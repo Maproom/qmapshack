@@ -25,6 +25,7 @@
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
+#include <QDebug>
 #include <QPen>
 #include <QPointer>
 #include <functional>
@@ -32,6 +33,7 @@
 class QDomNode;
 class IGisProject;
 class IPlot;
+class INotifyTrk;
 class CDetailsTrk;
 class CScrOptTrk;
 class QSqlDatabase;
@@ -45,10 +47,6 @@ class CFitStream;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
-
-#include <QDebug>
-
-class INotifyTrk;
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
@@ -80,60 +78,28 @@ public:
         , eVisualAll         = -1
     };
 
-    /**
-       @brief Used to create a new track from a part of an existing track
-       @param name
-       @param idx1
-       @param idx2
-       @param srctrk
-       @param project
-     */
+    /** @brief Used to create a new track from a part of an existing track */
     CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
-    /**
-       @brief Used to create a copy of track with new parent
-       @param parentTrk
-       @param project
-       @param idx
-       @param clone
-     */
+
+    /** @brief Used to create a copy of track with new parent */
     CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx, bool clone);
-    /**
-       @brief Used to restore a track from a line of coordinates
-       @param l
-       @param name
-       @param project
-       @param idx
-     */
+
+    /** @brief Used to restore a track from a line of coordinates */
     CGisItemTrk(const SGisLine &l, const QString &name, IGisProject *project, int idx);
-    /**
-       @brief Used to create track from GPX file
-       @param xml
-       @param project
-     */
+
+    /** @brief Used to create track from GPX file */
     CGisItemTrk(const QDomNode &xml, IGisProject *project);
-    /**
-       @brief Used to restore track from history structure
-       @param hist
-       @param project
-     */
+
+    /** @brief Used to restore track from history structure */
     CGisItemTrk(const history_t& hist, const QString& dbHash, IGisProject * project);
-    /**
-       @brief Used to restore track from database
-       @param id
-       @param db
-       @param project
-     */
+
+    /** @brief Used to restore track from database */
     CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
-    /**
-       @brief Clone QLandkarte GT track
-       @param trk1
-     */
+
+    /** @brief Clone QLandkarte GT track */
     CGisItemTrk(const CQlgtTrack& trk1);
-    /**
-       @brief Load track from file (e.g. TwoNav *trk)
-       @param filename
-       @param project
-     */
+
+    /** @brief Load track from file (e.g. TwoNav *trk) */
     CGisItemTrk(const QString& filename, IGisProject * project);
 
     CGisItemTrk(const IQlgtOverlay& ovl);
@@ -218,20 +184,20 @@ public:
      */
     QString getInfo(bool showName = true) const override;
     /// get a summary of a selected range
-    QString getInfoRange();
+    QString getInfoRange() const;
     /// get a summary of a selected range defined by two track points
-    QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2);
+    QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const;
     /// get a summary for a track point
-    QString getInfoTrkPt(const trkpt_t& pt);
+    QString getInfoTrkPt(const trkpt_t& pt) const;
     /// get a progress summary for a selected track point
-    QString getInfoProgress(const trkpt_t& pt);
+    QString getInfoProgress(const trkpt_t& pt) const;
 
     quint32 getTotalElapsedSeconds() const
     {
         return totalElapsedSeconds;
     }
 
-    quint32 getTotalElapsedSecondsMoving()
+    quint32 getTotalElapsedSecondsMoving() const
     {
         return totalElapsedSecondsMoving;
     }
@@ -264,7 +230,7 @@ public:
         return trk.links;
     }
     /// get the track as a simple coordinate polyline
-    void getPolylineFromData(QPolygonF &l);
+    void getPolylineFromData(QPolygonF &l) const;
     /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l) override;
 
@@ -333,9 +299,9 @@ public:
     qreal getMax(const QString& source) const;
 
 private:
-    void drawColorized(QPainter &p);
-    void drawColorizedByActivity(QPainter& p);
-    void setPen(QPainter& p, QPen& pen, quint32 flag);
+    void drawColorized(QPainter &p) const;
+    void drawColorizedByActivity(QPainter& p) const;
+    void setPen(QPainter& p, QPen& pen, quint32 flag) const;
     /**@}*/
 
 
@@ -349,16 +315,16 @@ public:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-    void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
+    void getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const;
 
     void setName(const QString& str);
     void setColor(int idx);
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
     void setComment(const QString& str)         override;
-    void setDescription(const QString& str)         override;
-    void setLinks(const QList<link_t>& links) override;
-    void setDataFromPolyline(const SGisLine &l)          override;
+    void setDescription(const QString& str)     override;
+    void setLinks(const QList<link_t>& links)   override;
+    void setDataFromPolyline(const SGisLine &l) override;
 
     /**
        @brief display the track screen options
@@ -383,7 +349,7 @@ public:
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*) override;
     void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
@@ -473,7 +439,7 @@ public:
        including the hidden (trkpt_t::eHidden) ones.
 
      */
-    void copySelectedPoints();
+    void copySelectedPoints() const;
 
     /**
        @brief Check for user focus
@@ -693,6 +659,10 @@ private:
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
 
+    static bool getNameAndProject(QString &name, IGisProject *&project);
+
+    const trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const;
+
     /**
        @brief Try to get access Nth visible point matching the idx
 
@@ -702,7 +672,7 @@ private:
        @param idx The index into all visible points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx);
+    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx) const;
     /**
        @brief Try to get access Nth point
 
@@ -712,21 +682,21 @@ private:
        @param idx The index into all points
        @return A null pointer of no point is found.
      */
-    const trkpt_t *getTrkPtByTotalIndex(qint32 idx);
+    const trkpt_t *getTrkPtByTotalIndex(qint32 idx) const;
 
     /**
        @brief Check if the track point at index it the last one visible
        @param idxTotal  The point's index
        @return True if it is the last one visible
      */
-    bool isTrkPtLastVisible(qint32 idxTotal);
+    bool isTrkPtLastVisible(qint32 idxTotal) const;
 
     /**
        @brief Check if the track point at index it the first one visible
        @param idxTotal  The point's index
        @return True if it is the first one visible
      */
-    bool isTrkPtFirstVisible(qint32 idxTotal);
+    bool isTrkPtFirstVisible(qint32 idxTotal) const;
     /**
        @brief Tell the point of focus to all plots and the detail dialog
 
@@ -737,6 +707,8 @@ private:
     bool publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString &owner);
     void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
     void publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode);
+    void resetMouseRange();
+
     /**
        @brief Replace all trackpoints by the coordinates stored in the polyline
 
@@ -809,34 +781,40 @@ public:
             ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
 
-        quint32 flags = 0;
-        /// index within the complete track
-        qint32 idxTotal = NOIDX;
-        /// offset into lineSimple
-        qint32 idxVisible;
+        inline bool isHidden() const
+        {
+            return hasFlag(trkpt_t::eHidden);
+        }
 
-        /// the distance to the last point
-        qreal deltaDistance;
-        /// the distance from the start of the track
-        qreal distance;
-        /// the ascend from the start of the track
-        qreal ascend;
-        /// the descend from the start of the track
-        qreal descend;
-        /// the slope [°] over several points close by
-        qreal slope1;
-        /// the slope [%] over several points close by
-        qreal slope2;
-        /// the speed over several points close by
-        qreal speed;
-        /// the seconds since the start of the track
-        qreal elapsedSeconds;
-        /// the seconds since the start of the track with moving speed
-        qreal elapsedSecondsMoving;
-        /// the key of an attached waypoint
-        key_t keyWpt;
-        /// track point extensions
-        QHash<QString,QVariant> extensions;
+        inline bool hasFlag(enum flag_e flag) const
+        {
+            return flags & flag;
+        }
+
+        inline void setFlag(enum flag_e flag)
+        {
+            flags |= flag;
+        }
+
+        inline void unsetFlag(enum flag_e flag)
+        {
+            flags &= ~flag;
+        }
+
+        quint32 flags = 0;
+        qint32 idxTotal = NOIDX;            //< index within the complete track
+        qint32 idxVisible;                  //< offset into lineSimple
+        qreal deltaDistance;                //< the distance to the last point
+        qreal distance;                     //< the distance from the start of the track
+        qreal ascend;                       //< the ascend from the start of the track
+        qreal descend;                      //< the descend from the start of the track
+        qreal slope1;                       //< the slope [°] over several points close by
+        qreal slope2;                       //< the slope [%] over several points close by
+        qreal speed;                        //< the speed over several points close by
+        qreal elapsedSeconds;               //< the seconds since the start of the track
+        qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed
+        key_t keyWpt;                       //< the key of an attached waypoint
+        QHash<QString,QVariant> extensions; //< track point extensions
     };
 
     struct trkseg_t
@@ -944,25 +922,18 @@ private:
         \defgroup DrawUtilies Objects used to draw the track
      */
     /**@{*/
-    /// the track line color by index
-    unsigned colorIdx = 4;
-    /// the track line color
-    QColor color;
 
-    /// the trackpoint bullet icon
-    QPixmap bullet;
-    /// the current track line as screen pixel coordinates
-    QPolygonF lineSimple;
-    /// visible and invisible points
-    QPolygonF lineFull;
+    unsigned colorIdx = 4;  //< the track line color by index
+    QColor color;           //< the track line color
 
+    QPixmap bullet;         //< the trackpoint bullet icon
+    QPolygonF lineSimple;   //< the current track line as screen pixel coordinates
+    QPolygonF lineFull;     //< visible and invisible points
 
-    /// inner trackline width
-    qint32 penWidthFg = 3;
-    /// outer trackline width
-    qint32 penWidthBg = 5;
-    /// highlighted trackline width
-    qint32 penWidthHi = 11;
+    qint32 penWidthFg = 3;  //< inner trackline width
+    qint32 penWidthBg = 5;  //< outer trackline width
+    qint32 penWidthHi = 11; //< highlighted trackline width
+
     /// the pen with the actual track color
     QPen penForeground {Qt::blue, qreal(penWidthFg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     /// background (border) color of all tracks
@@ -1037,21 +1008,14 @@ private:
      */
     QString mouseFocusOwner;
 
-    /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus  = nullptr;
-    /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus = nullptr;
-    /// the first point of a range selection
-    const trkpt_t * mouseRange1     = nullptr;
-    /// the second point of a range selection
-    const trkpt_t * mouseRange2     = nullptr;
+    const trkpt_t *mouseMoveFocus  = nullptr; //< the current track point selected by mouse movement
+    const trkpt_t *mouseClickFocus = nullptr; //< the last track point the user clicked on
+    const trkpt_t *mouseRange1     = nullptr; //< the first point of a range selection
+    const trkpt_t *mouseRange2     = nullptr; //< the second point of a range selection
     /**@}*/
 
-    /// the track's details dialog if any
-    QPointer<CDetailsTrk> dlgDetails;
-
-    /// the track's screen option if visible
-    QPointer<CScrOptTrk>  scrOpt;
+    QPointer<CDetailsTrk> dlgDetails; //< the track's details dialog if any
+    QPointer<CScrOptTrk>  scrOpt;     //< the track's screen option if visible
 
     /// all function concerning track activities have been moved to CActivityTrk
     CActivityTrk activities = {this};

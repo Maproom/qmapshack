@@ -33,7 +33,6 @@
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
-#include "plot/IPlot.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -50,13 +49,9 @@ using std::numeric_limits;
 
 struct trkwpt_t
 {
-    trkwpt_t() : x(0), y(0)
-    {
-    }
-
     QString name;
-    qreal x;
-    qreal y;
+    qreal x = 0;
+    qreal y = 0;
     IGisItem::key_t key;
 };
 
@@ -246,6 +241,12 @@ CGisItemTrk::~CGisItemTrk()
     delete propHandler;
 }
 
+template<typename T>
+static inline bool isInRange(const T &val, const T &rangeStart, const T &rangeEnd)
+{
+    return (rangeStart <= val) && (val <= rangeEnd);
+}
+
 IGisItem * CGisItemTrk::createClone()
 {
     int idx = -1;
@@ -291,7 +292,7 @@ void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
     changed(tr("Changed trackpoints, sacrificed all previous data."), "://icons/48x48/LineMove.png");
 }
 
-void CGisItemTrk::getPolylineFromData(QPolygonF &l)
+void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
 {
     QMutexLocker lock(&mutexItems);
 
@@ -300,7 +301,7 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l)
     {
         foreach(const trkpt_t &pt, seg.pts)
         {
-            if(!(pt.flags & trkpt_t::eHidden))
+            if(!pt.isHidden())
             {
                 l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
             }
@@ -317,12 +318,24 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
     {
         foreach(const trkpt_t &pt, seg.pts)
         {
-            if(!(pt.flags & trkpt_t::eHidden))
+            if(!pt.isHidden())
             {
                 l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
             }
         }
     }
+}
+
+bool CGisItemTrk::getNameAndProject(QString &name, IGisProject *&project)
+{
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name);
+    if(name.isEmpty())
+    {
+        return false;
+    }
+
+    project = CGisWidget::self().selectProject();
+    return (nullptr != project);
 }
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
@@ -373,21 +386,17 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
 QString CGisItemTrk::getInfo(bool showName) const
 {
     QString val1, unit1, val2, unit2;
+
+    if(cntVisiblePoints == 0)
+    {
+        return showName ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
+    }
+
     QString str = "<div>";
 
     if(showName)
     {
-        str += "<b>" + getName() + "</b>";
-    }
-
-    if(cntVisiblePoints == 0)
-    {
-        return str + "</div>";
-    }
-
-    if(showName)
-    {
-        str += "<br />";
+        str += "<b>" + getName() + "</b><br />";
     }
 
     IUnit::self().meter2distance(totalDistance, val1, unit1);
@@ -395,54 +404,43 @@ QString CGisItemTrk::getInfo(bool showName) const
 
     if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
     {
-        IUnit::self().meter2elevation(totalAscend, val1, unit1);
+        IUnit::self().meter2elevation(totalAscend,  val1, unit1);
         IUnit::self().meter2elevation(totalDescend, val2, unit2);
 
         str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }
-
+    str += "<br />";
 
     if(totalElapsedSeconds != NOTIME)
     {
         IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
-        str += "<br/>\n";
-        str += tr("Time: %1").arg(val1);
-
-        IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val1, unit1);
-        str += tr(", Speed: %1 %2").arg(val1).arg(unit1);
+        IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
+        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
     }
 
     if(totalElapsedSecondsMoving != NOTIME)
     {
         IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
-        str += "<br/>\n";
-        str += tr("Moving: %1").arg(val1);
-
-        IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val1, unit1);
-        str += tr(", Speed: %1 %2").arg(val1).arg(unit1);
+        IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
+        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
     }
 
     if(timeStart.isValid())
     {
-        str += "<br/>\n";
-        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
+        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center())) + "<br />";
     }
     if(timeEnd.isValid())
     {
-        str += "<br/>\n";
-        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
+        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center())) + "<br />";
     }
 
-    str += "<br/>\n";
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
-
-    str += "</div>";
-    return str;
+    return str + "</div>";
 }
 
-QString CGisItemTrk::getInfoRange()
+QString CGisItemTrk::getInfoRange() const
 {
-    qreal tmp, d, slope1, slope2;
+    qreal tmp, slope1, slope2;
     QString str, val, unit;
     if(mouseRange1 == nullptr || mouseRange2 == nullptr)
     {
@@ -451,53 +449,38 @@ QString CGisItemTrk::getInfoRange()
 
     int idx1 = mouseRange1->idxTotal;
     int idx2 = mouseRange2->idxTotal;
-    const trkpt_t * pt1, * pt2;
-    if(idx1 < idx2)
-    {
-        pt1 = mouseRange1;
-        pt2 = mouseRange2;
-    }
-    else
+    const trkpt_t *pt1 = mouseRange1;
+    const trkpt_t *pt2 = mouseRange2;
+    if(idx1 >= idx2)
     {
         pt1 = mouseRange2;
         pt2 = mouseRange1;
     }
 
-    while(pt1->flags & trkpt_t::eHidden)
+    for(; pt1->isHidden() && (pt1->idxTotal < cntTotalPoints); --pt1)
     {
-        if(pt1->idxTotal == (cntTotalPoints - 1))
-        {
-            break;
-        }
-        pt1++;
     }
-
-    while(pt2->flags & trkpt_t::eHidden)
+    for(; pt2->isHidden() && (pt2->idxTotal > 0); --pt2)
     {
-        if(pt2->idxTotal == 0)
-        {
-            break;
-        }
-        pt2--;
     }
 
     bool timeIsValid = pt1->time.isValid() && pt2->time.isValid();
     qreal deltaTime  = pt2->time.toTime_t() - pt1->time.toTime_t();
 
-    d = tmp = pt2->distance - pt1->distance;
+    const qreal distance = pt2->distance - pt1->distance;
 
-    IUnit::self().meter2distance(tmp, val, unit);
+    IUnit::self().meter2distance(distance, val, unit);
     str += QString("%3 %1%2 ").arg(val).arg(unit).arg(QChar(0x21A6));
     if(timeIsValid)
     {
         quint32 t  = pt2->time.toTime_t() - pt1->time.toTime_t();
-        quint32 hh = t / 3600;
-        quint32 mm = (t - hh * 3600) / 60;
-        quint32 ss = (t - hh * 3600 - mm * 60);
+        quint32 hh =  t / 3600;
+        quint32 mm = (t % 3600) / 60;
+        quint32 ss =  t % 60;
 
-        str += QString("%4 %1:%2:%3").arg(hh,2,10,QChar('0')).arg(mm,2,10,QChar('0')).arg(ss,2,10,QChar('0')).arg(QChar(0x231a));
+        str += QString("%4 %1:%2:%3").arg(hh, 2, 10, QChar('0')).arg(mm, 2, 10, QChar('0')).arg(ss, 2, 10, QChar('0')).arg(QChar(0x231a));
 
-        IUnit::self().meter2speed(d/deltaTime, val, unit);
+        IUnit::self().meter2speed(distance/deltaTime, val, unit);
         str += QString(", %3 %1%2").arg(val).arg(unit).arg(QChar(0x21A3));
     }
     str += "\n";
@@ -505,7 +488,7 @@ QString CGisItemTrk::getInfoRange()
     qreal deltaAscend  = pt2->ascend  - pt1->ascend;
     qreal deltaDescend = pt2->descend - pt1->descend;
 
-    tmp    = qAtan(deltaAscend/d);
+    tmp    = qAtan(deltaAscend/distance);
     slope1 = qAbs(tmp * 360.0/(2 * M_PI));
     slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
 
@@ -518,9 +501,9 @@ QString CGisItemTrk::getInfoRange()
     }
     str += "\n";
 
-    tmp       = qAtan(deltaDescend/d);
-    slope1    = qAbs(tmp * 360.0/(2 * M_PI));
-    slope2    = qTan(slope1 * DEG_TO_RAD) * 100;
+    tmp    = qAtan(deltaDescend/distance);
+    slope1 = qAbs(tmp * 360.0/(2 * M_PI));
+    slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
 
     IUnit::self().meter2elevation(deltaDescend, val, unit);
     str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
@@ -533,7 +516,7 @@ QString CGisItemTrk::getInfoRange()
     return str + "\n";
 }
 
-QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
+QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt) const
 {
     QString str, val1, unit1;
     if(totalElapsedSeconds != 0)
@@ -568,7 +551,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
         {
-            str += "\n" + ext.name + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor,0,'f',1).arg(ext.unit);
+            str += "\n" + ext.name + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor, 0, 'f', 1).arg(ext.unit);
         }
         else
         {
@@ -585,56 +568,45 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt)
     return str;
 }
 
-QString CGisItemTrk::getInfoProgress(const trkpt_t& pt)
+QString CGisItemTrk::getInfoProgress(const trkpt_t& pt) const
 {
-    QString str, val, unit;
+    QString val, unit;
+
+    QString asc = tr("Ascend: - (-)");
+    QString dsc = tr("Descend: - (-)");
+    QString dst = tr("Distance: - (-)");
+    QString mov = tr("Moving: - (-)");
+
     if(pt.ascend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.ascend, val, unit);
-        str += tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2,'f',0);
-    }
-    else
-    {
-        str += tr("Ascend: - (-)");
+        asc = tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2, 'f', 0);
     }
 
     if(pt.descend != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descend, val, unit);
-        str += tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2,'f',0);
-    }
-    else
-    {
-        str += tr(" Descend: - (-) ");
+        dsc = tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2, 'f', 0);
     }
 
-    str += "\n";
     if(pt.distance != NOFLOAT)
     {
         IUnit::self().meter2distance(pt.distance, val, unit);
-        str += tr("Dist.: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2,'f',0);
-    }
-    else
-    {
-        str += tr("Dist.: - (-)");
+        dst = tr("Distance: %1%2 (%3%)").arg(val).arg(unit).arg(pt.distance * 100/totalDistance, 2, 'f', 0);
     }
 
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        str += tr(" Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2,'f',0);
-    }
-    else
-    {
-        str += tr(" Moving: - (-) ");
+        mov = tr(" Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2, 'f', 0);
     }
 
-    return str;
+    return QString("%1 %2\n%3 %4").arg(asc).arg(dsc).arg(dst).arg(mov);
 }
 
-QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
+QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const
 {
-    QString str, val, unit;
+    QString val, unit;
     qreal dt = NOFLOAT;
 
     if(pt1.time.isValid() && pt2.time.isValid())
@@ -642,51 +614,43 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2)
         dt = pt2.time.toTime_t() - pt1.time.toTime_t();
     }
 
+    QString asc = tr("Ascend: -");
+    QString dsc = tr("Descend: -");
+
     if((pt1.ascend != NOFLOAT) && (pt2.ascend != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.ascend - pt1.ascend, val, unit);
-        str += tr("Ascend: %1%2").arg(val).arg(unit);
+        asc = tr("Ascend: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.ascend - pt1.ascend)/dt, val, unit);
-            str += tr(", %1%2").arg(val).arg(unit);
+            asc += tr(", %1%2").arg(val).arg(unit);
         }
     }
-    else
-    {
-        str += tr("Ascend: -");
-    }
-
 
     if((pt1.descend != NOFLOAT) && (pt2.descend != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.descend - pt1.descend, val, unit);
-        str += tr(" Descend: %1%2").arg(val).arg(unit);
+        dsc = tr(" Descend: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
             IUnit::self().meter2speed((pt2.descend - pt1.descend)/dt, val, unit);
-            str += tr(", %1%2").arg(val).arg(unit);
+            dsc += tr(", %1%2").arg(val).arg(unit);
         }
     }
-    else
-    {
-        str += tr("Descend: -");
-    }
-
-    str += "\n";
 
     IUnit::self().meter2distance(pt2.distance - pt1.distance, val, unit);
-    str += tr("Dist.: %1%2").arg(val).arg(unit);
+    QString dsttme = tr("Distance: %1%2").arg(val).arg(unit);
 
     if(dt != NOFLOAT)
     {
         IUnit::self().seconds2time(dt, val, unit);
-        str += tr(" Time: %1%2").arg(val).arg(unit);
+        dsttme += tr(" Time: %1%2").arg(val).arg(unit);
     }
 
-    return str;
+    return QString("%1 %2\n%3").arg(asc).arg(dsc).arg(dsttme);
 }
 
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
@@ -698,33 +662,34 @@ IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
     return scrOpt;
 }
 
+static qint32 getIdxPointCloseBy(const QPoint &pos, const QPolygonF &line)
+{
+    qint32 idx     = 0;
+    qint32 bestIdx = NOIDX;
+    qint32 bestDst = NOINT;
+    foreach(const QPointF &pt, line)
+    {
+        int dst = (pos - pt).manhattanLength();
+        if(dst < bestDst)
+        {
+            bestIdx = idx;
+            bestDst = dst;
+        }
+        ++idx;
+    }
+
+    return bestIdx;
+}
+
 QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 {
     QMutexLocker lock(&mutexItems);
 
-    qint32 i    = 0;
-    qint32 idx  = NOIDX;
-    qint32 d    = NOINT;
-    foreach(const QPointF &point, lineSimple)
-    {
-        int tmp = (screenPos - point).manhattanLength();
-        if(tmp < d)
-        {
-            idx = i;
-            d   = tmp;
-        }
-        i++;
-    }
-
-    if(idx < 0)
-    {
-        return NOPOINTF;
-    }
-
-    return lineSimple[idx];
+    qint32 bestIdx = getIdxPointCloseBy(screenPos, lineSimple);
+    return (NOIDX == bestIdx) ? NOPOINTF : lineSimple[bestIdx];
 }
 
-void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2)
+void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const
 {
     if((nullptr == mouseRange1) || (nullptr == mouseRange2))
     {
@@ -765,7 +730,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
     {
         foreach(const trkpt_t &pt, seg.pts)
         {
-            if(pt.flags & trkpt_t::eHidden)
+            if(pt.isHidden())
             {
                 continue;
             }
@@ -788,9 +753,9 @@ void CGisItemTrk::updateExtremaAndExtensions()
                 }
             }
 
-            updateExtrema(extremaSpeed, pt.speed);
-            updateExtrema(extremaEle,   pt.ele);
-            updateExtrema(extremaSlope, pt.slope1);
+            updateExtrema(extremaSpeed,    pt.speed);
+            updateExtrema(extremaEle,      pt.ele);
+            updateExtrema(extremaSlope,    pt.slope1);
             updateExtrema(extremaProgress, pt.distance);
         }
     }
@@ -826,9 +791,7 @@ void CGisItemTrk::resetInternalData()
 {
     mouseClickFocus = nullptr;
     mouseMoveFocus  = nullptr;
-    mouseRange1     = nullptr;
-    mouseRange2     = nullptr;
-    rangeState      = eRangeStateIdle;
+    resetMouseRange();
 
     delete dlgDetails;
 }
@@ -888,7 +851,7 @@ void CGisItemTrk::deriveSecondaryData()
             trkpt_t& trkpt = seg.pts[p];
 
             trkpt.idxTotal = cntTotalPoints++;
-            if(trkpt.flags & trkpt_t::eHidden)
+            if(trkpt.isHidden())
             {
                 trkpt.reset();
                 continue;
@@ -896,22 +859,10 @@ void CGisItemTrk::deriveSecondaryData()
             trkpt.idxVisible = cntVisiblePoints++;
             lintrk << &trkpt;
 
-            if(trkpt.lon < west)
-            {
-                west    = trkpt.lon;
-            }
-            if(trkpt.lon > east)
-            {
-                east    = trkpt.lon;
-            }
-            if(trkpt.lat < south)
-            {
-                south   = trkpt.lat;
-            }
-            if(trkpt.lat > north)
-            {
-                north   = trkpt.lat;
-            }
+            west  = qMin(west,  trkpt.lon);
+            east  = qMax(east,  trkpt.lon);
+            south = qMin(south, trkpt.lat);
+            north = qMax(north, trkpt.lat);
 
             if(lastTrkpt != nullptr)
             {
@@ -922,13 +873,12 @@ void CGisItemTrk::deriveSecondaryData()
                 // ascend descend
                 if(lastEle != NOFLOAT)
                 {
-                    qreal delta     = trkpt.ele - lastEle;
-                    qreal absDelta  = qAbs(delta);
+                    qreal delta   = trkpt.ele - lastEle;
 
                     trkpt.ascend  = lastTrkpt->ascend;
                     trkpt.descend = lastTrkpt->descend;
 
-                    if(absDelta > ASCEND_THRESHOLD)
+                    if(qAbs(delta) > ASCEND_THRESHOLD)
                     {
                         if(delta > 0)
                         {
@@ -952,9 +902,9 @@ void CGisItemTrk::deriveSecondaryData()
             }
             else
             {
-                timeStart       = trkpt.time;
-                timestampStart  = timeStart.toMSecsSinceEpoch()/1000.0;
-                lastEle         = trkpt.ele;
+                timeStart      = trkpt.time;
+                timestampStart = timeStart.toMSecsSinceEpoch()/1000.0;
+                lastEle        = trkpt.ele;
 
                 trkpt.deltaDistance        = 0;
                 trkpt.distance             = 0;
@@ -1095,7 +1045,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         {
             trkpt_t& pt = seg.pts[n];
             pt.keyWpt.clear();
-            if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
+            if(pt.isHidden())
             {
                 continue;
             }
@@ -1208,8 +1158,7 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
 {
     QMutexLocker lock(&mutexItems);
 
-    qreal dist = GPS_Math_DistPointPolyline(lineSimple, pos);
-    return dist < 20;
+    return GPS_Math_DistPointPolyline(lineSimple, pos) < 20;
 }
 
 void CGisItemTrk::gainUserFocus(bool yes)
@@ -1265,39 +1214,27 @@ bool CGisItemTrk::cut()
         // clone first part?
         if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepFirst)) != 0)
         {
-            QString name1 = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
-            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
-            if(name1.isEmpty())
+            QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
+            IGisProject *project = nullptr;
+            if(!getNameAndProject(name, project))
             {
                 return false;
             }
 
-            IGisProject *project = CGisWidget::self().selectProject();
-            if(nullptr == project)
-            {
-                return false;
-            }
-
-            new CGisItemTrk(name1, 0, idxMouse, trk, project);
+            new CGisItemTrk(name, 0, idxMouse, trk, project);
         }
 
         // clone second part?
         if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepSecond)) != 0)
         {
-            QString name1 = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
-            name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
-            if(name1.isEmpty())
+            QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
+            IGisProject *project = nullptr;
+            if(!getNameAndProject(name, project))
             {
                 return false;
             }
 
-            IGisProject *project = CGisWidget::self().selectProject();
-            if(nullptr == project)
-            {
-                return false;
-            }
-
-            new CGisItemTrk(name1, idxMouse, cntTotalPoints-1, trk, project);
+            new CGisItemTrk(name, idxMouse, cntTotalPoints-1, trk, project);
         }
     }
     else
@@ -1305,55 +1242,44 @@ bool CGisItemTrk::cut()
         // if the result is not a clone, the track's list of segments and trackpoints
         // has to be reduced. This is done by copying points into a new trackpoint list
         // that replaces the original one.
+        int removeStart = ((mode & CCutTrk::eModeKeepFirst) != 0) ? idxMouse + 1   : 0;
+        int removeEnd   = ((mode & CCutTrk::eModeKeepFirst) != 0) ? cntTotalPoints : idxMouse - 1;
 
-        if((mode & CCutTrk::eModeKeepFirst) != 0)
+        for(int i = 0; i < trk.segs.size(); ++i)
         {
-            for(int i = 0; i < trk.segs.size(); i++)
+            trkseg_t& seg = trk.segs[i];
+
+            if(seg.pts.empty())
+            {
+                continue;
+            }
+
+            if(removeStart <= seg.pts.first().idxTotal && seg.pts.last().idxTotal <= removeEnd)
+            {
+                // remove all points for segments, that are completely in [removeStart; removeEnd]
+                seg.pts.clear();
+            }
+            else if( isInRange(removeStart, seg.pts.first().idxTotal, seg.pts.last().idxTotal)
+                     || isInRange(removeEnd,   seg.pts.first().idxTotal, seg.pts.last().idxTotal) )
             {
                 QVector<trkpt_t> pts;
-                trkseg_t& seg = trk.segs[i];
 
                 for(int n = 0; n < seg.pts.size(); n++)
                 {
                     trkpt_t& pt = seg.pts[n];
 
-                    if(pt.idxTotal > idxMouse)
+                    if(!(removeStart <= pt.idxTotal && pt.idxTotal <= removeEnd) )
                     {
-                        break;
+                        pts << pt;
                     }
-
-                    pts << pt;
                 }
 
                 seg.pts = pts;
             }
-            deriveSecondaryData();
-            changed(tr("Permanently removed points %1..%2").arg(idxMouse+1).arg(cntTotalPoints-1), "://icons/48x48/TrkCut.png");
+            // else: keep any segments, that are not in [removeStart; removeEnd]
         }
-        else if((mode & CCutTrk::eModeKeepSecond) != 0)
-        {
-            for(int i = 0; i < trk.segs.size(); i++)
-            {
-                QVector<trkpt_t> pts;
-                trkseg_t& seg = trk.segs[i];
-
-                for(int n = 0; n < seg.pts.size(); n++)
-                {
-                    trkpt_t& pt = seg.pts[n];
-
-                    if(pt.idxTotal < idxMouse)
-                    {
-                        continue;
-                    }
-
-                    pts << pt;
-                }
-
-                seg.pts = pts;
-            }
-            deriveSecondaryData();
-            changed(tr("Permanently removed points %1..%2").arg(0).arg(idxMouse-1), "://icons/48x48/TrkCut.png");
-        }
+        deriveSecondaryData();
+        changed(tr("Permanently removed points %1..%2").arg(removeStart).arg(removeEnd), "://icons/48x48/TrkCut.png");
     }
 
     return askToDeleteOriginal;
@@ -1361,21 +1287,16 @@ bool CGisItemTrk::cut()
 
 void CGisItemTrk::reverse()
 {
-    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, getName() + "_rev");
-    if(name1.isEmpty())
-    {
-        return;
-    }
-
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
+    QString name = getName() + "_rev";
+    IGisProject *project = nullptr;
+    if(!getNameAndProject(name, project))
     {
         return;
     }
 
     // start with a 1:1 copy of the first track
     CGisItemTrk * trk1 = new CGisItemTrk(*this, project, NOIDX, false);
-    trk1->trk.name = name1;
+    trk1->trk.name = name;
     /*
         clear track data, item key and history. To clear the history is important as
         the original track's history would restore the original key
@@ -1420,14 +1341,9 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
         return;
     }
 
-    QString name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, getName() + " & other");
-    if(name1.isEmpty())
-    {
-        return;
-    }
-
-    IGisProject * projectNew = CGisWidget::self().selectProject();
-    if(nullptr == projectNew)
+    QString name = getName() + " & other";
+    IGisProject *projectNew = nullptr;
+    if(!getNameAndProject(name, projectNew))
     {
         return;
     }
@@ -1435,7 +1351,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
     // start with a 1:1 copy of the first track
     CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
     // replace name
-    trk1->trk.name = name1;
+    trk1->trk.name = name;
 
     /*
         clear track data, item key and history. To clear the history is important as
@@ -1496,45 +1412,44 @@ void CGisItemTrk::hideSelectedPoints()
         idx2++;
     }
 
+    // abort if there is no point between idx1 and idx2
+    if(idx1 + 1 == idx2)
+    {
+        return;
+    }
+
     // special case for a single point
     if(idx1 == idx2)
     {
-        for(int s = 0; s < trk.segs.size(); s++)
-        {
-            trkseg_t& seg = trk.segs[s];
-            for(int i = 0; i < seg.pts.size(); i++)
-            {
-                trkpt_t& trkpt = seg.pts[i];
+        --idx1;
+        ++idx2;
+    }
 
-                if(idx1 == trkpt.idxTotal)
-                {
-                    trkpt.flags |= trkpt_t::eHidden;
-                }
+    // iterate over all segments and delete points between idx1 and idx2
+    for(int s = 0; s < trk.segs.size(); s++)
+    {
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
+        {
+            trkpt_t& trkpt = seg.pts[i];
+
+            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
+            {
+                trkpt.setFlag(trkpt_t::eHidden);
             }
         }
+    }
+    resetMouseRange();
+    deriveSecondaryData();
+    if(idx1 + 1 == idx2 - 1)
+    {
+        changed(tr("Hide point %1.").arg(idx1 + 1), "://icons/48x48/PointHide.png");
     }
     else
     {
-        // iterate over all segments and delete points between idx1 and idx2
-        for(int s = 0; s < trk.segs.size(); s++)
-        {
-            trkseg_t& seg = trk.segs[s];
-            for(int i = 0; i < seg.pts.size(); i++)
-            {
-                trkpt_t& trkpt = seg.pts[i];
-
-                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
-                {
-                    trkpt.flags |= trkpt_t::eHidden;
-                }
-            }
-        }
+        changed(tr("Hide points %1..%2.").arg(idx1 + 1).arg(idx2 - 1), "://icons/48x48/PointHide.png");
     }
-    mouseRange1 = nullptr;
-    mouseRange2 = nullptr;
-    rangeState  = eRangeStateIdle;
-    deriveSecondaryData();
-    changed(tr("Hide points."), "://icons/48x48/PointHide.png");
+
 }
 
 void CGisItemTrk::showSelectedPoints()
@@ -1566,18 +1481,17 @@ void CGisItemTrk::showSelectedPoints()
 
             if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
             {
-                trkpt.flags &= ~trkpt_t::eHidden;
+                trkpt.unsetFlag(trkpt_t::eHidden);
             }
         }
     }
-    mouseRange1 = nullptr;
-    mouseRange2 = nullptr;
-    rangeState  = eRangeStateIdle;
+
+    resetMouseRange();
     deriveSecondaryData();
     changed(tr("Show points."), "://icons/48x48/PointShow.png");
 }
 
-void CGisItemTrk::copySelectedPoints()
+void CGisItemTrk::copySelectedPoints() const
 {
     if((mouseRange1 == nullptr) || (mouseRange2 == nullptr))
     {
@@ -1592,19 +1506,14 @@ void CGisItemTrk::copySelectedPoints()
         qSwap(idx1,idx2);
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
+    QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
+    IGisProject *project = nullptr;
+    if(!getNameAndProject(name, project))
     {
         return;
     }
 
-    QString name1 = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
-    name1 = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name1);
-    if(name1.isEmpty())
-    {
-        return;
-    }
-    new CGisItemTrk(name1, idx1, idx2, trk, project);
+    new CGisItemTrk(name, idx1, idx2, trk, project);
 }
 
 void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
@@ -1634,11 +1543,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(mode == eModeNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
-        foreach (const trkseg_t &seg, trk.segs)
+        foreach(const trkseg_t &seg, trk.segs)
         {
             foreach(const trkpt_t &pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eHidden)
+                if(pt.isHidden())
                 {
                     continue;
                 }
@@ -1655,7 +1564,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // in full mode the complete track including points marked as deleted
         // is drawn as gray line first. Then the track without points marked as
         // deleted is drawn with it's configured color
-        foreach (const trkseg_t &seg, trk.segs)
+        foreach(const trkseg_t &seg, trk.segs)
         {
             foreach(const trkpt_t &pt, seg.pts)
             {
@@ -1665,7 +1574,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
                 lineFull << pt1;
 
-                if(pt.flags & trkpt_t::eHidden)
+                if(pt.isHidden())
                 {
                     continue;
                 }
@@ -1746,21 +1655,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 }
 
-void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag)
+void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const
 {
     flag &= trkpt_t::eActMask;
-    if(flag == 0)
-    {
-        pen.setColor(color);
-    }
-    else
-    {
-        pen.setColor(CActivityTrk::getDescriptor(flag).color);
-    }
+    pen.setColor((flag == 0) ? color : CActivityTrk::getDescriptor(flag).color);
     p.setPen(pen);
 }
 
-void CGisItemTrk::drawColorizedByActivity(QPainter& p)
+void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
 {
     QPen pen;
     pen.setWidth(penWidthFg);
@@ -1768,15 +1670,15 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p)
 
     foreach(const trkseg_t &segment, trk.segs)
     {
-        const trkpt_t *ptPrev = NULL;
+        const trkpt_t *ptPrev = nullptr;
 
         foreach(const trkpt_t &pt, segment.pts)
         {
-            if(pt.flags & trkpt_t::eHidden)
+            if(pt.isHidden())
             {
                 continue;
             }
-            if(NULL == ptPrev)
+            if(nullptr == ptPrev)
             {
                 setPen(p, pen, pt.flags);
                 ptPrev = &pt;
@@ -1794,7 +1696,7 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p)
     }
 }
 
-void CGisItemTrk::drawColorized(QPainter &p)
+void CGisItemTrk::drawColorized(QPainter &p) const
 {
     auto valueFunc = CKnownExtension::get(getColorizeSource()).valueFunc;
 
@@ -1812,30 +1714,23 @@ void CGisItemTrk::drawColorized(QPainter &p)
 
     foreach(const trkseg_t &segment, trk.segs)
     {
-        const trkpt_t *ptPrev = NULL;
+        const trkpt_t *ptPrev = nullptr;
         QColor colorStart;
 
         foreach(const trkpt_t &pt, segment.pts)
         {
-            if(pt.flags & trkpt_t::eHidden)
+            if(pt.isHidden())
             {
                 continue;
             }
-            if(NULL == ptPrev)
+            if(nullptr == ptPrev)
             {
                 ptPrev = &pt;
                 continue;
             }
 
             float colorAt = ( factor * valueFunc(pt) - getColorizeLimitLow() ) / (getColorizeLimitHigh() - getColorizeLimitLow());
-            if(colorAt > 1.f)
-            {
-                colorAt = 1.f;
-            }
-            if(colorAt < 0.f)
-            {
-                colorAt = 0.f;
-            }
+            colorAt = qMin(qMax(colorAt, 0.f), 1.f);
 
             const QColor &colorEnd = colors.pixel(0, ((1.f - colorAt) * 255.f));
             if(!colorStart.isValid())
@@ -1978,8 +1873,8 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         gis->convertRad2Px(anchor);
 
         // create trackpoint info text
-        QString str, val1, unit1, val2, unit2;
-        str = getInfoTrkPt(*mouseMoveFocus);
+        QString val1, unit1, val2, unit2;
+        QString str = getInfoTrkPt(*mouseMoveFocus);
 
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
@@ -2069,7 +1964,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     drawRange(p);
 }
 
-void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
+void CGisItemTrk::drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*)
 {
     // tracks have no labels
 }
@@ -2121,14 +2016,12 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
 
     mode            = m;
     // always reset the range statemachine
-    rangeState      = eRangeStateIdle;
-    mouseRange1     = nullptr;
-    mouseRange2     = nullptr;
-    mouseFocusOwner = mode == eModeRange ? owner : "";
+    resetMouseRange();
+    mouseFocusOwner = (mode == eModeRange) ? owner : "";
 
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
+    if(nullptr != canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
@@ -2179,8 +2072,8 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
         for(int i = 0; i < seg.pts.size(); i++)
         {
             trkpt_t& trkpt = seg.pts[i];
-            trkpt.flags &= ~trkpt_t::eActMask;
-            trkpt.flags |= flag;
+            trkpt.unsetFlag(trkpt_t::eActMask);
+            trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
         }
     }
 
@@ -2222,42 +2115,26 @@ void CGisItemTrk::setActivity()
     // special case for a single point
     if(idx1 == idx2)
     {
-        for(int s = 0; s < trk.segs.size(); s++)
-        {
-            trkseg_t& seg = trk.segs[s];
-            for(int i = 0; i < seg.pts.size(); i++)
-            {
-                trkpt_t& trkpt = seg.pts[i];
-
-                if(idx1 == trkpt.idxTotal)
-                {
-                    trkpt.flags &= ~trkpt_t::eActMask;
-                    trkpt.flags |= flag;
-                }
-            }
-        }
+        --idx1;
     }
-    else
+
+    // iterate over all segments and set activity flag for points between idx1 and idx2
+    for(int s = 0; s < trk.segs.size(); s++)
     {
-        // iterate over all segments and delete points between idx1 and idx2
-        for(int s = 0; s < trk.segs.size(); s++)
+        trkseg_t& seg = trk.segs[s];
+        for(int i = 0; i < seg.pts.size(); i++)
         {
-            trkseg_t& seg = trk.segs[s];
-            for(int i = 0; i < seg.pts.size(); i++)
-            {
-                trkpt_t& trkpt = seg.pts[i];
+            trkpt_t& trkpt = seg.pts[i];
 
-                if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
-                {
-                    trkpt.flags &= ~trkpt_t::eActMask;
-                    trkpt.flags |= flag;
-                }
+            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
+            {
+                trkpt.unsetFlag(trkpt_t::eActMask);
+                trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
             }
         }
     }
-    mouseRange1 = nullptr;
-    mouseRange2 = nullptr;
-    rangeState  = eRangeStateIdle;
+
+    resetMouseRange();
     deriveSecondaryData();
     changed(tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
 }
@@ -2295,7 +2172,6 @@ void CGisItemTrk::setIcon(const QString& iconColor)
 }
 
 
-
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {
     const trkpt_t * newPointOfFocus = nullptr;
@@ -2310,7 +2186,7 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
         {
             foreach(const trkpt_t &pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eHidden)
+                if(pt.isHidden())
                 {
                     continue;
                 }
@@ -2346,7 +2222,7 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
         {
             foreach(const trkpt_t &pt, seg.pts)
             {
-                if(pt.flags & trkpt_t::eHidden)
+                if(pt.isHidden())
                 {
                     continue;
                 }
@@ -2388,19 +2264,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             getTrkPtByTotalIndex(). Depending on the current mode.
          */
 
-        quint32 i   = 0;
-        qint32 d1   = NOINT;
-        foreach(const QPointF &point, line)
-        {
-            int tmp = (pt - point).manhattanLength();
-            if(tmp < d1)
-            {
-                idx = i;
-                d1  = tmp;
-            }
-            i++;
-        }
-
+        idx = getIdxPointCloseBy(pt, line);
         newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
     }
     if(!publishMouseFocus(newPointOfFocus, fmode, owner))
@@ -2418,81 +2282,62 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 
 bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString &owner)
 {
-    const trkpt_t * newPointOfFocus = nullptr;
-
-    foreach (const trkseg_t &seg, trk.segs)
+    const trkpt_t *newPointOfFocus = getTrkPtByTotalIndex(idx);
+    if(nullptr != newPointOfFocus)
     {
-        foreach(const trkpt_t &pt, seg.pts)
-        {
-            if(pt.idxTotal == idx)
-            {
-                newPointOfFocus = &pt;
-                return publishMouseFocus(newPointOfFocus, fmode, owner);
-            }
-        }
+        return publishMouseFocus(newPointOfFocus, fmode, owner);
     }
+
     return false;
 }
 
-const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx)
+const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
+{
+    foreach(const trkseg_t &seg, trk.segs)
+    {
+        foreach(const trkpt_t &pt, seg.pts)
+        {
+            if(cond(pt))
+            {
+                return &pt;
+            }
+        }
+    }
+    return nullptr;
+}
+
+const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx) const
 {
     if(idx == NOIDX)
     {
         return nullptr;
     }
 
-    foreach (const trkseg_t &seg, trk.segs)
-    {
-        foreach(const trkpt_t &pt, seg.pts)
-        {
-            if(pt.idxVisible == idx)
-            {
-                return &pt;
-            }
-        }
-    }
-    return nullptr;
+    auto condition = [idx](const trkpt_t &pt) { return (pt.idxVisible == idx); };
+    return getTrkPtByCondition(condition);
 }
 
-const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx)
+const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx) const
+{
+    auto condition = [idx](const trkpt_t &pt) { return (pt.idxTotal == idx); };
+    return getTrkPtByCondition(condition);
+}
+
+bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal) const
+{
+    auto condition = [idxTotal](const trkpt_t &pt) { return ((pt.idxTotal > idxTotal) && !pt.isHidden()); };
+    return nullptr == getTrkPtByCondition(condition);
+}
+
+bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal) const
 {
     foreach (const trkseg_t &seg, trk.segs)
     {
         foreach(const trkpt_t &pt, seg.pts)
         {
-            if(pt.idxTotal == idx)
+            if((pt.idxTotal < idxTotal))
             {
-                return &pt;
-            }
-        }
-    }
-    return nullptr;
-}
-
-bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal)
-{
-    foreach (const trkseg_t &seg, trk.segs)
-    {
-        foreach(const trkpt_t &pt1, seg.pts)
-        {
-            if((pt1.idxTotal > idxTotal) && !(pt1.flags & trkpt_t::eHidden))
-            {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
-{
-    foreach (const trkseg_t &seg, trk.segs)
-    {
-        foreach(const trkpt_t &pt1, seg.pts)
-        {
-            if((pt1.idxTotal < idxTotal))
-            {
-                if(!(pt1.flags & trkpt_t::eHidden))
+                if(!pt.isHidden())
                 {
                     return false;
                 }
@@ -2506,6 +2351,12 @@ bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal)
     return true;
 }
 
+void CGisItemTrk::resetMouseRange()
+{
+    mouseRange1 = nullptr;
+    mouseRange2 = nullptr;
+    rangeState  = eRangeStateIdle;
+}
 
 bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString& owner)
 {
@@ -2555,9 +2406,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
     {
         if(fmode == eFocusMouseClick)
         {
-            mouseRange1 = nullptr;
-            mouseRange2 = nullptr;
-            rangeState  = eRangeStateIdle;
+            resetMouseRange();
         }
         break;
     }

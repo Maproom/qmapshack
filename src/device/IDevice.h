@@ -25,6 +25,7 @@
 #include "gis/IGisItem.h"
 class CGisDraw;
 class CGisItemWpt;
+class CDeviceGarmin;
 
 class IDevice : public QTreeWidgetItem
 {
@@ -38,6 +39,7 @@ public:
     };
 
     IDevice(const QString& path, type_e type, const QString& key, QTreeWidget * parent);
+    IDevice(const QString &path, type_e type, const QString &key, CDeviceGarmin *parent);
     virtual ~IDevice();
 
 

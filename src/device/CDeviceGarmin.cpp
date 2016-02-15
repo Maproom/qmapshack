@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "device/CDeviceGarmin.h"
+#include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
@@ -116,7 +117,12 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
     this->createProjectsFromFiles(pathGpx, "gpx");
     this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
-    this->createProjectsFromFiles(pathGpx + "/Archive", "gpx");
+
+    QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
+    if(dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0))
+    {
+        archive = new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
+    }
 
     this->createProjectsFromFiles(pathActivities, "fit");
     this->createProjectsFromFiles(pathCourses, "fit");
@@ -178,6 +184,27 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
     }
 
     createAdventureFromProject(project, pathGpx + "/" + name + ".gpx");
+
+    // move new project to top of any sub-folder/sub-device item
+    int newIdx      = NOIDX;
+    const int myIdx = childCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(child(i));
+        if(0 == device)
+        {
+            break;
+        }
+
+        newIdx = i;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        takeChild(myIdx);
+        insertChild(newIdx, gpx);
+    }
+
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)

@@ -270,6 +270,7 @@ set( SRCS
         device/IDeviceWatcher.cpp
         device/IDevice.cpp
         device/CDeviceGarmin.cpp
+        device/CDeviceGarminArchive.cpp
         device/CDeviceTwoNav.cpp
         tool/IToolShell.cpp
         tool/CMapVrtBuilder.cpp
@@ -522,6 +523,7 @@ set( HDRS
         device/IDeviceWatcher.h
         device/IDevice.h
         device/CDeviceGarmin.h
+        device/CDeviceGarminArchive.h
         device/CDeviceTwoNav.h
         tool/IToolShell.h
         tool/CMapVrtBuilder.h

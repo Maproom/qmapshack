@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 #include "CMainWindow.h"
+#include "device/CDeviceGarmin.h"
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
@@ -34,6 +35,14 @@ IDevice::IDevice(const QString &path, type_e type, const QString &key, QTreeWidg
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/Device.png"));
     cnt++;
+}
+
+IDevice::IDevice(const QString &path, type_e type, const QString &key, CDeviceGarmin *parent)
+    : QTreeWidgetItem(parent, type)
+    , dir(path)
+    , key(key)
+{
+    setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/PathGreen.png"));
 }
 
 IDevice::~IDevice()
@@ -74,9 +83,16 @@ void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             project->getItemsByPos(pos, items);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getItemsByPos(pos, items);
         }
     }
 }
@@ -88,7 +104,7 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             if(project->getKey() != key.project)
             {
@@ -96,6 +112,16 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
             }
 
             item = project->getItemByKey(key);
+            if(item != nullptr)
+            {
+                break;
+            }
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            item = device->getItemByKey(key);
             if(item != nullptr)
             {
                 break;
@@ -111,7 +137,7 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             if(project->getKey() != key)
             {
@@ -119,6 +145,16 @@ IGisProject * IDevice::getProjectByKey(const QString& key)
             }
 
             return project;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            project = device->getProjectByKey(key);
+            if(project != nullptr)
+            {
+                return project;
+            }
         }
     }
     return nullptr;
@@ -130,9 +166,16 @@ void IDevice::editItemByKey(const IGisItem::key_t& key)
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             project->editItemByKey(key);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->editItemByKey(key);
         }
     }
 }
@@ -230,8 +273,6 @@ bool IDevice::testForExternalProject(const QString& filename)
             }
         }
     }
-
-
     return false;
 }
 
@@ -241,9 +282,16 @@ void IDevice::drawItem(QPainter& p, const QPolygonF &viewport, QList<QRectF>& bl
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             project->drawItem(p, viewport, blockedAreas, gis);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->drawItem(p, viewport, blockedAreas, gis);
         }
     }
 }
@@ -254,9 +302,16 @@ void IDevice::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF>& b
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             project->drawLabel(p, viewport, blockedAreas, fm, gis);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->drawLabel(p, viewport, blockedAreas, fm, gis);
         }
     }
 }
@@ -267,9 +322,16 @@ void IDevice::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     for(int n = 0; n < N; n++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
-        if(project)
+        if(project != nullptr)
         {
             project->drawItem(p, viewport, gis);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->drawItem(p, viewport, gis);
         }
     }
 }

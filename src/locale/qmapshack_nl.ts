@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="nl_NL">
+<TS version="2.1" language="nl_NL">
 <context>
     <name>CAbout</name>
     <message>
@@ -20,101 +20,101 @@
         <location filename="../gis/trk/CActivityTrk.cpp" line="29"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="117"/>
         <source>Foot</source>
-        <translation type="unfinished">Wandelen</translation>
+        <translation>Wandelen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="37"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="118"/>
         <source>Bicycle</source>
-        <translation type="unfinished">Fiets</translation>
+        <translation>Fiets</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="45"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="119"/>
         <source>Motor Bike</source>
-        <translation type="unfinished">Motorfiets</translation>
+        <translation>Motorfiets</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="120"/>
         <source>Car</source>
-        <translation type="unfinished">Auto</translation>
+        <translation>Auto</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="121"/>
         <source>Cable Car</source>
-        <translation type="unfinished">Kabelbaan</translation>
+        <translation>Kabelbaan</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="69"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="122"/>
         <source>Swim</source>
-        <translation type="unfinished">Zwemmen</translation>
+        <translation>Zwemmen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="77"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="123"/>
         <source>Ship</source>
-        <translation type="unfinished">Boot</translation>
+        <translation>Boot</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="85"/>
         <source>Aeronautik</source>
-        <translation type="unfinished">Vliegen</translation>
+        <translation>Vliegen</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="93"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="125"/>
         <source>Ski/Winter</source>
-        <translation type="unfinished"></translation>
+        <translation>Ski/Winter</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="124"/>
         <source>Aeronautics</source>
-        <translation type="unfinished">Vliegtuig</translation>
+        <translation>Vliegtuig</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="261"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="305"/>
         <source>Distance:</source>
-        <translation type="unfinished">Afstand:</translation>
+        <translation>Afstand:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="327"/>
         <source>Ascend:</source>
-        <translation type="unfinished">Stijging:</translation>
+        <translation>Stijging:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="265"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="349"/>
         <source>Descend:</source>
-        <translation type="unfinished">Daling:</translation>
+        <translation>Daling:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="267"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="371"/>
         <source>Speed Moving:</source>
-        <translation type="unfinished">Bewogen snelheid:</translation>
+        <translation>Bewogen snelheid:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="269"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="393"/>
         <source>Speed Total:</source>
-        <translation type="unfinished">Totale snelheid:</translation>
+        <translation>Totale snelheid:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="271"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="415"/>
         <source>Time Moving:</source>
-        <translation type="unfinished">Bewogen tijd:</translation>
+        <translation>Bewogen tijd:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="273"/>
         <location filename="../gis/trk/CActivityTrk.cpp" line="437"/>
         <source>Time Total:</source>
-        <translation type="unfinished">Totale tijd:</translation>
+        <translation>Totale tijd:</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Bewerk naam...</translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
@@ -184,17 +184,17 @@
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="30"/>
         <source>All your data grouped by folders.</source>
-        <translation type="unfinished">Alle gegevens gegroepeerd per map.</translation>
+        <translation>Alle gegevens gegroepeerd per map.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="59"/>
         <source>Lost &amp; Found (%1)</source>
-        <translation type="unfinished">Lost &amp; Found (%1)</translation>
+        <translation>Lost &amp; Found (%1)</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <source>Lost &amp; Found</source>
-        <translation type="unfinished">Lost &amp; Found</translation>
+        <translation>Lost &amp; Found</translation>
     </message>
 </context>
 <context>
@@ -202,12 +202,12 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="32"/>
         <source>All your data grouped by folders.</source>
-        <translation type="unfinished">Alle gegevens gegroepeerd per map.</translation>
+        <translation>Alle gegevens gegroepeerd per map.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="53"/>
         <source>MySQL Database</source>
-        <translation type="unfinished"></translation>
+        <translation>MySQL Database</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="56"/>
@@ -223,7 +223,7 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="73"/>
         <source>Error: </source>
-        <translation type="unfinished">Fout: </translation>
+        <translation>Fout: </translation>
     </message>
 </context>
 <context>
@@ -231,17 +231,17 @@
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="28"/>
         <source>All your data grouped by folders.</source>
-        <translation type="unfinished">Alle gegevens gegroepeerd per map.</translation>
+        <translation>Alle gegevens gegroepeerd per map.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="46"/>
         <source>SQLite Database</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLite Database</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="56"/>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand: </translation>
     </message>
 </context>
 <context>
@@ -269,29 +269,29 @@
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
-        <translation type="unfinished">Het item %1 is verand door %2 (%3). 
+        <translation>Het item %1 is verand door %2 (%3). 
 
 Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer huidige versie of verwijder deze versie en kies een ander uit de database</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="201"/>
         <source>Conflict with database...</source>
-        <translation type="unfinished">Conflict met database...</translation>
+        <translation>Conflict met database...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="202"/>
         <source>Clone &amp;&amp; Save</source>
-        <translation type="unfinished">Kloon &amp;&amp; Opslaan</translation>
+        <translation>Kloon &amp;&amp; Opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="203"/>
         <source>Force Save</source>
-        <translation type="unfinished">Forceer opslaan</translation>
+        <translation>Forceer opslaan</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="204"/>
         <source>Take remote</source>
-        <translation type="unfinished">Neem huidige</translation>
+        <translation>Neem huidige</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="507"/>
@@ -306,31 +306,31 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="517"/>
         <source>Save ...</source>
-        <translation type="unfinished">Opslaan...</translation>
+        <translation>Opslaan...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="583"/>
         <source>Error</source>
-        <translation type="unfinished">Fout</translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="583"/>
         <source>There was an unexpected database error:
 
 %1</source>
-        <translation type="unfinished">Er is een onverwachte database fout opgetreden:
+        <translation>Er is een onverwachte database fout opgetreden:
 
 %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="704"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
-        <translation type="unfinished">Het project &apos;%1&apos; zal geupdated worden met de database.Er zijn nog veranderingen niet opgeslagen.</translation>
+        <translation>Het project &apos;%1&apos; zal geupdated worden met de database.Er zijn nog veranderingen niet opgeslagen.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="705"/>
         <source>Save changes?</source>
-        <translation type="unfinished">Veranderingen opslaan?</translation>
+        <translation>Veranderingen opslaan?</translation>
     </message>
 </context>
 <context>
@@ -608,12 +608,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="508"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="509"/>
         <source>Activity</source>
-        <translation type="unfinished">Activiteit</translation>
+        <translation>Activiteit</translation>
     </message>
     <message>
         <source>Edit name...</source>
@@ -660,12 +660,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../device/CDeviceGarmin.cpp" line="228"/>
         <source>Picture%1</source>
-        <translation type="unfinished">Afbeelding%1</translation>
+        <translation>Afbeelding%1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="1039"/>
         <source>Unknown</source>
-        <translation type="unfinished">Onbekend</translation>
+        <translation>Onbekend</translation>
     </message>
 </context>
 <context>
@@ -727,7 +727,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <location filename="../gis/fit/CFitProject.cpp" line="44"/>
         <location filename="../gis/fit/CFitProject.cpp" line="62"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Kan bestand %1 niet laden...</translation>
+        <translation>Kan bestand %1 niet laden...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="86"/>
@@ -754,17 +754,17 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
         <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
         <source>Warning...</source>
-        <translation type="unfinished">Waarschuwing...</translation>
+        <translation>Waarschuwing...</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
-        <translation type="unfinished">Dit is een bestand met onbekende polygon codering. Alstublieft melden!</translation>
+        <translation>Dit is een bestand met onbekende polygon codering. Alstublieft melden!</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
-        <translation type="unfinished">Dit is een bestand met onbekende polylijn codering. Alstublieft melden!</translation>
+        <translation>Dit is een bestand met onbekende polylijn codering. Alstublieft melden!</translation>
     </message>
 </context>
 <context>
@@ -772,77 +772,77 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="36"/>
         <source>thin</source>
-        <translation type="unfinished">dun</translation>
+        <translation>dun</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="37"/>
         <source>normal</source>
-        <translation type="unfinished">normaal</translation>
+        <translation>normaal</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="38"/>
         <source>wide</source>
-        <translation type="unfinished">breed</translation>
+        <translation>breed</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="39"/>
         <source>strong</source>
-        <translation type="unfinished">vet</translation>
+        <translation>vet</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="78"/>
         <source>_Clone</source>
-        <translation type="unfinished">_Kloon</translation>
+        <translation>_Kloon</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="380"/>
         <source>Area: %1%2</source>
-        <translation type="unfinished">Gebied: %1%2</translation>
+        <translation>Gebied: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="442"/>
         <source>Changed area shape.</source>
-        <translation type="unfinished">Vorm gebied aangepast.</translation>
+        <translation>Vorm gebied aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="450"/>
         <source>Changed name.</source>
-        <translation type="unfinished">Naam aangepast.</translation>
+        <translation>Naam aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="456"/>
         <source>Changed border width.</source>
-        <translation type="unfinished">Lijndikte aangepast.</translation>
+        <translation>Lijndikte aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="462"/>
         <source>Changed fill pattern.</source>
-        <translation type="unfinished">Opvulling aangepast.</translation>
+        <translation>Opvulling aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="468"/>
         <source>Changed opacity.</source>
-        <translation type="unfinished">Transparantie aangepast.</translation>
+        <translation>Transparantie aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="474"/>
         <source>Changed comment.</source>
-        <translation type="unfinished">Notitie aangepast.</translation>
+        <translation>Notitie aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="480"/>
         <source>Changed description.</source>
-        <translation type="unfinished">Beschrijving aangepast.</translation>
+        <translation>Beschrijving aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="486"/>
         <source>Changed links</source>
-        <translation type="unfinished">Link aangepast</translation>
+        <translation>Link aangepast</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="497"/>
         <source>Changed color</source>
-        <translation type="unfinished">Kleur aangepast</translation>
+        <translation>Kleur aangepast</translation>
     </message>
 </context>
 <context>
@@ -850,68 +850,68 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="63"/>
         <source>_Clone</source>
-        <translation type="unfinished">_Kloon</translation>
+        <translation>_Kloon</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="249"/>
         <source>Changed name.</source>
-        <translation type="unfinished">Naam aangepast.</translation>
+        <translation>Naam aangepast.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="255"/>
         <source>Changed comment</source>
-        <translation type="unfinished">Notitie aangepast</translation>
+        <translation>Notitie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="261"/>
         <source>Changed description</source>
-        <translation type="unfinished">Beschrijving aangepast</translation>
+        <translation>Beschrijving aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="267"/>
         <source>Changed links</source>
-        <translation type="unfinished">Link aangepast</translation>
+        <translation>Link aangepast</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
         <source>Length: %1 %2</source>
-        <translation type="unfinished">Lengte: %1 %2</translation>
+        <translation>Lengte: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="289"/>
         <source>Length: -</source>
-        <translation type="unfinished">Lengte: -</translation>
+        <translation>Lengte: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="296"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="479"/>
         <source>Time: %1 %2</source>
-        <translation type="unfinished">Tijd: %1 %2</translation>
+        <translation>Tijd: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="300"/>
         <source>Time: -</source>
-        <translation type="unfinished">Tijd: -</translation>
+        <translation>Tijd: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="306"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
-        <translation type="unfinished">Laatste routeberekening:&lt;br/&gt;%1</translation>
+        <translation>Laatste routeberekening:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="308"/>
         <source>with %1</source>
-        <translation type="unfinished">met %1</translation>
+        <translation>met %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="481"/>
         <source>Distance: %1 %2</source>
-        <translation type="unfinished">Afstand: %1 %2</translation>
+        <translation>Afstand: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="595"/>
         <source>Changed route points.</source>
-        <translation type="unfinished">Routepunten aangepast.</translation>
+        <translation>Routepunten aangepast.</translation>
     </message>
 </context>
 <context>
@@ -928,171 +928,171 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <location filename="../gis/tnv/serialization.cpp" line="387"/>
         <location filename="../gis/tnv/serialization.cpp" line="420"/>
         <source>Error...</source>
-        <translation type="unfinished">Fout...</translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <source>Failed to open %1.</source>
-        <translation type="unfinished">Kan %1 niet openen.</translation>
+        <translation>Kan %1 niet openen.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
         <location filename="../gis/tnv/serialization.cpp" line="387"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation type="unfinished">Alleen lon/lat WGS 84 formaat word ondersteunt.</translation>
+        <translation>Alleen lon/lat WGS 84 formaat word ondersteunt.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="420"/>
         <source>Failed to read data.</source>
-        <translation type="unfinished">Lezen gegevens mislukt.</translation>
+        <translation>Lezen gegevens mislukt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="124"/>
         <source>_Clone</source>
-        <translation type="unfinished">_Kloon</translation>
+        <translation>_Kloon</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="291"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
-        <translation type="unfinished">Trackpunten aangepast, vorige gegevens overschreven.</translation>
+        <translation>Trackpunten aangepast, vorige gegevens overschreven.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="394"/>
         <source>Length: %1 %2</source>
-        <translation type="unfinished">Lengte: %1 %2</translation>
+        <translation>Lengte: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
         <source>, %1%2 %3, %4%5 %6</source>
-        <translation type="unfinished">, %1%2 %3, %4%5 %6</translation>
+        <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="409"/>
         <source>Time: %1</source>
-        <translation type="unfinished">Tijd: %1</translation>
+        <translation>Tijd: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="422"/>
         <source>, Speed: %1 %2</source>
-        <translation type="unfinished">, Snelheid: %1 %2</translation>
+        <translation>, Snelheid: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="419"/>
         <source>Moving: %1</source>
-        <translation type="unfinished">Beweging: %1</translation>
+        <translation>Beweging: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
         <source>Start: %1</source>
-        <translation type="unfinished">Start: %1</translation>
+        <translation>Start: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="433"/>
         <source>End: %1</source>
-        <translation type="unfinished">Einde: %1</translation>
+        <translation>Einde: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="437"/>
         <source>Points: %1 (%2)</source>
-        <translation type="unfinished">Punten: %1 (%2)</translation>
+        <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="546"/>
         <source>Ele.: %1 %2</source>
-        <translation type="unfinished">Hoogte.: %1 %2</translation>
+        <translation>Hoogte.: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="549"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation type="unfinished"> helling: %1%3 (%2%)</translation>
+        <translation> helling: %1%3 (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="554"/>
         <source> speed: %1%2</source>
-        <translation type="unfinished"> snelheid: %1%2</translation>
+        <translation> snelheid: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>... and %1 tags not displayed</source>
-        <translation type="unfinished">... en %1 tags niet getoont</translation>
+        <translation>... en %1 tags niet getoont</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
         <source>Ascend: %1%2 (%3%)</source>
-        <translation type="unfinished">Stijging: %1%2 (%3%)</translation>
+        <translation>Stijging: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
         <source>Ascend: - (-)</source>
-        <translation type="unfinished">Stijging: - (-)</translation>
+        <translation>Stijging: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source> Descend: %1%2 (%3%)</source>
-        <translation type="unfinished"> Daling: %1%2 (%3%)</translation>
+        <translation> Daling: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="608"/>
         <source> Descend: - (-) </source>
-        <translation type="unfinished"> Daling: - (-) </translation>
+        <translation> Daling: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="615"/>
         <source>Dist.: %1%2 (%3%)</source>
-        <translation type="unfinished">Afstand.: %1%2 (%3%)</translation>
+        <translation>Afstand.: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="619"/>
         <source>Dist.: - (-)</source>
-        <translation type="unfinished">Afstand.: - (-)</translation>
+        <translation>Afstand.: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="625"/>
         <source> Moving: %1%2 (%3%)</source>
-        <translation type="unfinished"> Beweging: %1%2 (%3%)</translation>
+        <translation> Beweging: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="629"/>
         <source> Moving: - (-) </source>
-        <translation type="unfinished"> Beweging: - (-) </translation>
+        <translation> Beweging: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Ascend: %1%2</source>
-        <translation type="unfinished">Stijging: %1%2</translation>
+        <translation>Stijging: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="670"/>
         <source>, %1%2</source>
-        <translation type="unfinished">, %1%2</translation>
+        <translation>, %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="658"/>
         <source>Ascend: -</source>
-        <translation type="unfinished">Stijging: -</translation>
+        <translation>Stijging: -</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
         <source> Descend: %1%2</source>
-        <translation type="unfinished"> Daling: %1%2</translation>
+        <translation> Daling: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="675"/>
         <source>Descend: -</source>
-        <translation type="unfinished">Daling: -</translation>
+        <translation>Daling: -</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
         <source>Dist.: %1%2</source>
-        <translation type="unfinished">Afstand.: %1%2</translation>
+        <translation>Afstand.: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="686"/>
         <source> Time: %1%2</source>
-        <translation type="unfinished"> Tijd: %1%2</translation>
+        <translation> Tijd: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1269"/>
@@ -1101,7 +1101,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1423"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1602"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Bewerk naam...</translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1269"/>
@@ -1110,83 +1110,83 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1423"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1602"/>
         <source>Enter new track name.</source>
-        <translation type="unfinished">Geef track nieuwe naam.</translation>
+        <translation>Geef track nieuwe naam.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1331"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1355"/>
         <source>Permanently removed points %1..%2</source>
-        <translation type="unfinished">Permanent verwijderde punten %1..%2</translation>
+        <translation>Permanent verwijderde punten %1..%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1537"/>
         <source>Hide points.</source>
-        <translation type="unfinished">Verberg punten.</translation>
+        <translation>Verberg punten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1577"/>
         <source>Show points.</source>
-        <translation type="unfinished">Toon punten.</translation>
+        <translation>Toon punten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2143"/>
         <source>Changed name</source>
-        <translation type="unfinished">Naam aangepast</translation>
+        <translation>Naam aangepast</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2149"/>
         <source>Changed comment</source>
-        <translation type="unfinished">Notitie aangepast</translation>
+        <translation>Notitie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2155"/>
         <source>Changed description</source>
-        <translation type="unfinished">Beschrijving aangepast</translation>
+        <translation>Beschrijving aangepast</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2161"/>
         <source>Changed links</source>
-        <translation type="unfinished">Link aangepast</translation>
+        <translation>Link aangepast</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2188"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
-        <translation type="unfinished">Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
+        <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2262"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
-        <translation type="unfinished">Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
+        <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="108"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
-        <translation type="unfinished">Verberg alle punten via Douglas Peuker algoritme (%1%2)</translation>
+        <translation>Verberg alle punten via Douglas Peuker algoritme (%1%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="143"/>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation type="unfinished">Verberg punten met slechte gegevens naar begin van de track</translation>
+        <translation>Verberg punten met slechte gegevens naar begin van de track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="159"/>
         <source>Reset all hidden track points to visible</source>
-        <translation type="unfinished">Verander alle verborgen trackpunten naar zichtbaar</translation>
+        <translation>Verander alle verborgen trackpunten naar zichtbaar</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="193"/>
         <source>Permanently removed all hidden track points</source>
-        <translation type="unfinished">Alle verborgen trackpunten permanent verwijderd</translation>
+        <translation>Alle verborgen trackpunten permanent verwijderd</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="243"/>
         <source>Smoothed profile with a Median filter of size %1</source>
-        <translation type="unfinished">Vloeiend profiel met een median filter van grootte %1</translation>
+        <translation>Vloeiend profiel met een median filter van grootte %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="279"/>
         <source>Replaced elevation data with data from DEM files.</source>
-        <translation type="unfinished">Vervang hoogte gegevens met gegevens van DEM bestanden.</translation>
+        <translation>Vervang hoogte gegevens met gegevens van DEM bestanden.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="302"/>
@@ -1196,12 +1196,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="321"/>
         <source>Changed start of track to %1.</source>
-        <translation type="unfinished">Start van track veranderd naar %1.</translation>
+        <translation>Start van track veranderd naar %1.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="340"/>
         <source>Remove timestamps.</source>
-        <translation type="unfinished">Verwijder tijdstempels.</translation>
+        <translation>Verwijder tijdstempels.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="363"/>
@@ -1211,12 +1211,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="396"/>
         <source>Changed speed to %1%2.</source>
-        <translation type="unfinished">Snelheid veranderd naar %1%2.</translation>
+        <translation>Snelheid veranderd naar %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="415"/>
         <source>%1 (Segment %2)</source>
-        <translation type="unfinished">%1 (Segment %2)</translation>
+        <translation>%1 (Segment %2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="438"/>
@@ -1226,7 +1226,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../qlgt/converter.cpp" line="198"/>
         <source>Copy flag information from QLandkarte GT track</source>
-        <translation type="unfinished">Kopieer flag informatie vanuit QLandkarte GT track</translation>
+        <translation>Kopieer flag informatie vanuit QLandkarte GT track</translation>
     </message>
 </context>
 <context>
@@ -1234,82 +1234,82 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="588"/>
         <source>Archived</source>
-        <translation type="unfinished">Gearchiveerd</translation>
+        <translation>Gearchiveerd</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="592"/>
         <source>Available</source>
-        <translation type="unfinished">Beschikbaar</translation>
+        <translation>Beschikbaar</translation>
     </message>
     <message>
         <location filename="../gis/gpx/serialization.cpp" line="596"/>
         <source>Not Available</source>
-        <translation type="unfinished">Niet beschikbaar</translation>
+        <translation>Niet beschikbaar</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="102"/>
         <source>_Clone</source>
-        <translation type="unfinished">_Kloon</translation>
+        <translation>_Kloon</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="267"/>
         <source>Elevation: %1 %2</source>
-        <translation type="unfinished">Hoogte: %1 %2</translation>
+        <translation>Hoogte: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="278"/>
         <source>Proximity: %1 %2</source>
-        <translation type="unfinished">Nabijheid: %1 %2</translation>
+        <translation>Nabijheid: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="352"/>
         <source>Changed name</source>
-        <translation type="unfinished">Naam aangepast</translation>
+        <translation>Naam aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="362"/>
         <source>Changed position</source>
-        <translation type="unfinished">Positie aangepast</translation>
+        <translation>Positie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="368"/>
         <source>Changed elevation</source>
-        <translation type="unfinished">Hoogte aangepast</translation>
+        <translation>Hoogte aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="374"/>
         <source>Changed proximity</source>
-        <translation type="unfinished">Nabijheid aangepast</translation>
+        <translation>Nabijheid aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="388"/>
         <source>Changed icon</source>
-        <translation type="unfinished">Pictogram aangepast</translation>
+        <translation>Pictogram aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
         <source>Changed comment</source>
-        <translation type="unfinished">Notitie aangepast</translation>
+        <translation>Notitie aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
         <source>Changed description</source>
-        <translation type="unfinished">Beschrijving aangepast</translation>
+        <translation>Beschrijving aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed links</source>
-        <translation type="unfinished">Link aangepast</translation>
+        <translation>Link aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="412"/>
         <source>Changed images</source>
-        <translation type="unfinished">Afbeelding aangepast</translation>
+        <translation>Afbeelding aangepast</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="418"/>
         <source>Add image</source>
-        <translation type="unfinished">Afbeelding toevoegen</translation>
+        <translation>Afbeelding toevoegen</translation>
     </message>
 </context>
 <context>
@@ -1399,12 +1399,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/CGisListDB.cpp" line="611"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
-        <translation type="unfinished">Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
+        <translation>Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="612"/>
         <source>Delete...</source>
-        <translation type="unfinished">Verwijderen...</translation>
+        <translation>Verwijderen...</translation>
     </message>
 </context>
 <context>
@@ -1575,12 +1575,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1151"/>
         <source>Delete project...</source>
-        <translation type="unfinished">Project verwijderen...</translation>
+        <translation>Project verwijderen...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1151"/>
         <source>Do you really want to delete %1?</source>
-        <translation type="unfinished">Moet %1 werkelijk verwijderd worden?</translation>
+        <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1347"/>
@@ -1616,51 +1616,51 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="90"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Kan bestand %1 niet laden...</translation>
+        <translation>Kan bestand %1 niet laden...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="112"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Openen mislukt-%1</translation>
+        <translation>Openen mislukt-%1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="124"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Lezen mislukt: %1
+        <translation>Lezen mislukt: %1
 lijn %2, kolom %3:
  %4</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="132"/>
         <source>Not a GPX file: %1</source>
-        <translation type="unfinished">Geen GPX bestand: %1</translation>
+        <translation>Geen GPX bestand: %1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="238"/>
         <source>File exists ...</source>
-        <translation type="unfinished">Bestand bestaat al...</translation>
+        <translation>Bestand bestaat al...</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="239"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation type="unfinished">Dit bestand bestaat al en is niet in QMapShack gemaakt. Wanneer op &apos;Ja&apos; geklikt wordt zullen er gegevens verloren gaan. Alhoewel QMapShack dit GPX bestand kan openen is het mogelijk dat niet alle elementen opgeslagen kunnen worden. Geadviseerd wordt om een ander bestand te kiezen. &lt;b&gt;Moet dit bestand werkelijk overschreven worden?&lt;b/&gt;</translation>
+        <translation>Dit bestand bestaat al en is niet in QMapShack gemaakt. Wanneer op &apos;Ja&apos; geklikt wordt zullen er gegevens verloren gaan. Alhoewel QMapShack dit GPX bestand kan openen is het mogelijk dat niet alle elementen opgeslagen kunnen worden. Geadviseerd wordt om een ander bestand te kiezen. &lt;b&gt;Moet dit bestand werkelijk overschreven worden?&lt;b/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="347"/>
         <source>Failed to create file &apos;%1&apos;</source>
-        <translation type="unfinished">Maken bestand mislukt &apos;%1&apos;</translation>
+        <translation>Maken bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="357"/>
         <source>Failed to write file &apos;%1&apos;</source>
-        <translation type="unfinished">Schrijven bestand mislukt &apos;%1&apos;</translation>
+        <translation>Schrijven bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="362"/>
         <source>Saving GIS data failed...</source>
-        <translation type="unfinished">Opslaan GIS gegevens mislukt...</translation>
+        <translation>Opslaan GIS gegevens mislukt...</translation>
     </message>
 </context>
 <context>
@@ -1696,7 +1696,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="61"/>
         <source> by %1</source>
-        <translation type="unfinished"></translation>
+        <translation> per %1</translation>
     </message>
 </context>
 <context>
@@ -1722,44 +1722,44 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="45"/>
         <source>Air Temperature</source>
-        <translation type="unfinished">Luchttemperatuur</translation>
+        <translation>Luchttemperatuur</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="49"/>
         <source>Water Temperature</source>
-        <translation type="unfinished">Watertemperatuur</translation>
+        <translation>Watertemperatuur</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="53"/>
         <source>Depth</source>
-        <translation type="unfinished">Diepte</translation>
+        <translation>Diepte</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="57"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="69"/>
         <source>Heart Rate</source>
-        <translation type="unfinished">Hartslag</translation>
+        <translation>Hartslag</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="61"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="73"/>
         <source>Cadence</source>
-        <translation type="unfinished">Cadans</translation>
+        <translation>Cadans</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="77"/>
         <source>Speed</source>
-        <translation type="unfinished">Snelheid</translation>
+        <translation>Snelheid</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="81"/>
         <source>Acceleration</source>
-        <translation type="unfinished">Versnelling</translation>
+        <translation>Versnelling</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="85"/>
         <source>Course</source>
-        <translation type="unfinished">Richting</translation>
+        <translation>Richting</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="94"/>
@@ -1774,12 +1774,12 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
         <source>Elevation</source>
-        <translation type="unfinished">Hoogte</translation>
+        <translation>Hoogte</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="109"/>
         <source>Progress</source>
-        <translation type="unfinished">Voortgang</translation>
+        <translation>Voortgang</translation>
     </message>
 </context>
 <context>
@@ -1787,7 +1787,7 @@ lijn %2, kolom %3:
     <message>
         <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <source>Lost &amp; Found</source>
-        <translation type="unfinished">Lost &amp; Found</translation>
+        <translation>Lost &amp; Found</translation>
     </message>
 </context>
 <context>
@@ -2713,12 +2713,12 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Bewerk naam...</translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
         <source>Enter new area name.</source>
-        <translation type="unfinished">Geef gebied een nieuwe naam.</translation>
+        <translation>Geef gebied een nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -2737,12 +2737,12 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Bewerk naam...</translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
         <source>Enter new route name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geef  route een nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -2771,12 +2771,12 @@ Onbekende structuur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Bewerk naam...</translation>
+        <translation>Bewerk naam...</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
         <source>Enter new track name.</source>
-        <translation type="unfinished">Geef track nieuwe naam.</translation>
+        <translation>Geef track nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -2989,12 +2989,12 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="65"/>
         <source>distance [%1]</source>
-        <translation type="unfinished">afstand [%1]</translation>
+        <translation>afstand [%1]</translation>
     </message>
     <message>
         <location filename="../gis/trk/CPropertyTrk.cpp" line="77"/>
         <source>time</source>
-        <translation type="unfinished">tijd</translation>
+        <translation>tijd</translation>
     </message>
 </context>
 <context>
@@ -3123,7 +3123,7 @@ is geen geldig coordinaat definitie:
         <location filename="../qlgt/CQlgtTrack.cpp" line="265"/>
         <location filename="../qlgt/CQlgtTrack.cpp" line="291"/>
         <source>Corrupt track ...</source>
-        <translation type="unfinished">Slechte track...</translation>
+        <translation>Slechte track...</translation>
     </message>
     <message>
         <location filename="../qlgt/CQlgtTrack.cpp" line="164"/>
@@ -3171,13 +3171,13 @@ is geen geldig coordinaat definitie:
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
         <source>Failed to open...</source>
-        <translation type="unfinished">Openen mislukt...</translation>
+        <translation>Openen mislukt...</translation>
     </message>
     <message>
         <location filename="../gis/qms/CQmsProject.cpp" line="48"/>
         <location filename="../gis/qms/CQmsProject.cpp" line="84"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Openen mislukt-%1</translation>
+        <translation>Openen mislukt-%1</translation>
     </message>
 </context>
 <context>
@@ -3648,7 +3648,7 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/slf/CSlfProject.cpp" line="42"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Kan bestand %1 niet laden...</translation>
+        <translation>Kan bestand %1 niet laden...</translation>
     </message>
 </context>
 <context>
@@ -3656,41 +3656,41 @@ is geen geldig coordinaat definitie:
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="59"/>
         <source>%1 does not exist</source>
-        <translation type="unfinished">%1 bestaat niet</translation>
+        <translation>%1 bestaat niet</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Openen mislukt-%1</translation>
+        <translation>Openen mislukt-%1</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Lezen mislukt: %1
+        <translation>Lezen mislukt: %1
 lijn %2, kolom %3:
  %4</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="82"/>
         <source>Not a SLF file: %1</source>
-        <translation type="unfinished">Geen SLF bestand: %1</translation>
+        <translation>Geen SLF bestand: %1</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="89"/>
         <source>Unsupported revision %1: %2</source>
-        <translation type="unfinished">Niet ondersteunende revisie %1: %2</translation>
+        <translation>Niet ondersteunende revisie %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="164"/>
         <source>Break %1</source>
-        <translation type="unfinished">Pauze %1</translation>
+        <translation>Pauze %1</translation>
     </message>
     <message>
         <location filename="../gis/slf/CSlfReader.cpp" line="168"/>
         <source>Lap %1</source>
-        <translation type="unfinished">Ronde %1</translation>
+        <translation>Ronde %1</translation>
     </message>
 </context>
 <context>
@@ -3713,32 +3713,32 @@ lijn %2, kolom %3:
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
         <source>Error...</source>
-        <translation type="unfinished">Fout...</translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
-        <translation type="unfinished">Kan %1 niet openen.</translation>
+        <translation>Kan %1 niet openen.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="159"/>
         <source>Save GIS data to...</source>
-        <translation type="unfinished">Sla GIS gegevens op naar...</translation>
+        <translation>Sla GIS gegevens op naar...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <source>Only support lon/lat WGS 84 format.</source>
-        <translation type="unfinished">Alleen lon/lat WGS 84 formaat word ondersteunt.</translation>
+        <translation>Alleen lon/lat WGS 84 formaat word ondersteunt.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
         <source>Failed to read data.</source>
-        <translation type="unfinished">Lezen gegevens mislukt.</translation>
+        <translation>Lezen gegevens mislukt.</translation>
     </message>
 </context>
 <context>
@@ -3811,7 +3811,8 @@ lijn %2, kolom %3:
         <location filename="../IAbout.ui" line="381"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg</source>
-        <translation type="unfinished"></translation>
+        <translation>Christian Eichler (qms@christian-eichler.de)
+Ivo Kronenberg</translation>
     </message>
     <message>
         <source>French</source>
@@ -3909,7 +3910,7 @@ Ivo Kronenberg</source>
         <source>OS X</source>
         <translation type="obsolete">OS X</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="354"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>..en een dank naar alle Linux binarie beheerders voor het geleverde werk. Speciale dank aan  Dan Horák en Bas Couwenberg voor het tonen van hun aanwezigheid op de mailinglijst om de distributie-gerelateerde onderwerpen te bespreken.</translation>
@@ -3923,7 +3924,7 @@ Ivo Kronenberg</source>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Deze software is gelicenseerd onder GPL3 of latere versies</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="406"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</translation>
@@ -3967,7 +3968,7 @@ Ivo Kronenberg</source>
     <message>
         <location filename="../widgets/IColorChooser.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Dialoog</translation>
+        <translation>Dialoog</translation>
     </message>
 </context>
 <context>
@@ -3993,17 +3994,17 @@ Ivo Kronenberg</source>
         <source>Coordinate Format...</source>
         <translation>Coördinaat formaat...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation>N48° 53.660 O013° 31.113</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
         <translation>N48.8943° O013.51855°</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation>N48° 53&apos; 39.6&quot; O13° 31&apos; 6.78&quot;</translation>
@@ -4074,7 +4075,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
         <source>Migrate database...</source>
-        <translation type="unfinished">Migreren database...</translation>
+        <translation>Migreren database...</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="74"/>
@@ -4085,7 +4086,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
         <location filename="../gis/db/IDB.cpp" line="76"/>
         <location filename="../gis/db/IDB.cpp" line="100"/>
         <source>Error...</source>
-        <translation type="unfinished">Fout...</translation>
+        <translation>Fout...</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="85"/>
@@ -4108,12 +4109,12 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/db/IDBMysql.cpp" line="54"/>
         <source>Password...</source>
-        <translation type="unfinished">Wachtwoord...</translation>
+        <translation>Wachtwoord...</translation>
     </message>
     <message>
         <location filename="../gis/db/IDBMysql.cpp" line="54"/>
         <source>Password for database &apos;%1&apos;:</source>
-        <translation type="unfinished">Wachtwoord voor database &apos;%1&apos;:</translation>
+        <translation>Wachtwoord voor database &apos;%1&apos;:</translation>
     </message>
 </context>
 <context>
@@ -4178,7 +4179,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
         <source>Slope </source>
         <translation>Helling </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../dem/IDemPropSetup.ui" line="226"/>
         <location filename="../dem/IDemPropSetup.ui" line="326"/>
         <location filename="../dem/IDemPropSetup.ui" line="410"/>
@@ -4671,7 +4672,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="788"/>
         <source>Color</source>
-        <translation type="unfinished">Kleur</translation>
+        <translation>Kleur</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1331"/>
@@ -4818,7 +4819,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../device/IDevice.cpp" line="204"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
-        <translation type="unfinished">Er is al een ander project met dezelfde naam. Bij drukken op &apos;OK&apos; zal deze overschreven worden.</translation>
+        <translation>Er is al een ander project met dezelfde naam. Bij drukken op &apos;OK&apos; zal deze overschreven worden.</translation>
     </message>
 </context>
 <context>
@@ -4877,7 +4878,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="51"/>
@@ -4897,7 +4898,7 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/trk/filter/IFilterDeleteExtension.ui" line="103"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -5188,71 +5189,71 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/IGisItem.cpp" line="42"/>
         <source>[no name]</source>
-        <translation type="unfinished">[geen naam]</translation>
+        <translation>[geen naam]</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="301"/>
         <source>The item is not part of the project in the database.</source>
-        <translation type="unfinished">Het item is geen deel van het project in de database.</translation>
+        <translation>Het item is geen deel van het project in de database.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="307"/>
         <source>The item is not in the database.</source>
-        <translation type="unfinished">Het item is niet in de database.</translation>
+        <translation>Het item is niet in de database.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="313"/>
         <source>The item might need to be saved</source>
-        <translation type="unfinished">Het item dient opgeslagen te worden</translation>
+        <translation>Het item dient opgeslagen te worden</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="397"/>
         <source>Initial version.</source>
-        <translation type="unfinished">Orginele versie.</translation>
+        <translation>Orginele versie.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="505"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
-        <translation type="unfinished">&lt;h3&gt;%1&lt;h3&gt;Dit element is waarschijnlijk alleen lezen omdat dit niet gemaakt is in QMapShack. Normaal hoeven geen gegevens aangepast te worden na het importeren.  Om toch aan te passen druk dan op &apos;OK&apos;.</translation>
+        <translation>&lt;h3&gt;%1&lt;h3&gt;Dit element is waarschijnlijk alleen lezen omdat dit niet gemaakt is in QMapShack. Normaal hoeven geen gegevens aangepast te worden na het importeren.  Om toch aan te passen druk dan op &apos;OK&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="506"/>
         <source>Read Only Mode...</source>
-        <translation type="unfinished">Alleen lezen modus...</translation>
+        <translation>Alleen lezen modus...</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="670"/>
         <location filename="../gis/IGisItem.cpp" line="729"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Beschrijving:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Beschrijving:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="673"/>
         <location filename="../gis/IGisItem.cpp" line="732"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- geen beschrijving ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- geen beschrijving ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="684"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Notitie:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Notitie:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="687"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- geen notitie ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- geen notitie ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="698"/>
         <location filename="../gis/IGisItem.cpp" line="743"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
-        <translation type="unfinished">&lt;h4&gt;Links:&lt;/h4&gt;</translation>
+        <translation>&lt;h4&gt;Links:&lt;/h4&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="701"/>
         <location filename="../gis/IGisItem.cpp" line="746"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;--- geen links ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- geen links ---&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -5260,69 +5261,69 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
         <source>Save project?</source>
-        <translation type="unfinished">Project opslaan?</translation>
+        <translation>Project opslaan?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="109"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
-        <translation type="unfinished">&lt;h3&gt;%1&lt;/h3&gt;Het project is veranderd. Voor het sluiten opslaan?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Het project is veranderd. Voor het sluiten opslaan?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="261"/>
         <source>%1: Correlate tracks and waypoints.</source>
-        <translation type="unfinished">%1: Correlatie van tracks en waypointen.</translation>
+        <translation>%1: Correlatie van tracks en waypointen.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="271"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
-        <translation type="unfinished">&lt;h3&gt;%1&lt;/h3&gt;Duurde dit te lang? Moet de correlatie van tracks en waypointen in dit project in de toekomst overgeslagen worden?</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt;Duurde dit te lang? Moet de correlatie van tracks en waypointen in dit project in de toekomst overgeslagen worden?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="272"/>
         <source>Canceled correlation...</source>
-        <translation type="unfinished">Correlatie geanuleerd...</translation>
+        <translation>Correlatie geanuleerd...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="312"/>
         <source>Save &quot;%1&quot; to...</source>
-        <translation type="unfinished">Opslaan &quot;%1&quot; als...</translation>
+        <translation>Opslaan &quot;%1&quot; als...</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="423"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
-        <translation type="unfinished">&lt;br/&gt;
+        <translation>&lt;br/&gt;
 Bestandsnaam: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="428"/>
         <source>Waypoints: %1</source>
-        <translation type="unfinished">Waypoints: %1</translation>
+        <translation>Waypoints: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="432"/>
         <source>Tracks: %1</source>
-        <translation type="unfinished">Tracks: %1</translation>
+        <translation>Tracks: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="436"/>
         <source>Routes: %1</source>
-        <translation type="unfinished">Routes: %1</translation>
+        <translation>Routes: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="440"/>
         <source>Areas: %1</source>
-        <translation type="unfinished">Gebieden: %1</translation>
+        <translation>Gebieden: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="520"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
-        <translation type="unfinished">Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
+        <translation>Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="521"/>
         <source>Delete...</source>
-        <translation type="unfinished">Verwijderen...</translation>
+        <translation>Verwijderen...</translation>
     </message>
 </context>
 <context>
@@ -6252,7 +6253,7 @@ of
         <source>m</source>
         <translation>m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation>°</translation>
@@ -6881,7 +6882,7 @@ of
     <message>
         <location filename="../gis/trk/ISelectActivityColor.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
+        <translation>Formulier</translation>
     </message>
 </context>
 <context>
@@ -7091,7 +7092,7 @@ of
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
         <source>00000</source>
-        <translation type="unfinished">O {00000?}</translation>
+        <translation>O {00000?}</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
@@ -7226,7 +7227,7 @@ of
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
         <source>00000</source>
-        <translation type="unfinished">O {00000?}</translation>
+        <translation>O {00000?}</translation>
     </message>
 </context>
 <context>
@@ -7461,12 +7462,12 @@ of
         <location filename="../units/IUnit.cpp" line="735"/>
         <location filename="../units/IUnit.cpp" line="741"/>
         <source>Error</source>
-        <translation type="unfinished">Fout</translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <location filename="../units/IUnit.cpp" line="735"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished">Verkeerde invoer. Moet zijn: 
+        <translation>Verkeerde invoer. Moet zijn: 
 &quot;[N|Z] ddd mm.sss [W|O] ddd mm.sss&quot;
 of
 &quot;[N|Z] ddd.ddd [W|O] ddd.ddd&quot;</translation>
@@ -7474,7 +7475,7 @@ of
     <message>
         <location filename="../units/IUnit.cpp" line="741"/>
         <source>Position values out of bounds. </source>
-        <translation type="unfinished">Positiewaarden vallen buiten bereik. </translation>
+        <translation>Positiewaarden vallen buiten bereik. </translation>
     </message>
 </context>
 <context>

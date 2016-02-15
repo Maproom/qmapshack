@@ -196,9 +196,8 @@ CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
 
 CGisItemTrk::CGisItemTrk(trk_t& trkdata, IGisProject *project)
     : IGisItem(project, eTypeTrk, NOIDX)
+    , trk(std::move(trkdata))
 {
-    trk = std::move(trkdata);
-
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);

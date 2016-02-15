@@ -127,7 +127,7 @@ inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
         {
             return true;
         }
-        rectPoi++;
+        ++rectPoi;
     }
     rectPois << rect;
     return false;

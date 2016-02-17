@@ -193,7 +193,55 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockGis->toggleViewAction());
     menuWindow->addAction(dockRte->toggleViewAction());
 
+#ifdef Q_OS_MAC
+    prepareMenuForMac();
+#endif // Q_OS_MAC
+
     loadGISData(qlOpts->arguments);
+}
+
+void CMainWindow::prepareMenuForMac()
+{
+    // prevents automatically moving menu entries and fixes an issue with menu entries not displayed for certain
+    // languages
+    actionAddMapView->setMenuRole(QAction::NoRole);
+    actionShowScale->setMenuRole(QAction::NoRole);
+    actionSetupMapFont->setMenuRole(QAction::NoRole);
+    actionShowGrid->setMenuRole(QAction::NoRole);
+    actionSetupGrid->setMenuRole(QAction::NoRole);
+    actionFlipMouseWheel->setMenuRole(QAction::NoRole);
+    actionSetupMapPaths->setMenuRole(QAction::NoRole);
+    actionPOIText->setMenuRole(QAction::NoRole);
+    actionNightDay->setMenuRole(QAction::NoRole);
+    actionMapToolTip->setMenuRole(QAction::NoRole);
+    actionSetupDEMPaths->setMenuRole(QAction::NoRole);
+    actionAbout->setMenuRole(QAction::NoRole);
+    actionHelp->setMenuRole(QAction::NoRole);
+    actionSetupMapView->setMenuRole(QAction::NoRole);
+    actionLoadGISData->setMenuRole(QAction::NoRole);
+    actionSaveGISData->setMenuRole(QAction::NoRole);
+    actionSetupTimeZone->setMenuRole(QAction::NoRole);
+    actionAddEmptyProject->setMenuRole(QAction::NoRole);
+    actionSearchGoogle->setMenuRole(QAction::NoRole);
+    actionCloseAllProjects->setMenuRole(QAction::NoRole);
+    actionSetupUnits->setMenuRole(QAction::NoRole);
+    actionSetupWorkspace->setMenuRole(QAction::NoRole);
+    actionImportDatabase->setMenuRole(QAction::NoRole);
+    actionVrtBuilder->setMenuRole(QAction::NoRole);
+    actionStoreView->setMenuRole(QAction::NoRole);
+    actionLoadView->setMenuRole(QAction::NoRole);
+    actionProfileIsWindow->setMenuRole(QAction::NoRole);
+    actionClose->setMenuRole(QAction::NoRole);
+    actionCloneMapView->setMenuRole(QAction::NoRole);
+    actionCreateRoutinoDatabase->setMenuRole(QAction::NoRole);
+    actionPrintMap->setMenuRole(QAction::NoRole);
+    actionSetupCoordFormat->setMenuRole(QAction::NoRole);
+
+    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }
 
 CMainWindow::~CMainWindow()

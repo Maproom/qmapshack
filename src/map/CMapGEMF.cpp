@@ -37,13 +37,14 @@ inline double tile2lat(int y, int z)
     return 180.0 / M_PI * qAtan(0.5 * (exp(n) - exp(-n)));
 }
 
+
 CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     : IMap(eFeatVisibility,parent)
     , filename(filename)
 {
     qDebug() << "CMapGEMF: try to open " << filename;
     pjsrc = pj_init_plus("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs");
-    //qDebug() << "CMapGEMF:" << "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs";
+    qDebug() << "CMapGEMF:" << "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs";
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
 
@@ -102,7 +103,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
             }
         }
         if(rangeZoom.length()!= 0) {
-            RangesByZoom[i] = rangeZoom;
+            rangesByZoom[i] = rangeZoom;
             qDebug() << "CMapGEMF: Found " << rangeZoom.length() << "ranges for " << " Zoomlevel " << i;
         }
 
@@ -112,22 +113,16 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     f.open(QIODevice::ReadOnly);
     i=1;
     do{
-
-        ;
         gemffile_t gf;
         gf.filename= partfile;
         gf.size = f.size();
         f.close();
         files << gf;
-
         partfile = filename + "-" + QString::number(i);
         i++;
         f.setFileName(partfile);
-
-    }while(f.open(QIODevice::ReadOnly));
-
+    }while( f.open(QIODevice::ReadOnly) );
     isActivated = true;
-
 }
 
 void CMapGEMF::draw(IDrawContext::buffer_t &buf)
@@ -136,7 +131,6 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
     {
         return;
     }
-
     QPointF bufferScale = buf.scale * buf.zoomFactor;
     if(isOutOfScale(bufferScale))
     {
@@ -231,12 +225,12 @@ quint64 CMapGEMF::getFilenameFromAddress(quint64 offset,QString &filename)
 
 QImage CMapGEMF::getTile(quint32 row, quint32 col, quint32 z)
 {
-        if(z<minZoom || z> maxZoom)
+        if(!rangesByZoom.contains(z))
         {
-            qDebug() << "CMapGEMF: getTile out of Zoomlevels";
+            qDebug() << "CMapGEMF: getTile called for a zoomlevel not available";
             return QImage();
         }
-        QList<range_t> ranges = RangesByZoom[z];
+        QList<range_t> ranges = rangesByZoom[z];
 
         foreach (range_t r,ranges)
         {

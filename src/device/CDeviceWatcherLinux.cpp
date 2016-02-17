@@ -67,6 +67,8 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     delete blockIface;
     delete driveIface;
 
+    qDebug() << "model:" << model << "vendor:" << vendor;
+
     if(model.isEmpty() || vendor.isEmpty())
     {
         return;

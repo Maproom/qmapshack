@@ -187,7 +187,6 @@ QDataStream& operator <<(QDataStream& s, IQlgtOverlay& ovl)
 
 IQlgtOverlay::IQlgtOverlay(quint64 id, QObject *parent)
     : IItem(id)
-    , speed(0)
 {
 }
 

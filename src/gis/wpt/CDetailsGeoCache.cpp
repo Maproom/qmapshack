@@ -87,14 +87,14 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
-    connect(timerDownload, SIGNAL(timeout()), this, SLOT(slotDownloadDone()));
+    connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
 
-    connect(checkHint, SIGNAL(toggled(bool)), this, SLOT(slotHintChanged(bool)));
-    connect(webDesc, SIGNAL(linkClicked(QUrl)), this, SLOT(slotLinkClicked(QUrl)));
-    connect(toolUpdateSpoiler, SIGNAL(clicked()), this, SLOT(slotCollectSpoiler()));
+    connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
+    connect(webDesc,           &QWebView::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
+    connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);
 
     networkManager = new QNetworkAccessManager(this);
-    connect(networkManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(networkManager, &QNetworkAccessManager::finished, this, &CDetailsGeoCache::slotRequestFinished);
 
     const QList<CGisItemWpt::image_t>& images = wpt.getImages();
     photoAlbum->reload(images);

@@ -32,16 +32,79 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="labelName">
+      <widget class="CLineEdit" name="lineName">
+       <property name="palette">
+        <palette>
+         <active>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </active>
+         <inactive>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </inactive>
+         <disabled>
+          <colorrole role="Base">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+          <colorrole role="Window">
+           <brush brushstyle="SolidPattern">
+            <color alpha="0">
+             <red>0</red>
+             <green>0</green>
+             <blue>0</blue>
+            </color>
+           </brush>
+          </colorrole>
+         </disabled>
+        </palette>
+       </property>
        <property name="font">
         <font>
-         <pointsize>15</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
        </property>
-       <property name="text">
-        <string>-</string>
+       <property name="frame">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -178,7 +241,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tab_3">
       <attribute name="title">
@@ -280,7 +343,24 @@
    <extends>QListWidget</extends>
    <header>widgets/CHistoryListWidget.h</header>
   </customwidget>
+  <customwidget>
+   <class>CLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets/CLineEdit.h</header>
+  </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>toolLock</tabstop>
+  <tabstop>lineName</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>comboColor</tabstop>
+  <tabstop>comboBorderWidth</tabstop>
+  <tabstop>comboStyle</tabstop>
+  <tabstop>checkOpacity</tabstop>
+  <tabstop>textCmtDesc</tabstop>
+  <tabstop>treeWidget</tabstop>
+  <tabstop>listHistory</tabstop>
+ </tabstops>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

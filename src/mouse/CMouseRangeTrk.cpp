@@ -100,7 +100,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         case eStateIdle:
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-            if(trk != 0 && anchor != NOPOINTF)
+            if(trk != nullptr && anchor != NOPOINTF)
             {
                 anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
                 state = eStateSelectRange;
@@ -116,14 +116,14 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         case eStateSelectRange:
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-            if(trk != 0 && anchor != NOPOINTF)
+            if(trk != nullptr && anchor != NOPOINTF)
             {
                 QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
                 scrOptRange = new CScrOptRangeTrk(pt, trk, this);
-                connect(scrOptRange->toolHidePoints, SIGNAL(clicked()), this, SLOT(slotHidePoints()));
-                connect(scrOptRange->toolShowPoints, SIGNAL(clicked()), this, SLOT(slotShowPoints()));
-                connect(scrOptRange->toolActivity, SIGNAL(clicked()), this, SLOT(slotActivity()));
-                connect(scrOptRange->toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
+                connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
+                connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
+                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &CMouseRangeTrk::slotActivity);
+                connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
 
                 state = eStateRangeSelected;
                 canvas->update();
@@ -135,7 +135,6 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         case eStateRangeSelected:
         {
             resetState();
-            canvas->update();
             break;
         }
 
@@ -154,7 +153,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
     case eStateIdle:
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk != 0)
+        if(trk != nullptr)
         {
             anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
             canvas->update();
@@ -175,7 +174,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
     case eStateSelectRange:
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk != 0)
+        if(trk != nullptr)
         {
             anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
             canvas->update();
@@ -204,18 +203,24 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 
 void CMouseRangeTrk::wheelEvent(QWheelEvent * e)
 {
-    resetState();
+    if(state == eStateRangeSelected)
+    {
+        resetState();
+    }
 }
 
 void CMouseRangeTrk::keyPressEvent(QKeyEvent * e)
 {
-    resetState();
+    if(state == eStateRangeSelected)
+    {
+        resetState();
+    }
 }
 
 void CMouseRangeTrk::resetState()
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
         trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
@@ -225,7 +230,9 @@ void CMouseRangeTrk::resetState()
     {
         scrOptRange->deleteLater();
     }
-    state = eStateIdle;
+    state   = eStateIdle;
+    anchor  = NOPOINTF;
+    canvas->update();
 }
 
 void CMouseRangeTrk::slotHidePoints()
@@ -233,7 +240,7 @@ void CMouseRangeTrk::slotHidePoints()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         trk->hideSelectedPoints();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -248,7 +255,7 @@ void CMouseRangeTrk::slotShowPoints()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         trk->showSelectedPoints();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -263,7 +270,7 @@ void CMouseRangeTrk::slotActivity()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         trk->setActivity();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -278,7 +285,7 @@ void CMouseRangeTrk::slotCopy()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != 0)
+    if(trk != nullptr)
     {
         trk->copySelectedPoints();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

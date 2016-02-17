@@ -32,9 +32,10 @@ public:
     virtual ~CDetailsRte();
 
 private slots:
+    void slotNameChanged(const QString &name);
+    void slotNameChangeFinished();
     void slotChangeReadOnlyMode(bool on);
     void slotLinkActivated(const QUrl& url);
-    void slotLinkActivated(const QString& link);
     void setupGui();
 
 private:

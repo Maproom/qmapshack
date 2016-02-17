@@ -22,7 +22,7 @@
 #include "CMainWindow.h"
 #include <QtCore>
 
-CDeviceWatcherWindows * CDeviceWatcherWindows::pSelf = 0;
+CDeviceWatcherWindows * CDeviceWatcherWindows::pSelf = nullptr;
 
 CDeviceWatcherWindows::CDeviceWatcherWindows(CGisListWks *parent)
     : IDeviceWatcher(parent)

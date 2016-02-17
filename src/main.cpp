@@ -45,7 +45,7 @@ int main(int argc, char ** argv)
     env->prepareTranslators(&app);
     env->prepareGdal();
 
-    QSplashScreen *splash = 0;
+    QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)
     {
         QPixmap pic(":/pics/splash.png");
@@ -58,13 +58,21 @@ int main(int argc, char ** argv)
         p.drawText(400,395,"V " VER_STR);
 
         splash = new QSplashScreen(pic);
+#ifdef Q_OS_MAC
+        // remove the splash screen flag on OS-X as workaround for the reported bug
+        // https://bugreports.qt.io/browse/QTBUG-49576
+        splash->setWindowFlags(splash->windowFlags() & (~Qt::SplashScreen));
+#endif
         splash->show();
     }
+
+    uint seed = QDateTime::currentDateTime().toTime_t();
+    qsrand(seed);
 
     CMainWindow w;
     w.show();
 
-    if (splash != 0)
+    if(nullptr != splash)
     {
         splash->finish(&w);
         delete splash;

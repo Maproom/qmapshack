@@ -19,23 +19,34 @@
 #ifndef IDB_H
 #define IDB_H
 
+#include <QCoreApplication>
 #include <QMap>
 #include <QSqlDatabase>
 
 class IDB
 {
+    Q_DECLARE_TR_FUNCTIONS(IDB)
+
 public:
     IDB();
     virtual ~IDB();
 
+    QSqlDatabase& getDb() { return db; }
+
+    static quint64 getLastInsertID(QSqlDatabase& db, const QString& table);
+
+    bool isUsable() const
+    {
+        return db.isOpen();
+    }
+
 protected:
-    bool setupDB(const QString &filename, const QString &connectionName);
-    bool initDB();
-    bool migrateDB(int version);
-
-    QSqlDatabase db;
-
     static QMap<QString,int> references;
+    QSqlDatabase db;
+    void setup(const QString& connectionName);
+    bool setupDB();
+    virtual bool initDB() = 0;
+    virtual bool migrateDB(int version) = 0;
 };
 
 #endif //IDB_H

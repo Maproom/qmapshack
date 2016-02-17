@@ -32,8 +32,9 @@ CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, Q
 
     adjustSize();
 
-    connect(pushSave, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
-    connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+    connect(pushSave,  &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+    connect(pushSkip,  &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
+    connect(pushClone, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");
 }
@@ -57,6 +58,10 @@ void CSelectSaveAction::slotSelectResult()
     else if(sender() == pushSkip)
     {
         result = eResultSkip;
+    }
+    else if(sender() == pushClone)
+    {
+        result = eResultClone;
     }
 
     accept();

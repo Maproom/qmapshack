@@ -62,16 +62,17 @@ CProjWizard::CProjWizard(QLineEdit &line)
     comboHemisphere->addItem(tr("north"), "");
     comboHemisphere->addItem(tr("south"), "+south");
 
-    connect(radioMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(radioWorldMercator, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(radioUPSNorth, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(radioUPSSouth, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(radioUTM, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(radioUserDef, SIGNAL(clicked()), this, SLOT(slotChange()));
-    connect(comboDatum, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChange()));
-    connect(comboHemisphere, SIGNAL(currentIndexChanged(int)), this, SLOT(slotChange()));
-    connect(lineUserDef, SIGNAL(textChanged(const QString &)), this, SLOT(slotChange()));
-    connect(spinUTMZone, SIGNAL(valueChanged(int)), this, SLOT(slotChange()));
+    connect(radioMercator,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(radioWorldMercator, &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(radioUPSNorth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(radioUPSSouth,      &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(radioUTM,           &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(radioUserDef,       &QRadioButton::clicked,  this, &CProjWizard::slotChange);
+    connect(lineUserDef,        &QLineEdit::textChanged, this, &CProjWizard::slotChange);
+
+    connect(spinUTMZone,        static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged),         this, &CProjWizard::slotChange);
+    connect(comboDatum,         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
+    connect(comboHemisphere,    static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CProjWizard::slotChange);
 
     QString projstr = line.text();
     QRegExp re2("\\s*\\+proj=merc \\+a=6378137 \\+b=6378137 \\+lat_ts=0.001 \\+lon_0=0.0 \\+x_0=0.0 \\+y_0=0 \\+k=1.0 \\+units=m \\+nadgrids=@null \\+no_defs");
@@ -119,7 +120,7 @@ void CProjWizard::findDatum(const QString& str)
     while(di->nMapInfoDatumID != -1)
     {
         cmp.clear();
-        if(di->pszOGCDatumName != QString(""))
+        if(di->pszOGCDatumName != QString())
         {
             const MapInfoSpheroidInfo * si = asSpheroidInfoList;
             while(si->nMapInfoId != -1)
@@ -180,7 +181,7 @@ void CProjWizard::slotChange()
 
     int idx = comboDatum->itemData(comboDatum->currentIndex()).toInt();
     const MapInfoDatumInfo di = asDatumInfoListQL[idx];
-    if(di.pszOGCDatumName != QString(""))
+    if(di.pszOGCDatumName != QString())
     {
         const MapInfoSpheroidInfo * si = asSpheroidInfoList;
         while(si->nMapInfoId != -1)

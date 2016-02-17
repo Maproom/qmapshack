@@ -22,17 +22,25 @@
 
 #include "plot/IPlot.h"
 
+class CLimit;
+
 class CPlotProfile : public IPlot
 {
     Q_OBJECT
 public:
     CPlotProfile(QWidget * parent);
-    CPlotProfile(CGisItemTrk * trk, mode_e mode, QWidget * parent);
+    CPlotProfile(CGisItemTrk * trk, CLimit& lim, mode_e mode, QWidget * parent);
     virtual ~CPlotProfile();
 
-    void setTrack(CGisItemTrk * track);
-    void updateData();
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+    void setTrack(CGisItemTrk * track, CLimit& lim);
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
+
+public slots:
+    void setLimits();
+
+private:
+    CLimit * limit = nullptr;
 };
 
 #endif //CPLOTPROFILE_H

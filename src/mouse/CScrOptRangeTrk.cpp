@@ -26,7 +26,7 @@
 CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse *mouse, QWidget *parent)
     : IScrOpt(mouse)
 {
-    if(parent != 0)
+    if(parent != nullptr)
     {
         setParent(parent);
     }
@@ -40,10 +40,10 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolHidePoints, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolShowPoints, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolActivity,   SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy,       SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolHidePoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
+    connect(toolShowPoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
+    connect(toolActivity,   &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
+    connect(toolCopy,       &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
 }
 
 CScrOptRangeTrk::~CScrOptRangeTrk()

@@ -33,7 +33,7 @@ public:
 
 
 protected slots:
-    virtual void slotPropertiesChanged()= 0;
+    virtual void slotPropertiesChanged() = 0;
 
 protected:
     IMap * mapfile;

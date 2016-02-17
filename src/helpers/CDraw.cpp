@@ -32,9 +32,9 @@ QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
 
-QImage CDraw::createBasicArrow(const QBrush &brush)
+QImage CDraw::createBasicArrow(const QBrush &brush, qreal scale)
 {
-    QImage arrow(21, 16, QImage::Format_ARGB32);
+    QImage arrow(21*scale, 16*scale, QImage::Format_ARGB32);
     arrow.fill(qRgba(0, 0, 0, 0));
 
     QPainter painter(&arrow);
@@ -46,10 +46,10 @@ QImage CDraw::createBasicArrow(const QBrush &brush)
 
     QPointF arrowPoints[4] =
     {
-        QPointF(20.0,  7.0), // front
-        QPointF( 0.0,  0.0), // upper tail
-        QPointF( 5.0,  7.0), // mid   tail
-        QPointF( 0.0, 15.0)  // lower tail
+        QPointF(20.0*scale,  7.0*scale), // front
+        QPointF( 0.0*scale,  0.0*scale), // upper tail
+        QPointF( 5.0*scale,  7.0*scale), // mid   tail
+        QPointF( 0.0*scale, 15.0*scale)  // lower tail
     };
     painter.drawPolygon(arrowPoints, 4);
     painter.end();
@@ -67,9 +67,11 @@ static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
     return (p2.x() - p1.x()) * (p2.x() - p1.x()) + (p2.y() - p1.y()) * (p2.y() - p1.y());
 }
 
-void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist)
+void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
 {
-    QImage arrow = createBasicArrow(p.brush());
+    QImage arrow = createBasicArrow(p.brush(), scale);
+    qreal xoff = qCeil(arrow.width()/2.0);
+    qreal yoff = qFloor((arrow.height()-1)/2.0);
 
     const qreal minArrowDistSquare = minArrowDist * minArrowDist;
     const qreal minPointDistSquare = minPointDist * minPointDist;
@@ -95,7 +97,7 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
                 p.translate(arrowPos);
                 qreal direction = ( qAtan2((pt.y() - prevPt.y()), (pt.x() - prevPt.x())) * 180.) / M_PI;
                 p.rotate(direction);
-                p.drawImage(-11, -7, arrow);
+                p.drawImage(-xoff, -yoff, arrow);
 
                 p.restore();
 

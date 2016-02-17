@@ -52,7 +52,7 @@ CProgressDialog * CProgressDialog::self()
 {
     if(stackSelf.isEmpty())
     {
-        return 0;
+        return nullptr;
     }
     return stackSelf.top();
 }
@@ -62,6 +62,11 @@ CProgressDialog::~CProgressDialog()
     stackSelf.pop();
 }
 
+void CProgressDialog::enableCancel(bool yes)
+{
+    buttonBox->setEnabled(yes);
+}
+
 void CProgressDialog::reject()
 {
     setResult(QMessageBox::Abort);
@@ -69,7 +74,10 @@ void CProgressDialog::reject()
 
 void CProgressDialog::setValue(int val)
 {
-    QApplication::processEvents();
+    if(time.elapsed() > 1000)
+    {
+        QApplication::processEvents();
+    }
     progressBar->setValue(val);
     labelTime->setText(tr("Elapsed time: %1 seconds.").arg(time.elapsed()/1000.0, 0,'f',1));
 }

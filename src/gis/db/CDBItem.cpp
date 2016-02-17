@@ -31,19 +31,21 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 {
 //    qDebug() << "CDBItem::CDBItem()";
     QSqlQuery query(db);
-    query.prepare("SELECT type, key, icon, name, comment FROM items WHERE id=:id");
+    query.prepare("SELECT type, keyqms, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())
     {
         QPixmap pixmap;
         type = query.value(0).toInt();
-        key = query.value(1).toString();
+        key  = query.value(1).toString();
         pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
         setToolTip(CGisListDB::eColumnName, query.value(4).toString());
     }
+
+    updateAge();
 }
 
 CDBItem::~CDBItem()
@@ -51,10 +53,55 @@ CDBItem::~CDBItem()
 //    qDebug() << "CDBItem::~CDBItem()";
 }
 
+void CDBItem::updateAge()
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT trash FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+    if(!query.next())
+    {
+        return;
+    }
+
+    if(parent()->type() == IDBFolder::eTypeLostFound)
+    {
+        QString date = query.value(0).toString();
+        QDateTime timestamp;
+
+        // The time format can differ by database type
+        if(date.contains('T'))
+        {
+            timestamp = QDateTime::fromString(date,"yyyy-MM-ddThh:mm:ss");
+        }
+        else
+        {
+            timestamp = QDateTime::fromString(date,"yyyy-MM-dd hh:mm:ss");
+        }
+
+        if(timestamp.isValid())
+        {
+            quint64 diff = QDateTime::currentDateTimeUtc().toTime_t() - timestamp.toTime_t();
+            if(diff < (60*60))
+            {
+                setText(CGisListDB::eColumnTime, tr("%1 min.").arg(diff/60));
+            }
+            else if(diff < (60*60*24))
+            {
+                setText(CGisListDB::eColumnTime, tr("%1 h").arg(diff/(60*60)));
+            }
+            else
+            {
+                setText(CGisListDB::eColumnTime, tr("%1 days").arg(diff/(60*60*24)));
+            }
+        }
+    }
+}
+
 void CDBItem::toggle()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }
@@ -82,7 +129,7 @@ void CDBItem::toggle()
 void CDBItem::remove()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }

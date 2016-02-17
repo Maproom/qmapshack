@@ -28,11 +28,12 @@ class CMapDraw;
 
 class CMapMAP : public IMap
 {
+    Q_DECLARE_TR_FUNCTIONS(CMapMAP)
 public:
     CMapMAP(const QString& filename, CMapDraw *parent);
     virtual ~CMapMAP();
 
-    void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     enum exce_e {eErrOpen, eErrAccess, errFormat, errAbort};
@@ -70,17 +71,17 @@ private:
         {
         }
         char signature[20];
-        quint32 sizeHeader;
-        quint32 version;
-        quint64 sizeFile;
-        quint64 timestamp;
-        qint32 minLat;
-        qint32 minLon;
-        qint32 maxLat;
-        qint32 maxLon;
-        quint16 sizeTile;
+        quint32 sizeHeader = 0;
+        quint32 version = 0;
+        quint64 sizeFile = 0;
+        quint64 timestamp = 0;
+        qint32 minLat = 0;
+        qint32 minLon = 0;
+        qint32 maxLat = 0;
+        qint32 maxLon = 0;
+        quint16 sizeTile = 0;
         utf8 projection;
-        quint8 flags;
+        quint8 flags = 0;
         // optional fields
         qint32 latStart;
         qint32 lonStart;

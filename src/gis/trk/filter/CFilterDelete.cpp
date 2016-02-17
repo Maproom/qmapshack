@@ -26,7 +26,7 @@ CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterDelete::slotApply);
 }
 
 CFilterDelete::~CFilterDelete()

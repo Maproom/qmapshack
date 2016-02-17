@@ -36,7 +36,7 @@ CLostFoundProject::CLostFoundProject(const QString &dbName, CGisListWks * parent
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/DeleteMultiple.png"));
 
     filename        = dbName;
-    metadata.name   = QObject::tr("Lost & Found");
+    metadata.name   = tr("Lost & Found");
 
     setupName(dbName);
 
@@ -52,13 +52,12 @@ void CLostFoundProject::updateFromDb()
     qDeleteAll(takeChildren());
 
     QSqlQuery query(db);
-    query.prepare("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
-    QUERY_EXEC(return );
+    QUERY_RUN("SELECT id, type FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return )
 
     while(query.next())
     {
-        quint64 id      = query.value(0).toULongLong();
-        quint32 type    = query.value(1).toUInt();
+        quint64 id   = query.value(0).toULongLong();
+        quint32 type = query.value(1).toUInt();
 
         switch(type)
         {

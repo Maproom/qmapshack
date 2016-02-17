@@ -25,12 +25,23 @@
 #include "gis/IGisItem.h"
 class CGisDraw;
 class CGisItemWpt;
+class CDeviceGarmin;
 
 class IDevice : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(IDevice)
 public:
-    IDevice(const QString& path, const QString& key, QTreeWidget * parent);
+    enum type_e
+    {
+        eTypeNone       = 0
+        ,eTypeGarmin    = 1
+        ,eTypeTwoNav    = 2
+    };
+
+    IDevice(const QString& path, type_e type, const QString& key, QTreeWidget * parent);
+    IDevice(const QString &path, type_e type, const QString &key, CDeviceGarmin *parent);
     virtual ~IDevice();
+
 
     static void mount(const QString& path);
     static void umount(const QString &path);

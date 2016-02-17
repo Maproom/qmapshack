@@ -16,10 +16,12 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/db/IDB.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
+#include <QtWidgets>
 
 QMap<QString,int> IDB::references;
 
@@ -37,36 +39,14 @@ IDB::~IDB()
     }
 }
 
-bool IDB::setupDB(const QString& filename, const QString& connectionName)
+void IDB::setup(const QString &connectionName)
 {
     references[connectionName]++;
+}
 
-    if(!QSqlDatabase::contains(connectionName))
-    {
-        db = QSqlDatabase::addDatabase("QSQLITE", connectionName);
-        db.setDatabaseName(filename);
-        if(!db.open())
-        {
-            qDebug() << "failed to open database" << db.lastError();
-        }
-    }
-    else
-    {
-        db = QSqlDatabase::database(connectionName);
-    }
-
+bool IDB::setupDB()
+{
     QSqlQuery query(db);
-
-    query.prepare("PRAGMA locking_mode=EXCLUSIVE");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA temp_store=MEMORY");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA default_cache_size=50");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA page_size=8192");
-    QUERY_EXEC(return false);
-    query.prepare("PRAGMA synchronous=OFF");
-    QUERY_EXEC(return false);
 
     if(!query.exec("SELECT version FROM versioninfo"))
     {
@@ -75,112 +55,80 @@ bool IDB::setupDB(const QString& filename, const QString& connectionName)
     else if(query.next())
     {
         int version = query.value(0).toInt();
-        if(version != DB_VERSION)
+        if(version < DB_VERSION)
         {
-            return migrateDB(version);
+            QString msg = tr("The internal database format of '%1'' has changed. QMapShack will migrate your database, now. "
+                             "After the migration the database won't be usable with older versions of QMapShack. "
+                             "It is recommended to backup the database first.").arg(db.connectionName());
+            int res = QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(),
+                                           tr("Migrate database..."),
+                                           msg,
+                                           QMessageBox::Ok|QMessageBox::Abort);
+            if(res != QMessageBox::Ok)
+            {
+                exit(0);
+            }
+
+            if(!migrateDB(version))
+            {
+                QString msg = tr("Failed to migrate '%1'.").arg(db.connectionName());
+                QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                      tr("Error..."),
+                                      msg,
+                                      QMessageBox::Abort);
+
+                return false;
+            }
+        }
+        else if(version > DB_VERSION)
+        {
+            QString msg = tr("The database version of '%1'' is more advanced as the one understood by your "
+                             "QMapShack installation. This won't work.").arg(db.connectionName());
+            QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                  tr("Wrong database version..."),
+                                  msg,
+                                  QMessageBox::Abort);
+            return false;
         }
     }
     else
     {
-        return initDB();
+        if(!initDB())
+        {
+            QString msg = tr("Failed to initialize '%1'.").arg(db.connectionName());
+            QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(),
+                                  tr("Error..."),
+                                  msg,
+                                  QMessageBox::Abort);
+
+            return false;
+        }
     }
 
     query.prepare( "UPDATE folders SET name=:name WHERE id=1");
-    query.bindValue(":name", connectionName);
-    QUERY_EXEC()
-
-    return true;
-}
-
-bool IDB::initDB()
-{
-    QSqlQuery query(db);
-
-    if(query.exec( "CREATE TABLE versioninfo ( version TEXT, type TEXT )"))
-    {
-        query.prepare( "INSERT INTO versioninfo (version, type) VALUES(:version, 'QMapShack')");
-        query.bindValue(":version", DB_VERSION);
-        QUERY_EXEC(return false);
-    }
-
-    if(!query.exec( "CREATE TABLE folders ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER NOT NULL,"
-                    "key            TEXT,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "locked         BOOLEAN DEFAULT FALSE,"
-                    "data           BLOB"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
-
-    if(!query.exec( "CREATE TABLE items ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "type           INTEGER,"
-                    "key            TEXT NOT NULL,"
-                    "date           DATETIME DEFAULT CURRENT_TIMESTAMP,"
-                    "icon           BLOB NOT NULL,"
-                    "name           TEXT NOT NULL,"
-                    "comment        TEXT,"
-                    "data           BLOB NOT NULL"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
-
-    query.prepare("INSERT INTO folders (type, name, comment) VALUES (2, :name, '')");
     query.bindValue(":name", db.connectionName());
     QUERY_EXEC(return false);
 
-    if(!query.exec( "CREATE TABLE folder2folder ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES folders(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
-
-    if(!query.exec( "CREATE TABLE folder2item ("
-                    "id             INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    "parent         INTEGER NOT NULL,"
-                    "child          INTEGER NOT NULL,"
-                    "FOREIGN KEY(parent) REFERENCES folders(id),"
-                    "FOREIGN KEY(child) REFERENCES items(id)"
-                    ")"))
-    {
-        qDebug() << query.lastQuery();
-        qDebug() << query.lastError();
-        return false;
-    }
     return true;
 }
 
-bool IDB::migrateDB(int version)
+quint64 IDB::getLastInsertID(QSqlDatabase& db, const QString& table)
 {
+    quint64 idChild = 0;
     QSqlQuery query(db);
 
-    for(version++; version <= DB_VERSION; version++)
+    if(db.driverName() == "QSQLITE")
     {
-//        switch(version)
-//        {
-//        default:;
-//        }
+        QUERY_RUN("SELECT last_insert_rowid() from " + table, return 0)
+        query.next();
+        idChild = query.value(0).toULongLong();
     }
-    query.prepare( "UPDATE versioninfo set version=:version");
-    query.bindValue(":version", version - 1);
-    QUERY_EXEC(return false);
-    return true;
-}
+    else if(db.driverName() == "QMYSQL")
+    {
+        QUERY_RUN("SELECT last_insert_id() from " + table, return 0)
+        query.next();
+        idChild = query.value(0).toULongLong();
+    }
 
+    return idChild;
+}

@@ -43,9 +43,9 @@ public:
     IDem(CDemDraw * parent);
     virtual ~IDem();
 
-    void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg) override;
 
-    void loadConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg) override;
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
 

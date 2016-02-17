@@ -25,11 +25,11 @@ class CMapDraw;
 
 class CMapRMAP : public IMap
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CMapRMAP(const QString& filename, CMapDraw *parent);
 
-    void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     struct level_t
@@ -60,23 +60,23 @@ private:
     QString filename;
 
     /// total width in number of px
-    qint32 xsize_px;
+    qint32 xsize_px = 0;
     /// total height in number of px
-    qint32 ysize_px;
+    qint32 ysize_px = 0;
     /// width of a tile in number of px
-    quint32 tileSizeX;
+    quint32 tileSizeX = 0;
     /// height of a tile in number of px
-    quint32 tileSizeY;
+    quint32 tileSizeY = 0;
     /// all pre-scaled levels
     QList<level_t> levels;
     /// reference point [m] or [°] (left hand side of map)
-    qreal xref1;
+    qreal xref1 = 0;
     /// reference point [m] or [°] (top of map)
-    qreal yref1;
+    qreal yref1 = 0;
     /// reference point [m] or [°] (right hand side of map)
-    qreal xref2;
+    qreal xref2 = 0;
     /// reference point [m] or [°] (bottom of map)
-    qreal yref2;
+    qreal yref2 = 0;
 
     QPointF scale;
 };

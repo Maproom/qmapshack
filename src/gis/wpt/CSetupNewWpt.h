@@ -31,8 +31,8 @@ public:
     virtual ~CSetupNewWpt();
 
 public slots:
-    void accept();
-    void reject();
+    void accept() override;
+    void reject() override;
 
 private slots:
     void slotEditPosition(const QString& str);

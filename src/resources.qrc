@@ -27,6 +27,8 @@
         <file>icons/16x16/ActShip.png</file>
         <file>icons/16x16/ActSwim.png</file>
         <file>icons/16x16/ActAero.png</file>
+        <file>icons/16x16/ActSki.png</file>
+        <file>icons/16x16/EditDetails.png</file>
         <file>icons/32x32/2DFix.png</file>
         <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
@@ -41,6 +43,7 @@
         <file>icons/32x32/FolderDEM.png</file>
         <file>icons/32x32/Font.png</file>
         <file>icons/32x32/FromMap.png</file>
+        <file>icons/32x32/FilterModifyExtension.png</file>
         <file>icons/32x32/Grid.png</file>
         <file>icons/32x32/GridSetup.png</file>
         <file>icons/32x32/GridWizzard.png</file>
@@ -79,6 +82,7 @@
         <file>icons/32x32/LoadGIS.png</file>
         <file>icons/32x32/GpxProject.png</file>
         <file>icons/32x32/QmsProject.png</file>
+        <file>icons/32x32/SlfProject.png</file>
         <file>icons/32x32/DBProject.png</file>
         <file>icons/32x32/Route.png</file>
         <file>icons/32x32/RouteSetup.png</file>
@@ -133,11 +137,15 @@
         <file>icons/32x32/Opacity.png</file>
         <file>icons/32x32/DatabaseSetup.png</file>
         <file>icons/32x32/DatabaseConvert.png</file>
+        <file>icons/32x32/DatabaseSync.png</file>
         <file>icons/32x32/PathBlue.png</file>
         <file>icons/32x32/PathOrange.png</file>
         <file>icons/32x32/PathGreen.png</file>
         <file>icons/32x32/Link.png</file>
         <file>icons/32x32/Database.png</file>
+        <file>icons/32x32/SQLite.png</file>
+        <file>icons/32x32/MySQL.png</file>
+        <file>icons/32x32/MySQLNoConn.png</file>
         <file>icons/32x32/Empty.png</file>
         <file>icons/32x32/Apply.png</file>
         <file>icons/32x32/Time.png</file>
@@ -172,6 +180,7 @@
         <file>icons/32x32/ActShip.png</file>
         <file>icons/32x32/ActSwim.png</file>
         <file>icons/32x32/ActAero.png</file>
+        <file>icons/32x32/ActSki.png</file>
         <file>icons/32x32/Activity.png</file>
         <file>icons/32x32/CSrcSolid.png</file>
         <file>icons/32x32/CSrcHR.png</file>
@@ -186,6 +195,17 @@
         <file>icons/32x32/CSrcAccel.png</file>
         <file>icons/32x32/CSrcCourse.png</file>
         <file>icons/32x32/Progress.png</file>
+        <file>icons/32x32/FitProject.png</file>
+        <file>icons/32x32/LineWidthUser.png</file>
+        <file>icons/32x32/LineWidthDef.png</file>
+        <file>icons/32x32/ArrowUser.png</file>
+        <file>icons/32x32/ArrowDef.png</file>
+        <file>icons/32x32/LimitMax.png</file>
+        <file>icons/32x32/LimitMin.png</file>
+        <file>icons/32x32/Limit.png</file>
+        <file>icons/32x32/LimitSys.png</file>
+        <file>icons/32x32/LimitUsr.png</file>
+        
 
         <file>icons/48x48/2DFix.png</file>
         <file>icons/48x48/3DFix.png</file>
@@ -201,6 +221,7 @@
         <file>icons/48x48/FolderDEM.png</file>
         <file>icons/48x48/Font.png</file>
         <file>icons/48x48/FromMap.png</file>
+        <file>icons/48x48/FilterModifyExtension.png</file>
         <file>icons/48x48/Grid.png</file>
         <file>icons/48x48/GridSetup.png</file>
         <file>icons/48x48/GridWizzard.png</file>
@@ -239,6 +260,7 @@
         <file>icons/48x48/LoadGIS.png</file>
         <file>icons/48x48/GpxProject.png</file>
         <file>icons/48x48/QmsProject.png</file>
+        <file>icons/48x48/SlfProject.png</file>
         <file>icons/48x48/DBProject.png</file>
         <file>icons/48x48/Route.png</file>
         <file>icons/48x48/RouteSetup.png</file>
@@ -293,11 +315,15 @@
         <file>icons/48x48/Opacity.png</file>
         <file>icons/48x48/DatabaseSetup.png</file>
         <file>icons/48x48/DatabaseConvert.png</file>
+        <file>icons/48x48/DatabaseSync.png</file>
         <file>icons/48x48/PathBlue.png</file>
         <file>icons/48x48/PathOrange.png</file>
         <file>icons/48x48/PathGreen.png</file>
         <file>icons/48x48/Link.png</file>
         <file>icons/48x48/Database.png</file>
+        <file>icons/48x48/SQLite.png</file>
+        <file>icons/48x48/MySQL.png</file>
+        <file>icons/48x48/MySQLNoConn.png</file>
         <file>icons/48x48/Empty.png</file>
         <file>icons/48x48/Apply.png</file>
         <file>icons/48x48/Time.png</file>
@@ -332,6 +358,7 @@
         <file>icons/48x48/ActShip.png</file>
         <file>icons/48x48/ActSwim.png</file>
         <file>icons/48x48/ActAero.png</file>
+        <file>icons/48x48/ActSki.png</file>
         <file>icons/48x48/Activity.png</file>
         <file>icons/48x48/CSrcSolid.png</file>
         <file>icons/48x48/CSrcHR.png</file>
@@ -346,6 +373,16 @@
         <file>icons/48x48/CSrcAccel.png</file>
         <file>icons/48x48/CSrcCourse.png</file>
         <file>icons/48x48/Progress.png</file>
+        <file>icons/48x48/FitProject.png</file>
+        <file>icons/48x48/LineWidthUser.png</file>
+        <file>icons/48x48/LineWidthDef.png</file>
+        <file>icons/48x48/ArrowUser.png</file>
+        <file>icons/48x48/ArrowDef.png</file>
+        <file>icons/48x48/LimitMax.png</file>
+        <file>icons/48x48/LimitMin.png</file>
+        <file>icons/48x48/Limit.png</file>
+        <file>icons/48x48/LimitSys.png</file>
+        <file>icons/48x48/LimitUsr.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

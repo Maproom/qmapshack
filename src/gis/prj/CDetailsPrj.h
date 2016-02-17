@@ -19,6 +19,7 @@
 #ifndef CDETAILSPRJ_H
 #define CDETAILSPRJ_H
 
+#include "gis/trk/CGisItemTrk.h"
 #include "ui_IDetailsPrj.h"
 #include <QMutex>
 #include <QPointer>
@@ -33,15 +34,21 @@ class CGisItemRte;
 class CProgressDialog;
 class QTimer;
 
-class CDetailsPrj : public QWidget, private Ui::IDetailsPrj
+class CDetailsPrj : public QWidget, public INotifyTrk, private Ui::IDetailsPrj
 {
     Q_OBJECT
 public:
     CDetailsPrj(IGisProject& prj, QWidget * parent);
     virtual ~CDetailsPrj();
 
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt) override {}
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) override {}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
+
+
 protected:
-    void resizeEvent(QResizeEvent * e);
+    void resizeEvent(QResizeEvent *e) override;
 
 private slots:
     void slotLinkActivated(const QString& link);
@@ -53,6 +60,7 @@ private slots:
     void slotSetScrollbar();
 
 private:
+    void addIcon(QTextTable *table, int col, int row, IGisItem * item, bool printable);
     void getTrackProfile(CGisItemTrk * trk, QImage& image);
     void getTrackOverview(CGisItemTrk * trk, QImage& image);
     void draw(QTextDocument& doc, bool printable);

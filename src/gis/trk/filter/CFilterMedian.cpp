@@ -31,7 +31,7 @@ CFilterMedian::CFilterMedian(CGisItemTrk &trk, QWidget *parent)
     SETTINGS;
     spinBox->setValue(cfg.value("TrackDetails/Filter/Median/points",5).toInt());
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterMedian::slotApply);
 }
 
 CFilterMedian::~CFilterMedian()

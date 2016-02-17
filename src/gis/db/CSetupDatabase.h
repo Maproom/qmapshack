@@ -28,11 +28,23 @@ class CSetupDatabase : public QDialog, private Ui::ISetupDatabase
 {
     Q_OBJECT
 public:
-    CSetupDatabase(QString &name, QString &filename, CGisListDB& parent);
+    CSetupDatabase(CGisListDB& parent);
     virtual ~CSetupDatabase();
 
+    bool isSqlite() const {return radioSqlite->isChecked(); }
+    bool isMysql() const {return radioMysql->isChecked(); }
+    bool noPasswd() const;
+
+    QString getName() const {return lineName->text(); }
+    QString getFilename() const {return labelFilename->text(); }
+    QString getServer() const {return lineServer->text(); }
+    QString getPort() const {return linePort->text(); }
+    QString getUser() const {return lineUser->text(); }
+    QString getPasswd() const {return linePasswd->text(); }
+
+
 public slots:
-    void accept();
+    void accept() override;
 
 private slots:
     void slotNewDB();
@@ -41,8 +53,6 @@ private slots:
 
 private:
     CGisListDB& list;
-    QString& name;
-    QString& filename;
 };
 
 #endif //CSETUPDATABASE_H

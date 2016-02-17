@@ -15,7 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
-
 #ifndef CUNITSSETUP_H
 #define CUNITSSETUP_H
 
@@ -29,7 +28,7 @@ public:
     virtual ~CUnitsSetup();
 
 public slots:
-    void accept();
+    void accept() override;
 };
 
 #endif //CUNITSSETUP_H

@@ -37,9 +37,9 @@ signals:
     void sigChanged();
 
 protected:
-    void dragEnterEvent(QDragEnterEvent * e);
-    void dragMoveEvent (QDragMoveEvent  * e );
-    void dropEvent ( QDropEvent  * e );
+    void dragEnterEvent(QDragEnterEvent *e) override;
+    void dragMoveEvent(QDragMoveEvent  *e) override;
+    void dropEvent(QDropEvent      *e) override;
 };
 
 #include "ui_IMapList.h"
@@ -69,6 +69,9 @@ public slots:
 
 private slots:
     void slotActivate();
+    void slotMoveUp();
+    void slotMoveDown();
+    void slotReloadMaps();
     void slotContextMenu(const QPoint &point);
 
 private:

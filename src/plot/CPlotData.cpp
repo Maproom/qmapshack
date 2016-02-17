@@ -63,8 +63,8 @@ void CPlotData::setLimits()
     {
         return;
     }
-    QPolygonF::const_iterator p         = line->points.begin();
 
+    QPolygonF::const_iterator p = line->points.begin();
     xmin = p->x();
     xmax = p->x();
     ymin = p->y();
@@ -77,22 +77,10 @@ void CPlotData::setLimits()
         {
             if(p->y() != NOFLOAT)
             {
-                if(p->x() > xmax)
-                {
-                    xmax = p->x();
-                }
-                if(p->x() < xmin)
-                {
-                    xmin = p->x();
-                }
-                if(p->y() > ymax)
-                {
-                    ymax = p->y();
-                }
-                if(p->y() < ymin)
-                {
-                    ymin = p->y();
-                }
+                xmin = qMin(xmin, p->x());
+                xmax = qMax(xmax, p->x());
+                ymin = qMin(ymin, p->y());
+                ymax = qMax(ymax, p->y());
             }
             ++p;
         }

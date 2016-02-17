@@ -11,7 +11,7 @@ class CMapGEMF : public IMap
 public:
     CMapGEMF(const QString& filename, CMapDraw *parent);
 
-    void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     QImage getTile(quint32 col, quint32 row,quint32 z);

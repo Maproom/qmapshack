@@ -30,7 +30,7 @@ CUnitImperial::~CUnitImperial()
 }
 
 
-void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit)
+void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -45,7 +45,7 @@ void CUnitImperial::meter2elevation(qreal meter, QString& val, QString& unit)
 }
 
 
-void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit)
+void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -79,7 +79,7 @@ void CUnitImperial::meter2distance(qreal meter, QString& val, QString& unit)
     }
 }
 
-void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit)
+void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit) const /* override */
 {
     if(meter == NOFLOAT)
     {
@@ -95,7 +95,7 @@ void CUnitImperial::meter2area(qreal meter, QString& val, QString& unit)
 
 
 
-qreal CUnitImperial::elevation2meter(const QString& val)
+qreal CUnitImperial::elevation2meter(const QString& val) const /* override */
 {
     return val.toDouble() / 3.28084;
 }

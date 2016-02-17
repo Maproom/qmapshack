@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,24 @@
 
 **********************************************************************************************/
 
-#ifndef CDBFOLDERDATABASE_H
-#define CDBFOLDERDATABASE_H
+#ifndef IDBMYSQL_H
+#define IDBMYSQL_H
 
-#include "gis/db/IDBFolder.h"
-#include <gis/db/IDB.h>
+#include "gis/db/IDB.h"
 
-class CDBFolderLostFound;
-
-class CDBFolderDatabase : public IDBFolder, private IDB
+class IDBMysql : public IDB
 {
+    Q_DECLARE_TR_FUNCTIONS(IDBMysql)
 public:
-    CDBFolderDatabase(const QString &filename, const QString &name, QTreeWidget *parent);
-    virtual ~CDBFolderDatabase();
+    IDBMysql();
+    virtual ~IDBMysql() = default;
 
-    void expanding();
-    void updateLostFound();
-    const QString& getFilename()
-    {
-        return filename;
-    }
-
-    QSqlDatabase& getDb()
-    {
-        return IDB::db;
-    }
-
-private:
-    QString filename;
-    CDBFolderLostFound * folderLostFound = 0;
+protected:
+    using IDB::setupDB;
+    bool setupDB(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, const QString &connectionName);
+    bool initDB() override;
+    bool migrateDB(int version) override;
 };
 
-#endif //CDBFOLDERDATABASE_H
+#endif //IDBMYSQL_H
 

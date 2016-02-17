@@ -21,30 +21,38 @@
 
 #include "device/IDevice.h"
 
+class CDeviceGarminArchive;
+
 class CDeviceGarmin : public IDevice
 {
+    Q_DECLARE_TR_FUNCTIONS(CDeviceGarmin)
 public:
     CDeviceGarmin(const QString &path, const QString &key, const QString& model, QTreeWidget * parent);
     virtual ~CDeviceGarmin();
 
-    void insertCopyOfProject(IGisProject * project);
-
-
-    void startSavingProject(IGisProject * project);
-    void saveImages(CGisItemWpt& wpt);
-    void loadImages(CGisItemWpt& wpt);
-    void aboutToRemoveProject(IGisProject * project);
-
+    void insertCopyOfProject(IGisProject *project)  override;
+    void startSavingProject(IGisProject *project)   override;
+    void saveImages(CGisItemWpt& wpt)               override;
+    void loadImages(CGisItemWpt& wpt)               override;
+    void aboutToRemoveProject(IGisProject *project) override;
 
 private:
+    void createProjectsFromFiles(QString subdirecoty, QString fileEnding);
+    void createAdventureFromProject(IGisProject * project, const QString &gpxFilename);
+
     QString id;
     QString partno;
     QString description;
-    QString pathGpx = "Garmin/GPX";
-    QString pathPictures = "Garmin/JPEG";
-    QString pathSpoilers = "Garmin/GeocachePhotos";
+    QString pathGpx           = "Garmin/GPX";
+    QString pathPictures      = "Garmin/JPEG";
+    QString pathSpoilers      = "Garmin/GeocachePhotos";
+    QString pathActivities    = "Garmin/Activities";
+    QString pathCourses       = "Garmin/Courses";
+    QString pathAdventures; // no default
 
     int cntImages = 0;
+
+    CDeviceGarminArchive * archive = nullptr;
 };
 
 #endif //CDEVICEGARMIN_H

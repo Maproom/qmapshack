@@ -58,22 +58,19 @@ public:
     IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect);
-    void mousePressEvent(QMouseEvent * e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
-    void wheelEvent(QWheelEvent * e);
-    void keyPressEvent(QKeyEvent * e);
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent *e) override;
+    void keyPressEvent(QKeyEvent   *e) override;
 
     void abortStep();
 
     bool useAutoRouting();
     bool useVectorRouting();
 
-    void setCanvasPanning(bool enable)
-    {
-        doCanvasPanning = enable;
-    }
+    void setCanvasPanning(bool enable);
 
     void storeToHistory(const SGisLine& line);
     void restoreFromHistory(SGisLine& line);
@@ -111,7 +108,7 @@ protected slots:
     void slotUndo();
     void slotRedo();
 
-    void slotPanCanvas();
+    void slotPanCanvas() override;
 
 protected:
     virtual void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p);
@@ -152,7 +149,7 @@ private:
     QPolygonF pixelSubs;
 
     /// the current active line operation (move, add, delete...)
-    ILineOp  * lineOp = 0;
+    ILineOp  * lineOp = nullptr;
 
     bool enableStatus;
 

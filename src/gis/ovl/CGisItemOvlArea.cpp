@@ -31,72 +31,12 @@
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 
-
-const QColor CGisItemOvlArea::lineColors[OVL_N_COLORS] =
-{
-    Qt::black                     // 0
-    ,Qt::darkRed                 // 1
-    ,Qt::darkGreen               // 2
-    ,Qt::darkYellow              // 3
-    ,Qt::darkBlue                // 4
-    ,Qt::darkMagenta             // 5
-    ,Qt::darkCyan                // 6
-    ,Qt::gray                    // 7
-    ,Qt::darkGray                // 8
-    ,Qt::red                     // 9
-    ,Qt::green                   // 10
-    ,Qt::yellow                  // 11
-    ,Qt::blue                    // 12
-    ,Qt::magenta                 // 13
-    ,Qt::cyan                    // 14
-    ,Qt::white                   // 15
-    ,Qt::transparent             // 16
-};
-
-const QString CGisItemOvlArea::bulletColors[OVL_N_COLORS] =
-{
-    // 0
-    "://icons/8x8/bullet_black.png"
-    // 1
-    ,QString("://icons/8x8/bullet_dark_red.png")
-    // 2
-    ,QString("://icons/8x8/bullet_dark_green.png")
-    // 3
-    ,QString("://icons/8x8/bullet_dark_yellow.png")
-    // 4
-    ,QString("://icons/8x8/bullet_dark_blue.png")
-    // 5
-    ,QString("://icons/8x8/bullet_dark_magenta.png")
-    // 6
-    ,QString("://icons/8x8/bullet_dark_cyan.png")
-    // 7
-    ,QString("://icons/8x8/bullet_gray.png")
-    // 8
-    ,QString("://icons/8x8/bullet_dark_gray.png")
-    // 9
-    ,QString("://icons/8x8/bullet_red.png")
-    // 10
-    ,QString("://icons/8x8/bullet_green.png")
-    // 11
-    ,QString("://icons/8x8/bullet_yellow.png")
-    // 12
-    ,QString("://icons/8x8/bullet_blue.png")
-    // 13
-    ,QString("://icons/8x8/bullet_magenta.png")
-    // 14
-    ,QString("://icons/8x8/bullet_cyan.png")
-    // 15
-    ,QString("://icons/8x8/bullet_white.png")
-    ,QString("")                 // 16
-};
-
-
 const CGisItemOvlArea::width_t CGisItemOvlArea::lineWidths[OVL_N_WIDTHS] =
 {
-    {3, QObject::tr("thin")}
-    ,{5, QObject::tr("normal")}
-    ,{9, QObject::tr("wide")}
-    ,{13, QObject::tr("strong")}
+    {3,  tr("thin")}
+    ,{5,  tr("normal")}
+    ,{9,  tr("wide")}
+    ,{13, tr("strong")}
 };
 
 const Qt::BrushStyle CGisItemOvlArea::brushStyles[OVL_N_STYLES] =
@@ -135,7 +75,7 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
 
     if(clone)
     {
-        area.name += QObject::tr("_Clone");
+        area.name += tr("_Clone");
         key.clear();
         history.events.clear();
         setupHistory();
@@ -166,11 +106,15 @@ CGisItemOvlArea::CGisItemOvlArea(const QDomNode &xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, IGisProject * project)
+CGisItemOvlArea::CGisItemOvlArea(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeOvl, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemOvlArea::CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project)
@@ -186,6 +130,17 @@ CGisItemOvlArea::~CGisItemOvlArea()
     {
         keyUserFocus.clear();
     }
+}
+
+IGisItem * CGisItemOvlArea::createClone()
+{
+    int idx = -1;
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project)
+    {
+        idx = project->indexOfChild(this);
+    }
+    return new CGisItemOvlArea(*this, project, idx, true);
 }
 
 void CGisItemOvlArea::setSymbol()
@@ -219,12 +174,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
         i++;
     }
 
-    if(idx < 0)
-    {
-        return NOPOINTF;
-    }
-
-    return polygonArea[idx];
+    return (idx < 0) ? NOPOINTF : polygonArea[idx];
 }
 
 void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
@@ -260,7 +210,7 @@ void CGisItemOvlArea::readAreaDataFromGisLine(const SGisLine &l)
 
 void CGisItemOvlArea::edit()
 {
-    CDetailsOvlArea dlg(*this, 0);
+    CDetailsOvlArea dlg(*this, nullptr);
     dlg.exec();
 
     deriveSecondaryData();
@@ -277,19 +227,19 @@ void CGisItemOvlArea::deriveSecondaryData()
     {
         if(pt.lon < west)
         {
-            west    = pt.lon;
+            west  = pt.lon;
         }
         if(pt.lon > east)
         {
-            east    = pt.lon;
+            east  = pt.lon;
         }
         if(pt.lat < south)
         {
-            south   = pt.lat;
+            south = pt.lat;
         }
         if(pt.lat > north)
         {
-            north   = pt.lat;
+            north = pt.lat;
         }
     }
 
@@ -397,12 +347,11 @@ void CGisItemOvlArea::gainUserFocus(bool yes)
 
 QPointF CGisItemOvlArea::getPolygonCentroid(const QPolygonF& polygon)
 {
-    int i, len;
-    qreal x = 0, y = 0;
+    qreal x = 0;
+    qreal y = 0;
+    int len = polygon.size();
 
-    len = polygon.size();
-
-    for(i = 0; i < len; i++)
+    for(int i = 0; i < len; i++)
     {
         x = x + polygon[i].x();
         y = y + polygon[i].y();
@@ -428,7 +377,7 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
     QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
 
     IUnit::self().meter2area(area.area, val, unit);
-    str += "<br/>\n" + QObject::tr("Area: %1%2").arg(val).arg(unit);
+    str += "<br/>\n" + tr("Area: %1%2").arg(val).arg(unit);
 
     QString desc = removeHtml(area.desc).simplified();
     if(desc.count())
@@ -490,7 +439,7 @@ void CGisItemOvlArea::setDataFromPolyline(const SGisLine& l)
 
     flags |= eFlagTainted;
 
-    changed(QObject::tr("Changed area shape."), "://icons/48x48/AreaMove.png");
+    changed(tr("Changed area shape."), "://icons/48x48/AreaMove.png");
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -498,78 +447,76 @@ void CGisItemOvlArea::setName(const QString& str)
 {
     setText(CGisListWks::eColumnName, str);
     area.name = str;
-    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
+    changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setWidth(qint32 w)
 {
     area.width = w;
-    changed(QObject::tr("Changed border width."), "://icons/48x48/TextBold.png");
+    changed(tr("Changed border width."), "://icons/48x48/TextBold.png");
 }
 
 void CGisItemOvlArea::setStyle(qint32 s)
 {
     area.style = s;
-    changed(QObject::tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
+    changed(tr("Changed fill pattern."), "://icons/48x48/Pattern.png");
 }
 
 void CGisItemOvlArea::setOpacity(bool yes)
 {
     area.opacity = yes;
-    changed(QObject::tr("Changed opacity."), "://icons/48x48/Opacity.png");
+    changed(tr("Changed opacity."), "://icons/48x48/Opacity.png");
 }
 
 void CGisItemOvlArea::setComment(const QString& str)
 {
     area.cmt = str;
-    changed(QObject::tr("Changed comment."), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setDescription(const QString& str)
 {
     area.desc = str;
-    changed(QObject::tr("Changed description."), "://icons/48x48/EditText.png");
+    changed(tr("Changed description."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemOvlArea::setLinks(const QList<link_t>& links)
 {
     area.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 
-void CGisItemOvlArea::setColor(int idx)
+void CGisItemOvlArea::setColor(size_t idx)
 {
-    int N = sizeof(lineColors)/sizeof(QColor);
-    if(idx >= N)
+    if(idx >= colorMapSize)
     {
         return;
     }
-    setColor(lineColors[idx]);
-    changed(QObject::tr("Changed color"), "://icons/48x48/SelectColor.png");
+    setColor(colorMap[idx].color);
+    changed(tr("Changed color"), "://icons/48x48/SelectColor.png");
 }
 
 void CGisItemOvlArea::setColor(const QColor& c)
 {
-    int n;
-    int N = sizeof(lineColors)/sizeof(QColor);
+    size_t n;
 
-    for(n = 0; n < N; n++)
+    for(n = 0; n < colorMapSize; n++)
     {
-        if(lineColors[n] == c)
+        if(colorMap[n].color == c)
         {
             colorIdx    = n;
-            color       = lineColors[n];
-            bullet      = QPixmap(bulletColors[n]);
+            color       = colorMap[n].color;
+            bullet      = QPixmap(colorMap[n].bullet);
             break;
         }
     }
 
-    if(n == N)
+    if(n == colorMapSize)
     {
         colorIdx    = DEFAULT_COLOR;
-        color       = lineColors[DEFAULT_COLOR];
-        bullet      = QPixmap(bulletColors[DEFAULT_COLOR]);
+        color       = colorMap[DEFAULT_COLOR].color;
+        bullet      = QPixmap(colorMap[DEFAULT_COLOR].bullet);
     }
 
     setIcon(color.name());
@@ -577,7 +524,7 @@ void CGisItemOvlArea::setColor(const QColor& c)
 
 void CGisItemOvlArea::setIcon(const QString& c)
 {
-    area.color   = c;
+    area.color  = c;
     icon        = QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );

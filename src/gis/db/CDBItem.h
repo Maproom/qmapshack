@@ -19,6 +19,7 @@
 #ifndef CDBITEM_H
 #define CDBITEM_H
 
+#include <QCoreApplication>
 #include <QTreeWidgetItem>
 
 class IDBFolder;
@@ -26,6 +27,7 @@ class QSqlDatabase;
 
 class CDBItem : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBItem)
 public:
     CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
     virtual ~CDBItem();
@@ -49,11 +51,13 @@ public:
      */
     void remove();
 
+    void updateAge();
+
 private:
     QSqlDatabase& db;
     quint64 id;
 
-    int type;
+    int type = 0;
     QString key;
 };
 

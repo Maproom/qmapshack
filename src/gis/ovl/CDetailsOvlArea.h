@@ -33,12 +33,13 @@ public:
 
 private slots:
     void slotSetColor(int idx);
+    void slotNameChanged(const QString &name);
+    void slotNameChangeFinished();
     void slotSetWidth(int idx);
     void slotSetStyle(int idx);
     void slotOpyacity(bool yes);
     void slotChangeReadOnlyMode(bool on);
     void slotLinkActivated(const QUrl& url);
-    void slotLinkActivated(const QString& link);
     void setupGui();
 
 private:

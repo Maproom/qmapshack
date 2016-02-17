@@ -32,7 +32,7 @@ public:
     CMapVRT(const QString& filename, CMapDraw *parent);
     virtual ~CMapVRT();
 
-    void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf) override;
 
 
 
@@ -46,17 +46,17 @@ private:
     QVector<QRgb> colortable;
 
     /// width in number of px
-    quint32 xsize_px;
+    quint32 xsize_px = 0;
     /// height in number of px
-    quint32 ysize_px;
+    quint32 ysize_px = 0;
 
     /// scale [px/m]
-    qreal xscale;
+    qreal xscale = 0;
     /// scale [px/m]
-    qreal yscale;
+    qreal yscale = 0;
 
-    qreal xrot;
-    qreal yrot;
+    qreal xrot = 0;
+    qreal yrot = 0;
 
     QPointF ref1;
     QPointF ref2;

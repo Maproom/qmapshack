@@ -57,7 +57,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         while(1)
         {
             QString name = tr("View %1").arg(count);
-            if(CMainWindow::self().findChild<CCanvas*>(name) == 0)
+            if(nullptr == CMainWindow::self().findChild<CCanvas*>(name))
             {
                 setObjectName(name);
                 break;
@@ -78,13 +78,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     gis     = new CGisDraw(this);
     mouse   = new CMouseNormal(gis, this);
 
-    connect(map, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
-    connect(dem, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
-    connect(gis, SIGNAL(sigCanvasUpdate(CCanvas::redraw_e)), this, SLOT(slotTriggerCompleteUpdate(CCanvas::redraw_e)));
+    connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(gis, &CGisDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
-    connect(timerToolTip, SIGNAL(timeout()), this, SLOT(slotToolTip()));
+    connect(timerToolTip, &QTimer::timeout, this, &CCanvas::slotToolTip);
 
     loadIndicator1 = new QMovie(this);
     loadIndicator1->setFileName("://animation/loader.gif");
@@ -106,17 +106,17 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelStatusMessages->setAlignment(Qt::AlignJustify);
     labelStatusMessages->hide();
 
-    connect(map, SIGNAL(sigStartThread()), mapLoadIndicator, SLOT(show()));
-    connect(map, SIGNAL(sigStopThread()), mapLoadIndicator, SLOT(hide()));
+    connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
+    connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
 
-    connect(dem, SIGNAL(sigStartThread()), demLoadIndicator, SLOT(show()));
-    connect(dem, SIGNAL(sigStopThread()), demLoadIndicator, SLOT(hide()));
+    connect(dem, &CDemDraw::sigStartThread, demLoadIndicator, &QLabel::show);
+    connect(dem, &CDemDraw::sigStopThread,  demLoadIndicator, &QLabel::hide);
 
     timerTrackOnFocus = new QTimer(this);
     timerTrackOnFocus->setSingleShot(false);
     timerTrackOnFocus->start(1000);
 
-    connect(timerTrackOnFocus, SIGNAL(timeout()), this, SLOT(slotCheckTrackOnFocus()));
+    connect(timerTrackOnFocus, &QTimer::timeout, this, &CCanvas::slotCheckTrackOnFocus);
 }
 
 CCanvas::~CCanvas()
@@ -392,9 +392,16 @@ void CCanvas::paintEvent(QPaintEvent * e)
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
 {
+    if(!mousePressMutex.tryLock())
+    {
+        return;
+    }
+
     mouse->mousePressEvent(e);
     QWidget::mousePressEvent(e);
     e->accept();
+
+    mousePressMutex.unlock();
 }
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
@@ -498,7 +505,7 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
     case Qt::Key_Escape:
     {
         IMouseEditLine *lineMouse = dynamic_cast<IMouseEditLine*>(mouse);
-        if(lineMouse != 0)
+        if(nullptr != lineMouse)
         {
             lineMouse->abortStep();
         }
@@ -636,13 +643,13 @@ void CCanvas::slotCheckTrackOnFocus()
 
         // get access to next track object
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk2 == 0)
+        if(nullptr == trk2)
         {
             return;
         }
 
         // create new profile plot, the plot will register itself at the track
-        plotTrackProfile = new CPlotProfile(trk2, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
+        plotTrackProfile = new CPlotProfile(trk2, trk2->limitsGraph1, CMainWindow::self().profileIsWindow() ? IPlot::eModeWindow : IPlot::eModeIcon, this);
         setSizeTrackProfile();
         if(isVisible())
         {
@@ -772,7 +779,7 @@ bool CCanvas::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32
 
 void CCanvas::saveSizeTrackProfile()
 {
-    if(plotTrackProfile == 0)
+    if(plotTrackProfile.isNull())
     {
         return;
     }
@@ -794,7 +801,7 @@ void CCanvas::saveSizeTrackProfile()
 
 void CCanvas::setSizeTrackProfile()
 {
-    if(plotTrackProfile == 0)
+    if(plotTrackProfile.isNull())
     {
         return;
     }

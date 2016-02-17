@@ -32,7 +32,7 @@ QDataStream& operator>>(QDataStream& s, uintX& v)
         s >> tmp;
     }
 
-    v.val |= tmp << shift;
+    v.val |= quint64(tmp) << shift;
 
     return s;
 }
@@ -57,7 +57,7 @@ QDataStream& operator>>(QDataStream& s, intX& v)
     }
     else
     {
-        v.val |= tmp << shift;
+        v.val |= quint64(tmp) << shift;
     }
 
     return s;

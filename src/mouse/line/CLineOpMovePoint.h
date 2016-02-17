@@ -27,17 +27,17 @@ public:
     CLineOpMovePoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpMovePoint();
 
-    void mousePressEventEx(QMouseEvent * e);
-    void mouseMoveEventEx(QMouseEvent * e);
-    void mouseReleaseEventEx(QMouseEvent * e)
+    void mousePressEventEx(QMouseEvent * e) override;
+    void mouseMoveEventEx(QMouseEvent * e) override;
+    void mouseReleaseEventEx(QMouseEvent * e) override
     {
     }
 
-    void drawFg(QPainter& p);
+    void drawFg(QPainter& p) override;
 
-    void canvasPanned(QPointF pos);
+    void canvasPanned(QPointF pos) override;
 
-    bool abortStep();
+    bool abortStep() override;
 
 private:
     bool movePoint = false;

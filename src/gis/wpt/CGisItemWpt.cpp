@@ -38,18 +38,28 @@
 
 IGisItem::key_t CGisItemWpt::keyUserFocus;
 
-/// used to add a new waypoint
-CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
+CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     wpt.name    = name;
     wpt.sym     = icon;
     wpt.lon     = pos.x();
     wpt.lat     = pos.y();
-    wpt.time    = QDateTime::currentDateTimeUtc();
+    wpt.ele     = (ele == NOFLOAT) ? NOINT : qRound(ele);
+    wpt.time    = time;
 
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
+/// used to add a new waypoint
+CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString &icon, IGisProject *project)
+    : CGisItemWpt(pos, NOFLOAT, QDateTime::currentDateTimeUtc(), name, icon, project)
+{
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
-    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -71,7 +81,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     history.events.clear();
     flags = eFlagCreatedInQms|eFlagWriteAllowed;
 
-    qreal ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
@@ -89,7 +99,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
 
     if(clone)
     {
-        wpt.name += QObject::tr("_Clone");
+        wpt.name += tr("_Clone");
         key.clear();
         history.events.clear();
         setupHistory();
@@ -104,6 +114,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -119,12 +130,16 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemWpt::CGisItemWpt(const history_t& hist, IGisProject * project)
+CGisItemWpt::CGisItemWpt(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeWpt, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
@@ -145,9 +160,34 @@ CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * proj
     updateDecoration(eMarkNone, eMarkNone);
 }
 
+CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
+    : IGisItem(project, eTypeWpt, NOIDX)
+    , proximity(NOFLOAT)
+    , posScreen(NOPOINTF)
+{
+    readWptFromFit(stream);
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+
+    genKey();
+    setupHistory();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemWpt::~CGisItemWpt()
 {
 }
+
+IGisItem * CGisItemWpt::createClone()
+{
+    int idx = -1;
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project)
+    {
+        idx = project->indexOfChild(this);
+    }
+    return new CGisItemWpt(*this, project, idx, true);
+}
+
 
 void CGisItemWpt::setSymbol()
 {
@@ -224,7 +264,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
         }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += QObject::tr("Elevation: %1 %2").arg(val).arg(unit);
+        str += tr("Elevation: %1 %2").arg(val).arg(unit);
     }
 
     if(proximity != NOFLOAT)
@@ -235,7 +275,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
         }
         QString val, unit;
         IUnit::self().meter2distance(proximity, val, unit);
-        str += QObject::tr("Proximity: %1 %2").arg(val).arg(unit);
+        str += tr("Proximity: %1 %2").arg(val).arg(unit);
     }
 
     QString desc = removeHtml(wpt.desc).simplified();
@@ -309,7 +349,7 @@ void CGisItemWpt::setName(const QString& str)
     setText(CGisListWks::eColumnName, str);
 
     wpt.name = str;
-    changed(QObject::tr("Changed name"),"://icons/48x48/EditText.png");
+    changed(tr("Changed name"),"://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setPosition(const QPointF& pos)
@@ -319,19 +359,19 @@ void CGisItemWpt::setPosition(const QPointF& pos)
 
     boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
 
-    changed(QObject::tr("Changed position"),"://icons/48x48/WptMove.png");
+    changed(tr("Changed position"),"://icons/48x48/WptMove.png");
 }
 
 void CGisItemWpt::setElevation(qint32 val)
 {
     wpt.ele = val;
-    changed(QObject::tr("Changed elevation"),"://icons/48x48/SetEle.png");
+    changed(tr("Changed elevation"),"://icons/48x48/SetEle.png");
 }
 
 void CGisItemWpt::setProximity(qreal val)
 {
     proximity = val;
-    changed(QObject::tr("Changed proximity"),"://icons/48x48/WptProx.png");
+    changed(tr("Changed proximity"),"://icons/48x48/WptProx.png");
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -345,37 +385,37 @@ void CGisItemWpt::setIcon(const QString& name)
     QString path;
     getWptIconByName(name, focus, &path);
 
-    changed(QObject::tr("Changed icon"), path);
+    changed(tr("Changed icon"), path);
 }
 
 void CGisItemWpt::setComment(const QString& str)
 {
     wpt.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setDescription(const QString& str)
 {
     wpt.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+    changed(tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemWpt::setLinks(const QList<link_t>& links)
 {
     wpt.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 void CGisItemWpt::setImages(const QList<image_t>& imgs)
 {
     images = imgs;
-    changed(QObject::tr("Changed images"), "://icons/48x48/Image.png");
+    changed(tr("Changed images"), "://icons/48x48/Image.png");
 }
 
 void CGisItemWpt::addImage(const image_t& img)
 {
     images.append(img);
-    changed(QObject::tr("Add image"), "://icons/48x48/Image.png");
+    changed(tr("Add image"), "://icons/48x48/Image.png");
 }
 
 

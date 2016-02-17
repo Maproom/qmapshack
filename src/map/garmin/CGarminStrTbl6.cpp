@@ -98,7 +98,7 @@ void CGarminStrTbl6::get(CFileExt& file, quint32 offset, type_e t, QStringList& 
     p = (quint8*)data.data();
 
     fill();
-    while(idx < sizeof(buffer))
+    while(idx < (sizeof(buffer) - 1))
     {
         c1 = reg >> 26;
         reg <<= 6;

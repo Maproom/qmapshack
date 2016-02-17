@@ -77,7 +77,7 @@ public:
     void zoom(bool in, CCanvas::redraw_e &needsRedraw);
     void zoom(int idx);
     void zoom(const QRectF& rect);
-    int  zoom()
+    int  zoom() const
     {
         return zoomIndex;
     }
@@ -125,7 +125,7 @@ public:
        @return A proj4 string.
      */
     QString getProjection();
-    CCanvas::scales_type_e getScalesType();
+    CCanvas::scales_type_e getScalesType() const;
 
     /**
        @brief Set the projection of the draw context
@@ -153,7 +153,7 @@ public slots:
     void emitSigCanvasUpdate();
 
 protected:
-    void run();
+    void run() override;
     /**
        @brief The draw method called from the thread.
 

@@ -19,6 +19,7 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemPropSetup.h"
 #include "dem/IDem.h"
+#include "helpers/Signals.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -37,35 +38,36 @@ CDemPropSetup::CDemPropSetup(IDem * demfile, CDemDraw *dem)
 
     slotPropertiesChanged();
 
-    connect(sliderOpacity,     SIGNAL(valueChanged(int)),        demfile, SLOT(slotSetOpacity(int)));
-    connect(sliderOpacity,     SIGNAL(valueChanged(int)),        dem,     SLOT(emitSigCanvasUpdate()));
-    connect(dem,               SIGNAL(sigScaleChanged(QPointF)), this,    SLOT(slotScaleChanged(QPointF)));
-    connect(toolSetMinScale,   SIGNAL(toggled(bool)),            this,    SLOT(slotSetMinScale(bool)));
-    connect(toolSetMaxScale,   SIGNAL(toggled(bool)),            this,    SLOT(slotSetMaxScale(bool)));
+    connect(sliderOpacity,     &QSlider::valueChanged,          demfile, &IDem::slotSetOpacity);
+    connect(sliderOpacity,     &QSlider::valueChanged,          dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(dem,               &CDemDraw::sigScaleChanged,      this,    &CDemPropSetup::slotScaleChanged);
+    connect(toolSetMinScale,   &QToolButton::toggled,           this,    &CDemPropSetup::slotSetMinScale);
+    connect(toolSetMaxScale,   &QToolButton::toggled,           this,    &CDemPropSetup::slotSetMaxScale);
 
-    connect(checkHillshading,  SIGNAL(toggled(bool)),            demfile, SLOT(slotSetHillshading(bool)));
-    connect(checkHillshading,  SIGNAL(clicked()),                dem,     SLOT(emitSigCanvasUpdate()));
-    connect(sliderHillshading, SIGNAL(valueChanged(int)),        demfile, SLOT(slotSetFactorHillshade(int)));
-    connect(sliderHillshading, SIGNAL(valueChanged(int)),        dem,     SLOT(emitSigCanvasUpdate()));
+    connect(checkHillshading,  &QCheckBox::toggled,             demfile, &IDem::slotSetHillshading);
+    connect(checkHillshading,  &QCheckBox::clicked,             dem,     &CDemDraw::emitSigCanvasUpdate);
+    connect(sliderHillshading, &QSlider::valueChanged,          demfile, &IDem::slotSetFactorHillshade);
+    connect(sliderHillshading, &QSlider::valueChanged,          dem,     &CDemDraw::emitSigCanvasUpdate);
 
-    connect(checkSlopeColor,   SIGNAL(toggled(bool)),            demfile, SLOT(slotSetSlopeColor(bool)));
-    connect(checkSlopeColor,   SIGNAL(clicked()),                dem,     SLOT(emitSigCanvasUpdate()));
-    connect(comboGrades,       SIGNAL(currentIndexChanged(int)), this,    SLOT(slotGradeIndex(int)));
+    connect(checkSlopeColor,   &QCheckBox::toggled,             demfile, &IDem::slotSetSlopeColor);
+    connect(checkSlopeColor,   &QCheckBox::clicked,             dem,     &CDemDraw::emitSigCanvasUpdate);
+
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
         slopeSpins[i]->setProperty("level", (uint) i);
-        connect(slopeSpins[i], SIGNAL(editingFinished()), this, SLOT(slotSlopeValiddateAfterEdit()));
-        connect(slopeSpins[i], SIGNAL(valueChangedByStep(int)), this, SLOT(slotSlopeValiddateAfterEdit()));
+        connect(slopeSpins[i], &CTinySpinBox::editingFinished,    this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
+        connect(slopeSpins[i], &CTinySpinBox::valueChangedByStep, this, &CDemPropSetup::slotSlopeValiddateAfterEdit);
     }
 
-    comboGrades->blockSignals(true);
+
     for(size_t i = 0; i < IDem::slopePresetCount; i++)
     {
         comboGrades->addItem(IDem::slopePresets[i].name);
     }
     comboGrades->addItem("custom");
-    comboGrades->blockSignals(false);
+    connect(comboGrades, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDemPropSetup::slotGradeIndex);
+
 
     const QVector<QRgb>& colortable = demfile->getSlopeColorTable();
     QPixmap pixmap(20, 10);
@@ -93,13 +95,7 @@ void CDemPropSetup::resizeEvent(QResizeEvent * e)
 
 void CDemPropSetup::slotPropertiesChanged()
 {
-    sliderOpacity->blockSignals(true);
-    toolSetMaxScale->blockSignals(true);
-    toolSetMinScale->blockSignals(true);
-    checkHillshading->blockSignals(true);
-    sliderHillshading->blockSignals(true);
-    checkSlopeColor->blockSignals(true);
-    comboGrades->blockSignals(true);
+    X______________BlockAllSignals______________X(this);
 
     sliderOpacity->setValue(demfile->getOpacity());
 
@@ -126,21 +122,13 @@ void CDemPropSetup::slotPropertiesChanged()
 
     for(size_t i = 0; i < SLOPE_LEVELS; i++)
     {
-        slopeSpins[i]->blockSignals(true);
         slopeSpins[i]->setReadOnly(spinsReadonly);
         slopeSpins[i]->setValue(demfile->getCurrentSlopeStepTable()[i]);
-        slopeSpins[i]->blockSignals(false);
     }
 
     dem->emitSigCanvasUpdate();
 
-    comboGrades->blockSignals(false);
-    sliderOpacity->blockSignals(false);
-    toolSetMaxScale->blockSignals(false);
-    toolSetMinScale->blockSignals(false);
-    checkHillshading->blockSignals(false);
-    sliderHillshading->blockSignals(false);
-    checkSlopeColor->blockSignals(false);
+    X_____________UnBlockAllSignals_____________X(this);
 }
 
 void CDemPropSetup::slotScaleChanged(const QPointF& s)

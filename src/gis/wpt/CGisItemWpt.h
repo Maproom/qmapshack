@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/tnv/CTwoNavProject.h"
 
+#include <QCoreApplication>
 #include <QPointer>
 
 class IGisProject;
@@ -31,9 +32,10 @@ class QSqlDatabase;
 class CQlgtWpt;
 class QTextEdit;
 class QDir;
-
+class CFitStream;
 class CGisItemWpt : public IGisItem
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemWpt)
 public:
     enum geocacheservice_e {eGC, eOC, eTC};
 
@@ -83,6 +85,8 @@ public:
         QString fileName;
     };
 
+    CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, const QString &name, const QString &icon, IGisProject *project);
+
     /**
        @brief Create a completely new waypoint
        @param pos       the waypoint's position [°]
@@ -117,7 +121,7 @@ public:
        @param hist      the change history
        @param project   the project to append with item
      */
-    CGisItemWpt(const history_t& hist, IGisProject * project);
+    CGisItemWpt(const history_t& hist, const QString& dbHash, IGisProject * project);
 
     /**
        @brief Read item from database by it's database ID
@@ -136,13 +140,17 @@ public:
 
     CGisItemWpt(const CQlgtWpt& wpt1);
 
+    CGisItemWpt(CFitStream& stream, IGisProject * project);
+
     virtual ~CGisItemWpt();
+
+    IGisItem * createClone() override;
 
     /**
        @brief Save waypoint to GPX tree
        @param gpx   The <gpx> node to append by the waypoint
      */
-    void save(QDomNode& gpx);
+    void save(QDomNode& gpx) override;
     /**
        @brief Save waypoint to TwoNav waypoint file
        @param out   the text stream to write to
@@ -153,22 +161,22 @@ public:
        @param stream  the data stream to read from
        @return A reference to the stream
      */
-    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator<<(QDataStream& stream) override;
     /**
        @brief Serialize waypoint into a binary data stream
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    QDataStream& operator>>(QDataStream& stream) const;
+    QDataStream& operator>>(QDataStream& stream) const override;
 
     void setName(const QString& str);
     void setPosition(const QPointF& pos);
     void setElevation(qint32 val);
     void setProximity(qreal val);
     void setIcon(const QString& name);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
+    void setComment(const QString& str)         override;
+    void setDescription(const QString& str)         override;
+    void setLinks(const QList<link_t>& links) override;
     void setImages(const QList<image_t>& imgs);
 
     /**
@@ -206,12 +214,12 @@ public:
     void addImage(const image_t& img);
 
 
-    const QString& getName() const
+    const QString& getName() const override
     {
         return wpt.name.isEmpty() ? noName : wpt.name;
     }
 
-    QString getInfo(bool allowEdit = false) const;
+    QString getInfo(bool allowEdit = false) const override;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);
@@ -233,11 +241,11 @@ public:
     {
         return wpt.sym;
     }
-    const QString& getComment() const
+    const QString& getComment() const override
     {
         return wpt.cmt;
     }
-    const QString& getDescription() const
+    const QString& getDescription() const override
     {
         return wpt.desc;
     }
@@ -245,7 +253,7 @@ public:
     {
         return geocache;
     }
-    const QList<link_t>& getLinks() const
+    const QList<link_t>& getLinks() const override
     {
         return wpt.links;
     }
@@ -254,27 +262,28 @@ public:
         return images;
     }
 
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-    QPointF getPointCloseBy(const QPoint& )
+    IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+
+    QPointF getPointCloseBy(const QPoint& ) override
     {
         return posScreen;
     }
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
-    bool isCloseTo(const QPointF& pos);
-    void mouseMove(const QPointF& pos);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
+    bool isCloseTo(const QPointF& pos) override;
+    void mouseMove(const QPointF& pos) override;
     void mousePress(const QPointF& pos);
     void mouseRelease(const QPointF& pos);
     bool isGeocache()
     {
         return geocache.hasData;
     }
-    void gainUserFocus(bool yes);
+    void gainUserFocus(bool yes) override;
 
-    void edit();
+    void edit() override;
 
     /**
        @brief Remove all links from the waypoint's link list with a given type
@@ -299,9 +308,10 @@ public:
 
 private:
     void setIcon();
-    void setSymbol();
+    void setSymbol() override;
     void readGpx(const QDomNode& xml);
     void readTwoNav(const CTwoNavProject::wpt_t &tnvWpt);
+    void readWptFromFit(CFitStream &stream);
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
@@ -325,10 +335,10 @@ private:
 
     QPointer<CScrOptWpt> scrOpt;
 
-    bool doBubble = false;
-    bool doSpecialCursor = false;
-    bool doBubbleMove = false;
-    bool doBubbleSize = false;
+    bool doBubble          = false;
+    bool doSpecialCursor   = false;
+    bool doBubbleMove      = false;
+    bool doBubbleSize      = false;
     bool mouseIsOverBubble = false;
     QRect rectBubble;
     QRect rectBubbleMove {0,0,16,16};
@@ -340,5 +350,5 @@ private:
     quint32 widthBubble = 300;
 };
 
-#endif //CGISITEMWPT_H
+#endif // CGISITEMWPT_H
 

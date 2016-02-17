@@ -34,7 +34,7 @@ public:
     CMapItem(QTreeWidget * parent, CMapDraw *map);
     virtual ~CMapItem();
 
-    void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg) const;
     void loadConfig(QSettings& cfg);
 
     /**

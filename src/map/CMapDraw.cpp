@@ -40,8 +40,8 @@ CMapDraw::CMapDraw(CCanvas *parent)
 {
     mapList = new CMapList(canvas);
     CMainWindow::self().addMapList(mapList, canvas->objectName());
-    connect(canvas, SIGNAL(destroyed()), mapList, SLOT(deleteLater()));
-    connect(mapList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+    connect(canvas,  &CCanvas::destroyed,   mapList, &CMapList::deleteLater);
+    connect(mapList, &CMapList::sigChanged, this,    &CMapDraw::emitSigCanvasUpdate);
 
     buildMapList();
 
@@ -53,7 +53,7 @@ CMapDraw::~CMapDraw()
     maps.removeOne(this);
 }
 
-void CMapDraw::setProjection(const QString& proj)
+void CMapDraw::setProjection(const QString& proj) /* override */
 {
     // --- save the active maps
     QStringList keys;
@@ -204,7 +204,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
     return res;
 }
 
-void CMapDraw::saveConfig(QSettings& cfg)
+void CMapDraw::saveConfig(QSettings& cfg) /* override */
 {
     // store group context for later use
     cfgGroup = cfg.group();
@@ -217,7 +217,7 @@ void CMapDraw::saveConfig(QSettings& cfg)
     cfg.endGroup();
 }
 
-void CMapDraw::loadConfig(QSettings& cfg)
+void CMapDraw::loadConfig(QSettings& cfg) /* override */
 {
     // store group context for later use
     cfgGroup = cfg.group();
@@ -367,7 +367,7 @@ void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
     canvas->reportStatus(key, msg);
 }
 
-void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer)
+void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {
     // iterate over all active maps and call the draw method
     CMapItem::mutexActiveMaps.lock();

@@ -19,7 +19,7 @@
 #ifndef CSEARCHGOOGLE_H
 #define CSEARCHGOOGLE_H
 
-#include <gis/prj/IGisProject.h>
+#include "gis/prj/IGisProject.h"
 
 #include <QNetworkAccessManager>
 #include <QObject>
@@ -33,15 +33,6 @@ class CSearchGoogle : public QObject, public IGisProject
 public:
     CSearchGoogle(CGisListWks * parent);
     virtual ~CSearchGoogle();
-
-    bool save()
-    {
-        return false;
-    }
-    bool saveAs()
-    {
-        return false;
-    }
 
 private slots:
     void slotChangeSymbol();

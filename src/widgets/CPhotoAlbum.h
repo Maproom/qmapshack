@@ -22,7 +22,7 @@
 #include "ui_IPhotoAlbum.h"
 #include <QWidget>
 
-#include <gis/wpt/CGisItemWpt.h>
+#include "gis/wpt/CGisItemWpt.h"
 
 class CPhotoAlbum : public QWidget, private Ui::IPhotoAlbum
 {
@@ -41,8 +41,8 @@ public slots:
     void slotDelImage();
 
 protected:
-    void resizeEvent(QResizeEvent * e);
-    void mouseReleaseEvent(QMouseEvent *e);
+    void resizeEvent(QResizeEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent  *e) override;
 
 private slots:
     void slotRight();

@@ -36,14 +36,14 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 {
     setupUi(this);
 
-    QListWidgetItem * lastSelectedItem = 0;
+    QListWidgetItem *lastSelectedItem = nullptr;
 
     if(parent)
     {
         for(int i = 0; i < parent->topLevelItemCount(); i++)
         {
             IGisProject * project = dynamic_cast<IGisProject*>(parent->topLevelItem(i));
-            if(project == 0)
+            if(nullptr == project)
             {
                 continue;
             }
@@ -67,7 +67,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
 
     frameType->setEnabled(listWidget->count() == 0);
 
-    if(lastSelectedItem == 0)
+    if(nullptr == lastSelectedItem)
     {
         SETTINGS;
         QString filter = cfg.value("Paths/lastGisFilter", "GPS Exchange Format (*.qms)").toString();
@@ -93,13 +93,13 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, type_e& 
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
 
-    connect(listWidget, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(slotItemClicked(QListWidgetItem*)));
-    connect(listWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(slotItemDoubleClicked(QListWidgetItem*)));
-    connect(lineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotProjectChanged(QString)));
-    connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotProjectEdited(QString)));
-    connect(radioQms, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioGpx, SIGNAL(clicked()), this, SLOT(slotTypeChanged()));
-    connect(radioDatabase, SIGNAL(toggled(bool)), this, SLOT(slotTypeChanged()));
+    connect(listWidget,    &QListWidget::itemClicked,       this, &CSelectProjectDialog::slotItemClicked);
+    connect(listWidget,    &QListWidget::itemDoubleClicked, this, &CSelectProjectDialog::slotItemDoubleClicked);
+    connect(lineEdit,      &QLineEdit::textChanged,         this, &CSelectProjectDialog::slotProjectChanged);
+    connect(lineEdit,      &QLineEdit::textEdited,          this, &CSelectProjectDialog::slotProjectEdited);
+    connect(radioQms,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioGpx,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
+    connect(radioDatabase, &QRadioButton::toggled,          this, &CSelectProjectDialog::slotTypeChanged);
 
     adjustSize();
 

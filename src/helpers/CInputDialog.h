@@ -30,7 +30,7 @@ public:
     virtual ~CInputDialog();
 
 public slots:
-    void accept();
+    void accept() override;
 
 private slots:
     void slotReset();

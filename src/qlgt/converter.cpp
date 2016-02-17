@@ -37,7 +37,7 @@ inline qreal readFloat(float val)
 }
 
 CDBProject::CDBProject(CQlgtFolder& folder)
-    : IGisProject(eTypeDb, "", (CGisListWks*)0)
+    : IGisProject(eTypeDb, "", (CGisListWks*) nullptr)
 {
     metadata.name = folder.name;
     if(folder.diary)
@@ -47,7 +47,7 @@ CDBProject::CDBProject(CQlgtFolder& folder)
 }
 
 CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
-    : IGisItem(0, eTypeWpt, NOIDX)
+    : IGisItem(nullptr, eTypeWpt, NOIDX)
 {
     qreal direction;
     QDateTime time = QDateTime::fromTime_t(wpt1.timestamp,QTimeZone("UTC"));
@@ -137,7 +137,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
 
 CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
-    : IGisItem(0, eTypeTrk, NOIDX)
+    : IGisItem(nullptr, eTypeTrk, NOIDX)
     , activities(this)
 {
     trk.name        = trk1.name;
@@ -195,7 +195,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
         history.events << history_event_t();
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
-        event.comment   = QObject::tr("Copy flag information from QLandkarte GT track");
+        event.comment   = tr("Copy flag information from QLandkarte GT track");
         event.icon      = "://icons/48x48/PointHide.png";
 
         QDataStream stream(&event.data, QIODevice::WriteOnly);

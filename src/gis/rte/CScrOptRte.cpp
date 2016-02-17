@@ -50,21 +50,21 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCalc, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolReset, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolInstruction, SIGNAL(toggled(bool)), this, SLOT(hide()));
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::hide);
+    connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::hide);
 
-    connect(toolEditDetails, SIGNAL(clicked()), this, SLOT(slotEditDetails()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolCopy, SIGNAL(clicked()), this, SLOT(slotCopy()));
-    connect(toolCalc, SIGNAL(clicked()), this, SLOT(slotCalc()));
-    connect(toolReset, SIGNAL(clicked()), this, SLOT(slotReset()));
-    connect(toolEdit, SIGNAL(clicked()), this, SLOT(slotEdit()));
-    connect(toolInstruction, SIGNAL(toggled(bool)), this, SLOT(slotInstruction(bool)));
+    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::slotEditDetails);
+    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::slotDelete);
+    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptRte::slotCopy);
+    connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::slotCalc);
+    connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::slotReset);
+    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::slotEdit);
+    connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
 }
 
 CScrOptRte::~CScrOptRte()
@@ -115,8 +115,8 @@ void CScrOptRte::slotInstruction(bool on)
 
 void CScrOptRte::draw(QPainter& p)
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    IGisItem *item = CGisWidget::self().getItemByKey(key);
+    if(nullptr == item)
     {
         QWidget::deleteLater();
         return;

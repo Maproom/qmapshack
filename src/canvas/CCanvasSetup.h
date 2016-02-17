@@ -32,7 +32,7 @@ public:
     virtual ~CCanvasSetup();
 
 public slots:
-    void accept();
+    void accept() override;
 
 
 protected slots:

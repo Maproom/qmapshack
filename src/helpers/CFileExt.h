@@ -27,7 +27,7 @@ class CFileExt : public QFile
 public:
     CFileExt(const QString &filename)
         : QFile(filename)
-        , mapped(NULL)
+        , mapped(nullptr)
     {
         cnt++;
     }

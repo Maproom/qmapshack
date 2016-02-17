@@ -33,7 +33,7 @@ CPositionDialog::CPositionDialog(QWidget * parent, QPointF &pos)
 
     labelWarning->hide();
 
-    connect(lineEdit, SIGNAL(textEdited(QString)), this, SLOT(slotEdit(QString)));
+    connect(lineEdit, &QLineEdit::textEdited, this, &CPositionDialog::slotEdit);
 }
 
 CPositionDialog::~CPositionDialog()

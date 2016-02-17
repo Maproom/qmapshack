@@ -38,7 +38,7 @@ IMap::~IMap()
     delete setup;
 }
 
-void IMap::saveConfig(QSettings& cfg)
+void IMap::saveConfig(QSettings& cfg) /* override */
 {
     IDrawObject::saveConfig(cfg);
 
@@ -56,14 +56,14 @@ void IMap::saveConfig(QSettings& cfg)
     }
 }
 
-void IMap::loadConfig(QSettings& cfg)
+void IMap::loadConfig(QSettings& cfg) /* override */
 {
     IDrawObject::loadConfig(cfg);
 
-    slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
-    slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
-    slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
-    slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
+    slotSetShowPolygons   (cfg.value("showPolygons",    getShowPolygons()   ).toBool());
+    slotSetShowPolylines  (cfg.value("showPolylines",   getShowPolylines()  ).toBool());
+    slotSetShowPOIs       (cfg.value("showPOIs",        getShowPOIs()       ).toBool());
+    slotSetCacheSize      (cfg.value("cacheSizeMB",     getCacheSize()      ).toInt());
     slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
 }
 
@@ -78,7 +78,7 @@ IMapProp *IMap::getSetup()
 }
 
 
-void IMap::convertRad2M(QPointF &p)
+void IMap::convertRad2M(QPointF &p) const
 {
     if(pjsrc == 0)
     {
@@ -87,7 +87,7 @@ void IMap::convertRad2M(QPointF &p)
     pj_transform(pjtar,pjsrc,1,0,&p.rx(),&p.ry(),0);
 }
 
-void IMap::convertM2Rad(QPointF &p)
+void IMap::convertM2Rad(QPointF &p) const
 {
     if(pjsrc == 0)
     {

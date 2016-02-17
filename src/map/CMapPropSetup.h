@@ -31,10 +31,10 @@ public:
     virtual ~CMapPropSetup();
 
 protected slots:
-    void slotPropertiesChanged();
+    void slotPropertiesChanged() override;
 
 protected:
-    void resizeEvent(QResizeEvent * e);
+    void resizeEvent(QResizeEvent * e) override;
 
 private slots:
     void slotScaleChanged(const QPointF& s);

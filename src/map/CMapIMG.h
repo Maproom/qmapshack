@@ -19,7 +19,6 @@
 #ifndef CMAPIMG_H
 #define CMAPIMG_H
 
-#include "map/CMapDraw.h"
 #include "map/IMap.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
@@ -147,10 +146,10 @@ public:
     CMapIMG(const QString &filename, CMapDraw *parent);
     virtual ~CMapIMG();
 
-    void draw(IDrawContext::buffer_t& buf);
+    void draw(IDrawContext::buffer_t& buf) override;
 
-    void getInfo(const QPoint& px, QString& str);
-    void getToolTip(const QPoint& px, QString& infotext);
+    void getInfo(const QPoint& px, QString& str) override;
+    void getToolTip(const QPoint& px, QString& infotext) override;
 
     /**
        @brief Find a matching street polyline
@@ -164,7 +163,7 @@ public:
        @param polyline      the resulting polyline, if any, in [rad]
        @return              Return true if a line has been found.
      */
-    bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline);
+    bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline) override;
 
 
 private:

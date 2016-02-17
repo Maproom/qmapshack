@@ -20,10 +20,11 @@
 #define CDETAILSTRK_H
 
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlot.h"
+#include "helpers/CLimit.h"
 #include "ui_IDetailsTrk.h"
 #include <QWidget>
 
+class CPlot;
 class CPlotProfile;
 
 class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk
@@ -33,33 +34,45 @@ public:
     CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
     virtual ~CDetailsTrk();
 
-    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt);
+    void setMouseFocus(const CGisItemTrk::trkpt_t *pt) override;
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2) override;
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t *pt) override;
 
 public slots:
-    void updateData();
+    void updateData() override;
 
 private slots:
+    void slotNameChanged(const QString &name);
+    void slotNameChangeFinished();
     void slotShowPlots();
     void slotColorChanged(int idx);
     void slotChangeReadOnlyMode(bool on);
     void slotItemSelectionChanged();
     void slotLinkActivated(const QUrl& url);
-    void slotLinkActivated(const QString& url);
     void slotMouseClickState(int);
     void slotActivitySelected(bool checked);
 
-    void slotColorSourceChanged(int idx, float valueLow = HUGE_VALF, float valueHigh = HUGE_VALF);
+    void slotColorSourceChanged(int idx);
     void slotColorLimitHighChanged();
     void slotColorLimitLowChanged();
 
-    void slotLimitLowFromData();
-    void slotLimitHighFromData();
-
     void slotSetupGraph(int idx);
+    void slotSetLimitModeGraph(CLimit::mode_e mode, CLimit *limit, QDoubleSpinBox *spinMin, QDoubleSpinBox *spinMax, bool on);
+    void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
+
+    void slotLineWidthMode(bool isUser);
+    void slotLineWidth(qreal f);
+    void slotWithArrowsMode(bool isUser);
+    void slotWithArrows(bool yes);
 
 private:
+    void loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault);
+    void saveGraphSource(QComboBox * comboBox, qint32 n);
+    void setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGraph, QToolButton * toolLimitUsrGraph, QToolButton * toolLimitSysGraph, QDoubleSpinBox * spinMinGraph, QDoubleSpinBox * spinMaxGraph);
+    void setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax);
+    void setupGraph(CPlot * plot, const CLimit &limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
+    void setupLimits(CLimit *limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
+
     enum columns_t
     {
         eColNum

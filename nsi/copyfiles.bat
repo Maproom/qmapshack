@@ -6,13 +6,14 @@ rem http://technet.microsoft.com/en-us/library/bb491035.aspx
 rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.4\msvc2013_64"
+set QMSI_QT_PATH="C:\Qt5\5.5\msvc2013_64"
 rem get the VC redistributable installer from http://www.microsoft.com/en-us/download/details.aspx?id=40784
 set QMSI_VCREDIST_PATH="M:\deploy"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
+rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib\mingw64"
 
 rem Section 2.) Copy Files
@@ -40,9 +41,9 @@ copy %QMSI_QT_PATH%\bin\Qt5WebKit.dll
 copy %QMSI_QT_PATH%\bin\Qt5WebKitWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Widgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Xml.dll
-copy %QMSI_QT_PATH%\bin\icudt53.dll
-copy %QMSI_QT_PATH%\bin\icuin53.dll
-copy %QMSI_QT_PATH%\bin\icuuc53.dll
+copy %QMSI_QT_PATH%\bin\icudt54.dll
+copy %QMSI_QT_PATH%\bin\icuin54.dll
+copy %QMSI_QT_PATH%\bin\icuuc54.dll
 copy %QMSI_QT_PATH%\bin\libEGL.dll
 copy %QMSI_QT_PATH%\bin\libGLESv2.dll
 mkdir imageformats
@@ -58,6 +59,9 @@ cd ..
 mkdir sqldrivers
 cd sqldrivers
 copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlite.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlmysql.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlodbc.dll
+copy %QMSI_QT_PATH%\plugins\sqldrivers\qsqlpsql.dll
 cd ..
 mkdir platforms
 cd platforms
@@ -82,6 +86,7 @@ rem section 2.2.5) Routino
 copy %QMSI_ROUT_PATH%\lib\routino.dll
 copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
 copy %QMSI_MGW6_PATH%\libwinpthread-1.dll
+copy %QMSI_MGW6_PATH%\libz-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 
 

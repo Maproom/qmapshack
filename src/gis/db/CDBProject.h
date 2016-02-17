@@ -28,6 +28,7 @@ class CQlgtFolder;
 
 class CDBProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CDBProject)
 public:
     CDBProject(CGisListWks * parent);
     CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
@@ -42,16 +43,24 @@ public:
      */
     void restoreDBLink();
 
-    bool save();
-    bool saveAs();
+    bool canSave() const override
+    {
+        return true;
+    }
 
-    quint64 getId()
+    bool save() override;
+
+    quint64 getId() const
     {
         return id;
     }
-    QString getDBName()
+    QString getDBName() const
     {
         return db.connectionName();
+    }
+    QString getDBHost() const
+    {
+        return db.hostName();
     }
 
     /**
@@ -62,7 +71,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator<<(QDataStream& stream) override;
 
     /**
        @brief Serialize object into a QDataStream
@@ -72,7 +81,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    QDataStream& operator>>(QDataStream& stream);
+    QDataStream& operator>>(QDataStream& stream) const override;
 
     /**
        @brief Send a CEvtW2DAckInfo event to the database view
@@ -95,13 +104,15 @@ public:
      */
     void hideItems(CEvtD2WHideItems * evt);
 
+    void update();
+
 protected:
     /**
        @brief Setup the items text with the name and suffix
 
        @param defaultName
      */
-    void setupName(const QString &defaultName);
+    void setupName(const QString &defaultName) override;
 
     /**
      * @brief Save item's data into an existing database entry
@@ -109,17 +120,39 @@ protected:
      * @param item      the item itself
      * @param idItem    the 64bit database key
      */
-    void updateItem(IGisItem * item, quint64 idItem);
+    void updateItem(IGisItem *&item, quint64 idItem, QSqlQuery& query);
+
+
+    int checkForAction1(IGisItem * item, quint64 &idItem, int &lastResult, QSqlQuery& query);
+    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hashItem, QSqlQuery& query);
 
     /**
      * @brief Add item to database
      * @param item      the item itself
      * @return The new 64bit database key
      */
-    quint64 insertItem(IGisItem * item);
+    quint64 insertItem(IGisItem * item, QSqlQuery& query);
 
     QSqlDatabase db;
-    quint64 id;
+    quint64 id = 0;
+
+    enum reasons_e
+    {
+        eReasonCancel     = 0
+        , eReasonQueryFail  = -1
+        , eReasonUnexpected = -2
+        , eReasonConflict   = -3
+    };
+
+    enum action_e
+    {
+        eActionNone = 0x00
+        , eActionLink = 0x01
+        , eActionUpdate = 0x02
+        , eActionInsert = 0x04
+        , eActionClone  = 0x08
+        , eActionReload = 0x10
+    };
 };
 
 #endif //CDBPROJECT_H

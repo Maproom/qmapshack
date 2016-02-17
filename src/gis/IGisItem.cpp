@@ -39,7 +39,7 @@ QMutex IGisItem::mutexItems(QMutex::Recursive);
 
 const QString IGisItem::noKey;
 
-const QString IGisItem::noName = QObject::tr("[no name]");
+const QString IGisItem::noName = IGisItem::tr("[no name]");
 
 const IGisItem::color_t IGisItem::colorMap[] =
 {
@@ -59,8 +59,10 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"Magenta",     QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png")}
     ,{"Cyan",        QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png")}
     ,{"White",       QColor(Qt::white),       QString("://icons/8x8/bullet_white.png")}
-    ,{"Transparent", QColor(Qt::transparent), QString("")}
+    ,{"Transparent", QColor(Qt::transparent), QString()}
 };
+
+const size_t IGisItem::colorMapSize = sizeof(colorMap) / sizeof(color_t);
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
@@ -68,7 +70,7 @@ IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     int n = -1;
     setFlags(QTreeWidgetItem::flags() & ~Qt::ItemIsDropEnabled);
 
-    if(parent == 0)
+    if(nullptr == parent)
     {
         return;
     }
@@ -160,7 +162,7 @@ IGisItem::~IGisItem()
 {
 }
 
-void IGisItem::genKey()
+void IGisItem::genKey() const
 {
     if(key.item.isEmpty())
     {
@@ -188,7 +190,7 @@ void IGisItem::genKey()
 void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT data, key FROM items WHERE id=:id");
+    query.prepare("SELECT data, keyqms, hash FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())
@@ -217,7 +219,40 @@ void IGisItem::loadFromDb(quint64 id, QSqlDatabase& db)
                 updateHistory();
             }
         }
+
+        lastDatabaseHash = query.value(2).toString();
     }
+}
+
+void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db)
+{
+    QSqlQuery query(db);
+
+    query.prepare("SELECT hash FROM items WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+
+    /*
+        Test on the hash stored in the database. If the hash is
+        equal to the one stored in this item the item is up-to-date
+     */
+
+    if(query.next())
+    {
+        if(query.value(0).toString() == lastDatabaseHash)
+        {
+            return;
+        }
+    }
+    else
+    {
+        // no hash? better leave...
+        return;
+    }
+
+    // reset history and load item again
+    history.reset();
+    loadFromDb(id, db);
 }
 
 QString IGisItem::getNameEx() const
@@ -238,7 +273,7 @@ QString IGisItem::getNameEx() const
 }
 
 
-void IGisItem::updateDecoration(mark_e enable, mark_e disable)
+void IGisItem::updateDecoration(quint32 enable, quint32 disable)
 {
     // update text and icon
     setToolTip(CGisListWks::eColumnName,getInfo());
@@ -247,7 +282,7 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
 
     // update project if necessary
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project && (enable & eMarkChanged))
+    if(project && (enable & (eMarkChanged|eMarkNotPart|eMarkNotInDB)))
     {
         project->setChanged();
     }
@@ -258,12 +293,28 @@ void IGisItem::updateDecoration(mark_e enable, mark_e disable)
     mask &= ~disable;
     setData(1, Qt::UserRole, mask);
 
+    QString tt;
     QString str;
+    if(mask & eMarkNotPart)
+    {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += tr("The item is not part of the project in the database.");
+        str += "?";
+    }
+    if(mask & eMarkNotInDB)
+    {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += tr("The item is not in the database.");
+        str += "X";
+    }
     if(mask & eMarkChanged)
     {
+        tt  += tt.isEmpty() ? "" : "\n";
+        tt  += tr("The item might need to be saved");
         str += "*";
     }
     setText(CGisListWks::eColumnDecoration, str);
+    setToolTip(CGisListWks::eColumnDecoration, tt);
 }
 
 
@@ -291,6 +342,7 @@ void IGisItem::changed(const QString &what, const QString &icon)
     event.time      = QDateTime::currentDateTimeUtc();
     event.comment   = what;
     event.icon      = icon;
+    event.who       = CMainWindow::getUser();
 
     QDataStream stream(&event.data, QIODevice::WriteOnly);
     stream.setByteOrder(QDataStream::LittleEndian);
@@ -342,7 +394,7 @@ void IGisItem::setupHistory()
         history.events << history_event_t();
         history_event_t& event = history.events.last();
         event.time      = QDateTime::currentDateTimeUtc();
-        event.comment   = QObject::tr("Initial version.");
+        event.comment   = tr("Initial version.");
         event.icon      = "://icons/48x48/Start.png";
     }
 
@@ -420,10 +472,10 @@ bool IGisItem::isTainted() const
     return flags & eFlagTainted;
 }
 
-bool IGisItem::isOnDevice() const
+qint32 IGisItem::isOnDevice() const
 {
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(project == 0)
+    if(nullptr == project)
     {
         return false;
     }
@@ -450,8 +502,8 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
         if(isReadOnly() && !readOnly)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "setReadOnlyMode");
-            QString str = QObject::tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
-            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), QObject::tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+            QString str = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
+            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
             CCanvas::restoreOverrideCursor("setReadOnlyMode");
             if(res != QMessageBox::Ok)
             {
@@ -475,7 +527,7 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
 }
 
 
-const IGisItem::key_t &IGisItem::getKey()
+const IGisItem::key_t &IGisItem::getKey() const
 {
     if(key.item.isEmpty() || key.project.isEmpty())
     {
@@ -493,9 +545,25 @@ const QString& IGisItem::getHash()
     return history.events[history.histIdxCurrent].hash;
 }
 
+
+const QString& IGisItem::getLastDatabaseHash()
+{
+    if(lastDatabaseHash.isEmpty())
+    {
+        lastDatabaseHash = getHash();
+    }
+
+    return lastDatabaseHash;
+}
+
+void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
+{
+    lastDatabaseHash = getHash();
+}
+
 QColor IGisItem::str2color(const QString& name)
 {
-    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
+    for(size_t i = 0; i < colorMapSize; i++)
     {
         if(QString(colorMap[i].name).toUpper() == name.toUpper())
         {
@@ -508,7 +576,7 @@ QColor IGisItem::str2color(const QString& name)
 
 QString IGisItem::color2str(const QColor& color)
 {
-    for(size_t i = 0; i < sizeof(colorMap) / sizeof(color_t); i++)
+    for(size_t i = 0; i < colorMapSize; i++)
     {
         if(colorMap[i].color == color)
         {
@@ -521,22 +589,21 @@ QString IGisItem::color2str(const QColor& color)
 
 void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewport, QList<QPolygonF>& lines)
 {
-    int i;
-    QPointF pt, ptt, pt1;
-    QPolygonF subline;
-    const int size = line.size();
-
     if(line.isEmpty())
     {
         return;
     }
 
-    pt = line[0];
+    QPointF ptt;
+    QPointF pt = line[0];
+
+    QPolygonF subline;
     subline << pt;
 
-    for(i = 1; i < size; i++)
+    const int size = line.size();
+    for(int i = 1; i < size; i++)
     {
-        pt1 = line[i];
+        QPointF pt1 = line[i];
 
         if(!GPS_Math_LineCrossesRect(pt, pt1, extViewport))
         {
@@ -551,13 +618,11 @@ void IGisItem::splitLineToViewport(const QPolygonF& line, const QRectF& extViewp
         }
 
         ptt = pt1 - pt;
-        if(ptt.manhattanLength() < 5)
+        if(ptt.manhattanLength() >= 5)
         {
-            continue;
+            subline << pt1;
+            pt = pt1;
         }
-
-        subline << pt1;
-        pt = pt1;
     }
 
     if(subline.size() > 1)
@@ -573,6 +638,10 @@ QString IGisItem::removeHtml(const QString &str)
     return html.toPlainText();
 }
 
+QString IGisItem::html2Dev(const QString& str)
+{
+    return isOnDevice() == IDevice::eTypeGarmin ? removeHtml(str) : str;
+}
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString &key)
 {
@@ -598,10 +667,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = removeHtml(desc).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
         if(removeHtml(desc).simplified().isEmpty())
         {
-            str += QObject::tr("<p>--- no description ---</p>");
+            str += tr("<p>--- no description ---</p>");
         }
         else
         {
@@ -612,10 +681,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = removeHtml(cmt).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "comment", QObject::tr("<h4>Comment:</h4>"), key);
+        str += toLink(isReadOnly, "comment", tr("<h4>Comment:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no comment ---</p>");
+            str += tr("<p>--- no comment ---</p>");
         }
         else
         {
@@ -626,10 +695,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
     isEmpty = links.isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no links ---</p>");
+            str += tr("<p>--- no links ---</p>");
         }
         else
         {
@@ -657,10 +726,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
     isEmpty = removeHtml(desc).simplified().isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "description", QObject::tr("<h4>Description:</h4>"), key);
+        str += toLink(isReadOnly, "description", tr("<h4>Description:</h4>"), key);
         if(removeHtml(desc).simplified().isEmpty())
         {
-            str += QObject::tr("<p>--- no description ---</p>");
+            str += tr("<p>--- no description ---</p>");
         }
         else
         {
@@ -671,10 +740,10 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
     isEmpty = links.isEmpty();
     if(!isReadOnly || !isEmpty)
     {
-        str += toLink(isReadOnly, "links", QObject::tr("<h4>Links:</h4>"), key);
+        str += toLink(isReadOnly, "links", tr("<h4>Links:</h4>"), key);
         if(isEmpty)
         {
-            str += QObject::tr("<p>--- no links ---</p>");
+            str += tr("<p>--- no links ---</p>");
         }
         else
         {
@@ -723,5 +792,5 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
 
 bool IGisItem::isChanged() const
 {
-    return text(CGisListWks::eColumnDecoration) == "*";
+    return text(CGisListWks::eColumnDecoration).contains('*');
 }

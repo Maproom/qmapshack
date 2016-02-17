@@ -27,7 +27,7 @@
 CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent)
     : IDBFolder(true, db, eTypeLostFound, 0, parent)
 {
-    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
+    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     setupFromDB();
 
     setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
@@ -46,24 +46,22 @@ void CDBFolderLostFound::setupFromDB()
 
     qDeleteAll(takeChildren());
 
-
-    query.prepare("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name");
-    QUERY_EXEC(return );
+    QUERY_RUN("SELECT id FROM items AS t1 WHERE NOT EXISTS(SELECT * FROM folder2item WHERE child=t1.id) ORDER BY t1.type, t1.name", return );
     while(query.next())
     {
-        quint64 id      = query.value(0).toULongLong();
+        quint64 id = query.value(0).toULongLong();
         new CDBItem(db, id, this);
         cnt++;
     }
 
     if(cnt)
     {
-        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found (%1)").arg(cnt));
+        setText(CGisListDB::eColumnName, tr("Lost & Found (%1)").arg(cnt));
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/DeleteMultiple.png"));
     }
     else
     {
-        setText(CGisListDB::eColumnName, QObject::tr("Lost & Found"));
+        setText(CGisListDB::eColumnName, tr("Lost & Found"));
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Empty.png"));
     }
 
@@ -80,17 +78,30 @@ void CDBFolderLostFound::update(CEvtW2DAckInfo * info)
     setCheckState(CGisListDB::eColumnCheckbox, info->isLoaded ? Qt::Checked : Qt::Unchecked);
 }
 
-void CDBFolderLostFound::update()
+bool CDBFolderLostFound::update()
 {
     setupFromDB();
+    return true;
+}
+
+void CDBFolderLostFound::expanding()
+{
+    const int N = childCount();
+    for(int i=0; i<N; i++)
+    {
+        CDBItem * item = dynamic_cast<CDBItem*>(child(i));
+        if(item)
+        {
+            item->updateAge();
+        }
+    }
 }
 
 void CDBFolderLostFound::clear()
 {
     QSqlQuery query(db);
 
-    query.prepare("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)");
-    QUERY_EXEC(return );
+    QUERY_RUN("DELETE FROM items WHERE id NOT IN (SELECT child from folder2item)", return )
 
     setupFromDB();
 }

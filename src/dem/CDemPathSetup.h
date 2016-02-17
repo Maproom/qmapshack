@@ -30,7 +30,7 @@ public:
     virtual ~CDemPathSetup();
 
 public slots:
-    void accept();
+    void accept() override;
 
 private slots:
     void slotAddPath();

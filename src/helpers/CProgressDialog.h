@@ -46,8 +46,10 @@ public:
 
     bool wasCanceled();
 
+    void enableCancel(bool yes);
+
 public slots:
-    void reject();
+    void reject() override;
 
 private:
     QTime time;

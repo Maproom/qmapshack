@@ -48,19 +48,19 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolEdit,   SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolCopy,   SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolMove,   SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolProj,   SIGNAL(clicked()), this, SLOT(hide()));
-    connect(toolBubble, SIGNAL(clicked()), this, SLOT(hide()));
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolEdit,   &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolCopy,   &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::hide);
 
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-    connect(toolEdit,   SIGNAL(clicked()), this, SLOT(slotEdit()));
-    connect(toolCopy,   SIGNAL(clicked()), this, SLOT(slotCopy()));
-    connect(toolMove,   SIGNAL(clicked()), this, SLOT(slotMove()));
-    connect(toolProj,   SIGNAL(clicked()), this, SLOT(slotProj()));
-    connect(toolBubble, SIGNAL(clicked()), this, SLOT(slotBubble()));
+    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
+    connect(toolEdit,   &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
+    connect(toolCopy,   &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
+    connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::slotMove);
+    connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::slotProj);
+    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
 
     adjustSize();
 }
@@ -108,7 +108,7 @@ void CScrOptWpt::slotBubble()
 void CScrOptWpt::draw(QPainter& p)
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         deleteLater();
         return;

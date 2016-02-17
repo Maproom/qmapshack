@@ -1,31 +1,44 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIR/env-path.sh
+if [[ "$ROUTINO_LIB_DIR" == "" ]]; then
+	echo "ROUTINO_LIB_DIR not set"
+fi
+if [[ "$ROUTINO_SRC_DIR" == "" ]]; then
+	echo "ROUTINO_SRC_DIR not set"
+fi
 
-SRC_ROUTINO_DIR_B=$ROOT_DIR/routino-lib-src
-SRC_ROUTINO_DIR_T=$ROOT_DIR/routino-src
-SRC_ROUTINO_DIR=$SRC_ROUTINO_DIR_T
+
+ROUTINO_LIB_LIB_DIR=$ROUTINO_LIB_DIR/lib
+ROUTINO_LIB_H_DIR=$ROUTINO_LIB_DIR/include
+ROUTINO_LIB_XML_DIR=$ROUTINO_LIB_DIR/xml
 
 REPO_URL_B=http://routino.org/svn/branches/libroutino/
 REPO_URL_T=http://routino.org/svn/trunk/
 
+
+function checkoutRoutino {
+	if ! [ -d "$ROUTINO_SRC_DIR" ]; then
+		mkdir $ROUTINO_SRC_DIR
+		svn checkout $REPO_URL_T
+	fi
+}
+
 function updateRoutino {
-    svn revert $SRC_ROUTINO_DIR
-    svn update $SRC_ROUTINO_DIR
+    svn revert $ROUTINO_SRC_DIR
+    svn update $ROUTINO_SRC_DIR
 }
 
 function buildRoutino {
-    cd $SRC_ROUTINO_DIR
-    rm $SRC_ROUTINO_DIR/src/*.o
-    rm $SRC_ROUTINO_DIR/src/filedumper
-    rm $SRC_ROUTINO_DIR/src/filedumper-slim
-    rm $SRC_ROUTINO_DIR/src/filedumperx
-    rm $SRC_ROUTINO_DIR/src/libroutino.so
-    rm $SRC_ROUTINO_DIR/src/planetsplitter
-    rm $SRC_ROUTINO_DIR/src/planetsplitter-slim
-    rm $SRC_ROUTINO_DIR/src/router
-    rm $SRC_ROUTINO_DIR/src/router-slim
+    cd $ROUTINO_SRC_DIR
+    rm $ROUTINO_SRC_DIR/src/*.o
+    rm $ROUTINO_SRC_DIR/src/filedumper
+    rm $ROUTINO_SRC_DIR/src/filedumper-slim
+    rm $ROUTINO_SRC_DIR/src/filedumperx
+    rm $ROUTINO_SRC_DIR/src/libroutino.so
+    rm $ROUTINO_SRC_DIR/src/planetsplitter
+    rm $ROUTINO_SRC_DIR/src/planetsplitter-slim
+    rm $ROUTINO_SRC_DIR/src/router
+    rm $ROUTINO_SRC_DIR/src/router-slim
     
     pimpMakefileConf
     
@@ -33,16 +46,16 @@ function buildRoutino {
 }
 
 function adjustLinking {
-     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/libroutino.so $LIB_ROUTINO_LIB_DIR/libroutino.so
-     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/routino.so $LIB_ROUTINO_LIB_DIR/routino.so
-     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/routino.a $LIB_ROUTINO_LIB_DIR/routino.a
-     sudo install_name_tool -id $LIB_ROUTINO_LIB_DIR/libroutino.a $LIB_ROUTINO_LIB_DIR/libroutino.a
+     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/libroutino.so $ROUTINO_LIB_LIB_DIR/libroutino.so
+     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/routino.so $ROUTINO_LIB_LIB_DIR/routino.so
+     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/routino.a $ROUTINO_LIB_LIB_DIR/routino.a
+     sudo install_name_tool -id $ROUTINO_LIB_LIB_DIR/libroutino.a $ROUTINO_LIB_LIB_DIR/libroutino.a
 }
 
 function pimpMakefileConf {
-    sed 's/LDFLAGS_SONAME.*/LDFLAGS_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino.so" -o "libroutino.so"/' $SRC_ROUTINO_DIR/Makefile.conf> ./makefile.tmp
+    sed 's/LDFLAGS_SONAME.*/LDFLAGS_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino.so" -o "libroutino.so"/' $ROUTINO_SRC_DIR/Makefile.conf> ./makefile.tmp
     sed 's/LDFLAGS_SLIM_SONAME.*/LDFLAGS_SLIM_SONAME=-dynamiclib -Wl,-headerpad_max_install_names,-undefined,dynamic_lookup,-compatibility_version,$(SOVERSION),-current_version,$(SOVERSION),-install_name,"libroutino-slim.so" -o "libroutino-slim.so"/' ./makefile.tmp > ./makefile2.tmp
-    sed 's/LDFLAGS_LDSO.*/LDFLAGS_LDSO=-Wl/' ./makefile2.tmp > $SRC_ROUTINO_DIR/Makefile.conf
+    sed 's/LDFLAGS_LDSO.*/LDFLAGS_LDSO=-Wl/' ./makefile2.tmp > $ROUTINO_SRC_DIR/Makefile.conf
     
     rm ./makefile.tmp
     rm ./makefile2.tmp
@@ -54,28 +67,29 @@ function pimpMakefileConf {
 }
 
 function releaseRoutino {
-    rm -R $LIB_ROUTINO_DIR/*
-    mkdir $LIB_ROUTINO_LIB_DIR
-    mkdir $LIB_ROUTINO_H_DIR
-    mkdir $LIB_ROUTINO_XML_DIR
+    rm -R $ROUTINO_LIB_DIR/*
+    mkdir $ROUTINO_LIB_LIB_DIR
+    mkdir $ROUTINO_LIB_H_DIR
+    mkdir $ROUTINO_LIB_XML_DIR
     
-    cp $SRC_ROUTINO_DIR/src/libroutino.so             $LIB_ROUTINO_LIB_DIR
-    cp $SRC_ROUTINO_DIR/src/routino.h                 $LIB_ROUTINO_H_DIR
-    cp $SRC_ROUTINO_DIR/xml/routino-profiles.xml      $LIB_ROUTINO_XML_DIR
-    cp $SRC_ROUTINO_DIR/xml/routino-tagging.xml       $LIB_ROUTINO_XML_DIR
-    cp $SRC_ROUTINO_DIR/xml/routino-translations.xml  $LIB_ROUTINO_XML_DIR
+    cp $ROUTINO_SRC_DIR/src/libroutino.so             $ROUTINO_LIB_LIB_DIR
+    cp $ROUTINO_SRC_DIR/src/routino.h                 $ROUTINO_LIB_H_DIR
+    cp $ROUTINO_SRC_DIR/xml/routino-profiles.xml      $ROUTINO_LIB_XML_DIR
+    cp $ROUTINO_SRC_DIR/xml/routino-tagging.xml       $ROUTINO_LIB_XML_DIR
+    cp $ROUTINO_SRC_DIR/xml/routino-translations.xml  $ROUTINO_LIB_XML_DIR
     
-    cp $LIB_ROUTINO_LIB_DIR/libroutino.so             $LIB_ROUTINO_LIB_DIR/routino
-    cp $LIB_ROUTINO_LIB_DIR/libroutino.so             $LIB_ROUTINO_LIB_DIR/routino.so
-    cp $LIB_ROUTINO_LIB_DIR/libroutino.so             $LIB_ROUTINO_LIB_DIR/routino.a
-    cp $LIB_ROUTINO_LIB_DIR/libroutino.so             $LIB_ROUTINO_LIB_DIR/libroutino.a
+    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino
+    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino.so
+    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino.a
+    cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/libroutino.a
 
-    cp $LIB_ROUTINO_XML_DIR/routino-profiles.xml      $LIB_ROUTINO_XML_DIR/profiles.xml
-    cp $LIB_ROUTINO_XML_DIR/routino-tagging.xml       $LIB_ROUTINO_XML_DIR/tagging.xml
-    cp $LIB_ROUTINO_XML_DIR/routino-translations.xml  $LIB_ROUTINO_XML_DIR/translations.xml
+    cp $ROUTINO_LIB_XML_DIR/routino-profiles.xml      $ROUTINO_LIB_XML_DIR/profiles.xml
+    cp $ROUTINO_LIB_XML_DIR/routino-tagging.xml       $ROUTINO_LIB_XML_DIR/tagging.xml
+    cp $ROUTINO_LIB_XML_DIR/routino-translations.xml  $ROUTINO_LIB_XML_DIR/translations.xml
 }
 
 if [[ "$1" == "routino-build" ]]; then
+	checkoutRoutino
     updateRoutino
     buildRoutino
     releaseRoutino

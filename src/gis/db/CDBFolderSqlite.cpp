@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,40 +17,42 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/db/CDBFolderDatabase.h"
-#include "gis/db/CDBFolderLostFound.h"
+#include "gis/db/CDBFolderSqlite.h"
 
-CDBFolderDatabase::CDBFolderDatabase(const QString& filename, const QString& name, QTreeWidget *parent)
-    : IDBFolder(false, IDB::db, eTypeDatabase, 1, parent)
+#include <QtCore>
+
+CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
+    : IDBFolderSql(IDB::db, parent)
     , filename(filename)
-    , folderLostFound(0)
 {
-    setToolTip(CGisListDB::eColumnName, QObject::tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/Database.png"));
+    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
+    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
     setText(CGisListDB::eColumnName, name);
 
     setupDB(filename, name);
 
     setupFromDB();
+
+    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
 }
 
-CDBFolderDatabase::~CDBFolderDatabase()
+CDBFolderSqlite::~CDBFolderSqlite()
 {
 }
 
-void CDBFolderDatabase::expanding()
+QString CDBFolderSqlite::getDBInfo() const
 {
-    IDBFolder::expanding();
+    QString str = "<div style='font-weight: bold;'>" + IDB::db.connectionName() + "</div><br />";
+    str += tr("SQLite Database") + "<br />";
 
-    folderLostFound  = new CDBFolderLostFound(IDB::db, 0);
-    insertChild(0, folderLostFound);
-}
-
-void CDBFolderDatabase::updateLostFound()
-{
-    if(folderLostFound)
+    QString path = IDB::db.databaseName();
+    #ifndef Q_OS_WIN
+    if(path.startsWith(QDir::homePath()))
     {
-        folderLostFound->update();
+        path = "~" + path.remove(0, QDir::homePath().length());
     }
-}
+    #endif
 
+    str += tr("File: ") + QString("<i>%1</i>").arg(path);
+    return str;
+}

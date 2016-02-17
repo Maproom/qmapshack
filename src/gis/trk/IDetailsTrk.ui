@@ -152,35 +152,88 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
             <item>
-             <widget class="QToolButton" name="toolLock">
+             <widget class="CLineEdit" name="lineName">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="toolTip">
-               <string>Toggle read only mode. You have to open the lock to edit the item.</string>
+              <property name="palette">
+               <palette>
+                <active>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                 <colorrole role="Window">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </active>
+                <inactive>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                 <colorrole role="Window">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </inactive>
+                <disabled>
+                 <colorrole role="Base">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                 <colorrole role="Window">
+                  <brush brushstyle="SolidPattern">
+                   <color alpha="0">
+                    <red>0</red>
+                    <green>0</green>
+                    <blue>0</blue>
+                   </color>
+                  </brush>
+                 </colorrole>
+                </disabled>
+               </palette>
               </property>
-              <property name="text">
-               <string>...</string>
+              <property name="font">
+               <font>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
               </property>
-              <property name="icon">
-               <iconset resource="../../resources.qrc">
-                <normaloff>:/icons/32x32/UnLock.png</normaloff>
-                <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+              <property name="focusPolicy">
+               <enum>Qt::ClickFocus</enum>
               </property>
-              <property name="iconSize">
-               <size>
-                <width>22</width>
-                <height>22</height>
-               </size>
-              </property>
-              <property name="checkable">
-               <bool>true</bool>
-              </property>
-              <property name="autoRaise">
-               <bool>true</bool>
+              <property name="frame">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -213,9 +266,35 @@
              </widget>
             </item>
             <item>
-             <widget class="QLabel" name="label_5">
+             <widget class="QToolButton" name="toolLock">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Toggle read only mode. You have to open the lock to edit the item.</string>
+              </property>
               <property name="text">
-               <string/>
+               <string>...</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../../resources.qrc">
+                <normaloff>:/icons/32x32/UnLock.png</normaloff>
+                <normalon>:/icons/32x32/Lock.png</normalon>:/icons/32x32/UnLock.png</iconset>
+              </property>
+              <property name="iconSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoRaise">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -259,7 +338,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -310,14 +389,14 @@
                </property>
                <property name="minimumSize">
                 <size>
-                 <width>60</width>
-                 <height>100</height>
+                 <width>100</width>
+                 <height>0</height>
                 </size>
                </property>
                <property name="maximumSize">
                 <size>
-                 <width>16777215</width>
-                 <height>300</height>
+                 <width>300</width>
+                 <height>16777215</height>
                 </size>
                </property>
               </widget>
@@ -328,20 +407,7 @@
             <layout class="QVBoxLayout" name="verticalLayout_2">
              <item>
               <layout class="QGridLayout" name="gridLayout">
-               <item row="2" column="2">
-                <widget class="QPushButton" name="btnMaxFromData">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>from Data</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
+               <item row="0" column="0">
                 <widget class="QLabel" name="label">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -354,17 +420,199 @@
                  </property>
                 </widget>
                </item>
-               <item row="1" column="1">
-                <widget class="QComboBox" name="comboColorSource">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+               <item row="7" column="0">
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Width</string>
                  </property>
                 </widget>
                </item>
-               <item row="2" column="0">
+               <item row="0" column="1">
+                <widget class="QComboBox" name="comboColorSource"/>
+               </item>
+               <item row="8" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QToolButton" name="toolUserArrow">
+                   <property name="toolTip">
+                    <string>Use/edit user defined visibility of arrows for this track</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/ArrowUser.png</normaloff>:/icons/32x32/ArrowUser.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">buttonGroupArrow</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolDefArrow">
+                   <property name="toolTip">
+                    <string>Use/edit system's visibility of arrows for all tracks</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/ArrowDef.png</normaloff>:/icons/32x32/ArrowDef.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">buttonGroupArrow</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>25</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="4" column="1">
+                <widget class="CDoubleSpinBox" name="spinLimitHigh">
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-100.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QToolButton" name="toolLimitUsrStyle">
+                   <property name="toolTip">
+                    <string>User defined limits for this track</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LimitUsr.png</normaloff>:/icons/32x32/LimitUsr.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolLimitAutoStyle">
+                   <property name="toolTip">
+                    <string>Automatic limits</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/Limit.png</normaloff>:/icons/32x32/Limit.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolLimitSysStyle">
+                   <property name="toolTip">
+                    <string>User defined limits for all tracks</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LimitSys.png</normaloff>:/icons/32x32/LimitSys.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="4" column="0">
                 <widget class="QLabel" name="label_2">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -377,14 +625,34 @@
                  </property>
                 </widget>
                </item>
-               <item row="2" column="1">
-                <widget class="CDoubleSpinBox" name="spinLimitHigh">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
+               <item row="8" column="1">
+                <widget class="QCheckBox" name="checkWithArrows">
+                 <property name="text">
+                  <string>with arrows</string>
                  </property>
+                </widget>
+               </item>
+               <item row="7" column="1">
+                <widget class="QDoubleSpinBox" name="spinLineWidth">
+                 <property name="prefix">
+                  <string>x </string>
+                 </property>
+                 <property name="decimals">
+                  <number>1</number>
+                 </property>
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>4.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="CDoubleSpinBox" name="spinLimitLow">
                  <property name="decimals">
                   <number>1</number>
                  </property>
@@ -393,7 +661,98 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="0">
+               <item row="5" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout_9">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                </layout>
+               </item>
+               <item row="7" column="2">
+                <layout class="QHBoxLayout" name="horizontalLayout">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QToolButton" name="toolUserLineWith">
+                   <property name="toolTip">
+                    <string>Use/edit user defined scale factor for this track</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LineWidthUser.png</normaloff>:/icons/32x32/LineWidthUser.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">buttonGroupLineWidth</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QToolButton" name="toolDefLineWidth">
+                   <property name="toolTip">
+                    <string>Use/edit system's default factor for all tracks</string>
+                   </property>
+                   <property name="text">
+                    <string>...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset resource="../../resources.qrc">
+                     <normaloff>:/icons/32x32/LineWidthDef.png</normaloff>:/icons/32x32/LineWidthDef.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>16</width>
+                     <height>16</height>
+                    </size>
+                   </property>
+                   <property name="checkable">
+                    <bool>true</bool>
+                   </property>
+                   <property name="checked">
+                    <bool>true</bool>
+                   </property>
+                   <property name="autoExclusive">
+                    <bool>true</bool>
+                   </property>
+                   <attribute name="buttonGroup">
+                    <string notr="true">buttonGroupLineWidth</string>
+                   </attribute>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>25</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item row="5" column="0">
                 <widget class="QLabel" name="label_3">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -406,36 +765,14 @@
                  </property>
                 </widget>
                </item>
-               <item row="3" column="1">
-                <widget class="CDoubleSpinBox" name="spinLimitLow">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="decimals">
-                  <number>1</number>
-                 </property>
-                 <property name="minimum">
-                  <double>-100.000000000000000</double>
+               <item row="6" column="0" colspan="3">
+                <widget class="Line" name="line_4">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
                  </property>
                 </widget>
                </item>
-               <item row="3" column="2">
-                <widget class="QPushButton" name="btnMinFromData">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string>from Data</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="0" column="0">
+               <item row="3" column="0">
                 <widget class="QLabel" name="label_4">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -444,19 +781,19 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Solid color</string>
+                  <string>Color</string>
                  </property>
                 </widget>
                </item>
-               <item row="0" column="1">
-                <widget class="QComboBox" name="comboColor">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
+               <item row="3" column="1">
+                <layout class="QHBoxLayout" name="horizontalLayout_13">
+                 <item>
+                  <widget class="QComboBox" name="comboColor"/>
+                 </item>
+                 <item>
+                  <widget class="CSelectActivityColor" name="widgetColorActivity" native="true"/>
+                 </item>
+                </layout>
                </item>
               </layout>
              </item>
@@ -495,26 +832,81 @@
            <string>Graphs</string>
           </attribute>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="1">
-            <widget class="QComboBox" name="comboGraph2"/>
-           </item>
-           <item row="2" column="1">
-            <widget class="QComboBox" name="comboGraph3"/>
-           </item>
-           <item row="3" column="1">
-            <spacer name="verticalSpacer_3">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+           <item row="3" column="0">
+            <widget class="QCheckBox" name="checkGraph2">
+             <property name="text">
+              <string/>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
+            </widget>
            </item>
-           <item row="2" column="2">
+           <item row="7" column="2">
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QDoubleSpinBox" name="spinMaxGraph1">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="2">
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="3">
+            <widget class="QDoubleSpinBox" name="spinMaxGraph2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QCheckBox" name="checkGraph3">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="checkGraph1">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="3">
+            <widget class="QDoubleSpinBox" name="spinMinGraph3">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="5">
             <spacer name="horizontalSpacer_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -527,6 +919,100 @@
              </property>
             </spacer>
            </item>
+           <item row="7" column="3">
+            <widget class="QDoubleSpinBox" name="spinMaxGraph3">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="8" column="0">
+            <spacer name="verticalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>40</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="label_8">
+             <property name="text">
+              <string>max.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QDoubleSpinBox" name="spinMinGraph2">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QDoubleSpinBox" name="spinMinGraph1">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="minimum">
+              <double>-1000000.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>1000000.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="6" column="2">
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>min.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>min.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="5">
+            <widget class="Line" name="line_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="label_7">
+             <property name="text">
+              <string>min.</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="5">
+            <widget class="Line" name="line_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="1">
             <widget class="QLabel" name="label_6">
              <property name="text">
@@ -534,26 +1020,302 @@
              </property>
             </widget>
            </item>
-           <item row="2" column="0">
-            <widget class="QCheckBox" name="checkGraph3">
-             <property name="text">
-              <string>Graph 3</string>
-             </property>
-            </widget>
+           <item row="3" column="1">
+            <widget class="QComboBox" name="comboGraph2"/>
            </item>
-           <item row="1" column="0">
-            <widget class="QCheckBox" name="checkGraph2">
-             <property name="text">
-              <string>Graph 2</string>
-             </property>
-            </widget>
+           <item row="6" column="1">
+            <widget class="QComboBox" name="comboGraph3"/>
            </item>
-           <item row="0" column="0">
-            <widget class="QCheckBox" name="checkGraph1">
-             <property name="text">
-              <string>Graph 1</string>
+           <item row="0" column="4">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <property name="spacing">
+              <number>0</number>
              </property>
-            </widget>
+             <item>
+              <widget class="QToolButton" name="toolLimitUsrGraph1">
+               <property name="toolTip">
+                <string>User defined limits for this track</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitUsr.png</normaloff>:/icons/32x32/LimitUsr.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph1</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitAutoGraph1">
+               <property name="toolTip">
+                <string>Automatic limits</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/Limit.png</normaloff>:/icons/32x32/Limit.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph1</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitSysGraph1">
+               <property name="toolTip">
+                <string>User defined limits for all tracks</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitSys.png</normaloff>:/icons/32x32/LimitSys.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph1</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="4">
+            <layout class="QHBoxLayout" name="horizontalLayout_11">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QToolButton" name="toolLimitUsrGraph2">
+               <property name="toolTip">
+                <string>User defined limits for this track</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitUsr.png</normaloff>:/icons/32x32/LimitUsr.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph2</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitAutoGraph2">
+               <property name="toolTip">
+                <string>Automatic limits</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/Limit.png</normaloff>:/icons/32x32/Limit.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph2</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitSysGraph2">
+               <property name="toolTip">
+                <string>User defined limits for all tracks</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitSys.png</normaloff>:/icons/32x32/LimitSys.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph2</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="6" column="4">
+            <layout class="QHBoxLayout" name="horizontalLayout_12">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QToolButton" name="toolLimitUsrGraph3">
+               <property name="toolTip">
+                <string>User defined limits for this track</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitUsr.png</normaloff>:/icons/32x32/LimitUsr.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph3</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitAutoGraph3">
+               <property name="toolTip">
+                <string>Automatic limits</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/Limit.png</normaloff>:/icons/32x32/Limit.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph3</string>
+               </attribute>
+              </widget>
+             </item>
+             <item>
+              <widget class="QToolButton" name="toolLimitSysGraph3">
+               <property name="toolTip">
+                <string>User defined limits for all tracks</string>
+               </property>
+               <property name="text">
+                <string>...</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../resources.qrc">
+                 <normaloff>:/icons/32x32/LimitSys.png</normaloff>:/icons/32x32/LimitSys.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
+               </property>
+               <property name="autoExclusive">
+                <bool>true</bool>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupGraph3</string>
+               </attribute>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
@@ -578,11 +1340,7 @@
             <number>3</number>
            </property>
            <item>
-            <layout class="QVBoxLayout" name="layoutActivities">
-             <property name="spacing">
-              <number>3</number>
-             </property>
-            </layout>
+            <layout class="QGridLayout" name="layoutActivities"/>
            </item>
            <item>
             <widget class="Line" name="line_3">
@@ -810,6 +1568,11 @@
    <header>widgets/CHistoryListWidget.h</header>
   </customwidget>
   <customwidget>
+   <class>CLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>widgets/CLineEdit.h</header>
+  </customwidget>
+  <customwidget>
    <class>CPlotTrack</class>
    <extends>QWidget</extends>
    <header>plot/CPlotTrack.h</header>
@@ -826,9 +1589,22 @@
    <header>widgets/CColorLegend.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CSelectActivityColor</class>
+   <extends>QWidget</extends>
+   <header>gis/trk/CSelectActivityColor.h</header>
+   <container>1</container>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
  <connections/>
+ <buttongroups>
+  <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph3"/>
+ </buttongroups>
 </ui>

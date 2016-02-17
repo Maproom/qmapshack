@@ -31,8 +31,9 @@
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
     : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, SIGNAL(sigDeviceAdded(const QString &, const QString &)), this, SLOT(slotDeviceAdded(const QString &, const QString &)));
-    connect(&worker, SIGNAL(sigDeviceRemoved(const QString &, const QString &)), this, SLOT(slotDeviceRemoved(const QString &, const QString &)));
+    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded);
+    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved);
+    connect(qApp,    &QApplication::aboutToQuit,       this, &CDeviceWatcherMac::slotEndListing);
 }
 
 
@@ -221,6 +222,6 @@ void CDeviceWorker::init()
 {
     mSession = DASessionCreate(kCFAllocatorDefault);
 
-    DARegisterDiskAppearedCallback(mSession, NULL, onDiskAppear, this);
-    DARegisterDiskDisappearedCallback(mSession, NULL, onDiskDisappear, this);
+    DARegisterDiskAppearedCallback(mSession, nullptr, onDiskAppear, this);
+    DARegisterDiskDisappearedCallback(mSession, nullptr, onDiskDisappear, this);
 }

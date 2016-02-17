@@ -23,20 +23,38 @@
 
 #include <QtWidgets>
 
-CSetupDatabase::CSetupDatabase(QString& name, QString& filename, CGisListDB &parent)
+CSetupDatabase::CSetupDatabase(CGisListDB &parent)
     : QDialog(&parent)
     , list(parent)
-    , name(name)
-    , filename(filename)
 {
     setupUi(this);
 
-    lineName->setText(name);
-    labelFilename->setText(filename);
+    lineUser->setText(CMainWindow::getUser());
 
-    connect(toolNewDB, SIGNAL(clicked()), this, SLOT(slotNewDB()));
-    connect(toolAddDB, SIGNAL(clicked()), this, SLOT(slotOpenDB()));
-    connect(lineName, SIGNAL(textChanged(QString)), this, SLOT(slotUpdateButtonBox()));
+    connect(toolNewDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotNewDB);
+    connect(toolAddDB,   &QToolButton::clicked,   this, &CSetupDatabase::slotOpenDB);
+    connect(lineName,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineServer,  &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(lineUser,    &QLineEdit::textChanged, this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioSqlite, &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(radioMysql,  &QRadioButton::clicked,  this, &CSetupDatabase::slotUpdateButtonBox);
+    connect(checkMySQLNoPasswd, &QCheckBox::clicked, linePasswd, &QLineEdit::setDisabled);
+
+    if(!QSqlDatabase::isDriverAvailable("QMYSQL"))
+    {
+        gridLayout->removeWidget(frameMysql);
+
+        QString errorTitle = tr("Missing Requirement");
+        QString errorText  = tr("MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.<br />Please make sure you have installed the corresponding package.<br />If you don't know what to do now you should have <a href=\"%1\">a look at the wiki</a>.").arg("https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabaseAddRemove#markdown-header-mysql-565");
+
+        QLabel *errorMissingMySQL = new QLabel(QString("<b>%1</b><br /><br />%2").arg(errorTitle).arg(errorText));
+        errorMissingMySQL->setOpenExternalLinks(true);
+        errorMissingMySQL->setWordWrap(true);
+        gridLayout->addWidget(errorMissingMySQL, 4, 1, Qt::AlignTop);
+
+        radioSqlite->setChecked(true);
+        radioMysql->setDisabled(true);
+    }
 
     slotUpdateButtonBox();
 }
@@ -47,15 +65,29 @@ CSetupDatabase::~CSetupDatabase()
 
 void CSetupDatabase::slotUpdateButtonBox()
 {
-    bool enable = true;
+    bool enable = !lineName->text().isEmpty();
 
-    if(lineName->text().isEmpty())
+    if(radioSqlite->isChecked())
     {
-        enable = false;
+        if(labelFilename->text() == "-")
+        {
+            enable = false;
+        }
+        frameSqlite->setEnabled(true);
+        frameMysql->setEnabled(false);
     }
-    if(labelFilename->text() == "-")
+    else if(radioMysql->isChecked())
     {
-        enable = false;
+        if(lineServer->text().isEmpty())
+        {
+            enable = false;
+        }
+        if(lineUser->text().isEmpty())
+        {
+            enable = false;
+        }
+        frameSqlite->setEnabled(false);
+        frameMysql->setEnabled(true);
     }
 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(enable);
@@ -64,13 +96,12 @@ void CSetupDatabase::slotUpdateButtonBox()
 
 void CSetupDatabase::accept()
 {
-    name = lineName->text();
+    QString name = lineName->text();
     if(list.hasDatabase(name))
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("There is already a database with name '%1'").arg(name), QMessageBox::Abort);
         return;
     }
-    filename = labelFilename->text();
 
     QDialog::accept();
 }
@@ -124,4 +155,10 @@ void CSetupDatabase::slotOpenDB()
     labelFilename->setText(filename);
 
     slotUpdateButtonBox();
+}
+
+
+bool CSetupDatabase::noPasswd() const
+{
+    return radioMysql->isChecked() && checkMySQLNoPasswd->isChecked();
 }

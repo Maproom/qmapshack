@@ -19,7 +19,7 @@
 #ifndef IMOUSE_H
 #define IMOUSE_H
 
-#include <canvas/CCanvas.h>
+#include "canvas/CCanvas.h"
 
 #include <QCursor>
 #include <QObject>
@@ -45,14 +45,14 @@ public:
     };
 
     virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
-    virtual void mousePressEvent(QMouseEvent * e) = 0;
-    virtual void mouseMoveEvent(QMouseEvent * e) = 0;
+    virtual void mousePressEvent(QMouseEvent *e) = 0;
+    virtual void mouseMoveEvent(QMouseEvent *e) = 0;
     virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
     virtual void mouseDoubleClickEvent(QMouseEvent *e)
     {
     }
-    virtual void wheelEvent(QWheelEvent * e) = 0;
-    virtual void keyPressEvent(QKeyEvent * e)
+    virtual void wheelEvent(QWheelEvent *e) = 0;
+    virtual void keyPressEvent(QKeyEvent *e)
     {
     }
 
@@ -61,12 +61,12 @@ public:
         Each mouse function is represented by a special cursor. The main
         widget uses this method to query the current cursor.
      */
-    operator const QCursor&()
+    operator const QCursor&() const
     {
         return cursor;
     }
 
-    CCanvas * getCanvas()
+    CCanvas * getCanvas() const
     {
         return canvas;
     }

@@ -190,7 +190,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         QString str = xmlTileMatrixSet.namedItem("SupportedCRS").toElement().text();
 
         char * ptr1 = (char*)malloc(str.toLatin1().size() + 1);
-        char * ptr2 = 0;
+        char * ptr2 = nullptr;
 
         strncpy(ptr1,str.toLatin1().data(), str.toLatin1().size() + 1);
         OGRSpatialReference oSRS;
@@ -247,8 +247,8 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
 
     accessManager   = new QNetworkAccessManager(parent->thread());
-    connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
-    connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(this,          &CMapWMTS::sigQueueChanged,       this, &CMapWMTS::slotQueueChanged);
+    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapWMTS::slotRequestFinished);
 
     name = fi.baseName().replace("_", " ");
 
@@ -278,10 +278,10 @@ void CMapWMTS::getLayers(QListWidget& list)
         item->setData(Qt::UserRole, i++);
     }
 
-    connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
+    connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
 }
 
-void CMapWMTS::saveConfig(QSettings& cfg)
+void CMapWMTS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -303,7 +303,7 @@ void CMapWMTS::saveConfig(QSettings& cfg)
     cfg.setValue("enabledLayers", enabled);
 }
 
-void CMapWMTS::loadConfig(QSettings& cfg)
+void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -451,7 +451,7 @@ void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
     slotQueueChanged();
 }
 
-void CMapWMTS::draw(IDrawContext::buffer_t& buf)
+void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 {
     QMutexLocker lock(&mutex);
 

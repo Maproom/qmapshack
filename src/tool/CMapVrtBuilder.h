@@ -36,7 +36,7 @@ private slots:
     void slotStart();
 
 private:
-    void finished(int exitCode, QProcess::ExitStatus status);
+    void finished(int exitCode, QProcess::ExitStatus status) override;
     void enableStartButton();
 };
 

@@ -40,8 +40,8 @@ CDemDraw::CDemDraw(CCanvas *canvas)
 {
     demList = new CDemList(canvas);
     CMainWindow::self().addDemList(demList, canvas->objectName());
-    connect(canvas, SIGNAL(destroyed()), demList, SLOT(deleteLater()));
-    connect(demList, SIGNAL(sigChanged()), this, SLOT(emitSigCanvasUpdate()));
+    connect(canvas,  &CCanvas::destroyed,   demList, &CDemList::deleteLater);
+    connect(demList, &CDemList::sigChanged, this,    &CDemDraw::emitSigCanvasUpdate);
 
     buildMapList();
 
@@ -68,11 +68,19 @@ void CDemDraw::setProjection(const QString& proj)
 
 void CDemDraw::setupDemPath()
 {
-    CDemPathSetup dlg(demPaths);
+    QStringList paths = demPaths;
+    CDemPathSetup dlg(paths);
     if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
+
+    setupDemPath(paths);
+}
+
+void CDemDraw::setupDemPath(const QStringList &paths)
+{
+    demPaths = paths;
 
     foreach(CDemDraw * dem, dems)
     {

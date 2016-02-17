@@ -22,6 +22,8 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "helpers/CLimit.h"
+#include "helpers/CValue.h"
 
 #include <QPen>
 #include <QPointer>
@@ -39,6 +41,7 @@ class QDir;
 class CProgressDialog;
 class CPropertyTrk;
 class CColorLegend;
+class CFitStream;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
@@ -49,6 +52,7 @@ class INotifyTrk;
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemTrk)
 public:
     struct trk_t;
     struct trkpt_t;
@@ -67,11 +71,13 @@ public:
 
     enum visual_e
     {
-        eVisualNone = 0
-        , eVisualColorLegend = 0x1
-        , eVisualPlot = 0x2
-        , eVisualDetails = 0x4
-        , eVisualAll = -1
+        eVisualNone          = 0
+        , eVisualColorLegend = 0x01
+        , eVisualPlot        = 0x02
+        , eVisualDetails     = 0x04
+        , eVisualProject     = 0x08
+        , eVisualColorAct    = 0x10
+        , eVisualAll         = -1
     };
 
     /**
@@ -110,7 +116,7 @@ public:
        @param hist
        @param project
      */
-    CGisItemTrk(const history_t& hist, IGisProject * project);
+    CGisItemTrk(const history_t& hist, const QString& dbHash, IGisProject * project);
     /**
        @brief Used to restore track from database
        @param id
@@ -132,13 +138,43 @@ public:
 
     CGisItemTrk(const IQlgtOverlay& ovl);
 
+    /**
+       @brief Creates a new track via provided trkdata
+       @param trkdata  The track's new data (will be moved, don't use your "copy" after construction!
+       @param project  The project this track belongs to
+     */
+    CGisItemTrk(trk_t& trkdata, IGisProject *project);
+
+    CGisItemTrk(CFitStream& stream, IGisProject * project);
+
     virtual ~CGisItemTrk();
+
+    /**
+       @brief Overide IGisItem::updateHistory() method
+
+        same as changed();
+
+     */
+    void updateHistory(quint32 visuals);
+
+    /**
+       @brief Update all registered visuals viw the INotifyTrk interface
+       @param a bit field of visuals to be updated
+       @param who a string for debug puposes
+     */
+    void updateVisuals(quint32 visuals, const QString &who);
+
+    /**
+       @brief Create a cloned copy of this track
+       @return The cloned item a pointer
+     */
+    IGisItem * createClone() override;
 
     /**
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track
      */
-    void save(QDomNode& gpx);
+    void save(QDomNode& gpx) override;
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
@@ -149,16 +185,16 @@ public:
        @param stream  the data stream to read from
        @return A reference to the stream
      */
-    QDataStream& operator<<(QDataStream& stream);
+    QDataStream& operator<<(QDataStream& stream) override;
     /**
        @brief Serialize track into a binary data stream
        @param stream  the data stream to write to.
        @return A reference to the stream
      */
-    QDataStream& operator>>(QDataStream& stream) const;
+    QDataStream& operator>>(QDataStream& stream) const override;
 
     /// get name of track
-    const QString& getName() const
+    const QString& getName() const override
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
@@ -175,13 +211,12 @@ public:
         return color;
     }
 
-
     /**
        @brief get a summary of the track
-       @param allowEdit if true the track name is a link to allow interactions like edit
+       @param showName  if true the track name is shown
        @return
      */
-    QString getInfo(bool allowEdit = false) const;
+    QString getInfo(bool showName = true) const override;
     /// get a summary of a selected range
     QString getInfoRange();
     /// get a summary of a selected range defined by two track points
@@ -216,22 +251,22 @@ public:
         return totalDistance;
     }
 
-    const QString& getComment() const
+    const QString& getComment() const override
     {
         return trk.cmt;
     }
-    const QString& getDescription() const
+    const QString& getDescription() const override
     {
         return trk.desc;
     }
-    const QList<link_t>& getLinks() const
+    const QList<link_t>& getLinks() const override
     {
         return trk.links;
     }
     /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l);
     /// get the track as polyline with elevation, pixel and GIS coordinates.
-    void getPolylineFromData(SGisLine& l);
+    void getPolylineFromData(SGisLine& l) override;
 
     const QDateTime& getTimeStart() const
     {
@@ -252,6 +287,8 @@ public:
     {
         return propHandler;
     }
+
+
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
         @{
@@ -269,9 +306,9 @@ public:
 
         @return  The new source to use.
      */
-    QString getColorizeSource()
+    QString getColorizeSource() const
     {
-        return colorSource;
+        return colorSourceLimit.getSource();
     }
 
     QStringList getExistingDataSources() const;
@@ -279,30 +316,31 @@ public:
     void setColorizeLimitLow(qreal limit);
     qreal getColorizeLimitLow() const
     {
-        return limitLow;
+        return colorSourceLimit.getMin();
     }
 
     void setColorizeLimitHigh(qreal limit);
     qreal getColorizeLimitHigh() const
     {
-        return limitHigh;
+        return colorSourceLimit.getMax();
     }
+
+    void setColorizeLimits(qreal low, qreal high);
 
     const QString getColorizeUnit() const;
 
-    void getExtrema(qreal &min, qreal &max, const QString &source) const;
+    qreal getMin(const QString& source) const;
+    qreal getMax(const QString& source) const;
 
 private:
-    QString colorSource  = "";
-
-    // the low and high limit for (slope-)colored drawing of tracks
-    qreal limitLow  = -10;
-    qreal limitHigh =  10;
-
     void drawColorized(QPainter &p);
+    void drawColorizedByActivity(QPainter& p);
+    void setPen(QPainter& p, QPen& pen, quint32 flag);
     /**@}*/
 
 
+
+public:
     /**
        @brief Get the indices of visible points for a selected range
 
@@ -311,16 +349,16 @@ private:
        @param idx1 a reference to receive the first index
        @param idx2 a reference to receive the second index
      */
-public:
     void getSelectedVisiblePoints(qint32& idx1, qint32& idx2);
 
     void setName(const QString& str);
     void setColor(int idx);
+    /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
-    void setDataFromPolyline(const SGisLine &l);
+    void setComment(const QString& str)         override;
+    void setDescription(const QString& str)         override;
+    void setLinks(const QList<link_t>& links) override;
+    void setDataFromPolyline(const SGisLine &l)          override;
 
     /**
        @brief display the track screen options
@@ -329,24 +367,24 @@ public:
        @param mouse     the mouse object causing the request
        @return          a pointer to the screen option widget
      */
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
     /**
        @brief Get a screen pixel of the track close to the given position on the screen
        @param screenPos Screen position as pixel coordinate
        @return The screen coordinates as pixel of a track point close by
      */
-    QPointF getPointCloseBy(const QPoint& screenPos);
+    QPointF getPointCloseBy(const QPoint& screenPos) override;
     /**
        @brief isCloseTo
        @param pos Screen position as pixel coordinate
        @return True if point is considered close enough
      */
-    bool isCloseTo(const QPointF& pos);
+    bool isCloseTo(const QPointF& pos) override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
     /**
@@ -356,7 +394,7 @@ public:
 
        @param yes   set true to gain focus.
      */
-    void gainUserFocus(bool yes);
+    void gainUserFocus(bool yes) override;
     /**
        @brief Make sure the track has lost focus.
 
@@ -368,7 +406,7 @@ public:
     /**
        @brief Make sure a CDetailsTrk widget is registered with the main tab widget
      */
-    void edit();
+    void edit() override;
 
     /**
        @brief Cut track at mouseClickFocus
@@ -442,7 +480,7 @@ public:
 
        @return True if the track has user focus
      */
-    bool hasUserFocus() const
+    bool hasUserFocus() const override
     {
         return key == keyUserFocus;
     }
@@ -575,6 +613,18 @@ public:
        @param speed speed in meter per seconds
      */
     void filterSpeed(qreal speed);
+    /**
+       @brief filterSplitSegment
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterSplitSegment();
+    /**
+       @brief filterDeleteExtension
+
+       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+     */
+    void filterDeleteExtension(const QString &ext);
 
     /**
        @brief Correlate waypoints with the track points
@@ -588,7 +638,13 @@ public:
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
 private:
-    void setSymbol();
+    /// no don't really use it, use CGisItemTrk(quint32 visuals) instead
+    void updateHistory() override
+    {
+        updateHistory(eVisualAll);
+    }
+
+    void setSymbol() override;
     /**
        @brief Read track data from section in GPX file
        @param xml   The XML <trk> section
@@ -602,11 +658,22 @@ private:
      */
     bool readTwoNav(const QString& filename);
     /**
+       @brief Read serialized track data from a FIT file stream
+       @param stream
+     */
+    void readTrkFromFit(CFitStream &stream);
+
+    /**
        @brief Derive secondary data from the track data
 
        This has to be called each time the track data is changed.
      */
     void deriveSecondaryData();
+
+    /**
+     * @brief Reset internal data like range selection and details dialog
+     */
+    void resetInternalData();
 
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extremas/extensions
@@ -690,25 +757,16 @@ private:
        @param what  The reason string
        @param icon  An icon string
      */
-    void changed(const QString& what, const QString& icon);
-    /**
-       @brief Overide IGisItem::updateHistory() method
-
-        same as changed();
-
-     */
-    void updateHistory();
+    void changed(const QString& what, const QString& icon) override;
 
     /// setup colorIdx, color, bullet and icon
     void setColor(const QColor& c);
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void updateVisuals(quint32 visuals, const QString &who);
     void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
     void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
     void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
-
 
 public:
     struct trkpt_t : public wpt_t
@@ -746,13 +804,14 @@ public:
             ,eActSwim   = 0x04000000
             ,eActShip   = 0x02000000
             ,eActAero   = 0x01000000
-            ,eActMask   = 0xFF000000    ///< mask for activity flags
-            ,eActMaxNum = 8             ///< maximum number of activity flags. this is defined by the mask
+            ,eActSki    = 0x00800000
+            ,eActMask   = 0xFF800000    ///< mask for activity flags
+            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
 
         quint32 flags = 0;
         /// index within the complete track
-        qint32 idxTotal;
+        qint32 idxTotal = NOIDX;
         /// offset into lineSimple
         qint32 idxVisible;
 
@@ -813,14 +872,56 @@ public:
         return trk;
     }
 
+    void updateFromDB(quint64 id, QSqlDatabase& db) override;
+
+private:
+    fGetLimit _getMin = [this](const QString& source)
+                        {
+                            return getMin(source);
+                        };
+
+    fGetLimit _getMax = [this](const QString& source)
+                        {
+                            return getMax(source);
+                        };
+
+    qreal   getMinProp(const QString& source) const;
+    qreal   getMaxProp(const QString& source) const;
+    QString getUnitProp(const QString& source) const;
+
+    fGetLimit _getMinProp = [this](const QString& source)
+                            {
+                                return getMinProp(source);
+                            };
+
+    fGetLimit _getMaxProp = [this](const QString& source)
+                            {
+                                return getMaxProp(source);
+                            };
+
+    fGetUnit _getUnitProp = [this](const QString& source)
+                            {
+                                return getUnitProp(source);
+                            };
+
+    fMarkChanged _markChanged = [this]()
+                                {
+                                    updateHistory(eVisualNone);
+                                };
+
+public:
+    CLimit limitsGraph1 {"TrackDetails/Graph1", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
+    CLimit limitsGraph2 {"TrackDetails/Graph2", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
+    CLimit limitsGraph3 {"TrackDetails/Graph3", _getMin, _getMax, _getMinProp, _getMaxProp, _getUnitProp, _markChanged};
+
+    CLimit colorSourceLimit {"TrackDetails/Style", _getMin, _getMax, _getMin, _getMax, _getUnitProp, _markChanged};
+
 private:
     /// this is the GPX structure oriented data of the track
     trk_t trk;
 
     /// the key of the track having the user focus.
     static key_t keyUserFocus;
-    /// background (border) color of all tracks
-    static const QPen penBackground;
     /// drawing and mouse interaction is dependent on the mode
     mode_e mode = eModeNormal;
 
@@ -847,14 +948,43 @@ private:
     unsigned colorIdx = 4;
     /// the track line color
     QColor color;
-    /// the pen with the actual track color
-    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
     /// the trackpoint bullet icon
     QPixmap bullet;
     /// the current track line as screen pixel coordinates
     QPolygonF lineSimple;
     /// visible and invisible points
     QPolygonF lineFull;
+
+
+    /// inner trackline width
+    qint32 penWidthFg = 3;
+    /// outer trackline width
+    qint32 penWidthBg = 5;
+    /// highlighted trackline width
+    qint32 penWidthHi = 11;
+    /// the pen with the actual track color
+    QPen penForeground {Qt::blue, qreal(penWidthFg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    /// background (border) color of all tracks
+    QPen penBackground {Qt::white, qreal(penWidthBg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+
+
+    fValueOnChange onChange = [this](const QVariant& val)
+                              {
+                                  int w = qRound(3.0 * val.toDouble());
+
+                                  penWidthFg = w;
+                                  penWidthBg = w + 2;
+                                  penWidthHi = w + 8;
+
+                                  penForeground.setWidth(penWidthFg);
+                                  penBackground.setWidth(penWidthBg);
+                              };
+
+public:
+    CValue lineScale     {"TrackDetails/lineScale", 1.0, _markChanged, onChange};
+    CValue showArrows    {"TrackDetails/showArrows", true, _markChanged};
+private:
     /**@}*/
 
 
@@ -908,13 +1038,13 @@ private:
     QString mouseFocusOwner;
 
     /// the current track point selected by mouse movement
-    const trkpt_t * mouseMoveFocus = 0;
+    const trkpt_t * mouseMoveFocus  = nullptr;
     /// the last track point the user clicked on
-    const trkpt_t * mouseClickFocus = 0;
+    const trkpt_t * mouseClickFocus = nullptr;
     /// the first point of a range selection
-    const trkpt_t * mouseRange1 = 0;
+    const trkpt_t * mouseRange1     = nullptr;
     /// the second point of a range selection
-    const trkpt_t * mouseRange2 = 0;
+    const trkpt_t * mouseRange2     = nullptr;
     /**@}*/
 
     /// the track's details dialog if any

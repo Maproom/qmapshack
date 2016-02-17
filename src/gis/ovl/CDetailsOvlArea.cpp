@@ -31,13 +31,13 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     setupUi(this);
 
     QPixmap icon(64,24);
-    for(int i=0; i < OVL_N_COLORS; ++i)
+    for(size_t i = 0; i < CGisItemOvlArea::colorMapSize; ++i)
     {
-        icon.fill(CGisItemOvlArea::lineColors[i]);
-        comboColor->addItem(icon,"",CGisItemOvlArea::lineColors[i]);
+        icon.fill(CGisItemOvlArea::colorMap[i].color);
+        comboColor->addItem(icon,"", CGisItemOvlArea::colorMap[i].color);
     }
 
-    for(int i = 0; i < OVL_N_STYLES; i++)
+    for(int i = 0; i < OVL_N_STYLES; ++i)
     {
         icon.fill(Qt::white);
         QPainter p(&icon);
@@ -49,7 +49,7 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     }
 
 
-    for(int i = 0; i < OVL_N_WIDTHS; i++)
+    for(int i = 0; i < OVL_N_WIDTHS; ++i)
     {
         comboBorderWidth->addItem(CGisItemOvlArea::lineWidths[i].string, CGisItemOvlArea::lineWidths[i].width);
     }
@@ -62,15 +62,16 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     }
 
 
-    connect(comboColor, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetColor(int)));
-    connect(comboBorderWidth, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetWidth(int)));
-    connect(comboStyle, SIGNAL(currentIndexChanged(int)), this, SLOT(slotSetStyle(int)));
-    connect(checkOpacity, SIGNAL(toggled(bool)), this, SLOT(slotOpyacity(bool)));
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
+    connect(comboColor,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetColor);
+    connect(comboBorderWidth, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetWidth);
+    connect(comboStyle,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
 
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpyacity);
+    connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
+    connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
+    connect(lineName,         &CLineEdit::textEdited,          this, &CDetailsOvlArea::slotNameChanged);
+    connect(lineName,         &CLineEdit::editingFinished,     this, &CDetailsOvlArea::slotNameChangeFinished);
+    connect(listHistory,      &CHistoryListWidget::sigChanged, this, &CDetailsOvlArea::setupGui);
 }
 
 CDetailsOvlArea::~CDetailsOvlArea()
@@ -127,26 +128,31 @@ void CDetailsOvlArea::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsOvlArea::slotLinkActivated(const QString& link)
+void CDetailsOvlArea::slotNameChanged(const QString &name)
 {
-    if(link == "name")
-    {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new area name."), QLineEdit::Normal, area.getName());
-        if(name.isEmpty())
-        {
-            return;
-        }
-        area.setName(name);
-    }
+    const QString shownName = name.isEmpty() ? IGisItem::noName : QString(name).replace('&', "&&");
+    setWindowTitle(shownName);
+}
 
-    setupGui();
+void CDetailsOvlArea::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != area.getName())
+    {
+        area.setName(name);
+        setupGui();
+    }
 }
 
 void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(nullptr);
         dlg.setHtml(area.getComment());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -156,7 +162,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(0);
+        CTextEditWidget dlg(nullptr);
         dlg.setHtml(area.getDescription());
         if(dlg.exec() == QDialog::Accepted)
         {
@@ -192,26 +198,20 @@ void CDetailsOvlArea::setupGui()
     bool isReadOnly = area.isReadOnly();
     setWindowTitle(area.getName());
 
-    if(area.isTainted())
-    {
-        labelTainted->show();
-    }
-    else
-    {
-        labelTainted->hide();
-    }
+    labelTainted->setVisible(area.isTainted());
+    lineName->setText(area.getName());
+    lineName->setReadOnly(isReadOnly);
 
-
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", area.getName(), ""));
-
-    comboColor->setCurrentIndex(area.getColorIdx());
-    comboColor->setEnabled(!isReadOnly);
+    comboColor->setCurrentIndex      (area.getColorIdx());
     comboBorderWidth->setCurrentIndex(comboBorderWidth->findData(area.getWidth()));
+    comboStyle->setCurrentIndex      (comboStyle->findData      (area.getStyle()));
+
+    comboColor->setEnabled      (!isReadOnly);
     comboBorderWidth->setEnabled(!isReadOnly);
-    comboStyle->setCurrentIndex(comboStyle->findData(area.getStyle()));
-    comboStyle->setEnabled(!isReadOnly);
+    comboStyle->setEnabled      (!isReadOnly);
+    checkOpacity->setEnabled    (!isReadOnly);
+
     checkOpacity->setChecked(area.getOpacity());
-    checkOpacity->setEnabled(!isReadOnly);
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));
@@ -223,12 +223,12 @@ void CDetailsOvlArea::setupGui()
     const CGisItemOvlArea::area_t& a = area.getAreaData();
     foreach(const CGisItemOvlArea::pt_t& pt, a.pts)
     {
-        QString str;
         QTreeWidgetItem * item = new QTreeWidgetItem();
 
         item->setText(eColNum,QString::number(idx++));
 
         // position
+        QString str;
         IUnit::degToStr(pt.lon, pt.lat, str);
         item->setText(eColPosition,str);
         items << item;

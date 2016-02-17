@@ -60,7 +60,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
 
     if(clone)
     {
-        rte.name += QObject::tr("_Clone");
+        rte.name += tr("_Clone");
         key.clear();
         history.events.clear();
     }
@@ -98,12 +98,16 @@ CGisItemRte::CGisItemRte(const QDomNode& xml, IGisProject *parent)
     updateDecoration(eMarkNone, eMarkNone);
 }
 
-CGisItemRte::CGisItemRte(const history_t& hist, IGisProject * project)
+CGisItemRte::CGisItemRte(const history_t& hist, const QString &dbHash, IGisProject * project)
     : IGisItem(project, eTypeRte, project->childCount())
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
     deriveSecondaryData();
+    if(!dbHash.isEmpty())
+    {
+        lastDatabaseHash = dbHash;
+    }
 }
 
 CGisItemRte::CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project)
@@ -124,6 +128,18 @@ CGisItemRte::CGisItemRte(const SGisLine &l, const QString &name, IGisProject *pr
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
+CGisItemRte::CGisItemRte(CFitStream& stream, IGisProject * project)
+    : IGisItem(project, eTypeRte, project->childCount())
+{
+    // --- start read and process data ----
+    readRteFromFit(stream);
+    // --- stop read and process data ----
+
+    setupHistory();
+    deriveSecondaryData();
+    updateDecoration(eMarkNone, eMarkNone);
+}
+
 CGisItemRte::~CGisItemRte()
 {
     // reset user focus if focused on this track
@@ -132,6 +148,18 @@ CGisItemRte::~CGisItemRte()
         keyUserFocus.clear();
     }
 }
+
+IGisItem * CGisItemRte::createClone()
+{
+    int idx = -1;
+    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    if(project)
+    {
+        idx = project->indexOfChild(this);
+    }
+    return new CGisItemRte(*this, project, idx, true);
+}
+
 
 bool CGisItemRte::isCalculated()
 {
@@ -218,71 +246,66 @@ void CGisItemRte::setName(const QString& str)
 {
     setText(CGisListWks::eColumnName, str);
     rte.name = str;
-    changed(QObject::tr("Changed name."), "://icons/48x48/EditText.png");
+    changed(tr("Changed name."), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setComment(const QString& str)
 {
     rte.cmt = str;
-    changed(QObject::tr("Changed comment"), "://icons/48x48/EditText.png");
+    changed(tr("Changed comment"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setDescription(const QString& str)
 {
     rte.desc = str;
-    changed(QObject::tr("Changed description"), "://icons/48x48/EditText.png");
+    changed(tr("Changed description"), "://icons/48x48/EditText.png");
 }
 
 void CGisItemRte::setLinks(const QList<link_t>& links)
 {
     rte.links = links;
-    changed(QObject::tr("Changed links"), "://icons/48x48/Link.png");
+    changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
 
 
-QString CGisItemRte::getInfo(bool allowEdit) const
+QString CGisItemRte::getInfo(bool showName) const
 {
     QString val1, unit1, val2, unit2;
     QString str = "<div>";
 
-    if(allowEdit)
+    if(showName)
     {
-        str += "<b>" + toLink(isReadOnly(), "name", getName(), "") + "</b>";
-    }
-    else
-    {
-        str += "<div style='font-weight: bold;'>" + getName() + "</div>";
+        str += "<b>" + getName() + "</b><br />";
     }
 
-    str += "<br/>\n";
     if(totalDistance != NOFLOAT)
     {
         IUnit::self().meter2distance(totalDistance, val1, unit1);
-        str += QObject::tr("Length: %1 %2").arg(val1).arg(unit1);
+        str += tr("Length: %1 %2").arg(val1).arg(unit1);
     }
     else
     {
-        str += QObject::tr("Length: -");
+        str += tr("Length: -");
     }
 
     str += "<br/>\n";
     if(totalTime != 0)
     {
         IUnit::self().seconds2time(totalTime, val1, unit1);
-        str += QObject::tr("Time: %1 %2").arg(val1).arg(unit1);
+        str += tr("Time: %1 %2").arg(val1).arg(unit1);
     }
     else
     {
-        str += QObject::tr("Time: -");
+        str += tr("Time: -");
     }
 
     if(!lastRoutedWith.isEmpty())
     {
         str += "<br/>\n";
-        str += QObject::tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
+        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
         str += "<br/>\n";
-        str += QObject::tr("with %1").arg(lastRoutedWith);
+        str += tr("with %1").arg(lastRoutedWith);
     }
     return str;
 }
@@ -410,7 +433,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setPen(hasUserFocus() ? penForegroundFocus : penForeground);
     p.setBrush(hasUserFocus() ? penForegroundFocus.color() : penForeground.color());
-    CDraw::arrows(line, extViewport, p, 10, 80);
+    CDraw::arrows(line, extViewport, p, 10, 80, 1.0);
     p.drawPolyline(line);
 
     p.setPen(Qt::NoPen);
@@ -453,9 +476,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         QString str, val, unit;
         IUnit::self().seconds2time(mouseMoveFocus->time, val, unit);
-        str += QObject::tr("Time: %1 %2").arg(val).arg(unit) + " ";
+        str += tr("Time: %1 %2").arg(val).arg(unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
-        str += QObject::tr("Distance: %1 %2").arg(val).arg(unit);
+        str += tr("Distance: %1 %2").arg(val).arg(unit);
         str += "\n" + mouseMoveFocus->instruction;
 
         // calculate bounding box of text
@@ -564,12 +587,12 @@ void CGisItemRte::readRouteDataFromGisLine(const SGisLine &l)
 void CGisItemRte::setDataFromPolyline(const SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);
-    mouseMoveFocus = 0;
+    mouseMoveFocus = nullptr;
 
     readRouteDataFromGisLine(l);
 
     flags |= eFlagTainted;
-    changed(QObject::tr("Changed route points."), "://icons/48x48/LineMove.png");
+    changed(tr("Changed route points."), "://icons/48x48/LineMove.png");
 }
 
 void CGisItemRte::getPolylineFromData(SGisLine& l)
@@ -593,7 +616,7 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 void CGisItemRte::calc()
 {
     QMutexLocker lock(&mutexItems);
-    mouseMoveFocus = 0;
+    mouseMoveFocus = nullptr;
     for(int i = 0; i < rte.pts.size(); i++)
     {
         rte.pts[i].subpts.clear();
@@ -611,7 +634,7 @@ void CGisItemRte::reset()
         pt.fakeSubpt = subpt_t();
     }
 
-    mouseMoveFocus  = 0;
+    mouseMoveFocus  = nullptr;
     totalDistance   = NOFLOAT;
     totalTime       = 0;
     lastRoutedTime  = QDateTime();
@@ -631,7 +654,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 {
     QMutexLocker lock(&mutexItems);
 
-    const subpt_t * newPointOfFocus = 0;
+    const subpt_t * newPointOfFocus = nullptr;
     quint32 idx = 0;
 
     if(pt != NOPOINT && GPS_Math_DistPointPolyline(line, pt) < MIN_DIST_FOCUS)
@@ -655,7 +678,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 
     if(newPointOfFocus && (newPointOfFocus->type == subpt_t::eTypeNone))
     {
-        newPointOfFocus = 0;
+        newPointOfFocus = nullptr;
     }
 
 
@@ -685,7 +708,7 @@ const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
         cnt++;
     }
 
-    return 0;
+    return nullptr;
 }
 
 void CGisItemRte::setResult(Routino_Output * route, const QString& options)
@@ -693,7 +716,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     QMutexLocker lock(&mutexItems);
 
     qint32 idxRtept = -1;
-    rtept_t * rtept = 0;
+    rtept_t * rtept = nullptr;
 
     Routino_Output * next = route;
     while(next)
@@ -713,7 +736,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
             rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
-        else if(rtept != 0)
+        else if(rtept != nullptr)
         {
             rtept->subpts << subpt_t();
             subpt_t& subpt  = rtept->subpts.last();

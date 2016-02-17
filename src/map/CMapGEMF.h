@@ -7,20 +7,20 @@
 
 class CMapGEMF : public IMap
 {
-    Q_OBJECT;
+    Q_OBJECT
 public:
     CMapGEMF(const QString& filename, CMapDraw *parent);
-
     void draw(IDrawContext::buffer_t& buf) override;
 
 private:
     QImage getTile(quint32 col, quint32 row,quint32 z);
     quint64 getFilenameFromAddress(quint64 offset,QString &filename);
 
-    struct source_t {
+     struct source_t {
       quint32 index;
       QString name;
      };
+
     struct gemffile_t {
         QString filename;
         quint64 size;
@@ -34,7 +34,6 @@ private:
         quint32 maxY;
         quint32 sourceIdx;
         quint64 offset;
-
     };
 
     QString filename;
@@ -46,9 +45,7 @@ private:
     quint32 maxZoom = 0;
     QList< source_t> sources;
     QList<gemffile_t> files;
-    QHash<int, QList<range_t>> RangesByZoom;
-
-
+    QHash<quint32, QList<range_t>> rangesByZoom;
 
 signals:
 

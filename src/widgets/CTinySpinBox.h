@@ -59,13 +59,13 @@ signals:
     void valueChangedByStep(int val);
 
 public:
-    CTinySpinBox(QWidget * parent = 0);
+    CTinySpinBox(QWidget * parent = nullptr);
 
     void setReadOnly(bool r);
-    void stepBy(int steps);
+    void stepBy(int steps) override;
 
 protected:
-    void focusInEvent(QFocusEvent *event);
-    void focusOutEvent(QFocusEvent *event);
+    void focusInEvent(QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
 };
 #endif // CTINYSPINBOX_H

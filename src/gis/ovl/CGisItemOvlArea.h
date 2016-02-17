@@ -29,25 +29,27 @@ class IGisProject;
 class CScrOptOvlArea;
 class IQlgtOverlay;
 
-#define OVL_N_COLORS 17
 #define OVL_N_WIDTHS 4
 #define OVL_N_STYLES 8
 
 class CGisItemOvlArea : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemOvlArea)
 public:
     CGisItemOvlArea(const SGisLine& line, const QString &name, IGisProject * project, int idx);
     CGisItemOvlArea(const CGisItemOvlArea &parentArea, IGisProject * project, int idx, bool clone);
     CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
-    CGisItemOvlArea(const history_t& hist, IGisProject * project);
+    CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject * project);
     CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemOvlArea(const IQlgtOverlay& ovl);
     virtual ~CGisItemOvlArea();
 
-    QDataStream& operator<<(QDataStream& stream);
-    QDataStream& operator>>(QDataStream& stream) const;
+    IGisItem * createClone() override;
 
-    const QString& getName() const
+    QDataStream& operator<<(QDataStream& stream) override;
+    QDataStream& operator>>(QDataStream& stream) const override;
+
+    const QString& getName() const override
     {
         return area.name.isEmpty() ? noName : area.name;
     }
@@ -56,17 +58,17 @@ public:
     {
         return colorIdx;
     }
-    QString getInfo(bool allowEdit = false) const;
-    void getPolylineFromData(SGisLine& l);
-    const QString& getComment() const
+    QString getInfo(bool allowEdit = false) const override;
+    void getPolylineFromData(SGisLine& l) override;
+    const QString& getComment() const override
     {
         return area.cmt;
     }
-    const QString& getDescription() const
+    const QString& getDescription() const override
     {
         return area.desc;
     }
-    const QList<link_t>& getLinks() const
+    const QList<link_t>& getLinks() const override
     {
         return area.links;
     }
@@ -84,27 +86,28 @@ public:
     }
 
     void setName(const QString& str);
-    void setColor(int idx);
-    void setDataFromPolyline(const SGisLine& l);
+    void setColor(size_t idx);
+    void setDataFromPolyline(const SGisLine& l) override;
     void setWidth(qint32 w);
     void setStyle(qint32 s);
     void setOpacity(bool yes);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
+    void setComment(const QString& str)       override;
+    void setDescription(const QString& str)   override;
+    void setLinks(const QList<link_t>& links) override;
 
-    void save(QDomNode& gpx);
-    void edit();
+    void save(QDomNode& gpx) override;
+    void edit() override;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
+    using IGisItem::drawItem;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport,QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
 
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-    QPointF getPointCloseBy(const QPoint& screenPos);
-    bool isCloseTo(const QPointF& pos);
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    QPointF getPointCloseBy(const QPoint& screenPos) override;
+    bool isCloseTo(const QPointF& pos) override;
 
-    void gainUserFocus(bool yes);
+    void gainUserFocus(bool yes) override;
 
     struct width_t
     {
@@ -112,12 +115,10 @@ public:
         QString string;
     };
 
-    static const QColor lineColors[OVL_N_COLORS];
-    static const QString bulletColors[OVL_N_COLORS];
     static const width_t lineWidths[OVL_N_WIDTHS];
     static const Qt::BrushStyle brushStyles[OVL_N_STYLES];
 protected:
-    void setSymbol();
+    void setSymbol() override;
 
 
 public:
@@ -164,7 +165,7 @@ private:
 
     static key_t keyUserFocus;
 
-    QPen penForeground {Qt::blue, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
+    QPen penForeground {Qt::blue,  3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
     QPen penBackground {Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};
 
     /// the track line color
@@ -172,7 +173,7 @@ private:
     /// the trackpoint bullet icon
     QPixmap bullet;
     /// the track line color by index
-    unsigned colorIdx;
+    unsigned colorIdx = 0;
 
     QPolygonF polygonArea;
 

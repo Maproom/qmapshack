@@ -35,9 +35,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
 
     adjustSize();
 
-    connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
-    connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
-    connect(pushClone, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+    connect(pushCopy,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
+    connect(pushSkip,  &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
+    connect(pushClone, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
 }
@@ -57,8 +57,8 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
 
     adjustSize();
 
-    connect(pushCopy, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
-    connect(pushSkip, SIGNAL(clicked()), this, SLOT(slotSelectResult()));
+    connect(pushCopy, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
+    connect(pushSkip, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
 }

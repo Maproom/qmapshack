@@ -29,7 +29,7 @@ public:
     CScrOptEditLine(IMouse *mouse);
     virtual ~CScrOptEditLine();
 
-    void draw(QPainter& p)
+    void draw(QPainter& p) override
     {
     }
 };

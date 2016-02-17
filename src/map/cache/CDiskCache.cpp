@@ -39,7 +39,7 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
     timer = new QTimer(this);
     timer->setSingleShot(false);
     timer->start(20000);
-    connect(timer, SIGNAL(timeout()), this, SLOT(slotCleanup()));
+    connect(timer, &QTimer::timeout, this, &CDiskCache::slotCleanup);
 }
 
 CDiskCache::~CDiskCache()

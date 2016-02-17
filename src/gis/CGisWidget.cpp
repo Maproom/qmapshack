@@ -24,11 +24,13 @@
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
@@ -39,7 +41,7 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CGisWidget * CGisWidget::pSelf = 0;
+CGisWidget * CGisWidget::pSelf = nullptr;
 
 CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     : QWidget(parent)
@@ -53,10 +55,12 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
     treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
-    connect(treeWks, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
-    connect(treeDB, SIGNAL(sigChanged()), SLOT(slotHelpText()));
+    connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
+    connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
 
     slotHelpText();
+
+    treeWks->slotLoadWorkspace();
 }
 
 CGisWidget::~CGisWidget()
@@ -91,7 +95,7 @@ void CGisWidget::loadGisProject(const QString& filename)
     treeWks->blockSignals(true);
 
     QMutexLocker lock(&IGisItem::mutexItems);
-    IGisProject * item = 0;
+    IGisProject *item = nullptr;
     QString suffix = QFileInfo(filename).suffix().toLower();
     if(suffix == "gpx")
     {
@@ -101,11 +105,24 @@ void CGisWidget::loadGisProject(const QString& filename)
     {
         item = new CQmsProject(filename, treeWks);
     }
+    else if(suffix == "slf")
+    {
+        item = new CSlfProject(filename);
+
+        // the CSlfProject does not - as the other C*Project - register itself in the list
+        // of currently opened projects. This is done manually here.
+        treeWks->addProject(item);
+    }
+    else if(suffix == "fit")
+    {
+        item = new CFitProject(filename, treeWks);
+    }
+
 
     if(item && !item->isValid())
     {
         delete item;
-        item = 0;
+        item = nullptr;
     }
 
     // skip if project is already loaded
@@ -114,7 +131,7 @@ void CGisWidget::loadGisProject(const QString& filename)
         QMessageBox::information(this, tr("Load project..."), tr("The project \"%1\" is already in the workspace.").arg(item->getName()), QMessageBox::Abort);
 
         delete item;
-        item = 0;
+        item = nullptr;
     }
 
     treeWks->blockSignals(false);
@@ -142,11 +159,18 @@ void CGisWidget::slotSaveAll()
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
-        item->save();
+        if(item->canSave())
+        {
+            item->save();
+        }
+        else
+        {
+            item->saveAs();
+        }
     }
 
     CCanvas::restoreOverrideCursor("slotSaveAll");
@@ -160,14 +184,14 @@ IGisProject * CGisWidget::selectProject()
     CSelectProjectDialog dlg(key, name, type, treeWks);
     dlg.exec();
 
-    IGisProject * project = 0;
+    IGisProject *project = nullptr;
     if(!key.isEmpty())
     {
         QMutexLocker lock(&IGisItem::mutexItems);
         for(int i = 0; i < treeWks->topLevelItemCount(); i++)
         {
             project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-            if(project == 0)
+            if(nullptr == project)
             {
                 continue;
             }
@@ -181,27 +205,28 @@ IGisProject * CGisWidget::selectProject()
     {
         quint64 idParent;
         QString db;
+        QString host;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, this);
+        CSelectDBFolder dlg1(idParent, db, host, this);
         if(dlg1.exec() == QDialog::Rejected)
         {
-            return 0;
+            return nullptr;
         }
 
         CSetupFolder dlg2(type, name, false, this);
         if(dlg2.exec() == QDialog::Rejected)
         {
-            return 0;
+            return nullptr;
         }
 
         QMutexLocker lock(&IGisItem::mutexItems);
-        CEvtW2DCreate evt(name, type, idParent, db);
+        CEvtW2DCreate evt(name, type, idParent, db, host);
         QApplication::sendEvent(treeDB, &evt);
 
         if(evt.idChild)
         {
-            while(project == 0)
+            while(nullptr == project)
             {
                 QApplication::processEvents(QEventLoop::WaitForMoreEvents|QEventLoop::ExcludeUserInputEvents, 100);
                 project = treeWks->getProjectById(evt.idChild, db);
@@ -262,7 +287,7 @@ void CGisWidget::mouseMove(const QPointF& pos)
 
 IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
 {
-    IGisItem * item = 0;
+    IGisItem *item = nullptr;
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
@@ -276,7 +301,7 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
             }
 
             item = project->getItemByKey(key);
-            if(item != 0)
+            if(nullptr != item)
             {
                 break;
             }
@@ -293,7 +318,7 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
             }
 
             item = device->getItemByKey(key);
-            if(item != 0)
+            if(nullptr != item)
             {
                 break;
             }
@@ -310,7 +335,7 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(treeWks->topLevelItem(i));
-        if(project == 0)
+        if(nullptr == project)
         {
             continue;
         }
@@ -340,15 +365,15 @@ void CGisWidget::editItemByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
-        QTreeWidgetItem * item = treeWks->topLevelItem(i);
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project != 0)
+        QTreeWidgetItem *item = treeWks->topLevelItem(i);
+        IGisProject *project = dynamic_cast<IGisProject*>(item);
+        if(nullptr != project)
         {
             project->editItemByKey(key);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
-        if(device != 0)
+        if(nullptr != device)
         {
             device->editItemByKey(key);
             continue;
@@ -362,14 +387,14 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisItem * item = getItemByKey(key);
-    if(item == 0)
+    IGisItem *item = getItemByKey(key);
+    if(nullptr == item)
     {
         return;
     }
 
-    IGisProject * project = selectProject();
-    if(project == 0)
+    IGisProject *project = selectProject();
+    if(nullptr == project)
     {
         return;
     }
@@ -385,8 +410,8 @@ void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(wpt != 0)
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
     {
         CProjWpt dlg(*wpt, 0);
         dlg.exec();
@@ -399,16 +424,16 @@ void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(wpt != 0)
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
     {
         if(!wpt->setReadOnlyMode(false))
         {
             return;
         }
 
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+        if(nullptr != canvas)
         {
             canvas->setMouseMoveWpt(*wpt);
         }
@@ -419,7 +444,7 @@ void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(wpt != 0)
+    if(nullptr != wpt)
     {
         wpt->toggleBubble();
     }
@@ -430,7 +455,7 @@ void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-    if(trk != 0)
+    if(nullptr != trk)
     {
         trk->gainUserFocus(yes);
     }
@@ -443,7 +468,7 @@ void CGisWidget::focusRteByKey(bool yes, const IGisItem::key_t &key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
-    if(rte != 0)
+    if(nullptr != rte)
     {
         rte->gainUserFocus(yes);
     }
@@ -456,7 +481,7 @@ void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-    if(trk != 0 && trk->cut())
+    if(nullptr != trk && trk->cut())
     {
         int res = QMessageBox::question(this, tr("Cut Track..."), tr("Do you want to delete the original track?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
         if(res == QMessageBox::Ok)
@@ -473,7 +498,7 @@ void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-    if(trk)
+    if(nullptr != trk)
     {
         trk->reverse();
     }
@@ -511,7 +536,7 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-    if(trk != 0)
+    if(nullptr != trk)
     {
         if(!trk->setReadOnlyMode(false))
         {
@@ -519,7 +544,7 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
         }
 
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        if(nullptr != canvas)
         {
             canvas->setMouseEditTrk(*trk);
         }
@@ -531,10 +556,10 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-    if(trk != 0)
+    if(nullptr != trk)
     {
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        if(nullptr != canvas)
         {
             canvas->setMouseRangeTrk(*trk);
         }
@@ -546,15 +571,15 @@ void CGisWidget::editRteByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
-    if(rte != 0)
+    if(nullptr != rte)
     {
         if(!rte->setReadOnlyMode(false))
         {
             return;
         }
 
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+        if(nullptr != canvas)
         {
             canvas->setMouseEditRte(*rte);
         }
@@ -566,7 +591,7 @@ void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
-    if(rte != 0)
+    if(nullptr != rte)
     {
         rte->calc();
     }
@@ -577,7 +602,7 @@ void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
-    if(rte != 0)
+    if(rte != nullptr)
     {
         rte->reset();
     }
@@ -589,7 +614,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(getItemByKey(key));
-    if(area != 0)
+    if(area != nullptr)
     {
         if(!area->setReadOnlyMode(false))
         {
@@ -597,7 +622,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
         }
 
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas != 0)
+        if(canvas != nullptr)
         {
             canvas->setMouseEditArea(*area);
         }
@@ -618,16 +643,16 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
             break;
         }
 
-        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        QTreeWidgetItem *item = treeWks->topLevelItem(i);
 
-        IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project)
+        IGisProject *project = dynamic_cast<IGisProject*>(item);
+        if(nullptr != project)
         {
             project->drawItem(p, viewport, blockedAreas, gis);
             continue;
         }
-        IDevice * device = dynamic_cast<IDevice*>(item);
-        if(device)
+        IDevice *device = dynamic_cast<IDevice*>(item);
+        if(nullptr != device)
         {
             device->drawItem(p, viewport, blockedAreas, gis);
             continue;
@@ -645,13 +670,13 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
         QTreeWidgetItem * item = treeWks->topLevelItem(i);
 
         IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project)
+        if(nullptr != project)
         {
             project->drawLabel(p, viewport, blockedAreas, fm, gis);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
-        if(device)
+        if(nullptr != device)
         {
             device->drawLabel(p, viewport, blockedAreas, fm, gis);
             continue;
@@ -671,13 +696,13 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
         QTreeWidgetItem * item = treeWks->topLevelItem(i);
 
         IGisProject * project = dynamic_cast<IGisProject*>(item);
-        if(project)
+        if(nullptr != project)
         {
             project->drawItem(p, viewport, gis);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
-        if(device)
+        if(nullptr != device)
         {
             device->drawItem(p, viewport, gis);
             continue;

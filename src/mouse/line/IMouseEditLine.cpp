@@ -54,10 +54,7 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
 
 IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
-    , idxHistory(NOIDX)
     , key(key)
-    , doCanvasPanning(false)
-    , lineOp(0)
     , enableStatus(enableStatus)
     , type(type)
 {
@@ -95,25 +92,42 @@ IMouseEditLine::~IMouseEditLine()
     delete scrOptEditLine;
 }
 
+void IMouseEditLine::setCanvasPanning(bool enable)
+{
+    doCanvasPanning = enable;
+
+    if(enable)
+    {
+        scrOptEditLine->toolUndo->hide();
+        scrOptEditLine->toolRedo->hide();
+    }
+    else
+    {
+        scrOptEditLine->toolUndo->show();
+        scrOptEditLine->toolRedo->show();
+    }
+}
+
+
 void IMouseEditLine::commonSetup()
 {
     // create permanent line edit on screen options
     scrOptEditLine = new CScrOptEditLine(this);
-    connect(scrOptEditLine->pushSaveOrig,    SIGNAL(clicked()), this, SLOT(slotCopyToOrig()   ));
-    connect(scrOptEditLine->pushSaveNew,     SIGNAL(clicked()), this, SLOT(slotCopyToNew()    ));
-    connect(scrOptEditLine->pushAbort,       SIGNAL(clicked()), this, SLOT(slotAbort()        ));
+    connect(scrOptEditLine->pushSaveOrig,    &QPushButton::clicked, this, &IMouseEditLine::slotCopyToOrig   );
+    connect(scrOptEditLine->pushSaveNew,     &QPushButton::clicked, this, &IMouseEditLine::slotCopyToNew    );
+    connect(scrOptEditLine->pushAbort,       &QPushButton::clicked, this, &IMouseEditLine::slotAbort        );
 
-    connect(scrOptEditLine->toolMovePoint,   SIGNAL(clicked()), this, SLOT(slotMovePoint()    ));
-    connect(scrOptEditLine->toolSelectRange, SIGNAL(clicked()), this, SLOT(slotSelectRange()  ));
-    connect(scrOptEditLine->toolAddPoint,    SIGNAL(clicked()), this, SLOT(slotAddPoint()     ));
-    connect(scrOptEditLine->toolDeletePoint, SIGNAL(clicked()), this, SLOT(slotDeletePoint()  ));
+    connect(scrOptEditLine->toolMovePoint,   &QPushButton::clicked, this, &IMouseEditLine::slotMovePoint    );
+    connect(scrOptEditLine->toolSelectRange, &QPushButton::clicked, this, &IMouseEditLine::slotSelectRange  );
+    connect(scrOptEditLine->toolAddPoint,    &QPushButton::clicked, this, &IMouseEditLine::slotAddPoint     );
+    connect(scrOptEditLine->toolDeletePoint, &QPushButton::clicked, this, &IMouseEditLine::slotDeletePoint  );
 
-    connect(scrOptEditLine->toolNoRoute,     SIGNAL(clicked()), this, SLOT(slotNoRouting()    ));
-    connect(scrOptEditLine->toolAutoRoute,   SIGNAL(clicked()), this, SLOT(slotAutoRouting()  ));
-    connect(scrOptEditLine->toolVectorRoute, SIGNAL(clicked()), this, SLOT(slotVectorRouting()));
+    connect(scrOptEditLine->toolNoRoute,     &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting    );
+    connect(scrOptEditLine->toolAutoRoute,   &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
+    connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
 
-    connect(scrOptEditLine->toolUndo,        SIGNAL(clicked()), this, SLOT(slotUndo()         ));
-    connect(scrOptEditLine->toolRedo,        SIGNAL(clicked()), this, SLOT(slotRedo()         ));
+    connect(scrOptEditLine->toolUndo,        &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
+    connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
 
     SETTINGS;
     int mode = cfg.value("Route/drawMode",0).toInt();
@@ -199,7 +213,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
 
     // draw magenta arrows (with white background)
     p.setBrush(Qt::magenta);
-    CDraw::arrows(pixelLine, QRectF(), p, 10, 80);
+    CDraw::arrows(pixelLine, QRectF(), p, 10, 80, 1.0);
 
     p.setPen(Qt::NoPen);
     p.setBrush(Qt::white);
@@ -303,7 +317,7 @@ void IMouseEditLine::slotDeletePoint()
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotSelectRange()
@@ -312,7 +326,7 @@ void IMouseEditLine::slotSelectRange()
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotMovePoint()
@@ -321,7 +335,7 @@ void IMouseEditLine::slotMovePoint()
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotAddPoint()
@@ -330,7 +344,7 @@ void IMouseEditLine::slotAddPoint()
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
-    doCanvasPanning = false;
+    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotNoRouting()
@@ -364,7 +378,7 @@ void IMouseEditLine::slotAbortEx(bool showMB)
     bool doAbort = ( idxHistory == 0 ) || !showMB;
     if(!doAbort)
     {
-        doAbort = (QMessageBox::Yes == QMessageBox::question(NULL, "Abort", "Do you really want to abort?\nAny modifications done will be discarded.", QMessageBox::Yes | QMessageBox::No));
+        doAbort = (QMessageBox::Yes == QMessageBox::question(nullptr, "Abort", "Do you really want to abort?\nAny modifications done will be discarded.", QMessageBox::Yes | QMessageBox::No));
     }
 
     if(doAbort)
@@ -379,9 +393,9 @@ void IMouseEditLine::slotCopyToOrig()
     QMutexLocker lock(&IGisItem::mutexItems);
 
     IGisLine * l = getGisLine();
-    if(l != 0)
+    if(l != nullptr)
     {
-        CMainWindow::self().getEelevationAt(points);
+        CMainWindow::self().getElevationAt(points);
         l->setDataFromPolyline(points);
     }
 
@@ -420,6 +434,11 @@ void IMouseEditLine::storeToHistory(const SGisLine& line)
 
 void IMouseEditLine::slotUndo()
 {
+    if(lineOp != nullptr)
+    {
+        lineOp->abortStep();
+    }
+
     if(idxHistory > 0)
     {
         idxHistory--;
@@ -434,6 +453,12 @@ void IMouseEditLine::slotUndo()
 
 void IMouseEditLine::slotRedo()
 {
+    // abort operation
+    if(lineOp != nullptr)
+    {
+        lineOp->abortStep();
+    }
+
     if(idxHistory < (history.size() - 1))
     {
         idxHistory++;

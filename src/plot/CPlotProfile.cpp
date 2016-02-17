@@ -23,16 +23,19 @@
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 
+
 #include <proj_api.h>
 
 CPlotProfile::CPlotProfile(QWidget * parent)
-    : IPlot(0, CPlotData::eAxisLinear, eModeNormal, parent)
+    : IPlot(nullptr, CPlotData::eAxisLinear, eModeNormal, parent)
 {
 }
 
-CPlotProfile::CPlotProfile(CGisItemTrk *trk, mode_e mode, QWidget *parent)
+CPlotProfile::CPlotProfile(CGisItemTrk *trk, CLimit& lim, mode_e mode, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, mode, parent)
+    , limit(&lim)
 {
+    connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
     setWindowTitle(trk->getNameEx());
     updateData();
 }
@@ -41,10 +44,17 @@ CPlotProfile::~CPlotProfile()
 {
 }
 
-void CPlotProfile::setTrack(CGisItemTrk * track)
+void CPlotProfile::setTrack(CGisItemTrk * track, CLimit &lim)
 {
     trk = track;
     trk->registerVisual(this);
+
+    if(limit)
+    {
+        disconnect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
+    }
+    limit = &lim;
+    connect(limit, &CLimit::sigChanged, this, &CPlotProfile::setLimits);
 
     updateData();
 }
@@ -90,7 +100,7 @@ void CPlotProfile::updateData()
             coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
             lineDem << QPointF(trkpt.distance, NOFLOAT);
 
-            if(project == 0 || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
+            if(nullptr == project || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
             {
                 continue;
             }
@@ -107,7 +117,7 @@ void CPlotProfile::updateData()
         }
     }
 
-    CMainWindow::self().getEelevationAt(coords, lineDem);
+    CMainWindow::self().getElevationAt(coords, lineDem);
 
     newLine(lineEle, "GPS");
     if(!lineDem.isEmpty())
@@ -120,7 +130,7 @@ void CPlotProfile::updateData()
 
 void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMouseMove == 0)
+    if(nullptr == ptMouseMove)
     {
         if(posMouse != NOPOINT)
         {
@@ -135,9 +145,19 @@ void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(ptMouseMove->distance);
-        posMouse.ry() = top  +  data->y().val2pt(ptMouseMove->ele);
+        posMouse.rx() = left + data->x().val2pt(ptMouseMove->distance);
+        posMouse.ry() = top  + data->y().val2pt(ptMouseMove->ele);
     }
     update();
 }
 
+void CPlotProfile::setLimits()
+{
+    IPlot::setLimits();
+    data->ymin = limit->getMin() == NOFLOAT ? data->ymin : limit->getMin();
+    data->ymax = limit->getMax() == NOFLOAT ? data->ymax : limit->getMax();
+
+    data->y().setLimits(data->ymin, data->ymax);
+    resetZoom();
+    update();
+}

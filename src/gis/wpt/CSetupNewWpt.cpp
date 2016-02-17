@@ -44,9 +44,9 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
 
     lineName->setText(name);
 
-    connect(linePosition, SIGNAL(textEdited(QString)), this, SLOT(slotEditPosition(QString)));
-    connect(lineName,     SIGNAL(textEdited(QString)), this, SLOT(slotEditName(QString)));
-    connect(toolIcon,     SIGNAL(clicked()),           this, SLOT(slotChangeIcon()));
+    connect(linePosition, &QLineEdit::textEdited, this, &CSetupNewWpt::slotEditPosition);
+    connect(lineName,     &QLineEdit::textEdited, this, &CSetupNewWpt::slotEditName);
+    connect(toolIcon,     &QToolButton::clicked,  this, &CSetupNewWpt::slotChangeIcon);
 
     checkInput();
 }

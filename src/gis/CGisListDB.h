@@ -22,11 +22,10 @@
 #include <QSqlDatabase>
 #include <QTreeWidget>
 
-#include <gis/db/IDBFolder.h>
-
 struct action_t;
 class QMenu;
-class CDBFolderDatabase;
+class IDBFolderSql;
+class QUdpSocket;
 
 class CGisListDB : public QTreeWidget
 {
@@ -39,10 +38,11 @@ public:
     {
         eColumnCheckbox = 0
         ,eColumnName = 1
+        ,eColumnTime = 2
     };
 
     bool hasDatabase(const QString& name);
-    bool event(QEvent * e);
+    bool event(QEvent * e) override;
 
 signals:
     void sigChanged();
@@ -58,12 +58,15 @@ private slots:
     void slotAddDatabase();
     void slotDelDatabase();
     void slotDelItem();
+    void slotUpdateDatabase();
+
+    void slotReadyRead();
 
 private:
     friend class CGisListDBEditLock;
 
-    CDBFolderDatabase *getDataBase(const QString& name);
-    void addDatabase(const QString& name, const QString& filename);
+    IDBFolderSql *getDataBase(const QString& name, const QString& host);
+    void saveDatabaseConfiguration();
 
     int isInternalEdit = 0;
 
@@ -76,6 +79,7 @@ private:
 
     QMenu * menuDatabase;
     QAction * actionDelDatabase;
+    QAction * actionUpdate;
 
     QMenu * menuItem;
     QAction * actionDelItem;
@@ -86,8 +90,9 @@ private:
     QMenu * menuLostFoundItem;
     QAction * actionDelLostFoundItem;
 
+    QUdpSocket * socket;
 
-//        CDBFolderDatabase *  folderDatabase;
+    quint32 lastTan;
 };
 
 #endif //CGISLISTDB_H

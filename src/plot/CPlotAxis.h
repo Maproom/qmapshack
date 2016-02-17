@@ -27,19 +27,22 @@ class CPlotAxis : public QObject
 {
     Q_OBJECT
 public:
-    CPlotAxis(QObject * parent);
-    virtual ~CPlotAxis();
+    CPlotAxis(QObject * parent) : QObject(parent)
+    {
+    }
+
+    virtual ~CPlotAxis()
+    {
+    }
 
     /// tic mark information structure
     struct tic_t
     {
         tic_t()
         {
-            val=0;
-            lbl="";
         }
-        qreal val;
-        QString lbl;
+        qreal val = 0;
+        QString lbl = "";
     };
 
     ///tic type
@@ -70,7 +73,7 @@ public:
     ///get the maximum width of a scale with provided fontmetrics
     virtual int getScaleWidth(const QFontMetrics& m);
     ///get a new ticmark object
-    virtual const tic_t* ticmark(const tic_t * t = NULL);
+    virtual const tic_t* ticmark(const tic_t *t = nullptr);
     /// get the total limits and the used ones
     virtual void getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& useMax);
 
@@ -80,7 +83,7 @@ public:
         {
             return 0;
         }
-        return ( int ) ( ( val - usedMin ) * scale + 0.5 );
+        return qRound(( val - usedMin ) * scale);
     }
 
     inline qreal pt2val( int pt ) const
@@ -89,7 +92,7 @@ public:
         {
             return 0;
         }
-        return ( qreal ) ( ( (qreal)pt - 0.5 ) / scale + usedMin );
+        return qreal(pt) / scale + usedMin;
     }
 
     void setAutoscale(bool on)
@@ -97,10 +100,11 @@ public:
         autoscale = on;
     }
 
-    inline tictype_e getTicType()
+    inline tictype_e getTicType() const
     {
         return ticType;
     }
+
     inline tictype_e setTicType(tictype_e t)
     {
         tictype_e old = ticType;
@@ -135,21 +139,15 @@ protected:
     ///scalefactor
     qreal scale = 1.0;
 
-    ///the actual applied min value
-    qreal usedMin = 0.0;
-    ///the actual applied max value
-    qreal usedMax = 0.0;
-
+    qreal usedMin  = 0.0; ///< the actual applied min value
+    qreal usedMax  = 0.0; ///< the actual applied max value
     qreal limitMin = 0.0;
     qreal limitMax = 0.0;
 
-    ///the interval of the ticmarks
-    qreal interval = 0.0;
+    qreal ticStart = 0.0; ///< start value of the ticmarks
+    qreal interval = 0.0; ///< the interval of the ticmarks
 
-    ///start value of the tic marks
-    qreal ticStart = 0;
 
-    /// this is set to -1 by default
     /**
         a value > 0 will override the dynamic value in getScaleWidth();
      */
@@ -160,13 +158,12 @@ protected:
     ///local copy of the last ticmark object
     tic_t tic;
 
-    /// used by ticmark()
-    bool firstTic = false;
-    /// used by ticmark()
-    bool lastTic = false;
-
     ///points of dimension
     quint32 points = 0;
+
+private:
+    bool firstTic = false; ///< used by ticmark()
+    bool lastTic  = false; ///< used by ticmark()
 };
 
 #endif //CPLOTAXIS_H

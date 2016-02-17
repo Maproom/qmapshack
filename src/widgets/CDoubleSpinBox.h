@@ -35,11 +35,11 @@ signals:
     void valueChangedByStep(double val);
 
 public:
-    CDoubleSpinBox(QWidget * parent = 0);
+    CDoubleSpinBox(QWidget * parent = nullptr);
 
-    void stepBy(int steps);
+    void stepBy(int steps) override;
 
 protected:
-    void focusInEvent(QFocusEvent *event);
+    void focusInEvent(QFocusEvent *event) override;
 };
 #endif // CDOUBLESPINBOX_H

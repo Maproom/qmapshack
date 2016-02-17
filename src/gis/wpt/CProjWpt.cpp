@@ -43,8 +43,8 @@ CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
     IUnit::self().meter2distance(0,val,unit);
     labelDistUnit->setText(unit);
 
-    connect(labelName, SIGNAL(linkActivated(QString)), this, SLOT(slotChangeName()));
-    connect(toolIcon, SIGNAL(clicked()), this, SLOT(slotChangeIcon()));
+    connect(labelName, &QLabel::linkActivated, this, &CProjWpt::slotChangeName);
+    connect(toolIcon,  &QToolButton::clicked,  this, &CProjWpt::slotChangeIcon);
 }
 
 CProjWpt::~CProjWpt()
@@ -79,8 +79,8 @@ void CProjWpt::accept()
         return;
     }
 
-    IGisProject * project = dynamic_cast<IGisProject*>(wpt.parent());
-    if(project == 0)
+    IGisProject *project = dynamic_cast<IGisProject*>(wpt.parent());
+    if(nullptr == project)
     {
         return;
     }

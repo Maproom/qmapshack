@@ -67,12 +67,12 @@ CRouterMapQuest::CRouterMapQuest(QWidget *parent)
     cfg.endGroup();
 
     networkAccessManager = new QNetworkAccessManager(this);
-    connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(slotRequestFinished(QNetworkReply*)));
+    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterMapQuest::slotRequestFinished);
 
     timerCloseStatusMsg = new QTimer(this);
     timerCloseStatusMsg->setSingleShot(true);
     timerCloseStatusMsg->setInterval(5000);
-    connect(timerCloseStatusMsg, SIGNAL(timeout()), this, SLOT(slotCloseStatusMsg()));
+    connect(timerCloseStatusMsg, &QTimer::timeout, this, &CRouterMapQuest::slotCloseStatusMsg);
 }
 
 CRouterMapQuest::~CRouterMapQuest()
@@ -187,8 +187,8 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
 
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
-    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte == 0)
+    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    if(nullptr == rte)
     {
         return;
     }
@@ -358,7 +358,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
     time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte != 0)
+    if(rte != nullptr)
     {
         rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
     }

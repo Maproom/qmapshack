@@ -26,9 +26,9 @@ CCutTrk::CCutTrk(QWidget *parent)
 {
     setupUi(this);
 
-    connect(radioKeepFirst, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
-    connect(radioKeepBoth, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
-    connect(radioKeepSecond, SIGNAL(toggled(bool)), this, SLOT(slotClicked()));
+    connect(radioKeepFirst,  &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+    connect(radioKeepBoth,   &QRadioButton::toggled, this, &CCutTrk::slotClicked);
+    connect(radioKeepSecond, &QRadioButton::toggled, this, &CCutTrk::slotClicked);
 
     SETTINGS;
     cfg.beginGroup("TrackCut");

@@ -36,7 +36,7 @@ ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLin
     timerRouting = new QTimer(this);
     timerRouting->setSingleShot(true);
     timerRouting->setInterval(400);
-    connect(timerRouting, SIGNAL(timeout()), this, SLOT(slotTimeoutRouting()));
+    connect(timerRouting, &QTimer::timeout, this, &ILineOp::slotTimeoutRouting);
 }
 
 ILineOp::~ILineOp()

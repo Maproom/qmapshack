@@ -21,22 +21,29 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/IGisItem.h"
+#include "gis/fit/CFitProject.h"
+#include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.qms)";
-const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx)";
+
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.qms *.slf *.fit)";
+const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
+const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
+const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
-const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS;
+const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
 
 
@@ -56,7 +63,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
         for(int i = myIdx - 1; i >= 0; i--)
         {
             IDevice * device = dynamic_cast<IDevice*>(parent->topLevelItem(i));
-            if(device != 0)
+            if(device != nullptr)
             {
                 newIdx = i;
                 continue;
@@ -87,6 +94,10 @@ IGisProject::~IGisProject()
     delete dlgDetails;
 }
 
+QString IGisProject::html2Dev(const QString& str)
+{
+    return isOnDevice() == IDevice::eTypeGarmin ? IGisItem::removeHtml(str) : str;
+}
 
 bool IGisProject::askBeforClose()
 {
@@ -94,12 +105,21 @@ bool IGisProject::askBeforClose()
     if(isChanged())
     {
         CCanvas::setOverrideCursor(Qt::ArrowCursor, "askBeforClose");
-        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Save project?"), QObject::tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
+
+        res = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Save project?"), tr("<h3>%1</h3>The project was changed. Save before closing it?").arg(getName()), QMessageBox::Save|QMessageBox::No|QMessageBox::Abort, QMessageBox::No);
         CCanvas::restoreOverrideCursor("askBeforClose");
 
         if(res == QMessageBox::Save)
         {
-            save();
+            // some project cannot be saved
+            if(canSave())
+            {
+                save();
+            }
+            else
+            {
+                saveAs();
+            }
         }
     }
 
@@ -112,7 +132,7 @@ bool IGisProject::isVisible() const
     return checkState(CGisListWks::eColumnDecoration) == Qt::Checked;
 }
 
-void IGisProject::genKey()
+void IGisProject::genKey() const
 {
     if(key.isEmpty())
     {
@@ -145,10 +165,10 @@ QPixmap IGisProject::getIcon() const
     return icon(CGisListWks::eColumnIcon).pixmap(22,22);
 }
 
-bool IGisProject::isOnDevice() const
+qint32 IGisProject::isOnDevice() const
 {
     IDevice * device = dynamic_cast<IDevice*>(parent());
-    return device != 0;
+    return device != nullptr ? device->type() : IDevice::eTypeNone;
 }
 
 bool IGisProject::isChanged() const
@@ -194,8 +214,12 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 
 void IGisProject::setSorting(sorting_e s)
 {
+    bool changed = s != sorting;
     sorting = s;
-    setChanged();
+    if(changed)
+    {
+        setChanged();
+    }
 }
 
 void IGisProject::setChanged()
@@ -234,7 +258,7 @@ void IGisProject::updateItems()
     quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;
 
-    PROGRESS_SETUP(QObject::tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
+    PROGRESS_SETUP(tr("%1: Correlate tracks and waypoints.").arg(getName()), 0, total, CMainWindow::getBestWidgetForParent());
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -244,14 +268,87 @@ void IGisProject::updateItems()
             trk->findWaypointsCloseBy(progress, current);
             if(progress.wasCanceled())
             {
-                QString msg = QObject::tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
-                int res = QMessageBox::question(&progress, QObject::tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+                QString msg = tr("<h3>%1</h3>Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?").arg(getNameEx());
+                int res = QMessageBox::question(&progress, tr("Canceled correlation..."), msg, QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
                 noCorrelation = res == QMessageBox::Yes;
                 break;
             }
         }
     }
 }
+
+bool IGisProject::save()
+{
+    if(!canSave())
+    {
+        qWarning() << "This should never be called!";
+        return false;
+    }
+
+    return saveAs(filename, getFileDialogFilter());
+}
+
+bool IGisProject::saveAs(QString fn, QString filter)
+{
+    SETTINGS;
+
+    if(fn.isEmpty())
+    {
+        QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+        // guess the correct extension:
+        // by default use the extension provided by the current format,
+        // otherwise use gpx
+        QString ext = getFileExtension();
+        filter = getFileDialogFilter();
+        if(ext.isEmpty() || !canSave())
+        {
+            ext    = "gpx";
+            filter = IGisProject::filedialogFilterGPX;
+        }
+        path += "/" + getName() + "." + ext;
+
+
+        fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), tr("Save \"%1\" to...").arg(getName()), path, filedialogSaveFilters, &filter);
+
+        if(fn.isEmpty())
+        {
+            return false;
+        }
+    }
+
+    bool res = false;
+    if(filter == getFileDialogFilter())
+    {
+        filename = fn;
+        metadata.name.clear();
+        setupName(QFileInfo(fn).baseName());
+    }
+
+    if(filter == filedialogFilterGPX)
+    {
+        res = CGpxProject::saveAs(fn, *this);
+    }
+    else if(filter == filedialogFilterQMS)
+    {
+        res = CQmsProject::saveAs(fn, *this);
+    }
+    else
+    {
+        return false;
+    }
+
+    if(res && filter == getFileDialogFilter())
+    {
+        markAsSaved();
+    }
+
+    QString path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
+
+    return res;
+}
+
 
 void IGisProject::setupName(const QString &defaultName)
 {
@@ -268,7 +365,7 @@ void IGisProject::markAsSaved()
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -323,24 +420,24 @@ QString IGisProject::getInfo() const
 
     if(!filename.isEmpty())
     {
-        str += QObject::tr("<br/>\nFilename: %1").arg(filename);
+        str += tr("<br/>\nFilename: %1").arg(filename);
     }
 
     if(cntItemsByType[IGisItem::eTypeWpt])
     {
-        str += "<br/>\n" + QObject::tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
+        str += "<br/>\n" + tr("Waypoints: %1").arg(cntItemsByType[IGisItem::eTypeWpt]);
     }
     if(cntItemsByType[IGisItem::eTypeTrk])
     {
-        str += "<br/>\n" + QObject::tr("Tracks: %1").arg(cntItemsByType[IGisItem::eTypeTrk]);
+        str += "<br/>\n" + tr("Tracks: %1").arg(cntItemsByType[IGisItem::eTypeTrk]);
     }
     if(cntItemsByType[IGisItem::eTypeRte])
     {
-        str += "<br/>\n" + QObject::tr("Routes: %1").arg(cntItemsByType[IGisItem::eTypeRte]);
+        str += "<br/>\n" + tr("Routes: %1").arg(cntItemsByType[IGisItem::eTypeRte]);
     }
     if(cntItemsByType[IGisItem::eTypeOvl])
     {
-        str += "<br/>\n" + QObject::tr("Areas: %1").arg(cntItemsByType[IGisItem::eTypeOvl]);
+        str += "<br/>\n" + tr("Areas: %1").arg(cntItemsByType[IGisItem::eTypeOvl]);
     }
 
     return str;
@@ -350,8 +447,8 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
 {
     for(int i = 0; i < childCount(); i++)
     {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        IGisItem *item = dynamic_cast<IGisItem*>(child(i));
+        if(nullptr == item)
         {
             continue;
         }
@@ -361,7 +458,7 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
             return item;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
@@ -374,7 +471,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -396,7 +493,7 @@ void IGisProject::mouseMove(const QPointF& pos)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -411,7 +508,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -420,8 +517,8 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
         {
             if(last != QMessageBox::YesToAll)
             {
-                QString msg = QObject::tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
-                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), QObject::tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
+                QString msg = tr("Are you sure you want to delete '%1' from project '%2'?").arg(item->getName()).arg(text(CGisListWks::eColumnName));
+                last = QMessageBox::question(CMainWindow::getBestWidgetForParent(), tr("Delete..."), msg, QMessageBox::YesToAll|QMessageBox::Cancel|QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok);
                 if((last == QMessageBox::No) || (last == QMessageBox::Cancel))
                 {
                     // as each item in the project has to be unique, we can stop searching.
@@ -451,7 +548,7 @@ void IGisProject::editItemByKey(const IGisItem::key_t& key)
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -472,7 +569,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     key.device  = getDeviceKey();
 
     IGisItem * item2 = getItemByKey(key);
-    if(item2 != 0)
+    if(item2 != nullptr)
     {
         int result = lastResult;
         if(lastResult == CSelectCopyAction::eResultNone)
@@ -518,7 +615,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     case IGisItem::eTypeTrk:
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
-        if(trk != 0)
+        if(trk != nullptr)
         {
             CGisItemTrk * newTrk = new CGisItemTrk(*trk, this, off, clone);
             // if the track is on a device, remove hidden trackpoints
@@ -533,7 +630,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     case IGisItem::eTypeWpt:
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(wpt != 0)
+        if(wpt != nullptr)
         {
             new CGisItemWpt(*wpt, this, off, clone);
         }
@@ -543,7 +640,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     case IGisItem::eTypeRte:
     {
         CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
-        if(rte != 0)
+        if(rte != nullptr)
         {
             new CGisItemRte(*rte, this, off, clone);
         }
@@ -553,7 +650,7 @@ void IGisProject::insertCopyOfItem(IGisItem * item, int off, int& lastResult)
     case IGisItem::eTypeOvl:
     {
         CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(item);
-        if(area != 0)
+        if(area != nullptr)
         {
             new CGisItemOvlArea(*area, this, off, clone);
         }
@@ -577,7 +674,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -596,7 +693,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -621,7 +718,7 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -705,7 +802,7 @@ void IGisProject::updateItemCounters()
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -745,4 +842,26 @@ void IGisProject::blockUpdateItems(bool yes)
     {
         updateItems();
     }
+}
+
+void IGisProject::updateDecoration()
+{
+    int N       = childCount();
+    bool saved  = true;
+
+    for(int i = 0; i < N; i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(nullptr == item)
+        {
+            continue;
+        }
+        if(item->isChanged())
+        {
+            saved = false;
+            break;
+        }
+    }
+
+    setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
 }

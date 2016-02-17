@@ -23,27 +23,28 @@
 #include "plot/IPlot.h"
 #include <functional>
 
+class CLimit;
+
 class CPlot : public IPlot
 {
     Q_OBJECT
 public:
-    CPlot(CGisItemTrk *trk, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget *parent);
-    CPlot(CGisItemTrk *trk, QWidget *parent);
+    CPlot(CGisItemTrk *trk, CLimit& limit, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget *parent);
+    CPlot(CGisItemTrk *trk, CLimit& limit,  QWidget *parent);
     virtual ~CPlot() = default;
 
-    void setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY);
+    void setup(const QString &source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY);
 
-    void setLimits(qreal min, qreal max);
+    void updateData() override;
 
-    void updateData();
+    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
 
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove);
+public slots:
+    void setLimits();
 
 private:
-    void setLimitsOnData(qreal min, qreal max);
+    CLimit& limit;
 
-    qreal maxLimit = NOFLOAT;
-    qreal minLimit = NOFLOAT;
     qreal factor = 1.0;
     fTrkPtGetVal getX = nullptr;
     fTrkPtGetVal getY = nullptr;

@@ -23,6 +23,7 @@
 #include "gis/IGisLine.h"
 #include <routino.h>
 
+#include "gis/fit/CFitStream.h"
 #include <QPen>
 #include <QPointer>
 
@@ -33,6 +34,7 @@ class CScrOptRte;
 
 class CGisItemRte : public IGisItem, public IGisLine
 {
+    Q_DECLARE_TR_FUNCTIONS(CGisItemRte)
 public:
 
     enum focusmode_e
@@ -95,29 +97,32 @@ public:
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);
     CGisItemRte(const CGisItemRte& parentRte, IGisProject *project, int idx, bool clone);
-    CGisItemRte(const history_t& hist, IGisProject * project);
+    CGisItemRte(const history_t& hist, const QString& dbHash, IGisProject * project);
     CGisItemRte(quint64 id, QSqlDatabase& db, IGisProject * project);
     CGisItemRte(const CQlgtRoute& rte1);
     CGisItemRte(const SGisLine& l, const QString &name, IGisProject *project, int idx);
+    CGisItemRte(CFitStream& stream, IGisProject * project);
     virtual ~CGisItemRte();
 
-    QDataStream& operator<<(QDataStream& stream);
-    QDataStream& operator>>(QDataStream& stream) const;
+    IGisItem * createClone() override;
 
-    const QString& getName() const
+    QDataStream& operator<<(QDataStream& stream) override;
+    QDataStream& operator>>(QDataStream& stream) const override;
+
+    const QString& getName() const override
     {
         return rte.name.isEmpty() ? noName : rte.name;
     }
 
-    QString getInfo(bool allowEdit = false) const;
-    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse);
-    QPointF getPointCloseBy(const QPoint& screenPos);
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis);
-    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis);
-    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis);
-    void drawHighlight(QPainter& p);
-    void save(QDomNode& gpx);
-    bool isCloseTo(const QPointF& pos);
+    QString getInfo(bool showName = true) const override;
+    IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
+    QPointF getPointCloseBy(const QPoint& screenPos) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
+    void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
+    void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
+    void drawHighlight(QPainter& p) override;
+    void save(QDomNode& gpx) override;
+    bool isCloseTo(const QPointF& pos) override;
     /**
        @brief Switch user focus on and off.
 
@@ -125,7 +130,7 @@ public:
 
        @param yes   set true to gain focus.
      */
-    void gainUserFocus(bool yes);
+    void gainUserFocus(bool yes) override;
     /**
        @brief Make sure the route has lost focus.
 
@@ -138,7 +143,7 @@ public:
 
        @return True if the route has user focus
      */
-    bool hasUserFocus() const
+    bool hasUserFocus() const override
     {
         return key == keyUserFocus;
     }
@@ -153,19 +158,19 @@ public:
         return keyUserFocus;
     }
 
-    void setDataFromPolyline(const SGisLine& l);
+    void setDataFromPolyline(const SGisLine& l) override;
 
-    void getPolylineFromData(SGisLine &l);
+    void getPolylineFromData(SGisLine &l) override;
 
-    const QString& getComment() const
+    const QString& getComment() const override
     {
         return rte.cmt;
     }
-    const QString& getDescription() const
+    const QString& getDescription() const override
     {
         return rte.desc;
     }
-    const QList<link_t>& getLinks() const
+    const QList<link_t>& getLinks() const override
     {
         return rte.links;
     }
@@ -176,15 +181,15 @@ public:
     }
 
     void setName(const QString& str);
-    void setComment(const QString& str);
-    void setDescription(const QString& str);
-    void setLinks(const QList<link_t>& links);
+    void setComment(const QString& str)       override;
+    void setDescription(const QString& str)   override;
+    void setLinks(const QList<link_t>& links) override;
 
     void calc();
 
     void reset();
 
-    void edit();
+    void edit() override;
 
     QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
 
@@ -195,8 +200,9 @@ public:
 
 private:
     void deriveSecondaryData();
-    void setSymbol();
+    void setSymbol() override;
     void readRte(const QDomNode& xml, rte_t& rte);
+    void readRteFromFit(CFitStream &stream);
     void readRouteDataFromGisLine(const SGisLine &l);
     const subpt_t * getSubPtByIndex(quint32 idx);
 
@@ -215,7 +221,7 @@ private:
     qreal totalDistance = NOFLOAT;
     quint32 totalTime = 0;
 
-    const subpt_t * mouseMoveFocus = 0;
+    const subpt_t * mouseMoveFocus = nullptr;
 
     QPointer<CScrOptRte>  scrOpt;
 };

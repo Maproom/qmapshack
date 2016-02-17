@@ -42,8 +42,8 @@ public:
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
 
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2);
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2) override;
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
 
     void save(QImage& image);
     void setSolid(bool yes)
@@ -51,7 +51,9 @@ public:
         solid = yes;
     }
 
-    bool isZoomed();
+    bool isZoomed() const;
+
+    using INotifyTrk::setMouseFocus;
 
 signals:
     void sigMouseClickState(int);
@@ -76,14 +78,14 @@ protected:
     void setLimits();
     void resetZoom();
 
-    void paintEvent(QPaintEvent * e);
-    void resizeEvent(QResizeEvent * e);
-    void leaveEvent(QEvent * e);
-    void enterEvent(QEvent * e);
-    void keyPressEvent(QKeyEvent *e);
-    void mouseMoveEvent(QMouseEvent * e);
-    void mousePressEvent(QMouseEvent * e);
-    void wheelEvent( QWheelEvent * e);
+    void paintEvent(QPaintEvent  *e) override;
+    void resizeEvent(QResizeEvent *e) override;
+    void leaveEvent(QEvent       *e) override;
+    void enterEvent(QEvent       *e) override;
+    void keyPressEvent(QKeyEvent    *e) override;
+    void mouseMoveEvent(QMouseEvent  *e) override;
+    void mousePressEvent(QMouseEvent  *e) override;
+    void wheelEvent(QWheelEvent  *e) override;
 
 
     void setSizes();
@@ -93,6 +95,8 @@ protected:
     void setSizeYLabel();
     void setSizeTrackInfo();
     void setSizeDrawArea();
+
+    QPointF getBasePoint(int ptx) const;
 
     void draw(QPainter& p);
     void draw();
@@ -109,6 +113,8 @@ protected:
     void drawTags(QPainter& p);
     void drawActivities(QPainter& p);
 
+    bool graphAreaContainsMousePos(QPoint& pos);
+
     static int cnt;
 
     // different draw modes
@@ -117,8 +123,8 @@ protected:
     bool needsRedraw = true;
 
     bool showScale = true;
-    bool thinLine = false;
-    bool solid = false;
+    bool thinLine  = false;
+    bool solid     = false;
 
     QImage buffer;
     QPoint posMouse = NOPOINT;
@@ -137,16 +143,16 @@ protected:
 
     QFontMetrics fm;
 
-    int left = 0;
-    int right = 0;
-    int top = 0;
+    int left   = 0;
+    int right  = 0;
+    int top    = 0;
     int bottom = 0;
 
     int deadAreaX = 0;
     int deadAreaY = 0;
 
-    int fontWidth = 0;
-    int fontHeight = 0;
+    int fontWidth    = 0;
+    int fontHeight   = 0;
     int scaleWidthX1 = 0;
     int scaleWidthY1 = 0;
 
@@ -156,9 +162,9 @@ protected:
     QRect rectIconArea;
     QRect rectTrackInfo;
 
-    static QPen pens[];
-    static QPen pensThin[];
-    static QColor colors[];
+    static const QPen pens[];
+    static const QPen pensThin[];
+    static const QColor colors[];
 
     QMenu * menu;
     QAction * actionResetZoom;
@@ -173,6 +179,10 @@ protected:
     QPointer<CScrOptRangeTrk> scrOptRange;
 
     CMouseDummy dummyMouse;
+
+private:
+    void setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm);
+    QPolygonF getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) const;
 };
 
 #endif //IPLOT_H

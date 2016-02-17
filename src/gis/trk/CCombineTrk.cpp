@@ -34,7 +34,7 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPre
     for(int i = 0; i < N; i++)
     {
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.child(i));
-        if(trk1 == 0)
+        if(nullptr == trk1)
         {
             continue;
         }
@@ -56,7 +56,7 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPre
     foreach(const IGisItem::key_t& key, keysPreSel)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(project.getItemByKey(key));
-        if(gisItem == 0)
+        if(nullptr == gisItem)
         {
             continue;
         }
@@ -69,12 +69,12 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPre
         item->setData(Qt::UserRole + 3, key.device);
     }
 
-    connect(listAvailable, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(listSelected, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(toolSelect, SIGNAL(clicked()), this, SLOT(slotSelect()));
-    connect(toolRemove, SIGNAL(clicked()), this, SLOT(slotRemove()));
-    connect(toolUp, SIGNAL(clicked()), this, SLOT(slotUp()));
-    connect(toolDown, SIGNAL(clicked()), this, SLOT(slotDown()));
+    connect(listAvailable, &QListWidget::itemSelectionChanged, this, &CCombineTrk::slotSelectionChanged);
+    connect(listSelected,  &QListWidget::itemSelectionChanged, this, &CCombineTrk::slotSelectionChanged);
+    connect(toolSelect,    &QToolButton::clicked,              this, &CCombineTrk::slotSelect);
+    connect(toolRemove,    &QToolButton::clicked,              this, &CCombineTrk::slotRemove);
+    connect(toolUp,        &QToolButton::clicked,              this, &CCombineTrk::slotUp);
+    connect(toolDown,      &QToolButton::clicked,              this, &CCombineTrk::slotDown);
 
     listAvailable->setCurrentItem(0);
     listSelected->setCurrentItem(0);
@@ -96,7 +96,7 @@ void CCombineTrk::accept()
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
         key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
         CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
-        if(trk1 == 0)
+        if(nullptr == trk1)
         {
             continue;
         }
@@ -108,14 +108,13 @@ void CCombineTrk::accept()
 
 void CCombineTrk::slotSelectionChanged()
 {
-    QListWidgetItem * item;
-    item = listAvailable->currentItem();
-    toolSelect->setEnabled(item != 0);
+    QListWidgetItem * item = listAvailable->currentItem();
+    toolSelect->setEnabled(item != nullptr);
 
     item = listSelected->currentItem();
-    toolRemove->setEnabled(item != 0);
-    toolUp->setEnabled(item != 0);
-    toolDown->setEnabled(item != 0);
+    toolRemove->setEnabled(item != nullptr);
+    toolUp->setEnabled(item != nullptr);
+    toolDown->setEnabled(item != nullptr);
 
     if(item)
     {
@@ -134,10 +133,9 @@ void CCombineTrk::slotSelectionChanged()
 
 void CCombineTrk::slotSelect()
 {
-    QListWidgetItem * item;
-    item = listAvailable->currentItem();
+    QListWidgetItem *item = listAvailable->currentItem();
 
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -151,10 +149,9 @@ void CCombineTrk::slotSelect()
 
 void CCombineTrk::slotRemove()
 {
-    QListWidgetItem * item;
-    item = listSelected->currentItem();
+    QListWidgetItem *item = listSelected->currentItem();
 
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -225,8 +222,8 @@ void CCombineTrk::updatePreview()
         key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
 
 
-        CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
-        if(trk1 == 0)
+        CGisItemTrk *trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
+        if(nullptr == trk1)
         {
             continue;
         }

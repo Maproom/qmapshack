@@ -20,12 +20,12 @@
 #define IGISPROJECT_H
 
 #include "gis/IGisItem.h"
+#include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
 #include <QTreeWidgetItem>
 
 class CGisListWks;
-class IGisItem;
 class CGisDraw;
 class QDataStream;
 class CDetailsPrj;
@@ -33,6 +33,7 @@ class IDevice;
 
 class IGisProject : public QTreeWidgetItem
 {
+    Q_DECLARE_TR_FUNCTIONS(IGisProject)
 public:
     enum type_e
     {
@@ -42,6 +43,8 @@ public:
         , eTypeDb
         , eTypeLostFound
         , eTypeTwoNav
+        , eTypeSlf       // the Sigma Log Format
+        , eTypeFit
     };
 
     enum sorting_e
@@ -87,11 +90,13 @@ public:
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;
     static const QString filedialogFilterQMS;
+    static const QString filedialogFilterSLF;
+    static const QString filedialogFilterFIT;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
-    IGisProject(type_e type, const QString& filename, CGisListWks * parent);
-    IGisProject(type_e type, const QString &filename, IDevice *parent);
+    IGisProject(type_e type, const QString &filename, CGisListWks *parent);
+    IGisProject(type_e type, const QString &filename, IDevice     *parent);
     virtual ~IGisProject();
 
     /**
@@ -116,13 +121,32 @@ public:
     void edit();
 
     /**
+       @brief Returns true if a project of given format can be saved, false if it cannot be saved (just as .slf atm)
+     */
+    virtual bool canSave() const
+    {
+        return false;
+    }
+
+    virtual const QString getFileDialogFilter() const
+    {
+        return QString();
+    }
+
+    virtual const QString getFileExtension() const
+    {
+        return QString();
+    }
+
+    /**
        @brief Save the project using it's native format.
      */
-    virtual bool save() = 0;
+    virtual bool save();
+
     /**
        @brief Save the project selecting one of the available formats.
      */
-    virtual bool saveAs() = 0;
+    bool saveAs(QString fn = QString(), QString filter = QString());
 
     virtual void setFilename(const QString& fn)
     {
@@ -151,7 +175,7 @@ public:
        @brief Get unique project key.
        @return A MD5 hash string
      */
-    const QString& getKey()
+    const QString& getKey() const
     {
         genKey();
         return key;
@@ -244,7 +268,7 @@ public:
     void getItemsByPos(const QPointF& pos, QList<IGisItem*>& items);
 
 
-    int getItemCountByType(IGisItem::type_e type)
+    int getItemCountByType(IGisItem::type_e type) const
     {
         return cntItemsByType[type];
     }
@@ -270,7 +294,7 @@ public:
         return totalElapsedSecondsMoving;
     }
 
-    bool doCorrelation()
+    bool doCorrelation() const
     {
         return !noCorrelation;
     }
@@ -320,7 +344,7 @@ public:
 
        @return True if project is valid
      */
-    bool  isValid() const
+    bool isValid() const
     {
         return valid;
     }
@@ -333,9 +357,9 @@ public:
 
     /**
        @brief Test if this project is handled by a device
-       @return True if handled by a device
+       @return The device type (IDevice::type_e). IDevice::eTypeNone if the project is not stored on a device.
      */
-    bool isOnDevice() const;
+    qint32 isOnDevice() const;
 
     /**
        @brief Test if project has been changed
@@ -365,7 +389,7 @@ public:
        @param stream the binary data stream
        @return The stream object.
      */
-    virtual QDataStream& operator>>(QDataStream& stream);
+    virtual QDataStream& operator>>(QDataStream& stream) const;
 
     /**
        @brief writeMetadata
@@ -417,12 +441,23 @@ public:
     }
 
 protected:
-    void genKey();
+    void genKey() const;
     virtual void setupName(const QString& defaultName);
     void markAsSaved();
     void readMetadata(const QDomNode& xml, metadata_t& metadata);
     void updateItems();
     void updateItemCounters();
+    void updateDecoration();
+
+    /**
+       @brief Converts a string with HTML tags to a string without HTML depending on the device
+
+       Some devices e.g. Garmin can not handle HTML.
+
+       @param str   a string
+       @return A string with HTML removed depending on the device
+     */
+    QString html2Dev(const QString& str);
 
     // Those are the URIs of the GPX extensions we support
     static const QString gpxx_ns;
@@ -435,29 +470,29 @@ protected:
     static const QString gpx_ns;
     static const QString xsi_ns;
 
+    QPointer<CDetailsPrj> dlgDetails;
+
     type_e type;
-    QString key;
+    mutable QString key;
     QString filename;
-    bool valid = false;
-    bool noUpdate = false;
+    bool valid         = false;
+    bool noUpdate      = false;
     bool noCorrelation = false;
 
     metadata_t metadata;
     QString nameSuffix;
 
-    QPointer<CDetailsPrj> dlgDetails;
-
     sorting_e sorting = eSortNone;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 
-    qint32 cntTrkPts = 0;
-    qint32 cntWpts = 0;
+    qint32 cntTrkPts                 = 0;
+    qint32 cntWpts                   = 0;
 
-    qreal totalDistance = 0;
-    qreal totalAscend = 0;
-    qreal totalDescend = 0;
-    quint32 totalElapsedSeconds = 0;
+    qreal totalDistance             = 0;
+    qreal totalAscend               = 0;
+    qreal totalDescend              = 0;
+    quint32 totalElapsedSeconds       = 0;
     quint32 totalElapsedSecondsMoving = 0;
 
     QString hashTrkWpt[2];

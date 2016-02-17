@@ -208,7 +208,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     QFile file(filename);
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to open %1.").arg(filename), QMessageBox::Abort);
         return false;
     }
 
@@ -344,7 +344,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
         return false;
     }
     QTextStream in(&file);
@@ -373,7 +373,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             QString name  = line.mid(1).simplified();
             if(name != "WGS 84")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
             break;
@@ -384,7 +384,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             QString name  = line.mid(1).simplified();
             if(name != "1")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
             break;
@@ -417,7 +417,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
             if(values.size() < 8)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
 
@@ -557,7 +557,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
     QFile file(filename);
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
+        QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to open %1.").arg(filename),QMessageBox::Abort,QMessageBox::Abort);
         return false;
     }
     QTextStream in(&file);
@@ -585,7 +585,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QString name  = line.mid(1).simplified();
             if(name != "WGS 84")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
             break;
@@ -596,7 +596,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QString name  = line.mid(1).simplified();
             if(name != "1")
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Only support lon/lat WGS 84 format."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
             break;
@@ -614,7 +614,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(values.size() < 8)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
 
@@ -642,7 +642,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
 
             if(values.size() < 10)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
 
@@ -716,7 +716,7 @@ bool CTwoNavProject::loadWpts(const QString& filename, const QDir& dir)
             QStringList values = line.mid(1).simplified().split(',', QString::KeepEmptyParts);
             if(values.size() < 1)
             {
-                QMessageBox::information(CMainWindow::getBestWidgetForParent(),QObject::tr("Error..."), QObject::tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
+                QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
             }
 

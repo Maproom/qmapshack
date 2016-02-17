@@ -49,7 +49,7 @@ public:
     /// primary route, just the basic points like A to B via C
     QVector<pt_t> priRoute;
 
-    quint32 ttime;
+    quint32 ttime = 0;
 
     QString iconString;
 };

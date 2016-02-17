@@ -167,7 +167,7 @@ const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& poin
             return &item;
         }
     }
-    return 0;
+    return nullptr;
 }
 
 void CScrOptUnclutter::draw(QPainter& p)

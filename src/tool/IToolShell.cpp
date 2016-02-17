@@ -24,10 +24,11 @@ IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
     : QWidget(parent)
     , text(textBrowser)
 {
-    connect(&cmd, SIGNAL(readyReadStandardError()),            this, SLOT(slotStderr()));
-    connect(&cmd, SIGNAL(readyReadStandardOutput()),           this, SLOT(slotStdout()));
-    connect(&cmd, SIGNAL(finished(int, QProcess::ExitStatus)), this, SLOT(slotFinished(int, QProcess::ExitStatus)));
-    connect(&cmd, SIGNAL(error(QProcess::ProcessError)),       this, SLOT(slotError(QProcess::ProcessError)));
+    connect(&cmd, &QProcess::readyReadStandardError,  this, &IToolShell::slotStderr);
+    connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
+
+    connect(&cmd, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), this, &IToolShell::slotFinished);
+    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)   >(&QProcess::error),    this, &IToolShell::slotError);
 }
 
 IToolShell::~IToolShell()

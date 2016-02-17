@@ -16,27 +16,33 @@
 
 **********************************************************************************************/
 
+#include "helpers/CLimit.h"
 #include "plot/CPlot.h"
 #include "plot/CPlotAxis.h"
 
-CPlot::CPlot(CGisItemTrk * trk, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget * parent)
+CPlot::CPlot(CGisItemTrk * trk,  CLimit& limit, CPlotData::axistype_e type, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY, QWidget * parent)
     : IPlot(trk, type, eModeNormal, parent)
+    , limit(limit)
     , factor(factor)
     , getX(getX)
     , getY(getY)
 {
+    connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);
+
     setXLabel(xLabel);
     setYLabel(yLabel);
 
     updateData();
 }
 
-CPlot::CPlot(CGisItemTrk *trk, QWidget *parent)
+CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, QWidget *parent)
     : IPlot(trk, CPlotData::eAxisLinear, eModeNormal, parent)
+    , limit(limit)
 {
+    connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);
 }
 
-void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
+void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
 {
     data->setXAxisType(type);
     setXLabel(xLabel);
@@ -44,16 +50,10 @@ void CPlot::setup(CPlotData::axistype_e type, const QString &xLabel, const QStri
     factor = f;
     getX = funcGetX;
     getY = funcGetY;
+    limit.setSource(source);
     updateData();
 }
 
-void CPlot::setLimits(qreal min, qreal max)
-{
-    minLimit = min;
-    maxLimit = max;
-
-    setLimitsOnData(minLimit, maxLimit);
-}
 
 void CPlot::updateData()
 {
@@ -72,12 +72,8 @@ void CPlot::updateData()
     {
         foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-            {
-                continue;
-            }
-
-            if(getY(trkpt) != NOFLOAT)
+            if(!(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+               && getY(trkpt) != NOFLOAT)
             {
                 line << QPointF(getX(trkpt), getY(trkpt) * factor);
             }
@@ -85,12 +81,12 @@ void CPlot::updateData()
     }
 
     newLine(line, "GPS");
-    setLimitsOnData(minLimit, maxLimit);
+    setLimits();
 }
 
 void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
-    if(ptMouseMove == 0 ||  getX == nullptr || getY == nullptr)
+    if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
     {
         if(posMouse != NOPOINT)
         {
@@ -111,11 +107,11 @@ void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
     update();
 }
 
-void CPlot::setLimitsOnData(qreal min, qreal max)
+void CPlot::setLimits()
 {
     IPlot::setLimits();
-    data->ymin = min == NOFLOAT ? data->ymin : min;
-    data->ymax = max == NOFLOAT ? data->ymax : max;
+    data->ymin = limit.getMin() == NOFLOAT ? data->ymin : limit.getMin();
+    data->ymax = limit.getMax() == NOFLOAT ? data->ymax : limit.getMax();
 
     data->y().setLimits(data->ymin, data->ymax);
     resetZoom();

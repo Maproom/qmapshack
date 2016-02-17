@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QString& model, QTreeWidget *parent)
-    : IDevice(path, key, parent)
+    : IDevice(path, eTypeTwoNav, key, parent)
 {
     setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
     setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));

@@ -26,7 +26,7 @@ public:
     CGarminStrTbl6(const quint16 codepage, const quint8 mask, QObject * parent);
     virtual ~CGarminStrTbl6();
 
-    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info);
+    void get(CFileExt& file, quint32 offset, type_e t, QStringList& info) override;
 
 private:
     static const char str6tbl1[];
@@ -35,10 +35,10 @@ private:
 
     void fill();
     /// temp shift reg buffer
-    quint32 reg;
+    quint32 reg = 0;
     /// bits in buffer
-    quint32 bits;
+    quint32 bits = 0;
     /// pointer to current data;
-    const quint8 * p;
+    const quint8 * p = nullptr;
 };
 #endif                           //CGARMINSTRTBL6_H

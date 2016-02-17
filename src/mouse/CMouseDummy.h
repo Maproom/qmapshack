@@ -19,7 +19,7 @@
 #ifndef CMOUSEDUMMY_H
 #define CMOUSEDUMMY_H
 
-#include <mouse/IMouse.h>
+#include "mouse/IMouse.h"
 
 
 class CMouseDummy : public IMouse
@@ -28,19 +28,19 @@ public:
     CMouseDummy();
     virtual ~CMouseDummy();
 
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override
     {
     }
-    void mousePressEvent(QMouseEvent * e)
+    void mousePressEvent(QMouseEvent * e) override
     {
     }
-    void mouseMoveEvent(QMouseEvent * e)
+    void mouseMoveEvent(QMouseEvent * e) override
     {
     }
-    void mouseReleaseEvent(QMouseEvent *e)
+    void mouseReleaseEvent(QMouseEvent *e) override
     {
     }
-    virtual void wheelEvent(QWheelEvent * e)
+    void wheelEvent(QWheelEvent * e) override
     {
     }
 };

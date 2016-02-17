@@ -16,12 +16,14 @@
 
 **********************************************************************************************/
 
+#include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 
-void CDemTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
+void CDemTreeWidget::dragMoveEvent( QDragMoveEvent  * event )
 {
     CDemItem * item = dynamic_cast<CDemItem*>(itemAt(event->pos()));
 
@@ -36,7 +38,7 @@ void CDemTreeWidget::dragMoveEvent ( QDragMoveEvent  * event )
     }
 }
 
-void CDemTreeWidget::dropEvent ( QDropEvent  * event )
+void CDemTreeWidget::dropEvent( QDropEvent  * event )
 {
     CDemItem * item = dynamic_cast<CDemItem*>(currentItem());
     if(item)
@@ -60,13 +62,20 @@ CDemList::CDemList(QWidget *parent)
 {
     setupUi(this);
 
-    connect(treeWidget, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
-    connect(actionActivate, SIGNAL(triggered()), this, SLOT(slotActivate()));
+    connect(treeWidget,     &CDemTreeWidget::customContextMenuRequested, this, &CDemList::slotContextMenu);
+    connect(actionMoveUp,   &QAction::triggered,                         this, &CDemList::slotMoveUp);
+    connect(actionMoveDown, &QAction::triggered,                         this, &CDemList::slotMoveDown);
+    connect(actionActivate, &QAction::triggered,                         this, &CDemList::slotActivate);
+    connect(actionReloadDem, &QAction::triggered,                        this, &CDemList::slotReloadDem);
 
-    connect(treeWidget, SIGNAL(sigChanged()), SIGNAL(sigChanged()));
+    connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
+    menu->addAction(actionMoveUp);
+    menu->addAction(actionMoveDown);
+    menu->addSeparator();
+    menu->addAction(actionReloadDem);
 }
 
 CDemList::~CDemList()
@@ -117,7 +126,7 @@ void CDemList::updateHelpText()
 void CDemList::slotActivate()
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -131,12 +140,56 @@ void CDemList::slotActivate()
     updateHelpText();
 }
 
+void CDemList::slotMoveUp()
+{
+    CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+    if(item == nullptr)
+    {
+        return;
+    }
+
+    int index = treeWidget->indexOfTopLevelItem(item);
+    if(index == NOIDX)
+    {
+        return;
+    }
+
+    item->showChildren(false);
+    treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index-1, item);
+    item->showChildren(true);
+    treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
+}
+
+void CDemList::slotMoveDown()
+{
+    CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
+    if(item == nullptr)
+    {
+        return;
+    }
+
+    int index = treeWidget->indexOfTopLevelItem(item);
+    if(index == NOIDX)
+    {
+        return;
+    }
+
+    item->showChildren(false);
+    treeWidget->takeTopLevelItem(index);
+    treeWidget->insertTopLevelItem(index+1, item);
+    item->showChildren(true);
+    treeWidget->setCurrentItem(0);
+    emit treeWidget->sigChanged();
+}
+
 
 void CDemList::slotContextMenu(const QPoint& point)
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
 
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -144,7 +197,15 @@ void CDemList::slotContextMenu(const QPoint& point)
     actionActivate->setChecked(activated);
     actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
 
+    CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
+    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != 0));
+    actionMoveDown->setEnabled(activated && item1 && item1->isActivated());
+
     QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);
 }
 
+void CDemList::slotReloadDem()
+{
+    CDemDraw::setupDemPath(CDemDraw::getDemPaths());
+}

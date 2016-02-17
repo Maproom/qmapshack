@@ -27,8 +27,8 @@ CPhotoAlbum::CPhotoAlbum(QWidget *parent)
 {
     setupUi(this);
     setFocusPolicy(Qt::WheelFocus);
-    connect(toolLeft, SIGNAL(clicked()), this, SLOT(slotLeft()));
-    connect(toolRight, SIGNAL(clicked()), this, SLOT(slotRight()));
+    connect(toolLeft,  &QToolButton::clicked, this, &CPhotoAlbum::slotLeft);
+    connect(toolRight, &QToolButton::clicked, this, &CPhotoAlbum::slotRight);
 }
 
 CPhotoAlbum::~CPhotoAlbum()

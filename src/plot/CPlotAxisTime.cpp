@@ -20,22 +20,10 @@
 
 #include <QtWidgets>
 
-CPlotAxisTime::CPlotAxisTime(QObject * parent)
-    : CPlotAxis(parent)
-{
-}
-
-
-CPlotAxisTime::~CPlotAxisTime()
-{
-}
-
-
-void CPlotAxisTime::calc()
+void CPlotAxisTime::calc() /* override */
 {
     int dSec  = usedMax - usedMin;
     ticStart  = usedMin;
-    strFormat = "hh:mm:ss";
 
     // abort if the xRange has a length of 0
     if(0 == dSec)
@@ -124,7 +112,7 @@ void CPlotAxisTime::calc()
 }
 
 
-const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t )
+const CPlotAxis::tic_t* CPlotAxisTime::ticmark( const tic_t * t ) /* override */
 {
     const tic_t * _tic_ = CPlotAxis::ticmark(t);
     if(_tic_)

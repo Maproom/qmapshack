@@ -36,9 +36,9 @@ public:
     IMap(quint32 features, CMapDraw * parent);
     virtual ~IMap();
 
-    void saveConfig(QSettings& cfg);
+    void saveConfig(QSettings& cfg) override;
 
-    void loadConfig(QSettings& cfg);
+    void loadConfig(QSettings& cfg) override;
 
     enum features_e
     {
@@ -54,7 +54,7 @@ public:
        @brief Test if map has been loaded successfully
        @return Return false if map is not loaded
      */
-    bool activated()
+    bool activated() const
     {
         return isActivated;
     }
@@ -94,54 +94,54 @@ public:
        @brief Return copyright notice if any
        @return If no copyright notice has been decoded the string will be empty
      */
-    const QString& getCopyright()
+    const QString& getCopyright() const
     {
         return copyright;
     }
 
-    bool hasFeatureVisibility()
+    bool hasFeatureVisibility() const
     {
         return flagsFeature & eFeatVisibility;
     }
-    bool hasFeatureVectorItems()
+    bool hasFeatureVectorItems() const
     {
         return flagsFeature & eFeatVectorItems;
     }
-    bool hasFeatureTileCache()
+    bool hasFeatureTileCache() const
     {
         return flagsFeature & eFeatTileCache;
     }
-    bool hasFeatureLayers()
+    bool hasFeatureLayers() const
     {
         return flagsFeature & eFeatLayers;
     }
 
-    bool getShowPolygons()
+    bool getShowPolygons() const
     {
         return showPolygons;
     }
 
-    bool getShowPolylines()
+    bool getShowPolylines() const
     {
         return showPolylines;
     }
 
-    bool getShowPOIs()
+    bool getShowPOIs() const
     {
         return showPOIs;
     }
 
-    const QString& getCachePath()
+    const QString& getCachePath() const
     {
         return cachePath;
     }
 
-    qint32 getCacheSize()
+    qint32 getCacheSize() const
     {
         return cacheSizeMB;
     }
 
-    qint32 getCacheExpiration()
+    qint32 getCacheExpiration() const
     {
         return cacheExpiration;
     }
@@ -193,8 +193,8 @@ public slots:
 
 
 protected:
-    void convertRad2M(QPointF &p);
-    void convertM2Rad(QPointF &p);
+    void convertRad2M(QPointF &p) const;
+    void convertM2Rad(QPointF &p) const;
 
 
     /**

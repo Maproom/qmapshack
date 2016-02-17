@@ -51,20 +51,24 @@ public:
     IGisProject * getProjectByKey(const QString& key);
     CDBProject * getProjectById(quint64 id, const QString& db);
 
-    bool event(QEvent * e);
+    bool event(QEvent * e) override;
+
+    void addProject(IGisProject *proj);
 
     void removeDevice(const QString& key);
+
+public slots:
+    void slotLoadWorkspace();
 
 signals:
     void sigChanged();
 
 protected:
-    void dragMoveEvent (QDragMoveEvent  * e );
-    void dropEvent ( QDropEvent  * e );
+    void dragMoveEvent(QDragMoveEvent *e) override;
+    void dropEvent(QDropEvent     *e) override;
 
 private slots:
     void slotSaveWorkspace();
-    void slotLoadWorkspace();
     void slotContextMenu(const QPoint& point);
     void slotSaveProject();
     void slotSaveAsProject();
@@ -97,6 +101,7 @@ private slots:
     void slotSyncWksDev();
     void slotSyncDevWks();
     void slotRteFromWpt();
+    void slotSyncDB();
 
 
 private:
@@ -104,6 +109,7 @@ private:
     void initDB();
     void migrateDB(int version);
     void migrateDB1to2();
+    void migrateDB2to3();
     void setVisibilityOnMap(bool visible);
 
     QSqlDatabase db;
@@ -116,6 +122,7 @@ private:
     QAction  * actionShowOnMap;
     QAction  * actionHideFrMap;
     QAction  * actionSyncWksDev;
+    QAction  * actionSyncDB;
 
 
     QMenu * menuProjectDev;
@@ -147,14 +154,14 @@ private:
     QAction * actionEditArea;
     QAction * actionRteFromWpt;
 
-    QMenu * menuNone = 0;
+    QMenu * menuNone = nullptr;
 
     QPointer<CSearchGoogle> searchGoogle;
 
     bool saveOnExit = true;
     qint32 saveEvery = 5;
 
-    IDeviceWatcher * deviceWatcher = 0;
+    IDeviceWatcher * deviceWatcher = nullptr;
 };
 
 #endif //CGISLISTWKS_H

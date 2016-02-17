@@ -161,9 +161,9 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     QFileInfo fi(filename);
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
 
-    accessManager   = new QNetworkAccessManager(parent->thread());
-    connect(this, SIGNAL(sigQueueChanged()), this, SLOT(slotQueueChanged()));
-    connect(accessManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(slotRequestFinished(QNetworkReply*)));
+    accessManager = new QNetworkAccessManager(parent->thread());
+    connect(this,          &CMapTMS::sigQueueChanged,        this, &CMapTMS::slotQueueChanged);
+    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapTMS::slotRequestFinished);
 
     name = fi.baseName().replace("_", " ");
 
@@ -175,7 +175,7 @@ CMapTMS::~CMapTMS()
 //    map->reportStatusToCanvas(name, "");
 }
 
-void CMapTMS::getLayers(QListWidget& list)
+void CMapTMS::getLayers(QListWidget& list) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -193,11 +193,11 @@ void CMapTMS::getLayers(QListWidget& list)
         item->setData(Qt::UserRole, i++);
     }
 
-    connect(&list, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(slotLayersChanged(QListWidgetItem*)));
+    connect(&list, &QListWidget::itemChanged, this, &CMapTMS::slotLayersChanged);
 }
 
 
-void CMapTMS::saveConfig(QSettings& cfg)
+void CMapTMS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -249,9 +249,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
     }
 }
 
-
-
-void CMapTMS::configureCache()
+void CMapTMS::configureCache() /* override */
 {
     QMutexLocker lock(&mutex);
 
@@ -416,7 +414,7 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
 }
 
 
-void CMapTMS::draw(IDrawContext::buffer_t& buf)
+void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
 {
     QMutexLocker lock(&mutex);
 

@@ -41,7 +41,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtWpt& wpt)
     if(strncmp(magic,"QLWpt   ",9))
     {
         dev->seek(pos);
-        //         throw(QObject::tr("This is not waypoint data."));
+        //         throw(tr("This is not waypoint data."));
         return s;
     }
 
@@ -219,7 +219,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
     s1 << wpt.description;
     s1 << wpt.urlname;
     s1 << wpt.type;
-    s1 << QString("");
+    s1 << QString();
     s1 << wpt.selected;
     s1 << wpt.dir;
 

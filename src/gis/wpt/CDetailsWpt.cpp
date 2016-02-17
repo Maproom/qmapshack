@@ -41,19 +41,21 @@ CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
 
     toolLock->setDisabled(wpt.isOnDevice());
 
-    connect(labelName,      SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelPosition,  SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelElevation, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(labelProximity, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-    connect(textCmtDesc,    SIGNAL(anchorClicked(QUrl)),    this, SLOT(slotLinkActivated(QUrl)));
-    connect(toolIcon,       SIGNAL(clicked()),              this, SLOT(slotChangeIcon()));
-    connect(toolLock,       SIGNAL(toggled(bool)),          this, SLOT(slotChangeReadOnlyMode(bool)));
+    connect(labelPosition,  &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelElevation, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(labelProximity, &QLabel::linkActivated,          this,       static_cast<void (CDetailsWpt::*)(const QString&)>(&CDetailsWpt::slotLinkActivated));
+    connect(textCmtDesc,    &QTextBrowser::anchorClicked,    this,       static_cast<void (CDetailsWpt::*)(const QUrl&)   >(&CDetailsWpt::slotLinkActivated));
 
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(lineName,       &CLineEdit::textEdited,          this,       &CDetailsWpt::slotNameChanged);
+    connect(lineName,       &CLineEdit::editingFinished,     this,       &CDetailsWpt::slotNameChangeFinished);
+    connect(toolIcon,       &QToolButton::clicked,           this,       &CDetailsWpt::slotChangeIcon);
+    connect(toolLock,       &QToolButton::toggled,           this,       &CDetailsWpt::slotChangeReadOnlyMode);
 
-    connect(toolAddImage, SIGNAL(clicked()), photoAlbum, SLOT(slotAddImage()));
-    connect(toolDelImage, SIGNAL(clicked()), photoAlbum, SLOT(slotDelImage()));
-    connect(photoAlbum, SIGNAL(sigChanged(QList<CGisItemWpt::image_t>)), this, SLOT(slotChangedImages(QList<CGisItemWpt::image_t>)));
+    connect(listHistory,    &CHistoryListWidget::sigChanged, this,       &CDetailsWpt::setupGui);
+
+    connect(toolAddImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotAddImage);
+    connect(toolDelImage,   &QToolButton::clicked,           photoAlbum, &CPhotoAlbum::slotDelImage);
+    connect(photoAlbum,     &CPhotoAlbum::sigChanged,        this,       &CDetailsWpt::slotChangedImages);
 }
 
 CDetailsWpt::~CDetailsWpt()
@@ -81,7 +83,8 @@ void CDetailsWpt::setupGui()
     toolIcon->setEnabled(!isReadOnly);
     toolIcon->setIcon(wpt.getIcon());
     toolIcon->setObjectName(wpt.getIconName());
-    labelName->setText(IGisItem::toLink(isReadOnly, "name", wpt.getName(), ""));
+    lineName->setReadOnly(isReadOnly);
+    lineName->setText(wpt.getName());
     labelPosition->setText(IGisItem::toLink(isReadOnly, "position", strPos, ""));
 
     labelTainted->setVisible(wpt.isTainted());
@@ -127,18 +130,28 @@ void CDetailsWpt::setupGui()
     originator = false;
 }
 
+void CDetailsWpt::slotNameChanged(const QString &name)
+{
+    setWindowTitle(name);
+}
+
+void CDetailsWpt::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != wpt.getName())
+    {
+        wpt.setName(name);
+        setupGui();
+    }
+}
+
 void CDetailsWpt::slotLinkActivated(const QString& link)
 {
-    if(link == "name")
-    {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new waypoint name."), QLineEdit::Normal, wpt.getName());
-        if(name.isEmpty())
-        {
-            return;
-        }
-        wpt.setName(name);
-    }
-    else if(link == "elevation")
+    if(link == "elevation")
     {
         QVariant var(wpt.getElevation());
         CElevationDialog dlg(this, var, QVariant(NOINT), wpt.getPosition());

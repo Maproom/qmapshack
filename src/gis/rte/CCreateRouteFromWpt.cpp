@@ -36,8 +36,8 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
 
     foreach(const IGisItem::key_t& key, keys)
     {
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
-        if(wpt == 0)
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+        if(nullptr == wpt)
         {
             continue;
         }
@@ -49,9 +49,9 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
         item->setData(Qt::UserRole + 0, QPointF(wpt->getPosition()*DEG_TO_RAD));
     }
 
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(toolUp, SIGNAL(clicked()), this, SLOT(slotUp()));
-    connect(toolDown, SIGNAL(clicked()), this, SLOT(slotDown()));
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, &CCreateRouteFromWpt::slotSelectionChanged);
+    connect(toolUp,     &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotUp);
+    connect(toolDown,   &QToolButton::clicked,              this, &CCreateRouteFromWpt::slotDown);
 }
 
 CCreateRouteFromWpt::~CCreateRouteFromWpt()
@@ -62,14 +62,14 @@ void CCreateRouteFromWpt::accept()
 {
     QDialog::accept();
 
-    QString name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new route name."), QLineEdit::Normal, "");
+    QString name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new route name."), QLineEdit::Normal, "");
     if(name.isEmpty())
     {
         return;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    IGisProject *project = CGisWidget::self().selectProject();
+    if(nullptr == project)
     {
         return;
     }
@@ -88,7 +88,7 @@ void CCreateRouteFromWpt::accept()
 void CCreateRouteFromWpt::slotSelectionChanged()
 {
     QListWidgetItem * item = listWidget->currentItem();
-    if(item != 0)
+    if(item != nullptr)
     {
         int row = listWidget->row(item);
         toolUp->setEnabled(row != 0);

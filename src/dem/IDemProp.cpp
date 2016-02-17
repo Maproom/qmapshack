@@ -24,7 +24,7 @@ IDemProp::IDemProp(IDem *demfile, CDemDraw *dem)
     : demfile(demfile)
     , dem(dem)
 {
-    connect(demfile, SIGNAL(sigPropertiesChanged()), this, SLOT(slotPropertiesChanged()));
+    connect(demfile, &IDem::sigPropertiesChanged, this, &IDemProp::slotPropertiesChanged);
 }
 
 IDemProp::~IDemProp()

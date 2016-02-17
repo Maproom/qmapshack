@@ -33,7 +33,7 @@ public:
 private slots:
     void slotDeviceAdded(const QDBusObjectPath& path, const QVariantMap& map);
     void slotDeviceRemoved(const QDBusObjectPath& path, const QStringList& list);
-    void slotUpdate();
+    void slotUpdate() override;
 
 
 private:

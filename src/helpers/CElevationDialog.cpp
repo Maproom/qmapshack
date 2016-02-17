@@ -32,8 +32,8 @@ CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVaria
     setupUi(this);
 
     QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
-    connect(pushReset, SIGNAL(clicked()), this, SLOT(slotReset()));
-    connect(toolGetEle, SIGNAL(clicked()), this, SLOT(slotGetEle()));
+    connect(pushReset,  &QPushButton::clicked, this, &CElevationDialog::slotReset);
+    connect(toolGetEle, &QToolButton::clicked, this, &CElevationDialog::slotGetEle);
 
     QString str, unit;
     IUnit::self().meter2elevation(100, str, unit);
@@ -71,7 +71,7 @@ void CElevationDialog::slotReset()
 
 void CElevationDialog::slotGetEle()
 {
-    QVariant ele = CMainWindow::self().getEelevationAt(pos * DEG_TO_RAD);
+    QVariant ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     if(ele != NOFLOAT)
     {
         QString str, unit;

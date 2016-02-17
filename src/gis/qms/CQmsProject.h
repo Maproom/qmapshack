@@ -23,12 +23,25 @@
 
 class CQmsProject : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CQmsProject)
 public:
     CQmsProject(const QString& filename, CGisListWks * parent);
     virtual ~CQmsProject();
 
-    bool save();
-    bool saveAs();
+    const QString getFileDialogFilter() const override
+    {
+        return IGisProject::filedialogFilterQMS;
+    }
+
+    const QString getFileExtension() const override
+    {
+        return "qms";
+    }
+
+    bool canSave() const override
+    {
+        return true;
+    }
 
     static bool saveAs(const QString& fn, IGisProject& project);
 };

@@ -39,7 +39,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << "VRT: try to open" << filename;
 
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
-    if(dataset == 0)
+    if(nullptr == dataset)
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
@@ -48,17 +48,16 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     if(dataset->GetRasterCount() != 1)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
 
-    GDALRasterBand * pBand;
-    pBand = dataset->GetRasterBand(1);
-    if(pBand == 0)
+    GDALRasterBand *pBand = dataset->GetRasterBand(1);
+    if(nullptr == pBand)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
     }
@@ -70,24 +69,24 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     qDebug() << "no data:" << hasNoData << noData;
 
     // ------- setup projection ---------------
-    char str[1024] = {0};
+    char str[1025] = {0};
     if(dataset->GetProjectionRef())
     {
-        strncpy(str,dataset->GetProjectionRef(),sizeof(str));
+        strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
-    char * ptr = str;
     OGRSpatialReference oSRS;
-    oSRS.importFromWkt(&ptr);
-    oSRS.exportToProj4(&ptr);
+    char *wkt = str;
+    oSRS.importFromWkt(&wkt);
 
-    qDebug() << ptr;
+    char *proj4 = nullptr;
+    oSRS.exportToProj4(&proj4);
+    pjsrc = pj_init_plus(proj4);
+    free(proj4);
 
-    pjsrc = pj_init_plus(ptr);
-    free(ptr);
     if(pjsrc == 0)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
         return;
     }

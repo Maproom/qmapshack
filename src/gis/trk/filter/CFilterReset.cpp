@@ -27,7 +27,7 @@ CFilterReset::CFilterReset(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    connect(toolApply, SIGNAL(clicked()), this, SLOT(slotApply()));
+    connect(toolApply, &QToolButton::clicked, this, &CFilterReset::slotApply);
 }
 
 CFilterReset::~CFilterReset()

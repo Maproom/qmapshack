@@ -27,7 +27,7 @@ public:
     CDeviceTwoNav(const QString &path, const QString &key, const QString &model, QTreeWidget * parent);
     virtual ~CDeviceTwoNav();
 
-    void insertCopyOfProject(IGisProject * project);
+    void insertCopyOfProject(IGisProject * project) override;
 
 private:
     void readReginfo(const QString& filename);

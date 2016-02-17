@@ -41,20 +41,22 @@ public:
 
     static QWidget * getBestWidgetForParent();
 
+    static QString getUser();
+
     virtual ~CMainWindow();
 
     void addMapList(CMapList *list, const QString& name);
     void addDemList(CDemList *list, const QString& name);
     void addWidgetToTab(QWidget * w);
 
-    bool isScaleVisible();
-    bool isGridVisible();
-    bool isNight();
-    bool isPOIText();
-    bool isMapToolTip();
-    bool flipMouseWheel();
-    bool profileIsWindow();
-    const QFont& getMapFont()
+    bool isScaleVisible()  const;
+    bool isGridVisible()   const;
+    bool isNight()         const;
+    bool isPOIText()       const;
+    bool isMapToolTip()    const;
+    bool flipMouseWheel()  const;
+    bool profileIsWindow() const;
+    const QFont& getMapFont() const
     {
         return mapFont;
     }
@@ -65,21 +67,22 @@ public:
        @param pos   a position in units of [rad]
        @return If no elevation value can be found for the position NOFLOAT is returned.
      */
-    qreal getEelevationAt(const QPointF &pos);
-    void  getEelevationAt(const QPolygonF& pos, QPolygonF &ele);
-    void  getEelevationAt(SGisLine &line);
+    qreal getElevationAt(const QPointF &pos) const;
+    void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
+    void  getElevationAt(SGisLine &line) const;
     /**
        @brief Get pointer to the currently visible canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.
      */
-    CCanvas * getVisibleCanvas();
+    CCanvas* getVisibleCanvas() const;
 
-#ifdef WIN32
+    const qint32 id;
 protected:
+#ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
 #endif // WIN32
-    void dragEnterEvent(QDragEnterEvent *event);
-    void dropEvent(QDropEvent *event);
+    void dragEnterEvent(QDragEnterEvent *event) override;
+    void dropEvent(QDropEvent *event) override;
 
 
 private slots:

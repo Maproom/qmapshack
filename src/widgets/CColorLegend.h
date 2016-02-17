@@ -36,15 +36,15 @@ public:
 
     void setUnit(const QString &unit);
 
-    void updateData();
-    void setMouseFocus(const CGisItemTrk::trkpt_t * pt);
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2){}
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt){}
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t *pt) override;
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2) override {}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t *pt) override {}
 
 
 protected:
-    void paintEvent(QPaintEvent *event);
-    void resizeEvent(QResizeEvent *event);
+    void paintEvent(QPaintEvent  *event) override;
+    void resizeEvent(QResizeEvent *event) override;
 
 private:
     int paintLabel(QPainter &p, qreal value);
@@ -54,8 +54,8 @@ private:
 
     QRect colorRect;
     QString unit;
-    qreal minimum;
-    qreal maximum;
+    qreal minimum       = 0;
+    qreal maximum       = 0;
     bool background     = false;
     int xOffset         = 1;
     CGisItemTrk *trk    = nullptr;

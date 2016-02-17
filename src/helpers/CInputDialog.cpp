@@ -27,7 +27,7 @@ CInputDialog::CInputDialog(QWidget *parent, const QString& text, QVariant& val, 
 {
     setupUi(this);
     QPushButton * pushReset = buttonBox->addButton(QDialogButtonBox::Reset);
-    connect(pushReset, SIGNAL(clicked()), this, SLOT(slotReset()));
+    connect(pushReset, &QPushButton::clicked, this, &CInputDialog::slotReset);
 
     label->setText(text);
     if(val != reset)

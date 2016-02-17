@@ -27,6 +27,7 @@
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
@@ -55,10 +56,12 @@
 #include <windows.h>
 #endif // WIN32
 
-CMainWindow * CMainWindow::pSelf = 0;
+CMainWindow * CMainWindow::pSelf = nullptr;
 
 CMainWindow::CMainWindow()
+    : id(qrand())
 {
+    qDebug() << "Application ID:" << id;
     SETTINGS;
 
     pSelf = this;
@@ -69,6 +72,7 @@ CMainWindow::CMainWindow()
 
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     CKnownExtension::init(IUnit::self());
+    CActivityTrk::init();
 
     gisWidget = new CGisWidget(menuProject, this);
     dockGis->setWidget(gisWidget);
@@ -90,39 +94,39 @@ CMainWindow::CMainWindow()
     // end ---- restore window geometry -----
 
 
-    connect(actionAbout,                 SIGNAL(triggered()),            this,      SLOT(slotAbout()));
-    connect(actionHelp,                  SIGNAL(triggered()),            this,      SLOT(slotHelp()));
-    connect(actionAddMapView,            SIGNAL(triggered()),            this,      SLOT(slotAddCanvas()));
-    connect(actionCloneMapView,          SIGNAL(triggered()),            this,      SLOT(slotCloneCanvas()));
-    connect(actionShowScale,             SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionShowGrid,              SIGNAL(changed()),              this,      SLOT(update()));
-    connect(actionPOIText,               SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionMapToolTip,            SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionNightDay,              SIGNAL(changed()),              this,      SLOT(slotUpdateCurrentWidget()));
-    connect(actionProfileIsWindow,       SIGNAL(toggled(bool)),          this,      SLOT(slotSetProfileMode(bool)));
-    connect(actionSetupMapFont,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapFont()));
-    connect(actionSetupGrid,             SIGNAL(triggered()),            this,      SLOT(slotSetupGrid()));
-    connect(actionSetupMapPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupMapPath()));
-    connect(actionSetupDEMPaths,         SIGNAL(triggered()),            this,      SLOT(slotSetupDemPath()));
-    connect(actionSetupMapView,          SIGNAL(triggered()),            this,      SLOT(slotSetupMapView()));
-    connect(actionSetupTimeZone,         SIGNAL(triggered()),            this,      SLOT(slotSetupTimeZone()));
-    connect(actionSetupUnits,            SIGNAL(triggered()),            this,      SLOT(slotSetupUnits()));
-    connect(actionSetupWorkspace,        SIGNAL(triggered()),            this,      SLOT(slotSetupWorkspace()));
-    connect(actionSetupCoordFormat,      SIGNAL(triggered(bool)),        this,      SLOT(slotSetupCoordFormat()));
-    connect(actionImportDatabase,        SIGNAL(triggered()),            this,      SLOT(slotImportDatabase()));
-    connect(actionSaveGISData,           SIGNAL(triggered()),            gisWidget, SLOT(slotSaveAll()));
-    connect(actionLoadGISData,           SIGNAL(triggered()),            this,      SLOT(slotLoadGISData()));
-    connect(actionVrtBuilder,            SIGNAL(triggered()),            this,      SLOT(slotBuildVrt()));
-    connect(actionStoreView,             SIGNAL(triggered()),            this,      SLOT(slotStoreView()));
-    connect(actionLoadView,              SIGNAL(triggered()),            this,      SLOT(slotLoadView()));
-    connect(actionClose,                 SIGNAL(triggered()),            this,      SLOT(close()));
-    connect(actionCreateRoutinoDatabase, SIGNAL(triggered()),            this,      SLOT(slotCreateRoutinoDatabase()));
-    connect(actionPrintMap,              SIGNAL(triggered()),            this,      SLOT(slotPrintMap()));
-    connect(tabWidget,                   SIGNAL(tabCloseRequested(int)), this,      SLOT(slotTabCloseRequest(int)));
+    connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
+    connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
+    connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
+    connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
+    connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionShowGrid,              &QAction::changed,              this,      static_cast<void (CMainWindow::*)()>(&CMainWindow::update));
+    connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
+    connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
+    connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
+    connect(actionSetupMapPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupMapPath);
+    connect(actionSetupDEMPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupDemPath);
+    connect(actionSetupMapView,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapView);
+    connect(actionSetupTimeZone,         &QAction::triggered,            this,      &CMainWindow::slotSetupTimeZone);
+    connect(actionSetupUnits,            &QAction::triggered,            this,      &CMainWindow::slotSetupUnits);
+    connect(actionSetupWorkspace,        &QAction::triggered,            this,      &CMainWindow::slotSetupWorkspace);
+    connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
+    connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
+    connect(actionSaveGISData,           &QAction::triggered,            gisWidget, &CGisWidget::slotSaveAll);
+    connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
+    connect(actionVrtBuilder,            &QAction::triggered,            this,      &CMainWindow::slotBuildVrt);
+    connect(actionStoreView,             &QAction::triggered,            this,      &CMainWindow::slotStoreView);
+    connect(actionLoadView,              &QAction::triggered,            this,      &CMainWindow::slotLoadView);
+    connect(actionClose,                 &QAction::triggered,            this,      &CMainWindow::close);
+    connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
+    connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
+    connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
-    connect(tabWidget,                   SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabCanvas(int)));
-    connect(tabMaps,                     SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabMaps(int)));
-    connect(tabDem,                      SIGNAL(currentChanged(int)),    this,      SLOT(slotCurrentTabDem(int)));
+    connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
+    connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
+    connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
 
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
@@ -135,7 +139,7 @@ CMainWindow::CMainWindow()
     {
         CCanvas * view = new CCanvas(tabWidget, name);
         tabWidget->addTab(view, view->objectName());
-        connect(view, SIGNAL(sigMousePosition(QPointF,qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
         cfg.beginGroup(name);
         view->loadConfig(cfg);
@@ -143,18 +147,18 @@ CMainWindow::CMainWindow()
     }
     if(names.isEmpty())
     {
-        CCanvas * view = new CCanvas(tabWidget,"");
+        CCanvas * view = new CCanvas(tabWidget, QString());
         tabWidget->addTab(view, view->objectName());
-        connect(view, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
 
-    actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
-    actionShowGrid->setChecked(cfg.value("isGridVisible", true).toBool());
-    actionPOIText->setChecked(cfg.value("POIText", true).toBool());
-    actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
-    actionNightDay->setChecked(cfg.value("isNight", false).toBool());
-    actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
+    actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
+    actionShowGrid->setChecked       (cfg.value("isGridVisible",    true).toBool());
+    actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
+    actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
+    actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());
+    actionFlipMouseWheel->setChecked (cfg.value("flipMouseWheel",  false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
@@ -194,8 +198,9 @@ CMainWindow::CMainWindow()
 
 CMainWindow::~CMainWindow()
 {
-    int cnt = 0;
+    CActivityTrk::release();
 
+    int cnt = 0;
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
@@ -213,12 +218,12 @@ CMainWindow::~CMainWindow()
     // save setup of all views
     cfg.beginGroup("Views");
     // remove all previous setups in this section first
-    cfg.remove("");
+    cfg.remove(QString());
 
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(view == 0)
+        if(nullptr == view)
         {
             allOtherTabs << tabWidget->widget(i);
             continue;
@@ -292,37 +297,53 @@ QWidget * CMainWindow::getBestWidgetForParent()
     return &self();
 }
 
-bool CMainWindow::isScaleVisible()
+QString CMainWindow::getUser()
+{
+    QString user = getenv("USER");
+    if(user.isEmpty())
+    {
+        user = getenv("USERNAME"); //for windows
+
+        if(user.isEmpty())
+        {
+            user = "QMapShack";
+        }
+    }
+
+    return user;
+}
+
+bool CMainWindow::isScaleVisible() const
 {
     return actionShowScale->isChecked();
 }
 
-bool CMainWindow::isGridVisible()
+bool CMainWindow::isGridVisible() const
 {
     return actionShowGrid->isChecked();
 }
 
-bool CMainWindow::isNight()
+bool CMainWindow::isNight() const
 {
     return actionNightDay->isChecked();
 }
 
-bool CMainWindow::isPOIText()
+bool CMainWindow::isPOIText() const
 {
     return actionPOIText->isChecked();
 }
 
-bool CMainWindow::isMapToolTip()
+bool CMainWindow::isMapToolTip() const
 {
     return actionMapToolTip->isChecked();
 }
 
-bool CMainWindow::flipMouseWheel()
+bool CMainWindow::flipMouseWheel() const
 {
     return actionFlipMouseWheel->isChecked();
 }
 
-bool CMainWindow::profileIsWindow()
+bool CMainWindow::profileIsWindow() const
 {
     return actionProfileIsWindow->isChecked();
 }
@@ -341,12 +362,12 @@ void CMainWindow::addWidgetToTab(QWidget * w)
 {
     if(tabWidget->indexOf(w) == NOIDX)
     {
-        tabWidget->addTab(w, w->objectName());
+        tabWidget->addTab(w, w->objectName().replace("&", "&&"));
     }
     tabWidget->setCurrentWidget(w);
 }
 
-CCanvas * CMainWindow::getVisibleCanvas()
+CCanvas* CMainWindow::getVisibleCanvas() const
 {
     return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
 }
@@ -360,7 +381,7 @@ void CMainWindow::zoomCanvasTo(const QRectF rect)
     }
 }
 
-qreal CMainWindow::getEelevationAt(const QPointF& pos)
+qreal CMainWindow::getElevationAt(const QPointF& pos) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -371,7 +392,7 @@ qreal CMainWindow::getEelevationAt(const QPointF& pos)
 }
 
 
-void CMainWindow::getEelevationAt(SGisLine &line)
+void CMainWindow::getElevationAt(SGisLine &line) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -397,7 +418,7 @@ void CMainWindow::getEelevationAt(SGisLine &line)
     }
 }
 
-void CMainWindow::getEelevationAt(const QPolygonF &pos, QPolygonF& ele)
+void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
 {
     CCanvas * canvas = getVisibleCanvas();
     if(canvas)
@@ -437,16 +458,15 @@ void CMainWindow::slotAddCanvas()
     for(i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(canvas == 0)
+        if(nullptr != canvas)
         {
-            continue;
+            cnt++;
         }
-        cnt++;
     }
 
-    CCanvas * canvas = new CCanvas(tabWidget,"");
+    CCanvas * canvas = new CCanvas(tabWidget, QString());
     tabWidget->addTab(canvas, canvas->objectName());
-    connect(canvas, SIGNAL(sigMousePosition(QPointF, qreal)), this, SLOT(slotMousePosition(QPointF, qreal)));
+    connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
     tabWidget->setCurrentWidget(canvas);
 }
@@ -454,7 +474,7 @@ void CMainWindow::slotAddCanvas()
 void CMainWindow::slotCloneCanvas()
 {
     CCanvas * source = getVisibleCanvas();
-    if(source == 0)
+    if(nullptr == source)
     {
         return;
     }
@@ -471,7 +491,7 @@ void CMainWindow::slotCloneCanvas()
     slotAddCanvas();
 
     CCanvas * target = getVisibleCanvas();
-    if(target == 0)
+    if(nullptr == target)
     {
         return;
     }
@@ -493,9 +513,12 @@ void CMainWindow::slotTabCloseRequest(int i)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    QWidget * w = tabWidget->widget(i);
+    delete tabWidget->widget(i);
+}
 
-    delete w;
+static inline bool compareNames(QString s1, QString s2)
+{
+    return s1.replace("&", "") == s2.replace("&", "");
 }
 
 void CMainWindow::slotCurrentTabCanvas(int i)
@@ -503,15 +526,16 @@ void CMainWindow::slotCurrentTabCanvas(int i)
     QString name = tabWidget->tabText(i);
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(tabMaps->tabText(n) == name)
+        if(compareNames(name, tabMaps->tabText(n)))
         {
             tabMaps->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabDem->count(); n++)
     {
-        if(tabDem->tabText(n) == name)
+        if(compareNames(name, tabDem->tabText(n)))
         {
             tabDem->setCurrentIndex(n);
             break;
@@ -541,15 +565,16 @@ void CMainWindow::slotCurrentTabMaps(int i)
     QString name = tabMaps->tabText(i);
     for(int n = 0; n < tabWidget->count(); n++)
     {
-        if(tabWidget->tabText(n) == name)
+        if(compareNames(name, tabWidget->tabText(n)))
         {
             tabWidget->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabDem->count(); n++)
     {
-        if(tabDem->tabText(n) == name)
+        if(compareNames(name, tabDem->tabText(n)))
         {
             tabDem->setCurrentIndex(n);
             break;
@@ -562,15 +587,16 @@ void CMainWindow::slotCurrentTabDem(int i)
     QString name = tabMaps->tabText(i);
     for(int n = 0; n < tabWidget->count(); n++)
     {
-        if(tabWidget->tabText(n) == name)
+        if(compareNames(name, tabWidget->tabText(n)))
         {
             tabWidget->setCurrentIndex(n);
             break;
         }
     }
+
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(tabMaps->tabText(n) == name)
+        if(compareNames(name, tabMaps->tabText(n)))
         {
             tabMaps->setCurrentIndex(n);
             break;
@@ -649,7 +675,7 @@ void CMainWindow::slotSetupMapFont()
 void CMainWindow::slotSetupGrid()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -669,7 +695,7 @@ void CMainWindow::slotSetupDemPath()
 void CMainWindow::slotSetupMapView()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -756,14 +782,14 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 void CMainWindow::slotStoreView()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
 
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path,"QMapShack View (*.view)");
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select output file"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {
@@ -789,7 +815,7 @@ void CMainWindow::slotLoadView()
 {
     SETTINGS;
     QString path = cfg.value("Paths/lastViewPath", QDir::homePath()).toString();
-    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, "QMapShack View (*.view)");
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select file to load"), path, tr("QMapShack View (*.view)"));
 
     if(filename.isEmpty())
     {
@@ -799,7 +825,7 @@ void CMainWindow::slotLoadView()
     slotAddCanvas();
 
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr == canvas)
     {
         return;
     }
@@ -825,24 +851,20 @@ void CMainWindow::slotSetProfileMode(bool on)
     for(int i = 0; i < tabWidget->count(); i++)
     {
         CCanvas * view = dynamic_cast<CCanvas*>(tabWidget->widget(i));
-        if(view == 0)
+        if(nullptr != view)
         {
-            continue;
+            view->showProfileAsWindow(on);
         }
-
-        view->showProfileAsWindow(on);
     }
 }
 
 void CMainWindow::slotPrintMap()
 {
     CCanvas * canvas = getVisibleCanvas();
-    if(canvas == 0)
+    if(nullptr != canvas)
     {
-        return;
+        canvas->setMousePrint();
     }
-
-    canvas->setMousePrint();
 }
 
 #ifdef WIN32
@@ -916,7 +938,7 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
         QFileInfo fi(urls[0].path());
         QString ext = fi.suffix().toUpper();
 
-        if ( (ext == "QMS") || (ext == "GPX"))
+        if( (ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") )
         {
             event->acceptProposedAction();
         }
@@ -927,10 +949,9 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
 void CMainWindow::dropEvent(QDropEvent *event)
 {
     QList<QUrl> urls = event->mimeData()->urls();
-    QUrl url;
 
     QStringList filenames;
-    foreach(url, urls)
+    foreach(const QUrl &url, urls)
     {
         filenames << url.toLocalFile();
     }

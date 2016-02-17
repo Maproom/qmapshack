@@ -45,7 +45,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 
     if(!file.open(QIODevice::ReadOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(filename), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to open..."), tr("Failed to open %1").arg(filename), QMessageBox::Abort);
         return;
     }
 
@@ -67,66 +67,6 @@ CQmsProject::~CQmsProject()
 {
 }
 
-
-bool CQmsProject::save()
-{
-    if(filename.isEmpty())
-    {
-        return saveAs();
-    }
-    else
-    {
-        if(saveAs(filename, *this))
-        {
-            markAsSaved();
-        }
-    }
-
-    return true;
-}
-
-bool CQmsProject::saveAs()
-{
-    SETTINGS;
-    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
-    path += "/" + getName() + ".qms";
-
-    QString filter = filedialogFilterQMS;
-    QString fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), QObject::tr("Save GIS data to..."), path, filedialogSaveFilters, &filter);
-
-    if(fn.isEmpty())
-    {
-        return false;
-    }
-
-    bool res = false;
-    if(filter == filedialogFilterGPX)
-    {
-        res = CGpxProject::saveAs(fn, *this);
-    }
-    else if(filter == filedialogFilterQMS)
-    {
-        filename = fn;
-        metadata.name.clear();
-        setupName(QFileInfo(filename).baseName());
-
-        res = saveAs(fn, *this);
-        if(res)
-        {
-            markAsSaved();
-        }
-    }
-    else
-    {
-        return false;
-    }
-
-    path = QFileInfo(fn).absolutePath();
-    cfg.setValue("Paths/lastGisPath", path);
-
-    return res;
-}
-
 bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 {
     QString _fn_ = fn;
@@ -141,7 +81,7 @@ bool CQmsProject::saveAs(const QString& fn, IGisProject& project)
 
     if(!file.open(QIODevice::WriteOnly))
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), QObject::tr("Failed to open..."), QObject::tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
+        QMessageBox::critical(CMainWindow::getBestWidgetForParent(), tr("Failed to open..."), tr("Failed to open %1").arg(_fn_), QMessageBox::Abort);
         return false;
     }
     QDataStream out(&file);

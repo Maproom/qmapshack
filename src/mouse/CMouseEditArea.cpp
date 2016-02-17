@@ -85,19 +85,19 @@ void CMouseEditArea::slotCopyToNew()
     }
 
     IGisProject * project = CGisWidget::self().selectProject();
-    if(project == 0)
+    if(nullptr == project)
     {
         return;
     }
 
     QString name;
     CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
-    if(area != 0)
+    if(area != nullptr)
     {
         name = area->getName();
     }
 
-    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), QObject::tr("Edit name..."), QObject::tr("Enter new area name."), QLineEdit::Normal, name);
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new area name."), QLineEdit::Normal, name);
 
     if(name.isEmpty())
     {

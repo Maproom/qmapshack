@@ -18,6 +18,7 @@
 
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
 CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
@@ -25,64 +26,82 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
     {
         "Foot"
         , CGisItemTrk::trkpt_t::eActFoot
-        , QObject::tr("Foot")
+        , tr("Foot")
         , "://icons/48x48/ActFoot.png"
         , "://icons/16x16/ActFoot.png"
+        , IGisItem::colorMap[0].color
     },
     {
         "Cycle"
         , CGisItemTrk::trkpt_t::eActCycle
-        , QObject::tr("Bicycle")
+        , tr("Bicycle")
         , "://icons/48x48/ActCycle.png"
         , "://icons/16x16/ActCycle.png"
+        , IGisItem::colorMap[1].color
     },
     {
         "Bike"
         , CGisItemTrk::trkpt_t::eActBike
-        , QObject::tr("Motor Bike")
+        , tr("Motor Bike")
         , "://icons/48x48/ActBike.png"
         , "://icons/16x16/ActBike.png"
+        , IGisItem::colorMap[2].color
     },
     {
         "Car"
         , CGisItemTrk::trkpt_t::eActCar
-        , QObject::tr("Car")
+        , tr("Car")
         , "://icons/48x48/ActCar.png"
         , "://icons/16x16/ActCar.png"
+        , IGisItem::colorMap[3].color
     },
     {
         "Cable"
         , CGisItemTrk::trkpt_t::eActCable
-        , QObject::tr("Cable Car")
+        , tr("Cable Car")
         , "://icons/48x48/ActCable.png"
         , "://icons/16x16/ActCable.png"
+        , IGisItem::colorMap[4].color
     },
     {
         "Swim"
         , CGisItemTrk::trkpt_t::eActSwim
-        , QObject::tr("Swim")
+        , tr("Swim")
         , "://icons/48x48/ActSwim.png"
         , "://icons/16x16/ActSwim.png"
+        , IGisItem::colorMap[5].color
     },
     {
         "Ship"
         , CGisItemTrk::trkpt_t::eActShip
-        , QObject::tr("Ship")
+        , tr("Ship")
         , "://icons/48x48/ActShip.png"
         , "://icons/16x16/ActShip.png"
+        , IGisItem::colorMap[6].color
     },
     {
         "Aeronautik"
         , CGisItemTrk::trkpt_t::eActAero
-        , QObject::tr("Aeronautik")
+        , tr("Aeronautik")
         , "://icons/48x48/ActAero.png"
         , "://icons/16x16/ActAero.png"
+        , IGisItem::colorMap[7].color
     },
     {
-        ""
+        "Ski/Winter"
+        , CGisItemTrk::trkpt_t::eActSki
+        , tr("Ski/Winter")
+        , "://icons/48x48/ActSki.png"
+        , "://icons/16x16/ActSki.png"
+        , IGisItem::colorMap[8].color
+    },
+    {
+        QString()
         , 0
-        , ""
-        , ""
+        , QString()
+        , QString()
+        , QString()
+        , QColor()
     }
 };
 
@@ -91,14 +110,40 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     , allFlags(0)
     , activitySummary(CGisItemTrk::trkpt_t::eActMaxNum + 1)
 {
-    actDescriptor[0].name = QObject::tr("Foot");
-    actDescriptor[1].name = QObject::tr("Bicycle");
-    actDescriptor[2].name = QObject::tr("Motor Bike");
-    actDescriptor[3].name = QObject::tr("Car");
-    actDescriptor[4].name = QObject::tr("Cable Car");
-    actDescriptor[5].name = QObject::tr("Swim");
-    actDescriptor[6].name = QObject::tr("Ship");
-    actDescriptor[7].name = QObject::tr("Aeronautics");
+}
+
+void CActivityTrk::init()
+{
+    actDescriptor[0].name = tr("Foot");
+    actDescriptor[1].name = tr("Bicycle");
+    actDescriptor[2].name = tr("Motor Bike");
+    actDescriptor[3].name = tr("Car");
+    actDescriptor[4].name = tr("Cable Car");
+    actDescriptor[5].name = tr("Swim");
+    actDescriptor[6].name = tr("Ship");
+    actDescriptor[7].name = tr("Aeronautics");
+    actDescriptor[8].name = tr("Ski/Winter");
+
+    SETTINGS;
+    cfg.beginGroup("Activities");
+    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    {
+        desc_t& desc = actDescriptor[i];
+        desc.color = QColor(cfg.value(QString("color%1").arg(i), desc.color.name()).toString());
+    }
+    cfg.endGroup(); // Activities
+}
+
+void CActivityTrk::release()
+{
+    SETTINGS;
+    cfg.beginGroup("Activities");
+    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    {
+        desc_t& desc = actDescriptor[i];
+        cfg.setValue(QString("color%1").arg(i), desc.color.name());
+    }
+    cfg.endGroup(); // Activities
 }
 
 
@@ -112,8 +157,8 @@ void CActivityTrk::update()
     }
 
     const CGisItemTrk::trk_t&       data = trk->getTrackData();
-    const CGisItemTrk::trkpt_t *    lastTrkpt = 0;
-    const CGisItemTrk::trkpt_t *    startTrkpt = 0;
+    const CGisItemTrk::trkpt_t *    lastTrkpt = nullptr;
+    const CGisItemTrk::trkpt_t *    startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
     foreach(const CGisItemTrk::trkseg_t &seg, data.segs)
@@ -129,7 +174,7 @@ void CActivityTrk::update()
             lastTrkpt = &pt;
             if(pt.flags != lastFlag)
             {
-                if(startTrkpt != 0)
+                if(startTrkpt != nullptr)
                 {
                     activity_summary_t& summary = getSummary(activitySummary, lastFlag);
                     summary.distance += pt.distance - startTrkpt->distance;
@@ -156,6 +201,12 @@ void CActivityTrk::update()
             }
         }
     }
+
+    if(lastTrkpt == nullptr)
+    {
+        return;
+    }
+
     activity_summary_t& summary = getSummary(activitySummary, lastFlag);
     summary.distance += lastTrkpt->distance - startTrkpt->distance;
     summary.ascend += lastTrkpt->ascend - startTrkpt->ascend;
@@ -207,19 +258,19 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
         str += "<table>";
         IUnit::self().meter2distance(s.distance, val, unit);
-        str += "<tr><td>" + QObject::tr("Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Distance:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().meter2elevation(s.ascend, val, unit);
-        str += "<tr><td>" + QObject::tr("Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Ascend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().meter2elevation(s.descend, val, unit);
-        str += "<tr><td>" + QObject::tr("Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Descend:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
-        str += "<tr><td>" + QObject::tr("Speed Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Speed Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
-        str += "<tr><td>" + QObject::tr("Speed Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Speed Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
-        str += "<tr><td>" + QObject::tr("Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Time Moving:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
-        str += "<tr><td>" + QObject::tr("Time Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
+        str += "<tr><td>" + tr("Time Total:") + QString("&nbsp;&nbsp;</td><td>%1 %2</td></tr>").arg(val).arg(unit);
         str += "</table>";
         return;
     }
@@ -251,7 +302,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Distance row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Distance:") + "</td>";
+    str += "<td>" + tr("Distance:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -273,7 +324,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Ascend row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Ascend:") + "</td>";
+    str += "<td>" + tr("Ascend:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -295,7 +346,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Descend row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Descend:") + "</td>";
+    str += "<td>" + tr("Descend:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -317,7 +368,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Speed Moving row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Speed Moving:") + "</td>";
+    str += "<td>" + tr("Speed Moving:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -339,7 +390,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Speed row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Speed Total:") + "</td>";
+    str += "<td>" + tr("Speed Total:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -361,7 +412,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Time Moving row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Time Moving:") + "</td>";
+    str += "<td>" + tr("Time Moving:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -383,7 +434,7 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     // ############### build Time Moving row ###############
     str += "<tr>";
-    str += "<td>" + QObject::tr("Time Total:") + "</td>";
+    str += "<td>" + tr("Time Total:") + "</td>";
     mask = 0x80000000;
     for(int i = 0; i < N; i++)
     {
@@ -465,4 +516,19 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
     }
 
     return actDescriptor[i];
+}
+
+void CActivityTrk::setColor(quint32 flag, const QString& color)
+{
+    int i = 0;
+    while(!actDescriptor[i].objName.isEmpty())
+    {
+        if(actDescriptor[i].flag == flag)
+        {
+            actDescriptor[i].color = QColor(color);
+            break;
+        }
+
+        i++;
+    }
 }

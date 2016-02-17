@@ -24,6 +24,7 @@
 #include <QSqlDatabase>
 #include <QWidget>
 
+#include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
 
 class CGisDraw;
@@ -37,6 +38,8 @@ enum event_types_e
     ,eEvtD2WShowItems   = QEvent::User + 4
     ,eEvtD2WHideItems   = QEvent::User + 5
     ,eEvtD2WUpdateLnF   = QEvent::User + 6
+    ,eEvtD2WUpdateItems = QEvent::User + 7
+    ,eEvtD2WReload      = QEvent::User + 8
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
     ,eEvtW2DCreate      = QEvent::User + 101
@@ -111,7 +114,13 @@ public:
 class CEvtW2DAckInfo : public QEvent
 {
 public:
-    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DAckInfo)), isLoaded(loaded), updateLostFound(false), id(id), db(db)
+    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DAckInfo))
+        , isLoaded(loaded)
+        , updateLostFound(false)
+        , id(id)
+        , db(db)
+        , host(host)
     {
     }
 
@@ -119,6 +128,7 @@ public:
     bool updateLostFound;
     quint64 id;
     QString db;
+    QString host;
     QSet<QString> keysChildren;
 };
 
@@ -136,7 +146,14 @@ public:
 class CEvtW2DCreate : public QEvent
 {
 public:
-    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtW2DCreate)), name(name), type(type), idParent(id), idChild(0), db(db)
+    CEvtW2DCreate(const QString& name, IDBFolder::type_e type, quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DCreate))
+        , name(name)
+        , type(type)
+        , idParent(id)
+        , idChild(0)
+        , db(db)
+        , host(host)
     {
     }
 
@@ -144,6 +161,28 @@ public:
     IDBFolder::type_e type;
     quint64 idParent;
     quint64 idChild;
+    QString db;
+    QString host;
+};
+
+class CEvtD2WUpdateItems : public QEvent
+{
+public:
+    CEvtD2WUpdateItems(quint64 id, const QString& db) : QEvent(QEvent::Type(eEvtD2WUpdateItems)), id(id), db(db)
+    {
+    }
+
+    quint64 id;
+    QString db;
+};
+
+class CEvtD2WReload : public QEvent
+{
+public:
+    CEvtD2WReload(const QString& db) : QEvent(QEvent::Type(eEvtD2WReload)), db(db)
+    {
+    }
+
     QString db;
 };
 

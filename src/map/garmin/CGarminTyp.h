@@ -23,6 +23,7 @@
 
 class CGarminTyp
 {
+    Q_DECLARE_TR_FUNCTIONS(CGarminTyp)
 public:
     CGarminTyp() = default;
     virtual ~CGarminTyp() = default;
@@ -225,17 +226,17 @@ protected:
         quint32 arraySize;
     };
 
-    quint16 version;
-    quint16 codepage;
-    quint16 year;
-    quint8 month;
-    quint8 day;
-    quint8 hour;
-    quint8 minutes;
-    quint8 seconds;
+    quint16 version = 0;
+    quint16 codepage = 0;
+    quint16 year = 0;
+    quint8 month = 0;
+    quint8 day = 0;
+    quint8 hour = 0;
+    quint8 minutes = 0;
+    quint8 seconds = 0;
 
-    quint16 fid;
-    quint16 pid;
+    quint16 fid = 0;
+    quint16 pid = 0;
 
     typ_section_t sectPoints;
     typ_section_t sectPolylines;

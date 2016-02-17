@@ -37,11 +37,11 @@ CDetailsRte::CDetailsRte(CGisItemRte& rte, QWidget *parent)
         toolLock->setDisabled(true);
     }
 
-    connect(toolLock, SIGNAL(toggled(bool)), this, SLOT(slotChangeReadOnlyMode(bool)));
-    connect(textCmtDesc, SIGNAL(anchorClicked(QUrl)), this, SLOT(slotLinkActivated(QUrl)));
-    connect(labelInfo, SIGNAL(linkActivated(QString)), this, SLOT(slotLinkActivated(QString)));
-
-    connect(listHistory, SIGNAL(sigChanged()), this, SLOT(setupGui()));
+    connect(lineName,    &CLineEdit::textEdited,          this, &CDetailsRte::slotNameChanged);
+    connect(lineName,    &CLineEdit::editingFinished,     this, &CDetailsRte::slotNameChangeFinished);
+    connect(toolLock,    &QToolButton::toggled,           this, &CDetailsRte::slotChangeReadOnlyMode);
+    connect(textCmtDesc, &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsRte::*)(const QUrl&)>(&CDetailsRte::slotLinkActivated));
+    connect(listHistory, &CHistoryListWidget::sigChanged, this, &CDetailsRte::setupGui);
 }
 
 CDetailsRte::~CDetailsRte()
@@ -59,17 +59,12 @@ void CDetailsRte::setupGui()
     bool isReadOnly = rte.isReadOnly();
     setWindowTitle(rte.getName());
 
-    if(rte.isTainted())
-    {
-        labelTainted->show();
-    }
-    else
-    {
-        labelTainted->hide();
-    }
+    labelTainted->setVisible(rte.isTainted());
 
+    lineName->setText(rte.getName());
+    lineName->setReadOnly(isReadOnly);
 
-    labelInfo->setText(rte.getInfo(true));
+    labelInfo->setText(rte.getInfo(false));
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, rte.getComment(), rte.getDescription(), rte.getLinks()));
@@ -112,19 +107,23 @@ void CDetailsRte::slotChangeReadOnlyMode(bool on)
     setupGui();
 }
 
-void CDetailsRte::slotLinkActivated(const QString& link)
+void CDetailsRte::slotNameChanged(const QString &name)
 {
-    if(link == "name")
-    {
-        QString name = QInputDialog::getText(this, tr("Edit name..."), tr("Enter new route name."), QLineEdit::Normal, rte.getName());
-        if(name.isEmpty())
-        {
-            return;
-        }
-        rte.setName(name);
-    }
+    setWindowTitle(name);
+}
 
-    setupGui();
+void CDetailsRte::slotNameChangeFinished()
+{
+    lineName->clearFocus();
+
+    const QString& name = lineName->text();
+    slotNameChanged(name);
+
+    if(name != rte.getName())
+    {
+        rte.setName(name);
+        setupGui();
+    }
 }
 
 void CDetailsRte::slotLinkActivated(const QUrl& url)

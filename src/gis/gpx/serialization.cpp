@@ -16,11 +16,13 @@
 
 **********************************************************************************************/
 
+#include "device/CDeviceGarmin.h"
 #include "gis/WptIcons.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "version.h"
 
@@ -35,6 +37,7 @@ const QString IGisProject::wptx1_ns  = "http://www.garmin.com/xmlschemas/Waypoin
 const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
+
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
 {
@@ -337,7 +340,10 @@ static void writeXml(QDomNode& ext, const QHash<QString, QVariant>& extensions)
     QDomDocument doc = ext.ownerDocument();
 
     QStringList keys = extensions.keys();
-    keys.sort();
+    qSort(keys.begin(), keys.end(), [] (const QString &k1, const QString &k2) {
+        return CKnownExtension::get(k1).order < CKnownExtension::get(k2).order;
+    });
+
     foreach(const QString &key, keys)
     {
         QStringList tags = key.split('|', QString::SkipEmptyParts);
@@ -447,8 +453,8 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
                              + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
                              + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
                              + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
-                             + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd"
-                             + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd";
+                             + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
+                             + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd ";
 
     gpx.setAttribute("xsi:schemaLocation", schemaLocation);
 
@@ -456,7 +462,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
     gpx.appendChild(xmlMetadata);
 
     writeXml(xmlMetadata,"name", metadata.name);
-    writeXml(xmlMetadata,"desc", metadata.desc);
+    writeXml(xmlMetadata,"desc", html2Dev(metadata.desc));
 
     if(!metadata.author.name.isEmpty())
     {
@@ -579,15 +585,15 @@ void CGisItemWpt::readGcExt(const QDomNode& xmlCache)
     geocache.available  = attr.namedItem("available").nodeValue().toLocal8Bit() == "True";
     if(geocache.archived)
     {
-        geocache.status = QObject::tr("Archived");
+        geocache.status = tr("Archived");
     }
     else if(geocache.available)
     {
-        geocache.status = QObject::tr("Available");
+        geocache.status = tr("Available");
     }
     else
     {
-        geocache.status = QObject::tr("Not Available");
+        geocache.status = tr("Not Available");
     }
 
     readXml(xmlCache, "groundspeak:name",              geocache.name);
@@ -740,13 +746,6 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
         const QDomNode& gpxx = ext.namedItem("gpxx:TrackExtension");
         readXml(gpxx, "gpxx:DisplayColor", trk.color);
         setColor(str2color(trk.color));
-
-        const QDomNode &extColoring = ext.namedItem("ql:coloring");
-        QString source;
-        readXml(extColoring, "ql:source",    source);
-        setColorizeSource(source);
-        readXml(extColoring, "ql:limitLow",  limitLow);
-        readXml(extColoring, "ql:limitHigh", limitHigh);
     }
 
     deriveSecondaryData();
@@ -762,8 +761,8 @@ void CGisItemTrk::save(QDomNode& gpx)
     gpx.appendChild(xmlTrk);
 
     writeXml(xmlTrk, "name",   trk.name);
-    writeXml(xmlTrk, "cmt",    trk.cmt);
-    writeXml(xmlTrk, "desc",   trk.desc);
+    writeXml(xmlTrk, "cmt",    html2Dev(trk.cmt));
+    writeXml(xmlTrk, "desc",   html2Dev(trk.desc));
     writeXml(xmlTrk, "src",    trk.src);
     writeXml(xmlTrk, "link",   trk.links);
     writeXml(xmlTrk, "number", trk.number);
@@ -775,16 +774,6 @@ void CGisItemTrk::save(QDomNode& gpx)
     writeXml(xmlExt, "ql:key", key.item);
     writeXml(xmlExt, "ql:flags", flags);
     writeXml(xmlExt, history);
-
-    // write source for coloring tracks
-    if(!colorSource.isEmpty())
-    {
-        QDomElement xmlExtColoring = doc.createElement("ql:coloring");
-        xmlExt.appendChild(xmlExtColoring);
-        writeXml(xmlExtColoring, "ql:source",    colorSource);
-        writeXml(xmlExtColoring, "ql:limitLow",  limitLow);
-        writeXml(xmlExtColoring, "ql:limitHigh", limitHigh);
-    }
 
     // write other well known extensions
     QDomElement gpxx  = doc.createElement("gpxx:TrackExtension");
@@ -848,8 +837,8 @@ void CGisItemRte::save(QDomNode& gpx)
     gpx.appendChild(xmlRte);
 
     writeXml(xmlRte, "name",   rte.name);
-    writeXml(xmlRte, "cmt",    rte.cmt);
-    writeXml(xmlRte, "desc",   rte.desc);
+    writeXml(xmlRte, "cmt",    html2Dev(rte.cmt));
+    writeXml(xmlRte, "desc",   html2Dev(rte.desc));
     writeXml(xmlRte, "src",    rte.src);
     writeXml(xmlRte, "link",   rte.links);
     writeXml(xmlRte, "number", rte.number);
@@ -984,8 +973,8 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "magvar",        wpt.magvar);
     writeXml(xml, "geoidheight",   wpt.geoidheight);
     writeXml(xml, "name",          wpt.name);
-    writeXml(xml, "cmt",           IGisItem::removeHtml(wpt.cmt));
-    writeXml(xml, "desc",          IGisItem::removeHtml(wpt.desc));
+    writeXml(xml, "cmt",           html2Dev(wpt.cmt));
+    writeXml(xml, "desc",          html2Dev(wpt.desc));
     writeXml(xml, "src",           wpt.src);
     writeXml(xml, "link",          wpt.links);
     writeXml(xml, "sym",           wpt.sym);
@@ -997,4 +986,107 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt)
     writeXml(xml, "pdop",          wpt.pdop);
     writeXml(xml, "ageofdgpsdata", wpt.ageofdgpsdata);
     writeXml(xml, "dgpsid",        wpt.dgpsid);
+}
+
+
+void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QString& gpxFilename)
+{
+    if(pathAdventures.isEmpty())
+    {
+        return;
+    }
+
+    QDomDocument doc;
+
+    QDomElement adventure = doc.createElement("Adventure");
+    doc.appendChild(adventure);
+    adventure.setAttribute("xmlns","http://www.garmin.com/xmlschemas/GarminAdventure/v1");
+
+    writeXml(adventure, "GlobalId", project->getKey());
+    writeXml(adventure, "Name", project->getName());
+
+    QDomElement item = doc.createElement("Item");
+    adventure.appendChild(item);
+    writeXml(item, "DataType", "GPSData");
+    writeXml(item, "Location", gpxFilename);
+
+    writeXml(adventure, "Description", IGisItem::removeHtml(project->getDescription()));
+
+    const int N = project->childCount();
+    for(int i = 0; i < N; i++)
+    {
+        CGisItemTrk * track = dynamic_cast<CGisItemTrk*>(project->child(i));
+        if(track != nullptr)
+        {
+            const CGisItemTrk::trk_t& trk = track->getTrackData();
+            if(trk.segs.isEmpty())
+            {
+                continue;
+            }
+
+            if(trk.segs.first().pts.isEmpty())
+            {
+                continue;
+            }
+
+            const CGisItemTrk::trkpt_t& origin = trk.segs.first().pts.first();
+
+            QDomElement startPosition = doc.createElement("StartPosition");
+            adventure.appendChild(startPosition);
+            writeXml(startPosition, "Lat", origin.lat);
+            writeXml(startPosition, "Lon", origin.lon);
+
+            writeXml(adventure, "Activity", tr("Unknown"));
+            writeXml(adventure, "Distance", track->getTotalDistance());
+            writeXml(adventure, "Duration", track->getTotalElapsedSecondsMoving());
+            writeXml(adventure, "Ascent", track->getTotalAscend());
+            writeXml(adventure, "Descent", track->getTotalDescend());
+            writeXml(adventure, "Difficulty", 1);
+            writeXml(adventure, "NumRatings", 0);
+            writeXml(adventure, "MainTrackId", track->getName());
+
+            QDomElement waypointOrder = doc.createElement("WaypointOrder");
+            adventure.appendChild(waypointOrder);
+
+            foreach(const CGisItemTrk::trkseg_t& seg, trk.segs)
+            {
+                foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+                {
+                    if(trkpt.keyWpt.item.isEmpty())
+                    {
+                        continue;
+                    }
+
+                    const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                    if(wpt == nullptr)
+                    {
+                        continue;
+                    }
+
+                    QDomElement waypoints = doc.createElement("Waypoints");
+                    waypointOrder.appendChild(waypoints);
+
+                    writeXml(waypoints, "ID", wpt->getName());
+                    writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+                }
+            }
+
+
+            break;
+        }
+    }
+
+
+    const QDir dirAdventures(dir.absoluteFilePath(pathAdventures));
+    QString filename = dirAdventures.absoluteFilePath(project->getKey() + ".adv");
+    QFile file(filename);
+
+    mount();
+    file.open(QIODevice::WriteOnly);
+    QTextStream out(&file);
+    out.setCodec("UTF-8");
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+    out << doc.toString();
+    file.close();
+    umount();
 }

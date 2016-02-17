@@ -27,8 +27,8 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
 {
     setIconSize(QSize(32,32));
     setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(this, SIGNAL(itemSelectionChanged()), this, SLOT(slotSelectionChanged()));
-    connect(this, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(slotContextMenu(QPoint)));
+    connect(this, &CHistoryListWidget::itemSelectionChanged,       this, &CHistoryListWidget::slotSelectionChanged);
+    connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
     actionCutHistory = menu->addAction(QIcon("://icons/32x32/CutHistory.png"),tr("Cut history"), this, SLOT(slotCutHistory()));
@@ -56,6 +56,11 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
         QListWidgetItem * item = new QListWidgetItem(this);
 
         str  = event.time.toString();
+        if(!event.who.isEmpty())
+        {
+            str += tr(" by %1").arg(event.who);
+        }
+
         str += "\n";
         str += event.comment;
 
@@ -77,7 +82,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 void CHistoryListWidget::slotSelectionChanged()
 {
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
@@ -108,13 +113,14 @@ void CHistoryListWidget::slotCutHistory()
     }
 
     IGisItem * item = CGisWidget::self().getItemByKey(key);
-    if(item == 0)
+    if(nullptr == item)
     {
         return;
     }
 
     item->cutHistory();
-    item->setText(CGisListWks::eColumnDecoration,"*");
+    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+
     IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
     if(project)
     {

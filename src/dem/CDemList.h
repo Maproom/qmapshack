@@ -36,8 +36,8 @@ signals:
     void sigChanged();
 
 protected:
-    void dragMoveEvent ( QDragMoveEvent  * event );
-    void dropEvent ( QDropEvent  * event );
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent     *event) override;
 };
 
 
@@ -65,6 +65,9 @@ signals:
 
 private slots:
     void slotActivate();
+    void slotMoveUp();
+    void slotMoveDown();
+    void slotReloadDem();
     void slotContextMenu(const QPoint &point);
 
 private:

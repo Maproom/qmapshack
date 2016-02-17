@@ -17,33 +17,52 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/db/CDBFolderDatabase.h"
+#include "gis/db/CDBFolderMysql.h"
+#include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
-CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QWidget *parent)
+CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidget *parent)
     : QDialog(parent)
     , id(id)
     , db(db)
+    , host(host)
 {
     setupUi(this);
 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
     SETTINGS;
-    QStringList names = cfg.value("Database/names").toStringList();
-    QStringList files = cfg.value("Database/files").toStringList();
-
-    const int N = names.count();
-    for(int i = 0; i < N; i++)
+    cfg.beginGroup("Database");
+    QStringList names = cfg.value("names").toStringList();
+    cfg.beginGroup("Entries");
+    foreach(const QString &name, names)
     {
-        new CDBFolderDatabase(files[i], names[i], treeWidget);
-    }
+        cfg.beginGroup(name);
+        QString type = cfg.value("type", "SQLite").toString();
+        if(type == "SQLite")
+        {
+            QString filename = cfg.value("filename","").toString();
+            new CDBFolderSqlite(filename, name, treeWidget);
+        }
 
-    connect(treeWidget, SIGNAL(itemExpanded(QTreeWidgetItem*)), this, SLOT(slotItemExpanded(QTreeWidgetItem*)));
-    connect(treeWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
+        if(type == "MySQL")
+        {
+            QString server  = cfg.value("server","").toString();
+            QString port    = cfg.value("port","").toString();
+            QString user    = cfg.value("user","").toString();
+            QString passwd  = cfg.value("passwd","").toString();
+            bool noPasswd   = cfg.value("noPasswd",false).toBool();
+            new CDBFolderMysql(server, port, user, passwd, noPasswd, name, treeWidget);
+        }
+        cfg.endGroup(); // name
+    }
+    cfg.endGroup(); // Database
+
+    connect(treeWidget, &QTreeWidget::itemExpanded,         this, &CSelectDBFolder::slotItemExpanded);
+    connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CSelectDBFolder::slotItemSelectionChanged);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectDBFolder");
 }
@@ -56,22 +75,20 @@ CSelectDBFolder::~CSelectDBFolder()
 void CSelectDBFolder::slotItemExpanded(QTreeWidgetItem * item)
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
-    if(folder == 0)
+    if(nullptr != folder)
     {
-        return;
+        folder->expanding();
     }
-
-    folder->expanding();
 }
-
 
 void CSelectDBFolder::slotItemSelectionChanged()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
     if(folder)
     {
-        id = folder->getId();
-        db = folder->getDBName();
+        id      = folder->getId();
+        db      = folder->getDBName();
+        host    = folder->getDBHost();
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
     else

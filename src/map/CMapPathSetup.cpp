@@ -30,10 +30,10 @@ CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
 {
     setupUi(this);
 
-    connect(toolAdd, SIGNAL(clicked()), this, SLOT(slotAddPath()));
-    connect(toolDelete, SIGNAL(clicked()), this, SLOT(slotDelPath()));
-    connect(listWidget, SIGNAL(itemSelectionChanged()), this, SLOT(slotItemSelectionChanged()));
-    connect(pushMapHonk, SIGNAL(clicked()), this, SLOT(slotMapHonk()));
+    connect(toolAdd,     &QToolButton::clicked,              this, &CMapPathSetup::slotAddPath);
+    connect(toolDelete,  &QToolButton::clicked,              this, &CMapPathSetup::slotDelPath);
+    connect(listWidget,  &QListWidget::itemSelectionChanged, this, &CMapPathSetup::slotItemSelectionChanged);
+    connect(pushMapHonk, &QPushButton::clicked,              this, &CMapPathSetup::slotMapHonk);
 
     foreach(const QString &path, paths)
     {
@@ -42,7 +42,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
     }
 
     labelCacheRoot->setText(pathCache);
-    connect(toolCacheRoot, SIGNAL(clicked()), this, SLOT(slotChangeCachePath()));
+    connect(toolCacheRoot, &QToolButton::clicked, this, &CMapPathSetup::slotChangeCachePath);
 
     labelHelp->setText(tr("Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1").arg(CMapDraw::getSupportedFormats().join(", ")));
 }

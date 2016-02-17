@@ -24,7 +24,7 @@
 
 class QSqlDatabase;
 class CEvtW2DAckInfo;
-class CDBFolderDatabase;
+class IDBFolderSql;
 class CDBItem;
 
 /**
@@ -37,9 +37,9 @@ public:
     {
         eTypeLostFound = 1
         ,eTypeDatabase = 2
-        ,eTypeGroup = 3
-        ,eTypeProject = 4
-        ,eTypeOther = 5
+        ,eTypeGroup    = 3
+        ,eTypeProject  = 4
+        ,eTypeOther    = 5
     };
 
     IDBFolder(bool isLoadable, QSqlDatabase& db, type_e type, quint64 id, QTreeWidgetItem * parent);
@@ -50,17 +50,21 @@ public:
      * @brief Get the 64bit database key
      * @return
      */
-    quint64 getId()
+    quint64 getId() const
     {
         return id;
     }
-    QString getDBName();
+    QString getDBName() const;
+    QString getDBHost() const;
+
+    QSqlDatabase& getDb(){return db; }
+
     /**
      * @brief Get the database folder that folder is stored in
      *
      * @return On success a pointer to the item holding the database is returned.
      */
-    CDBFolderDatabase * getDBFolder();
+    IDBFolderSql * getDBFolder();
 
     /**
      * @brief Search and get access to a subfolder
@@ -92,6 +96,14 @@ public:
      * @param info  The event object posted by the workspace
      */
     virtual void update(CEvtW2DAckInfo * info);
+
+    /**
+     * @brief Update from database
+     *
+     * The database might have been changed by other users. Update list of folders
+     * and update each folder expanded. Rebuild list of items.
+     */
+    virtual bool update();
 
     /**
      * @brief Toggle check state of project and post event to workspace.
@@ -126,7 +138,9 @@ public:
      */
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
-    bool operator<(const QTreeWidgetItem &other) const;
+    bool operator<(const QTreeWidgetItem &other) const override;
+
+    void updateItemsOnWks();
 
 protected:
     /**
@@ -147,7 +161,7 @@ protected:
 
        @param activeChildren     a set of item keys that are active on the workspace
      */
-    virtual void addChildren(const QSet<QString> &activeChildren);
+    virtual void addChildren(const QSet<QString> &activeChildren, bool skipFolders);
 
     /**
        @brief Remove a folder to folder realtion
@@ -158,6 +172,8 @@ protected:
        @param idFolder      the 64bit database key of the child folder to be removed
      */
     virtual void remove(quint64 idParent, quint64 idFolder);
+
+    void setChildIndicator();
 
     QSqlDatabase& db;
 

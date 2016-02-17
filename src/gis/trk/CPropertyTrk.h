@@ -20,24 +20,27 @@
 #define CPROPERTYTRK_H
 
 #include "gis/trk/CGisItemTrk.h"
-#include "plot/CPlot.h"
 #include "plot/CPlotData.h"
 
 #include <QObject>
 
 class QComboBox;
+class CPlot;
+class CLimit;
 
 class CPropertyTrk
 {
+    Q_DECLARE_TR_FUNCTIONS(CPropertyTrk)
 public:
     virtual ~CPropertyTrk() = default;
 
     struct property_t
     {
         property_t() = default;
-        property_t(const QString& key, const QString& name, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
+        property_t(const QString& key, const QString& name, const QString& unit, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
             : key(key)
             , name(name)
+            , unit(unit)
             , icon(icon)
             , axisType(axisType)
             , xLabel(xLabel)
@@ -50,6 +53,7 @@ public:
 
         QString key;
         QString name;
+        QString unit;
         QIcon icon;
         CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
         QString xLabel;
@@ -64,13 +68,14 @@ public:
     void fillComboBox(QComboBox * box) const;
 
     void setupData();
-    void setupPlot(CPlot * plot, int idx) const;
+    void setupPlot(CPlot * plot, const QString &source) const;
+    const property_t &propBySource(const QString& source) const;
 
 private:
     friend class CGisItemTrk;
-    CPropertyTrk(const CGisItemTrk &trk);
+    CPropertyTrk(CGisItemTrk &trk);
 
-    const CGisItemTrk& trk;
+    CGisItemTrk& trk;
 
     QList<property_t> properties;
 };

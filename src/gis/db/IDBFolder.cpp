@@ -19,12 +19,13 @@
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
-#include "gis/db/CDBFolderDatabase.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/IDB.h"
 #include "gis/db/IDBFolder.h"
+#include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
 
 #include <QtSql>
@@ -52,7 +53,7 @@ IDBFolder::~IDBFolder()
 bool IDBFolder::operator<(const QTreeWidgetItem &other) const
 {
     const IDBFolder * folder = dynamic_cast<const IDBFolder*>(&other);
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return false;
     }
@@ -75,28 +76,33 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
         return new CDBFolderOther(db, id, parent);
 
     default:
-        return 0;
+        return nullptr;
     }
 }
 
-QString IDBFolder::getDBName()
+QString IDBFolder::getDBName() const
 {
     return db.connectionName();
 }
 
-CDBFolderDatabase * IDBFolder::getDBFolder()
+QString IDBFolder::getDBHost() const
+{
+    return db.hostName();
+}
+
+IDBFolderSql *IDBFolder::getDBFolder()
 {
     if(type() == eTypeDatabase)
     {
-        return dynamic_cast<CDBFolderDatabase*>(this);
+        return dynamic_cast<IDBFolderSql*>(this);
     }
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder != 0)
+    if(nullptr != folder)
     {
         return folder->getDBFolder();
     }
-    return 0;
+    return nullptr;
 }
 
 IDBFolder * IDBFolder::getFolder(quint64 idFolder)
@@ -110,19 +116,19 @@ IDBFolder * IDBFolder::getFolder(quint64 idFolder)
     for(int n = 0; n < N; n++)
     {
         IDBFolder * folder1 = dynamic_cast<IDBFolder*>(child(n));
-        if(folder1 == 0)
+        if(nullptr == folder1)
         {
-            return 0;
+            return nullptr;
         }
 
         IDBFolder * folder2 = folder1->getFolder(idFolder);
-        if(folder2)
+        if(nullptr != folder2)
         {
             return folder2;
         }
     }
 
-    return 0;
+    return nullptr;
 }
 
 quint64 IDBFolder::addFolder(type_e type, const QString& name)
@@ -130,7 +136,7 @@ quint64 IDBFolder::addFolder(type_e type, const QString& name)
     quint64 idChild = IDBFolder::addFolderToDb(type, name, id, db);
     if(idChild != 0)
     {
-        IDBFolder::createFolderByType(db, type, idChild, this);
+        createFolderByType(db, type, idChild, this);
         expanding();
     }
     return idChild;
@@ -144,10 +150,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
     query.bindValue(":type", type);
     QUERY_EXEC(return 0);
 
-    query.prepare("SELECT last_insert_rowid() from folders");
-    QUERY_EXEC(return 0);
-    query.next();
-    quint64 idChild = query.value(0).toULongLong();
+    quint64 idChild = IDB::getLastInsertID(db, "folders");
     if(idChild == 0)
     {
         qDebug() << "CGisListDB::slotAddFolder(): childId equals 0. bad.";
@@ -165,7 +168,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
 void IDBFolder::expanding()
 {
     qDeleteAll(takeChildren());
-    addChildren(QSet<QString>());
+    addChildren(QSet<QString>(), false);
 
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt);
@@ -199,37 +202,130 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     setText(CGisListDB::eColumnName, query.value(0).toString());
     setToolTip(CGisListDB::eColumnName, query.value(1).toString());
 
-    // count folders linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2folder WHERE parent=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    query.next();
-
-    qint32 nFolders = query.value(0).toInt();
-
-    // count items linked to this folder
-    query.prepare("SELECT COUNT() FROM folder2item WHERE parent=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    query.next();
-
-    qint32 nItems = query.value(0).toInt();
-
-    // set indicator according to items
-    if(nFolders || nItems)
-    {
-        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    }
-    else
-    {
-        setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
-    }
+    setChildIndicator();
 
     if(isExpanded())
     {
         qDeleteAll(takeChildren());
-        addChildren(info->keysChildren);
+        addChildren(info->keysChildren, false);
     }
+}
+
+bool IDBFolder::update()
+{
+    QSqlQuery query(db);
+
+    // Step 0: check if folder is still in the database
+    query.prepare("SELECT COUNT(*) FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return false);
+
+    if(!query.next() || query.value(0).toInt() == 0)
+    {
+        qDebug() << text(CGisListDB::eColumnName) << query.value(0).toInt() << id;
+        // return false to mark folder to be deleted
+        return false;
+    }
+
+    // Step 1: get basic properties like name and key
+    query.prepare("SELECT keyqms, name, comment FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return false);
+    query.next();
+
+    // update items look on the gui.
+    key = query.value(0).toString();
+    setText(CGisListDB::eColumnName, query.value(1).toString());
+    setToolTip(CGisListDB::eColumnName, query.value(2).toString());
+
+    // Step 2: Test for children.
+    setChildIndicator();
+
+    // Nothing to do for folders not expanded
+    if(!isExpanded())
+    {
+        return true;
+    }
+
+    /* Step 3: Iterate over all child items.
+     *
+     * There might be new folders to add. This is done collecting all sub-folder IDs in
+     * dbFoldersAdd. Remove every existing folder while iterating over all items. The
+     * left overs are the folders to add.
+     *
+     * Update existing folders. If the update return s false the folder was removed from
+     * the database or an error occured. In both cases remove the folder item.
+     *
+     * Collect all items in dbItems. They will be removed and the item list ist rebuilt
+     * from scratch.
+     */
+    QSet<QString>       activeChildren;
+    QList<CDBItem*>     dbItems;
+    QList<IDBFolder*>   dbFoldersDel;
+
+    // get all folder IDs attached to this folder
+    QList<quint64> dbFoldersAdd;
+    query.prepare("SELECT child FROM folder2folder WHERE parent=:parent");
+    query.bindValue(":parent", id);
+    QUERY_EXEC(return false);
+    while(query.next())
+    {
+        dbFoldersAdd << query.value(0).toULongLong();
+    }
+
+    const int N = childCount();
+    for(int i = 0; i < N; i++)
+    {
+        QTreeWidgetItem * item = child(i);
+
+        // test for folder and update folder
+        // remove the folder from the add list as it is allready known
+        // if the update returns false register it for removal
+        IDBFolder * dbFolder = dynamic_cast<IDBFolder*>(item);
+        if(dbFolder != nullptr)
+        {
+            dbFoldersAdd.removeAll(dbFolder->getId());
+            if(dbFolder->update() == false)
+            {
+                dbFoldersDel << dbFolder;
+            }
+            continue;
+        }
+
+        CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
+        if(dbItem != nullptr)
+        {
+            if(dbItem->checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
+            {
+                activeChildren << dbItem->getKey();
+            }
+            dbItems << dbItem;
+            continue;
+        }
+    }
+
+    // Step 4: Remove items and folders registered for removal. Add missing folders. Rebuild list of items.
+    qDeleteAll(dbFoldersDel);
+    qDeleteAll(dbItems);
+
+    // add folders
+    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return false);
+    while(query.next())
+    {
+        quint64 idChild     = query.value(0).toULongLong();
+        quint32 typeChild   = query.value(1).toInt();
+        if(dbFoldersAdd.contains(idChild))
+        {
+            createFolderByType(db, typeChild, idChild, this);
+        }
+    }
+    sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+
+    // add children
+    addChildren(activeChildren, true);
+    return true;
 }
 
 void IDBFolder::toggle()
@@ -268,7 +364,7 @@ void IDBFolder::toggle()
 void IDBFolder::remove()
 {
     IDBFolder * folder = dynamic_cast<IDBFolder*>(parent());
-    if(folder == 0)
+    if(nullptr == folder)
     {
         return;
     }
@@ -288,7 +384,7 @@ void IDBFolder::setupFromDB()
     QSqlQuery query(db);
 
     // get basic properties like name and key
-    query.prepare("SELECT key, name, comment FROM folders WHERE id=:id");
+    query.prepare("SELECT keyqms, name, comment FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
@@ -298,27 +394,7 @@ void IDBFolder::setupFromDB()
     setToolTip(CGisListDB::eColumnName, query.value(2).toString());
 
     // check if folder has child folders (to set expand indicator)
-    query.prepare("SELECT EXISTS(SELECT 1 FROM folder2folder WHERE parent=:id LIMIT 1)");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    query.next();
-
-    if(query.value(0).toInt() == 1)
-    {
-        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-    }
-    else
-    {
-        // check for child items (to set expand indicator)
-        query.prepare("SELECT EXISTS(SELECT 1 FROM folder2item WHERE parent=:id LIMIT 1)");
-        query.bindValue(":id", id);
-        QUERY_EXEC(return );
-        query.next();
-        if(query.value(0).toInt() == 1)
-        {
-            setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-        }
-    }
+    setChildIndicator();
 
     // if the folder is loadable the checkbox has to be displayed and
     // an event to query the state has to be sent to the workspace
@@ -330,22 +406,25 @@ void IDBFolder::setupFromDB()
     }
 }
 
-void IDBFolder::addChildren(const QSet<QString>& activeChildren)
+void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolders)
 {
     QSqlQuery query(db);
 
-    // folders 1st
-    query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    while(query.next())
+    if(!skipFolders)
     {
-        quint64 idChild     = query.value(0).toULongLong();
-        quint32 typeChild   = query.value(1).toInt();
-        IDBFolder::createFolderByType(db, typeChild, idChild, this);
-    }
+        // folders 1st
+        query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild     = query.value(0).toULongLong();
+            quint32 typeChild   = query.value(1).toInt();
+            createFolderByType(db, typeChild, idChild, this);
+        }
 
-    sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+        sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
+    }
 
     // tracks 2nd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
@@ -428,5 +507,42 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
         query.prepare("DELETE FROM folders WHERE id=:id");
         query.bindValue(":id", idFolder);
         QUERY_EXEC()
+    }
+}
+
+void IDBFolder::updateItemsOnWks()
+{
+    CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
+    CGisWidget::self().postEventForWks(evt);
+}
+
+void IDBFolder::setChildIndicator()
+{
+    QSqlQuery query(db);
+
+    // count folders linked to this folder
+    query.prepare("SELECT COUNT(*) FROM folder2folder WHERE parent=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+    query.next();
+
+    qint32 nFolders = query.value(0).toInt();
+
+    // count items linked to this folder
+    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+    query.next();
+
+    qint32 nItems = query.value(0).toInt();
+
+    // set indicator according to items
+    if(nFolders || nItems)
+    {
+        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    }
+    else
+    {
+        setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
     }
 }

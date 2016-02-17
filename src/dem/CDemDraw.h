@@ -51,9 +51,15 @@ public:
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
     void  getElevationAt(SGisLine& line);
 
-    void setProjection(const QString& proj);
+    void setProjection(const QString& proj) override;
+
+    static const QStringList& getDemPaths()
+    {
+        return demPaths;
+    }
 
     static void setupDemPath();
+    static void setupDemPath(const QStringList &paths);
     static void saveDemPath(QSettings &cfg);
     static void loadDemPath(QSettings &cfg);
     static const QStringList& getSupportedFormats()
@@ -62,7 +68,7 @@ public:
     }
 
 protected:
-    void drawt(buffer_t& currentBuffer);
+    void drawt(buffer_t& currentBuffer) override;
 
 private:
     /**

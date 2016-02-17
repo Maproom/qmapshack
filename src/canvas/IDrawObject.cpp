@@ -32,22 +32,22 @@ IDrawObject::~IDrawObject()
 
 void IDrawObject::saveConfig(QSettings& cfg)
 {
-    cfg.setValue("opacity", getOpacity());
+    cfg.setValue("opacity",  getOpacity());
     cfg.setValue("minScale", getMinScale());
     cfg.setValue("maxScale", getMaxScale());
 }
 
 void IDrawObject::loadConfig(QSettings& cfg)
 {
-    slotSetOpacity(cfg.value("opacity", getOpacity()).toDouble());
-    setMinScale(cfg.value("minScale", getMinScale()).toDouble());
-    setMaxScale(cfg.value("maxScale", getMaxScale()).toDouble());
+    slotSetOpacity(cfg.value("opacity",  getOpacity() ).toDouble());
+    setMinScale(   cfg.value("minScale", getMinScale()).toDouble());
+    setMaxScale(   cfg.value("maxScale", getMaxScale()).toDouble());
 
     emit sigPropertiesChanged();
 }
 
 
-bool IDrawObject::isOutOfScale(const QPointF& scale)
+bool IDrawObject::isOutOfScale(const QPointF& scale) const
 {
     if((getMinScale() != NOFLOAT) && (scale.x() < getMinScale()))
     {

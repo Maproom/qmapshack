@@ -35,7 +35,7 @@ public:
         return "no info";
     }
 
-    quint32 timestamp;
+    quint32 timestamp = 0;
 
     QString name;
     QString comment;

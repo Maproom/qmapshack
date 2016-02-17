@@ -31,10 +31,10 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
 
     setObjectName(tr("Create Routino Database"));
 
-    connect(toolSourceFiles, SIGNAL(clicked()), this, SLOT(slotSelectSourceFiles()));
-    connect(toolTargetPath, SIGNAL(clicked()), this, SLOT(slotSelectTargetPath()));
-    connect(pushStart, SIGNAL(clicked()), this, SLOT(slotStart()));
-    connect(lineTargetPrefix, SIGNAL(textChanged(QString)), this, SLOT(enabelStartButton()));
+    connect(toolSourceFiles,  &QToolButton::clicked,   this, &CRoutinoDatabaseBuilder::slotSelectSourceFiles);
+    connect(toolTargetPath,   &QToolButton::clicked,   this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
+    connect(pushStart,        &QPushButton::clicked,   this, &CRoutinoDatabaseBuilder::slotStart);
+    connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
 
     pushStart->setDisabled(true);
 

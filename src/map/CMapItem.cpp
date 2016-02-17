@@ -43,7 +43,7 @@ CMapItem::~CMapItem()
 {
 }
 
-void CMapItem::saveConfig(QSettings& cfg)
+void CMapItem::saveConfig(QSettings& cfg) const
 {
     if(mapfile.isNull())
     {

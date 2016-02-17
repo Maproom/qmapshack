@@ -23,10 +23,12 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CLimit.h"
+#include "helpers/CValue.h"
 
 #include <QtWidgets>
 
-#define VER_TRK         quint8(2)
+#define VER_TRK         quint8(5)
 #define VER_WPT         quint8(2)
 #define VER_RTE         quint8(2)
 #define VER_AREA        quint8(1)
@@ -43,8 +45,10 @@
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
-#define VER_HIST_EVT    quint8(2)
-#define VER_ITEM        quint8(2)
+#define VER_HIST_EVT    quint8(3)
+#define VER_ITEM        quint8(3)
+#define VER_CVALUE      quint8(1)
+#define VER_CLIMIT      quint8(1)
 
 #define MAGIC_SIZE      10
 #define MAGIC_TRK       "QMTrk     "
@@ -129,6 +133,8 @@ QDataStream& operator<<(QDataStream& stream, const IGisItem::history_event_t& e)
     stream << e.comment;
     stream << e.data;
     stream << e.hash;
+    stream << e.who;
+
     return stream;
 }
 
@@ -143,6 +149,10 @@ QDataStream& operator>>(QDataStream& stream, IGisItem::history_event_t& e)
     if(version > 1)
     {
         stream >> e.hash;
+    }
+    if(version > 2)
+    {
+        stream >> e.who;
     }
 
     return stream;
@@ -442,6 +452,39 @@ QDataStream& operator>>(QDataStream& stream, IGisProject::person_t& p)
     return stream;
 }
 
+QDataStream& operator<<(QDataStream& stream, const CValue& v)
+{
+    stream << VER_CVALUE << quint8(v.mode) << v.valUser;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CValue& v)
+{
+    quint8 version, mode;
+    stream >> version >> mode >> v.valUser;
+    // lame trick to update object on mode correctly without
+    // triggering a changed mark
+    v.mode = CValue::mode_e(mode);
+    v.setMode(CValue::mode_e(mode));
+    return stream;
+}
+
+QDataStream& operator<<(QDataStream& stream, const CLimit& l)
+{
+    stream << VER_CLIMIT << quint8(l.mode) << l.source << l.minUser << l.maxUser;
+    return stream;
+}
+
+QDataStream& operator>>(QDataStream& stream, CLimit& l)
+{
+    quint8 version, mode;
+
+    stream >> version >> mode >> l.source >> l.minUser >> l.maxUser;
+    l.mode = CLimit::mode_e(mode);
+
+    return stream;
+}
+
 
 // ---------------- main objects ---------------------------------
 
@@ -463,10 +506,13 @@ QDataStream& CGisItemTrk::operator>>(QDataStream& stream) const
     out << trk.type;
     out << trk.color;
 
-    out << colorSource;
-    out << limitLow;
-    out << limitHigh;
+    out << colorSourceLimit;
+    out << lineScale;
+    out << showArrows;
 
+    out << limitsGraph1;
+    out << limitsGraph2;
+    out << limitsGraph3;
     out << trk.segs;
 
     stream.writeRawData(MAGIC_TRK, MAGIC_SIZE);
@@ -510,13 +556,36 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     in >> trk.type;
     in >> trk.color;
 
-    // versions >= 2 contain colorized tracks
-    if(version >= 2)
+    if(version > 1 && version <= 4)
     {
-        QString source;
+        QString colorSource;
         in >> colorSource;
+
+        qreal limitLow, limitHigh;
         in >> limitLow;
         in >> limitHigh;
+
+        colorSourceLimit.source     = colorSource;
+        colorSourceLimit.mode       = CLimit::eModeAuto;
+        colorSourceLimit.minUser    = limitLow;
+        colorSourceLimit.maxUser    = limitHigh;
+    }
+    else if(version > 4)
+    {
+        in >> colorSourceLimit;
+    }
+
+    if(version > 2)
+    {
+        in >> lineScale;
+        in >> showArrows;
+    }
+
+    if(version > 3)
+    {
+        in >> limitsGraph1;
+        in >> limitsGraph2;
+        in >> limitsGraph3;
     }
 
     trk.segs.clear();
@@ -524,7 +593,7 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
 
     deriveSecondaryData();
     setColor(str2color(trk.color));
-    setText(CGisListWks::eColumnName, trk.name);
+    setText(   CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo());
     return stream;
 }
@@ -566,7 +635,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     }
 
     setIcon();
-    setText(CGisListWks::eColumnName, wpt.name);
+    setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
@@ -640,7 +709,7 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
 
     setSymbol();
     deriveSecondaryData();
-    setText(CGisListWks::eColumnName, rte.name);
+    setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
@@ -718,7 +787,7 @@ QDataStream& CGisItemOvlArea::operator<<(QDataStream& stream)
     deriveSecondaryData();
 
     setColor(str2color(area.color));
-    setText(CGisListWks::eColumnName, area.name);
+    setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo());
 
     return stream;
@@ -799,6 +868,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
 
     while(!stream.atEnd())
     {
+        QString lastDatabaseHash;
         IGisItem::history_t history;
         quint8 changed = 0;
         quint8 version, type;
@@ -810,23 +880,29 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
             stream >> changed;
         }
 
-        IGisItem * item = 0;
+        if(version > 2)
+        {
+            stream >> lastDatabaseHash;
+        }
+
+
+        IGisItem *item = nullptr;
         switch(type)
         {
         case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(history, this);
+            item = new CGisItemWpt(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(history, this);
+            item = new CGisItemTrk(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeRte:
-            item = new CGisItemRte(history, this);
+            item = new CGisItemRte(history, lastDatabaseHash, this);
             break;
 
         case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(history, this);
+            item = new CGisItemOvlArea(history, lastDatabaseHash, this);
             break;
 
         default:
@@ -843,7 +919,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& IGisProject::operator>>(QDataStream& stream)
+QDataStream& IGisProject::operator>>(QDataStream& stream) const
 {
     stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
     stream << VER_PROJECT;
@@ -864,7 +940,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemTrk * item = dynamic_cast<CGisItemTrk*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -872,11 +948,12 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemRte * item = dynamic_cast<CGisItemRte*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -884,11 +961,12 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -896,11 +974,12 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(child(i));
-        if(item == 0)
+        if(nullptr == item)
         {
             continue;
         }
@@ -908,6 +987,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream)
         stream << quint8(item->type());
         stream << item->getHistory();
         stream << quint8(item->data(1,Qt::UserRole).toUInt() & IGisItem::eMarkChanged);
+        stream << item->getLastDatabaseHash();
     }
 
     return stream;
@@ -958,7 +1038,7 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     return stream;
 }
 
-QDataStream& CDBProject::operator>>(QDataStream& stream)
+QDataStream& CDBProject::operator>>(QDataStream& stream) const
 {
     stream.writeRawData(MAGIC_PROJ, MAGIC_SIZE);
     stream << VER_PROJECT;

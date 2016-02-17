@@ -19,16 +19,25 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-#define DB_VERSION 1
+#define DB_VERSION 4
+
+#define NO_CMD ((void)0)
 
 #define QUERY_EXEC(cmd) \
     if(!query.exec()) \
     { \
-        qDebug() << query.lastQuery(); \
-        qDebug() << query.lastError(); \
+        qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
+        qWarning() << query.lastError(); \
         cmd; \
-    } \
+    }
 
+#define QUERY_RUN(stmt, cmd) \
+    if(!query.exec(stmt)) \
+    { \
+        qWarning() << "Execution of SQL-Statement `" << query.lastQuery() << "` failed:"; \
+        qWarning() << query.lastError(); \
+        cmd; \
+    }
 
 #endif //MACROS_H
 

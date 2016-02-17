@@ -40,7 +40,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
     dataset = (GDALDataset*)GDALOpen(filename.toUtf8(),GA_ReadOnly);
 
-    if(dataset == 0)
+    if(nullptr == dataset)
     {
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
         return;
@@ -50,13 +50,12 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     rasterBandCount = dataset->GetRasterCount();
     if(rasterBandCount == 1)
     {
-        GDALRasterBand * pBand;
-        pBand = dataset->GetRasterBand(1);
+        GDALRasterBand *pBand = dataset->GetRasterBand(1);
 
-        if(pBand == 0)
+        if(nullptr == pBand)
         {
             delete dataset;
-            dataset = 0;
+            dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
             return;
         }
@@ -85,7 +84,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         else
         {
             delete dataset;
-            dataset = 0;
+            dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
             return;
         }
@@ -105,24 +104,25 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
 
     // ------- setup projection ---------------
-    char str[1024] = {0};
+    char str[1025] = {0};
     if(dataset->GetProjectionRef())
     {
-        strncpy(str,dataset->GetProjectionRef(),sizeof(str));
+        strncpy(str, dataset->GetProjectionRef(), sizeof(str) - 1);
     }
-    char * ptr = str;
+
     OGRSpatialReference oSRS;
-    oSRS.importFromWkt(&ptr);
-    oSRS.exportToProj4(&ptr);
+    char *wkt = str;
+    oSRS.importFromWkt(&wkt);
 
-    qDebug() << ptr;
+    char *proj4 = nullptr;
+    oSRS.exportToProj4(&proj4);
+    pjsrc = pj_init_plus(proj4);
+    free(proj4);
 
-    pjsrc = pj_init_plus(ptr);
-    free(ptr);
     if(pjsrc == 0)
     {
         delete dataset;
-        dataset = 0;
+        dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
         return;
     }
@@ -171,7 +171,7 @@ CMapVRT::~CMapVRT()
     delete dataset;
 }
 
-void CMapVRT::draw(IDrawContext::buffer_t& buf)
+void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 {
     if(map->needsRedraw())
     {

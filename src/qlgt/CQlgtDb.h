@@ -19,6 +19,7 @@
 #ifndef CQLGTDB_H
 #define CQLGTDB_H
 
+#include <QCoreApplication>
 #include <QDir>
 #include <QObject>
 #include <QPointer>
@@ -30,6 +31,7 @@ class CQmsDb;
 
 class CQlgtDb : public QObject
 {
+    Q_DECLARE_TR_FUNCTIONS(CQlgtDb)
 public:
     enum EntryType_e
     {

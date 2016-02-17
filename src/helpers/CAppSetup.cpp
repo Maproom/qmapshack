@@ -35,7 +35,7 @@ CAppSetup* instance;
 
 CAppSetup* CAppSetup::getPlattformInstance()
 {
-    if(instance == 0)
+    if(nullptr == instance)
     {
 #ifdef Q_OS_MAC
         instance = new CAppSetupMac();
@@ -305,6 +305,7 @@ void CAppSetupWin::prepareGdal()
 
     qputenv("GDAL_DATA", gdalDir.toUtf8());
     qputenv("PROJ_LIB", projDir.toUtf8());
+    qunsetenv("GDAL_DRIVER_PATH");
 
     CAppSetup::prepareGdal();
 }

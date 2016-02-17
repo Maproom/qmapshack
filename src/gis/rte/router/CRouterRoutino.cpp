@@ -75,24 +75,24 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
         return;
     }
 
-    comboProfile->addItem(tr("Foot"), "foot");
-    comboProfile->addItem(tr("Horse"), "horse");
+    comboProfile->addItem(tr("Foot"),       "foot");
+    comboProfile->addItem(tr("Horse"),      "horse");
     comboProfile->addItem(tr("Wheelchair"), "wheelchair");
-    comboProfile->addItem(tr("Bicycle"), "bicycle");
-    comboProfile->addItem(tr("Moped"), "moped");
+    comboProfile->addItem(tr("Bicycle"),    "bicycle");
+    comboProfile->addItem(tr("Moped"),      "moped");
     comboProfile->addItem(tr("Motorcycle"), "motorcycle");
-    comboProfile->addItem(tr("Motorcar"), "motorcar");
-    comboProfile->addItem(tr("Goods"), "goods");
+    comboProfile->addItem(tr("Motorcar"),   "motorcar");
+    comboProfile->addItem(tr("Goods"),      "goods");
 
-    comboLanguage->addItem(tr("English"), "en");
-    comboLanguage->addItem(tr("German"), "de");
-    comboLanguage->addItem(tr("French"), "fr");
+    comboLanguage->addItem(tr("English"),   "en");
+    comboLanguage->addItem(tr("German"),    "de");
+    comboLanguage->addItem(tr("French"),    "fr");
     comboLanguage->addItem(tr("Hungarian"), "hu");
-    comboLanguage->addItem(tr("Dutch"), "nl");
-    comboLanguage->addItem(tr("Russian"), "ru");
-    comboLanguage->addItem(tr("Polish"), "pl");
+    comboLanguage->addItem(tr("Dutch"),     "nl");
+    comboLanguage->addItem(tr("Russian"),   "ru");
+    comboLanguage->addItem(tr("Polish"),    "pl");
 
-    connect(toolSetupPaths, SIGNAL(clicked()), this, SLOT(slotSetupPaths()));
+    connect(toolSetupPaths, &QToolButton::clicked, this, &CRouterRoutino::slotSetupPaths);
 
     SETTINGS;
     dbPaths = cfg.value("Route/routino/paths", dbPaths).toStringList();
@@ -158,7 +158,7 @@ QString CRouterRoutino::xlateRoutinoError(int err)
         return tr("The requested translation language does not exist in the loaded XML file.");
 
     case ROUTINO_ERROR_NO_NEARBY_HIGHWAY:
-        return tr("There is no highway near the coordinates to place a waypoint.");
+        return tr("In the routing database there is no highway near the coordinates to place a waypoint.");
 
     case ROUTINO_ERROR_PROFILE_DATABASE_ERR:
         return tr("The profile and database do not work together.");
@@ -231,15 +231,17 @@ void CRouterRoutino::buildDatabaseList()
                 continue;
             }
 
-#ifdef OS_WIN
+#ifdef Q_OS_WIN
             QFileInfo fi(dir.absoluteFilePath(filename));
             if(fi.size() > 0x0FFFFFFFFLL)
             {
                 QMessageBox::warning(this, tr("Warning..."), tr("%1: Due to limitations in the Windows POSIX API Routino can't handle files larger than 4GB.").arg(prefix), QMessageBox::Ok);
                 continue;
             }
-#endif
+            Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
+#else
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
+#endif
             if(data)
             {
                 comboDatabase->addItem(prefix.replace("_", " "), quint64(data));
@@ -288,22 +290,22 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         QTime time;
         time.start();
 
-        CGisItemRte * rte       = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-        if(rte == 0)
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+        if(nullptr == rte)
         {
             throw QString();
         }
 
         Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
-        if(data == 0)
+        if(nullptr == data)
         {
             throw QString();
         }
 
         rte->reset();
 
-        QString strProfile      = comboProfile->currentData(Qt::UserRole).toString();
-        QString strLanguage     = comboLanguage->currentData(Qt::UserRole).toString();
+        QString strProfile  = comboProfile->currentData(Qt::UserRole).toString();
+        QString strLanguage = comboLanguage->currentData(Qt::UserRole).toString();
 
         Routino_Profile *profile         = Routino_GetProfile(strProfile.toUtf8());
         Routino_Translation *translation = Routino_GetTranslation(strLanguage.toUtf8());
@@ -332,7 +334,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         foreach(const IGisLine::point_t &pt, line)
         {
             waypoints[idx] = Routino_FindWaypoint(data, profile, pt.coord.y()*RAD_TO_DEG, pt.coord.x()*RAD_TO_DEG);
-            if(waypoints[idx] == NULL)
+            if(waypoints[idx] == nullptr)
             {
                 throw xlateRoutinoError(Routino_errno);
             }
@@ -345,7 +347,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
         delete progress;
 
-        if(route != NULL)
+        if(nullptr != route)
         {
             rte->setResult(route, getOptions() + tr("<br/>Calculation time: %1s").arg(time.elapsed()/1000.0, 0,'f',2));
             Routino_DeleteRoute(route);
@@ -386,7 +388,7 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     try
     {
         Routino_Database * data = (Routino_Database*)comboDatabase->currentData(Qt::UserRole).toULongLong();
-        if(data == 0)
+        if(nullptr == data)
         {
             throw QString();
         }

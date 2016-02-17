@@ -17,15 +17,18 @@
 **********************************************************************************************/
 
 #include "device/CDeviceGarmin.h"
+#include "device/CDeviceGarminArchive.h"
 #include "gis/CGisListWks.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/wpt/CGisItemWpt.h"
+
 
 #include <QtWidgets>
 #include <QtXml>
 
 CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
-    : IDevice(path, key, parent)
+    : IDevice(path, eTypeGarmin, key, parent)
     , cntImages(0)
 {
     setText(CGisListWks::eColumnName, "Garmin");
@@ -72,11 +75,27 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
         {
             pathSpoilers = xmlPath.toElement().text();
         }
+        else if(name == "FIT_TYPE_4")
+        {
+            pathActivities = xmlPath.toElement().text();
+        }
+        else if(name == "FIT_TYPE_6")
+        {
+            // courses
+            pathCourses = xmlPath.toElement().text();
+        }
+        else if(name == "Adventures")
+        {
+            pathAdventures = xmlPath.toElement().text();
+        }
     }
 
     qDebug() << dir.absoluteFilePath(pathGpx);
     qDebug() << dir.absoluteFilePath(pathPictures);
     qDebug() << dir.absoluteFilePath(pathSpoilers);
+    qDebug() << dir.absoluteFilePath(pathActivities);
+    qDebug() << dir.absoluteFilePath(pathCourses);
+    qDebug() << dir.absoluteFilePath(pathAdventures);
 
     if(!dir.exists(pathGpx))
     {
@@ -90,34 +109,43 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     {
         dir.mkpath(pathSpoilers);
     }
-
-    QDir dirGpx(dir.absoluteFilePath(pathGpx));
-    QStringList entries = dirGpx.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
+    if(!pathAdventures.isEmpty() && !dir.exists(pathAdventures))
     {
-        IGisProject * project =  new CGpxProject(dirGpx.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+        dir.mkpath(pathAdventures);
     }
 
-    QDir dirGpxCurrent(dir.absoluteFilePath(pathGpx + "/Current"));
-    entries = dirGpxCurrent.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
+
+    this->createProjectsFromFiles(pathGpx, "gpx");
+    this->createProjectsFromFiles(pathGpx + "/Current", "gpx");
+
+    QDir dirArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
+    if(dirArchive.exists() && (dirArchive.entryList(QStringList("*.gpx")).count() != 0))
     {
-        IGisProject * project =  new CGpxProject(dirGpxCurrent.absoluteFilePath(entry), this);
-        if(!project->isValid())
-        {
-            delete project;
-        }
+        archive = new CDeviceGarminArchive(dir.absoluteFilePath(pathGpx + "/Archive"), this);
     }
 
-    QDir dirGpxArchive(dir.absoluteFilePath(pathGpx + "/Archive"));
-    entries = dirGpxArchive.entryList(QStringList("*.gpx"));
+    this->createProjectsFromFiles(pathActivities, "fit");
+    this->createProjectsFromFiles(pathCourses, "fit");
+}
+
+void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding)
+{
+    QDir dirLoop(dir.absoluteFilePath(subdirecoty));
+    qDebug() << "reading files from device: " << dirLoop.path();
+    QStringList entries = dirLoop.entryList(QStringList("*." + fileEnding));
     foreach(const QString &entry, entries)
     {
-        IGisProject * project =  new CGpxProject(dirGpxArchive.absoluteFilePath(entry), this);
+        const QString filename = dirLoop.absoluteFilePath(entry);
+        IGisProject * project = nullptr;
+        if (fileEnding == "fit")
+        {
+            project = new CFitProject(filename, this);
+        }
+        if (fileEnding == "gpx")
+        {
+            project = new CGpxProject(filename, this);
+        }
+
         if(!project->isValid())
         {
             delete project;
@@ -154,6 +182,29 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
         delete gpx;
         return;
     }
+
+    createAdventureFromProject(project, pathGpx + "/" + name + ".gpx");
+
+    // move new project to top of any sub-folder/sub-device item
+    int newIdx      = NOIDX;
+    const int myIdx = childCount() - 1;
+    for(int i = myIdx - 1; i >= 0; i--)
+    {
+        IDevice * device = dynamic_cast<IDevice*>(child(i));
+        if(0 == device)
+        {
+            break;
+        }
+
+        newIdx = i;
+    }
+
+    if(newIdx != NOIDX)
+    {
+        takeChild(myIdx);
+        insertChild(newIdx, gpx);
+    }
+
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
@@ -201,7 +252,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
 
             IGisItem::link_t link;
             link.uri  = pathPictures + "/" + filename;
-            link.text = QObject::tr("Picture%1").arg(cntImages);
+            link.text = tr("Picture%1").arg(cntImages);
             link.type = "Garmin";
 
             links << link;
@@ -309,4 +360,12 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
             dirCache.removeRecursively();
         }
     }
+
+    if(!pathAdventures.isEmpty())
+    {
+        const QDir dirAdventures(dir.absoluteFilePath(pathAdventures));
+        QString filename = dirAdventures.absoluteFilePath(key + ".adv");
+        QFile::remove(filename);
+    }
 }
+

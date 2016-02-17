@@ -78,6 +78,7 @@ set( SRCS
     map/CMapItem.cpp
     map/CMapList.cpp
     map/CMapRMAP.cpp
+    map/CMapGEMF.cpp
     map/CMapJNX.cpp
     map/CMapIMG.cpp
     map/CMapMAP.cpp
@@ -293,6 +294,7 @@ set( HDRS
     map/IMap.h
     map/IMapProp.h
     map/CMapDraw.h
+    map/CMapGEMF.h
     map/CMapItem.h
     map/CMapList.h
     map/CMapRMAP.h

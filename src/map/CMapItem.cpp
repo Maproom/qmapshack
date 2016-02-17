@@ -25,6 +25,7 @@
 #include "map/CMapTMS.h"
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
+#include "map/CMapGEMF.h"
 #include "map/IMapProp.h"
 #include <QtGui>
 
@@ -200,6 +201,9 @@ bool CMapItem::activate()
     else if(fi.suffix().toLower() == "tms")
     {
         mapfile = new CMapTMS(filename, map);
+    }else if(fi.suffix().toLower() == "gemf")
+    {
+        mapfile = new CMapGEMF(filename, map);
     }
 
     updateIcon();

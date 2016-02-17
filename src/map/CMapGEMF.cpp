@@ -182,14 +182,6 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
 
     z = 21 - z;
 
-    if(z > maxZoom)
-    {
-
-        return;
-    }
-
-
-
     qint32 row1, row2, col1, col2;
 
     col1 = lon2tile(x1 * RAD_TO_DEG, z) / 256;

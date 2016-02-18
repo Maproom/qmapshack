@@ -1,10 +1,29 @@
+/**********************************************************************************************
+    Copyright (C) 2016 Peter Schumann peter.schumann@jeepxj.de
 
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
 /*
+ *
+ *
+ *
  * Map Driver Implementation for GEMF Maps
  * SPECs --> http://www.cgtk.co.uk/gemf
  *
  *
-*/
+ */
 
 #include "CMainWindow.h"
 #include "helpers/CDraw.h"
@@ -51,7 +70,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     QDataStream stream(&file);
     stream.setByteOrder(QDataStream::BigEndian);
 
-    stream >> version ;
+    stream >> version;
     stream >> tileSize;
     stream >> sourceNr;
 
@@ -59,60 +78,69 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
 
     for(i=0; i<sourceNr; i++)
     {
-        source_t source ;
+        source_t source;
         quint32 len;
         QByteArray name(NAMEBUFLEN,0);
-        stream >> source.index ;
-        stream >>len ;
-        if(len>NAMEBUFLEN) qDebug() << "CMapGEMF: Name longer than 1024 byte";
-        len = (len>NAMEBUFLEN)?NAMEBUFLEN:len;
+        stream >> source.index;
+        stream >>len;
+        if(len>NAMEBUFLEN)
+        {
+            qDebug() << "CMapGEMF: Name longer than 1024 byte";
+        }
+        len = (len>NAMEBUFLEN) ? NAMEBUFLEN : len;
         stream.readRawData(name.data(),len);
         source.name = QString().fromLocal8Bit(name,len);
         sources << source;
         qDebug() << "CMapGEMF: Read Source " << source.name;
-
     }
     qDebug() << "CMapGEMF: Read "<< i << "Sources";
     stream >> rangeNum;
     QList<range_t> ranges;
     quint64 tiles=0;
-    for (i=0; i<rangeNum;i++)
+    for (i=0; i<rangeNum; i++)
     {
-           range_t range;
-           stream >> range.zoomlevel;
-           stream >> range.minX;
-           stream >> range.maxX;
-           stream >> range.minY;
-           stream >> range.maxY;
-           stream >> range.sourceIdx;
-           stream >> range.offset;
+        range_t range;
+        stream >> range.zoomlevel;
+        stream >> range.minX;
+        stream >> range.maxX;
+        stream >> range.minY;
+        stream >> range.maxY;
+        stream >> range.sourceIdx;
+        stream >> range.offset;
 
-           ranges << range;
-           tiles += (range.maxX +1 -range.minX)*(range.maxY+1-range.minY);
+        ranges << range;
+        tiles += (range.maxX +1 -range.minX)*(range.maxY+1-range.minY);
     }
-    qDebug() << "CMapGEMF: Read "<< i << "Ranges with " << tiles << " Tiles" ;
+    qDebug() << "CMapGEMF: Read "<< i << "Ranges with " << tiles << " Tiles";
 
-    for(i=0;i<21;i++){
+    minZoom= MAX_ZOOM_LEVEL;
+    maxZoom= MIN_ZOOM_LEVEL;
+
+    for(i=0; i<=MAX_ZOOM_LEVEL; i++)
+    {
         QList<range_t> rangeZoom;
         QList<range_t>::iterator it;
-        for(it=ranges.begin();it!=ranges.end(); it++){
-            if(it->zoomlevel ==i) {
+        for(it=ranges.begin(); it!=ranges.end(); it++)
+        {
+            if(it->zoomlevel ==i)
+            {
                 rangeZoom << *it;
-                minZoom = (i<minZoom)?i:minZoom;
-                maxZoom = (i>maxZoom)?i:maxZoom;
+                minZoom = (i<minZoom) ? i : minZoom;
+                maxZoom = (i>maxZoom) ? i : maxZoom;
             }
         }
-        if(rangeZoom.length()!= 0) {
+        if(rangeZoom.length()!= 0)
+        {
             rangesByZoom[i] = rangeZoom;
             qDebug() << "CMapGEMF: Found " << rangeZoom.length() << "ranges for " << " Zoomlevel " << i;
         }
-
     }
     QString partfile = filename;
     QFile f(partfile);
     f.open(QIODevice::ReadOnly);
     i=1;
-    do{
+    do
+    {
         gemffile_t gf;
         gf.filename= partfile;
         gf.size = f.size();
@@ -121,7 +149,8 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
         partfile = filename + "-" + QString::number(i);
         i++;
         f.setFileName(partfile);
-    }while( f.open(QIODevice::ReadOnly) );
+    }
+    while( f.open(QIODevice::ReadOnly) );
     isActivated = true;
 }
 
@@ -160,11 +189,12 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
         x2 =  180*DEG_TO_RAD;
     }
 
-    quint32 z    = 20;
+
     QPointF s1  = buf.scale * buf.zoomFactor;
     qreal d     = NOFLOAT;
+    quint32 z = MAX_ZOOM_LEVEL + 1;
 
-    for(quint32 i = minZoom; i < 21; i++)
+    for(quint32 i = minZoom; i <= MAX_ZOOM_LEVEL; i++)
     {
         qreal s2 = 0.055 * (1<<i);
         if(qAbs(s2 - s1.x()) < d)
@@ -174,7 +204,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
         }
     }
 
-    z = 21 - z;
+    z = (MAX_ZOOM_LEVEL + 2)  - z;
 
     qint32 row1, row2, col1, col2;
 
@@ -199,76 +229,72 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
             drawTile(img, l, p);
         }
     }
-
-
 }
 
-quint64 CMapGEMF::getFilenameFromAddress(quint64 offset,QString &filename)
+quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset,QString &filename)
 {
-
     quint64 temp = offset;
 
-    foreach (gemffile_t gf, files) {
+    foreach (gemffile_t gf, files)
+    {
         if(temp < gf.size)
         {
             filename = gf.filename;
 
             return temp;
-        }else temp -= gf.size;
-
+        }
+        else
+        {
+            temp -= gf.size;
+        }
     }
 
     qDebug() << "CMAPGemf: ImageAddress was wrong "<< offset;
     return 0;  //
-
 }
 
-QImage CMapGEMF::getTile(quint32 row, quint32 col, quint32 z)
+QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z)
 {
-        if(!rangesByZoom.contains(z))
+    if(!rangesByZoom.contains(z))
+    {
+        qDebug() << "CMapGEMF: getTile called for a zoomlevel not available";
+        return QImage();
+    }
+    QList<range_t> ranges = rangesByZoom[z];
+
+    foreach (range_t r,ranges)
+    {
+        if(    row >= r.minX
+               && row <= r.maxX
+               && col >= r.minY
+               && col <= r.maxY)
         {
-            qDebug() << "CMapGEMF: getTile called for a zoomlevel not available";
-            return QImage();
+            quint32 Xidx = row-r.minX;
+            quint32 Yidx = col-r.minY;
+            quint32 nrYVals = r.maxY + 1 - r.minY;
+            quint32 TileIdx = Xidx*nrYVals + Yidx;
+            quint64 offsetRange = TileIdx*12;         // 4 + 8
+            quint64 offsetGEMF = offsetRange +r.offset;
+            QString splitfile;
+            offsetGEMF = getFilenameFromAddress(offsetGEMF, splitfile);
+            QFile file(splitfile);
+            file.open(QIODevice::ReadOnly);
+            QDataStream dataFile(&file);
+            quint32 size;
+            quint64 imageDataAddress;
+            dataFile.skipRawData(offsetGEMF);
+            dataFile >> imageDataAddress;
+            dataFile >> size;
+            file.close();
+            quint64 imageDataOffset = getFilenameFromAddress(imageDataAddress, splitfile);
+            QFile imageFile(splitfile);
+            imageFile.open(QIODevice::ReadOnly);
+            imageFile.seek(imageDataOffset);
+            QByteArray imageData(size,0);
+            imageFile.read(imageData.data(),size);
+            return QImage::fromData((uchar *)imageData.data(),size,0);
         }
-        QList<range_t> ranges = rangesByZoom[z];
+    }
 
-        foreach (range_t r,ranges)
-        {
-                if(    row >= r.minX
-                    && row <= r.maxX
-                    && col >= r.minY
-                    && col <= r.maxY)
-                {
-                    quint32 nrYVals, Xidx,Yidx,TileIdx;
-                    quint64 offsetRange, offsetGEMF;
-                    Xidx = row-r.minX;
-                    Yidx = col-r.minY;
-                    nrYVals = r.maxY + 1 - r.minY ;
-                    TileIdx = Xidx*nrYVals + Yidx;
-                    offsetRange = TileIdx*12; // 4 + 8
-                    offsetGEMF = offsetRange +r.offset;
-                    QString splitfile;
-                    offsetGEMF = getFilenameFromAddress(offsetGEMF, splitfile);
-                    QFile file(splitfile);
-                    file.open(QIODevice::ReadOnly);
-                    QDataStream dataFile(&file);
-                    quint32 size;
-                    quint64 imageDataAddress, imageDataOffset;
-                    dataFile.skipRawData(offsetGEMF);
-                    dataFile >> imageDataAddress;
-                    dataFile >> size;
-                    file.close();
-                    imageDataOffset = getFilenameFromAddress(imageDataAddress, splitfile);
-                    QFile imageFile(splitfile);
-                    imageFile.open(QIODevice::ReadOnly);
-                    imageFile.seek(imageDataOffset);
-                    QByteArray imageData(size,0);
-                    imageFile.read(imageData.data(),size);
-                    return QImage::fromData((uchar *)imageData.data(),size,0)   ;
-
-
-                }
-
-        }
- return QImage();
+    return QImage();
 }

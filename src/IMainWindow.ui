@@ -288,6 +288,9 @@
    <property name="shortcut">
     <string>Ctrl+T</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionShowScale">
    <property name="checkable">
@@ -300,6 +303,9 @@
    <property name="text">
     <string>Show Scale</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupMapFont">
    <property name="icon">
@@ -308,6 +314,9 @@
    </property>
    <property name="text">
     <string>Setup Map Font</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionShowGrid">
@@ -324,6 +333,9 @@
    <property name="shortcut">
     <string>Ctrl+G</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupGrid">
    <property name="icon">
@@ -335,6 +347,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Alt+G</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionFlipMouseWheel">
@@ -348,6 +363,9 @@
    <property name="text">
     <string>Flip Mouse Wheel</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupMapPaths">
    <property name="icon">
@@ -359,6 +377,9 @@
    </property>
    <property name="toolTip">
     <string>Setup Map Paths</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPOIText">
@@ -372,6 +393,9 @@
    <property name="text">
     <string>POI Text</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionNightDay">
    <property name="checkable">
@@ -383,6 +407,9 @@
    </property>
    <property name="text">
     <string>Night / Day</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionMapToolTip">
@@ -399,6 +426,9 @@
    <property name="shortcut">
     <string>Ctrl+I</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupDEMPaths">
    <property name="icon">
@@ -408,6 +438,9 @@
    <property name="text">
     <string>Setup DEM Paths</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
@@ -416,6 +449,9 @@
    </property>
    <property name="text">
     <string>About</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::AboutRole</enum>
    </property>
   </action>
   <action name="actionHelp">
@@ -429,6 +465,9 @@
    <property name="shortcut">
     <string>F1</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupMapView">
    <property name="icon">
@@ -440,6 +479,9 @@
    </property>
    <property name="toolTip">
     <string>Setup Map View</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionLoadGISData">
@@ -456,6 +498,9 @@
    <property name="shortcut">
     <string>Ctrl+L</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSaveGISData">
    <property name="icon">
@@ -471,6 +516,9 @@
    <property name="shortcut">
     <string>Ctrl+S</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupTimeZone">
    <property name="icon">
@@ -480,6 +528,9 @@
    <property name="text">
     <string>Setup Time Zone</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionAddEmptyProject">
    <property name="icon">
@@ -488,6 +539,9 @@
    </property>
    <property name="text">
     <string>Add empty project</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSearchGoogle">
@@ -501,6 +555,9 @@
    <property name="text">
     <string>Search Google</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionCloseAllProjects">
    <property name="icon">
@@ -513,6 +570,9 @@
    <property name="shortcut">
     <string>F8</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupUnits">
    <property name="icon">
@@ -521,6 +581,9 @@
    </property>
    <property name="text">
     <string>Setup Units</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionSetupWorkspace">
@@ -534,6 +597,9 @@
    <property name="toolTip">
     <string>Setup save on exit.</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionImportDatabase">
    <property name="icon">
@@ -545,6 +611,9 @@
    </property>
    <property name="toolTip">
     <string>Import QLandkarte GT database</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionVrtBuilder">
@@ -558,6 +627,9 @@
    <property name="toolTip">
     <string>GUI front end to gdalbuildvrt</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionStoreView">
    <property name="icon">
@@ -570,6 +642,9 @@
    <property name="toolTip">
     <string>Write current active map and DEM list including the properties to a file</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionLoadView">
    <property name="icon">
@@ -581,6 +656,9 @@
    </property>
    <property name="toolTip">
     <string>Restore view with active map and DEM list including the properties from a file</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionProfileIsWindow">
@@ -597,6 +675,9 @@
    <property name="shortcut">
     <string>Ctrl+E</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionClose">
    <property name="icon">
@@ -608,6 +689,9 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::QuitRole</enum>
    </property>
   </action>
   <action name="actionCloneMapView">
@@ -621,6 +705,9 @@
    <property name="shortcut">
     <string>Ctrl+Shift+T</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionCreateRoutinoDatabase">
    <property name="icon">
@@ -629,6 +716,9 @@
    </property>
    <property name="text">
     <string>Create Routino Database</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
   <action name="actionPrintMap">
@@ -645,6 +735,9 @@
    <property name="shortcut">
     <string>Ctrl+P</string>
    </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
   </action>
   <action name="actionSetupCoordFormat">
    <property name="icon">
@@ -656,6 +749,9 @@
    </property>
    <property name="toolTip">
     <string>Change the format coordinates are displayed</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>

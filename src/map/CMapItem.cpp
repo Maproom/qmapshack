@@ -122,6 +122,9 @@ void CMapItem::updateIcon()
     else if(fi.suffix().toLower() == "tms")
     {
         img = QPixmap("://icons/32x32/MimeTMS.png");
+    }else if(fi.suffix().toLower() == "gemf")
+    {
+        img = QPixmap("://icons/32x32/MimeGEMF.png");
     }
 
     setIcon(0,QIcon(img));

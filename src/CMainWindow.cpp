@@ -193,7 +193,18 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockGis->toggleViewAction());
     menuWindow->addAction(dockRte->toggleViewAction());
 
+    prepareMenuForMac();
+
     loadGISData(qlOpts->arguments);
+}
+
+void CMainWindow::prepareMenuForMac()
+{
+    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }
 
 CMainWindow::~CMainWindow()

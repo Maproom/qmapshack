@@ -29,7 +29,7 @@ class CMapGEMF : public IMap
 public:
     CMapGEMF(const QString& filename, CMapDraw *parent);
     void draw(IDrawContext::buffer_t& buf) override;
-    const quint32 MAX_ZOOM_LEVEL = 19;
+    const quint32 MAX_ZOOM_LEVEL = 21;
     const quint32 MIN_ZOOM_LEVEL = 0;
 
 private:

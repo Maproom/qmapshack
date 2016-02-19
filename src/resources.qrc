@@ -60,6 +60,7 @@
         <file>icons/32x32/MimeWMTS.png</file>
         <file>icons/32x32/MimeTMS.png</file>
         <file>icons/32x32/MimeDemVRT.png</file>
+        <file>icons/32x32/MimeGEMF.png</file>
         <file>icons/32x32/MouseWheel.png</file>
         <file>icons/32x32/NightDay.png</file>
         <file>icons/32x32/NoFix.png</file>
@@ -238,6 +239,7 @@
         <file>icons/48x48/MimeWMTS.png</file>
         <file>icons/48x48/MimeTMS.png</file>
         <file>icons/48x48/MimeDemVRT.png</file>
+        <file>icons/48x48/MimeGEMF.png</file>
         <file>icons/48x48/MouseWheel.png</file>
         <file>icons/48x48/NightDay.png</file>
         <file>icons/48x48/NoFix.png</file>

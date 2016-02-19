@@ -192,9 +192,9 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
 
     QPointF s1  = buf.scale * buf.zoomFactor;
     qreal d     = NOFLOAT;
-    quint32 z = MAX_ZOOM_LEVEL + 1;
+    quint32 z = MAX_ZOOM_LEVEL;
 
-    for(quint32 i = minZoom; i <= MAX_ZOOM_LEVEL; i++)
+    for(quint32 i = 0; i < MAX_ZOOM_LEVEL; i++)
     {
         qreal s2 = 0.055 * (1<<i);
         if(qAbs(s2 - s1.x()) < d)
@@ -204,7 +204,7 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
         }
     }
 
-    z = (MAX_ZOOM_LEVEL + 2)  - z;
+    z = MAX_ZOOM_LEVEL   - z;
 
     qint32 row1, row2, col1, col2;
 

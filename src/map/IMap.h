@@ -203,7 +203,7 @@ protected:
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
      */
-    void drawTile(QImage& img, QPolygonF& l, QPainter& p);
+    void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
 
     /// the drawcontext this map belongs to
     CMapDraw * map;

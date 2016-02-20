@@ -18,10 +18,8 @@
 
 #ifndef CMAPGEMF_H
 #define CMAPGEMF_H
-#define    NAMEBUFLEN 1024
 
 #include "IMap.h"
-
 
 class CMapGEMF : public IMap
 {
@@ -29,10 +27,11 @@ class CMapGEMF : public IMap
 public:
     CMapGEMF(const QString& filename, CMapDraw *parent);
     void draw(IDrawContext::buffer_t& buf) override;
+
+private:
     const quint32 MAX_ZOOM_LEVEL = 21;
     const quint32 MIN_ZOOM_LEVEL = 0;
 
-private:
     QImage getTile(const quint32 col, const quint32 row,const quint32 z);
     quint64 getFilenameFromAddress(const quint64 offset, QString &filename );
 

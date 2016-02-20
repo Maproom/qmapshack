@@ -118,6 +118,7 @@ private:
     friend int main(int argc, char ** argv);
     CMainWindow();
     void loadGISData(const QStringList& filenames);
+    void prepareMenuForMac();
 
     static CMainWindow * pSelf;
 

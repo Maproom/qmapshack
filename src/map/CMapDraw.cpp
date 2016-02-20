@@ -32,7 +32,7 @@
 QList<CMapDraw*> CMapDraw::maps;
 QString CMapDraw::cachePath = QDir::home().absoluteFilePath(".QMapShack/");
 QStringList CMapDraw::mapPaths;
-QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms").split('|');
+QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
 
 
 CMapDraw::CMapDraw(CCanvas *parent)

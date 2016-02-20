@@ -97,7 +97,7 @@ void IMap::convertM2Rad(QPointF &p) const
 }
 
 
-void IMap::drawTile(QImage& img, QPolygonF& l, QPainter& p)
+void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
 {
     map->convertRad2Px(l);
 

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IPreferences</class>
+ <widget class="QMainWindow" name="IPreferences">
+  <property name="windowModality">
+   <enum>Qt::WindowModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>308</width>
+    <height>107</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="unifiedTitleAndToolBarOnMac">
+   <bool>false</bool>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>300</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Ignored" vsizetype="Ignored">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="currentIndex">
+     <number>-1</number>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="movable">
+    <bool>false</bool>
+   </property>
+   <property name="floatable">
+    <bool>false</bool>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionSetupMapPaths"/>
+   <addaction name="actionSetupDEMPaths"/>
+   <addaction name="separator"/>
+   <addaction name="actionSetupWorkspace"/>
+   <addaction name="separator"/>
+   <addaction name="actionSetupUnits"/>
+   <addaction name="actionSetupTimeZone"/>
+   <addaction name="actionSetupCoordFormat"/>
+  </widget>
+  <action name="actionSetupUnits">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/UnitSetup.png</normaloff>:/icons/48x48/UnitSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Units</string>
+   </property>
+  </action>
+  <action name="actionSetupTimeZone">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/TimeZoneSetup.png</normaloff>:/icons/48x48/TimeZoneSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Time Zone</string>
+   </property>
+  </action>
+  <action name="actionSetupCoordFormat">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/SetupCoordFormat.png</normaloff>:/icons/48x48/SetupCoordFormat.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Coord. Format</string>
+   </property>
+  </action>
+  <action name="actionSetupMapPaths">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/FolderMap.png</normaloff>:/icons/48x48/FolderMap.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Map Paths</string>
+   </property>
+  </action>
+  <action name="actionSetupDEMPaths">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/FolderDEM.png</normaloff>:/icons/48x48/FolderDEM.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup DEM Paths</string>
+   </property>
+  </action>
+  <action name="actionSetupWorkspace">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/48x48/DatabaseSetup.png</normaloff>:/icons/48x48/DatabaseSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>SetupWorkspace</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

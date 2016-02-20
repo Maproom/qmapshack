@@ -291,7 +291,7 @@ if (APPLE)
 set( SRCS
     ${SRCS}
     device/CDeviceWatcherMac.cpp
-)
+    CMacPreferences.cpp)
 endif(APPLE)
 
 if(WIN32)
@@ -545,7 +545,7 @@ if(APPLE)
 set( HDRS
     ${HDRS}
     device/CDeviceWatcherMac.h
-    )
+    CMacPreferences.h)
 endif(APPLE)
 
 if(WIN32)
@@ -630,6 +630,11 @@ set( UIS
     print/IPrintDialog.ui
 )
 
+if(APPLE)
+set( UIS
+    ${UIS}
+    IPreferences.ui)
+endif(APPLE)
 
 set( RCS
     resources.qrc

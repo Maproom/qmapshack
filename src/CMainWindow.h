@@ -113,6 +113,7 @@ private slots:
     void slotSetProfileMode(bool on);
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
+    void slotPreferences();
 
 private:
     friend int main(int argc, char ** argv);

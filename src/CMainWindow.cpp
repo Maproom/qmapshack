@@ -47,6 +47,10 @@
 #include <QtSql>
 #include <QtWidgets>
 
+#ifdef Q_OS_MAC
+#include "CMacPreferences.h"
+#endif // Q_OS_MAC
+
 #ifdef WIN32
 #include "device/CDeviceWatcherWindows.h"
 #include <dbt.h>
@@ -192,9 +196,9 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockDem->toggleViewAction());
     menuWindow->addAction(dockGis->toggleViewAction());
     menuWindow->addAction(dockRte->toggleViewAction());
-
+#ifdef Q_OS_MAC
     prepareMenuForMac();
-
+#endif // Q_OS_MAC
     loadGISData(qlOpts->arguments);
 }
 
@@ -205,6 +209,28 @@ void CMainWindow::prepareMenuForMac()
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
+
+    actionSetupMapPaths->setVisible(false);
+    actionSetupDEMPaths->setVisible(false);
+    actionSetupTimeZone->setVisible(false);
+    actionSetupUnits->setVisible(false);
+    actionSetupWorkspace->setVisible(false);
+    actionSetupCoordFormat->setVisible(false);
+
+    QAction* actionPreferences = new QAction(this);
+    // actionPreferences->setIcon()
+    actionPreferences->setMenuRole(QAction::PreferencesRole);
+    actionPreferences->setObjectName(QStringLiteral("actionPreferences"));
+    menu->addAction(actionPreferences);
+    connect(actionPreferences, &QAction::triggered, this, &CMainWindow::slotPreferences);
+}
+
+void CMainWindow::slotPreferences()
+{
+#ifdef Q_OS_MAC
+    CMacPreferencesDialog dlgpref(this);
+    dlgpref.exec();
+#endif // Q_OS_MAC
 }
 
 CMainWindow::~CMainWindow()
@@ -450,6 +476,7 @@ void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
         ele.clear();
     }
 }
+
 
 void CMainWindow::slotAbout()
 {

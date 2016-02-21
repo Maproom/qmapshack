@@ -1,5 +1,5 @@
 /**********************************************************************************************
-   Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+   Copyright (C) 2015 Ivo Kronenberg
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -31,14 +31,28 @@
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
     : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded);
-    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved);
+    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded, Qt::QueuedConnection);
+    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved, Qt::QueuedConnection);
     connect(qApp,    &QApplication::aboutToQuit,       this, &CDeviceWatcherMac::slotEndListing);
 }
 
 
-CDeviceWatcherMac::~CDeviceWatcherMac()
+void CDeviceWatcherMac::addDevice(const QStorageInfo& storage)
 {
+    if (storage.isValid() && storage.isReady())
+    {
+        QString dev = QString(storage.device()).section('/', -1);
+        if (!deviceList.contains(dev))
+        {
+            // We don't care about content of device. This is done in the probeForDevice() method.
+            deviceList.append(dev);
+            QString path = storage.rootPath();
+            QString label = storage.name();
+
+            qDebug() << "label:" << label << " root path: " << path << " device: " << dev;
+            probeForDevice(path, dev, label);
+        }
+    }
 }
 
 
@@ -51,141 +65,82 @@ void CDeviceWatcherMac::slotEndListing()
 // Aufruf 1s. nach instanzierung
 void CDeviceWatcherMac::slotUpdate()
 {
+    qDebug() << "slotUpdate";
     foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
     {
         addDevice(storage);
     }
 }
 
-void CDeviceWatcherMac::slotDeviceAdded(const QString& dev, const QString& path)
+
+void CDeviceWatcherMac::slotDeviceAdded(QString dev)
 {
-    qDebug() << "slotDeviceAdded" << dev << " " << path;
-
-    QStorageInfo storage(path);
-    addDevice(storage);
-}
-
-
-void CDeviceWatcherMac::addDevice(QStorageInfo storage)
-{
-    if (storage.isValid() && storage.isReady())
+    // get mount point
+    QStorageInfo storageInfo;
+    foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
     {
-        QString dev = QString(storage.device()).section('/', -1);
-        if (!sDevices.contains(dev))
+        QString diskName = QString(storage.device()).section('/', -1);
+        if(dev == diskName)
         {
-            // TODO only add Garmin devices...
-            sDevices.append(dev);
-            //QString label = QFileInfo(path).fileName();
-            QString path = storage.rootPath();
-            QString device = storage.device();
-            QString label = storage.name();
-            QString name = storage.displayName();
-
-            qDebug() << "name: " << storage.name() << " display name: " << name << " root path: " << path << " label (name): " << label << " device: " <<device << " " << dev;
-            //probeForDevice(path, path, storage.name());
-            probeForDevice(path, dev, label);
-
-            // beim senden von *.gpx Dateien an Device:
-            // 1. wird im Ordner Garmin/NewFiles als gpx abgelegt.
-            // danach (z.B. wenn device abgehängt wird) übernimmt das GPS diese als *.fit im Ordner Garmin/Courses
+            storageInfo = storage;
         }
     }
+
+    qDebug() << "slotDeviceAdded" << dev << " " << storageInfo.rootPath();
+
+    addDevice(storageInfo);
 }
 
 
-void CDeviceWatcherMac::slotDeviceRemoved(const QString& dev, const QString& path)
+void CDeviceWatcherMac::slotDeviceRemoved(QString dev)
 {
     qDebug() << "slotDeviceRemoved" << dev;
 
-    sDevices.removeAll(dev); //erase?
+    deviceList.removeAll(dev);
     listWks->removeDevice(dev);
 }
 
 
 
-static void onDiskAppear(DADiskRef disk, void *context)
+static void onDiskAppear(DADiskRef disk, CFArrayRef keys, void* context)
 {
     CDeviceWorker *p = static_cast<CDeviceWorker*>(context);
-    p->eventDiskAppear(disk);
+    QString diskName = DADiskGetBSDName(disk);
+    qDebug() << "onDiskAppear" << diskName;
+
+    p->sigDeviceAdded(diskName);
+
+    //QMetaMethod deviceAddedSignal = QMetaMethod::fromSignal(&CDeviceWorker::sigDeviceAdded);
+    //if(!deviceAddedSignal.invoke(p, Qt::QueuedConnection, Q_ARG(QString, diskName), Q_ARG(QString, path)))
+    //{
+    //    qWarning("invoke sigDeviceAdded failed");
+    //}
 }
 
 
 static void onDiskDisappear(DADiskRef disk, void *context)
 {
     CDeviceWorker *p = static_cast<CDeviceWorker*>(context);
-    p->eventDiskDisappear(disk);
-}
+    QString diskName = DADiskGetBSDName(disk);
+    qDebug() << "onDiskDisappear" << diskName;
 
+    p->sigDeviceRemoved(diskName);
 
-void CDeviceWorker::eventDiskAppear(DADiskRef disk)
-{
-    QString disk_name = DADiskGetBSDName(disk);
-    QString path = getMountPoint(disk);
-
-    qDebug() << "onDiskAppear " << path << " " << disk_name;
-
-    if (!QMetaObject::invokeMethod(this, "sigDeviceAdded", Qt::QueuedConnection, Q_ARG(QString, disk_name), Q_ARG(QString, path)))
-    {
-        qWarning("invoke deviceAdded failed");
-    }
-}
-
-
-void CDeviceWorker::eventDiskDisappear(DADiskRef disk)
-{
-    QString disk_name = DADiskGetBSDName(disk);
-    qDebug() << "onDiskDisappear " << disk_name;
-
-    if (!QMetaObject::invokeMethod(this, "sigDeviceRemoved", Qt::QueuedConnection, Q_ARG(QString, disk_name), Q_ARG(QString, "")))
-    {
-        qWarning("invoke deviceRemoved failed");
-    }
-}
-
-
-QString CDeviceWorker::getMountPoint(DADiskRef disk)
-{
-    //QString path = getMountPoint(disk);
-    CFDictionaryRef dict = DADiskCopyDescription(disk);
-
-    QString path;
-    CFURLRef fspath = (CFURLRef) CFDictionaryGetValue(dict, kDADiskDescriptionVolumePathKey);
-    if(fspath)
-    {
-        char buf[512];
-        CFURLGetFileSystemRepresentation(fspath, false, (UInt8 *)buf, sizeof(buf));
-        path = buf;
-    }
-    else
-    {
-        // wieso braucht es diesen Workaround für gewisse Devices?
-        // bei manchen Devices ist der Volumen Path Key (fspath) nicht gesetzt.
-        // TODO anderen Key verwenden?
-        QString disk_name = DADiskGetBSDName(disk);
-        foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
-        {
-            QString dev = QString(storage.device()).section('/', -1);
-            if(dev == disk_name)
-            {
-                path = storage.rootPath();
-            }
-        }
-    }
-
-    CFRelease(dict);
-    return path;
+    //QMetaMethod deviceRemovedSignal = QMetaMethod::fromSignal(&CDeviceWorker::sigDeviceRemoved);
+    //if(!deviceRemovedSignal.invoke(p, Qt::QueuedConnection, Q_ARG(QString, diskName)))
+    //{
+    //    qWarning("invoke sigDeviceRemoved failed");
+    //}
 }
 
 
 CDeviceWorker::CDeviceWorker() : QThread()
 {
-    init();
+    mSession = DASessionCreate(kCFAllocatorDefault);
+    DARegisterDiskDescriptionChangedCallback(mSession, nullptr, kDADiskDescriptionWatchVolumePath, onDiskAppear, this);
+    DARegisterDiskDisappearedCallback(mSession, nullptr, onDiskDisappear, this);
+
     QThread::start();
-}
-
-
-CDeviceWorker::~CDeviceWorker()
-{
 }
 
 
@@ -197,13 +152,13 @@ void CDeviceWorker::stop()
     DAUnregisterCallback(mSession, (void*)onDiskAppear, this);
     DAUnregisterCallback(mSession, (void*)onDiskDisappear, this);
 
-    qDebug() << "Thread.stop";
+    qDebug() << "CDeviceWorker Thread.stop";
 }
 
 
 void CDeviceWorker::run()
 {
-    qDebug() << "Thread.run";
+    qDebug() << "CDeviceWorker Thread.run";
     mStop = false;
 
     DASessionScheduleWithRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
@@ -215,13 +170,4 @@ void CDeviceWorker::run()
     while (!mStop && result);
 
     DASessionUnscheduleFromRunLoop(mSession, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-}
-
-
-void CDeviceWorker::init()
-{
-    mSession = DASessionCreate(kCFAllocatorDefault);
-
-    DARegisterDiskAppearedCallback(mSession, nullptr, onDiskAppear, this);
-    DARegisterDiskDisappearedCallback(mSession, nullptr, onDiskDisappear, this);
 }

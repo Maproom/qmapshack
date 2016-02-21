@@ -76,6 +76,16 @@ public:
      */
     CCanvas* getVisibleCanvas() const;
 
+    QAction * getMapSetupAction()
+    {
+        return actionSetupMapPaths;
+    }
+
+    QAction * getDemSetupAction()
+    {
+        return actionSetupDEMPaths;
+    }
+
     const qint32 id;
 protected:
 #ifdef WIN32

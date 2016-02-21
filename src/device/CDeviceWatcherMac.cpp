@@ -22,11 +22,6 @@
 
 #include <QtWidgets>
 
-#include <CoreServices/CoreServices.h>
-
-#include <IOKit/storage/IOCDMedia.h>
-#include <IOKit/storage/IODVDMedia.h>
-
 
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
     : IDeviceWatcher(parent), worker()
@@ -109,12 +104,6 @@ static void onDiskAppear(DADiskRef disk, CFArrayRef keys, void* context)
     qDebug() << "onDiskAppear" << diskName;
 
     p->sigDeviceAdded(diskName);
-
-    //QMetaMethod deviceAddedSignal = QMetaMethod::fromSignal(&CDeviceWorker::sigDeviceAdded);
-    //if(!deviceAddedSignal.invoke(p, Qt::QueuedConnection, Q_ARG(QString, diskName), Q_ARG(QString, path)))
-    //{
-    //    qWarning("invoke sigDeviceAdded failed");
-    //}
 }
 
 
@@ -125,12 +114,6 @@ static void onDiskDisappear(DADiskRef disk, void *context)
     qDebug() << "onDiskDisappear" << diskName;
 
     p->sigDeviceRemoved(diskName);
-
-    //QMetaMethod deviceRemovedSignal = QMetaMethod::fromSignal(&CDeviceWorker::sigDeviceRemoved);
-    //if(!deviceRemovedSignal.invoke(p, Qt::QueuedConnection, Q_ARG(QString, diskName)))
-    //{
-    //    qWarning("invoke sigDeviceRemoved failed");
-    //}
 }
 
 

@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
 #include "units/IUnit.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 

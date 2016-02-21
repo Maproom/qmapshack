@@ -18,8 +18,8 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "helpers/CSettings.h"
 #include "helpers/CDraw.h"
+#include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -398,18 +398,16 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
         p.translate(offMargin,offTop);
 
         QString msg = tr(
-                    "There are no maps right now. "
-                    "QMapShack is no fun without maps. "
-                    "You can install maps by pressing the 'Help! I want maps!' button in the 'Maps' dock window. "
-                    "Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. "
-                    );
+            "There are no maps right now. "
+            "QMapShack is no fun without maps. "
+            "You can install maps by pressing the 'Help! I want maps!' button in the 'Maps' dock window. "
+            "Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. "
+            );
 
         QTextDocument doc;
         doc.setPlainText(msg);
         doc.setTextWidth(currentBuffer.image.width() - offMargin*2);
         doc.drawContents(&p);
-
-
     }
     CMapItem::mutexActiveMaps.unlock();
 }

@@ -204,7 +204,6 @@ void CDeviceGarmin::insertCopyOfProject(IGisProject * project)
         takeChild(myIdx);
         insertChild(newIdx, gpx);
     }
-
 }
 
 void CDeviceGarmin::saveImages(CGisItemWpt& wpt)

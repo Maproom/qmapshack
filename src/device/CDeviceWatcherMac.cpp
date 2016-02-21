@@ -26,8 +26,8 @@
 CDeviceWatcherMac::CDeviceWatcherMac(CGisListWks *parent)
     : IDeviceWatcher(parent), worker()
 {
-    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded, Qt::QueuedConnection);
-    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved, Qt::QueuedConnection);
+    connect(&worker, &CDeviceWorker::sigDeviceAdded,   this, &CDeviceWatcherMac::slotDeviceAdded);
+    connect(&worker, &CDeviceWorker::sigDeviceRemoved, this, &CDeviceWatcherMac::slotDeviceRemoved);
     connect(qApp,    &QApplication::aboutToQuit,       this, &CDeviceWatcherMac::slotEndListing);
 }
 
@@ -103,7 +103,7 @@ static void onDiskAppear(DADiskRef disk, CFArrayRef keys, void* context)
     QString diskName = DADiskGetBSDName(disk);
     qDebug() << "onDiskAppear" << diskName;
 
-    p->sigDeviceAdded(diskName);
+    emit p->sigDeviceAdded(diskName);
 }
 
 
@@ -113,7 +113,7 @@ static void onDiskDisappear(DADiskRef disk, void *context)
     QString diskName = DADiskGetBSDName(disk);
     qDebug() << "onDiskDisappear" << diskName;
 
-    p->sigDeviceRemoved(diskName);
+    emit p->sigDeviceRemoved(diskName);
 }
 
 

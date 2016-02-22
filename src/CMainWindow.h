@@ -123,6 +123,7 @@ private slots:
     void slotSetProfileMode(bool on);
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
+    void slotSetupWptIcons();
 
 private:
     friend int main(int argc, char ** argv);

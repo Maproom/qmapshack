@@ -25,6 +25,7 @@
 class QToolButton;
 class QAction;
 class QListWidgetItem;
+class CMainWindow;
 
 class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
 {
@@ -32,16 +33,19 @@ class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
 public:
     CWptIconDialog(QToolButton * parent);
     CWptIconDialog(QAction * parent);
+    CWptIconDialog(CMainWindow * parent);
     virtual ~CWptIconDialog();
 
 private slots:
     void slotItemClicked(QListWidgetItem * item);
+    void slotSetupPath();
 
 private:
     void setupList(QObject *obj);
+    void setupSignals();
 
-    QToolButton * button;
-    QAction     * action;
+    QToolButton * button = nullptr;
+    QAction     * action = nullptr;
 };
 
 #endif //CWPTICONDIALOG_H

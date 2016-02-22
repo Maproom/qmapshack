@@ -206,6 +206,7 @@
         <file>icons/32x32/Limit.png</file>
         <file>icons/32x32/LimitSys.png</file>
         <file>icons/32x32/LimitUsr.png</file>
+        <file>icons/32x32/SetupWptSym.png</file>
         
 
         <file>icons/48x48/2DFix.png</file>
@@ -385,6 +386,7 @@
         <file>icons/48x48/Limit.png</file>
         <file>icons/48x48/LimitSys.png</file>
         <file>icons/48x48/LimitUsr.png</file>
+        <file>icons/48x48/SetupWptSym.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

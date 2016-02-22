@@ -103,7 +103,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
     CGisWidget::self().postEventForDb(info);
 }
 
@@ -145,7 +145,7 @@ void CDBProject::setupName(const QString &defaultName)
 void CDBProject::postStatus()
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Checked, getId(), getDBName(), getDBHost());
 
     bool changedItems   = false;
     const int N         = childCount();
@@ -156,6 +156,21 @@ void CDBProject::postStatus()
         {
             info->keysChildren << item->getKey().item;
             changedItems |= item->isChanged();
+        }
+    }
+
+    // check if all items are loaded
+    QSqlQuery query(db);
+    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
+    query.bindValue(":parent", getId());
+    QUERY_EXEC();
+
+    if(query.next())
+    {
+        qDebug() << query.value(0).toInt() << info->keysChildren.count();
+        if(query.value(0).toInt() != info->keysChildren.count())
+        {
+            info->isLoaded = Qt::PartiallyChecked;
         }
     }
 
@@ -511,7 +526,7 @@ bool CDBProject::save()
         return false;
     }
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Checked, getId(), getDBName(), getDBHost());
 
     int N = childCount();
     PROGRESS_SETUP(tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
@@ -613,6 +628,21 @@ bool CDBProject::save()
     // update change flag
     updateDecoration();
 
+
+    // check if all items are loaded
+    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
+    query.bindValue(":parent", getId());
+    QUERY_EXEC();
+
+    if(query.next())
+    {
+        qDebug() << query.value(0).toInt() << info->keysChildren.count();
+        if(query.value(0).toInt() != info->keysChildren.count())
+        {
+            info->isLoaded = Qt::PartiallyChecked;
+        }
+    }
+
     // report status to database view
     info->updateLostFound = true;
     CGisWidget::self().postEventForDb(info);
@@ -623,6 +653,11 @@ bool CDBProject::save()
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
 {
+    if(evt->addItemsExclusively)
+    {
+        qDeleteAll(takeChildren());
+    }
+
     foreach(const evt_item_t &item, evt->items)
     {
         IGisItem * gisItem = 0;

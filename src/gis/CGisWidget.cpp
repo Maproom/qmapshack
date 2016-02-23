@@ -346,7 +346,7 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
             CDBProject * dbp = dynamic_cast<CDBProject*>(project);
             if(dbp)
             {
-                dbp->postStatus();
+                dbp->postStatus(true);
             }
         }
 

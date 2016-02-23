@@ -116,16 +116,24 @@ public:
 class CEvtW2DAckInfo : public QEvent
 {
 public:
-    CEvtW2DAckInfo(Qt::CheckState loaded, quint64 id, const QString& db, const QString& host)
+    CEvtW2DAckInfo(Qt::CheckState checkState, quint64 id, const QString& db, const QString& host)
         : QEvent(QEvent::Type(eEvtW2DAckInfo))
-        , isLoaded(loaded)
+        , checkState(checkState)
         , id(id)
         , db(db)
         , host(host)
     {
     }
 
-    Qt::CheckState isLoaded;
+    CEvtW2DAckInfo(quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DAckInfo))
+        , id(id)
+        , db(db)
+        , host(host)
+    {
+    }
+
+    Qt::CheckState checkState = Qt::Unchecked;
     bool updateLostFound = false;
     quint64 id;
     QString db;

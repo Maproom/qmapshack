@@ -1,5 +1,5 @@
 /**********************************************************************************************
-   Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+   Copyright (C) 2015 Ivo Kronenberg
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -32,22 +32,15 @@ class CDeviceWorker : public QThread
     Q_OBJECT
 public:
     CDeviceWorker();
-    virtual ~CDeviceWorker();
 
-    void run() Q_DECL_OVERRIDE;
+    void run() override;
     void stop();
 
-    void eventDiskAppear(DADiskRef disk);
-    void eventDiskDisappear(DADiskRef disk);
-
 signals:
-    void sigDeviceAdded(const QString& dev, const QString& path);
-    void sigDeviceRemoved(const QString& dev, const QString& path);
+    void sigDeviceAdded(QString dev);
+    void sigDeviceRemoved(QString dev);
 
 private:
-    void init();
-    QString getMountPoint(DADiskRef disk);
-
     volatile bool mStop;
     DASessionRef mSession;
 };
@@ -58,20 +51,18 @@ class CDeviceWatcherMac : public IDeviceWatcher
     Q_OBJECT
 public:
     CDeviceWatcherMac(CGisListWks *parent);
-    virtual ~CDeviceWatcherMac();
-
-    CDeviceWorker worker;
 
 private slots:
-    void slotUpdate();
-    void slotDeviceAdded(const QString& dev, const QString& path);
-    void slotDeviceRemoved(const QString& dev, const QString& path);
+    void slotUpdate() override;
+    void slotDeviceAdded(QString dev);
+    void slotDeviceRemoved(QString dev);
     void slotEndListing();
 
 private:
-    void addDevice(QStorageInfo storage);
+    void addDevice(const QStorageInfo& storage);
 
-    QStringList sDevices;
+    CDeviceWorker worker;
+    QStringList deviceList;
 };
 
 #endif //CDEVICEWATCHERMAC_H

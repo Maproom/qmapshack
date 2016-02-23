@@ -145,7 +145,7 @@ void CDBProject::setupName(const QString &defaultName)
 void CDBProject::postStatus()
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Checked, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(getId(), getDBName(), getDBHost());
 
     bool changedItems   = false;
     const int N         = childCount();
@@ -165,14 +165,15 @@ void CDBProject::postStatus()
     query.bindValue(":parent", getId());
     QUERY_EXEC();
 
-    if(query.next())
-    {
-        qDebug() << query.value(0).toInt() << info->keysChildren.count();
-        if(query.value(0).toInt() != info->keysChildren.count())
-        {
-            info->isLoaded = Qt::PartiallyChecked;
-        }
+    if(query.next() && (query.value(0).toInt() != info->keysChildren.count()))
+    {        
+        checkState = Qt::PartiallyChecked;
     }
+    else
+    {
+        checkState = Qt::Checked;
+    }
+    info->checkState = checkState;
 
     // update item counters and track/waypoint correlation
     // updateItems(); <--- don't! this is causing a crash
@@ -526,7 +527,7 @@ bool CDBProject::save()
         return false;
     }
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Checked, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(getId(), getDBName(), getDBHost());
 
     int N = childCount();
     PROGRESS_SETUP(tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
@@ -628,20 +629,20 @@ bool CDBProject::save()
     // update change flag
     updateDecoration();
 
-
     // check if all items are loaded
     query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
     query.bindValue(":parent", getId());
     QUERY_EXEC();
 
-    if(query.next())
+    if(query.next() && (query.value(0).toInt() != info->keysChildren.count()))
     {
-        qDebug() << query.value(0).toInt() << info->keysChildren.count();
-        if(query.value(0).toInt() != info->keysChildren.count())
-        {
-            info->isLoaded = Qt::PartiallyChecked;
-        }
+        checkState = Qt::PartiallyChecked;
     }
+    else
+    {
+        checkState = Qt::Checked;
+    }
+    info->checkState = checkState;
 
     // report status to database view
     info->updateLostFound = true;
@@ -752,10 +753,10 @@ void CDBProject::update()
         }
     }
 
-
+    // read project properties
     QSqlQuery query(db);
     query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
-    query.bindValue(":id", id);
+    query.bindValue(":id", getId());
     QUERY_EXEC(return );
     query.next();
 
@@ -774,6 +775,18 @@ void CDBProject::update()
     setupName(name);
     setToolTip(CGisListWks::eColumnName, getInfo());
 
+    // get keys of all children attached to the project in the database
+    query.prepare("SELECT keyqms FROM items WHERE id IN (SELECT child FROM folder2item WHERE parent=:parent)");
+    query.bindValue(":parent", getId());
+    QUERY_EXEC(return );
+
+    QStringList allKeys;
+    while(query.next())
+    {
+        allKeys << query.value(0).toString();
+    }
+
+    // Iterate over all children
     const int N = childCount();
     for(int i = 0; i < N; i++)
     {
@@ -783,8 +796,14 @@ void CDBProject::update()
             continue;
         }
 
+        const IGisItem::key_t& key = item->getKey();
+
+        // sort out keys allready loaded
+        allKeys.removeAll(key.item);
+
+        // update item from database
         query.prepare("SELECT id FROM items WHERE keyqms=:keyqms");
-        query.bindValue(":keyqms", item->getKey().item);
+        query.bindValue(":keyqms", key.item);
         QUERY_EXEC(return );
 
         if(query.next())
@@ -794,7 +813,7 @@ void CDBProject::update()
 
             QSqlQuery query2(db);
             query2.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
-            query2.bindValue(":parent", id);
+            query2.bindValue(":parent", getId());
             query2.bindValue(":child", idItem);
             query2.exec();
 
@@ -816,6 +835,28 @@ void CDBProject::update()
             // item is not in the database at all.
             item->updateDecoration(IGisItem::eMarkNotInDB|IGisItem::eMarkChanged, IGisItem::eMarkNone);
         }
+    }
+
+    // allKeys contains all item keys that are part of the project but not loaded.
+    // If the check state has been Qt::Checked we try to regain that status by loading
+    // all items left over in allKeys;
+    if((checkState == Qt::Checked) && !allKeys.isEmpty())
+    {
+        QString list = "'" + allKeys.join("','") + "'";
+        qDebug() << list;
+
+        CEvtD2WShowItems * evt = new CEvtD2WShowItems(getId(), getDBName());
+//        query.prepare("SELECT id, type FROM items WHERE keyqms IN (:list)");
+//        query.bindValue(":list", list);
+        //QUERY_EXEC(return);
+        QUERY_RUN("SELECT id, type FROM items WHERE keyqms IN (" + list + ")", return);
+
+        while(query.next())
+        {
+            evt->items << evt_item_t(query.value(0).toULongLong(), query.value(1).toUInt());
+        }
+
+        CGisWidget::self().postEventForWks(evt);
     }
 
     updateDecoration();

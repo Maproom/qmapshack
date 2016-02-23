@@ -153,6 +153,8 @@ protected:
         , eActionClone  = 0x08
         , eActionReload = 0x10
     };
+
+    Qt::CheckState checkState = Qt::Unchecked;
 };
 
 #endif //CDBPROJECT_H

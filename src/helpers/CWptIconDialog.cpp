@@ -16,7 +16,10 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/WptIcons.h"
+#include "helpers/CAppSetup.h"
+#include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 
 #include <QtWidgets>
@@ -60,24 +63,43 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
 
 
 CWptIconDialog::CWptIconDialog(QAction *parent)
-    : button(0)
+    : QDialog(CMainWindow::self().getBestWidgetForParent())
     , action(parent)
 {
     setupUi(this);
     setupList(action);
+    setupSignals();
 }
 
 CWptIconDialog::CWptIconDialog(QToolButton *parent)
-    : button(parent)
-    , action(0)
+    : QDialog(CMainWindow::self().getBestWidgetForParent())
+    , button(parent)
 {
     setupUi(this);
     setupList(button);
+    setupSignals();
+}
+
+CWptIconDialog::CWptIconDialog(CMainWindow * parent)
+    : QDialog(parent)
+{
+    setupUi(this);
+    setupList(nullptr);
+    setupSignals();
+}
+
+void CWptIconDialog::setupSignals()
+{
+    connect(listWidget, &QListWidget::itemClicked,   this, &CWptIconDialog::slotItemClicked);
+    connect(listWidget, &QListWidget::itemActivated, this, &CWptIconDialog::slotItemClicked);
+    connect(toolPath,   &QToolButton::clicked,       this, &CWptIconDialog::slotSetupPath);
 }
 
 void CWptIconDialog::setupList(QObject * obj)
 {
-    QString currentIcon = obj->objectName();
+    listWidget->clear();
+
+    QString currentIcon = obj == nullptr ? QString() : obj->objectName();
     QListWidgetItem * currentItem = nullptr;
 
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
@@ -104,8 +126,8 @@ void CWptIconDialog::setupList(QObject * obj)
         listWidget->scrollToItem(currentItem);
     }
 
-    connect(listWidget, &QListWidget::itemClicked,   this, &CWptIconDialog::slotItemClicked);
-    connect(listWidget, &QListWidget::itemActivated, this, &CWptIconDialog::slotItemClicked);
+    SETTINGS;
+    labelIconPath->setText(cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->configDir("WaypointIcons").absolutePath()).toString());
 }
 
 CWptIconDialog::~CWptIconDialog()
@@ -127,4 +149,19 @@ void CWptIconDialog::slotItemClicked(QListWidgetItem * item)
         action->setToolTip(item->text());
     }
     accept();
+}
+
+void CWptIconDialog::slotSetupPath()
+{
+    QString path = labelIconPath->text();
+    path = QFileDialog::getExistingDirectory(this, tr("Path to user icons..."), path);
+    if(path.isEmpty())
+    {
+        return;
+    }
+
+    SETTINGS;
+    cfg.setValue("Paths/externalWptIcons", path);
+    initWptIcons();
+    setupList(button == nullptr ? dynamic_cast<QObject*>(action) : dynamic_cast<QObject*>(button));
 }

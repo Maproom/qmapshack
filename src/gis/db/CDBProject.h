@@ -86,7 +86,7 @@ public:
     /**
        @brief Send a CEvtW2DAckInfo event to the database view
      */
-    void postStatus();
+    void postStatus(bool updateLostFound);
 
     /**
        @brief Load items from the database into the project
@@ -153,6 +153,8 @@ protected:
         , eActionClone  = 0x08
         , eActionReload = 0x10
     };
+
+    Qt::CheckState checkState = Qt::Unchecked;
 };
 
 #endif //CDBPROJECT_H

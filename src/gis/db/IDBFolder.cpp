@@ -190,7 +190,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
         return;
     }
 
-    setCheckState(CGisListDB::eColumnCheckbox, info->isLoaded ? Qt::Checked : Qt::Unchecked);
+    setCheckState(CGisListDB::eColumnCheckbox, info->checkState);
 
     QSqlQuery query(db);
     // update text and tooltip
@@ -348,6 +348,8 @@ void IDBFolder::toggle()
         QUERY_EXEC(return );
 
         CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(getId(), getDBName());
+        evt2->addItemsExclusively = true;
+
         while(query.next())
         {
             evt2->items << evt_item_t(query.value(0).toULongLong(), query.value(1).toUInt());

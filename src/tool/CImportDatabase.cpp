@@ -93,7 +93,7 @@ void CImportDatabase::slotSelectSource()
 void CImportDatabase::slotSelectTarget()
 {
     SETTINGS;
-    QString path = cfg.value("Path/target",QDir::homePath()).toString();
+    QString path = cfg.value("ConvertDB/targetPath",QDir::homePath()).toString();
     QString filename = QFileDialog::getSaveFileName(this, tr("Select target database..."), path, "QMapShack Database (*.db)");
     if(filename.isEmpty())
     {
@@ -101,7 +101,7 @@ void CImportDatabase::slotSelectTarget()
     }
 
     QFileInfo fi(filename);
-    cfg.setValue("Path/target", fi.absolutePath());
+    cfg.setValue("ConvertDB/targetPath", fi.absolutePath());
     if(fi.suffix().toLower() != "db")
     {
         filename += ".db";

@@ -875,7 +875,7 @@ void CGisListWks::slotLoadWorkspace()
             }
             else
             {
-                dbProject->postStatus();
+                dbProject->postStatus(false);
             }
             break;
         }
@@ -1300,7 +1300,7 @@ void CGisListWks::slotDeleteItem()
     // this will update the database view.
     foreach(CDBProject * project, projects)
     {
-        project->postStatus();
+        project->postStatus(true);
     }
     // unblock update for all projects seen
     foreach(IGisProject * project, projectsAll)
@@ -1702,7 +1702,7 @@ bool CGisListWks::event(QEvent * e)
             CDBProject * project =  getProjectById(evt->id, evt->db);
             if(nullptr != project)
             {
-                project->postStatus();
+                project->postStatus(false);
             }
             e->accept();
             emit sigChanged();

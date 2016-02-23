@@ -94,6 +94,8 @@ public:
     {
     }
 
+    /// if true only the items in the list are loaded. Any other item loaded but not part of the list will be removed.
+    bool addItemsExclusively = false;
     quint64 id;
     QString db;
     QList<evt_item_t> items;
@@ -114,18 +116,25 @@ public:
 class CEvtW2DAckInfo : public QEvent
 {
 public:
-    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db, const QString& host)
+    CEvtW2DAckInfo(Qt::CheckState checkState, quint64 id, const QString& db, const QString& host)
         : QEvent(QEvent::Type(eEvtW2DAckInfo))
-        , isLoaded(loaded)
-        , updateLostFound(false)
+        , checkState(checkState)
         , id(id)
         , db(db)
         , host(host)
     {
     }
 
-    bool isLoaded;
-    bool updateLostFound;
+    CEvtW2DAckInfo(quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DAckInfo))
+        , id(id)
+        , db(db)
+        , host(host)
+    {
+    }
+
+    Qt::CheckState checkState = Qt::Unchecked;
+    bool updateLostFound = false;
     quint64 id;
     QString db;
     QString host;
@@ -151,7 +160,6 @@ public:
         , name(name)
         , type(type)
         , idParent(id)
-        , idChild(0)
         , db(db)
         , host(host)
     {
@@ -160,7 +168,7 @@ public:
     QString name;
     IDBFolder::type_e type;
     quint64 idParent;
-    quint64 idChild;
+    quint64 idChild = 0;
     QString db;
     QString host;
 };

@@ -31,7 +31,7 @@
 #define _MKSTR(x)      _MKSTR_1(x)
 #endif
 
-CAppSetup* instance;
+CAppSetup* instance = nullptr;
 
 CAppSetup* CAppSetup::getPlattformInstance()
 {

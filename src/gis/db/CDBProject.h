@@ -86,7 +86,7 @@ public:
     /**
        @brief Send a CEvtW2DAckInfo event to the database view
      */
-    void postStatus();
+    void postStatus(bool updateLostFound);
 
     /**
        @brief Load items from the database into the project

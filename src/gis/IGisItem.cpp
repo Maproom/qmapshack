@@ -284,7 +284,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     IGisProject * project = dynamic_cast<IGisProject*>(parent());
     if(project && (enable & (eMarkChanged|eMarkNotPart|eMarkNotInDB)))
     {
-        project->setChanged();                
+        project->setChanged();
     }
 
     // test for lost & found folder
@@ -313,7 +313,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     if(mask & eMarkNotInDB)
     {
         tt  += tt.isEmpty() ? "" : "\n";
-        tt  += tr("The item is not in the database.");        
+        tt  += tr("The item is not in the database.");
         str += "X";
     }
     if(mask & eMarkChanged)

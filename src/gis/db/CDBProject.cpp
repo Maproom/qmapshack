@@ -631,8 +631,8 @@ bool CDBProject::save()
 
     postStatus(true);
 
-    // update change flag    
-    updateDecoration();        
+    // update change flag
+    updateDecoration();
     return success;
 }
 
@@ -766,7 +766,7 @@ void CDBProject::update()
         The further proceeding depends on the check state of the project. If the project
         is partially loaded we simply update all items. If it is completely loaded we
         reload it.
-    */
+     */
 
     if(state == Qt::Checked)
     {

@@ -127,7 +127,11 @@ void CWptIconDialog::setupList(QObject * obj)
     }
 
     SETTINGS;
-    labelIconPath->setText(cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->configDir("WaypointIcons").absolutePath()).toString());
+    QString path = cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->configDir("WaypointIcons").absolutePath()).toString();
+    labelIconPath->setProperty("path", path);
+    labelIconPath->setText(path.size() > 25 ? "..." + path.right(22) : path);
+
+    adjustSize();
 }
 
 CWptIconDialog::~CWptIconDialog()
@@ -153,7 +157,7 @@ void CWptIconDialog::slotItemClicked(QListWidgetItem * item)
 
 void CWptIconDialog::slotSetupPath()
 {
-    QString path = labelIconPath->text();
+    QString path = labelIconPath->property("path").toString();
     path = QFileDialog::getExistingDirectory(this, tr("Path to user icons..."), path);
     if(path.isEmpty())
     {

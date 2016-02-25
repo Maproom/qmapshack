@@ -71,7 +71,7 @@ void initWptIcons()
     QDir dirIcon(cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->configDir("WaypointIcons").absolutePath()).toString());
 
     QString filename;
-    QStringList filenames = dirIcon.entryList(QDir::Files);
+    QStringList filenames = dirIcon.entryList(QStringList("*.bmp"), QDir::Files);
 
     foreach(filename, filenames)
     {

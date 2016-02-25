@@ -1,3 +1,42 @@
+V 1.6.0
+* Fix: Toggle key focus of on-screen profile
+* Fix: Printing correct unit in a plot's xLabel instead of `distance [%1]`
+* Fix: CPlot: Replace hardcoded check for TotalElapsedSeconds() with proper values from the source actually used
+* Fix: Avoid div-by-zero in case the distance between two points is 0
+* Fix: Precision of plot scale for small values
+* Fix: Implemented linear interpolation for drawing zoomed plots correctly
+* Fix: Avoid drawing tics outside the plotting area
+* Add: Additional extensions created by `MIO Cyclo ver. 4.2`
+* Add: Map/DEM: Add move up/move down to context menu as alternative to drag-n-drop
+* Add: Support for .slf (Sigma Log Format) files
+* Add: Support for .fit (Garmin Fitness Format) files
+* Add: (Trk) Filter to split a single track containing several segments into several tracks
+* Add: (Trk) Filter to remove extension values
+* Add: Support for MySQL database
+* Add: Support for accessing the database from multiple instances at the same time
+* Add: User info to item history
+* Add: (Trk) Setup for line width and arrows
+* Add: (Trk) line coloring: local, global, automatic setup of limits
+* Add: (Trk) plot limits: local, global, automatic setup of limits 
+* Add: (Trk) colorize track by activity
+* Add: Adventures to Garmin devices. Projects are stored as adventure.
+* Add: "Archive" folder for Garmin devices. 
+* Add: Show/hide action for projects on devices.
+* Add: Support GEMF raster maps
+* Add: Make custom waypoint symbols path configurable
+* Add: Reflect partially loaded projects in the checkbox state
+* [Issue #80] Selected segment by select tool diseappears when zoom +- or pan
+* [Issue #86] Updating map path when adding new maps
+* [Issue #91] undo last change crashes qmapshack when drawing a track or a route
+* [Issue #89] *.GPX files are not recognized
+* [Issue #100] Show file/server when hovering a database
+* [Issue #106 ] Profil with no or bad data does not open trackdetails
+* [Issue #107] Patches for 'original' & 'debugging' typos
+* [Issue #108] Use the correct order of extensions for Garmin TPX1
+* [Issue #112] correct display of menu entries on OS-X for all languages.
+* A lot of lttle GUI fixes bug fixes and other improvements
+* Converted code closer to c++11
+
 V 1.5.1
 Line edit: Fix broken abort button
 

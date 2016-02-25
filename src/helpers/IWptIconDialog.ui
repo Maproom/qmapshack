@@ -15,19 +15,19 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <item>
     <widget class="QListWidget" name="listWidget">
@@ -45,16 +45,16 @@
       <number>3</number>
      </property>
      <property name="leftMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="topMargin">
-      <number>3</number>
+      <number>0</number>
      </property>
      <property name="rightMargin">
-      <number>5</number>
+      <number>0</number>
      </property>
      <property name="bottomMargin">
-      <number>3</number>
+      <number>0</number>
      </property>
      <item>
       <widget class="QLabel" name="label_2">
@@ -88,6 +88,13 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>All custom icons have to be *.bmp format.</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

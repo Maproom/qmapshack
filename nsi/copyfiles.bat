@@ -15,6 +15,11 @@ set QMSI_PROJ_PATH="M:\lib\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib\mingw64"
+rem runtime libraries from mysql/mariadb 
+rem ToDo: describe from where to get - could this be optional?
+set QMSI_MSQL_PATH="M:\lib\mysql"
+rem And finally of courss the path to your build directory!
+set QMSI_BUILD_PATH="..\..\build\"
 
 rem Section 2.) Copy Files
 del /s/q Files
@@ -88,17 +93,18 @@ copy %QMSI_ROUT_PATH%\bin\planetsplitter.exe
 copy %QMSI_MGW6_PATH%\libwinpthread-1.dll
 copy %QMSI_MGW6_PATH%\libz-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
-
+rem section 2.2.6) MySql/MariaDB
+copy %QMSI_MSQL_PATH%\libmysql.dll
 
 rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
-rem section 2.4) Copy libexif Files
-rem copy %QLGTI_LIBEXIF_PATH%\libexif-12.dll
-rem section 2.5) Copy QMapShack Files
-copy ..\..\build\bin\Release\qmapshack.exe
-copy ..\..\build\src\*.qm translations
+
+rem section 2.4) Copy QMapShack Files
+copy %QMSI_BUILD_PATH%\bin\Release\qmapshack.exe
+copy %QMSI_BUILD_PATH%\src\*.qm translations
 copy ..\*.ico
-rem section 2.6) 3rd party SW description
+
+rem section 2.5) 3rd party SW description
 copy ..\3rdparty.txt
 
 pause

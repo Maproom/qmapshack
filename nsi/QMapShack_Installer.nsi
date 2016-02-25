@@ -193,6 +193,7 @@ Section "QMapShack" QMapShack
   
   ;BEGIN additional Files    
   SetOutPath $INSTDIR
+    File Files\libmysql.dll  
     File Files\3rdparty.txt
     ;File Files\libexif-12.dll
   ;END additional Files    

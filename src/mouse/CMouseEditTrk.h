@@ -40,7 +40,7 @@ protected slots:
 
 
 protected:
-    IGisLine* getGisLine() override;
+    IGisLine* getGisLine() const override;
     bool isNewLine = true;
 };
 

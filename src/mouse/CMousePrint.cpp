@@ -25,7 +25,7 @@
 CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
 {
-    cursor      = QCursor(QPixmap("://cursors/cursorSave.png"),0,0);
+    cursor = QCursor(QPixmap("://cursors/cursorSave.png"),0,0);
 
     canvas->reportStatus("CMousePrint", tr("<b>Save(Print) Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection."));
 }

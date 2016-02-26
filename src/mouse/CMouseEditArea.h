@@ -42,7 +42,7 @@ protected slots:
 protected:
     void drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p) override;
 
-    IGisLine * getGisLine() override;
+    IGisLine * getGisLine() const override;
 };
 
 #endif //CMOUSEEDITAREA_H

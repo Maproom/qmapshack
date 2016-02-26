@@ -101,7 +101,7 @@ void ILineOp::drawSinglePointLarge(const QPointF &pt, QPainter& p)
     p.drawRect(rectPoint);
 }
 
-void ILineOp::drawLeadLine(const QPolygonF& line, QPainter& p)
+void ILineOp::drawLeadLine(const QPolygonF& line, QPainter& p) const
 {
     p.setPen(QPen(Qt::yellow, 7, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
     p.drawPolyline(line);
@@ -119,9 +119,9 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
 
         if(e->button() == Qt::LeftButton)
         {
-            lastPos     = pos;
-            mapMove     = true;
-            mapDidMove  = false;
+            lastPos    = pos;
+            mapMove    = true;
+            mapDidMove = false;
         }
     }
 }
@@ -269,7 +269,7 @@ void ILineOp::finalizeOperation(qint32 idx)
 }
 
 
-qint32 ILineOp::isCloseTo(const QPoint& pos)
+qint32 ILineOp::isCloseTo(const QPoint& pos) const
 {
     qint32 min = 30;
     qint32 idx = NOIDX;
@@ -289,8 +289,7 @@ qint32 ILineOp::isCloseTo(const QPoint& pos)
     return idx;
 }
 
-
-qint32 ILineOp::isCloseToLine(const QPoint& pos)
+qint32 ILineOp::isCloseToLine(const QPoint& pos) const
 {
     qint32 idx = NOIDX;
     qreal dist = 60;

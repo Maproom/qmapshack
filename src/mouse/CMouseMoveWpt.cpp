@@ -32,34 +32,32 @@
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
     : IMouse(gis, parent)
 {
-    cursor      = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"),0,0);
-    key         = wpt.getKey();
-    icon        = getWptIconByName(wpt.getIconName(), focus);
-    origPos     = wpt.getPosition() * DEG_TO_RAD;
+    cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
+    key     = wpt.getKey();
+    icon    = getWptIconByName(wpt.getIconName(), focus);
+    origPos = wpt.getPosition() * DEG_TO_RAD;
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()
 {
 }
 
-void CMouseMoveWpt::draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect)
+void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 {
-    QString val, unit, str;
-    qreal d, a1 = 0, a2 = 0;
+    QString val, unit;
+    qreal a1 = 0, a2 = 0;
     QPointF p1 = origPos;
     QPointF p2 = newPos;
 
-    d = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y(), a1, a2);
+    qreal d = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y(), a1, a2);
     IUnit::self().meter2distance(d, val, unit);
-    str = QString("%1 %2, %3").arg(val).arg(unit).arg(a2, 0, 'f', 1);
+    const QString &str = QString("%1 %2, %3").arg(val).arg(unit).arg(a2, 0, 'f', 1);
 
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
 
-
     QPointF p11 = p1 + QPoint(17 * qCos((a1 - 90) * DEG_TO_RAD), 17 * qSin((a1 - 90) * DEG_TO_RAD));
     QPointF p22 = p2 + QPoint(21 * qCos((a2 + 90) * DEG_TO_RAD), 21 * qSin((a2 + 90) * DEG_TO_RAD));
-
 
     QPen pen(Qt::darkBlue, 3);
     pen.setCapStyle(Qt::RoundCap);
@@ -69,13 +67,13 @@ void CMouseMoveWpt::draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRec
     p.setBrush(Qt::NoBrush);
     p.drawEllipse(p1, 16, 16);
     p.drawEllipse(p2, 16, 16);
-    p.drawLine(p11,p22);
+    p.drawLine(p11, p22);
 
     p.save();
     p.translate(p22);
     p.rotate(a2 + 180);
     QPolygonF arrow;
-    arrow << QPointF(0,0) << QPointF(5, -20) << QPointF(0, -10) << QPointF(-5, -20);
+    arrow << QPointF(0, 0) << QPointF(5, -20) << QPointF(0, -10) << QPointF(-5, -20);
     p.setBrush(Qt::NoBrush);
     p.drawPolygon(arrow);
     p.restore();
@@ -90,7 +88,7 @@ void CMouseMoveWpt::slotPanCanvas()
 {
     IMouse::slotPanCanvas();
 
-    newPos  = point;
+    newPos = point;
     gis->convertPx2Rad(newPos);
 }
 
@@ -121,7 +119,7 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
 void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
 {
     point  = e->pos();
-    newPos  = point;
+    newPos = point;
     gis->convertPx2Rad(newPos);
 
     panCanvas(point);
@@ -129,10 +127,10 @@ void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
 
 void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
 {
-    point  = e->pos();
+    point = e->pos();
 }
 
-void CMouseMoveWpt::wheelEvent(QWheelEvent * e)
+void CMouseMoveWpt::wheelEvent(QWheelEvent*)
 {
     canvas->update();
 }

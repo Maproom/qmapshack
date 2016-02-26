@@ -204,7 +204,7 @@ void CDemList::slotContextMenu(const QPoint& point)
     if(itemIsSelected)
     {
         CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
-        actionMoveUp->setEnabled(itemIsActivated && (treeWidget->itemAbove(item) != 0));
+        actionMoveUp->setEnabled(itemIsActivated && (treeWidget->itemAbove(item) != nullptr));
         actionMoveDown->setEnabled(itemIsActivated && item1 && item1->isActivated());
     }
 

@@ -26,7 +26,7 @@
 CQlgtFolder::CQlgtFolder(quint64 id, QSqlDatabase &db)
     : type(0)
     , locked(false)
-    , diary(0)
+    , diary(nullptr)
     , id(id)
 {
     QSqlQuery query(db);

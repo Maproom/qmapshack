@@ -38,7 +38,6 @@ IScrOpt::~IScrOpt()
     }
 }
 
-
 void IScrOpt::mouseMoveEvent(QMouseEvent * e)
 {
     mousePos = e->pos();
@@ -49,7 +48,6 @@ void IScrOpt::enterEvent(QEvent * e)
     QWidget::enterEvent(e);
     CCanvas::restoreOverrideCursor("IScrOpt::enterEvent");
 }
-
 
 void IScrOpt::leaveEvent(QEvent * e)
 {

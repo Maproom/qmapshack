@@ -66,6 +66,8 @@ public:
     void convertRad2Px(QPointF &pos);
     void convertPx2Rad(QPointF& pos);
 
+    void setupBackgroundColor();
+
     void setup();
     QString getProjection();
     void  setProjection(const QString& proj);
@@ -112,7 +114,6 @@ public:
 
     void showProfileAsWindow(bool yes);
     void showProfile(bool yes);
-
 
     /**
        @brief Add a message by key to be reported on the canvas
@@ -176,16 +177,13 @@ private:
     void saveSizeTrackProfile();
     void setDrawContextSize(const QSize& s);
 
-    /// set true to initiate a complete redraw of the screen content
-    redraw_e needsRedraw;
-    /// the map object attached to this canvas
-    CMapDraw * map;
-    /// the elevation data layer attached to this canvas
-    CDemDraw * dem;
-    /// the GIS data layer attached to this canvas
-    CGisDraw * gis;
-    /// the grid attached to this canvas
-    CGrid * grid;
+    QColor backColor;     //< the background color used in case of missing map tiles
+    redraw_e needsRedraw; //< set true to initiate a complete redraw of the screen content
+    CMapDraw * map;       //< the map object attached to this canvas
+    CDemDraw * dem;       //< the elevation data layer attached to this canvas
+    CGisDraw * gis;       //< the GIS data layer attached to this canvas
+    CGrid * grid;         //< the grid attached to this canvas
+
     /// the current point of focus (usually the canvas center)
     QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};
 

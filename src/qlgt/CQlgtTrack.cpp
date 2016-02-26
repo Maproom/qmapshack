@@ -176,7 +176,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
                 s1 >> dummy;
                 s1 >> dummy;
 
-                pt1++;
+                ++pt1;
             }
             break;
         }
@@ -244,7 +244,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
                 s1 >> pt1->vy;
                 ///< [m/s] velocity
                 s1 >> pt1->vz;
-                pt1++;
+                ++pt1;
             }
 
             track.setExt1Data();

@@ -26,7 +26,7 @@
 CLineOpAddPoint::CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorAdd.png"), 0, 0);
 }
 
 CLineOpAddPoint::~CLineOpAddPoint()
@@ -174,7 +174,7 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
 
             if((idxFocus == 0) || (idxFocus == (points.size() - 1)))
             {
-                isPoint  = true;
+                isPoint = true;
             }
         }
     }

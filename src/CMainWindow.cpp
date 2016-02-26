@@ -538,7 +538,13 @@ void CMainWindow::slotCurrentTabCanvas(int i)
     QString name = tabWidget->tabText(i);
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(compareNames(name, tabMaps->tabText(n)))
+        bool isMapView = compareNames(name, tabMaps->tabText(n));
+
+        actionSetupGrid->setEnabled(isMapView);
+        actionSetupMapBackground->setEnabled(isMapView);
+        actionSetupMapView->setEnabled(isMapView);
+
+        if(isMapView)
         {
             tabMaps->setCurrentIndex(n);
             break;

@@ -26,7 +26,7 @@
 CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorDelete.png"),0,0);
+    cursor  = QCursor(QPixmap(":/cursors/cursorDelete.png"), 0, 0);
 }
 
 CLineOpDeletePoint::~CLineOpDeletePoint()
@@ -56,7 +56,7 @@ void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
         // store to undo/redo history
         parentHandler->storeToHistory(points);
     }
-    idxFocus    = NOIDX;
+    idxFocus = NOIDX;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -68,6 +68,5 @@ void CLineOpDeletePoint::drawFg(QPainter& p)
         return;
     }
 
-    const IGisLine::point_t& pt = points[idxFocus];
-    drawSinglePointLarge(pt.pixel, p);
+    drawSinglePointLarge(points[idxFocus].pixel, p);
 }

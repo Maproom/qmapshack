@@ -26,7 +26,6 @@ class CGisItemWpt;
 class CGisDraw;
 class CCanvas;
 
-
 class CMouseWptBubble : public IMouse
 {
     Q_OBJECT

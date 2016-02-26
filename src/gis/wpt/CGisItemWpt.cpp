@@ -672,7 +672,7 @@ void CGisItemWpt::removeLinksByType(const QString& type)
             continue;
         }
 
-        link++;
+        ++link;
     }
 }
 

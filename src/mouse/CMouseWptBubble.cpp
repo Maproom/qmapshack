@@ -27,14 +27,14 @@ CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t &key, CGisDraw * gis, CCa
     : IMouse(gis, parent)
     , key(key)
 {
-    cursor      = QCursor(QPixmap("://cursors/cursorArrow.png"),0,0);
+    cursor = QCursor(QPixmap("://cursors/cursorArrow.png"), 0, 0);
 }
 
 CMouseWptBubble::~CMouseWptBubble()
 {
 }
 
-void CMouseWptBubble::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+void CMouseWptBubble::draw(QPainter&, CCanvas::redraw_e, const QRect&)
 {
 }
 
@@ -89,6 +89,6 @@ void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
     }
 }
 
-void CMouseWptBubble::wheelEvent(QWheelEvent * e)
+void CMouseWptBubble::wheelEvent(QWheelEvent*)
 {
 }

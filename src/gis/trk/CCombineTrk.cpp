@@ -76,8 +76,8 @@ CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPre
     connect(toolUp,        &QToolButton::clicked,              this, &CCombineTrk::slotUp);
     connect(toolDown,      &QToolButton::clicked,              this, &CCombineTrk::slotDown);
 
-    listAvailable->setCurrentItem(0);
-    listSelected->setCurrentItem(0);
+    listAvailable->setCurrentItem(nullptr);
+    listSelected->setCurrentItem(nullptr);
 
     slotSelectionChanged();
     updatePreview();

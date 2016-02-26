@@ -206,9 +206,8 @@ void IDrawContext::setScales(const CCanvas::scales_type_e type)
 
 bool IDrawContext::needsRedraw()
 {
-    bool res = false;
     mutex.lock();
-    res = intNeedsRedraw;
+    bool res = intNeedsRedraw;
     mutex.unlock();
     return res;
 }

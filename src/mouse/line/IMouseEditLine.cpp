@@ -18,12 +18,9 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
-#include "gis/rte/router/CRouterSetup.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -160,12 +157,12 @@ void IMouseEditLine::abortStep()
     }
 }
 
-bool IMouseEditLine::useAutoRouting()
+bool IMouseEditLine::useAutoRouting() const
 {
     return scrOptEditLine->toolAutoRoute->isChecked();
 }
 
-bool IMouseEditLine::useVectorRouting()
+bool IMouseEditLine::useVectorRouting() const
 {
     return scrOptEditLine->toolVectorRoute->isChecked();
 }
@@ -179,7 +176,7 @@ void IMouseEditLine::drawLine(const QPolygonF &l, const QColor color, int width,
 
 void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
 {
-    if(needsRedraw & (CCanvas::eRedrawMouse|CCanvas::eRedrawGis))
+    if(needsRedraw & (CCanvas::eRedrawMouse | CCanvas::eRedrawGis))
     {
         points.updatePixel(gis);
 
@@ -187,15 +184,13 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         pixelPts.clear();
         pixelSubs.clear();
 
-        for(int i = 0; i < points.size(); i++)
+        foreach(const IGisLine::point_t &pt, points)
         {
-            IGisLine::point_t& pt = points[i];
             pixelLine << pt.pixel;
-            pixelPts << pt.pixel;
+            pixelPts  << pt.pixel;
 
-            for(int n = 0; n < pt.subpts.size(); n++)
+            foreach(const IGisLine::subpt_t &sub, pt.subpts)
             {
-                IGisLine::subpt_t& sub = pt.subpts[n];
                 pixelLine << sub.pixel;
                 pixelSubs << sub.pixel;
             }
@@ -392,11 +387,11 @@ void IMouseEditLine::slotCopyToOrig()
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    IGisLine * l = getGisLine();
-    if(l != nullptr)
+    IGisLine * line = getGisLine();
+    if(line != nullptr)
     {
         CMainWindow::self().getElevationAt(points);
-        l->setDataFromPolyline(points);
+        line->setDataFromPolyline(points);
     }
 
 
@@ -464,7 +459,6 @@ void IMouseEditLine::slotRedo()
         idxHistory++;
     }
 
-
     points = history[idxHistory];
 
     scrOptEditLine->toolRedo->setEnabled(idxHistory < (history.size() - 1));
@@ -486,20 +480,13 @@ void IMouseEditLine::updateStatus()
     qreal dsc   = 0;
     qreal dist  = 0;
 
-    qreal lastEle = points[0].ele;
-    qreal absDelta;
-    qreal delta;
-
-
+    qreal   lastEle = points[0].ele;
     QPointF lastPos = points[0].coord;
 
-    for(int i = 0; i < points.size(); i++)
+    foreach(const IGisLine::point_t &pt1, points)
     {
-        const IGisLine::point_t& pt1 = points[i];
-
-        delta       = pt1.ele - lastEle;
-        absDelta    = qAbs(delta);
-        if(absDelta > ASCEND_THRESHOLD)
+        qreal delta = pt1.ele - lastEle;
+        if(qAbs(delta) > ASCEND_THRESHOLD)
         {
             if(delta > 0)
             {
@@ -517,9 +504,8 @@ void IMouseEditLine::updateStatus()
 
         foreach(const IGisLine::subpt_t& pt, pt1.subpts)
         {
-            delta       = pt.ele - lastEle;
-            absDelta    = qAbs(delta);
-            if(absDelta > ASCEND_THRESHOLD)
+            delta = pt.ele - lastEle;
+            if(qAbs(delta) > ASCEND_THRESHOLD)
             {
                 if(delta > 0)
                 {

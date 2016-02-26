@@ -35,12 +35,12 @@ public:
     IScrOpt(IMouse *mouse);
     virtual ~IScrOpt();
 
-
     void setOrigin(const QPoint& pos)
     {
         origin = pos;
     }
-    const QPoint& getOrigin()
+
+    const QPoint& getOrigin() const
     {
         return origin;
     }

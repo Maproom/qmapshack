@@ -44,6 +44,13 @@ public:
     quint32 decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
     quint32 decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, bool line, const quint8 * pData, const quint8 * pEnd);
 
+    QString getLabelText() const;
+
+    bool hasLabel() const
+    {
+        return !labels.isEmpty();
+    }
+
     quint32 type = 0;
     /// direction of line (polyline, only)
     bool direction = false;
@@ -88,28 +95,18 @@ private:
     quint64 reg;
     /// the data stream to get data from
     const quint8 * pData;
-    /// bytes left in stream
-    quint32 bytes;
-    /// bitmask x coord.
-    quint32 xmask;
-    /// bitmask y coord.
-    quint32 ymask;
-    /// sign bit for x value
-    qint32 xsign;
-    /// sign bit for y value
-    qint32 ysign;
-    /// sign bit * 2 for x value
-    qint32 xsign2;
-    /// sign bit * 2 for y value
-    qint32 ysign2;
-    /// total bits in register
-    quint8 bits;
-    /// bits per x coord.
-    quint8 bits_per_x;
-    /// bits per y   coord.
-    quint8 bits_per_y;
-    /// bits per coord.
-    quint8 bits_per_coord;
+
+    quint32 bytes;         //< bytes left in stream
+    quint32 xmask;         //< bitmask x coord.
+    quint32 ymask;         //< bitmask y coord.
+    qint32 xsign;          //< sign bit for x value
+    qint32 ysign;          //< sign bit for y value
+    qint32 xsign2;         //< sign bit * 2 for x value
+    qint32 ysign2;         //< sign bit * 2 for y value
+    quint8 bits;           //< total bits in register
+    quint8 bits_per_x;     //< bits per x coord.
+    quint8 bits_per_y;     //< bits per y coord.
+    quint8 bits_per_coord; //< bits per coord.
 
     sign_info_t& sinfo;
 

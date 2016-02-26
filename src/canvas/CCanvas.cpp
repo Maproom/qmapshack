@@ -153,9 +153,10 @@ void CCanvas::saveConfig(QSettings& cfg)
     map->saveConfig(cfg);
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
-    cfg.setValue("posFocus", posFocus);
-    cfg.setValue("proj", map->getProjection());
-    cfg.setValue("scales", map->getScalesType());
+    cfg.setValue("posFocus",  posFocus);
+    cfg.setValue("proj",      map->getProjection());
+    cfg.setValue("scales",    map->getScalesType());
+    cfg.setValue("backColor", backColor.name());
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
@@ -163,6 +164,9 @@ void CCanvas::loadConfig(QSettings& cfg)
     posFocus = cfg.value("posFocus", posFocus).toPointF();
     setProjection(cfg.value("proj", map->getProjection()).toString());
     setScales((CCanvas::scales_type_e)cfg.value("scales",  map->getScalesType()).toInt());
+
+    const QString &backColorStr = cfg.value("backColor", "#FFFFBF").toString();
+    backColor = QColor(backColorStr);
 
     map->loadConfig(cfg);
     dem->loadConfig(cfg);
@@ -361,7 +365,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     USE_ANTI_ALIASING(p,true);
 
     // fill the background with default pattern
-    p.fillRect(rect(), "#FFFFBF");
+    p.fillRect(rect(), backColor);
 
     // ----- start to draw thread based content -----
     // move coordinate system to center of the screen
@@ -406,10 +410,9 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
 {
-    qreal ele = NOFLOAT;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
-    ele = dem->getElevationAt(pos);
+    qreal ele = dem->getElevationAt(pos);
     emit sigMousePosition(pos * RAD_TO_DEG, ele);
 
     mouse->mouseMoveEvent(e);
@@ -689,6 +692,18 @@ void CCanvas::setupGrid()
     CGridSetup dlg(grid, map);
     dlg.exec();
     update();
+}
+
+void CCanvas::setupBackgroundColor()
+{
+    QColorDialog::setCustomColor(0, "#FFFFBF");
+    const QColor &selected = QColorDialog::getColor(backColor, this, "Test");
+
+    if(selected.isValid())
+    {
+        backColor = selected;
+        update();
+    }
 }
 
 void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)

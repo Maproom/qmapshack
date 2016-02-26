@@ -56,7 +56,7 @@ void CMouseEditArea::drawLine(const QPolygonF &l, const QColor color, int width,
     p.drawPolygon(l);
 }
 
-IGisLine * CMouseEditArea::getGisLine()
+IGisLine * CMouseEditArea::getGisLine() const
 {
     return dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
 }

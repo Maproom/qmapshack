@@ -44,7 +44,7 @@ void CPhotoAlbum::resizeEvent(QResizeEvent * e)
 
 void CPhotoAlbum::mouseReleaseEvent(QMouseEvent * e)
 {
-    CPhotoViewer dlg(images, 0,this);
+    CPhotoViewer dlg(images, 0, this);
     dlg.exec();
 
     e->accept();

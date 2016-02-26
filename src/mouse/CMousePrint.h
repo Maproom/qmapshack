@@ -43,12 +43,12 @@ private:
     QPointF posInitial;
 
     QRectF rectSelection;
-    QRectF rectTopLeft {0,0,20,20};
-    QRectF rectTopRight {0,0,20,20};
-    QRectF rectBottomLeft {0,0,20,20};
-    QRectF rectBottomRight {0,0,20,20};
-    QRectF rectPrintButton {0,0,48,48};
-    QRectF rectImageButton {0,0,48,48};
+    QRectF rectTopLeft     {0, 0, 20, 20};
+    QRectF rectTopRight    {0, 0, 20, 20};
+    QRectF rectBottomLeft  {0, 0, 20, 20};
+    QRectF rectBottomRight {0, 0, 20, 20};
+    QRectF rectPrintButton {0, 0, 48, 48};
+    QRectF rectImageButton {0, 0, 48, 48};
 
     enum state_e
     {

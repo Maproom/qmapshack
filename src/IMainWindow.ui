@@ -91,6 +91,7 @@
     <addaction name="actionFlipMouseWheel"/>
     <addaction name="actionProfileIsWindow"/>
     <addaction name="actionSetupMapFont"/>
+    <addaction name="actionSetupMapBackground"/>
     <addaction name="actionSetupUnits"/>
     <addaction name="actionSetupGrid"/>
     <addaction name="actionSetupMapView"/>
@@ -749,6 +750,18 @@
    </property>
    <property name="toolTip">
     <string>Change the format coordinates are displayed</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSetupMapBackground">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Map Background</string>
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>

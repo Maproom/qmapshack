@@ -697,7 +697,7 @@ void CCanvas::setupGrid()
 void CCanvas::setupBackgroundColor()
 {
     QColorDialog::setCustomColor(0, "#FFFFBF");
-    const QColor &selected = QColorDialog::getColor(backColor, this, "Test");
+    const QColor &selected = QColorDialog::getColor(backColor, this, tr("Setup Map Background"));
 
     if(selected.isValid())
     {

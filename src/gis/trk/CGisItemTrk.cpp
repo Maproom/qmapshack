@@ -456,7 +456,7 @@ QString CGisItemTrk::getInfoRange() const
         pt2 = mouseRange1;
     }
 
-    for(; pt1->isHidden() && (pt1->idxTotal < cntTotalPoints); --pt1)
+    for(; pt1->isHidden() && (pt1->idxTotal < cntTotalPoints); ++pt1)
     {
     }
     for(; pt2->isHidden() && (pt2->idxTotal > 0); --pt2)

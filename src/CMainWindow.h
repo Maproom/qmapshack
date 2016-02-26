@@ -97,6 +97,7 @@ private slots:
     void slotMousePosition(const QPointF& pos, qreal ele);
     void slotUpdateCurrentWidget();
     void slotSetupMapFont();
+    void slotSetupMapBackground();
     void slotSetupGrid();
     void slotSetupMapPath();
     void slotSetupDemPath();

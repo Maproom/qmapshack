@@ -105,6 +105,7 @@ CMainWindow::CMainWindow()
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
+    connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
     connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
     connect(actionSetupMapPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupMapPath);
     connect(actionSetupDEMPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupDemPath);
@@ -681,6 +682,16 @@ void CMainWindow::slotSetupMapFont()
             w->update();
         }
     }
+}
+
+void CMainWindow::slotSetupMapBackground()
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(nullptr == canvas)
+    {
+        return;
+    }
+    canvas->setupBackgroundColor();
 }
 
 void CMainWindow::slotSetupGrid()

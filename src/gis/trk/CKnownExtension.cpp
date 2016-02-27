@@ -37,7 +37,7 @@ static fTrkPtGetVal getExtensionValueFunc(const QString ext)
            };
 }
 
-void CKnownExtension::initGarminTPXv1(IUnit &units, const QString &ns)
+void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
 {
     // support for the Garmin TrackPointExtension v1
     //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
@@ -62,7 +62,7 @@ void CKnownExtension::initGarminTPXv1(IUnit &units, const QString &ns)
                              getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:cad")});
 }
 
-void CKnownExtension::initMioTPX(IUnit &units)
+void CKnownExtension::initMioTPX(const IUnit &units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
@@ -86,7 +86,7 @@ void CKnownExtension::initMioTPX(IUnit &units)
                              getExtensionValueFunc("course")});
 }
 
-void CKnownExtension::init(IUnit &units)
+void CKnownExtension::init(const IUnit &units)
 {
     knownExtensions =
     {

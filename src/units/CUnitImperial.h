@@ -23,15 +23,19 @@
 
 class CUnitImperial : public IUnit
 {
-    Q_OBJECT
 public:
-    CUnitImperial(QObject * parent);
-    virtual ~CUnitImperial();
+    CUnitImperial();
+    virtual ~CUnitImperial() = default;
 
     void meter2elevation(qreal meter, QString& val, QString& unit) const override;
     void meter2distance(qreal meter, QString& val, QString& unit) const override;
     void meter2area(qreal meter, QString& val, QString& unit) const override;
 
     qreal elevation2meter(const QString& val) const override;
+
+private:
+    static constexpr qreal footPerMeter = 3.28084;
+    static constexpr qreal milePerMeter = 0.6213699E-3;
+    static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
 };
 #endif //CUNITIMPERIAL_H

@@ -18,13 +18,8 @@
 **********************************************************************************************/
 #include "units/CUnitMetric.h"
 
-CUnitMetric::CUnitMetric(QObject * parent)
-    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6, parent)
-{
-}
-
-
-CUnitMetric::~CUnitMetric()
+CUnitMetric::CUnitMetric()
+    : IUnit(eTypeMetric, "m", 1.0, "km/h", 3.6)
 {
 }
 

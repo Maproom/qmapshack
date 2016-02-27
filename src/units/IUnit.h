@@ -18,7 +18,7 @@
 **********************************************************************************************/
 #ifndef IUNIT_H
 #define IUNIT_H
-#include <QObject>
+#include <QtCore>
 #include <QTimeZone>
 
 
@@ -30,13 +30,13 @@
 extern const QPointF NOPOINTF;
 extern const QPoint NOPOINT;
 
-class IUnit : public QObject
+class IUnit
 {
-    Q_OBJECT
+    Q_DECLARE_TR_FUNCTIONS(IUnit)
 public:
-    virtual ~IUnit();
+    virtual ~IUnit() = default;
 
-    static IUnit& self()
+    static const IUnit& self()
     {
         return *m_self;
     }
@@ -58,7 +58,7 @@ public:
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object
-    static void setUnitType(type_e t, QObject *parent);
+    static void setUnitType(type_e t);
 
     /// parse a string for a timestamp
     static bool parseTimestamp(const QString &time, QDateTime &datetime);
@@ -113,9 +113,9 @@ public:
         ,eCoordFormat3
     };
 
-    static void getCoordFormat(coord_format_e& format)
+    static enum coord_format_e getCoordFormat()
     {
-        format = coordFormat;
+        return coordFormat;
     }
 
     static void setCoordFormat(const coord_format_e format)
@@ -123,21 +123,14 @@ public:
         coordFormat = format;
     }
 
-
     static void degToStr(const qreal& x, const qreal& y, QString& str);
 
     static bool strToDeg(const QString& str, qreal& lon, qreal& lat);
 
     static bool isValidCoordString(const QString& str);
 
-    static QRegExp reCoord1;
-    static QRegExp reCoord2;
-    static QRegExp reCoord3;
-    static QRegExp reCoord4;
-    static QRegExp reCoord5;
-
 protected:
-    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent);
+    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor);
 
     static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
 
@@ -148,6 +141,12 @@ protected:
     static coord_format_e coordFormat;
 
 private:
-    static IUnit * m_self;
+    static const IUnit * m_self;
+
+    static const QRegExp reCoord1;
+    static const QRegExp reCoord2;
+    static const QRegExp reCoord3;
+    static const QRegExp reCoord4;
+    static const QRegExp reCoord5;
 };
 #endif //IUNIT_H

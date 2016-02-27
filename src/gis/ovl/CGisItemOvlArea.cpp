@@ -156,6 +156,11 @@ bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
     return dist < 20;
 }
 
+bool CGisItemOvlArea::isWithin(const QRectF& area, selection_e mode)
+{
+    return IGisItem::isWithin(area, mode, polygonArea);
+}
+
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
 {
     QMutexLocker lock(&mutexItems);

@@ -97,6 +97,26 @@ void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     }
 }
 
+void IDevice::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project != nullptr)
+        {
+            project->getItemsByArea(area, mode, items);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getItemsByArea(area, mode, items);
+        }
+    }
+}
+
 IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
 {
     IGisItem * item = nullptr;

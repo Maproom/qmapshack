@@ -37,6 +37,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CProgressDialog.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -270,6 +271,27 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
     }
 }
 
+void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
+        {
+            project->getItemsByArea(area, mode, items);
+            continue;
+        }
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->getItemsByArea(area, mode, items);
+            continue;
+        }
+    }
+}
+
 void CGisWidget::mouseMove(const QPointF& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -360,6 +382,67 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
+void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
+{
+    QMessageBox::StandardButtons last   = QMessageBox::NoButton;
+
+    QSet<CDBProject*>   projects;
+    QSet<IGisProject*>  projectsAll;
+
+    foreach(const IGisItem::key_t key, keys)
+    {
+        IGisItem * gisItem = getItemByKey(key);
+        if(nullptr != gisItem)
+        {
+            bool yes = false;
+            IGisProject *project = dynamic_cast<IGisProject*>(gisItem->parent());
+            if(nullptr != project)
+            {
+                project->blockUpdateItems(true);
+                yes = project->delItemByKey(gisItem->getKey(), last);
+
+
+                /*
+                    collect database projects to update their counterpart in
+                    the database view, after all operations are done.
+                 */
+                if(yes && project->getType() == IGisProject::eTypeDb)
+                {
+                    projects << dynamic_cast<CDBProject*>(project);
+                }
+
+                /*
+                    Collect all projects to unblock update later on.
+                 */
+                projectsAll << project;
+            }
+
+            if(last == QMessageBox::Cancel)
+            {
+                break;
+            }
+        }
+    }
+
+    // make all database projects that are changed to post their new status
+    // this will update the database view.
+    foreach(CDBProject * project, projects)
+    {
+        project->postStatus(true);
+    }
+    // unblock update for all projects seen
+    foreach(IGisProject * project, projectsAll)
+    {
+        project->blockUpdateItems(false);
+    }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+}
+
 void CGisWidget::editItemByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -404,6 +487,39 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
 
 
     emit sigChanged();
+}
+
+void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    IGisProject * project = selectProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    int lastResult = CSelectCopyAction::eResultNone;
+
+    project->blockUpdateItems(true);
+    int cnt = 1;
+    PROGRESS_SETUP(tr("Copy items..."), 0, keys.count(), this);
+    foreach(const IGisItem::key_t& key, keys)
+    {
+        PROGRESS(cnt++, break);
+        IGisItem * gisItem = getItemByKey(key);
+        if(nullptr != gisItem)
+        {
+            project->insertCopyOfItem(gisItem, NOIDX, lastResult);
+        }
+    }
+    project->blockUpdateItems(false);
+
+    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+    if(nullptr != canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
 }
 
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)

@@ -803,3 +803,31 @@ bool IGisItem::isChanged() const
 {
     return text(CGisListWks::eColumnDecoration).contains('*');
 }
+
+bool IGisItem::isWithin(const QRectF& area, selection_e mode, const QPolygonF& points)
+{
+    if(mode == eSelectionExact)
+    {
+        foreach(const QPointF& point, points)
+        {
+            if(!area.contains(point))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    else if(mode == eSelectionIntersect)
+    {
+        foreach(const QPointF& point, points)
+        {
+            if(area.contains(point))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return false;
+}

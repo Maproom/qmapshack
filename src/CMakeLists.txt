@@ -139,8 +139,10 @@ set( SRCS
         mouse/CMouseRangeTrk.cpp
         mouse/CMouseWptBubble.cpp
         mouse/CMousePrint.cpp
+        mouse/CMouseSelect.cpp
         mouse/CScrOptUnclutter.cpp
         mouse/CScrOptRangeTrk.cpp
+        mouse/CScrOptSelect.cpp
         mouse/line/IMouseEditLine.cpp
         mouse/line/CScrOptEditLine.cpp
         mouse/line/CScrOptRangeLine.cpp
@@ -395,8 +397,10 @@ set( HDRS
         mouse/CMouseRangeTrk.h
         mouse/CMouseWptBubble.h
         mouse/CMousePrint.h
+        mouse/CMouseSelect.h
         mouse/CScrOptUnclutter.h
         mouse/CScrOptRangeTrk.h
+        mouse/CScrOptSelect.h
         mouse/line/CScrOptEditLine.h
         mouse/line/CScrOptRangeLine.h
         mouse/line/IMouseEditLine.h
@@ -579,6 +583,7 @@ set( UIS
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     mouse/IScrOptRangeTrk.ui
+    mouse/IScrOptSelect.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui
@@ -736,38 +741,38 @@ target_link_libraries(${APPLICATION_NAME}
 )
 
 if(UNIX AND NOT APPLE)
-    add_executable(qttest test/main.cpp test/test_QMapShack.h test/CGpxProject.cpp test/CSlfReader.cpp ${RC_SRCS})
+#    add_executable(qttest test/main.cpp test/test_QMapShack.h test/CGpxProject.cpp test/CSlfReader.cpp ${RC_SRCS})
 
-    # copy the input files required by the unittests to ./bin/input
-    file(COPY test/input DESTINATION ../bin)
+#    # copy the input files required by the unittests to ./bin/input
+#    file(COPY test/input DESTINATION ../bin)
 
-    target_link_libraries(qttest
-        Qt5::Widgets
-        Qt5::Xml
-        Qt5::Script
-        Qt5::Sql
-        Qt5::WebKitWidgets
-        Qt5::PrintSupport
-        Qt5::Test
-        QMS
-        ${DBUS_LIB}
-        ${GDAL_LIBRARIES}
-        ${PROJ_LIBRARIES}
-        ${ROUTINO_LIBRARIES}
-    )
+#    target_link_libraries(qttest
+#        Qt5::Widgets
+#        Qt5::Xml
+#        Qt5::Script
+#        Qt5::Sql
+#        Qt5::WebKitWidgets
+#        Qt5::PrintSupport
+#        Qt5::Test
+#        QMS
+#        ${DBUS_LIB}
+#        ${GDAL_LIBRARIES}
+#        ${PROJ_LIBRARIES}
+#        ${ROUTINO_LIBRARIES}
+#    )
 
-    add_custom_command(
-        OUTPUT tests_run.log
-        COMMAND qttest
-        DEPENDS qttest
-        COMMENT "Executing the Unittests"
-        VERBATIM
-    )
+#    add_custom_command(
+#        OUTPUT tests_run.log
+#        COMMAND qttest
+#        DEPENDS qttest
+#        COMMENT "Executing the Unittests"
+#        VERBATIM
+#    )
 
-    add_custom_target(
-        run_tests
-        DEPENDS tests_run.log
-    )
+#    add_custom_target(
+#        run_tests
+#        DEPENDS tests_run.log
+#    )
 endif(UNIX AND NOT APPLE)
 
 if(APPLE)

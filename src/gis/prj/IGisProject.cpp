@@ -483,6 +483,28 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     }
 }
 
+void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items)
+{
+    if(!isVisible())
+    {
+        return;
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(nullptr == item)
+        {
+            continue;
+        }
+
+        if(item->isWithin(area, mode))
+        {
+            items << item;
+        }
+    }
+}
+
 void IGisProject::mouseMove(const QPointF& pos)
 {
     if(!isVisible())

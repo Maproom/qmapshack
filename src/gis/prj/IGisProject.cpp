@@ -461,6 +461,18 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
     return nullptr;
 }
 
+void IGisProject::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+{
+    foreach(const IGisItem::key_t& key, keys)
+    {
+        IGisItem * item = getItemByKey(key);
+        if(item != nullptr)
+        {
+            items << item;
+        }
+    }
+}
+
 void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
     if(!isVisible())

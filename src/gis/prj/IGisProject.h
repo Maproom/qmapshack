@@ -257,6 +257,7 @@ public:
      */
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
+    void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     /**
        @brief Get a list of items that are close to a given pixel coordinate of the screen
 

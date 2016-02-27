@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "helpers/CSettings.h"
 #include "mouse/CScrOptSelect.h"
 
 #include <QtWidgets>
@@ -24,8 +25,21 @@ CScrOptSelect::CScrOptSelect(IMouse *mouse)
     : IScrOpt(mouse)
 {
     setupUi(this);
-
     adjustSize();
+
+    SETTINGS;
+    cfg.beginGroup("Selection");
+    toolModeExact->setChecked(cfg.value("modeExact", toolModeExact->isChecked()).toBool());
+    toolModeIntersect->setChecked(cfg.value("modeIntersect", toolModeIntersect->isChecked()).toBool());
+    cfg.endGroup(); //Selection
+
 }
 
-
+CScrOptSelect::~CScrOptSelect()
+{
+    SETTINGS;
+    cfg.beginGroup("Selection");
+    cfg.setValue("modeExact", toolModeExact->isChecked());
+    cfg.setValue("modeIntersect", toolModeIntersect->isChecked());
+    cfg.endGroup(); //Selection
+}

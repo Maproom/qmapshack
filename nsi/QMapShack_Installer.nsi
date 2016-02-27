@@ -55,7 +55,7 @@ OutFile "QMapShack_Install.exe"
 ; Page welcome description
 !define MUI_WELCOMEPAGE_TITLE "QMapShack"
 !define MUI_WELCOMEPAGE_TITLE_3LINES
-!define MUI_WELCOMEPAGE_TEXT "QMapShack is a consumer grade software to work with data aquired by GPS devices. The data can be displayed on a variety of maps and stored in a database. Additionally new data can be created to plan tours."
+!define MUI_WELCOMEPAGE_TEXT "QMapShack is a consumer grade software to work with data acquired by GPS devices. The data can be displayed on a variety of maps and stored in a database. Additionally new data can be created to plan tours."
 
 !define MUI_LICENSEPAGE_CHECKBOX
 
@@ -233,7 +233,7 @@ Section "StartMenue" StartMenue
   WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\QMapShack" "UninstallString" "$INSTDIR\Uninstall.exe"
 
 SectionEnd
-LangString DESC_StartMenue ${LANG_ENGLISH} "Create Start Menue (deselect if you want install QMapShack as portable app)"
+LangString DESC_StartMenue ${LANG_ENGLISH} "Create Start Menu (deselect if you want install QMapShack as portable app)"
 LangString DESC_StartMenue ${LANG_GERMAN}  "Erzeuge Start Menü (weglassen, wenn QMapShack als portable app installiert werden soll)"
 
 

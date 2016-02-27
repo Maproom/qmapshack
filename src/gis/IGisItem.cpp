@@ -808,7 +808,7 @@ bool IGisItem::isWithin(const QRectF& area, selection_e mode, const QPolygonF& p
 {
     if(mode == eSelectionExact)
     {
-        foreach(const QPointF& point, points)
+        foreach(const QPointF &point, points)
         {
             if(!area.contains(point))
             {
@@ -819,7 +819,7 @@ bool IGisItem::isWithin(const QRectF& area, selection_e mode, const QPolygonF& p
     }
     else if(mode == eSelectionIntersect)
     {
-        foreach(const QPointF& point, points)
+        foreach(const QPointF &point, points)
         {
             if(area.contains(point))
             {

@@ -34,10 +34,10 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
-#include "helpers/CProgressDialog.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -266,6 +266,27 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         if(device)
         {
             device->getItemsByPos(pos, items);
+            continue;
+        }
+    }
+}
+
+void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
+        {
+            project->getItemsByKeys(keys, items);
+            continue;
+        }
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->getItemsByKeys(keys, items);
             continue;
         }
     }

@@ -1255,7 +1255,7 @@ void CGisListWks::slotDeleteItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    QList<QTreeWidgetItem*> items       = selectedItems();    
+    QList<QTreeWidgetItem*> items       = selectedItems();
     QList<IGisItem::key_t>  keys;
     foreach(QTreeWidgetItem * item, items)
     {

@@ -263,6 +263,7 @@ public:
      */
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
+    void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     /**
        @brief Delete all items with matching key from workspace
 
@@ -287,7 +288,7 @@ public:
     /**
        @brief Select a project and add a copy of all items in the list
        @param keys      a list of item keys to copy
-    */
+     */
     void copyItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**

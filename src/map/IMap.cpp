@@ -80,7 +80,7 @@ IMapProp *IMap::getSetup()
 
 void IMap::convertRad2M(QPointF &p) const
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }
@@ -89,7 +89,7 @@ void IMap::convertRad2M(QPointF &p) const
 
 void IMap::convertM2Rad(QPointF &p) const
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }

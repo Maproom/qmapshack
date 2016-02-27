@@ -49,8 +49,8 @@ private:
 
     CMapDraw * map;
 
-    projPJ pjWGS84 = 0;
-    projPJ pjGrid = 0;
+    projPJ pjWGS84 = nullptr;
+    projPJ pjGrid  = nullptr;
 
     QString projstr = "+proj=longlat +datum=WGS84 +no_defs";
     QColor color = Qt::magenta;

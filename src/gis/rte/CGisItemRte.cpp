@@ -348,6 +348,12 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
     return dist < 20;
 }
 
+bool CGisItemRte::isWithin(const QRectF& area, selection_e mode)
+{
+    return IGisItem::isWithin(area, mode, line);
+}
+
+
 void CGisItemRte::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();

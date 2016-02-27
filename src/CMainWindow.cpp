@@ -71,7 +71,7 @@ CMainWindow::CMainWindow()
 
     initWptIcons();
 
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt());
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 
@@ -289,8 +289,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
 
-    IUnit::coord_format_e coordFormat;
-    IUnit::getCoordFormat(coordFormat);
+    IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
     cfg.setValue("Units/coordFormat", coordFormat);
 }
 

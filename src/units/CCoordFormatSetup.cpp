@@ -24,8 +24,7 @@ CCoordFormatSetup::CCoordFormatSetup(QWidget * parent)
 {
     setupUi(this);
 
-    IUnit::coord_format_e coordFormat;
-    IUnit::getCoordFormat(coordFormat);
+    IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
     switch(coordFormat)
     {
     case IUnit::eCoordFormat1:

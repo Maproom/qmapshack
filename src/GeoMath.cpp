@@ -59,7 +59,7 @@ bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *deg, qreal *min)
     *deg = qAbs(v);
     *min = (qAbs(v) - *deg) * 60.0;
 
-    return (v < 0);
+    return v < 0;
 }
 
 

@@ -463,7 +463,8 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     {
         coords.clear();
 
-        if(!msg.isEmpty()) {
+        if(!msg.isEmpty())
+        {
             mutex.unlock();
             throw msg;
         }

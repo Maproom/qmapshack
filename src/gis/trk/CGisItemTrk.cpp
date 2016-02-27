@@ -334,7 +334,7 @@ bool CGisItemTrk::getNameAndProject(QString &name, IGisProject *&project)
     }
 
     project = CGisWidget::self().selectProject();
-    return (nullptr != project);
+    return nullptr != project;
 }
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
@@ -1448,7 +1448,6 @@ void CGisItemTrk::hideSelectedPoints()
     {
         changed(tr("Hide points %1..%2.").arg(idx1 + 1).arg(idx2 - 1), "://icons/48x48/PointHide.png");
     }
-
 }
 
 void CGisItemTrk::showSelectedPoints()
@@ -2312,19 +2311,19 @@ const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx) con
         return nullptr;
     }
 
-    auto condition = [idx](const trkpt_t &pt) { return (pt.idxVisible == idx); };
+    auto condition = [idx](const trkpt_t &pt) { return pt.idxVisible == idx;  };
     return getTrkPtByCondition(condition);
 }
 
 const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx) const
 {
-    auto condition = [idx](const trkpt_t &pt) { return (pt.idxTotal == idx); };
+    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
     return getTrkPtByCondition(condition);
 }
 
 bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal) const
 {
-    auto condition = [idxTotal](const trkpt_t &pt) { return ((pt.idxTotal > idxTotal) && !pt.isHidden()); };
+    auto condition = [idxTotal](const trkpt_t &pt) { return (pt.idxTotal > idxTotal) && !pt.isHidden();  };
     return nullptr == getTrkPtByCondition(condition);
 }
 

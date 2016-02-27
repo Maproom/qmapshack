@@ -219,7 +219,8 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
 {
     QPolygonF subs;
 
-    try {
+    try
+    {
         if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
         {
             pt1.subpts.clear();

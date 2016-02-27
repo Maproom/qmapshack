@@ -187,7 +187,7 @@ void IMouseEditLine::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRec
         foreach(const IGisLine::point_t &pt, points)
         {
             pixelLine << pt.pixel;
-            pixelPts  << pt.pixel;
+            pixelPts << pt.pixel;
 
             foreach(const IGisLine::subpt_t &sub, pt.subpts)
             {
@@ -482,7 +482,7 @@ void IMouseEditLine::updateStatus()
     qreal dsc   = 0;
     qreal dist  = 0;
 
-    qreal   lastEle = points[0].ele;
+    qreal lastEle = points[0].ele;
     QPointF lastPos = points[0].coord;
 
     foreach(const IGisLine::point_t &pt1, points)

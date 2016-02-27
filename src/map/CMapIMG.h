@@ -86,11 +86,11 @@ public:
         quint32 level;
 
         quint32 offsetPoints2;
-        qint32  lengthPoints2;
+        qint32 lengthPoints2;
         quint32 offsetPolylines2;
-        qint32  lengthPolylines2;
+        qint32 lengthPolylines2;
         quint32 offsetPolygons2;
-        qint32  lengthPolygons2;
+        qint32 lengthPolygons2;
     };
 
     struct subfile_desc_t
@@ -492,7 +492,7 @@ private:
     };
 
     QString filename;
-    quint8  mask;
+    quint8 mask;
     quint32 mask32;
     quint64 mask64;
     QString mapdesc;
@@ -519,8 +519,8 @@ private:
     QMap<quint32, CGarminTyp::point_property> pointProperties;
     QMap<quint8, QString> languages;
 
-    polytype_t  polygons;
-    polytype_t  polylines;
+    polytype_t polygons;
+    polytype_t polylines;
     pointtype_t points;
     pointtype_t pois;
 

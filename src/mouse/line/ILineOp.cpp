@@ -41,6 +41,7 @@ ILineOp::ILineOp(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLin
 
 ILineOp::~ILineOp()
 {
+    canvas->reportStatus("Routino", QString());
 }
 
 void ILineOp::cancelDelayedRouting()
@@ -124,6 +125,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
             mapDidMove = false;
         }
     }
+    showRoutingErrorMessage(QString());
 }
 
 void ILineOp::mouseMoveEvent(QMouseEvent * e)
@@ -201,6 +203,39 @@ void ILineOp::updateLeadLines(qint32 idx)
     }
 }
 
+void ILineOp::showRoutingErrorMessage(const QString &msg) const
+{
+    if(msg.isEmpty())
+    {
+        canvas->reportStatus("Routino", QString());
+    }
+    else
+    {
+        canvas->reportStatus("Routino", QString("<span style='color: red;'><b>%1</b><br />%2</span>").arg(tr("Routing")).arg(msg));
+    }
+}
+
+void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
+{
+    QPolygonF subs;
+
+    try {
+        if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
+        {
+            pt1.subpts.clear();
+            foreach(const QPointF &sub, subs)
+            {
+                pt1.subpts << IGisLine::subpt_t(sub);
+            }
+        }
+        showRoutingErrorMessage(QString());
+    }
+    catch(const QString &msg)
+    {
+        showRoutingErrorMessage(msg);
+    }
+}
+
 void ILineOp::finalizeOperation(qint32 idx)
 {
     if(idx == NOIDX)
@@ -213,33 +248,13 @@ void ILineOp::finalizeOperation(qint32 idx)
         CCanvas::setOverrideCursor(Qt::WaitCursor,"ILineOp::finalizeOperation");
         if(idx > 0)
         {
-            QPolygonF subs;
-            IGisLine::point_t& pt1 = points[idx - 1];
-            IGisLine::point_t& pt2 = points[idx];
-            if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
-            {
-                pt1.subpts.clear();
-                foreach(const QPointF &sub, subs)
-                {
-                    pt1.subpts << IGisLine::subpt_t(sub);
-                }
-            }
+            tryRouting(points[idx - 1], points[idx]);
         }
-
         if(idx < (points.size() - 1))
         {
-            QPolygonF subs;
-            IGisLine::point_t& pt1 = points[idx];
-            IGisLine::point_t& pt2 = points[idx + 1];
-            if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
-            {
-                pt1.subpts.clear();
-                foreach(const QPointF &sub, subs)
-                {
-                    pt1.subpts << IGisLine::subpt_t(sub);
-                }
-            }
+            tryRouting(points[idx], points[idx + 1]);
         }
+
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting())

@@ -345,6 +345,7 @@ void IMouseEditLine::slotAddPoint()
 void IMouseEditLine::slotNoRouting()
 {
     canvas->reportStatus(key.item, tr("<b>No Routing</b><br/>All points will be connected with a straight line.<br/>"));
+    canvas->reportStatus("Routino", QString());
 }
 
 void IMouseEditLine::slotAutoRouting()
@@ -355,6 +356,7 @@ void IMouseEditLine::slotAutoRouting()
 void IMouseEditLine::slotVectorRouting()
 {
     canvas->reportStatus(key.item, tr("<b>Vector Routing</b><br/>Connect points with a line from a loaded vector map if possible.<br/>"));
+    canvas->reportStatus("Routino", QString());
 }
 
 
@@ -470,7 +472,7 @@ void IMouseEditLine::updateStatus()
 {
     if(!enableStatus || points.isEmpty())
     {
-        canvas->reportStatus("IMouseEditLine","");
+        canvas->reportStatus("IMouseEditLine", QString());
         return;
     }
 

@@ -461,11 +461,12 @@ int CRouterRoutino::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     }
     catch(const QString& msg)
     {
-        if(!msg.isEmpty())
-        {
-            QMessageBox::critical(this, "Routino...", msg, QMessageBox::Abort);
-        }
         coords.clear();
+
+        if(!msg.isEmpty()) {
+            mutex.unlock();
+            throw msg;
+        }
     }
 
     mutex.unlock();

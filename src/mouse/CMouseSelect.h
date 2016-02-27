@@ -19,8 +19,8 @@
 #ifndef CMOUSESELECT_H
 #define CMOUSESELECT_H
 
-#include "mouse/IMouse.h"
 #include "gis/IGisItem.h"
+#include "mouse/IMouse.h"
 
 class CGisDraw;
 class CCanvas;
@@ -40,11 +40,11 @@ public:
 
 private slots:
     void slotModeSwitch(IGisItem::selection_e mode, bool checked);
-    void slotCopy();
-    void slotDelete();
+    void slotCopy() const;
+    void slotDelete() const;
 
 private:
-    void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar);
+    void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
     void placeScrOpt();
     void findItems();
 

@@ -30,12 +30,11 @@ class CScrOptSelect : public IScrOpt, public Ui::IScrOptSelect
     Q_OBJECT
 public:
     CScrOptSelect(IMouse *mouse);
-    virtual ~CScrOptSelect() = default;
+    virtual ~CScrOptSelect();
 
     void draw(QPainter& p) override
     {
     }
-
 };
 
 #endif //CSCROPTSELECT_H

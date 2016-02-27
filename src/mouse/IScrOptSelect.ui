@@ -31,6 +31,9 @@
    </property>
    <item>
     <widget class="QToolButton" name="toolDelete">
+     <property name="toolTip">
+      <string>Delete all selected items.</string>
+     </property>
      <property name="text">
       <string>...</string>
      </property>
@@ -42,6 +45,9 @@
    </item>
    <item>
     <widget class="QToolButton" name="toolCopy">
+     <property name="toolTip">
+      <string>Copy all selected items to a project.</string>
+     </property>
      <property name="text">
       <string>...</string>
      </property>

@@ -33,7 +33,8 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
 
     canvas->reportStatus("CMouseSelect", tr("<b>Select Items On Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners."));
 
-    scrOptSelect = new CScrOptSelect(this);
+    scrOptSelect  = new CScrOptSelect(this);
+    modeSelection = scrOptSelect->toolModeExact->isChecked() ? IGisItem::eSelectionExact : IGisItem::eSelectionIntersect;
 
     auto slotModeExact      = bind(&CMouseSelect::slotModeSwitch, this, IGisItem::eSelectionExact, std::placeholders::_1);
     auto slotModeIntersect  = bind(&CMouseSelect::slotModeSwitch, this, IGisItem::eSelectionIntersect, std::placeholders::_1);
@@ -51,7 +52,7 @@ CMouseSelect::~CMouseSelect()
     delete scrOptSelect;
 }
 
-void CMouseSelect::rectRad2Px(const QRectF& rectSrc, QRectF& rectTar)
+void CMouseSelect::rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const
 {
     QPointF pt1 = rectSrc.topLeft();
     QPointF pt2 = rectSrc.bottomRight();
@@ -104,12 +105,15 @@ void CMouseSelect::findItems()
         case IGisItem::eTypeWpt:
             cntWpt++;
             break;
+
         case IGisItem::eTypeTrk:
             cntTrk++;
             break;
+
         case IGisItem::eTypeRte:
             cntRte++;
             break;
+
         case IGisItem::eTypeOvl:
             cntOvl++;
             break;
@@ -134,6 +138,13 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         return;
     }
 
+    QList<IGisItem*> items;
+    CGisWidget::self().getItemsByKeys(itemKeys, items);
+    foreach(IGisItem * item, items)
+    {
+        item->drawHighlight(p);
+    }
+
     QRectF rectSel;
     rectRad2Px(rectSelection, rectSel);
 
@@ -143,7 +154,6 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     rectTopRight.moveTopRight(rectSel.topRight());
     rectBottomLeft.moveBottomLeft(rectSel.bottomLeft());
     rectBottomRight.moveBottomRight(rectSel.bottomRight());
-
 
     QPainterPath path;
     path.addRect(rectScr);
@@ -301,7 +311,7 @@ void CMouseSelect::mouseMoveEvent(QMouseEvent * e)
         QPoint pos = e->pos();
 
         if(pos != lastPos)
-        {            
+        {
             QPoint delta = pos - lastPos;
             canvas->moveMap(delta);
             lastPos     = pos;
@@ -389,13 +399,13 @@ void CMouseSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
     findItems();
 }
 
-void CMouseSelect::slotCopy()
+void CMouseSelect::slotCopy() const
 {
     CGisWidget::self().copyItemsByKey(itemKeys);
     canvas->resetMouse();
 }
 
-void CMouseSelect::slotDelete()
+void CMouseSelect::slotDelete() const
 {
     CGisWidget::self().delItemsByKey(itemKeys);
     canvas->resetMouse();

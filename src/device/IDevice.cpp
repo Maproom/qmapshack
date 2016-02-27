@@ -151,6 +151,26 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
     return item;
 }
 
+void IDevice::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project != nullptr)
+        {
+            project->getItemsByKeys(keys, items);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getItemsByKeys(keys, items);
+        }
+    }
+}
+
 IGisProject * IDevice::getProjectByKey(const QString& key)
 {
     const int N = childCount();

@@ -49,7 +49,7 @@ variables in advanced:
 ROUTINO_LIB_DIR=... (absolute path to directory where the build library and other files will be stored)
 ROUTINO_SRC_DIR=... (absolute path to directory where the source code will be checked out)
 
-the call the script:
+Now call the script:
 
 ./build-routino.sh routino-build
 
@@ -86,8 +86,8 @@ PROJ_DIR=...          (absolute path to the proj4 library base package)
 ROUTINO_LIB_DIR=..    (absolute path to the routino library base package, same as ROUTINO_LIB_DIR / ROUTINO_DEV_PATH)
 BUILD_DIR=..          (absolute path to the QMapShack build directory, the created directory "build_QMapShack" for the cmake build)
 QMS_SRC_DIR=...       (absolute path to the QMapShack source, the directory "QMapShack" used by cmake)
-BUILD_BIN_DIR=...     (absolute path to the direcotry with the qmapshack binary, typically build_QMapShack/bin for cmake build; depends on IDE)
-BUILD_RELEASE_DIR=... (absolute path to the direcotry where the application bundle should be placed)
+BUILD_BIN_DIR=...     (absolute path to the directory with the qmapshack binary, typically build_QMapShack/bin for cmake build; depends on IDE)
+BUILD_RELEASE_DIR=... (absolute path to the directory where the application bundle should be placed)
 
 ./bundle.sh bundle
 

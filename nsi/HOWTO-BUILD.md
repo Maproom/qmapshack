@@ -106,7 +106,7 @@ Note: you might have to install TortoiseHG or any other mercurial client
 
 ### I1.) Download the VC redistributable installer 
   from http://www.microsoft.com/en-us/download/details.aspx?id=40784
-Note: in case the restributable files are already installed in your system, 
+Note: in case the redistributable files are already installed in your system, 
 this step is not necessary.
 
 ### I2.) Create the installer with NSIS(3.0b1)
@@ -119,13 +119,13 @@ this step is not necessary.
   The copyfiles.bat script will create a new directory "Files" which has 
   exactly the same content as the final installation directory created 
   by the NSIS installer will have.
-  Qmapshack does not have any dependencies out of its own installation 
+  QMapShack does not have any dependencies out of its own installation 
   directory. So instead of creating an NSIS installer you could just 
   copy this directory to an other machine for a quick deployment
 
 - [optional] Test whether the deployment is complete: 
   double-click on Files/qmapshack.exe
-  ==> Qmapshack should start up and be fully operational without any restrictions
+  ==> QMapShack should start up and be fully operational without any restrictions
   
 - Run the QMapShack_Installer.nsi script e.g via right click on script file 
   and choosing "Compile NSIS Script" from contextual menu.
@@ -136,7 +136,7 @@ this step is not necessary.
   
 ## Debugging with VS2013
 
-For bug fixing you might want to run QMapshack with the VS2013 debugger.
+For bug fixing you might want to run QMapShack with the VS2013 debugger.
 This requires some additional configuration
 
 ### D1.) Set the solution configuration type to "RelWithDebInfo"
@@ -146,7 +146,7 @@ start as described in
 http://stackoverflow.com/questions/19197791/projapi-gis-library-heap-overflow
 The reason for this problem is currently unknown. Any help is welcome.
 
-### D2.) Right-click on the project qmapshack and open the settings dialogue
+### D2.) Right-click on the project qmapshack and open the settings dialog
 - In C/C++->Optimization: deactivate optimization (/Od)
 - In Debugging->Environment set the path such that all required .dll's are found
   (see http://stackoverflow.com/questions/2119539/visual-studio-how-to-set-path-to-dll)
@@ -158,10 +158,10 @@ The reason for this problem is currently unknown. Any help is welcome.
 - Right-Click on the ALL_BUILD project and select build to start the compilation
 
 ### D4.) Run/Debug preparations
-Now you can in principle run Qmapshack with the VS2013 debugger: 
+Now you can in principle run QMapShack with the VS2013 debugger: 
 step through, inspect variables, see the debug output
 
-But as Qmapshack expects some configuration files for gdal and routino in the
+But as QMapShack expects some configuration files for gdal and routino in the
 directory where it's executable is placed. 
 If those files are not there, you will get some strange error messages such as 
 "the specified XML file is not found" at startup and the functionality for 

@@ -38,6 +38,7 @@
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMousePrint.h"
 #include "mouse/CMouseRangeTrk.h"
+#include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
@@ -190,114 +191,90 @@ void CCanvas::resetMouse()
     }
 }
 
+void CCanvas::setMouseCursor(IMouse& mouse, const QString& src)
+{
+    if(underMouse())
+    {
+        CCanvas::restoreOverrideCursor(src);
+        CCanvas::setOverrideCursor(mouse, src);
+    }
+}
+
 void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 {
     mouse->deleteLater();
     mouse = new CMouseMoveWpt(wpt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseMoveWpt");
-        CCanvas::setOverrideCursor(*mouse, "setMouseMoveWpt");
-    }
+    setMouseCursor(*mouse, "setMouseMoveWpt");
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
-    }
+    setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseEditRte(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditRte(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditRte");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
-    }
+    setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(trk, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
-    }
+    setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
     mouse = new CMouseRangeTrk(trk, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseRangeTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseRangeTrk");
-    }
+    setMouseCursor(*mouse, "setMouseRangeTrk");
 }
 
 void CCanvas::setMouseEditArea(const QPointF& pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditArea(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditArea");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
-    }
+    setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
 {
     mouse->deleteLater();
     mouse = new CMouseEditArea(area, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditArea");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
-    }
+    setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditRte(CGisItemRte& rte)
 {
     mouse->deleteLater();
     mouse = new CMouseEditRte(rte, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditRte");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
-    }
+    setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
     mouse->deleteLater();
     mouse = new CMouseWptBubble(key, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseWptBubble");
-        CCanvas::setOverrideCursor(*mouse, "setMouseWptBubble");
-    }
+    setMouseCursor(*mouse, "setMouseWptBubble");
 }
 
 void CCanvas::setMousePrint()
 {
     mouse->deleteLater();
     mouse = new CMousePrint(gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMousePrint");
-        CCanvas::setOverrideCursor(*mouse, "setMousePrint");
-    }
+    setMouseCursor(*mouse, "setMousePrint");
+}
+
+void CCanvas::setMouseSelect()
+{
+    mouse->deleteLater();
+    mouse = new CMouseSelect(gis, this);
+    setMouseCursor(*mouse, "setMouseSelect");
 }
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)

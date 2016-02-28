@@ -111,6 +111,7 @@ public:
     void setMouseEditArea(const QPointF& pt);
     void setMouseWptBubble(const IGisItem::key_t& key);
     void setMousePrint();
+    void setMouseSelect();
 
     void showProfileAsWindow(bool yes);
     void showProfile(bool yes);
@@ -176,6 +177,7 @@ private:
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
     void setDrawContextSize(const QSize& s);
+    void setMouseCursor(IMouse& mouse, const QString& src);
 
     QColor backColor;     //< the background color used in case of missing map tiles
     redraw_e needsRedraw; //< set true to initiate a complete redraw of the screen content

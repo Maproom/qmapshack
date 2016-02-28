@@ -28,6 +28,7 @@ class CScrOptSelect;
 
 class CMouseSelect : public IMouse
 {
+    Q_OBJECT
 public:
     CMouseSelect(CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseSelect();

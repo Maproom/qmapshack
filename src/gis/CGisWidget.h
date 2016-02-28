@@ -249,18 +249,29 @@ public:
     void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
 
     /**
+       @brief Get items matching the given area
+
+       @param pos
+       @param items
+     */
+    void getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items);
+
+    /**
        @brief Find first item with matching key
        @param key       the item's key as it is returned from IGisItem::getKey()
        @return If no item is found 0 is returned.
      */
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
+    void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     /**
        @brief Delete all items with matching key from workspace
 
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
     void delItemByKey(const IGisItem::key_t &key);
+
+    void delItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**
        @brief Edit / view item details
@@ -273,6 +284,12 @@ public:
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
     void copyItemByKey(const IGisItem::key_t &key);
+
+    /**
+       @brief Select a project and add a copy of all items in the list
+       @param keys      a list of item keys to copy
+     */
+    void copyItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**
        @brief Clone waypoint and move clone

@@ -123,6 +123,7 @@ public:
     void drawHighlight(QPainter& p) override;
     void save(QDomNode& gpx) override;
     bool isCloseTo(const QPointF& pos) override;
+    bool isWithin(const QRectF& area, selection_e mode) override;
     /**
        @brief Switch user focus on and off.
 

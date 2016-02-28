@@ -461,6 +461,18 @@ IGisItem * IGisProject::getItemByKey(const IGisItem::key_t& key)
     return nullptr;
 }
 
+void IGisProject::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+{
+    foreach(const IGisItem::key_t& key, keys)
+    {
+        IGisItem * item = getItemByKey(key);
+        if(item != nullptr)
+        {
+            items << item;
+        }
+    }
+}
+
 void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
 {
     if(!isVisible())
@@ -477,6 +489,28 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
         }
 
         if(item->isCloseTo(pos))
+        {
+            items << item;
+        }
+    }
+}
+
+void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items)
+{
+    if(!isVisible())
+    {
+        return;
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if(nullptr == item)
+        {
+            continue;
+        }
+
+        if(item->isWithin(area, mode))
         {
             items << item;
         }

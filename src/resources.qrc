@@ -128,6 +128,9 @@
         <file>icons/32x32/PointShow.png</file>
         <file>icons/32x32/AreaMove.png</file>
         <file>icons/32x32/SelectRange.png</file>
+        <file>icons/32x32/SelectArea.png</file>
+        <file>icons/32x32/SelectExactArea.png</file>
+        <file>icons/32x32/SelectIntersectArea.png</file>
         <file>icons/32x32/Area.png</file>
         <file>icons/32x32/Reverse.png</file>
         <file>icons/32x32/Combine.png</file>
@@ -308,6 +311,9 @@
         <file>icons/48x48/PointShow.png</file>
         <file>icons/48x48/AreaMove.png</file>
         <file>icons/48x48/SelectRange.png</file>
+        <file>icons/48x48/SelectArea.png</file>
+        <file>icons/48x48/SelectExactArea.png</file>
+        <file>icons/48x48/SelectIntersectArea.png</file>
         <file>icons/48x48/Area.png</file>
         <file>icons/48x48/Reverse.png</file>
         <file>icons/48x48/Combine.png</file>
@@ -455,6 +461,7 @@
         <file>cursors/cursorMoveArea.png</file>
         <file>cursors/cursorDelete.png</file>
         <file>cursors/cursorSelectRange.png</file>
+        <file>cursors/cursorSelectArea.png</file>
         <file>cursors/cursorAdd.png</file>
         <file>cursors/cursorPrint.png</file>
         <file>cursors/cursorSave.png</file>

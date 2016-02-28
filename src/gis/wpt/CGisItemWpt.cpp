@@ -429,6 +429,12 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
     return (pos - posScreen).manhattanLength() < 22;
 }
 
+bool CGisItemWpt::isWithin(const QRectF& area, selection_e)
+{
+    return area.contains(posScreen);
+}
+
+
 void CGisItemWpt::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();

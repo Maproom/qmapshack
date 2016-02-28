@@ -39,14 +39,20 @@ public:
     void wheelEvent(QWheelEvent * e) override;
 
 private slots:
-    void slotModeSwitch(IGisItem::selection_e mode, bool checked);
     void slotCopy() const;
     void slotDelete() const;
 
 private:
     void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
     void placeScrOpt();
-    void findItems();
+    /**
+       @brief Get a temporary list of all items
+
+       @Note: The list of items is only temporary and maust not be used outside the calling method.
+
+       @param items a temporary list to collect all item pointers
+     */
+    void findItems(QList<IGisItem *> &items);
 
     QPoint lastPos;
     QPointF offset;
@@ -84,8 +90,7 @@ private:
 
     QPointer<CScrOptSelect> scrOptSelect;
 
-    IGisItem::selection_e modeSelection = IGisItem::eSelectionIntersect;
-    IGisItem::selection_e modeLastSel   = IGisItem::eSelectionNone;
+    IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
 
     QList<IGisItem::key_t> itemKeys;
 

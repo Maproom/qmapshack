@@ -106,7 +106,7 @@ public:
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
     QPointF getPointCloseBy(const QPoint& screenPos) override;
     bool isCloseTo(const QPointF& pos) override;
-    bool isWithin(const QRectF& area, selection_e mode) override;
+    bool isWithin(const QRectF& area, selflags_t flags) override;
 
     void gainUserFocus(bool yes) override;
 

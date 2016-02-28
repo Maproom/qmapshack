@@ -20,6 +20,7 @@
 #define CSCROPTSELECT_H
 
 
+#include "gis/IGisItem.h"
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptSelect.h"
 
@@ -35,6 +36,17 @@ public:
     void draw(QPainter& p) override
     {
     }
+    IGisItem::selflags_t getModeSelection()
+    {
+        return modeSelection;
+    }
+
+private slots:
+    void slotModeSwitch(IGisItem::selection_e mode, bool checked);
+
+
+private:
+    IGisItem::selflags_t modeSelection = IGisItem::eSelectionNone;
 };
 
 #endif //CSCROPTSELECT_H

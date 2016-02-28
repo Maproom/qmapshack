@@ -429,9 +429,9 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
     return (pos - posScreen).manhattanLength() < 22;
 }
 
-bool CGisItemWpt::isWithin(const QRectF& area, selection_e)
+bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
 {
-    return area.contains(posScreen);
+    return (flags & eSelectionWpt) ? area.contains(posScreen) : false;
 }
 
 

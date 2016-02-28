@@ -347,7 +347,7 @@ public:
      */
     bool isCloseTo(const QPointF& pos) override;
 
-    bool isWithin(const QRectF& area, selection_e mode) override;
+    bool isWithin(const QRectF& area, selflags_t flags) override;
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;

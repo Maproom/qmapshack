@@ -251,9 +251,9 @@ public:
     /**
        @brief Get items matching the given area
 
-       @param area
-       @param mode
-       @param items
+       @param area      a rectangle in screen pixel coordinates
+       @param flags     flag field with IGisItem::selection_e flags set
+       @param items     a list to receive the temporary pointers to the found items
      */
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 

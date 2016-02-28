@@ -32,8 +32,8 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
 
     scrOptSelect = new CScrOptSelect(this);
 
-    connect(scrOptSelect->toolCopy,          &QToolButton::clicked, this, &CMouseSelect::slotCopy);
-    connect(scrOptSelect->toolDelete,        &QToolButton::clicked, this, &CMouseSelect::slotDelete);
+    connect(scrOptSelect->toolCopy,   &QToolButton::clicked, this, &CMouseSelect::slotCopy);
+    connect(scrOptSelect->toolDelete, &QToolButton::clicked, this, &CMouseSelect::slotDelete);
 }
 
 CMouseSelect::~CMouseSelect()

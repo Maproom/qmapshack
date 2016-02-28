@@ -140,6 +140,13 @@ public:
         ,eMarkNotInDB   = 0x00000004
     };
 
+    enum selection_e
+    {
+        eSelectionNone
+        , eSelectionExact
+        , eSelectionIntersect
+    };
+
     struct key_t
     {
         bool operator==(const key_t& k) const
@@ -300,6 +307,8 @@ public:
        @return If no point can be found NOPOINTF is returned.
      */
     virtual bool isCloseTo(const QPointF& pos) = 0;
+
+    virtual bool isWithin(const QRectF& area, selection_e mode) = 0;
 
     /**
        @brief Receive the current mouse position
@@ -509,11 +518,10 @@ protected:
     /// call when ever you make a change to the item's data
     virtual void changed(const QString& what, const QString& icon);
 
-
     void loadFromDb(quint64 id, QSqlDatabase& db);
-
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
+    bool isWithin(const QRectF& area, selection_e mode, const QPolygonF& points);
 
     /**
        @brief Converts a string with HTML tags to a string without HTML depending on the device

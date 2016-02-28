@@ -19,6 +19,7 @@
 #ifndef CMOUSESELECT_H
 #define CMOUSESELECT_H
 
+#include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "mouse/IMouse.h"
 

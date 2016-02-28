@@ -36,7 +36,8 @@ public:
     void draw(QPainter& p) override
     {
     }
-    IGisItem::selflags_t getModeSelection()
+
+    IGisItem::selflags_t getModeSelection() const
     {
         return modeSelection;
     }

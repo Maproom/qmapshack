@@ -273,7 +273,7 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
 
     auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMinGraph, spinMaxGraph);
-    connect(&limit, &CLimit::sigChanged, limitChangedFunc);
+    connect(&limit, &CLimit::sigChanged, this, limitChangedFunc);
 }
 
 void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax)
@@ -316,7 +316,7 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
     auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMin, spinMax);
-    connect(&limit,        &CLimit::sigChanged, limitChangedFunc);
+    connect(&limit,        &CLimit::sigChanged, this, limitChangedFunc);
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)

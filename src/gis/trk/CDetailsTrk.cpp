@@ -265,9 +265,9 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     auto limitUserFunc = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
     auto limitSysFunc  = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeSys,  &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
 
-    connect(toolLimitAutoGraph, &QToolButton::toggled, limitAutoFunc);
-    connect(toolLimitUsrGraph,  &QToolButton::toggled, limitUserFunc);
-    connect(toolLimitSysGraph,  &QToolButton::toggled, limitSysFunc);
+    connect(toolLimitAutoGraph, &QToolButton::toggled, this, limitAutoFunc);
+    connect(toolLimitUsrGraph,  &QToolButton::toggled, this, limitUserFunc);
+    connect(toolLimitSysGraph,  &QToolButton::toggled, this, limitSysFunc);
 
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);

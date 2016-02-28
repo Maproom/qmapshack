@@ -251,10 +251,11 @@ public:
     /**
        @brief Get items matching the given area
 
-       @param pos
+       @param area
+       @param mode
        @param items
      */
-    void getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items);
+    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
     /**
        @brief Find first item with matching key

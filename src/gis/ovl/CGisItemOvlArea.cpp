@@ -156,9 +156,9 @@ bool CGisItemOvlArea::isCloseTo(const QPointF& pos)
     return dist < 20;
 }
 
-bool CGisItemOvlArea::isWithin(const QRectF& area, selection_e mode)
+bool CGisItemOvlArea::isWithin(const QRectF& area, selflags_t flags)
 {
-    return IGisItem::isWithin(area, mode, polygonArea);
+    return (flags & eSelectionOvl) ? IGisItem::isWithin(area, flags, polygonArea) : false;
 }
 
 QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)

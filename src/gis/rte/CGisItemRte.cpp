@@ -348,9 +348,9 @@ bool CGisItemRte::isCloseTo(const QPointF& pos)
     return dist < 20;
 }
 
-bool CGisItemRte::isWithin(const QRectF& area, selection_e mode)
+bool CGisItemRte::isWithin(const QRectF& area, selflags_t flags)
 {
-    return IGisItem::isWithin(area, mode, line);
+    return (flags & eSelectionRte) ? IGisItem::isWithin(area, flags, line) : false;
 }
 
 

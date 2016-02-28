@@ -23,9 +23,6 @@
 
 #include <QtWidgets>
 
-#include <functional>
-using std::bind;
-
 CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
     : IMouse(gis, parent)
 {
@@ -33,14 +30,8 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
 
     canvas->reportStatus("CMouseSelect", tr("<b>Select Items On Map</b><br/>Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners."));
 
-    scrOptSelect  = new CScrOptSelect(this);
-    modeSelection = scrOptSelect->toolModeExact->isChecked() ? IGisItem::eSelectionExact : IGisItem::eSelectionIntersect;
+    scrOptSelect = new CScrOptSelect(this);
 
-    auto slotModeExact      = bind(&CMouseSelect::slotModeSwitch, this, IGisItem::eSelectionExact, std::placeholders::_1);
-    auto slotModeIntersect  = bind(&CMouseSelect::slotModeSwitch, this, IGisItem::eSelectionIntersect, std::placeholders::_1);
-
-    connect(scrOptSelect->toolModeExact,     &QToolButton::toggled, this, slotModeExact);
-    connect(scrOptSelect->toolModeIntersect, &QToolButton::toggled, this, slotModeIntersect);
     connect(scrOptSelect->toolCopy,          &QToolButton::clicked, this, &CMouseSelect::slotCopy);
     connect(scrOptSelect->toolDelete,        &QToolButton::clicked, this, &CMouseSelect::slotDelete);
 }
@@ -65,12 +56,11 @@ void CMouseSelect::rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const
 
 void CMouseSelect::placeScrOpt()
 {
-    QRectF rectSel;
-    rectRad2Px(rectSelection, rectSel);
-
-    if(((rectTopLeft.width() + rectTopRight.width() + scrOptSelect->width()) < rectSel.width()) && (scrOptSelect->height() < rectSel.height()))
+    if((state == eStateMap) || (state == eStateMapMoving))
     {
-        scrOptSelect->move(rectSel.x() + (rectSel.width()  - scrOptSelect->width())/2, rectSel.y());
+        QRectF rectSel;
+        rectRad2Px(rectSelection, rectSel);
+        scrOptSelect->move(rectSel.topRight().toPoint());
         scrOptSelect->show();
     }
     else
@@ -79,56 +69,70 @@ void CMouseSelect::placeScrOpt()
     }
 }
 
-void CMouseSelect::findItems()
+void CMouseSelect::findItems(QList<IGisItem*>& items)
 {
+    IGisItem::selflags_t modeSelection = scrOptSelect->getModeSelection();
+
     if((rectSelection == rectLastSel) && (modeSelection == modeLastSel))
     {
-        return;
-    }
-
-    itemKeys.clear();
-    QList<IGisItem*> items;
-    QRectF area;
-
-    rectRad2Px(rectSelection, area);
-    CGisWidget::self().getItemsByArea(area, modeSelection, items);
-
-    quint32 cntWpt = 0;
-    quint32 cntTrk = 0;
-    quint32 cntRte = 0;
-    quint32 cntOvl = 0;
-    foreach(IGisItem * item, items)
-    {
-        itemKeys << item->getKey();
-        switch(item->type())
+        if(itemKeys.isEmpty())
         {
-        case IGisItem::eTypeWpt:
-            cntWpt++;
-            break;
-
-        case IGisItem::eTypeTrk:
-            cntTrk++;
-            break;
-
-        case IGisItem::eTypeRte:
-            cntRte++;
-            break;
-
-        case IGisItem::eTypeOvl:
-            cntOvl++;
-            break;
+            scrOptSelect->frameFunction->setDisabled(true);
+        }
+        else
+        {
+            scrOptSelect->frameFunction->setEnabled(true);
+            CGisWidget::self().getItemsByKeys(itemKeys, items);
         }
     }
+    else
+    {
+        itemKeys.clear();
 
-    QString msg = tr("<b>Selected:</b><br/>");
-    msg += tr("%1 waypoints<br/>").arg(cntWpt);
-    msg += tr("%1 tracks<br/>").arg(cntTrk);
-    msg += tr("%1 routes<br/>").arg(cntRte);
-    msg += tr("%1 areas<br/>").arg(cntOvl);
+        QRectF area;
+        rectRad2Px(rectSelection, area);
+        CGisWidget::self().getItemsByArea(area, modeSelection, items);
 
-    canvas->reportStatus("CMouseSelect::Stat",msg);
+        quint32 cntWpt = 0;
+        quint32 cntTrk = 0;
+        quint32 cntRte = 0;
+        quint32 cntOvl = 0;
+        foreach(IGisItem * item, items)
+        {
+            itemKeys << item->getKey();
+            switch(item->type())
+            {
+            case IGisItem::eTypeWpt:
+                cntWpt++;
+                break;
 
-    rectLastSel = rectSelection;
+            case IGisItem::eTypeTrk:
+                cntTrk++;
+                break;
+
+            case IGisItem::eTypeRte:
+                cntRte++;
+                break;
+
+            case IGisItem::eTypeOvl:
+                cntOvl++;
+                break;
+            }
+        }
+
+        QString msg = tr("<b>Selected:</b><br/>");
+        msg += tr("%1 waypoints<br/>").arg(cntWpt);
+        msg += tr("%1 tracks<br/>").arg(cntTrk);
+        msg += tr("%1 routes<br/>").arg(cntRte);
+        msg += tr("%1 areas<br/>").arg(cntOvl);
+
+        canvas->reportStatus("CMouseSelect::Stat",msg);
+
+        scrOptSelect->frameFunction->setDisabled(itemKeys.isEmpty());
+
+        rectLastSel = rectSelection;
+        modeLastSel = modeSelection;
+    }
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
@@ -139,7 +143,8 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 
     QList<IGisItem*> items;
-    CGisWidget::self().getItemsByKeys(itemKeys, items);
+    findItems(items);
+
     foreach(IGisItem * item, items)
     {
         item->drawHighlight(p);
@@ -190,7 +195,6 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 
     placeScrOpt();
-    findItems();
 }
 
 void CMouseSelect::mousePressEvent(QMouseEvent * e)
@@ -377,27 +381,6 @@ void CMouseSelect::wheelEvent(QWheelEvent * e)
 {
 }
 
-void CMouseSelect::slotModeSwitch(IGisItem::selection_e mode, bool checked)
-{
-    if(!checked)
-    {
-        return;
-    }
-    switch(mode)
-    {
-    case IGisItem::eSelectionExact:
-        canvas->reportStatus("CMouseSelect", tr("<b>Exact Mode</b><br/>All selected items have to be completely inside the selected area.<br/>"));
-        modeSelection = mode;
-        break;
-
-    case IGisItem::eSelectionIntersect:
-        canvas->reportStatus("CMouseSelect", tr("<b>Intersecting Mode</b><br/>All selected items have to be inside or at least intersect the selected area.<br/>"));
-        modeSelection = mode;
-        break;
-    }
-
-    findItems();
-}
 
 void CMouseSelect::slotCopy() const
 {

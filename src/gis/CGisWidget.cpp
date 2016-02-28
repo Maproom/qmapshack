@@ -292,7 +292,7 @@ void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisIt
     }
 }
 
-void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, QList<IGisItem *> &items)
+void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -301,13 +301,13 @@ void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selection_e mode, 
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project)
         {
-            project->getItemsByArea(area, mode, items);
+            project->getItemsByArea(area, flags, items);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
         if(device)
         {
-            device->getItemsByArea(area, mode, items);
+            device->getItemsByArea(area, flags, items);
             continue;
         }
     }

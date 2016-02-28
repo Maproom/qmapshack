@@ -28,19 +28,19 @@ CAppOpts* CCommandProcessor::processOptions(const QStringList &arguments)
     QCommandLineParser parser;
     QCommandLineOption helpOption = parser.addHelpOption(); // h help
 
-    QCommandLineOption debugOption(QStringList() << "d" << "debug", QCoreApplication::translate("CCommandProcessor", "Print debug output to console."));
+    QCommandLineOption debugOption(QStringList() << "d" << "debug", tr("Print debug output to console."));
     parser.addOption(debugOption);
 
-    QCommandLineOption logfileOption(QStringList() << "f" << "logfile", QCoreApplication::translate("CCommandProcessor", "Print debug output to logfile (temp. path)."));
+    QCommandLineOption logfileOption(QStringList() << "f" << "logfile", tr("Print debug output to logfile (temp. path)."));
     parser.addOption(logfileOption);
 
-    QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", QCoreApplication::translate("CCommandProcessor", "Do not show splash screen."));
+    QCommandLineOption nosplashOption(QStringList() << "n" << "no-splash", tr("Do not show splash screen."));
     parser.addOption(nosplashOption);
 
-    QCommandLineOption configOption(QStringList() << "c" << "config", QCoreApplication::translate("CCommandProcessor", "File with QMapShack configuration."), QCoreApplication::translate("CCommandProcessor", "file"));
+    QCommandLineOption configOption(QStringList() << "c" << "config", tr("File with QMapShack configuration."), tr("file"));
     parser.addOption(configOption);
 
-    parser.addPositionalArgument("files", QCoreApplication::translate("CCommandProcessor", "Files for future use."));
+    parser.addPositionalArgument("files", tr("Files for future use."));
 
     if (!parser.parse(arguments))
     {

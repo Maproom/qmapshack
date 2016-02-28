@@ -25,7 +25,7 @@
 #include <QtWidgets>
 #include <iostream>
 
-CAppOpts *qlOpts;
+CAppOpts *qlOpts = nullptr;
 
 int main(int argc, char ** argv)
 {
@@ -35,12 +35,11 @@ int main(int argc, char ** argv)
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
-    CAppSetup* env = CAppSetup::getPlattformInstance();
-    env->installMessageHandler();
-
     CCommandProcessor cmdParse;
     qlOpts = cmdParse.processOptions(app.arguments());
 
+    CAppSetup* env = CAppSetup::getPlattformInstance();
+    env->installMessageHandler();
     env->prepareConfig();
     env->prepareTranslators(&app);
     env->prepareGdal();

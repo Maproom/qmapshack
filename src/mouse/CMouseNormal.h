@@ -51,6 +51,7 @@ private slots:
     void slotAddTrk()           const;
     void slotAddRte()           const;
     void slotAddArea()          const;
+    void slotSelectArea()       const;
     void slotCopyPosition()     const;
     void slotCopyPositionGrid() const;
 

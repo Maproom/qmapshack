@@ -1160,6 +1160,12 @@ bool CGisItemTrk::isCloseTo(const QPointF& pos)
     return GPS_Math_DistPointPolyline(lineSimple, pos) < 20;
 }
 
+bool CGisItemTrk::isWithin(const QRectF& area, selflags_t flags)
+{
+    return (flags & eSelectionTrk) ? IGisItem::isWithin(area, flags, lineSimple) : false;
+}
+
+
 void CGisItemTrk::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();

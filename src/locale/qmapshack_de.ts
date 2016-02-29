@@ -410,7 +410,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Suche nach Bildern...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="263"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
         <source>No images found</source>
         <translation>Keine Bilder gefunden</translation>
     </message>
@@ -2806,9 +2806,13 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMousePrint</name>
     <message>
-        <location filename="../mouse/CMousePrint.cpp" line="30"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection.</source>
-        <translation>&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
+        <translation type="obsolete">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMousePrint.cpp" line="31"/>
+        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2827,27 +2831,27 @@ Unbekannte Struktur.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="123"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="124"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="125"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="126"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="127"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6596,6 +6600,30 @@ sein</translation>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
+    </message>
+</context>
+<context>
+    <name>IScrOptPrint</name>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="35"/>
+        <source>Save selected area as image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="38"/>
+        <location filename="../mouse/IScrOptPrint.ui" line="58"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="55"/>
+        <source>Print selected area.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

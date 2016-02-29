@@ -406,7 +406,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="263"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
         <source>No images found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2754,8 +2754,8 @@ Unknown structure.</source>
 <context>
     <name>CMousePrint</name>
     <message>
-        <location filename="../mouse/CMousePrint.cpp" line="30"/>
-        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection.</source>
+        <location filename="../mouse/CMousePrint.cpp" line="31"/>
+        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2775,27 +2775,27 @@ Unknown structure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="123"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="124"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="125"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="126"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="127"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6522,6 +6522,30 @@ or
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="121"/>
         <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IScrOptPrint</name>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="35"/>
+        <source>Save selected area as image.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="38"/>
+        <location filename="../mouse/IScrOptPrint.ui" line="58"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptPrint.ui" line="55"/>
+        <source>Print selected area.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

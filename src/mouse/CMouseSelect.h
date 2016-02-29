@@ -21,13 +21,13 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
-#include "mouse/IMouse.h"
+#include "mouse/IMouseSelect.h"
 
 class CGisDraw;
 class CCanvas;
 class CScrOptSelect;
 
-class CMouseSelect : public IMouse
+class CMouseSelect : public IMouseSelect
 {
     Q_OBJECT
 public:
@@ -35,18 +35,12 @@ public:
     virtual ~CMouseSelect();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent * e) override;
-    void mouseMoveEvent(QMouseEvent * e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent * e) override;
 
 private slots:
     void slotCopy() const;
     void slotDelete() const;
 
 private:
-    void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
-    void placeScrOpt();
     /**
        @brief Get a temporary list of all items
 
@@ -56,46 +50,9 @@ private:
      */
     void findItems(QList<IGisItem *> &items);
 
-    QPoint lastPos;
-    QPointF offset;
-    QPointF posInitial;
-
-    QRectF rectSelection;
-    QRectF rectTopLeft     {0, 0, 20, 20};
-    QRectF rectTopRight    {0, 0, 20, 20};
-    QRectF rectBottomLeft  {0, 0, 20, 20};
-    QRectF rectBottomRight {0, 0, 20, 20};
-
-    enum state_e
-    {
-        eStateIdle
-        ,eStateInitial
-        ,eStateMap
-        ,eStateMapMoving
-        ,eStateResize
-    };
-
-    state_e state = eStateIdle;
-
-    enum corner_e
-    {
-        eCornerNone
-        , eCornerTopLeft
-        , eCornerTopRight
-        , eCornerBottomLeft
-        , eCornerBottomRight
-        , eCornerPrint
-        , eCornerImage
-    };
-
-    corner_e corner = eCornerNone;
-
-    QPointer<CScrOptSelect> scrOptSelect;
-
-    IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
 
     QList<IGisItem::key_t> itemKeys;
-
+    IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
     QRectF rectLastSel;
 };
 

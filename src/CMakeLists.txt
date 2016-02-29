@@ -129,6 +129,7 @@ set( SRCS
         grid/CProjWizard.cpp
         grid/mitab.cpp
         mouse/IMouse.cpp
+        mouse/IMouseSelect.cpp
         mouse/IScrOpt.cpp
         mouse/CMouseDummy.cpp
         mouse/CMouseNormal.cpp
@@ -143,6 +144,7 @@ set( SRCS
         mouse/CScrOptUnclutter.cpp
         mouse/CScrOptRangeTrk.cpp
         mouse/CScrOptSelect.cpp
+        mouse/CScrOptPrint.cpp
         mouse/line/IMouseEditLine.cpp
         mouse/line/CScrOptEditLine.cpp
         mouse/line/CScrOptRangeLine.cpp
@@ -387,6 +389,7 @@ set( HDRS
         grid/CProjWizard.h
         grid/mitab.h
         mouse/IMouse.h
+        mouse/IMouseSelect.h
         mouse/IScrOpt.h
         mouse/CMouseDummy.h
         mouse/CMouseNormal.h
@@ -401,6 +404,7 @@ set( HDRS
         mouse/CScrOptUnclutter.h
         mouse/CScrOptRangeTrk.h
         mouse/CScrOptSelect.h
+        mouse/CScrOptPrint.h
         mouse/line/CScrOptEditLine.h
         mouse/line/CScrOptRangeLine.h
         mouse/line/IMouseEditLine.h
@@ -584,6 +588,7 @@ set( UIS
     grid/IProjWizard.ui
     mouse/IScrOptRangeTrk.ui
     mouse/IScrOptSelect.ui
+    mouse/IScrOptPrint.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui

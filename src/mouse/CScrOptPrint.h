@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,22 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSEPRINT_H
-#define CMOUSEPRINT_H
+#ifndef CSCROPTPRINT_H
+#define CSCROPTPRINT_H
 
-#include "mouse/IMouseSelect.h"
+#include "mouse/IScrOpt.h"
+#include "ui_IScrOptPrint.h"
 
-class CGisDraw;
-class CCanvas;
-
-class CMousePrint : public IMouseSelect
+class CScrOptPrint : public IScrOpt, public Ui::IScrOptPrint
 {
-    Q_OBJECT
 public:
-    CMousePrint(CGisDraw * gis, CCanvas * parent);
-    virtual ~CMousePrint();
+    CScrOptPrint(IMouse *mouse);
+    virtual ~CScrOptPrint() = default;
 
-private slots:
-    void slotSave();
-    void slotPrint();
+    void draw(QPainter& p) override
+    {
+    }
 };
 
-#endif //CMOUSEPRINT_H
+#endif //CSCROPTPRINT_H
 

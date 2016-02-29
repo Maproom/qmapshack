@@ -151,7 +151,7 @@ void IDrawContext::resize(const QSize& size)
 
 QString IDrawContext::getProjection()
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return QString::Null();
     }
@@ -164,7 +164,7 @@ QString IDrawContext::getProjection()
 
 void IDrawContext::setProjection(const QString& proj)
 {
-    if(pjsrc != 0)
+    if(pjsrc != nullptr)
     {
         pj_free(pjsrc);
     }
@@ -206,16 +206,15 @@ void IDrawContext::setScales(const CCanvas::scales_type_e type)
 
 bool IDrawContext::needsRedraw()
 {
-    bool res = false;
     mutex.lock();
-    res = intNeedsRedraw;
+    bool res = intNeedsRedraw;
     mutex.unlock();
     return res;
 }
 
 void IDrawContext::zoom(const QRectF& rect)
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }
@@ -247,7 +246,7 @@ void IDrawContext::zoom(const QRectF& rect)
 
 void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }
@@ -282,7 +281,7 @@ void IDrawContext::zoom(int idx)
 
 void IDrawContext::convertRad2M(QPointF &p)
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }
@@ -321,7 +320,7 @@ void IDrawContext::convertRad2M(QPointF &p)
 
 void IDrawContext::convertM2Rad(QPointF &p)
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }
@@ -375,7 +374,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly)
 
 void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {
-    if(pjsrc == 0)
+    if(pjsrc == nullptr)
     {
         return;
     }

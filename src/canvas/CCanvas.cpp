@@ -38,6 +38,7 @@
 #include "mouse/CMouseNormal.h"
 #include "mouse/CMousePrint.h"
 #include "mouse/CMouseRangeTrk.h"
+#include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
@@ -153,9 +154,10 @@ void CCanvas::saveConfig(QSettings& cfg)
     map->saveConfig(cfg);
     dem->saveConfig(cfg);
     grid->saveConfig(cfg);
-    cfg.setValue("posFocus", posFocus);
-    cfg.setValue("proj", map->getProjection());
-    cfg.setValue("scales", map->getScalesType());
+    cfg.setValue("posFocus",  posFocus);
+    cfg.setValue("proj",      map->getProjection());
+    cfg.setValue("scales",    map->getScalesType());
+    cfg.setValue("backColor", backColor.name());
 }
 
 void CCanvas::loadConfig(QSettings& cfg)
@@ -163,6 +165,9 @@ void CCanvas::loadConfig(QSettings& cfg)
     posFocus = cfg.value("posFocus", posFocus).toPointF();
     setProjection(cfg.value("proj", map->getProjection()).toString());
     setScales((CCanvas::scales_type_e)cfg.value("scales",  map->getScalesType()).toInt());
+
+    const QString &backColorStr = cfg.value("backColor", "#FFFFBF").toString();
+    backColor = QColor(backColorStr);
 
     map->loadConfig(cfg);
     dem->loadConfig(cfg);
@@ -186,114 +191,90 @@ void CCanvas::resetMouse()
     }
 }
 
+void CCanvas::setMouseCursor(IMouse& mouse, const QString& src)
+{
+    if(underMouse())
+    {
+        CCanvas::restoreOverrideCursor(src);
+        CCanvas::setOverrideCursor(mouse, src);
+    }
+}
+
 void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 {
     mouse->deleteLater();
     mouse = new CMouseMoveWpt(wpt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseMoveWpt");
-        CCanvas::setOverrideCursor(*mouse, "setMouseMoveWpt");
-    }
+    setMouseCursor(*mouse, "setMouseMoveWpt");
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
-    }
+    setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseEditRte(const QPointF &pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditRte(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditRte");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
-    }
+    setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
     mouse = new CMouseEditTrk(trk, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditTrk");
-    }
+    setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
 {
     mouse->deleteLater();
     mouse = new CMouseRangeTrk(trk, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseRangeTrk");
-        CCanvas::setOverrideCursor(*mouse, "setMouseRangeTrk");
-    }
+    setMouseCursor(*mouse, "setMouseRangeTrk");
 }
 
 void CCanvas::setMouseEditArea(const QPointF& pt)
 {
     mouse->deleteLater();
     mouse = new CMouseEditArea(pt, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditArea");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
-    }
+    setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
 {
     mouse->deleteLater();
     mouse = new CMouseEditArea(area, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditArea");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditArea");
-    }
+    setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditRte(CGisItemRte& rte)
 {
     mouse->deleteLater();
     mouse = new CMouseEditRte(rte, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseEditRte");
-        CCanvas::setOverrideCursor(*mouse, "setMouseEditRte");
-    }
+    setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
     mouse->deleteLater();
     mouse = new CMouseWptBubble(key, gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMouseWptBubble");
-        CCanvas::setOverrideCursor(*mouse, "setMouseWptBubble");
-    }
+    setMouseCursor(*mouse, "setMouseWptBubble");
 }
 
 void CCanvas::setMousePrint()
 {
     mouse->deleteLater();
     mouse = new CMousePrint(gis, this);
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor("setMousePrint");
-        CCanvas::setOverrideCursor(*mouse, "setMousePrint");
-    }
+    setMouseCursor(*mouse, "setMousePrint");
+}
+
+void CCanvas::setMouseSelect()
+{
+    mouse->deleteLater();
+    mouse = new CMouseSelect(gis, this);
+    setMouseCursor(*mouse, "setMouseSelect");
 }
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)
@@ -361,7 +342,7 @@ void CCanvas::paintEvent(QPaintEvent * e)
     USE_ANTI_ALIASING(p,true);
 
     // fill the background with default pattern
-    p.fillRect(rect(), "#FFFFBF");
+    p.fillRect(rect(), backColor);
 
     // ----- start to draw thread based content -----
     // move coordinate system to center of the screen
@@ -406,10 +387,9 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
 
 void CCanvas::mouseMoveEvent(QMouseEvent * e)
 {
-    qreal ele = NOFLOAT;
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
-    ele = dem->getElevationAt(pos);
+    qreal ele = dem->getElevationAt(pos);
     emit sigMousePosition(pos * RAD_TO_DEG, ele);
 
     mouse->mouseMoveEvent(e);
@@ -689,6 +669,18 @@ void CCanvas::setupGrid()
     CGridSetup dlg(grid, map);
     dlg.exec();
     update();
+}
+
+void CCanvas::setupBackgroundColor()
+{
+    QColorDialog::setCustomColor(0, "#FFFFBF");
+    const QColor &selected = QColorDialog::getColor(backColor, this, tr("Setup Map Background"));
+
+    if(selected.isValid())
+    {
+        backColor = selected;
+        update();
+    }
 }
 
 void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)

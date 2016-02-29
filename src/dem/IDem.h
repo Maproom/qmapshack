@@ -130,12 +130,12 @@ protected:
         Has to be set by subclass. Destruction has to be
         handled by subclass.
      */
-    projPJ pjsrc = 0;
+    projPJ pjsrc = nullptr;
     /// target projection
     /**
         Is set by IMap() to WGS84. Will be freed by ~IMap()
      */
-    projPJ pjtar = 0;
+    projPJ pjtar = nullptr;
 
     /// width in number of px
     quint32 xsize_px = 0;

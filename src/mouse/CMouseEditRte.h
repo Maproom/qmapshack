@@ -39,9 +39,8 @@ protected slots:
     void slotCopyToNew()  override;
     void slotCopyToOrig() override;
 
-
 protected:
-    IGisLine* getGisLine() override;
+    IGisLine* getGisLine() const override;
 };
 
 #endif //CMOUSEEDITRTE_H

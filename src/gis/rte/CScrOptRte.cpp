@@ -26,10 +26,8 @@
 
 CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)
-
+    , key(rte->getKey())
 {
-    key = rte->getKey();
-
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

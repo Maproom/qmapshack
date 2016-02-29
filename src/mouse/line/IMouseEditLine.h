@@ -38,8 +38,8 @@ class IMouseEditLine : public IMouse
 public:
     enum features_e
     {
-        eFeatureSnapToLines    = 0x01
-        ,eFeatureRouting        = 0x02
+        eFeatureSnapToLines = 0x01
+        , eFeatureRouting   = 0x02
     };
 
     /**
@@ -58,17 +58,17 @@ public:
     IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
     virtual ~IMouseEditLine();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
     void mousePressEvent(QMouseEvent *e) override;
     void mouseMoveEvent(QMouseEvent *e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *e) override;
-    void keyPressEvent(QKeyEvent   *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
 
     void abortStep();
 
-    bool useAutoRouting();
-    bool useVectorRouting();
+    bool useAutoRouting() const;
+    bool useVectorRouting() const;
 
     void setCanvasPanning(bool enable);
 
@@ -116,7 +116,7 @@ protected:
        @brief Get access to the IGisLine object a subclass of IMouseEditLine is handling.
        @return A valid pointer or 0.
      */
-    virtual IGisLine * getGisLine() = 0;
+    virtual IGisLine * getGisLine() const = 0;
 
     virtual void startNewLine(const QPointF &point);
 
@@ -129,7 +129,6 @@ protected:
     /// undo/redo history
     QList<SGisLine> history;
     qint32 idxHistory = NOIDX;
-
 
     /// the on screen buttons
     CScrOptEditLine * scrOptEditLine;
@@ -149,7 +148,7 @@ private:
     QPolygonF pixelSubs;
 
     /// the current active line operation (move, add, delete...)
-    ILineOp  * lineOp = nullptr;
+    ILineOp * lineOp = nullptr;
 
     bool enableStatus;
 

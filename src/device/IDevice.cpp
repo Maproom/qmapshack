@@ -97,6 +97,26 @@ void IDevice::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     }
 }
 
+void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project != nullptr)
+        {
+            project->getItemsByArea(area, flags, items);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getItemsByArea(area, flags, items);
+        }
+    }
+}
+
 IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
 {
     IGisItem * item = nullptr;
@@ -129,6 +149,26 @@ IGisItem * IDevice::getItemByKey(const IGisItem::key_t& key)
         }
     }
     return item;
+}
+
+void IDevice::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project != nullptr)
+        {
+            project->getItemsByKeys(keys, items);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getItemsByKeys(keys, items);
+        }
+    }
 }
 
 IGisProject * IDevice::getProjectByKey(const QString& key)

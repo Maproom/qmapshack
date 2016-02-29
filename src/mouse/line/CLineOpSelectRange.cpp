@@ -221,9 +221,9 @@ void CLineOpSelectRange::resetState()
     {
         scrOptRangeLine->deleteLater();
     }
-    idxFocus    = NOIDX;
-    idx2nd      = NOIDX;
-    state       = eStateIdle;
+    idxFocus = NOIDX;
+    idx2nd   = NOIDX;
+    state    = eStateIdle;
 }
 
 void CLineOpSelectRange::slotDelete()

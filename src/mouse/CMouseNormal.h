@@ -47,18 +47,19 @@ public:
     void keyPressEvent(QKeyEvent * e) override;
 
 private slots:
-    void slotAddWpt();
-    void slotAddTrk();
-    void slotAddRte();
-    void slotAddArea();
-    void slotCopyPosition();
-    void slotCopyPositionGrid();
+    void slotAddWpt()           const;
+    void slotAddTrk()           const;
+    void slotAddRte()           const;
+    void slotAddArea()          const;
+    void slotSelectArea()       const;
+    void slotCopyPosition()     const;
+    void slotCopyPositionGrid() const;
 
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);
 
 protected:
-    void stopTracking();
+    void stopTracking() const;
     void resetState();
 
 

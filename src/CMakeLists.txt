@@ -129,6 +129,7 @@ set( SRCS
         grid/CProjWizard.cpp
         grid/mitab.cpp
         mouse/IMouse.cpp
+        mouse/IMouseSelect.cpp
         mouse/IScrOpt.cpp
         mouse/CMouseDummy.cpp
         mouse/CMouseNormal.cpp
@@ -139,8 +140,11 @@ set( SRCS
         mouse/CMouseRangeTrk.cpp
         mouse/CMouseWptBubble.cpp
         mouse/CMousePrint.cpp
+        mouse/CMouseSelect.cpp
         mouse/CScrOptUnclutter.cpp
         mouse/CScrOptRangeTrk.cpp
+        mouse/CScrOptSelect.cpp
+        mouse/CScrOptPrint.cpp
         mouse/line/IMouseEditLine.cpp
         mouse/line/CScrOptEditLine.cpp
         mouse/line/CScrOptRangeLine.cpp
@@ -385,6 +389,7 @@ set( HDRS
         grid/CProjWizard.h
         grid/mitab.h
         mouse/IMouse.h
+        mouse/IMouseSelect.h
         mouse/IScrOpt.h
         mouse/CMouseDummy.h
         mouse/CMouseNormal.h
@@ -395,8 +400,11 @@ set( HDRS
         mouse/CMouseRangeTrk.h
         mouse/CMouseWptBubble.h
         mouse/CMousePrint.h
+        mouse/CMouseSelect.h
         mouse/CScrOptUnclutter.h
         mouse/CScrOptRangeTrk.h
+        mouse/CScrOptSelect.h
+        mouse/CScrOptPrint.h
         mouse/line/CScrOptEditLine.h
         mouse/line/CScrOptRangeLine.h
         mouse/line/IMouseEditLine.h
@@ -579,6 +587,8 @@ set( UIS
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     mouse/IScrOptRangeTrk.ui
+    mouse/IScrOptSelect.ui
+    mouse/IScrOptPrint.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui
@@ -655,6 +665,7 @@ add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
+    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}"
     SOURCES ${SRCS} ${HDRS} ${UIS}
     TEMPLATE ${APPLICATION_NAME}
     TRANSLATION_DIR "locale"

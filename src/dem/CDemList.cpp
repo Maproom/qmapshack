@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
@@ -76,6 +77,7 @@ CDemList::CDemList(QWidget *parent)
     menu->addAction(actionMoveDown);
     menu->addSeparator();
     menu->addAction(actionReloadDem);
+    menu->addAction(CMainWindow::self().getDemSetupAction());
 }
 
 CDemList::~CDemList()
@@ -189,17 +191,22 @@ void CDemList::slotContextMenu(const QPoint& point)
 {
     CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->currentItem());
 
-    if(nullptr == item)
-    {
-        return;
-    }
-    bool activated = item->isActivated();
-    actionActivate->setChecked(activated);
-    actionActivate->setText(activated ? tr("Deactivate") : tr("Activate"));
+    bool itemIsSelected  = nullptr != item;
+    bool itemIsActivated = item ? item->isActivated() : false;
 
-    CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
-    actionMoveUp->setEnabled(activated && (treeWidget->itemAbove(item) != 0));
-    actionMoveDown->setEnabled(activated && item1 && item1->isActivated());
+    actionActivate->setEnabled(itemIsSelected);
+    actionMoveUp->setEnabled(itemIsSelected);
+    actionMoveDown->setEnabled(itemIsSelected);
+
+    actionActivate->setChecked(itemIsActivated);
+    actionActivate->setText(itemIsActivated ? tr("Deactivate") : tr("Activate"));
+
+    if(itemIsSelected)
+    {
+        CDemItem * item1 = dynamic_cast<CDemItem*>(treeWidget->itemBelow(item));
+        actionMoveUp->setEnabled(itemIsActivated && (treeWidget->itemAbove(item) != nullptr));
+        actionMoveDown->setEnabled(itemIsActivated && item1 && item1->isActivated());
+    }
 
     QPoint p = treeWidget->mapToGlobal(point);
     menu->exec(p);

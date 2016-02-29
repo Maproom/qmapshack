@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
@@ -371,7 +372,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {
     // iterate over all active maps and call the draw method
     CMapItem::mutexActiveMaps.lock();
-    if(mapList)
+    if(mapList && (mapList->count() != 0))
     {
         for(int i = 0; i < mapList->count(); i++)
         {
@@ -387,6 +388,26 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 
             item->mapfile->draw(currentBuffer);
         }
+    }
+    else
+    {
+        const int offMargin = currentBuffer.image.size().width()*0.1;
+        const int offTop    = currentBuffer.image.size().height()/2;
+        QPainter p(&currentBuffer.image);
+        p.setPen(Qt::black);
+        p.translate(offMargin,offTop);
+
+        QString msg = tr(
+            "There are no maps right now. "
+            "QMapShack is no fun without maps. "
+            "You can install maps by pressing the 'Help! I want maps!' button in the 'Maps' dock window. "
+            "Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. "
+            );
+
+        QTextDocument doc;
+        doc.setPlainText(msg);
+        doc.setTextWidth(currentBuffer.image.width() - offMargin*2);
+        doc.drawContents(&p);
     }
     CMapItem::mutexActiveMaps.unlock();
 }

@@ -57,20 +57,20 @@ void ITrack::setupProjection(const QRectF& boundingBox)
     if(pjsrc)
     {
         pj_free(pjsrc);
-        pjsrc = 0;
+        pjsrc = nullptr;
     }
 
     if(boundingBox.top() > (60*DEG_TO_RAD))
     {
-        pjsrc =  pj_init_plus("+init=epsg:32661");
+        pjsrc = pj_init_plus("+init=epsg:32661");
     }
     else if(boundingBox.bottom() < (-60*DEG_TO_RAD))
     {
-        pjsrc =  pj_init_plus("+init=epsg:32761");
+        pjsrc = pj_init_plus("+init=epsg:32761");
     }
     else
     {
-        pjsrc =  pj_init_plus("+init=epsg:3857");
+        pjsrc = pj_init_plus("+init=epsg:3857");
     }
 }
 
@@ -94,7 +94,7 @@ void ITrack::setTrack(const QPolygonF& track)
 
 void ITrack::updateData()
 {
-    if((pjsrc == 0) || (nullptr == trk && coords.isEmpty()))
+    if((pjsrc == nullptr) || (nullptr == trk && coords.isEmpty()))
     {
         return;
     }

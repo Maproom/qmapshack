@@ -681,7 +681,7 @@ void CGisListWks::addProject(IGisProject *proj)
     for(int i = myIdx - 1; i >= 0; i--)
     {
         IDevice * device = dynamic_cast<IDevice*>(topLevelItem(i));
-        if(0 == device)
+        if(nullptr == device)
         {
             break;
         }
@@ -875,7 +875,7 @@ void CGisListWks::slotLoadWorkspace()
             }
             else
             {
-                dbProject->postStatus();
+                dbProject->postStatus(false);
             }
             break;
         }
@@ -1256,63 +1256,17 @@ void CGisListWks::slotDeleteItem()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items       = selectedItems();
-    QMessageBox::StandardButtons last   = QMessageBox::NoButton;
-
-    QSet<CDBProject*>   projects;
-    QSet<IGisProject*>  projectsAll;
-
+    QList<IGisItem::key_t>  keys;
     foreach(QTreeWidgetItem * item, items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
-        if(nullptr != gisItem)
+        if(gisItem != nullptr)
         {
-            bool yes = false;
-            IGisProject *project = dynamic_cast<IGisProject*>(gisItem->parent());
-            if(nullptr != project)
-            {
-                project->blockUpdateItems(true);
-                yes = project->delItemByKey(gisItem->getKey(), last);
-
-
-                /*
-                    collect database projects to update their counterpart in
-                    the database view, after all operations are done.
-                 */
-                if(yes && project->getType() == IGisProject::eTypeDb)
-                {
-                    projects << dynamic_cast<CDBProject*>(project);
-                }
-
-                /*
-                    Collect all projects to unblock update later on.
-                 */
-                projectsAll << project;
-            }
-
-            if(last == QMessageBox::Cancel)
-            {
-                break;
-            }
+            keys << gisItem->getKey();
         }
     }
 
-    // make all database projects that are changed to post their new status
-    // this will update the database view.
-    foreach(CDBProject * project, projects)
-    {
-        project->postStatus();
-    }
-    // unblock update for all projects seen
-    foreach(IGisProject * project, projectsAll)
-    {
-        project->blockUpdateItems(false);
-    }
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CGisWidget::self().delItemsByKey(keys);
 }
 
 void CGisListWks::slotCopyItem()
@@ -1339,33 +1293,7 @@ void CGisListWks::slotCopyItem()
         }
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
-    {
-        return;
-    }
-
-    int lastResult = CSelectCopyAction::eResultNone;
-
-    project->blockUpdateItems(true);
-    int cnt = 1;
-    PROGRESS_SETUP(tr("Copy items..."), 0, items.count(), this);
-    foreach(const IGisItem::key_t& key, keys)
-    {
-        PROGRESS(cnt++, break);
-        IGisItem * gisItem = CGisWidget::self().getItemByKey(key);
-        if(nullptr != gisItem)
-        {
-            project->insertCopyOfItem(gisItem, NOIDX, lastResult);
-        }
-    }
-    project->blockUpdateItems(false);
-
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CGisWidget::self().copyItemsByKey(keys);
 }
 
 void CGisListWks::slotProjWpt()
@@ -1702,7 +1630,7 @@ bool CGisListWks::event(QEvent * e)
             CDBProject * project =  getProjectById(evt->id, evt->db);
             if(nullptr != project)
             {
-                project->postStatus();
+                project->postStatus(false);
             }
             e->accept();
             emit sigChanged();

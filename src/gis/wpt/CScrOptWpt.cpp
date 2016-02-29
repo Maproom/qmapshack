@@ -30,9 +30,8 @@
 
 CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     : IScrOpt(parent)
+    , key(wpt->getKey())
 {
-    key = wpt->getKey();
-
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

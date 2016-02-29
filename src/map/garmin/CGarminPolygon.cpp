@@ -25,6 +25,7 @@
 #include "CGarminPolygon.h"
 #include "Garmin.h"
 #include "helpers/Platform.h"
+#include "units/IUnit.h"
 
 #include <assert.h>
 
@@ -97,10 +98,10 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         bit 22      use extra bit for coordinates
         bit 23      use label data of NET section
      */
-    lbl_info    = gar_ptr_load(uint24_t, pData);
-    lbl_in_NET  = lbl_info & 0x800000;
-    extra_bit   = lbl_info & 0x400000;
-    lbl_info    = lbl_info & 0x3FFFFF;
+    lbl_info   = gar_ptr_load(uint24_t, pData);
+    lbl_in_NET = lbl_info & 0x800000;
+    extra_bit  = lbl_info & 0x400000;
+    lbl_info   = lbl_info & 0x3FFFFF;
 
     pData += 3;
 
@@ -139,7 +140,6 @@ quint32 CGarminPolygon::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shi
         bit 4..7    base bits latitude
      */
     bs_info = *pData++;
-    ;
 
     //if(extra_bit) qWarning("extrabit");
 
@@ -227,7 +227,6 @@ quint32 CGarminPolygon::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 sh
 
     type        = *pData++;
     subtype     = *pData++;
-    ;
 
     type        = 0x10000 + (quint16(type) << 8) + (subtype & 0x1f);
     hasV2Label  = subtype & 0x20;
@@ -401,6 +400,32 @@ void CGarminPolygon::bits_per_coord(quint8 base, quint8 bfirst, quint32& bx, qui
     }
 }
 
+QString CGarminPolygon::getLabelText() const
+{
+    QString str;
+
+    switch(type)
+    {
+    case 0x23: //< "Minor depth contour"
+    case 0x20: //< "Minor land contour"
+    case 0x24: //< "Intermediate depth contour"
+    case 0x21: //< "Intermediate land contour"
+    case 0x25: //< "Major depth contour"
+    case 0x22: //< "Major land contour"
+    {
+        QString unit;
+        QString val = labels[0];
+        IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+        str = QString("%1 %2").arg(val).arg(unit);
+    }
+    break;
+
+    default:
+        str = labels.join(" ").simplified();
+    }
+
+    return str;
+}
 
 // extract bits per coordinate
 int CGarminPolygon::bits_per_coord(quint8 base, bool is_signed)

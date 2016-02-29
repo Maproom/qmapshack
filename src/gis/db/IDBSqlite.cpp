@@ -289,19 +289,19 @@ bool IDBSqlite::migrateDB2to3()
         switch(typeItem)
         {
         case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(idItem, db, 0);
+            item = new CGisItemWpt(idItem, db, nullptr);
             break;
 
         case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(idItem, db, 0);
+            item = new CGisItemTrk(idItem, db, nullptr);
             break;
 
         case IGisItem::eTypeRte:
-            item = new CGisItemRte(idItem, db, 0);
+            item = new CGisItemRte(idItem, db, nullptr);
             break;
 
         case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(idItem, db, 0);
+            item = new CGisItemOvlArea(idItem, db, nullptr);
             break;
 
         default:

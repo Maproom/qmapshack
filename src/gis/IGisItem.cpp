@@ -287,6 +287,14 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
         project->setChanged();
     }
 
+    // test for lost & found folder
+    if(project && project->getType() == IGisProject::eTypeLostFound)
+    {
+        setText(CGisListWks::eColumnDecoration, QString());
+        setToolTip(CGisListWks::eColumnDecoration, QString());
+        return;
+    }
+
     // set marks in column 1
     quint32 mask = data(1,Qt::UserRole).toUInt();
     mask |=  enable;
@@ -299,6 +307,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     {
         tt  += tt.isEmpty() ? "" : "\n";
         tt  += tr("The item is not part of the project in the database.");
+        tt  += tr("\nIt is either a new item or it has been deleted in the database by someone else.");
         str += "?";
     }
     if(mask & eMarkNotInDB)
@@ -793,4 +802,32 @@ bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDr
 bool IGisItem::isChanged() const
 {
     return text(CGisListWks::eColumnDecoration).contains('*');
+}
+
+bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points)
+{
+    if(flags & eSelectionExact)
+    {
+        foreach(const QPointF &point, points)
+        {
+            if(!area.contains(point))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    else if(flags & eSelectionIntersect)
+    {
+        foreach(const QPointF &point, points)
+        {
+            if(area.contains(point))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    return false;
 }

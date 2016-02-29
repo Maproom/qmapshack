@@ -25,34 +25,31 @@
 #include "CGarminPoint.h"
 #include "Garmin.h"
 #include "helpers/Platform.h"
+#include "units/IUnit.h"
 
 #include <QtCore>
 
 
 quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData)
 {
-    qint16 dLng, dLat;
-
-    type        = (quint16)(*pData) << 8;
+    type       = (quint16)(*pData) << 8;
 
     ++pData;
 
-    lbl_ptr     = gar_ptr_load(uint24_t, pData);
-    hasSubType  = lbl_ptr & 0x00800000;
-    isLbl6      = lbl_ptr & 0x00400000;
-    lbl_ptr     = lbl_ptr & 0x003FFFFF;
+    lbl_ptr    = gar_ptr_load(uint24_t, pData);
+    hasSubType = lbl_ptr & 0x00800000;
+    isLbl6     = lbl_ptr & 0x00400000;
+    lbl_ptr    = lbl_ptr & 0x003FFFFF;
 
     pData += 3;
 
-    dLng = gar_ptr_load(int16_t, pData);
+    qint16 dLng = gar_ptr_load(int16_t, pData);
     pData += 2;
-    dLat = gar_ptr_load(int16_t, pData);
+    qint16 dLat = gar_ptr_load(int16_t, pData);
     pData += 2;
 
-    qint32 x1,y1;
-
-    x1 = ((qint32)dLng << shift) + iCenterLon;
-    y1 = ((qint32)dLat << shift) + iCenterLat;
+    qint32 x1 = ((qint32)dLng << shift) + iCenterLon;
+    qint32 y1 = ((qint32)dLat << shift) + iCenterLat;
     pos = QPointF(GARMIN_RAD(x1),GARMIN_RAD(y1));
 
 #ifdef DEBUG_SHOW_POINTS
@@ -71,7 +68,6 @@ quint32 CGarminPoint::decode(qint32 iCenterLon, qint32 iCenterLat, quint32 shift
 
 quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shift, const quint8 * pData, const quint8 * pEnd)
 {
-    qint16 dLng, dLat;
     quint32 byte_size = 6;
     quint8 subtype;
 
@@ -87,9 +83,9 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
         byte_size += 1;
     }
 
-    dLng = gar_ptr_load(int16_t, pData);
+    qint16 dLng = gar_ptr_load(int16_t, pData);
     pData += 2;
-    dLat = gar_ptr_load(int16_t, pData);
+    qint16 dLat = gar_ptr_load(int16_t, pData);
     pData += 2;
 
     qint32 x1,y1;
@@ -107,4 +103,38 @@ quint32 CGarminPoint::decode2(qint32 iCenterLon, qint32 iCenterLat, quint32 shif
     }
 
     return byte_size;
+}
+
+QString CGarminPoint::getLabelText() const
+{
+    QString str;
+    if(!labels.isEmpty())
+    {
+        if((type == 0x6200) || (type == 0x6300))
+        {
+            QString unit;
+            QString val = labels[0];
+            IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+            str = QString("%1 %2").arg(val).arg(unit);
+        }
+        else if(type == 0x6616) //669 DAV
+        {
+            if(labels.size() > 1)
+            {
+                QString unit;
+                QString val = labels[1];
+                IUnit::self().meter2elevation(val.toFloat() / 3.28084f, val, unit);
+                str = QString("%1 %2 %3").arg(labels[0]).arg(val).arg(unit);
+            }
+            else
+            {
+                str = labels[0];
+            }
+        }
+        else
+        {
+            str = labels.join(" ");
+        }
+    }
+    return str;
 }

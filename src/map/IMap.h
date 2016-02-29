@@ -203,7 +203,7 @@ protected:
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
      */
-    void drawTile(QImage& img, QPolygonF& l, QPainter& p);
+    void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
 
     /// the drawcontext this map belongs to
     CMapDraw * map;
@@ -213,12 +213,12 @@ protected:
         Has to be set by subclass. Destruction has to be
         handled by subclass.
      */
-    projPJ pjsrc = 0;
+    projPJ pjsrc = nullptr;
     /// target projection
     /**
         Is set by IMap() to WGS84. Will be freed by ~IMap()
      */
-    projPJ pjtar = 0;
+    projPJ pjtar = nullptr;
 
     /**
        @brief True if map was loaded successfully

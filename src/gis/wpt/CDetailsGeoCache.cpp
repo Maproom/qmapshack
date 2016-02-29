@@ -167,15 +167,16 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
         return;
     }
 
-    //qDebug() << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
-    //qDebug() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute);
-    //qDebug() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+    qDebug() << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute);
+    qDebug() << reply->attribute(QNetworkRequest::HttpReasonPhraseAttribute);
+    qDebug() << reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 
+    qint32 httpStatusCodeAttribute = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     if(reply->property("whatfor") == "image")
     {
         QString info = reply->property("info").toString();
 
-        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 301)
+        if((httpStatusCodeAttribute == 301) || (httpStatusCodeAttribute == 302))
         {
             QNetworkRequest request;
             request.setUrl(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());
@@ -202,7 +203,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
     }
     else
     {
-        if(reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt() == 301)
+        if((httpStatusCodeAttribute == 301) || (httpStatusCodeAttribute == 302))
         {
             QNetworkRequest request;
             request.setUrl(reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl());

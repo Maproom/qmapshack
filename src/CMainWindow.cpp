@@ -31,6 +31,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconDialog.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -105,6 +106,7 @@ CMainWindow::CMainWindow()
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
+    connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
     connect(actionSetupGrid,             &QAction::triggered,            this,      &CMainWindow::slotSetupGrid);
     connect(actionSetupMapPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupMapPath);
     connect(actionSetupDEMPaths,         &QAction::triggered,            this,      &CMainWindow::slotSetupDemPath);
@@ -122,6 +124,7 @@ CMainWindow::CMainWindow()
     connect(actionClose,                 &QAction::triggered,            this,      &CMainWindow::close);
     connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
+    connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
@@ -537,7 +540,13 @@ void CMainWindow::slotCurrentTabCanvas(int i)
     QString name = tabWidget->tabText(i);
     for(int n = 0; n < tabMaps->count(); n++)
     {
-        if(compareNames(name, tabMaps->tabText(n)))
+        bool isMapView = compareNames(name, tabMaps->tabText(n));
+
+        actionSetupGrid->setEnabled(isMapView);
+        actionSetupMapBackground->setEnabled(isMapView);
+        actionSetupMapView->setEnabled(isMapView);
+
+        if(isMapView)
         {
             tabMaps->setCurrentIndex(n);
             break;
@@ -681,6 +690,16 @@ void CMainWindow::slotSetupMapFont()
             w->update();
         }
     }
+}
+
+void CMainWindow::slotSetupMapBackground()
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(nullptr == canvas)
+    {
+        return;
+    }
+    canvas->setupBackgroundColor();
 }
 
 void CMainWindow::slotSetupGrid()
@@ -876,6 +895,12 @@ void CMainWindow::slotPrintMap()
     {
         canvas->setMousePrint();
     }
+}
+
+void CMainWindow::slotSetupWptIcons()
+{
+    CWptIconDialog dlg(this);
+    dlg.exec();
 }
 
 #ifdef WIN32

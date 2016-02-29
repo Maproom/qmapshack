@@ -429,6 +429,12 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
     return (pos - posScreen).manhattanLength() < 22;
 }
 
+bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
+{
+    return (flags & eSelectionWpt) ? area.contains(posScreen) : false;
+}
+
+
 void CGisItemWpt::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();
@@ -672,7 +678,7 @@ void CGisItemWpt::removeLinksByType(const QString& type)
             continue;
         }
 
-        link++;
+        ++link;
     }
 }
 

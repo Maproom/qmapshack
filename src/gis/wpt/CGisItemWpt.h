@@ -274,6 +274,7 @@ public:
     void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
     void drawHighlight(QPainter& p) override;
     bool isCloseTo(const QPointF& pos) override;
+    bool isWithin(const QRectF &area, selflags_t flags) override;
     void mouseMove(const QPointF& pos) override;
     void mousePress(const QPointF& pos);
     void mouseRelease(const QPointF& pos);

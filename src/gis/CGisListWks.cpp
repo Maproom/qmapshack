@@ -90,7 +90,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
-    QString config = CAppSetup::getPlattformInstance()->configDir().filePath("workspace.db");
+    QString config = QDir(CAppSetup::getPlattformInstance()->userDataPath()).filePath("workspace.db");
     db.setDatabaseName(config);
     db.open();
     configDB();

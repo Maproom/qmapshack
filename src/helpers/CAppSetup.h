@@ -27,66 +27,19 @@ class CAppSetup
 {
 public:
     static CAppSetup* getPlattformInstance();
-    static void consoleMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
+    virtual void initQMapShack() = 0;
+    void initLogHandler();
 
-    virtual void prepareGdal();
     virtual QString routinoPath(QString xmlFile) = 0;
-    virtual void prepareTranslators(QApplication* app) = 0;
-    virtual void prepareConfig();
-    virtual void installMessageHandler();
-    virtual QDir configDir(QString subdir = 0);
+    virtual QString defaultCachePath() = 0;
+    virtual QString userDataPath(QString subdir = 0) = 0;
+    virtual QString logDir() = 0;
 
 protected:
-    void prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix);
-    QString logName();
+    void prepareGdal(QString gdalDir, QString projDir);
+    void prepareTranslator(QString translationPath, QString translationPrefix);
 
-    virtual QString logFilename();
-    void printToConsole(QtMsgType type, QString formatedMsg);
-    void appendToFile(QtMsgType type, QString formatedMsg);
-    QString routinoPath(QDir dirXml, QString xmlFile);
-    QDir path(QString path, QString subdir = 0, bool mkdir = false);
-};
-
-
-class CAppSetupMac : public CAppSetup
-{
-public:
-    void prepareGdal() override;
-    QString routinoPath(QString xmlFile) override;
-    void prepareTranslators(QApplication* app) override;
-
-protected:
-    QString logFilename() override;
-    QString getResourceDir(QString subdir);
-    CAppSetupMac();
-
-    friend class CAppSetup;
-};
-
-
-class CAppSetupLinux : public CAppSetup
-{
-public:
-    QString routinoPath(QString xmlFile) override;
-    void prepareTranslators(QApplication* app) override;
-
-protected:
-    CAppSetupLinux();
-    friend class CAppSetup;
-};
-
-
-class CAppSetupWin : public CAppSetup
-{
-public:
-    QString routinoPath(QString xmlFile)       override;
-    void prepareGdal()                         override;
-    void prepareTranslators(QApplication* app) override;
-    void prepareConfig()                       override;
-
-protected:
-    CAppSetupWin();
-    friend class CAppSetup;
+    QString path(QString path, QString subdir, bool mkdir, QString debugName);
 };
 
 #endif // CAPPSETUP_H

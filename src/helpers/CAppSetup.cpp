@@ -20,16 +20,273 @@
 #include "helpers/CAppOpts.h"
 #include "helpers/CAppSetup.h"
 
-#include <QtCore>
 #include <gdal.h>
 #include <iostream>
 
-#include <qdebug.h>
 
 #ifndef _MKSTR_1
 #define _MKSTR_1(x)    #x
 #define _MKSTR(x)      _MKSTR_1(x)
 #endif
+
+
+class CLogHandler
+{
+public:
+    CLogHandler(QString logDirectory, bool writeToFile, bool debugOutput) :
+        writeToFile(writeToFile), debugOutput(debugOutput), logFile(QDir(logDirectory).absoluteFilePath(logfileName())),
+        fileStream(&logFile)
+    {
+        if (writeToFile)
+        {
+            logFile.open(QIODevice::WriteOnly | QIODevice::Append);
+        }
+        qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
+    }
+
+    void log(QtMsgType type, const QMessageLogContext &context, const QString &msg)
+    {
+#if QT_VERSION >= 0x050400
+        QString txt = qFormatLogMessage(type, context, msg);
+#else
+        QString txt = msg;
+#endif
+        printToConsole(type, txt);
+        appendToFile(type, txt);
+    }
+
+    void printLoggerInfo()
+    {
+        qDebug() << "Log configuration:" << "log file=" << logFile.fileName() << "write to file=" << writeToFile <<
+            "debug output=" << debugOutput;
+    }
+
+private:
+    QString logfileName()
+    {
+        QStringList domainSplit = QCoreApplication::organizationDomain().split(".");
+        QString fileName;
+        foreach(QString part, domainSplit)
+        {
+            fileName = fileName.insert(0, part + ".");
+        }
+        fileName.append(QCoreApplication::applicationName() + ".log");
+        return fileName;
+    }
+
+
+    void appendToFile(QtMsgType type, QString formatedMsg)
+    {
+        Q_UNUSED(type);
+        if (writeToFile)
+        {
+            fileStream << formatedMsg << endl;
+        }
+    }
+
+
+    void printToConsole(QtMsgType type, QString formatedMsg)
+    {
+        switch (type)
+        {
+        case QtDebugMsg:
+            if (debugOutput)
+            {
+                std::cout << formatedMsg.toUtf8().constData() << std::endl;
+            }
+            break;
+
+#if QT_VERSION >= 0x050500
+        case QtInfoMsg:
+            std::cout << formatedMsg.toUtf8().constData() << std::endl;
+            break;
+
+#endif
+        case QtWarningMsg:
+            std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+            break;
+
+        case QtCriticalMsg:
+            std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+            break;
+
+        case QtFatalMsg:
+            std::cerr << formatedMsg.toUtf8().constData() << std::endl;
+            abort();
+            break;
+        }
+    }
+
+    bool writeToFile;
+    bool debugOutput;
+    QFile logFile;
+    QTextStream fileStream;
+};
+
+
+class CAppSetupWin : public CAppSetup
+{
+public:
+    void initQMapShack() override
+    {
+        // setup environment variables for GDAL/Proj4
+        QString apppath = QCoreApplication::applicationDirPath();
+        apppath = apppath.replace("/", "\\");
+        QString gdalDir = QString("%1\\data").arg(apppath);
+        QString projDir = QString("%1\\share").arg(apppath);
+
+        qunsetenv("GDAL_DRIVER_PATH");
+        CAppSetup::prepareGdal(gdalDir, projDir);
+
+        QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
+        prepareTranslator(appResourceDir, "qtbase_");
+        prepareTranslator(appResourceDir, "qmapshack_");
+
+        //reset PATH to avoid that wrong .dll's are loaded
+        qputenv("PATH", "");
+
+        // create direcotries
+        CAppSetup::path(defaultCachePath(), 0, true, "CACHE");
+        CAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
+        CAppSetup::path(logDir(), 0, true, "LOG");
+    }
+
+
+    QString routinoPath(QString xmlFile) override
+    {
+        QString apppath = QCoreApplication::applicationDirPath();
+        apppath = apppath.replace("/", "\\");
+        QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
+        return CAppSetup::path(dirXml.absolutePath(), xmlFile, false, "ROUTINO");
+    }
+
+    QString defaultCachePath() override
+    {
+        return CAppSetup::path(QDir::home().absolutePath(), ".QMapShack/", false, 0);
+    }
+
+    QString userDataPath(QString subdir = 0) override
+    {
+        QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+        return CAppSetup::path(path, subdir, false, 0);
+    }
+
+    QString logDir() override
+    {
+        return QDir::temp().absolutePath();
+    }
+};
+
+
+class CAppSetupLinux : public CAppSetup
+{
+public:
+    void initQMapShack() override
+    {
+        prepareGdal("", "");
+
+        // setup translators
+        QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
+        QString translationPath = QCoreApplication::applicationDirPath();
+        translationPath.replace(QRegExp("bin$"), "share/qmapshack/translations");
+        prepareTranslator(resourceDir, "qt_");
+        prepareTranslator(translationPath, "qmapshack_");
+
+        // create direcotries
+        CAppSetup::path(defaultCachePath(), 0, true, "CACHE");
+        CAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
+        CAppSetup::path(logDir(), 0, true, "LOG");
+    }
+
+    QString routinoPath(QString xmlFile) override
+    {
+        QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
+        return CAppSetup::path(dirXml.absolutePath(), xmlFile, false, "ROUTINO");
+    }
+
+    QString defaultCachePath() override
+    {
+        return CAppSetup::path(QDir::home().absolutePath(), ".QMapShack/", false, 0);
+    }
+
+    QString userDataPath(QString subdir = 0) override
+    {
+        QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+        return CAppSetup::path(path, subdir, false, 0);
+    }
+
+    QString logDir() override
+    {
+        return QDir::temp().absolutePath();
+    }
+};
+
+
+static QString relTranslationDir = "Resources/translations"; // app
+static QString relRoutinoDir     = "Resources/routino"; // app
+static QString relGdalDir        = "Resources/gdal"; // app
+static QString relProjDir        = "Resources/proj"; // app
+
+static QString relLogDir         = "Library/Logs"; // home
+
+class CAppSetupMac : public CAppSetup
+{
+public:
+    void initQMapShack() override
+    {
+        // setup gdal
+        QString gdalDir = getApplicationDir(relGdalDir).absolutePath();
+        QString projDir = getApplicationDir(relProjDir).absolutePath();
+        prepareGdal(gdalDir, projDir);
+
+        // setup translators
+        QString translationPath = getApplicationDir(relTranslationDir).absolutePath();
+        prepareTranslator(translationPath, "qt_");
+        prepareTranslator(translationPath, "qmapshack_");
+
+        // create direcotries
+        CAppSetup::path(defaultCachePath(), 0, true, "CACHE");
+        CAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
+        CAppSetup::path(logDir(), 0, false, "LOG");
+    }
+
+    QString routinoPath(QString xmlFile) override
+    {
+        QDir dirXml = getApplicationDir(relRoutinoDir);
+        return CAppSetup::path(dirXml.absolutePath(), xmlFile, false, "ROUTINO");
+    }
+
+    QString defaultCachePath() override
+    {
+        QString cachePath =  QStandardPaths::standardLocations(QStandardPaths::CacheLocation).at(0);
+        return CAppSetup::path(cachePath, 0, false, 0);
+    }
+
+    QString userDataPath(QString subdir = 0) override
+    {
+        QString dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).at(0);
+        return CAppSetup::path(dataDir, subdir, false, 0);
+    }
+
+    QString logDir() override
+    {
+        // home location returns / (root) instead of user home...
+        QString home = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).at(0);
+        QDir dir = QDir(home);
+        dir.cdUp();
+        return CAppSetup::path(dir.absolutePath(), relLogDir, false, 0);
+    }
+
+private:
+    QDir getApplicationDir(QString subdir)
+    {
+        QDir appDir(QCoreApplication::applicationDirPath());
+        appDir.cdUp();
+        appDir.cd(subdir);
+        return appDir;
+    }
+};
+
 
 CAppSetup* instance = nullptr;
 
@@ -50,103 +307,19 @@ CAppSetup* CAppSetup::getPlattformInstance()
     return instance;
 }
 
-QString CAppSetup::logName()
+
+void CAppSetup::prepareGdal(QString gdalDir, QString projDir)
 {
-    QStringList domainSplit = QCoreApplication::organizationDomain().split(".");
-    QString fileName;
-    foreach(QString part, domainSplit)
-    {
-        fileName = fileName.insert(0, part + ".");
-    }
-    fileName.append(QCoreApplication::applicationName() + ".log");
-    return fileName;
-}
+    qputenv("GDAL_DATA", gdalDir.toUtf8());
+    qputenv("PROJ_LIB", projDir.toUtf8());
 
-
-
-QString CAppSetup::logFilename()
-{
-    QDir dir = QDir::temp();
-    return dir.absoluteFilePath(logName());
-}
-
-void CAppSetup::appendToFile(QtMsgType type, QString formatedMsg)
-{
-    Q_UNUSED(type);
-    if(qlOpts->logfile)
-    {
-        QFile outFile(logFilename());
-        outFile.open(QIODevice::WriteOnly | QIODevice::Append);
-        QTextStream ts(&outFile);
-        ts << formatedMsg << endl;
-    }
-}
-
-
-void CAppSetup::printToConsole(QtMsgType type, QString formatedMsg)
-{
-    switch (type)
-    {
-    case QtDebugMsg:
-        if (qlOpts->debug)
-        {
-            std::cout << formatedMsg.toUtf8().constData() << std::endl;
-        }
-        break;
-
-#if QT_VERSION >= 0x050500
-    case QtInfoMsg:
-        std::cout << formatedMsg.toUtf8().constData() << std::endl;
-        break;
-
-#endif
-    case QtWarningMsg:
-        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-        break;
-
-    case QtCriticalMsg:
-        std::cerr <<  formatedMsg.toUtf8().constData() << std::endl;
-        break;
-
-    case QtFatalMsg:
-        std::cerr << formatedMsg.toUtf8().constData() << std::endl;
-        abort();
-        break;
-    }
-}
-
-
-
-void CAppSetup::consoleMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-{
-#if QT_VERSION >= 0x050400
-    QString txt = qFormatLogMessage(type, context, msg);
-#else
-    QString txt = msg;
-#endif
-    CAppSetup::getPlattformInstance()->printToConsole(type, txt);
-    CAppSetup::getPlattformInstance()->appendToFile(type, txt);
-}
-
-
-void CAppSetup::prepareGdal()
-{
-    QString gdal = qgetenv("GDAL_DATA");
-    QString proj = qgetenv("PROJ_LIB");
-    qDebug() << "GDAL_DATA directory set to " + gdal;
-    qDebug() << "PROJ_LIB directory set to " + proj;
+    qDebug() << "GDAL_DATA directory set to " + gdalDir;
+    qDebug() << "PROJ_LIB directory set to " + projDir;
     GDALAllRegister();
 }
 
 
-QString CAppSetup::routinoPath(QDir dirXml, QString xmlFile)
-{
-    QString file = dirXml.absoluteFilePath(xmlFile);
-    qDebug() << "ROUTINO file is " +file;
-    return file;
-}
-
-QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
+QString CAppSetup::path(QString path, QString subdir, bool mkdir, QString debugName)
 {
     QDir pathDir(path);
 
@@ -157,186 +330,50 @@ QDir CAppSetup::path(QString path, QString subdir, bool mkdir)
     if(mkdir && !pathDir.exists())
     {
         pathDir.mkpath(pathDir.absolutePath());
-        qDebug() << "path created " << pathDir.absolutePath();
+        qDebug() << debugName << "path created" << pathDir.absolutePath();
     }
-    return pathDir;
+    else if (debugName != 0)
+    {
+        qDebug() << debugName << "path" << pathDir.absolutePath();
+    }
+    return pathDir.absolutePath();
 }
 
 
-QDir CAppSetup::configDir(QString subdir)
-{
-    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
-    QDir configDir = CAppSetup::path(path, subdir, false);
-    qDebug() << "config dir " << configDir.absolutePath();
-    return configDir;
-}
-
-
-
-void CAppSetup::prepareTranslator(QApplication* app, QTranslator *qtTranslator, QString translationPath, QString translationPrefix)
+void CAppSetup::prepareTranslator(QString translationPath, QString translationPrefix)
 {
     QString locale = QLocale::system().name();
-
     QDir dir(translationPath);
     if(!QFile::exists(dir.absoluteFilePath(translationPrefix + locale)))
     {
         locale = locale.left(2);
     }
+    qDebug() << "locale" << locale;
 
+    QApplication* app =  (QApplication*) QCoreApplication::instance();
+    QTranslator *qtTranslator = new QTranslator(app);
     if (qtTranslator->load(translationPrefix + locale, translationPath))
     {
         app->installTranslator(qtTranslator);
         qDebug() << "using file '"+ translationPath + "/" + translationPrefix + locale + ".qm' for translations.";
     }
+    else
+    {
+        qWarning() << "no file found for translations '"+ translationPath + "/" + translationPrefix + locale + "' (using default).";
+    }
 }
 
 
-void CAppSetup::prepareConfig()
+CLogHandler* logHandler = nullptr;
+
+static void logCallback(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
-    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
-    CAppSetup::path(path, "WaypointIcons", true);
+    logHandler->log(type, context, msg);
 }
 
-
-void CAppSetup::installMessageHandler()
+void CAppSetup::initLogHandler()
 {
-    qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");
-    qInstallMessageHandler(consoleMessageHandler);
-}
-
-
-CAppSetupMac::CAppSetupMac()
-{
-}
-
-
-void CAppSetupMac::prepareGdal()
-{
-    QString gdalDir = getResourceDir("gdal");
-    QString projDir = getResourceDir("proj");
-
-    qputenv("GDAL_DATA", gdalDir.toUtf8());
-    qputenv("PROJ_LIB", projDir.toUtf8());
-
-    CAppSetup::prepareGdal();
-}
-
-QString CAppSetupMac::routinoPath(QString xmlFile)
-{
-    QDir dirXml(getResourceDir("routino"));
-    return CAppSetup::routinoPath(dirXml, xmlFile);
-}
-
-
-QString CAppSetupMac::getResourceDir(QString subdir)
-{
-    QString appResourceDir = QCoreApplication::applicationDirPath();
-
-    QDir resourcesDir(appResourceDir);
-    resourcesDir.cdUp();
-    resourcesDir.cd("Resources");
-    resourcesDir.cd(subdir);
-    appResourceDir = resourcesDir.absolutePath();
-
-    return appResourceDir;
-}
-
-
-void CAppSetupMac::prepareTranslators(QApplication* app)
-{
-    QString translationPath = getResourceDir("translations");
-
-    QTranslator *qtTranslator = new QTranslator(app);
-    prepareTranslator(app, qtTranslator, translationPath, "qt_");
-
-    QTranslator *qlandkartegtTranslator = new QTranslator(app);
-    prepareTranslator(app, qlandkartegtTranslator, translationPath, "qmapshack_");
-}
-
-
-
-QString CAppSetupMac::logFilename()
-{
-    QDir dir = QDir::home();
-    dir.cd("Library");
-    dir.cd("Logs");
-
-    return dir.absoluteFilePath(logName());
-}
-
-
-CAppSetupLinux::CAppSetupLinux()
-{
-}
-
-QString CAppSetupLinux::routinoPath(QString xmlFile)
-{
-    QDir dirXml(_MKSTR(ROUTINO_XML_PATH));
-    return CAppSetup::routinoPath(dirXml, xmlFile);
-}
-
-
-void CAppSetupLinux::prepareTranslators(QApplication* app)
-{
-    QString resourceDir     = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-    QString translationPath = QCoreApplication::applicationDirPath();
-    translationPath.replace(QRegExp("bin$"), "share/qmapshack/translations");
-
-    QTranslator *qtTranslator = new QTranslator(app);
-    prepareTranslator(app, qtTranslator, resourceDir, "qt_");
-
-    QTranslator *qlandkartegtTranslator = new QTranslator(app);
-    prepareTranslator(app, qlandkartegtTranslator, translationPath, "qmapshack_");
-}
-
-
-CAppSetupWin::CAppSetupWin()
-{
-}
-
-
-void CAppSetupWin::prepareGdal()
-{
-    // setup environment variables for GDAL/Proj4
-    QString apppath = QCoreApplication::applicationDirPath();
-    apppath = apppath.replace("/", "\\");
-    QString gdalDir = QString("%1\\data").arg(apppath);
-    QString projDir = QString("%1\\share").arg(apppath);
-
-    qputenv("GDAL_DATA", gdalDir.toUtf8());
-    qputenv("PROJ_LIB", projDir.toUtf8());
-    qunsetenv("GDAL_DRIVER_PATH");
-
-    CAppSetup::prepareGdal();
-}
-
-
-QString CAppSetupWin::routinoPath(QString xmlFile)
-{
-    QString apppath = QCoreApplication::applicationDirPath();
-    apppath = apppath.replace("/", "\\");
-    QDir dirXml(QString("%1\\routino-xml").arg(apppath).toUtf8());
-    return CAppSetup::routinoPath(dirXml, xmlFile);
-}
-
-
-
-void CAppSetupWin::prepareTranslators(QApplication* app)
-{
-    QString apppath = QCoreApplication::applicationDirPath();
-    apppath = apppath.replace("/", "\\");
-    QString appResourceDir = QString("%1\\translations").arg(apppath).toUtf8();
-
-    QTranslator *qtTranslator = new QTranslator(app);
-    prepareTranslator(app, qtTranslator, appResourceDir, "qtbase_");
-
-    QTranslator *qlandkartegtTranslator = new QTranslator(app);
-    prepareTranslator(app, qlandkartegtTranslator, appResourceDir, "qmapshack_");
-}
-
-void CAppSetupWin::prepareConfig()
-{
-    CAppSetup::prepareConfig();
-    //reset PATH to avoid that wrong .dll's are loaded
-    qputenv("PATH", "");
+    logHandler = new CLogHandler(logDir(), qlOpts->logfile, qlOpts->debug);
+    qInstallMessageHandler(logCallback);
+    logHandler->printLoggerInfo();
 }

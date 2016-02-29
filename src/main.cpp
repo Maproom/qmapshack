@@ -32,17 +32,15 @@ int main(int argc, char ** argv)
     QApplication app(argc, argv);
 
     QCoreApplication::setApplicationName("QMapShack");
-    QCoreApplication::setOrganizationName("QLandkarte");
+    //QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
     CCommandProcessor cmdParse;
     qlOpts = cmdParse.processOptions(app.arguments());
 
     CAppSetup* env = CAppSetup::getPlattformInstance();
-    env->installMessageHandler();
-    env->prepareConfig();
-    env->prepareTranslators(&app);
-    env->prepareGdal();
+    env->initLogHandler();
+    env->initQMapShack();
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)

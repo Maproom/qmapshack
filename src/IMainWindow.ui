@@ -91,6 +91,7 @@
     <addaction name="actionFlipMouseWheel"/>
     <addaction name="actionProfileIsWindow"/>
     <addaction name="actionSetupMapFont"/>
+    <addaction name="actionSetupMapBackground"/>
     <addaction name="actionSetupUnits"/>
     <addaction name="actionSetupGrid"/>
     <addaction name="actionSetupMapView"/>
@@ -118,6 +119,7 @@
     <addaction name="actionCloseAllProjects"/>
     <addaction name="separator"/>
     <addaction name="actionSetupWorkspace"/>
+    <addaction name="actionSetupWaypointIcons"/>
    </widget>
    <widget class="QMenu" name="menuExtra">
     <property name="title">
@@ -752,6 +754,30 @@
    </property>
    <property name="menuRole">
     <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSetupMapBackground">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SelectColor.png</normaloff>:/icons/32x32/SelectColor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Map Background</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+  </action>
+  <action name="actionSetupWaypointIcons">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/SetupWptSym.png</normaloff>:/icons/32x32/SetupWptSym.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Waypoint Icons</string>
+   </property>
+   <property name="toolTip">
+    <string>Setup path to custom icons</string>
    </property>
   </action>
  </widget>

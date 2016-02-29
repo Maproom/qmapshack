@@ -46,23 +46,23 @@ public:
     virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
     virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
 
-    virtual void wheelEvent(QWheelEvent * e)
+    virtual void wheelEvent(QWheelEvent*)
     {
     }
 
-    virtual void keyPressEvent(QKeyEvent * e)
+    virtual void keyPressEvent(QKeyEvent*)
     {
     }
 
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
 
-    const QCursor& getCursor()
+    const QCursor& getCursor() const
     {
         return cursor;
     }
 
-    virtual void canvasPanned(QPointF pos)
+    virtual void canvasPanned(QPointF)
     {
     }
 
@@ -89,12 +89,12 @@ protected:
     virtual void cancelDelayedRouting();
     virtual void startDelayedRouting();
     virtual void finalizeOperation(qint32 idx);
-    qint32 isCloseTo(const QPoint& pos);
-    qint32 isCloseToLine(const QPoint& pos);
+    qint32 isCloseTo(const QPoint& pos) const;
+    qint32 isCloseToLine(const QPoint& pos) const;
 
     void drawSinglePointSmall(const QPointF& pt, QPainter& p);
     void drawSinglePointLarge(const QPointF &pt, QPainter& p);
-    void drawLeadLine(const QPolygonF& line, QPainter& p);
+    void drawLeadLine(const QPolygonF& line, QPainter& p) const;
 
     void updateLeadLines(qint32 idx);
 
@@ -128,6 +128,9 @@ protected:
     QPolygonF subLinePixel2;
 
 private:
+    void showRoutingErrorMessage(const QString &msg) const;
+    void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
+
     QTimer * timerRouting;
 };
 

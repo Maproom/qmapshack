@@ -265,15 +265,15 @@ void CDetailsTrk::setupGraphLimits(CLimit& limit, QToolButton * toolLimitAutoGra
     auto limitUserFunc = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeUser, &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
     auto limitSysFunc  = bind(&CDetailsTrk::slotSetLimitModeGraph, this, CLimit::eModeSys,  &limit, spinMinGraph, spinMaxGraph, std::placeholders::_1);
 
-    connect(toolLimitAutoGraph, &QToolButton::toggled, limitAutoFunc);
-    connect(toolLimitUsrGraph,  &QToolButton::toggled, limitUserFunc);
-    connect(toolLimitSysGraph,  &QToolButton::toggled, limitSysFunc);
+    connect(toolLimitAutoGraph, &QToolButton::toggled, this, limitAutoFunc);
+    connect(toolLimitUsrGraph,  &QToolButton::toggled, this, limitUserFunc);
+    connect(toolLimitSysGraph,  &QToolButton::toggled, this, limitSysFunc);
 
     connect(spinMinGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMin);
     connect(spinMaxGraph, static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), &limit, &CLimit::setMax);
 
     auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMinGraph, spinMaxGraph);
-    connect(&limit, &CLimit::sigChanged, limitChangedFunc);
+    connect(&limit, &CLimit::sigChanged, this, limitChangedFunc);
 }
 
 void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QToolButton *toolLimitUsr, QToolButton *toolLimitSys, CDoubleSpinBox *spinMin, CDoubleSpinBox *spinMax)
@@ -316,7 +316,7 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
     connect(spinMin,       &CDoubleSpinBox::editingFinished,    this, &CDetailsTrk::slotColorLimitLowChanged);
 
     auto limitChangedFunc = bind(&CDetailsTrk::setupLimits, this, &limit, spinMin, spinMax);
-    connect(&limit,        &CLimit::sigChanged, limitChangedFunc);
+    connect(&limit,        &CLimit::sigChanged, this, limitChangedFunc);
 }
 
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
@@ -483,7 +483,7 @@ void CDetailsTrk::updateData()
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);
 
-    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : 0);
+    QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
     if(nullptr != tabWidget)
     {
         int idx = tabWidget->indexOf(this);

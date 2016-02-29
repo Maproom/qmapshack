@@ -33,6 +33,6 @@ System:
   Probably on OS X, too, but so far no one volunteers to 
   maintain a binary.
 * GUI has been translated to Czech, French, German and Spanish
-* Wiki dokumentation is English 
+* Wiki documentation is English 
 * Needs Qt5, GDAL, Proj4 installed
 * For device support on Linux DBus and UDisk2 must be installed

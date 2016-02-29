@@ -103,7 +103,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(false, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
     CGisWidget::self().postEventForDb(info);
 }
 
@@ -142,10 +142,10 @@ void CDBProject::setupName(const QString &defaultName)
 }
 
 
-void CDBProject::postStatus()
+void CDBProject::postStatus(bool updateLostFound)
 {
     // collect the keys of all child items and post them to the database view
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
+    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(getId(), getDBName(), getDBHost());
 
     bool changedItems   = false;
     const int N         = childCount();
@@ -158,6 +158,30 @@ void CDBProject::postStatus()
             changedItems |= item->isChanged();
         }
     }
+
+    // check if all items are loaded
+    if(type != eTypeLostFound)
+    {
+        QSqlQuery query(db);
+        query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
+        query.bindValue(":parent", getId());
+        QUERY_EXEC();
+
+        if(query.next() && (query.value(0).toInt() != info->keysChildren.count()))
+        {
+            checkState = Qt::PartiallyChecked;
+        }
+        else
+        {
+            checkState = Qt::Checked;
+        }
+    }
+    else
+    {
+        checkState = Qt::Checked;
+    }
+    info->checkState        = checkState;
+    info->updateLostFound   = updateLostFound;
 
     // update item counters and track/waypoint correlation
     // updateItems(); <--- don't! this is causing a crash
@@ -413,19 +437,19 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
                 switch(typeItem)
                 {
                 case IGisItem::eTypeWpt:
-                    item1 = new CGisItemWpt(idItem, db, 0);
+                    item1 = new CGisItemWpt(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeTrk:
-                    item1 = new CGisItemTrk(idItem, db, 0);
+                    item1 = new CGisItemTrk(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeRte:
-                    item1 = new CGisItemRte(idItem, db, 0);
+                    item1 = new CGisItemRte(idItem, db, nullptr);
                     break;
 
                 case IGisItem::eTypeOvl:
-                    item1 = new CGisItemOvlArea(idItem, db, 0);
+                    item1 = new CGisItemOvlArea(idItem, db, nullptr);
                     break;
 
                 default:
@@ -511,8 +535,6 @@ bool CDBProject::save()
         return false;
     }
 
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(true, getId(), getDBName(), getDBHost());
-
     int N = childCount();
     PROGRESS_SETUP(tr("Save ..."), 0, N, CMainWindow::getBestWidgetForParent());
 
@@ -531,7 +553,6 @@ bool CDBProject::save()
             // skip unchanged items
             if(!item->isChanged())
             {
-                info->keysChildren << item->getKey().item;
                 continue;
             }
 
@@ -571,8 +592,6 @@ bool CDBProject::save()
                 query.bindValue(":child", idItem);
                 QUERY_EXEC(throw eReasonQueryFail);
             }
-
-            info->keysChildren << item->getKey().item;
             item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged|IGisItem::eMarkNotPart|IGisItem::eMarkNotInDB);
         }
         catch(reasons_e reason)
@@ -610,19 +629,21 @@ bool CDBProject::save()
     query.bindValue(":id", getId());
     QUERY_EXEC(return false);
 
+    postStatus(true);
+
     // update change flag
     updateDecoration();
-
-    // report status to database view
-    info->updateLostFound = true;
-    CGisWidget::self().postEventForDb(info);
-
     return success;
 }
 
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
 {
+    if(evt->addItemsExclusively)
+    {
+        qDeleteAll(takeChildren());
+    }
+
     foreach(const evt_item_t &item, evt->items)
     {
         IGisItem * gisItem = 0;
@@ -675,7 +696,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         }
     }
 
-    postStatus();
+    postStatus(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
 }
 
@@ -692,13 +713,15 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
         delItemByKey(key, last);
     }
 
-    postStatus();
+    postStatus(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
 }
 
 
 void CDBProject::update()
 {
+    Qt::CheckState state = checkState;
+
     if(isChanged())
     {
         QString msg = tr("The project '%1' is about to update itself from the database. However there are changes not saved.").arg(getName());
@@ -717,10 +740,10 @@ void CDBProject::update()
         }
     }
 
-
+    // read project properties
     QSqlQuery query(db);
     query.prepare("SELECT date, name, data FROM folders WHERE id=:id");
-    query.bindValue(":id", id);
+    query.bindValue(":id", getId());
     QUERY_EXEC(return );
     query.next();
 
@@ -739,49 +762,81 @@ void CDBProject::update()
     setupName(name);
     setToolTip(CGisListWks::eColumnName, getInfo());
 
-    const int N = childCount();
-    for(int i = 0; i < N; i++)
-    {
-        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(item == nullptr)
-        {
-            continue;
-        }
+    /*
+        The further proceeding depends on the check state of the project. If the project
+        is partially loaded we simply update all items. If it is completely loaded we
+        reload it.
+     */
 
-        query.prepare("SELECT id FROM items WHERE keyqms=:keyqms");
-        query.bindValue(":keyqms", item->getKey().item);
+    if(state == Qt::Checked)
+    {
+        // get keys of all children attached to the project in the database
+        query.prepare("SELECT id, type FROM items WHERE id IN (SELECT child FROM folder2item WHERE parent=:parent)");
+        query.bindValue(":parent", getId());
         QUERY_EXEC(return );
 
-        if(query.next())
+        CEvtD2WShowItems * evt = new CEvtD2WShowItems(getId(), getDBName());
+        evt->addItemsExclusively = true;
+
+        while(query.next())
         {
-            // item is in the database
-            quint64 idItem = query.value(0).toULongLong();
+            evt->items << evt_item_t(query.value(0).toULongLong(), query.value(1).toUInt());
+        }
 
-            QSqlQuery query2(db);
-            query2.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
-            query2.bindValue(":parent", id);
-            query2.bindValue(":child", idItem);
-            query2.exec();
-
-            if(query2.next())
+        CGisWidget::self().postEventForWks(evt);
+    }
+    else
+    {
+        // Iterate over all children and update
+        const int N = childCount();
+        for(int i = 0; i < N; i++)
+        {
+            IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+            if(item == nullptr)
             {
-                // item is connected to this project
-                item->updateFromDB(idItem, db);
-                item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+                continue;
+            }
+
+            const IGisItem::key_t& key = item->getKey();
+            // update item from database
+            query.prepare("SELECT id FROM items WHERE keyqms=:keyqms");
+            query.bindValue(":keyqms", key.item);
+            QUERY_EXEC(return );
+
+            if(query.next())
+            {
+                // item is in the database
+                quint64 idItem = query.value(0).toULongLong();
+
+                QSqlQuery query2(db);
+                query2.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
+                query2.bindValue(":parent", getId());
+                query2.bindValue(":child", idItem);
+                query2.exec();
+
+                if(query2.next())
+                {
+                    // item is connected to this project
+                    item->updateFromDB(idItem, db);
+                    item->updateDecoration(IGisItem::eMarkNone, IGisItem::eMarkChanged);
+                }
+                else
+                {
+                    // item is not connected to this project
+                    item->updateFromDB(idItem, db);
+                    item->updateDecoration(IGisItem::eMarkNotPart|IGisItem::eMarkChanged, IGisItem::eMarkNone);
+                }
             }
             else
             {
-                // item is not connected to this project
-                item->updateFromDB(idItem, db);
-                item->updateDecoration(IGisItem::eMarkNotPart|IGisItem::eMarkChanged, IGisItem::eMarkNone);
+                // item is not in the database at all.
+                item->updateDecoration(IGisItem::eMarkNotInDB|IGisItem::eMarkChanged, IGisItem::eMarkNone);
             }
         }
-        else
-        {
-            // item is not in the database at all.
-            item->updateDecoration(IGisItem::eMarkNotInDB|IGisItem::eMarkChanged, IGisItem::eMarkNone);
-        }
+
+        postStatus(false);
     }
+
 
     updateDecoration();
 }

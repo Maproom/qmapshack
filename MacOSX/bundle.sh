@@ -96,12 +96,14 @@ function adjustLinking {
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
     do 
         adjustLinkQt $F "Qt"
+        adjustLinkQt $F "libdbus"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
     do 
         adjustLinkQt $F "Qt"
         adjustLinkQt $F "libroutino"
+        adjustLinkQt $F "libdbus"
     done
 
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"

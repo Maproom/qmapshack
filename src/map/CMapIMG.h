@@ -49,50 +49,33 @@ public:
     /// subfile part (TRE, RGN, ...) location information
     struct subfile_part_t
     {
-        subfile_part_t() : offset(0), size(0)
-        {
-        }
-        /// file offset of subfile part
-        quint32 offset;
-        /// size of the subfile part
-        quint32 size;
+        quint32 offset = 0; //< file offset of subfile part
+        quint32 size   = 0; //< size of the subfile part
     };
 
     /// subdivision  information
     struct subdiv_desc_t
     {
         quint32 n;
-        /// section of next level
-        quint16 next;
-        /// end of section group
-        bool terminate;
-        /// offset into the subfile's RGN part
-        quint32 rgn_start;
-        /// end of section in RGN part (last offset = rgn_end - 1)
-        quint32 rgn_end;
 
-        /// there are points stored in the RGN subsection
-        bool hasPoints;
-        /// there are indexd points stored in the RGN subsection
-        bool hasIdxPoints;
-        /// there are polylines stored in the RGN subsection
-        bool hasPolylines;
-        /// there are polygons stored in the RGN subsection
-        bool hasPolygons;
+        quint16 next;      //< section of next level
+        bool terminate;    //< end of section group
+        quint32 rgn_start; //< offset into the subfile's RGN part
+        quint32 rgn_end;   //< end of section in RGN part (last offset = rgn_end - 1)
 
-        /// the center longitude of the area covered by this subdivision
-        qint32 iCenterLng;
-        /// the center latitude of the area covered by this subdivision
-        qint32 iCenterLat;
 
-        /// north boundary of area covered by this subsection []
-        qreal north;
-        /// east boundary of area covered by this subsection []
-        qreal east;
-        /// south boundary of area covered by this subsection []
-        qreal south;
-        /// west boundary of area covered by this subsection []
-        qreal west;
+        bool hasPoints;    //< there are points stored in the RGN subsection
+        bool hasIdxPoints; //< there are indexd points stored in the RGN subsection
+        bool hasPolylines; //< there are polylines stored in the RGN subsection
+        bool hasPolygons;  //< there are polygons stored in the RGN subsection
+
+        qint32 iCenterLng; //< the center longitude of the area covered by this subdivision
+        qint32 iCenterLat; //< the center latitude  of the area covered by this subdivision
+
+        qreal north; //< north boundary of area covered by this subsection []
+        qreal east;  //< east  boundary of area covered by this subsection []
+        qreal south; //< south boundary of area covered by this subsection []
+        qreal west;  //< west  boundary of area covered by this subsection []
 
         /// area in meter coordinates covered by this subdivision []
         QRectF area;
@@ -112,23 +95,15 @@ public:
 
     struct subfile_desc_t
     {
-        subfile_desc_t() : north(0.0), east(0.0), south(0.0), west(0.0), isTransparent(false), strtbl(0)
-        {
-        }
-
         /// the name of the subfile (not really needed)
         QString name;
         /// location information of all parts
         QMap<QString,subfile_part_t> parts;
 
-        /// north boundary of area covered by this subfile [rad]
-        qreal north;
-        /// east boundary of area covered by this subfile [rad]
-        qreal east;
-        /// south boundary of area covered by this subfile [rad]
-        qreal south;
-        /// west boundary of area covered by this subfile [rad]
-        qreal west;
+        qreal north = 0.0; //< north boundary of area covered by this subfile [rad]
+        qreal east  = 0.0; //< east  boundary of area covered by this subfile [rad]
+        qreal south = 0.0; //< south boundary of area covered by this subfile [rad]
+        qreal west  = 0.0; //< west  boundary of area covered by this subfile [rad]
 
         /// area in [] covered by this subfile
         QRectF area;
@@ -138,9 +113,9 @@ public:
         /// used maplevels
         QVector<maplevel_t> maplevels;
         /// bit 1 of POI_flags (TRE header @ 0x3F)
-        bool isTransparent;
+        bool isTransparent = false;
         /// object to manage the string tables
-        IGarminStrTbl * strtbl;
+        IGarminStrTbl * strtbl = nullptr;
     };
 
     CMapIMG(const QString &filename, CMapDraw *parent);
@@ -148,7 +123,6 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
-    void getInfo(const QPoint& px, QString& str) override;
     void getToolTip(const QPoint& px, QString& infotext) override;
 
     /**
@@ -178,14 +152,10 @@ private:
     };
     struct strlbl_t
     {
-        strlbl_t() : type(CGarminTyp::eStandard)
-        {
-        }
-
         QPoint pt;
         QRect rect;
         QString str;
-        CGarminTyp::label_type_e type;
+        CGarminTyp::label_type_e type = CGarminTyp::eStandard;
     };
 
 
@@ -197,6 +167,8 @@ private:
     void readFile(CFileExt& file, quint32 offset, quint32 size, QByteArray& data);
     void loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polylines, pointtype_t& points, pointtype_t& pois, unsigned level, const QRectF& viewport,QPainter& p);
     void loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStrTbl * strtbl, const QByteArray& rgndata, bool fast, const QRectF& viewport, polytype_t& polylines, polytype_t& polygons, pointtype_t& points, pointtype_t& pois);
+    bool intersectsWithExistingLabel(const QRect &rect) const;
+    void addLabel(const CGarminPoint &pt, const QRect &rect, CGarminTyp::label_type_e type);
     void drawPolygons(QPainter& p, polytype_t& lines);
     void drawPolylines(QPainter& p, polytype_t& lines, const QPointF &scale);
     void drawPoints(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois);
@@ -209,8 +181,7 @@ private:
 
     void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth);
 
-    void getInfoPoints(const QPoint& pt, QMultiMap<QString, QString>& dict);
-    void getInfoPois(const QPoint& pt, QMultiMap<QString, QString>& dict);
+    void getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict);
     void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict);
     void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict);
 
@@ -557,7 +528,7 @@ private:
 
     struct textpath_t
     {
-        //            QPainterPath    path;
+        // QPainterPath path;
         QPolygonF polyline;
         QString text;
         QFont font;

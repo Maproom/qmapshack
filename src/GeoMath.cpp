@@ -37,6 +37,12 @@ segment_t::segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
 {
 }
 
+static inline qreal distance(const QPointF &pa, const QPointF &pb)
+{
+    const qreal &dx = pa.x() - pb.x();
+    const qreal &dy = pa.y() - pb.y();
+    return qSqrt(dx * dx + dy * dy);
+}
 
 void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const qreal s, qreal &deg)
 {
@@ -45,21 +51,15 @@ void GPS_Math_DegMinSec_To_Deg(bool sign, const qint32 d, const qint32 m, const 
     {
         deg = -deg;
     }
-
-    return;
 }
 
 
-bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *d, qreal *m)
+bool GPS_Math_Deg_To_DegMin(qreal v, qint32 *deg, qreal *min)
 {
-    bool sign = v < 0;
-    qint32 deg = qAbs(v);
-    qreal min = (qAbs(v) - deg) * 60.0;
+    *deg = qAbs(v);
+    *min = (qAbs(v) - *deg) * 60.0;
 
-    *d = deg;
-    *m = min;
-
-    return sign;
+    return v < 0;
 }
 
 
@@ -70,8 +70,6 @@ void GPS_Math_DegMin_To_Deg(bool sign, const qint32 d, const qreal m, qreal& deg
     {
         deg = -deg;
     }
-
-    return;
 }
 
 
@@ -215,26 +213,24 @@ void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal dis
     lon2 = qCos(lat1) == 0 ? lon1 : fmod(lon1 - qAsin(qSin(-bearing) * qSin(d) / qCos(lat1)) + PI, TWOPI) - PI;
 }
 
-qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
+static qreal GPS_Math_distPointLine3D(const point3D &x1, const point3D &x2, const point3D &x0)
 {
     point3D v1, v2, v3, v1x2;
 
-    qreal a1x2, a3;
-
     // (x0 - x1)
-    v1.x    = x0.x - x1.x;
-    v1.y    = x0.y - x1.y;
-    v1.z    = x0.z - x1.z;
+    v1.x = x0.x - x1.x;
+    v1.y = x0.y - x1.y;
+    v1.z = x0.z - x1.z;
 
     // (x0 - x2)
-    v2.x    = x0.x - x2.x;
-    v2.y    = x0.y - x2.y;
-    v2.z    = x0.z - x2.z;
+    v2.x = x0.x - x2.x;
+    v2.y = x0.y - x2.y;
+    v2.z = x0.z - x2.z;
 
     // (x2 - x1)
-    v3.x    = x2.x - x1.x;
-    v3.y    = x2.y - x1.y;
-    v3.z    = x2.z - x1.z;
+    v3.x = x2.x - x1.x;
+    v3.y = x2.y - x1.y;
+    v3.z = x2.z - x1.z;
 
     // (x0 - x1)x(x0 - x2)
     v1x2.x  = v1.y * v2.z - v1.z * v2.y;
@@ -242,9 +238,9 @@ qreal GPS_Math_distPointLine3D(point3D& x1, point3D& x2, point3D& x0)
     v1x2.z  = v1.x * v2.y - v1.y * v2.x;
 
     // |(x0 - x1)x(x0 - x2)|
-    a1x2    = v1x2.x*v1x2.x + v1x2.y*v1x2.y + v1x2.z*v1x2.z;
+    qreal a1x2    = v1x2.x*v1x2.x + v1x2.y*v1x2.y + v1x2.z*v1x2.z;
     // |(x2 - x1)|
-    a3      = v3.x*v3.x + v3.y*v3.y + v3.z*v3.z;
+    qreal a3      = v3.x*v3.x + v3.y*v3.y + v3.z*v3.z;
 
     return qSqrt(a1x2/a3);
 }
@@ -407,13 +403,10 @@ bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF
 
 void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t &result)
 {
-    qint32 i, len;
     projXY p1, p2;
     qreal dx,dy;                // delta x and y defined by p1 and p2
     qreal d_p1_p2;              // distance between p1 and p2
-    qreal u;                    // ratio u the tangent point will divide d_p1_p2
     qreal x,y;                  // coord. (x,y) of the point on line defined by [p1,p2] close to pt
-    qreal distance;             // the distance to the polyline
     qreal shortest1 = threshold;
     qreal shortest2 = threshold;
     qint32 idx11 = NOIDX, idx21 = NOIDX, idx12 = NOIDX;
@@ -421,10 +414,9 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     QPointF pt11;
     QPointF pt21;
 
-    len = pixel.size();
-
     // find points on line closest to pt1 and pt2
-    for(i=1; i<len; ++i)
+    const qint32 len = pixel.size();
+    for(qint32 i = 1; i < len; ++i)
     {
         p1.u = pixel[i - 1].x();
         p1.v = pixel[i - 1].y();
@@ -436,14 +428,15 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         d_p1_p2 = qSqrt(dx * dx + dy * dy);
 
         // find point on line closest to pt1
-        u = ((pt1.x() - p1.u) * dx + (pt1.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
+        // ratio u the tangent point will divide d_p1_p2
+        qreal u = ((pt1.x() - p1.u) * dx + (pt1.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
         if(u >= 0.0 && u <= 1.0)
         {
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
-            distance = qSqrt((x - pt1.x())*(x - pt1.x()) + (y - pt1.y())*(y - pt1.y()));
+            qreal distance = qSqrt((x - pt1.x())*(x - pt1.x()) + (y - pt1.y())*(y - pt1.y()));
 
             if(distance < shortest1)
             {
@@ -456,6 +449,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         }
 
         // find point on line closest to pt2
+        // ratio u the tangent point will divide d_p1_p2
         u = ((pt2.x() - p1.u) * dx + (pt2.y() - p1.v) * dy) / (d_p1_p2 * d_p1_p2);
 
         if(u >= 0.0 && u <= 1.0)
@@ -463,7 +457,7 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
             x = p1.u + u * dx;
             y = p1.v + u * dy;
 
-            distance = qSqrt((x - pt2.x())*(x - pt2.x()) + (y - pt2.y())*(y - pt2.y()));
+            qreal distance = qSqrt((x - pt2.x())*(x - pt2.x()) + (y - pt2.y())*(y - pt2.y()));
 
             if(distance < shortest2)
             {
@@ -479,8 +473,8 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     if(idx11 == NOIDX)
     {
         QPointF px = pixel.first();
-        distance = qSqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
-        if(distance < (threshold<<1))
+        qreal dist = distance(px, pt1);
+        if(dist < (threshold << 1))
         {
             idx11 = 0;
             idx12 = 1;
@@ -489,8 +483,8 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         else
         {
             px = pixel.last();
-            distance = qSqrt((qreal)((px.x() - pt1.x())*(px.x() - pt1.x()) + (px.y() - pt1.y())*(px.y() - pt1.y())));
-            if(distance < (threshold<<1))
+            qreal dist = distance(px, pt1);
+            if(dist < (threshold << 1))
             {
                 idx11 = pixel.size() - 2;
                 idx12 = pixel.size() - 1;
@@ -503,9 +497,9 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
     if(idx21 == NOIDX)
     {
         QPointF px = pixel.first();
-        distance = qSqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
+        qreal dist = distance(px, pt2);
 
-        if(distance < (threshold<<1))
+        if(dist < (threshold<<1))
         {
             idx21 = 0;
             pt21 = px;
@@ -513,8 +507,8 @@ void GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 thresho
         else
         {
             px = pixel.last();
-            distance = qSqrt((qreal)((px.x() - pt2.x())*(px.x() - pt2.x()) + (px.y() - pt2.y())*(px.y() - pt2.y())));
-            if(distance < (threshold<<1))
+            qreal dist = distance(px, pt2);
+            if(dist < (threshold<<1))
             {
                 idx21 = pixel.size() - 2;
                 pt21 = px;

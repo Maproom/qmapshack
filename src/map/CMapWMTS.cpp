@@ -212,7 +212,7 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         free(ptr1);
         free(ptr2);
 
-        if(tileset.pjsrc == 0)
+        if(tileset.pjsrc == nullptr)
         {
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("No georeference information found."));
             return;

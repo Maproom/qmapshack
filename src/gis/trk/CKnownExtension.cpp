@@ -43,23 +43,23 @@ void CKnownExtension::initGarminTPXv1(IUnit &units, const QString &ns)
     //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":atemp",
                            { tr("Air Temperature"), 0, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
-                             getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:atemp")});
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":atemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":wtemp",
                            { tr("Water Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
-                             getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:wtemp")});
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":wtemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":depth",
                            { tr("Depth"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
-                             getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:depth")});
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":depth")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":hr",
                            { tr("Heart Rate"), 3, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
-                             getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:hr")});
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":hr")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":cad",
                            { tr("Cadence"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
-                             getExtensionValueFunc("gpxtpx:TrackPointExtension|gpxtpx:cad")});
+                             getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":cad")});
 }
 
 void CKnownExtension::initMioTPX(IUnit &units)

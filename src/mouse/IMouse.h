@@ -27,10 +27,8 @@
 
 class QMouseEvent;
 class QWheelEvent;
-class CCanvas;
 class QTimer;
 class CGisDraw;
-
 
 class IMouse : public QObject
 {
@@ -38,11 +36,6 @@ class IMouse : public QObject
 public:
     IMouse(CGisDraw * gis, CCanvas * canvas);
     virtual ~IMouse();
-
-    enum type_e
-    {
-        eNormal
-    };
 
     virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
     virtual void mousePressEvent(QMouseEvent *e) = 0;

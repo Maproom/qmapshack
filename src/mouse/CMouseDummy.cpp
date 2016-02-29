@@ -19,7 +19,7 @@
 #include "CMouseDummy.h"
 
 CMouseDummy::CMouseDummy()
-    : IMouse(0,0)
+    : IMouse(nullptr, nullptr)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorArrow.png"),0,0);
 }

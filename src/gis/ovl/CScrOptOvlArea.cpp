@@ -25,9 +25,8 @@
 
 CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMouse *parent)
     : IScrOpt(parent)
+    , key(area->getKey())
 {
-    key = area->getKey();
-
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());

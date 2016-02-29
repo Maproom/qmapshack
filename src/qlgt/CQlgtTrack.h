@@ -35,7 +35,7 @@ public:
     virtual ~CFlags()
     {
     }
-    const quint32 flag() const
+    quint32 flag() const
     {
         return flags;
     }
@@ -78,7 +78,7 @@ public:
         flags = f;
         return flags;
     }
-    const bool isChanged() const
+    bool isChanged() const
     {
         return changed;
     }

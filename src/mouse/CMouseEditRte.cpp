@@ -65,7 +65,7 @@ void CMouseEditRte::mousePressEvent(QMouseEvent * e)
     IMouseEditLine::mousePressEvent(e);
 }
 
-IGisLine * CMouseEditRte::getGisLine()
+IGisLine * CMouseEditRte::getGisLine() const
 {
     return dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
 }

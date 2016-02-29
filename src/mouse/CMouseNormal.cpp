@@ -36,11 +36,12 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     screenUnclutter = new CScrOptUnclutter(this);
 
     menu = new QMenu(canvas);
-    menu->addAction(QIcon("://icons/32x32/AddWpt.png"), tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    menu->addAction(QIcon("://icons/32x32/AddTrk.png"), tr("Add Track"), this, SLOT(slotAddTrk()));
-    menu->addAction(QIcon("://icons/32x32/AddRte.png"), tr("Add Route"), this, SLOT(slotAddRte()));
-    menu->addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"), this, SLOT(slotAddArea()));
-
+    menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
+    menu->addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
+    menu->addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
+    menu->addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
+    menu->addSeparator();
+    menu->addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
     menu->addSeparator();
     menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
     menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
@@ -50,7 +51,7 @@ CMouseNormal::~CMouseNormal()
 {
 }
 
-void CMouseNormal::stopTracking()
+void CMouseNormal::stopTracking() const
 {
     const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
     if(!key.item.isEmpty())
@@ -158,7 +159,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 stateItemSel = eStateIdle;
 
                 IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
-                if(item)
+                if(nullptr != item)
                 {
                     item->treeWidget()->collapseAll();
                     item->treeWidget()->setCurrentItem(item);
@@ -211,9 +212,6 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 resetState();
                 break;
             }
-
-            default:
-                ;
             }
 
             canvas->update();
@@ -347,14 +345,14 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 }
 
 
-void CMouseNormal::slotAddWpt()
+void CMouseNormal::slotAddWpt() const
 {
-    QString name;
-    QString icon;
     QPointF pt = point;
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
+    QString name;
+    QString icon;
     if(!CGisItemWpt::getNewWptData(pt, icon, name))
     {
         return;
@@ -370,11 +368,10 @@ void CMouseNormal::slotAddWpt()
     CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
     wpt->edit();
 
-
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CMouseNormal::slotAddTrk()
+void CMouseNormal::slotAddTrk() const
 {
     QPointF pt = point;
     gis->convertPx2Rad(pt);
@@ -383,7 +380,7 @@ void CMouseNormal::slotAddTrk()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CMouseNormal::slotAddRte()
+void CMouseNormal::slotAddRte() const
 {
     QPointF pt = point;
     gis->convertPx2Rad(pt);
@@ -392,7 +389,7 @@ void CMouseNormal::slotAddRte()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CMouseNormal::slotAddArea()
+void CMouseNormal::slotAddArea() const
 {
     QPointF pt = point;
     gis->convertPx2Rad(pt);
@@ -401,7 +398,7 @@ void CMouseNormal::slotAddArea()
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CMouseNormal::slotCopyPosition()
+void CMouseNormal::slotCopyPosition() const
 {
     QPointF pt = point;
     gis->convertPx2Rad(pt);
@@ -413,7 +410,7 @@ void CMouseNormal::slotCopyPosition()
     clipboard->setText(position);
 }
 
-void CMouseNormal::slotCopyPositionGrid()
+void CMouseNormal::slotCopyPositionGrid() const
 {
     QString position;
     QPointF pt = point;
@@ -423,4 +420,9 @@ void CMouseNormal::slotCopyPositionGrid()
 
     QClipboard *clipboard = QApplication::clipboard();
     clipboard->setText(position);
+}
+
+void CMouseNormal::slotSelectArea() const
+{
+    canvas->setMouseSelect();
 }

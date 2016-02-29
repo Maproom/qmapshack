@@ -40,7 +40,7 @@ public:
     void mouseMoveEvent(QMouseEvent *e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *e) override;
-    void keyPressEvent(QKeyEvent   *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
 
 private slots:
     void slotHidePoints();

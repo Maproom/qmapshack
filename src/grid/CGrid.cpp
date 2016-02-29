@@ -42,7 +42,7 @@ CGrid::~CGrid()
 
 void CGrid::convertPos2Str(const QPointF& pos, QString& info, bool simple)
 {
-    if(pjGrid == 0)
+    if(pjGrid == nullptr)
     {
         return;
     }
@@ -97,7 +97,7 @@ void CGrid::setProjAndColor(const QString& proj, const QColor& c)
     projstr = proj;
     color   = c;
 
-    if(pjGrid)
+    if(nullptr != pjGrid)
     {
         pj_free(pjGrid);
     }
@@ -220,15 +220,15 @@ struct val_t
 
 void CGrid::draw(QPainter& p, const QRect& rect)
 {
-    if(pjWGS84 == 0 || pjGrid == 0 || !CMainWindow::self().isGridVisible())
+    if(pjWGS84 == nullptr || pjGrid == nullptr || !CMainWindow::self().isGridVisible())
     {
         return;
     }
 
-    QPointF topLeft     = rect.topLeft();
-    QPointF topRight    = rect.topRight();
-    QPointF btmLeft     = rect.bottomLeft();
-    QPointF btmRight    = rect.bottomRight();
+    QPointF topLeft  = rect.topLeft();
+    QPointF topRight = rect.topRight();
+    QPointF btmLeft  = rect.bottomLeft();
+    QPointF btmRight = rect.bottomRight();
 
     map->convertPx2Rad(topLeft);
     map->convertPx2Rad(topRight);
@@ -252,10 +252,10 @@ void CGrid::draw(QPainter& p, const QRect& rect)
     //    qDebug() << topLeft.v  - btmLeft.v;
     //    qDebug() << topRight.v - btmRight.v;
 
-    qreal topMax   = topLeft.y()  > topRight.y()   ? topLeft.y()  : topRight.y();
-    qreal btmMin   = btmLeft.y()  < btmRight.y()   ? btmLeft.y()  : btmRight.y();
-    qreal leftMin  = topLeft.x()  < btmLeft.x()    ? topLeft.x()  : btmLeft.x();
-    qreal rightMax = topRight.x() > btmRight.x()   ? topRight.x() : btmRight.x();
+    qreal topMax   = qMax(topLeft.y(),  topRight.y());
+    qreal btmMin   = qMin(btmLeft.y(),  btmRight.y());
+    qreal leftMin  = qMin(topLeft.x(),  btmLeft.x());
+    qreal rightMax = qMax(topRight.x(), btmRight.x());
 
     qreal xGridSpace = 1000;
     qreal yGridSpace = 1000;

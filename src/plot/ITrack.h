@@ -45,10 +45,10 @@ protected:
     void draw(QPainter& p);
     void draw();
 
-    projPJ pjsrc = 0;
-    projPJ pjtar = 0;
+    projPJ pjsrc = nullptr;
+    projPJ pjtar = nullptr;
 
-    bool needsRedraw =true;
+    bool needsRedraw = true;
     CGisItemTrk * trk = nullptr;
     QPolygonF coords;
     QPolygonF line;

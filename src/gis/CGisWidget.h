@@ -94,6 +94,8 @@ public:
     {
     }
 
+    /// if true only the items in the list are loaded. Any other item loaded but not part of the list will be removed.
+    bool addItemsExclusively = false;
     quint64 id;
     QString db;
     QList<evt_item_t> items;
@@ -114,18 +116,25 @@ public:
 class CEvtW2DAckInfo : public QEvent
 {
 public:
-    CEvtW2DAckInfo(bool loaded, quint64 id, const QString& db, const QString& host)
+    CEvtW2DAckInfo(Qt::CheckState checkState, quint64 id, const QString& db, const QString& host)
         : QEvent(QEvent::Type(eEvtW2DAckInfo))
-        , isLoaded(loaded)
-        , updateLostFound(false)
+        , checkState(checkState)
         , id(id)
         , db(db)
         , host(host)
     {
     }
 
-    bool isLoaded;
-    bool updateLostFound;
+    CEvtW2DAckInfo(quint64 id, const QString& db, const QString& host)
+        : QEvent(QEvent::Type(eEvtW2DAckInfo))
+        , id(id)
+        , db(db)
+        , host(host)
+    {
+    }
+
+    Qt::CheckState checkState = Qt::Unchecked;
+    bool updateLostFound = false;
     quint64 id;
     QString db;
     QString host;
@@ -151,7 +160,6 @@ public:
         , name(name)
         , type(type)
         , idParent(id)
-        , idChild(0)
         , db(db)
         , host(host)
     {
@@ -160,7 +168,7 @@ public:
     QString name;
     IDBFolder::type_e type;
     quint64 idParent;
-    quint64 idChild;
+    quint64 idChild = 0;
     QString db;
     QString host;
 };
@@ -241,18 +249,30 @@ public:
     void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
 
     /**
+       @brief Get items matching the given area
+
+       @param area      a rectangle in screen pixel coordinates
+       @param flags     flag field with IGisItem::selection_e flags set
+       @param items     a list to receive the temporary pointers to the found items
+     */
+    void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
+
+    /**
        @brief Find first item with matching key
        @param key       the item's key as it is returned from IGisItem::getKey()
        @return If no item is found 0 is returned.
      */
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
+    void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     /**
        @brief Delete all items with matching key from workspace
 
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
     void delItemByKey(const IGisItem::key_t &key);
+
+    void delItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**
        @brief Edit / view item details
@@ -265,6 +285,12 @@ public:
        @param key       the item's key as it is returned from IGisItem::getKey()
      */
     void copyItemByKey(const IGisItem::key_t &key);
+
+    /**
+       @brief Select a project and add a copy of all items in the list
+       @param keys      a list of item keys to copy
+     */
+    void copyItemsByKey(const QList<IGisItem::key_t> &keys);
 
     /**
        @brief Clone waypoint and move clone

@@ -60,26 +60,26 @@ void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
     IMouseEditLine::mousePressEvent(e);
 }
 
-IGisLine * CMouseEditTrk::getGisLine()
+IGisLine * CMouseEditTrk::getGisLine() const
 {
     return dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
 }
 
 void CMouseEditTrk::slotAbort()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
     IMouseEditLine::slotAbortEx(false);
 }
 
 void CMouseEditTrk::slotCopyToOrig()
 {
-    canvas->reportStatus(key.item,"");
+    canvas->reportStatus(key.item, "");
 
     if(!isNewLine)
     {
-        int res = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+        QMessageBox::StandardButton button = QMessageBox::warning(canvas, tr("Warning!"), tr("This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently."), QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
 
-        if(res != QMessageBox::Ok)
+        if(button != QMessageBox::Ok)
         {
             return;
         }
@@ -122,7 +122,7 @@ void CMouseEditTrk::slotCopyToNew()
 
     CMainWindow::self().getElevationAt(points);
 
-    new CGisItemTrk(points,name, project, NOIDX);
+    new CGisItemTrk(points, name, project, NOIDX);
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

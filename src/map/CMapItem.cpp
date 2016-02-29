@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "map/CMapDraw.h"
+#include "map/CMapGEMF.h"
 #include "map/CMapIMG.h"
 #include "map/CMapItem.h"
 #include "map/CMapJNX.h"
@@ -25,7 +26,6 @@
 #include "map/CMapTMS.h"
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
-#include "map/CMapGEMF.h"
 #include "map/IMapProp.h"
 #include <QtGui>
 
@@ -122,7 +122,8 @@ void CMapItem::updateIcon()
     else if(fi.suffix().toLower() == "tms")
     {
         img = QPixmap("://icons/32x32/MimeTMS.png");
-    }else if(fi.suffix().toLower() == "gemf")
+    }
+    else if(fi.suffix().toLower() == "gemf")
     {
         img = QPixmap("://icons/32x32/MimeGEMF.png");
     }
@@ -204,7 +205,8 @@ bool CMapItem::activate()
     else if(fi.suffix().toLower() == "tms")
     {
         mapfile = new CMapTMS(filename, map);
-    }else if(fi.suffix().toLower() == "gemf")
+    }
+    else if(fi.suffix().toLower() == "gemf")
     {
         mapfile = new CMapGEMF(filename, map);
     }

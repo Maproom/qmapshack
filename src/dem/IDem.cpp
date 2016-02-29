@@ -182,31 +182,31 @@ int IDem::getFactorHillshading()
 void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
 {
     int wp2 = w + 2;
-    qint16 win[9];
-    qreal dx, dy, aspect, xx_plus_yy, cang;
 
 #define ZFACT           0.125
 #define ZFACT_BY_ZFACT  (ZFACT*ZFACT)
 #define SIN_ALT         (qSin(45*DEG_TO_RAD))
 #define ZFACT_COS_ALT   (ZFACT*qCos(45*DEG_TO_RAD))
 #define AZ              (315 * DEG_TO_RAD)
-    for(int m = 1; m <= h; m++)
+    for(unsigned int m = 1; m <= h; m++)
     {
-        for(int n = 1; n <= w; n++)
+        unsigned char* scan = img.scanLine(m - 1);
+        for(unsigned int n = 1; n <= w; n++)
         {
+            qint16 win[9];
             fillWindow(data, n, m, wp2, win);
 
             if(hasNoData && win[4] == noData)
             {
-                img.setPixel(n - 1, m - 1, 255);
+                scan[n - 1] = 255;
                 continue;
             }
 
-            dx          = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
-            dy          = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
-            aspect      = qAtan2(dy, dx);
-            xx_plus_yy  = dx * dx + dy * dy;
-            cang        = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
+            qreal dx         = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale*factorHillshading);
+            qreal dy         = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale*factorHillshading);
+            qreal aspect     = qAtan2(dy, dx);
+            qreal xx_plus_yy = dx * dx + dy * dy;
+            qreal cang       = (SIN_ALT - ZFACT_COS_ALT * qSqrt(xx_plus_yy) * qSin(aspect - AZ)) / qSqrt(1+ZFACT_BY_ZFACT*xx_plus_yy);
 
             if (cang <= 0.0)
             {
@@ -217,7 +217,7 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
                 cang = 1.0 + (254.0 * cang);
             }
 
-            img.setPixel(n - 1, m - 1, cang);
+            scan[n - 1] = cang;
         }
     }
 }
@@ -225,44 +225,45 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
 void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
 {
     int wp2 = w + 2;
-    qint16 win[9];
-    qreal dx, dy, k, slope;
 
-    for(int m = 1; m <= h; m++)
+    for(unsigned int m = 1; m <= h; m++)
     {
-        for(int n = 1; n <= w; n++)
+        unsigned char* scan = img.scanLine(m - 1);
+        for(unsigned int n = 1; n <= w; n++)
         {
+            qint16 win[9];
             fillWindow(data, n, m, wp2, win);
-            dx  = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
-            dy  = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
-            k   = (dx * dx + dy * dy);
-            slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+
+            qreal dx    = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+            qreal dy    = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+            qreal k     = dx * dx + dy * dy;
+            qreal slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
 
             const qreal *currentSlopeStepTable = getCurrentSlopeStepTable();
 
             if(slope > currentSlopeStepTable[4])
             {
-                img.setPixel(n - 1, m - 1, 5);
+                scan[n - 1] = 5;
             }
             else if(slope > currentSlopeStepTable[3])
             {
-                img.setPixel(n - 1, m - 1, 4);
+                scan[n - 1] = 4;
             }
             else if(slope > currentSlopeStepTable[2])
             {
-                img.setPixel(n - 1, m - 1, 3);
+                scan[n - 1] = 3;
             }
             else if(slope > currentSlopeStepTable[1])
             {
-                img.setPixel(n - 1, m - 1, 2);
+                scan[n - 1] = 2;
             }
             else if(slope > currentSlopeStepTable[0])
             {
-                img.setPixel(n - 1, m - 1, 1);
+                scan[n - 1] = 1;
             }
             else
             {
-                img.setPixel(n - 1, m - 1, 0);
+                scan[n - 1] = 0;
             }
         }
     }

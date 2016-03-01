@@ -42,7 +42,6 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
-#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
@@ -1773,8 +1772,10 @@ void CGisListWks::slotRteFromWpt()
         }
     }
 
-    CCreateRouteFromWpt dlg(keys, this);
-    dlg.exec();
+    if(!keys.isEmpty())
+    {
+        CGisWidget::self().makeRteFromWpt(keys);
+    }
 }
 
 void CGisListWks::slotSyncDB()

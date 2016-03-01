@@ -248,7 +248,7 @@ static inline bool isInRange(const T &val, const T &rangeStart, const T &rangeEn
 IGisItem * CGisItemTrk::createClone()
 {
     int idx = -1;
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -1021,7 +1021,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current)
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(nullptr == project)
     {
         return;

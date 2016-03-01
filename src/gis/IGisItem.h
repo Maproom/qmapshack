@@ -443,6 +443,8 @@ public:
     virtual IGisItem * createClone() = 0;
 
 
+    IGisProject * getParentProject() const;
+
     /**
        @brief Remove all HTML tags from a string
        @param str the string

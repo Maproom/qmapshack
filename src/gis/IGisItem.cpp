@@ -162,6 +162,11 @@ IGisItem::~IGisItem()
 {
 }
 
+IGisProject * IGisItem::getParentProject() const
+{
+    return dynamic_cast<IGisProject*>(parent());
+}
+
 void IGisItem::genKey() const
 {
     if(key.item.isEmpty())
@@ -179,7 +184,7 @@ void IGisItem::genKey() const
     }
     if(key.project.isEmpty())
     {
-        IGisProject * project = dynamic_cast<IGisProject*>(parent());
+        IGisProject * project = getParentProject();
         if(project)
         {
             key.project = project->getKey();
@@ -258,7 +263,7 @@ void IGisItem::updateFromDB(quint64 id, QSqlDatabase& db)
 QString IGisItem::getNameEx() const
 {
     QString str = getName();
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(project)
     {
         str += " @ " + project->getName();
@@ -281,7 +286,7 @@ void IGisItem::updateDecoration(quint32 enable, quint32 disable)
     setSymbol();
 
     // update project if necessary
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(project && (enable & (eMarkChanged|eMarkNotPart|eMarkNotInDB)))
     {
         project->setChanged();
@@ -483,7 +488,7 @@ bool IGisItem::isTainted() const
 
 qint32 IGisItem::isOnDevice() const
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(nullptr == project)
     {
         return false;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -127,7 +127,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="677"/>
         <source>Setup Map Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartenhintergrund einstellen</translation>
     </message>
 </context>
 <context>
@@ -922,15 +922,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Time: %1</source>
-        <translation type="obsolete">Gesamtzeit: %1</translation>
+        <translation type="vanished">Gesamtzeit: %1</translation>
     </message>
     <message>
         <source>, Speed: %1 %2</source>
-        <translation type="obsolete">, Geschw.: %1 %2</translation>
+        <translation type="vanished">, Geschw.: %1 %2</translation>
     </message>
     <message>
         <source>Moving: %1</source>
-        <translation type="obsolete">Zeit in Bew.: %1</translation>
+        <translation type="vanished">Zeit in Bew.: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="429"/>
@@ -970,17 +970,17 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="575"/>
         <source>Descend: - (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Abstieg: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Distance: - (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernung: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="577"/>
         <source>Moving: - (-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit in Bew.: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
@@ -990,12 +990,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1451"/>
         <source>Hide point %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1455"/>
         <source>Hide points %1..%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Punket %1  %2 verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="574"/>
@@ -1009,15 +1009,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source> Descend: - (-) </source>
-        <translation type="obsolete">, Abstieg: - (-) </translation>
+        <translation type="vanished">, Abstieg: - (-) </translation>
     </message>
     <message>
         <source>Dist.: %1%2 (%3%)</source>
-        <translation type="obsolete">Entf.: %1 %2 (%3%)</translation>
+        <translation type="vanished">Entf.: %1 %2 (%3%)</translation>
     </message>
     <message>
         <source>Dist.: - (-)</source>
-        <translation type="obsolete">Entf.: - (-)</translation>
+        <translation type="vanished">Entf.: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="600"/>
@@ -1026,7 +1026,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source> Moving: - (-) </source>
-        <translation type="obsolete">, Zeit in Bew.: - (-) </translation>
+        <translation type="vanished">, Zeit in Bew.: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="622"/>
@@ -1056,7 +1056,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Dist.: %1%2</source>
-        <translation type="obsolete">Entf.: %1 %2</translation>
+        <translation type="vanished">Entf.: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
@@ -1076,22 +1076,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="417"/>
         <source>Time: %1, Speed: %2 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit: %1, Geschwindigkeit: %2 %3</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
         <source>Moving: %1, Speed: %2 %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit in Bew.: %1, Geschw. %2 3%</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
         <source>Distance: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Entf.: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="644"/>
         <source>Distance: %1%2</source>
-        <translation type="unfinished">Entfernung: %1%2</translation>
+        <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1287"/>
@@ -1100,7 +1100,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Hide points.</source>
-        <translation type="obsolete">Punkte verbergen.</translation>
+        <translation type="vanished">Punkte verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1495"/>
@@ -1482,7 +1482,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Copy items...</source>
-        <translation type="obsolete">Elemente kopieren...</translation>
+        <translation type="vanished">Elemente kopieren...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="154"/>
@@ -1548,7 +1548,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="780"/>
         <source>Saving workspace. Please wait.</source>
-        <translation>Arbeitsplatz speichern. Bitte warten.</translation>
+        <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="826"/>
@@ -1581,7 +1581,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/CGisWidget.cpp" line="527"/>
         <source>Copy items...</source>
-        <translation type="unfinished">Elemente kopieren...</translation>
+        <translation>Elemente kopieren...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="623"/>
@@ -1812,7 +1812,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapDraw.cpp" line="400"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. </source>
-        <translation type="unfinished"></translation>
+        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten keinen Spaß. Sie können Karten installieren durch Drücken der &apos;Hilfe! Ich will Karten!&apos; Schaltfläche im Fenster &apos;Karten&apos;. Oder öffnen Sie durch Drücken der F1-Taste die Online Dokumentation, um zu erfahren, wie Sie QMapShack anwenden.</translation>
     </message>
 </context>
 <context>
@@ -2713,7 +2713,7 @@ Unbekannte Struktur.</translation>
         <location filename="../mouse/CMouseEditRte.cpp" line="30"/>
         <location filename="../mouse/CMouseEditRte.cpp" line="37"/>
         <source>Route</source>
-        <translation>Routen</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
@@ -2790,7 +2790,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Select Items On Map</source>
-        <translation type="unfinished"></translation>
+        <translation>Elemente auf der Karte auswählen</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="46"/>
@@ -2807,12 +2807,12 @@ Unbekannte Struktur.</translation>
     <name>CMousePrint</name>
     <message>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection.</source>
-        <translation type="obsolete">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
+        <translation type="vanished">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
     </message>
     <message>
         <location filename="../mouse/CMousePrint.cpp" line="31"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
     </message>
 </context>
 <context>
@@ -2828,32 +2828,32 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="31"/>
         <source>&lt;b&gt;Select Items On Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Elemente auf der Karte wählen&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Abbruch mit Rechtsklick. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="99"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
-        <source>%1 waypoints&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ausgewählt:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>%1 tracks&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Tracks&lt;br/&gt;</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
+        <source>%1 waypoints&lt;br/&gt;</source>
+        <translation>%1 Wegpunkte&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 routes&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Routen&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 areas&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Gebiete&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3579,52 +3579,52 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="93"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Genauert Modus&lt;/b&gt;&lt;br/&gt;Alle Elemente müssen vollständig innerhalb des gewählten Bereiches sein.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="97"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Überschneidender Modus&lt;/b&gt;&lt;br/&gt;Alle gewählten Elemente müssen innerhalb des gewählten Bereiches sein oder müssen diesen zumindest schneiden.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="101"/>
         <source>&lt;b&gt;Add Tracks&lt;/b&gt;&lt;br/&gt;Add tracks to list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Tracks hinzufügen&lt;/b&gt;&lt;br/&gt;Fügt Tracks zur Liste der gewählten Elemente hinzu&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="105"/>
         <source>&lt;b&gt;Add Waypoints&lt;/b&gt;&lt;br/&gt;Add waypoints to list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Wegpunkte hinzufügen&lt;/b&gt;&lt;br/&gt;Fügt Wegpunkte zur Liste der gewählten Elemente hinzu&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="109"/>
         <source>&lt;b&gt;Add Routes&lt;/b&gt;&lt;br/&gt;Add routes to list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Routen hinzufügen&lt;/b&gt;&lt;br/&gt;Fügt Routen zur Liste der gewählten Elemente hinzu&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="113"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gebiete hinzufügen&lt;/b&gt;&lt;br/&gt;Fügt Gebiete zur Liste der gewählten Elemente hinzu&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="124"/>
         <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Tracks ignorieren&lt;/b&gt;&lt;br/&gt;Tracks werden in der Liste der gewählten Elemente nicht berücksichtigt&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="128"/>
         <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Wegpunkte ignorieren&lt;/b&gt;&lt;br/&gt;Wegpunkte werden in der Liste der gewählten Elemente nicht berücksichtigt&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="132"/>
         <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Routen ignorieren&lt;/b&gt;&lt;br/&gt;Routen werden in der Liste der gewählten Elemente nicht berücksichtigt&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="136"/>
         <source>&lt;b&gt;Ignore Areas&lt;/b&gt;&lt;br/&gt;Ignore areas in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Gebiete ignorieren&lt;/b&gt;&lt;br/&gt;Gebiete werden in der Liste der gewählten Elemente nicht berücksichtigt&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3789,7 +3789,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../helpers/CWptIconDialog.cpp" line="161"/>
         <source>Path to user icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zu Benutzersymbolen...</translation>
     </message>
 </context>
 <context>
@@ -3924,7 +3924,7 @@ Ivo Kronenberg</source>
         <source>Helmut Schmidt</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="354"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
@@ -3934,7 +3934,7 @@ Ivo Kronenberg</source>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="406"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -4004,17 +4004,17 @@ Ivo Kronenberg</source>
         <source>Coordinate Format...</source>
         <translation>Koordinatenformat...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation></translation>
@@ -4189,7 +4189,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <source>Slope </source>
         <translation>Hangneigung </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../dem/IDemPropSetup.ui" line="226"/>
         <location filename="../dem/IDemPropSetup.ui" line="326"/>
         <location filename="../dem/IDemPropSetup.ui" line="410"/>
@@ -5177,7 +5177,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <location filename="../gis/IGisItem.cpp" line="310"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
-        <translation type="unfinished"></translation>
+        <translation>Es ist entweder ein neues Symbol oder es wurde in der Datenbank gelöscht.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="316"/>
@@ -5432,7 +5432,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../mouse/line/ILineOp.cpp" line="214"/>
         <source>Routing</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -5712,17 +5712,17 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="765"/>
         <source>Setup Map Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Kartenhintergrund einstellen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="777"/>
         <source>Setup Waypoint Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Wegpunktsymbole konfigurieren</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="780"/>
         <source>Setup path to custom icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Pfad zu individuellen Symbolen einrichten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="495"/>
@@ -5865,7 +5865,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="14"/>
         <source>Setup map paths</source>
-        <translation>Kartenpfad einstellen</translation>
+        <translation>Kartenpfad einrichten</translation>
     </message>
     <message>
         <location filename="../map/IMapPathSetup.ui" line="20"/>
@@ -6260,7 +6260,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -6607,23 +6607,23 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
         <source>Save selected area as image.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="38"/>
         <location filename="../mouse/IScrOptPrint.ui" line="58"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="55"/>
         <source>Print selected area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Druckt gewählten Bereich.</translation>
     </message>
 </context>
 <context>
@@ -6750,12 +6750,12 @@ sein</translation>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="59"/>
         <source>Copy all selected items to a project.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiert alle gewählten Elemente in ein Projekt.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="62"/>
@@ -6767,42 +6767,42 @@ sein</translation>
         <location filename="../mouse/IScrOptSelect.ui" line="241"/>
         <location filename="../mouse/IScrOptSelect.ui" line="261"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="73"/>
         <source>Delete all selected items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Löscht alle gewählten Elemente.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="121"/>
         <source>Select all items that intersect the selected area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählt alle Elemente, die den gewählten Bereich schneiden.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="144"/>
         <source>Select all itmes that are completely inside the selected area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählt alle Elemente, die vollständig innerhalb des gewählten Bereiches liegen.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="198"/>
         <source>Add tracks to selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügt Tracks zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="218"/>
         <source>Add waypoints to selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügt Wegpunkte zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="238"/>
         <source>Add routes to selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügt Routen zur Auswahl hinzu.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="258"/>
         <source>Add areas to selection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fügt Gebiete zur Auswahl hinzu.</translation>
     </message>
 </context>
 <context>
@@ -7583,22 +7583,22 @@ sein</translation>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="68"/>
         <source>External Icons:</source>
-        <translation type="unfinished"></translation>
+        <translation>Externe Symbole:</translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="75"/>
         <source>-</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="82"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="95"/>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
     </message>
 </context>
 </TS>

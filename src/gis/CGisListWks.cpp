@@ -1378,7 +1378,7 @@ void CGisListWks::slotCombineTrk()
 
     if(!keys.isEmpty())
     {
-        CGisWidget::self().combineTrkByKey(keys);
+        CGisWidget::self().combineTrkByKey(keys, keys);
     }
 }
 

@@ -68,20 +68,31 @@ void CCombineTrk::accept()
 {
     CGisWidget& gis = CGisWidget::self();
 
+    // get name of first track in list
+    IGisItem::key_t key;
+    key.item    = listSelected->item(0)->data(Qt::UserRole + 1).toString();
+    key.project = listSelected->item(0)->data(Qt::UserRole + 2).toString();
+    key.device  = listSelected->item(0)->data(Qt::UserRole + 3).toString();
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
+    if(nullptr == trk)
+    {
+        return;
+    }
+
+    QList<IGisItem::key_t> keys;
+    // copy the segments of all tracks to new track
     for(int i = 0; i < listSelected->count(); i++)
     {
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
-        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
+        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();   
 
-        CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
-        if(nullptr == trk1)
-        {
-            continue;
-        }
-        //keys << key;
+        keys << key;
     }
+
+    trk->combine(keys);
 
     QDialog::accept();
 }

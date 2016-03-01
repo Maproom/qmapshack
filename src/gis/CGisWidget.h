@@ -337,7 +337,7 @@ public:
 
        @param keys  a list of GIS item keys
      */
-    void combineTrkByKey(const QList<IGisItem::key_t>& keys);
+    void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
 
     void rangeTrkByKey(const IGisItem::key_t &key);
 

@@ -29,6 +29,7 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -764,6 +765,14 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
             canvas->setMouseEditArea(*area);
         }
     }
+}
+
+void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CCreateRouteFromWpt dlg(keys, this);
+    dlg.exec();
 }
 
 void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)

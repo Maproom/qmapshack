@@ -33,8 +33,10 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
     CScrOptSelect * scrOptSelect;
     scrOpt = scrOptSelect = new CScrOptSelect(this);
 
-    connect(scrOptSelect->toolCopy,   &QToolButton::clicked, this, &CMouseSelect::slotCopy);
-    connect(scrOptSelect->toolDelete, &QToolButton::clicked, this, &CMouseSelect::slotDelete);
+    connect(scrOptSelect->toolCopy,         &QToolButton::clicked, this, &CMouseSelect::slotCopy);
+    connect(scrOptSelect->toolRoute,        &QToolButton::clicked, this, &CMouseSelect::slotRoute);
+    connect(scrOptSelect->toolCombineTracks, &QToolButton::clicked, this, &CMouseSelect::slotCombine);
+    connect(scrOptSelect->toolDelete,       &QToolButton::clicked, this, &CMouseSelect::slotDelete);
 }
 
 CMouseSelect::~CMouseSelect()
@@ -51,13 +53,8 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
 
     if((rectSelection == rectLastSel) && (modeSelection == modeLastSel))
     {
-        if(itemKeys.isEmpty())
+        if(!itemKeys.isEmpty())
         {
-            scrOptSelect->frameFunction->setDisabled(true);
-        }
-        else
-        {
-            scrOptSelect->frameFunction->setEnabled(true);
             CGisWidget::self().getItemsByKeys(itemKeys, items);
         }
     }
@@ -69,10 +66,10 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         rectRad2Px(rectSelection, area);
         CGisWidget::self().getItemsByArea(area, modeSelection, items);
 
-        quint32 cntWpt = 0;
-        quint32 cntTrk = 0;
-        quint32 cntRte = 0;
-        quint32 cntOvl = 0;
+        cntWpt = 0;
+        cntTrk = 0;
+        cntRte = 0;
+        cntOvl = 0;
         foreach(IGisItem * item, items)
         {
             itemKeys << item->getKey();
@@ -104,11 +101,13 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
 
         canvas->reportStatus("CMouseSelect::Stat",msg);
 
-        scrOptSelect->frameFunction->setDisabled(itemKeys.isEmpty());
-
         rectLastSel = rectSelection;
         modeLastSel = modeSelection;
     }
+
+    scrOptSelect->frameFunction->setDisabled(items.isEmpty());
+    scrOptSelect->toolRoute->setEnabled(cntWpt > 1);
+    scrOptSelect->toolCombineTracks->setEnabled(cntTrk > 1);
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
@@ -140,5 +139,17 @@ void CMouseSelect::slotCopy() const
 void CMouseSelect::slotDelete() const
 {
     CGisWidget::self().delItemsByKey(itemKeys);
+    canvas->resetMouse();
+}
+
+void CMouseSelect::slotRoute() const
+{
+    CGisWidget::self().makeRteFromWpt(itemKeys);
+    canvas->resetMouse();
+}
+
+void CMouseSelect::slotCombine() const
+{
+    CGisWidget::self().combineTrkByKey(itemKeys);
     canvas->resetMouse();
 }

@@ -38,6 +38,8 @@ public:
 
 private slots:
     void slotCopy() const;
+    void slotRoute() const;
+    void slotCombine() const;
     void slotDelete() const;
 
 private:
@@ -54,6 +56,11 @@ private:
     QList<IGisItem::key_t> itemKeys;
     IGisItem::selflags_t modeLastSel   = IGisItem::eSelectionNone;
     QRectF rectLastSel;
+
+    quint32 cntWpt = 0;
+    quint32 cntTrk = 0;
+    quint32 cntRte = 0;
+    quint32 cntOvl = 0;
 };
 
 #endif //CMOUSESELECT_H

@@ -336,6 +336,8 @@ public:
 
     void editAreaByKey(const IGisItem::key_t &key);
 
+    void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
+
     /**
        @brief Select a project via dialog
 

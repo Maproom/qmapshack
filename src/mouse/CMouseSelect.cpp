@@ -150,6 +150,6 @@ void CMouseSelect::slotRoute() const
 
 void CMouseSelect::slotCombine() const
 {
-    CGisWidget::self().combineTrkByKey(itemKeys);
+    CGisWidget::self().combineTrkByKey(itemKeys, itemKeys);
     canvas->resetMouse();
 }

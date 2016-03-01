@@ -397,7 +397,7 @@ public:
        Handle the complete process of selecting tracks, choosing the order and
        the final name with dialogs.
      */
-    void combine(const QList<key_t> &keysPreSel);
+    void combine(const QList<key_t> &keys);
 
     /**
        @brief Set the trkpt_t::eHidden flag

@@ -678,10 +678,10 @@ void CGisWidget::combineTrkByKey(const IGisItem::key_t& keyTrk)
         }
     }
 
-    combineTrkByKey(keys);
+    combineTrkByKey(keys, {keyTrk});
 }
 
-void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
+void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel)
 {
     if(keys.isEmpty())
     {
@@ -690,8 +690,8 @@ void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
 
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    QList<IGisItem::key_t> keysPreSel;
     CCombineTrk dlg(keys, keysPreSel, this);
+    dlg.exec();
 
     emit sigChanged();
 }

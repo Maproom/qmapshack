@@ -1328,60 +1328,51 @@ void CGisItemTrk::reverse()
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
-void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
+void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 {
-//    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-//    if(nullptr == project)
-//    {
-//        return;
-//    }
+    if(keys.isEmpty())
+    {
+        return;
+    }
 
-//    CCombineTrk dlg(*this, keysPreSel, *project, CMainWindow::getBestWidgetForParent());
-//    dlg.exec();
+    QString name = getName() + " & other";
+    IGisProject *projectNew = nullptr;
+    if(!getNameAndProject(name, projectNew))
+    {
+        return;
+    }
 
-//    QList<IGisItem::key_t> keys = dlg.getTrackKeys();
-//    if(keys.isEmpty())
-//    {
-//        return;
-//    }
+    // start with a 1:1 copy of the first track
+    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
+    // replace name
+    trk1->trk.name = name;
 
-//    QString name = getName() + " & other";
-//    IGisProject *projectNew = nullptr;
-//    if(!getNameAndProject(name, projectNew))
-//    {
-//        return;
-//    }
+    /*
+        clear track data, item key and history. To clear the history is important as
+        the original track's history would restore the original key
 
-//    // start with a 1:1 copy of the first track
-//    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
-//    // replace name
-//    trk1->trk.name = name;
+     */
+    trk1->trk.segs.clear();
+    trk1->key.clear();
+    trk1->history.events.clear();
 
-//    /*
-//        clear track data, item key and history. To clear the history is important as
-//        the original track's history would restore the original key
+    // copy the segments of all tracks to new track
+    CGisWidget& gis = CGisWidget::self();
+    foreach(const IGisItem::key_t &key, keys)
+    {
+        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
+        if(nullptr == trk2)
+        {
+            continue;
+        }
 
-//     */
-//    trk1->trk.segs.clear();
-//    trk1->key.clear();
-//    trk1->history.events.clear();
+        trk1->trk.segs += trk2->trk.segs;
+    }
 
-//    // copy the segments of all tracks to new track
-//    foreach(const IGisItem::key_t &key, keys)
-//    {
-//        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
-//        if(nullptr == trk2)
-//        {
-//            continue;
-//        }
-
-//        trk1->trk.segs += trk2->trk.segs;
-//    }
-
-//    // restore secondary data and create a new history
-//    trk1->deriveSecondaryData();
-//    trk1->setupHistory();
-//    trk1->updateDecoration(eMarkChanged, eMarkNone);
+    // restore secondary data and create a new history
+    trk1->deriveSecondaryData();
+    trk1->setupHistory();
+    trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemTrk::hideSelectedPoints()

@@ -16,54 +16,31 @@
 
 **********************************************************************************************/
 
-#include "gis/prj/IGisProject.h"
+
+#include "gis/CGisWidget.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlotTrack.h"
 
 #include <QtWidgets>
 
-CCombineTrk::CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t> &keysPreSel, IGisProject& project, QWidget * parent)
+CCombineTrk::CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisItem::key_t> &keysPreSel, QWidget * parent)
     : QDialog(parent)
-    , trk(trk)
-    , project(project)
 {
     setupUi(this);
 
-    const int N = project.childCount();
-    for(int i = 0; i < N; i++)
+    CGisWidget& gis = CGisWidget::self();
+    foreach(const IGisItem::key_t& key, keys)
     {
-        CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.child(i));
-        if(nullptr == trk1)
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
+        if(nullptr == trk)
         {
             continue;
         }
 
-        if(keysPreSel.contains(trk1->getKey()))
-        {
-            continue;
-        }
-
-        const IGisItem::key_t& key = trk1->getKey();
-        QListWidgetItem * item = new QListWidgetItem(listAvailable);
-        item->setText(trk1->getName());
-        item->setIcon(trk1->getIcon());
-        item->setData(Qt::UserRole + 1, key.item);
-        item->setData(Qt::UserRole + 2, key.project);
-        item->setData(Qt::UserRole + 3, key.device);
-    }
-
-    foreach(const IGisItem::key_t& key, keysPreSel)
-    {
-        IGisItem * gisItem = dynamic_cast<IGisItem*>(project.getItemByKey(key));
-        if(nullptr == gisItem)
-        {
-            continue;
-        }
-
-        QListWidgetItem * item = new QListWidgetItem(listSelected);
-        item->setText(gisItem->getName());
-        item->setIcon(gisItem->getIcon());
+        QListWidgetItem * item = new QListWidgetItem(keysPreSel.contains(key) ? listSelected : listAvailable);
+        item->setText(trk->getName());
+        item->setIcon(trk->getIcon());
         item->setData(Qt::UserRole + 1, key.item);
         item->setData(Qt::UserRole + 2, key.project);
         item->setData(Qt::UserRole + 3, key.device);
@@ -89,18 +66,21 @@ CCombineTrk::~CCombineTrk()
 
 void CCombineTrk::accept()
 {
+    CGisWidget& gis = CGisWidget::self();
+
     for(int i = 0; i < listSelected->count(); i++)
     {
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
         key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
-        CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
+
+        CGisItemTrk * trk1 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk1)
         {
             continue;
         }
-        keys << key;
+        //keys << key;
     }
 
     QDialog::accept();
@@ -161,11 +141,6 @@ void CCombineTrk::slotRemove()
     key.project = item->data(Qt::UserRole + 2).toString();
     key.device  = item->data(Qt::UserRole + 3).toString();
 
-    if(key == trk.getKey())
-    {
-        return;
-    }
-
 
     listSelected->takeItem(listSelected->row(item));
     listAvailable->addItem(item);
@@ -213,6 +188,8 @@ void CCombineTrk::slotDown()
 
 void CCombineTrk::updatePreview()
 {
+    CGisWidget& gis = CGisWidget::self();
+
     QPolygonF line;
     for(int i = 0; i < listSelected->count(); i++)
     {
@@ -222,7 +199,7 @@ void CCombineTrk::updatePreview()
         key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
 
 
-        CGisItemTrk *trk1 = dynamic_cast<CGisItemTrk*>(project.getItemByKey(key));
+        CGisItemTrk *trk1 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk1)
         {
             continue;

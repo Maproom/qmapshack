@@ -23,20 +23,13 @@
 #include "ui_ICombineTrk.h"
 #include <QDialog>
 
-class CGisItemTrk;
-class IGisProject;
 
 class CCombineTrk : public QDialog, private Ui::ICombineTrk
 {
     Q_OBJECT
 public:
-    CCombineTrk(CGisItemTrk& trk, const QList<IGisItem::key_t>& keysPreSel, IGisProject &project, QWidget * parent);
+    CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisItem::key_t> &keysPreSel, QWidget * parent);
     virtual ~CCombineTrk();
-
-    const QList<IGisItem::key_t>& getTrackKeys()
-    {
-        return keys;
-    }
 
 public slots:
     void accept() override;
@@ -50,10 +43,6 @@ private slots:
 
 private:
     void updatePreview();
-    CGisItemTrk& trk;
-    IGisProject& project;
-
-    QList<IGisItem::key_t> keys;
 };
 
 #endif //CCOMBINETRK_H

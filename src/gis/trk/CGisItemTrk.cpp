@@ -1,4 +1,4 @@
-﻿/**********************************************************************************************
+/**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -1331,58 +1330,58 @@ void CGisItemTrk::reverse()
 
 void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(nullptr == project)
-    {
-        return;
-    }
+//    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+//    if(nullptr == project)
+//    {
+//        return;
+//    }
 
-    CCombineTrk dlg(*this, keysPreSel, *project, CMainWindow::getBestWidgetForParent());
-    dlg.exec();
+//    CCombineTrk dlg(*this, keysPreSel, *project, CMainWindow::getBestWidgetForParent());
+//    dlg.exec();
 
-    QList<IGisItem::key_t> keys = dlg.getTrackKeys();
-    if(keys.isEmpty())
-    {
-        return;
-    }
+//    QList<IGisItem::key_t> keys = dlg.getTrackKeys();
+//    if(keys.isEmpty())
+//    {
+//        return;
+//    }
 
-    QString name = getName() + " & other";
-    IGisProject *projectNew = nullptr;
-    if(!getNameAndProject(name, projectNew))
-    {
-        return;
-    }
+//    QString name = getName() + " & other";
+//    IGisProject *projectNew = nullptr;
+//    if(!getNameAndProject(name, projectNew))
+//    {
+//        return;
+//    }
 
-    // start with a 1:1 copy of the first track
-    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
-    // replace name
-    trk1->trk.name = name;
+//    // start with a 1:1 copy of the first track
+//    CGisItemTrk * trk1 = new CGisItemTrk(*this, projectNew, NOIDX, false);
+//    // replace name
+//    trk1->trk.name = name;
 
-    /*
-        clear track data, item key and history. To clear the history is important as
-        the original track's history would restore the original key
+//    /*
+//        clear track data, item key and history. To clear the history is important as
+//        the original track's history would restore the original key
 
-     */
-    trk1->trk.segs.clear();
-    trk1->key.clear();
-    trk1->history.events.clear();
+//     */
+//    trk1->trk.segs.clear();
+//    trk1->key.clear();
+//    trk1->history.events.clear();
 
-    // copy the segments of all tracks to new track
-    foreach(const IGisItem::key_t &key, keys)
-    {
-        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
-        if(nullptr == trk2)
-        {
-            continue;
-        }
+//    // copy the segments of all tracks to new track
+//    foreach(const IGisItem::key_t &key, keys)
+//    {
+//        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
+//        if(nullptr == trk2)
+//        {
+//            continue;
+//        }
 
-        trk1->trk.segs += trk2->trk.segs;
-    }
+//        trk1->trk.segs += trk2->trk.segs;
+//    }
 
-    // restore secondary data and create a new history
-    trk1->deriveSecondaryData();
-    trk1->setupHistory();
-    trk1->updateDecoration(eMarkChanged, eMarkNone);
+//    // restore secondary data and create a new history
+//    trk1->deriveSecondaryData();
+//    trk1->setupHistory();
+//    trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemTrk::hideSelectedPoints()

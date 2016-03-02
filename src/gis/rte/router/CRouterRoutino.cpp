@@ -60,7 +60,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Quickest"));
 
     int res = 0;
-    IAppSetup *setup = IAppSetup::getPlattformInstance();
+    IAppSetup *setup = IAppSetup::getPlatformInstance();
     res = Routino_ParseXMLProfiles(setup->routinoPath("profiles.xml").toUtf8());
     if(res)
     {

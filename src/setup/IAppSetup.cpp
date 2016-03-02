@@ -25,25 +25,26 @@
 #include "setup/CAppSetupLinux.h"
 #include "setup/CAppSetupWin.h"
 
-
 #include <gdal.h>
 
 
-IAppSetup* instance = nullptr;
+static IAppSetup* instance = nullptr;
 
-IAppSetup* IAppSetup::getPlattformInstance()
+IAppSetup* IAppSetup::getPlatformInstance()
 {
     if(nullptr == instance)
     {
-#ifdef Q_OS_MAC
+#if defined(Q_OS_MAC)
         instance = new CAppSetupMac();
-#endif
-#ifdef Q_OS_LINUX
+#elif defined(Q_OS_LINUX)
         instance = new CAppSetupLinux();
-#endif
-#ifdef Q_OS_WIN32
+#elif defined (Q_OS_WIN32)
         instance = new CAppSetupWin();
 #endif
+        if(nullptr == instance)
+        {
+        throw tr("Platform %1 not supported.").arg(QSysInfo::prettyProductName());
+        }
     }
     return instance;
 }

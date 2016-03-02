@@ -38,13 +38,13 @@ void CAppSetupMac::initQMapShack()
     prepareTranslator(translationPath, "qt_");
     prepareTranslator(translationPath, "qmapshack_");
 
+    migrateDirContent(defaultCachePath());
+    migrateDirContent(userDataPath());
+
     // create direcotries
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
     IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
     IAppSetup::path(logDir(), 0, false, "LOG");
-
-    migrateDirContent(defaultCachePath());
-    migrateDirContent(userDataPath());
 }
 
 
@@ -87,49 +87,30 @@ QDir CAppSetupMac::getApplicationDir(QString subdir)
     return appDir;
 }
 
-static void copyRecursively(const QString &srcFilePath,
-                            const QString &tgtFilePath)
-{
-    QFileInfo srcFileInfo(srcFilePath);
-    if (srcFileInfo.isDir())
-    {
-        QDir targetDir(tgtFilePath);
-        targetDir.cdUp();
-        if (!targetDir.exists())
-        {
-            targetDir.mkdir(QFileInfo(tgtFilePath).fileName());
-        }
-        QDir sourceDir(srcFilePath);
-        QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System);
-        foreach (const QString &fileName, fileNames)
-        {
-            const QString newSrcFilePath = srcFilePath + QLatin1Char('/') + fileName;
-            const QString newTgtFilePath = tgtFilePath + QLatin1Char('/') + fileName;
-            copyRecursively(newSrcFilePath, newTgtFilePath);
-        }
-    }
-    else
-    {
-        qDebug() << "migrate file from "<< srcFilePath << "to" << tgtFilePath;
-        if (!QFile::rename(srcFilePath, tgtFilePath))
-        {
-            qDebug() << "error migrating file" << srcFilePath;
-        }
-    }
-}
 
-
-void CAppSetupMac::migrateDirContent(QString dir)
+void CAppSetupMac::migrateDirContent(QString dest)
 {
-    QDir dirDest = QDir(dir);
-    QDir dirSource = QDir(dir);
-    dirSource.cdUp();
-    dirSource.cdUp();
-    dirSource.cd("QMapShack");
-    if (dirSource.exists())
+    QString src = dest;
+    src.replace("/QLandkarte/", "/");
+    QDir dirDest = QDir(dest);
+    QDir dirSource = QDir(src);
+
+    if (!dirDest.exists() && dirSource.exists())
     {
+        qDebug() << "src directory for migration" << src;
+        qDebug() << "dst directory for migration" << dest;
+
+        QDir wdir;
+        QString newdir = dest;
+        newdir.remove("/QMapShack");
+        wdir.mkdir(newdir);
+        qDebug() << "directory created" << newdir;
+
         qDebug() << "migrate data from "<<dirSource.absolutePath() << "to" << dirDest.absolutePath();
-        copyRecursively(dirSource.absolutePath(), dirDest.absolutePath());
-        dirSource.removeRecursively();
+        QDir mvDir;
+        if(!mvDir.rename(dirSource.absolutePath(), dirDest.absolutePath()))
+        {
+            qDebug() << "error migrating directory" << dirSource;
+        }
     }
 }

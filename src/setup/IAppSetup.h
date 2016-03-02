@@ -26,8 +26,9 @@
 
 class IAppSetup
 {
+    Q_DECLARE_TR_FUNCTIONS(IAppSetup)
 public:
-    static IAppSetup * getPlattformInstance();
+    static IAppSetup *getPlatformInstance();
     virtual void initQMapShack() = 0;
     void initLogHandler();
     CAppOpts* processArguments();

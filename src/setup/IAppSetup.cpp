@@ -17,12 +17,12 @@
 **********************************************************************************************/
 
 
-#include "setup/IAppSetup.h"
-#include "setup/CLogHandler.h"
 #include "CCommandProcessor.h"
+#include "setup/CLogHandler.h"
+#include "setup/IAppSetup.h"
 
-#include "setup/CAppSetupMac.h"
 #include "setup/CAppSetupLinux.h"
+#include "setup/CAppSetupMac.h"
 #include "setup/CAppSetupWin.h"
 
 #include <gdal.h>
@@ -40,11 +40,9 @@ IAppSetup* IAppSetup::getPlatformInstance()
         instance = new CAppSetupLinux();
 #elif defined (Q_OS_WIN32)
         instance = new CAppSetupWin();
+#else
+  #error OS not supported
 #endif
-        if(nullptr == instance)
-        {
-        throw tr("Platform %1 not supported.").arg(QSysInfo::prettyProductName());
-        }
     }
     return instance;
 }

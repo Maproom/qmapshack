@@ -17,8 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "helpers/CAppSetup.h"
-#include "helpers/CCommandProcessor.h"
+#include "setup/IAppSetup.h"
 #include "version.h"
 
 #include <QtCore>
@@ -32,13 +31,11 @@ int main(int argc, char ** argv)
     QApplication app(argc, argv);
 
     QCoreApplication::setApplicationName("QMapShack");
-    //QCoreApplication::setOrganizationName("QLandkarte");
+    QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
-    CCommandProcessor cmdParse;
-    qlOpts = cmdParse.processOptions(app.arguments());
-
-    CAppSetup* env = CAppSetup::getPlattformInstance();
+    IAppSetup* env = IAppSetup::getPlattformInstance();
+    qlOpts = env->processArguments();
     env->initLogHandler();
     env->initQMapShack();
 

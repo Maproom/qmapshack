@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "helpers/CAppSetup.h"
+#include "setup/IAppSetup.h"
 #include "helpers/CSettings.h"
 
 #include "tool/CRoutinoDatabaseBuilder.h"
@@ -143,7 +143,7 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         return;
     }
 
-    CAppSetup* instance = CAppSetup::getPlattformInstance();
+    IAppSetup* instance = IAppSetup::getPlattformInstance();
     if(sourceFiles.isEmpty())
     {
         QStringList args;

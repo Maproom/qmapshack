@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/WptIcons.h"
-#include "helpers/CAppSetup.h"
+#include "setup/IAppSetup.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 
@@ -127,7 +127,7 @@ void CWptIconDialog::setupList(QObject * obj)
     }
 
     SETTINGS;
-    QString path = cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString();
+    QString path = cfg.value("Paths/externalWptIcons",IAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString();
     labelIconPath->setProperty("path", path);
     labelIconPath->setText(path.size() > 25 ? "..." + path.right(22) : path);
 

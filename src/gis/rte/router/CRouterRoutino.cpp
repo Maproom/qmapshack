@@ -22,7 +22,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterRoutinoPathSetup.h"
-#include "helpers/CAppSetup.h"
+#include "setup/IAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtWidgets>
@@ -60,7 +60,7 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     comboMode->addItem(tr("Quickest"));
 
     int res = 0;
-    CAppSetup *setup = CAppSetup::getPlattformInstance();
+    IAppSetup *setup = IAppSetup::getPlattformInstance();
     res = Routino_ParseXMLProfiles(setup->routinoPath("profiles.xml").toUtf8());
     if(res)
     {

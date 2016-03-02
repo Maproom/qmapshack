@@ -18,7 +18,7 @@
 
 
 #include "WptIcons.h"
-#include "helpers/CAppSetup.h"
+#include "setup/IAppSetup.h"
 #include "helpers/CSettings.h"
 
 #include <QtGui>
@@ -68,7 +68,7 @@ void initWptIcons()
     setWptIconByName("Webcam Cache", "://icons/cache/32x32/webcam.png");
 
     SETTINGS;
-    QDir dirIcon(cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString());
+    QDir dirIcon(cfg.value("Paths/externalWptIcons",IAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString());
 
     QString filename;
     QStringList filenames = dirIcon.entryList(QStringList("*.bmp"), QDir::Files);
@@ -97,7 +97,7 @@ void setWptIconByName(const QString& name, const QString& filename)
 void setWptIconByName(const QString& name, const QPixmap& icon)
 {
     SETTINGS;
-    QDir dirIcon(cfg.value("Paths/externalWptIcons",CAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString());
+    QDir dirIcon(cfg.value("Paths/externalWptIcons",IAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString());
     QString filename = dirIcon.filePath(name + ".png");
 
     icon.save(filename);

@@ -103,7 +103,7 @@ void CLogHandler::printToConsole(QtMsgType type, QString formatedMsg)
     }
 }
 
-CLogHandler* logHandler = nullptr;
+static CLogHandler* logHandler = nullptr;
 
 static void logCallback(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {

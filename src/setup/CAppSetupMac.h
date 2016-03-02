@@ -34,7 +34,7 @@ public:
 
 private:
     QDir getApplicationDir(QString subdir);
-    void migrateDirContent(QString dir);
+    void migrateDirContent(QString dest);
 };
 
 #endif // CAPPSETUPMAC_H

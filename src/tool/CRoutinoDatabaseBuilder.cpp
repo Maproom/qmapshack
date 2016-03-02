@@ -143,7 +143,7 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         return;
     }
 
-    IAppSetup* instance = IAppSetup::getPlattformInstance();
+    IAppSetup* instance = IAppSetup::getPlatformInstance();
     if(sourceFiles.isEmpty())
     {
         QStringList args;

@@ -127,7 +127,7 @@ void CWptIconDialog::setupList(QObject * obj)
     }
 
     SETTINGS;
-    QString path = cfg.value("Paths/externalWptIcons",IAppSetup::getPlattformInstance()->userDataPath("WaypointIcons")).toString();
+    QString path = cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString();
     labelIconPath->setProperty("path", path);
     labelIconPath->setText(path.size() > 25 ? "..." + path.right(22) : path);
 

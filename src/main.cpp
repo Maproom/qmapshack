@@ -34,7 +34,7 @@ int main(int argc, char ** argv)
     QCoreApplication::setOrganizationName("QLandkarte");
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
-    IAppSetup* env = IAppSetup::getPlattformInstance();
+    IAppSetup* env = IAppSetup::getPlatformInstance();
     qlOpts = env->processArguments();
     env->initLogHandler();
     env->initQMapShack();

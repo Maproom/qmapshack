@@ -109,9 +109,10 @@ void IAppSetup::initLogHandler()
     CLogHandler::initLogHandler(logDir(), qlOpts->logfile, qlOpts->debug);
 }
 
+CAppOpts *qlOpts = nullptr;
 
-CAppOpts* IAppSetup::processArguments()
+void IAppSetup::processArguments()
 {
     CCommandProcessor cmdParse;
-    return cmdParse.processOptions(QCoreApplication::instance()->arguments());
+    qlOpts = cmdParse.processOptions(QCoreApplication::instance()->arguments());
 }

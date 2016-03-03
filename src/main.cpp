@@ -20,11 +20,9 @@
 #include "setup/IAppSetup.h"
 #include "version.h"
 
-#include <QtCore>
 #include <QtWidgets>
 #include <iostream>
 
-CAppOpts *qlOpts = nullptr;
 
 int main(int argc, char ** argv)
 {
@@ -35,7 +33,7 @@ int main(int argc, char ** argv)
     QCoreApplication::setOrganizationDomain("qlandkarte.org");
 
     IAppSetup* env = IAppSetup::getPlatformInstance();
-    qlOpts = env->processArguments();
+    env->processArguments();
     env->initLogHandler();
     env->initQMapShack();
 

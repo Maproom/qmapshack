@@ -57,8 +57,8 @@ QString CAppSetupLinux::defaultCachePath()
 
 QString CAppSetupLinux::userDataPath(QString subdir)
 {
-    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::AppConfigLocation).first();
-    return IAppSetup::path(dataDir, subdir, false, 0);
+    QString path = QDir::home().absoluteFilePath(CONFIGDIR);
+    return IAppSetup::path(path, subdir, false, 0);
 }
 
 

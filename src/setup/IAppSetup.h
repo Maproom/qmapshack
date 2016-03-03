@@ -26,12 +26,11 @@
 
 class IAppSetup
 {
-    Q_DECLARE_TR_FUNCTIONS(IAppSetup)
 public:
     static IAppSetup *getPlatformInstance();
     virtual void initQMapShack() = 0;
     void initLogHandler();
-    CAppOpts* processArguments();
+    void processArguments();
 
     virtual QString routinoPath(QString xmlFile) = 0;
     virtual QString defaultCachePath() = 0;

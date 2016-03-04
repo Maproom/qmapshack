@@ -30,7 +30,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 {
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/QmsProject.png"));
 
-    // cerate file instance
+    // create file instance
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
@@ -61,10 +61,6 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;
-}
-
-CQmsProject::~CQmsProject()
-{
 }
 
 bool CQmsProject::saveAs(const QString& fn, IGisProject& project)

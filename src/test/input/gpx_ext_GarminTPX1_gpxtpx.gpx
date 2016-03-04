@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+ <metadata>
+  <name>QTTest gpx file 0</name>
+  <desc>QTTest gpx input file 0</desc>
+  <time>2015-11-14T19:09:45Z</time>
+ </metadata>
+ <trk>
+  <name>Track</name>
+  <trkseg>
+   <trkpt lat="49.43892301" lon="11.40093000">
+    <ele>525</ele>
+    <time>2015-10-02T13:56:08Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>20.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>10.0</gpxtpx:wtemp>
+      <gpxtpx:depth>100.0</gpxtpx:depth>
+      <gpxtpx:hr>90</gpxtpx:hr>
+      <gpxtpx:cad>60</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43895997" lon="11.40101994">
+    <ele>526</ele>
+    <time>2015-10-02T13:56:10Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>21.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>11.0</gpxtpx:wtemp>
+      <gpxtpx:depth>101.0</gpxtpx:depth>
+      <gpxtpx:hr>91</gpxtpx:hr>
+      <gpxtpx:cad>61</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43899702" lon="11.40111197">
+    <ele>527</ele>
+    <time>2015-10-02T13:56:12Z</time>
+    <extensions>
+      <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>22.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>12.0</gpxtpx:wtemp>
+      <gpxtpx:depth>102.0</gpxtpx:depth>
+      <gpxtpx:hr>92</gpxtpx:hr>
+      <gpxtpx:cad>62</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43903197" lon="11.40118993">
+    <ele>528</ele>
+    <time>2015-10-02T13:56:14Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>23.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>13.0</gpxtpx:wtemp>
+      <gpxtpx:depth>103.0</gpxtpx:depth>
+      <gpxtpx:hr>93</gpxtpx:hr>
+      <gpxtpx:cad>63</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43905997" lon="11.40126696">
+    <ele>529</ele>
+    <time>2015-10-02T13:56:16Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>24.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>14.0</gpxtpx:wtemp>
+      <gpxtpx:depth>104.0</gpxtpx:depth>
+      <gpxtpx:hr>94</gpxtpx:hr>
+      <gpxtpx:cad>64</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43908000" lon="11.40133300">
+    <ele>530</ele>
+    <time>2015-10-02T13:56:18Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>25.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>15.0</gpxtpx:wtemp>
+      <gpxtpx:depth>105.0</gpxtpx:depth>
+      <gpxtpx:hr>95</gpxtpx:hr>
+      <gpxtpx:cad>65</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43910699" lon="11.40139495">
+    <ele>531</ele>
+    <time>2015-10-02T13:56:20Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>26.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>16.0</gpxtpx:wtemp>
+      <gpxtpx:depth>106.0</gpxtpx:depth>
+      <gpxtpx:hr>96</gpxtpx:hr>
+      <gpxtpx:cad>66</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+   <trkpt lat="49.43913800" lon="11.40145999">
+    <ele>531</ele>
+    <time>2015-10-02T13:56:22Z</time>
+    <extensions>
+     <gpxtpx:TrackPointExtension>
+      <gpxtpx:atemp>27.0</gpxtpx:atemp>
+      <gpxtpx:wtemp>17.0</gpxtpx:wtemp>
+      <gpxtpx:depth>107.0</gpxtpx:depth>
+      <gpxtpx:hr>97</gpxtpx:hr>
+      <gpxtpx:cad>67</gpxtpx:cad>
+     </gpxtpx:TrackPointExtension>
+    </extensions>
+   </trkpt>
+  </trkseg>
+ </trk>
+</gpx>

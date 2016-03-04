@@ -26,7 +26,7 @@
 
 static CGpxProject* readGpxFile(const QString &file, bool valid)
 {
-    // this does not ready anything, a bare CSlfProject is created
+    // this does not read anything, a bare CSlfProject is created
     CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
 
     bool hadExc = false;

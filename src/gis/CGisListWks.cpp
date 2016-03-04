@@ -47,7 +47,7 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CAppSetup.h"
+#include "setup/IAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -89,7 +89,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     : QTreeWidget(parent)
 {
     db = QSqlDatabase::addDatabase("QSQLITE","Workspace1");
-    QString config = CAppSetup::getPlattformInstance()->configDir().filePath("workspace.db");
+    QString config = QDir(IAppSetup::getPlatformInstance()->userDataPath()).filePath("workspace.db");
     db.setDatabaseName(config);
     db.open();
     configDB();

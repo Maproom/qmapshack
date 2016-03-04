@@ -21,10 +21,6 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/slf/CSlfReader.h"
 
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CKnownExtension.h"
-#include "gis/wpt/CGisItemWpt.h"
-
 void test_QMapShack::readValidSLFFile()
 {
     // this does not ready anything, a bare CSlfProject is created

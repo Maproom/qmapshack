@@ -20,10 +20,6 @@
 
 #include "gis/gpx/CGpxProject.h"
 
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CKnownExtension.h"
-#include "gis/wpt/CGisItemWpt.h"
-
 void test_QMapShack::readWriteGPXFile()
 {
     // step 1: read .gpx file

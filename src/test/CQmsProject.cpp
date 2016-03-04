@@ -18,11 +18,7 @@
 
 #include "test/test_QMapShack.h"
 
-#include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CKnownExtension.h"
-#include "gis/wpt/CGisItemWpt.h"
 
 void test_QMapShack::readQMSFile_1_6_0()
 {

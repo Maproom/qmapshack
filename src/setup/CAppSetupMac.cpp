@@ -69,7 +69,7 @@ void CAppSetupMac::initQMapShack()
     migrateDirContent(defaultCachePath());
     migrateDirContent(userDataPath());
 
-    // create direcotries
+    // create directories
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
     IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
     IAppSetup::path(logDir(), 0, false, "LOG");

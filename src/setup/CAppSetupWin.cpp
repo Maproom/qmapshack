@@ -38,7 +38,7 @@ void CAppSetupWin::initQMapShack()
     //reset PATH to avoid that wrong .dll's are loaded
     qputenv("PATH", "");
 
-    // create direcotries
+    // create directories
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
     IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
     IAppSetup::path(logDir(), 0, true, "LOG");

@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#ifndef CAPPSETUP_H
-#define CAPPSETUP_H
+#ifndef IAPPSETUP_H
+#define IAPPSETUP_H
 
 #include <QApplication>
 #include <QtCore>
@@ -44,4 +44,4 @@ protected:
     QString path(QString path, QString subdir, bool mkdir, QString debugName);
 };
 
-#endif // CAPPSETUP_H
+#endif // IAPPSETUP_H

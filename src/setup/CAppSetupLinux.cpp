@@ -35,7 +35,7 @@ void CAppSetupLinux::initQMapShack()
     prepareTranslator(resourceDir, "qt_");
     prepareTranslator(translationPath, "qmapshack_");
 
-    // create direcotries
+    // create directories
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
     IAppSetup::path(userDataPath("WaypointIcons"), 0, true, "USER DATA");
     IAppSetup::path(logDir(), 0, true, "LOG");

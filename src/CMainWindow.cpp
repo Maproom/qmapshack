@@ -301,6 +301,12 @@ QWidget * CMainWindow::getBestWidgetForParent()
         return w;
     }
 
+    // this is a workaround for unittesting
+    if(nullptr == pSelf)
+    {
+        return nullptr;
+    }
+
     w = self().getVisibleCanvas();
     if(w)
     {

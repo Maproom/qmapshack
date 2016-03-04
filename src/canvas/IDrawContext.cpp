@@ -16,7 +16,6 @@
 
 **********************************************************************************************/
 
-
 #include "canvas/IDrawContext.h"
 
 #include <QtWidgets>
@@ -28,64 +27,21 @@
 #define N_DEFAULT_ZOOM_LEVELS 31
 const qreal IDrawContext::scalesDefault[N_DEFAULT_ZOOM_LEVELS] =
 {
-    0.10
-    , 0.15
-    , 0.20
-    , 0.30
-    , 0.50
-    , 0.70
-    , 1.0
-    , 1.5
-    , 2.0
-    , 3.0
-    , 5.0
-    , 7.0
-    , 10.0
-    , 15.0
-    , 20.0
-    , 30.0
-    , 50.0
-    , 70.0
-    , 100.0
-    , 150.0
-    , 200.0
-    , 300.0
-    , 500.0
-    , 700.0
-    , 1000.0
-    , 1500.0
-    , 2000.0
-    , 3000.0
-    , 5000.0
-    , 7000.0
-    , 10000.0
-//    , 15000.0
-//    , 20000.0
-//    , 30000.0
-//    , 50000.0
-//    , 70000.0
+        0.10,  0.15,  0.20,  0.30,   0.50,   0.70,   1.0,    1.5,    2.0,    3.0,
+        5.0,   7.0,  10.0,  15.0,   20.0,   30.0,   50.0,   70.0,  100.0,  150.0,
+      200.0, 300.0, 500.0, 700.0, 1000.0, 1500.0, 2000.0, 3000.0, 5000.0, 7000.0,
+    10000.0
+    //, 15000.0, 20000.0, 30000.0, 50000.0, 70000.0
 };
 
 #define N_SQUARE_ZOOM_LEVELS 17
 const qreal IDrawContext::scalesSquare[N_SQUARE_ZOOM_LEVELS] =
 {
-    0.1492910709
-    , 0.2985821417
-    , 0.5971642834
-    , 1.1943285668
-    , 2.3886571336
-    , 4.7773142672
-    , 9.5546285344
-    , 19.1092570688
-    , 38.2185141376
-    , 76.4370282752
-    , 152.8740565504
-    , 305.7481131008
-    , 611.4962262016
-    , 1222.9924524032
-    , 2445.9849048064
-    , 4891.9698096128
-    , 9783.9396192256
+       0.1492910709,    0.2985821417,    0.5971642834,    1.1943285668,
+       2.3886571336,    4.7773142672,    9.5546285344,   19.1092570688,
+      38.2185141376,   76.4370282752,  152.8740565504,  305.7481131008,
+     611.4962262016, 1222.9924524032, 2445.9849048064, 4891.9698096128,
+    9783.9396192256
 };
 
 QPointF operator*(const QPointF& p1, const QPointF& p2)
@@ -137,25 +93,26 @@ void IDrawContext::resize(const QSize& size)
         wait();
     }
     mutex.lock(); // --------- start serialize with thread
-    viewWidth   = size.width();
-    viewHeight  = size.height();
+    viewWidth  = size.width();
+    viewHeight = size.height();
 
-    center      = QPointF(viewWidth/2.0, viewHeight/2.0);
-    bufWidth    = viewWidth  + 2 * BUFFER_BORDER;
-    bufHeight   = viewHeight + 2 * BUFFER_BORDER;
+    center     = QPointF(viewWidth/2.0, viewHeight/2.0);
+    bufWidth   = viewWidth  + 2 * BUFFER_BORDER;
+    bufHeight  = viewHeight + 2 * BUFFER_BORDER;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-QString IDrawContext::getProjection()
+QString IDrawContext::getProjection() const
 {
     if(pjsrc == nullptr)
     {
         return QString::Null();
     }
-    char * p = pj_get_def(pjsrc,0);
+
+    char *p = pj_get_def(pjsrc, 0);
     QString str(p);
     free(p);
 
@@ -172,29 +129,18 @@ void IDrawContext::setProjection(const QString& proj)
     pjsrc = pj_init_plus(proj.toLatin1());
 }
 
-CCanvas::scales_type_e IDrawContext::getScalesType() const
-{
-    return scalesType;
-}
-
 void IDrawContext::setScales(const CCanvas::scales_type_e type)
 {
     switch (type)
     {
     case CCanvas::eScalesDefault:
-        for (int i=0; i < N_DEFAULT_ZOOM_LEVELS; i++)
-        {
-            scales[i] = scalesDefault[i];
-        }
+        scales = scalesDefault;
         zoomLevels = N_DEFAULT_ZOOM_LEVELS;
         scalesType = type;
         break;
 
     case CCanvas::eScalesSquare:
-        for (int i=0; i < N_SQUARE_ZOOM_LEVELS; i++)
-        {
-            scales[i] = scalesSquare[i];
-        }
+        scales = scalesSquare;
         zoomLevels = N_SQUARE_ZOOM_LEVELS;
         scalesType = type;
         break;
@@ -204,7 +150,7 @@ void IDrawContext::setScales(const CCanvas::scales_type_e type)
     }
 }
 
-bool IDrawContext::needsRedraw()
+bool IDrawContext::needsRedraw() const
 {
     mutex.lock();
     bool res = intNeedsRedraw;
@@ -256,15 +202,8 @@ void IDrawContext::zoom(bool in, CCanvas::redraw_e& needsRedraw)
 
 void IDrawContext::zoom(int idx)
 {
-    if(idx < 0)
-    {
-        idx = 0;
-    }
-
-    if(idx >= zoomLevels)
-    {
-        idx = zoomLevels -1;
-    }
+    idx = qMax(idx, 0);
+    idx = qMin(idx, zoomLevels - 1);
 
     mutex.lock(); // --------- start serialize with thread
     if((zoomIndex != idx) || (zoomFactor.x() != scales[idx]))
@@ -279,7 +218,7 @@ void IDrawContext::zoom(int idx)
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::convertRad2M(QPointF &p)
+void IDrawContext::convertRad2M(QPointF &p) const
 {
     if(pjsrc == nullptr)
     {
@@ -296,7 +235,7 @@ void IDrawContext::convertRad2M(QPointF &p)
     bool fixWest = p.x() < (-180*DEG_TO_RAD);
     bool fixEast = p.x() > ( 180*DEG_TO_RAD);
 
-    pj_transform(pjtar,pjsrc,1,0,&p.rx(),&p.ry(),0);
+    pj_transform(pjtar, pjsrc, 1, 0, &p.rx(), &p.ry(), 0);
 
     /*
         The idea of the fix is to calculate a point
@@ -318,17 +257,17 @@ void IDrawContext::convertRad2M(QPointF &p)
     }
 }
 
-void IDrawContext::convertM2Rad(QPointF &p)
+void IDrawContext::convertM2Rad(QPointF &p) const
 {
     if(pjsrc == nullptr)
     {
         return;
     }
 
-    pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
+    pj_transform(pjsrc, pjtar, 1, 0, &p.rx(), &p.ry(), 0);
 }
 
-void IDrawContext::convertPx2Rad(QPointF &p)
+void IDrawContext::convertPx2Rad(QPointF &p) const
 {
     mutex.lock(); // --------- start serialize with thread
 
@@ -342,7 +281,7 @@ void IDrawContext::convertPx2Rad(QPointF &p)
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::convertRad2Px(QPointF &p)
+void IDrawContext::convertRad2Px(QPointF &p) const
 {
     mutex.lock(); // --------- start serialize with thread
 
@@ -355,7 +294,7 @@ void IDrawContext::convertRad2Px(QPointF &p)
     mutex.unlock(); // --------- stop serialize with thread
 }
 
-void IDrawContext::convertRad2Px(QPolygonF& poly)
+void IDrawContext::convertRad2Px(QPolygonF& poly) const
 {
     mutex.lock(); // --------- start serialize with thread
 
@@ -388,17 +327,15 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     QPointF bufferScale = scale * zoomFactor;
 
     mutex.lock(); // --------- start serialize with thread
-    // derive top left reference coordinate of map buffer
+
+    // derive references for all corners coordinate of map buffer
     ref1 = f1 + QPointF(-bufWidth/2, -bufHeight/2) * bufferScale;
-    convertM2Rad(ref1);
-    // derive top right reference coordinate of map buffer
     ref2 = f1 + QPointF( bufWidth/2, -bufHeight/2) * bufferScale;
-    convertM2Rad(ref2);
-    // derive bottom right reference coordinate of map buffer
     ref3 = f1 + QPointF( bufWidth/2,  bufHeight/2) * bufferScale;
-    convertM2Rad(ref3);
-    // derive bottom left reference coordinate of map buffer
     ref4 = f1 + QPointF(-bufWidth/2,  bufHeight/2) * bufferScale;
+    convertM2Rad(ref1);
+    convertM2Rad(ref2);
+    convertM2Rad(ref3);
     convertM2Rad(ref4);
 
     // adjust west <-> east boundaries
@@ -453,7 +390,7 @@ void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPoint
     }
     mutex.unlock(); // --------- stop serialize with thread
 
-    if((needsRedraw  & maskRedraw) && !isRunning())
+    if((needsRedraw & maskRedraw) && !isRunning())
     {
         emit sigStartThread();
         start();
@@ -465,22 +402,22 @@ void IDrawContext::run()
     mutex.lock();
     QTime t;
     t.start();
-    qDebug() << "start thread";
+    qDebug() << "start thread" << objectName();
 
     IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
     while(intNeedsRedraw)
     {
         // copy all projection information need by the
         // map render objects to buffer structure
-        currentBuffer.pjsrc         = pjsrc;
-        currentBuffer.zoomFactor    = zoomFactor;
-        currentBuffer.scale         = scale;
-        currentBuffer.ref1          = ref1;
-        currentBuffer.ref2          = ref2;
-        currentBuffer.ref3          = ref3;
-        currentBuffer.ref4          = ref4;
-        currentBuffer.focus         = focus;
-        intNeedsRedraw              = false;
+        currentBuffer.pjsrc      = pjsrc;
+        currentBuffer.zoomFactor = zoomFactor;
+        currentBuffer.scale      = scale;
+        currentBuffer.ref1       = ref1;
+        currentBuffer.ref2       = ref2;
+        currentBuffer.ref3       = ref3;
+        currentBuffer.ref4       = ref4;
+        currentBuffer.focus      = focus;
+        intNeedsRedraw           = false;
 
         mutex.unlock();
 
@@ -494,7 +431,8 @@ void IDrawContext::run()
     }
     // ----- switch buffer ------
     bufIndex = !bufIndex;
-    qDebug() << objectName() << "stop thread" << t.elapsed();
+    qDebug() << "stop thread" << objectName() << "after" << t.elapsed() << "ms";
+
     mutex.unlock();
 }
 

@@ -42,26 +42,19 @@ public:
     {
         /// @note: all coordinate values are long/lat WGS84 [rad]
 
-        /// the canvas buffer
-        QImage image;
-        /// the used projection
-        projPJ pjsrc;
-        /// the zoomfactor used to draw the canvas
-        QPointF zoomFactor {1.0,1.0};
-        /// the number of zoom levels
-        int zoomLevels;
-        /// the scale of the global viewport
-        QPointF scale {1.0,1.0};
-        /// top left corner
-        QPointF ref1;
-        /// top right corner
-        QPointF ref2;
-        /// bottom right corner
-        QPointF ref3;
-        /// bottom left corner
-        QPointF ref4;
-        /// point of focus
-        QPointF focus;
+        QImage image; //< the canvas buffer
+        projPJ pjsrc; //< the used projection
+
+        int zoomLevels; //< the number of zoom levels
+
+        QPointF zoomFactor {1.0,1.0}; //< the zoomfactor used to draw the canvas
+        QPointF scale {1.0,1.0}; //< the scale of the global viewport
+
+        QPointF ref1;  //< top left corner
+        QPointF ref2;  //< top right corner
+        QPointF ref3;  //< bottom right corner
+        QPointF ref4;  //< bottom left corner
+        QPointF focus; //< point of focus
     };
 
     /**
@@ -87,30 +80,30 @@ public:
        @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
-    void convertRad2M(QPointF &p);
+    void convertRad2M(QPointF &p) const;
     /**
        @brief Convert a geo coordinate of the currently used projection/datum to lon/lat WGS84
        @note  The unit is dependent on the currently used projection and must not necessarily be meter
        @param p             the point to convert
      */
-    void convertM2Rad(QPointF &p);
+    void convertM2Rad(QPointF &p) const;
     /**
        @brief Convert a pixel coordinate from the viewport to a geo coordinate in [rad]
        @param p             the point to convert
      */
-    void convertPx2Rad(QPointF& p);
+    void convertPx2Rad(QPointF& p) const;
     /**
        @brief Convert a geo coordinate in [rad] to a pixel coordinate of the viewport
        @param p             the point to convert
      */
-    void convertRad2Px(QPointF& p);
-    void convertRad2Px(QPolygonF& poly);
+    void convertRad2Px(QPointF& p) const;
+    void convertRad2Px(QPolygonF& poly) const;
 
     /**
        @brief Check if the internal needs redraw flag is set
        @return intNeedsRedraw is returned
      */
-    bool needsRedraw();
+    bool needsRedraw() const;
 
     /**
         @brief Draw the active map buffer to the painter
@@ -124,8 +117,11 @@ public:
        @brief Get the projection string of this map object
        @return A proj4 string.
      */
-    QString getProjection();
-    CCanvas::scales_type_e getScalesType() const;
+    QString getProjection() const;
+    CCanvas::scales_type_e getScalesType() const
+    {
+        return scalesType;
+    }
 
     /**
        @brief Set the projection of the draw context
@@ -170,7 +166,7 @@ protected:
     static const qreal scalesSquare[];
 
     /// the mutex to serialize access
-    QMutex mutex;
+    mutable QMutex mutex;
 
     /// internal needs redraw flag
     bool intNeedsRedraw;
@@ -183,44 +179,39 @@ protected:
     buffer_t buffer[2];
     /// the main threads currently used map canvas buffer
     bool bufIndex = false;
-    /// buffer width [px]
-    int bufWidth = 100;
-    /// buffer height [px]
-    int bufHeight = 100;
-    /// the viewports width [px]
-    int viewWidth = 100;
-    /// the viewports height [px]
-    int viewHeight = 100;
-    /// the center of the viewport
-    QPointF center;
 
-    /// source projection should be the same for all maps
-    projPJ pjsrc;
-    /// target projection is always WGS84
-    projPJ pjtar;
+    int bufWidth   = 100; //< buffer width [px]
+    int bufHeight  = 100; //< buffer height [px]
+    int viewWidth  = 100; //< the viewports width [px]
+    int viewHeight = 100; //< the viewports height [px]
+
+    QPointF center; /// the center of the viewport
+
+    projPJ pjsrc; //< source projection should be the same for all maps
+    projPJ pjtar; //< target projection is always WGS84
+
+    /// index into scales table
+    int zoomIndex = 0;
+
+private:
     /// the used scales and the type of scale levels
-    qreal scales[CANVAS_MAX_ZOOM_LEVELS];
+    const qreal *scales = nullptr;
     CCanvas::scales_type_e scalesType;
     /// the number of zoom levels
     int zoomLevels = 0;
 
     /// the basic scale of the map canvas
     QPointF scale {1.0,-1.0};
-    /// index into scales table
-    int zoomIndex = 0;
+
     /// the actual used scaleFactor
     QPointF zoomFactor;
 
-    /// the next point of focus that will be displayed right in the middle of the viewport
-    QPointF focus;
-    /// top left corner of next buffer
-    QPointF ref1;
-    /// top right corner of next buffer
-    QPointF ref2;
-    /// bottom right corner of next buffer
-    QPointF ref3;
-    /// bottom left corner of next buffer
-    QPointF ref4;
+    QPointF focus; //< the next point of focus that will be displayed right in the middle of the viewport
+
+    QPointF ref1; //< top left corner of next buffer
+    QPointF ref2; //< top right corner of next buffer
+    QPointF ref3; //< bottom right corner of next buffer
+    QPointF ref4; //< bottom left corner of next buffer
 };
 
 extern QPointF operator*(const QPointF& p1, const QPointF& p2);

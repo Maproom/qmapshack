@@ -25,13 +25,15 @@
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
 #include "map/IMap.h"
+#include "setup/IAppSetup.h"
 
 #include <QtGui>
 #include <QtWidgets>
 
 
+
 QList<CMapDraw*> CMapDraw::maps;
-QString CMapDraw::cachePath = QDir::home().absoluteFilePath(".QMapShack/");
+QString CMapDraw::cachePath = IAppSetup::getPlatformInstance()->defaultCachePath();
 QStringList CMapDraw::mapPaths;
 QStringList CMapDraw::supportedFormats = QString("*.vrt|*.jnx|*.img|*.rmap|*.wmts|*.tms|*.gemf").split('|');
 

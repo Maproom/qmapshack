@@ -47,7 +47,6 @@ class test_QMapShack : public QObject
 
 
     /// helper functions
-    QString getAttribute(const QDomNode &node, const QString &name);
     QString getTempFileName(const QString &ext);
 
     /// CSlfReader
@@ -63,12 +62,16 @@ class test_QMapShack : public QObject
 
     void readExtGarminTPX1(const QString &file, const QString &ns);
 
+    // CQmsProject
+    void readQMSFile_1_6_0();
+
 private slots:
     void initTestCase();
 
     void _readValidSLFFile()         { TCWRAPPER( readValidSLFFile()         ) }
     void _readNonExistingSLFFile()   { TCWRAPPER( readNonExistingSLFFile()   ) }
     void _readWriteGPXFile()         { TCWRAPPER( readWriteGPXFile()         ) }
+    void _readQMSFile_1_6_0()        { TCWRAPPER( readQMSFile_1_6_0()        ) }
     void _readExtGarminTPX1_gpxtpx() { TCWRAPPER( readExtGarminTPX1_gpxtpx() ) }
     void _readExtGarminTPX1_tp1()    { TCWRAPPER( readExtGarminTPX1_tp1()    ) }
 };

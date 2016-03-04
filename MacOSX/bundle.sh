@@ -190,6 +190,7 @@ function copyExternalFiles {
     # at least gdalbuildvrt is used
     cp $GDAL_DIR/bin/*  $BUILD_BUNDLE_RES_BIN_DIR
     cp $PROJ_DIR/bin/proj  $BUILD_BUNDLE_RES_BIN_DIR
+    cp $ROUTINO_LIB_LIB_DIR/planetsplitter $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 

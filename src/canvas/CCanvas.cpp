@@ -53,8 +53,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     if(name.isEmpty())
     {
-        int count = 1;
-        while(1)
+        for(int count = 1; ; ++count)
         {
             QString name = tr("View %1").arg(count);
             if(nullptr == CMainWindow::self().findChild<CCanvas*>(name))
@@ -62,7 +61,6 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
                 setObjectName(name);
                 break;
             }
-            count++;
         }
     }
     else
@@ -130,7 +128,7 @@ CCanvas::~CCanvas()
     saveSizeTrackProfile();
 }
 
-void CCanvas::setOverrideCursor(const QCursor& cursor, const QString& src)
+void CCanvas::setOverrideCursor(const QCursor &cursor, const QString&)
 {
 //    qDebug() << "setOverrideCursor" << src;
     QApplication::setOverrideCursor(cursor);
@@ -461,9 +459,8 @@ void CCanvas::enterEvent(QEvent * e)
 }
 
 
-void CCanvas::leaveEvent(QEvent * e)
+void CCanvas::leaveEvent(QEvent *)
 {
-    Q_UNUSED(e);
     // bad hack to stop bad number of override cursors.
     while(QApplication::overrideCursor())
     {
@@ -490,19 +487,19 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     /* move the map with keys up, down, left and right */
     case Qt::Key_Up:
-        moveMap(QPointF(         0,  height()/4));
+        moveMap(QPointF(0,  height()/4));
         break;
 
     case Qt::Key_Down:
-        moveMap(QPointF(         0, -height()/4));
+        moveMap(QPointF(0, -height()/4));
         break;
 
     case Qt::Key_Left:
-        moveMap(QPointF( width()/4,           0));
+        moveMap(QPointF( width()/4, 0));
         break;
 
     case Qt::Key_Right:
-        moveMap(QPointF(-width()/4,           0));
+        moveMap(QPointF(-width()/4, 0));
         break;
 
     case Qt::Key_Escape:
@@ -763,17 +760,17 @@ CCanvas::scales_type_e CCanvas::getScalesType()
 }
 
 
-qreal CCanvas::getElevationAt(const QPointF& pos)
+qreal CCanvas::getElevationAt(const QPointF& pos) const
 {
     return dem->getElevationAt(pos);
 }
 
-void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
+void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele) const
 {
     return dem->getElevationAt(pos, ele);
 }
 
-void CCanvas::getElevationAt(SGisLine& line)
+void CCanvas::getElevationAt(SGisLine& line) const
 {
     return dem->getElevationAt(line);
 }
@@ -872,16 +869,9 @@ void CCanvas::showProfileAsWindow(bool yes)
 
 void CCanvas::showProfile(bool yes)
 {
-    if(plotTrackProfile)
+    if(nullptr != plotTrackProfile)
     {
-        if(yes)
-        {
-            plotTrackProfile->show();
-        }
-        else
-        {
-            plotTrackProfile->hide();
-        }
+        plotTrackProfile->setVisible(yes);
     }
 }
 

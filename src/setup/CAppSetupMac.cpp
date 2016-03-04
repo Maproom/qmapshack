@@ -22,12 +22,40 @@ static QString relTranslationDir = "Resources/translations"; // app
 static QString relRoutinoDir     = "Resources/routino"; // app
 static QString relGdalDir        = "Resources/gdal"; // app
 static QString relProjDir        = "Resources/proj"; // app
+static QString relBinDir         = "Resources/bin"; // app
 
 static QString relLogDir         = "Library/Logs"; // home
 
 
+void CAppSetupMac::extendPath()
+{
+    QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+    QStringList envlist = env.toStringList();
+    QString value = "";
+    for(int i=0; i < envlist.size(); i++)
+    {
+        QString entry = envlist[i];
+        if(entry.startsWith("PATH="))
+        {
+            int index = entry.indexOf("=");
+
+            if(index != -1)
+            {
+                value = entry.right(entry.length() - (index+1)) + ":";
+            }
+            break;
+        }
+    }
+    QString binDir = getApplicationDir(relBinDir).absolutePath();
+    qDebug() << "BIN" << binDir;
+    value += binDir;
+    setenv("PATH", value.toLatin1().constData(), true);
+}
+
+
 void CAppSetupMac::initQMapShack()
 {
+    extendPath();
     // setup gdal
     QString gdalDir = getApplicationDir(relGdalDir).absolutePath();
     QString projDir = getApplicationDir(relProjDir).absolutePath();

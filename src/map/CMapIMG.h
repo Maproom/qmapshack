@@ -119,7 +119,7 @@ public:
     };
 
     CMapIMG(const QString &filename, CMapDraw *parent);
-    virtual ~CMapIMG();
+    virtual ~CMapIMG() = default;
 
     void draw(IDrawContext::buffer_t& buf) override;
 
@@ -159,7 +159,7 @@ private:
     };
 
 
-    quint8 scale2bits(const QPointF &scale);
+    static quint8 scale2bits(const QPointF &scale);
     void setupTyp();
     void readBasics();
     void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);
@@ -391,37 +391,6 @@ private:
         quint8 net2_addr_shift;
         quint32 net3_offset;     ///< 0x00000027 .. 0x0000002A
         quint32 net3_length;     ///< 0x0000002B .. 0x0000002E
-    };
-
-    struct hdr_dem_t : public hdr_subfile_part_t
-    {
-        quint32 dem_flags;       ///< 0x00000015 .. 0x00000018
-        quint16 levels;          ///< 0x00000019 .. 0x0000001A
-        quint8 byte0x0000001B_0x0000001E[4];
-        quint16 blk3_size;       ///< 0x0000001f .. 0x00000020
-        quint32 blk3_offset;     ///< 0x00000021 .. 0x00000024
-    };
-
-    struct dem_level_t
-    {
-        quint16 index;
-        quint32 nPixelPerTileX;
-        quint32 nPixelPerTileY;
-        quint32 Unknown1;
-        quint32 Unknown2;
-        quint16 Unknown3;
-        quint32 nTilesX;
-        quint32 nTilesY;
-        quint16 format;
-        quint16 blk1_size;
-        quint32 blk1_offset;
-        quint32 blk2_offset;
-        quint32 westernBound;
-        quint32 northernBound;
-        quint32 PixelPerMeterX;
-        quint32 PixelPerMeterY;
-        quint16 minHeight;
-        quint16 maxHeight;
     };
 
 #define TRE_MAP_LEVEL(r) ((r)->zoom & 0x0f)

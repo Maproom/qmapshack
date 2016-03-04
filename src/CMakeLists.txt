@@ -75,8 +75,6 @@ set( SRCS
         helpers/CLinksDialog.cpp
         helpers/CPhotoViewer.cpp
         helpers/CProgressDialog.cpp
-        setup/CCommandProcessor.cpp
-        setup/IAppSetup.cpp
         helpers/CDraw.cpp
         helpers/CValue.cpp
         helpers/CLimit.cpp
@@ -282,10 +280,12 @@ set( SRCS
         tool/CImportDatabase.cpp
         tool/CRoutinoDatabaseBuilder.cpp
         print/CPrintDialog.cpp
-        setup/CLogHandler.cpp
+        setup/IAppSetup.cpp
         setup/CAppSetupLinux.cpp
         setup/CAppSetupWin.cpp
         setup/CAppSetupMac.cpp
+        setup/CCommandProcessor.cpp
+        setup/CLogHandler.cpp
 )
 
 if(UNIX AND NOT APPLE)
@@ -336,9 +336,6 @@ set( HDRS
         helpers/CLinksDialog.h
         helpers/CPhotoViewer.h
         helpers/CProgressDialog.h
-        setup/CAppOpts.h
-        setup/CCommandProcessor.h
-        setup/IAppSetup.h
         helpers/CDraw.h
         helpers/CValue.h
         helpers/CLimit.h
@@ -544,10 +541,13 @@ set( HDRS
         tool/CImportDatabase.h
         tool/CRoutinoDatabaseBuilder.h
         print/CPrintDialog.h
-        setup/CLogHandler.h
+        setup/CAppOpts.h
         setup/CAppSetupLinux.h
         setup/CAppSetupWin.h
         setup/CAppSetupMac.h
+        setup/CCommandProcessor.h
+        setup/CLogHandler.h
+        setup/IAppSetup.h
 )
 
 if(UNIX AND NOT APPLE)

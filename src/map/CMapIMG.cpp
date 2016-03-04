@@ -81,12 +81,7 @@ static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewp
         ref.setHeight(0.00001);
     }
 
-    if(viewport.intersects(ref))
-    {
-        return false;
-    }
-
-    return true;
+    return !viewport.intersects(ref);
 }
 
 static inline QImage img2line(const QImage &img, int width)
@@ -116,7 +111,7 @@ static inline QImage img2line(const QImage &img, int width)
     return newImage;
 }
 
-inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
+static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 {
     foreach(const QRectF &rectPoi, rectPois)
     {
@@ -153,10 +148,6 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
 
 
     isActivated = true;
-}
-
-CMapIMG::~CMapIMG()
-{
 }
 
 void CMapIMG::setupTyp()
@@ -1346,13 +1337,13 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
         QByteArray rgndata;
         readFile(file, subfile.parts["RGN"].offset, subfile.parts["RGN"].size, rgndata);
 
-        //         qDebug() << "rgn range" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
+        // qDebug() << "rgn range" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
 
         const QVector<subdiv_desc_t>& subdivs = subfile.subdivs;
         // collect polylines
         foreach(const subdiv_desc_t &subdiv, subdivs)
         {
-            //             if(subdiv.level == level) qDebug() << "subdiv:" << subdiv.level << level <<  subdiv.area << viewport << subdiv.area.intersects(viewport);
+            // if(subdiv.level == level) qDebug() << "subdiv:" << subdiv.level << level <<  subdiv.area << viewport << subdiv.area.intersects(viewport);
             if(subdiv.level != level || !subdiv.area.intersects(viewport))
             {
                 continue;
@@ -1689,16 +1680,14 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
         p.setPen(polygonProperties[type].pen);
         p.setBrush(CMainWindow::self().isNight() ? polygonProperties[type].brushNight : polygonProperties[type].brushDay);
 
-        polytype_t::iterator item = lines.begin();
-        while (item != lines.end())
+        for(CGarminPolygon &line : lines)
         {
-            if(item->type != type)
+            if(line.type != type)
             {
-                ++item;
                 continue;
             }
 
-            QPolygonF& poly = item->pixel;
+            QPolygonF &poly = line.pixel;
 
             map->convertRad2Px(poly);
 
@@ -1710,7 +1699,6 @@ void CMapIMG::drawPolygons(QPainter& p, polytype_t& lines)
             {
                 qDebug() << "unknown polygon" << hex << type;
             }
-            ++item;
         }
     }
 }
@@ -1727,12 +1715,13 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
 
     QVector<qreal> lengths;
     lengths.reserve(100);
-
+/*
     int pixmapCount = 0;
     int borderCount = 0;
     int normalCount = 0;
     int imageCount = 0;
-//    int deletedCount = 0;
+    int deletedCount = 0;
+*/
 
     QHash<quint32, QList<quint32> > dict;
     for(int i = 0; i < lines.count(); ++i)
@@ -1762,7 +1751,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
             {
                 CGarminPolygon &item = lines[*it];
                 {
-                    pixmapCount++;
+                    //pixmapCount++;
 
                     QPolygonF& poly = item.pixel;
                     int size        = poly.size();
@@ -1832,7 +1821,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                         p.translate(p1);
                         p.rotate(angle);
                         p.drawImage(0,-h/2, img2line(pixmap, segLength));
-                        imageCount++;
+                        //imageCount++;
 
                         p.restore();
                         curLength += segLength;
@@ -1850,7 +1839,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                 QList<quint32>::const_iterator it = dict[type].constBegin();
                 for(; it != dict[type].constEnd(); ++it)
                 {
-                    borderCount++;
+                    //borderCount++;
                     drawLine(p, lines[*it], property, metrics, font, scale);
                 }
                 // draw foreground line in a second run for nicer borders
@@ -1862,7 +1851,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
                 QList<quint32>::const_iterator it = dict[type].constBegin();
                 for(; it != dict[type].constEnd(); ++it)
                 {
-                    normalCount++;
+                    //normalCount++;
                     drawLine(p, lines[*it], property, metrics, font, scale);
                 }
             }
@@ -2067,54 +2056,50 @@ void CMapIMG::drawPois(QPainter& p, pointtype_t& pts, QVector<QRectF> &rectPois)
 {
     CGarminTyp::label_type_e labelType = CGarminTyp::eStandard;
 
-    pointtype_t::iterator pt = pts.begin();
-    while(pt != pts.end())
+    for(CGarminPoint &pt : pts)
     {
-        map->convertRad2Px(pt->pos);
+        map->convertRad2Px(pt.pos);
 
-        const QImage&  icon = CMainWindow::self().isNight() ? pointProperties[pt->type].imgNight : pointProperties[pt->type].imgDay;
+        const QImage&  icon = CMainWindow::self().isNight() ? pointProperties[pt.type].imgNight : pointProperties[pt.type].imgDay;
         const QSizeF&  size = icon.size();
 
-        if(isCluttered(rectPois, QRectF(pt->pos, size)))
+        if(isCluttered(rectPois, QRectF(pt.pos, size)))
         {
             if(size.width() <= 8 && size.height() <= 8)
             {
-                p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
+                p.drawImage(pt.pos.x() - (size.width()/2), pt.pos.y() - (size.height()/2), icon);
             }
             else
             {
-                p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
+                p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_blue.png"));
             }
-            ++pt;
             continue;
         }
 
         labelType = CGarminTyp::eStandard;
-        if(pointProperties.contains(pt->type))
+        if(pointProperties.contains(pt.type))
         {
-            p.drawImage(pt->pos.x() - (size.width()/2), pt->pos.y() - (size.height()/2), icon);
-            labelType = pointProperties[pt->type].labelType;
+            p.drawImage(pt.pos.x() - (size.width()/2), pt.pos.y() - (size.height()/2), icon);
+            labelType = pointProperties[pt.type].labelType;
         }
         else
         {
-            p.drawPixmap(pt->pos.x() - 4, pt->pos.y() - 4, QPixmap(":/icons/8x8/bullet_red.png"));
+            p.drawPixmap(pt.pos.x() - 4, pt.pos.y() - 4, QPixmap(":/icons/8x8/bullet_red.png"));
         }
 
         if(CMainWindow::self().isPOIText())
         {
             // calculate bounding rectangle with a border of 2 px
-            QRect rect = fm.boundingRect(pt->labels.join(" "));
+            QRect rect = fm.boundingRect(pt.labels.join(" "));
             rect.adjust(0,0,4,4);
-            rect.moveCenter(pt->pos.toPoint());
+            rect.moveCenter(pt.pos.toPoint());
 
             // if no intersection was found, add label to list
             if(!intersectsWithExistingLabel(rect))
             {
-                addLabel(*pt, rect, labelType);
+                addLabel(pt, rect, labelType);
             }
         }
-
-        ++pt;
     }
 }
 

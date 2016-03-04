@@ -1,4 +1,4 @@
-﻿/**********************************************************************************************
+/**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
@@ -21,7 +21,6 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -249,7 +248,7 @@ static inline bool isInRange(const T &val, const T &rangeStart, const T &rangeEn
 IGisItem * CGisItemTrk::createClone()
 {
     int idx = -1;
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);
@@ -1022,7 +1021,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& current)
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(nullptr == project)
     {
         return;
@@ -1329,18 +1328,8 @@ void CGisItemTrk::reverse()
     trk1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
-void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
+void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 {
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
-    if(nullptr == project)
-    {
-        return;
-    }
-
-    CCombineTrk dlg(*this, keysPreSel, *project, CMainWindow::getBestWidgetForParent());
-    dlg.exec();
-
-    QList<IGisItem::key_t> keys = dlg.getTrackKeys();
     if(keys.isEmpty())
     {
         return;
@@ -1368,9 +1357,10 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keysPreSel)
     trk1->history.events.clear();
 
     // copy the segments of all tracks to new track
+    CGisWidget& gis = CGisWidget::self();
     foreach(const IGisItem::key_t &key, keys)
     {
-        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(project->getItemByKey(key));
+        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk2)
         {
             continue;

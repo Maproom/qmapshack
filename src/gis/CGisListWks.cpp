@@ -42,7 +42,6 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
-#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
@@ -1043,14 +1042,23 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
-                actionCombineTrk->setEnabled(true); // might be disabled by menuItem
+            {
+                IGisProject * project = gisItem->getParentProject();
+                if(project != nullptr)
+                {
+                    actionCombineTrk->setEnabled(project->getItemCountByType(IGisItem::eTypeTrk) > 1);
+                }
+                else
+                {
+                    actionCombineTrk->setEnabled(false);
+                }
                 actionRangeTrk->setDisabled(isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
                 actionEditTrk->setDisabled(isOnDevice);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;
-
+            }
             case IGisItem::eTypeWpt:
                 actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
                 actionMoveWpt->setDisabled(isOnDevice);
@@ -1378,8 +1386,15 @@ void CGisListWks::slotCombineTrk()
     }
 
     if(!keys.isEmpty())
-    {
-        CGisWidget::self().combineTrkByKey(keys);
+    {        
+        if(keys.size() == 1)
+        {
+            CGisWidget::self().combineTrkByKey(keys.first());
+        }
+        else
+        {
+            CGisWidget::self().combineTrkByKey(keys, keys);
+        }
     }
 }
 
@@ -1773,8 +1788,10 @@ void CGisListWks::slotRteFromWpt()
         }
     }
 
-    CCreateRouteFromWpt dlg(keys, this);
-    dlg.exec();
+    if(!keys.isEmpty())
+    {
+        CGisWidget::self().makeRteFromWpt(keys);
+    }
 }
 
 void CGisListWks::slotSyncDB()

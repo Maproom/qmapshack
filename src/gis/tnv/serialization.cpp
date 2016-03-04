@@ -213,7 +213,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     }
 
     QDir dir(QFileInfo(filename).absoluteDir());
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
 
     QTextStream out(&file);
     out.setCodec(QTextCodec::codecForName("UTF-8"));

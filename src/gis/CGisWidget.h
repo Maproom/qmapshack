@@ -322,9 +322,22 @@ public:
 
     void reverseTrkByKey(const IGisItem::key_t &key);
 
-    void combineTrkByKey(const IGisItem::key_t &key);
+    /**
+       @brief Combine all tracks in a given track's project
 
-    void combineTrkByKey(const QList<IGisItem::key_t>& keys);
+       This will collect all tracks in a project and pass them
+       to the track combine dialog.
+
+       @param keyTrk    the key of the first track
+     */
+    void combineTrkByKey(const IGisItem::key_t &keyTrk);
+
+    /**
+       @brief Combine al tracks in the given list of keys.
+
+       @param keys  a list of GIS item keys
+     */
+    void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
 
     void rangeTrkByKey(const IGisItem::key_t &key);
 
@@ -335,6 +348,8 @@ public:
     void resetRteByKey(const IGisItem::key_t& key);
 
     void editAreaByKey(const IGisItem::key_t &key);
+
+    void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
 
     /**
        @brief Select a project via dialog

@@ -20,6 +20,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
+#include "gis/prj/IGisProject.h"
 #include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 
@@ -40,6 +41,12 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     toolEdit->setDisabled(isOnDevice);
     toolReverse->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
+
+    IGisProject * project = trk->getParentProject();
+    if(project != nullptr)
+    {
+        toolCombine->setEnabled(project->getItemCountByType(IGisItem::eTypeTrk) > 1);
+    }
 
     anchor = trk->getPointCloseBy(point);
     if((anchor - point).manhattanLength() > 50)

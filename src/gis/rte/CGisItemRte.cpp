@@ -152,7 +152,7 @@ CGisItemRte::~CGisItemRte()
 IGisItem * CGisItemRte::createClone()
 {
     int idx = -1;
-    IGisProject * project = dynamic_cast<IGisProject*>(parent());
+    IGisProject * project = getParentProject();
     if(project)
     {
         idx = project->indexOfChild(this);

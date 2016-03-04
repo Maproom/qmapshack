@@ -29,8 +29,10 @@
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
+#include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
@@ -643,14 +645,43 @@ void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::combineTrkByKey(const IGisItem::key_t& key)
+void CGisWidget::combineTrkByKey(const IGisItem::key_t& keyTrk)
 {
+    QMutexLocker lock(&IGisItem::mutexItems);
+
     QList<IGisItem::key_t> keys;
-    keys << key;
-    combineTrkByKey(keys);
+    IGisItem * item = dynamic_cast<IGisItem*>(getItemByKey(keyTrk));
+    if(item == nullptr)
+    {
+        return;
+    }
+
+    keys << keyTrk;
+
+    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    if(project == nullptr)
+    {
+        return;
+    }
+
+    const int N = project->childCount();
+    for(int i = 0; i < N; i++)
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(project->child(i));
+        if(trk != nullptr)
+        {
+            const IGisItem::key_t& key = trk->getKey();
+            if(key != keyTrk)
+            {
+                keys << key;
+            }
+        }
+    }
+
+    combineTrkByKey(keys, {keyTrk});
 }
 
-void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
+void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel)
 {
     if(keys.isEmpty())
     {
@@ -659,11 +690,8 @@ void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys)
 
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(keys.first()));
-    if(trk)
-    {
-        trk->combine(keys);
-    }
+    CCombineTrk dlg(keys, keysPreSel, this);
+    dlg.exec();
 
     emit sigChanged();
 }
@@ -764,6 +792,14 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
             canvas->setMouseEditArea(*area);
         }
     }
+}
+
+void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CCreateRouteFromWpt dlg(keys, this);
+    dlg.exec();
 }
 
 void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)

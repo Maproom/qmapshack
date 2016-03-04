@@ -77,6 +77,7 @@ function releaseRoutino {
     cp $ROUTINO_SRC_DIR/xml/routino-profiles.xml      $ROUTINO_LIB_XML_DIR
     cp $ROUTINO_SRC_DIR/xml/routino-tagging.xml       $ROUTINO_LIB_XML_DIR
     cp $ROUTINO_SRC_DIR/xml/routino-translations.xml  $ROUTINO_LIB_XML_DIR
+    cp $ROUTINO_SRC_DIR/src/planetsplitter            $ROUTINO_LIB_LIB_DIR
     
     cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino
     cp $ROUTINO_LIB_LIB_DIR/libroutino.so             $ROUTINO_LIB_LIB_DIR/routino.so

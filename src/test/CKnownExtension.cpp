@@ -21,7 +21,6 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
-#include "gis/wpt/CGisItemWpt.h"
 
 static QStringList GarminTPX1Exts = {"atemp", "wtemp", "depth", "hr", "cad"};
 

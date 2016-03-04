@@ -21,10 +21,10 @@
 
 #include "test/test_QMapShack.h"
 
-#include "gis/ovl/CGisItemOvlArea.h"
-#include "gis/rte/CGisItemRte.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -121,7 +121,7 @@ static QHash<QString, expectedArea> getExpectedAreas(const QDomNode &exp)
     {
         const QDomNode &node = ovlList.item(i);
 
-        expectedArea ovl;;
+        expectedArea ovl;
         ovl.name     = getAttribute(node, "name");
         ovl.colorIdx = getAttribute(node, "colorIdx").toInt();
         ovl.ptCount  = getAttribute(node, "pointcount").toInt();

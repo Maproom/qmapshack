@@ -21,16 +21,15 @@
 
 #include "test/test_QMapShack.h"
 
+#include "gis/gpx/CGpxProject.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CAppSetup.h"
 #include "helpers/CCommandProcessor.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
-
-#include "gis/trk/CKnownExtension.h"
-
-#include "gis/prj/IGisProject.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
 
 struct expectedWaypoint
 {
@@ -48,6 +47,32 @@ struct expectedTrack
 
 CAppOpts *qlOpts;
 QString testInput;
+
+CGpxProject* test_QMapShack::readGpxFile(const QString &file, bool valid)
+{
+    // this does not read anything, a bare CSlfProject is created
+    CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
+
+    bool hadExc = false;
+    try
+    {
+        proj->blockUpdateItems(true);
+        CGpxProject::loadGpx(file, proj);
+        proj->blockUpdateItems(false);
+    }
+    catch(QString &errormsg)
+    {
+        SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
+        hadExc = true;
+    }
+
+    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown")
+    SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
+
+    return proj;
+}
+
+
 
 void test_QMapShack::initTestCase()
 {

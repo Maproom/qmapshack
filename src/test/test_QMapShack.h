@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015-2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,12 +19,15 @@
 #include <QTest>
 class IGisProject;
 class QDomNode;
+class CGpxProject;
 
 extern QString testInput;
 
-#define SUBVERIFY(EXPR, MSG) \
-    { if(!(EXPR)) { throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); } \
-    }
+#define SUBVERIFY(EXPR, MSG) { \
+        if(!(EXPR)) { \
+            throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); \
+        } \
+}
 
 #define VERIFY_EQUAL(EXP, ACT) \
     SUBVERIFY( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
@@ -40,6 +43,8 @@ class test_QMapShack : public QObject
 
     void verify(const QString &expectFile, const IGisProject &proj);
 
+    static CGpxProject* readGpxFile(const QString &file, bool valid);
+
 
     /// helper functions
     QString getAttribute(const QDomNode &node, const QString &name);
@@ -52,10 +57,18 @@ class test_QMapShack : public QObject
     // CGpxProject
     void readWriteGPXFile();
 
+    // CKnownExtension
+    void readExtGarminTPX1_tp1();
+    void readExtGarminTPX1_gpxtpx();
+
+    void readExtGarminTPX1(const QString &file, const QString &ns);
+
 private slots:
     void initTestCase();
 
-    void _readValidSLFFile()       { TCWRAPPER( readValidSLFFile()       ) }
-    void _readNonExistingSLFFile() { TCWRAPPER( readNonExistingSLFFile() ) }
-    void _readWriteGPXFile()       { TCWRAPPER( readWriteGPXFile()       ) }
+    void _readValidSLFFile()         { TCWRAPPER( readValidSLFFile()         ) }
+    void _readNonExistingSLFFile()   { TCWRAPPER( readNonExistingSLFFile()   ) }
+    void _readWriteGPXFile()         { TCWRAPPER( readWriteGPXFile()         ) }
+    void _readExtGarminTPX1_gpxtpx() { TCWRAPPER( readExtGarminTPX1_gpxtpx() ) }
+    void _readExtGarminTPX1_tp1()    { TCWRAPPER( readExtGarminTPX1_tp1()    ) }
 };

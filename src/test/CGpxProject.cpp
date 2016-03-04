@@ -24,30 +24,6 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 
-static CGpxProject* readGpxFile(const QString &file, bool valid)
-{
-    // this does not read anything, a bare CSlfProject is created
-    CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
-
-    bool hadExc = false;
-    try
-    {
-        proj->blockUpdateItems(true);
-        CGpxProject::loadGpx(file, proj);
-        proj->blockUpdateItems(false);
-    }
-    catch(QString &errormsg)
-    {
-        SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
-        hadExc = true;
-    }
-
-    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown")
-    SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
-
-    return proj;
-}
-
 void test_QMapShack::readWriteGPXFile()
 {
     // step 1: read .gpx file

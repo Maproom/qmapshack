@@ -59,6 +59,7 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
     mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
+    mkdir $BUILD_BUNDLE_RES_BIN_DIR
     cp $BUILD_BIN_DIR/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
@@ -172,16 +173,23 @@ function copyAdditionalLibraries {
 }
 
 function copyExternalFiles {
-    cp $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
     cp $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
-    
+    cp $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
+
     cp $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
     cp $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
     
     cp $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+
+    # at least gdalbuildvrt is used
+    cp $GDAL_DIR/bin/*  $BUILD_BUNDLE_RES_BIN_DIR
+    cp $PROJ_DIR/bin/proj  $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 

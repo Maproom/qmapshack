@@ -32,11 +32,6 @@ CFilterNewDate::CFilterNewDate(CGisItemTrk &trk, QWidget *parent)
     connect(toolApply, &QToolButton::clicked, this, &CFilterNewDate::slotApply);
 }
 
-CFilterNewDate::~CFilterNewDate()
-{
-}
-
-
 void CFilterNewDate::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterNewDate");

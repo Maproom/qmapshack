@@ -30,10 +30,6 @@ CFilterInvalid::CFilterInvalid(CGisItemTrk &trk, QWidget *parent)
     connect(toolApply, &QToolButton::clicked, this, &CFilterInvalid::slotApply);
 }
 
-CFilterInvalid::~CFilterInvalid()
-{
-}
-
 void CFilterInvalid::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInvalid");

@@ -29,7 +29,7 @@ class CFilterDelete : public QWidget, private Ui::IFilterDelete
     Q_OBJECT
 public:
     CFilterDelete(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterDelete();
+    virtual ~CFilterDelete() = default;
 
 private slots:
     void slotApply();

@@ -29,7 +29,7 @@ class CFilterInvalid : public QWidget, private Ui::IFilterInvalid
     Q_OBJECT
 public:
     CFilterInvalid(CGisItemTrk& trk, QWidget *parent);
-    virtual ~CFilterInvalid();
+    virtual ~CFilterInvalid() = default;
 
 private slots:
     void slotApply();

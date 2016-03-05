@@ -11,12 +11,12 @@
     <tracks>
         <track name="[no name]" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764">
             <colorSources>
-                <colorSource name="::ql:slope"                              />
-                <colorSource name="::ql:speed"                              />
-                <colorSource name="::ql:ele"                                />
-                <colorSource name="::ql:progress"                           />
-                <colorSource name="speed"                                   />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"                              />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"                              />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"                                />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress"                           />
+                <colorSource known="true" everypoint="true"  derived="false" name="speed"                                   />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
             </colorSources>
         </track>
     </tracks>

@@ -96,14 +96,19 @@ static QHash<QString, expectedTrack> getExpectedTracks(const QDomNode &exp)
         trk.ptCount  = getAttribute(node, "pointcount").toInt();
         trk.colorIdx = getAttribute(node, "colorIdx"  ).toInt();
 
-        QStringList colorSources;
+        QHash<QString, expectedExtension> extensions;
         const QDomNodeList &extList = node.namedItem("colorSources").childNodes();
         for(int j = 0; j < extList.length(); j++)
         {
-            colorSources << getAttribute(extList.item(j), "name");
+            expectedExtension ext;
+            ext.name       = getAttribute(extList.item(j), "name");
+            ext.known      = getAttribute(extList.item(j), "known")      == "true";
+            ext.everyPoint = getAttribute(extList.item(j), "everypoint") == "true";
+            ext.derived    = getAttribute(extList.item(j), "derived")    == "true";
+
+            extensions.insert(ext.name, ext);
         }
-        colorSources.sort();
-        trk.colorSources = colorSources;
+        trk.extensions = extensions;
 
         expTrks.insert(trk.name, trk);
     }

@@ -7,15 +7,15 @@
     <tracks>
         <track name="Track" colorIdx="12" colorName="Blue" segcount="1" pointcount="8">
             <colorSources>
-                <colorSource name="::ql:slope"                              />
-                <colorSource name="::ql:ele"                                />
-                <colorSource name="::ql:progress"                           />
-                <colorSource name="::ql:speed"                              />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:wtemp" />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:depth" />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:hr"    />
-                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:cad"   />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"                              />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"                                />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress"                           />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"                              />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:wtemp" />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:depth" />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:hr"    />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:cad"   />
             </colorSources>
         </track>
     </tracks>

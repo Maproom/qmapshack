@@ -106,6 +106,15 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
                 foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
                 {
                     SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
+
+                    foreach(const QString &key, expTrk.extensions.keys())
+                    {
+                        VERIFY_EQUAL(CKnownExtension::isKnown(key), expTrk.extensions[key].known);
+                        if(expTrk.extensions[key].everyPoint)
+                        {
+                            SUBVERIFY(trkpt.extensions.contains(key), "Missing extension on trackpoint");
+                        }
+                    }
                 }
             }
 
@@ -115,7 +124,9 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
 
             QStringList existingSources = itemTrk->getExistingDataSources();
             existingSources.sort();
-            SUBVERIFY(expTrk.colorSources == existingSources, "Expected and existing list of colorSources do not match");
+            QList<QString> extensionNames =  expTrk.extensions.keys();
+            extensionNames.sort();
+            SUBVERIFY(extensionNames == existingSources, "Expected and existing list of colorSources do not match");
         }
 
         CGisItemRte *itemRte = dynamic_cast<CGisItemRte*>(item);

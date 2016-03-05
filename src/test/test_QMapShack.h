@@ -23,15 +23,6 @@ class CGpxProject;
 
 extern QString testInput;
 
-#define SUBVERIFY(EXPR, MSG) { \
-        if(!(EXPR)) { \
-            throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); \
-        } \
-}
-
-#define VERIFY_EQUAL(EXP, ACT) \
-    SUBVERIFY( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
-
 #define TCWRAPPER( CALL ) { try { CALL; } catch(QString &error) { QFAIL(error.toStdString().c_str()); } \
 }
 
@@ -45,9 +36,6 @@ class test_QMapShack : public QObject
 
     static CGpxProject* readGpxFile(const QString &file, bool valid);
 
-
-    /// helper functions
-    QString getTempFileName(const QString &ext);
 
     /// CSlfReader
     void readValidSLFFile();

@@ -36,7 +36,6 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
     delete proj;
 
     QFile(tmpFile).remove();
-   
 }
 
 void test_QMapShack::writeReadGpxFile()

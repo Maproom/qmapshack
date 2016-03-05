@@ -36,13 +36,21 @@ struct expectedWaypoint
     QString name;
 };
 
+struct expectedExtension
+{
+    QString name;    //< the name as used in the file
+    bool known;      //< if true, the value has to be known (e.g. CKnownExtension::isKnown() returns true)
+    bool everyPoint; //< if true, the value has to be set for every single trkpt
+    bool derived;    //< if true, the value is derived by QMS
+};
+
 struct expectedTrack
 {
     QString name;
     int colorIdx;
     int segCount;
     int ptCount;
-    QStringList colorSources;
+    QHash<QString, expectedExtension> extensions;
 };
 
 struct expectedRoute

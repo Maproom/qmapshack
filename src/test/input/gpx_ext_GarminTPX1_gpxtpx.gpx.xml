@@ -1,0 +1,25 @@
+<expected>
+    <name>Garmin TPX1 Test NS gpxtpx</name>
+    <desc></desc>
+
+    <waypoints></waypoints>
+
+    <tracks>
+        <track name="Track" colorIdx="12" colorName="Blue" segcount="1" pointcount="8">
+            <colorSources>
+                <colorSource name="::ql:slope"                              />
+                <colorSource name="::ql:ele"                                />
+                <colorSource name="::ql:progress"                           />
+                <colorSource name="::ql:speed"                              />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:wtemp" />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:depth" />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:hr"    />
+                <colorSource name="gpxtpx:TrackPointExtension|gpxtpx:cad"   />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+    <areas></areas>
+</expected>

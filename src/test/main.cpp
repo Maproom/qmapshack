@@ -23,6 +23,7 @@
 #include "test/TestHelper.h"
 
 #include "gis/gpx/CGpxProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
@@ -47,6 +48,15 @@ void test_QMapShack::initTestCase()
     CKnownExtension::init(IUnit::self());
 
     testInput = QCoreApplication::applicationDirPath() + "/input/";
+}
+
+void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)
+{
+    const QString &expFile = projFile + ".xml";
+    if(QFile(expFile).exists())
+    {
+        verify(expFile, proj);
+    }
 }
 
 void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
@@ -137,6 +147,20 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
     SUBVERIFY(exp.trks.isEmpty(), "Not all expected tracks found");
     SUBVERIFY(exp.rtes.isEmpty(), "Not all expected routes found");
     SUBVERIFY(exp.ovls.isEmpty(), "Not all expected areas found");
+}
+
+IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid)
+{
+    if(file.endsWith(".gpx"))
+    {
+        return readGpxFile(file, valid);
+    }
+    if(file.endsWith(".qms"))
+    {
+        return readQmsFile(file, valid);
+    }
+
+    return nullptr;
 }
 
 QTEST_MAIN(test_QMapShack)

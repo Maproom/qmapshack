@@ -17,13 +17,14 @@
 **********************************************************************************************/
 
 #include "test/test_QMapShack.h"
+#include "test/TestHelper.h"
 
 #include "gis/slf/CSlfProject.h"
 #include "gis/slf/CSlfReader.h"
 
 void test_QMapShack::readValidSLFFile()
 {
-    // this does not ready anything, a bare CSlfProject is created
+    // this does not read anything, a bare CSlfProject is created
     CSlfProject *proj = new CSlfProject("qtt_slf_file0.slf", false);
 
     try
@@ -43,7 +44,7 @@ void test_QMapShack::readValidSLFFile()
 
 void test_QMapShack::readNonExistingSLFFile()
 {
-    // this does not ready anything, a bare CSlfProject is created
+    // this does not read anything, a bare CSlfProject is created
     CSlfProject *proj = new CSlfProject("qtt_slf_DOES_NOT_EXIST.slf", false);
 
     bool hadException = false;

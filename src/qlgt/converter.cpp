@@ -101,7 +101,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
         geocache.state      = wpt1.geocache.state;
         geocache.locale     = wpt1.geocache.locale;
 
-        foreach(const CQlgtWpt::geocachelog_t& log1, wpt1.geocache.logs)
+        for(const CQlgtWpt::geocachelog_t& log1 : wpt1.geocache.logs)
         {
             CGisItemWpt::geocachelog_t log;
             log.id          = log1.id;
@@ -118,7 +118,7 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
         }
     }
 
-    foreach(const CQlgtWpt::image_t& image1, wpt1.images)
+    for(const CQlgtWpt::image_t& image1 : wpt1.images)
     {
         CGisItemWpt::image_t image;
 
@@ -148,7 +148,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
 
     bool hasExtData = trk1.hasExt1Data();
     trkseg_t seg;
-    foreach(const CQlgtTrack::pt_t& pt1, trk1.track)
+    for(const CQlgtTrack::pt_t& pt1 : trk1.track)
     {
         trkpt_t pt;
         QDateTime time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
@@ -222,7 +222,7 @@ CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
     trk.color   = ovl.color.name();
 
     trkseg_t seg;
-    foreach(const IQlgtOverlay::pt_t& pt1, ovl.points)
+    for(const IQlgtOverlay::pt_t& pt1 : ovl.points)
     {
         trkpt_t pt;
         pt.lon = pt1.u * RAD_TO_DEG;
@@ -257,7 +257,7 @@ CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
     area.style      = ovl.style;
     area.opacity    = ovl.opacity != 255;
 
-    foreach(const IQlgtOverlay::pt_t& pt1, ovl.points)
+    for(const IQlgtOverlay::pt_t& pt1 : ovl.points)
     {
         pt_t pt;
         pt.lon = pt1.u * RAD_TO_DEG;
@@ -284,7 +284,7 @@ CGisItemRte::CGisItemRte(const CQlgtRoute& rte1)
     QPointF focus;
     QPixmap icon = getWptIconByName(rte1.iconString, focus);
 
-    foreach (const CQlgtRoute::pt_t& pt1, rte1.priRoute)
+    for(const CQlgtRoute::pt_t& pt1 : rte1.priRoute)
     {
         rtept_t pt;
         pt.lon      = pt1.lon;

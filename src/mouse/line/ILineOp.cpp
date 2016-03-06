@@ -224,7 +224,7 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
         if(CRouterSetup::self().calcRoute(pt1.coord, pt2.coord, subs) >= 0)
         {
             pt1.subpts.clear();
-            foreach(const QPointF &sub, subs)
+            for(const QPointF &sub : subs)
             {
                 pt1.subpts << IGisLine::subpt_t(sub);
             }
@@ -264,7 +264,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx - 1];
             pt1.subpts.clear();
-            foreach(const QPointF &pt, subLineCoord1)
+            for(const QPointF &pt : subLineCoord1)
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }
@@ -274,7 +274,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             IGisLine::point_t& pt1 = points[idx];
             pt1.subpts.clear();
-            foreach(const QPointF &pt, subLineCoord2)
+            for(const QPointF &pt : subLineCoord2)
             {
                 pt1.subpts << IGisLine::subpt_t(pt);
             }
@@ -322,7 +322,7 @@ qint32 ILineOp::isCloseToLine(const QPoint& pos) const
         }
         else
         {
-            foreach(const IGisLine::subpt_t& pt, pt1.subpts)
+            for(const IGisLine::subpt_t& pt : pt1.subpts)
             {
                 line << pt.pixel;
             }

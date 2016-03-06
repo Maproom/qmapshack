@@ -102,15 +102,15 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
             const expectedTrack &expTrk = exp.trks.take(itemTrk->getName());
 
             int trkptCount = 0;
-            foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
+            for(const CGisItemTrk::trkseg_t &seg : trk.segs)
             {
                 trkptCount += seg.pts.count();
 
-                foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
+                for(const CGisItemTrk::trkpt_t &trkpt : seg.pts)
                 {
                     SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
 
-                    foreach(const QString &key, expTrk.extensions.keys())
+                    for(const QString &key : expTrk.extensions.keys())
                     {
                         VERIFY_EQUAL(CKnownExtension::isKnown(key), expTrk.extensions[key].known);
                         if(expTrk.extensions[key].everyPoint)

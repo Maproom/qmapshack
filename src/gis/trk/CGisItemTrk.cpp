@@ -68,10 +68,10 @@ CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const tr
 {
     flags = eFlagCreatedInQms;
 
-    foreach(const trkseg_t &srcseg, srctrk.segs)
+    for(const trkseg_t &srcseg : srctrk.segs)
     {
         trkseg_t seg;
-        foreach(const trkpt_t &srcpt, srcseg.pts)
+        for(const trkpt_t &srcpt : srcseg.pts)
         {
             if(srcpt.idxTotal < idx1)
             {
@@ -295,9 +295,9 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    foreach (const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             if(!pt.isHidden())
             {
@@ -312,9 +312,9 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    foreach (const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             if(!pt.isHidden())
             {
@@ -544,7 +544,7 @@ QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt) const
         keys = keys.mid(0, 10);
     }
 
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
@@ -665,7 +665,7 @@ static qint32 getIdxPointCloseBy(const QPoint &pos, const QPolygonF &line)
     qint32 idx     = 0;
     qint32 bestIdx = NOIDX;
     qint32 bestDst = NOINT;
-    foreach(const QPointF &pt, line)
+    for(const QPointF &pt : line)
     {
         int dst = (pos - pt).manhattanLength();
         if(dst < bestDst)
@@ -724,9 +724,9 @@ void CGisItemTrk::updateExtremaAndExtensions()
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
 
-    foreach(const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             if(pt.isHidden())
             {
@@ -735,7 +735,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
             existingExtensions.unite(pt.extensions.keys().toSet());
 
-            foreach(const QString &key, pt.extensions.keys())
+            for(const QString &key : pt.extensions.keys())
             {
                 bool isReal = false;
                 qreal val = pt.extensions.value(key).toReal(&isReal);
@@ -1101,12 +1101,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         pt1.y = qSin(a1 * DEG_TO_RAD) * d;
     }
 
-    foreach(const trkwpt_t &trkwpt, trkwpts)
+    for(const trkwpt_t &trkwpt : trkwpts)
     {
         qreal minD   = WPT_FOCUS_DIST_IN;
         qint32 index = NOIDX;
 
-        foreach(const pointDP &pt, line)
+        for(const pointDP &pt : line)
         {
             current++;
             qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
@@ -1310,10 +1310,10 @@ void CGisItemTrk::reverse()
     trk1->key.clear();
     trk1->history.events.clear();
 
-    foreach(const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
         trkseg_t seg1;
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             trkpt_t pt1     = pt;
             pt1.time        = QDateTime();
@@ -1358,7 +1358,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 
     // copy the segments of all tracks to new track
     CGisWidget& gis = CGisWidget::self();
-    foreach(const IGisItem::key_t &key, keys)
+    for(const IGisItem::key_t &key : keys)
     {
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk2)
@@ -1537,9 +1537,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(mode == eModeNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
-        foreach(const trkseg_t &seg, trk.segs)
+        for(const trkseg_t &seg : trk.segs)
         {
-            foreach(const trkpt_t &pt, seg.pts)
+            for(const trkpt_t &pt : seg.pts)
             {
                 if(pt.isHidden())
                 {
@@ -1558,9 +1558,9 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // in full mode the complete track including points marked as deleted
         // is drawn as gray line first. Then the track without points marked as
         // deleted is drawn with it's configured color
-        foreach(const trkseg_t &seg, trk.segs)
+        for(const trkseg_t &seg : trk.segs)
         {
-            foreach(const trkpt_t &pt, seg.pts)
+            for(const trkpt_t &pt : seg.pts)
             {
                 pt1.setX(pt.lon);
                 pt1.setY(pt.lat);
@@ -1588,15 +1588,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
         p.setPen(QPen(Qt::lightGray, penWidthBg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
 
-        foreach(const QPolygonF &l, lines)
+        for(const QPolygonF &l : lines)
         {
             p.drawPolyline(l);
         }
 
         QPixmap bullet("://icons/8x8/bullet_dark_gray.png");
-        foreach(const QPolygonF &l, lines)
+        for(const QPolygonF &l : lines)
         {
-            foreach(const QPointF &pt, l)
+            for(const QPointF &pt : l)
             {
                 p.drawPixmap(pt.x() - 3, pt.y() - 3, bullet);
             }
@@ -1611,7 +1611,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(key == keyUserFocus)
     {
         p.setPen(QPen(Qt::red, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        foreach(const QPolygonF &l, lines)
+        for(const QPolygonF &l : lines)
         {
             p.drawPolyline(l);
         }
@@ -1619,7 +1619,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setBrush(color);
     p.setPen(penBackground);
-    foreach(const QPolygonF &l, lines)
+    for(const QPolygonF &l : lines)
     {
         p.drawPolyline(l);
         if(showArrows.val().toBool())
@@ -1633,7 +1633,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // use the track's ordinary color
         penForeground.setColor(color);
         p.setPen(penForeground);
-        foreach(const QPolygonF &l, lines)
+        for(const QPolygonF &l : lines)
         {
             p.drawPolyline(l);
         }
@@ -1662,11 +1662,11 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
     pen.setWidth(penWidthFg);
     pen.setCapStyle(Qt::RoundCap);
 
-    foreach(const trkseg_t &segment, trk.segs)
+    for(const trkseg_t &segment : trk.segs)
     {
         const trkpt_t *ptPrev = nullptr;
 
-        foreach(const trkpt_t &pt, segment.pts)
+        for(const trkpt_t &pt : segment.pts)
         {
             if(pt.isHidden())
             {
@@ -1706,12 +1706,12 @@ void CGisItemTrk::drawColorized(QPainter &p) const
 
     const qreal factor = CKnownExtension::get(getColorizeSource()).factor;
 
-    foreach(const trkseg_t &segment, trk.segs)
+    for(const trkseg_t &segment : trk.segs)
     {
         const trkpt_t *ptPrev = nullptr;
         QColor colorStart;
 
-        foreach(const trkpt_t &pt, segment.pts)
+        for(const trkpt_t &pt : segment.pts)
         {
             if(pt.isHidden())
             {
@@ -1794,7 +1794,7 @@ QStringList CGisItemTrk::getExistingDataSources() const
     QStringList known;
     QStringList unknown;
 
-    foreach(const QString &key, existingExtensions)
+    for(const QString &key : existingExtensions)
     {
         if(CKnownExtension::isKnown(key))
         {
@@ -2176,9 +2176,9 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
 
         /// @todo: optimize search by single out segment and then do a binary search
 
-        foreach (const trkseg_t &seg, trk.segs)
+        for(const trkseg_t &seg : trk.segs)
         {
-            foreach(const trkpt_t &pt, seg.pts)
+            for(const trkpt_t &pt : seg.pts)
             {
                 if(pt.isHidden())
                 {
@@ -2212,9 +2212,9 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
 
         qreal delta = totalElapsedSeconds;
 
-        foreach (const trkseg_t &seg, trk.segs)
+        for(const trkseg_t &seg : trk.segs)
         {
-            foreach(const trkpt_t &pt, seg.pts)
+            for(const trkpt_t &pt : seg.pts)
             {
                 if(pt.isHidden())
                 {
@@ -2287,9 +2287,9 @@ bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const
 
 const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
 {
-    foreach(const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             if(cond(pt))
             {
@@ -2325,9 +2325,9 @@ bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal) const
 
 bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal) const
 {
-    foreach (const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             if((pt.idxTotal < idxTotal))
             {
@@ -2456,7 +2456,7 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
         dlgDetails->updateData();
     }
 
-    foreach(INotifyTrk * visual, registeredVisuals)
+    for(INotifyTrk * visual : registeredVisuals)
     {
         if(visuals & visual->mask)
         {
@@ -2472,7 +2472,7 @@ void CGisItemTrk::setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt)
         dlgDetails->setMouseFocus(pt);
     }
 
-    foreach(INotifyTrk * visual, registeredVisuals)
+    for(INotifyTrk * visual : registeredVisuals)
     {
         visual->setMouseFocus(pt);
     }
@@ -2485,7 +2485,7 @@ void CGisItemTrk::setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, co
         dlgDetails->setMouseRangeFocus(pt1, pt2);
     }
 
-    foreach(INotifyTrk * visual, registeredVisuals)
+    for(INotifyTrk * visual : registeredVisuals)
     {
         visual->setMouseRangeFocus(pt1, pt2);
     }
@@ -2498,7 +2498,7 @@ void CGisItemTrk::setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt)
         dlgDetails->setMouseClickFocus(pt);
     }
 
-    foreach(INotifyTrk * visual, registeredVisuals)
+    for(INotifyTrk * visual : registeredVisuals)
     {
         visual->setMouseClickFocus(pt);
     }

@@ -35,7 +35,7 @@ CMapPathSetup::CMapPathSetup(QStringList &paths, QString& pathCache)
     connect(listWidget,  &QListWidget::itemSelectionChanged, this, &CMapPathSetup::slotItemSelectionChanged);
     connect(pushMapHonk, &QPushButton::clicked,              this, &CMapPathSetup::slotMapHonk);
 
-    foreach(const QString &path, paths)
+    for(const QString &path : paths)
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);

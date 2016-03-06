@@ -564,7 +564,7 @@ protected:
 
     static inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
     {
-        foreach(const QRectF &r, blockedAreas)
+        for(const QRectF &r : blockedAreas)
         {
             if(rect.intersects(r))
             {

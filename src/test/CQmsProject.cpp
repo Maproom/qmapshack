@@ -35,7 +35,7 @@ void test_QMapShack::_readQmsFile_1_6_0()
 
 void test_QMapShack::_writeReadQmsFile()
 {
-    foreach(const QString &file, inputFiles)
+    for(const QString &file : inputFiles)
     {
         IGisProject *proj = readProjFile(file);
 

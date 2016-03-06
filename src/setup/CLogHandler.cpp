@@ -52,7 +52,7 @@ QString CLogHandler::logfileName()
 {
     QStringList domainSplit = QCoreApplication::organizationDomain().split(".");
     QString fileName;
-    foreach(QString part, domainSplit)
+    for(const QString &part : domainSplit)
     {
         fileName = fileName.insert(0, part + ".");
     }

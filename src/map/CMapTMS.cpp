@@ -186,7 +186,7 @@ void CMapTMS::getLayers(QListWidget& list) /* override */
     }
 
     int i = 0;
-    foreach(const layer_t &layer, layers)
+    for(const layer_t &layer : layers)
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -239,7 +239,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    foreach(const QString &str, enabled)
+    for(const QString &str : enabled)
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -271,7 +271,7 @@ void CMapTMS::slotQueueChanged()
 
             QNetworkRequest request;
             request.setUrl(url);
-            foreach(const rawHeaderItem_t &item, rawHeaderItems)
+            for(const rawHeaderItem_t &item : rawHeaderItems)
             {
                 request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
             }
@@ -460,7 +460,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     }
 
     // draw layers
-    foreach(const layer_t &layer, layers)
+    for(const layer_t &layer : layers)
     {
         if(!layer.enabled)
         {

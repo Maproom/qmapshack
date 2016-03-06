@@ -47,7 +47,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 
     const IGisItem::history_t& history = gisItem.getHistory();
 
-    //foreach(const IGisItem::history_event_t& event, history.events)
+    //for(const IGisItem::history_event_t& event : history.events)
     for(int i = 0; i < history.events.size(); i++)
     {
         const IGisItem::history_event_t& event = history.events[i];

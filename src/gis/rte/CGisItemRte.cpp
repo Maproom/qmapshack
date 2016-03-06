@@ -164,7 +164,7 @@ IGisItem * CGisItemRte::createClone()
 bool CGisItemRte::isCalculated()
 {
     bool yes = true;
-    foreach(const rtept_t &pt, rte.pts)
+    for(const rtept_t &pt : rte.pts)
     {
         if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
         {
@@ -182,7 +182,7 @@ void CGisItemRte::deriveSecondaryData()
     qreal south =  90;
     qreal west  =  180;
 
-    //foreach(const rtept_t &rtept, rte.pts)
+    //for(const rtept_t &rtept : rte.pts)
     const int N = rte.pts.count();
 
     for(int i = 0; i < N; i++)
@@ -205,7 +205,7 @@ void CGisItemRte::deriveSecondaryData()
             north   = rtept.lat;
         }
 
-        foreach(const subpt_t &subpt, rtept.subpts)
+        for(const subpt_t &subpt : rtept.subpts)
         {
             if(subpt.lon < west)
             {
@@ -325,7 +325,7 @@ QPointF CGisItemRte::getPointCloseBy(const QPoint& screenPos)
 
     qint32 d    = NOINT;
     QPointF pt  = NOPOINTF;
-    foreach(const QPointF &point, line)
+    for(const QPointF &point : line)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -390,7 +390,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     QVector<QPixmap> icons;
     QVector<QPointF> focus;
 
-    foreach(const rtept_t &rtept, rte.pts)
+    for(const rtept_t &rtept : rte.pts)
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
@@ -402,7 +402,7 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         focus << rtept.focus;
 
         blockedAreas << QRectF(pt - rtept.focus, rtept.icon.size());
-        foreach(const subpt_t &subpt, rtept.subpts)
+        for(const subpt_t &subpt : rtept.subpts)
         {
             QPointF pt(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD);
             gis->convertRad2Px(pt);
@@ -514,7 +514,7 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
     }
 
 
-    foreach(const rtept_t &rtept, rte.pts)
+    for(const rtept_t &rtept : rte.pts)
     {
         QPointF pt(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD);
 
@@ -605,14 +605,14 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
 {
     QMutexLocker lock(&mutexItems);
     l.clear();
-    foreach(const rtept_t &rtept, rte.pts)
+    for(const rtept_t &rtept : rte.pts)
     {
         l << point_t(QPointF(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD));
 
         point_t& pt = l.last();
 
         pt.subpts.clear();
-        foreach(const subpt_t &subpt, rtept.subpts)
+        for(const subpt_t &subpt : rtept.subpts)
         {
             pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
         }
@@ -668,7 +668,7 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
         quint32 i = 0;
         qint32 d1 = NOINT;
 
-        foreach(const QPointF &point, line)
+        for(const QPointF &point : line)
         {
             int tmp = (pt - point).manhattanLength();
             if(tmp <= d1)
@@ -696,14 +696,14 @@ QPointF CGisItemRte::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 const CGisItemRte::subpt_t * CGisItemRte::getSubPtByIndex(quint32 idx)
 {
     quint32 cnt = 0;
-    foreach(const rtept_t &rtept, rte.pts)
+    for(const rtept_t &rtept : rte.pts)
     {
         if(cnt == idx)
         {
             return &rtept.fakeSubpt;
         }
 
-        foreach(const subpt_t &subpt, rtept.subpts)
+        for(const subpt_t &subpt : rtept.subpts)
         {
             cnt++;
             if(cnt == idx)

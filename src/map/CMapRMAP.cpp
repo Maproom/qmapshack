@@ -117,7 +117,7 @@ CMapRMAP::CMapRMAP(const QString &filename, CMapDraw *parent)
     QString datum;
     QStringList lines = QString(charbuf).split("\r\n");
 
-    foreach(const QString &line, lines)
+    for(const QString &line : lines)
     {
 //        qDebug() << line;
         if(line.startsWith("Version="))

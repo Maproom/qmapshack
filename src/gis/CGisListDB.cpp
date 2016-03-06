@@ -69,7 +69,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
     QStringList names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
-    foreach(const QString &name, names)
+    for(const QString &name : names)
     {
         cfg.beginGroup(name);
         QString type = cfg.value("type", "SQLite").toString();
@@ -531,7 +531,7 @@ void CGisListDB::slotDelLostFoundItem()
     QSet<CDBFolderLostFound*> folders;
     QList<QTreeWidgetItem*> delItems;
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         CDBItem * dbItem            = dynamic_cast<CDBItem*>(item);
         if(dbItem == nullptr)
@@ -553,7 +553,7 @@ void CGisListDB::slotDelLostFoundItem()
     }
 
     qDeleteAll(delItems);
-    foreach(CDBFolderLostFound* folder, folders)
+    for(CDBFolderLostFound* folder : folders)
     {
         folder->update();
 
@@ -592,7 +592,7 @@ void CGisListDB::slotDelItem()
 
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         CDBItem * dbItem = dynamic_cast<CDBItem*>(item);
         if(dbItem == nullptr)
@@ -628,14 +628,14 @@ void CGisListDB::slotDelItem()
     }
 
     qDeleteAll(dbItems);
-    foreach(IDBFolderSql * dbFolder, dbFolders)
+    for(IDBFolderSql * dbFolder : dbFolders)
     {
         dbFolder->updateLostFound();
         dbFolder->announceChange();
     }
 
     // tell all folders to update their statistics and waypoint/track correlations
-    foreach(IDBFolder * folder, folders)
+    for(IDBFolder * folder : folders)
     {
         folder->updateItemsOnWks();
     }
@@ -682,7 +682,7 @@ void CGisListDB::slotUpdateDatabase()
     CGisListDBEditLock lock(true, this, "slotUpdateDatabase");
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem* item, items)
+    for(QTreeWidgetItem* item : items)
     {
         IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
         if(folder == nullptr)

@@ -52,7 +52,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     }
 
     QStringList entries = dirData.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         IGisProject * project =  new CGpxProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
@@ -62,7 +62,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     }
 
     entries = dirData.entryList(QDir::NoDotAndDotDot|QDir::Dirs);
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         IGisProject * project =  new CTwoNavProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())
@@ -74,7 +74,7 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     // special case: read the gpx files in the track log directory.
     dirData = dir.absoluteFilePath(pathData + "Tracklog");
     entries = dirData.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         IGisProject * project =  new CGpxProject(dirData.absoluteFilePath(entry), this);
         if(!project->isValid())

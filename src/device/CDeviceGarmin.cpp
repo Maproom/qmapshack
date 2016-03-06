@@ -133,7 +133,7 @@ void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnd
     QDir dirLoop(dir.absoluteFilePath(subdirecoty));
     qDebug() << "reading files from device: " << dirLoop.path();
     QStringList entries = dirLoop.entryList(QStringList("*." + fileEnding));
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         const QString filename = dirLoop.absoluteFilePath(entry);
         IGisProject * project = nullptr;
@@ -224,7 +224,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
         }
 
         QString filename;
-        foreach(const CGisItemWpt::image_t& image, images)
+        for(const CGisItemWpt::image_t& image : images)
         {
             filename = image.info;
             filename = filename.remove(QRegExp("[^A-Za-z0-9_]"));
@@ -244,7 +244,7 @@ void CDeviceGarmin::saveImages(CGisItemWpt& wpt)
         QList<IGisItem::link_t> links;
 
         QString filename;
-        foreach(const CGisItemWpt::image_t& image, images)
+        for(const CGisItemWpt::image_t& image : images)
         {
             filename = QString("%1.%2.jpg").arg(key).arg(cntImages);
             image.pixmap.save(dirImages.absoluteFilePath(filename));
@@ -276,7 +276,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
 
         QList<CGisItemWpt::image_t> images;
         QStringList entries = dirCache.entryList(QStringList("*.jpg"), QDir::Files);
-        foreach(const QString &file, entries)
+        for(const QString &file : entries)
         {
             CGisItemWpt::image_t image;
             image.pixmap.load(dirCache.absoluteFilePath(file));
@@ -299,7 +299,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
         const QList<IGisItem::link_t>& links = wpt.getLinks();
         QList<CGisItemWpt::image_t> images;
 
-        foreach(const IGisItem::link_t& link, links)
+        for(const IGisItem::link_t& link : links)
         {
             if(link.type != "Garmin")
             {
@@ -331,7 +331,7 @@ void CDeviceGarmin::aboutToRemoveProject(IGisProject * project)
     const QString& key = project->getKey();
     const QDir dirImages(dir.absoluteFilePath(pathPictures));
     QStringList entries = dirImages.entryList(QStringList("*.jpg"), QDir::Files);
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         QString filename = dirImages.absoluteFilePath(entry);
         QFileInfo fi(filename);

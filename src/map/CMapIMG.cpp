@@ -50,7 +50,7 @@ static inline bool isCompletlyOutside(const QPolygonF& poly, const QRectF &viewp
     qreal west  =  180.0 * DEG_TO_RAD;
     qreal east  = -180.0 * DEG_TO_RAD;
 
-    foreach(const QPointF &pt, poly)
+    for(const QPointF &pt : poly)
     {
         if(north < pt.y())
         {
@@ -113,7 +113,7 @@ static inline QImage img2line(const QImage &img, int width)
 
 static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 {
-    foreach(const QRectF &rectPoi, rectPois)
+    for(const QRectF &rectPoi : rectPois)
     {
         if(rect.intersects(rectPoi))
         {
@@ -646,7 +646,7 @@ void CMapIMG::readBasics()
 
     // combine copyright sections
     copyright.clear();
-    foreach(const QString &str, copyrights)
+    for(const QString &str : copyrights)
     {
         if(!copyright.isEmpty())
         {
@@ -1051,9 +1051,9 @@ void CMapIMG::processPrimaryMapData()
      * Query all subfiles for possible maplevels.
      * Exclude basemap to avoid pollution.
      */
-    foreach(const subfile_desc_t &subfile, subfiles)
+    for(const subfile_desc_t &subfile : subfiles)
     {
-        foreach(const maplevel_t &maplevel, subfile.maplevels)
+        for(const maplevel_t &maplevel : subfile.maplevels)
         {
             if(!maplevel.inherited)
             {
@@ -1309,7 +1309,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
     }
 #endif
 
-    foreach(const subfile_desc_t &subfile, subfiles)
+    for(const subfile_desc_t &subfile : subfiles)
     {
 //        qDebug() << "-------";
 //        qDebug() << (viewport.topLeft() * RAD_TO_DEG) << (viewport.bottomRight() * RAD_TO_DEG);
@@ -1341,7 +1341,7 @@ void CMapIMG::loadVisibleData(bool fast, polytype_t& polygons, polytype_t& polyl
 
         const QVector<subdiv_desc_t>& subdivs = subfile.subdivs;
         // collect polylines
-        foreach(const subdiv_desc_t &subdiv, subdivs)
+        for(const subdiv_desc_t &subdiv : subdivs)
         {
             // if(subdiv.level == level) qDebug() << "subdiv:" << subdiv.level << level <<  subdiv.area << viewport << subdiv.area.intersects(viewport);
             if(subdiv.level != level || !subdiv.area.intersects(viewport))
@@ -1965,7 +1965,7 @@ void CMapIMG::collectText(const CGarminPolygon& item, const QPolygonF& line, con
 
 bool CMapIMG::intersectsWithExistingLabel(const QRect &rect) const
 {
-    foreach(const strlbl_t &label, labels)
+    for(const strlbl_t &label : labels)
     {
         if(label.rect.intersects(rect))
         {
@@ -2111,7 +2111,7 @@ void CMapIMG::drawLabels(QPainter& p, const QVector<strlbl_t> &lbls)
     fonts[CGarminTyp::eSmall].setPointSize(f.pointSize() - 2);
     fonts[CGarminTyp::eLarge].setPointSize(f.pointSize() + 2);
 
-    foreach(const strlbl_t &lbl, lbls)
+    for(const strlbl_t &lbl : lbls)
     {
         CDraw::text(lbl.str, p, lbl.pt, Qt::black, fonts[lbl.type]);
     }
@@ -2121,7 +2121,7 @@ void CMapIMG::drawText(QPainter& p)
 {
     p.setPen(Qt::black);
 
-    foreach(const textpath_t &textpath, textpaths)
+    for(const textpath_t &textpath : textpaths)
     {
         QPainterPath path;
         QFont font = textpath.font;
@@ -2250,7 +2250,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
     getInfoPoints(pois,   px, dict);
     getInfoPolylines(px, dict);
 
-    foreach(const QString &value, dict.values())
+    for(const QString &value : dict.values())
     {
         if(value == "-")
         {
@@ -2268,7 +2268,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
     {
         dict.clear();
         getInfoPolygons(px, dict);
-        foreach(const QString &value, dict.values())
+        for(const QString &value : dict.values())
         {
             if(value == "-")
             {
@@ -2295,7 +2295,7 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
 
 void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict)
 {
-    foreach(const CGarminPoint &point, points)
+    for(const CGarminPoint &point : points)
     {
         QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
         if(x.manhattanLength() < 10)
@@ -2331,7 +2331,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 
     bool found = false;
 
-    foreach(const CGarminPolygon &line, polylines)
+    for(const CGarminPolygon &line : polylines)
     {
         int len = line.pixel.size();
         // need at least 2 points
@@ -2415,7 +2415,7 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
     const qreal x = pt.x();
     const qreal y = pt.y();
 
-    foreach(const CGarminPolygon &line, polygons)
+    for(const CGarminPolygon &line : polygons)
     {
         int npol = line.pixel.size();
         if(npol > 2)
@@ -2507,7 +2507,7 @@ static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal thresho
 
 bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) /* override */
 {
-    foreach(const CGarminPolygon &line, polylines)
+    for(const CGarminPolygon &line : polylines)
     {
         if(line.pixel.size() < 2)
         {

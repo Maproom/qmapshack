@@ -168,7 +168,7 @@ QPointF CGisItemOvlArea::getPointCloseBy(const QPoint& screenPos)
     qint32 i    = 0;
     qint32 idx  = NOIDX;
     qint32 d    = NOINT;
-    foreach(const QPointF &point, polygonArea)
+    for(const QPointF &point : polygonArea)
     {
         int tmp = (screenPos - point).manhattanLength();
         if(tmp < d)
@@ -228,7 +228,7 @@ void CGisItemOvlArea::deriveSecondaryData()
     qreal south =  90;
     qreal west  =  180;
 
-    foreach(const pt_t &pt, area.pts)
+    for(const pt_t &pt : area.pts)
     {
         if(pt.lon < west)
         {
@@ -289,7 +289,7 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
     QPointF pt1;
 
-    foreach(const pt_t &pt, area.pts)
+    for(const pt_t &pt : area.pts)
     {
         pt1.setX(pt.lon);
         pt1.setY(pt.lat);
@@ -430,7 +430,7 @@ void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    foreach(const pt_t &pt, area.pts)
+    for(const pt_t &pt : area.pts)
     {
         l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
     }

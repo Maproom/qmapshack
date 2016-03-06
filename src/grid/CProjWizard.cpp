@@ -39,13 +39,13 @@ CProjWizard::CProjWizard(QLineEdit &line)
     , line(line)
 {
     setupUi(this);
-    mitab_entry_t entry;
-    QList<mitab_entry_t>    list;
-    int idx                 = 0;
-    const MapInfoDatumInfo * di   = asDatumInfoListQL;
+    QList<mitab_entry_t> list;
+    int idx = 0;
+    const MapInfoDatumInfo * di = asDatumInfoListQL;
 
     while(di->nMapInfoDatumID != -1)
     {
+        mitab_entry_t entry;
         entry.name  = di->pszOGCDatumName;
         entry.idx   = idx;
         list << entry;
@@ -54,7 +54,7 @@ CProjWizard::CProjWizard(QLineEdit &line)
     }
     qSort(list.begin(), list.end(), mitabLessThan);
 
-    foreach(entry, list)
+    for(const mitab_entry_t &entry : list)
     {
         comboDatum->addItem(entry.name, entry.idx);
     }

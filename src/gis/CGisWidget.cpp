@@ -412,7 +412,7 @@ void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
     QSet<CDBProject*>   projects;
     QSet<IGisProject*>  projectsAll;
 
-    foreach(const IGisItem::key_t key, keys)
+    for(const IGisItem::key_t key : keys)
     {
         IGisItem * gisItem = getItemByKey(key);
         if(nullptr != gisItem)
@@ -449,12 +449,12 @@ void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
 
     // make all database projects that are changed to post their new status
     // this will update the database view.
-    foreach(CDBProject * project, projects)
+    for(CDBProject * project : projects)
     {
         project->postStatus(true);
     }
     // unblock update for all projects seen
-    foreach(IGisProject * project, projectsAll)
+    for(IGisProject * project : projectsAll)
     {
         project->blockUpdateItems(false);
     }
@@ -527,7 +527,7 @@ void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     project->blockUpdateItems(true);
     int cnt = 1;
     PROGRESS_SETUP(tr("Copy items..."), 0, keys.count(), this);
-    foreach(const IGisItem::key_t& key, keys)
+    for(const IGisItem::key_t& key : keys)
     {
         PROGRESS(cnt++, break);
         IGisItem * gisItem = getItemByKey(key);

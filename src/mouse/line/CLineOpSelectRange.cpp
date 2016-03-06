@@ -180,7 +180,7 @@ void CLineOpSelectRange::drawFg(QPainter& p)
             {
                 const IGisLine::point_t& point = points[i];
                 seg << point.pixel;
-                foreach(const IGisLine::subpt_t& subpt, point.subpts)
+                for(const IGisLine::subpt_t& subpt : point.subpts)
                 {
                     seg << subpt.pixel;
                 }
@@ -197,14 +197,14 @@ void CLineOpSelectRange::drawFg(QPainter& p)
             QRectF r(0,0,7,7);
             p.setPen(QPen(Qt::darkGreen,2));
             p.setBrush(Qt::darkGreen);
-            foreach(const QPointF &pt, seg)
+            for(const QPointF &pt : seg)
             {
                 r.moveCenter(pt);
                 p.drawRect(r);
             }
             p.setPen(Qt::NoPen);
             p.setBrush(Qt::black);
-            foreach(const QPointF &pt, seg)
+            for(const QPointF &pt : seg)
             {
                 r.moveCenter(pt);
                 p.drawRect(r);

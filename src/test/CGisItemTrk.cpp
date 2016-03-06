@@ -26,7 +26,7 @@
 
 void test_QMapShack::_filterDeleteExtension()
 {
-    foreach(const QString &file, inputFiles)
+    for(const QString &file : inputFiles)
     {
         IGisProject *proj = readProjFile(file);
     

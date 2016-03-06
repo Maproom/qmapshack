@@ -83,7 +83,7 @@ const QVariant& CValue::operator=(const QVariant& v)
         SETTINGS;
         cfg.setValue(cfgTag, v);
 
-        foreach(CValue * value, allValues)
+        for(CValue * value : allValues)
         {
             if(value != this)
             {

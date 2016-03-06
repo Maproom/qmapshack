@@ -104,11 +104,10 @@ void CWptIconDialog::setupList(QObject * obj)
 
     const QMap<QString, icon_t>& wptIcons = getWptIcons();
     QStringList keys = wptIcons.keys();
-    QString key;
 
     qSort(keys.begin(), keys.end(), keyLessThanAlpha);
 
-    foreach(key, keys)
+    for(const QString &key : keys)
     {
         const QString& icon = wptIcons[key].path;
         QPixmap pixmap      = loadIcon(icon);

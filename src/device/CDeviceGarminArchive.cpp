@@ -47,7 +47,7 @@ void CDeviceGarminArchive::slotExpanded(QTreeWidgetItem * item)
     mount();
     qDebug() << "reading files from device: " << dir.path();
     QStringList entries = dir.entryList(QStringList("*.gpx"));
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         const QString filename = dir.absoluteFilePath(entry);
         IGisProject * project = new CGpxProject(filename, this);

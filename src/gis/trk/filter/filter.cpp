@@ -31,9 +31,9 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     QVector<pointDP> line;
     bool nothingDone = true;
 
-    foreach (const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
-        foreach(const trkpt_t &pt, seg.pts)
+        for(const trkpt_t &pt : seg.pts)
         {
             pointDP dp;
             dp.x = pt.lon * DEG_TO_RAD;
@@ -405,7 +405,7 @@ void CGisItemTrk::filterSplitSegment()
     }
 
     int part = 0;
-    foreach(const trkseg_t &seg, trk.segs)
+    for(const trkseg_t &seg : trk.segs)
     {
         if(0 < seg.pts.count())
         {

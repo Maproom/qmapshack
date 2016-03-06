@@ -177,7 +177,7 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
     SGisLine line;
     rte.getPolylineFromData(line);
 
-    foreach(const IGisLine::point_t &pt, line)
+    for(const IGisLine::point_t &pt : line)
     {
         QDomElement location = xml.createElement("location");
         location.appendChild(xml.createTextNode(QString("%1,%2").arg(pt.coord.y()*RAD_TO_DEG).arg(pt.coord.x()*RAD_TO_DEG)));

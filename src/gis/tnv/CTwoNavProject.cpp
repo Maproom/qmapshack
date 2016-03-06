@@ -199,7 +199,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     qreal west = 180.0;
     qreal east = -180.0;
 
-    foreach(CGisItemWpt * wpt, wpts)
+    for(CGisItemWpt * wpt : wpts)
     {
         QPointF pt = wpt->getPosition();
 
@@ -227,7 +227,7 @@ bool CTwoNavProject::saveWpts(QList<CGisItemWpt*>& wpts, const QString& filename
     out << "U  1" << endl;
     out << "z " << west << ", " << south << ", " << east << ", " << north << endl;
 
-    foreach(CGisItemWpt * wpt, wpts)
+    for(CGisItemWpt * wpt : wpts)
     {
         wpt->saveTwoNav(out, dir);
     }
@@ -244,7 +244,7 @@ bool CTwoNavProject::load(const QString& filename)
     QDir dir(filename);
 
     QStringList entries = dir.entryList(QDir::NoDotAndDotDot|QDir::Dirs|QDir::Files);
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         QFileInfo fi(entry);
 
@@ -255,7 +255,7 @@ bool CTwoNavProject::load(const QString& filename)
         }
     }
 
-    foreach(const QString &entry, entries)
+    for(const QString &entry : entries)
     {
         QFileInfo fi(entry);
 

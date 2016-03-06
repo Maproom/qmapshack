@@ -115,7 +115,7 @@ CMapGEMF::CMapGEMF(const QString &filename, CMapDraw *parent)
     for(quint32 i=0; i<=MAX_ZOOM_LEVEL; i++)
     {
         QList<range_t> rangeZoom;
-        foreach(const range_t &range, ranges)
+        for(const range_t &range : ranges)
         {
             if(range.zoomlevel == i)
             {
@@ -227,7 +227,7 @@ quint64 CMapGEMF::getFilenameFromAddress(const quint64 offset, QString &filename
 {
     quint64 temp = offset;
 
-    foreach (const gemffile_t &gf, files)
+    for(const gemffile_t &gf : files)
     {
         if(temp < gf.size)
         {
@@ -251,7 +251,7 @@ QImage CMapGEMF::getTile(const quint32 row, const quint32 col, const quint32 z)
     }
     QList<range_t> ranges = rangesByZoom[z];
 
-    foreach (const range_t &range, ranges)
+    for(const range_t &range : ranges)
     {
         if(row >= range.minX
            && row <= range.maxX

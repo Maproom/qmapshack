@@ -37,7 +37,7 @@ CDeviceWatcherWindows::~CDeviceWatcherWindows()
 void CDeviceWatcherWindows::slotUpdate()
 {
     QApplication::setOverrideCursor(Qt::WaitCursor);
-    foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
+    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
     {
         if (storage.isValid() && storage.isReady())
         {

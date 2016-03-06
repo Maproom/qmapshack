@@ -369,22 +369,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
         int yoff  = fm.height() + fm.ascent();
         int xoff  = fm.width("XX.XXXX")>>1;
 
-        foreach(const val_t &val, horzTopTicks)
+        for(const val_t &val : horzTopTicks)
         {
             CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, yoff), textColor);
         }
 
-        foreach(const val_t &val, horzBtmTicks)
+        for(const val_t &val : horzBtmTicks)
         {
             CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(val.pos, h), textColor);
         }
 
-        foreach(const val_t &val, vertLftTicks)
+        for(const val_t &val : vertLftTicks)
         {
             CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(xoff, val.pos), textColor);
         }
 
-        foreach(const val_t &val, vertRgtTicks)
+        for(const val_t &val : vertRgtTicks)
         {
             CDraw::text(qAbs(val.val)<1.e-5 ? "0" : QString("%1%2").arg(val.val * RAD_TO_DEG).arg(QChar(0260)), p, QPoint(w - xoff, val.pos), textColor);
         }
@@ -395,22 +395,22 @@ void CGrid::draw(QPainter& p, const QRect& rect)
         int yoff  = fm.height() + fm.ascent();
         int xoff  = fm.width("XXXX")>>1;
 
-        foreach(const val_t &val, horzTopTicks)
+        for(const val_t &val : horzTopTicks)
         {
             CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, yoff), textColor);
         }
 
-        foreach(const val_t &val, horzBtmTicks)
+        for(const val_t &val : horzBtmTicks)
         {
             CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(val.pos, h), textColor);
         }
 
-        foreach(const val_t &val, vertLftTicks)
+        for(const val_t &val : vertLftTicks)
         {
             CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(xoff, val.pos), textColor);
         }
 
-        foreach(const val_t &val, vertRgtTicks)
+        for(const val_t &val : vertRgtTicks)
         {
             CDraw::text(QString("%1").arg(qint32(val.val/1000)), p, QPoint(w - xoff, val.pos), textColor);
         }

@@ -82,7 +82,7 @@ void CDemDraw::setupDemPath(const QStringList &paths)
 {
     demPaths = paths;
 
-    foreach(CDemDraw * dem, dems)
+    for(CDemDraw * dem : dems)
     {
         QStringList keys;
         dem->saveActiveMapsList(keys);
@@ -138,11 +138,11 @@ void CDemDraw::buildMapList()
     QMutexLocker lock(&CDemItem::mutexActiveDems);
     demList->clear();
 
-    foreach(const QString &path, demPaths)
+    for(const QString &path : demPaths)
     {
         QDir dir(path);
         // find available maps
-        foreach(const QString &filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
+        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 
@@ -209,7 +209,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CDemItem::mutexActiveDems);
 
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         for(int i = 0; i < demList->count(); i++)
         {
@@ -234,7 +234,7 @@ void CDemDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CDemItem::mutexActiveDems);
 
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         for(int i = 0; i < demList->count(); i++)
         {

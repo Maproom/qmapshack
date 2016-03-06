@@ -34,7 +34,7 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
 {
     setupUi(this);
 
-    foreach(const IGisItem::key_t& key, keys)
+    for(const IGisItem::key_t& key : keys)
     {
         CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
         if(nullptr == wpt)

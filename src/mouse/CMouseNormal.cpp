@@ -307,7 +307,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
             break;
         }
 
-        foreach(IGisItem * item, items)
+        for(IGisItem * item : items)
         {
             item->drawHighlight(p);
             screenUnclutter->addItem(item);

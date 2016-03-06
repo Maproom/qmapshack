@@ -30,10 +30,6 @@ CFilterReset::CFilterReset(CGisItemTrk &trk, QWidget *parent)
     connect(toolApply, &QToolButton::clicked, this, &CFilterReset::slotApply);
 }
 
-CFilterReset::~CFilterReset()
-{
-}
-
 void CFilterReset::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReset");

@@ -29,7 +29,7 @@ class CFilterDeleteExtension : public QWidget, private Ui::IFilterDeleteExtensio
     Q_OBJECT
 public:
     CFilterDeleteExtension(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterDeleteExtension();
+    virtual ~CFilterDeleteExtension() = default;
 
     void update();
 

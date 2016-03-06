@@ -34,10 +34,6 @@ CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent
     connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 
-CFilterDeleteExtension::~CFilterDeleteExtension()
-{
-}
-
 void CFilterDeleteExtension::update()
 {
     comboExtensions->clear();

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015-2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,31 +20,20 @@
 #include <QTemporaryFile>
 
 #include "test/test_QMapShack.h"
+#include "test/TestHelper.h"
 
+#include "gis/gpx/CGpxProject.h"
+#include "gis/qms/CQmsProject.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CAppSetup.h"
 #include "helpers/CCommandProcessor.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
-
-#include "gis/trk/CKnownExtension.h"
-
-#include "gis/prj/IGisProject.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/wpt/CGisItemWpt.h"
-
-struct expectedWaypoint
-{
-    QString name;
-};
-
-struct expectedTrack
-{
-    QString name;
-    int colorIdx;
-    int segCount;
-    int ptCount;
-    QStringList colorSources;
-};
 
 CAppOpts *qlOpts;
 QString testInput;
@@ -55,89 +44,41 @@ void test_QMapShack::initTestCase()
     qlOpts = cmdParse.processOptions(QStringList(""));
 
     SETTINGS;
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt());
     CKnownExtension::init(IUnit::self());
 
     testInput = QCoreApplication::applicationDirPath() + "/input/";
+
+    inputFiles = {
+          testInput + "qtt_gpx_file0.gpx"
+        , testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx"
+        , testInput + "gpx_ext_GarminTPX1_tp1.gpx"
+        , testInput + "V1.6.0_file1.qms"
+        , testInput + "V1.6.0_file2.qms"
+    };
 }
 
-QString test_QMapShack::getAttribute(const QDomNode &node, const QString &name)
+void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)
 {
-    const QDomNamedNodeMap &attrs = node.attributes();
-    if(!attrs.contains(name))
+    const QString &expFile = projFile + ".xml";
+    if(QFile(expFile).exists())
     {
-        QWARN( QString("Attribute `%1` does not exist in DomNode `%2`").arg(name).arg(node.nodeName()).toStdString().c_str() );
-        return QString();
+        verify(expFile, proj);
     }
-
-    return attrs.namedItem(name).nodeValue();
 }
 
-void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
+void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
 {
-    QFile file(expectFile);
+    VERIFY_EQUAL(true,        proj.isValid());
+    VERIFY_EQUAL(exp.changed, proj.isChanged());
 
-    QDomDocument xml;
-    QString msg;
-    int line;
-    int column;
-    SUBVERIFY(xml.setContent(&file, false, &msg, &line, &column), QString("[%1:%2] %3").arg(expectFile).arg(line).arg(msg));
+    VERIFY_EQUAL(exp.name, proj.getName());
+    VERIFY_EQUAL(exp.desc, proj.getDescription());
 
-    const QDomNode &exp = xml.namedItem("expected");
-
-    const QString &expName = exp.namedItem("name").firstChild().nodeValue();
-    const QString &expDesc = exp.namedItem("desc").firstChild().nodeValue();
-
-    QHash<QString, expectedWaypoint> expWpts;
-    const QDomNodeList &wptList = exp.namedItem("waypoints").childNodes();
-    for(int i = 0; i < wptList.length(); i++)
-    {
-        const QDomNode &node = wptList.item(i);
-
-        expectedWaypoint wpt;
-        wpt.name = node.attributes().namedItem("name").nodeValue();
-
-        expWpts.insert(wpt.name, wpt);
-    }
-
-    QHash<QString, expectedTrack> expTrks;
-    const QDomNodeList &trkList = exp.namedItem("tracks").childNodes();
-    for(int i = 0; i < trkList.length(); i++)
-    {
-        const QDomNode &node = trkList.item(i);
-
-        expectedTrack trk;
-        trk.name     = getAttribute(node, "name");
-        trk.segCount = getAttribute(node, "segcount"  ).toInt();
-        trk.ptCount  = getAttribute(node, "pointcount").toInt();
-        trk.colorIdx = getAttribute(node, "colorIdx"  ).toInt();
-
-        QStringList colorSources;
-        const QDomNodeList &extList = node.namedItem("colorSources").childNodes();
-        for(int j = 0; j < extList.length(); j++)
-        {
-            colorSources << getAttribute(extList.item(j), "name");
-        }
-        colorSources.sort();
-        trk.colorSources = colorSources;
-
-        expTrks.insert(trk.name, trk);
-    }
-
-    //const QDomNodeList &expRtes = exp.namedItem("routes"   ).childNodes(); TODO
-    //const QDomNodeList &expOvls = exp.namedItem("areas"    ).childNodes(); TODO
-
-
-    VERIFY_EQUAL(true,  proj.isValid());
-    VERIFY_EQUAL(false, proj.isChanged());
-
-    VERIFY_EQUAL(expName, proj.getName());
-    VERIFY_EQUAL(expDesc, proj.getDescription());
-
-    VERIFY_EQUAL(expWpts.count(), proj.getItemCountByType(IGisItem::eTypeWpt));
-    VERIFY_EQUAL(expTrks.count(), proj.getItemCountByType(IGisItem::eTypeTrk));
-    VERIFY_EQUAL(0, proj.getItemCountByType(IGisItem::eTypeRte)); // TODO
-    VERIFY_EQUAL(0, proj.getItemCountByType(IGisItem::eTypeOvl)); // TODO
+    VERIFY_EQUAL(exp.wpts.count(), proj.getItemCountByType(IGisItem::eTypeWpt));
+    VERIFY_EQUAL(exp.trks.count(), proj.getItemCountByType(IGisItem::eTypeTrk));
+    VERIFY_EQUAL(exp.rtes.count(), proj.getItemCountByType(IGisItem::eTypeRte));
+    VERIFY_EQUAL(exp.ovls.count(), proj.getItemCountByType(IGisItem::eTypeOvl));
 
     for(int i = 0; i < proj.childCount(); i++)
     {
@@ -146,8 +87,8 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(item);
         if(nullptr != wpt)
         {
-            VERIFY_EQUAL(true, expWpts.contains(wpt->getName()));
-            expWpts.remove(wpt->getName());
+            VERIFY_EQUAL(true, exp.wpts.contains(wpt->getName()));
+            exp.wpts.remove(wpt->getName());
 
             SUBVERIFY(wpt->getPosition() != QPointF(0., 0.), "Waypoint has position 0/0");
         }
@@ -157,9 +98,9 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
         {
             const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
 
-            SUBVERIFY(expTrks.contains(itemTrk->getName()), QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()));
+            SUBVERIFY(exp.trks.contains(itemTrk->getName()), QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()));
 
-            const expectedTrack &expTrk = expTrks.take(itemTrk->getName());
+            const expectedTrack &expTrk = exp.trks.take(itemTrk->getName());
 
             int trkptCount = 0;
             foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
@@ -169,6 +110,15 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
                 foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
                 {
                     SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
+
+                    foreach(const QString &key, expTrk.extensions.keys())
+                    {
+                        VERIFY_EQUAL(CKnownExtension::isKnown(key), expTrk.extensions[key].known);
+                        if(expTrk.extensions[key].everyPoint)
+                        {
+                            SUBVERIFY(trkpt.extensions.contains(key), "Missing extension on trackpoint");
+                        }
+                    }
                 }
             }
 
@@ -178,23 +128,64 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
 
             QStringList existingSources = itemTrk->getExistingDataSources();
             existingSources.sort();
-            SUBVERIFY(expTrk.colorSources == existingSources, "Expected and existing list of colorSources do not match");
+            QList<QString> extensionNames =  expTrk.extensions.keys();
+            extensionNames.sort();
+            SUBVERIFY(extensionNames == existingSources, "Expected and existing list of colorSources do not match");
+        }
+
+        CGisItemRte *itemRte = dynamic_cast<CGisItemRte*>(item);
+        if(nullptr != itemRte)
+        {
+            SUBVERIFY(exp.rtes.contains(itemRte->getName()), QString("Found route `%1`, there shouldn't be any route with that name").arg(itemRte->getName()));
+            const CGisItemRte::rte_t &rte = itemRte->getRoute();
+
+            const expectedRoute &expRte = exp.rtes.take(itemRte->getName());
+
+            VERIFY_EQUAL(expRte.ptCount, rte.pts.size());
+        }
+
+        CGisItemOvlArea *itemOvl = dynamic_cast<CGisItemOvlArea*>(item);
+        if(nullptr != itemOvl)
+        {
+            SUBVERIFY(exp.ovls.contains(itemOvl->getName()), QString("Found area `%1`, there shouldn't be any area with that name").arg(itemOvl->getName()));
+
+            const expectedArea &expOvl = exp.ovls.take(itemOvl->getName());
+            VERIFY_EQUAL(expOvl.colorIdx, itemOvl->getColorIdx());
+
+            const CGisItemOvlArea::area_t &area = itemOvl->getAreaData();
+            VERIFY_EQUAL(expOvl.ptCount, area.pts.size());
         }
     }
 
     // ensure all expected waypoints/tracks actually exist
-    SUBVERIFY(expWpts.isEmpty(), "Not all expected waypoints found");
-    SUBVERIFY(expTrks.isEmpty(), "Not all expected tracks found");
+    SUBVERIFY(exp.wpts.isEmpty(), "Not all expected waypoints found");
+    SUBVERIFY(exp.trks.isEmpty(), "Not all expected tracks found");
+    SUBVERIFY(exp.rtes.isEmpty(), "Not all expected routes found");
+    SUBVERIFY(exp.ovls.isEmpty(), "Not all expected areas found");
+
 }
 
-QString test_QMapShack::getTempFileName(const QString &ext)
+void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
 {
-    QTemporaryFile tmp("qtt_XXXXXX." + ext);
-    tmp.open();
-    QString tempFile = tmp.fileName();
-    tmp.remove();
+    // step 0: read expected values from .xml file
+    expectedGisProject exp = TestHelper::readExpProj(expectFile);
 
-    return tempFile;
+    // step 1: do the actual verification
+    verify(exp, proj);
+}
+
+IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid)
+{
+    if(file.endsWith(".gpx"))
+    {
+        return readGpxFile(file, valid);
+    }
+    if(file.endsWith(".qms"))
+    {
+        return readQmsFile(file, valid);
+    }
+
+    return nullptr;
 }
 
 QTEST_MAIN(test_QMapShack)

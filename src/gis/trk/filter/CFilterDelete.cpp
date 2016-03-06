@@ -29,10 +29,6 @@ CFilterDelete::CFilterDelete(CGisItemTrk &trk, QWidget *parent)
     connect(toolApply, &QToolButton::clicked, this, &CFilterDelete::slotApply);
 }
 
-CFilterDelete::~CFilterDelete()
-{
-}
-
 void CFilterDelete::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterDelete");

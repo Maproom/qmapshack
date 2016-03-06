@@ -1,0 +1,26 @@
+<expected>
+    <name>1.6.0 Test2</name>
+    <desc></desc>
+
+    <waypoints>
+        <waypoint name="Hut" />
+    </waypoints>
+
+    <tracks>
+        <track name="Glasersberg" colorIdx="4" colorName="DarkBlue" segcount="1" pointcount="153">
+            <colorSources>
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"    />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"      />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress" />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes>
+        <route name="highway" pointcount="4" />
+    </routes>
+
+    <areas>
+        <area name="?" colorIdx="4" colorName="DarkBlue" pointcount="3" />
+    </areas>
+</expected>

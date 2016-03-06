@@ -26,7 +26,7 @@ class CKnownExtension
 {
     Q_DECLARE_TR_FUNCTIONS(CKnownExtension)
 public:
-    static void init(IUnit &units);
+    static void init(const IUnit &units);
 
     static const QString internalSlope;
     static const QString internalSpeed;
@@ -61,8 +61,8 @@ private:
     {
     }
 
-    static void initGarminTPXv1(IUnit &units, const QString &ns);
-    static void initMioTPX(IUnit &units);
+    static void initGarminTPXv1(const IUnit &units, const QString &ns);
+    static void initMioTPX(const IUnit &units);
 };
 
 #endif // CKNOWNEXTENSION_H

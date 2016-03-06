@@ -30,10 +30,6 @@ CFilterSplitSegment::CFilterSplitSegment(CGisItemTrk &trk, QWidget *parent)
     connect(toolApply, &QToolButton::clicked, this, &CFilterSplitSegment::slotApply);
 }
 
-CFilterSplitSegment::~CFilterSplitSegment()
-{
-}
-
 void CFilterSplitSegment::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSplitSegment");

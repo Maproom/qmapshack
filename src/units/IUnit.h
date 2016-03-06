@@ -18,7 +18,7 @@
 **********************************************************************************************/
 #ifndef IUNIT_H
 #define IUNIT_H
-#include <QtCore>
+#include <QObject>
 #include <QTimeZone>
 
 
@@ -30,9 +30,9 @@
 extern const QPointF NOPOINTF;
 extern const QPoint NOPOINT;
 
-class IUnit
+class IUnit : public QObject
 {
-    Q_DECLARE_TR_FUNCTIONS(IUnit)
+    Q_OBJECT
 public:
     virtual ~IUnit() = default;
 
@@ -58,7 +58,7 @@ public:
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object
-    static void setUnitType(type_e t);
+    static void setUnitType(type_e t, QObject * parent);
 
     /// parse a string for a timestamp
     static bool parseTimestamp(const QString &time, QDateTime &datetime);
@@ -130,7 +130,7 @@ public:
     static bool isValidCoordString(const QString& str);
 
 protected:
-    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor);
+    IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject *parent);
 
     static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
 

@@ -24,7 +24,7 @@
 class CUnitImperial : public IUnit
 {
 public:
-    CUnitImperial();
+    CUnitImperial(QObject * parent);
     virtual ~CUnitImperial() = default;
 
     void meter2elevation(qreal meter, QString& val, QString& unit) const override;

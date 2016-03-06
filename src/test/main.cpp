@@ -43,7 +43,7 @@ void test_QMapShack::initTestCase()
     env->initQMapShack();
 
     SETTINGS;
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt());
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), nullptr);
     CKnownExtension::init(IUnit::self());
 
     testInput = QCoreApplication::applicationDirPath() + "/input/";

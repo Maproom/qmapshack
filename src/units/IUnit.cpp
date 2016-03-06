@@ -431,8 +431,9 @@ const QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]
 
 const QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
-IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor)
-    : type(type)
+IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
+    : QObject(parent)
+    , type(type)
     , baseunit(baseunit)
     , basefactor(basefactor)
     , speedunit(speedunit)
@@ -447,20 +448,20 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
 }
 
 
-void IUnit::setUnitType(type_e t)
+void IUnit::setUnitType(type_e t, QObject * parent)
 {
     switch(t)
     {
     case eTypeMetric:
-        new CUnitMetric();
+        new CUnitMetric(parent);
         break;
 
     case eTypeImperial:
-        new CUnitImperial();
+        new CUnitImperial(parent);
         break;
 
     case eTypeNautic:
-        new CUnitNautic();
+        new CUnitNautic(parent);
         break;
     }
 

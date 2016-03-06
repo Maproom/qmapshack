@@ -50,11 +50,18 @@ IAppSetup* IAppSetup::getPlatformInstance()
 
 void IAppSetup::prepareGdal(QString gdalDir, QString projDir)
 {
-    qputenv("GDAL_DATA", gdalDir.toUtf8());
-    qputenv("PROJ_LIB", projDir.toUtf8());
+    if(!gdalDir.isEmpty())
+    {
+        qputenv("GDAL_DATA", gdalDir.toUtf8());
+        qDebug() << "GDAL_DATA directory set to " + gdalDir;
+    }
 
-    qDebug() << "GDAL_DATA directory set to " + gdalDir;
-    qDebug() << "PROJ_LIB directory set to " + projDir;
+    if(!projDir.isEmpty())
+    {
+        qputenv("PROJ_LIB", projDir.toUtf8());
+        qDebug() << "PROJ_LIB directory set to " + projDir;
+    }
+
     GDALAllRegister();
 }
 

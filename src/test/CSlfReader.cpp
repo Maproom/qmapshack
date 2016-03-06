@@ -22,7 +22,7 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/slf/CSlfReader.h"
 
-void test_QMapShack::readValidSLFFile()
+void test_QMapShack::_readValidSLFFile()
 {
     // this does not read anything, a bare CSlfProject is created
     CSlfProject *proj = new CSlfProject("qtt_slf_file0.slf", false);
@@ -42,7 +42,7 @@ void test_QMapShack::readValidSLFFile()
     delete proj;
 }
 
-void test_QMapShack::readNonExistingSLFFile()
+void test_QMapShack::_readNonExistingSLFFile()
 {
     // this does not read anything, a bare CSlfProject is created
     CSlfProject *proj = new CSlfProject("qtt_slf_DOES_NOT_EXIST.slf", false);

@@ -35,6 +35,7 @@ class test_QMapShack : public QObject
     Q_OBJECT
 
     QString testInput;
+    QList<QString> inputFiles;
 
     static void tryVerify(const QString &projFile, const IGisProject &proj);
     static void verify(const QString &expectFile, const IGisProject &proj);
@@ -45,36 +46,35 @@ class test_QMapShack : public QObject
     static IGisProject* readProjFile(const QString &file, bool valid = true);
 
     // CSlfReader
-    void readValidSLFFile();
-    void readNonExistingSLFFile();
+    void _readValidSLFFile();
+    void _readNonExistingSLFFile();
 
     // CGpxProject
     static void writeReadGpxFile(const QString &file);
-    void writeReadGpxFile();
+    void _writeReadGpxFile();
 
     // CKnownExtension
-    void readExtGarminTPX1_tp1();
-    void readExtGarminTPX1_gpxtpx();
+    void _readExtGarminTPX1_tp1();
+    void _readExtGarminTPX1_gpxtpx();
 
     void readExtGarminTPX1(const QString &file, const QString &ns);
 
     // CQmsProject
-    void readQmsFile_1_6_0();
-    static void writeReadQmsFile(const QString &file);
-    void writeReadQmsFile();
+    void _readQmsFile_1_6_0();
+    void _writeReadQmsFile();
 
     // CGisItemTrk
-    void filterDeleteExtension();
+    void _filterDeleteExtension();
 
 private slots:
     void initTestCase();
 
-    void _readValidSLFFile()         { TCWRAPPER( readValidSLFFile()         ) }
-    void _readNonExistingSLFFile()   { TCWRAPPER( readNonExistingSLFFile()   ) }
-    void _writeReadGpxFile()         { TCWRAPPER( writeReadGpxFile()         ) }
-    void _readQmsFile_1_6_0()        { TCWRAPPER( readQmsFile_1_6_0()        ) }
-    void _writeReadQmsFile()         { TCWRAPPER( writeReadQmsFile()         ) }
-    void _readExtGarminTPX1_gpxtpx() { TCWRAPPER( readExtGarminTPX1_gpxtpx() ) }
-    void _readExtGarminTPX1_tp1()    { TCWRAPPER( readExtGarminTPX1_tp1()    ) }
-    void _filterDeleteExtension()    { TCWRAPPER( filterDeleteExtension()    ) }
+    void readValidSLFFile()         { TCWRAPPER( _readValidSLFFile()         ) }
+    void readNonExistingSLFFile()   { TCWRAPPER( _readNonExistingSLFFile()   ) }
+    void writeReadGpxFile()         { TCWRAPPER( _writeReadGpxFile()         ) }
+    void readQmsFile_1_6_0()        { TCWRAPPER( _readQmsFile_1_6_0()        ) }
+    void writeReadQmsFile()         { TCWRAPPER( _writeReadQmsFile()         ) }
+    void readExtGarminTPX1_gpxtpx() { TCWRAPPER( _readExtGarminTPX1_gpxtpx() ) }
+    void readExtGarminTPX1_tp1()    { TCWRAPPER( _readExtGarminTPX1_tp1()    ) }
+    void filterDeleteExtension()    { TCWRAPPER( _filterDeleteExtension()    ) }
 };

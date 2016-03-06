@@ -84,12 +84,12 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
     delete proj;
 }
 
-void test_QMapShack::readExtGarminTPX1_tp1()
+void test_QMapShack::_readExtGarminTPX1_tp1()
 {
     readExtGarminTPX1(testInput + "gpx_ext_GarminTPX1_tp1.gpx", "tp1");
 }
 
-void test_QMapShack::readExtGarminTPX1_gpxtpx()
+void test_QMapShack::_readExtGarminTPX1_gpxtpx()
 {
     readExtGarminTPX1(testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx", "gpxtpx");
 }

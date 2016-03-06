@@ -48,6 +48,14 @@ void test_QMapShack::initTestCase()
     CKnownExtension::init(IUnit::self());
 
     testInput = QCoreApplication::applicationDirPath() + "/input/";
+
+    inputFiles = {
+          testInput + "qtt_gpx_file0.gpx"
+        , testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx"
+        , testInput + "gpx_ext_GarminTPX1_tp1.gpx"
+        , testInput + "V1.6.0_file1.qms"
+        , testInput + "V1.6.0_file2.qms"
+    };
 }
 
 void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)

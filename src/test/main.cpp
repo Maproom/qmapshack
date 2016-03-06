@@ -59,14 +59,10 @@ void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)
     }
 }
 
-void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
+void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
 {
-    // step 0: read expected values from .xml file
-    expectedGisProject exp = TestHelper::readExpProj(expectFile);
-
-    // step 1: do the actual verification
-    VERIFY_EQUAL(true,  proj.isValid());
-    VERIFY_EQUAL(false, proj.isChanged()); //< projects should never be changed after loading
+    VERIFY_EQUAL(true,        proj.isValid());
+    VERIFY_EQUAL(exp.changed, proj.isChanged());
 
     VERIFY_EQUAL(exp.name, proj.getName());
     VERIFY_EQUAL(exp.desc, proj.getDescription());
@@ -158,6 +154,16 @@ void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
     SUBVERIFY(exp.trks.isEmpty(), "Not all expected tracks found");
     SUBVERIFY(exp.rtes.isEmpty(), "Not all expected routes found");
     SUBVERIFY(exp.ovls.isEmpty(), "Not all expected areas found");
+
+}
+
+void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
+{
+    // step 0: read expected values from .xml file
+    expectedGisProject exp = TestHelper::readExpProj(expectFile);
+
+    // step 1: do the actual verification
+    verify(exp, proj);
 }
 
 IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid)

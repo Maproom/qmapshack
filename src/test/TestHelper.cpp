@@ -146,13 +146,14 @@ expectedGisProject TestHelper::readExpProj(const QString &fileName)
     const QDomNode &exp = xml.namedItem("expected");
 
     expectedGisProject proj;
-    proj.name = exp.namedItem("name").firstChild().nodeValue();
-    proj.desc = exp.namedItem("desc").firstChild().nodeValue();
+    proj.changed = false; //< projects should never be changed after loading
+    proj.name    = exp.namedItem("name").firstChild().nodeValue();
+    proj.desc    = exp.namedItem("desc").firstChild().nodeValue();
 
-    proj.wpts = getExpectedWaypoints(exp);
-    proj.trks = getExpectedTracks(exp);
-    proj.rtes = getExpectedRoutes(exp);
-    proj.ovls = getExpectedAreas(exp);
+    proj.wpts    = getExpectedWaypoints(exp);
+    proj.trks    = getExpectedTracks(exp);
+    proj.rtes    = getExpectedRoutes(exp);
+    proj.ovls    = getExpectedAreas(exp);
 
     return proj;
 }

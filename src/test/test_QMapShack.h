@@ -18,6 +18,9 @@
 
 #include <QtCore>
 #include <QTest>
+
+#include "test/TestHelper.h"
+
 class IGisProject;
 class CGpxProject;
 class CQmsProject;
@@ -35,12 +38,13 @@ class test_QMapShack : public QObject
 
     static void tryVerify(const QString &projFile, const IGisProject &proj);
     static void verify(const QString &expectFile, const IGisProject &proj);
+    static void verify(expectedGisProject exp, const IGisProject &proj);
 
     static CGpxProject* readGpxFile(const QString &file, bool valid = true);
     static CQmsProject* readQmsFile(const QString &file, bool valid = true);
     static IGisProject* readProjFile(const QString &file, bool valid = true);
 
-    /// CSlfReader
+    // CSlfReader
     void readValidSLFFile();
     void readNonExistingSLFFile();
 
@@ -59,6 +63,9 @@ class test_QMapShack : public QObject
     static void writeReadQmsFile(const QString &file);
     void writeReadQmsFile();
 
+    // CGisItemTrk
+    void filterDeleteExtension();
+
 private slots:
     void initTestCase();
 
@@ -69,4 +76,5 @@ private slots:
     void _writeReadQmsFile()         { TCWRAPPER( writeReadQmsFile()         ) }
     void _readExtGarminTPX1_gpxtpx() { TCWRAPPER( readExtGarminTPX1_gpxtpx() ) }
     void _readExtGarminTPX1_tp1()    { TCWRAPPER( readExtGarminTPX1_tp1()    ) }
+    void _filterDeleteExtension()    { TCWRAPPER( filterDeleteExtension()    ) }
 };

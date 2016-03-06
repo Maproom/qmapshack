@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 
@@ -44,15 +45,15 @@ void CUnitsSetup::accept()
 {
     if(radioMetric->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeMetric);
+        IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
     }
     else if(radioImperial->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeImperial);
+        IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
     }
     else if(radioNautic->isChecked())
     {
-        IUnit::setUnitType(IUnit::eTypeNautic);
+        IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
     }
     QDialog::accept();
 }

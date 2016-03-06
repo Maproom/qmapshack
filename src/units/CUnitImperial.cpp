@@ -19,8 +19,8 @@
 
 #include "units/CUnitImperial.h"
 
-CUnitImperial::CUnitImperial()
-    : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour)
+CUnitImperial::CUnitImperial(QObject * parent)
+    : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour, parent)
 {
 }
 

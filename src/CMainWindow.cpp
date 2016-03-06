@@ -71,7 +71,7 @@ CMainWindow::CMainWindow()
 
     initWptIcons();
 
-    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt());
+    IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 

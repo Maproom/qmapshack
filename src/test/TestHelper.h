@@ -71,6 +71,8 @@ struct expectedGisProject
     QString name;
     QString desc;
 
+    bool changed;
+
     QHash<QString, expectedWaypoint> wpts;
     QHash<QString, expectedTrack>    trks;
     QHash<QString, expectedRoute>    rtes;

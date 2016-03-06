@@ -30,18 +30,17 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "helpers/CAppSetup.h"
-#include "helpers/CCommandProcessor.h"
 #include "helpers/CSettings.h"
-#include "units/IUnit.h"
+#include "setup/IAppSetup.h"
 
-CAppOpts *qlOpts;
 QString testInput;
 
 void test_QMapShack::initTestCase()
 {
-    CCommandProcessor cmdParse;
-    qlOpts = cmdParse.processOptions(QStringList(""));
+    IAppSetup* env = IAppSetup::getPlatformInstance();
+    env->processArguments();
+    env->initLogHandler();
+    env->initQMapShack();
 
     SETTINGS;
     IUnit::self().setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt());

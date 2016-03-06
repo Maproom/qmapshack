@@ -24,7 +24,7 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"
 
-void test_QMapShack::readQmsFile_1_6_0()
+void test_QMapShack::_readQmsFile_1_6_0()
 {
     CQmsProject proj1(testInput + "V1.6.0_file1.qms", (CGisListWks*) nullptr);
     verify(testInput + "V1.6.0_file1.qms.xml", proj1);
@@ -33,30 +33,24 @@ void test_QMapShack::readQmsFile_1_6_0()
     verify(testInput + "V1.6.0_file2.qms.xml", proj2);
 }
 
-void test_QMapShack::writeReadQmsFile(const QString &file)
+void test_QMapShack::_writeReadQmsFile()
 {
-    IGisProject *proj = readProjFile(file);
+    foreach(const QString &file, inputFiles)
+    {
+        IGisProject *proj = readProjFile(file);
 
-    QString tmpFile = TestHelper::getTempFileName("qms");
-    CQmsProject::saveAs(tmpFile, *proj);
+        QString tmpFile = TestHelper::getTempFileName("qms");
+        CQmsProject::saveAs(tmpFile, *proj);
 
-    delete proj;
+        delete proj;
 
-    proj = readQmsFile(tmpFile);
-    verify(file + ".xml", *proj);
+        proj = readQmsFile(tmpFile);
+        verify(file + ".xml", *proj);
 
-    delete proj;
+        delete proj;
 
-    QFile(tmpFile).remove();
-}
-
-void test_QMapShack::writeReadQmsFile()
-{
-    writeReadQmsFile(testInput + "qtt_gpx_file0.gpx");
-    writeReadQmsFile(testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx");
-    writeReadQmsFile(testInput + "gpx_ext_GarminTPX1_tp1.gpx");
-    writeReadQmsFile(testInput + "V1.6.0_file1.qms");
-    writeReadQmsFile(testInput + "V1.6.0_file2.qms");
+        QFile(tmpFile).remove();
+    }
 }
 
 CQmsProject* test_QMapShack::readQmsFile(const QString &file, bool)

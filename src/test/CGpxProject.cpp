@@ -38,7 +38,7 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
     QFile(tmpFile).remove();
 }
 
-void test_QMapShack::writeReadGpxFile()
+void test_QMapShack::_writeReadGpxFile()
 {
     writeReadGpxFile(testInput + "qtt_gpx_file0.gpx");
     writeReadGpxFile(testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx");

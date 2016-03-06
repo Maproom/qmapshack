@@ -125,7 +125,7 @@ void CDeviceWatcherLinux::slotUpdate()
     }
 
 
-    foreach (QDBusObjectPath path, paths)
+    for(const QDBusObjectPath &path : paths)
     {
         QDBusMessage call = QDBusMessage::createMethodCall("org.freedesktop.UDisks2", path.path(), "org.freedesktop.DBus.Introspectable","Introspect");
         QDBusPendingReply<QString> reply = QDBusConnection::systemBus().call(call);
@@ -168,12 +168,12 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
     QDBusMessage reply = QDBusConnection::systemBus().call(message);
 
     QList<QByteArray> list;
-    foreach (QVariant arg, reply.arguments())
+    for(const QVariant &arg : reply.arguments())
     {
         arg.value<QDBusVariant>().variant().value<QDBusArgument>() >> list;
     }
 
-    foreach (QByteArray point, list)
+    for(const QByteArray &point : list)
     {
         points.append(point);
     }

@@ -306,7 +306,7 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    foreach(const file_t &mapFile, files)
+    for(const file_t &mapFile : files)
     {
         if(!viewport.intersects(mapFile.bbox))
         {

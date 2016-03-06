@@ -32,7 +32,7 @@ CDemPathSetup::CDemPathSetup(QStringList &paths)
     connect(toolDelete, &QToolButton::clicked,              this, &CDemPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CDemPathSetup::slotItemSelectionChanged);
 
-    foreach(const QString &path, paths)
+    for(const QString &path : paths)
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);

@@ -289,7 +289,7 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
     QString report;
     QStringList keys = statusMessages.keys();
     keys.sort();
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         report += statusMessages[key] + "\n";
     }

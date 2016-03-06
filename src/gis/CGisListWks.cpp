@@ -624,7 +624,7 @@ void CGisListWks::dropEvent( QDropEvent  * e )
         int N   = items.size();
         PROGRESS_SETUP(tr("Drop items..."), 0, N, this);
 
-        foreach(QTreeWidgetItem * item, items)
+        for(QTreeWidgetItem * item : items)
         {
             PROGRESS(cnt++, break);
 
@@ -932,7 +932,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
     bool allUnchecked = true;
     bool allCantSave  = true;
 
-    foreach(QTreeWidgetItem *item, selectedItems())
+    for(QTreeWidgetItem *item : selectedItems())
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -982,7 +982,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         {
             bool onlyWpts = true;
             bool onlyTrks = true;
-            foreach(QTreeWidgetItem *item, selectedItems())
+            for(QTreeWidgetItem *item : selectedItems())
             {
                 if(item->type() != IGisItem::eTypeWpt)
                 {
@@ -1086,7 +1086,7 @@ void CGisListWks::setVisibilityOnMap(bool visible)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem *item, items)
+    for(QTreeWidgetItem *item : items)
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1109,7 +1109,7 @@ void CGisListWks::slotHideFrMap()
 
 static void closeProjects(const QList<QTreeWidgetItem*> &items)
 {
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisProject *project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1155,7 +1155,7 @@ void CGisListWks::slotDeleteProject()
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1183,7 +1183,7 @@ void CGisListWks::slotSaveProject()
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1205,7 +1205,7 @@ void CGisListWks::slotSaveAsProject()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(nullptr != project)
@@ -1265,7 +1265,7 @@ void CGisListWks::slotDeleteItem()
 
     QList<QTreeWidgetItem*> items       = selectedItems();
     QList<IGisItem::key_t>  keys;
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != nullptr)
@@ -1292,7 +1292,7 @@ void CGisListWks::slotCopyItem()
      */
     QList<QTreeWidgetItem*> items = selectedItems();
     QList<IGisItem::key_t>  keys;
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
         if(gisItem != nullptr)
@@ -1376,7 +1376,7 @@ void CGisListWks::slotCombineTrk()
 
     QList<IGisItem::key_t>  keys;
     QList<QTreeWidgetItem*> items = selectedItems();
-    foreach(QTreeWidgetItem * item, items)
+    for(QTreeWidgetItem * item : items)
     {
         CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(item);
         if(gisItem)
@@ -1760,7 +1760,7 @@ bool CGisListWks::event(QEvent * e)
                 }
             }
 
-            foreach(CDBProject * project, projects)
+            for(CDBProject * project : projects)
             {
                 project->blockUpdateItems(false);
             }
@@ -1779,7 +1779,7 @@ void CGisListWks::slotRteFromWpt()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QList<IGisItem::key_t> keys;
-    foreach(QTreeWidgetItem * item, selectedItems())
+    for(QTreeWidgetItem * item : selectedItems())
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
         if(nullptr != wpt)
@@ -1798,7 +1798,7 @@ void CGisListWks::slotSyncDB()
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    foreach(QTreeWidgetItem * item, selectedItems())
+    for(QTreeWidgetItem * item : selectedItems())
     {
         CDBProject * project = dynamic_cast<CDBProject*>(item);
         if(project == nullptr)

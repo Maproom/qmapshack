@@ -226,7 +226,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
 
     bool watchOut       = false;
     QStringList lines   = asw.split("\n");
-    foreach(const QString &line, lines)
+    for(const QString &line : lines)
     {
         if(!watchOut && re1.exactMatch(line))
         {

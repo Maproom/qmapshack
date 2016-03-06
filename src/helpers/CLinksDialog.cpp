@@ -30,7 +30,7 @@ CLinksDialog::CLinksDialog(QList<IGisItem::link_t> &links, QWidget *parent)
     connect(toolDelete, &QToolButton::clicked,              this, &CLinksDialog::slotDelLink);
     connect(treeWidget, &QTreeWidget::itemSelectionChanged, this, &CLinksDialog::slotItemSelectionChanged);
 
-    foreach(const IGisItem::link_t& link, links)
+    for(const IGisItem::link_t& link : links)
     {
         QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
         item->setText(0, link.type);

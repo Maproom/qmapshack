@@ -82,9 +82,9 @@ void CPlotProfile::updateData()
 
     qreal basefactor = IUnit::self().basefactor;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
-    foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+    for(const CGisItemTrk::trkseg_t& seg : t.segs)
     {
-        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
         {
             if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
             {

@@ -161,9 +161,9 @@ void CActivityTrk::update()
     const CGisItemTrk::trkpt_t *    startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
-    foreach(const CGisItemTrk::trkseg_t &seg, data.segs)
+    for(const CGisItemTrk::trkseg_t &seg : data.segs)
     {
-        foreach(const CGisItemTrk::trkpt_t &pt, seg.pts)
+        for(const CGisItemTrk::trkpt_t &pt : seg.pts)
         {
             allFlags |= pt.flags;
 

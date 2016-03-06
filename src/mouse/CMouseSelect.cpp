@@ -70,7 +70,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         cntTrk = 0;
         cntRte = 0;
         cntOvl = 0;
-        foreach(IGisItem * item, items)
+        for(IGisItem * item : items)
         {
             itemKeys << item->getKey();
             switch(item->type())
@@ -120,7 +120,7 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     QList<IGisItem*> items;
     findItems(items);
 
-    foreach(IGisItem * item, items)
+    for(IGisItem * item : items)
     {
         item->drawHighlight(p);
     }

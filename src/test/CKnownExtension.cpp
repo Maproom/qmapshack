@@ -44,7 +44,7 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
             QStringList extensions = itemTrk->getExistingDataSources().filter(QRegExp("^((?!::ql:).)*$"));
 
             VERIFY_EQUAL(GarminTPX1Exts.size(), extensions.size());
-            foreach(const QString &exp, GarminTPX1Exts)
+            for(const QString &exp : GarminTPX1Exts)
             {
                 const QString &fullExp = ns + ":TrackPointExtension|" + ns + ":" + exp;
                 SUBVERIFY(extensions.contains(fullExp), "Missing extension " + fullExp)
@@ -57,13 +57,13 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
             const fTrkPtGetVal &getCad   = CKnownExtension::get(ns + ":TrackPointExtension|" + ns + ":cad").valueFunc;
 
             int i = 0;
-            foreach(const CGisItemTrk::trkseg_t &seg, trk.segs)
+            for(const CGisItemTrk::trkseg_t &seg : trk.segs)
             {
-                foreach(const CGisItemTrk::trkpt_t &trkpt, seg.pts)
+                for(const CGisItemTrk::trkpt_t &trkpt : seg.pts)
                 {
                     SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
 
-                    foreach(const QString &ext, trkpt.extensions.keys())
+                    for(const QString &ext : trkpt.extensions.keys())
                     {
                         VERIFY_EQUAL(true, CKnownExtension::isKnown(ext));
                     }

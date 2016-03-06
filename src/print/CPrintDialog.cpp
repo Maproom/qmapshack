@@ -215,7 +215,7 @@ void CPrintDialog::slotPrint()
     int n = 0;
     PROGRESS_SETUP(tr("Printing pages."), 0, N, this);
 
-    foreach(const QPointF &pt, centers)
+    for(const QPointF &pt : centers)
     {
         if(!first)
         {

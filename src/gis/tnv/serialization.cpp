@@ -240,9 +240,9 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << "y " << getKey().item << endl;
 
 
-    foreach(const CGisItemTrk::trkseg_t& seg, trk.segs)
+    for(const CGisItemTrk::trkseg_t& seg : trk.segs)
     {
-        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
         {
             list.clear();
 
@@ -289,7 +289,7 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
                     list << wpt->getName();
                     out << "a " << list.join(",") << endl;
 
-                    foreach(const CGisItemWpt::image_t& img, wpt->getImages())
+                    for(const CGisItemWpt::image_t& img : wpt->getImages())
                     {
                         QString fn = img.info;
                         if(fn.isEmpty())
@@ -516,7 +516,7 @@ void CGisItemWpt::saveTwoNav(QTextStream& out, const QDir& dir)
     }
 
 
-    foreach(const image_t &img, images)
+    for(const image_t &img : images)
     {
         QString fn = img.info;
         if(fn.isEmpty())
@@ -760,7 +760,7 @@ void CGisItemWpt::readTwoNav(const CTwoNavProject::wpt_t &tnvWpt)
     wpt.sym     = tnvWpt.symbol;
     key.item    = tnvWpt.key;
 
-    foreach(const CTwoNavProject::img_t& img, tnvWpt.images)
+    for(const CTwoNavProject::img_t& img : tnvWpt.images)
     {
         CGisItemWpt::image_t image;
         image.fileName  = img.filename;

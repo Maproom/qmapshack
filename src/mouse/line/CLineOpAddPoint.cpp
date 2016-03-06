@@ -222,7 +222,7 @@ void CLineOpAddPoint::drawFg(QPainter& p)
         else
         {
             line << pt1.pixel;
-            foreach(const IGisLine::subpt_t& pt, pt1.subpts)
+            for(const IGisLine::subpt_t& pt : pt1.subpts)
             {
                 line << pt.pixel;
             }

@@ -166,7 +166,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
 //    s2.setVersion(QDataStream::Qt_4_5);
 
 //    s2 << diary.wpts.count();
-//    foreach(CWpt * wpt, diary.wpts)
+//    for(CWpt * wpt : diary.wpts)
 //    {
 //        s2 << *wpt;
 //    }
@@ -182,7 +182,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
 //    s3.setVersion(QDataStream::Qt_4_5);
 
 //    s3 << diary.trks.count();
-//    foreach(CTrack * trk, diary.trks)
+//    for(CTrack * trk : diary.trks)
 //    {
 //        s3 << *trk;
 //    }
@@ -198,7 +198,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtDiary& diary)
 //    s4.setVersion(QDataStream::Qt_4_5);
 
 //    s4 << diary.rtes.count();
-//    foreach(CRoute * rte, diary.rtes)
+//    for(CRoute * rte : diary.rtes)
 //    {
 //        s4 << *rte;
 //    }

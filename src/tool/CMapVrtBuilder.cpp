@@ -54,7 +54,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
     cfg.setValue("VrtBuilder/sourcePath", path);
 
     listWidget->clear();
-    foreach(const QString &file, files)
+    for(const QString &file : files)
     {
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
@@ -99,7 +99,7 @@ void CMapVrtBuilder::slotStart()
     QStringList args;
     args << labelTargetFilename->text();
 
-    foreach(const QListWidgetItem * item, listWidget->findItems("*", Qt::MatchWildcard))
+    for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
     {
         args << item->text();
     }

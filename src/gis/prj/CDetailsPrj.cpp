@@ -379,7 +379,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
 {
     quint32 flags = 0;
     QVector<CActivityTrk::activity_summary_t> summaries(CGisItemTrk::trkpt_t::eActMaxNum + 1);
-    foreach(const CGisItemTrk* trk, trks)
+    for(const CGisItemTrk* trk : trks)
     {
         const CActivityTrk& activities = trk->getActivities();
         flags |= activities.getAllFlags();
@@ -410,12 +410,12 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
     if(trk)
     {
         QSet<QString> icons;
-        foreach(const CActivityTrk::activity_range_t& range, trk->getActivities().getActivityRanges())
+        for(const CActivityTrk::activity_range_t& range : trk->getActivities().getActivityRanges())
         {
             icons << range.icon;
         }
 
-        foreach(const QString &icon, icons)
+        for(const QString &icon : icons)
         {
             if(!icon.isEmpty())
             {
@@ -454,7 +454,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
         table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
 
         cnt = 1;
-        foreach(CGisItemWpt * wpt, wpts)
+        for(CGisItemWpt * wpt : wpts)
         {
             PROGRESS(n++, return );
 
@@ -481,7 +481,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 
         cnt = 1;
 
-        foreach(CGisItemTrk * trk, trks)
+        for(CGisItemTrk * trk : trks)
         {
             PROGRESS(n++, return );
 
@@ -550,13 +550,13 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
     const qreal h1 = qRound(w1/2.0);
 
 
-    foreach(CGisItemTrk * trk, trks)
+    for(CGisItemTrk * trk : trks)
     {
         QList<wpt_info_t> wptInfo;
         const CGisItemTrk::trk_t& t = trk->getTrackData();
-        foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+        for(const CGisItemTrk::trkseg_t& seg : t.segs)
         {
-            foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+            for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
             {
                 if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
                 {
@@ -585,7 +585,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
         cnt = 1;
 
-        foreach(const wpt_info_t &info, wptInfo)
+        for(const wpt_info_t &info : wptInfo)
         {
             PROGRESS(n++, return );
 
@@ -674,7 +674,7 @@ void CDetailsPrj::drawArea(QTextCursor& cursor, QList<CGisItemOvlArea *> &areas,
     table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
-    foreach(CGisItemOvlArea * area, areas)
+    for(CGisItemOvlArea * area : areas)
     {
         PROGRESS(n++, return );
 
@@ -704,7 +704,7 @@ void CDetailsPrj::drawRoute(QTextCursor& cursor, QList<CGisItemRte *> &rtes, CPr
     table->cellAt(0,eComment1).firstCursorPosition().insertText(tr("Comment"));
 
     int cnt = 1;
-    foreach(CGisItemRte * rte, rtes)
+    for(CGisItemRte * rte : rtes)
     {
         PROGRESS(n++, return );
 

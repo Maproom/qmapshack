@@ -38,7 +38,7 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidge
     cfg.beginGroup("Database");
     QStringList names = cfg.value("names").toStringList();
     cfg.beginGroup("Entries");
-    foreach(const QString &name, names)
+    for(const QString &name : names)
     {
         cfg.beginGroup(name);
         QString type = cfg.value("type", "SQLite").toString();

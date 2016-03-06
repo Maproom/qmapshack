@@ -271,7 +271,7 @@ void CMapWMTS::getLayers(QListWidget& list)
     }
 
     int i = 0;
-    foreach(const layer_t &layer, layers)
+    for(const layer_t &layer : layers)
     {
         QListWidgetItem * item = new QListWidgetItem(layer.title, &list);
         item->setCheckState(layer.enabled ? Qt::Checked : Qt::Unchecked);
@@ -323,7 +323,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 
     // enable layers stored in configuration
     enabled = cfg.value("enabledLayers", enabled).toStringList();
-    foreach(const QString &str, enabled)
+    for(const QString &str : enabled)
     {
         int idx = str.toInt();
         if(idx < layers.size())
@@ -502,7 +502,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     QRectF viewport(QPointF(x1,y1) * RAD_TO_DEG, QPointF(x2,y2) * RAD_TO_DEG);
 
     // draw layers
-    foreach(const layer_t &layer, layers)
+    for(const layer_t &layer : layers)
     {
         if(!layer.boundingBox.intersects(viewport) || !layer.enabled)
         {
@@ -529,7 +529,7 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
         QString tileMatrixId;
         QPointF s1 = (pt2 - pt1)/QPointF(buf.image.width(), buf.image.height());
         qreal d = NOFLOAT;
-        foreach(const QString &key, tileset.tilematrix.keys())
+        for(const QString &key : tileset.tilematrix.keys())
         {
             const tilematrix_t& tilematrix = tileset.tilematrix[key];
             qreal s2 = tilematrix.scale * 0.28e-3;

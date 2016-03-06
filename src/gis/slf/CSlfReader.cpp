@@ -128,7 +128,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
     }
 
     offsetsTime.append(0);
-    foreach(const QDomNode &marker, markers)
+    for(const QDomNode &marker : markers)
     {
         const QDomNamedNodeMap& attr = marker.attributes();
 
@@ -202,7 +202,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
     {
         const QDomNamedNodeMap &attr = xmlEntrs.item(i).attributes();
 
-        foreach(const QString &key, attrToExt.keys())
+        for(const QString &key : attrToExt.keys())
         {
             if(attr.contains(key) && ("0" != attr.namedItem(key).nodeValue()))
             {
@@ -239,7 +239,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
         trkpt.ele  = attr.namedItem("altitude" ).nodeValue().toDouble() / 1000.;
 
-        foreach(const QString &key, usedAttr)
+        for(const QString &key : usedAttr)
         {
             if(attr.contains(key))
             {

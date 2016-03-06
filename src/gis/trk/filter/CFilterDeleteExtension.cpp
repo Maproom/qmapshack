@@ -38,7 +38,7 @@ void CFilterDeleteExtension::update()
 {
     comboExtensions->clear();
 
-    foreach(const QString &key, trk.getExistingDataSources())
+    for(const QString &key : trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(!ext.derivedQMS)

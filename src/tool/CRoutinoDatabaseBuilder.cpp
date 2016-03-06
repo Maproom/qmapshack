@@ -64,7 +64,7 @@ void CRoutinoDatabaseBuilder::slotSelectSourceFiles()
     cfg.setValue("RoutinoDatabaseBuilder/sourcePath", path);
 
     listWidget->clear();
-    foreach(const QString &file, files)
+    for(const QString &file : files)
     {
         new QListWidgetItem(QIcon("://icons/32x32/Map.png"), file, listWidget);
     }
@@ -118,7 +118,7 @@ void CRoutinoDatabaseBuilder::slotStart()
     pushStart->setDisabled(true);
 
     sourceFiles.clear();
-    foreach(const QListWidgetItem * item, listWidget->findItems("*", Qt::MatchWildcard))
+    for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
     {
         sourceFiles << item->text();
     }

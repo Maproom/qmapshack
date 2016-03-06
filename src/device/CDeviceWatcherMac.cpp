@@ -61,7 +61,7 @@ void CDeviceWatcherMac::slotEndListing()
 void CDeviceWatcherMac::slotUpdate()
 {
     qDebug() << "slotUpdate";
-    foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
+    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
     {
         addDevice(storage);
     }
@@ -72,7 +72,7 @@ void CDeviceWatcherMac::slotDeviceAdded(QString dev)
 {
     // get mount point
     QStorageInfo storageInfo;
-    foreach(const QStorageInfo &storage, QStorageInfo::mountedVolumes())
+    for(const QStorageInfo &storage : QStorageInfo::mountedVolumes())
     {
         QString diskName = QString(storage.device()).section('/', -1);
         if(dev == diskName)

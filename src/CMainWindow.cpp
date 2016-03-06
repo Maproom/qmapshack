@@ -138,7 +138,7 @@ CMainWindow::CMainWindow()
     cfg.beginGroup("Views");
     QStringList names = cfg.childGroups();
 
-    foreach(const QString &name, names)
+    for(const QString &name : names)
     {
         CCanvas * view = new CCanvas(tabWidget, name);
         tabWidget->addTab(view, view->objectName());
@@ -807,7 +807,7 @@ void CMainWindow::slotLoadGISData()
 
 void CMainWindow::loadGISData(const QStringList& filenames)
 {
-    foreach(const QString &filename, filenames)
+    for(const QString &filename : filenames)
     {
         gisWidget->loadGisProject(filename);
     }
@@ -992,7 +992,7 @@ void CMainWindow::dropEvent(QDropEvent *event)
     QList<QUrl> urls = event->mimeData()->urls();
 
     QStringList filenames;
-    foreach(const QUrl &url, urls)
+    for(const QUrl &url : urls)
     {
         filenames << url.toLocalFile();
     }

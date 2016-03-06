@@ -30,7 +30,7 @@ CCombineTrk::CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisIte
     setupUi(this);
 
     CGisWidget& gis = CGisWidget::self();
-    foreach(const IGisItem::key_t& key, keys)
+    for(const IGisItem::key_t& key : keys)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
         if(nullptr == trk)

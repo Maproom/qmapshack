@@ -376,9 +376,9 @@ void CDetailsTrk::updateData()
 
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk.getTrackData();
-    foreach (const CGisItemTrk::trkseg_t& seg, t.segs)
+    for(const CGisItemTrk::trkseg_t& seg : t.segs)
     {
-        foreach(const CGisItemTrk::trkpt_t& trkpt, seg.pts)
+        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
         {
             QString val, unit;
 
@@ -506,7 +506,7 @@ void CDetailsTrk::updateData()
     // the first entry `solid color`, it is always available
     comboColorSource->addItem(QIcon("://icons/32x32/CSrcSolid.png"), tr("Color"));
     comboColorSource->addItem(QIcon("://icons/32x32/Activity.png"), tr("Activity"), "activity");
-    foreach(const QString &key, trk.getExistingDataSources())
+    for(const QString &key : trk.getExistingDataSources())
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);

@@ -50,7 +50,7 @@ void CPropertyTrk::setupData()
     properties << propNull;
 
     QStringList keys = trk.getExistingDataSources();
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QString name = (ext.known ? ext.name : key);
@@ -89,7 +89,7 @@ void CPropertyTrk::setupData()
 
 const CPropertyTrk::property_t& CPropertyTrk::propBySource(const QString& source) const
 {
-    foreach(const property_t &prop, properties)
+    for(const property_t &prop : properties)
     {
         if(prop.key == source)
         {
@@ -104,7 +104,7 @@ void CPropertyTrk::fillComboBox(QComboBox * box) const
 {
     box->clear();
 
-    foreach(const property_t &p, properties)
+    for(const property_t &p : properties)
     {
         if(p.key == CKnownExtension::internalEle)
         {

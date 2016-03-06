@@ -644,9 +644,9 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         qDeleteAll(takeChildren());
     }
 
-    foreach(const evt_item_t &item, evt->items)
+    for(const evt_item_t &item : evt->items)
     {
-        IGisItem * gisItem = 0;
+        IGisItem * gisItem = nullptr;
         switch(item.type)
         {
         case IGisItem::eTypeWpt:
@@ -707,7 +707,7 @@ void CDBProject::hideItems(CEvtD2WHideItems * evt)
 
     QMessageBox::StandardButtons last = QMessageBox::YesToAll;
 
-    foreach(const QString &k, evt->keys)
+    for(const QString &k : evt->keys)
     {
         key.item = k;
         delItemByKey(key, last);

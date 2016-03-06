@@ -101,7 +101,7 @@ void CMapDraw::setupMapPath(const QStringList& paths)
 {
     mapPaths = paths;
 
-    foreach(CMapDraw * map, maps)
+    for(CMapDraw * map : maps)
     {
         QStringList keys;
         map->saveActiveMapsList(keys);
@@ -253,11 +253,11 @@ void CMapDraw::buildMapList()
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
 
-    foreach(const QString &path, mapPaths)
+    for(const QString &path : mapPaths)
     {
         QDir dir(path);
         // find available maps
-        foreach(const QString &filename, dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
+        for(const QString &filename : dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
             QFileInfo fi(filename);
 
@@ -323,7 +323,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         for(int i = 0; i < mapList->count(); i++)
         {
@@ -348,7 +348,7 @@ void CMapDraw::restoreActiveMapsList(const QStringList& keys, QSettings& cfg)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    foreach(const QString &key, keys)
+    for(const QString &key : keys)
     {
         for(int i = 0; i < mapList->count(); i++)
         {

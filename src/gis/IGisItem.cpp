@@ -716,7 +716,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         }
         else
         {
-            foreach(const link_t &link, links)
+            for(const link_t &link : links)
             {
                 if(link.text.isEmpty())
                 {
@@ -761,7 +761,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         }
         else
         {
-            foreach(const link_t &link, links)
+            for(const link_t &link : links)
             {
                 if(link.text.isEmpty())
                 {
@@ -813,7 +813,7 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
 {
     if(flags & eSelectionExact)
     {
-        foreach(const QPointF &point, points)
+        for(const QPointF &point : points)
         {
             if(!area.contains(point))
             {
@@ -824,7 +824,7 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     }
     else if(flags & eSelectionIntersect)
     {
-        foreach(const QPointF &point, points)
+        for(const QPointF &point : points)
         {
             if(area.contains(point))
             {

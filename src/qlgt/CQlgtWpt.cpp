@@ -299,7 +299,7 @@ QDataStream& operator <<(QDataStream& s, CQlgtWpt& wpt)
 
         s3 << cache.logs.count();
 
-        foreach(const CQlgtWpt::geocachelog_t& log, cache.logs)
+        for(const CQlgtWpt::geocachelog_t& log : cache.logs)
         {
             s3 << log.id;
             s3 << log.date;

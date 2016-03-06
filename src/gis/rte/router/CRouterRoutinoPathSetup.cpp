@@ -31,7 +31,7 @@ CRouterRoutinoPathSetup::CRouterRoutinoPathSetup(QStringList &paths)
     connect(toolDelete, &QToolButton::clicked,              this, &CRouterRoutinoPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CRouterRoutinoPathSetup::slotItemSelectionChanged);
 
-    foreach(const QString &path, paths)
+    for(const QString &path : paths)
     {
         QListWidgetItem * item = new QListWidgetItem(listWidget);
         item->setText(path);

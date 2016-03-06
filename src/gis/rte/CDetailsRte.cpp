@@ -74,13 +74,13 @@ void CDetailsRte::setupGui()
 
 //    treeWidget->clear();
 //    QString val, unit;
-//    foreach(const CGisItemRte::rtept_t& rtept, rte.getRoute().pts)
+//    for(const CGisItemRte::rtept_t& rtept : rte.getRoute().pts)
 //    {
 //        QTreeWidgetItem * item = new QTreeWidgetItem(treeWidget);
 
 //        item->setText(0, tr("Route waypoint"));
 
-//        foreach(const CGisItemRte::subpt_t& subpt, rtept.subpts)
+//        for(const CGisItemRte::subpt_t& subpt : rtept.subpts)
 //        {
 //            if(subpt.type != CGisItemRte::subpt_t::eTypeJunct)
 //            {

@@ -221,7 +221,7 @@ void CDetailsOvlArea::setupGui()
     int idx = 0;
     QList<QTreeWidgetItem*> items;
     const CGisItemOvlArea::area_t& a = area.getAreaData();
-    foreach(const CGisItemOvlArea::pt_t& pt, a.pts)
+    for(const CGisItemOvlArea::pt_t& pt : a.pts)
     {
         QTreeWidgetItem * item = new QTreeWidgetItem();
 

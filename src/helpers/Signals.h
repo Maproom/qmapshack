@@ -24,7 +24,7 @@
 
 inline void X______________BlockAllSignals______________X(QObject * parent)
 {
-    foreach(QObject * obj, parent->findChildren<QObject*>(QRegExp(".*")))
+    for(QObject * obj : parent->findChildren<QObject*>(QRegExp(".*")))
     {
         obj->blockSignals(true);
     }
@@ -32,7 +32,7 @@ inline void X______________BlockAllSignals______________X(QObject * parent)
 
 inline void X_____________UnBlockAllSignals_____________X(QObject * parent)
 {
-    foreach(QObject * obj, parent->findChildren<QObject*>(QRegExp(".*")))
+    for(QObject * obj : parent->findChildren<QObject*>(QRegExp(".*")))
     {
         obj->blockSignals(false);
     }

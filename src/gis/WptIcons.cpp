@@ -70,10 +70,9 @@ void initWptIcons()
     SETTINGS;
     QDir dirIcon(cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());
 
-    QString filename;
     QStringList filenames = dirIcon.entryList(QStringList("*.bmp"), QDir::Files);
 
-    foreach(filename, filenames)
+    for(const QString &filename : filenames)
     {
         QFileInfo fi(filename);
         QString name = fi.baseName();

@@ -48,7 +48,7 @@ public:
 
     void free()
     {
-        foreach(uchar * p, mappedSections)
+        for(uchar * p : mappedSections)
         {
             unmap(p);
         }

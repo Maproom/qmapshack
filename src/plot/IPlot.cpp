@@ -691,7 +691,7 @@ QPolygonF IPlot::getVisiblePolygon(const QPolygonF &polyline, QPolygonF &line) c
     int ptx = NOINT;
     int pty = NOINT;
 
-    foreach(const QPointF &pt, polyline)
+    for(const QPointF &pt : polyline)
     {
         int oldPtx = ptx;
         int oldPty = pty;
@@ -1046,7 +1046,7 @@ void IPlot::drawDecoration( QPainter &p )
             p.drawLine(x, top, x, bottom);
 
             // check if the mouse is near a waypoint
-            foreach(const CPlotData::point_t& tag, data->tags)
+            for(const CPlotData::point_t& tag : data->tags)
             {
                 int ptx = left + data->x().val2pt( tag.point.x() );
 
@@ -1166,7 +1166,7 @@ void IPlot::drawActivities(QPainter& p)
 
     QRect rectIconFrame(0,0,20,20);
     QRect rectIcon(2,2,16,16);
-    foreach(const CActivityTrk::activity_range_t& range, ranges)
+    for(const CActivityTrk::activity_range_t& range : ranges)
     {
         int x1, x2;
         if(data->axisType == CPlotData::eAxisTime)

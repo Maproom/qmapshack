@@ -115,7 +115,7 @@ void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
 {
     IScrOpt::mouseMoveEvent(e);
 
-    foreach(const item_t &item, items)
+    for(const item_t &item : items)
     {
         if(item.active.contains(mousePos) || item.text.contains(mousePos))
         {
@@ -160,7 +160,7 @@ IGisItem::key_t CScrOptUnclutter::getItemKey(int index)
 
 const CScrOptUnclutter::item_t * CScrOptUnclutter::selectItem(const QPoint& point)
 {
-    foreach(const item_t &item, items)
+    for(const item_t &item : items)
     {
         if(item.active.contains(point) || item.text.contains(point))
         {
@@ -195,7 +195,7 @@ void CScrOptUnclutter::draw(QPainter& p)
         }
     }
 
-    foreach(const item_t &item, items)
+    for(const item_t &item : items)
     {
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));

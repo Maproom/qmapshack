@@ -30,7 +30,7 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
 
     dir.mkpath(dir.path());
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
-    foreach(const QFileInfo &fileinfo, files)
+    for(const QFileInfo &fileinfo : files)
     {
         QString hash    = fileinfo.baseName();
         table[hash]     = fileinfo.fileName();
@@ -116,7 +116,7 @@ void CDiskCache::slotCleanup()
     qint32 maxSize      = size * 1024 * 1024;
     qint32 tmpSize      = 0;
     // expire old files and calculate cache size
-    foreach(const QFileInfo &fileinfo, files)
+    for(const QFileInfo &fileinfo : files)
     {
         if(fileinfo.lastModified().daysTo(now) > days)
         {
@@ -136,7 +136,7 @@ void CDiskCache::slotCleanup()
     {
         files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time|QDir::Reversed);
         // if cache is still too large remove oldest files
-        foreach(const QFileInfo &fileinfo, files)
+        for(const QFileInfo &fileinfo : files)
         {
             QString hash = fileinfo.baseName();
             table.remove(hash);

@@ -23,10 +23,9 @@
 
 class CUnitMetric : public IUnit
 {
-    Q_OBJECT
 public:
-    CUnitMetric(QObject * parent);
-    virtual ~CUnitMetric();
+    CUnitMetric();
+    virtual ~CUnitMetric() = default;
 
     void meter2elevation(qreal meter, QString& val, QString& unit) const override;
     void meter2distance(qreal meter, QString& val, QString& unit) const override;
@@ -35,4 +34,4 @@ public:
 
     qreal elevation2meter(const QString& val) const override;
 };
-#endif                           //CUNITMETRIC_H
+#endif // CUNITMETRIC_H

@@ -29,7 +29,7 @@ class CFilterNewDate : public QWidget, private Ui::IFilterNewDate
     Q_OBJECT
 public:
     CFilterNewDate(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterNewDate();
+    virtual ~CFilterNewDate() = default;
 
 private slots:
     void slotApply();

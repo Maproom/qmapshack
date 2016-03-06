@@ -29,7 +29,7 @@ class CFilterReplaceElevation : public QWidget, private Ui::IFilterReplaceElevat
     Q_OBJECT
 public:
     CFilterReplaceElevation(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterReplaceElevation();
+    virtual ~CFilterReplaceElevation() = default;
 
 private slots:
     void slotApply();

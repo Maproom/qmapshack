@@ -26,7 +26,7 @@ class CQmsProject : public IGisProject
     Q_DECLARE_TR_FUNCTIONS(CQmsProject)
 public:
     CQmsProject(const QString& filename, CGisListWks * parent);
-    virtual ~CQmsProject();
+    virtual ~CQmsProject() = default;
 
     const QString getFileDialogFilter() const override
     {

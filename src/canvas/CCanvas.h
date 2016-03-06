@@ -45,8 +45,6 @@ class QLabel;
 class IPlot;
 struct SGisLine;
 
-
-
 class CCanvas : public QWidget
 {
     Q_OBJECT
@@ -54,7 +52,7 @@ public:
     CCanvas(QWidget * parent, const QString& name);
     virtual ~CCanvas();
 
-    static void setOverrideCursor(const QCursor& cursor, const QString &src);
+    static void setOverrideCursor(const QCursor &cursor, const QString&);
     static void restoreOverrideCursor(const QString &src);
     static void changeOverrideCursor(const QCursor& cursor, const QString &src);
 
@@ -81,9 +79,9 @@ public:
     void  setScales(const scales_type_e type);
     scales_type_e getScalesType();
 
-    qreal getElevationAt(const QPointF &pos);
-    void  getElevationAt(const QPolygonF& pos, QPolygonF &ele);
-    void  getElevationAt(SGisLine &line);
+    qreal getElevationAt(const QPointF &pos) const;
+    void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
+    void  getElevationAt(SGisLine &line) const;
 
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);

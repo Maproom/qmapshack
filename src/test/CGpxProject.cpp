@@ -17,16 +17,39 @@
 **********************************************************************************************/
 
 #include "test/test_QMapShack.h"
+#include "test/TestHelper.h"
 
 #include "gis/gpx/CGpxProject.h"
 
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/CKnownExtension.h"
-#include "gis/wpt/CGisItemWpt.h"
-
-static CGpxProject* readGpxFile(const QString &file, bool valid)
+void test_QMapShack::writeReadGpxFile(const QString &file)
 {
-    // this does not ready anything, a bare CSlfProject is created
+    IGisProject *proj = readProjFile(file);
+
+    QString tmpFile = TestHelper::getTempFileName("gpx");
+    CGpxProject::saveAs(tmpFile, *proj);
+
+    delete proj;
+
+    proj = readGpxFile(tmpFile, true);
+    verify(file + ".xml", *proj);
+
+    delete proj;
+
+    QFile(tmpFile).remove();
+}
+
+void test_QMapShack::_writeReadGpxFile()
+{
+    writeReadGpxFile(testInput + "qtt_gpx_file0.gpx");
+    writeReadGpxFile(testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx");
+    writeReadGpxFile(testInput + "gpx_ext_GarminTPX1_tp1.gpx");
+    writeReadGpxFile(testInput + "V1.6.0_file1.qms");
+    writeReadGpxFile(testInput + "V1.6.0_file2.qms");
+}
+
+CGpxProject* test_QMapShack::readGpxFile(const QString &file, bool valid)
+{
+    // this does not read anything, a bare CGpxProject is created
     CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
 
     bool hadExc = false;
@@ -42,29 +65,10 @@ static CGpxProject* readGpxFile(const QString &file, bool valid)
         hadExc = true;
     }
 
-    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown")
+    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown");
     SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
+
+    tryVerify(file, *proj);
 
     return proj;
 }
-
-void test_QMapShack::readWriteGPXFile()
-{
-    // step 1: read .gpx file
-    CGpxProject *proj = readGpxFile(testInput + "qtt_gpx_file0.gpx", true);
-    verify(testInput + "qtt_gpx_file0.gpx.xml", *proj);
-
-    // step 2: write to new .gpx file
-    QString tmpFile = getTempFileName("gpx");
-    CGpxProject::saveAs(tmpFile, *proj);
-
-    delete proj;
-
-    // step 3: read .gpx file from step 2
-    proj = readGpxFile(tmpFile, true);
-    verify(testInput + "qtt_gpx_file0.gpx.xml", *proj);
-    delete proj;
-
-    QFile(tmpFile).remove();
-}
-

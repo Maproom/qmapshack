@@ -24,7 +24,7 @@
 
 #include <QtWidgets>
 #include <proj_api.h>
-IUnit * IUnit::m_self = nullptr;
+const IUnit * IUnit::m_self = nullptr;
 
 const QPointF NOPOINTF(NOFLOAT, NOFLOAT);
 const QPoint NOPOINT (NOINT, NOINT);
@@ -421,26 +421,25 @@ const char * IUnit::tblTimezone[] =
 
 const int N_TIMEZONES = sizeof(IUnit::tblTimezone)/sizeof(const char*);
 
-QRegExp IUnit::reCoord1("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
+const QRegExp IUnit::reCoord1("^\\s*([N|S]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s+([E|W|O]){1}\\W*([0-9]+)\\W*([0-9]+\\.[0-9]+)\\s*$");
 
-QRegExp IUnit::reCoord2("^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s*$");
+const QRegExp IUnit::reCoord2("^\\s*([N|S]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s+([E|W|O]){1}\\s*([0-9]+\\.[0-9]+)\\W*\\s*$");
 
-QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
+const QRegExp IUnit::reCoord3("^\\s*([-0-9]+\\.[0-9]+)\\s+([-0-9]+\\.[0-9]+)\\s*$");
 
-QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*\\s*$");
+const QRegExp IUnit::reCoord4("^\\s*([N|S]){1}\\s*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*([E|W|O]){1}\\W*([0-9]+)\\W+([0-9]+)\\W+([0-9]+\\.[0-9]+)\\W*\\s*$");
 
-QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
+const QRegExp IUnit::reCoord5("^\\s*([-0-9]+\\.[0-9]+)([N|S])\\s+([-0-9]+\\.[0-9]+)([W|E])\\s*$");
 
-IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject * parent)
-    : QObject(parent)
-    , type(type)
+IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor)
+    : type(type)
     , baseunit(baseunit)
     , basefactor(basefactor)
     , speedunit(speedunit)
     , speedfactor(speedfactor)
 {
     //there can be only one...
-    if(m_self)
+    if(nullptr != m_self)
     {
         delete m_self;
     }
@@ -448,24 +447,20 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
 }
 
 
-IUnit::~IUnit()
-{
-}
-
-void IUnit::setUnitType(type_e t, QObject * parent)
+void IUnit::setUnitType(type_e t)
 {
     switch(t)
     {
     case eTypeMetric:
-        new CUnitMetric(parent);
+        new CUnitMetric();
         break;
 
     case eTypeImperial:
-        new CUnitImperial(parent);
+        new CUnitImperial();
         break;
 
     case eTypeNautic:
-        new CUnitNautic(parent);
+        new CUnitNautic();
         break;
     }
 
@@ -639,11 +634,8 @@ void IUnit::degToStr(const qreal& x, const qreal& y, QString& str)
 
     case eCoordFormat2:
     {
-        bool signLat = y < 0;
-        bool signLon = x < 0;
-
-        const QString &lat = signLat ? "S" : "N";
-        const QString &lng = signLon ? "W" : "E";
+        const QString &lat = (y < 0) ? "S" : "N";
+        const QString &lng = (x < 0) ? "W" : "E";
         str.sprintf("%s%02.6f° %s%03.6f°",lat.toUtf8().data(),qAbs(y),lng.toUtf8().data(),qAbs(x));
         break;
     }
@@ -767,8 +759,5 @@ bool IUnit::isValidCoordString(const QString& str)
     {
         return true;
     }
-    else
-    {
-        return false;
-    }
+    return false;
 }

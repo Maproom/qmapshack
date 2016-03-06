@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015-2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,16 @@
 
 **********************************************************************************************/
 
+#include <QtCore>
 #include <QTest>
+
+#include "test/TestHelper.h"
+
 class IGisProject;
-class QDomNode;
+class CGpxProject;
+class CQmsProject;
 
 extern QString testInput;
-
-#define SUBVERIFY(EXPR, MSG) \
-    { if(!(EXPR)) { throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); } \
-    }
-
-#define VERIFY_EQUAL(EXP, ACT) \
-    SUBVERIFY( (EXP == ACT), QTest::toString(QString("Expected `%1`, got `%2`").arg(EXP).arg(ACT)) );
 
 #define TCWRAPPER( CALL ) { try { CALL; } catch(QString &error) { QFAIL(error.toStdString().c_str()); } \
 }
@@ -37,25 +35,46 @@ class test_QMapShack : public QObject
     Q_OBJECT
 
     QString testInput;
+    QList<QString> inputFiles;
 
-    void verify(const QString &expectFile, const IGisProject &proj);
+    static void tryVerify(const QString &projFile, const IGisProject &proj);
+    static void verify(const QString &expectFile, const IGisProject &proj);
+    static void verify(expectedGisProject exp, const IGisProject &proj);
 
+    static CGpxProject* readGpxFile(const QString &file, bool valid = true);
+    static CQmsProject* readQmsFile(const QString &file, bool valid = true);
+    static IGisProject* readProjFile(const QString &file, bool valid = true);
 
-    /// helper functions
-    QString getAttribute(const QDomNode &node, const QString &name);
-    QString getTempFileName(const QString &ext);
-
-    /// CSlfReader
-    void readValidSLFFile();
-    void readNonExistingSLFFile();
+    // CSlfReader
+    void _readValidSLFFile();
+    void _readNonExistingSLFFile();
 
     // CGpxProject
-    void readWriteGPXFile();
+    static void writeReadGpxFile(const QString &file);
+    void _writeReadGpxFile();
+
+    // CKnownExtension
+    void _readExtGarminTPX1_tp1();
+    void _readExtGarminTPX1_gpxtpx();
+
+    void readExtGarminTPX1(const QString &file, const QString &ns);
+
+    // CQmsProject
+    void _readQmsFile_1_6_0();
+    void _writeReadQmsFile();
+
+    // CGisItemTrk
+    void _filterDeleteExtension();
 
 private slots:
     void initTestCase();
 
-    void _readValidSLFFile()       { TCWRAPPER( readValidSLFFile()       ) }
-    void _readNonExistingSLFFile() { TCWRAPPER( readNonExistingSLFFile() ) }
-    void _readWriteGPXFile()       { TCWRAPPER( readWriteGPXFile()       ) }
+    void readValidSLFFile()         { TCWRAPPER( _readValidSLFFile()         ) }
+    void readNonExistingSLFFile()   { TCWRAPPER( _readNonExistingSLFFile()   ) }
+    void writeReadGpxFile()         { TCWRAPPER( _writeReadGpxFile()         ) }
+    void readQmsFile_1_6_0()        { TCWRAPPER( _readQmsFile_1_6_0()        ) }
+    void writeReadQmsFile()         { TCWRAPPER( _writeReadQmsFile()         ) }
+    void readExtGarminTPX1_gpxtpx() { TCWRAPPER( _readExtGarminTPX1_gpxtpx() ) }
+    void readExtGarminTPX1_tp1()    { TCWRAPPER( _readExtGarminTPX1_tp1()    ) }
+    void filterDeleteExtension()    { TCWRAPPER( _filterDeleteExtension()    ) }
 };

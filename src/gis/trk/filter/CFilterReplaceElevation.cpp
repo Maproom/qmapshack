@@ -29,10 +29,6 @@ CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *pare
     connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
 }
 
-CFilterReplaceElevation::~CFilterReplaceElevation()
-{
-}
-
 void CFilterReplaceElevation::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterMedian");

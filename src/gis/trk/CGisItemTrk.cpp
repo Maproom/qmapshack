@@ -1972,8 +1972,18 @@ void CGisItemTrk::drawHighlight(QPainter& p)
     {
         return;
     }
+
+
+    // draw the reduced track line
+    QList<QPolygonF> lines;
+    splitLineToViewport(lineSimple, p.viewport(), lines);
+
     p.setPen(QPen(QColor(255,0,0,100), penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-    p.drawPolyline(lineSimple);
+
+    for(const QPolygonF &line : lines)
+    {
+        p.drawPolyline(line);
+    }
 }
 
 void CGisItemTrk::drawRange(QPainter& p)

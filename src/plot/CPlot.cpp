@@ -88,21 +88,21 @@ void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
     {
-        if(posMouse != NOPOINT)
+        if(posMouse1 != NOPOINT)
         {
-            posMouse = NOPOINT;
+            posMouse1 = NOPOINT;
             needsRedraw = true;
         }
     }
     else
     {
-        if(posMouse == NOPOINT)
+        if(posMouse1 == NOPOINT)
         {
             needsRedraw = true;
         }
 
-        posMouse.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
-        posMouse.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
+        posMouse1.rx() = left  + data->x().val2pt(getX(*ptMouseMove));
+        posMouse1.ry() = top  +  data->y().val2pt(getY(*ptMouseMove));
     }
     update();
 }

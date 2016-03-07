@@ -22,6 +22,7 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisWidget.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CActivityTrk.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -93,6 +94,8 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionResetZoom = menu->addAction(QIcon("://icons/32x32/Zoom.png"),        tr("Reset Zoom"), this, SLOT(slotResetZoom()));
     actionStopRange = menu->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Stop Range"), this, SLOT(slotStopRange()));
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
+    menu->addSeparator();
+    actionAddWpt    = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -233,7 +236,7 @@ void IPlot::resizeEvent(QResizeEvent * e)
 void IPlot::leaveEvent(QEvent * e)
 {
     needsRedraw = true;
-    posMouse    = NOPOINT;
+    posMouse1    = NOPOINT;
 
     CCanvas::restoreOverrideCursor("IPlot::leaveEvent");
     update();
@@ -307,13 +310,13 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     }
 
     QPoint pos  = e->pos();
-    posMouse    = NOPOINT;
+    posMouse1    = NOPOINT;
     if(graphAreaContainsMousePos(pos))
     {
-        posMouse = pos;
+        posMouse1 = pos;
 
         // set point of focus at track object
-        qreal x = data->x().pt2val(posMouse.x() - left);
+        qreal x = data->x().pt2val(posMouse1.x() - left);
         setMouseFocus(x, CGisItemTrk::eFocusMouseMove);
 
         // update canvas if visible
@@ -324,6 +327,7 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         }
         e->accept();
     }
+
     update();
 }
 
@@ -362,11 +366,9 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     bool wasProcessed = true;
 
     QPoint pos  = e->pos();
-    posMouse    = NOPOINT;
-    if((e->button() == Qt::LeftButton) && graphAreaContainsMousePos(pos))
+    posMouse1    = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+    if(e->button() == Qt::LeftButton)
     {
-        posMouse = pos;
-
         if(mode == eModeIcon)
         {
             trk->edit();
@@ -374,7 +376,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
         else
         {
             // set point of focus at track object
-            qreal x = data->x().pt2val(posMouse.x() - left);
+            qreal x = data->x().pt2val(posMouse1.x() - left);
 
             switch(mouseClickState)
             {
@@ -392,7 +394,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                         If the object is not the owner of the range selection, no action has to be taken.
                         However the user has to be informed, that he clicked on the wrong widget.
                      */
-                    new CFadingIcon(posMouse, "://icons/48x48/NoGo.png", this);
+                    new CFadingIcon(posMouse1, "://icons/48x48/NoGo.png", this);
                     wasProcessed = false;
                 }
                 break;
@@ -618,7 +620,7 @@ void IPlot::draw()
     {
         QRect r = rect();
         r.adjust(2,2,-2,-2);
-        if(underMouse() || posMouse != NOPOINT || solid)
+        if(underMouse() || posMouse1 != NOPOINT || solid)
         {
             p.setPen(solid ? CDraw::penBorderBlack : CDraw::penBorderBlue);
             p.setOpacity(1.0);
@@ -1036,10 +1038,10 @@ void IPlot::drawLegend(QPainter& p)
 
 void IPlot::drawDecoration( QPainter &p )
 {
-    if(posMouse != NOPOINT)
+    if(posMouse1 != NOPOINT)
     {
         // draw the vertical `you are here` line
-        int x = posMouse.x();
+        int x = posMouse1.x();
         p.setPen(QPen(Qt::red, 2));
         if(x >= left && x <= right)
         {
@@ -1219,8 +1221,13 @@ void IPlot::slotContextMenu(const QPoint & point)
     actionResetZoom->setEnabled(isZoomed());
     actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
     actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
+    actionAddWpt->setDisabled(posMouse1 == NOPOINT);
+
+    posMouse2 = posMouse1;
 
     menu->exec(p);
+
+    posMouse2 = NOPOINT;
 }
 
 void IPlot::slotSave()
@@ -1304,6 +1311,27 @@ void IPlot::slotResetZoom()
     update();
 }
 
+
+void IPlot::slotAddWpt()
+{
+    if(posMouse2 == NOPOINT)
+    {
+        return;
+    }
+
+    const CGisItemTrk::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    if(trkpt == nullptr)
+    {
+        return;
+    }
+
+    CGisWidget::self().addWptByPos({trkpt->lon, trkpt->lat});
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas != nullptr)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
+}
 
 void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
 {

@@ -351,23 +351,7 @@ void CMouseNormal::slotAddWpt() const
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
-    QString name;
-    QString icon;
-    if(!CGisItemWpt::getNewWptData(pt, icon, name))
-    {
-        return;
-    }
-
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
-    {
-        return;
-    }
-
-    QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
-    wpt->edit();
-
+    CGisWidget::self().addWptByPos(pt);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

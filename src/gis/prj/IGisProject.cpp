@@ -243,17 +243,14 @@ void IGisProject::updateItems()
         return;
     }
 
+
     updateItemCounters();
 
-    if(noCorrelation || getItemCountByType(IGisItem::eTypeTrk) == 0 || getItemCountByType(IGisItem::eTypeWpt) == 0)
+    if(noCorrelation || (hashTrkWpt[0] == hashTrkWpt[1]) || (getItemCountByType(IGisItem::eTypeTrk) == 0))
     {
         return;
     }
 
-    if(hashTrkWpt[0] == hashTrkWpt[1])
-    {
-        return;
-    }
 
     quint32 total   = cntTrkPts * cntWpts;
     quint32 current = 0;

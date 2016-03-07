@@ -254,6 +254,11 @@ public:
         return propHandler;
     }
 
+    const trkpt_t * getMouseMoveFocusPoint() const
+    {
+        return mouseMoveFocus;
+    }
+
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -738,9 +743,9 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void setMouseFocusVisuals(const CGisItemTrk::trkpt_t * pt);
-    void setMouseRangeFocusVisuals(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
-    void setMouseClickFocusVisuals(const CGisItemTrk::trkpt_t * pt);
+    void setMouseFocusVisuals(const trkpt_t * pt);
+    void setMouseRangeFocusVisuals(const trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
+    void setMouseClickFocusVisuals(const trkpt_t * pt);
 
 public:
     struct trkpt_t : public wpt_t

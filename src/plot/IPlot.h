@@ -67,6 +67,7 @@ private slots:
     void slotCopy();
     void slotStopRange();
     void slotResetZoom();
+    void slotAddWpt();
 
 
 protected:
@@ -126,8 +127,9 @@ protected:
     bool thinLine  = false;
     bool solid     = false;
 
-    QImage buffer;
-    QPoint posMouse = NOPOINT;
+    QImage buffer;    
+    QPoint posMouse1 = NOPOINT; ///< pixel coordinate of mouse in graph area while in focus
+    QPoint posMouse2 = NOPOINT; ///< pixel coordinate of mouse in graph area while in context menu function
 
     /**
        @brief The track this plot is attached to
@@ -170,6 +172,7 @@ protected:
     QAction * actionResetZoom;
     QAction * actionPrint;
     QAction * actionStopRange;
+    QAction * actionAddWpt;
 
     qint32 idxSel1 = NOIDX;
     qint32 idxSel2 = NOIDX;

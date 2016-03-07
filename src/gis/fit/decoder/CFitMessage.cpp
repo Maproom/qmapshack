@@ -88,7 +88,7 @@ bool CFitMessage::isFieldValueValid(const quint8 fieldDefNum) const
     return fields[fieldDefNum].isValidValue();
 }
 
-const QVariant& CFitMessage::getFieldValue(const quint8 fieldDefNum) const
+const QVariant CFitMessage::getFieldValue(const quint8 fieldDefNum) const
 {
     return fields[fieldDefNum].getValue();
 }

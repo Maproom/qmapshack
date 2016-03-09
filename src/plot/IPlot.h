@@ -127,7 +127,7 @@ protected:
     bool thinLine  = false;
     bool solid     = false;
 
-    QImage buffer;    
+    QImage buffer;
     QPoint posMouse1 = NOPOINT; ///< pixel coordinate of mouse in graph area while in focus
     QPoint posMouse2 = NOPOINT; ///< pixel coordinate of mouse in graph area while in context menu function
 

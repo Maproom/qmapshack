@@ -107,11 +107,8 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
             log.id          = log1.id;
             IUnit::parseTimestamp(log1.date, log.date);
             log.type        = log1.type;
-            ;
             log.finderId    = log1.finderId;
-            ;
             log.finder      = log1.finder;
-            ;
             log.textIsHtml  = log1.text.contains("</");
             log.text        = log1.text;
             geocache.logs << log;

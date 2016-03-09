@@ -40,12 +40,26 @@ private:
     void readEntries(const QDomNode& xml);
     void readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata);
 
+    /**
+       @brief Search for attributes that are not 0-only.
+
+       Sigma Data Center even stores non-used values (as 0) within the .slf file.
+       As we do not want to include those 0-only values as extensions, we need to
+       search for used attributes first.
+
+       @param xmlEntrs  List of nodes
+       @return  Set of used attributes
+     */
+    QSet<QString> findUsedAttributes(const QDomNodeList &xmlEntrs);
+
     static QDateTime parseTimestamp(const QString &ts);
 
-    CSlfProject   *proj = nullptr; /// the resulting project after construction
-    QDateTime      baseTime;       /// the time all entries refer to
-    QList<long>    offsetsTime;    /// an additional offset, required to take breaks into account
-    QList<long>    laps;           /// the distances a new lap starts at (a lap is a .slf segment)
+    CSlfProject   *proj = nullptr; //< the resulting project after construction
+    QDateTime      baseTime;       //< the time all entries refer to
+    QList<long>    offsetsTime;    //< an additional offset, required to take breaks into account
+    QList<long>    laps;           //< the distances a new lap starts at (a lap is a .slf segment)
+
+    static const QHash<QString, QString> attrToExt;
 };
 
 #endif // CSLFREADER_H

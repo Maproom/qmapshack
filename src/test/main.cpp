@@ -19,13 +19,13 @@
 #include <QDebug>
 #include <QTemporaryFile>
 
-#include "test/test_QMapShack.h"
 #include "test/TestHelper.h"
+#include "test/test_QMapShack.h"
 
 #include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -48,8 +48,9 @@ void test_QMapShack::initTestCase()
 
     testInput = QCoreApplication::applicationDirPath() + "/input/";
 
-    inputFiles = {
-          testInput + "qtt_gpx_file0.gpx"
+    inputFiles =
+    {
+        testInput + "qtt_gpx_file0.gpx"
         , testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx"
         , testInput + "gpx_ext_GarminTPX1_tp1.gpx"
         , testInput + "V1.6.0_file1.qms"
@@ -130,7 +131,6 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
             {
                 SUBVERIFY(existingSources.contains(ext), QString("Missing extension `%1`").arg(ext));
                 existingSources.removeOne(ext);
-
             }
             SUBVERIFY(existingSources.isEmpty(), "existingSources is not empty");
         }
@@ -164,7 +164,6 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
     SUBVERIFY(exp.trks.isEmpty(), "Not all expected tracks found");
     SUBVERIFY(exp.rtes.isEmpty(), "Not all expected routes found");
     SUBVERIFY(exp.ovls.isEmpty(), "Not all expected areas found");
-
 }
 
 void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)

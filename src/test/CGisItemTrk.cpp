@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "test/test_QMapShack.h"
 #include "test/TestHelper.h"
+#include "test/test_QMapShack.h"
 
 #include "gis/gpx/CGpxProject.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -29,27 +29,27 @@ void test_QMapShack::_filterDeleteExtension()
     for(const QString &file : inputFiles)
     {
         IGisProject *proj = readProjFile(file);
-    
+
         expectedGisProject exp = TestHelper::readExpProj(file + ".xml");
         exp.changed = true; // filtering changes a project
-    
+
         for(int i = 0; i < proj->childCount(); i++)
         {
             CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(proj->child(i));
             if(nullptr != trk)
             {
                 expectedTrack &expTrk = exp.trks[trk->getName()];
-    
+
                 while(!expTrk.extensions.empty())
                 {
                     expectedExtension expExt = expTrk.extensions.take(expTrk.extensions.keys().first());
-                    
+
                     trk->filterDeleteExtension(expExt.name);
                     verify(exp, *proj);
                 }
             }
         }
-    
+
         delete proj;
     }
 }

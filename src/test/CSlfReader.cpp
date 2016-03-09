@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "test/test_QMapShack.h"
 #include "test/TestHelper.h"
+#include "test/test_QMapShack.h"
 
 #include "gis/slf/CSlfProject.h"
 #include "gis/slf/CSlfReader.h"

@@ -18,8 +18,8 @@
 
 #include <QtCore>
 
-#include "test/test_QMapShack.h"
 #include "test/TestHelper.h"
+#include "test/test_QMapShack.h"
 
 #include "gis/gpx/CGpxProject.h"
 #include "gis/qms/CQmsProject.h"

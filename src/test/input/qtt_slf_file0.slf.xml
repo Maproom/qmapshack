@@ -9,7 +9,7 @@
     </waypoints>
 
     <tracks>
-        <track name="[no name]" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764">
+        <track name="qttest slf file 0" colorIdx="4" colorName="DarkBlue" segcount="2" pointcount="2764">
             <colorSources>
                 <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"                              />
                 <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"                              />

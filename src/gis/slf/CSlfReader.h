@@ -40,10 +40,10 @@ private:
     void readEntries(const QDomNode& xml);
     void readMetadata(const QDomNode& xml, IGisProject::metadata_t& metadata);
 
-    CSlfProject* getProject();
+    static QDateTime parseTimestamp(const QString &ts);
 
     CSlfProject   *proj = nullptr; /// the resulting project after construction
-    QDateTime baseTime;            /// the time all entries refer to
+    QDateTime      baseTime;       /// the time all entries refer to
     QList<long>    offsetsTime;    /// an additional offset, required to take breaks into account
     QList<long>    laps;           /// the distances a new lap starts at (a lap is a .slf segment)
 };

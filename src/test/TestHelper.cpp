@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include <QDebug>
-#include <QTest>
-#include <QTemporaryFile>
 #include <QDomNode>
+#include <QTemporaryFile>
+#include <QTest>
 
 #include "test/TestHelper.h"
 

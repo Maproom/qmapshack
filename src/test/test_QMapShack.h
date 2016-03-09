@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include <QtCore>
 #include <QTest>
+#include <QtCore>
 
 #include "test/TestHelper.h"
 

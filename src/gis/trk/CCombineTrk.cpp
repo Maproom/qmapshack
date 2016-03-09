@@ -87,7 +87,7 @@ void CCombineTrk::accept()
         IGisItem::key_t key;
         key.item    = listSelected->item(i)->data(Qt::UserRole + 1).toString();
         key.project = listSelected->item(i)->data(Qt::UserRole + 2).toString();
-        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();   
+        key.device  = listSelected->item(i)->data(Qt::UserRole + 3).toString();
 
         keys << key;
     }

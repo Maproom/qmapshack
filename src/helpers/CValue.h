@@ -23,8 +23,8 @@
 #include <QVariant>
 #include <functional>
 
-using fValueOnChange = std::function<void(const QVariant&)>;
 using fMarkChanged   = std::function<void(void)>;
+using fValueOnChange = std::function<void(const QVariant&)>;
 
 class CValue
 {

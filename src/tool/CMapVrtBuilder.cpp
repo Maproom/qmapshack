@@ -113,5 +113,4 @@ void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status)
     textBrowser->setTextColor(Qt::darkGreen);
     textBrowser->append(tr("!!! done !!!\n"));
     pushStart->setEnabled(true);
-    return;
 }

@@ -124,6 +124,5 @@ void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
     }
 
     plot->setup(p.key, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
-    return;
 }
 

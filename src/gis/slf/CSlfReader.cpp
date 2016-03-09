@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015-2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +27,17 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+
+// .slf does not know extensions, but we are using them internally.
+// This makes saving as .gpx easy and conforms to the internal way of doing
+// things.
+const QHash<QString, QString> CSlfReader::attrToExt =
+{
+    {"temperature", "gpxtpx:TrackPointExtension|gpxtpx:atemp"},
+    {"heartrate",   "gpxtpx:TrackPointExtension|gpxtpx:hr"   },
+    {"cadence",     "gpxtpx:TrackPointExtension|gpxtpx:cad"  },
+    {"speed",       "speed"}
+};
 
 void CSlfReader::readFile(const QString &file, CSlfProject *proj)
 {
@@ -175,7 +186,7 @@ void CSlfReader::readMarkers(const QDomNode& xml)
                 }
             }
 
-            qreal ele             = attr.namedItem("altitude"   ).nodeValue().toDouble() / 1000.;
+            qreal ele             = attr.namedItem("altitude").nodeValue().toDouble() / 1000.;
             const QDateTime &time = baseTime.addSecs(attr.namedItem("timeAbsolute").nodeValue().toDouble() / 100.);
             new CGisItemWpt(QPointF(lon, lat), ele, time, name, "", proj);
         }
@@ -185,24 +196,8 @@ void CSlfReader::readMarkers(const QDomNode& xml)
     laps.append(std::numeric_limits<long>::max());
 }
 
-void CSlfReader::readEntries(const QDomNode& xml)
+QSet<QString> CSlfReader::findUsedAttributes(const QDomNodeList &xmlEntrs)
 {
-    const QDomNodeList& xmlEntrs = xml.childNodes();
-
-    // .slf does not know extensions, but we are using them internally.
-    // This makes saving as .gpx easy and conforms to the internal way of doing
-    // things.
-    const QHash<QString, QString> attrToExt =
-    {
-        {"temperature", "gpxtpx:TrackPointExtension|gpxtpx:atemp"},
-        {"heartrate",   "gpxtpx:TrackPointExtension|gpxtpx:hr"   },
-        {"cadence",     "gpxtpx:TrackPointExtension|gpxtpx:cad"  },
-        {"speed",       "speed"}
-    };
-
-    // Iterate over all entries and search for 0-only attributes.
-    // Sigma Data Center seems to store even non-used values (as 0),
-    // but we do not want to include that within our extensions
     QSet<QString> usedAttr;
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
@@ -216,6 +211,28 @@ void CSlfReader::readEntries(const QDomNode& xml)
             }
         }
     }
+
+    return usedAttr;
+}
+
+static void removeEmptySegments(QVector<CGisItemTrk::trkseg_t> &segs)
+{
+    for(int i = 0; i < segs.count(); i++)
+    {
+        if(segs[i].pts.isEmpty())
+        {
+            segs.remove(i);
+            i--;
+        }
+    }
+
+}
+
+void CSlfReader::readEntries(const QDomNode& xml)
+{
+    const QDomNodeList& xmlEntrs = xml.childNodes();
+
+    QSet<QString> usedAttr = findUsedAttributes(xmlEntrs);
 
     // Now generate the track / segments
     int lap = 0;
@@ -247,7 +264,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
         for(const QString &key : usedAttr)
         {
-            if(attr.contains(key))
+            if(attr.contains(key) && attrToExt.contains(key))
             {
                 trkpt.extensions[attrToExt[key]] = attr.namedItem(key).nodeValue().toDouble();
             }
@@ -266,15 +283,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
         seg->pts.append(trkpt);
     }
 
-    // Remove empty segments
-    for(int i = 0; i < trk.segs.count(); i++)
-    {
-        if(trk.segs[i].pts.isEmpty())
-        {
-            trk.segs.remove(i);
-            i--;
-        }
-    }
+    removeEmptySegments(trk.segs);
 
     trk.name = proj->metadata.name;
     new CGisItemTrk(trk, proj);

@@ -124,7 +124,7 @@ public:
     void updateHistory(quint32 visuals);
 
     /**
-       @brief Update all registered visuals viw the INotifyTrk interface
+       @brief Update all registered visuals via the INotifyTrk interface
        @param a bit field of visuals to be updated
        @param who a string for debug purposes
      */
@@ -510,89 +510,44 @@ public:
      */
     bool setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString& owner);
 
+
+    /** @defgroup Filter All filters implemented by CGisItemTrks.
+
+        @note All filter implementations are found in src/gis/trk/filter/filter.cpp
+
+        @{
+     */
     /**
        @brief Reduce the amount of visible track points with the help of the Douglas Peuker algorithm
-
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
 
        @param dist the Douglas Peuker distance in meters
      */
     void filterReducePoints(qreal dist);
 
-    /**
-       @brief Remove track points without valid location at the beginning of the track
-
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-     */
+    /** @brief Remove track points without valid location at the beginning of the track */
     void filterRemoveNullPoints();
-    /**
-       @brief filterReset
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-     */
-    void filterReset();
-    /**
-       @brief filterDelete
-
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-     */
-    void filterDelete();
-    /**
-       @brief filterSmoothProfile
-
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-
-       @param points  size of Median filter
-     */
+    /** @param points  size of Median filter */
     void filterSmoothProfile(int points);
-    /**
-       @brief filterReplaceElevation
-     */
-    void filterReplaceElevation();
-    /**
-       @brief filterOffsetElevation
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-
-       @param offset elevation offset in meters
-     */
+    /** @param offset elevation offset in meters */
     void filterOffsetElevation(int offset);
-    /**
-       @brief filterNewDate
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-
-       @param date new date for start of track
-     */
+    /** @param date new date for start of track */
     void filterNewDate(const QDateTime& date);
-    /**
-       @brief filterObscureDate
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-
-       @param delta intervall to increase timestamps in seconds
-     */
+    /** @param delta interval to increase timestamps in seconds a*/
     void filterObscureDate(int delta);
-    /**
-       @brief filterSpeed
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-
-       @param speed speed in meter per seconds
-     */
+    /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    /**
-       @brief filterSplitSegment
 
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-     */
+    void filterReplaceElevation();
+    void filterReset();
+    void filterDelete();
     void filterSplitSegment();
-    /**
-       @brief filterDeleteExtension
-
-       @note All filter implementations are found in src/gis/trk/filter/filter.cpp
-     */
     void filterDeleteExtension(const QString &ext);
+    /** @} */
 
     /**
        @brief Correlate waypoints with the track points
@@ -644,7 +599,7 @@ private:
     void resetInternalData();
 
 
-    /** @defgroup ExtremaExtensions Stuff related to calculation of extremas/extensions
+    /** @defgroup ExtremaExtensions Stuff related to calculation of extrema/extensions
 
         @{
      */
@@ -720,7 +675,7 @@ private:
      */
     void readTrackDataFromGisLine(const SGisLine &l);
     /**
-       @brief Overide IGisItem::changed() method
+       @brief Override IGisItem::changed() method
 
        As the CDetailsTrk is no modal dialog that blocks the GUI from any other input the track
        can be changed while the widget is visible. Therefore it needs some feedback to update the

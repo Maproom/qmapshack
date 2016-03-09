@@ -18,8 +18,8 @@
 
 
 #include "WptIcons.h"
-#include "setup/IAppSetup.h"
 #include "helpers/CSettings.h"
+#include "setup/IAppSetup.h"
 
 #include <QtGui>
 

@@ -47,11 +47,11 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "setup/IAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "setup/IAppSetup.h"
 
 #include <QApplication>
 #include <QtSql>
@@ -1059,6 +1059,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 menuItemTrk->exec(p);
                 break;
             }
+
             case IGisItem::eTypeWpt:
                 actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
                 actionMoveWpt->setDisabled(isOnDevice);
@@ -1386,7 +1387,7 @@ void CGisListWks::slotCombineTrk()
     }
 
     if(!keys.isEmpty())
-    {        
+    {
         if(keys.size() == 1)
         {
             CGisWidget::self().combineTrkByKey(keys.first());

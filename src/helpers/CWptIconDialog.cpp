@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "gis/WptIcons.h"
-#include "setup/IAppSetup.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
+#include "setup/IAppSetup.h"
 
 #include <QtWidgets>
 

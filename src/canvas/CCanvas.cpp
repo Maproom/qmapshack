@@ -54,7 +54,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     if(name.isEmpty())
     {
-        for(int count = 1; ; ++count)
+        for(int count = 1;; ++count)
         {
             QString name = tr("View %1").arg(count);
             if(nullptr == CMainWindow::self().findChild<CCanvas*>(name))

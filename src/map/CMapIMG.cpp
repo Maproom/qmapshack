@@ -1721,7 +1721,7 @@ void CMapIMG::drawPolylines(QPainter& p, polytype_t& lines, const QPointF& scale
     int normalCount = 0;
     int imageCount = 0;
     int deletedCount = 0;
-*/
+ */
 
     QHash<quint32, QList<quint32> > dict;
     for(int i = 0; i < lines.count(); ++i)

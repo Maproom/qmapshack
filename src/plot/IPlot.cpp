@@ -22,8 +22,8 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisWidget.h"
-#include "gis/wpt/CGisItemWpt.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptRangeTrk.h"

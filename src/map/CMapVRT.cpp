@@ -384,7 +384,6 @@ void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */
 
                             for (offset = 0; offset < sizeof(testPix) && *(((quint8 *)&testPix) + offset) != pbandColour; offset++)
                             {
-                                ;
                             }
                             if(offset < sizeof(testPix))
                             {

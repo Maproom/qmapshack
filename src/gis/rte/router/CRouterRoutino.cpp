@@ -22,9 +22,9 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterRoutinoPathSetup.h"
-#include "setup/IAppSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
+#include "setup/IAppSetup.h"
 #include <QtWidgets>
 #include <proj_api.h>
 #include <routino.h>

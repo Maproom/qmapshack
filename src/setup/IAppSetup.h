@@ -19,9 +19,9 @@
 #ifndef IAPPSETUP_H
 #define IAPPSETUP_H
 
+#include "CAppOpts.h"
 #include <QApplication>
 #include <QtCore>
-#include "CAppOpts.h"
 
 
 class IAppSetup

@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisWidget.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
-#include "gis/prj/IGisProject.h"
 #include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 

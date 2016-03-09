@@ -44,7 +44,9 @@ static QDateTime parseSlfTimestamp(const QString &ts)
     }
 
     QString pts = ts.left(posOfGMT - 1) + ts.mid(posOfGMT + 8);
-    const QDateTime &baseTime = QDateTime::fromString(pts, "ddd MMM d HH:mm:ss yyyy");
+
+    QLocale locale(QLocale::C);
+    const QDateTime &baseTime = locale.toDateTime(pts, "ddd MMM d HH:mm:ss yyyy");
 
     return baseTime.addSecs( (deltaGMT / 100) * 60 * 60 );
 }

@@ -215,18 +215,6 @@ QSet<QString> CSlfReader::findUsedAttributes(const QDomNodeList &xmlEntrs)
     return usedAttr;
 }
 
-static void removeEmptySegments(QVector<CGisItemTrk::trkseg_t> &segs)
-{
-    for(int i = 0; i < segs.count(); i++)
-    {
-        if(segs[i].pts.isEmpty())
-        {
-            segs.remove(i);
-            i--;
-        }
-    }
-}
-
 void CSlfReader::readEntries(const QDomNode& xml)
 {
     const QDomNodeList& xmlEntrs = xml.childNodes();
@@ -281,8 +269,6 @@ void CSlfReader::readEntries(const QDomNode& xml)
 
         seg->pts.append(trkpt);
     }
-
-    removeEmptySegments(trk.segs);
 
     trk.name = proj->metadata.name;
     new CGisItemTrk(trk, proj);

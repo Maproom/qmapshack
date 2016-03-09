@@ -33,7 +33,7 @@ void CSlfReader::readFile(const QString &file, CSlfProject *proj)
     CSlfReader reader(file, proj);
 }
 
-static QDateTime parseSlfTimestamp(const QString &ts)
+QDateTime CSlfReader::parseTimestamp(const QString &ts)
 {
     int posOfGMT = ts.indexOf("GMT");
     int deltaGMT = 0;
@@ -47,6 +47,10 @@ static QDateTime parseSlfTimestamp(const QString &ts)
 
     QLocale locale(QLocale::C);
     const QDateTime &baseTime = locale.toDateTime(pts, "ddd MMM d HH:mm:ss yyyy");
+    if(!baseTime.isValid())
+    {
+        throw tr("Failed to parse timestamp `%1`").arg(ts);
+    }
 
     return baseTime.addSecs( (deltaGMT / 100) * 60 * 60 );
 }
@@ -94,7 +98,7 @@ CSlfReader::CSlfReader(const QString &filename, CSlfProject *proj) : proj(proj)
     // Parse the file's dateCode
     // This is a crucial step, as all the other timestamps are relative to this one
     const QString &dateCode = xmlAct.namedItem("Computer").attributes().namedItem("dateCode").nodeValue();
-    baseTime = parseSlfTimestamp(dateCode);
+    baseTime = parseTimestamp(dateCode);
 
     const QDomNode& xmlGI = xmlAct.namedItem("GeneralInformation");
     if(xmlGI.isElement())
@@ -282,10 +286,5 @@ void CSlfReader::readMetadata(const QDomNode& xml, IGisProject::metadata_t& meta
     metadata.name     = xml.namedItem("name"       ).firstChild().nodeValue();
     metadata.desc     = xml.namedItem("description").firstChild().nodeValue();
     metadata.keywords = xml.namedItem("sport"      ).firstChild().nodeValue();
-}
-
-CSlfProject* CSlfReader::getProject()
-{
-    return proj;
 }
 

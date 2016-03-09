@@ -272,6 +272,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
         }
     }
 
+    trk.name = proj->metadata.name;
     new CGisItemTrk(trk, proj);
     proj->updateItemCounters();
 }

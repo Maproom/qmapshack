@@ -225,7 +225,6 @@ static void removeEmptySegments(QVector<CGisItemTrk::trkseg_t> &segs)
             i--;
         }
     }
-
 }
 
 void CSlfReader::readEntries(const QDomNode& xml)

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -1203,7 +1203,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
     <message>
-        <location filename="../qlgt/converter.cpp" line="198"/>
+        <location filename="../qlgt/converter.cpp" line="195"/>
         <source>Copy flag information from QLandkarte GT track</source>
         <translation>Kopiert das Informationsflag aus dem QLandkarte GT Track</translation>
     </message>
@@ -1465,18 +1465,18 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="650"/>
-        <location filename="../gis/CGisListWks.cpp" line="1580"/>
-        <location filename="../gis/CGisListWks.cpp" line="1618"/>
+        <location filename="../gis/CGisListWks.cpp" line="1581"/>
+        <location filename="../gis/CGisListWks.cpp" line="1619"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1164"/>
+        <location filename="../gis/CGisListWks.cpp" line="1165"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1164"/>
+        <location filename="../gis/CGisListWks.cpp" line="1165"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -1556,12 +1556,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1141"/>
+        <location filename="../gis/CGisListWks.cpp" line="1142"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1141"/>
+        <location filename="../gis/CGisListWks.cpp" line="1142"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -1584,12 +1584,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="625"/>
+        <location filename="../gis/CGisWidget.cpp" line="645"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="625"/>
+        <location filename="../gis/CGisWidget.cpp" line="645"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
@@ -1819,33 +1819,33 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="642"/>
+        <location filename="../CMainWindow.cpp" line="643"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="658"/>
+        <location filename="../CMainWindow.cpp" line="659"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="793"/>
+        <location filename="../CMainWindow.cpp" line="794"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="827"/>
+        <location filename="../CMainWindow.cpp" line="828"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="827"/>
-        <location filename="../CMainWindow.cpp" line="853"/>
+        <location filename="../CMainWindow.cpp" line="828"/>
+        <location filename="../CMainWindow.cpp" line="854"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="853"/>
+        <location filename="../CMainWindow.cpp" line="854"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
@@ -1855,7 +1855,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapDraw.cpp" line="406"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. </source>
-        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten keinen Spaß. Sie können Karten installieren durch Drücken der &apos;Hilfe! Ich will Karten!&apos; Schaltfläche im Fenster &apos;Karten&apos;. Oder öffnen Sie durch Drücken der F1-Taste die Online Dokumentation, um zu erfahren, wie Sie QMapShack anwenden.</translation>
+        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Erfahren Sie dort mehr über die Bedienung von QMapShack.</translation>
     </message>
 </context>
 <context>
@@ -3740,17 +3740,22 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CSlfReader</name>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="59"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="63"/>
+        <source>Failed to parse timestamp `%1`</source>
+        <translation>Zeitmarke lesen fehlgeschlagen. &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../gis/slf/CSlfReader.cpp" line="76"/>
         <source>%1 does not exist</source>
         <translation>%1 existiert nicht</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="64"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="81"/>
         <source>Failed to open %1</source>
         <translation>Öffnen von %1 fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="75"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="92"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3759,22 +3764,22 @@ Zeile %2, Spalte %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="82"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="99"/>
         <source>Not a SLF file: %1</source>
         <translation>Keine SLF Datei: %1</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="89"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="106"/>
         <source>Unsupported revision %1: %2</source>
         <translation>Nicht unterstützte Revision %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="164"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="181"/>
         <source>Break %1</source>
         <translation>Pause %1</translation>
     </message>
     <message>
-        <location filename="../gis/slf/CSlfReader.cpp" line="168"/>
+        <location filename="../gis/slf/CSlfReader.cpp" line="185"/>
         <source>Lap %1</source>
         <translation>Runde %1</translation>
     </message>
@@ -3790,21 +3795,21 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
     </message>
@@ -3967,7 +3972,7 @@ Ivo Kronenberg</source>
         <source>Helmut Schmidt</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="354"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
@@ -3977,7 +3982,7 @@ Ivo Kronenberg</source>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../IAbout.ui" line="406"/>
         <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
@@ -4047,17 +4052,17 @@ Ivo Kronenberg</source>
         <source>Coordinate Format...</source>
         <translation>Koordinatenformat...</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
         <translation></translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
         <translation></translation>
@@ -4232,7 +4237,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <source>Slope </source>
         <translation>Hangneigung </translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../dem/IDemPropSetup.ui" line="226"/>
         <location filename="../dem/IDemPropSetup.ui" line="326"/>
         <location filename="../dem/IDemPropSetup.ui" line="410"/>
@@ -4268,14 +4273,18 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Um Dateien mit Höhendaten zuzufügen -&gt; Menü Datei - DEM Verzeichnisse angeben.</translation>
+        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="118"/>
+        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
+        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Nutze das Kontextmenü (Klick mit rechter Maustaste auf Eintrag), um eine Datei zu aktivieren. Nutze Ziehen u. Ablegen, um die aktivierte Datei in der Reihenfolge der Ansicht zu verschieben.</translation>
+        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie einen Datensatz aktivieren. Um die Höhendaten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="156"/>
@@ -5295,59 +5304,59 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Das Projekt wurde geändert. Speichern, bevor es geschlossen wird?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="261"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="258"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Tracks und Wegpunkte verknüpfen.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="271"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="268"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Hat das zu lange gedauert? Wollen Sie die Verknüpfung von Tracks und Wegpunkten auch in Zukunft für dieses Projekt überspringen?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="272"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="269"/>
         <source>Canceled correlation...</source>
         <translation>Verknüpfung abgebrochen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="312"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="309"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Speichere &quot;%1&quot; nach...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="423"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="420"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Dateiname: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="428"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="425"/>
         <source>Waypoints: %1</source>
         <translation>Wegpunkte: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="432"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="429"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="436"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="433"/>
         <source>Routes: %1</source>
         <translation>Routen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="440"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
         <source>Areas: %1</source>
         <translation>Gebiete: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="560"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="557"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Projekt &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="561"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="558"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
@@ -5373,7 +5382,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/IGisWidget.ui" line="138"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation>Um eine Datenbank hinzuzufügen rechtsklicken Sie oben auf die Datenbankliste.</translation>
+        <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
     </message>
 </context>
 <context>
@@ -5856,14 +5865,18 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Um Karten zuzufügen: Menü - Datei - Kartenverzeichnisse angeben.</translation>
+        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="103"/>
+        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
+        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
-        <translation>Nutze das Kontextmenü (Klick mit rechter Maustaste auf Eintrag), um eine Karte zu aktivieren. Nutze Ziehen u. Ablegen, um die aktivierte Karte in der Reihenfolge der Ansicht zu verschieben.</translation>
+        <translation>Mit dem Kontextmenü (Klick mit rechter Maustaste auf einen Eintrag) können Sie eine Karte aktivieren. Um die Karten in einer anderen Reihenfolge anzuzeigen, können Sie jeden Eintrag mit drag-n-drop verschieben.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="129"/>
@@ -6119,27 +6132,32 @@ Keine Lust die Anleitung zu lesen!</translation>
 <context>
     <name>IPlot</name>
     <message>
-        <location filename="../plot/IPlot.cpp" line="93"/>
+        <location filename="../plot/IPlot.cpp" line="94"/>
         <source>Reset Zoom</source>
         <translation>Zoom zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="94"/>
+        <location filename="../plot/IPlot.cpp" line="95"/>
         <source>Stop Range</source>
         <translation>Bereichsauswahl beenden</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="95"/>
+        <location filename="../plot/IPlot.cpp" line="96"/>
         <source>Save...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="638"/>
+        <location filename="../plot/IPlot.cpp" line="98"/>
+        <source>Add Waypoint</source>
+        <translation>Wegpunkt hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../plot/IPlot.cpp" line="640"/>
         <source>No or bad data.</source>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1230"/>
+        <location filename="../plot/IPlot.cpp" line="1237"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
@@ -6303,7 +6321,7 @@ sein</translation>
         <source>m</source>
         <translation> m</translation>
     </message>
-    <message utf8="true">
+    <message>
         <location filename="../gis/wpt/IProjWpt.ui" line="76"/>
         <source>°</source>
         <translation></translation>
@@ -6406,8 +6424,12 @@ sein</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
+        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
+        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
+    </message>
+    <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation>Um Offline-Routing zu nutzen, müssen Pfade zu lokalen Routendaten definiert sein. Benutzen Sie den Werkzeugbutton, um einen Pfad zu registrieren.</translation>
+        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu lokalen Routendaten angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner.</translation>
     </message>
 </context>
 <context>

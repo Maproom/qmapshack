@@ -408,6 +408,13 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             "QMapShack is no fun without maps. "
             "You can install maps by pressing the 'Help! I want maps!' button in the 'Maps' dock window. "
             "Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. "
+            "\n\n"
+            "If it's no fun, why don't you provide maps? Well to host maps ready for download and installation "
+            "requires a good server. And this is not a free service. The project lacks the money. Additionally "
+            "map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package "
+            "the data. This is not that easy as it might sound and for some data you have to pay royalties. "
+            "The project simply lacks resources to do this. And we think installing the stuff yourself is not "
+            "that much to ask from you. After all the software is ditributed without a fee."
             );
 
         QTextDocument doc;

@@ -85,7 +85,7 @@ CMainWindow::CMainWindow()
     }
     else
     {
-        showMaximized();
+        QTimer::singleShot(500, this, SLOT(showMaximized()));
     }
 
     if ( cfg.contains("MainWindow/state"))

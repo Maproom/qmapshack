@@ -85,7 +85,7 @@ CMainWindow::CMainWindow()
     }
     else
     {
-        setGeometry(0,0,800,600);
+        showMaximized();
     }
 
     if ( cfg.contains("MainWindow/state"))
@@ -151,13 +151,14 @@ CMainWindow::CMainWindow()
     if(names.isEmpty())
     {
         CCanvas * view = new CCanvas(tabWidget, QString());
+        view->loadConfig(cfg);
         tabWidget->addTab(view, view->objectName());
         connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
 
     actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
-    actionShowGrid->setChecked       (cfg.value("isGridVisible",    true).toBool());
+    actionShowGrid->setChecked       (cfg.value("isGridVisible",    false).toBool());
     actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
     actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
     actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());

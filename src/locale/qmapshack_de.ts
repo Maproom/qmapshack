@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -1853,9 +1853,17 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMapDraw</name>
     <message>
-        <location filename="../map/CMapDraw.cpp" line="406"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. </source>
         <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Erfahren Sie dort mehr über die Bedienung von QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapDraw.cpp" line="406"/>
+        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
+
+If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is ditributed without a fee.</source>
+        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Erfahren Sie dort mehr über die Bedienung von QMapShack.
+
+Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Resourcen. Außerdem glauben wir, ist es nicht zuviel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.   </translation>
     </message>
 </context>
 <context>
@@ -4274,7 +4282,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5866,7 +5874,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -6429,7 +6437,7 @@ sein</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu lokalen Routendaten angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner.</translation>
+        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu lokalen Routendaten angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner.</translation>
     </message>
 </context>
 <context>

@@ -398,7 +398,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
     else
     {
         const int offMargin = currentBuffer.image.size().width()*0.1;
-        const int offTop    = currentBuffer.image.size().height()/2;
+        const int offTop    = currentBuffer.image.size().height()/3;
         QPainter p(&currentBuffer.image);
         p.setPen(Qt::black);
         p.translate(offMargin,offTop);

@@ -31,7 +31,7 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
     delete proj;
 
     proj = readGpxFile(tmpFile, true);
-    verify(file + ".xml", *proj);
+    verify(file, *proj);
 
     delete proj;
 
@@ -40,11 +40,11 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
 
 void test_QMapShack::_writeReadGpxFile()
 {
-    writeReadGpxFile(testInput + "qtt_gpx_file0.gpx");
-    writeReadGpxFile(testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx");
-    writeReadGpxFile(testInput + "gpx_ext_GarminTPX1_tp1.gpx");
-    writeReadGpxFile(testInput + "V1.6.0_file1.qms");
-    writeReadGpxFile(testInput + "V1.6.0_file2.qms");
+    writeReadGpxFile("qtt_gpx_file0.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_gpxtpx.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_tp1.gpx");
+    writeReadGpxFile("V1.6.0_file1.qms");
+    writeReadGpxFile("V1.6.0_file2.qms");
 }
 
 CGpxProject* test_QMapShack::readGpxFile(const QString &file, bool valid)
@@ -56,7 +56,7 @@ CGpxProject* test_QMapShack::readGpxFile(const QString &file, bool valid)
     try
     {
         proj->blockUpdateItems(true);
-        CGpxProject::loadGpx(file, proj);
+        CGpxProject::loadGpx(fileToPath(file), proj);
         proj->blockUpdateItems(false);
     }
     catch(QString &errormsg)

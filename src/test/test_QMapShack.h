@@ -37,20 +37,22 @@ class test_QMapShack : public QObject
     QString testInput;
     QList<QString> inputFiles;
 
-    static void tryVerify(const QString &projFile, const IGisProject &proj);
-    static void verify(const QString &expectFile, const IGisProject &proj);
-    static void verify(expectedGisProject exp, const IGisProject &proj);
+    void tryVerify(const QString &projFile, const IGisProject &proj);
+    void verify(const QString &expectFile, const IGisProject &proj);
+    void verify(expectedGisProject exp, const IGisProject &proj);
 
-    static CGpxProject* readGpxFile(const QString &file, bool valid = true);
-    static CQmsProject* readQmsFile(const QString &file, bool valid = true);
-    static IGisProject* readProjFile(const QString &file, bool valid = true);
+    QString fileToPath(const QString &file);
+
+    CGpxProject* readGpxFile(const QString &file, bool valid = true);
+    CQmsProject* readQmsFile(const QString &file, bool valid = true);
+    IGisProject* readProjFile(const QString &file, bool valid = true);
 
     // CSlfReader
     void _readValidSLFFile();
     void _readNonExistingSLFFile();
 
     // CGpxProject
-    static void writeReadGpxFile(const QString &file);
+    void writeReadGpxFile(const QString &file);
     void _writeReadGpxFile();
 
     // CKnownExtension

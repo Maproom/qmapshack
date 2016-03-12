@@ -50,20 +50,20 @@ void test_QMapShack::initTestCase()
 
     inputFiles =
     {
-        testInput + "qtt_gpx_file0.gpx"
-        , testInput + "gpx_ext_GarminTPX1_gpxtpx.gpx"
-        , testInput + "gpx_ext_GarminTPX1_tp1.gpx"
-        , testInput + "V1.6.0_file1.qms"
-        , testInput + "V1.6.0_file2.qms"
+        "qtt_gpx_file0.gpx"
+        , "gpx_ext_GarminTPX1_gpxtpx.gpx"
+        , "gpx_ext_GarminTPX1_tp1.gpx"
+        , "V1.6.0_file1.qms"
+        , "V1.6.0_file2.qms"
     };
 }
 
 void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)
 {
-    const QString &expFile = projFile + ".xml";
-    if(QFile(expFile).exists())
+    const QString &projPath = fileToPath(projFile);
+    if(QFile(projPath + ".xml").exists())
     {
-        verify(expFile, proj);
+        verify(projFile, proj);
     }
 }
 
@@ -166,13 +166,22 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
     SUBVERIFY(exp.ovls.isEmpty(), "Not all expected areas found");
 }
 
-void test_QMapShack::verify(const QString &expectFile, const IGisProject &proj)
+void test_QMapShack::verify(const QString &projFile, const IGisProject &proj)
 {
     // step 0: read expected values from .xml file
-    expectedGisProject exp = TestHelper::readExpProj(expectFile);
+    expectedGisProject exp = TestHelper::readExpProj(fileToPath(projFile) + ".xml");
 
     // step 1: do the actual verification
     verify(exp, proj);
+}
+
+QString test_QMapShack::fileToPath(const QString &file)
+{
+    if(!QFileInfo(file).exists())
+    {
+        return testInput + "/" + file.right(3) + "/" + file;
+    }
+    return file;
 }
 
 IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid)

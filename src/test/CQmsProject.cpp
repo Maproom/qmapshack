@@ -26,11 +26,13 @@
 
 void test_QMapShack::_readQmsFile_1_6_0()
 {
-    CQmsProject proj1(testInput + "V1.6.0_file1.qms", (CGisListWks*) nullptr);
-    verify(testInput + "V1.6.0_file1.qms.xml", proj1);
+    IGisProject *proj1 = readProjFile("V1.6.0_file1.qms");
+    verify("V1.6.0_file1.qms", *proj1);
+    delete proj1;
 
-    CQmsProject proj2(testInput + "V1.6.0_file2.qms", (CGisListWks*) nullptr);
-    verify(testInput + "V1.6.0_file2.qms.xml", proj2);
+    IGisProject *proj2 = readProjFile("V1.6.0_file2.qms");
+    verify("V1.6.0_file2.qms", *proj2);
+    delete proj1;
 }
 
 void test_QMapShack::_writeReadQmsFile()
@@ -45,7 +47,7 @@ void test_QMapShack::_writeReadQmsFile()
         delete proj;
 
         proj = readQmsFile(tmpFile);
-        verify(file + ".xml", *proj);
+        verify(file, *proj);
 
         delete proj;
 
@@ -55,7 +57,7 @@ void test_QMapShack::_writeReadQmsFile()
 
 CQmsProject* test_QMapShack::readQmsFile(const QString &file, bool)
 {
-    CQmsProject *proj = new CQmsProject(file, (CGisListWks*) nullptr);
+    CQmsProject *proj = new CQmsProject(fileToPath(file), (CGisListWks*) nullptr);
 
     SUBVERIFY(IGisProject::eTypeQms == proj->getType(), "Project has invalid type");
 

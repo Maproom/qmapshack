@@ -30,7 +30,7 @@ void test_QMapShack::_filterDeleteExtension()
     {
         IGisProject *proj = readProjFile(file);
 
-        expectedGisProject exp = TestHelper::readExpProj(file + ".xml");
+        expectedGisProject exp = TestHelper::readExpProj(fileToPath(file) + ".xml");
         exp.changed = true; // filtering changes a project
 
         for(int i = 0; i < proj->childCount(); i++)

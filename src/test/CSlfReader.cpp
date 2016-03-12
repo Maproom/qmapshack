@@ -25,11 +25,11 @@
 void test_QMapShack::_readValidSLFFile()
 {
     // this does not read anything, a bare CSlfProject is created
-    CSlfProject *proj = new CSlfProject("qtt_slf_file0.slf", false);
+    CSlfProject *proj = new CSlfProject("slf/qtt_slf_file0.slf", false);
 
     try
     {
-        CSlfReader::readFile(testInput + "qtt_slf_file0.slf", proj);
+        CSlfReader::readFile(testInput + "slf/qtt_slf_file0.slf", proj);
     }
     catch(QString &errormsg)
     {
@@ -38,7 +38,7 @@ void test_QMapShack::_readValidSLFFile()
 
     SUBVERIFY(IGisProject::eTypeSlf == proj->getType(), "Project has invalid type");
 
-    verify(testInput + "qtt_slf_file0.slf.xml", *proj);
+    verify("qtt_slf_file0.slf", *proj);
     delete proj;
 }
 

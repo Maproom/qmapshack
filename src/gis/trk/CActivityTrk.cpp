@@ -23,7 +23,7 @@
 
 CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
 {
-    {
+    { // 0
         "Foot"
         , CGisItemTrk::trkpt_t::eActFoot
         , tr("Foot")
@@ -31,7 +31,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActFoot.png"
         , IGisItem::colorMap[0].color
     },
-    {
+    { // 1
         "Cycle"
         , CGisItemTrk::trkpt_t::eActCycle
         , tr("Bicycle")
@@ -39,7 +39,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActCycle.png"
         , IGisItem::colorMap[1].color
     },
-    {
+    { // 2
         "Bike"
         , CGisItemTrk::trkpt_t::eActBike
         , tr("Motor Bike")
@@ -47,7 +47,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActBike.png"
         , IGisItem::colorMap[2].color
     },
-    {
+    { // 3
         "Car"
         , CGisItemTrk::trkpt_t::eActCar
         , tr("Car")
@@ -55,7 +55,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActCar.png"
         , IGisItem::colorMap[3].color
     },
-    {
+    { // 4
         "Cable"
         , CGisItemTrk::trkpt_t::eActCable
         , tr("Cable Car")
@@ -63,7 +63,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActCable.png"
         , IGisItem::colorMap[4].color
     },
-    {
+    { // 5
         "Swim"
         , CGisItemTrk::trkpt_t::eActSwim
         , tr("Swim")
@@ -71,7 +71,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActSwim.png"
         , IGisItem::colorMap[5].color
     },
-    {
+    { // 6
         "Ship"
         , CGisItemTrk::trkpt_t::eActShip
         , tr("Ship")
@@ -79,7 +79,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActShip.png"
         , IGisItem::colorMap[6].color
     },
-    {
+    { // 7
         "Aeronautik"
         , CGisItemTrk::trkpt_t::eActAero
         , tr("Aeronautik")
@@ -87,7 +87,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActAero.png"
         , IGisItem::colorMap[7].color
     },
-    {
+    { // 8
         "Ski/Winter"
         , CGisItemTrk::trkpt_t::eActSki
         , tr("Ski/Winter")
@@ -95,7 +95,7 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/16x16/ActSki.png"
         , IGisItem::colorMap[8].color
     },
-    {
+    { // 9
         QString()
         , 0
         , QString()
@@ -476,7 +476,7 @@ void CActivityTrk::sumUp(QVector<activity_summary_t> &summary) const
 const CActivityTrk::activity_summary_t &CActivityTrk::getSummary(const QVector<activity_summary_t>& summary, quint32 flag)
 {
     qint32 cnt = 0;
-    flag >>= 24;
+    flag >>= 32 - CGisItemTrk::trkpt_t::eActMaxNum;
 
     while(((flag & 0x01) == 0) && (cnt < qMin((int)CGisItemTrk::trkpt_t::eActMaxNum,summary.size())))
     {
@@ -491,7 +491,7 @@ const CActivityTrk::activity_summary_t &CActivityTrk::getSummary(const QVector<a
 CActivityTrk::activity_summary_t& CActivityTrk::getSummary(QVector<activity_summary_t> &summary, quint32 flag)
 {
     qint32 cnt = 0;
-    flag >>= 24;
+    flag >>= 32 - CGisItemTrk::trkpt_t::eActMaxNum;
 
     while(((flag & 0x01) == 0) && (cnt < qMin((int)CGisItemTrk::trkpt_t::eActMaxNum,summary.size())))
     {

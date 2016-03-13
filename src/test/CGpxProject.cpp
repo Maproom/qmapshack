@@ -30,9 +30,8 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
 
     delete proj;
 
-    proj = readGpxFile(tmpFile, true);
+    proj = readProjFile(tmpFile, true, false);
     verify(file, *proj);
-
     delete proj;
 
     QFile(tmpFile).remove();
@@ -47,28 +46,3 @@ void test_QMapShack::_writeReadGpxFile()
     writeReadGpxFile("V1.6.0_file2.qms");
 }
 
-CGpxProject* test_QMapShack::readGpxFile(const QString &file, bool valid)
-{
-    // this does not read anything, a bare CGpxProject is created
-    CGpxProject *proj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
-
-    bool hadExc = false;
-    try
-    {
-        proj->blockUpdateItems(true);
-        CGpxProject::loadGpx(fileToPath(file), proj);
-        proj->blockUpdateItems(false);
-    }
-    catch(QString &errormsg)
-    {
-        SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
-        hadExc = true;
-    }
-
-    SUBVERIFY(valid || hadExc, "File is neither valid, nor an exception was thrown");
-    SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
-
-    tryVerify(file, *proj);
-
-    return proj;
-}

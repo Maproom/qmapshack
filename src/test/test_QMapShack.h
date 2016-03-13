@@ -24,6 +24,7 @@
 class IGisProject;
 class CGpxProject;
 class CQmsProject;
+class CSlfProject;
 
 extern QString testInput;
 
@@ -37,15 +38,13 @@ class test_QMapShack : public QObject
     QString testInput;
     QList<QString> inputFiles;
 
-    void tryVerify(const QString &projFile, const IGisProject &proj);
     void verify(const QString &expectFile, const IGisProject &proj);
     void verify(expectedGisProject exp, const IGisProject &proj);
+    void verify(const QString &projFile);
 
     QString fileToPath(const QString &file);
 
-    CGpxProject* readGpxFile(const QString &file, bool valid = true);
-    CQmsProject* readQmsFile(const QString &file, bool valid = true);
-    IGisProject* readProjFile(const QString &file, bool valid = true);
+    IGisProject* readProjFile(const QString &file, bool valid = true, bool forceVerify = true);
 
     // CSlfReader
     void _readValidSLFFile();

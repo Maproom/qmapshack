@@ -27,6 +27,8 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/slf/CSlfProject.h"
+#include "gis/slf/CSlfReader.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -56,15 +58,6 @@ void test_QMapShack::initTestCase()
         , "V1.6.0_file1.qms"
         , "V1.6.0_file2.qms"
     };
-}
-
-void test_QMapShack::tryVerify(const QString &projFile, const IGisProject &proj)
-{
-    const QString &projPath = fileToPath(projFile);
-    if(QFile(projPath + ".xml").exists())
-    {
-        verify(projFile, proj);
-    }
 }
 
 void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
@@ -168,11 +161,17 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
 
 void test_QMapShack::verify(const QString &projFile, const IGisProject &proj)
 {
-    // step 0: read expected values from .xml file
     expectedGisProject exp = TestHelper::readExpProj(fileToPath(projFile) + ".xml");
-
-    // step 1: do the actual verification
     verify(exp, proj);
+}
+
+void test_QMapShack::verify(const QString &projFile)
+{
+    IGisProject        *proj = readProjFile(projFile);
+    expectedGisProject exp  = TestHelper::readExpProj(fileToPath(projFile) + ".xml");
+
+    verify(exp, *proj);
+    delete proj;
 }
 
 QString test_QMapShack::fileToPath(const QString &file)
@@ -184,18 +183,62 @@ QString test_QMapShack::fileToPath(const QString &file)
     return file;
 }
 
-IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid)
+IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid, bool forceVerify)
 {
-    if(file.endsWith(".gpx"))
+    IGisProject *proj = nullptr;
+
+    try
     {
-        return readGpxFile(file, valid);
+        if(file.endsWith(".gpx"))
+        {
+            CGpxProject *gpxProj = new CGpxProject("a very random string to prevent loading via constructor", (CGisListWks*) nullptr);
+            gpxProj->blockUpdateItems(true);
+            CGpxProject::loadGpx(fileToPath(file), gpxProj);
+            gpxProj->blockUpdateItems(false);
+            proj = gpxProj;
+            SUBVERIFY(IGisProject::eTypeGpx == proj->getType(), "Project has invalid type");
+        }
+        else if(file.endsWith(".qms"))
+        {
+            proj = new CQmsProject(fileToPath(file), (CGisListWks*) nullptr);
+            SUBVERIFY(IGisProject::eTypeQms == proj->getType(), "Project has invalid type");
+        }
+        else if(file.endsWith(".slf"))
+        {
+            CSlfProject *slfProj = new CSlfProject("a very random string to prevent loading via constructor", false);
+            proj = slfProj;
+            CSlfReader::readFile(fileToPath(file), slfProj);
+            SUBVERIFY(IGisProject::eTypeSlf == proj->getType(), "Project has invalid type");
+        }
+        else
+        {
+            SUBVERIFY(false, "Internal error: Can't read project file `" + file + "`");
+        }
     }
-    if(file.endsWith(".qms"))
+    catch(QString &errormsg)
     {
-        return readQmsFile(file, valid);
+        SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
+        if(proj)
+        {
+            delete proj;
+            proj = nullptr;
+        }
     }
 
-    return nullptr;
+    SUBVERIFY(valid || nullptr == proj, "File is neither valid, nor an exception was thrown");
+
+    if(nullptr != proj)
+    {
+        const QString &projPath = fileToPath(file);
+        SUBVERIFY(QFile(projPath + ".xml").exists() || !forceVerify, "Can't verify file `" + file + "`, .xml does not exist");
+
+        if(QFile(projPath + ".xml").exists())
+        {
+            verify(file, *proj);
+        }
+    }
+
+    return proj;
 }
 
 QTEST_MAIN(test_QMapShack)

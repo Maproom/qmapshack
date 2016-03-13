@@ -27,7 +27,7 @@ static QStringList GarminTPX1Exts = {"atemp", "wtemp", "depth", "hr", "cad"};
 
 void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
 {
-    CGpxProject *proj = readGpxFile(file, true);
+    CGpxProject *proj = dynamic_cast<CGpxProject*>(readProjFile(file));
 
     VERIFY_EQUAL(1, proj->childCount());
 

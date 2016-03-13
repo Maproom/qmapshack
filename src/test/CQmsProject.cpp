@@ -32,7 +32,7 @@ void test_QMapShack::_readQmsFile_1_6_0()
 
     IGisProject *proj2 = readProjFile("V1.6.0_file2.qms");
     verify("V1.6.0_file2.qms", *proj2);
-    delete proj1;
+    delete proj2;
 }
 
 void test_QMapShack::_writeReadQmsFile()
@@ -46,7 +46,7 @@ void test_QMapShack::_writeReadQmsFile()
 
         delete proj;
 
-        proj = readQmsFile(tmpFile);
+        proj = readProjFile(tmpFile, true, false);
         verify(file, *proj);
 
         delete proj;
@@ -55,13 +55,3 @@ void test_QMapShack::_writeReadQmsFile()
     }
 }
 
-CQmsProject* test_QMapShack::readQmsFile(const QString &file, bool)
-{
-    CQmsProject *proj = new CQmsProject(fileToPath(file), (CGisListWks*) nullptr);
-
-    SUBVERIFY(IGisProject::eTypeQms == proj->getType(), "Project has invalid type");
-
-    tryVerify(file, *proj);
-
-    return proj;
-}

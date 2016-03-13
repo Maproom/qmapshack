@@ -16,48 +16,17 @@
 
 **********************************************************************************************/
 
-#include "test/TestHelper.h"
 #include "test/test_QMapShack.h"
 
-#include "gis/slf/CSlfProject.h"
-#include "gis/slf/CSlfReader.h"
+#include "gis/prj/IGisProject.h"
 
 void test_QMapShack::_readValidSLFFile()
 {
-    // this does not read anything, a bare CSlfProject is created
-    CSlfProject *proj = new CSlfProject("slf/qtt_slf_file0.slf", false);
-
-    try
-    {
-        CSlfReader::readFile(testInput + "slf/qtt_slf_file0.slf", proj);
-    }
-    catch(QString &errormsg)
-    {
-        SUBVERIFY(false, QString("Did not expect any error, but got: `%1`").arg(errormsg));
-    }
-
-    SUBVERIFY(IGisProject::eTypeSlf == proj->getType(), "Project has invalid type");
-
-    verify("qtt_slf_file0.slf", *proj);
-    delete proj;
+    verify("qtt_slf_file0.slf");
 }
 
 void test_QMapShack::_readNonExistingSLFFile()
 {
-    // this does not read anything, a bare CSlfProject is created
-    CSlfProject *proj = new CSlfProject("qtt_slf_DOES_NOT_EXIST.slf", false);
-
-    bool hadException = false;
-    try
-    {
-        CSlfReader::readFile(testInput + "qtt_slf_DOES_NOT_EXIST.slf", proj);
-    }
-    catch(QString &errormsg)
-    {
-        SUBVERIFY(errormsg.contains("does not exist"), "Wrong error message");
-        hadException = true;
-    }
-    SUBVERIFY(hadException, "File is neither valid, nor an exception was thrown");
-
-    delete proj;
+    delete readProjFile("qtt_slf_DOES_NOT_EXIST.slf", false, false);
 }
+

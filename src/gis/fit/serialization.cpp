@@ -16,8 +16,6 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "gis/fit/CFitProject.h"
 #include "gis/fit/defs/fit_enums.h"
 #include "gis/fit/defs/fit_fields.h"
 #include "gis/rte/CGisItemRte.h"
@@ -29,10 +27,8 @@ static const qreal twoPow31 = qPow(2, 31);
 static const uint sec1970to1990 = QDateTime(QDate(1989, 12, 31), QTime(0, 0, 0),Qt::UTC).toTime_t();
 
 
-class CFitDataConverter
+namespace CFitDataConverter
 {
-public:
-
     /**
      * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).
      * North latitude +, South latitude -
@@ -42,9 +38,7 @@ public:
      */
     static qreal toDegree(qint32 semicircles)
     {
-        qreal degree = 0;
-        degree = semicircles * (degrees / twoPow31);
-        return degree;
+        return semicircles * (degrees / twoPow31);
     }
 
     /**
@@ -57,7 +51,7 @@ public:
         dateTime.setTimeSpec(Qt::UTC);
         return dateTime;
     }
-};
+}
 
 template<typename T>
 static void readKnownExtensions(T &exts, const CFitMessage &mesg)
@@ -157,19 +151,18 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
         if(mesg.getGlobalMesgNr() == eMesgNumRecord)
         {
             // for documentation: MesgNumActivity, MesgNumSession, MesgNumLap, MesgNumLength could also contain data
-            CGisItemTrk::trkpt_t pt = CGisItemTrk::trkpt_t();
+            CGisItemTrk::trkpt_t pt;
             if(readFitRecord(mesg, pt))
             {
-                seg.pts.append(pt);
+                seg.pts.append(std::move(pt));
             }
         }
         else if(mesg.getGlobalMesgNr() ==  eMesgNumEvent)
         {
             if(mesg.getFieldValue(eEventEvent).toUInt() == eEventTimer)
             {
-                if(mesg.getFieldValue(eEventEventType).toUInt() == eEventTypeStop ||
-                   mesg.getFieldValue(eEventEventType).toUInt() == eEventTypeStopAll ||
-                   mesg.getFieldValue(eEventEventType).toUInt() == eEventTypeStopDisableAll)
+                uint event = mesg.getFieldValue(eEventEventType).toUInt();
+                if(event == eEventTypeStop || event == eEventTypeStopAll || event == eEventTypeStopDisableAll)
                 {
                     if(!seg.pts.isEmpty())
                     {
@@ -214,7 +207,7 @@ void CGisItemRte::readRteFromFit(CFitStream &stream)
         const CFitMessage& mesg = stream.nextMesg();
         if(mesg.getGlobalMesgNr() == eMesgNumRecord)
         {
-            rtept_t pt = rtept_t();
+            rtept_t pt;
             if(readFitRecord(mesg, pt))
             {
                 rte.pts.append(pt);

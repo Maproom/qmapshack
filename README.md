@@ -1,4 +1,4 @@
-You need a working mercurial, g++, cmake and QT5 installation to compile QMapShack on your computer. Clone and compile the code base by:
+You need a working mercurial, g++, cmake and QT5 (at least 5.4) installation to compile QMapShack on your computer. Clone and compile the code base by:
 
         hg clone https://bitbucket.org/maproom/qmapshack QMapShack
         mkdir build_QMapShack

@@ -100,7 +100,7 @@
        <item>
         <widget class="QLabel" name="labelHelpFillMapList">
          <property name="text">
-          <string>To add maps use File-&gt;Setup Map Paths. </string>
+          <string>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </string>
          </property>
          <property name="alignment">
           <set>Qt::AlignJustify|Qt::AlignVCenter</set>

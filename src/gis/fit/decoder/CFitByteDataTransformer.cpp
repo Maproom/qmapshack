@@ -109,7 +109,7 @@ qint32 CFitByteDataTransformer::getSint32(quint8* rawData)
 qreal CFitByteDataTransformer::getFloat32(quint8* rawData)
 {
     qint32 fValue = (qint32) (((qint32)rawData[3] << 24) | ((qint32)rawData[2] << 16) | ((qint32)rawData[1] << 8) | rawData[0]);
-    // comment: qreal is a double type (on allmost all systems). Here we need to go through a 32 bit flaoting type.
+    // comment: qreal is a double type (on almost all systems). Here we need to go through a 32 bit floating type.
     float tmp;
     memcpy(&tmp, &fValue, sizeof(tmp));
     qreal value = tmp;
@@ -122,7 +122,7 @@ qreal CFitByteDataTransformer::getFloat64(quint8* rawData)
                                 | ((unsigned long long) rawData[5] << 40) | ((unsigned long long) rawData[4] << 32)
                                 | ((unsigned long long) rawData[3] << 24) | ((unsigned long long) rawData[2] << 16)
                                 | ((unsigned long long) rawData[1] << 8) | rawData[0];
-    // comment: qreal is a double type (on allmost all systems). Here we need to go through a 64 bit flaoting type.
+    // comment: qreal is a double type (on almost all systems). Here we need to go through a 64 bit floating type.
     double tmp;
     memcpy(&tmp, &dValue, sizeof(tmp));
     qreal value = tmp;
@@ -136,7 +136,7 @@ QString CFitByteDataTransformer::getString(quint8* rawData, quint8 length)
     while(rawData[i] != 0 )
     {
         i++;
-        // no 0 termination found, but length exceded
+        // no 0 termination found, but length exceeded
         if(i > length)
         {
             break;

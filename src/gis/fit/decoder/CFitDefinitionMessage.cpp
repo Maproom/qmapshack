@@ -62,33 +62,14 @@ void CFitDefinitionMessage::setNrOfFields(quint8 nrOfFields)
     this->nrOfFields = nrOfFields;
 }
 
-quint16 CFitDefinitionMessage::getGlobalMesgNr() const
-{
-    return globalMesgNr;
-}
-
-quint8 CFitDefinitionMessage::getLocalMesgNr() const
-{
-    return localMesgNr;
-}
-
 quint8 CFitDefinitionMessage::getArchitectureBit() const
 {
     return architecture & fitArchitecureEndianMask;
-}
-quint8 CFitDefinitionMessage::getNrOfFields() const
-{
-    return nrOfFields;
 }
 
 void CFitDefinitionMessage::addField(CFitFieldDefinition fieldDef)
 {
     fields.append(fieldDef);
-}
-
-const QList<CFitFieldDefinition>&CFitDefinitionMessage::getFields() const
-{
-    return fields;
 }
 
 bool CFitDefinitionMessage::hasField(const quint8 fieldNum) const
@@ -113,7 +94,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getField(const quint8 fieldNum
         }
     }
     // dummy field for unknown field nr.
-    static CFitFieldDefinition dummyDefinitionField {};
+    static const CFitFieldDefinition dummyDefinitionField;
 
     return dummyDefinitionField;
 }
@@ -126,7 +107,7 @@ const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const quint16 
         return fields[index];
     }
     // dummy field for unknown field nr.
-    static CFitFieldDefinition dummyDefinitionField {};
+    static const CFitFieldDefinition dummyDefinitionField;
 
     return dummyDefinitionField;
 }

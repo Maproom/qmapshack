@@ -24,7 +24,6 @@
  * 0: field definition number
  * 1: size in bytes of field data
  * 2: base type
- *
  */
 
 void CFitFieldDefinitionState::reset()
@@ -59,10 +58,6 @@ decode_state_e CFitFieldDefinitionState::process(quint8 &dataByte)
             FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
             endDefintion();
             return eDecoderStateRecord;
-        }
-        else
-        {
-            return eDecoderStateFieldDef;
         }
     }
 

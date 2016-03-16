@@ -52,21 +52,11 @@ QStringList CFitMessage::messageInfo() const
         .arg(getGlobalMesgNr())
         .arg(getLocalMesgNr());
 
-    for(const CFitField &  field: fields)
+    for(const CFitField &field : fields)
     {
         list << field.fieldInfo();
     }
     return list;
-}
-
-quint16 CFitMessage::getGlobalMesgNr() const
-{
-    return globalMesgNr;
-}
-
-quint8 CFitMessage::getLocalMesgNr() const
-{
-    return localMesgNr;
 }
 
 bool CFitMessage::hasField(const quint8 fieldDefNum) const

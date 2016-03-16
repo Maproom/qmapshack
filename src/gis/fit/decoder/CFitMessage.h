@@ -23,7 +23,6 @@
 
 #include <QtCore>
 
-class MesgDefinition;
 class CFitDefinitionMessage;
 class CFitProfile;
 class CFitFieldProfile;
@@ -35,8 +34,8 @@ public:
     CFitMessage();
 
     bool isValid() const;
-    quint16 getGlobalMesgNr() const;
-    quint8 getLocalMesgNr() const;
+    quint16 getGlobalMesgNr() const { return globalMesgNr; };
+    quint8 getLocalMesgNr()   const { return localMesgNr; };
 
     bool hasField(const quint8 fieldDefNum) const;
 

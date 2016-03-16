@@ -76,7 +76,7 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         reset();
         if (nrOfFields == 0)
         {
-            // no fields, records may follow (either for a data message or defninition message)
+            // no fields, records may follow (either for a data message or definition message)
             return eDecoderStateRecord;
         }
         // the fields definitions follows

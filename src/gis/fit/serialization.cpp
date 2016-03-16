@@ -26,31 +26,27 @@ static const qreal degrees = 180.0;
 static const qreal twoPow31 = qPow(2, 31);
 static const uint sec1970to1990 = QDateTime(QDate(1989, 12, 31), QTime(0, 0, 0),Qt::UTC).toTime_t();
 
-
-namespace CFitDataConverter
+/**
+ * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).
+ * North latitude +, South latitude -
+ * East longitude +, West longitude -
+ *
+   return: the given semicircle value converted to degree.
+ */
+static qreal toDegree(qint32 semicircles)
 {
-    /**
-     * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).
-     * North latitude +, South latitude -
-     * East longitude +, West longitude -
-     *
-       return: the given semicircle value converted to degree.
-     */
-    static qreal toDegree(qint32 semicircles)
-    {
-        return semicircles * (degrees / twoPow31);
-    }
+    return semicircles * (degrees / twoPow31);
+}
 
-    /**
-       timestamp: seconds since UTC 00:00 Dec 31 1989
-     */
-    static QDateTime toDateTime(quint32 timestamp)
-    {
-        QDateTime dateTime;
-        dateTime.setTime_t(sec1970to1990 + timestamp);
-        dateTime.setTimeSpec(Qt::UTC);
-        return dateTime;
-    }
+/**
+   timestamp: seconds since UTC 00:00 Dec 31 1989
+ */
+static QDateTime toDateTime(quint32 timestamp)
+{
+    QDateTime dateTime;
+    dateTime.setTime_t(sec1970to1990 + timestamp);
+    dateTime.setTimeSpec(Qt::UTC);
+    return dateTime;
 }
 
 template<typename T>
@@ -80,11 +76,11 @@ bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
 {
     if(mesg.isFieldValueValid(eRecordPositionLong) && mesg.isFieldValueValid(eRecordPositionLat))
     {
-        pt.lon = CFitDataConverter::toDegree(mesg.getFieldValue(eRecordPositionLong).toInt());
-        pt.lat = CFitDataConverter::toDegree(mesg.getFieldValue(eRecordPositionLat).toInt());
+        pt.lon = toDegree(mesg.getFieldValue(eRecordPositionLong).toInt());
+        pt.lat = toDegree(mesg.getFieldValue(eRecordPositionLat).toInt());
         // QVariant.toInt() does not convert double to int but return 0.
         pt.ele = (int) mesg.getFieldValue(eRecordEnhancedAltitude).toDouble();
-        pt.time = CFitDataConverter::toDateTime(mesg.getFieldValue(eRecordTimestamp).toUInt());
+        pt.time = toDateTime(mesg.getFieldValue(eRecordTimestamp).toUInt());
 
         readKnownExtensions(pt.extensions, mesg);
 
@@ -115,13 +111,13 @@ void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
     }
     if(mesg.isFieldValueValid(eCoursePointTimestamp))
     {
-        wpt.time = CFitDataConverter::toDateTime(mesg.getFieldValue(eCoursePointTimestamp).toUInt());
+        wpt.time = toDateTime(mesg.getFieldValue(eCoursePointTimestamp).toUInt());
     }
 
     if(mesg.isFieldValueValid(eCoursePointPositionLong) && mesg.isFieldValueValid(eCoursePointPositionLat))
     {
-        wpt.lon = CFitDataConverter::toDegree(mesg.getFieldValue(eCoursePointPositionLong).toInt());
-        wpt.lat = CFitDataConverter::toDegree(mesg.getFieldValue(eCoursePointPositionLat).toInt());
+        wpt.lon = toDegree(mesg.getFieldValue(eCoursePointPositionLong).toInt());
+        wpt.lat = toDegree(mesg.getFieldValue(eCoursePointPositionLat).toInt());
     }
     // TODO find appropriate icon for different CoursePointType (CoursePoint***)
     // see WptIcons.initWptIcons() for all values

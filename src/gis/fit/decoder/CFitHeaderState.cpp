@@ -21,7 +21,7 @@
 
 /**
  * byte
- * 0: the header size wihtout crc (12 for the current version)
+ * 0: the header size without crc (12 for the current version)
  * 1: protocol version
  * 2: profil version LSB
  * 3: profil version MSB
@@ -37,10 +37,9 @@
  * 13: CRC MSB
  */
 
-static const quint8 fitProtocolVersionMajor =1;
-
-static const quint8 fitProtocolMajerVersionShift = 4;
-static const quint8 fitProtocolMajorVersionMask = 0x0F << fitProtocolMajerVersionShift;
+static const quint8 fitProtocolVersionMajor = 1;
+static const quint8 fitProtocolMajorVersionShift = 4;
+static const quint8 fitProtocolMajorVersionMask = 0x0F << fitProtocolMajorVersionShift;
 
 void CFitHeaderState::reset()
 {
@@ -65,7 +64,7 @@ decode_state_e CFitHeaderState::process(quint8 &dataByte)
     case 1:
         // protocol version
         if ((dataByte & fitProtocolMajorVersionMask) >
-            (fitProtocolVersionMajor << fitProtocolMajerVersionShift))
+            (fitProtocolVersionMajor << fitProtocolMajorVersionShift))
         {
             throw tr("FIT decoding error: protocol %1 version not supported.").arg(dataByte & fitProtocolMajorVersionMask);
         }

@@ -22,9 +22,9 @@
 #include <QtCore>
 
 /*
- * 0: does not print any decoded fit messages and defintions
- * 1: prints fit messages and defintions after finishing decoding
- * 2: 1 + prints fit messages and defintions during decoing (just after finshing one)
+ * 0: does not print any decoded fit messages and definitions
+ * 1: prints fit messages and definitions after finishing decoding
+ * 2: 1 + prints fit messages and definitions during decoding (just after finishing one)
  */
 #define FITDEBUGLVL 1
 

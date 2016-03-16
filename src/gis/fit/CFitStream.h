@@ -53,12 +53,12 @@ public:
     /**
        return: the last read message again
      */
-    const CFitMessage& lastMesg();
+    const CFitMessage& lastMesg() const;
 
     /**
        return: true if there a further FIT message is available
      */
-    bool hasMoreMesg();
+    bool hasMoreMesg() const;
 
     /**
        return: the next message of the given message type (xx_MESG_NUM) beginning reading at the current position
@@ -74,7 +74,7 @@ public:
     int countMesgOf(quint16 mesgNr);
 
 
-    QString getFileName() { return file.fileName(); }
+    QString getFileName() const { return file.fileName(); }
 
 private:
     QFile& file;

@@ -36,7 +36,7 @@ const CFitMessage& CFitStream::nextMesg()
 }
 
 
-const CFitMessage& CFitStream::lastMesg()
+const CFitMessage& CFitStream::lastMesg() const
 {
     int pos = readPos-1;
     if(pos < 0)
@@ -47,7 +47,7 @@ const CFitMessage& CFitStream::lastMesg()
 }
 
 
-bool CFitStream::hasMoreMesg()
+bool CFitStream::hasMoreMesg() const
 {
     return readPos < decode.getMessages().size();
 }
@@ -63,7 +63,7 @@ const CFitMessage& CFitStream::nextMesgOf(quint16 mesgNum)
         }
     }
 
-    static CFitMessage dummyMessage {};
+    static const CFitMessage dummyMessage;
     return dummyMessage;
 }
 

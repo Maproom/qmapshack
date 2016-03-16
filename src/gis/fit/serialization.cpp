@@ -35,7 +35,7 @@ public:
 
     /**
      * converts the semicircle to the WGS-84 geoids (Degrees Decimal Minutes (DDD MM.MMM)).
-     * North latitude +, South latitute -
+     * North latitude +, South latitude -
      * East longitude +, West longitude -
      *
        return: the given semicircle value converted to degree.
@@ -59,6 +59,27 @@ public:
     }
 };
 
+template<typename T>
+static void readKnownExtensions(T &exts, const CFitMessage &mesg)
+{
+        // see gis/trk/CKnownExtension for the keys of the extensions
+        if(mesg.isFieldValueValid(eRecordHeartRate))
+        {
+            exts["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
+        }
+        if(mesg.isFieldValueValid(eRecordTemperature))
+        {
+            exts["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
+        }
+        if(mesg.isFieldValueValid(eRecordCadence))
+        {
+            exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
+        }
+        if(mesg.isFieldValueValid(eRecordSpeed))
+        {
+            exts["speed"] = mesg.getFieldValue(eRecordSpeed);
+        }
+}
 
 bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
 {
@@ -70,15 +91,7 @@ bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
         pt.ele = (int) mesg.getFieldValue(eRecordEnhancedAltitude).toDouble();
         pt.time = CFitDataConverter::toDateTime(mesg.getFieldValue(eRecordTimestamp).toUInt());
 
-        // see gis/trk/CKnownExtension for the keys of the extensions
-        if(mesg.isFieldValueValid(eRecordHeartRate))
-        {
-            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
-        }
-        if(mesg.isFieldValueValid(eRecordTemperature))
-        {
-            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
-        }
+        readKnownExtensions(pt.extensions, mesg);
 
         return true;
     }
@@ -91,15 +104,7 @@ bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
     {
         pt.speed = mesg.getFieldValue(eRecordSpeed).toDouble();
 
-        // see gis/trk/CKnownExtension for the keys of the extensions
-        if(mesg.isFieldValueValid(eRecordHeartRate))
-        {
-            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
-        }
-        if(mesg.isFieldValueValid(eRecordTemperature))
-        {
-            pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
-        }
+        readKnownExtensions(pt.extensions, mesg);
 
         pt.extensions.squeeze();
         return true;
@@ -141,12 +146,11 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
         trk.name = QFileInfo(stream.getFileName()).baseName().replace("_", " ");
     }
 
-    trk.name = QFileInfo(stream.getFileName()).baseName().replace("_", " ");
-    // note to the FIT specification: the specification alllows different ordering of the messages.
+    // note to the FIT specification: the specification allows different ordering of the messages.
     // Record messages can either be at the beginning or in chronological order within the record
     // messages. Garmin devices uses the chronological ordering. We only consider the chronological
     // order, otherwise timestamps (of records and events) must be compared to each other.
-    trkseg_t seg = trkseg_t();
+    trkseg_t seg;
     do
     {
         const CFitMessage& mesg = stream.nextMesg();

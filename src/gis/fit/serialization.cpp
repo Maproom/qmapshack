@@ -71,7 +71,8 @@ static void readKnownExtensions(T &exts, const CFitMessage &mesg)
         }
         if(mesg.isFieldValueValid(eRecordSpeed))
         {
-            exts["speed"] = mesg.getFieldValue(eRecordSpeed);
+            const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
+            exts["speed"] = speed.toDouble() / 1000.;
         }
 }
 

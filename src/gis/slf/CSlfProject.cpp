@@ -51,7 +51,3 @@ CSlfProject::CSlfProject(const QString &filename, bool readFile)
     setupName(QFileInfo(filename).baseName().replace("_", " "));
 }
 
-CSlfProject::~CSlfProject()
-{
-}
-

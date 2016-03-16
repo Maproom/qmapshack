@@ -58,23 +58,6 @@ void IFitDecoderState::buildCrc(quint8 byte)
     data.crc = crc;
 }
 
-
-quint16 IFitDecoderState::getCrc()
-{
-    return data.crc;
-}
-
-CFitMessage*IFitDecoderState::latestMessage()
-{
-    return data.lastMessage;
-}
-
-CFitDefinitionMessage*IFitDecoderState::latestDefinition()
-{
-    return data.lastDefintion;
-}
-
-
 static const quint8 fitRecordHeaderTimeOffsetMask = 0x1F; // bit 0-4: 0001 1111
 
 void IFitDecoderState::setTimestamp(quint32 fullTimestamp)
@@ -90,18 +73,13 @@ void IFitDecoderState::setTimestampOffset(quint32 offsetTimestamp)
     data.lastTimeOffset = timeOffset;
 }
 
-quint32 IFitDecoderState::getTimestamp()
-{
-    return data.timestamp;
-}
-
 void IFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
 {
     data.messages.append(CFitMessage(definition));
     data.lastMessage = &data.messages.last();
 }
 
-void IFitDecoderState::addDefinition(CFitDefinitionMessage definition)
+void IFitDecoderState::addDefinition(const CFitDefinitionMessage &definition)
 {
     data.defintions[definition.getLocalMesgNr()] = definition;
     data.lastDefintion = &data.defintions[definition.getLocalMesgNr()];

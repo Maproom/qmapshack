@@ -64,7 +64,7 @@ decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
         {
             // create dummy definition field for timestamp
             // later on passed timestamp is a uint32, therefore a 4 byte type is created.
-            // remark on enum for timestamp (RecordTimestamp:
+            // remark on enum for timestamp (RecordTimestamp):
             // the timestamp field has for all message types the same number (253) therefore it does not matter which
             // enum is taken here.
             def->addField(CFitFieldDefinition(def, eRecordTimestamp, sizeof(quint32), eBaseTypeNrUint8));

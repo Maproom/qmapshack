@@ -45,7 +45,7 @@ decode_state_e CFitFieldDataState::process(quint8 &dataByte)
         mesg.addField(f);
 
         // The special case time record.
-        // timestamp has always the same value for all enums. it does not matter againts which we're comparing.
+        // timestamp has always the same value for all enums. it does not matter against which we're comparing.
         if (fieldDef.getDefNr() == eRecordTimestamp)
         {
             setTimestamp(f.getValue().toUInt());

@@ -54,7 +54,7 @@ public:
         QList<CFitMessage> messages;
     };
 
-    IFitDecoderState(shared_state_data_t &data, decode_state_e stateClass) : data(data) { }
+    IFitDecoderState(shared_state_data_t &data) : data(data) { }
     virtual ~IFitDecoderState() {}
 
     virtual void reset() = 0;
@@ -63,7 +63,7 @@ public:
 protected:
     virtual decode_state_e process(quint8 &dataByte) = 0;
 
-    CFitMessage* latestMessage();
+    CFitMessage* latestMessage() const { return data.lastMessage; };
     void addMessage(const CFitDefinitionMessage& definition);
 
     void setFileLength(quint32 fileLength);
@@ -71,15 +71,15 @@ protected:
     void incFileBytesRead();
     quint32 bytesLeftToRead();
 
-    CFitDefinitionMessage* latestDefinition();
+    CFitDefinitionMessage* latestDefinition() const { return data.lastDefintion; };
     CFitDefinitionMessage* defintion(quint32 localMessageType);
-    void addDefinition(CFitDefinitionMessage definition);
+    void addDefinition(const CFitDefinitionMessage &definition);
     void endDefintion();
 
     void setTimestamp(quint32 fullTimestamp);
     void setTimestampOffset(quint32 offsetTimestamp);
-    quint32 getTimestamp();
-    quint16 getCrc();
+    quint32 getTimestamp() const { return data.timestamp; };
+    quint16 getCrc() const { return data.crc; };
 
 private:
     void buildCrc(quint8 byte);

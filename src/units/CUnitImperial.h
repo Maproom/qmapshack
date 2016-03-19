@@ -34,8 +34,8 @@ public:
     qreal elevation2meter(const QString& val) const override;
 
 private:
-    static constexpr qreal footPerMeter = 3.28084;
-    static constexpr qreal milePerMeter = 0.6213699E-3;
-    static constexpr qreal meterPerSecToMilePerHour = 2.23693164;
+    static const qreal footPerMeter;
+    static const qreal milePerMeter;
+    static const qreal meterPerSecToMilePerHour;
 };
 #endif //CUNITIMPERIAL_H

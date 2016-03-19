@@ -92,3 +92,8 @@ qreal CUnitImperial::elevation2meter(const QString& val) const /* override */
 {
     return val.toDouble() / footPerMeter;
 }
+
+
+const qreal CUnitImperial::footPerMeter = 3.28084;
+const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
+const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;

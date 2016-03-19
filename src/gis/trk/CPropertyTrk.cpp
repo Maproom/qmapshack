@@ -120,6 +120,7 @@ void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
     const property_t& p = propBySource(source);
     if(p.name.isEmpty())
     {
+        plot->clear();
         return;
     }
 

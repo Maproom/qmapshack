@@ -53,6 +53,8 @@ public:
 
     bool isZoomed() const;
 
+    void clear();
+
     using INotifyTrk::setMouseFocus;
 
 signals:
@@ -72,8 +74,7 @@ private slots:
 
 protected:
     void setYLabel(const QString& str);
-    void setXLabel(const QString& str);
-    void clear();
+    void setXLabel(const QString& str);    
     void newLine(const QPolygonF& line, const QString& label);
     void addLine(const QPolygonF& line, const QString& label);
     void setLimits();

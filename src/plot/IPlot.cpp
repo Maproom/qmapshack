@@ -131,6 +131,7 @@ IPlot::~IPlot()
 
 void IPlot::clear()
 {
+    needsRedraw = true;
     data->lines.clear();
     data->tags.clear();
     data->badData = true;

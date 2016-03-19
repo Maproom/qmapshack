@@ -1,9 +1,11 @@
 #############################################################
-#			QMapShack for Windows (short: QMS)				#
+#			QMapShack for Windows dependencies				#
 #############################################################
-QMS is build with Visual Studio 2013 as 64bit application.
+This installation of QMapShack for Windows (short: QMS) 
+has been build with Visual Studio 2013 as 64bit application.
 
-It can be build with Visual Studio 2013 Community-Edition, too.
+If you want to build QMS on your own, have a look at
+https://bitbucket.org/maproom/qmapshack/wiki/BuildWindowsVisualStudio
 
 Dependencies
 ============
@@ -35,4 +37,5 @@ QMS depends on the 3rd party software listed below:
  
 7.) MinGW64,  http://mingw-w64.org
   The mingw64 compiler is used to compile the routino library.
-  This results in dependencies from mingw64 runtime libraries such as libwinpthread-1.dll
+  This resulting library depends from mingw64 runtime libraries such as libwinpthread-1.dll, libz-1.dll
+  which are also included in this installation

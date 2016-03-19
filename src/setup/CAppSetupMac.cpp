@@ -49,7 +49,7 @@ void CAppSetupMac::extendPath()
     QString binDir = getApplicationDir(relBinDir).absolutePath();
     qDebug() << "BIN" << binDir;
     value += binDir;
-    setenv("PATH", value.toLatin1().constData(), true);
+    qputenv("PATH", value.toLatin1().constData());
 }
 
 

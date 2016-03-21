@@ -46,12 +46,14 @@ void SGisLine::updateElevation(CDemDraw * dem)
     for(int i = 0; i < size(); i++)
     {
         IGisLine::point_t& pt = (*this)[i];
-        pt.ele = dem->getElevationAt(pt.coord);
+        qreal ele = dem->getElevationAt(pt.coord);
+        pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
         for(int n = 0; n < pt.subpts.size(); n++)
         {
             IGisLine::subpt_t& sub = pt.subpts[n];
-            sub.ele = dem->getElevationAt(sub.coord);
+            qreal ele = dem->getElevationAt(pt.coord);
+            sub.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
         }
     }
 }

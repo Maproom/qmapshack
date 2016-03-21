@@ -72,6 +72,10 @@ mkdir platforms
 cd platforms
 copy %QMSI_QT_PATH%\plugins\platforms\qwindows.dll
 cd ..
+mkdir printsupport
+cd printsupport
+copy %QMSI_QT_PATH%\plugins\printsupport\windowsprintersupport.dll
+cd ..
 rem Qt translations
 rem Qt5: see http://doc.qt.io/qt-5/linguist-programmers.html
 mkdir translations

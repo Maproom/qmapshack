@@ -158,6 +158,9 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\platforms\"
     File Files\platforms\qwindows.dll	
 
+  SetOutPath "$INSTDIR\printsupport\"
+    File Files\printsupport\windowsprintersupport.dll
+    
   SetOutPath "$INSTDIR\translations"
     File Files\translations\qt*.qm	
   ;END Qt Files

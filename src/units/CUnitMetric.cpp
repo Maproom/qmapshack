@@ -116,3 +116,17 @@ qreal CUnitMetric::elevation2meter(const QString& val) const /* override */
 {
     return val.toDouble();
 }
+
+void CUnitMetric::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+{
+    if(meter > 1000)
+    {
+        scale = 0.001;
+        unit  = "km";
+    }
+    else
+    {
+        scale = 1.0;
+        unit  = "m";
+    }
+}

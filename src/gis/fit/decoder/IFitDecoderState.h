@@ -63,7 +63,7 @@ public:
 protected:
     virtual decode_state_e process(quint8 &dataByte) = 0;
 
-    CFitMessage* latestMessage() const { return data.lastMessage; };
+    CFitMessage* latestMessage() const { return data.lastMessage; }
     void addMessage(const CFitDefinitionMessage& definition);
 
     void setFileLength(quint32 fileLength);
@@ -71,15 +71,15 @@ protected:
     void incFileBytesRead();
     quint32 bytesLeftToRead();
 
-    CFitDefinitionMessage* latestDefinition() const { return data.lastDefintion; };
+    CFitDefinitionMessage* latestDefinition() const { return data.lastDefintion; }
     CFitDefinitionMessage* defintion(quint32 localMessageType);
     void addDefinition(const CFitDefinitionMessage &definition);
     void endDefintion();
 
     void setTimestamp(quint32 fullTimestamp);
     void setTimestampOffset(quint32 offsetTimestamp);
-    quint32 getTimestamp() const { return data.timestamp; };
-    quint16 getCrc() const { return data.crc; };
+    quint32 getTimestamp() const { return data.timestamp; }
+    quint16 getCrc() const { return data.crc; }
 
 private:
     void buildCrc(quint8 byte);

@@ -36,14 +36,19 @@ public:
 
     struct property_t
     {
+        enum axistype_e
+        {
+            eAxisDistance
+            ,eAxisTime
+        };
+
         property_t() = default;
-        property_t(const QString& key, const QString& name, const QString& unit, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
+        property_t(const QString& key, const QString& name, const QString& unit, const QIcon& icon, axistype_e axisType, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
             : key(key)
             , name(name)
             , unit(unit)
             , icon(icon)
             , axisType(axisType)
-            , xLabel(xLabel)
             , yLabel(yLabel)
             , factor(factor)
             , getX(getX)
@@ -55,8 +60,7 @@ public:
         QString name;
         QString unit;
         QIcon icon;
-        CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
-        QString xLabel;
+        axistype_e axisType = eAxisDistance;
         QString yLabel;
         qreal min = NOFLOAT;
         qreal max = NOFLOAT;

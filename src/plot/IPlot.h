@@ -75,7 +75,7 @@ private slots:
 protected:
     void setXTicScale(qreal scale);
     void setYLabel(const QString& str);
-    void setXLabel(const QString& str);    
+    void setXLabel(const QString& str);
     void newLine(const QPolygonF& line, const QString& label);
     void addLine(const QPolygonF& line, const QString& label);
     void setLimits();

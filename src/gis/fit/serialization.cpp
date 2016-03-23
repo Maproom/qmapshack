@@ -52,24 +52,24 @@ static QDateTime toDateTime(quint32 timestamp)
 template<typename T>
 static void readKnownExtensions(T &exts, const CFitMessage &mesg)
 {
-        // see gis/trk/CKnownExtension for the keys of the extensions
-        if(mesg.isFieldValueValid(eRecordHeartRate))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
-        }
-        if(mesg.isFieldValueValid(eRecordTemperature))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
-        }
-        if(mesg.isFieldValueValid(eRecordCadence))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
-        }
-        if(mesg.isFieldValueValid(eRecordSpeed))
-        {
-            const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
-            exts["speed"] = speed.toDouble() / 1000.;
-        }
+    // see gis/trk/CKnownExtension for the keys of the extensions
+    if(mesg.isFieldValueValid(eRecordHeartRate))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
+    }
+    if(mesg.isFieldValueValid(eRecordTemperature))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
+    }
+    if(mesg.isFieldValueValid(eRecordCadence))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
+    }
+    if(mesg.isFieldValueValid(eRecordSpeed))
+    {
+        const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
+        exts["speed"] = speed.toDouble() / 1000.;
+    }
 }
 
 bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)

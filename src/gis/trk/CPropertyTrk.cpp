@@ -40,8 +40,7 @@ void CPropertyTrk::setupData()
         , QString()
         , QString()
         , QIcon()
-        , CPlotData::eAxisLinear
-        , QString()
+        , property_t::eAxisDistance
         , QString()
         , 1.0
         , nullptr
@@ -61,8 +60,7 @@ void CPropertyTrk::setupData()
             , name
             , ext.unit
             , QIcon(ext.icon)
-            , CPlotData::eAxisLinear
-            , tr("distance [%1]").arg(IUnit::self().baseunit)
+            , property_t::eAxisDistance
             , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
             , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
@@ -73,8 +71,7 @@ void CPropertyTrk::setupData()
         if(key == CKnownExtension::internalProgress)
         {
             property.min        = 0;
-            property.axisType   = CPlotData::eAxisTime;
-            property.xLabel     = tr("time");
+            property.axisType   = property_t::eAxisTime;
             property.getX       = [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
         }
 
@@ -124,6 +121,6 @@ void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
         return;
     }
 
-    plot->setup(p.key, p.axisType, p.xLabel, p.yLabel, p.factor, p.getX, p.getY);
+    plot->setup(p);
 }
 

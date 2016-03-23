@@ -729,12 +729,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CFitHeaderState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="70"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="69"/>
         <source>FIT decoding error: protocol %1 version not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="121"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="120"/>
         <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -935,7 +935,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="188"/>
+        <location filename="../gis/fit/serialization.cpp" line="182"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2975,6 +2975,19 @@ Onbekende structuur.</translation>
     </message>
 </context>
 <context>
+    <name>CPlot</name>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="55"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished">afstand [%1]</translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="60"/>
+        <source>time</source>
+        <translation type="unfinished">tijd</translation>
+    </message>
+</context>
+<context>
     <name>CPlotDistance</name>
     <message>
         <source>distance [%1]</source>
@@ -2992,7 +3005,7 @@ Onbekende structuur.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="73"/>
+        <location filename="../plot/CPlotProfile.cpp" line="78"/>
         <source>distance [%1]</source>
         <translation>afstand [%1]</translation>
     </message>
@@ -3001,7 +3014,7 @@ Onbekende structuur.</translation>
         <translation type="obsolete">tijd [u]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="74"/>
+        <location filename="../plot/CPlotProfile.cpp" line="79"/>
         <source>alt. [%1]</source>
         <translation>hoogte [%1]</translation>
     </message>
@@ -3125,14 +3138,12 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CPropertyTrk</name>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="65"/>
         <source>distance [%1]</source>
-        <translation>afstand [%1]</translation>
+        <translation type="vanished">afstand [%1]</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="77"/>
         <source>time</source>
-        <translation>tijd</translation>
+        <translation type="vanished">tijd</translation>
     </message>
 </context>
 <context>
@@ -6331,12 +6342,12 @@ Ik wil de documentatie niet lezen!</translation>
         <translation type="unfinished">Maak waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="640"/>
+        <location filename="../plot/IPlot.cpp" line="647"/>
         <source>No or bad data.</source>
         <translation>Geen of ontbrekende gegevens.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1237"/>
+        <location filename="../plot/IPlot.cpp" line="1244"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>

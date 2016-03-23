@@ -100,6 +100,11 @@ public:
         autoscale = on;
     }
 
+    void setTicScale(qreal scale)
+    {
+        ticScale = scale;
+    }
+
     inline tictype_e getTicType() const
     {
         return ticType;
@@ -153,10 +158,12 @@ protected:
      */
     qint32 scaleWidth = 0;
 
-    ///the ticmark generation type
+    /// the ticmark generation type
     tictype_e ticType = eTicNorm;
-    ///local copy of the last ticmark object
+    /// local copy of the last ticmark object
     tic_t tic;
+    /// this is the scale used to convert meters into the scale's unit (km, ft, ml, nm)
+    qreal ticScale = 1.0;
 
     ///points of dimension
     quint32 points = 0;

@@ -49,30 +49,36 @@ static QDateTime toDateTime(quint32 timestamp)
     return dateTime;
 }
 
+static QString dateTimeAsString(quint32 timestamp)
+{
+    QDateTime dateTime = toDateTime(timestamp);
+    return dateTime.toString("yyyy-dd-MM-HH-mm-ss");
+}
+
 template<typename T>
 static void readKnownExtensions(T &exts, const CFitMessage &mesg)
 {
-        // see gis/trk/CKnownExtension for the keys of the extensions
-        if(mesg.isFieldValueValid(eRecordHeartRate))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
-        }
-        if(mesg.isFieldValueValid(eRecordTemperature))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
-        }
-        if(mesg.isFieldValueValid(eRecordCadence))
-        {
-            exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
-        }
-        if(mesg.isFieldValueValid(eRecordSpeed))
-        {
-            const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
-            exts["speed"] = speed.toDouble() / 1000.;
-        }
+    // see gis/trk/CKnownExtension for the keys of the extensions
+    if(mesg.isFieldValueValid(eRecordHeartRate))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:hr"] = mesg.getFieldValue(eRecordHeartRate);
+    }
+    if(mesg.isFieldValueValid(eRecordTemperature))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = mesg.getFieldValue(eRecordTemperature);
+    }
+    if(mesg.isFieldValueValid(eRecordCadence))
+    {
+        exts["gpxtpx:TrackPointExtension|gpxtpx:cad"] = mesg.getFieldValue(eRecordCadence);
+    }
+    if(mesg.isFieldValueValid(eRecordSpeed))
+    {
+        const QVariant &speed = mesg.getFieldValue(eRecordSpeed);
+        exts["speed"] = speed.toDouble() / 1000.;
+    }
 }
 
-bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
+static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
 {
     if(mesg.isFieldValueValid(eRecordPositionLong) && mesg.isFieldValueValid(eRecordPositionLat))
     {
@@ -89,7 +95,7 @@ bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
-bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
+static bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
 {
     if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
     {
@@ -103,11 +109,11 @@ bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
     return false;
 }
 
-void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
+static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 {
     if(mesg.isFieldValueValid(eCoursePointName))
     {
-        wpt.name = mesg.getFieldValue(eCoursePointName).toString();
+        wpt.name =  mesg.getFieldValue(eCoursePointName).toString();
     }
     if(mesg.isFieldValueValid(eCoursePointTimestamp))
     {
@@ -124,18 +130,69 @@ void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
     wpt.sym = "Waypoint";
 }
 
+
+static bool readFitSegmentPoint(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt, quint32 timeCreated)
+{
+    if(mesg.isFieldValueValid(eSegmentPointPositionLong) && mesg.isFieldValueValid(eSegmentPointPositionLat))
+    {
+        pt.lon = toDegree(mesg.getFieldValue(eSegmentPointPositionLong).toInt());
+        pt.lat = toDegree(mesg.getFieldValue(eSegmentPointPositionLat).toInt());
+        pt.ele = (int) mesg.getFieldValue(eSegmentPointAltitude).toDouble();
+        // sum with file_id time_created
+        pt.time = toDateTime(timeCreated + mesg.getFieldValue(eSegmentPointLeaderTime).toUInt());
+        return true;
+    }
+    return false;
+}
+
+
+static QString evaluateTrkName(CFitStream &stream)
+{
+    const CFitMessage& segmentIdMesg = stream.firstMesgOf(eMesgNumSegmentId);
+    if(segmentIdMesg.isFieldValueValid(eSegmentIdName))
+    {
+        return segmentIdMesg.getFieldValue(eSegmentIdName).toString();
+    }
+
+    const CFitMessage& courseMesg = stream.firstMesgOf(eMesgNumCourse);
+    if(courseMesg.isFieldValueValid(eCourseName))
+    {
+        // first place: take the course name
+        // course files can have a name but activities don't.
+        return courseMesg.getFieldValue(eCourseName).toString();
+    }
+
+    const CFitMessage& sessionMesg = stream.firstMesgOf(eMesgNumSession);
+    if(sessionMesg.isFieldValueValid(eSessionStartTime))
+    {
+        // second place: take the session start time
+        return dateTimeAsString(sessionMesg.getFieldValue(eSessionStartTime).toUInt());
+    }
+
+    const CFitMessage& fileidMesg = stream.firstMesgOf(eMesgNumFileId);
+    if(fileidMesg.isFieldValueValid(eFileIdTimeCreated))
+    {
+        // third place: take the file created timestamp
+        // (is typically the same as the start time with a offset of several seconds)
+        return dateTimeAsString(fileidMesg.getFieldValue(eFileIdTimeCreated).toUInt());
+    }
+
+    // fourth place: take the filename of the fit file
+    return QFileInfo(stream.getFileName()).baseName().replace("_", " ");
+}
+
+
 void CGisItemTrk::readTrkFromFit(CFitStream &stream)
 {
-    const CFitMessage& mesg = stream.firstMesgOf(eMesgNumCourse);
-    if(mesg.isValid() && mesg.isFieldValueValid(eCourseName))
+    trk.name = evaluateTrkName(stream);
+
+    quint32 timeCreated = 0;
+    const CFitMessage& fileIdMesg = stream.firstMesgOf(eMesgNumFileId);
+    if(fileIdMesg.isFieldValueValid(eFileIdTimeCreated))
     {
-        trk.name = mesg.getFieldValue(eCourseName).toString();
+        timeCreated = fileIdMesg.getFieldValue(eFileIdTimeCreated).toUInt();
     }
-    else
-    {
-        // course files can have a name but activities don't, so use just the filename
-        trk.name = QFileInfo(stream.getFileName()).baseName().replace("_", " ");
-    }
+    stream.reset();
 
     // note to the FIT specification: the specification allows different ordering of the messages.
     // Record messages can either be at the beginning or in chronological order within the record
@@ -169,6 +226,14 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                 }
             }
         }
+        else if(mesg.getGlobalMesgNr() == eMesgNumSegmentPoint)
+        {
+            CGisItemTrk::trkpt_t pt;
+            if(readFitSegmentPoint(mesg, pt, timeCreated))
+            {
+                seg.pts.append(std::move(pt));
+            }
+        }
     }
     while (stream.hasMoreMesg());
 
@@ -194,11 +259,8 @@ void CGisItemWpt::readWptFromFit(CFitStream &stream)
 void CGisItemRte::readRteFromFit(CFitStream &stream)
 {
     // a course file could be considered as a route...
-    const CFitMessage& mesg = stream.firstMesgOf(eMesgNumCourse);
-    if(mesg.isFieldValueValid(eCourseName))
-    {
-        rte.name = mesg.getFieldValue(eCourseName).toString();
-    }
+    rte.name =  evaluateTrkName(stream);
+    stream.reset();
     do
     {
         const CFitMessage& mesg = stream.nextMesg();
@@ -207,11 +269,9 @@ void CGisItemRte::readRteFromFit(CFitStream &stream)
             rtept_t pt;
             if(readFitRecord(mesg, pt))
             {
-                rte.pts.append(pt);
+                rte.pts.append(std::move(pt));
             }
         }
     }
     while (stream.hasMoreMesg());
 }
-
-

@@ -32,40 +32,45 @@
 CFitProject::CFitProject(const QString &filename, CGisListWks *parent)
     : IGisProject(eTypeFit, filename, parent)
 {
-    setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/FitProject.png"));
-    blockUpdateItems(true);
-    try
-    {
-        loadFit(filename);
-    }
-    catch(QString &errormsg)
-    {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                              tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
-        valid = false;
-    }
-    blockUpdateItems(false);
+    loadFitFromFile(filename, true);
 }
 
 CFitProject::CFitProject(const QString &filename, IDevice *parent)
     : IGisProject(eTypeFit, filename, parent)
 {
+    // this constructor is used when opening files from the garmin device.
+    // this means several files are opened at the same time. For that case we don not show an error message if a file
+    // can not be opened.
+    loadFitFromFile(filename, false);
+}
+
+
+void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
+{
     setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/FitProject.png"));
     blockUpdateItems(true);
     try
     {
-        loadFit(filename);
+        tryOpeningFitFile(filename);
     }
     catch(QString &errormsg)
     {
-        QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
-                              tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+        if(showErrorMsg)
+        {
+            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),
+                                  tr("Failed to load file %1...").arg(filename), errormsg, QMessageBox::Abort);
+        }
+        else
+        {
+            qWarning() << "Failed to load FIT file:" << errormsg;
+        }
         valid = false;
     }
     blockUpdateItems(false);
 }
 
-void CFitProject::loadFit(const QString & filename)
+
+void CFitProject::tryOpeningFitFile(const QString &filename)
 {
     // create file instance
     QFile file(filename);
@@ -86,10 +91,9 @@ void CFitProject::loadFit(const QString & filename)
         throw tr("Failed to open FIT file %1.").arg(filename);
     }
 
-    CFitStream in(file);
     try
     {
-        in.decodeFile();
+        createGisItems(file);
     }
     catch(QString& errormsg)
     {
@@ -98,26 +102,53 @@ void CFitProject::loadFit(const QString & filename)
     }
     file.close();
 
+    markAsSaved();
+
+    setToolTip(CGisListWks::eColumnName, getInfo());
+    valid = true;
+}
+
+
+
+void CFitProject::createGisItems(QFile& file)
+{
+    CFitStream in(file);
+    in.decodeFile();
+
+    QString name = "";
+
+    // remark: we consider activity and course files types. trk is for both types. There is one trk per fit file
     const CFitMessage& mesg = in.firstMesgOf(eMesgNumFileId);
-    if(mesg.getFieldValue(eFileIdType).toUInt() == eFileActivity || mesg.getFieldValue(eFileIdType).toUInt() == eFileCourse)
+    if(mesg.getFieldValue(eFileIdType).toUInt() == eFileActivity || mesg.getFieldValue(eFileIdType).toUInt() == eFileCourse
+       || mesg.getFieldValue(eFileIdType).toUInt() == eFileSegment)
     {
-        new CGisItemTrk(in, this);
+        CGisItemTrk* trk = new CGisItemTrk(in, this);
+        name = trk->getName();
     }
     // fit does not have routes
     // new CGisItemRte(in, this);
 
     in.reset();
+    // course point is a message of a course file. Thus, wpt is only for a course file. There might be n wpt per fit file
     while(in.nextMesgOf(eMesgNumCoursePoint).isValid())
     {
-        new CGisItemWpt(in, this);
+        CGisItemWpt* wpt = new CGisItemWpt(in, this);
+        if (name.length() == 0)
+        {
+            name = wpt->getName();
+        }
     }
     // ql:area is not directly available in FIT (could be calculated)
 
-    markAsSaved();
-
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
-    setToolTip(CGisListWks::eColumnName, getInfo());
-    valid = true;
+    // use name of first trk
+    if(name.length() > 0)
+    {
+        setupName(name);
+    }
+    else
+    {
+        setupName(QFileInfo(filename).baseName().replace("_", " "));
+    }
 }
 
 CFitProject::~CFitProject()

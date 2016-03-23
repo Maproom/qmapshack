@@ -23,6 +23,7 @@
 
 #include <QtCore>
 
+class CFitStream;
 
 class CFitProject final : public IGisProject
 {
@@ -49,7 +50,9 @@ public:
 
 
 private:
-    void loadFit(const QString & filename);
+    void loadFitFromFile(const QString &filename, bool showErrorMsg);
+    void tryOpeningFitFile(const QString &filename);
+    void createGisItems(QFile& file);
 };
 
 #endif //CFITPROJECT_H

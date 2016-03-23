@@ -38,12 +38,12 @@ void CPropertyTrk::setupData()
     {
         QString()
         , QString()
-        , QString()
         , QIcon()
         , property_t::eAxisDistance
-        , QString()
-        , 1.0
         , nullptr
+        , QString()
+        , QString()
+        , 1.0        
         , nullptr
     };
     properties << propNull;
@@ -58,12 +58,12 @@ void CPropertyTrk::setupData()
         {
             key
             , name
-            , ext.unit
             , QIcon(ext.icon)
             , property_t::eAxisDistance
-            , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
-            , ext.factor
             , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
+            , ext.unit                        
+            , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
+            , ext.factor            
             , ext.valueFunc
         };
 

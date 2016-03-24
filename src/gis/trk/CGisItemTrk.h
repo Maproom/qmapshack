@@ -75,6 +75,7 @@ public:
         , eVisualDetails     = 0x04
         , eVisualProject     = 0x08
         , eVisualColorAct    = 0x10
+        , eVisualTrkTable    = 0x20
         , eVisualAll         = -1
     };
 
@@ -259,9 +260,9 @@ public:
         return mouseMoveFocus;
     }
 
-    quint32 getAllFlagsSet() const
+    quint32 getAllValidFlags() const
     {
-        return allFlags;
+        return allValidFlags;
     }
 
 
@@ -734,12 +735,6 @@ public:
         {
 
             eHidden         = 0x00000004      ///< mark point as deleted
-            ,eValidTime     = 0x00000010
-            ,eValidEle      = 0x00000020
-            ,eInvalidTime   = 0x00000040
-            ,eInvalidEle    = 0x00000080
-            ,eValidMask     = 0x000000F0
-
                           // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
@@ -754,6 +749,19 @@ public:
             ,eActMask   = 0xFF800000    ///< mask for activity flags
             ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
+
+        enum valid_e
+        {
+             eValidTime     = 0x00000001
+            ,eValidEle      = 0x00000002
+        };
+
+        enum invalid_e
+        {
+            eInvalidTime    = eValidTime << 16
+            ,eInvalidEle    = eValidEle  << 16
+        };
+
 
         inline bool isHidden() const
         {
@@ -775,7 +783,18 @@ public:
             flags &= ~flag;
         }
 
+        inline bool isValid(valid_e flag) const
+        {
+            return valid & flag;
+        }
+
+        inline bool isInvalid(invalid_e flag) const
+        {
+            return valid & flag;
+        }
+
         quint32 flags = 0;
+        quint32 valid = 0;
         qint32 idxTotal = NOIDX;            //< index within the complete track
         qint32 idxVisible;                  //< offset into lineSimple
         qreal deltaDistance;                //< the distance to the last point
@@ -881,7 +900,7 @@ private:
        \defgroup TrackStatistics Some statistical values over the complete track
      */
     /**@{*/
-    quint32 allFlags = 0;
+    quint32 allValidFlags = 0;
     qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;

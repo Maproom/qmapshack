@@ -432,7 +432,17 @@ QString CGisItemTrk::getInfo(bool showName) const
         str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center())) + "<br />";
     }
 
-    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
+
+    if((allValidFlags & trkpt_t::eValidEle) && (allValidFlags & trkpt_t::eInvalidEle))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
+    }
+    if((allValidFlags & trkpt_t::eValidTime) && (allValidFlags & trkpt_t::eInvalidTime))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
+    }
+
     return str + "</div>";
 }
 
@@ -796,25 +806,25 @@ void CGisItemTrk::resetInternalData()
 
 void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
 {
-    trkpt.flags &= ~trkpt_t::eValidMask;
-    trkpt.flags |= trkpt.ele != NOINT ? trkpt_t::eValidEle : trkpt_t::eInvalidEle;
+    trkpt.valid  = 0;
+    trkpt.valid |= trkpt.ele != NOINT ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
 
     if(trkpt.time.isValid())
     {
         if(last != nullptr)
         {
-            trkpt.flags |= (trkpt.time.toMSecsSinceEpoch() - last->time.toMSecsSinceEpoch()) < 0 ? trkpt_t::eInvalidTime : trkpt_t::eValidTime;
+            trkpt.valid |= (trkpt.time.toMSecsSinceEpoch() - last->time.toMSecsSinceEpoch()) < 0 ? quint32(trkpt_t::eInvalidTime) : quint32(trkpt_t::eValidTime);
         }
         else
         {
-            trkpt.flags |= trkpt_t::eValidTime;
+            trkpt.valid |= trkpt_t::eValidTime;
         }
 
         last = &trkpt;
     }
     else
     {
-        trkpt.flags |= trkpt_t::eInvalidTime;
+        trkpt.valid |= trkpt_t::eInvalidTime;
     }
 }
 
@@ -826,7 +836,7 @@ void CGisItemTrk::deriveSecondaryData()
     qreal west  =  180;
 
     // reset all secondary data
-    allFlags                  = 0;
+    allValidFlags             = 0;
     cntTotalPoints            = 0;
     cntVisiblePoints          = 0;
     timeStart                 = QDateTime();
@@ -875,7 +885,7 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt_t& trkpt = seg.pts[p];
             verifyTrkPt(lastValid, trkpt);
-            allFlags |= trkpt.flags;
+            allValidFlags |= trkpt.valid;
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.isHidden())
@@ -1037,10 +1047,10 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
     qDebug() << "--------------" << getName() << "------------------";
-    qDebug() << "flags" << hex << flags;
+    qDebug() << "allValidFlags" << hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
 //    qDebug() << "totalDescend" << totalDescend;

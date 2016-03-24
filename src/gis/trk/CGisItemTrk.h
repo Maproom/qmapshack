@@ -259,6 +259,11 @@ public:
         return mouseMoveFocus;
     }
 
+    quint32 getAllFlagsSet() const
+    {
+        return allFlags;
+    }
+
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -603,6 +608,7 @@ private:
      */
     void resetInternalData();
 
+    void verifyTrkPt(trkpt_t *&last, trkpt_t& trkpt);
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extrema/extensions
 
@@ -726,7 +732,13 @@ public:
 
         enum flag_e
         {
-            eHidden     = 0x00000004      ///< mark point as deleted
+
+            eHidden         = 0x00000004      ///< mark point as deleted
+            ,eValidTime     = 0x00000010
+            ,eValidEle      = 0x00000020
+            ,eInvalidTime   = 0x00000040
+            ,eInvalidEle    = 0x00000080
+            ,eValidMask     = 0x000000F0
 
                           // activity flags
             ,eActNone   = 0x00000000
@@ -869,6 +881,7 @@ private:
        \defgroup TrackStatistics Some statistical values over the complete track
      */
     /**@{*/
+    quint32 allFlags = 0;
     qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;

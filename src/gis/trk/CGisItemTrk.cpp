@@ -794,6 +794,30 @@ void CGisItemTrk::resetInternalData()
     delete dlgDetails;
 }
 
+void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
+{
+    trkpt.flags &= ~trkpt_t::eValidMask;
+    trkpt.flags |= trkpt.ele != NOINT ? trkpt_t::eValidEle : trkpt_t::eInvalidEle;
+
+    if(trkpt.time.isValid())
+    {
+        if(last != nullptr)
+        {
+            trkpt.flags |= (trkpt.time.toMSecsSinceEpoch() - last->time.toMSecsSinceEpoch()) < 0 ? trkpt_t::eInvalidTime : trkpt_t::eValidTime;
+        }
+        else
+        {
+            trkpt.flags |= trkpt_t::eValidTime;
+        }
+
+        last = &trkpt;
+    }
+    else
+    {
+        trkpt.flags |= trkpt_t::eInvalidTime;
+    }
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
     qreal north = -90;
@@ -802,6 +826,7 @@ void CGisItemTrk::deriveSecondaryData()
     qreal west  =  180;
 
     // reset all secondary data
+    allFlags                  = 0;
     cntTotalPoints            = 0;
     cntVisiblePoints          = 0;
     timeStart                 = QDateTime();
@@ -833,9 +858,11 @@ void CGisItemTrk::deriveSecondaryData()
         return;
     }
 
-    trkpt_t * lastTrkpt  = nullptr;
-    qreal timestampStart = NOFLOAT;
-    qreal lastEle        = NOFLOAT;
+    trkpt_t * lastValid     = nullptr;
+    trkpt_t * lastTrkpt     = nullptr;
+    qreal timestampStart    = NOFLOAT;
+    qreal lastEle           = NOFLOAT;
+
 
     // linear list of pointers to visible track points
     QVector<trkpt_t*> lintrk;
@@ -847,6 +874,8 @@ void CGisItemTrk::deriveSecondaryData()
         for(int p = 0; p < seg.pts.size(); p++)
         {
             trkpt_t& trkpt = seg.pts[p];
+            verifyTrkPt(lastValid, trkpt);
+            allFlags |= trkpt.flags;
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.isHidden())
@@ -1010,7 +1039,8 @@ void CGisItemTrk::deriveSecondaryData()
 
     updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct, "deriveSecondaryData()");
 
-//    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "flags" << hex << flags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
 //    qDebug() << "totalDescend" << totalDescend;

@@ -1,3 +1,18 @@
+V 1.6.1
+* GUI improvements
+* Improve render perfomance of DEM layer
+* Fix: Geocache image download
+* Fix: OS X: Add planetsplitter
+* Fix: Bad elevation data if track is created without DEM data loaded
+* Add: item selection via selection rectangle in the map view
+* Add: Make combine tracks work over several projects
+* Add: Add a waypoint by context menu in plots
+* Add: Read FIT segments and other fixes of reading FIT format
+* [Issue #109] Implement choosing canvas background color
+* [Issue #125] Graph issue : previous graph remain displayed when [nothing] is selected
+* [Issue #121] Distance Values Choose Km/m Miles/feet
+* [Issue #126] No Printing on Windows
+
 V 1.6.0
 * Fix: Toggle key focus of on-screen profile
 * Fix: Printing correct unit in a plot's xLabel instead of `distance [%1]`

@@ -51,9 +51,10 @@ public:
     virtual void meter2area(qreal meter, QString& val, QString& unit) const = 0;
     /// convert seconds to a timespan of days, hours, minutes and seconds
     virtual void seconds2time(quint32 ttime, QString& val, QString& unit) const;
-
     /// convert an elevation string to a float
     virtual qreal elevation2meter(const QString& val) const = 0;
+    /// convert a range in meter into a scale and a matching unit
+    virtual void meter2unit(qreal meter, qreal& scale, QString&  unit) const  = 0;
 
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};

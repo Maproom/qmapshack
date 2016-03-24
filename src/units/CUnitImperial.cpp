@@ -19,6 +19,10 @@
 
 #include "units/CUnitImperial.h"
 
+const qreal CUnitImperial::footPerMeter = 3.28084;
+const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
+const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;
+
 CUnitImperial::CUnitImperial(QObject * parent)
     : IUnit(eTypeImperial, "ft", footPerMeter, "ml/h", meterPerSecToMilePerHour, parent)
 {
@@ -93,7 +97,17 @@ qreal CUnitImperial::elevation2meter(const QString& val) const /* override */
     return val.toDouble() / footPerMeter;
 }
 
+void CUnitImperial::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+{
+    if(meter > 1600)
+    {
+        scale = milePerMeter;
+        unit  = "ml";
+    }
+    else
+    {
+        scale = footPerMeter;
+        unit  = "ft";
+    }
+}
 
-const qreal CUnitImperial::footPerMeter = 3.28084;
-const qreal CUnitImperial::milePerMeter = 0.6213699E-3;
-const qreal CUnitImperial::meterPerSecToMilePerHour = 2.23693164;

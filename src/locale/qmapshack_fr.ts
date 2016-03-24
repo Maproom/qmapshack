@@ -726,12 +726,12 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CFitHeaderState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="70"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="69"/>
         <source>FIT decoding error: protocol %1 version not supported.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="121"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="120"/>
         <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -932,7 +932,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="188"/>
+        <location filename="../gis/fit/serialization.cpp" line="182"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3003,6 +3003,19 @@ Structure inconnue.</translation>
     </message>
 </context>
 <context>
+    <name>CPlot</name>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="55"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="60"/>
+        <source>time</source>
+        <translation type="unfinished">durée</translation>
+    </message>
+</context>
+<context>
     <name>CPlotDistance</name>
     <message>
         <source>time</source>
@@ -3012,7 +3025,7 @@ Structure inconnue.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="73"/>
+        <location filename="../plot/CPlotProfile.cpp" line="78"/>
         <source>distance [%1]</source>
         <translation></translation>
     </message>
@@ -3021,7 +3034,7 @@ Structure inconnue.</translation>
         <translation type="obsolete">durée [h]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="74"/>
+        <location filename="../plot/CPlotProfile.cpp" line="79"/>
         <source>alt. [%1]</source>
         <translation>Alt. [%1]</translation>
     </message>
@@ -3141,14 +3154,8 @@ n&apos;est pas une définition de système de coordonnées:
 <context>
     <name>CPropertyTrk</name>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="65"/>
-        <source>distance [%1]</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="77"/>
         <source>time</source>
-        <translation type="unfinished">durée</translation>
+        <translation type="obsolete">durée</translation>
     </message>
 </context>
 <context>
@@ -6359,12 +6366,12 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation type="unfinished">Ajouter un waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="640"/>
+        <location filename="../plot/IPlot.cpp" line="647"/>
         <source>No or bad data.</source>
         <translation>Aucune donnée ou données invalides.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1237"/>
+        <location filename="../plot/IPlot.cpp" line="1244"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>

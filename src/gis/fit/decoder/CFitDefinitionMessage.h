@@ -39,13 +39,13 @@ public:
     void setNrOfFields(quint8 nrOfFields);
 
     quint8 getArchitectureBit() const;
-    quint16 getGlobalMesgNr()   const { return globalMesgNr; };
-    quint8 getNrOfFields()      const { return nrOfFields;   };
-    quint8 getLocalMesgNr()     const { return localMesgNr;  };
+    quint16 getGlobalMesgNr()   const { return globalMesgNr; }
+    quint8 getNrOfFields()      const { return nrOfFields;   }
+    quint8 getLocalMesgNr()     const { return localMesgNr;  }
 
     const CFitProfile& profile() const { return *messageProfile; }
 
-    const QList<CFitFieldDefinition>& getFields() const { return fields; };
+    const QList<CFitFieldDefinition>& getFields() const { return fields; }
 
     void addField(CFitFieldDefinition field);
     bool hasField(const quint8 fieldNum) const;

@@ -102,9 +102,10 @@ void CPlotAxis::calc()
 
 const QString CPlotAxis::fmtsgl( qreal val )
 {
+    QString f;
     int exponent = (0. == val) ? 0 : (int) qLog10( qFabs(val) );
 
-    QString f;
+    val *= ticScale;
     if ( abs(exponent) > 5 )
     {
         f = "%1.2e";
@@ -142,7 +143,9 @@ const QString CPlotAxis::fmtsgl( qreal val )
 const QString CPlotAxis::fmtdbl( qreal val )
 {
     int exponent = 0;
+
     qreal residue  = 0;
+    val *= ticScale;
 
     if ( val != 0 )
     {
@@ -182,7 +185,7 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
     }
 
     int width = 0;
-    QString format_single_prec = fmtsgl( interval );
+    QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     const tic_t * t = ticmark();
     while (nullptr != t)
@@ -207,7 +210,7 @@ void CPlotAxis::getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& us
 
 const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
 {
-    QString format_single_prec = fmtsgl( interval );
+    QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     switch ( ticType )
     {

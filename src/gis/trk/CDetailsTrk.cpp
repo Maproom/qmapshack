@@ -375,8 +375,6 @@ void CDetailsTrk::updateData()
     lineName->setText(trk.getName());
     lineName->setReadOnly(isReadOnly);
 
-    treeWidget->updateData();
-
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, trk.getComment(), trk.getDescription(), trk.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start);

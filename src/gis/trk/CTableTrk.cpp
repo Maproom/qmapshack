@@ -17,21 +17,41 @@
 **********************************************************************************************/
 
 #include "gis/trk/CTableTrk.h"
-#include "gis/trk/CGisItemTrk.h"
+
 
 #include <QtWidgets>
 #include <proj_api.h>
 
 CTableTrk::CTableTrk(QWidget *parent)
     : QTreeWidget(parent)
+    , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
     connect(this, &CTableTrk::itemSelectionChanged, this, &CTableTrk::slotItemSelectionChanged);
 }
 
+CTableTrk::~CTableTrk()
+{
+    if(trk != nullptr)
+    {
+        trk->unregisterVisual(this);
+    }
+}
+
 void CTableTrk::setTrack(CGisItemTrk * track)
 {
+    if(trk != nullptr)
+    {
+        trk->unregisterVisual(this);
+    }
+
+    clear();
     trk = track;
-    updateData();
+
+    if(trk != nullptr)
+    {
+        trk->registerVisual(this);
+        updateData();
+    }
 }
 
 void CTableTrk::updateData()
@@ -41,7 +61,7 @@ void CTableTrk::updateData()
         return;
     }
 
-    quint32 allFlags = trk->getAllFlagsSet();
+    quint32 allFlags = trk->getAllValidFlags();
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
     for(const CGisItemTrk::trkseg_t& seg : t.segs)
@@ -60,11 +80,11 @@ void CTableTrk::updateData()
             item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
             QBrush bg = item->background(0);
-            if((allFlags & CGisItemTrk::trkpt_t::eValidEle) && (trkpt.hasFlag(CGisItemTrk::trkpt_t::eInvalidEle)))
+            if((allFlags & CGisItemTrk::trkpt_t::eValidEle) && (trkpt.isInvalid(CGisItemTrk::trkpt_t::eInvalidEle)))
             {
                 bg = QColor(255, 100, 100);
             }
-            if((allFlags & CGisItemTrk::trkpt_t::eValidTime) && (trkpt.hasFlag(CGisItemTrk::trkpt_t::eInvalidTime)))
+            if((allFlags & CGisItemTrk::trkpt_t::eValidTime) && (trkpt.isInvalid(CGisItemTrk::trkpt_t::eInvalidTime)))
             {
                 bg = QColor(255, 100, 100);
             }

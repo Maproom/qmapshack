@@ -338,7 +338,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1408,7 +1408,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QTreeWidget" name="treeWidget">
+            <widget class="CTableTrk" name="treeWidget">
              <property name="sizePolicy">
               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
                <horstretch>0</horstretch>
@@ -1595,16 +1595,21 @@
    <header>gis/trk/CSelectActivityColor.h</header>
    <container>1</container>
   </customwidget>
+  <customwidget>
+   <class>CTableTrk</class>
+   <extends>QTreeWidget</extends>
+   <header>gis/trk/CTableTrk.h</header>
+  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>
 </ui>

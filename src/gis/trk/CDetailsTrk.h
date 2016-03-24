@@ -46,8 +46,7 @@ private slots:
     void slotNameChangeFinished();
     void slotShowPlots();
     void slotColorChanged(int idx);
-    void slotChangeReadOnlyMode(bool on);
-    void slotItemSelectionChanged();
+    void slotChangeReadOnlyMode(bool on);    
     void slotLinkActivated(const QUrl& url);
     void slotMouseClickState(int);
     void slotActivitySelected(bool checked);
@@ -73,20 +72,6 @@ private:
     void setupGraph(CPlot * plot, const CLimit &limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
     void setupLimits(CLimit *limit, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax);
 
-    enum columns_t
-    {
-        eColNum
-        ,eColTime
-        ,eColEle
-        ,eColDelta
-        ,eColDist
-        ,eColSpeed
-        ,eColSlope
-        ,eColAscend
-        ,eColDescend
-        ,eColPosition
-        ,eColMax
-    };
 
     enum tabs_t
     {

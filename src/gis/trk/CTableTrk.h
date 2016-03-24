@@ -19,20 +19,23 @@
 #ifndef CTABLETRK_H
 #define CTABLETRK_H
 
+#include <gis/trk/CGisItemTrk.h>
 #include <QTreeWidget>
 
-class CGisItemTrk;
-
-class CTableTrk : public QTreeWidget
+class CTableTrk : public QTreeWidget, public INotifyTrk
 {
 Q_OBJECT
 public:
     CTableTrk(QWidget * parent);
-    virtual ~CTableTrk() = default;
+    virtual ~CTableTrk();
 
     void setTrack(CGisItemTrk * track);
 
-    void updateData();
+    void updateData() override;
+    void setMouseFocus(const CGisItemTrk::trkpt_t * pt) override {}
+    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) override {}
+    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
+
 
     enum columns_t
     {

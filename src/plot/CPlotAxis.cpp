@@ -64,7 +64,7 @@ void CPlotAxis::setMinMax( qreal givenMin, qreal givenMax )
 
 void CPlotAxis::calc()
 {
-    qreal tmpAbs = qFabs(usedMax - usedMin);
+    qreal tmpAbs = qFabs(usedMax - usedMin) * ticScale;
     qreal tmp    = qLog10( tmpAbs / 10.0 );
 
     qreal exponent = (int) tmp;
@@ -81,7 +81,7 @@ void CPlotAxis::calc()
     }
 
     interval = exponent + residue;
-    interval = qPow( 10, interval );
+    interval = qPow( 10, interval ) / ticScale;
 
     if ( autoscale )
     {
@@ -102,9 +102,10 @@ void CPlotAxis::calc()
 
 const QString CPlotAxis::fmtsgl( qreal val )
 {
+    QString f;
     int exponent = (0. == val) ? 0 : (int) qLog10( qFabs(val) );
 
-    QString f;
+    val *= ticScale;
     if ( abs(exponent) > 5 )
     {
         f = "%1.2e";
@@ -142,7 +143,9 @@ const QString CPlotAxis::fmtsgl( qreal val )
 const QString CPlotAxis::fmtdbl( qreal val )
 {
     int exponent = 0;
+
     qreal residue  = 0;
+    val *= ticScale;
 
     if ( val != 0 )
     {
@@ -182,12 +185,12 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
     }
 
     int width = 0;
-    QString format_single_prec = fmtsgl( interval );
+    QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     const tic_t * t = ticmark();
     while (nullptr != t)
     {
-        int tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val ) );
+        int tmp = m.width( QString().sprintf( format_single_prec.toLatin1().data(), t->val * ticScale) );
         width = qMax(width, tmp);
 
         t = ticmark(t);
@@ -207,7 +210,7 @@ void CPlotAxis::getLimits(qreal& limMin, qreal& limMax, qreal& useMin, qreal& us
 
 const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
 {
-    QString format_single_prec = fmtsgl( interval );
+    QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     switch ( ticType )
     {
@@ -280,7 +283,7 @@ const CPlotAxis::tic_t* CPlotAxis::ticmark( const tic_t * t )
         break;
     }
 
-    tic.lbl.sprintf( format_single_prec.toLatin1(), tic.val );
+    tic.lbl.sprintf( format_single_prec.toLatin1(), tic.val * ticScale );
 
     return &tic;
 }

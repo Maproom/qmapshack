@@ -88,3 +88,9 @@ qreal CUnitNautic::elevation2meter(const QString& val) const /* override */
 {
     return val.toDouble();
 }
+
+void CUnitNautic::meter2unit(qreal meter, qreal& scale, QString&  unit) const
+{
+    scale = basefactor;
+    unit  = "nm";
+}

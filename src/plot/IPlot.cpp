@@ -138,6 +138,12 @@ void IPlot::clear()
     update();
 }
 
+void IPlot::setXTicScale(qreal scale)
+{
+    data->x().setTicScale(scale);
+    setSizes();
+    update();
+}
 
 void IPlot::setYLabel(const QString& str)
 {

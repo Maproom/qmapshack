@@ -42,15 +42,29 @@ CPlot::CPlot(CGisItemTrk *trk,  CLimit& limit, QWidget *parent)
     connect(&limit, &CLimit::sigChanged, this, &CPlot::setLimits);
 }
 
-void CPlot::setup(const QString& source, CPlotData::axistype_e type, const QString &xLabel, const QString &yLabel, qreal f, fTrkPtGetVal funcGetX, fTrkPtGetVal funcGetY)
+void CPlot::setup(const CPropertyTrk::property_t& p)
 {
-    data->setXAxisType(type);
-    setXLabel(xLabel);
-    setYLabel(yLabel);
-    factor = f;
-    getX = funcGetX;
-    getY = funcGetY;
-    limit.setSource(source);
+    if(p.axisType == CPropertyTrk::property_t::eAxisDistance)
+    {
+        data->setXAxisType(CPlotData::eAxisLinear);
+
+        qreal scale;
+        QString unit;
+        IUnit::self().meter2unit(trk->getTotalDistance(), scale, unit);
+        setXTicScale(scale);
+        setXLabel(tr("distance [%1]").arg(unit));
+    }
+    else if(p.axisType == CPropertyTrk::property_t::eAxisTime)
+    {
+        data->setXAxisType(CPlotData::eAxisTime);
+        setXLabel(tr("time"));
+    }
+
+    setYLabel(p.yLabel);
+    factor  = p.factor;
+    getX    = p.getX;
+    getY    = p.getY;
+    limit.setSource(p.key);
     updateData();
 }
 

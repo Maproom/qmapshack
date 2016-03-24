@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>CAbout</name>
     <message>
@@ -797,12 +797,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CFitHeaderState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="70"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="69"/>
         <source>FIT decoding error: protocol %1 version not supported.</source>
         <translation>Chyba při dekódování FIT: Verze protokolu %1 není podporována.</translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="121"/>
+        <location filename="../gis/fit/decoder/CFitHeaderState.cpp" line="120"/>
         <source>FIT decoding error: file header signature mismatch. File is not FIT.</source>
         <translation>Chyba při dekódování FIT: Nesouhlasí signatura hlavičky. Soubor není FIT.</translation>
     </message>
@@ -1003,7 +1003,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="188"/>
+        <location filename="../gis/fit/serialization.cpp" line="182"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Soubor FIT %1 neobsahuje žádná data GPS.</translation>
     </message>
@@ -3085,6 +3085,19 @@ Neznámá stavba.</translation>
     </message>
 </context>
 <context>
+    <name>CPlot</name>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="55"/>
+        <source>distance [%1]</source>
+        <translation type="unfinished">Vzdálenost [%1]</translation>
+    </message>
+    <message>
+        <location filename="../plot/CPlot.cpp" line="60"/>
+        <source>time</source>
+        <translation type="unfinished">Čas</translation>
+    </message>
+</context>
+<context>
     <name>CPlotDistance</name>
     <message>
         <source>distance [%1]</source>
@@ -3106,7 +3119,7 @@ Neznámá stavba.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="73"/>
+        <location filename="../plot/CPlotProfile.cpp" line="78"/>
         <source>distance [%1]</source>
         <translation>Vzdálenost [%1]</translation>
     </message>
@@ -3115,7 +3128,7 @@ Neznámá stavba.</translation>
         <translation type="obsolete">Čas [h]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="74"/>
+        <location filename="../plot/CPlotProfile.cpp" line="79"/>
         <source>alt. [%1]</source>
         <translation>Výška [%1]</translation>
     </message>
@@ -3239,14 +3252,12 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>CPropertyTrk</name>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="65"/>
         <source>distance [%1]</source>
-        <translation>Vzdálenost [%1]</translation>
+        <translation type="vanished">Vzdálenost [%1]</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CPropertyTrk.cpp" line="77"/>
         <source>time</source>
-        <translation>Čas</translation>
+        <translation type="vanished">Čas</translation>
     </message>
 </context>
 <context>
@@ -4578,7 +4589,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
+        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -6240,7 +6251,7 @@ Název souboru: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
+        <translation type="vanished">Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -6542,12 +6553,12 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="640"/>
+        <location filename="../plot/IPlot.cpp" line="647"/>
         <source>No or bad data.</source>
         <translation>Žádné nebo špatné údaje.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1237"/>
+        <location filename="../plot/IPlot.cpp" line="1244"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
@@ -6822,7 +6833,7 @@ nebo
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation>Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
+        <translation type="vanished">Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
     </message>
 </context>
 <context>

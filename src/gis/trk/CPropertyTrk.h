@@ -36,33 +36,58 @@ public:
 
     struct property_t
     {
+        enum axistype_e
+        {
+            eAxisDistance
+            ,eAxisTime
+        };
+
         property_t() = default;
-        property_t(const QString& key, const QString& name, const QString& unit, const QIcon& icon, CPlotData::axistype_e axisType, const QString& xLabel, const QString& yLabel, qreal factor, fTrkPtGetVal getX, fTrkPtGetVal getY)
+        property_t(const QString& key,
+                   const QString& name,
+                   const QIcon& icon,
+                   axistype_e axisType,
+                   fTrkPtGetVal getX,
+                   const QString& unit,
+                   const QString& yLabel,
+                   qreal factor,
+                   fTrkPtGetVal getY)
             : key(key)
-            , name(name)
-            , unit(unit)
-            , icon(icon)
+            , name(name)            
+            , icon(icon)           
             , axisType(axisType)
-            , xLabel(xLabel)
-            , yLabel(yLabel)
-            , factor(factor)
             , getX(getX)
+            , unit(unit)
+            , yLabel(yLabel)
+            , factor(factor)            
             , getY(getY)
         {
         }
 
+        // key/extension source of the property
         QString key;
-        QString name;
-        QString unit;
+        // name of the property
+        QString name;        
+        // symbol representing the property
         QIcon icon;
-        CPlotData::axistype_e axisType = CPlotData::eAxisLinear;
-        QString xLabel;
-        QString yLabel;
-        qreal min = NOFLOAT;
-        qreal max = NOFLOAT;
-        qreal factor = 1.0;
+
+        // the x-axis type to be used in plots
+        axistype_e axisType = eAxisDistance;
+        // access function to the x-values
         fTrkPtGetVal getX = nullptr;
+
+        // the unit of the y-axis
+        QString unit;
+        // the y-axis label
+        QString yLabel;
+        // a scaling factor for the y-values (e.g. m/h -> km/h)
+        qreal factor = 1.0;
+        // access function to the y-values
         fTrkPtGetVal getY = nullptr;
+        // lower limit of the y-axis
+        qreal min = NOFLOAT;
+        // upper limit of the y-axis
+        qreal max = NOFLOAT;
     };
 
     void fillComboBox(QComboBox * box) const;

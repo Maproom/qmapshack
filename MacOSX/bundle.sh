@@ -115,8 +115,7 @@ function adjustLinkQt {
     F=$1 # file
     L=$2 # search condition
     FREL=${F##*/}
-    
-    #printLinking $F
+
     for P in `otool -L $F | awk '{print $1}'`
     do
         #  replace doubel slashes
@@ -124,35 +123,29 @@ function adjustLinkQt {
             PSLASH=$(echo $P | sed 's,//,/,g')
             sudo install_name_tool -change $P $PSLASH $F
         fi
-    
-        if [[ "$P" == *$L* ]]; then
-            LIB=${P##*/}
-            LIB=${LIB%%:}
 
-            if [[ "$P" == *".framework"* ]]; then
-                LIB_VERSION=Versions/5
-                LIB=$LIB.framework/$LIB_VERSION/$LIB
-            fi
-            
+        LIB=${P##*/}
+        LIB=${LIB%%:}
+        PREL="@executable_path/../Frameworks/$LIB"
+
+        if [[ "$P" == *".framework"* ]]; then
+            LIB_VERSION=Versions/5
+            LIB=$LIB.framework/$LIB_VERSION/$LIB
             PREL="@executable_path/../Frameworks/$LIB"
-            
-            if [[ "$P" == *"plugins"* ]]; then
-                # subdirectory for PlugIns
-                PREL=${P##*plugins/} # remove prepart
-                LIB=$PREL
-                PREL="@executable_path/../PlugIns/$LIB"
-            fi
-            
-            if [[ "$LIB" == *$FREL* ]]; then
-                sudo install_name_tool -id $PREL $F
-            else 
-                sudo install_name_tool -change $P $PREL $F
-            fi
-        
-            echo "$FREL > $P - $PREL"
+        elif [[ "$P" == *"plugins"* ]]; then
+            # subdirectory for PlugIns
+            LIB=${P##*plugins/} # remove prepart
+            PREL="@executable_path/../PlugIns/$LIB"
+        fi
+
+        if [[ "$LIB" == "$FREL" ]]; then
+            echo "$FREL >> $PREL ($P)"
+            sudo install_name_tool -id $PREL $F
+        elif [[ "$P" == *$L* ]]; then
+            echo "$FREL > $PREL ($P)"
+            sudo install_name_tool -change $P $PREL $F
         fi
     done
-    #printLinking $F
 }
 
 
@@ -169,7 +162,6 @@ function copyAdditionalLibraries {
     cp -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
     # TODO remove QT Bus, is only for linux needed
     cp -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
-
 }
 
 function copyExternalFiles {
@@ -186,7 +178,28 @@ function copyExternalFiles {
     cp $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
     cp $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+}
 
+
+function adjustLinkingExtTools {
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        adjustLinkQt $F "/usr/local/opt/"
+        adjustLinkQt $F "/usr/local/Cellar/"
+        adjustLinkQt $F "/usr/local/lib/"
+    done
+}
+
+
+function printLinkingExtTools {
+    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
+    do
+        printLinking $F
+    done
+}
+
+
+function copyExtTools {
     # at least gdalbuildvrt is used
     cp $GDAL_DIR/bin/*  $BUILD_BUNDLE_RES_BIN_DIR
     cp $PROJ_DIR/bin/proj  $BUILD_BUNDLE_RES_BIN_DIR
@@ -258,10 +271,14 @@ if [[ "$1" == "bundle" ]]; then
     qtDeploy
     echo "---copy libraries ------------------"
     copyAdditionalLibraries
-    echo "---copy external files ---------------"
+    echo "---copy external files -------------"
     copyExternalFiles
     echo "---adjust linking ------------------"
     adjustLinking
+    echo "---external tools ------------------"
+    copyExtTools
+    adjustLinkingExtTools
+    printLinkingExtTools
     echo "------------------------------------"
     # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
 fi
@@ -272,7 +289,6 @@ if [[ "$1" == "info-before" ]]; then
     printLinking $BUILD_RELEASE_DIR/$APP_NAME
     printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
 fi
-
 if [[ "$1" == "archive" ]]; then
     extractVersion
     archiveBundle

@@ -677,13 +677,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitProject</name>
     <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="44"/>
-        <location filename="../gis/fit/CFitProject.cpp" line="62"/>
+        <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
         <translation>Datei %1 konnte nicht geladen werden...</translation>
     </message>
     <message>
-        <location filename="../gis/fit/CFitProject.cpp" line="86"/>
+        <location filename="../gis/fit/CFitProject.cpp" line="91"/>
         <source>Failed to open FIT file %1.</source>
         <translation>Öffnen der FIT Datei %1 fehlgeschlagen.</translation>
     </message>
@@ -870,7 +869,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="182"/>
+        <location filename="../gis/fit/serialization.cpp" line="247"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>FIT Dekodierfehler: Datei enthält keine GPS Daten.</translation>
     </message>
@@ -919,18 +918,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Time: %1</source>
-        <translation type="obsolete">Gesamtzeit: %1</translation>
-    </message>
-    <message>
-        <source>, Speed: %1 %2</source>
-        <translation type="obsolete">, Geschw.: %1 %2</translation>
-    </message>
-    <message>
-        <source>Moving: %1</source>
-        <translation type="obsolete">Zeit in Bew.: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
@@ -995,7 +982,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1445"/>
         <source>Hide points %1..%2.</source>
-        <translation>Punket %1  %2 verbergen.</translation>
+        <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="573"/>
@@ -1008,25 +995,9 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>, Abstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <source> Descend: - (-) </source>
-        <translation type="obsolete">, Abstieg: - (-) </translation>
-    </message>
-    <message>
-        <source>Dist.: %1%2 (%3%)</source>
-        <translation type="obsolete">Entf.: %1 %2 (%3%)</translation>
-    </message>
-    <message>
-        <source>Dist.: - (-)</source>
-        <translation type="obsolete">Entf.: - (-)</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation>, Zeit in Bew.: %1 %2 (%3%)</translation>
-    </message>
-    <message>
-        <source> Moving: - (-) </source>
-        <translation type="obsolete">, Zeit in Bew.: - (-) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
@@ -1053,10 +1024,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
         <source>Descend: -</source>
         <translation>Abstieg: -</translation>
-    </message>
-    <message>
-        <source>Dist.: %1%2</source>
-        <translation type="obsolete">Entf.: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
@@ -1097,10 +1064,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1286"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
-    </message>
-    <message>
-        <source>Hide points.</source>
-        <translation type="obsolete">Punkte verbergen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1485"/>
@@ -1481,10 +1444,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
-        <source>Copy items...</source>
-        <translation type="obsolete">Elemente kopieren...</translation>
-    </message>
-    <message>
         <location filename="../gis/CGisListWks.cpp" line="153"/>
         <source>Proj. Waypoint...</source>
         <translation>Wegpunkt Projektion...</translation>
@@ -1592,49 +1551,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/CGisWidget.cpp" line="645"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
-    </message>
-</context>
-<context>
-    <name>CGpsProject</name>
-    <message>
-        <source>Failed to load file %1...</source>
-        <translation type="obsolete">Datei %1 konnte nicht geladen werden...</translation>
-    </message>
-    <message>
-        <source>Failed to open %1</source>
-        <translation type="obsolete">Öffnen von %1 fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Failed to read: %1
-line %2, column %3:
- %4</source>
-        <translation type="obsolete">Lesen von %1 fehlgeschlagen:
-Zeile %2, Spalte %3:
-%4</translation>
-    </message>
-    <message>
-        <source>Not a GPX file: %1</source>
-        <translation type="obsolete">Keine GPX Datei: %1</translation>
-    </message>
-    <message>
-        <source>File exists ...</source>
-        <translation type="obsolete">Datei existiert...</translation>
-    </message>
-    <message>
-        <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation type="obsolete">Diese Datei wurde nicht mit QMapShack erstellt. Wenn Sie &apos;Ja&apos; drücken werden alle Daten dieser Datei gelöscht. Selbst wenn diese Datei GPX Daten enthält und mit QMapShack geladen wurde, können nicht alle Elemente dieser Datei durch QMapShack geladen und gespeichert werden. Diese Elemente sind verloren. Ich empfehle die Nutzung einer anderen Datei. &lt;b&gt;Wollen Sie die Datei wirklich überschreiben?&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Failed to create file &apos;%1&apos;</source>
-        <translation type="obsolete">Datei %1&apos; konnte nicht erstellt werden</translation>
-    </message>
-    <message>
-        <source>Failed to write file &apos;%1&apos;</source>
-        <translation type="obsolete">Datei %1&apos; konnte nicht gespeichert werden</translation>
-    </message>
-    <message>
-        <source>Saving GIS data failed...</source>
-        <translation type="obsolete">Das Speichern der GIS Daten ist fehlgeschlagen...</translation>
     </message>
 </context>
 <context>
@@ -1853,17 +1769,13 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMapDraw</name>
     <message>
-        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. </source>
-        <translation type="vanished">Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Erfahren Sie dort mehr über die Bedienung von QMapShack.</translation>
-    </message>
-    <message>
         <location filename="../map/CMapDraw.cpp" line="406"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is ditributed without a fee.</source>
         <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Erfahren Sie dort mehr über die Bedienung von QMapShack.
 
-Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Ressourcen. Außerdem glauben wir, ist es nicht zu viel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.   </translation>
+Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Ressourcen. Außerdem glauben wir, ist es nicht zu viel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.</translation>
     </message>
 </context>
 <context>
@@ -2857,10 +2769,6 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMousePrint</name>
     <message>
-        <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners. Save/print the selection by a left click on the disc/printer icon in the center of the selection.</source>
-        <translation type="obsolete">&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
-    </message>
-    <message>
         <location filename="../mouse/CMousePrint.cpp" line="31"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation>&lt;b&gt;Karte speichern (drucken)&lt;/b&gt;&lt;br/&gt;Wählen Sie mit der linken Maustaste einen rechteckigen Bereich auf der Karte aus. Die Auswahl kann durch Verschieben der Eckpunkte mit der Maus angepasst werden. Abbruch mit Rechtsklick. Speichern/Drucken erfolgt durch Linksklick auf das entsprechende Symbol in der Mitte der Auswahl.</translation>
@@ -3040,17 +2948,6 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
-    </message>
-</context>
-<context>
-    <name>CPropertyTrk</name>
-    <message>
-        <source>distance [%1]</source>
-        <translation type="vanished">Entfernung [%1]</translation>
-    </message>
-    <message>
-        <source>time</source>
-        <translation type="vanished">Uhrzeit</translation>
     </message>
 </context>
 <context>
@@ -3814,21 +3711,21 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
     </message>
@@ -4292,10 +4189,6 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation></translation>
     </message>
     <message>
-        <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
-    </message>
-    <message>
         <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
         <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
@@ -4712,22 +4605,22 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="441"/>
         <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation>Benutzt die benutzerdefinierte Sichtbarkeit der Richtungspfeile für diesen Track</translation>
+        <translation>Die benutzerdefinierte Sichtbarkeit der Richtungspfeile für diesen Track verwenden</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="470"/>
         <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
-        <translation>Benutzet die vorgegebene Sichtbarkeit der Richtungspfeile für alle Tracks</translation>
+        <translation>Die vorgegebene Sichtbarkeit der Richtungspfeile für alle Tracks benutzen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="679"/>
         <source>Use/edit user defined scale factor for this track</source>
-        <translation>Benutzt den benutzerdefinierten Skalierungsfaktor für diesen Track</translation>
+        <translation>Den benutzerdefinierten Skalierungsfaktor für diesen Track verwenden</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="708"/>
         <source>Use/edit system&apos;s default factor for all tracks</source>
-        <translation>Benutzt den vorgegebenen Skalierungsfaktor für alle Tracks</translation>
+        <translation>Den vorgegebenen Skalierungsfaktor für alle Tracks benutzen</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="638"/>
@@ -5884,10 +5777,6 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
-    </message>
-    <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
         <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
@@ -6445,10 +6334,6 @@ sein</translation>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
         <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
-    </message>
-    <message>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu lokalen Routendaten angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner.</translation>
     </message>
 </context>
 <context>

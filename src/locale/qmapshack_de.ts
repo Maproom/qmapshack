@@ -241,7 +241,7 @@
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="46"/>
         <source>SQLite Database</source>
-        <translation>SQLite Databank</translation>
+        <translation>SQLite Datenbank</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="56"/>
@@ -323,7 +323,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <source>There was an unexpected database error:
 
 %1</source>
-        <translation>Da war ein unerwarterter Datenbankfehler:
+        <translation>Da war ein unerwarteter Datenbankfehler:
 
 %1</translation>
     </message>
@@ -863,7 +863,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="601"/>
         <source>Changed route points.</source>
-        <translation>Geänderte Routenpukte.</translation>
+        <translation>Geänderte Routenpunkte.</translation>
     </message>
 </context>
 <context>
@@ -1838,7 +1838,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     <message>
         <location filename="../map/CMapIMG.cpp" line="166"/>
         <source>Catalan</source>
-        <translation>Catalanisch</translation>
+        <translation>Katalanisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="167"/>
@@ -1873,7 +1873,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     <message>
         <location filename="../map/CMapIMG.cpp" line="173"/>
         <source>Slovak</source>
-        <translation>Slovakisch</translation>
+        <translation>Slowakisch</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="174"/>
@@ -3464,7 +3464,7 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="161"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
         <translatorcomment>Message text points now to problem with routing database</translatorcomment>
-        <translation>Es gibt in der Routing-Datenbank keine Straße in der Nähe des zu plazierenden Wegpunktes.</translation>
+        <translation>Es gibt in der Routing-Datenbank keine Straße in der Nähe des zu platzierenden Wegpunktes.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="238"/>
@@ -3538,7 +3538,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="93"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Genauert Modus&lt;/b&gt;&lt;br/&gt;Alle Elemente müssen vollständig innerhalb des gewählten Bereiches sein.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Genauer Modus&lt;/b&gt;&lt;br/&gt;Alle Elemente müssen vollständig innerhalb des gewählten Bereiches sein.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="97"/>
@@ -4031,7 +4031,7 @@ If you want to keep just one half you can simply remove the points, or check thi
 
 Wenn Sie beide Teile des Tracks behalten wollen, müssen neue Tracks erstellt werden.
 
-Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte löschen, oder wählen SIe das, um einen neuen Track zu erstellen.</translation>
+Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte löschen, oder wählen Sie das, um einen neuen Track zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="67"/>
@@ -4049,7 +4049,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
         <source>Migrate database...</source>
-        <translation>Datenbank wird migiriert...</translation>
+        <translation>Datenbank wird migriert...</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="74"/>
@@ -4760,7 +4760,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../device/IDevice.cpp" line="287"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
-        <translation>Es gibt schon ein Projekt mit dem selben Namen. Wenn Sie &apos;ok&apos; drücken wird dieses entfernt und ersetzt.</translation>
+        <translation>Es gibt schon ein Projekt mit demselben Namen. Wenn Sie &apos;ok&apos; drücken wird dieses entfernt und ersetzt.</translation>
     </message>
 </context>
 <context>
@@ -5601,7 +5601,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="645"/>
         <source>Write current active map and DEM list including the properties to a file</source>
-        <translation>Speichert die aktive Karten und DEM Dateien inklusive der Eigenschaften in einer Datei</translation>
+        <translation>Speichert die aktiven Karten und DEM Dateien inklusive der Eigenschaften in einer Datei</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="657"/>
@@ -5611,7 +5611,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="660"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
-        <translation>Stellt die aktive Karten und DEM Dateien inklusive der Eigenschaften aus einer Datei wieder her</translation>
+        <translation>Stellt die aktiven Karten und DEM Dateien inklusive der Eigenschaften aus einer Datei wieder her</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="675"/>
@@ -5671,7 +5671,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="753"/>
         <source>Change the format coordinates are displayed</source>
-        <translation>Ändert das Format der angezeigten Koordianten</translation>
+        <translation>Ändert das Format der angezeigten Koordinaten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="765"/>
@@ -5990,7 +5990,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="347"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Kein Routing&lt;/b&gt;&lt;br/&gt;Alle Punkte werden mittles einer geraden Linie verbunden.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Kein Routing&lt;/b&gt;&lt;br/&gt;Alle Punkte werden mittels einer geraden Linie verbunden.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="353"/>

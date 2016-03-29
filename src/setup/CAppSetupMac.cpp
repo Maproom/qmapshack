@@ -22,7 +22,7 @@ static QString relTranslationDir = "Resources/translations"; // app
 static QString relRoutinoDir     = "Resources/routino"; // app
 static QString relGdalDir        = "Resources/gdal"; // app
 static QString relProjDir        = "Resources/proj"; // app
-static QString relBinDir         = "Resources/bin"; // app
+static QString relBinDir         = "Tools"; // app
 
 static QString relLogDir         = "Library/Logs"; // home
 

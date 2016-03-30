@@ -205,6 +205,7 @@ set( SRCS
         gis/trk/CActivityTrk.cpp
         gis/trk/CPropertyTrk.cpp
         gis/trk/CKnownExtension.cpp
+        gis/trk/CTableTrk.cpp
         gis/trk/filter/filter.cpp
         gis/trk/filter/CFilterDouglasPeuker.cpp
         gis/trk/filter/CFilterInvalid.cpp
@@ -462,6 +463,7 @@ set( HDRS
         gis/trk/CActivityTrk.h
         gis/trk/CPropertyTrk.h
         gis/trk/CKnownExtension.h
+        gis/trk/CTableTrk.h
         gis/trk/filter/CFilterDouglasPeuker.h
         gis/trk/filter/CFilterInvalid.h
         gis/trk/filter/CFilterReset.h

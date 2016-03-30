@@ -440,13 +440,14 @@ QString CGisItemTrk::getInfoRange() const
 {
     qreal tmp, slope1, slope2;
     QString str, val, unit;
-    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr) || (mouseRange1 == mouseRange2))
     {
         return str;
     }
 
     int idx1 = mouseRange1->idxTotal;
     int idx2 = mouseRange2->idxTotal;
+
     const trkpt_t *pt1 = mouseRange1;
     const trkpt_t *pt2 = mouseRange2;
     if(idx1 >= idx2)
@@ -455,7 +456,7 @@ QString CGisItemTrk::getInfoRange() const
         pt2 = mouseRange1;
     }
 
-    for(; pt1->isHidden() && (pt1->idxTotal < cntTotalPoints); ++pt1)
+    for(; pt1->isHidden() && (pt1->idxTotal < (cntTotalPoints - 1)); ++pt1)
     {
     }
     for(; pt2->isHidden() && (pt2->idxTotal > 0); --pt2)

@@ -432,7 +432,17 @@ QString CGisItemTrk::getInfo(bool showName) const
         str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center())) + "<br />";
     }
 
-    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
+
+    if((allValidFlags & trkpt_t::eValidEle) && (allValidFlags & trkpt_t::eInvalidEle))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
+    }
+    if((allValidFlags & trkpt_t::eValidTime) && (allValidFlags & trkpt_t::eInvalidTime))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
+    }
+
     return str + "</div>";
 }
 
@@ -795,6 +805,30 @@ void CGisItemTrk::resetInternalData()
     delete dlgDetails;
 }
 
+void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
+{
+    trkpt.valid  = 0;
+    trkpt.valid |= trkpt.ele != NOINT ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
+
+    if(trkpt.time.isValid())
+    {
+        if(last != nullptr)
+        {
+            trkpt.valid |= (trkpt.time.toMSecsSinceEpoch() - last->time.toMSecsSinceEpoch()) < 0 ? quint32(trkpt_t::eInvalidTime) : quint32(trkpt_t::eValidTime);
+        }
+        else
+        {
+            trkpt.valid |= trkpt_t::eValidTime;
+        }
+
+        last = &trkpt;
+    }
+    else
+    {
+        trkpt.valid |= trkpt_t::eInvalidTime;
+    }
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
     qreal north = -90;
@@ -803,6 +837,7 @@ void CGisItemTrk::deriveSecondaryData()
     qreal west  =  180;
 
     // reset all secondary data
+    allValidFlags             = 0;
     cntTotalPoints            = 0;
     cntVisiblePoints          = 0;
     timeStart                 = QDateTime();
@@ -834,9 +869,11 @@ void CGisItemTrk::deriveSecondaryData()
         return;
     }
 
-    trkpt_t * lastTrkpt  = nullptr;
-    qreal timestampStart = NOFLOAT;
-    qreal lastEle        = NOFLOAT;
+    trkpt_t * lastValid     = nullptr;
+    trkpt_t * lastTrkpt     = nullptr;
+    qreal timestampStart    = NOFLOAT;
+    qreal lastEle           = NOFLOAT;
+
 
     // linear list of pointers to visible track points
     QVector<trkpt_t*> lintrk;
@@ -848,6 +885,8 @@ void CGisItemTrk::deriveSecondaryData()
         for(int p = 0; p < seg.pts.size(); p++)
         {
             trkpt_t& trkpt = seg.pts[p];
+            verifyTrkPt(lastValid, trkpt);
+            allValidFlags |= trkpt.valid;
 
             trkpt.idxTotal = cntTotalPoints++;
             if(trkpt.isHidden())
@@ -1009,9 +1048,10 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
-//    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "--------------" << getName() << "------------------";
+    qDebug() << "allValidFlags" << hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
 //    qDebug() << "totalDescend" << totalDescend;

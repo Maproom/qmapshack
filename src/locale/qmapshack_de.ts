@@ -650,7 +650,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="116"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
-        <translation>FIT Dekodierfehler: unerwartetes Ende der Datei %1.</translation>
+        <translation>FIT Dekodierfehler: Unerwartetes Ende der Datei %1.</translation>
     </message>
 </context>
 <context>
@@ -658,7 +658,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="70"/>
         <source>FIT decoding error: unknown base type %1.</source>
-        <translation>FIT Dekodierfehler: unbekannter Datentyp %1.</translation>
+        <translation>FIT Dekodierfehler: Unbekannter Datentyp %1.</translation>
     </message>
 </context>
 <context>
@@ -774,7 +774,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="473"/>
         <source>Changed opacity.</source>
-        <translation>Durchsichtigkeit geändert.</translation>
+        <translation>Deckkraft geändert.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="479"/>
@@ -2383,7 +2383,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     <message>
         <location filename="../map/CMapIMG.cpp" line="730"/>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -2560,7 +2560,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="88"/>
         <source>File must be 8 bit palette or gray indexed.</source>
-        <translation>Die Datei muss eine 8 bit Palette haben, oder Graustufen.</translation>
+        <translation>Die Datei muss eine 8 bit Palette oder Graustufen haben.</translation>
     </message>
     <message>
         <location filename="../map/CMapVRT.cpp" line="126"/>
@@ -2657,7 +2657,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="37"/>
         <source>&lt;b&gt;Edit Area&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Gebiet bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Gebiet bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funktion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
@@ -2681,7 +2681,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="39"/>
         <source>&lt;b&gt;Edit Route Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Routenpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funktion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
@@ -2705,7 +2705,7 @@ Unbekannte Struktur.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="38"/>
         <source>&lt;b&gt;Edit Track Points&lt;/b&gt;&lt;br/&gt;Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Trackpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funkion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;Trackpunkte bearbeiten&lt;/b&gt;&lt;br/&gt;Wählen Sie mittels der Werkzeug-Buttons eine Funktion und einen Routing-Modus. Als nächstes wählen Sie einen Punkt auf der Linie. Es können nur Punkte geändert werden, die mit einem großen Quadrat markiert sind. Schwarze Punkte sind durchs Routing erzeugte Unterpunkte.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
@@ -4065,7 +4065,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/db/IDB.cpp" line="85"/>
         <source>The database version of &apos;%1&apos;&apos; is more advanced as the one understood by your QMapShack installation. This won&apos;t work.</source>
-        <translation>Die Datenbankversion von &apos;%1&apos; ist fortschrittlicher als die ihrer QMapShack Installation. Dies wird nicht funktionieren.</translation>
+        <translation>Die Datenbankversion von &apos;%1&apos; ist höher als die in ihrer QMapShack Installation benutzte. Dies wird nicht funktionieren.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="88"/>
@@ -4545,7 +4545,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1365"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
-        <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder wählen Sie einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
+        <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder Sie wählen einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1392"/>
@@ -7121,7 +7121,7 @@ sein</translation>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
-        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.</translation>
+        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Achtung!&lt;/span&gt; Es wird empfohlen, das Passwortfeld leer zulassen, da QMapShack dies als Klartext speichert. Wenn Sie kein Passwort vergeben, werden Sie bei jedem Start danach gefragt.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="239"/>

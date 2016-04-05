@@ -53,7 +53,7 @@
      <item>
       <widget class="QLabel" name="labelDescription">
        <property name="text">
-        <string>Hide points with invalid coordinates at the beginning of the track.</string>
+        <string>Hide points with invalid data.</string>
        </property>
       </widget>
      </item>

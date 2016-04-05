@@ -108,28 +108,22 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     changed(tr("Hide points by Douglas Peuker algorithm (%1%2)").arg(val).arg(unit), "://icons/48x48/PointHide.png");
 }
 
-void CGisItemTrk::filterRemoveNullPoints()
+void CGisItemTrk::filterRemoveInvalidPoints()
 {
     bool nothingDone    = true;
-    bool done           = false;
 
-    for(int i = 0; i < trk.segs.size() && !done; i++)
+    for(int i = 0; i < trk.segs.size(); i++)
     {
         trkseg_t& seg = trk.segs[i];
 
-        for(int n = 0; n < seg.pts.size() && !done; n++)
+        for(int n = 0; n < seg.pts.size(); n++)
         {
             trkpt_t& pt = seg.pts[n];
 
-            if( (NOFLOAT == pt.lat || 0. == pt.lat)
-                && (NOFLOAT == pt.lon || 0. == pt.lon) )
+            if(pt.isInvalid(trkpt_t::eInvalidMask))
             {
                 pt.flags |= trkpt_t::eHidden;
                 nothingDone = false;
-            }
-            else
-            {
-                done = true;
             }
         }
     }
@@ -140,7 +134,7 @@ void CGisItemTrk::filterRemoveNullPoints()
     }
 
     deriveSecondaryData();
-    changed(tr("Hide points with invalid coordinates at the beginning of the track"), "://icons/48x48/PointHide.png");
+    changed(tr("Hide points with invalid data."), "://icons/48x48/PointHide.png");
 }
 
 void CGisItemTrk::filterReset()

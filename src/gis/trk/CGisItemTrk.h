@@ -536,7 +536,7 @@ public:
     void filterReducePoints(qreal dist);
 
     /** @brief Remove track points without valid location at the beginning of the track */
-    void filterRemoveNullPoints();
+    void filterRemoveInvalidPoints();
 
     /** @param points  size of Median filter */
     void filterSmoothProfile(int points);
@@ -754,12 +754,16 @@ public:
         {
              eValidTime     = 0x00000001
             ,eValidEle      = 0x00000002
+            ,eValidPos      = 0x00000004
+            ,eValidMask     = 0x0000FFFF
         };
 
         enum invalid_e
         {
             eInvalidTime    = eValidTime << 16
             ,eInvalidEle    = eValidEle  << 16
+            ,eInvalidPos    = eValidPos  << 16
+            ,eInvalidMask   = 0xFFFF0000
         };
 
 
@@ -785,12 +789,12 @@ public:
 
         inline bool isValid(valid_e flag) const
         {
-            return valid & flag;
+            return (valid & flag) != 0;
         }
 
         inline bool isInvalid(invalid_e flag) const
         {
-            return valid & flag;
+            return (valid & flag) != 0;
         }
 
         quint32 flags = 0;

@@ -1085,8 +1085,8 @@ void CGisItemTrk::deriveSecondaryData()
 
     updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
-    qDebug() << "--------------" << getName() << "------------------";
-    qDebug() << "allValidFlags" << hex << allValidFlags;
+//    qDebug() << "--------------" << getName() << "------------------";
+//    qDebug() << "allValidFlags" << hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
 //    qDebug() << "totalDescend" << totalDescend;

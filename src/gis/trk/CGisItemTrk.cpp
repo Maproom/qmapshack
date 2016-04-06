@@ -390,6 +390,10 @@ QString CGisItemTrk::getInfo(bool showName) const
         return showName ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
     }
 
+    bool timeIsValid = (allValidFlags & trkpt_t::eInvalidTime) == 0;
+    bool eleIsValid  = (allValidFlags & trkpt_t::eInvalidEle) == 0;
+
+
     QString str = "<div>";
 
     if(showName)
@@ -400,37 +404,62 @@ QString CGisItemTrk::getInfo(bool showName) const
     IUnit::self().meter2distance(totalDistance, val1, unit1);
     str += tr("Length: %1 %2").arg(val1).arg(unit1);
 
-    if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
+    if(eleIsValid && totalAscend != NOFLOAT && totalDescend != NOFLOAT)
     {
         IUnit::self().meter2elevation(totalAscend,  val1, unit1);
         IUnit::self().meter2elevation(totalDescend, val2, unit2);
 
         str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }
+    else
+    {
+        str += tr(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
+    }
     str += "<br />";
 
-    if(totalElapsedSeconds != NOTIME)
+    if(timeIsValid && (totalElapsedSeconds != NOTIME))
     {
         IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
         IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
-        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
+        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
     }
+    else
+    {
+        str += tr("Time: -, Speed: -");
+    }
+    str += "<br />";
 
-    if(totalElapsedSecondsMoving != NOTIME)
+    if(timeIsValid && (totalElapsedSecondsMoving != NOTIME))
     {
         IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
         IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
-        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
+        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
     }
+    else
+    {
+        str += tr("Moving: -, Speed: -");
+    }
+    str += "<br />";
 
-    if(timeStart.isValid())
+    if(timeIsValid && timeStart.isValid())
     {
-        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center())) + "<br />";
+        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
     }
-    if(timeEnd.isValid())
+    else
     {
-        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center())) + "<br />";
+        str += tr("Start: -");
     }
+    str += "<br />";
+
+    if(timeIsValid && timeEnd.isValid())
+    {
+        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
+    }
+    else
+    {
+        str += tr("End: -");
+    }
+    str += "<br />";
 
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
 
@@ -2177,7 +2206,7 @@ void CGisItemTrk::setActivity()
         {
             trkpt_t& trkpt = seg.pts[i];
 
-            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
+            if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
             {
                 trkpt.unsetFlag(trkpt_t::eActMask);
                 trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);

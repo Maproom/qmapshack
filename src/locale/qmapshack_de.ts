@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -552,37 +552,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Track in Stücke teilen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="410"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="418"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="421"/>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="426"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="440"/>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="442"/>
-        <source>%1 %2</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="507"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="508"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="427"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="741"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="651"/>
         <source>Reset activities...</source>
         <translation>Aktivitäten zurücksetzen...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="741"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="651"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Dies wird alle Aktivitäten vom Track entfernen. Fortfahren?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="747"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="657"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
@@ -910,123 +900,158 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="405"/>
         <source>Length: %1 %2</source>
         <translation>Länge: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation></translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <source>, %1-, %2-</source>
+        <translation></translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
+        <source>Time: -, Speed: -</source>
+        <translation>Zeit: -, Geschwindigkeit: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="440"/>
+        <source>Moving: -, Speed: -</source>
+        <translation>Zeit in Bew.: -, Geschw. -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="446"/>
         <source>Start: %1</source>
         <translation>Beginn: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="432"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="450"/>
+        <source>Start: -</source>
+        <translation>Beginn: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
         <source>End: %1</source>
         <translation>Ende: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="435"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
+        <source>End: -</source>
+        <translation>Ende: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
         <source>Points: %1 (%2)</source>
         <translation>Punkte: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="527"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="468"/>
+        <source>Invalid elevations!</source>
+        <translation>Ungültige Höhenwerte!</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
+        <source>Invalid timestamps!</source>
+        <translation>Ungültige Zeitmarken!</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="567"/>
         <source>Ele.: %1 %2</source>
         <translation>Höhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="530"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="570"/>
         <source> slope: %1%3 (%2%)</source>
         <translation>, Neigung: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="575"/>
         <source> speed: %1%2</source>
         <translation>, Geschw.: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="563"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="603"/>
         <source>... and %1 tags not displayed</source>
         <translation>... und %1 Tags werden nicht angezeigt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="574"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="614"/>
         <source>Descend: - (-)</source>
         <translation>Abstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="575"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="615"/>
         <source>Distance: - (-)</source>
         <translation>Entfernung: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
         <source>Moving: - (-)</source>
         <translation>Zeit in Bew.: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1441"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1517"/>
         <source>Hide point %1.</source>
         <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1445"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1521"/>
         <source>Hide points %1..%2.</source>
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="573"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="613"/>
         <source>Ascend: - (-)</source>
         <translation>Anstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="587"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="627"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation>, Abstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation>, Zeit in Bew.: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source>Ascend: %1%2</source>
         <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="666"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="678"/>
         <source>, %1%2</source>
         <translation>, %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="615"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Ascend: -</source>
         <translation>Anstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="633"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="673"/>
         <source> Descend: %1%2</source>
         <translation> Abstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
         <source>Descend: -</source>
         <translation>Abstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="688"/>
         <source> Time: %1%2</source>
         <translation> Zeit: %1 %2</translation>
     </message>
@@ -1041,62 +1066,62 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
         <source>Time: %1, Speed: %2 %3</source>
         <translation>Zeit: %1, Geschwindigkeit: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="423"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
         <source>Moving: %1, Speed: %2 %3</source>
         <translation>Zeit in Bew.: %1, Geschw. %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="633"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Entf.: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="683"/>
         <source>Distance: %1%2</source>
         <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1286"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1362"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1485"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1561"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2040"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2116"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2046"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2122"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2052"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2128"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2058"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2134"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2085"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2161"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2143"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2219"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
@@ -1106,62 +1131,66 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Punkte ausblenden mit dem Douglas-Peuker Algorithmus (%1 %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="143"/>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
         <translation>Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="159"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="137"/>
+        <source>Hide points with invalid data.</source>
+        <translation>Punkte mit ungültigen Daten ausblenden.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="153"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Alle verborgenen Trackpunkte zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="193"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="187"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Alle verborgenen Trackpunkte wurden dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="243"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="237"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Mit einem Median-Filter der Größe %1 geglättetes Profil</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="279"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="273"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="302"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="296"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Versatz der Höhendaten um %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="321"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="315"/>
         <source>Changed start of track to %1.</source>
         <translation>Trackanfang auf %1 verschoben.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="340"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="334"/>
         <source>Remove timestamps.</source>
         <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="363"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="357"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="396"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="390"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="415"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="409"/>
         <source>%1 (Segment %2)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="438"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="432"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
@@ -3701,6 +3730,19 @@ Zeile %2, Spalte %3:
     </message>
 </context>
 <context>
+    <name>CTableTrk</name>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="120"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="128"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="131"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="136"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="150"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="152"/>
+        <source>%1 %2</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>CTextEditWidget</name>
     <message>
         <location filename="../widgets/CTextEditWidget.cpp" line="73"/>
@@ -3711,21 +3753,21 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
     </message>
@@ -4889,6 +4931,10 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="56"/>
+        <source>Hide points with invalid data.</source>
+        <translation>Punkte mit ungültigen Daten ausblenden.</translation>
+    </message>
+    <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
         <translation>Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
     </message>
@@ -5968,57 +6014,57 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>&lt;b&gt;Neue Linie&lt;/b&gt;&lt;br/&gt;Erstellen Sie Punkte durch Verschieben des Mauscursors und Drücken der linken Maustaste. Mit der rechten Maustaste beenden Sie den Vorgang.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="314"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Punkt löschen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken Sie die linke Maustaste um ihn zu löschen. &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="320"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="323"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Punktebereich auswählen&lt;/b&gt;&lt;br/&gt;Mit der linken Maustaste wählen Sie den ersten Punkt aus. Mit einem erneuten Drücken der linken Maustaste wählen Sie den zweiten Punkt aus und dann wählen Sie eine der Optionen. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Punkt verschieben&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an einen Punkt und drücken die linke Maustaste, um ihn mit dem Cursor zu fangen. Verschieben Sie den Punkt mit der Maus. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="341"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Punkt hinzufügen&lt;/b&gt;&lt;br/&gt;Bewegen Sie den Mauscursor nahe an ein Liniensegment und drücken Sie die linke Maustaste, um einen Punkt hinzuzufügen. Der Punkt wird durch den Cursor gefangen und kann verschoben werden. Setzen Sie den Punkt mit einem Linksklick. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="347"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="350"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Kein Routing&lt;/b&gt;&lt;br/&gt;Alle Punkte werden mittels einer geraden Linie verbunden.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="353"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="356"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;Die aktuellen Router Einstellungen erstellen eine Route zwischen Punkten. &lt;b&gt;Hinweis:&lt;/b&gt; Der gewählte Router muss schnell routen können. Offline Router können dies gewöhnlich, Online Router nicht.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="358"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="361"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vektor Routing&lt;/b&gt;&lt;br/&gt;Verbindet Punkte mit einer Linie einer geladenen Vektorkarte, soweit möglich.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="530"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="533"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1maße&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="533"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="536"/>
         <source>Distance:</source>
         <translation>Entfernung:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="535"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="538"/>
         <source>Ascend:</source>
         <translation>Anstieg:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="537"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="540"/>
         <source>Descend:</source>
         <translation>Abstieg:</translation>
     </message>

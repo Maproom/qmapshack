@@ -135,7 +135,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     checkGraph2->setChecked(cfg.value("showGraph2", true).toBool());
     checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
     splitter->restoreState (cfg.value("splitterSizes").toByteArray());
-    treeWidget->header()->restoreState(cfg.value("trackPointListState").toByteArray());
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
@@ -205,7 +204,6 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showGraph2",          checkGraph2->isChecked());
     cfg.setValue("showGraph3",          checkGraph3->isChecked());
     cfg.setValue("splitterSizes",       splitter->saveState());
-    cfg.setValue("trackPointListState", treeWidget->header()->saveState());
     cfg.setValue("visibleTab",          tabWidget->currentIndex());
     cfg.endGroup();
 

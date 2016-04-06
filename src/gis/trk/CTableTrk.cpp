@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/trk/CTableTrk.h"
+#include "helpers/CSettings.h"
 
 
 #include <QtWidgets>
@@ -26,11 +27,21 @@ CTableTrk::CTableTrk(QWidget *parent)
     : QTreeWidget(parent)
     , INotifyTrk(CGisItemTrk::eVisualTrkTable)
 {
+    SETTINGS;
+    cfg.beginGroup("TrackDetails");
+    header()->restoreState(cfg.value("trackPointListState").toByteArray());
+    cfg.endGroup();
+
     connect(this, &CTableTrk::itemSelectionChanged, this, &CTableTrk::slotItemSelectionChanged);
 }
 
 CTableTrk::~CTableTrk()
 {
+    SETTINGS;
+    cfg.beginGroup("TrackDetails");
+    cfg.setValue("trackPointListState", header()->saveState());
+    cfg.endGroup();
+
     if(trk != nullptr)
     {
         trk->unregisterVisual(this);

@@ -230,6 +230,13 @@ public:
     {
         return trk.links;
     }
+
+    qint32 getCntTotalPoints()
+    {
+        return cntTotalPoints;
+    }
+
+
     /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l) const;
     /// get the track as polyline with elevation, pixel and GIS coordinates.

@@ -72,7 +72,10 @@ void CTableTrk::updateData()
         return;
     }
 
-    quint32 allFlags = trk->getAllValidFlags();
+    // use all valid flags as invalid mask. By that only
+    // invalid flags for properties with valid points count
+    quint32 invalidMask = (trk->getAllValidFlags() & CGisItemTrk::trkpt_t::eValidMask) << 16;
+
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
     for(const CGisItemTrk::trkseg_t& seg : t.segs)
@@ -91,11 +94,7 @@ void CTableTrk::updateData()
             item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
             QBrush bg = item->background(0);
-            if((allFlags & CGisItemTrk::trkpt_t::eValidEle) && (trkpt.isInvalid(CGisItemTrk::trkpt_t::eInvalidEle)))
-            {
-                bg = QColor(255, 100, 100);
-            }
-            if((allFlags & CGisItemTrk::trkpt_t::eValidTime) && (trkpt.isInvalid(CGisItemTrk::trkpt_t::eInvalidTime)))
+            if(trkpt.isInvalid(CGisItemTrk::trkpt_t::invalid_e(invalidMask)))
             {
                 bg = QColor(255, 100, 100);
             }

@@ -19,12 +19,12 @@
 #ifndef CTABLETRK_H
 #define CTABLETRK_H
 
-#include <gis/trk/CGisItemTrk.h>
 #include <QTreeWidget>
+#include <gis/trk/CGisItemTrk.h>
 
 class CTableTrk : public QTreeWidget, public INotifyTrk
 {
-Q_OBJECT
+    Q_OBJECT
 public:
     CTableTrk(QWidget * parent);
     virtual ~CTableTrk();

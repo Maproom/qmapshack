@@ -740,9 +740,8 @@ public:
 
         enum flag_e
         {
-
             eHidden         = 0x00000004      ///< mark point as deleted
-                          // activity flags
+                              // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -759,7 +758,7 @@ public:
 
         enum valid_e
         {
-             eValidTime     = 0x00000001
+            eValidTime     = 0x00000001
             ,eValidEle      = 0x00000002
             ,eValidPos      = 0x00000004
             ,eValidMask     = 0x0000FFFF

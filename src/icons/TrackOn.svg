@@ -14,7 +14,7 @@
    id="svg3377"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="Track.svg">
+   sodipodi:docname="TrackOn.svg">
   <defs
      id="defs3379" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.5"
-     inkscape:cx="-49.454545"
-     inkscape:cy="32"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="48.479685"
+     inkscape:cy="19.715729"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -58,7 +58,7 @@
      inkscape:groupmode="layer">
     <g
        id="g3937"
-       transform="matrix(0.46114505,0,0,0.60404216,-167.21055,-32.539512)"
+       transform="matrix(0.52705344,0,0,0.69038707,-188.26124,-44.162668)"
        inkscape:export-filename="/home/oeichler/Code/android/QLandkarteM/QLandkarteM/icons/48x48/record.png"
        inkscape:export-xdpi="123.42857"
        inkscape:export-ydpi="123.42857"
@@ -77,7 +77,7 @@
            sodipodi:ry="7"
            d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z"
            sodipodi:start="4.7098749"
-           sodipodi:end="7.8572596"
+           sodipodi:end="1.5740743"
            transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)" />
         <path
            sodipodi:type="arc"
@@ -106,7 +106,7 @@
            sodipodi:ry="7"
            d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z"
            sodipodi:start="4.7098749"
-           sodipodi:end="7.8572596"
+           sodipodi:end="1.5740743"
            transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)" />
         <path
            sodipodi:type="arc"
@@ -135,7 +135,7 @@
            sodipodi:ry="7"
            d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z"
            sodipodi:start="4.7098749"
-           sodipodi:end="7.8572596"
+           sodipodi:end="1.5740743"
            transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)" />
         <path
            sodipodi:type="arc"
@@ -164,7 +164,7 @@
            sodipodi:ry="7"
            d="m 416.9824,87.362205 a 7,7 0 0 1 6.07773,3.496442 7,7 0 0 1 -0.003,7.0117 7,7 0 0 1 -6.08041,3.491803 L 417,94.362183 Z"
            sodipodi:start="4.7098749"
-           sodipodi:end="7.8572596"
+           sodipodi:end="1.5740743"
            transform="matrix(2.8638155,0,0,0.95340127,-777.28343,4.421604)" />
         <path
            sodipodi:type="arc"
@@ -180,5 +180,17 @@
            transform="matrix(2.1833386,0,0,1.0380416,-476.38942,-0.97014023)" />
       </g>
     </g>
+    <path
+       style="fill:#008000;stroke:#ffffff;stroke-width:1.42415118;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path4189"
+       sodipodi:type="arc"
+       sodipodi:cx="50.043594"
+       sodipodi:cy="38.772476"
+       sodipodi:rx="9.2879"
+       sodipodi:ry="9.2879229"
+       sodipodi:start="3.1402313"
+       sodipodi:end="3.1371421"
+       sodipodi:open="true"
+       d="m 40.755703,38.78512 a 9.2879,9.2879229 0 0 1 9.268074,-9.300546 9.2879,9.2879229 0 0 1 9.307678,9.260912 9.2879,9.2879229 0 0 1 -9.253697,9.31485 9.2879,9.2879229 0 0 1 -9.321972,-9.246524" />
   </g>
 </svg>

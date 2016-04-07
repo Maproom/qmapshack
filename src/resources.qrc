@@ -210,6 +210,10 @@
         <file>icons/32x32/LimitSys.png</file>
         <file>icons/32x32/LimitUsr.png</file>
         <file>icons/32x32/SetupWptSym.png</file>
+        <file>icons/32x32/WaypointOn.png</file>
+        <file>icons/32x32/TrackOn.png</file>
+        <file>icons/32x32/RouteOn.png</file>
+        <file>icons/32x32/AreaOn.png</file>
         
 
         <file>icons/48x48/2DFix.png</file>
@@ -393,6 +397,10 @@
         <file>icons/48x48/LimitSys.png</file>
         <file>icons/48x48/LimitUsr.png</file>
         <file>icons/48x48/SetupWptSym.png</file>
+        <file>icons/48x48/WaypointOn.png</file>
+        <file>icons/48x48/TrackOn.png</file>
+        <file>icons/48x48/RouteOn.png</file>
+        <file>icons/48x48/AreaOn.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

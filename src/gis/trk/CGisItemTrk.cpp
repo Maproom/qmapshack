@@ -463,13 +463,19 @@ QString CGisItemTrk::getInfo(bool showName) const
 
     str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
 
-    if((allValidFlags & trkpt_t::eValidEle) && (allValidFlags & trkpt_t::eInvalidEle))
+    if((allValidFlags & (trkpt_t::eValidEle|trkpt_t::eInvalidEle)) == (trkpt_t::eValidEle|trkpt_t::eInvalidEle))
     {
         str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
     }
-    if((allValidFlags & trkpt_t::eValidTime) && (allValidFlags & trkpt_t::eInvalidTime))
+
+    if((allValidFlags & (trkpt_t::eValidTime|trkpt_t::eInvalidTime)) == (trkpt_t::eValidTime|trkpt_t::eInvalidTime))
     {
         str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
+    }
+
+    if((allValidFlags & (trkpt_t::eValidPos|trkpt_t::eInvalidPos)) == (trkpt_t::eValidPos|trkpt_t::eInvalidPos))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
     return str + "</div>";

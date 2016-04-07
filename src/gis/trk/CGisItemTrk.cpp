@@ -836,7 +836,7 @@ void CGisItemTrk::resetInternalData()
 
 void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
 {
-    trkpt.valid  = 0;  
+    trkpt.valid  = 0;
     trkpt.valid |= trkpt.ele != NOINT ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
     trkpt.valid |= ((NOFLOAT == trkpt.lat || 0. == trkpt.lat) && (NOFLOAT == trkpt.lon || 0. == trkpt.lon)) ? quint32(trkpt_t::eInvalidPos) : quint32(trkpt_t::eValidPos);
 

@@ -112,6 +112,10 @@ void CGisItemTrk::filterRemoveInvalidPoints()
 {
     bool nothingDone    = true;
 
+    // use all valid flags as invalid mask. By that only
+    // invalid flags for properties with valid points count
+    quint32 invalidMask = (getAllValidFlags() & trkpt_t::eValidMask) << 16;
+
     for(int i = 0; i < trk.segs.size(); i++)
     {
         trkseg_t& seg = trk.segs[i];
@@ -120,7 +124,7 @@ void CGisItemTrk::filterRemoveInvalidPoints()
         {
             trkpt_t& pt = seg.pts[n];
 
-            if(pt.isInvalid(trkpt_t::eInvalidMask))
+            if(pt.isInvalid(trkpt_t::invalid_e(invalidMask)))
             {
                 pt.flags |= trkpt_t::eHidden;
                 nothingDone = false;

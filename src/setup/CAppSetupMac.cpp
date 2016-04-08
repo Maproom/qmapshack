@@ -92,7 +92,11 @@ QString CAppSetupMac::defaultCachePath()
 
 QString CAppSetupMac::userDataPath(QString subdir)
 {
+#if QT_VERSION >= 0x050400
     QString dataDir = QStandardPaths::standardLocations(QStandardPaths::AppLocalDataLocation).first();
+#else
+    QString dataDir = QStandardPaths::standardLocations(QStandardPaths::DataLocation).first();
+#endif
     return IAppSetup::path(dataDir, subdir, false, 0);
 }
 

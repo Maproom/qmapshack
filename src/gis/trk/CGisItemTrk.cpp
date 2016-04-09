@@ -390,6 +390,10 @@ QString CGisItemTrk::getInfo(bool showName) const
         return showName ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
     }
 
+    bool timeIsValid = (allValidFlags & trkpt_t::eInvalidTime) == 0;
+    bool eleIsValid  = (allValidFlags & trkpt_t::eInvalidEle) == 0;
+
+
     QString str = "<div>";
 
     if(showName)
@@ -400,39 +404,80 @@ QString CGisItemTrk::getInfo(bool showName) const
     IUnit::self().meter2distance(totalDistance, val1, unit1);
     str += tr("Length: %1 %2").arg(val1).arg(unit1);
 
-    if(totalAscend != NOFLOAT && totalDescend != NOFLOAT)
+    if(eleIsValid && totalAscend != NOFLOAT && totalDescend != NOFLOAT)
     {
         IUnit::self().meter2elevation(totalAscend,  val1, unit1);
         IUnit::self().meter2elevation(totalDescend, val2, unit2);
 
         str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }
+    else
+    {
+        str += tr(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
+    }
     str += "<br />";
 
-    if(totalElapsedSeconds != NOTIME)
+    if(timeIsValid && (totalElapsedSeconds != NOTIME))
     {
         IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
         IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
-        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
+        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
     }
+    else
+    {
+        str += tr("Time: -, Speed: -");
+    }
+    str += "<br />";
 
-    if(totalElapsedSecondsMoving != NOTIME)
+    if(timeIsValid && (totalElapsedSecondsMoving != NOTIME))
     {
         IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
         IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
-        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2) + "<br />";
+        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+    }
+    else
+    {
+        str += tr("Moving: -, Speed: -");
+    }
+    str += "<br />";
+
+    if(timeIsValid && timeStart.isValid())
+    {
+        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center()));
+    }
+    else
+    {
+        str += tr("Start: -");
+    }
+    str += "<br />";
+
+    if(timeIsValid && timeEnd.isValid())
+    {
+        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center()));
+    }
+    else
+    {
+        str += tr("End: -");
+    }
+    str += "<br />";
+
+    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints) + "<br />";
+
+    if((allValidFlags & (trkpt_t::eValidEle|trkpt_t::eInvalidEle)) == (trkpt_t::eValidEle|trkpt_t::eInvalidEle))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid elevations!") + "</b><br/>";
     }
 
-    if(timeStart.isValid())
+    if((allValidFlags & (trkpt_t::eValidTime|trkpt_t::eInvalidTime)) == (trkpt_t::eValidTime|trkpt_t::eInvalidTime))
     {
-        str += tr("Start: %1").arg(IUnit::datetime2string(timeStart, false, boundingRect.center())) + "<br />";
-    }
-    if(timeEnd.isValid())
-    {
-        str += tr("End: %1").arg(IUnit::datetime2string(timeEnd, false, boundingRect.center())) + "<br />";
+        str += "<b style='color: red;'>" + tr("Invalid timestamps!") + "</b><br/>";
     }
 
-    str += tr("Points: %1 (%2)").arg(cntVisiblePoints).arg(cntTotalPoints);
+    if((allValidFlags & (trkpt_t::eValidPos|trkpt_t::eInvalidPos)) == (trkpt_t::eValidPos|trkpt_t::eInvalidPos))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
+    }
+
     return str + "</div>";
 }
 
@@ -440,13 +485,14 @@ QString CGisItemTrk::getInfoRange() const
 {
     qreal tmp, slope1, slope2;
     QString str, val, unit;
-    if(mouseRange1 == nullptr || mouseRange2 == nullptr)
+    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr) || (mouseRange1 == mouseRange2))
     {
         return str;
     }
 
     int idx1 = mouseRange1->idxTotal;
     int idx2 = mouseRange2->idxTotal;
+
     const trkpt_t *pt1 = mouseRange1;
     const trkpt_t *pt2 = mouseRange2;
     if(idx1 >= idx2)
@@ -455,7 +501,7 @@ QString CGisItemTrk::getInfoRange() const
         pt2 = mouseRange1;
     }
 
-    for(; pt1->isHidden() && (pt1->idxTotal < cntTotalPoints); ++pt1)
+    for(; pt1->isHidden() && (pt1->idxTotal < (cntTotalPoints - 1)); ++pt1)
     {
     }
     for(; pt2->isHidden() && (pt2->idxTotal > 0); --pt2)
@@ -794,6 +840,31 @@ void CGisItemTrk::resetInternalData()
     delete dlgDetails;
 }
 
+void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
+{
+    trkpt.valid  = 0;
+    trkpt.valid |= trkpt.ele != NOINT ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
+    trkpt.valid |= ((NOFLOAT == trkpt.lat || 0. == trkpt.lat) && (NOFLOAT == trkpt.lon || 0. == trkpt.lon)) ? quint32(trkpt_t::eInvalidPos) : quint32(trkpt_t::eValidPos);
+
+    if(trkpt.time.isValid())
+    {
+        if(last != nullptr)
+        {
+            trkpt.valid |= (trkpt.time.toMSecsSinceEpoch() - last->time.toMSecsSinceEpoch()) < 0 ? quint32(trkpt_t::eInvalidTime) : quint32(trkpt_t::eValidTime);
+        }
+        else
+        {
+            trkpt.valid |= trkpt_t::eValidTime;
+        }
+
+        last = &trkpt;
+    }
+    else
+    {
+        trkpt.valid |= trkpt_t::eInvalidTime;
+    }
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
     qreal north = -90;
@@ -802,6 +873,7 @@ void CGisItemTrk::deriveSecondaryData()
     qreal west  =  180;
 
     // reset all secondary data
+    allValidFlags             = 0;
     cntTotalPoints            = 0;
     cntVisiblePoints          = 0;
     timeStart                 = QDateTime();
@@ -833,9 +905,11 @@ void CGisItemTrk::deriveSecondaryData()
         return;
     }
 
-    trkpt_t * lastTrkpt  = nullptr;
-    qreal timestampStart = NOFLOAT;
-    qreal lastEle        = NOFLOAT;
+    trkpt_t * lastValid     = nullptr;
+    trkpt_t * lastTrkpt     = nullptr;
+    qreal timestampStart    = NOFLOAT;
+    qreal lastEle           = NOFLOAT;
+
 
     // linear list of pointers to visible track points
     QVector<trkpt_t*> lintrk;
@@ -848,12 +922,19 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt_t& trkpt = seg.pts[p];
 
+            // verify data of all points
+            verifyTrkPt(lastValid, trkpt);
             trkpt.idxTotal = cntTotalPoints++;
+
             if(trkpt.isHidden())
             {
                 trkpt.reset();
                 continue;
             }
+
+            // count only visible points to allValidFlags
+            allValidFlags |= trkpt.valid;
+
             trkpt.idxVisible = cntVisiblePoints++;
             lintrk << &trkpt;
 
@@ -1008,9 +1089,10 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct, "deriveSecondaryData()");
+    updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
+//    qDebug() << "allValidFlags" << hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
 //    qDebug() << "totalAscend" << totalAscend;
 //    qDebug() << "totalDescend" << totalDescend;
@@ -2130,7 +2212,7 @@ void CGisItemTrk::setActivity()
         {
             trkpt_t& trkpt = seg.pts[i];
 
-            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
+            if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
             {
                 trkpt.unsetFlag(trkpt_t::eActMask);
                 trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);

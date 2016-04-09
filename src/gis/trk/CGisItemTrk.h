@@ -75,6 +75,7 @@ public:
         , eVisualDetails     = 0x04
         , eVisualProject     = 0x08
         , eVisualColorAct    = 0x10
+        , eVisualTrkTable    = 0x20
         , eVisualAll         = -1
     };
 
@@ -229,6 +230,13 @@ public:
     {
         return trk.links;
     }
+
+    qint32 getCntTotalPoints()
+    {
+        return cntTotalPoints;
+    }
+
+
     /// get the track as a simple coordinate polyline
     void getPolylineFromData(QPolygonF &l) const;
     /// get the track as polyline with elevation, pixel and GIS coordinates.
@@ -257,6 +265,11 @@ public:
     const trkpt_t * getMouseMoveFocusPoint() const
     {
         return mouseMoveFocus;
+    }
+
+    quint32 getAllValidFlags() const
+    {
+        return allValidFlags;
     }
 
 
@@ -530,7 +543,7 @@ public:
     void filterReducePoints(qreal dist);
 
     /** @brief Remove track points without valid location at the beginning of the track */
-    void filterRemoveNullPoints();
+    void filterRemoveInvalidPoints();
 
     /** @param points  size of Median filter */
     void filterSmoothProfile(int points);
@@ -603,6 +616,7 @@ private:
      */
     void resetInternalData();
 
+    void verifyTrkPt(trkpt_t *&last, trkpt_t& trkpt);
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extrema/extensions
 
@@ -726,9 +740,8 @@ public:
 
         enum flag_e
         {
-            eHidden     = 0x00000004      ///< mark point as deleted
-
-                          // activity flags
+            eHidden         = 0x00000004      ///< mark point as deleted
+                              // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -742,6 +755,23 @@ public:
             ,eActMask   = 0xFF800000    ///< mask for activity flags
             ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
         };
+
+        enum valid_e
+        {
+            eValidTime     = 0x00000001
+            ,eValidEle      = 0x00000002
+            ,eValidPos      = 0x00000004
+            ,eValidMask     = 0x0000FFFF
+        };
+
+        enum invalid_e
+        {
+            eInvalidTime    = eValidTime << 16
+            ,eInvalidEle    = eValidEle  << 16
+            ,eInvalidPos    = eValidPos  << 16
+            ,eInvalidMask   = 0xFFFF0000
+        };
+
 
         inline bool isHidden() const
         {
@@ -763,7 +793,18 @@ public:
             flags &= ~flag;
         }
 
+        inline bool isValid(valid_e flag) const
+        {
+            return (valid & flag) != 0;
+        }
+
+        inline bool isInvalid(invalid_e flag) const
+        {
+            return (valid & flag) != 0;
+        }
+
         quint32 flags = 0;
+        quint32 valid = 0;
         qint32 idxTotal = NOIDX;            //< index within the complete track
         qint32 idxVisible;                  //< offset into lineSimple
         qreal deltaDistance;                //< the distance to the last point
@@ -869,6 +910,7 @@ private:
        \defgroup TrackStatistics Some statistical values over the complete track
      */
     /**@{*/
+    quint32 allValidFlags = 0;
     qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;

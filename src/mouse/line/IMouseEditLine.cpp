@@ -280,6 +280,9 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
     }
 
     lineOp->mouseMoveEvent(e);
+
+    canvas->displayInfo(point);
+    canvas->update();
 }
 
 void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)

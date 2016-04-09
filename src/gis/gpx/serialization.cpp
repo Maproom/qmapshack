@@ -37,6 +37,7 @@ const QString IGisProject::wptx1_ns  = "http://www.garmin.com/xmlschemas/Waypoin
 const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
+const QString IGisProject::tp1_ns    = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
 
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
@@ -448,6 +449,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc)
     gpx.setAttribute("xmlns:wptx1",  wptx1_ns);
     gpx.setAttribute("xmlns:rmc",    rmc_ns);
     gpx.setAttribute("xmlns:ql",     ql_ns);
+    gpx.setAttribute("xmlns:tp1",    tp1_ns);
 
     QString schemaLocation = QString()
                              + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "

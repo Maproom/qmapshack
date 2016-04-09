@@ -53,13 +53,13 @@ public:
                    qreal factor,
                    fTrkPtGetVal getY)
             : key(key)
-            , name(name)            
-            , icon(icon)           
+            , name(name)
+            , icon(icon)
             , axisType(axisType)
             , getX(getX)
             , unit(unit)
             , yLabel(yLabel)
-            , factor(factor)            
+            , factor(factor)
             , getY(getY)
         {
         }
@@ -67,7 +67,7 @@ public:
         // key/extension source of the property
         QString key;
         // name of the property
-        QString name;        
+        QString name;
         // symbol representing the property
         QIcon icon;
 

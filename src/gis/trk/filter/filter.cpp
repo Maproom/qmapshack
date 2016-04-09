@@ -382,8 +382,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
                 continue;
             }
 
-            qreal dmsec = 1000 * pt.deltaDistance/speed;
-            timestamp   = timestamp.addMSecs(qRound(dmsec));
+            timestamp   = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
             pt.time     = timestamp;
         }
     }

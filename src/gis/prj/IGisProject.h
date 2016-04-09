@@ -469,6 +469,7 @@ protected:
     static const QString rmc_ns;
     static const QString ql_ns;
     static const QString gs_ns;
+    static const QString tp1_ns;
     // Those are standard GPX/XML namespaces
     static const QString gpx_ns;
     static const QString xsi_ns;

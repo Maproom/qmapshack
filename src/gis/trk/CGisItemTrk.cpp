@@ -1153,6 +1153,11 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             continue;
         }
 
+        if(!boundingRect.contains(wpt->getBoundingRect().topLeft()))
+        {
+            continue;
+        }
+
         QPointF pos;
         pos = wpt->getPosition();
 

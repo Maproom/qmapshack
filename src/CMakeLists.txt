@@ -26,6 +26,10 @@ find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
+if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]+\\..*")
+    message( SEND_ERROR "You need at least Qt5.3 or newer.")
+endif()
+
 function(cxx_add_flag_if_supported flag)
     CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
     if(Flag:${flag})

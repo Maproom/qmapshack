@@ -92,7 +92,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>All custom icons have to be *.bmp format.</string>
+      <string>All custom icons have to be *.bmp or *.png format.</string>
      </property>
     </widget>
    </item>

@@ -30,11 +30,10 @@ public:
 
     virtual void store(const QString& key, QImage& img) = 0;
     virtual void restore(const QString& key, QImage& img) = 0;
-    virtual bool contains(const QString& key) = 0;
-
+    virtual bool contains(const QString& key) const = 0;
 
 protected:
-    QMutex mutex;
+    mutable QMutex mutex;
 };
 
 #endif //IDISKCACHE_H

@@ -32,21 +32,22 @@ class CDiskCache : public IDiskCache
     Q_OBJECT
 public:
     CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
-    virtual ~CDiskCache();
+    virtual ~CDiskCache() = default;
 
     void store(const QString& key, QImage& img) override;
     void restore(const QString& key, QImage& img) override;
-    bool contains(const QString& key) override;
+    bool contains(const QString& key) const override;
 
 private slots:
     void slotCleanup();
 
 private:
+    void removeCacheFile(const QFileInfo &fileinfo);
+
     QDir dir;
 
-    qint32 size;
-
-    qint32 expiration;
+    const qint32 maxSize;        //< maximum cache size in MB
+    const qint32 expirationDays; //< expiration time in days
 
     /// hash table to cache images as files on disc
     QHash<QString, QString> table;

@@ -18,6 +18,8 @@
 
 #include "gis/trk/CTableTrk.h"
 #include "helpers/CSettings.h"
+#include "helpers/CElevationDialog.h"
+#include "units/IUnit.h"
 
 
 #include <QtWidgets>
@@ -33,6 +35,7 @@ CTableTrk::CTableTrk(QWidget *parent)
     cfg.endGroup();
 
     connect(this, &CTableTrk::itemSelectionChanged, this, &CTableTrk::slotItemSelectionChanged);
+    connect(this, &CTableTrk::itemDoubleClicked, this, &CTableTrk::slotItemDoubleClicked);
 }
 
 CTableTrk::~CTableTrk()
@@ -172,5 +175,25 @@ void CTableTrk::slotItemSelectionChanged()
     {
         quint32 idx = item->text(eColNum).toUInt();
         trk->setMouseFocusByTotalIndex(idx, CGisItemTrk::eFocusMouseMove, "CTableTrk");
+    }
+}
+
+void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
+{
+    qint32 idx = item->text(eColNum).toInt();
+    qint32 ele = trk->getElevation(idx);
+    qreal lon, lat;
+    IUnit::strToDeg(item->text(eColPosition), lon, lat);
+
+    if((column == eColEle) && (lon != NOFLOAT) && (lat != NOFLOAT))
+    {
+        QVariant var(ele);
+        CElevationDialog dlg(this, var, QVariant(ele), QPointF(lon, lat));
+
+        if(dlg.exec() == QDialog::Accepted)
+        {
+            trk->setElevation(idx, var.toInt());
+        }
+
     }
 }

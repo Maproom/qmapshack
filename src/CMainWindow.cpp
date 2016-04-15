@@ -408,6 +408,18 @@ qreal CMainWindow::getElevationAt(const QPointF& pos) const
     {
         return canvas->getElevationAt(pos);
     }
+    else
+    {
+        for(int i = 0; i < tabWidget->count(); i++)
+        {
+            canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+            if(canvas)
+            {
+                return canvas->getElevationAt(pos);
+
+            }
+        }
+    }
     return NOFLOAT;
 }
 

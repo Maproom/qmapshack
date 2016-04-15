@@ -20,11 +20,11 @@
 
 #include <QtWidgets>
 
-CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * parent)
+CDiskCache::CDiskCache(const QString &path, qint32 maxSize, qint32 expirationDays, QObject * parent)
     : IDiskCache(parent)
     , dir(path)
-    , size(size)
-    , expiration(days)
+    , maxSize(maxSize)
+    , expirationDays(expirationDays)
 {
     dummy.fill(Qt::transparent);
 
@@ -42,10 +42,6 @@ CDiskCache::CDiskCache(const QString &path, qint32 size, qint32 days, QObject * 
     connect(timer, &QTimer::timeout, this, &CDiskCache::slotCleanup);
 }
 
-CDiskCache::~CDiskCache()
-{
-}
-
 void CDiskCache::store(const QString& key, QImage& img)
 {
     QMutexLocker lock(&mutex);
@@ -53,8 +49,8 @@ void CDiskCache::store(const QString& key, QImage& img)
     QCryptographicHash md5(QCryptographicHash::Md5);
     md5.addData(key.toLatin1());
 
-    QString hash        = md5.result().toHex();
-    QString filename    = QString("%1.png").arg(hash);
+    QString hash     = md5.result().toHex();
+    QString filename = QString("%1.png").arg(hash);
 
     if(!img.isNull())
     {
@@ -95,7 +91,7 @@ void CDiskCache::restore(const QString& key, QImage& img)
     }
 }
 
-bool CDiskCache::contains(const QString& key)
+bool CDiskCache::contains(const QString& key) const
 {
     QMutexLocker lock(&mutex);
 
@@ -106,25 +102,29 @@ bool CDiskCache::contains(const QString& key)
     return table.contains(hash) || cache.contains(hash);
 }
 
+void CDiskCache::removeCacheFile(const QFileInfo &fileinfo)
+{
+    QString hash = fileinfo.baseName();
+    table.remove(hash);
+    cache.remove(hash);
+    QFile::remove(fileinfo.absoluteFilePath());
+}
+
 void CDiskCache::slotCleanup()
 {
     QMutexLocker lock(&mutex);
 
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now       = QDateTime::currentDateTime();
-    int days            = expiration;
-    qint32 maxSize      = size * 1024 * 1024;
+    qint32 maxSize      = this->maxSize * 1024 * 1024;
     qint32 tmpSize      = 0;
     // expire old files and calculate cache size
     for(const QFileInfo &fileinfo : files)
     {
-        if(fileinfo.lastModified().daysTo(now) > days)
+        if(fileinfo.lastModified().daysTo(now) > expirationDays)
         {
-            QString hash = fileinfo.baseName();
-            table.remove(hash);
-            cache.remove(hash);
-            QFile::remove(fileinfo.absoluteFilePath());
-            qDebug() << "remove old tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath();
+            removeCacheFile(fileinfo);
+            qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: expired)";
         }
         else
         {
@@ -138,12 +138,8 @@ void CDiskCache::slotCleanup()
         // if cache is still too large remove oldest files
         for(const QFileInfo &fileinfo : files)
         {
-            QString hash = fileinfo.baseName();
-            table.remove(hash);
-            cache.remove(hash);
-            QFile::remove(fileinfo.absoluteFilePath());
-
-            qDebug() << "remove" << fileinfo.lastModified() << fileinfo.absoluteFilePath();
+            removeCacheFile(fileinfo);
+            qDebug() << "remove tile" << fileinfo.lastModified() << fileinfo.absoluteFilePath() << "(reason: cache size limit)";
 
             tmpSize -= fileinfo.size();
 

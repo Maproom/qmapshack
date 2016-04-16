@@ -107,7 +107,7 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
 
                     for(const QString &key : expTrk.extensions.keys())
                     {
-                        VERIFY_EQUAL(CKnownExtension::isKnown(key), expTrk.extensions[key].known);
+                        VERIFY_EQUAL(expTrk.extensions[key].known, CKnownExtension::isKnown(key));
                         if(expTrk.extensions[key].everyPoint)
                         {
                             SUBVERIFY(trkpt.extensions.contains(key), QString("Missing extension `%1`on trackpoint").arg(key));

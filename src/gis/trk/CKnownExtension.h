@@ -19,6 +19,8 @@
 #ifndef CKNOWNEXTENSION_H
 #define CKNOWNEXTENSION_H
 
+#include <QSet>
+
 #include "gis/trk/CGisItemTrk.h"
 #include <functional>
 
@@ -27,6 +29,8 @@ class CKnownExtension
     Q_DECLARE_TR_FUNCTIONS(CKnownExtension)
 public:
     static void init(const IUnit &units);
+
+    static void initGarminTPXv1(const IUnit &units, const QString &ns);
 
     static const QString internalSlope;
     static const QString internalSpeed;
@@ -48,7 +52,11 @@ public:
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
 private:
+
+    static bool registerNS(const QString &ns);
+
     static QHash<QString, CKnownExtension> knownExtensions;
+    static QSet<QString> registeredNS;
 
     CKnownExtension(QString name,      int order,
                     qreal minimum,     qreal maximum,
@@ -61,7 +69,6 @@ private:
     {
     }
 
-    static void initGarminTPXv1(const IUnit &units, const QString &ns);
     static void initMioTPX(const IUnit &units);
 };
 

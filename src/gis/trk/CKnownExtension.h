@@ -22,21 +22,41 @@
 #include <QSet>
 
 #include "gis/trk/CGisItemTrk.h"
-#include <functional>
 
 class CKnownExtension
 {
     Q_DECLARE_TR_FUNCTIONS(CKnownExtension)
 public:
+    /**
+       @brief Initialize using the default list of known namespaces
+       @param units  The unit class currently used
+     */
     static void init(const IUnit &units);
 
+    /**
+       @brief Register the Garmin TPX v1 for namespace ns
+       @param units  The unit class currently used
+       @param ns     The namespace to be used for Garmin TPX v1
+     */
     static void initGarminTPXv1(const IUnit &units, const QString &ns);
 
-    static const QString internalSlope;
-    static const QString internalSpeed;
-    static const QString internalEle;
-    static const QString internalProgress;
+    static const QString internalSlope;    //< name of internally derived slope
+    static const QString internalSpeed;    //< name of internally derived speed
+    static const QString internalEle;      //< name of internally derived elevation (DEM)
+    static const QString internalProgress; //< name of internally derived progress
 
+    /**
+       @brief Get extension descriptor for name
+
+       If there is no known descriptor for an extension with `name`, a valid dummy descriptor
+       will be returned.
+       The dummy descriptor contains valid entries, `valueFunc` can be used just as if the
+       extension was known.
+
+       @param name  The name of the requested extension (incl. namespace)
+
+       @return a valid extension descriptor (for both known and unknown extensions)
+     */
     static const CKnownExtension get(const QString &name);
     static bool isKnown(const QString &name);
 
@@ -47,7 +67,7 @@ public:
     qreal factor;              //< factor used to convert a value to match the users' units
     QString unit;              //< the unit (to be displayed)
     QString icon;              //< path to an icon
-    bool known;
+    bool known;                //< true if extension is known, false otherwise
     bool derivedQMS;           //< if set to true the value is derived by QMS (p.x. slope*)
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 

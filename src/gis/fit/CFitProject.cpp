@@ -39,7 +39,7 @@ CFitProject::CFitProject(const QString &filename, IDevice *parent)
     : IGisProject(eTypeFit, filename, parent)
 {
     // this constructor is used when opening files from the garmin device.
-    // this means several files are opened at the same time. For that case we don not show an error message if a file
+    // this means several files are opened at the same time. For that case we do not show an error message if a file
     // can not be opened.
     loadFitFromFile(filename, false);
 }

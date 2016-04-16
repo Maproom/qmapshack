@@ -25,6 +25,7 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/fit/CFitProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
@@ -125,7 +126,11 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
                 SUBVERIFY(existingSources.contains(ext), QString("Missing extension `%1`").arg(ext));
                 existingSources.removeOne(ext);
             }
-            SUBVERIFY(existingSources.isEmpty(), "existingSources is not empty");
+
+            auto accuFunc = [](const QString &accu, const QString &b) { return accu.isEmpty() ? b : QString("%1, %2").arg(accu).arg(b); };
+            QString remainingExts = std::accumulate(existingSources.cbegin(), existingSources.cend(), QString(), accuFunc);
+
+            SUBVERIFY(existingSources.isEmpty(), QString("existingSources still contains: ") +  remainingExts);
         }
 
         CGisItemRte *itemRte = dynamic_cast<CGisItemRte*>(item);
@@ -210,6 +215,11 @@ IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid, bool 
             CSlfReader::readFile(fileToPath(file), slfProj);
             SUBVERIFY(IGisProject::eTypeSlf == proj->getType(), "Project has invalid type");
         }
+        else if(file.endsWith(".fit"))
+        {
+            proj = new CFitProject(fileToPath(file), (CGisListWks*) nullptr);
+            SUBVERIFY(IGisProject::eTypeFit == proj->getType(), "Project has invalid type");
+        }
         else
         {
             SUBVERIFY(false, "Internal error: Can't read project file `" + file + "`");
@@ -218,11 +228,8 @@ IGisProject* test_QMapShack::readProjFile(const QString &file, bool valid, bool 
     catch(QString &errormsg)
     {
         SUBVERIFY(!valid, "Expected `" + file + "` to be valid, error while reading: " + errormsg);
-        if(proj)
-        {
-            delete proj;
-            proj = nullptr;
-        }
+        delete proj;
+        proj = nullptr;
     }
 
     SUBVERIFY(valid || nullptr == proj, "File is neither valid, nor an exception was thrown");

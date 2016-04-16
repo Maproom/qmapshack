@@ -1,0 +1,24 @@
+<expected>
+    <name>2015-07-05-22-03-17</name>
+    <desc></desc>
+
+    <waypoints></waypoints>
+
+    <!-- name="5/7/2015 10:03:17 PM" -->
+    <tracks>
+        <track name="2015-07-05-22-03-17" colorIdx="12" colorName="DarkGray" segcount="1" pointcount="2341">
+            <colorSources>
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"                              />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"                                />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress"                           />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"                              />
+                <colorSource known="true" everypoint="true"  derived="false" name="speed"                                   />
+                <colorSource known="true" everypoint="true"  derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:atemp" />
+                <colorSource known="true" everypoint="false" derived="false" name="gpxtpx:TrackPointExtension|gpxtpx:cad"   />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+    <areas></areas>
+</expected>

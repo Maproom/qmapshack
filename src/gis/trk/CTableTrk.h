@@ -54,6 +54,7 @@ public:
 
 private slots:
     void slotItemSelectionChanged();
+    void slotItemDoubleClicked(QTreeWidgetItem * item, int column);
 
 private:
     CGisItemTrk * trk = nullptr;

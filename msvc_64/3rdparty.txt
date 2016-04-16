@@ -39,3 +39,9 @@ QMS depends on the 3rd party software listed below:
   The mingw64 compiler is used to compile the routino library.
   This resulting library depends from mingw64 runtime libraries such as libwinpthread-1.dll, libz-1.dll
   which are also included in this installation
+  
+8.) MariaDB, https://mariadb.com/
+  For MySql/MariaDB support, the Qt mysql plugin needs libmysql.dll.
+  This DLL can be downloaded as part of the precompiled MariaDB binaries at https://downloads.mariadb.org/mariadb/+releases/
+  For the current QMS binary distribution, libmysql.dll is taken from mariadb version 10.1.11: 
+  https://downloads.mariadb.org/mariadb/10.1.11/ --> mariadb-10.1.11-winx64.zip

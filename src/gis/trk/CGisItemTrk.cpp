@@ -697,6 +697,12 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const
     return QString("%1 %2\n%3").arg(asc).arg(dsc).arg(dsttme);
 }
 
+qint32 CGisItemTrk::getElevation(qint32 idx) const
+{
+    const trkpt_t *trkpt = getTrkPtByTotalIndex(idx);
+    return trkpt != nullptr ? trkpt->ele : NOINT;
+}
+
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
     if(scrOpt.isNull())
@@ -1149,6 +1155,11 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
     {
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->child(i));
         if(wpt == nullptr)
+        {
+            continue;
+        }
+
+        if(!boundingRect.contains(wpt->getBoundingRect().topLeft()))
         {
             continue;
         }
@@ -2140,6 +2151,17 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
     changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
+void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
+{
+    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
+    trkpt_t * trkpt = getTrkPtByCondition(condition);
+    if((trkpt != nullptr) && (trkpt->ele != ele))
+    {
+        trkpt->ele = ele;
+        deriveSecondaryData();
+        changed(tr("Changed elevation of point %1 to %2 %3").arg(idx).arg(ele).arg(IUnit::self().baseunit), "://icons/48x48/SetEle.png");
+    }
+}
 
 void CGisItemTrk::setColor(int idx)
 {
@@ -2382,6 +2404,21 @@ const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(
     for(const trkseg_t &seg : trk.segs)
     {
         for(const trkpt_t &pt : seg.pts)
+        {
+            if(cond(pt))
+            {
+                return &pt;
+            }
+        }
+    }
+    return nullptr;
+}
+
+CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
+{
+    for(trkseg_t &seg : trk.segs)
+    {
+        for(trkpt_t &pt : seg.pts)
         {
             if(cond(pt))
             {

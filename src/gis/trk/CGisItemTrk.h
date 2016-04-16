@@ -272,6 +272,12 @@ public:
         return allValidFlags;
     }
 
+    /**
+       @brief Get the elevation of a track point
+       @param idx   The total index of the point
+       @return The elevation or NOINT if the index is invalid, or the track point has no elevation value.
+     */
+    qint32 getElevation(qint32 idx) const;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -343,6 +349,12 @@ public:
     void setDescription(const QString& str)     override;
     void setLinks(const QList<link_t>& links)   override;
     void setDataFromPolyline(const SGisLine &l) override;
+    /**
+       @brief Manually set the elevation value of a single track point
+       @param idx   the total index of the track point
+       @param ele   the new elevation value
+     */
+    void setElevation(qint32 idx, qint32 ele);
 
     /**
        @brief display the track screen options
@@ -638,6 +650,8 @@ private:
     static bool getNameAndProject(QString &name, IGisProject *&project);
 
     const trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const;
+    
+    trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond);
 
     /**
        @brief Try to get access Nth visible point matching the idx

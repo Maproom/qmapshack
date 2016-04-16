@@ -39,7 +39,7 @@ CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVaria
     IUnit::self().meter2elevation(100, str, unit);
 
     labelUnit->setText(unit);
-    if(val != reset)
+    if(val != NOINT)
     {
         IUnit::self().meter2elevation(val.toDouble(), str, unit);
         lineValue->setText(str);
@@ -66,7 +66,17 @@ void CElevationDialog::accept()
 
 void CElevationDialog::slotReset()
 {
-    lineValue->clear();
+    if(reset == NOINT)
+    {
+        lineValue->clear();
+    }
+    else
+    {
+        QString str, unit;
+        IUnit::self().meter2elevation(val.toDouble(), str, unit);
+        lineValue->setText(str);
+    }
+
 }
 
 void CElevationDialog::slotGetEle()

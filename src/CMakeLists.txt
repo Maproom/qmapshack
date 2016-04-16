@@ -764,6 +764,7 @@ if(UNIX AND NOT APPLE)
         test/main.cpp
         test/test_QMapShack.h
         test/CGpxProject.cpp
+        test/CFitProject.cpp
         test/CQmsProject.cpp
         test/CSlfReader.cpp
         test/CKnownExtension.cpp

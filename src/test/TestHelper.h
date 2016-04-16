@@ -23,7 +23,7 @@
 
 #define SUBVERIFY(EXPR, MSG) { \
         if(!(EXPR)) { \
-            throw QString("Verification of `%1` failed: %2").arg(#EXPR).arg(MSG); \
+            throw QString("Verification of `%1` failed: %2 (%3:%4)").arg(#EXPR).arg(MSG).arg(__FILE__).arg(__LINE__); \
         } \
 }
 

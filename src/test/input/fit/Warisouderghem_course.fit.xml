@@ -1,0 +1,22 @@
+<expected>
+    <name>Warisouderghem</name>
+    <desc></desc>
+
+    <waypoints></waypoints>
+
+    <!-- name="8/30/2014 2:00:00 AM" -->
+    <tracks>
+        <track name="Warisouderghem" colorIdx="12" colorName="DarkGray" segcount="1" pointcount="1790">
+            <colorSources>
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:slope"    />
+                <colorSource known="true" everypoint="false" derived="false" name="::ql:ele"      />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:progress" />
+                <colorSource known="true" everypoint="false" derived="true"  name="::ql:speed"    />
+                <colorSource known="true" everypoint="true"  derived="false" name="speed"         />
+            </colorSources>
+        </track>
+    </tracks>
+
+    <routes></routes>
+    <areas></areas>
+</expected>

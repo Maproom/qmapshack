@@ -64,6 +64,9 @@ class test_QMapShack : public QObject
     void _readQmsFile_1_6_0();
     void _writeReadQmsFile();
 
+    // CFitProject
+    void _readValidFitFiles();
+
     // CGisItemTrk
     void _filterDeleteExtension();
 
@@ -77,5 +80,6 @@ private slots:
     void writeReadQmsFile()         { TCWRAPPER( _writeReadQmsFile()         ) }
     void readExtGarminTPX1_gpxtpx() { TCWRAPPER( _readExtGarminTPX1_gpxtpx() ) }
     void readExtGarminTPX1_tp1()    { TCWRAPPER( _readExtGarminTPX1_tp1()    ) }
+    void readValidFitFiles()        { TCWRAPPER( _readValidFitFiles()        ) }
     void filterDeleteExtension()    { TCWRAPPER( _filterDeleteExtension()    ) }
 };

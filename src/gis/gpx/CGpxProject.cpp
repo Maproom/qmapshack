@@ -26,6 +26,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
@@ -130,6 +131,25 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     if(xmlGpx.tagName() != "gpx")
     {
         throw tr("Not a GPX file: %1").arg(filename);
+    }
+
+    // Read all attributes and find any registrations for actually known extensions.
+    // This is used to properly detect valid .gpx files using uncommon namespaces.
+    QDomNamedNodeMap attributes = xmlGpx.attributes();
+    for(int i = 0; i < attributes.size(); ++i)
+    {
+        const QString xmlns("xmlns");
+        QDomAttr att = attributes.item(i).toAttr();
+
+        if(att.name().startsWith(xmlns + ":"))
+        {
+            QString ns = att.name().mid(xmlns.length() + 1);
+
+            if(att.value() == gpxtpx_ns)
+            {
+                CKnownExtension::initGarminTPXv1(IUnit::self(), ns);
+            }
+        }
     }
 
     const QDomElement& xmlExtension = xmlGpx.namedItem("extensions").toElement();

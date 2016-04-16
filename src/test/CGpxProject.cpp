@@ -42,6 +42,7 @@ void test_QMapShack::_writeReadGpxFile()
     writeReadGpxFile("qtt_gpx_file0.gpx");
     writeReadGpxFile("gpx_ext_GarminTPX1_gpxtpx.gpx");
     writeReadGpxFile("gpx_ext_GarminTPX1_tp1.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_cns.gpx");
     writeReadGpxFile("V1.6.0_file1.qms");
     writeReadGpxFile("V1.6.0_file2.qms");
 }

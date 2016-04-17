@@ -46,7 +46,7 @@ private:
 
     QDir dir;
 
-    const qint32 maxSize;        //< maximum cache size in MB
+    const qint32 maxSizeMB;      //< maximum cache size in MB
     const qint32 expirationDays; //< expiration time in days
 
     /// hash table to cache images as files on disc

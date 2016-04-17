@@ -20,10 +20,10 @@
 
 #include <QtWidgets>
 
-CDiskCache::CDiskCache(const QString &path, qint32 maxSize, qint32 expirationDays, QObject * parent)
+CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationDays, QObject * parent)
     : IDiskCache(parent)
     , dir(path)
-    , maxSize(maxSize)
+    , maxSizeMB(maxSizeMB)
     , expirationDays(expirationDays)
 {
     dummy.fill(Qt::transparent);
@@ -116,7 +116,7 @@ void CDiskCache::slotCleanup()
 
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     QDateTime now       = QDateTime::currentDateTime();
-    qint32 maxSize      = this->maxSize * 1024 * 1024;
+    qint32 maxSizeBytes = maxSizeMB * 1024 * 1024;
     qint32 tmpSize      = 0;
     // expire old files and calculate cache size
     for(const QFileInfo &fileinfo : files)
@@ -132,7 +132,7 @@ void CDiskCache::slotCleanup()
         }
     }
 
-    if(tmpSize > maxSize)
+    if(tmpSize > maxSizeBytes)
     {
         files = dir.entryInfoList(QStringList("*.png"), QDir::Files, QDir::Time|QDir::Reversed);
         // if cache is still too large remove oldest files
@@ -143,7 +143,7 @@ void CDiskCache::slotCleanup()
 
             tmpSize -= fileinfo.size();
 
-            if(tmpSize < maxSize)
+            if(tmpSize < maxSizeBytes)
             {
                 break;
             }

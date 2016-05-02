@@ -208,14 +208,15 @@ protected:
     /// the drawcontext this map belongs to
     CMapDraw * map;
 
-    /// source projection of the current map file
     /**
+        Source projection of the current map file
         Has to be set by subclass. Destruction has to be
         handled by subclass.
      */
     projPJ pjsrc = nullptr;
-    /// target projection
+
     /**
+        target projection
         Is set by IMap() to WGS84. Will be freed by ~IMap()
      */
     projPJ pjtar = nullptr;
@@ -231,22 +232,15 @@ protected:
     /// flag field for features defined in features_e
     quint32 flagsFeature;
 
-    /// vector maps only: hide/show polygons
-    bool showPolygons = true;
-    /// vector maps only: hide/show polylines
-    bool showPolylines = true;
-    /// vector maps only: hide/show point of interest
-    bool showPOIs = true;
+    bool showPolygons  = true; //< vector maps only: hide/show polygons
+    bool showPolylines = true; //< vector maps only: hide/show polylines
+    bool showPOIs      = true; //< vector maps only: hide/show point of interest
 
-    /// streaming map only: path to cached tiles
-    QString cachePath;
-    /// streaming map only: maximum size of all tiles in cache [MByte]
-    qint32 cacheSizeMB = 100;
-    /// streaming map only: maximum age of tiles in cache [days]
-    qint32 cacheExpiration = 8;
+    QString cachePath;            //< streaming map only: path to cached tiles
+    qint32 cacheSizeMB     = 100; //< streaming map only: maximum size of all tiles in cache [MByte]
+    qint32 cacheExpiration =   8; //< streaming map only: maximum age of tiles in cache [days]
 
-    /// a copyright string to be displayed as tool tip
-    QString copyright;
+    QString copyright; //< a copyright string to be displayed as tool tip
 };
 
 

@@ -23,7 +23,7 @@
 #include <QQueue>
 #include <QTime>
 
-class IDiskCache;
+class CDiskCache;
 class QListWidgetItem;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -93,7 +93,7 @@ private:
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache = nullptr;
+    CDiskCache * diskCache = nullptr;
     /// access manager to request tiles
     QNetworkAccessManager * accessManager = nullptr;
 

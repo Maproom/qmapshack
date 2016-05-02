@@ -117,7 +117,6 @@ set( SRCS
         map/garmin/CGarminPolygon.cpp
         map/garmin/CGarminTyp.cpp
         map/cache/CDiskCache.cpp
-        map/cache/IDiskCache.cpp
         map/mapsforge/types.cpp
         units/IUnit.cpp
         units/CUnitImperial.cpp
@@ -381,7 +380,6 @@ set( HDRS
         map/garmin/CGarminPolygon.h
         map/garmin/CGarminTyp.h
         map/cache/CDiskCache.h
-        map/cache/IDiskCache.h
         map/mapsforge/types.h
         units/IUnit.h
         units/CUnitImperial.h

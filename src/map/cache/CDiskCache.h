@@ -19,24 +19,23 @@
 #ifndef CDISKCACHE_H
 #define CDISKCACHE_H
 
-#include "map/cache/IDiskCache.h"
-
 #include <QDir>
 #include <QHash>
 #include <QImage>
+#include <QMutex>
 
 class QTimer;
 
-class CDiskCache : public IDiskCache
+class CDiskCache : public QObject
 {
     Q_OBJECT
 public:
     CDiskCache(const QString& path, qint32 size, qint32 days, QObject *parent);
     virtual ~CDiskCache() = default;
 
-    void store(const QString& key, QImage& img) override;
-    void restore(const QString& key, QImage& img) override;
-    bool contains(const QString& key) const override;
+    void store(const QString& key, QImage& img);
+    void restore(const QString& key, QImage& img);
+    bool contains(const QString& key) const;
 
 private slots:
     void slotCleanup();
@@ -57,6 +56,8 @@ private:
     QTimer * timer;
 
     QImage dummy {256,256, QImage::Format_ARGB32};
+
+    mutable QMutex mutex;
 };
 
 #endif //CDISKCACHE_H

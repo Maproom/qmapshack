@@ -80,24 +80,10 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
   )
 
   install(
-    FILES
-      src/icons/48x48/QMapShack.png
+    DIRECTORY
+      src/icons/hicolor
     DESTINATION
-      ${ICON_INSTALL_DIR}/hicolor/48x48/apps
-  )
-
-  install(
-    FILES
-      src/icons/32x32/QMapShack.png
-    DESTINATION
-      ${ICON_INSTALL_DIR}/hicolor/32x32/apps
-  )
-
-  install(
-    FILES
-      src/icons/QMapShack.svg
-    DESTINATION
-      ${ICON_INSTALL_DIR}/hicolor/scalable/apps
+      ${ICON_INSTALL_DIR}
   )
 
   install(

@@ -69,6 +69,9 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 add_subdirectory(src)
+if(UNIX AND NOT APPLE)
+  add_subdirectory(test/unittest)
+endif(UNIX AND NOT APPLE)
 
 
 if (UNIX AND NOT WIN32 AND NOT APPLE)

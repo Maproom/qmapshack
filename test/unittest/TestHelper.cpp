@@ -21,7 +21,7 @@
 #include <QTemporaryFile>
 #include <QTest>
 
-#include "test/TestHelper.h"
+#include "TestHelper.h"
 
 QString TestHelper::getTempFileName(const QString &ext)
 {

@@ -727,7 +727,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     if(pTreHdr->flag & 0x80)
     {
-        throw exce_t(errLock,tr("File contains locked / encypted data. Garmin does not "
+        throw exce_t(errLock,tr("File contains locked / encrypted data. Garmin does not "
                                 "want you to use this file with any other software than "
                                 "the one supplied by Garmin."));
     }

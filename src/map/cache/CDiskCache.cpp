@@ -21,7 +21,7 @@
 #include <QtWidgets>
 
 CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationDays, QObject * parent)
-    : IDiskCache(parent)
+    : QObject(parent)
     , dir(path)
     , maxSizeMB(maxSizeMB)
     , expirationDays(expirationDays)

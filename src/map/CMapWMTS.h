@@ -26,7 +26,7 @@
 
 
 class CMapDraw;
-class IDiskCache;
+class CDiskCache;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QListWidgetItem;
@@ -116,7 +116,7 @@ private:
     /// a queue with all tile urls to request
     QQueue<QString> urlQueue;
     /// the tile cache
-    IDiskCache * diskCache = nullptr;
+    CDiskCache * diskCache = nullptr;
     /// access manager to request tiles
     QNetworkAccessManager * accessManager = nullptr;
 

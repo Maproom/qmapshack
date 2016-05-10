@@ -37,13 +37,8 @@ function(cxx_add_flag_if_supported flag)
     endif(Flag:${flag})
 endfunction(cxx_add_flag_if_supported)
 
-
-if(UNIX AND NOT APPLE)
-find_package(Qt5Test)
-endif(UNIX AND NOT APPLE)
-
 if(UNIX)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 endif(UNIX)
 
 if (APPLE)
@@ -756,51 +751,6 @@ target_link_libraries(${APPLICATION_NAME}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
 )
-
-if(UNIX AND NOT APPLE)
-    add_executable(qttest EXCLUDE_FROM_ALL
-        test/main.cpp
-        test/test_QMapShack.h
-        test/CGpxProject.cpp
-        test/CFitProject.cpp
-        test/CQmsProject.cpp
-        test/CSlfReader.cpp
-        test/CKnownExtension.cpp
-        test/TestHelper.cpp
-        test/CGisItemTrk.cpp
-        ${RC_SRCS})
-
-    # copy the input files required by the unittests to ./bin/input
-    file(COPY test/input DESTINATION ../bin)
-
-    target_link_libraries(qttest
-        Qt5::Widgets
-        Qt5::Xml
-        Qt5::Script
-        Qt5::Sql
-        Qt5::WebKitWidgets
-        Qt5::PrintSupport
-        Qt5::Test
-        QMS
-        ${DBUS_LIB}
-        ${GDAL_LIBRARIES}
-        ${PROJ_LIBRARIES}
-        ${ROUTINO_LIBRARIES}
-    )
-
-    add_custom_command(
-        OUTPUT tests_run.log
-        COMMAND qttest
-        DEPENDS qttest
-        COMMENT "Executing the Unittests"
-        VERBATIM
-    )
-
-    add_custom_target(
-        run_tests
-        DEPENDS tests_run.log
-    )
-endif(UNIX AND NOT APPLE)
 
 if(APPLE)
      target_link_libraries(${APPLICATION_NAME}

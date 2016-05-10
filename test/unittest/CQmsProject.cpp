@@ -16,41 +16,42 @@
 
 **********************************************************************************************/
 
-#include "test/TestHelper.h"
-#include "test/test_QMapShack.h"
-
-#include "gis/gpx/CGpxProject.h"
-#include "gis/trk/CGisItemTrk.h"
-
 #include <QtCore>
 
-void test_QMapShack::_filterDeleteExtension()
+#include "TestHelper.h"
+#include "test_QMapShack.h"
+
+#include "gis/gpx/CGpxProject.h"
+#include "gis/qms/CQmsProject.h"
+
+void test_QMapShack::_readQmsFile_1_6_0()
+{
+    IGisProject *proj1 = readProjFile("V1.6.0_file1.qms");
+    verify("V1.6.0_file1.qms", *proj1);
+    delete proj1;
+
+    IGisProject *proj2 = readProjFile("V1.6.0_file2.qms");
+    verify("V1.6.0_file2.qms", *proj2);
+    delete proj2;
+}
+
+void test_QMapShack::_writeReadQmsFile()
 {
     for(const QString &file : inputFiles)
     {
         IGisProject *proj = readProjFile(file);
 
-        expectedGisProject exp = TestHelper::readExpProj(fileToPath(file) + ".xml");
-        exp.changed = true; // filtering changes a project
-
-        for(int i = 0; i < proj->childCount(); i++)
-        {
-            CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(proj->child(i));
-            if(nullptr != trk)
-            {
-                expectedTrack &expTrk = exp.trks[trk->getName()];
-
-                while(!expTrk.extensions.empty())
-                {
-                    expectedExtension expExt = expTrk.extensions.take(expTrk.extensions.keys().first());
-
-                    trk->filterDeleteExtension(expExt.name);
-                    verify(exp, *proj);
-                }
-            }
-        }
+        QString tmpFile = TestHelper::getTempFileName("qms");
+        CQmsProject::saveAs(tmpFile, *proj);
 
         delete proj;
+
+        proj = readProjFile(tmpFile, true, false);
+        verify(file, *proj);
+
+        delete proj;
+
+        QFile(tmpFile).remove();
     }
 }
 

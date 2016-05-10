@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "test/TestHelper.h"
-#include "test/test_QMapShack.h"
+#include "TestHelper.h"
+#include "test_QMapShack.h"
 
 #include "gis/gpx/CGpxProject.h"
 #include "gis/trk/CGisItemTrk.h"

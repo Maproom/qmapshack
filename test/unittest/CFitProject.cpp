@@ -18,40 +18,16 @@
 
 #include <QtCore>
 
-#include "test/TestHelper.h"
-#include "test/test_QMapShack.h"
+#include "TestHelper.h"
+#include "test_QMapShack.h"
 
-#include "gis/gpx/CGpxProject.h"
-#include "gis/qms/CQmsProject.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/fit/CFitProject.h"
 
-void test_QMapShack::_readQmsFile_1_6_0()
+void test_QMapShack::_readValidFitFiles()
 {
-    IGisProject *proj1 = readProjFile("V1.6.0_file1.qms");
-    verify("V1.6.0_file1.qms", *proj1);
-    delete proj1;
-
-    IGisProject *proj2 = readProjFile("V1.6.0_file2.qms");
-    verify("V1.6.0_file2.qms", *proj2);
-    delete proj2;
-}
-
-void test_QMapShack::_writeReadQmsFile()
-{
-    for(const QString &file : inputFiles)
-    {
-        IGisProject *proj = readProjFile(file);
-
-        QString tmpFile = TestHelper::getTempFileName("qms");
-        CQmsProject::saveAs(tmpFile, *proj);
-
-        delete proj;
-
-        proj = readProjFile(tmpFile, true, false);
-        verify(file, *proj);
-
-        delete proj;
-
-        QFile(tmpFile).remove();
-    }
+    delete readProjFile("2015-05-07-22-03-17.fit");
+    delete readProjFile("Warisouderghem_course.fit");
+    delete readProjFile("2016-03-12_15-16-50_4_20.fit");
 }
 

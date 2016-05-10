@@ -16,17 +16,34 @@
 
 **********************************************************************************************/
 
-#include "test/test_QMapShack.h"
+#include "TestHelper.h"
+#include "test_QMapShack.h"
 
-#include "gis/prj/IGisProject.h"
+#include "gis/gpx/CGpxProject.h"
 
-void test_QMapShack::_readValidSLFFile()
+void test_QMapShack::writeReadGpxFile(const QString &file)
 {
-    verify("qtt_slf_file0.slf");
+    IGisProject *proj = readProjFile(file);
+
+    QString tmpFile = TestHelper::getTempFileName("gpx");
+    CGpxProject::saveAs(tmpFile, *proj);
+
+    delete proj;
+
+    proj = readProjFile(tmpFile, true, false);
+    verify(file, *proj);
+    delete proj;
+
+    QFile(tmpFile).remove();
 }
 
-void test_QMapShack::_readNonExistingSLFFile()
+void test_QMapShack::_writeReadGpxFile()
 {
-    delete readProjFile("qtt_slf_DOES_NOT_EXIST.slf", false, false);
+    writeReadGpxFile("qtt_gpx_file0.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_gpxtpx.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_tp1.gpx");
+    writeReadGpxFile("gpx_ext_GarminTPX1_cns.gpx");
+    writeReadGpxFile("V1.6.0_file1.qms");
+    writeReadGpxFile("V1.6.0_file2.qms");
 }
 

@@ -19,7 +19,7 @@
 #include <QTest>
 #include <QtCore>
 
-#include "test/TestHelper.h"
+#include "TestHelper.h"
 
 class IGisProject;
 class CGpxProject;
@@ -73,13 +73,13 @@ class test_QMapShack : public QObject
 private slots:
     void initTestCase();
 
-    void readValidSLFFile()         { TCWRAPPER( _readValidSLFFile()         ) }
-    void readNonExistingSLFFile()   { TCWRAPPER( _readNonExistingSLFFile()   ) }
-    void writeReadGpxFile()         { TCWRAPPER( _writeReadGpxFile()         ) }
-    void readQmsFile_1_6_0()        { TCWRAPPER( _readQmsFile_1_6_0()        ) }
-    void writeReadQmsFile()         { TCWRAPPER( _writeReadQmsFile()         ) }
-    void readExtGarminTPX1_gpxtpx() { TCWRAPPER( _readExtGarminTPX1_gpxtpx() ) }
-    void readExtGarminTPX1_tp1()    { TCWRAPPER( _readExtGarminTPX1_tp1()    ) }
-    void readValidFitFiles()        { TCWRAPPER( _readValidFitFiles()        ) }
-    void filterDeleteExtension()    { TCWRAPPER( _filterDeleteExtension()    ) }
+    void testreadValidSLFFile()         { TCWRAPPER( _readValidSLFFile()         ) }
+    void testreadNonExistingSLFFile()   { TCWRAPPER( _readNonExistingSLFFile()   ) }
+    void testwriteReadGpxFile()         { TCWRAPPER( _writeReadGpxFile()         ) }
+    void testreadQmsFile_1_6_0()        { TCWRAPPER( _readQmsFile_1_6_0()        ) }
+    void testwriteReadQmsFile()         { TCWRAPPER( _writeReadQmsFile()         ) }
+    void testreadExtGarminTPX1_gpxtpx() { TCWRAPPER( _readExtGarminTPX1_gpxtpx() ) }
+    void testreadExtGarminTPX1_tp1()    { TCWRAPPER( _readExtGarminTPX1_tp1()    ) }
+    void testreadValidFitFiles()        { TCWRAPPER( _readValidFitFiles()        ) }
+    void testfilterDeleteExtension()    { TCWRAPPER( _filterDeleteExtension()    ) }
 };

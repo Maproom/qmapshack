@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
+    Copyright (C) 2015 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,17 @@
 
 **********************************************************************************************/
 
-#include <QtCore>
-
-#include "test/TestHelper.h"
-#include "test/test_QMapShack.h"
+#include "test_QMapShack.h"
 
 #include "gis/prj/IGisProject.h"
-#include "gis/fit/CFitProject.h"
 
-void test_QMapShack::_readValidFitFiles()
+void test_QMapShack::_readValidSLFFile()
 {
-    delete readProjFile("2015-05-07-22-03-17.fit");
-    delete readProjFile("Warisouderghem_course.fit");
-    delete readProjFile("2016-03-12_15-16-50_4_20.fit");
+    verify("qtt_slf_file0.slf");
+}
+
+void test_QMapShack::_readNonExistingSLFFile()
+{
+    delete readProjFile("qtt_slf_DOES_NOT_EXIST.slf", false, false);
 }
 

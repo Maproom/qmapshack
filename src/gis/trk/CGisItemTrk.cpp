@@ -1261,6 +1261,7 @@ bool CGisItemTrk::isWithin(const QRectF& area, selflags_t flags)
 void CGisItemTrk::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();
+    widthInfoBox = MIN_WIDTH_INFO_BOX;
 }
 
 void CGisItemTrk::looseUserFocus()
@@ -1966,7 +1967,19 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        QRect rectText = fm.boundingRect(QRect(0,0,widthInfoBox,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+
+        // The initial minimum size of the box will be MIN_WIDTH_INFO_BOX.
+        // If a larger box is needed the minimum grows. By that the width
+        // of the box will only grow but not jump between sizes
+        if(rectText.width() < widthInfoBox)
+        {
+            rectText.setWidth(widthInfoBox);
+        }
+        else
+        {
+            widthInfoBox = rectText.width();
+        }
 
         // create info box
         int w = rectText.width()  + 5 + 5;

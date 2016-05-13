@@ -1005,12 +1005,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1534"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1535"/>
         <source>Hide point %1.</source>
         <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1538"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1539"/>
         <source>Hide points %1..%2.</source>
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
@@ -1091,47 +1091,47 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1379"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1380"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2133"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2146"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2139"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2152"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2145"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2158"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2151"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2164"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2162"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Höhe von Punkt %1 auf %2 %3 geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2189"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2202"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2247"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2260"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
@@ -2421,6 +2421,10 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="730"/>
+        <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
+        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+    </message>
+    <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
@@ -3742,12 +3746,17 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="122"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="130"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="133"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="101"/>
+        <source>Double click to edit elevation value</source>
+        <translation>Doppelt klicken, um die Höhe zu ändern.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="127"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="135"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="138"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="152"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="154"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="143"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="159"/>
         <source>%1 %2</source>
         <translation></translation>
     </message>

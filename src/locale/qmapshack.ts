@@ -1001,12 +1001,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1534"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1535"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1538"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1539"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1087,47 +1087,47 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1379"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1380"/>
         <source>Permanently removed points %1..%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1579"/>
         <source>Show points.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2133"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2146"/>
         <source>Changed name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2139"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2152"/>
         <source>Changed comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2145"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2158"/>
         <source>Changed description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2151"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2164"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2162"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2189"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2202"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2247"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2260"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2408,7 +2408,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="730"/>
-        <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
+        <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3714,12 +3714,17 @@ line %2, column %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="122"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="130"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="133"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="101"/>
+        <source>Double click to edit elevation value</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="127"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="135"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="138"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="152"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="154"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="143"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="159"/>
         <source>%1 %2</source>
         <translation type="unfinished"></translation>
     </message>

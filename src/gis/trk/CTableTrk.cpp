@@ -96,6 +96,11 @@ void CTableTrk::updateData()
             item->setTextAlignment(eColDescend, Qt::AlignRight);
             item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
+            if(!trk->isReadOnly())
+            {
+                item->setToolTip(eColEle, tr("Double click to edit elevation value"));
+            }
+
             QBrush bg = item->background(0);
             if(trkpt.isInvalid(CGisItemTrk::trkpt_t::invalid_e(invalidMask)))
             {
@@ -180,6 +185,11 @@ void CTableTrk::slotItemSelectionChanged()
 
 void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
 {
+    if(trk->isReadOnly())
+    {
+        return;
+    }
+
     qint32 idx = item->text(eColNum).toInt();
     qint32 ele = trk->getElevation(idx);
     qreal lon, lat;
@@ -194,6 +204,5 @@ void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
         {
             trk->setElevation(idx, var.toInt());
         }
-
     }
 }

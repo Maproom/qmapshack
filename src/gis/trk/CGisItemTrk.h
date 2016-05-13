@@ -47,6 +47,7 @@ class CFitStream;
 
 #define TRK_N_COLORS          17
 #define ASCEND_THRESHOLD       5
+#define MIN_WIDTH_INFO_BOX   300
 
 class CGisItemTrk : public IGisItem, public IGisLine
 {
@@ -951,6 +952,8 @@ private:
     qint32 penWidthFg = 3;  //< inner trackline width
     qint32 penWidthBg = 5;  //< outer trackline width
     qint32 penWidthHi = 11; //< highlighted trackline width
+
+    qint32 widthInfoBox = MIN_WIDTH_INFO_BOX;
 
     /// the pen with the actual track color
     QPen penForeground {Qt::blue, qreal(penWidthFg), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin};

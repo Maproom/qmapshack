@@ -128,7 +128,7 @@ void CMapItem::updateIcon()
         img = QPixmap("://icons/32x32/MimeGEMF.png");
     }
 
-    setIcon(0,QIcon(img));
+    setIcon(/* col */ 0, QIcon(img));
 }
 
 bool CMapItem::isActivated()
@@ -167,6 +167,8 @@ void CMapItem::deactivate()
 
     // deny drag-n-drop again
     setFlags(flags() & ~Qt::ItemIsDragEnabled);
+
+    map->reportStatusToCanvas(text(0), "");
 }
 
 

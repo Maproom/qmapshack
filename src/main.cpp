@@ -38,8 +38,6 @@ int main(int argc, char ** argv)
     env->initLogHandler();
     env->initQMapShack();
 
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
-
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)
     {
@@ -63,6 +61,8 @@ int main(int argc, char ** argv)
 
     uint seed = QDateTime::currentDateTime().toTime_t();
     qsrand(seed);
+
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     CMainWindow w;
     w.show();

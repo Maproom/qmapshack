@@ -21,6 +21,7 @@
 #include "version.h"
 
 #include <QtWidgets>
+#include <QNetworkProxyFactory>
 #include <iostream>
 
 
@@ -36,6 +37,8 @@ int main(int argc, char ** argv)
     env->processArguments();
     env->initLogHandler();
     env->initQMapShack();
+
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)

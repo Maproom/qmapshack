@@ -67,7 +67,7 @@ void CMapVrtBuilder::slotSelectTargetFile()
     SETTINGS;
     QString path = cfg.value("VrtBuilder/targetPath",QDir::homePath()).toString();
 
-    QString file = QFileDialog::getSaveFileName(this, tr("Select target file..."), path);
+    QString file = QFileDialog::getSaveFileName(this, tr("Select target file..."), path, "GDAL vrt (*.vrt)");
     if(file.isEmpty())
     {
         return;

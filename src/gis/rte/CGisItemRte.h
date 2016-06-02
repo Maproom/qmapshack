@@ -187,10 +187,10 @@ public:
     void setLinks(const QList<link_t>& links) override;
 
     void calc();
-
     void reset();
-
     void edit() override;
+    void toTrack();
+
 
     QPointF setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, const QString &owner);
 

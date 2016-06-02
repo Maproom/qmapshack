@@ -76,7 +76,6 @@ void CElevationDialog::slotReset()
         IUnit::self().meter2elevation(val.toDouble(), str, unit);
         lineValue->setText(str);
     }
-
 }
 
 void CElevationDialog::slotGetEle()

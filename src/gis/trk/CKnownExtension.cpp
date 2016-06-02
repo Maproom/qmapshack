@@ -40,13 +40,13 @@ static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 
 bool CKnownExtension::registerNS(const QString &ns)
 {
-   if(!registeredNS.contains(ns))
-   {
-       registeredNS.insert(ns);
-       return true;
-   }
+    if(!registeredNS.contains(ns))
+    {
+        registeredNS.insert(ns);
+        return true;
+    }
 
-   return false;
+    return false;
 }
 
 void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)

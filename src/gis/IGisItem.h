@@ -531,6 +531,7 @@ protected:
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
     bool isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points);
 
+    static bool getNameAndProject(QString &name, IGisProject *&project, const QString &itemtype);
     /**
        @brief Converts a string with HTML tags to a string without HTML depending on the device
 

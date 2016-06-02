@@ -324,17 +324,6 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
     }
 }
 
-bool CGisItemTrk::getNameAndProject(QString &name, IGisProject *&project)
-{
-    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name);
-    if(name.isEmpty())
-    {
-        return false;
-    }
-
-    project = CGisWidget::self().selectProject();
-    return nullptr != project;
-}
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
@@ -1314,7 +1303,7 @@ bool CGisItemTrk::cut()
         {
             QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
             IGisProject *project = nullptr;
-            if(!getNameAndProject(name, project))
+            if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
@@ -1327,7 +1316,7 @@ bool CGisItemTrk::cut()
         {
             QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
             IGisProject *project = nullptr;
-            if(!getNameAndProject(name, project))
+            if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
@@ -1387,7 +1376,7 @@ void CGisItemTrk::reverse()
 {
     QString name = getName() + "_rev";
     IGisProject *project = nullptr;
-    if(!getNameAndProject(name, project))
+    if(!getNameAndProject(name, project, tr("track")))
     {
         return;
     }
@@ -1431,7 +1420,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 
     QString name = getName() + " & other";
     IGisProject *projectNew = nullptr;
-    if(!getNameAndProject(name, projectNew))
+    if(!getNameAndProject(name, projectNew, tr("track")))
     {
         return;
     }
@@ -1596,7 +1585,7 @@ void CGisItemTrk::copySelectedPoints() const
 
     QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
     IGisProject *project = nullptr;
-    if(!getNameAndProject(name, project))
+    if(!getNameAndProject(name, project, tr("track")))
     {
         return;
     }

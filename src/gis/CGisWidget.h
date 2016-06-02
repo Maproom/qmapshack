@@ -321,6 +321,8 @@ public:
 
     void focusRteByKey(bool yes, const IGisItem::key_t &key);
 
+    void convertRouteToTrack(const IGisItem::key_t &key);
+
 
     void cutTrkByKey(const IGisItem::key_t &key);
 

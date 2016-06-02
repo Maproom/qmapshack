@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/trk/CTableTrk.h"
-#include "helpers/CSettings.h"
 #include "helpers/CElevationDialog.h"
+#include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
 

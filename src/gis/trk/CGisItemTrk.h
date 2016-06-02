@@ -648,10 +648,8 @@ private:
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
 
-    static bool getNameAndProject(QString &name, IGisProject *&project);
-
     const trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const;
-    
+
     trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond);
 
     /**

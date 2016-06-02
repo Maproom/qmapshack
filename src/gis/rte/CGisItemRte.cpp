@@ -27,6 +27,7 @@
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
 
 #include <QtWidgets>
@@ -234,6 +235,28 @@ void CGisItemRte::edit()
 {
     CDetailsRte dlg(*this, CMainWindow::getBestWidgetForParent());
     dlg.exec();
+}
+
+void CGisItemRte::toTrack()
+{
+    QString name;
+    IGisProject * project;
+
+    if(!getNameAndProject(name, project, tr("track")))
+    {
+        return;
+    }
+
+    SGisLine line;
+    getPolylineFromData(line);
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->getElevationAt(line);
+    }
+
+    new CGisItemTrk(line, name, project, -1);
 }
 
 void CGisItemRte::setSymbol()

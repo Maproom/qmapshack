@@ -416,7 +416,6 @@ qreal CMainWindow::getElevationAt(const QPointF& pos) const
             if(canvas)
             {
                 return canvas->getElevationAt(pos);
-
             }
         }
     }

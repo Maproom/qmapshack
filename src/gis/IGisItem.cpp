@@ -22,6 +22,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
+#include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/db/macros.h"
 #include "gis/prj/IGisProject.h"
@@ -835,4 +836,16 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     }
 
     return false;
+}
+
+bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QString& itemtype)
+{
+    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new %1 name.").arg(itemtype), QLineEdit::Normal, name);
+    if(name.isEmpty())
+    {
+        return false;
+    }
+
+    project = CGisWidget::self().selectProject();
+    return nullptr != project;
 }

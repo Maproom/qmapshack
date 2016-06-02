@@ -93,6 +93,7 @@ private slots:
     void slotCalcRte();
     void slotResetRte();
     void slotEditRte();
+    void slotRte2Trk();
     void slotEditArea();
     void slotAddEmptyProject();
     void slotCloseAllProjects();
@@ -151,6 +152,7 @@ private:
     QAction * actionCalcRte;
     QAction * actionResetRte;
     QAction * actionEditRte;
+    QAction * actionRte2Trk;
     QAction * actionEditArea;
     QAction * actionRteFromWpt;
 

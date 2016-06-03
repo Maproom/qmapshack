@@ -62,7 +62,9 @@ public:
 
         QString instruction;
         qreal distance = 0;
-        quint32 time = 0;
+        QDateTime time;
+
+        qint32 ele = NOINT;
     };
 
     struct rtept_t : public wpt_t
@@ -93,6 +95,14 @@ public:
         QString type;
         QVector<rtept_t> pts;
         // -- all gpx tags - stop
+
+        QString lastRoutedWith;
+        QDateTime lastRoutedTime;
+
+        qreal totalDistance = NOFLOAT;
+        quint32 totalTime = 0;
+        qreal ascend  = NOFLOAT;
+        qreal descend = NOFLOAT;
     };
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);
@@ -201,6 +211,7 @@ public:
 
 private:
     void deriveSecondaryData();
+    void setElevation(qreal ele, subpt_t &subpt, qreal &lastEle);
     void setSymbol() override;
     void readRte(const QDomNode& xml, rte_t& rte);
     void readRteFromFit(CFitStream &stream);
@@ -216,11 +227,6 @@ private:
     rte_t rte;
     QPolygonF line;
 
-    QString lastRoutedWith;
-    QDateTime lastRoutedTime;
-
-    qreal totalDistance = NOFLOAT;
-    quint32 totalTime = 0;
 
     const subpt_t * mouseMoveFocus = nullptr;
 

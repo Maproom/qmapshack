@@ -56,6 +56,9 @@
             <string>-
 -</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -77,6 +80,9 @@
             <string>-
 -</string>
            </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+           </property>
           </widget>
          </item>
          <item>
@@ -97,6 +103,9 @@
            <property name="text">
             <string>-
 -</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
            </property>
           </widget>
          </item>
@@ -1606,10 +1615,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>
 </ui>

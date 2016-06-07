@@ -552,11 +552,22 @@ QString CGisItemTrk::getInfoRange() const
 QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt) const
 {
     QString str, val1, unit1;
+
+    if(pt.idxTotal == pt.idxVisible)
+    {
+        str += tr("Index: %1").arg(pt.idxVisible);
+    }
+    else
+    {
+        str += tr("Index: visible %1, total %2").arg(pt.idxVisible).arg(pt.idxTotal);
+    }
+    str += "\n";
+
     if(totalElapsedSeconds != 0)
     {
         str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD);
+        str += "\n";
     }
-    str += "\n";
 
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
     str += tr("Ele.: %1 %2").arg(val1).arg(unit1);
@@ -1933,6 +1944,7 @@ const QString CGisItemTrk::getColorizeUnit() const
     return CKnownExtension::get(getColorizeSource()).unit;
 }
 
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QMutexLocker lock(&mutexItems);
@@ -2026,15 +2038,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        }
 
-            p.translate(0,fm.height() + 5);
-        }
-        else
-        {
-            p.translate(0, 5);
-        }
         // draw text
-        p.translate(0, 3);
+        p.translate(0,fm.height() + 8);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap,str);
 

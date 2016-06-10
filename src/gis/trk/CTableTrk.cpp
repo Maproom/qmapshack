@@ -149,7 +149,7 @@ void CTableTrk::updateData()
 
             item->setText(eColSlope,
                           (trkpt.slope1 != NOFLOAT)
-                          ? QString("%1°(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0)
+                          ? QString("%1%3(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0).arg(QChar(0x00b0))
                           : "-"
                           );
 

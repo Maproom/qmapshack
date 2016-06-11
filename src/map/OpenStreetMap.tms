@@ -3,7 +3,7 @@
  <MinZoomLevel>2</MinZoomLevel>
  <MaxZoomLevel>19</MaxZoomLevel>
  <Layer idx="0">
-  <ServerUrl>https://c.tile.openstreetmap.org/%1/%2/%3.png</ServerUrl>
+  <ServerUrl>http://c.tile.openstreetmap.org/%1/%2/%3.png</ServerUrl>
  </Layer>
  <RawHeader>
    <Value name="User-Agent">Agent Smith</Value>

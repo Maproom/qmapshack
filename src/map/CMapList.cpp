@@ -74,7 +74,7 @@ CMapList::CMapList(QWidget *parent)
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
     connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
     connect(pushMapHonk,    &QPushButton::clicked,                       this, &CMapList::slotMapHonk);
-
+    connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CMapList::slotLinkActivated);
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -256,4 +256,12 @@ void CMapList::slotMapHonk()
 void CMapList::slotReloadMaps()
 {
     CMapDraw::setupMapPath(CMapDraw::getMapPaths());
+}
+
+void CMapList::slotLinkActivated(const QString& link)
+{
+    if(link == "setup")
+    {
+        emit sigSetupMapPath();
+    }
 }

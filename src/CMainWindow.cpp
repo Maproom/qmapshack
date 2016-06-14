@@ -372,11 +372,13 @@ bool CMainWindow::profileIsWindow() const
 void CMainWindow::addMapList(CMapList * list, const QString &name)
 {
     tabMaps->addTab(list,name);
+    connect(list, &CMapList::sigSetupMapPath, this, &CMainWindow::slotSetupMapPath);
 }
 
 void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
     tabDem->addTab(list,name);
+    connect(list, &CDemList::sigSetupDemPath, this, &CMainWindow::slotSetupDemPath);
 }
 
 void CMainWindow::addWidgetToTab(QWidget * w)

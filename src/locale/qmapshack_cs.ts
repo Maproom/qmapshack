@@ -182,14 +182,17 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Enter new route name.</source>
-        <translation>Zadat nový název pro cestu.</translation>
+        <translation type="vanished">Zadat nový název pro cestu.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3023,14 +3026,17 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit oblast&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <source>area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Upravit název...</translation>
+    </message>
+    <message>
         <source>Enter new area name.</source>
-        <translation>Zadat název nové oblasti.</translation>
+        <translation type="vanished">Zadat název nové oblasti.</translation>
     </message>
 </context>
 <context>
@@ -3047,14 +3053,17 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Upravit název...</translation>
+    </message>
+    <message>
         <source>Enter new route name.</source>
-        <translation>Zadat nový název pro cestu.</translation>
+        <translation type="vanished">Zadat nový název pro cestu.</translation>
     </message>
 </context>
 <context>
@@ -3085,14 +3094,17 @@ Neznámá stavba.</translation>
         <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <source>track</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Upravit název...</translation>
+    </message>
+    <message>
         <source>Enter new track name.</source>
-        <translation>Zadat název nové stopy.</translation>
+        <translation type="vanished">Zadat název nové stopy.</translation>
     </message>
 </context>
 <context>

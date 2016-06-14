@@ -94,13 +94,9 @@ void CMouseEditRte::slotCopyToNew()
         return;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
-    {
-        return;
-    }
 
-    /// @todo make this independent from track
+    IGisProject * project = nullptr;
+
     QString name;
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
     if(rte != nullptr)
@@ -108,12 +104,11 @@ void CMouseEditRte::slotCopyToNew()
         name = rte->getName();
     }
 
-    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new route name."), QLineEdit::Normal, name);
-
-    if(name.isEmpty())
+    if(!IGisItem::getNameAndProject(name, project, tr("route")))
     {
         return;
     }
+
 
     new CGisItemRte(points,name, project, NOIDX);
 

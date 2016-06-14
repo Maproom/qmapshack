@@ -178,13 +178,12 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Editar nombre...</translation>
+        <translation type="obsolete">Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <source>Enter new route name.</source>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <source>route</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2968,14 +2967,17 @@ Estructura desconocida.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Editar nombre...</translation>
+        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <source>area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
+        <source>Edit name...</source>
+        <translation type="obsolete">Editar nombre...</translation>
+    </message>
+    <message>
         <source>Enter new area name.</source>
-        <translation type="unfinished">Introduzca el nombre del nuevo área.</translation>
+        <translation type="obsolete">Introduzca el nombre del nuevo área.</translation>
     </message>
 </context>
 <context>
@@ -2992,14 +2994,13 @@ Estructura desconocida.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Editar nombre...</translation>
+        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Enter new route name.</source>
-        <translation type="unfinished"></translation>
+        <source>Edit name...</source>
+        <translation type="obsolete">Editar nombre...</translation>
     </message>
 </context>
 <context>
@@ -3030,14 +3031,17 @@ Estructura desconocida.</translation>
         <translation type="unfinished">Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Editar nombre...</translation>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <source>track</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
+        <source>Edit name...</source>
+        <translation type="obsolete">Editar nombre...</translation>
+    </message>
+    <message>
         <source>Enter new track name.</source>
-        <translation type="unfinished">Introduzca el nombre del nuevo track.</translation>
+        <translation type="obsolete">Introduzca el nombre del nuevo track.</translation>
     </message>
 </context>
 <context>

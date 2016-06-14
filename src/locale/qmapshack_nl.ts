@@ -174,13 +174,12 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Edit name...</source>
-        <translation>Bewerk naam...</translation>
+        <translation type="vanished">Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <source>Enter new route name.</source>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <source>route</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2917,14 +2916,17 @@ Onbekende structuur.</translation>
         <translation>&lt;b&gt;Bewerk gebied&lt;/b&gt;&lt;br/&gt;Selecteer een functie en een routeoptie via de gereedschapknoppen. Selecteer dan een punt op de lijn. Alleen zwarte vierkante punten kunnen gewijzigd worden. De ronde zwarte subpunten niet.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Edit name...</source>
-        <translation>Bewerk naam...</translation>
+        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <source>area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Bewerk naam...</translation>
+    </message>
+    <message>
         <source>Enter new area name.</source>
-        <translation>Geef gebied een nieuwe naam.</translation>
+        <translation type="vanished">Geef gebied een nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -2941,14 +2943,17 @@ Onbekende structuur.</translation>
         <translation>&lt;b&gt;Bewerk route punten&lt;/b&gt;&lt;br/&gt;Selecteer een functie en een routeoptie via de gereedschapknoppen. Selecteer dan een punt op de lijn. Alleen zwarte vierkante punten kunnen gewijzigd worden. De ronde zwarte subpunten niet.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Edit name...</source>
-        <translation>Bewerk naam...</translation>
+        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Bewerk naam...</translation>
+    </message>
+    <message>
         <source>Enter new route name.</source>
-        <translation>Geef  route een nieuwe naam.</translation>
+        <translation type="vanished">Geef  route een nieuwe naam.</translation>
     </message>
 </context>
 <context>
@@ -2975,14 +2980,17 @@ Onbekende structuur.</translation>
         <translation>Dit zal alle gegevens overschrijven van het origineel door een simpele lijn met coördinaten. Alle andere gegevens zullen verloren gaan.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Edit name...</source>
-        <translation>Bewerk naam...</translation>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <source>track</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
+        <source>Edit name...</source>
+        <translation type="vanished">Bewerk naam...</translation>
+    </message>
+    <message>
         <source>Enter new track name.</source>
-        <translation>Geef track nieuwe naam.</translation>
+        <translation type="vanished">Geef track nieuwe naam.</translation>
     </message>
 </context>
 <context>

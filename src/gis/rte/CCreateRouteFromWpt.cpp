@@ -62,14 +62,10 @@ void CCreateRouteFromWpt::accept()
 {
     QDialog::accept();
 
-    QString name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new route name."), QLineEdit::Normal, "");
-    if(name.isEmpty())
-    {
-        return;
-    }
+    QString name;
+    IGisProject *project = nullptr;
 
-    IGisProject *project = CGisWidget::self().selectProject();
-    if(nullptr == project)
+    if(!IGisItem::getNameAndProject(name, project, tr("route")))
     {
         return;
     }

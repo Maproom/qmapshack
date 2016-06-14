@@ -174,14 +174,17 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Edit name...</source>
-        <translation type="unfinished">Éditer le nom...</translation>
+        <translation type="obsolete">Éditer le nom...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
         <source>Enter new route name.</source>
-        <translation type="unfinished">Entrez le nom de la nouvelle route.</translation>
+        <translation type="obsolete">Entrez le nom de la nouvelle route.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2929,14 +2932,17 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Éditer la surface&lt;/b&gt;&lt;br/&gt;Choisissez und fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seulement les points marqués d&apos;un carré large peuvet être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Éditer le nom...</translation>
+        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <source>area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
+        <source>Edit name...</source>
+        <translation type="obsolete">Éditer le nom...</translation>
+    </message>
+    <message>
         <source>Enter new area name.</source>
-        <translation type="unfinished">Entrez le nom de la nouvelle surface.</translation>
+        <translation type="obsolete">Entrez le nom de la nouvelle surface.</translation>
     </message>
 </context>
 <context>
@@ -2953,14 +2959,17 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Éditer les points de la route&lt;/b&gt;&lt;br/&gt;Choisissez une fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seul les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Éditer le nom...</translation>
+        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
+        <source>Edit name...</source>
+        <translation type="obsolete">Éditer le nom...</translation>
+    </message>
+    <message>
         <source>Enter new route name.</source>
-        <translation type="unfinished">Entrez le nom de la nouvelle route.</translation>
+        <translation type="obsolete">Entrez le nom de la nouvelle route.</translation>
     </message>
 </context>
 <context>
@@ -2991,14 +3000,17 @@ Structure inconnue.</translation>
         <translation>La trace obtenue ne contiendra que des données de position. Toutes les autres données (altitude, temps, etc...) seront perdues.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Edit name...</source>
-        <translation type="unfinished">Éditer le nom...</translation>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <source>track</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
+        <source>Edit name...</source>
+        <translation type="obsolete">Éditer le nom...</translation>
+    </message>
+    <message>
         <source>Enter new track name.</source>
-        <translation type="unfinished">Entrez le nom de la nouvelle trace.</translation>
+        <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
         <source>This will replace all data of the orignal by a simple line of coordinates. All other data will be lost permanently.</source>

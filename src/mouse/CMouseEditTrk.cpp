@@ -99,13 +99,9 @@ void CMouseEditTrk::slotCopyToNew()
         return;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
-    if(nullptr == project)
-    {
-        return;
-    }
 
-    /// @todo make this independent from track
+    IGisProject * project = nullptr;
+
     QString name;
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
     if(trk != nullptr)
@@ -113,12 +109,11 @@ void CMouseEditTrk::slotCopyToNew()
         name = trk->getName();
     }
 
-    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name);
-
-    if(name.isEmpty())
+    if(!IGisItem::getNameAndProject(name, project, tr("track")))
     {
         return;
     }
+
 
     CMainWindow::self().getElevationAt(points);
 

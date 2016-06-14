@@ -174,13 +174,8 @@
 <context>
     <name>CCreateRouteFromWpt</name>
     <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <source>Edit name...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="65"/>
-        <source>Enter new route name.</source>
+        <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
+        <source>route</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2725,13 +2720,8 @@ Unknown structure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Edit name...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="100"/>
-        <source>Enter new area name.</source>
+        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <source>area</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2749,13 +2739,8 @@ Unknown structure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Edit name...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="111"/>
-        <source>Enter new route name.</source>
+        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <source>route</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2783,13 +2768,8 @@ Unknown structure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Edit name...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="116"/>
-        <source>Enter new track name.</source>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <source>track</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

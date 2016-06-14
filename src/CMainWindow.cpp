@@ -156,6 +156,7 @@ CMainWindow::CMainWindow()
         connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
+    testForNoView();
 
     actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
     actionShowGrid->setChecked       (cfg.value("isGridVisible",    false).toBool());
@@ -500,6 +501,8 @@ void CMainWindow::slotAddCanvas()
     connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
 
     tabWidget->setCurrentWidget(canvas);
+
+    testForNoView();
 }
 
 void CMainWindow::slotCloneCanvas()
@@ -538,6 +541,29 @@ void CMainWindow::slotCloneCanvas()
     cfg.endGroup();
     cfg.endGroup();
     cfg.endGroup();
+
+    testForNoView();
+}
+
+void CMainWindow::testForNoView()
+{
+    if(tabWidget->count() == 0)
+    {
+        QLabel * label = new QLabel(tabWidget);
+        label->setAlignment(Qt::AlignCenter);
+        label->setWordWrap(true);
+        label->setText(tr("Use <b>View->Add Map View</b> to open a new view. Or <b>File->Load Map View</b> to restore a saved one."));
+        label->setObjectName("NoViewInfo");
+        tabWidget->addTab(label, "*");
+        return;
+    }
+
+    QLabel * label = tabWidget->findChild<QLabel*>("NoViewInfo");
+
+    if(label && tabWidget->count() > 1)
+    {
+        delete label;
+    }
 }
 
 void CMainWindow::slotTabCloseRequest(int i)
@@ -545,6 +571,8 @@ void CMainWindow::slotTabCloseRequest(int i)
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
     delete tabWidget->widget(i);
+
+    testForNoView();
 }
 
 static inline bool compareNames(QString s1, QString s2)

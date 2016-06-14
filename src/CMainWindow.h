@@ -131,6 +131,7 @@ private:
     CMainWindow();
     void loadGISData(const QStringList& filenames);
     void prepareMenuForMac();
+    void testForNoView();
 
     static CMainWindow * pSelf;
 

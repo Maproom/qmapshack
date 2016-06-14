@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr">
+<TS version="2.1" language="fr">
 <context>
     <name>CAbout</name>
     <message>
@@ -531,15 +531,15 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation>distance : %1%2</translation>
+        <translation type="vanished">distance : %1%2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation>montée : %1%2</translation>
+        <translation type="vanished">montée : %1%2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation>descente : %1%2</translation>
+        <translation type="vanished">descente : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="749"/>
@@ -1978,33 +1978,38 @@ ligne %2, colonne %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="654"/>
+        <location filename="../CMainWindow.cpp" line="557"/>
+        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="684"/>
         <source>Ele: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="670"/>
+        <location filename="../CMainWindow.cpp" line="700"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="805"/>
+        <location filename="../CMainWindow.cpp" line="835"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
@@ -2627,7 +2632,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas d&apos;utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
+        <translation type="vanished">Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas d&apos;utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -4050,21 +4055,21 @@ ligne %2, colonne %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation type="unfinished">Erreur...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation type="unfinished">Impossible d&apos;ouvrir %1</translation>
     </message>
@@ -4558,11 +4563,11 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
+        <translation type="vanished">Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
-        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
+        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5300,7 +5305,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation>Cacher les points aux coordonnées invalides du début de la trace.</translation>
+        <translation type="vanished">Cacher les points aux coordonnées invalides du début de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -6198,11 +6203,11 @@ Nom de fichier: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
+        <translation type="vanished">Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
-        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
+        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6775,7 +6780,7 @@ or
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
         <translatorcomment>tbc: setup tool button</translatorcomment>
-        <translation>Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données de calcul d&apos;itinéraire locales. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
+        <translation type="vanished">Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données de calcul d&apos;itinéraire locales. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
     </message>
 </context>
 <context>

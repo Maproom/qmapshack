@@ -2065,33 +2065,38 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="654"/>
+        <location filename="../CMainWindow.cpp" line="557"/>
+        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="684"/>
         <source>Ele: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="670"/>
+        <location filename="../CMainWindow.cpp" line="700"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="805"/>
+        <location filename="../CMainWindow.cpp" line="835"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
@@ -4179,21 +4184,21 @@ line %2, column %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Chyba...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Nepodařilo se otevřít %1.</translation>
     </message>
@@ -4715,9 +4720,13 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
         <translation type="vanished">Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
-        <translation>Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
+        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="118"/>
+        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
@@ -6397,9 +6406,13 @@ Název souboru: %1</translation>
         <translation type="vanished">Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
-        <translation>Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
+        <translation type="vanished">Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="103"/>
+        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>

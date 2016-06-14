@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -508,15 +508,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation type="vanished">Entfernung: %1 %2</translation>
+        <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation type="vanished">Anstieg: %1 %2</translation>
+        <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation type="vanished">Abstieg: %1 %2</translation>
+        <translation>Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="749"/>
@@ -1118,11 +1118,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="413"/>
@@ -1196,7 +1196,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation type="vanished">Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
+        <translation>Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
@@ -1833,33 +1833,42 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="654"/>
+        <source>Use &lt;b&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
+        <translation type="obsolete">Benützen Sie &lt;b&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="557"/>
+        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
+        <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="684"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="670"/>
+        <location filename="../CMainWindow.cpp" line="700"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="805"/>
+        <location filename="../CMainWindow.cpp" line="835"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
@@ -2485,7 +2494,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation type="vanished">Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -3831,21 +3840,21 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Die Datei %1 konnte nicht geöffnet werden.</translation>
     </message>
@@ -4309,9 +4318,13 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="118"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
         <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="118"/>
+        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
+        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="131"/>
@@ -5022,7 +5035,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation type="vanished">Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
+        <translation>Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -5919,9 +5932,13 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
         <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="103"/>
+        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
+        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
@@ -7731,7 +7748,7 @@ sein</translation>
     </message>
     <message>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation type="vanished">Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
+        <translation>Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
     </message>
 </context>
 </TS>

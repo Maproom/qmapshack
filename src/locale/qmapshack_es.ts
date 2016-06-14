@@ -2017,33 +2017,38 @@ línea %2, columna %3.
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="654"/>
+        <location filename="../CMainWindow.cpp" line="557"/>
+        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="684"/>
         <source>Ele: %1%2</source>
         <translation>Alt: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="670"/>
+        <location filename="../CMainWindow.cpp" line="700"/>
         <source>[Grid: %1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="805"/>
+        <location filename="../CMainWindow.cpp" line="835"/>
         <source>Load GIS Data...</source>
         <translation>Cargar Datos GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="839"/>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="869"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="865"/>
+        <location filename="../CMainWindow.cpp" line="895"/>
         <source>Select file to load</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4112,21 +4117,21 @@ línea %2, columna %3.
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
         <source>Error...</source>
         <translation type="unfinished">Error...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="87"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="191"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation type="unfinished">Fallo al abrir %1.</translation>
     </message>
@@ -4623,7 +4628,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
-        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
+        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -6263,7 +6268,7 @@ Filename: %1</source>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
-        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
+        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

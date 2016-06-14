@@ -554,7 +554,7 @@ void CMainWindow::testForNoView()
         QLabel * label = new QLabel(tabWidget);
         label->setAlignment(Qt::AlignCenter);
         label->setWordWrap(true);
-        label->setText(tr("Use <b>View->Add Map View</b> to open a new view. Or <b>File->Load Map View</b> to restore a saved one."));
+        label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one."));
         label->setObjectName("NoViewInfo");
         tabWidget->addTab(label, "*");
         return;

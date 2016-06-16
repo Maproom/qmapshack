@@ -554,8 +554,9 @@ void CMainWindow::testForNoView()
         QLabel * label = new QLabel(tabWidget);
         label->setAlignment(Qt::AlignCenter);
         label->setWordWrap(true);
-        label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one."));
+        label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one. Or click <a href='newview'>here</a>."));
         label->setObjectName("NoViewInfo");
+        connect(label, &QLabel::linkActivated, this, &CMainWindow::slotLinkActivated);
         tabWidget->addTab(label, "*");
         return;
     }
@@ -941,6 +942,14 @@ void CMainWindow::slotPrintMap()
     if(nullptr != canvas)
     {
         canvas->setMousePrint();
+    }
+}
+
+void CMainWindow::slotLinkActivated(const QString& link)
+{
+    if(link == "newview")
+    {
+        actionAddMapView->trigger();
     }
 }
 

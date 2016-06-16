@@ -125,6 +125,7 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
+    void slotLinkActivated(const QString& link);
 
 private:
     friend int main(int argc, char ** argv);

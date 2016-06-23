@@ -201,6 +201,8 @@ CMainWindow::CMainWindow()
     prepareMenuForMac();
 
     loadGISData(qlOpts->arguments);
+
+    QTimer::singleShot(100, this, SLOT(slotSanityTest()));
 }
 
 void CMainWindow::prepareMenuForMac()
@@ -1051,4 +1053,24 @@ void CMainWindow::dropEvent(QDropEvent *event)
     loadGISData(filenames);
 
     event->acceptProposedAction();
+}
+
+void CMainWindow::slotSanityTest()
+{
+
+    projPJ pjsrc = pj_init_plus("+init=epsg:32661");
+    if(pjsrc != nullptr)
+    {
+        QMessageBox::critical(this, tr("Fatal...")
+                              ,tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.")
+                              ,QMessageBox::Close);
+
+        deleteLater();
+        return;
+    }
+
+    pj_free(pjsrc);
+
+
+    qDebug() << "Sanity test passed.";
 }

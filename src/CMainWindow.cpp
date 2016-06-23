@@ -1059,7 +1059,7 @@ void CMainWindow::slotSanityTest()
 {
 
     projPJ pjsrc = pj_init_plus("+init=epsg:32661");
-    if(pjsrc != nullptr)
+    if(pjsrc == nullptr)
     {
         QMessageBox::critical(this, tr("Fatal...")
                               ,tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.")

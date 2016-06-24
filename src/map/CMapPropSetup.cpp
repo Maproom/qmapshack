@@ -48,23 +48,8 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     connect(spinCacheSize,       static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
     connect(spinCacheExpiration, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheExpiration);
 
-    if(mapfile->hasFeatureVectorItems())
-    {
-        frameVectorItems->show();
-    }
-    else
-    {
-        frameVectorItems->hide();
-    }
-
-    if(mapfile->hasFeatureTileCache())
-    {
-        frameTileCache->show();
-    }
-    else
-    {
-        frameTileCache->hide();
-    }
+    frameVectorItems->setVisible( mapfile->hasFeatureVectorItems() );
+    frameTileCache->setVisible( mapfile->hasFeatureTileCache() );
 
     if(mapfile->hasFeatureLayers())
     {

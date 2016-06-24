@@ -112,16 +112,9 @@ void CDemList::updateHelpText()
         labelHelpFillMapList->hide();
 
         CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->topLevelItem(0));
-        if(item && item->isActivated())
-        {
-            labelIcon->hide();
-            labelHelpActivateMap->hide();
-        }
-        else
-        {
-            labelIcon->show();
-            labelHelpActivateMap->show();
-        }
+        bool haveActive = item && item->isActivated();
+        labelIcon->setVisible(!haveActive);
+        labelHelpActivateMap->setVisible(!haveActive);
     }
 }
 

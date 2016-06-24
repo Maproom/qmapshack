@@ -145,14 +145,7 @@ void CGisWidget::loadGisProject(const QString& filename)
 
 void CGisWidget::slotHelpText()
 {
-    if(treeDB->topLevelItemCount() == 0)
-    {
-        frameHelp->show();
-    }
-    else
-    {
-        frameHelp->hide();
-    }
+    frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
 }
 
 void CGisWidget::slotSaveAll()

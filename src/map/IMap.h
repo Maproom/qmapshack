@@ -69,26 +69,9 @@ public:
      */
     virtual IMapProp *getSetup();
 
-    /**
-       @brief getInfo
-       @param px
-       @param str
-     */
-    virtual void getInfo(const QPoint& px, QString& str)
-    {
-        Q_UNUSED(px);
-        Q_UNUSED(str);
-    }
-    /**
-       @brief getToolTip
-       @param px
-       @param str
-     */
-    virtual void getToolTip(const QPoint& px, QString& str)
-    {
-        Q_UNUSED(px);
-        Q_UNUSED(str);
-    }
+    virtual void getInfo(const QPoint&, QString&) {}
+
+    virtual void getToolTip(const QPoint&, QString&) {}
 
     /**
        @brief Return copyright notice if any

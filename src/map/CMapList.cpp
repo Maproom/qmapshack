@@ -119,16 +119,10 @@ void CMapList::updateHelpText()
         labelHelpFillMapList->hide();
 
         CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
-        if(item && item->isActivated())
-        {
-            labelIcon->hide();
-            labelHelpActivateMap->hide();
-        }
-        else
-        {
-            labelIcon->show();
-            labelHelpActivateMap->show();
-        }
+
+        bool showHelp = !(item && item->isActivated());
+        labelIcon->setVisible(showHelp);
+        labelHelpActivateMap->setVisible(showHelp);
     }
 }
 

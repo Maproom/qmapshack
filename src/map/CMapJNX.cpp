@@ -239,19 +239,19 @@ void CMapJNX::readFile(const QString& fn, qint32& productId)
 
     if(mapFile.lon1 < lon1)
     {
-        lon1  = mapFile.lon1;
+        lon1 = mapFile.lon1;
     }
     if(mapFile.lat1 > lat1)
     {
-        lat1  = mapFile.lat1;
+        lat1 = mapFile.lat1;
     }
     if(mapFile.lon2 > lon2)
     {
-        lon2  = mapFile.lon2;
+        lon2 = mapFile.lon2;
     }
     if(mapFile.lat2 < lat2)
     {
-        lat2  = mapFile.lat2;
+        lat2 = mapFile.lat2;
     }
 }
 
@@ -380,14 +380,14 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
                 img.loadFromData(data);
 
                 QPolygonF l(4);
-                l[0].rx() = tile.area.left()     * DEG_TO_RAD;
-                l[0].ry() = tile.area.top()      * DEG_TO_RAD;
-                l[1].rx() = tile.area.right()    * DEG_TO_RAD;
-                l[1].ry() = tile.area.top()      * DEG_TO_RAD;
-                l[2].rx() = tile.area.right()    * DEG_TO_RAD;
-                l[2].ry() = tile.area.bottom()   * DEG_TO_RAD;
-                l[3].rx() = tile.area.left()     * DEG_TO_RAD;
-                l[3].ry() = tile.area.bottom()   * DEG_TO_RAD;
+                l[0].rx() = tile.area.left()   * DEG_TO_RAD;
+                l[0].ry() = tile.area.top()    * DEG_TO_RAD;
+                l[1].rx() = tile.area.right()  * DEG_TO_RAD;
+                l[1].ry() = tile.area.top()    * DEG_TO_RAD;
+                l[2].rx() = tile.area.right()  * DEG_TO_RAD;
+                l[2].ry() = tile.area.bottom() * DEG_TO_RAD;
+                l[3].rx() = tile.area.left()   * DEG_TO_RAD;
+                l[3].ry() = tile.area.bottom() * DEG_TO_RAD;
 
                 drawTile(img, l, p);
             }

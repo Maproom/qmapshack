@@ -57,7 +57,7 @@ private:
 
     QTimer * timer;
 
-    QImage dummy {256,256, QImage::Format_ARGB32};
+    QImage dummy {256, 256, QImage::Format_ARGB32};
 
     mutable QMutex mutex;
 };

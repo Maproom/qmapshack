@@ -158,7 +158,7 @@ CMainWindow::CMainWindow()
     cfg.endGroup(); // Views
 
     actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
-    actionShowGrid->setChecked       (cfg.value("isGridVisible",    false).toBool());
+    actionShowGrid->setChecked       (cfg.value("isGridVisible",   false).toBool());
     actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
     actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
     actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());
@@ -416,7 +416,6 @@ qreal CMainWindow::getElevationAt(const QPointF& pos) const
             if(canvas)
             {
                 return canvas->getElevationAt(pos);
-
             }
         }
     }
@@ -885,9 +884,9 @@ void CMainWindow::slotLoadView()
     cfg.beginGroup("Views");
     cfg.beginGroup(canvas->objectName());
     canvas->saveConfig(cfg);
-    cfg.endGroup();
-    cfg.endGroup();
-    cfg.endGroup();
+    cfg.endGroup(); // objectName
+    cfg.endGroup(); // "Views"
+    cfg.endGroup(); // "Canvas"
 
     QFileInfo fi(filename);
     path = fi.absolutePath();

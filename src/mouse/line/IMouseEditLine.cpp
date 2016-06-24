@@ -93,16 +93,8 @@ void IMouseEditLine::setCanvasPanning(bool enable)
 {
     doCanvasPanning = enable;
 
-    if(enable)
-    {
-        scrOptEditLine->toolUndo->hide();
-        scrOptEditLine->toolRedo->hide();
-    }
-    else
-    {
-        scrOptEditLine->toolUndo->show();
-        scrOptEditLine->toolRedo->show();
-    }
+    scrOptEditLine->toolUndo->setVisible(!enable);
+    scrOptEditLine->toolRedo->setVisible(!enable);
 }
 
 

@@ -20,6 +20,7 @@
 #include "canvas/CCanvas.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -253,9 +254,12 @@ void CMapDraw::buildMapList()
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
 
+    QSet<QString> maps;
+
     for(const QString &path : mapPaths)
     {
         QDir dir(path);
+
         // find available maps
         for(const QString &filename : dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
@@ -263,7 +267,9 @@ void CMapDraw::buildMapList()
 
             CMapItem * item = new CMapItem(*mapList, this);
 
-            item->setText(0,fi.baseName().replace("_", " "));
+            maps.insert(fi.baseName());
+
+            item->setText(0, fi.baseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
@@ -276,6 +282,9 @@ void CMapDraw::buildMapList()
             f.close();
         }
     }
+
+    CDiskCache::cleanupRemovedMaps(maps);
+
     mapList->updateHelpText();
 }
 

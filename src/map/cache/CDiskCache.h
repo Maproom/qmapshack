@@ -37,6 +37,8 @@ public:
     void restore(const QString& key, QImage& img);
     bool contains(const QString& key) const;
 
+    static void cleanupRemovedMaps(const QSet<QString> &maps);
+
 private slots:
     void slotCleanup();
 

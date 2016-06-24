@@ -101,18 +101,18 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     {
         const QDomNode& xmlLayer = xmlLayers.item(n);
         int idx = xmlLayer.attributes().namedItem("idx").nodeValue().toInt();
-        layers[idx].strUrl          = xmlLayer.namedItem("ServerUrl").toElement().text();
-        layers[idx].script          = xmlLayer.namedItem("Script").toElement().text();
-        layers[idx].minZoomLevel    = minZoomLevel;
-        layers[idx].maxZoomLevel    = maxZoomLevel;
+        layers[idx].strUrl       = xmlLayer.namedItem("ServerUrl").toElement().text();
+        layers[idx].script       = xmlLayer.namedItem("Script").toElement().text();
+        layers[idx].minZoomLevel = minZoomLevel;
+        layers[idx].maxZoomLevel = maxZoomLevel;
 
         if(xmlLayer.namedItem("Title").isElement())
         {
-            layers[idx].title       = xmlLayer.namedItem("Title").toElement().text();
+            layers[idx].title = xmlLayer.namedItem("Title").toElement().text();
         }
         else
         {
-            layers[idx].title       = tr("Layer %1").arg(idx + 1);
+            layers[idx].title = tr("Layer %1").arg(idx + 1);
         }
 
         if(xmlLayer.firstChildElement("MinZoomLevel").isElement())
@@ -168,11 +168,6 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     name = fi.baseName().replace("_", " ");
 
     isActivated = true;
-}
-
-CMapTMS::~CMapTMS()
-{
-//    map->reportStatusToCanvas(name, "");
 }
 
 void CMapTMS::getLayers(QListWidget& list) /* override */

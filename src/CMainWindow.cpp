@@ -159,7 +159,7 @@ CMainWindow::CMainWindow()
     testForNoView();
 
     actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
-    actionShowGrid->setChecked       (cfg.value("isGridVisible",    false).toBool());
+    actionShowGrid->setChecked       (cfg.value("isGridVisible",   false).toBool());
     actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
     actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
     actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());
@@ -218,7 +218,6 @@ CMainWindow::~CMainWindow()
 {
     CActivityTrk::release();
 
-    int cnt = 0;
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
@@ -246,7 +245,7 @@ CMainWindow::~CMainWindow()
             allOtherTabs << tabWidget->widget(i);
             continue;
         }
-        cnt++;
+
         // save views
         cfg.beginGroup(view->objectName());
         view->saveConfig(cfg);
@@ -293,8 +292,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
 
-    IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
-    cfg.setValue("Units/coordFormat", coordFormat);
+    cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()
@@ -917,9 +915,9 @@ void CMainWindow::slotLoadView()
     cfg.beginGroup("Views");
     cfg.beginGroup(canvas->objectName());
     canvas->saveConfig(cfg);
-    cfg.endGroup();
-    cfg.endGroup();
-    cfg.endGroup();
+    cfg.endGroup(); // objectName
+    cfg.endGroup(); // "Views"
+    cfg.endGroup(); // "Canvas"
 
     QFileInfo fi(filename);
     path = fi.absolutePath();

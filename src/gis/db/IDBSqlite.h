@@ -29,7 +29,7 @@ public:
 
 protected:
     using IDB::setupDB;
-    bool setupDB(const QString &filename, const QString &connectionName);
+    bool setupDB(const QString &filename, const QString &connectionName, QString &error);
     bool initDB() override;
     bool migrateDB(int version) override;
     bool migrateDB1to2();

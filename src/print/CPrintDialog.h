@@ -55,19 +55,14 @@ private:
 
     CCanvas * canvas;
 
-    /// the selected area in coordinated of lon/lat
-    QRectF rectSelArea;
-    /// the selected area in coordinated of pixel
-    QRectF rectSelAreaPixel;
-    /// the page rectangle in pixel
-    QRectF rectPrinterPage;
+    QRectF rectSelArea;      //< the selected area in coordinated of lon/lat
+    QRectF rectSelAreaPixel; //< the selected area in coordinated of pixel
+    QRectF rectPrinterPage;  //< the page rectangle in pixel
 
     QPrinter printer;
 
-    /// number of pages in x dimension
-    qreal xPages = 0.0;
-    /// number of pages in y dimension
-    qreal yPages = 0.0;
+    qreal xPages = 0.0; //< number of pages in x dimension
+    qreal yPages = 0.0; //< number of pages in y dimension
 };
 
 #endif //CPRINTDIALOG_H

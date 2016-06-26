@@ -44,14 +44,14 @@ void IMap::saveConfig(QSettings& cfg) /* override */
 
     if(hasFeatureVectorItems())
     {
-        cfg.setValue("showPolygons", getShowPolygons());
+        cfg.setValue("showPolygons",  getShowPolygons());
         cfg.setValue("showPolylines", getShowPolylines());
-        cfg.setValue("showPOIs", getShowPOIs());
+        cfg.setValue("showPOIs",      getShowPOIs());
     }
 
     if(hasFeatureTileCache())
     {
-        cfg.setValue("cacheSizeMB", cacheSizeMB);
+        cfg.setValue("cacheSizeMB",     cacheSizeMB);
         cfg.setValue("cacheExpiration", cacheExpiration);
     }
 }
@@ -102,12 +102,12 @@ void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     map->convertRad2Px(l);
 
     // adjust the tiles width and height to fit the buffer's scale
-    qreal dx1   = l[0].x() - l[1].x();
-    qreal dy1   = l[0].y() - l[1].y();
-    qreal dx2   = l[0].x() - l[3].x();
-    qreal dy2   = l[0].y() - l[3].y();
-    qreal w     = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
-    qreal h     = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
+    qreal dx1 = l[0].x() - l[1].x();
+    qreal dy1 = l[0].y() - l[1].y();
+    qreal dx2 = l[0].x() - l[3].x();
+    qreal dy2 = l[0].y() - l[3].y();
+    qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
+    qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
     qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
@@ -121,11 +121,7 @@ void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     p.restore();
 }
 
-bool IMap::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&)
 {
-    Q_UNUSED(pt1);
-    Q_UNUSED(pt2);
-    Q_UNUSED(threshold);
-    Q_UNUSED(polyline);
     return false;
 }

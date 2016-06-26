@@ -266,16 +266,10 @@ void CRouterRoutino::freeDatabaseList()
 
 void CRouterRoutino::updateHelpText()
 {
-    if(comboDatabase->count() != 0)
-    {
-        frameHelp->hide();
-        comboDatabase->setEnabled(true);
-    }
-    else
-    {
-        frameHelp->show();
-        comboDatabase->setEnabled(false);
-    }
+    bool haveDB = (comboDatabase->count() != 0);
+
+    frameHelp->setVisible(!haveDB);
+    comboDatabase->setEnabled(haveDB);
 }
 
 void CRouterRoutino::calcRoute(const IGisItem::key_t& key)

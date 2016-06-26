@@ -30,13 +30,13 @@
 
 #define VER_TRK         quint8(5)
 #define VER_WPT         quint8(2)
-#define VER_RTE         quint8(2)
+#define VER_RTE         quint8(3)
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
 #define VER_TRKPT       quint8(2)
 #define VER_RTEPT       quint8(2)
-#define VER_RTESUBPT    quint8(1)
+#define VER_RTESUBPT    quint8(2)
 #define VER_WPT_T       quint8(1)
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
@@ -379,6 +379,7 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemRte::subpt_t& pt)
     stream << pt.instruction;
     stream << pt.distance;
     stream << pt.time;
+    stream << pt.ele;
 
     return stream;
 }
@@ -398,7 +399,16 @@ QDataStream& operator>>(QDataStream& stream, CGisItemRte::subpt_t& pt)
 
     stream >> pt.instruction;
     stream >> pt.distance;
-    stream >> pt.time;
+    if(version < 2)
+    {
+        quint32 time;
+        stream >> time;
+    }
+    else
+    {
+        stream >> pt.time;
+        stream >> pt.ele;
+    }
 
     return stream;
 }
@@ -700,10 +710,15 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
     in >> rte.pts;
     if(version > 1)
     {
-        in >> lastRoutedWith;
-        in >> lastRoutedTime;
-        in >> totalDistance;
-        in >> totalTime;
+        in >> rte.lastRoutedWith;
+        in >> rte.lastRoutedTime;
+        in >> rte.totalDistance;
+        in >> rte.totalTime;
+    }
+    if(version > 2)
+    {
+        in >> rte.ascend;
+        in >> rte.descend;
     }
 
 
@@ -732,10 +747,12 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream) const
     out << rte.number;
     out << rte.type;
     out << rte.pts;
-    out << lastRoutedWith;
-    out << lastRoutedTime;
-    out << totalDistance;
-    out << totalTime;
+    out << rte.lastRoutedWith;
+    out << rte.lastRoutedTime;
+    out << rte.totalDistance;
+    out << rte.totalTime;
+    out << rte.ascend;
+    out << rte.descend;
 
     stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
     stream << VER_RTE;

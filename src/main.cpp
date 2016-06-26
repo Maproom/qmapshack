@@ -21,6 +21,7 @@
 #include "version.h"
 
 #include <QtWidgets>
+#include <QNetworkProxyFactory>
 #include <iostream>
 
 
@@ -60,6 +61,8 @@ int main(int argc, char ** argv)
 
     uint seed = QDateTime::currentDateTime().toTime_t();
     qsrand(seed);
+
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     CMainWindow w;
     w.show();

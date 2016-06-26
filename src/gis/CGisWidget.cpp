@@ -635,6 +635,18 @@ void CGisWidget::focusRteByKey(bool yes, const IGisItem::key_t &key)
     emit sigChanged();
 }
 
+void CGisWidget::convertRouteToTrack(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
+    if(nullptr != rte)
+    {
+        rte->toTrack();
+    }
+
+    emit sigChanged();
+}
+
 void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

@@ -899,7 +899,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     // read extended NT elements
     if((gar_load(uint16_t, pTreHdr->hdr_subfile_part_t::length) >= 0x9A) && pTreHdr->tre7_size && (gar_load(uint16_t, pTreHdr->tre7_rec_size) >= sizeof(tre_subdiv2_t)))
     {
-        rgnoff = subfile.parts["RGN"].offset;
+        //rgnoff = subfile.parts["RGN"].offset;
         //         qDebug() << subdivs.count() << (pTreHdr->tre7_size / pTreHdr->tre7_rec_size) << pTreHdr->tre7_rec_size;
         QByteArray subdiv2;
         readFile(file, subfile.parts["TRE"].offset + gar_load(uint32_t, pTreHdr->tre7_offset), gar_load(uint32_t, pTreHdr->tre7_size), subdiv2);
@@ -2185,7 +2185,7 @@ void CMapIMG::drawText(QPainter& p)
         QPointF point1  = path.pointAtPercent(percent1);
         QPointF point2  = path.pointAtPercent(percent2);
 
-        qreal angle     = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
+        qreal angle; //     = qAtan((point2.y() - point1.y()) / (point2.x() - point1.x())) * 180 / M_PI;
 
         // flip path if string start is E->W direction
         // this helps, sometimes, in 50 % of the cases :)
@@ -2201,7 +2201,7 @@ void CMapIMG::drawText(QPainter& p)
 
         for(int i = 0; i < size; ++i)
         {
-            percent1 = percent2;
+            //percent1 = percent2;
             percent2 = (offset + fm.width(text[i])) / length;
 
             point1  = point2;

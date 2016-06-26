@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/trk/CTableTrk.h"
-#include "helpers/CSettings.h"
 #include "helpers/CElevationDialog.h"
+#include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
 
@@ -96,6 +96,11 @@ void CTableTrk::updateData()
             item->setTextAlignment(eColDescend, Qt::AlignRight);
             item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
+            if(!trk->isReadOnly())
+            {
+                item->setToolTip(eColEle, tr("Double click to edit elevation value"));
+            }
+
             QBrush bg = item->background(0);
             if(trkpt.isInvalid(CGisItemTrk::trkpt_t::invalid_e(invalidMask)))
             {
@@ -144,7 +149,7 @@ void CTableTrk::updateData()
 
             item->setText(eColSlope,
                           (trkpt.slope1 != NOFLOAT)
-                          ? QString("%1°(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0)
+                          ? QString("%1%3(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0).arg(QChar(0x00b0))
                           : "-"
                           );
 
@@ -180,6 +185,11 @@ void CTableTrk::slotItemSelectionChanged()
 
 void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
 {
+    if(trk->isReadOnly())
+    {
+        return;
+    }
+
     qint32 idx = item->text(eColNum).toInt();
     qint32 ele = trk->getElevation(idx);
     qreal lon, lat;
@@ -194,6 +204,5 @@ void CTableTrk::slotItemDoubleClicked(QTreeWidgetItem * item, int column)
         {
             trk->setElevation(idx, var.toInt());
         }
-
     }
 }

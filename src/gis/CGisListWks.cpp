@@ -163,6 +163,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"),    tr("Calculate Route"), this, SLOT(slotCalcRte()));
     actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"),    tr("Reset Route"),     this, SLOT(slotResetRte()));
     actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
+    actionRte2Trk   = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
 
@@ -1452,6 +1453,17 @@ void CGisListWks::slotEditRte()
     if(gisItem != nullptr)
     {
         CGisWidget::self().editRteByKey(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotRte2Trk()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWidget::self().convertRouteToTrack(gisItem->getKey());
     }
 }
 

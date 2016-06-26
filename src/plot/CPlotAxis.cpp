@@ -105,7 +105,7 @@ const QString CPlotAxis::fmtsgl( qreal val )
     QString f;
     int exponent = (0. == val) ? 0 : (int) qLog10( qFabs(val) );
 
-    val *= ticScale;
+    //val *= ticScale;
     if ( abs(exponent) > 5 )
     {
         f = "%1.2e";

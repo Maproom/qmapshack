@@ -27,7 +27,9 @@
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -175,56 +177,94 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
+void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
+{
+
+    if(ele == NOFLOAT)
+    {
+        subpt.ele = NOINT;
+        return;
+    }
+
+    subpt.ele = qRound(ele);
+
+    if(lastEle != NOFLOAT)
+    {
+        qreal delta   = subpt.ele - lastEle;
+
+        if(qAbs(delta) > ASCEND_THRESHOLD)
+        {
+            if(delta > 0)
+            {
+                rte.ascend  += delta;
+            }
+            else
+            {
+                rte.descend -= delta;
+            }
+            lastEle = subpt.ele;
+        }
+    }
+    else
+    {
+        lastEle = subpt.ele;
+    }
+}
+
 void CGisItemRte::deriveSecondaryData()
 {
+    QPolygonF pos;
+    QPolygonF ele;
     qreal north = -90;
     qreal east  = -180;
     qreal south =  90;
     qreal west  =  180;
 
-    //for(const rtept_t &rtept : rte.pts)
-    const int N = rte.pts.count();
-
-    for(int i = 0; i < N; i++)
+    for(rtept_t &rtept : rte.pts)
     {
-        rtept_t &rtept = rte.pts[i];
-        if(rtept.lon < west)
-        {
-            west    = rtept.lon;
-        }
-        if(rtept.lon > east)
-        {
-            east    = rtept.lon;
-        }
-        if(rtept.lat < south)
-        {
-            south   = rtept.lat;
-        }
-        if(rtept.lat > north)
-        {
-            north   = rtept.lat;
-        }
+        west  = qMin(west,  rtept.lon);
+        east  = qMax(east,  rtept.lon);
+        south = qMin(south, rtept.lat);
+        north = qMax(north, rtept.lat);
 
-        for(const subpt_t &subpt : rtept.subpts)
+        pos << (QPointF(rtept.lon, rtept.lat) * DEG_TO_RAD);
+        rtept.ele = NOINT;
+        rtept.fakeSubpt.ele = NOINT;
+
+        for(subpt_t &subpt : rtept.subpts)
         {
-            if(subpt.lon < west)
-            {
-                west    = subpt.lon;
-            }
-            if(subpt.lon > east)
-            {
-                east    = subpt.lon;
-            }
-            if(subpt.lat < south)
-            {
-                south   = subpt.lat;
-            }
-            if(subpt.lat > north)
-            {
-                north   = subpt.lat;
-            }
+            west  = qMin(west,  subpt.lon);
+            east  = qMax(east,  subpt.lon);
+            south = qMin(south, subpt.lat);
+            north = qMax(north, subpt.lat);
+
+            pos << (QPointF(subpt.lon, subpt.lat) * DEG_TO_RAD);
+            subpt.ele = NOINT;
         }
         rtept.updateIcon();
+    }
+
+    ele.resize(pos.size());
+    ele.fill(NOPOINTF);
+    CMainWindow::self().getElevationAt(pos, ele);
+
+    if(!ele.isEmpty())
+    {
+        qreal lastEle = NOFLOAT;
+        int i = 0;
+        rte.descend = 0;
+        rte.ascend = 0;
+
+        for(rtept_t &rtept : rte.pts)
+        {
+            setElevation(ele[i++].y(), rtept.fakeSubpt, lastEle);
+            rtept.ele = rtept.fakeSubpt.ele;
+
+            for(subpt_t &subpt : rtept.subpts)
+            {
+                setElevation(ele[i++].y(), subpt, lastEle);
+            }
+        }
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
@@ -234,6 +274,28 @@ void CGisItemRte::edit()
 {
     CDetailsRte dlg(*this, CMainWindow::getBestWidgetForParent());
     dlg.exec();
+}
+
+void CGisItemRte::toTrack()
+{
+    QString name;
+    IGisProject * project;
+
+    if(!getNameAndProject(name, project, tr("track")))
+    {
+        return;
+    }
+
+    SGisLine line;
+    getPolylineFromData(line);
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->getElevationAt(line);
+    }
+
+    new CGisItemTrk(line, name, project, -1);
 }
 
 void CGisItemRte::setSymbol()
@@ -279,9 +341,9 @@ QString CGisItemRte::getInfo(bool showName) const
         str += "<b>" + getName() + "</b><br />";
     }
 
-    if(totalDistance != NOFLOAT)
+    if(rte.totalDistance != NOFLOAT)
     {
-        IUnit::self().meter2distance(totalDistance, val1, unit1);
+        IUnit::self().meter2distance(rte.totalDistance, val1, unit1);
         str += tr("Length: %1 %2").arg(val1).arg(unit1);
     }
     else
@@ -290,9 +352,9 @@ QString CGisItemRte::getInfo(bool showName) const
     }
 
     str += "<br/>\n";
-    if(totalTime != 0)
+    if(rte.totalTime != 0)
     {
-        IUnit::self().seconds2time(totalTime, val1, unit1);
+        IUnit::self().seconds2time(rte.totalTime, val1, unit1);
         str += tr("Time: %1 %2").arg(val1).arg(unit1);
     }
     else
@@ -300,12 +362,22 @@ QString CGisItemRte::getInfo(bool showName) const
         str += tr("Time: -");
     }
 
-    if(!lastRoutedWith.isEmpty())
+    if((rte.ascend != NOFLOAT) && (rte.descend != NOFLOAT))
     {
         str += "<br/>\n";
-        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(lastRoutedTime, false, boundingRect.center()));
+        QString val1, val2, unit1, unit2;
+        IUnit::self().meter2elevation(rte.ascend,  val1, unit1);
+        IUnit::self().meter2elevation(rte.descend, val2, unit2);
+
+        str += tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+    }
+
+    if(!rte.lastRoutedWith.isEmpty())
+    {
         str += "<br/>\n";
-        str += tr("with %1").arg(lastRoutedWith);
+        str += tr("Last time routed:<br/>%1").arg(IUnit::datetime2string(rte.lastRoutedTime, false, boundingRect.center()));
+        str += "<br/>\n";
+        str += tr("with %1").arg(rte.lastRoutedWith);
     }
     return str;
 }
@@ -473,6 +545,8 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         return;
     }
 
+    QDateTime startTime = rte.pts.first().fakeSubpt.time;
+
     if(hasUserFocus() && mouseMoveFocus && mouseMoveFocus->lon != NOFLOAT && mouseMoveFocus->lat != NOFLOAT)
     {
         QPointF anchor(mouseMoveFocus->lon, mouseMoveFocus->lat);
@@ -481,7 +555,7 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawEllipse(anchor, 5, 5);
 
         QString str, val, unit;
-        IUnit::self().seconds2time(mouseMoveFocus->time, val, unit);
+        IUnit::self().seconds2time((mouseMoveFocus->time.toTime_t() - startTime.toTime_t()), val, unit);
         str += tr("Time: %1 %2").arg(val).arg(unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
         str += tr("Distance: %1 %2").arg(val).arg(unit);
@@ -641,10 +715,10 @@ void CGisItemRte::reset()
     }
 
     mouseMoveFocus  = nullptr;
-    totalDistance   = NOFLOAT;
-    totalTime       = 0;
-    lastRoutedTime  = QDateTime();
-    lastRoutedWith  = "";
+    rte.totalDistance   = NOFLOAT;
+    rte.totalTime       = 0;
+    rte.lastRoutedTime  = QDateTime();
+    rte.lastRoutedWith  = "";
 
     deriveSecondaryData();
     updateHistory();
@@ -724,6 +798,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     qint32 idxRtept = -1;
     rtept_t * rtept = nullptr;
 
+    QDateTime time = QDateTime::currentDateTimeUtc();
+
     Routino_Output * next = route;
     while(next)
     {
@@ -738,7 +814,8 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             rtept->fakeSubpt.turn      = next->turn;
             rtept->fakeSubpt.bearing   = next->bearing;
             rtept->fakeSubpt.distance  = next->dist * 1000;
-            rtept->fakeSubpt.time      = next->time * 60;
+            rtept->fakeSubpt.time      = time.addSecs(next->time * 60);
+
             rtept->fakeSubpt.type      = subpt_t::eTypeWpt;
             rtept->fakeSubpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
@@ -752,7 +829,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
             subpt.turn      = next->turn;
             subpt.bearing   = next->bearing;
             subpt.distance  = next->dist * 1000;
-            subpt.time      = next->time * 60;
+            subpt.time      = time.addSecs(next->time * 60);
 
             if(next->name != 0)
             {
@@ -768,16 +845,16 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
                 subpt.type = subpt_t::eTypeNone;
             }
 
-            totalDistance = subpt.distance;
-            totalTime     = subpt.time;
+            rte.totalDistance = subpt.distance;
+            rte.totalTime     = subpt.time.toTime_t() - time.toTime_t();
             subpt.instruction = QString(next->desc1) + ".\n" + QString(next->desc2) + ".";
         }
 
         next = next->next;
     }
 
-    lastRoutedTime = QDateTime::currentDateTimeUtc();
-    lastRoutedWith = "Routino, " + options;
+    rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
+    rte.lastRoutedWith = "Routino, " + options;
 
     deriveSecondaryData();
     updateHistory();
@@ -811,12 +888,14 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
 {
     QMutexLocker lock(&mutexItems);
 
+    QDateTime localtime = QDateTime::currentDateTimeUtc();
+
     QDomElement response    = xml.firstChildElement("response");
     QDomElement route       = response.firstChildElement("route");
 
     // get time of travel
     QDomElement xmlTime     = route.firstChildElement("time");
-    totalTime = xmlTime.text().toUInt();
+    rte.totalTime = xmlTime.text().toUInt();
 
 
     // build list of maneuvers
@@ -896,7 +975,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
         subpt.type              = subpt_t::eTypeJunct;
         subpt.instruction       = maneuver.instruction;
 
-        subpt.time              = time;
+        subpt.time              = localtime.addSecs(time);
         time += maneuver.time;
 
         subpt.distance          = dist;
@@ -923,9 +1002,9 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
-    totalDistance  = dist;
-    lastRoutedTime = QDateTime::currentDateTimeUtc();
-    lastRoutedWith = "MapQuest" + options;
+    rte.totalDistance  = dist;
+    rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
+    rte.lastRoutedWith = "MapQuest" + options;
 
     deriveSecondaryData();
     updateHistory();

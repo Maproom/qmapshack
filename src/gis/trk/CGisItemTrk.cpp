@@ -324,17 +324,6 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
     }
 }
 
-bool CGisItemTrk::getNameAndProject(QString &name, IGisProject *&project)
-{
-    name = QInputDialog::getText(CMainWindow::getBestWidgetForParent(), tr("Edit name..."), tr("Enter new track name."), QLineEdit::Normal, name);
-    if(name.isEmpty())
-    {
-        return false;
-    }
-
-    project = CGisWidget::self().selectProject();
-    return nullptr != project;
-}
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
@@ -563,11 +552,22 @@ QString CGisItemTrk::getInfoRange() const
 QString CGisItemTrk::getInfoTrkPt(const trkpt_t& pt) const
 {
     QString str, val1, unit1;
+
+    if(pt.idxTotal == pt.idxVisible)
+    {
+        str += tr("Index: %1").arg(pt.idxVisible);
+    }
+    else
+    {
+        str += tr("Index: visible %1, total %2").arg(pt.idxVisible).arg(pt.idxTotal);
+    }
+    str += "\n";
+
     if(totalElapsedSeconds != 0)
     {
         str += IUnit::datetime2string(pt.time, false, QPointF(pt.lon, pt.lat) * DEG_TO_RAD);
+        str += "\n";
     }
-    str += "\n";
 
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
     str += tr("Ele.: %1 %2").arg(val1).arg(unit1);
@@ -1261,6 +1261,7 @@ bool CGisItemTrk::isWithin(const QRectF& area, selflags_t flags)
 void CGisItemTrk::gainUserFocus(bool yes)
 {
     keyUserFocus = yes ? key : key_t();
+    widthInfoBox = MIN_WIDTH_INFO_BOX;
 }
 
 void CGisItemTrk::looseUserFocus()
@@ -1313,7 +1314,7 @@ bool CGisItemTrk::cut()
         {
             QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
             IGisProject *project = nullptr;
-            if(!getNameAndProject(name, project))
+            if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
@@ -1326,7 +1327,7 @@ bool CGisItemTrk::cut()
         {
             QString name = getName() + QString(" (%1 - %2)").arg(idxMouse).arg(cntTotalPoints-1);
             IGisProject *project = nullptr;
-            if(!getNameAndProject(name, project))
+            if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
@@ -1386,7 +1387,7 @@ void CGisItemTrk::reverse()
 {
     QString name = getName() + "_rev";
     IGisProject *project = nullptr;
-    if(!getNameAndProject(name, project))
+    if(!getNameAndProject(name, project, tr("track")))
     {
         return;
     }
@@ -1430,7 +1431,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
 
     QString name = getName() + " & other";
     IGisProject *projectNew = nullptr;
-    if(!getNameAndProject(name, projectNew))
+    if(!getNameAndProject(name, projectNew, tr("track")))
     {
         return;
     }
@@ -1595,7 +1596,7 @@ void CGisItemTrk::copySelectedPoints() const
 
     QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
     IGisProject *project = nullptr;
-    if(!getNameAndProject(name, project))
+    if(!getNameAndProject(name, project, tr("track")))
     {
         return;
     }
@@ -1943,6 +1944,7 @@ const QString CGisItemTrk::getColorizeUnit() const
     return CKnownExtension::get(getColorizeSource()).unit;
 }
 
+
 void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 {
     QMutexLocker lock(&mutexItems);
@@ -1967,6 +1969,18 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
         QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+
+        // The initial minimum size of the box will be MIN_WIDTH_INFO_BOX.
+        // If a larger box is needed the minimum grows. By that the width
+        // of the box will only grow but not jump between sizes
+        if(rectText.width() < widthInfoBox)
+        {
+            rectText.setWidth(widthInfoBox);
+        }
+        else
+        {
+            widthInfoBox = rectText.width();
+        }
 
         // create info box
         int w = rectText.width()  + 5 + 5;
@@ -2024,15 +2038,10 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
             p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        }
 
-            p.translate(0,fm.height() + 5);
-        }
-        else
-        {
-            p.translate(0, 5);
-        }
         // draw text
-        p.translate(0, 3);
+        p.translate(0,fm.height() + 8);
         p.setPen(Qt::darkBlue);
         p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap,str);
 

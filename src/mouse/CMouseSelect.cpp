@@ -94,10 +94,25 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
         }
 
         QString msg = tr("<b>Selected:</b><br/>");
-        msg += tr("%1 tracks<br/>").arg(cntTrk);
-        msg += tr("%1 waypoints<br/>").arg(cntWpt);
-        msg += tr("%1 routes<br/>").arg(cntRte);
-        msg += tr("%1 areas<br/>").arg(cntOvl);
+        if(scrOptSelect->toolItemTrk->isChecked())
+        {
+            msg += tr("%1 tracks<br/>").arg(cntTrk);
+        }
+
+        if(scrOptSelect->toolItemWpt->isChecked())
+        {
+            msg += tr("%1 waypoints<br/>").arg(cntWpt);
+        }
+
+        if(scrOptSelect->toolItemRte->isChecked())
+        {
+            msg += tr("%1 routes<br/>").arg(cntRte);
+        }
+
+        if(scrOptSelect->toolItemOvl->isChecked())
+        {
+            msg += tr("%1 areas<br/>").arg(cntOvl);
+        }
 
         canvas->reportStatus("CMouseSelect::Stat",msg);
 

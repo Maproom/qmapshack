@@ -489,6 +489,18 @@ public:
      */
     static QString toLink(bool isReadOnly, const QString& href, const QString& str, const QString& key);
 
+    /**
+       @brief Unified handler to get a new item name and a pointer to the traget project
+
+       @param name      a reference to a string object with the default name and to receive the name
+       @param project   a reference to a IGisProject pointer. On success it will point to the project instance
+       @param itemtype  a string to be used for the item type in the dialogs
+
+
+       @return Returns true on success. Otherwise false.
+     */
+    static bool getNameAndProject(QString &name, IGisProject *&project, const QString &itemtype);
+
     /// a no key value that can be used to nullify references.
     const static QString noKey;
 

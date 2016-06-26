@@ -125,12 +125,15 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
+    void slotLinkActivated(const QString& link);
+    void slotSanityTest();
 
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();
     void loadGISData(const QStringList& filenames);
     void prepareMenuForMac();
+    void testForNoView();
 
     static CMainWindow * pSelf;
 

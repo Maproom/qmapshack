@@ -55,6 +55,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::hide);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::hide);
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::hide);
+    connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::hide);
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::slotEditDetails);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptRte::slotDelete);
@@ -63,6 +64,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::slotReset);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::slotEdit);
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
+    connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
 }
 
 CScrOptRte::~CScrOptRte()
@@ -108,6 +110,12 @@ void CScrOptRte::slotEdit()
 void CScrOptRte::slotInstruction(bool on)
 {
     CGisWidget::self().focusRteByKey(on, key);
+    deleteLater();
+}
+
+void CScrOptRte::slotToTrack()
+{
+    CGisWidget::self().convertRouteToTrack(key);
     deleteLater();
 }
 

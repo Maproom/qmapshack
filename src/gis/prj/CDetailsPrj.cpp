@@ -532,9 +532,18 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 struct wpt_info_t
 {
     IGisItem::key_t key;
-    qreal distance;
-    qreal ascend;
-    qreal descend;
+    qreal distance1 = NOFLOAT;
+    qreal ascend1 = NOFLOAT;
+    qreal descend1 = NOFLOAT;
+
+    qreal distance2 = NOFLOAT;
+    qreal ascend2 = NOFLOAT;
+    qreal descend2 = NOFLOAT;
+
+    qreal distance3 = NOFLOAT;
+    qreal ascend3 = NOFLOAT;
+    qreal descend3 = NOFLOAT;
+
 };
 
 void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable)
@@ -552,6 +561,8 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 
     for(CGisItemTrk * trk : trks)
     {
+        const CGisItemTrk::trkpt_t* lastTrkpt = nullptr;
+        wpt_info_t * lastWptInfo = nullptr;
         QList<wpt_info_t> wptInfo;
         const CGisItemTrk::trk_t& t = trk->getTrackData();
         for(const CGisItemTrk::trkseg_t& seg : t.segs)
@@ -566,9 +577,23 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 wptInfo << wpt_info_t();
                 wpt_info_t& info = wptInfo.last();
                 info.key        = trkpt.keyWpt;
-                info.distance   = trkpt.distance;
-                info.ascend     = trkpt.ascend;
-                info.descend    = trkpt.descend;
+                info.distance1  = trkpt.distance;
+                info.ascend1    = trkpt.ascend;
+                info.descend1   = trkpt.descend;
+
+                if(lastWptInfo != nullptr)
+                {
+                    lastWptInfo->distance2  = trkpt.distance - lastTrkpt->distance;
+                    lastWptInfo->ascend2    = trkpt.ascend   - lastTrkpt->ascend;
+                    lastWptInfo->descend2   = trkpt.descend  - lastTrkpt->descend;
+                }
+
+                info.distance3  = trk->getTotalDistance() - trkpt.distance;
+                info.ascend3    = trk->getTotalAscend() - trkpt.ascend;
+                info.descend3   = trk->getTotalDescend() - trkpt.descend;
+
+                lastTrkpt       = &trkpt;
+                lastWptInfo     = &wptInfo.last();
             }
         }
 
@@ -598,12 +623,40 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
                 QString text, val, unit;
-                IUnit::self().meter2distance(info.distance, val, unit);
-                text += "<div>"+ tr("distance: %1%2").arg(val).arg(unit) + "</div>";
-                IUnit::self().meter2elevation(info.ascend, val, unit);
-                text += "<div>"+ tr("ascent: %1%2").arg(val).arg(unit) + "</div>";
-                IUnit::self().meter2elevation(info.descend, val, unit);
-                text += "<div>"+ tr("descend: %1%2").arg(val).arg(unit) + "</div>";
+                text += "<table sytle='border=1px;'>";
+                text += "<tr><td></td><td><nobr>&nbsp;" + tr("From Start") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To Next") + "&nbsp;</nobr></td><td><nobr>&nbsp;" + tr("To End")  + "&nbsp;</nobr></td></tr>";
+
+                text += "<tr>";
+                text += "<td>" + tr("distance: ") + "</td>";
+                IUnit::self().meter2distance(info.distance1, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2distance(info.distance2, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2distance(info.distance3, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                text += "</tr>";
+
+                text += "<tr>";
+                text += "<td>" + tr("ascent: ") + "</td>";
+                IUnit::self().meter2elevation(info.ascend1, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2elevation(info.ascend2, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2elevation(info.ascend3, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                text += "</tr>";
+
+                text += "<tr>";
+                text += "<td>" + tr("descend: ") + "</td>";
+                IUnit::self().meter2elevation(info.descend1, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2elevation(info.descend2, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                IUnit::self().meter2elevation(info.descend3, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
+                text += "</tr>";
+
+                text += "</table>";
 
                 table1->cellAt(0,0).firstCursorPosition().insertHtml(text);
 

@@ -177,12 +177,12 @@ private:
     void setDrawContextSize(const QSize& s);
     void setMouseCursor(IMouse& mouse, const QString& src);
 
-    QColor backColor;     //< the background color used in case of missing map tiles
-    redraw_e needsRedraw; //< set true to initiate a complete redraw of the screen content
-    CMapDraw * map;       //< the map object attached to this canvas
-    CDemDraw * dem;       //< the elevation data layer attached to this canvas
-    CGisDraw * gis;       //< the GIS data layer attached to this canvas
-    CGrid * grid;         //< the grid attached to this canvas
+    QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
+    redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
+    CMapDraw * map;                     //< the map object attached to this canvas
+    CDemDraw * dem;                     //< the elevation data layer attached to this canvas
+    CGisDraw * gis;                     //< the GIS data layer attached to this canvas
+    CGrid * grid;                       //< the grid attached to this canvas
 
     /// the current point of focus (usually the canvas center)
     QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};

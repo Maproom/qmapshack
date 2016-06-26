@@ -1409,8 +1409,8 @@ void CGisItemTrk::reverse()
         trkseg_t seg1;
         for(const trkpt_t &pt : seg.pts)
         {
-            trkpt_t pt1     = pt;
-            pt1.time        = QDateTime();
+            trkpt_t pt1 = pt;
+            pt1.time    = QDateTime();
 
             seg1.pts.push_front(pt1);
         }
@@ -1857,29 +1857,20 @@ qreal CGisItemTrk::getMax(const QString& source) const
 
 qreal CGisItemTrk::getMinProp(const QString& source) const
 {
-    if(propHandler == nullptr)
-    {
-        return NOFLOAT;
-    }
-    return propHandler->propBySource(source).min;
+    return propHandler == nullptr ? NOFLOAT
+        : propHandler->propBySource(source).min;
 }
 
 qreal CGisItemTrk::getMaxProp(const QString& source) const
 {
-    if(propHandler == nullptr)
-    {
-        return NOFLOAT;
-    }
-    return propHandler->propBySource(source).max;
+    return propHandler == nullptr ? NOFLOAT
+        : propHandler->propBySource(source).max;
 }
 
 QString CGisItemTrk::getUnitProp(const QString& source) const
 {
-    if(propHandler == nullptr)
-    {
-        return QString();
-    }
-    return propHandler->propBySource(source).unit;
+    return propHandler == nullptr ? QString()
+        : propHandler->propBySource(source).unit;
 }
 
 
@@ -1932,14 +1923,7 @@ void CGisItemTrk::setColorizeLimitHigh(qreal limit)
     updateHistory(eVisualColorLegend|eVisualDetails);
 }
 
-void CGisItemTrk::setColorizeLimits(qreal low, qreal high)
-{
-    colorSourceLimit.setMin(low);
-    colorSourceLimit.setMax(high);
-    updateHistory(eVisualColorLegend|eVisualDetails);
-}
-
-const QString CGisItemTrk::getColorizeUnit() const
+QString CGisItemTrk::getColorizeUnit() const
 {
     return CKnownExtension::get(getColorizeSource()).unit;
 }
@@ -2277,8 +2261,8 @@ void CGisItemTrk::setColor(const QColor& c)
 
 void CGisItemTrk::setIcon(const QString& iconColor)
 {
-    trk.color   = iconColor;
-    icon        = QPixmap("://icons/48x48/Track.png");
+    trk.color = iconColor;
+    icon      = QPixmap("://icons/48x48/Track.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );

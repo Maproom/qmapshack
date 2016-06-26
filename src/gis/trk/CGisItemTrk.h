@@ -32,17 +32,14 @@
 
 class QDomNode;
 class IGisProject;
-class IPlot;
 class INotifyTrk;
 class CDetailsTrk;
 class CScrOptTrk;
 class QSqlDatabase;
 class CQlgtTrack;
 class IQlgtOverlay;
-class QDir;
 class CProgressDialog;
 class CPropertyTrk;
-class CColorLegend;
 class CFitStream;
 
 #define TRK_N_COLORS          17
@@ -316,9 +313,7 @@ public:
         return colorSourceLimit.getMax();
     }
 
-    void setColorizeLimits(qreal low, qreal high);
-
-    const QString getColorizeUnit() const;
+    QString getColorizeUnit() const;
 
     qreal getMin(const QString& source) const;
     qreal getMax(const QString& source) const;
@@ -516,7 +511,6 @@ public:
        @brief Use point with the distance from start matching best the given distance.
 
        @param dist      the distance in [m]
-       @param initiator a pointer to an initiating IPlot object, or 0
      */
     bool setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString& owner);
 
@@ -524,7 +518,6 @@ public:
        @brief Use point with time from start matching best the given time delta
 
        @param time      a time delta in [s] relative to the start time
-       @param initiator a pointer to an initiating IPlot object, or 0
      */
     bool setMouseFocusByTime(quint32 time, focusmode_e fmode, const QString& owner);
 

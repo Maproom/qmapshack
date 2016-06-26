@@ -148,6 +148,7 @@
         <file>icons/32x32/Link.png</file>
         <file>icons/32x32/Database.png</file>
         <file>icons/32x32/SQLite.png</file>
+        <file>icons/32x32/SQLiteNoConn.png</file>
         <file>icons/32x32/MySQL.png</file>
         <file>icons/32x32/MySQLNoConn.png</file>
         <file>icons/32x32/Empty.png</file>
@@ -335,6 +336,7 @@
         <file>icons/48x48/Link.png</file>
         <file>icons/48x48/Database.png</file>
         <file>icons/48x48/SQLite.png</file>
+        <file>icons/48x48/SQLiteNoConn.png</file>
         <file>icons/48x48/MySQL.png</file>
         <file>icons/48x48/MySQLNoConn.png</file>
         <file>icons/48x48/Empty.png</file>

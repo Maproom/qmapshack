@@ -26,18 +26,22 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
     , filename(filename)
 {
     setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
-    setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
+
     setText(CGisListDB::eColumnName, name);
 
-    setupDB(filename, name);
+    if(setupDB(filename, name, error)) {
+        setupFromDB();
 
-    setupFromDB();
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));
+        setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
+    }
+    else
+    {
+        IDB::db.close();
 
-    setChildIndicatorPolicy(QTreeWidgetItem::ShowIndicator);
-}
-
-CDBFolderSqlite::~CDBFolderSqlite()
-{
+        setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLiteNoConn.png"));
+        setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
+    }
 }
 
 QString CDBFolderSqlite::getDBInfo() const
@@ -54,5 +58,11 @@ QString CDBFolderSqlite::getDBInfo() const
     #endif
 
     str += tr("File: ") + QString("<i>%1</i>").arg(path);
+
+    if(!isUsable())
+    {
+        str += "<br />" + tr("Error: ") + QString("<span style=\"color:#f00; font-weight:bold;\">%1</span>").arg(error);
+    }
+
     return str;
 }

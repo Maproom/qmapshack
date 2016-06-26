@@ -718,14 +718,8 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
         {
             for(const link_t &link : links)
             {
-                if(link.text.isEmpty())
-                {
-                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.uri.toString());
-                }
-                else
-                {
-                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
-                }
+                str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
+                    .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
             }
         }
     }
@@ -763,14 +757,8 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
         {
             for(const link_t &link : links)
             {
-                if(link.text.isEmpty())
-                {
-                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.uri.toString());
-                }
-                else
-                {
-                    str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString()).arg(link.text);
-                }
+                str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
+                    .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
             }
         }
     }

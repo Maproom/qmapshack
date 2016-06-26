@@ -215,7 +215,6 @@ CMainWindow::~CMainWindow()
 {
     CActivityTrk::release();
 
-    int cnt = 0;
     SETTINGS;
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
@@ -243,7 +242,7 @@ CMainWindow::~CMainWindow()
             allOtherTabs << tabWidget->widget(i);
             continue;
         }
-        cnt++;
+
         // save views
         cfg.beginGroup(view->objectName());
         view->saveConfig(cfg);
@@ -290,8 +289,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
 
-    IUnit::coord_format_e coordFormat = IUnit::getCoordFormat();
-    cfg.setValue("Units/coordFormat", coordFormat);
+    cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()

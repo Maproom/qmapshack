@@ -40,7 +40,6 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
         IDB::db.close();
 
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLiteNoConn.png"));
-        setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
     }
 }
 

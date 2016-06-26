@@ -377,6 +377,7 @@ void CGisListDB::slotAddDatabase()
         QString filename = dlg.getFilename();
         CDBFolderSqlite *sfolder = new CDBFolderSqlite(filename, name, this);
         sfolder->setToolTip(eColumnName, sfolder->getDBInfo());
+        isUsable = sfolder->isUsable();
         folder = sfolder;
     }
     else if(dlg.isMysql())

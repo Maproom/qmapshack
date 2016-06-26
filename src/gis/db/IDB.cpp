@@ -113,7 +113,7 @@ bool IDB::setupDB(QString &error)
         }
     }
 
-    query.prepare( "UPDATE folders SET name=:name WHERE id=1");
+    query.prepare("UPDATE folders SET name=:name WHERE id=1");
     query.bindValue(":name", db.connectionName());
     QUERY_EXEC(return false);
 

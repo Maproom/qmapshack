@@ -67,14 +67,8 @@ bool CPositionDialog::getPosition(QPointF& pt, const QString& str)
 
 void CPositionDialog::slotEdit(const QString& str)
 {
-    if(IUnit::isValidCoordString(str))
-    {
-        labelWarning->hide();
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
-    }
-    else
-    {
-        labelWarning->show();
-        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
-    }
+    bool isValid = IUnit::isValidCoordString(str);
+
+    labelWarning->setVisible(!isValid);
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(isValid);
 }

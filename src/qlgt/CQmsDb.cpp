@@ -52,7 +52,8 @@ CQmsDb::CQmsDb(const QString &filename, CImportDatabase *parent)
         gui->stdErr(tr("Remove existing file %1").arg(filename));
         QFile::remove(filename);
     }
-    valid = setupDB(filename, "qlgt2qms");
+    QString error;
+    valid = setupDB(filename, "qlgt2qms", error);
     if(!valid)
     {
         return;

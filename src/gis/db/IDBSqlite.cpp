@@ -33,7 +33,7 @@ IDBSqlite::IDBSqlite()
 }
 
 
-bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
+bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName, QString &error)
 {
     // this is important!
     IDB::setup(connectionName);
@@ -73,7 +73,7 @@ bool IDBSqlite::setupDB(const QString& filename, const QString& connectionName)
         QUERY_RUN("DROP TABLE tmp_items;", NO_CMD)
     }
 
-    return setupDB();
+    return setupDB(error);
 }
 
 bool IDBSqlite::initDB()

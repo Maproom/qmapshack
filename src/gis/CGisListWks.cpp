@@ -359,14 +359,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
 
         if(trk1 && trk2)
         {
-            if(trk1->parent() == trk2->parent())
-            {
-                e->setDropAction(Qt::MoveAction);
-            }
-            else
-            {
-                e->setDropAction(Qt::CopyAction);
-            }
+            e->setDropAction( trk1->parent() == trk2->parent() ? Qt::MoveAction : Qt::CopyAction);
             QTreeWidget::dragMoveEvent(e);
             return;
         }
@@ -376,14 +369,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
 
         if(wpt1 && wpt2)
         {
-            if(wpt1->parent() == wpt2->parent())
-            {
-                e->setDropAction(Qt::MoveAction);
-            }
-            else
-            {
-                e->setDropAction(Qt::CopyAction);
-            }
+            e->setDropAction( wpt1->parent() == wpt2->parent() ? Qt::MoveAction : Qt::CopyAction);
             QTreeWidget::dragMoveEvent(e);
             return;
         }
@@ -393,14 +379,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
 
         if(rte1 && rte2)
         {
-            if(rte1->parent() == rte2->parent())
-            {
-                e->setDropAction(Qt::MoveAction);
-            }
-            else
-            {
-                e->setDropAction(Qt::CopyAction);
-            }
+            e->setDropAction( rte1->parent() == rte2->parent() ? Qt::MoveAction : Qt::CopyAction);
             QTreeWidget::dragMoveEvent(e);
             return;
         }
@@ -410,14 +389,7 @@ void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
 
         if(area1 && area2)
         {
-            if(area1->parent() == area2->parent())
-            {
-                e->setDropAction(Qt::MoveAction);
-            }
-            else
-            {
-                e->setDropAction(Qt::CopyAction);
-            }
+            e->setDropAction( area1->parent() == area2->parent() ? Qt::MoveAction : Qt::CopyAction);
             QTreeWidget::dragMoveEvent(e);
             return;
         }
@@ -721,12 +693,9 @@ bool CGisListWks::hasProject(IGisProject * project)
     for(int i = 0; i < topLevelItemCount(); i++)
     {
         IGisProject * item = dynamic_cast<IGisProject*>(topLevelItem(i));
-        if(item && item->getKey() == key)
+        if(item && item->getKey() == key && item != project)
         {
-            if(item != project)
-            {
-                return true;
-            }
+            return true;
         }
     }
     return false;

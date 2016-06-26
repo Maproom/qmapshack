@@ -85,15 +85,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     timerToolTip->setSingleShot(true);
     connect(timerToolTip, &QTimer::timeout, this, &CCanvas::slotToolTip);
 
-    loadIndicator1 = new QMovie(this);
-    loadIndicator1->setFileName("://animation/loader.gif");
+    loadIndicator1 = new QMovie("://animation/loader.gif", QByteArray(), this);
     mapLoadIndicator = new QLabel(this);
     mapLoadIndicator->setMovie(loadIndicator1);
     loadIndicator1->start();
     mapLoadIndicator->show();
 
-    loadIndicator2 = new QMovie(this);
-    loadIndicator2->setFileName("://animation/loader2.gif");
+    loadIndicator2 = new QMovie("://animation/loader2.gif", QByteArray(), this);
     demLoadIndicator = new QLabel(this);
     demLoadIndicator->setMovie(loadIndicator2);
     loadIndicator2->start();
@@ -326,10 +324,8 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     setSizeTrackProfile();
 }
 
-void CCanvas::paintEvent(QPaintEvent * e)
+void CCanvas::paintEvent(QPaintEvent*)
 {
-    Q_UNUSED(e);
-
     if(!isVisible())
     {
         return;

@@ -106,29 +106,23 @@ CMapItem * CMapList::item(int i)
 
 void CMapList::updateHelpText()
 {
-    if(treeWidget->topLevelItemCount() == 0)
+    bool haveMaps = (treeWidget->topLevelItemCount() > 0);
+
+    pushMapHonk->setVisible(!haveMaps);
+    labelHelpFillMapList->setVisible(!haveMaps);
+
+    if(!haveMaps)
     {
         labelIcon->show();
-        pushMapHonk->show();
-        labelHelpFillMapList->show();
         labelHelpActivateMap->hide();
     }
     else
     {
-        pushMapHonk->hide();
-        labelHelpFillMapList->hide();
-
         CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->topLevelItem(0));
-        if(item && item->isActivated())
-        {
-            labelIcon->hide();
-            labelHelpActivateMap->hide();
-        }
-        else
-        {
-            labelIcon->show();
-            labelHelpActivateMap->show();
-        }
+
+        bool showHelp = !(item && item->isActivated());
+        labelIcon->setVisible(showHelp);
+        labelHelpActivateMap->setVisible(showHelp);
     }
 }
 

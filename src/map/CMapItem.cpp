@@ -93,40 +93,19 @@ void CMapItem::updateIcon()
         return;
     }
 
-    QPixmap img("://icons/32x32/Map.png");
-    QFileInfo fi(filename);
-    if(fi.suffix().toLower() == "rmap")
-    {
-        img = QPixmap("://icons/32x32/MimeRMAP.png");
-    }
-    else if(fi.suffix().toLower() == "jnx")
-    {
-        img = QPixmap("://icons/32x32/MimeJNX.png");
-    }
-    else if(fi.suffix().toLower() == "vrt")
-    {
-        img = QPixmap("://icons/32x32/MimeVRT.png");
-    }
-    else if(fi.suffix().toLower() == "img")
-    {
-        img = QPixmap("://icons/32x32/MimeIMG.png");
-    }
-    else if(fi.suffix().toLower() == "map")
-    {
-        img = QPixmap("://icons/32x32/MimeMAP.png");
-    }
-    else if(fi.suffix().toLower() == "wmts")
-    {
-        img = QPixmap("://icons/32x32/MimeWMTS.png");
-    }
-    else if(fi.suffix().toLower() == "tms")
-    {
-        img = QPixmap("://icons/32x32/MimeTMS.png");
-    }
-    else if(fi.suffix().toLower() == "gemf")
-    {
-        img = QPixmap("://icons/32x32/MimeGEMF.png");
-    }
+    static QHash<QString, QString> icons {
+        {"rmap",   "://icons/32x32/MimeRMAP.png"}
+        , {"jnx",  "://icons/32x32/MimeJNX.png"}
+        , {"vrt",  "://icons/32x32/MimeVRT.png"}
+        , {"img",  "://icons/32x32/MimeIMG.png"}
+        , {"map",  "://icons/32x32/MimeMAP.png"}
+        , {"wmts", "://icons/32x32/MimeWMTS.png"}
+        , {"tms",  "://icons/32x32/MimeTMS.png"}
+        , {"gemf", "://icons/32x32/MimeGEMF.png"}
+    };
+
+    const QString &suffix = QFileInfo(filename).suffix().toLower();
+    QPixmap img( icons.contains(suffix) ? icons[suffix] : "://icons/32x32/Map.png" );
 
     setIcon(/* col */ 0, QIcon(img));
 }
@@ -154,6 +133,7 @@ bool CMapItem::toggleActivate()
 void CMapItem::deactivate()
 {
     QMutexLocker lock(&mutexActiveMaps);
+
     // remove mapfile setup dialog as child of this item
     showChildren(false);
 

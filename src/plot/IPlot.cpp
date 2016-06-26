@@ -372,8 +372,8 @@ void IPlot::mousePressEvent(QMouseEvent * e)
 
     bool wasProcessed = true;
 
-    QPoint pos  = e->pos();
-    posMouse1    = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+    QPoint pos = e->pos();
+    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
     if(e->button() == Qt::LeftButton)
     {
         if(mode == eModeIcon)

@@ -44,7 +44,7 @@ void IDB::setup(const QString &connectionName)
     references[connectionName]++;
 }
 
-bool IDB::setupDB()
+bool IDB::setupDB(QString &error)
 {
     QSqlQuery query(db);
 
@@ -66,7 +66,8 @@ bool IDB::setupDB()
                                            QMessageBox::Ok|QMessageBox::Abort);
             if(res != QMessageBox::Ok)
             {
-                exit(0);
+                error = tr("Migration aborted by user");
+                return false;
             }
 
             if(!migrateDB(version))
@@ -76,6 +77,8 @@ bool IDB::setupDB()
                                       tr("Error..."),
                                       msg,
                                       QMessageBox::Abort);
+
+                error = tr("Migration failed");
 
                 return false;
             }
@@ -88,6 +91,9 @@ bool IDB::setupDB()
                                   tr("Wrong database version..."),
                                   msg,
                                   QMessageBox::Abort);
+
+            error = tr("Database created by newer version of QMapShack");
+
             return false;
         }
     }
@@ -100,6 +106,8 @@ bool IDB::setupDB()
                                   tr("Error..."),
                                   msg,
                                   QMessageBox::Abort);
+
+            error = tr("Initialization failed");
 
             return false;
         }

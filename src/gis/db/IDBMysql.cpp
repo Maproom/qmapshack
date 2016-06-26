@@ -73,7 +73,8 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
         db = QSqlDatabase::database(connectionName);
     }
 
-    return setupDB();
+    QString error;
+    return setupDB(error);
 }
 
 bool IDBMysql::initDB()

@@ -158,7 +158,8 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
     QString cacheRoot = CMapDraw::getCacheRoot();
     const QStringList &dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
 
-    for(const QString &dir : dirs) {
+    for(const QString &dir : dirs)
+    {
         if(!maps.contains(dir))
         {
             qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";

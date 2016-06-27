@@ -20,8 +20,8 @@
 #include "setup/IAppSetup.h"
 #include "version.h"
 
-#include <QtWidgets>
 #include <QNetworkProxyFactory>
+#include <QtWidgets>
 #include <iostream>
 
 

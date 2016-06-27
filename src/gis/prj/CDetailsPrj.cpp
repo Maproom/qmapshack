@@ -543,7 +543,6 @@ struct wpt_info_t
     qreal distance3 = NOFLOAT;
     qreal ascend3 = NOFLOAT;
     qreal descend3 = NOFLOAT;
-
 };
 
 void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, QList<CGisItemWpt *> &wpts, CProgressDialog &progress, int &n, bool printable)

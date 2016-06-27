@@ -720,7 +720,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& cmt, const QString&
             for(const link_t &link : links)
             {
                 str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
-                    .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
+                       .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
             }
         }
     }
@@ -759,7 +759,7 @@ QString IGisItem::createText(bool isReadOnly, const QString& desc, const QList<l
             for(const link_t &link : links)
             {
                 str += QString("<p><a href='%1'>%2</a></p>").arg(link.uri.toString())
-                    .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
+                       .arg(link.text.isEmpty() ? link.uri.toString() : link.text);
             }
         }
     }

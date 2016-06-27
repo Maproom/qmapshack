@@ -72,7 +72,6 @@ void ITrack::setupProjection(const QRectF& boundingBox)
     {
         pjsrc = pj_init_plus("+init=epsg:3857");
     }
-
 }
 
 void ITrack::setTrack(CGisItemTrk * track)

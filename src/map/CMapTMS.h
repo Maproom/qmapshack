@@ -33,7 +33,7 @@ class CMapTMS : public IMap
     Q_OBJECT
 public:
     CMapTMS(const QString& filename, CMapDraw *parent);
-    virtual ~CMapTMS() {};
+    virtual ~CMapTMS() {}
 
     void draw(IDrawContext::buffer_t& buf) override;
 

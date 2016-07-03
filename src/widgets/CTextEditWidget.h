@@ -54,7 +54,7 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget
     Q_OBJECT
 public:
     CTextEditWidget(QWidget * parent);
-    virtual ~CTextEditWidget();
+    virtual ~CTextEditWidget() {}
 
     QString getHtml();
     void  setHtml(const QString& text)
@@ -73,6 +73,7 @@ private slots:
 
     void currentCharFormatChanged(const QTextCharFormat &format);
     void cursorPositionChanged();
+    void selectionChanged();
     void clipboardDataChanged();
 
 private:
@@ -82,5 +83,6 @@ private:
     void alignmentChanged(Qt::Alignment a);
 
     QAction * actionTextColor;
+    QMenu   * menuTextEdit;
 };
 #endif                           //CTEXTEDITWIDGET_H

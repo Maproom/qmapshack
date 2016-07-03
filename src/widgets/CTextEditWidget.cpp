@@ -130,28 +130,17 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     actionCut->setEnabled(false);
     actionCopy->setEnabled(false);
 
-    connect(actionCut,       &QAction::triggered, textEdit, &QTextEdit::cut);
-    connect(actionCopy,      &QAction::triggered, textEdit, &QTextEdit::copy);
-    connect(actionPaste,     &QAction::triggered, textEdit, &QTextEdit::paste);
-    connect(actionSelectAll, &QAction::triggered, textEdit, &QTextEdit::selectAll);
+    connect(actionCut,        &QAction::triggered,                    textEdit,   &QTextEdit::cut);
+    connect(actionCopy,       &QAction::triggered,                    textEdit,   &QTextEdit::copy);
+    connect(actionPaste,      &QAction::triggered,                    textEdit,   &QTextEdit::paste);
+    connect(actionSelectAll,  &QAction::triggered,                    textEdit,   &QTextEdit::selectAll);
+    connect(actionPastePlain, &QAction::triggered,                    this,       &CTextEditWidget::pastePlain);
+    connect(actionDelete,     &QAction::triggered,                    this,       &CTextEditWidget::deleteSelected);
+    connect(textEdit,         &QTextEdit::customContextMenuRequested, this,       &CTextEditWidget::customContextMenuRequested);
+    connect(textEdit,         &QTextEdit::copyAvailable,              actionCut,  &QAction::setEnabled);
+    connect(textEdit,         &QTextEdit::copyAvailable,              actionCopy, &QAction::setEnabled);
 
-    connect(actionPastePlain, &QAction::triggered, textEdit, [this]() {
-        QClipboard *clip = QApplication::clipboard();
-        textEdit->insertPlainText( clip->text() );
-    });
-
-    connect(actionDelete, &QAction::triggered, textEdit, [this]() {
-        textEdit->insertPlainText(QString());
-    });
-
-    connect(textEdit, &QTextEdit::customContextMenuRequested, textEdit, [this]() {
-        menuTextEdit->exec(QCursor::pos());
-    });
-
-    connect(textEdit,                  &QTextEdit::copyAvailable, actionCut,  &QAction::setEnabled);
-    connect(textEdit,                  &QTextEdit::copyAvailable, actionCopy, &QAction::setEnabled);
-
-    connect(QApplication::clipboard(), &QClipboard::dataChanged,  this,       &CTextEditWidget::clipboardDataChanged);
+    connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &CTextEditWidget::clipboardDataChanged);
 }
 
 QString CTextEditWidget::getHtml()
@@ -372,4 +361,20 @@ void CTextEditWidget::selectionChanged()
 {
     const QTextCursor cursor = textEdit->textCursor();
     actionDelete->setEnabled(cursor.selectionStart() != cursor.selectionEnd());
+}
+
+void CTextEditWidget::customContextMenuRequested()
+{
+    menuTextEdit->exec(QCursor::pos());
+}
+
+void CTextEditWidget::pastePlain()
+{
+    QClipboard *clip = QApplication::clipboard();
+    textEdit->insertPlainText( clip->text() );
+}
+
+void CTextEditWidget::deleteSelected()
+{
+    textEdit->insertPlainText(QString());
 }

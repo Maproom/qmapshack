@@ -85,6 +85,7 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
 
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
+    connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
 
     textEdit->setFocus();
 
@@ -98,7 +99,25 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     toolCopy->setDefaultAction(actionCopy);
     toolPaste->setDefaultAction(actionPaste);
 
+    QMenu *menu = new QMenu(this);
+    menu->addAction(actionPastePlain);
+    toolPaste->setMenu(menu);
+
+    /* Setup contextmenu for textEdit */
+    menuTextEdit = new QMenu(this);
+    menuTextEdit->addAction(actionUndo);
+    menuTextEdit->addAction(actionRedo);
+    menuTextEdit->addSeparator();
+    menuTextEdit->addAction(actionCut);
+    menuTextEdit->addAction(actionCopy);
+    menuTextEdit->addAction(actionPaste);
+    menuTextEdit->addAction(actionPastePlain);
+    menuTextEdit->addAction(actionDelete);
+    menuTextEdit->addSeparator();
+    menuTextEdit->addAction(actionSelectAll);
+
     actionPaste->setEnabled(!QApplication::clipboard()->text().isEmpty());
+    actionPastePlain->setEnabled(!QApplication::clipboard()->text().isEmpty());
     actionUndo->setEnabled(textEdit->document()->isUndoAvailable());
     actionRedo->setEnabled(textEdit->document()->isRedoAvailable());
 
@@ -111,19 +130,28 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     actionCut->setEnabled(false);
     actionCopy->setEnabled(false);
 
-    connect(actionCut,                 &QAction::triggered,       textEdit,   &QTextEdit::cut);
-    connect(actionCopy,                &QAction::triggered,       textEdit,   &QTextEdit::copy);
-    connect(actionPaste,               &QAction::triggered,       textEdit,   &QTextEdit::paste);
+    connect(actionCut,       &QAction::triggered, textEdit, &QTextEdit::cut);
+    connect(actionCopy,      &QAction::triggered, textEdit, &QTextEdit::copy);
+    connect(actionPaste,     &QAction::triggered, textEdit, &QTextEdit::paste);
+    connect(actionSelectAll, &QAction::triggered, textEdit, &QTextEdit::selectAll);
+
+    connect(actionPastePlain, &QAction::triggered, textEdit, [this]() {
+        QClipboard *clip = QApplication::clipboard();
+        textEdit->insertPlainText( clip->text() );
+    });
+
+    connect(actionDelete, &QAction::triggered, textEdit, [this]() {
+        textEdit->insertPlainText(QString());
+    });
+
+    connect(textEdit, &QTextEdit::customContextMenuRequested, textEdit, [this]() {
+        menuTextEdit->exec(QCursor::pos());
+    });
 
     connect(textEdit,                  &QTextEdit::copyAvailable, actionCut,  &QAction::setEnabled);
     connect(textEdit,                  &QTextEdit::copyAvailable, actionCopy, &QAction::setEnabled);
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged,  this,       &CTextEditWidget::clipboardDataChanged);
-}
-
-
-CTextEditWidget::~CTextEditWidget()
-{
 }
 
 QString CTextEditWidget::getHtml()
@@ -336,4 +364,12 @@ void CTextEditWidget::cursorPositionChanged()
 void CTextEditWidget::clipboardDataChanged()
 {
     actionPaste->setEnabled(!QApplication::clipboard()->text().isEmpty());
+    actionPastePlain->setEnabled(!QApplication::clipboard()->text().isEmpty());
+}
+
+
+void CTextEditWidget::selectionChanged()
+{
+    const QTextCursor cursor = textEdit->textCursor();
+    actionDelete->setEnabled(cursor.selectionStart() != cursor.selectionEnd());
 }

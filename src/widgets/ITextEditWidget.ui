@@ -82,6 +82,9 @@
          <height>24</height>
         </size>
        </property>
+       <property name="popupMode">
+        <enum>QToolButton::MenuButtonPopup</enum>
+       </property>
       </widget>
      </item>
      <item>
@@ -237,7 +240,11 @@
     <layout class="QHBoxLayout" name="horizontalLayout"/>
    </item>
    <item>
-    <widget class="QTextEdit" name="textEdit"/>
+    <widget class="QTextEdit" name="textEdit">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">
@@ -412,6 +419,37 @@
     <string>Ctrl+I</string>
    </property>
   </action>
+  <action name="actionPastePlain">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Paste (Plain)</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste as Plain Text</string>
+   </property>
+  </action>
+  <action name="actionSelectAll">
+   <property name="text">
+    <string>Select All</string>
+   </property>
+   <property name="toolTip">
+    <string>Select All</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="toolTip">
+    <string>Delete</string>
+   </property>
+  </action>
  </widget>
  <resources>
   <include location="../resources.qrc"/>
@@ -424,8 +462,8 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>454</x>
-     <y>479</y>
+     <x>417</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>
@@ -440,8 +478,8 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>454</x>
-     <y>479</y>
+     <x>417</x>
+     <y>331</y>
     </hint>
     <hint type="destinationlabel">
      <x>454</x>

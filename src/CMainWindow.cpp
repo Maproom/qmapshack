@@ -1055,7 +1055,6 @@ void CMainWindow::dropEvent(QDropEvent *event)
 
 void CMainWindow::slotSanityTest()
 {
-
     projPJ pjsrc = pj_init_plus("+init=epsg:32661");
     if(pjsrc == nullptr)
     {

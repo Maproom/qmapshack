@@ -1858,19 +1858,19 @@ qreal CGisItemTrk::getMax(const QString& source) const
 qreal CGisItemTrk::getMinProp(const QString& source) const
 {
     return propHandler == nullptr ? NOFLOAT
-        : propHandler->propBySource(source).min;
+           : propHandler->propBySource(source).min;
 }
 
 qreal CGisItemTrk::getMaxProp(const QString& source) const
 {
     return propHandler == nullptr ? NOFLOAT
-        : propHandler->propBySource(source).max;
+           : propHandler->propBySource(source).max;
 }
 
 QString CGisItemTrk::getUnitProp(const QString& source) const
 {
     return propHandler == nullptr ? QString()
-        : propHandler->propBySource(source).unit;
+           : propHandler->propBySource(source).unit;
 }
 
 

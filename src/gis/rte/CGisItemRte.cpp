@@ -179,7 +179,6 @@ bool CGisItemRte::isCalculated()
 
 void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
 {
-
     if(ele == NOFLOAT)
     {
         subpt.ele = NOINT;

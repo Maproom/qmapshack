@@ -76,6 +76,10 @@ private slots:
     void selectionChanged();
     void clipboardDataChanged();
 
+    void customContextMenuRequested();
+    void pastePlain();
+    void deleteSelected();
+
 private:
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
     void fontChanged(const QFont &f);

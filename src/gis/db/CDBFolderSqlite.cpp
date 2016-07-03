@@ -29,7 +29,8 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
 
     setText(CGisListDB::eColumnName, name);
 
-    if(setupDB(filename, name, error)) {
+    if(setupDB(filename, name, error))
+    {
         setupFromDB();
 
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLite.png"));

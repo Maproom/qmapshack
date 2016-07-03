@@ -1,3 +1,30 @@
+V 1.6.2
+* Add support kFreeBSD ports, treat like Linux.
+* Add support for GNU/Hurd, treat like Linux.
+* Trk: Range Selection: Fix bad pointers if point 1 equals point 2
+* Trk: Derive valid/invalid flags for elevation and time
+* Trk: Change filter to remove invalid trackpoints due to flags.
+* Trk: Optimize waypoint correlation
+* Trk: Add visible and total index to trackpoint info
+* Wpt: Allow png as custom symbol
+* Rte: Add ascend/descend info to routes
+* Maps: Implement automatic removal of caches for no longer existing maps
+* Maps: VRT Builder: Set file extension in file dialog for target file
+* Improve 1st time experience for new users
+* DB: Properly handle unusable SQLite databases
+* DB: Don't close application if database can not be migrated
+* [Issue #128] Show map info on cursor while routing
+* [Issue #132] GPX file exported from QMS not accepted by Basecamp, Strava and JOSM
+* [Issue #131] Strange behaviour of filters "Change Speed" and "Hide Invalid Points" in extreme situations
+* [Issue #134] Possibility to manually edit elevation data of track points (preferably in the table of points)
+* [Issue #115] Read namespaces for known extensions from .gpx
+* [Issue #48] No http map access behind proxy
+* [Issue #30] Create Track of Route
+* [Issue #141] Additional information for WP in roadbook
+* [Issue #143] %5 3%4%5 {1 m?} is added to some data in points table
+* [Issue #144] Crash - reproduceable when viewing track profiles
+* [Issue #148] Implement "Paste Plain" for CTextEditWidget
+
 V 1.6.1
 * GUI improvements
 * Improve render perfomance of DEM layer

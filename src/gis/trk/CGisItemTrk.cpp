@@ -370,7 +370,7 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-QString CGisItemTrk::getInfo(bool showName) const
+QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
 {
     QString val1, unit1, val2, unit2;
 
@@ -465,6 +465,16 @@ QString CGisItemTrk::getInfo(bool showName) const
     if((allValidFlags & (trkpt_t::eValidPos|trkpt_t::eInvalidPos)) == (trkpt_t::eValidPos|trkpt_t::eInvalidPos))
     {
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
+    }
+
+    if(showFullText && !trk.cmt.isEmpty())
+    {
+        str += "</div><div>" + getComment();
+    }
+
+    if(showFullText && !trk.desc.isEmpty())
+    {
+        str += "</div><div>" + getDescription();
     }
 
     return str + "</div>";

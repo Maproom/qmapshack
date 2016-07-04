@@ -29,7 +29,6 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     , db(db)
     , id(id)
 {
-//    qDebug() << "CDBItem::CDBItem()";
     QSqlQuery query(db);
     query.prepare("SELECT type, keyqms, icon, name, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
@@ -42,16 +41,19 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
         pixmap.loadFromData(query.value(2).toByteArray(), "PNG");
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
-        setToolTip(CGisListDB::eColumnName, query.value(4).toString());
+
+        // limit comment to 200 characters
+        QString comment = query.value(4).toString();
+        if(comment.size() > 200)
+        {
+            comment = comment.left(197) + "...";
+        }
+        setToolTip(CGisListDB::eColumnName, comment);
     }
 
     updateAge();
 }
 
-CDBItem::~CDBItem()
-{
-//    qDebug() << "CDBItem::~CDBItem()";
-}
 
 void CDBItem::updateAge()
 {

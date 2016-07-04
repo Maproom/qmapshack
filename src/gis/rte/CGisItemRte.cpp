@@ -330,9 +330,9 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
 
 
 
-QString CGisItemRte::getInfo(bool showName) const
+QString CGisItemRte::getInfo(bool showName, bool showFullText) const
 {
-    QString val1, unit1, val2, unit2;
+    QString val1, unit1;
     QString str = "<div>";
 
     if(showName)
@@ -378,7 +378,18 @@ QString CGisItemRte::getInfo(bool showName) const
         str += "<br/>\n";
         str += tr("with %1").arg(rte.lastRoutedWith);
     }
-    return str;
+
+    if(showFullText && !rte.cmt.isEmpty())
+    {
+        str += "</div><div>" + getComment();
+    }
+
+    if(showFullText && !rte.desc.isEmpty())
+    {
+        str += "</div><div>" + getDescription();
+    }
+
+    return str + "</div>";
 }
 
 IScrOpt * CGisItemRte::getScreenOptions(const QPoint& origin, IMouse * mouse)

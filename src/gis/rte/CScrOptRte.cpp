@@ -31,7 +31,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(rte->getInfo());
+    label->setText(rte->getInfo(true, false));
     adjustSize();
 
     toolInstruction->setEnabled(rte->isCalculated());

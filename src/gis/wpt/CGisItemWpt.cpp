@@ -237,9 +237,14 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
     return true;
 }
 
-QString CGisItemWpt::getInfo(bool allowEdit) const
+QString CGisItemWpt::getInfo(bool showName, bool showFullText) const
 {
-    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
+    QString str = "<div>";
+
+    if(showName)
+    {
+        str = "<b>" + getName() + "</b><br/>\n";
+    }
 
     if(geocache.hasData)
     {
@@ -286,7 +291,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
             str += "<br/>\n";
         }
 
-        if(desc.count() < 200)
+        if(showFullText || (desc.count() < 200))
         {
             str += desc;
         }
@@ -305,7 +310,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
                 str += "<br/>\n";
             }
 
-            if(cmt.count() < 200)
+            if(showFullText || cmt.count() < 200)
             {
                 str += cmt;
             }
@@ -315,7 +320,7 @@ QString CGisItemWpt::getInfo(bool allowEdit) const
             }
         }
     }
-    return str;
+    return str + "</div>";
 }
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)

@@ -219,7 +219,7 @@ public:
         return wpt.name.isEmpty() ? noName : wpt.name;
     }
 
-    QString getInfo(bool allowEdit = false) const override;
+    QString getInfo(bool showName, bool showFullText) const override;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);

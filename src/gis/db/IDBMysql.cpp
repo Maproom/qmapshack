@@ -19,6 +19,12 @@
 #include "CMainWindow.h"
 #include "gis/db/IDBMysql.h"
 #include "gis/db/macros.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CProgressDialog.h"
+
 
 #include <QtSql>
 #include <QtWidgets>
@@ -165,7 +171,23 @@ bool IDBMysql::migrateDB(int version)
 {
     QSqlQuery query(db);
 
-    return false;
+    try
+    {
+        if(version < 5)
+        {
+            if(!migrateDB4to5())
+            {
+                throw -1;
+            }
+        }
+    }
+    catch(int i)
+    {
+        if(i == -1)
+        {
+            return false;
+        }
+    }
 
     query.prepare( "UPDATE versioninfo set version=:version");
     query.bindValue(":version", DB_VERSION);
@@ -173,3 +195,77 @@ bool IDBMysql::migrateDB(int version)
     return true;
 }
 
+bool IDBMysql::migrateDB4to5()
+{
+    QSqlQuery query(db);
+
+    // id and comment to full text search index
+    QUERY_RUN("ALTER TABLE items ADD FULLTEXT INDEX serachindex (comment)", return false);
+
+
+    // get number of items in the database
+    QUERY_RUN("SELECT Count(*) FROM items", return false);
+    query.next();
+    quint32 N = query.value(0).toUInt();
+
+    // over all items
+    QUERY_RUN("SELECT id, type FROM items", return false);
+    PROGRESS_SETUP("Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    progress.enableCancel(false);
+    quint32 cnt = 0;
+    while(query.next())
+    {
+        PROGRESS(cnt++,;);
+
+        quint64 idItem      = query.value(0).toULongLong();
+        quint32 typeItem    = query.value(1).toUInt();
+
+        IGisItem *item = nullptr;
+
+        // load item from database
+        switch(typeItem)
+        {
+        case IGisItem::eTypeWpt:
+            item = new CGisItemWpt(idItem, db, nullptr);
+            break;
+
+        case IGisItem::eTypeTrk:
+            item = new CGisItemTrk(idItem, db, nullptr);
+            break;
+
+        case IGisItem::eTypeRte:
+            item = new CGisItemRte(idItem, db, nullptr);
+            break;
+
+        case IGisItem::eTypeOvl:
+            item = new CGisItemOvlArea(idItem, db, nullptr);
+            break;
+
+        default:
+            ;
+        }
+
+        if(nullptr == item)
+        {
+            continue;
+        }
+
+        // get full size info text
+        QString comment = item->getInfo(true, true);
+
+        // replace comment with full size info text in items table
+        QSqlQuery query2(db);
+        query2.prepare("UPDATE items SET comment=:comment WHERE id=:id");
+        query2.bindValue(":comment", comment);
+        query2.bindValue(":id", idItem);
+        if(!query2.exec())
+        {
+            qWarning() << query2.lastQuery();
+            qWarning() << query2.lastError();
+        }
+
+        delete item;
+    }
+
+    return true;
+}

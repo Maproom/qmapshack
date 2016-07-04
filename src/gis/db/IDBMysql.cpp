@@ -112,6 +112,7 @@ bool IDBMysql::initDB()
                "last_user      TEXT DEFAULT NULL,"
                "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
                "trash          DATETIME DEFAULT NULL,"
+               "FULLTEXT (name, comment),"
                "UNIQUE KEY (keyqms)"
                ")", return false);
 

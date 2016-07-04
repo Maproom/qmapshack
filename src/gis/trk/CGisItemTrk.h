@@ -181,7 +181,7 @@ public:
        @param showName  if true the track name is shown
        @return
      */
-    QString getInfo(bool showName = true) const override;
+    QString getInfo(bool showName, bool showFullText) const override;
     /// get a summary of a selected range
     QString getInfoRange() const;
     /// get a summary of a selected range defined by two track points

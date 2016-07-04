@@ -376,10 +376,16 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     return scrOpt;
 }
 
-QString CGisItemOvlArea::getInfo(bool allowEdit) const
+QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
 {
     QString unit, val;
-    QString str = "<div style='font-weight: bold;'>" + getName() + "</div>";
+    QString str = "<div>";
+
+    if(showName)
+    {
+        str += "<b>" + getName() + "</b>";
+    }
+
 
     IUnit::self().meter2area(area.area, val, unit);
     str += "<br/>\n" + tr("Area: %1%2").arg(val).arg(unit);
@@ -392,7 +398,7 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
             str += "<br/>\n";
         }
 
-        if(desc.count() < 200)
+        if(showFullText || desc.count() < 200)
         {
             str += desc;
         }
@@ -411,7 +417,7 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
                 str += "<br/>\n";
             }
 
-            if(cmt.count() < 200)
+            if(showFullText || cmt.count() < 200)
             {
                 str += cmt;
             }
@@ -422,7 +428,7 @@ QString CGisItemOvlArea::getInfo(bool allowEdit) const
         }
     }
 
-    return str;
+    return str + "</div>";
 }
 
 void CGisItemOvlArea::getPolylineFromData(SGisLine &l)

@@ -250,9 +250,13 @@ public:
 
     /**
        @brief Get a short string with the items properties to be displayed in tool tips or similar
+
+       @param showName          set true if the first line should be the item's name
+       @apram showFullText      set false to get a 200 characters limited info text
+
        @return A string object.
      */
-    virtual QString getInfo(bool allowEdit = false) const = 0;
+    virtual QString getInfo(bool showName, bool showFullText) const = 0;
 
     virtual const QString& getComment() const = 0;
     virtual const QString& getDescription() const = 0;

@@ -31,7 +31,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(trk->getInfo());
+    label->setText(trk->getInfo(true, false));
     adjustSize();
 
     toolProfile->setChecked(trk->hasUserFocus());

@@ -30,12 +30,24 @@ class CDBItem : public QTreeWidgetItem
     Q_DECLARE_TR_FUNCTIONS(CDBItem)
 public:
     CDBItem(QSqlDatabase& db, quint64 id, IDBFolder * parent);
-    virtual ~CDBItem();
+    virtual ~CDBItem() = default;
 
+    /**
+       @brief Get the database id
+       @return The ID value used by the database
+     */
     quint64 getId()
     {
         return id;
     }
+
+    /**
+       @brief Get the item key
+
+       This is not the full blown QMapSahck item key with project and device key. It's just the item key.
+
+       @return The string with the item key
+     */
     const QString& getKey()
     {
         return key;
@@ -51,6 +63,9 @@ public:
      */
     void remove();
 
+    /**
+       @brief Update the time the item is in the lost & found folder
+     */
     void updateAge();
 
 private:

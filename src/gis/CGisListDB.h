@@ -59,6 +59,7 @@ private slots:
     void slotDelDatabase();
     void slotDelItem();
     void slotUpdateDatabase();
+    void slotSearchDatabase();
 
     void slotReadyRead();
 
@@ -80,6 +81,7 @@ private:
     QMenu * menuDatabase;
     QAction * actionDelDatabase;
     QAction * actionUpdate;
+    QAction * actionSearch;
 
     QMenu * menuItem;
     QAction * actionDelItem;

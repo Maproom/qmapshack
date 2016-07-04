@@ -19,7 +19,7 @@
 #ifndef MACROS_H
 #define MACROS_H
 
-#define DB_VERSION 4
+#define DB_VERSION 5
 
 #define NO_CMD ((void)0)
 

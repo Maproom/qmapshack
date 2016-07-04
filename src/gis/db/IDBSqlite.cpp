@@ -377,7 +377,8 @@ bool IDBSqlite::migrateDB4to5()
     quint32 cnt = 0;
     while(query.next())
     {
-        PROGRESS(cnt++,;);
+        PROGRESS(cnt++,;
+                 );
 
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();

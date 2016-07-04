@@ -142,6 +142,16 @@ public:
 
     void updateItemsOnWks();
 
+    /**
+       @brief Do a database search.
+
+       This must be overridden by the database folder classes.
+
+       @param str       The string to search for
+       @param result    The result as a folder/item list
+     */
+    virtual void search(const QString& str, QTreeWidget * result) {}
+
 protected:
     /**
        @brief Setup all item properties

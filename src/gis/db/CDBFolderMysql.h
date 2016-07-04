@@ -41,6 +41,8 @@ public:
 
     QString getDBInfo() const;
 
+    void search(const QString& str, QTreeWidget * result) override;
+
 private:
     const QString server;
     const QString port;

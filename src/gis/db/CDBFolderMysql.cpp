@@ -74,3 +74,7 @@ QString CDBFolderMysql::getDBInfo() const
 
     return str;
 }
+
+void CDBFolderMysql::search(const QString& str, QTreeWidget * result)
+{
+}

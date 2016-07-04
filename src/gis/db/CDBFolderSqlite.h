@@ -37,6 +37,8 @@ public:
 
     QString getDBInfo() const;
 
+    void search(const QString& str, QTreeWidget * result) override;
+
 private:
     QString filename;
     QString error;

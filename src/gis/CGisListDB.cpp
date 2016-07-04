@@ -123,8 +123,10 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
+    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/SearchDatabase.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
+
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -322,6 +324,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         bool enabled = database->getDb().isOpen();
         actionUpdate->setEnabled(enabled);
         actionAddFolder->setEnabled(enabled);
+        actionSearch->setEnabled(enabled);
 
         menuDatabase->exec(p);
 
@@ -701,6 +704,10 @@ void CGisListDB::slotUpdateDatabase()
     }
 }
 
+void CGisListDB::slotSearchDatabase()
+{
+
+}
 
 void CGisListDB::slotReadyRead()
 {

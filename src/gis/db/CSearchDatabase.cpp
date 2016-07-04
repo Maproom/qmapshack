@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,37 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef IDBFOLDERSQL_H
-#define IDBFOLDERSQL_H
-
+#include "gis/CGisListDB.h"
+#include "gis/db/CSearchDatabase.h"
 #include "gis/db/IDBFolder.h"
 
-class CDBFolderLostFound;
-class QUdpSocket;
-
-#define UDP_PORT 34123
-
-class IDBFolderSql : public IDBFolder, public QObject
+CSearchDatabase::CSearchDatabase(IDBFolder &db, CGisListDB *parent)
+    : QDialog(parent)
+    , db(db)
 {
-public:
-    IDBFolderSql(QSqlDatabase& db, QTreeWidget * parent);
-    virtual ~IDBFolderSql() = default;
+    setupUi(this);
 
-    void expanding() override;
-    void updateLostFound();
-    void update(CEvtW2DAckInfo * info) override
-    {
-        IDBFolder::update(info);
-    }
-    bool update() override;
+    connect(pushSearch, &QPushButton::clicked, this, &CSearchDatabase::slotSearch);
+    connect(pushClose, &QPushButton::clicked, this, &CSearchDatabase::accept);
+}
 
-    void announceChange() const;
 
-protected:
-    CDBFolderLostFound * folderLostFound = nullptr;
-
-    QUdpSocket * socket;
-};
-
-#endif //IDBFOLDERSQL_H
-
+void CSearchDatabase::slotSearch()
+{
+    treeResult->clear();
+    db.search(lineQuery->text(), treeResult);
+}

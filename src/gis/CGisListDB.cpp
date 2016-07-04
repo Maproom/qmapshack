@@ -25,6 +25,7 @@
 #include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/CSearchDatabase.h"
 #include "gis/db/CSetupDatabase.h"
 #include "gis/db/CSetupFolder.h"
 #include "gis/db/macros.h"
@@ -706,7 +707,16 @@ void CGisListDB::slotUpdateDatabase()
 
 void CGisListDB::slotSearchDatabase()
 {
+    CGisListDBEditLock lock(false, this, "slotSearchDatabase");
 
+    IDBFolder * db = dynamic_cast<IDBFolder*>(currentItem());
+    if(db == nullptr)
+    {
+        return;
+    }
+
+    CSearchDatabase dlg(*db,this);
+    dlg.exec();
 }
 
 void CGisListDB::slotReadyRead()

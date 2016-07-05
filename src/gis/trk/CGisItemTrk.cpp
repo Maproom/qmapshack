@@ -1172,7 +1172,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         trkwpt.y      = pos.y() * DEG_TO_RAD;
         trkwpt.key    = wpt->getKey();
 
-        qreal a1, a2;
+        qreal a1 = 0, a2 = 0;
         qreal d = GPS_Math_Distance(pt0.x, pt0.y, trkwpt.x, trkwpt.y, a1, a2);
 
         trkwpt.x = qCos(a1 * DEG_TO_RAD) * d;

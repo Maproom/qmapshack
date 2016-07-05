@@ -124,17 +124,15 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     menuDatabase        = new QMenu(this);
     menuDatabase->addAction(actionAddFolder);
-    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/SearchDatabase.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
+    actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
-
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
 
     menuLostFoundItem       = new QMenu(this);
     actionDelLostFoundItem  = menuLostFoundItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelLostFoundItem()));
-
 
     connect(this, &CGisListDB::customContextMenuRequested, this, &CGisListDB::slotContextMenu);
     connect(this, &CGisListDB::itemExpanded,               this, &CGisListDB::slotItemExpanded);

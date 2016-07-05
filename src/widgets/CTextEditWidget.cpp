@@ -361,7 +361,33 @@ void CTextEditWidget::currentCharFormatChanged(const QTextCharFormat &format)
 
 void CTextEditWidget::cursorPositionChanged()
 {
+    static QHash<QTextListFormat::Style, int> styleToIndex({
+        std::make_pair(QTextListFormat::ListDisc,       1),
+        std::make_pair(QTextListFormat::ListCircle,     2),
+        std::make_pair(QTextListFormat::ListSquare,     3),
+        std::make_pair(QTextListFormat::ListDecimal,    4),
+        std::make_pair(QTextListFormat::ListLowerAlpha, 5),
+        std::make_pair(QTextListFormat::ListUpperAlpha, 6),
+        std::make_pair(QTextListFormat::ListLowerRoman, 7),
+        std::make_pair(QTextListFormat::ListUpperRoman, 9)
+    });
+
     alignmentChanged(textEdit->alignment());
+
+    int listStyleIndex = 0;
+
+    QTextCursor cursor = textEdit->textCursor();
+    if(cursor.currentList())
+    {
+        QTextListFormat::Style style = cursor.currentList()->format().style();
+
+        if(styleToIndex.contains(style))
+        {
+            listStyleIndex = styleToIndex[ cursor.currentList()->format().style() ];
+        }
+    }
+
+    comboStyle->setCurrentIndex(listStyleIndex);
 }
 
 

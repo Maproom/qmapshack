@@ -67,6 +67,7 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     toolRight->setDefaultAction(actionAlignRight);
     toolBlock->setDefaultAction(actionAlignJustify);
 
+    defaultFont = textEdit->font();
 
     QPixmap pix(24, 24);
     pix.fill(Qt::black);
@@ -107,6 +108,17 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     menuTextEdit->addAction(actionPastePlain);
     menuTextEdit->addAction(actionDelete);
     menuTextEdit->addSeparator();
+
+    QMenu *removeFormat = new QMenu(tr("Reset format"), this);
+    {
+        menuTextEdit->addMenu(removeFormat);
+        removeFormat->addAction(actionResetFont);
+        removeFormat->addAction(actionResetLayout);
+    }
+
+    connect(actionResetFont,   &QAction::triggered, this, &CTextEditWidget::resetFont);
+    connect(actionResetLayout, &QAction::triggered, this, &CTextEditWidget::resetLayout);
+
     menuTextEdit->addAction(actionSelectAll);
 
     actionPaste->setEnabled(!QApplication::clipboard()->text().isEmpty());
@@ -200,10 +212,9 @@ void CTextEditWidget::textAlign(QAction *a)
 
 void CTextEditWidget::textStyle(int styleIndex)
 {
-    QTextCursor cursor = textEdit->textCursor();
-
     if (styleIndex > 0)
     {
+        QTextCursor cursor = textEdit->textCursor();
         QTextListFormat::Style style = QTextListFormat::ListDisc;
 
         static QTextListFormat::Style indexToFormat[] = {
@@ -246,10 +257,36 @@ void CTextEditWidget::textStyle(int styleIndex)
     }
     else
     {
-        cursor.setBlockFormat(QTextBlockFormat());
+        resetLayout();
     }
 }
 
+void CTextEditWidget::resetLayout()
+{
+    textEdit->textCursor().setBlockFormat(QTextBlockFormat());
+}
+
+void CTextEditWidget::resetFont()
+{
+    QTextCharFormat fmt;
+    fmt.setFontUnderline(false);
+    fmt.setFontWeight(QFont::Normal);
+    fmt.setFontItalic(false);
+    fmt.setForeground(QColor());
+
+    fmt.setFont(defaultFont);
+    fmt.setFontPointSize(defaultFont.pointSizeF());
+
+    QTextCursor cursor = textEdit->textCursor();
+    if (!cursor.hasSelection())
+    {
+        cursor.select(QTextCursor::WordUnderCursor);
+    }
+    cursor.setCharFormat(fmt);
+
+    fontChanged(defaultFont);
+    colorChanged(QColor());
+}
 
 void CTextEditWidget::textColor()
 {

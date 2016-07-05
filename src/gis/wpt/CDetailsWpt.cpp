@@ -186,8 +186,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(this);
-        dlg.setHtml(wpt.getComment());
+        CTextEditWidget dlg(wpt.getComment(), this);
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setComment(dlg.getHtml());
@@ -196,8 +195,7 @@ void CDetailsWpt::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(this);
-        dlg.setHtml(wpt.getDescription());
+        CTextEditWidget dlg(wpt.getDescription(), this);
         if(dlg.exec() == QDialog::Accepted)
         {
             wpt.setDescription(dlg.getHtml());

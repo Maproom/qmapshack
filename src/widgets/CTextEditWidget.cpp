@@ -43,7 +43,7 @@
 
 #include <QtWidgets>
 
-CTextEditWidget::CTextEditWidget(QWidget * parent)
+CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -81,6 +81,7 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
     connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
 
+    textEdit->setHtml(html);
     textEdit->setFocus();
 
     fontChanged(textEdit->font());

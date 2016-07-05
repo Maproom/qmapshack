@@ -152,8 +152,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(nullptr);
-        dlg.setHtml(area.getComment());
+        CTextEditWidget dlg(area.getComment(), nullptr);
         if(dlg.exec() == QDialog::Accepted)
         {
             area.setComment(dlg.getHtml());
@@ -162,8 +161,7 @@ void CDetailsOvlArea::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(nullptr);
-        dlg.setHtml(area.getDescription());
+        CTextEditWidget dlg(area.getDescription(), nullptr);
         if(dlg.exec() == QDialog::Accepted)
         {
             area.setDescription(dlg.getHtml());

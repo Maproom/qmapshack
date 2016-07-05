@@ -610,8 +610,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(this);
-        dlg.setHtml(trk.getComment());
+        CTextEditWidget dlg(trk.getComment(), this);
         if(dlg.exec() == QDialog::Accepted)
         {
             trk.setComment(dlg.getHtml());
@@ -620,8 +619,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(this);
-        dlg.setHtml(trk.getDescription());
+        CTextEditWidget dlg(trk.getDescription(), this);
         if(dlg.exec() == QDialog::Accepted)
         {
             trk.setDescription(dlg.getHtml());

@@ -18,13 +18,10 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderSqlite.h"
-#include "gis/db/CDBFolderProject.h"
-#include "gis/db/CDBFolderOther.h"
-#include "gis/db/CDBItem.h"
 #include "gis/db/macros.h"
 
-#include <QtWidgets>
 #include <QtSql>
+#include <QtWidgets>
 
 CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
@@ -72,63 +69,12 @@ QString CDBFolderSqlite::getDBInfo() const
     return str;
 }
 
-void CDBFolderSqlite::search(const QString& str, QTreeWidget * result)
+
+bool CDBFolderSqlite::search(const QString& str, QSqlQuery& query)
 {
-    QSqlQuery query(IDB::db);
     query.prepare("SELECT id FROM searchindex WHERE comment MATCH :str");
     query.bindValue(":str", str);
-    QUERY_EXEC(return );
+    QUERY_EXEC(return false);
 
-    QMap<quint64, IDBFolder*> folders;
-
-    while(query.next())
-    {
-        quint64 itemId = query.value(0).toULongLong();
-
-        QSqlQuery query2(IDB::db);
-        query2.prepare("SELECT t1.id, t1.type, t1.name FROM folders AS t1 WHERE id=(SELECT parent FROM folder2item WHERE child=:id)");
-        query2.bindValue(":id", itemId);
-        if(!query2.exec())
-        {
-            qWarning() << query2.lastQuery();
-            qWarning() << query2.lastError();
-            continue;
-        }
-
-        while(query2.next())
-        {
-            quint64 folderId = query2.value(0).toULongLong();
-            quint32 type = query2.value(1).toUInt();
-            QString name = query2.value(2).toString();
-
-            IDBFolder * folder = nullptr;
-
-            if(!folders.contains(folderId))
-            {
-                switch(type)
-                {
-                case IDBFolder::eTypeProject:
-                    folder = new CDBFolderProject(IDB::db, folderId, 0);
-                    break;
-                case IDBFolder::eTypeOther:
-                    folder = new CDBFolderOther(IDB::db, folderId, 0);
-                    break;
-                default:
-                    continue;
-                }
-
-                folders[folderId] = folder;
-                result->addTopLevelItem(folder);
-            }
-            else
-            {
-                folder = folders[folderId];
-            }
-
-            new CDBItem(IDB::db, itemId, folder);
-
-        }
-    }
-
-    result->header()->resizeSections(QHeaderView::ResizeToContents);
+    return true;
 }

@@ -22,6 +22,8 @@
 #include "gis/db/IDBFolder.h"
 #include <QCoreApplication>
 
+class CDBItem;
+
 class CDBFolderLostFound : public IDBFolder
 {
     Q_DECLARE_TR_FUNCTIONS(CDBFolderLostFound)

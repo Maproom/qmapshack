@@ -24,6 +24,7 @@
 
 class CGisListDB;
 class IDBFolder;
+class QSqlDatabase;
 
 class CSearchDatabase : public QDialog, private Ui::ISearchDatabase
 {
@@ -32,11 +33,18 @@ public:
     CSearchDatabase(IDBFolder& db, CGisListDB * parent);
     virtual ~CSearchDatabase() = default;
 
+signals:
+    void sigItemChanged(QTreeWidgetItem * item, int column);
+
 private slots:
     void slotSearch();
+    void slotItemChanged(QTreeWidgetItem * item, int column);
 
 private:
-    IDBFolder& db;
+    void addWithParentFolders(QTreeWidget * result, IDBFolder * folder, QMap<quint64, IDBFolder *> &folders, QSqlDatabase &sqlDB);
+    IDBFolder& dbFolder;
+
+    bool internalEdit = false;
 };
 
 #endif //CSEARCHDATABASE_H

@@ -6,14 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>545</width>
+    <height>492</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Search...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="labelName">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QLineEdit" name="lineQuery">
      <property name="focusPolicy">
@@ -30,22 +37,19 @@
    </item>
    <item>
     <widget class="QTreeWidget" name="treeResult">
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
      <column>
       <property name="text">
-       <string notr="true">1</string>
+       <string notr="true"/>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Neue Spalte</string>
+       <string>Name</string>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Neue Spalte</string>
+       <string/>
       </property>
      </column>
     </widget>

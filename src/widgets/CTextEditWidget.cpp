@@ -266,10 +266,7 @@ void CTextEditWidget::textStyle(int styleIndex)
     }
     else
     {
-        // ####
-        QTextBlockFormat bfmt;
-        bfmt.setObjectIndex(-1);
-        cursor.mergeBlockFormat(bfmt);
+        cursor.setBlockFormat(QTextBlockFormat());
     }
 }
 

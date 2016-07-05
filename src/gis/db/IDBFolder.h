@@ -25,7 +25,7 @@
 class QSqlDatabase;
 class CEvtW2DAckInfo;
 class IDBFolderSql;
-class CDBItem;
+
 
 /**
  * @brief Baseclass for all folders in the database view
@@ -145,12 +145,16 @@ public:
     /**
        @brief Do a database search.
 
-       This must be overridden by the database folder classes.
+       This must be overridden by the database folder classes. As a result the query will
+       contain a list of item IDs.
 
        @param str       The string to search for
-       @param result    The result as a folder/item list
+       @param query     The sql query item to use
      */
-    virtual void search(const QString& str, QTreeWidget * result) {}
+    virtual bool search(const QString& str, QSqlQuery& query)
+    {
+        return false;
+    }
 
 protected:
     /**

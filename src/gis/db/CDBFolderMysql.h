@@ -41,7 +41,7 @@ public:
 
     QString getDBInfo() const;
 
-    void search(const QString& str, QTreeWidget * result) override;
+    bool search(const QString& str, QSqlQuery& query) override;
 
 private:
     const QString server;

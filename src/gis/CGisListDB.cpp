@@ -44,7 +44,7 @@ public:
         {
             CCanvas::setOverrideCursor(Qt::WaitCursor, "CGisListDBEditLock: " + src);
         }
-        widget->isInternalEdit += 1;
+        widget->isInternalEdit++;
     }
     ~CGisListDBEditLock()
     {
@@ -52,7 +52,7 @@ public:
         {
             CCanvas::restoreOverrideCursor("~CGisListDBEditLock: " + src);
         }
-        widget->isInternalEdit -= 1;
+        widget->isInternalEdit--;
     }
 private:
     CGisListDB * widget;
@@ -715,8 +715,11 @@ void CGisListDB::slotSearchDatabase()
         return;
     }
 
+    isInternalEdit--;
     CSearchDatabase dlg(*db,this);
+    connect(&dlg, &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
     dlg.exec();
+    isInternalEdit++;
 }
 
 void CGisListDB::slotReadyRead()

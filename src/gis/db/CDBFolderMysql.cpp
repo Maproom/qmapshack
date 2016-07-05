@@ -18,8 +18,9 @@
 
 #include "gis/CGisListDB.h"
 #include "gis/db/CDBFolderMysql.h"
+#include "gis/db/macros.h"
 
-#include <QSqlError>
+#include <QtSql>
 
 CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString & passwd, bool noPasswd, const QString &name, QTreeWidget *parent)
     : IDBFolderSql(IDB::db, parent)
@@ -75,6 +76,11 @@ QString CDBFolderMysql::getDBInfo() const
     return str;
 }
 
-void CDBFolderMysql::search(const QString& str, QTreeWidget * result)
+bool CDBFolderMysql::search(const QString& str, QSqlQuery &query)
 {
+    query.prepare("SELECT id FROM items WHERE MATCH(comment) AGAINST (:str IN BOOLEAN MODE)");
+    query.bindValue(":str", str);
+    QUERY_EXEC(return false);
+
+    return true;
 }

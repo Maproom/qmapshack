@@ -219,7 +219,53 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboStyle"/>
+      <widget class="QComboBox" name="comboStyle">
+       <item>
+        <property name="text">
+         <string>Standard</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bullet List (Disc)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bullet List (Circle)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Bullet List (Square)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ordered List (Decimal)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ordered List (Alpha lower)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ordered List (Alpha upper)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ordered List (Roman lower)</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Ordered List (Roman upper)</string>
+        </property>
+       </item>
+      </widget>
      </item>
      <item>
       <spacer>

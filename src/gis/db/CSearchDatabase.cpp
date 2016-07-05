@@ -43,7 +43,6 @@ CSearchDatabase::CSearchDatabase(IDBFolder &dbFolder, CGisListDB *parent)
 
 void CSearchDatabase::slotItemChanged(QTreeWidgetItem * item, int column)
 {
-
     if((column != CGisListDB::eColumnCheckbox) || internalEdit)
     {
         return;

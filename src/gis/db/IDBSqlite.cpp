@@ -154,6 +154,20 @@ bool IDBSqlite::initDB()
                   "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
                   "END;", throw -1);
 
+        // create virtaul table with search index
+        QUERY_RUN("CREATE VIRTUAL TABLE searchindex USING fts4(id, comment)", throw -1);
+
+        QUERY_RUN("CREATE TRIGGER searchindex_update "
+                  "AFTER UPDATE ON items BEGIN "
+                  "UPDATE searchindex SET comment=NEW.comment "
+                  "WHERE id=OLD.id; "
+                  "END;", throw -1);
+
+        QUERY_RUN("CREATE TRIGGER searchindex_insert "
+                  "AFTER INSERT ON items BEGIN "
+                  "INSERT INTO searchindex(id, comment) VALUES(NEW.id, NEW.comment); "
+                  "END;", throw -1);
+
         QUERY_RUN("END TRANSACTION;", throw -1);
     }
     catch(int i)
@@ -439,6 +453,18 @@ bool IDBSqlite::migrateDB4to5()
 
         delete item;
     }
+
+
+    QUERY_RUN("CREATE TRIGGER searchindex_update "
+              "AFTER UPDATE ON items BEGIN "
+              "UPDATE searchindex SET comment=NEW.comment "
+              "WHERE id=OLD.id; "
+              "END;", return false);
+    QUERY_RUN("CREATE TRIGGER searchindex_insert "
+              "AFTER INSERT ON items BEGIN "
+              "INSERT INTO searchindex(id, comment) VALUES(NEW.id, NEW.comment); "
+              "END;", return false);
+
 
     return true;
 }

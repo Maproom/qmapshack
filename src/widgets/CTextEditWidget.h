@@ -53,15 +53,10 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget
 {
     Q_OBJECT
 public:
-    CTextEditWidget(QWidget * parent);
+    CTextEditWidget(const QString &html, QWidget * parent);
     virtual ~CTextEditWidget() {}
 
     QString getHtml();
-    void  setHtml(const QString& text)
-    {
-        textEdit->clear();
-        textEdit->insertHtml(text);
-    }
 
 private slots:
     void textBold();

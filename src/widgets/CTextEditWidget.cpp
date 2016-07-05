@@ -40,6 +40,7 @@
 ****************************************************************************/
 
 #include "CTextEditWidget.h"
+#include "helpers/Signals.h"
 
 #include <QtWidgets>
 
@@ -76,6 +77,9 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     toolColor->setDefaultAction(actionTextColor);
 
     connect(comboStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CTextEditWidget::textStyle);
+
+    connect(comboFont, &QFontComboBox::currentFontChanged, textEdit, &QTextEdit::setCurrentFont);
+    connect(spinFontSize, static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), textEdit, &QTextEdit::setFontPointSize);
 
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
@@ -387,7 +391,24 @@ void CTextEditWidget::cursorPositionChanged()
         }
     }
 
+    X______________BlockAllSignals______________X(this);
     comboStyle->setCurrentIndex(listStyleIndex);
+
+    const QFont &font = cursor.charFormat().font();
+    comboFont->setCurrentFont(font);
+
+    int pointSize = font.pointSize();
+
+    if(-1 == pointSize)
+    {
+        // some texts (if pasted from px. a browser) have their font size
+        // specified in pixels instead of points, so we need to convert that
+        QFontInfo info(font);
+        pointSize = info.pointSize();
+    }
+    spinFontSize->setValue(pointSize);
+
+    X_____________UnBlockAllSignals_____________X(this);
 }
 
 

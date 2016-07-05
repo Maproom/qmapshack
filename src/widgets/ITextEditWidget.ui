@@ -22,7 +22,7 @@
      <item>
       <widget class="QToolButton" name="toolUndo">
        <property name="text">
-        <string>...</string>
+        <string>Undo</string>
        </property>
        <property name="iconSize">
         <size>
@@ -35,7 +35,7 @@
      <item>
       <widget class="QToolButton" name="toolRedo">
        <property name="text">
-        <string>...</string>
+        <string>Redo</string>
        </property>
        <property name="iconSize">
         <size>
@@ -48,7 +48,7 @@
      <item>
       <widget class="QToolButton" name="toolCut">
        <property name="text">
-        <string>...</string>
+        <string>Cut</string>
        </property>
        <property name="iconSize">
         <size>
@@ -61,7 +61,7 @@
      <item>
       <widget class="QToolButton" name="toolCopy">
        <property name="text">
-        <string>...</string>
+        <string>Copy</string>
        </property>
        <property name="iconSize">
         <size>
@@ -74,7 +74,7 @@
      <item>
       <widget class="QToolButton" name="toolPaste">
        <property name="text">
-        <string>...</string>
+        <string>Paste</string>
        </property>
        <property name="iconSize">
         <size>
@@ -97,7 +97,7 @@
      <item>
       <widget class="QToolButton" name="toolLeft">
        <property name="text">
-        <string>...</string>
+        <string>A:L</string>
        </property>
        <property name="iconSize">
         <size>
@@ -110,7 +110,7 @@
      <item>
       <widget class="QToolButton" name="toolCenter">
        <property name="text">
-        <string>...</string>
+        <string>A:C</string>
        </property>
        <property name="iconSize">
         <size>
@@ -123,7 +123,7 @@
      <item>
       <widget class="QToolButton" name="toolRight">
        <property name="text">
-        <string>...</string>
+        <string>A:R</string>
        </property>
        <property name="iconSize">
         <size>
@@ -136,7 +136,7 @@
      <item>
       <widget class="QToolButton" name="toolBlock">
        <property name="text">
-        <string>...</string>
+        <string>A:B</string>
        </property>
        <property name="iconSize">
         <size>
@@ -169,7 +169,7 @@
      <item>
       <widget class="QToolButton" name="toolBold">
        <property name="text">
-        <string>...</string>
+        <string>B</string>
        </property>
        <property name="iconSize">
         <size>
@@ -182,7 +182,7 @@
      <item>
       <widget class="QToolButton" name="toolItalic">
        <property name="text">
-        <string>...</string>
+        <string>I</string>
        </property>
        <property name="iconSize">
         <size>
@@ -195,7 +195,7 @@
      <item>
       <widget class="QToolButton" name="toolUnder">
        <property name="text">
-        <string>...</string>
+        <string>U</string>
        </property>
        <property name="iconSize">
         <size>
@@ -208,7 +208,7 @@
      <item>
       <widget class="QToolButton" name="toolColor">
        <property name="text">
-        <string>...</string>
+        <string>C</string>
        </property>
        <property name="iconSize">
         <size>

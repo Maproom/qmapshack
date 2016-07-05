@@ -70,6 +70,8 @@ private slots:
     void textStyle(int styleIndex);
     void textColor();
     void textAlign(QAction *a);
+    void resetFont();
+    void resetLayout();
 
     void currentCharFormatChanged(const QTextCharFormat &format);
     void cursorPositionChanged();
@@ -88,5 +90,7 @@ private:
 
     QAction * actionTextColor;
     QMenu   * menuTextEdit;
+
+    QFont defaultFont;
 };
 #endif                           //CTEXTEDITWIDGET_H

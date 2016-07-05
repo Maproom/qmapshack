@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
+    <width>429</width>
     <height>341</height>
    </rect>
   </property>
@@ -494,6 +494,22 @@
    </property>
    <property name="toolTip">
     <string>Delete</string>
+   </property>
+  </action>
+  <action name="actionResetFont">
+   <property name="text">
+    <string>Reset Font</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset Font</string>
+   </property>
+  </action>
+  <action name="actionResetLayout">
+   <property name="text">
+    <string>Reset Layout</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset Layout</string>
    </property>
   </action>
  </widget>

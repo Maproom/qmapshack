@@ -118,7 +118,7 @@ bool IDBMysql::initDB()
                "last_user      TEXT DEFAULT NULL,"
                "last_change    DATETIME DEFAULT NOW() ON UPDATE NOW(),"
                "trash          DATETIME DEFAULT NULL,"
-               "FULLTEXT (name, comment),"
+               "FULLTEXT INDEX searchindex(comment),"
                "UNIQUE KEY (keyqms)"
                ")", return false);
 
@@ -200,7 +200,7 @@ bool IDBMysql::migrateDB4to5()
     QSqlQuery query(db);
 
     // id and comment to full text search index
-    QUERY_RUN("ALTER TABLE items ADD FULLTEXT INDEX serachindex (comment)", return false);
+    QUERY_RUN("ALTER TABLE items ADD FULLTEXT INDEX searchindex (comment)", return false);
 
 
     // get number of items in the database

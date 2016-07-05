@@ -74,13 +74,6 @@ CTextEditWidget::CTextEditWidget(QWidget * parent)
     connect(actionTextColor, &QAction::triggered, this, &CTextEditWidget::textColor);
     toolColor->setDefaultAction(actionTextColor);
 
-    comboStyle->addItem("standard");
-    comboStyle->addItem("Bullet List (Disc)");
-    comboStyle->addItem("Bullet List (Circle)");
-    comboStyle->addItem("Bullet List (Square)");
-    comboStyle->addItem("Ordered List (Decimal)");
-    comboStyle->addItem("Ordered List (Alpha lower)");
-    comboStyle->addItem("Ordered List (Alpha upper)");
     connect(comboStyle, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), this, &CTextEditWidget::textStyle);
 
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
@@ -209,36 +202,23 @@ void CTextEditWidget::textStyle(int styleIndex)
 {
     QTextCursor cursor = textEdit->textCursor();
 
-    if (styleIndex != 0)
+    if (styleIndex > 0)
     {
         QTextListFormat::Style style = QTextListFormat::ListDisc;
 
-        switch (styleIndex)
-        {
-        default:
-        case 1:
-            style = QTextListFormat::ListDisc;
-            break;
+        static QTextListFormat::Style indexToFormat[] = {
+            QTextListFormat::ListDisc,
+            QTextListFormat::ListCircle,
+            QTextListFormat::ListSquare,
+            QTextListFormat::ListDecimal,
+            QTextListFormat::ListLowerAlpha,
+            QTextListFormat::ListUpperAlpha,
+            QTextListFormat::ListLowerRoman,
+            QTextListFormat::ListUpperRoman
+        };
 
-        case 2:
-            style = QTextListFormat::ListCircle;
-            break;
-
-        case 3:
-            style = QTextListFormat::ListSquare;
-            break;
-
-        case 4:
-            style = QTextListFormat::ListDecimal;
-            break;
-
-        case 5:
-            style = QTextListFormat::ListLowerAlpha;
-            break;
-
-        case 6:
-            style = QTextListFormat::ListUpperAlpha;
-            break;
+        if( (unsigned) styleIndex <= sizeof(indexToFormat)/sizeof(QTextListFormat::Style)) {
+            style = indexToFormat[styleIndex - 1];
         }
 
         cursor.beginEditBlock();

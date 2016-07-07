@@ -21,6 +21,7 @@
 
 #include "CTextEditWidget.h"
 #include "helpers/Signals.h"
+#include "widgets/CTextEditWidgetSelMenu.h"
 
 #include <QtWidgets>
 
@@ -29,12 +30,18 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 {
     setupUi(this);
 
-    connect(actionTextBold,      &QAction::triggered, this, &CTextEditWidget::textBold);
-    connect(actionTextItalic,    &QAction::triggered, this, &CTextEditWidget::textItalic);
-    connect(actionTextUnderline, &QAction::triggered, this, &CTextEditWidget::textUnderline);
+    selectionWindow = new CTextEditWidgetSelMenu(this,
+        /* font style actions */ actionTextBold, actionTextItalic, actionTextUnderline,
+        /* copy/paste actions */ actionCut, actionCopy, actionPaste
+    );
+
     toolBold->setDefaultAction  (actionTextBold);
     toolItalic->setDefaultAction(actionTextItalic);
     toolUnder->setDefaultAction (actionTextUnderline);
+
+    connect(actionTextBold,      &QAction::triggered, this, &CTextEditWidget::textBold);
+    connect(actionTextItalic,    &QAction::triggered, this, &CTextEditWidget::textItalic);
+    connect(actionTextUnderline, &QAction::triggered, this, &CTextEditWidget::textUnderline);
 
     QActionGroup *grp = new QActionGroup(this);
     grp->addAction(actionAlignLeft);
@@ -402,7 +409,25 @@ void CTextEditWidget::clipboardDataChanged()
 void CTextEditWidget::selectionChanged()
 {
     const QTextCursor cursor = textEdit->textCursor();
-    actionDelete->setEnabled(cursor.selectionStart() != cursor.selectionEnd());
+    actionDelete->setEnabled(cursor.hasSelection());
+
+    if(cursor.hasSelection())
+    {
+        const QRect &rect = textEdit->cursorRect();
+
+        int dy = cursor.anchor() < cursor.position()
+              ? (  6 + rect.height() )
+              : ( -6 - selectionWindow->height() );
+
+        int dx = - selectionWindow->width() / 2;
+
+        selectionWindow->move(textEdit->mapToGlobal(QPoint(rect.x(), rect.y())) + QPoint(dx, dy));
+        selectionWindow->show();
+    }
+    else
+    {
+        selectionWindow->hide();
+    }
 }
 
 void CTextEditWidget::customContextMenuRequested()

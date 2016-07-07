@@ -60,6 +60,7 @@ set( SRCS
         widgets/CDoubleSpinBox.cpp
         widgets/CFadingIcon.cpp
         widgets/CTextEditWidget.cpp
+        widgets/CTextEditWidgetSelMenu.cpp
         widgets/CLineEdit.cpp
         widgets/CHistoryListWidget.cpp
         widgets/CPhotoAlbum.cpp
@@ -319,6 +320,7 @@ set( HDRS
         widgets/CFadingIcon.h
         widgets/CHistoryListWidget.h
         widgets/CTextEditWidget.h
+        widgets/CTextEditWidgetSelMenu.h
         widgets/CLineEdit.h
         widgets/CPhotoAlbum.h
         widgets/CColorLegend.h
@@ -574,6 +576,7 @@ set( UIS
     IMainWindow.ui
     IAbout.ui
     widgets/ITextEditWidget.ui
+    widgets/ITextEditWidgetSelMenu.ui
     widgets/IPhotoAlbum.ui
     widgets/IColorChooser.ui
     helpers/IInputDialog.ui

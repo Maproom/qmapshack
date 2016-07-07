@@ -62,6 +62,7 @@ private:
 
     QAction * actionTextColor;
     QMenu   * menuTextEdit;
+    QWidget *selectionWindow;
 
     QFont defaultFont;
 };

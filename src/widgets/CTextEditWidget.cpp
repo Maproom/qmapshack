@@ -78,6 +78,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
+    connect(textEdit, &QTextEdit::textChanged,              this, &CTextEditWidget::cursorPositionChanged);
     connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
 
     textEdit->setHtml(html);

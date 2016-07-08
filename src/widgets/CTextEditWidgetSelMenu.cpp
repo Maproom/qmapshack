@@ -26,7 +26,7 @@ CTextEditWidgetSelMenu::CTextEditWidgetSelMenu(QWidget *parent,
     QAction *actionTextBold, QAction *actionTextItalic, QAction *actionTextUnderline,
     QAction *actionCut,      QAction *actionCopy,       QAction *actionPaste
 )
-    : QWidget(parent, Qt::Tool | Qt::FramelessWindowHint)
+    : QWidget(parent, Qt::Tool | Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::X11BypassWindowManagerHint)
 {
     setupUi(this);
 

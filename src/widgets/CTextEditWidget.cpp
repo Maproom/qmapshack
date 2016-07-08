@@ -474,7 +474,7 @@ bool CTextEditWidget::event(QEvent *event)
     {
         selectionWindow->hide();
     }
-    return false;
+    return QDialog::event(event);
 }
 
 void CTextEditWidget::updateSelectionWindow()

@@ -101,7 +101,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     menuTextEdit->addAction(actionDelete);
     menuTextEdit->addSeparator();
 
-    QMenu *removeFormat = new QMenu(tr("Reset format"), this);
+    removeFormat = new QMenu(tr("Reset format"), this);
     {
         menuTextEdit->addMenu(removeFormat);
         removeFormat->addAction(actionResetFont);
@@ -360,7 +360,7 @@ void CTextEditWidget::cursorPositionChanged()
         std::make_pair(QTextListFormat::ListLowerAlpha, 5),
         std::make_pair(QTextListFormat::ListUpperAlpha, 6),
         std::make_pair(QTextListFormat::ListLowerRoman, 7),
-        std::make_pair(QTextListFormat::ListUpperRoman, 9)
+        std::make_pair(QTextListFormat::ListUpperRoman, 8)
     });
 
     alignmentChanged(textEdit->alignment());
@@ -410,6 +410,10 @@ void CTextEditWidget::selectionChanged()
 {
     const QTextCursor cursor = textEdit->textCursor();
     actionDelete->setEnabled(cursor.hasSelection());
+
+    removeFormat->setEnabled(cursor.hasSelection());
+    actionResetFont->setEnabled(cursor.hasSelection());
+    actionResetLayout->setEnabled(cursor.hasSelection());
 
     if(cursor.hasSelection())
     {

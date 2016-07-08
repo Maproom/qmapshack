@@ -31,7 +31,7 @@ class CTextEditWidget : public QDialog, private Ui::ITextEditWidget
     Q_OBJECT
 public:
     CTextEditWidget(const QString &html, QWidget * parent);
-    virtual ~CTextEditWidget() {}
+    virtual ~CTextEditWidget();
 
     QString getHtml();
 

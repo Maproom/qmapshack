@@ -20,6 +20,7 @@
 
 
 #include "CTextEditWidget.h"
+#include "helpers/CSettings.h"
 #include "helpers/Signals.h"
 #include "widgets/CTextEditWidgetSelMenu.h"
 
@@ -28,6 +29,10 @@
 CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     : QDialog(parent)
 {
+    SETTINGS;
+
+    bool pastePlain = cfg.value("TextEditWidget/pastePlain", false).toBool();
+
     setupUi(this);
 
     selectionWindow = new CTextEditWidgetSelMenu(this,
@@ -74,8 +79,6 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     connect(textEdit, &QTextEdit::currentCharFormatChanged, this, &CTextEditWidget::currentCharFormatChanged);
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
     connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
-
-    bool pastePlain = false;
 
     textEdit->setHtml(html);
     textEdit->setFocus();
@@ -150,6 +153,12 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     connect(textEdit,         &QTextEdit::copyAvailable,              actionCopy, &QAction::setEnabled);
 
     connect(QApplication::clipboard(), &QClipboard::dataChanged, this, &CTextEditWidget::clipboardDataChanged);
+}
+
+CTextEditWidget::~CTextEditWidget()
+{
+    SETTINGS;
+    cfg.setValue("TextEditWidget/pastePlain", actionPastePlain->isChecked());
 }
 
 QString CTextEditWidget::getHtml()

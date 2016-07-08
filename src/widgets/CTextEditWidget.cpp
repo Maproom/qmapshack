@@ -35,6 +35,9 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
         /* copy/paste actions */ actionCut, actionCopy, actionPaste
     );
 
+    QScrollBar *vbar = textEdit->verticalScrollBar();
+    connect(vbar, &QAbstractSlider::valueChanged, this, &CTextEditWidget::textEditScrolled);
+
     toolBold->setDefaultAction  (actionTextBold);
     toolItalic->setDefaultAction(actionTextItalic);
     toolUnder->setDefaultAction (actionTextUnderline);
@@ -415,23 +418,7 @@ void CTextEditWidget::selectionChanged()
     actionResetFont->setEnabled(cursor.hasSelection());
     actionResetLayout->setEnabled(cursor.hasSelection());
 
-    if(cursor.hasSelection())
-    {
-        const QRect &rect = textEdit->cursorRect();
-
-        int dy = cursor.anchor() < cursor.position()
-              ? (  6 + rect.height() )
-              : ( -6 - selectionWindow->height() );
-
-        int dx = - selectionWindow->width() / 2;
-
-        selectionWindow->move(textEdit->mapToGlobal(QPoint(rect.x(), rect.y())) + QPoint(dx, dy));
-        selectionWindow->show();
-    }
-    else
-    {
-        selectionWindow->hide();
-    }
+    updateSelectionWindow();
 }
 
 void CTextEditWidget::customContextMenuRequested()
@@ -448,4 +435,39 @@ void CTextEditWidget::pastePlain()
 void CTextEditWidget::deleteSelected()
 {
     textEdit->insertPlainText(QString());
+}
+
+void CTextEditWidget::textEditScrolled()
+{
+    updateSelectionWindow();
+}
+
+void CTextEditWidget::moveEvent(QMoveEvent *event)
+{
+    updateSelectionWindow();
+}
+
+void CTextEditWidget::updateSelectionWindow()
+{
+    const QTextCursor &cursor = textEdit->textCursor();
+    const QRect       &rect   = textEdit->cursorRect();
+
+    // don't show the selctionWindow, if there is no selection or
+    // the cursor is not visible
+    if(cursor.hasSelection() && rect.y() >= 0 && rect.y() <= textEdit->height())
+    {
+        int dy = cursor.anchor() < cursor.position()
+              ? (  6 + rect.height() )
+              : ( -6 - selectionWindow->height() );
+
+        int dx = - selectionWindow->width() / 2;
+
+        selectionWindow->move(textEdit->mapToGlobal(QPoint(rect.x(), rect.y())) + QPoint(dx, dy));
+        selectionWindow->show();
+    }
+    else
+    {
+        selectionWindow->hide();
+    }
+
 }

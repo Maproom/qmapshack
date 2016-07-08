@@ -464,6 +464,19 @@ void CTextEditWidget::pasteMode(QAction *action)
     textEdit->setPastePlain( action == actionPastePlain );
 }
 
+bool CTextEditWidget::event(QEvent *event)
+{
+    if(event->type() == QEvent::WindowActivate)
+    {
+        updateSelectionWindow();
+    }
+    else if(event->type() == QEvent::WindowDeactivate)
+    {
+        selectionWindow->hide();
+    }
+    return false;
+}
+
 void CTextEditWidget::updateSelectionWindow()
 {
     const QTextCursor &cursor = textEdit->textCursor();

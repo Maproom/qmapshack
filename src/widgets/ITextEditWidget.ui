@@ -308,7 +308,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="CTextEdit" name="textEdit">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -488,15 +488,18 @@
    </property>
   </action>
   <action name="actionPastePlain">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
      <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
    </property>
    <property name="text">
-    <string>Paste (Plain)</string>
+    <string>Plain</string>
    </property>
    <property name="toolTip">
-    <string>Paste as Plain Text</string>
+    <string>Reset the text's format before pasting</string>
    </property>
   </action>
   <action name="actionSelectAll">
@@ -534,7 +537,29 @@
     <string>Reset Layout</string>
    </property>
   </action>
+  <action name="actionPasteNormal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Normal</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste without resetting the text's format</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>widgets/CTextEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

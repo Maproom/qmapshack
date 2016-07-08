@@ -54,7 +54,7 @@ private slots:
     void clipboardDataChanged();
 
     void customContextMenuRequested();
-    void pastePlain();
+    void pasteMode(QAction *action);
     void deleteSelected();
 
     void textEditScrolled();
@@ -74,4 +74,4 @@ private:
 
     QFont defaultFont;
 };
-#endif                           //CTEXTEDITWIDGET_H
+#endif // CTEXTEDITWIDGET_H

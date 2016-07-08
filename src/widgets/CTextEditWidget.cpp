@@ -32,7 +32,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     selectionWindow = new CTextEditWidgetSelMenu(this,
         /* font style actions */ actionTextBold, actionTextItalic, actionTextUnderline,
-        /* copy/paste actions */ actionCut, actionCopy, actionPaste
+        /* copy/paste actions */ actionCut,      actionCopy,       actionPaste
     );
 
     QScrollBar *vbar = textEdit->verticalScrollBar();
@@ -75,8 +75,11 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     connect(textEdit, &QTextEdit::cursorPositionChanged,    this, &CTextEditWidget::cursorPositionChanged);
     connect(textEdit, &QTextEdit::selectionChanged,         this, &CTextEditWidget::selectionChanged);
 
+    bool pastePlain = false;
+
     textEdit->setHtml(html);
     textEdit->setFocus();
+    textEdit->setPastePlain(pastePlain);
 
     fontChanged(textEdit->font());
     colorChanged(textEdit->textColor());
@@ -90,6 +93,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     QMenu *menu = new QMenu(this);
     menu->addAction(actionPastePlain);
+    menu->addAction(actionPasteNormal);
     toolPaste->setMenu(menu);
 
     /* Setup contextmenu for textEdit */
@@ -100,7 +104,6 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     menuTextEdit->addAction(actionCut);
     menuTextEdit->addAction(actionCopy);
     menuTextEdit->addAction(actionPaste);
-    menuTextEdit->addAction(actionPastePlain);
     menuTextEdit->addAction(actionDelete);
     menuTextEdit->addSeparator();
 
@@ -130,11 +133,17 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     actionCut->setEnabled(false);
     actionCopy->setEnabled(false);
 
+    QActionGroup *pasteGroup = new QActionGroup(this);
+    actionPastePlain->setChecked(pastePlain);
+    actionPasteNormal->setChecked(!pastePlain);
+    pasteGroup->addAction(actionPastePlain);
+    pasteGroup->addAction(actionPasteNormal);
+    connect(pasteGroup, &QActionGroup::triggered, this, &CTextEditWidget::pasteMode);
+
     connect(actionCut,        &QAction::triggered,                    textEdit,   &QTextEdit::cut);
     connect(actionCopy,       &QAction::triggered,                    textEdit,   &QTextEdit::copy);
-    connect(actionPaste,      &QAction::triggered,                    textEdit,   &QTextEdit::paste);
     connect(actionSelectAll,  &QAction::triggered,                    textEdit,   &QTextEdit::selectAll);
-    connect(actionPastePlain, &QAction::triggered,                    this,       &CTextEditWidget::pastePlain);
+    connect(actionPaste,      &QAction::triggered,                    textEdit,   &CTextEdit::paste);
     connect(actionDelete,     &QAction::triggered,                    this,       &CTextEditWidget::deleteSelected);
     connect(textEdit,         &QTextEdit::customContextMenuRequested, this,       &CTextEditWidget::customContextMenuRequested);
     connect(textEdit,         &QTextEdit::copyAvailable,              actionCut,  &QAction::setEnabled);
@@ -411,12 +420,12 @@ void CTextEditWidget::clipboardDataChanged()
 
 void CTextEditWidget::selectionChanged()
 {
-    const QTextCursor cursor = textEdit->textCursor();
-    actionDelete->setEnabled(cursor.hasSelection());
+    bool hasSel = textEdit->textCursor().hasSelection();
 
-    removeFormat->setEnabled(cursor.hasSelection());
-    actionResetFont->setEnabled(cursor.hasSelection());
-    actionResetLayout->setEnabled(cursor.hasSelection());
+    actionDelete->setEnabled     (hasSel);
+    removeFormat->setEnabled     (hasSel);
+    actionResetFont->setEnabled  (hasSel);
+    actionResetLayout->setEnabled(hasSel);
 
     updateSelectionWindow();
 }
@@ -424,12 +433,6 @@ void CTextEditWidget::selectionChanged()
 void CTextEditWidget::customContextMenuRequested()
 {
     menuTextEdit->exec(QCursor::pos());
-}
-
-void CTextEditWidget::pastePlain()
-{
-    QClipboard *clip = QApplication::clipboard();
-    textEdit->insertPlainText( clip->text() );
 }
 
 void CTextEditWidget::deleteSelected()
@@ -445,6 +448,11 @@ void CTextEditWidget::textEditScrolled()
 void CTextEditWidget::moveEvent(QMoveEvent *event)
 {
     updateSelectionWindow();
+}
+
+void CTextEditWidget::pasteMode(QAction *action)
+{
+    textEdit->setPastePlain( action == actionPastePlain );
 }
 
 void CTextEditWidget::updateSelectionWindow()

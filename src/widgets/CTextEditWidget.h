@@ -35,6 +35,9 @@ public:
 
     QString getHtml();
 
+protected:
+    void moveEvent(QMoveEvent *event) override;
+
 private slots:
     void textBold();
     void textUnderline();
@@ -54,14 +57,18 @@ private slots:
     void pastePlain();
     void deleteSelected();
 
+    void textEditScrolled();
+
 private:
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
     void fontChanged(const QFont &f);
     void colorChanged(const QColor &c);
     void alignmentChanged(Qt::Alignment a);
 
-    QAction * actionTextColor;
-    QMenu   * menuTextEdit;
+    void updateSelectionWindow();
+
+    QAction *actionTextColor;
+    QMenu   *menuTextEdit;
     QWidget *selectionWindow;
     QMenu   *removeFormat;
 

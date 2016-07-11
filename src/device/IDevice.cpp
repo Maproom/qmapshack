@@ -57,6 +57,11 @@ void IDevice::mount(const QString& path)
     QVariantMap args;
     args.insert("options", "sync");
     message << args;
+#if defined(Q_OS_FREEBSD)
+    // XXX Hunc sint race conditions - call bsdisks (UDisks2) too fast,
+    // get a malformed reply, crash.
+    QThread::sleep(1);
+#endif
     QDBusConnection::systemBus().call(message);
 #endif
 }

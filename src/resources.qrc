@@ -99,6 +99,8 @@
         <file>icons/32x32/Copy.png</file>
         <file>icons/32x32/Move.png</file>
         <file>icons/32x32/Paste.png</file>
+        <file>icons/32x32/PastePlain.png</file>
+        <file>icons/32x32/PasteNormal.png</file>
         <file>icons/32x32/TextLeft.png</file>
         <file>icons/32x32/TextRight.png</file>
         <file>icons/32x32/TextCenter.png</file>
@@ -282,6 +284,8 @@
         <file>icons/48x48/Copy.png</file>
         <file>icons/48x48/Move.png</file>
         <file>icons/48x48/Paste.png</file>
+        <file>icons/48x48/PastePlain.png</file>
+        <file>icons/48x48/PasteNormal.png</file>
         <file>icons/48x48/TextLeft.png</file>
         <file>icons/48x48/TextRight.png</file>
         <file>icons/48x48/TextCenter.png</file>

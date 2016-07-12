@@ -22,7 +22,7 @@
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
 
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #include <QtDBus>
 #endif
 
@@ -52,18 +52,23 @@ IDevice::~IDevice()
 
 void IDevice::mount(const QString& path)
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
     QVariantMap args;
     args.insert("options", "sync");
     message << args;
+#if defined(Q_OS_FREEBSD)
+    // XXX Hunc sint race conditions - call bsdisks (UDisks2) too fast,
+    // get a malformed reply, crash.
+    QThread::sleep(1);
+#endif
     QDBusConnection::systemBus().call(message);
 #endif
 }
 
 void IDevice::umount(const QString &path)
 {
-#ifdef Q_OS_LINUX
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
     QVariantMap args;
     message << args;

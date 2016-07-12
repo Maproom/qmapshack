@@ -67,13 +67,15 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     delete blockIface;
     delete driveIface;
 
+#if !defined(Q_OS_FREEBSD)
+// currently bsdisks does not report model or vendor
     qDebug() << "model:" << model << "vendor:" << vendor;
 
     if(model.isEmpty() || vendor.isEmpty())
     {
         return;
     }
-
+#endif
 
     QString strPath = path.path();
 
@@ -167,6 +169,12 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
 
     QDBusMessage reply = QDBusConnection::systemBus().call(message);
 
+#if defined(Q_OS_FREEBSD)
+    for(const QVariant &arg : reply.arguments())
+    {
+        points.append(arg.value<QDBusVariant>().variant().value<QStringList>().first());
+    }
+#else
     QList<QByteArray> list;
     for(const QVariant &arg : reply.arguments())
     {
@@ -177,6 +185,7 @@ QString CDeviceWatcherLinux::readMountPoint(const QString& path)
     {
         points.append(point);
     }
+#endif
 
     if(!points.isEmpty())
     {

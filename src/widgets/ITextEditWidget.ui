@@ -371,10 +371,6 @@
    </property>
   </action>
   <action name="actionPaste">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
-   </property>
    <property name="text">
     <string>Paste</string>
    </property>
@@ -493,7 +489,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
+     <normaloff>:/icons/32x32/PastePlain.png</normaloff>:/icons/32x32/PastePlain.png</iconset>
    </property>
    <property name="text">
     <string>Plain</string>
@@ -543,7 +539,7 @@
    </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
+     <normaloff>:/icons/32x32/PasteNormal.png</normaloff>:/icons/32x32/PasteNormal.png</iconset>
    </property>
    <property name="text">
     <string>Normal</string>

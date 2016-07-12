@@ -83,7 +83,6 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     textEdit->setHtml(html);
     textEdit->setFocus();
-    textEdit->setPastePlain(pastePlain);
 
     fontChanged(textEdit->font());
     colorChanged(textEdit->textColor());
@@ -143,6 +142,8 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     pasteGroup->addAction(actionPastePlain);
     pasteGroup->addAction(actionPasteNormal);
     connect(pasteGroup, &QActionGroup::triggered, this, &CTextEditWidget::pasteMode);
+
+    pasteMode(pastePlain ? actionPastePlain : actionPasteNormal);
 
     connect(actionCut,        &QAction::triggered,                    textEdit,   &QTextEdit::cut);
     connect(actionCopy,       &QAction::triggered,                    textEdit,   &QTextEdit::copy);
@@ -463,6 +464,8 @@ void CTextEditWidget::moveEvent(QMoveEvent *event)
 void CTextEditWidget::pasteMode(QAction *action)
 {
     textEdit->setPastePlain( action == actionPastePlain );
+
+    actionPaste->setIcon(action->icon());
 }
 
 bool CTextEditWidget::event(QEvent *event)

@@ -36,7 +36,7 @@ IAppSetup* IAppSetup::getPlatformInstance()
     {
 #if defined(Q_OS_MAC)
         instance = new CAppSetupMac();
-#elif defined(Q_OS_LINUX) || defined(__FreeBSD_kernel__) || defined(__GNU__)
+#elif defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
         instance = new CAppSetupLinux();
 #elif defined (Q_OS_WIN32)
         instance = new CAppSetupWin();

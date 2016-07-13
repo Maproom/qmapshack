@@ -31,7 +31,11 @@
    <item>
     <widget class="QLabel" name="labelHelp">
      <property name="text">
-      <string>Type the word you want to search for and press the search button</string>
+      <string>Type the word you want to search for and press the search button. 
+If you enter 'word' a search with an exact match is done. If you enter 'word*', 'word' has to be at the beginning of a string.</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

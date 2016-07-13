@@ -44,9 +44,9 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 
         // limit comment to 200 characters
         QString comment = query.value(4).toString();
-        if(comment.size() > 200)
+        if(comment.size() > 300)
         {
-            comment = comment.left(197) + "...";
+            comment = comment.left(297) + "...";
         }
         setToolTip(CGisListDB::eColumnName, comment);
     }

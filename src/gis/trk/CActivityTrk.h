@@ -93,6 +93,8 @@ public:
         return allFlags;
     }
 
+    void getActivityNames(QStringList& names) const;
+
     /**
        @brief Convert internal summary to HTML table
        @param str   string to receive HTML
@@ -105,6 +107,7 @@ public:
        @param str   string to receive HTML
      */
     static void printSummary(const QVector<activity_summary_t> &summary, quint32 flags, QString& str);
+
 
     /**
        @brief Add internal summary to given array of summaries

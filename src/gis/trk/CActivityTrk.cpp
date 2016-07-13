@@ -532,3 +532,25 @@ void CActivityTrk::setColor(quint32 flag, const QString& color)
         i++;
     }
 }
+
+void CActivityTrk::getActivityNames(QStringList& names) const
+{
+    const int N = qMin((int)CGisItemTrk::trkpt_t::eActMaxNum, activitySummary.size());
+
+    quint32 mask = 0x80000000;
+    for(int i = 0; i < N; i++)
+    {
+        if(actDescriptor[i].objName.isEmpty())
+        {
+            break;
+        }
+
+        if((allFlags & mask) != 0)
+        {
+            names << actDescriptor[i].name;
+        }
+
+        mask >>= 1;
+    }
+
+}

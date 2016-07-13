@@ -467,16 +467,25 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
-    if(showFullText && !trk.cmt.isEmpty())
+    if(showFullText)
     {
-        str += "</div><div>" + getComment();
-    }
+        QStringList actNames;
+        activities.getActivityNames(actNames);
+        if(!actNames.isEmpty())
+        {
+            str += "</div><div>" + tr("Activities: %1").arg(actNames.join(", "));
+        }
 
-    if(showFullText && !trk.desc.isEmpty())
-    {
-        str += "</div><div>" + getDescription();
-    }
+        if(!trk.cmt.isEmpty())
+        {
+            str += "</div><div>" + getComment();
+        }
 
+        if(!trk.desc.isEmpty())
+        {
+            str += "</div><div>" + getDescription();
+        }
+    }
     return str + "</div>";
 }
 

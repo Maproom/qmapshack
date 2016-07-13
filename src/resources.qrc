@@ -29,8 +29,6 @@
         <file>icons/16x16/ActAero.png</file>
         <file>icons/16x16/ActSki.png</file>
         <file>icons/16x16/EditDetails.png</file>
-        <file>icons/32x32/2DFix.png</file>
-        <file>icons/32x32/3DFix.png</file>
         <file>icons/32x32/Add.png</file>
         <file>icons/32x32/AddMapWorkspace.png</file>
         <file>icons/32x32/CloneMapWorkspace.png</file>
@@ -63,7 +61,6 @@
         <file>icons/32x32/MimeGEMF.png</file>
         <file>icons/32x32/MouseWheel.png</file>
         <file>icons/32x32/NightDay.png</file>
-        <file>icons/32x32/NoFix.png</file>
         <file>icons/32x32/Off.png</file>
         <file>icons/32x32/POIText.png</file>
         <file>icons/32x32/Reset.png</file>
@@ -102,6 +99,8 @@
         <file>icons/32x32/Copy.png</file>
         <file>icons/32x32/Move.png</file>
         <file>icons/32x32/Paste.png</file>
+        <file>icons/32x32/PastePlain.png</file>
+        <file>icons/32x32/PasteNormal.png</file>
         <file>icons/32x32/TextLeft.png</file>
         <file>icons/32x32/TextRight.png</file>
         <file>icons/32x32/TextCenter.png</file>
@@ -205,8 +204,6 @@
         <file>icons/32x32/LineWidthDef.png</file>
         <file>icons/32x32/ArrowUser.png</file>
         <file>icons/32x32/ArrowDef.png</file>
-        <file>icons/32x32/LimitMax.png</file>
-        <file>icons/32x32/LimitMin.png</file>
         <file>icons/32x32/Limit.png</file>
         <file>icons/32x32/LimitSys.png</file>
         <file>icons/32x32/LimitUsr.png</file>
@@ -218,8 +215,6 @@
         <file>icons/32x32/SearchDatabase.png</file>
         
 
-        <file>icons/48x48/2DFix.png</file>
-        <file>icons/48x48/3DFix.png</file>
         <file>icons/48x48/Add.png</file>
         <file>icons/48x48/AddMapWorkspace.png</file>
         <file>icons/48x48/CloneMapWorkspace.png</file>
@@ -252,7 +247,6 @@
         <file>icons/48x48/MimeGEMF.png</file>
         <file>icons/48x48/MouseWheel.png</file>
         <file>icons/48x48/NightDay.png</file>
-        <file>icons/48x48/NoFix.png</file>
         <file>icons/48x48/Off.png</file>
         <file>icons/48x48/POIText.png</file>
         <file>icons/48x48/Reset.png</file>
@@ -291,6 +285,8 @@
         <file>icons/48x48/Copy.png</file>
         <file>icons/48x48/Move.png</file>
         <file>icons/48x48/Paste.png</file>
+        <file>icons/48x48/PastePlain.png</file>
+        <file>icons/48x48/PasteNormal.png</file>
         <file>icons/48x48/TextLeft.png</file>
         <file>icons/48x48/TextRight.png</file>
         <file>icons/48x48/TextCenter.png</file>
@@ -394,8 +390,6 @@
         <file>icons/48x48/LineWidthDef.png</file>
         <file>icons/48x48/ArrowUser.png</file>
         <file>icons/48x48/ArrowDef.png</file>
-        <file>icons/48x48/LimitMax.png</file>
-        <file>icons/48x48/LimitMin.png</file>
         <file>icons/48x48/Limit.png</file>
         <file>icons/48x48/LimitSys.png</file>
         <file>icons/48x48/LimitUsr.png</file>

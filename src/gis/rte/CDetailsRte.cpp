@@ -130,8 +130,7 @@ void CDetailsRte::slotLinkActivated(const QUrl& url)
 {
     if(url.toString() == "comment")
     {
-        CTextEditWidget dlg(nullptr);
-        dlg.setHtml(rte.getComment());
+        CTextEditWidget dlg(rte.getComment(), nullptr);
         if(dlg.exec() == QDialog::Accepted)
         {
             rte.setComment(dlg.getHtml());
@@ -140,8 +139,7 @@ void CDetailsRte::slotLinkActivated(const QUrl& url)
     }
     else if(url.toString() == "description")
     {
-        CTextEditWidget dlg(nullptr);
-        dlg.setHtml(rte.getDescription());
+        CTextEditWidget dlg(rte.getDescription(), nullptr);
         if(dlg.exec() == QDialog::Accepted)
         {
             rte.setDescription(dlg.getHtml());

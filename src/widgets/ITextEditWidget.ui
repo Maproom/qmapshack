@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>427</width>
+    <width>429</width>
     <height>341</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
      <item>
       <widget class="QToolButton" name="toolUndo">
        <property name="text">
-        <string>...</string>
+        <string>Undo</string>
        </property>
        <property name="iconSize">
         <size>
@@ -35,7 +35,7 @@
      <item>
       <widget class="QToolButton" name="toolRedo">
        <property name="text">
-        <string>...</string>
+        <string>Redo</string>
        </property>
        <property name="iconSize">
         <size>
@@ -48,7 +48,7 @@
      <item>
       <widget class="QToolButton" name="toolCut">
        <property name="text">
-        <string>...</string>
+        <string>Cut</string>
        </property>
        <property name="iconSize">
         <size>
@@ -61,7 +61,7 @@
      <item>
       <widget class="QToolButton" name="toolCopy">
        <property name="text">
-        <string>...</string>
+        <string>Copy</string>
        </property>
        <property name="iconSize">
         <size>
@@ -74,7 +74,7 @@
      <item>
       <widget class="QToolButton" name="toolPaste">
        <property name="text">
-        <string>...</string>
+        <string>Paste</string>
        </property>
        <property name="iconSize">
         <size>
@@ -97,7 +97,7 @@
      <item>
       <widget class="QToolButton" name="toolLeft">
        <property name="text">
-        <string>...</string>
+        <string>A:L</string>
        </property>
        <property name="iconSize">
         <size>
@@ -110,7 +110,7 @@
      <item>
       <widget class="QToolButton" name="toolCenter">
        <property name="text">
-        <string>...</string>
+        <string>A:C</string>
        </property>
        <property name="iconSize">
         <size>
@@ -123,7 +123,7 @@
      <item>
       <widget class="QToolButton" name="toolRight">
        <property name="text">
-        <string>...</string>
+        <string>A:R</string>
        </property>
        <property name="iconSize">
         <size>
@@ -136,7 +136,7 @@
      <item>
       <widget class="QToolButton" name="toolBlock">
        <property name="text">
-        <string>...</string>
+        <string>A:B</string>
        </property>
        <property name="iconSize">
         <size>
@@ -169,7 +169,7 @@
      <item>
       <widget class="QToolButton" name="toolBold">
        <property name="text">
-        <string>...</string>
+        <string>B</string>
        </property>
        <property name="iconSize">
         <size>
@@ -182,7 +182,7 @@
      <item>
       <widget class="QToolButton" name="toolItalic">
        <property name="text">
-        <string>...</string>
+        <string>I</string>
        </property>
        <property name="iconSize">
         <size>
@@ -195,20 +195,27 @@
      <item>
       <widget class="QToolButton" name="toolUnder">
        <property name="text">
-        <string>...</string>
+        <string>U</string>
        </property>
        <property name="iconSize">
         <size>
          <width>24</width>
          <height>24</height>
         </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QToolButton" name="toolColor">
        <property name="text">
-        <string>...</string>
+        <string>C</string>
        </property>
        <property name="iconSize">
         <size>
@@ -219,28 +226,89 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboStyle"/>
+      <widget class="QFontComboBox" name="comboFont"/>
      </item>
      <item>
-      <spacer>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
+      <widget class="QSpinBox" name="spinFontSize">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-       <property name="sizeHint" stdset="0">
+       <property name="minimumSize">
         <size>
-         <width>40</width>
-         <height>20</height>
+         <width>80</width>
+         <height>0</height>
         </size>
        </property>
-      </spacer>
+       <property name="maximumSize">
+        <size>
+         <width>80</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="minimum">
+        <number>1</number>
+       </property>
+       <property name="maximum">
+        <number>200</number>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout"/>
+    <widget class="QComboBox" name="comboStyle">
+     <item>
+      <property name="text">
+       <string>Standard</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bullet List (Disc)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bullet List (Circle)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Bullet List (Square)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ordered List (Decimal)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ordered List (Alpha lower)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ordered List (Alpha upper)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ordered List (Roman lower)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Ordered List (Roman upper)</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item>
-    <widget class="QTextEdit" name="textEdit">
+    <widget class="CTextEdit" name="textEdit">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -303,10 +371,6 @@
    </property>
   </action>
   <action name="actionPaste">
-   <property name="icon">
-    <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
-   </property>
    <property name="text">
     <string>Paste</string>
    </property>
@@ -420,15 +484,18 @@
    </property>
   </action>
   <action name="actionPastePlain">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="../resources.qrc">
-     <normaloff>:/icons/32x32/Paste.png</normaloff>:/icons/32x32/Paste.png</iconset>
+     <normaloff>:/icons/32x32/PastePlain.png</normaloff>:/icons/32x32/PastePlain.png</iconset>
    </property>
    <property name="text">
-    <string>Paste (Plain)</string>
+    <string>Plain</string>
    </property>
    <property name="toolTip">
-    <string>Paste as Plain Text</string>
+    <string>Reset the text's format before pasting</string>
    </property>
   </action>
   <action name="actionSelectAll">
@@ -450,7 +517,45 @@
     <string>Delete</string>
    </property>
   </action>
+  <action name="actionResetFont">
+   <property name="text">
+    <string>Reset Font</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset Font</string>
+   </property>
+  </action>
+  <action name="actionResetLayout">
+   <property name="text">
+    <string>Reset Layout</string>
+   </property>
+   <property name="toolTip">
+    <string>Reset Layout</string>
+   </property>
+  </action>
+  <action name="actionPasteNormal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/PasteNormal.png</normaloff>:/icons/32x32/PasteNormal.png</iconset>
+   </property>
+   <property name="text">
+    <string>Normal</string>
+   </property>
+   <property name="toolTip">
+    <string>Paste without resetting the text's format</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>widgets/CTextEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

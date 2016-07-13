@@ -822,8 +822,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
             IGisItem * item = prj.getItemByKey(key);
             if(item)
             {
-                CTextEditWidget dlg(this);
-                dlg.setHtml(item->getDescription());
+                CTextEditWidget dlg(item->getDescription(), this);
                 if(dlg.exec() == QDialog::Accepted)
                 {
                     item->setDescription(dlg.getHtml());
@@ -832,8 +831,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
         }
         else
         {
-            CTextEditWidget dlg(nullptr);
-            dlg.setHtml(prj.getDescription());
+            CTextEditWidget dlg(prj.getDescription(), nullptr);
             if(dlg.exec() == QDialog::Accepted)
             {
                 prj.setDescription(dlg.getHtml());
@@ -856,8 +854,7 @@ void CDetailsPrj::slotLinkActivated(const QUrl& url)
             IGisItem * item = prj.getItemByKey(key);
             if(item)
             {
-                CTextEditWidget dlg(this);
-                dlg.setHtml(item->getComment());
+                CTextEditWidget dlg(item->getComment(), this);
                 if(dlg.exec() == QDialog::Accepted)
                 {
                     item->setComment(dlg.getHtml());

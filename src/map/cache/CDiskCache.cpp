@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CDiskCache.h"
+#include "version.h"
 #include "map/CMapDraw.h"
 
 #include <QtWidgets>
@@ -30,6 +31,16 @@ CDiskCache::CDiskCache(const QString &path, qint32 maxSizeMB, qint32 expirationD
     dummy.fill(Qt::transparent);
 
     dir.mkpath(dir.path());
+
+    QFile IDfile(dir.absoluteFilePath("QMS_cache"));
+    if(!IDfile.exists())
+    {
+        if(IDfile.open(QIODevice::ReadWrite))
+        {
+            QTextStream(&IDfile) << "QMapShack " << VER_STR;
+        }
+    }
+
     QFileInfoList files = dir.entryInfoList(QStringList("*.png"), QDir::Files);
     for(const QFileInfo &fileinfo : files)
     {
@@ -166,10 +177,21 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
 
     for(const QString &dir : dirs)
     {
+        QDir qdir(cacheRoot + "/" + dir);
         if(!maps.contains(dir))
         {
-            qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
-            QDir(cacheRoot + "/" + dir).removeRecursively();
+            QDir qdir(cacheRoot + "/" + dir);
+
+            if(QFile(qdir.absoluteFilePath("QMS_cache")).exists()) {
+                qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
+                for(const QString &file : qdir.entryList(QDir::Files)) {
+                    qdir.remove(file);
+                }
+                qdir.cdUp();
+                qdir.rmdir(dir);
+            } else {
+                qDebug() << "ignoring " << dir << " (reason: no QMS cache)";
+            }
         }
     }
 }

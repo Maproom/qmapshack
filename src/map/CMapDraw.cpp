@@ -119,8 +119,13 @@ void CMapDraw::saveMapPath(QSettings& cfg)
 
 void CMapDraw::loadMapPath(QSettings& cfg)
 {
-    mapPaths    = cfg.value("mapPath", mapPaths).toStringList();
-    cachePath   = cfg.value("cachePath", cachePath).toString();
+    mapPaths  = cfg.value("mapPath", mapPaths).toStringList();
+    cachePath = cfg.value("cachePath", cachePath).toString();
+
+    if(cachePath.isEmpty())
+    {
+        cachePath = IAppSetup::getPlatformInstance()->defaultCachePath();
+    }
 }
 
 

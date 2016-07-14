@@ -156,6 +156,12 @@ void CDiskCache::slotCleanup()
 void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
 {
     QString cacheRoot = CMapDraw::getCacheRoot();
+
+    if(cacheRoot.isEmpty()) {
+        qWarning() << "cacheRoot is empty, that should not happen at all";
+        return;
+    }
+
     const QStringList &dirs = QDir(cacheRoot).entryList(QStringList("*"), QDir::Dirs | QDir::NoDotAndDotDot);
 
     for(const QString &dir : dirs)

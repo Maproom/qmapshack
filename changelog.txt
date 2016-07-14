@@ -1,3 +1,10 @@
+V 1.6.3
+* Add FreeBSD support
+* Enhance editor for descriptions and comments.
+* [Issue #147] Fix bug preventing list formats to be removed
+* [Issue #148] Text editor: format of pasted text
+* [Issue #149] Properly initialize cachePath for systems without QMS configuration (new installations)
+ 
 V 1.6.2
 * Add support kFreeBSD ports, treat like Linux.
 * Add support for GNU/Hurd, treat like Linux.

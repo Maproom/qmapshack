@@ -23,6 +23,7 @@
 
 class CFitHeaderState final : public IFitDecoderState
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitHeaderState)
 public:
     CFitHeaderState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitHeaderState() {}

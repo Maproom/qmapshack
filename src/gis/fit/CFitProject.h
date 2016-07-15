@@ -27,6 +27,7 @@ class CFitStream;
 
 class CFitProject final : public IGisProject
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitProject)
 public:
     CFitProject(const QString& filename, CGisListWks * parent);
     CFitProject(const QString& filename, IDevice * parent);

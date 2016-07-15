@@ -23,6 +23,7 @@
 
 class CFitCrcState final : public IFitDecoderState
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitCrcState)
 public:
     CFitCrcState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitCrcState() {}

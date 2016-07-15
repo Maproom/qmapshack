@@ -23,6 +23,7 @@
 
 class CFitRecordContentState final : public IFitDecoderState
 {
+    Q_DECLARE_TR_FUNCTIONS(CFitRecordContentState)
 public:
     CFitRecordContentState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
     virtual ~CFitRecordContentState() {}

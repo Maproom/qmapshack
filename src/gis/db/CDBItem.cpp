@@ -42,7 +42,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
 
-        // limit comment to 200 characters
+        // limit comment to 300 characters
         QString comment = query.value(4).toString();
         if(comment.size() > 300)
         {

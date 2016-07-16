@@ -154,7 +154,7 @@ bool IDBSqlite::initDB()
                   "WHERE id=OLD.child AND OLD.child NOT IN(SELECT child FROM folder2item); "
                   "END;", throw -1);
 
-        // create virtaul table with search index
+        // create virtual table with search index
         QUERY_RUN("CREATE VIRTUAL TABLE searchindex USING fts4(id, comment)", throw -1);
 
         QUERY_RUN("CREATE TRIGGER searchindex_update "
@@ -376,7 +376,7 @@ bool IDBSqlite::migrateDB4to5()
 {
     QSqlQuery query(db);
 
-    // create virtaul table with serach index
+    // create virtual table with serach index
     QUERY_RUN("CREATE VIRTUAL TABLE searchindex USING fts4(id, comment)", return false);
 
     // get number of items in the database

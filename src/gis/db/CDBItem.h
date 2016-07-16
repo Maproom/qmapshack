@@ -44,7 +44,7 @@ public:
     /**
        @brief Get the item key
 
-       This is not the full blown QMapSahck item key with project and device key. It's just the item key.
+       This is not the full blown QMapShack item key with project and device key. It's just the item key.
 
        @return The string with the item key
      */

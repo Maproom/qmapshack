@@ -244,6 +244,11 @@ bool CGisListDB::hasDatabase(const QString& name)
 
 bool CGisListDB::event(QEvent * e)
 {
+    if(!dlgSearch.isNull())
+    {
+        dlgSearch->event(e);
+    }
+
     switch(e->type())
     {
     case eEvtW2DAckInfo:
@@ -714,9 +719,10 @@ void CGisListDB::slotSearchDatabase()
     }
 
     isInternalEdit--;
-    CSearchDatabase dlg(*db,this);
-    connect(&dlg, &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
-    dlg.exec();
+    dlgSearch = new CSearchDatabase(*db,this);
+    connect(dlgSearch, &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
+    dlgSearch->exec();
+    delete dlgSearch;
     isInternalEdit++;
 }
 

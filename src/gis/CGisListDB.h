@@ -21,11 +21,13 @@
 
 #include <QSqlDatabase>
 #include <QTreeWidget>
+#include <QPointer>
 
 struct action_t;
 class QMenu;
 class IDBFolderSql;
 class QUdpSocket;
+class CSearchDatabase;
 
 class CGisListDB : public QTreeWidget
 {
@@ -95,6 +97,8 @@ private:
     QUdpSocket * socket;
 
     quint32 lastTan;
+
+    QPointer<CSearchDatabase> dlgSearch;
 };
 
 #endif //CGISLISTDB_H

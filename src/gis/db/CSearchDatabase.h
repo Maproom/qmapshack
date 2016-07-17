@@ -33,6 +33,8 @@ public:
     CSearchDatabase(IDBFolder& db, CGisListDB * parent);
     virtual ~CSearchDatabase() = default;
 
+    bool event(QEvent * e) override;
+
 signals:
     void sigItemChanged(QTreeWidgetItem * item, int column);
 

@@ -24,6 +24,7 @@
 #include "gis/db/CSearchDatabase.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
+#include "gis/CGisWidget.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -51,19 +52,21 @@ void CSearchDatabase::slotItemChanged(QTreeWidgetItem * item, int column)
     IDBFolder * folder = dynamic_cast<IDBFolder*>(item);
     if(folder != nullptr)
     {
+        Qt::CheckState checkState = item->checkState(column);
+
         const int N = folder->childCount();
         for(int i = 0; i < N; i++)
         {
             IDBFolder * childFolder = dynamic_cast<IDBFolder*>(folder->child(i));
             if(childFolder != nullptr)
             {
-                childFolder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+                childFolder->setCheckState(CGisListDB::eColumnCheckbox, checkState);
             }
 
             CDBItem * childItem = dynamic_cast<CDBItem*>(folder->child(i));
             if(childItem != nullptr)
             {
-                childItem->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+                childItem->setCheckState(CGisListDB::eColumnCheckbox, checkState);
             }
         }
     }
@@ -193,4 +196,43 @@ void CSearchDatabase::addWithParentFolders(QTreeWidget * result, IDBFolder * chi
             folders[folderId]->addChild(child);
         }
     }
+}
+
+bool CSearchDatabase::event(QEvent * e)
+{
+    switch(e->type())
+    {
+    case eEvtW2DAckInfo:
+    {
+        CEvtW2DAckInfo * evt    = (CEvtW2DAckInfo*)e;
+
+        // check for matching database
+        if(evt->db == dbFolder.getDBName())
+        {
+            if(!evt->host.isEmpty())
+            {
+                if(dbFolder.getDBHost() != evt->host)
+                {
+                    break;
+                }
+            }
+        }
+        internalEdit = true;
+        // iterate over all top level items and their children to check active items.
+        const int N = treeResult->topLevelItemCount();
+        for(int i = 0; i < N; i++)
+        {
+            IDBFolder * folder = dynamic_cast<IDBFolder*>(treeResult->topLevelItem(i));
+            if(folder)
+            {
+                folder->update(evt);
+            }
+        }
+
+        internalEdit = false;
+        break;
+    }
+    }
+
+    return QDialog::event(e);
 }

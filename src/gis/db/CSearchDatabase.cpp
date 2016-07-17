@@ -267,16 +267,20 @@ void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
         }
     }
 
-    if(nChecked == nItems)
+    if(folder->type() > IDBFolder::eTypeGroup)
     {
-        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+        if(nChecked == nItems)
+        {
+            folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+        }
+        else if(nChecked > 0)
+        {
+            folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::PartiallyChecked);
+        }
+        else
+        {
+            folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+        }
     }
-    else if(nChecked > 0)
-    {
-        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::PartiallyChecked);
-    }
-    else
-    {
-        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
-    }
+
 }

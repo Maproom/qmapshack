@@ -225,7 +225,7 @@ bool CSearchDatabase::event(QEvent * e)
             IDBFolder * folder = dynamic_cast<IDBFolder*>(treeResult->topLevelItem(i));
             if(folder)
             {
-                folder->update(evt);
+                updateFolder(folder, evt);
             }
         }
 
@@ -235,4 +235,48 @@ bool CSearchDatabase::event(QEvent * e)
     }
 
     return QDialog::event(e);
+}
+
+void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
+{
+    int nItems      = 0;
+    int nChecked    = 0;
+    const int N     = folder->childCount();
+    for(int i = 0; i < N; i++)
+    {
+        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->child(i));
+        if(folder1 != nullptr)
+        {
+            updateFolder(folder1, evt);
+            continue;
+        }
+
+        CDBItem * item = dynamic_cast<CDBItem*>(folder->child(i));
+        if(item != nullptr)
+        {
+            nItems++;
+            if(evt->keysChildren.contains(item->getKey()))
+            {
+                nChecked++;
+                item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+            }
+            else
+            {
+                item->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+            }
+        }
+    }
+
+    if(nChecked == nItems)
+    {
+        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Checked);
+    }
+    else if(nChecked > 0)
+    {
+        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::PartiallyChecked);
+    }
+    else
+    {
+        folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
+    }
 }

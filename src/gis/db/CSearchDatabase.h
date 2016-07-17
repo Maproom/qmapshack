@@ -44,6 +44,7 @@ private slots:
 
 private:
     void addWithParentFolders(QTreeWidget * result, IDBFolder * folder, QMap<quint64, IDBFolder *> &folders, QSqlDatabase &sqlDB);
+    void updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt);
     IDBFolder& dbFolder;
 
     bool internalEdit = false;

@@ -300,25 +300,24 @@ QString CGisItemWpt::getInfo(bool showName, bool showFullText) const
             str += desc.left(297) + "...";
         }
     }
-    else
-    {
-        QString cmt = removeHtml(wpt.cmt).simplified();
-        if(cmt.count())
-        {
-            if(!str.isEmpty())
-            {
-                str += "<br/>\n";
-            }
 
-            if(showFullText || cmt.count() < 300)
-            {
-                str += cmt;
-            }
-            else
-            {
-                str += cmt.left(297) + "...";
-            }
+    QString cmt = removeHtml(wpt.cmt).simplified();
+    if(wpt.cmt != wpt.desc && cmt.count())
+    {        
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
         }
+
+        if(showFullText || cmt.count() < 300)
+        {
+            str += cmt;
+        }
+        else
+        {
+            str += cmt.left(297) + "...";
+        }
+
     }
     return str + "</div>";
 }

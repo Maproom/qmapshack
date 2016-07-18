@@ -118,8 +118,8 @@ void CDetailsPrj::slotSetupGui()
     }
 
     X______________BlockAllSignals______________X(this);
-    comboSort->setCurrentIndex(prj.getSorting());
-    if((prj.getSorting() > IGisProject::eSortTime) && !prj.doCorrelation())
+    comboSort->setCurrentIndex(prj.getSortingRoadbook());
+    if((prj.getSortingRoadbook() > IGisProject::eSortRoadbookNone) && !prj.doCorrelation())
     {
         X_____________UnBlockAllSignals_____________X(this);
 
@@ -131,7 +131,7 @@ void CDetailsPrj::slotSetupGui()
         }
         else
         {
-            comboSort->setCurrentIndex(IGisProject::eSortNone);
+            comboSort->setCurrentIndex(IGisProject::eSortRoadbookNone);
         }
         timerUpdateTime->start();
 
@@ -179,16 +179,6 @@ void CDetailsPrj::slotSetupGui()
 
 #define ROOT_FRAME_MARGIN 5
 #define CHAR_PER_LINE 130
-
-bool sortTrkByTime(const CGisItemTrk * trk1, const CGisItemTrk * trk2)
-{
-    return trk1->getTimeStart() < trk2->getTimeStart();
-}
-
-bool sortWptByTime(const CGisItemWpt * wpt1, const CGisItemWpt * wpt2)
-{
-    return wpt1->getTime() < wpt2->getTime();
-}
 
 void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 {
@@ -342,7 +332,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     int n=1;
     PROGRESS_SETUP(tr("Build diary..."), 0, nItems, this);
 
-    if(comboSort->currentIndex() > IGisProject::eSortTime)
+    if(comboSort->currentIndex() > IGisProject::eSortRoadbookNone)
     {
         drawByTrack(cursor, trks, wpts, progress, n, isReadOnly);
     }
@@ -434,12 +424,6 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
 void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QList<CGisItemWpt*>& wpts, CProgressDialog& progress, int& n, bool printable)
 {
     int cnt, w = cursor.document()->textWidth();
-
-    if(comboSort->currentIndex() == IGisProject::eSortTime)
-    {
-        qSort(trks.begin(), trks.end(), sortTrkByTime);
-        qSort(wpts.begin(), wpts.end(), sortWptByTime);
-    }
 
     if(!wpts.isEmpty())
     {
@@ -549,10 +533,6 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
 {
     int cnt, w = cursor.document()->textWidth();
 
-    if(comboSort->currentIndex() == IGisProject::eSortTime)
-    {
-        qSort(trks.begin(), trks.end(), sortTrkByTime);
-    }
 
     const qreal w1 = qRound(w/3.5 > 300 ? 300 : w/3.5);
     const qreal h1 = qRound(w1/2.0);
@@ -963,7 +943,7 @@ void CDetailsPrj::slotLock(bool on)
 void CDetailsPrj::slotSortMode(int idx)
 {
     comboSort->setEnabled(false);
-    prj.setSorting(IGisProject::sorting_e(idx));
+    prj.setSortingRoadbook(IGisProject::sorting_roadbook_e(idx));
     slotSetupGui();
 }
 

@@ -1136,7 +1136,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     quint32 lastCurrent = current;
 
-    bool withDoubles = project->getSorting() != IGisProject::eSortTrackWithoutDouble;
+    bool withDoubles = project->getSortingRoadbook() != IGisProject::eSortRoadbookTrackWithoutDouble;
 
     QVector<pointDP> line;
     // combine all segments to a single line

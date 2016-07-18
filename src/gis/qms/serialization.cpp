@@ -874,7 +874,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     {
         qint32 tmp;
         stream >> tmp;
-        sorting = (sorting_e)tmp;
+        sortingRoadbook = (sorting_roadbook_e)tmp;
     }
     if(version > 3)
     {
@@ -951,7 +951,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << metadata.keywords;
     stream << metadata.bounds;
     stream << key;
-    stream << qint32(sorting);
+    stream << qint32(sortingRoadbook);
     stream << qint8(noCorrelation);
 
     for(int i = 0; i < childCount(); i++)
@@ -1043,7 +1043,7 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     {
         qint32 tmp;
         stream >> tmp;
-        sorting = (sorting_e)tmp;
+        sortingRoadbook = (sorting_roadbook_e)tmp;
     }
     if(version > 3)
     {
@@ -1070,7 +1070,7 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << metadata.keywords;
     stream << metadata.bounds;
     stream << key;
-    stream << qint32(sorting);
+    stream << qint32(sortingRoadbook);
     stream << qint8(noCorrelation);
 
     return stream;

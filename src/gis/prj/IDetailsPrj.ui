@@ -73,11 +73,6 @@
        </item>
        <item>
         <property name="text">
-         <string>Sort by time</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
          <string>Sort along track (multiple)</string>
         </property>
        </item>

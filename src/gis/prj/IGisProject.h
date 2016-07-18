@@ -47,12 +47,11 @@ public:
         , eTypeFit
     };
 
-    enum sorting_e
+    enum sorting_roadbook_e
     {
-        eSortNone
-        , eSortTime
-        , eSortTrackWithDouble
-        , eSortTrackWithoutDouble
+        eSortRoadbookNone
+        , eSortRoadbookTrackWithDouble
+        , eSortRoadbookTrackWithoutDouble
     };
 
     struct person_t
@@ -222,9 +221,9 @@ public:
        @brief Get the sorting mode
        @return One of sorting_e
      */
-    sorting_e getSorting() const
+    sorting_roadbook_e getSortingRoadbook() const
     {
-        return sorting;
+        return sortingRoadbook;
     }
 
     void setName(const QString& str);
@@ -243,7 +242,7 @@ public:
 
        @param s the mode
      */
-    void setSorting(sorting_e s);
+    void setSortingRoadbook(sorting_roadbook_e s);
 
     /**
        @brief Get a short metadata summary
@@ -486,7 +485,7 @@ protected:
     metadata_t metadata;
     QString nameSuffix;
 
-    sorting_e sorting = eSortNone;
+    sorting_roadbook_e sortingRoadbook = eSortRoadbookNone;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 

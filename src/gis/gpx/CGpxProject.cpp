@@ -158,9 +158,9 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
         project->key = xmlExtension.namedItem("ql:key").toElement().text();
     }
 
-    if(xmlExtension.namedItem("ql:sorting").isElement())
+    if(xmlExtension.namedItem("ql:sortingRoadbook").isElement())
     {
-        project->sorting = sorting_e(xmlExtension.namedItem("ql:sorting").toElement().text().toInt());
+        project->sortingRoadbook = sorting_roadbook_e(xmlExtension.namedItem("ql:sortingRoadbook").toElement().text().toInt());
     }
 
     if(xmlExtension.namedItem("ql:correlation").isElement())
@@ -344,9 +344,9 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
     }
 
     {
-        QDomElement elem = xmlExt.ownerDocument().createElement("ql:sorting");
+        QDomElement elem = xmlExt.ownerDocument().createElement("ql:sortingRoadbook");
         xmlExt.appendChild(elem);
-        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSorting()));
+        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSortingRoadbook()));
         elem.appendChild(text);
     }
 

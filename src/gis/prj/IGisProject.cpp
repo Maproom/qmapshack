@@ -212,10 +212,10 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
     setChanged();
 }
 
-void IGisProject::setSorting(sorting_e s)
+void IGisProject::setSortingRoadbook(sorting_roadbook_e s)
 {
-    bool changed = s != sorting;
-    sorting = s;
+    bool changed = (s != sortingRoadbook);
+    sortingRoadbook = s;
     if(changed)
     {
         setChanged();

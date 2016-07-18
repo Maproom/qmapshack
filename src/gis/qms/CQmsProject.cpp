@@ -34,7 +34,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
-    if(!file.exists())
+    if(!file.exists() || QFileInfo(filename).suffix().toLower() != "qms")
     {
         IGisProject::filename.clear();
         setupName(filename);

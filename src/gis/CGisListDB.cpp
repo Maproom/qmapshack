@@ -720,7 +720,7 @@ void CGisListDB::slotSearchDatabase()
 
     isInternalEdit--;
     dlgSearch = new CSearchDatabase(*db,this);
-    connect(dlgSearch, &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
+    connect(dlgSearch.data(), &CSearchDatabase::sigItemChanged, this, &CGisListDB::slotItemChanged);
     dlgSearch->exec();
     delete dlgSearch;
     isInternalEdit++;

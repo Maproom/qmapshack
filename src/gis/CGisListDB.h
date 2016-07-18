@@ -19,9 +19,9 @@
 #ifndef CGISLISTDB_H
 #define CGISLISTDB_H
 
+#include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidget>
-#include <QPointer>
 
 struct action_t;
 class QMenu;

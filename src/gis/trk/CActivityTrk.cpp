@@ -552,5 +552,4 @@ void CActivityTrk::getActivityNames(QStringList& names) const
 
         mask >>= 1;
     }
-
 }

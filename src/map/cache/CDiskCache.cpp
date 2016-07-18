@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "CDiskCache.h"
-#include "version.h"
 #include "map/CMapDraw.h"
+#include "version.h"
 
 #include <QtWidgets>
 
@@ -168,7 +168,8 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
 {
     QString cacheRoot = CMapDraw::getCacheRoot();
 
-    if(cacheRoot.isEmpty()) {
+    if(cacheRoot.isEmpty())
+    {
         qWarning() << "cacheRoot is empty, that should not happen at all";
         return;
     }
@@ -182,14 +183,18 @@ void CDiskCache::cleanupRemovedMaps(const QSet<QString> &maps)
         {
             QDir qdir(cacheRoot + "/" + dir);
 
-            if(QFile(qdir.absoluteFilePath("QMS_cache")).exists()) {
+            if(QFile(qdir.absoluteFilePath("QMS_cache")).exists())
+            {
                 qDebug() << "remove cache directory" << dir << "(reason: map no longer exists)";
-                for(const QString &file : qdir.entryList(QDir::Files)) {
+                for(const QString &file : qdir.entryList(QDir::Files))
+                {
                     qdir.remove(file);
                 }
                 qdir.cdUp();
                 qdir.rmdir(dir);
-            } else {
+            }
+            else
+            {
                 qDebug() << "ignoring " << dir << " (reason: no QMS cache)";
             }
         }

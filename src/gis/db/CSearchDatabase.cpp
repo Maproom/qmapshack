@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
+#include "gis/CGisWidget.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
@@ -24,7 +25,6 @@
 #include "gis/db/CSearchDatabase.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
-#include "gis/CGisWidget.h"
 
 #include <QtSql>
 #include <QtWidgets>
@@ -282,5 +282,4 @@ void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
             folder->setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
         }
     }
-
 }

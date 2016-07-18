@@ -36,9 +36,9 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     setupUi(this);
 
     selectionWindow = new CTextEditWidgetSelMenu(this,
-        /* font style actions */ actionTextBold, actionTextItalic, actionTextUnderline,
-        /* copy/paste actions */ actionCut,      actionCopy,       actionPaste
-    );
+                                                 /* font style actions */ actionTextBold, actionTextItalic, actionTextUnderline,
+                                                 /* copy/paste actions */ actionCut,      actionCopy,       actionPaste
+                                                 );
 
     QScrollBar *vbar = textEdit->verticalScrollBar();
     connect(vbar, &QAbstractSlider::valueChanged, this, &CTextEditWidget::textEditScrolled);
@@ -232,7 +232,8 @@ void CTextEditWidget::textStyle(int styleIndex)
         QTextCursor cursor = textEdit->textCursor();
         QTextListFormat::Style style = QTextListFormat::ListDisc;
 
-        static QTextListFormat::Style indexToFormat[] = {
+        static QTextListFormat::Style indexToFormat[] =
+        {
             QTextListFormat::ListDisc,
             QTextListFormat::ListCircle,
             QTextListFormat::ListSquare,
@@ -243,7 +244,8 @@ void CTextEditWidget::textStyle(int styleIndex)
             QTextListFormat::ListUpperRoman
         };
 
-        if( (unsigned) styleIndex <= sizeof(indexToFormat)/sizeof(QTextListFormat::Style)) {
+        if( (unsigned) styleIndex <= sizeof(indexToFormat)/sizeof(QTextListFormat::Style))
+        {
             style = indexToFormat[styleIndex - 1];
         }
 
@@ -491,10 +493,10 @@ void CTextEditWidget::updateSelectionWindow()
     if(cursor.hasSelection() && rect.y() >= 0 && rect.y() <= textEdit->height())
     {
         int dy = cursor.anchor() < cursor.position()
-              ? (  6 + rect.height() )
-              : ( -6 - selectionWindow->height() );
+                 ? (  6 + rect.height() )
+                 : ( -6 - selectionWindow->height() );
 
-        int dx = - selectionWindow->width() / 2;
+        int dx = -selectionWindow->width() / 2;
 
         selectionWindow->move(textEdit->mapToGlobal(QPoint(rect.x(), rect.y())) + QPoint(dx, dy));
         selectionWindow->show();
@@ -503,5 +505,4 @@ void CTextEditWidget::updateSelectionWindow()
     {
         selectionWindow->hide();
     }
-
 }

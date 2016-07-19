@@ -248,7 +248,6 @@ void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
             updateFolder(folder1, evt);
             continue;
         }
-
     }
 
     if(folder->getId() != evt->id)

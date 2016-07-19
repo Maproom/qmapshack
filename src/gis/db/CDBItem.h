@@ -36,7 +36,7 @@ public:
        @brief Get the database id
        @return The ID value used by the database
      */
-    quint64 getId()
+    quint64 getId() const
     {
         return id;
     }
@@ -48,10 +48,11 @@ public:
 
        @return The string with the item key
      */
-    const QString& getKey()
+    const QString& getKey() const
     {
         return key;
     }
+
 
     /**
        @brief Send show/hide events to the workspace
@@ -69,6 +70,7 @@ public:
     void updateAge();
 
 private:
+    friend bool sortByTime(CDBItem * item1, CDBItem * item2);
     QSqlDatabase& db;
     quint64 id;
 

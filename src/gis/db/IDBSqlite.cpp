@@ -314,7 +314,7 @@ bool IDBSqlite::migrateDB2to3()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
         if(nullptr == item)
         {
@@ -383,7 +383,7 @@ bool IDBSqlite::migrateDB4to5()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
 
         if(nullptr == item)
@@ -457,7 +457,7 @@ bool IDBSqlite::migrateDB5to6()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);
 
         if(nullptr == item)
         {

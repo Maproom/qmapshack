@@ -303,7 +303,7 @@ QString CGisItemWpt::getInfo(bool showName, bool showFullText) const
 
     QString cmt = removeHtml(wpt.cmt).simplified();
     if((cmt != desc) && cmt.count())
-    {        
+    {
         if(!str.isEmpty())
         {
             str += "<br/>\n";
@@ -317,7 +317,6 @@ QString CGisItemWpt::getInfo(bool showName, bool showFullText) const
         {
             str += cmt.left(297) + "...";
         }
-
     }
     return str + "</div>";
 }

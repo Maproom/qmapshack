@@ -25,6 +25,7 @@
 class QSqlDatabase;
 class CEvtW2DAckInfo;
 class IDBFolderSql;
+class CDBItem;
 
 
 /**
@@ -189,10 +190,14 @@ protected:
 
     void setChildIndicator();
 
+    void addItemsSorted(QList<CDBItem *> &items);
+    void sortItems(QList<CDBItem *> &items) const;
+
     QSqlDatabase& db;
 
     quint64 id;
     QString key;
+    quint32 sortMode;
     bool isLoadable;
 };
 

@@ -495,7 +495,6 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
             }
             str += cmt;
         }
-
     }
     return str + "</div>";
 }

@@ -25,11 +25,11 @@
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/db/macros.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 

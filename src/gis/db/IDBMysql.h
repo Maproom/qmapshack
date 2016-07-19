@@ -34,6 +34,7 @@ protected:
     bool initDB() override;
     bool migrateDB(int version) override;
     bool migrateDB4to5();
+    bool migrateDB5to6();
 };
 
 #endif //IDBMYSQL_H

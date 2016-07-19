@@ -379,14 +379,41 @@ QString CGisItemRte::getInfo(bool showName, bool showFullText) const
         str += tr("with %1").arg(rte.lastRoutedWith);
     }
 
-    if(showFullText && !rte.cmt.isEmpty())
+    QString desc = removeHtml(rte.desc).simplified();
+    if(desc.count())
     {
-        str += "</div><div>" + getComment();
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
+
+        if(showFullText || (desc.count() < 300))
+        {
+            str += desc;
+        }
+        else
+        {
+            str += desc.left(297) + "...";
+        }
     }
 
-    if(showFullText && !rte.desc.isEmpty())
+    QString cmt = removeHtml(rte.cmt).simplified();
+    if((cmt != desc) && cmt.count())
     {
-        str += "</div><div>" + getDescription();
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
+
+        if(showFullText || cmt.count() < 300)
+        {
+            str += cmt;
+        }
+        else
+        {
+            str += cmt.left(297) + "...";
+        }
+
     }
 
     return str + "</div>";

@@ -59,27 +59,7 @@ void CLostFoundProject::updateFromDb()
         quint64 id   = query.value(0).toULongLong();
         quint32 type = query.value(1).toUInt();
 
-        switch(type)
-        {
-        case IGisItem::eTypeWpt:
-            new CGisItemWpt(id, db, this);
-            break;
-
-        case IGisItem::eTypeTrk:
-            new CGisItemTrk(id, db, this);
-            break;
-
-        case IGisItem::eTypeRte:
-            new CGisItemRte(id, db, this);
-            break;
-
-        case IGisItem::eTypeOvl:
-            new CGisItemOvlArea(id, db, this);
-            break;
-
-        default:
-            ;
-        }
+        IGisItem::newGisItem(type, id, db, this);
     }
 
     setText(CGisListWks::eColumnDecoration,"");

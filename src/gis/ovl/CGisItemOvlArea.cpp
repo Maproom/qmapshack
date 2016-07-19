@@ -398,7 +398,7 @@ QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
             str += "<br/>\n";
         }
 
-        if(showFullText || desc.count() < 300)
+        if(showFullText || (desc.count() < 300))
         {
             str += desc;
         }
@@ -407,24 +407,22 @@ QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
             str += desc.left(297) + "...";
         }
     }
-    else
-    {
-        QString cmt = removeHtml(area.cmt).simplified();
-        if(cmt.count())
-        {
-            if(!str.isEmpty())
-            {
-                str += "<br/>\n";
-            }
 
-            if(showFullText || cmt.count() < 300)
-            {
-                str += cmt;
-            }
-            else
-            {
-                str += cmt.left(297) + "...";
-            }
+    QString cmt = removeHtml(area.cmt).simplified();
+    if((cmt != desc) && cmt.count())
+    {
+        if(!str.isEmpty())
+        {
+            str += "<br/>\n";
+        }
+
+        if(showFullText || cmt.count() < 300)
+        {
+            str += cmt;
+        }
+        else
+        {
+            str += cmt.left(297) + "...";
         }
     }
 

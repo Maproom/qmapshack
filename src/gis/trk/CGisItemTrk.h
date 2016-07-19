@@ -164,6 +164,11 @@ public:
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
+    QDateTime getTimestamp() const override
+    {
+        return getTimeStart();
+    }
+
     /// get the track color as index into the Garmin color table
     int getColorIdx() const
     {

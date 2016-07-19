@@ -191,6 +191,12 @@ public:
         return rte;
     }
 
+    QDateTime getTimestamp() const override
+    {
+        return QDateTime();
+    }
+
+
     void setName(const QString& str);
     void setComment(const QString& str)       override;
     void setDescription(const QString& str)   override;

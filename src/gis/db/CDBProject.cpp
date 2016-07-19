@@ -194,12 +194,12 @@ void CDBProject::postStatus(bool updateLostFound)
 }
 
 
-int CDBProject::checkForAction2(IGisItem * item, quint64 &idItem, QString& hashItem, QSqlQuery &query)
+int CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashItem, QSqlQuery &query)
 {
     int action = eActionNone;
 
     query.prepare("SELECT hash, last_user, last_change FROM items WHERE id=:id");
-    query.bindValue(":id", idItem);
+    query.bindValue(":id", itemId);
     QUERY_EXEC(throw eReasonQueryFail);
 
     if(query.next())
@@ -273,11 +273,12 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
 
     QString hashInDb = item->getLastDatabaseHash();
 
-    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
+    query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, date=:date, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
+    query.bindValue(":date",    item->getTimestamp());
     query.bindValue(":comment", item->getInfo(true, true));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
@@ -320,11 +321,12 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
         {
             // hashInDb has been updated by checkForAction2() by the one stored in the database
             // therefore the update should succeed now.
-            query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
+            query.prepare("UPDATE items SET type=:type, keyqms=:keyqms, icon=:icon, name=:name, date=:date, comment=:comment, data=:data, hash=:hash WHERE id=:id AND hash=:oldhash");
             query.bindValue(":type",    item->type());
             query.bindValue(":keyqms",  item->getKey().item);
             query.bindValue(":icon",    buffer.data());
             query.bindValue(":name",    item->getName());
+            query.bindValue(":date",    item->getTimestamp());
             query.bindValue(":comment", item->getInfo(true, true));
             query.bindValue(":data",    data);
             query.bindValue(":hash",    item->getHash());
@@ -372,11 +374,12 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
-    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :comment, :data, :hash)");
+    query.prepare("INSERT INTO items (type, keyqms, icon, name, date, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :date, :comment, :data, :hash)");
     query.bindValue(":type",    item->type());
     query.bindValue(":keyqms",  item->getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
+    query.bindValue(":date",    item->getTimestamp());
     query.bindValue(":comment", item->getInfo(true, true));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
@@ -400,12 +403,12 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     return idItem;
 }
 
-int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResult, QSqlQuery &query)
+int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResult, QSqlQuery &query)
 {
     int action = eActionNone;
 
     // test if item exists in database
-    quint32 typeItem = 0;
+    quint32 itemType = 0;
     query.prepare("SELECT id, type FROM items WHERE keyqms=:keyqms");
     query.bindValue(":keyqms", item->getKey().item);
     QUERY_EXEC(throw eReasonQueryFail);
@@ -413,13 +416,13 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
 
     if(query.next())
     {
-        idItem      = query.value(0).toULongLong();
-        typeItem    = query.value(1).toUInt();
+        itemId      = query.value(0).toULongLong();
+        itemType    = query.value(1).toUInt();
 
         // check if relation already exists.
         query.prepare("SELECT id FROM folder2item WHERE parent=:parent AND child=:child");
         query.bindValue(":parent", id);
-        query.bindValue(":child", idItem);
+        query.bindValue(":child", itemId);
         QUERY_EXEC(throw eReasonQueryFail);
 
         if(!query.next())
@@ -430,31 +433,7 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& idItem, int& lastResul
             if(lastResult == CSelectSaveAction::eResultNone)
             {
                 // Build the dialog to ask for user action
-
-                IGisItem * item1 = nullptr;
-
-                // load item from database for a compare
-                switch(typeItem)
-                {
-                case IGisItem::eTypeWpt:
-                    item1 = new CGisItemWpt(idItem, db, nullptr);
-                    break;
-
-                case IGisItem::eTypeTrk:
-                    item1 = new CGisItemTrk(idItem, db, nullptr);
-                    break;
-
-                case IGisItem::eTypeRte:
-                    item1 = new CGisItemRte(idItem, db, nullptr);
-                    break;
-
-                case IGisItem::eTypeOvl:
-                    item1 = new CGisItemOvlArea(idItem, db, nullptr);
-                    break;
-
-                default:
-                    ;
-                }
+                IGisItem * item1 = IGisItem::newGisItem(itemType, itemId, db, nullptr);
 
                 if(nullptr == item1)
                 {
@@ -646,28 +625,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
 
     for(const evt_item_t &item : evt->items)
     {
-        IGisItem * gisItem = nullptr;
-        switch(item.type)
-        {
-        case IGisItem::eTypeWpt:
-            gisItem = new CGisItemWpt(item.id, db, this);
-            break;
-
-        case IGisItem::eTypeTrk:
-            gisItem = new CGisItemTrk(item.id, db, this);
-            break;
-
-        case IGisItem::eTypeRte:
-            gisItem = new CGisItemRte(item.id, db, this);
-            break;
-
-        case IGisItem::eTypeOvl:
-            gisItem = new CGisItemOvlArea(item.id, db, this);
-            break;
-
-        default:
-            ;
-        }
+        IGisItem * gisItem = IGisItem::newGisItem(item.type, item.id, db, this);
 
         /* [Issue #72] Database/Workspace inconsistency in QMS 1.4.0
 

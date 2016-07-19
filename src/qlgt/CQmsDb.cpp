@@ -260,11 +260,12 @@ quint64 CQmsDb::store(IGisItem& item)
 
     QSqlQuery query(db);
     // item is unknown to database -> create item in database
-    query.prepare("INSERT INTO items (type, keyqms, icon, name, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :comment, :data, :hash)");
+    query.prepare("INSERT INTO items (type, keyqms, icon, name, date, comment, data, hash) VALUES (:type, :keyqms, :icon, :name, :date, :comment, :data, :hash)");
     query.bindValue(":type",    item.type());
     query.bindValue(":keyqms",     item.getKey().item);
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item.getName());
+    query.bindValue(":date",    item.getTimestamp());
     query.bindValue(":comment", item.getInfo(true, true));
     query.bindValue(":data", data);
     query.bindValue(":hash", item.getHash());

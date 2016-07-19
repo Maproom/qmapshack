@@ -239,8 +239,6 @@ bool CSearchDatabase::event(QEvent * e)
 
 void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
 {
-    int nItems      = 0;
-    int nChecked    = 0;
     const int N     = folder->childCount();
     for(int i = 0; i < N; i++)
     {
@@ -251,6 +249,17 @@ void CSearchDatabase::updateFolder(IDBFolder * folder, CEvtW2DAckInfo * evt)
             continue;
         }
 
+    }
+
+    if(folder->getId() != evt->id)
+    {
+        return;
+    }
+
+    int nItems      = 0;
+    int nChecked    = 0;
+    for(int i = 0; i < N; i++)
+    {
         CDBItem * item = dynamic_cast<CDBItem*>(folder->child(i));
         if(item != nullptr)
         {

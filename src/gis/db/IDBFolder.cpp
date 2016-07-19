@@ -27,6 +27,7 @@
 #include "gis/db/IDBFolder.h"
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
+#include "gis/prj/IGisProject.h"
 
 #include <QtSql>
 
@@ -194,13 +195,15 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
 
     QSqlQuery query(db);
     // update text and tooltip
-    query.prepare("SELECT name, comment FROM folders WHERE id=:id");
+    query.prepare("SELECT name, comment, sortmode FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
 
     setText(CGisListDB::eColumnName, query.value(0).toString());
     setToolTip(CGisListDB::eColumnName, query.value(1).toString());
+    sortMode = query.value(2).toUInt();
+
 
     setChildIndicator();
 
@@ -228,7 +231,7 @@ bool IDBFolder::update()
     }
 
     // Step 1: get basic properties like name and key
-    query.prepare("SELECT keyqms, name, comment FROM folders WHERE id=:id");
+    query.prepare("SELECT keyqms, name, comment, sortmode FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return false);
     query.next();
@@ -237,6 +240,7 @@ bool IDBFolder::update()
     key = query.value(0).toString();
     setText(CGisListDB::eColumnName, query.value(1).toString());
     setToolTip(CGisListDB::eColumnName, query.value(2).toString());
+    sortMode = query.value(3).toUInt();
 
     // Step 2: Test for children.
     setChildIndicator();
@@ -386,7 +390,7 @@ void IDBFolder::setupFromDB()
     QSqlQuery query(db);
 
     // get basic properties like name and key
-    query.prepare("SELECT keyqms, name, comment FROM folders WHERE id=:id");
+    query.prepare("SELECT keyqms, name, comment, sortmode FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     query.next();
@@ -394,6 +398,7 @@ void IDBFolder::setupFromDB()
     key = query.value(0).toString();
     setText(CGisListDB::eColumnName, query.value(1).toString());
     setToolTip(CGisListDB::eColumnName, query.value(2).toString());
+    sortMode = query.value(4).toUInt();
 
     // check if folder has child folders (to set expand indicator)
     setChildIndicator();
@@ -428,6 +433,7 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
         sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
     }
 
+    QList<CDBItem*> items;
     // tracks 2nd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
     query.bindValue(":id", id);
@@ -436,9 +442,11 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, nullptr);
         item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        items << item;
     }
+    addItemsSorted(items);
 
     // routes 3rd
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
@@ -448,9 +456,11 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, nullptr);
         item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        items << item;
     }
+    addItemsSorted(items);
 
     //waypoints 4th
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
@@ -460,9 +470,11 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, nullptr);
         item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        items << item;
     }
+    addItemsSorted(items);
 
     // overlays 5th
     query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
@@ -472,9 +484,11 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
     while(query.next())
     {
         quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, this);
+        CDBItem * item = new CDBItem(db, idChild, nullptr);
         item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+        items << item;
     }
+    addItemsSorted(items);
 }
 
 void IDBFolder::remove(quint64 idParent, quint64 idFolder)
@@ -546,5 +560,39 @@ void IDBFolder::setChildIndicator()
     else
     {
         setChildIndicatorPolicy(QTreeWidgetItem::DontShowIndicator);
+    }
+}
+
+void IDBFolder::addItemsSorted(QList<CDBItem*>& items)
+{
+    sortItems(items);
+    for(CDBItem * item : items)
+    {
+        addChild(item);
+    }
+    items.clear();
+}
+
+bool sortByName(CDBItem * item1, CDBItem * item2)
+{
+    return item1->text(CGisListDB::eColumnName) < item2->text(CGisListDB::eColumnName);
+}
+
+bool sortByTime(CDBItem * item1, CDBItem * item2)
+{
+    return item1->date < item2->date;
+}
+
+void IDBFolder::sortItems(QList<CDBItem*>& items) const
+{
+    switch(sortMode)
+    {
+    case IGisProject::eSortFolderName:
+        qSort(items.begin(), items.end(), &sortByName);
+        break;
+
+    case IGisProject::eSortFolderTime:
+        qSort(items.begin(), items.end(), &sortByTime);
+        break;
     }
 }

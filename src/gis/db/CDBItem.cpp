@@ -68,7 +68,7 @@ void CDBItem::updateAge()
         return;
     }
 
-    if(parent()->type() == IDBFolder::eTypeLostFound)
+    if((parent() != nullptr) && (parent()->type() == IDBFolder::eTypeLostFound))
     {
         QString date = query.value(0).toString();
         QDateTime timestamp;

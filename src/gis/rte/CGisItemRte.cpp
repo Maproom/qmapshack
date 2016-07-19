@@ -413,7 +413,6 @@ QString CGisItemRte::getInfo(bool showName, bool showFullText) const
         {
             str += cmt.left(297) + "...";
         }
-
     }
 
     return str + "</div>";

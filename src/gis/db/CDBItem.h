@@ -74,6 +74,7 @@ private:
 
     int type = 0;
     QString key;
+    QDateTime date;
 };
 
 #endif //CDBITEM_H

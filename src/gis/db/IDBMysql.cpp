@@ -102,7 +102,8 @@ bool IDBMysql::initDB()
                "name           TEXT NOT NULL,"
                "comment        TEXT,"
                "locked         BOOLEAN DEFAULT FALSE,"
-               "data           LONGBLOB"
+               "data           LONGBLOB,"
+               "sortmode       INTEGER NOT NULL DEFAULT 0"
                ")", return false);
 
     QUERY_RUN( "CREATE TABLE items ("
@@ -258,6 +259,8 @@ bool IDBMysql::migrateDB4to5()
 bool IDBMysql::migrateDB5to6()
 {
     QSqlQuery query(db);
+
+    QUERY_RUN("ALTER TABLE folders ADD COLUMN sortmode INTEGER NOT NULL DEFAULT 0", return false);
 
     // get number of items in the database
     QUERY_RUN("SELECT Count(*) FROM items", return false);

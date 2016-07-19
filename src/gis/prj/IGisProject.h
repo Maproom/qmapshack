@@ -54,6 +54,14 @@ public:
         , eSortRoadbookTrackWithoutDouble
     };
 
+    enum sorting_folder_e
+    {
+        eSortFolderNone
+        ,eSortFolderName
+        ,eSortFolderTime
+        ,eSortFolderSymbol
+    };
+
     struct person_t
     {
         QString name;

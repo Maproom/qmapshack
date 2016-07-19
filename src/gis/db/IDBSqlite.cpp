@@ -98,7 +98,8 @@ bool IDBSqlite::initDB()
                   "name           TEXT NOT NULL,"
                   "comment        TEXT,"
                   "locked         BOOLEAN DEFAULT FALSE,"
-                  "data           BLOB"
+                  "data           BLOB,"
+                  "sortmode       INTEGER NOT NULL DEFAULT 0"
                   ")", throw -1)
 
         QUERY_RUN("CREATE TABLE items ("
@@ -435,6 +436,8 @@ bool IDBSqlite::migrateDB4to5()
 bool IDBSqlite::migrateDB5to6()
 {
     QSqlQuery query(db);
+
+    QUERY_RUN("ALTER TABLE folders ADD COLUMN sortmode INTEGER NOT NULL DEFAULT 0", return false);
 
     // get number of items in the database
     QUERY_RUN("SELECT Count(*) FROM items", return false);

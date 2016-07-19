@@ -30,7 +30,7 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
     , id(id)
 {
     QSqlQuery query(db);
-    query.prepare("SELECT type, keyqms, icon, name, comment FROM items WHERE id=:id");
+    query.prepare("SELECT type, keyqms, icon, name, date, comment FROM items WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return );
     if(query.next())
@@ -42,8 +42,10 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
         setIcon(CGisListDB::eColumnCheckbox, pixmap);
         setText(CGisListDB::eColumnName, query.value(3).toString());
 
+        date = query.value(4).toDateTime();
+
         // limit comment to 300 characters
-        QString comment = query.value(4).toString();
+        QString comment = query.value(5).toString();
         if(comment.size() > 300)
         {
             comment = comment.left(297) + "...";

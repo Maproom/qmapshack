@@ -123,8 +123,8 @@ protected:
     void updateItem(IGisItem *&item, quint64 idItem, QSqlQuery& query);
 
 
-    int checkForAction1(IGisItem * item, quint64 &idItem, int &lastResult, QSqlQuery& query);
-    int checkForAction2(IGisItem * item, quint64 &idItem, QString &hashItem, QSqlQuery& query);
+    int checkForAction1(IGisItem * item, quint64 &itemId, int &lastResult, QSqlQuery& query);
+    int checkForAction2(IGisItem * item, quint64 &itemId, QString &hashItem, QSqlQuery& query);
 
     /**
      * @brief Add item to database

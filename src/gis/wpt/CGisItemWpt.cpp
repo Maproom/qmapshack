@@ -302,7 +302,7 @@ QString CGisItemWpt::getInfo(bool showName, bool showFullText) const
     }
 
     QString cmt = removeHtml(wpt.cmt).simplified();
-    if(wpt.cmt != wpt.desc && cmt.count())
+    if((cmt != desc) && cmt.count())
     {        
         if(!str.isEmpty())
         {

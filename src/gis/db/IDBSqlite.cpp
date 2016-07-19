@@ -222,6 +222,14 @@ bool IDBSqlite::migrateDB(int version)
             }
         }
 
+        if(version < 6)
+        {
+            if(!migrateDB5to6())
+            {
+                throw -1;
+            }
+        }
+
         QUERY_RUN("END TRANSACTION;", throw -1);
     }
     catch(int i)
@@ -294,7 +302,7 @@ bool IDBSqlite::migrateDB2to3()
 
     QUERY_RUN("SELECT id, type FROM items WHERE hash='-'", return false);
 
-    PROGRESS_SETUP("Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    PROGRESS_SETUP("Update to database version 3. Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
     progress.enableCancel(false);
     quint32 cnt = 0;
     while(query.next())
@@ -305,30 +313,7 @@ bool IDBSqlite::migrateDB2to3()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem *item = nullptr;
-
-        // load item from database for a compare
-        switch(typeItem)
-        {
-        case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeRte:
-            item = new CGisItemRte(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(idItem, db, nullptr);
-            break;
-
-        default:
-            ;
-        }
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
 
         if(nullptr == item)
         {
@@ -386,7 +371,7 @@ bool IDBSqlite::migrateDB4to5()
 
     // over all items
     QUERY_RUN("SELECT id, type FROM items", return false);
-    PROGRESS_SETUP("Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    PROGRESS_SETUP("Update to database version 5. Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
     progress.enableCancel(false);
     quint32 cnt = 0;
     while(query.next())
@@ -397,30 +382,8 @@ bool IDBSqlite::migrateDB4to5()
         quint64 idItem      = query.value(0).toULongLong();
         quint32 typeItem    = query.value(1).toUInt();
 
-        IGisItem *item = nullptr;
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
 
-        // load item from database
-        switch(typeItem)
-        {
-        case IGisItem::eTypeWpt:
-            item = new CGisItemWpt(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeTrk:
-            item = new CGisItemTrk(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeRte:
-            item = new CGisItemRte(idItem, db, nullptr);
-            break;
-
-        case IGisItem::eTypeOvl:
-            item = new CGisItemOvlArea(idItem, db, nullptr);
-            break;
-
-        default:
-            ;
-        }
 
         if(nullptr == item)
         {
@@ -469,3 +432,54 @@ bool IDBSqlite::migrateDB4to5()
     return true;
 }
 
+bool IDBSqlite::migrateDB5to6()
+{
+    QSqlQuery query(db);
+
+    // get number of items in the database
+    QUERY_RUN("SELECT Count(*) FROM items", return false);
+    query.next();
+    quint32 N = query.value(0).toUInt();
+
+    // over all items
+    QUERY_RUN("SELECT id, type FROM items", return false);
+    PROGRESS_SETUP("Update to database version 6. Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    progress.enableCancel(false);
+    quint32 cnt = 0;
+    while(query.next())
+    {
+        PROGRESS(cnt++,;
+                 );
+
+        quint64 idItem      = query.value(0).toULongLong();
+        quint32 typeItem    = query.value(1).toUInt();
+
+        IGisItem *item = IGisItem::newGisItem(typeItem, idItem, db, nullptr);;
+
+        if(nullptr == item)
+        {
+            continue;
+        }
+
+        // get full size info text
+        QString comment = item->getInfo(true, true);
+        QDateTime date  = item->getTimestamp();
+
+        // replace comment with full size info text in items table
+        QSqlQuery query2(db);
+        query2.prepare("UPDATE items SET comment=:comment, date=:date WHERE id=:id");
+        query2.bindValue(":comment", comment);
+        query2.bindValue(":date", date);
+        query2.bindValue(":id", idItem);
+        if(!query2.exec())
+        {
+            qWarning() << query2.lastQuery();
+            qWarning() << query2.lastError();
+        }
+
+        delete item;
+    }
+
+
+    return true;
+}

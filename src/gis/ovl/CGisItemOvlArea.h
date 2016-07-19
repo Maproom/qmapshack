@@ -85,6 +85,11 @@ public:
         return area.opacity;
     }
 
+    QDateTime getTimestamp() const override
+    {
+        return QDateTime();
+    }
+
     void setName(const QString& str);
     void setColor(size_t idx);
     void setDataFromPolyline(const SGisLine& l) override;

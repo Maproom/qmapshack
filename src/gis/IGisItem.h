@@ -260,7 +260,8 @@ public:
 
     virtual const QString& getComment() const = 0;
     virtual const QString& getDescription() const = 0;
-    virtual const QList<link_t>& getLinks() const = 0;
+    virtual const QList<link_t>& getLinks() const = 0;    
+    virtual QDateTime getTimestamp() const = 0;
 
 
     virtual void setComment(const QString& str) = 0;
@@ -504,6 +505,10 @@ public:
        @return Returns true on success. Otherwise false.
      */
     static bool getNameAndProject(QString &name, IGisProject *&project, const QString &itemtype);
+
+
+    static IGisItem * newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject * project);
+
 
     /// a no key value that can be used to nullify references.
     const static QString noKey;

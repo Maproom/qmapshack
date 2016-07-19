@@ -29,6 +29,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/ovl/CGisItemOvlArea.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
@@ -836,4 +837,34 @@ bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QSt
 
     project = CGisWidget::self().selectProject();
     return nullptr != project;
+}
+
+IGisItem * IGisItem::newGisItem(quint32 type, quint64 id, QSqlDatabase& db, IGisProject * project)
+{
+    IGisItem *item = nullptr;
+
+    // load item from database
+    switch(type)
+    {
+    case IGisItem::eTypeWpt:
+        item = new CGisItemWpt(id, db, project);
+        break;
+
+    case IGisItem::eTypeTrk:
+        item = new CGisItemTrk(id, db, project);
+        break;
+
+    case IGisItem::eTypeRte:
+        item = new CGisItemRte(id, db, project);
+        break;
+
+    case IGisItem::eTypeOvl:
+        item = new CGisItemOvlArea(id, db, project);
+        break;
+
+    default:
+        ;
+    }
+
+    return item;
 }

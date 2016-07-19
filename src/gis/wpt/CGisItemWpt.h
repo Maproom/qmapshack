@@ -262,6 +262,12 @@ public:
         return images;
     }
 
+    QDateTime getTimestamp() const override
+    {
+        return wpt.time;
+    }
+
+
     IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
 
     QPointF getPointCloseBy(const QPoint& ) override

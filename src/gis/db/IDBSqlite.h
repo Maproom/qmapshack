@@ -36,6 +36,7 @@ protected:
     bool migrateDB2to3();
     bool migrateDB3to4();
     bool migrateDB4to5();
+    bool migrateDB5to6();
 };
 
 #endif //IDBSQLITE_H

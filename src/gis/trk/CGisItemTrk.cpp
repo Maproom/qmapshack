@@ -476,15 +476,26 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
             str += "</div><div>" + tr("Activities: %1").arg(actNames.join(", "));
         }
 
-        if(!trk.cmt.isEmpty())
+        QString desc = removeHtml(trk.desc).simplified();
+        if(desc.count())
         {
-            str += "</div><div>" + getComment();
+            if(!str.isEmpty())
+            {
+                str += "<br/>\n";
+            }
+            str += desc;
         }
 
-        if(!trk.desc.isEmpty())
+        QString cmt = removeHtml(trk.cmt).simplified();
+        if((cmt != desc) && cmt.count())
         {
-            str += "</div><div>" + getDescription();
+            if(!str.isEmpty())
+            {
+                str += "<br/>\n";
+            }
+            str += cmt;
         }
+
     }
     return str + "</div>";
 }

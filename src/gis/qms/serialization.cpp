@@ -41,7 +41,7 @@
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
-#define VER_PROJECT     quint8(4)
+#define VER_PROJECT     quint8(5)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
@@ -883,6 +883,13 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         noCorrelation = tmp != 0;
     }
 
+    if(version > 4)
+    {
+        qint32 tmp;
+        stream >> tmp;
+        sortingFolder = (sorting_folder_e)tmp;
+    }
+
     while(!stream.atEnd())
     {
         QString lastDatabaseHash;
@@ -953,6 +960,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << key;
     stream << qint32(sortingRoadbook);
     stream << qint8(noCorrelation);
+    stream << qint32(sortingFolder);
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -1051,6 +1059,12 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
         stream >> tmp;
         noCorrelation = tmp != 0;
     }
+    if(version > 4)
+    {
+        qint32 tmp;
+        stream >> tmp;
+        sortingFolder = (sorting_folder_e)tmp;
+    }
 
     return stream;
 }
@@ -1072,6 +1086,7 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << key;
     stream << qint32(sortingRoadbook);
     stream << qint8(noCorrelation);
+    stream << qint32(sortingFolder);
 
     return stream;
 }

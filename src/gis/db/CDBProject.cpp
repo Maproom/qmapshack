@@ -601,10 +601,11 @@ bool CDBProject::save()
     *this >> in;
 
     // update folder entry in database
-    query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data WHERE id=:id");
+    query.prepare("UPDATE folders SET name=:name, comment=:comment, data=:data, sortmode=:sortmode WHERE id=:id");
     query.bindValue(":name", getName());
     query.bindValue(":comment", getInfo());
     query.bindValue(":data", data);
+    query.bindValue(":sortmode", getSortingFolder());
     query.bindValue(":id", getId());
     QUERY_EXEC(return false);
 

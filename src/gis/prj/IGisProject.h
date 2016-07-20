@@ -234,6 +234,11 @@ public:
         return sortingRoadbook;
     }
 
+    sorting_folder_e getSortingFolder() const
+    {
+        return sortingFolder;
+    }
+
     void setName(const QString& str);
     void setKeywords(const QString& str);
     void setDescription(const QString& str);
@@ -244,13 +249,22 @@ public:
     void setChanged();
 
     /**
-       @brief Set the sorting mode_t
+       @brief Set the sorting mode for the roadbook in the details dialog
 
        This will mark the project as changed.
 
        @param s the mode
      */
     void setSortingRoadbook(sorting_roadbook_e s);
+
+    /**
+       @brief Set the sorting mode for workspace folder
+
+       This will mark the project as changed.
+
+       @param s the mode
+     */
+    void setSortingFolder(sorting_folder_e s);
 
     /**
        @brief Get a short metadata summary
@@ -493,7 +507,8 @@ protected:
     metadata_t metadata;
     QString nameSuffix;
 
-    sorting_roadbook_e sortingRoadbook = eSortRoadbookNone;
+    sorting_roadbook_e sortingRoadbook  = eSortRoadbookNone;
+    sorting_folder_e   sortingFolder    = eSortFolderNone;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 

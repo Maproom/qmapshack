@@ -222,6 +222,16 @@ void IGisProject::setSortingRoadbook(sorting_roadbook_e s)
     }
 }
 
+void IGisProject::setSortingFolder(sorting_folder_e s)
+{
+    bool changed = (s != sortingFolder);
+    sortingFolder = s;
+    if(changed)
+    {
+        setChanged();
+    }
+}
+
 void IGisProject::setChanged()
 {
     setText(CGisListWks::eColumnDecoration,"*");

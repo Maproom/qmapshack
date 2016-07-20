@@ -398,7 +398,7 @@ void IDBFolder::setupFromDB()
     key = query.value(0).toString();
     setText(CGisListDB::eColumnName, query.value(1).toString());
     setToolTip(CGisListDB::eColumnName, query.value(2).toString());
-    sortMode = query.value(4).toUInt();
+    sortMode = query.value(3).toUInt();
 
     // check if folder has child folders (to set expand indicator)
     setChildIndicator();
@@ -586,7 +586,7 @@ bool sortByTime(CDBItem * item1, CDBItem * item2)
 void IDBFolder::sortItems(QList<CDBItem*>& items) const
 {
     switch(sortMode)
-    {
+    {    
     case IGisProject::eSortFolderName:
         qSort(items.begin(), items.end(), &sortByName);
         break;

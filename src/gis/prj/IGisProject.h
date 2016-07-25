@@ -56,9 +56,8 @@ public:
 
     enum sorting_folder_e
     {
-        eSortFolderNone
+        eSortFolderTime
         ,eSortFolderName
-        ,eSortFolderTime
         ,eSortFolderSymbol
     };
 
@@ -509,7 +508,7 @@ protected:
     QString nameSuffix;
 
     sorting_roadbook_e sortingRoadbook  = eSortRoadbookNone;
-    sorting_folder_e   sortingFolder    = eSortFolderNone;
+    sorting_folder_e   sortingFolder    = eSortFolderTime;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 

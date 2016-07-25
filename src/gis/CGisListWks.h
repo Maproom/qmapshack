@@ -129,9 +129,9 @@ private:
     QAction  * actionHideFrMap;
     QAction  * actionSyncWksDev;
     QAction  * actionSyncDB;
-    QAction  * actionSortByNone;
-    QAction  * actionSortByName;
     QAction  * actionSortByTime;
+    QAction  * actionSortByName;
+
 
 
     QActionGroup * actionGroup;

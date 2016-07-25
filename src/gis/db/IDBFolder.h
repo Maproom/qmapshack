@@ -19,6 +19,8 @@
 #ifndef IDBFOLDER_H
 #define IDBFOLDER_H
 
+#include "gis/prj/IGisProject.h"
+
 #include <QSqlDatabase>
 #include <QTreeWidgetItem>
 
@@ -197,7 +199,7 @@ protected:
 
     quint64 id;
     QString key;
-    quint32 sortMode;
+    quint32 sortMode =  IGisProject::eSortFolderTime;
     bool isLoadable;
 };
 

@@ -100,6 +100,13 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionHideFrMap  = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"   ), tr("Hide from Map"  ), this, SLOT(slotHideFrMap()));
 
     menuProjectWks->addSeparator();
+    actionGroup = new QActionGroup(menuProjectWks);
+    actionGroup->setExclusive(true);
+    actionSortByNone = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("No sorting"), IGisProject::eSortFolderNone);
+    actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("Sort by name"), IGisProject::eSortFolderName);
+    actionSortByTime = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("Sort by time"), IGisProject::eSortFolderTime);
+
+    menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
     actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save As..."     ), this, SLOT(slotSaveAsProject()));
 
@@ -332,6 +339,20 @@ void CGisListWks::setExternalMenu(QMenu * project)
     connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"),  &QAction::triggered, this, &CGisListWks::slotAddEmptyProject);
     connect(CMainWindow::self().findChild<QAction*>("actionCloseAllProjects"), &QAction::triggered, this, &CGisListWks::slotCloseAllProjects);
     connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"),     &QAction::triggered, this, &CGisListWks::slotSearchGoogle);
+}
+
+QAction * CGisListWks::addSortAction(QMenu * menu, QActionGroup * actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode)
+{
+
+    QAction * action = menu->addAction(QIcon(icon), text);
+    action->setCheckable(true);
+
+    auto func = bind(&CGisListWks::slotSetSortMode, this, mode, std::placeholders::_1);
+    connect(action, &QAction::toggled, this, func);
+
+    actionGroup->addAction(action);
+
+    return action;
 }
 
 void CGisListWks::dragMoveEvent(QDragMoveEvent  * e )
@@ -998,6 +1019,22 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 {
                     actionSyncWksDev->setEnabled(IDevice::count());
                     actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
+
+                    blockSorting = true;
+                    switch(project->getSortingFolder())
+                    {
+                    case IGisProject::eSortFolderNone:
+                        actionSortByNone->setChecked(true);
+                        break;
+                    case IGisProject::eSortFolderName:
+                        actionSortByName->setChecked(true);
+                        break;
+                    case IGisProject::eSortFolderTime:
+                        actionSortByTime->setChecked(true);
+                        break;
+                    }
+                    blockSorting = false;
+
                     menuProjectWks->exec(p);
                 }
             }
@@ -1790,4 +1827,20 @@ void CGisListWks::slotSyncDB()
 
         project->update();
     }
+}
+
+void CGisListWks::slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked)
+{
+    if(!checked || blockSorting)
+    {
+        return;
+    }
+
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != nullptr)
+    {
+        project->setSortingFolder(mode);
+    }
+
 }

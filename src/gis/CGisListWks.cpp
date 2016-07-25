@@ -101,10 +101,10 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionGroup = new QActionGroup(menuProjectWks);
-    actionGroup->setExclusive(true);
-    actionSortByNone = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("No sorting"), IGisProject::eSortFolderNone);
-    actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("Sort by name"), IGisProject::eSortFolderName);
-    actionSortByTime = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/A.png", tr("Sort by time"), IGisProject::eSortFolderTime);
+    actionGroup->setExclusive(true);   
+    actionSortByTime = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
+    actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
+
 
     menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
@@ -1023,9 +1023,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     blockSorting = true;
                     switch(project->getSortingFolder())
                     {
-                    case IGisProject::eSortFolderNone:
-                        actionSortByNone->setChecked(true);
-                        break;
                     case IGisProject::eSortFolderName:
                         actionSortByName->setChecked(true);
                         break;

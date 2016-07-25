@@ -213,6 +213,7 @@
         <file>icons/32x32/RouteOn.png</file>
         <file>icons/32x32/AreaOn.png</file>
         <file>icons/32x32/SearchDatabase.png</file>
+        <file>icons/32x32/SortName.png</file>
         
 
         <file>icons/48x48/Add.png</file>
@@ -399,6 +400,7 @@
         <file>icons/48x48/RouteOn.png</file>
         <file>icons/48x48/AreaOn.png</file>
         <file>icons/48x48/SearchDatabase.png</file>
+        <file>icons/48x48/SortName.png</file>
 
 
         <file>icons/cache/32x32/bluepin.png</file>

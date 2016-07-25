@@ -27,7 +27,6 @@
 #include "gis/db/IDBFolder.h"
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
-#include "gis/prj/IGisProject.h"
 
 #include <QtSql>
 
@@ -587,12 +586,12 @@ void IDBFolder::sortItems(QList<CDBItem*>& items) const
 {
     switch(sortMode)
     {    
-    case IGisProject::eSortFolderName:
-        qSort(items.begin(), items.end(), &sortByName);
-        break;
-
     case IGisProject::eSortFolderTime:
         qSort(items.begin(), items.end(), &sortByTime);
+        break;
+
+    case IGisProject::eSortFolderName:
+        qSort(items.begin(), items.end(), &sortByName);
         break;
     }
 }

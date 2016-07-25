@@ -47,6 +47,8 @@ CSlfProject::CSlfProject(const QString &filename, bool readFile)
     {
         IGisProject::filename.clear();
     }
+
+    sortItems();
     blockUpdateItems(false);
     setupName(QFileInfo(filename).baseName().replace("_", " "));
 }

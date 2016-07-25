@@ -939,6 +939,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         }
     }
 
+    sortItems();
+
     blockUpdateItems(false);
     return stream;
 }

@@ -101,7 +101,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionGroup = new QActionGroup(menuProjectWks);
-    actionGroup->setExclusive(true);   
+    actionGroup->setExclusive(true);
     actionSortByTime = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/Time.png", tr("Sort by Time"), IGisProject::eSortFolderTime);
     actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
 
@@ -343,7 +343,6 @@ void CGisListWks::setExternalMenu(QMenu * project)
 
 QAction * CGisListWks::addSortAction(QMenu * menu, QActionGroup * actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode)
 {
-
     QAction * action = menu->addAction(QIcon(icon), text);
     action->setCheckable(true);
 
@@ -1026,10 +1025,12 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     case IGisProject::eSortFolderName:
                         actionSortByName->setChecked(true);
                         break;
+
                     case IGisProject::eSortFolderTime:
                         actionSortByTime->setChecked(true);
                         break;
                     }
+
                     blockSorting = false;
 
                     menuProjectWks->exec(p);
@@ -1839,5 +1840,4 @@ void CGisListWks::slotSetSortMode(IGisProject::sorting_folder_e mode, bool check
     {
         project->setSortingFolder(mode);
     }
-
 }

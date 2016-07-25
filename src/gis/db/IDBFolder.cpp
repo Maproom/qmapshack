@@ -585,7 +585,7 @@ bool sortByTime(CDBItem * item1, CDBItem * item2)
 void IDBFolder::sortItems(QList<CDBItem*>& items) const
 {
     switch(sortMode)
-    {    
+    {
     case IGisProject::eSortFolderTime:
         qSort(items.begin(), items.end(), &sortByTime);
         break;

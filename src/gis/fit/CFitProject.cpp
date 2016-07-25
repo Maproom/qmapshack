@@ -66,6 +66,8 @@ void CFitProject::loadFitFromFile(const QString &filename, bool showErrorMsg)
         }
         valid = false;
     }
+
+    sortItems();
     blockUpdateItems(false);
 }
 

@@ -471,6 +471,7 @@ protected:
     void updateItems();
     void updateItemCounters();
     void updateDecoration();
+    void sortItems();
     void sortItems(QList<IGisItem*>& items) const;
 
     /**
@@ -508,7 +509,7 @@ protected:
     QString nameSuffix;
 
     sorting_roadbook_e sortingRoadbook  = eSortRoadbookNone;
-    sorting_folder_e   sortingFolder    = eSortFolderTime;
+    sorting_folder_e sortingFolder    = eSortFolderTime;
 
     qint32 cntItemsByType[IGisItem::eTypeMax];
 

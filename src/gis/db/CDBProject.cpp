@@ -655,6 +655,7 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
         }
     }
 
+    sortItems();
     postStatus(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
 }

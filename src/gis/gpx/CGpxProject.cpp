@@ -226,6 +226,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
         new CGisItemOvlArea(xmlArea, project);
     }
 
+    project->sortItems();
     project->setupName(QFileInfo(filename).baseName().replace("_", " "));
     project->setToolTip(CGisListWks::eColumnName, project->getInfo());
     project->valid = true;

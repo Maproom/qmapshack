@@ -227,68 +227,7 @@ void IGisProject::setSortingFolder(sorting_folder_e s)
     bool changed = (s != sortingFolder);
     sortingFolder = s;
 
-    QList<IGisItem*> trks;
-    QList<IGisItem*> rtes;
-    QList<IGisItem*> wpts;
-    QList<IGisItem*> ovls;
-
-    QList<QTreeWidgetItem*> items = takeChildren();
-    for(QTreeWidgetItem* item : items)
-    {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
-        if(trk != nullptr)
-        {
-            trks << trk;
-            continue;
-        }
-
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
-        if(rte != nullptr)
-        {
-            rtes << rte;
-            continue;
-        }
-
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
-        if(wpt != nullptr)
-        {
-            wpts << wpt;
-            continue;
-        }
-
-        CGisItemOvlArea * ovl = dynamic_cast<CGisItemOvlArea*>(item);
-        if(ovl != nullptr)
-        {
-            ovls << ovl;
-            continue;
-        }
-
-    }
-
-    sortItems(trks);
-    sortItems(rtes);
-    sortItems(wpts);
-    sortItems(ovls);
-
-    items.clear();
-    for(IGisItem * item : trks)
-    {
-        items << item;
-    }
-    for(IGisItem * item : rtes)
-    {
-        items << item;
-    }
-    for(IGisItem * item : wpts)
-    {
-        items << item;
-    }
-    for(IGisItem * item : ovls)
-    {
-        items << item;
-    }
-
-    addChildren(items);
+    sortItems();
 
     if(changed)
     {
@@ -975,6 +914,71 @@ void IGisProject::updateDecoration()
     }
 
     setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
+}
+
+void IGisProject::sortItems()
+{
+    QList<IGisItem*> trks;
+    QList<IGisItem*> rtes;
+    QList<IGisItem*> wpts;
+    QList<IGisItem*> ovls;
+
+    QList<QTreeWidgetItem*> items = takeChildren();
+    for(QTreeWidgetItem* item : items)
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        if(trk != nullptr)
+        {
+            trks << trk;
+            continue;
+        }
+
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(item);
+        if(rte != nullptr)
+        {
+            rtes << rte;
+            continue;
+        }
+
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt != nullptr)
+        {
+            wpts << wpt;
+            continue;
+        }
+
+        CGisItemOvlArea * ovl = dynamic_cast<CGisItemOvlArea*>(item);
+        if(ovl != nullptr)
+        {
+            ovls << ovl;
+            continue;
+        }
+    }
+
+    sortItems(trks);
+    sortItems(rtes);
+    sortItems(wpts);
+    sortItems(ovls);
+
+    items.clear();
+    for(IGisItem * item : trks)
+    {
+        items << item;
+    }
+    for(IGisItem * item : rtes)
+    {
+        items << item;
+    }
+    for(IGisItem * item : wpts)
+    {
+        items << item;
+    }
+    for(IGisItem * item : ovls)
+    {
+        items << item;
+    }
+
+    addChildren(items);
 }
 
 bool sortByName(IGisItem * item1, IGisItem * item2)

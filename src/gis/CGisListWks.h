@@ -19,6 +19,8 @@
 #ifndef CGISLISTWKS_H
 #define CGISLISTWKS_H
 
+#include "gis/prj/IGisProject.h"
+
 #include <QPointer>
 #include <QSqlDatabase>
 #include <QTreeWidget>
@@ -29,6 +31,7 @@ class CSearchGoogle;
 class IGisProject;
 class CDBProject;
 class IDeviceWatcher;
+class QActionGroup;
 
 class CGisListWks : public QTreeWidget
 {
@@ -103,6 +106,7 @@ private slots:
     void slotSyncDevWks();
     void slotRteFromWpt();
     void slotSyncDB();
+    void slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked);
 
 
 private:
@@ -112,6 +116,7 @@ private:
     void migrateDB1to2();
     void migrateDB2to3();
     void setVisibilityOnMap(bool visible);
+    QAction * addSortAction(QMenu * menu, QActionGroup *actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode);
 
     QSqlDatabase db;
 
@@ -124,7 +129,12 @@ private:
     QAction  * actionHideFrMap;
     QAction  * actionSyncWksDev;
     QAction  * actionSyncDB;
+    QAction  * actionSortByNone;
+    QAction  * actionSortByName;
+    QAction  * actionSortByTime;
 
+
+    QActionGroup * actionGroup;
 
     QMenu * menuProjectDev;
     QAction  * actionDelProj;
@@ -164,6 +174,8 @@ private:
     qint32 saveEvery = 5;
 
     IDeviceWatcher * deviceWatcher = nullptr;
+
+    bool blockSorting = false;
 };
 
 #endif //CGISLISTWKS_H

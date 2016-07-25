@@ -472,6 +472,7 @@ protected:
     void updateItems();
     void updateItemCounters();
     void updateDecoration();
+    void sortItems(QList<IGisItem*>& items) const;
 
     /**
        @brief Converts a string with HTML tags to a string without HTML depending on the device

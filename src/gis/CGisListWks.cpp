@@ -960,6 +960,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             }
             else
             {
+                actionGroup->setEnabled(false);
                 actionSyncWksDev->setEnabled(IDevice::count());
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
                 menuProjectWks->exec(p);
@@ -1016,6 +1017,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 }
                 else
                 {
+                    actionGroup->setEnabled(true);
                     actionSyncWksDev->setEnabled(IDevice::count());
                     actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
 

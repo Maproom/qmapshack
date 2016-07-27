@@ -23,6 +23,7 @@
 
 class IDBSqlite : public IDB
 {
+    Q_DECLARE_TR_FUNCTIONS(IDBSqlite)
 public:
     IDBSqlite();
     virtual ~IDBSqlite() = default;

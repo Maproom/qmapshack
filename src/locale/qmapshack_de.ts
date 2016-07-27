@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -175,11 +175,11 @@
     <name>CCreateRouteFromWpt</name>
     <message>
         <source>Edit name...</source>
-        <translation>Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation>Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
@@ -516,15 +516,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation>Entfernung: %1 %2</translation>
+        <translation type="vanished">Entfernung: %1 %2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation>Anstieg: %1 %2</translation>
+        <translation type="vanished">Anstieg: %1 %2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation>Abstieg: %1 %2</translation>
+        <translation type="vanished">Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
@@ -1131,11 +1131,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="413"/>
@@ -1209,7 +1209,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation>Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
+        <translation type="vanished">Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
@@ -1866,7 +1866,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
-        <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
+        <translation type="vanished">Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="557"/>
@@ -2536,7 +2536,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+        <translation type="vanished">Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -2819,11 +2819,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation>Geben Sie einen neuen Namen für das Gebiet ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für das Gebiet ein.</translation>
     </message>
 </context>
 <context>
@@ -2846,11 +2846,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation>Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
 </context>
 <context>
@@ -2883,11 +2883,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Name bearbeiten...</translation>
+        <translation type="vanished">Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
 </context>
 <context>
@@ -4236,7 +4236,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <name>IDB</name>
     <message>
         <source>The internal database format of &apos;%1&apos;&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
+        <translation type="vanished">Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
@@ -4251,7 +4251,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/db/IDB.cpp" line="69"/>
         <source>Migration aborted by user</source>
-        <translation></translation>
+        <translation>Migration durch den Benutzer abgebrochen</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="75"/>
@@ -4281,7 +4281,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>The database version of &apos;%1&apos;&apos; is more advanced as the one understood by your QMapShack installation. This won&apos;t work.</source>
-        <translation>Die Datenbankversion von &apos;%1&apos; ist höher als die in ihrer QMapShack Installation benutzte. Dies wird nicht funktionieren.</translation>
+        <translation type="vanished">Die Datenbankversion von &apos;%1&apos; ist höher als die in ihrer QMapShack Installation benutzte. Dies wird nicht funktionieren.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="91"/>
@@ -4310,6 +4310,29 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <location filename="../gis/db/IDBMysql.cpp" line="60"/>
         <source>Password for database &apos;%1&apos;:</source>
         <translation>Passwort für Datenbank &apos;%1&apos;:</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDBMysql.cpp" line="222"/>
+        <source>Update to database version 5. Migrate all GIS items.</source>
+        <translation>Wechsel zu Datenbankversion 5. Alle GIS Elemente werden übertragen.</translation>
+    </message>
+</context>
+<context>
+    <name>IDBSqlite</name>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="306"/>
+        <source>Update to database version 3. Migrate all GIS items.</source>
+        <translation>Wechsel zu Datenbankversion 3. Alle GIS Elemente werden übertragen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="375"/>
+        <source>Update to database version 5. Migrate all GIS items.</source>
+        <translation>Wechsel zu Datenbankversion 5. Alle GIS Elemente werden übertragen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="449"/>
+        <source>Update to database version 6. Migrate all GIS items.</source>
+        <translation>Wechsel zu Datenbankversion 6. Alle GIS Elemente werden übertragen.</translation>
     </message>
 </context>
 <context>
@@ -4411,7 +4434,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
-        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -4614,7 +4637,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Sort by time</source>
-        <translation>Sortieren nach Zeit</translation>
+        <translation type="vanished">Sortieren nach Zeit</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
@@ -5126,7 +5149,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation>Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
+        <translation type="vanished">Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -6024,7 +6047,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
-        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -8024,7 +8047,7 @@ sein</translation>
     </message>
     <message>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation>Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
+        <translation type="vanished">Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
     </message>
 </context>
 </TS>

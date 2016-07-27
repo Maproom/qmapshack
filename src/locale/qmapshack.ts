@@ -4207,6 +4207,29 @@ If you want to keep just one half you can simply remove the points, or check thi
         <source>Password for database &apos;%1&apos;:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../gis/db/IDBMysql.cpp" line="222"/>
+        <source>Update to database version 5. Migrate all GIS items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IDBSqlite</name>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="306"/>
+        <source>Update to database version 3. Migrate all GIS items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="375"/>
+        <source>Update to database version 5. Migrate all GIS items.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/IDBSqlite.cpp" line="449"/>
+        <source>Update to database version 6. Migrate all GIS items.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>IDemPathSetup</name>

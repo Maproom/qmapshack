@@ -219,7 +219,7 @@ bool IDBMysql::migrateDB4to5()
 
     // over all items
     QUERY_RUN("SELECT id, type FROM items", return false);
-    PROGRESS_SETUP("Update to database version 5. Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    PROGRESS_SETUP(tr("Update to database version 5. Migrate all GIS items."), 0, N, CMainWindow::self().getBestWidgetForParent());
     progress.enableCancel(false);
     quint32 cnt = 0;
     while(query.next())
@@ -269,7 +269,7 @@ bool IDBMysql::migrateDB5to6()
 
     // over all items
     QUERY_RUN("SELECT id, type FROM items", return false);
-    PROGRESS_SETUP("Update to database version 6. Migrate all GIS items.", 0, N, CMainWindow::self().getBestWidgetForParent());
+    PROGRESS_SETUP(("Update to database version 6. Migrate all GIS items."), 0, N, CMainWindow::self().getBestWidgetForParent());
     progress.enableCancel(false);
     quint32 cnt = 0;
     while(query.next())

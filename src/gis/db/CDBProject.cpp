@@ -28,6 +28,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/prj/CDetailsPrj.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 
@@ -618,9 +619,13 @@ bool CDBProject::save()
 
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
-{
+{        
+    bool restoreDlgDetails = false;
     if(evt->addItemsExclusively)
     {
+        restoreDlgDetails = !dlgDetails.isNull();
+        delete dlgDetails;
+
         qDeleteAll(takeChildren());
     }
 
@@ -658,6 +663,12 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
     sortItems();
     postStatus(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
+
+    if(restoreDlgDetails)
+    {
+        edit();
+    }
+
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)

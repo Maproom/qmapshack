@@ -30,6 +30,7 @@
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
 #include "widgets/CTextEditWidget.h"
+#include "CMainWindow.h"
 
 #include <QtPrintSupport>
 #include <QtWidgets>
@@ -187,10 +188,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
 
     QFontMetrics fm(QFont(font().family(),12));
     int pointSize = ((10 * (w - 2 * ROOT_FRAME_MARGIN)) / (CHAR_PER_LINE *  fm.width("X")));
-    if(pointSize == 0)
-    {
-        return;
-    }
+    pointSize = qMax(pointSize,CMainWindow::self().getMapFont().pointSize());
 
     QFont f = textDesc->font();
     f.setPointSize(pointSize);

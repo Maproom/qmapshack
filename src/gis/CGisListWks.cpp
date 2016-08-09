@@ -122,8 +122,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectDev->addAction(actionShowOnMap);
     menuProjectDev->addAction(actionHideFrMap);
     menuProjectDev->addSeparator();
-    menuProjectDev->addAction(actionSaveAs);
-    menuProjectDev->addAction(actionSave);
     menuProjectDev->addSeparator();
     actionSyncDevWks= menuProjectDev->addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
     menuProjectDev->addSeparator();

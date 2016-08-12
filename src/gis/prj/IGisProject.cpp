@@ -332,7 +332,7 @@ bool IGisProject::saveAs(QString fn, QString filter)
     {
         filename = fn;
         metadata.name.clear();
-        setupName(QFileInfo(fn).baseName());
+        setupName(QFileInfo(fn).completeBaseName());
     }
 
     if(filter == filedialogFilterGPX)

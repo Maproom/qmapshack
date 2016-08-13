@@ -857,7 +857,15 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     blockUpdateItems(true);
 
     stream >> version;
-    stream >> filename;
+    if(filename.isEmpty())
+    {
+        stream >> filename;
+    }
+    else
+    {
+        QString tmp;
+        stream >> tmp;
+    }
     stream >> metadata.name;
     stream >> metadata.desc;
     stream >> metadata.author;

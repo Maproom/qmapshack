@@ -331,7 +331,6 @@ bool IGisProject::saveAs(QString fn, QString filter)
     if(filter == getFileDialogFilter())
     {
         filename = fn;
-        metadata.name.clear();
         setupName(QFileInfo(fn).completeBaseName());
     }
 

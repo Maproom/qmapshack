@@ -121,7 +121,7 @@ public:
         return activityRanges;
     }
 
-    static const desc_t* getActivityDescriptors()
+    static const QVector<desc_t>& getActivityDescriptors()
     {
         return actDescriptor;
     }
@@ -136,7 +136,7 @@ private:
     static activity_summary_t& getSummary(QVector<activity_summary_t> &summary, quint32 flag);
     static const activity_summary_t& getSummary(const QVector<activity_summary_t> &summary, quint32 flag);
 
-    static desc_t actDescriptor[];
+    static QVector<desc_t> actDescriptor;
 
     CGisItemTrk * trk;
     quint32 allFlags;

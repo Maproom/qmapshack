@@ -21,7 +21,7 @@
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
+QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor =
 {
     { // 0
         "Foot"
@@ -94,14 +94,6 @@ CActivityTrk::desc_t CActivityTrk::actDescriptor[] =
         , "://icons/48x48/ActSki.png"
         , "://icons/16x16/ActSki.png"
         , IGisItem::colorMap[8].color
-    },
-    { // 9
-        QString()
-        , 0
-        , QString()
-        , QString()
-        , QString()
-        , QColor()
     }
 };
 
@@ -126,10 +118,11 @@ void CActivityTrk::init()
 
     SETTINGS;
     cfg.beginGroup("Activities");
-    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    int i = 0;
+    for(desc_t &desc : actDescriptor)
     {
-        desc_t& desc = actDescriptor[i];
         desc.color = QColor(cfg.value(QString("color%1").arg(i), desc.color.name()).toString());
+        ++i;
     }
     cfg.endGroup(); // Activities
 }
@@ -138,10 +131,11 @@ void CActivityTrk::release()
 {
     SETTINGS;
     cfg.beginGroup("Activities");
-    for(int i = 0; !actDescriptor[i].objName.isEmpty(); i++)
+    int i = 0;
+    for(desc_t &desc : actDescriptor)
     {
-        desc_t& desc = actDescriptor[i];
         cfg.setValue(QString("color%1").arg(i), desc.color.name());
+        ++i;
     }
     cfg.endGroup(); // Activities
 }
@@ -156,9 +150,9 @@ void CActivityTrk::update()
         activitySummary[i].reset();
     }
 
-    const CGisItemTrk::trk_t&       data = trk->getTrackData();
-    const CGisItemTrk::trkpt_t *    lastTrkpt = nullptr;
-    const CGisItemTrk::trkpt_t *    startTrkpt = nullptr;
+    const CGisItemTrk::trk_t&   data       = trk->getTrackData();
+    const CGisItemTrk::trkpt_t *lastTrkpt  = nullptr;
+    const CGisItemTrk::trkpt_t *startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
     for(const CGisItemTrk::trkseg_t &seg : data.segs)
@@ -249,7 +243,6 @@ void CActivityTrk::printSummary(QString& str) const
 
 void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quint32 flags, QString& str)
 {
-    quint32 mask;
     QString val, unit;
 
     if((flags == 0) && (summary.size() >= (int)CGisItemTrk::trkpt_t::eActMaxNum))
@@ -275,182 +268,115 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
         return;
     }
 
-
-    const int N = qMin((int)CGisItemTrk::trkpt_t::eActMaxNum, summary.size());
-
     str += "<table>";
 
     // ############### build header ###############
     str += "<tr>";
     str += "<th></th>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
+            str += QString("<th align='right'><img src='%1'/></th>").arg(desc.iconSmall);
         }
-
-        if((flags & mask) != 0)
-        {
-            str += QString("<th align='right'><img src='%1'/></th>").arg(actDescriptor[i].iconSmall);
-        }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Distance row ###############
     str += "<tr>";
     str += "<td>" + tr("Distance:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().meter2distance(s.distance, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Ascend row ###############
     str += "<tr>";
     str += "<td>" + tr("Ascend:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().meter2elevation(s.ascend, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Descend row ###############
     str += "<tr>";
     str += "<td>" + tr("Descend:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().meter2elevation(s.descend, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Speed Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Speed Moving:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Speed row ###############
     str += "<tr>";
     str += "<td>" + tr("Speed Total:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Time Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Time Moving:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
     // ############### build Time Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Time Total:") + "</td>";
-    mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((flags & desc.flag) != 0)
         {
-            break;
-        }
-
-        if((flags & mask) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, mask);
+            const activity_summary_t& s = getSummary(summary, desc.flag);
             IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
             str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         }
-
-        mask >>= 1;
     }
     str += "</tr>";
 
@@ -504,52 +430,33 @@ CActivityTrk::activity_summary_t& CActivityTrk::getSummary(QVector<activity_summ
 
 const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
 {
-    int i = 0;
-    while(!actDescriptor[i].objName.isEmpty())
-    {
-        if(actDescriptor[i].flag == flag)
-        {
-            break;
-        }
+    auto it = std::find_if(actDescriptor.begin(), actDescriptor.end(), [flag](const desc_t &desc) {
+        return desc.flag == flag;
+    });
 
-        i++;
-    }
-
-    return actDescriptor[i];
+    static desc_t dummyDesc;
+    return actDescriptor.end() == it ? dummyDesc : *it;
 }
 
 void CActivityTrk::setColor(quint32 flag, const QString& color)
 {
-    int i = 0;
-    while(!actDescriptor[i].objName.isEmpty())
+    for(desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].flag == flag)
+        if(desc.flag == flag)
         {
-            actDescriptor[i].color = QColor(color);
-            break;
+            desc.color = QColor(color);
+            return;
         }
-
-        i++;
     }
 }
 
 void CActivityTrk::getActivityNames(QStringList& names) const
 {
-    const int N = qMin((int)CGisItemTrk::trkpt_t::eActMaxNum, activitySummary.size());
-
-    quint32 mask = 0x80000000;
-    for(int i = 0; i < N; i++)
+    for(const desc_t &desc : actDescriptor)
     {
-        if(actDescriptor[i].objName.isEmpty())
+        if((allFlags & desc.flag) != 0)
         {
-            break;
+            names << desc.name;
         }
-
-        if((allFlags & mask) != 0)
-        {
-            names << actDescriptor[i].name;
-        }
-
-        mask >>= 1;
     }
 }

@@ -90,10 +90,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     widgetColorActivity->setTrack(&trk);
 
-    const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
-    for(int i = 0; !actDesc[i].name.isEmpty(); ++i)
+    int i = 0;
+    for(const CActivityTrk::desc_t &desc : CActivityTrk::getActivityDescriptors())
     {
-        const CActivityTrk::desc_t& desc = actDesc[i];
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
         check->setIcon(QIcon(desc.iconLarge));
@@ -105,6 +104,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
         connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
 
         layoutActivities->addWidget(check, i%8, i>>3);
+        ++i;
     }
     layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding),8,0);
 
@@ -380,10 +380,8 @@ void CDetailsTrk::updateData()
 
     quint32 flags = trk.getActivities().getAllFlags();
 
-    const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
-    for(int i = 0; !actDesc[i].objName.isEmpty(); ++i)
+    for(const CActivityTrk::desc_t &desc : CActivityTrk::getActivityDescriptors())
     {
-        const CActivityTrk::desc_t& desc = actDesc[i];
         QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
         if(nullptr != check)
         {

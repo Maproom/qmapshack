@@ -33,10 +33,8 @@ CSelectActivity::CSelectActivity(quint32 &flag, QString &name, QString &icon, QW
     int i = 0;
     QLayout * l = layout();
 
-    const CActivityTrk::desc_t* actDesc = CActivityTrk::getActivityDescriptors();
-    while(!actDesc[i].name.isEmpty())
+    for(const CActivityTrk::desc_t &desc : CActivityTrk::getActivityDescriptors())
     {
-        const CActivityTrk::desc_t& desc = actDesc[i];
         QCheckBox * check = new QCheckBox(this);
         check->setText(desc.name);
         check->setIcon(QIcon(desc.iconLarge));

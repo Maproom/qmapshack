@@ -270,113 +270,101 @@ void CActivityTrk::printSummary(const QVector<activity_summary_t>& summary, quin
 
     str += "<table>";
 
+
+    // gather any used activities
+    QVector<const desc_t*> descs;
+    for(const desc_t &desc : actDescriptor)
+    {
+        if(flags & desc.flag)
+        {
+            descs << &desc;
+        }
+    }
+
+
     // ############### build header ###############
     str += "<tr>";
     str += "<th></th>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            str += QString("<th align='right'><img src='%1'/></th>").arg(desc.iconSmall);
-        }
+        str += QString("<th align='right'><img src='%1'/></th>").arg(desc->iconSmall);
     }
     str += "</tr>";
 
     // ############### build Distance row ###############
     str += "<tr>";
     str += "<td>" + tr("Distance:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().meter2distance(s.distance, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().meter2distance(s.distance, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Ascend row ###############
     str += "<tr>";
     str += "<td>" + tr("Ascend:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().meter2elevation(s.ascend, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().meter2elevation(s.ascend, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Descend row ###############
     str += "<tr>";
     str += "<td>" + tr("Descend:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().meter2elevation(s.descend, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().meter2elevation(s.descend, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Speed Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Speed Moving:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+       const activity_summary_t& s = getSummary(summary, desc->flag);
+       IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
+       str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Speed row ###############
     str += "<tr>";
     str += "<td>" + tr("Speed Total:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Time Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Time Moving:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
     // ############### build Time Moving row ###############
     str += "<tr>";
     str += "<td>" + tr("Time Total:") + "</td>";
-    for(const desc_t &desc : actDescriptor)
+    for(const desc_t *desc : descs)
     {
-        if((flags & desc.flag) != 0)
-        {
-            const activity_summary_t& s = getSummary(summary, desc.flag);
-            IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
-            str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
-        }
+        const activity_summary_t& s = getSummary(summary, desc->flag);
+        IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 

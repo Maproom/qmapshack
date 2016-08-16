@@ -21,81 +21,7 @@
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
-QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor =
-{
-    { // 0
-        "Foot"
-        , CGisItemTrk::trkpt_t::eActFoot
-        , tr("Foot")
-        , "://icons/48x48/ActFoot.png"
-        , "://icons/16x16/ActFoot.png"
-        , IGisItem::colorMap[0].color
-    },
-    { // 1
-        "Cycle"
-        , CGisItemTrk::trkpt_t::eActCycle
-        , tr("Bicycle")
-        , "://icons/48x48/ActCycle.png"
-        , "://icons/16x16/ActCycle.png"
-        , IGisItem::colorMap[1].color
-    },
-    { // 2
-        "Bike"
-        , CGisItemTrk::trkpt_t::eActBike
-        , tr("Motor Bike")
-        , "://icons/48x48/ActBike.png"
-        , "://icons/16x16/ActBike.png"
-        , IGisItem::colorMap[2].color
-    },
-    { // 3
-        "Car"
-        , CGisItemTrk::trkpt_t::eActCar
-        , tr("Car")
-        , "://icons/48x48/ActCar.png"
-        , "://icons/16x16/ActCar.png"
-        , IGisItem::colorMap[3].color
-    },
-    { // 4
-        "Cable"
-        , CGisItemTrk::trkpt_t::eActCable
-        , tr("Cable Car")
-        , "://icons/48x48/ActCable.png"
-        , "://icons/16x16/ActCable.png"
-        , IGisItem::colorMap[4].color
-    },
-    { // 5
-        "Swim"
-        , CGisItemTrk::trkpt_t::eActSwim
-        , tr("Swim")
-        , "://icons/48x48/ActSwim.png"
-        , "://icons/16x16/ActSwim.png"
-        , IGisItem::colorMap[5].color
-    },
-    { // 6
-        "Ship"
-        , CGisItemTrk::trkpt_t::eActShip
-        , tr("Ship")
-        , "://icons/48x48/ActShip.png"
-        , "://icons/16x16/ActShip.png"
-        , IGisItem::colorMap[6].color
-    },
-    { // 7
-        "Aeronautik"
-        , CGisItemTrk::trkpt_t::eActAero
-        , tr("Aeronautik")
-        , "://icons/48x48/ActAero.png"
-        , "://icons/16x16/ActAero.png"
-        , IGisItem::colorMap[7].color
-    },
-    { // 8
-        "Ski/Winter"
-        , CGisItemTrk::trkpt_t::eActSki
-        , tr("Ski/Winter")
-        , "://icons/48x48/ActSki.png"
-        , "://icons/16x16/ActSki.png"
-        , IGisItem::colorMap[8].color
-    }
-};
+QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
@@ -105,15 +31,82 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
 
 void CActivityTrk::init()
 {
-    actDescriptor[0].name = tr("Foot");
-    actDescriptor[1].name = tr("Bicycle");
-    actDescriptor[2].name = tr("Motor Bike");
-    actDescriptor[3].name = tr("Car");
-    actDescriptor[4].name = tr("Cable Car");
-    actDescriptor[5].name = tr("Swim");
-    actDescriptor[6].name = tr("Ship");
-    actDescriptor[7].name = tr("Aeronautics");
-    actDescriptor[8].name = tr("Ski/Winter");
+    actDescriptor =
+    {
+        { // 0
+            "Foot"
+            , CGisItemTrk::trkpt_t::eActFoot
+            , tr("Foot")
+            , "://icons/48x48/ActFoot.png"
+            , "://icons/16x16/ActFoot.png"
+            , IGisItem::colorMap[0].color
+        },
+        { // 1
+            "Cycle"
+            , CGisItemTrk::trkpt_t::eActCycle
+            , tr("Bicycle")
+            , "://icons/48x48/ActCycle.png"
+            , "://icons/16x16/ActCycle.png"
+            , IGisItem::colorMap[1].color
+        },
+        { // 2
+            "Bike"
+            , CGisItemTrk::trkpt_t::eActBike
+            , tr("Motor Bike")
+            , "://icons/48x48/ActBike.png"
+            , "://icons/16x16/ActBike.png"
+            , IGisItem::colorMap[2].color
+        },
+        { // 3
+            "Car"
+            , CGisItemTrk::trkpt_t::eActCar
+            , tr("Car")
+            , "://icons/48x48/ActCar.png"
+            , "://icons/16x16/ActCar.png"
+            , IGisItem::colorMap[3].color
+        },
+        { // 4
+            "Cable"
+            , CGisItemTrk::trkpt_t::eActCable
+            , tr("Cable Car")
+            , "://icons/48x48/ActCable.png"
+            , "://icons/16x16/ActCable.png"
+            , IGisItem::colorMap[4].color
+        },
+        { // 5
+            "Swim"
+            , CGisItemTrk::trkpt_t::eActSwim
+            , tr("Swim")
+            , "://icons/48x48/ActSwim.png"
+            , "://icons/16x16/ActSwim.png"
+            , IGisItem::colorMap[5].color
+        },
+        { // 6
+            "Ship"
+            , CGisItemTrk::trkpt_t::eActShip
+            , tr("Ship")
+            , "://icons/48x48/ActShip.png"
+            , "://icons/16x16/ActShip.png"
+            , IGisItem::colorMap[6].color
+        },
+        { // 7
+            "Aeronautik"
+            , CGisItemTrk::trkpt_t::eActAero
+            , tr("Aeronautics")
+            , "://icons/48x48/ActAero.png"
+            , "://icons/16x16/ActAero.png"
+            , IGisItem::colorMap[7].color
+        },
+        { // 8
+            "Ski/Winter"
+            , CGisItemTrk::trkpt_t::eActSki
+            , tr("Ski/Winter")
+            , "://icons/48x48/ActSki.png"
+            , "://icons/16x16/ActSki.png"
+            , IGisItem::colorMap[8].color
+        }
+    };
+
 
     SETTINGS;
     cfg.beginGroup("Activities");

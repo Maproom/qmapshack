@@ -21,6 +21,7 @@
 
 #include <QCoreApplication>
 #include <QIcon>
+#include <QMap>
 #include <QPointer>
 #include <QVector>
 class CGisItemTrk;
@@ -106,14 +107,14 @@ public:
        @param summary  The array of summaries
        @param str   string to receive HTML
      */
-    static void printSummary(const QVector<activity_summary_t> &summary, quint32 flags, QString& str);
+    static void printSummary(const QMap<uint32_t, activity_summary_t> &summary, quint32 flags, QString& str);
 
 
     /**
        @brief Add internal summary to given array of summaries
        @param summary  an array of summaries to hold the sum
      */
-    void sumUp(QVector<activity_summary_t> &summary) const;
+    void sumUp(QMap<uint32_t, activity_summary_t> &summary) const;
 
 
     const QList<activity_range_t>& getActivityRanges() const
@@ -133,15 +134,13 @@ public:
 private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk * trk);
-    static activity_summary_t& getSummary(QVector<activity_summary_t> &summary, quint32 flag);
-    static const activity_summary_t& getSummary(const QVector<activity_summary_t> &summary, quint32 flag);
 
     static QVector<desc_t> actDescriptor;
 
     CGisItemTrk * trk;
     quint32 allFlags;
     QList<activity_range_t> activityRanges;
-    QVector<activity_summary_t>  activitySummary;
+    QMap<uint32_t, activity_summary_t> activitySummary;
 };
 
 #endif //CACTIVITYTRK_H

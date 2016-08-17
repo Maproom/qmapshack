@@ -656,6 +656,12 @@ QString IGisItem::removeHtml(const QString &str)
 
 QString IGisItem::html2Dev(const QString& str)
 {
+    // device or not, an empty text should never be enclosed in HTML tags
+    if(removeHtml(str).simplified().isEmpty())
+    {
+        return "";
+    }
+
     return isOnDevice() == IDevice::eTypeGarmin ? removeHtml(str) : str;
 }
 

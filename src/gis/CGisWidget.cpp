@@ -222,11 +222,18 @@ IGisProject * CGisWidget::selectProject()
 
         if(evt.idChild)
         {
-            while(nullptr == project)
+            CDBProject * p = nullptr;
+            while(nullptr == p)
             {
                 QApplication::processEvents(QEventLoop::WaitForMoreEvents|QEventLoop::ExcludeUserInputEvents, 100);
-                project = treeWks->getProjectById(evt.idChild, db);
+                p = dynamic_cast<CDBProject*>(treeWks->getProjectById(evt.idChild, db));
             }
+            /*
+               Creating a project usually does initiate an info request. However as the project isn't in the workspace
+               the moment we create it, the requuest will fail. That is why we send the info now.
+            */
+            p->postStatus(false);
+            project = p;
         }
     }
     else if(!name.isEmpty())

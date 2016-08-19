@@ -74,7 +74,7 @@ void CCreateRouteFromWpt::accept()
     for(int i = 0; i < listWidget->count(); i++)
     {
         QListWidgetItem * item = listWidget->item(i);
-        points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF());
+        points << IGisLine::point_t(item->data(Qt::UserRole + 0).toPointF(),item->text());
     }
 
     CGisItemRte* rte = new CGisItemRte(points,name, project, NOIDX);

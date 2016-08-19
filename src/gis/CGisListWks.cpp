@@ -1699,6 +1699,11 @@ bool CGisListWks::event(QEvent * e)
             CDBProject * project =  getProjectById(evt->id, evt->db);
             if(project && project->askBeforClose())
             {
+                /*
+                    Tell the DB view that we aborted to hide the folder by posting it's
+                    current status.
+                */
+                project->postStatus(false);
                 return false;
             }
             delete project;

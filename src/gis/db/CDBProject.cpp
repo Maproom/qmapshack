@@ -167,8 +167,11 @@ void CDBProject::postStatus(bool updateLostFound)
         query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:parent");
         query.bindValue(":parent", getId());
         QUERY_EXEC();
+        query.next();
 
-        if(query.next() && (query.value(0).toInt() != info->keysChildren.count()))
+        const int nChildrenAttached = query.value(0).toInt();
+
+        if((nChildrenAttached != 0) && (nChildrenAttached != info->keysChildren.count()))
         {
             checkState = Qt::PartiallyChecked;
         }

@@ -107,6 +107,7 @@ private slots:
     void slotRteFromWpt();
     void slotSyncDB();
     void slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked);
+    void slotCopyProject();
 
 
 private:
@@ -123,6 +124,7 @@ private:
     QMenu * menuProjectWks;
     QAction  * actionSave;
     QAction  * actionSaveAs;
+    QAction  * actionCopyPrj;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;
     QAction  * actionShowOnMap;

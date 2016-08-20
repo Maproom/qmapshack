@@ -24,11 +24,11 @@
 #include "gis/db/macros.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/prj/CDetailsPrj.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/prj/CDetailsPrj.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 
@@ -622,7 +622,7 @@ bool CDBProject::save()
 
 
 void CDBProject::showItems(CEvtD2WShowItems * evt)
-{        
+{
     bool restoreDlgDetails = false;
     if(evt->addItemsExclusively)
     {
@@ -671,7 +671,6 @@ void CDBProject::showItems(CEvtD2WShowItems * evt)
     {
         edit();
     }
-
 }
 
 void CDBProject::hideItems(CEvtD2WHideItems * evt)

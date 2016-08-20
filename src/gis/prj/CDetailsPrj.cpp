@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
@@ -30,7 +31,6 @@
 #include "plot/CPlotProfile.h"
 #include "plot/CPlotTrack.h"
 #include "widgets/CTextEditWidget.h"
-#include "CMainWindow.h"
 
 #include <QtPrintSupport>
 #include <QtWidgets>

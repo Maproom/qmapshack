@@ -285,6 +285,11 @@ void IGisProject::updateItems()
             }
         }
     }
+
+    if(dlgDetails != nullptr)
+    {
+        dlgDetails->updateData();
+    }
 }
 
 bool IGisProject::save()

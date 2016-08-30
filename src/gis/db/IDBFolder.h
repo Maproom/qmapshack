@@ -62,6 +62,9 @@ public:
 
     QSqlDatabase& getDb(){return db; }
 
+    QString getName() const;
+    void setName(const QString& name);
+
     /**
      * @brief Get the database folder that folder is stored in
      *

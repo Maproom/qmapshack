@@ -162,8 +162,15 @@ void CDetailsPrj::slotSetupGui()
     }
     X_____________UnBlockAllSignals_____________X(this);
 
-    textDesc->document()->setTextWidth(textDesc->size().width() - 20);
-    draw(*textDesc->document(), false);
+    // Create a new document, fill it and attach it to the text browser.
+    // This is much faster than to use the current one of the text browser.
+    // According to the docs, the text browser's current document should be
+    // deleted because the text browser is it's parent.
+    QTextDocument * doc = new QTextDocument();
+    doc->setTextWidth(textDesc->size().width() - 20);
+    draw(*doc, false);
+    doc->setParent(textDesc);
+    textDesc->setDocument(doc);
 
     QTabWidget * tabWidget = dynamic_cast<QTabWidget*>(parentWidget() ? parentWidget()->parentWidget() : nullptr);
     if(tabWidget)

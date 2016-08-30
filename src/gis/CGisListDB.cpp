@@ -117,6 +117,7 @@ CGisListDB::CGisListDB(QWidget *parent)
 
     menuFolder          = new QMenu(this);
     actionAddFolder     = menuFolder->addAction(QIcon("://icons/32x32/Add.png"), tr("Add Folder"), this, SLOT(slotAddFolder()));
+    actionRenameFolder  = menuFolder->addAction(QIcon("://icons/32x32/A.png"), tr("Rename Folder"), this, SLOT(slotRenameFolder()));
     actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
 
     menuItem            = new QMenu(this);
@@ -345,6 +346,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder)
     {
+        actionRenameFolder->setVisible(folder->type() == IDBFolder::eTypeGroup);
         menuFolder->exec(p);
         return;
     }
@@ -724,6 +726,25 @@ void CGisListDB::slotSearchDatabase()
     dlgSearch->exec();
     delete dlgSearch;
     isInternalEdit++;
+}
+
+void CGisListDB::slotRenameFolder()
+{
+    CGisListDBEditLock lock(false, this, "slotRenameFolder");
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == nullptr)
+    {
+        return;
+    }
+
+    QString name1 = folder->getName();
+    QString name2 = QInputDialog::getText(this, tr("Folder name..."), tr("Rename folder:"), QLineEdit::Normal, name1);
+
+    if(!name2.isEmpty() && (name1 != name2))
+    {
+        folder->setName(name2);
+    }
 }
 
 void CGisListDB::slotReadyRead()

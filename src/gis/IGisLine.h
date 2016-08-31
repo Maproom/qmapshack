@@ -36,11 +36,11 @@ public:
     struct subpt_t
     {
         subpt_t() = default;
-	subpt_t(const QPointF& pt);
-	subpt_t(const QPointF& pt, const QString &name);
+        subpt_t(const QPointF& pt);
+        subpt_t(const QPointF& pt, const QString &name);
         QPointF coord;
         QPointF pixel;
-	QString name;
+        QString name;
         qint32 ele = NOINT;
     };
 

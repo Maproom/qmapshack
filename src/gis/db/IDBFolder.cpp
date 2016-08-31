@@ -101,7 +101,7 @@ void IDBFolder::setName(const QString& name)
     query.prepare("UPDATE folders SET name=:name WHERE id=:id");
     query.bindValue(":name", name);
     query.bindValue(":id", getId());
-    QUERY_EXEC(return);
+    QUERY_EXEC(return );
 
     setupFromDB();
 
@@ -396,6 +396,11 @@ void IDBFolder::remove()
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt1);
 }
+
+void IDBFolder::moveTo(quint64 parentId)
+{
+}
+
 
 void IDBFolder::setupFromDB()
 {

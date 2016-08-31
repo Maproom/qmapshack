@@ -63,6 +63,8 @@ private slots:
     void slotUpdateDatabase();
     void slotSearchDatabase();
     void slotRenameFolder();
+    void slotCopyFolder();
+    void slotMoveFolder();
 
     void slotReadyRead();
 
@@ -80,6 +82,8 @@ private:
     QMenu * menuFolder;
     QAction * actionAddFolder;
     QAction * actionRenameFolder;
+    QAction * actionCopyFolder;
+    QAction * actionMoveFolder;
     QAction * actionDelFolder;
 
     QMenu * menuDatabase;

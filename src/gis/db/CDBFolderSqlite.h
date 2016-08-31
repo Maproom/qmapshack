@@ -39,6 +39,7 @@ public:
 
     bool search(const QString& str, QSqlQuery &query) override;
 
+    void copyFolder(quint64 child, quint64 parent) override;
 private:
     QString filename;
     QString error;

@@ -42,6 +42,8 @@ public:
 
     void announceChange() const;
 
+    virtual void copyFolder(quint64 child, quint64 parent) = 0;
+
 protected:
     CDBFolderLostFound * folderLostFound = nullptr;
 

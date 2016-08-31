@@ -120,6 +120,8 @@ public:
      */
     virtual void remove();
 
+    virtual void moveTo(quint64 parentId);
+
     /**
      * @brief Create a new folder entry into the database table
      *

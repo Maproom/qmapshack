@@ -40,6 +40,11 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidge
     cfg.beginGroup("Entries");
     for(const QString &name : names)
     {
+        if(!db.isEmpty() && (db != name))
+        {
+            continue;
+        }
+
         cfg.beginGroup(name);
         QString type = cfg.value("type", "SQLite").toString();
         if(type == "SQLite")

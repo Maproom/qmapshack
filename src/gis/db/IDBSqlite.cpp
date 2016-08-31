@@ -486,3 +486,4 @@ bool IDBSqlite::migrateDB5to6()
 
     return true;
 }
+

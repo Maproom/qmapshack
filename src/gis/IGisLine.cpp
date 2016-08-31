@@ -32,12 +32,13 @@ IGisLine::subpt_t::subpt_t(const QPointF& pt, const QString &nm)
 }
 
 IGisLine::point_t::point_t(const QPointF& pt)
-    : subpt_t(pt){
-
+    : subpt_t(pt)
+{
 }
 
 IGisLine::point_t::point_t(const QPointF& pt, const QString& nm)
-    : subpt_t(pt,nm){
+    : subpt_t(pt,nm)
+{
 }
 
 void IGisLine::point_t::resetElevation()

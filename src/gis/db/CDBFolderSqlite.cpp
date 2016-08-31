@@ -78,3 +78,12 @@ bool CDBFolderSqlite::search(const QString& str, QSqlQuery& query)
 
     return true;
 }
+
+void CDBFolderSqlite::copyFolder(quint64 child, quint64 parent) //override;
+{
+    QSqlQuery query(IDB::db);
+    query.prepare("INSERT INTO folder2folder (parent, child) SELECT :parent, :child WHERE NOT EXISTS (SELECT parent, child FROM folder2folder WHERE parent=:parent AND child=:child)");
+    query.bindValue(":parent", parent);
+    query.bindValue(":child", child);
+    QUERY_EXEC(return );
+}

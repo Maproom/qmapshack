@@ -104,8 +104,6 @@ void IDBFolder::setName(const QString& name)
     QUERY_EXEC(return );
 
     setupFromDB();
-
-    getDBFolder()->announceChange();
 }
 
 IDBFolderSql *IDBFolder::getDBFolder()
@@ -395,10 +393,6 @@ void IDBFolder::remove()
 
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
     CGisWidget::self().postEventForWks(evt1);
-}
-
-void IDBFolder::moveTo(quint64 parentId)
-{
 }
 
 

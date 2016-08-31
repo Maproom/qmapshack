@@ -351,8 +351,6 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     {
         bool isGroupFolder = folder->type() == IDBFolder::eTypeGroup;
         actionRenameFolder->setVisible(isGroupFolder);
-        actionCopyFolder->setVisible(!isGroupFolder);
-        actionMoveFolder->setVisible(!isGroupFolder);
         menuFolder->exec(p);
         return;
     }
@@ -581,7 +579,7 @@ void CGisListDB::slotCopyFolder()
     {
         // only pick the project/other folders to copy
         folder = dynamic_cast<IDBFolder*>(item);
-        if((folder == nullptr) || (folder->type() < IDBFolder::eTypeProject))
+        if((folder == nullptr) || (folder->type() < IDBFolder::eTypeGroup))
         {
             continue;
         }
@@ -591,15 +589,127 @@ void CGisListDB::slotCopyFolder()
 
     // tell the parent folder to show all changes
     parent->update();
-
     // tell other clients to show changes
     dbfolder->announceChange();
 }
 
 void CGisListDB::slotMoveFolder()
 {
+    CGisListDBEditLock lock(false, this, "slotMoveFolder");
+
+    // no way to continue if the current item is not a folder (we need the database it is attached to)
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == nullptr)
+    {
+        return;
+    }
+
+    // get the database the folder is attached to
+    IDBFolderSql * dbfolder = folder->getDBFolder();
+    if(dbfolder == nullptr)
+    {
+        return;
+    }
+
+    // next we need to get the target folder
+    // NOTE: By pre-setting db and host, we limit the selection to the current database
+    quint64 idParent    = 0;
+    QString db          = folder->getDBName();
+    QString host        = folder->getDBHost();
+
+    CSelectDBFolder dlg(idParent, db, host, this);
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    // get a pointer to the parent folder for later use.
+    IDBFolder * parent = dbfolder->getFolder(idParent);
+    if(parent == nullptr)
+    {
+        return;
+    }
+
+    // --- at this point we should have all data to perform the copy without interruption ---
+
+    // now iterate over all selected items
+    QList<QTreeWidgetItem*> itemsToDelete;
+    QList<QTreeWidgetItem*> items = selectedItems();
+    for(QTreeWidgetItem * item : items)
+    {
+        // only pick the project/other folders to copy
+        folder = dynamic_cast<IDBFolder*>(item);
+        if((folder == nullptr) || (folder->type() < IDBFolder::eTypeGroup))
+        {
+            continue;
+        }
+        // copy to new loacation
+        dbfolder->copyFolder(folder->getId(), idParent);
+        // and remove
+        folder->remove();
+        // Because some items can be parent of other selected items
+        // it's a bad idea to delete them asap. Better collect them first.
+        itemsToDelete << folder;
+    }
+
+    // iterate over all items to be deleted.
+    for(QTreeWidgetItem * item : itemsToDelete)
+    {
+        // Test if the item's parent is also in the list.
+        // If it is skip it because it will be deleted together with it's parent.
+        if(itemsToDelete.contains(item->parent()))
+        {
+            continue;
+        }
+
+        delete item;
+    }
+
+    // tell the parent folder to show all changes
+    parent->update();
+    // tell other clients to show changes
+    dbfolder->announceChange();
 }
 
+void CGisListDB::slotRenameFolder()
+{
+    CGisListDBEditLock lock(false, this, "slotRenameFolder");
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == nullptr)
+    {
+        return;
+    }
+
+    // get the database the folder is attached to
+    IDBFolderSql * dbfolder = folder->getDBFolder();
+    if(dbfolder == nullptr)
+    {
+        return;
+    }
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    for(QTreeWidgetItem * item : items)
+    {
+        folder = dynamic_cast<IDBFolder*>(item);
+        if((folder == nullptr) || (folder->type() != IDBFolder::eTypeGroup))
+        {
+            continue;
+        }
+
+
+        QString name1 = folder->getName();
+        QString name2 = QInputDialog::getText(this, tr("Folder name..."), tr("Rename folder:"), QLineEdit::Normal, name1);
+
+        if(!name2.isEmpty() && (name1 != name2))
+        {
+            folder->setName(name2);
+        }
+    }
+
+    // tell other clients to show changes
+    dbfolder->announceChange();
+}
 
 void CGisListDB::slotDelLostFound()
 {
@@ -828,24 +938,6 @@ void CGisListDB::slotSearchDatabase()
     isInternalEdit++;
 }
 
-void CGisListDB::slotRenameFolder()
-{
-    CGisListDBEditLock lock(false, this, "slotRenameFolder");
-
-    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
-    if(folder == nullptr)
-    {
-        return;
-    }
-
-    QString name1 = folder->getName();
-    QString name2 = QInputDialog::getText(this, tr("Folder name..."), tr("Rename folder:"), QLineEdit::Normal, name1);
-
-    if(!name2.isEmpty() && (name1 != name2))
-    {
-        folder->setName(name2);
-    }
-}
 
 void CGisListDB::slotReadyRead()
 {

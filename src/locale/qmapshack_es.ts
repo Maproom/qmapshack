@@ -278,66 +278,66 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="219"/>
+        <location filename="../gis/db/CDBProject.cpp" line="223"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="225"/>
+        <location filename="../gis/db/CDBProject.cpp" line="229"/>
         <source>Conflict with database...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="226"/>
+        <location filename="../gis/db/CDBProject.cpp" line="230"/>
         <source>Clone &amp;&amp; Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="227"/>
+        <location filename="../gis/db/CDBProject.cpp" line="231"/>
         <source>Force Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="228"/>
+        <location filename="../gis/db/CDBProject.cpp" line="232"/>
         <source>Take remote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="510"/>
+        <location filename="../gis/db/CDBProject.cpp" line="514"/>
         <source>Missing folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="511"/>
+        <location filename="../gis/db/CDBProject.cpp" line="515"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="518"/>
+        <location filename="../gis/db/CDBProject.cpp" line="522"/>
         <source>Save ...</source>
         <translation type="unfinished">Guardar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="581"/>
+        <location filename="../gis/db/CDBProject.cpp" line="585"/>
         <source>Error</source>
         <translation type="unfinished">Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="581"/>
+        <location filename="../gis/db/CDBProject.cpp" line="585"/>
         <source>There was an unexpected database error:
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="687"/>
+        <location filename="../gis/db/CDBProject.cpp" line="700"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="688"/>
+        <location filename="../gis/db/CDBProject.cpp" line="701"/>
         <source>Save changes?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,13 +460,13 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsPrj</name>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="260"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="265"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="775"/>
         <source>none</source>
         <translation>ninguna</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="333"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="338"/>
         <source>Build diary...</source>
         <translation>Creando diario...</translation>
     </message>
@@ -475,112 +475,112 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Cancelar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="430"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="435"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>Waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="437"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="463"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="587"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="705"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="735"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="442"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="468"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
         <source>Info</source>
         <translation>Información</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="438"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="464"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="588"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="706"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="736"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="443"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="469"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="593"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="711"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="741"/>
         <source>Comment</source>
         <translation>Comentario</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="456"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="461"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="606"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>From Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="606"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>To Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="606"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>To End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="609"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="614"/>
         <source>distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="619"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="624"/>
         <source>ascent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="629"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="634"/>
         <source>descend: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="698"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="703"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>Áreas</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="126"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="127"/>
         <source>You want to sort waypoints along a track, but you switched off track and waypoint correlation. Do you want to switch it on again?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="127"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
         <source>Correlation...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="388"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="393"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="728"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="783"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="788"/>
         <source>Edit name...</source>
         <translation>Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="783"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="788"/>
         <source>Enter new project name.</source>
         <translation>Introducir nuevo nombre de proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="765"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
         <source>Edit keywords...</source>
         <translation>Editar etiquetas...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="765"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
         <source>Enter keywords.</source>
         <translation>Introducir etiquetas.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="911"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="916"/>
         <source>Print Diary</source>
         <translation>Imprimir Diario</translation>
     </message>
@@ -993,7 +993,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="711"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="712"/>
         <source>Changed route points.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1488,73 +1488,103 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisListDB</name>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="82"/>
+        <location filename="../gis/CGisListDB.cpp" line="83"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="83"/>
+        <location filename="../gis/CGisListDB.cpp" line="84"/>
         <source>Select database file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="117"/>
         <source>Add Database</source>
         <translation>Añadir Base de Datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Add Folder</source>
         <translation>Añadir carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <source>Rename Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <source>Copy Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <source>Move Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Delete Folder</source>
         <translation>Eliminar Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
+        <location filename="../gis/CGisListDB.cpp" line="139"/>
         <source>Delete Item</source>
         <translation>Eliminar Elemento</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="127"/>
+        <location filename="../gis/CGisListDB.cpp" line="131"/>
         <source>Search Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="128"/>
+        <location filename="../gis/CGisListDB.cpp" line="132"/>
         <source>Sync. with Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="129"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
         <source>Remove Database</source>
         <translation>Quitar Base de Datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="132"/>
+        <location filename="../gis/CGisListDB.cpp" line="136"/>
         <source>Empty</source>
         <translation>Vacío</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="426"/>
+        <location filename="../gis/CGisListDB.cpp" line="432"/>
         <source>Remove database...</source>
         <translation>Quitar Base de Datos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="426"/>
+        <location filename="../gis/CGisListDB.cpp" line="432"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="619"/>
+        <location filename="../gis/CGisListDB.cpp" line="496"/>
+        <source>Are you sure you want to delete selected folders and all folders below from the database?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="702"/>
+        <source>Folder name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="702"/>
+        <source>Rename folder:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListDB.cpp" line="831"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation type="unfinished">¿Desea realmente eleiminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="620"/>
+        <location filename="../gis/CGisListDB.cpp" line="832"/>
         <source>Delete...</source>
         <translation type="unfinished">Borrar...</translation>
     </message>
@@ -1563,28 +1593,27 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">¿Desea realmente quitar &apos;%1&apos; de la lista?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="484"/>
+        <location filename="../gis/CGisListDB.cpp" line="496"/>
         <source>Delete database folder...</source>
         <translation>Eliminar Carpeta de la Base de Datos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="484"/>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation>¿Desea realmente eliminar &apos;%1&apos; de la Base de Datos?</translation>
+        <translation type="vanished">¿Desea realmente eliminar &apos;%1&apos; de la Base de Datos?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="511"/>
-        <location filename="../gis/CGisListDB.cpp" line="532"/>
+        <location filename="../gis/CGisListDB.cpp" line="723"/>
+        <location filename="../gis/CGisListDB.cpp" line="744"/>
         <source>Remove items...</source>
         <translation>Eliminar elementos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="511"/>
+        <location filename="../gis/CGisListDB.cpp" line="723"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>¿Desea realmente eliminar todos los elementos de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="532"/>
+        <location filename="../gis/CGisListDB.cpp" line="744"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>¿Desea realmente eliminar todos los elementos.seleccionados de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
     </message>
@@ -1592,12 +1621,12 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="110"/>
+        <location filename="../gis/CGisListWks.cpp" line="111"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="111"/>
+        <location filename="../gis/CGisListWks.cpp" line="112"/>
         <source>Save As...</source>
         <translation>Guardar Como...</translation>
     </message>
@@ -1611,7 +1640,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Actualizar Proyecto en Dispositivos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="118"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
@@ -1626,6 +1655,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Editar...</translation>
     </message>
     <message>
+        <location filename="../gis/CGisListWks.cpp" line="99"/>
         <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Copy to...</source>
         <translation>Copiar a...</translation>
@@ -1707,32 +1737,32 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Perfil del Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="99"/>
+        <location filename="../gis/CGisListWks.cpp" line="100"/>
         <source>Show on Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="100"/>
+        <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Hide from Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="105"/>
+        <location filename="../gis/CGisListWks.cpp" line="107"/>
         <source>Sort by Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="106"/>
+        <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Sort by Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <location filename="../gis/CGisListWks.cpp" line="115"/>
         <source>Send to Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Sync. with Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1801,17 +1831,17 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="522"/>
+        <location filename="../gis/CGisWidget.cpp" line="529"/>
         <source>Copy items...</source>
         <translation type="unfinished">Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="650"/>
+        <location filename="../gis/CGisWidget.cpp" line="657"/>
         <source>Cut Track...</source>
         <translation>Partir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="650"/>
+        <location filename="../gis/CGisWidget.cpp" line="657"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Desea borrar el track original?</translation>
     </message>
@@ -5724,46 +5754,46 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation type="unfinished">Modo Sólo Lectura...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="686"/>
-        <location filename="../gis/IGisItem.cpp" line="739"/>
+        <location filename="../gis/IGisItem.cpp" line="692"/>
+        <location filename="../gis/IGisItem.cpp" line="745"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Descripción:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="689"/>
-        <location filename="../gis/IGisItem.cpp" line="742"/>
+        <location filename="../gis/IGisItem.cpp" line="695"/>
+        <location filename="../gis/IGisItem.cpp" line="748"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;---sin descripción---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="700"/>
+        <location filename="../gis/IGisItem.cpp" line="706"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation type="unfinished">&lt;h4&gt;Comentario:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="703"/>
+        <location filename="../gis/IGisItem.cpp" line="709"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="714"/>
-        <location filename="../gis/IGisItem.cpp" line="753"/>
+        <location filename="../gis/IGisItem.cpp" line="720"/>
+        <location filename="../gis/IGisItem.cpp" line="759"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="717"/>
-        <location filename="../gis/IGisItem.cpp" line="756"/>
+        <location filename="../gis/IGisItem.cpp" line="723"/>
+        <location filename="../gis/IGisItem.cpp" line="762"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation type="unfinished">&lt;p&gt;--- sin links ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="832"/>
+        <location filename="../gis/IGisItem.cpp" line="838"/>
         <source>Edit name...</source>
         <translation type="unfinished">Editar nombre...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="832"/>
+        <location filename="../gis/IGisItem.cpp" line="838"/>
         <source>Enter new %1 name.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5796,43 +5826,43 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="322"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="327"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="433"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="438"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="442"/>
         <source>Waypoints: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="442"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="446"/>
         <source>Tracks: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="446"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="450"/>
         <source>Routes: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="450"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="454"/>
         <source>Areas: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="570"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="574"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation type="unfinished">¿Desea realmente eleiminar &apos;%1&apos; del proyecto &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="571"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="575"/>
         <source>Delete...</source>
         <translation type="unfinished">Borrar...</translation>
     </message>

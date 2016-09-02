@@ -493,7 +493,7 @@ void CGisListDB::slotDelFolder()
         return;
     }
 
-    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete selected folders and all folders below from the database?"), QMessageBox::Ok|QMessageBox::No);
+    int res = QMessageBox::question(this, tr("Delete database folder..."), tr("Are you sure you want to delete selected folders and all subfolders from the database?"), QMessageBox::Ok|QMessageBox::No);
     if(res != QMessageBox::Ok)
     {
         return;
@@ -584,6 +584,14 @@ void CGisListDB::slotCopyFolder()
             continue;
         }
 
+        IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
+        if((parent == nullptr) || (parent->getId() == idParent))
+        {
+            // skip operation if the current parent is the same as the traget parent
+            continue;
+        }
+
+
         dbfolder->copyFolder(folder->getId(), idParent);
     }
 
@@ -643,6 +651,14 @@ void CGisListDB::slotMoveFolder()
         {
             continue;
         }
+
+        IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
+        if((parent == nullptr) || (parent->getId() == idParent))
+        {
+            // skip operation if the current parent is the same as the traget parent
+            continue;
+        }
+
         // copy to new loacation
         dbfolder->copyFolder(folder->getId(), idParent);
         // and remove

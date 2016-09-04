@@ -641,7 +641,7 @@ void CGisListDB::slotMoveFolder()
     // --- at this point we should have all data to perform the copy without interruption ---
 
     // now iterate over all selected items
-    QList<QTreeWidgetItem*> itemsToDelete;
+    QList<IDBFolder*> foldersToDelete;
     QList<QTreeWidgetItem*> items = selectedItems();
     for(QTreeWidgetItem * item : items)
     {
@@ -661,24 +661,23 @@ void CGisListDB::slotMoveFolder()
 
         // copy to new loacation
         dbfolder->copyFolder(folder->getId(), idParent);
-        // and remove
-        folder->remove();
         // Because some items can be parent of other selected items
         // it's a bad idea to delete them asap. Better collect them first.
-        itemsToDelete << folder;
+        foldersToDelete << folder;
     }
 
     // iterate over all items to be deleted.
-    for(QTreeWidgetItem * item : itemsToDelete)
+    for(IDBFolder * folder : foldersToDelete)
     {
         // Test if the item's parent is also in the list.
         // If it is skip it because it will be deleted together with it's parent.
-        if(itemsToDelete.contains(item->parent()))
+        if(foldersToDelete.contains(dynamic_cast<IDBFolder*>(folder->parent())))
         {
             continue;
         }
 
-        delete item;
+        folder->remove();
+        delete folder;
     }
 
     // tell the parent folder to show all changes

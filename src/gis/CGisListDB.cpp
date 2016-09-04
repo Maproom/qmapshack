@@ -585,7 +585,7 @@ void CGisListDB::slotCopyFolder()
         }
 
         IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
-        if((parent == nullptr) || (parent->getId() == idParent))
+        if((parent == nullptr) || (parent->getId() == idParent) || (folder->getId() == idParent))
         {
             // skip operation if the current parent is the same as the traget parent
             continue;
@@ -653,7 +653,7 @@ void CGisListDB::slotMoveFolder()
         }
 
         IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
-        if((parent == nullptr) || (parent->getId() == idParent))
+        if((parent == nullptr) || (parent->getId() == idParent) || (folder->getId() == idParent))
         {
             // skip operation if the current parent is the same as the traget parent
             continue;

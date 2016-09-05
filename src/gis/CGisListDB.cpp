@@ -554,19 +554,19 @@ void CGisListDB::slotCopyFolder()
 
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
-    quint64 idParent    = 0;
+    quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
 
-    CSelectDBFolder dlg(idParent, db, host, this);
+    CSelectDBFolder dlg(idTarget, db, host, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
     }
 
     // get a pointer to the parent folder for later use.
-    IDBFolder * parent = dbfolder->getFolder(idParent);
-    if(parent == nullptr)
+    IDBFolder * target = dbfolder->getFolder(idTarget);
+    if(target == nullptr)
     {
         return;
     }
@@ -585,18 +585,18 @@ void CGisListDB::slotCopyFolder()
         }
 
         IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
-        if((parent == nullptr) || (parent->getId() == idParent) || (folder->getId() == idParent))
+        if((parent == nullptr) || (parent->getId() == idTarget) || (folder->getId() == idTarget))
         {
             // skip operation if the current parent is the same as the traget parent
             continue;
         }
 
 
-        dbfolder->copyFolder(folder->getId(), idParent);
+        dbfolder->copyFolder(folder->getId(), idTarget);
     }
 
     // tell the parent folder to show all changes
-    parent->update();
+    target->update();
     // tell other clients to show changes
     dbfolder->announceChange();
 }
@@ -621,19 +621,19 @@ void CGisListDB::slotMoveFolder()
 
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
-    quint64 idParent    = 0;
+    quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
 
-    CSelectDBFolder dlg(idParent, db, host, this);
+    CSelectDBFolder dlg(idTarget, db, host, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
     }
 
     // get a pointer to the parent folder for later use.
-    IDBFolder * parent = dbfolder->getFolder(idParent);
-    if(parent == nullptr)
+    IDBFolder * target = dbfolder->getFolder(idTarget);
+    if(target == nullptr)
     {
         return;
     }
@@ -653,14 +653,20 @@ void CGisListDB::slotMoveFolder()
         }
 
         IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
-        if((parent == nullptr) || (parent->getId() == idParent) || (folder->getId() == idParent))
+        if((parent == nullptr) || (parent->getId() == idTarget))
         {
             // skip operation if the current parent is the same as the traget parent
             continue;
         }
 
+        if(target->isSiblingFrom(folder))
+        {
+            QMessageBox::warning(this, tr("Bad operation...."), tr("The target folder is a subfolder of the one to move. This will not work."), QMessageBox::Abort);
+            continue;
+        }
+
         // copy to new loacation
-        dbfolder->copyFolder(folder->getId(), idParent);
+        dbfolder->copyFolder(folder->getId(), idTarget);
         // Because some items can be parent of other selected items
         // it's a bad idea to delete them asap. Better collect them first.
         foldersToDelete << folder;
@@ -681,7 +687,7 @@ void CGisListDB::slotMoveFolder()
     }
 
     // tell the parent folder to show all changes
-    parent->update();
+    target->update();
     // tell other clients to show changes
     dbfolder->announceChange();
 }

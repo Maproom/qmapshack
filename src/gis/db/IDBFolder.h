@@ -162,6 +162,8 @@ public:
         return false;
     }
 
+    bool isSiblingFrom(IDBFolder * folder) const;
+
 protected:
     /**
        @brief Setup all item properties

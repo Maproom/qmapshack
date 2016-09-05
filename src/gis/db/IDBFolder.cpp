@@ -612,3 +612,20 @@ void IDBFolder::sortItems(QList<CDBItem*>& items) const
         break;
     }
 }
+
+
+bool IDBFolder::isSiblingFrom(IDBFolder * folder) const
+{
+    if(folder->getId() == getId())
+    {
+        return true;
+    }
+
+    IDBFolder * parentFolder = dynamic_cast<IDBFolder*>(parent());
+    if(parentFolder != nullptr)
+    {
+        return parentFolder->isSiblingFrom(folder);
+    }
+
+    return false;
+}

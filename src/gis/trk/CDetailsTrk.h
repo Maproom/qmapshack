@@ -49,7 +49,8 @@ private slots:
     void slotChangeReadOnlyMode(bool on);
     void slotLinkActivated(const QUrl& url);
     void slotMouseClickState(int);
-    void slotActivitySelected(bool checked);
+    void slotSetActivities();
+    void slotRemoveActivities();
 
     void slotColorSourceChanged(int idx);
     void slotColorLimitHighChanged();

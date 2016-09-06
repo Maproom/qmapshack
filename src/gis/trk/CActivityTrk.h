@@ -22,6 +22,7 @@
 #include <QCoreApplication>
 #include <QIcon>
 #include <QMap>
+#include <QMenu>
 #include <QPointer>
 #include <QVector>
 class CGisItemTrk;
@@ -95,6 +96,8 @@ public:
     }
 
     void getActivityNames(QStringList& names) const;
+
+    static uint32_t selectActivity(QWidget *parent);
 
     /**
        @brief Convert internal summary to HTML table

@@ -1350,7 +1350,35 @@
             <number>3</number>
            </property>
            <item>
-            <layout class="QGridLayout" name="layoutActivities"/>
+            <layout class="QVBoxLayout" name="verticalLayout">
+             <item>
+              <widget class="QPushButton" name="pushSetActivities">
+               <property name="text">
+                <string>Set Track Activity</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushRemoveActivities">
+               <property name="text">
+                <string>Remove Track Activity</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer_4">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
            </item>
            <item>
             <widget class="Line" name="line_3">
@@ -1617,9 +1645,9 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupArrow"/>
-  <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>
 </ui>

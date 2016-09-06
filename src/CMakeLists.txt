@@ -201,7 +201,6 @@ set( SRCS
         gis/trk/CDetailsTrk.cpp
         gis/trk/CCombineTrk.cpp
         gis/trk/CCutTrk.cpp
-        gis/trk/CSelectActivity.cpp
         gis/trk/CSelectActivityColor.cpp
         gis/trk/CActivityTrk.cpp
         gis/trk/CPropertyTrk.cpp
@@ -461,7 +460,6 @@ set( HDRS
         gis/trk/CDetailsTrk.h
         gis/trk/CCombineTrk.h
         gis/trk/CCutTrk.h
-        gis/trk/CSelectActivity.h
         gis/trk/CSelectActivityColor.h
         gis/trk/CActivityTrk.h
         gis/trk/CPropertyTrk.h
@@ -623,7 +621,6 @@ set( UIS
     gis/trk/IDetailsTrk.ui
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
-    gis/trk/ISelectActivity.ui
     gis/trk/ISelectActivityColor.ui
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterInvalid.ui

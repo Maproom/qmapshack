@@ -26,11 +26,19 @@ class CGisItemTrk;
 
 class CScrOptRangeTrk : public IScrOpt, public Ui::IScrOptRangeTrk
 {
+    Q_OBJECT
+
 public:
     CScrOptRangeTrk(const QPointF& point, CGisItemTrk *trk, IMouse *mouse, QWidget *parent = nullptr);
     virtual ~CScrOptRangeTrk();
 
     void draw(QPainter& p) override;
+
+signals:
+    void activitySelected(uint32_t flag);
+
+private:
+    void selectActivity();
 };
 
 #endif //CSCROPTRANGETRK_H

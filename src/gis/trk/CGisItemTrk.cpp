@@ -27,7 +27,6 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
-#include "gis/trk/CSelectActivity.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
@@ -2194,8 +2193,10 @@ void CGisItemTrk::setColor(int idx)
     }
 }
 
-void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& icon)
+void CGisItemTrk::setActivity(uint32_t flag)
 {
+    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flag);
+
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -2208,22 +2209,12 @@ void CGisItemTrk::setActivity(quint32 flag, const QString& name, const QString& 
     }
 
     deriveSecondaryData();
-    changed(tr("Changed activity to '%1' for complete track.").arg(name), icon);
+    changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 
-void CGisItemTrk::setActivity()
+void CGisItemTrk::setActivityRange(uint32_t flags)
 {
     if((mouseRange1 == nullptr) && (mouseRange2 == nullptr))
-    {
-        return;
-    }
-
-    quint32 flag = 0;
-    QString name;
-    QString icon;
-
-    CSelectActivity dlg(flag, name, icon, CMainWindow::getBestWidgetForParent());
-    if(dlg.exec() != QDialog::Accepted)
     {
         return;
     }
@@ -2232,6 +2223,8 @@ void CGisItemTrk::setActivity()
     {
         return;
     }
+
+    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flags);
 
     // read start/stop indices
     qint32 idx1 = mouseRange1->idxTotal;
@@ -2259,16 +2252,15 @@ void CGisItemTrk::setActivity()
             if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
             {
                 trkpt.unsetFlag(trkpt_t::eActMask);
-                trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
+                trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flags);
             }
         }
     }
 
     resetMouseRange();
     deriveSecondaryData();
-    changed(tr("Changed activity to '%1' for range(%2..%3).").arg(name).arg(idx1).arg(idx2), icon);
+    changed(tr("Changed activity to '%1' for range(%2..%3).").arg(desc.name).arg(idx1).arg(idx2), desc.iconLarge);
 }
-
 
 void CGisItemTrk::setColor(const QColor& c)
 {

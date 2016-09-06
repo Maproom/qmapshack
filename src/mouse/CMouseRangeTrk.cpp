@@ -122,7 +122,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
                 scrOptRange = new CScrOptRangeTrk(pt, trk, this);
                 connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
                 connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
-                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &CMouseRangeTrk::slotActivity);
+                connect(scrOptRange, &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
                 connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
 
                 state = eStateRangeSelected;
@@ -265,14 +265,14 @@ void CMouseRangeTrk::slotShowPoints()
     canvas->resetMouse();
 }
 
-void CMouseRangeTrk::slotActivity()
+void CMouseRangeTrk::slotActivity(uint32_t flags)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-    if(trk != nullptr)
+    if(nullptr != trk)
     {
-        trk->setActivity();
+        trk->setActivityRange(flags);
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 

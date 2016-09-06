@@ -90,24 +90,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     widgetColorActivity->setTrack(&trk);
 
-    int i = 0;
-    for(const CActivityTrk::desc_t &desc : CActivityTrk::getActivityDescriptors())
-    {
-        QCheckBox * check = new QCheckBox(this);
-        check->setText(desc.name);
-        check->setIcon(QIcon(desc.iconLarge));
-        check->setProperty("flag",   desc.flag);
-        check->setProperty("name",   desc.name);
-        check->setProperty("symbol", desc.iconLarge);
-        check->setObjectName("check" + desc.objName);
-
-        connect(check, &QCheckBox::clicked, this, &CDetailsTrk::slotActivitySelected);
-
-        layoutActivities->addWidget(check, i%8, i>>3);
-        ++i;
-    }
-    layoutActivities->addItem(new QSpacerItem(0,0,QSizePolicy::Maximum, QSizePolicy::MinimumExpanding),8,0);
-
     updateData();
 
     treeWidget->setTrack(&trk);
@@ -144,6 +126,9 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
 
     connect(toolLock,         &QToolButton::toggled,               this, &CDetailsTrk::slotChangeReadOnlyMode);
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
+
+    connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
+    connect(pushRemoveActivities, &QPushButton::clicked, this, &CDetailsTrk::slotRemoveActivities);
 
     connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
     connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
@@ -378,21 +363,11 @@ void CDetailsTrk::updateData()
     textCmtDesc->moveCursor (QTextCursor::Start);
     textCmtDesc->ensureCursorVisible();
 
-    quint32 flags = trk.getActivities().getAllFlags();
-
-    for(const CActivityTrk::desc_t &desc : CActivityTrk::getActivityDescriptors())
-    {
-        QCheckBox * check = findChild<QCheckBox*>("check" + desc.objName);
-        if(nullptr != check)
-        {
-            check->setChecked((flags & desc.flag) == desc.flag);
-        }
-    }
-
     QString str;
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
+    quint32 flags = trk.getActivities().getAllFlags();
     bool hasActivity = 0 != (flags & CGisItemTrk::trkpt_t::eActMask);
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
@@ -640,28 +615,20 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
     }
 }
 
-void CDetailsTrk::slotActivitySelected(bool checked)
+void CDetailsTrk::slotSetActivities()
 {
-    if(!checked)
+    uint32_t flags = CActivityTrk::selectActivity(this);
+    if(0 != flags)
     {
-        if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) != QMessageBox::Ok)
-        {
-            updateData();
-        }
-        else
-        {
-            trk.setActivity(CGisItemTrk::trkpt_t::eActNone, tr("None"), "://icons/48x48/ActNone.png");
-        }
+        trk.setActivity(flags);
     }
-    else
+}
+
+void CDetailsTrk::slotRemoveActivities()
+{
+    if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok)
     {
-        QObject *s = sender();
-        bool ok = false;
-        quint32 flag = s->property("flag").toUInt(&ok);
-        if(ok)
-        {
-            trk.setActivity(flag, s->property("name").toString(), s->property("symbol").toString());
-        }
+        trk.setActivity(CGisItemTrk::trkpt_t::eActNone);
     }
 }
 

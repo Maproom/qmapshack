@@ -132,6 +132,25 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
+uint32_t CActivityTrk::selectActivity(QWidget *parent)
+{
+    QMenu menu(parent);
+
+    for(const desc_t &desc : actDescriptor)
+    {
+        QAction *act = menu.addAction(QIcon(desc.iconLarge), desc.name);
+        act->setData(QVariant(desc.flag));
+    }
+
+    QAction *act = menu.exec(QCursor::pos());
+    if(nullptr != act)
+    {
+        return act->data().toUInt(nullptr);
+    }
+
+    return 0;
+}
+
 
 void CActivityTrk::update()
 {
@@ -377,12 +396,16 @@ void CActivityTrk::sumUp(QMap<uint32_t, activity_summary_t> &summary) const
 
 const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
 {
-    auto it = std::find_if(actDescriptor.begin(), actDescriptor.end(), [flag](const desc_t &desc) {
-        return desc.flag == flag;
-    });
+    for(const desc_t &desc : actDescriptor)
+    {
+        if(desc.flag == flag)
+        {
+            return desc;
+        }
+    }
 
     static desc_t dummyDesc;
-    return actDescriptor.end() == it ? dummyDesc : *it;
+    return dummyDesc;
 }
 
 void CActivityTrk::setColor(quint32 flag, const QString& color)

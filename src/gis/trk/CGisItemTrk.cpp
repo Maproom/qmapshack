@@ -2195,8 +2195,6 @@ void CGisItemTrk::setColor(int idx)
 
 void CGisItemTrk::setActivity(uint32_t flag)
 {
-    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flag);
-
     for(int s = 0; s < trk.segs.size(); s++)
     {
         trkseg_t& seg = trk.segs[s];
@@ -2209,6 +2207,8 @@ void CGisItemTrk::setActivity(uint32_t flag)
     }
 
     deriveSecondaryData();
+
+    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flag);
     changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 

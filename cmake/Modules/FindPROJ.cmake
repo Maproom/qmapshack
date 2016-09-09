@@ -30,6 +30,7 @@ endif(WIN32)
         /usr/local/include
         /opt/local/include
         /sw/include
+        ${CMAKE_INSTALL_PREFIX}/include
         ${CMAKE_SOURCE_DIR}/Win32/GDAL/include
     PATH_SUFFIXES
         proj4
@@ -49,6 +50,7 @@ endif(WIN32)
         /usr/local/lib
         /opt/local/lib
         /sw/lib
+        ${CMAKE_INSTALL_PREFIX}/lib
         ${CMAKE_SOURCE_DIR}/Win32/GDAL/lib
   )
   mark_as_advanced(LIBPROJ_LIBRARY)

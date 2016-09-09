@@ -28,6 +28,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             /usr/local/include
             /opt/local/include
             /sw/include
+            ${CMAKE_INSTALL_PREFIX}/include
             ${ROUTINO_DEV_PATH}/include/
     )
     mark_as_advanced(ROUTINO_INCLUDE_DIR)
@@ -40,6 +41,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             /usr/local/lib
             /opt/local/lib
             /sw/lib
+            ${CMAKE_INSTALL_PREFIX}/include
             ${ROUTINO_DEV_PATH}/lib
     )
     mark_as_advanced(LIBROUTINO_LIBRARY)
@@ -53,6 +55,7 @@ else (ROUTINO_LIBRARIES AND ROUTINO_INCLUDE_DIRS AND ROUTINO_XML_PATH)
             /usr/share/routino
             /usr/local/share/routino
             /opt/local/share/routino
+            ${CMAKE_INSTALL_PREFIX}/share/routino
             ${ROUTINO_DEV_PATH}/xml/
     )
     mark_as_advanced(ROUTINO_XML_PATH)

@@ -29,10 +29,12 @@ endif(WIN32)
         /usr/local/include
         /opt/local/include
         /sw/include
+        ${CMAKE_INSTALL_PREFIX}/include
         /usr/include/gdal
         /usr/local/include/gdal
         /opt/local/include/gdal
         /sw/include/gdal
+        ${CMAKE_INSTALL_PREFIX}/include/gdal
         ${CMAKE_SOURCE_DIR}/Win32/GDAL/include
     PATH_SUFFIXES
         gdal
@@ -59,6 +61,7 @@ endif(WIN32)
       /usr/local/lib
       /opt/local/lib
       /sw/lib
+      ${CMAKE_INSTALL_PREFIX}/lib
       ${CMAKE_SOURCE_DIR}/Win32/GDAL/lib
   )
 

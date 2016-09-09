@@ -404,7 +404,14 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
         }
     }
 
-    static desc_t dummyDesc;
+    static desc_t dummyDesc = {
+        "None"
+        , CGisItemTrk::trkpt_t::eActNone
+        , tr("None")
+        , "://icons/48x48/ActNone.png"
+        , "://icons/16x16/ActNone.png"
+        , QColor()
+    };
     return dummyDesc;
 }
 

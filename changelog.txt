@@ -1,3 +1,6 @@
+V 1.7.1
+* Fix: Compile issue for GCC4
+
 V 1.7.0
 * Add: Function to search the database
 * Add: Sort items in projects by time or name

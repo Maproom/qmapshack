@@ -1,3 +1,21 @@
+V 1.7.0
+* Add: Function to search the database
+* Add: Sort items in projects by time or name
+* Add: "Copy To..." for projects
+* Add: Include waypoint name when creating of a route from waypoints
+* Add: Database: Add menu item to copy projects from one folder to another
+* Add: Database: Add menu item to move projects from one folder to another
+* Fix: No HTML tags for empty strings
+* Fix: Checkmark for new folders to prevent deleting data by chance.
+* Clean up code for track activities for futur improvements
+* [Issue #154]Font size for project description
+* [Issue #157] Issue when "Save as" a project from Garmin device
+* [Issue #159] File-/Projectnames with dots get truncated
+* [Issue #158] QMS incompabilities on different platforms
+* [Issue #160] Update of diary after adding a waypoint takes very long time
+* [Issue #102] Allow renaming of Groups, Projects, ...
+
+
 V 1.6.3
 * Add FreeBSD support
 * Enhance editor for descriptions and comments.

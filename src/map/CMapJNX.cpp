@@ -72,7 +72,7 @@ static quint32 scale2jnx(qreal scale)
        table is built. It is (76437 / 4777) ^ (1/4).
      */
 
-    return (uint32_t)qFloor(0.5 + 76437 * exp(log(2.000032708011) * qFloor(0.5 + log(scale * 10 * 130.2084 / 76437) / log(2.000032708011) ) ) );
+    return (quint32)qFloor(0.5 + 76437 * exp(log(2.000032708011) * qFloor(0.5 + log(scale * 10 * 130.2084 / 76437) / log(2.000032708011) ) ) );
 }
 
 

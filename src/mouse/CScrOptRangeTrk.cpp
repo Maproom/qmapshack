@@ -62,7 +62,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 
 void CScrOptRangeTrk::selectActivity()
 {
-    uint32_t flags = CActivityTrk::selectActivity(this);
+    quint32 flags = CActivityTrk::selectActivity(this);
     if(0 != flags)
     {
         emit activitySelected(flags);

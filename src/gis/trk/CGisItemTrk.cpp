@@ -2193,7 +2193,7 @@ void CGisItemTrk::setColor(int idx)
     }
 }
 
-void CGisItemTrk::setActivity(uint32_t flag)
+void CGisItemTrk::setActivity(quint32 flag)
 {
     for(int s = 0; s < trk.segs.size(); s++)
     {
@@ -2212,7 +2212,7 @@ void CGisItemTrk::setActivity(uint32_t flag)
     changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 
-void CGisItemTrk::setActivityRange(uint32_t flags)
+void CGisItemTrk::setActivityRange(quint32 flags)
 {
     if((mouseRange1 == nullptr) && (mouseRange2 == nullptr))
     {

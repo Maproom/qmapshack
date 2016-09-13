@@ -35,7 +35,7 @@ public:
     void draw(QPainter& p) override;
 
 signals:
-    void activitySelected(uint32_t flag);
+    void activitySelected(quint32 flag);
 
 private:
     void selectActivity();

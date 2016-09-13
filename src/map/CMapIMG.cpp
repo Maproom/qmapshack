@@ -563,7 +563,7 @@ void CMapIMG::readBasics()
         memcpy(tmpstr,pFATBlock->name,sizeof(pFATBlock->name) + sizeof(pFATBlock->type));
         tmpstr[sizeof(pFATBlock->name) + sizeof(pFATBlock->type)] = 0;
 
-        if(gar_load(uint32_t, pFATBlock->size) != 0 && !subfileNames.contains(tmpstr) && tmpstr[0] != 0x20)
+        if(gar_load(quint32, pFATBlock->size) != 0 && !subfileNames.contains(tmpstr) && tmpstr[0] != 0x20)
         {
             subfileNames << tmpstr;
 
@@ -580,7 +580,7 @@ void CMapIMG::readBasics()
                 tmpstr[sizeof(pFATBlock->type)] = 0;
 
                 subfile_part_t& part = subfile.parts[tmpstr];
-                part.size   = gar_load(uint32_t, pFATBlock->size);
+                part.size   = gar_load(quint32, pFATBlock->size);
                 part.offset = quint32(gar_load(uint16_t, pFATBlock->blocks[0]) * blocksize);
             }
         }
@@ -596,15 +596,15 @@ void CMapIMG::readBasics()
     }
 
     // gmapsupp.img files do not have a data offset field
-    if(gar_load(uint32_t, pImgHdr->dataoffset) == 0)
+    if(gar_load(quint32, pImgHdr->dataoffset) == 0)
     {
-        pImgHdr->dataoffset = gar_load(uint32_t, dataoffset);
+        pImgHdr->dataoffset = gar_load(quint32, dataoffset);
     }
 
     // sometimes there are dummy blocks at the end of the FAT
-    if(gar_load(uint32_t, pImgHdr->dataoffset) != dataoffset)
+    if(gar_load(quint32, pImgHdr->dataoffset) != dataoffset)
     {
-        dataoffset = gar_load(uint32_t, pImgHdr->dataoffset);
+        dataoffset = gar_load(quint32, pImgHdr->dataoffset);
     }
 
 #ifdef DEBUG_SHOW_SECT_DESC
@@ -676,10 +676,10 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 #ifdef DEBUG_SHOW_TRE_DATA
     qDebug() << "+++" << subfile.name << "+++";
     qDebug() << "TRE header length  :" << gar_load(uint16_t, pTreHdr->length);
-    qDebug() << "TRE1 offset        :" << hex << gar_load(uint32_t, pTreHdr->tre1_offset);
-    qDebug() << "TRE1 size          :" << dec << gar_load(uint32_t, pTreHdr->tre1_size);
-    qDebug() << "TRE2 offset        :" << hex << gar_load(uint32_t, pTreHdr->tre2_offset);
-    qDebug() << "TRE2 size          :" << dec << gar_load(uint32_t, pTreHdr->tre2_size);
+    qDebug() << "TRE1 offset        :" << hex << gar_load(quint32, pTreHdr->tre1_offset);
+    qDebug() << "TRE1 size          :" << dec << gar_load(quint32, pTreHdr->tre1_size);
+    qDebug() << "TRE2 offset        :" << hex << gar_load(quint32, pTreHdr->tre2_offset);
+    qDebug() << "TRE2 size          :" << dec << gar_load(quint32, pTreHdr->tre2_size);
 #endif                       // DEBUG_SHOW_TRE_DATA
 
     copyrights << QString(file.data(subfile.parts["TRE"].offset + gar_load(uint16_t, pTreHdr->length),0x7FFF));
@@ -722,7 +722,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 #endif                       // DEBUG_SHOW_TRE_DATA
 
     QByteArray maplevel;
-    readFile(file, subfile.parts["TRE"].offset + gar_load(uint32_t, pTreHdr->tre1_offset), gar_load(uint32_t, pTreHdr->tre1_size), maplevel);
+    readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre1_offset), gar_load(quint32, pTreHdr->tre1_size), maplevel);
     const tre_map_level_t * pMapLevel = (const tre_map_level_t * )maplevel.data();
 
     if(pTreHdr->flag & 0x80)
@@ -732,7 +732,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
                                 "the one supplied by Garmin."));
     }
 
-    quint32 nlevels       = gar_load(uint32_t, pTreHdr->tre1_size) / sizeof(tre_map_level_t);
+    quint32 nlevels       = gar_load(quint32, pTreHdr->tre1_size) / sizeof(tre_map_level_t);
     quint32 nsubdivs      = 0;
     quint32 nsubdivs_last = 0;
 
@@ -765,7 +765,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
     // point to first 16 byte subdivision definition entry
     QByteArray subdiv_n;
-    readFile(file, subfile.parts["TRE"].offset + gar_load(uint32_t, pTreHdr->tre2_offset), gar_load(uint32_t, pTreHdr->tre2_size), subdiv_n);
+    readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre2_offset), gar_load(quint32, pTreHdr->tre2_size), subdiv_n);
     tre_subdiv_next_t * pSubDivN = (tre_subdiv_next_t*)subdiv_n.data();
 
     QVector<subdiv_desc_t> subdivs;
@@ -777,15 +777,15 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
     QByteArray rgnhdr;
     readFile(file, subfile.parts["RGN"].offset, sizeof(hdr_rgn_t), rgnhdr);
     hdr_rgn_t * pRgnHdr = (hdr_rgn_t*)rgnhdr.data();
-    quint32 rgnoff = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->offset);
+    quint32 rgnoff = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset);
 
-    quint32 rgnOffPolyg2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->offset_polyg2);
-    quint32 rgnOffPolyl2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->offset_polyl2);
-    quint32 rgnOffPoint2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->offset_point2);
+    quint32 rgnOffPolyg2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset_polyg2);
+    quint32 rgnOffPolyl2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset_polyl2);
+    quint32 rgnOffPoint2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->offset_point2);
 
-    quint32 rgnLenPolyg2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->length_polyg2);
-    quint32 rgnLenPolyl2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->length_polyl2);
-    quint32 rgnLenPoint2 = /*subfile.parts["RGN"].offset +*/ gar_load(uint32_t, pRgnHdr->length_point2);
+    quint32 rgnLenPolyg2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->length_polyg2);
+    quint32 rgnLenPolyl2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->length_polyl2);
+    quint32 rgnLenPoint2 = /*subfile.parts["RGN"].offset +*/ gar_load(quint32, pRgnHdr->length_point2);
 
     //     qDebug() << "***" << hex << subfile.parts["RGN"].offset << (subfile.parts["RGN"].offset + subfile.parts["RGN"].size);
     //     qDebug() << "+++" << hex << rgnOffPolyg2 << (rgnOffPolyg2 + rgnLenPolyg2);
@@ -894,7 +894,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         ++pSubDivL;
         ++subdiv;
     }
-    subdivs.last().rgn_end = gar_load(uint32_t, pRgnHdr->hdr_rgn_t::offset) + gar_load(uint32_t, pRgnHdr->hdr_rgn_t::length);
+    subdivs.last().rgn_end = gar_load(quint32, pRgnHdr->hdr_rgn_t::offset) + gar_load(quint32, pRgnHdr->hdr_rgn_t::length);
 
     // read extended NT elements
     if((gar_load(uint16_t, pTreHdr->hdr_subfile_part_t::length) >= 0x9A) && pTreHdr->tre7_size && (gar_load(uint16_t, pTreHdr->tre7_rec_size) >= sizeof(tre_subdiv2_t)))
@@ -902,10 +902,10 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         //rgnoff = subfile.parts["RGN"].offset;
         //         qDebug() << subdivs.count() << (pTreHdr->tre7_size / pTreHdr->tre7_rec_size) << pTreHdr->tre7_rec_size;
         QByteArray subdiv2;
-        readFile(file, subfile.parts["TRE"].offset + gar_load(uint32_t, pTreHdr->tre7_offset), gar_load(uint32_t, pTreHdr->tre7_size), subdiv2);
+        readFile(file, subfile.parts["TRE"].offset + gar_load(quint32, pTreHdr->tre7_offset), gar_load(quint32, pTreHdr->tre7_size), subdiv2);
         tre_subdiv2_t * pSubDiv2    = (tre_subdiv2_t*)subdiv2.data();
 
-        //        const quint32 entries1 = gar_load(uint32_t, pTreHdr->tre7_size) / gar_load(uint32_t, pTreHdr->tre7_rec_size);
+        //        const quint32 entries1 = gar_load(quint32, pTreHdr->tre7_size) / gar_load(quint32, pTreHdr->tre7_rec_size);
         //        const quint32 entries2 = subdivs.size();
 
         bool skipPois = ( gar_load(uint16_t, pTreHdr->tre7_rec_size) != sizeof(tre_subdiv2_t) );
@@ -918,9 +918,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
         subdiv       = subdivs.begin();
         subdiv_prev  = subdivs.begin();
-        subdiv->offsetPolygons2  = gar_load(uint32_t, pSubDiv2->offsetPolygons) + rgnOffPolyg2;
-        subdiv->offsetPolylines2 = gar_load(uint32_t, pSubDiv2->offsetPolyline) + rgnOffPolyl2;
-        subdiv->offsetPoints2    = skipPois ? 0 : gar_load(uint32_t, pSubDiv2->offsetPoints)   + rgnOffPoint2;
+        subdiv->offsetPolygons2  = gar_load(quint32, pSubDiv2->offsetPolygons) + rgnOffPolyg2;
+        subdiv->offsetPolylines2 = gar_load(quint32, pSubDiv2->offsetPolyline) + rgnOffPolyl2;
+        subdiv->offsetPoints2    = skipPois ? 0 : gar_load(quint32, pSubDiv2->offsetPoints)   + rgnOffPoint2;
 
         ++subdiv;
         pSubDiv2 = reinterpret_cast<tre_subdiv2_t*>((quint8*)pSubDiv2 + gar_endian(uint16_t, pTreHdr->tre7_rec_size));
@@ -933,9 +933,9 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
             //             }
             //             fprintf(stderr,"\n");
 
-            subdiv->offsetPolygons2          = gar_load(uint32_t, pSubDiv2->offsetPolygons) + rgnOffPolyg2;
-            subdiv->offsetPolylines2         = gar_load(uint32_t, pSubDiv2->offsetPolyline) + rgnOffPolyl2;
-            subdiv->offsetPoints2            = skipPois ? 0 : gar_load(uint32_t, pSubDiv2->offsetPoints)   + rgnOffPoint2;
+            subdiv->offsetPolygons2          = gar_load(quint32, pSubDiv2->offsetPolygons) + rgnOffPolyg2;
+            subdiv->offsetPolylines2         = gar_load(quint32, pSubDiv2->offsetPolyline) + rgnOffPolyl2;
+            subdiv->offsetPoints2            = skipPois ? 0 : gar_load(quint32, pSubDiv2->offsetPoints)   + rgnOffPoint2;
 
             subdiv_prev->lengthPolygons2     = subdiv->offsetPolygons2    - subdiv_prev->offsetPolygons2;
             subdiv_prev->lengthPolylines2    = subdiv->offsetPolylines2   - subdiv_prev->offsetPolylines2;
@@ -994,8 +994,8 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         readFile(file, subfile.parts["LBL"].offset, sizeof(hdr_lbl_t), lblhdr);
         hdr_lbl_t * pLblHdr = (hdr_lbl_t*)lblhdr.data();
 
-        quint32 offsetLbl1 = subfile.parts["LBL"].offset + gar_load(uint32_t, pLblHdr->lbl1_offset);
-        quint32 offsetLbl6 = subfile.parts["LBL"].offset + gar_load(uint32_t, pLblHdr->lbl6_offset);
+        quint32 offsetLbl1 = subfile.parts["LBL"].offset + gar_load(quint32, pLblHdr->lbl1_offset);
+        quint32 offsetLbl6 = subfile.parts["LBL"].offset + gar_load(quint32, pLblHdr->lbl6_offset);
 
         QByteArray nethdr;
         quint32 offsetNet1  = 0;
@@ -1004,7 +1004,7 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
         {
             readFile(file, subfile.parts["NET"].offset, sizeof(hdr_net_t), nethdr);
             pNetHdr = (hdr_net_t*)nethdr.data();
-            offsetNet1 = subfile.parts["NET"].offset + gar_load(uint32_t, pNetHdr->net1_offset);
+            offsetNet1 = subfile.parts["NET"].offset + gar_load(quint32, pNetHdr->net1_offset);
         }
 
         quint16 codepage = 0;
@@ -1035,11 +1035,11 @@ void CMapIMG::readSubfileBasics(subfile_desc_t& subfile, CFileExt &file)
 
         if(nullptr != subfile.strtbl)
         {
-            subfile.strtbl->registerLBL1(offsetLbl1, gar_load(uint32_t, pLblHdr->lbl1_length), pLblHdr->addr_shift);
-            subfile.strtbl->registerLBL6(offsetLbl6, gar_load(uint32_t, pLblHdr->lbl6_length));
+            subfile.strtbl->registerLBL1(offsetLbl1, gar_load(quint32, pLblHdr->lbl1_length), pLblHdr->addr_shift);
+            subfile.strtbl->registerLBL6(offsetLbl6, gar_load(quint32, pLblHdr->lbl6_length));
             if(nullptr != pNetHdr)
             {
-                subfile.strtbl->registerNET1(offsetNet1, gar_load(uint32_t, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
+                subfile.strtbl->registerNET1(offsetNet1, gar_load(quint32, pNetHdr->net1_length), pNetHdr->net1_addr_shift);
             }
         }
     }

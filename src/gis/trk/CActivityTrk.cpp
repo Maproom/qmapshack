@@ -132,7 +132,7 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
-uint32_t CActivityTrk::selectActivity(QWidget *parent)
+quint32 CActivityTrk::selectActivity(QWidget *parent)
 {
     QMenu menu(parent);
 
@@ -249,7 +249,7 @@ void CActivityTrk::printSummary(QString& str) const
     printSummary(activitySummary, allFlags, str);
 }
 
-void CActivityTrk::printSummary(const QMap<uint32_t, activity_summary_t>& summary, quint32 flags, QString& str)
+void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, quint32 flags, QString& str)
 {
     QString val, unit;
 
@@ -379,9 +379,9 @@ void CActivityTrk::printSummary(const QMap<uint32_t, activity_summary_t>& summar
     str += "</table>";
 }
 
-void CActivityTrk::sumUp(QMap<uint32_t, activity_summary_t> &summary) const
+void CActivityTrk::sumUp(QMap<quint32, activity_summary_t> &summary) const
 {
-    for(uint32_t flag : activitySummary.keys())
+    for(quint32 flag : activitySummary.keys())
     {
         const activity_summary_t &src = activitySummary[flag];
         activity_summary_t       &dst = summary[flag];

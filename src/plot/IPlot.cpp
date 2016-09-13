@@ -421,7 +421,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
                 connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
                 connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
 
-                connect(scrOptRange, &CScrOptRangeTrk::activitySelected, this, &IPlot::slotActivity);
+                connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &IPlot::slotActivity);
 
                 /* Adjust position of screen option widget if the widget is out of the visible area*/
                 QRect r1 = scrOptRange->geometry();
@@ -1281,7 +1281,7 @@ void IPlot::slotShowPoints()
     slotStopRange();
 }
 
-void IPlot::slotActivity(uint32_t flags)
+void IPlot::slotActivity(quint32 flags)
 {
     trk->setActivityRange(flags);
     slotStopRange();

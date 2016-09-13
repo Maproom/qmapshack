@@ -122,7 +122,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
                 scrOptRange = new CScrOptRangeTrk(pt, trk, this);
                 connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
                 connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
-                connect(scrOptRange, &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
+                connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
                 connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
 
                 state = eStateRangeSelected;
@@ -265,7 +265,7 @@ void CMouseRangeTrk::slotShowPoints()
     canvas->resetMouse();
 }
 
-void CMouseRangeTrk::slotActivity(uint32_t flags)
+void CMouseRangeTrk::slotActivity(quint32 flags)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 

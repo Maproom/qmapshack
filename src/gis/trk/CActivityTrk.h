@@ -97,7 +97,7 @@ public:
 
     void getActivityNames(QStringList& names) const;
 
-    static uint32_t selectActivity(QWidget *parent);
+    static quint32 selectActivity(QWidget *parent);
 
     /**
        @brief Convert internal summary to HTML table
@@ -110,14 +110,14 @@ public:
        @param summary  The array of summaries
        @param str   string to receive HTML
      */
-    static void printSummary(const QMap<uint32_t, activity_summary_t> &summary, quint32 flags, QString& str);
+    static void printSummary(const QMap<quint32, activity_summary_t> &summary, quint32 flags, QString& str);
 
 
     /**
        @brief Add internal summary to given array of summaries
        @param summary  an array of summaries to hold the sum
      */
-    void sumUp(QMap<uint32_t, activity_summary_t> &summary) const;
+    void sumUp(QMap<quint32, activity_summary_t> &summary) const;
 
 
     const QList<activity_range_t>& getActivityRanges() const
@@ -143,7 +143,7 @@ private:
     CGisItemTrk * trk;
     quint32 allFlags;
     QList<activity_range_t> activityRanges;
-    QMap<uint32_t, activity_summary_t> activitySummary;
+    QMap<quint32, activity_summary_t> activitySummary;
 };
 
 #endif //CACTIVITYTRK_H

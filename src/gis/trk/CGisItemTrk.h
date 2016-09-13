@@ -452,7 +452,7 @@ public:
        @brief Set the activity flag for all track points
        @param flag  one of trkpt_t::flag_e::eAct...
      */
-    void setActivity(uint32_t flags);
+    void setActivity(quint32 flags);
 
     /**
        @brief Sets the activity flag for a selected range of track points
@@ -460,7 +460,7 @@ public:
        The range has to be selected already. The activity will be selected by a dialog displayed
        in this method.
      */
-    void setActivityRange(uint32_t flags);
+    void setActivityRange(quint32 flags);
 
     /**
        @brief Copy a section into a new track object

@@ -51,23 +51,23 @@
 
     Always use the macro
         gar_endian(<type>, <source>)
-    where type may be int16_t, int32_t, int64_t, uint16_t, uint32_t, uint64_t, float or double.
+    where type may be int16_t, int32_t, int64_t, uint16_t, quint32, uint64_t, float or double.
     The returned value will explicitly be cast'ed to <type>.
 
     (b) the source is an unaligned 16, 32 or 64-bit value
 
     Always use the macro
         gar_load(<type>, <source>)
-    where type may be int16_t, int32_t, int64_t, uint16_t, uint32_t, uint64_t, float or double.
+    where type may be int16_t, int32_t, int64_t, uint16_t, quint32, uint64_t, float or double.
     The returned value will explicitly be cast'ed to <type>.
 
     (c) the source is a pointer
 
     Always use the macro
         gar_ptr_load(<type>, <pointer>)
-    where type may be int16_t, int32_t, int64_t, uint16_t, uint32_t, uint64_t, float or double
+    where type may be int16_t, int32_t, int64_t, uint16_t, quint32, uint64_t, float or double
     or the special Garmin types int24_t or uint24_t.  The returned value will be of type <type>
-    except for the Garmin types int24_t or uint24_t which will be int32_t or uint32_t,
+    except for the Garmin types int24_t or uint24_t which will be int32_t or quint32,
     respectively, but have the uppermost 8 bits always set to 0.
 
     2.2 Store data to Garmin
@@ -76,14 +76,14 @@
 
     For unaligned variables, use the macro
         gar_store(<type>, <destination>, <source>)
-    where type may be int16_t, int32_t, int64_t, uint16_t, uint32_t, uint64_t, float or double.
+    where type may be int16_t, int32_t, int64_t, uint16_t, quint32, uint64_t, float or double.
     if the variable is aligned, use "destination = gar_endian(type, source)" which is faster.
 
     (b) the destination is a pointer
 
     For unaligned pointer destinations, use the macro
         gar_ptr_store(<type>, <pointer>, <source>)
-    where type may be int16_t, int32_t, int64_t, uint16_t, uint32_t, uint64_t, float or double
+    where type may be int16_t, int32_t, int64_t, uint16_t, quint32, uint64_t, float or double
     or the special Garmin types int24_t or uint24_t.  For a standard type and an aligned pointer
     destination, use "*(type *)(ptr) = gar_endian(type, source)" which is faster.
 
@@ -108,7 +108,7 @@ typedef __int32 int32_t;
 typedef __int64 int64_t;
 typedef unsigned __int8 uint8_t;
 typedef unsigned __int16 uint16_t;
-typedef unsigned __int32 uint32_t;
+typedef unsigned __int32 quint32;
 typedef unsigned __int64 uint64_t;
 
 #define qIsNaN(x) _isnan(x)
@@ -139,8 +139,8 @@ __gar_endian_uint16_t(uint16_t x)
 }
 
 
-static inline uint32_t
-__gar_endian_uint32_t(uint32_t x)
+static inline quint32
+__gar_endian_quint32(quint32 x)
 {
     return ((x & 0xff000000u) >> 24) |
            ((x & 0x00ff0000u) >>  8) |
@@ -199,12 +199,12 @@ __gar_endian_float(float x)
 {
     union
     {
-        uint32_t _u;
+        quint32 _u;
         float _f;
     } _v;
 
     _v._f = x;
-    _v._u = gar_endian(uint32_t, _v._u);
+    _v._u = gar_endian(quint32, _v._u);
     return _v._f;
 }
 
@@ -246,12 +246,12 @@ __gar_endian_double(double x)
 #define __gar_ptr_load_int32_t(p)   (*((int32_t *)(p)))
 #define __gar_ptr_load_int64_t(p)   (*((int64_t *)(p)))
 #define __gar_ptr_load_uint16_t(p)  (*((uint16_t *)(p)))
-#define __gar_ptr_load_uint32_t(p)  (*((uint32_t *)(p)))
+#define __gar_ptr_load_quint32(p)  (*((quint32 *)(p)))
 #define __gar_ptr_load_uint64_t(p)  (*((uint64_t *)(p)))
 #define __gar_ptr_load_float(p)     (*((float *)(p)))
 #define __gar_ptr_load_double(p)    (*((double *)(p)))
 // special Garmin types - map memory and clear extra bits
-#define __gar_ptr_load_uint24_t(p)  (__gar_ptr_load_uint32_t(p) & 0x00FFFFFFu)
+#define __gar_ptr_load_uint24_t(p)  (__gar_ptr_load_quint32(p) & 0x00FFFFFFu)
 #define __gar_ptr_load_int24_t(p)   (__gar_ptr_load_int32_t(p) & 0x00FFFFFFu)
 
 // store data to pointer - just assign after a proper cast
@@ -259,7 +259,7 @@ __gar_endian_double(double x)
 #define __gar_ptr_store_int32_t(p, src)     (*((int32_t *)(p))) = (src)
 #define __gar_ptr_store_int64_t(p, src)     (*((int64_t *)(p))) = (src)
 #define __gar_ptr_store_uint16_t(p, src)    (*((uint16_t *)(p))) = (src)
-#define __gar_ptr_store_uint32_t(p, src)    (*((uint32_t *)(p))) = (src)
+#define __gar_ptr_store_quint32(p, src)    (*((quint32 *)(p))) = (src)
 #define __gar_ptr_store_uint64_t(p, src)    (*((uint64_t *)(p))) = (src)
 #define __gar_ptr_store_float(p, src)       (*((float *)(p))) = (src)
 #define __gar_ptr_store_double(p, src)      (*((double *)(p))) = (src)
@@ -273,7 +273,7 @@ __gar_ptr_store_int24_t(uint8_t * p, int32_t src)
 
 
 static inline void
-__gar_ptr_store_uint24_t(uint8_t * p, uint32_t src)
+__gar_ptr_store_uint24_t(uint8_t * p, quint32 src)
 {
     __gar_ptr_store_uint16_t(p, src & 0xffffu);
     p[2] = src >> 16;
@@ -304,31 +304,31 @@ __gar_ptr_load_uint16_t(const uint8_t *p)
 }
 
 
-static inline uint32_t
+static inline quint32
 __gar_ptr_load_uint24_t(const uint8_t *p)
 {
 #ifdef __powerpc__
-    register uint32_t temp;
+    register quint32 temp;
 
     asm __volatile__ ("lwbrx %0,0,%1"       : "=r" (temp) : "b" (p), "m" (*p));
     asm __volatile__ ("rlwinm %0,%1,0,8,31" : "=r" (temp) : "r" (temp));
     return temp;
 #else
-    return (uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16));
+    return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16));
 #endif
 }
 
 
-static inline uint32_t
-__gar_ptr_load_uint32_t(const uint8_t *p)
+static inline quint32
+__gar_ptr_load_quint32(const uint8_t *p)
 {
 #ifdef __powerpc__
-    register uint32_t temp;
+    register quint32 temp;
 
     asm __volatile__ ("lwbrx %0,0,%1" : "=r" (temp) : "b" (p), "m" (*p));
     return temp;
 #else
-    return (uint32_t)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
+    return (quint32)(p[0] | (p[1] << 8) | (p[2] << 16) | (p[3] << 24));
 #endif
 }
 
@@ -336,8 +336,8 @@ __gar_ptr_load_uint32_t(const uint8_t *p)
 static inline uint64_t
 __gar_ptr_load_uint64_t(const uint8_t *p)
 {
-    return (uint64_t)__gar_ptr_load_uint32_t(p) |
-           ((uint64_t)__gar_ptr_load_uint32_t(p + 4) << 32);
+    return (uint64_t)__gar_ptr_load_quint32(p) |
+           ((uint64_t)__gar_ptr_load_quint32(p + 4) << 32);
 }
 
 
@@ -387,7 +387,7 @@ __gar_ptr_load_int32_t(const uint8_t *p)
 static inline int64_t
 __gar_ptr_load_int64_t(const uint8_t *p)
 {
-    return (int64_t)__gar_ptr_load_uint32_t(p) |
+    return (int64_t)__gar_ptr_load_quint32(p) |
            ((int64_t)__gar_ptr_load_int32_t(p + 4) << 32);
 }
 
@@ -397,11 +397,11 @@ __gar_ptr_load_float(const uint8_t * p)
 {
     union
     {
-        uint32_t _u;
+        quint32 _u;
         float _f;
     } _v;
 
-    _v._u = gar_ptr_load(uint32_t, p);
+    _v._u = gar_ptr_load(quint32, p);
     return _v._f;
 }
 
@@ -430,7 +430,7 @@ __gar_ptr_store_uint16_t(uint8_t *p, uint16_t src)
 
 
 static inline void
-__gar_ptr_store_uint24_t(uint8_t *p, uint32_t src)
+__gar_ptr_store_uint24_t(uint8_t *p, quint32 src)
 {
     p[0] = src & 0xffu;
     p[1] = (src >> 8) & 0xffu;
@@ -439,7 +439,7 @@ __gar_ptr_store_uint24_t(uint8_t *p, uint32_t src)
 
 
 static inline void
-__gar_ptr_store_uint32_t(uint8_t *p, uint32_t src)
+__gar_ptr_store_quint32(uint8_t *p, quint32 src)
 {
     p[0] = src & 0xffu;
     p[1] = (src >> 8) & 0xffu;
@@ -451,14 +451,14 @@ __gar_ptr_store_uint32_t(uint8_t *p, uint32_t src)
 static inline void
 __gar_ptr_store_uint64_t(uint8_t *p, uint64_t src)
 {
-    __gar_ptr_store_uint32_t(p, src & 0xffffffffu);
-    __gar_ptr_store_uint32_t(p + 4, src >> 32);
+    __gar_ptr_store_quint32(p, src & 0xffffffffu);
+    __gar_ptr_store_quint32(p + 4, src >> 32);
 }
 
 
 #define __gar_ptr_store_int16_t(p, src) __gar_ptr_store_uint16_t(p, (uint16_t)src)
-#define __gar_ptr_store_int24_t(p, src) __gar_ptr_store_uint24_t(p, (uint32_t)src)
-#define __gar_ptr_store_int32_t(p, src) __gar_ptr_store_uint32_t(p, (uint32_t)src)
+#define __gar_ptr_store_int24_t(p, src) __gar_ptr_store_uint24_t(p, (quint32)src)
+#define __gar_ptr_store_int32_t(p, src) __gar_ptr_store_quint32(p, (quint32)src)
 #define __gar_ptr_store_int64_t(p, src) __gar_ptr_store_uint64_t(p, (uint64_t)src)
 
 static inline void

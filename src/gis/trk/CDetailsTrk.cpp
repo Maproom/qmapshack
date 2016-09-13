@@ -617,7 +617,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 
 void CDetailsTrk::slotSetActivities()
 {
-    uint32_t flags = CActivityTrk::selectActivity(this);
+    quint32 flags = CActivityTrk::selectActivity(this);
     if(0 != flags)
     {
         trk.setActivity(flags);

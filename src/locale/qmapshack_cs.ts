@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="cs_CZ">
+<TS version="2.0" language="cs_CZ">
 <context>
     <name>CAbout</name>
     <message>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Aeronautik</source>
-        <translation type="vanished">Vzduchoplavba</translation>
+        <translation>Vzduchoplavba</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="103"/>
@@ -114,7 +114,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="410"/>
         <source>None</source>
-        <translation type="unfinished">Žádné</translation>
+        <translation>Žádné</translation>
     </message>
 </context>
 <context>
@@ -179,11 +179,11 @@
     <name>CCreateRouteFromWpt</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="vanished">Zadat nový název cesty.</translation>
+        <translation>Zadat nový název cesty.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
@@ -258,7 +258,7 @@
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="66"/>
         <source>Error: </source>
-        <translation type="unfinished">Chyba: </translation>
+        <translation>Chyba: </translation>
     </message>
 </context>
 <context>
@@ -562,15 +562,15 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation type="vanished">Vzdálenost: %1%2</translation>
+        <translation>Vzdálenost: %1%2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation type="vanished">Stoupání: %1%2</translation>
+        <translation>Stoupání: %1%2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation type="vanished">Klesání: %1%2</translation>
+        <translation>Klesání: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
@@ -665,7 +665,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>%1 %2</source>
-        <translation type="vanished">%1 %2</translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="399"/>
@@ -697,7 +697,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Žádné</translation>
+        <translation>Žádné</translation>
     </message>
     <message>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
@@ -1141,7 +1141,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="475"/>
         <source>Activities: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Činnosti: %1</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
@@ -1280,11 +1280,11 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Zadejte nový název stopy.</translation>
+        <translation>Zadejte nový název stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="404"/>
@@ -1377,7 +1377,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation type="vanished">Skrýt body s neplatnými souřadnicemi na začátku stopy</translation>
+        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
@@ -1553,17 +1553,17 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/CGisListDB.cpp" line="121"/>
         <source>Rename Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat složku</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="122"/>
         <source>Copy Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat složku</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Move Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout složku</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="124"/>
@@ -1579,7 +1579,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/CGisListDB.cpp" line="131"/>
         <source>Search Database</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledat databázi</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="132"/>
@@ -1609,27 +1609,27 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/CGisListDB.cpp" line="496"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat vybrané složky a všechny podsložky z databáze?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="664"/>
         <source>Bad operation....</source>
-        <translation type="unfinished"></translation>
+        <translation>Špatná operace...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="664"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cílová složka je podsložkou složky k přesunutí. Toto nebude pracovat.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="723"/>
         <source>Folder name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Název složky...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="723"/>
         <source>Rename folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenovat složku:</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="852"/>
@@ -1652,7 +1652,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation type="vanished">Opravdu chcete &quot;%1&quot; odstranit z databáze?</translation>
+        <translation>Opravdu chcete &quot;%1&quot; odstranit z databáze?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="744"/>
@@ -1802,12 +1802,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/CGisListWks.cpp" line="107"/>
         <source>Sort by Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Třídit podle času</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Sort by Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Třídit podle názvu</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="115"/>
@@ -2166,12 +2166,12 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1061"/>
         <source>Fatal...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritické...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1062"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack zjistil špatně nainstalovanou knihovnu Proj4. Chybí překladové tabulky pro promítání EPSG obvykle uložené v /usr/share/proj. Spojte se, prosím, s údržbářem balíčku pro vaši distribuci, aby to opravil.</translation>
     </message>
 </context>
 <context>
@@ -2794,7 +2794,7 @@ Když s QMapShack není bez map žádná zábava, proč s ním nejsou nějaké p
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation type="vanished">Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
+        <translation>Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -3102,11 +3102,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation type="vanished">Zadat nový název oblasti.</translation>
+        <translation>Zadat nový název oblasti.</translation>
     </message>
 </context>
 <context>
@@ -3129,11 +3129,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="vanished">Zadat nový název cesty.</translation>
+        <translation>Zadat nový název cesty.</translation>
     </message>
 </context>
 <context>
@@ -3170,11 +3170,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Upravit název...</translation>
+        <translation>Upravit název...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Zadejte nový název stopy.</translation>
+        <translation>Zadejte nový název stopy.</translation>
     </message>
 </context>
 <context>
@@ -3445,11 +3445,11 @@ není platným vymezením soustavy souřadnic
     <name>CPropertyTrk</name>
     <message>
         <source>distance [%1]</source>
-        <translation type="vanished">Vzdálenost [%1]</translation>
+        <translation>Vzdálenost [%1]</translation>
     </message>
     <message>
         <source>time</source>
-        <translation type="vanished">Čas</translation>
+        <translation>Čas</translation>
     </message>
 </context>
 <context>
@@ -4113,7 +4113,7 @@ není platným vymezením soustavy souřadnic
     <message>
         <location filename="../gis/db/CSearchDatabase.cpp" line="38"/>
         <source>Search database &apos;%1&apos;:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohledat databázi &apos;%1&apos;:</translation>
     </message>
 </context>
 <context>
@@ -4273,7 +4273,7 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CTextEditWidget.cpp" line="113"/>
         <source>Reset format</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit formát znovu</translation>
     </message>
 </context>
 <context>
@@ -4660,12 +4660,12 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <name>IDB</name>
     <message>
         <source>The internal database format of &apos;%1&apos;&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation type="vanished">Vnitřní formát databáze &apos;%1&apos;&apos; se změnil. QMapShack nyní vaši databázi přestěhuje. Po přestěhování databáze se staršími verzemi QMapShack nebude použitelná. Doporučuje se databázi nejprve zazálohovat.</translation>
+        <translation>Vnitřní formát databáze &apos;%1&apos;&apos; se změnil. QMapShack nyní vaši databázi přestěhuje. Po přestěhování databáze se staršími verzemi QMapShack nebude použitelná. Doporučuje se databázi nejprve zazálohovat.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
         <source>The internal database format of &apos;%1&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vnitřní formát databáze &apos;%1&apos; se změnil. QMapShack nyní vaši databázi přestěhuje. Po přestěhování databáze se staršími verzemi QMapShack nebude použitelná. Doporučuje se databázi nejprve zazálohovat.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
@@ -4675,7 +4675,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/db/IDB.cpp" line="69"/>
         <source>Migration aborted by user</source>
-        <translation type="unfinished"></translation>
+        <translation>Přestěhování přerušeno uživatelem</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="75"/>
@@ -4691,17 +4691,17 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/db/IDB.cpp" line="81"/>
         <source>Migration failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Přestěhování se nepodařilo</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="88"/>
         <source>The database version of &apos;%1&apos; is more advanced as the one understood by your QMapShack installation. This won&apos;t work.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verze databáze &apos;%1&apos;je pokročilejší než ta, jíž rozumí vaše instalace QMapShacku. Toto nebude pracovat.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="110"/>
         <source>Initialization failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepodařilo se inicializovat</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="91"/>
@@ -4711,7 +4711,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/db/IDB.cpp" line="95"/>
         <source>Database created by newer version of QMapShack</source>
-        <translation type="unfinished"></translation>
+        <translation>Databáze vytvořena novější verzí QMapShack</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="104"/>
@@ -4734,7 +4734,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/db/IDBMysql.cpp" line="222"/>
         <source>Update to database version 5. Migrate all GIS items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat na verzi databáze 5. Přestěhovat všechny položky GIS.</translation>
     </message>
 </context>
 <context>
@@ -4742,17 +4742,17 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/db/IDBSqlite.cpp" line="306"/>
         <source>Update to database version 3. Migrate all GIS items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat na verzi databáze 3. Přestěhovat všechny položky GIS.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDBSqlite.cpp" line="375"/>
         <source>Update to database version 5. Migrate all GIS items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat na verzi databáze 5. Přestěhovat všechny položky GIS.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDBSqlite.cpp" line="449"/>
         <source>Update to database version 6. Migrate all GIS items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualizovat na verzi databáze 6. Přestěhovat všechny položky GIS.</translation>
     </message>
 </context>
 <context>
@@ -4858,11 +4858,11 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
+        <translation>Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
-        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
+        <translation>Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5077,7 +5077,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>Sort by time</source>
-        <translation type="vanished">Třídit podle času</translation>
+        <translation>Třídit podle času</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
@@ -5289,12 +5289,12 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1357"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit činnost stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1364"/>
         <source>Remove Track Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit činnost stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1403"/>
@@ -5636,7 +5636,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation type="vanished">Skrýt body s neplatnými souřadnicemi na začátku stopy.</translation>
+        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -6555,11 +6555,11 @@ Název souboru: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation type="vanished">Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
+        <translation>Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
-        <translation type="vanished">Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
+        <translation>Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -7141,7 +7141,7 @@ nebo
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation type="vanished">Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
+        <translation>Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
     </message>
 </context>
 <context>
@@ -7860,28 +7860,29 @@ nebo
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="14"/>
         <source>Search...</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="34"/>
         <source>Type the word you want to search for and press the search button. 
 If you enter &apos;word&apos; a search with an exact match is done. If you enter &apos;word*&apos;, &apos;word&apos; has to be at the beginning of a string.</source>
-        <translation type="unfinished"></translation>
+        <translation>Napište slovo, které se má hledat, a stiskněte tlačítko pro hledání. 
+Pokud zadáte &apos;slovo&apos;, provede se hledání přesné shody. Pokud zadáte &apos;slovo*&apos;, &apos;slovo&apos; musí být na začátku řetězce.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="51"/>
         <source>Name</source>
-        <translation type="unfinished">Název</translation>
+        <translation>Název</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="79"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat</translation>
     </message>
     <message>
         <location filename="../gis/db/ISearchDatabase.ui" line="86"/>
         <source>Close</source>
-        <translation type="unfinished">Zavřít</translation>
+        <translation>Zavřít</translation>
     </message>
 </context>
 <context>
@@ -7896,11 +7897,11 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <name>ISelectActivity</name>
     <message>
         <source>Activities...</source>
-        <translation type="vanished">Činnosti...</translation>
+        <translation>Činnosti...</translation>
     </message>
     <message>
         <source>Select one:</source>
-        <translation type="vanished">Vyberte jednu:</translation>
+        <translation>Vyberte jednu:</translation>
     </message>
 </context>
 <context>
@@ -8308,7 +8309,7 @@ nebo
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
@@ -8363,87 +8364,87 @@ nebo
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="100"/>
         <source>A:L</source>
-        <translation type="unfinished"></translation>
+        <translation>A:L</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="113"/>
         <source>A:C</source>
-        <translation type="unfinished"></translation>
+        <translation>A:C</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="126"/>
         <source>A:R</source>
-        <translation type="unfinished"></translation>
+        <translation>A:R</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="139"/>
         <source>A:B</source>
-        <translation type="unfinished"></translation>
+        <translation>A:B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="172"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="185"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="198"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="218"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="265"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardní</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="270"/>
         <source>Bullet List (Disc)</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kulatých odrážek (kotouč)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="275"/>
         <source>Bullet List (Circle)</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kulatých odrážek (kroužek)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="280"/>
         <source>Bullet List (Square)</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kulatých odrážek (čtvereček)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="285"/>
         <source>Ordered List (Decimal)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádaný seznam (desetinný)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="290"/>
         <source>Ordered List (Alpha lower)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádaný seznam (abecední dolní)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="295"/>
         <source>Ordered List (Alpha upper)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádaný seznam (abecední horní)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="300"/>
         <source>Ordered List (Roman lower)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádaný seznam (antikva dolní)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="305"/>
         <source>Ordered List (Roman upper)</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspořádaný seznam (antikva horní)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="378"/>
@@ -8523,51 +8524,51 @@ nebo
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="495"/>
         <source>Plain</source>
-        <translation type="unfinished"></translation>
+        <translation>Prostý</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="498"/>
         <source>Reset the text&apos;s format before pasting</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit znovu formát textu před vložením</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="503"/>
         <location filename="../widgets/ITextEditWidget.ui" line="506"/>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vybrat vše</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="509"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished">Ctrl+A</translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="514"/>
         <location filename="../widgets/ITextEditWidget.ui" line="517"/>
         <source>Delete</source>
-        <translation type="unfinished">Smazat</translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="522"/>
         <location filename="../widgets/ITextEditWidget.ui" line="525"/>
         <source>Reset Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit písmo znovu</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="530"/>
         <location filename="../widgets/ITextEditWidget.ui" line="533"/>
         <source>Reset Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavit rozvržení znovu</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="545"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normální</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="548"/>
         <source>Paste without resetting the text&apos;s format</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit bez znovunastavení formátu textu</translation>
     </message>
 </context>
 <context>
@@ -8575,32 +8576,32 @@ nebo
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="55"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="68"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="81"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="101"/>
         <source>Cut</source>
-        <translation type="unfinished">Vyjmout</translation>
+        <translation>Vyjmout</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="114"/>
         <source>Copy</source>
-        <translation type="unfinished">Kopírovat</translation>
+        <translation>Kopírovat</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="127"/>
         <source>Paste</source>
-        <translation type="unfinished">Vložit</translation>
+        <translation>Vložit</translation>
     </message>
 </context>
 <context>
@@ -8755,7 +8756,7 @@ nebo
     </message>
     <message>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation type="vanished">Všechny vlastní symboly musí být ve formátu *.bmp.</translation>
+        <translation>Všechny vlastní symboly musí být ve formátu *.bmp.</translation>
     </message>
 </context>
 <context>

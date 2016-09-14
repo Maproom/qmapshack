@@ -57,6 +57,7 @@
 #include <QtSql>
 #include <QtWidgets>
 
+using std::bind;
 
 #undef  DB_VERSION
 #define DB_VERSION 3

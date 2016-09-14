@@ -20,7 +20,7 @@ function buildIcon {
     sips -z 256 256   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256.png
     sips -z 512 512   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_256x256@2x.png
     sips -z 512 512   $SRC_RESOURCES_DIR/$APP_NAME.png --out $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512.png
-    cp                $SRC_RESOURCES_DIR/$APP_NAME.png       $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512@2x.png
+    cp -v            $SRC_RESOURCES_DIR/$APP_NAME.png       $BUILD_BIN_DIR/$APP_NAME.iconset/icon_512x512@2x.png
     iconutil -c icns -o $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BIN_DIR/$APP_NAME.iconset
     # rm -r $BUILD_BIN_DIR/$APP_NAME.iconset
 }
@@ -44,23 +44,23 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_DIR
     
     # predefined data
-    cp -R $SRC_RESOURCES_DIR/Contents $BUILD_BUNDLE_DIR
+    cp -v -R $SRC_RESOURCES_DIR/Contents $BUILD_BUNDLE_DIR
     
     # new icon, if one has been created (otherwise the one from predefined data
     if [ -f "$BUILD_BIN_DIR/$APP_NAME.icns" ]; then
-        cp $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
+        cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
     fi
     
     # binary
     mkdir $BUILD_BUNDLE_APP_DIR
-    cp $BUILD_BIN_DIR/qmapshack  $BUILD_BUNDLE_APP_DIR/$APP_NAME
+    cp -v $BUILD_BIN_DIR/qmapshack  $BUILD_BUNDLE_APP_DIR/$APP_NAME
     
     mkdir $BUILD_BUNDLE_RES_QM_DIR
     mkdir $BUILD_BUNDLE_RES_GDAL_DIR
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
     mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
     mkdir $BUILD_BUNDLE_RES_BIN_DIR
-    cp $BUILD_BIN_DIR/*.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $BUILD_BIN_DIR/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 function qtDeploy {
@@ -85,6 +85,23 @@ function printLinkingApp {
     do
         printLinking $F
     done
+    
+    checkLibraries $BUILD_BUNDLE_APP_FILE
+
+    for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)`    
+    do
+        checkLibraries $F
+    done
+    
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
+    do
+        checkLibraries $F
+    done
+
+    for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
+    do
+        checkLibraries $F
+    done   
 }
 
 function adjustLinking {
@@ -118,7 +135,7 @@ function adjustLinkQt {
 
     for P in `otool -L $F | awk '{print $1}'`
     do
-        #  replace doubel slashes
+        #  replace double slashes
         if [[ "$P" == *//* ]]; then 
             PSLASH=$(echo $P | sed 's,//,/,g')
             sudo install_name_tool -change $P $PSLASH $F
@@ -138,46 +155,73 @@ function adjustLinkQt {
             PREL="@executable_path/../PlugIns/$LIB"
         fi
 
-        if [[ "$LIB" == "$FREL" ]]; then
-            echo "$FREL >> $PREL ($P)"
+#echo "F    = $F"
+#echo "P    = $P"
+#echo "LIB  = $LIB"
+#echo "FREL = $FREL"
+#echo "PREL = $PREL"
+#echo "L    = $L"
+#echo "-----"
+		if [[ "$LIB" == *"$FREL" ]]; then
+            echo "name_tool: $FREL >> $PREL ($P)"
             sudo install_name_tool -id $PREL $F
         elif [[ "$P" == *$L* ]]; then
-            echo "$FREL > $PREL ($P)"
+            echo "name_tool: $FREL > $PREL ($P)"
             sudo install_name_tool -change $P $PREL $F
         fi
     done
 }
 
 
+function checkLibraries {
+	F=$1 # file
+	DIR=${BUILD_BUNDLE_APP_FILE%/*}
+	
+	for P in `otool -L $F | awk '{print $1}'`
+    do
+    	if [[ "$P" == "@executable_path"* ]]; then
+    		FREL=${P##@executable_path}
+    		LIB=${DIR}${FREL}
+    		#echo "LIB = $LIB"
+    		if [ ! -e $LIB ]; then
+    			echo "referenced library not bundled: $P"
+    		fi
+    	fi
+    	if [[ "$P" == "/"* && "$P" != "/System/Library/"* && "$P" != "/usr/lib/"* && "$P" != *":" ]]; then
+    		echo "external library: $P"
+    	fi
+    done
+}
+
 function copyAdditionalLibraries {
-    cp $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtMultimedia.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtWebKitWidgets.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
-    cp -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v    $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtMultimedia.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtWebKitWidgets.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
+    cp -v -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
     # TODO remove QT Bus, is only for linux needed
-    cp -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
+    #cp -v -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
 }
 
 function copyExternalFiles {
-    cp $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
 
-    cp $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
-    cp $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
+    cp -v $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
+    cp -v $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
     
-    cp $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
+    cp -v $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
 }
 
 
@@ -201,9 +245,9 @@ function printLinkingExtTools {
 
 function copyExtTools {
     # at least gdalbuildvrt is used
-    cp $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
-    cp $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
-    cp $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 
@@ -255,7 +299,7 @@ function updateInfoPlist {
     /usr/libexec/PlistBuddy -c "Set :BuildTime $BUILD_TIME"                   "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
 }
 
-    
+
 if [[ "$1" == "icon" ]]; then
     buildIcon
 fi

@@ -347,7 +347,7 @@ QAction * CGisListWks::addSortAction(QMenu * menu, QActionGroup * actionGroup, c
     QAction * action = menu->addAction(QIcon(icon), text);
     action->setCheckable(true);
 
-    auto func = bind(&CGisListWks::slotSetSortMode, this, mode, std::placeholders::_1);
+    auto func = std::bind(&CGisListWks::slotSetSortMode, this, mode, std::placeholders::_1);
     connect(action, &QAction::toggled, this, func);
 
     actionGroup->addAction(action);

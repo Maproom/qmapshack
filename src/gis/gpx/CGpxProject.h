@@ -48,7 +48,7 @@ public:
         return true;
     }
 
-    static bool saveAs(const QString& fn, IGisProject& project);
+    static bool saveAs(const QString& fn, IGisProject& project, bool strictGpx11);
 
     static void loadGpx(const QString &filename, CGpxProject *project);
 

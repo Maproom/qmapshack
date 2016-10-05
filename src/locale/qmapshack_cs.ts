@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="cs_CZ">
+<TS version="2.1" language="cs_CZ">
 <context>
     <name>CAbout</name>
     <message>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Aeronautik</source>
-        <translation>Vzduchoplavba</translation>
+        <translation type="vanished">Vzduchoplavba</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="103"/>
@@ -179,11 +179,11 @@
     <name>CCreateRouteFromWpt</name>
     <message>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation>Zadat nový název cesty.</translation>
+        <translation type="vanished">Zadat nový název cesty.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
@@ -562,15 +562,15 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation>Vzdálenost: %1%2</translation>
+        <translation type="vanished">Vzdálenost: %1%2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation>Stoupání: %1%2</translation>
+        <translation type="vanished">Stoupání: %1%2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation>Klesání: %1%2</translation>
+        <translation type="vanished">Klesání: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
@@ -665,7 +665,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>%1 %2</source>
-        <translation>%1 %2</translation>
+        <translation type="vanished">%1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CDetailsTrk.cpp" line="399"/>
@@ -697,7 +697,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>None</source>
-        <translation>Žádné</translation>
+        <translation type="vanished">Žádné</translation>
     </message>
     <message>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
@@ -760,7 +760,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Obrázek %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1040"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1052"/>
         <source>Unknown</source>
         <translation>Neznámý</translation>
     </message>
@@ -1280,11 +1280,11 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation>Zadejte nový název stopy.</translation>
+        <translation type="vanished">Zadejte nový název stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="404"/>
@@ -1377,7 +1377,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy</translation>
+        <translation type="vanished">Skrýt body s neplatnými souřadnicemi na začátku stopy</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
@@ -1448,17 +1448,17 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="590"/>
+        <location filename="../gis/gpx/serialization.cpp" line="593"/>
         <source>Archived</source>
         <translation>Archivováno</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="594"/>
+        <location filename="../gis/gpx/serialization.cpp" line="597"/>
         <source>Available</source>
         <translation>Dostupné</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="598"/>
+        <location filename="../gis/gpx/serialization.cpp" line="601"/>
         <source>Not Available</source>
         <translation>Nedostupné</translation>
     </message>
@@ -1652,7 +1652,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation>Opravdu chcete &quot;%1&quot; odstranit z databáze?</translation>
+        <translation type="vanished">Opravdu chcete &quot;%1&quot; odstranit z databáze?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="744"/>
@@ -1674,17 +1674,16 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="112"/>
         <source>Save As...</source>
-        <translation>Uložit jako...</translation>
+        <translation type="vanished">Uložit jako...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="111"/>
+        <location filename="../gis/CGisListWks.cpp" line="112"/>
         <source>Save</source>
         <translation>Uložit</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="98"/>
+        <location filename="../gis/CGisListWks.cpp" line="99"/>
         <source>Edit..</source>
         <translation>Upravit...</translation>
     </message>
@@ -1693,90 +1692,100 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="obsolete">Aktualizovat projekt na zařízeních</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="121"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="128"/>
+        <location filename="../gis/CGisListWks.cpp" line="130"/>
         <source>Update Project on Device</source>
         <translation>Aktualizovat projekt na zařízení</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="141"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Edit...</source>
         <translation>Upravit...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="99"/>
-        <location filename="../gis/CGisListWks.cpp" line="142"/>
+        <location filename="../gis/CGisListWks.cpp" line="100"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Copy to...</source>
         <translation>Kopírovat do...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <source>Save as...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <source>Save as strict GPX 1.1...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="160"/>
         <source>Show Bubble</source>
         <translation>Ukázat bublinu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Move Waypoint</source>
         <translation>Přesunout cestovní bod</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Proj. Waypoint...</source>
         <translation>Promítnutí cestovního bodu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Route Instructions</source>
         <translation>Pokyny pro cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Calculate Route</source>
         <translation>Spočítat cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Reset Route</source>
         <translation>Nastavit cestu znovu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="172"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Edit Route</source>
         <translation>Upravit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Convert to Track</source>
         <translation>Převést na stopu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="189"/>
+        <location filename="../gis/CGisListWks.cpp" line="192"/>
         <source>Create Route</source>
         <translation>Vytvořit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="618"/>
+        <location filename="../gis/CGisListWks.cpp" line="621"/>
         <source>Drop items...</source>
         <translation>Zahodit prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="643"/>
-        <location filename="../gis/CGisListWks.cpp" line="1599"/>
-        <location filename="../gis/CGisListWks.cpp" line="1637"/>
+        <location filename="../gis/CGisListWks.cpp" line="646"/>
+        <location filename="../gis/CGisListWks.cpp" line="1617"/>
+        <location filename="../gis/CGisListWks.cpp" line="1655"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1172"/>
+        <location filename="../gis/CGisListWks.cpp" line="1175"/>
         <source>Delete project...</source>
         <translation>Smazat projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1172"/>
+        <location filename="../gis/CGisListWks.cpp" line="1175"/>
         <source>Do you really want to delete %1?</source>
         <translation>Opravdu chcete smazat %1?</translation>
     </message>
@@ -1785,88 +1794,88 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="obsolete">Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="147"/>
         <source>Track Profile</source>
         <translation>Profil stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="100"/>
+        <location filename="../gis/CGisListWks.cpp" line="101"/>
         <source>Show on Map</source>
         <translation>Ukázat na mapě</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="101"/>
+        <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Hide from Map</source>
         <translation>Skrýt v mapě</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="107"/>
+        <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Sort by Time</source>
         <translation>Třídit podle času</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="108"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
         <source>Sort by Name</source>
         <translation>Třídit podle názvu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Send to Devices</source>
         <translation>Poslat do zařízení</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Sync. with Database</source>
         <translation>Seřídit s databází</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="146"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Select Range</source>
         <translation>Vybrat rozsah</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Edit Track Points</source>
         <translation>Upravit body stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="148"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Reverse Track</source>
         <translation>Obrátit stopu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="149"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Combine Tracks</source>
         <translation>Spojit stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
+        <location filename="../gis/CGisListWks.cpp" line="185"/>
         <source>Edit Area Points</source>
         <translation>Upravit body oblasti</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="130"/>
-        <location filename="../gis/CGisListWks.cpp" line="151"/>
+        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="769"/>
+        <location filename="../gis/CGisListWks.cpp" line="772"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ukládá se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="815"/>
+        <location filename="../gis/CGisListWks.cpp" line="818"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Nahrává se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1149"/>
+        <location filename="../gis/CGisListWks.cpp" line="1152"/>
         <source>Close all projects...</source>
         <translation>Zavřít všechny projekty...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1149"/>
+        <location filename="../gis/CGisListWks.cpp" line="1152"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tímto budou všechny projekty odstraněny z pracovního prostoru.</translation>
     </message>
@@ -1971,17 +1980,17 @@ line %2, column %3:
         <translation>Soubor existuje a nebyl vytvořen programem QMapShack. Pokud stisknete Ano, budou všechna data v tomto souboru ztracena. I když by tento soubor obsahoval data GPX a byl nahrán programem QMapShack, QMapShack nemusí být schopen nahrát a uložit všechny prvky tohoto souboru.  Tyto prvky budou ztraceny. Doporučuje se použít jiný soubor. &lt;b&gt;Opravdu chcete soubor přepsat?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="380"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="382"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="390"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="392"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="395"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="397"/>
         <source>Saving GIS data failed...</source>
         <translation>Nepodařilo se uložit data GIS...</translation>
     </message>
@@ -2794,7 +2803,7 @@ Když s QMapShack není bez map žádná zábava, proč s ním nejsou nějaké p
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
+        <translation type="vanished">Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -3102,11 +3111,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation>Zadat nový název oblasti.</translation>
+        <translation type="vanished">Zadat nový název oblasti.</translation>
     </message>
 </context>
 <context>
@@ -3129,11 +3138,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation>Zadat nový název cesty.</translation>
+        <translation type="vanished">Zadat nový název cesty.</translation>
     </message>
 </context>
 <context>
@@ -3170,11 +3179,11 @@ Neznámá stavba.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation>Upravit název...</translation>
+        <translation type="vanished">Upravit název...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation>Zadejte nový název stopy.</translation>
+        <translation type="vanished">Zadejte nový název stopy.</translation>
     </message>
 </context>
 <context>
@@ -3445,11 +3454,11 @@ není platným vymezením soustavy souřadnic
     <name>CPropertyTrk</name>
     <message>
         <source>distance [%1]</source>
-        <translation>Vzdálenost [%1]</translation>
+        <translation type="vanished">Vzdálenost [%1]</translation>
     </message>
     <message>
         <source>time</source>
-        <translation>Čas</translation>
+        <translation type="vanished">Čas</translation>
     </message>
 </context>
 <context>
@@ -4660,7 +4669,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     <name>IDB</name>
     <message>
         <source>The internal database format of &apos;%1&apos;&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Vnitřní formát databáze &apos;%1&apos;&apos; se změnil. QMapShack nyní vaši databázi přestěhuje. Po přestěhování databáze se staršími verzemi QMapShack nebude použitelná. Doporučuje se databázi nejprve zazálohovat.</translation>
+        <translation type="vanished">Vnitřní formát databáze &apos;%1&apos;&apos; se změnil. QMapShack nyní vaši databázi přestěhuje. Po přestěhování databáze se staršími verzemi QMapShack nebude použitelná. Doporučuje se databázi nejprve zazálohovat.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
@@ -4858,11 +4867,11 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
+        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte Soubor → Nastavit cesty k výškovým modelům. </translation>
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
-        <translation>Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
+        <translation type="vanished">Pro přidání souborů s údaji o výšce použijte &lt;b&gt;Soubor → Nastavit cesty k výškovým modelům&lt;/b&gt;. </translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5077,7 +5086,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>Sort by time</source>
-        <translation>Třídit podle času</translation>
+        <translation type="vanished">Třídit podle času</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
@@ -5636,7 +5645,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation>Skrýt body s neplatnými souřadnicemi na začátku stopy.</translation>
+        <translation type="vanished">Skrýt body s neplatnými souřadnicemi na začátku stopy.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -5989,43 +5998,44 @@ Buď je to nový symbol nebo byl v databázi někým smazán.</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="327"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="380"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Uložit &quot;%1&quot; do...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="465"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Název souboru: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="442"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="470"/>
         <source>Waypoints: %1</source>
         <translation>Cestovní body: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="446"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="474"/>
         <source>Tracks: %1</source>
         <translation>Stopy: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="450"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="478"/>
         <source>Routes: %1</source>
         <translation>Cesty: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="454"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
         <source>Areas: %1</source>
         <translation>Oblasti: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="574"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="602"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; z projektu &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="575"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="603"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>
@@ -6555,11 +6565,11 @@ Název souboru: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
+        <translation type="vanished">Pro přidání map použijte Soubor → Nastavit cesty k mapám. </translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
-        <translation>Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
+        <translation type="vanished">Pro přidání map použijte &lt;b&gt;Soubor → Nastavit cesty k mapám&lt;/b&gt;. </translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -7141,7 +7151,7 @@ nebo
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
-        <translation>Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
+        <translation type="vanished">Pro použití stanovení cesty bez připojení k internetu je potřeba stanovit cesty k místním datům se stanovením cest. Použijte nástrojové tlačítko pro nastavení k zaregistrování cesty.</translation>
     </message>
 </context>
 <context>
@@ -7897,11 +7907,11 @@ Pokud zadáte &apos;slovo&apos;, provede se hledání přesné shody. Pokud zad�
     <name>ISelectActivity</name>
     <message>
         <source>Activities...</source>
-        <translation>Činnosti...</translation>
+        <translation type="vanished">Činnosti...</translation>
     </message>
     <message>
         <source>Select one:</source>
-        <translation>Vyberte jednu:</translation>
+        <translation type="vanished">Vyberte jednu:</translation>
     </message>
 </context>
 <context>
@@ -8309,7 +8319,7 @@ nebo
     </message>
     <message>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
@@ -8756,7 +8766,7 @@ nebo
     </message>
     <message>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation>Všechny vlastní symboly musí být ve formátu *.bmp.</translation>
+        <translation type="vanished">Všechny vlastní symboly musí být ve formátu *.bmp.</translation>
     </message>
 </context>
 <context>

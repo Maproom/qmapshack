@@ -196,7 +196,7 @@ public:
        @brief Save the item's data into a GPX structure
        @param gpx       the files <gpx> tag to attach the data to
      */
-    virtual void save(QDomNode& gpx) = 0;
+    virtual void save(QDomNode& gpx, bool strictGpx11) = 0;
 
     /**
        @brief Get key string to identify object
@@ -531,7 +531,7 @@ protected:
     /// read waypoint data from an XML snippet
     void readWpt(const QDomNode& xml, wpt_t &wpt);
     /// write waypoint data to an XML snippet
-    void writeWpt(QDomElement &xml, const wpt_t &wpt);
+    void writeWpt(QDomElement &xml, const wpt_t &wpt, bool strictGpx11);
     /// generate a unique key from item's data
     virtual void genKey() const;
     /// setup the history structure right after the creation of the item
@@ -560,7 +560,7 @@ protected:
        @param str   a string
        @return A string with HTML removed depending on the device
      */
-    QString html2Dev(const QString& str);
+    QString html2Dev(const QString& str, bool strictGpx11);
 
     /// see flags_e for possible flags
     quint32 flags = 0;

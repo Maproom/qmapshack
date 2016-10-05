@@ -654,7 +654,7 @@ QString IGisItem::removeHtml(const QString &str)
     return html.toPlainText();
 }
 
-QString IGisItem::html2Dev(const QString& str)
+QString IGisItem::html2Dev(const QString& str, bool strictGpx11)
 {
     // device or not, an empty text should never be enclosed in HTML tags
     if(removeHtml(str).simplified().isEmpty())
@@ -662,7 +662,7 @@ QString IGisItem::html2Dev(const QString& str)
         return "";
     }
 
-    return isOnDevice() == IDevice::eTypeGarmin ? removeHtml(str) : str;
+    return (isOnDevice() == IDevice::eTypeGarmin) || strictGpx11 ? removeHtml(str) : str;
 }
 
 QString IGisItem::toLink(bool isReadOnly, const QString& href, const QString& str, const QString &key)

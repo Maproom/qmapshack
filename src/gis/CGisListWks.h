@@ -75,6 +75,7 @@ private slots:
     void slotContextMenu(const QPoint& point);
     void slotSaveProject();
     void slotSaveAsProject();
+    void slotSaveAsStrictGpx11Project();
     void slotEditPrj();
     void slotCloseProject();
     void slotDeleteProject();
@@ -124,6 +125,7 @@ private:
     QMenu * menuProjectWks;
     QAction  * actionSave;
     QAction  * actionSaveAs;
+    QAction  * actionSaveAsStrict;
     QAction  * actionCopyPrj;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;

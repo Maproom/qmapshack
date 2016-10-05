@@ -139,7 +139,7 @@ public:
        @brief Save track to GPX tree
        @param gpx   The <gpx> node to append by the track
      */
-    void save(QDomNode& gpx) override;
+    void save(QDomNode& gpx, bool strictGpx11) override;
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file

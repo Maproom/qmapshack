@@ -341,7 +341,7 @@ bool IGisProject::saveAs(QString fn, QString filter)
 
     if(filter == filedialogFilterGPX)
     {
-        res = CGpxProject::saveAs(fn, *this);
+        res = CGpxProject::saveAs(fn, *this, false);
     }
     else if(filter == filedialogFilterQMS)
     {
@@ -363,6 +363,34 @@ bool IGisProject::saveAs(QString fn, QString filter)
     return res;
 }
 
+bool IGisProject::saveAsStrictGpx11()
+{
+    SETTINGS;
+
+    QString fn;
+    QString path = cfg.value("Paths/lastGisPath", QDir::homePath()).toString();
+
+    // guess the correct extension:
+    // by default use the extension provided by the current format,
+    // otherwise use gpx
+    QString ext    = "gpx";
+    QString filter = IGisProject::filedialogFilterGPX;
+    path += "/" + getName() + "." + ext;
+
+    fn = QFileDialog::getSaveFileName(CMainWindow::getBestWidgetForParent(), tr("Save \"%1\" to...").arg(getName()), path, "Strict GPX V 1.1 (*.gpx *.GPX)", &filter);
+
+    if(fn.isEmpty())
+    {
+        return false;
+    }
+
+    bool res = CGpxProject::saveAs(fn, *this, true);
+
+    path = QFileInfo(fn).absolutePath();
+    cfg.setValue("Paths/lastGisPath", path);
+
+    return res;
+}
 
 void IGisProject::setupName(const QString &defaultName)
 {

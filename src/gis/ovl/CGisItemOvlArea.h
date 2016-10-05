@@ -100,7 +100,7 @@ public:
     void setDescription(const QString& str)   override;
     void setLinks(const QList<link_t>& links) override;
 
-    void save(QDomNode& gpx) override;
+    void save(QDomNode& gpx, bool strictGpx11) override;
     void edit() override;
 
     using IGisItem::drawItem;

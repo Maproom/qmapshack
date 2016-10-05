@@ -131,7 +131,7 @@ public:
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
     void drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw * gis) override;
     void drawHighlight(QPainter& p) override;
-    void save(QDomNode& gpx) override;
+    void save(QDomNode& gpx, bool strictGpx11) override;
     bool isCloseTo(const QPointF& pos) override;
     bool isWithin(const QRectF& area, selflags_t flags) override;
     /**

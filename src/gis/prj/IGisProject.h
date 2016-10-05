@@ -154,6 +154,12 @@ public:
      */
     bool saveAs(QString fn = QString(), QString filter = QString());
 
+    /**
+       @brief Save as strict GPX V 1.1 without any extensions and HTML
+       @return True on success
+     */
+    bool saveAsStrictGpx11();
+
     virtual void setFilename(const QString& fn)
     {
         filename = fn;

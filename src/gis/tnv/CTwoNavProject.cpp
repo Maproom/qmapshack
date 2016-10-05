@@ -167,7 +167,7 @@ bool CTwoNavProject::saveAs()
     bool res = false;
     if(filter == filedialogFilterGPX)
     {
-        res = CGpxProject::saveAs(fn, *this);
+        res = CGpxProject::saveAs(fn, *this, false);
     }
     else if(filter == filedialogFilterQMS)
     {

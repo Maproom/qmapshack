@@ -110,7 +110,8 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
-    actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save As..."     ), this, SLOT(slotSaveAsProject()));
+    actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save as..."     ), this, SLOT(slotSaveAsProject()));
+    actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save as strict GPX 1.1..."), this, SLOT(slotSaveAsStrictGpx11Project()));
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
@@ -132,6 +133,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     menuProjectTrash= new QMenu(this);
     menuProjectTrash->addAction(actionSaveAs);
+    menuProjectTrash->addAction(actionSaveAsStrict);
     menuProjectTrash->addAction(actionCloseProj);
 
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -1220,6 +1222,21 @@ void CGisListWks::slotSaveAsProject()
         if(nullptr != project)
         {
             project->saveAs();
+        }
+    }
+}
+
+void CGisListWks::slotSaveAsStrictGpx11Project()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    QList<QTreeWidgetItem*> items = selectedItems();
+    for(QTreeWidgetItem * item : items)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(nullptr != project)
+        {
+            project->saveAsStrictGpx11();
         }
     }
 }

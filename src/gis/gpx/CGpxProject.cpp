@@ -232,7 +232,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     project->valid = true;
 }
 
-bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
+bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx11)
 {
     QString _fn_ = fn;
     QFileInfo fi(_fn_);
@@ -308,7 +308,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
             device->saveImages(*item);
         }
 
-        item->save(gpx);
+        item->save(gpx, strictGpx11);
     }
     for(int i = 0; i < project.childCount(); i++)
     {
@@ -317,7 +317,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         {
             continue;
         }
-        item->save(gpx);
+        item->save(gpx, strictGpx11);
     }
     for(int i = 0; i < project.childCount(); i++)
     {
@@ -326,50 +326,52 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project)
         {
             continue;
         }
-        item->save(gpx);
+        item->save(gpx, strictGpx11);
     }
 
-    QDomElement xmlExt = doc.createElement("extensions");
-    gpx.appendChild(xmlExt);
-    for(int i = 0; i < project.childCount(); i++)
+    if(not strictGpx11)
     {
-        CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
-        if(nullptr == item)
+        QDomElement xmlExt = doc.createElement("extensions");
+        gpx.appendChild(xmlExt);
+        for(int i = 0; i < project.childCount(); i++)
         {
-            continue;
+            CGisItemOvlArea * item = dynamic_cast<CGisItemOvlArea*>(project.child(i));
+            if(nullptr == item)
+            {
+                continue;
+            }
+            item->save(xmlExt,strictGpx11);
         }
-        item->save(xmlExt);
-    }
 
-    if(!project.getKey().isEmpty())
-    {
-        QDomElement elem = xmlExt.ownerDocument().createElement("ql:key");
-        xmlExt.appendChild(elem);
-        QDomText text = xmlExt.ownerDocument().createTextNode(project.getKey());
-        elem.appendChild(text);
-    }
+        if(!project.getKey().isEmpty())
+        {
+            QDomElement elem = xmlExt.ownerDocument().createElement("ql:key");
+            xmlExt.appendChild(elem);
+            QDomText text = xmlExt.ownerDocument().createTextNode(project.getKey());
+            elem.appendChild(text);
+        }
 
-    {
-        QDomElement elem = xmlExt.ownerDocument().createElement("ql:sortingRoadbook");
-        xmlExt.appendChild(elem);
-        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSortingRoadbook()));
-        elem.appendChild(text);
-    }
+        {
+            QDomElement elem = xmlExt.ownerDocument().createElement("ql:sortingRoadbook");
+            xmlExt.appendChild(elem);
+            QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSortingRoadbook()));
+            elem.appendChild(text);
+        }
 
-    {
-        QDomElement elem = xmlExt.ownerDocument().createElement("ql:sortingFolder");
-        xmlExt.appendChild(elem);
-        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSortingFolder()));
-        elem.appendChild(text);
-    }
+        {
+            QDomElement elem = xmlExt.ownerDocument().createElement("ql:sortingFolder");
+            xmlExt.appendChild(elem);
+            QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getSortingFolder()));
+            elem.appendChild(text);
+        }
 
-    {
-        QDomElement elem = xmlExt.ownerDocument().createElement("ql:correlation");
-        xmlExt.appendChild(elem);
-        QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.doCorrelation()));
-        elem.appendChild(text);
+        {
+            QDomElement elem = xmlExt.ownerDocument().createElement("ql:correlation");
+            xmlExt.appendChild(elem);
+            QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.doCorrelation()));
+            elem.appendChild(text);
+        }
     }
-
     //  ---- stop  content of gpx
 
     bool res = true;

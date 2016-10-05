@@ -282,7 +282,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
 
     //  ---- start content of gpx
     QDomDocument doc;
-    QDomNode gpx = project.writeMetadata(doc);
+    QDomNode gpx = project.writeMetadata(doc, strictGpx11);
 
     IDevice * device = dynamic_cast<IDevice*>(project.parent());
     if(device)

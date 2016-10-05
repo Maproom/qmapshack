@@ -425,7 +425,7 @@ public:
        @param doc
        @return
      */
-    QDomNode writeMetadata(QDomDocument& doc);
+    QDomNode writeMetadata(QDomDocument& doc, bool strictGpx11);
 
     /**
        @brief Mount volume the project's file is stored at

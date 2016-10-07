@@ -456,17 +456,16 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
         gpx.setAttribute("xmlns:tp1",    tp1_ns);
 
         schemaLocation = QString()
-                                 + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
-                                 + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
-                                 + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
-                                 + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
-                                 + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd ";
+                         + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
+                         + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
+                         + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
+                         + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
+                         + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd ";
     }
     else
     {
         schemaLocation = QString()
-                                 + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd ";
-
+                         + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd ";
     }
 
 

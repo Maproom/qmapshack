@@ -337,9 +337,9 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     str += "<td>" + tr("Speed Moving:") + "</td>";
     for(const desc_t *desc : descs)
     {
-       const activity_summary_t& s = summary[desc->flag];
-       IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
-       str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        const activity_summary_t& s = summary[desc->flag];
+        IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -404,7 +404,8 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
         }
     }
 
-    static desc_t dummyDesc = {
+    static desc_t dummyDesc =
+    {
         "None"
         , CGisItemTrk::trkpt_t::eActNone
         , tr("None")

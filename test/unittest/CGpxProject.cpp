@@ -26,7 +26,7 @@ void test_QMapShack::writeReadGpxFile(const QString &file)
     IGisProject *proj = readProjFile(file);
 
     QString tmpFile = TestHelper::getTempFileName("gpx");
-    CGpxProject::saveAs(tmpFile, *proj);
+    CGpxProject::saveAs(tmpFile, *proj, false);
 
     delete proj;
 

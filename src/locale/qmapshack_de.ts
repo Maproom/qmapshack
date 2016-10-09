@@ -7207,7 +7207,7 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
         <source>Copy track together with all attached waypoints into another project.</source>
-        <translation>Kopiert den Track zusammen mit all verküpften Wegpunkten.</translation>
+        <translation type="unfinished">Kopiert den Track zusammen mit allen verküpften Wegpunkten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>

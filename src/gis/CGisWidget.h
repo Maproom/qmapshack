@@ -349,6 +349,8 @@ public:
 
     void rangeTrkByKey(const IGisItem::key_t &key);
 
+    void copyTrkWithWptByKey(const IGisItem::key_t &key);
+
     void editRteByKey(const IGisItem::key_t& key);
 
     void calcRteByKey(const IGisItem::key_t& key);

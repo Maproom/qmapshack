@@ -150,6 +150,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),    tr("Edit Track Points"      ), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
+    actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
@@ -1432,6 +1433,17 @@ void CGisListWks::slotRangeTrk()
     if(gisItem != nullptr)
     {
         CGisWidget::self().rangeTrkByKey(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotCopyTrkWithWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWidget::self().copyTrkWithWptByKey(gisItem->getKey());
     }
 }
 

@@ -763,6 +763,33 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
     }
 }
 
+void CGisWidget::copyTrkWithWptByKey(const IGisItem::key_t &key)
+{
+    QList<IGisItem::key_t> keys;
+
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    if(nullptr != trk)
+    {
+        keys << key;
+
+        const CGisItemTrk::trk_t& t = trk->getTrackData();
+        for(const CGisItemTrk::trkseg_t& seg : t.segs)
+        {
+            for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+            {
+                if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
+                {
+                    continue;
+                }
+
+                keys << trkpt.keyWpt;
+            }
+        }
+
+        copyItemsByKey(keys);
+    }
+}
+
 void CGisWidget::editRteByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

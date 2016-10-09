@@ -195,7 +195,10 @@ void CActivityTrk::update()
 
                     const desc_t& desc = getDescriptor(lastFlag);
                     activity.name = desc.name;
-                    activity.icon = desc.iconSmall;
+                    if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
+                    {
+                        activity.icon = desc.iconSmall;
+                    }
                 }
 
                 startTrkpt  = &pt;
@@ -226,7 +229,10 @@ void CActivityTrk::update()
 
     const desc_t& desc = getDescriptor(lastFlag);
     activity.name = desc.name;
-    activity.icon = desc.iconSmall;
+    if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
+    {
+        activity.icon = desc.iconSmall;
+    }
 
 
 
@@ -255,7 +261,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
 
     if(flags == 0)
     {
-        const activity_summary_t& s = summary[CGisItemTrk::trkpt_t::eActMaxNum];
+        const activity_summary_t& s = summary[CGisItemTrk::trkpt_t::eActNone];
 
         str += "<table>";
         IUnit::self().meter2distance(s.distance, val, unit);

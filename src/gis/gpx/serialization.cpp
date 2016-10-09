@@ -445,7 +445,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
     gpx.setAttribute("xmlns",        gpx_ns);
 
     QString schemaLocation;
-    if(not strictGpx11)
+    if(!strictGpx11)
     {
         gpx.setAttribute("xmlns:xsi",    xsi_ns);
         gpx.setAttribute("xmlns:gpxx",   gpxx_ns);
@@ -567,7 +567,7 @@ void CGisItemWpt::save(QDomNode& gpx, bool strictGpx11)
     gpx.appendChild(xmlWpt);
     writeWpt(xmlWpt, wpt, strictGpx11);
 
-    if(not strictGpx11)
+    if(!strictGpx11)
     {
         // write the key as extension tag
         QDomElement xmlExt  = doc.createElement("extensions");
@@ -784,7 +784,7 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
     writeXml(xmlTrk, "number", trk.number);
     writeXml(xmlTrk, "type",   trk.type);
 
-    if(not strictGpx11)
+    if(!strictGpx11)
     {
         // write the key as extension tag
         QDomElement xmlExt  = doc.createElement("extensions");
@@ -810,7 +810,7 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
             xmlTrkseg.appendChild(xmlTrkpt);
             writeWpt(xmlTrkpt, pt, strictGpx11);
 
-            if(not strictGpx11)
+            if(!strictGpx11)
             {
                 QDomElement xmlExt  = doc.createElement("extensions");
                 xmlTrkpt.appendChild(xmlExt);
@@ -866,7 +866,7 @@ void CGisItemRte::save(QDomNode& gpx, bool strictGpx11)
     writeXml(xmlRte, "number", rte.number);
     writeXml(xmlRte, "type",   rte.type);
 
-    if(not strictGpx11)
+    if(!strictGpx11)
     {
         // write the key as extension tag
         QDomElement xmlExt  = doc.createElement("extensions");

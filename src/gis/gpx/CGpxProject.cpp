@@ -329,7 +329,7 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
         item->save(gpx, strictGpx11);
     }
 
-    if(not strictGpx11)
+    if(!strictGpx11)
     {
         QDomElement xmlExt = doc.createElement("extensions");
         gpx.appendChild(xmlExt);

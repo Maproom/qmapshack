@@ -66,49 +66,49 @@
         <translation>Vliegtuig</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="262"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="304"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="310"/>
         <source>Distance:</source>
         <translation>Afstand:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="264"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="315"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
         <source>Ascend:</source>
         <translation>Stijging:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="266"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="326"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
         <source>Descend:</source>
         <translation>Daling:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="337"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="343"/>
         <source>Speed Moving:</source>
         <translation>Bewogen snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="276"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="354"/>
         <source>Speed Total:</source>
         <translation>Totale snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="359"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="278"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
         <source>Time Moving:</source>
         <translation>Bewogen tijd:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="280"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="376"/>
         <source>Time Total:</source>
         <translation>Totale tijd:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="410"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="417"/>
         <source>None</source>
         <translation type="unfinished">Geen</translation>
     </message>
@@ -688,7 +688,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Afbeelding%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1052"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1063"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
@@ -1376,17 +1376,17 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="593"/>
+        <location filename="../gis/gpx/serialization.cpp" line="604"/>
         <source>Archived</source>
         <translation>Gearchiveerd</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="597"/>
+        <location filename="../gis/gpx/serialization.cpp" line="608"/>
         <source>Available</source>
         <translation>Beschikbaar</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="601"/>
+        <location filename="../gis/gpx/serialization.cpp" line="612"/>
         <source>Not Available</source>
         <translation>Niet beschikbaar</translation>
     </message>
@@ -1653,7 +1653,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="132"/>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Delete</source>
         <translation>Verwijder</translation>
     </message>
@@ -1704,94 +1704,99 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Combineer tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <source>Copy Track with Waypoints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Show Bubble</source>
         <translation>Toon ballon</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Move Waypoint</source>
         <translation>Verplaats waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Proj. Waypoint...</source>
         <translation>Projecteer waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="172"/>
         <source>Route Instructions</source>
         <translation>Route instructies</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Calculate Route</source>
         <translation>Route berekenen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Reset Route</source>
         <translation>Route omkeren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Edit Route</source>
         <translation>Bewerk route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Convert to Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="185"/>
+        <location filename="../gis/CGisListWks.cpp" line="186"/>
         <source>Edit Area Points</source>
         <translation>Bewerk gebied punten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="192"/>
+        <location filename="../gis/CGisListWks.cpp" line="193"/>
         <source>Create Route</source>
         <translation>Maak route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="621"/>
+        <location filename="../gis/CGisListWks.cpp" line="622"/>
         <source>Drop items...</source>
         <translation>Elementen wissen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="646"/>
-        <location filename="../gis/CGisListWks.cpp" line="1617"/>
-        <location filename="../gis/CGisListWks.cpp" line="1655"/>
+        <location filename="../gis/CGisListWks.cpp" line="647"/>
+        <location filename="../gis/CGisListWks.cpp" line="1629"/>
+        <location filename="../gis/CGisListWks.cpp" line="1667"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Updaten GPS&lt;/b&gt;&lt;p&gt;Updaten %1&lt;br/&gt;Moment geduld...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="772"/>
+        <location filename="../gis/CGisListWks.cpp" line="773"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Werkruimte opslaan. Moment geduld.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="818"/>
+        <location filename="../gis/CGisListWks.cpp" line="819"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Laden werkruimte. Moment geduld.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1152"/>
+        <location filename="../gis/CGisListWks.cpp" line="1153"/>
         <source>Close all projects...</source>
         <translation>Sluit alle projecten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1152"/>
+        <location filename="../gis/CGisListWks.cpp" line="1153"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dit zal alle projecten uit de werkruimte verwijderen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1175"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>Delete project...</source>
         <translation>Project verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1175"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>Do you really want to delete %1?</source>
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
@@ -7404,6 +7409,7 @@ of
         <location filename="../gis/trk/IScrOptTrk.ui" line="137"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -7458,11 +7464,16 @@ of
 </translation>
     </message>
     <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
+        <source>Copy track together with all attached waypoints into another project.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Cut track at selected point into two tracks.</source>
         <translation type="obsolete">Knip track op geselecteerde punt in 2 tracks.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="196"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>

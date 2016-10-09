@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Aeronautik</source>
-        <translation type="vanished">Luftfahrt</translation>
+        <translation>Luftfahrt</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="103"/>
@@ -66,49 +66,49 @@
         <translation>Aeronautik</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="262"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="304"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="310"/>
         <source>Distance:</source>
         <translation>Entfernung:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="264"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="315"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
         <source>Ascend:</source>
         <translation>Anstieg:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="266"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="326"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
         <source>Descend:</source>
         <translation>Abstieg:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="337"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="343"/>
         <source>Speed Moving:</source>
         <translation>Geschwindigkeit in Bewegung:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="276"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="354"/>
         <source>Speed Total:</source>
         <translation>Geschwindigkeit insgesamt:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="359"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="278"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
         <source>Time Moving:</source>
         <translation>Zeit in Bewegung:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="370"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="280"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="376"/>
         <source>Time Total:</source>
         <translation>Zeit insgesamt:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="410"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="417"/>
         <source>None</source>
         <translation>Keine</translation>
     </message>
@@ -171,11 +171,11 @@
     <name>CCreateRouteFromWpt</name>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation>Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
     <message>
         <location filename="../gis/rte/CCreateRouteFromWpt.cpp" line="68"/>
@@ -512,15 +512,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation type="vanished">Entfernung: %1 %2</translation>
+        <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation type="vanished">Anstieg: %1 %2</translation>
+        <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation type="vanished">Abstieg: %1 %2</translation>
+        <translation>Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
@@ -604,7 +604,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Keine</translation>
+        <translation>Keine</translation>
     </message>
 </context>
 <context>
@@ -623,7 +623,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Bild %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1052"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1063"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
@@ -1126,11 +1126,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
@@ -1204,7 +1204,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track</source>
-        <translation type="vanished">Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
+        <translation>Punkte mit ungültigen Koordinaten wurden ausgeblendet.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="141"/>
@@ -1275,17 +1275,17 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="593"/>
+        <location filename="../gis/gpx/serialization.cpp" line="604"/>
         <source>Archived</source>
         <translation>Archiviert</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="597"/>
+        <location filename="../gis/gpx/serialization.cpp" line="608"/>
         <source>Available</source>
         <translation>Verfügbar</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="601"/>
+        <location filename="../gis/gpx/serialization.cpp" line="612"/>
         <source>Not Available</source>
         <translation>Nicht verfügbar</translation>
     </message>
@@ -1450,7 +1450,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Are you sure you want to delete selected folders and all folders below from the database?</source>
-        <translation type="vanished">Sind Sie sicher, dass Sie alle ausgewählten Ordner und alle darunter liegenden löschen wollen?</translation>
+        <translation>Sind Sie sicher, dass Sie alle ausgewählten Ordner und alle darunter liegenden löschen wollen?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="723"/>
@@ -1479,7 +1479,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation type="vanished">Sind Sie sicher, dass Sie &quot;%1&quot; aus der Datenbank löschen wollen? </translation>
+        <translation>Sind Sie sicher, dass Sie &quot;%1&quot; aus der Datenbank löschen wollen? </translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="744"/>
@@ -1507,7 +1507,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="vanished">Speichern unter...</translation>
+        <translation>Speichern unter...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="99"/>
@@ -1556,69 +1556,74 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Speichern als striktes GPX 1.1...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <source>Copy Track with Waypoints</source>
+        <translation>Track mit Wegpunkten kopieren</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Show Bubble</source>
         <translation>Infoblase anzeigen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Move Waypoint</source>
         <translation>Wegpunkt verschieben</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="172"/>
         <source>Route Instructions</source>
         <translation>Navigationsanweisungen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Calculate Route</source>
         <translation>Route berechnen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Reset Route</source>
         <translation>Route zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Edit Route</source>
         <translation>Route bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Convert to Track</source>
         <translation>In einen Track umwandeln</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="192"/>
+        <location filename="../gis/CGisListWks.cpp" line="193"/>
         <source>Create Route</source>
         <translation>Route erstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="621"/>
+        <location filename="../gis/CGisListWks.cpp" line="622"/>
         <source>Drop items...</source>
         <translation>Elemente verwerfen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="646"/>
-        <location filename="../gis/CGisListWks.cpp" line="1617"/>
-        <location filename="../gis/CGisListWks.cpp" line="1655"/>
+        <location filename="../gis/CGisListWks.cpp" line="647"/>
+        <location filename="../gis/CGisListWks.cpp" line="1629"/>
+        <location filename="../gis/CGisListWks.cpp" line="1667"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1175"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1175"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Proj. Waypoint...</source>
         <translation>Wegpunkt Projektion...</translation>
     </message>
@@ -1653,13 +1658,13 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Tracks verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="185"/>
+        <location filename="../gis/CGisListWks.cpp" line="186"/>
         <source>Edit Area Points</source>
         <translation>Gebietspunkte bearbeiten</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="132"/>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -1679,22 +1684,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Mit der Datenbank synchronisieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="772"/>
+        <location filename="../gis/CGisListWks.cpp" line="773"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="818"/>
+        <location filename="../gis/CGisListWks.cpp" line="819"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1152"/>
+        <location filename="../gis/CGisListWks.cpp" line="1153"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1152"/>
+        <location filename="../gis/CGisListWks.cpp" line="1153"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -1914,7 +1919,7 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one.</source>
-        <translation type="vanished">Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
+        <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="557"/>
@@ -2584,7 +2589,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation type="vanished">Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
+        <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -2867,11 +2872,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new area name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für das Gebiet ein.</translation>
+        <translation>Geben Sie einen neuen Namen für das Gebiet ein.</translation>
     </message>
 </context>
 <context>
@@ -2894,11 +2899,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new route name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für die Route ein.</translation>
+        <translation>Geben Sie einen neuen Namen für die Route ein.</translation>
     </message>
 </context>
 <context>
@@ -2931,11 +2936,11 @@ Unbekannte Struktur.</translation>
     </message>
     <message>
         <source>Edit name...</source>
-        <translation type="vanished">Name bearbeiten...</translation>
+        <translation>Name bearbeiten...</translation>
     </message>
     <message>
         <source>Enter new track name.</source>
-        <translation type="vanished">Geben Sie einen neuen Namen für den Track ein.</translation>
+        <translation>Geben Sie einen neuen Namen für den Track ein.</translation>
     </message>
 </context>
 <context>
@@ -4284,7 +4289,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <name>IDB</name>
     <message>
         <source>The internal database format of &apos;%1&apos;&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation type="vanished">Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
+        <translation>Das interne Datenbankformat von &apos;%1&apos; wurde geändert. QMapShack wird ihre Datenbank nun migrieren. Nach der Migration kann die Datenbank mit älteren QMapShack Versionen nicht mehr verwendet werden. Es wird empfohlen, zuerst ein Backup der Datenbank zu erstellen.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
@@ -4329,7 +4334,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>The database version of &apos;%1&apos;&apos; is more advanced as the one understood by your QMapShack installation. This won&apos;t work.</source>
-        <translation type="vanished">Die Datenbankversion von &apos;%1&apos; ist höher als die in ihrer QMapShack Installation benutzte. Dies wird nicht funktionieren.</translation>
+        <translation>Die Datenbankversion von &apos;%1&apos; ist höher als die in ihrer QMapShack Installation benutzte. Dies wird nicht funktionieren.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="91"/>
@@ -4482,7 +4487,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;. </source>
-        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -4685,7 +4690,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Sort by time</source>
-        <translation type="vanished">Sortieren nach Zeit</translation>
+        <translation>Sortieren nach Zeit</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="76"/>
@@ -5207,7 +5212,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation type="vanished">Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
+        <translation>Blendet Punkte mit ungültigen Koordinaten am Anfang vom Track aus.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -6106,7 +6111,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;. </source>
-        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
+        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -7195,11 +7200,17 @@ sein</translation>
         <location filename="../gis/trk/IScrOptTrk.ui" line="137"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="196"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
+        <source>Copy track together with all attached waypoints into another project.</source>
+        <translation>Kopiert den Track zusammen mit all verküpften Wegpunkten.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
@@ -7299,11 +7310,11 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISelectActivity</name>
     <message>
         <source>Activities...</source>
-        <translation type="vanished">Aktivitäten...</translation>
+        <translation>Aktivitäten...</translation>
     </message>
     <message>
         <source>Select one:</source>
-        <translation type="vanished">Wählen Sie eine aus:</translation>
+        <translation>Wählen Sie eine aus:</translation>
     </message>
 </context>
 <context>
@@ -8104,7 +8115,7 @@ sein</translation>
     </message>
     <message>
         <source>All custom icons have to be *.bmp format.</source>
-        <translation type="vanished">Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
+        <translation>Alle individuellen Symbole müssen im *.bmp Format sein.</translation>
     </message>
 </context>
 </TS>

@@ -350,6 +350,11 @@ public:
     void setDescription(const QString& str)     override;
     void setLinks(const QList<link_t>& links)   override;
     void setDataFromPolyline(const SGisLine &l) override;
+    quint32 getNumberOfAttachedWpt()
+    {
+        return numberOfAttachedWpt;
+    }
+
     /**
        @brief Manually set the elevation value of a single track point
        @param idx   the total index of the track point
@@ -928,6 +933,7 @@ private:
     qreal totalDescend  = 0;
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
+    quint32 numberOfAttachedWpt = 0;
     /**@}*/
 
     /**

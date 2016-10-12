@@ -41,6 +41,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     toolEdit->setDisabled(isOnDevice);
     toolReverse->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
+    toolCopyWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
 
     IGisProject * project = trk->getParentProject();
     if(project != nullptr)

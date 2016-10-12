@@ -214,9 +214,9 @@ void IGisProject::setLinks(const QList<IGisItem::link_t>& links)
 
 void IGisProject::setSortingRoadbook(sorting_roadbook_e s)
 {
-    bool changed = (s != sortingRoadbook);
+    changedRoadbookMode = (s != sortingRoadbook);
     sortingRoadbook = s;
-    if(changed)
+    if(changedRoadbookMode)
     {
         setChanged();
     }
@@ -259,9 +259,17 @@ void IGisProject::updateItems()
 
     updateItemCounters();
 
-    if(noCorrelation || (hashTrkWpt[0] == hashTrkWpt[1]) || (getItemCountByType(IGisItem::eTypeTrk) == 0))
+    if(noCorrelation)
     {
         return;
+    }
+
+    if(!changedRoadbookMode)
+    {
+        if((hashTrkWpt[0] == hashTrkWpt[1]) || (getItemCountByType(IGisItem::eTypeTrk) == 0))
+        {
+            return;
+        }
     }
 
 

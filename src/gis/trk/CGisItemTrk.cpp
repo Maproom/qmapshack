@@ -1222,6 +1222,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         pt1.y = qSin(a1 * DEG_TO_RAD) * d;
     }
 
+    numberOfAttachedWpt = 0;
     for(const trkwpt_t &trkwpt : trkwpts)
     {
         qreal minD   = WPT_FOCUS_DIST_IN;
@@ -1245,6 +1246,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
+                    numberOfAttachedWpt++;
                     trkpt->keyWpt = trkwpt.key;
                 }
 
@@ -1265,6 +1267,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
             if(trkpt)
             {
+                numberOfAttachedWpt++;
                 trkpt->keyWpt = trkwpt.key;
             }
         }

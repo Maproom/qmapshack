@@ -162,6 +162,7 @@ void CDetailsPrj::slotSetupGui()
     }
     X_____________UnBlockAllSignals_____________X(this);
 
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "CDetailsPrj::slotSetupGui()");
     // Create a new document, fill it and attach it to the text browser.
     // This is much faster than to use the current one of the text browser.
     // According to the docs, the text browser's current document should be
@@ -182,6 +183,7 @@ void CDetailsPrj::slotSetupGui()
             tabWidget->setTabText(idx, prj.getName().replace("&", "&&"));
         }
     }
+    CCanvas::restoreOverrideCursor("CDetailsPrj::slotSetupGui()");
     mutex.unlock();
 }
 

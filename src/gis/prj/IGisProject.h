@@ -510,6 +510,7 @@ protected:
     bool valid         = false;
     bool noUpdate      = false;
     bool noCorrelation = false;
+    bool changedRoadbookMode = false;
 
     metadata_t metadata;
     QString nameSuffix;

@@ -1054,6 +1054,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             {
             case IGisItem::eTypeTrk:
             {
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
                 IGisProject * project = gisItem->getParentProject();
                 if(project != nullptr)
                 {
@@ -1066,6 +1067,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionRangeTrk->setDisabled(isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
                 actionEditTrk->setDisabled(isOnDevice);
+                actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 menuItemTrk->exec(p);
                 break;

@@ -226,12 +226,15 @@ void IGisProject::setSortingFolder(sorting_folder_e s)
 {
     bool changed = (s != sortingFolder);
     sortingFolder = s;
-
     sortItems();
 
     if(changed)
     {
         setChanged();
+        if(dlgDetails != nullptr)
+        {
+            dlgDetails->updateData();
+        }
     }
 }
 
@@ -271,6 +274,7 @@ void IGisProject::updateItems()
             return;
         }
     }
+    changedRoadbookMode = false;
 
 
     quint32 total   = cntTrkPts * cntWpts;

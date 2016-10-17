@@ -443,11 +443,11 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
     gpx.setAttribute("version","1.1");
     gpx.setAttribute("creator","QMapShack " VER_STR " http://www.qlandkarte.org/");
     gpx.setAttribute("xmlns",        gpx_ns);
+    gpx.setAttribute("xmlns:xsi",    xsi_ns);
 
     QString schemaLocation;
     if(!strictGpx11)
-    {
-        gpx.setAttribute("xmlns:xsi",    xsi_ns);
+    {        
         gpx.setAttribute("xmlns:gpxx",   gpxx_ns);
         gpx.setAttribute("xmlns:gpxtpx", gpxtpx_ns);
         gpx.setAttribute("xmlns:wptx1",  wptx1_ns);

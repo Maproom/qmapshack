@@ -1965,7 +1965,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1062"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.</source>
-        <translation>QMapShack hat eine unvollständig installierte Proj4 Biliothek detektiert. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution um das zu beheben.</translation>
+        <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution um das zu beheben.</translation>
     </message>
 </context>
 <context>
@@ -3453,7 +3453,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="169"/>
         <source>no crossing of country borders</source>
-        <translation>keine Überqueruung von Landesgrenzen</translation>
+        <translation>keine Überquerung von Landesgrenzen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterMapQuest.cpp" line="301"/>
@@ -3637,7 +3637,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="173"/>
         <source>The routing options specified are not consistent with each other.</source>
-        <translation>Die vorgebenen Routingoptionen passen nicht zusammen.</translation>
+        <translation>Die vorgegebenen Routingoptionen passen nicht zusammen.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="176"/>
@@ -4863,7 +4863,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1403"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
-        <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder Sie wählen einen Teil des Track aus und weisen diesem eine Aktivität zu.</translation>
+        <translation>Um Trackstatistiken zu differenzieren, wählen Sie für den gesamten Track eine Aktivität aus der Liste. Oder Sie wählen einen Teil des Tracks aus und weisen diesem eine Aktivität zu.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1430"/>
@@ -5431,7 +5431,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="63"/>
         <source>Creates a new track for every segment within this track.</source>
-        <translation>Für jedes Segment in diesem Track wird eine neuer Track erstellt.</translation>
+        <translation>Für jedes Segment in diesem Track wird ein neuer Track erstellt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="70"/>
@@ -7049,7 +7049,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Convert route to track</source>
-        <translation>Die Route in einen Track umwandlen</translation>
+        <translation>Die Route in einen Track umwandeln</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="174"/>
@@ -7207,7 +7207,7 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
         <source>Copy track together with all attached waypoints into another project.</source>
-        <translation type="unfinished">Kopiert den Track zusammen mit allen verküpften Wegpunkten.</translation>
+        <translation type="unfinished">Kopiert den Track zusammen mit allen verknüpften Wegpunkten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>

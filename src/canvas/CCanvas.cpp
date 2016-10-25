@@ -46,6 +46,7 @@
 
 #include <QtWidgets>
 
+qreal CCanvas::gisLayerOpacity = 1.0;
 
 CCanvas::CCanvas(QWidget *parent, const QString &name)
     : QWidget(parent)
@@ -344,7 +345,9 @@ void CCanvas::paintEvent(QPaintEvent*)
 
     map->draw(p, needsRedraw, posFocus);
     dem->draw(p, needsRedraw, posFocus);
+    p.setOpacity(gisLayerOpacity);
     gis->draw(p, needsRedraw, posFocus);
+    p.setOpacity(1.0);
 
     // restore coordinate system to default
     p.resetTransform();

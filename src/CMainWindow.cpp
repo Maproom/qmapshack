@@ -158,12 +158,15 @@ CMainWindow::CMainWindow()
     cfg.endGroup(); // Views
     testForNoView();
 
-    actionShowScale->setChecked      (cfg.value("isScaleVisible",   true).toBool());
-    actionShowGrid->setChecked       (cfg.value("isGridVisible",   false).toBool());
-    actionPOIText->setChecked        (cfg.value("POIText",          true).toBool());
-    actionMapToolTip->setChecked     (cfg.value("MapToolTip",       true).toBool());
-    actionNightDay->setChecked       (cfg.value("isNight",         false).toBool());
-    actionFlipMouseWheel->setChecked (cfg.value("flipMouseWheel",  false).toBool());
+    CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity",1.0).toFloat();
+    gisWidget->setOpacity(CCanvas::gisLayerOpacity);
+
+    actionShowScale->setChecked(cfg.value("isScaleVisible",   true).toBool());
+    actionShowGrid->setChecked(cfg.value("isGridVisible",   false).toBool());
+    actionPOIText->setChecked(cfg.value("POIText",          true).toBool());
+    actionMapToolTip->setChecked(cfg.value("MapToolTip",       true).toBool());
+    actionNightDay->setChecked(cfg.value("isNight",         false).toBool());
+    actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel",  false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
@@ -255,6 +258,7 @@ CMainWindow::~CMainWindow()
     }
     cfg.endGroup(); // Views
 
+    cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
     cfg.setValue("visibleCanvas", tabWidget->currentIndex());
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());

@@ -60,6 +60,7 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
     connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
+    connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
 
     slotHelpText();
 
@@ -80,6 +81,10 @@ CGisWidget::~CGisWidget()
     delete treeWks;
 }
 
+void CGisWidget::setOpacity(qreal val)
+{
+    sliderOpacity->setValue(val * 100);
+}
 void CGisWidget::postEventForWks(QEvent * event)
 {
     QCoreApplication::postEvent(treeWks, event);
@@ -146,6 +151,16 @@ void CGisWidget::loadGisProject(const QString& filename)
 void CGisWidget::slotHelpText()
 {
     frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
+}
+
+void CGisWidget::slotSetGisLayerOpacity(int val)
+{
+    CCanvas::gisLayerOpacity = qreal(val)/100;
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas != nullptr)
+    {
+        canvas->update();
+    }
 }
 
 void CGisWidget::slotSaveAll()

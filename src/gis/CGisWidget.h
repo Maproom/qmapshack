@@ -374,6 +374,7 @@ public:
     void postEventForWks(QEvent * event);
     void postEventForDb(QEvent * event);
 
+    void setOpacity(qreal val);
 
 signals:
     void sigChanged();
@@ -383,6 +384,7 @@ public slots:
 
 private slots:
     void slotHelpText();
+    void slotSetGisLayerOpacity(int val);
 
 
 private:

@@ -143,6 +143,7 @@ public:
 
     void print(QPainter &p, const QRectF& area, const QPointF &focus);
 
+    static qreal gisLayerOpacity;
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele);
     void sigZoom();

@@ -20,6 +20,7 @@
 #define CSELECTPROJECTDIALOG_H
 
 #include "ui_ISelectProjectDialog.h"
+#include "gis/prj/IGisProject.h"
 #include <QDialog>
 
 class QTreeWidget;
@@ -28,15 +29,7 @@ class CSelectProjectDialog : public QDialog, private Ui::ISelectProjectDialog
 {
     Q_OBJECT
 public:
-    enum type_e
-    {
-        eTypeNone
-        ,eTypeQms
-        ,eTypeGpx
-        ,eTypeDb
-    };
-
-    CSelectProjectDialog(QString& key, QString& name, type_e& type, QTreeWidget *parent);
+    CSelectProjectDialog(QString& key, QString& name, IGisProject::type_e& type, QTreeWidget *parent);
     virtual ~CSelectProjectDialog();
 
 public slots:
@@ -51,10 +44,12 @@ private slots:
     void slotTypeChanged();
 
 private:
+    void setType(IGisProject::type_e& t);
+
     static QString lastkey;
     QString& key;
     QString& name;
-    type_e& type;
+    IGisProject::type_e& type;
 };
 
 #endif //CSELECTPROJECTDIALOG_H

@@ -1522,23 +1522,23 @@ void CGisListWks::slotAddEmptyProject()
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     QString key, name;
-    CSelectProjectDialog::type_e type;
+    IGisProject::type_e type;
     CSelectProjectDialog dlg(key, name, type, nullptr);
     dlg.exec();
-    if(name.isEmpty() && (type != CSelectProjectDialog::eTypeDb))
+    if(name.isEmpty() && (type != IGisProject::eTypeDb))
     {
         return;
     }
 
-    if(type == CSelectProjectDialog::eTypeGpx)
+    if(type == IGisProject::eTypeGpx)
     {
         new CGpxProject(name, this);
     }
-    else if(type == CSelectProjectDialog::eTypeQms)
+    else if(type == IGisProject::eTypeQms)
     {
         new CQmsProject(name, this);
     }
-    else if(type == CSelectProjectDialog::eTypeDb)
+    else if(type == IGisProject::eTypeDb)
     {
         quint64 idParent;
         QString db;

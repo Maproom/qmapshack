@@ -447,7 +447,7 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
 
     QString schemaLocation;
     if(!strictGpx11)
-    {        
+    {
         gpx.setAttribute("xmlns:gpxx",   gpxx_ns);
         gpx.setAttribute("xmlns:gpxtpx", gpxtpx_ns);
         gpx.setAttribute("xmlns:wptx1",  wptx1_ns);

@@ -116,12 +116,12 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="59"/>
+        <location filename="../canvas/CCanvas.cpp" line="60"/>
         <source>View %1</source>
         <translation>Venster %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="670"/>
+        <location filename="../canvas/CCanvas.cpp" line="673"/>
         <source>Setup Map Background</source>
         <translation type="unfinished"></translation>
     </message>
@@ -446,76 +446,76 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Correlatie...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="265"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="775"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
         <source>none</source>
         <translation>geen</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="338"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="340"/>
         <source>Build diary...</source>
         <translation>Dagboek maken...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="393"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="395"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Overzicht van alle tracks in project&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="435"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="437"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Waypoints&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="442"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="468"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="470"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="594"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="712"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="443"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="469"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="593"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="711"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="741"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="445"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="471"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="743"/>
         <source>Comment</source>
         <translation>Notitie</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="461"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="463"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
         <source>From Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
         <source>To Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
         <source>To End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="614"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="616"/>
         <source>distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="624"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="626"/>
         <source>ascent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="634"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
         <source>descend: </source>
         <translation type="unfinished"></translation>
     </message>
@@ -532,39 +532,39 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">daling: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="703"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="705"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Gebieden&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="733"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="735"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="788"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="763"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="790"/>
         <source>Edit name...</source>
         <translation>Bewerk naam...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="761"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="788"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="763"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="790"/>
         <source>Enter new project name.</source>
         <translation>Geef  project een nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="772"/>
         <source>Edit keywords...</source>
         <translation>Bewerkt sleutelwoorden...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="770"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="772"/>
         <source>Enter keywords.</source>
         <translation>Geef sleutelwoorden.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="916"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="918"/>
         <source>Print Diary</source>
         <translation>Dagboek afdrukken</translation>
     </message>
@@ -1122,21 +1122,21 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Stijging: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1345"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1358"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1418"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1462"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1627"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1348"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1361"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1421"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1465"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1630"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1563"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1566"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1567"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1570"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1250,7 +1250,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1411"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Permanent verwijderde punten %1..%2</translation>
     </message>
@@ -1259,42 +1259,42 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="obsolete">Verberg punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1607"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1610"/>
         <source>Show points.</source>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2154"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2157"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2160"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2163"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2166"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2169"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2172"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2183"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2186"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2212"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2215"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2262"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2265"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -1765,8 +1765,8 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="647"/>
-        <location filename="../gis/CGisListWks.cpp" line="1629"/>
-        <location filename="../gis/CGisListWks.cpp" line="1667"/>
+        <location filename="../gis/CGisListWks.cpp" line="1631"/>
+        <location filename="../gis/CGisListWks.cpp" line="1669"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Updaten GPS&lt;/b&gt;&lt;p&gt;Updaten %1&lt;br/&gt;Moment geduld...&lt;/p&gt;</translation>
     </message>
@@ -1781,22 +1781,22 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Laden werkruimte. Moment geduld.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1153"/>
+        <location filename="../gis/CGisListWks.cpp" line="1155"/>
         <source>Close all projects...</source>
         <translation>Sluit alle projecten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1153"/>
+        <location filename="../gis/CGisListWks.cpp" line="1155"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dit zal alle projecten uit de werkruimte verwijderen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1176"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>Delete project...</source>
         <translation>Project verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1176"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>Do you really want to delete %1?</source>
         <translation>Moet %1 werkelijk verwijderd worden?</translation>
     </message>
@@ -1808,27 +1808,27 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="134"/>
+        <location filename="../gis/CGisWidget.cpp" line="139"/>
         <source>Load project...</source>
         <translation>Project laden...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="134"/>
+        <location filename="../gis/CGisWidget.cpp" line="139"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Het project &quot;%1&quot; is al geopend.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="529"/>
+        <location filename="../gis/CGisWidget.cpp" line="544"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopieer elementen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="657"/>
+        <location filename="../gis/CGisWidget.cpp" line="672"/>
         <source>Cut Track...</source>
         <translation>Track knippen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="657"/>
+        <location filename="../gis/CGisWidget.cpp" line="672"/>
         <source>Do you want to delete the original track?</source>
         <translation>Moet de orginele track verwijderd worden?</translation>
     </message>
@@ -2058,48 +2058,48 @@ lijn %2, kolom %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="557"/>
+        <location filename="../CMainWindow.cpp" line="561"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="685"/>
+        <location filename="../CMainWindow.cpp" line="689"/>
         <source>Ele: %1%2</source>
         <translation>Hoogte: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="701"/>
+        <location filename="../CMainWindow.cpp" line="705"/>
         <source>[Grid: %1]</source>
         <translation>[Raster: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="836"/>
+        <location filename="../CMainWindow.cpp" line="840"/>
         <source>Load GIS Data...</source>
         <translation>GIS gegevens laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="870"/>
+        <location filename="../CMainWindow.cpp" line="874"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="870"/>
-        <location filename="../CMainWindow.cpp" line="896"/>
+        <location filename="../CMainWindow.cpp" line="874"/>
+        <location filename="../CMainWindow.cpp" line="900"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="896"/>
+        <location filename="../CMainWindow.cpp" line="900"/>
         <source>Select file to load</source>
         <translation>Selecteer bestand</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1061"/>
+        <location filename="../CMainWindow.cpp" line="1065"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1062"/>
+        <location filename="../CMainWindow.cpp" line="1066"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5799,60 +5799,60 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Het project is veranderd. Voor het sluiten opslaan?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="271"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="283"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Correlatie van tracks en waypointen.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="281"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="293"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Duurde dit te lang? Moet de correlatie van tracks en waypointen in dit project in de toekomst overgeslagen worden?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="282"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="294"/>
         <source>Canceled correlation...</source>
         <translation>Correlatie geanuleerd...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="327"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="380"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="339"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="392"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Opslaan &quot;%1&quot; als...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="465"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="477"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Bestandsnaam: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="470"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
         <source>Waypoints: %1</source>
         <translation>Waypoints: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="474"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="486"/>
         <source>Tracks: %1</source>
         <translation>Tracks: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="478"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="490"/>
         <source>Routes: %1</source>
         <translation>Routes: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="494"/>
         <source>Areas: %1</source>
         <translation>Gebieden: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="602"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="614"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Moet &apos;%1&apos; werkelijk verwijderd worden uit project &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="603"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="615"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -5865,18 +5865,28 @@ Bestandsnaam: %1</translation>
         <translation>Formulier</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="69"/>
-        <location filename="../gis/IGisWidget.ui" line="99"/>
+        <location filename="../gis/IGisWidget.ui" line="37"/>
+        <source>Opacity</source>
+        <translation type="unfinished">Transparantie</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="44"/>
+        <source>Change the opacity of all GIS Items on the map.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="93"/>
+        <location filename="../gis/IGisWidget.ui" line="123"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="104"/>
+        <location filename="../gis/IGisWidget.ui" line="128"/>
         <source>Age</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="138"/>
+        <location filename="../gis/IGisWidget.ui" line="162"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Om nieuwe database te maken doe een rechterklik op database erboven.</translation>
     </message>

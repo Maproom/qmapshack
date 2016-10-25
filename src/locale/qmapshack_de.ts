@@ -6044,7 +6044,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="516"/>
         <source>Save all projects in the workspace</source>
-        <translation>Alle Projekte die sich auf dem Arbeitsplatz befinden, speichern</translation>
+        <translation>Alle Projekte, die sich auf dem Arbeitsplatz befinden, speichern</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="519"/>

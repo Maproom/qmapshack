@@ -175,7 +175,7 @@ void CGisWidget::slotSaveAll()
 IGisProject * CGisWidget::selectProject()
 {
     QString key, name;
-    CSelectProjectDialog::type_e type;
+    IGisProject::type_e type = IGisProject::eTypeQms;
 
     CSelectProjectDialog dlg(key, name, type, treeWks);
     dlg.exec();
@@ -197,7 +197,7 @@ IGisProject * CGisWidget::selectProject()
             }
         }
     }
-    else if(type == CSelectProjectDialog::eTypeDb)
+    else if(type == IGisProject::eTypeDb)
     {
         quint64 idParent;
         QString db;
@@ -239,11 +239,11 @@ IGisProject * CGisWidget::selectProject()
     else if(!name.isEmpty())
     {
         QMutexLocker lock(&IGisItem::mutexItems);
-        if(type == CSelectProjectDialog::eTypeGpx)
+        if(type == IGisProject::eTypeGpx)
         {
             project = new CGpxProject(name, treeWks);
         }
-        else if (type == CSelectProjectDialog::eTypeQms)
+        else if (type == IGisProject::eTypeQms)
         {
             project = new CQmsProject(name, treeWks);
         }

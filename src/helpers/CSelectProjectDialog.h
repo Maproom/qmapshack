@@ -19,8 +19,8 @@
 #ifndef CSELECTPROJECTDIALOG_H
 #define CSELECTPROJECTDIALOG_H
 
-#include "ui_ISelectProjectDialog.h"
 #include "gis/prj/IGisProject.h"
+#include "ui_ISelectProjectDialog.h"
 #include <QDialog>
 
 class QTreeWidget;

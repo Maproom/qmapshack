@@ -40,6 +40,9 @@
      </item>
      <item>
       <widget class="QSlider" name="sliderOpacity">
+       <property name="toolTip">
+        <string>Change the opacity of all GIS Items on the map.</string>
+       </property>
        <property name="maximum">
         <number>100</number>
        </property>

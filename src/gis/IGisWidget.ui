@@ -46,6 +46,9 @@
        <property name="maximum">
         <number>100</number>
        </property>
+       <property name="singleStep">
+        <number>10</number>
+       </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>

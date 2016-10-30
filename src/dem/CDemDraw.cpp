@@ -292,7 +292,8 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 
     for(int i = 0; i < pos.size(); i++)
     {
-        ele[i].ry() = getElevationAt(pos[i]) * basefactor;
+        qreal tmp = getElevationAt(pos[i]);
+        ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp * basefactor;
     }
 }
 

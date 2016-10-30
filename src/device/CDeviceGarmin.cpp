@@ -27,13 +27,13 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, QTreeWidget *parent)
+CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QString &model, const QString& garminDeviceXml, QTreeWidget *parent)
     : IDevice(path, eTypeGarmin, key, parent)
     , cntImages(0)
 {
     setText(CGisListWks::eColumnName, "Garmin");
 
-    QFile file(dir.absoluteFilePath("Garmin/GarminDevice.xml"));
+    QFile file(garminDeviceXml);
     file.open(QIODevice::ReadOnly);
 
     QDomDocument dom;

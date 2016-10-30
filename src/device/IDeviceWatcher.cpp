@@ -52,7 +52,12 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
     {
         if(dir.exists("Garmin/GarminDevice.xml"))
         {
-            new CDeviceGarmin(mountPoint, path, label, listWks);
+            new CDeviceGarmin(mountPoint, path, label, "Garmin/GarminDevice.xml", listWks);
+            emit sigChanged();
+        }
+        else if(dir.exists("GARMIN/GarminDevice.xml"))
+        {
+            new CDeviceGarmin(mountPoint, path, label, "GARMIN/GarminDevice.xml", listWks);
             emit sigChanged();
         }
     }

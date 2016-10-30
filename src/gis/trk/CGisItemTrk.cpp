@@ -942,7 +942,7 @@ void CGisItemTrk::deriveSecondaryData()
     trkpt_t * lastValid     = nullptr;
     trkpt_t * lastTrkpt     = nullptr;
     qreal timestampStart    = NOFLOAT;
-    qreal lastEle           = NOFLOAT;
+    qint32 lastEle          = NOINT;
 
 
     // linear list of pointers to visible track points
@@ -984,9 +984,9 @@ void CGisItemTrk::deriveSecondaryData()
                 trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
 
                 // ascend descend
-                if(lastEle != NOFLOAT)
+                if(lastEle != NOINT)
                 {
-                    qreal delta   = trkpt.ele - lastEle;
+                    qint32 delta  = trkpt.ele - lastEle;
 
                     trkpt.ascend  = lastTrkpt->ascend;
                     trkpt.descend = lastTrkpt->descend;
@@ -1888,14 +1888,12 @@ qreal CGisItemTrk::getMax(const QString& source) const
 
 qreal CGisItemTrk::getMinProp(const QString& source) const
 {
-    return propHandler == nullptr ? NOFLOAT
-           : propHandler->propBySource(source).min;
+    return propHandler == nullptr ? NOFLOAT : propHandler->propBySource(source).min;
 }
 
 qreal CGisItemTrk::getMaxProp(const QString& source) const
 {
-    return propHandler == nullptr ? NOFLOAT
-           : propHandler->propBySource(source).max;
+    return propHandler == nullptr ? NOFLOAT : propHandler->propBySource(source).max;
 }
 
 QString CGisItemTrk::getUnitProp(const QString& source) const

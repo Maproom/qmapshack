@@ -167,7 +167,7 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
         return NOFLOAT;
     }
 
-    if(hasNoData && e[0] == noData)
+    if(hasNoData && ((e[0] == noData)||(e[1] == noData)||(e[2] == noData)||(e[3] == noData)))
     {
         return NOFLOAT;
     }

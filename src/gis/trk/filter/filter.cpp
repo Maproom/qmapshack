@@ -268,8 +268,8 @@ void CGisItemTrk::filterReplaceElevation()
         for(int n = 0; n < seg.pts.size(); n++)
         {
             trkpt_t& pt = seg.pts[n];
-
-            pt.ele = ele[cnt++].y();
+            pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
+            cnt++;
         }
     }
 

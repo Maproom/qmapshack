@@ -33,11 +33,22 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 {
     setText(CGisListWks::eColumnName, "Garmin");
 
-    QFile file(garminDeviceXml);
-    file.open(QIODevice::ReadOnly);
+
+    QFile file(QDir(path).absoluteFilePath(garminDeviceXml));
+    if(!file.open(QIODevice::ReadOnly))
+    {
+        qDebug() << "failed to open" << dir.absoluteFilePath(garminDeviceXml);
+    }
 
     QDomDocument dom;
-    dom.setContent(&file);
+    QString msg;
+    int line;
+    int column;
+    if(!dom.setContent(&file, false, &msg, &line, &column))
+    {
+        qDebug() << QString("Failed to read: %1\nline %2, column %3:\n %4").arg(file.fileName()).arg(line).arg(column).arg(msg);
+    }
+
     file.close();
 
     const QDomElement& xmlDevice    = dom.documentElement();

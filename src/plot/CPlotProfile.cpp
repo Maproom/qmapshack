@@ -22,7 +22,8 @@
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
-
+#include <ap.h>
+#include <interpolation.h>
 
 #include <proj_api.h>
 
@@ -59,6 +60,7 @@ void CPlotProfile::setTrack(CGisItemTrk * track, CLimit &lim)
     updateData();
 }
 
+#define Q 32
 void CPlotProfile::updateData()
 {
     clear();
@@ -83,6 +85,11 @@ void CPlotProfile::updateData()
     QPolygonF lineDem;
     QPolygonF coords;
 
+    const qint32 N = trk->getNumberOfVisiblePoints();
+    alglib::real_1d_array X,Y;
+    X.setlength(N);
+    Y.setlength(N);
+
     IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal basefactor = IUnit::self().basefactor;
@@ -100,6 +107,9 @@ void CPlotProfile::updateData()
             {
                 continue;
             }
+
+            X[trkpt.idxVisible] = trkpt.distance;
+            Y[trkpt.idxVisible] = trkpt.ele * basefactor;
 
             lineEle << QPointF(trkpt.distance, trkpt.ele * basefactor);
             coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
@@ -124,11 +134,29 @@ void CPlotProfile::updateData()
 
     CMainWindow::self().getElevationAt(coords, lineDem);
 
+    alglib::ae_int_t info;
+    alglib::ae_int_t m = N/Q;
+    alglib::spline1dinterpolant p;
+    alglib::spline1dfitreport rep;
+
+    alglib::spline1dfitcubic(X,Y,m, info, p, rep);
+
+    QPolygonF spline;
+    const qreal maxDist = trk->getTotalDistance();
+    const qreal deltaDist = maxDist / (N);
+    qreal dist = 0;
+    while(dist < maxDist)
+    {
+        spline << QPointF(dist, alglib::spline1dcalc(p, dist));
+        dist += deltaDist;
+    }
+
     newLine(lineEle, "GPS");
     if(!lineDem.isEmpty())
     {
         addLine(lineDem, "DEM");
     }
+    addLine(spline,"spline");
     setLimits();
     resetZoom();
 }

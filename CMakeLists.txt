@@ -66,8 +66,12 @@ include(CPackConfig.cmake)
 include(ConfigureChecks.cmake)
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 
-
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
+
+set(ALG_DEV_PATH ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/alglib/src)
+set(ALG_LIBRARIES alg)
+
+add_subdirectory(3rdparty/alglib)
 add_subdirectory(src)
 if(UNIX AND NOT APPLE)
   add_subdirectory(test/unittest)

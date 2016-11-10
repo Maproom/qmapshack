@@ -63,7 +63,6 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
             new CDeviceGarmin(mountPoint, path, label, "GARMIN/GarminDevice.xml", listWks);
             emit sigChanged();
         }
-
     }
     else if(entries.contains("TwoNavData"))
     {

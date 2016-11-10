@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "gis/trk/filter/CFilterInterpolateElevation.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterInterpolateElevation.h"
 
 CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -32,7 +32,6 @@ CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidg
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterInterpolateElevation::slotApply);
     connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
-
 }
 
 

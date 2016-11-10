@@ -19,8 +19,8 @@
 #ifndef CFILTERINTERPOLATEELEVATION_H
 #define CFILTERINTERPOLATEELEVATION_H
 
-#include <QWidget>
 #include "ui_IFilterInterpolateElevation.h"
+#include <QWidget>
 
 class CGisItemTrk;
 

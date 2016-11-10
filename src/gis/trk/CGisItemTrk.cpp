@@ -2685,7 +2685,7 @@ void CGisItemTrk::setupInterpolation(bool on)
         }
     }
 
-    interp.m = N < 400 ? N/4 : 300;
+    interp.m = N < 400 ? N/2 : 300;
     alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);
 
     interp.valid = interp.info > 0;
@@ -2693,7 +2693,7 @@ void CGisItemTrk::setupInterpolation(bool on)
     updateVisuals(eVisualPlot, "setupInterpolation()");
 }
 
-qreal CGisItemTrk::getElevationInterpolated(qreal d)
+qreal CGisItemTrk::getElevationInterpolated(qreal d) const
 {
     return alglib::spline1dcalc(interp.p, d);
 }

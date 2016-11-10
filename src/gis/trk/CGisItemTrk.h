@@ -29,6 +29,7 @@
 #include <QPen>
 #include <QPointer>
 #include <functional>
+#include <interpolation.h>
 
 class QDomNode;
 class IGisProject;
@@ -574,6 +575,7 @@ public:
     void filterSpeed(qreal speed);
 
     void filterReplaceElevation();
+    void filterInterpolateElevation();
     void filterReset();
     void filterDelete();
     void filterSplitSegment();
@@ -1042,6 +1044,33 @@ private:
 
     /// all functions and data concerning graphs
     CPropertyTrk * propHandler = nullptr;
+
+    /**
+        \defgroup Data and API related to track interpolation
+     */
+    /**@{*/
+public:
+    void setupInterpolation(bool on);
+    bool isInterpolationEnabled() const
+    {
+        return interp.valid;
+    }
+    qreal getElevationInterpolated(qreal d);
+
+private:
+    struct interpolate_t
+    {
+        bool valid = false;
+        alglib::ae_int_t info = -1;
+        alglib::ae_int_t m = 0;
+        alglib::spline1dinterpolant p;
+        alglib::spline1dfitreport rep;
+    };
+
+    interpolate_t interp;
+
+    /**@}*/
+
 };
 
 class INotifyTrk

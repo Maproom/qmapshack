@@ -307,6 +307,10 @@ void CDetailsTrk::setupStyleLimits(CLimit& limit, QToolButton *toolLimitAuto, QT
 void CDetailsTrk::loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault)
 {
     const CPropertyTrk * p = trk.getPropertyHandler();
+    if(p == nullptr)
+    {
+        return;
+    }
 
     comboBox->blockSignals(true);
     p->fillComboBox(comboBox);

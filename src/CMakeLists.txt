@@ -716,7 +716,7 @@ include_directories(
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
-    ${ALG_DEV_PATH}
+    ${ALGLIB_INCLUDE_DIRS}
 
 )
 
@@ -745,7 +745,7 @@ target_link_libraries(QMS
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
-    ${ALG_LIBRARIES}
+    ${ALGLIB_LIBRARIES}
 )
 
 target_link_libraries(${APPLICATION_NAME}
@@ -760,7 +760,7 @@ target_link_libraries(${APPLICATION_NAME}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
-    ${ALG_LIBRARIES}
+    ${ALGLIB_LIBRARIES}
 )
 
 if(APPLE)

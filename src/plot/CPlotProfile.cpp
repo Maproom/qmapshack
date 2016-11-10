@@ -22,7 +22,6 @@
 #include "plot/CPlotAxis.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
-#include <ap.h>
 #include <interpolation.h>
 
 #include <proj_api.h>

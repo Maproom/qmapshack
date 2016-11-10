@@ -1055,7 +1055,7 @@ public:
     {
         return interp.valid;
     }
-    qreal getElevationInterpolated(qreal d);
+    qreal getElevationInterpolated(qreal d) const;
 
 private:
     struct interpolate_t
@@ -1070,7 +1070,6 @@ private:
     interpolate_t interp;
 
     /**@}*/
-
 };
 
 class INotifyTrk

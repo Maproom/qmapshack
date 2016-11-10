@@ -558,47 +558,47 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="166"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="167"/>
         <source>Reduce visible track points</source>
         <translation>Sichtbare Trackpunkte reduzieren</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="169"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="170"/>
         <source>Change elevation of track points</source>
         <translation>Höhe von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="173"/>
         <source>Change timestamp of track points</source>
         <translation>Zeitstempel von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="176"/>
         <source>Modify track points&apos; extensions</source>
         <translation>Erweiterung von Trackpunkten ändern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="179"/>
         <source>Cut track into pieces</source>
         <translation>Track in Stücke teilen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="399"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="400"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="400"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="401"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="629"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="630"/>
         <source>Reset activities...</source>
         <translation>Aktivitäten zurücksetzen...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="629"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="630"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Dies wird alle Aktivitäten vom Track entfernen. Fortfahren?</translation>
     </message>
@@ -618,7 +618,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CDeviceGarmin</name>
     <message>
-        <location filename="../device/CDeviceGarmin.cpp" line="254"/>
+        <location filename="../device/CDeviceGarmin.cpp" line="265"/>
         <source>Picture%1</source>
         <translation>Bild %1</translation>
     </message>
@@ -1060,21 +1060,21 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1348"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1361"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1421"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1465"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1630"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1350"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1363"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1423"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1467"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1632"/>
         <source>track</source>
         <translation>Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1566"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
         <source>Hide point %1.</source>
         <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1570"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1572"/>
         <source>Hide points %1..%2.</source>
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
@@ -1153,12 +1153,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1411"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1413"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1610"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1612"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
@@ -1232,37 +1232,42 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="300"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="296"/>
+        <source>Replaced elevation data with interpolated values.</source>
+        <translation>Höhendaten durch interpolierte Daten ersetzen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="319"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Versatz der Höhendaten um %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="319"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="338"/>
         <source>Changed start of track to %1.</source>
         <translation>Trackanfang auf %1 verschoben.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="338"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="357"/>
         <source>Remove timestamps.</source>
         <translation>Zeitstempel entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="361"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="380"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="393"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="412"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1 %2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="412"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="431"/>
         <source>%1 (Segment %2)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="435"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="454"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
@@ -3054,12 +3059,12 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CPlotProfile</name>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="78"/>
+        <location filename="../plot/CPlotProfile.cpp" line="79"/>
         <source>distance [%1]</source>
         <translation>Entfernung [%1]</translation>
     </message>
     <message>
-        <location filename="../plot/CPlotProfile.cpp" line="79"/>
+        <location filename="../plot/CPlotProfile.cpp" line="80"/>
         <source>alt. [%1]</source>
         <translation>Höhe [%1]</translation>
     </message>
@@ -5194,6 +5199,34 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
 </context>
 <context>
+    <name>IFilterInterpolateElevation</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="51"/>
+        <source>&lt;b&gt;Interpolate Elevation Data&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Höhendaten interpolieren&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="69"/>
+        <source>Replace elevation of track points with interpolated data</source>
+        <translation>Die Höhe eines Trackpunktes durch einen interpolierten Wert ersetzen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="95"/>
+        <source>Preview</source>
+        <translation>Vorschau</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="102"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>IFilterInvalid</name>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="14"/>
@@ -5628,18 +5661,18 @@ Dateiname: %1</translation>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="93"/>
-        <location filename="../gis/IGisWidget.ui" line="123"/>
+        <location filename="../gis/IGisWidget.ui" line="96"/>
+        <location filename="../gis/IGisWidget.ui" line="126"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="128"/>
+        <location filename="../gis/IGisWidget.ui" line="131"/>
         <source>Age</source>
         <translation>Alter</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="162"/>
+        <location filename="../gis/IGisWidget.ui" line="165"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
     </message>
@@ -7221,7 +7254,7 @@ sein</translation>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
         <source>Copy track together with all attached waypoints into another project.</source>
-        <translation type="unfinished">Kopiert den Track zusammen mit allen verknüpften Wegpunkten.</translation>
+        <translation>Kopiert den Track zusammen mit allen verknüpften Wegpunkten.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>

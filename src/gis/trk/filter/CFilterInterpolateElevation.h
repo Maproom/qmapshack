@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,22 +16,28 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/trk/CGisItemTrk.h"
-#include "gis/trk/filter/CFilterReplaceElevation.h"
+#ifndef CFILTERINTERPOLATEELEVATION_H
+#define CFILTERINTERPOLATEELEVATION_H
 
-CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *parent)
-    : QWidget(parent)
-    , trk(trk)
+#include <QWidget>
+#include "ui_IFilterInterpolateElevation.h"
+
+class CGisItemTrk;
+
+class CFilterInterpolateElevation : public QWidget, private Ui::IFilterInterpolateElevation
 {
-    setupUi(this);
+    Q_OBJECT
+public:
+    CFilterInterpolateElevation(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterInterpolateElevation() = default;
 
-    connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
-}
+private slots:
+    void slotApply();
+    void slotPreview(bool yes);
 
-void CFilterReplaceElevation::slotApply()
-{
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReplaceElevation");
-    trk.filterReplaceElevation();
-    CCanvas::restoreOverrideCursor("CFilterReplaceElevation");
-}
+private:
+    CGisItemTrk& trk;
+};
+
+#endif //CFILTERINTERPOLATEELEVATION_H
+

@@ -28,6 +28,7 @@
 #include "gis/trk/filter/CFilterObscureDate.h"
 #include "gis/trk/filter/CFilterOffsetElevation.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
+#include "gis/trk/filter/CFilterInterpolateElevation.h"
 #include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
@@ -165,7 +166,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
         (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png");
 
-    addFilterGroup<CFilterMedian, CFilterReplaceElevation, CFilterOffsetElevation>
+    addFilterGroup<CFilterMedian, CFilterInterpolateElevation, CFilterReplaceElevation, CFilterOffsetElevation>
         (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png");
 
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>

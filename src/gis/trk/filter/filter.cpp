@@ -277,6 +277,25 @@ void CGisItemTrk::filterReplaceElevation()
     changed(tr("Replaced elevation data with data from DEM files."), "://icons/48x48/SetEle.png");
 }
 
+void CGisItemTrk::filterInterpolateElevation()
+{
+    if(!interp.valid)
+    {
+        return;
+    }
+
+    for(trkseg_t& seg : trk.segs)
+    {
+        for(trkpt_t& pt : seg.pts)
+        {
+            pt.ele = getElevationInterpolated(pt.distance);
+        }
+    }
+
+    deriveSecondaryData();
+    changed(tr("Replaced elevation data with interpolated values."), "://icons/48x48/SetEle.png");
+}
+
 void CGisItemTrk::filterOffsetElevation(int offset)
 {
     for(int i = 0; i < trk.segs.size(); i++)

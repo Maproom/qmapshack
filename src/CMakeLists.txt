@@ -214,6 +214,7 @@ set( SRCS
         gis/trk/filter/CFilterDeleteExtension.cpp
         gis/trk/filter/CFilterMedian.cpp
         gis/trk/filter/CFilterReplaceElevation.cpp
+        gis/trk/filter/CFilterInterpolateElevation.cpp
         gis/trk/filter/CFilterOffsetElevation.cpp
         gis/trk/filter/CFilterNewDate.cpp
         gis/trk/filter/CFilterObscureDate.cpp
@@ -472,6 +473,7 @@ set( HDRS
         gis/trk/filter/CFilterDeleteExtension.h
         gis/trk/filter/CFilterMedian.h
         gis/trk/filter/CFilterReplaceElevation.h
+        gis/trk/filter/CFilterInterpolateElevation.h
         gis/trk/filter/CFilterOffsetElevation.h
         gis/trk/filter/CFilterNewDate.h
         gis/trk/filter/CFilterObscureDate.h
@@ -629,6 +631,7 @@ set( UIS
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterMedian.ui
     gis/trk/filter/IFilterReplaceElevation.ui
+    gis/trk/filter/IFilterInterpolateElevation.ui
     gis/trk/filter/IFilterOffsetElevation.ui
     gis/trk/filter/IFilterNewDate.ui
     gis/trk/filter/IFilterObscureDate.ui

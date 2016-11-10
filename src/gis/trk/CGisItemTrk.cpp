@@ -1123,6 +1123,8 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
+    setupInterpolation(interp.valid);
+
     updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
 //    qDebug() << "--------------" << getName() << "------------------";
@@ -2646,4 +2648,52 @@ void CGisItemTrk::setMouseClickFocusVisuals(const trkpt_t * pt)
     {
         visual->setMouseClickFocus(pt);
     }
+}
+
+void CGisItemTrk::setupInterpolation(bool on)
+{
+    interp.valid = on;
+
+    if(on == false)
+    {
+        updateVisuals(eVisualPlot, "setupInterpolation()");
+        return;
+    }
+
+    const qint32 N = getNumberOfVisiblePoints();
+    alglib::real_1d_array x,y;
+    x.setlength(N);
+    y.setlength(N);
+
+    qreal basefactor = IUnit::self().basefactor;
+    for(const CGisItemTrk::trkseg_t& seg : trk.segs)
+    {
+        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        {
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+            {
+                continue;
+            }
+
+            if(trkpt.ele == NOINT)
+            {
+                continue;
+            }
+
+            x[trkpt.idxVisible] = trkpt.distance;
+            y[trkpt.idxVisible] = trkpt.ele * basefactor;
+        }
+    }
+
+    interp.m = N < 400 ? N/4 : 300;
+    alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);
+
+    interp.valid = interp.info > 0;
+
+    updateVisuals(eVisualPlot, "setupInterpolation()");
+}
+
+qreal CGisItemTrk::getElevationInterpolated(qreal d)
+{
+    return alglib::spline1dcalc(interp.p, d);
 }

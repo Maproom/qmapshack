@@ -34,12 +34,18 @@ CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidg
     connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
 }
 
+CFilterInterpolateElevation::~CFilterInterpolateElevation()
+{
+    trk.setupInterpolation(false);
+}
 
 void CFilterInterpolateElevation::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterInterpolateElevation");
     trk.filterInterpolateElevation();
+    checkPreview->setChecked(trk.isInterpolationEnabled());
     CCanvas::restoreOverrideCursor("CFilterInterpolateElevation");
+
 }
 
 void CFilterInterpolateElevation::slotPreview(bool yes)

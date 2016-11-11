@@ -292,6 +292,7 @@ void CGisItemTrk::filterInterpolateElevation()
         }
     }
 
+    interp.valid = false;
     deriveSecondaryData();
     changed(tr("Replaced elevation data with interpolated values."), "://icons/48x48/SetEle.png");
 }

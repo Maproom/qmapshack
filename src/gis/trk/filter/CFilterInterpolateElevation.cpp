@@ -52,6 +52,9 @@ void CFilterInterpolateElevation::slotPreview(bool yes)
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation::slotPreview()");
     trk.setupInterpolation(yes);
-    toolApply->setEnabled(trk.isInterpolationEnabled());
+
+    bool enabled = trk.isInterpolationEnabled();
+    checkPreview->setChecked(enabled);
+    toolApply->setEnabled(enabled);
     CCanvas::restoreOverrideCursor("CFilterInterpolateElevation::slotPreview()");
 }

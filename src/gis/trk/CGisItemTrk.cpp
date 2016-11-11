@@ -2686,7 +2686,14 @@ void CGisItemTrk::setupInterpolation(bool on)
     }
 
     interp.m = N < 400 ? N/2 : 300;
-    alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);
+    try
+    {
+        alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);
+    }
+    catch(const alglib::ap_error& e)
+    {
+        qDebug() << e.msg.c_str();
+    }
 
     interp.valid = interp.info > 0;
 

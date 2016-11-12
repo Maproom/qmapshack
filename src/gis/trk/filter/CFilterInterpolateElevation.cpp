@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "helpers/CSettings.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterInterpolateElevation.h"
 
@@ -26,17 +27,27 @@ CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidg
 {
     setupUi(this);
 
+    comboQuality->addItem(tr("coarse"), CGisItemTrk::eQualityCoarse);
+    comboQuality->addItem(tr("medium"), CGisItemTrk::eQualityMedium);
+    comboQuality->addItem(tr("fine"), CGisItemTrk::eQualityFine);
+
     bool enabled = trk.isInterpolationEnabled();
     checkPreview->setChecked(enabled);
     toolApply->setEnabled(enabled);
 
+    SETTINGS;
+    comboQuality->setCurrentIndex(comboQuality->findData(cfg.value("TrackDetails/Filter/Interp/quality", CGisItemTrk::eQualityCoarse)));
+
     connect(toolApply, &QToolButton::clicked, this, &CFilterInterpolateElevation::slotApply);
-    connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
+    connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotSetup);
+    connect(comboQuality, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterInterpolateElevation::slotSetup);
 }
 
 CFilterInterpolateElevation::~CFilterInterpolateElevation()
 {
-    trk.setupInterpolation(false);
+    SETTINGS;
+    cfg.setValue("TrackDetails/Filter/Interp/quality",comboQuality->currentData());
+    trk.setupInterpolation(false, CGisItemTrk::eQualityCoarse);
 }
 
 void CFilterInterpolateElevation::slotApply()
@@ -48,13 +59,15 @@ void CFilterInterpolateElevation::slotApply()
 
 }
 
-void CFilterInterpolateElevation::slotPreview(bool yes)
+void CFilterInterpolateElevation::slotSetup()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation::slotPreview()");
-    trk.setupInterpolation(yes);
+    bool yes = checkPreview->isChecked();
+    qint32 Q = comboQuality->currentData().toInt();
+    trk.setupInterpolation(yes, Q);
 
-    bool enabled = trk.isInterpolationEnabled();
-    checkPreview->setChecked(enabled);
-    toolApply->setEnabled(enabled);
+    yes = trk.isInterpolationEnabled();
+    checkPreview->setChecked(yes);
+    toolApply->setEnabled(yes);
     CCanvas::restoreOverrideCursor("CFilterInterpolateElevation::slotPreview()");
 }

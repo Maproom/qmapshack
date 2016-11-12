@@ -625,12 +625,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Découper la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="400"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="404"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="401"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="405"/>
         <source>Activity</source>
         <translation type="unfinished"></translation>
     </message>
@@ -643,12 +643,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="630"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
         <source>Reset activities...</source>
         <translation>Réinitialiser les activités...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="630"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Toutes les activités seront supprimées de la trace. Etes-vous sûr ?</translation>
     </message>
@@ -713,6 +713,24 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/filter/CFilterDeleteExtension.cpp" line="57"/>
         <source>No extension available</source>
         <translation>Aucune extension disponible</translation>
+    </message>
+</context>
+<context>
+    <name>CFilterInterpolateElevation</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="30"/>
+        <source>coarse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="31"/>
+        <source>medium</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="32"/>
+        <source>fine</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1322,42 +1340,42 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished">Les altitudes ont été remplacées  par les données DEM</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="296"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="297"/>
         <source>Replaced elevation data with interpolated values.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="319"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="320"/>
         <source>Offset elevation data by %1%2.</source>
         <translation type="unfinished">Décaler les altitudes de %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="338"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="339"/>
         <source>Changed start of track to %1.</source>
         <translation type="unfinished">Début de la trace modifié à %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="357"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="358"/>
         <source>Remove timestamps.</source>
         <translation type="unfinished">Horodatage Supprimé.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="380"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="381"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation type="unfinished">Horodatage artificiel ajouté avec un décalage de %1 sec.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="412"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="413"/>
         <source>Changed speed to %1%2.</source>
         <translation type="unfinished">Vitesse modifiée à %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="431"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="432"/>
         <source>%1 (Segment %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="454"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="455"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5462,16 +5480,21 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="69"/>
-        <source>Replace elevation of track points with interpolated data</source>
+        <source>Replace elevation of track points with interpolated data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="95"/>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="76"/>
+        <source>Quality</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="105"/>
         <source>Preview</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="102"/>
+        <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="112"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>

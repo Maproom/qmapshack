@@ -1123,7 +1123,7 @@ void CGisItemTrk::deriveSecondaryData()
         propHandler->setupData();
     }
 
-    setupInterpolation(interp.valid);
+    setupInterpolation(interp.valid, interp.Q);
 
     updateVisuals(eVisualPlot|eVisualDetails|eVisualProject|eVisualColorAct|eVisualTrkTable, "deriveSecondaryData()");
 
@@ -2650,9 +2650,10 @@ void CGisItemTrk::setMouseClickFocusVisuals(const trkpt_t * pt)
     }
 }
 
-void CGisItemTrk::setupInterpolation(bool on)
+void CGisItemTrk::setupInterpolation(bool on, qint32 q)
 {
-    interp.valid = on;
+    interp.valid    = on;
+    interp.Q        = (quality_e)q;
 
     if(on == false)
     {
@@ -2685,7 +2686,13 @@ void CGisItemTrk::setupInterpolation(bool on)
         }
     }
 
-    interp.m = N < 400 ? N/2 : 300;
+    /// @todo find a better way to scale the algorithm
+    interp.m = interp.Q*50;
+    if(N < 400)
+    {
+        interp.m = N / (16/interp.Q);
+    }
+
     try
     {
         alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);

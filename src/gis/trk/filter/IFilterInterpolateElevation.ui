@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>584</width>
-    <height>56</height>
+    <width>842</width>
+    <height>58</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -66,9 +66,19 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Replace elevation of track points with interpolated data</string>
+        <string>Replace elevation of track points with interpolated data.</string>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Quality</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="comboQuality"/>
      </item>
      <item>
       <spacer name="horizontalSpacer">

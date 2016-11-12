@@ -1050,17 +1050,27 @@ private:
      */
     /**@{*/
 public:
-    void setupInterpolation(bool on);
+    enum quality_e
+    {
+        eQualityFine = 8
+        , eQualityMedium = 4
+        , eQualityCoarse = 2
+    };
+
+    void setupInterpolation(bool on, qint32 q);
     bool isInterpolationEnabled() const
     {
         return interp.valid;
     }
+
     qreal getElevationInterpolated(qreal d) const;
 
 private:
     struct interpolate_t
     {
-        bool valid = false;
+
+        bool valid      = false;
+        quality_e Q     = eQualityCoarse;
         alglib::ae_int_t info = -1;
         alglib::ae_int_t m = 0;
         alglib::spline1dinterpolant p;

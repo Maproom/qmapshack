@@ -33,9 +33,10 @@ public:
 
 private slots:
     void slotApply();
-    void slotPreview(bool yes);
+    void slotSetup();
 
 private:
+
     CGisItemTrk& trk;
 };
 

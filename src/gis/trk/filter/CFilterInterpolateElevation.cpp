@@ -39,8 +39,8 @@ CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidg
     comboQuality->setCurrentIndex(comboQuality->findData(cfg.value("TrackDetails/Filter/Interp/quality", CGisItemTrk::eQualityCoarse)));
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterInterpolateElevation::slotApply);
-    connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotSetup);
-    connect(comboQuality, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterInterpolateElevation::slotSetup);
+    connect(checkPreview, &QCheckBox::toggled, this, &CFilterInterpolateElevation::slotPreview);
+    connect(comboQuality, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterInterpolateElevation::slotPreview);
 }
 
 CFilterInterpolateElevation::~CFilterInterpolateElevation()
@@ -59,7 +59,7 @@ void CFilterInterpolateElevation::slotApply()
 
 }
 
-void CFilterInterpolateElevation::slotSetup()
+void CFilterInterpolateElevation::slotPreview()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterInterpolateElevation::slotPreview()");
     bool yes = checkPreview->isChecked();

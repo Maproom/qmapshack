@@ -2693,6 +2693,8 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
         interp.m = N / (16/interp.Q);
     }
 
+    interp.m &= 0xFFFFFFFE;
+
     try
     {
         alglib::spline1dfitcubic(x, y, interp.m, interp.info, interp.p, interp.rep);

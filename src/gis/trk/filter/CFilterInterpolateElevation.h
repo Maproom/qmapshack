@@ -33,7 +33,7 @@ public:
 
 private slots:
     void slotApply();
-    void slotSetup();
+    void slotPreview();
 
 private:
 

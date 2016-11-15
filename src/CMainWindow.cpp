@@ -125,6 +125,7 @@ CMainWindow::CMainWindow()
     connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
+    connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
@@ -963,6 +964,20 @@ void CMainWindow::slotSetupWptIcons()
     dlg.exec();
 }
 
+
+void CMainWindow::slotCloseTab()
+{
+    CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
+    if(canvas == nullptr)
+    {
+        QWidget * widget = tabWidget->currentWidget();
+        if(widget != nullptr)
+        {
+            widget->deleteLater();
+        }
+    }
+}
+
 #ifdef WIN32
 
 static void sendDeviceEvent(DWORD unitmask, bool add)
@@ -1075,3 +1090,4 @@ void CMainWindow::slotSanityTest()
 
     qDebug() << "Sanity test passed.";
 }
+

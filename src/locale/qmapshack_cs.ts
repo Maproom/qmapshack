@@ -1016,7 +1016,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="357"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="595"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="599"/>
         <source>Time: %1 %2</source>
         <translation>Čas: %1 %2</translation>
     </message>
@@ -1041,12 +1041,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>s %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="597"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="601"/>
         <source>Distance: %1 %2</source>
         <translation>Vzdálenost: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="712"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="716"/>
         <source>Changed route points.</source>
         <translation>Změněné body cesty.</translation>
     </message>
@@ -2165,48 +2165,48 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="561"/>
+        <location filename="../CMainWindow.cpp" line="562"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Použít &lt;b&gt;Nabídka → Pohled → Přidat pohled na mapu&lt;/b&gt; k otevření nového pohledu. Nebo &lt;b&gt;Nabídka → Soubor → Nahrát pohled na mapu&lt;/b&gt; k obnovení uložené. Nebo klepněte &lt;a href=&apos;newview&apos;&gt;sem&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="689"/>
+        <location filename="../CMainWindow.cpp" line="690"/>
         <source>Ele: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="705"/>
+        <location filename="../CMainWindow.cpp" line="706"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="840"/>
+        <location filename="../CMainWindow.cpp" line="841"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="874"/>
+        <location filename="../CMainWindow.cpp" line="875"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="874"/>
-        <location filename="../CMainWindow.cpp" line="900"/>
+        <location filename="../CMainWindow.cpp" line="875"/>
+        <location filename="../CMainWindow.cpp" line="901"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="900"/>
+        <location filename="../CMainWindow.cpp" line="901"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1065"/>
+        <location filename="../CMainWindow.cpp" line="1080"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1066"/>
+        <location filename="../CMainWindow.cpp" line="1081"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.</source>
         <translation>QMapShack zjistil špatně nainstalovanou knihovnu Proj4. Chybí překladové tabulky pro promítání EPSG obvykle uložené v /usr/share/proj. Spojte se, prosím, s údržbářem balíčku pro vaši distribuci, aby to opravil.</translation>
     </message>
@@ -6293,32 +6293,32 @@ Název souboru: %1</translation>
         <translation>Okno</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="108"/>
+        <location filename="../IMainWindow.ui" line="109"/>
         <source>?</source>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="115"/>
+        <location filename="../IMainWindow.ui" line="116"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="126"/>
+        <location filename="../IMainWindow.ui" line="127"/>
         <source>Tool</source>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="151"/>
+        <location filename="../IMainWindow.ui" line="152"/>
         <source>Maps</source>
         <translation>Mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="194"/>
+        <location filename="../IMainWindow.ui" line="195"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Digitální výškový model</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="233"/>
+        <location filename="../IMainWindow.ui" line="234"/>
         <source>Data</source>
         <translation>Data</translation>
     </message>
@@ -6327,78 +6327,78 @@ Název souboru: %1</translation>
         <translation type="obsolete">Přidat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="291"/>
+        <location filename="../IMainWindow.ui" line="292"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="306"/>
+        <location filename="../IMainWindow.ui" line="307"/>
         <source>Show Scale</source>
         <translation>Ukázat měřítko</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="318"/>
+        <location filename="../IMainWindow.ui" line="319"/>
         <source>Setup Map Font</source>
         <translation>Nastavit písmo mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="333"/>
+        <location filename="../IMainWindow.ui" line="334"/>
         <source>Show Grid</source>
         <translation>Ukázat mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="336"/>
+        <location filename="../IMainWindow.ui" line="337"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="348"/>
+        <location filename="../IMainWindow.ui" line="349"/>
         <source>Setup Grid</source>
         <translation>Nastavit mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="351"/>
+        <location filename="../IMainWindow.ui" line="352"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="366"/>
+        <location filename="../IMainWindow.ui" line="367"/>
         <source>Flip Mouse Wheel</source>
         <translation>Obrátit kolečko myši</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="378"/>
-        <location filename="../IMainWindow.ui" line="381"/>
+        <location filename="../IMainWindow.ui" line="379"/>
+        <location filename="../IMainWindow.ui" line="382"/>
         <source>Setup Map Paths</source>
         <translation>Nastavit cesty k mapám</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="396"/>
+        <location filename="../IMainWindow.ui" line="397"/>
         <source>POI Text</source>
         <translation>Text POI</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="411"/>
+        <location filename="../IMainWindow.ui" line="412"/>
         <source>Night / Day</source>
         <translation>Noc/Den</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="426"/>
+        <location filename="../IMainWindow.ui" line="427"/>
         <source>Map Tool Tip</source>
         <translation>Rada k nástroji pro mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="441"/>
+        <location filename="../IMainWindow.ui" line="442"/>
         <source>Setup DEM Paths</source>
         <translation>Nastavit cesty k výškovým modelům</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="453"/>
+        <location filename="../IMainWindow.ui" line="454"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="465"/>
+        <location filename="../IMainWindow.ui" line="466"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
@@ -6407,216 +6407,226 @@ Název souboru: %1</translation>
         <translation type="obsolete">Nastavit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="251"/>
+        <location filename="../IMainWindow.ui" line="252"/>
         <source>Route</source>
         <translation>Cesta</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="285"/>
-        <location filename="../IMainWindow.ui" line="288"/>
+        <location filename="../IMainWindow.ui" line="286"/>
+        <location filename="../IMainWindow.ui" line="289"/>
         <source>Add Map View</source>
         <translation>Přidat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="429"/>
+        <location filename="../IMainWindow.ui" line="430"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="468"/>
+        <location filename="../IMainWindow.ui" line="469"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="480"/>
-        <location filename="../IMainWindow.ui" line="483"/>
+        <location filename="../IMainWindow.ui" line="481"/>
+        <location filename="../IMainWindow.ui" line="484"/>
         <source>Setup Map View</source>
         <translation>Nastavit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="495"/>
+        <location filename="../IMainWindow.ui" line="496"/>
         <source>Load GIS Data</source>
         <translation>Nahrát data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="498"/>
+        <location filename="../IMainWindow.ui" line="499"/>
         <source>Load projects from file</source>
         <translation>Nahrát projekty ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="501"/>
+        <location filename="../IMainWindow.ui" line="502"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="513"/>
+        <location filename="../IMainWindow.ui" line="514"/>
         <source>Save All GIS Data</source>
         <translation>Uložit všechna data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="516"/>
+        <location filename="../IMainWindow.ui" line="517"/>
         <source>Save all projects in the workspace</source>
         <translation>Uložit všechny projekty nacházející se v pracovním prostoru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="519"/>
+        <location filename="../IMainWindow.ui" line="520"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="531"/>
+        <location filename="../IMainWindow.ui" line="532"/>
         <source>Setup Time Zone</source>
         <translation>Nastavit časové pásmo</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="543"/>
+        <location filename="../IMainWindow.ui" line="544"/>
         <source>Add empty project</source>
         <translation>Přidat prázdný projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="558"/>
+        <location filename="../IMainWindow.ui" line="559"/>
         <source>Search Google</source>
         <translation>Hledat pomocí Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="570"/>
+        <location filename="../IMainWindow.ui" line="571"/>
         <source>Close all projects</source>
         <translation>Zavřít všechny projekty</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="573"/>
+        <location filename="../IMainWindow.ui" line="574"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="585"/>
+        <location filename="../IMainWindow.ui" line="586"/>
         <source>Setup Units</source>
         <translation>Nastavit jednotky</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="597"/>
+        <location filename="../IMainWindow.ui" line="598"/>
         <source>Setup Workspace</source>
         <translation>Nastavit pracovní prostor</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="600"/>
+        <location filename="../IMainWindow.ui" line="601"/>
         <source>Setup save on exit.</source>
         <translation>Nastavit uložení při ukončení.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="612"/>
+        <location filename="../IMainWindow.ui" line="613"/>
         <source>Import Database from QLandkarte</source>
         <translation>Zavést databázi z QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="615"/>
+        <location filename="../IMainWindow.ui" line="616"/>
         <source>Import QLandkarte GT database</source>
         <translation>Zavést databázi GT QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="627"/>
+        <location filename="../IMainWindow.ui" line="628"/>
         <source>VRT Builder</source>
         <translation>Sestavovač VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="630"/>
+        <location filename="../IMainWindow.ui" line="631"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Rozhraní pro gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="642"/>
+        <location filename="../IMainWindow.ui" line="643"/>
         <source>Store Map View</source>
         <translation>Uložit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="645"/>
+        <location filename="../IMainWindow.ui" line="646"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Zapsat nynější činnou mapu a seznam výškových modelů včetně vlastností do souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="657"/>
+        <location filename="../IMainWindow.ui" line="658"/>
         <source>Load Map View</source>
         <translation>Nahrát pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="660"/>
+        <location filename="../IMainWindow.ui" line="661"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Obnovit pohled s činnou mapou a seznam výškových modelů včetně vlastností ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="675"/>
+        <location filename="../IMainWindow.ui" line="676"/>
         <source>Ext. Profile</source>
         <translation>Ext. Profil</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="678"/>
+        <location filename="../IMainWindow.ui" line="679"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="690"/>
+        <location filename="../IMainWindow.ui" line="691"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="693"/>
+        <location filename="../IMainWindow.ui" line="694"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="705"/>
+        <location filename="../IMainWindow.ui" line="706"/>
         <source>Clone Map View</source>
         <translation>Klonovat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="708"/>
+        <location filename="../IMainWindow.ui" line="709"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="720"/>
+        <location filename="../IMainWindow.ui" line="721"/>
         <source>Create Routino Database</source>
         <translation>Vytvořit databázi Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="732"/>
+        <location filename="../IMainWindow.ui" line="733"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Uložit (vytisknout) snímek obrazovky s mapou</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="735"/>
+        <location filename="../IMainWindow.ui" line="736"/>
         <source>Print a selected area of the map</source>
         <translation>Vytisknout vybranou oblast mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="738"/>
+        <location filename="../IMainWindow.ui" line="739"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="750"/>
+        <location filename="../IMainWindow.ui" line="751"/>
         <source>Setup Coord. Format</source>
         <translation>Nastavit formát souřadnic</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="753"/>
+        <location filename="../IMainWindow.ui" line="754"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Změnit formát, v němž jsou souřadnice zobrazeny</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="765"/>
+        <location filename="../IMainWindow.ui" line="766"/>
         <source>Setup Map Background</source>
         <translation>Nastavit pozadí mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="777"/>
+        <location filename="../IMainWindow.ui" line="778"/>
         <source>Setup Waypoint Icons</source>
         <translation>Stanovit ikony cestovních bodů</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="780"/>
+        <location filename="../IMainWindow.ui" line="781"/>
         <source>Setup path to custom icons</source>
         <translation>Stanovit cestu k vlastním ikonám</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="790"/>
+        <source>Close Tab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="793"/>
+        <source>Ctrl+W</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Setup Database</source>

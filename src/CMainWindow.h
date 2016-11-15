@@ -127,6 +127,7 @@ private slots:
     void slotSetupWptIcons();
     void slotLinkActivated(const QString& link);
     void slotSanityTest();
+    void slotCloseTab();
 
 private:
     friend int main(int argc, char ** argv);

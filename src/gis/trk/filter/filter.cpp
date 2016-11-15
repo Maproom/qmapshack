@@ -294,7 +294,7 @@ void CGisItemTrk::filterInterpolateElevation()
 
     interp.valid = false;
     deriveSecondaryData();
-    changed(tr("Replaced elevation data with interpolated values."), "://icons/48x48/SetEle.png");
+    changed(tr("Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)").arg(interp.m).arg(interp.rep.rmserror), "://icons/48x48/SetEle.png");
 }
 
 void CGisItemTrk::filterOffsetElevation(int offset)

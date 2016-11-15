@@ -582,6 +582,10 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     }
 
     QDateTime startTime = rte.pts.first().fakeSubpt.time;
+    if(!startTime.isValid() && !rte.pts.isEmpty() && !rte.pts.first().subpts.isEmpty())
+    {
+        startTime = rte.pts.first().subpts.first().time;
+    }
 
     if(hasUserFocus() && mouseMoveFocus && mouseMoveFocus->lon != NOFLOAT && mouseMoveFocus->lat != NOFLOAT)
     {

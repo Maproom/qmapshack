@@ -1341,7 +1341,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="297"/>
-        <source>Replaced elevation data with interpolated values.</source>
+        <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

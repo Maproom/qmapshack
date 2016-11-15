@@ -1250,9 +1250,13 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Höhendaten durch Daten von DEM Dateien ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="297"/>
         <source>Replaced elevation data with interpolated values.</source>
         <translation>Höhendaten durch interpolierte Daten ersetzen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="297"/>
+        <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
+        <translation>Höhenwerte durch interpolierte Werte ersetzt. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="320"/>

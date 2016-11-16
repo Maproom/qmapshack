@@ -1068,7 +1068,6 @@ public:
 private:
     struct interpolate_t
     {
-
         bool valid      = false;
         quality_e Q     = eQualityCoarse;
         alglib::ae_int_t info = -1;

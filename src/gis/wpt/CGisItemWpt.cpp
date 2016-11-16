@@ -497,7 +497,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     if(mouseIsOverBubble && !doBubbleMove && !doBubbleSize && rectBubble.isValid() && !isReadOnly())
     {
         QPainterPath clip;
-        clip.addRoundedRect(rectBubble, 5, 5);
+        clip.addRoundedRect(rectBubble, RECT_RADIUS, RECT_RADIUS);
         p.setClipPath(clip);
 
         QRect barTop(rectBubble.topLeft(), QSize(rectBubble.width(), 26));
@@ -512,9 +512,9 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawRect(barBottom);
 
         p.setBrush(Qt::white);
-        p.drawRoundedRect(rectBubbleMove.adjusted(-2,-2,2,2), 3,3);
-        p.drawRoundedRect(rectBubbleEdit.adjusted(-2,-2,2,2), 3,3);
-        p.drawRoundedRect(rectBubbleSize.adjusted(-2,-2,2,2), 3,3);
+        p.drawRoundedRect(rectBubbleMove.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
+        p.drawRoundedRect(rectBubbleEdit.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
+        p.drawRoundedRect(rectBubbleSize.adjusted(-2,-2,2,2), RECT_RADIUS, RECT_RADIUS);
 
         p.drawPixmap(rectBubbleMove, QPixmap("://icons/32x32/MoveArrow.png"));
         p.drawPixmap(rectBubbleEdit, QPixmap("://icons/32x32/EditDetails.png"));
@@ -656,7 +656,7 @@ QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
         }
 
         QPainterPath path1;
-        path1.addRoundedRect(r,5,5);
+        path1.addRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
         QPainterPath path2;
         path2.addPolygon(poly2);
 

@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "helpers/CSettings.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterInterpolateElevation.h"
+#include "helpers/CSettings.h"
 
 CFilterInterpolateElevation::CFilterInterpolateElevation(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent)
@@ -56,7 +56,6 @@ void CFilterInterpolateElevation::slotApply()
     trk.filterInterpolateElevation();
     checkPreview->setChecked(trk.isInterpolationEnabled());
     CCanvas::restoreOverrideCursor("CFilterInterpolateElevation");
-
 }
 
 void CFilterInterpolateElevation::slotPreview()

@@ -200,11 +200,11 @@ void CScrOptUnclutter::draw(QPainter& p)
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(255,255,255,255));
         p.drawEllipse(item.area.center(), 20,20);
-        p.drawRoundedRect(item.text, 3, 3);
+        p.drawRoundedRect(item.text, RECT_RADIUS, RECT_RADIUS);
 
         p.setPen(QPen(item.hasUserFocus ? Qt::red : Qt::lightGray,2));
         p.setBrush(Qt::NoBrush);
-        p.drawRoundedRect(item.text, 3, 3);
+        p.drawRoundedRect(item.text, RECT_RADIUS, RECT_RADIUS);
         p.drawEllipse(item.area.center(), 18,18);
 
         p.drawPixmap(item.area, item.icon);

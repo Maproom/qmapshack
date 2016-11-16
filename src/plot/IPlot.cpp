@@ -1071,7 +1071,7 @@ void IPlot::drawDecoration( QPainter &p )
 
                     p.setPen(Qt::NoPen);
                     p.setBrush(Qt::white);
-                    p.drawRoundedRect(r,3,3);
+                    p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
 
                     p.setFont(f);
                     p.setPen(Qt::darkBlue);
@@ -1204,7 +1204,7 @@ void IPlot::drawActivities(QPainter& p)
 
         rectIconFrame.moveCenter(QPoint(c,10));
         p.setBrush(QColor(255, 255, 255, 100));
-        p.drawRoundedRect(rectIconFrame, 3, 3);
+        p.drawRoundedRect(rectIconFrame, RECT_RADIUS, RECT_RADIUS);
 
         rectIcon.moveCenter(QPoint(c, 10));
         p.drawPixmap(rectIcon, QPixmap(range.icon));

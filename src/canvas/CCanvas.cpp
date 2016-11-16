@@ -517,7 +517,7 @@ void CCanvas::drawStatusMessages(QPainter& p)
         r.moveTopLeft(QPoint(15,45));
         p.setPen(CDraw::penBorderGray);
         p.setBrush(CDraw::brushBackWhite);
-        p.drawRoundedRect(r, 5, 5);
+        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
     }
 }
 

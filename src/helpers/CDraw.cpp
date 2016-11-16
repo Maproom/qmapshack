@@ -157,7 +157,7 @@ void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &
 QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth, float pointerBasePos)
 {
     QPainterPath bubblePath;
-    bubblePath.addRoundedRect(contentRect, 5, 5);
+    bubblePath.addRoundedRect(contentRect, RECT_RADIUS, RECT_RADIUS);
 
     // draw the arrow
     int pointerBaseCenterX = (pointerBasePos <= 1)

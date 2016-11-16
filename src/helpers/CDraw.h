@@ -30,8 +30,8 @@ inline void USE_ANTI_ALIASING(QPainter& p, bool useAntiAliasing)
     p.setRenderHints(QPainter::TextAntialiasing|QPainter::Antialiasing|QPainter::SmoothPixmapTransform|QPainter::HighQualityAntialiasing, useAntiAliasing);
 }
 
-
-#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,5,5)
+#define RECT_RADIUS 3
+#define PAINT_ROUNDED_RECT(p,r) p.drawRoundedRect(r,RECT_RADIUS,RECT_RADIUS)
 
 
 class CDraw

@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "helpers/CDraw.h"
 #include "widgets/CColorLegend.h"
 
 #include <QtWidgets>
@@ -159,7 +160,7 @@ void CColorLegend::paintEvent(QPaintEvent *event)
 
             p.setPen( QPen(QBrush(Qt::darkGray), 2.) );
             p.setBrush(Qt::white);
-            p.drawRoundedRect(1, 1, width() - 2, height() - 2, 5.f, 5.f);
+            p.drawRoundedRect(1, 1, width() - 2, height() - 2, RECT_RADIUS, RECT_RADIUS);
 
             p.setOpacity(1.f);
             p.setRenderHint(QPainter::Antialiasing, false);

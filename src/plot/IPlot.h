@@ -81,15 +81,15 @@ protected:
     void setLimits();
     void resetZoom();
 
-    void paintEvent(QPaintEvent  *e) override;
+    void paintEvent(QPaintEvent *e) override;
     void resizeEvent(QResizeEvent *e) override;
-    void leaveEvent(QEvent       *e) override;
-    void enterEvent(QEvent       *e) override;
-    void keyPressEvent(QKeyEvent    *e) override;
-    void mouseMoveEvent(QMouseEvent  *e) override;
-    void mousePressEvent(QMouseEvent  *e) override;
+    void leaveEvent(QEvent *e) override;
+    void enterEvent(QEvent *e) override;
+    void keyPressEvent(QKeyEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+    void mousePressEvent(QMouseEvent *e) override;
     void mouseReleaseEvent(QMouseEvent * e) override;
-    void wheelEvent(QWheelEvent  *e) override;
+    void wheelEvent(QWheelEvent *e) override;
 
 
     void setSizes();
@@ -105,15 +105,15 @@ protected:
     void draw(QPainter& p);
     void draw();
     void drawData(QPainter& p);
-    void drawLabels( QPainter &p );
-    void drawXScale( QPainter &p );
-    void drawYScale( QPainter &p );
-    void drawGridX( QPainter &p );
-    void drawGridY( QPainter &p );
-    void drawXTic( QPainter &p );
-    void drawYTic( QPainter &p );
+    void drawLabels(QPainter &p);
+    void drawXScale(QPainter &p);
+    void drawYScale(QPainter &p);
+    void drawGridX(QPainter &p);
+    void drawGridY(QPainter &p);
+    void drawXTic(QPainter &p);
+    void drawYTic(QPainter &p);
     void drawLegend(QPainter& p);
-    void drawDecoration( QPainter &p );
+    void drawDecoration(QPainter &p);
     void drawTags(QPainter& p);
     void drawActivities(QPainter& p);
 
@@ -124,15 +124,19 @@ protected:
     // different draw modes
     mode_e mode;
     // buffer needs update
-    bool needsRedraw = true;
+    bool needsRedraw    = true;
 
-    bool showScale = true;
-    bool thinLine  = false;
-    bool solid     = false;
+    bool showScale      = true;
+    bool thinLine       = false;
+    bool solid          = false;
+
+    bool mouseDidMove   = false;
 
     QImage buffer;
     QPoint posMouse1 = NOPOINT; ///< pixel coordinate of mouse in graph area while in focus
     QPoint posMouse2 = NOPOINT; ///< pixel coordinate of mouse in graph area while in context menu function
+
+    QPoint posLast   = NOPOINT;
 
     /**
        @brief The track this plot is attached to

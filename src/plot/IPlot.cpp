@@ -357,31 +357,26 @@ void IPlot::setMouseFocus(qreal pos, enum CGisItemTrk::focusmode_e fm)
 
 void IPlot::mousePressEvent(QMouseEvent * e)
 {
-    if(data->lines.isEmpty() || data->badData || !data->x().isValid() || !data->y().isValid())
+    if((e->button() == Qt::LeftButton) && (mode == eModeIcon))
     {
-        // [Issue #106 ] Profil with no or bad data does not open trackdetails
-        //
-        // even if there is no data at least open the track edit dialog
-        if((e->button() == Qt::LeftButton) && (mode == eModeIcon))
-        {
-            trk->edit();
-        }
+        trk->edit();
+    }    
+}
 
-        return;
-    }
-
-    bool wasProcessed = true;
-
-    QPoint pos = e->pos();
-    posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+void IPlot::mouseReleaseEvent(QMouseEvent * e)
+{
     if(e->button() == Qt::LeftButton)
     {
         if(mode == eModeIcon)
         {
-            trk->edit();
+            return;
         }
         else
         {
+            QPoint pos = e->pos();
+            posMouse1  = graphAreaContainsMousePos(pos) ? pos : NOPOINT;
+
+            bool wasProcessed = true;
             // set point of focus at track object
             qreal x = data->x().pt2val(posMouse1.x() - left);
 

@@ -266,10 +266,7 @@ void IPlot::draw(QPainter& p)
     }
 
     p.drawImage(0,0,buffer);
-
-    p.setClipRect(rectGraphArea);
     drawDecoration(p);
-    p.setClipping(false);
 }
 
 void IPlot::keyPressEvent(QKeyEvent *e)
@@ -322,6 +319,10 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
     mouseDidMove    = (e->buttons() == Qt::LeftButton);
     if(mouseDidMove)
     {
+        if(!scrOptRange.isNull())
+        {
+            delete scrOptRange;
+        }
         QPoint diff = pos - posLast;
 
         data->x().move(-diff.x());
@@ -516,6 +517,8 @@ void IPlot::wheelEvent(QWheelEvent * e)
     }
 
 
+    QPoint p = mapToGlobal(e->pos() + QPoint(32,0));
+    QToolTip::showText(p,tr("Hold ctrl key for vertical zoom."), this, QRect(), 500);
     needsRedraw = true;
     update();
 }
@@ -1110,6 +1113,8 @@ void IPlot::drawDecoration( QPainter &p )
 
     if((idxSel1 != NOIDX) && (idxSel2 != NOIDX) && !data->badData)
     {
+        p.setClipRect(rectGraphArea);
+
         int penIdx = 3;
 
         const QPolygonF& polyline = data->lines.first().points.mid(idxSel1, idxSel2 - idxSel1 + 1);
@@ -1134,7 +1139,8 @@ void IPlot::drawDecoration( QPainter &p )
             p.setPen(QPen(Qt::darkBlue, 2));
             p.drawLine(line.first().x(), top, line.first().x(), bottom);
             p.drawLine(line.last().x(),  top, line.last().x(),  bottom);
-        }
+        }        
+        p.setClipping(false);
     }
 
     if(!scrOptRange.isNull())
@@ -1408,8 +1414,12 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
 
 bool IPlot::isZoomed() const
 {
+    bool zoomed = false;
     qreal limMin, limMax, useMin, useMax;
     data->x().getLimits(limMin, limMax, useMin, useMax);
+    zoomed |= !((limMax - limMin) <= (useMax - useMin));
+    data->y().getLimits(limMin, limMax, useMin, useMax);
+    zoomed |= !((limMax - limMin) <= (useMax - useMin));
 
-    return !((limMax - limMin) <= (useMax - useMin));
+    return zoomed;
 }

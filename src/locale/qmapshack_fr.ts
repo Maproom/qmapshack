@@ -6740,12 +6740,17 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation type="unfinished">Ajouter un waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="648"/>
+        <location filename="../plot/IPlot.cpp" line="521"/>
+        <source>Hold ctrl key for vertical zoom.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/IPlot.cpp" line="676"/>
         <source>No or bad data.</source>
         <translation>Aucune donnée ou données invalides.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1245"/>
+        <location filename="../plot/IPlot.cpp" line="1276"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>

@@ -6485,12 +6485,17 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="648"/>
+        <location filename="../plot/IPlot.cpp" line="521"/>
+        <source>Hold ctrl key for vertical zoom.</source>
+        <translation>Für vertikales Zoom strg Taste gedrückt halten.</translation>
+    </message>
+    <message>
+        <location filename="../plot/IPlot.cpp" line="676"/>
         <source>No or bad data.</source>
         <translation>Keine oder schlechte Daten.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1245"/>
+        <location filename="../plot/IPlot.cpp" line="1276"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>

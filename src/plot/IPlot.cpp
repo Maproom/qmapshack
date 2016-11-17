@@ -377,7 +377,7 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     if((e->button() == Qt::LeftButton) && (mode == eModeIcon))
     {
         trk->edit();
-    }    
+    }
 
     mouseDidMove    = false;
     posLast         = e->pos();
@@ -1139,7 +1139,7 @@ void IPlot::drawDecoration( QPainter &p )
             p.setPen(QPen(Qt::darkBlue, 2));
             p.drawLine(line.first().x(), top, line.first().x(), bottom);
             p.drawLine(line.last().x(),  top, line.last().x(),  bottom);
-        }        
+        }
         p.setClipping(false);
     }
 

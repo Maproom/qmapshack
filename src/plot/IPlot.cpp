@@ -267,7 +267,9 @@ void IPlot::draw(QPainter& p)
 
     p.drawImage(0,0,buffer);
 
+    p.setClipRect(rectGraphArea);
     drawDecoration(p);
+    p.setClipping(false);
 }
 
 void IPlot::keyPressEvent(QKeyEvent *e)
@@ -316,7 +318,21 @@ void IPlot::mouseMoveEvent(QMouseEvent * e)
         return;
     }
 
-    QPoint pos  = e->pos();
+    QPoint pos      = e->pos();
+    mouseDidMove    = (e->buttons() == Qt::LeftButton);
+    if(mouseDidMove)
+    {
+        QPoint diff = pos - posLast;
+
+        data->x().move(-diff.x());
+        data->y().move( diff.y());
+        needsRedraw = true;
+        update();
+
+        posLast = pos;
+        return;
+    }
+
     posMouse1    = NOPOINT;
     if(graphAreaContainsMousePos(pos))
     {
@@ -361,14 +377,18 @@ void IPlot::mousePressEvent(QMouseEvent * e)
     {
         trk->edit();
     }    
+
+    mouseDidMove    = false;
+    posLast         = e->pos();
 }
 
 void IPlot::mouseReleaseEvent(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        if(mode == eModeIcon)
+        if((mode == eModeIcon) || mouseDidMove)
         {
+            mouseDidMove = false;
             return;
         }
         else
@@ -482,9 +502,19 @@ void IPlot::wheelEvent(QWheelEvent * e)
 {
     bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
-    data->x().zoom(in, e->pos().x() - left);
-    setSizes();
-    data->x().setScale(rectGraphArea.width());
+    if(QApplication::keyboardModifiers() == Qt::ControlModifier)
+    {
+        data->y().zoom(in, e->pos().y() - bottom);
+        setSizes();
+        data->y().setScale(rectGraphArea.height());
+    }
+    else
+    {
+        data->x().zoom(in, e->pos().x() - left);
+        setSizes();
+        data->x().setScale(rectGraphArea.width());
+    }
+
 
     needsRedraw = true;
     update();
@@ -1308,6 +1338,7 @@ void IPlot::slotStopRange()
 void IPlot::slotResetZoom()
 {
     data->x().resetZoom();
+    data->y().resetZoom();
     setSizes();
 
     needsRedraw = true;

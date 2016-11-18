@@ -6952,17 +6952,18 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="521"/>
-        <source>Hold ctrl key for vertical zoom.</source>
+        <location filename="../plot/IPlot.cpp" line="539"/>
+        <source>Hold CTRL key for vertical zoom, only.
+Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="676"/>
+        <location filename="../plot/IPlot.cpp" line="694"/>
         <source>No or bad data.</source>
         <translation>Žádné nebo špatné údaje.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1276"/>
+        <location filename="../plot/IPlot.cpp" line="1294"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>

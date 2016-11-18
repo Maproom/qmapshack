@@ -6782,17 +6782,18 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished">Añadir Waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="521"/>
-        <source>Hold ctrl key for vertical zoom.</source>
+        <location filename="../plot/IPlot.cpp" line="539"/>
+        <source>Hold CTRL key for vertical zoom, only.
+Hold ALT key for horizontal zoom, only.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="676"/>
+        <location filename="../plot/IPlot.cpp" line="694"/>
         <source>No or bad data.</source>
         <translation>Datos incorrectos o inexistentes.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1276"/>
+        <location filename="../plot/IPlot.cpp" line="1294"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>

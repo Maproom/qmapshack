@@ -503,22 +503,40 @@ void IPlot::wheelEvent(QWheelEvent * e)
 {
     bool in = CMainWindow::self().flipMouseWheel() ? (e->delta() < 0) : (e->delta() > 0);
 
-    if(QApplication::keyboardModifiers() == Qt::ControlModifier)
+    bool doHorizontalZoom   = false;
+    bool doVerticalZoom     = false;
+
+    switch(QApplication::keyboardModifiers())
     {
-        data->y().zoom(in, e->pos().y() - bottom);
-        setSizes();
-        data->y().setScale(rectGraphArea.height());
+    case Qt::AltModifier:
+        doHorizontalZoom    = true;
+        break;
+    case Qt::ControlModifier:
+        doVerticalZoom      = true;
+        break;
+    case Qt::NoModifier:
+        doHorizontalZoom    = true;
+        doVerticalZoom      = true;
+        break;
     }
-    else
+
+    if(doHorizontalZoom)
     {
         data->x().zoom(in, e->pos().x() - left);
         setSizes();
         data->x().setScale(rectGraphArea.width());
     }
 
+    if(doVerticalZoom)
+    {
+        data->y().zoom(in, e->pos().y() - bottom);
+        setSizes();
+        data->y().setScale(rectGraphArea.height());
+    }
+
 
     QPoint p = mapToGlobal(e->pos() + QPoint(32,0));
-    QToolTip::showText(p,tr("Hold ctrl key for vertical zoom."), this, QRect(), 500);
+    QToolTip::showText(p,tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
     needsRedraw = true;
     update();
 }

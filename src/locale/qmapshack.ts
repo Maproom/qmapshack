@@ -3662,6 +3662,14 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
+    <name>CScrOptRangeTrk</name>
+    <message>
+        <location filename="../mouse/CScrOptRangeTrk.cpp" line="40"/>
+        <source>No range selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CScrOptSelect</name>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="93"/>

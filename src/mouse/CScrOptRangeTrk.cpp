@@ -47,6 +47,7 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
 
     toolShowPoints->setDisabled(noRange);
     toolCopy->setDisabled(noRange);
+    toolActivity->setDisabled(noRange);
 
     connect(toolHidePoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
     connect(toolShowPoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);

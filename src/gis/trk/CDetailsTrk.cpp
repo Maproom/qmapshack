@@ -447,6 +447,7 @@ void CDetailsTrk::updateData()
         widgetColorLabel->setUnit(ext.unit);
     }
 
+    widgetColorActivity->updateData();
     widgetColorActivity->setVisible(enabledActivity);
     widgetColorActivity->setEnabled(enabledActivity);
 

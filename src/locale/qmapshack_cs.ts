@@ -56,6 +56,18 @@
         <translation>Loď</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
+        <source>Ascent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
+        <source>Descent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Aeronautik</source>
         <translation type="vanished">Vzduchoplavba</translation>
     </message>
@@ -76,16 +88,12 @@
         <translation>Vzdálenost:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
         <source>Ascend:</source>
-        <translation>Stoupání:</translation>
+        <translation type="vanished">Stoupání:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
         <source>Descend:</source>
-        <translation>Klesání:</translation>
+        <translation type="vanished">Klesání:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
@@ -537,8 +545,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
+        <source>descent: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>descend: </source>
-        <translation>Klesání: </translation>
+        <translation type="vanished">Klesání: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="705"/>
@@ -686,12 +698,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="obsolete">Zadat název nové stopy.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>Reset activities...</source>
         <translation>Nastavit činnosti znovu...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Tímto budou všechny činnosti odstraněny ze stopy. Pokračovat?</translation>
     </message>
@@ -1192,9 +1204,8 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>... a %1 značek nezobrazeno</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Descend: - (-)</source>
-        <translation>Klesání: - (-)</translation>
+        <translation type="vanished">Klesání: - (-)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
@@ -1207,9 +1218,8 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Pohyb: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Ascend: %1%2 (%3%)</source>
-        <translation>Stoupání: %1%2 (%3%)</translation>
+        <translation type="vanished">Stoupání: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1350"/>
@@ -1231,14 +1241,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Skrýt body %1  %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>Ascend: - (-)</source>
-        <translation>Stoupání: - (-)</translation>
+        <translation type="vanished">Stoupání: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source> Descend: %1%2 (%3%)</source>
-        <translation> Klesání: %1%2 (%3%)</translation>
+        <translation type="vanished"> Klesání: %1%2 (%3%)</translation>
     </message>
     <message>
         <source> Descend: - (-) </source>
@@ -1262,9 +1270,8 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="obsolete"> Pohyb: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
         <source>Ascend: %1%2</source>
-        <translation>Stoupání: %1%2</translation>
+        <translation type="vanished">Stoupání: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="700"/>
@@ -1273,19 +1280,16 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
         <source>Ascend: -</source>
-        <translation>Stoupání: -</translation>
+        <translation type="vanished">Stoupání: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
         <source> Descend: %1%2</source>
-        <translation> Klesání: %1%2</translation>
+        <translation type="vanished"> Klesání: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
         <source>Descend: -</source>
-        <translation>Klesání: -</translation>
+        <translation type="vanished">Klesání: -</translation>
     </message>
     <message>
         <source>Dist.: %1%2</source>
@@ -1330,9 +1334,49 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Pohyb: -, Rychlost: -</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
+        <source>Ascent: - (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <source>Descent: - (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <source>Ascent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
+        <source> Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Vzdálenost: %1%2 (%3%)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
+        <source>Ascent: -</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <source>Descent: -</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
+        <source>Ascent: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <source> Descent: %1%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
@@ -5377,14 +5421,12 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
         <translation>Sklon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
         <source>Ascend</source>
-        <translation>Stoupání</translation>
+        <translation type="vanished">Stoupání</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
         <source>Descend</source>
-        <translation>Klesání</translation>
+        <translation type="vanished">Klesání</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
@@ -5452,6 +5494,16 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
         <location filename="../gis/trk/IDetailsTrk.ui" line="794"/>
         <source>Color</source>
         <translation>Barva</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
+        <source>Ascent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
+        <source>Descent</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1527"/>
@@ -6914,13 +6966,21 @@ Nechce se mi číst dokumentaci!</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="530"/>
-        <source>Ascend:</source>
-        <translation>Stoupání:</translation>
+        <source>Ascent:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="532"/>
+        <source>Descent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ascend:</source>
+        <translation type="vanished">Stoupání:</translation>
+    </message>
+    <message>
         <source>Descend:</source>
-        <translation>Klesání:</translation>
+        <translation type="vanished">Klesání:</translation>
     </message>
 </context>
 <context>

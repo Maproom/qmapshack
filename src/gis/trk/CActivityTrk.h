@@ -38,22 +38,22 @@ public:
 
     struct activity_summary_t
     {
-        activity_summary_t() : distance(0), ascend(0), descend(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
+        activity_summary_t() : distance(0), ascent(0), descent(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
         {
         }
 
         void reset()
         {
             distance = 0;
-            ascend = 0;
-            descend = 0;
+            ascent = 0;
+            descent = 0;
             ellapsedSeconds = 0;
             ellapsedSecondsMoving = 0;
         }
 
         qreal distance;
-        qreal ascend;
-        qreal descend;
+        qreal ascent;
+        qreal descent;
         qreal ellapsedSeconds;
         qreal ellapsedSecondsMoving;
     };

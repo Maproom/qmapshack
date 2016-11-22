@@ -883,8 +883,8 @@ void IGisProject::updateItemCounters()
     cntTrkPts = 0;
     cntWpts = 0;
     totalDistance = 0;
-    totalAscend = 0;
-    totalDescend = 0;
+    totalAscent = 0;
+    totalDescent = 0;
     totalElapsedSeconds = 0;
     totalElapsedSecondsMoving = 0;
 
@@ -908,8 +908,8 @@ void IGisProject::updateItemCounters()
         {
             cntTrkPts       += trk->getNumberOfVisiblePoints();
             totalDistance   += trk->getTotalDistance();
-            totalAscend     += trk->getTotalAscend();
-            totalDescend    += trk->getTotalDescend();
+            totalAscent     += trk->getTotalAscent();
+            totalDescent    += trk->getTotalDescent();
             totalElapsedSeconds += trk->getTotalElapsedSeconds();
             totalElapsedSecondsMoving += trk->getTotalElapsedSecondsMoving();
             stream << trk->getHash();

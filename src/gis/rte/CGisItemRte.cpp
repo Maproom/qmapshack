@@ -191,15 +191,15 @@ void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
     {
         qreal delta   = subpt.ele - lastEle;
 
-        if(qAbs(delta) > ASCEND_THRESHOLD)
+        if(qAbs(delta) > ASCENT_THRESHOLD)
         {
             if(delta > 0)
             {
-                rte.ascend  += delta;
+                rte.ascent  += delta;
             }
             else
             {
-                rte.descend -= delta;
+                rte.descent -= delta;
             }
             lastEle = subpt.ele;
         }
@@ -251,8 +251,8 @@ void CGisItemRte::deriveSecondaryData()
     {
         qreal lastEle = NOFLOAT;
         int i = 0;
-        rte.descend = 0;
-        rte.ascend = 0;
+        rte.descent = 0;
+        rte.ascent = 0;
 
         for(rtept_t &rtept : rte.pts)
         {
@@ -361,12 +361,12 @@ QString CGisItemRte::getInfo(bool showName, bool showFullText) const
         str += tr("Time: -");
     }
 
-    if((rte.ascend != NOFLOAT) && (rte.descend != NOFLOAT))
+    if((rte.ascent != NOFLOAT) && (rte.descent != NOFLOAT))
     {
         str += "<br/>\n";
         QString val1, val2, unit1, unit2;
-        IUnit::self().meter2elevation(rte.ascend,  val1, unit1);
-        IUnit::self().meter2elevation(rte.descend, val2, unit2);
+        IUnit::self().meter2elevation(rte.ascent,  val1, unit1);
+        IUnit::self().meter2elevation(rte.descent, val2, unit2);
 
         str += tr("%1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }

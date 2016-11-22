@@ -57,6 +57,18 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
+        <source>Ascent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
+        <source>Descent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="95"/>
         <source>Aeronautics</source>
         <translation type="unfinished"></translation>
@@ -68,16 +80,12 @@
         <translation type="unfinished">Distance:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
         <source>Ascend:</source>
-        <translation type="unfinished">Dénivelé positif:</translation>
+        <translation type="obsolete">Dénivelé positif:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
         <source>Descend:</source>
-        <translation type="unfinished">Dénivelé négatif:</translation>
+        <translation type="obsolete">Dénivelé négatif:</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
@@ -506,7 +514,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
-        <source>descend: </source>
+        <source>descent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -643,12 +651,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>Reset activities...</source>
         <translation>Réinitialiser les activités...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Toutes les activités seront supprimées de la trace. Etes-vous sûr ?</translation>
     </message>
@@ -1113,11 +1121,6 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
-        <source>Descend: - (-)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
         <source>Distance: - (-)</source>
         <translation type="unfinished"></translation>
@@ -1128,9 +1131,8 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Ascend: %1%2 (%3%)</source>
-        <translation type="unfinished">Montée: %1%2 (%3%)</translation>
+        <translation type="obsolete">Montée: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1350"/>
@@ -1152,14 +1154,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>Ascend: - (-)</source>
-        <translation type="unfinished">Montées: - (-)</translation>
+        <translation type="obsolete">Montées: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source> Descend: %1%2 (%3%)</source>
-        <translation type="unfinished">  Descente: %1%2 (%3%)</translation>
+        <translation type="obsolete">  Descente: %1%2 (%3%)</translation>
     </message>
     <message>
         <source> Descend: - (-) </source>
@@ -1183,9 +1183,8 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">En mouvement: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
         <source>Ascend: %1%2</source>
-        <translation type="unfinished">Montée : %1%2</translation>
+        <translation type="obsolete">Montée : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="700"/>
@@ -1194,19 +1193,16 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
         <source>Ascend: -</source>
-        <translation type="unfinished">Montée : -</translation>
+        <translation type="obsolete">Montée : -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
         <source> Descend: %1%2</source>
-        <translation type="unfinished">Descente : %1%2</translation>
+        <translation type="obsolete">Descente : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
         <source>Descend: -</source>
-        <translation type="unfinished">Descente : -</translation>
+        <translation type="obsolete">Descente : -</translation>
     </message>
     <message>
         <source>Dist.: %1%2</source>
@@ -1251,8 +1247,48 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
+        <source>Ascent: - (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <source>Descent: - (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <source>Ascent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
+        <source> Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
         <source>Distance: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
+        <source>Ascent: -</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <source>Descent: -</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
+        <source>Ascent: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <source> Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -5252,13 +5288,21 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
-        <source>Ascend</source>
-        <translation>Montée</translation>
+        <source>Ascent</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
+        <source>Descent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ascend</source>
+        <translation type="vanished">Montée</translation>
+    </message>
+    <message>
         <source>Descend</source>
-        <translation>Descente</translation>
+        <translation type="vanished">Descente</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
@@ -6701,13 +6745,21 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="530"/>
-        <source>Ascend:</source>
-        <translation>Dénivelé positif:</translation>
+        <source>Ascent:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="532"/>
+        <source>Descent:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ascend:</source>
+        <translation type="vanished">Dénivelé positif:</translation>
+    </message>
+    <message>
         <source>Descend:</source>
-        <translation>Dénivelé négatif:</translation>
+        <translation type="vanished">Dénivelé négatif:</translation>
     </message>
 </context>
 <context>

@@ -119,7 +119,7 @@ public:
 
         pt_t() : idx(-1), lon(WPT_NOFLOAT), lat(WPT_NOFLOAT), ele(WPT_NOFLOAT), timestamp(0), timestamp_msec(0),
             speed(WPT_NOFLOAT), avgspeed(0), delta(WPT_NOFLOAT), azimuth(WPT_NOFLOAT), distance(WPT_NOFLOAT),
-            ascend(0), descend(0), heartReateBpm(-1), cadenceRpm(-1), slope(0), slope2(WPT_NOFLOAT), timeSinceStart(0),
+            ascent(0), descent(0), heartReateBpm(-1), cadenceRpm(-1), slope(0), slope2(WPT_NOFLOAT), timeSinceStart(0),
             fix(""), sat(0), velocity(WPT_NOFLOAT), heading(WPT_NOFLOAT),
             vdop(WPT_NOFLOAT), hdop(WPT_NOFLOAT), pdop(WPT_NOFLOAT),
             _lon(WPT_NOFLOAT),_lat(WPT_NOFLOAT),_ele(WPT_NOFLOAT), _timestamp(0), _timestamp_msec(0),
@@ -154,10 +154,10 @@ public:
         double azimuth;
         /// secondary data: the total distance of all visible points up to this point
         float distance;
-        /// secondary data: the total ascend of all visible points up to this point
-        float ascend;
-        /// secondary data: the total descend of all visible points up to this point
-        float descend;
+        /// secondary data: the total ascent of all visible points up to this point
+        float ascent;
+        /// secondary data: the total descent of all visible points up to this point
+        float descent;
         /// secondary data: the heart rate in bpm
         int heartReateBpm;
         /// secondary data: cadence in rpm
@@ -251,10 +251,10 @@ public:
     /// total distance of track [m]
     double totalDistance = 0;
 
-    /// total ascend in [m]
-    double totalAscend = 0;
-    /// total descend in [m]
-    double totalDescend = 0;
+    /// total ascent in [m]
+    double totalAscent = 0;
+    /// total descent in [m]
+    double totalDescent = 0;
 
     /// the Qt polyline for faster processing
     QPolygon polyline;

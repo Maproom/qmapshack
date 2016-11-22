@@ -101,8 +101,8 @@ public:
 
         qreal totalDistance = NOFLOAT;
         quint32 totalTime = 0;
-        qreal ascend  = NOFLOAT;
-        qreal descend = NOFLOAT;
+        qreal ascent  = NOFLOAT;
+        qreal descent = NOFLOAT;
     };
 
     CGisItemRte(const QDomNode &xml, IGisProject *parent);

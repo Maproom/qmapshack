@@ -483,7 +483,7 @@ void IMouseEditLine::updateStatus()
     for(const IGisLine::point_t &pt1 : points)
     {
         qreal delta = pt1.ele - lastEle;
-        if(qAbs(delta) > ASCEND_THRESHOLD)
+        if(qAbs(delta) > ASCENT_THRESHOLD)
         {
             if(delta > 0)
             {
@@ -502,7 +502,7 @@ void IMouseEditLine::updateStatus()
         for(const IGisLine::subpt_t& pt : pt1.subpts)
         {
             delta = pt.ele - lastEle;
-            if(qAbs(delta) > ASCEND_THRESHOLD)
+            if(qAbs(delta) > ASCENT_THRESHOLD)
             {
                 if(delta > 0)
                 {
@@ -527,9 +527,9 @@ void IMouseEditLine::updateStatus()
     IUnit::self().meter2distance(dist, val, unit);
     msg += "<tr><td>" + tr("Distance:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
     IUnit::self().meter2elevation(asc, val, unit);
-    msg += "<tr><td>" + tr("Ascend:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "<tr><td>" + tr("Ascent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
     IUnit::self().meter2elevation(dsc, val, unit);
-    msg += "<tr><td>" + tr("Descend:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
+    msg += "<tr><td>" + tr("Descent:") + "</td><td>" + QString("&nbsp;%1 %2").arg(val).arg(unit) + "</td></tr>";
     msg += "</table>";
 
     canvas->reportStatus("IMouseEditLine",msg);

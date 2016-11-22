@@ -1063,8 +1063,8 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             writeXml(adventure, "Activity", tr("Unknown"));
             writeXml(adventure, "Distance", track->getTotalDistance());
             writeXml(adventure, "Duration", track->getTotalElapsedSecondsMoving());
-            writeXml(adventure, "Ascent", track->getTotalAscend());
-            writeXml(adventure, "Descent", track->getTotalDescend());
+            writeXml(adventure, "Ascent", track->getTotalAscent());
+            writeXml(adventure, "Descent", track->getTotalDescent());
             writeXml(adventure, "Difficulty", 1);
             writeXml(adventure, "NumRatings", 0);
             writeXml(adventure, "MainTrackId", track->getName());

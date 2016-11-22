@@ -1505,12 +1505,12 @@
              </column>
              <column>
               <property name="text">
-               <string>Ascend</string>
+               <string>Ascent</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>Descend</string>
+               <string>Descent</string>
               </property>
              </column>
              <column>

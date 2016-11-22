@@ -717,8 +717,8 @@ QDataStream& CGisItemRte::operator<<(QDataStream& stream)
     }
     if(version > 2)
     {
-        in >> rte.ascend;
-        in >> rte.descend;
+        in >> rte.ascent;
+        in >> rte.descent;
     }
 
 
@@ -751,8 +751,8 @@ QDataStream& CGisItemRte::operator>>(QDataStream& stream) const
     out << rte.lastRoutedTime;
     out << rte.totalDistance;
     out << rte.totalTime;
-    out << rte.ascend;
-    out << rte.descend;
+    out << rte.ascent;
+    out << rte.descent;
 
     stream.writeRawData(MAGIC_RTE, MAGIC_SIZE);
     stream << VER_RTE;

@@ -46,8 +46,8 @@ public:
         ,eColDist
         ,eColSpeed
         ,eColSlope
-        ,eColAscend
-        ,eColDescend
+        ,eColAscent
+        ,eColDescent
         ,eColPosition
         ,eColMax
     };

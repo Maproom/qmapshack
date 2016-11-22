@@ -52,6 +52,18 @@
         <translation>Schiff</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
+        <source>Ascent:</source>
+        <translation>Anstieg:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
+        <source>Descent:</source>
+        <translation>Abstieg:</translation>
+    </message>
+    <message>
         <source>Aeronautik</source>
         <translation>Luftfahrt</translation>
     </message>
@@ -72,14 +84,10 @@
         <translation>Entfernung:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
         <source>Ascend:</source>
         <translation>Anstieg:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
         <source>Descend:</source>
         <translation>Abstieg:</translation>
     </message>
@@ -491,7 +499,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Anstieg:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
         <source>descend: </source>
         <translation>Abstieg:</translation>
     </message>
@@ -550,6 +557,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Stichwörter bearbeiten...</translation>
     </message>
     <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
+        <source>descent: </source>
+        <translation>Abstieg: </translation>
+    </message>
+    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="772"/>
         <source>Enter keywords.</source>
         <translation>Stichwörter eingeben.</translation>
@@ -593,12 +605,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Aktivität</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>Reset activities...</source>
         <translation>Aktivitäten zurücksetzen...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="634"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Dies wird alle Aktivitäten vom Track entfernen. Fortfahren?</translation>
     </message>
@@ -1058,7 +1070,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>... und %1 Tags werden nicht angezeigt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Descend: - (-)</source>
         <translation>Abstieg: - (-)</translation>
     </message>
@@ -1073,7 +1084,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Zeit in Bew.: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Ascend: %1%2 (%3%)</source>
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
@@ -1097,12 +1107,10 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
         <source>Ascend: - (-)</source>
         <translation>Anstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source> Descend: %1%2 (%3%)</source>
         <translation>, Abstieg: %1 %2 (%3%)</translation>
     </message>
@@ -1112,7 +1120,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>, Zeit in Bew.: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
         <source>Ascend: %1%2</source>
         <translation>Anstieg: %1 %2</translation>
     </message>
@@ -1123,17 +1130,14 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>, %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
         <source>Ascend: -</source>
         <translation>Anstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
         <source> Descend: %1%2</source>
         <translation> Abstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
         <source>Descend: -</source>
         <translation>Abstieg: -</translation>
     </message>
@@ -1161,9 +1165,49 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Zeit in Bew.: %1, Geschw. %2 %3</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
+        <source>Ascent: - (-)</source>
+        <translation>Anstieg: - (-)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <source>Descent: - (-)</source>
+        <translation>Abstieg: - (-)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <source>Ascent: %1%2 (%3%)</source>
+        <translation>Anstieg: %1 %2 (%3%)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
+        <source> Descent: %1%2 (%3%)</source>
+        <translation>, Abstieg: %1 %2 (%3%)</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Entf.: %1 %2 (%3%)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
+        <source>Ascent: -</source>
+        <translation>Anstieg: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <source>Descent: -</source>
+        <translation>Abstieg: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
+        <source>Ascent: %1%2</source>
+        <translation>Anstieg: %1 %2</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <source> Descent: %1%2</source>
+        <translation> Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
@@ -4931,12 +4975,10 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation>Neigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
         <source>Ascend</source>
         <translation>Anstieg</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
         <source>Descend</source>
         <translation>Abstieg</translation>
     </message>
@@ -5022,6 +5064,16 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <location filename="../gis/trk/IDetailsTrk.ui" line="794"/>
         <source>Color</source>
         <translation>Farbe</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
+        <source>Ascent</source>
+        <translation>Anstieg</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
+        <source>Descent</source>
+        <translation>Abstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1527"/>
@@ -6447,11 +6499,19 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="530"/>
-        <source>Ascend:</source>
+        <source>Ascent:</source>
         <translation>Anstieg:</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="532"/>
+        <source>Descent:</source>
+        <translation>Abstieg:</translation>
+    </message>
+    <message>
+        <source>Ascend:</source>
+        <translation>Anstieg:</translation>
+    </message>
+    <message>
         <source>Descend:</source>
         <translation>Abstieg:</translation>
     </message>

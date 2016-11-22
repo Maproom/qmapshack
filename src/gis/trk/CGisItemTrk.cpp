@@ -392,10 +392,10 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
     IUnit::self().meter2distance(totalDistance, val1, unit1);
     str += tr("Length: %1 %2").arg(val1).arg(unit1);
 
-    if(eleIsValid && totalAscend != NOFLOAT && totalDescend != NOFLOAT)
+    if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
     {
-        IUnit::self().meter2elevation(totalAscend,  val1, unit1);
-        IUnit::self().meter2elevation(totalDescend, val2, unit2);
+        IUnit::self().meter2elevation(totalAscent,  val1, unit1);
+        IUnit::self().meter2elevation(totalDescent, val2, unit2);
 
         str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
     }
@@ -546,31 +546,31 @@ QString CGisItemTrk::getInfoRange() const
     }
     str += "\n";
 
-    qreal deltaAscend  = pt2->ascend  - pt1->ascend;
-    qreal deltaDescend = pt2->descend - pt1->descend;
+    qreal deltaAscent  = pt2->ascent  - pt1->ascent;
+    qreal deltaDescent = pt2->descent - pt1->descent;
 
-    tmp    = qAtan(deltaAscend/distance);
+    tmp    = qAtan(deltaAscent/distance);
     slope1 = qAbs(tmp * 360.0/(2 * M_PI));
     slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
 
-    IUnit::self().meter2elevation(deltaAscend, val, unit);
+    IUnit::self().meter2elevation(deltaAscent, val, unit);
     str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
     if(timeIsValid)
     {
-        IUnit::self().meter2speed(deltaAscend/deltaTime, val, unit);
+        IUnit::self().meter2speed(deltaAscent/deltaTime, val, unit);
         str += QString(", %1%2").arg(val).arg(unit);
     }
     str += "\n";
 
-    tmp    = qAtan(deltaDescend/distance);
+    tmp    = qAtan(deltaDescent/distance);
     slope1 = qAbs(tmp * 360.0/(2 * M_PI));
     slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
 
-    IUnit::self().meter2elevation(deltaDescend, val, unit);
+    IUnit::self().meter2elevation(deltaDescent, val, unit);
     str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
     if(timeIsValid)
     {
-        IUnit::self().meter2speed(deltaDescend/deltaTime, val, unit);
+        IUnit::self().meter2speed(deltaDescent/deltaTime, val, unit);
         str += QString(", %1%2").arg(val).arg(unit);
     }
 
@@ -644,21 +644,21 @@ QString CGisItemTrk::getInfoProgress(const trkpt_t& pt) const
 {
     QString val, unit;
 
-    QString asc = tr("Ascend: - (-)");
-    QString dsc = tr("Descend: - (-)");
+    QString asc = tr("Ascent: - (-)");
+    QString dsc = tr("Descent: - (-)");
     QString dst = tr("Distance: - (-)");
     QString mov = tr("Moving: - (-)");
 
-    if(pt.ascend != NOFLOAT)
+    if(pt.ascent != NOFLOAT)
     {
-        IUnit::self().meter2elevation(pt.ascend, val, unit);
-        asc = tr("Ascend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascend * 100/totalAscend, 2, 'f', 0);
+        IUnit::self().meter2elevation(pt.ascent, val, unit);
+        asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100/totalAscent, 2, 'f', 0);
     }
 
-    if(pt.descend != NOFLOAT)
+    if(pt.descent != NOFLOAT)
     {
-        IUnit::self().meter2elevation(pt.descend, val, unit);
-        dsc = tr(" Descend: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descend * 100/totalDescend, 2, 'f', 0);
+        IUnit::self().meter2elevation(pt.descent, val, unit);
+        dsc = tr(" Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100/totalDescent, 2, 'f', 0);
     }
 
     if(pt.distance != NOFLOAT)
@@ -686,29 +686,29 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const
         dt = pt2.time.toTime_t() - pt1.time.toTime_t();
     }
 
-    QString asc = tr("Ascend: -");
-    QString dsc = tr("Descend: -");
+    QString asc = tr("Ascent: -");
+    QString dsc = tr("Descent: -");
 
-    if((pt1.ascend != NOFLOAT) && (pt2.ascend != NOFLOAT))
+    if((pt1.ascent != NOFLOAT) && (pt2.ascent != NOFLOAT))
     {
-        IUnit::self().meter2elevation(pt2.ascend - pt1.ascend, val, unit);
-        asc = tr("Ascend: %1%2").arg(val).arg(unit);
+        IUnit::self().meter2elevation(pt2.ascent - pt1.ascent, val, unit);
+        asc = tr("Ascent: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
-            IUnit::self().meter2speed((pt2.ascend - pt1.ascend)/dt, val, unit);
+            IUnit::self().meter2speed((pt2.ascent - pt1.ascent)/dt, val, unit);
             asc += tr(", %1%2").arg(val).arg(unit);
         }
     }
 
-    if((pt1.descend != NOFLOAT) && (pt2.descend != NOFLOAT))
+    if((pt1.descent != NOFLOAT) && (pt2.descent != NOFLOAT))
     {
-        IUnit::self().meter2elevation(pt2.descend - pt1.descend, val, unit);
-        dsc = tr(" Descend: %1%2").arg(val).arg(unit);
+        IUnit::self().meter2elevation(pt2.descent - pt1.descent, val, unit);
+        dsc = tr(" Descent: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
-            IUnit::self().meter2speed((pt2.descend - pt1.descend)/dt, val, unit);
+            IUnit::self().meter2speed((pt2.descent - pt1.descent)/dt, val, unit);
             dsc += tr(", %1%2").arg(val).arg(unit);
         }
     }
@@ -913,8 +913,8 @@ void CGisItemTrk::deriveSecondaryData()
     timeStart                 = QDateTime();
     timeEnd                   = QDateTime();
     totalDistance             = NOFLOAT;
-    totalAscend               = NOFLOAT;
-    totalDescend              = NOFLOAT;
+    totalAscent               = NOFLOAT;
+    totalDescent              = NOFLOAT;
     totalElapsedSeconds       = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
 
@@ -983,23 +983,23 @@ void CGisItemTrk::deriveSecondaryData()
                 trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
                 trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
 
-                // ascend descend
+                // ascent descent
                 if(lastEle != NOINT)
                 {
                     qint32 delta  = trkpt.ele - lastEle;
 
-                    trkpt.ascend  = lastTrkpt->ascend;
-                    trkpt.descend = lastTrkpt->descend;
+                    trkpt.ascent  = lastTrkpt->ascent;
+                    trkpt.descent = lastTrkpt->descent;
 
-                    if(qAbs(delta) > ASCEND_THRESHOLD)
+                    if(qAbs(delta) > ASCENT_THRESHOLD)
                     {
                         if(delta > 0)
                         {
-                            trkpt.ascend  += delta;
+                            trkpt.ascent  += delta;
                         }
                         else
                         {
-                            trkpt.descend -= delta;
+                            trkpt.descent -= delta;
                         }
                         lastEle = trkpt.ele;
                     }
@@ -1021,8 +1021,8 @@ void CGisItemTrk::deriveSecondaryData()
 
                 trkpt.deltaDistance        = 0;
                 trkpt.distance             = 0;
-                trkpt.ascend               = 0;
-                trkpt.descend              = 0;
+                trkpt.ascent               = 0;
+                trkpt.descent              = 0;
                 trkpt.elapsedSeconds       = 0;
                 trkpt.elapsedSecondsMoving = 0;
             }
@@ -1103,8 +1103,8 @@ void CGisItemTrk::deriveSecondaryData()
     {
         timeEnd                   = lastTrkpt->time;
         totalDistance             = lastTrkpt->distance;
-        totalAscend               = lastTrkpt->ascend;
-        totalDescend              = lastTrkpt->descend;
+        totalAscent               = lastTrkpt->ascent;
+        totalDescent              = lastTrkpt->descent;
         totalElapsedSeconds       = lastTrkpt->elapsedSeconds;
         totalElapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
     }
@@ -1130,8 +1130,8 @@ void CGisItemTrk::deriveSecondaryData()
 //    qDebug() << "--------------" << getName() << "------------------";
 //    qDebug() << "allValidFlags" << hex << allValidFlags;
 //    qDebug() << "totalDistance" << totalDistance;
-//    qDebug() << "totalAscend" << totalAscend;
-//    qDebug() << "totalDescend" << totalDescend;
+//    qDebug() << "totalAscent" << totalAscent;
+//    qDebug() << "totalDescent" << totalDescent;
 //    qDebug() << "totalElapsedSeconds" << totalElapsedSeconds;
 //    qDebug() << "totalElapsedSecondsMoving" << totalElapsedSecondsMoving;
 }

@@ -306,13 +306,13 @@ public:
     {
         return totalDistance;
     }
-    qreal getTotalAscend() const
+    qreal getTotalAscent() const
     {
-        return totalAscend;
+        return totalAscent;
     }
-    qreal getTotalDescend() const
+    qreal getTotalDescent() const
     {
-        return totalDescend;
+        return totalDescent;
     }
     qreal getTotalElapsedSeconds() const
     {
@@ -524,8 +524,8 @@ protected:
     qint32 cntWpts                   = 0;
 
     qreal totalDistance             = 0;
-    qreal totalAscend               = 0;
-    qreal totalDescend              = 0;
+    qreal totalAscent               = 0;
+    qreal totalDescent              = 0;
     quint32 totalElapsedSeconds       = 0;
     quint32 totalElapsedSecondsMoving = 0;
 

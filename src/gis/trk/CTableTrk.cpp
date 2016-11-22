@@ -92,8 +92,8 @@ void CTableTrk::updateData()
             item->setTextAlignment(eColEle,     Qt::AlignRight);
             item->setTextAlignment(eColDelta,   Qt::AlignRight);
             item->setTextAlignment(eColDist,    Qt::AlignRight);
-            item->setTextAlignment(eColAscend,  Qt::AlignRight);
-            item->setTextAlignment(eColDescend, Qt::AlignRight);
+            item->setTextAlignment(eColAscent,  Qt::AlignRight);
+            item->setTextAlignment(eColDescent, Qt::AlignRight);
             item->setTextAlignment(eColSpeed,   Qt::AlignRight);
 
             if(!trk->isReadOnly())
@@ -153,10 +153,10 @@ void CTableTrk::updateData()
                           : "-"
                           );
 
-            IUnit::self().meter2elevation(trkpt.ascend, val, unit);
-            item->setText(eColAscend, tr("%1 %2").arg(val).arg(unit));
-            IUnit::self().meter2elevation(trkpt.descend, val, unit);
-            item->setText(eColDescend, tr("%1 %2").arg(val).arg(unit));
+            IUnit::self().meter2elevation(trkpt.ascent, val, unit);
+            item->setText(eColAscent, tr("%1 %2").arg(val).arg(unit));
+            IUnit::self().meter2elevation(trkpt.descent, val, unit);
+            item->setText(eColDescent, tr("%1 %2").arg(val).arg(unit));
 
             // position
             QString str;

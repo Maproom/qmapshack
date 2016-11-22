@@ -44,7 +44,7 @@ class CPropertyTrk;
 class CFitStream;
 
 #define TRK_N_COLORS          17
-#define ASCEND_THRESHOLD       5
+#define ASCENT_THRESHOLD       5
 #define MIN_WIDTH_INFO_BOX   300
 
 class CGisItemTrk : public IGisItem, public IGisLine
@@ -207,14 +207,14 @@ public:
         return totalElapsedSecondsMoving;
     }
 
-    qreal getTotalAscend() const
+    qreal getTotalAscent() const
     {
-        return totalAscend;
+        return totalAscent;
     }
 
-    qreal getTotalDescend() const
+    qreal getTotalDescent() const
     {
-        return totalDescend;
+        return totalDescent;
     }
 
     qreal getTotalDistance() const
@@ -743,8 +743,8 @@ public:
         {
             deltaDistance   = NOFLOAT;
             distance        = NOFLOAT;
-            ascend          = NOFLOAT;
-            descend         = NOFLOAT;
+            ascent          = NOFLOAT;
+            descent         = NOFLOAT;
             elapsedSeconds  = NOFLOAT;
             elapsedSecondsMoving = NOFLOAT;
             slope1          = NOFLOAT;
@@ -824,8 +824,8 @@ public:
         qint32 idxVisible;                  //< offset into lineSimple
         qreal deltaDistance;                //< the distance to the last point
         qreal distance;                     //< the distance from the start of the track
-        qreal ascend;                       //< the ascend from the start of the track
-        qreal descend;                      //< the descend from the start of the track
+        qreal ascent;                       //< the ascent from the start of the track
+        qreal descent;                      //< the descent from the start of the track
         qreal slope1;                       //< the slope [°] over several points close by
         qreal slope2;                       //< the slope [%] over several points close by
         qreal speed;                        //< the speed over several points close by
@@ -931,8 +931,8 @@ private:
     QDateTime timeStart;
     QDateTime timeEnd;
     qreal totalDistance = 0;
-    qreal totalAscend   = 0;
-    qreal totalDescend  = 0;
+    qreal totalAscent   = 0;
+    qreal totalDescent  = 0;
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;

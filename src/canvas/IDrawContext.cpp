@@ -168,7 +168,7 @@ void IDrawContext::zoom(const QRectF& rect)
     // special case for elements with no extent
     if(rect.width() == 0 || rect.height() == 0)
     {
-        zoom(8);
+        zoom(scalesType == CCanvas::eScalesDefault ? 8 : 4);
         return;
     }
 

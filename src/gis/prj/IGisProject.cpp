@@ -259,7 +259,7 @@ void IGisProject::updateItems()
         return;
     }
 
-
+    sortItems();
     updateItemCounters();
 
     if(noCorrelation)

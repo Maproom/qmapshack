@@ -69,7 +69,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
         }
     }
 
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     blockUpdateItems(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
@@ -227,7 +227,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     }
 
     project->sortItems();
-    project->setupName(QFileInfo(filename).baseName().replace("_", " "));
+    project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     project->setToolTip(CGisListWks::eColumnName, project->getInfo());
     project->valid = true;
 }

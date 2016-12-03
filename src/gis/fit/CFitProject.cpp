@@ -149,7 +149,7 @@ void CFitProject::createGisItems(QFile& file)
     }
     else
     {
-        setupName(QFileInfo(filename).baseName().replace("_", " "));
+        setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     }
 }
 

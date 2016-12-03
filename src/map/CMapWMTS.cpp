@@ -244,13 +244,13 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     // create default cache path from filename
     QFileInfo fi(filename);
-    slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
+    slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.completeBaseName()));
 
     accessManager   = new QNetworkAccessManager(parent->thread());
     connect(this,          &CMapWMTS::sigQueueChanged,       this, &CMapWMTS::slotQueueChanged);
     connect(accessManager, &QNetworkAccessManager::finished, this, &CMapWMTS::slotRequestFinished);
 
-    name = fi.baseName().replace("_", " ");
+    name = fi.completeBaseName().replace("_", " ");
 
     isActivated = true;
 }

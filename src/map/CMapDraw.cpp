@@ -272,9 +272,9 @@ void CMapDraw::buildMapList()
 
             CMapItem * item = new CMapItem(*mapList, this);
 
-            maps.insert(fi.baseName());
+            maps.insert(fi.completeBaseName());
 
-            item->setText(0, fi.baseName().replace("_", " "));
+            item->setText(0, fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 

@@ -206,6 +206,9 @@ private:
 
     QPointer<CColorLegend> colorLegend;
 
+    /// current accumulated angleDelta, used/required for zooming on trackpads
+    int zoomAngleDelta = 0;
+
     /// timer to poll for track gaining/loosing focus
     QTimer * timerTrackOnFocus;
     /// the key of the currently focused track

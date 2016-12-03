@@ -39,7 +39,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, IDevice * parent)
     load(filename);
 
     sortItems();
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;
@@ -63,7 +63,7 @@ CTwoNavProject::CTwoNavProject(const QString &filename, const IGisProject * proj
     }
 
     sortItems();
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;
@@ -251,7 +251,7 @@ bool CTwoNavProject::load(const QString& filename)
 
         if(fi.suffix().toLower() == "key")
         {
-            key = fi.baseName();
+            key = fi.completeBaseName();
             break;
         }
     }

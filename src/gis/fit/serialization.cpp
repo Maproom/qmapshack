@@ -178,7 +178,7 @@ static QString evaluateTrkName(CFitStream &stream)
     }
 
     // fourth place: take the filename of the fit file
-    return QFileInfo(stream.getFileName()).baseName().replace("_", " ");
+    return QFileInfo(stream.getFileName()).completeBaseName().replace("_", " ");
 }
 
 

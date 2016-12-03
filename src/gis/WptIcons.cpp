@@ -76,7 +76,7 @@ void initWptIcons()
     for(const QString &filename : filenames)
     {
         QFileInfo fi(filename);
-        QString name = fi.baseName();
+        QString name = fi.completeBaseName();
         setWptIconByName(name, dirIcon.filePath(filename));
     }
 }

@@ -411,6 +411,17 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 {
     mouse->wheelEvent(e);
 
+    // angleDelta() returns the eighths of a degree
+    // of the mousewheel
+    // -> zoom in/out every 15 degress = every 120 eights
+    const int EIGHTS_ZOOM = 15 * 8;
+    zoomAngleDelta += e->angleDelta().y();
+    if(abs(zoomAngleDelta) < EIGHTS_ZOOM) {
+        return;
+    }
+
+    zoomAngleDelta = 0;
+
     QPointF pos = e->posF();
     QPointF pt1 = pos;
 

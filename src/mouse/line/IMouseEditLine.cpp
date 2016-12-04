@@ -89,13 +89,6 @@ IMouseEditLine::~IMouseEditLine()
     delete scrOptEditLine;
 }
 
-void IMouseEditLine::setCanvasPanning(bool enable)
-{
-    doCanvasPanning = enable;
-
-    scrOptEditLine->toolUndo->setVisible(!enable);
-    scrOptEditLine->toolRedo->setVisible(!enable);
-}
 
 
 void IMouseEditLine::commonSetup()
@@ -266,11 +259,6 @@ void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
 {
     point  = e->pos();
 
-    if(doCanvasPanning)
-    {
-        panCanvas(e->pos());
-    }
-
     lineOp->mouseMoveEvent(e);
 
     canvas->displayInfo(point);
@@ -295,11 +283,6 @@ void IMouseEditLine::keyPressEvent(QKeyEvent * e)
     lineOp->keyPressEvent(e);
 }
 
-void IMouseEditLine::slotPanCanvas()
-{
-    IMouse::slotPanCanvas();
-    lineOp->canvasPanned(point);
-}
 
 void IMouseEditLine::slotDeletePoint()
 {
@@ -307,7 +290,6 @@ void IMouseEditLine::slotDeletePoint()
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
-    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotSelectRange()
@@ -316,7 +298,6 @@ void IMouseEditLine::slotSelectRange()
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
-    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotMovePoint()
@@ -325,7 +306,6 @@ void IMouseEditLine::slotMovePoint()
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
-    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotAddPoint()
@@ -334,7 +314,6 @@ void IMouseEditLine::slotAddPoint()
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();
-    setCanvasPanning(false);
 }
 
 void IMouseEditLine::slotNoRouting()

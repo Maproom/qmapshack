@@ -122,8 +122,6 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
     }
     }
 
-    // switch on map panning if move operation is in progress
-    parentHandler->setCanvasPanning(state != eStateIdle);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 

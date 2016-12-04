@@ -62,10 +62,6 @@ public:
         return cursor;
     }
 
-    virtual void canvasPanned(QPointF)
-    {
-    }
-
     /**
        @brief   (try to) abort a step in the current operation
 

@@ -511,9 +511,11 @@ void IPlot::wheelEvent(QWheelEvent * e)
     case Qt::AltModifier:
         doHorizontalZoom    = true;
         break;
+
     case Qt::ControlModifier:
         doVerticalZoom      = true;
         break;
+
     case Qt::NoModifier:
         doHorizontalZoom    = true;
         doVerticalZoom      = true;

@@ -33,7 +33,7 @@ CLineOpSelectRange::~CLineOpSelectRange()
 {
 }
 
-void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
+void CLineOpSelectRange::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {
@@ -122,8 +122,6 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
     }
     }
 
-    // switch on map panning if move operation is in progress
-    parentHandler->setCanvasPanning(state != eStateIdle);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 

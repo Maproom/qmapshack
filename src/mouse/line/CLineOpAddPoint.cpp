@@ -42,10 +42,9 @@ void CLineOpAddPoint::append()
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
     isPoint  = true;
-    parentHandler->setCanvasPanning(addPoint);
 }
 
-void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
+void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {
@@ -94,7 +93,7 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
 
             addPoint = true;
         }
-        else
+        else if(idxFocus != NOIDX)
         {
             // clear current line segment
             points[idxFocus].subpts.clear();
@@ -115,7 +114,6 @@ void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
         idxFocus = NOIDX;
     }
 
-    parentHandler->setCanvasPanning(addPoint);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -130,7 +128,6 @@ bool CLineOpAddPoint::abortStep()
         addPoint = false;
         idxFocus = NOIDX;
 
-        parentHandler->setCanvasPanning(addPoint);
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 
         return true;
@@ -181,15 +178,6 @@ void CLineOpAddPoint::mouseMoveEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpAddPoint::canvasPanned(QPointF pos)
-{
-    if(addPoint)
-    {
-        gis->convertPx2Rad(pos);
-        points[idxFocus].coord = pos;
-    }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
 
 
 void CLineOpAddPoint::drawFg(QPainter& p)

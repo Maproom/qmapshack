@@ -416,7 +416,8 @@ void CCanvas::wheelEvent(QWheelEvent * e)
     // -> zoom in/out every 15 degress = every 120 eights
     const int EIGHTS_ZOOM = 15 * 8;
     zoomAngleDelta += e->angleDelta().y();
-    if(abs(zoomAngleDelta) < EIGHTS_ZOOM) {
+    if(abs(zoomAngleDelta) < EIGHTS_ZOOM)
+    {
         return;
     }
 

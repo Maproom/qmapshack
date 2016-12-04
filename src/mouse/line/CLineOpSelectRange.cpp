@@ -33,7 +33,7 @@ CLineOpSelectRange::~CLineOpSelectRange()
 {
 }
 
-void CLineOpSelectRange::mousePressEventEx(QMouseEvent * e)
+void CLineOpSelectRange::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {

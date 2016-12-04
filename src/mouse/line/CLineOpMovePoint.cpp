@@ -34,7 +34,7 @@ CLineOpMovePoint::~CLineOpMovePoint()
 {
 }
 
-void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
+void CLineOpMovePoint::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {

@@ -34,7 +34,7 @@ CMouseEditArea::CMouseEditArea(const QPointF& point, CGisDraw * gis, CCanvas * p
 CMouseEditArea::CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent)
     : IMouseEditLine(area.getKey(), area, false, tr("Area"), gis, parent)
 {
-    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Edit Area</b><br/>Select a function and a routing mode via the tool buttons. Next select a point of the line. Only points marked with a large square can be changed. The ones with a black dot are subpoints introduced by routing.<br/>") + docPanning);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 

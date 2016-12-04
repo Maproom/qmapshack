@@ -47,7 +47,7 @@ void CLineOpMovePoint::mouseReleaseEventEx(QMouseEvent * e)
             // store new state of line to undo/redo history
             parentHandler->storeToHistory(points);
         }
-        else
+        else if(idxFocus != NOIDX)
         {
             QPointF coord = e->pos();
             gis->convertPx2Rad(coord);

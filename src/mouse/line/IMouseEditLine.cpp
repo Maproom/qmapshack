@@ -246,7 +246,7 @@ void IMouseEditLine::startNewLine(const QPointF& point)
         lineOpAddPoint->append();
     }
 
-    canvas->reportStatus(key.item, tr("<b>New Line</b><br/>Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>New Line</b><br/>Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.<br/>") + docPanning);
 }
 
 void IMouseEditLine::mousePressEvent(QMouseEvent * e)
@@ -286,7 +286,7 @@ void IMouseEditLine::keyPressEvent(QKeyEvent * e)
 
 void IMouseEditLine::slotDeletePoint()
 {
-    canvas->reportStatus(key.item, tr("<b>Delete Point</b><br/>Move the mouse close to a point and press the left button to delete it.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Delete Point</b><br/>Move the mouse close to a point and press the left button to delete it.<br/>") + docPanning);
     delete lineOp;
     lineOp = new CLineOpDeletePoint(points, gis, canvas, this);
     changeCursor();
@@ -294,7 +294,7 @@ void IMouseEditLine::slotDeletePoint()
 
 void IMouseEditLine::slotSelectRange()
 {
-    canvas->reportStatus(key.item, tr("<b>Select Range of Points</b><br/>Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Select Range of Points</b><br/>Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.<br/>") + docPanning);
     delete lineOp;
     lineOp = new CLineOpSelectRange(points, gis, canvas, this);
     changeCursor();
@@ -302,7 +302,7 @@ void IMouseEditLine::slotSelectRange()
 
 void IMouseEditLine::slotMovePoint()
 {
-    canvas->reportStatus(key.item, tr("<b>Move Point</b><br/>Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Move Point</b><br/>Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.<br/>") + docPanning);
     delete lineOp;
     lineOp = new CLineOpMovePoint(points, gis, canvas, this);
     changeCursor();
@@ -310,7 +310,7 @@ void IMouseEditLine::slotMovePoint()
 
 void IMouseEditLine::slotAddPoint()
 {
-    canvas->reportStatus(key.item, tr("<b>Add Point</b><br/>Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.<br/>"));
+    canvas->reportStatus(key.item, tr("<b>Add Point</b><br/>Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.<br/>") + docPanning);
     delete lineOp;
     lineOp = new CLineOpAddPoint(points, gis, canvas, this);
     changeCursor();

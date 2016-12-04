@@ -504,7 +504,7 @@ bool CDBProject::save()
     bool success    = true;
     int lastResult  = CSelectSaveAction::eResultNone;
 
-    // check if project is still part of the databasse
+    // check if project is still part of the database
     query.prepare("SELECT keyqms FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return false);

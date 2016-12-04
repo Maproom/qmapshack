@@ -35,8 +35,6 @@ public:
 
     void drawFg(QPainter& p) override;
 
-    void canvasPanned(QPointF pos) override;
-
     void append();
 
     bool abortStep() override;

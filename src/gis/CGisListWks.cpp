@@ -1317,7 +1317,7 @@ void CGisListWks::slotCopyItem()
      *
      * As a fix the keys of the selected items are stored temporarily and
      * later used to retrieve the item on the workspace via CGisWidget::getItemByKey()
-     * again. This is allways safe.
+     * again. This is always safe.
      */
     QList<QTreeWidgetItem*> items = selectedItems();
     QList<IGisItem::key_t>  keys;

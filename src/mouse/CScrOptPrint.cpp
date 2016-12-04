@@ -27,4 +27,3 @@ CScrOptPrint::CScrOptPrint(IMouse *mouse)
     adjustSize();
 }
 
-

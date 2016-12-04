@@ -60,7 +60,7 @@ bool IDBFolderSql::update()
      * dbFoldersAdd is filled with all folders IDs attached with the database folder. Now we
      * iterate over all existing items and remove their ID from dbFoldersAdd. Additionally
      * the folder item is updated. If the update returns false, the folders was removed from
-     * the database or an error occured. In both cases the item is registered for removal in
+     * the database or an error occurred. In both cases the item is registered for removal in
      * dbFoldersDel.
      *
      * When done with the iteration all folders registered for removal are deleted and the

@@ -99,8 +99,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         {
             QPoint delta = point - lastPos;
             canvas->moveMap(delta);
-            lastPos     = point;
-            mapDidMove  = true;
+            lastPos    = point;
+            mapDidMove = true;
         }
     }
     else

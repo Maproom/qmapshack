@@ -521,7 +521,7 @@ void CGisListDB::slotDelFolder()
     for(QTreeWidgetItem * item : itemsToDelete)
     {
         // Test if the item's parent is also in the list.
-        // If it is skip it because it will be deleted together with it's parent.
+        // If it is skip it because it will be deleted together with its parent.
         if(itemsToDelete.contains(item->parent()))
         {
             continue;
@@ -655,7 +655,7 @@ void CGisListDB::slotMoveFolder()
         IDBFolder * parent = dynamic_cast<IDBFolder*>(folder->parent());
         if((parent == nullptr) || (parent->getId() == idTarget))
         {
-            // skip operation if the current parent is the same as the traget parent
+            // skip operation if the current parent is the same as the target parent
             continue;
         }
 
@@ -665,7 +665,7 @@ void CGisListDB::slotMoveFolder()
             continue;
         }
 
-        // copy to new loacation
+        // copy to new location
         dbfolder->copyFolder(folder->getId(), idTarget);
         // Because some items can be parent of other selected items
         // it's a bad idea to delete them asap. Better collect them first.

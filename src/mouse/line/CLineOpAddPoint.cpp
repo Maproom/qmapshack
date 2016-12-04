@@ -45,7 +45,7 @@ void CLineOpAddPoint::append()
     parentHandler->setCanvasPanning(addPoint);
 }
 
-void CLineOpAddPoint::mousePressEventEx(QMouseEvent * e)
+void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {

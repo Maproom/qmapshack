@@ -93,7 +93,7 @@ void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)
 
             addPoint = true;
         }
-        else
+        else if(idxFocus != NOIDX)
         {
             // clear current line segment
             points[idxFocus].subpts.clear();

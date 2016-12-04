@@ -132,6 +132,8 @@ protected:
     /// the key of the GIS item to edit
     IGisItem::key_t key;
 
+    QString docPanning = tr("<br/><b>Move the map</b><br/>If you keep the left mouse button pressed and move the mouse, you will move the map.<br/><br/>");
+
 private:
     void commonSetup();
     void changeCursor();

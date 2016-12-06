@@ -621,6 +621,11 @@ private:
     void readTrkFromFit(CFitStream &stream);
 
     /**
+       @brief Consolidate points and subpoints
+     */
+    void consolidatePoints();
+
+    /**
        @brief Derive secondary data from the track data
 
        This has to be called each time the track data is changed.

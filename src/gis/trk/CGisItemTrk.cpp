@@ -317,7 +317,12 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
         {
             if(!pt.isHidden())
             {
-                l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+                if(pt.hasFlag(trkpt_t::eSubpt))
+                {
+                    l.last().subpts << subpt_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+                } else {
+                    l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+                }
             }
         }
     }
@@ -353,6 +358,7 @@ void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
             trkpt.lon = sub.coord.x() * RAD_TO_DEG;
             trkpt.lat = sub.coord.y() * RAD_TO_DEG;
             trkpt.ele = sub.ele;
+            trkpt.setFlag(trkpt_t::eSubpt);
         }
     }
 
@@ -2595,8 +2601,6 @@ void CGisItemTrk::updateHistory(quint32 visuals)
 
 void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
 {
-    qDebug() << "CGisItemTrk::updateVisuals()" << getName() << who;
-
     if(!dlgDetails.isNull() && (visuals & eVisualDetails))
     {
         dlgDetails->updateData();

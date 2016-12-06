@@ -905,8 +905,24 @@ void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
     }
 }
 
+void CGisItemTrk::consolidatePoints()
+{
+    for(trkseg_t &seg : trk.segs)
+    {
+        if(seg.pts.empty())
+        {
+            continue;
+        }
+
+        seg.pts.first().unsetFlag(trkpt_t::eSubpt);
+        seg.pts.last().unsetFlag(trkpt_t::eSubpt);
+    }
+}
+
 void CGisItemTrk::deriveSecondaryData()
 {
+    consolidatePoints();
+
     qreal north = -90;
     qreal east  = -180;
     qreal south =  90;

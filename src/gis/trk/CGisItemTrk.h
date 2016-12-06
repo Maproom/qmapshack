@@ -580,6 +580,7 @@ public:
     void filterDelete();
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
+    void filterSubPt2Pt();
     /** @} */
 
     /**

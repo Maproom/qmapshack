@@ -469,5 +469,5 @@ void CGisItemTrk::filterSubPt2Pt()
     }
     propHandler->setupData();
 
-    changed(tr("Convert SubPoints to Points"), "://icons/48x48/FilterModifyExtension.png");
+    changed(tr("Convert SubPoints to Points"), "://icons/48x48/FilterSubPt2Pt.png");
 }

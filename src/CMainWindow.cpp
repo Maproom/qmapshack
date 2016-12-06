@@ -1078,7 +1078,7 @@ void CMainWindow::slotSanityTest()
     if(pjsrc == nullptr)
     {
         QMessageBox::critical(this, tr("Fatal...")
-                              ,tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.")
+                              ,tr("QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.")
                               ,QMessageBox::Close);
 
         deleteLater();

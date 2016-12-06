@@ -362,7 +362,7 @@ bool IDBSqlite::migrateDB4to5()
 {
     QSqlQuery query(db);
 
-    // create virtual table with serach index
+    // create virtual table with search index
     QUERY_RUN("CREATE VIRTUAL TABLE searchindex USING fts4(id, comment)", return false);
 
     // get number of items in the database

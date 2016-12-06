@@ -273,9 +273,9 @@ bool IDBFolder::update()
      * left overs are the folders to add.
      *
      * Update existing folders. If the update return s false the folder was removed from
-     * the database or an error occured. In both cases remove the folder item.
+     * the database or an error occurred. In both cases remove the folder item.
      *
-     * Collect all items in dbItems. They will be removed and the item list ist rebuilt
+     * Collect all items in dbItems. They will be removed and the item list is rebuilt
      * from scratch.
      */
     QSet<QString>       activeChildren;
@@ -298,7 +298,7 @@ bool IDBFolder::update()
         QTreeWidgetItem * item = child(i);
 
         // test for folder and update folder
-        // remove the folder from the add list as it is allready known
+        // remove the folder from the add list as it is already known
         // if the update returns false register it for removal
         IDBFolder * dbFolder = dynamic_cast<IDBFolder*>(item);
         if(dbFolder != nullptr)

@@ -46,7 +46,7 @@ private:
     /**
        @brief Get a temporary list of all items
 
-       @Note: The list of items is only temporary and maust not be used outside the calling method.
+       @Note: The list of items is only temporary and must not be used outside the calling method.
 
        @param items a temporary list to collect all item pointers
      */

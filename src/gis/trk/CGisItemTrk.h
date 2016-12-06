@@ -580,6 +580,7 @@ public:
     void filterDelete();
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
+    void filterSubPt2Pt();
     /** @} */
 
     /**
@@ -618,6 +619,11 @@ private:
        @param stream
      */
     void readTrkFromFit(CFitStream &stream);
+
+    /**
+       @brief Consolidate points and subpoints
+     */
+    void consolidatePoints();
 
     /**
        @brief Derive secondary data from the track data
@@ -755,7 +761,8 @@ public:
 
         enum flag_e
         {
-            eHidden         = 0x00000004      ///< mark point as deleted
+            eHidden     = 0x00000004      ///< mark point as deleted
+            ,eSubpt     = 0x00000008
                               // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000

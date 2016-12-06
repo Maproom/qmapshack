@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -453,4 +454,20 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
     changed(tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
+}
+
+void CGisItemTrk::filterSubPt2Pt()
+{
+    for(int i = 0; i < trk.segs.size(); i++)
+    {
+        trkseg_t& seg = trk.segs[i];
+
+        for(int n = 0; n < seg.pts.size(); n++)
+        {
+            seg.pts[n].unsetFlag(trkpt_t::eSubpt);
+        }
+    }
+    propHandler->setupData();
+
+    changed(tr("Convert SubPoints to Points"), "://icons/48x48/FilterSubPt2Pt.png");
 }

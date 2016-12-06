@@ -428,7 +428,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             "map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package "
             "the data. This is not that easy as it might sound and for some data you have to pay royalties. "
             "The project simply lacks resources to do this. And we think installing the stuff yourself is not "
-            "that much to ask from you. After all the software is ditributed without a fee."
+            "that much to ask from you. After all the software is distributed without a fee."
             );
 
         QTextDocument doc;

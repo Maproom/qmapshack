@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="fr">
+<TS version="2.0" language="fr">
 <context>
     <name>CAbout</name>
     <message>
@@ -542,15 +542,15 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation type="vanished">distance : %1%2</translation>
+        <translation>distance : %1%2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation type="vanished">montée : %1%2</translation>
+        <translation>montée : %1%2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation type="vanished">descente : %1%2</translation>
+        <translation>descente : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="735"/>
@@ -665,7 +665,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>None</source>
-        <translation type="vanished">Aucune</translation>
+        <translation>Aucune</translation>
     </message>
 </context>
 <context>
@@ -1631,7 +1631,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation type="vanished">Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
+        <translation>Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="744"/>
@@ -1679,7 +1679,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>Save As...</source>
-        <translation type="vanished">Enregistrer sous...</translation>
+        <translation>Enregistrer sous...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="112"/>
@@ -2778,7 +2778,7 @@ Pourquoi aucune carte n&apos;est fournie par défaut ? Et bien parce qu&apos;hé
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation type="vanished">Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
+        <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -4782,7 +4782,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation type="vanished">Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
+        <translation>Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5008,7 +5008,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Sort by time</source>
-        <translation type="vanished">Trier par ordre chronolgique</translation>
+        <translation>Trier par ordre chronolgique</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="130"/>
@@ -5304,11 +5304,11 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Ascend</source>
-        <translation type="vanished">Montée</translation>
+        <translation>Montée</translation>
     </message>
     <message>
         <source>Descend</source>
-        <translation type="vanished">Descente</translation>
+        <translation>Descente</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
@@ -5576,7 +5576,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation type="vanished">Cacher les points aux coordonnées invalides du début de la trace.</translation>
+        <translation>Cacher les points aux coordonnées invalides du début de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -5632,7 +5632,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="51"/>
         <source>dd.MM.yy HH:mm:ss</source>
-        <translation>jj.MM.aa HH:mm:ss</translation>
+        <translation>dd.MM.yy HH:mm:ss</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
@@ -6495,7 +6495,7 @@ Nom de fichier: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation type="vanished">Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
+        <translation>Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -6761,11 +6761,11 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <source>Ascend:</source>
-        <translation type="vanished">Dénivelé positif:</translation>
+        <translation>Dénivelé positif:</translation>
     </message>
     <message>
         <source>Descend:</source>
-        <translation type="vanished">Dénivelé négatif:</translation>
+        <translation>Dénivelé négatif:</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.h" line="135"/>
@@ -7092,7 +7092,7 @@ or
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
         <translatorcomment>tbc: setup tool button</translatorcomment>
-        <translation type="vanished">Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données locales  de calcul d&apos;itinéraire. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
+        <translation>Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données locales  de calcul d&apos;itinéraire. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
     </message>
 </context>
 <context>
@@ -7841,11 +7841,11 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <name>ISelectActivity</name>
     <message>
         <source>Activities...</source>
-        <translation type="vanished">Activités...</translation>
+        <translation>Activités...</translation>
     </message>
     <message>
         <source>Select one:</source>
-        <translation type="vanished">Faites une sélection :</translation>
+        <translation>Faites une sélection :</translation>
     </message>
 </context>
 <context>

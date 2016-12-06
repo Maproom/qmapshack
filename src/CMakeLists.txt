@@ -210,6 +210,7 @@ set( SRCS
         gis/trk/filter/CFilterDouglasPeuker.cpp
         gis/trk/filter/CFilterInvalid.cpp
         gis/trk/filter/CFilterReset.cpp
+        gis/trk/filter/CFilterSubPt2Pt.cpp
         gis/trk/filter/CFilterDelete.cpp
         gis/trk/filter/CFilterDeleteExtension.cpp
         gis/trk/filter/CFilterMedian.cpp
@@ -469,6 +470,7 @@ set( HDRS
         gis/trk/filter/CFilterDouglasPeuker.h
         gis/trk/filter/CFilterInvalid.h
         gis/trk/filter/CFilterReset.h
+        gis/trk/filter/CFilterSubPt2Pt.h
         gis/trk/filter/CFilterDelete.h
         gis/trk/filter/CFilterDeleteExtension.h
         gis/trk/filter/CFilterMedian.h
@@ -585,11 +587,11 @@ set( UIS
     widgets/IColorChooser.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
-    helpers/IWptIconDialog.ui    
+    helpers/IWptIconDialog.ui
     helpers/ISelectProjectDialog.ui
     helpers/ISelectCopyAction.ui
     helpers/IElevationDialog.ui
-    helpers/ILinksDialog.ui    
+    helpers/ILinksDialog.ui
     helpers/IProgressDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
@@ -597,7 +599,7 @@ set( UIS
     dem/IDemPropSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
-    map/IMapPropSetup.ui    
+    map/IMapPropSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     mouse/IScrOptRangeTrk.ui
@@ -627,6 +629,7 @@ set( UIS
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterReset.ui
+    gis/trk/filter/IFilterSubPt2Pt.ui
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterMedian.ui
@@ -643,7 +646,7 @@ set( UIS
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
-    gis/rte/router/IRouterRoutinoPathSetup.ui    
+    gis/rte/router/IRouterRoutinoPathSetup.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui

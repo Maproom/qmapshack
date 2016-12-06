@@ -1983,7 +1983,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         gis->convertRad2Px(anchor);
 
         // create trackpoint info text
-        QString val1, unit1, val2, unit2;
         QString str = getInfoTrkPt(*mouseMoveFocus);
 
         // calculate bounding box of text
@@ -2033,6 +2032,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         p.drawRect(0,0,d,fm.height());
 
 
+        QString val1, unit1, val2, unit2;
         IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
         IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
@@ -2056,15 +2056,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
             IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
             IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
             p.setPen(Qt::darkBlue);
-            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
-            p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->elapsedSecondsMoving * 100 / totalElapsedSecondsMoving, 0, 'f', 0));
+            p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
         }
 
         // draw text
-        p.translate(0,fm.height() + 8);
+        p.translate(0, fm.height() + 8);
         p.setPen(Qt::darkBlue);
-        p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap,str);
+        p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         p.restore();
     }
@@ -2083,7 +2083,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void CGisItemTrk::drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*)
 {
-    // tracks have no labels
+    // tracks don't have labels
 }
 
 
@@ -2543,7 +2543,7 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
         mouseRange2 = pt;
         if((fmode == eFocusMouseClick) && (pt != nullptr))
         {
-            rangeState  = eRangeState2nd;
+            rangeState = eRangeState2nd;
         }
         break;
     }
@@ -2659,7 +2659,7 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     interp.valid    = on;
     interp.Q        = (quality_e)q;
 
-    if(on == false)
+    if(!on)
     {
         updateVisuals(eVisualPlot, "setupInterpolation()");
         return;

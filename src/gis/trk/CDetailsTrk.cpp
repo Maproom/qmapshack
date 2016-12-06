@@ -32,6 +32,7 @@
 #include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
+#include "gis/trk/filter/CFilterSubPt2Pt.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
@@ -172,11 +173,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
 
-    addFilterGroup<CFilterDeleteExtension>
-        (treeFilter, trk, tr("Modify track points' extensions"), "://icons/48x48/FilterModifyExtension.png");
-
-    addFilterGroup<CFilterSplitSegment>
-        (treeFilter, trk, tr("Cut track into pieces"), "://icons/48x48/TrkCut.png");
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt>
+        (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
 
     slotShowPlots();
@@ -186,11 +184,11 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showGraph1",          checkGraph1->isChecked());
-    cfg.setValue("showGraph2",          checkGraph2->isChecked());
-    cfg.setValue("showGraph3",          checkGraph3->isChecked());
-    cfg.setValue("splitterSizes",       splitter->saveState());
-    cfg.setValue("visibleTab",          tabWidget->currentIndex());
+    cfg.setValue("showGraph1",    checkGraph1->isChecked());
+    cfg.setValue("showGraph2",    checkGraph2->isChecked());
+    cfg.setValue("showGraph3",    checkGraph3->isChecked());
+    cfg.setValue("splitterSizes", splitter->saveState());
+    cfg.setValue("visibleTab",    tabWidget->currentIndex());
     cfg.endGroup();
 
     saveGraphSource(comboGraph2, 2);

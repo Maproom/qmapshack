@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,14 +16,23 @@
 
 **********************************************************************************************/
 
-#include "CScrOptPrint.h"
+#include "canvas/CCanvas.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterSubPt2Pt.h"
 
-#include <QtWidgets>
+CFilterSubPt2Pt::CFilterSubPt2Pt(CGisItemTrk &trk, QWidget *parent)
+    : QWidget(parent)
+    , trk(trk)
 
-CScrOptPrint::CScrOptPrint(IMouse *mouse)
-    : IScrOpt(mouse)
 {
     setupUi(this);
-    adjustSize();
+
+    connect(toolApply, &QToolButton::clicked, this, &CFilterSubPt2Pt::slotApply);
 }
 
+void CFilterSubPt2Pt::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterSubPt2Pt");
+    trk.filterSubPt2Pt();
+    CCanvas::restoreOverrideCursor("CFilterSubPt2Pt");
+}

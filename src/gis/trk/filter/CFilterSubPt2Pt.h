@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,14 +16,27 @@
 
 **********************************************************************************************/
 
-#include "CScrOptPrint.h"
+#ifndef CFILTERSUBPT2PT
+#define CFILTERSUBPT2PT
 
-#include <QtWidgets>
+#include "ui_IFilterSubPt2Pt.h"
+#include <QWidget>
 
-CScrOptPrint::CScrOptPrint(IMouse *mouse)
-    : IScrOpt(mouse)
+class CGisItemTrk;
+
+class CFilterSubPt2Pt : public QWidget, private Ui::IFilterSubPt2Pt
 {
-    setupUi(this);
-    adjustSize();
-}
+    Q_OBJECT
+public:
+    CFilterSubPt2Pt(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CFilterSubPt2Pt() = default;
+
+private slots:
+    void slotApply();
+
+private:
+    CGisItemTrk& trk;
+};
+
+#endif //CFILTERSUBPT2PT
 

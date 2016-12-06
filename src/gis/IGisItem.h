@@ -362,7 +362,7 @@ public:
 
     /**
        @brief Check if there are any pending unsaved changes
-       @return True if the are changes to be safed
+       @return True if the are changes to be saved
      */
     bool isChanged() const;
 
@@ -457,7 +457,7 @@ public:
      */
     static QString removeHtml(const QString &str);
     /**
-       @brief Create a HTML formated text with comment, description and link section.
+       @brief Create a HTML formatted text with comment, description and link section.
 
        Depending on the isReadOnly flag the section headers are links to trigger a function
 
@@ -470,7 +470,7 @@ public:
      */
     static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString& key = "");
     /**
-       @brief Create a HTML formated text with description and link section.
+       @brief Create a HTML formatted text with description and link section.
 
        Depending on the isReadOnly flag the section headers are links to trigger a function
 
@@ -482,7 +482,7 @@ public:
      */
     static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key = "");
     /**
-       @brief Create a HTML formated text with a link.
+       @brief Create a HTML formatted text with a link.
 
        Depending on the isReadOnly flag the section headers are links to trigger a function
 

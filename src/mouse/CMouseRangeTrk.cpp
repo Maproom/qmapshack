@@ -87,7 +87,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
 void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 {
     canvas->reportStatus(key.item, "");
-    point  = e->pos();
+    point = e->pos();
     if(e->button() == Qt::RightButton)
     {
         canvas->resetMouse();
@@ -146,7 +146,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 
 void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
 {
-    point  = e->pos();
+    point = e->pos();
 
     switch(state)
     {
@@ -230,8 +230,8 @@ void CMouseRangeTrk::resetState()
     {
         scrOptRange->deleteLater();
     }
-    state   = eStateIdle;
-    anchor  = NOPOINTF;
+    state  = eStateIdle;
+    anchor = NOPOINTF;
     canvas->update();
 }
 

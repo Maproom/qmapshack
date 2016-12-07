@@ -288,7 +288,8 @@ void CGisItemTrk::filterInterpolateElevation()
     {
         for(trkpt_t& pt : seg.pts)
         {
-            pt.ele = getElevationInterpolated(pt.distance);
+            qreal ele = getElevationInterpolated(pt.distance);
+            pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
         }
     }
 

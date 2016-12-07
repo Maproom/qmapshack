@@ -103,17 +103,14 @@ void ITrack::updateData()
     {
         coords.clear();
         const CGisItemTrk::trk_t& t = trk->getTrackData();
-        for(const CGisItemTrk::trkseg_t& seg : t.segs)
+        for(const CGisItemTrk::trkpt_t& trkpt : t)
         {
-            for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
             {
-                if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-                {
-                    continue;
-                }
-
-                coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+                continue;
             }
+
+            coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
         }
     }
 

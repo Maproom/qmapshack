@@ -82,15 +82,12 @@ void CPlot::updateData()
 
     QPolygonF line;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(const CGisItemTrk::trkseg_t& seg : t.segs)
+    for(const CGisItemTrk::trkpt_t& trkpt : t)
     {
-        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        if(!(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+           && getY(trkpt) != NOFLOAT)
         {
-            if(!(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-               && getY(trkpt) != NOFLOAT)
-            {
-                line << QPointF(getX(trkpt), getY(trkpt) * factor);
-            }
+            line << QPointF(getX(trkpt), getY(trkpt) * factor);
         }
     }
 

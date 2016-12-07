@@ -32,18 +32,15 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     QVector<pointDP> line;
     bool nothingDone = true;
 
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
-        {
-            pointDP dp;
-            dp.x = pt.lon * DEG_TO_RAD;
-            dp.y = pt.lat * DEG_TO_RAD;
-            dp.z = pt.ele;
-            dp.used = !(pt.flags & CGisItemTrk::trkpt_t::eHidden);
+        pointDP dp;
+        dp.x = pt.lon * DEG_TO_RAD;
+        dp.y = pt.lat * DEG_TO_RAD;
+        dp.z = pt.ele;
+        dp.used = !(pt.flags & CGisItemTrk::trkpt_t::eHidden);
 
-            line << dp;
-        }
+        line << dp;
     }
 
     if(line.size() < 3)
@@ -73,29 +70,22 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
     int cnt = 0;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(line[cnt].used)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(line[cnt].used)
-            {
-                pt.flags &= ~trkpt_t::eHidden;
-            }
-            else
-            {
-                if((pt.flags & trkpt_t::eHidden) == 0)
-                {
-                    nothingDone = false;
-                    pt.flags |=  trkpt_t::eHidden;
-                }
-            }
-
-            cnt++;
+            pt.flags &= ~trkpt_t::eHidden;
         }
+        else
+        {
+            if((pt.flags & trkpt_t::eHidden) == 0)
+            {
+                nothingDone = false;
+                pt.flags |=  trkpt_t::eHidden;
+            }
+        }
+
+        cnt++;
     }
 
     if(nothingDone)
@@ -111,25 +101,18 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
 void CGisItemTrk::filterRemoveInvalidPoints()
 {
-    bool nothingDone    = true;
+    bool nothingDone = true;
 
     // use all valid flags as invalid mask. By that only
     // invalid flags for properties with valid points count
     quint32 invalidMask = (getAllValidFlags() & trkpt_t::eValidMask) << 16;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.isInvalid(trkpt_t::invalid_e(invalidMask)))
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.isInvalid(trkpt_t::invalid_e(invalidMask)))
-            {
-                pt.flags |= trkpt_t::eHidden;
-                nothingDone = false;
-            }
+            pt.setFlag(trkpt_t::eHidden);
+            nothingDone = false;
         }
     }
 
@@ -144,15 +127,9 @@ void CGisItemTrk::filterRemoveInvalidPoints()
 
 void CGisItemTrk::filterReset()
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.flags &= ~trkpt_t::eHidden;
-        }
+        pt.unsetFlag(trkpt_t::eHidden);
     }
     deriveSecondaryData();
     changed(tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
@@ -171,7 +148,7 @@ void CGisItemTrk::filterDelete()
         {
             trkpt_t& pt = seg.pts[n];
 
-            if(pt.flags & trkpt_t::eHidden)
+            if(pt.hasFlag(trkpt_t::eHidden))
             {
                 nothingDone = false;
                 continue;
@@ -197,17 +174,10 @@ void CGisItemTrk::filterSmoothProfile(int points)
     QVector<int> window(points, 0);
     QVector<int> ele1, ele2;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-
-            ele1 << pt.ele;
-            ele2 << pt.ele;
-        }
+        ele1 << pt.ele;
+        ele2 << pt.ele;
     }
 
     if(ele1.size() < (points + 1))
@@ -228,15 +198,9 @@ void CGisItemTrk::filterSmoothProfile(int points)
     }
 
     int cnt = 0;
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.ele = ele2[cnt++];
-        }
+        pt.ele = ele2[cnt++];
     }
     deriveSecondaryData();
     changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
@@ -262,16 +226,10 @@ void CGisItemTrk::filterReplaceElevation()
     CMainWindow::self().getElevationAt(line, ele);
 
     int cnt = 0;
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
-            cnt++;
-        }
+        pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
+        cnt++;
     }
 
     deriveSecondaryData();
@@ -285,12 +243,9 @@ void CGisItemTrk::filterInterpolateElevation()
         return;
     }
 
-    for(trkseg_t& seg : trk.segs)
+    for(trkpt_t& pt : trk)
     {
-        for(trkpt_t& pt : seg.pts)
-        {
-            pt.ele = getElevationInterpolated(pt.distance);
-        }
+        pt.ele = getElevationInterpolated(pt.distance);
     }
 
     interp.valid = false;
@@ -300,18 +255,11 @@ void CGisItemTrk::filterInterpolateElevation()
 
 void CGisItemTrk::filterOffsetElevation(int offset)
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.ele != NOINT)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.ele != NOINT)
-            {
-                pt.ele += offset;
-            }
+            pt.ele += offset;
         }
     }
 
@@ -325,15 +273,9 @@ void CGisItemTrk::filterNewDate(const QDateTime& date)
 {
     qint64 delta = qint64(date.toTime_t()) - qint64(timeStart.toUTC().toTime_t());
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.time = pt.time.addSecs(delta);
-        }
+        pt.time = pt.time.addSecs(delta);
     }
 
     deriveSecondaryData();
@@ -344,15 +286,9 @@ void CGisItemTrk::filterObscureDate(int delta)
 {
     if(delta == 0)
     {
-        for(int i = 0; i < trk.segs.size(); i++)
+        for(trkpt_t& pt : trk)
         {
-            trkseg_t& seg = trk.segs[i];
-
-            for(int n = 0; n < seg.pts.size(); n++)
-            {
-                trkpt_t& pt = seg.pts[n];
-                pt.time = QDateTime();
-            }
+            pt.time = QDateTime();
         }
 
         deriveSecondaryData();
@@ -366,16 +302,10 @@ void CGisItemTrk::filterObscureDate(int delta)
             timestamp = QDateTime::currentDateTime().toUTC();
         }
 
-        for(int i = 0; i < trk.segs.size(); i++)
+        for(trkpt_t& pt : trk)
         {
-            trkseg_t& seg = trk.segs[i];
-
-            for(int n = 0; n < seg.pts.size(); n++)
-            {
-                trkpt_t& pt = seg.pts[n];
-                pt.time = timestamp;
-                timestamp = timestamp.addSecs(delta);
-            }
+            pt.time = timestamp;
+            timestamp = timestamp.addSecs(delta);
         }
 
         deriveSecondaryData();
@@ -391,21 +321,15 @@ void CGisItemTrk::filterSpeed(qreal speed)
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.hasFlag(trkpt_t::eHidden))
         {
-            trkpt_t& pt = seg.pts[n];
-            if(pt.flags & trkpt_t::eHidden)
-            {
-                continue;
-            }
-
-            timestamp   = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
-            pt.time     = timestamp;
+            continue;
         }
+
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        pt.time   = timestamp;
     }
 
     deriveSecondaryData();
@@ -438,14 +362,9 @@ void CGisItemTrk::filterSplitSegment()
 
 void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            seg.pts[n].extensions.remove(extStr);
-        }
+        pt.extensions.remove(extStr);
     }
 
     extrema.remove(extStr);
@@ -458,14 +377,9 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 
 void CGisItemTrk::filterSubPt2Pt()
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            seg.pts[n].unsetFlag(trkpt_t::eSubpt);
-        }
+        pt.unsetFlag(trkpt_t::eSubpt);
     }
     propHandler->setupData();
 

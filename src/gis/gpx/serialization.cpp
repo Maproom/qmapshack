@@ -1072,29 +1072,25 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             QDomElement waypointOrder = doc.createElement("WaypointOrder");
             adventure.appendChild(waypointOrder);
 
-            for(const CGisItemTrk::trkseg_t& seg : trk.segs)
+            for(const CGisItemTrk::trkpt_t& trkpt : trk)
             {
-                for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+                if(trkpt.keyWpt.item.isEmpty())
                 {
-                    if(trkpt.keyWpt.item.isEmpty())
-                    {
-                        continue;
-                    }
-
-                    const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
-                    if(wpt == nullptr)
-                    {
-                        continue;
-                    }
-
-                    QDomElement waypoints = doc.createElement("Waypoints");
-                    waypointOrder.appendChild(waypoints);
-
-                    writeXml(waypoints, "ID", wpt->getName());
-                    writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+                    continue;
                 }
-            }
 
+                const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                if(wpt == nullptr)
+                {
+                    continue;
+                }
+
+                QDomElement waypoints = doc.createElement("Waypoints");
+                waypointOrder.appendChild(waypoints);
+
+                writeXml(waypoints, "ID", wpt->getName());
+                writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+            }
 
             break;
         }

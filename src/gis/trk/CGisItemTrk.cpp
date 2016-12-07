@@ -294,14 +294,11 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
+        if(!pt.isHidden())
         {
-            if(!pt.isHidden())
-            {
-                l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
-            }
+            l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
         }
     }
 }
@@ -311,18 +308,15 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
     QMutexLocker lock(&mutexItems);
 
     l.clear();
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
+        if(!pt.isHidden())
         {
-            if(!pt.isHidden())
+            if(pt.hasFlag(trkpt_t::eSubpt))
             {
-                if(pt.hasFlag(trkpt_t::eSubpt))
-                {
-                    l.last().subpts << subpt_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
-                } else {
-                    l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
-                }
+                l.last().subpts << subpt_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+            } else {
+                l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
             }
         }
     }
@@ -810,38 +804,35 @@ void CGisItemTrk::updateExtremaAndExtensions()
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
 
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
+        if(pt.isHidden())
         {
-            if(pt.isHidden())
-            {
-                continue;
-            }
-
-            existingExtensions.unite(pt.extensions.keys().toSet());
-
-            for(const QString &key : pt.extensions.keys())
-            {
-                bool isReal = false;
-                qreal val = pt.extensions.value(key).toReal(&isReal);
-
-                if(isReal)
-                {
-                    const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
-                    extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
-                }
-                else
-                {
-                    nonRealExtensions << key;
-                }
-            }
-
-            updateExtrema(extremaSpeed,    pt.speed);
-            updateExtrema(extremaEle,      pt.ele);
-            updateExtrema(extremaSlope,    pt.slope1);
-            updateExtrema(extremaProgress, pt.distance);
+            continue;
         }
+
+        existingExtensions.unite(pt.extensions.keys().toSet());
+
+        for(const QString &key : pt.extensions.keys())
+        {
+            bool isReal = false;
+            qreal val = pt.extensions.value(key).toReal(&isReal);
+
+            if(isReal)
+            {
+                const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
+                extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
+            }
+            else
+            {
+                nonRealExtensions << key;
+            }
+        }
+
+        updateExtrema(extremaSpeed,    pt.speed);
+        updateExtrema(extremaEle,      pt.ele);
+        updateExtrema(extremaSlope,    pt.slope1);
+        updateExtrema(extremaProgress, pt.distance);
     }
 
     if(extremaEle.min < extremaEle.max)
@@ -882,9 +873,8 @@ void CGisItemTrk::resetInternalData()
 
 void CGisItemTrk::verifyTrkPt(trkpt_t*& last, trkpt_t& trkpt)
 {
-    trkpt.valid  = 0;
-    trkpt.valid |= trkpt.ele != NOINT ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
-    trkpt.valid |= (trkpt.lat < -90)  || (trkpt.lat > 90) ||(trkpt.lon < -180) || (trkpt.lon > 180) ? quint32(trkpt_t::eInvalidPos) : quint32(trkpt_t::eValidPos);
+    trkpt.valid = (trkpt.ele != NOINT) ? quint32(trkpt_t::eValidEle) : quint32(trkpt_t::eInvalidEle);
+    trkpt.valid |= (trkpt.lat < -90) || (trkpt.lat > 90) || (trkpt.lon < -180) || (trkpt.lon > 180) ? quint32(trkpt_t::eInvalidPos) : quint32(trkpt_t::eValidPos);
 
     if(trkpt.time.isValid())
     {
@@ -961,96 +951,89 @@ void CGisItemTrk::deriveSecondaryData()
         return;
     }
 
-    trkpt_t * lastValid     = nullptr;
-    trkpt_t * lastTrkpt     = nullptr;
-    qreal timestampStart    = NOFLOAT;
-    qint32 lastEle          = NOINT;
+    trkpt_t * lastValid  = nullptr;
+    trkpt_t * lastTrkpt  = nullptr;
+    qreal timestampStart = NOFLOAT;
+    qint32 lastEle       = NOINT;
 
 
     // linear list of pointers to visible track points
     QVector<trkpt_t*> lintrk;
 
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(trkpt_t& trkpt : trk)
     {
-        trkseg_t& seg = trk.segs[s];
+        // verify data of all points
+        verifyTrkPt(lastValid, trkpt);
+        trkpt.idxTotal = cntTotalPoints++;
 
-        for(int p = 0; p < seg.pts.size(); p++)
+        if(trkpt.isHidden())
         {
-            trkpt_t& trkpt = seg.pts[p];
-
-            // verify data of all points
-            verifyTrkPt(lastValid, trkpt);
-            trkpt.idxTotal = cntTotalPoints++;
-
-            if(trkpt.isHidden())
-            {
-                trkpt.reset();
-                continue;
-            }
-
-            // count only visible points to allValidFlags
-            allValidFlags |= trkpt.valid;
-
-            trkpt.idxVisible = cntVisiblePoints++;
-            lintrk << &trkpt;
-
-            west  = qMin(west,  trkpt.lon);
-            east  = qMax(east,  trkpt.lon);
-            south = qMin(south, trkpt.lat);
-            north = qMax(north, trkpt.lat);
-
-            if(lastTrkpt != nullptr)
-            {
-                trkpt.deltaDistance  = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-                trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
-                trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
-
-                // ascent descent
-                if(lastEle != NOINT)
-                {
-                    qint32 delta  = trkpt.ele - lastEle;
-
-                    trkpt.ascent  = lastTrkpt->ascent;
-                    trkpt.descent = lastTrkpt->descent;
-
-                    if(qAbs(delta) > ASCENT_THRESHOLD)
-                    {
-                        if(delta > 0)
-                        {
-                            trkpt.ascent  += delta;
-                        }
-                        else
-                        {
-                            trkpt.descent -= delta;
-                        }
-                        lastEle = trkpt.ele;
-                    }
-                }
-
-                // time moving
-                trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
-                qreal dt = (trkpt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
-                if(dt > 0 && ((trkpt.deltaDistance / dt) > 0.2))
-                {
-                    trkpt.elapsedSecondsMoving += dt;
-                }
-            }
-            else
-            {
-                timeStart      = trkpt.time;
-                timestampStart = timeStart.toMSecsSinceEpoch()/1000.0;
-                lastEle        = trkpt.ele;
-
-                trkpt.deltaDistance        = 0;
-                trkpt.distance             = 0;
-                trkpt.ascent               = 0;
-                trkpt.descent              = 0;
-                trkpt.elapsedSeconds       = 0;
-                trkpt.elapsedSecondsMoving = 0;
-            }
-
-            lastTrkpt = &trkpt;
+            trkpt.reset();
+            continue;
         }
+
+        // count only visible points to allValidFlags
+        allValidFlags |= trkpt.valid;
+
+        trkpt.idxVisible = cntVisiblePoints++;
+        lintrk << &trkpt;
+
+        west  = qMin(west,  trkpt.lon);
+        east  = qMax(east,  trkpt.lon);
+        south = qMin(south, trkpt.lat);
+        north = qMax(north, trkpt.lat);
+
+        if(lastTrkpt != nullptr)
+        {
+            trkpt.deltaDistance  = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
+            trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
+
+            // ascent descent
+            if(lastEle != NOINT)
+            {
+                qint32 delta  = trkpt.ele - lastEle;
+
+                trkpt.ascent  = lastTrkpt->ascent;
+                trkpt.descent = lastTrkpt->descent;
+
+                if(qAbs(delta) > ASCENT_THRESHOLD)
+                {
+                    if(delta > 0)
+                    {
+                        trkpt.ascent  += delta;
+                    }
+                    else
+                    {
+                        trkpt.descent -= delta;
+                    }
+                    lastEle = trkpt.ele;
+                }
+            }
+
+            // time moving
+            trkpt.elapsedSecondsMoving = lastTrkpt->elapsedSecondsMoving;
+            qreal dt = (trkpt.time.toMSecsSinceEpoch() - lastTrkpt->time.toMSecsSinceEpoch()) / 1000.0;
+            if(dt > 0 && ((trkpt.deltaDistance / dt) > 0.2))
+            {
+                trkpt.elapsedSecondsMoving += dt;
+            }
+        }
+        else
+        {
+            timeStart      = trkpt.time;
+            timestampStart = timeStart.toMSecsSinceEpoch()/1000.0;
+            lastEle        = trkpt.ele;
+
+            trkpt.deltaDistance        = 0;
+            trkpt.distance             = 0;
+            trkpt.ascent               = 0;
+            trkpt.descent              = 0;
+            trkpt.elapsedSeconds       = 0;
+            trkpt.elapsedSecondsMoving = 0;
+        }
+
+        lastTrkpt = &trkpt;
     }
 
     boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
@@ -1064,12 +1047,12 @@ void CGisItemTrk::deriveSecondaryData()
         qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
         int n = p;
 
-        while(n>0)
+        while(n > 0)
         {
             trkpt_t & trkpt2 = *lintrk[n];
             if(trkpt2.ele == NOINT)
             {
-                n--;
+                --n;
                 continue;
             }
 
@@ -1080,7 +1063,7 @@ void CGisItemTrk::deriveSecondaryData()
                 t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
                 break;
             }
-            n--;
+            --n;
         }
 
         qreal d2 = trkpt.distance;
@@ -1103,7 +1086,7 @@ void CGisItemTrk::deriveSecondaryData()
                 t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
                 break;
             }
-            n++;
+            ++n;
         }
 
         qreal a      = qAtan((e2 - e1)/(d2 - d1));
@@ -1173,26 +1156,18 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
     QVector<pointDP> line;
     // combine all segments to a single line
-    const int M = trk.segs.size();
-    for(int m = 0; m < M; m++)
+    for(trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[m];
-
-        const int N = seg.pts.size();
-        for(int n = 0; n < N; n++)
+        pt.keyWpt.clear();
+        if(pt.isHidden())
         {
-            trkpt_t& pt = seg.pts[n];
-            pt.keyWpt.clear();
-            if(pt.isHidden())
-            {
-                continue;
-            }
-            pointDP dp;
-            dp.x    = pt.lon * DEG_TO_RAD;
-            dp.y    = pt.lat * DEG_TO_RAD;
-            dp.idx  = pt.idxVisible;
-            line << dp;
+            continue;
         }
+        pointDP dp;
+        dp.x   = pt.lon * DEG_TO_RAD;
+        dp.y   = pt.lat * DEG_TO_RAD;
+        dp.idx = pt.idxVisible;
+        line << dp;
     }
 
     if(line.isEmpty())
@@ -1220,9 +1195,9 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         pos = wpt->getPosition();
 
         trkwpt_t trkwpt;
-        trkwpt.x      = pos.x() * DEG_TO_RAD;
-        trkwpt.y      = pos.y() * DEG_TO_RAD;
-        trkwpt.key    = wpt->getKey();
+        trkwpt.x   = pos.x() * DEG_TO_RAD;
+        trkwpt.y   = pos.y() * DEG_TO_RAD;
+        trkwpt.key = wpt->getKey();
 
         qreal a1 = 0, a2 = 0;
         qreal d = GPS_Math_Distance(pt0.x, pt0.y, trkwpt.x, trkwpt.y, a1, a2);
@@ -1359,7 +1334,7 @@ bool CGisItemTrk::cut()
     // if the cut action results into cloning a track, the calling method should
     // ask if the original track should be removed. As a track can't delete itself
     // this has to be done from the outside of this method.
-    bool askToDeleteOriginal    = dlg.createClone() || (mode == CCutTrk::eModeKeepBoth);
+    bool askToDeleteOriginal = dlg.createClone() || (mode == CCutTrk::eModeKeepBoth);
 
     // askToDeleteOriginal = store result as clone
     if(askToDeleteOriginal)
@@ -1398,10 +1373,8 @@ bool CGisItemTrk::cut()
         int removeStart = ((mode & CCutTrk::eModeKeepFirst) != 0) ? idxMouse + 1   : 0;
         int removeEnd   = ((mode & CCutTrk::eModeKeepFirst) != 0) ? cntTotalPoints : idxMouse - 1;
 
-        for(int i = 0; i < trk.segs.size(); ++i)
+        for(trkseg_t& seg : trk.segs)
         {
-            trkseg_t& seg = trk.segs[i];
-
             if(seg.pts.empty())
             {
                 continue;
@@ -1417,10 +1390,8 @@ bool CGisItemTrk::cut()
             {
                 QVector<trkpt_t> pts;
 
-                for(int n = 0; n < seg.pts.size(); n++)
+                for(const trkpt_t& pt : seg.pts)
                 {
-                    trkpt_t& pt = seg.pts[n];
-
                     if(!(removeStart <= pt.idxTotal && pt.idxTotal <= removeEnd) )
                     {
                         pts << pt;
@@ -1570,17 +1541,11 @@ void CGisItemTrk::hideSelectedPoints()
     }
 
     // iterate over all segments and delete points between idx1 and idx2
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(trkpt_t& trkpt : trk)
     {
-        trkseg_t& seg = trk.segs[s];
-        for(int i = 0; i < seg.pts.size(); i++)
+        if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt_t& trkpt = seg.pts[i];
-
-            if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
-            {
-                trkpt.setFlag(trkpt_t::eHidden);
-            }
+            trkpt.setFlag(trkpt_t::eHidden);
         }
     }
     resetMouseRange();
@@ -1615,17 +1580,11 @@ void CGisItemTrk::showSelectedPoints()
         qSwap(idx1,idx2);
     }
 
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(trkpt_t& trkpt : trk)
     {
-        trkseg_t& seg = trk.segs[s];
-        for(int i = 0; i < seg.pts.size(); i++)
+        if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
         {
-            trkpt_t& trkpt = seg.pts[i];
-
-            if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
-            {
-                trkpt.unsetFlag(trkpt_t::eHidden);
-            }
+            trkpt.unsetFlag(trkpt_t::eHidden);
         }
     }
 
@@ -1686,20 +1645,17 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     if(mode == eModeNormal)
     {
         // in normal mode the trackline without points marked as deleted is drawn
-        for(const trkseg_t &seg : trk.segs)
+        for(const trkpt_t &pt : trk)
         {
-            for(const trkpt_t &pt : seg.pts)
+            if(pt.isHidden())
             {
-                if(pt.isHidden())
-                {
-                    continue;
-                }
-
-                pt1.setX(pt.lon);
-                pt1.setY(pt.lat);
-                pt1 *= DEG_TO_RAD;
-                lineSimple << pt1;
+                continue;
             }
+
+            pt1.setX(pt.lon);
+            pt1.setY(pt.lat);
+            pt1 *= DEG_TO_RAD;
+            lineSimple << pt1;
         }
     }
     else
@@ -1707,23 +1663,20 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         // in full mode the complete track including points marked as deleted
         // is drawn as gray line first. Then the track without points marked as
         // deleted is drawn with it's configured color
-        for(const trkseg_t &seg : trk.segs)
+        for(const trkpt_t &pt : trk)
         {
-            for(const trkpt_t &pt : seg.pts)
+            pt1.setX(pt.lon);
+            pt1.setY(pt.lat);
+            pt1 *= DEG_TO_RAD;
+
+            lineFull << pt1;
+
+            if(pt.isHidden())
             {
-                pt1.setX(pt.lon);
-                pt1.setY(pt.lat);
-                pt1 *= DEG_TO_RAD;
-
-                lineFull << pt1;
-
-                if(pt.isHidden())
-                {
-                    continue;
-                }
-
-                lineSimple << pt1;
+                continue;
             }
+
+            lineSimple << pt1;
         }
     }
     gis->convertRad2Px(lineSimple);
@@ -2220,15 +2173,10 @@ void CGisItemTrk::setColor(int idx)
 
 void CGisItemTrk::setActivity(quint32 flag)
 {
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(trkpt_t& trkpt : trk)
     {
-        trkseg_t& seg = trk.segs[s];
-        for(int i = 0; i < seg.pts.size(); i++)
-        {
-            trkpt_t& trkpt = seg.pts[i];
-            trkpt.unsetFlag(trkpt_t::eActMask);
-            trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
-        }
+        trkpt.unsetFlag(trkpt_t::eActMask);
+        trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
     }
 
     deriveSecondaryData();
@@ -2267,18 +2215,12 @@ void CGisItemTrk::setActivityRange(quint32 flags)
     }
 
     // iterate over all segments and set activity flag for points between idx1 and idx2
-    for(int s = 0; s < trk.segs.size(); s++)
+    for(trkpt_t& trkpt : trk)
     {
-        trkseg_t& seg = trk.segs[s];
-        for(int i = 0; i < seg.pts.size(); i++)
+        if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt_t& trkpt = seg.pts[i];
-
-            if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
-            {
-                trkpt.unsetFlag(trkpt_t::eActMask);
-                trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flags);
-            }
+            trkpt.unsetFlag(trkpt_t::eActMask);
+            trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flags);
         }
     }
 
@@ -2329,25 +2271,22 @@ bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const Q
 
         /// @todo: optimize search by single out segment and then do a binary search
 
-        for(const trkseg_t &seg : trk.segs)
+        for(const trkpt_t &pt : trk)
         {
-            for(const trkpt_t &pt : seg.pts)
+            if(pt.isHidden())
             {
-                if(pt.isHidden())
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                qreal d = qAbs(pt.distance - dist);
-                if(d <= delta)
-                {
-                    newPointOfFocus = &pt;
-                    delta = d;
-                }
-                else
-                {
-                    break;
-                }
+            qreal d = qAbs(pt.distance - dist);
+            if(d <= delta)
+            {
+                newPointOfFocus = &pt;
+                delta = d;
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -2365,25 +2304,22 @@ bool CGisItemTrk::setMouseFocusByTime(quint32 time, focusmode_e fmode, const QSt
 
         qreal delta = totalElapsedSeconds;
 
-        for(const trkseg_t &seg : trk.segs)
+        for(const trkpt_t &pt : trk)
         {
-            for(const trkpt_t &pt : seg.pts)
+            if(pt.isHidden())
             {
-                if(pt.isHidden())
-                {
-                    continue;
-                }
+                continue;
+            }
 
-                qreal d = qAbs(qreal(pt.time.toTime_t()) - qreal(time));
-                if(d <= delta)
-                {
-                    newPointOfFocus = &pt;
-                    delta = d;
-                }
-                else
-                {
-                    break;
-                }
+            qreal d = qAbs(qreal(pt.time.toTime_t()) - qreal(time));
+            if(d <= delta)
+            {
+                newPointOfFocus = &pt;
+                delta = d;
+            }
+            else
+            {
+                break;
             }
         }
     }
@@ -2440,14 +2376,11 @@ bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const
 
 const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
 {
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
+        if(cond(pt))
         {
-            if(cond(pt))
-            {
-                return &pt;
-            }
+            return &pt;
         }
     }
     return nullptr;
@@ -2455,14 +2388,11 @@ const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(
 
 CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
 {
-    for(trkseg_t &seg : trk.segs)
+    for(trkpt_t &pt : trk)
     {
-        for(trkpt_t &pt : seg.pts)
+        if(cond(pt))
         {
-            if(cond(pt))
-            {
-                return &pt;
-            }
+            return &pt;
         }
     }
     return nullptr;
@@ -2493,21 +2423,18 @@ bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal) const
 
 bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal) const
 {
-    for(const trkseg_t &seg : trk.segs)
+    for(const trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
+        if((pt.idxTotal < idxTotal))
         {
-            if((pt.idxTotal < idxTotal))
+            if(!pt.isHidden())
             {
-                if(!pt.isHidden())
-                {
-                    return false;
-                }
+                return false;
             }
-            else
-            {
-                return true;
-            }
+        }
+        else
+        {
+            return true;
         }
     }
     return true;
@@ -2674,8 +2601,8 @@ void CGisItemTrk::setMouseClickFocusVisuals(const trkpt_t * pt)
 
 void CGisItemTrk::setupInterpolation(bool on, qint32 q)
 {
-    interp.valid    = on;
-    interp.Q        = (quality_e)q;
+    interp.valid = on;
+    interp.Q     = (quality_e)q;
 
     if(!on)
     {
@@ -2689,23 +2616,20 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     y.setlength(N);
 
     qreal basefactor = IUnit::self().basefactor;
-    for(const CGisItemTrk::trkseg_t& seg : trk.segs)
+    for(const CGisItemTrk::trkpt_t& trkpt : trk)
     {
-        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-            {
-                continue;
-            }
-
-            if(trkpt.ele == NOINT)
-            {
-                continue;
-            }
-
-            x[trkpt.idxVisible] = trkpt.distance;
-            y[trkpt.idxVisible] = trkpt.ele * basefactor;
+            continue;
         }
+
+        if(trkpt.ele == NOINT)
+        {
+            continue;
+        }
+
+        x[trkpt.idxVisible] = trkpt.distance;
+        y[trkpt.idxVisible] = trkpt.ele * basefactor;
     }
 
     /// @todo find a better way to scale the algorithm

@@ -81,90 +81,87 @@ void CTableTrk::updateData()
 
     QList<QTreeWidgetItem*> items;
     const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(const CGisItemTrk::trkseg_t& seg : t.segs)
+    for(const CGisItemTrk::trkpt_t& trkpt : t)
     {
-        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        QString val, unit;
+
+        QTreeWidgetItem * item = new QTreeWidgetItem();
+        item->setTextAlignment(eColNum,     Qt::AlignLeft);
+        item->setTextAlignment(eColEle,     Qt::AlignRight);
+        item->setTextAlignment(eColDelta,   Qt::AlignRight);
+        item->setTextAlignment(eColDist,    Qt::AlignRight);
+        item->setTextAlignment(eColAscent,  Qt::AlignRight);
+        item->setTextAlignment(eColDescent, Qt::AlignRight);
+        item->setTextAlignment(eColSpeed,   Qt::AlignRight);
+
+        if(!trk->isReadOnly())
         {
-            QString val, unit;
-
-            QTreeWidgetItem * item = new QTreeWidgetItem();
-            item->setTextAlignment(eColNum,     Qt::AlignLeft);
-            item->setTextAlignment(eColEle,     Qt::AlignRight);
-            item->setTextAlignment(eColDelta,   Qt::AlignRight);
-            item->setTextAlignment(eColDist,    Qt::AlignRight);
-            item->setTextAlignment(eColAscent,  Qt::AlignRight);
-            item->setTextAlignment(eColDescent, Qt::AlignRight);
-            item->setTextAlignment(eColSpeed,   Qt::AlignRight);
-
-            if(!trk->isReadOnly())
-            {
-                item->setToolTip(eColEle, tr("Double click to edit elevation value"));
-            }
-
-            QBrush bg = item->background(0);
-            if(trkpt.isInvalid(CGisItemTrk::trkpt_t::invalid_e(invalidMask)))
-            {
-                bg = QColor(255, 100, 100);
-            }
-
-            QBrush fg( trkpt.flags & CGisItemTrk::trkpt_t::eHidden ? Qt::gray : Qt::black );
-            for(int i = 0; i < eColMax; i++)
-            {
-                item->setBackground(i, bg);
-                item->setForeground(i, fg);
-            }
-
-            item->setText(eColNum,QString::number(trkpt.idxTotal));
-
-            item->setText(eColTime, trkpt.time.isValid()
-                          ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD)
-                          : "-"
-                          );
-
-            if(trkpt.ele != NOINT)
-            {
-                IUnit::self().meter2elevation(trkpt.ele, val, unit);
-                item->setText(eColEle, tr("%1 %2").arg(val).arg(unit));
-            }
-            else
-            {
-                item->setText(eColEle, "-");
-            }
-
-            IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
-            item->setText(eColDelta, tr("%1 %2").arg(val).arg(unit));
-
-            IUnit::self().meter2distance(trkpt.distance, val, unit);
-            item->setText(eColDist, tr("%1 %2").arg(val).arg(unit));
-
-            if(trkpt.speed != NOFLOAT)
-            {
-                IUnit::self().meter2speed(trkpt.speed, val, unit);
-                item->setText(eColSpeed, tr("%1 %2").arg(val).arg(unit));
-            }
-            else
-            {
-                item->setText(eColSpeed, "-");
-            }
-
-            item->setText(eColSlope,
-                          (trkpt.slope1 != NOFLOAT)
-                          ? QString("%1%3(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0).arg(QChar(0x00b0))
-                          : "-"
-                          );
-
-            IUnit::self().meter2elevation(trkpt.ascent, val, unit);
-            item->setText(eColAscent, tr("%1 %2").arg(val).arg(unit));
-            IUnit::self().meter2elevation(trkpt.descent, val, unit);
-            item->setText(eColDescent, tr("%1 %2").arg(val).arg(unit));
-
-            // position
-            QString str;
-            IUnit::degToStr(trkpt.lon, trkpt.lat, str);
-            item->setText(eColPosition,str);
-
-            items << item;
+            item->setToolTip(eColEle, tr("Double click to edit elevation value"));
         }
+
+        QBrush bg = item->background(0);
+        if(trkpt.isInvalid(CGisItemTrk::trkpt_t::invalid_e(invalidMask)))
+        {
+            bg = QColor(255, 100, 100);
+        }
+
+        QBrush fg( trkpt.flags & CGisItemTrk::trkpt_t::eHidden ? Qt::gray : Qt::black );
+        for(int i = 0; i < eColMax; i++)
+        {
+            item->setBackground(i, bg);
+            item->setForeground(i, fg);
+        }
+
+        item->setText(eColNum,QString::number(trkpt.idxTotal));
+
+        item->setText(eColTime, trkpt.time.isValid()
+                      ? IUnit::self().datetime2string(trkpt.time, true, QPointF(trkpt.lon, trkpt.lat)*DEG_TO_RAD)
+                      : "-"
+                      );
+
+        if(trkpt.ele != NOINT)
+        {
+            IUnit::self().meter2elevation(trkpt.ele, val, unit);
+            item->setText(eColEle, tr("%1 %2").arg(val).arg(unit));
+        }
+        else
+        {
+            item->setText(eColEle, "-");
+        }
+
+        IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
+        item->setText(eColDelta, tr("%1 %2").arg(val).arg(unit));
+
+        IUnit::self().meter2distance(trkpt.distance, val, unit);
+        item->setText(eColDist, tr("%1 %2").arg(val).arg(unit));
+
+        if(trkpt.speed != NOFLOAT)
+        {
+            IUnit::self().meter2speed(trkpt.speed, val, unit);
+            item->setText(eColSpeed, tr("%1 %2").arg(val).arg(unit));
+        }
+        else
+        {
+            item->setText(eColSpeed, "-");
+        }
+
+        item->setText(eColSlope,
+                      (trkpt.slope1 != NOFLOAT)
+                      ? QString("%1%3(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0).arg(QChar(0x00b0))
+                      : "-"
+                      );
+
+        IUnit::self().meter2elevation(trkpt.ascent, val, unit);
+        item->setText(eColAscent, tr("%1 %2").arg(val).arg(unit));
+        IUnit::self().meter2elevation(trkpt.descent, val, unit);
+        item->setText(eColDescent, tr("%1 %2").arg(val).arg(unit));
+
+        // position
+        QString str;
+        IUnit::degToStr(trkpt.lon, trkpt.lat, str);
+        item->setText(eColPosition,str);
+
+        items << item;
     }
 
     clear();

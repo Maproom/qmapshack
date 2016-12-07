@@ -551,36 +551,33 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         wpt_info_t * lastWptInfo = nullptr;
         QList<wpt_info_t> wptInfo;
         const CGisItemTrk::trk_t& t = trk->getTrackData();
-        for(const CGisItemTrk::trkseg_t& seg : t.segs)
+        for(const CGisItemTrk::trkpt_t& trkpt : t)
         {
-            for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+            if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
             {
-                if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
-                {
-                    continue;
-                }
-
-                wptInfo << wpt_info_t();
-                wpt_info_t& info = wptInfo.last();
-                info.key        = trkpt.keyWpt;
-                info.distance1  = trkpt.distance;
-                info.ascent1    = trkpt.ascent;
-                info.descent1   = trkpt.descent;
-
-                if(lastWptInfo != nullptr)
-                {
-                    lastWptInfo->distance2  = trkpt.distance - lastTrkpt->distance;
-                    lastWptInfo->ascent2    = trkpt.ascent   - lastTrkpt->ascent;
-                    lastWptInfo->descent2   = trkpt.descent  - lastTrkpt->descent;
-                }
-
-                info.distance3  = trk->getTotalDistance() - trkpt.distance;
-                info.ascent3    = trk->getTotalAscent() - trkpt.ascent;
-                info.descent3   = trk->getTotalDescent() - trkpt.descent;
-
-                lastTrkpt       = &trkpt;
-                lastWptInfo     = &wptInfo.last();
+                continue;
             }
+
+            wptInfo << wpt_info_t();
+            wpt_info_t& info = wptInfo.last();
+            info.key        = trkpt.keyWpt;
+            info.distance1  = trkpt.distance;
+            info.ascent1    = trkpt.ascent;
+            info.descent1   = trkpt.descent;
+
+            if(lastWptInfo != nullptr)
+            {
+                lastWptInfo->distance2  = trkpt.distance - lastTrkpt->distance;
+                lastWptInfo->ascent2    = trkpt.ascent   - lastTrkpt->ascent;
+                lastWptInfo->descent2   = trkpt.descent  - lastTrkpt->descent;
+            }
+
+            info.distance3  = trk->getTotalDistance() - trkpt.distance;
+            info.ascent3    = trk->getTotalAscent() - trkpt.ascent;
+            info.descent3   = trk->getTotalDescent() - trkpt.descent;
+
+            lastTrkpt       = &trkpt;
+            lastWptInfo     = &wptInfo.last();
         }
 
         cursor.insertHtml(QString("<h2>%1</h2>").arg(trk->getName()));

@@ -864,6 +864,102 @@ public:
         // -- all gpx tags - stop
 
         QString color;
+
+
+        class iterator: public std::iterator<std::forward_iterator_tag, trkpt_t>
+        {
+            trk_t &trk;
+            int seg = 0;
+            int pt  = 0;
+
+        public:
+            explicit iterator(trk_t &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
+
+            iterator& operator++()
+            {
+                ++pt;
+
+                if(this->trk.segs[seg].pts.count() <= pt) {
+                    pt = 0;
+                    ++seg;
+                }
+
+                return *this;
+            }
+
+            iterator operator++(int)
+            {
+                iterator prev = *this;
+                ++(*this);
+                return prev;
+            }
+
+            bool operator==(iterator other) const
+            {
+                return seg == other.seg && pt == other.pt;
+            }
+
+            bool operator!=(iterator other) const
+            {
+                return !(*this == other);
+            }
+
+            reference operator*()
+            {
+                return this->trk.segs[seg].pts[pt];
+            }
+        };
+
+        iterator begin() { return iterator(*this,            0, 0); }
+        iterator end()   { return iterator(*this, segs.count(), 0); }
+
+
+        class const_iterator: public std::iterator<std::forward_iterator_tag, const trkpt_t>
+        {
+            const trk_t &trk;
+            int seg = 0;
+            int pt  = 0;
+
+        public:
+            explicit const_iterator(const trk_t &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
+
+            const_iterator& operator++()
+            {
+                ++pt;
+
+                if(this->trk.segs[seg].pts.count() <= pt) {
+                    pt = 0;
+                    ++seg;
+                }
+
+                return *this;
+            }
+
+            const_iterator operator++(int)
+            {
+                const_iterator prev = *this;
+                ++(*this);
+                return prev;
+            }
+
+            bool operator==(const_iterator other) const
+            {
+                return seg == other.seg && pt == other.pt;
+            }
+
+            bool operator!=(const_iterator other) const
+            {
+                return !(*this == other);
+            }
+
+            const reference operator*() const
+            {
+                return this->trk.segs[seg].pts[pt];
+            }
+        };
+
+        const_iterator begin() const { return const_iterator(*this,            0, 0); }
+        const_iterator end()   const { return const_iterator(*this, segs.count(), 0); }
     };
 
     /**

@@ -163,47 +163,44 @@ void CActivityTrk::update()
     const CGisItemTrk::trkpt_t *startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
-    for(const CGisItemTrk::trkseg_t &seg : data.segs)
+    for(const CGisItemTrk::trkpt_t &pt : data)
     {
-        for(const CGisItemTrk::trkpt_t &pt : seg.pts)
+        allFlags |= pt.flags;
+
+        if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
         {
-            allFlags |= pt.flags;
+            continue;
+        }
+        lastTrkpt = &pt;
+        if(pt.flags != lastFlag)
+        {
+            if(startTrkpt != nullptr)
+            {
+                activity_summary_t& summary = activitySummary[lastFlag];
+                summary.distance += pt.distance - startTrkpt->distance;
+                summary.ascent   += pt.ascent   - startTrkpt->ascent;
+                summary.descent  += pt.descent  - startTrkpt->descent;
+                summary.ellapsedSeconds += pt.elapsedSeconds - startTrkpt->elapsedSeconds;
+                summary.ellapsedSecondsMoving += pt.elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
 
-            if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
-            {
-                continue;
-            }
-            lastTrkpt = &pt;
-            if(pt.flags != lastFlag)
-            {
-                if(startTrkpt != nullptr)
+                activityRanges << activity_range_t();
+                activity_range_t& activity = activityRanges.last();
+
+                activity.d1 = startTrkpt->distance;
+                activity.d2 = pt.distance;
+                activity.t1 = startTrkpt->time.toTime_t();
+                activity.t2 = pt.time.toTime_t();
+
+                const desc_t& desc = getDescriptor(lastFlag);
+                activity.name = desc.name;
+                if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
                 {
-                    activity_summary_t& summary = activitySummary[lastFlag];
-                    summary.distance += pt.distance - startTrkpt->distance;
-                    summary.ascent   += pt.ascent   - startTrkpt->ascent;
-                    summary.descent  += pt.descent  - startTrkpt->descent;
-                    summary.ellapsedSeconds += pt.elapsedSeconds - startTrkpt->elapsedSeconds;
-                    summary.ellapsedSecondsMoving += pt.elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
-
-                    activityRanges << activity_range_t();
-                    activity_range_t& activity = activityRanges.last();
-
-                    activity.d1 = startTrkpt->distance;
-                    activity.d2 = pt.distance;
-                    activity.t1 = startTrkpt->time.toTime_t();
-                    activity.t2 = pt.time.toTime_t();
-
-                    const desc_t& desc = getDescriptor(lastFlag);
-                    activity.name = desc.name;
-                    if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
-                    {
-                        activity.icon = desc.iconSmall;
-                    }
+                    activity.icon = desc.iconSmall;
                 }
-
-                startTrkpt  = &pt;
-                lastFlag    = pt.flags;
             }
+
+            startTrkpt  = &pt;
+            lastFlag    = pt.flags;
         }
     }
 

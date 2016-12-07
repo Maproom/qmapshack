@@ -16,33 +16,40 @@
 
 **********************************************************************************************/
 
-#ifndef CEXPORTDIALOG_H
-#define CEXPORTDIALOG_H
+#ifndef CEXPORTDATABASETHREAD_H
+#define CEXPORTDATABASETHREAD_H
 
-#include <QDialog>
-#include <ui_IExportDialog.h>
+#include <QMutex>
+#include <QThread>
+#include <QSqlDatabase>
 
-class QSqlDatabase;
-
-class CExportDialog : public QDialog, private Ui::IExportDialog
+class CExportDatabaseThread : public QThread
 {
     Q_OBJECT
 public:
-    CExportDialog(quint64 id, QSqlDatabase& db, QWidget * parent);
-    virtual ~CExportDialog();
+    CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject * parent);
+    virtual ~CExportDatabaseThread() = default;
+
+    void start(const QString& path);
+    void abort();
+
+signals:
+    void sigOut(const QString& msg);
+    void sigErr(const QString& msg);
 
 protected:
-    void stdOut(const QString& str);
-    void stdErr(const QString& str);
-
-private slots:
-    void slotSetPath();
-    void slotApply();
+    void run() override;
+    bool getKeepGoing() const;
+    bool dumpFolder(quint64 id, const QString &parentName, const QString& path);
 
 private:
-    quint64 id;
+    mutable QMutex mutex;
+    bool keepGoing = false;
+
+    quint64 parentFolderId;
     QSqlDatabase& db;
+    QString exportPath;
 };
 
-#endif //CEXPORTDIALOG_H
+#endif //CEXPORTDATABASETHREAD_H
 

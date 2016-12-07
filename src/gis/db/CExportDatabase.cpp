@@ -39,9 +39,9 @@ CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase &db, QWidget *parent)
 
     connect(toolPath, &QToolButton::clicked, this, &CExportDatabase::slotSetPath);
     connect(pushStart, &QPushButton::clicked, this, &CExportDatabase::slotStart);
-    connect(pushAbort, &QPushButton::clicked, this, &CExportDatabase::slotAbort);
 
     thread = new CExportDatabaseThread(id, db, this);
+    connect(pushAbort, &QPushButton::clicked, thread, &CExportDatabaseThread::slotAbort);
     connect(thread, &CExportDatabaseThread::started, this, &CExportDatabase::slotStarted);
     connect(thread, &CExportDatabaseThread::finished, this, &CExportDatabase::slotFinished);
     connect(thread, &CExportDatabaseThread::sigOut, this, &CExportDatabase::slotStdout);
@@ -88,7 +88,7 @@ void CExportDatabase::slotSetPath()
 void CExportDatabase::slotStart()
 {
     textBrowser->clear();
-    thread->start(labelPath->text());
+    thread->start(labelPath->text(), checkGpx11->isChecked());
 }
 
 void CExportDatabase::slotStarted()
@@ -103,7 +103,3 @@ void CExportDatabase::slotFinished()
     pushAbort->setEnabled(false);
 }
 
-void CExportDatabase::slotAbort()
-{
-    thread->abort();
-}

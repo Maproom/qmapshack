@@ -40,7 +40,6 @@ private slots:
     void slotStart();
     void slotStarted();
     void slotFinished();
-    void slotAbort();
 
 private:
     CExportDatabaseThread * thread;

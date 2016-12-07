@@ -1070,7 +1070,7 @@ public:
         return interp.valid;
     }
 
-    qreal getElevationInterpolated(qreal d) const;
+    qreal getElevationInterpolated(qreal d);
 
 private:
     struct interpolate_t

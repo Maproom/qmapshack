@@ -20,8 +20,8 @@
 #define CEXPORTDATABASETHREAD_H
 
 #include <QMutex>
-#include <QThread>
 #include <QSqlDatabase>
+#include <QThread>
 
 class CExportDatabaseThread : public QThread
 {
@@ -30,8 +30,10 @@ public:
     CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject * parent);
     virtual ~CExportDatabaseThread() = default;
 
-    void start(const QString& path);
-    void abort();
+    void start(const QString& path, bool saveAsGpx11);
+
+public slots:
+    void slotAbort();
 
 signals:
     void sigOut(const QString& msg);
@@ -49,6 +51,7 @@ private:
     quint64 parentFolderId;
     QSqlDatabase& db;
     QString exportPath;
+    bool asGpx11 = false;
 };
 
 #endif //CEXPORTDATABASETHREAD_H

@@ -24,7 +24,7 @@
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBItem.h"
-#include "gis/db/CExportDialog.h"
+#include "gis/db/CExportDatabase.h"
 #include "gis/db/IDB.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/IDBFolderSql.h"
@@ -634,7 +634,7 @@ bool IDBFolder::isSiblingFrom(IDBFolder * folder) const
 
 void IDBFolder::exportToGpx()
 {
-    CExportDialog dlg(getId(), getDb(), CMainWindow::self().getBestWidgetForParent());
+    CExportDatabase dlg(getId(), getDb(), CMainWindow::self().getBestWidgetForParent());
     dlg.exec();
 }
 

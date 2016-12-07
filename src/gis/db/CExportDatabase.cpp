@@ -17,17 +17,14 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/db/CExportDialog.h"
-#include "gis/db/macros.h"
+#include "gis/db/CExportDatabase.h"
+#include "gis/db/CExportDatabaseThread.h"
 #include "helpers/CSettings.h"
 
-#include <QtSql>
 #include <QtWidgets>
 
-CExportDialog::CExportDialog(quint64 id, QSqlDatabase &db, QWidget *parent)
+CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase &db, QWidget *parent)
     : QDialog(parent)
-    , id(id)
-    , db(db)
 {
     setupUi(this);
 
@@ -37,11 +34,21 @@ CExportDialog::CExportDialog(quint64 id, QSqlDatabase &db, QWidget *parent)
     checkGpx11->setChecked(cfg.value("asGpx11", false).toBool());
     cfg.endGroup();
 
-    connect(toolPath, &QToolButton::clicked, this, &CExportDialog::slotSetPath);
-    connect(buttonBox->button(QDialogButtonBox::Apply), &QPushButton::pressed, this, &CExportDialog::slotApply);
+    QDir dir(labelPath->text());
+    pushStart->setEnabled(dir.exists());
+
+    connect(toolPath, &QToolButton::clicked, this, &CExportDatabase::slotSetPath);
+    connect(pushStart, &QPushButton::clicked, this, &CExportDatabase::slotStart);
+    connect(pushAbort, &QPushButton::clicked, this, &CExportDatabase::slotAbort);
+
+    thread = new CExportDatabaseThread(id, db, this);
+    connect(thread, &CExportDatabaseThread::started, this, &CExportDatabase::slotStarted);
+    connect(thread, &CExportDatabaseThread::finished, this, &CExportDatabase::slotFinished);
+    connect(thread, &CExportDatabaseThread::sigOut, this, &CExportDatabase::slotStdout);
+    connect(thread, &CExportDatabaseThread::sigErr, this, &CExportDatabase::slotStderr);
 }
 
-CExportDialog::~CExportDialog()
+CExportDatabase::~CExportDatabase()
 {
     SETTINGS;
     cfg.beginGroup("ExportDB");
@@ -50,33 +57,53 @@ CExportDialog::~CExportDialog()
     cfg.endGroup();
 }
 
-void CExportDialog::stdOut(const QString& str)
+void CExportDatabase::slotStdout(const QString& str)
 {
     textBrowser->setTextColor(Qt::black);
     textBrowser->append(str);
 }
 
 
-void CExportDialog::stdErr(const QString& str)
+void CExportDatabase::slotStderr(const QString& str)
 {
     textBrowser->setTextColor(Qt::red);
     textBrowser->append(str);
 }
 
 
-void CExportDialog::slotSetPath()
+void CExportDatabase::slotSetPath()
 {
     QString path = labelPath->text();
 
     path = QFileDialog::getExistingDirectory(CMainWindow::self().getBestWidgetForParent(), tr("Select export path..."), path);
     if(path.isEmpty())
     {
-        return;
+        labelPath->setText(path);
     }
-    labelPath->setText(path);
+
+    QDir dir(labelPath->text());
+    pushStart->setEnabled(dir.exists());
 }
 
-void CExportDialog::slotApply()
+void CExportDatabase::slotStart()
 {
-    stdOut("xxx");
+    textBrowser->clear();
+    thread->start(labelPath->text());
+}
+
+void CExportDatabase::slotStarted()
+{
+    pushStart->setEnabled(false);
+    pushAbort->setEnabled(true);
+}
+
+void CExportDatabase::slotFinished()
+{
+    pushStart->setEnabled(true);
+    pushAbort->setEnabled(false);
+}
+
+void CExportDatabase::slotAbort()
+{
+    thread->abort();
 }

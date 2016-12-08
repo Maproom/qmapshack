@@ -320,7 +320,9 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l)
                 if(pt.hasFlag(trkpt_t::eSubpt))
                 {
                     l.last().subpts << subpt_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
-                } else {
+                }
+                else
+                {
                     l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
                 }
             }

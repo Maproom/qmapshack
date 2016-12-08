@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>787</width>
-    <height>82</height>
+    <height>58</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    <item row="0" column="1">
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>&lt;b&gt;Convert Track's SubPoints to Points&lt;/b&gt;</string>
+      <string>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</string>
      </property>
     </widget>
    </item>
@@ -44,7 +44,7 @@
      <item>
       <widget class="QLabel" name="label_4">
        <property name="text">
-        <string>Convert subpoints (obtained from p.x. Routino) to ordinary track points</string>
+        <string>Convert subpoints obtained from routing to ordinary track points </string>
        </property>
       </widget>
      </item>

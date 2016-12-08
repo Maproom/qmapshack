@@ -41,10 +41,18 @@ void CExportDatabaseThread::start(const QString& path, bool saveAsGpx11, bool de
         return;
     }
 
+    if(QDir(path).absolutePath() == QDir::home().absolutePath())
+    {
+        QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(), tr("Stop...")
+                              , tr("This would delete your home directory. Bad Idea.")
+                              , QMessageBox::Abort);
+        return;
+    }
+
     if(delOld)
     {
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Delete content...")
-                                        , tr("Delete all old content in %1").arg(path)
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Remove path...")
+                                        , tr("Remove %1 and all it's content?").arg(path)
                                         , QMessageBox::Yes|QMessageBox::No);
         if(res == QMessageBox::Yes)
         {
@@ -135,7 +143,7 @@ void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
             emit sigOut(tr("Create %1").arg(dir.absoluteFilePath(simplifiedName)));
             if(!dir.mkpath(simplifiedName))
             {
-                throw tr("Failed to create %1").arg(path);
+                throw tr("Failed to create %1").arg(simplifiedName);
             }
         }
         dir.cd(simplifiedName);

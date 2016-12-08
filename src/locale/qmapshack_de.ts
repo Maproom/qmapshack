@@ -676,50 +676,68 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <name>CExportDatabaseThread</name>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="46"/>
+        <source>Stop...</source>
+        <translation>Stop...</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="47"/>
+        <source>This would delete your home directory. Bad Idea.</source>
+        <translation>Das würde Ihre Home-Verzeichnis löschen. Keine gute Idee.</translation>
+    </message>
+    <message>
         <source>Delete content...</source>
         <translation>Inhalt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="47"/>
         <source>Delete all old content in %1</source>
         <translation>Alten Inhalt von %1 löschen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="91"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="135"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="54"/>
+        <source>Remove path...</source>
+        <translation>Ordner entfernen...</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="55"/>
+        <source>Remove %1 and all it&apos;s content?</source>
+        <translation>Den Ordner %1 und den gesamten Inhalt entfernen?</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="99"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="143"/>
         <source>Create %1</source>
         <translation>Erstelle %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="94"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="138"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="102"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="146"/>
         <source>Failed to create %1</source>
         <translation>Erstellen von %1 fehlgeschlagen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="100"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="108"/>
         <source>Done!</source>
         <translation>Fertig!</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="112"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
         <source>Abort by user!</source>
         <translation>Abbruch durch Benutzer!</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="152"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="128"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="160"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="185"/>
         <source>Database Error: %1</source>
         <translation>Datenbankfehler: %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="165"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="173"/>
         <source>Save project as %1</source>
         <translation>Speichere das Projekt als %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="169"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
         <source>Failed!</source>
         <translation>Fehlgeschlagen!</translation>
     </message>
@@ -1568,27 +1586,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Leeren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="437"/>
         <source>Remove database...</source>
         <translation>Datenbank entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="437"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="501"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Ordner und alle Unterordner löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="669"/>
         <source>Bad operation....</source>
         <translation>Falsche Funktion...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="669"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>Der Zielordner ist ein Unterordner von dem zu verschiebenden. Das kann nicht funktionieren.</translation>
     </message>
@@ -1597,27 +1615,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Ordner und alle darunter liegenden löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="728"/>
         <source>Folder name...</source>
         <translation>Ordnername...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="728"/>
         <source>Rename folder:</source>
         <translation>Ordner umbenennen:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="854"/>
+        <location filename="../gis/CGisListDB.cpp" line="857"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Ordner &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="855"/>
+        <location filename="../gis/CGisListDB.cpp" line="858"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="501"/>
         <source>Delete database folder...</source>
         <translation>Datenbankordner löschen...</translation>
     </message>
@@ -1626,18 +1644,18 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Sind Sie sicher, dass Sie &quot;%1&quot; aus der Datenbank löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="749"/>
+        <location filename="../gis/CGisListDB.cpp" line="770"/>
         <source>Remove items...</source>
         <translation>Element entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
+        <location filename="../gis/CGisListDB.cpp" line="749"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="770"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
@@ -5305,6 +5323,10 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="57"/>
+        <source>GPX 1.1 without extensions</source>
+        <translation>GPX 1.1 ohne Erweiterungen</translation>
+    </message>
+    <message>
         <source>as GPX 1.1</source>
         <translation>als GPX 1.1</translation>
     </message>

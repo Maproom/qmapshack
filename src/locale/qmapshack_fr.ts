@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="fr">
+<TS version="2.1" language="fr">
 <context>
     <name>CAbout</name>
     <message>
@@ -542,15 +542,15 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>distance: %1%2</source>
-        <translation>distance : %1%2</translation>
+        <translation type="vanished">distance : %1%2</translation>
     </message>
     <message>
         <source>ascent: %1%2</source>
-        <translation>montée : %1%2</translation>
+        <translation type="vanished">montée : %1%2</translation>
     </message>
     <message>
         <source>descend: %1%2</source>
-        <translation>descente : %1%2</translation>
+        <translation type="vanished">descente : %1%2</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="735"/>
@@ -611,37 +611,40 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Couleur unie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="167"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="168"/>
         <source>Reduce visible track points</source>
         <translation>Réduire les points visibles de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="170"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
         <source>Change elevation of track points</source>
         <translation>Modifier l&apos;altitude des points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="173"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
         <source>Change timestamp of track points</source>
         <translation>Modifier l&apos;horodatage des points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="176"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
+        <source>Miscellaneous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Modify track points&apos; extensions</source>
-        <translation>Modifier les extensions des points de la trace</translation>
+        <translation type="vanished">Modifier les extensions des points de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="179"/>
         <source>Cut track into pieces</source>
-        <translation>Découper la trace</translation>
+        <translation type="vanished">Découper la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="404"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="402"/>
         <source>Color</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="405"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
         <source>Activity</source>
         <translation>Activité</translation>
     </message>
@@ -654,18 +657,18 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
         <source>Reset activities...</source>
         <translation>Réinitialiser les activités...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="635"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
         <source>This will remove all activities from the track. Proceed?</source>
         <translation>Toutes les activités seront supprimées de la trace. Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Aucune</translation>
+        <translation type="vanished">Aucune</translation>
     </message>
 </context>
 <context>
@@ -1027,12 +1030,12 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Points de la trace modifiés, les données antérieures sont perdues.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="393"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="399"/>
         <source>Length: %1 %2</source>
         <translation>Longueur: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="400"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="406"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
@@ -1049,87 +1052,87 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Déplacement: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="440"/>
         <source>Start: %1</source>
         <translation>Début: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="438"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
         <source>Start: -</source>
         <translation>Début: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="450"/>
         <source>End: %1</source>
         <translation>Fin: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="448"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="454"/>
         <source>End: -</source>
         <translation>Fin: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="452"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
         <source>Points: %1 (%2)</source>
         <translation>Points: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="462"/>
         <source>Invalid elevations!</source>
         <translation>Altitudes invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="461"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="467"/>
         <source>Invalid timestamps!</source>
         <translation>Temps invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="466"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
         <source>Invalid positions!</source>
         <translation>Positions invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="475"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source>Activities: %1</source>
         <translation>Activités: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="590"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="596"/>
         <source>Index: visible %1, total %2</source>
         <translation>Index: visibles %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="601"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="607"/>
         <source>Ele.: %1 %2</source>
         <translation>Altitude: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="610"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> pente: %1%3(%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="615"/>
         <source> speed: %1%2</source>
         <translation> vitesse: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="637"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>... and %1 tags not displayed</source>
         <translation>... and %1 tags non affichés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Distance: - (-)</source>
         <translation>Distance: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="650"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
         <source>Moving: - (-)</source>
         <translation>En déplacement: - (-)</translation>
     </message>
@@ -1138,21 +1141,21 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Montée: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1350"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1363"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1423"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1467"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1632"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1372"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1385"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1445"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1489"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1654"/>
         <source>track</source>
         <translation>trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1590"/>
         <source>Hide point %1.</source>
         <translation>Cacher les points %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1572"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
         <source>Hide points %1..%2.</source>
         <translation>Cacher les points %1..%2.</translation>
     </message>
@@ -1177,7 +1180,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Dist.: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="673"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="679"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation>  En mouvement: %1%2 (%3%)</translation>
     </message>
@@ -1190,8 +1193,8 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Montée : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="700"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="712"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="706"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="718"/>
         <source>, %1%2</source>
         <translation>,%1,%2</translation>
     </message>
@@ -1212,7 +1215,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Dist.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="722"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="728"/>
         <source> Time: %1%2</source>
         <translation> Temps : %1%2</translation>
     </message>
@@ -1225,82 +1228,82 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Entrez le nom de la nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="404"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="410"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="418"/>
         <source>Time: %1, Speed: %2 %3</source>
         <translation>Temps: %1, Vitesse: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="422"/>
         <source>Time: -, Speed: -</source>
         <translation>Time: -, Speed: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
         <source>Moving: %1, Speed: %2 %3</source>
         <translation>En déplacement: %1, Vitesse: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="428"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
         <source>Moving: -, Speed: -</source>
         <translation>En déplacement: -, Vitesse: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="647"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source>Ascent: - (-)</source>
         <translation>Montée: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
         <source>Descent: - (-)</source>
         <translation>Descente: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Montée: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
         <source> Descent: %1%2 (%3%)</source>
         <translation> Descente: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="673"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Distance: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="689"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
         <source>Ascent: -</source>
         <translation>Ascent: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="696"/>
         <source>Descent: -</source>
         <translation>Descente: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="701"/>
         <source>Ascent: %1%2</source>
         <translation>Montée: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="713"/>
         <source> Descent: %1%2</source>
         <translation> Descente: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="723"/>
         <source>Distance: %1%2</source>
         <translation>Distance: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1413"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1435"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Points supprimés de manière permanente %1..%2</translation>
     </message>
@@ -1309,114 +1312,119 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation type="obsolete">Cacher des points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1634"/>
         <source>Show points.</source>
         <translation>Afficher les points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2157"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2179"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2163"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2185"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2169"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2191"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2197"/>
         <source>Changed links</source>
         <translation>Liens modifiés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2186"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2208"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Altitudes modifiées du point %1 à %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2215"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2237"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Acirvité modifiée pour &apos;%1&apos; pour la trace complète.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2265"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2287"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activité modifiée pur &apos;%1&apos; for la plage (%2..%3).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="108"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="109"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
         <translation>Cacher des points avec l&apos;algorithme Douglas Peuker (%1%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="141"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="142"/>
         <source>Hide points with invalid data.</source>
         <translation>Cacher les points aux données invalides</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="157"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="158"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Restaurer les points cachés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="191"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="192"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Supprimer définitivement tous les points cachés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="241"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="242"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Profile lissé avec un filtre médian de dimension %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="277"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="278"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Les altitudes ont été remplacées  par les données des fichiers MNT</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="297"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="299"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation>Les altitudes ont été remplacées  par des valeurs interpolées. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="320"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="322"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Décaler les altitudes de %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="339"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="341"/>
         <source>Changed start of track to %1.</source>
         <translation>Début de la trace modifié à %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="358"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="360"/>
         <source>Remove timestamps.</source>
         <translation>Horodatage supprimé.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="381"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Horodatage artificiel ajouté avec un décalage de %1 sec.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="413"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="415"/>
         <source>Changed speed to %1%2.</source>
         <translation>Vitesse modifiée à %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="432"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="434"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="455"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="457"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Extension %1 supprimée de tous les points</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="473"/>
+        <source>Converted subpoints from routing to track points</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="195"/>
@@ -1631,7 +1639,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>Are you sure you want to delete &quot;%1&quot; from the database?</source>
-        <translation>Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
+        <translation type="vanished">Êtes-vous sûr de vouloir enlever &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="744"/>
@@ -1679,7 +1687,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <source>Save As...</source>
-        <translation>Enregistrer sous...</translation>
+        <translation type="vanished">Enregistrer sous...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="112"/>
@@ -2155,19 +2163,29 @@ ligne %2, colonne %3:
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1081"/>
+        <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your ditribution to fix it.</source>
-        <translation>QMapShack a détecté une librarie Proj4 mal installée. Les tables de conversion pour les projections ESPG qui sont généralement stockée dans /usr/share/proj sont manquantes. Veuillez contacter le mainteneur de paquets de votre distribution pour régler ce problème.</translation>
+        <translation type="vanished">QMapShack a détecté une librarie Proj4 mal installée. Les tables de conversion pour les projections ESPG qui sont généralement stockée dans /usr/share/proj sont manquantes. Veuillez contacter le mainteneur de paquets de votre distribution pour régler ce problème.</translation>
     </message>
 </context>
 <context>
     <name>CMapDraw</name>
     <message>
-        <location filename="../map/CMapDraw.cpp" line="420"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is ditributed without a fee.</source>
-        <translation>Aucune carte n&apos;est installée.Sans cartes  QMapShack a peu d&apos;intérêt. Vous pouvez installer des cartes en cliquant sur le bouton &quot;Au secours ! Je veux des cartes !&quot; dans la fenêtre &quot;Cartes&quot;. Vous pouvez aussi appuyer sur la touche F1 et lire la documentation qui vous expliquera comment utiliser QMapShack.
+        <translation type="vanished">Aucune carte n&apos;est installée.Sans cartes  QMapShack a peu d&apos;intérêt. Vous pouvez installer des cartes en cliquant sur le bouton &quot;Au secours ! Je veux des cartes !&quot; dans la fenêtre &quot;Cartes&quot;. Vous pouvez aussi appuyer sur la touche F1 et lire la documentation qui vous expliquera comment utiliser QMapShack.
 Pourquoi aucune carte n&apos;est fournie par défaut ? Et bien parce qu&apos;héberger des cartes prêtes à télécharger et installer nécessite un serveur puissant, et que ce service n&apos;est pas gratuit. Le projet QMapShack n&apos;a pas les moyens. De plus les cartes et les modèles numériques de terrain ont des droit d&apos;auteurs, ce qui implique des autorisations de la part des fournisseurs. Ce n&apos;est pas si facile que ça en a l&apos;air et pour certaines sources de données de l&apos;argent est demandé ; une fois de plus le projet QMapShack ne peut se le permettre. Et enfin nous pensons qu&apos;installer des cartes vous-même n&apos;est pas grand chose à côté du travail que nécessite le développement de QMapShack, distribué gratuitement pour vous.</translation>
+    </message>
+    <message>
+        <location filename="../map/CMapDraw.cpp" line="420"/>
+        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
+
+If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2778,7 +2796,7 @@ Pourquoi aucune carte n&apos;est fournie par défaut ? Et bien parce qu&apos;hé
     </message>
     <message>
         <source>File contains locked / encypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
-        <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
+        <translation type="vanished">Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
@@ -4782,7 +4800,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>To add files with elevation data use File-&gt;Setup DEM Paths. </source>
-        <translation>Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
+        <translation type="vanished">Pour ajouter des fichiers DEM cliquez sur Fichier -&gt; Configurer les répertoires DEM.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5008,7 +5026,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Sort by time</source>
-        <translation>Trier par ordre chronolgique</translation>
+        <translation type="vanished">Trier par ordre chronolgique</translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="130"/>
@@ -5304,11 +5322,11 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Ascend</source>
-        <translation>Montée</translation>
+        <translation type="vanished">Montée</translation>
     </message>
     <message>
         <source>Descend</source>
-        <translation>Descente</translation>
+        <translation type="vanished">Descente</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
@@ -5576,7 +5594,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <source>Hide points with invalid coordinates at the beginning of the track.</source>
-        <translation>Cacher les points aux coordonnées invalides du début de la trace.</translation>
+        <translation type="vanished">Cacher les points aux coordonnées invalides du début de la trace.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInvalid.ui" line="63"/>
@@ -5801,6 +5819,29 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="70"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+</context>
+<context>
+    <name>IFilterSubPt2Pt</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulaire</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
+        <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
+        <source>Convert subpoints obtained from routing to ordinary track points </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
     </message>
 </context>
 <context>
@@ -6495,7 +6536,7 @@ Nom de fichier: %1</translation>
     </message>
     <message>
         <source>To add maps use File-&gt;Setup Map Paths. </source>
-        <translation>Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
+        <translation type="vanished">Pour ajouter des cartes cliquez sur Fichier -&gt; Configurer les répertoires des cartes.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -6761,11 +6802,11 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
     </message>
     <message>
         <source>Ascend:</source>
-        <translation>Dénivelé positif:</translation>
+        <translation type="vanished">Dénivelé positif:</translation>
     </message>
     <message>
         <source>Descend:</source>
-        <translation>Dénivelé négatif:</translation>
+        <translation type="vanished">Dénivelé négatif:</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.h" line="135"/>
@@ -7092,7 +7133,7 @@ or
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path.</source>
         <translatorcomment>tbc: setup tool button</translatorcomment>
-        <translation>Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données locales  de calcul d&apos;itinéraire. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
+        <translation type="vanished">Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données locales  de calcul d&apos;itinéraire. Utilisez le bouton de configuration pour ajouter des répertoires.</translation>
     </message>
 </context>
 <context>
@@ -7841,11 +7882,11 @@ Si vous entrez &apos;mot&apos; alors &apos;mot&apos; uniquement sera recherché.
     <name>ISelectActivity</name>
     <message>
         <source>Activities...</source>
-        <translation>Activités...</translation>
+        <translation type="vanished">Activités...</translation>
     </message>
     <message>
         <source>Select one:</source>
-        <translation>Faites une sélection :</translation>
+        <translation type="vanished">Faites une sélection :</translation>
     </message>
 </context>
 <context>

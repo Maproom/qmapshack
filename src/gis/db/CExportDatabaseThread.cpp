@@ -160,7 +160,7 @@ void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
 
         QString simplifiedProjName = simplifyString(prj.getName());
 
-        // use simplified project name as filename. If the folder is of type "other" prepend it with the parnt folder's name.
+        // use simplified project name as filename. If the folder is of type "other" prepend it with the parent folder's name.
         QString filename = dir.absoluteFilePath((!parentName.isEmpty() && (type == IDBFolder::eTypeOther)) ?  parentName + "_" + simplifiedProjName : simplifiedProjName) + ".gpx";
         sigOut(tr("Save project as %1").arg(filename));
 

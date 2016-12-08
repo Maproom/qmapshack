@@ -722,66 +722,6 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
 </context>
 <context>
-    <name>CExportDatabase</name>
-    <message>
-        <location filename="../gis/db/CExportDatabase.cpp" line="92"/>
-        <source>Select export path...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CExportDatabaseThread</name>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="46"/>
-        <source>Delete content...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="47"/>
-        <source>Delete all old content in %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="91"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="135"/>
-        <source>Create %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="94"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="138"/>
-        <source>Failed to create %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="100"/>
-        <source>Done!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="112"/>
-        <source>Abort by user!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="152"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
-        <source>Database Error: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="165"/>
-        <source>Save project as %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="169"/>
-        <source>Failed!</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CFilterDeleteExtension</name>
     <message>
         <location filename="../gis/trk/filter/CFilterDeleteExtension.cpp" line="57"/>
@@ -1090,12 +1030,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Trackpunten aangepast, vorige gegevens overschreven.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="399"/>
         <source>Length: %1 %2</source>
         <translation>Lengte: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="406"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
@@ -1112,87 +1052,87 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="obsolete">Beweging: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="440"/>
         <source>Start: %1</source>
         <translation>Start: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="446"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
         <source>Start: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="452"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="450"/>
         <source>End: %1</source>
         <translation>Einde: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="454"/>
         <source>End: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
         <source>Points: %1 (%2)</source>
         <translation>Punten: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="462"/>
         <source>Invalid elevations!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="467"/>
         <source>Invalid timestamps!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="472"/>
         <source>Invalid positions!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="483"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="481"/>
         <source>Activities: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
         <source>Index: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="596"/>
         <source>Index: visible %1, total %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="607"/>
         <source>Ele.: %1 %2</source>
         <translation>Hoogte.: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="610"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> helling: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="617"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="615"/>
         <source> speed: %1%2</source>
         <translation> snelheid: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="645"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>... and %1 tags not displayed</source>
         <translation>... en %1 tags niet getoont</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
         <source>Distance: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="658"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
         <source>Moving: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1201,21 +1141,21 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Stijging: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1374"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1387"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1447"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1491"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1372"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1385"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1445"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1489"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1654"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1592"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1590"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1596"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1240,7 +1180,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="obsolete">Afstand.: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="679"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> Beweging: %1%2 (%3%)</translation>
     </message>
@@ -1253,8 +1193,8 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Stijging: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="708"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="706"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="718"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
@@ -1275,7 +1215,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="obsolete">Afstand.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="730"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="728"/>
         <source> Time: %1%2</source>
         <translation> Tijd: %1%2</translation>
     </message>
@@ -1288,82 +1228,82 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Geef track nieuwe naam.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="410"/>
         <source>, %1-, %2-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="420"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="418"/>
         <source>Time: %1, Speed: %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="422"/>
         <source>Time: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="432"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
         <source>Moving: %1, Speed: %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
         <source>Moving: -, Speed: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source>Ascent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
         <source>Descent: - (-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="663"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="669"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
         <source> Descent: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="675"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="673"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="697"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="695"/>
         <source>Ascent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="696"/>
         <source>Descent: -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="701"/>
         <source>Ascent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="715"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="713"/>
         <source> Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="725"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="723"/>
         <source>Distance: %1%2</source>
         <translation type="unfinished">Afstand: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1437"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1435"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Permanent verwijderde punten %1..%2</translation>
     </message>
@@ -1372,42 +1312,42 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="obsolete">Verberg punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1636"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1634"/>
         <source>Show points.</source>
         <translation>Toon punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2181"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2179"/>
         <source>Changed name</source>
         <translation>Naam aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2187"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2185"/>
         <source>Changed comment</source>
         <translation>Notitie aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2193"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2191"/>
         <source>Changed description</source>
         <translation>Beschrijving aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2199"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2197"/>
         <source>Changed links</source>
         <translation>Link aangepast</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2210"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2208"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2237"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor gehele track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2289"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2287"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activiteit aangepast naar &apos;%1&apos; voor bereik(%2..%3).</translation>
     </message>
@@ -1446,48 +1386,48 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Vervang hoogte gegevens met gegevens van DEM bestanden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="298"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="299"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="321"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="322"/>
         <source>Offset elevation data by %1%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="340"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="341"/>
         <source>Changed start of track to %1.</source>
         <translation>Start van track veranderd naar %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="359"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="360"/>
         <source>Remove timestamps.</source>
         <translation>Verwijder tijdstempels.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="382"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="414"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="415"/>
         <source>Changed speed to %1%2.</source>
         <translation>Snelheid veranderd naar %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="433"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="434"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="456"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="457"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="472"/>
-        <source>Convert SubPoints to Points</source>
+        <location filename="../gis/trk/filter/filter.cpp" line="473"/>
+        <source>Converted subpoints from routing to track points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1622,73 +1562,68 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Map verwijderen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
-        <source>Export to GPX...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListDB.cpp" line="128"/>
-        <location filename="../gis/CGisListDB.cpp" line="141"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
+        <location filename="../gis/CGisListDB.cpp" line="139"/>
         <source>Delete Item</source>
         <translation>Element verwijderen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="132"/>
+        <location filename="../gis/CGisListDB.cpp" line="131"/>
         <source>Search Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="132"/>
         <source>Sync. with Database</source>
         <translation>Syngroniseren met database</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="134"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
         <source>Remove Database</source>
         <translation>Database verwijderen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="138"/>
+        <location filename="../gis/CGisListDB.cpp" line="136"/>
         <source>Empty</source>
         <translation>Leeg</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="432"/>
         <source>Remove database...</source>
         <translation>Database verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="432"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Moet &apos;%1&apos; werkelijk uit de lijst verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="496"/>
         <source>Delete database folder...</source>
         <translation>Verwijder database map...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="496"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="664"/>
         <source>Bad operation....</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="664"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="723"/>
         <source>Folder name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="723"/>
         <source>Rename folder:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1697,28 +1632,28 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="vanished">Moet &quot;%1&quot; werkelijk uit de database verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="744"/>
+        <location filename="../gis/CGisListDB.cpp" line="765"/>
         <source>Remove items...</source>
         <translation>Elementen verwijderen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
+        <location filename="../gis/CGisListDB.cpp" line="744"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Moeten alle elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="765"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Moeten alle geselecteerde elementen worden verwijderd uit Verloren &amp; Gevonden? Dit zal pemanent zijn.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="854"/>
+        <location filename="../gis/CGisListDB.cpp" line="852"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Moet &apos;%1&apos; uit map &apos;%2&apos; verwijderd worden?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="855"/>
+        <location filename="../gis/CGisListDB.cpp" line="853"/>
         <source>Delete...</source>
         <translation>Verwijderen...</translation>
     </message>
@@ -2051,7 +1986,7 @@ lijn %2, kolom %3:
         <translation type="unfinished">Schrijven bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="404"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="397"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished">Opslaan GIS gegevens mislukt...</translation>
     </message>
@@ -5505,54 +5440,6 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     </message>
 </context>
 <context>
-    <name>IExportDatabase</name>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="14"/>
-        <source>Export database to GPX...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="22"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="33"/>
-        <source>Export Path:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="46"/>
-        <source>-</source>
-        <translation type="unfinished">-</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="57"/>
-        <source>as GPX 1.1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="64"/>
-        <source>Delete content in export folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="94"/>
-        <source>Start</source>
-        <translation type="unfinished">Start</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="104"/>
-        <source>Abort</source>
-        <translation type="unfinished">Annuleren</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="111"/>
-        <source>Close</source>
-        <translation type="unfinished">Sluiten</translation>
-    </message>
-</context>
-<context>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
@@ -5924,12 +5811,12 @@ Als er alleen een halve track bewaard moet worden kunnen de overige punten verwi
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
-        <source>&lt;b&gt;Convert Track&apos;s SubPoints to Points&lt;/b&gt;</source>
+        <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
-        <source>Convert subpoints (obtained from p.x. Routino) to ordinary track points</source>
+        <source>Convert subpoints obtained from routing to ordinary track points </source>
         <translation type="unfinished"></translation>
     </message>
     <message>

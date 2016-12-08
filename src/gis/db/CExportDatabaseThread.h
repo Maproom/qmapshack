@@ -30,7 +30,7 @@ public:
     CExportDatabaseThread(quint64 id, QSqlDatabase& db, QObject * parent);
     virtual ~CExportDatabaseThread() = default;
 
-    void start(const QString& path, bool saveAsGpx11, bool delOld);
+    void start(const QString& path, bool saveAsGpx11);
 
 public slots:
     void slotAbort();

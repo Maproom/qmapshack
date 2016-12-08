@@ -34,31 +34,11 @@ CExportDatabaseThread::CExportDatabaseThread(quint64 id, QSqlDatabase &db, QObje
 }
 
 
-void CExportDatabaseThread::start(const QString& path, bool saveAsGpx11, bool delOld)
+void CExportDatabaseThread::start(const QString& path, bool saveAsGpx11)
 {
     if(isRunning())
     {
         return;
-    }
-
-    if(QDir(path).absolutePath() == QDir::home().absolutePath())
-    {
-        QMessageBox::critical(CMainWindow::self().getBestWidgetForParent(), tr("Stop...")
-                              , tr("This would delete your home directory. Bad Idea.")
-                              , QMessageBox::Abort);
-        return;
-    }
-
-    if(delOld)
-    {
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Remove path...")
-                                        , tr("Remove %1 and all it's content?").arg(path)
-                                        , QMessageBox::Yes|QMessageBox::No);
-        if(res == QMessageBox::Yes)
-        {
-            QDir dir(path);
-            dir.removeRecursively();
-        }
     }
 
     asGpx11 = saveAsGpx11;

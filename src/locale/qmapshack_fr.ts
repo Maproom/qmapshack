@@ -724,7 +724,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CExportDatabase</name>
     <message>
-        <location filename="../gis/db/CExportDatabase.cpp" line="92"/>
+        <location filename="../gis/db/CExportDatabase.cpp" line="90"/>
         <source>Select export path...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -732,61 +732,41 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CExportDatabaseThread</name>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="46"/>
-        <source>Stop...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="47"/>
-        <source>This would delete your home directory. Bad Idea.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="54"/>
-        <source>Remove path...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="55"/>
-        <source>Remove %1 and all it&apos;s content?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="99"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="143"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="79"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="123"/>
         <source>Create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="102"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="146"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="82"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="126"/>
         <source>Failed to create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="108"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="88"/>
         <source>Done!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="100"/>
         <source>Abort by user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="128"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="160"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="185"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="108"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="140"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="165"/>
         <source>Database Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="173"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5556,27 +5536,22 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="57"/>
+        <location filename="../gis/db/IExportDatabase.ui" line="55"/>
         <source>GPX 1.1 without extensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="64"/>
-        <source>Delete content in export folder</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="94"/>
+        <location filename="../gis/db/IExportDatabase.ui" line="83"/>
         <source>Start</source>
         <translation type="unfinished">Démarrer</translation>
     </message>
     <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="104"/>
+        <location filename="../gis/db/IExportDatabase.ui" line="93"/>
         <source>Abort</source>
         <translation type="unfinished">Annuler</translation>
     </message>
     <message>
-        <location filename="../gis/db/IExportDatabase.ui" line="111"/>
+        <location filename="../gis/db/IExportDatabase.ui" line="100"/>
         <source>Close</source>
         <translation type="unfinished">Fermer</translation>
     </message>

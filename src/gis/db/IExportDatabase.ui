@@ -50,22 +50,11 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
-     <item>
-      <widget class="QCheckBox" name="checkGpx11">
-       <property name="text">
-        <string>GPX 1.1 without extensions</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkDel">
-       <property name="text">
-        <string>Delete content in export folder</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QCheckBox" name="checkGpx11">
+     <property name="text">
+      <string>GPX 1.1 without extensions</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QTextBrowser" name="textBrowser"/>

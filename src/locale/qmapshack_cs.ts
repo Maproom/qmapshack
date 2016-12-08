@@ -813,50 +813,60 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <name>CExportDatabaseThread</name>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="46"/>
-        <source>Delete content...</source>
+        <source>Stop...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="47"/>
-        <source>Delete all old content in %1</source>
+        <source>This would delete your home directory. Bad Idea.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="91"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="135"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="54"/>
+        <source>Remove path...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="55"/>
+        <source>Remove %1 and all it&apos;s content?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="99"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="143"/>
         <source>Create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="94"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="138"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="102"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="146"/>
         <source>Failed to create %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="100"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="108"/>
         <source>Done!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="112"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
         <source>Abort by user!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="120"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="152"/>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="128"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="160"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="185"/>
         <source>Database Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="165"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="173"/>
         <source>Save project as %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/db/CExportDatabaseThread.cpp" line="169"/>
+        <location filename="../gis/db/CExportDatabaseThread.cpp" line="177"/>
         <source>Failed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1737,47 +1747,47 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="437"/>
         <source>Remove database...</source>
         <translation>Odstranit databázi...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="434"/>
+        <location filename="../gis/CGisListDB.cpp" line="437"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="501"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Opravdu chcete smazat vybrané složky a všechny podsložky z databáze?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="669"/>
         <source>Bad operation....</source>
         <translation>Špatná operace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="666"/>
+        <location filename="../gis/CGisListDB.cpp" line="669"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>Cílová složka je podsložkou složky k přesunutí. Toto nebude pracovat.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="728"/>
         <source>Folder name...</source>
         <translation>Název složky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="725"/>
+        <location filename="../gis/CGisListDB.cpp" line="728"/>
         <source>Rename folder:</source>
         <translation>Přejmenovat složku:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="854"/>
+        <location filename="../gis/CGisListDB.cpp" line="857"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; ze složky &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="855"/>
+        <location filename="../gis/CGisListDB.cpp" line="858"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>
@@ -1786,7 +1796,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="obsolete">Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="498"/>
+        <location filename="../gis/CGisListDB.cpp" line="501"/>
         <source>Delete database folder...</source>
         <translation>Smazat složku s databází...</translation>
     </message>
@@ -1795,18 +1805,18 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="vanished">Opravdu chcete &quot;%1&quot; odstranit z databáze?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="749"/>
+        <location filename="../gis/CGisListDB.cpp" line="770"/>
         <source>Remove items...</source>
         <translation>Odstranit prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="746"/>
+        <location filename="../gis/CGisListDB.cpp" line="749"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Opravdu chcete smazat všechny prvky ze ztracených a nalezených? Tím budou trvale odstraněny.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="767"/>
+        <location filename="../gis/CGisListDB.cpp" line="770"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Opravdu chcete smazat všechny vybrané prvky ze ztracených a nalezených? Tím budou trvale odstraněny.</translation>
     </message>
@@ -5737,7 +5747,7 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <location filename="../gis/db/IExportDatabase.ui" line="57"/>
-        <source>as GPX 1.1</source>
+        <source>GPX 1.1 without extensions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

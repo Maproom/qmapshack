@@ -33,6 +33,9 @@ public:
     CExportDatabase(quint64 id, QSqlDatabase& db, QWidget * parent);
     virtual ~CExportDatabase();
 
+protected:
+    void closeEvent(QCloseEvent * e) override;
+
 private slots:
     void slotStdout(const QString& str);
     void slotStderr(const QString& str);

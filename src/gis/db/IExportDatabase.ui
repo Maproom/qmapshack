@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Export database to GPX...</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -50,11 +50,22 @@
     </layout>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkGpx11">
-     <property name="text">
-      <string>as GPX 1.1</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QCheckBox" name="checkGpx11">
+       <property name="text">
+        <string>as GPX 1.1</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkDel">
+       <property name="text">
+        <string>Delete content in export folder</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QTextBrowser" name="textBrowser"/>

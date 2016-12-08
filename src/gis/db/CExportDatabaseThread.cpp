@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisWidget.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CExportDatabaseThread.h"
@@ -33,15 +34,34 @@ CExportDatabaseThread::CExportDatabaseThread(quint64 id, QSqlDatabase &db, QObje
 }
 
 
-void CExportDatabaseThread::start(const QString& path, bool saveAsGpx11)
+void CExportDatabaseThread::start(const QString& path, bool saveAsGpx11, bool delOld)
 {
     if(isRunning())
     {
         return;
     }
+
+    if(delOld)
+    {
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Delete content...")
+                                        , tr("Delete all old content in %1").arg(path)
+                                        , QMessageBox::Yes|QMessageBox::No);
+        if(res == QMessageBox::Yes)
+        {
+            QDir dir(path);
+            dir.removeRecursively();
+        }
+    }
+
     asGpx11 = saveAsGpx11;
     exportPath = path;
     QThread::start();
+}
+
+QString CExportDatabaseThread::simplifyString(const QString& str) const
+{
+    QString s = str;
+    return s.replace(QRegExp("[^\\w\\d]"), "_");
 }
 
 void CExportDatabaseThread::slotAbort()
@@ -65,7 +85,19 @@ void CExportDatabaseThread::run()
 
     try
     {
+        QDir dir(exportPath);
+        if(!dir.exists())
+        {
+            emit sigOut(tr("Create %1").arg(dir.absoluteFilePath(exportPath)));
+            if(!dir.mkpath(exportPath))
+            {
+                throw tr("Failed to create %1").arg(dir.absoluteFilePath(exportPath));
+            }
+        }
+
         dumpFolder(parentFolderId, "", exportPath);
+
+        emit sigOut(tr("Done!"));
     }
     catch(const QString& msg)
     {
@@ -73,22 +105,14 @@ void CExportDatabaseThread::run()
     }
 }
 
-bool CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path)
+void CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, const QString& path)
 {
     if(!getKeepGoing())
     {
-        throw "";
+        throw tr("Abort by user!");
     }
 
     QDir dir(path);
-    if(!dir.exists())
-    {
-        emit sigOut(tr("Create %1").arg(path));
-        if(!dir.mkpath(path))
-        {
-            throw tr("Failed to create %1").arg(path);
-        }
-    }
 
     QSqlQuery query(db);
     query.prepare("SELECT type, name FROM folders WHERE id=:id");
@@ -99,19 +123,26 @@ bool CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
     quint32 type = query.value(0).toUInt();
     QString name = query.value(1).toString();
 
-    query.prepare("SELECT child FROM folder2folder WHERE parent=:parent");
-    query.prepare("SELECT id, name FROM folders WHERE id IN (SELECT child FROM folder2folder WHERE parent=:parent)");
-    query.bindValue(":parent", id);
-    QUERY_EXEC(throw tr("Database Error: %1").arg(query.lastError().text()));
-    while(query.next())
-    {
-        quint64 childId = query.value(0).toULongLong();
-        QString folder  = query.value(1).toString();
-        dumpFolder(childId, name, dir.absoluteFilePath(folder));
-    }
+    QString simplifiedName = simplifyString(name);
 
-    if((type == IDBFolder::eTypeProject) || (type == IDBFolder::eTypeOther))
+
+    if(type < IDBFolder::eTypeProject)
     {
+        // if it is a group or database folder create a new subdirectory-
+
+        if(!dir.exists(simplifiedName))
+        {
+            emit sigOut(tr("Create %1").arg(dir.absoluteFilePath(simplifiedName)));
+            if(!dir.mkpath(simplifiedName))
+            {
+                throw tr("Failed to create %1").arg(path);
+            }
+        }
+        dir.cd(simplifiedName);
+    }
+    else
+    {
+        // if it is a project or other folder dump it to a GPX file
         const QString connectionName = db.connectionName();
         CDBProject prj(connectionName, id, 0);
 
@@ -127,7 +158,10 @@ bool CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
         }
         prj.showItems(&evt);
 
-        QString filename = dir.absoluteFilePath((!parentName.isEmpty() && (type == IDBFolder::eTypeOther)) ?  parentName + "_" + prj.getName() : prj.getName()) + ".gpx";
+        QString simplifiedProjName = simplifyString(prj.getName());
+
+        // use simplified project name as filename. If the folder is of type "other" prepend it with the parnt folder's name.
+        QString filename = dir.absoluteFilePath((!parentName.isEmpty() && (type == IDBFolder::eTypeOther)) ?  parentName + "_" + simplifiedProjName : simplifiedProjName) + ".gpx";
         sigOut(tr("Save project as %1").arg(filename));
 
         if(!CGpxProject::saveAs(filename,  prj, asGpx11))
@@ -136,5 +170,14 @@ bool CExportDatabaseThread::dumpFolder(quint64 id, const QString& parentName, co
         }
     }
 
-    return true;
+    // query all child folders to this folder
+    query.prepare("SELECT child FROM folder2folder WHERE parent=:parent");
+    query.prepare("SELECT id, name FROM folders WHERE id IN (SELECT child FROM folder2folder WHERE parent=:parent)");
+    query.bindValue(":parent", id);
+    QUERY_EXEC(throw tr("Database Error: %1").arg(query.lastError().text()));
+    while(query.next())
+    {
+        quint64 childId = query.value(0).toULongLong();
+        dumpFolder(childId, simplifiedName, dir.absolutePath());
+    }
 }

@@ -32,6 +32,7 @@ CExportDatabase::CExportDatabase(quint64 id, QSqlDatabase &db, QWidget *parent)
     cfg.beginGroup("ExportDB");
     labelPath->setText(cfg.value("path","-").toString());
     checkGpx11->setChecked(cfg.value("asGpx11", false).toBool());
+    checkDel->setChecked(cfg.value("delOld", false).toBool());
     cfg.endGroup();
 
     QDir dir(labelPath->text());
@@ -54,7 +55,20 @@ CExportDatabase::~CExportDatabase()
     cfg.beginGroup("ExportDB");
     cfg.setValue("path", labelPath->text());
     cfg.setValue("asGpx11", checkGpx11->isChecked());
+    cfg.setValue("delOld", checkDel->isChecked());
     cfg.endGroup();
+}
+
+void CExportDatabase::closeEvent(QCloseEvent * e)
+{
+    if(thread->isRunning())
+    {
+        e->ignore();
+    }
+    else
+    {
+        e->accept();
+    }
 }
 
 void CExportDatabase::slotStdout(const QString& str)
@@ -88,18 +102,20 @@ void CExportDatabase::slotSetPath()
 void CExportDatabase::slotStart()
 {
     textBrowser->clear();
-    thread->start(labelPath->text(), checkGpx11->isChecked());
+    thread->start(labelPath->text(), checkGpx11->isChecked(), checkDel->isChecked());
 }
 
 void CExportDatabase::slotStarted()
 {
     pushStart->setEnabled(false);
     pushAbort->setEnabled(true);
+    pushClose->setEnabled(false);
 }
 
 void CExportDatabase::slotFinished()
 {
     pushStart->setEnabled(true);
     pushAbort->setEnabled(false);
+    pushClose->setEnabled(true);
 }
 

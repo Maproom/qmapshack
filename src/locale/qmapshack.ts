@@ -1557,6 +1557,11 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <source>Save as GPX 1.1 w/o ext...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Send to Devices</source>
         <translation type="unfinished"></translation>
@@ -1596,11 +1601,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Save as...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
-        <source>Save as strict GPX 1.1...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

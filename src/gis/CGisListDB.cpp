@@ -325,8 +325,11 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
+    bool isSingleSelection  = selectedItems().count() == 1;
+
     actionUpdate->setEnabled(true);
-    actionAddFolder->setEnabled(true);
+    actionAddFolder->setEnabled(isSingleSelection);
+    actionExportToGpx->setEnabled(isSingleSelection);
 
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
@@ -350,8 +353,8 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder)
-    {
-        bool isGroupFolder = folder->type() == IDBFolder::eTypeGroup;
+    {        
+        bool isGroupFolder      = folder->type() == IDBFolder::eTypeGroup;
         actionRenameFolder->setVisible(isGroupFolder);
         menuFolder->exec(p);
         return;

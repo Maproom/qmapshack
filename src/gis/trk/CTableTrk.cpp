@@ -80,7 +80,7 @@ void CTableTrk::updateData()
     quint32 invalidMask = (trk->getAllValidFlags() & trkpt_t::eValidMask) << 16;
 
     QList<QTreeWidgetItem*> items;
-    const trk_t& t = trk->getTrackData();
+    const CTrackData& t = trk->getTrackData();
     for(const trkpt_t& trkpt : t)
     {
         QString val, unit;

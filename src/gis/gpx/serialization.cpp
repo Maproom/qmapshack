@@ -715,7 +715,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 }
 
 
-void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
+void CGisItemTrk::readTrk(const QDomNode& xml, CTrackData& trk)
 {
     readXml(xml, "name",   trk.name);
     readXml(xml, "cmt",    trk.cmt);
@@ -1042,7 +1042,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
         CGisItemTrk * track = dynamic_cast<CGisItemTrk*>(project->child(i));
         if(track != nullptr)
         {
-            const trk_t& trk = track->getTrackData();
+            const CTrackData& trk = track->getTrackData();
             if(trk.segs.isEmpty())
             {
                 continue;

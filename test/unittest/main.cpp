@@ -90,7 +90,7 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
         if(nullptr != itemTrk)
         {
-            const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
+            const CGisItemTrk::CTrackData &trk = itemTrk->getTrackData();
 
             SUBVERIFY(exp.trks.contains(itemTrk->getName()), QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()));
 

@@ -87,7 +87,7 @@ void CPlotProfile::updateData()
     IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal basefactor = IUnit::self().basefactor;
-    const trk_t& t = trk->getTrackData();
+    const CTrackData& t = trk->getTrackData();
     for(const trkpt_t& trkpt : t)
     {
         if(trkpt.isHidden())

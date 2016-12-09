@@ -77,7 +77,7 @@ public:
     };
 
     /** @brief Used to create a new track from a part of an existing track */
-    CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
+    CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const CTrackData &srctrk, IGisProject *project);
 
     /** @brief Used to create a copy of track with new parent */
     CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx, bool clone);
@@ -107,7 +107,7 @@ public:
        @param trkdata  The track's new data (will be moved, don't use your "copy" after construction!
        @param project  The project this track belongs to
      */
-    CGisItemTrk(trk_t& trkdata, IGisProject *project);
+    CGisItemTrk(CTrackData& trkdata, IGisProject *project);
 
     CGisItemTrk(CFitStream& stream, IGisProject * project);
 
@@ -545,7 +545,7 @@ private:
        @param xml   The XML <trk> section
        @param trk   The track structure to fill
      */
-    void readTrk(const QDomNode& xml, trk_t& trk);
+    void readTrk(const QDomNode& xml, CTrackData& trk);
 
     /**
        @brief Restore track from TwoNav *trk file
@@ -642,7 +642,7 @@ public:
        @brief Read only access to the track data.
        @return
      */
-    const trk_t& getTrackData() const
+    const CTrackData& getTrackData() const
     {
         return trk;
     }
@@ -693,7 +693,7 @@ public:
 
 private:
     /// this is the GPX structure oriented data of the track
-    trk_t trk;
+    CTrackData trk;
 
     /// the key of the track having the user focus.
     static key_t keyUserFocus;

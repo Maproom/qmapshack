@@ -550,7 +550,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         const trkpt_t* lastTrkpt = nullptr;
         wpt_info_t * lastWptInfo = nullptr;
         QList<wpt_info_t> wptInfo;
-        const trk_t& t = trk->getTrackData();
+        const CTrackData& t = trk->getTrackData();
         for(const trkpt_t& trkpt : t)
         {
             if(trkpt.isHidden() || trkpt.keyWpt.item.isEmpty())

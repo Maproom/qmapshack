@@ -224,7 +224,7 @@ void CSlfReader::readEntries(const QDomNode& xml)
     // Now generate the track / segments
     int lap = 0;
 
-    trk_t trk;
+    CTrackData trk;
     trk.segs.resize(laps.count() + 1);
 
     trkseg_t *seg = &(trk.segs[0]);

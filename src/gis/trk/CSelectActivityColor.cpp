@@ -72,7 +72,7 @@ void CSelectActivityColor::updateData()
     quint32 flags           = act.getAllFlags();
     quint32 mask            = 0x80000000;
     qint32 cnt              = 0;
-    for(quint32 i = 0; i < CGisItemTrk::trkpt_t::eActMaxNum; i++)
+    for(quint32 i = 0; i < trkpt_t::eActMaxNum; i++)
     {
         if((flags & mask) != 0)
         {

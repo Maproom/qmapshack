@@ -1379,7 +1379,7 @@ void IPlot::slotAddWpt()
         return;
     }
 
-    const CGisItemTrk::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    const trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
     if(trkpt == nullptr)
     {
         return;
@@ -1393,7 +1393,7 @@ void IPlot::slotAddWpt()
     }
 }
 
-void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
+void IPlot::setMouseRangeFocus(const trkpt_t * ptRange1, const trkpt_t *ptRange2)
 {
     if(nullptr == ptRange1 || nullptr == ptRange2)
     {
@@ -1404,11 +1404,11 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
     {
         if(ptRange1->idxTotal < ptRange2->idxTotal)
         {
-            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->flags & trkpt_t::eHidden)
             {
                 ptRange1++;
             }
-            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->flags & trkpt_t::eHidden)
             {
                 ptRange2--;
             }
@@ -1417,11 +1417,11 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
         }
         else
         {
-            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->flags & trkpt_t::eHidden)
             {
                 ptRange1--;
             }
-            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->flags & trkpt_t::eHidden)
             {
                 ptRange2++;
             }

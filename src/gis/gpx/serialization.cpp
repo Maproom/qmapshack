@@ -1042,7 +1042,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
         CGisItemTrk * track = dynamic_cast<CGisItemTrk*>(project->child(i));
         if(track != nullptr)
         {
-            const CGisItemTrk::trk_t& trk = track->getTrackData();
+            const trk_t& trk = track->getTrackData();
             if(trk.segs.isEmpty())
             {
                 continue;
@@ -1053,7 +1053,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
                 continue;
             }
 
-            const CGisItemTrk::trkpt_t& origin = trk.segs.first().pts.first();
+            const trkpt_t& origin = trk.segs.first().pts.first();
 
             QDomElement startPosition = doc.createElement("StartPosition");
             adventure.appendChild(startPosition);
@@ -1072,7 +1072,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             QDomElement waypointOrder = doc.createElement("WaypointOrder");
             adventure.appendChild(waypointOrder);
 
-            for(const CGisItemTrk::trkpt_t& trkpt : trk)
+            for(const trkpt_t& trkpt : trk)
             {
                 if(trkpt.keyWpt.item.isEmpty())
                 {

@@ -102,10 +102,10 @@ void ITrack::updateData()
     if(trk)
     {
         coords.clear();
-        const CGisItemTrk::trk_t& t = trk->getTrackData();
-        for(const CGisItemTrk::trkpt_t& trkpt : t)
+        const trk_t& t = trk->getTrackData();
+        for(const trkpt_t& trkpt : t)
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+            if(trkpt.flags & trkpt_t::eHidden)
             {
                 continue;
             }

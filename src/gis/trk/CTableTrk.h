@@ -32,9 +32,9 @@ public:
     void setTrack(CGisItemTrk * track);
 
     void updateData() override;
-    void setMouseFocus(const CGisItemTrk::trkpt_t * pt) override {}
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) override {}
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
+    void setMouseFocus(const trkpt_t * pt) override {}
+    void setMouseRangeFocus(const trkpt_t * pt1, const trkpt_t * pt2) override {}
+    void setMouseClickFocus(const trkpt_t * pt) override {}
 
 
     enum columns_t

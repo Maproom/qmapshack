@@ -81,10 +81,10 @@ void CPlot::updateData()
     }
 
     QPolygonF line;
-    const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(const CGisItemTrk::trkpt_t& trkpt : t)
+    const trk_t& t = trk->getTrackData();
+    for(const trkpt_t& trkpt : t)
     {
-        if(!(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+        if(!(trkpt.flags & trkpt_t::eHidden)
            && getY(trkpt) != NOFLOAT)
         {
             line << QPointF(getX(trkpt), getY(trkpt) * factor);
@@ -95,7 +95,7 @@ void CPlot::updateData()
     setLimits();
 }
 
-void CPlot::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
+void CPlot::setMouseFocus(const trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
     {

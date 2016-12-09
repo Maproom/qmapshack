@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/trk/TrackData.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -51,9 +52,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
 {
     Q_DECLARE_TR_FUNCTIONS(CGisItemTrk)
 public:
-    struct trk_t;
-    struct trkpt_t;
-
     enum focusmode_e
     {
         eFocusMouseMove
@@ -165,22 +163,13 @@ public:
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
-    QDateTime getTimestamp() const override
-    {
-        return getTimeStart();
-    }
+    QDateTime getTimestamp() const override { return getTimeStart(); }
 
     /// get the track color as index into the Garmin color table
-    int getColorIdx() const
-    {
-        return colorIdx;
-    }
+    int getColorIdx() const { return colorIdx; }
 
     /// get the track color a Qt color object
-    const QColor& getColor() const
-    {
-        return color;
-    }
+    const QColor& getColor() const { return color; }
 
     /**
        @brief get a summary of the track
@@ -197,48 +186,25 @@ public:
     /// get a progress summary for a selected track point
     QString getInfoProgress(const trkpt_t& pt) const;
 
-    quint32 getTotalElapsedSeconds() const
-    {
-        return totalElapsedSeconds;
-    }
+    quint32 getTotalElapsedSeconds()       const { return totalElapsedSeconds;       }
+    quint32 getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
 
-    quint32 getTotalElapsedSecondsMoving() const
-    {
-        return totalElapsedSecondsMoving;
-    }
+    qreal getTotalAscent()   const { return totalAscent;   }
+    qreal getTotalDescent()  const { return totalDescent;  }
+    qreal getTotalDistance() const { return totalDistance; }
 
-    qreal getTotalAscent() const
-    {
-        return totalAscent;
-    }
+    const QString&       getComment()     const override { return trk.cmt;   }
+    const QString&       getDescription() const override { return trk.desc;  }
+    const QList<link_t>& getLinks()       const override { return trk.links; }
 
-    qreal getTotalDescent() const
-    {
-        return totalDescent;
-    }
+    qint32 getCntTotalPoints() const { return cntTotalPoints; }
 
-    qreal getTotalDistance() const
-    {
-        return totalDistance;
-    }
-
-    const QString& getComment() const override
-    {
-        return trk.cmt;
-    }
-    const QString& getDescription() const override
-    {
-        return trk.desc;
-    }
-    const QList<link_t>& getLinks() const override
-    {
-        return trk.links;
-    }
-
-    qint32 getCntTotalPoints()
-    {
-        return cntTotalPoints;
-    }
+    const QDateTime& getTimeStart()           const { return timeStart;        }
+    qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
+    const CActivityTrk& getActivities()       const { return activities;       }
+    const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
+    const trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
+    quint32 getAllValidFlags()                const { return allValidFlags;    }
 
 
     /// get the track as a simple coordinate polyline
@@ -246,42 +212,14 @@ public:
     /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l) override;
 
-    const QDateTime& getTimeStart() const
-    {
-        return timeStart;
-    }
-
-    qint32 getNumberOfVisiblePoints() const
-    {
-        return cntVisiblePoints;
-    }
-
-    const CActivityTrk& getActivities() const
-    {
-        return activities;
-    }
-
-    const CPropertyTrk * getPropertyHandler() const
-    {
-        return propHandler;
-    }
-
-    const trkpt_t * getMouseMoveFocusPoint() const
-    {
-        return mouseMoveFocus;
-    }
-
-    quint32 getAllValidFlags() const
-    {
-        return allValidFlags;
-    }
-
     /**
        @brief Get the elevation of a track point
        @param idx   The total index of the point
        @return The elevation or NOINT if the index is invalid, or the track point has no elevation value.
      */
     qint32 getElevation(qint32 idx) const;
+
+
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -656,44 +594,6 @@ private:
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
 
-    const trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const;
-
-    trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond);
-
-    /**
-       @brief Try to get access Nth visible point matching the idx
-
-       This will iterate over all segments and count the visible points. If the
-       count matches idx a pointer to the track point is returned.
-
-       @param idx The index into all visible points
-       @return A null pointer of no point is found.
-     */
-    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx) const;
-    /**
-       @brief Try to get access Nth point
-
-       This will iterate over all segments. If the index matches
-       a pointer to the track point is returned.
-
-       @param idx The index into all points
-       @return A null pointer of no point is found.
-     */
-    const trkpt_t *getTrkPtByTotalIndex(qint32 idx) const;
-
-    /**
-       @brief Check if the track point at index it the last one visible
-       @param idxTotal  The point's index
-       @return True if it is the last one visible
-     */
-    bool isTrkPtLastVisible(qint32 idxTotal) const;
-
-    /**
-       @brief Check if the track point at index it the first one visible
-       @param idxTotal  The point's index
-       @return True if it is the first one visible
-     */
-    bool isTrkPtFirstVisible(qint32 idxTotal) const;
     /**
        @brief Tell the point of focus to all plots and the detail dialog
 
@@ -734,234 +634,10 @@ private:
     void setIcon(const QString& iconColor);
 
     void setMouseFocusVisuals(const trkpt_t * pt);
-    void setMouseRangeFocusVisuals(const trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
+    void setMouseRangeFocusVisuals(const trkpt_t * pt1, const trkpt_t * pt2);
     void setMouseClickFocusVisuals(const trkpt_t * pt);
 
 public:
-    struct trkpt_t : public wpt_t
-    {
-        trkpt_t()
-        {
-            reset();
-        }
-
-        void reset()
-        {
-            deltaDistance   = NOFLOAT;
-            distance        = NOFLOAT;
-            ascent          = NOFLOAT;
-            descent         = NOFLOAT;
-            elapsedSeconds  = NOFLOAT;
-            elapsedSecondsMoving = NOFLOAT;
-            slope1          = NOFLOAT;
-            slope2          = NOFLOAT;
-            speed           = NOFLOAT;
-            idxVisible      = NOIDX;
-        }
-
-        enum flag_e
-        {
-            eHidden     = 0x00000004      ///< mark point as deleted
-            ,eSubpt     = 0x00000008
-                              // activity flags
-            ,eActNone   = 0x00000000
-            ,eActFoot   = 0x80000000
-            ,eActCycle  = 0x40000000
-            ,eActBike   = 0x20000000
-            ,eActCar    = 0x10000000
-            ,eActCable  = 0x08000000
-            ,eActSwim   = 0x04000000
-            ,eActShip   = 0x02000000
-            ,eActAero   = 0x01000000
-            ,eActSki    = 0x00800000
-            ,eActMask   = 0xFF800000    ///< mask for activity flags
-            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
-        };
-
-        enum valid_e
-        {
-            eValidTime     = 0x00000001
-            ,eValidEle      = 0x00000002
-            ,eValidPos      = 0x00000004
-            ,eValidMask     = 0x0000FFFF
-        };
-
-        enum invalid_e
-        {
-            eInvalidTime    = eValidTime << 16
-            ,eInvalidEle    = eValidEle  << 16
-            ,eInvalidPos    = eValidPos  << 16
-            ,eInvalidMask   = 0xFFFF0000
-        };
-
-
-        inline bool isHidden() const
-        {
-            return hasFlag(trkpt_t::eHidden);
-        }
-
-        inline bool hasFlag(enum flag_e flag) const
-        {
-            return flags & flag;
-        }
-
-        inline void setFlag(enum flag_e flag)
-        {
-            flags |= flag;
-        }
-
-        inline void unsetFlag(enum flag_e flag)
-        {
-            flags &= ~flag;
-        }
-
-        inline bool isValid(valid_e flag) const
-        {
-            return (valid & flag) != 0;
-        }
-
-        inline bool isInvalid(invalid_e flag) const
-        {
-            return (valid & flag) != 0;
-        }
-
-        quint32 flags = 0;
-        quint32 valid = 0;
-        qint32 idxTotal = NOIDX;            //< index within the complete track
-        qint32 idxVisible;                  //< offset into lineSimple
-        qreal deltaDistance;                //< the distance to the last point
-        qreal distance;                     //< the distance from the start of the track
-        qreal ascent;                       //< the ascent from the start of the track
-        qreal descent;                      //< the descent from the start of the track
-        qreal slope1;                       //< the slope [°] over several points close by
-        qreal slope2;                       //< the slope [%] over several points close by
-        qreal speed;                        //< the speed over several points close by
-        qreal elapsedSeconds;               //< the seconds since the start of the track
-        qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed
-        key_t keyWpt;                       //< the key of an attached waypoint
-        QHash<QString,QVariant> extensions; //< track point extensions
-    };
-
-    struct trkseg_t
-    {
-        QVector<trkpt_t> pts;
-    };
-
-    struct trk_t
-    {
-        trk_t()
-        {
-        }
-        // -- all gpx tags - start
-        QString name;
-        QString cmt;
-        QString desc;
-        QString src;
-        QList<link_t> links;
-        quint64 number = 0;
-        QString type;
-        QVector<trkseg_t> segs;
-        // -- all gpx tags - stop
-
-        QString color;
-
-
-        class iterator: public std::iterator<std::forward_iterator_tag, trkpt_t>
-        {
-            trk_t &trk;
-            int seg = 0;
-            int pt  = 0;
-
-        public:
-            explicit iterator(trk_t &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
-
-            iterator& operator++()
-            {
-                ++pt;
-
-                if(this->trk.segs[seg].pts.count() <= pt) {
-                    pt = 0;
-                    ++seg;
-                }
-
-                return *this;
-            }
-
-            iterator operator++(int)
-            {
-                iterator prev = *this;
-                ++(*this);
-                return prev;
-            }
-
-            bool operator==(iterator other) const
-            {
-                return seg == other.seg && pt == other.pt;
-            }
-
-            bool operator!=(iterator other) const
-            {
-                return !(*this == other);
-            }
-
-            reference operator*()
-            {
-                return this->trk.segs[seg].pts[pt];
-            }
-        };
-
-        iterator begin() { return iterator(*this,            0, 0); }
-        iterator end()   { return iterator(*this, segs.count(), 0); }
-
-
-        class const_iterator: public std::iterator<std::forward_iterator_tag, const trkpt_t>
-        {
-            const trk_t &trk;
-            int seg = 0;
-            int pt  = 0;
-
-        public:
-            explicit const_iterator(const trk_t &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
-
-            const_iterator& operator++()
-            {
-                ++pt;
-
-                if(this->trk.segs[seg].pts.count() <= pt) {
-                    pt = 0;
-                    ++seg;
-                }
-
-                return *this;
-            }
-
-            const_iterator operator++(int)
-            {
-                const_iterator prev = *this;
-                ++(*this);
-                return prev;
-            }
-
-            bool operator==(const_iterator other) const
-            {
-                return seg == other.seg && pt == other.pt;
-            }
-
-            bool operator!=(const_iterator other) const
-            {
-                return !(*this == other);
-            }
-
-            const reference operator*() const
-            {
-                return this->trk.segs[seg].pts[pt];
-            }
-        };
-
-        const_iterator begin() const { return const_iterator(*this,            0, 0); }
-        const_iterator end()   const { return const_iterator(*this, segs.count(), 0); }
-    };
-
     /**
        @brief Read only access to the track data.
        @return
@@ -1191,13 +867,13 @@ public:
     virtual ~INotifyTrk() = default;
 
     virtual void updateData() = 0;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * pt) = 0;
-    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) = 0;
-    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+    virtual void setMouseFocus(const trkpt_t * pt) = 0;
+    virtual void setMouseRangeFocus(const trkpt_t * pt1, const trkpt_t * pt2) = 0;
+    virtual void setMouseClickFocus(const trkpt_t * pt) = 0;
 
     const CGisItemTrk::visual_e mask;
 };
 
-using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
+using fTrkPtGetVal = std::function<qreal(const trkpt_t&)>;
 
 #endif //CGISITEMTRK_H

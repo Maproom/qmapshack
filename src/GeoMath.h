@@ -38,6 +38,7 @@ struct point3D
 struct pointDP : public point3D
 {
     pointDP();
+    pointDP(const qreal &x, const qreal &y, const qreal &z);
     bool used;
     qint32 idx;
 };

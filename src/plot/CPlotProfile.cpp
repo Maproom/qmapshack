@@ -87,10 +87,10 @@ void CPlotProfile::updateData()
     IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal basefactor = IUnit::self().basefactor;
-    const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(const CGisItemTrk::trkpt_t& trkpt : t)
+    const trk_t& t = trk->getTrackData();
+    for(const trkpt_t& trkpt : t)
     {
-        if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+        if(trkpt.flags & trkpt_t::eHidden)
         {
             continue;
         }
@@ -143,7 +143,7 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
+void CPlotProfile::setMouseFocus(const trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove)
     {

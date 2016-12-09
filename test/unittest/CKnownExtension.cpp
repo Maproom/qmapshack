@@ -38,7 +38,7 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
         if(nullptr != itemTrk)
         {
-            const CGisItemTrk::CTrackData &trk = itemTrk->getTrackData();
+            const CTrackData &trk = itemTrk->getTrackData();
 
             // filter all internal extensions (starting with ::ql:)
             QStringList extensions = itemTrk->getExistingDataSources().filter(QRegExp("^((?!::ql:).)*$"));
@@ -57,7 +57,7 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
             const fTrkPtGetVal &getCad   = CKnownExtension::get(ns + ":TrackPointExtension|" + ns + ":cad").valueFunc;
 
             int i = 0;
-            for(const CGisItemTrk::trkpt_t &trkpt : trk)
+            for(const trkpt_t &trkpt : trk)
             {
                 SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
 

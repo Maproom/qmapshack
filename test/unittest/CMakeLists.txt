@@ -41,6 +41,7 @@ include_directories(
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
+    ${ALGLIB_INCLUDE_DIRS}
 )
 
 qt5_add_resources(RC_SRCS ./../../src/resources.qrc)
@@ -73,6 +74,7 @@ target_link_libraries(qttest
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
+    ${ALGLIB_LIBRARIES}
 )
 
 add_custom_command(

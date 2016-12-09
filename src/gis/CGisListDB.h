@@ -65,8 +65,8 @@ private slots:
     void slotRenameFolder();
     void slotCopyFolder();
     void slotMoveFolder();
-
     void slotReadyRead();
+    void slotExportToGpx();
 
 private:
     friend class CGisListDBEditLock;
@@ -85,11 +85,13 @@ private:
     QAction * actionCopyFolder;
     QAction * actionMoveFolder;
     QAction * actionDelFolder;
+    QAction * actionExportToGpx;
 
     QMenu * menuDatabase;
     QAction * actionDelDatabase;
     QAction * actionUpdate;
     QAction * actionSearch;
+
 
     QMenu * menuItem;
     QAction * actionDelItem;

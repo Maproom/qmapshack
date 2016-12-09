@@ -189,6 +189,8 @@ set( SRCS
         gis/db/CSelectSaveAction.cpp
         gis/db/CSelectDBFolder.cpp
         gis/db/CSearchDatabase.cpp
+        gis/db/CExportDatabase.cpp
+        gis/db/CExportDatabaseThread.cpp
         gis/search/CSearchGoogle.cpp
         gis/wpt/CGisItemWpt.cpp
         gis/wpt/CScrOptWpt.cpp
@@ -452,6 +454,8 @@ set( HDRS
         gis/db/CSelectSaveAction.h
         gis/db/CSelectDBFolder.h
         gis/db/CSearchDatabase.h
+        gis/db/CExportDatabase.h
+        gis/db/CExportDatabaseThread.h
         gis/wpt/CGisItemWpt.h
         gis/wpt/CScrOptWpt.h
         gis/wpt/CDetailsWpt.h
@@ -618,6 +622,7 @@ set( UIS
     gis/db/ISelectSaveAction.ui
     gis/db/ISelectDBFolder.ui
     gis/db/ISearchDatabase.ui
+    gis/db/IExportDatabase.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui
@@ -685,7 +690,7 @@ add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}"
+    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" "-no-obsolete"
     SOURCES ${SRCS} ${HDRS} ${UIS}
     TEMPLATE ${APPLICATION_NAME}
     TRANSLATION_DIR "locale"

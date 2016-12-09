@@ -394,7 +394,19 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     }
     catch(const QString& msg)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        // as saveAs() can be called from the thread that exports a database showing the
+        // message box will crash the app. Therefore we test if the current thread is the
+        // application's main thread. If not we forward the exception.
+        //
+        // Not sure if that is a good concept.
+        if(QThread::currentThread() == qApp->thread())
+        {
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        }
+        else
+        {
+            throw msg;
+        }
         res = false;
     }
     project.umount();

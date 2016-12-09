@@ -230,7 +230,8 @@ void CGisItemTrk::filterInterpolateElevation()
 
     for(trkpt_t& pt : trk)
     {
-        pt.ele = getElevationInterpolated(pt.distance);
+        qreal ele = getElevationInterpolated(pt.distance);
+        pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
     }
 
     interp.valid = false;
@@ -368,5 +369,5 @@ void CGisItemTrk::filterSubPt2Pt()
     }
     propHandler->setupData();
 
-    changed(tr("Convert SubPoints to Points"), "://icons/48x48/FilterSubPt2Pt.png");
+    changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
 }

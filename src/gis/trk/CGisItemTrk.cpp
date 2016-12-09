@@ -679,20 +679,7 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 
 void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const
 {
-    if((nullptr == mouseRange1) || (nullptr == mouseRange2))
-    {
-        idx1 = NOIDX;
-        idx2 = NOIDX;
-        return;
-    }
-
-    idx1 = mouseRange1->idxVisible;
-    idx2 = mouseRange2->idxVisible;
-
-    if(idx1 > idx2)
-    {
-        qSwap(idx1,idx2);
-    }
+    std::tie(idx1, idx2) = getMouseRange(false);
 }
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
@@ -1398,19 +1385,15 @@ void CGisItemTrk::hideSelectedPoints()
         return;
     }
 
-    if((nullptr == mouseRange1) || (nullptr == mouseRange2))
+    // read start/stop indices
+    qint32 idx1, idx2;
+    std::tie(idx1, idx2) = getMouseRange(true);
+
+    if(NOIDX == idx1)
     {
         return;
     }
 
-    // read start/stop indices
-    qint32 idx1 = mouseRange1->idxTotal;
-    qint32 idx2 = mouseRange2->idxTotal;
-
-    if(idx1 > idx2)
-    {
-        qSwap(idx1,idx2);
-    }
 
     // if first index is the first point adjust index to hide it, too
     if(trk.isTrkPtFirstVisible(idx1))
@@ -1463,17 +1446,12 @@ void CGisItemTrk::showSelectedPoints()
         return;
     }
 
-    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr))
+    qint32 idx1, idx2;
+    std::tie(idx1, idx2) = getMouseRange(true);
+
+    if(NOIDX == idx1)
     {
         return;
-    }
-
-    qint32 idx1 = mouseRange1->idxTotal;
-    qint32 idx2 = mouseRange2->idxTotal;
-
-    if(idx1 > idx2)
-    {
-        qSwap(idx1,idx2);
     }
 
     for(trkpt_t& trkpt : trk)
@@ -1491,17 +1469,12 @@ void CGisItemTrk::showSelectedPoints()
 
 void CGisItemTrk::copySelectedPoints() const
 {
-    if((mouseRange1 == nullptr) || (mouseRange2 == nullptr))
+    qint32 idx1, idx2;
+    std::tie(idx1, idx2) = getMouseRange(true);
+
+    if(NOIDX == idx1)
     {
         return;
-    }
-
-    quint32 idx1 = mouseRange1->idxTotal;
-    quint32 idx2 = mouseRange2->idxTotal;
-
-    if(idx1 > idx2)
-    {
-        qSwap(idx1,idx2);
     }
 
     QString name = getName() + QString(" (%1 - %2)").arg(idx1).arg(idx2);
@@ -1978,25 +1951,23 @@ void CGisItemTrk::drawRange(QPainter& p)
 {
     QMutexLocker lock(&mutexItems);
 
-    if((mouseRange1 != nullptr) && (mouseRange2 != nullptr))
+    int idx1, idx2;
+    std::tie(idx1, idx2) = getMouseRange(mode == eModeRange);
+
+    if(NOIDX == idx1)
     {
-        const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
-        int idx1 = (mode == eModeRange) ? mouseRange1->idxTotal : mouseRange1->idxVisible;
-        int idx2 = (mode == eModeRange) ? mouseRange2->idxTotal : mouseRange2->idxVisible;
-
-        if(idx1 > idx2)
-        {
-            qSwap(idx1,idx2);
-        }
-
-        QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
-
-        p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p.drawPolyline(seg);
-
-        p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
-        p.drawPolyline(seg);
+        return;
     }
+
+    const QPolygonF& line = (mode == eModeRange) ? lineFull : lineSimple;
+
+    QPolygonF seg = line.mid(idx1, idx2 - idx1 + 1);
+
+    p.setPen(QPen(Qt::darkGreen, penWidthHi, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(seg);
+
+    p.setPen(QPen(Qt::green, penWidthFg, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
+    p.drawPolyline(seg);
 }
 
 bool CGisItemTrk::setMode(mode_e m, const QString& owner)
@@ -2083,11 +2054,6 @@ void CGisItemTrk::setActivity(quint32 flag)
 
 void CGisItemTrk::setActivityRange(quint32 flags)
 {
-    if((mouseRange1 == nullptr) && (mouseRange2 == nullptr))
-    {
-        return;
-    }
-
     if(!setReadOnlyMode(false))
     {
         return;
@@ -2096,12 +2062,12 @@ void CGisItemTrk::setActivityRange(quint32 flags)
     const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flags);
 
     // read start/stop indices
-    qint32 idx1 = mouseRange1->idxTotal;
-    qint32 idx2 = mouseRange2->idxTotal;
+    qint32 idx1, idx2;
+    std::tie(idx1, idx2) = getMouseRange(true);
 
-    if(idx1 > idx2)
+    if(NOIDX == idx1)
     {
-        qSwap(idx1,idx2);
+        return;
     }
 
     // special case for a single point
@@ -2489,5 +2455,24 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
 qreal CGisItemTrk::getElevationInterpolated(qreal d) const
 {
     return alglib::spline1dcalc(interp.p, d);
+}
+
+
+std::pair<int, int> CGisItemTrk::getMouseRange(bool total) const
+{
+    if(nullptr == mouseRange1 || nullptr == mouseRange2)
+    {
+        return std::make_pair(NOIDX, NOIDX);
+    }
+
+    int idx1 = total ? mouseRange1->idxTotal : mouseRange1->idxVisible;
+    int idx2 = total ? mouseRange2->idxTotal : mouseRange2->idxVisible;
+
+    if(idx1 > idx2)
+    {
+        qSwap(idx1, idx2);
+    }
+
+    return std::make_pair(idx1, idx2);
 }
 

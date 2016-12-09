@@ -60,7 +60,7 @@ void CPropertyTrk::setupData()
             , name
             , QIcon(ext.icon)
             , property_t::eAxisDistance
-            , [](const CGisItemTrk::trkpt_t &p) {return p.distance; }
+            , [](const trkpt_t &p) {return p.distance; }
             , ext.unit
             , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
             , ext.factor
@@ -72,7 +72,7 @@ void CPropertyTrk::setupData()
         {
             property.min        = 0;
             property.axisType   = property_t::eAxisTime;
-            property.getX       = [](const CGisItemTrk::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
+            property.getX       = [](const trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
         }
 
         if(key == CKnownExtension::internalSpeed)

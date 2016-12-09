@@ -332,20 +332,20 @@ QDataStream& operator>>(QDataStream& stream, CGisItemWpt::image_t& image)
     return stream;
 }
 
-QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkseg_t& seg)
+QDataStream& operator<<(QDataStream& stream, const trkseg_t& seg)
 {
     stream << VER_TRKSEG << seg.pts;
     return stream;
 }
 
-QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkseg_t& seg)
+QDataStream& operator>>(QDataStream& stream, trkseg_t& seg)
 {
     quint8 version;
     stream >> version >> seg.pts;
     return stream;
 }
 
-QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkpt_t& pt)
+QDataStream& operator<<(QDataStream& stream, const trkpt_t& pt)
 {
     stream << VER_TRKPT << pt.flags;
     stream << (const IGisItem::wpt_t&)pt;
@@ -353,7 +353,7 @@ QDataStream& operator<<(QDataStream& stream, const CGisItemTrk::trkpt_t& pt)
     return stream;
 }
 
-QDataStream& operator>>(QDataStream& stream, CGisItemTrk::trkpt_t& pt)
+QDataStream& operator>>(QDataStream& stream, trkpt_t& pt)
 {
     quint8 version;
     stream >> version >> pt.flags;

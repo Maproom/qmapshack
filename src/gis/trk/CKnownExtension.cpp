@@ -30,7 +30,7 @@ QSet<QString> CKnownExtension::registeredNS;
 
 static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 {
-    return [ext](const CGisItemTrk::trkpt_t &p)
+    return [ext](const trkpt_t &p)
            {
                bool ok;
                qreal val = p.extensions.value(ext).toReal(&ok);
@@ -109,22 +109,22 @@ void CKnownExtension::init(const IUnit &units)
     {
         {internalSlope,
          { tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
+           [](const trkpt_t &p) { return p.slope1; }}
         },
 
         {internalSpeed,
          { tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
+           [](const trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
          { tr("Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
+           [](const trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
          { tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
+           [](const trkpt_t &p) { return p.distance; }}
         }
     };
 

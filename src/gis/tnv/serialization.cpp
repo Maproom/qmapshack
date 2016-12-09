@@ -240,9 +240,9 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << "y " << getKey().item << endl;
 
 
-    for(const CGisItemTrk::trkseg_t& seg : trk.segs)
+    for(const trkseg_t& seg : trk.segs)
     {
-        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        for(const trkpt_t& trkpt : seg.pts)
         {
             list.clear();
 

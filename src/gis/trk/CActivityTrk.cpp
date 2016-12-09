@@ -35,7 +35,7 @@ void CActivityTrk::init()
     {
         { // 0
             "Foot"
-            , CGisItemTrk::trkpt_t::eActFoot
+            , trkpt_t::eActFoot
             , tr("Foot")
             , "://icons/48x48/ActFoot.png"
             , "://icons/16x16/ActFoot.png"
@@ -43,7 +43,7 @@ void CActivityTrk::init()
         },
         { // 1
             "Cycle"
-            , CGisItemTrk::trkpt_t::eActCycle
+            , trkpt_t::eActCycle
             , tr("Bicycle")
             , "://icons/48x48/ActCycle.png"
             , "://icons/16x16/ActCycle.png"
@@ -51,7 +51,7 @@ void CActivityTrk::init()
         },
         { // 2
             "Bike"
-            , CGisItemTrk::trkpt_t::eActBike
+            , trkpt_t::eActBike
             , tr("Motor Bike")
             , "://icons/48x48/ActBike.png"
             , "://icons/16x16/ActBike.png"
@@ -59,7 +59,7 @@ void CActivityTrk::init()
         },
         { // 3
             "Car"
-            , CGisItemTrk::trkpt_t::eActCar
+            , trkpt_t::eActCar
             , tr("Car")
             , "://icons/48x48/ActCar.png"
             , "://icons/16x16/ActCar.png"
@@ -67,7 +67,7 @@ void CActivityTrk::init()
         },
         { // 4
             "Cable"
-            , CGisItemTrk::trkpt_t::eActCable
+            , trkpt_t::eActCable
             , tr("Cable Car")
             , "://icons/48x48/ActCable.png"
             , "://icons/16x16/ActCable.png"
@@ -75,7 +75,7 @@ void CActivityTrk::init()
         },
         { // 5
             "Swim"
-            , CGisItemTrk::trkpt_t::eActSwim
+            , trkpt_t::eActSwim
             , tr("Swim")
             , "://icons/48x48/ActSwim.png"
             , "://icons/16x16/ActSwim.png"
@@ -83,7 +83,7 @@ void CActivityTrk::init()
         },
         { // 6
             "Ship"
-            , CGisItemTrk::trkpt_t::eActShip
+            , trkpt_t::eActShip
             , tr("Ship")
             , "://icons/48x48/ActShip.png"
             , "://icons/16x16/ActShip.png"
@@ -91,7 +91,7 @@ void CActivityTrk::init()
         },
         { // 7
             "Aeronautik"
-            , CGisItemTrk::trkpt_t::eActAero
+            , trkpt_t::eActAero
             , tr("Aeronautics")
             , "://icons/48x48/ActAero.png"
             , "://icons/16x16/ActAero.png"
@@ -99,7 +99,7 @@ void CActivityTrk::init()
         },
         { // 8
             "Ski/Winter"
-            , CGisItemTrk::trkpt_t::eActSki
+            , trkpt_t::eActSki
             , tr("Ski/Winter")
             , "://icons/48x48/ActSki.png"
             , "://icons/16x16/ActSki.png"
@@ -158,16 +158,16 @@ void CActivityTrk::update()
     activityRanges.clear();
     activitySummary.clear();
 
-    const CGisItemTrk::trk_t&   data       = trk->getTrackData();
-    const CGisItemTrk::trkpt_t *lastTrkpt  = nullptr;
-    const CGisItemTrk::trkpt_t *startTrkpt = nullptr;
+    const trk_t&   data       = trk->getTrackData();
+    const trkpt_t *lastTrkpt  = nullptr;
+    const trkpt_t *startTrkpt = nullptr;
 
     quint32 lastFlag = 0xFFFFFFFF;
-    for(const CGisItemTrk::trkpt_t &pt : data)
+    for(const trkpt_t &pt : data)
     {
         allFlags |= pt.flags;
 
-        if(pt.flags & CGisItemTrk::trkpt_t::eHidden)
+        if(pt.flags & trkpt_t::eHidden)
         {
             continue;
         }
@@ -193,7 +193,7 @@ void CActivityTrk::update()
 
                 const desc_t& desc = getDescriptor(lastFlag);
                 activity.name = desc.name;
-                if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
+                if(desc.flag != trkpt_t::eActNone)
                 {
                     activity.icon = desc.iconSmall;
                 }
@@ -226,14 +226,14 @@ void CActivityTrk::update()
 
     const desc_t& desc = getDescriptor(lastFlag);
     activity.name = desc.name;
-    if(desc.flag != CGisItemTrk::trkpt_t::eActNone)
+    if(desc.flag != trkpt_t::eActNone)
     {
         activity.icon = desc.iconSmall;
     }
 
 
 
-    allFlags &= CGisItemTrk::trkpt_t::eActMask;
+    allFlags &= trkpt_t::eActMask;
 
 //    for(int i = 0; i < 9; i++)
 //    {
@@ -258,7 +258,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
 
     if(flags == 0)
     {
-        const activity_summary_t& s = summary[CGisItemTrk::trkpt_t::eActNone];
+        const activity_summary_t& s = summary[trkpt_t::eActNone];
 
         str += "<table>";
         IUnit::self().meter2distance(s.distance, val, unit);
@@ -410,7 +410,7 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
     static desc_t dummyDesc =
     {
         "None"
-        , CGisItemTrk::trkpt_t::eActNone
+        , trkpt_t::eActNone
         , tr("None")
         , "://icons/48x48/ActNone.png"
         , "://icons/16x16/ActNone.png"

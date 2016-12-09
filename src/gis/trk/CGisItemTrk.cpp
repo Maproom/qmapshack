@@ -53,50 +53,13 @@ struct trkwpt_t
     IGisItem::key_t key;
 };
 
-struct activity_t
-{
-    QString name;
-    QString icon;
-};
-
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 
 CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
-    : IGisItem(project, eTypeTrk, NOIDX)
+    : IGisItem(project, eTypeTrk, NOIDX), trk(name, srctrk, idx1, idx2)
 {
     flags = eFlagCreatedInQms;
-
-    for(const trkseg_t &srcseg : srctrk.segs)
-    {
-        trkseg_t seg;
-        for(const trkpt_t &srcpt : srcseg.pts)
-        {
-            if(srcpt.idxTotal < idx1)
-            {
-                continue;
-            }
-            if(srcpt.idxTotal > idx2)
-            {
-                break;
-            }
-
-            seg.pts << srcpt;
-        }
-
-        if(!seg.pts.isEmpty())
-        {
-            trk.segs << seg;
-        }
-    }
-
-    trk.name   = name;
-    trk.cmt    = srctrk.cmt;
-    trk.desc   = srctrk.desc;
-    trk.src    = srctrk.src;
-    trk.links  = srctrk.links;
-    trk.number = srctrk.number;
-    trk.type   = srctrk.type;
 
     deriveSecondaryData();
     setupHistory();
@@ -292,70 +255,20 @@ void CGisItemTrk::setDataFromPolyline(const SGisLine &l)
 void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
 {
     QMutexLocker lock(&mutexItems);
-
-    l.clear();
-    for(const trkpt_t &pt : trk)
-    {
-        if(!pt.isHidden())
-        {
-            l << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
-        }
-    }
+    trk.getPolyline(l);
 }
 
 void CGisItemTrk::getPolylineFromData(SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);
-
-    l.clear();
-    for(const trkpt_t &pt : trk)
-    {
-        if(!pt.isHidden())
-        {
-            if(pt.hasFlag(trkpt_t::eSubpt))
-            {
-                l.last().subpts << subpt_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
-            } else {
-                l << point_t(QPointF(pt.lon*DEG_TO_RAD, pt.lat * DEG_TO_RAD));
-            }
-        }
-    }
+    trk.getPolyline(l);
 }
 
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);
-
-    trk.segs.clear();
-    trk.segs.resize(1);
-    trkseg_t& seg = trk.segs.first();
-
-    for(int i = 0; i < l.size(); i++)
-    {
-        seg.pts << trkpt_t();
-
-        trkpt_t& trkpt    = seg.pts.last();
-        const point_t& pt = l[i];
-
-        trkpt.lon = pt.coord.x() * RAD_TO_DEG;
-        trkpt.lat = pt.coord.y() * RAD_TO_DEG;
-        trkpt.ele = pt.ele;
-
-        for(int n = 0; n < pt.subpts.size(); n++)
-        {
-            seg.pts << trkpt_t();
-
-            trkpt_t& trkpt     = seg.pts.last();
-            const subpt_t& sub = pt.subpts[n];
-
-            trkpt.lon = sub.coord.x() * RAD_TO_DEG;
-            trkpt.lat = sub.coord.y() * RAD_TO_DEG;
-            trkpt.ele = sub.ele;
-            trkpt.setFlag(trkpt_t::eSubpt);
-        }
-    }
-
+    trk.readFrom(l);
     deriveSecondaryData();
 }
 
@@ -507,12 +420,9 @@ QString CGisItemTrk::getInfoRange() const
         return str;
     }
 
-    int idx1 = mouseRange1->idxTotal;
-    int idx2 = mouseRange2->idxTotal;
-
     const trkpt_t *pt1 = mouseRange1;
     const trkpt_t *pt2 = mouseRange2;
-    if(idx1 >= idx2)
+    if(mouseRange1->idxTotal >= mouseRange2->idxTotal)
     {
         pt1 = mouseRange2;
         pt2 = mouseRange1;
@@ -727,7 +637,7 @@ QString CGisItemTrk::getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const
 
 qint32 CGisItemTrk::getElevation(qint32 idx) const
 {
-    const trkpt_t *trkpt = getTrkPtByTotalIndex(idx);
+    const trkpt_t *trkpt = trk.getTrkPtByTotalIndex(idx);
     return trkpt != nullptr ? trkpt->ele : NOINT;
 }
 
@@ -932,18 +842,7 @@ void CGisItemTrk::deriveSecondaryData()
 
 
     // remove empty segments
-    QVector<trkseg_t>::iterator it = trk.segs.begin();
-    while(it != trk.segs.end())
-    {
-        if(it->pts.isEmpty())
-        {
-            it = trk.segs.erase(it);
-        }
-        else
-        {
-            ++it;
-        }
-    }
+    trk.removeEmptySegments();
 
     // no segments -> no data -> nothing to do
     if(trk.segs.isEmpty())
@@ -985,7 +884,7 @@ void CGisItemTrk::deriveSecondaryData()
 
         if(lastTrkpt != nullptr)
         {
-            trkpt.deltaDistance  = GPS_Math_Distance(lastTrkpt->lon * DEG_TO_RAD, lastTrkpt->lat * DEG_TO_RAD, trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            trkpt.deltaDistance  = lastTrkpt->distanceTo(trkpt);
             trkpt.distance       = lastTrkpt->distance + trkpt.deltaDistance;
             trkpt.elapsedSeconds = trkpt.time.toMSecsSinceEpoch()/1000.0 - timestampStart;
 
@@ -1163,9 +1062,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
         {
             continue;
         }
-        pointDP dp;
-        dp.x   = pt.lon * DEG_TO_RAD;
-        dp.y   = pt.lat * DEG_TO_RAD;
+        pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, 0);
         dp.idx = pt.idxVisible;
         line << dp;
     }
@@ -1242,13 +1139,12 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             }
             else if(withDoubles && (d > WPT_FOCUS_DIST_OUT))
             {
-                trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
+                trkpt_t * trkpt = const_cast<trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
                     numberOfAttachedWpt++;
                     trkpt->keyWpt = trkwpt.key;
                 }
-
 
                 index = NOIDX;
                 minD  = WPT_FOCUS_DIST_IN;
@@ -1263,7 +1159,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         if(index != NOIDX)
         {
-            trkpt_t * trkpt = const_cast<trkpt_t*>(getTrkPtByVisibleIndex(index));
+            trkpt_t * trkpt = const_cast<trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
             if(trkpt)
             {
                 numberOfAttachedWpt++;
@@ -1517,12 +1413,12 @@ void CGisItemTrk::hideSelectedPoints()
     }
 
     // if first index is the first point adjust index to hide it, too
-    if(isTrkPtFirstVisible(idx1))
+    if(trk.isTrkPtFirstVisible(idx1))
     {
         idx1--;
     }
     // if second index is the last point adjust index to hide it, too
-    if(isTrkPtLastVisible(idx2))
+    if(trk.isTrkPtLastVisible(idx2))
     {
         idx2++;
     }
@@ -2110,7 +2006,7 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
         return false;
     }
 
-    mode            = m;
+    mode = m;
     // always reset the range statemachine
     resetMouseRange();
     mouseFocusOwner = (mode == eModeRange) ? owner : "";
@@ -2152,8 +2048,8 @@ void CGisItemTrk::setLinks(const QList<link_t>& links)
 
 void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 {
-    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
-    trkpt_t * trkpt = getTrkPtByCondition(condition);
+    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx; };
+    trkpt_t * trkpt = trk.getTrkPtByCondition(condition);
     if((trkpt != nullptr) && (trkpt->ele != ele))
     {
         trkpt->ele = ele;
@@ -2176,7 +2072,7 @@ void CGisItemTrk::setActivity(quint32 flag)
     for(trkpt_t& trkpt : trk)
     {
         trkpt.unsetFlag(trkpt_t::eActMask);
-        trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flag);
+        trkpt.setFlag((enum trkpt_t::flag_e) flag);
     }
 
     deriveSecondaryData();
@@ -2220,7 +2116,7 @@ void CGisItemTrk::setActivityRange(quint32 flags)
         if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
             trkpt.unsetFlag(trkpt_t::eActMask);
-            trkpt.setFlag((enum CGisItemTrk::trkpt_t::flag_e) flags);
+            trkpt.setFlag((enum trkpt_t::flag_e) flags);
         }
     }
 
@@ -2348,7 +2244,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
          */
 
         idx = getIdxPointCloseBy(pt, line);
-        newPointOfFocus = (mode == eModeRange) ? getTrkPtByTotalIndex(idx) : getTrkPtByVisibleIndex(idx);
+        newPointOfFocus = (mode == eModeRange) ? trk.getTrkPtByTotalIndex(idx) : trk.getTrkPtByVisibleIndex(idx);
     }
     if(!publishMouseFocus(newPointOfFocus, fmode, owner))
     {
@@ -2365,7 +2261,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
 
 bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const QString &owner)
 {
-    const trkpt_t *newPointOfFocus = getTrkPtByTotalIndex(idx);
+    const trkpt_t *newPointOfFocus = trk.getTrkPtByTotalIndex(idx);
     if(nullptr != newPointOfFocus)
     {
         return publishMouseFocus(newPointOfFocus, fmode, owner);
@@ -2374,71 +2270,6 @@ bool CGisItemTrk::setMouseFocusByTotalIndex(qint32 idx, focusmode_e fmode, const
     return false;
 }
 
-const CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
-{
-    for(const trkpt_t &pt : trk)
-    {
-        if(cond(pt))
-        {
-            return &pt;
-        }
-    }
-    return nullptr;
-}
-
-CGisItemTrk::trkpt_t* CGisItemTrk::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
-{
-    for(trkpt_t &pt : trk)
-    {
-        if(cond(pt))
-        {
-            return &pt;
-        }
-    }
-    return nullptr;
-}
-
-const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByVisibleIndex(qint32 idx) const
-{
-    if(idx == NOIDX)
-    {
-        return nullptr;
-    }
-
-    auto condition = [idx](const trkpt_t &pt) { return pt.idxVisible == idx;  };
-    return getTrkPtByCondition(condition);
-}
-
-const CGisItemTrk::trkpt_t * CGisItemTrk::getTrkPtByTotalIndex(qint32 idx) const
-{
-    auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
-    return getTrkPtByCondition(condition);
-}
-
-bool CGisItemTrk::isTrkPtLastVisible(qint32 idxTotal) const
-{
-    auto condition = [idxTotal](const trkpt_t &pt) { return (pt.idxTotal > idxTotal) && !pt.isHidden();  };
-    return nullptr == getTrkPtByCondition(condition);
-}
-
-bool CGisItemTrk::isTrkPtFirstVisible(qint32 idxTotal) const
-{
-    for(const trkpt_t &pt : trk)
-    {
-        if((pt.idxTotal < idxTotal))
-        {
-            if(!pt.isHidden())
-            {
-                return false;
-            }
-        }
-        else
-        {
-            return true;
-        }
-    }
-    return true;
-}
 
 void CGisItemTrk::resetMouseRange()
 {
@@ -2520,7 +2351,7 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
     case eFocusMouseClick:
         if(pt != mouseClickFocus)
         {
-            mouseClickFocus =  pt;
+            mouseClickFocus = pt;
             setMouseClickFocusVisuals(pt);
         }
 
@@ -2616,9 +2447,9 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     y.setlength(N);
 
     qreal basefactor = IUnit::self().basefactor;
-    for(const CGisItemTrk::trkpt_t& trkpt : trk)
+    for(const trkpt_t& trkpt : trk)
     {
-        if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
+        if(trkpt.flags & trkpt_t::eHidden)
         {
             continue;
         }
@@ -2659,3 +2490,4 @@ qreal CGisItemTrk::getElevationInterpolated(qreal d) const
 {
     return alglib::spline1dcalc(interp.p, d);
 }
+

@@ -95,7 +95,7 @@ static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
-static bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
+static bool readFitRecord(const CFitMessage &mesg, trkpt_t &pt)
 {
     if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
     {
@@ -131,7 +131,7 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 }
 
 
-static bool readFitSegmentPoint(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt, quint32 timeCreated)
+static bool readFitSegmentPoint(const CFitMessage &mesg, trkpt_t &pt, quint32 timeCreated)
 {
     if(mesg.isFieldValueValid(eSegmentPointPositionLong) && mesg.isFieldValueValid(eSegmentPointPositionLat))
     {
@@ -205,7 +205,7 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
         if(mesg.getGlobalMesgNr() == eMesgNumRecord)
         {
             // for documentation: MesgNumActivity, MesgNumSession, MesgNumLap, MesgNumLength could also contain data
-            CGisItemTrk::trkpt_t pt;
+            trkpt_t pt;
             if(readFitRecord(mesg, pt))
             {
                 seg.pts.append(std::move(pt));
@@ -228,7 +228,7 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
         }
         else if(mesg.getGlobalMesgNr() == eMesgNumSegmentPoint)
         {
-            CGisItemTrk::trkpt_t pt;
+            trkpt_t pt;
             if(readFitSegmentPoint(mesg, pt, timeCreated))
             {
                 seg.pts.append(std::move(pt));

@@ -224,17 +224,17 @@ void CSlfReader::readEntries(const QDomNode& xml)
     // Now generate the track / segments
     int lap = 0;
 
-    CGisItemTrk::trk_t trk;
+    trk_t trk;
     trk.segs.resize(laps.count() + 1);
 
-    CGisItemTrk::trkseg_t *seg = &(trk.segs[0]);
+    trkseg_t *seg = &(trk.segs[0]);
     long breakTime = offsetsTime[0];
 
     qreal prevLon = NOFLOAT;
     qreal prevLat = NOFLOAT;
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
-        CGisItemTrk::trkpt_t trkpt;
+        trkpt_t trkpt;
 
         const QDomNamedNodeMap& attr = xmlEntrs.item(i).attributes();
         trkpt.lat = attr.namedItem("latitude" ).nodeValue().toDouble();

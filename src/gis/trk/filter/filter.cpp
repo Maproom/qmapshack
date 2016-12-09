@@ -34,11 +34,8 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
     for(const trkpt_t &pt : trk)
     {
-        pointDP dp;
-        dp.x = pt.lon * DEG_TO_RAD;
-        dp.y = pt.lat * DEG_TO_RAD;
-        dp.z = pt.ele;
-        dp.used = !(pt.flags & CGisItemTrk::trkpt_t::eHidden);
+        pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, pt.ele);
+        dp.used = !(pt.flags & trkpt_t::eHidden);
 
         line << dp;
     }

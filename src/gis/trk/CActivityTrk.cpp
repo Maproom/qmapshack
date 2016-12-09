@@ -158,7 +158,7 @@ void CActivityTrk::update()
     activityRanges.clear();
     activitySummary.clear();
 
-    const trk_t&   data       = trk->getTrackData();
+    const CTrackData&   data       = trk->getTrackData();
     const trkpt_t *lastTrkpt  = nullptr;
     const trkpt_t *startTrkpt = nullptr;
 

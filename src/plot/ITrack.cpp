@@ -102,7 +102,7 @@ void ITrack::updateData()
     if(trk)
     {
         coords.clear();
-        const trk_t& t = trk->getTrackData();
+        const CTrackData& t = trk->getTrackData();
         for(const trkpt_t& trkpt : t)
         {
             if(trkpt.isHidden())

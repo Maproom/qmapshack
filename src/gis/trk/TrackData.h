@@ -133,11 +133,12 @@ struct trkseg_t
     }
 };
 
-struct trk_t
+class CTrackData
 {
-    trk_t() {}
+public:
+    CTrackData() {}
 
-    trk_t(const QString &name, const trk_t &other, qint32 rangeStart, qint32 rangeEnd);
+    CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd);
 
     // -- all gpx tags - start
     QString name;
@@ -248,11 +249,11 @@ struct trk_t
         }
     };
 
-    iterator<trk_t, trkpt_t> begin() { return iterator<trk_t, trkpt_t>(*this,            0, 0); }
-    iterator<trk_t, trkpt_t> end()   { return iterator<trk_t, trkpt_t>(*this, segs.count(), 0); }
+    iterator<CTrackData, trkpt_t> begin() { return iterator<CTrackData, trkpt_t>(*this,            0, 0); }
+    iterator<CTrackData, trkpt_t> end()   { return iterator<CTrackData, trkpt_t>(*this, segs.count(), 0); }
 
-    iterator<const trk_t, const trkpt_t> begin() const { return iterator<const trk_t, const trkpt_t>(*this,            0, 0); }
-    iterator<const trk_t, const trkpt_t> end()   const { return iterator<const trk_t, const trkpt_t>(*this, segs.count(), 0); }
+    iterator<const CTrackData, const trkpt_t> begin() const { return iterator<const CTrackData, const trkpt_t>(*this,            0, 0); }
+    iterator<const CTrackData, const trkpt_t> end()   const { return iterator<const CTrackData, const trkpt_t>(*this, segs.count(), 0); }
 };
 
 #endif /* TRACKDATA_H */

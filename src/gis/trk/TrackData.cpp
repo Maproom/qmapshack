@@ -1,7 +1,7 @@
 #include "gis/trk/TrackData.h"
 #include "gis/IGisLine.h"
 
-trk_t::trk_t(const QString &name, const trk_t &other, qint32 rangeStart, qint32 rangeEnd) : name(name)
+CTrackData::CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd) : name(name)
 {
     for(const trkseg_t &oseg : other.segs)
     {
@@ -34,7 +34,7 @@ trk_t::trk_t(const QString &name, const trk_t &other, qint32 rangeStart, qint32 
     type   = other.type;
 }
 
-void trk_t::removeEmptySegments()
+void CTrackData::removeEmptySegments()
 {
     QVector<trkseg_t>::iterator it = segs.begin();
     while(it != segs.end())
@@ -50,7 +50,7 @@ void trk_t::removeEmptySegments()
     }
 }
 
-void trk_t::readFrom(const SGisLine &l)
+void CTrackData::readFrom(const SGisLine &l)
 {
     segs.clear();
     segs.resize(1);
@@ -83,7 +83,7 @@ void trk_t::readFrom(const SGisLine &l)
 }
 
 
-void trk_t::getPolyline(SGisLine &l) const
+void CTrackData::getPolyline(SGisLine &l) const
 {
     l.clear();
     for(const trkpt_t &pt : *this)
@@ -100,7 +100,7 @@ void trk_t::getPolyline(SGisLine &l) const
     }
 }
 
-void trk_t::getPolyline(QPolygonF &l) const
+void CTrackData::getPolyline(QPolygonF &l) const
 {
     l.clear();
     for(const trkpt_t &pt : *this)
@@ -113,7 +113,7 @@ void trk_t::getPolyline(QPolygonF &l) const
 }
 
 
-bool trk_t::isTrkPtFirstVisible(qint32 idxTotal) const
+bool CTrackData::isTrkPtFirstVisible(qint32 idxTotal) const
 {
     for(const trkpt_t &pt : *this)
     {
@@ -132,7 +132,7 @@ bool trk_t::isTrkPtFirstVisible(qint32 idxTotal) const
     return true;
 }
 
-const trkpt_t* trk_t::getTrkPtByVisibleIndex(qint32 idx) const
+const trkpt_t* CTrackData::getTrkPtByVisibleIndex(qint32 idx) const
 {
     if(idx == NOIDX)
     {
@@ -143,19 +143,19 @@ const trkpt_t* trk_t::getTrkPtByVisibleIndex(qint32 idx) const
     return getTrkPtByCondition(condition);
 }
 
-const trkpt_t* trk_t::getTrkPtByTotalIndex(qint32 idx) const
+const trkpt_t* CTrackData::getTrkPtByTotalIndex(qint32 idx) const
 {
     auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
     return getTrkPtByCondition(condition);
 }
 
-bool trk_t::isTrkPtLastVisible(qint32 idxTotal) const
+bool CTrackData::isTrkPtLastVisible(qint32 idxTotal) const
 {
     auto condition = [idxTotal](const trkpt_t &pt) { return (pt.idxTotal > idxTotal) && !pt.isHidden();  };
     return nullptr == getTrkPtByCondition(condition);
 }
 
-const trkpt_t* trk_t::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
+const trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
 {
     for(const trkpt_t &pt : *this)
     {
@@ -167,7 +167,7 @@ const trkpt_t* trk_t::getTrkPtByCondition(std::function<bool(const trkpt_t&)> co
     return nullptr;
 }
 
-trkpt_t* trk_t::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
+trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
 {
     for(trkpt_t &pt : *this)
     {

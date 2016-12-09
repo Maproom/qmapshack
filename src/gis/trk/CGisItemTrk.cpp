@@ -56,7 +56,7 @@ struct trkwpt_t
 IGisItem::key_t CGisItemTrk::keyUserFocus;
 
 
-CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const trk_t& srctrk, IGisProject * project)
+CGisItemTrk::CGisItemTrk(const QString &name, qint32 idx1, qint32 idx2, const CTrackData& srctrk, IGisProject * project)
     : IGisItem(project, eTypeTrk, NOIDX), trk(name, srctrk, idx1, idx2)
 {
     flags = eFlagCreatedInQms;
@@ -154,7 +154,7 @@ CGisItemTrk::CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project)
     loadFromDb(id, db);
 }
 
-CGisItemTrk::CGisItemTrk(trk_t& trkdata, IGisProject *project)
+CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject *project)
     : IGisItem(project, eTypeTrk, NOIDX)
     , trk(std::move(trkdata))
 {
@@ -2189,7 +2189,7 @@ QPointF CGisItemTrk::setMouseFocusByPoint(const QPoint& pt, focusmode_e fmode, c
             Iterate over the polyline used to draw the track as it contains screen
             coordinates. The polyline is a linear representation of the segments in the
             track. That is why the index into the polyline can't be used directly.
-            In a second step we have to iterate over all segments and points of the trk_t object
+            In a second step we have to iterate over all segments and points of the CTrackData object
             until the index is reached. This is done by either getTrkPtByVisibleIndex(), or
             getTrkPtByTotalIndex(). Depending on the current mode.
          */

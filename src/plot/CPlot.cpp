@@ -81,7 +81,7 @@ void CPlot::updateData()
     }
 
     QPolygonF line;
-    const trk_t& t = trk->getTrackData();
+    const CTrackData& t = trk->getTrackData();
     for(const trkpt_t& trkpt : t)
     {
         if(!trkpt.isHidden()

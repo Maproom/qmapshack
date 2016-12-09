@@ -38,7 +38,7 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
         if(nullptr != itemTrk)
         {
-            const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
+            const CGisItemTrk::CTrackData &trk = itemTrk->getTrackData();
 
             // filter all internal extensions (starting with ::ql:)
             QStringList extensions = itemTrk->getExistingDataSources().filter(QRegExp("^((?!::ql:).)*$"));

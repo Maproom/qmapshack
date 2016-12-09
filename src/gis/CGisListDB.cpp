@@ -122,6 +122,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionCopyFolder    = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, SLOT(slotCopyFolder()));
     actionMoveFolder    = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, SLOT(slotMoveFolder()));
     actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
+    actionExportToGpx   = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, SLOT(slotExportToGpx()));
 
     menuItem            = new QMenu(this);
     actionDelItem       = menuItem->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Item"), this, SLOT(slotDelItem()));
@@ -131,6 +132,7 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
+    menuDatabase->addAction(actionExportToGpx);
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -323,8 +325,11 @@ void CGisListDB::slotContextMenu(const QPoint& point)
         return;
     }
 
+    bool isSingleSelection  = selectedItems().count() == 1;
+
     actionUpdate->setEnabled(true);
-    actionAddFolder->setEnabled(true);
+    actionAddFolder->setEnabled(isSingleSelection);
+    actionExportToGpx->setEnabled(isSingleSelection);
 
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
@@ -349,7 +354,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder)
     {
-        bool isGroupFolder = folder->type() == IDBFolder::eTypeGroup;
+        bool isGroupFolder      = folder->type() == IDBFolder::eTypeGroup;
         actionRenameFolder->setVisible(isGroupFolder);
         menuFolder->exec(p);
         return;
@@ -1011,4 +1016,17 @@ void CGisListDB::slotReadyRead()
             CGisWidget::self().postEventForWks(evt);
         }
     }
+}
+
+void CGisListDB::slotExportToGpx()
+{
+    CGisListDBEditLock lock(false, this, "slotExportToGpx");
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == nullptr)
+    {
+        return;
+    }
+
+    folder->exportToGpx();
 }

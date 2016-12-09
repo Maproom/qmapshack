@@ -2433,9 +2433,21 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     updateVisuals(eVisualPlot, "setupInterpolation()");
 }
 
-qreal CGisItemTrk::getElevationInterpolated(qreal d) const
+qreal CGisItemTrk::getElevationInterpolated(qreal d)
 {
-    return alglib::spline1dcalc(interp.p, d);
+    qreal res = NOFLOAT;
+
+    try
+    {
+        res = alglib::spline1dcalc(interp.p, d);
+    }
+    catch(const alglib::ap_error& e)
+    {
+        qDebug() << e.msg.c_str();
+        interp.valid = false;
+    }
+
+    return res;
 }
 
 

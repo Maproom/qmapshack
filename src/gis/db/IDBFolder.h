@@ -164,6 +164,8 @@ public:
 
     bool isSiblingFrom(IDBFolder * folder) const;
 
+    void exportToGpx();
+
 protected:
     /**
        @brief Setup all item properties

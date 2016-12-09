@@ -219,7 +219,7 @@ public:
      */
     qint32 getElevation(qint32 idx) const;
 
-
+    std::pair<int, int> getMouseRange(bool total) const;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 

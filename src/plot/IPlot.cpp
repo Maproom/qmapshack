@@ -1404,11 +1404,11 @@ void IPlot::setMouseRangeFocus(const trkpt_t * ptRange1, const trkpt_t *ptRange2
     {
         if(ptRange1->idxTotal < ptRange2->idxTotal)
         {
-            while(ptRange1->flags & trkpt_t::eHidden)
+            while(ptRange1->isHidden())
             {
                 ptRange1++;
             }
-            while(ptRange2->flags & trkpt_t::eHidden)
+            while(ptRange2->isHidden())
             {
                 ptRange2--;
             }
@@ -1417,11 +1417,11 @@ void IPlot::setMouseRangeFocus(const trkpt_t * ptRange1, const trkpt_t *ptRange2
         }
         else
         {
-            while(ptRange1->flags & trkpt_t::eHidden)
+            while(ptRange1->isHidden())
             {
                 ptRange1--;
             }
-            while(ptRange2->flags & trkpt_t::eHidden)
+            while(ptRange2->isHidden())
             {
                 ptRange2++;
             }

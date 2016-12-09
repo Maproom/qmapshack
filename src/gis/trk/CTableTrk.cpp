@@ -105,7 +105,7 @@ void CTableTrk::updateData()
             bg = QColor(255, 100, 100);
         }
 
-        QBrush fg( trkpt.flags & trkpt_t::eHidden ? Qt::gray : Qt::black );
+        QBrush fg( trkpt.isHidden() ? Qt::gray : Qt::black );
         for(int i = 0; i < eColMax; i++)
         {
             item->setBackground(i, bg);

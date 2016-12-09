@@ -105,12 +105,12 @@ void ITrack::updateData()
         const trk_t& t = trk->getTrackData();
         for(const trkpt_t& trkpt : t)
         {
-            if(trkpt.flags & trkpt_t::eHidden)
+            if(trkpt.isHidden())
             {
                 continue;
             }
 
-            coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+            coords << trkpt.radPoint();
         }
     }
 
@@ -160,7 +160,7 @@ void ITrack::draw(QPainter& p)
         needsRedraw = false;
     }
 
-    p.drawImage(0,0,buffer);
+    p.drawImage(0, 0, buffer);
 }
 
 void ITrack::draw()
@@ -171,11 +171,11 @@ void ITrack::draw()
 
 
     p.setPen(CDraw::penBorderBlack);
-    p.setBrush(QColor(255,255,255,255));
-    PAINT_ROUNDED_RECT(p,buffer.rect().adjusted(1,1,-1,-1));
+    p.setBrush(QColor(255, 255, 255, 255));
+    PAINT_ROUNDED_RECT(p, buffer.rect().adjusted(1,1,-1,-1));
 
-    p.setPen(QPen(Qt::darkBlue,2/scale.x()));
+    p.setPen(QPen(Qt::darkBlue, 2/scale.x()));
     p.scale(scale.x(), scale.y());
-    p.translate(-xoff,-yoff);
+    p.translate(-xoff, -yoff);
     p.drawPolyline(line);
 }

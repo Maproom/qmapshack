@@ -35,7 +35,7 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     for(const trkpt_t &pt : trk)
     {
         pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, pt.ele);
-        dp.used = !(pt.flags & trkpt_t::eHidden);
+        dp.used = !pt.isHidden();
 
         line << dp;
     }
@@ -51,11 +51,11 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     line[0].y = 0;
     for(int i = 1; i < line.size(); i++)
     {
-        qreal d, a1, a2;
         pointDP& pt1 = line[i - 1];
         pointDP& pt2 = line[i];
 
-        d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
+        qreal a1, a2;
+        qreal d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
 
         pt0 = pt2;
 
@@ -71,14 +71,14 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     {
         if(line[cnt].used)
         {
-            pt.flags &= ~trkpt_t::eHidden;
+            pt.unsetFlag(trkpt_t::eHidden);
         }
         else
         {
-            if((pt.flags & trkpt_t::eHidden) == 0)
+            if(!pt.isHidden())
             {
                 nothingDone = false;
-                pt.flags |=  trkpt_t::eHidden;
+                pt.setFlag(trkpt_t::eHidden);
             }
         }
 
@@ -136,16 +136,12 @@ void CGisItemTrk::filterDelete()
 {
     bool nothingDone = true;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(trkseg_t& seg : trk.segs)
     {
         QVector<trkpt_t> pts;
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        for(const trkpt_t &pt : seg.pts)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.hasFlag(trkpt_t::eHidden))
+            if(pt.isHidden())
             {
                 nothingDone = false;
                 continue;
@@ -171,7 +167,7 @@ void CGisItemTrk::filterSmoothProfile(int points)
     QVector<int> window(points, 0);
     QVector<int> ele1, ele2;
 
-    for(trkpt_t& pt : trk)
+    for(const trkpt_t &pt : trk)
     {
         ele1 << pt.ele;
         ele2 << pt.ele;
@@ -206,17 +202,9 @@ void CGisItemTrk::filterSmoothProfile(int points)
 void CGisItemTrk::filterReplaceElevation()
 {
     QPolygonF line;
-
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(const trkpt_t &pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-
-            line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
-        }
+        line << pt.radPoint();
     }
 
     QPolygonF ele(line.size());
@@ -226,7 +214,7 @@ void CGisItemTrk::filterReplaceElevation()
     for(trkpt_t& pt : trk)
     {
         pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
-        cnt++;
+        ++cnt;
     }
 
     deriveSecondaryData();
@@ -320,7 +308,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
 
     for(trkpt_t& pt : trk)
     {
-        if(pt.hasFlag(trkpt_t::eHidden))
+        if(pt.isHidden())
         {
             continue;
         }
@@ -352,7 +340,7 @@ void CGisItemTrk::filterSplitSegment()
             qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
 
             new CGisItemTrk(tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
-            part++;
+            ++part;
         }
     }
 }

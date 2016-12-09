@@ -84,7 +84,7 @@ void CPlot::updateData()
     const trk_t& t = trk->getTrackData();
     for(const trkpt_t& trkpt : t)
     {
-        if(!(trkpt.flags & trkpt_t::eHidden)
+        if(!trkpt.isHidden()
            && getY(trkpt) != NOFLOAT)
         {
             line << QPointF(getX(trkpt), getY(trkpt) * factor);

@@ -167,7 +167,7 @@ void CActivityTrk::update()
     {
         allFlags |= pt.flags;
 
-        if(pt.flags & trkpt_t::eHidden)
+        if(pt.isHidden())
         {
             continue;
         }

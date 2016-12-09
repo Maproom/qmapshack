@@ -158,6 +158,10 @@ struct trk_t
     void getPolyline(SGisLine  &l) const;
     void getPolyline(QPolygonF &l) const;
 
+    bool isEmpty() const
+    {
+        return segs.isEmpty();
+    }
 
     /**
        @brief Check if the track point at index it the first one visible

@@ -83,7 +83,6 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
         setupHistory();
     }
 
-
     if(parentTrk.isOnDevice() || !parentTrk.isReadOnly())
     {
         flags |= eFlagWriteAllowed;
@@ -459,8 +458,8 @@ QString CGisItemTrk::getInfoRange() const
     qreal deltaAscent  = pt2->ascent  - pt1->ascent;
     qreal deltaDescent = pt2->descent - pt1->descent;
 
-    tmp    = qAtan(deltaAscent/distance);
-    slope1 = qAbs(tmp * 360.0/(2 * M_PI));
+    tmp    = qAtan(deltaAscent / distance);
+    slope1 = qAbs(tmp * 360.0 / (2 * M_PI));
     slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
 
     IUnit::self().meter2elevation(deltaAscent, val, unit);
@@ -827,12 +826,10 @@ void CGisItemTrk::deriveSecondaryData()
     totalElapsedSeconds       = NOTIME;
     totalElapsedSecondsMoving = NOTIME;
 
-
-    // remove empty segments
     trk.removeEmptySegments();
 
-    // no segments -> no data -> nothing to do
-    if(trk.segs.isEmpty())
+    // no data -> nothing to do
+    if(trk.isEmpty())
     {
         return;
     }
@@ -931,14 +928,11 @@ void CGisItemTrk::deriveSecondaryData()
         qreal d1 = trkpt.distance;
         qreal e1 = trkpt.ele;
         qreal t1 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
-        int n = p;
-
-        while(n > 0)
+        for(int n = p; n > 0; --n)
         {
             trkpt_t & trkpt2 = *lintrk[n];
             if(trkpt2.ele == NOINT)
             {
-                --n;
                 continue;
             }
 
@@ -949,19 +943,16 @@ void CGisItemTrk::deriveSecondaryData()
                 t1 = trkpt2.time.toMSecsSinceEpoch()/1000.0;
                 break;
             }
-            --n;
         }
 
         qreal d2 = trkpt.distance;
         qreal e2 = trkpt.ele;
         qreal t2 = trkpt.time.toMSecsSinceEpoch() / 1000.0;
-        n = p;
-        while(n < lintrk.size())
+        for(int n = p; n < lintrk.size(); ++n)
         {
             trkpt_t & trkpt2 = *lintrk[n];
             if(trkpt2.ele == NOINT)
             {
-                n++;
                 continue;
             }
 
@@ -972,7 +963,6 @@ void CGisItemTrk::deriveSecondaryData()
                 t2 = trkpt2.time.toMSecsSinceEpoch() / 1000.0;
                 break;
             }
-            ++n;
         }
 
         qreal a      = qAtan((e2 - e1)/(d2 - d1));
@@ -988,7 +978,6 @@ void CGisItemTrk::deriveSecondaryData()
             trkpt.speed = NOFLOAT;
         }
     }
-
 
     if(nullptr != lastTrkpt)
     {
@@ -1075,31 +1064,25 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             continue;
         }
 
-        QPointF pos;
-        pos = wpt->getPosition();
-
-        trkwpt_t trkwpt;
-        trkwpt.x   = pos.x() * DEG_TO_RAD;
-        trkwpt.y   = pos.y() * DEG_TO_RAD;
-        trkwpt.key = wpt->getKey();
+        QPointF pos = wpt->getPosition();
 
         qreal a1 = 0, a2 = 0;
-        qreal d = GPS_Math_Distance(pt0.x, pt0.y, trkwpt.x, trkwpt.y, a1, a2);
+        qreal d = GPS_Math_Distance(pt0.x, pt0.y, pos.x() * DEG_TO_RAD, pos.y() * DEG_TO_RAD, a1, a2);
 
-        trkwpt.x = qCos(a1 * DEG_TO_RAD) * d;
-        trkwpt.y = qSin(a1 * DEG_TO_RAD) * d;
+        trkwpt_t trkwpt;
+        trkwpt.x    = qCos(a1 * DEG_TO_RAD) * d;
+        trkwpt.y    = qSin(a1 * DEG_TO_RAD) * d;
         trkwpt.name = wpt->getName();
+        trkwpt.key  = wpt->getKey();
 
         trkwpts << trkwpt;
     }
 
     // convert all coordinates into meter relative to the first track point.
-    for(int i = 0; i < line.size(); i++)
+    for(pointDP& pt1 : line)
     {
-        qreal d, a1 = 0, a2 = 0;
-        pointDP& pt1 = line[i];
-
-        d = GPS_Math_Distance(pt0.x, pt0.y, pt1.x, pt1.y, a1, a2);
+        qreal a1 = 0, a2 = 0;
+        qreal d = GPS_Math_Distance(pt0.x, pt0.y, pt1.x, pt1.y, a1, a2);
 
         pt1.x = qCos(a1 * DEG_TO_RAD) * d;
         pt1.y = qSin(a1 * DEG_TO_RAD) * d;
@@ -1113,7 +1096,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
 
         for(const pointDP &pt : line)
         {
-            current++;
+            ++current;
             qreal d = (trkwpt.x - pt.x)*(trkwpt.x - pt.x) + (trkwpt.y - pt.y)*(trkwpt.y - pt.y);
 
             if(d < WPT_FOCUS_DIST_IN)
@@ -1129,7 +1112,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
                 trkpt_t * trkpt = const_cast<trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
                 if(trkpt)
                 {
-                    numberOfAttachedWpt++;
+                    ++numberOfAttachedWpt;
                     trkpt->keyWpt = trkwpt.key;
                 }
 
@@ -1149,7 +1132,7 @@ void CGisItemTrk::findWaypointsCloseBy(CProgressDialog& progress, quint32& curre
             trkpt_t * trkpt = const_cast<trkpt_t*>(trk.getTrkPtByVisibleIndex(index));
             if(trkpt)
             {
-                numberOfAttachedWpt++;
+                ++numberOfAttachedWpt;
                 trkpt->keyWpt = trkwpt.key;
             }
         }
@@ -1258,7 +1241,7 @@ bool CGisItemTrk::cut()
 
         for(trkseg_t& seg : trk.segs)
         {
-            if(seg.pts.empty())
+            if(seg.isEmpty())
             {
                 continue;
             }
@@ -1456,7 +1439,7 @@ void CGisItemTrk::showSelectedPoints()
 
     for(trkpt_t& trkpt : trk)
     {
-        if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal <= idx2))
+        if(isInRange(trkpt.idxTotal, idx1, idx2))
         {
             trkpt.unsetFlag(trkpt_t::eHidden);
         }
@@ -1656,7 +1639,7 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
             }
 
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
-            ptPrev  = &pt;
+            ptPrev = &pt;
         }
     }
 }
@@ -1669,10 +1652,10 @@ void CGisItemTrk::drawColorized(QPainter &p) const
     QPainter colorsPainter(&colors);
 
     QLinearGradient colorsGradient(colors.rect().topLeft(), colors.rect().bottomLeft());
-    colorsGradient.setColorAt(1.00, QColor(  0,   0, 255)); // blue
-    colorsGradient.setColorAt(0.60, QColor(  0, 255,   0)); // green
-    colorsGradient.setColorAt(0.40, QColor(255, 255,   0)); // yellow
-    colorsGradient.setColorAt(0.00, QColor(255,   0,   0)); // red
+    colorsGradient.setColorAt(1.0, QColor(  0,   0, 255)); // blue
+    colorsGradient.setColorAt(0.6, QColor(  0, 255,   0)); // green
+    colorsGradient.setColorAt(0.4, QColor(255, 255,   0)); // yellow
+    colorsGradient.setColorAt(0.0, QColor(255,   0,   0)); // red
     colorsPainter.fillRect(colors.rect(), colorsGradient);
 
     const qreal factor = CKnownExtension::get(getColorizeSource()).factor;
@@ -1826,7 +1809,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         // calculate bounding box of text
         QFont f = CMainWindow::self().getMapFont();
         QFontMetrics fm(f);
-        QRect rectText = fm.boundingRect(QRect(0,0,500,0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
+        QRect rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, str);
 
         // The initial minimum size of the box will be MIN_WIDTH_INFO_BOX.
         // If a larger box is needed the minimum grows. By that the width
@@ -1852,44 +1835,46 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         // draw the bubble
         QRect box(0, 0, w, h);
-        box.moveBottomLeft(anchor.toPoint() + QPoint(-50,-50));
+        box.moveBottomLeft(anchor.toPoint() + QPoint(-50, -50));
         CDraw::bubble(p, box, anchor.toPoint(), 18 /* px */, 21 /* px */);
 
         p.save();
         p.translate(box.topLeft());
 
+        QColor pbarBlue(150, 150, 255);
+        QColor pbarGreen(150, 255, 150);
+
         // draw progress bar distance
-        p.translate(5,5);
-        QRect rectBar1(0,0,rectText.width(), fm.height());
-        p.setPen(QColor(150,150,255));
-        p.setBrush(QColor(150,150,255));
+        p.translate(5, 5);
+        QRect rectBar1(0, 0, rectText.width(), fm.height());
+        p.setPen(pbarBlue);
+        p.setBrush(pbarBlue);
         p.drawRect(rectBar1);
         qreal d = mouseMoveFocus->distance * rectBar1.width() / totalDistance;
-        p.setPen(QColor(150,255,150));
-        p.setBrush(QColor(150,255,150));
-        p.drawRect(0,0,d,fm.height());
-
+        p.setPen(pbarGreen);
+        p.setBrush(pbarGreen);
+        p.drawRect(0, 0, d, fm.height());
 
         QString val1, unit1, val2, unit2;
         IUnit::self().meter2distance(mouseMoveFocus->distance, val1, unit1);
         IUnit::self().meter2distance(totalDistance - mouseMoveFocus->distance, val2, unit2);
         p.setPen(Qt::darkBlue);
-        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
-        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
-        p.drawText(QRect(0,1,rectBar1.width(),fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignLeft, QString("%1%2").arg(val1).arg(unit1));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignCenter, QString("%1%").arg(mouseMoveFocus->distance * 100 / totalDistance, 0, 'f', 0));
+        p.drawText(QRect(0, 1, rectBar1.width(), fm.height()), Qt::AlignVCenter|Qt::AlignRight, QString("%1%2").arg(val2).arg(unit2));
 
         // draw progress bar time
         if(totalElapsedSeconds != 0)
         {
-            p.translate(0,fm.height() + 5);
-            QRect rectBar2(0,0,rectText.width(), fm.height());
-            p.setPen(QColor(150,150,255));
-            p.setBrush(QColor(150,150,255));
+            p.translate(0, fm.height() + 5);
+            QRect rectBar2(0, 0, rectText.width(), fm.height());
+            p.setPen(pbarBlue);
+            p.setBrush(pbarBlue);
             p.drawRect(rectBar2);
             qreal t = mouseMoveFocus->elapsedSecondsMoving * rectBar2.width() / totalElapsedSecondsMoving;
-            p.setPen(QColor(150,255,150));
-            p.setBrush(QColor(150,255,150));
-            p.drawRect(0,0,t,fm.height());
+            p.setPen(pbarGreen);
+            p.setBrush(pbarGreen);
+            p.drawRect(0, 0, t, fm.height());
 
             IUnit::self().seconds2time(mouseMoveFocus->elapsedSecondsMoving, val1, unit1);
             IUnit::self().seconds2time(totalElapsedSecondsMoving - mouseMoveFocus->elapsedSecondsMoving, val2, unit2);
@@ -1913,7 +1898,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
         anchor *= DEG_TO_RAD;
         gis->convertRad2Px(anchor);
 
-        p.drawPixmap(anchor - QPointF(4,4), QPixmap(IGisItem::colorMap[colorIdx].bullet));
+        p.drawPixmap(anchor - QPointF(4, 4), QPixmap(IGisItem::colorMap[colorIdx].bullet));
     }
 
     drawRange(p);
@@ -2117,7 +2102,7 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    icon = mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
 
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
@@ -2274,7 +2259,6 @@ void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmo
             mouseRange1 = pt;
             rangeState  = eRangeState1st;
         }
-
         break;
     }
 
@@ -2320,9 +2304,6 @@ void CGisItemTrk::publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fm
             mouseClickFocus = pt;
             setMouseClickFocusVisuals(pt);
         }
-
-    default:
-        ;
     }
 }
 
@@ -2415,7 +2396,7 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     qreal basefactor = IUnit::self().basefactor;
     for(const trkpt_t& trkpt : trk)
     {
-        if(trkpt.flags & trkpt_t::eHidden)
+        if(trkpt.isHidden())
         {
             continue;
         }

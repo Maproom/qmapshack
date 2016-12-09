@@ -90,7 +90,7 @@ void CPlotProfile::updateData()
     const trk_t& t = trk->getTrackData();
     for(const trkpt_t& trkpt : t)
     {
-        if(trkpt.flags & trkpt_t::eHidden)
+        if(trkpt.isHidden())
         {
             continue;
         }

@@ -353,7 +353,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
 
     IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
     if(folder)
-    {        
+    {
         bool isGroupFolder      = folder->type() == IDBFolder::eTypeGroup;
         actionRenameFolder->setVisible(isGroupFolder);
         menuFolder->exec(p);

@@ -788,7 +788,7 @@ void CGisWidget::copyTrkWithWptByKey(const IGisItem::key_t &key)
         keys << key;
 
         const CTrackData& t = trk->getTrackData();
-        for(const trkpt_t& trkpt : t)
+        for(const CTrackData::trkpt_t& trkpt : t)
         {
             if(trkpt.isHidden() || trkpt.keyWpt.item.isEmpty())
             {

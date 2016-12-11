@@ -227,14 +227,14 @@ void CSlfReader::readEntries(const QDomNode& xml)
     CTrackData trk;
     trk.segs.resize(laps.count() + 1);
 
-    trkseg_t *seg = &(trk.segs[0]);
+    CTrackData::trkseg_t *seg = &(trk.segs[0]);
     long breakTime = offsetsTime[0];
 
     qreal prevLon = NOFLOAT;
     qreal prevLat = NOFLOAT;
     for(int i = 0; i < xmlEntrs.count(); i++)
     {
-        trkpt_t trkpt;
+        CTrackData::trkpt_t trkpt;
 
         const QDomNamedNodeMap& attr = xmlEntrs.item(i).attributes();
         trkpt.lat = attr.namedItem("latitude" ).nodeValue().toDouble();

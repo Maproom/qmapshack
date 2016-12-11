@@ -144,10 +144,10 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     setColor(IGisItem::colorMap[trk1.colorIdx].color);
 
     bool hasExtData = trk1.hasExt1Data();
-    trkseg_t seg;
+    CTrackData::trkseg_t seg;
     for(const CQlgtTrack::pt_t& pt1 : trk1.track)
     {
-        trkpt_t pt;
+        CTrackData::trkpt_t pt;
         QDateTime time = QDateTime::fromTime_t(pt1._timestamp,QTimeZone("UTC"));
         time = time.addMSecs(pt1._timestamp_msec);
 
@@ -174,12 +174,12 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     bool hasHiddenPoints = false;
     for(int i = 0; i < trk1.track.size(); i++)
     {
-        trkpt_t&                pt  = trk.segs[0].pts[i];
+        CTrackData::trkpt_t&                pt  = trk.segs[0].pts[i];
         const CQlgtTrack::pt_t& pt1 = trk1.track[i];
 
         if(pt1.flags & CQlgtTrack::pt_t::eDeleted)
         {
-            pt.flags |= trkpt_t::eHidden;
+            pt.flags |= CTrackData::trkpt_t::eHidden;
             hasHiddenPoints = true;
         }
     }
@@ -218,10 +218,10 @@ CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
     trk.desc    = ovl.description;
     trk.color   = ovl.color.name();
 
-    trkseg_t seg;
+    CTrackData::trkseg_t seg;
     for(const IQlgtOverlay::pt_t& pt1 : ovl.points)
     {
-        trkpt_t pt;
+        CTrackData::trkpt_t pt;
         pt.lon = pt1.u * RAD_TO_DEG;
         pt.lat = pt1.v * RAD_TO_DEG;
 

@@ -132,7 +132,7 @@ bool CTrackData::isTrkPtFirstVisible(qint32 idxTotal) const
     return true;
 }
 
-const trkpt_t* CTrackData::getTrkPtByVisibleIndex(qint32 idx) const
+const CTrackData::trkpt_t* CTrackData::getTrkPtByVisibleIndex(qint32 idx) const
 {
     if(idx == NOIDX)
     {
@@ -143,7 +143,7 @@ const trkpt_t* CTrackData::getTrkPtByVisibleIndex(qint32 idx) const
     return getTrkPtByCondition(condition);
 }
 
-const trkpt_t* CTrackData::getTrkPtByTotalIndex(qint32 idx) const
+const CTrackData::trkpt_t* CTrackData::getTrkPtByTotalIndex(qint32 idx) const
 {
     auto condition = [idx](const trkpt_t &pt) { return pt.idxTotal == idx;  };
     return getTrkPtByCondition(condition);
@@ -155,7 +155,7 @@ bool CTrackData::isTrkPtLastVisible(qint32 idxTotal) const
     return nullptr == getTrkPtByCondition(condition);
 }
 
-const trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const
+const CTrackData::trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const CTrackData::trkpt_t&)> cond) const
 {
     for(const trkpt_t &pt : *this)
     {
@@ -167,7 +167,7 @@ const trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const trkpt_t&
     return nullptr;
 }
 
-trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond)
+CTrackData::trkpt_t* CTrackData::getTrkPtByCondition(std::function<bool(const CTrackData::trkpt_t&)> cond)
 {
     for(trkpt_t &pt : *this)
     {

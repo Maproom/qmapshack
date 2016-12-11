@@ -77,11 +77,11 @@ void CTableTrk::updateData()
 
     // use all valid flags as invalid mask. By that only
     // invalid flags for properties with valid points count
-    quint32 invalidMask = (trk->getAllValidFlags() & trkpt_t::eValidMask) << 16;
+    quint32 invalidMask = (trk->getAllValidFlags() & CTrackData::trkpt_t::eValidMask) << 16;
 
     QList<QTreeWidgetItem*> items;
     const CTrackData& t = trk->getTrackData();
-    for(const trkpt_t& trkpt : t)
+    for(const CTrackData::trkpt_t& trkpt : t)
     {
         QString val, unit;
 
@@ -100,7 +100,7 @@ void CTableTrk::updateData()
         }
 
         QBrush bg = item->background(0);
-        if(trkpt.isInvalid(trkpt_t::invalid_e(invalidMask)))
+        if(trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
         {
             bg = QColor(255, 100, 100);
         }

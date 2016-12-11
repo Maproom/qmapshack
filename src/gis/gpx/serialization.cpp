@@ -731,14 +731,14 @@ void CGisItemTrk::readTrk(const QDomNode& xml, CTrackData& trk)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& trkseg = trksegs.item(n);
-        trkseg_t& seg = trk.segs[n];
+        CTrackData::trkseg_t& seg = trk.segs[n];
 
         const QDomNodeList& xmlTrkpts = trkseg.toElement().elementsByTagName("trkpt");
         int M = xmlTrkpts.count();
         seg.pts.resize(M);
         for(int m = 0; m < M; ++m)
         {
-            trkpt_t& trkpt = seg.pts[m];
+            CTrackData::trkpt_t& trkpt = seg.pts[m];
             const QDomNode& xmlTrkpt = xmlTrkpts.item(m);
             readWpt(xmlTrkpt, trkpt);
 
@@ -799,12 +799,12 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
         writeXml(gpxx, "gpxx:DisplayColor", trk.color);
     }
 
-    for(const trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : trk.segs)
     {
         QDomElement xmlTrkseg = doc.createElement("trkseg");
         xmlTrk.appendChild(xmlTrkseg);
 
-        for(const trkpt_t &pt : seg.pts)
+        for(const CTrackData::trkpt_t &pt : seg.pts)
         {
             QDomElement xmlTrkpt = doc.createElement("trkpt");
             xmlTrkseg.appendChild(xmlTrkpt);
@@ -1053,7 +1053,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
                 continue;
             }
 
-            const trkpt_t& origin = trk.segs.first().pts.first();
+            const CTrackData::trkpt_t& origin = trk.segs.first().pts.first();
 
             QDomElement startPosition = doc.createElement("StartPosition");
             adventure.appendChild(startPosition);
@@ -1072,7 +1072,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             QDomElement waypointOrder = doc.createElement("WaypointOrder");
             adventure.appendChild(waypointOrder);
 
-            for(const trkpt_t& trkpt : trk)
+            for(const CTrackData::trkpt_t& trkpt : trk)
             {
                 if(trkpt.keyWpt.item.isEmpty())
                 {

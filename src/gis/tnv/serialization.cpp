@@ -240,9 +240,9 @@ bool CGisItemTrk::saveTwoNav(const QString &filename)
     out << "y " << getKey().item << endl;
 
 
-    for(const trkseg_t& seg : trk.segs)
+    for(const CTrackData::trkseg_t& seg : trk.segs)
     {
-        for(const trkpt_t& trkpt : seg.pts)
+        for(const CTrackData::trkpt_t& trkpt : seg.pts)
         {
             list.clear();
 
@@ -350,7 +350,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
     QTextStream in(&file);
     in.setCodec(QTextCodec::codecForName("UTF-8"));
 
-    trkseg_t seg;
+    CTrackData::trkseg_t seg;
 
     while(!line.isEmpty())
     {
@@ -412,7 +412,7 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
 
         case 'T':
         {
-            trkpt_t pt;
+            CTrackData::trkpt_t pt;
             QStringList values = line.split(' ', QString::SkipEmptyParts);
 
             if(values.size() < 8)

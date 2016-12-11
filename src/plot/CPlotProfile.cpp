@@ -88,7 +88,7 @@ void CPlotProfile::updateData()
 
     qreal basefactor = IUnit::self().basefactor;
     const CTrackData& t = trk->getTrackData();
-    for(const trkpt_t& trkpt : t)
+    for(const CTrackData::trkpt_t& trkpt : t)
     {
         if(trkpt.isHidden())
         {
@@ -143,7 +143,7 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseFocus(const trkpt_t * ptMouseMove)
+void CPlotProfile::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove)
     {

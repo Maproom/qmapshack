@@ -42,8 +42,8 @@ public:
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
 
-    void setMouseRangeFocus(const trkpt_t * ptRange1, const trkpt_t * ptRange2) override;
-    void setMouseClickFocus(const trkpt_t * pt) override {}
+    void setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t * ptRange2) override;
+    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
 
     void save(QImage& image);
     void setSolid(bool yes)

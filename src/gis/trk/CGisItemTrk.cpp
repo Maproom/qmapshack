@@ -676,9 +676,10 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
     return (NOIDX == bestIdx) ? NOPOINTF : lineSimple[bestIdx];
 }
 
-void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const
+
+bool CGisItemTrk::isRangeSelected() const
 {
-    getMouseRange(idx1, idx2, false);
+    return mouseRange1 != mouseRange2;
 }
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)

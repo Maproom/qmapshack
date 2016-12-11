@@ -1066,21 +1066,21 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1374"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1387"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1447"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1491"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1362"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1375"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1435"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1479"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1644"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1592"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1580"/>
         <source>Hide point %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1596"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1584"/>
         <source>Hide points %1..%2.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1176,47 +1176,47 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1437"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
         <source>Permanently removed points %1..%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1636"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1624"/>
         <source>Show points.</source>
         <translation type="unfinished">Mostrar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2181"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2169"/>
         <source>Changed name</source>
         <translation type="unfinished">Se cambió el nombre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2187"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
         <source>Changed comment</source>
         <translation type="unfinished">Se cambió el comentario</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2193"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2181"/>
         <source>Changed description</source>
         <translation type="unfinished">Se cambió la descripción</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2199"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2187"/>
         <source>Changed links</source>
         <translation type="unfinished">Se cambió el enlace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2210"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2198"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2289"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2277"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2975,9 +2975,9 @@ Estructura desconocida.</translation>
 <context>
     <name>CMouseRangeTrk</name>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="42"/>
-        <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point. And then a second one.&lt;br/&gt;</source>
-        <translation>&lt;b&gt;Seleccione Rango&lt;/b&gt;&lt;br/&gt;En el track, seleccione el primer punto, y otro más a continuación.&lt;br/&gt;</translation>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="227"/>
+        <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3729,7 +3729,7 @@ no es una definición de sistema de coordenadas válido:
 <context>
     <name>CScrOptRangeTrk</name>
     <message>
-        <location filename="../mouse/CScrOptRangeTrk.cpp" line="40"/>
+        <location filename="../mouse/CScrOptRangeTrk.cpp" line="38"/>
         <source>No range selected</source>
         <translation type="unfinished"></translation>
     </message>

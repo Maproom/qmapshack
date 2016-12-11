@@ -35,16 +35,7 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     // switch to full mode to show deleted (hidden) track points, too
     trk.setMode(CGisItemTrk::eModeRange, "CMouseRangeTrk");
 
-    // reset user focus if the track has it
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-
-    canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point. And then a second one.<br/>"));
-    /*
-        trigger complete update of GIS components to make sure all changes to
-        the originating object are reflected on the canvas
-     */
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    resetState();
 }
 
 CMouseRangeTrk::~CMouseRangeTrk()
@@ -232,7 +223,9 @@ void CMouseRangeTrk::resetState()
     }
     state  = eStateIdle;
     anchor = NOPOINTF;
-    canvas->update();
+
+    canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.<br/>"));
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CMouseRangeTrk::slotHidePoints()
@@ -246,8 +239,7 @@ void CMouseRangeTrk::slotHidePoints()
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
-    scrOptRange->deleteLater();
-    canvas->resetMouse();
+    resetState();
 }
 
 void CMouseRangeTrk::slotShowPoints()
@@ -261,8 +253,7 @@ void CMouseRangeTrk::slotShowPoints()
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
-    scrOptRange->deleteLater();
-    canvas->resetMouse();
+    resetState();
 }
 
 void CMouseRangeTrk::slotActivity(quint32 flags)

@@ -777,8 +777,8 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 
 
 bool CGisItemTrk::isRangeSelected() const
-{    
-    return (mouseRange1 != mouseRange2);
+{
+    return mouseRange1 != mouseRange2;
 }
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)

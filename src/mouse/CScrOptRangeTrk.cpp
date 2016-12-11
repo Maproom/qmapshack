@@ -43,7 +43,6 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    toolShowPoints->setDisabled(noRange);
     toolCopy->setDisabled(noRange);
     toolActivity->setDisabled(noRange);
 

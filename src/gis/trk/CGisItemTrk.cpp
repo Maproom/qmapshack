@@ -775,22 +775,10 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
     return (NOIDX == bestIdx) ? NOPOINTF : lineSimple[bestIdx];
 }
 
-void CGisItemTrk::getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const
-{
-    if((nullptr == mouseRange1) || (nullptr == mouseRange2))
-    {
-        idx1 = NOIDX;
-        idx2 = NOIDX;
-        return;
-    }
 
-    idx1 = mouseRange1->idxVisible;
-    idx2 = mouseRange2->idxVisible;
-
-    if(idx1 > idx2)
-    {
-        qSwap(idx1,idx2);
-    }
+bool CGisItemTrk::isRangeSelected() const
+{    
+    return (mouseRange1 != mouseRange2);
 }
 
 static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
@@ -2540,6 +2528,7 @@ bool CGisItemTrk::publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const
 
     return true;
 }
+
 
 void CGisItemTrk::publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode)
 {

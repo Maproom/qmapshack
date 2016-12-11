@@ -22,7 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
-#include "gis/trk/TrackData.h"
+#include "gis/trk/CTrackData.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 

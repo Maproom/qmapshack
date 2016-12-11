@@ -1,4 +1,4 @@
-#include "gis/trk/TrackData.h"
+#include "gis/trk/CTrackData.h"
 #include "gis/IGisLine.h"
 
 CTrackData::CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd) : name(name)

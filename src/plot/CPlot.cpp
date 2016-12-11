@@ -82,7 +82,7 @@ void CPlot::updateData()
 
     QPolygonF line;
     const CTrackData& t = trk->getTrackData();
-    for(const trkpt_t& trkpt : t)
+    for(const CTrackData::trkpt_t& trkpt : t)
     {
         if(!trkpt.isHidden()
            && getY(trkpt) != NOFLOAT)
@@ -95,7 +95,7 @@ void CPlot::updateData()
     setLimits();
 }
 
-void CPlot::setMouseFocus(const trkpt_t * ptMouseMove)
+void CPlot::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove ||  getX == nullptr || getY == nullptr)
     {

@@ -1379,7 +1379,7 @@ void IPlot::slotAddWpt()
         return;
     }
 
-    const trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    const CTrackData::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
     if(trkpt == nullptr)
     {
         return;
@@ -1393,7 +1393,7 @@ void IPlot::slotAddWpt()
     }
 }
 
-void IPlot::setMouseRangeFocus(const trkpt_t * ptRange1, const trkpt_t *ptRange2)
+void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t *ptRange2)
 {
     if(nullptr == ptRange1 || nullptr == ptRange2)
     {

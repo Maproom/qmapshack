@@ -95,7 +95,7 @@ static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
-static bool readFitRecord(const CFitMessage &mesg, trkpt_t &pt)
+static bool readFitRecord(const CFitMessage &mesg, CTrackData::trkpt_t &pt)
 {
     if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
     {
@@ -131,7 +131,7 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 }
 
 
-static bool readFitSegmentPoint(const CFitMessage &mesg, trkpt_t &pt, quint32 timeCreated)
+static bool readFitSegmentPoint(const CFitMessage &mesg, CTrackData::trkpt_t &pt, quint32 timeCreated)
 {
     if(mesg.isFieldValueValid(eSegmentPointPositionLong) && mesg.isFieldValueValid(eSegmentPointPositionLat))
     {
@@ -198,14 +198,14 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
     // Record messages can either be at the beginning or in chronological order within the record
     // messages. Garmin devices uses the chronological ordering. We only consider the chronological
     // order, otherwise timestamps (of records and events) must be compared to each other.
-    trkseg_t seg;
+    CTrackData::trkseg_t seg;
     do
     {
         const CFitMessage& mesg = stream.nextMesg();
         if(mesg.getGlobalMesgNr() == eMesgNumRecord)
         {
             // for documentation: MesgNumActivity, MesgNumSession, MesgNumLap, MesgNumLength could also contain data
-            trkpt_t pt;
+            CTrackData::trkpt_t pt;
             if(readFitRecord(mesg, pt))
             {
                 seg.pts.append(std::move(pt));
@@ -221,14 +221,14 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                     if(!seg.pts.isEmpty())
                     {
                         trk.segs.append(seg);
-                        seg = trkseg_t();
+                        seg = CTrackData::trkseg_t();
                     }
                 }
             }
         }
         else if(mesg.getGlobalMesgNr() == eMesgNumSegmentPoint)
         {
-            trkpt_t pt;
+            CTrackData::trkpt_t pt;
             if(readFitSegmentPoint(mesg, pt, timeCreated))
             {
                 seg.pts.append(std::move(pt));

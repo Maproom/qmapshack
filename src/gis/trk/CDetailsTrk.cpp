@@ -371,7 +371,7 @@ void CDetailsTrk::updateData()
     labelActivityInfo->setText(str);
 
     quint32 flags = trk.getActivities().getAllFlags();
-    bool hasActivity = 0 != (flags & trkpt_t::eActMask);
+    bool hasActivity = 0 != (flags & CTrackData::trkpt_t::eActMask);
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
 
@@ -466,7 +466,7 @@ void CDetailsTrk::updateData()
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }
 
-void CDetailsTrk::setMouseFocus(const trkpt_t * pt)
+void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
 {
     if(nullptr != pt)
     {
@@ -481,12 +481,12 @@ void CDetailsTrk::setMouseFocus(const trkpt_t * pt)
     }
 }
 
-void CDetailsTrk::setMouseRangeFocus(const trkpt_t *pt1, const trkpt_t *pt2)
+void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2)
 {
     labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
 }
 
-void CDetailsTrk::setMouseClickFocus(const trkpt_t *pt)
+void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)
 {
     if(nullptr != pt)
     {
@@ -632,7 +632,7 @@ void CDetailsTrk::slotRemoveActivities()
 {
     if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok)
     {
-        trk.setActivity(trkpt_t::eActNone);
+        trk.setActivity(CTrackData::trkpt_t::eActNone);
     }
 }
 

@@ -52,7 +52,7 @@ CColorLegend::~CColorLegend()
     }
 }
 
-void CColorLegend::setMouseFocus(const trkpt_t * pt)
+void CColorLegend::setMouseFocus(const CTrackData::trkpt_t * pt)
 {
     if(nullptr == pt)
     {

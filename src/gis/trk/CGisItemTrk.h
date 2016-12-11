@@ -180,11 +180,11 @@ public:
     /// get a summary of a selected range
     QString getInfoRange() const;
     /// get a summary of a selected range defined by two track points
-    QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const;
+    QString getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackData::trkpt_t& pt2) const;
     /// get a summary for a track point
-    QString getInfoTrkPt(const trkpt_t& pt) const;
+    QString getInfoTrkPt(const CTrackData::trkpt_t& pt) const;
     /// get a progress summary for a selected track point
-    QString getInfoProgress(const trkpt_t& pt) const;
+    QString getInfoProgress(const CTrackData::trkpt_t& pt) const;
 
     quint32 getTotalElapsedSeconds()       const { return totalElapsedSeconds;       }
     quint32 getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
@@ -203,7 +203,7 @@ public:
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
-    const trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
+    const CTrackData::trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
     quint32 getAllValidFlags()                const { return allValidFlags;    }
 
 
@@ -219,7 +219,7 @@ public:
      */
     qint32 getElevation(qint32 idx) const;
 
-    std::pair<int, int> getMouseRange(bool total) const;
+    void getMouseRange(int &idx1, int &idx2, bool total) const;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -375,7 +375,7 @@ public:
     void combine(const QList<key_t> &keys);
 
     /**
-       @brief Set the trkpt_t::eHidden flag
+       @brief Set the CTrackData::trkpt_t::eHidden flag
 
        The flag is set for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -384,7 +384,7 @@ public:
     void hideSelectedPoints();
 
     /**
-       @brief Reset the trkpt_t::eHidden flag
+       @brief Reset the CTrackData::trkpt_t::eHidden flag
 
        The flag is reset for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -394,7 +394,7 @@ public:
 
     /**
        @brief Set the activity flag for all track points
-       @param flag  one of trkpt_t::flag_e::eAct...
+       @param flag  one of CTrackData::trkpt_t::flag_e::eAct...
      */
     void setActivity(quint32 flags);
 
@@ -410,7 +410,7 @@ public:
        @brief Copy a section into a new track object
 
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
-       including the hidden (trkpt_t::eHidden) ones.
+       including the hidden (CTrackData::trkpt_t::eHidden) ones.
 
      */
     void copySelectedPoints() const;
@@ -525,7 +525,7 @@ public:
        @brief Correlate waypoints with the track points
 
        If a waypoint correlates with a trackpoint it's key is written to
-       trkpt_t::keyWpt.
+       CTrackData::trkpt_t::keyWpt.
 
        @param progress  a progress dialog as this operation can take quite some time
        @param current   the current progress if the operation is done for several tracks
@@ -575,7 +575,7 @@ private:
      */
     void resetInternalData();
 
-    void verifyTrkPt(trkpt_t *&last, trkpt_t& trkpt);
+    void verifyTrkPt(CTrackData::trkpt_t *&last, CTrackData::trkpt_t& trkpt);
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extrema/extensions
 
@@ -601,9 +601,9 @@ private:
        @param fmode     The reason for the focus
        @param owner     A string to identify owner of the operation
      */
-    bool publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString &owner);
-    void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
-    void publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode);
+    bool publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e fmode, const QString &owner);
+    void publishMouseFocusNormalMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
+    void publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
     void resetMouseRange();
 
     /**
@@ -633,9 +633,9 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void setMouseFocusVisuals(const trkpt_t * pt);
-    void setMouseRangeFocusVisuals(const trkpt_t * pt1, const trkpt_t * pt2);
-    void setMouseClickFocusVisuals(const trkpt_t * pt);
+    void setMouseFocusVisuals(const CTrackData::trkpt_t * pt);
+    void setMouseRangeFocusVisuals(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2);
+    void setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt);
 
 public:
     /**
@@ -809,10 +809,10 @@ private:
      */
     QString mouseFocusOwner;
 
-    const trkpt_t *mouseMoveFocus  = nullptr; //< the current track point selected by mouse movement
-    const trkpt_t *mouseClickFocus = nullptr; //< the last track point the user clicked on
-    const trkpt_t *mouseRange1     = nullptr; //< the first point of a range selection
-    const trkpt_t *mouseRange2     = nullptr; //< the second point of a range selection
+    const CTrackData::trkpt_t *mouseMoveFocus  = nullptr; //< the current track point selected by mouse movement
+    const CTrackData::trkpt_t *mouseClickFocus = nullptr; //< the last track point the user clicked on
+    const CTrackData::trkpt_t *mouseRange1     = nullptr; //< the first point of a range selection
+    const CTrackData::trkpt_t *mouseRange2     = nullptr; //< the second point of a range selection
     /**@}*/
 
     QPointer<CDetailsTrk> dlgDetails; //< the track's details dialog if any
@@ -867,13 +867,13 @@ public:
     virtual ~INotifyTrk() = default;
 
     virtual void updateData() = 0;
-    virtual void setMouseFocus(const trkpt_t * pt) = 0;
-    virtual void setMouseRangeFocus(const trkpt_t * pt1, const trkpt_t * pt2) = 0;
-    virtual void setMouseClickFocus(const trkpt_t * pt) = 0;
+    virtual void setMouseFocus(const CTrackData::trkpt_t * pt) = 0;
+    virtual void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) = 0;
+    virtual void setMouseClickFocus(const CTrackData::trkpt_t * pt) = 0;
 
     const CGisItemTrk::visual_e mask;
 };
 
-using fTrkPtGetVal = std::function<qreal(const trkpt_t&)>;
+using fTrkPtGetVal = std::function<qreal(const CTrackData::trkpt_t&)>;
 
 #endif //CGISITEMTRK_H

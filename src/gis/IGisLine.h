@@ -19,6 +19,7 @@
 #ifndef IGISLINE_H
 #define IGISLINE_H
 
+#include "units/IUnit.h"
 #include <QPointF>
 #include <QVector>
 

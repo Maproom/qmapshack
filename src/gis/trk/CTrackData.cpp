@@ -1,5 +1,5 @@
-#include "gis/trk/CTrackData.h"
 #include "gis/IGisLine.h"
+#include "gis/trk/CTrackData.h"
 
 CTrackData::CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd) : name(name)
 {
@@ -93,7 +93,9 @@ void CTrackData::getPolyline(SGisLine &l) const
             if(pt.hasFlag(trkpt_t::eSubpt))
             {
                 l.last().subpts << IGisLine::subpt_t(pt.radPoint());
-            } else {
+            }
+            else
+            {
                 l << IGisLine::point_t(pt.radPoint());
             }
         }

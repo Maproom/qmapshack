@@ -1,11 +1,13 @@
 #ifndef TRACKDATA_H
 #define TRACKDATA_H
 
-#include "gis/IGisItem.h"
 #include "GeoMath.h"
-#include <QtWidgets>
+#include "gis/IGisItem.h"
 #include <QPoint>
+#include <QtWidgets>
+#include <functional>
 #include <proj_api.h>
+
 
 struct SGisLine;
 
@@ -37,7 +39,7 @@ public:
         {
             eHidden     = 0x00000004      ///< mark point as deleted
             ,eSubpt     = 0x00000008
-                              // activity flags
+                          // activity flags
             ,eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
@@ -213,7 +215,7 @@ public:
         int seg = 0;
         int pt  = 0;
 
-    public:
+public:
         explicit iterator(T1 &trk, int seg, int pt) : trk(trk), seg(seg), pt(pt) {}
 
         iterator& operator++()
@@ -221,7 +223,8 @@ public:
             Q_ASSERT(seg < trk.segs.count());
             ++pt;
 
-            if(this->trk.segs[seg].pts.count() <= pt) {
+            if(this->trk.segs[seg].pts.count() <= pt)
+            {
                 pt = 0;
                 ++seg;
             }

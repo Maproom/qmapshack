@@ -34,7 +34,7 @@ pointDP::pointDP() : used(true), idx(NOIDX)
 }
 
 pointDP::pointDP(const qreal &x, const qreal &y, const qreal &z)
-	: point3D(x, y, z), used(true), idx(NOIDX)
+    : point3D(x, y, z), used(true), idx(NOIDX)
 {
 }
 

@@ -57,14 +57,14 @@
         <translation>Ski</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="270"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="321"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="267"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
         <source>Ascent:</source>
         <translation>Montée:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="272"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="332"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="269"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="329"/>
         <source>Descent:</source>
         <translation>Descente:</translation>
     </message>
@@ -74,37 +74,37 @@
         <translation>Aérien</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="268"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="310"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="265"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
         <source>Distance:</source>
         <translation>Distance:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="274"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="343"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="271"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="340"/>
         <source>Speed Moving:</source>
         <translation>Vitesse moyenne en déplacement:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="276"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="354"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="273"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="351"/>
         <source>Speed Total:</source>
         <translation>Vitesse moyenne totale:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="278"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="275"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="362"/>
         <source>Time Moving:</source>
         <translation>Temps en déplacement:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="280"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="376"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="277"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="373"/>
         <source>Time Total:</source>
         <translation>Temps total:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="417"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="414"/>
         <source>None</source>
         <translation>Aucune</translation>
     </message>
@@ -411,7 +411,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <name>CDetailsPrj</name>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="774"/>
         <source>none</source>
         <translation>aucun</translation>
     </message>
@@ -428,18 +428,18 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="470"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="594"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="712"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="591"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="709"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="739"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="445"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="471"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="743"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
         <source>Comment</source>
         <translation>Commentaire</translation>
     </message>
@@ -449,37 +449,37 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>&lt;h2&gt;Traces&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
         <source>From Start</source>
         <translation>Depuis le début</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
         <source>To Next</source>
         <translation>Jusqu&apos;au suivant</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
         <source>To End</source>
         <translation>Jusqu&apos;à la fin</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="616"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
         <source>distance: </source>
         <translation>Distance:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="626"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="623"/>
         <source>ascent: </source>
         <translation>montée:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="636"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="633"/>
         <source>descent: </source>
         <translation>descente:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="705"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Surfaces&lt;/h2&gt;</translation>
     </message>
@@ -499,34 +499,34 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Résumé de toutes les traces du projet</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="735"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="732"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="763"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="790"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="760"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="787"/>
         <source>Edit name...</source>
         <translation>Éditer le nom...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="763"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="790"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="760"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="787"/>
         <source>Enter new project name.</source>
         <translation>Entrez le nom du nouveau projet.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="772"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
         <source>Edit keywords...</source>
         <translation>Éditer les mots-clés...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="772"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
         <source>Enter keywords.</source>
         <translation>Saisir les mots-clés.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="918"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="915"/>
         <source>Print Diary</source>
         <translation>Imprimer le journal</translation>
     </message>
@@ -965,337 +965,337 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Impossible de lire les données.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="117"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="80"/>
         <source>_Clone</source>
         <translation>_Clone</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="289"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="251"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Points de la trace modifiés, les données antérieures sont perdues.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="401"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="305"/>
         <source>Length: %1 %2</source>
         <translation>Longueur: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="312"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation>, %1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="442"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="346"/>
         <source>Start: %1</source>
         <translation>Début: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="446"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="350"/>
         <source>Start: -</source>
         <translation>Début: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="452"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="356"/>
         <source>End: %1</source>
         <translation>Fin: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="456"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="360"/>
         <source>End: -</source>
         <translation>Fin: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="364"/>
         <source>Points: %1 (%2)</source>
         <translation>Points: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="464"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="368"/>
         <source>Invalid elevations!</source>
         <translation>Altitudes invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="469"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="373"/>
         <source>Invalid timestamps!</source>
         <translation>Temps invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="474"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="378"/>
         <source>Invalid positions!</source>
         <translation>Positions invalides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="483"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="387"/>
         <source>Activities: %1</source>
         <translation>Activités: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="499"/>
         <source>Index: visible %1, total %2</source>
         <translation>Index: visibles %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="510"/>
         <source>Ele.: %1 %2</source>
         <translation>Altitude: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> pente: %1%3(%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="617"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="518"/>
         <source> speed: %1%2</source>
         <translation> vitesse: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="645"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="546"/>
         <source>... and %1 tags not displayed</source>
         <translation>... and %1 tags non affichés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="657"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="558"/>
         <source>Distance: - (-)</source>
         <translation>Distance: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="658"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="559"/>
         <source>Moving: - (-)</source>
         <translation>En déplacement: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1362"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1375"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1435"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1479"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1644"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1214"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1466"/>
         <source>track</source>
         <translation>trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1580"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1418"/>
         <source>Hide point %1.</source>
         <translation>Cacher les points %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1584"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1422"/>
         <source>Hide points %1..%2.</source>
         <translation>Cacher les points %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation>  En mouvement: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="708"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="720"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
         <source>, %1%2</source>
         <translation>,%1,%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="730"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
         <source> Time: %1%2</source>
         <translation> Temps : %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="316"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="420"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="324"/>
         <source>Time: %1, Speed: %2 %3</source>
         <translation>Temps: %1, Vitesse: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="328"/>
         <source>Time: -, Speed: -</source>
         <translation>Time: -, Speed: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="432"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="336"/>
         <source>Moving: %1, Speed: %2 %3</source>
         <translation>En déplacement: %1, Vitesse: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="436"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="340"/>
         <source>Moving: -, Speed: -</source>
         <translation>En déplacement: -, Vitesse: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="655"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="556"/>
         <source>Ascent: - (-)</source>
         <translation>Montée: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="656"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="557"/>
         <source>Descent: - (-)</source>
         <translation>Descente: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="663"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="564"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Montée: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="669"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="570"/>
         <source> Descent: %1%2 (%3%)</source>
         <translation> Descente: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="675"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Distance: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="697"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
         <source>Ascent: -</source>
         <translation>Ascent: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="698"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Descent: -</source>
         <translation>Descente: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source>Ascent: %1%2</source>
         <translation>Montée: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="715"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
         <source> Descent: %1%2</source>
         <translation> Descente: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="725"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>Distance: %1%2</source>
         <translation>Distance: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1273"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Points supprimés de manière permanente %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1624"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1451"/>
         <source>Show points.</source>
         <translation>Afficher les points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2169"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1985"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2175"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1991"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2181"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1997"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2187"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
         <source>Changed links</source>
         <translation>Liens modifiés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2198"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2014"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Altitudes modifiées du point %1 à %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2038"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Acirvité modifiée pour &apos;%1&apos; pour la trace complète.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2277"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2077"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activité modifiée pur &apos;%1&apos; for la plage (%2..%3).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="109"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="96"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
         <translation>Cacher des points avec l&apos;algorithme Douglas Peuker (%1%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="142"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="122"/>
         <source>Hide points with invalid data.</source>
         <translation>Cacher les points aux données invalides</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="158"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="132"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Restaurer les points cachés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="192"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="162"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Supprimer définitivement tous les points cachés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="242"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="199"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Profile lissé avec un filtre médian de dimension %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="278"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="221"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Les altitudes ont été remplacées  par les données des fichiers MNT</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="299"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="239"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation>Les altitudes ont été remplacées  par des valeurs interpolées. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="322"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="255"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Décaler les altitudes de %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="341"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="268"/>
         <source>Changed start of track to %1.</source>
         <translation>Début de la trace modifié à %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="360"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="281"/>
         <source>Remove timestamps.</source>
         <translation>Horodatage supprimé.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="298"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Horodatage artificiel ajouté avec un décalage de %1 sec.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="415"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="324"/>
         <source>Changed speed to %1%2.</source>
         <translation>Vitesse modifiée à %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="434"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="343"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="457"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="361"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Extension %1 supprimée de tous les points</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="473"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="372"/>
         <source>Converted subpoints from routing to track points</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3920,17 +3920,17 @@ ligne %2, colonne %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="101"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="99"/>
         <source>Double click to edit elevation value</source>
         <translation>Double-clic pour éditer l&apos;altitude</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="127"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="135"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="138"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="143"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="125"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="133"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="136"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="141"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="159"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>

@@ -30,7 +30,7 @@ else (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
         ${CMAKE_INSTALL_PREFIX}/include
     PATH_SUFFIXES
         alglib
-
+        libalglib
   )
   mark_as_advanced(ALGLIB_INCLUDE_DIR)
 

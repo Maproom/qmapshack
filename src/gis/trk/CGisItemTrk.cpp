@@ -2426,7 +2426,7 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     }
     catch(const alglib::ap_error& e)
     {
-        qDebug() << e.msg.c_str();
+        qWarning() << "Error from alglib: " << e.msg.c_str();
     }
 
     interp.valid = interp.info > 0;
@@ -2436,19 +2436,17 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
 
 qreal CGisItemTrk::getElevationInterpolated(qreal d)
 {
-    qreal res = NOFLOAT;
-
     try
     {
-        res = alglib::spline1dcalc(interp.p, d);
+        return alglib::spline1dcalc(interp.p, d);
     }
     catch(const alglib::ap_error& e)
     {
-        qDebug() << e.msg.c_str();
+        qWarning() << "Error from alglib: " << e.msg.c_str();
         interp.valid = false;
     }
 
-    return res;
+    return NOFLOAT;
 }
 
 

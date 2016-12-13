@@ -403,7 +403,7 @@ Ivo Kronenberg</string>
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</string>
+        <string>© 2016 Oliver Eichler (oliver.eichler@gmx.de)</string>
        </property>
       </widget>
      </item>

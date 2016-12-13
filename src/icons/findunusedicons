@@ -1,0 +1,10 @@
+#!/bin/bash
+
+for i in *.svg; do
+	grep -r `echo $i | cut -d. -f1` --exclude-dir=".hg" --exclude-dir="icons" --exclude="resources.qrc" ../.. >/dev/null 2>&1
+
+	if [ $? -ne 0 ]; then
+		echo $i is unused
+	fi
+done
+

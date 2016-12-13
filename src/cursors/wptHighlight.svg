@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="Neues Dokument 1">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3815">
+      <stop
+         style="stop-color:#ff2a2a;stop-opacity:1;"
+         offset="0"
+         id="stop3817" />
+      <stop
+         style="stop-color:#ff2a2a;stop-opacity:0;"
+         offset="1"
+         id="stop3819" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient3765">
+      <stop
+         style="stop-color:#ffff00;stop-opacity:1;"
+         offset="0"
+         id="stop3767" />
+      <stop
+         style="stop-color:#ffff00;stop-opacity:0;"
+         offset="1"
+         id="stop3769" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3765"
+       id="radialGradient3771"
+       cx="30"
+       cy="34"
+       fx="30"
+       fy="34"
+       r="24"
+       gradientTransform="matrix(1,0,0,0.79166667,0,7.0833333)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3815"
+       id="radialGradient3821"
+       cx="30"
+       cy="29"
+       fx="30"
+       fy="29"
+       r="20.846153"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="8"
+     inkscape:cx="32.100954"
+     inkscape:cy="49.055774"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="996"
+     inkscape:window-x="-2"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.36218)">
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:url(#radialGradient3821);stroke-width:11.11794853;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3773"
+       sodipodi:cx="30"
+       sodipodi:cy="29"
+       sodipodi:rx="15"
+       sodipodi:ry="15"
+       d="m 45,29 a 15,15 0 1 1 -1.33e-4,-0.06325"
+       transform="matrix(0.97281118,0,0,0.97281118,0.87316707,989.09323)"
+       sodipodi:start="0"
+       sodipodi:end="6.2789689"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/oeichler/Code/cpp/QMapShack/src/cursors/wptHighlight.png"
+       inkscape:export-xdpi="137.22581"
+       inkscape:export-ydpi="137.22581" />
+    <path
+       sodipodi:type="arc"
+       style="fill:none;stroke:#ff2a2a;stroke-width:0.50444174;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="path3823"
+       sodipodi:cx="-5"
+       sodipodi:cy="31.5"
+       sodipodi:rx="5"
+       sodipodi:ry="2.5"
+       d="m 0,31.5 a 5,2.5 0 1 1 -4.4445158e-5,-0.01054"
+       transform="matrix(2.0535053,0,0,4.1070106,40.325029,887.93392)"
+       sodipodi:start="0"
+       sodipodi:end="6.2789689"
+       sodipodi:open="true"
+       inkscape:export-filename="/home/oeichler/Code/cpp/QMapShack/src/cursors/wptHighlight.png"
+       inkscape:export-xdpi="137.22581"
+       inkscape:export-ydpi="137.22581" />
+  </g>
+</svg>

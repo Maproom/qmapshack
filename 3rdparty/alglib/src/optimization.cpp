@@ -25144,7 +25144,7 @@ void qpbleicoptimize(convexquadraticmodel* a,
                         sstate->tmp1.ptr.p_double[i] = sstate->solver.g.ptr.p_double[i]*s->ptr.p_double[i];
                         v = v+ae_sqr(sstate->tmp0.ptr.p_double[i], _state);
                     }
-                    ae_assert(ae_fp_greater(v,(double)(0)), "QPBLEICOptimize: inernal errror (scaled direction is zero)", _state);
+                    ae_assert(ae_fp_greater(v,(double)(0)), "QPBLEICOptimize: internal error (scaled direction is zero)", _state);
                     v = 1/ae_sqrt(v, _state);
                     ae_v_muld(&sstate->tmp0.ptr.p_double[0], 1, ae_v_len(0,n-1), v);
                     v = ae_v_dotproduct(&sstate->tmp0.ptr.p_double[0], 1, &sstate->tmp1.ptr.p_double[0], 1, ae_v_len(0,n-1));

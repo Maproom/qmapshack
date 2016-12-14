@@ -19192,7 +19192,7 @@ REMARK:
 
 Assume, that exist one root only at [A;B], else 
 function may be work incorrectly.
-The function dont check value A0,B0!
+The function don't check value A0,B0!
 
  -- ALGLIB PROJECT --
      Copyright 26.09.2011 by Bochkanov Sergey
@@ -19953,7 +19953,7 @@ Result:
          
 REMARK:
 
-The function dont check value A0,B0 and A1,B1!
+The function don't check value A0,B0 and A1,B1!
 
  -- ALGLIB PROJECT --
      Copyright 26.09.2011 by Bochkanov Sergey

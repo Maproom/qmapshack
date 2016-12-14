@@ -7056,8 +7056,8 @@ void matrixvectormultiply(/* Real    */ ae_matrix* a,
         {
             return;
         }
-        ae_assert(j2-j1==ix2-ix1, "MatrixVectorMultiply: A and X dont match!", _state);
-        ae_assert(i2-i1==iy2-iy1, "MatrixVectorMultiply: A and Y dont match!", _state);
+        ae_assert(j2-j1==ix2-ix1, "MatrixVectorMultiply: A and X don't match!", _state);
+        ae_assert(i2-i1==iy2-iy1, "MatrixVectorMultiply: A and Y don't match!", _state);
         
         /*
          * beta*y
@@ -7093,8 +7093,8 @@ void matrixvectormultiply(/* Real    */ ae_matrix* a,
         {
             return;
         }
-        ae_assert(i2-i1==ix2-ix1, "MatrixVectorMultiply: A and X dont match!", _state);
-        ae_assert(j2-j1==iy2-iy1, "MatrixVectorMultiply: A and Y dont match!", _state);
+        ae_assert(i2-i1==ix2-ix1, "MatrixVectorMultiply: A and X don't match!", _state);
+        ae_assert(j2-j1==iy2-iy1, "MatrixVectorMultiply: A and Y don't match!", _state);
         
         /*
          * beta*y

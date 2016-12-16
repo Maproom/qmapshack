@@ -111,4 +111,8 @@ copy ..\*.ico
 rem section 2.5) 3rd party SW description
 copy ..\3rdparty.txt
 
+rem section 2.6) qt.conf
+copy ..\qt.conf
+
+
 pause

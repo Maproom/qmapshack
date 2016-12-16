@@ -22,7 +22,7 @@
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#if defined(Q_OS_LINUX) && defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
 #include <QtDBus>
 #endif
 
@@ -52,7 +52,7 @@ IDevice::~IDevice()
 
 void IDevice::mount(const QString& path)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#if defined(Q_OS_LINUX) && defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Mount");
     QVariantMap args;
     args.insert("options", "sync");
@@ -68,7 +68,7 @@ void IDevice::mount(const QString& path)
 
 void IDevice::umount(const QString &path)
 {
-#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
+#if defined(Q_OS_LINUX) && defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
     QDBusMessage message = QDBusMessage::createMethodCall("org.freedesktop.UDisks2",path,"org.freedesktop.UDisks2.Filesystem","Unmount");
     QVariantMap args;
     message << args;

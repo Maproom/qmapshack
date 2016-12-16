@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0.0)
 project(QMapShack)
 
 option(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files" OFF)
+option(USE_QT5DBus "Enable device detection via DBus" ON)
 
 # Needed to properly handle extract translations strings when using the Ninja
 # generator.

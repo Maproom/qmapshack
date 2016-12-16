@@ -20,7 +20,12 @@ find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(Qt5PrintSupport)
 if(UNIX AND NOT APPLE)
-find_package(Qt5DBus)
+	if (USE_QT5DBus)
+		find_package(Qt5DBus)
+		if(Qt5DBus_FOUND)
+			add_definitions(-DHAVE_DBUS)
+		endif(Qt5DBus_FOUND)
+	endif (USE_QT5DBus)
 endif(UNIX AND NOT APPLE)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
@@ -295,10 +300,12 @@ set( SRCS
 )
 
 if(UNIX AND NOT APPLE)
-set( SRCS
-    ${SRCS}
-    device/CDeviceWatcherLinux.cpp
-)
+	if(Qt5DBus_FOUND)
+		set( SRCS
+		${SRCS}
+		device/CDeviceWatcherLinux.cpp
+		)
+	endif(Qt5DBus_FOUND)
 endif(UNIX AND NOT APPLE)
 
 if (APPLE)
@@ -564,10 +571,12 @@ set( HDRS
 )
 
 if(UNIX AND NOT APPLE)
-set( HDRS
-    ${HDRS}
-    device/CDeviceWatcherLinux.h
-)
+	if(Qt5DBus_FOUND)
+		set( HDRS
+			${HDRS}
+			device/CDeviceWatcherLinux.h
+		)
+	endif(Qt5DBus_FOUND)
 endif(UNIX AND NOT APPLE)
 
 if(APPLE)
@@ -739,7 +748,9 @@ add_library(QMS ${LIBINP})
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 if(UNIX AND NOT APPLE)
-    set(DBUS_LIB Qt5::DBus)
+	if(Qt5DBus_FOUND)
+		set(DBUS_LIB Qt5::DBus)
+	endif(Qt5DBus_FOUND)
 else(UNIX AND NOT APPLE)
     set(DBUS_LIB)
 endif(UNIX AND NOT APPLE)

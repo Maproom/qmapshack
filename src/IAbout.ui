@@ -64,6 +64,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="labelNODBUS">
+         <property name="text">
+          <string>XXXXX</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">

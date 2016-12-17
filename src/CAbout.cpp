@@ -41,6 +41,11 @@ CAbout::CAbout(QWidget *parent)
     {
         labelRoutinoVersion->setText(tr("%1 (API V%2)").arg(Routino_Version).arg(Routino_APIVersion));
     }
+#if defined (HAVE_DBUS)
+    labelNODBUS->setText("");	
+#else
+    labelNODBUS->setText("(no DBUS: device detection and handling disabled)");
+#endif
 }
 
 CAbout::~CAbout()

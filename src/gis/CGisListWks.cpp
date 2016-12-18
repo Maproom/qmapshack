@@ -208,7 +208,7 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-#if defined(Q_OS_LINUX) && defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
+#if defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
     deviceWatcher = new CDeviceWatcherLinux(this);
     connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
 #endif

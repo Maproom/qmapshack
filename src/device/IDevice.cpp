@@ -22,7 +22,7 @@
 #include "gis/prj/IGisProject.h"
 #include "helpers/CSelectCopyAction.h"
 
-#if defined(Q_OS_LINUX) && defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
+#if defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
 #include <QtDBus>
 #endif
 

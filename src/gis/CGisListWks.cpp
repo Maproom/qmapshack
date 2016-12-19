@@ -208,18 +208,20 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-#if defined(HAVE_DBUS) || defined(Q_OS_FREEBSD)
-    deviceWatcher = new CDeviceWatcherLinux(this);
-    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
-#endif
 #ifdef Q_OS_MAC
     deviceWatcher = new CDeviceWatcherMac(this);
     connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
-#endif
-#ifdef Q_OS_WIN
+#else
+    #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
     connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
-#endif
+    #else
+        #ifdef HAVE_DBUS
+    deviceWatcher = new CDeviceWatcherLinux(this);
+    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
+        #endif // HAVE_DBUS
+    #endif // Q_OS_WIN
+#endif // Q_OS_MAC
 }
 
 CGisListWks::~CGisListWks()

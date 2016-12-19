@@ -44,12 +44,11 @@ CAbout::CAbout(QWidget *parent)
 
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
     #if defined (HAVE_DBUS)
-        labelNODBUS->setText("");	
+    labelNoDBus->setText("");
     #else
-        labelNODBUS->setText("(no DBUS: device detection and handling disabled)");
+    labelNoDBus->setText(tr("(no DBUS: device detection and handling disabled)"));
     #endif
 #endif
-
 }
 
 CAbout::~CAbout()

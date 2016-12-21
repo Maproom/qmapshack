@@ -55,14 +55,14 @@ private:
     enum state_e
     {
         eStateIdle
-        ,eStateMoveMap
         ,eStateSelectRange
         ,eStateRangeSelected
     };
 
-    state_e state = eStateIdle;
-
-    QPointF anchor = NOPOINTF;
+    bool moveMap    = false;
+    bool mapMoved   = false;
+    state_e state   = eStateIdle;
+    QPointF anchor  = NOPOINTF;
 
     QPoint lastPoint;
 

@@ -58,7 +58,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
     if(trk)
     {
         trk->drawRange(p);
-        if(anchor != NOPOINTF)
+        if(!mapMoved && (anchor != NOPOINTF))
         {
             p.setPen(Qt::darkBlue);
             p.setBrush(QColor(255,255,255,200));
@@ -127,7 +127,6 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
                 anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
                 canvas->update();
             }
-            panCanvas(point);
             break;
         }
 

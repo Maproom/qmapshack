@@ -36,6 +36,7 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
     key     = wpt.getKey();
     icon    = getWptIconByName(wpt.getIconName(), focus);
     origPos = wpt.getPosition() * DEG_TO_RAD;
+    newPos  = wpt.getPosition() * DEG_TO_RAD;
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()
@@ -84,13 +85,6 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
     p.drawPixmap(p2 - focus, icon);
 }
 
-void CMouseMoveWpt::slotPanCanvas()
-{
-    IMouse::slotPanCanvas();
-
-    newPos = point;
-    gis->convertPx2Rad(newPos);
-}
 
 void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
 {
@@ -101,6 +95,38 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
         canvas->update();
     }
     else if(e->button() == Qt::LeftButton)
+    {
+        moveMap = true;
+    }
+}
+
+void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
+{
+    point  = e->pos();
+
+    if(moveMap)
+    {
+        if(point != lastPoint)
+        {
+            QPoint delta = point - lastPoint;
+            canvas->moveMap(delta);
+            mapMoved = true;
+        }
+    }
+    else
+    {
+        newPos = point;
+        gis->convertPx2Rad(newPos);
+    }
+
+    lastPoint = point;
+    canvas->update();
+}
+
+void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
+{
+    point = e->pos();
+    if(!mapMoved && (e->button() == Qt::LeftButton))
     {
         QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -114,20 +140,9 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
         canvas->resetMouse();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
-}
 
-void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
-{
-    point  = e->pos();
-    newPos = point;
-    gis->convertPx2Rad(newPos);
-
-    panCanvas(point);
-}
-
-void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
-{
-    point = e->pos();
+    moveMap     = false;
+    mapMoved    = false;
 }
 
 void CMouseMoveWpt::wheelEvent(QWheelEvent*)

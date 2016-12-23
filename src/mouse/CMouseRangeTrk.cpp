@@ -58,7 +58,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
     if(trk)
     {
         trk->drawRange(p);
-        if(!mapMoved && (anchor != NOPOINTF))
+        if(!mapDidMove && (anchor != NOPOINTF))
         {
             p.setPen(Qt::darkBlue);
             p.setBrush(QColor(255,255,255,200));
@@ -86,7 +86,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::LeftButton)
     {        
-        moveMap = true;
+        mapMove = true;
     }
 }
 
@@ -94,13 +94,13 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
 {
     point = e->pos();
 
-    if(moveMap)
+    if(mapMove)
     {
         if(point != lastPoint)
         {
             QPoint delta = point - lastPoint;
             canvas->moveMap(delta);
-            mapMoved = true;
+            mapDidMove = true;
         }
     }
     else
@@ -141,7 +141,7 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        if(!mapMoved)
+        if(!mapDidMove)
         {
             switch(state)
             {
@@ -184,8 +184,8 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
             }
             }
         }
-        mapMoved = false;
-        moveMap  = false;
+        mapDidMove = false;
+        mapMove  = false;
     }
 }
 

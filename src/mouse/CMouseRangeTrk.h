@@ -59,8 +59,8 @@ private:
         ,eStateRangeSelected
     };
 
-    bool moveMap    = false;
-    bool mapMoved   = false;
+    bool mapMove    = false;
+    bool mapDidMove = false;
     state_e state   = eStateIdle;
     QPointF anchor  = NOPOINTF;
 

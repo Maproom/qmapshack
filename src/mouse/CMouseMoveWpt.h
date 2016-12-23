@@ -47,8 +47,8 @@ private:
     QPointF focus;
     QPixmap icon;
 
-    bool moveMap    = false;
-    bool mapMoved   = false;
+    bool mapMove    = false;
+    bool mapDidMove   = false;
 
     QPoint lastPoint;
 

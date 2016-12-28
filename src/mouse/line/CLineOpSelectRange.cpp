@@ -229,8 +229,10 @@ void CLineOpSelectRange::slotDelete()
     qint32 idx = qMin(idxFocus, idx2nd);
     qint32 N   = qAbs(idxFocus - idx2nd) - 1;
 
+    points[idx].subpts.clear();
     points.remove(idx + 1, N);
     parentHandler->storeToHistory(points);
+
 
     resetState();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

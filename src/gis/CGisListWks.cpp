@@ -45,6 +45,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -890,6 +891,14 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeFit:
         {
             project = new CFitProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeTcx:
+        {
+            project = new CTcxProject(name, this);
             project->setCheckState(CGisListDB::eColumnCheckbox, visible);
             *project << stream;
             break;

@@ -32,6 +32,7 @@
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -124,6 +125,10 @@ void CGisWidget::loadGisProject(const QString& filename)
     else if(suffix == "fit")
     {
         item = new CFitProject(filename, treeWks);
+    }
+    else if(suffix == "tcx")
+    {
+        item = new CTcxProject(filename, treeWks);
     }
 
 

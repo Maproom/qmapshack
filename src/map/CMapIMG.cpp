@@ -1246,7 +1246,16 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
         p.restore();
         return;
     }
-    loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+
+    try
+    {
+        loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+    }
+    catch(...)
+    {
+        p.restore();
+        return;
+    }
 
     if(map->needsRedraw())
     {

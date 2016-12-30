@@ -41,9 +41,11 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     connect(checkPolygons,       &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolygons);
     connect(checkPolylines,      &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPolylines);
     connect(checkPoints,         &QCheckBox::toggled,        mapfile, &IMap::slotSetShowPOIs);
+    connect(spinAdjustDetails,   static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), mapfile, &IMap::slotSetAdjustDetailLevel);
     connect(checkPolygons,       &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
     connect(checkPolylines,      &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
     connect(checkPoints,         &QCheckBox::clicked,        map,     &CMapDraw::emitSigCanvasUpdate);
+    connect(spinAdjustDetails,   static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), map, &CMapDraw::emitSigCanvasUpdate);
 
     connect(spinCacheSize,       static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
     connect(spinCacheExpiration, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheExpiration);

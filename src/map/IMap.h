@@ -129,6 +129,10 @@ public:
         return cacheExpiration;
     }
 
+    qint32 getAdjustDetailLevel() const
+    {
+        return adjustDetailLevel;
+    }
 
     /**
        @brief Find a matching street polyline
@@ -174,6 +178,10 @@ public slots:
         configureCache();
     }
 
+    void slotSetAdjustDetailLevel(qint32 level)
+    {
+        adjustDetailLevel = level;
+    }
 
 protected:
     void convertRad2M(QPointF &p) const;
@@ -218,6 +226,7 @@ protected:
     bool showPolygons  = true; //< vector maps only: hide/show polygons
     bool showPolylines = true; //< vector maps only: hide/show polylines
     bool showPOIs      = true; //< vector maps only: hide/show point of interest
+    qint32 adjustDetailLevel = 0; //< vector maps only: alter threshold to show deatils.
 
     QString cachePath;            //< streaming map only: path to cached tiles
     qint32 cacheSizeMB     = 100; //< streaming map only: maximum size of all tiles in cache [MByte]

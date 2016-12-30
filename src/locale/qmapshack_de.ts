@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -12,6 +12,11 @@
         <location filename="../CAbout.cpp" line="42"/>
         <source>%1 (API V%2)</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../CAbout.cpp" line="49"/>
+        <source>(no DBUS: device detection and handling disabled)</source>
+        <translation>(kein DBUS: Keine Geräteerkennung und - verwaltung)</translation>
     </message>
 </context>
 <context>
@@ -1622,24 +1627,24 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Route erstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="622"/>
+        <location filename="../gis/CGisListWks.cpp" line="624"/>
         <source>Drop items...</source>
         <translation>Elemente verwerfen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="647"/>
-        <location filename="../gis/CGisListWks.cpp" line="1631"/>
-        <location filename="../gis/CGisListWks.cpp" line="1669"/>
+        <location filename="../gis/CGisListWks.cpp" line="649"/>
+        <location filename="../gis/CGisListWks.cpp" line="1633"/>
+        <location filename="../gis/CGisListWks.cpp" line="1671"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1178"/>
+        <location filename="../gis/CGisListWks.cpp" line="1180"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1178"/>
+        <location filename="../gis/CGisListWks.cpp" line="1180"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -1710,22 +1715,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Mit der Datenbank synchronisieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="773"/>
+        <location filename="../gis/CGisListWks.cpp" line="775"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="819"/>
+        <location filename="../gis/CGisListWks.cpp" line="821"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1155"/>
+        <location filename="../gis/CGisListWks.cpp" line="1157"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1155"/>
+        <location filename="../gis/CGisListWks.cpp" line="1157"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -2606,21 +2611,21 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
         <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
+        <location filename="../map/CMapIMG.cpp" line="2299"/>
         <location filename="../map/CMapIMG.cpp" line="2305"/>
-        <location filename="../map/CMapIMG.cpp" line="2311"/>
-        <location filename="../map/CMapIMG.cpp" line="2315"/>
+        <location filename="../map/CMapIMG.cpp" line="2309"/>
         <source>Point of Interest</source>
         <translation>Ort von Interesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2401"/>
+        <location filename="../map/CMapIMG.cpp" line="2395"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2443"/>
-        <location filename="../map/CMapIMG.cpp" line="2451"/>
-        <location filename="../map/CMapIMG.cpp" line="2458"/>
+        <location filename="../map/CMapIMG.cpp" line="2437"/>
+        <location filename="../map/CMapIMG.cpp" line="2445"/>
+        <location filename="../map/CMapIMG.cpp" line="2452"/>
         <source>Area</source>
         <translation>Gebiet</translation>
     </message>
@@ -2982,7 +2987,7 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseRangeTrk</name>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="227"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="224"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Punktebereich auswählen&lt;/b&gt;&lt;br/&gt;Mit der linken Maustaste wählen Sie den ersten Punkt aus. Mit einem erneuten Drücken der linken Maustaste wählen Sie den zweiten Punkt aus und dann wählen Sie eine der Optionen. Zum Abbrechen nutzen Sie die rechte Maustaste.&lt;br/&gt;</translation>
     </message>
@@ -4014,138 +4019,138 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../IAbout.ui" line="62"/>
-        <location filename="../IAbout.ui" line="106"/>
-        <location filename="../IAbout.ui" line="120"/>
-        <location filename="../IAbout.ui" line="134"/>
-        <location filename="../IAbout.ui" line="148"/>
+        <location filename="../IAbout.ui" line="113"/>
+        <location filename="../IAbout.ui" line="127"/>
+        <location filename="../IAbout.ui" line="141"/>
+        <location filename="../IAbout.ui" line="155"/>
         <source>TextLabel</source>
         <translation>Bezeichnung</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="99"/>
+        <location filename="../IAbout.ui" line="106"/>
         <source>Qt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="113"/>
+        <location filename="../IAbout.ui" line="120"/>
         <source>GDAL</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="127"/>
+        <location filename="../IAbout.ui" line="134"/>
         <source>Proj4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="141"/>
+        <location filename="../IAbout.ui" line="148"/>
         <source>Routino</source>
         <translation>Routino</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="172"/>
+        <location filename="../IAbout.ui" line="179"/>
         <source>Czech:</source>
         <translation>Tschechisch:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="195"/>
+        <location filename="../IAbout.ui" line="202"/>
         <source>German:</source>
         <translation>Deutsch:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="218"/>
+        <location filename="../IAbout.ui" line="225"/>
         <source>Dutch:</source>
         <translation>Niederländisch:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="241"/>
+        <location filename="../IAbout.ui" line="248"/>
         <source>French:</source>
         <translation>Französisch:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="251"/>
+        <location filename="../IAbout.ui" line="258"/>
         <source>Rainer Unseld </source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="381"/>
+        <location filename="../IAbout.ui" line="388"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="182"/>
+        <location filename="../IAbout.ui" line="413"/>
+        <source>© 2016 Oliver Eichler (oliver.eichler@gmx.de)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="189"/>
         <source>Pavel Fric</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="281"/>
+        <location filename="../IAbout.ui" line="288"/>
         <source>&lt;b&gt;Translation:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Übersetzung:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="228"/>
+        <location filename="../IAbout.ui" line="235"/>
         <source>Harrie Klomp</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="271"/>
+        <location filename="../IAbout.ui" line="278"/>
         <source>Spanish:</source>
         <translation>Spanisch:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="305"/>
+        <location filename="../IAbout.ui" line="312"/>
         <source>Win64:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="345"/>
+        <location filename="../IAbout.ui" line="352"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Ausführbare Dateien:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="321"/>
+        <location filename="../IAbout.ui" line="328"/>
         <source>OS X:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="374"/>
+        <location filename="../IAbout.ui" line="381"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Mitwirkende:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="205"/>
+        <location filename="../IAbout.ui" line="212"/>
         <source>Josef Latt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="258"/>
+        <location filename="../IAbout.ui" line="265"/>
         <source>Jose Luis Domingo Lopez</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="338"/>
+        <location filename="../IAbout.ui" line="345"/>
         <source>Ivo Kronenberg</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="331"/>
+        <location filename="../IAbout.ui" line="338"/>
         <source>Helmut Schmidt</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="354"/>
+        <location filename="../IAbout.ui" line="361"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="399"/>
+        <location filename="../IAbout.ui" line="406"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
-    </message>
-    <message>
-        <location filename="../IAbout.ui" line="406"/>
-        <source>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -6321,37 +6326,42 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Klicken um die aktuelle Skalierung als maximale Skalierung zu benutzen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="137"/>
+        <location filename="../map/IMapPropSetup.ui" line="139"/>
         <source>Areas</source>
         <translation>Gebiete</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="144"/>
+        <location filename="../map/IMapPropSetup.ui" line="146"/>
         <source>Lines</source>
         <translation>Linien</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="151"/>
+        <location filename="../map/IMapPropSetup.ui" line="153"/>
         <source>Points</source>
         <translation>Punkte</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="233"/>
+        <location filename="../map/IMapPropSetup.ui" line="170"/>
+        <source>Details</source>
+        <translation>Details</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapPropSetup.ui" line="265"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="240"/>
+        <location filename="../map/IMapPropSetup.ui" line="272"/>
         <source>Cache Path</source>
         <translation>Speicherpfad</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="196"/>
+        <location filename="../map/IMapPropSetup.ui" line="228"/>
         <source>Cache Size (MB)</source>
         <translation>Cache (MB)</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="216"/>
+        <location filename="../map/IMapPropSetup.ui" line="248"/>
         <source>Expiration (Days)</source>
         <translation>Verfallzeit (Tage)</translation>
     </message>

@@ -91,6 +91,7 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
     checkPolygons->setChecked(mapfile->getShowPolygons());
     checkPolylines->setChecked(mapfile->getShowPolylines());
     checkPoints->setChecked(mapfile->getShowPOIs());
+    spinAdjustDetails->setValue(mapfile->getAdjustDetailLevel());
 
     // streaming map properties
     QString lbl = mapfile->getCachePath();

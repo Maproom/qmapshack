@@ -51,7 +51,6 @@ private:
     bool mapDidMove   = false;
 
     QPoint lastPoint;
-
 };
 
 #endif //CMOUSEMOVEWPT_H

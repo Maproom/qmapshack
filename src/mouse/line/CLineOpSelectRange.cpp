@@ -158,15 +158,8 @@ void CLineOpSelectRange::drawFg(QPainter& p)
         break;
     }
 
-    case eState2nd:
-    {
-        if(!scrOptRangeLine.isNull())
-        {
-            scrOptRangeLine->draw(p);
-        }
-    }
-
     case eState1st:
+    case eState2nd:
     {
         if(idx2nd != NOIDX)
         {
@@ -206,6 +199,11 @@ void CLineOpSelectRange::drawFg(QPainter& p)
                     p.drawEllipse(subpt.pixel, 2, 2);
                 }
             }
+        }
+
+        if(!scrOptRangeLine.isNull() && eState2nd == state)
+        {
+            scrOptRangeLine->draw(p);
         }
         break;
     }

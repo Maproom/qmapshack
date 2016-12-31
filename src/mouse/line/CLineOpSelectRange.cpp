@@ -192,20 +192,19 @@ void CLineOpSelectRange::drawFg(QPainter& p)
             p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
             p.drawPolyline(seg);
 
-            QRectF r(0,0,7,7);
-            p.setPen(QPen(Qt::darkGreen,2));
-            p.setBrush(Qt::darkGreen);
-            for(const QPointF &pt : seg)
-            {
-                r.moveCenter(pt);
-                p.drawRect(r);
-            }
-            p.setPen(Qt::NoPen);
+            p.setPen(QPen(Qt::NoPen));
             p.setBrush(Qt::black);
-            for(const QPointF &pt : seg)
+
+            QRectF r(0, 0, 8, 8);
+            for(int i = idx1; i <= idx2; i++)
             {
-                r.moveCenter(pt);
+                r.moveCenter(points[i].pixel);
                 p.drawRect(r);
+
+                for(const IGisLine::subpt_t& subpt : points[i].subpts)
+                {
+                    p.drawEllipse(subpt.pixel, 2, 2);
+                }
             }
         }
         break;

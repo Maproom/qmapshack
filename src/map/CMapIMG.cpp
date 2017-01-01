@@ -1251,8 +1251,9 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     {
         loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
     }
-    catch(...)
+    catch(std::bad_alloc)
     {
+        qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
         p.restore();
         return;
     }

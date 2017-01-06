@@ -105,7 +105,6 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
-
         switch(state)
         {
         case eStateIdle:

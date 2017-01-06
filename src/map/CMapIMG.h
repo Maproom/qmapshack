@@ -159,7 +159,7 @@ private:
     };
 
 
-    static quint8 scale2bits(const QPointF &scale);
+    quint8 scale2bits(const QPointF &scale);
     void setupTyp();
     void readBasics();
     void readSubfileBasics(subfile_desc_t& subfile, CFileExt &file);

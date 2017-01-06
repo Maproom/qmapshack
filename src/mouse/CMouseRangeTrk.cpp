@@ -85,7 +85,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         canvas->update();
     }
     else if(e->button() == Qt::LeftButton)
-    {        
+    {
         mapMove = true;
     }
 }

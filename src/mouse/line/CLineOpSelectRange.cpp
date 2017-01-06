@@ -31,6 +31,7 @@ CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas 
 
 CLineOpSelectRange::~CLineOpSelectRange()
 {
+    delete scrOptRangeLine;
 }
 
 void CLineOpSelectRange::mouseReleaseEventEx(QMouseEvent * e)

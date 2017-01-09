@@ -94,9 +94,23 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
+    // show menu action for German help if system language is German.
+    QString locale = QLocale::system().name();
+    if(locale.size() >= 2)
+    {
+        locale = locale.left(2);
+        actionHelpDE->setVisible(locale == "de");
+    }
+    else
+    {
+        actionHelpDE->setVisible(false);
+    }
+
+    qDebug() << locale;
 
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
     connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
+    connect(actionHelpDE,                &QAction::triggered,            this,      &CMainWindow::slotHelpDE);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
     connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
@@ -488,6 +502,11 @@ void CMainWindow::slotAbout()
 void CMainWindow::slotHelp()
 {
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocMain"));
+}
+
+void CMainWindow::slotHelpDE()
+{
+    QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartGerman"));
 }
 
 

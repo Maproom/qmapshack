@@ -199,6 +199,7 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="33"/>
         <source>All your data grouped by folders.</source>
+        <translatorcomment></translatorcomment>
         <translation>Все данные сгруппированные по папкам.</translation>
     </message>
     <message>
@@ -293,6 +294,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="232"/>
         <source>Take remote</source>
+        <translatorcomment></translatorcomment>
         <translation>Взять удаленная версия</translation>
     </message>
     <message>
@@ -385,6 +387,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../dem/CDemVRT.cpp" line="90"/>
         <source>No georeference information found.</source>
+        <translatorcomment></translatorcomment>
         <translation>Отсутствует геогравическая справочная информация.</translation>
     </message>
 </context>
@@ -399,6 +402,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="61"/>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="131"/>
         <source>???</source>
+        <translatorcomment></translatorcomment>
         <translation>???</translation>
     </message>
     <message>
@@ -438,6 +442,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="395"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
+        <translatorcomment></translatorcomment>
         <translation>&lt;b&gt;Резюме по всем трекам в проекте&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
@@ -794,6 +799,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="38"/>
         <source>wide</source>
+        <translatorcomment></translatorcomment>
         <translation>Широко</translation>
     </message>
     <message>
@@ -1022,6 +1028,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="360"/>
         <source>End: -</source>
+        <translatorcomment></translatorcomment>
         <translation>Конец: -</translation>
     </message>
     <message>
@@ -1052,6 +1059,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
         <source>Index: %1</source>
+        <translatorcomment></translatorcomment>
         <translation>Индекс: %1</translation>
     </message>
     <message>
@@ -1067,6 +1075,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source> slope: %1%3 (%2%)</source>
+        <translatorcomment></translatorcomment>
         <translation> наклон: %1%3 (%2%)</translation>
     </message>
     <message>
@@ -1438,6 +1447,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Export to GPX...</source>
+        <translatorcomment></translatorcomment>
         <translation>Экспортировать до GPX..</translation>
     </message>
     <message>
@@ -1454,6 +1464,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="133"/>
         <source>Sync. with Database</source>
+        <translatorcomment></translatorcomment>
         <translation>Синхронизировать с базой данных</translation>
     </message>
     <message>
@@ -1568,7 +1579,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="114"/>
         <source>Save as GPX 1.1 w/o ext...</source>
-        <translation>Захранить как GPX 1.1 без расширений...</translation>
+        <translation>Сохранить как GPX 1.1 без расширений...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="117"/>
@@ -1605,7 +1616,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/CGisListWks.cpp" line="100"/>
         <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Copy to...</source>
-        <translation>Скопировать в...</translation>
+        <translation>Копировать в...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="113"/>
@@ -1707,7 +1718,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="775"/>
         <source>Saving workspace. Please wait.</source>
-        <translation>Захранить рабочую область. Подождите.</translation>
+        <translation>Сохранить рабочую область. Подождите.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="821"/>
@@ -1797,7 +1808,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="265"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation>Файл существует и не был создан QMapShack. Если нажать &apos;да&apos; все данные в этом файле будут потеряны. Даже если этот файл содержит данные GPX и был загружен QMapShack, QMapShack может не быть в состоянии загружать и захранить все элементы этого файла. Эти элементы будут потеряны. Рекомендуется использовать другой файл. &lt;b&gt; Вы действительно хотите, чтобы перезаписать файл?&lt;/b&gt;</translation>
+        <translation>Файл существует и не был создан QMapShack. Если нажать &apos;да&apos; все данные в этом файле будут потеряны. Даже если этот файл содержит данные GPX и был загружен QMapShack, QMapShack может не быть в состоянии загружать и сохранить все элементы этого файла. Эти элементы будут потеряны. Рекомендуется использовать другой файл. &lt;b&gt; Вы действительно хотите, чтобы перезаписать файл?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="382"/>
@@ -2063,6 +2074,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="166"/>
         <source>Catalan</source>
+        <translatorcomment></translatorcomment>
         <translation>Каталонский</translation>
     </message>
     <message>
@@ -2646,7 +2658,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapList.cpp" line="227"/>
         <source>Where do you want to store maps?</source>
-        <translation>Где хотите ли вы захранить карты?</translation>
+        <translation>Где хотите ли вы сохранить карты?</translation>
     </message>
 </context>
 <context>
@@ -2754,12 +2766,13 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="115"/>
         <source>Layer %1</source>
+        <translatorcomment></translatorcomment>
         <translation>Слой %1</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="130"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Эта карта требует поддержки OpenSSL. Однако из-за юридических ограничений в некоторых странах OpenSSL не упакован с QMapShack. Вы можете посмотреть на &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt; OpenSSL домашнюю страницу &lt;/a&gt; для бинарных файлов. Вы должны скопировать libeay32.dll и ssleay32.dll в папку программы QMapShack.</translation>
+        <translation>Эта карта требует поддержки OpenSSL. Однако из-за юридических ограничений в некоторых странах OpenSSL не упакован с QMapShack. Вы можете посмотреть на &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt; OpenSSL домашнюю страницу &lt;/a&gt; для бинарных файлов. Вы должны копировать libeay32.dll и ssleay32.dll в папку программы QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="299"/>
@@ -2858,7 +2871,7 @@ Unknown structure.</source>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="151"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Эта карта требует поддержки OpenSSL. Однако из-за юридических ограничений в некоторых странах OpenSSL не упакован с QMapShack. Вы можете посмотреть на &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt; OpenSSL домашнюю страницу &lt;/a&gt; для бинарных файлов. Вы должны скопировать libeay32.dll и ssleay32.dll в папку программы QMapShack.</translation>
+        <translation>Эта карта требует поддержки OpenSSL. Однако из-за юридических ограничений в некоторых странах OpenSSL не упакован с QMapShack. Вы можете посмотреть на &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt; OpenSSL домашнюю страницу &lt;/a&gt; для бинарных файлов. Вы должны копировать libeay32.dll и ssleay32.dll в папку программы QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/CMapWMTS.cpp" line="217"/>
@@ -3069,7 +3082,7 @@ Unknown structure.</source>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="74"/>
         <source>Save Map as Image...</source>
-        <translation>Захранить карту как изображение...</translation>
+        <translation>Сохранить карту как изображение...</translation>
     </message>
     <message>
         <location filename="../print/CPrintDialog.cpp" line="94"/>
@@ -3862,6 +3875,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
         <source>Setup database...</source>
+        <translatorcomment></translatorcomment>
         <translation>Настройка базы данных</translation>
     </message>
     <message>
@@ -3959,21 +3973,21 @@ line %2, column %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Не удалось открыть %1.</translation>
     </message>
@@ -4439,6 +4453,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="118"/>
         <source>Hillshading</source>
+        <translatorcomment></translatorcomment>
         <translation>Затенения холмов</translation>
     </message>
     <message>
@@ -4563,6 +4578,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
         <source>Update spoilers</source>
+        <translatorcomment></translatorcomment>
         <translation>Обновить спойлер</translation>
     </message>
     <message>
@@ -4593,6 +4609,10 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
         <translation>Диалог</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Область была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
@@ -4709,6 +4729,10 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Сведение</translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Маршрут  импортирован в QMapShack и был изменена. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Маршрут  импортирован в QMapShack и был изменена. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.</translation>
@@ -4748,6 +4772,10 @@ If you want to keep just one half you can simply remove the points, or check thi
 -</source>
         <translation>-
 -</translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Трек был импортирован в QMapShack и был изменен. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="287"/>
@@ -4898,6 +4926,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../gis/trk/IDetailsTrk.ui" line="875"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="961"/>
         <source>max.</source>
+        <translatorcomment></translatorcomment>
         <translation>Макс.</translation>
     </message>
     <message>
@@ -5029,6 +5058,10 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Путевая точка была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.</translation>
     </message>
     <message>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Путевая точка была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю  изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="284"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Переключить режим &apos;только чтение&apos;. Вы должны открыть замок для изменения элемента.</translation>
@@ -5067,6 +5100,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../device/IDevice.cpp" line="292"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
+        <translatorcomment></translatorcomment>
         <translation>Существует другой проект с тем же именем. Если нажать кнопку ОК, то он будет удален и заменен.</translation>
     </message>
 </context>
@@ -5380,6 +5414,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
         <source>Form</source>
+        <translatorcomment></translatorcomment>
         <translation>Форма</translation>
     </message>
     <message>
@@ -6220,11 +6255,13 @@ Filename: %1</source>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
         <source>Form</source>
+        <translatorcomment></translatorcomment>
         <translation>форма</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
+        <translatorcomment></translatorcomment>
         <translation>Чтобы добавить карты использовать &lt;b&gt;Файл-&gt;Настройка пути карт&lt;/b&gt;. или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
@@ -6457,6 +6494,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="504"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
+        <translatorcomment></translatorcomment>
         <translation>&lt;b&gt;%1. Метрика&lt;/b&gt;</translation>
     </message>
     <message>
@@ -6875,6 +6913,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
         <source>Save to original</source>
+        <translatorcomment></translatorcomment>
         <translation>Сохранить в оригинал</translation>
     </message>
     <message>
@@ -7044,6 +7083,7 @@ or
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
         <source>Save selected area as image.</source>
+        <translatorcomment></translatorcomment>
         <translation>Сохранить выбранную областб как изображение.</translation>
     </message>
     <message>
@@ -7265,6 +7305,7 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
+        <translatorcomment></translatorcomment>
         <translation>Показать подробности и изменить свойства трека.</translation>
     </message>
     <message>
@@ -7634,6 +7675,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
+        <translatorcomment></translatorcomment>
         <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание!&lt;/span&gt;Рекомендуется оставить поле пароля пустым. QMapShack сохранит её как обычный текст. Если нет пароля то вас попросят для него при каждого запуске&lt;/p&gt;</translation>
     </message>
     <message>
@@ -7675,6 +7717,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
         <source>MySQL</source>
+        <translatorcomment></translatorcomment>
         <translation>MySQL</translation>
     </message>
     <message>
@@ -7968,6 +8011,7 @@ or
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="450"/>
         <source>Underline</source>
+        <translatorcomment></translatorcomment>
         <translation>Подчеркнуть</translation>
     </message>
     <message>

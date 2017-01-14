@@ -108,6 +108,7 @@ protected:
     qint32 idxFocus = NOIDX;
 
     QPoint lastPos;
+    QPoint firstPos;
 
     QRect rectPoint {0,0,9,9};
     const QPen penBgPoint {Qt::white, 4};

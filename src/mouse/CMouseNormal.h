@@ -69,6 +69,8 @@ protected:
     bool mapDidMove = false;
     /// always the last seen mouse cursor position
     QPoint lastPos;
+    /// the last mouse press event position
+    QPoint firstPos;
 
     enum item_selection_states_e
     {

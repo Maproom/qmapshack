@@ -71,6 +71,7 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos     = e->pos();
+        firstPos    = lastPos;
         // start to block map moving when a previous click
         // has triggered a selection of any kind
         mapMove     = (stateItemSel < eStateNoMapMovePossible);
@@ -95,7 +96,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 
     if(mapMove)
     {
-        if(point != lastPos)
+        if((point - firstPos).manhattanLength() >= 4)
         {
             QPoint delta = point - lastPos;
             canvas->moveMap(delta);

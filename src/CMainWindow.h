@@ -98,7 +98,7 @@ protected:
 private slots:
     void slotAbout();
     void slotHelp();
-    void slotHelpDE();
+    void slotQuickstart();
     void slotAddCanvas();
     void slotCloneCanvas();
     void slotTabCloseRequest(int i);

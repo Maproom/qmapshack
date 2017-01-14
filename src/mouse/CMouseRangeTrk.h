@@ -65,6 +65,7 @@ private:
     QPointF anchor  = NOPOINTF;
 
     QPoint lastPoint;
+    QPoint firstPoint;
 
     QPointer<CScrOptRangeTrk> scrOptRange;
 };

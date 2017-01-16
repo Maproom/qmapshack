@@ -199,7 +199,6 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="33"/>
         <source>All your data grouped by folders.</source>
-        <translatorcomment></translatorcomment>
         <translation>Все данные сгруппированные по папкам.</translation>
     </message>
     <message>
@@ -294,7 +293,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="232"/>
         <source>Take remote</source>
-        <translatorcomment></translatorcomment>
         <translation>Взять удаленная версия</translation>
     </message>
     <message>
@@ -387,7 +385,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../dem/CDemVRT.cpp" line="90"/>
         <source>No georeference information found.</source>
-        <translatorcomment></translatorcomment>
         <translation>Отсутствует географическая справочная информация.</translation>
     </message>
 </context>
@@ -402,7 +399,6 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="61"/>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="131"/>
         <source>???</source>
-        <translatorcomment></translatorcomment>
         <translation>???</translation>
     </message>
     <message>
@@ -442,7 +438,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="395"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
-        <translatorcomment></translatorcomment>
         <translation>&lt;b&gt;Резюме по всем трекам в проекте&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
@@ -799,7 +794,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="38"/>
         <source>wide</source>
-        <translatorcomment></translatorcomment>
         <translation>Широко</translation>
     </message>
     <message>
@@ -1028,7 +1022,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="360"/>
         <source>End: -</source>
-        <translatorcomment></translatorcomment>
         <translation>Конец: -</translation>
     </message>
     <message>
@@ -1059,7 +1052,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
         <source>Index: %1</source>
-        <translatorcomment></translatorcomment>
         <translation>Индекс: %1</translation>
     </message>
     <message>
@@ -1075,7 +1067,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source> slope: %1%3 (%2%)</source>
-        <translatorcomment></translatorcomment>
         <translation> наклон: %1%3 (%2%) </translation>
     </message>
     <message>
@@ -1447,7 +1438,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Export to GPX...</source>
-        <translatorcomment></translatorcomment>
         <translation>Экспортировать до GPX..</translation>
     </message>
     <message>
@@ -1464,7 +1454,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="133"/>
         <source>Sync. with Database</source>
-        <translatorcomment></translatorcomment>
         <translation>Синхронизировать с базой данных</translation>
     </message>
     <message>
@@ -1956,48 +1945,48 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="581"/>
+        <location filename="../CMainWindow.cpp" line="598"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Использовать &lt;b&gt;Меню→Вид→Добавить окно карты&lt;/b&gt; чтобы открыть новый вид. Или &lt;b&gt;Меню→Файл→Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="709"/>
+        <location filename="../CMainWindow.cpp" line="726"/>
         <source>Ele: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="725"/>
+        <location filename="../CMainWindow.cpp" line="742"/>
         <source>[Grid: %1]</source>
         <translation>[Сетка: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="860"/>
+        <location filename="../CMainWindow.cpp" line="877"/>
         <source>Load GIS Data...</source>
         <translation>Загрузить данные GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="894"/>
+        <location filename="../CMainWindow.cpp" line="911"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="894"/>
-        <location filename="../CMainWindow.cpp" line="920"/>
+        <location filename="../CMainWindow.cpp" line="911"/>
+        <location filename="../CMainWindow.cpp" line="937"/>
         <source>QMapShack View (*.view)</source>
         <translation>Вид QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="920"/>
+        <location filename="../CMainWindow.cpp" line="937"/>
         <source>Select file to load</source>
         <translation>Выбрать файл для загрузки</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1099"/>
+        <location filename="../CMainWindow.cpp" line="1116"/>
         <source>Fatal...</source>
         <translation>Неустранимо...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1100"/>
+        <location filename="../CMainWindow.cpp" line="1117"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для EPSG проекций обычно охраняемые в /usr/share/pro отсутствуют.Пожалуйста, сообщите об этом администратору пакета.</translation>
     </message>
@@ -2074,7 +2063,6 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="166"/>
         <source>Catalan</source>
-        <translatorcomment></translatorcomment>
         <translation>Каталонский</translation>
     </message>
     <message>
@@ -2766,7 +2754,6 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapTMS.cpp" line="115"/>
         <source>Layer %1</source>
-        <translatorcomment></translatorcomment>
         <translation>Слой %1</translation>
     </message>
     <message>
@@ -3000,7 +2987,7 @@ Unknown structure.</source>
 <context>
     <name>CMouseRangeTrk</name>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="223"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="224"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрать интервал&lt;/b&gt;&lt;br/&gt; Выберите первую точку трека с левой кнопкой мыши. А потом второй. Закончите выбор интервала с помощью щелчка правой кнопкой мыши. &lt;br/&gt;</translation>
     </message>
@@ -3875,7 +3862,6 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
         <source>Setup database...</source>
-        <translatorcomment></translatorcomment>
         <translation>Настройка базы данных</translation>
     </message>
     <message>
@@ -3973,21 +3959,21 @@ line %2, column %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/serialization.cpp" line="588"/>
         <location filename="../gis/tnv/serialization.cpp" line="599"/>
         <location filename="../gis/tnv/serialization.cpp" line="617"/>
         <location filename="../gis/tnv/serialization.cpp" line="645"/>
         <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
     <message>
+        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
         <source>Failed to open %1.</source>
         <translation>Не удалось открыть %1.</translation>
     </message>
@@ -4115,56 +4101,66 @@ line %2, column %3:
         <translation>&lt;b&gt;Перевод:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="312"/>
+        <location filename="../IAbout.ui" line="295"/>
+        <source>Russian:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="302"/>
+        <source>Wolfgang Thämelt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="326"/>
         <source>Win64:</source>
         <translation>Win64:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="328"/>
+        <location filename="../IAbout.ui" line="342"/>
         <source>OS X:</source>
         <translation>OS X:</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="338"/>
+        <location filename="../IAbout.ui" line="352"/>
         <source>Helmut Schmidt</source>
         <translation>Helmut Schmidt</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="345"/>
+        <location filename="../IAbout.ui" line="359"/>
         <source>Ivo Kronenberg</source>
         <translation>Ivo Kronenberg</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="352"/>
+        <location filename="../IAbout.ui" line="366"/>
         <source>&lt;b&gt;Binaries:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Двоичные файлы:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="361"/>
+        <location filename="../IAbout.ui" line="375"/>
         <source>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</source>
         <translation>...and thanks to all Linux binary maintainers for doing a great job. Special thanks to Dan Horák and Bas Couwenberg for showing presence on the mailing list to discuss distribution related topics.</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="381"/>
+        <location filename="../IAbout.ui" line="395"/>
         <source>&lt;b&gt;Contributors:&lt;/b&gt;</source>
         <translation>&lt;b&gt;Участники:&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="388"/>
+        <location filename="../IAbout.ui" line="402"/>
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg</source>
         <translation>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="406"/>
+        <location filename="../IAbout.ui" line="420"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Это программное обеспечение распространяется под лицензией GPL3 или любой более поздней версии</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="413"/>
-        <source>© 2016 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation>© 2016 Oliver Eichler (oliver.eichler@gmx.de)</translation>
+        <location filename="../IAbout.ui" line="427"/>
+        <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
+        <translation type="unfinished">© 2016 Oliver Eichler (oliver.eichler@gmx.de) {2017 ?}</translation>
     </message>
 </context>
 <context>
@@ -4453,7 +4449,6 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="118"/>
         <source>Hillshading</source>
-        <translatorcomment></translatorcomment>
         <translation>Затенения холмов</translation>
     </message>
     <message>
@@ -4578,7 +4573,6 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="214"/>
         <source>Update spoilers</source>
-        <translatorcomment></translatorcomment>
         <translation>Обновить спойлер</translation>
     </message>
     <message>
@@ -4609,10 +4603,6 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="14"/>
         <source>Dialog</source>
         <translation>Диалог</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Область была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
@@ -4729,10 +4719,6 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Сведение</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Маршрут импортирован в QMapShack и был изменена. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation>Маршрут импортирован в QMapShack и был изменена. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.</translation>
@@ -4772,10 +4758,6 @@ If you want to keep just one half you can simply remove the points, or check thi
 -</source>
         <translation>-
 -</translation>
-    </message>
-    <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Трек был импортирован в QMapShack и был изменен. Он больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="287"/>
@@ -4926,7 +4908,6 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../gis/trk/IDetailsTrk.ui" line="875"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="961"/>
         <source>max.</source>
-        <translatorcomment></translatorcomment>
         <translation>Макс.</translation>
     </message>
     <message>
@@ -5058,10 +5039,6 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Путевая точка была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.</translation>
     </message>
     <message>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Путевая точка была импортирована в QMapShack и был изменена. Она больше не показывает исходные данные. Пожалуйста, смотрите в историю изменений.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="284"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Переключить режим &apos;только чтение&apos;. Вы должны открыть замок для изменения элемента.</translation>
@@ -5100,7 +5077,6 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../device/IDevice.cpp" line="292"/>
         <source>There is another project with the same name. If you press &apos;ok&apos; it will be removed and replaced.</source>
-        <translatorcomment></translatorcomment>
         <translation>Существует другой проект с тем же именем. Если нажать кнопку ОК, то он будет удален и заменен.</translation>
     </message>
 </context>
@@ -5414,7 +5390,6 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterOffsetElevation.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment></translatorcomment>
         <translation>Форма</translation>
     </message>
     <message>
@@ -5857,7 +5832,7 @@ Filename: %1</source>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="211"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="212"/>
         <source>Routing</source>
         <translation>Маршрутизация</translation>
     </message>
@@ -5919,335 +5894,340 @@ Filename: %1</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="117"/>
+        <location filename="../IMainWindow.ui" line="118"/>
         <source>Project</source>
         <translation>Проект</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="128"/>
+        <location filename="../IMainWindow.ui" line="129"/>
         <source>Tool</source>
         <translation>Инструмент</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="153"/>
+        <location filename="../IMainWindow.ui" line="154"/>
         <source>Maps</source>
         <translation>Карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="196"/>
+        <location filename="../IMainWindow.ui" line="197"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Цифровая модель рельефа (ЦМР)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="235"/>
+        <location filename="../IMainWindow.ui" line="236"/>
         <source>Data</source>
         <translation>Данные</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="253"/>
+        <location filename="../IMainWindow.ui" line="254"/>
         <source>Route</source>
         <translation>Маршрутизация</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="287"/>
-        <location filename="../IMainWindow.ui" line="290"/>
+        <location filename="../IMainWindow.ui" line="288"/>
+        <location filename="../IMainWindow.ui" line="291"/>
         <source>Add Map View</source>
         <translation>Добавить окно карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="293"/>
+        <location filename="../IMainWindow.ui" line="294"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="308"/>
+        <location filename="../IMainWindow.ui" line="309"/>
         <source>Show Scale</source>
         <translation>Показать масштаб</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="320"/>
+        <location filename="../IMainWindow.ui" line="321"/>
         <source>Setup Map Font</source>
         <translation>Настройка шрифта карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="335"/>
+        <location filename="../IMainWindow.ui" line="336"/>
         <source>Show Grid</source>
         <translation>Показать сетку</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="338"/>
+        <location filename="../IMainWindow.ui" line="339"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="350"/>
+        <location filename="../IMainWindow.ui" line="351"/>
         <source>Setup Grid</source>
         <translation>Настройка сетки</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="353"/>
+        <location filename="../IMainWindow.ui" line="354"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="368"/>
+        <location filename="../IMainWindow.ui" line="369"/>
         <source>Flip Mouse Wheel</source>
         <translation>Флип колесо мыши</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="380"/>
-        <location filename="../IMainWindow.ui" line="383"/>
+        <location filename="../IMainWindow.ui" line="381"/>
+        <location filename="../IMainWindow.ui" line="384"/>
         <source>Setup Map Paths</source>
         <translation>Настройка пути карт</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="398"/>
+        <location filename="../IMainWindow.ui" line="399"/>
         <source>POI Text</source>
         <translation>Текст для точек интереса</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="413"/>
+        <location filename="../IMainWindow.ui" line="414"/>
         <source>Night / Day</source>
         <translation>Ночь/день</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="428"/>
+        <location filename="../IMainWindow.ui" line="429"/>
         <source>Map Tool Tip</source>
         <translation>Подсказка карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="431"/>
+        <location filename="../IMainWindow.ui" line="432"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="443"/>
+        <location filename="../IMainWindow.ui" line="444"/>
         <source>Setup DEM Paths</source>
         <translation>Настройка пути ЦМР</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="455"/>
+        <location filename="../IMainWindow.ui" line="456"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="467"/>
+        <location filename="../IMainWindow.ui" line="468"/>
         <source>Help</source>
         <translation>Справки</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="470"/>
+        <location filename="../IMainWindow.ui" line="471"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="482"/>
-        <location filename="../IMainWindow.ui" line="485"/>
+        <location filename="../IMainWindow.ui" line="483"/>
+        <location filename="../IMainWindow.ui" line="486"/>
         <source>Setup Map View</source>
         <translation>Настройка вида карт</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="497"/>
+        <location filename="../IMainWindow.ui" line="498"/>
         <source>Load GIS Data</source>
         <translation>Загрузить данные GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="500"/>
+        <location filename="../IMainWindow.ui" line="501"/>
         <source>Load projects from file</source>
         <translation>Загрузить проекты из файла</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="503"/>
+        <location filename="../IMainWindow.ui" line="504"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="515"/>
+        <location filename="../IMainWindow.ui" line="516"/>
         <source>Save All GIS Data</source>
         <translation>Сохранить все данные GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="518"/>
+        <location filename="../IMainWindow.ui" line="519"/>
         <source>Save all projects in the workspace</source>
         <translation>Сохранить все проекты в рабочей области</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="521"/>
+        <location filename="../IMainWindow.ui" line="522"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="533"/>
+        <location filename="../IMainWindow.ui" line="534"/>
         <source>Setup Time Zone</source>
         <translation>Настройка часового пояса</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="545"/>
+        <location filename="../IMainWindow.ui" line="546"/>
         <source>Add empty project</source>
         <translation>Добавить пустой проект</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="560"/>
+        <location filename="../IMainWindow.ui" line="561"/>
         <source>Search Google</source>
         <translation>Поиск Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="572"/>
+        <location filename="../IMainWindow.ui" line="573"/>
         <source>Close all projects</source>
         <translation>Закрыть все проекты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="575"/>
+        <location filename="../IMainWindow.ui" line="576"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="587"/>
+        <location filename="../IMainWindow.ui" line="588"/>
         <source>Setup Units</source>
         <translation>Настройка единиц</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="599"/>
+        <location filename="../IMainWindow.ui" line="600"/>
         <source>Setup Workspace</source>
         <translation>Настройка рабочей области</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="602"/>
+        <location filename="../IMainWindow.ui" line="603"/>
         <source>Setup save on exit.</source>
         <translatorcomment>Tooltip for &quot;Setup workspace&quot; menu entry?</translatorcomment>
         <translation>Настройка рабочей области.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="614"/>
+        <location filename="../IMainWindow.ui" line="615"/>
         <source>Import Database from QLandkarte</source>
         <translation>Импортировать базу данных QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="617"/>
+        <location filename="../IMainWindow.ui" line="618"/>
         <source>Import QLandkarte GT database</source>
         <translation>Импортировать базу данных QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="629"/>
+        <location filename="../IMainWindow.ui" line="630"/>
         <source>VRT Builder</source>
         <translation>VRT строитель</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="632"/>
+        <location filename="../IMainWindow.ui" line="633"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Графический внешний интерфейс для gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="644"/>
+        <location filename="../IMainWindow.ui" line="645"/>
         <source>Store Map View</source>
         <translation>Сохранить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="647"/>
+        <location filename="../IMainWindow.ui" line="648"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translatorcomment>Tooltip??</translatorcomment>
         <translation>Сохранить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="659"/>
+        <location filename="../IMainWindow.ui" line="660"/>
         <source>Load Map View</source>
         <translation>Загрузить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="662"/>
+        <location filename="../IMainWindow.ui" line="663"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translatorcomment>Tooltip??</translatorcomment>
         <translation>Загрузить вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="677"/>
+        <location filename="../IMainWindow.ui" line="678"/>
         <source>Ext. Profile</source>
         <translation>Расширенный профиль</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="680"/>
+        <location filename="../IMainWindow.ui" line="681"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="692"/>
+        <location filename="../IMainWindow.ui" line="693"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="695"/>
+        <location filename="../IMainWindow.ui" line="696"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="707"/>
+        <location filename="../IMainWindow.ui" line="708"/>
         <source>Clone Map View</source>
         <translation>Клонировать вид карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="710"/>
+        <location filename="../IMainWindow.ui" line="711"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="722"/>
+        <location filename="../IMainWindow.ui" line="723"/>
         <source>Create Routino Database</source>
         <translation>Создать базу данных Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="734"/>
+        <location filename="../IMainWindow.ui" line="735"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Сохранить (печатать) снимок экрана</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="737"/>
+        <location filename="../IMainWindow.ui" line="738"/>
         <source>Print a selected area of the map</source>
         <translation>Печать выбранную область карты</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="740"/>
+        <location filename="../IMainWindow.ui" line="741"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="752"/>
+        <location filename="../IMainWindow.ui" line="753"/>
         <source>Setup Coord. Format</source>
         <translation>Настройка форматы координат</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="755"/>
+        <location filename="../IMainWindow.ui" line="756"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Изменить формат отображения координат</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="767"/>
+        <location filename="../IMainWindow.ui" line="768"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="779"/>
+        <location filename="../IMainWindow.ui" line="780"/>
         <source>Setup Waypoint Icons</source>
         <translation>Настройка значков для точек трека</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="782"/>
+        <location filename="../IMainWindow.ui" line="783"/>
         <source>Setup path to custom icons</source>
         <translation>Настройка пути к пользовательским значкам</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="791"/>
+        <location filename="../IMainWindow.ui" line="792"/>
         <source>Close Tab</source>
         <translation>Закрыть вкладкy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="794"/>
+        <location filename="../IMainWindow.ui" line="795"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="803"/>
+        <location filename="../IMainWindow.ui" line="804"/>
         <source>Hilfe Schnelleinstieg</source>
         <translation>Быстрый старт (по-немецки)</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="813"/>
+        <source>Quickstart Help</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6255,13 +6235,11 @@ Filename: %1</source>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
         <source>Form</source>
-        <translatorcomment></translatorcomment>
         <translation>форма</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translatorcomment></translatorcomment>
         <translation>Чтобы добавить карты использовать &lt;b&gt;Файл-&gt;Настройка пути карт&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
@@ -6494,7 +6472,6 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="504"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
-        <translatorcomment></translatorcomment>
         <translation>&lt;b&gt;%1. Метрика&lt;/b&gt;</translation>
     </message>
     <message>
@@ -6913,7 +6890,6 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
         <source>Save to original</source>
-        <translatorcomment></translatorcomment>
         <translation>Сохранить в оригинал</translation>
     </message>
     <message>
@@ -7083,7 +7059,6 @@ or
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="35"/>
         <source>Save selected area as image.</source>
-        <translatorcomment></translatorcomment>
         <translation>Сохранить выбранную область как изображение.</translation>
     </message>
     <message>
@@ -7305,7 +7280,6 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="40"/>
         <source>View details and edit properties of track.</source>
-        <translatorcomment></translatorcomment>
         <translation>Показать подробности и изменить свойства трека.</translation>
     </message>
     <message>
@@ -7675,7 +7649,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
-        <translatorcomment></translatorcomment>
         <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание!&lt;/span&gt; Рекомендуется оставить поле пароля пустым. QMapShack сохранит её как обычный текст. Если нет пароля, то вас попросят для него при каждом запуске&lt;/p&gt;</translation>
     </message>
     <message>
@@ -7717,7 +7690,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
         <source>MySQL</source>
-        <translatorcomment></translatorcomment>
         <translation>MySQL</translation>
     </message>
     <message>
@@ -8011,7 +7983,6 @@ or
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="450"/>
         <source>Underline</source>
-        <translatorcomment></translatorcomment>
         <translation>Подчеркнуть</translation>
     </message>
     <message>

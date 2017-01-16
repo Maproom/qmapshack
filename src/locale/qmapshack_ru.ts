@@ -1067,12 +1067,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation> наклон: %1%3 (%2%) </translation>
+        <translation> наклон: %1 %3 (%2%) </translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="518"/>
         <source> speed: %1%2</source>
-        <translation> скорость: %1%2</translation>
+        <translation> скорость: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="546"/>
@@ -1111,7 +1111,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source> Moving: %1%2 (%3%)</source>
-        <translation> В движении: %1%2 (%3%)</translation>
+        <translation> В движении: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
@@ -1122,7 +1122,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
         <source> Time: %1%2</source>
-        <translation> Время: %1%2</translation>
+        <translation> Время: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="324"/>
@@ -1147,17 +1147,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="564"/>
         <source>Ascent: %1%2 (%3%)</source>
-        <translation>Подъем: %1%2 (%3%)</translation>
+        <translation>Подъем: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="570"/>
         <source> Descent: %1%2 (%3%)</source>
-        <translation>Спуск: %1%2 (%3%)</translation>
+        <translation>Спуск: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
         <source>Distance: %1%2 (%3%)</source>
-        <translation>Расстояние: %1%2 (%3%)</translation>
+        <translation>Расстояние: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
@@ -1172,17 +1172,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source>Ascent: %1%2</source>
-        <translation>Подъем: %1%2</translation>
+        <translation>Подъем: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
         <source> Descent: %1%2</source>
-        <translation>Спуск: %1%2</translation>
+        <translation>Спуск: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>Distance: %1%2</source>
-        <translation>Расстояние: %1%2</translation>
+        <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1273"/>
@@ -1267,7 +1267,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="255"/>
         <source>Offset elevation data by %1%2.</source>
-        <translation>Сместить высоту на %1%2.</translation>
+        <translation>Сместить высоту на %1 %2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="268"/>
@@ -1287,7 +1287,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="324"/>
         <source>Changed speed to %1%2.</source>
-        <translation>Изменена скорость до %1%2.</translation>
+        <translation>Изменена скорость до %1 %2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="343"/>
@@ -1438,7 +1438,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Export to GPX...</source>
-        <translation>Экспортировать до GPX..</translation>
+        <translation>Экспортировать до GPX...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="128"/>
@@ -3862,7 +3862,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
         <source>Setup database...</source>
-        <translation>Настройка базы данных</translation>
+        <translation>Настройка базы данных...</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupWorkspace.cpp" line="55"/>
@@ -4048,7 +4048,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="179"/>
         <source>Czech:</source>
-        <translation>Czech:</translation>
+        <translation>Чешский:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="189"/>
@@ -4058,7 +4058,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="202"/>
         <source>German:</source>
-        <translation>German:</translation>
+        <translation>Немецкий:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="212"/>
@@ -4068,7 +4068,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="225"/>
         <source>Dutch:</source>
-        <translation>Dutch:</translation>
+        <translation>Голландский:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="235"/>
@@ -4078,7 +4078,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="248"/>
         <source>French:</source>
-        <translation>French:</translation>
+        <translation>Французский:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="258"/>
@@ -4093,7 +4093,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="278"/>
         <source>Spanish:</source>
-        <translation>Spanish:</translation>
+        <translation>Испанский:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="288"/>
@@ -4103,12 +4103,12 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="295"/>
         <source>Russian:</source>
-        <translation type="unfinished"></translation>
+        <translation>Русский:</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="302"/>
         <source>Wolfgang Thämelt</source>
-        <translation type="unfinished"></translation>
+        <translation>Wolfgang Thämelt</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="326"/>
@@ -4160,7 +4160,7 @@ Ivo Kronenberg</translation>
     <message>
         <location filename="../IAbout.ui" line="427"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation type="unfinished">© 2016 Oliver Eichler (oliver.eichler@gmx.de) {2017 ?}</translation>
+        <translation>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</translation>
     </message>
 </context>
 <context>
@@ -4960,7 +4960,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1493"/>
         <source>Dist.</source>
-        <translation>Расстояние:</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1498"/>
@@ -6227,7 +6227,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="813"/>
         <source>Quickstart Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Помощь для быстрого старта</translation>
     </message>
 </context>
 <context>

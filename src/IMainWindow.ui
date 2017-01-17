@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -110,8 +110,7 @@
     </property>
     <addaction name="actionAbout"/>
     <addaction name="actionHelp"/>
-    <addaction name="actionHelpDE"/>
-    <addaction name="actionHelpEN"/>
+    <addaction name="actionQuickstart"/>
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
@@ -795,16 +794,7 @@
     <string>Ctrl+W</string>
    </property>
   </action>
-  <action name="actionHelpDE">
-   <property name="icon">
-    <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
-   </property>
-   <property name="text">
-    <string>Hilfe Schnelleinstieg</string>
-   </property>
-  </action>
-  <action name="actionHelpEN">
+  <action name="actionQuickstart">
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>

@@ -43,7 +43,7 @@ const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
-const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
+const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
 
 

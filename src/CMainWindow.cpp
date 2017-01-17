@@ -94,32 +94,9 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
-    // show menu action for German help if system language is German.
-    actionHelpDE->setVisible(false);
-    actionHelpEN->setVisible(false);
-    QString locale = QLocale::system().name();
-    if(locale.size() >= 2)
-    {
-        locale = locale.left(2);
-        if(locale == "de")
-        {
-            actionHelpDE->setVisible(true);
-        }
-        else
-        {
-            actionHelpEN->setVisible(true);
-        }
-    }
-    else
-    {        
-        actionHelpEN->setVisible(true);
-    }
-
-
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
     connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
-    connect(actionHelpDE,                &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
-    connect(actionHelpEN,                &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
+    connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
     connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
@@ -515,12 +492,26 @@ void CMainWindow::slotHelp()
 
 void CMainWindow::slotQuickstart()
 {
-    QAction * origin = dynamic_cast<QAction*>(sender());
-    if(origin == actionHelpDE)
+
+    // show menu action for German help if system language is German.
+    QString locale = QLocale::system().name();
+    if(locale.size() >= 2)
     {
-        QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartGerman"));
+        locale = locale.left(2).toLower();
+        if(locale == "de")
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartGerman"));
+        }
+        else if(locale == "ru")
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartRussian"));
+        }
+        else
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
+        }
     }
-    else if(origin == actionHelpEN)
+    else
     {
         QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
     }

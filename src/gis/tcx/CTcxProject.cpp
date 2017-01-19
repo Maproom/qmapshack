@@ -58,7 +58,6 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 	
 	// if the file does not exist, the file name is assumed to be a name for a new project
 	if (!file.exists() || QFileInfo(filename).suffix().toLower() != "tcx")
-	if (QFileInfo(filename).suffix().toLower() != "tcx")
 	{
 		project->filename.clear();
 		project->setupName(filename);

@@ -47,6 +47,7 @@ void IMap::saveConfig(QSettings& cfg) /* override */
         cfg.setValue("showPolygons",  getShowPolygons());
         cfg.setValue("showPolylines", getShowPolylines());
         cfg.setValue("showPOIs",      getShowPOIs());
+        cfg.setValue("adjustDetailLevel", getAdjustDetailLevel());
     }
 
     if(hasFeatureTileCache())
@@ -60,10 +61,11 @@ void IMap::loadConfig(QSettings& cfg) /* override */
 {
     IDrawObject::loadConfig(cfg);
 
-    slotSetShowPolygons   (cfg.value("showPolygons",    getShowPolygons()   ).toBool());
-    slotSetShowPolylines  (cfg.value("showPolylines",   getShowPolylines()  ).toBool());
-    slotSetShowPOIs       (cfg.value("showPOIs",        getShowPOIs()       ).toBool());
-    slotSetCacheSize      (cfg.value("cacheSizeMB",     getCacheSize()      ).toInt());
+    slotSetShowPolygons(cfg.value("showPolygons", getShowPolygons()).toBool());
+    slotSetShowPolylines(cfg.value("showPolylines", getShowPolylines()).toBool());
+    slotSetShowPOIs(cfg.value("showPOIs", getShowPOIs()).toBool());
+    slotSetAdjustDetailLevel(cfg.value("adjustDetailLevel", getAdjustDetailLevel()).toInt());
+    slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
     slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
 }
 

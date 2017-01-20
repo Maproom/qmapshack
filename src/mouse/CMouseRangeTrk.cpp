@@ -85,8 +85,9 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         canvas->update();
     }
     else if(e->button() == Qt::LeftButton)
-    {        
-        mapMove = true;
+    {
+        mapMove     = true;
+        firstPoint  = point;
     }
 }
 
@@ -96,7 +97,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
 
     if(mapMove)
     {
-        if(point != lastPoint)
+        if((point - firstPoint).manhattanLength() >= 4)
         {
             QPoint delta = point - lastPoint;
             canvas->moveMap(delta);
@@ -105,7 +106,6 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
     }
     else
     {
-
         switch(state)
         {
         case eStateIdle:

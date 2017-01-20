@@ -94,9 +94,9 @@ CMainWindow::CMainWindow()
     }
     // end ---- restore window geometry -----
 
-
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
     connect(actionHelp,                  &QAction::triggered,            this,      &CMainWindow::slotHelp);
+    connect(actionQuickstart,            &QAction::triggered,            this,      &CMainWindow::slotQuickstart);
     connect(actionAddMapView,            &QAction::triggered,            this,      &CMainWindow::slotAddCanvas);
     connect(actionCloneMapView,          &QAction::triggered,            this,      &CMainWindow::slotCloneCanvas);
     connect(actionShowScale,             &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
@@ -488,6 +488,33 @@ void CMainWindow::slotAbout()
 void CMainWindow::slotHelp()
 {
     QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocMain"));
+}
+
+void CMainWindow::slotQuickstart()
+{
+
+    // show menu action for German help if system language is German.
+    QString locale = QLocale::system().name();
+    if(locale.size() >= 2)
+    {
+        locale = locale.left(2).toLower();
+        if(locale == "de")
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartGerman"));
+        }
+        else if(locale == "ru")
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartRussian"));
+        }
+        else
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
+        }
+    }
+    else
+    {
+        QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));
+    }
 }
 
 

@@ -31,6 +31,7 @@ CLineOpSelectRange::CLineOpSelectRange(SGisLine& points, CGisDraw *gis, CCanvas 
 
 CLineOpSelectRange::~CLineOpSelectRange()
 {
+    delete scrOptRangeLine;
 }
 
 void CLineOpSelectRange::mouseReleaseEventEx(QMouseEvent * e)
@@ -158,15 +159,8 @@ void CLineOpSelectRange::drawFg(QPainter& p)
         break;
     }
 
-    case eState2nd:
-    {
-        if(!scrOptRangeLine.isNull())
-        {
-            scrOptRangeLine->draw(p);
-        }
-    }
-
     case eState1st:
+    case eState2nd:
     {
         if(idx2nd != NOIDX)
         {
@@ -192,21 +186,25 @@ void CLineOpSelectRange::drawFg(QPainter& p)
             p.setPen(QPen(Qt::green, 3, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));
             p.drawPolyline(seg);
 
-            QRectF r(0,0,7,7);
-            p.setPen(QPen(Qt::darkGreen,2));
-            p.setBrush(Qt::darkGreen);
-            for(const QPointF &pt : seg)
-            {
-                r.moveCenter(pt);
-                p.drawRect(r);
-            }
-            p.setPen(Qt::NoPen);
+            p.setPen(QPen(Qt::NoPen));
             p.setBrush(Qt::black);
-            for(const QPointF &pt : seg)
+
+            QRectF r(0, 0, 8, 8);
+            for(int i = idx1; i <= idx2; i++)
             {
-                r.moveCenter(pt);
+                r.moveCenter(points[i].pixel);
                 p.drawRect(r);
+
+                for(const IGisLine::subpt_t& subpt : points[i].subpts)
+                {
+                    p.drawEllipse(subpt.pixel, 2, 2);
+                }
             }
+        }
+
+        if(!scrOptRangeLine.isNull() && eState2nd == state)
+        {
+            scrOptRangeLine->draw(p);
         }
         break;
     }
@@ -229,8 +227,10 @@ void CLineOpSelectRange::slotDelete()
     qint32 idx = qMin(idxFocus, idx2nd);
     qint32 N   = qAbs(idxFocus - idx2nd) - 1;
 
+    points[idx].subpts.clear();
     points.remove(idx + 1, N);
     parentHandler->storeToHistory(points);
+
 
     resetState();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

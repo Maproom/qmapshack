@@ -119,6 +119,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos    = e->pos();
+        firstPos   = lastPos;
         mapMove    = true;
         mapDidMove = false;
     }
@@ -130,7 +131,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if(mapMove && (pos != lastPos))
+    if(mapMove && ((pos - firstPos).manhattanLength() >= 4))
     {
         QPoint delta = pos - lastPos;
         canvas->moveMap(delta);

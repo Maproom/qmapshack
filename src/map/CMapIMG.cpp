@@ -1085,95 +1085,97 @@ void CMapIMG::processPrimaryMapData()
 
 quint8 CMapIMG::scale2bits(const QPointF& scale)
 {
+    qint32 bits = 24;
     if(scale.x() >= 70000.0)
     {
-        return 2;
+        bits = 2;
     }
-    if(scale.x() >= 50000.0)
+    else if(scale.x() >= 50000.0)
     {
-        return 3;
+        bits = 3;
     }
-    if(scale.x() >= 30000.0)
+    else if(scale.x() >= 30000.0)
     {
-        return 4;
+        bits = 4;
     }
-    if(scale.x() >= 20000.0)
+    else if(scale.x() >= 20000.0)
     {
-        return 5;
+        bits = 5;
     }
-    if(scale.x() >= 15000.0)
+    else if(scale.x() >= 15000.0)
     {
-        return 6;
+        bits = 6;
     }
-    if(scale.x() >= 10000.0)
+    else if(scale.x() >= 10000.0)
     {
-        return 7;
+        bits = 7;
     }
-    if(scale.x() >= 7000.0)
+    else if(scale.x() >= 7000.0)
     {
-        return 8;
+        bits = 8;
     }
-    if(scale.x() >= 5000.0)
+    else if(scale.x() >= 5000.0)
     {
-        return 9;
+        bits = 9;
     }
-    if(scale.x() >= 3000.0)
+    else if(scale.x() >= 3000.0)
     {
-        return 10;
+        bits = 10;
     }
-    if(scale.x() >= 2000.0)
+    else if(scale.x() >= 2000.0)
     {
-        return 11;
+        bits = 11;
     }
-    if(scale.x() >= 1500.0)
+    else if(scale.x() >= 1500.0)
     {
-        return 12;
+        bits = 12;
     }
-    if(scale.x() >= 1000.0)
+    else if(scale.x() >= 1000.0)
     {
-        return 13;
+        bits = 13;
     }
-    if(scale.x() >= 700.0)
+    else if(scale.x() >= 700.0)
     {
-        return 14;
+        bits = 14;
     }
-    if(scale.x() >= 500.0)
+    else if(scale.x() >= 500.0)
     {
-        return 15;
+        bits = 15;
     }
-    if(scale.x() >= 300.0)
+    else if(scale.x() >= 300.0)
     {
-        return 16;
+        bits = 16;
     }
-    if(scale.x() >= 200.0)
+    else if(scale.x() >= 200.0)
     {
-        return 17;
+        bits = 17;
     }
-    if(scale.x() >= 100.0)
+    else if(scale.x() >= 100.0)
     {
-        return 18;
+        bits = 18;
     }
-    if(scale.x() >= 70.0)
+    else if(scale.x() >= 70.0)
     {
-        return 19;
+        bits = 19;
     }
-    if(scale.x() >= 30.0)
+    else if(scale.x() >= 30.0)
     {
-        return 20;
+        bits = 20;
     }
-    if(scale.x() >= 15.0)
+    else if(scale.x() >= 15.0)
     {
-        return 21;
+        bits = 21;
     }
-    if(scale.x() >= 7.0)
+    else if(scale.x() >= 7.0)
     {
-        return 22;
+        bits = 22;
     }
-    if(scale.x() >= 3.0)
+    else if(scale.x() >= 3.0)
     {
-        return 23;
+        bits = 23;
     }
-    return 24;
+
+    return qMax(2, qMin(24, bits + getAdjustDetailLevel()));
 }
 
 void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
@@ -1202,14 +1204,6 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     p.setBrush(Qt::NoBrush);
 
     quint8 bits = scale2bits(bufferScale);
-//    if((zoomidx >= 25) && (detailsFineTune < 0))
-//    {
-//        bits += detailsFineTune + (zoomidx - 25);
-//    }
-//    else
-//    {
-//        bits += detailsFineTune;
-//    }
 
     QVector<map_level_t>::const_iterator maplevel = maplevels.constEnd();
     do
@@ -1252,7 +1246,17 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
         p.restore();
         return;
     }
-    loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+
+    try
+    {
+        loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+    }
+    catch(std::bad_alloc)
+    {
+        qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
+        p.restore();
+        return;
+    }
 
     if(map->needsRedraw())
     {

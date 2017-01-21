@@ -45,6 +45,7 @@ public:
         , eTypeTwoNav
         , eTypeSlf       // the Sigma Log Format
         , eTypeFit
+        , eTypeTcx
     };
 
     enum sorting_roadbook_e
@@ -95,6 +96,7 @@ public:
 
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;
+    static const QString filedialogFilterTCX;
     static const QString filedialogFilterQMS;
     static const QString filedialogFilterSLF;
     static const QString filedialogFilterFIT;

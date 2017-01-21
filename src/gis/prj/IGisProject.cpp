@@ -21,7 +21,6 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/IGisItem.h"
-#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/CDetailsPrj.h"
@@ -37,13 +36,14 @@
 #include <QtWidgets>
 
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.qms *.slf *.fit)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.qms *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
+const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
-const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
+const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
 
 

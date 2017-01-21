@@ -10,6 +10,32 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary might not work on other systems!)" OFF)
+
+if(BUILD_FOR_LOCAL_SYSTEM)
+    set(flag "-march=native")
+    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
+    if(Flag:${flag})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+
+        message(WARNING [=[
+ /===============================================================================\
+ |                         BUILDING FOR LOCAL SYSTEM ONLY                        |
+ |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        |
+ |Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.|
+ |The generated binary will exhibit higher performance,                          |
+ |but will not be portable (e.g., might not work on other CPUs)                  |
+ \===============================================================================/]=])
+    else(Flag:${flag})
+        message(WARNING [=[
+ Your compiler does not support -march=native.
+ Ignoring -DBUILD_FOR_LOCAL_SYSTEM=ON!]=])
+    endif(Flag:${flag})
+
+
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+endif(BUILD_FOR_LOCAL_SYSTEM)
+
 # Find the QtWidgets library
 find_package(Qt5Widgets)
 find_package(Qt5Core)

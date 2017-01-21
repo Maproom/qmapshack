@@ -26,6 +26,7 @@ CLogHandler::CLogHandler(QString logDirectory, bool writeToFile, bool debugOutpu
 {
     if (writeToFile)
     {
+        fileStream.setCodec("UTF-8");
         logFile.open(QIODevice::WriteOnly | QIODevice::Append);
     }
     qSetMessagePattern("%{time yyyy-MM-dd h:mm:ss.zzz} [%{type}] %{message}");

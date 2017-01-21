@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -1536,201 +1536,201 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="112"/>
+        <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Save</source>
         <translation>Speichern</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="99"/>
+        <location filename="../gis/CGisListWks.cpp" line="100"/>
         <source>Edit..</source>
         <translation>Bearbeiten..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="108"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
         <source>Sort by Time</source>
         <translation>Nach der Zeit sortieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="110"/>
         <source>Sort by Name</source>
         <translation>Nach dem Namen sortieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="121"/>
+        <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="130"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Update Project on Device</source>
         <translation>Aktualisiere das Projekt auf dem Gerät</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
         <source>Edit...</source>
         <translation>Bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="100"/>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="101"/>
+        <location filename="../gis/CGisListWks.cpp" line="146"/>
         <source>Copy to...</source>
         <translation>Kopieren nach...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
         <source>Save as...</source>
         <translation>Speichern unter...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Copy Track with Waypoints</source>
         <translation>Track mit Wegpunkten kopieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Show Bubble</source>
         <translation>Infoblase anzeigen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Move Waypoint</source>
         <translation>Wegpunkt verschieben</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="172"/>
+        <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Route Instructions</source>
         <translation>Navigationsanweisungen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Calculate Route</source>
         <translation>Route berechnen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Reset Route</source>
         <translation>Route zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Edit Route</source>
         <translation>Route bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Convert to Track</source>
         <translation>In einen Track umwandeln</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="193"/>
+        <location filename="../gis/CGisListWks.cpp" line="194"/>
         <source>Create Route</source>
         <translation>Route erstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="624"/>
+        <location filename="../gis/CGisListWks.cpp" line="625"/>
         <source>Drop items...</source>
         <translation>Elemente verwerfen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="649"/>
-        <location filename="../gis/CGisListWks.cpp" line="1633"/>
-        <location filename="../gis/CGisListWks.cpp" line="1671"/>
+        <location filename="../gis/CGisListWks.cpp" line="650"/>
+        <location filename="../gis/CGisListWks.cpp" line="1642"/>
+        <location filename="../gis/CGisListWks.cpp" line="1680"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1180"/>
+        <location filename="../gis/CGisListWks.cpp" line="1189"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1180"/>
+        <location filename="../gis/CGisListWks.cpp" line="1189"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Proj. Waypoint...</source>
         <translation>Wegpunkt Projektion...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="148"/>
         <source>Track Profile</source>
         <translation>Trackprofil</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Send to Devices</source>
         <translation>Ans Gerät senden</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="149"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Select Range</source>
         <translation>Bereich wählen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="150"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Edit Track Points</source>
         <translation>Trackpunkte bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="151"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Reverse Track</source>
         <translation>Track umkehren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
         <source>Combine Tracks</source>
         <translation>Tracks verbinden</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="186"/>
+        <location filename="../gis/CGisListWks.cpp" line="187"/>
         <source>Edit Area Points</source>
         <translation>Gebietspunkte bearbeiten</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="133"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="101"/>
+        <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Show on Map</source>
         <translation>Auf der Karte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="102"/>
+        <location filename="../gis/CGisListWks.cpp" line="103"/>
         <source>Hide from Map</source>
         <translation>Auf der Karte ausblenden.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <location filename="../gis/CGisListWks.cpp" line="115"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation>Als GPX o. Erw. speichern...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="118"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Sync. with Database</source>
         <translation>Mit der Datenbank synchronisieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="775"/>
+        <location filename="../gis/CGisListWks.cpp" line="776"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="821"/>
+        <location filename="../gis/CGisListWks.cpp" line="822"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1157"/>
+        <location filename="../gis/CGisListWks.cpp" line="1166"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1157"/>
+        <location filename="../gis/CGisListWks.cpp" line="1166"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -1738,27 +1738,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="139"/>
+        <location filename="../gis/CGisWidget.cpp" line="144"/>
         <source>Load project...</source>
         <translation>Lade Projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="139"/>
+        <location filename="../gis/CGisWidget.cpp" line="144"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Das Projekt &quot;%1&quot; ist schon im Arbeitsplatz geladen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="544"/>
+        <location filename="../gis/CGisWidget.cpp" line="549"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="672"/>
+        <location filename="../gis/CGisWidget.cpp" line="677"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="672"/>
+        <location filename="../gis/CGisWidget.cpp" line="677"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
@@ -3942,6 +3942,38 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
         <source>%1 %2</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>CTcxProject</name>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="49"/>
+        <source>Failed to load file %1...</source>
+        <translation>Datei %1 konnte nicht geladen werden...</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="71"/>
+        <source>Failed to open %1</source>
+        <translation>Die Datei %1 konnte nicht geöffnet werden</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="82"/>
+        <source>Failed to read: %1
+line %2, column %3:
+ %4</source>
+        <translation>Fehler beim Lesen: %1
+Zeile %2, Spalte %3:
+ %4</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="89"/>
+        <source>Not a TCX file: %1</source>
+        <translation>Keine TCX  Datei: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="94"/>
+        <source>This TCX file does not contain any activity or course: %1</source>
+        <translation>Diese TCX Datei enthält keine Aktivität oder Runden: %1</translation>
     </message>
 </context>
 <context>

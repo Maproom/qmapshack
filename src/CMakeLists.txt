@@ -174,6 +174,7 @@ set( SRCS
         gis/slf/CSlfReader.cpp
         gis/tnv/CTwoNavProject.cpp
         gis/tnv/serialization.cpp
+        gis/tcx/CTcxProject.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp
@@ -440,6 +441,7 @@ set( HDRS
         gis/CSelDevices.h
         gis/qms/CQmsProject.h
         gis/tnv/CTwoNavProject.h
+        gis/tcx/CTcxProject.h
         gis/db/IDB.h
         gis/db/IDBSqlite.h
         gis/db/IDBMysql.h

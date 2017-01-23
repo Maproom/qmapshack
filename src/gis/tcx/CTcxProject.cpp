@@ -89,20 +89,20 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 		throw tr("Not a TCX file: %1").arg(filename);
 	}
 
-	if ((xmlTcx.firstChild().toElement().tagName() != "Activities") && (xmlTcx.firstChild().toElement().nextSibling().toElement().tagName() != "Courses"))
+	const QDomNodeList& tcxActivitys = xmlTcx.elementsByTagName("Activity");
+	const QDomNodeList& tcxCourses = xmlTcx.elementsByTagName("Course");
+	if (!tcxActivitys.item(0).isElement() && !tcxCourses.item(0).isElement()) // Only the first activity or course is parsed as TCX files coming from GPSr (as Edge 705) only contain one activity or course. TCX files can also contain full exports of Garmin Training Center databases ; this use case is not handled.
 	{
-		throw tr("This TCX file does not contain any activity or course: %1").arg(filename);
+		throw tr("This TCX file does not contain any activity or course: %1").arg(filename); // maybe it is a "workout", not handled because workouts do not contain position data
 	}
 
-	
 	CTrackData trk;
-
-	
-	if (xmlTcx.firstChild().toElement().tagName() == "Activities") // Only the first activity is parsed as TCX files coming from GPSr (as Edge 705) only contain one activity. TCX files can also contain full exports of Garmin Training Center databases ; this use case is not handled.
+		
+	if (tcxActivitys.item(0).isElement()) // parsing of the first activity found, if any
 	{ 
-		trk.name = xmlTcx.elementsByTagName("Id").item(0).firstChild().nodeValue(); // activities does not have a "Name" but an "Id" instead (containing start date-time)
+		trk.name = tcxActivitys.item(0).toElement().elementsByTagName("Id").item(0).firstChild().nodeValue(); // activities does not have a "Name" but an "Id" instead (containing start date-time)
 
-		const QDomNodeList& tcxLaps = xmlTcx.elementsByTagName("Lap");
+		const QDomNodeList& tcxLaps = tcxActivitys.item(0).toElement().elementsByTagName("Lap");
 
 		trk.segs.resize(tcxLaps.count());
 		for (int i = 0; i < tcxLaps.count(); i++)	// browse laps
@@ -145,17 +145,16 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 			}
 		}
 	}
-
-
-	if (xmlTcx.firstChild().toElement().nextSibling().toElement().tagName() == "Courses") // TCX files can also contain full exports of Garmin Training Center databases with several courses inside ; here only the first found course will be processed.
+	
+	else // parsing of the first course found
 	{
-		trk.name = xmlTcx.elementsByTagName("Name").item(0).firstChild().nodeValue();
+		trk.name = tcxCourses.item(0).toElement().elementsByTagName("Name").item(0).firstChild().nodeValue();
 		QString timeString;
 		QDateTime trkPtTimestamp;
 		trk.segs.resize(1);
 		CTrackData::trkseg_t *seg = &(trk.segs[0]);
 
-		const QDomNodeList& tcxTrackpts = xmlTcx.elementsByTagName("Trackpoint");
+		const QDomNodeList& tcxTrackpts = tcxCourses.item(0).toElement().elementsByTagName("Trackpoint");
 
 		for (int i = 0; i < tcxTrackpts.count(); i++) // browse trackpoints
 		{

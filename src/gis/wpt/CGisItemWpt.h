@@ -156,6 +156,11 @@ public:
        @param out   the text stream to write to
      */
     void saveTwoNav(QTextStream &out, const QDir &dir);
+	/**
+	@brief Save waypoint to TCX waypoint file
+	@param  tcx  The <TrainingCenterDatabase> node to append by the waypoint
+	*/
+	void saveTCX(QDomNode& tcx);
     /**
        @brief Read serialized waypoint from a binary data stream
        @param stream  the data stream to read from

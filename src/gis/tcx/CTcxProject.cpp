@@ -214,3 +214,179 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
     project->setToolTip(CGisListWks::eColumnName, project->getInfo());
     project->valid = true;
 }
+
+
+
+
+bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
+{
+	QString _fn_ = fn;
+	QFileInfo fi(_fn_);
+	if (fi.suffix().toLower() != "tcx")
+	{
+		_fn_ += ".tcx";
+	}
+
+	project.mount();
+
+	// safety check for existing files
+	QFile file(_fn_);
+
+	//  ---- start content of tcx
+	QDomDocument doc;
+	QDomElement tcx = doc.createElement("TrainingCenterDatabase");
+	doc.appendChild(tcx);
+
+	tcx.setAttribute("xmlns", "http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2");
+	tcx.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+	tcx.setAttribute("xsi:schemaLocation", "http://www.garmin.com/xmlschemas/ProfileExtension/v1 http://www.garmin.com/xmlschemas/UserProfilePowerExtensionv1.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd http://www.garmin.com/xmlschemas/UserProfile/v2 http://www.garmin.com/xmlschemas/UserProfileExtensionv2.xsd");
+
+	
+	for (int i = 0; i < project.childCount(); i++)
+	{
+		CGisItemTrk *item = dynamic_cast<CGisItemTrk*>(project.child(i));
+		if (nullptr == item)
+		{
+			continue;
+		}
+		else
+		{
+			// only the first found track will be saved
+			tcx.appendChild(doc.createElement("Courses"));
+			tcx.lastChild().appendChild(doc.createElement("Course"));
+
+			tcx.lastChild().lastChild().appendChild(doc.createElement("Name"));
+			// 15 chars MAX !!
+			tcx.lastChild().lastChild().lastChild().appendChild(doc.createTextNode(item->getName()));
+			
+
+
+			item->saveTCX(tcx);
+		}
+	}
+
+	
+	for (int i = 0; i < project.childCount(); i++)
+	{
+		CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));
+		if (nullptr == item)
+		{
+			continue;
+		}
+
+		item->saveTCX(tcx);
+	}
+
+
+
+	bool res = true;
+	try
+	{
+		if (!file.open(QIODevice::WriteOnly))
+		{
+			throw tr("Failed to create file '%1'").arg(_fn_);
+		}
+		QTextStream out(&file);
+		out.setCodec("UTF-8");
+		out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+
+		out << doc.toString();
+		file.close();
+		if (file.error() != QFile::NoError)
+		{
+			throw tr("Failed to write file '%1'").arg(_fn_);
+		}
+	}
+	catch (const QString& msg)
+	{
+		// as saveAs() can be called from the thread that exports a database showing the
+		// message box will crash the app. Therefore we test if the current thread is the
+		// application's main thread. If not we forward the exception.
+		//
+		// Not sure if that is a good concept.
+		if (QThread::currentThread() == qApp->thread())
+		{
+			QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+		}
+		else
+		{
+			throw msg;
+		}
+		res = false;
+	}
+	project.umount();
+	return res;
+}
+
+
+void CGisItemTrk::saveTCX(QDomNode& tcx)
+{
+	QDomDocument doc = tcx.ownerDocument();
+
+	QDomElement xmlTrk = doc.createElement("Track");
+	tcx.lastChild().lastChild().appendChild(xmlTrk);
+
+	for (const CTrackData::trkseg_t &seg : trk.segs)
+	{
+		for (const CTrackData::trkpt_t &pt : seg.pts)
+		{
+			QDomElement xmlTrkpt = doc.createElement("Trackpoint");
+			xmlTrk.appendChild(xmlTrkpt);
+
+			xmlTrkpt.appendChild(doc.createElement("Time"));
+			if (pt.time.isValid())
+			{
+				xmlTrkpt.lastChild().appendChild(doc.createTextNode(pt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+			}
+
+			xmlTrkpt.appendChild(doc.createElement("Position"));
+			
+			xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
+			QString str;
+			str.sprintf("%1.8f", pt.lat);
+			xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+						
+			xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
+			str.sprintf("%1.8f", pt.lon);
+			xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+
+			xmlTrkpt.appendChild(doc.createElement("AltitudeMeters"));
+			xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(pt.ele)));
+
+			
+		}
+	}
+}
+
+
+void CGisItemWpt::saveTCX(QDomNode& tcx)
+{
+	QDomDocument doc = tcx.ownerDocument();
+
+	QDomElement xmlCrsPt = doc.createElement("CoursePoint");
+	tcx.lastChild().lastChild().appendChild(xmlCrsPt);
+
+	xmlCrsPt.appendChild(doc.createElement("Name"));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.name));
+
+	xmlCrsPt.appendChild(doc.createElement("Time"));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+
+	xmlCrsPt.appendChild(doc.createElement("Position"));
+
+	xmlCrsPt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
+	QString str;
+	str.sprintf("%1.8f", wpt.lat);
+	xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+
+	xmlCrsPt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
+	str.sprintf("%1.8f", wpt.lon);
+	xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+
+	xmlCrsPt.appendChild(doc.createElement("AltitudeMeters"));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(QString::number(wpt.ele)));
+
+	xmlCrsPt.appendChild(doc.createElement("PointType"));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.sym));
+
+}

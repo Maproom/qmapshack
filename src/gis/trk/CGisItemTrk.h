@@ -144,6 +144,12 @@ public:
        @param dir   the path to store the file
      */
     bool saveTwoNav(const QString& filename);
+
+	/**
+	@brief Save track to TCX track file
+	@param tcx   The <TrainingCenterDatabase> node to append by the track
+	*/
+	void saveTCX(QDomNode& tcx);
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from

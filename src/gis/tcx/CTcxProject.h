@@ -39,8 +39,13 @@ public:
     }
 
     static void loadTcx(const QString &filename, CTcxProject *project);
+
+	static bool saveAs(const QString& fn, IGisProject& project);
+
 private:
     void loadTcx(const QString& filename);
+
+	
 };
 
 #endif //CTCXPROJECT_H

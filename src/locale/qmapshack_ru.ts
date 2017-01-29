@@ -1302,7 +1302,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="372"/>
         <source>Converted subpoints from routing to track points</source>
-        <translation>Преобразованы подточки от маршрутных до путевых точек</translation>
+        <translation>Преобразованы подточки от маршрутных в путевые точки</translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="195"/>
@@ -1464,7 +1464,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="138"/>
         <source>Empty</source>
-        <translation>Пустой</translation>
+        <translation>Удалить все элементы</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="437"/>
@@ -2188,48 +2188,48 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="247"/>
         <source>Major highway</source>
-        <translation>Шоссе</translation>
+        <translation>Автомагистраль</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="248"/>
         <source>Principal highway</source>
-        <translation>Главное шоссе</translation>
+        <translation>Шоссе основное</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="249"/>
         <source>Other highway</source>
-        <translation>Другое шоссе</translation>
+        <translation>Прочие загородные дороги</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="250"/>
         <source>Arterial road</source>
-        <translation>Магистраль</translation>
+        <translation>Городская магистраль</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="251"/>
         <source>Collector road</source>
-        <translatorcomment>???</translatorcomment>
-        <translation>Collector road</translation>
+        <translatorcomment></translatorcomment>
+        <translation>Улица крупная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="252"/>
         <source>Residential street</source>
-        <translation>Улица</translation>
+        <translation>Улица малая</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="253"/>
         <source>Alley/Private road</source>
-        <translation>аллея, частная дорога</translation>
+        <translation>Переулок, внутриквартальный проезд</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="254"/>
         <source>Highway ramp, low speed</source>
-        <translation>Рампа, низкая скорость</translation>
+        <translation>Наклонный съезд с путепровода</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="255"/>
         <source>Highway ramp, high speed</source>
-        <translation>Рампа, высокая скорость</translation>
+        <translation>Наклонный съезд с путепровода скоростной</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="256"/>
@@ -2239,8 +2239,8 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="257"/>
         <source>Major highway connector</source>
-        <translatorcomment>???</translatorcomment>
-        <translation>Major highway connector</translation>
+        <translatorcomment></translatorcomment>
+        <translation>Соединительное шоссе</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="258"/>
@@ -2260,17 +2260,17 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="261"/>
         <source>Trail</source>
-        <translation>След</translation>
+        <translation>Тропа</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="262"/>
         <source>Stream</source>
-        <translation>Поток</translation>
+        <translation>Ручей</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="263"/>
         <source>Time zone</source>
-        <translation>Часовой пояс</translation>
+        <translation>Граница часового пояса</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="264"/>
@@ -2281,12 +2281,12 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="266"/>
         <source>State/province border</source>
-        <translation>Государственная граница</translation>
+        <translation>Граница области</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="267"/>
         <source>County/parish border</source>
-        <translation>Региональная граница</translation>
+        <translation>Граница района, округа</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="268"/>
@@ -2301,37 +2301,37 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="270"/>
         <source>Minor land contour</source>
-        <translation>Малый контур</translation>
+        <translation>Горизонталь вспомогательная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Intermediate land contour</source>
-        <translation>Промежуточный контур</translation>
+        <translation>Горизонталь основная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Major land contour</source>
-        <translation>Главный контур</translation>
+        <translation>Горизонталь утолщённая</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="273"/>
         <source>Minor depth contour</source>
-        <translation>Малый контур глубины</translation>
+        <translation>Изобата вспомогательная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="274"/>
         <source>Intermediate depth contour</source>
-        <translation>Промежуточный контур глубины</translation>
+        <translation>Изобата основная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Major depth contour</source>
-        <translation>Главный контур глубины</translation>
+        <translation>Изобата утолщённая</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>Intermittent stream</source>
-        <translation>Пересыхающая река</translation>
+        <translation>Пересыхающая река, ручей или канава</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="277"/>
@@ -2357,22 +2357,22 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>Hazard boundary</source>
-        <translation>граница опасной области</translation>
+        <translation>Опасность для плавания</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="346"/>
         <source>Large urban area (&amp;gt;200K)</source>
-        <translation>Большой городской район (&amp;gt;200 000)</translation>
+        <translation>Городcкая застройка (&amp;gt;200 тыс.ж)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="347"/>
         <source>Small urban area (&amp;lt;200K)</source>
-        <translation>Маленький городской район (&amp;lt;200K)</translation>
+        <translation>Городcкая застройка (&amp;lt;200 тыс.ж)</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="348"/>
         <source>Rural housing area</source>
-        <translation>Область сельского жилья</translation>
+        <translation>Застройка сельского типа</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="349"/>
@@ -2382,12 +2382,12 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="350"/>
         <source>Parking lot</source>
-        <translation>Стоянка</translation>
+        <translation>Автостоянка</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="351"/>
         <source>Parking garage</source>
-        <translation>Гараж</translation>
+        <translation>Гаражи</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="352"/>
@@ -2397,37 +2397,37 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="353"/>
         <source>Shopping center</source>
-        <translation>Торговый центр</translation>
+        <translation>Место для торговли</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="354"/>
         <source>Marina</source>
-        <translation>Марина</translation>
+        <translation>Пристань</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="355"/>
         <source>University/College</source>
-        <translation>Университет / колледж</translation>
+        <translation>Территория университета или колледжа</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="356"/>
         <source>Hospital</source>
-        <translation>Больница</translation>
+        <translation>Территория больницы</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="357"/>
         <source>Industrial complex</source>
-        <translation>Промышленный комплекс</translation>
+        <translation>Промышленная зона</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="358"/>
         <source>Reservation</source>
-        <translation>Заповедник</translation>
+        <translation>Резервация, заповедник</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="360"/>
         <source>Man-made area</source>
-        <translation>Застроенная область</translation>
+        <translation>Здание, искусственное сооружение</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="361"/>
@@ -2437,7 +2437,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="362"/>
         <source>Golf course</source>
-        <translation>Гольф</translation>
+        <translation>Поле для гольфа</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="363"/>
@@ -2461,7 +2461,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
         <location filename="../map/CMapIMG.cpp" line="369"/>
         <location filename="../map/CMapIMG.cpp" line="370"/>
         <source>State park</source>
-        <translation>Государственный парк</translation>
+        <translation>Парк регионального значения</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="371"/>
@@ -2471,7 +2471,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="372"/>
         <source>Ocean</source>
-        <translation>Океан</translation>
+        <translation>Море/океан</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="373"/>
@@ -2490,50 +2490,50 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
         <location filename="../map/CMapIMG.cpp" line="377"/>
         <location filename="../map/CMapIMG.cpp" line="384"/>
         <source>Large lake</source>
-        <translation>Большое озеро</translation>
+        <translation>Озеро большое</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="378"/>
         <location filename="../map/CMapIMG.cpp" line="379"/>
         <source>Medium lake</source>
-        <translation>Среднее озеро</translation>
+        <translation>Озеро среднее</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="380"/>
         <location filename="../map/CMapIMG.cpp" line="381"/>
         <source>Small lake</source>
-        <translation>Маленькое озеро</translation>
+        <translation>Озеро малое</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="382"/>
         <location filename="../map/CMapIMG.cpp" line="383"/>
         <source>Major lake</source>
-        <translation>Большое озеро</translation>
+        <translation>Озеро крупное</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="386"/>
         <source>Major River</source>
-        <translation>Большая река</translation>
+        <translation>Река крупная</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="387"/>
         <source>Large River</source>
-        <translation>Большая река</translation>
+        <translation>Река большая</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="388"/>
         <source>Medium River</source>
-        <translation>Средняя река</translation>
+        <translation>Река средняя</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="389"/>
         <source>Small River</source>
-        <translation>Малая река</translation>
+        <translation>Река малая</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="392"/>
         <source>Intermittent water</source>
-        <translation>Пересыхающая вода</translation>
+        <translation>Пересыхающая река или озеро</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="393"/>
@@ -2548,12 +2548,12 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="395"/>
         <source>Orchard/Plantation</source>
-        <translation>Фруктовый сад / плантация</translation>
+        <translation>Фруктовый сад или огород</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="396"/>
         <source>Scrub</source>
-        <translation>кустарник</translation>
+        <translation>Кустарник</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="397"/>
@@ -2563,7 +2563,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="398"/>
         <source>Flat</source>
-        <translation>Плоский</translation>
+        <translation>Плато</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="399"/>
@@ -5552,12 +5552,12 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
         <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Преобразовать подточки трека до путевых точек&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Преобразовать подточки трека в путевые точки&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
-        <translation>Преобразовать подточки маршрутизации до путевых точек</translation>
+        <translation>Преобразовать подточки маршрутизации в путевые точки</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>

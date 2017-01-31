@@ -1831,7 +1831,15 @@ bool CGisListWks::event(QEvent * e)
             {
                 project->blockUpdateItems(false);
             }
+            e->accept();
+            return true;
+        }
 
+        case eEvtA2WCutTrk:
+        {
+            CEvtA2WCutTrk * evt = (CEvtA2WCutTrk*)e;
+            CGisWidget::self().cutTrkByKey(evt->key);
+            e->accept();
             return true;
         }
         }

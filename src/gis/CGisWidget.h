@@ -43,6 +43,8 @@ enum event_types_e
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
     ,eEvtW2DCreate      = QEvent::User + 101
+
+    ,eEvtA2WCutTrk        = QEvent::User + 200
 };
 
 struct evt_item_t
@@ -192,6 +194,17 @@ public:
     }
 
     QString db;
+};
+
+
+class CEvtA2WCutTrk : public QEvent
+{
+public:
+    CEvtA2WCutTrk(const IGisItem::key_t& key) : QEvent(QEvent::Type(eEvtA2WCutTrk)), key(key)
+    {
+    }
+
+    const IGisItem::key_t key;
 };
 
 

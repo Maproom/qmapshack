@@ -96,6 +96,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
     actionAddWpt    = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
+    actionCutTrk    = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),       tr("Cut..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -1281,6 +1282,7 @@ void IPlot::slotContextMenu(const QPoint & point)
     actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
     actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
     actionAddWpt->setDisabled(posMouse1 == NOPOINT);
+    actionCutTrk->setDisabled(actionStopRange->isEnabled());
 
     posMouse2 = posMouse1;
 
@@ -1391,6 +1393,22 @@ void IPlot::slotAddWpt()
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
+}
+
+void IPlot::slotCutTrk()
+{
+    // set point of mouse click focus to position of contect menu stored in
+    // secondary mouse point
+    qreal x = data->x().pt2val(posMouse2.x() - left);
+    setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
+
+    /*
+       Trigger cut by event not by direct call to API. This is because cutting the track
+       might result into deleteing the original one. The riginal one is the parent of this
+       plot and needs to destroy it. This would be impossible if we are still in this method
+       because the API call did not return yet.
+     */
+    CGisWidget::self().postEventForWks(new CEvtA2WCutTrk(trk->getKey()));
 }
 
 void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t *ptRange2)

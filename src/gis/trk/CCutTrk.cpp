@@ -59,7 +59,7 @@ CCutTrk::CCutTrk(QWidget *parent)
         break;
     }
 
-    cfg.endGroup();        
+    cfg.endGroup();
 }
 
 

@@ -98,6 +98,7 @@ CSelectProjectDialog::CSelectProjectDialog(QString &key, QString &name, IGisProj
     connect(radioGpx,      &QRadioButton::clicked,          this, &CSelectProjectDialog::slotTypeChanged);
     connect(radioDatabase, &QRadioButton::toggled,          this, &CSelectProjectDialog::slotTypeChanged);
 
+    lineEdit->setFocus();
     adjustSize();
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectProjectDialog");

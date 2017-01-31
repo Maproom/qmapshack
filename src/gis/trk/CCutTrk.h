@@ -37,9 +37,20 @@ public:
         , eModeKeepSecond = 4
     };
 
+    enum cutmode_e
+    {
+        eCutMode1
+        ,eCutMode2
+    };
+
     mode_e getMode() const
     {
         return mode;
+    }
+
+    cutmode_e getCutMode() const
+    {
+        return cutMode;
     }
 
     bool createClone()
@@ -55,6 +66,7 @@ private slots:
 
 private:
     mode_e mode = eModeNone;
+    cutmode_e cutMode = eCutMode2;
 };
 
 #endif //CCUTTRK_H

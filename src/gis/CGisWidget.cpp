@@ -86,6 +86,7 @@ void CGisWidget::setOpacity(qreal val)
 {
     sliderOpacity->setValue(val * 100);
 }
+
 void CGisWidget::postEventForWks(QEvent * event)
 {
     QCoreApplication::postEvent(treeWks, event);

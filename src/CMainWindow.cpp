@@ -492,7 +492,6 @@ void CMainWindow::slotHelp()
 
 void CMainWindow::slotQuickstart()
 {
-
     // show menu action for German help if system language is German.
     QString locale = QLocale::system().name();
     if(locale.size() >= 2)

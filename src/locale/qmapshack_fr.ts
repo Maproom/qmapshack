@@ -1075,21 +1075,21 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>En déplacement: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1214"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1227"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1466"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1234"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1290"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1334"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1473"/>
         <source>track</source>
         <translation>trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1418"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
         <source>Hide point %1.</source>
         <translation>Cacher les points %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1422"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1429"/>
         <source>Hide points %1..%2.</source>
         <translation>Cacher les points %1..%2.</translation>
     </message>
@@ -1185,47 +1185,47 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Distance: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1273"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Points supprimés de manière permanente %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1451"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1458"/>
         <source>Show points.</source>
         <translation>Afficher les points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1985"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1992"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1991"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1998"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1997"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2004"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2010"/>
         <source>Changed links</source>
         <translation>Liens modifiés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2014"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2021"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Altitudes modifiées du point %1 à %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2038"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2045"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Acirvité modifiée pour &apos;%1&apos; pour la trace complète.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2077"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2084"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activité modifiée pur &apos;%1&apos; for la plage (%2..%3).</translation>
     </message>
@@ -1738,27 +1738,27 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="144"/>
+        <location filename="../gis/CGisWidget.cpp" line="145"/>
         <source>Load project...</source>
         <translation>Charger le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="144"/>
+        <location filename="../gis/CGisWidget.cpp" line="145"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Le projet &quot;%1&quot; est déjà présent dans l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="549"/>
+        <location filename="../gis/CGisWidget.cpp" line="550"/>
         <source>Copy items...</source>
         <translation>Copier les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="677"/>
+        <location filename="../gis/CGisWidget.cpp" line="678"/>
         <source>Cut Track...</source>
         <translation>Couper la trace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="677"/>
+        <location filename="../gis/CGisWidget.cpp" line="678"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voulez-vous supprimer la trace originale?</translation>
     </message>
@@ -1945,48 +1945,48 @@ ligne %2, colonne %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="589"/>
+        <location filename="../CMainWindow.cpp" line="588"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Add Map View&lt;/b&gt; pour ouvrir une nouvelle vue. Ou &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour charger une vue sauvegardée. Ou cliquez &lt;a href=&apos;newview&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="717"/>
+        <location filename="../CMainWindow.cpp" line="716"/>
         <source>Ele: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="733"/>
+        <location filename="../CMainWindow.cpp" line="732"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="868"/>
+        <location filename="../CMainWindow.cpp" line="867"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="902"/>
+        <location filename="../CMainWindow.cpp" line="901"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="902"/>
-        <location filename="../CMainWindow.cpp" line="928"/>
+        <location filename="../CMainWindow.cpp" line="901"/>
+        <location filename="../CMainWindow.cpp" line="927"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="928"/>
+        <location filename="../CMainWindow.cpp" line="927"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1107"/>
+        <location filename="../CMainWindow.cpp" line="1106"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1108"/>
+        <location filename="../CMainWindow.cpp" line="1107"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4297,17 +4297,22 @@ Ivo Kronenberg</translation>
         <translation>Supprimer le début de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICutTrk.ui" line="27"/>
+        <location filename="../gis/trk/ICutTrk.ui" line="30"/>
         <source>Keep both parts of the track</source>
         <translation>Séparer la trace en 2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICutTrk.ui" line="37"/>
+        <location filename="../gis/trk/ICutTrk.ui" line="43"/>
         <source>Keep first part of the track and delete second one</source>
         <translation>Supprimer la fin de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICutTrk.ui" line="60"/>
+        <location filename="../gis/trk/ICutTrk.ui" line="55"/>
+        <source>Cut Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICutTrk.ui" line="136"/>
         <source>Check this to store the result into a new track. 
 
 If you keep both parts of the track you have to create new ones. 
@@ -4320,7 +4325,7 @@ Si vous voulez conserver les 2 parties de la trace vous devez en créer de nouve
 Si vous voulez conserver seulement une moitié vous pouvez simplement enlever les points, ou cochez la case pour créer une nouvelle trace.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICutTrk.ui" line="67"/>
+        <location filename="../gis/trk/ICutTrk.ui" line="143"/>
         <source>Create a new track</source>
         <translation>Créer une nouvelle trace</translation>
     </message>
@@ -6548,19 +6553,24 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation>Ajouter un waypoint</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="541"/>
+        <location filename="../plot/IPlot.cpp" line="99"/>
+        <source>Cut...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../plot/IPlot.cpp" line="542"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Enfoncez CTRL pour zoomer uniquement sur l&apos;axe vertical.
 Enfoncez ALT pour zoomer uniquement sur l&apos;axe horizontal.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="696"/>
+        <location filename="../plot/IPlot.cpp" line="697"/>
         <source>No or bad data.</source>
         <translation>Aucune donnée ou données invalides.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1296"/>
+        <location filename="../plot/IPlot.cpp" line="1298"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>

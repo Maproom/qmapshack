@@ -1983,7 +1983,7 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1106"/>
         <source>Fatal...</source>
-        <translation>Неустранимо...</translation>
+        <translation>Неустранимая ошибка...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1107"/>
@@ -4312,7 +4312,7 @@ Ivo Kronenberg</translation>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="55"/>
         <source>Cut Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим вырезания:</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICutTrk.ui" line="136"/>
@@ -6564,7 +6564,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../plot/IPlot.cpp" line="99"/>
         <source>Cut...</source>
-        <translation type="unfinished"></translation>
+        <translation>Вырезать...</translation>
     </message>
     <message>
         <location filename="../plot/IPlot.cpp" line="542"/>

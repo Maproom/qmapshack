@@ -1397,14 +1397,14 @@ void IPlot::slotAddWpt()
 
 void IPlot::slotCutTrk()
 {
-    // set point of mouse click focus to position of contect menu stored in
+    // set point of mouse click focus to position of context menu stored in
     // secondary mouse point
     qreal x = data->x().pt2val(posMouse2.x() - left);
     setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
 
     /*
        Trigger cut by event not by direct call to API. This is because cutting the track
-       might result into deleteing the original one. The riginal one is the parent of this
+       might result into deleting the original one. The original one is the parent of this
        plot and needs to destroy it. This would be impossible if we are still in this method
        because the API call did not return yet.
      */

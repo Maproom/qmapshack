@@ -3944,17 +3944,17 @@ line %2, column %3:
 <context>
     <name>CTcxProject</name>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="49"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="50"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Nepodařilo se nahrát soubor %1...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="71"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="72"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Nepodařilo se otevřít %1</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="82"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="83"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3963,14 +3963,39 @@ line %2, column %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="89"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="90"/>
         <source>Not a TCX file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="94"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="97"/>
         <source>This TCX file does not contain any activity or course: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="257"/>
+        <source>Track with invalid timestamps...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="258"/>
+        <source>The track you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <source>Failed to create file &apos;%1&apos;</source>
+        <translation type="unfinished">Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="351"/>
+        <source>Failed to write file &apos;%1&apos;</source>
+        <translation type="unfinished">Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="363"/>
+        <source>Saving GIS data failed...</source>
+        <translation type="unfinished">Nepodařilo se uložit data GIS...</translation>
     </message>
 </context>
 <context>
@@ -5662,70 +5687,70 @@ Buď je to nový symbol nebo byl v databázi někým smazán.</translation>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="110"/>
         <source>Save project?</source>
         <translation>Uložit projekt?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="109"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="110"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Projekt byl změněn. Uložit jej před zavřením?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="283"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="284"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Svázat stopy a cestovní body.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="293"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="294"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Trvalo to moc dlouho? Chcete svázání stop a cestovních bodů pro tento projekt přeskočit i v budoucnu?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="294"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="295"/>
         <source>Canceled correlation...</source>
         <translation>Svázání zrušeno...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="339"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="392"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="340"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="397"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Uložit &quot;%1&quot; do...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="477"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Název souboru: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="482"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="487"/>
         <source>Waypoints: %1</source>
         <translation>Cestovní body: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="486"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="491"/>
         <source>Tracks: %1</source>
         <translation>Stopy: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="490"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="495"/>
         <source>Routes: %1</source>
         <translation>Cesty: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="494"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="499"/>
         <source>Areas: %1</source>
         <translation>Oblasti: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="614"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="619"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; z projektu &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="615"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="620"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>

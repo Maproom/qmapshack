@@ -26,6 +26,7 @@
 
 
 
+
 CTcxProject::CTcxProject(const QString &filename, CGisListWks * parent)
     : IGisProject(eTypeTcx, filename, parent)
 {
@@ -192,17 +193,12 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 		for (int i = 0; i < tcxCoursePts.count(); i++) // browse course points
 		{
 			QString name = tcxCoursePts.item(i).toElement().elementsByTagName("Name").item(0).firstChild().nodeValue();
-			
-			timeString = tcxCoursePts.item(i).toElement().elementsByTagName("Time").item(0).firstChild().nodeValue();
-			IUnit::parseTimestamp(timeString, trkPtTimestamp);
-			QDateTime &time = trkPtTimestamp;
-
 			qreal lat = tcxCoursePts.item(i).toElement().elementsByTagName("Position").item(0).toElement().elementsByTagName("LatitudeDegrees").item(0).firstChild().nodeValue().toDouble();
 			qreal lon = tcxCoursePts.item(i).toElement().elementsByTagName("Position").item(0).toElement().elementsByTagName("LongitudeDegrees").item(0).firstChild().nodeValue().toDouble();
 			qreal ele = tcxCoursePts.item(i).toElement().elementsByTagName("AltitudeMeters").item(0).firstChild().nodeValue().toDouble();
 			QString icon = tcxCoursePts.item(i).toElement().elementsByTagName("PointType").item(0).firstChild().nodeValue(); // there is no "icon" in course points ;  "PointType" is used instead (can be "turn left", "turn right", etc... See list in http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd)
 
-			new CGisItemWpt(QPointF(lon, lat), ele, time, name, icon, project); // 1 TCX course point gives 1 GPX waypoint
+			new CGisItemWpt(QPointF(lon, lat), ele, QDateTime::currentDateTime().toUTC(), name, icon, project); // 1 TCX course point gives 1 GPX waypoint
 		}
 	}
 	
@@ -242,30 +238,87 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 	tcx.setAttribute("xsi:schemaLocation", "http://www.garmin.com/xmlschemas/ProfileExtension/v1 http://www.garmin.com/xmlschemas/UserProfilePowerExtensionv1.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd http://www.garmin.com/xmlschemas/UserProfile/v2 http://www.garmin.com/xmlschemas/UserProfileExtensionv2.xsd");
 
 	
-	for (int i = 0; i < project.childCount(); i++)
+	CGisItemTrk *trkItem;
+	for (int i = 0; i < project.childCount(); i++) // find 1st project track
 	{
-		CGisItemTrk *item = dynamic_cast<CGisItemTrk*>(project.child(i));
-		if (nullptr == item)
+		trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
+		if (nullptr == trkItem)
 		{
 			continue;
 		}
 		else
 		{
-			// only the first found track will be saved
-			tcx.appendChild(doc.createElement("Courses"));
-			tcx.lastChild().appendChild(doc.createElement("Course"));
-
-			tcx.lastChild().lastChild().appendChild(doc.createElement("Name"));
-			// 15 chars MAX !!
-			tcx.lastChild().lastChild().lastChild().appendChild(doc.createTextNode(item->getName()));
-			
-
-
-			item->saveTCX(tcx);
+			break;
 		}
 	}
 
+	if (!trkItem->isTrkTimeValid())
+	{
+		int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
+			, tr("The track you have selected contains trackpoints with "
+			"invalid timestamps. "
+			"Device might not accept the generated TCX course file if left as is. "
+			"<b>Do you want to apply a filter with constant speed (10 m/s) and continue?</b>")
+			, QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+		if (res == QMessageBox::No)
+		{
+			return false;
+		}
+
+		if (res == QMessageBox::Yes)
+		{
+			trkItem->filterSpeed(10);
+		}
+	}
+
+	QVector<QDateTime> ptDateTimes;
+	QVector<qint32> ptElevations;
+	int j = 0;
+
+	for (int i = 0; i < project.childCount(); i++) // browse waypoints 
+	{
+		CGisItemWpt *wptItem = dynamic_cast<CGisItemWpt*>(project.child(i));
+		if (nullptr == wptItem)
+		{
+			continue;
+		}
+		else
+		{
+			j++;
+			ptDateTimes.resize(j);
+			ptElevations.resize(j);
+			ptDateTimes[j - 1] = trkItem->getCloserPtDateTime(wptItem->getPosition());
+			ptElevations[j - 1] = wptItem->getElevation();
+		}
+	}
 	
+
+	tcx.appendChild(doc.createElement("Courses"));
+	tcx.lastChild().appendChild(doc.createElement("Course"));
+
+	tcx.lastChild().lastChild().appendChild(doc.createElement("Name"));
+	QString str = trkItem->getName();
+	str.truncate(15);
+	tcx.lastChild().lastChild().lastChild().appendChild(doc.createTextNode(str));
+
+			
+	QDomElement lapElmt = doc.createElement("Lap");
+	tcx.lastChild().lastChild().appendChild(lapElmt);
+
+	lapElmt.appendChild(doc.createElement("TotalTimeSeconds"));
+	lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(trkItem->getTotalElapsedSeconds())));
+
+	lapElmt.appendChild(doc.createElement("DistanceMeters"));
+	lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(trkItem->getTotalDistance())));
+			
+	lapElmt.appendChild(doc.createElement("Intensity"));
+	lapElmt.lastChild().appendChild(doc.createTextNode("Active"));
+
+	trkItem->saveTCX(tcx, ptDateTimes, ptElevations);
+
+	
+
+	j = 0;
 	for (int i = 0; i < project.childCount(); i++)
 	{
 		CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));
@@ -274,7 +327,8 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 			continue;
 		}
 
-		item->saveTCX(tcx);
+		item->saveTCX(tcx, ptDateTimes[j]);
+		j++;
 	}
 
 
@@ -319,12 +373,14 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 }
 
 
-void CGisItemTrk::saveTCX(QDomNode& tcx)
+void CGisItemTrk::saveTCX(QDomNode& tcx, QVector<QDateTime> ptDateTimes, QVector<qint32> ptElevations)
 {
 	QDomDocument doc = tcx.ownerDocument();
 
 	QDomElement xmlTrk = doc.createElement("Track");
 	tcx.lastChild().lastChild().appendChild(xmlTrk);
+
+	int i = 0;
 
 	for (const CTrackData::trkseg_t &seg : trk.segs)
 	{
@@ -334,11 +390,8 @@ void CGisItemTrk::saveTCX(QDomNode& tcx)
 			xmlTrk.appendChild(xmlTrkpt);
 
 			xmlTrkpt.appendChild(doc.createElement("Time"));
-			if (pt.time.isValid())
-			{
-				xmlTrkpt.lastChild().appendChild(doc.createTextNode(pt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
-			}
-
+			xmlTrkpt.lastChild().appendChild(doc.createTextNode(pt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+		
 			xmlTrkpt.appendChild(doc.createElement("Position"));
 			
 			xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
@@ -350,16 +403,75 @@ void CGisItemTrk::saveTCX(QDomNode& tcx)
 			str.sprintf("%1.8f", pt.lon);
 			xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
-			xmlTrkpt.appendChild(doc.createElement("AltitudeMeters"));
-			xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(pt.ele)));
-
+			qint32 eleToBeWritten = NOINT;
 			
+			if ((i < ptDateTimes.size()) && (pt.time == ptDateTimes[i])) // if trackpoint corresponds to one of the waypoints to be attached to the track
+			{
+				if (ptElevations[i] != NOINT) // if waypoint has elevation
+				{
+					eleToBeWritten = ptElevations[i]; // take elevation of the waypoint
+				}
+				else 
+				{
+					eleToBeWritten = pt.ele; // if not, take elevation on the trackpoint
+				}
+				i++;
+			}
+			else
+			{
+				if (pt.ele != NOINT) // if this trackpoint has elevation
+				{
+					eleToBeWritten = pt.ele;
+				}
+			}
+			
+			
+			if (eleToBeWritten != NOINT) // if valid elevation has been found
+			{
+				xmlTrkpt.appendChild(doc.createElement("AltitudeMeters"));
+				xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(eleToBeWritten)));
+			}
+
+			xmlTrkpt.appendChild(doc.createElement("DistanceMeters"));
+			xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(pt.distance)));
 		}
 	}
 }
 
 
-void CGisItemWpt::saveTCX(QDomNode& tcx)
+QDateTime CGisItemTrk::getCloserPtDateTime(const QPointF inputPoint)
+{
+	qreal shortestDistFound;
+	QDateTime shortestDistPtDateTime;
+	bool firstCycle = true;
+
+	for (const CTrackData::trkseg_t &seg : trk.segs)
+	{
+		for (const CTrackData::trkpt_t &pt : seg.pts)
+		{
+			qreal dist = GPS_Math_Distance(pt.lon, pt.lat, inputPoint.x(), inputPoint.y());
+			if (firstCycle)
+			{
+				shortestDistFound = dist;
+				firstCycle = false;
+			}
+			else
+			{
+				if (dist < shortestDistFound)
+				{
+					shortestDistFound = dist;
+					shortestDistPtDateTime = pt.time;
+				}
+			}
+		}
+	}
+
+	return shortestDistPtDateTime;
+}
+
+
+
+void CGisItemWpt::saveTCX(QDomNode& tcx, const QDateTime crsPtDateTimeToBeSaved)
 {
 	QDomDocument doc = tcx.ownerDocument();
 
@@ -367,15 +479,16 @@ void CGisItemWpt::saveTCX(QDomNode& tcx)
 	tcx.lastChild().lastChild().appendChild(xmlCrsPt);
 
 	xmlCrsPt.appendChild(doc.createElement("Name"));
-	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.name));
+	QString str = wpt.name;
+	str.truncate(10);
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(str));
 
 	xmlCrsPt.appendChild(doc.createElement("Time"));
-	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(crsPtDateTimeToBeSaved.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
 	xmlCrsPt.appendChild(doc.createElement("Position"));
 
 	xmlCrsPt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
-	QString str;
 	str.sprintf("%1.8f", wpt.lat);
 	xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
@@ -383,10 +496,39 @@ void CGisItemWpt::saveTCX(QDomNode& tcx)
 	str.sprintf("%1.8f", wpt.lon);
 	xmlCrsPt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
-	xmlCrsPt.appendChild(doc.createElement("AltitudeMeters"));
-	xmlCrsPt.lastChild().appendChild(doc.createTextNode(QString::number(wpt.ele)));
+	if (wpt.ele != NOINT)
+	{
+		xmlCrsPt.appendChild(doc.createElement("AltitudeMeters"));
+		xmlCrsPt.lastChild().appendChild(doc.createTextNode(QString::number(wpt.ele)));
+	}
+
+
+	QString pointTypeToBeWritten;
+
+	if (wpt.sym != "1st Category" &&
+		wpt.sym != "2nd Category" &&
+		wpt.sym != "3rd Category" &&
+		wpt.sym != "4th Category" &&
+		wpt.sym != "Danger" &&
+		wpt.sym != "First Aid" &&
+		wpt.sym != "Food" &&
+		wpt.sym != "Hors Category" &&
+		wpt.sym != "Left" &&
+		wpt.sym != "Right" &&
+		wpt.sym != "Sprint" &&
+		wpt.sym != "Straight" &&
+		wpt.sym != "Summit" &&
+		wpt.sym != "Valley" &&
+		wpt.sym != "Water")
+	{
+		pointTypeToBeWritten = "Generic";
+	}
+	else
+	{
+		pointTypeToBeWritten = wpt.sym;
+	}
 
 	xmlCrsPt.appendChild(doc.createElement("PointType"));
-	xmlCrsPt.lastChild().appendChild(doc.createTextNode(wpt.sym));
+	xmlCrsPt.lastChild().appendChild(doc.createTextNode(pointTypeToBeWritten));
 
 }

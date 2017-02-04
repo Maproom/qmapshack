@@ -24,15 +24,12 @@
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
-#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
-#include "gis/slf/CSlfProject.h"
-#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -105,40 +102,8 @@ void CGisWidget::loadGisProject(const QString& filename)
     treeWks->blockSignals(true);
 
     QMutexLocker lock(&IGisItem::mutexItems);
-    IGisProject *item = nullptr;
-    QString suffix = QFileInfo(filename).suffix().toLower();
-    if(suffix == "gpx")
-    {
-        item = new CGpxProject(filename, treeWks);
-    }
-    else if(suffix == "qms")
-    {
-        item = new CQmsProject(filename, treeWks);
-    }
-    else if(suffix == "slf")
-    {
-        item = new CSlfProject(filename);
 
-        // the CSlfProject does not - as the other C*Project - register itself in the list
-        // of currently opened projects. This is done manually here.
-        treeWks->addProject(item);
-    }
-    else if(suffix == "fit")
-    {
-        item = new CFitProject(filename, treeWks);
-    }
-    else if(suffix == "tcx")
-    {
-        item = new CTcxProject(filename, treeWks);
-    }
-
-
-    if(item && !item->isValid())
-    {
-        delete item;
-        item = nullptr;
-    }
-
+    IGisProject * item = IGisProject::create(filename, treeWks);
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {

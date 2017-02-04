@@ -67,6 +67,7 @@ private slots:
     void slotMoveFolder();
     void slotReadyRead();
     void slotExportToGpx();
+    void slotImport();
 
 private:
     friend class CGisListDBEditLock;
@@ -86,6 +87,7 @@ private:
     QAction * actionMoveFolder;
     QAction * actionDelFolder;
     QAction * actionExportToGpx;
+    QAction * actionImport;
 
     QMenu * menuDatabase;
     QAction * actionDelDatabase;

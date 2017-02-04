@@ -107,6 +107,8 @@ public:
     IGisProject(type_e type, const QString &filename, IDevice     *parent);
     virtual ~IGisProject();
 
+    static IGisProject * create(const QString filename, CGisListWks * parent);
+
     /**
        @brief Ask to save the project before it is closed.
 
@@ -230,6 +232,11 @@ public:
     const QList<IGisItem::link_t>& getLinks() const
     {
         return metadata.links;
+    }
+
+    const metadata_t& getMetadata() const
+    {
+        return metadata;
     }
 
     /**

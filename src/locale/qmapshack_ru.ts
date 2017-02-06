@@ -269,22 +269,22 @@
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="112"/>
         <source>Failed to load...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось загрузить...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="113"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить файл %1 не удалось. Он будет пропущен.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="126"/>
         <source>Project already in database...</source>
-        <translation type="unfinished"></translation>
+        <translation>Проект уже в базе данных...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="127"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
-        <translation type="unfinished"></translation>
+        <translation>Проект &quot;%1&quot; уже был загружен в базу данных. Он будет пропущен.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="278"/>
@@ -1458,7 +1458,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="127"/>
         <source>Import from Files...</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать файлы...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="128"/>
@@ -1560,7 +1560,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="1055"/>
         <source>Import GIS Data...</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать данные GIS...</translation>
     </message>
 </context>
 <context>

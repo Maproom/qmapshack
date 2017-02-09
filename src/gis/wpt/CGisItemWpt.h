@@ -156,12 +156,12 @@ public:
        @param out   the text stream to write to
      */
     void saveTwoNav(QTextStream &out, const QDir &dir);
-	/**
-	@brief Save waypoint to TCX waypoint file
-	@param  tcx  The <TrainingCenterDatabase> node to append by the waypoint
-	@param  crsPtDateTimeToBeSaved  course point dateTime to be saved (NOT the waypoint date and time !)
-	*/
-	void saveTCX(QDomNode& tcx, const QDateTime crsPtDateTimeToBeSaved);
+    /**
+    @brief Save waypoint to TCX waypoint file
+    @param  tcx  The <TrainingCenterDatabase> node to append by the waypoint
+    @param  crsPtDateTimeToBeSaved  course point dateTime to be saved (NOT the waypoint date and time !)
+    */
+    void saveTCX(QDomNode& tcx, const QDateTime crsPtDateTimeToBeSaved);
     /**
        @brief Read serialized waypoint from a binary data stream
        @param stream  the data stream to read from

@@ -360,10 +360,10 @@ bool IGisProject::saveAs(QString fn, QString filter)
     {
         res = CQmsProject::saveAs(fn, *this);
     }
-	else if (filter == filedialogFilterTCX)
-	{
-		res = CTcxProject::saveAs(fn, *this);
-	}
+    else if (filter == filedialogFilterTCX)
+    {
+        res = CTcxProject::saveAs(fn, *this);
+    }
     else
     {
         return false;

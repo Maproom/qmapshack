@@ -40,12 +40,14 @@ public:
 
     static void loadTcx(const QString &filename, CTcxProject *project);
 
-	static bool saveAs(const QString& fn, IGisProject& project);
+    static bool saveAs(const QString& fn, IGisProject& project);
 
 private:
     void loadTcx(const QString& filename);
+    void loadActivity(QDomNode& activityRootNode);
+    void loadCourse(QDomNode& courseRootNode);
 
-	
+    
 };
 
 #endif //CTCXPROJECT_H

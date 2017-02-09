@@ -1075,21 +1075,21 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>En déplacement: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1214"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1227"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1283"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1327"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1466"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1248"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1261"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1317"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1361"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1500"/>
         <source>track</source>
         <translation>trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1418"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1452"/>
         <source>Hide point %1.</source>
         <translation>Cacher les points %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1422"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1456"/>
         <source>Hide points %1..%2.</source>
         <translation>Cacher les points %1..%2.</translation>
     </message>
@@ -1185,47 +1185,47 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Distance: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1273"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1307"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Points supprimés de manière permanente %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1451"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1485"/>
         <source>Show points.</source>
         <translation>Afficher les points.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1985"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2019"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1991"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2025"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1997"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2031"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2003"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2037"/>
         <source>Changed links</source>
         <translation>Liens modifiés</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2014"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2048"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Altitudes modifiées du point %1 à %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2038"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2072"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Acirvité modifiée pour &apos;%1&apos; pour la trace complète.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2077"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2111"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Activité modifiée pur &apos;%1&apos; for la plage (%2..%3).</translation>
     </message>
@@ -3967,32 +3967,47 @@ ligne %2, colonne %3:
         <translation>Ce n&apos;est pas un fichier TCX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="97"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="100"/>
+        <source>This TCX file contains at least 1 workout, but neither an activity nor a course. As workouts do not contain position data, they can not be imported to QMapShack.</source>
+        <translation>Ce fichier TCX contient au moins un entraînement, mais pas d&apos;activité ni de course. Comme les entraînements ne contiennent pas de données de position, ils ne peuvent pas être importés par QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="105"/>
         <source>This TCX file does not contain any activity or course: %1</source>
         <translation>Ce fichier TCX ne contient ni activité ni course : %1</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="257"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="286"/>
+        <source>No track in selected project...</source>
+        <translation>Aucune trace dans le fichier selectionné...</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="287"/>
+        <source>The project you have selected does not contain any track ! A course with no track makes no sense. &lt;b&gt;Please add a track to this project and try again.&lt;/b&gt;</source>
+        <translation>Le projet que vous avez selectionné ne contient aucune trace ! Une course ne peut exister sans trace. &lt;b&gt;Ajoutez une trace et réessayez s&apos;il-vous-plaît.&lt;/b&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="297"/>
         <source>Track with invalid timestamps...</source>
         <translation>Horodatage de trace invalide...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="258"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="298"/>
         <source>The track you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
         <translation>La trace sélectionnée contient des points à l&apos;horodatage invalide. L&apos;appareil risque de ne pas accepter le fichier TCX course si il est généré tel quel. &lt;b&gt;Voulez-vous appliquer une vitesse arbitraire (10 m/s) et continuer ?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="378"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Impossible de créer le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="351"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="388"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Impossible d&apos;écrire le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="363"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="400"/>
         <source>Saving GIS data failed...</source>
         <translation>Impossible de sauvegarder les données SIG...</translation>
     </message>

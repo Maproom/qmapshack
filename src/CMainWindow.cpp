@@ -1076,7 +1076,7 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
         QFileInfo fi(urls[0].path());
         QString ext = fi.suffix().toUpper();
 
-		if ((ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") || (ext == "TCX"))
+        if ((ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") || (ext == "TCX"))
         {
             event->acceptProposedAction();
         }

@@ -266,7 +266,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     tcx.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
     tcx.setAttribute("xsi:schemaLocation", "http://www.garmin.com/xmlschemas/ProfileExtension/v1 http://www.garmin.com/xmlschemas/UserProfilePowerExtensionv1.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd http://www.garmin.com/xmlschemas/UserProfile/v2 http://www.garmin.com/xmlschemas/UserProfileExtensionv2.xsd");
 
-    
+    int j = 0;
     CGisItemTrk *trkItem = nullptr;
     for (int i = 0; i < project.childCount(); i++) // find 1st project track
     {
@@ -277,7 +277,8 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         }
         else
         {
-            break;
+            j = j + 1;
+            //break;
         }
     }
 
@@ -289,7 +290,18 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             "<b>Please add a track to this project and try again.</b>")
             , QMessageBox::Ok, QMessageBox::Ok);
              return false;
-     }
+    }
+
+
+    if (j > 1)
+    {
+        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("More than one track in selected project...")
+            , tr("The project you have selected contains more than one track ! "
+            "A course can be built from one single track only. "
+            "<b>Please remove unwanted tracks from project and try again.</b>")
+            , QMessageBox::Ok, QMessageBox::Ok);
+        return false;
+    }
 
 
     if (!trkItem->isTrkTimeValid())
@@ -354,7 +366,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 
     
 
-    int j = 0;
+    j = 0;
     for (int i = 0; i < project.childCount(); i++)
     {
         CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));

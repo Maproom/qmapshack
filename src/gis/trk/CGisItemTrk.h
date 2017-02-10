@@ -32,6 +32,7 @@
 #include <functional>
 #include <interpolation.h>
 
+
 class QDomNode;
 class IGisProject;
 class INotifyTrk;
@@ -144,6 +145,14 @@ public:
        @param dir   the path to store the file
      */
     bool saveTwoNav(const QString& filename);
+
+    /**
+    @brief Save track to TCX track file
+    @param tcx   The <TrainingCenterDatabase> node to append by the track
+    @param trkPtToOverwriteDateTimes   dateTimes of track points whose elevation has to be overwritten
+    @param trkPtToOverwriteElevations   elevations to be written
+    */
+    void saveTCX(QDomNode& tcx, QList<QDateTime>& trkPtToOverwriteDateTimes, QList<qint32>& trkPtToOverwriteElevations);
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from
@@ -162,6 +171,12 @@ public:
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
+
+    /// get date and time of the trackpoint which is closer to inputPoint (lat, lon)
+    QDateTime getCloserPtDateTime(const QPointF inputPoint);
+
+    /// returns "true" when trk has no time-related invalid points
+    bool isTrkTimeValid() { return ((allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0); }
 
     QDateTime getTimestamp() const override { return getTimeStart(); }
 

@@ -640,6 +640,38 @@ qint32 CGisItemTrk::getElevation(qint32 idx) const
     return trkpt != nullptr ? trkpt->ele : NOINT;
 }
 
+
+QDateTime CGisItemTrk::getCloserPtDateTime(const QPointF inputPoint)
+{
+    qreal shortestDistFound;
+    QDateTime shortestDistPtDateTime;
+    bool firstCycle = true;
+
+    for (const CTrackData::trkseg_t &seg : trk.segs)
+    {
+        for (const CTrackData::trkpt_t &pt : seg.pts)
+        {
+            qreal dist = GPS_Math_Distance(pt.lon, pt.lat, inputPoint.x(), inputPoint.y());
+            if (firstCycle)
+            {
+                shortestDistFound = dist;
+                firstCycle = false;
+            }
+            else
+            {
+                if (dist < shortestDistFound)
+                {
+                    shortestDistFound = dist;
+                    shortestDistPtDateTime = pt.time;
+                }
+            }
+        }
+    }
+
+    return shortestDistPtDateTime;
+}
+
+
 IScrOpt * CGisItemTrk::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
     if(scrOpt.isNull())
@@ -675,6 +707,8 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
     qint32 bestIdx = getIdxPointCloseBy(screenPos, lineSimple);
     return (NOIDX == bestIdx) ? NOPOINTF : lineSimple[bestIdx];
 }
+
+
 
 
 bool CGisItemTrk::isRangeSelected() const

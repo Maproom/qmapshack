@@ -270,18 +270,18 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     CGisItemTrk *trkItem = nullptr;
     for (int i = 0; i < project.childCount(); i++) // find tracks in selected project
     {
-        trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
-        if (nullptr == trkItem)
+        if (nullptr == dynamic_cast<CGisItemTrk*>(project.child(i)))
         {
             continue;
         }
         else
         {
+            trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
             j = j + 1; // count number of tracks in selected project
         }
     }
 
-    if (nullptr == trkItem)
+    if (j == 0)
     {
         int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("No track in selected project...")
             , tr("The project you have selected does not contain any track ! "

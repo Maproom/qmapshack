@@ -27,6 +27,7 @@
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/tcx/CTcxProject.h"
@@ -45,7 +46,7 @@ const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.t
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
-const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
+const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
 
@@ -403,6 +404,10 @@ bool IGisProject::saveAs(QString fn, QString filter)
     else if(filter == filedialogFilterQMS)
     {
         res = CQmsProject::saveAs(fn, *this);
+    }
+    else if (filter == filedialogFilterTCX)
+    {
+        res = CTcxProject::saveAs(fn, *this);
     }
     else
     {

@@ -268,7 +268,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 
     int j = 0;
     CGisItemTrk *trkItem = nullptr;
-    for (int i = 0; i < project.childCount(); i++) // find 1st project track
+    for (int i = 0; i < project.childCount(); i++) // find tracks in selected project
     {
         trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
         if (nullptr == trkItem)
@@ -277,8 +277,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         }
         else
         {
-            j = j + 1;
-            //break;
+            j = j + 1; // count number of tracks in selected project
         }
     }
 

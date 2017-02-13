@@ -172,7 +172,7 @@ void CActivityTrk::update()
             continue;
         }
         lastTrkpt = &pt;
-        if(pt.flags != lastFlag)
+        if((pt.flags & CTrackData::trkpt_t::eActMask) != lastFlag)
         {
             if(startTrkpt != nullptr)
             {
@@ -200,7 +200,7 @@ void CActivityTrk::update()
             }
 
             startTrkpt  = &pt;
-            lastFlag    = pt.flags;
+            lastFlag    = pt.flags & CTrackData::trkpt_t::eActMask;
         }
     }
 

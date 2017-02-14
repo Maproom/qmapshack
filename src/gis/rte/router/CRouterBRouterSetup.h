@@ -39,7 +39,7 @@ public slots:
     void reject() override;
 
 private slots:
-    void slotCheckLocal(int state);
+    void slotCheckLocal(const int state);
     void slotHostChanged();
     void slotPortChanged();
     void slotAddProfile();
@@ -56,12 +56,12 @@ private:
     void load();
     void save();
     void updateDialog();
-    QStringList readProfiles(QString path);
-    QStringList defaultProfiles();
-    QString defaultHost();
-    QString defaultPort();
-    QString defaultLocalHost();
-    QString defaultLocalPort();
+    QStringList readProfiles(const QString path);
+    const QStringList defaultProfiles();
+    const QString defaultHost();
+    const QString defaultPort();
+    const QString defaultLocalHost();
+    const QString defaultLocalPort();
 
     QString host;
     QString port;

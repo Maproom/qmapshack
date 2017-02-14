@@ -108,7 +108,7 @@ void CRouterBRouterSetup::updateDialog()
     }
 }
 
-void CRouterBRouterSetup::slotCheckLocal(int state)
+void CRouterBRouterSetup::slotCheckLocal(const int state)
 {
     switch(state) {
     case Qt::Checked:
@@ -146,7 +146,7 @@ void CRouterBRouterSetup::slotAddProfile()
 
 void CRouterBRouterSetup::slotDelProfile()
 {
-    QList<QListWidgetItem *> items = listProfiles->selectedItems();
+    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
     bool changed = false;
     for(int i=0; i < items.size(); i++)
     {
@@ -165,7 +165,7 @@ void CRouterBRouterSetup::slotDelProfile()
 
 void CRouterBRouterSetup::slotUpdateProfile()
 {
-    QList<QListWidgetItem *> items = listProfiles->selectedItems();
+    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
     if(items.size() == 1 and lineProfile->text().length() > 0)
     {
         int idx = profiles.indexOf(items.at(0)->text());
@@ -181,7 +181,7 @@ void CRouterBRouterSetup::slotUpdateProfile()
 
 void CRouterBRouterSetup::slotProfileUp()
 {
-    QList<QListWidgetItem *> items = listProfiles->selectedItems();
+    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
     if (items.size() == 1)
     {
         int idx = profiles.indexOf(items.at(0)->text());
@@ -197,7 +197,7 @@ void CRouterBRouterSetup::slotProfileUp()
 
 void CRouterBRouterSetup::slotProfileDown()
 {
-    QList<QListWidgetItem *> items = listProfiles->selectedItems();
+    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
     if (items.size() == 1)
     {
         int idx = profiles.indexOf(items.at(0)->text());
@@ -213,7 +213,7 @@ void CRouterBRouterSetup::slotProfileDown()
 
 void CRouterBRouterSetup::slotItemSelectionChanged()
 {
-    QList<QListWidgetItem *> items = listProfiles->selectedItems();
+    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
     if(items.size() == 1)
     {
         lineProfile->setText(items.at(0)->text());
@@ -297,7 +297,7 @@ QStringList CRouterBRouterSetup::readProfiles(QString path)
     return profiles;
 }
 
-QStringList CRouterBRouterSetup::defaultProfiles()
+const QStringList CRouterBRouterSetup::defaultProfiles()
 {
     QStringList list;
     list.append("trekking");
@@ -320,22 +320,22 @@ QStringList CRouterBRouterSetup::defaultProfiles()
     return list;
 }
 
-QString CRouterBRouterSetup::defaultHost()
+const QString CRouterBRouterSetup::defaultHost()
 {
     return QString("h2096617.stratoserver.net");
 }
 
-QString CRouterBRouterSetup::defaultPort()
+const QString CRouterBRouterSetup::defaultPort()
 {
     return "443";
 }
 
-QString CRouterBRouterSetup::defaultLocalHost()
+const QString CRouterBRouterSetup::defaultLocalHost()
 {
     return "127.0.0.1";
 }
 
-QString CRouterBRouterSetup::defaultLocalPort()
+const QString CRouterBRouterSetup::defaultLocalPort()
 {
     return "17777";
 }

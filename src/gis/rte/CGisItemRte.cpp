@@ -1187,15 +1187,22 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
     rte.lastRoutedWith = "BRouter" + options;
 
 //    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
-    QDomNode comment = xml.firstChild();
-    if(comment.isComment())
+    QDomNodeList nodes = xml.childNodes();
+    for (int i = 0; i < nodes.count(); i++)
     {
-        QString commentTxt = comment.toComment().data();
-        QRegExp rxAscDes("(.+ filtered ascend = )(\\d+)( plain-ascend = )(\\d+)( .+)");
-        int pos = rxAscDes.indexIn(commentTxt);
-        if (pos > -1) {
-            rte.ascent = rxAscDes.cap(2).toFloat();
-            rte.descent = rxAscDes.cap(4).toFloat();
+        QDomNode node = nodes.at(i);
+        if (node.isComment())
+        {
+            QString commentTxt = node.toComment().data();
+            QRegExp rxAscDes("( track-length = )(\\d+)( filtered ascend = )(\\d+)( plain-ascend = )(\\d+)( )(cost=\\d+)( )");
+            int pos = rxAscDes.indexIn(commentTxt);
+            if (pos > -1) {
+                rte.totalDistance = rxAscDes.cap(2).toFloat();
+                rte.ascent = rxAscDes.cap(4).toFloat();
+                rte.descent = rxAscDes.cap(6).toFloat();
+                rte.desc = rxAscDes.cap(8);
+            }
+            break;
         }
     }
 

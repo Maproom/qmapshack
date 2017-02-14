@@ -73,7 +73,6 @@ private:
     QTimer * timerCloseStatusMsg;
 
     bool synchronous = false;
-    QPolygonF synchronousCoords = QPolygonF();
     QMutex mutex {QMutex::NonRecursive};
 
     CRouterBRouterSetup setup;

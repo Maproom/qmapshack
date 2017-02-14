@@ -122,15 +122,12 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
         }
     }
 
-    QList< QPair<QString, QString> > queryItems;
-    queryItems << QPair<QString, QString>("lonlats",lonlats.toLatin1());
-    queryItems << QPair<QString, QString>("nogos", "");
-    queryItems << QPair<QString, QString>("profile", comboBRProfile->currentData().toString());
-    queryItems << QPair<QString, QString>("alternativeidx", comboBRAlternative->currentData().toString());
-    queryItems << QPair<QString, QString>("format", "gpx");
-
     QUrlQuery urlQuery;
-    urlQuery.setQueryItems(queryItems);
+    urlQuery.addQueryItem("lonlats",lonlats.toLatin1());
+    urlQuery.addQueryItem("nogos", "");
+    urlQuery.addQueryItem("profile", comboBRProfile->currentData().toString());
+    urlQuery.addQueryItem("alternativeidx", comboBRAlternative->currentData().toString());
+    urlQuery.addQueryItem("format", "gpx");
 
     QUrl url(QString("http://"));
     url.setHost(setup.getHost());
@@ -209,7 +206,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
     eventLoop.exec();
 
-    QByteArray res = reply->readAll();
+    const QByteArray res = reply->readAll();
     reply->deleteLater();
 
     if(res.isEmpty())
@@ -221,24 +218,21 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         QDomDocument xml;
         xml.setContent(res);
 
-        QDomElement xmlGpx = xml.documentElement();
+        const QDomElement xmlGpx = xml.documentElement();
         if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
         {
             coords.clear();
-            QString resStr(res);
-            QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(resStr), QMessageBox::Abort);
+            QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(QString(res)), QMessageBox::Abort);
         }
         else
         {
-            QDomElement gpx = xml.documentElement();
             // read the shape
-            QDomElement xmlShape        = gpx.firstChildElement("trk");
-            QDomElement xmlShapePoints  = xmlShape.firstChildElement("trkseg");
-            QDomNodeList xmlLatLng      = xmlShapePoints.elementsByTagName("trkpt");
-            const qint32 N = xmlLatLng.size();
-            for(int n = 0; n < N; n++)
+            const QDomNodeList xmlLatLng = xmlGpx.firstChildElement("trk")
+                    .firstChildElement("trkseg")
+                    .elementsByTagName("trkpt");
+            for(int n = 0; n < xmlLatLng.size(); n++)
             {
-                QDomElement elem   = xmlLatLng.item(n).toElement();
+                const QDomElement elem   = xmlLatLng.item(n).toElement();
                 coords << QPointF();
                 QPointF& point = coords.last();
                 point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
@@ -271,7 +265,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         return;
     }
 
-    QByteArray res = reply->readAll();
+    const QByteArray res = reply->readAll();
     reply->deleteLater();
 
     if(res.isEmpty())
@@ -282,11 +276,10 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     QDomDocument xml;
     xml.setContent(res);
 
-    QDomElement xmlGpx = xml.documentElement();
+    const QDomElement xmlGpx = xml.documentElement();
     if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
     {
-        QString resStr(res);
-        QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(resStr), QMessageBox::Abort);
+        QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(QString(res)), QMessageBox::Abort);
         return;
     }
 

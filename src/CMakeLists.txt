@@ -60,6 +60,7 @@ endif(APPLE)
 set( SRCS
         GeoMath.cpp
         CMainWindow.cpp
+        CSingleInstanceProxy.cpp
         CAbout.cpp
         widgets/CTinySpinBox.cpp
         widgets/CDoubleSpinBox.cpp
@@ -328,6 +329,7 @@ set( HDRS
         version.h
         GeoMath.h
         CMainWindow.h
+        CSingleInstanceProxy.h
         CAbout.h
         widgets/CTinySpinBox.h
         widgets/CDoubleSpinBox.h

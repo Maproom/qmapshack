@@ -25,18 +25,28 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
     QLocalSocket socket;
     socket.connectToServer("QMapShack");
     if(socket.waitForConnected(1000))
-    {
+    {        
+        // if the connection is successful another instance
+        // is already running. In that case the list of files to
+        // open is sent to the primary instance. And this instance
+        // will be closed imediately.
         QDataStream stream(&socket);
         stream << filenames;
-        socket.waitForBytesWritten(1000);
+        socket.waitForBytesWritten(3000);
+
+        qDebug() << "There is alread an instance of QMapShack runnig. Exit this one.";
         exit(0);
     }
 
-
+    // Looks like we are the first instance.
+    // Create a server socket and wait for other instances to connect.
     server = new QLocalServer(this);
     connect(server, &QLocalServer::newConnection, this, &CSingleInstanceProxy::slotNewConnection);
-
     server->listen("QMapShack");
+}
+
+CSingleInstanceProxy::~CSingleInstanceProxy()
+{
 }
 
 void CSingleInstanceProxy::slotNewConnection()
@@ -47,16 +57,20 @@ void CSingleInstanceProxy::slotNewConnection()
         return;
     }
 
-    if(socket->waitForReadyRead(2000))
+    // Each secondoray instance will send a QStringList with files to open
+    // The list can be empty.
+    if(socket->waitForReadyRead(3000))
     {
         QStringList filenames;
         QDataStream stream(socket);
         stream >> filenames;
 
-        CMainWindow::self().loadGISData(filenames);
+        CMainWindow& w = CMainWindow::self();
+        w.loadGISData(filenames);
 
-        CMainWindow::self().raise();
-        QApplication::setActiveWindow(&CMainWindow::self());
+        // raise the application window to top of desktop
+        w.raise();
+        QApplication::setActiveWindow(&w);
     }
 
     socket->close();

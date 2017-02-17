@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "CSingleInstanceProxy.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
 
@@ -37,6 +38,13 @@ int main(int argc, char ** argv)
     env->processArguments();
     env->initLogHandler();
     env->initQMapShack();
+
+    uint seed = QDateTime::currentDateTime().toTime_t();
+    qsrand(seed);
+
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
+
+    CSingleInstanceProxy singleInstanceProxy(qlOpts->arguments);
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)
@@ -59,10 +67,6 @@ int main(int argc, char ** argv)
         splash->show();
     }
 
-    uint seed = QDateTime::currentDateTime().toTime_t();
-    qsrand(seed);
-
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     CMainWindow w;
     w.show();

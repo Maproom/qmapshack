@@ -26,13 +26,13 @@ class CSingleInstanceProxy : public QObject
 {
 public:
     CSingleInstanceProxy(const QStringList filenames);
-    virtual ~CSingleInstanceProxy() = default;
+    virtual ~CSingleInstanceProxy();
 
 private slots:
     void slotNewConnection();
 
 private:
-    QLocalServer * server;
+    QLocalServer * server = nullptr;
 };
 
 #endif //CSINGLEINSTANCEPROXY_H

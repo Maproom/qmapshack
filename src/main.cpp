@@ -39,12 +39,16 @@ int main(int argc, char ** argv)
     env->initLogHandler();
     env->initQMapShack();
 
+    // setup random number generator. currently used for an
+    // unique instance ID.
     uint seed = QDateTime::currentDateTime().toTime_t();
     qsrand(seed);
 
+    // setup default proxy
     QNetworkProxyFactory::setUseSystemConfiguration(true);
 
-    CSingleInstanceProxy singleInstanceProxy(qlOpts->arguments);
+    // make sure this is the one and only instance on the system
+    CSingleInstanceProxy s(qlOpts->arguments);
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)

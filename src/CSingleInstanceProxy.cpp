@@ -54,6 +54,9 @@ void CSingleInstanceProxy::slotNewConnection()
         stream >> filenames;
 
         CMainWindow::self().loadGISData(filenames);
+
+        CMainWindow::self().raise();
+        QApplication::setActiveWindow(&CMainWindow::self());
     }
 
     socket->close();

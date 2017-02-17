@@ -1,5 +1,4 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
@@ -17,325 +16,258 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "gis/rte/router/CRouterBRouterSetup.h"
 #include "helpers/CSettings.h"
-#include <QtWidgets>
+#include <QtNetwork>
+#include <QtScript>
 
 CRouterBRouterSetup::CRouterBRouterSetup()
-    : QDialog(CMainWindow::getBestWidgetForParent())
 {
-    setupUi(this);
-
-    connect(checkLocal,        &QCheckBox::stateChanged,           this, &CRouterBRouterSetup::slotCheckLocal);
-    connect(lineHost,          &QLineEdit::textChanged,            this, &CRouterBRouterSetup::slotHostChanged);
-    connect(linePort,          &QLineEdit::textChanged,            this, &CRouterBRouterSetup::slotPortChanged);
-    connect(toolProfilePath,   &QToolButton::clicked,              this, &CRouterBRouterSetup::slotSelectProfilesPath);
-    connect(pushDefaultLocal,  &QPushButton::clicked,              this, &CRouterBRouterSetup::slotPushDefaultLocal);
-    connect(pushDefaultOnline, &QPushButton::clicked,              this, &CRouterBRouterSetup::slotPushDefaultOnline);
-    connect(toolAddProfile,    &QToolButton::clicked,              this, &CRouterBRouterSetup::slotAddProfile);
-    connect(toolDeleteProfile, &QToolButton::clicked,              this, &CRouterBRouterSetup::slotDelProfile);
-    connect(toolUpdateProfile, &QToolButton::clicked,              this, &CRouterBRouterSetup::slotUpdateProfile);
-    connect(toolProfileUp,     &QToolButton::clicked,              this, &CRouterBRouterSetup::slotProfileUp);
-    connect(toolProfileDown,   &QToolButton::clicked,              this, &CRouterBRouterSetup::slotProfileDown);
-    connect(listProfiles,      &QListWidget::itemSelectionChanged, this, &CRouterBRouterSetup::slotItemSelectionChanged);
-
-    load();
-
-    updateDialog();
-
-    labelHelp->setText(tr("Configure BRouter settings here..."));
 }
 
 CRouterBRouterSetup::~CRouterBRouterSetup()
 {
-    save();
 }
 
 void CRouterBRouterSetup::load()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-    host = cfg.value("host", defaultHost()).toString();
-    port = cfg.value("port", defaultPort()).toString();
-    profiles = cfg.value("profiles", "").toString().split(QRegExp("[,;| ]"),QString::SkipEmptyParts);
-    profilePath = cfg.value("profilePath", "").toString();
-    local = cfg.value("local", false).toBool();
+
+    installMode = modeFromString(cfg.value("installMode",stringFromMode(Mode_Online)).toString());
+    expertMode = cfg.value("expertMode",false).toBool();
+    onlineWebUrl = cfg.value("onlineWebUrl", defaultOnlineWebUrl).toString();
+    onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
+    onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
+    localDir = cfg.value("localDir", defaultLocalDir).toString();
+    localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
+    localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
+    localHost = cfg.value("localHost", defaultLocalHost).toString();
+    localPort = cfg.value("localPort", defaultLocalPort).toString();
+    binariesUrl = cfg.value("binariesUrl",defaultBinariesUrl).toString();
     cfg.endGroup();
+
+    readLocalProfiles();
+    readOnlineProfiles();
+
+    if (onlineProfiles.isEmpty())
+    {
+        onlineProfiles << "trekking";
+        onlineProfiles << "fastbike";
+        onlineProfiles << "car-test";
+        onlineProfiles << "safety";
+        onlineProfiles << "shortest";
+        onlineProfiles << "trekking-ignore-cr";
+        onlineProfiles << "trekking-steep";
+        onlineProfiles << "trekking-noferries";
+        onlineProfiles << "trekking-nosteps";
+        onlineProfiles << "moped";
+        onlineProfiles << "rail";
+        onlineProfiles << "river";
+        onlineProfiles << "vm-forum-liegerad-schnell";
+        onlineProfiles << "vm-forum-velomobil-schnell";
+        onlineProfiles << "fastbike-lowtraffic";
+        onlineProfiles << "fastbike-asia-pacific";
+        onlineProfiles << "hiking-beta";
+    }
 }
 
 void CRouterBRouterSetup::save()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-    cfg.setValue("host", host);
-    cfg.setValue("port", port);
-    cfg.setValue("profiles", profiles.join(","));
-    cfg.setValue("profilePath", profilePath);
-    cfg.setValue("local", local);
+    cfg.setValue("expertMode",expertMode);
+    cfg.setValue("installMode", stringFromMode(installMode));
+    cfg.setValue("onlineWebUrl", onlineWebUrl);
+    cfg.setValue("onlineServiceUrl", onlineServiceUrl);
+    cfg.setValue("onlineProfilesUrl", onlineProfilesUrl);
+    cfg.setValue("localDir", localDir);
+    cfg.setValue("localProfileDir", localProfileDir);
+    cfg.setValue("localSegmentsDir", localSegmentsDir);
+    cfg.setValue("localHost", localHost);
+    cfg.setValue("localPort", localPort);
+    cfg.setValue("binariesUrl", binariesUrl);
     cfg.endGroup();
 }
 
-void CRouterBRouterSetup::updateDialog()
+CRouterBRouterSetup::Mode CRouterBRouterSetup::modeFromString(QString mode)
 {
-    //visible for local
-    labelProfileDir->setVisible(local);
-    toolProfilePath->setVisible(local);
-    labelProfilePath->setVisible(local);
-    pushDefaultLocal->setVisible(local);
-
-    //visible for remote
-    toolAddProfile->setVisible(!local);
-    toolDeleteProfile->setVisible(!local);
-    toolUpdateProfile->setVisible(!local);
-    toolProfileUp->setVisible(!local);
-    toolProfileDown->setVisible(!local);
-    pushDefaultOnline->setVisible(!local);
-    lineProfile->setVisible(!local);
-
-    //update values
-    lineHost->setText(host);
-    linePort->setText(port);
-    checkLocal->setChecked(local);
-    labelProfilePath->setText(profilePath);
-
-    //fill profiles list
-    listProfiles->clear();
-    for(const QString &profile : getProfiles())
+    if (mode == "online")
     {
-        QListWidgetItem * item = new QListWidgetItem(listProfiles);
-        item->setText(profile);
+        return Mode_Online;
     }
-}
-
-void CRouterBRouterSetup::slotCheckLocal(const int state)
-{
-    switch(state) {
-    case Qt::Checked:
+    else if (mode == "local")
     {
-        local = true;
-        break;
-    }
-    case Qt::Unchecked:
-    {
-        local = false;
-        break;
-    }
-    }
-    updateDialog();
-}
-
-void CRouterBRouterSetup::slotHostChanged()
-{
-    host = lineHost->text();
-}
-
-void CRouterBRouterSetup::slotPortChanged()
-{
-    port = linePort->text();
-}
-
-void CRouterBRouterSetup::slotAddProfile()
-{
-    if(lineProfile->text().length() > 0 and !profiles.contains(lineProfile->text()))
-    {
-        profiles.append(lineProfile->text());
-        updateDialog();
-    }
-}
-
-void CRouterBRouterSetup::slotDelProfile()
-{
-    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
-    bool changed = false;
-    for(int i=0; i < items.size(); i++)
-    {
-        int idx = profiles.indexOf(items.at(i)->text());
-        if(idx > -1)
-        {
-            profiles.removeAt(idx);
-            changed = true;
-        }
-    }
-    if(changed)
-    {
-        updateDialog();
-    }
-}
-
-void CRouterBRouterSetup::slotUpdateProfile()
-{
-    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
-    if(items.size() == 1 and lineProfile->text().length() > 0)
-    {
-        int idx = profiles.indexOf(items.at(0)->text());
-        if (idx > -1)
-        {
-            profiles.removeAt(idx);
-            profiles.insert(idx,lineProfile->text());
-            lineProfile->setText("");
-            updateDialog();
-        }
-    }
-}
-
-void CRouterBRouterSetup::slotProfileUp()
-{
-    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
-    if (items.size() == 1)
-    {
-        int idx = profiles.indexOf(items.at(0)->text());
-        if (idx > 0)
-        {
-            profiles.removeAt(idx);
-            profiles.insert(idx-1,items.at(0)->text());
-            updateDialog();
-            listProfiles->item(idx-1)->setSelected(true);
-        }
-    }
-}
-
-void CRouterBRouterSetup::slotProfileDown()
-{
-    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
-    if (items.size() == 1)
-    {
-        int idx = profiles.indexOf(items.at(0)->text());
-        if (idx < profiles.size()-1)
-        {
-            profiles.removeAt(idx);
-            profiles.insert(idx+1,items.at(0)->text());
-            updateDialog();
-            listProfiles->item(idx+1)->setSelected(true);
-        }
-    }
-}
-
-void CRouterBRouterSetup::slotItemSelectionChanged()
-{
-    const QList<QListWidgetItem *> items = listProfiles->selectedItems();
-    if(items.size() == 1)
-    {
-        lineProfile->setText(items.at(0)->text());
+        return Mode_Local;
     }
     else
     {
-        lineProfile->setText("");
+        return Mode_None;
     }
 }
 
-void CRouterBRouterSetup::slotSelectProfilesPath()
+QString CRouterBRouterSetup::stringFromMode(Mode mode)
 {
-    profilePath = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"", QFileDialog::ShowDirsOnly);
-    updateDialog();
-}
-
-void CRouterBRouterSetup::slotPushDefaultOnline()
-{
-    host = defaultHost();
-    port = defaultPort();
-    profiles = defaultProfiles();
-    updateDialog();
-}
-
-void CRouterBRouterSetup::slotPushDefaultLocal()
-{
-    host = defaultLocalHost();
-    port = defaultLocalPort();
-    updateDialog();
-}
-
-void CRouterBRouterSetup::accept()
-{
-    save();
-    QDialog::accept();
-}
-
-void CRouterBRouterSetup::reject()
-{
-    load();
-    updateDialog();
-    QDialog::reject();
-}
-
-QString CRouterBRouterSetup::getHost()
-{
-    return host;
-}
-
-int CRouterBRouterSetup::getPort()
-{
-    return port.toInt();
-}
-
-QStringList CRouterBRouterSetup::getProfiles()
-{
-    if (local && !profilePath.isEmpty())
+    switch(mode)
     {
-        profiles = readProfiles(profilePath);
+    case Mode_Local:
+    {
+        return "local";
     }
-    else if (profiles.isEmpty())
+    case Mode_Online:
     {
-        profiles = defaultProfiles();
+        return "online";
     }
-    return profiles;
+    default:
+        return "";
+    }
 }
 
-QStringList CRouterBRouterSetup::readProfiles(QString path)
+void CRouterBRouterSetup::readLocalProfiles()
 {
-    QDir dir = QDir(path);
-    QString profile;
-    QStringList entries = dir.entryList();
-    QStringList profiles = QStringList();
-    foreach(profile,entries)
+    readProfiles(Mode_Local);
+}
+
+void CRouterBRouterSetup::readOnlineProfiles()
+{
+    readProfiles(Mode_Online);
+}
+
+void CRouterBRouterSetup::readProfiles(Mode mode)
+{
+    QDir dir = getProfileDir(mode);
+    (mode == Mode_Local ? localProfiles : onlineProfiles).clear();
+    if (dir.exists())
     {
-        if(profile.endsWith(".brf"))
+        QString profile;
+        QStringList entries = dir.entryList();
+
+        foreach(profile,entries)
         {
-            profiles.append(profile.left(profile.length()-4));
+            if(profile.endsWith(".brf"))
+            {
+                (mode == Mode_Local ? localProfiles : onlineProfiles) << profile.left(profile.length()-4);
+            }
         }
     }
-    return profiles;
 }
 
-const QStringList CRouterBRouterSetup::defaultProfiles()
+QDir CRouterBRouterSetup::getLocalProfileDir()
 {
-    QStringList list;
-    list.append("trekking");
-    list.append("fastbike");
-    list.append("car-test");
-    list.append("safety");
-    list.append("shortest");
-    list.append("trekking-ignore-cr");
-    list.append("trekking-steep");
-    list.append("trekking-noferries");
-    list.append("trekking-nosteps");
-    list.append("moped");
-    list.append("rail");
-    list.append("river");
-    list.append("vm-forum-liegerad-schnell");
-    list.append("vm-forum-velomobil-schnell");
-    list.append("fastbike-lowtraffic");
-    list.append("fastbike-asia-pacific");
-    list.append("hiking-beta");
-    return list;
+    return getProfileDir(Mode_Local);
 }
 
-const QString CRouterBRouterSetup::defaultHost()
+QDir CRouterBRouterSetup::getProfileDir(Mode mode)
 {
-    return QString("h2096617.stratoserver.net");
+    switch(mode)
+    {
+    case Mode_Local:
+    {
+        return QDir(QDir(localDir).absoluteFilePath(localProfileDir));
+    }
+    case Mode_Online:
+    {
+        return QDir(IAppSetup::getPlatformInstance()->defaultCachePath());
+    }
+    default:
+    {
+        return QDir();
+    }
+    }
 }
 
-const QString CRouterBRouterSetup::defaultPort()
+QString CRouterBRouterSetup::readLocalProfile(QString profile)
 {
-    return "443";
+    return readProfile(Mode_Local, profile);
 }
 
-const QString CRouterBRouterSetup::defaultLocalHost()
+QString CRouterBRouterSetup::readOnlineProfile(QString profile)
 {
-    return "127.0.0.1";
+    return readProfile(Mode_Online, profile);
 }
 
-const QString CRouterBRouterSetup::defaultLocalPort()
+QString CRouterBRouterSetup::readProfile(Mode mode, QString profile)
 {
-    return "17777";
+    QDir dir = getProfileDir(mode);
+    QString filename = dir.absoluteFilePath(profile + ".brf");
+    QFile file(filename);
+    if (file.exists())
+    {
+        file.open(QIODevice::ReadOnly);
+        return QString(file.readAll());
+    }
+    return QString();
+}
+
+void CRouterBRouterSetup::loadOnlineConfig()
+{
+    QNetworkRequest request;
+    QUrl configUrl = QUrl(onlineWebUrl + "config.js");
+    QString configHost = configUrl.host();
+    request.setUrl(configUrl);
+
+    QNetworkAccessManager networkAccessManager;
+    QNetworkReply * reply = networkAccessManager.get(request);
+    reply->deleteLater();
+
+    QEventLoop eventLoop;
+    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
+
+    QString jsConfig(reply->readAll());
+
+    QScriptEngine engine;
+
+    QString jsSetup = QString(\
+                "(function(){\
+                   window = {};\
+                   window.location = {};\
+                   window.location.hostname = '%1';\
+                   window.location.search = {};\
+                   window.location.search.slice = function() {};\
+                   URLSearchParams = function() {};\
+                   BR = {};\
+                  })();").arg(configHost);
+
+    QString run1 = engine.evaluate(jsSetup).toString();
+    QString run2 = engine.evaluate(jsConfig).toString();
+
+    QScriptValue br = engine.globalObject().property("BR");
+    QScriptValue conf = br.property("conf");
+    onlineServiceUrl = conf.property("host").toString();
+    onlineProfilesUrl = conf.property("profilesUrl").toString();
+    QScriptValue profiles = conf.property("profiles");
+    qint32 len = profiles.property("length").toInt32();
+    onlineProfiles.clear();
+    for(qint32 i=0;i<len;i++)
+    {
+        onlineProfiles << profiles.property(i).toString();
+    }
+}
+
+void CRouterBRouterSetup::loadOnlineProfiles()
+{
+    QNetworkAccessManager networkAccessManager;
+
+    QDir dir(IAppSetup::getPlatformInstance()->defaultCachePath());
+
+    for(QString profile:onlineProfiles)
+    {
+        QNetworkRequest request;
+        QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");
+        request.setUrl(profileUrl);
+
+        QNetworkReply * reply = networkAccessManager.get(request);
+        reply->deleteLater();
+
+        QEventLoop eventLoop;
+        QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+        eventLoop.exec();
+
+        QString filename = dir.absoluteFilePath(profile + ".brf");
+        QFile file(filename);
+        file.open(QIODevice::WriteOnly);
+        file.write(reply->readAll());
+        file.close();
+    }
 }

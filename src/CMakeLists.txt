@@ -241,6 +241,7 @@ set( SRCS
         gis/rte/router/CRouterBRouter.cpp
         gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
+        gis/rte/router/CRouterBRouterSetupWizard.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -509,6 +510,7 @@ set( HDRS
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterBRouterSetup.h
+        gis/rte/router/CRouterBRouterSetupWizard.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h
@@ -670,7 +672,7 @@ set( UIS
     gis/rte/router/IRouterMapQuest.ui
     gis/rte/router/IRouterBRouter.ui
     gis/rte/router/IRouterRoutinoPathSetup.ui
-    gis/rte/router/IRouterBRouterSetup.ui
+    gis/rte/router/IRouterBRouterSetupWizard.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui

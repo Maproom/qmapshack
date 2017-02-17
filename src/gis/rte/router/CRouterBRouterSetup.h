@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,56 +19,58 @@
 #ifndef CROUTERBROUTERSETUP_H
 #define CROUTERBROUTERSETUP_H
 
-#include "ui_IRouterBRouterSetup.h"
-#include <QDialog>
+#include <QtCore>
+#include "setup/IAppSetup.h"
 
-class CRouterBRouterSetup : public QDialog, private Ui::IRouterBRouterSetup
+class CRouterBRouterSetup
 {
-    Q_OBJECT
 public:
     CRouterBRouterSetup();
-    virtual ~CRouterBRouterSetup();
+    ~CRouterBRouterSetup();
+    enum Mode { Mode_Local, Mode_Online, Mode_None };
+    bool expertMode;
+    Mode installMode;
+    QString onlineWebUrl;
+    QString onlineServiceUrl;
+    QString onlineProfilesUrl;
+    QStringList onlineProfiles;
+    QString localDir;
+    QString localProfileDir;
+    QString localSegmentsDir;
+    QStringList localProfiles;
+    QString localHost;
+    QString localPort;
+    QString binariesUrl;
 
-    QString getHost();
-    int getPort();
-    QStringList getProfiles();
+    const bool defaultExpertMode = false;
+    const Mode defaultInstallMode = Mode_Online;
+    const QString defaultOnlineWebUrl = "http://brouter.de/brouter-web/";
+    const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
+    const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
+    const QString defaultLocalDir = ".";
+    const QString defaultLocalProfileDir = "profiles2";
+    const QString defaultLocalSegmentsDir = "segments4";
+    const QString defaultLocalHost = "127.0.0.1";
+    const QString defaultLocalPort = "17777";
+    const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
 
-public slots:
-    void accept() override;
-    void reject() override;
-
-private slots:
-    void slotCheckLocal(const int state);
-    void slotHostChanged();
-    void slotPortChanged();
-    void slotAddProfile();
-    void slotDelProfile();
-    void slotUpdateProfile();
-    void slotProfileUp();
-    void slotProfileDown();
-    void slotItemSelectionChanged();
-    void slotSelectProfilesPath();
-    void slotPushDefaultOnline();
-    void slotPushDefaultLocal();
-
-private:
     void load();
     void save();
-    void updateDialog();
-    QStringList readProfiles(const QString path);
-    const QStringList defaultProfiles();
-    const QString defaultHost();
-    const QString defaultPort();
-    const QString defaultLocalHost();
-    const QString defaultLocalPort();
 
-    QString host;
-    QString port;
-    bool local;
-    QStringList profiles;
-    QString profilePath;
+    Mode modeFromString(QString mode);
+    QString stringFromMode(Mode mode);
 
+    QString readLocalProfile(QString profile);
+    QString readOnlineProfile(QString profile);
+    void readLocalProfiles();
+    void readOnlineProfiles();
+    void loadOnlineConfig();
+    void loadOnlineProfiles();
+    QString readProfile(Mode mode, QString profile);
+    QDir getLocalProfileDir();
+private:
+    QDir getProfileDir(Mode mode);
+    void readProfiles(Mode mode);
 };
 
-#endif //CROUTERBROUTERSETUP_H
-
+#endif

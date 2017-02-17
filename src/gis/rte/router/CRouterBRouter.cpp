@@ -23,18 +23,19 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "helpers/CSettings.h"
-
-
 #include <QtNetwork>
 #include <QtWidgets>
-#include <proj_api.h>
 
 CRouterBRouter::CRouterBRouter(QWidget *parent)
     : IRouter(false, parent)
 {
     setupUi(this);
 
-    connect(toolSetup, &QToolButton::clicked,          this, &CRouterBRouter::slotSetup);
+    setup.load();
+    checkBRFastRecalc->setVisible(setup.installMode == CRouterBRouterSetup::Mode_Local);
+
+    connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
+    connect(comboBRProfile, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRouterBRouter::slotComboProfileChanged);
 
     comboBRAlternative->addItem(tr("original"), "0");
     comboBRAlternative->addItem(tr("first alternative"), "1");
@@ -47,8 +48,9 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     cfg.beginGroup("Route/brouter");
     comboBRProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-    checkBRFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool());
+    checkBRFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() and (setup.installMode == CRouterBRouterSetup::Mode_Local));
     comboBRAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
+    cfg.endGroup();
 
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouter::slotRequestFinished);
@@ -69,16 +71,43 @@ CRouterBRouter::~CRouterBRouter()
     cfg.endGroup();
 }
 
-void CRouterBRouter::slotSetup()
+void CRouterBRouter::slotToolSetupClicked()
 {
-    setup.exec();
+    CRouterBRouterSetupWizard setupWizard;
+    setupWizard.exec();
+    setup.load();
+    checkBRFastRecalc->setVisible(setup.installMode == CRouterBRouterSetup::Mode_Local);
     updateProfiles();
+}
+
+void CRouterBRouter::slotComboProfileChanged(int index)
+{
+    if (index < 0)
+    {
+        textBrowser->setText("");
+    }
+    else
+    {
+        switch(setup.installMode)
+        {
+        case CRouterBRouterSetup::Mode_Local:
+        {
+            textBrowser->setText(setup.readLocalProfile(setup.localProfiles.at(index)));
+            break;
+        }
+        case CRouterBRouterSetup::Mode_Online:
+        {
+            textBrowser->setText(setup.readOnlineProfile(setup.onlineProfiles.at(index)));
+            break;
+        }
+        }
+    }
 }
 
 void CRouterBRouter::updateProfiles()
 {
     comboBRProfile->clear();
-    for(const QString& profile : setup.getProfiles())
+    for(const QString& profile : getProfiles())
     {
         comboBRProfile->addItem(profile,profile);
     }
@@ -103,7 +132,7 @@ QString CRouterBRouter::getOptions()
 
 bool CRouterBRouter::hasFastRouting()
 {
-    return checkBRFastRecalc->isChecked();
+    return setup.installMode == CRouterBRouterSetup::Mode_Local and checkBRFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
@@ -129,9 +158,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
     urlQuery.addQueryItem("alternativeidx", comboBRAlternative->currentData().toString());
     urlQuery.addQueryItem("format", "gpx");
 
-    QUrl url(QString("http://"));
-    url.setHost(setup.getHost());
-    url.setPort(setup.getPort());
+    QUrl url = getServiceUrl();
     url.setPath("/brouter");
     url.setQuery(urlQuery);
 
@@ -297,4 +324,46 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     }
 
     slotCloseStatusMsg();
+}
+
+QUrl CRouterBRouter::getServiceUrl()
+{
+    switch (setup.installMode)
+    {
+    case CRouterBRouterSetup::Mode_Local:
+    {
+        QUrl url(QString("http://"));
+        url.setHost(setup.localHost);
+        url.setPort(setup.localPort.toInt());
+        return url;
+    }
+    case CRouterBRouterSetup::Mode_Online:
+    {
+        return QUrl(setup.onlineServiceUrl);
+    }
+    default:
+    {
+        return QUrl();
+    }
+    }
+}
+
+QStringList CRouterBRouter::getProfiles()
+{
+    switch (setup.installMode)
+    {
+    case CRouterBRouterSetup::Mode_Local:
+    {
+        setup.readLocalProfiles();
+        return setup.localProfiles;
+    }
+    case CRouterBRouterSetup::Mode_Online:
+    {
+        return setup.onlineProfiles;
+    }
+    default:
+    {
+        return QStringList();
+    }
+    }
 }

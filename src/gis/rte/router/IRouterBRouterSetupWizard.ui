@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IRouterBRouterSetupWizard</class>
+ <widget class="QWizard" name="IRouterBRouterSetupWizard">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>624</width>
+    <height>436</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Wizard</string>
+  </property>
+  <widget class="QWizardPage" name="pageChooseMode">
+   <attribute name="pageId">
+    <string notr="true">0</string>
+   </attribute>
+   <widget class="QGroupBox" name="groupRadioMode">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>60</y>
+      <width>361</width>
+      <height>221</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>choose which BRouter to use</string>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QRadioButton" name="radioOnline">
+       <property name="text">
+        <string>BRouter-Web (online)</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="radioLocal">
+       <property name="text">
+        <string>local Installation</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="checkExpert">
+       <property name="text">
+        <string>Expert Mode</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalDirectory">
+   <attribute name="pageId">
+    <string notr="true">1</string>
+   </attribute>
+   <widget class="QWidget" name="verticalLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>-1</y>
+      <width>601</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="labelLocalDir">
+       <property name="text">
+        <string>local BRouter Installation directory:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="lineLocalDir"/>
+       </item>
+       <item>
+        <widget class="QToolButton" name="toolLocalDir">
+         <property name="toolTip">
+          <string>select installation directory</string>
+         </property>
+         <property name="text">
+          <string>...</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../../resources.qrc">
+           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelLocalDirResult">
+       <property name="text">
+        <string>labelLocalDirResult</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalInstallation">
+   <property name="title">
+    <string/>
+   </property>
+   <property name="subTitle">
+    <string/>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">2</string>
+   </attribute>
+   <widget class="QWidget" name="verticalLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>-1</y>
+      <width>601</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="labelLocalInstallTitle">
+       <property name="text">
+        <string>Download and install BRouter Version</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QWebView" name="webLocalBRouterVersions">
+       <property name="url">
+        <url>
+         <string>about:blank</string>
+        </url>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelLocalInstallLink">
+       <property name="text">
+        <string>File to install</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="pushLocalInstall">
+         <property name="text">
+          <string>Download and Install</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textLocalInstall"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalProfiles">
+   <attribute name="pageId">
+    <string notr="true">3</string>
+   </attribute>
+   <widget class="QWidget" name="verticalLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>-1</y>
+      <width>601</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_7">
+         <item>
+          <widget class="QLabel" name="labelLocalProfiles">
+           <property name="text">
+            <string>installed Profiles</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="listLocalProfiles">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QToolButton" name="toolLocalAddProfile">
+           <property name="toolTip">
+            <string>install profile</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../resources.qrc">
+             <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="toolLocalDeleteProfile">
+           <property name="toolTip">
+            <string>remove profile</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../../../resources.qrc">
+             <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="labelLocalAvailableProfiles">
+           <property name="text">
+            <string>available Profiles</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QListView" name="listLocalAvailableProfiles">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelLocalProfileContent">
+       <property name="text">
+        <string>content of profile</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textLocalProfileContent"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalTiles">
+   <attribute name="pageId">
+    <string notr="true">4</string>
+   </attribute>
+  </widget>
+  <widget class="QWizardPage" name="pageOnlineUrl">
+   <attribute name="pageId">
+    <string notr="true">5</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>0</y>
+      <width>601</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelOnlineUrl">
+       <property name="text">
+        <string>BRouter-Web URL:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineOnlineUrl"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageOnlineDetails">
+   <attribute name="pageId">
+    <string notr="true">6</string>
+   </attribute>
+   <widget class="QWidget" name="formLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>601</width>
+      <height>301</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="1" column="0">
+      <widget class="QLabel" name="labelOnlineHost">
+       <property name="text">
+        <string>Service-URL</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineOnlineHost"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="labelOnlineProfileUrl">
+       <property name="text">
+        <string>Profile-URL</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="lineOnlineProfileUrl"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QWizardPage" name="pageOnlineProfiles">
+   <attribute name="pageId">
+    <string notr="true">7</string>
+   </attribute>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>601</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_8">
+     <item>
+      <widget class="QLabel" name="labelOnlineProfiles">
+       <property name="text">
+        <string>Profiles</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QListView" name="listOnlineProfiles">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textOnlineProfile"/>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

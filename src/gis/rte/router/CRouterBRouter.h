@@ -20,14 +20,12 @@
 #ifndef CROUTERBROUTER_H
 #define CROUTERBROUTER_H
 
+#include "CRouterBRouterSetup.h"
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterBRouter.h"
-#include "CRouterBRouterSetup.h"
-
-class QNetworkAccessManager;
-class QNetworkRequest;
-class QNetworkReply;
-class QTimer;
+#include "CRouterBRouterSetupWizard.h"
+#include <QtNetwork>
+#include <QTimer>
 
 class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {
@@ -44,11 +42,13 @@ public:
     QString getOptions() override;
 
 private slots:
-    void slotSetup();
+    void slotToolSetupClicked();
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg();
+    void slotComboProfileChanged(int index);
 
 private:
+
     struct wpt_t
     {
         wpt_t():
@@ -75,8 +75,12 @@ private:
     bool synchronous = false;
     QMutex mutex {QMutex::NonRecursive};
 
-    CRouterBRouterSetup setup;
     void updateProfiles();
+
+    QUrl getServiceUrl();
+    QStringList getProfiles();
+
+    CRouterBRouterSetup setup;
 };
 
 #endif //CROUTERBROUTER_H

@@ -90,6 +90,7 @@ private:
 
     void initProfiles();
     void beginProfiles();
+    void updateProfiles();
     void cleanupProfiles();
 
     void initLocalTiles();

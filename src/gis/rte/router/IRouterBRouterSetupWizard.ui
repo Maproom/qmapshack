@@ -211,14 +211,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QLabel" name="labelProfiles">
+          <widget class="QLabel" name="labelAvailableProfiles">
            <property name="text">
-            <string>installed Profiles</string>
+            <string>available Profiles</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="listProfiles">
+          <widget class="QListView" name="listAvailableProfiles">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -238,7 +238,7 @@
            </property>
            <property name="icon">
             <iconset resource="../../../resources.qrc">
-             <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
+             <normaloff>:/icons/32x32/Right.png</normaloff>:/icons/32x32/Right.png</iconset>
            </property>
           </widget>
          </item>
@@ -252,7 +252,7 @@
            </property>
            <property name="icon">
             <iconset resource="../../../resources.qrc">
-             <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+             <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
            </property>
           </widget>
          </item>
@@ -261,14 +261,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QLabel" name="labelAvailableProfiles">
+          <widget class="QLabel" name="labelProfiles">
            <property name="text">
-            <string>available Profiles</string>
+            <string>installed Profiles</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="listAvailableProfiles">
+          <widget class="QListView" name="listProfiles">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>

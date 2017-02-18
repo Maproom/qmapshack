@@ -48,7 +48,7 @@
          </property>
          <property name="icon">
           <iconset resource="../../../resources.qrc">
-           <normaloff>:/icons/32x32/CSrcUnknown.png</normaloff>:/icons/32x32/CSrcUnknown.png</iconset>
+           <normaloff>:/icons/32x32/Help.png</normaloff>:/icons/32x32/Help.png</iconset>
          </property>
         </widget>
        </item>
@@ -60,8 +60,11 @@
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
       <widget class="QCheckBox" name="checkFastRecalc">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
        <property name="text">
-        <string>on demand</string>
+        <string>on-the-fly routing</string>
        </property>
       </widget>
      </item>

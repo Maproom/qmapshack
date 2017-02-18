@@ -31,10 +31,10 @@ public:
     CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent);
     virtual ~CRouterBRouterSetupWizardToolShell();
 
-    void out(QString out);
-    void execute(QString dir, QString command, QStringList args);
+    void out(const QString out);
+    void execute(const QString dir, const QString command, const QStringList args);
     QProcess::ExitStatus getExitStatus();
-    int getExitCode();
+    const int getExitCode();
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
@@ -50,15 +50,15 @@ public:
     virtual ~CRouterBRouterSetupWizard();
 
     int nextId() const override;
-    void initializePage(int id) override;
-    void cleanupPage(int id) override;
+    void initializePage(const int id) override;
+    void cleanupPage(const int id) override;
 
 public slots:
     void accept() override;
     void reject() override;
 
 private slots:
-    void slotCurrentIdChanged(int id);
+    void slotCurrentIdChanged(const int id);
     void slotRadioLocalClicked();
     void slotRadioOnlineClicked();
     void slotCheckExpertClicked();
@@ -66,15 +66,14 @@ private slots:
     void slotLocalDirectoryEditingFinished();
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
-    void slotLocalProfileClicked(const QModelIndex & index);
-    void slotLocalAvailableProfileClicked(const QModelIndex & index);
-    void slotLocalAddProfileClicked();
-    void slotLocalDelProfileClicked();
-    void slotOnlineProfileClicked(const QModelIndex & index);
+    void slotProfileClicked(const QModelIndex & index);
+    void slotAvailableProfileClicked(const QModelIndex & index);
+    void slotAddProfileClicked();
+    void slotDelProfileClicked();
 
 private:
-    enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_LocalProfiles,
-               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails, Page_OnlineProfiles };
+    enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
+               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails };
 
     void initChooseMode();
     void beginChooseMode();
@@ -89,9 +88,9 @@ private:
     void beginLocalInstall();
     void cleanupLocalInstall();
 
-    void initLocalProfiles();
-    void beginLocalProfiles();
-    void cleanupLocalProfiles();
+    void initProfiles();
+    void beginProfiles();
+    void cleanupProfiles();
 
     void initLocalTiles();
     void beginLocalTiles();
@@ -100,10 +99,6 @@ private:
     void initOnlineDetails();
     void beginOnlineDetails();
     void cleanupOnlineDetails();
-
-    void initOnlineProfiles();
-    void beginOnlineProfiles();
-    void cleanupOnlineProfiles();
 
     void initOnlineUrl();
     void beginOnlineUrl();

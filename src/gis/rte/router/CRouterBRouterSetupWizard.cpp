@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/rte/router/CRouterBRouterSetupWizard.h"
+#include "CRouterBRouterSetupWizard.h"
 #include "setup/IAppSetup.h"
 #include <QtNetwork>
 #include <QtWidgets>
@@ -44,9 +44,13 @@ int CRouterBRouterSetupWizard::nextId() const
         {
             return Page_OnlineUrl;
         }
-        if (setup.installMode == CRouterBRouterSetup::Mode_Local)
+        if (setup.installMode == CRouterBRouterSetup::ModeLocal)
         {
             return Page_LocalDirectory;
+        }
+        else
+        {
+            return Page_Profiles;
         }
         break;
     }
@@ -56,11 +60,15 @@ int CRouterBRouterSetupWizard::nextId() const
     }
     case Page_LocalInstallation:
     {
-        return Page_LocalProfiles;
+        return Page_Profiles;
     }
-    case Page_LocalProfiles:
+    case Page_Profiles:
     {
-        return Page_LocalTiles;
+        if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+        {
+            return Page_LocalTiles;
+        }
+        break;
     }
     case Page_LocalTiles:
     {
@@ -68,21 +76,17 @@ int CRouterBRouterSetupWizard::nextId() const
     }
     case Page_OnlineDetails:
     {
-        return Page_OnlineProfiles;
-    }
-    case Page_OnlineProfiles:
-    {
-        break;
+        return Page_Profiles;
     }
     case Page_OnlineUrl:
     {
         switch(setup.installMode)
         {
-        case CRouterBRouterSetup::Mode_Local:
+        case CRouterBRouterSetup::ModeLocal:
         {
             return Page_LocalDirectory;
         }
-        case CRouterBRouterSetup::Mode_Online:
+        case CRouterBRouterSetup::ModeOnline:
         {
             return Page_OnlineDetails;
         }
@@ -93,7 +97,7 @@ int CRouterBRouterSetupWizard::nextId() const
     return -1;
 }
 
-void CRouterBRouterSetupWizard::initializePage(int id)
+void CRouterBRouterSetupWizard::initializePage(const int id)
 {
     switch(id)
     {
@@ -112,9 +116,9 @@ void CRouterBRouterSetupWizard::initializePage(int id)
         initLocalInstall();
         break;
     }
-    case Page_LocalProfiles:
+    case Page_Profiles:
     {
-        initLocalProfiles();
+        initProfiles();
         break;
     }
     case Page_LocalTiles:
@@ -125,11 +129,6 @@ void CRouterBRouterSetupWizard::initializePage(int id)
     case Page_OnlineDetails:
     {
         initOnlineDetails();
-        break;
-    }
-    case Page_OnlineProfiles:
-    {
-        initOnlineProfiles();
         break;
     }
     case Page_OnlineUrl:
@@ -143,7 +142,7 @@ void CRouterBRouterSetupWizard::initializePage(int id)
     }
 }
 
-void CRouterBRouterSetupWizard::cleanupPage(int id)
+void CRouterBRouterSetupWizard::cleanupPage(const int id)
 {
     switch(id)
     {
@@ -162,9 +161,9 @@ void CRouterBRouterSetupWizard::cleanupPage(int id)
         cleanupLocalInstall();
         break;
     }
-    case Page_LocalProfiles:
+    case Page_Profiles:
     {
-        cleanupLocalProfiles();
+        cleanupProfiles();
         break;
     }
     case Page_LocalTiles:
@@ -175,11 +174,6 @@ void CRouterBRouterSetupWizard::cleanupPage(int id)
     case Page_OnlineDetails:
     {
         cleanupOnlineDetails();
-        break;
-    }
-    case Page_OnlineProfiles:
-    {
-        cleanupOnlineProfiles();
         break;
     }
     case Page_OnlineUrl:
@@ -193,7 +187,7 @@ void CRouterBRouterSetupWizard::cleanupPage(int id)
     }
 }
 
-void CRouterBRouterSetupWizard::slotCurrentIdChanged(int id)
+void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
 {
     switch(id)
     {
@@ -212,9 +206,9 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(int id)
         beginLocalInstall();
         break;
     }
-    case Page_LocalProfiles:
+    case Page_Profiles:
     {
-        beginLocalProfiles();
+        beginProfiles();
         break;
     }
     case Page_LocalTiles:
@@ -225,11 +219,6 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(int id)
     case Page_OnlineDetails:
     {
         beginOnlineDetails();
-        break;
-    }
-    case Page_OnlineProfiles:
-    {
-        beginOnlineProfiles();
         break;
     }
     case Page_OnlineUrl:
@@ -265,13 +254,13 @@ void CRouterBRouterSetupWizard::beginChooseMode()
 {
     switch(setup.installMode)
     {
-    case CRouterBRouterSetup::Mode_Local:
+    case CRouterBRouterSetup::ModeLocal:
     {
         radioLocal->setChecked(true);
         radioOnline->setChecked(false);
         break;
     }
-    case CRouterBRouterSetup::Mode_Online:
+    case CRouterBRouterSetup::ModeOnline:
     {
         radioLocal->setChecked(false);
         radioOnline->setChecked(true);
@@ -283,13 +272,13 @@ void CRouterBRouterSetupWizard::beginChooseMode()
 
 void CRouterBRouterSetupWizard::slotRadioLocalClicked()
 {
-    setup.installMode = CRouterBRouterSetup::Mode_Local;
+    setup.installMode = CRouterBRouterSetup::ModeLocal;
     currentPage()->setFinalPage(false);
 }
 
 void CRouterBRouterSetupWizard::slotRadioOnlineClicked()
 {
-    setup.installMode = CRouterBRouterSetup::Mode_Online;
+    setup.installMode = CRouterBRouterSetup::ModeOnline;
     currentPage()->setFinalPage(!setup.expertMode);
 }
 
@@ -335,8 +324,8 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
     }
     else
     {
-        QDir dir(setup.localDir);
-        QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
+        const QDir dir(setup.localDir);
+        const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
         if (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(setup.localProfileDir)).exists())
         {
             labelLocalDirResult->setText(tr("existing BRouter installation"));
@@ -407,88 +396,79 @@ void CRouterBRouterSetupWizard::cleanupLocalInstall()
 
 }
 
-void CRouterBRouterSetupWizard::initLocalProfiles()
+void CRouterBRouterSetupWizard::initProfiles()
 {
-    setup.readLocalProfiles();
+    setup.readProfiles();
 
-    QStringListModel *localProfilesModel = new QStringListModel(setup.localProfiles);
-    listLocalProfiles->setModel(localProfilesModel);
+    QStringListModel *profilesModel = new QStringListModel(setup.getProfiles());
+    listProfiles->setModel(profilesModel);
 
     setup.loadOnlineConfig();
-    setup.loadOnlineProfiles();
 
-    QStringListModel *availableProfiles = new QStringListModel(setup.onlineProfiles);
+    QStringListModel *availableProfiles = new QStringListModel(setup.onlineProfilesAvailable);
 
-    listLocalAvailableProfiles->setModel(availableProfiles);
+    listAvailableProfiles->setModel(availableProfiles);
 
-    connect(listLocalProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotLocalProfileClicked);
-    connect(listLocalAvailableProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotLocalAvailableProfileClicked);
-    connect(toolLocalAddProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalAddProfileClicked);
-    connect(toolLocalDeleteProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalDelProfileClicked);
+    connect(listProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotProfileClicked);
+    connect(listAvailableProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotAvailableProfileClicked);
+    connect(toolAddProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotAddProfileClicked);
+    connect(toolDeleteProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotDelProfileClicked);
 }
 
-void CRouterBRouterSetupWizard::beginLocalProfiles()
+void CRouterBRouterSetupWizard::beginProfiles()
 {
 
 }
 
-void CRouterBRouterSetupWizard::slotLocalProfileClicked(const QModelIndex & index)
+void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex & index)
 {
-    textLocalProfileContent->setText(setup.readLocalProfile(setup.localProfiles.at(index.row())));
+    textProfileContent->setText(setup.getProfileContent(index.row()));
 }
 
-void CRouterBRouterSetupWizard::slotLocalAvailableProfileClicked(const QModelIndex & index)
+void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex & index)
 {
-    textLocalProfileContent->setText(setup.readOnlineProfile(setup.localProfiles.at(index.row())));
+    textProfileContent->setText(setup.getOnlineProfileContent(index.row()));
 }
 
-void CRouterBRouterSetupWizard::slotLocalAddProfileClicked()
+void CRouterBRouterSetupWizard::slotAddProfileClicked()
 {
-    QItemSelectionModel * selectModel = listLocalAvailableProfiles->selectionModel();
-    QModelIndexList selected = selectModel->selectedIndexes();
+    const QItemSelectionModel * selectModel = listAvailableProfiles->selectionModel();
+    const QModelIndexList selected = selectModel->selectedIndexes();
     if (selected.size() == 1)
     {
-        QString fileName = setup.onlineProfiles.at(selected.at(0).row()) + ".brf";
-        QFile onlineFile(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(fileName));
-        if (onlineFile.exists())
-        {
-            QFile localFile(setup.getLocalProfileDir().absoluteFilePath(fileName));
-            onlineFile.open(QIODevice::ReadOnly);
-            localFile.open(QIODevice::WriteOnly);
-            localFile.write(onlineFile.readAll());
-        }
-        setup.readLocalProfiles();
-        (dynamic_cast<QStringListModel*>(listLocalProfiles->model()))->setStringList(setup.localProfiles);
+        setup.installOnlineProfile(selected.at(0).row());
+        setup.readProfiles();
+        (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(setup.getProfiles());
     }
 }
 
-void CRouterBRouterSetupWizard::slotLocalDelProfileClicked()
+void CRouterBRouterSetupWizard::slotDelProfileClicked()
 {
-    QItemSelectionModel * selectModel = listLocalProfiles->selectionModel();
-    QModelIndexList selected = selectModel->selectedIndexes();
+    const QItemSelectionModel * selectModel = listProfiles->selectionModel();
+    const QModelIndexList selected = selectModel->selectedIndexes();
     if (selected.size() == 1)
     {
-        QString filename = setup.getLocalProfileDir().absoluteFilePath(setup.localProfiles.at(selected.at(0).row()) + ".brf");
+        const QString filename = setup.getProfileDir().absoluteFilePath(setup.getProfiles().at((selected.at(0).row())) + ".brf");
         QFile(filename).remove();
 
-        setup.readLocalProfiles();
-        (dynamic_cast<QStringListModel*>(listLocalProfiles->model()))->setStringList(setup.localProfiles);
+        setup.readProfiles();
+        (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(setup.getProfiles());
     }
 }
 
-void CRouterBRouterSetupWizard::cleanupLocalProfiles()
+void CRouterBRouterSetupWizard::cleanupProfiles()
 {
-    QAbstractItemModel *localProfiles = listLocalProfiles->model();
+    const QAbstractItemModel *localProfiles = listProfiles->model();
     if (localProfiles != nullptr)
     {
         delete localProfiles;
-        listLocalProfiles->setModel(nullptr);
+        listProfiles->setModel(nullptr);
     }
-    QAbstractItemModel *availableProfiles = listLocalAvailableProfiles->model();
+    const QAbstractItemModel *availableProfiles = listAvailableProfiles->model();
     if (availableProfiles != nullptr)
     {
         delete availableProfiles;
-        listLocalAvailableProfiles->setModel(nullptr);
+        listAvailableProfiles->setModel(nullptr);
     }
 }
 
@@ -523,34 +503,6 @@ void CRouterBRouterSetupWizard::cleanupOnlineDetails()
 
 }
 
-void CRouterBRouterSetupWizard::initOnlineProfiles()
-{
-    setup.loadOnlineProfiles();
-    QStringListModel * profilesModel = new QStringListModel;
-    profilesModel->setStringList(setup.onlineProfiles);
-    listOnlineProfiles->setModel(profilesModel);
-
-    connect(listOnlineProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotOnlineProfileClicked);
-}
-
-void CRouterBRouterSetupWizard::beginOnlineProfiles()
-{
-}
-
-void CRouterBRouterSetupWizard::slotOnlineProfileClicked(const QModelIndex & index)
-{
-    textOnlineProfile->setText(setup.readOnlineProfile(setup.onlineProfiles.at(index.row())));
-}
-
-void CRouterBRouterSetupWizard::cleanupOnlineProfiles()
-{
-    QAbstractItemModel * model = listOnlineProfiles->model();
-    if (model!=nullptr)
-    {
-        delete model;
-    }
-}
-
 void CRouterBRouterSetupWizard::initOnlineUrl()
 {
 }
@@ -574,12 +526,12 @@ CRouterBRouterSetupWizardToolShell::~CRouterBRouterSetupWizardToolShell()
 {
 }
 
-void CRouterBRouterSetupWizardToolShell::out(QString out)
+void CRouterBRouterSetupWizardToolShell::out(const QString out)
 {
     stdOut(out);
 }
 
-void CRouterBRouterSetupWizardToolShell::execute(QString dir, QString command, QStringList args)
+void CRouterBRouterSetupWizardToolShell::execute(const QString dir, const QString command, const QStringList args)
 {
     stdOut("cd " + dir);
     stdOut(command+" " + args.join(" ") + "\n");
@@ -588,7 +540,7 @@ void CRouterBRouterSetupWizardToolShell::execute(QString dir, QString command, Q
     cmd.waitForFinished();
 }
 
-void CRouterBRouterSetupWizardToolShell::finished(int exitCode, QProcess::ExitStatus status)
+void CRouterBRouterSetupWizardToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
 {
     this->exitCode = exitCode;
     this->exitStatus = status;

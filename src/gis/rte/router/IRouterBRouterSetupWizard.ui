@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Wizard</string>
+   <string>BRouter Setup</string>
   </property>
   <widget class="QWizardPage" name="pageChooseMode">
    <attribute name="pageId">
@@ -192,7 +192,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QWizardPage" name="pageLocalProfiles">
+  <widget class="QWizardPage" name="pageProfiles">
    <attribute name="pageId">
     <string notr="true">3</string>
    </attribute>
@@ -211,14 +211,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_7">
          <item>
-          <widget class="QLabel" name="labelLocalProfiles">
+          <widget class="QLabel" name="labelProfiles">
            <property name="text">
             <string>installed Profiles</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="listLocalProfiles">
+          <widget class="QListView" name="listProfiles">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -229,7 +229,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_5">
          <item>
-          <widget class="QToolButton" name="toolLocalAddProfile">
+          <widget class="QToolButton" name="toolAddProfile">
            <property name="toolTip">
             <string>install profile</string>
            </property>
@@ -243,7 +243,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QToolButton" name="toolLocalDeleteProfile">
+          <widget class="QToolButton" name="toolDeleteProfile">
            <property name="toolTip">
             <string>remove profile</string>
            </property>
@@ -261,14 +261,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_6">
          <item>
-          <widget class="QLabel" name="labelLocalAvailableProfiles">
+          <widget class="QLabel" name="labelAvailableProfiles">
            <property name="text">
             <string>available Profiles</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QListView" name="listLocalAvailableProfiles">
+          <widget class="QListView" name="listAvailableProfiles">
            <property name="editTriggers">
             <set>QAbstractItemView::NoEditTriggers</set>
            </property>
@@ -279,14 +279,14 @@
       </layout>
      </item>
      <item>
-      <widget class="QLabel" name="labelLocalProfileContent">
+      <widget class="QLabel" name="labelProfileContent">
        <property name="text">
         <string>content of profile</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QTextBrowser" name="textLocalProfileContent"/>
+      <widget class="QTextBrowser" name="textProfileContent"/>
      </item>
     </layout>
    </widget>
@@ -356,40 +356,6 @@
      </item>
      <item row="2" column="1">
       <widget class="QLineEdit" name="lineOnlineProfileUrl"/>
-     </item>
-    </layout>
-   </widget>
-  </widget>
-  <widget class="QWizardPage" name="pageOnlineProfiles">
-   <attribute name="pageId">
-    <string notr="true">7</string>
-   </attribute>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>601</width>
-      <height>371</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_8">
-     <item>
-      <widget class="QLabel" name="labelOnlineProfiles">
-       <property name="text">
-        <string>Profiles</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QListView" name="listOnlineProfiles">
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QTextBrowser" name="textOnlineProfile"/>
      </item>
     </layout>
    </widget>

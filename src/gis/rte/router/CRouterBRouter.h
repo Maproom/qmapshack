@@ -26,6 +26,7 @@
 #include "CRouterBRouterSetupWizard.h"
 #include <QtNetwork>
 #include <QTimer>
+#include "CRouterSetup.h"
 
 class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {
@@ -45,7 +46,7 @@ private slots:
     void slotToolSetupClicked();
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg();
-    void slotComboProfileChanged(int index);
+    void slotToolProfileInfoClicked();
 
 private:
 
@@ -75,12 +76,13 @@ private:
     bool synchronous = false;
     QMutex mutex {QMutex::NonRecursive};
 
-    void updateProfiles();
+    void updateDialog();
 
     QUrl getServiceUrl();
-    QStringList getProfiles();
 
     CRouterBRouterSetup setup;
+
+    CRouterSetup* routerSetup;
 };
 
 #endif //CROUTERBROUTER_H

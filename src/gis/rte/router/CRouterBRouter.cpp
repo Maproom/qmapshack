@@ -98,14 +98,14 @@ void CRouterBRouter::updateDialog()
 {
     if (setup.installMode == CRouterBRouterSetup::ModeLocal)
     {
-        checkFastRecalc->setCheckable(true);
-        checkFastRecalc->setToolTip(tr("enables on-demand recalculation during editing of route"));
+        checkFastRecalc->setEnabled(true);
+        checkFastRecalc->setToolTip(tr("enables on-the-fly routing when editing a route"));
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
     }
     else
     {
-        checkFastRecalc->setCheckable(false);
-        checkFastRecalc->setToolTip(tr("on-demand recalculation is available for local install only"));
+        checkFastRecalc->setEnabled(false);
+        checkFastRecalc->setToolTip(tr("on-the-fly routing is available for local install only"));
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
     comboProfile->clear();

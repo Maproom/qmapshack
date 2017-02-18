@@ -398,16 +398,13 @@ void CRouterBRouterSetupWizard::cleanupLocalInstall()
 
 void CRouterBRouterSetupWizard::initProfiles()
 {
-    setup.readProfiles();
-
-    QStringListModel *profilesModel = new QStringListModel(setup.getProfiles());
+    QStringListModel *profilesModel = new QStringListModel();
     listProfiles->setModel(profilesModel);
 
-    setup.loadOnlineConfig();
-
-    QStringListModel *availableProfiles = new QStringListModel(setup.onlineProfilesAvailable);
-
+    QStringListModel *availableProfiles = new QStringListModel();
     listAvailableProfiles->setModel(availableProfiles);
+
+    setup.loadOnlineConfig();
 
     connect(listProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotProfileClicked);
     connect(listAvailableProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotAvailableProfileClicked);
@@ -417,17 +414,24 @@ void CRouterBRouterSetupWizard::initProfiles()
 
 void CRouterBRouterSetupWizard::beginProfiles()
 {
-
+    updateProfiles();
 }
 
 void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex & index)
 {
     textProfileContent->setText(setup.getProfileContent(index.row()));
+    listAvailableProfiles->clearSelection();
+    toolDeleteProfile->setEnabled(true);
+    toolAddProfile->setEnabled(false);
 }
 
 void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex & index)
 {
-    textProfileContent->setText(setup.getOnlineProfileContent(index.row()));
+    const QString profile = listAvailableProfiles->model()->data(index).toString();
+    textProfileContent->setText(setup.getOnlineProfileContent(profile));
+    listProfiles->clearSelection();
+    toolAddProfile->setEnabled(true);
+    toolDeleteProfile->setEnabled(false);
 }
 
 void CRouterBRouterSetupWizard::slotAddProfileClicked()
@@ -436,9 +440,9 @@ void CRouterBRouterSetupWizard::slotAddProfileClicked()
     const QModelIndexList selected = selectModel->selectedIndexes();
     if (selected.size() == 1)
     {
-        setup.installOnlineProfile(selected.at(0).row());
-        setup.readProfiles();
-        (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(setup.getProfiles());
+        const QString profile = listAvailableProfiles->model()->data(selected.at(0)).toString();
+        setup.installOnlineProfile(profile);
+        updateProfiles();
     }
 }
 
@@ -450,10 +454,26 @@ void CRouterBRouterSetupWizard::slotDelProfileClicked()
     {
         const QString filename = setup.getProfileDir().absoluteFilePath(setup.getProfiles().at((selected.at(0).row())) + ".brf");
         QFile(filename).remove();
-
-        setup.readProfiles();
-        (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(setup.getProfiles());
+        updateProfiles();
     }
+}
+
+void CRouterBRouterSetupWizard::updateProfiles()
+{
+    setup.readProfiles();
+    QStringList profiles = setup.getProfiles();
+    QStringList available;
+    for(QString profile:setup.onlineProfilesAvailable)
+    {
+        if (!profiles.contains(profile))
+        {
+            available << profile;
+        }
+    }
+    (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(profiles);
+    (dynamic_cast<QStringListModel*>(listAvailableProfiles->model()))->setStringList(available);
+    toolAddProfile->setEnabled(false);
+    toolDeleteProfile->setEnabled(false);
 }
 
 void CRouterBRouterSetupWizard::cleanupProfiles()

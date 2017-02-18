@@ -227,27 +227,24 @@ void CRouterBRouterSetup::loadOnlineConfig()
     }
 }
 
-const QString CRouterBRouterSetup::getOnlineProfileContent(const int index)
+const QString CRouterBRouterSetup::getOnlineProfileContent(const QString profile)
 {
-    return QString(loadOnlineProfile(index));
+    return QString(loadOnlineProfile(profile));
 }
 
-void CRouterBRouterSetup::installOnlineProfile(const int index)
+void CRouterBRouterSetup::installOnlineProfile(const QString profile)
 {
-    const QString profile = onlineProfilesAvailable.at(index);
     const QDir dir = getProfileDir();
     const QString filename = dir.absoluteFilePath(profile + ".brf");
     QFile file(filename);
     file.open(QIODevice::WriteOnly);
-    file.write(loadOnlineProfile(index));
+    file.write(loadOnlineProfile(profile));
     file.close();
 }
 
-const QByteArray CRouterBRouterSetup::loadOnlineProfile(const int index)
+const QByteArray CRouterBRouterSetup::loadOnlineProfile(const QString profile)
 {
     QNetworkAccessManager networkAccessManager;
-
-    const QString profile = onlineProfilesAvailable.at(index);
 
     QNetworkRequest request;
     const QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");

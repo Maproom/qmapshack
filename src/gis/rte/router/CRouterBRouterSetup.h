@@ -49,13 +49,12 @@ public:
     const QString getProfileContent(const int index);
     const QString getProfileContent(const QString profile);
     const QStringList getProfiles();
-    const QStringList getProfilesAvailable();
     const QDir getProfileDir();
 
     void readProfiles();
     void loadOnlineConfig();
-    const QString getOnlineProfileContent(const int index);
-    void installOnlineProfile(const int index);
+    const QString getOnlineProfileContent(const QString profile);
+    void installOnlineProfile(const QString profile);
 
 private:
     const bool defaultExpertMode = false;
@@ -73,7 +72,7 @@ private:
     void readProfiles(mode_e mode);
     const QString getProfileContent(mode_e mode, QString profile);
     const QDir getProfileDir(mode_e mode);
-    const QByteArray loadOnlineProfile(int index);
+    const QByteArray loadOnlineProfile(const QString profile);
 
     const mode_e modeFromString(QString mode);
     const QString stringFromMode(mode_e mode);

@@ -42,7 +42,15 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
     // Create a server socket and wait for other instances to connect.
     server = new QLocalServer(this);
     connect(server, &QLocalServer::newConnection, this, &CSingleInstanceProxy::slotNewConnection);
-    server->listen("QMapShack");
+    server->removeServer("QMapShack");
+    if(!server->listen("QMapShack"))
+    {
+        qDebug() << "CSingleInstanceProxy: Failed to start singel instance server socket.";
+    }
+    else
+    {
+        qDebug() << "CSingleInstanceProxy: Single instance server socket listening to" << server->fullServerName();
+    }
 }
 
 CSingleInstanceProxy::~CSingleInstanceProxy()

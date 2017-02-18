@@ -33,9 +33,15 @@ void CRouterBRouterSetup::load()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-
-    installMode = modeFromString(cfg.value("installMode",stringFromMode(Mode_Online)).toString());
-    expertMode = cfg.value("expertMode",false).toBool();
+    try
+    {
+        installMode = modeFromString(cfg.value("installMode",stringFromMode(defaultInstallMode)).toString());
+    }
+    catch(CRouterBRouterSetupException& e)
+    {
+        installMode = defaultInstallMode;
+    }
+    expertMode = cfg.value("expertMode",defaultExpertMode).toBool();
     onlineWebUrl = cfg.value("onlineWebUrl", defaultOnlineWebUrl).toString();
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
@@ -47,29 +53,8 @@ void CRouterBRouterSetup::load()
     binariesUrl = cfg.value("binariesUrl",defaultBinariesUrl).toString();
     cfg.endGroup();
 
-    readLocalProfiles();
-    readOnlineProfiles();
-
-    if (onlineProfiles.isEmpty())
-    {
-        onlineProfiles << "trekking";
-        onlineProfiles << "fastbike";
-        onlineProfiles << "car-test";
-        onlineProfiles << "safety";
-        onlineProfiles << "shortest";
-        onlineProfiles << "trekking-ignore-cr";
-        onlineProfiles << "trekking-steep";
-        onlineProfiles << "trekking-noferries";
-        onlineProfiles << "trekking-nosteps";
-        onlineProfiles << "moped";
-        onlineProfiles << "rail";
-        onlineProfiles << "river";
-        onlineProfiles << "vm-forum-liegerad-schnell";
-        onlineProfiles << "vm-forum-velomobil-schnell";
-        onlineProfiles << "fastbike-lowtraffic";
-        onlineProfiles << "fastbike-asia-pacific";
-        onlineProfiles << "hiking-beta";
-    }
+    readProfiles(ModeLocal);
+    readProfiles(ModeOnline);
 }
 
 void CRouterBRouterSetup::save()
@@ -90,106 +75,102 @@ void CRouterBRouterSetup::save()
     cfg.endGroup();
 }
 
-CRouterBRouterSetup::Mode CRouterBRouterSetup::modeFromString(QString mode)
+const CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QString mode)
 {
     if (mode == "online")
     {
-        return Mode_Online;
+        return ModeOnline;
     }
     else if (mode == "local")
     {
-        return Mode_Local;
+        return ModeLocal;
     }
-    else
-    {
-        return Mode_None;
-    }
+    throw CRouterBRouterSetupException();
 }
 
-QString CRouterBRouterSetup::stringFromMode(Mode mode)
+const QString CRouterBRouterSetup::stringFromMode(const mode_e mode)
 {
     switch(mode)
     {
-    case Mode_Local:
+    case ModeLocal:
     {
         return "local";
     }
-    case Mode_Online:
+    case ModeOnline:
     {
         return "online";
     }
     default:
-        return "";
+    {
+        throw CRouterBRouterSetupException();
+    }
     }
 }
 
-void CRouterBRouterSetup::readLocalProfiles()
+void CRouterBRouterSetup::readProfiles()
 {
-    readProfiles(Mode_Local);
+    readProfiles(installMode);
 }
 
-void CRouterBRouterSetup::readOnlineProfiles()
+void CRouterBRouterSetup::readProfiles(mode_e mode)
 {
-    readProfiles(Mode_Online);
-}
-
-void CRouterBRouterSetup::readProfiles(Mode mode)
-{
-    QDir dir = getProfileDir(mode);
-    (mode == Mode_Local ? localProfiles : onlineProfiles).clear();
+    const QDir dir = getProfileDir(mode);
+    (mode == ModeLocal ? localProfiles : onlineProfiles).clear();
     if (dir.exists())
     {
-        QString profile;
-        QStringList entries = dir.entryList();
-
-        foreach(profile,entries)
+        foreach(const QString profile,dir.entryList())
         {
             if(profile.endsWith(".brf"))
             {
-                (mode == Mode_Local ? localProfiles : onlineProfiles) << profile.left(profile.length()-4);
+                (mode == ModeLocal ? localProfiles : onlineProfiles) << profile.left(profile.length()-4);
             }
         }
     }
 }
 
-QDir CRouterBRouterSetup::getLocalProfileDir()
+const QDir CRouterBRouterSetup::getProfileDir()
 {
-    return getProfileDir(Mode_Local);
+    return getProfileDir(installMode);
 }
 
-QDir CRouterBRouterSetup::getProfileDir(Mode mode)
+const QDir CRouterBRouterSetup::getProfileDir(mode_e mode)
 {
     switch(mode)
     {
-    case Mode_Local:
+    case ModeLocal:
     {
         return QDir(QDir(localDir).absoluteFilePath(localProfileDir));
     }
-    case Mode_Online:
+    case ModeOnline:
     {
         return QDir(IAppSetup::getPlatformInstance()->defaultCachePath());
     }
     default:
     {
-        return QDir();
+        throw CRouterBRouterSetupException();
     }
     }
 }
 
-QString CRouterBRouterSetup::readLocalProfile(QString profile)
+const QStringList CRouterBRouterSetup::getProfiles()
 {
-    return readProfile(Mode_Local, profile);
+    return installMode == ModeLocal ? localProfiles : onlineProfiles;
 }
 
-QString CRouterBRouterSetup::readOnlineProfile(QString profile)
+const QString CRouterBRouterSetup::getProfileContent(const int index)
 {
-    return readProfile(Mode_Online, profile);
+    return getProfileContent(installMode, getProfiles().at(index));
 }
 
-QString CRouterBRouterSetup::readProfile(Mode mode, QString profile)
+const QString CRouterBRouterSetup::getProfileContent(const QString profile)
 {
-    QDir dir = getProfileDir(mode);
-    QString filename = dir.absoluteFilePath(profile + ".brf");
+    return getProfileContent(installMode, profile);
+}
+
+const QString CRouterBRouterSetup::getProfileContent(const mode_e mode, const QString profile)
+{
+    const QDir dir = getProfileDir(mode);
+    const QString filename = dir.absoluteFilePath(profile + ".brf");
     QFile file(filename);
     if (file.exists())
     {
@@ -202,8 +183,8 @@ QString CRouterBRouterSetup::readProfile(Mode mode, QString profile)
 void CRouterBRouterSetup::loadOnlineConfig()
 {
     QNetworkRequest request;
-    QUrl configUrl = QUrl(onlineWebUrl + "config.js");
-    QString configHost = configUrl.host();
+    const QUrl configUrl = QUrl(onlineWebUrl + "config.js");
+    const QString configHost = configUrl.host();
     request.setUrl(configUrl);
 
     QNetworkAccessManager networkAccessManager;
@@ -214,11 +195,11 @@ void CRouterBRouterSetup::loadOnlineConfig()
     QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
     eventLoop.exec();
 
-    QString jsConfig(reply->readAll());
+    const QString jsConfig(reply->readAll());
 
     QScriptEngine engine;
 
-    QString jsSetup = QString(\
+    const QString jsSetup = QString(\
                 "(function(){\
                    window = {};\
                    window.location = {};\
@@ -229,45 +210,55 @@ void CRouterBRouterSetup::loadOnlineConfig()
                    BR = {};\
                   })();").arg(configHost);
 
-    QString run1 = engine.evaluate(jsSetup).toString();
-    QString run2 = engine.evaluate(jsConfig).toString();
+//TODO: error handling
+    const QString run1 = engine.evaluate(jsSetup).toString();
+    const QString run2 = engine.evaluate(jsConfig).toString();
 
-    QScriptValue br = engine.globalObject().property("BR");
-    QScriptValue conf = br.property("conf");
+    const QScriptValue br = engine.globalObject().property("BR");
+    const QScriptValue conf = br.property("conf");
     onlineServiceUrl = conf.property("host").toString();
     onlineProfilesUrl = conf.property("profilesUrl").toString();
-    QScriptValue profiles = conf.property("profiles");
-    qint32 len = profiles.property("length").toInt32();
-    onlineProfiles.clear();
+    const QScriptValue profiles = conf.property("profiles");
+    const qint32 len = profiles.property("length").toInt32();
+    onlineProfilesAvailable.clear();
     for(qint32 i=0;i<len;i++)
     {
-        onlineProfiles << profiles.property(i).toString();
+        onlineProfilesAvailable << profiles.property(i).toString();
     }
 }
 
-void CRouterBRouterSetup::loadOnlineProfiles()
+const QString CRouterBRouterSetup::getOnlineProfileContent(const int index)
+{
+    return QString(loadOnlineProfile(index));
+}
+
+void CRouterBRouterSetup::installOnlineProfile(const int index)
+{
+    const QString profile = onlineProfilesAvailable.at(index);
+    const QDir dir = getProfileDir();
+    const QString filename = dir.absoluteFilePath(profile + ".brf");
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
+    file.write(loadOnlineProfile(index));
+    file.close();
+}
+
+const QByteArray CRouterBRouterSetup::loadOnlineProfile(const int index)
 {
     QNetworkAccessManager networkAccessManager;
 
-    QDir dir(IAppSetup::getPlatformInstance()->defaultCachePath());
+    const QString profile = onlineProfilesAvailable.at(index);
 
-    for(QString profile:onlineProfiles)
-    {
-        QNetworkRequest request;
-        QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");
-        request.setUrl(profileUrl);
+    QNetworkRequest request;
+    const QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");
+    request.setUrl(profileUrl);
 
-        QNetworkReply * reply = networkAccessManager.get(request);
-        reply->deleteLater();
+    QNetworkReply * reply = networkAccessManager.get(request);
+    reply->deleteLater();
 
-        QEventLoop eventLoop;
-        QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
-        eventLoop.exec();
+    QEventLoop eventLoop;
+    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
+    eventLoop.exec();
 
-        QString filename = dir.absoluteFilePath(profile + ".brf");
-        QFile file(filename);
-        file.open(QIODevice::WriteOnly);
-        file.write(reply->readAll());
-        file.close();
-    }
+    return reply->readAll();
 }

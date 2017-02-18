@@ -27,13 +27,14 @@ class CRouterBRouterSetup
 public:
     CRouterBRouterSetup();
     ~CRouterBRouterSetup();
-    enum Mode { Mode_Local, Mode_Online, Mode_None };
+    enum mode_e { ModeLocal, ModeOnline };
     bool expertMode;
-    Mode installMode;
+    mode_e installMode;
     QString onlineWebUrl;
     QString onlineServiceUrl;
     QString onlineProfilesUrl;
     QStringList onlineProfiles;
+    QStringList onlineProfilesAvailable;
     QString localDir;
     QString localProfileDir;
     QString localSegmentsDir;
@@ -42,8 +43,23 @@ public:
     QString localPort;
     QString binariesUrl;
 
+    void load();
+    void save();
+
+    const QString getProfileContent(const int index);
+    const QString getProfileContent(const QString profile);
+    const QStringList getProfiles();
+    const QStringList getProfilesAvailable();
+    const QDir getProfileDir();
+
+    void readProfiles();
+    void loadOnlineConfig();
+    const QString getOnlineProfileContent(const int index);
+    void installOnlineProfile(const int index);
+
+private:
     const bool defaultExpertMode = false;
-    const Mode defaultInstallMode = Mode_Online;
+    const mode_e defaultInstallMode = ModeOnline;
     const QString defaultOnlineWebUrl = "http://brouter.de/brouter-web/";
     const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
     const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
@@ -54,23 +70,19 @@ public:
     const QString defaultLocalPort = "17777";
     const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
 
-    void load();
-    void save();
+    void readProfiles(mode_e mode);
+    const QString getProfileContent(mode_e mode, QString profile);
+    const QDir getProfileDir(mode_e mode);
+    const QByteArray loadOnlineProfile(int index);
 
-    Mode modeFromString(QString mode);
-    QString stringFromMode(Mode mode);
-
-    QString readLocalProfile(QString profile);
-    QString readOnlineProfile(QString profile);
-    void readLocalProfiles();
-    void readOnlineProfiles();
-    void loadOnlineConfig();
-    void loadOnlineProfiles();
-    QString readProfile(Mode mode, QString profile);
-    QDir getLocalProfileDir();
-private:
-    QDir getProfileDir(Mode mode);
-    void readProfiles(Mode mode);
+    const mode_e modeFromString(QString mode);
+    const QString stringFromMode(mode_e mode);
 };
 
+class CRouterBRouterSetupException : public QException
+{
+public:
+    void raise() const override { throw *this; }
+    CRouterBRouterSetupException *clone() const override { return new CRouterBRouterSetupException(*this); }
+};
 #endif

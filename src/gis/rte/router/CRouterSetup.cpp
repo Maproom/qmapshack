@@ -89,3 +89,8 @@ int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coo
 
     return false;
 }
+
+void CRouterSetup::setRouterTitle(const router_e router, const QString title)
+{
+    comboRouter->setItemText(router,title);
+}

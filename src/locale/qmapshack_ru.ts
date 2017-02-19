@@ -4274,7 +4274,7 @@ Ivo Kronenberg</translation>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
         <source>Available Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступные треки</translation>
     </message>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="54"/>
@@ -4287,7 +4287,7 @@ Ivo Kronenberg</translation>
     <message>
         <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
         <source>Combined Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Объединенные треки</translation>
     </message>
 </context>
 <context>

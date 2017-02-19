@@ -34,7 +34,12 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
         stream << filenames;
         socket.waitForBytesWritten(3000);
 
-        qDebug() << "There is alread an instance of QMapShack runnig. Exit this one.";
+        // wait for confirmation
+        socket.waitForReadyRead(3000);
+        bool ok;
+        stream >> ok;
+        qDebug() << "Sent parameters to primary instance. Result" << ok;
+        qDebug() << "There can only be one. Exit.";
         exit(0);
     }
 
@@ -75,6 +80,10 @@ void CSingleInstanceProxy::slotNewConnection()
 
         CMainWindow& w = CMainWindow::self();
         w.loadGISData(filenames);
+
+        // confirm that files are loaded
+        stream << true;
+        socket->waitForBytesWritten(3000);
 
         // raise the application window to top of desktop
         w.raise();

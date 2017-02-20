@@ -295,6 +295,22 @@
    <attribute name="pageId">
     <string notr="true">4</string>
    </attribute>
+   <widget class="QFrame" name="frameLocalTiles">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>-1</y>
+      <width>601</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QWizardPage" name="pageOnlineUrl">
    <attribute name="pageId">

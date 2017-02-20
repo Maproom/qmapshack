@@ -68,6 +68,7 @@ private:
     const QString defaultLocalHost = "127.0.0.1";
     const QString defaultLocalPort = "17777";
     const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
+    const QString onlineCacheDir = "BRouter";
 
     void readProfiles(mode_e mode);
     const QString getProfileContent(mode_e mode, QString profile);

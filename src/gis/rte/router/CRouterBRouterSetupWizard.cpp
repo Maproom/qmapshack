@@ -19,6 +19,8 @@
 #include "CMainWindow.h"
 #include "CRouterBRouterSetupWizard.h"
 #include "setup/IAppSetup.h"
+#include "canvas/CCanvas.h"
+#include <proj_api.h>
 #include <QtNetwork>
 #include <QtWidgets>
 
@@ -494,7 +496,37 @@ void CRouterBRouterSetupWizard::cleanupProfiles()
 
 void CRouterBRouterSetupWizard::initLocalTiles()
 {
+    QTemporaryFile temp;
+    temp.open();
+    temp.close();
 
+    QSettings view(temp.fileName(), QSettings::IniFormat);
+    view.clear();
+
+    CCanvas * source = CMainWindow::self().getVisibleCanvas();
+    if(source)
+    {
+        source->saveConfig(view);
+    }
+    //view.setValue("grid/color",QColor(Qt::red).name());
+    view.setValue("map/zoomIndex",16);
+
+    canvas = new CCanvas(frameLocalTiles,"BRouterTileDownload");
+    // clone canvas by a temporary configuration file
+
+//    QPointF posFocus = view.value("posFocus", QPointF(0,0)).toPointF();
+//    const QPointF ul = posFocus + QPointF(-0.2*DEG_TO_RAD,+0.2*DEG_TO_RAD);
+//    const QPointF lr = posFocus + QPointF(0.2*DEG_TO_RAD,-0.2*DEG_TO_RAD);
+    canvas->loadConfig(view);
+
+    area = new CRouterBRouterTilesSelect(frameLocalTiles, canvas);
+
+    canvas->setGeometry(frameLocalTiles->rect());
+//    canvas->zoomTo(QRectF(ul,lr));
+    canvas->show();
+
+    area->setGeometry(frameLocalTiles->rect());
+    //area->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 void CRouterBRouterSetupWizard::beginLocalTiles()
@@ -504,7 +536,10 @@ void CRouterBRouterSetupWizard::beginLocalTiles()
 
 void CRouterBRouterSetupWizard::cleanupLocalTiles()
 {
-
+    if (canvas != nullptr)
+    {
+//        delete mapView;
+    }
 }
 
 void CRouterBRouterSetupWizard::initOnlineDetails()

@@ -20,9 +20,11 @@
 #define CROUTERBROUTERSETUPWIZARD_H
 
 #include "CRouterBRouterSetup.h"
+#include "CRouterBRouterTilesSelect.h"
 #include "ui_IRouterBRouterSetupWizard.h"
 #include "tool/IToolShell.h"
 #include <QWizard>
+#include <canvas/CCanvas.h>
 
 class CRouterBRouterSetupWizardToolShell : public IToolShell
 {
@@ -106,6 +108,10 @@ private:
     void cleanupOnlineUrl();
 
     CRouterBRouterSetup setup;
+
+    CCanvas * canvas;
+    CRouterBRouterTilesSelect * area;
+
 };
 
 #endif //CROUTERBROUTERSETUPWIZARD_H

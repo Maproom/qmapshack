@@ -243,6 +243,7 @@ set( SRCS
         gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
         gis/rte/router/CRouterBRouterSetupWizard.cpp
+        gis/rte/router/CRouterBRouterTilesSelect.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -513,6 +514,7 @@ set( HDRS
         gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterBRouterSetup.h
         gis/rte/router/CRouterBRouterSetupWizard.h
+        gis/rte/router/CRouterBRouterTilesSelect.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h

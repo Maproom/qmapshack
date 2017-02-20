@@ -143,7 +143,12 @@ const QDir CRouterBRouterSetup::getProfileDir(mode_e mode)
     }
     case ModeOnline:
     {
-        return QDir(IAppSetup::getPlatformInstance()->defaultCachePath());
+        QDir brouterDir(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(onlineCacheDir));
+        if (!brouterDir.exists())
+        {
+            brouterDir.mkpath(brouterDir.absolutePath());
+        }
+        return brouterDir;
     }
     default:
     {

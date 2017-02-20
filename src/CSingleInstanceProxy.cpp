@@ -50,7 +50,7 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
     server->removeServer("QMapShack");
     if(!server->listen("QMapShack"))
     {
-        qDebug() << "CSingleInstanceProxy: Failed to start singel instance server socket.";
+        qDebug() << "CSingleInstanceProxy: Failed to start single instance server socket.";
     }
     else
     {

@@ -60,6 +60,7 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
 
 CSingleInstanceProxy::~CSingleInstanceProxy()
 {
+    qDebug() << "CSingleInstanceProxy::~CSingleInstanceProxy()";
 }
 
 void CSingleInstanceProxy::slotNewConnection()

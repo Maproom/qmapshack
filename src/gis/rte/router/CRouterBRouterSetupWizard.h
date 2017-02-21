@@ -109,8 +109,7 @@ private:
 
     CRouterBRouterSetup setup;
 
-    CCanvas * canvas;
-    CRouterBRouterTilesSelect * area;
+    CRouterBRouterTilesSelect * tilesSelect;
 
 };
 

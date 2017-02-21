@@ -27,8 +27,16 @@ class CRouterBRouterTilesSelect : public QWidget
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelect(QWidget * parent, CCanvas * map);
+    CRouterBRouterTilesSelect(QWidget * parent);
     virtual ~CRouterBRouterTilesSelect();
+};
+
+class CRouterBRouterTilesSelectArea : public QWidget
+{
+    Q_OBJECT
+public:
+    CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas);
+    virtual ~CRouterBRouterTilesSelectArea();
 
     void paintEvent(QPaintEvent *event) override;
 
@@ -50,6 +58,22 @@ private:
     QPoint pPressed;
     QVector<QPoint> newTiles;
     QVector<QPoint> existingTiles;
+};
+
+class CRouterBRouterTilesSelectLayout : public QLayout
+{
+public:
+    CRouterBRouterTilesSelectLayout(QWidget * parent);
+    virtual ~CRouterBRouterTilesSelectLayout();
+
+    void addItem(QLayoutItem *) override;
+    QSize sizeHint() const override;
+    void setGeometry(const QRect & r) override;
+    QLayoutItem * itemAt(int index) const override;
+    QLayoutItem * takeAt(int index) override;
+    int count() const override;
+private:
+    QList<QLayoutItem *> items;
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

@@ -32,6 +32,7 @@ CRouterBRouterTilesSelect::~CRouterBRouterTilesSelect()
 
 void CRouterBRouterTilesSelect::paintEvent(QPaintEvent *event)
 {
+    drawNewTiles();
 }
 
 

@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "CRouterBRouterSetupWizard.h"
+#include "CRouterBRouterSetupWizardToolShell.h"
 #include "setup/IAppSetup.h"
 #include "canvas/CCanvas.h"
 #include <proj_api.h>
@@ -496,15 +497,161 @@ void CRouterBRouterSetupWizard::cleanupProfiles()
 
 void CRouterBRouterSetupWizard::initLocalTiles()
 {
-    tilesSelect = new CRouterBRouterTilesSelect(pageLocalTiles);
-    pageLocalTiles->layout()->addWidget(tilesSelect);
-    tilesSelect->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
-    tilesSelect->show();
+    connect(widgetLocalTilesSelect, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterSetupWizard::slotLocalTilesSelectionChanged);
+    connect(pushLocalTilesClearSelection, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesClearSelection);
+    connect(pushLocalTilesDeleteSelection, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected);
+    connect(pushLocalTilesSelectOld, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated);
+    connect(pushLocalTilesDownload, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDownload);
+
+    localTilesOld.clear();
+    localTilesOld << QPoint(5,40);
+
+    localTilesExisting.clear();
+    localTilesExisting << QPoint(10,50);
 }
 
 void CRouterBRouterSetupWizard::beginLocalTiles()
 {
+    localTilesSelected.clear();
+    updateLocalTilesButtons();
+    updateLocalTilesSelect();
+}
 
+void CRouterBRouterSetupWizard::slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles)
+{
+    localTilesSelected = tiles;
+    updateLocalTilesButtons();
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated()
+{
+    bool changed(false);
+
+    for (QPoint tile : localTilesOld)
+    {
+        if (!localTilesSelected.contains(tile))
+        {
+            localTilesSelected << tile;
+            changed = true;
+        }
+    }
+    if (changed)
+    {
+        widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
+        updateLocalTilesSelect();
+        updateLocalTilesButtons();
+    }
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected()
+{
+    bool changed(false);
+
+    for (QPoint tile : localTilesSelected)
+    {
+        if (localTilesOld.contains(tile))
+        {
+            localTilesOld.removeAt(localTilesOld.indexOf(tile));
+            changed = true;
+        }
+        else if (localTilesExisting.contains(tile))
+        {
+            localTilesExisting.removeAt(localTilesExisting.indexOf(tile));
+            changed = true;
+        }
+    }
+    if (!localTilesSelected.isEmpty())
+    {
+        localTilesSelected.clear();
+        changed = true;
+    }
+    if (changed)
+    {
+        updateLocalTilesSelect();
+        updateLocalTilesButtons();
+    }
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesClearSelection()
+{
+    if (!localTilesSelected.isEmpty())
+    {
+        localTilesSelected.clear();
+        updateLocalTilesSelect();
+        updateLocalTilesButtons();
+    }
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesDownload()
+{
+    bool changed(false);
+
+    for (QPoint tile : localTilesSelected)
+    {
+        if (localTilesOld.contains(tile))
+        {
+            localTilesOld.removeAt(localTilesOld.indexOf(tile));
+            changed = true;
+        }
+        if (!localTilesExisting.contains(tile))
+        {
+            localTilesExisting << tile;
+            changed = true;
+        }
+    }
+    if (!localTilesSelected.isEmpty())
+    {
+        localTilesSelected.clear();
+        changed = true;
+    }
+    if (changed)
+    {
+        updateLocalTilesSelect();
+        updateLocalTilesButtons();
+    }
+}
+
+void CRouterBRouterSetupWizard::updateLocalTilesButtons()
+{
+    pushLocalTilesClearSelection->setEnabled(!localTilesSelected.isEmpty());
+    bool enabled = false;
+    for (QPoint tile : localTilesSelected)
+    {
+        if (localTilesOld.contains(tile) or localTilesExisting.contains(tile))
+        {
+            enabled = true;
+            break;
+        }
+    }
+    pushLocalTilesDeleteSelection->setEnabled(enabled);
+    enabled = false;
+    for (QPoint tile : localTilesOld)
+    {
+        if (!localTilesSelected.contains(tile))
+        {
+            enabled = true;
+            break;
+        }
+    }
+    pushLocalTilesSelectOld->setEnabled(enabled);
+    enabled = false;
+    for (QPoint tile : localTilesSelected)
+    {
+        if (!localTilesExisting.contains(tile))
+        {
+            enabled = true;
+            break;
+        }
+    }
+    pushLocalTilesDownload->setEnabled(enabled);
+}
+
+void CRouterBRouterSetupWizard::updateLocalTilesSelect()
+{
+    widgetLocalTilesSelect->setExistingTiles(localTilesExisting);
+    widgetLocalTilesSelect->setOutdatedTiles(localTilesOld);
+    widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
+    widgetLocalTilesSelect->update();
 }
 
 void CRouterBRouterSetupWizard::cleanupLocalTiles()
@@ -539,43 +686,4 @@ void CRouterBRouterSetupWizard::beginOnlineUrl()
 void CRouterBRouterSetupWizard::cleanupOnlineUrl()
 {
 
-}
-
-CRouterBRouterSetupWizardToolShell::CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent)
-    : IToolShell(textBrowser,parent)
-{
-}
-
-CRouterBRouterSetupWizardToolShell::~CRouterBRouterSetupWizardToolShell()
-{
-}
-
-void CRouterBRouterSetupWizardToolShell::out(const QString out)
-{
-    stdOut(out);
-}
-
-void CRouterBRouterSetupWizardToolShell::execute(const QString dir, const QString command, const QStringList args)
-{
-    stdOut("cd " + dir);
-    stdOut(command+" " + args.join(" ") + "\n");
-    cmd.setWorkingDirectory(dir);
-    cmd.start(command,args);
-    cmd.waitForFinished();
-}
-
-void CRouterBRouterSetupWizardToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
-{
-    this->exitCode = exitCode;
-    this->exitStatus = status;
-    if (status == QProcess::ExitStatus::NormalExit)
-    {
-        text->setTextColor(Qt::darkGreen);
-        text->append(tr("!!! done !!!\n"));
-    }
-    else
-    {
-        text->setTextColor(Qt::darkRed);
-        text->append(tr("!!! failed !!!\n"));
-    }
 }

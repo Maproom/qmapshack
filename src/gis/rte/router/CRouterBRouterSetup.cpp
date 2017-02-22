@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,7 +16,9 @@
 
 **********************************************************************************************/
 
-#include "gis/rte/router/CRouterBRouterSetup.h"
+#include "CRouterBRouterSetup.h"
+#include "CRouterBRouterSetupException.h"
+
 #include "helpers/CSettings.h"
 #include <QtNetwork>
 #include <QtScript>

@@ -16,35 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERBROUTERTILESSELECT_H
-#define CROUTERBROUTERTILESSELECT_H
+#ifndef CROUTERBROUTERTILESSELECTLAYOUT_H
+#define CROUTERBROUTERTILESSELECTLAYOUT_H
 
-#include "canvas/CCanvas.h"
 #include <QtCore>
 #include <QtWidgets>
 
-class CRouterBRouterTilesSelectArea;
-
-class CRouterBRouterTilesSelect : public QWidget
+class CRouterBRouterTilesSelectLayout : public QLayout
 {
-    Q_OBJECT
 public:
-    CRouterBRouterTilesSelect(QWidget * parent);
-    virtual ~CRouterBRouterTilesSelect();
+    CRouterBRouterTilesSelectLayout(QWidget * parent);
+    virtual ~CRouterBRouterTilesSelectLayout();
 
-    void setExistingTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
-
-signals:
-    void selectedTilesChanged(const QVector<QPoint> & tiles);
-
+    void addItem(QLayoutItem *) override;
+    QSize sizeHint() const override;
+    void setGeometry(const QRect & r) override;
+    QLayoutItem * itemAt(int index) const override;
+    QLayoutItem * takeAt(int index) override;
+    int count() const override;
 private:
-    CRouterBRouterTilesSelectArea * selectArea;
-    void selectedTilesChangedEvent();
-
-    friend class CRouterBRouterTilesSelectArea;
+    QList<QLayoutItem *> items;
 };
 
-#endif //CROUTERBROUTERTILESSELECT_H
+#endif //CROUTERBROUTERTILESSELECTLAYOUT_H
 

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,35 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERBROUTERTILESSELECT_H
-#define CROUTERBROUTERTILESSELECT_H
+#ifndef CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
+#define CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
 
-#include "canvas/CCanvas.h"
-#include <QtCore>
-#include <QtWidgets>
+#include "tool/IToolShell.h"
+#include <QWidget>
 
-class CRouterBRouterTilesSelectArea;
-
-class CRouterBRouterTilesSelect : public QWidget
+class CRouterBRouterSetupWizardToolShell : public IToolShell
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelect(QWidget * parent);
-    virtual ~CRouterBRouterTilesSelect();
+    CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent);
+    virtual ~CRouterBRouterSetupWizardToolShell();
 
-    void setExistingTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
-
-signals:
-    void selectedTilesChanged(const QVector<QPoint> & tiles);
+    void out(const QString out);
+    void execute(const QString dir, const QString command, const QStringList args);
+    QProcess::ExitStatus getExitStatus();
+    const int getExitCode();
 
 private:
-    CRouterBRouterTilesSelectArea * selectArea;
-    void selectedTilesChangedEvent();
-
-    friend class CRouterBRouterTilesSelectArea;
+    void finished(int exitCode, QProcess::ExitStatus status) override;
+    QProcess::ExitStatus exitStatus;
+    int exitCode;
 };
 
-#endif //CROUTERBROUTERTILESSELECT_H
+#endif //CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
 

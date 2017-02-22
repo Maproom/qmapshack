@@ -310,7 +310,69 @@
    <attribute name="pageId">
     <string notr="true">4</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_10"/>
+   <layout class="QVBoxLayout" name="verticalLayout_10">
+    <item>
+     <widget class="CRouterBRouterTilesSelect" name="widgetLocalTilesSelect" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushLocalTilesSelectOld">
+        <property name="text">
+         <string>select Outdated</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushLocalTilesClearSelection">
+        <property name="text">
+         <string>Clear selection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushLocalTilesDeleteSelection">
+        <property name="text">
+         <string>Delete selection</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushLocalTilesDownload">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Download</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QWizardPage" name="pageOnlineUrl">
    <property name="sizePolicy">
@@ -391,6 +453,12 @@
    <class>QWebView</class>
    <extends>QWidget</extends>
    <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+  <customwidget>
+   <class>CRouterBRouterTilesSelect</class>
+   <extends>QWidget</extends>
+   <header>gis/rte/router/CRouterBRouterTilesSelect.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

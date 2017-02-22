@@ -373,7 +373,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="41"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit DEM Daten. Im Verzeichnis können mehrere Dateien vorliegen. Allerdings wird kein Unterverzeichnis durchsucht. Unterstützte Formate sind: %1</translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Höhendaten. In einem Verzeichnis können mehrere Dateien liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="56"/>
@@ -2701,7 +2701,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="47"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder Entfernen von Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="62"/>

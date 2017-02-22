@@ -16,35 +16,15 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERBROUTERTILESSELECT_H
-#define CROUTERBROUTERTILESSELECT_H
+#ifndef CROUTERBROUTERSETUPEXCEPTION_H
+#define CROUTERBROUTERSETUPEXCEPTION_H
 
-#include "canvas/CCanvas.h"
 #include <QtCore>
-#include <QtWidgets>
 
-class CRouterBRouterTilesSelectArea;
-
-class CRouterBRouterTilesSelect : public QWidget
+class CRouterBRouterSetupException : public QException
 {
-    Q_OBJECT
 public:
-    CRouterBRouterTilesSelect(QWidget * parent);
-    virtual ~CRouterBRouterTilesSelect();
-
-    void setExistingTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
-
-signals:
-    void selectedTilesChanged(const QVector<QPoint> & tiles);
-
-private:
-    CRouterBRouterTilesSelectArea * selectArea;
-    void selectedTilesChangedEvent();
-
-    friend class CRouterBRouterTilesSelectArea;
+    void raise() const override { throw *this; }
+    CRouterBRouterSetupException *clone() const override { return new CRouterBRouterSetupException(*this); }
 };
-
-#endif //CROUTERBROUTERTILESSELECT_H
-
+#endif

@@ -16,35 +16,49 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERBROUTERTILESSELECT_H
-#define CROUTERBROUTERTILESSELECT_H
+#include "CRouterBRouterTilesSelectLayout.h"
 
-#include "canvas/CCanvas.h"
-#include <QtCore>
-#include <QtWidgets>
-
-class CRouterBRouterTilesSelectArea;
-
-class CRouterBRouterTilesSelect : public QWidget
+CRouterBRouterTilesSelectLayout::CRouterBRouterTilesSelectLayout(QWidget * parent) : QLayout(parent)
 {
-    Q_OBJECT
-public:
-    CRouterBRouterTilesSelect(QWidget * parent);
-    virtual ~CRouterBRouterTilesSelect();
 
-    void setExistingTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
+}
 
-signals:
-    void selectedTilesChanged(const QVector<QPoint> & tiles);
+CRouterBRouterTilesSelectLayout::~CRouterBRouterTilesSelectLayout()
+{
 
-private:
-    CRouterBRouterTilesSelectArea * selectArea;
-    void selectedTilesChangedEvent();
+}
 
-    friend class CRouterBRouterTilesSelectArea;
-};
+void CRouterBRouterTilesSelectLayout::addItem(QLayoutItem * item)
+{
+    items.append(item);
+}
 
-#endif //CROUTERBROUTERTILESSELECT_H
+QSize CRouterBRouterTilesSelectLayout::sizeHint() const
+{
+    return QSize(200,200);
+}
 
+void CRouterBRouterTilesSelectLayout::setGeometry(const QRect & r)
+{
+    for (QLayoutItem * item : items)
+    {
+        item->setGeometry(r);
+    }
+}
+
+QLayoutItem * CRouterBRouterTilesSelectLayout::itemAt(int index) const
+{
+    return items.at(index);
+}
+
+QLayoutItem * CRouterBRouterTilesSelectLayout::takeAt(int index)
+{
+    QLayoutItem * item = items.at(index);
+    items.removeAt(index);
+    return item;
+}
+
+int CRouterBRouterTilesSelectLayout::count() const
+{
+    return items.size();
+}

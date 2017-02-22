@@ -238,12 +238,15 @@ set( SRCS
         gis/rte/router/CRouterSetup.cpp
         gis/rte/router/CRouterRoutino.cpp
         gis/rte/router/CRouterMapQuest.cpp
+        gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouter.cpp
         gis/rte/router/CRouterBRouterInfo.cpp
-        gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
         gis/rte/router/CRouterBRouterSetupWizard.cpp
+        gis/rte/router/CRouterBRouterSetupWizardToolShell.cpp
         gis/rte/router/CRouterBRouterTilesSelect.cpp
+        gis/rte/router/CRouterBRouterTilesSelectArea.cpp
+        gis/rte/router/CRouterBRouterTilesSelectLayout.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -508,13 +511,17 @@ set( HDRS
         gis/rte/router/IRouter.h
         gis/rte/router/CRouterSetup.h
         gis/rte/router/CRouterRoutino.h
+        gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterMapQuest.h
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterBRouterInfo.h
-        gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterBRouterSetup.h
+        gis/rte/router/CRouterBRouterSetupException.h
         gis/rte/router/CRouterBRouterSetupWizard.h
+        gis/rte/router/CRouterBRouterSetupWizardToolShell.h
         gis/rte/router/CRouterBRouterTilesSelect.h
+        gis/rte/router/CRouterBRouterTilesSelectArea.h
+        gis/rte/router/CRouterBRouterTilesSelectLayout.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h
@@ -674,9 +681,9 @@ set( UIS
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
+    gis/rte/router/IRouterRoutinoPathSetup.ui
     gis/rte/router/IRouterBRouter.ui
     gis/rte/router/IRouterBRouterInfo.ui
-    gis/rte/router/IRouterRoutinoPathSetup.ui
     gis/rte/router/IRouterBRouterSetupWizard.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui

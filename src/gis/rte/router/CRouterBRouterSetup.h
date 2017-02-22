@@ -79,10 +79,4 @@ private:
     const QString stringFromMode(mode_e mode);
 };
 
-class CRouterBRouterSetupException : public QException
-{
-public:
-    void raise() const override { throw *this; }
-    CRouterBRouterSetupException *clone() const override { return new CRouterBRouterSetupException(*this); }
-};
 #endif

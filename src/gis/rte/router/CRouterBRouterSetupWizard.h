@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,27 +22,8 @@
 #include "CRouterBRouterSetup.h"
 #include "CRouterBRouterTilesSelect.h"
 #include "ui_IRouterBRouterSetupWizard.h"
-#include "tool/IToolShell.h"
 #include <QWizard>
 #include <canvas/CCanvas.h>
-
-class CRouterBRouterSetupWizardToolShell : public IToolShell
-{
-    Q_OBJECT
-public:
-    CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent);
-    virtual ~CRouterBRouterSetupWizardToolShell();
-
-    void out(const QString out);
-    void execute(const QString dir, const QString command, const QStringList args);
-    QProcess::ExitStatus getExitStatus();
-    const int getExitCode();
-
-private:
-    void finished(int exitCode, QProcess::ExitStatus status) override;
-    QProcess::ExitStatus exitStatus;
-    int exitCode;
-};
 
 class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
 {
@@ -58,6 +39,7 @@ public:
 public slots:
     void accept() override;
     void reject() override;
+    void slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles);
 
 private slots:
     void slotCurrentIdChanged(const int id);
@@ -72,6 +54,10 @@ private slots:
     void slotAvailableProfileClicked(const QModelIndex & index);
     void slotAddProfileClicked();
     void slotDelProfileClicked();
+    void slotLocalTilesSelectOutdated();
+    void slotLocalTilesDeleteSelected();
+    void slotLocalTilesClearSelection();
+    void slotLocalTilesDownload();
 
 private:
     enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
@@ -98,6 +84,8 @@ private:
     void initLocalTiles();
     void beginLocalTiles();
     void cleanupLocalTiles();
+    void updateLocalTilesButtons();
+    void updateLocalTilesSelect();
 
     void initOnlineDetails();
     void beginOnlineDetails();
@@ -109,8 +97,9 @@ private:
 
     CRouterBRouterSetup setup;
 
-    CRouterBRouterTilesSelect * tilesSelect;
-
+    QVector<QPoint> localTilesOld;
+    QVector<QPoint> localTilesExisting;
+    QVector<QPoint> localTilesSelected;
 };
 
 #endif //CROUTERBROUTERSETUPWIZARD_H

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
     Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
@@ -19,6 +19,8 @@
 
 #include <QtCore>
 #include "CRouterBRouterTilesSelect.h"
+#include "CRouterBRouterTilesSelectArea.h"
+#include "CRouterBRouterTilesSelectLayout.h"
 #include "CMainWindow.h"
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
@@ -43,170 +45,37 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     // clone canvas by a temporary configuration file
 
     canvas->loadConfig(view);
-    canvas->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 
-    CRouterBRouterTilesSelectArea * selectArea = new CRouterBRouterTilesSelectArea(this,canvas);
-    selectArea->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    selectArea = new CRouterBRouterTilesSelectArea(this,canvas);
 
-//    QLayout * layout = new QVBoxLayout(this);
     QLayout * layout = new CRouterBRouterTilesSelectLayout(this);
     layout->addWidget(canvas);
     layout->addWidget(selectArea);
     canvas->lower();
     canvas->show();
     selectArea->show();
-    //area->setAttribute(Qt::WA_TransparentForMouseEvents);
 }
 
 CRouterBRouterTilesSelect::~CRouterBRouterTilesSelect()
 {
 }
 
-
-CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas)
-    : QWidget(parent)
+void CRouterBRouterTilesSelect::setExistingTiles(const QVector<QPoint> & tiles)
 {
-    this->canvas = canvas;
+    selectArea->existingTiles = tiles;
 }
 
-CRouterBRouterTilesSelectArea::~CRouterBRouterTilesSelectArea()
+void CRouterBRouterTilesSelect::setOutdatedTiles(const QVector<QPoint> & tiles)
 {
+    selectArea->outdatedTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
+void CRouterBRouterTilesSelect::setSelectedTiles(const QVector<QPoint> & tiles)
 {
-    QPainter painter(this);
-    QPen pen;
-    pen.setColor(Qt::red);
-    pen.setWidth(2);
-    painter.setPen(pen);
-    QRect rect = this->rect();
-    painter.drawRect(rect);
-    drawNewTiles();
+    selectArea->selectedTiles = tiles;
 }
 
-
-void CRouterBRouterTilesSelectArea::mouseDoubleClickEvent(QMouseEvent * event)
+void CRouterBRouterTilesSelect::selectedTilesChangedEvent()
 {
-    QPointF pos = QPointF(event->pos());
-    canvas->convertPx2Rad(pos);
-    QPointF posDegF = pos * RAD_TO_DEG;
-    QPoint tile(posDegF.x()/5,posDegF.y()/5);
-    tile *=5;
-    if (newTiles.contains(tile))
-    {
-        newTiles.remove(newTiles.indexOf(tile));
-    }
-    else
-    {
-        newTiles.append(tile);
-    }
-}
-
-void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
-{
-    canvas->moveMap(QPointF(event->pos()-pPressed));
-    pPressed = event->pos();
-}
-
-void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent * event)
-{
-    pPressed = event->pos();
-}
-
-void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
-{
-    canvas->moveMap(QPointF(event->pos()-pPressed));
-}
-
-void CRouterBRouterTilesSelectArea::drawExistingTiles()
-{
-    for(QPoint tile: existingTiles)
-    {
-        drawTileMark(tile,Qt::blue);
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawNewTiles()
-{
-    for(QPoint tile:newTiles)
-    {
-        drawTileMark(tile,Qt::red);
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawTileMark(QPoint tile, Qt::GlobalColor color)
-{
-    QPainter painter(this);
-    QPen pen;
-    pen.setColor(color);
-    pen.setWidth(2);
-    painter.setPen(pen);
-
-    QPointF p0(tile.x(),tile.y());
-    QPointF p1(tile.x()+5,tile.y());
-    QPointF p2(tile.x()+5,tile.y()+5);
-    QPointF p3(tile.x(),tile.y()+5);
-
-    p0 *= DEG_TO_RAD;
-    p1 *= DEG_TO_RAD;
-    p2 *= DEG_TO_RAD;
-    p3 *= DEG_TO_RAD;
-
-    canvas->convertRad2Px(p0);
-    canvas->convertRad2Px(p1);
-    canvas->convertRad2Px(p2);
-    canvas->convertRad2Px(p3);
-
-    painter.drawLine(p0,p1);
-    painter.drawLine(p1,p2);
-    painter.drawLine(p2,p3);
-    painter.drawLine(p3,p0);
-    painter.drawLine(p0,p2);
-    painter.drawLine(p1,p3);
-}
-
-CRouterBRouterTilesSelectLayout::CRouterBRouterTilesSelectLayout(QWidget * parent) : QLayout(parent)
-{
-
-}
-
-CRouterBRouterTilesSelectLayout::~CRouterBRouterTilesSelectLayout()
-{
-
-}
-
-void CRouterBRouterTilesSelectLayout::addItem(QLayoutItem * item)
-{
-    items.append(item);
-}
-
-QSize CRouterBRouterTilesSelectLayout::sizeHint() const
-{
-    return QSize(200,200);
-}
-
-void CRouterBRouterTilesSelectLayout::setGeometry(const QRect & r)
-{
-    for (QLayoutItem * item : items)
-    {
-        item->setGeometry(r);
-    }
-}
-
-QLayoutItem * CRouterBRouterTilesSelectLayout::itemAt(int index) const
-{
-    return items.at(index);
-}
-
-QLayoutItem * CRouterBRouterTilesSelectLayout::takeAt(int index)
-{
-    QLayoutItem * item = items.at(index);
-    items.removeAt(index);
-    return item;
-}
-
-int CRouterBRouterTilesSelectLayout::count() const
-{
-    return items.size();
+    emit selectedTilesChanged(selectArea->selectedTiles);
 }

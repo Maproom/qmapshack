@@ -89,3 +89,4 @@ void CRouterBRouterTilesSelect::selectedTilesChangedEvent()
 {
     emit selectedTilesChanged(selectArea->selectedTiles);
 }
+

@@ -41,6 +41,7 @@ public slots:
     void reject() override;
     void slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles);
     void slotLocalTilesChanged();
+    void slotLocalTilesDownloadProgress(qint64 received, qint64 total);
 
 private slots:
     void slotCurrentIdChanged(const int id);

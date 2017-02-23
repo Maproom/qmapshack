@@ -73,9 +73,12 @@ public:
 public slots:
     void slotLoadOnlineTilesRequestFinished();
     void slotLoadOnlineTileDownloadFinished(QNetworkReply* reply);
+    void slotLoadOnlineTileDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+    void slotLoadOnlineTileDownloadReadReady();
 
 signals:
     void tilesLocalChanged();
+    void tilesDownloadProgress(qint64 received, qint64 total);
 
 private:
     const bool defaultExpertMode = false;
@@ -103,9 +106,9 @@ private:
 
     const QPoint tileFromFileName(QString fileName);
     const QString fileNameFromTile(QPoint tile);
+    QFile * findFileForReply(QNetworkReply * reply);
 
     void readTiles();
-    void downloadOutstandingTiles();
 
     QVector<tile_s> onlineTiles;
     QVector<QPoint> invalidTiles;
@@ -113,10 +116,10 @@ private:
     QVector<QPoint> currentTiles;
     QVector<QPoint> outstandingTiles;
 
-    bool tileDownloadRunning;
-
     QWebPage tilesWebPage;
     QNetworkAccessManager * tilesDownloadManager;
+    QVector<QNetworkReply*> tilesDownloadManagerReplies;
+    QVector<QFile*> tilesDownloadManagerFiles;
 
 };
 

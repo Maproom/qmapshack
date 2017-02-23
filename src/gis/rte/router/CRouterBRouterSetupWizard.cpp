@@ -502,24 +502,32 @@ void CRouterBRouterSetupWizard::initLocalTiles()
     connect(pushLocalTilesDeleteSelection, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected);
     connect(pushLocalTilesSelectOld, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated);
     connect(pushLocalTilesDownload, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDownload);
-
-    localTilesOld.clear();
-    localTilesOld << QPoint(5,40);
-
-    localTilesExisting.clear();
-    localTilesExisting << QPoint(10,50);
+    connect(&setup, &CRouterBRouterSetup::tilesLocalChanged, this, &CRouterBRouterSetupWizard::slotLocalTilesChanged);
 }
 
 void CRouterBRouterSetupWizard::beginLocalTiles()
 {
-    localTilesSelected.clear();
-    updateLocalTilesButtons();
-    updateLocalTilesSelect();
+    setup.initializeTiles();
+    slotLocalTilesClearSelection();
 }
 
 void CRouterBRouterSetupWizard::slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles)
 {
-    localTilesSelected = tiles;
+    QVector<QPoint> available = setup.getOnlineTilesAvailable();
+    localTilesSelected.clear();
+    for (QPoint tile : tiles)
+    {
+        if (available.contains(tile))
+        {
+            localTilesSelected << tile;
+        }
+    }
+    slotLocalTilesChanged();
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesChanged()
+{
+    updateLocalTilesSelect();
     updateLocalTilesButtons();
 }
 
@@ -527,7 +535,7 @@ void CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated()
 {
     bool changed(false);
 
-    for (QPoint tile : localTilesOld)
+    for (QPoint tile : setup.getOutdatedTiles())
     {
         if (!localTilesSelected.contains(tile))
         {
@@ -538,38 +546,17 @@ void CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated()
     if (changed)
     {
         widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
-        updateLocalTilesSelect();
-        updateLocalTilesButtons();
+        slotLocalTilesChanged();
     }
 }
 
 void CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected()
 {
-    bool changed(false);
-
     for (QPoint tile : localTilesSelected)
     {
-        if (localTilesOld.contains(tile))
-        {
-            localTilesOld.removeAt(localTilesOld.indexOf(tile));
-            changed = true;
-        }
-        else if (localTilesExisting.contains(tile))
-        {
-            localTilesExisting.removeAt(localTilesExisting.indexOf(tile));
-            changed = true;
-        }
+        setup.deleteTile(tile);
     }
-    if (!localTilesSelected.isEmpty())
-    {
-        localTilesSelected.clear();
-        changed = true;
-    }
-    if (changed)
-    {
-        updateLocalTilesSelect();
-        updateLocalTilesButtons();
-    }
+    slotLocalTilesClearSelection();
 }
 
 void CRouterBRouterSetupWizard::slotLocalTilesClearSelection()
@@ -577,42 +564,27 @@ void CRouterBRouterSetupWizard::slotLocalTilesClearSelection()
     if (!localTilesSelected.isEmpty())
     {
         localTilesSelected.clear();
-        updateLocalTilesSelect();
-        updateLocalTilesButtons();
+        slotLocalTilesChanged();
     }
 }
 
 void CRouterBRouterSetupWizard::slotLocalTilesDownload()
 {
-    bool changed(false);
-
     for (QPoint tile : localTilesSelected)
     {
-        if (localTilesOld.contains(tile))
+        if (!setup.getCurrentTiles().contains(tile) and !setup.getOutstandingTiles().contains(tile))
         {
-            localTilesOld.removeAt(localTilesOld.indexOf(tile));
-            changed = true;
-        }
-        if (!localTilesExisting.contains(tile))
-        {
-            localTilesExisting << tile;
-            changed = true;
+            setup.installOnlineTile(tile);
         }
     }
-    if (!localTilesSelected.isEmpty())
-    {
-        localTilesSelected.clear();
-        changed = true;
-    }
-    if (changed)
-    {
-        updateLocalTilesSelect();
-        updateLocalTilesButtons();
-    }
+    slotLocalTilesClearSelection();
 }
 
 void CRouterBRouterSetupWizard::updateLocalTilesButtons()
 {
+    QVector<QPoint> localTilesOld = setup.getOutdatedTiles();
+    QVector<QPoint> localTilesExisting = setup.getCurrentTiles();
+
     pushLocalTilesClearSelection->setEnabled(!localTilesSelected.isEmpty());
     bool enabled = false;
     for (QPoint tile : localTilesSelected)
@@ -648,8 +620,10 @@ void CRouterBRouterSetupWizard::updateLocalTilesButtons()
 
 void CRouterBRouterSetupWizard::updateLocalTilesSelect()
 {
-    widgetLocalTilesSelect->setExistingTiles(localTilesExisting);
-    widgetLocalTilesSelect->setOutdatedTiles(localTilesOld);
+    widgetLocalTilesSelect->setInvalidTiles(setup.getInvalidTiles());
+    widgetLocalTilesSelect->setExistingTiles(setup.getCurrentTiles());
+    widgetLocalTilesSelect->setOutdatedTiles(setup.getOutdatedTiles());
+    widgetLocalTilesSelect->setOutstandingTiles(setup.getOutstandingTiles());
     widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
     widgetLocalTilesSelect->update();
 }

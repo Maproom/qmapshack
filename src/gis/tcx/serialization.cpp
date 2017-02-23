@@ -20,12 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "gis/wpt/CGisItemWpt.h"
 
 
-void CGisItemWpt::saveTCX(QDomNode& tcx, const QDateTime crsPtDateTimeToBeSaved)
+void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToBeSaved)
 {
-    QDomDocument doc = tcx.ownerDocument();
+    QDomDocument doc = courseNode.ownerDocument();
 
     QDomElement xmlCrsPt = doc.createElement("CoursePoint");
-    tcx.lastChild().lastChild().appendChild(xmlCrsPt);
+    courseNode.appendChild(xmlCrsPt);
 
     xmlCrsPt.appendChild(doc.createElement("Name"));
     QString str = wpt.name;
@@ -83,69 +83,199 @@ void CGisItemWpt::saveTCX(QDomNode& tcx, const QDateTime crsPtDateTimeToBeSaved)
 }
 
 
-
-
-void CGisItemTrk::saveTCX(QDomNode& tcx, QList<QDateTime>& trkPtToOverwriteDateTimes, QList<qint32>& trkPtToOverwriteElevations)
+void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
 {
-    QDomDocument doc = tcx.ownerDocument();
+    IGisProject * project = getParentProject();
+    if (nullptr == project)
+    {
+        return;
+    }
+
+    QDomDocument doc = coursesNode.ownerDocument();
+
+    QDomElement courseNode = doc.createElement("Course");
+    coursesNode.appendChild(courseNode);
+
+    courseNode.appendChild(doc.createElement("Name"));
+    QString str = this->getName();
+    str.truncate(15);
+    courseNode.lastChild().appendChild(doc.createTextNode(str));
+
+
+    QDomElement lapElmt = doc.createElement("Lap");
+    courseNode.appendChild(lapElmt);
+    
+    lapElmt.appendChild(doc.createElement("TotalTimeSeconds"));
+    lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(this->getTotalElapsedSeconds())));
+    
+    lapElmt.appendChild(doc.createElement("DistanceMeters"));
+    lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(this->getTotalDistance())));
+    
+    lapElmt.appendChild(doc.createElement("Intensity"));
+    lapElmt.lastChild().appendChild(doc.createTextNode("Active"));
 
     QDomElement xmlTrk = doc.createElement("Track");
-    tcx.lastChild().lastChild().appendChild(xmlTrk);
+    courseNode.appendChild(xmlTrk);
+
+    QList<QDateTime> trkPtToOverwriteDateTimes;
+    QList<IGisItem::key_t> wptKeys;
+
+    for (const CTrackData::trkpt_t& trkpt : trk)
+    {
+   
+        QDomElement xmlTrkpt = doc.createElement("Trackpoint");
+        xmlTrk.appendChild(xmlTrkpt);
+
+        xmlTrkpt.appendChild(doc.createElement("Time"));
+        xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+
+        xmlTrkpt.appendChild(doc.createElement("Position"));
+
+        xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
+        QString str;
+        str.sprintf("%1.8f", trkpt.lat);
+        xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+
+        xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
+        str.sprintf("%1.8f", trkpt.lon);
+        xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
+            
+        qint32 eleToBeWritten = NOINT;
+        if (NOINT != trkpt.ele) // if this trackpoint has elevation
+        {
+            eleToBeWritten = trkpt.ele;    // take elevation on the trackpoint
+        }
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+        if (nullptr != wpt)   // if trackpoint has an attached waypoint
+        {
+            wptKeys << trkpt.keyWpt; // store attached waypoint
+            trkPtToOverwriteDateTimes << trkpt.time; // store trackpoint dateTime
+
+            if (NOINT != wpt->getElevation())    // if waypoint has elevation
+            {
+                eleToBeWritten = wpt->getElevation();   // take elevation of the waypoint
+            }
+        }
+        if (eleToBeWritten != NOINT) // if valid elevation has been found
+        {
+            xmlTrkpt.appendChild(doc.createElement("AltitudeMeters"));
+            xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(eleToBeWritten)));
+        }
+
+        xmlTrkpt.appendChild(doc.createElement("DistanceMeters"));
+        xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(trkpt.distance)));
+
+
+        if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString().size() != 0)
+        {
+            xmlTrkpt.appendChild(doc.createElement("HeartRateBpm"));
+            xmlTrkpt.lastChild().appendChild(doc.createElement("Value"));
+            xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString()));
+
+        }
+
+        if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString().size() != 0)
+        {
+            xmlTrkpt.appendChild(doc.createElement("Cadence"));
+            xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString()));
+        }
+    }
 
     int i = 0;
+    for (const IGisItem::key_t& wptKey : wptKeys)  // browse course points
+    {
+        CGisItemWpt *wptItem = dynamic_cast<CGisItemWpt*>(project->getItemByKey(wptKey));
+        wptItem->saveTCX(courseNode, trkPtToOverwriteDateTimes[i++]);
+    }
+}
 
+
+void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
+{
+    IGisProject * project = getParentProject();
+    if (nullptr == project)
+    {
+        return;
+    }
+
+    QDomDocument doc = activitiesNode.ownerDocument();
+
+    QDomElement activityNode = doc.createElement("Activity");
+    activitiesNode.appendChild(activityNode);
+
+    activityNode.setAttribute("Sport", "Other");
+    
+    activityNode.appendChild(doc.createElement("Id"));
+    activityNode.lastChild().appendChild(doc.createTextNode(trk.segs[0].pts[0].time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+    
     for (const CTrackData::trkseg_t &seg : trk.segs)
     {
-        for (const CTrackData::trkpt_t &pt : seg.pts)
+        QDomElement lapElmt = doc.createElement("Lap");
+        activityNode.appendChild(lapElmt);
+        lapElmt.setAttribute("StartTime", seg.pts[0].time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
+
+        lapElmt.appendChild(doc.createElement("TotalTimeSeconds")); // "totalTime" means "time of this lap"
+        lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(seg.pts.first().time.secsTo(seg.pts.last().time))));
+   
+        lapElmt.appendChild(doc.createElement("DistanceMeters"));
+        lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(seg.pts.last().distance - seg.pts.first().distance)));
+
+        lapElmt.appendChild(doc.createElement("Calories"));
+        lapElmt.lastChild().appendChild(doc.createTextNode("0")); // calories are unknown but a "calories" element is mandatory
+
+        lapElmt.appendChild(doc.createElement("Intensity"));
+        lapElmt.lastChild().appendChild(doc.createTextNode("Active"));
+
+        lapElmt.appendChild(doc.createElement("TriggerMethod"));
+        lapElmt.lastChild().appendChild(doc.createTextNode("Manual"));
+
+
+        QDomElement xmlTrk = doc.createElement("Track");
+        lapElmt.appendChild(xmlTrk);
+
+        for (const CTrackData::trkpt_t &trkpt : seg.pts)
         {
+
             QDomElement xmlTrkpt = doc.createElement("Trackpoint");
             xmlTrk.appendChild(xmlTrkpt);
-
+    
             xmlTrkpt.appendChild(doc.createElement("Time"));
-            xmlTrkpt.lastChild().appendChild(doc.createTextNode(pt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
+            xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
             xmlTrkpt.appendChild(doc.createElement("Position"));
 
             xmlTrkpt.lastChild().appendChild(doc.createElement("LatitudeDegrees"));
             QString str;
-            str.sprintf("%1.8f", pt.lat);
+            str.sprintf("%1.8f", trkpt.lat);
             xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
             xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
-            str.sprintf("%1.8f", pt.lon);
+            str.sprintf("%1.8f", trkpt.lon);
             xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
 
-            qint32 eleToBeWritten = NOINT;
 
-            if ((i < trkPtToOverwriteDateTimes.size()) && (pt.time == trkPtToOverwriteDateTimes[i])) // if trackpoint corresponds to one of the waypoints to be attached to the track
-            {
-                if (trkPtToOverwriteElevations[i] != NOINT) // if waypoint has elevation
-                {
-                    eleToBeWritten = trkPtToOverwriteElevations[i]; // take elevation of the waypoint
-                }
-                else
-                {
-                    eleToBeWritten = pt.ele; // if not, take elevation on the trackpoint
-                }
-                i++;
-            }
-            else
-            {
-                if (pt.ele != NOINT) // if this trackpoint has elevation
-                {
-                    eleToBeWritten = pt.ele;
-                }
-            }
-
-
-            if (eleToBeWritten != NOINT) // if valid elevation has been found
+            if (NOINT != trkpt.ele) // if this trackpoint has elevation
             {
                 xmlTrkpt.appendChild(doc.createElement("AltitudeMeters"));
-                xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(eleToBeWritten)));
+                xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(trkpt.ele)));
             }
 
             xmlTrkpt.appendChild(doc.createElement("DistanceMeters"));
-            xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(pt.distance)));
+            xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(trkpt.distance)));
+
+           if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString().size() != 0)
+           {
+                xmlTrkpt.appendChild(doc.createElement("HeartRateBpm"));
+                xmlTrkpt.lastChild().appendChild(doc.createElement("Value"));
+                xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString()));
+        
+            }
+
+           if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString().size() != 0)
+           {
+                xmlTrkpt.appendChild(doc.createElement("Cadence"));
+                xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString()));
+           }
         }
     }
 }

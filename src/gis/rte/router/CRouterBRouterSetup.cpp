@@ -29,7 +29,6 @@
 CRouterBRouterSetup::CRouterBRouterSetup()
 {
     tilesDownloadManager = new QNetworkAccessManager(this);
-    tileDownloadRunning = false;
 
     connect(tilesDownloadManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetup::slotLoadOnlineTileDownloadFinished);
     connect(&tilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterSetup::slotLoadOnlineTilesRequestFinished);
@@ -395,15 +394,19 @@ void CRouterBRouterSetup::installOnlineTile(const QPoint tile)
     {
         outstandingTiles << tile;
         emit tilesLocalChanged();
-    }
-    downloadOutstandingTiles();
-}
 
-void CRouterBRouterSetup::downloadOutstandingTiles()
-{
-    if (!tileDownloadRunning and outstandingTiles.size() > 0)
-    {
-        QString fileName = fileNameFromTile(outstandingTiles.first());
+        QString fileName = fileNameFromTile(tile);
+
+        QDir segmentsDir = QDir(QDir(localDir).absoluteFilePath(localSegmentsDir));
+        if (!segmentsDir.exists())
+        {
+            QDir(localDir).mkpath(localSegmentsDir);
+        }
+
+        QFile * out = new QFile(segmentsDir.absoluteFilePath(fileName));
+        out->open(QIODevice::WriteOnly);
+        tilesDownloadManagerFiles << out;
+
         QString tileUrl = segmentsUrl + fileName;
         QUrl url(tileUrl);
 
@@ -411,21 +414,39 @@ void CRouterBRouterSetup::downloadOutstandingTiles()
         request.setUrl(url);
 
         QNetworkReply* reply = tilesDownloadManager->get(request);
-
         reply->setProperty("tile", fileName);
-        tileDownloadRunning = true;
+        tilesDownloadManagerReplies << reply;
+
+        connect(reply, &QNetworkReply::downloadProgress, this, &CRouterBRouterSetup::slotLoadOnlineTileDownloadProgress);
+        connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterSetup::slotLoadOnlineTileDownloadReadReady);
+    }
+}
+
+void CRouterBRouterSetup::slotLoadOnlineTileDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+    emit tilesDownloadProgress(bytesReceived,bytesTotal);
+}
+
+void CRouterBRouterSetup::slotLoadOnlineTileDownloadReadReady()
+{
+    for (QNetworkReply* reply : tilesDownloadManagerReplies)
+    {
+        if (reply->bytesAvailable() > 0)
+        {
+            QFile * file = findFileForReply(reply);
+            if (file != nullptr)
+            {
+                file->write(reply->readAll());
+            }
+        }
     }
 }
 
 void CRouterBRouterSetup::slotLoadOnlineTileDownloadFinished(QNetworkReply* reply)
 {
-    tileDownloadRunning = false;
-
-    if(reply->error() != QNetworkReply::NoError)
+    if (tilesDownloadManagerReplies.contains(reply))
     {
-        //TODO add statusmessage
-        reply->deleteLater();
-        return;
+        tilesDownloadManagerReplies.remove(tilesDownloadManagerReplies.indexOf(reply));
     }
 
     QString fileName = reply->property("tile").toString();
@@ -434,22 +455,42 @@ void CRouterBRouterSetup::slotLoadOnlineTileDownloadFinished(QNetworkReply* repl
     {
         outstandingTiles.remove(outstandingTiles.indexOf(tile));
     }
-    QDir segmentsDir = QDir(QDir(localDir).absoluteFilePath(localSegmentsDir));
-    if (!segmentsDir.exists())
+
+    QFile * file = findFileForReply(reply);
+
+    if (file != nullptr)
     {
-        QDir(localDir).mkpath(localSegmentsDir);
+        tilesDownloadManagerFiles.remove(tilesDownloadManagerFiles.indexOf(file));
+
+        if(reply->error() == QNetworkReply::NoError)
+        {
+            file->write(reply->readAll());
+            file->close();
+        }
+        else
+        {
+            file->close();
+            file->remove();
+            //TODO add errormessage
+        }
     }
-
-    QFile out(segmentsDir.absoluteFilePath(fileName));
-
-    out.open(QIODevice::WriteOnly);
-    out.write(reply->readAll());
-    out.close();
 
     reply->deleteLater();
 
     readTiles();
-    downloadOutstandingTiles();
+}
+
+QFile * CRouterBRouterSetup::findFileForReply(QNetworkReply * reply)
+{
+    QString fileName = reply->property("tile").toString();
+    for (QFile * file : tilesDownloadManagerFiles)
+    {
+        if (file->fileName().endsWith(fileName))
+        {
+            return file;
+        }
+    }
+    return nullptr;
 }
 
 void CRouterBRouterSetup::deleteTile(const QPoint tile)
@@ -473,20 +514,27 @@ void CRouterBRouterSetup::readTiles()
         if (rxTileName.indexIn(segment) > -1)
         {
             QPoint tile = tileFromFileName(segment);
-            for (tile_s online : onlineTiles)
+            if (onlineTiles.isEmpty())
             {
-                if (online.tile == tile)
+                oldTiles << tile;
+            }
+            else
+            {
+                for (tile_s online : onlineTiles)
                 {
-                    QFileInfo info = QFileInfo(segmentsDir,segment);
-                    if (info.created() > online.date)
+                    if (online.tile == tile)
                     {
-                        currentTiles << tile;
+                        QFileInfo info = QFileInfo(segmentsDir,segment);
+                        if (info.created() > online.date)
+                        {
+                            currentTiles << tile;
+                        }
+                        else
+                        {
+                            oldTiles << tile;
+                        }
+                        break;
                     }
-                    else
-                    {
-                        oldTiles << tile;
-                    }
-                    break;
                 }
             }
         }

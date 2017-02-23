@@ -42,6 +42,18 @@ signals:
     void selectedTilesChanged(const QVector<QPoint> & tiles);
 
 private:
+    QVBoxLayout * outerLayout;
+
+    QWidget * select;
+
+    QFormLayout * progressLayout;
+    QWidget * progress;
+
+    QToolButton * toolSelectOld;
+    QToolButton * toolClearSelection;
+    QToolButton * toolDeleteSelection;
+    QToolButton * toolDownload;
+
     CRouterBRouterTilesSelectArea * selectArea;
     void selectedTilesChangedEvent();
 

@@ -30,6 +30,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 {
     setupUi(this);
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
+    connect(&setup,&CRouterBRouterSetup::tilesDownloadProgress, this, &CRouterBRouterSetupWizard::slotLocalTilesDownloadProgress);
     setup.load();
 }
 
@@ -626,6 +627,12 @@ void CRouterBRouterSetupWizard::updateLocalTilesSelect()
     widgetLocalTilesSelect->setOutstandingTiles(setup.getOutstandingTiles());
     widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
     widgetLocalTilesSelect->update();
+}
+
+void CRouterBRouterSetupWizard::slotLocalTilesDownloadProgress(qint64 received, qint64 total)
+{
+    progressLocalTiles->setRange(0,total);
+    progressLocalTiles->setValue(received);
 }
 
 void CRouterBRouterSetupWizard::cleanupLocalTiles()

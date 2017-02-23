@@ -35,6 +35,8 @@ public:
     void setExistingTiles(const QVector<QPoint> & tiles);
     void setOutdatedTiles(const QVector<QPoint> & tiles);
     void setSelectedTiles(const QVector<QPoint> & tiles);
+    void setOutstandingTiles(const QVector<QPoint> & tiles);
+    void setInvalidTiles(const QVector<QPoint> & tiles);
 
 signals:
     void selectedTilesChanged(const QVector<QPoint> & tiles);

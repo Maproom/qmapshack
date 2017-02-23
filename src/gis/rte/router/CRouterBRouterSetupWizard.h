@@ -40,6 +40,7 @@ public slots:
     void accept() override;
     void reject() override;
     void slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles);
+    void slotLocalTilesChanged();
 
 private slots:
     void slotCurrentIdChanged(const int id);
@@ -97,8 +98,6 @@ private:
 
     CRouterBRouterSetup setup;
 
-    QVector<QPoint> localTilesOld;
-    QVector<QPoint> localTilesExisting;
     QVector<QPoint> localTilesSelected;
 };
 

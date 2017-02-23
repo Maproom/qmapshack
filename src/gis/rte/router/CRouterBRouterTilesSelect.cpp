@@ -75,6 +75,16 @@ void CRouterBRouterTilesSelect::setSelectedTiles(const QVector<QPoint> & tiles)
     selectArea->selectedTiles = tiles;
 }
 
+void CRouterBRouterTilesSelect::setOutstandingTiles(const QVector<QPoint> & tiles)
+{
+    selectArea->outstandingTiles = tiles;
+}
+
+void CRouterBRouterTilesSelect::setInvalidTiles(const QVector<QPoint> & tiles)
+{
+    selectArea->invalidTiles = tiles;
+}
+
 void CRouterBRouterTilesSelect::selectedTilesChangedEvent()
 {
     emit selectedTilesChanged(selectArea->selectedTiles);

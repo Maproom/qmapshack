@@ -21,13 +21,16 @@
 
 #include <QtCore>
 #include "setup/IAppSetup.h"
+#include <QWebPage>
 
-class CRouterBRouterSetup
+class CRouterBRouterSetup : public QObject
 {
+    Q_OBJECT
 public:
     CRouterBRouterSetup();
     ~CRouterBRouterSetup();
     enum mode_e { ModeLocal, ModeOnline };
+    struct tile_s { QPoint tile; QDateTime date; qreal size; };
     bool expertMode;
     mode_e installMode;
     QString onlineWebUrl;
@@ -42,6 +45,7 @@ public:
     QString localHost;
     QString localPort;
     QString binariesUrl;
+    QString segmentsUrl;
 
     void load();
     void save();
@@ -56,6 +60,23 @@ public:
     const QString getOnlineProfileContent(const QString profile);
     void installOnlineProfile(const QString profile);
 
+    void initializeTiles();
+    void installOnlineTile(const QPoint tile);
+    void deleteTile(const QPoint tile);
+
+    QVector<QPoint> getInvalidTiles();
+    QVector<QPoint> getCurrentTiles();
+    QVector<QPoint> getOutdatedTiles();
+    QVector<QPoint> getOnlineTilesAvailable();
+    QVector<QPoint> getOutstandingTiles();
+
+public slots:
+    void slotLoadOnlineTilesRequestFinished();
+    void slotLoadOnlineTileDownloadFinished(QNetworkReply* reply);
+
+signals:
+    void tilesLocalChanged();
+
 private:
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = ModeOnline;
@@ -68,6 +89,8 @@ private:
     const QString defaultLocalHost = "127.0.0.1";
     const QString defaultLocalPort = "17777";
     const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
+    const QString defaultSegmentsUrl = "http://brouter.de/brouter/segments4/";
+
     const QString onlineCacheDir = "BRouter";
 
     void readProfiles(mode_e mode);
@@ -77,6 +100,24 @@ private:
 
     const mode_e modeFromString(QString mode);
     const QString stringFromMode(mode_e mode);
+
+    const QPoint tileFromFileName(QString fileName);
+    const QString fileNameFromTile(QPoint tile);
+
+    void readTiles();
+    void downloadOutstandingTiles();
+
+    QVector<tile_s> onlineTiles;
+    QVector<QPoint> invalidTiles;
+    QVector<QPoint> oldTiles;
+    QVector<QPoint> currentTiles;
+    QVector<QPoint> outstandingTiles;
+
+    bool tileDownloadRunning;
+
+    QWebPage tilesWebPage;
+    QNetworkAccessManager * tilesDownloadManager;
+
 };
 
 #endif

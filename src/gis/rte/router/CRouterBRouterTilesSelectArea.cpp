@@ -41,6 +41,16 @@ CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(CRouterBRouterTiles
     selectedTilesBrush.setColor(Qt::blue);
     selectedTilesBrush.setStyle(Qt::Dense3Pattern);
 
+    outstandingTilesPen.setColor(Qt::yellow);
+    outstandingTilesPen.setWidth(1);
+    outstandingTilesBrush.setColor(Qt::yellow);
+    outstandingTilesBrush.setStyle(Qt::Dense3Pattern);
+
+    invalidTilesPen.setColor(Qt::gray);
+    invalidTilesPen.setWidth(1);
+    invalidTilesBrush.setColor(Qt::gray);
+    invalidTilesBrush.setStyle(Qt::DiagCrossPattern);
+
     this->canvas = canvas;
     this->select = parent;
 }
@@ -51,9 +61,11 @@ CRouterBRouterTilesSelectArea::~CRouterBRouterTilesSelectArea()
 
 void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
 {
+    drawInvalidTiles();
     drawOutdatedTiles();
     drawExistingTiles();
     drawSelectedTiles();
+    drawOutstandingTiles();
 }
 
 
@@ -97,6 +109,28 @@ void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
     painter.setPen(outdatedTilesPen);
     painter.setBrush(outdatedTilesBrush);
     for(QPoint tile : outdatedTiles)
+    {
+        painter.drawPolygon(tilePolygon(tile));
+    }
+}
+
+void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
+{
+    QPainter painter(this);
+    painter.setPen(outstandingTilesPen);
+    painter.setBrush(outstandingTilesBrush);
+    for(QPoint tile : outstandingTiles)
+    {
+        painter.drawPolygon(tilePolygon(tile));
+    }
+}
+
+void CRouterBRouterTilesSelectArea::drawInvalidTiles()
+{
+    QPainter painter(this);
+    painter.setPen(invalidTilesPen);
+    painter.setBrush(invalidTilesBrush);
+    for(QPoint tile : invalidTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }

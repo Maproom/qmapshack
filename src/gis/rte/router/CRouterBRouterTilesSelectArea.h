@@ -46,6 +46,8 @@ private:
     void drawSelectedTiles();
     void drawExistingTiles();
     void drawOutdatedTiles();
+    void drawOutstandingTiles();
+    void drawInvalidTiles();
     QPoint tileUnderMouse(const QPointF & mousePos);
     QPolygonF tilePolygon(const QPoint & tile);
 
@@ -56,13 +58,19 @@ private:
     QVector<QPoint> existingTiles;
     QVector<QPoint> outdatedTiles;
     QVector<QPoint> selectedTiles;
+    QVector<QPoint> outstandingTiles;
+    QVector<QPoint> invalidTiles;
 
     QPen existingTilesPen;
     QPen outdatedTilesPen;
     QPen selectedTilesPen;
+    QPen outstandingTilesPen;
+    QPen invalidTilesPen;
     QBrush existingTilesBrush;
     QBrush outdatedTilesBrush;
     QBrush selectedTilesBrush;
+    QBrush outstandingTilesBrush;
+    QBrush invalidTilesBrush;
 
     friend class CRouterBRouterTilesSelect;
 };

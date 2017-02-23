@@ -21,6 +21,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/tcx/CTcxProject.h"
+#include "version.h"
 
 #include <QtWidgets>
 
@@ -55,7 +56,7 @@ void CTcxProject::loadTcx(const QString& filename)
 
 void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 {
-       QFile file(filename);
+    QFile file(filename);
     
     // if the file does not exist, the file name is assumed to be a name for a new project
     if (!file.exists() || QFileInfo(filename).suffix().toLower() != "tcx")
@@ -127,7 +128,7 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 }
 
 
-void CTcxProject::loadActivity(QDomNode& activityRootNode)
+void CTcxProject::loadActivity(const QDomNode& activityRootNode)
 {
     if (activityRootNode.isElement())
     {
@@ -177,13 +178,18 @@ void CTcxProject::loadActivity(QDomNode& activityRootNode)
                 }
             }
         }
-
+        this->blockUpdateItems(true); // block is necessary as adding an track in project will change its rank
         new CGisItemTrk(trk, this);
+
+        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(this->child(this->childCount() - 1)); // get the track item inserted just above (thanks to "blockUpdateItems" this is really this one)
+        trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
+
+        this->blockUpdateItems(false);
     }
 }
 
 
-void CTcxProject::loadCourse(QDomNode& courseRootNode)
+void CTcxProject::loadCourse(const QDomNode& courseRootNode)
 {
     if (courseRootNode.isElement())
     {
@@ -229,8 +235,13 @@ void CTcxProject::loadCourse(QDomNode& courseRootNode)
             }
         }
 
+        this->blockUpdateItems(true); // block is necessary as adding an track in project will change its rank
         new CGisItemTrk(trk, this);
-
+     
+        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(this->child(this->childCount()-1)); // get the track item inserted just above (thanks to "blockUpdateItems" this is really this one)
+        trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
+        this->blockUpdateItems(false);
+        
         const QDomNodeList& tcxCoursePts = courseRootNode.toElement().elementsByTagName("CoursePoint");
         for (int i = 0; i < tcxCoursePts.count(); i++) // browse course points
         {
@@ -257,6 +268,45 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 
     project.mount();
 
+    // safety check for existing files
+    QFile file(_fn_);
+    if (file.exists())
+    {
+        file.open(QIODevice::ReadOnly);
+        bool createdByQMS = false;
+
+        // load file content to xml document
+        QDomDocument xmlTcx;
+        if (xmlTcx.setContent(&file, false))
+        {
+            const QDomNodeList& tcxAuthor = xmlTcx.elementsByTagName("Author");
+            if (tcxAuthor.item(0).isElement())
+            {
+                const QDomNodeList& tcxAuthorName = tcxAuthor.item(0).toElement().elementsByTagName("Name");
+                createdByQMS = tcxAuthorName.item(0).firstChild().nodeValue() == "QMapShack";
+            }
+        }
+
+        if (!createdByQMS)
+        {
+            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("File exists ...")
+                , tr("The file exists and it has not been created by QMapShack. "
+                "If you press 'yes' all data in this file will be lost. "
+                "Even if this file contains data and has been loaded by QMapShack, "
+                "QMapShack might not be able to load and store all elements of this file.  "
+                "Those elements will be lost. I recommend to use another file. "
+                "<b>Do you really want to overwrite the file?</b>")
+                , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+            if (res == QMessageBox::No)
+            {
+                project.umount();
+                return false;
+            }
+        }
+        file.close();
+    }
+
+
     //  ---- start content of tcx
     QDomDocument doc;
     QDomElement tcx = doc.createElement("TrainingCenterDatabase");
@@ -266,124 +316,123 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     tcx.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
     tcx.setAttribute("xsi:schemaLocation", "http://www.garmin.com/xmlschemas/ProfileExtension/v1 http://www.garmin.com/xmlschemas/UserProfilePowerExtensionv1.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd http://www.garmin.com/xmlschemas/UserProfile/v2 http://www.garmin.com/xmlschemas/UserProfileExtensionv2.xsd");
 
-    int j = 0;
-    CGisItemTrk *trkItem = nullptr;
-    for (int i = 0; i < project.childCount(); i++) // find tracks in selected project
+    QList<CGisItemTrk *> courseTrks, activityTrks;
+    for (int i = 0; i < project.childCount(); i++) // browse tracks in selected project
     {
-        if (nullptr == dynamic_cast<CGisItemTrk*>(project.child(i)))
+        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
+        if (nullptr == trkItem)
         {
-            continue;
+            continue; // not a track
         }
         else
         {
-            trkItem = dynamic_cast<CGisItemTrk*>(project.child(i));
-            j = j + 1; // count number of tracks in selected project
+            if (!trkItem->isTrkTimeValid())
+            {
+                int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
+                    , tr("The track <b>%1</b> you have selected contains trackpoints with "
+                    "invalid timestamps. "
+                    "Device might not accept the generated TCX course file if left as is. "
+                    "<b>Do you want to apply a filter with constant speed (10 m/s) and continue?</b>").arg(trkItem->getName())
+                    , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+                if (res == QMessageBox::No)
+                {
+                    project.blockUpdateItems(false);
+                    return false;
+                }
+
+                if (res == QMessageBox::Yes)
+                {
+                    project.blockUpdateItems(true); // block is necessary as changing the start date will also change the track position in project when project sorting order is "by date"
+                    trkItem->filterSpeed(10);
+                }
+            }
+
+            CTcxProject *CTcxProjectRef = dynamic_cast<CTcxProject*>(&project);
+            if (nullptr != CTcxProjectRef) // if a TCX project
+            {
+                if (!CTcxProjectRef->trackTypes.contains(trkItem->getKey().item))   // if this is an added track
+                {
+                    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Activity or course ?")
+                        , tr("QMapShack does not know if track <b>%1</b> should be saved as an activity or as a course. "
+                        "<b>Do you want to save it as a course (Yes) or as an activity (No) ?</b>").arg(trkItem->getName())
+                        , QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::No);
+                    if (res == QMessageBox::Yes)
+                    {
+                        courseTrks << trkItem;
+                    }
+                    if (res == QMessageBox::No)
+                    {
+                        activityTrks << trkItem;
+                    }
+                    if (res == QMessageBox::Cancel)
+                    {
+                        project.blockUpdateItems(false);
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eCourse)    //if a course
+                    {
+                        courseTrks << trkItem;
+                    }
+                    if (CTcxProjectRef->trackTypes.value(trkItem->getKey().item) == eActivity)   // if an activity
+                    {
+                        activityTrks << trkItem;
+                    }
+                }
+            }
+            else // not a TCX project, then it is necessary to ask for each track
+            {
+                int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Activity or course ?")
+                    , tr("QMapShack does not know if track <b>%1</b> should be saved as an activity or as a course. "
+                    "<b>Do you want to save it as a course (Yes) or as an activity (No) ?</b>").arg(trkItem->getName())
+                    , QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::No);
+                if (res == QMessageBox::Yes)
+                {
+                    courseTrks << trkItem;
+                }
+                if (res == QMessageBox::No)
+                {
+                    activityTrks << trkItem;
+                }
+                if (res == QMessageBox::Cancel)
+                {
+                    project.blockUpdateItems(false);
+                    return false;
+                }
+
+            }
         }
     }
+    project.blockUpdateItems(false);
 
-    if (j == 0)
-    {
-        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("No track in selected project...")
-            , tr("The project you have selected does not contain any track ! "
-            "A course with no track makes no sense. "
-            "<b>Please add a track to this project and try again.</b>")
-            , QMessageBox::Ok, QMessageBox::Ok);
-             return false;
-    }
-
-
-    if (j > 1)
-    {
-        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("More than one track in selected project...")
-            , tr("The project you have selected contains more than one track ! "
-            "A course can be built from one single track only. "
-            "<b>Please remove unwanted tracks from project and try again.</b>")
-            , QMessageBox::Ok, QMessageBox::Ok);
-        return false;
-    }
-
-
-    if (!trkItem->isTrkTimeValid())
-    {
-        int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
-            , tr("The track you have selected contains trackpoints with "
-            "invalid timestamps. "
-            "Device might not accept the generated TCX course file if left as is. "
-            "<b>Do you want to apply a filter with constant speed (10 m/s) and continue?</b>")
-            , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if (res == QMessageBox::No)
-        {
-            return false;
-        }
-
-        if (res == QMessageBox::Yes)
-        {
-            trkItem->filterSpeed(10);
-        }
-    }
-
-    QList<QDateTime> trkPtToOverwriteDateTimes;
-    QList<qint32> trkPtToOverwriteElevations;
  
-    for (int i = 0; i < project.childCount(); i++) // browse waypoints 
+    QDomNode activitiesNode = doc.createElement("Activities");
+    if (activityTrks.size() != 0)
     {
-        CGisItemWpt *wptItem = dynamic_cast<CGisItemWpt*>(project.child(i));
-        if (nullptr == wptItem)
-        {
-            continue;
-        }
-        else
-        {
-            trkPtToOverwriteDateTimes << trkItem->getCloserPtDateTime(wptItem->getPosition());
-            trkPtToOverwriteElevations << wptItem->getElevation();
-        }
+        tcx.appendChild(activitiesNode);
     }
-    
-
-    tcx.appendChild(doc.createElement("Courses"));
-    tcx.lastChild().appendChild(doc.createElement("Course"));
-
-    tcx.lastChild().lastChild().appendChild(doc.createElement("Name"));
-    QString str = trkItem->getName();
-    str.truncate(15);
-    tcx.lastChild().lastChild().lastChild().appendChild(doc.createTextNode(str));
-
-            
-    QDomElement lapElmt = doc.createElement("Lap");
-    tcx.lastChild().lastChild().appendChild(lapElmt);
-
-    lapElmt.appendChild(doc.createElement("TotalTimeSeconds"));
-    lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(trkItem->getTotalElapsedSeconds())));
-
-    lapElmt.appendChild(doc.createElement("DistanceMeters"));
-    lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(trkItem->getTotalDistance())));
-            
-    lapElmt.appendChild(doc.createElement("Intensity"));
-    lapElmt.lastChild().appendChild(doc.createTextNode("Active"));
-
-    trkItem->saveTCX(tcx, trkPtToOverwriteDateTimes, trkPtToOverwriteElevations);
-
-    
-
-    j = 0;
-    for (int i = 0; i < project.childCount(); i++)
+    for (CGisItemTrk *trkToBeSaved : activityTrks)
     {
-        CGisItemWpt *item = dynamic_cast<CGisItemWpt*>(project.child(i));
-        if (nullptr == item)
-        {
-            continue;
-        }
-
-        item->saveTCX(tcx, trkPtToOverwriteDateTimes[j]);
-        j++;
+        trkToBeSaved->saveTCXactivity(activitiesNode);
     }
 
+    QDomNode coursesNode = doc.createElement("Courses");
+    if (courseTrks.size() != 0)
+    {
+        tcx.appendChild(coursesNode);
+    }
+    for (CGisItemTrk *trkToBeSaved : courseTrks)
+    {
+        trkToBeSaved->saveTCXcourse(coursesNode);
+    }
 
+    saveAuthor(tcx);
 
     bool res = true;
     try
     {
-        QFile file(_fn_);
         if (!file.open(QIODevice::WriteOnly))
         {
             throw tr("Failed to create file '%1'").arg(_fn_);
@@ -421,6 +470,32 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
 }
 
 
+void CTcxProject::saveAuthor(QDomNode& nodeToAttachAuthor)
+{
+    QDomDocument doc = nodeToAttachAuthor.toElement().ownerDocument();
+
+    nodeToAttachAuthor.appendChild(doc.createElement("Author"));
+    nodeToAttachAuthor.lastChild().toElement().setAttribute("xsi:type", "Application_t");
+
+    nodeToAttachAuthor.lastChild().appendChild(doc.createElement("Name"));
+    nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createTextNode("QMapShack"));
+    nodeToAttachAuthor.lastChild().appendChild(doc.createElement("Build"));
+    nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createElement("Version"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("VersionMajor"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_MAJOR)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("VersionMinor"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_MINOR)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("BuildMajor"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_STEP)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("BuildMinor"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode("0"));
+    nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createElement("Type"));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createTextNode("Release"));
+    nodeToAttachAuthor.lastChild().appendChild(doc.createElement("LangID"));
+    nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createTextNode("EN")); // todo : get language
+    nodeToAttachAuthor.lastChild().appendChild(doc.createElement("PartNumber"));
+    nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createTextNode("000-00000-00")); // dummy number
+}
 
 
 

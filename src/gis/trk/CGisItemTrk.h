@@ -140,6 +140,7 @@ public:
        @param gpx   The <gpx> node to append by the track
      */
     void save(QDomNode& gpx, bool strictGpx11) override;
+
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
@@ -147,12 +148,19 @@ public:
     bool saveTwoNav(const QString& filename);
 
     /**
-    @brief Save track to TCX track file
-    @param tcx   The <TrainingCenterDatabase> node to append by the track
-    @param trkPtToOverwriteDateTimes   dateTimes of track points whose elevation has to be overwritten
-    @param trkPtToOverwriteElevations   elevations to be written
+    @brief Save track as TCX course (including correlated course points)
+    @param coursesNode   The node to append by the course
     */
-    void saveTCX(QDomNode& tcx, QList<QDateTime>& trkPtToOverwriteDateTimes, QList<qint32>& trkPtToOverwriteElevations);
+    void saveTCXcourse(QDomNode& coursesNode);
+
+
+    /**
+    @brief Save track as TCX activity
+    @param activitiesNode   The node to append by the activity
+    */
+    void saveTCXactivity(QDomNode& activitiesNode);
+
+
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from
@@ -171,9 +179,6 @@ public:
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
-
-    /// get date and time of the trackpoint which is closer to inputPoint (lat, lon)
-    QDateTime getCloserPtDateTime(const QPointF inputPoint);
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() { return ((allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0); }

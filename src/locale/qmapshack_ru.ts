@@ -4324,12 +4324,22 @@ Ivo Kronenberg</translation>
         <translation>Объединить треки...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICombineTrk.ui" line="43"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="70"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
+        <source>Available Tracks</source>
+        <translation>Доступные треки</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="54"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="81"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="139"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="166"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
+        <source>Combined Tracks</source>
+        <translation>Объединенные треки</translation>
     </message>
 </context>
 <context>

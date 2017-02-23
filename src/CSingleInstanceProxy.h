@@ -16,11 +16,24 @@
 
 **********************************************************************************************/
 
-#include "CLASSNAME.h"
+#ifndef CSINGLEINSTANCEPROXY_H
+#define CSINGLEINSTANCEPROXY_H
 
-CLASSNAME::CLASSNAME()
+#include <QObject>
+class QLocalServer;
+
+class CSingleInstanceProxy : public QObject
 {
+public:
+    CSingleInstanceProxy(const QStringList filenames);
+    virtual ~CSingleInstanceProxy();
 
-}
+private slots:
+    void slotNewConnection();
 
+private:
+    QLocalServer * server = nullptr;
+};
+
+#endif //CSINGLEINSTANCEPROXY_H
 

@@ -373,7 +373,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="41"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit DEM Daten. Im Verzeichnis können mehrere Dateien vorliegen. Allerdings wird kein Unterverzeichnis durchsucht. Unterstützte Formate sind: %1</translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Höhendaten. In einem Verzeichnis können mehrere Dateien liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="56"/>
@@ -2701,7 +2701,7 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="47"/>
         <source>Add or remove paths containing maps. There can be multiple maps in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Hinzufügen oder Entfernen von Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
+        <translation>Hinzufügen oder Entfernen von Verzeichnissen mit Karten. In einem Verzeichnis können mehrere Karten liegen. Unterverzeichnisse werden jedoch nicht durchsucht. Unterstützte Formate sind: %1 </translation>
     </message>
     <message>
         <location filename="../map/CMapPathSetup.cpp" line="62"/>
@@ -4326,12 +4326,22 @@ Ivo Kronenberg</source>
         <translation>Tracks verbinden...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICombineTrk.ui" line="43"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="70"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
+        <source>Available Tracks</source>
+        <translation>Vorh. Tracks</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="54"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="81"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="139"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="166"/>
         <source>...</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
+        <source>Combined Tracks</source>
+        <translation>Verb. Tracks</translation>
     </message>
 </context>
 <context>

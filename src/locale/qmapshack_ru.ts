@@ -4008,49 +4008,50 @@ line %2, column %3:
         <translation>В файлеTCX %1 нет мероприятий или курсов</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="292"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
         <source>File exists ...</source>
         <translation type="unfinished">Файл существует...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="293"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="332"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="380"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="355"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="387"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="403"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
         <source>Activity or course ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="331"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="379"/>
         <source>Track with invalid timestamps...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="356"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="388"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="404"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="436"/>
         <source>QMapShack does not know if track &lt;b&gt;%1&lt;/b&gt; should be saved as an activity or as a course. &lt;b&gt;Do you want to save it as a course (Yes) or as an activity (No) ?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="438"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="492"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished">Не удалось создать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="448"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="513"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished">Не удалось записать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="460"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="495"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="514"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished">Не удалось записать данные GIS...</translation>
     </message>

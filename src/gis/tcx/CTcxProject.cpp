@@ -178,13 +178,37 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
                 }
             }
         }
-        this->blockUpdateItems(true); // block is necessary as adding an track in project will change its rank
-        new CGisItemTrk(trk, this);
 
-        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(this->child(this->childCount() - 1)); // get the track item inserted just above (thanks to "blockUpdateItems" this is really this one)
-        trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
+        QList <QString> keys;
+        for (int i = 0; i < this->childCount(); i++) // browse items in selected project before track insertion
+        {
+            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
+            if (nullptr != item)
+            {
+                keys << item->getKey().item; // store item key
+            }
+        }
 
-        this->blockUpdateItems(false);
+        new CGisItemTrk(trk, this); // insert track to project (which generates a key  ; we need this key but we do not get it right now)
+
+        CGisItemTrk *trkItem;
+        for (int i = 0; i < this->childCount(); i++) // browse items in selected project after track insertion
+        {
+            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
+            if (nullptr != item)
+            {
+                if (!keys.contains(item->getKey().item))
+                { // then this key is the key of the new track inserted above
+                    trkItem = dynamic_cast<CGisItemTrk*>(item);
+                    break;
+                }
+            }
+        }
+
+        if (nullptr != trkItem)
+        {
+            trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
+        }
     }
 }
 
@@ -235,13 +259,37 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
             }
         }
 
-        this->blockUpdateItems(true); // block is necessary as adding an track in project will change its rank
-        new CGisItemTrk(trk, this);
-     
-        CGisItemTrk *trkItem = dynamic_cast<CGisItemTrk*>(this->child(this->childCount()-1)); // get the track item inserted just above (thanks to "blockUpdateItems" this is really this one)
-        trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
-        this->blockUpdateItems(false);
-        
+        QList <QString> keys;
+        for (int i = 0; i < this->childCount(); i++) // browse items in selected project before track insertion
+        {
+            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
+            if (nullptr != item)
+            {
+                keys << item->getKey().item; // store item key
+            }
+        }
+    
+        new CGisItemTrk(trk, this); // insert track to projectinsert track to project (which generates a key  ; we need this key but we do not get it right now)
+       
+        CGisItemTrk *trkItem;
+        for (int i = 0; i < this->childCount(); i++) // browse items in selected project after track insertion 
+        {
+            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
+            if (nullptr != item)
+            {
+                if (!keys.contains(item->getKey().item)) 
+                { // then this key is the key of the new track inserted above
+                    trkItem = dynamic_cast<CGisItemTrk*>(item);
+                    break;
+                }
+            }
+        }
+
+        if (nullptr != trkItem)
+        {
+            trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
+        }
+
         const QDomNodeList& tcxCoursePts = courseRootNode.toElement().elementsByTagName("CoursePoint");
         for (int i = 0; i < tcxCoursePts.count(); i++) // browse course points
         {
@@ -431,32 +479,38 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     saveAuthor(tcx);
 
     bool res = true;
-    try
-    {
-        if (!file.open(QIODevice::WriteOnly))
-        {
-            throw tr("Failed to create file '%1'").arg(_fn_);
-        }
-        QTextStream out(&file);
-        out.setCodec("UTF-8");
-        out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+    QString msg;
 
-        out << doc.toString();
-        file.close();
-        if (file.error() != QFile::NoError)
-        {
-            throw tr("Failed to write file '%1'").arg(_fn_);
-        }
-    }
-    catch (const QString& msg)
+    if (!file.open(QIODevice::WriteOnly))
     {
-        // as saveAs() can be called from the thread that exports a database showing the
+        // copied-pasted from CGpxProject::saveAs :
+        // "as saveAs() can be called from the thread that exports a database showing the
         // message box will crash the app. Therefore we test if the current thread is the
         // application's main thread. If not we forward the exception.
         //
-        // Not sure if that is a good concept.
+        // Not sure if that is a good concept."
+        msg = tr("Failed to create file '%1'").arg(_fn_);
         if (QThread::currentThread() == qApp->thread())
         {
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        }
+        else
+        {
+            throw msg;
+        }
+        res = false;
+    }
+    QTextStream out(&file);
+    out.setCodec("UTF-8");
+    out << "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>" << endl;
+
+    out << doc.toString();
+    file.close();
+    if (file.error() != QFile::NoError)
+    {
+        if (QThread::currentThread() == qApp->thread())
+        {
+            msg = tr("Failed to write file '%1'").arg(_fn_);
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
         }
         else

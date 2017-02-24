@@ -18,7 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include <QSet>
+#include <QString>
+#include <initializer_list>
 
+static std::initializer_list<QString> knownSymbols = { "1stCategory", "2ndCategory", "3rdCategory", "4thCategory", "Danger", "FirstAid", "Food",
+"HorsCategory", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };
 
 void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToBeSaved)
 {
@@ -51,24 +56,8 @@ void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToB
         xmlCrsPt.lastChild().appendChild(doc.createTextNode(QString::number(wpt.ele)));
     }
 
-
     QString pointTypeToBeWritten;
-
-    if (wpt.sym != "1st Category" &&
-        wpt.sym != "2nd Category" &&
-        wpt.sym != "3rd Category" &&
-        wpt.sym != "4th Category" &&
-        wpt.sym != "Danger" &&
-        wpt.sym != "First Aid" &&
-        wpt.sym != "Food" &&
-        wpt.sym != "Hors Category" &&
-        wpt.sym != "Left" &&
-        wpt.sym != "Right" &&
-        wpt.sym != "Sprint" &&
-        wpt.sym != "Straight" &&
-        wpt.sym != "Summit" &&
-        wpt.sym != "Valley" &&
-        wpt.sym != "Water")
+    if (!QSet<QString>(knownSymbols).contains(wpt.sym))
     {
         pointTypeToBeWritten = "Generic";
     }
@@ -79,7 +68,6 @@ void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToB
 
     xmlCrsPt.appendChild(doc.createElement("PointType"));
     xmlCrsPt.lastChild().appendChild(doc.createTextNode(pointTypeToBeWritten));
-
 }
 
 

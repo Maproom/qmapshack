@@ -179,36 +179,9 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
             }
         }
 
-        QList <QString> keys;
-        for (int i = 0; i < this->childCount(); i++) // browse items in selected project before track insertion
-        {
-            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
-            if (nullptr != item)
-            {
-                keys << item->getKey().item; // store item key
-            }
-        }
-
-        new CGisItemTrk(trk, this); // insert track to project (which generates a key  ; we need this key but we do not get it right now)
-
-        CGisItemTrk *trkItem;
-        for (int i = 0; i < this->childCount(); i++) // browse items in selected project after track insertion
-        {
-            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
-            if (nullptr != item)
-            {
-                if (!keys.contains(item->getKey().item))
-                { // then this key is the key of the new track inserted above
-                    trkItem = dynamic_cast<CGisItemTrk*>(item);
-                    break;
-                }
-            }
-        }
-
-        if (nullptr != trkItem)
-        {
-            trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
-        }
+        CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
+        trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
+ 
     }
 }
 
@@ -258,38 +231,10 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
                 seg->pts.append(trkpt);
             }
         }
-
-        QList <QString> keys;
-        for (int i = 0; i < this->childCount(); i++) // browse items in selected project before track insertion
-        {
-            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
-            if (nullptr != item)
-            {
-                keys << item->getKey().item; // store item key
-            }
-        }
-    
-        new CGisItemTrk(trk, this); // insert track to projectinsert track to project (which generates a key  ; we need this key but we do not get it right now)
-       
-        CGisItemTrk *trkItem;
-        for (int i = 0; i < this->childCount(); i++) // browse items in selected project after track insertion 
-        {
-            IGisItem *item = dynamic_cast<IGisItem*>(this->child(i));
-            if (nullptr != item)
-            {
-                if (!keys.contains(item->getKey().item)) 
-                { // then this key is the key of the new track inserted above
-                    trkItem = dynamic_cast<CGisItemTrk*>(item);
-                    break;
-                }
-            }
-        }
-
-        if (nullptr != trkItem)
-        {
-            trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
-        }
-
+      
+        CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
+        trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
+   
         const QDomNodeList& tcxCoursePts = courseRootNode.toElement().elementsByTagName("CoursePoint");
         for (int i = 0; i < tcxCoursePts.count(); i++) // browse course points
         {

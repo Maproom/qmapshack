@@ -60,6 +60,12 @@ public:
     const QString getOnlineProfileContent(const QString profile);
     void installOnlineProfile(const QString profile);
 
+signals:
+    void onlineConfigChanged();
+
+private slots:
+    void slotLoadOnlineConfigFinished(QNetworkReply* reply);
+
 private:
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = ModeOnline;
@@ -84,6 +90,7 @@ private:
     const mode_e modeFromString(QString mode);
     const QString stringFromMode(mode_e mode);
 
+    QNetworkAccessManager * networkAccessManager;
 };
 
 #endif

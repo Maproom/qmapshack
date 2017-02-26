@@ -512,8 +512,8 @@ set( HDRS
         gis/rte/router/IRouter.h
         gis/rte/router/CRouterSetup.h
         gis/rte/router/CRouterRoutino.h
-        gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterMapQuest.h
+        gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterBRouterInfo.h
         gis/rte/router/CRouterBRouterProgressBar.h

@@ -20,8 +20,12 @@
 #define CROUTERBROUTERTILESSELECT_H
 
 #include "canvas/CCanvas.h"
+#include "CRouterBRouterSetup.h"
+#include "CRouterBRouterProgressBar.h"
 #include <QtCore>
 #include <QtWidgets>
+#include <QNetworkReply>
+#include <limits>
 
 class CRouterBRouterTilesSelectArea;
 
@@ -32,30 +36,83 @@ public:
     CRouterBRouterTilesSelect(QWidget * parent);
     virtual ~CRouterBRouterTilesSelect();
 
-    void setExistingTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
-    void setOutstandingTiles(const QVector<QPoint> & tiles);
-    void setInvalidTiles(const QVector<QPoint> & tiles);
+    void setSetup(CRouterBRouterSetup * setup);
+    void initialize();
 
 signals:
-    void selectedTilesChanged(const QVector<QPoint> & tiles);
+    void tilesChanged();
+    void selectedTilesChanged();
+
+public slots:
+    void slotLoadOnlineTilesRequestFinished();
+    void slotDownloadFinished(QNetworkReply* reply);
+    void slotDownloadReadReady();
+
+private slots:
+    void slotTileClicked(const QPoint & tile);
+    void slotUpdateButtons();
+    void slotClearSelection();
+    void slotDeleteSelected();
+    void slotSelectOutdated();
+    void slotDownload();
 
 private:
+    CRouterBRouterSetup * setup;
+
     QVBoxLayout * outerLayout;
+    QWidget * widgetSelect;
+    QFormLayout * statusLayout;
 
-    QWidget * select;
-
-    QFormLayout * progressLayout;
-    QWidget * progress;
-
-    QToolButton * toolSelectOld;
-    QToolButton * toolClearSelection;
-    QToolButton * toolDeleteSelection;
-    QToolButton * toolDownload;
+    QPushButton * pushSelectOutdated;
+    QPushButton * pushClearSelection;
+    QPushButton * pushDeleteSelection;
+    QPushButton * pushDownload;
 
     CRouterBRouterTilesSelectArea * selectArea;
-    void selectedTilesChangedEvent();
+
+    void initializeTiles();
+    void selectTile(const QPoint tile);
+    void deselectTile(const QPoint tile);
+    void deleteTile(const QPoint tile);
+
+    const QPoint tileFromFileName(const QString fileName);
+    const QString fileNameFromTile(const QPoint tile);
+    const QString absoluteFileNameFromTile(QPoint tile);
+    QDir segmentsDir();
+
+    void readTiles();
+
+    const QString formatSize(const qint64 size);
+
+    struct tile_s { QPoint tile; QDateTime date; qint64 size; };
+
+    const QPoint noTile = QPoint(INT_MIN,INT_MIN);
+    const tile_s noTileData = { noTile, QDateTime::fromMSecsSinceEpoch(0), INT_MIN };
+
+    QVector<tile_s> onlineTiles;
+    const tile_s getOnlineTileData(const QPoint tile);
+    const tile_s getLocalTileData(const QPoint tile);
+
+    QVector<QPoint> invalidTiles;
+
+    QVector<QPoint> outdatedTiles;
+    QVector<QPoint> currentTiles;
+    QVector<QPoint> outstandingTiles;
+    QVector<QPoint> selectedTiles;
+
+    QWebPage tilesWebPage;
+
+    QNetworkAccessManager * tilesDownloadManager;
+    QVector<QNetworkReply*> tilesDownloadManagerReplies;
+
+    struct status_s {
+        CRouterBRouterProgressBar * progress;
+        QLabel * labelFilename;
+        QLabel * labelStatus;
+        QFile * file;
+    };
+
+    QHash<QString,status_s*> tilesDownloadStatus;
 
     friend class CRouterBRouterTilesSelectArea;
 };

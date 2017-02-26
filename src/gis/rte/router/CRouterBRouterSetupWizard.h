@@ -39,9 +39,6 @@ public:
 public slots:
     void accept() override;
     void reject() override;
-    void slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles);
-    void slotLocalTilesChanged();
-    void slotLocalTilesDownloadProgress(qint64 received, qint64 total);
 
 private slots:
     void slotCurrentIdChanged(const int id);
@@ -56,10 +53,6 @@ private slots:
     void slotAvailableProfileClicked(const QModelIndex & index);
     void slotAddProfileClicked();
     void slotDelProfileClicked();
-    void slotLocalTilesSelectOutdated();
-    void slotLocalTilesDeleteSelected();
-    void slotLocalTilesClearSelection();
-    void slotLocalTilesDownload();
 
 private:
     enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
@@ -86,8 +79,6 @@ private:
     void initLocalTiles();
     void beginLocalTiles();
     void cleanupLocalTiles();
-    void updateLocalTilesButtons();
-    void updateLocalTilesSelect();
 
     void initOnlineDetails();
     void beginOnlineDetails();
@@ -98,8 +89,6 @@ private:
     void cleanupOnlineUrl();
 
     CRouterBRouterSetup setup;
-
-    QVector<QPoint> localTilesSelected;
 };
 
 #endif //CROUTERBROUTERSETUPWIZARD_H

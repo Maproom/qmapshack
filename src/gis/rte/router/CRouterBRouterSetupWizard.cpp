@@ -30,7 +30,6 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 {
     setupUi(this);
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
-    connect(&setup,&CRouterBRouterSetup::tilesDownloadProgress, this, &CRouterBRouterSetupWizard::slotLocalTilesDownloadProgress);
     setup.load();
 }
 
@@ -498,141 +497,12 @@ void CRouterBRouterSetupWizard::cleanupProfiles()
 
 void CRouterBRouterSetupWizard::initLocalTiles()
 {
-    connect(widgetLocalTilesSelect, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterSetupWizard::slotLocalTilesSelectionChanged);
-    connect(pushLocalTilesClearSelection, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesClearSelection);
-    connect(pushLocalTilesDeleteSelection, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected);
-    connect(pushLocalTilesSelectOld, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated);
-    connect(pushLocalTilesDownload, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalTilesDownload);
-    connect(&setup, &CRouterBRouterSetup::tilesLocalChanged, this, &CRouterBRouterSetupWizard::slotLocalTilesChanged);
+    widgetLocalTilesSelect->setSetup(&setup);
 }
 
 void CRouterBRouterSetupWizard::beginLocalTiles()
 {
-    setup.initializeTiles();
-    slotLocalTilesClearSelection();
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesSelectionChanged(const QVector<QPoint> & tiles)
-{
-    QVector<QPoint> available = setup.getOnlineTilesAvailable();
-    localTilesSelected.clear();
-    for (QPoint tile : tiles)
-    {
-        if (available.contains(tile))
-        {
-            localTilesSelected << tile;
-        }
-    }
-    slotLocalTilesChanged();
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesChanged()
-{
-    updateLocalTilesSelect();
-    updateLocalTilesButtons();
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesSelectOutdated()
-{
-    bool changed(false);
-
-    for (QPoint tile : setup.getOutdatedTiles())
-    {
-        if (!localTilesSelected.contains(tile))
-        {
-            localTilesSelected << tile;
-            changed = true;
-        }
-    }
-    if (changed)
-    {
-        widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
-        slotLocalTilesChanged();
-    }
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesDeleteSelected()
-{
-    for (QPoint tile : localTilesSelected)
-    {
-        setup.deleteTile(tile);
-    }
-    slotLocalTilesClearSelection();
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesClearSelection()
-{
-    if (!localTilesSelected.isEmpty())
-    {
-        localTilesSelected.clear();
-        slotLocalTilesChanged();
-    }
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesDownload()
-{
-    for (QPoint tile : localTilesSelected)
-    {
-        if (!setup.getCurrentTiles().contains(tile) and !setup.getOutstandingTiles().contains(tile))
-        {
-            setup.installOnlineTile(tile);
-        }
-    }
-    slotLocalTilesClearSelection();
-}
-
-void CRouterBRouterSetupWizard::updateLocalTilesButtons()
-{
-    QVector<QPoint> localTilesOld = setup.getOutdatedTiles();
-    QVector<QPoint> localTilesExisting = setup.getCurrentTiles();
-
-    pushLocalTilesClearSelection->setEnabled(!localTilesSelected.isEmpty());
-    bool enabled = false;
-    for (QPoint tile : localTilesSelected)
-    {
-        if (localTilesOld.contains(tile) or localTilesExisting.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushLocalTilesDeleteSelection->setEnabled(enabled);
-    enabled = false;
-    for (QPoint tile : localTilesOld)
-    {
-        if (!localTilesSelected.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushLocalTilesSelectOld->setEnabled(enabled);
-    enabled = false;
-    for (QPoint tile : localTilesSelected)
-    {
-        if (!localTilesExisting.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushLocalTilesDownload->setEnabled(enabled);
-}
-
-void CRouterBRouterSetupWizard::updateLocalTilesSelect()
-{
-    widgetLocalTilesSelect->setInvalidTiles(setup.getInvalidTiles());
-    widgetLocalTilesSelect->setExistingTiles(setup.getCurrentTiles());
-    widgetLocalTilesSelect->setOutdatedTiles(setup.getOutdatedTiles());
-    widgetLocalTilesSelect->setOutstandingTiles(setup.getOutstandingTiles());
-    widgetLocalTilesSelect->setSelectedTiles(localTilesSelected);
-    widgetLocalTilesSelect->update();
-}
-
-void CRouterBRouterSetupWizard::slotLocalTilesDownloadProgress(qint64 received, qint64 total)
-{
-    progressLocalTiles->setRange(0,total);
-    progressLocalTiles->setValue(received);
+    widgetLocalTilesSelect->initialize();
 }
 
 void CRouterBRouterSetupWizard::cleanupLocalTiles()

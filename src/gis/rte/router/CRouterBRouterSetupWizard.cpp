@@ -30,6 +30,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 {
     setupUi(this);
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
+    connect(&setup, &CRouterBRouterSetup::onlineConfigChanged, this, &CRouterBRouterSetupWizard::updateProfiles);
     setup.load();
 }
 

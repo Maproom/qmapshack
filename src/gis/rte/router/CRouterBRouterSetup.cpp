@@ -28,6 +28,8 @@
 
 CRouterBRouterSetup::CRouterBRouterSetup()
 {
+    networkAccessManager = new QNetworkAccessManager(this);
+    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetup::slotLoadOnlineConfigFinished);
 }
 
 CRouterBRouterSetup::~CRouterBRouterSetup()
@@ -199,13 +201,14 @@ void CRouterBRouterSetup::loadOnlineConfig()
     const QString configHost = configUrl.host();
     request.setUrl(configUrl);
 
-    QNetworkAccessManager networkAccessManager;
-    QNetworkReply * reply = networkAccessManager.get(request);
-    reply->deleteLater();
+    QNetworkReply * reply = networkAccessManager->get(request);
+    reply->setProperty("configHost",configHost);
+}
 
-    QEventLoop eventLoop;
-    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
-    eventLoop.exec();
+void CRouterBRouterSetup::slotLoadOnlineConfigFinished(QNetworkReply *reply)
+{
+    reply->deleteLater();
+    QString configHost = reply->property("configHost").toString();
 
     const QString jsConfig(reply->readAll());
 
@@ -237,6 +240,8 @@ void CRouterBRouterSetup::loadOnlineConfig()
     {
         onlineProfilesAvailable << profiles.property(i).toString();
     }
+
+    emit onlineConfigChanged();
 }
 
 const QString CRouterBRouterSetup::getOnlineProfileContent(const QString profile)

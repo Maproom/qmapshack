@@ -29,10 +29,16 @@ class CRouterBRouterTilesSelectArea : public QWidget
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelectArea(CRouterBRouterTilesSelect * parent, CCanvas * canvas);
+    CRouterBRouterTilesSelectArea(QWidget * parent, CRouterBRouterTilesSelect * select, CCanvas * canvas);
     virtual ~CRouterBRouterTilesSelectArea();
 
     void paintEvent(QPaintEvent *event) override;
+
+public slots:
+    void updateTiles();
+
+signals:
+    void tileClicked(const QPoint & tile);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent * event) override;
@@ -44,7 +50,7 @@ private slots:
 
 private:
     void drawSelectedTiles();
-    void drawExistingTiles();
+    void drawCurrentTiles();
     void drawOutdatedTiles();
     void drawOutstandingTiles();
     void drawInvalidTiles();
@@ -55,24 +61,17 @@ private:
     CRouterBRouterTilesSelect * select;
     QPoint mousePos;
     QPoint startPos;
-    QVector<QPoint> existingTiles;
-    QVector<QPoint> outdatedTiles;
-    QVector<QPoint> selectedTiles;
-    QVector<QPoint> outstandingTiles;
-    QVector<QPoint> invalidTiles;
 
-    QPen existingTilesPen;
+    QPen currentTilesPen;
     QPen outdatedTilesPen;
     QPen selectedTilesPen;
     QPen outstandingTilesPen;
     QPen invalidTilesPen;
-    QBrush existingTilesBrush;
+    QBrush currentTilesBrush;
     QBrush outdatedTilesBrush;
     QBrush selectedTilesBrush;
     QBrush outstandingTilesBrush;
     QBrush invalidTilesBrush;
-
-    friend class CRouterBRouterTilesSelect;
 };
 
 #endif //CROUTERBROUTERTILESSELECTAREA_H

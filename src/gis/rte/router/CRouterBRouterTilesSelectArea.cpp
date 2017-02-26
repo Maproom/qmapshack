@@ -23,7 +23,7 @@
 
 #include "CMainWindow.h"
 
-CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(CRouterBRouterTilesSelect * parent, CCanvas * canvas)
+CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CRouterBRouterTilesSelect * select, CCanvas * canvas)
     : QWidget(dynamic_cast<QWidget *>(parent))
 {
     outdatedTilesPen.setColor(Qt::gray);
@@ -31,10 +31,10 @@ CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(CRouterBRouterTiles
     outdatedTilesBrush.setColor(Qt::gray);
     outdatedTilesBrush.setStyle(Qt::Dense5Pattern);
 
-    existingTilesPen.setColor(Qt::darkGreen);
-    existingTilesPen.setWidth(1);
-    existingTilesBrush.setColor(Qt::darkGreen);
-    existingTilesBrush.setStyle(Qt::Dense3Pattern);
+    currentTilesPen.setColor(Qt::darkGreen);
+    currentTilesPen.setWidth(1);
+    currentTilesBrush.setColor(Qt::darkGreen);
+    currentTilesBrush.setStyle(Qt::Dense3Pattern);
 
     selectedTilesPen.setColor(Qt::blue);
     selectedTilesPen.setWidth(1);
@@ -52,18 +52,23 @@ CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(CRouterBRouterTiles
     invalidTilesBrush.setStyle(Qt::DiagCrossPattern);
 
     this->canvas = canvas;
-    this->select = parent;
+    this->select = select;
 }
 
 CRouterBRouterTilesSelectArea::~CRouterBRouterTilesSelectArea()
 {
 }
 
+void CRouterBRouterTilesSelectArea::updateTiles()
+{
+    update();
+}
+
 void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
 {
     drawInvalidTiles();
     drawOutdatedTiles();
-    drawExistingTiles();
+    drawCurrentTiles();
     drawSelectedTiles();
     drawOutstandingTiles();
 }
@@ -90,16 +95,7 @@ void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
     canvas->moveMap(QPointF(pos-mousePos));
     if (pos == startPos)
     {
-        QPoint tile = tileUnderMouse(event->pos());
-        if (selectedTiles.contains(tile))
-        {
-            selectedTiles.remove(selectedTiles.indexOf(tile));
-        }
-        else
-        {
-            selectedTiles.append(tile);
-        }
-        select->selectedTilesChangedEvent();
+        emit tileClicked(tileUnderMouse(pos));
     }
 }
 
@@ -108,7 +104,7 @@ void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
     QPainter painter(this);
     painter.setPen(outdatedTilesPen);
     painter.setBrush(outdatedTilesBrush);
-    for(QPoint tile : outdatedTiles)
+    for(QPoint tile : select->outdatedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -119,7 +115,7 @@ void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
     QPainter painter(this);
     painter.setPen(outstandingTilesPen);
     painter.setBrush(outstandingTilesBrush);
-    for(QPoint tile : outstandingTiles)
+    for(QPoint tile : select->outstandingTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -130,19 +126,19 @@ void CRouterBRouterTilesSelectArea::drawInvalidTiles()
     QPainter painter(this);
     painter.setPen(invalidTilesPen);
     painter.setBrush(invalidTilesBrush);
-    for(QPoint tile : invalidTiles)
+    for(QPoint tile : select->invalidTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
 }
 
-void CRouterBRouterTilesSelectArea::drawExistingTiles()
+void CRouterBRouterTilesSelectArea::drawCurrentTiles()
 {
     QPainter painter(this);
-    painter.setPen(existingTilesPen);
-    painter.setBrush(existingTilesBrush);
+    painter.setPen(currentTilesPen);
+    painter.setBrush(currentTilesBrush);
 
-    for(QPoint tile : existingTiles)
+    for(QPoint tile : select->currentTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -154,7 +150,7 @@ void CRouterBRouterTilesSelectArea::drawSelectedTiles()
     painter.setPen(selectedTilesPen);
     painter.setBrush(selectedTilesBrush);
 
-    for(QPoint tile : selectedTiles)
+    for(QPoint tile : select->selectedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }

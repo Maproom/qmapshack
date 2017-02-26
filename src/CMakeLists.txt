@@ -241,6 +241,7 @@ set( SRCS
         gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouter.cpp
         gis/rte/router/CRouterBRouterInfo.cpp
+        gis/rte/router/CRouterBRouterProgressBar.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
         gis/rte/router/CRouterBRouterSetupWizard.cpp
         gis/rte/router/CRouterBRouterSetupWizardToolShell.cpp
@@ -515,6 +516,7 @@ set( HDRS
         gis/rte/router/CRouterMapQuest.h
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterBRouterInfo.h
+        gis/rte/router/CRouterBRouterProgressBar.h
         gis/rte/router/CRouterBRouterSetup.h
         gis/rte/router/CRouterBRouterSetupException.h
         gis/rte/router/CRouterBRouterSetupWizard.h

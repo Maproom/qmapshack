@@ -60,26 +60,6 @@ public:
     const QString getOnlineProfileContent(const QString profile);
     void installOnlineProfile(const QString profile);
 
-    void initializeTiles();
-    void installOnlineTile(const QPoint tile);
-    void deleteTile(const QPoint tile);
-
-    QVector<QPoint> getInvalidTiles();
-    QVector<QPoint> getCurrentTiles();
-    QVector<QPoint> getOutdatedTiles();
-    QVector<QPoint> getOnlineTilesAvailable();
-    QVector<QPoint> getOutstandingTiles();
-
-public slots:
-    void slotLoadOnlineTilesRequestFinished();
-    void slotLoadOnlineTileDownloadFinished(QNetworkReply* reply);
-    void slotLoadOnlineTileDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
-    void slotLoadOnlineTileDownloadReadReady();
-
-signals:
-    void tilesLocalChanged();
-    void tilesDownloadProgress(qint64 received, qint64 total);
-
 private:
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = ModeOnline;
@@ -103,23 +83,6 @@ private:
 
     const mode_e modeFromString(QString mode);
     const QString stringFromMode(mode_e mode);
-
-    const QPoint tileFromFileName(QString fileName);
-    const QString fileNameFromTile(QPoint tile);
-    QFile * findFileForReply(QNetworkReply * reply);
-
-    void readTiles();
-
-    QVector<tile_s> onlineTiles;
-    QVector<QPoint> invalidTiles;
-    QVector<QPoint> oldTiles;
-    QVector<QPoint> currentTiles;
-    QVector<QPoint> outstandingTiles;
-
-    QWebPage tilesWebPage;
-    QNetworkAccessManager * tilesDownloadManager;
-    QVector<QNetworkReply*> tilesDownloadManagerReplies;
-    QVector<QFile*> tilesDownloadManagerFiles;
 
 };
 

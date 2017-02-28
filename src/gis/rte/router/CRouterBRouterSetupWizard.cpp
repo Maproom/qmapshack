@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "CRouterBRouterSetupException.h"
 #include "CRouterBRouterSetupWizard.h"
 #include "CRouterBRouterSetupWizardToolShell.h"
 #include "setup/IAppSetup.h"
@@ -29,9 +30,11 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     : QWizard(CMainWindow::getBestWidgetForParent())
 {
     setupUi(this);
+    setButtonText(QWizard::CustomButton1, tr("Restore Default Values"));
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
-    connect(&setup, &CRouterBRouterSetup::onlineConfigChanged, this, &CRouterBRouterSetupWizard::updateProfiles);
+    connect(this, &CRouterBRouterSetupWizard::customButtonClicked, this, &CRouterBRouterSetupWizard::slotCustomButtonClicked);
     setup.load();
+    localInstallExists = false;
 }
 
 CRouterBRouterSetupWizard::~CRouterBRouterSetupWizard()
@@ -44,26 +47,38 @@ int CRouterBRouterSetupWizard::nextId() const
     {
     case Page_ChooseMode:
     {
-        if (setup.expertMode)
-        {
-            return Page_OnlineUrl;
-        }
         if (setup.installMode == CRouterBRouterSetup::ModeLocal)
         {
             return Page_LocalDirectory;
         }
-        else
+        if (setup.expertMode) //ModeOnline
+        {
+            return Page_OnlineUrl;
+        }
+        return Page_Profiles;
+    }
+    case Page_LocalDirectory:
+    {
+        if (setup.expertMode)
+        {
+            return Page_OnlineUrl;
+        }
+        if (doLocalInstall)
+        {
+            return Page_LocalInstallation;
+        }
+        if (localInstallExists)
         {
             return Page_Profiles;
         }
         break;
     }
-    case Page_LocalDirectory:
-    {
-        return Page_LocalInstallation;
-    }
     case Page_LocalInstallation:
     {
+        if (setup.expertMode)
+        {
+            return Page_OnlineDetails;
+        }
         return Page_Profiles;
     }
     case Page_Profiles:
@@ -84,16 +99,24 @@ int CRouterBRouterSetupWizard::nextId() const
     }
     case Page_OnlineUrl:
     {
-        switch(setup.installMode)
+        if (setup.installMode == CRouterBRouterSetup::ModeLocal)
         {
-        case CRouterBRouterSetup::ModeLocal:
-        {
-            return Page_LocalDirectory;
+            if (doLocalInstall)
+            {
+                return Page_LocalInstallation;
+            }
+            if (localInstallExists)
+            {
+                if (setup.expertMode)
+                {
+                    return Page_OnlineDetails;
+                }
+                return Page_Profiles;
+            }
         }
-        case CRouterBRouterSetup::ModeOnline:
+        else if (setup.installMode == CRouterBRouterSetup::ModeOnline)
         {
             return Page_OnlineDetails;
-        }
         }
         break;
     }
@@ -135,31 +158,29 @@ void CRouterBRouterSetupWizard::initializePage(const int id)
         initOnlineDetails();
         break;
     }
+    }
+}
+
+bool CRouterBRouterSetupWizard::validateCurrentPage()
+{
+    switch(currentId())
+    {
+    case Page_OnlineDetails:
+    {
+        return validateOnlineDetails();
+    }
     case Page_OnlineUrl:
     {
-        initOnlineUrl();
-        break;
-    }
-    default:
-    {
+        return validateOnlineUrl();
     }
     }
+    return true;
 }
 
 void CRouterBRouterSetupWizard::cleanupPage(const int id)
 {
     switch(id)
     {
-    case Page_ChooseMode:
-    {
-        cleanupChooseMode();
-        break;
-    }
-    case Page_LocalDirectory:
-    {
-        cleanupLocalDirectory();
-        break;
-    }
     case Page_LocalInstallation:
     {
         cleanupLocalInstall();
@@ -169,24 +190,6 @@ void CRouterBRouterSetupWizard::cleanupPage(const int id)
     {
         cleanupProfiles();
         break;
-    }
-    case Page_LocalTiles:
-    {
-        cleanupLocalTiles();
-        break;
-    }
-    case Page_OnlineDetails:
-    {
-        cleanupOnlineDetails();
-        break;
-    }
-    case Page_OnlineUrl:
-    {
-        cleanupOnlineUrl();
-        break;
-    }
-    default:
-    {
     }
     }
 }
@@ -230,9 +233,27 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
         beginOnlineUrl();
         break;
     }
-    default:
-    {
     }
+}
+
+void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
+{
+    if (id == QWizard::CustomButton1)
+    {
+        const int page = currentId();
+        switch (page)
+        {
+        case Page_OnlineDetails:
+        {
+            resetOnlineDetails();
+            break;
+        }
+        case Page_OnlineUrl:
+        {
+            resetOnlineUrl();
+            break;
+        }
+        }
     }
 }
 
@@ -272,40 +293,36 @@ void CRouterBRouterSetupWizard::beginChooseMode()
     }
     }
     checkExpert->setChecked(setup.expertMode);
+    setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::slotRadioLocalClicked()
 {
     setup.installMode = CRouterBRouterSetup::ModeLocal;
-    currentPage()->setFinalPage(false);
 }
 
 void CRouterBRouterSetupWizard::slotRadioOnlineClicked()
 {
     setup.installMode = CRouterBRouterSetup::ModeOnline;
-    currentPage()->setFinalPage(!setup.expertMode);
 }
 
 void CRouterBRouterSetupWizard::slotCheckExpertClicked()
 {
     setup.expertMode = checkExpert->isChecked();
-    currentPage()->setFinalPage(false);
-}
-
-void CRouterBRouterSetupWizard::cleanupChooseMode()
-{
-
 }
 
 void CRouterBRouterSetupWizard::initLocalDirectory()
 {
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(lineLocalDir, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished);
+    connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 }
 
 void CRouterBRouterSetupWizard::beginLocalDirectory()
 {
     updateLocalDirectory();
+    doLocalInstall = false;
+    setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
@@ -316,6 +333,7 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
 
 void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished()
 {
+    setup.localDir = lineLocalDir->text();
     updateLocalDirectory();
 }
 
@@ -325,6 +343,15 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
     if (setup.localDir.isEmpty())
     {
         labelLocalDirResult->setText(tr("please select BRouter installation directory"));
+        pushCreateOrUpdateLocalInstall->setVisible(false);
+        localInstallExists = false;
+    }
+    else if(!QDir(setup.localDir).exists())
+    {
+        labelLocalDirResult->setText(tr("selected directory does not exist"));
+        pushCreateOrUpdateLocalInstall->setText(tr("create directory and install BRouter there"));
+        pushCreateOrUpdateLocalInstall->setVisible(true);
+        localInstallExists = false;
     }
     else
     {
@@ -333,71 +360,94 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
         if (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(setup.localProfileDir)).exists())
         {
             labelLocalDirResult->setText(tr("existing BRouter installation"));
+            pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
+            pushCreateOrUpdateLocalInstall->setVisible(true);
+            localInstallExists = true;
         }
         else
         {
-            labelLocalDirResult->setText(tr("empty directory, continue with install on next page"));
+            labelLocalDirResult->setText(tr("empty directory, create new BRouter installation here"));
+            pushCreateOrUpdateLocalInstall->setText(tr("create new BRouter installation"));
+            pushCreateOrUpdateLocalInstall->setVisible(true);
+            localInstallExists = false;
         }
     }
 }
 
-void CRouterBRouterSetupWizard::cleanupLocalDirectory()
+void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
 {
-
+    doLocalInstall = true;
+    next();
 }
 
 void CRouterBRouterSetupWizard::initLocalInstall()
 {
-    textLocalInstall->setVisible(false);
     const QUrl brouterUrl(setup.binariesUrl);
     webLocalBRouterVersions->load(brouterUrl);
 
     QWebPage *localVersionsPage = webLocalBRouterVersions->page();
     localVersionsPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
+    networkAccessManager = new QNetworkAccessManager(this);
+
     connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
     connect(pushLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked);
+    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished);
 }
 
 void CRouterBRouterSetupWizard::beginLocalInstall()
 {
+    doLocalInstall = false;
+    textLocalInstall->setVisible(false);
+    textLocalInstall->clear();
+    labelLocalInstallLink->setText("no brouter-version to install selected");
+    pushLocalInstall->setEnabled(false);
+    setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl & url)
 {
-    labelLocalInstallLink->setText(url.toString());
+    downloadUrl = url;
+    labelLocalInstallLink->setText("selected " + url.fileName() + " for download and installation");
+    pushLocalInstall->setEnabled(true);
 }
 
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
     textLocalInstall->setVisible(true);
     CRouterBRouterSetupWizardToolShell shell(textLocalInstall,this);
-    shell.out("download " + labelLocalInstallLink->text() + " started");
+    shell.out("download " + downloadUrl.toString() + " started");
 
     QNetworkRequest request;
-    request.setUrl(QUrl(labelLocalInstallLink->text()));
+    request.setUrl(downloadUrl);
 
-    QNetworkAccessManager networkAccessManager;
-    QNetworkReply * reply = networkAccessManager.get(request);
+    QNetworkReply * reply = networkAccessManager->get(request);
+    reply->setProperty("fileName",downloadUrl.fileName());
+}
+
+void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * reply)
+{
     reply->deleteLater();
-
-    QEventLoop eventLoop;
-    QObject::connect(reply, SIGNAL(finished()), &eventLoop, SLOT(quit()));
-    eventLoop.exec();
-
-    QFile outfile(QDir(lineLocalDir->text()).absoluteFilePath("brouter.zip"));
+    QString fileName = reply->property("fileName").toString();
+    QDir outDir(setup.localDir);
+    if (!outDir.exists())
+    {
+        outDir.mkpath(outDir.absolutePath());
+    }
+    QFile outfile(outDir.absoluteFilePath(fileName));
     outfile.open(QIODevice::WriteOnly);
     outfile.write(reply->readAll());
     outfile.close();
 
-    shell.out("download " + labelLocalInstallLink->text() + " finished");
-
-    shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << "brouter.zip");
+    CRouterBRouterSetupWizardToolShell shell(textLocalInstall,this);
+    shell.out("download " + outfile.fileName() + " finished");
+    shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
+    setup.updateLocalProfiles();
 }
 
 void CRouterBRouterSetupWizard::cleanupLocalInstall()
 {
-
+    delete networkAccessManager;
 }
 
 void CRouterBRouterSetupWizard::initProfiles()
@@ -408,63 +458,79 @@ void CRouterBRouterSetupWizard::initProfiles()
     QStringListModel *availableProfiles = new QStringListModel();
     listAvailableProfiles->setModel(availableProfiles);
 
-    setup.loadOnlineConfig();
-
     connect(listProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotProfileClicked);
     connect(listAvailableProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotAvailableProfileClicked);
     connect(toolAddProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotAddProfileClicked);
     connect(toolDeleteProfile, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotDelProfileClicked);
+    connect(toolProfileUp, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileUpClicked);
+    connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
+    connect(&setup, &CRouterBRouterSetup::displayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
+    connect(&setup, &CRouterBRouterSetup::profilesChanged, this, &CRouterBRouterSetupWizard::updateProfiles);
+
+    setup.loadOnlineConfig();
 }
 
 void CRouterBRouterSetupWizard::beginProfiles()
 {
     updateProfiles();
+    setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex & index)
 {
-    textProfileContent->setText(setup.getProfileContent(index.row()));
+    const QString profile = listProfiles->model()->data(index).toString();
+    setup.displayProfileAsync(profile);
     listAvailableProfiles->clearSelection();
-    toolDeleteProfile->setEnabled(true);
-    toolAddProfile->setEnabled(false);
+    updateProfiles();
 }
 
 void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex & index)
 {
     const QString profile = listAvailableProfiles->model()->data(index).toString();
-    textProfileContent->setText(setup.getOnlineProfileContent(profile));
+    setup.displayOnlineProfileAsync(profile);
     listProfiles->clearSelection();
-    toolAddProfile->setEnabled(true);
-    toolDeleteProfile->setEnabled(false);
+    updateProfiles();
+}
+
+void CRouterBRouterSetupWizard::slotDisplayProfile(QString profile, const QString content)
+{
+    textProfileContent->setText(content);
 }
 
 void CRouterBRouterSetupWizard::slotAddProfileClicked()
 {
-    const QItemSelectionModel * selectModel = listAvailableProfiles->selectionModel();
-    const QModelIndexList selected = selectModel->selectedIndexes();
-    if (selected.size() == 1)
+    for (QString profile : selectedProfiles(listAvailableProfiles))
     {
-        const QString profile = listAvailableProfiles->model()->data(selected.at(0)).toString();
-        setup.installOnlineProfile(profile);
-        updateProfiles();
+        setup.addProfile(profile);
     }
 }
 
 void CRouterBRouterSetupWizard::slotDelProfileClicked()
 {
-    const QItemSelectionModel * selectModel = listProfiles->selectionModel();
-    const QModelIndexList selected = selectModel->selectedIndexes();
-    if (selected.size() == 1)
+    for (QString profile : selectedProfiles(listProfiles))
     {
-        const QString filename = setup.getProfileDir().absoluteFilePath(setup.getProfiles().at((selected.at(0).row())) + ".brf");
-        QFile(filename).remove();
-        updateProfiles();
+        setup.deleteProfile(profile);
+    }
+}
+
+void CRouterBRouterSetupWizard::slotProfileUpClicked()
+{
+    for (QString profile : selectedProfiles(listProfiles))
+    {
+        setup.profileUp(profile);
+    }
+}
+
+void CRouterBRouterSetupWizard::slotProfileDownClicked()
+{
+    for (QString profile : selectedProfiles(listProfiles))
+    {
+        setup.profileDown(profile);
     }
 }
 
 void CRouterBRouterSetupWizard::updateProfiles()
 {
-    setup.readProfiles();
     QStringList profiles = setup.getProfiles();
     QStringList available;
     for(QString profile:setup.onlineProfilesAvailable)
@@ -474,10 +540,45 @@ void CRouterBRouterSetupWizard::updateProfiles()
             available << profile;
         }
     }
-    (dynamic_cast<QStringListModel*>(listProfiles->model()))->setStringList(profiles);
-    (dynamic_cast<QStringListModel*>(listAvailableProfiles->model()))->setStringList(available);
-    toolAddProfile->setEnabled(false);
-    toolDeleteProfile->setEnabled(false);
+
+    QList<int> selected = updateProfileView(listProfiles, profiles);
+    qSort(selected.begin(),selected.end());
+    toolDeleteProfile->setEnabled(!selected.isEmpty());
+    toolProfileUp->setEnabled(!selected.isEmpty() and selected.first() > 0);
+    toolProfileDown->setEnabled(!selected.isEmpty() and selected.last() < profiles.size()-1);
+    toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+}
+
+QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView * listView)
+{
+    const QItemSelectionModel * selectModel = listView->selectionModel();
+    const QModelIndexList selected = selectModel->selectedIndexes();
+    const QAbstractItemModel * model = listView->model();
+    QStringList selectedList;
+    for (int i = 0; i < selected.size(); i++)
+    {
+        selectedList << model->data(selected.at(i)).toString();
+    }
+    return selectedList;
+}
+
+QList<int> CRouterBRouterSetupWizard::updateProfileView(QListView * listView, QStringList values)
+{
+    QList<int> selected;
+    QStringList selectedValues = selectedProfiles(listView);
+    QStringListModel * listModel = (dynamic_cast<QStringListModel*>(listView->model()));
+    QItemSelectionModel * selectModel = listView->selectionModel();
+    listModel->setStringList(values);
+    for (QString value : selectedValues)
+    {
+        if (values.contains(value))
+        {
+            int index = values.indexOf(value);
+            selectModel->select(listModel->index(index), QItemSelectionModel::Select);
+            selected << index;
+        }
+    }
+    return selected;
 }
 
 void CRouterBRouterSetupWizard::cleanupProfiles()
@@ -504,38 +605,96 @@ void CRouterBRouterSetupWizard::initLocalTiles()
 void CRouterBRouterSetupWizard::beginLocalTiles()
 {
     widgetLocalTilesSelect->initialize();
-}
-
-void CRouterBRouterSetupWizard::cleanupLocalTiles()
-{
+    setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::initOnlineDetails()
 {
+    connect(&setup, &CRouterBRouterSetup::onlineConfigChanged, this, &CRouterBRouterSetupWizard::beginOnlineDetails);
     setup.loadOnlineConfig();
 }
 
 void CRouterBRouterSetupWizard::beginOnlineDetails()
 {
-    lineOnlineHost->setText(setup.onlineServiceUrl);
+    labelOnlineProfileUrl->setText(tr("Profile-Url"));
     lineOnlineProfileUrl->setText(setup.onlineProfilesUrl);
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        labelOnlineHost->setText(tr("Hostname"));
+        labelLocalPort->setText(tr("Portnummer"));
+        lineOnlineHost->setText(setup.localHost);
+        lineLocalPort->setText(setup.localPort);
+        labelLocalPort->setVisible(true);
+        lineLocalPort->setVisible(true);
+    }
+    else if (setup.installMode == CRouterBRouterSetup::ModeOnline)
+    {
+        labelOnlineHost->setText(tr("Service-Url"));
+        lineOnlineHost->setText(setup.onlineServiceUrl);
+        labelLocalPort->setVisible(false);
+        lineLocalPort->setVisible(false);
+    }
+    else
+    {
+        throw new CRouterBRouterSetupException();
+    }
+    setOption(QWizard::HaveCustomButton1, true);
 }
 
-void CRouterBRouterSetupWizard::cleanupOnlineDetails()
+bool CRouterBRouterSetupWizard::validateOnlineDetails()
 {
+    setup.onlineProfilesUrl = lineOnlineProfileUrl->text();
 
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        setup.localHost = lineOnlineHost->text();
+        setup.localPort = lineLocalPort->text();
+    }
+    else if (setup.installMode == CRouterBRouterSetup::ModeOnline)
+    {
+        setup.onlineServiceUrl = lineOnlineHost->text();
+    }
+    else
+    {
+        throw new CRouterBRouterSetupException();
+    }
+    return true;
 }
 
-void CRouterBRouterSetupWizard::initOnlineUrl()
+void CRouterBRouterSetupWizard::resetOnlineDetails()
 {
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        setup.resetLocalHost();
+        setup.resetLocalPort();
+        setup.resetOnlineServiceUrl();
+    }
+    else if (setup.installMode == CRouterBRouterSetup::ModeOnline)
+    {
+        setup.resetOnlineProfilesUrl();
+        setup.resetOnlineServiceUrl();
+    }
+    else
+    {
+        throw new CRouterBRouterSetupException();
+    }
+    beginOnlineDetails();
 }
 
 void CRouterBRouterSetupWizard::beginOnlineUrl()
 {
     lineOnlineUrl->setText(setup.onlineWebUrl);
+    setOption(QWizard::HaveCustomButton1, true);
 }
 
-void CRouterBRouterSetupWizard::cleanupOnlineUrl()
+bool CRouterBRouterSetupWizard::validateOnlineUrl()
 {
+    setup.onlineWebUrl = lineOnlineUrl->text();
+    return true;
+}
 
+void CRouterBRouterSetupWizard::resetOnlineUrl()
+{
+    setup.resetOnlineWebUrl();
+    beginOnlineUrl();
 }

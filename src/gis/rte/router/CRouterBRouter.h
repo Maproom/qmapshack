@@ -24,6 +24,7 @@
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterBRouter.h"
 #include "CRouterBRouterSetupWizard.h"
+#include "CRouterBRouterInfo.h"
 #include <QtNetwork>
 #include <QTimer>
 #include "CRouterSetup.h"
@@ -47,6 +48,7 @@ private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg();
     void slotToolProfileInfoClicked();
+    void slotDisplayProfileInfo(QString profile, QString content);
 
 private:
 
@@ -83,6 +85,8 @@ private:
     CRouterBRouterSetup setup;
 
     CRouterSetup* routerSetup;
+
+    CRouterBRouterInfo * info;
 };
 
 #endif //CROUTERBROUTER_H

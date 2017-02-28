@@ -50,8 +50,11 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     {
         source->saveConfig(view);
     }
-    //view.setValue("grid/color",QColor(Qt::red).name());
+    view.setValue("grid/color",QColor(Qt::magenta).name());
     view.setValue("map/zoomIndex",16);
+    view.setValue("scales",1);
+    view.setValue("proj","+proj=merc");
+    view.setValue("grid/proj","+proj=longlat +datum=WGS84 +no_defs");
 
     CCanvas * canvas = new CCanvas(widgetSelect,"BRouterTileDownload");
     // clone canvas by a temporary configuration file
@@ -158,7 +161,8 @@ void CRouterBRouterTilesSelect::slotDeleteSelected()
 void CRouterBRouterTilesSelect::slotClearSelection()
 {
     bool changed(false);
-    for (QPoint tile : selectedTiles)
+    const QVector<QPoint> tilesToDeselect(selectedTiles);
+    for (QPoint tile : tilesToDeselect)
     {
         deselectTile(tile);
         changed = true;
@@ -216,7 +220,7 @@ void CRouterBRouterTilesSelect::selectTile(const QPoint tile)
         if (currentTiles.contains(tile))
         {
             const tile_s local = getLocalTileData(tile);
-            status->labelStatus = new QLabel(QString("available %1 (%2) / installed %3 (%4)")
+            status->labelStatus = new QLabel(QString("%1 (%2) (installed %3 (%4))")
                                              .arg(formatSize(remote.size))
                                              .arg(remote.date.date().toString(Qt::DefaultLocaleShortDate))
                                              .arg(formatSize(local.size))
@@ -225,7 +229,7 @@ void CRouterBRouterTilesSelect::selectTile(const QPoint tile)
         }
         else
         {
-            status->labelStatus = new QLabel(QString("available %1 (%2) / installed -")
+            status->labelStatus = new QLabel(QString("%1 (%2)")
                                              .arg(formatSize(remote.size))
                                              .arg(remote.date.date().toString(Qt::DefaultLocaleShortDate))
                                              ,this);
@@ -444,58 +448,69 @@ const CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getLocalTileD
 
 void CRouterBRouterTilesSelect::slotDownload()
 {
-    for (const QPoint tile : selectedTiles)
+    bool changed(false);
+    const QVector<QPoint> tilesToDownload(selectedTiles);
+    for (const QPoint tile : tilesToDownload)
     {
-        const QString fileName = fileNameFromTile(tile);
-        QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-        if (it != tilesDownloadStatus.constEnd())
+        if (!currentTiles.contains(tile))
         {
-            status_s * status = it.value();
-            if (!currentTiles.contains(tile) and status->progress == nullptr)
+            const QString fileName = fileNameFromTile(tile);
+            QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+            if (it != tilesDownloadStatus.constEnd())
             {
-                const QDir dir = segmentsDir();
-                if (!dir.exists())
+                status_s * status = it.value();
+                if (status->progress == nullptr)
                 {
-                    QDir(setup->localDir).mkpath(setup->localSegmentsDir);
+                    const QDir dir = segmentsDir();
+                    if (!dir.exists())
+                    {
+                        QDir(setup->localDir).mkpath(setup->localSegmentsDir);
+                    }
+
+                    status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
+                    status->file->open(QIODevice::WriteOnly);
+
+                    const QString tileUrl = setup->segmentsUrl + fileName;
+                    const QUrl url(tileUrl);
+
+                    QNetworkRequest request;
+                    request.setUrl(url);
+
+                    QNetworkReply* reply = tilesDownloadManager->get(request);
+                    reply->setProperty("tile", fileName);
+
+                    if (status->labelStatus != nullptr)
+                    {
+                        statusLayout->removeWidget(status->labelStatus);
+                        status->labelStatus->hide();
+                        delete status->labelStatus;
+                        status->labelStatus = nullptr;
+                    }
+
+                    int row;
+                    QFormLayout::ItemRole role;
+                    statusLayout->getWidgetPosition(dynamic_cast<QWidget*>(status->labelFilename),&row,&role);
+                    if (row > -1)
+                    {
+                        status->progress = new CRouterBRouterProgressBar(this);
+                        statusLayout->setWidget(row,QFormLayout::FieldRole,dynamic_cast<QWidget*>(status->progress));
+                        connect(reply, &QNetworkReply::downloadProgress, status->progress, &CRouterBRouterProgressBar::updateProgress);
+                    }
+                    tilesDownloadManagerReplies << reply;
+                    outstandingTiles << tile;
+                    selectedTiles.remove(selectedTiles.indexOf(tile));
+
+                    connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
+
+                    changed = true;
                 }
-
-                status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
-                status->file->open(QIODevice::WriteOnly);
-
-                const QString tileUrl = setup->segmentsUrl + fileName;
-                const QUrl url(tileUrl);
-
-                QNetworkRequest request;
-                request.setUrl(url);
-
-                QNetworkReply* reply = tilesDownloadManager->get(request);
-                reply->setProperty("tile", fileName);
-
-                if (status->labelStatus != nullptr)
-                {
-                    statusLayout->removeWidget(status->labelStatus);
-                    status->labelStatus->hide();
-                    delete status->labelStatus;
-                    status->labelStatus = nullptr;
-                }
-
-                int row;
-                QFormLayout::ItemRole role;
-                statusLayout->getWidgetPosition(dynamic_cast<QWidget*>(status->labelFilename),&row,&role);
-                if (row > -1)
-                {
-                    status->progress = new CRouterBRouterProgressBar(this);
-                    statusLayout->setWidget(row,QFormLayout::FieldRole,dynamic_cast<QWidget*>(status->progress));
-                    connect(reply, &QNetworkReply::downloadProgress, status->progress, &CRouterBRouterProgressBar::updateProgress);
-                }
-                tilesDownloadManagerReplies << reply;
-                outstandingTiles << tile;
-
-                connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
             }
         }
     }
-    slotClearSelection();
+    if (changed)
+    {
+        emit selectedTilesChanged();
+    }
 }
 
 void CRouterBRouterTilesSelect::slotDownloadReadReady()

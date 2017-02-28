@@ -36,12 +36,10 @@ public:
     QString onlineWebUrl;
     QString onlineServiceUrl;
     QString onlineProfilesUrl;
-    QStringList onlineProfiles;
     QStringList onlineProfilesAvailable;
     QString localDir;
     QString localProfileDir;
     QString localSegmentsDir;
-    QStringList localProfiles;
     QString localHost;
     QString localPort;
     QString binariesUrl;
@@ -50,21 +48,36 @@ public:
     void load();
     void save();
 
-    const QString getProfileContent(const int index);
-    const QString getProfileContent(const QString profile);
-    const QStringList getProfiles();
-    const QDir getProfileDir();
+    void resetOnlineWebUrl();
+    void resetOnlineServiceUrl();
+    void resetOnlineProfilesUrl();
+    void resetLocalProfileDir();
+    void resetLocalSegmentsDir();
+    void resetLocalHost();
+    void resetLocalPort();
+    void resetBinariesUrl();
+    void resetSegmentsUrl();
 
-    void readProfiles();
+    const QStringList getProfiles();
+
+    void addProfile(const QString profile);
+    void deleteProfile(const QString profile);
+    void profileUp(const QString profile);
+    void profileDown(const QString profile);
+
+    void updateLocalProfiles();
+
     void loadOnlineConfig();
-    const QString getOnlineProfileContent(const QString profile);
-    void installOnlineProfile(const QString profile);
+    void displayProfileAsync(const QString profile);
+    void displayOnlineProfileAsync(const QString profile);
 
 signals:
     void onlineConfigChanged();
+    void profilesChanged();
+    void displayOnlineProfileFinished(QString profile, QString content);
 
 private slots:
-    void slotLoadOnlineConfigFinished(QNetworkReply* reply);
+    void slotOnlineRequestFinished(QNetworkReply *reply);
 
 private:
     const bool defaultExpertMode = false;
@@ -82,10 +95,17 @@ private:
 
     const QString onlineCacheDir = "BRouter";
 
-    void readProfiles(mode_e mode);
-    const QString getProfileContent(mode_e mode, QString profile);
+    QStringList onlineProfiles;
+    QStringList localProfiles;
+
     const QDir getProfileDir(mode_e mode);
-    const QByteArray loadOnlineProfile(const QString profile);
+
+    enum request_e { type_config, type_profile };
+    enum profileRequest_e { ProfileInstall, ProfileDisplay };
+
+    void loadOnlineProfileAsync(const QString profile, profileRequest_e mode);
+    void loadOnlineConfigFinished(QNetworkReply* reply);
+    void loadOnlineProfileFinished(QNetworkReply * reply);
 
     const mode_e modeFromString(QString mode);
     const QString stringFromMode(mode_e mode);

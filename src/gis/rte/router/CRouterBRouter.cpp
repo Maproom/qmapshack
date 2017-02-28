@@ -36,6 +36,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
     connect(toolProfileInfo, &QToolButton::clicked, this, &CRouterBRouter::slotToolProfileInfoClicked);
+    connect(&setup, &CRouterBRouterSetup::displayOnlineProfileFinished, this, &CRouterBRouter::slotDisplayProfileInfo);
 
     comboAlternative->addItem(tr("original"), "0");
     comboAlternative->addItem(tr("first alternative"), "1");
@@ -84,13 +85,17 @@ void CRouterBRouter::slotToolSetupClicked()
 void CRouterBRouter::slotToolProfileInfoClicked()
 {
     const int index = comboProfile->currentIndex();
-    if (index < 0)
+    if (index > -1)
     {
-        return;
+        setup.displayOnlineProfileAsync(setup.getProfiles().at(index));
     }
+}
+
+void CRouterBRouter::slotDisplayProfileInfo(QString profile, QString content)
+{
     CRouterBRouterInfo info;
-    info.setLabel(setup.getProfiles().at(index));
-    info.setInfo(setup.getProfileContent(index));
+    info.setLabel(profile);
+    info.setInfo(content);
     info.exec();
 }
 

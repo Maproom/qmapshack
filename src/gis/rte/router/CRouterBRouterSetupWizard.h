@@ -34,6 +34,7 @@ public:
 
     int nextId() const override;
     void initializePage(const int id) override;
+    bool validateCurrentPage() override;
     void cleanupPage(const int id) override;
 
 public slots:
@@ -42,17 +43,23 @@ public slots:
 
 private slots:
     void slotCurrentIdChanged(const int id);
+    void slotCustomButtonClicked(int id);
     void slotRadioLocalClicked();
     void slotRadioOnlineClicked();
     void slotCheckExpertClicked();
     void slotLocalToolSelectDirectory();
+    void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEditingFinished();
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
+    void slotLocalDownloadButtonFinished(QNetworkReply * reply);
     void slotProfileClicked(const QModelIndex & index);
     void slotAvailableProfileClicked(const QModelIndex & index);
+    void slotDisplayProfile(QString profile, const QString content);
     void slotAddProfileClicked();
     void slotDelProfileClicked();
+    void slotProfileUpClicked();
+    void slotProfileDownClicked();
 
 private:
     enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
@@ -73,6 +80,8 @@ private:
 
     void initProfiles();
     void beginProfiles();
+    QStringList selectedProfiles(const QListView * listView);
+    QList<int> updateProfileView(QListView * listView, QStringList values);
     void updateProfiles();
     void cleanupProfiles();
 
@@ -82,13 +91,23 @@ private:
 
     void initOnlineDetails();
     void beginOnlineDetails();
+    bool validateOnlineDetails();
+    void resetOnlineDetails();
     void cleanupOnlineDetails();
 
     void initOnlineUrl();
     void beginOnlineUrl();
+    bool validateOnlineUrl();
+    void resetOnlineUrl();
     void cleanupOnlineUrl();
 
     CRouterBRouterSetup setup;
+
+    bool localInstallExists;
+    bool doLocalInstall;
+    QUrl downloadUrl;
+
+    QNetworkAccessManager * networkAccessManager;
 };
 
 #endif //CROUTERBROUTERSETUPWIZARD_H

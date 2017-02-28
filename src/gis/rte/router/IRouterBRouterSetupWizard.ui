@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>BRouter Setup</string>
   </property>
+  <property name="options">
+   <set>QWizard::HaveCustomButton1</set>
+  </property>
   <widget class="QWizardPage" name="pageChooseMode">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -107,6 +110,30 @@
        <string>labelLocalDirResult</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QPushButton" name="pushCreateOrUpdateLocalInstall">
+        <property name="text">
+         <string>create or update installation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
     </item>
     <item>
      <spacer name="verticalSpacer">
@@ -286,6 +313,32 @@
         </item>
        </layout>
       </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QToolButton" name="toolProfileUp">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../resources.qrc">
+            <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolProfileDown">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../resources.qrc">
+            <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
      </layout>
     </item>
     <item>
@@ -379,9 +432,6 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineOnlineHost"/>
-      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="labelOnlineProfileUrl">
         <property name="text">
@@ -391,6 +441,23 @@
       </item>
       <item row="1" column="1">
        <widget class="QLineEdit" name="lineOnlineProfileUrl"/>
+      </item>
+      <item row="0" column="1">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QLineEdit" name="lineOnlineHost"/>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelLocalPort">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineLocalPort"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>

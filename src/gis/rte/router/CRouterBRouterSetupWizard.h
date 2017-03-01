@@ -35,7 +35,6 @@ public:
     int nextId() const override;
     void initializePage(const int id) override;
     bool validateCurrentPage() override;
-    void cleanupPage(const int id) override;
 
 public slots:
     void accept() override;
@@ -60,46 +59,42 @@ private slots:
     void slotDelProfileClicked();
     void slotProfileUpClicked();
     void slotProfileDownClicked();
+    void slotOnlineConfigChanged();
 
 private:
     enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
-               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails };
+               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails, Page_LocalDetails };
 
-    void initChooseMode();
     void beginChooseMode();
-    void cleanupChooseMode();
 
-    void initLocalDirectory();
     void beginLocalDirectory();
     void updateLocalDirectory();
-    void cleanupLocalDirectory();
 
     void initLocalInstall();
     void beginLocalInstall();
-    void cleanupLocalInstall();
 
     void initProfiles();
     void beginProfiles();
     QStringList selectedProfiles(const QListView * listView);
     QList<int> updateProfileView(QListView * listView, QStringList values);
     void updateProfiles();
-    void cleanupProfiles();
 
     void initLocalTiles();
     void beginLocalTiles();
-    void cleanupLocalTiles();
 
-    void initOnlineDetails();
+    void beginLocalDetails();
+    void updateLocalDetails();
+    bool validateLocalDetails();
+    void resetLocalDetails();
+
     void beginOnlineDetails();
+    void updateOnlineDetails();
     bool validateOnlineDetails();
     void resetOnlineDetails();
-    void cleanupOnlineDetails();
 
-    void initOnlineUrl();
     void beginOnlineUrl();
     bool validateOnlineUrl();
     void resetOnlineUrl();
-    void cleanupOnlineUrl();
 
     CRouterBRouterSetup setup;
 

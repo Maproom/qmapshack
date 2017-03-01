@@ -39,9 +39,13 @@ public:
     QStringList onlineProfilesAvailable;
     QString localDir;
     QString localProfileDir;
+    QString localCustomProfileDir;
     QString localSegmentsDir;
     QString localHost;
     QString localPort;
+    QString localNumberThreads;
+    QString localMaxRunningTime;
+    QString localJavaOpts;
     QString binariesUrl;
     QString segmentsUrl;
 
@@ -52,9 +56,13 @@ public:
     void resetOnlineServiceUrl();
     void resetOnlineProfilesUrl();
     void resetLocalProfileDir();
+    void resetLocalCustomProfileDir();
     void resetLocalSegmentsDir();
     void resetLocalHost();
     void resetLocalPort();
+    void resetLocalNumberThreads();
+    void resetLocalMaxRunningTime();
+    void resetLocalJavaOpts();
     void resetBinariesUrl();
     void resetSegmentsUrl();
 
@@ -89,9 +97,13 @@ private:
     const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
     const QString defaultLocalDir = ".";
     const QString defaultLocalProfileDir = "profiles2";
+    const QString defaultLocalCustomProfileDir = "customprofiles";
     const QString defaultLocalSegmentsDir = "segments4";
     const QString defaultLocalHost = "127.0.0.1";
     const QString defaultLocalPort = "17777";
+    const QString defaultLocalNumberThreads = "1";
+    const QString defaultLocalMaxRunningTime = "300";
+    const QString defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";
     const QString defaultBinariesUrl = "http://brouter.de/brouter_bin/";
     const QString defaultSegmentsUrl = "http://brouter.de/brouter/segments4/";
 

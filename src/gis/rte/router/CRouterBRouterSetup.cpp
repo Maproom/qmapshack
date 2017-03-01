@@ -54,9 +54,13 @@ void CRouterBRouterSetup::load()
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
+    localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
     localHost = cfg.value("localHost", defaultLocalHost).toString();
     localPort = cfg.value("localPort", defaultLocalPort).toString();
+    localNumberThreads = cfg.value("localNumberThreads", defaultLocalNumberThreads).toString();
+    localMaxRunningTime = cfg.value("localMaxRunningTime", defaultLocalMaxRunningTime).toString();
+    localJavaOpts = cfg.value("localJavaOpts", defaultLocalJavaOpts).toString();
     binariesUrl = cfg.value("binariesUrl",defaultBinariesUrl).toString();
     segmentsUrl = cfg.value("segmentsUrl",defaultSegmentsUrl).toString();
     onlineProfiles.clear();
@@ -102,9 +106,13 @@ void CRouterBRouterSetup::save()
     cfg.setValue("onlineProfilesUrl", onlineProfilesUrl);
     cfg.setValue("localDir", localDir);
     cfg.setValue("localProfileDir", localProfileDir);
+    cfg.setValue("localCustomProfileDir", localCustomProfileDir);
     cfg.setValue("localSegmentsDir", localSegmentsDir);
     cfg.setValue("localHost", localHost);
     cfg.setValue("localPort", localPort);
+    cfg.setValue("localNumberThreads", localNumberThreads);
+    cfg.setValue("localMaxRunningTime", localMaxRunningTime);
+    cfg.setValue("localJavaOpts", localJavaOpts);
     cfg.setValue("binariesUrl", binariesUrl);
     cfg.setValue("segmentsUrl", segmentsUrl);
     cfg.beginWriteArray("online");
@@ -144,6 +152,11 @@ void CRouterBRouterSetup::resetLocalProfileDir()
     localProfileDir = defaultLocalProfileDir;
 }
 
+void CRouterBRouterSetup::resetLocalCustomProfileDir()
+{
+    localCustomProfileDir = defaultLocalCustomProfileDir;
+}
+
 void CRouterBRouterSetup::resetLocalSegmentsDir()
 {
     localSegmentsDir = defaultLocalSegmentsDir;
@@ -157,6 +170,21 @@ void CRouterBRouterSetup::resetLocalHost()
 void CRouterBRouterSetup::resetLocalPort()
 {
     localPort = defaultLocalPort;
+}
+
+void CRouterBRouterSetup::resetLocalNumberThreads()
+{
+    localNumberThreads = defaultLocalNumberThreads;
+}
+
+void CRouterBRouterSetup::resetLocalMaxRunningTime()
+{
+    localMaxRunningTime = defaultLocalMaxRunningTime;
+}
+
+void CRouterBRouterSetup::resetLocalJavaOpts()
+{
+    localJavaOpts = defaultLocalJavaOpts;
 }
 
 void CRouterBRouterSetup::resetBinariesUrl()

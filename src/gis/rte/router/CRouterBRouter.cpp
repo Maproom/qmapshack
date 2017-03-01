@@ -68,7 +68,6 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
 
     updateDialog();
-    updateLocalBRouterStatus();
     textBRouterOutput->setVisible(false);
 }
 
@@ -116,14 +115,10 @@ void CRouterBRouter::updateDialog()
 {
     if (setup.installMode == CRouterBRouterSetup::ModeLocal)
     {
-        checkFastRecalc->setEnabled(true);
-        checkFastRecalc->setToolTip(tr("enables on-the-fly routing when editing a route"));
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
     }
     else
     {
-        checkFastRecalc->setEnabled(false);
-        checkFastRecalc->setToolTip(tr("on-the-fly routing is available for local install only"));
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
     comboProfile->clear();
@@ -414,18 +409,16 @@ void CRouterBRouter::startBRouter()
         if (brouterState == QProcess::NotRunning)
         {
             QStringList args;
-            args << "-Xmx128M";
-            args << "-Xms128M";
-            args << "-Xmn8M";
-            args << "-DmaxRunningTime=300";
+            args << setup.localJavaOpts.split(QRegExp("\\s+"));
+            args << QString("-DmaxRunningTime=%1").arg(setup.localMaxRunningTime);
             args << "-cp";
             args << "brouter.jar";
             args << "btools.server.RouteServer";
-            args << "segments4";
-            args << "profiles2";
-            args << "customprofiles";
+            args << setup.localSegmentsDir;
+            args << setup.localProfileDir;
+            args << setup.localCustomProfileDir;
             args << setup.localPort;
-            args << "1";
+            args << setup.localNumberThreads;
             brouterShell->start(setup.localDir, "java", args);
         }
     }
@@ -486,20 +479,25 @@ void CRouterBRouter::updateLocalBRouterStatus()
                 break;
             }
             }
+            checkFastRecalc->setEnabled(true);
             toolToggleBRouter->setEnabled(true);
         }
         else
         {
             labelStatus->setText(tr("not installed"));
+            toolConsole->setVisible(false);
             toolToggleBRouter->setEnabled(false);
+            checkFastRecalc->setEnabled(false);
         }
-        toolToggleBRouter->setEnabled(true);
+        toolToggleBRouter->setVisible(true);
+        checkFastRecalc->setVisible(true);
     }
     else
     {
         labelStatus->setText(tr("online"));
         toolConsole->setVisible(false);
-        toolToggleBRouter->setEnabled(false);
+        toolToggleBRouter->setVisible(false);
+        checkFastRecalc->setVisible(false);
         textBRouterOutput->clear();
         textBRouterOutput->setVisible(false);
     }

@@ -426,11 +426,14 @@
        <enum>QLayout::SetNoConstraint</enum>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="labelOnlineHost">
+       <widget class="QLabel" name="labelOnlineService">
         <property name="text">
          <string>Service-URL</string>
         </property>
        </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineOnlineService"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="labelOnlineProfileUrl">
@@ -442,22 +445,112 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="lineOnlineProfileUrl"/>
       </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalDetails">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">7</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_13">
+    <item>
+     <layout class="QFormLayout" name="formLayout_3">
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelLocalHost">
+        <property name="text">
+         <string>Hostname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelLocalPort">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="labelLocalProfiles">
+        <property name="text">
+         <string>Profile directory</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="labelLocalSegments">
+        <property name="text">
+         <string>Segments directory</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineLocalHost"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineLocalPort"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineLocalProfiles"/>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineLocalSegments"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="labelLocalCustomProfiles">
+        <property name="text">
+         <string>Custom Profiles dir</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineLocalCustomProfiles"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelLocalMaxRuntime">
+        <property name="text">
+         <string>Max Runtime</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="labelLocalNumberThreads">
+        <property name="text">
+         <string>Number Threads</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="labelLocalJavaOpts">
+        <property name="text">
+         <string>Java Options</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineLocalMaxRuntime"/>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="lineLocalNumberThreads"/>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="lineLocalJavaOpts"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelLocalProfilesUrl">
+        <property name="text">
+         <string>Profiles Url</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
-        <item>
-         <widget class="QLineEdit" name="lineOnlineHost"/>
-        </item>
-        <item>
-         <widget class="QLabel" name="labelLocalPort">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="lineLocalPort"/>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="lineLocalProfilesUrl"/>
       </item>
      </layout>
     </item>

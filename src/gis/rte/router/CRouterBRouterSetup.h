@@ -71,6 +71,8 @@ public:
     void displayProfileAsync(const QString profile);
     void displayOnlineProfileAsync(const QString profile);
 
+    bool isLocalBRouterInstalled();
+
 signals:
     void onlineConfigChanged();
     void profilesChanged();

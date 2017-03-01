@@ -19,33 +19,54 @@
 #include "CMainWindow.h"
 #include <QWidget>
 #include <QTextBrowser>
-#include "CRouterBRouterSetupWizardToolShell.h"
+#include "CRouterBRouterToolShell.h"
 
 
-CRouterBRouterSetupWizardToolShell::CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent)
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent)
     : IToolShell(textBrowser,parent)
 {
+    connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
 }
 
-CRouterBRouterSetupWizardToolShell::~CRouterBRouterSetupWizardToolShell()
+CRouterBRouterToolShell::~CRouterBRouterToolShell()
 {
 }
 
-void CRouterBRouterSetupWizardToolShell::out(const QString out)
+void CRouterBRouterToolShell::out(const QString out)
 {
     stdOut(out);
 }
 
-void CRouterBRouterSetupWizardToolShell::execute(const QString dir, const QString command, const QStringList args)
+void CRouterBRouterToolShell::execute(const QString dir, const QString command, const QStringList args)
+{
+    start(dir,command,args);
+    cmd.waitForFinished();
+}
+
+void CRouterBRouterToolShell::start(const QString dir, const QString command, const QStringList args)
 {
     stdOut("cd " + dir);
     stdOut(command+" " + args.join(" ") + "\n");
     cmd.setWorkingDirectory(dir);
     cmd.start(command,args);
-    cmd.waitForFinished();
+    cmd.waitForStarted();
 }
 
-void CRouterBRouterSetupWizardToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
+void CRouterBRouterToolShell::stop()
+{
+    if (cmd.state() != QProcess::NotRunning)
+    {
+        cmd.terminate();
+        cmd.waitForFinished();
+    }
+}
+
+void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
+{
+    emit processStateChanged(newState);
+}
+
+void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
 {
     this->exitCode = exitCode;
     this->exitStatus = status;

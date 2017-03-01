@@ -399,6 +399,7 @@ void CRouterBRouterSetup::loadOnlineConfig()
 
     QNetworkReply * reply = networkAccessManager->get(request);
     reply->setProperty("configHost",configHost);
+    reply->setProperty("type",type_config);
 }
 
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)

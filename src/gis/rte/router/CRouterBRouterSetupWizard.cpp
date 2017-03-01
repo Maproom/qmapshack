@@ -187,6 +187,10 @@ bool CRouterBRouterSetupWizard::validateCurrentPage()
 {
     switch(currentId())
     {
+    case Page_ChooseMode:
+    {
+        return validateChooseMode();
+    }
     case Page_OnlineDetails:
     {
         return validateOnlineDetails();
@@ -321,6 +325,19 @@ void CRouterBRouterSetupWizard::slotRadioOnlineClicked()
 void CRouterBRouterSetupWizard::slotCheckExpertClicked()
 {
     setup.expertMode = checkExpert->isChecked();
+}
+
+bool CRouterBRouterSetupWizard::validateChooseMode()
+{
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        setup.updateLocalProfiles();
+    }
+    else if (setup.installMode == CRouterBRouterSetup::ModeOnline)
+    {
+        setup.loadOnlineConfig();
+    }
+    return true;
 }
 
 void CRouterBRouterSetupWizard::beginLocalDirectory()

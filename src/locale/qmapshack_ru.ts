@@ -323,7 +323,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="570"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
-        <translation>Не удалось сохранить проект.Папка удалена из базы данных.</translation>
+        <translation>Не удалось сохранить проект. Папка удалена из базы данных.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="577"/>
@@ -2018,7 +2018,7 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1107"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для EPSG проекций обычно охраняемые в /usr/share/pro отсутствуют.Пожалуйста, сообщите об этом администратору пакета.</translation>
+        <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для EPSG проекций обычно охраняемые в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета.</translation>
     </message>
 </context>
 <context>
@@ -2030,7 +2030,7 @@ line %2, column %3:
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
         <translation>Теперь ещё нет карт. QMapShack не забава без карт. Вы можете установить карты, нажав &quot;Помогите! Я хочу карты!&quot; кнопку в окне &quot;Карты&quot;.  Или вы можете нажать клавишу F1, чтобы открыть интерактивную документацию и читать как использовать QMapShack.
 
-Почему бы вам не предоставить карты? Для размещения карт готовых для загрузки и установки требуется хорошего сервера. И это не бесплатный сервис. Проекту не хватает денег. Кроме того, карты и ЦРМ данные имеют авторские права. Поэтому надо спросить владельцу авторских прав перед включением данных в пакет. Это не так просто, как может показаться, и за некоторые данные вам придется платить лицензионные платежи.Проекту просто не хватает ресурсов, чтобы сделать это. И мы думаем, что установка карт не так сложно, чтобы спросить этого от вас. Кроме того, программное обеспечение распространяется бесплатно.</translation>
+Почему бы вам не предоставить карты? Для размещения карт готовых для загрузки и установки требуется хорошего сервера. И это не бесплатный сервис. Проекту не хватает денег. Кроме того, карты и ЦРМ данные имеют авторские права. Поэтому надо спросить владельцу авторских прав перед включением данных в пакет. Это не так просто, как может показаться, и за некоторые данные вам придется платить лицензионные платежи. Проекту просто не хватает ресурсов, чтобы сделать это. И мы думаем, что установка карт не так сложно, чтобы спросить этого от вас. Кроме того, программное обеспечение распространяется бесплатно.</translation>
     </message>
 </context>
 <context>
@@ -4379,7 +4379,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
         <source>The internal database format of &apos;%1&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Внутренний формат базы данных &apos;%1&apos; изменилась. Сейчас QMapShack будет мигрировать вашу базу данных. После миграции база данных не работает с более старыми версиями QMapShack.Рекомендуется сделать резервную копию базы данных.</translation>
+        <translation>Внутренний формат базы данных &apos;%1&apos; изменилась. Сейчас QMapShack будет мигрировать вашу базу данных. После миграции база данных не работает с более старыми версиями QMapShack. Рекомендуется сделать резервную копию базы данных.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
@@ -7724,7 +7724,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
-        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание!&lt;/span&gt; Рекомендуется оставить поле пароля пустым. QMapShack сохранит её как обычный текст. Если нет пароля, то вас попросят для него при каждом запуске&lt;/p&gt;</translation>
+        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Внимание!&lt;/span&gt; Рекомендуется оставить поле пароля пустым. QMapShack сохранит её как обычный текст. Если нет пароля, то вас попросят для него при каждом запуске.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="275"/>
@@ -8321,7 +8321,7 @@ or
     <message>
         <location filename="../helpers/IWptIconDialog.ui" line="95"/>
         <source>All custom icons have to be *.bmp or *.png format.</source>
-        <translation>Все пользовательские значки должны иметь формат*.bmp или *.png.</translation>
+        <translation>Все пользовательские значки должны иметь формат *.bmp или *.png.</translation>
     </message>
 </context>
 </TS>

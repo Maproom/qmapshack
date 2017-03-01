@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -176,7 +176,14 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextBrowser" name="textBRouterOutput"/>
+    <widget class="QTextBrowser" name="textBRouterOutput">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -186,7 +193,7 @@
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>123</height>
+       <height>0</height>
       </size>
      </property>
     </spacer>

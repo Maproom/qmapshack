@@ -416,7 +416,7 @@ void CRouterBRouterSetupWizard::beginLocalInstall()
     doLocalInstall = false;
     textLocalInstall->setVisible(false);
     textLocalInstall->clear();
-    labelLocalInstallLink->setText("no brouter-version to install selected");
+    labelLocalInstallLink->setText(tr("no brouter-version to install selected"));
     pushLocalInstall->setEnabled(false);
     setOption(QWizard::HaveCustomButton1, false);
 }
@@ -424,7 +424,7 @@ void CRouterBRouterSetupWizard::beginLocalInstall()
 void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl & url)
 {
     downloadUrl = url;
-    labelLocalInstallLink->setText("selected " + url.fileName() + " for download and installation");
+    labelLocalInstallLink->setText(QString(tr("selected %1 for download and installation")).arg(url.fileName()));
     pushLocalInstall->setEnabled(true);
 }
 
@@ -590,9 +590,7 @@ void CRouterBRouterSetupWizard::beginLocalTiles()
 
 void CRouterBRouterSetupWizard::updateOnlineDetails()
 {
-    labelOnlineProfileUrl->setText(tr("Profile Url"));
     lineOnlineProfileUrl->setText(setup.onlineProfilesUrl);
-    labelOnlineService->setText(tr("Service-Url"));
     lineOnlineService->setText(setup.onlineServiceUrl);
 }
 
@@ -638,16 +636,6 @@ void CRouterBRouterSetupWizard::resetOnlineUrl()
 
 void CRouterBRouterSetupWizard::updateLocalDetails()
 {
-    labelLocalProfilesUrl->setText(tr("Profile Url"));
-    labelLocalHost->setText(tr("Hostname"));
-    labelLocalPort->setText(tr("Portnummer"));
-    labelLocalProfiles->setText(tr("Profiles Directory"));
-    labelLocalSegments->setText(tr("Segments Directory"));
-    labelLocalCustomProfiles->setText(tr("Custom Profiles Dir"));
-    labelLocalMaxRuntime->setText(tr("Max rumtime"));
-    labelLocalNumberThreads->setText(tr("Number Threads"));
-    labelLocalJavaOpts->setText(tr("Java Options"));
-
     lineLocalProfilesUrl->setText(setup.onlineProfilesUrl);
     lineLocalHost->setText(setup.localHost);
     lineLocalPort->setText(setup.localPort);

@@ -66,6 +66,7 @@ private:
                Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails, Page_LocalDetails };
 
     void beginChooseMode();
+    bool validateChooseMode();
 
     void beginLocalDirectory();
     void updateLocalDirectory();

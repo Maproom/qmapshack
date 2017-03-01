@@ -86,6 +86,8 @@ public:
         return actionSetupDEMPaths;
     }
 
+    void loadGISData(const QStringList& filenames);
+
     const qint32 id;
 protected:
 #ifdef WIN32
@@ -133,7 +135,6 @@ private slots:
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();
-    void loadGISData(const QStringList& filenames);
     void prepareMenuForMac();
     void testForNoView();
 

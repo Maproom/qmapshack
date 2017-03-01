@@ -372,7 +372,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="41"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
-        <translation>Ajoutez ou retirez des répertoires qui contiennent des données DEM. Il peut y avoir plusieurs fichiers dans un répertoire mais les sous-répertoires ne sont pas prises en compte.</translation>
+        <translation>Ajoutez ou retirez des répertoires qui contiennent des données DEM. Il peut y avoir plusieurs fichiers dans un répertoire mais les sous-répertoires ne sont pas prises en compte. Formats acceptés sont: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="56"/>
@@ -2766,7 +2766,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapTMS.cpp" line="67"/>
         <source>Failed to open %1</source>
-        <translation>Impossible d&apos;ouvrir : </translation>
+        <translation>Impossible d&apos;ouvrir: %1 </translation>
     </message>
     <message>
         <location filename="../map/CMapTMS.cpp" line="77"/>
@@ -3674,7 +3674,7 @@ n&apos;est pas une définition de système de coordonnées:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="185"/>
         <source>A route could not be found to waypoint %1.</source>
-        <translation>Aucune route vers le waypoint 1 n&apos;a été trouvée</translation>
+        <translation>Aucune route vers le waypoint %1 n&apos;a été trouvée</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="188"/>
@@ -4269,12 +4269,22 @@ Ivo Kronenberg</translation>
         <translation>Joindre des traces</translation>
     </message>
     <message>
-        <location filename="../gis/trk/ICombineTrk.ui" line="43"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="70"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="117"/>
-        <location filename="../gis/trk/ICombineTrk.ui" line="144"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="24"/>
+        <source>Available Tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="54"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="81"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="139"/>
+        <location filename="../gis/trk/ICombineTrk.ui" line="166"/>
         <source>...</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/ICombineTrk.ui" line="109"/>
+        <source>Combined Tracks</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6423,22 +6433,22 @@ Je n&apos;ai pas envie de lire la documentation !</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="265"/>
+        <location filename="../map/IMapPropSetup.ui" line="264"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="272"/>
+        <location filename="../map/IMapPropSetup.ui" line="271"/>
         <source>Cache Path</source>
         <translation>Répertoire du cache</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="228"/>
+        <location filename="../map/IMapPropSetup.ui" line="227"/>
         <source>Cache Size (MB)</source>
         <translation>Taille du cache (MO)</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="248"/>
+        <location filename="../map/IMapPropSetup.ui" line="247"/>
         <source>Expiration (Days)</source>
         <translation>Durée du cache (jours)</translation>
     </message>

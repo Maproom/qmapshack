@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "CRouterBRouterSetupException.h"
 #include "CRouterBRouterSetupWizard.h"
-#include "CRouterBRouterSetupWizardToolShell.h"
+#include "CRouterBRouterToolShell.h"
 #include "setup/IAppSetup.h"
 #include "canvas/CCanvas.h"
 #include <proj_api.h>
@@ -355,9 +355,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
     }
     else
     {
-        const QDir dir(setup.localDir);
-        const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
-        if (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(setup.localProfileDir)).exists())
+        if (setup.isLocalBRouterInstalled())
         {
             labelLocalDirResult->setText(tr("existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
@@ -415,7 +413,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl & url)
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
     textLocalInstall->setVisible(true);
-    CRouterBRouterSetupWizardToolShell shell(textLocalInstall,this);
+    CRouterBRouterToolShell shell(textLocalInstall,this);
     shell.out("download " + downloadUrl.toString() + " started");
 
     QNetworkRequest request;
@@ -439,7 +437,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
     outfile.write(reply->readAll());
     outfile.close();
 
-    CRouterBRouterSetupWizardToolShell shell(textLocalInstall,this);
+    CRouterBRouterToolShell shell(textLocalInstall,this);
     shell.out("download " + outfile.fileName() + " finished");
     shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
     setup.updateLocalProfiles();

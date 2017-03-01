@@ -25,6 +25,7 @@
 #include "ui_IRouterBRouter.h"
 #include "CRouterBRouterSetupWizard.h"
 #include "CRouterBRouterInfo.h"
+#include "CRouterBRouterToolShell.h"
 #include <QtNetwork>
 #include <QTimer>
 #include "CRouterSetup.h"
@@ -49,6 +50,9 @@ private slots:
     void slotCloseStatusMsg();
     void slotToolProfileInfoClicked();
     void slotDisplayProfileInfo(QString profile, QString content);
+    void slotBRouterStateChanged(const QProcess::ProcessState newState);
+    void slotToggleBRouter();
+    void slotToggleConsole();
 
 private:
 
@@ -87,6 +91,13 @@ private:
     CRouterSetup* routerSetup;
 
     CRouterBRouterInfo * info;
+
+    CRouterBRouterToolShell * brouterShell;
+    QProcess::ProcessState brouterState;
+
+    void startBRouter();
+    void stopBRouter();
+    void updateLocalBRouterStatus();
 };
 
 #endif //CROUTERBROUTER_H

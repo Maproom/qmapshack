@@ -61,11 +61,23 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     routerSetup = dynamic_cast<CRouterSetup*>(parent);
 
+    brouterShell = nullptr;
+    brouterState = QProcess::NotRunning;
+
+    connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
+    connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
+
     updateDialog();
+    updateLocalBRouterStatus();
+    textBRouterOutput->setVisible(false);
 }
 
 CRouterBRouter::~CRouterBRouter()
 {
+    if (brouterState != QProcess::NotRunning)
+    {
+        stopBRouter();
+    }
     SETTINGS;
     cfg.beginGroup("Route/brouter");
     cfg.setValue("profile", comboProfile->currentIndex());
@@ -76,6 +88,7 @@ CRouterBRouter::~CRouterBRouter()
 
 void CRouterBRouter::slotToolSetupClicked()
 {
+    stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
     setup.load();
@@ -118,6 +131,7 @@ void CRouterBRouter::updateDialog()
     {
         comboProfile->addItem(profile,profile);
     }
+    updateLocalBRouterStatus();
 }
 
 void CRouterBRouter::slotCloseStatusMsg()
@@ -178,6 +192,10 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    {
+        startBRouter();
+    }
     CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
     if(nullptr == rte)
     {
@@ -214,6 +232,10 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    {
+        startBRouter();
+    }
     if(!hasFastRouting() or !mutex.tryLock())
     {
         return -1;
@@ -352,5 +374,133 @@ QUrl CRouterBRouter::getServiceUrl()
     {
         return QUrl();
     }
+    }
+}
+
+void CRouterBRouter::slotToggleConsole()
+{
+    textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
+}
+
+void CRouterBRouter::slotToggleBRouter()
+{
+    if (brouterState == QProcess::NotRunning)
+    {
+        startBRouter();
+    }
+    else
+    {
+        stopBRouter();
+    }
+}
+
+void CRouterBRouter::startBRouter()
+{
+    if (setup.isLocalBRouterInstalled())
+    {
+        if (brouterShell == nullptr)
+        {
+            textBRouterOutput->clear();
+            brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
+            connect(brouterShell, &CRouterBRouterToolShell::processStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
+        }
+
+        //# BRouter standalone server
+        //# java -cp brouter.jar btools.brouter.RouteServer <segmentdir> <profile-map> <customprofiledir> <port> <maxthreads>
+        //# maxRunningTime is the request timeout in seconds, set to 0 to disable timeout//    JAVA_OPTS=
+        //    CLASSPATH=../brouter.jar
+        //    java $JAVA_OPTS -cp $CLASSPATH btools.server.RouteServer ../segments4 ../profiles2 ../customprofiles 17777 1
+
+        if (brouterState == QProcess::NotRunning)
+        {
+            QStringList args;
+            args << "-Xmx128M";
+            args << "-Xms128M";
+            args << "-Xmn8M";
+            args << "-DmaxRunningTime=300";
+            args << "-cp";
+            args << "brouter.jar";
+            args << "btools.server.RouteServer";
+            args << "segments4";
+            args << "profiles2";
+            args << "customprofiles";
+            args << setup.localPort;
+            args << "1";
+            brouterShell->start(setup.localDir, "java", args);
+        }
+    }
+}
+
+void CRouterBRouter::stopBRouter()
+{
+    if (brouterState != QProcess::NotRunning and brouterShell != nullptr)
+    {
+        brouterShell->stop();
+    }
+    textBRouterOutput->setVisible(false);
+}
+
+void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
+{
+    if (newState == QProcess::NotRunning and brouterShell != nullptr)
+    {
+        delete brouterShell;
+        brouterShell = nullptr;
+    }
+
+    brouterState = newState;
+
+    updateLocalBRouterStatus();
+}
+
+void CRouterBRouter::updateLocalBRouterStatus()
+{
+    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        if (setup.isLocalBRouterInstalled())
+        {
+            switch(brouterState)
+            {
+            case QProcess::Running:
+            {
+                labelStatus->setText(tr("running"));
+                toolConsole->setVisible(true);
+                break;
+            }
+            case QProcess::Starting:
+            {
+                labelStatus->setText(tr("starting"));
+                toolConsole->setVisible(true);
+                break;
+            }
+            case QProcess::NotRunning:
+            {
+                labelStatus->setText(tr("stopped"));
+                toolConsole->setVisible(false);
+                break;
+            }
+            default:
+            {
+                labelStatus->setText(tr("invalid"));
+                toolConsole->setVisible(false);
+                break;
+            }
+            }
+            toolToggleBRouter->setEnabled(true);
+        }
+        else
+        {
+            labelStatus->setText(tr("not installed"));
+            toolToggleBRouter->setEnabled(false);
+        }
+        toolToggleBRouter->setEnabled(true);
+    }
+    else
+    {
+        labelStatus->setText(tr("online"));
+        toolConsole->setVisible(false);
+        toolToggleBRouter->setEnabled(false);
+        textBRouterOutput->clear();
+        textBRouterOutput->setVisible(false);
     }
 }

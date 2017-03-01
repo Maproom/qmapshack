@@ -16,23 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
-#define CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
+#ifndef CROUTERBROUTERTOOLSHELL_H
+#define CROUTERBROUTERTOOLSHELL_H
 
 #include "tool/IToolShell.h"
 #include <QWidget>
 
-class CRouterBRouterSetupWizardToolShell : public IToolShell
+class CRouterBRouterToolShell : public IToolShell
 {
     Q_OBJECT
 public:
-    CRouterBRouterSetupWizardToolShell(QTextBrowser *&textBrowser, QWidget * parent);
-    virtual ~CRouterBRouterSetupWizardToolShell();
+    CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent);
+    virtual ~CRouterBRouterToolShell();
 
+    void start(const QString dir, const QString command, const QStringList args);
+    void stop();
     void out(const QString out);
     void execute(const QString dir, const QString command, const QStringList args);
     QProcess::ExitStatus getExitStatus();
     const int getExitCode();
+
+signals:
+    void processStateChanged(const QProcess::ProcessState newState);
+
+private slots:
+    void slotStateChanged(const QProcess::ProcessState newState);
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
@@ -40,5 +48,5 @@ private:
     int exitCode;
 };
 
-#endif //CROUTERBROUTERSETUPWIZARDTOOLSHELL_H
+#endif //CROUTERBROUTERTOOLSHELL_H
 

@@ -544,3 +544,10 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
         emit displayOnlineProfileFinished(profile, QString(content));
     }
 }
+
+bool CRouterBRouterSetup::isLocalBRouterInstalled()
+{
+    const QDir dir(localDir);
+    const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
+    return (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(localProfileDir)).exists());
+}

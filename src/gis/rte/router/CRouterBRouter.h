@@ -29,6 +29,7 @@
 #include <QtNetwork>
 #include <QTimer>
 #include "CRouterSetup.h"
+#include "helpers/CProgressDialog.h"
 
 class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {
@@ -98,6 +99,8 @@ private:
     void startBRouter();
     void stopBRouter();
     void updateLocalBRouterStatus();
+
+    QPointer<CProgressDialog> progress;
 };
 
 #endif //CROUTERBROUTER_H

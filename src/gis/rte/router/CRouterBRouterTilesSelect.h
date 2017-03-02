@@ -21,7 +21,7 @@
 
 #include "canvas/CCanvas.h"
 #include "CRouterBRouterSetup.h"
-#include "CRouterBRouterProgressBar.h"
+#include "CRouterBRouterTilesStatus.h"
 #include <QtCore>
 #include <QtWidgets>
 #include <QNetworkReply>
@@ -55,13 +55,15 @@ private slots:
     void slotDeleteSelected();
     void slotSelectOutdated();
     void slotDownload();
+    void slotUpdateStatus();
 
 private:
     CRouterBRouterSetup * setup;
 
     QVBoxLayout * outerLayout;
     QWidget * widgetSelect;
-    QFormLayout * statusLayout;
+    QLabel * statusLabel;
+    QProgressBar * statusProgress;
 
     QPushButton * pushSelectOutdated;
     QPushButton * pushClearSelection;
@@ -94,7 +96,6 @@ private:
     const tile_s getLocalTileData(const QPoint tile);
 
     QVector<QPoint> invalidTiles;
-
     QVector<QPoint> outdatedTiles;
     QVector<QPoint> currentTiles;
     QVector<QPoint> outstandingTiles;
@@ -106,13 +107,13 @@ private:
     QVector<QNetworkReply*> tilesDownloadManagerReplies;
 
     struct status_s {
-        CRouterBRouterProgressBar * progress;
-        QLabel * labelFilename;
-        QLabel * labelStatus;
+        qint64 max;
+        qint64 val;
+        qint64 size;
         QFile * file;
     };
 
-    QHash<QString,status_s*> tilesDownloadStatus;
+    QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
     friend class CRouterBRouterTilesSelectArea;
 };

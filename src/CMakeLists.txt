@@ -242,13 +242,13 @@ set( SRCS
         gis/rte/router/CRouterRoutinoPathSetup.cpp
         gis/rte/router/CRouterBRouter.cpp
         gis/rte/router/CRouterBRouterInfo.cpp
-        gis/rte/router/CRouterBRouterProgressBar.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
         gis/rte/router/CRouterBRouterSetupWizard.cpp
         gis/rte/router/CRouterBRouterToolShell.cpp
         gis/rte/router/CRouterBRouterTilesSelect.cpp
         gis/rte/router/CRouterBRouterTilesSelectArea.cpp
         gis/rte/router/CRouterBRouterTilesSelectLayout.cpp
+        gis/rte/router/CRouterBRouterTilesStatus.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -518,7 +518,6 @@ set( HDRS
         gis/rte/router/CRouterRoutinoPathSetup.h
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterBRouterInfo.h
-        gis/rte/router/CRouterBRouterProgressBar.h
         gis/rte/router/CRouterBRouterSetup.h
         gis/rte/router/CRouterBRouterSetupException.h
         gis/rte/router/CRouterBRouterSetupWizard.h
@@ -526,6 +525,7 @@ set( HDRS
         gis/rte/router/CRouterBRouterTilesSelect.h
         gis/rte/router/CRouterBRouterTilesSelectArea.h
         gis/rte/router/CRouterBRouterTilesSelectLayout.h
+        gis/rte/router/CRouterBRouterTilesStatus.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h

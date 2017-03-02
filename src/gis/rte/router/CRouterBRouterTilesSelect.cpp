@@ -21,7 +21,7 @@
 #include <QWebPage>
 #include <QWebFrame>
 #include <QWebElement>
-#include "CRouterBRouterProgressBar.h"
+#include "CRouterBRouterTilesStatus.h"
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
@@ -70,8 +70,16 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     canvas->show();
     selectArea->show();
 
-    statusLayout = new QFormLayout();
+    QHBoxLayout * statusLayout = new QHBoxLayout();
     outerLayout->addLayout(statusLayout);
+
+    statusLabel = new QLabel(this);
+    statusProgress = new QProgressBar(this);
+
+    statusLayout->addWidget(statusLabel);
+    statusLayout->addWidget(statusProgress);
+
+    statusLabel->setText("test");
 
     QHBoxLayout * buttonsLayout = new QHBoxLayout();
     outerLayout->addLayout(buttonsLayout);
@@ -98,6 +106,8 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
     connect(&tilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished);
     connect(tilesDownloadManager, &QNetworkAccessManager::finished, this, &CRouterBRouterTilesSelect::slotDownloadFinished);
+    connect(this, &CRouterBRouterTilesSelect::tilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
+    connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
 }
 
 CRouterBRouterTilesSelect::~CRouterBRouterTilesSelect()
@@ -214,29 +224,12 @@ void CRouterBRouterTilesSelect::selectTile(const QPoint tile)
     QString fileName = fileNameFromTile(tile);
     if (!tilesDownloadStatus.contains(fileName))
     {
-        status_s * status = new status_s;
-        status->labelFilename = new QLabel(fileName,this);
+        CRouterBRouterTilesStatus * status = new CRouterBRouterTilesStatus(this);
         const tile_s remote = getOnlineTileData(tile);
-        if (currentTiles.contains(tile))
-        {
-            const tile_s local = getLocalTileData(tile);
-            status->labelStatus = new QLabel(QString("%1 (%2) (installed %3 (%4))")
-                                             .arg(formatSize(remote.size))
-                                             .arg(remote.date.date().toString(Qt::DefaultLocaleShortDate))
-                                             .arg(formatSize(local.size))
-                                             .arg(local.date.date().toString(Qt::DefaultLocaleShortDate))
-                                             ,this);
-        }
-        else
-        {
-            status->labelStatus = new QLabel(QString("%1 (%2)")
-                                             .arg(formatSize(remote.size))
-                                             .arg(remote.date.date().toString(Qt::DefaultLocaleShortDate))
-                                             ,this);
-        }
+        status->size = remote.size;
         status->file = nullptr;
-        status->progress = nullptr;
-        statusLayout->addRow(status->labelFilename,status->labelStatus);
+        status->max = 0;
+        status->val = 0;
         tilesDownloadStatus.insert(fileName,status);
     }
 }
@@ -245,26 +238,12 @@ void CRouterBRouterTilesSelect::deselectTile(QPoint tile)
 {
     selectedTiles.remove(selectedTiles.indexOf(tile));
     const QString fileName = fileNameFromTile(tile);
-    QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
     if (it != tilesDownloadStatus.constEnd())
     {
-        status_s * status = it.value();
-        if (status->labelStatus != nullptr)
-        {
-            statusLayout->removeWidget(status->labelStatus);
-            status->labelStatus->hide();
-            delete status->labelStatus;
-            status->labelStatus = nullptr;
-        }
-        if (status->file == nullptr and status->progress == nullptr and status->labelFilename != nullptr)
-        {
-            statusLayout->removeWidget(status->labelFilename);
-            status->labelFilename->hide();
-            delete status->labelFilename;
-            status->labelFilename = nullptr;
-            tilesDownloadStatus.remove(fileName);
-            delete status;
-        }
+        CRouterBRouterTilesStatus * status = it.value();
+        tilesDownloadStatus.remove(fileName);
+        delete status;
     }
 }
 
@@ -455,11 +434,11 @@ void CRouterBRouterTilesSelect::slotDownload()
         if (!currentTiles.contains(tile))
         {
             const QString fileName = fileNameFromTile(tile);
-            QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+            QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
             if (it != tilesDownloadStatus.constEnd())
             {
-                status_s * status = it.value();
-                if (status->progress == nullptr)
+                CRouterBRouterTilesStatus * status = it.value();
+                if (status->file == nullptr)
                 {
                     const QDir dir = segmentsDir();
                     if (!dir.exists())
@@ -479,23 +458,8 @@ void CRouterBRouterTilesSelect::slotDownload()
                     QNetworkReply* reply = tilesDownloadManager->get(request);
                     reply->setProperty("tile", fileName);
 
-                    if (status->labelStatus != nullptr)
-                    {
-                        statusLayout->removeWidget(status->labelStatus);
-                        status->labelStatus->hide();
-                        delete status->labelStatus;
-                        status->labelStatus = nullptr;
-                    }
+                    connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
 
-                    int row;
-                    QFormLayout::ItemRole role;
-                    statusLayout->getWidgetPosition(dynamic_cast<QWidget*>(status->labelFilename),&row,&role);
-                    if (row > -1)
-                    {
-                        status->progress = new CRouterBRouterProgressBar(this);
-                        statusLayout->setWidget(row,QFormLayout::FieldRole,dynamic_cast<QWidget*>(status->progress));
-                        connect(reply, &QNetworkReply::downloadProgress, status->progress, &CRouterBRouterProgressBar::updateProgress);
-                    }
                     tilesDownloadManagerReplies << reply;
                     outstandingTiles << tile;
                     selectedTiles.remove(selectedTiles.indexOf(tile));
@@ -520,10 +484,10 @@ void CRouterBRouterTilesSelect::slotDownloadReadReady()
         if (reply->bytesAvailable() > 0)
         {
             QString fileName = reply->property("tile").toString();
-            QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+            QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
             if (it != tilesDownloadStatus.constEnd())
             {
-                status_s * status = it.value();
+                CRouterBRouterTilesStatus * status = it.value();
                 if (status->file != nullptr)
                 {
                     status->file->write(reply->readAll());
@@ -531,6 +495,7 @@ void CRouterBRouterTilesSelect::slotDownloadReadReady()
             }
         }
     }
+    slotUpdateStatus();
 }
 
 void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
@@ -548,24 +513,10 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
         outstandingTiles.remove(outstandingTiles.indexOf(tile));
     }
 
-    QHash<QString,status_s*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
     if (it != tilesDownloadStatus.constEnd())
     {
-        status_s * status = it.value();
-        if (status->labelFilename != nullptr)
-        {
-            statusLayout->removeWidget(status->labelFilename);
-            status->labelFilename->hide();
-            delete status->labelFilename;
-            status->labelFilename = nullptr;
-        }
-        if (status->progress != nullptr)
-        {
-            statusLayout->removeWidget(status->progress);
-            status->progress->hide();
-            delete status->progress;
-            status->progress = nullptr;
-        }
+        CRouterBRouterTilesStatus * status = it.value();
         if (status->file != nullptr)
         {
             if(reply->error() == QNetworkReply::NoError)
@@ -635,4 +586,36 @@ void CRouterBRouterTilesSelect::readTiles()
         }
     }
     emit tilesChanged();
+}
+
+void CRouterBRouterTilesSelect::slotUpdateStatus()
+{
+    int total(0);
+    int value(0);
+    int num(0);
+    bool downloading(false);
+
+    for (QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
+    {
+        const CRouterBRouterTilesStatus * status = it.value();
+
+        if (status->max > 0)
+        {
+            total += status->max;
+            value += status->val;
+            downloading = true;
+        }
+        else
+        {
+            total += status->size;
+        }
+        num++;
+    }
+
+    statusLabel->setText(QString(tr("%1 files, %2 total")).arg(num).arg(formatSize(total)));
+    statusProgress->setVisible(downloading);
+    statusProgress->setRange(0,total);
+    statusProgress->setValue(value);
 }

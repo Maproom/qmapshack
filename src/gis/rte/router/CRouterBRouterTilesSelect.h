@@ -19,15 +19,18 @@
 #ifndef CROUTERBROUTERTILESSELECT_H
 #define CROUTERBROUTERTILESSELECT_H
 
-#include "canvas/CCanvas.h"
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterTilesStatus.h"
-#include <QtCore>
-#include <QtWidgets>
-#include <QNetworkReply>
-#include <limits>
+#include <QDateTime>
+#include <QDir>
+#include <QLabel>
+#include <QNetworkAccessManager>
+#include <QProgressBar>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QWebPage>
 
 class CRouterBRouterTilesSelectArea;
+class CRouterBRouterTilesStatus;
+class CRouterBRouterSetup;
 
 class CRouterBRouterTilesSelect : public QWidget
 {
@@ -58,6 +61,27 @@ private slots:
     void slotUpdateStatus();
 
 private:
+    struct tile_s { QPoint tile; QDateTime date; qint64 size; };
+
+    void initializeTiles();
+    void selectTile(const QPoint tile);
+    void deselectTile(const QPoint tile);
+    void deleteTile(const QPoint tile);
+
+    QPoint tileFromFileName(const QString fileName) const;
+    QString fileNameFromTile(const QPoint tile) const;
+    QString absoluteFileNameFromTile(QPoint tile) const;
+
+    tile_s getOnlineTileData(const QPoint tile) const;
+    tile_s getLocalTileData(const QPoint tile) const;
+
+    QDir segmentsDir() const;
+    void readTiles();
+    const QString formatSize(const qint64 size);
+
+    const QPoint noTile = QPoint(INT_MIN,INT_MIN);
+    const tile_s noTileData = { noTile, QDateTime::fromMSecsSinceEpoch(0), INT_MIN };
+
     CRouterBRouterSetup * setup;
 
     QVBoxLayout * outerLayout;
@@ -72,28 +96,7 @@ private:
 
     CRouterBRouterTilesSelectArea * selectArea;
 
-    void initializeTiles();
-    void selectTile(const QPoint tile);
-    void deselectTile(const QPoint tile);
-    void deleteTile(const QPoint tile);
-
-    const QPoint tileFromFileName(const QString fileName);
-    const QString fileNameFromTile(const QPoint tile);
-    const QString absoluteFileNameFromTile(QPoint tile);
-    QDir segmentsDir();
-
-    void readTiles();
-
-    const QString formatSize(const qint64 size);
-
-    struct tile_s { QPoint tile; QDateTime date; qint64 size; };
-
-    const QPoint noTile = QPoint(INT_MIN,INT_MIN);
-    const tile_s noTileData = { noTile, QDateTime::fromMSecsSinceEpoch(0), INT_MIN };
-
     QVector<tile_s> onlineTiles;
-    const tile_s getOnlineTileData(const QPoint tile);
-    const tile_s getLocalTileData(const QPoint tile);
 
     QVector<QPoint> invalidTiles;
     QVector<QPoint> outdatedTiles;
@@ -101,17 +104,10 @@ private:
     QVector<QPoint> outstandingTiles;
     QVector<QPoint> selectedTiles;
 
-    QWebPage tilesWebPage;
+    QWebPage * tilesWebPage;
 
     QNetworkAccessManager * tilesDownloadManager;
     QVector<QNetworkReply*> tilesDownloadManagerReplies;
-
-    struct status_s {
-        qint64 max;
-        qint64 val;
-        qint64 size;
-        QFile * file;
-    };
 
     QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
 

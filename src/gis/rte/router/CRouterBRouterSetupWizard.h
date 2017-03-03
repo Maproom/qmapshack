@@ -19,11 +19,11 @@
 #ifndef CROUTERBROUTERSETUPWIZARD_H
 #define CROUTERBROUTERSETUPWIZARD_H
 
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterTilesSelect.h"
 #include "ui_IRouterBRouterSetupWizard.h"
-#include <QWizard>
-#include <canvas/CCanvas.h>
+
+class CCanvas;
+class CRouterBRouterSetup;
+class CRouterBRouterTilesSelect;
 
 class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
 {
@@ -76,7 +76,7 @@ private:
 
     void initProfiles();
     void beginProfiles();
-    QStringList selectedProfiles(const QListView * listView);
+    QStringList selectedProfiles(const QListView * listView) const;
     QList<int> updateProfileView(QListView * listView, QStringList values);
     void updateProfiles();
 
@@ -97,7 +97,7 @@ private:
     bool validateOnlineUrl();
     void resetOnlineUrl();
 
-    CRouterBRouterSetup setup;
+    CRouterBRouterSetup * setup;
 
     bool localInstallExists;
     bool doLocalInstall;

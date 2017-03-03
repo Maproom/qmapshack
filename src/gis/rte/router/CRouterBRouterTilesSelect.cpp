@@ -17,16 +17,18 @@
 
 **********************************************************************************************/
 
-#include <QtCore>
-#include <QWebPage>
-#include <QWebFrame>
 #include <QWebElement>
+#include <QWebFrame>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+#include "CRouterBRouterSetup.h"
 #include "CRouterBRouterTilesStatus.h"
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
 #include "CRouterBRouterSetupException.h"
 #include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
@@ -94,7 +96,9 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     buttonsLayout->addWidget(pushDeleteSelection);
     buttonsLayout->addWidget(pushDownload);
 
-    tilesDownloadManager = new QNetworkAccessManager();
+    tilesDownloadManager = new QNetworkAccessManager(this);
+
+    tilesWebPage = new QWebPage(this);
 
     connect(pushClearSelection, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotClearSelection);
     connect(pushDeleteSelection, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotDeleteSelected);
@@ -104,7 +108,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateButtons);
     connect(this, &CRouterBRouterTilesSelect::tilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
-    connect(&tilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished);
+    connect(tilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished);
     connect(tilesDownloadManager, &QNetworkAccessManager::finished, this, &CRouterBRouterTilesSelect::slotDownloadFinished);
     connect(this, &CRouterBRouterTilesSelect::tilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
@@ -249,7 +253,7 @@ void CRouterBRouterTilesSelect::deselectTile(QPoint tile)
 
 void CRouterBRouterTilesSelect::initializeTiles()
 {
-    tilesWebPage.mainFrame()->load(QUrl(setup->segmentsUrl));
+    tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
     readTiles();
 }
 
@@ -257,7 +261,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished()
 {
     onlineTiles.clear();
     QVector<QPoint> onlineTilesTmp;
-    QWebElement htmlElement = tilesWebPage.mainFrame()->documentElement();
+    QWebElement htmlElement = tilesWebPage->mainFrame()->documentElement();
     QWebElementCollection anchorElements = htmlElement.findAll("table tr td a");
 
     if (anchorElements.count() > 0)
@@ -369,7 +373,7 @@ const QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
     }
 }
 
-const QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName)
+QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName) const
 {
     // 'E10_N20.rd5'
     QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
@@ -384,7 +388,7 @@ const QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName)
     }
 }
 
-const QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile)
+QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile) const
 {
     return QString("%1%2_%3%4.rd5").arg(tile.x()<0 ? "W" : "E")
                                    .arg(abs(tile.x()))
@@ -392,17 +396,17 @@ const QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile)
                                    .arg(abs(tile.y()));
 }
 
-const QString CRouterBRouterTilesSelect::absoluteFileNameFromTile(const QPoint tile)
+QString CRouterBRouterTilesSelect::absoluteFileNameFromTile(const QPoint tile) const
 {
     return segmentsDir().absoluteFilePath(fileNameFromTile(tile));
 }
 
-QDir CRouterBRouterTilesSelect::segmentsDir()
+QDir CRouterBRouterTilesSelect::segmentsDir() const
 {
     return QDir(QDir(setup->localDir).absoluteFilePath(setup->localSegmentsDir));
 }
 
-const CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getOnlineTileData(const QPoint tile)
+CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getOnlineTileData(const QPoint tile) const
 {
     for (tile_s tileData : onlineTiles)
     {
@@ -414,7 +418,7 @@ const CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getOnlineTile
     return noTileData;
 }
 
-const CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getLocalTileData(const QPoint tile)
+CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getLocalTileData(const QPoint tile) const
 {
     QFileInfo info(absoluteFileNameFromTile(tile));
     if (info.exists())

@@ -19,11 +19,12 @@
 #ifndef CROUTERBROUTERTILESSELECTAREA_H
 #define CROUTERBROUTERTILESSELECTAREA_H
 
-#include "canvas/CCanvas.h"
-#include "CRouterBRouterTilesSelect.h"
-#include <QtCore>
-#include <QtWidgets>
-#include <QPolygonF>
+#include <QPen>
+#include <QWidget>
+#include <QMouseEvent>
+
+class CCanvas;
+class CRouterBRouterTilesSelect;
 
 class CRouterBRouterTilesSelectArea : public QWidget
 {

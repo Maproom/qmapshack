@@ -20,9 +20,7 @@
 #define CROUTERBROUTERTILESSTATUS_H
 
 #include <QObject>
-
-class QFile;
-class CRouterBRouterTilesSelect;
+#include <QFile>
 
 class CRouterBRouterTilesStatus : public QObject
 {

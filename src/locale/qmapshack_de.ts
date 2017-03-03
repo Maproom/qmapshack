@@ -961,7 +961,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/fit/serialization.cpp" line="247"/>
         <source>FIT file %1 contains no GPS data.</source>
-        <translation>FIT Dekodierfehler: Datei enthält keine GPS Daten.</translation>
+        <translation>FIT Dekodierfehler: Datei %1 enthält keine GPS Daten.</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="211"/>
@@ -1428,7 +1428,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/CGisListDB.cpp" line="84"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
-        <translation>Aufgrund der Änderungen im Datenbanksystem kennt QMapShack den Dateinamen Ihrer Datenbank nicht mehr. Sie müssen diesen im nächsten Schritt erneut wählen.</translation>
+        <translation>Aufgrund der Änderungen im Datenbanksystem kennt QMapShack den Dateinamen Ihrer Datenbank &apos;%1&apos; nicht mehr. Sie müssen diesen im nächsten Schritt erneut wählen.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="85"/>

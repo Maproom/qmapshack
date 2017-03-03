@@ -34,7 +34,7 @@ void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToB
 
     xmlCrsPt.appendChild(doc.createElement("Name"));
     QString str = wpt.name;
-    str.truncate(10);
+    str.truncate(10); // course point name max size is 10 characters ; see http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd
     xmlCrsPt.lastChild().appendChild(doc.createTextNode(str));
 
     xmlCrsPt.appendChild(doc.createElement("Time"));
@@ -86,7 +86,7 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
 
     courseNode.appendChild(doc.createElement("Name"));
     QString str = this->getName();
-    str.truncate(15);
+    str.truncate(15); // course name max size is 15 characters ; see http://www8.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd
     courseNode.lastChild().appendChild(doc.createTextNode(str));
 
 

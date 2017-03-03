@@ -104,7 +104,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     connect(pushDeleteSelection, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotDeleteSelected);
     connect(pushSelectOutdated, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotSelectOutdated);
     connect(pushDownload, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotDownload);
-    connect(selectArea, &CRouterBRouterTilesSelectArea::tileClicked, this, &CRouterBRouterTilesSelect::slotTileClicked);
+    connect(selectArea, &CRouterBRouterTilesSelectArea::sigTileClicked, this, &CRouterBRouterTilesSelect::slotTileClicked);
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateButtons);
     connect(this, &CRouterBRouterTilesSelect::tilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
     connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);

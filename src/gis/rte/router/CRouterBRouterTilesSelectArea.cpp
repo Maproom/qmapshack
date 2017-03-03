@@ -19,7 +19,9 @@
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
+#include "CRouterBRouterTilesStatus.h"
 #include "canvas/CCanvas.h"
+#include <QToolTip>
 
 CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CRouterBRouterTilesSelect * select, CCanvas * canvas)
     : QWidget(dynamic_cast<QWidget *>(parent))
@@ -51,6 +53,8 @@ CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, C
 
     this->canvas = canvas;
     this->select = select;
+
+    setMouseTracking(true);
 }
 
 CRouterBRouterTilesSelectArea::~CRouterBRouterTilesSelectArea()
@@ -62,6 +66,73 @@ void CRouterBRouterTilesSelectArea::updateTiles()
     update();
 }
 
+bool CRouterBRouterTilesSelectArea::event(QEvent * event)
+{
+    if (event->type() == QEvent::ToolTip)
+    {
+        QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
+        QPoint tile = tileUnderMouse(helpEvent->pos());
+        if (select->invalidTiles.contains(tile))
+        {
+            QToolTip::showText(helpEvent->globalPos(),tr("no routing-data available"));
+        }
+        else
+        {
+            QString fileName = select->fileNameFromTile(tile);
+            QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = select->tilesDownloadStatus.constFind(fileName);
+            if (it != select->tilesDownloadStatus.constEnd())
+            {
+                CRouterBRouterTilesStatus * status = it.value();
+
+                if (select->outstandingTiles.contains(tile))
+                {
+                    QToolTip::showText(helpEvent->globalPos(),
+                                       QString(tr("being downloaded (%1 of %2)"))
+                                       .arg(select->formatSize(status->val))
+                                       .arg(select->formatSize(status->max)));
+                }
+                else if (select->selectedTiles.contains(tile))
+                {
+                    CRouterBRouterTilesSelect::tile_s data = select->getOnlineTileData(tile);
+                    QToolTip::showText(helpEvent->globalPos(),
+                                       QString(tr("selected (%1, %2"))
+                                       .arg(select->formatSize(status->size))
+                                       .arg(data.date.toString(Qt::DefaultLocaleShortDate)));
+                }
+            }
+            else if (select->outdatedTiles.contains(tile))
+            {
+                CRouterBRouterTilesSelect::tile_s local = select->getLocalTileData(tile);
+                CRouterBRouterTilesSelect::tile_s remote = select->getOnlineTileData(tile);
+                QToolTip::showText(helpEvent->globalPos(),
+                                   QString(tr("local data outdated (%1, %2 - remote %3, %4)"))
+                                   .arg(select->formatSize(local.size))
+                                   .arg(local.date.toString(Qt::DefaultLocaleShortDate))
+                                   .arg(select->formatSize(remote.size))
+                                   .arg(remote.date.toString(Qt::DefaultLocaleShortDate)));
+            }
+            else if (select->currentTiles.contains(tile))
+            {
+                CRouterBRouterTilesSelect::tile_s local = select->getLocalTileData(tile);
+                QToolTip::showText(helpEvent->globalPos(),
+                                   QString(tr("local data up to date (%1, %2)"))
+                                   .arg(select->formatSize(local.size))
+                                   .arg(local.date.toString(Qt::DefaultLocaleShortDate)));
+            }
+            else
+            {
+                CRouterBRouterTilesSelect::tile_s remote = select->getOnlineTileData(tile);
+                QToolTip::showText(helpEvent->globalPos(),
+                                   QString(tr("no local data, online available (%1, %2)"))
+                                   .arg(select->formatSize(remote.size))
+                                   .arg(remote.date.toString(Qt::DefaultLocaleShortDate)));
+            }
+        }
+        return true;
+    }
+    return QWidget::event(event);
+}
+
 void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
 {
     drawInvalidTiles();
@@ -71,29 +142,41 @@ void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
     drawOutstandingTiles();
 }
 
-
 void CRouterBRouterTilesSelectArea::mouseDoubleClickEvent(QMouseEvent * event)
 {
 }
 
 void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
 {
-    canvas->moveMap(QPointF(event->pos()-mousePos));
-    mousePos = event->pos();
+    if (event->buttons() == Qt::LeftButton)
+    {
+        canvas->moveMap(QPointF(event->pos()-mousePos));
+        mousePos = event->pos();
+    }
+    else
+    {
+    }
 }
 
 void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent * event)
 {
-    startPos = mousePos = event->pos();
+    if (event->buttons() == Qt::LeftButton)
+    {
+        startPos = mousePos = event->pos();
+    }
+    button = event->buttons();
 }
 
 void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
 {
-    QPoint pos = event->pos();
-    canvas->moveMap(QPointF(pos-mousePos));
-    if (pos == startPos)
+    if (button == Qt::LeftButton)
     {
-        emit tileClicked(tileUnderMouse(pos));
+        QPoint pos = event->pos();
+        canvas->moveMap(QPointF(pos-mousePos));
+        if (pos == startPos)
+        {
+            emit sigTileClicked(tileUnderMouse(pos));
+        }
     }
 }
 

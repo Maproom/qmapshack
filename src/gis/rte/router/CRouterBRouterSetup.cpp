@@ -535,12 +535,12 @@ void CRouterBRouterSetup::displayProfileAsync(const QString profile)
     }
 }
 
-void CRouterBRouterSetup::displayOnlineProfileAsync(const QString profile)
+void CRouterBRouterSetup::displayOnlineProfileAsync(const QString profile) const
 {
     loadOnlineProfileAsync(profile, ProfileDisplay);
 }
 
-void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, const profileRequest_e mode)
+void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, const profileRequest_e mode) const
 {
     QNetworkRequest request;
     const QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");

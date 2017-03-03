@@ -106,7 +106,7 @@ void CRouterBRouter::slotToolProfileInfoClicked()
     const int index = comboProfile->currentIndex();
     if (index > -1)
     {
-        setup->displayOnlineProfileAsync(setup->getProfiles().at(index));
+        setup->displayProfileAsync(setup->getProfiles().at(index));
     }
 }
 

@@ -4008,50 +4008,63 @@ line %2, column %3:
         <translation>В файлеTCX %1 нет мероприятий или курсов</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="278"/>
         <source>File exists ...</source>
         <translation type="unfinished">Файл существует...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="279"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="380"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="318"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="403"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
         <source>Activity or course ?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="379"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
+        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity ?&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
+        <source>Course</source>
+        <translation type="unfinished">Курс</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <source>Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="317"/>
         <source>Track with invalid timestamps...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="404"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="436"/>
-        <source>QMapShack does not know if track &lt;b&gt;%1&lt;/b&gt; should be saved as an activity or as a course. &lt;b&gt;Do you want to save it as a course (Yes) or as an activity (No) ?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="492"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="433"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished">Не удалось создать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="513"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="454"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished">Не удалось записать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="495"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="514"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="436"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="455"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished">Не удалось записать данные GIS...</translation>
     </message>

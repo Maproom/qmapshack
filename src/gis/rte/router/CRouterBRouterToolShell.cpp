@@ -63,13 +63,11 @@ void CRouterBRouterToolShell::stop()
 
 void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
 {
-    emit processStateChanged(newState);
+    emit sigProcessStateChanged(newState);
 }
 
 void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status)
 {
-    this->exitCode = exitCode;
-    this->exitStatus = status;
     if (status == QProcess::ExitStatus::NormalExit)
     {
         text->setTextColor(Qt::darkGreen);

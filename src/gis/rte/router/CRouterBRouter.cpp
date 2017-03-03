@@ -22,7 +22,11 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "CRouterBRouter.h"
+#include "CRouterBRouterSetup.h"
 #include "CRouterBRouterInfo.h"
+#include "CRouterBRouterSetupWizard.h"
+#include "CRouterBRouterToolShell.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtNetwork>
 #include <QtWidgets>
@@ -32,11 +36,12 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 {
     setupUi(this);
 
-    setup.load();
+    setup = new CRouterBRouterSetup(this);
+    setup->load();
 
     connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
     connect(toolProfileInfo, &QToolButton::clicked, this, &CRouterBRouter::slotToolProfileInfoClicked);
-    connect(&setup, &CRouterBRouterSetup::displayOnlineProfileFinished, this, &CRouterBRouter::slotDisplayProfileInfo);
+    connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouter::slotDisplayProfileInfo);
 
     comboAlternative->addItem(tr("original"), "0");
     comboAlternative->addItem(tr("first alternative"), "1");
@@ -47,7 +52,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     cfg.beginGroup("Route/brouter");
     comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() and (setup.installMode == CRouterBRouterSetup::ModeLocal));
+    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() and (setup->installMode == CRouterBRouterSetup::ModeLocal));
     comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
     cfg.endGroup();
 
@@ -92,7 +97,7 @@ void CRouterBRouter::slotToolSetupClicked()
     stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
-    setup.load();
+    setup->load();
     updateDialog();
 }
 
@@ -101,11 +106,11 @@ void CRouterBRouter::slotToolProfileInfoClicked()
     const int index = comboProfile->currentIndex();
     if (index > -1)
     {
-        setup.displayOnlineProfileAsync(setup.getProfiles().at(index));
+        setup->displayOnlineProfileAsync(setup->getProfiles().at(index));
     }
 }
 
-void CRouterBRouter::slotDisplayProfileInfo(QString profile, QString content)
+void CRouterBRouter::slotDisplayProfileInfo(const QString profile, const QString content)
 {
     CRouterBRouterInfo info;
     info.setLabel(profile);
@@ -115,7 +120,7 @@ void CRouterBRouter::slotDisplayProfileInfo(QString profile, QString content)
 
 void CRouterBRouter::updateDialog()
 {
-    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
     }
@@ -124,7 +129,7 @@ void CRouterBRouter::updateDialog()
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
     comboProfile->clear();
-    for(const QString& profile : setup.getProfiles())
+    for(const QString& profile : setup->getProfiles())
     {
         comboProfile->addItem(profile,profile);
     }
@@ -150,10 +155,10 @@ QString CRouterBRouter::getOptions()
 
 bool CRouterBRouter::hasFastRouting()
 {
-    return setup.installMode == CRouterBRouterSetup::ModeLocal and checkFastRecalc->isChecked();
+    return setup->installMode == CRouterBRouterSetup::ModeLocal and checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
+QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) const
 {
     QString lonlats;
     bool isNext = false;
@@ -189,7 +194,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points)
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
-    if (setup.installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
@@ -235,7 +240,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    if (setup.installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
@@ -381,20 +386,20 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     slotCloseStatusMsg();
 }
 
-QUrl CRouterBRouter::getServiceUrl()
+QUrl CRouterBRouter::getServiceUrl() const
 {
-    switch (setup.installMode)
+    switch (setup->installMode)
     {
     case CRouterBRouterSetup::ModeLocal:
     {
         QUrl url(QString("http://"));
-        url.setHost(setup.localHost);
-        url.setPort(setup.localPort.toInt());
+        url.setHost(setup->localHost);
+        url.setPort(setup->localPort.toInt());
         return url;
     }
     case CRouterBRouterSetup::ModeOnline:
     {
-        return QUrl(setup.onlineServiceUrl);
+        return QUrl(setup->onlineServiceUrl);
     }
     default:
     {
@@ -422,13 +427,13 @@ void CRouterBRouter::slotToggleBRouter()
 
 void CRouterBRouter::startBRouter()
 {
-    if (setup.isLocalBRouterInstalled())
+    if (setup->isLocalBRouterInstalled())
     {
         if (brouterShell == nullptr)
         {
             textBRouterOutput->clear();
             brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
-            connect(brouterShell, &CRouterBRouterToolShell::processStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
+            connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
         }
 
         //# BRouter standalone server
@@ -440,17 +445,17 @@ void CRouterBRouter::startBRouter()
         if (brouterState == QProcess::NotRunning)
         {
             QStringList args;
-            args << setup.localJavaOpts.split(QRegExp("\\s+"));
-            args << QString("-DmaxRunningTime=%1").arg(setup.localMaxRunningTime);
+            args << setup->localJavaOpts.split(QRegExp("\\s+"));
+            args << QString("-DmaxRunningTime=%1").arg(setup->localMaxRunningTime);
             args << "-cp";
             args << "brouter.jar";
             args << "btools.server.RouteServer";
-            args << setup.localSegmentsDir;
-            args << setup.localProfileDir;
-            args << setup.localCustomProfileDir;
-            args << setup.localPort;
-            args << setup.localNumberThreads;
-            brouterShell->start(setup.localDir, "java", args);
+            args << setup->localSegmentsDir;
+            args << setup->localProfileDir;
+            args << setup->localCustomProfileDir;
+            args << setup->localPort;
+            args << setup->localNumberThreads;
+            brouterShell->start(setup->localDir, "java", args);
         }
     }
 }
@@ -479,9 +484,9 @@ void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newSta
 
 void CRouterBRouter::updateLocalBRouterStatus()
 {
-    if (setup.installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
-        if (setup.isLocalBRouterInstalled())
+        if (setup->isLocalBRouterInstalled())
         {
             switch(brouterState)
             {

@@ -20,34 +20,17 @@
 #define CROUTERBROUTERSETUP_H
 
 #include <QtCore>
-#include "setup/IAppSetup.h"
 #include <QWebPage>
 
 class CRouterBRouterSetup : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterSetup();
+    CRouterBRouterSetup(QObject * parent);
     ~CRouterBRouterSetup();
+
     enum mode_e { ModeLocal, ModeOnline };
     struct tile_s { QPoint tile; QDateTime date; qreal size; };
-    bool expertMode;
-    mode_e installMode;
-    QString onlineWebUrl;
-    QString onlineServiceUrl;
-    QString onlineProfilesUrl;
-    QStringList onlineProfilesAvailable;
-    QString localDir;
-    QString localProfileDir;
-    QString localCustomProfileDir;
-    QString localSegmentsDir;
-    QString localHost;
-    QString localPort;
-    QString localNumberThreads;
-    QString localMaxRunningTime;
-    QString localJavaOpts;
-    QString binariesUrl;
-    QString segmentsUrl;
 
     void load();
     void save();
@@ -66,7 +49,7 @@ public:
     void resetBinariesUrl();
     void resetSegmentsUrl();
 
-    const QStringList getProfiles();
+    QStringList getProfiles() const;
 
     void addProfile(const QString profile);
     void deleteProfile(const QString profile);
@@ -79,17 +62,50 @@ public:
     void displayProfileAsync(const QString profile);
     void displayOnlineProfileAsync(const QString profile);
 
-    bool isLocalBRouterInstalled();
+    bool isLocalBRouterInstalled() const;
 
 signals:
-    void onlineConfigChanged();
-    void profilesChanged();
-    void displayOnlineProfileFinished(QString profile, QString content);
+    void sigOnlineConfigChanged();
+    void sigProfilesChanged();
+    void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
 
 private slots:
     void slotOnlineRequestFinished(QNetworkReply *reply);
 
 private:
+    enum request_e { type_config, type_profile };
+    enum profileRequest_e { ProfileInstall, ProfileDisplay };
+
+    QDir getProfileDir(const mode_e mode) const;
+    void loadOnlineProfileAsync(const QString profile, const profileRequest_e mode);
+    void loadOnlineConfigFinished(QNetworkReply* reply);
+    void loadOnlineProfileFinished(QNetworkReply * reply);
+    mode_e modeFromString(const QString mode) const;
+    QString stringFromMode(const mode_e mode) const;
+
+    QStringList onlineProfiles;
+    QStringList localProfiles;
+
+    QNetworkAccessManager * networkAccessManager;
+
+    bool expertMode;
+    mode_e installMode;
+    QString onlineWebUrl;
+    QString onlineServiceUrl;
+    QString onlineProfilesUrl;
+    QStringList onlineProfilesAvailable;
+    QString localDir;
+    QString localProfileDir;
+    QString localCustomProfileDir;
+    QString localSegmentsDir;
+    QString localHost;
+    QString localPort;
+    QString localNumberThreads;
+    QString localMaxRunningTime;
+    QString localJavaOpts;
+    QString binariesUrl;
+    QString segmentsUrl;
+
     const bool defaultExpertMode = false;
     const mode_e defaultInstallMode = ModeOnline;
     const QString defaultOnlineWebUrl = "http://brouter.de/brouter-web/";
@@ -109,22 +125,9 @@ private:
 
     const QString onlineCacheDir = "BRouter";
 
-    QStringList onlineProfiles;
-    QStringList localProfiles;
-
-    const QDir getProfileDir(mode_e mode);
-
-    enum request_e { type_config, type_profile };
-    enum profileRequest_e { ProfileInstall, ProfileDisplay };
-
-    void loadOnlineProfileAsync(const QString profile, profileRequest_e mode);
-    void loadOnlineConfigFinished(QNetworkReply* reply);
-    void loadOnlineProfileFinished(QNetworkReply * reply);
-
-    const mode_e modeFromString(QString mode);
-    const QString stringFromMode(mode_e mode);
-
-    QNetworkAccessManager * networkAccessManager;
+    friend class CRouterBRouter;
+    friend class CRouterBRouterSetupWizard;
+    friend class CRouterBRouterTilesSelect;
 };
 
 #endif

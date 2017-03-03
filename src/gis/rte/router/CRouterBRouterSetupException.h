@@ -19,7 +19,7 @@
 #ifndef CROUTERBROUTERSETUPEXCEPTION_H
 #define CROUTERBROUTERSETUPEXCEPTION_H
 
-#include <QtCore>
+#include <QException>
 
 class CRouterBRouterSetupException : public QException
 {

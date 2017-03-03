@@ -16,12 +16,10 @@
 
 **********************************************************************************************/
 
-#include <QtCore>
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
-
-#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 
 CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CRouterBRouterTilesSelect * select, CCanvas * canvas)
     : QWidget(dynamic_cast<QWidget *>(parent))

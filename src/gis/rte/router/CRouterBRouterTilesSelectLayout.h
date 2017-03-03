@@ -19,8 +19,8 @@
 #ifndef CROUTERBROUTERTILESSELECTLAYOUT_H
 #define CROUTERBROUTERTILESSELECTLAYOUT_H
 
-#include <QtCore>
-#include <QtWidgets>
+#include <QLayout>
+#include <QList>
 
 class CRouterBRouterTilesSelectLayout : public QLayout
 {

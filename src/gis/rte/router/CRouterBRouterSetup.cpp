@@ -20,13 +20,14 @@
 #include "CRouterBRouterSetupException.h"
 
 #include "helpers/CSettings.h"
-#include <QtNetwork>
+#include "setup/IAppSetup.h"
 #include <QtScript>
 #include <QtWebKit>
 #include <QWebPage>
 #include <QWebFrame>
 
-CRouterBRouterSetup::CRouterBRouterSetup()
+CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
+    :QObject(parent)
 {
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetup::slotOnlineRequestFinished);
@@ -197,7 +198,7 @@ void CRouterBRouterSetup::resetSegmentsUrl()
     segmentsUrl = defaultSegmentsUrl;
 }
 
-const CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QString mode)
+CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QString mode) const
 {
     if (mode == "online")
     {
@@ -210,7 +211,7 @@ const CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QStr
     throw CRouterBRouterSetupException();
 }
 
-const QString CRouterBRouterSetup::stringFromMode(const mode_e mode)
+QString CRouterBRouterSetup::stringFromMode(const mode_e mode) const
 {
     switch(mode)
     {
@@ -240,7 +241,7 @@ void CRouterBRouterSetup::addProfile(const QString profile)
         if (!onlineProfiles.contains(profile))
         {
             onlineProfiles << profile;
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
     else
@@ -262,13 +263,13 @@ void CRouterBRouterSetup::deleteProfile(const QString profile)
         if (localProfiles.contains(profile))
         {
             localProfiles.removeAt(localProfiles.indexOf(profile));
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
     else if (installMode == ModeOnline)
     {
         onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
-        emit profilesChanged();
+        emit sigProfilesChanged();
     }
     else
     {
@@ -285,7 +286,7 @@ void CRouterBRouterSetup::profileUp(const QString profile)
         {
             localProfiles.removeAt(index);
             localProfiles.insert(index-1,profile);
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
     else if (installMode == ModeOnline)
@@ -295,7 +296,7 @@ void CRouterBRouterSetup::profileUp(const QString profile)
         {
             onlineProfiles.removeAt(index);
             onlineProfiles.insert(index-1,profile);
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
 }
@@ -309,7 +310,7 @@ void CRouterBRouterSetup::profileDown(const QString profile)
         {
             localProfiles.removeAt(index);
             localProfiles.insert(index+1,profile);
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
     else if (installMode == ModeOnline)
@@ -319,7 +320,7 @@ void CRouterBRouterSetup::profileDown(const QString profile)
         {
             onlineProfiles.removeAt(index);
             onlineProfiles.insert(index+1,profile);
-            emit profilesChanged();
+            emit sigProfilesChanged();
         }
     }
 }
@@ -357,11 +358,11 @@ void CRouterBRouterSetup::updateLocalProfiles()
     }
     if (changed)
     {
-        emit profilesChanged();
+        emit sigProfilesChanged();
     }
 }
 
-const QDir CRouterBRouterSetup::getProfileDir(mode_e mode)
+QDir CRouterBRouterSetup::getProfileDir(const mode_e mode) const
 {
     switch(mode)
     {
@@ -385,7 +386,7 @@ const QDir CRouterBRouterSetup::getProfileDir(mode_e mode)
     }
 }
 
-const QStringList CRouterBRouterSetup::getProfiles()
+QStringList CRouterBRouterSetup::getProfiles() const
 {
     return installMode == ModeLocal ? localProfiles : onlineProfiles;
 }
@@ -466,7 +467,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
     }
     if (changed)
     {
-        emit onlineConfigChanged();
+        emit sigOnlineConfigChanged();
     }
 
     changed = false;
@@ -507,7 +508,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 
     if (changed)
     {
-        emit profilesChanged();
+        emit sigProfilesChanged();
     }
 }
 
@@ -521,7 +522,7 @@ void CRouterBRouterSetup::displayProfileAsync(const QString profile)
             file.open(QIODevice::ReadOnly);
             const QByteArray content = file.readAll();
             file.close();
-            emit displayOnlineProfileFinished(profile, QString(content));
+            emit sigDisplayOnlineProfileFinished(profile, QString(content));
         }
     }
     else if (installMode == ModeOnline)
@@ -539,7 +540,7 @@ void CRouterBRouterSetup::displayOnlineProfileAsync(const QString profile)
     loadOnlineProfileAsync(profile, ProfileDisplay);
 }
 
-void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, profileRequest_e mode)
+void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, const profileRequest_e mode)
 {
     QNetworkRequest request;
     const QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");
@@ -554,10 +555,10 @@ void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, profileR
 void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
 {
     reply->deleteLater();
-    QString profile = reply->property("profile").toString();
-    profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
+    const QString profile = reply->property("profile").toString();
+    const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
 
-    QByteArray content = reply->readAll();
+    const QByteArray content = reply->readAll();
     if (mode == ProfileInstall)
     {
         const QDir dir = getProfileDir(ModeLocal);
@@ -570,11 +571,11 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
     }
     else if (mode == ProfileDisplay)
     {
-        emit displayOnlineProfileFinished(profile, QString(content));
+        emit sigDisplayOnlineProfileFinished(profile, QString(content));
     }
 }
 
-bool CRouterBRouterSetup::isLocalBRouterInstalled()
+bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
     const QDir dir(localDir);
     const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");

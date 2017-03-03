@@ -20,16 +20,18 @@
 #ifndef CROUTERBROUTER_H
 #define CROUTERBROUTER_H
 
-#include "CRouterBRouterSetup.h"
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterBRouter.h"
-#include "CRouterBRouterSetupWizard.h"
-#include "CRouterBRouterInfo.h"
-#include "CRouterBRouterToolShell.h"
-#include <QtNetwork>
+
+class CRouterBRouterSetup;
+class CRouterBRouterSetupWizard;
+class CRouterBRouterInfo;
+class CRouterBRouterToolShell;
+class CRouterSetup;
+class CProgressDialog;
+#include <QNetworkAccessManager>
+#include <QProcess>
 #include <QTimer>
-#include "CRouterSetup.h"
-#include "helpers/CProgressDialog.h"
 
 class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {
@@ -40,9 +42,7 @@ public:
 
     void calcRoute(const IGisItem::key_t& key) override;
     int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
-
     bool hasFastRouting() override;
-
     QString getOptions() override;
 
 private slots:
@@ -50,7 +50,7 @@ private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg();
     void slotToolProfileInfoClicked();
-    void slotDisplayProfileInfo(QString profile, QString content);
+    void slotDisplayProfileInfo(const QString profile, const QString content);
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
     void slotToggleBRouter();
     void slotToggleConsole();
@@ -74,32 +74,22 @@ private:
         qreal lon;
     };
 
-    QNetworkRequest getRequest(const QVector<wpt_t>& route_points);
-
-    QNetworkAccessManager * networkAccessManager;
-
-    QTimer * timerCloseStatusMsg;
-
-    bool synchronous = false;
-    QMutex mutex {QMutex::NonRecursive};
-
     void updateDialog();
-
-    QUrl getServiceUrl();
-
-    CRouterBRouterSetup setup;
-
-    CRouterSetup* routerSetup;
-
-    CRouterBRouterInfo * info;
-
-    CRouterBRouterToolShell * brouterShell;
-    QProcess::ProcessState brouterState;
-
     void startBRouter();
     void stopBRouter();
     void updateLocalBRouterStatus();
+    QNetworkRequest getRequest(const QVector<wpt_t>& route_points) const;
+    QUrl getServiceUrl() const;
 
+    QNetworkAccessManager * networkAccessManager;
+    QTimer * timerCloseStatusMsg;
+    bool synchronous = false;
+    QMutex mutex {QMutex::NonRecursive};
+    CRouterBRouterSetup * setup;
+    CRouterSetup * routerSetup;
+    CRouterBRouterInfo * info;
+    CRouterBRouterToolShell * brouterShell;
+    QProcess::ProcessState brouterState;
     QPointer<CProgressDialog> progress;
 };
 

@@ -20,7 +20,6 @@
 #define CROUTERBROUTERTOOLSHELL_H
 
 #include "tool/IToolShell.h"
-#include <QWidget>
 
 class CRouterBRouterToolShell : public IToolShell
 {
@@ -33,19 +32,15 @@ public:
     void stop();
     void out(const QString out);
     void execute(const QString dir, const QString command, const QStringList args);
-    QProcess::ExitStatus getExitStatus();
-    const int getExitCode();
 
 signals:
-    void processStateChanged(const QProcess::ProcessState newState);
+    void sigProcessStateChanged(const QProcess::ProcessState newState);
 
 private slots:
     void slotStateChanged(const QProcess::ProcessState newState);
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
-    QProcess::ExitStatus exitStatus;
-    int exitCode;
 };
 
 #endif //CROUTERBROUTERTOOLSHELL_H

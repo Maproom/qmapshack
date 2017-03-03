@@ -39,6 +39,7 @@ private:
     QFile * file;
 
     friend class CRouterBRouterTilesSelect;
+    friend class CRouterBRouterTilesSelectArea;
 };
 
 #endif //CROUTERBROUTERTILESSTATUS_H

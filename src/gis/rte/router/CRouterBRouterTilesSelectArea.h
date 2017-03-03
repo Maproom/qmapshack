@@ -39,13 +39,14 @@ public slots:
     void updateTiles();
 
 signals:
-    void tileClicked(const QPoint & tile);
+    void sigTileClicked(const QPoint & tile);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent * event) override;
     void mouseMoveEvent(QMouseEvent * event) override;
     void mousePressEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;
+    bool event(QEvent * event) override;
 
 private slots:
 
@@ -62,6 +63,7 @@ private:
     CRouterBRouterTilesSelect * select;
     QPoint mousePos;
     QPoint startPos;
+    Qt::MouseButtons button;
 
     QPen currentTilesPen;
     QPen outdatedTilesPen;

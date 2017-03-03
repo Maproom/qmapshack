@@ -60,7 +60,7 @@ public:
 
     void loadOnlineConfig();
     void displayProfileAsync(const QString profile);
-    void displayOnlineProfileAsync(const QString profile);
+    void displayOnlineProfileAsync(const QString profile) const;
 
     bool isLocalBRouterInstalled() const;
 
@@ -77,7 +77,7 @@ private:
     enum profileRequest_e { ProfileInstall, ProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
-    void loadOnlineProfileAsync(const QString profile, const profileRequest_e mode);
+    void loadOnlineProfileAsync(const QString profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
     mode_e modeFromString(const QString mode) const;

@@ -529,6 +529,14 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
     updateTiles();
 }
 
+void CRouterBRouterTilesSelect::cancelDownload()
+{
+    for (QNetworkReply * reply : tilesDownloadManagerReplies)
+    {
+        reply->abort();
+    }
+}
+
 void CRouterBRouterTilesSelect::updateStatus()
 {
 //    Anzahl und kummulierte Größe lokaler Kacheln (aktuell + outdated)
@@ -583,6 +591,11 @@ void CRouterBRouterTilesSelect::updateStatus()
     statusProgress->setVisible(downloading);
     statusProgress->setRange(0,sizeDownloadMax);
     statusProgress->setValue(sizeDownloaded);
+    if (downloading != isDownloading)
+    {
+        isDownloading = downloading;
+        emit sigDownloadStatusChanged(isDownloading);
+    }
 }
 
 CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile) const

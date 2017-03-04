@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>IRouterBRouterSetupWizard</class>
  <widget class="QWizard" name="IRouterBRouterSetupWizard">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -353,7 +356,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="pageLocalTiles">
+  <widget class="CRouterBRouterTilesPage" name="pageLocalTiles">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -363,18 +366,6 @@
    <attribute name="pageId">
     <string notr="true">4</string>
    </attribute>
-   <layout class="QVBoxLayout" name="verticalLayout_10">
-    <item>
-     <widget class="CRouterBRouterTilesSelect" name="widgetLocalTilesSelect" native="true">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-     </widget>
-    </item>
-   </layout>
   </widget>
   <widget class="QWizardPage" name="pageOnlineUrl">
    <property name="sizePolicy">
@@ -564,9 +555,9 @@
    <header>QtWebKitWidgets/QWebView</header>
   </customwidget>
   <customwidget>
-   <class>CRouterBRouterTilesSelect</class>
-   <extends>QWidget</extends>
-   <header>gis/rte/router/CRouterBRouterTilesSelect.h</header>
+   <class>CRouterBRouterTilesPage</class>
+   <extends>QWizardPage</extends>
+   <header>gis/rte/router/CRouterBRouterTilesPage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

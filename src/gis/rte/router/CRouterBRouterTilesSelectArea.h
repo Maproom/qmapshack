@@ -30,16 +30,22 @@ class CRouterBRouterTilesSelectArea : public QWidget
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesSelectArea(QWidget * parent, CRouterBRouterTilesSelect * select, CCanvas * canvas);
+    CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas);
     virtual ~CRouterBRouterTilesSelectArea();
 
     void paintEvent(QPaintEvent *event) override;
 
-public slots:
-    void updateTiles();
+    void setInvalidTiles(QVector<QPoint> * tiles);
+    void setOutdatedTiles(QVector<QPoint> * tiles);
+    void setCurrentTiles(QVector<QPoint> * tiles);
+    void setOutstandingTiles(QVector<QPoint> * tiles);
+    void setSelectedTiles(QVector<QPoint> * tiles);
+
+    void setTileToolTip(QString toolTip);
 
 signals:
     void sigTileClicked(const QPoint & tile);
+    void sigTileToolTipChanged(const QPoint & tile);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent * event) override;
@@ -60,10 +66,11 @@ private:
     QPolygonF tilePolygon(const QPoint & tile);
 
     CCanvas * canvas;
-    CRouterBRouterTilesSelect * select;
     QPoint mousePos;
     QPoint startPos;
     Qt::MouseButtons button;
+    QPoint currentTile;
+    QString tileToolTip;
 
     QPen currentTilesPen;
     QPen outdatedTilesPen;
@@ -75,6 +82,12 @@ private:
     QBrush selectedTilesBrush;
     QBrush outstandingTilesBrush;
     QBrush invalidTilesBrush;
+
+    QVector<QPoint> * invalidTiles;
+    QVector<QPoint> * outdatedTiles;
+    QVector<QPoint> * currentTiles;
+    QVector<QPoint> * outstandingTiles;
+    QVector<QPoint> * selectedTiles;
 };
 
 #endif //CROUTERBROUTERTILESSELECTAREA_H

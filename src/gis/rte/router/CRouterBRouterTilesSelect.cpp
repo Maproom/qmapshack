@@ -146,7 +146,7 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
          it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        if (!status->isSelected and status->isLocal and status->isRemote and status->remoteDate > status->localDate)
+        if (!status->isSelected and status->isOutdated)
         {
             changed = true;
             status->isSelected = true;
@@ -215,7 +215,7 @@ void CRouterBRouterTilesSelect::updateButtons()
     bool hasSelected(false);
     bool hasLocalSelected(false);
     bool hasUnselectedOutdated(false);
-    bool hasSelectedOutdated(false);
+    bool hasSelectedForDownload(false);
 
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
@@ -230,9 +230,9 @@ void CRouterBRouterTilesSelect::updateButtons()
             {
                 hasLocalSelected = true;
             }
-            if (status->isOutdated)
+            if (status->isOutdated or !status->isLocal)
             {
-                hasSelectedOutdated = true;
+                hasSelectedForDownload = true;
             }
         }
         else if (status->isOutdated)
@@ -244,7 +244,7 @@ void CRouterBRouterTilesSelect::updateButtons()
     pushClearSelection->setEnabled(hasSelected);
     pushDeleteSelection->setEnabled(hasLocalSelected);
     pushSelectOutdated->setEnabled(hasUnselectedOutdated);
-    pushDownload->setEnabled(hasSelectedOutdated);
+    pushDownload->setEnabled(hasSelectedForDownload);
 }
 
 void CRouterBRouterTilesSelect::initialize()
@@ -256,7 +256,6 @@ void CRouterBRouterTilesSelect::initialize()
         CRouterBRouterTilesStatus * status = it.value();
         status->isLocal = false;
         status->isRemote = false;
-        status->isSelected = false;
         status->isOutdated = false;
     }
     QDir dir = segmentsDir();
@@ -421,11 +420,12 @@ void CRouterBRouterTilesSelect::slotDownload()
 {
     bool changed(false);
 
-    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
-    if (it != tilesDownloadStatus.constEnd())
+    for (QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected and status->isRemote and status->file == nullptr)
+        if (status->isSelected and (status->isOutdated or !status->isLocal) and status->file == nullptr)
         {
             QString fileName = it.key();
 
@@ -507,7 +507,10 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                 status->file->close();
                 status->file->rename(segmentsDir().absoluteFilePath(it.key()));
                 status->isLocal = true;
-                status->localDate = QFileInfo(*status->file).created();
+                status->isOutdated = false;
+                QFileInfo info(*status->file);
+                status->localDate = info.created();
+                status->localSize = info.size();
             }
             else
             {
@@ -517,6 +520,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                 //TODO add errormessage
             }
             delete status->file;
+            status->file = nullptr;
         }
         reply->deleteLater();
     }
@@ -527,9 +531,18 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
 
 void CRouterBRouterTilesSelect::updateStatus()
 {
-    int total(0);
-    int value(0);
-    int num(0);
+//    Anzahl und kummulierte Größe lokaler Kacheln (aktuell + outdated)
+//    Anzahl und Größe der selektierten Kacheln (zum Download + lokal zum Löschen)
+
+    int numCurrent(0);
+    int sizeCurrent(0);
+    int numOutdated(0);
+    int sizeOutdated(0);
+    int numOutstanding(0);
+    int sizeDownloadMax(0);
+    int sizeOutstanding(0);
+    int sizeDownloaded(0);
+
     bool downloading(false);
 
     for (QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
@@ -540,21 +553,36 @@ void CRouterBRouterTilesSelect::updateStatus()
 
         if (status->file != nullptr and status->progressMax > 0)
         {
-            total += status->progressMax;
-            value += status->progressVal;
+            numOutstanding++;
+            sizeDownloadMax += status->progressMax;
+            sizeOutstanding += status->progressMax - status->progressVal;
+            sizeDownloaded += status->progressVal;
             downloading = true;
         }
-        else
+        else if (status->isSelected and status->isRemote and (!status->isLocal or status->isOutdated))
         {
-            total += status->remoteSize;
+            numOutstanding++;
+            sizeOutstanding += status->remoteSize;
         }
-        num++;
+        if (status->isOutdated)
+        {
+            numOutdated++;
+            sizeOutdated += status->localSize;
+        }
+        else if (status->isLocal)
+        {
+            numCurrent++;
+            sizeCurrent += status->localSize;
+        }
     }
 
-    statusLabel->setText(QString(tr("%1 files, %2 total")).arg(num).arg(formatSize(total)));
+    statusLabel->setText(QString(tr("up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)"))
+                         .arg(numCurrent).arg(formatSize(sizeCurrent))
+                         .arg(numOutdated).arg(formatSize(sizeOutdated))
+                         .arg(numOutstanding).arg(formatSize(sizeOutstanding)));
     statusProgress->setVisible(downloading);
-    statusProgress->setRange(0,total);
-    statusProgress->setValue(value);
+    statusProgress->setRange(0,sizeDownloadMax);
+    statusProgress->setValue(sizeDownloaded);
 }
 
 CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile) const
@@ -587,7 +615,7 @@ void CRouterBRouterTilesSelect::updateTiles()
         }
         else if (status->isLocal)
         {
-            if (!status->isRemote or status->remoteDate > status->localDate)
+            if (status->isOutdated)
             {
                 *outdatedTiles << tile;
             }

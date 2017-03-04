@@ -41,10 +41,14 @@ public:
 
     void setSetup(CRouterBRouterSetup * setup);
     void initialize();
+    void cancelDownload();
 
     static QString formatSize(const qint64 size);
     static QPoint tileFromFileName(const QString fileName);
     static QString fileNameFromTile(const QPoint tile);
+
+signals:
+    void sigDownloadStatusChanged(bool isDownloading);
 
 private slots:
     void slotTileClicked(const QPoint & tile);
@@ -86,6 +90,7 @@ private:
 
     QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
+    bool isDownloading { false };
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

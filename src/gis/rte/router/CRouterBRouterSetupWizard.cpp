@@ -19,6 +19,7 @@
 #include <QFileDialog>
 #include <QNetworkRequest>
 #include <QNetworkReply>
+#include <QMessageBox>
 #include "CMainWindow.h"
 #include "CRouterBRouterSetup.h"
 #include "CRouterBRouterSetupException.h"
@@ -293,6 +294,24 @@ void CRouterBRouterSetupWizard::accept()
 
 void CRouterBRouterSetupWizard::reject()
 {
+    if (!pageLocalTiles->isComplete())
+    {
+        QMessageBox msgBox;
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setText("Download of routing data is in progress.");
+        msgBox.setInformativeText("Do you want to cancel the download or continue?");
+        msgBox.setStandardButtons(QMessageBox::Cancel);
+        QPushButton *continueButton = msgBox.addButton(tr("Continue with download"), QMessageBox::NoRole);
+        msgBox.exec();
+        if (msgBox.clickedButton() == continueButton)
+        {
+            return;
+        }
+        else
+        {
+            pageLocalTiles->cancelDownload();
+        }
+    }
     QDialog::reject();
 }
 
@@ -584,12 +603,12 @@ QList<int> CRouterBRouterSetupWizard::updateProfileView(QListView * listView, QS
 
 void CRouterBRouterSetupWizard::initLocalTiles()
 {
-    widgetLocalTilesSelect->setSetup(setup);
+    pageLocalTiles->setSetup(setup);
 }
 
 void CRouterBRouterSetupWizard::beginLocalTiles()
 {
-    widgetLocalTilesSelect->initialize();
+    pageLocalTiles->beginPage();
     setOption(QWizard::HaveCustomButton1, false);
 }
 

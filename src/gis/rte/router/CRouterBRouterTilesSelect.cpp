@@ -591,11 +591,23 @@ void CRouterBRouterTilesSelect::updateStatus()
     statusProgress->setVisible(downloading);
     statusProgress->setRange(0,sizeDownloadMax);
     statusProgress->setValue(sizeDownloaded);
-    if (downloading != isDownloading)
+
+    if (this->downloading != downloading or (numOutstanding > 0) != downloadSelected)
     {
-        isDownloading = downloading;
-        emit sigDownloadStatusChanged(isDownloading);
+        this->downloading = downloading;
+        downloadSelected = numOutstanding > 0;
+        emit sigCompleteChanged();
     }
+}
+
+bool CRouterBRouterTilesSelect::isDownloading()
+{
+    return downloading;
+}
+
+bool CRouterBRouterTilesSelect::isDownloadSelected()
+{
+    return downloadSelected;
 }
 
 CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile) const

@@ -66,11 +66,6 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     routerSetup = dynamic_cast<CRouterSetup*>(parent);
 
-    progress = nullptr;
-
-    brouterShell = nullptr;
-    brouterState = QProcess::NotRunning;
-
     connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
     connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
 
@@ -235,7 +230,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     {
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
     }
-    connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+    connect(progress.data(), &CProgressDialog::rejected, reply, &QNetworkReply::abort);
 }
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)

@@ -88,8 +88,8 @@ private:
     CRouterBRouterSetup * setup;
     CRouterSetup * routerSetup;
     CRouterBRouterInfo * info;
-    CRouterBRouterToolShell * brouterShell;
-    QProcess::ProcessState brouterState;
+    CRouterBRouterToolShell * brouterShell {nullptr};
+    QProcess::ProcessState brouterState {QProcess::NotRunning};
     QPointer<CProgressDialog> progress;
 };
 

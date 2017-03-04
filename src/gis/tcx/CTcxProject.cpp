@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/tcx/CTcxProject.h"
 #include "version.h"
 
 #include <QtWidgets>
@@ -57,7 +57,7 @@ void CTcxProject::loadTcx(const QString& filename)
 void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 {
     QFile file(filename);
-    
+
     // if the file does not exist, the file name is assumed to be a name for a new project
     if (!file.exists() || QFileInfo(filename).suffix().toLower() != "tcx")
     {
@@ -93,17 +93,17 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
 
     const QDomNodeList& tcxActivities = xmlTcx.elementsByTagName("Activity");
     const QDomNodeList& tcxCourses = xmlTcx.elementsByTagName("Course");
-        
+
     if (!tcxActivities.item(0).isElement() && !tcxCourses.item(0).isElement())
     {
-        if ( xmlTcx.elementsByTagName("Workout").item(0).isElement() ) 
+        if ( xmlTcx.elementsByTagName("Workout").item(0).isElement() )
         {
             throw tr("This TCX file contains at least 1 workout, but neither an activity nor a course. "
-                "As workouts do not contain position data, they can not be imported to QMapShack.");
+                     "As workouts do not contain position data, they can not be imported to QMapShack.");
         }
         else
         {
-            throw tr("This TCX file does not contain any activity or course: %1").arg(filename); 
+            throw tr("This TCX file does not contain any activity or course: %1").arg(filename);
         }
     }
 
@@ -111,16 +111,14 @@ void CTcxProject::loadTcx(const QString &filename, CTcxProject *project)
     for (int i = 0; i < tcxActivities.count(); i++)
     {
         project->loadActivity(tcxActivities.item(i));
-
     }
 
     for (int i = 0; i < tcxCourses.count(); i++)
     {
         project->loadCourse(tcxCourses.item(i));
-
     }
-  
-  
+
+
     project->sortItems();
     project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     project->setToolTip(CGisListWks::eColumnName, project->getInfo());
@@ -171,14 +169,13 @@ void CTcxProject::loadActivity(const QDomNode& activityRootNode)
                         trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"] = CADElement.firstChild().nodeValue().toDouble();
                     }
 
-                    seg->pts.append(trkpt); // 1 TCX lap gives 1 GPX track segment 
+                    seg->pts.append(trkpt); // 1 TCX lap gives 1 GPX track segment
                 }
             }
         }
 
         CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
         trackTypes.insert(trkItem->getKey().item, eActivity); // store the track type according to its key
- 
     }
 }
 
@@ -224,10 +221,10 @@ void CTcxProject::loadCourse(const QDomNode& courseRootNode)
                 seg->pts.append(trkpt);
             }
         }
-      
+
         CGisItemTrk *trkItem = new CGisItemTrk(trk, this);
         trackTypes.insert(trkItem->getKey().item, eCourse); // store the track type according to its key
-   
+
         const QDomNodeList& tcxCoursePts = courseRootNode.toElement().elementsByTagName("CoursePoint");
         for (int i = 0; i < tcxCoursePts.count(); i++) // browse course points
         {
@@ -276,13 +273,13 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
         if (!createdByQMS)
         {
             int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("File exists ...")
-                , tr("The file exists and it has not been created by QMapShack. "
-                "If you press 'yes' all data in this file will be lost. "
-                "Even if this file contains data and has been loaded by QMapShack, "
-                "QMapShack might not be able to load and store all elements of this file.  "
-                "Those elements will be lost. I recommend to use another file. "
-                "<b>Do you really want to overwrite the file?</b>")
-                , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+                                           , tr("The file exists and it has not been created by QMapShack. "
+                                                "If you press 'yes' all data in this file will be lost. "
+                                                "Even if this file contains data and has been loaded by QMapShack, "
+                                                "QMapShack might not be able to load and store all elements of this file.  "
+                                                "Those elements will be lost. I recommend to use another file. "
+                                                "<b>Do you really want to overwrite the file?</b>")
+                                           , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if (res == QMessageBox::No)
             {
                 project.umount();
@@ -315,11 +312,11 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             if (!trkItem->isTrkTimeValid())
             {
                 int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Track with invalid timestamps...")
-                    , tr("The track <b>%1</b> you have selected contains trackpoints with "
-                    "invalid timestamps. "
-                    "Device might not accept the generated TCX course file if left as is. "
-                    "<b>Do you want to apply a filter with constant speed (10 m/s) and continue?</b>").arg(trkItem->getName())
-                    , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+                                               , tr("The track <b>%1</b> you have selected contains trackpoints with "
+                                                    "invalid timestamps. "
+                                                    "Device might not accept the generated TCX course file if left as is. "
+                                                    "<b>Do you want to apply a filter with constant speed (10 m/s) and continue?</b>").arg(trkItem->getName())
+                                               , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
                 if (res == QMessageBox::No)
                 {
                     project.blockUpdateItems(false);
@@ -336,7 +333,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             QMessageBox courseOrActivityMsgBox;
             courseOrActivityMsgBox.setWindowTitle(tr("Activity or course ?"));
             courseOrActivityMsgBox.setText(tr("QMapShack does not know how track <b>%1</b> should be saved. "
-                "<b>Do you want to save it as a course or as an activity ?</b>").arg(trkItem->getName()));
+                                              "<b>Do you want to save it as a course or as an activity ?</b>").arg(trkItem->getName()));
             QAbstractButton* pButtonCourse = courseOrActivityMsgBox.addButton(tr("Course"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonActivity = courseOrActivityMsgBox.addButton(tr("Activity"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonCancel = courseOrActivityMsgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);
@@ -396,7 +393,7 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
     }
     project.blockUpdateItems(false);
 
- 
+
     QDomNode activitiesNode = doc.createElement("Activities");
     if (activityTrks.size() != 0)
     {

@@ -48,6 +48,13 @@ public:
 
     static void loadTcx(const QString &filename, CTcxProject *project);
 
+private:
+    void loadTcx(const QString& filename);
+    void loadActivity(const QDomNode& activityRootNode);
+    void loadCourse(const QDomNode& courseRootNode);
+
+    static void saveAuthor(QDomNode& nodeToAttachAuthor);
+
     enum trackType_e
     {
         eCourse
@@ -55,13 +62,6 @@ public:
     };
 
     QMap<QString, qint8> trackTypes; //key = itemKey ; value = eCourse or eActivity
-
- private:
-    void loadTcx(const QString& filename);
-    void loadActivity(const QDomNode& activityRootNode);
-    void loadCourse(const QDomNode& courseRootNode);
-     
-    static void saveAuthor(QDomNode& nodeToAttachAuthor);
 };
 
 #endif //CTCXPROJECT_H

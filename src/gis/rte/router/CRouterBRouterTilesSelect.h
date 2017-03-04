@@ -47,8 +47,11 @@ public:
     static QPoint tileFromFileName(const QString fileName);
     static QString fileNameFromTile(const QPoint tile);
 
+    bool isDownloading();
+    bool isDownloadSelected();
+
 signals:
-    void sigDownloadStatusChanged(bool isDownloading);
+    void sigCompleteChanged();
 
 private slots:
     void slotTileClicked(const QPoint & tile);
@@ -90,7 +93,8 @@ private:
 
     QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
-    bool isDownloading { false };
+    bool downloading { false };
+    bool downloadSelected { false };
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

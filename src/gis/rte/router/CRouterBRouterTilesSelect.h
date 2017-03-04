@@ -41,16 +41,10 @@ public:
 
     void setSetup(CRouterBRouterSetup * setup);
     void initialize();
-    QString getToolTip(QPoint tile);
 
     static QString formatSize(const qint64 size);
     static QPoint tileFromFileName(const QString fileName);
     static QString fileNameFromTile(const QPoint tile);
-
-public slots:
-    void slotLoadOnlineTilesRequestFinished();
-    void slotDownloadFinished(QNetworkReply* reply);
-    void slotDownloadReadReady();
 
 private slots:
     void slotTileClicked(const QPoint & tile);
@@ -59,6 +53,9 @@ private slots:
     void slotDeleteSelected();
     void slotSelectOutdated();
     void slotDownload();
+    void slotLoadOnlineTilesRequestFinished();
+    void slotDownloadFinished(QNetworkReply* reply);
+    void slotDownloadReadReady();
 
 private:
     QDir segmentsDir() const;

@@ -18,13 +18,7 @@
 
 #include "CRouterBRouterTilesStatus.h"
 
-CRouterBRouterTilesStatus::CRouterBRouterTilesStatus(QObject *parent)
-    : QObject(parent),
-      isLocal(false),
-      isRemote(false),
-      isSelected(false),
-      isOutdated(false),
-      file(nullptr)
+CRouterBRouterTilesStatus::CRouterBRouterTilesStatus(QObject *parent) : QObject(parent)
 {
 }
 

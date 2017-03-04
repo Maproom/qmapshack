@@ -83,11 +83,11 @@ private:
     QBrush outstandingTilesBrush;
     QBrush invalidTilesBrush;
 
-    QVector<QPoint> * invalidTiles;
-    QVector<QPoint> * outdatedTiles;
-    QVector<QPoint> * currentTiles;
-    QVector<QPoint> * outstandingTiles;
-    QVector<QPoint> * selectedTiles;
+    QVector<QPoint> * invalidTiles { new QVector<QPoint> };
+    QVector<QPoint> * outdatedTiles { new QVector<QPoint> };
+    QVector<QPoint> * currentTiles { new QVector<QPoint> };
+    QVector<QPoint> * outstandingTiles { new QVector<QPoint> };
+    QVector<QPoint> * selectedTiles { new QVector<QPoint> };
 };
 
 #endif //CROUTERBROUTERTILESSELECTAREA_H

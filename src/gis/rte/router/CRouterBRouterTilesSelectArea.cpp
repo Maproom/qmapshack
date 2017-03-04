@@ -26,12 +26,6 @@
 CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas)
     : QWidget(parent)
 {
-    invalidTiles = new QVector<QPoint>;
-    outdatedTiles = new QVector<QPoint>;
-    currentTiles = new QVector<QPoint>;
-    outstandingTiles = new QVector<QPoint>;
-    selectedTiles = new QVector<QPoint>;
-
     outdatedTilesPen.setColor(Qt::gray);
     outdatedTilesPen.setWidth(1);
     outdatedTilesBrush.setColor(Qt::gray);

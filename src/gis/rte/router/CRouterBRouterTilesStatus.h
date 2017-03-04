@@ -40,11 +40,11 @@ private:
     qint64 localSize;
     QDateTime remoteDate;
     QDateTime localDate;
-    bool isLocal;
-    bool isRemote;
-    bool isSelected;
-    bool isOutdated;
-    QFile * file;
+    bool isLocal {false};
+    bool isRemote {false};
+    bool isSelected {false};
+    bool isOutdated {false};
+    QFile * file {nullptr};
 
     friend class CRouterBRouterTilesSelect;
     friend class CRouterBRouterTilesSelectArea;

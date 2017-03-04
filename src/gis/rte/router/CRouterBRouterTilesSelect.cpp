@@ -33,6 +33,15 @@
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
 {
+    for (int x = -180; x < 180; x += 5)
+    {
+        for (int y = -85; y < 85; y += 5)
+        {
+            CRouterBRouterTilesStatus * status = new CRouterBRouterTilesStatus(this);
+            tilesDownloadStatus.insert(fileNameFromTile(QPoint(x,y)),status);
+        }
+    }
+
     outerLayout = new QVBoxLayout(this);
     outerLayout->setContentsMargins(0,0,0,0);
     widgetSelect = new QWidget(this);
@@ -63,7 +72,7 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
 
     canvas->loadConfig(view);
 
-    selectArea = new CRouterBRouterTilesSelectArea(widgetSelect,this,canvas);
+    selectArea = new CRouterBRouterTilesSelectArea(widgetSelect,canvas);
 
     QLayout * selectLayout = new CRouterBRouterTilesSelectLayout(widgetSelect);
     selectLayout->addWidget(canvas);
@@ -105,13 +114,9 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     connect(pushSelectOutdated, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotSelectOutdated);
     connect(pushDownload, &QPushButton::clicked, this, &CRouterBRouterTilesSelect::slotDownload);
     connect(selectArea, &CRouterBRouterTilesSelectArea::sigTileClicked, this, &CRouterBRouterTilesSelect::slotTileClicked);
-    connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateButtons);
-    connect(this, &CRouterBRouterTilesSelect::tilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
-    connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, selectArea, &CRouterBRouterTilesSelectArea::updateTiles);
+    connect(selectArea, &CRouterBRouterTilesSelectArea::sigTileToolTipChanged, this, &CRouterBRouterTilesSelect::slotTileToolTipChanged);
     connect(tilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished);
     connect(tilesDownloadManager, &QNetworkAccessManager::finished, this, &CRouterBRouterTilesSelect::slotDownloadFinished);
-    connect(this, &CRouterBRouterTilesSelect::tilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
-    connect(this, &CRouterBRouterTilesSelect::selectedTilesChanged, this, &CRouterBRouterTilesSelect::slotUpdateStatus);
 }
 
 CRouterBRouterTilesSelect::~CRouterBRouterTilesSelect()
@@ -123,144 +128,158 @@ void CRouterBRouterTilesSelect::setSetup(CRouterBRouterSetup * setup)
     this->setup = setup;
 }
 
-void CRouterBRouterTilesSelect::initialize()
-{
-    initializeTiles();
-    slotClearSelection();
-}
-
 void CRouterBRouterTilesSelect::slotTileClicked(const QPoint & tile)
 {
-    const tile_s data = getOnlineTileData(tile);
-    if (data.tile != noTile)
-    {
-        if(selectedTiles.contains(tile))
-        {
-            deselectTile(tile);
-        }
-        else
-        {
-            selectTile(tile);
-        }
-        emit selectedTilesChanged();
-    }
+    CRouterBRouterTilesStatus * status = getTileStatus(tile);
+    status->isSelected = !status->isSelected;
+    updateButtons();
+    updateStatus();
+    updateTiles();
 }
 
 void CRouterBRouterTilesSelect::slotSelectOutdated()
 {
     bool changed(false);
-    for (QPoint tile : outdatedTiles)
+
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
     {
-        if (!selectedTiles.contains(tile))
+        CRouterBRouterTilesStatus * status = it.value();
+        if (!status->isSelected and status->isLocal and status->isRemote and status->remoteDate > status->localDate)
         {
-            selectTile(tile);
             changed = true;
+            status->isSelected = true;
         }
     }
     if (changed)
     {
-        emit selectedTilesChanged();
+        updateButtons();
+        updateStatus();
+        updateTiles();
     }
 }
 
 void CRouterBRouterTilesSelect::slotDeleteSelected()
 {
-    for (QPoint tile : selectedTiles)
+    bool changed(false);
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
     {
-        deleteTile(tile);
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected)
+        {
+            if (status->isLocal)
+            {
+                QFile segment(segmentsDir().absoluteFilePath(it.key()));
+                segment.remove();
+                status->isLocal = false;
+            }
+            status->isSelected = false;
+            changed = true;
+        }
     }
-    slotClearSelection();
+    if (changed)
+    {
+        updateButtons();
+        updateStatus();
+        updateTiles();
+    }
 }
 
 void CRouterBRouterTilesSelect::slotClearSelection()
 {
     bool changed(false);
-    const QVector<QPoint> tilesToDeselect(selectedTiles);
-    for (QPoint tile : tilesToDeselect)
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
     {
-        deselectTile(tile);
-        changed = true;
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected)
+        {
+            changed = true;
+            status->isSelected = false;
+        }
     }
     if (changed)
     {
-        emit selectedTilesChanged();
+        updateButtons();
+        updateStatus();
+        updateTiles();
     }
 }
 
-void CRouterBRouterTilesSelect::slotUpdateButtons()
+void CRouterBRouterTilesSelect::updateButtons()
 {
-    pushClearSelection->setEnabled(!selectedTiles.isEmpty());
-    bool enabled = false;
-    for (QPoint tile : selectedTiles)
-    {
-        if (outdatedTiles.contains(tile) or currentTiles.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushDeleteSelection->setEnabled(enabled);
-    enabled = false;
-    for (QPoint tile : outdatedTiles)
-    {
-        if (!selectedTiles.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushSelectOutdated->setEnabled(enabled);
-    enabled = false;
-    for (QPoint tile : selectedTiles)
-    {
-        if (!currentTiles.contains(tile))
-        {
-            enabled = true;
-            break;
-        }
-    }
-    pushDownload->setEnabled(enabled);
-}
+    bool hasSelected(false);
+    bool hasLocalSelected(false);
+    bool hasUnselectedOutdated(false);
+    bool hasSelectedOutdated(false);
 
-void CRouterBRouterTilesSelect::selectTile(const QPoint tile)
-{
-    selectedTiles << tile;
-    QString fileName = fileNameFromTile(tile);
-    if (!tilesDownloadStatus.contains(fileName))
-    {
-        CRouterBRouterTilesStatus * status = new CRouterBRouterTilesStatus(this);
-        const tile_s remote = getOnlineTileData(tile);
-        status->size = remote.size;
-        status->file = nullptr;
-        status->max = 0;
-        status->val = 0;
-        tilesDownloadStatus.insert(fileName,status);
-    }
-}
-
-void CRouterBRouterTilesSelect::deselectTile(QPoint tile)
-{
-    selectedTiles.remove(selectedTiles.indexOf(tile));
-    const QString fileName = fileNameFromTile(tile);
-    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-    if (it != tilesDownloadStatus.constEnd())
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        tilesDownloadStatus.remove(fileName);
-        delete status;
+        if (status->isSelected)
+        {
+            hasSelected = true;
+
+            if (status->isLocal)
+            {
+                hasLocalSelected = true;
+            }
+            if (status->isOutdated)
+            {
+                hasSelectedOutdated = true;
+            }
+        }
+        else if (status->isOutdated)
+        {
+            hasUnselectedOutdated = true;
+        }
     }
+
+    pushClearSelection->setEnabled(hasSelected);
+    pushDeleteSelection->setEnabled(hasLocalSelected);
+    pushSelectOutdated->setEnabled(hasUnselectedOutdated);
+    pushDownload->setEnabled(hasSelectedOutdated);
 }
 
-void CRouterBRouterTilesSelect::initializeTiles()
+void CRouterBRouterTilesSelect::initialize()
 {
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
+    {
+        CRouterBRouterTilesStatus * status = it.value();
+        status->isLocal = false;
+        status->isRemote = false;
+        status->isSelected = false;
+        status->isOutdated = false;
+    }
+    QDir dir = segmentsDir();
+    QStringList segments = dir.entryList();
+    QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
+    for (QString segment : segments)
+    {
+        if (rxTileName.indexIn(segment) > -1)
+        {
+            QPoint tile = tileFromFileName(segment);
+            CRouterBRouterTilesStatus * status = getTileStatus(tile);
+
+            QFileInfo info = QFileInfo(dir,segment);
+            status->localDate = info.created();
+            status->localSize = info.size();
+            status->isLocal = true;
+        }
+    }
     tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
-    readTiles();
 }
 
 void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished()
 {
-    onlineTiles.clear();
-    QVector<QPoint> onlineTilesTmp;
     QWebElement htmlElement = tilesWebPage->mainFrame()->documentElement();
     QWebElementCollection anchorElements = htmlElement.findAll("table tr td a");
 
@@ -286,62 +305,59 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished()
                 QWebElement dateElement = anchorElement.parent().nextSibling();
                 QWebElement sizeElement = dateElement.nextSibling();
 
-                tile_s newTile;
-                newTile.tile = tileFromFileName(tileName);
+                QPoint tile = tileFromFileName(tileName);
 
-                QString date = dateElement.toPlainText();
-                if (rxDate.indexIn((date)) > -1)
+                CRouterBRouterTilesStatus * status = getTileStatus(tile);
+                if (status != nullptr)
                 {
-                    int day = rxDate.cap(1).toInt();
-                    QString monthStr = rxDate.cap(2);
-                    int month = monthStr == "Jan" ? 1 :
-                                monthStr == "Feb" ? 2 :
-                                monthStr == "Mar" ? 3 :
-                                monthStr == "Apr" ? 4 :
-                                monthStr == "May" ? 5 :
-                                monthStr == "Jun" ? 6 :
-                                monthStr == "Jul" ? 7 :
-                                monthStr == "Aug" ? 8 :
-                                monthStr == "Sep" ? 9 :
-                                monthStr == "Oct" ? 10 :
-                                monthStr == "Nov" ? 11 :
-                                                    12;
-                    int year = rxDate.cap(3).toInt();
-                    int hour = rxDate.cap(4).toInt();
-                    int min  = rxDate.cap(5).toInt();
+                    status->isRemote = true;
 
-                    newTile.date = QDateTime(QDate(year,month,day),QTime(hour,min,0));
-                }
+                    QString date = dateElement.toPlainText();
+                    if (rxDate.indexIn((date)) > -1)
+                    {
+                        int day = rxDate.cap(1).toInt();
+                        QString monthStr = rxDate.cap(2);
+                        int month = monthStr == "Jan" ? 1 :
+                                    monthStr == "Feb" ? 2 :
+                                    monthStr == "Mar" ? 3 :
+                                    monthStr == "Apr" ? 4 :
+                                    monthStr == "May" ? 5 :
+                                    monthStr == "Jun" ? 6 :
+                                    monthStr == "Jul" ? 7 :
+                                    monthStr == "Aug" ? 8 :
+                                    monthStr == "Sep" ? 9 :
+                                    monthStr == "Oct" ? 10 :
+                                    monthStr == "Nov" ? 11 :
+                                                        12;
+                        int year = rxDate.cap(3).toInt();
+                        int hour = rxDate.cap(4).toInt();
+                        int min  = rxDate.cap(5).toInt();
 
-                QString size = sizeElement.toPlainText();
-                if (rxSize.indexIn(size) > -1)
-                {
-                    newTile.size = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
-                                                              rxSize.cap(2) == "G" ? 1073741824 :
-                                                              rxSize.cap(2) == "K" ? 1024 :
-                                                                                     1);
+                        status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
+                    }
+
+                    QString size = sizeElement.toPlainText();
+                    if (rxSize.indexIn(size) > -1)
+                    {
+                        status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
+                                                                  rxSize.cap(2) == "G" ? 1073741824 :
+                                                                  rxSize.cap(2) == "K" ? 1024 :
+                                                                                         1);
+                    }
+                    if (status->isLocal and status->remoteDate > status->localDate)
+                    {
+                        status->isOutdated = true;
+                    }
                 }
-                onlineTiles << newTile;
-                onlineTilesTmp << newTile.tile;
             }
         }
     }
-    invalidTiles.clear();
-    for (int x = -180; x < 180; x += 5)
-    {
-        for (int y = -85; y < 85; y += 5)
-        {
-            QPoint tmp(x,y);
-            if (!onlineTilesTmp.contains(tmp))
-            {
-                invalidTiles << tmp;
-            }
-        }
-    }
-    readTiles();
+    updateStatus();
+    updateButtons();
+    updateTiles();
 }
 
-const QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
+QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
 {
     if (size >= 2147483648)
     {
@@ -373,7 +389,7 @@ const QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
     }
 }
 
-QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName) const
+QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName)
 {
     // 'E10_N20.rd5'
     QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
@@ -388,7 +404,7 @@ QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName) const
     }
 }
 
-QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile) const
+QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile)
 {
     return QString("%1%2_%3%4.rd5").arg(tile.x()<0 ? "W" : "E")
                                    .arg(abs(tile.x()))
@@ -396,88 +412,57 @@ QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile) const
                                    .arg(abs(tile.y()));
 }
 
-QString CRouterBRouterTilesSelect::absoluteFileNameFromTile(const QPoint tile) const
-{
-    return segmentsDir().absoluteFilePath(fileNameFromTile(tile));
-}
-
 QDir CRouterBRouterTilesSelect::segmentsDir() const
 {
     return QDir(QDir(setup->localDir).absoluteFilePath(setup->localSegmentsDir));
 }
 
-CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getOnlineTileData(const QPoint tile) const
-{
-    for (tile_s tileData : onlineTiles)
-    {
-        if (tileData.tile == tile)
-        {
-            return tileData;
-        }
-    }
-    return noTileData;
-}
-
-CRouterBRouterTilesSelect::tile_s CRouterBRouterTilesSelect::getLocalTileData(const QPoint tile) const
-{
-    QFileInfo info(absoluteFileNameFromTile(tile));
-    if (info.exists())
-    {
-        tile_s tileData = { tile, info.created(), info.size() };
-        return tileData;
-    }
-    return noTileData;
-}
-
 void CRouterBRouterTilesSelect::slotDownload()
 {
     bool changed(false);
-    const QVector<QPoint> tilesToDownload(selectedTiles);
-    for (const QPoint tile : tilesToDownload)
+
+    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
+    if (it != tilesDownloadStatus.constEnd())
     {
-        if (!currentTiles.contains(tile))
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected and status->isRemote and status->file == nullptr)
         {
-            const QString fileName = fileNameFromTile(tile);
-            QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-            if (it != tilesDownloadStatus.constEnd())
+            QString fileName = it.key();
+
+            const QDir dir = segmentsDir();
+            if (!dir.exists())
             {
-                CRouterBRouterTilesStatus * status = it.value();
-                if (status->file == nullptr)
-                {
-                    const QDir dir = segmentsDir();
-                    if (!dir.exists())
-                    {
-                        QDir(setup->localDir).mkpath(setup->localSegmentsDir);
-                    }
-
-                    status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
-                    status->file->open(QIODevice::WriteOnly);
-
-                    const QString tileUrl = setup->segmentsUrl + fileName;
-                    const QUrl url(tileUrl);
-
-                    QNetworkRequest request;
-                    request.setUrl(url);
-
-                    QNetworkReply* reply = tilesDownloadManager->get(request);
-                    reply->setProperty("tile", fileName);
-
-                    connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
-
-                    tilesDownloadManagerReplies << reply;
-                    outstandingTiles << tile;
-                    selectedTiles.remove(selectedTiles.indexOf(tile));
-
-                    connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
-
-                    changed = true;
-                }
+                QDir(setup->localDir).mkpath(setup->localSegmentsDir);
             }
+
+            status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
+            status->file->open(QIODevice::WriteOnly);
+
+            const QString tileUrl = setup->segmentsUrl + fileName;
+            const QUrl url(tileUrl);
+
+            QNetworkRequest request;
+            request.setUrl(url);
+
+            QNetworkReply* reply = tilesDownloadManager->get(request);
+            reply->setProperty("tile", fileName);
+
+            connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
+
+            tilesDownloadManagerReplies << reply;
+
+            connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
+
+            status->isSelected = false;
+
+            changed = true;
         }
     }
     if (changed)
     {
-        emit selectedTilesChanged();
+        updateButtons();
+        updateStatus();
+        updateTiles();
     }
 }
 
@@ -499,7 +484,7 @@ void CRouterBRouterTilesSelect::slotDownloadReadReady()
             }
         }
     }
-    slotUpdateStatus();
+    updateStatus();
 }
 
 void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
@@ -510,13 +495,6 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
     }
 
     QString fileName = reply->property("tile").toString();
-    QPoint tile = tileFromFileName(fileName);
-
-    if (outstandingTiles.contains(tile))
-    {
-        outstandingTiles.remove(outstandingTiles.indexOf(tile));
-    }
-
     QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
     if (it != tilesDownloadStatus.constEnd())
     {
@@ -527,72 +505,27 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
             {
                 status->file->write(reply->readAll());
                 status->file->close();
-                status->file->rename(absoluteFileNameFromTile(tile));
+                status->file->rename(segmentsDir().absoluteFilePath(it.key()));
+                status->isLocal = true;
+                status->localDate = QFileInfo(*status->file).created();
             }
             else
             {
                 status->file->close();
                 status->file->remove();
+                status->isLocal = false;
                 //TODO add errormessage
             }
             delete status->file;
         }
-        tilesDownloadStatus.remove(fileName);
-        delete status;
         reply->deleteLater();
     }
-    readTiles();
+    updateButtons();
+    updateStatus();
+    updateTiles();
 }
 
-void CRouterBRouterTilesSelect::deleteTile(const QPoint tile)
-{
-    QFile segment(absoluteFileNameFromTile(tile));
-    segment.remove();
-    readTiles();
-}
-
-void CRouterBRouterTilesSelect::readTiles()
-{
-    outdatedTiles.clear();
-    currentTiles.clear();
-
-    QDir dir = segmentsDir();
-    QStringList segments = dir.entryList();
-    QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
-    for (QString segment : segments)
-    {
-        if (rxTileName.indexIn(segment) > -1)
-        {
-            QPoint tile = tileFromFileName(segment);
-            if (onlineTiles.isEmpty())
-            {
-                outdatedTiles << tile;
-            }
-            else
-            {
-                for (tile_s online : onlineTiles)
-                {
-                    if (online.tile == tile)
-                    {
-                        QFileInfo info = QFileInfo(dir,segment);
-                        if (info.created() > online.date)
-                        {
-                            currentTiles << tile;
-                        }
-                        else
-                        {
-                            outdatedTiles << tile;
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    }
-    emit tilesChanged();
-}
-
-void CRouterBRouterTilesSelect::slotUpdateStatus()
+void CRouterBRouterTilesSelect::updateStatus()
 {
     int total(0);
     int value(0);
@@ -605,15 +538,15 @@ void CRouterBRouterTilesSelect::slotUpdateStatus()
     {
         const CRouterBRouterTilesStatus * status = it.value();
 
-        if (status->max > 0)
+        if (status->file != nullptr and status->progressMax > 0)
         {
-            total += status->max;
-            value += status->val;
+            total += status->progressMax;
+            value += status->progressVal;
             downloading = true;
         }
         else
         {
-            total += status->size;
+            total += status->remoteSize;
         }
         num++;
     }
@@ -622,4 +555,98 @@ void CRouterBRouterTilesSelect::slotUpdateStatus()
     statusProgress->setVisible(downloading);
     statusProgress->setRange(0,total);
     statusProgress->setValue(value);
+}
+
+CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile) const
+{
+    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileNameFromTile(tile));
+    if (it != tilesDownloadStatus.constEnd())
+    {
+        return it.value();
+    }
+    return nullptr;
+}
+
+void CRouterBRouterTilesSelect::updateTiles()
+{
+    QVector<QPoint> * invalidTiles = new QVector<QPoint>;
+    QVector<QPoint> * outdatedTiles = new QVector<QPoint>;
+    QVector<QPoint> * currentTiles = new QVector<QPoint>;
+    QVector<QPoint> * outstandingTiles = new QVector<QPoint>;
+    QVector<QPoint> * selectedTiles = new QVector<QPoint>;
+
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         it++)
+    {
+        QPoint tile = tileFromFileName(it.key());
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected)
+        {
+            *selectedTiles << tile;
+        }
+        else if (status->isLocal)
+        {
+            if (!status->isRemote or status->remoteDate > status->localDate)
+            {
+                *outdatedTiles << tile;
+            }
+            else
+            {
+                *currentTiles << tile;
+            }
+        }
+        else if (!status->isRemote)
+        {
+            *invalidTiles << tile;
+        }
+        if (status->file != nullptr)
+        {
+            *outstandingTiles << tile;
+        }
+    }
+
+    selectArea->setInvalidTiles(invalidTiles);
+    selectArea->setOutdatedTiles(outdatedTiles);
+    selectArea->setCurrentTiles(currentTiles);
+    selectArea->setOutstandingTiles(outstandingTiles);
+    selectArea->setSelectedTiles(selectedTiles);
+
+    selectArea->update();
+}
+
+void CRouterBRouterTilesSelect::slotTileToolTipChanged(const QPoint & tile)
+{
+    CRouterBRouterTilesStatus * status = getTileStatus(tile);
+
+    if (status->file != nullptr)
+    {
+        selectArea->setTileToolTip(QString(tr("being downloaded (%1 of %2)"))
+                                   .arg(formatSize(status->progressVal))
+                                   .arg(formatSize(status->progressMax)));
+    }
+    else if (status->isOutdated)
+    {
+        selectArea->setTileToolTip(QString(tr("local data outdated (%1, %2 - remote %3, %4)"))
+                                   .arg(formatSize(status->localSize))
+                                   .arg(status->localDate.toString(Qt::DefaultLocaleShortDate))
+                                   .arg(formatSize(status->remoteSize))
+                                   .arg(status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+    }
+    else if (status->isLocal)
+    {
+        selectArea->setTileToolTip(QString(tr("local data up to date (%1, %2)"))
+                                   .arg(formatSize(status->localSize))
+                                   .arg(status->localDate.toString(Qt::DefaultLocaleShortDate)));
+    }
+    else if (status->isRemote)
+    {
+        selectArea->setTileToolTip(QString(tr("no local data, online available (%1, %2)"))
+                                   .arg(formatSize(status->remoteSize))
+                                   .arg(status->remoteDate.toString(Qt::DefaultLocaleShortDate)));
+    }
+    else
+    {
+        selectArea->setTileToolTip(tr("no routing-data available"));
+    }
 }

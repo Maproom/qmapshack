@@ -41,10 +41,11 @@ public:
 
     void setSetup(CRouterBRouterSetup * setup);
     void initialize();
+    QString getToolTip(QPoint tile);
 
-signals:
-    void tilesChanged();
-    void selectedTilesChanged();
+    static QString formatSize(const qint64 size);
+    static QPoint tileFromFileName(const QString fileName);
+    static QString fileNameFromTile(const QPoint tile);
 
 public slots:
     void slotLoadOnlineTilesRequestFinished();
@@ -53,34 +54,19 @@ public slots:
 
 private slots:
     void slotTileClicked(const QPoint & tile);
-    void slotUpdateButtons();
+    void slotTileToolTipChanged(const QPoint & tile);
     void slotClearSelection();
     void slotDeleteSelected();
     void slotSelectOutdated();
     void slotDownload();
-    void slotUpdateStatus();
 
 private:
-    struct tile_s { QPoint tile; QDateTime date; qint64 size; };
-
-    void initializeTiles();
-    void selectTile(const QPoint tile);
-    void deselectTile(const QPoint tile);
-    void deleteTile(const QPoint tile);
-
-    QPoint tileFromFileName(const QString fileName) const;
-    QString fileNameFromTile(const QPoint tile) const;
-    QString absoluteFileNameFromTile(QPoint tile) const;
-
-    tile_s getOnlineTileData(const QPoint tile) const;
-    tile_s getLocalTileData(const QPoint tile) const;
-
     QDir segmentsDir() const;
-    void readTiles();
-    const QString formatSize(const qint64 size);
+    void updateStatus();
+    void updateButtons();
+    void updateTiles();
 
-    const QPoint noTile = QPoint(INT_MIN,INT_MIN);
-    const tile_s noTileData = { noTile, QDateTime::fromMSecsSinceEpoch(0), INT_MIN };
+    CRouterBRouterTilesStatus * getTileStatus(QPoint tile) const;
 
     CRouterBRouterSetup * setup;
 
@@ -96,14 +82,6 @@ private:
 
     CRouterBRouterTilesSelectArea * selectArea;
 
-    QVector<tile_s> onlineTiles;
-
-    QVector<QPoint> invalidTiles;
-    QVector<QPoint> outdatedTiles;
-    QVector<QPoint> currentTiles;
-    QVector<QPoint> outstandingTiles;
-    QVector<QPoint> selectedTiles;
-
     QWebPage * tilesWebPage;
 
     QNetworkAccessManager * tilesDownloadManager;
@@ -111,7 +89,6 @@ private:
 
     QHash<QString,CRouterBRouterTilesStatus*> tilesDownloadStatus;
 
-    friend class CRouterBRouterTilesSelectArea;
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

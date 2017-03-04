@@ -21,6 +21,7 @@
 
 #include <QObject>
 #include <QFile>
+#include <QDateTime>
 
 class CRouterBRouterTilesStatus : public QObject
 {
@@ -33,9 +34,16 @@ public slots:
     void updateProgress(qint64 received, qint64 total);
 
 private:
-    qint64 max;
-    qint64 val;
-    qint64 size;
+    qint64 progressMax;
+    qint64 progressVal;
+    qint64 remoteSize;
+    qint64 localSize;
+    QDateTime remoteDate;
+    QDateTime localDate;
+    bool isLocal;
+    bool isRemote;
+    bool isSelected;
+    bool isOutdated;
     QFile * file;
 
     friend class CRouterBRouterTilesSelect;

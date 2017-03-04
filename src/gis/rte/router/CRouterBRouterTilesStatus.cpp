@@ -20,9 +20,10 @@
 
 CRouterBRouterTilesStatus::CRouterBRouterTilesStatus(QObject *parent)
     : QObject(parent),
-      max(0),
-      val(0),
-      size(0),
+      isLocal(false),
+      isRemote(false),
+      isSelected(false),
+      isOutdated(false),
       file(nullptr)
 {
 }
@@ -33,6 +34,6 @@ CRouterBRouterTilesStatus::~CRouterBRouterTilesStatus()
 
 void CRouterBRouterTilesStatus::updateProgress(qint64 received, qint64 total)
 {
-    max = total;
-    val = received;
+    progressMax = total;
+    progressVal = received;
 }

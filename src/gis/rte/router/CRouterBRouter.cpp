@@ -144,8 +144,9 @@ void CRouterBRouter::slotCloseStatusMsg()
 
 QString CRouterBRouter::getOptions()
 {
-    const QString str;
-    return str;
+    return QString(tr("profile: %1, alternative: %2")
+                   .arg(comboProfile->currentData().toString())
+                   .arg(comboAlternative->currentData().toString()));
 }
 
 bool CRouterBRouter::hasFastRouting()

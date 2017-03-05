@@ -35,11 +35,11 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
-    void setInvalidTiles(QVector<QPoint> * tiles);
-    void setOutdatedTiles(QVector<QPoint> * tiles);
-    void setCurrentTiles(QVector<QPoint> * tiles);
-    void setOutstandingTiles(QVector<QPoint> * tiles);
-    void setSelectedTiles(QVector<QPoint> * tiles);
+    void setInvalidTiles(const QVector<QPoint> & tiles);
+    void setOutdatedTiles(const QVector<QPoint> & tiles);
+    void setCurrentTiles(const QVector<QPoint> & tiles);
+    void setOutstandingTiles(const QVector<QPoint> & tiles);
+    void setSelectedTiles(const QVector<QPoint> & tiles);
 
     void setTileToolTip(QString toolTip);
 
@@ -83,11 +83,11 @@ private:
     QBrush outstandingTilesBrush;
     QBrush invalidTilesBrush;
 
-    QVector<QPoint> * invalidTiles { new QVector<QPoint> };
-    QVector<QPoint> * outdatedTiles { new QVector<QPoint> };
-    QVector<QPoint> * currentTiles { new QVector<QPoint> };
-    QVector<QPoint> * outstandingTiles { new QVector<QPoint> };
-    QVector<QPoint> * selectedTiles { new QVector<QPoint> };
+    QVector<QPoint> invalidTiles;
+    QVector<QPoint> outdatedTiles;
+    QVector<QPoint> currentTiles;
+    QVector<QPoint> outstandingTiles;
+    QVector<QPoint> selectedTiles;
 };
 
 #endif //CROUTERBROUTERTILESSELECTAREA_H

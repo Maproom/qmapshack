@@ -39,6 +39,7 @@ public:
 private slots:
     void slotCopy() const;
     void slotRoute() const;
+    void slotSymWpt() const;
     void slotCombine() const;
     void slotDelete() const;
 

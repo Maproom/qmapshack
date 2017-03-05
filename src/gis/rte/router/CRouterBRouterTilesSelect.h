@@ -60,7 +60,7 @@ private slots:
     void slotDeleteSelected();
     void slotSelectOutdated();
     void slotDownload();
-    void slotLoadOnlineTilesRequestFinished();
+    void slotLoadOnlineTilesRequestFinished(bool ok);
     void slotDownloadFinished(QNetworkReply* reply);
     void slotDownloadReadReady();
 
@@ -78,6 +78,7 @@ private:
     QWidget * widgetSelect;
     QLabel * statusLabel;
     QProgressBar * statusProgress;
+    QLabel * errorLabel;
 
     QPushButton * pushSelectOutdated;
     QPushButton * pushClearSelection;

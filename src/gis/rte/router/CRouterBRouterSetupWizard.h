@@ -36,6 +36,9 @@ public:
     void initializePage(const int id) override;
     bool validateCurrentPage() override;
 
+    enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
+               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails, Page_LocalDetails };
+
 public slots:
     void accept() override;
     void reject() override;
@@ -49,6 +52,7 @@ private slots:
     void slotLocalToolSelectDirectory();
     void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEditingFinished();
+    void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
     void slotLocalDownloadButtonFinished(QNetworkReply * reply);
@@ -60,14 +64,14 @@ private slots:
     void slotProfileUpClicked();
     void slotProfileDownClicked();
     void slotOnlineConfigChanged();
+    void slotSetupError(const QString &error, const QString &details);
+    void slotProfilesChanged();
 
 private:
-    enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,
-               Page_LocalTiles, Page_OnlineUrl, Page_OnlineDetails, Page_LocalDetails };
-
     void beginChooseMode();
     bool validateChooseMode();
 
+    void initLocalDirectory();
     void beginLocalDirectory();
     void updateLocalDirectory();
 
@@ -76,9 +80,9 @@ private:
 
     void initProfiles();
     void beginProfiles();
+    void updateProfiles();
     QStringList selectedProfiles(const QListView * listView) const;
     QList<int> updateProfileView(QListView * listView, QStringList values);
-    void updateProfiles();
 
     void initLocalTiles();
     void beginLocalTiles();
@@ -99,11 +103,14 @@ private:
 
     CRouterBRouterSetup * setup;
 
-    bool localInstallExists;
     bool doLocalInstall;
     QUrl downloadUrl;
 
     QNetworkAccessManager * networkAccessManager;
+
+    bool isError { false };
+    QString error;
+    QString errorDetails;
 };
 
 #endif //CROUTERBROUTERSETUPWIZARD_H

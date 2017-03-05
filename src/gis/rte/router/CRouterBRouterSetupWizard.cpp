@@ -60,7 +60,8 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
 
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
-    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::updateProfiles);
+    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotProfilesChanged);
+    connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
 
     QStringListModel *profilesModel = new QStringListModel();
     listProfiles->setModel(profilesModel);
@@ -70,6 +71,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished);
+
     try
     {
         setup->load();
@@ -78,8 +80,6 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     {
         setup->onInvalidSetup();
     }
-
-    localInstallExists = false;
 }
 
 CRouterBRouterSetupWizard::~CRouterBRouterSetupWizard()
@@ -112,11 +112,7 @@ int CRouterBRouterSetupWizard::nextId() const
         {
             return Page_LocalInstallation;
         }
-        if (localInstallExists)
-        {
-            return Page_Profiles;
-        }
-        break;
+        return Page_Profiles;
     }
     case Page_LocalInstallation:
     {
@@ -150,14 +146,11 @@ int CRouterBRouterSetupWizard::nextId() const
             {
                 return Page_LocalInstallation;
             }
-            if (localInstallExists)
+            if (setup->expertMode)
             {
-                if (setup->expertMode)
-                {
-                    return Page_LocalDetails;
-                }
-                return Page_Profiles;
+                return Page_LocalDetails;
             }
+            return Page_Profiles;
         }
         else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
         {
@@ -177,6 +170,11 @@ void CRouterBRouterSetupWizard::initializePage(const int id)
 {
     switch(id)
     {
+    case Page_LocalDirectory:
+    {
+        initLocalDirectory();
+        break;
+    }
     case Page_LocalInstallation:
     {
         initLocalInstall();
@@ -366,6 +364,11 @@ bool CRouterBRouterSetupWizard::validateChooseMode()
     return true;
 }
 
+void CRouterBRouterSetupWizard::initLocalDirectory()
+{
+    dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
+}
+
 void CRouterBRouterSetupWizard::beginLocalDirectory()
 {
     updateLocalDirectory();
@@ -392,14 +395,12 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
     {
         labelLocalDirResult->setText(tr("please select BRouter installation directory"));
         pushCreateOrUpdateLocalInstall->setVisible(false);
-        localInstallExists = false;
     }
     else if(!QDir(setup->localDir).exists())
     {
         labelLocalDirResult->setText(tr("selected directory does not exist"));
         pushCreateOrUpdateLocalInstall->setText(tr("create directory and install BRouter there"));
         pushCreateOrUpdateLocalInstall->setVisible(true);
-        localInstallExists = false;
     }
     else
     {
@@ -408,14 +409,12 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
             labelLocalDirResult->setText(tr("existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setText(tr("update existing BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
-            localInstallExists = true;
         }
         else
         {
             labelLocalDirResult->setText(tr("empty directory, create new BRouter installation here"));
             pushCreateOrUpdateLocalInstall->setText(tr("create new BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
-            localInstallExists = false;
         }
     }
 }
@@ -428,13 +427,22 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
 
 void CRouterBRouterSetupWizard::initLocalInstall()
 {
-    const QUrl brouterUrl(setup->binariesUrl);
-    webLocalBRouterVersions->load(brouterUrl);
-
+    dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
+    connect(webLocalBRouterVersions, &QWebView::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
+    webLocalBRouterVersions->load(QUrl(setup->binariesUrl));
     QWebPage *localVersionsPage = webLocalBRouterVersions->page();
     localVersionsPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
     connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
+}
+
+void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
+{
+    if (!ok)
+    {
+        textLocalInstall->setVisible(true);
+        textLocalInstall->setText(QString(tr("Error loading installation-page at %1").arg(setup->binariesUrl)));
+    }
 }
 
 void CRouterBRouterSetupWizard::beginLocalInstall()
@@ -467,21 +475,28 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * reply)
 {
     reply->deleteLater();
-    QString fileName = reply->property("fileName").toString();
-    QDir outDir(setup->localDir);
-    if (!outDir.exists())
+    if (reply->error() == QNetworkReply::NoError)
     {
-        outDir.mkpath(outDir.absolutePath());
-    }
-    QFile outfile(outDir.absoluteFilePath(fileName));
-    outfile.open(QIODevice::WriteOnly);
-    outfile.write(reply->readAll());
-    outfile.close();
+        QString fileName = reply->property("fileName").toString();
+        QDir outDir(setup->localDir);
+        if (!outDir.exists())
+        {
+            outDir.mkpath(outDir.absolutePath());
+        }
+        QFile outfile(outDir.absoluteFilePath(fileName));
+        outfile.open(QIODevice::WriteOnly);
+        outfile.write(reply->readAll());
+        outfile.close();
 
-    CRouterBRouterToolShell shell(textLocalInstall,this);
-    shell.out("download " + outfile.fileName() + " finished");
-    shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
-    setup->updateLocalProfiles();
+        CRouterBRouterToolShell shell(textLocalInstall,this);
+        shell.out("download " + outfile.fileName() + " finished");
+        shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
+        setup->updateLocalProfiles();
+    }
+    else
+    {
+        this->slotSetupError(QString(tr("Network Error")),reply->errorString());
+    }
 }
 
 void CRouterBRouterSetupWizard::initProfiles()
@@ -576,6 +591,12 @@ void CRouterBRouterSetupWizard::slotProfileDownClicked()
     }
 }
 
+void CRouterBRouterSetupWizard::slotProfilesChanged()
+{
+    isError = false;
+    updateProfiles();
+}
+
 void CRouterBRouterSetupWizard::updateProfiles()
 {
     try
@@ -595,7 +616,21 @@ void CRouterBRouterSetupWizard::updateProfiles()
         toolDeleteProfile->setEnabled(!selected.isEmpty());
         toolProfileUp->setEnabled(!selected.isEmpty() and selected.first() > 0);
         toolProfileDown->setEnabled(!selected.isEmpty() and selected.last() < profiles.size()-1);
-        toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+        if (isError)
+        {
+            toolAddProfile->setEnabled(false);
+            listAvailableProfiles->setVisible(false);
+            textAvailableProfiles->setVisible(true);
+            labelAvailableProfiles->setText(tr("no Profiles available"));
+            textAvailableProfiles->setText(error + ": "+ errorDetails);
+        }
+        else
+        {
+            toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+            listAvailableProfiles->setVisible(true);
+            textAvailableProfiles->setVisible(false);
+            labelAvailableProfiles->setText(tr("available Profiles"));
+        }
     }
     catch (CRouterBRouterSetupException &e)
     {
@@ -741,6 +776,8 @@ void CRouterBRouterSetupWizard::resetLocalDetails()
 
 void CRouterBRouterSetupWizard::slotOnlineConfigChanged()
 {
+    isError = false;
+
     if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
         updateLocalDetails();
@@ -748,5 +785,21 @@ void CRouterBRouterSetupWizard::slotOnlineConfigChanged()
     else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
     {
         updateOnlineDetails();
+    }
+}
+
+void CRouterBRouterSetupWizard::slotSetupError(const QString & error, const QString & details)
+{
+    isError = true;
+    this->error = error;
+    this->errorDetails = details;
+
+    switch(currentId())
+    {
+    case Page_Profiles:
+    {
+        this->updateProfiles();
+        break;
+    }
     }
 }

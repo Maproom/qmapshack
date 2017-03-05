@@ -243,6 +243,7 @@ set( SRCS
         gis/rte/router/CRouterBRouter.cpp
         gis/rte/router/CRouterBRouterInfo.cpp
         gis/rte/router/CRouterBRouterSetup.cpp
+        gis/rte/router/CRouterBRouterSetupPage.cpp
         gis/rte/router/CRouterBRouterSetupWizard.cpp
         gis/rte/router/CRouterBRouterToolShell.cpp
         gis/rte/router/CRouterBRouterTilesPage.cpp
@@ -521,6 +522,7 @@ set( HDRS
         gis/rte/router/CRouterBRouterInfo.h
         gis/rte/router/CRouterBRouterSetup.h
         gis/rte/router/CRouterBRouterSetupException.h
+        gis/rte/router/CRouterBRouterSetupPage.h
         gis/rte/router/CRouterBRouterSetupWizard.h
         gis/rte/router/CRouterBRouterToolShell.h
         gis/rte/router/CRouterBRouterTilesPage.h

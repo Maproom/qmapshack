@@ -456,88 +456,141 @@ void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 {
     reply->deleteLater();
-    QString configHost = reply->property("configHost").toString();
 
-    const QString jsConfig(reply->readAll());
-
-    QScriptEngine engine;
-
-    const QString jsSetup = QString(\
-                "(function(){\
-                   window = {};\
-                   window.location = {};\
-                   window.location.hostname = '%1';\
-                   window.location.search = {};\
-                   window.location.search.slice = function() {};\
-                   URLSearchParams = function() {};\
-                   BR = {};\
-                  })();").arg(configHost);
-
-//TODO: error handling
-    const QString run1 = engine.evaluate(jsSetup).toString();
-    const QString run2 = engine.evaluate(jsConfig).toString();
-
-    const QScriptValue br = engine.globalObject().property("BR");
-    const QScriptValue conf = br.property("conf");
-
-    bool changed(false);
-    const QString host = conf.property("host").toString();
-    if (onlineServiceUrl != host)
+    if (reply->error() != QNetworkReply::NoError)
     {
-        onlineServiceUrl = host;
-        changed = true;
+        emitNetworkError(reply);
     }
-    const QString url = conf.property("profilesUrl").toString();
-    if (onlineProfilesUrl != url)
+    else
     {
-        onlineProfilesUrl = url;
-        changed = true;
-    }
-    if (changed)
-    {
-        emit sigOnlineConfigChanged();
-    }
+        QString configHost = reply->property("configHost").toString();
 
-    changed = false;
+        const QString jsConfig(reply->readAll());
 
-    const QScriptValue profiles = conf.property("profiles");
-    const qint32 len = profiles.property("length").toInt32();
+        QScriptEngine engine;
 
-    QStringList onlineProfilesLoaded;
-    for(qint32 i=0;i<len;i++)
-    {
-        onlineProfilesLoaded << profiles.property(i).toString();
-    }
-    for (QString profile : onlineProfilesAvailable)
-    {
-        if (!onlineProfilesLoaded.contains(profile))
+        const QString jsSetup = QString(\
+                    "(function(){\
+                       window = {};\
+                       window.location = {};\
+                       window.location.hostname = '%1';\
+                       window.location.search = {};\
+                       window.location.search.slice = function() {};\
+                       URLSearchParams = function() {};\
+                       BR = {};\
+                      })();").arg(configHost);
+
+        engine.evaluate(jsSetup).toString();
+        engine.evaluate(jsConfig).toString();
+        if (engine.hasUncaughtException())
         {
-            onlineProfilesAvailable.removeAt(onlineProfilesAvailable.indexOf(profile));
+            emitOnlineConfigScriptError(engine.uncaughtException());
+            return;
+        }
+
+        const QScriptValue br = engine.globalObject().property("BR");
+        if (!br.isValid() or br.isError())
+        {
+            emitOnlineConfigScriptError(br);
+            return;
+        }
+        const QScriptValue conf = br.property("conf");
+        if (!conf.isValid() or conf.isError())
+        {
+            emitOnlineConfigScriptError(conf);
+            return;
+        }
+
+        bool changed(false);
+        const QScriptValue host = conf.property("host").toString();
+        if (!host.isValid() or host.isError())
+        {
+            emitOnlineConfigScriptError(host);
+            return;
+        }
+        if (onlineServiceUrl != host.toString())
+        {
+            onlineServiceUrl = host.toString();
             changed = true;
         }
-    }
-    for (QString profile : onlineProfilesLoaded)
-    {
-        if (!onlineProfilesAvailable.contains(profile))
+        const QScriptValue url = conf.property("profilesUrl").toString();
+        if (!url.isValid() or url.isError())
         {
-            onlineProfilesAvailable << profile;
+            emitOnlineConfigScriptError(url);
+            return;
+        }
+        if (onlineProfilesUrl != url.toString())
+        {
+            onlineProfilesUrl = url.toString();
             changed = true;
         }
-    }
-
-    for (const QString profile : onlineProfiles)
-    {
-        if (!onlineProfilesAvailable.contains(profile))
+        if (changed)
         {
-            onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
-            changed = true;
+            emit sigOnlineConfigChanged();
+        }
+
+        changed = false;
+
+        const QScriptValue profiles = conf.property("profiles");
+        if (!profiles.isValid() or profiles.isError())
+        {
+            emitOnlineConfigScriptError(profiles);
+            return;
+        }
+        const qint32 len = profiles.property("length").toInt32();
+
+        QStringList onlineProfilesLoaded;
+        for(qint32 i=0;i<len;i++)
+        {
+            QScriptValue profile = profiles.property(i);
+            if (!profile.isValid() or profile.isError())
+            {
+                emitOnlineConfigScriptError(profile);
+                return;
+            }
+            onlineProfilesLoaded << profile.toString();
+        }
+        for (QString profile : onlineProfilesAvailable)
+        {
+            if (!onlineProfilesLoaded.contains(profile))
+            {
+                onlineProfilesAvailable.removeAt(onlineProfilesAvailable.indexOf(profile));
+                changed = true;
+            }
+        }
+        for (QString profile : onlineProfilesLoaded)
+        {
+            if (!onlineProfilesAvailable.contains(profile))
+            {
+                onlineProfilesAvailable << profile;
+                changed = true;
+            }
+        }
+
+        for (const QString profile : onlineProfiles)
+        {
+            if (!onlineProfilesAvailable.contains(profile))
+            {
+                onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
+                changed = true;
+            }
+        }
+
+        if (changed)
+        {
+            emit sigProfilesChanged();
         }
     }
+}
 
-    if (changed)
-    {
-        emit sigProfilesChanged();
-    }
+void CRouterBRouterSetup::emitOnlineConfigScriptError(QScriptValue error)
+{
+    emit sigError(tr("Error parsing online-config:"),error.toString());
+}
+
+void CRouterBRouterSetup::emitNetworkError(QNetworkReply * reply)
+{
+    emit sigError(tr("Network error:"),reply->errorString());
 }
 
 void CRouterBRouterSetup::displayProfileAsync(const QString profile)
@@ -579,23 +632,30 @@ void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, const pr
 void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
 {
     reply->deleteLater();
-    const QString profile = reply->property("profile").toString();
-    const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
-
-    const QByteArray content = reply->readAll();
-    if (mode == ProfileInstall)
+    if (reply->error() != QNetworkReply::NoError)
     {
-        const QDir dir = getProfileDir(ModeLocal);
-        const QString filename = dir.absoluteFilePath(profile + ".brf");
-        QFile file(filename);
-        file.open(QIODevice::WriteOnly);
-        file.write(content);
-        file.close();
-        updateLocalProfiles();
+        emitNetworkError(reply);
     }
-    else if (mode == ProfileDisplay)
+    else
     {
-        emit sigDisplayOnlineProfileFinished(profile, QString(content));
+        const QString profile = reply->property("profile").toString();
+        const profileRequest_e mode = profileRequest_e(reply->property("request").toInt());
+
+        const QByteArray content = reply->readAll();
+        if (mode == ProfileInstall)
+        {
+            const QDir dir = getProfileDir(ModeLocal);
+            const QString filename = dir.absoluteFilePath(profile + ".brf");
+            QFile file(filename);
+            file.open(QIODevice::WriteOnly);
+            file.write(content);
+            file.close();
+            updateLocalProfiles();
+        }
+        else if (mode == ProfileDisplay)
+        {
+            emit sigDisplayOnlineProfileFinished(profile, QString(content));
+        }
     }
 }
 

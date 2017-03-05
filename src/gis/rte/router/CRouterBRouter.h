@@ -50,6 +50,7 @@ private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg();
     void slotToolProfileInfoClicked();
+    void slotError(const QString error, const QString details);
     void slotDisplayProfileInfo(const QString profile, const QString content);
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
     void slotToggleBRouter();
@@ -80,6 +81,7 @@ private:
     void updateLocalBRouterStatus();
     QNetworkRequest getRequest(const QVector<wpt_t>& route_points) const;
     QUrl getServiceUrl() const;
+    void clearError();
 
     QNetworkAccessManager * networkAccessManager;
     QTimer * timerCloseStatusMsg;
@@ -91,6 +93,9 @@ private:
     CRouterBRouterToolShell * brouterShell {nullptr};
     QProcess::ProcessState brouterState {QProcess::NotRunning};
     QPointer<CProgressDialog> progress;
+    bool isError { false };
+    QString error;
+    QString errorDetails;
 };
 
 #endif //CROUTERBROUTER_H

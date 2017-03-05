@@ -531,6 +531,23 @@ void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     }
 }
 
+void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    for(const IGisItem::key_t& key : keys)
+    {
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+        if(nullptr != wpt)
+        {
+            wpt->setIcon(sym);
+        }
+    }
+
+    emit sigChanged();
+}
+
+
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -844,6 +861,7 @@ void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
     dlg.exec();
 }
 
+
 void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
@@ -924,3 +942,5 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
         }
     }
 }
+
+

@@ -52,6 +52,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
 
 #include <QApplication>
@@ -192,6 +193,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Symbol (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionDelete);
 
@@ -986,6 +988,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem *gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(nullptr != gisItem)
         {
+            bool hasWpts  = false;
             bool onlyWpts = true;
             bool onlyTrks = true;
             for(QTreeWidgetItem *item : selectedItems())
@@ -993,6 +996,10 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 if(item->type() != IGisItem::eTypeWpt)
                 {
                     onlyWpts = false;
+                }
+                else
+                {
+                    hasWpts = true;
                 }
 
                 if(item->type() != IGisItem::eTypeTrk)
@@ -1008,6 +1015,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
+            actionSymWpt->setEnabled(hasWpts);
 
             menuItem->exec(p);
             return;
@@ -1927,4 +1935,30 @@ void CGisListWks::slotCopyProject()
     }
 
     CGisWidget::self().copyItemsByKey(keys);
+}
+
+
+void CGisListWks::slotSymWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    QToolButton tb;
+    CWptIconDialog dlg(&tb);
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    QList<IGisItem::key_t> keys;
+    for(QTreeWidgetItem * item : selectedItems())
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt == nullptr)
+        {
+            continue;
+        }
+
+        keys << wpt->getKey();
+    }
+
+    CGisWidget::self().changeWptSymByKey(keys, tb.objectName());
 }

@@ -35,6 +35,7 @@ public:
     void load();
     void save();
 
+    void resetAll();
     void resetOnlineWebUrl();
     void resetOnlineServiceUrl();
     void resetOnlineProfilesUrl();
@@ -63,6 +64,8 @@ public:
     void displayOnlineProfileAsync(const QString profile) const;
 
     bool isLocalBRouterInstalled() const;
+
+    void onInvalidSetup();
 
 signals:
     void sigOnlineConfigChanged();

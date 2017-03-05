@@ -25,6 +25,7 @@
 #include <QtWebKit>
 #include <QWebPage>
 #include <QWebFrame>
+#include <QMessageBox>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
     :QObject(parent)
@@ -41,14 +42,7 @@ void CRouterBRouterSetup::load()
 {
     SETTINGS;
     cfg.beginGroup("Route/brouter");
-    try
-    {
-        installMode = modeFromString(cfg.value("installMode",stringFromMode(defaultInstallMode)).toString());
-    }
-    catch(CRouterBRouterSetupException& e)
-    {
-        installMode = defaultInstallMode;
-    }
+    installMode = modeFromString(cfg.value("installMode",stringFromMode(defaultInstallMode)).toString());
     expertMode = cfg.value("expertMode",defaultExpertMode).toBool();
     onlineWebUrl = cfg.value("onlineWebUrl", defaultOnlineWebUrl).toString();
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
@@ -92,7 +86,7 @@ void CRouterBRouterSetup::load()
     }
     else
     {
-        throw new CRouterBRouterSetupException();
+        throw CRouterBRouterSetupException();
     }
 }
 
@@ -131,6 +125,23 @@ void CRouterBRouterSetup::save()
     }
     cfg.endArray();
     cfg.endGroup();
+}
+
+void CRouterBRouterSetup::resetAll()
+{
+    resetOnlineWebUrl();
+    resetOnlineServiceUrl();
+    resetOnlineProfilesUrl();
+    resetLocalProfileDir();
+    resetLocalCustomProfileDir();
+    resetLocalSegmentsDir();
+    resetLocalHost();
+    resetLocalPort();
+    resetLocalNumberThreads();
+    resetLocalMaxRunningTime();
+    resetLocalJavaOpts();
+    resetBinariesUrl();
+    resetSegmentsUrl();
 }
 
 void CRouterBRouterSetup::resetOnlineWebUrl()
@@ -246,7 +257,7 @@ void CRouterBRouterSetup::addProfile(const QString profile)
     }
     else
     {
-        throw new CRouterBRouterSetupException();
+        throw CRouterBRouterSetupException();
     }
 }
 
@@ -273,7 +284,7 @@ void CRouterBRouterSetup::deleteProfile(const QString profile)
     }
     else
     {
-        throw new CRouterBRouterSetupException();
+        throw CRouterBRouterSetupException();
     }
 }
 
@@ -299,6 +310,10 @@ void CRouterBRouterSetup::profileUp(const QString profile)
             emit sigProfilesChanged();
         }
     }
+    else
+    {
+        throw CRouterBRouterSetupException();
+    }
 }
 
 void CRouterBRouterSetup::profileDown(const QString profile)
@@ -322,6 +337,10 @@ void CRouterBRouterSetup::profileDown(const QString profile)
             onlineProfiles.insert(index+1,profile);
             emit sigProfilesChanged();
         }
+    }
+    else
+    {
+        throw CRouterBRouterSetupException();
     }
 }
 
@@ -388,7 +407,18 @@ QDir CRouterBRouterSetup::getProfileDir(const mode_e mode) const
 
 QStringList CRouterBRouterSetup::getProfiles() const
 {
-    return installMode == ModeLocal ? localProfiles : onlineProfiles;
+    if (installMode == ModeLocal)
+    {
+        return localProfiles;
+    }
+    else if (installMode == ModeOnline)
+    {
+        return onlineProfiles;
+    }
+    else
+    {
+        throw CRouterBRouterSetupException();
+    }
 }
 
 void CRouterBRouterSetup::loadOnlineConfig()
@@ -529,7 +559,7 @@ void CRouterBRouterSetup::displayProfileAsync(const QString profile)
     }
     else
     {
-        throw new CRouterBRouterSetupException();
+        throw CRouterBRouterSetupException();
     }
 }
 
@@ -574,4 +604,15 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
     const QDir dir(localDir);
     const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
     return (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(localProfileDir)).exists());
+}
+
+void CRouterBRouterSetup::onInvalidSetup()
+{
+    QMessageBox msgBox;
+    msgBox.setIcon(QMessageBox::Warning);
+    msgBox.setText("BRouter config is inconsistent!");
+    msgBox.setInformativeText("Resetting to default values");
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.exec();
+    resetAll();
 }

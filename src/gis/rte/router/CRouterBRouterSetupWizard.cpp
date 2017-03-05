@@ -70,8 +70,15 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished);
+    try
+    {
+        setup->load();
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
+    }
 
-    setup->load();
     localInstallExists = false;
 }
 
@@ -287,8 +294,15 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
 
 void CRouterBRouterSetupWizard::accept()
 {
-    setup->save();
-    QDialog::accept();
+    try
+    {
+        setup->save();
+        QDialog::accept();
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
+    }
 }
 
 void CRouterBRouterSetupWizard::reject()
@@ -504,54 +518,89 @@ void CRouterBRouterSetupWizard::slotDisplayProfile(QString profile, const QStrin
 
 void CRouterBRouterSetupWizard::slotAddProfileClicked()
 {
-    for (QString profile : selectedProfiles(listAvailableProfiles))
+    try
     {
-        setup->addProfile(profile);
+        for (QString profile : selectedProfiles(listAvailableProfiles))
+        {
+            setup->addProfile(profile);
+        }
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
     }
 }
 
 void CRouterBRouterSetupWizard::slotDelProfileClicked()
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    try
     {
-        setup->deleteProfile(profile);
+        for (QString profile : selectedProfiles(listProfiles))
+        {
+            setup->deleteProfile(profile);
+        }
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
     }
 }
 
 void CRouterBRouterSetupWizard::slotProfileUpClicked()
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    try
     {
-        setup->profileUp(profile);
+        for (QString profile : selectedProfiles(listProfiles))
+        {
+            setup->profileUp(profile);
+        }
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
     }
 }
 
 void CRouterBRouterSetupWizard::slotProfileDownClicked()
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    try
     {
-        setup->profileDown(profile);
+        for (QString profile : selectedProfiles(listProfiles))
+        {
+            setup->profileDown(profile);
+        }
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
     }
 }
 
 void CRouterBRouterSetupWizard::updateProfiles()
 {
-    const QStringList profiles = setup->getProfiles();
-    QStringList available;
-    for(QString profile:setup->onlineProfilesAvailable)
+    try
     {
-        if (!profiles.contains(profile))
+        const QStringList profiles = setup->getProfiles();
+        QStringList available;
+        for(QString profile:setup->onlineProfilesAvailable)
         {
-            available << profile;
+            if (!profiles.contains(profile))
+            {
+                available << profile;
+            }
         }
-    }
 
-    QList<int> selected = updateProfileView(listProfiles, profiles);
-    qSort(selected.begin(),selected.end());
-    toolDeleteProfile->setEnabled(!selected.isEmpty());
-    toolProfileUp->setEnabled(!selected.isEmpty() and selected.first() > 0);
-    toolProfileDown->setEnabled(!selected.isEmpty() and selected.last() < profiles.size()-1);
-    toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+        QList<int> selected = updateProfileView(listProfiles, profiles);
+        qSort(selected.begin(),selected.end());
+        toolDeleteProfile->setEnabled(!selected.isEmpty());
+        toolProfileUp->setEnabled(!selected.isEmpty() and selected.first() > 0);
+        toolProfileDown->setEnabled(!selected.isEmpty() and selected.last() < profiles.size()-1);
+        toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+    }
+    catch (CRouterBRouterSetupException &e)
+    {
+        setup->onInvalidSetup();
+    }
 }
 
 QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView * listView) const

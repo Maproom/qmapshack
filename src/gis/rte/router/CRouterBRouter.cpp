@@ -327,10 +327,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         return;
     }
 
-    if (progress != nullptr)
-    {
-        delete progress;
-    }
+    delete progress;
 
     if(reply->error() != QNetworkReply::NoError)
     {

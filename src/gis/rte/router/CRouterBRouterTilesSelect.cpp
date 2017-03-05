@@ -616,11 +616,11 @@ CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile
 
 void CRouterBRouterTilesSelect::updateTiles()
 {
-    QVector<QPoint> * invalidTiles = new QVector<QPoint>;
-    QVector<QPoint> * outdatedTiles = new QVector<QPoint>;
-    QVector<QPoint> * currentTiles = new QVector<QPoint>;
-    QVector<QPoint> * outstandingTiles = new QVector<QPoint>;
-    QVector<QPoint> * selectedTiles = new QVector<QPoint>;
+    QVector<QPoint> invalidTiles;
+    QVector<QPoint> outdatedTiles;
+    QVector<QPoint> currentTiles;
+    QVector<QPoint> outstandingTiles;
+    QVector<QPoint> selectedTiles;
 
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
@@ -630,26 +630,26 @@ void CRouterBRouterTilesSelect::updateTiles()
         CRouterBRouterTilesStatus * status = it.value();
         if (status->isSelected)
         {
-            *selectedTiles << tile;
+            selectedTiles << tile;
         }
         else if (status->isLocal)
         {
             if (status->isOutdated)
             {
-                *outdatedTiles << tile;
+                outdatedTiles << tile;
             }
             else
             {
-                *currentTiles << tile;
+                currentTiles << tile;
             }
         }
         else if (!status->isRemote)
         {
-            *invalidTiles << tile;
+            invalidTiles << tile;
         }
         if (status->file != nullptr)
         {
-            *outstandingTiles << tile;
+            outstandingTiles << tile;
         }
     }
 

@@ -98,9 +98,6 @@ void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
         canvas->moveMap(QPointF(event->pos()-mousePos));
         mousePos = event->pos();
     }
-    else
-    {
-    }
 }
 
 void CRouterBRouterTilesSelectArea::mousePressEvent(QMouseEvent * event)
@@ -130,7 +127,8 @@ void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
     QPainter painter(this);
     painter.setPen(outdatedTilesPen);
     painter.setBrush(outdatedTilesBrush);
-    for(QPoint tile : *outdatedTiles)
+
+    for(QPoint tile : outdatedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -141,7 +139,8 @@ void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
     QPainter painter(this);
     painter.setPen(outstandingTilesPen);
     painter.setBrush(outstandingTilesBrush);
-    for(QPoint tile : *outstandingTiles)
+
+    for(QPoint tile : outstandingTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -152,7 +151,8 @@ void CRouterBRouterTilesSelectArea::drawInvalidTiles()
     QPainter painter(this);
     painter.setPen(invalidTilesPen);
     painter.setBrush(invalidTilesBrush);
-    for(QPoint tile : *invalidTiles)
+
+    for(QPoint tile : invalidTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -164,7 +164,7 @@ void CRouterBRouterTilesSelectArea::drawCurrentTiles()
     painter.setPen(currentTilesPen);
     painter.setBrush(currentTilesBrush);
 
-    for(QPoint tile : *currentTiles)
+    for(QPoint tile : currentTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -176,7 +176,7 @@ void CRouterBRouterTilesSelectArea::drawSelectedTiles()
     painter.setPen(selectedTilesPen);
     painter.setBrush(selectedTilesBrush);
 
-    for(QPoint tile : *selectedTiles)
+    for(QPoint tile : selectedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -219,33 +219,28 @@ QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile)
     return polygon;
 }
 
-void CRouterBRouterTilesSelectArea::setInvalidTiles(QVector<QPoint> * tiles)
+void CRouterBRouterTilesSelectArea::setInvalidTiles(const QVector<QPoint> &tiles)
 {
-    delete invalidTiles;
     invalidTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::setOutdatedTiles(QVector<QPoint> * tiles)
+void CRouterBRouterTilesSelectArea::setOutdatedTiles(const QVector<QPoint> &tiles)
 {
-    delete outdatedTiles;
     outdatedTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::setCurrentTiles(QVector<QPoint> * tiles)
+void CRouterBRouterTilesSelectArea::setCurrentTiles(const QVector<QPoint> &tiles)
 {
-    delete currentTiles;
     currentTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::setOutstandingTiles(QVector<QPoint> * tiles)
+void CRouterBRouterTilesSelectArea::setOutstandingTiles(const QVector<QPoint> &tiles)
 {
-    delete outstandingTiles;
     outstandingTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::setSelectedTiles(QVector<QPoint> * tiles)
+void CRouterBRouterTilesSelectArea::setSelectedTiles(const QVector<QPoint> &tiles)
 {
-    delete selectedTiles;
     selectedTiles = tiles;
 }
 

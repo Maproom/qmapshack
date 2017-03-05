@@ -61,8 +61,8 @@ public:
 
     void setupGrid();
     void convertGridPos2Str(const QPointF& pos, QString& str, bool simple);
-    void convertRad2Px(QPointF &pos);
-    void convertPx2Rad(QPointF& pos);
+    void convertRad2Px(QPointF &pos) const;
+    void convertPx2Rad(QPointF& pos) const;
 
     void setupBackgroundColor();
 

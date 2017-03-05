@@ -62,8 +62,8 @@ private:
     void drawOutdatedTiles();
     void drawOutstandingTiles();
     void drawInvalidTiles();
-    QPoint tileUnderMouse(const QPointF & mousePos);
-    QPolygonF tilePolygon(const QPoint & tile);
+    QPoint tileUnderMouse(const QPointF & mousePos) const;
+    QPolygonF tilePolygon(const QPoint & tile) const;
 
     CCanvas * canvas;
     QPoint mousePos;

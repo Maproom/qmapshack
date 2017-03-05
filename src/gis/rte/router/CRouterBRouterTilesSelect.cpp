@@ -33,9 +33,9 @@
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
 {
-    for (int x = -180; x < 180; x += 5)
+    for (int x = minTileLat; x < maxTileLat; x += sizeTileLat)
     {
-        for (int y = -85; y < 85; y += 5)
+        for (int y = minTileLon; y < maxTileLon; y += sizeTileLon)
         {
             CRouterBRouterTilesStatus * status = new CRouterBRouterTilesStatus(this);
             tilesDownloadStatus.insert(fileNameFromTile(QPoint(x,y)),status);

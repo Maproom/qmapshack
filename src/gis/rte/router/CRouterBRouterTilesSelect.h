@@ -95,6 +95,13 @@ private:
 
     bool downloading { false };
     bool downloadSelected { false };
+
+    const int minTileLat { -180 };
+    const int maxTileLat { 180 };
+    const int sizeTileLat { 5 };
+    const int minTileLon { -85 };
+    const int maxTileLon { 85 };
+    const int sizeTileLon { 5 };
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

@@ -446,10 +446,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
     CRouterBRouterToolShell shell(textLocalInstall,this);
     shell.out("download " + downloadUrl.toString() + " started");
 
-    QNetworkRequest request;
-    request.setUrl(downloadUrl);
-
-    QNetworkReply * reply = networkAccessManager->get(request);
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
     reply->setProperty("fileName",downloadUrl.fileName());
 }
 

@@ -21,6 +21,7 @@
 
 #include <QtCore>
 #include <QWebPage>
+#include <QScriptValue>
 
 class CRouterBRouterSetup : public QObject
 {
@@ -71,6 +72,7 @@ signals:
     void sigOnlineConfigChanged();
     void sigProfilesChanged();
     void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
+    void sigError(const QString error, const QString details);
 
 private slots:
     void slotOnlineRequestFinished(QNetworkReply *reply);
@@ -83,6 +85,8 @@ private:
     void loadOnlineProfileAsync(const QString profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
+    void emitOnlineConfigScriptError(QScriptValue error);
+    void emitNetworkError(QNetworkReply * reply);
     mode_e modeFromString(const QString mode) const;
     QString stringFromMode(const mode_e mode) const;
 
@@ -129,6 +133,7 @@ private:
     const QString onlineCacheDir = "BRouter";
 
     friend class CRouterBRouter;
+    friend class CRouterBRouterSetupPage;
     friend class CRouterBRouterSetupWizard;
     friend class CRouterBRouterTilesSelect;
 };

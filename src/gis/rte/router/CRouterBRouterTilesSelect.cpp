@@ -92,6 +92,10 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
 
     statusLabel->setText("test");
 
+    errorLabel = new QLabel(this);
+    outerLayout->addWidget(errorLabel);
+    errorLabel->setVisible(false);
+
     QHBoxLayout * buttonsLayout = new QHBoxLayout();
     outerLayout->addLayout(buttonsLayout);
 
@@ -277,75 +281,84 @@ void CRouterBRouterTilesSelect::initialize()
     tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
 }
 
-void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished()
+void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
 {
-    QWebElement htmlElement = tilesWebPage->mainFrame()->documentElement();
-    QWebElementCollection anchorElements = htmlElement.findAll("table tr td a");
-
-    if (anchorElements.count() > 0)
+    if (!ok)
     {
-        // 'E10_N20.rd5'
-        QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
+        errorLabel->setVisible(true);
+        errorLabel->setText(QString(tr("Network Error: unable to load routing data from %1").arg(setup->segmentsUrl)));
+    }
+    else
+    {
+        errorLabel->setVisible(false);
+        QWebElement htmlElement = tilesWebPage->mainFrame()->documentElement();
+        QWebElementCollection anchorElements = htmlElement.findAll("table tr td a");
 
-        // '16-Feb-2017 20:48  '
-        // const QString dateFormat = "d-MMM-yyyy H:mm";
-        // QDateFormat conversion depends on user-locale, doesn't work here
-        QRegExp rxDate("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
-
-        // 8.2M 271K 9.3K
-        QRegExp rxSize(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
-
-        for (QWebElement anchorElement : anchorElements)
+        if (anchorElements.count() > 0)
         {
-            QString tileName = anchorElement.toPlainText();
-            //only anchors matching the desired pattern
-            if (rxTileName.indexIn(tileName) > -1)
+            // 'E10_N20.rd5'
+            QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
+
+            // '16-Feb-2017 20:48  '
+            // const QString dateFormat = "d-MMM-yyyy H:mm";
+            // QDateFormat conversion depends on user-locale, doesn't work here
+            QRegExp rxDate("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
+
+            // 8.2M 271K 9.3K
+            QRegExp rxSize(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
+
+            for (QWebElement anchorElement : anchorElements)
             {
-                QWebElement dateElement = anchorElement.parent().nextSibling();
-                QWebElement sizeElement = dateElement.nextSibling();
-
-                QPoint tile = tileFromFileName(tileName);
-
-                CRouterBRouterTilesStatus * status = getTileStatus(tile);
-                if (status != nullptr)
+                QString tileName = anchorElement.toPlainText();
+                //only anchors matching the desired pattern
+                if (rxTileName.indexIn(tileName) > -1)
                 {
-                    status->isRemote = true;
+                    QWebElement dateElement = anchorElement.parent().nextSibling();
+                    QWebElement sizeElement = dateElement.nextSibling();
 
-                    QString date = dateElement.toPlainText();
-                    if (rxDate.indexIn((date)) > -1)
-                    {
-                        int day = rxDate.cap(1).toInt();
-                        QString monthStr = rxDate.cap(2);
-                        int month = monthStr == "Jan" ? 1 :
-                                    monthStr == "Feb" ? 2 :
-                                    monthStr == "Mar" ? 3 :
-                                    monthStr == "Apr" ? 4 :
-                                    monthStr == "May" ? 5 :
-                                    monthStr == "Jun" ? 6 :
-                                    monthStr == "Jul" ? 7 :
-                                    monthStr == "Aug" ? 8 :
-                                    monthStr == "Sep" ? 9 :
-                                    monthStr == "Oct" ? 10 :
-                                    monthStr == "Nov" ? 11 :
-                                                        12;
-                        int year = rxDate.cap(3).toInt();
-                        int hour = rxDate.cap(4).toInt();
-                        int min  = rxDate.cap(5).toInt();
+                    QPoint tile = tileFromFileName(tileName);
 
-                        status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
-                    }
+                    CRouterBRouterTilesStatus * status = getTileStatus(tile);
+                    if (status != nullptr)
+                    {
+                        status->isRemote = true;
 
-                    QString size = sizeElement.toPlainText();
-                    if (rxSize.indexIn(size) > -1)
-                    {
-                        status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
-                                                                  rxSize.cap(2) == "G" ? 1073741824 :
-                                                                  rxSize.cap(2) == "K" ? 1024 :
-                                                                                         1);
-                    }
-                    if (status->isLocal and status->remoteDate > status->localDate)
-                    {
-                        status->isOutdated = true;
+                        QString date = dateElement.toPlainText();
+                        if (rxDate.indexIn((date)) > -1)
+                        {
+                            int day = rxDate.cap(1).toInt();
+                            QString monthStr = rxDate.cap(2);
+                            int month = monthStr == "Jan" ? 1 :
+                                        monthStr == "Feb" ? 2 :
+                                        monthStr == "Mar" ? 3 :
+                                        monthStr == "Apr" ? 4 :
+                                        monthStr == "May" ? 5 :
+                                        monthStr == "Jun" ? 6 :
+                                        monthStr == "Jul" ? 7 :
+                                        monthStr == "Aug" ? 8 :
+                                        monthStr == "Sep" ? 9 :
+                                        monthStr == "Oct" ? 10 :
+                                        monthStr == "Nov" ? 11 :
+                                                            12;
+                            int year = rxDate.cap(3).toInt();
+                            int hour = rxDate.cap(4).toInt();
+                            int min  = rxDate.cap(5).toInt();
+
+                            status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
+                        }
+
+                        QString size = sizeElement.toPlainText();
+                        if (rxSize.indexIn(size) > -1)
+                        {
+                            status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
+                                                                      rxSize.cap(2) == "G" ? 1073741824 :
+                                                                      rxSize.cap(2) == "K" ? 1024 :
+                                                                                             1);
+                        }
+                        if (status->isLocal and status->remoteDate > status->localDate)
+                        {
+                            status->isOutdated = true;
+                        }
                     }
                 }
             }
@@ -505,13 +518,15 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                 QFileInfo info(*status->file);
                 status->localDate = info.created();
                 status->localSize = info.size();
+                errorLabel->setVisible(false);
             }
             else
             {
                 status->file->close();
                 status->file->remove();
                 status->isLocal = false;
-                //TODO add errormessage
+                errorLabel->setVisible(true);
+                errorLabel->setText(fileName + ": "+reply->errorString());
             }
             delete status->file;
             status->file = nullptr;

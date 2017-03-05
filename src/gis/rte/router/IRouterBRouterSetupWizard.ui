@@ -17,7 +17,7 @@
    <string>BRouter Setup</string>
   </property>
   <property name="options">
-   <set>QWizard::HaveCustomButton1</set>
+   <set>QWizard::CancelButtonOnLeft|QWizard::HaveCustomButton1</set>
   </property>
   <widget class="QWizardPage" name="pageChooseMode">
    <property name="sizePolicy">
@@ -68,7 +68,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="pageLocalDirectory">
+  <widget class="CRouterBRouterSetupPage" name="pageLocalDirectory">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -153,7 +153,7 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="pageLocalInstallation">
+  <widget class="CRouterBRouterSetupPage" name="pageLocalInstallation">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -263,6 +263,9 @@
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
          </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="textAvailableProfiles"/>
         </item>
        </layout>
       </item>
@@ -558,6 +561,12 @@
    <class>CRouterBRouterTilesPage</class>
    <extends>QWizardPage</extends>
    <header>gis/rte/router/CRouterBRouterTilesPage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CRouterBRouterSetupPage</class>
+   <extends>QWizardPage</extends>
+   <header>gis/rte/router/CRouterBRouterSetupPage.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

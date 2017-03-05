@@ -50,6 +50,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
     connect(toolProfileInfo, &QToolButton::clicked, this, &CRouterBRouter::slotToolProfileInfoClicked);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouter::slotDisplayProfileInfo);
+    connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouter::slotError);
 
     comboAlternative->addItem(tr("original"), "0");
     comboAlternative->addItem(tr("first alternative"), "1");
@@ -77,8 +78,10 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
     connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
 
-    updateDialog();
     textBRouterOutput->setVisible(false);
+    textBRouterError->setVisible(false);
+
+    updateDialog();
 }
 
 CRouterBRouter::~CRouterBRouter()
@@ -100,6 +103,7 @@ void CRouterBRouter::slotToolSetupClicked()
     stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
+    clearError();
     try
     {
         setup->load();
@@ -127,8 +131,21 @@ void CRouterBRouter::slotToolProfileInfoClicked()
     }
 }
 
+void CRouterBRouter::slotError(const QString error, const QString details)
+{
+    textBRouterError->setText(error + ": " + details);
+    textBRouterError->setVisible(true);
+}
+
+void CRouterBRouter::clearError()
+{
+    textBRouterError->clear();
+    textBRouterError->setVisible(false);
+}
+
 void CRouterBRouter::slotDisplayProfileInfo(const QString profile, const QString content)
 {
+    clearError();
     CRouterBRouterInfo info;
     info.setLabel(profile);
     info.setInfo(content);
@@ -311,6 +328,8 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     }
     else
     {
+        clearError();
+
         const QByteArray res = reply->readAll();
 
         if(res.isEmpty())
@@ -381,6 +400,8 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     {
         return;
     }
+
+    clearError();
 
     QDomDocument xml;
     xml.setContent(res);

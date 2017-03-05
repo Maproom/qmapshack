@@ -128,7 +128,7 @@ void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
     painter.setPen(outdatedTilesPen);
     painter.setBrush(outdatedTilesBrush);
 
-    for(QPoint tile : outdatedTiles)
+    for(const QPoint & tile : outdatedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -140,7 +140,7 @@ void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
     painter.setPen(outstandingTilesPen);
     painter.setBrush(outstandingTilesBrush);
 
-    for(QPoint tile : outstandingTiles)
+    for(const QPoint & tile : outstandingTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -152,7 +152,7 @@ void CRouterBRouterTilesSelectArea::drawInvalidTiles()
     painter.setPen(invalidTilesPen);
     painter.setBrush(invalidTilesBrush);
 
-    for(QPoint tile : invalidTiles)
+    for(const QPoint & tile : invalidTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -164,7 +164,7 @@ void CRouterBRouterTilesSelectArea::drawCurrentTiles()
     painter.setPen(currentTilesPen);
     painter.setBrush(currentTilesBrush);
 
-    for(QPoint tile : currentTiles)
+    for(const QPoint & tile : currentTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -176,13 +176,13 @@ void CRouterBRouterTilesSelectArea::drawSelectedTiles()
     painter.setPen(selectedTilesPen);
     painter.setBrush(selectedTilesBrush);
 
-    for(QPoint tile : selectedTiles)
+    for(const QPoint & tile : selectedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
 }
 
-QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos)
+QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) const
 {
     QPointF pos(mousePos);
     canvas->convertPx2Rad(pos);
@@ -192,7 +192,7 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos)
     return tile * 5;
 }
 
-QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile)
+QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 {
     QPointF p0(tile.x(),tile.y());
     QPointF p1(tile.x()+5,tile.y());

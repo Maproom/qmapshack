@@ -96,7 +96,7 @@
       <item>
        <widget class="QToolButton" name="toolSymWpt">
         <property name="toolTip">
-         <string>Change the symbol of all selected waypoints.</string>
+         <string>Change the icon of all selected waypoints.</string>
         </property>
         <property name="text">
          <string>...</string>

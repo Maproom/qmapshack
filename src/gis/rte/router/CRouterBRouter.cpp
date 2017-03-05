@@ -181,11 +181,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) c
     url.setPath("/brouter");
     url.setQuery(urlQuery);
 
-    QNetworkRequest request;
-
-    request.setUrl(url);
-
-    return request;
+    return QNetworkRequest(url);
 }
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)

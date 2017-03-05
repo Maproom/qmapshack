@@ -438,13 +438,7 @@ void CRouterBRouterTilesSelect::slotDownload()
             status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
             status->file->open(QIODevice::WriteOnly);
 
-            const QString tileUrl = setup->segmentsUrl + fileName;
-            const QUrl url(tileUrl);
-
-            QNetworkRequest request;
-            request.setUrl(url);
-
-            QNetworkReply* reply = tilesDownloadManager->get(request);
+            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
             reply->setProperty("tile", fileName);
 
             connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);

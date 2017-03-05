@@ -393,12 +393,10 @@ QStringList CRouterBRouterSetup::getProfiles() const
 
 void CRouterBRouterSetup::loadOnlineConfig()
 {
-    QNetworkRequest request;
     const QUrl configUrl = QUrl(onlineWebUrl + "config.js");
     const QString configHost = configUrl.host();
-    request.setUrl(configUrl);
 
-    QNetworkReply * reply = networkAccessManager->get(request);
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(configUrl));
     reply->setProperty("configHost",configHost);
     reply->setProperty("type",type_config);
 }
@@ -542,11 +540,7 @@ void CRouterBRouterSetup::displayOnlineProfileAsync(const QString profile) const
 
 void CRouterBRouterSetup::loadOnlineProfileAsync(const QString profile, const profileRequest_e mode) const
 {
-    QNetworkRequest request;
-    const QUrl profileUrl = QUrl(onlineProfilesUrl + profile +".brf");
-    request.setUrl(profileUrl);
-
-    QNetworkReply * reply = networkAccessManager->get(request);
+    QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(QUrl(onlineProfilesUrl + profile +".brf")));
     reply->setProperty("type",type_profile);
     reply->setProperty("profile", profile);
     reply->setProperty("request", mode);

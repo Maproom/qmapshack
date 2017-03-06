@@ -1095,21 +1095,21 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Pohyb: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1221"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1234"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1290"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1334"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1473"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1223"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1236"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1292"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1336"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1475"/>
         <source>track</source>
         <translation>Stopa</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1425"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1427"/>
         <source>Hide point %1.</source>
         <translation>Skrýt bod %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1429"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1431"/>
         <source>Hide points %1..%2.</source>
         <translation>Skrýt body %1  %2.</translation>
     </message>
@@ -1205,47 +1205,47 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Vzdálenost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1280"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1282"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Trvale odstraněné body %1 ... %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1458"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1460"/>
         <source>Show points.</source>
         <translation>Ukázat body.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1992"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1994"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1998"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2000"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2004"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2006"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2010"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2012"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2021"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2023"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Výška bodu %1 byla změněna na %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2045"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2047"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Činnost byla pro celou stopu změněna na &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2084"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2086"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Činnost byla změněna pro oblast (%2...%3) na &apos;%1&apos;.</translation>
     </message>
@@ -3974,17 +3974,17 @@ line %2, column %3:
 <context>
     <name>CTcxProject</name>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="49"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="51"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Nepodařilo se nahrát soubor %1...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="71"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="73"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Nepodařilo se otevřít %1</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="82"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="84"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3993,14 +3993,80 @@ line %2, column %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="89"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="91"/>
         <source>Not a TCX file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="94"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="101"/>
+        <source>This TCX file contains at least 1 workout, but neither an activity nor a course. As workouts do not contain position data, they can not be imported to QMapShack.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="106"/>
         <source>This TCX file does not contain any activity or course: %1</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="278"/>
+        <source>File exists ...</source>
+        <translation type="unfinished">Soubor existuje...</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="279"/>
+        <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="318"/>
+        <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
+        <source>Course</source>
+        <translation type="unfinished">Směr</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="343"/>
+        <source>Activity</source>
+        <translation type="unfinished">Činnost</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="344"/>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="317"/>
+        <source>Track with invalid timestamps...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
+        <source>Activity or course?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
+        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
+        <source>Failed to create file &apos;%1&apos;</source>
+        <translation type="unfinished">Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="456"/>
+        <source>Failed to write file &apos;%1&apos;</source>
+        <translation type="unfinished">Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="438"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="457"/>
+        <source>Saving GIS data failed...</source>
+        <translation type="unfinished">Nepodařilo se uložit data GIS...</translation>
     </message>
 </context>
 <context>
@@ -5707,70 +5773,70 @@ Buď je to nový symbol nebo byl v databázi někým smazán.</translation>
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="154"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="155"/>
         <source>Save project?</source>
         <translation>Uložit projekt?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="154"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="155"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Projekt byl změněn. Uložit jej před zavřením?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="328"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="329"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Svázat stopy a cestovní body.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="338"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="339"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Trvalo to moc dlouho? Chcete svázání stop a cestovních bodů pro tento projekt přeskočit i v budoucnu?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="339"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="340"/>
         <source>Canceled correlation...</source>
         <translation>Svázání zrušeno...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="384"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="437"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="385"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="442"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Uložit &quot;%1&quot; do...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="522"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="527"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Název souboru: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="527"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="532"/>
         <source>Waypoints: %1</source>
         <translation>Cestovní body: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="531"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="536"/>
         <source>Tracks: %1</source>
         <translation>Stopy: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="535"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="540"/>
         <source>Routes: %1</source>
         <translation>Cesty: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="539"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="544"/>
         <source>Areas: %1</source>
         <translation>Oblasti: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="659"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="664"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; z projektu &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="660"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="665"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>

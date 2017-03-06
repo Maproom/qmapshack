@@ -176,6 +176,7 @@ set( SRCS
         gis/tnv/CTwoNavProject.cpp
         gis/tnv/serialization.cpp
         gis/tcx/CTcxProject.cpp
+        gis/tcx/serialization.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp

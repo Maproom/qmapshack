@@ -61,7 +61,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     cfg.beginGroup("Route/brouter");
     comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() and (setup->installMode == CRouterBRouterSetup::ModeLocal));
+    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::ModeLocal));
     comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
     cfg.endGroup();
 
@@ -201,7 +201,7 @@ QString CRouterBRouter::getOptions()
 
 bool CRouterBRouter::hasFastRouting()
 {
-    return setup->installMode == CRouterBRouterSetup::ModeLocal and checkFastRecalc->isChecked();
+    return setup->installMode == CRouterBRouterSetup::ModeLocal && checkFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) const
@@ -236,7 +236,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) c
 
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
@@ -282,11 +282,11 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal and brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
-    if(!hasFastRouting() or !mutex.tryLock())
+    if(!hasFastRouting() || !mutex.tryLock())
     {
         return -1;
     }
@@ -506,7 +506,7 @@ void CRouterBRouter::startBRouter()
 
 void CRouterBRouter::stopBRouter()
 {
-    if (brouterState != QProcess::NotRunning and brouterShell != nullptr)
+    if (brouterState != QProcess::NotRunning && brouterShell != nullptr)
     {
         brouterShell->stop();
     }
@@ -515,7 +515,7 @@ void CRouterBRouter::stopBRouter()
 
 void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
 {
-    if (newState == QProcess::NotRunning and brouterShell != nullptr)
+    if (newState == QProcess::NotRunning && brouterShell != nullptr)
     {
         delete brouterShell;
         brouterShell = nullptr;

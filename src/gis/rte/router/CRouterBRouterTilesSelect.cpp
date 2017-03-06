@@ -151,7 +151,7 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
          it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        if (!status->isSelected and status->isOutdated)
+        if (!status->isSelected && status->isOutdated)
         {
             changed = true;
             status->isSelected = true;
@@ -235,7 +235,7 @@ void CRouterBRouterTilesSelect::updateButtons()
             {
                 hasLocalSelected = true;
             }
-            if (status->isOutdated or !status->isLocal)
+            if (status->isOutdated || !status->isLocal)
             {
                 hasSelectedForDownload = true;
             }
@@ -356,7 +356,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                                                                       rxSize.cap(2) == "K" ? 1024 :
                                                                                              1);
                         }
-                        if (status->isLocal and status->remoteDate > status->localDate)
+                        if (status->isLocal && status->remoteDate > status->localDate)
                         {
                             status->isOutdated = true;
                         }
@@ -439,7 +439,7 @@ void CRouterBRouterTilesSelect::slotDownload()
          it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected and (status->isOutdated or !status->isLocal) and status->file == nullptr)
+        if (status->isSelected && (status->isOutdated or !status->isLocal) && status->file == nullptr)
         {
             QString fileName = it.key();
 
@@ -569,7 +569,7 @@ void CRouterBRouterTilesSelect::updateStatus()
     {
         const CRouterBRouterTilesStatus * status = it.value();
 
-        if (status->file != nullptr and status->progressMax > 0)
+        if (status->file != nullptr && status->progressMax > 0)
         {
             numOutstanding++;
             sizeDownloadMax += status->progressMax;
@@ -577,7 +577,7 @@ void CRouterBRouterTilesSelect::updateStatus()
             sizeDownloaded += status->progressVal;
             downloading = true;
         }
-        else if (status->isSelected and status->isRemote and (!status->isLocal or status->isOutdated))
+        else if (status->isSelected && status->isRemote && (!status->isLocal || status->isOutdated))
         {
             numOutstanding++;
             sizeOutstanding += status->remoteSize;
@@ -602,7 +602,7 @@ void CRouterBRouterTilesSelect::updateStatus()
     statusProgress->setRange(0,sizeDownloadMax);
     statusProgress->setValue(sizeDownloaded);
 
-    if (this->downloading != downloading or (numOutstanding > 0) != downloadSelected)
+    if (this->downloading != downloading || (numOutstanding > 0) != downloadSelected)
     {
         this->downloading = downloading;
         downloadSelected = numOutstanding > 0;

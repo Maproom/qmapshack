@@ -614,8 +614,8 @@ void CRouterBRouterSetupWizard::updateProfiles()
         QList<int> selected = updateProfileView(listProfiles, profiles);
         qSort(selected.begin(),selected.end());
         toolDeleteProfile->setEnabled(!selected.isEmpty());
-        toolProfileUp->setEnabled(!selected.isEmpty() and selected.first() > 0);
-        toolProfileDown->setEnabled(!selected.isEmpty() and selected.last() < profiles.size()-1);
+        toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
+        toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size()-1);
         if (isError)
         {
             toolAddProfile->setEnabled(false);

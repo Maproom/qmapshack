@@ -334,9 +334,11 @@ bool CTcxProject::saveAs(const QString& fn, IGisProject& project)
             }
 
             QMessageBox courseOrActivityMsgBox;
-            courseOrActivityMsgBox.setWindowTitle(tr("Activity or course ?"));
+            courseOrActivityMsgBox.setWindowTitle(tr("Activity or course?"));
             courseOrActivityMsgBox.setText(tr("QMapShack does not know how track <b>%1</b> should be saved. "
-                "<b>Do you want to save it as a course or as an activity ?</b>").arg(trkItem->getName()));
+                "<b>Do you want to save it as a course or as an activity? </b>"
+                "Remember that only waypoints close enough to the track will be saved when saving as a course. "
+                "Waypoints will not be saved when saving as an activity.").arg(trkItem->getName()));
             QAbstractButton* pButtonCourse = courseOrActivityMsgBox.addButton(tr("Course"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonActivity = courseOrActivityMsgBox.addButton(tr("Activity"), QMessageBox::AcceptRole);
             QAbstractButton* pButtonCancel = courseOrActivityMsgBox.addButton(tr("Cancel"), QMessageBox::RejectRole);

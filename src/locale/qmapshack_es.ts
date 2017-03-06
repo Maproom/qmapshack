@@ -4014,27 +4014,17 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
-        <source>Activity or course ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
-        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity ?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
         <source>Course</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="343"/>
         <source>Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="344"/>
         <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4044,18 +4034,28 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="433"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
+        <source>Activity or course?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
+        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished">Fallo al crear el archivo &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="454"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="456"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished">Fallo al escribir en el archivo &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="436"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="455"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="438"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="457"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished"></translation>
     </message>

@@ -4022,27 +4022,17 @@ ligne %2, colonne %3:
         <translation>La trace &lt;b&gt;%1&lt;/b&gt; que vous avez selectionnée contient des points à l&apos;horodatage invalide. L&apos;appareil risque de ne pas accepter le fichier TCX généré si la trace est laissée telle quelle. &lt;b&gt;Voulez-vous appliquer un filtre vitesse arbitraire (10 m/s) et continuer ?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
-        <source>Activity or course ?</source>
-        <translation>Course ou activité ?</translation>
-    </message>
-    <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
-        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity ?&lt;/b&gt;</source>
-        <translation>QMapShack ne sait pas comment la trace &lt;b&gt;%1&lt;/b&gt; doit être sauvegardée. &lt;b&gt;Voulez-vous la sauvegarder comme une course ou comme une activité ?&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
         <source>Course</source>
         <translation>Course</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="343"/>
         <source>Activity</source>
         <translation>Activité</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="342"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="344"/>
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
@@ -4052,18 +4042,28 @@ ligne %2, colonne %3:
         <translation>Trace à l&apos;horodatage invalide...</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="433"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="337"/>
+        <source>Activity or course?</source>
+        <translation>Activité ou course ?</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="338"/>
+        <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
+        <translation type="unfinished">QMapShack ne sait pas comment la trace &lt;b&gt;%1&lt;/b&gt; doit être sauvegardée. &lt;b&gt;Voulez-vous la sauvegarder comme une activité ou comme une course ?&lt;/b&gt; Seuls les waypoints proches de la trace seront inclus si &quot;course&quot; est choisi. Si &quot;activité&quot; est choisi aucun waypoint ne sera inclus.</translation>
+    </message>
+    <message>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Impossible de créer le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="454"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="456"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Impossible d&apos;écrire le fichier: &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="436"/>
-        <location filename="../gis/tcx/CTcxProject.cpp" line="455"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="438"/>
+        <location filename="../gis/tcx/CTcxProject.cpp" line="457"/>
         <source>Saving GIS data failed...</source>
         <translation>Impossible de sauvegarder les données SIG</translation>
     </message>

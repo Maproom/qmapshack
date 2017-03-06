@@ -196,7 +196,7 @@ QString CRouterBRouter::getOptions()
 {
     return QString(tr("profile: %1, alternative: %2")
                    .arg(comboProfile->currentData().toString())
-                   .arg(comboAlternative->currentData().toString()));
+                   .arg(comboAlternative->currentData().toInt()+1));
 }
 
 bool CRouterBRouter::hasFastRouting()

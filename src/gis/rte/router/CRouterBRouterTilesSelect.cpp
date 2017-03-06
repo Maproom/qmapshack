@@ -439,7 +439,7 @@ void CRouterBRouterTilesSelect::slotDownload()
          it++)
     {
         CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected && (status->isOutdated or !status->isLocal) && status->file == nullptr)
+        if (status->isSelected && (status->isOutdated || !status->isLocal) && status->file == nullptr)
         {
             QString fileName = it.key();
 

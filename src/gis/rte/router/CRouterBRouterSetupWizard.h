@@ -33,7 +33,7 @@ public:
     virtual ~CRouterBRouterSetupWizard();
 
     int nextId() const override;
-    void initializePage(const int id) override;
+    void initializePage(int id) override;
     bool validateCurrentPage() override;
 
     enum { Page_ChooseMode, Page_LocalDirectory, Page_LocalInstallation, Page_Profiles,

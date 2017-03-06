@@ -148,16 +148,16 @@ public:
     bool saveTwoNav(const QString& filename);
 
     /**
-    @brief Save track as TCX course (including correlated course points)
-    @param coursesNode   The node to append by the course
-    */
+       @brief Save track as TCX course (including correlated course points)
+       @param coursesNode   The node to append by the course
+     */
     void saveTCXcourse(QDomNode& coursesNode);
 
 
     /**
-    @brief Save track as TCX activity
-    @param activitiesNode   The node to append by the activity
-    */
+       @brief Save track as TCX activity
+       @param activitiesNode   The node to append by the activity
+     */
     void saveTCXactivity(QDomNode& activitiesNode);
 
 
@@ -181,7 +181,7 @@ public:
     }
 
     /// returns "true" when trk has no time-related invalid points
-    bool isTrkTimeValid() { return ((allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0); }
+    bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
 
     QDateTime getTimestamp() const override { return getTimeStart(); }
 

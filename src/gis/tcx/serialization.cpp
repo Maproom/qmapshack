@@ -1,18 +1,18 @@
 /**********************************************************************************************
-Copyright (C) 2017 Michel Durand zero@cms123.fr
+   Copyright (C) 2017 Michel Durand zero@cms123.fr
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
 
@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <initializer_list>
 
 static std::initializer_list<QString> knownSymbols = { "1stCategory", "2ndCategory", "3rdCategory", "4thCategory", "Danger", "FirstAid", "Food",
-"HorsCategory", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };
+                                                       "HorsCategory", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };
 
 void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToBeSaved)
 {
@@ -92,13 +92,13 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
 
     QDomElement lapElmt = doc.createElement("Lap");
     courseNode.appendChild(lapElmt);
-    
+
     lapElmt.appendChild(doc.createElement("TotalTimeSeconds"));
     lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(this->getTotalElapsedSeconds())));
-    
+
     lapElmt.appendChild(doc.createElement("DistanceMeters"));
     lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(this->getTotalDistance())));
-    
+
     lapElmt.appendChild(doc.createElement("Intensity"));
     lapElmt.lastChild().appendChild(doc.createTextNode("Active"));
 
@@ -110,7 +110,6 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
 
     for (const CTrackData::trkpt_t& trkpt : trk)
     {
-   
         QDomElement xmlTrkpt = doc.createElement("Trackpoint");
         xmlTrk.appendChild(xmlTrkpt);
 
@@ -127,7 +126,7 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
         xmlTrkpt.lastChild().appendChild(doc.createElement("LongitudeDegrees"));
         str.sprintf("%1.8f", trkpt.lon);
         xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(str));
-            
+
         qint32 eleToBeWritten = NOINT;
         if (NOINT != trkpt.ele) // if this trackpoint has elevation
         {
@@ -159,7 +158,6 @@ void CGisItemTrk::saveTCXcourse(QDomNode& coursesNode)
             xmlTrkpt.appendChild(doc.createElement("HeartRateBpm"));
             xmlTrkpt.lastChild().appendChild(doc.createElement("Value"));
             xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString()));
-
         }
 
         if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString().size() != 0)
@@ -192,10 +190,10 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
     activitiesNode.appendChild(activityNode);
 
     activityNode.setAttribute("Sport", "Other");
-    
+
     activityNode.appendChild(doc.createElement("Id"));
     activityNode.lastChild().appendChild(doc.createTextNode(trk.segs[0].pts[0].time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
-    
+
     for (const CTrackData::trkseg_t &seg : trk.segs)
     {
         QDomElement lapElmt = doc.createElement("Lap");
@@ -204,7 +202,7 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
 
         lapElmt.appendChild(doc.createElement("TotalTimeSeconds")); // "totalTime" means "time of this lap"
         lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(seg.pts.first().time.secsTo(seg.pts.last().time))));
-   
+
         lapElmt.appendChild(doc.createElement("DistanceMeters"));
         lapElmt.lastChild().appendChild(doc.createTextNode(QString::number(seg.pts.last().distance - seg.pts.first().distance)));
 
@@ -223,10 +221,9 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
 
         for (const CTrackData::trkpt_t &trkpt : seg.pts)
         {
-
             QDomElement xmlTrkpt = doc.createElement("Trackpoint");
             xmlTrk.appendChild(xmlTrkpt);
-    
+
             xmlTrkpt.appendChild(doc.createElement("Time"));
             xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'")));
 
@@ -251,19 +248,18 @@ void CGisItemTrk::saveTCXactivity(QDomNode& activitiesNode)
             xmlTrkpt.appendChild(doc.createElement("DistanceMeters"));
             xmlTrkpt.lastChild().appendChild(doc.createTextNode(QString::number(trkpt.distance)));
 
-           if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString().size() != 0)
-           {
+            if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString().size() != 0)
+            {
                 xmlTrkpt.appendChild(doc.createElement("HeartRateBpm"));
                 xmlTrkpt.lastChild().appendChild(doc.createElement("Value"));
                 xmlTrkpt.lastChild().lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"].toString()));
-        
             }
 
-           if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString().size() != 0)
-           {
+            if (trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString().size() != 0)
+            {
                 xmlTrkpt.appendChild(doc.createElement("Cadence"));
                 xmlTrkpt.lastChild().appendChild(doc.createTextNode(trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:cad"].toString()));
-           }
+            }
         }
     }
 }

@@ -321,7 +321,7 @@ void CRouterBRouterSetup::profileDown(const QString profile)
     if (installMode == ModeLocal)
     {
         int index = localProfiles.indexOf(profile);
-        if (index > -1 and index < localProfiles.size()-1)
+        if (index > -1 && index < localProfiles.size()-1)
         {
             localProfiles.removeAt(index);
             localProfiles.insert(index+1,profile);
@@ -331,7 +331,7 @@ void CRouterBRouterSetup::profileDown(const QString profile)
     else if (installMode == ModeOnline)
     {
         int index = onlineProfiles.indexOf(profile);
-        if (index > -1 and index < onlineProfiles.size()-1)
+        if (index > -1 && index < onlineProfiles.size()-1)
         {
             onlineProfiles.removeAt(index);
             onlineProfiles.insert(index+1,profile);
@@ -489,13 +489,13 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         }
 
         const QScriptValue br = engine.globalObject().property("BR");
-        if (!br.isValid() or br.isError())
+        if (!br.isValid() || br.isError())
         {
             emitOnlineConfigScriptError(br);
             return;
         }
         const QScriptValue conf = br.property("conf");
-        if (!conf.isValid() or conf.isError())
+        if (!conf.isValid() || conf.isError())
         {
             emitOnlineConfigScriptError(conf);
             return;
@@ -503,7 +503,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 
         bool changed(false);
         const QScriptValue host = conf.property("host").toString();
-        if (!host.isValid() or host.isError())
+        if (!host.isValid() || host.isError())
         {
             emitOnlineConfigScriptError(host);
             return;
@@ -514,7 +514,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             changed = true;
         }
         const QScriptValue url = conf.property("profilesUrl").toString();
-        if (!url.isValid() or url.isError())
+        if (!url.isValid() || url.isError())
         {
             emitOnlineConfigScriptError(url);
             return;
@@ -532,7 +532,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         changed = false;
 
         const QScriptValue profiles = conf.property("profiles");
-        if (!profiles.isValid() or profiles.isError())
+        if (!profiles.isValid() || profiles.isError())
         {
             emitOnlineConfigScriptError(profiles);
             return;
@@ -543,7 +543,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         for(qint32 i=0;i<len;i++)
         {
             QScriptValue profile = profiles.property(i);
-            if (!profile.isValid() or profile.isError())
+            if (!profile.isValid() || profile.isError())
             {
                 emitOnlineConfigScriptError(profile);
                 return;
@@ -663,7 +663,7 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
     const QDir dir(localDir);
     const QString brouterJarPath = dir.absoluteFilePath("brouter.jar");
-    return (QFile(brouterJarPath).exists() and QDir(dir.absoluteFilePath(localProfileDir)).exists());
+    return (QFile(brouterJarPath).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists());
 }
 
 void CRouterBRouterSetup::onInvalidSetup()

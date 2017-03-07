@@ -220,8 +220,106 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) c
     return QNetworkRequest(url);
 }
 
+int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
+{
+    if(!hasFastRouting() || !mutex.tryLock())
+    {
+        return -1;
+    }
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
+    {
+        startBRouter();
+    }
+
+    QVector<wpt_t> points;
+    points << wpt_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG);
+    points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
+
+    synchronous = true;
+
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
+
+    reply->setProperty("options", getOptions());
+    reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
+    }
+
+    //CProgressDialog * progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+
+    QEventLoop eventLoop;
+    connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+    connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+    eventLoop.exec();
+
+    delete progress;
+
+    if (reply->error() != QNetworkReply::NoError)
+    {
+        coords.clear();
+        if(canvas)
+        {
+            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+        }
+        timerCloseStatusMsg->start();
+    }
+    else
+    {
+        clearError();
+
+        const QByteArray &res = reply->readAll();
+
+        if(res.isEmpty())
+        {
+            coords.clear();
+        }
+        else
+        {
+            QDomDocument xml;
+            xml.setContent(res);
+
+            const QDomElement &xmlGpx = xml.documentElement();
+            if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
+            {
+                coords.clear();
+                if (canvas)
+                {
+                    canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+                }
+                timerCloseStatusMsg->start();
+            }
+            else
+            {
+                // read the shape
+                const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
+                        .firstChildElement("trkseg")
+                        .elementsByTagName("trkpt");
+                for(int n = 0; n < xmlLatLng.size(); n++)
+                {
+                    const QDomElement &elem   = xmlLatLng.item(n).toElement();
+                    coords << QPointF();
+                    QPointF &point = coords.last();
+                    point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
+                    point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+                }
+            }
+        }
+    }
+
+    reply->deleteLater();
+
+    slotCloseStatusMsg();
+    mutex.unlock();
+    return coords.size();
+}
+
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
+    mutex.lock();
     if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
     {
         startBRouter();
@@ -229,6 +327,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
     if(nullptr == rte)
     {
+        mutex.unlock();
         return;
     }
 
@@ -259,103 +358,9 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
     }
 
-    if (progress == nullptr)
-    {
-        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-        connect(progress.data(), &CProgressDialog::rejected, reply, &QNetworkReply::abort);
-    }
-}
+    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
-{
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
-    {
-        startBRouter();
-    }
-    if(!hasFastRouting() || !mutex.tryLock())
-    {
-        return -1;
-    }
-
-    QVector<wpt_t> points;
-    points << wpt_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG);
-    points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
-
-    synchronous = true;
-
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
-
-    reply->setProperty("options", getOptions());
-    reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
-    }
-
-    CProgressDialog * progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-
-    QEventLoop eventLoop;
     connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
-    connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
-
-    delete progress;
-
-    if (reply->error() != QNetworkReply::NoError)
-    {
-        coords.clear();
-        if(canvas)
-        {
-            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
-            timerCloseStatusMsg->start();
-        }
-    }
-    else
-    {
-        clearError();
-
-        const QByteArray &res = reply->readAll();
-
-        if(res.isEmpty())
-        {
-            coords.clear();
-        }
-        else
-        {
-            QDomDocument xml;
-            xml.setContent(res);
-
-            const QDomElement &xmlGpx = xml.documentElement();
-            if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
-            {
-                coords.clear();
-                QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(QString(res)), QMessageBox::Abort);
-            }
-            else
-            {
-                // read the shape
-                const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
-                        .firstChildElement("trkseg")
-                        .elementsByTagName("trkpt");
-                for(int n = 0; n < xmlLatLng.size(); n++)
-                {
-                    const QDomElement &elem   = xmlLatLng.item(n).toElement();
-                    coords << QPointF();
-                    QPointF &point = coords.last();
-                    point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
-                    point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
-                }
-            }
-        }
-    }
-
-    reply->deleteLater();
-
-    slotCloseStatusMsg();
-    mutex.unlock();
-    return coords.size();
 }
 
 void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
@@ -373,9 +378,10 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         if(canvas)
         {
             canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
-            timerCloseStatusMsg->start();
         }
+        timerCloseStatusMsg->start();
         reply->deleteLater();
+        mutex.unlock();
         return;
     }
 
@@ -384,6 +390,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
     if(res.isEmpty())
     {
+        mutex.unlock();
         return;
     }
 
@@ -395,7 +402,13 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     const QDomElement &xmlGpx = xml.documentElement();
     if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
     {
-        QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(QString(res)), QMessageBox::Abort);
+        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+        if(canvas)
+        {
+            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+        }
+        timerCloseStatusMsg->start();
+        mutex.unlock();
         return;
     }
 
@@ -413,6 +426,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     }
 
     slotCloseStatusMsg();
+    mutex.unlock();
 }
 
 QUrl CRouterBRouter::getServiceUrl() const

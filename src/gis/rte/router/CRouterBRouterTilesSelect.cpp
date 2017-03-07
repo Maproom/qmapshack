@@ -267,7 +267,7 @@ void CRouterBRouterTilesSelect::initialize() const
     }
     const QDir &dir = segmentsDir();
     const QStringList &segments = dir.entryList();
-    QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
+    const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
     for (const QString &segment : segments)
     {
         if (rxTileName.indexIn(segment) > -1)
@@ -413,7 +413,7 @@ QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
 QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString &fileName)
 {
     // 'E10_N20.rd5'
-    QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
+    const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
     if (rxTileName.indexIn(fileName) > -1)
     {
         return QPoint(rxTileName.cap(2).toInt() * (rxTileName.cap(1) == "E" ? 1 : -1)

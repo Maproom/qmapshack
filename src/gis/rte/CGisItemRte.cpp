@@ -1052,21 +1052,21 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     updateHistory();
 }
 
-void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &options)
+void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &options)
 {
     QMutexLocker lock(&mutexItems);
 
     QVector<subpt_t> shape;
 
-    QDomElement gpx = xml.documentElement();
+    const QDomElement &gpx = xml.documentElement();
     // read the shape
-    QDomElement xmlShape        = gpx.firstChildElement("trk");
-    QDomElement xmlShapePoints  = xmlShape.firstChildElement("trkseg");
-    QDomNodeList xmlLatLng      = xmlShapePoints.elementsByTagName("trkpt");
+    const QDomElement &xmlShape        = gpx.firstChildElement("trk");
+    const QDomElement &xmlShapePoints  = xmlShape.firstChildElement("trkseg");
+    const QDomNodeList &xmlLatLng      = xmlShapePoints.elementsByTagName("trkpt");
     const qint32 N = xmlLatLng.size();
     for(int n = 0; n < N; n++)
     {
-        QDomElement elem   = xmlLatLng.item(n).toElement();
+        const QDomElement &elem   = xmlLatLng.item(n).toElement();
         shape << subpt_t();
         subpt_t& subpt = shape.last();
         subpt.lon = elem.attribute("lon").toFloat();
@@ -1075,14 +1075,14 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
     }
 
     // build list of maneuvers
-    QDomElement xmlLeg = gpx.firstChildElement("rte");
+    const QDomElement &xmlLeg = gpx.firstChildElement("rte");
     if (!xmlLeg.isNull())
     {
-        QDomNodeList xmlManeuvers = xmlLeg.elementsByTagName("rtept");
+        const QDomNodeList &xmlManeuvers = xmlLeg.elementsByTagName("rtept");
         const qint32 M = xmlManeuvers.size();
         for(int m = 0; m < M; m++)
         {
-            QDomNode xmlManeuver    = xmlManeuvers.item(m);
+            const QDomNode &xmlManeuver    = xmlManeuvers.item(m);
             /* <rtept lat="48.322380" lon="11.601220">
                 <desc>right</desc>
                 <extensions>
@@ -1095,7 +1095,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
             subpt_t& subpt          = shape[idx];
             subpt.type              = subpt_t::eTypeJunct;
             subpt.instruction       = xmlManeuver.firstChildElement("desc").text();
-            QString command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
+            const QString &command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
             if(command=="TU")        // u-turn
             {
                 subpt.bearing = 180;
@@ -1159,8 +1159,8 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
 
     for(qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++)
     {
-        rtept_t& routePoint = rte.pts[rtIdx];
-        rtept_t& nextRoutePoint = rte.pts[rtIdx+1];
+        rtept_t &routePoint = rte.pts[rtIdx];
+        const rtept_t &nextRoutePoint = rte.pts[rtIdx+1];
 
         qreal minDist = std::pow(nextRoutePoint.lon - shape[minDistIdx].lon, 2) + std::pow(nextRoutePoint.lat - shape[minDistIdx].lat, 2);
         for (qint32 idx = startIdx+1; idx < shape.size(); idx++)
@@ -1178,7 +1178,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
         startIdx = minDistIdx;
     }
 
-    rtept_t& rtept = rte.pts.last();
+    rtept_t &rtept = rte.pts.last();
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
@@ -1187,15 +1187,15 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument& xml, const QString &o
     rte.lastRoutedWith = "BRouter" + options;
 
 //    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
-    QDomNodeList nodes = xml.childNodes();
+    const QDomNodeList &nodes = xml.childNodes();
     for (int i = 0; i < nodes.count(); i++)
     {
-        QDomNode node = nodes.at(i);
+        const QDomNode &node = nodes.at(i);
         if (node.isComment())
         {
-            QString commentTxt = node.toComment().data();
+            const QString &commentTxt = node.toComment().data();
             // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
-            QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*filtered ascend\\s*=\\s*)(-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
+            const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*filtered ascend\\s*=\\s*)(-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
             int pos = rxAscDes.indexIn(commentTxt);
             if (pos > -1) {
                 rte.totalDistance = rxAscDes.cap(2).toFloat();

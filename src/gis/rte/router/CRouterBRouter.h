@@ -92,7 +92,7 @@ private:
     CRouterBRouterInfo * info;
     CRouterBRouterToolShell * brouterShell {nullptr};
     QProcess::ProcessState brouterState {QProcess::NotRunning};
-    QPointer<CProgressDialog> progress;
+    CProgressDialog * progress;
     bool isError { false };
     QString error;
     QString errorDetails;

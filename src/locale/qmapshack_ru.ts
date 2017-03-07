@@ -3410,68 +3410,57 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="259"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="294"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="248"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="358"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="264"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="297"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="252"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="361"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished">Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="334"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="398"/>
-        <source>Failed...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="334"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="398"/>
-        <source>Bad response from server:
-%1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="311"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="375"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="266"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="291"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="380"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="412"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="425"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished">&lt;br/&gt;Продолжительность расчета: %1 сек</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="506"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="520"/>
         <source>running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="512"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="518"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
         <source>stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="524"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="538"/>
         <source>invalid</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="534"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
         <source>not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="544"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="558"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>

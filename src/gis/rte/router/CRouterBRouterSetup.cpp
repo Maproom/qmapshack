@@ -80,13 +80,10 @@ void CRouterBRouterSetup::load()
     {
         updateLocalProfiles();
     }
-    else if (installMode == ModeOnline)
-    {
-        loadOnlineConfig();
-    }
     else
     {
-        throw CRouterBRouterSetupException();
+        Q_ASSERT(installMode == ModeOnline);
+        loadOnlineConfig();
     }
 }
 
@@ -224,20 +221,14 @@ CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QString mo
 
 QString CRouterBRouterSetup::stringFromMode(const mode_e mode) const
 {
-    switch(mode)
-    {
-    case ModeLocal:
+    if (mode == ModeLocal)
     {
         return "local";
     }
-    case ModeOnline:
+    else
     {
+        Q_ASSERT(mode == ModeOnline);
         return "online";
-    }
-    default:
-    {
-        throw CRouterBRouterSetupException();
-    }
     }
 }
 
@@ -247,17 +238,14 @@ void CRouterBRouterSetup::addProfile(const QString profile)
     {
         loadOnlineProfileAsync(profile, ProfileInstall);
     }
-    else if (installMode == ModeOnline)
+    else
     {
+        Q_ASSERT(installMode == ModeOnline);
         if (!onlineProfiles.contains(profile))
         {
             onlineProfiles << profile;
             emit sigProfilesChanged();
         }
-    }
-    else
-    {
-        throw CRouterBRouterSetupException();
     }
 }
 
@@ -277,14 +265,11 @@ void CRouterBRouterSetup::deleteProfile(const QString profile)
             emit sigProfilesChanged();
         }
     }
-    else if (installMode == ModeOnline)
-    {
-        onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
-        emit sigProfilesChanged();
-    }
     else
     {
-        throw CRouterBRouterSetupException();
+        Q_ASSERT(installMode == ModeOnline);
+        onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
+        emit sigProfilesChanged();
     }
 }
 
@@ -300,8 +285,9 @@ void CRouterBRouterSetup::profileUp(const QString profile)
             emit sigProfilesChanged();
         }
     }
-    else if (installMode == ModeOnline)
+    else
     {
+        Q_ASSERT(installMode == ModeOnline);
         int index = onlineProfiles.indexOf(profile);
         if (index > 0)
         {
@@ -309,10 +295,6 @@ void CRouterBRouterSetup::profileUp(const QString profile)
             onlineProfiles.insert(index-1,profile);
             emit sigProfilesChanged();
         }
-    }
-    else
-    {
-        throw CRouterBRouterSetupException();
     }
 }
 
@@ -328,8 +310,9 @@ void CRouterBRouterSetup::profileDown(const QString profile)
             emit sigProfilesChanged();
         }
     }
-    else if (installMode == ModeOnline)
+    else
     {
+        Q_ASSERT(installMode == ModeOnline);
         int index = onlineProfiles.indexOf(profile);
         if (index > -1 && index < onlineProfiles.size()-1)
         {
@@ -337,10 +320,6 @@ void CRouterBRouterSetup::profileDown(const QString profile)
             onlineProfiles.insert(index+1,profile);
             emit sigProfilesChanged();
         }
-    }
-    else
-    {
-        throw CRouterBRouterSetupException();
     }
 }
 
@@ -383,25 +362,19 @@ void CRouterBRouterSetup::updateLocalProfiles()
 
 QDir CRouterBRouterSetup::getProfileDir(const mode_e mode) const
 {
-    switch(mode)
-    {
-    case ModeLocal:
+    if (mode == ModeLocal)
     {
         return QDir(QDir(localDir).absoluteFilePath(localProfileDir));
     }
-    case ModeOnline:
+    else
     {
+        Q_ASSERT(mode == ModeOnline);
         QDir brouterDir(QDir(IAppSetup::getPlatformInstance()->defaultCachePath()).absoluteFilePath(onlineCacheDir));
         if (!brouterDir.exists())
         {
             brouterDir.mkpath(brouterDir.absolutePath());
         }
         return brouterDir;
-    }
-    default:
-    {
-        throw CRouterBRouterSetupException();
-    }
     }
 }
 
@@ -411,13 +384,10 @@ QStringList CRouterBRouterSetup::getProfiles() const
     {
         return localProfiles;
     }
-    else if (installMode == ModeOnline)
-    {
-        return onlineProfiles;
-    }
     else
     {
-        throw CRouterBRouterSetupException();
+        Q_ASSERT(installMode == ModeOnline);
+        return onlineProfiles;
     }
 }
 
@@ -434,22 +404,14 @@ void CRouterBRouterSetup::loadOnlineConfig()
 void CRouterBRouterSetup::slotOnlineRequestFinished(QNetworkReply *reply)
 {
     request_e type = request_e(reply->property("type").toInt());
-    switch(type)
-    {
-    case type_config:
+    if (type == type_config)
     {
         loadOnlineConfigFinished(reply);
-        break;
     }
-    case type_profile:
+    else
     {
+        Q_ASSERT(type ==  type_profile);
         loadOnlineProfileFinished(reply);
-        break;
-    }
-    default:
-    {
-        reply->deleteLater();
-    }
     }
 }
 
@@ -606,13 +568,10 @@ void CRouterBRouterSetup::displayProfileAsync(const QString profile)
             emit sigDisplayOnlineProfileFinished(profile, QString(content));
         }
     }
-    else if (installMode == ModeOnline)
-    {
-        loadOnlineProfileAsync(profile, ProfileDisplay);
-    }
     else
     {
-        throw CRouterBRouterSetupException();
+        Q_ASSERT(installMode == ModeOnline);
+        loadOnlineProfileAsync(profile, ProfileDisplay);
     }
 }
 

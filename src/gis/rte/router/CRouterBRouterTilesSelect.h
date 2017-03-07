@@ -50,6 +50,8 @@ public:
     bool isDownloading();
     bool isDownloadSelected();
 
+    static const QPoint noTile;
+
 signals:
     void sigCompleteChanged();
 

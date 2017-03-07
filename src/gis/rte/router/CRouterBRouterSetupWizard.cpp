@@ -292,15 +292,8 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
 
 void CRouterBRouterSetupWizard::accept()
 {
-    try
-    {
-        setup->save();
-        QDialog::accept();
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
-    }
+    setup->save();
+    QDialog::accept();
 }
 
 void CRouterBRouterSetupWizard::reject()
@@ -536,61 +529,33 @@ void CRouterBRouterSetupWizard::slotDisplayProfile(QString profile, const QStrin
 
 void CRouterBRouterSetupWizard::slotAddProfileClicked()
 {
-    try
+    for (QString profile : selectedProfiles(listAvailableProfiles))
     {
-        for (QString profile : selectedProfiles(listAvailableProfiles))
-        {
-            setup->addProfile(profile);
-        }
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
+        setup->addProfile(profile);
     }
 }
 
 void CRouterBRouterSetupWizard::slotDelProfileClicked()
 {
-    try
+    for (QString profile : selectedProfiles(listProfiles))
     {
-        for (QString profile : selectedProfiles(listProfiles))
-        {
-            setup->deleteProfile(profile);
-        }
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
+        setup->deleteProfile(profile);
     }
 }
 
 void CRouterBRouterSetupWizard::slotProfileUpClicked()
 {
-    try
+    for (QString profile : selectedProfiles(listProfiles))
     {
-        for (QString profile : selectedProfiles(listProfiles))
-        {
-            setup->profileUp(profile);
-        }
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
+        setup->profileUp(profile);
     }
 }
 
 void CRouterBRouterSetupWizard::slotProfileDownClicked()
 {
-    try
+    for (QString profile : selectedProfiles(listProfiles))
     {
-        for (QString profile : selectedProfiles(listProfiles))
-        {
-            setup->profileDown(profile);
-        }
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
+        setup->profileDown(profile);
     }
 }
 
@@ -602,42 +567,35 @@ void CRouterBRouterSetupWizard::slotProfilesChanged()
 
 void CRouterBRouterSetupWizard::updateProfiles()
 {
-    try
+    const QStringList profiles = setup->getProfiles();
+    QStringList available;
+    for(QString profile:setup->onlineProfilesAvailable)
     {
-        const QStringList profiles = setup->getProfiles();
-        QStringList available;
-        for(QString profile:setup->onlineProfilesAvailable)
+        if (!profiles.contains(profile))
         {
-            if (!profiles.contains(profile))
-            {
-                available << profile;
-            }
-        }
-
-        QList<int> selected = updateProfileView(listProfiles, profiles);
-        qSort(selected.begin(),selected.end());
-        toolDeleteProfile->setEnabled(!selected.isEmpty());
-        toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
-        toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size()-1);
-        if (isError)
-        {
-            toolAddProfile->setEnabled(false);
-            listAvailableProfiles->setVisible(false);
-            textAvailableProfiles->setVisible(true);
-            labelAvailableProfiles->setText(tr("no Profiles available"));
-            textAvailableProfiles->setText(error + ": "+ errorDetails);
-        }
-        else
-        {
-            toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
-            listAvailableProfiles->setVisible(true);
-            textAvailableProfiles->setVisible(false);
-            labelAvailableProfiles->setText(tr("available Profiles"));
+            available << profile;
         }
     }
-    catch (CRouterBRouterSetupException &e)
+
+    QList<int> selected = updateProfileView(listProfiles, profiles);
+    qSort(selected.begin(),selected.end());
+    toolDeleteProfile->setEnabled(!selected.isEmpty());
+    toolProfileUp->setEnabled(!selected.isEmpty() && selected.first() > 0);
+    toolProfileDown->setEnabled(!selected.isEmpty() && selected.last() < profiles.size()-1);
+    if (isError)
     {
-        setup->onInvalidSetup();
+        toolAddProfile->setEnabled(false);
+        listAvailableProfiles->setVisible(false);
+        textAvailableProfiles->setVisible(true);
+        labelAvailableProfiles->setText(tr("no Profiles available"));
+        textAvailableProfiles->setText(error + ": "+ errorDetails);
+    }
+    else
+    {
+        toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
+        listAvailableProfiles->setVisible(true);
+        textAvailableProfiles->setVisible(false);
+        labelAvailableProfiles->setText(tr("available Profiles"));
     }
     pageProfiles->emitCompleteChanged();
 }
@@ -786,8 +744,9 @@ void CRouterBRouterSetupWizard::slotOnlineConfigChanged()
     {
         updateLocalDetails();
     }
-    else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
+    else
     {
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
         updateOnlineDetails();
     }
 }

@@ -25,7 +25,7 @@ CSingleInstanceProxy::CSingleInstanceProxy(const QStringList filenames)
     QLocalSocket socket;
     socket.connectToServer("QMapShack");
     if(socket.waitForConnected(1000))
-    {        
+    {
         // if the connection is successful another instance
         // is already running. In that case the list of files to
         // open is sent to the primary instance. And this instance

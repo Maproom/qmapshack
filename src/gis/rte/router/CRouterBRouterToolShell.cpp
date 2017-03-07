@@ -57,7 +57,6 @@ void CRouterBRouterToolShell::stop()
     if (cmd.state() != QProcess::NotRunning)
     {
         cmd.terminate();
-        cmd.waitForFinished();
     }
 }
 

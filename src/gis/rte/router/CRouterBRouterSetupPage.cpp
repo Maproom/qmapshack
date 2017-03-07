@@ -47,15 +47,11 @@ bool CRouterBRouterSetupPage::isComplete() const
     }
     case CRouterBRouterSetupWizard::Page_Profiles:
     {
-        QListView * listProfiles = findChild<QListView*>("listProfiles");
-        QAbstractItemModel * model = listProfiles->model();
-        int rowCount = model->rowCount();
-        return rowCount > 0;
-        //return listProfiles->model()->rowCount() > 0;
+        return findChild<QListView*>("listProfiles")->model()->rowCount() > 0;
     }
     default:
     {
-        return true;
+        return false;
     }
     }
 }

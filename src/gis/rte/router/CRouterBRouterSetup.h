@@ -53,26 +53,26 @@ public:
 
     QStringList getProfiles() const;
 
-    void addProfile(const QString profile);
-    void deleteProfile(const QString profile);
-    void profileUp(const QString profile);
-    void profileDown(const QString profile);
+    void addProfile(const QString &profile);
+    void deleteProfile(const QString &profile);
+    void profileUp(const QString &profile);
+    void profileDown(const QString &profile);
 
     void updateLocalProfiles();
 
-    void loadOnlineConfig();
-    void displayProfileAsync(const QString profile);
-    void displayOnlineProfileAsync(const QString profile) const;
+    void loadOnlineConfig() const;
+    void displayProfileAsync(const QString &profile) const;
+    void displayOnlineProfileAsync(const QString &profile) const;
 
     bool isLocalBRouterInstalled() const;
 
     void onInvalidSetup();
 
 signals:
-    void sigOnlineConfigChanged();
-    void sigProfilesChanged();
-    void sigDisplayOnlineProfileFinished(const QString profile, const QString content);
-    void sigError(const QString error, const QString details);
+    void sigOnlineConfigChanged() const;
+    void sigProfilesChanged() const;
+    void sigDisplayOnlineProfileFinished(const QString profile, const QString content) const;
+    void sigError(const QString error, const QString details) const;
 
 private slots:
     void slotOnlineRequestFinished(QNetworkReply *reply);
@@ -82,12 +82,12 @@ private:
     enum profileRequest_e { ProfileInstall, ProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
-    void loadOnlineProfileAsync(const QString profile, const profileRequest_e mode) const;
+    void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
-    void emitOnlineConfigScriptError(QScriptValue error);
-    void emitNetworkError(QNetworkReply * reply);
-    mode_e modeFromString(const QString mode) const;
+    void emitOnlineConfigScriptError(const QScriptValue &error) const;
+    void emitNetworkError(QNetworkReply * reply) const;
+    mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;
 
     QStringList onlineProfiles;

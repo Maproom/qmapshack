@@ -81,6 +81,9 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     textBRouterOutput->setVisible(false);
     textBRouterError->setVisible(false);
 
+    brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
+    connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
+
     updateDialog();
 }
 
@@ -98,7 +101,7 @@ CRouterBRouter::~CRouterBRouter()
     cfg.endGroup();
 }
 
-void CRouterBRouter::slotToolSetupClicked()
+void CRouterBRouter::slotToolSetupClicked() const
 {
     stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
@@ -115,7 +118,7 @@ void CRouterBRouter::slotToolSetupClicked()
     updateDialog();
 }
 
-void CRouterBRouter::slotToolProfileInfoClicked()
+void CRouterBRouter::slotToolProfileInfoClicked() const
 {
     const int index = comboProfile->currentIndex();
     if (index > -1)
@@ -124,19 +127,19 @@ void CRouterBRouter::slotToolProfileInfoClicked()
     }
 }
 
-void CRouterBRouter::slotError(const QString error, const QString details)
+void CRouterBRouter::slotError(const QString error, const QString details) const
 {
     textBRouterError->setText(error + ": " + details);
     textBRouterError->setVisible(true);
 }
 
-void CRouterBRouter::clearError()
+void CRouterBRouter::clearError() const
 {
     textBRouterError->clear();
     textBRouterError->setVisible(false);
 }
 
-void CRouterBRouter::slotDisplayProfileInfo(const QString profile, const QString content)
+void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content) const
 {
     clearError();
     CRouterBRouterInfo info;
@@ -145,7 +148,7 @@ void CRouterBRouter::slotDisplayProfileInfo(const QString profile, const QString
     info.exec();
 }
 
-void CRouterBRouter::updateDialog()
+void CRouterBRouter::updateDialog() const
 {
     if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
@@ -164,7 +167,7 @@ void CRouterBRouter::updateDialog()
     updateLocalBRouterStatus();
 }
 
-void CRouterBRouter::slotCloseStatusMsg()
+void CRouterBRouter::slotCloseStatusMsg() const
 {
     timerCloseStatusMsg->stop();
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -259,8 +262,8 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     if (progress == nullptr)
     {
         progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+        connect(progress.data(), &CProgressDialog::rejected, reply, &QNetworkReply::abort);
     }
-    connect(progress.data(), &CProgressDialog::rejected, reply, &QNetworkReply::abort);
 }
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
@@ -313,7 +316,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     {
         clearError();
 
-        const QByteArray res = reply->readAll();
+        const QByteArray &res = reply->readAll();
 
         if(res.isEmpty())
         {
@@ -324,7 +327,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
             QDomDocument xml;
             xml.setContent(res);
 
-            const QDomElement xmlGpx = xml.documentElement();
+            const QDomElement &xmlGpx = xml.documentElement();
             if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
             {
                 coords.clear();
@@ -333,14 +336,14 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
             else
             {
                 // read the shape
-                const QDomNodeList xmlLatLng = xmlGpx.firstChildElement("trk")
+                const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
                         .firstChildElement("trkseg")
                         .elementsByTagName("trkpt");
                 for(int n = 0; n < xmlLatLng.size(); n++)
                 {
-                    const QDomElement elem   = xmlLatLng.item(n).toElement();
+                    const QDomElement &elem   = xmlLatLng.item(n).toElement();
                     coords << QPointF();
-                    QPointF& point = coords.last();
+                    QPointF &point = coords.last();
                     point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
                     point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
                 }
@@ -376,7 +379,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         return;
     }
 
-    const QByteArray res = reply->readAll();
+    const QByteArray &res = reply->readAll();
     reply->deleteLater();
 
     if(res.isEmpty())
@@ -389,7 +392,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     QDomDocument xml;
     xml.setContent(res);
 
-    const QDomElement xmlGpx = xml.documentElement();
+    const QDomElement &xmlGpx = xml.documentElement();
     if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
     {
         QMessageBox::warning(0,tr("Failed..."), tr("Bad response from server:\n%1").arg(QString(res)), QMessageBox::Abort);
@@ -414,33 +417,26 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
 QUrl CRouterBRouter::getServiceUrl() const
 {
-    switch (setup->installMode)
-    {
-    case CRouterBRouterSetup::ModeLocal:
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
         QUrl url(QString("http://"));
         url.setHost(setup->localHost);
         url.setPort(setup->localPort.toInt());
         return url;
     }
-    case CRouterBRouterSetup::ModeOnline:
+    else
     {
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
         return QUrl(setup->onlineServiceUrl);
-    }
-    default:
-    {
-        setup->onInvalidSetup();
-        return QUrl();
-    }
     }
 }
 
-void CRouterBRouter::slotToggleConsole()
+void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
 }
 
-void CRouterBRouter::slotToggleBRouter()
+void CRouterBRouter::slotToggleBRouter() const
 {
     if (brouterState == QProcess::NotRunning)
     {
@@ -452,17 +448,11 @@ void CRouterBRouter::slotToggleBRouter()
     }
 }
 
-void CRouterBRouter::startBRouter()
+void CRouterBRouter::startBRouter() const
 {
     if (setup->isLocalBRouterInstalled())
     {
-        if (brouterShell == nullptr)
-        {
-            textBRouterOutput->clear();
-            brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
-            connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
-        }
-
+        textBRouterOutput->clear();
         //# BRouter standalone server
         //# java -cp brouter.jar btools.brouter.RouteServer <segmentdir> <profile-map> <customprofiledir> <port> <maxthreads>
         //# maxRunningTime is the request timeout in seconds, set to 0 to disable timeout//    JAVA_OPTS=
@@ -487,9 +477,9 @@ void CRouterBRouter::startBRouter()
     }
 }
 
-void CRouterBRouter::stopBRouter()
+void CRouterBRouter::stopBRouter() const
 {
-    if (brouterState != QProcess::NotRunning && brouterShell != nullptr)
+    if (brouterState != QProcess::NotRunning)
     {
         brouterShell->stop();
     }
@@ -498,18 +488,12 @@ void CRouterBRouter::stopBRouter()
 
 void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
 {
-    if (newState == QProcess::NotRunning && brouterShell != nullptr)
-    {
-        delete brouterShell;
-        brouterShell = nullptr;
-    }
-
     brouterState = newState;
 
     updateLocalBRouterStatus();
 }
 
-void CRouterBRouter::updateLocalBRouterStatus()
+void CRouterBRouter::updateLocalBRouterStatus() const
 {
     if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {

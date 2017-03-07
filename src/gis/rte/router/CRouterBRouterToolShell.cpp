@@ -32,18 +32,18 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 {
 }
 
-void CRouterBRouterToolShell::out(const QString out)
+void CRouterBRouterToolShell::out(const QString &out)
 {
     stdOut(out);
 }
 
-void CRouterBRouterToolShell::execute(const QString dir, const QString command, const QStringList args)
+void CRouterBRouterToolShell::execute(const QString &dir, const QString &command, const QStringList &args)
 {
     start(dir,command,args);
     cmd.waitForFinished();
 }
 
-void CRouterBRouterToolShell::start(const QString dir, const QString command, const QStringList args)
+void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
 {
     stdOut("cd " + dir);
     stdOut(command+" " + args.join(" ") + "\n");
@@ -61,7 +61,7 @@ void CRouterBRouterToolShell::stop()
     }
 }
 
-void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState)
+void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) const
 {
     emit sigProcessStateChanged(newState);
 }

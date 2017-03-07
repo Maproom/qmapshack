@@ -46,19 +46,19 @@ public slots:
 private slots:
     void slotCurrentIdChanged(const int id);
     void slotCustomButtonClicked(int id);
-    void slotRadioLocalClicked();
-    void slotRadioOnlineClicked();
-    void slotCheckExpertClicked();
+    void slotRadioLocalClicked() const;
+    void slotRadioOnlineClicked() const;
+    void slotCheckExpertClicked() const;
     void slotLocalToolSelectDirectory();
     void slotCreateOrUpdateLocalInstallClicked();
-    void slotLocalDirectoryEditingFinished();
-    void slotWebLocalBRouterVersionsLoadFinished(bool ok);
+    void slotLocalDirectoryEditingFinished() const;
+    void slotWebLocalBRouterVersionsLoadFinished(bool ok) const;
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
     void slotLocalDownloadButtonFinished(QNetworkReply * reply);
-    void slotProfileClicked(const QModelIndex & index);
-    void slotAvailableProfileClicked(const QModelIndex & index);
-    void slotDisplayProfile(QString profile, const QString content);
+    void slotProfileClicked(const QModelIndex & index) const;
+    void slotAvailableProfileClicked(const QModelIndex & index) const;
+    void slotDisplayProfile(const QString &profile, const QString content);
     void slotAddProfileClicked();
     void slotDelProfileClicked();
     void slotProfileUpClicked();
@@ -69,36 +69,36 @@ private slots:
 
 private:
     void beginChooseMode();
-    bool validateChooseMode();
+    bool validateChooseMode() const;
 
-    void initLocalDirectory();
+    void initLocalDirectory() const;
     void beginLocalDirectory();
-    void updateLocalDirectory();
+    void updateLocalDirectory() const;
 
-    void initLocalInstall();
+    void initLocalInstall() const;
     void beginLocalInstall();
 
-    void initProfiles();
+    void initProfiles() const;
     void beginProfiles();
-    void updateProfiles();
+    void updateProfiles() const;
     QStringList selectedProfiles(const QListView * listView) const;
-    QList<int> updateProfileView(QListView * listView, QStringList values);
+    QList<int> updateProfileView(QListView * listView, const QStringList &values) const;
 
-    void initLocalTiles();
+    void initLocalTiles() const;
     void beginLocalTiles();
 
     void beginLocalDetails();
-    void updateLocalDetails();
-    bool validateLocalDetails();
-    void resetLocalDetails();
+    void updateLocalDetails() const;
+    bool validateLocalDetails() const;
+    void resetLocalDetails() const;
 
     void beginOnlineDetails();
-    void updateOnlineDetails();
-    bool validateOnlineDetails();
-    void resetOnlineDetails();
+    void updateOnlineDetails() const;
+    bool validateOnlineDetails() const;
+    void resetOnlineDetails() const;
 
     void beginOnlineUrl();
-    bool validateOnlineUrl();
+    bool validateOnlineUrl() const;
     void resetOnlineUrl();
 
     CRouterBRouterSetup * setup;

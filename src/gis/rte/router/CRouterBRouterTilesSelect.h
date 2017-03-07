@@ -40,15 +40,15 @@ public:
     virtual ~CRouterBRouterTilesSelect();
 
     void setSetup(CRouterBRouterSetup * setup);
-    void initialize();
-    void cancelDownload();
+    void initialize() const;
+    void cancelDownload() const;
 
     static QString formatSize(const qint64 size);
-    static QPoint tileFromFileName(const QString fileName);
+    static QPoint tileFromFileName(const QString &fileName);
     static QString fileNameFromTile(const QPoint tile);
 
-    bool isDownloading();
-    bool isDownloadSelected();
+    bool isDownloading() const;
+    bool isDownloadSelected() const;
 
     static const QPoint noTile;
 
@@ -57,7 +57,7 @@ signals:
 
 private slots:
     void slotTileClicked(const QPoint & tile);
-    void slotTileToolTipChanged(const QPoint & tile);
+    void slotTileToolTipChanged(const QPoint & tile) const;
     void slotClearSelection();
     void slotDeleteSelected();
     void slotSelectOutdated();
@@ -69,8 +69,8 @@ private slots:
 private:
     QDir segmentsDir() const;
     void updateStatus();
-    void updateButtons();
-    void updateTiles();
+    void updateButtons() const;
+    void updateTiles() const;
 
     CRouterBRouterTilesStatus * getTileStatus(QPoint tile) const;
 

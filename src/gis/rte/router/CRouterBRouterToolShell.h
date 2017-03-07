@@ -28,16 +28,16 @@ public:
     CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent);
     virtual ~CRouterBRouterToolShell();
 
-    void start(const QString dir, const QString command, const QStringList args);
+    void start(const QString &dir, const QString &command, const QStringList &args);
     void stop();
-    void out(const QString out);
-    void execute(const QString dir, const QString command, const QStringList args);
+    void out(const QString &out);
+    void execute(const QString &dir, const QString &command, const QStringList &args);
 
 signals:
-    void sigProcessStateChanged(const QProcess::ProcessState newState);
+    void sigProcessStateChanged(const QProcess::ProcessState newState) const;
 
 private slots:
-    void slotStateChanged(const QProcess::ProcessState newState);
+    void slotStateChanged(const QProcess::ProcessState newState) const;
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;

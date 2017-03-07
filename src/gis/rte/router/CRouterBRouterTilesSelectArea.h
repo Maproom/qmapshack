@@ -41,14 +41,14 @@ public:
     void setOutstandingTiles(const QVector<QPoint> & tiles);
     void setSelectedTiles(const QVector<QPoint> & tiles);
 
-    void setTileToolTip(QString toolTip);
+    void setTileToolTip(const QString &toolTip);
 
 signals:
     void sigTileClicked(const QPoint & tile);
     void sigTileToolTipChanged(const QPoint & tile);
 
 protected:
-    void mouseDoubleClickEvent(QMouseEvent * event) override;
+//    void mouseDoubleClickEvent(QMouseEvent * event) override;
     void mouseMoveEvent(QMouseEvent * event) override;
     void mousePressEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;

@@ -1184,7 +1184,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
 
 //    rte.totalDistance  = dist;
     rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
-    rte.lastRoutedWith = "BRouter" + options;
+    rte.lastRoutedWith = QString("BRouter %1").arg(options);
 
 //    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
     const QDomNodeList &nodes = xml.childNodes();
@@ -1195,13 +1195,12 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
         {
             const QString &commentTxt = node.toComment().data();
             // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
-            const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*filtered ascend\\s*=\\s*)(-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
+            const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
             int pos = rxAscDes.indexIn(commentTxt);
             if (pos > -1) {
                 rte.totalDistance = rxAscDes.cap(2).toFloat();
-                rte.ascent = rxAscDes.cap(4).toFloat();
-                rte.cmt = rxAscDes.cap(6);
-                rte.desc = rxAscDes.cap(8);
+                rte.cmt = rxAscDes.cap(8);
+                rte.desc = QString("%1, %2").arg(rxAscDes.cap(4)).arg(rxAscDes.cap(6));
             }
             break;
         }

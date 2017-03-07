@@ -34,9 +34,9 @@ public:
 
     bool isComplete() const override;
 
-    void setSetup(CRouterBRouterSetup * setup);
-    void beginPage();
-    bool raiseWarning();
+    void setSetup(CRouterBRouterSetup * setup) const;
+    void beginPage() const;
+    bool raiseWarning() const;
 
 private slots:
     void slotTileDownloadStatusChanged();

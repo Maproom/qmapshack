@@ -29,12 +29,12 @@ CRouterBRouterInfo::~CRouterBRouterInfo()
 
 }
 
-void CRouterBRouterInfo::setLabel(const QString infoLabel)
+void CRouterBRouterInfo::setLabel(const QString &infoLabel) const
 {
     label->setText(infoLabel);
 }
 
-void CRouterBRouterInfo::setInfo(const QString infoText)
+void CRouterBRouterInfo::setInfo(const QString &infoText) const
 {
     textBrowser->setText(infoText);
 }

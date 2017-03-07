@@ -51,17 +51,17 @@ void CRouterBRouterTilesPage::slotTileDownloadStatusChanged()
     emit completeChanged();
 }
 
-void CRouterBRouterTilesPage::beginPage()
+void CRouterBRouterTilesPage::beginPage() const
 {
     widgetLocalTilesSelect->initialize();
 }
 
-void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup * setup)
+void CRouterBRouterTilesPage::setSetup(CRouterBRouterSetup * setup) const
 {
     widgetLocalTilesSelect->setSetup(setup);
 }
 
-bool CRouterBRouterTilesPage::raiseWarning()
+bool CRouterBRouterTilesPage::raiseWarning() const
 {
     QMessageBox msgBox;
     msgBox.setIcon(QMessageBox::Warning);

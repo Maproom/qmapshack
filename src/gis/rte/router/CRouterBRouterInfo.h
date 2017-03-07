@@ -28,7 +28,7 @@ public:
     CRouterBRouterInfo();
     virtual ~CRouterBRouterInfo();
 
-    void setLabel(const QString infoLabel);
-    void setInfo(const QString infoText);
+    void setLabel(const QString &infoLabel) const;
+    void setInfo(const QString &infoText) const;
 };
 #endif

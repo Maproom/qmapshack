@@ -65,7 +65,7 @@ bool CRouterBRouterTilesSelectArea::event(QEvent * event)
     if (event->type() == QEvent::ToolTip)
     {
         QHelpEvent *helpEvent = static_cast<QHelpEvent *>(event);
-        QPoint tile = tileUnderMouse(helpEvent->pos());
+        const QPoint &tile = tileUnderMouse(helpEvent->pos());
         if (currentTile != tile)
         {
             emit sigTileToolTipChanged(tile);
@@ -87,9 +87,9 @@ void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
     drawOutstandingTiles();
 }
 
-void CRouterBRouterTilesSelectArea::mouseDoubleClickEvent(QMouseEvent * event)
-{
-}
+//void CRouterBRouterTilesSelectArea::mouseDoubleClickEvent(QMouseEvent * event)
+//{
+//}
 
 void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
 {
@@ -113,7 +113,7 @@ void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
 {
     if (button == Qt::LeftButton)
     {
-        QPoint pos = event->pos();
+        const QPoint &pos = event->pos();
         canvas->moveMap(QPointF(pos-mousePos));
         if (pos == startPos)
         {
@@ -128,7 +128,7 @@ void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
     painter.setPen(outdatedTilesPen);
     painter.setBrush(outdatedTilesBrush);
 
-    for(const QPoint & tile : outdatedTiles)
+    for(const QPoint &tile : outdatedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -140,7 +140,7 @@ void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
     painter.setPen(outstandingTilesPen);
     painter.setBrush(outstandingTilesBrush);
 
-    for(const QPoint & tile : outstandingTiles)
+    for(const QPoint &tile : outstandingTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -152,7 +152,7 @@ void CRouterBRouterTilesSelectArea::drawInvalidTiles()
     painter.setPen(invalidTilesPen);
     painter.setBrush(invalidTilesBrush);
 
-    for(const QPoint & tile : invalidTiles)
+    for(const QPoint &tile : invalidTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -164,7 +164,7 @@ void CRouterBRouterTilesSelectArea::drawCurrentTiles()
     painter.setPen(currentTilesPen);
     painter.setBrush(currentTilesBrush);
 
-    for(const QPoint & tile : currentTiles)
+    for(const QPoint &tile : currentTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -176,7 +176,7 @@ void CRouterBRouterTilesSelectArea::drawSelectedTiles()
     painter.setPen(selectedTilesPen);
     painter.setBrush(selectedTilesBrush);
 
-    for(const QPoint & tile : selectedTiles)
+    for(const QPoint &tile : selectedTiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }
@@ -244,7 +244,7 @@ void CRouterBRouterTilesSelectArea::setSelectedTiles(const QVector<QPoint> &tile
     selectedTiles = tiles;
 }
 
-void CRouterBRouterTilesSelectArea::setTileToolTip(QString toolTip)
+void CRouterBRouterTilesSelectArea::setTileToolTip(const QString &toolTip)
 {
     tileToolTip = toolTip;
 }

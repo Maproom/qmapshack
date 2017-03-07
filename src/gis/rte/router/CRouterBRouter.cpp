@@ -120,14 +120,7 @@ void CRouterBRouter::slotToolProfileInfoClicked()
     const int index = comboProfile->currentIndex();
     if (index > -1)
     {
-        try
-        {
-            setup->displayProfileAsync(setup->getProfiles().at(index));
-        }
-        catch (CRouterBRouterSetupException &e)
-        {
-            setup->onInvalidSetup();
-        }
+        setup->displayProfileAsync(setup->getProfiles().at(index));
     }
 }
 
@@ -154,31 +147,21 @@ void CRouterBRouter::slotDisplayProfileInfo(const QString profile, const QString
 
 void CRouterBRouter::updateDialog()
 {
-    try
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
-        if (setup->installMode == CRouterBRouterSetup::ModeLocal)
-        {
-            routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
-        }
-        else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
-        {
-            routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
-        }
-        else
-        {
-            throw CRouterBRouterSetupException();
-        }
-        comboProfile->clear();
-        for(const QString& profile : setup->getProfiles())
-        {
-            comboProfile->addItem(profile,profile);
-        }
-        updateLocalBRouterStatus();
+        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
     }
-    catch (CRouterBRouterSetupException &e)
+    else
     {
-        setup->onInvalidSetup();
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
+    comboProfile->clear();
+    for(const QString& profile : setup->getProfiles())
+    {
+        comboProfile->addItem(profile,profile);
+    }
+    updateLocalBRouterStatus();
 }
 
 void CRouterBRouter::slotCloseStatusMsg()

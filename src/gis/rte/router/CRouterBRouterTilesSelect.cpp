@@ -30,6 +30,8 @@
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 
+const QPoint CRouterBRouterTilesSelect::noTile = QPoint(INT_MIN, INT_MIN);
+
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
 {
@@ -270,13 +272,16 @@ void CRouterBRouterTilesSelect::initialize()
     {
         if (rxTileName.indexIn(segment) > -1)
         {
-            QPoint tile = tileFromFileName(segment);
-            CRouterBRouterTilesStatus * status = getTileStatus(tile);
+            const QPoint& tile = tileFromFileName(segment);
+            if (tile != noTile)
+            {
+                CRouterBRouterTilesStatus * status = getTileStatus(tile);
 
-            QFileInfo info = QFileInfo(dir,segment);
-            status->localDate = info.created();
-            status->localSize = info.size();
-            status->isLocal = true;
+                QFileInfo info = QFileInfo(dir,segment);
+                status->localDate = info.created();
+                status->localSize = info.size();
+                status->isLocal = true;
+            }
         }
     }
     tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
@@ -317,48 +322,51 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                     QWebElement dateElement = anchorElement.parent().nextSibling();
                     QWebElement sizeElement = dateElement.nextSibling();
 
-                    QPoint tile = tileFromFileName(tileName);
+                    const QPoint& tile = tileFromFileName(tileName);
 
-                    CRouterBRouterTilesStatus * status = getTileStatus(tile);
-                    if (status != nullptr)
+                    if (tile != noTile)
                     {
-                        status->isRemote = true;
-
-                        QString date = dateElement.toPlainText();
-                        if (rxDate.indexIn((date)) > -1)
+                        CRouterBRouterTilesStatus * status = getTileStatus(tile);
+                        if (status != nullptr)
                         {
-                            int day = rxDate.cap(1).toInt();
-                            QString monthStr = rxDate.cap(2);
-                            int month = monthStr == "Jan" ? 1 :
-                                        monthStr == "Feb" ? 2 :
-                                        monthStr == "Mar" ? 3 :
-                                        monthStr == "Apr" ? 4 :
-                                        monthStr == "May" ? 5 :
-                                        monthStr == "Jun" ? 6 :
-                                        monthStr == "Jul" ? 7 :
-                                        monthStr == "Aug" ? 8 :
-                                        monthStr == "Sep" ? 9 :
-                                        monthStr == "Oct" ? 10 :
-                                        monthStr == "Nov" ? 11 :
-                                                            12;
-                            int year = rxDate.cap(3).toInt();
-                            int hour = rxDate.cap(4).toInt();
-                            int min  = rxDate.cap(5).toInt();
+                            status->isRemote = true;
 
-                            status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
-                        }
+                            const QString& date = dateElement.toPlainText();
+                            if (rxDate.indexIn((date)) > -1)
+                            {
+                                int day = rxDate.cap(1).toInt();
+                                const QString& monthStr = rxDate.cap(2);
+                                int month = monthStr == "Jan" ? 1 :
+                                            monthStr == "Feb" ? 2 :
+                                            monthStr == "Mar" ? 3 :
+                                            monthStr == "Apr" ? 4 :
+                                            monthStr == "May" ? 5 :
+                                            monthStr == "Jun" ? 6 :
+                                            monthStr == "Jul" ? 7 :
+                                            monthStr == "Aug" ? 8 :
+                                            monthStr == "Sep" ? 9 :
+                                            monthStr == "Oct" ? 10 :
+                                            monthStr == "Nov" ? 11 :
+                                                                12;
+                                int year = rxDate.cap(3).toInt();
+                                int hour = rxDate.cap(4).toInt();
+                                int min  = rxDate.cap(5).toInt();
 
-                        QString size = sizeElement.toPlainText();
-                        if (rxSize.indexIn(size) > -1)
-                        {
-                            status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
-                                                                      rxSize.cap(2) == "G" ? 1073741824 :
-                                                                      rxSize.cap(2) == "K" ? 1024 :
-                                                                                             1);
-                        }
-                        if (status->isLocal && status->remoteDate > status->localDate)
-                        {
-                            status->isOutdated = true;
+                                status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
+                            }
+
+                            const QString& size = sizeElement.toPlainText();
+                            if (rxSize.indexIn(size) > -1)
+                            {
+                                status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
+                                                                          rxSize.cap(2) == "G" ? 1073741824 :
+                                                                          rxSize.cap(2) == "K" ? 1024 :
+                                                                                                 1);
+                            }
+                            if (status->isLocal && status->remoteDate > status->localDate)
+                            {
+                                status->isOutdated = true;
+                            }
                         }
                     }
                 }
@@ -413,7 +421,7 @@ QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString fileName)
     }
     else
     {
-        throw new CRouterBRouterSetupException();
+        return noTile;
     }
 }
 
@@ -642,7 +650,8 @@ void CRouterBRouterTilesSelect::updateTiles()
          it != tilesDownloadStatus.constEnd();
          it++)
     {
-        QPoint tile = tileFromFileName(it.key());
+        const QPoint& tile = tileFromFileName(it.key());
+        Q_ASSERT(tile != noTile);
         CRouterBRouterTilesStatus * status = it.value();
         if (status->isSelected)
         {

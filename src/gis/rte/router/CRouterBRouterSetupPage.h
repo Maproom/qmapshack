@@ -34,6 +34,8 @@ public:
 
     void setSetup(CRouterBRouterSetup * setup);
 
+    void emitCompleteChanged();
+
 private:
     CRouterBRouterSetup * setup { nullptr };
 };

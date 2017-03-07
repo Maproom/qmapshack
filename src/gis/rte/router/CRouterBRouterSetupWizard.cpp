@@ -417,6 +417,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory()
             pushCreateOrUpdateLocalInstall->setVisible(true);
         }
     }
+    pageLocalDirectory->emitCompleteChanged();
 }
 
 void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
@@ -491,6 +492,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
         CRouterBRouterToolShell shell(textLocalInstall,this);
         shell.out("download " + outfile.fileName() + " finished");
         shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
+        pageLocalInstallation->emitCompleteChanged();
         setup->updateLocalProfiles();
     }
     else
@@ -502,6 +504,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
 void CRouterBRouterSetupWizard::initProfiles()
 {
     setup->loadOnlineConfig();
+    pageProfiles->setSetup(setup);
 }
 
 void CRouterBRouterSetupWizard::beginProfiles()
@@ -636,6 +639,7 @@ void CRouterBRouterSetupWizard::updateProfiles()
     {
         setup->onInvalidSetup();
     }
+    pageProfiles->emitCompleteChanged();
 }
 
 QStringList CRouterBRouterSetupWizard::selectedProfiles(const QListView * listView) const

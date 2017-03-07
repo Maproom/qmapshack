@@ -39,11 +39,19 @@ bool CRouterBRouterSetupPage::isComplete() const
     {
     case CRouterBRouterSetupWizard::Page_LocalDirectory:
     {
-        return QDir(setup->localDir).exists();
+        return setup->isLocalBRouterInstalled();
     }
     case CRouterBRouterSetupWizard::Page_LocalInstallation:
     {
         return setup->isLocalBRouterInstalled();
+    }
+    case CRouterBRouterSetupWizard::Page_Profiles:
+    {
+        QListView * listProfiles = findChild<QListView*>("listProfiles");
+        QAbstractItemModel * model = listProfiles->model();
+        int rowCount = model->rowCount();
+        return rowCount > 0;
+        //return listProfiles->model()->rowCount() > 0;
     }
     default:
     {
@@ -55,4 +63,9 @@ bool CRouterBRouterSetupPage::isComplete() const
 void CRouterBRouterSetupPage::setSetup(CRouterBRouterSetup * setup)
 {
     this->setup = setup;
+}
+
+void CRouterBRouterSetupPage::emitCompleteChanged()
+{
+    emit completeChanged();
 }

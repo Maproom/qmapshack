@@ -3539,32 +3539,32 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>neue BRouter-Installaion erzeugen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="444"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="445"/>
         <source>Error loading installation-page at %1</source>
         <translation>Fehler beim Laden der Installationsseite von %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="453"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="454"/>
         <source>no brouter-version to install selected</source>
         <translation>keine BRouter-Version zum Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="461"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="462"/>
         <source>selected %1 for download and installation</source>
         <translation>%1 zum Herunterladen und Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="498"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="500"/>
         <source>Network Error</source>
         <translation>Netzwerk Fehler</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="624"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="627"/>
         <source>no Profiles available</source>
         <translation>keine Profile verfügbar</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="632"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="635"/>
         <source>available Profiles</source>
         <translation>Verfügbare Profile</translation>
     </message>

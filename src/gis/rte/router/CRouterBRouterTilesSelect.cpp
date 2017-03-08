@@ -323,6 +323,7 @@ void CRouterBRouterTilesSelect::initialize()
     updateStatus();
     updateButtons();
     updateTiles();
+    emit sigCompleteChanged();
 }
 
 void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)

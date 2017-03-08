@@ -50,7 +50,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
     connect(toolProfileInfo, &QToolButton::clicked, this, &CRouterBRouter::slotToolProfileInfoClicked);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouter::slotDisplayProfileInfo);
-    connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouter::slotError);
+    connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouter::slotDisplayError);
 
     comboAlternative->addItem(tr("original"), "0");
     comboAlternative->addItem(tr("first alternative"), "1");
@@ -83,13 +83,14 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
+    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError, this, &CRouterBRouter::slotBRouterError);
 
     updateDialog();
 }
 
 CRouterBRouter::~CRouterBRouter()
 {
-    if (brouterState != QProcess::NotRunning)
+    if (brouterState != QProcess::Running)
     {
         stopBRouter();
     }
@@ -127,7 +128,7 @@ void CRouterBRouter::slotToolProfileInfoClicked() const
     }
 }
 
-void CRouterBRouter::slotError(const QString error, const QString details) const
+void CRouterBRouter::slotDisplayError(const QString &error, const QString &details) const
 {
     textBRouterError->setText(error + ": " + details);
     textBRouterError->setVisible(true);
@@ -445,6 +446,7 @@ QUrl CRouterBRouter::getServiceUrl() const
 void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
+    textBRouterError->setVisible(brouterError != QProcess::UnknownError && !textBRouterOutput->isVisible());
 }
 
 void CRouterBRouter::slotToggleBRouter() const
@@ -500,7 +502,13 @@ void CRouterBRouter::stopBRouter() const
 void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
 {
     brouterState = newState;
+    updateLocalBRouterStatus();
+}
 
+void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
+{
+    brouterError = error;
+    slotDisplayError(tr("Error"),errorString);
     updateLocalBRouterStatus();
 }
 
@@ -512,28 +520,22 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         {
             switch(brouterState)
             {
-            case QProcess::Running:
-            {
-                labelStatus->setText(tr("running"));
-                toolConsole->setVisible(true);
-                break;
-            }
             case QProcess::Starting:
             {
                 labelStatus->setText(tr("starting"));
                 toolConsole->setVisible(true);
                 break;
             }
+            case QProcess::Running:
+            {
+                labelStatus->setText(tr("running"));
+                toolConsole->setVisible(true);
+                break;
+            }
             case QProcess::NotRunning:
             {
                 labelStatus->setText(tr("stopped"));
-                toolConsole->setVisible(false);
-                break;
-            }
-            default:
-            {
-                labelStatus->setText(tr("invalid"));
-                toolConsole->setVisible(false);
+                toolConsole->setVisible(brouterError != QProcess::UnknownError);
                 break;
             }
             }
@@ -550,17 +552,14 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         toolToggleBRouter->setVisible(true);
         checkFastRecalc->setVisible(true);
     }
-    else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
+    else
     {
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
         labelStatus->setText(tr("online"));
         toolConsole->setVisible(false);
         toolToggleBRouter->setVisible(false);
         checkFastRecalc->setVisible(false);
         textBRouterOutput->clear();
         textBRouterOutput->setVisible(false);
-    }
-    else
-    {
-        setup->onInvalidSetup();
     }
 }

@@ -31,6 +31,7 @@ public:
     void start(const QString &dir, const QString &command, const QStringList &args);
     void stop();
     void out(const QString &out);
+    void error(const QString &error);
     void execute(const QString &dir, const QString &command, const QStringList &args);
 
 signals:

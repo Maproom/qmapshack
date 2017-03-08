@@ -142,10 +142,13 @@ void CRouterBRouterTilesSelect::setSetup(CRouterBRouterSetup * setup)
 void CRouterBRouterTilesSelect::slotTileClicked(const QPoint &tile)
 {
     CRouterBRouterTilesStatus * status = getTileStatus(tile);
-    status->isSelected = !status->isSelected;
-    updateButtons();
-    updateStatus();
-    updateTiles();
+    if (status->isLocal || status->isRemote)
+    {
+        status->isSelected = !status->isSelected;
+        updateButtons();
+        updateStatus();
+        updateTiles();
+    }
 }
 
 void CRouterBRouterTilesSelect::slotSelectOutdated()
@@ -174,22 +177,32 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
 void CRouterBRouterTilesSelect::slotDeleteSelected()
 {
     bool changed(false);
-    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
-         it != tilesDownloadStatus.constEnd();
-         it++)
+    try
     {
-        CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected)
+        for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+             it != tilesDownloadStatus.constEnd();
+             it++)
         {
-            if (status->isLocal)
+            CRouterBRouterTilesStatus * status = it.value();
+            if (status->isSelected)
             {
-                QFile segment(segmentsDir().absoluteFilePath(it.key()));
-                segment.remove();
-                status->isLocal = false;
+                status->isSelected = false;
+                changed = true;
+                if (status->isLocal)
+                {
+                    QFile segment(segmentsDir().absoluteFilePath(it.key()));
+                    if (!segment.remove())
+                    {
+                        throw tr("Error removing %1: %2").arg(segment.fileName()).arg(segment.errorString());
+                    }
+                    status->isLocal = false;
+                }
             }
-            status->isSelected = false;
-            changed = true;
         }
+    }
+    catch (const QString &msg)
+    {
+        error(msg);
     }
     if (changed)
     {
@@ -258,64 +271,88 @@ void CRouterBRouterTilesSelect::updateButtons() const
     pushDownload->setEnabled(hasSelectedForDownload);
 }
 
-void CRouterBRouterTilesSelect::initialize() const
-{
-    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
-         it != tilesDownloadStatus.constEnd();
-         it++)
-    {
-        CRouterBRouterTilesStatus * status = it.value();
-        status->isLocal = false;
-        status->isRemote = false;
-        status->isOutdated = false;
-    }
-    const QDir &dir = segmentsDir();
-    const QStringList &segments = dir.entryList();
-    const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
-    for (const QString &segment : segments)
-    {
-        if (rxTileName.indexIn(segment) > -1)
-        {
-            const QPoint& tile = tileFromFileName(segment);
-            if (tile != noTile)
-            {
-                CRouterBRouterTilesStatus * status = getTileStatus(tile);
+void CRouterBRouterTilesSelect::initialize()
 
-                const QFileInfo &info = QFileInfo(dir,segment);
-                status->localDate = info.created();
-                status->localSize = info.size();
-                status->isLocal = true;
+{
+    try
+    {
+        for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+             it != tilesDownloadStatus.constEnd();
+             it++)
+        {
+            CRouterBRouterTilesStatus * status = it.value();
+            status->isLocal = false;
+            status->isRemote = false;
+            status->isOutdated = false;
+        }
+        const QDir &dir = segmentsDir();
+        if (!dir.exists())
+        {
+            if (!QDir(setup->localDir).mkpath(setup->localSegmentsDir))
+            {
+                throw tr("Error creating segments directory %1").arg(dir.path());
             }
         }
+
+        const QStringList &segments = dir.entryList();
+        const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
+        for (const QString &segment : segments)
+        {
+            if (rxTileName.indexIn(segment) > -1)
+            {
+                const QPoint& tile = tileFromFileName(segment);
+                if (tile != noTile)
+                {
+                    CRouterBRouterTilesStatus * status = getTileStatus(tile);
+
+                    const QFileInfo &info = QFileInfo(dir,segment);
+                    status->localDate = info.created();
+                    status->localSize = info.size();
+                    status->isLocal = true;
+                }
+            }
+        }
+        clearError();
+        initialized = true;
+        tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
     }
-    tilesWebPage->mainFrame()->load(QUrl(setup->segmentsUrl));
+    catch (const QString &msg)
+    {
+        error(msg);
+    }
+    updateStatus();
+    updateButtons();
+    updateTiles();
 }
 
 void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
 {
-    if (!ok)
+    try
     {
-        errorLabel->setVisible(true);
-        errorLabel->setText(QString(tr("Network Error: unable to load routing data from %1").arg(setup->segmentsUrl)));
-    }
-    else
-    {
-        errorLabel->setVisible(false);
-        const QWebElement &htmlElement = tilesWebPage->mainFrame()->documentElement();
-        const QWebElementCollection &anchorElements = htmlElement.findAll("table tr td a");
-
-        if (anchorElements.count() > 0)
+        if (!ok)
         {
+            throw tr("Network Error");
+        }
+        else
+        {
+            const QWebElement &htmlElement = tilesWebPage->mainFrame()->documentElement();
+            const QWebElementCollection &anchorElements = htmlElement.findAll("table tr td a");
+
+            if (anchorElements.count() == 0)
+            {
+                throw tr("invalid result, no files found");
+            }
+
             // 'E10_N20.rd5'
-            QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
+            const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
 
             // '16-Feb-2017 20:48  '
             // const QString dateFormat = "d-MMM-yyyy H:mm";
             // QDateFormat conversion depends on user-locale, doesn't work here
-            QRegExp rxDate("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
+            const QRegExp rxDate("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
 
             // 8.2M 271K 9.3K
-            QRegExp rxSize(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
+            const QRegExp rxSize(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
 
             for (const QWebElement &anchorElement : anchorElements)
             {
@@ -336,37 +373,39 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                             status->isRemote = true;
 
                             const QString &date = dateElement.toPlainText();
-                            if (rxDate.indexIn((date)) > -1)
+                            if (rxDate.indexIn(date) < 0)
                             {
-                                int day = rxDate.cap(1).toInt();
-                                const QString &monthStr = rxDate.cap(2);
-                                int month = monthStr == "Jan" ? 1 :
-                                            monthStr == "Feb" ? 2 :
-                                            monthStr == "Mar" ? 3 :
-                                            monthStr == "Apr" ? 4 :
-                                            monthStr == "May" ? 5 :
-                                            monthStr == "Jun" ? 6 :
-                                            monthStr == "Jul" ? 7 :
-                                            monthStr == "Aug" ? 8 :
-                                            monthStr == "Sep" ? 9 :
-                                            monthStr == "Oct" ? 10 :
-                                            monthStr == "Nov" ? 11 :
-                                                                12;
-                                int year = rxDate.cap(3).toInt();
-                                int hour = rxDate.cap(4).toInt();
-                                int min  = rxDate.cap(5).toInt();
-
-                                status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
+                                throw tr("cannot parse: %1 is not a date").arg(date);
                             }
+                            int day = rxDate.cap(1).toInt();
+                            const QString &monthStr = rxDate.cap(2);
+                            int month = monthStr == "Jan" ? 1 :
+                                        monthStr == "Feb" ? 2 :
+                                        monthStr == "Mar" ? 3 :
+                                        monthStr == "Apr" ? 4 :
+                                        monthStr == "May" ? 5 :
+                                        monthStr == "Jun" ? 6 :
+                                        monthStr == "Jul" ? 7 :
+                                        monthStr == "Aug" ? 8 :
+                                        monthStr == "Sep" ? 9 :
+                                        monthStr == "Oct" ? 10 :
+                                        monthStr == "Nov" ? 11 :
+                                                            12;
+                            int year = rxDate.cap(3).toInt();
+                            int hour = rxDate.cap(4).toInt();
+                            int min  = rxDate.cap(5).toInt();
+
+                            status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
 
                             const QString &size = sizeElement.toPlainText();
-                            if (rxSize.indexIn(size) > -1)
+                            if (rxSize.indexIn(size) < 0)
                             {
-                                status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
-                                                                          rxSize.cap(2) == "G" ? 1073741824 :
-                                                                          rxSize.cap(2) == "K" ? 1024 :
-                                                                                                 1);
+                                throw tr("cannot parse: %1 is not a valid size").arg(size);
                             }
+                            status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
+                                                                            rxSize.cap(2) == "G" ? 1073741824 :
+                                                                            rxSize.cap(2) == "K" ? 1024 :
+                                                                                                   1);
                             if (status->isLocal && status->remoteDate > status->localDate)
                             {
                                 status->isOutdated = true;
@@ -376,6 +415,11 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                 }
             }
         }
+        clearError();
+    }
+    catch (const QString &msg)
+    {
+        error(tr("Error retrieving available routing data from %1: %2").arg(setup->segmentsUrl).arg(msg));
     }
     updateStatus();
     updateButtons();
@@ -450,34 +494,47 @@ void CRouterBRouterTilesSelect::slotDownload()
          it != tilesDownloadStatus.constEnd();
          it++)
     {
-        CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected && (status->isOutdated || !status->isLocal) && status->file == nullptr)
+        try
         {
-            const QString &fileName = it.key();
-
-            const QDir &dir = segmentsDir();
-            if (!dir.exists())
+            CRouterBRouterTilesStatus * status = it.value();
+            if (status->isSelected && (status->isOutdated || !status->isLocal) && status->file == nullptr)
             {
-                QDir(setup->localDir).mkpath(setup->localSegmentsDir);
+                const QString &fileName = it.key();
+
+                const QDir &dir = segmentsDir();
+                if (!dir.exists())
+                {
+                    throw tr("segments directory does not exist: ").arg(dir.path());
+                }
+
+                status->isSelected = false;
+                changed = true;
+
+                status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
+                if (!status->file->open(QIODevice::WriteOnly))
+                {
+                    const QString tmpName = status->file->fileName();
+                    const QString error = status->file->errorString();
+                    delete status->file;
+                    status->file = nullptr;
+                    throw tr("error creating file %1: %2").arg(tmpName).arg(error);
+                }
+
+                QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
+                reply->setProperty("tile", fileName);
+
+                tilesDownloadManagerReplies << reply;
+
+                connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
+                connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
             }
-
-            status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
-            status->file->open(QIODevice::WriteOnly);
-
-            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
-            reply->setProperty("tile", fileName);
-
-            connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
-
-            tilesDownloadManagerReplies << reply;
-
-            connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
-
-            status->isSelected = false;
-
-            changed = true;
+        }
+        catch (const QString &msg)
+        {
+            error(msg);
         }
     }
+
     if (changed)
     {
         updateButtons();
@@ -492,15 +549,34 @@ void CRouterBRouterTilesSelect::slotDownloadReadReady()
     {
         if (reply->bytesAvailable() > 0)
         {
-            const QString &fileName = reply->property("tile").toString();
-            QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-            if (it != tilesDownloadStatus.constEnd())
+            try
             {
-                CRouterBRouterTilesStatus * status = it.value();
-                if (status->file != nullptr)
+                const QString &fileName = reply->property("tile").toString();
+                QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+                if (it == tilesDownloadStatus.constEnd())
                 {
-                    status->file->write(reply->readAll());
+                    throw tr("no valid request for filename %1").arg(fileName);
                 }
+                CRouterBRouterTilesStatus * status = it.value();
+                if (status->file == nullptr)
+                {
+                    throw tr("no open file assigned to request for %1").arg(fileName);
+                }
+                if (status->file->write(reply->readAll()) < 0)
+                {
+                    QString tmpName = status->file->fileName();
+                    QString msg = status->file->errorString();
+                    status->file->close();
+                    status->file->remove();
+                    delete status->file;
+                    status->file = nullptr;
+                    throw tr("error writing to file %1: %2").arg(tmpName).arg(msg);
+                }
+            }
+            catch (const QString &msg)
+            {
+                reply->abort();
+                error(msg);
             }
         }
     }
@@ -513,39 +589,59 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
     {
         tilesDownloadManagerReplies.remove(tilesDownloadManagerReplies.indexOf(reply));
     }
-
-    const QString &fileName = reply->property("tile").toString();
-    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-    if (it != tilesDownloadStatus.constEnd())
+    reply->deleteLater();
+    try
     {
-        CRouterBRouterTilesStatus * status = it.value();
-        if (status->file != nullptr)
+        const QString &fileName = reply->property("tile").toString();
+        QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+        if (it == tilesDownloadStatus.constEnd())
         {
-            if(reply->error() == QNetworkReply::NoError)
+            throw tr("no valid request for filename %1").arg(fileName);
+        }
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->file == nullptr)
+        {
+            throw tr("no open file assigned to request for %1").arg(fileName);
+        }
+        try
+        {
+            if(reply->error() != QNetworkReply::NoError)
             {
-                status->file->write(reply->readAll());
-                status->file->close();
-                status->file->rename(segmentsDir().absoluteFilePath(it.key()));
-                status->isLocal = true;
-                status->isOutdated = false;
-                QFileInfo info(*status->file);
-                status->localDate = info.created();
-                status->localSize = info.size();
-                errorLabel->setVisible(false);
+                throw fileName + ": "+reply->errorString();
             }
-            else
+            if (status->file->write(reply->readAll()) < 0)
             {
-                status->file->close();
-                status->file->remove();
-                status->isLocal = false;
-                errorLabel->setVisible(true);
-                errorLabel->setText(fileName + ": "+reply->errorString());
+                throw tr("error writing to file %1: %2").arg(status->file->fileName()).arg(status->file->errorString());
             }
+            if (!status->file->rename(segmentsDir().absoluteFilePath(it.key())))
+            {
+                throw tr("error renaming file %1 to %2: %3").arg(status->file->fileName()).arg(segmentsDir().absoluteFilePath(it.key())).arg(status->file->errorString());
+            }
+            status->file->close();
+            status->isLocal = true;
+            status->isOutdated = false;
+            QFileInfo info(*status->file);
+            status->localDate = info.created();
+            status->localSize = info.size();
             delete status->file;
             status->file = nullptr;
         }
-        reply->deleteLater();
+        catch(const QString &msg)
+        {
+            status->file->close();
+            status->file->remove();
+            status->isLocal = false;
+            delete status->file;
+            status->file = nullptr;
+            throw msg;
+        }
+        clearError();
     }
+    catch (const QString &msg)
+    {
+        error(msg);
+    }
+
     updateButtons();
     updateStatus();
     updateTiles();
@@ -620,6 +716,22 @@ void CRouterBRouterTilesSelect::updateStatus()
         downloadSelected = numOutstanding > 0;
         emit sigCompleteChanged();
     }
+}
+
+void CRouterBRouterTilesSelect::error(const QString &error) const
+{
+    errorLabel->setVisible(true);
+    errorLabel->setText(error);
+}
+
+void CRouterBRouterTilesSelect::clearError() const
+{
+    errorLabel->setVisible(false);
+}
+
+bool CRouterBRouterTilesSelect::isInitialized() const
+{
+    return initialized;
 }
 
 bool CRouterBRouterTilesSelect::isDownloading() const

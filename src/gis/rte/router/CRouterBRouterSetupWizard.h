@@ -52,7 +52,7 @@ private slots:
     void slotLocalToolSelectDirectory();
     void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEditingFinished() const;
-    void slotWebLocalBRouterVersionsLoadFinished(bool ok) const;
+    void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
     void slotLocalDownloadButtonFinished(QNetworkReply * reply);

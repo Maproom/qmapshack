@@ -39,6 +39,11 @@ void CRouterBRouterToolShell::out(const QString &out)
     stdOut(out);
 }
 
+void CRouterBRouterToolShell::error(const QString &error)
+{
+    stdErr(error);
+}
+
 void CRouterBRouterToolShell::execute(const QString &dir, const QString &command, const QStringList &args)
 {
     start(dir,command,args);

@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include <QWidget>
 #include <QTextBrowser>
+#include <QProcess>
 #include "CRouterBRouterToolShell.h"
 
 
@@ -26,6 +27,7 @@ CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWi
     : IToolShell(textBrowser,parent)
 {
     connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
+    connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &CRouterBRouterToolShell::slotError);
 }
 
 CRouterBRouterToolShell::~CRouterBRouterToolShell()
@@ -63,6 +65,11 @@ void CRouterBRouterToolShell::stop()
 void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) const
 {
     emit sigProcessStateChanged(newState);
+}
+
+void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) const
+{
+    emit sigProcessError(error, cmd.errorString());
 }
 
 void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status)

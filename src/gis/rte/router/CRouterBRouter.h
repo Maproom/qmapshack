@@ -50,9 +50,10 @@ private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg() const;
     void slotToolProfileInfoClicked() const;
-    void slotError(const QString error, const QString details) const;
+    void slotDisplayError(const QString &error, const QString &details) const;
     void slotDisplayProfileInfo(const QString &profile, const QString &content) const;
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
+    void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
     void slotToggleBRouter() const;
     void slotToggleConsole() const;
 
@@ -91,7 +92,8 @@ private:
     CRouterSetup * routerSetup;
     CRouterBRouterInfo * info;
     CRouterBRouterToolShell * brouterShell {nullptr};
-    QProcess::ProcessState brouterState {QProcess::NotRunning};
+    QProcess::ProcessState brouterState { QProcess::NotRunning };
+    QProcess::ProcessError brouterError { QProcess::UnknownError };
     CProgressDialog * progress;
     bool isError { false };
     QString error;

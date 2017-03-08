@@ -35,9 +35,11 @@ public:
 
 signals:
     void sigProcessStateChanged(const QProcess::ProcessState newState) const;
+    void sigProcessError(const QProcess::ProcessError error, const QString &errorString) const;
 
 private slots:
     void slotStateChanged(const QProcess::ProcessState newState) const;
+    void slotError(const QProcess::ProcessError error) const;
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;

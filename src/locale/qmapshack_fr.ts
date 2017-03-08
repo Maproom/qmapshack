@@ -3637,70 +3637,70 @@ n&apos;est pas une définition de système de coordonnées:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="378"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="379"/>
         <source>cannot parse: %1 is not a date</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="403"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="404"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="422"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="423"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="507"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="508"/>
         <source>segments directory does not exist: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="520"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="521"/>
         <source>error creating file %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="558"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="599"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="559"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="600"/>
         <source>no valid request for filename %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="563"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="604"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="564"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="605"/>
         <source>no open file assigned to request for %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="573"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="614"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="574"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="615"/>
         <source>error writing to file %1: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="618"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="619"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="705"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="706"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="818"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="819"/>
         <source>being downloaded: %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="838"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="839"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="824"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="825"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3710,22 +3710,22 @@ n&apos;est pas une définition de système de coordonnées:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="334"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="335"/>
         <source>Network Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="343"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="344"/>
         <source>invalid result, no files found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="832"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="833"/>
         <source>local data up to date (%1, %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="844"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="845"/>
         <source>no routing-data available</source>
         <translation type="unfinished"></translation>
     </message>

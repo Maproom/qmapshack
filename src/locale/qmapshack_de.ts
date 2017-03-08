@@ -3419,12 +3419,12 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="269"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="383"/>
         <source>response is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwort ist leer</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="306"/>
         <source>Bad response from server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlerhafte Serverantwort: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="354"/>
@@ -3450,7 +3450,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="511"/>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="531"/>
@@ -3483,12 +3483,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="550"/>
         <source>Error parsing online-config:</source>
-        <translation>Fehler beim Auswerten der Online-konfiguration</translation>
+        <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="555"/>
         <source>Network error:</source>
-        <translation>Netzwerk Fehler</translation>
+        <translation>Netzwerk Fehler:</translation>
     </message>
 </context>
 <context>
@@ -3556,37 +3556,37 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="483"/>
         <source>download %1 started</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen von %1 gestartet</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="496"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkfehler: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="538"/>
         <source>download of brouter failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen von BRouter fehlgeschlagen: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="427"/>
         <source>Error creating directory %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen des Verzeichnisses %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="502"/>
         <source>Error directory %1 does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler: Das Verzeichnis %1 existiert nicht</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="509"/>
         <source>Error creating file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen der Datei %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="513"/>
         <source>Error writing to file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben der Datei %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="635"/>
@@ -3637,55 +3637,55 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="293"/>
         <source>Error creating segments directory %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen des Verzeichniss für die Routingdaten %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="378"/>
         <source>cannot parse: %1 is not a date</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht interpretierbar: %1 ist kein Datum</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="403"/>
         <source>cannot parse: %1 is not a valid size</source>
-        <translation type="unfinished"></translation>
+        <translation>nicht interpretierbar: %1 ist keine gültige Größenangabe</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="422"/>
         <source>Error retrieving available routing data from %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Abruf der verfügbaren Routingdaten von %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="507"/>
         <source>segments directory does not exist: </source>
-        <translation type="unfinished"></translation>
+        <translation>Das Verzeichniss für die Routingdaten existiert nicht:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="520"/>
         <source>error creating file %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Anlegen der Datei %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="558"/>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="599"/>
         <source>no valid request for filename %1</source>
-        <translation type="unfinished"></translation>
+        <translation>keine gültige Netzwerkanfrage für die Datei %1 vorhanden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="563"/>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="604"/>
         <source>no open file assigned to request for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>der Netzwerkanfrage für %1 ist keine offene Datei zugeordnet</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="573"/>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="614"/>
         <source>error writing to file %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Schreiben der Datei %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="618"/>
         <source>error renaming file %1 to %2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Umbenennen der Datei von %1 nach %2: %3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="705"/>
@@ -3710,17 +3710,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="196"/>
         <source>Error removing %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehler beim Löschen der Datei %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="334"/>
         <source>Network Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzwerkfehler</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="343"/>
         <source>invalid result, no files found</source>
-        <translation type="unfinished"></translation>
+        <translation>ungültige Anwort, keine Dateien gefunden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="832"/>
@@ -4393,7 +4393,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="275"/>
         <source>File exists ...</source>
-        <translation type="unfinished">Datei existiert...</translation>
+        <translation>Datei existiert...</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="276"/>
@@ -4408,17 +4408,17 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
         <source>Course</source>
-        <translation type="unfinished">Kurs</translation>
+        <translation>Kurs</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
         <source>Activity</source>
-        <translation type="unfinished">Aktivität</translation>
+        <translation>Aktivität</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="314"/>
@@ -4428,7 +4428,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="334"/>
         <source>Activity or course?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivität oder Kurs?</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="335"/>

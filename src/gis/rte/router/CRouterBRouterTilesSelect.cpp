@@ -31,13 +31,18 @@
 #include "canvas/CCanvas.h"
 
 const QPoint CRouterBRouterTilesSelect::noTile = QPoint(INT_MIN, INT_MIN);
+const int CRouterBRouterTilesSelect::minTileLat = -180;
+const int CRouterBRouterTilesSelect::maxTileLat =  180;
+const int CRouterBRouterTilesSelect::minTileLon =  -85;
+const int CRouterBRouterTilesSelect::maxTileLon =   85;
+const int CRouterBRouterTilesSelect::tileSize   =    5;
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
 {
-    for (int x = minTileLat; x < maxTileLat; x += sizeTileLat)
+    for (int x = minTileLat; x < maxTileLat; x += tileSize)
     {
-        for (int y = minTileLon; y < maxTileLon; y += sizeTileLon)
+        for (int y = minTileLon; y < maxTileLon; y += tileSize)
         {
             CRouterBRouterTilesStatus * status = new CRouterBRouterTilesStatus(this);
             tilesDownloadStatus.insert(fileNameFromTile(QPoint(x,y)),status);
@@ -63,7 +68,6 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     {
         source->saveConfig(view);
     }
-    view.setValue("grid/color",QColor(Qt::magenta).name());
     view.setValue("map/zoomIndex",16);
     view.setValue("scales",1);
     view.setValue("proj","+proj=merc");
@@ -640,6 +644,7 @@ CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile
 
 void CRouterBRouterTilesSelect::updateTiles() const
 {
+    QVector<QPoint> gridTiles;
     QVector<QPoint> invalidTiles;
     QVector<QPoint> outdatedTiles;
     QVector<QPoint> currentTiles;
@@ -653,7 +658,11 @@ void CRouterBRouterTilesSelect::updateTiles() const
         const QPoint& tile = tileFromFileName(it.key());
         Q_ASSERT(tile != noTile);
         const CRouterBRouterTilesStatus * status = it.value();
-        if (status->isSelected)
+        if (status->file != nullptr)
+        {
+            outstandingTiles << tile;
+        }
+        else if (status->isSelected)
         {
             selectedTiles << tile;
         }
@@ -668,16 +677,17 @@ void CRouterBRouterTilesSelect::updateTiles() const
                 currentTiles << tile;
             }
         }
-        else if (!status->isRemote)
+        else if (status->isRemote)
+        {
+            gridTiles << tile;
+        }
+        else
         {
             invalidTiles << tile;
         }
-        if (status->file != nullptr)
-        {
-            outstandingTiles << tile;
-        }
     }
 
+    selectArea->setGridTiles(gridTiles);
     selectArea->setInvalidTiles(invalidTiles);
     selectArea->setOutdatedTiles(outdatedTiles);
     selectArea->setCurrentTiles(currentTiles);

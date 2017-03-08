@@ -23,34 +23,21 @@
 #include "canvas/CCanvas.h"
 #include <QToolTip>
 
+const QPen CRouterBRouterTilesSelectArea::gridPen             = QPen(Qt::magenta);
+const QPen CRouterBRouterTilesSelectArea::outdatedTilesPen    = QPen(Qt::gray);
+const QPen CRouterBRouterTilesSelectArea::currentTilesPen     = QPen(Qt::darkGreen);
+const QPen CRouterBRouterTilesSelectArea::selectedTilesPen    = QPen(Qt::blue);
+const QPen CRouterBRouterTilesSelectArea::outstandingTilesPen = QPen(Qt::yellow);
+const QPen CRouterBRouterTilesSelectArea::invalidTilesPen     = QPen(Qt::gray);
+const QBrush CRouterBRouterTilesSelectArea::outdatedTilesBrush    = QBrush(Qt::gray,     Qt::Dense5Pattern);
+const QBrush CRouterBRouterTilesSelectArea::currentTilesBrush     = QBrush(Qt::darkGreen,Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::selectedTilesBrush    = QBrush(Qt::blue,     Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::outstandingTilesBrush = QBrush(Qt::yellow,   Qt::Dense3Pattern);
+const QBrush CRouterBRouterTilesSelectArea::invalidTilesBrush     = QBrush(Qt::gray,     Qt::DiagCrossPattern);
+
 CRouterBRouterTilesSelectArea::CRouterBRouterTilesSelectArea(QWidget * parent, CCanvas * canvas)
     : QWidget(parent)
 {
-    outdatedTilesPen.setColor(Qt::gray);
-    outdatedTilesPen.setWidth(1);
-    outdatedTilesBrush.setColor(Qt::gray);
-    outdatedTilesBrush.setStyle(Qt::Dense5Pattern);
-
-    currentTilesPen.setColor(Qt::darkGreen);
-    currentTilesPen.setWidth(1);
-    currentTilesBrush.setColor(Qt::darkGreen);
-    currentTilesBrush.setStyle(Qt::Dense3Pattern);
-
-    selectedTilesPen.setColor(Qt::blue);
-    selectedTilesPen.setWidth(1);
-    selectedTilesBrush.setColor(Qt::blue);
-    selectedTilesBrush.setStyle(Qt::Dense3Pattern);
-
-    outstandingTilesPen.setColor(Qt::yellow);
-    outstandingTilesPen.setWidth(1);
-    outstandingTilesBrush.setColor(Qt::yellow);
-    outstandingTilesBrush.setStyle(Qt::Dense3Pattern);
-
-    invalidTilesPen.setColor(Qt::gray);
-    invalidTilesPen.setWidth(1);
-    invalidTilesBrush.setColor(Qt::gray);
-    invalidTilesBrush.setStyle(Qt::DiagCrossPattern);
-
     this->canvas = canvas;
 
     setMouseTracking(true);
@@ -80,16 +67,13 @@ bool CRouterBRouterTilesSelectArea::event(QEvent * event)
 
 void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
 {
+    drawGrid();
     drawInvalidTiles();
     drawOutdatedTiles();
     drawCurrentTiles();
     drawSelectedTiles();
     drawOutstandingTiles();
 }
-
-//void CRouterBRouterTilesSelectArea::mouseDoubleClickEvent(QMouseEvent * event)
-//{
-//}
 
 void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
 {
@@ -119,6 +103,17 @@ void CRouterBRouterTilesSelectArea::mouseReleaseEvent(QMouseEvent * event)
         {
             emit sigTileClicked(tileUnderMouse(pos));
         }
+    }
+}
+
+void CRouterBRouterTilesSelectArea::drawGrid()
+{
+    QPainter painter(this);
+    painter.setPen(gridPen);
+
+    for(const QPoint &tile : gridTiles)
+    {
+        painter.drawPolyline(gridPolygon(tile));
     }
 }
 
@@ -187,17 +182,17 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) c
     QPointF pos(mousePos);
     canvas->convertPx2Rad(pos);
     QPointF posDegF = pos * RAD_TO_DEG;
-    QPoint tile(posDegF.x() > 0 ? posDegF.x()/5 : posDegF.x()/5 - 1
-               ,posDegF.y() > 0 ? posDegF.y()/5 : posDegF.y()/5 - 1);
-    return tile * 5;
+    QPoint tile(posDegF.x() > 0 ? posDegF.x()/CRouterBRouterTilesSelect::tileSize : posDegF.x()/CRouterBRouterTilesSelect::tileSize - 1
+               ,posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
+    return tile * CRouterBRouterTilesSelect::tileSize;
 }
 
 QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
 {
     QPointF p0(tile.x(),tile.y());
-    QPointF p1(tile.x()+5,tile.y());
-    QPointF p2(tile.x()+5,tile.y()+5);
-    QPointF p3(tile.x(),tile.y()+5);
+    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y());
+    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y()+CRouterBRouterTilesSelect::tileSize);
+    QPointF p3(tile.x(),tile.y()+CRouterBRouterTilesSelect::tileSize);
 
     p0 *= DEG_TO_RAD;
     p1 *= DEG_TO_RAD;
@@ -214,9 +209,35 @@ QPolygonF CRouterBRouterTilesSelectArea::tilePolygon(const QPoint & tile) const
     polygon << p1;
     polygon << p2;
     polygon << p3;
-    polygon << p0;
 
     return polygon;
+}
+
+QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint & tile) const
+{
+    QPointF p0(tile.x(),tile.y());
+    QPointF p1(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y());
+    QPointF p2(tile.x()+CRouterBRouterTilesSelect::tileSize,tile.y()+CRouterBRouterTilesSelect::tileSize);
+
+    p0 *= DEG_TO_RAD;
+    p1 *= DEG_TO_RAD;
+    p2 *= DEG_TO_RAD;
+
+    canvas->convertRad2Px(p0);
+    canvas->convertRad2Px(p1);
+    canvas->convertRad2Px(p2);
+
+    QPolygonF polygon;
+    polygon << p0;
+    polygon << p1;
+    polygon << p2;
+
+    return polygon;
+}
+
+void CRouterBRouterTilesSelectArea::setGridTiles(const QVector<QPoint> &tiles)
+{
+    gridTiles = tiles;
 }
 
 void CRouterBRouterTilesSelectArea::setInvalidTiles(const QVector<QPoint> &tiles)

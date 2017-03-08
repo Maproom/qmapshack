@@ -35,6 +35,7 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
+    void setGridTiles(const QVector<QPoint> & tiles);
     void setInvalidTiles(const QVector<QPoint> & tiles);
     void setOutdatedTiles(const QVector<QPoint> & tiles);
     void setCurrentTiles(const QVector<QPoint> & tiles);
@@ -42,6 +43,18 @@ public:
     void setSelectedTiles(const QVector<QPoint> & tiles);
 
     void setTileToolTip(const QString &toolTip);
+
+    static const QPen gridPen;
+    static const QPen currentTilesPen;
+    static const QPen outdatedTilesPen;
+    static const QPen selectedTilesPen;
+    static const QPen outstandingTilesPen;
+    static const QPen invalidTilesPen;
+    static const QBrush currentTilesBrush;
+    static const QBrush outdatedTilesBrush;
+    static const QBrush selectedTilesBrush;
+    static const QBrush outstandingTilesBrush;
+    static const QBrush invalidTilesBrush;
 
 signals:
     void sigTileClicked(const QPoint & tile);
@@ -57,12 +70,14 @@ protected:
 private slots:
 
 private:
+    void drawGrid();
     void drawSelectedTiles();
     void drawCurrentTiles();
     void drawOutdatedTiles();
     void drawOutstandingTiles();
     void drawInvalidTiles();
     QPoint tileUnderMouse(const QPointF & mousePos) const;
+    QPolygonF gridPolygon(const QPoint & tile) const;
     QPolygonF tilePolygon(const QPoint & tile) const;
 
     CCanvas * canvas;
@@ -72,17 +87,7 @@ private:
     QPoint currentTile;
     QString tileToolTip;
 
-    QPen currentTilesPen;
-    QPen outdatedTilesPen;
-    QPen selectedTilesPen;
-    QPen outstandingTilesPen;
-    QPen invalidTilesPen;
-    QBrush currentTilesBrush;
-    QBrush outdatedTilesBrush;
-    QBrush selectedTilesBrush;
-    QBrush outstandingTilesBrush;
-    QBrush invalidTilesBrush;
-
+    QVector<QPoint> gridTiles;
     QVector<QPoint> invalidTiles;
     QVector<QPoint> outdatedTiles;
     QVector<QPoint> currentTiles;

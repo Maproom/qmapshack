@@ -696,12 +696,12 @@ void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
     grid->convertPos2Str(pos, str, simple);
 }
 
-void CCanvas::convertRad2Px(QPointF& pos)
+void CCanvas::convertRad2Px(QPointF& pos) const
 {
     map->convertRad2Px(pos);
 }
 
-void CCanvas::convertPx2Rad(QPointF& pos)
+void CCanvas::convertPx2Rad(QPointF& pos) const
 {
     map->convertPx2Rad(pos);
 }

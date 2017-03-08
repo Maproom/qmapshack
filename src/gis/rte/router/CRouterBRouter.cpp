@@ -239,79 +239,74 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
     QNetworkReply * reply = networkAccessManager->get(getRequest(points));
 
-    reply->setProperty("options", getOptions());
-    reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
+    try
     {
-        canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Routing request sent to server. Please wait..."));
-    }
+        reply->setProperty("options", getOptions());
+        reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-    //CProgressDialog * progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
-    progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
 
-    QEventLoop eventLoop;
-    connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
-    connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-    eventLoop.exec();
+        QEventLoop eventLoop;
+        connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+        connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+        eventLoop.exec();
 
-    delete progress;
+        delete progress;
 
-    if (reply->error() != QNetworkReply::NoError)
-    {
-        coords.clear();
-        if(canvas)
+        if (reply->error() != QNetworkReply::NoError)
         {
-            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
-        }
-        timerCloseStatusMsg->start();
-    }
-    else
-    {
-        clearError();
-
-        const QByteArray &res = reply->readAll();
-
-        if(res.isEmpty())
-        {
-            coords.clear();
+            throw reply->errorString();
         }
         else
         {
-            QDomDocument xml;
-            xml.setContent(res);
+            clearError();
 
-            const QDomElement &xmlGpx = xml.documentElement();
-            if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
+            const QByteArray &res = reply->readAll();
+
+            if(res.isEmpty())
             {
-                coords.clear();
-                if (canvas)
-                {
-                    canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
-                }
-                timerCloseStatusMsg->start();
+                throw tr("response is empty");
             }
             else
             {
-                // read the shape
-                const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
-                        .firstChildElement("trkseg")
-                        .elementsByTagName("trkpt");
-                for(int n = 0; n < xmlLatLng.size(); n++)
+                QDomDocument xml;
+                xml.setContent(res);
+
+                const QDomElement &xmlGpx = xml.documentElement();
+                if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
                 {
-                    const QDomElement &elem   = xmlLatLng.item(n).toElement();
-                    coords << QPointF();
-                    QPointF &point = coords.last();
-                    point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
-                    point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+                    throw QString(res);
+                }
+                else
+                {
+                    // read the shape
+                    const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
+                            .firstChildElement("trkseg")
+                            .elementsByTagName("trkpt");
+                    for(int n = 0; n < xmlLatLng.size(); n++)
+                    {
+                        const QDomElement &elem   = xmlLatLng.item(n).toElement();
+                        coords << QPointF();
+                        QPointF &point = coords.last();
+                        point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
+                        point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+                    }
                 }
             }
+        }
+    }
+    catch(const QString& msg)
+    {
+        coords.clear();
+        if(!msg.isEmpty())
+        {
+            reply->deleteLater();
+            mutex.unlock();
+            throw tr("Bad response from server: %1").arg(msg);
         }
     }
 
     reply->deleteLater();
-
     slotCloseStatusMsg();
     mutex.unlock();
     return coords.size();
@@ -372,57 +367,59 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
     delete progress;
 
-    if(reply->error() != QNetworkReply::NoError)
+    try
     {
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas)
+        if(reply->error() != QNetworkReply::NoError)
         {
-            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+            throw reply->errorString();
         }
-        timerCloseStatusMsg->start();
+
+        const QByteArray &res = reply->readAll();
         reply->deleteLater();
-        mutex.unlock();
-        return;
-    }
 
-    const QByteArray &res = reply->readAll();
-    reply->deleteLater();
-
-    if(res.isEmpty())
-    {
-        mutex.unlock();
-        return;
-    }
-
-    clearError();
-
-    QDomDocument xml;
-    xml.setContent(res);
-
-    const QDomElement &xmlGpx = xml.documentElement();
-    if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
-    {
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if(canvas)
+        if(res.isEmpty())
         {
-            canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(reply->errorString()));
+            throw tr("response is empty");
         }
-        timerCloseStatusMsg->start();
-        mutex.unlock();
-        return;
+
+        clearError();
+
+        QDomDocument xml;
+        xml.setContent(res);
+
+        const QDomElement &xmlGpx = xml.documentElement();
+        if(xmlGpx.isNull() || xmlGpx.tagName() != "gpx")
+        {
+            throw QString(res);
+        }
+
+        IGisItem::key_t key;
+        key.item    = reply->property("key.item").toString();
+        key.project = reply->property("key.project").toString();
+        key.device  = reply->property("key.device").toString();
+        qint64 time = reply->property("time").toLongLong();
+        time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
+
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+        if(rte != nullptr)
+        {
+            rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
+        }
     }
-
-    IGisItem::key_t key;
-    key.item    = reply->property("key.item").toString();
-    key.project = reply->property("key.project").toString();
-    key.device  = reply->property("key.device").toString();
-    qint64 time = reply->property("time").toLongLong();
-    time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
-
-    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
-    if(rte != nullptr)
+    catch(const QString& msg)
     {
-        rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));
+        if(!msg.isEmpty())
+        {
+            CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+            if(canvas)
+            {
+                canvas->reportStatus("BRouter", tr("<b>BRouter</b><br/>Bad response from server:<br/>%1").arg(msg));
+            }
+            timerCloseStatusMsg->start();
+            reply->deleteLater();
+            mutex.unlock();
+            return;
+        }
     }
 
     slotCloseStatusMsg();

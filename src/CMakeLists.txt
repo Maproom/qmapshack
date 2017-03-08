@@ -241,6 +241,17 @@ set( SRCS
         gis/rte/router/CRouterRoutino.cpp
         gis/rte/router/CRouterMapQuest.cpp
         gis/rte/router/CRouterRoutinoPathSetup.cpp
+        gis/rte/router/CRouterBRouter.cpp
+        gis/rte/router/CRouterBRouterInfo.cpp
+        gis/rte/router/CRouterBRouterSetup.cpp
+        gis/rte/router/CRouterBRouterSetupPage.cpp
+        gis/rte/router/CRouterBRouterSetupWizard.cpp
+        gis/rte/router/CRouterBRouterToolShell.cpp
+        gis/rte/router/CRouterBRouterTilesPage.cpp
+        gis/rte/router/CRouterBRouterTilesSelect.cpp
+        gis/rte/router/CRouterBRouterTilesSelectArea.cpp
+        gis/rte/router/CRouterBRouterTilesSelectLayout.cpp
+        gis/rte/router/CRouterBRouterTilesStatus.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -508,6 +519,18 @@ set( HDRS
         gis/rte/router/CRouterRoutino.h
         gis/rte/router/CRouterMapQuest.h
         gis/rte/router/CRouterRoutinoPathSetup.h
+        gis/rte/router/CRouterBRouter.h
+        gis/rte/router/CRouterBRouterInfo.h
+        gis/rte/router/CRouterBRouterSetup.h
+        gis/rte/router/CRouterBRouterSetupException.h
+        gis/rte/router/CRouterBRouterSetupPage.h
+        gis/rte/router/CRouterBRouterSetupWizard.h
+        gis/rte/router/CRouterBRouterToolShell.h
+        gis/rte/router/CRouterBRouterTilesPage.h
+        gis/rte/router/CRouterBRouterTilesSelect.h
+        gis/rte/router/CRouterBRouterTilesSelectArea.h
+        gis/rte/router/CRouterBRouterTilesSelectLayout.h
+        gis/rte/router/CRouterBRouterTilesStatus.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h
@@ -668,6 +691,9 @@ set( UIS
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
     gis/rte/router/IRouterRoutinoPathSetup.ui
+    gis/rte/router/IRouterBRouter.ui
+    gis/rte/router/IRouterBRouterInfo.ui
+    gis/rte/router/IRouterBRouterSetupWizard.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui

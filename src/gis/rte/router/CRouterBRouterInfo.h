@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,41 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERSETUP_H
-#define CROUTERSETUP_H
+#ifndef CROUTERBROUTERINFO_H
+#define CROUTERBROUTERINFO_H
 
-#include "gis/IGisItem.h"
-#include "ui_IRouterSetup.h"
-#include <QWidget>
+#include "ui_IRouterBRouterInfo.h"
 
-class CRouterSetup : public QWidget, private Ui::IRouterSetup
+class CRouterBRouterInfo : public QDialog, private Ui::IRouterBRouterInfo
 {
     Q_OBJECT
 public:
-    static CRouterSetup& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CRouterSetup();
+    CRouterBRouterInfo();
+    virtual ~CRouterBRouterInfo();
 
-    void calcRoute(const IGisItem::key_t &key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
-
-    bool hasFastRouting();
-
-    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
-
-    void setRouterTitle(router_e, QString title);
-
-private slots:
-    void slotSelectRouter(int i);
-
-private:
-    friend class Ui_IMainWindow;
-    CRouterSetup(QWidget * parent);
-
-    static CRouterSetup * pSelf;
+    void setLabel(const QString &infoLabel) const;
+    void setInfo(const QString &infoText) const;
 };
-
-#endif //CROUTERSETUP_H
-
+#endif

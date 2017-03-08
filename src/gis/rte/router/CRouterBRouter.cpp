@@ -90,7 +90,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
 CRouterBRouter::~CRouterBRouter()
 {
-    if (brouterState == QProcess::Running)
+    if (brouterState != QProcess::NotRunning)
     {
         stopBRouter();
     }

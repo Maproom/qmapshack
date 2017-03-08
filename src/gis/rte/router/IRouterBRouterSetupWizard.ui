@@ -151,6 +151,9 @@
       </property>
      </spacer>
     </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalDirectory"/>
+    </item>
    </layout>
   </widget>
   <widget class="CRouterBRouterSetupPage" name="pageLocalInstallation">

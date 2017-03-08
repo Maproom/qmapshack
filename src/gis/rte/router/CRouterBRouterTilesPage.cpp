@@ -43,7 +43,7 @@ CRouterBRouterTilesPage::~CRouterBRouterTilesPage()
 
 bool CRouterBRouterTilesPage::isComplete() const
 {
-    return !(widgetLocalTilesSelect->isDownloading() || widgetLocalTilesSelect->isDownloadSelected());
+    return widgetLocalTilesSelect->isInitialized() && !(widgetLocalTilesSelect->isDownloading() || widgetLocalTilesSelect->isDownloadSelected());
 }
 
 void CRouterBRouterTilesPage::slotTileDownloadStatusChanged()

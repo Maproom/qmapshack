@@ -40,13 +40,14 @@ public:
     virtual ~CRouterBRouterTilesSelect();
 
     void setSetup(CRouterBRouterSetup * setup);
-    void initialize() const;
+    void initialize();
     void cancelDownload() const;
 
     static QString formatSize(const qint64 size);
     static QPoint tileFromFileName(const QString &fileName);
     static QString fileNameFromTile(const QPoint tile);
 
+    bool isInitialized() const;
     bool isDownloading() const;
     bool isDownloadSelected() const;
 
@@ -58,7 +59,7 @@ public:
     static const int tileSize;
 
 signals:
-    void sigCompleteChanged();
+    void sigCompleteChanged() const;
 
 private slots:
     void slotTileClicked(const QPoint & tile);
@@ -76,6 +77,8 @@ private:
     void updateStatus();
     void updateButtons() const;
     void updateTiles() const;
+    void error(const QString &error) const;
+    void clearError() const;
 
     CRouterBRouterTilesStatus * getTileStatus(QPoint tile) const;
 
@@ -103,6 +106,7 @@ private:
 
     bool downloading { false };
     bool downloadSelected { false };
+    bool initialized { false };
 };
 
 #endif //CROUTERBROUTERTILESSELECT_H

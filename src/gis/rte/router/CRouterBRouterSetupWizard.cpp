@@ -384,6 +384,7 @@ void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished() const
 
 void CRouterBRouterSetupWizard::updateLocalDirectory() const
 {
+    textLocalDirectory->setVisible(false);
     lineLocalDir->setText(setup->localDir);
     if (setup->localDir.isEmpty())
     {
@@ -416,8 +417,25 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
 
 void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
 {
-    doLocalInstall = true;
-    next();
+    QDir outDir(setup->localDir);
+    try
+    {
+        if(!outDir.exists())
+        {
+            if (!outDir.mkpath(outDir.absolutePath()))
+            {
+                throw tr("Error creating directory %1").arg(outDir.absolutePath());
+            }
+        }
+        doLocalInstall = true;
+        next();
+    }
+    catch (const QString &msg)
+    {
+        textLocalDirectory->setVisible(true);
+        CRouterBRouterToolShell shell(textLocalDirectory,this);
+        shell.error(msg);
+    }
 }
 
 void CRouterBRouterSetupWizard::initLocalInstall() const
@@ -431,12 +449,13 @@ void CRouterBRouterSetupWizard::initLocalInstall() const
     connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
 }
 
-void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok) const
+void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
 {
     if (!ok)
     {
         textLocalInstall->setVisible(true);
-        textLocalInstall->setText(QString(tr("Error loading installation-page at %1").arg(setup->binariesUrl)));
+        CRouterBRouterToolShell shell(textLocalInstall,this);
+        shell.error(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
     }
 }
 
@@ -461,7 +480,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
     textLocalInstall->setVisible(true);
     CRouterBRouterToolShell shell(textLocalInstall,this);
-    shell.out("download " + downloadUrl.toString() + " started");
+    shell.out(tr("download %1 started").arg(downloadUrl.toString()));
 
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
     reply->setProperty("fileName",downloadUrl.fileName());
@@ -470,28 +489,53 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * reply)
 {
     reply->deleteLater();
-    if (reply->error() == QNetworkReply::NoError)
+    try
     {
+        if (reply->error() != QNetworkReply::NoError)
+        {
+            throw tr("Network Error: %1").arg(reply->errorString());
+        }
         const QString &fileName = reply->property("fileName").toString();
         QDir outDir(setup->localDir);
         if (!outDir.exists())
         {
-            outDir.mkpath(outDir.absolutePath());
+            throw tr("Error directory %1 does not exist").arg(outDir.absolutePath());
         }
         QFile outfile(outDir.absoluteFilePath(fileName));
-        outfile.open(QIODevice::WriteOnly);
-        outfile.write(reply->readAll());
-        outfile.close();
-
-        CRouterBRouterToolShell shell(textLocalInstall,this);
-        shell.out("download " + outfile.fileName() + " finished");
-        shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
-        pageLocalInstallation->emitCompleteChanged();
-        setup->updateLocalProfiles();
+        try
+        {
+            if (!outfile.open(QIODevice::WriteOnly))
+            {
+                throw tr("Error creating file %1").arg(outfile.fileName());
+            }
+            if (outfile.write(reply->readAll()) < 0)
+            {
+                throw tr("Error writing to file %1").arg(outfile.fileName());
+            }
+            outfile.close();
+            CRouterBRouterToolShell shell(textLocalInstall,this);
+            shell.out("download " + outfile.fileName() + " finished");
+            shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
+            pageLocalInstallation->emitCompleteChanged();
+            setup->updateLocalProfiles();
+        }
+        catch (const QString &msg)
+        {
+            if (outfile.isOpen())
+            {
+                outfile.close();
+            }
+            if (outfile.exists())
+            {
+                outfile.remove();
+            }
+            throw msg;
+        }
     }
-    else
+    catch (const QString &msg)
     {
-        this->slotSetupError(QString(tr("Network Error")),reply->errorString());
+        CRouterBRouterToolShell shell(textLocalInstall,this);
+        shell.error(tr("download of brouter failed: %1").arg(msg));
     }
 }
 
@@ -762,7 +806,7 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
     {
     case Page_Profiles:
     {
-        this->updateProfiles();
+        updateProfiles();
         break;
     }
     }

@@ -380,8 +380,16 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
 
 void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
 {
-    setup->localJavaExecutable = QFileDialog::getOpenFileName(this, tr("select Java Executable"),"");
-    updateLocalDirectory();
+    QFileDialog dialog(this,
+                       tr("select Java Executable"),
+                       QFileInfo(setup->localJavaExecutable).absolutePath(),
+                       "Java Executable (java*)");
+    dialog.setFileMode(QFileDialog::ExistingFile);
+    if (dialog.exec())
+    {
+        setup->localJavaExecutable = dialog.selectedFiles().first();
+        updateLocalDirectory();
+    }
 }
 
 void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished() const
@@ -429,7 +437,14 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     }
     if (QFile(setup->localJavaExecutable).exists())
     {
-        labelLocalJavaResult->setVisible(false);
+        if (QFileInfo(setup->localJavaExecutable).baseName().startsWith("java"))
+        {
+            labelLocalJavaResult->setText("seems to be a valid Java-executable");
+        }
+        else
+        {
+            labelLocalJavaResult->setText("doesn't seem to be a valid Java-executable");
+        }
     }
     else
     {

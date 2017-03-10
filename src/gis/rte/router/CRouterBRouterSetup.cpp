@@ -48,6 +48,7 @@ void CRouterBRouterSetup::load()
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
+    localJavaExecutable = cfg.value("localJava",defaultJavaExecutable).toString();
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
     localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
@@ -97,6 +98,7 @@ void CRouterBRouterSetup::save()
     cfg.setValue("onlineServiceUrl", onlineServiceUrl);
     cfg.setValue("onlineProfilesUrl", onlineProfilesUrl);
     cfg.setValue("localDir", localDir);
+    cfg.setValue("localJava", localJavaExecutable);
     cfg.setValue("localProfileDir", localProfileDir);
     cfg.setValue("localCustomProfileDir", localCustomProfileDir);
     cfg.setValue("localSegmentsDir", localSegmentsDir);

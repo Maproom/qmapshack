@@ -102,6 +102,7 @@ private:
     QString onlineProfilesUrl;
     QStringList onlineProfilesAvailable;
     QString localDir;
+    QString localJavaExecutable;
     QString localProfileDir;
     QString localCustomProfileDir;
     QString localSegmentsDir;
@@ -119,6 +120,7 @@ private:
     const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
     const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
     const QString defaultLocalDir = ".";
+    const QString defaultJavaExecutable = "java";
     const QString defaultLocalProfileDir = "profiles2";
     const QString defaultLocalCustomProfileDir = "customprofiles";
     const QString defaultLocalSegmentsDir = "segments4";

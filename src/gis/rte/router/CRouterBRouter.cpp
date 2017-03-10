@@ -485,7 +485,7 @@ void CRouterBRouter::startBRouter() const
             args << setup->localCustomProfileDir;
             args << setup->localPort;
             args << setup->localNumberThreads;
-            brouterShell->start(setup->localDir, "java", args);
+            brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
         }
     }
 }

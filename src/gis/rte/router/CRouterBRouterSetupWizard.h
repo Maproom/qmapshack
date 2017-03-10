@@ -50,8 +50,10 @@ private slots:
     void slotRadioOnlineClicked() const;
     void slotCheckExpertClicked() const;
     void slotLocalToolSelectDirectory();
+    void slotLocalToolSelectJava();
     void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEditingFinished() const;
+    void slotLocalJavaExecutableFinished() const;
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();

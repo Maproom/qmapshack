@@ -139,6 +139,38 @@
      </layout>
     </item>
     <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Java Executable</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineJavaExecutable"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolJavaExecutable">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../resources.qrc">
+          <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelLocalJavaResult">
+      <property name="text">
+       <string>labelLocalJavaResult</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -459,12 +491,25 @@
    <layout class="QVBoxLayout" name="verticalLayout_13">
     <item>
      <layout class="QFormLayout" name="formLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelLocalProfilesUrl">
+        <property name="text">
+         <string>Profiles Url</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineLocalProfilesUrl"/>
+      </item>
       <item row="1" column="0">
        <widget class="QLabel" name="labelLocalHost">
         <property name="text">
          <string>Hostname</string>
         </property>
        </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineLocalHost"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="labelLocalPort">
@@ -473,6 +518,9 @@
         </property>
        </widget>
       </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineLocalPort"/>
+      </item>
       <item row="3" column="0">
        <widget class="QLabel" name="labelLocalProfiles">
         <property name="text">
@@ -480,21 +528,15 @@
         </property>
        </widget>
       </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineLocalProfiles"/>
+      </item>
       <item row="4" column="0">
        <widget class="QLabel" name="labelLocalSegments">
         <property name="text">
          <string>Segments directory</string>
         </property>
        </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineLocalHost"/>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="lineLocalPort"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="lineLocalProfiles"/>
       </item>
       <item row="4" column="1">
        <widget class="QLineEdit" name="lineLocalSegments"/>
@@ -516,12 +558,18 @@
         </property>
        </widget>
       </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineLocalMaxRuntime"/>
+      </item>
       <item row="7" column="0">
        <widget class="QLabel" name="labelLocalNumberThreads">
         <property name="text">
          <string>Number Threads</string>
         </property>
        </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="lineLocalNumberThreads"/>
       </item>
       <item row="8" column="0">
        <widget class="QLabel" name="labelLocalJavaOpts">
@@ -530,24 +578,8 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="lineLocalMaxRuntime"/>
-      </item>
-      <item row="7" column="1">
-       <widget class="QLineEdit" name="lineLocalNumberThreads"/>
-      </item>
       <item row="8" column="1">
        <widget class="QLineEdit" name="lineLocalJavaOpts"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="labelLocalProfilesUrl">
-        <property name="text">
-         <string>Profiles Url</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineLocalProfilesUrl"/>
       </item>
      </layout>
     </item>

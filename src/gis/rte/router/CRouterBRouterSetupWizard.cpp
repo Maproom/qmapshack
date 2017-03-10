@@ -46,7 +46,9 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(checkExpert, &QCheckBox::clicked,    this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
 
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
+    connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(lineLocalDir, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished);
+    connect(lineJavaExecutable, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableFinished);
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
@@ -376,9 +378,21 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectDirectory()
     updateLocalDirectory();
 }
 
+void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
+{
+    setup->localJavaExecutable = QFileDialog::getOpenFileName(this, tr("select Java Executable"),"");
+    updateLocalDirectory();
+}
+
 void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished() const
 {
     setup->localDir = lineLocalDir->text();
+    updateLocalDirectory();
+}
+
+void CRouterBRouterSetupWizard::slotLocalJavaExecutableFinished() const
+{
+    setup->localJavaExecutable = lineJavaExecutable->text();
     updateLocalDirectory();
 }
 
@@ -386,6 +400,7 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
 {
     textLocalDirectory->setVisible(false);
     lineLocalDir->setText(setup->localDir);
+    lineJavaExecutable->setText(setup->localJavaExecutable);
     if (setup->localDir.isEmpty())
     {
         labelLocalDirResult->setText(tr("please select BRouter installation directory"));
@@ -411,6 +426,15 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
             pushCreateOrUpdateLocalInstall->setText(tr("create new BRouter installation"));
             pushCreateOrUpdateLocalInstall->setVisible(true);
         }
+    }
+    if (QFile(setup->localJavaExecutable).exists())
+    {
+        labelLocalJavaResult->setVisible(false);
+    }
+    else
+    {
+        labelLocalJavaResult->setText(tr("Java Executable not found"));
+        labelLocalJavaResult->setVisible(true);
     }
     pageLocalDirectory->emitCompleteChanged();
 }

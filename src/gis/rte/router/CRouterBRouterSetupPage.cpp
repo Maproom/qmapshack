@@ -39,7 +39,7 @@ bool CRouterBRouterSetupPage::isComplete() const
     {
     case CRouterBRouterSetupWizard::Page_LocalDirectory:
     {
-        return setup->isLocalBRouterInstalled();
+        return setup->isLocalBRouterInstalled() && QFile(setup->localJavaExecutable).exists();
     }
     case CRouterBRouterSetupWizard::Page_LocalInstallation:
     {

@@ -21,6 +21,7 @@
 
 #include "gis/prj/IGisProject.h"
 
+
 class CTcxProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CTcxProject)
@@ -38,10 +39,29 @@ public:
         return "tcx";
     }
 
+    bool canSave() const override
+    {
+        return true;
+    }
+
+    static bool saveAs(const QString& fn, IGisProject& project);
+
     static void loadTcx(const QString &filename, CTcxProject *project);
+
 private:
     void loadTcx(const QString& filename);
+    void loadActivity(const QDomNode& activityRootNode);
+    void loadCourse(const QDomNode& courseRootNode);
+
+    static void saveAuthor(QDomNode& nodeToAttachAuthor);
+
+    enum trackType_e
+    {
+        eCourse
+        , eActivity
+    };
+
+    QMap<QString, qint8> trackTypes; //key = itemKey ; value = eCourse or eActivity
 };
 
 #endif //CTCXPROJECT_H
-

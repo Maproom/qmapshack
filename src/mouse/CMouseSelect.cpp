@@ -18,6 +18,7 @@
 
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
+#include "helpers/CWptIconDialog.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
 
@@ -35,6 +36,7 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
 
     connect(scrOptSelect->toolCopy,         &QToolButton::clicked, this, &CMouseSelect::slotCopy);
     connect(scrOptSelect->toolRoute,        &QToolButton::clicked, this, &CMouseSelect::slotRoute);
+    connect(scrOptSelect->toolSymWpt,       &QToolButton::clicked, this, &CMouseSelect::slotSymWpt);
     connect(scrOptSelect->toolCombineTracks, &QToolButton::clicked, this, &CMouseSelect::slotCombine);
     connect(scrOptSelect->toolDelete,       &QToolButton::clicked, this, &CMouseSelect::slotDelete);
 }
@@ -121,6 +123,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
     }
 
     scrOptSelect->frameFunction->setDisabled(items.isEmpty());
+    scrOptSelect->toolSymWpt->setEnabled(cntWpt);
     scrOptSelect->toolRoute->setEnabled(cntWpt > 1);
     scrOptSelect->toolCombineTracks->setEnabled(cntTrk > 1);
 }
@@ -166,5 +169,18 @@ void CMouseSelect::slotRoute() const
 void CMouseSelect::slotCombine() const
 {
     CGisWidget::self().combineTrkByKey(itemKeys, itemKeys);
+    canvas->resetMouse();
+}
+
+void CMouseSelect::slotSymWpt() const
+{
+    QToolButton tb;
+    CWptIconDialog dlg(&tb);
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    CGisWidget::self().changeWptSymByKey(itemKeys, tb.objectName());
     canvas->resetMouse();
 }

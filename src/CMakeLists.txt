@@ -86,6 +86,7 @@ endif(APPLE)
 set( SRCS
         GeoMath.cpp
         CMainWindow.cpp
+        CSingleInstanceProxy.cpp
         CAbout.cpp
         widgets/CTinySpinBox.cpp
         widgets/CDoubleSpinBox.cpp
@@ -201,6 +202,7 @@ set( SRCS
         gis/tnv/CTwoNavProject.cpp
         gis/tnv/serialization.cpp
         gis/tcx/CTcxProject.cpp
+        gis/tcx/serialization.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp
@@ -354,6 +356,7 @@ set( HDRS
         version.h
         GeoMath.h
         CMainWindow.h
+        CSingleInstanceProxy.h
         CAbout.h
         widgets/CTinySpinBox.h
         widgets/CDoubleSpinBox.h

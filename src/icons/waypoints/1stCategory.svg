@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="12.607673mm"
+   height="12.593531mm"
+   viewBox="0 0 12.607673 12.593531"
+   version="1.1"
+   id="svg6327"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="1stCategory.svg">
+  <defs
+     id="defs6321" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#767676"
+     bordercolor="#457e66"
+     borderopacity="1"
+     inkscape:pageopacity="0.34901961"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.919596"
+     inkscape:cx="24.478426"
+     inkscape:cy="36.50038"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1855"
+     inkscape:window-height="1056"
+     inkscape:window-x="65"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1"
+     showguides="true"
+     units="mm">
+    <inkscape:grid
+       type="xygrid"
+       id="grid6329"
+       originx="-163.03157"
+       originy="-131.28158"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="0,44.672855"
+       id="guide2987" />
+    <sodipodi:guide
+       position="44.672855,0"
+       orientation="-44.622746,0"
+       id="guide2989" />
+    <sodipodi:guide
+       position="44.672855,44.622746"
+       orientation="0,-44.672855"
+       id="guide2991" />
+    <sodipodi:guide
+       position="0,44.622746"
+       orientation="44.622746,0"
+       id="guide2993" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata6324">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-163.03157,-153.1249)"
+     style="opacity:1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.42991042;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect2995"
+       width="10.16278"
+       height="10.191433"
+       x="164.2216"
+       y="154.33534" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 164.04167,164.70833 174.625,154.125 v 3.96875"
+       id="path3789-1-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccc" />
+    <path
+       style="fill:none;stroke:#ff0000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 174.625,154.125 h -3.96875"
+       id="path3789-1-2-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.36416434999999936px;line-height:1.25000000000000000;font-family:Aharoni;-inkscape-font-specification:Aharoni;letter-spacing:0px;word-spacing:0px;fill:#000080;fill-opacity:1;stroke:none;stroke-width:0.30910410999999999"
+       x="178.10426"
+       y="150.33669"
+       id="text6333"
+       transform="scale(0.91222156,1.0962249)"><tspan
+         sodipodi:role="line"
+         x="178.10426"
+         y="150.33669"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Swis721 BlkEx BT;-inkscape-font-specification:Swis721 BlkEx BT;fill:#000080;fill-opacity:1;stroke-width:0.30910410999999999"
+         id="tspan6335">1</tspan></text>
+  </g>
+</svg>

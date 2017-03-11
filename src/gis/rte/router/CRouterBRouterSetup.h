@@ -37,19 +37,19 @@ public:
     void save();
 
     void resetAll();
-    void resetOnlineWebUrl();
-    void resetOnlineServiceUrl();
-    void resetOnlineProfilesUrl();
-    void resetLocalProfileDir();
-    void resetLocalCustomProfileDir();
-    void resetLocalSegmentsDir();
-    void resetLocalHost();
-    void resetLocalPort();
-    void resetLocalNumberThreads();
-    void resetLocalMaxRunningTime();
-    void resetLocalJavaOpts();
-    void resetBinariesUrl();
-    void resetSegmentsUrl();
+    void resetOnlineWebUrl() { onlineWebUrl = defaultOnlineWebUrl; }
+    void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
+    void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }
+    void resetLocalProfileDir() { localProfileDir = defaultLocalProfileDir; }
+    void resetLocalCustomProfileDir() { localCustomProfileDir = defaultLocalCustomProfileDir; }
+    void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
+    void resetLocalHost() { localHost = defaultLocalHost; }
+    void resetLocalPort() { localPort = defaultLocalPort; }
+    void resetLocalNumberThreads() { localNumberThreads = defaultLocalNumberThreads; }
+    void resetLocalMaxRunningTime() { localMaxRunningTime = defaultLocalMaxRunningTime; }
+    void resetLocalJavaOpts() { localJavaOpts = defaultLocalJavaOpts; }
+    void resetBinariesUrl() { binariesUrl = defaultBinariesUrl; }
+    void resetSegmentsUrl() { segmentsUrl = defaultSegmentsUrl; }
 
     QStringList getProfiles() const;
 

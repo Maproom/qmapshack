@@ -141,6 +141,7 @@ void CRouterBRouter::clearError() const
 {
     textBRouterError->clear();
     textBRouterError->setVisible(false);
+    brouterError = QProcess::UnknownError;
 }
 
 void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content) const

@@ -22,6 +22,7 @@ find_package(Qt5PrintSupport)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
+find_package(QuaZip REQUIRED)
 
 if(USE_QT5DBus)
     find_package(Qt5DBus)
@@ -767,7 +768,7 @@ include_directories(
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
-
+    ${QUAZIP_INCLUDE_DIRS}
 )
 
 if(APPLE)
@@ -797,6 +798,7 @@ target_link_libraries(QMS
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
+    ${QUAZIP_LIBRARIES}
 )
 
 target_link_libraries(${APPLICATION_NAME}
@@ -812,6 +814,7 @@ target_link_libraries(${APPLICATION_NAME}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
+    ${QUAZIP_LIBRARIES}
 )
 
 if(APPLE)

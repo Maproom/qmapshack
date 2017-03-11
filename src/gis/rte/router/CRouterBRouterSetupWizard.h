@@ -24,6 +24,7 @@
 class CCanvas;
 class CRouterBRouterSetup;
 class CRouterBRouterTilesSelect;
+class CRouterBRouterToolShell;
 
 class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
 {
@@ -74,11 +75,11 @@ private:
     void beginChooseMode();
     bool validateChooseMode() const;
 
-    void initLocalDirectory() const;
+    void initLocalDirectory();
     void beginLocalDirectory();
     void updateLocalDirectory() const;
 
-    void initLocalInstall() const;
+    void initLocalInstall();
     void beginLocalInstall();
 
     void initProfiles() const;
@@ -108,6 +109,9 @@ private:
 
     bool doLocalInstall;
     QUrl downloadUrl;
+
+    CRouterBRouterToolShell * localDirShell;
+    CRouterBRouterToolShell * localInstallShell;
 
     QNetworkAccessManager * networkAccessManager;
 

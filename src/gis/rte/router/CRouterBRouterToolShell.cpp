@@ -23,7 +23,7 @@
 #include "CRouterBRouterToolShell.h"
 
 
-CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent)
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent)
     : IToolShell(textBrowser,parent)
 {
     connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);

@@ -3481,12 +3481,12 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="487"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="489"/>
         <source>Error parsing online-config:</source>
         <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="492"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="494"/>
         <source>Network error:</source>
         <translation>Netzwerk Fehler:</translation>
     </message>

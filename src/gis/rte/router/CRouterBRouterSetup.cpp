@@ -275,7 +275,8 @@ void CRouterBRouterSetup::updateLocalProfiles()
             }
         }
     }
-    for (const QString &profile : localProfiles)
+    const QStringList localProfilesTmp(localProfiles);
+    for (const QString &profile : localProfilesTmp)
     {
         if (!installedProfiles.contains(profile))
         {
@@ -449,7 +450,8 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             }
             onlineProfilesLoaded << profile.toString();
         }
-        for (const QString &profile : onlineProfilesAvailable)
+        const QStringList onlineProfilesAvailableTmp(onlineProfilesAvailable);
+        for (const QString &profile : onlineProfilesAvailableTmp)
         {
             if (!onlineProfilesLoaded.contains(profile))
             {
@@ -465,8 +467,8 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
                 changed = true;
             }
         }
-
-        for (const QString &profile : onlineProfiles)
+        const QStringList onlineProfilesTmp(onlineProfiles);
+        for (const QString &profile : onlineProfilesTmp)
         {
             if (!onlineProfilesAvailable.contains(profile))
             {

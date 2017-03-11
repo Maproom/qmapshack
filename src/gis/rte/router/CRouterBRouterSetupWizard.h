@@ -51,6 +51,7 @@ private slots:
     void slotCheckExpertClicked() const;
     void slotLocalToolSelectDirectory();
     void slotLocalToolSelectJava();
+    void slotLocalPushFindJava() const;
     void slotCreateOrUpdateLocalInstallClicked();
     void slotLocalDirectoryEditingFinished() const;
     void slotLocalJavaExecutableFinished() const;

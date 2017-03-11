@@ -81,7 +81,8 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     textBRouterOutput->setVisible(false);
     textBRouterError->setVisible(false);
 
-    brouterShell = new CRouterBRouterToolShell(textBRouterOutput,this);
+    //set textBRouterOutput as parent of ToolShell to ensure Toolshell is destroyed before text
+    brouterShell = new CRouterBRouterToolShell(textBRouterOutput,textBRouterOutput);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessError, this, &CRouterBRouter::slotBRouterError);
 

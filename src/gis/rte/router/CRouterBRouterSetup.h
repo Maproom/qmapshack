@@ -90,6 +90,8 @@ private:
     mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;
 
+    QString findJava() const;
+
     QStringList onlineProfiles;
     QStringList localProfiles;
 
@@ -120,7 +122,6 @@ private:
     const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
     const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";
     const QString defaultLocalDir = ".";
-    const QString defaultJavaExecutable = "java";
     const QString defaultLocalProfileDir = "profiles2";
     const QString defaultLocalCustomProfileDir = "customprofiles";
     const QString defaultLocalSegmentsDir = "segments4";

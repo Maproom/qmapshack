@@ -48,7 +48,7 @@ void CRouterBRouterSetup::load()
     onlineServiceUrl = cfg.value("onlineServiceUrl", defaultOnlineServiceUrl).toString();
     onlineProfilesUrl = cfg.value("onlineProfilesUrl", defaultOnlineProfilesUrl).toString();
     localDir = cfg.value("localDir", defaultLocalDir).toString();
-    localJavaExecutable = cfg.value("localJava",defaultJavaExecutable).toString();
+    localJavaExecutable = cfg.value("localJava",findJava()).toString();
     localProfileDir = cfg.value("localProfileDir", defaultLocalProfileDir).toString();
     localCustomProfileDir = cfg.value("localCustomProfileDir", defaultLocalCustomProfileDir).toString();
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
@@ -625,6 +625,37 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
     const QDir dir(localDir);
     return (QFile(dir.absoluteFilePath("brouter.jar")).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists());
+}
+
+QString CRouterBRouterSetup::findJava() const
+{
+#if defined(Q_OS_MAC)
+#else
+    const QProcessEnvironment &env = QProcessEnvironment::systemEnvironment();
+    if (env.contains("PATH"))
+    {
+        const QString &envPath = env.value("PATH");
+#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
+        const QRegExp reSep(":");
+        const QString javaExe("java");
+#elif defined (Q_OS_WIN32)
+        const QRegExp reSep(";");
+        const QString javaExe("java.exe");
+#else
+  #error OS not supported
+#endif
+        for (const QString &path : envPath.split(reSep))
+        {
+            const QDir &dir(path);
+            const QString &javaPath = dir.absoluteFilePath(javaExe);
+            if (QFile(javaPath).exists())
+            {
+                return javaPath;
+            }
+        }
+    }
+#endif
+    return "";
 }
 
 void CRouterBRouterSetup::onInvalidSetup()

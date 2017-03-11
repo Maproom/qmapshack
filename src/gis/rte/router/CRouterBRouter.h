@@ -46,12 +46,12 @@ public:
     QString getOptions() override;
 
 private slots:
-    void slotToolSetupClicked() const;
+    void slotToolSetupClicked();
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg() const;
     void slotToolProfileInfoClicked() const;
     void slotDisplayError(const QString &error, const QString &details) const;
-    void slotDisplayProfileInfo(const QString &profile, const QString &content) const;
+    void slotDisplayProfileInfo(const QString &profile, const QString &content);
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
     void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
     void slotToggleBRouter() const;
@@ -82,7 +82,7 @@ private:
     void updateLocalBRouterStatus() const;
     QNetworkRequest getRequest(const QVector<wpt_t>& route_points) const;
     QUrl getServiceUrl() const;
-    void clearError() const;
+    void clearError();
 
     QNetworkAccessManager * networkAccessManager;
     QTimer * timerCloseStatusMsg;

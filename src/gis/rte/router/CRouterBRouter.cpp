@@ -104,7 +104,7 @@ CRouterBRouter::~CRouterBRouter()
     cfg.endGroup();
 }
 
-void CRouterBRouter::slotToolSetupClicked() const
+void CRouterBRouter::slotToolSetupClicked()
 {
     stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
@@ -137,14 +137,14 @@ void CRouterBRouter::slotDisplayError(const QString &error, const QString &detai
     QTimer::singleShot(5000,this,&CRouterBRouter::clearError);
 }
 
-void CRouterBRouter::clearError() const
+void CRouterBRouter::clearError()
 {
     textBRouterError->clear();
     textBRouterError->setVisible(false);
     brouterError = QProcess::UnknownError;
 }
 
-void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content) const
+void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content)
 {
     clearError();
     CRouterBRouterInfo info;

@@ -3401,79 +3401,79 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>dritte Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="157"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="158"/>
         <source>BRouter (offline)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="162"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="163"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="185"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="186"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="270"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="271"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="385"/>
         <source>response is empty</source>
         <translation>Anwort ist leer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="307"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="308"/>
         <source>Bad response from server: %1</source>
         <translation>Fehlerhafte Serverantwort: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="355"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="356"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-anfrage an den Server geschickt. Bitte warten...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="249"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="358"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="250"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="359"/>
         <source>Calculate route with %1</source>
         <translation>Berechne Route mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="418"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="419"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Fehler-Antwort vom Server&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="409"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="512"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="513"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="537"/>
         <source>running</source>
         <translation>wird ausgeführt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="531"/>
         <source>starting</source>
         <translation>started</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="538"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="543"/>
         <source>stopped</source>
         <translation>angehalten</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
         <source>not installed</source>
         <translation>nicht installiert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="559"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="564"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3746,13 +3746,13 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="91"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="96"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>
@@ -8918,36 +8918,36 @@ sein</translation>
 <context>
     <name>IToolShell</name>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="45"/>
+        <location filename="../tool/IToolShell.cpp" line="49"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Ausführen des externen Programms `%1` ist fehlgeschlagen: </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="49"/>
+        <location filename="../tool/IToolShell.cpp" line="53"/>
         <source>Process cannot be started.
 </source>
         <translation>Der Prozess konnte nicht gestartet werden.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="50"/>
+        <location filename="../tool/IToolShell.cpp" line="54"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>Stellen Sie sicher, dass die erforderlichen Pakete installiert sind, `%1` existiert und ist ausführbar.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="54"/>
+        <location filename="../tool/IToolShell.cpp" line="58"/>
         <source>External process crashed.
 </source>
         <translation>Der externe Prozess ist abgestürzt.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="58"/>
+        <location filename="../tool/IToolShell.cpp" line="62"/>
         <source>An unknown error occurred.
 </source>
         <translation>Ein unbekannter Fehler ist aufgetreten.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="149"/>
+        <location filename="../tool/IToolShell.cpp" line="156"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>

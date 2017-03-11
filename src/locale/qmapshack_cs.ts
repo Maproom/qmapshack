@@ -3399,79 +3399,79 @@ není platným vymezením soustavy souřadnic
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="157"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="158"/>
         <source>BRouter (offline)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="162"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="163"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="185"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="186"/>
         <source>profile: %1, alternative: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="270"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="271"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="385"/>
         <source>response is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="307"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="308"/>
         <source>Bad response from server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="355"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="356"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="249"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="358"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="250"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="359"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished">Spočítat cestu s %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="418"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="419"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="409"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished">&lt;br/&gt;Doba výpočtu: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="512"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="513"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="537"/>
         <source>running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="531"/>
         <source>starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="538"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="543"/>
         <source>stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
         <source>not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="559"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="564"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3744,13 +3744,13 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="91"/>
         <source>!!! done !!!
 </source>
         <translation type="unfinished">Hotovo!</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterBRouterToolShell.cpp" line="96"/>
         <source>!!! failed !!!
 </source>
         <translation type="unfinished">Nepodařilo se!</translation>
@@ -8915,36 +8915,36 @@ nebo
 <context>
     <name>IToolShell</name>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="45"/>
+        <location filename="../tool/IToolShell.cpp" line="49"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Nepodařilo se spustit vnější program `%1`: </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="49"/>
+        <location filename="../tool/IToolShell.cpp" line="53"/>
         <source>Process cannot be started.
 </source>
         <translation>Proces nelze spustit.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="50"/>
+        <location filename="../tool/IToolShell.cpp" line="54"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>Ujistěte se, že jsou nainstalovány požadované balíčky, že `%1` existuje a je spustitelný.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="54"/>
+        <location filename="../tool/IToolShell.cpp" line="58"/>
         <source>External process crashed.
 </source>
         <translation>Vnější proces spadl.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="58"/>
+        <location filename="../tool/IToolShell.cpp" line="62"/>
         <source>An unknown error occurred.
 </source>
         <translation>Vyskytla se neznámá chyba.</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="149"/>
+        <location filename="../tool/IToolShell.cpp" line="156"/>
         <source>!!! failed !!!
 </source>
         <translation>Nepodařilo se!</translation>

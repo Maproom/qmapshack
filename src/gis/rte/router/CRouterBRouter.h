@@ -98,6 +98,7 @@ private:
     bool isError { false };
     QString error;
     QString errorDetails;
+    bool isShutdown { false };
 };
 
 #endif //CROUTERBROUTER_H

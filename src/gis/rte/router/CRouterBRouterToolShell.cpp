@@ -63,7 +63,13 @@ void CRouterBRouterToolShell::stop()
 {
     if (cmd.state() != QProcess::NotRunning)
     {
+#if defined(Q_OS_MAC) || defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD) || defined(__FreeBSD_kernel__) || defined(__GNU__)
         cmd.terminate();
+#elif defined (Q_OS_WIN32)
+        cmd.kill();
+#else
+  #error OS not supported
+#endif
     }
 }
 

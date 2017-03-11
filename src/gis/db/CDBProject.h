@@ -25,6 +25,7 @@
 class CEvtD2WShowItems;
 class CEvtD2WHideItems;
 class CQlgtFolder;
+class IDBFolder;
 
 class CDBProject : public IGisProject
 {
@@ -32,6 +33,7 @@ class CDBProject : public IGisProject
 public:
     CDBProject(CGisListWks * parent);
     CDBProject(const QString &dbName, quint64 id, CGisListWks * parent);
+    CDBProject(const QString &filename, IDBFolder *parentFolder, CGisListWks *parent);
     CDBProject(CQlgtFolder& folder);
     virtual ~CDBProject();
 

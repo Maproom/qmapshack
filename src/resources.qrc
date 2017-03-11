@@ -97,6 +97,8 @@
         <file>icons/32x32/Undo.png</file>
         <file>icons/32x32/Redo.png</file>
         <file>icons/32x32/Cut.png</file>
+        <file>icons/32x32/CutMode1.png</file>
+        <file>icons/32x32/CutMode2.png</file>
         <file>icons/32x32/CutHistory.png</file>
         <file>icons/32x32/Copy.png</file>
         <file>icons/32x32/Move.png</file>
@@ -287,6 +289,8 @@
         <file>icons/48x48/Undo.png</file>
         <file>icons/48x48/Redo.png</file>
         <file>icons/48x48/Cut.png</file>
+        <file>icons/48x48/CutMode1.png</file>
+        <file>icons/48x48/CutMode2.png</file>
         <file>icons/48x48/CutHistory.png</file>
         <file>icons/48x48/Copy.png</file>
         <file>icons/48x48/Move.png</file>
@@ -467,6 +471,22 @@
         <file>icons/waypoints/32x32/CityLarge.png</file>
         <file>icons/waypoints/32x32/CityMedium.png</file>
         <file>icons/waypoints/32x32/CitySmall.png</file>
+        <file>icons/waypoints/32x32/1stCategory.png</file>
+        <file>icons/waypoints/32x32/2ndCategory.png</file>
+        <file>icons/waypoints/32x32/3rdCategory.png</file>
+        <file>icons/waypoints/32x32/4thCategory.png</file>
+        <file>icons/waypoints/32x32/Danger.png</file>
+        <file>icons/waypoints/32x32/FirstAid.png</file>
+        <file>icons/waypoints/32x32/Food.png</file>
+        <file>icons/waypoints/32x32/Generic.png</file>
+        <file>icons/waypoints/32x32/HorsCategory.png</file>
+        <file>icons/waypoints/32x32/Left.png</file>
+        <file>icons/waypoints/32x32/Right.png</file>
+        <file>icons/waypoints/32x32/Sprint.png</file>
+        <file>icons/waypoints/32x32/Straight.png</file>
+        <file>icons/waypoints/32x32/Summit.png</file>
+        <file>icons/waypoints/32x32/Valley.png</file>
+        <file>icons/waypoints/32x32/Water.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorMovePoint.png</file>

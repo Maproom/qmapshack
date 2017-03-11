@@ -492,7 +492,6 @@ void CMainWindow::slotHelp()
 
 void CMainWindow::slotQuickstart()
 {
-
     // show menu action for German help if system language is German.
     QString locale = QLocale::system().name();
     if(locale.size() >= 2)
@@ -1076,7 +1075,7 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
         QFileInfo fi(urls[0].path());
         QString ext = fi.suffix().toUpper();
 
-        if( (ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") )
+        if ((ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") || (ext == "TCX"))
         {
             event->acceptProposedAction();
         }

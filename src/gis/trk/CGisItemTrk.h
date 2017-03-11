@@ -32,6 +32,7 @@
 #include <functional>
 #include <interpolation.h>
 
+
 class QDomNode;
 class IGisProject;
 class INotifyTrk;
@@ -139,11 +140,27 @@ public:
        @param gpx   The <gpx> node to append by the track
      */
     void save(QDomNode& gpx, bool strictGpx11) override;
+
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
      */
     bool saveTwoNav(const QString& filename);
+
+    /**
+       @brief Save track as TCX course (including correlated course points)
+       @param coursesNode   The node to append by the course
+     */
+    void saveTCXcourse(QDomNode& coursesNode);
+
+
+    /**
+       @brief Save track as TCX activity
+       @param activitiesNode   The node to append by the activity
+     */
+    void saveTCXactivity(QDomNode& activitiesNode);
+
+
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from
@@ -162,6 +179,9 @@ public:
     {
         return trk.name.isEmpty() ? noName : trk.name;
     }
+
+    /// returns "true" when trk has no time-related invalid points
+    bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
 
     QDateTime getTimestamp() const override { return getTimeStart(); }
 

@@ -677,6 +677,8 @@ QPointF CGisItemTrk::getPointCloseBy(const QPoint& screenPos)
 }
 
 
+
+
 bool CGisItemTrk::isRangeSelected() const
 {
     return mouseRange1 != mouseRange2;
@@ -1195,8 +1197,9 @@ bool CGisItemTrk::cut()
         return false;
     }
 
-    qint32 idxMouse      = mouseClickFocus->idxTotal;
-    CCutTrk::mode_e mode = dlg.getMode();
+    qint32 idxMouse             = mouseClickFocus->idxTotal;
+    CCutTrk::mode_e mode        = dlg.getMode();
+    CCutTrk::cutmode_e cutMode  = dlg.getCutMode();
 
     // if the cut action results into cloning a track, the calling method should
     // ask if the original track should be removed. As a track can't delete itself
@@ -1209,14 +1212,20 @@ bool CGisItemTrk::cut()
         // clone first part?
         if((mode & (CCutTrk::eModeKeepBoth|CCutTrk::eModeKeepFirst)) != 0)
         {
-            QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idxMouse);
+            int idx = cutMode == CCutTrk::eCutMode1 ? idxMouse  - 1 : idxMouse;
+            if(idx < 0)
+            {
+                idx = 0;
+            }
+
+            QString name = getName() + QString(" (%1 - %2)").arg(0).arg(idx);
             IGisProject *project = nullptr;
             if(!getNameAndProject(name, project, tr("track")))
             {
                 return false;
             }
 
-            new CGisItemTrk(name, 0, idxMouse, trk, project);
+            new CGisItemTrk(name, 0, idx, trk, project);
         }
 
         // clone second part?

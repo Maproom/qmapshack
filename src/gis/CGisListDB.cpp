@@ -25,6 +25,7 @@
 #include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CDBFolderSqlite.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/CDBProject.h"
 #include "gis/db/CSearchDatabase.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupDatabase.h"
@@ -122,6 +123,8 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionCopyFolder    = menuFolder->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy Folder"), this, SLOT(slotCopyFolder()));
     actionMoveFolder    = menuFolder->addAction(QIcon("://icons/32x32/Move.png"), tr("Move Folder"), this, SLOT(slotMoveFolder()));
     actionDelFolder     = menuFolder->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Delete Folder"), this, SLOT(slotDelFolder()));
+    menuFolder->addSeparator();
+    actionImport        = menuFolder->addAction(QIcon("://icons/32x32/LoadGIS.png"), tr("Import from Files..."), this, SLOT(slotImport()));
     actionExportToGpx   = menuFolder->addAction(QIcon("://icons/32x32/SaveGIS.png"), tr("Export to GPX..."), this, SLOT(slotExportToGpx()));
 
     menuItem            = new QMenu(this);
@@ -132,7 +135,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     actionSearch        = menuDatabase->addAction(QIcon("://icons/32x32/Zoom.png"), tr("Search Database"), this, SLOT(slotSearchDatabase()));
     actionUpdate        = menuDatabase->addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotUpdateDatabase()));
     actionDelDatabase   = menuDatabase->addAction(QIcon("://icons/32x32/DeleteOne.png"), tr("Remove Database"), this, SLOT(slotDelDatabase()));
+    menuDatabase->addSeparator();
+    menuDatabase->addAction(actionImport);
     menuDatabase->addAction(actionExportToGpx);
+
 
     menuLostFound       = new QMenu(this);
     actionDelLostFound  = menuLostFound->addAction(QIcon("://icons/32x32/Empty.png"), tr("Empty"), this, SLOT(slotDelLostFound()));
@@ -330,6 +336,7 @@ void CGisListDB::slotContextMenu(const QPoint& point)
     actionUpdate->setEnabled(true);
     actionAddFolder->setEnabled(isSingleSelection);
     actionExportToGpx->setEnabled(isSingleSelection);
+    actionImport->setEnabled(isSingleSelection);
 
     IDBFolderSql * database = dynamic_cast<IDBFolderSql*>(currentItem());
     if(database)
@@ -1029,4 +1036,47 @@ void CGisListDB::slotExportToGpx()
     }
 
     folder->exportToGpx();
+}
+
+void CGisListDB::slotImport()
+{
+    CGisListDBEditLock lock(false, this, "slotImport");
+
+    IDBFolder * folder = dynamic_cast<IDBFolder*>(currentItem());
+    if(folder == nullptr)
+    {
+        return;
+    }
+
+    SETTINGS;
+    QString path   = cfg.value("Paths/lastGisPath",   QDir::homePath()).toString();
+    QString filter = cfg.value("Paths/lastGisFilter", IGisProject::filedialogAllSupported).toString();
+
+    QStringList filenames = QFileDialog::getOpenFileNames(this, tr("Import GIS Data..."), path, IGisProject::filedialogLoadFilters, &filter);
+
+    if(filenames.isEmpty())
+    {
+        return;
+    }
+
+    for(const QString& filename : filenames)
+    {
+        CDBProject * prjDb = new CDBProject(filename, folder, nullptr);
+        if(prjDb->isValid())
+        {
+            prjDb->save();
+        }
+
+        delete prjDb;
+    }
+
+    IDBFolderSql * dbfolder = folder->getDBFolder();
+    if(dbfolder)
+    {
+        dbfolder->announceChange();
+    }
+
+    path = QFileInfo(filenames.first()).absolutePath();
+    cfg.setValue("Paths/lastGisPath",   path);
+    cfg.setValue("Paths/lastGisFilter", filter);
 }

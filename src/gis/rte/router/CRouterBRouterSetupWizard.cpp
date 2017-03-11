@@ -27,6 +27,7 @@
 #include "setup/IAppSetup.h"
 #include "canvas/CCanvas.h"
 #include <proj_api.h>
+#include <quazip5/JlCompress.h>
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     : QWizard(CMainWindow::getBestWidgetForParent())
@@ -361,9 +362,10 @@ bool CRouterBRouterSetupWizard::validateChooseMode() const
     return true;
 }
 
-void CRouterBRouterSetupWizard::initLocalDirectory() const
+void CRouterBRouterSetupWizard::initLocalDirectory()
 {
     dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
+    localDirShell = new CRouterBRouterToolShell(textLocalDirectory,this);
 }
 
 void CRouterBRouterSetupWizard::beginLocalDirectory()
@@ -479,19 +481,18 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
     catch (const QString &msg)
     {
         textLocalDirectory->setVisible(true);
-        CRouterBRouterToolShell shell(textLocalDirectory,this);
-        shell.error(msg);
+        localDirShell->error(msg);
     }
 }
 
-void CRouterBRouterSetupWizard::initLocalInstall() const
+void CRouterBRouterSetupWizard::initLocalInstall()
 {
     dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
     connect(webLocalBRouterVersions, &QWebView::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
     webLocalBRouterVersions->load(QUrl(setup->binariesUrl));
     QWebPage *localVersionsPage = webLocalBRouterVersions->page();
     localVersionsPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-
+    localInstallShell = new CRouterBRouterToolShell(textLocalInstall,this);
     connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
 }
 
@@ -500,8 +501,7 @@ void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
     if (!ok)
     {
         textLocalInstall->setVisible(true);
-        CRouterBRouterToolShell shell(textLocalInstall,this);
-        shell.error(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
+        localInstallShell->error(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
     }
 }
 
@@ -525,9 +525,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl &url)
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
     textLocalInstall->setVisible(true);
-    CRouterBRouterToolShell shell(textLocalInstall,this);
-    shell.out(tr("download %1 started").arg(downloadUrl.toString()));
-
+    localInstallShell->out(tr("download %1 started").arg(downloadUrl.toString()));
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
     reply->setProperty("fileName",downloadUrl.fileName());
 }
@@ -559,9 +557,14 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
                 throw tr("Error writing to file %1").arg(outfile.fileName());
             }
             outfile.close();
-            CRouterBRouterToolShell shell(textLocalInstall,this);
-            shell.out("download " + outfile.fileName() + " finished");
-            shell.execute(lineLocalDir->text(),QString("unzip"),QStringList() << "-o" << fileName);
+            localInstallShell->out(tr("download %1 finished").arg(outfile.fileName()));
+            const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(),setup->localDir);
+            localInstallShell->out(tr("unzipping:"));
+            for (const QString unzipped : unzippedNames)
+            {
+                localInstallShell->out(unzipped);
+            }
+            localInstallShell->out(tr("ready."));
             pageLocalInstallation->emitCompleteChanged();
             setup->updateLocalProfiles();
         }
@@ -580,8 +583,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
     }
     catch (const QString &msg)
     {
-        CRouterBRouterToolShell shell(textLocalInstall,this);
-        shell.error(tr("download of brouter failed: %1").arg(msg));
+        localInstallShell->error(tr("download of brouter failed: %1").arg(msg));
     }
 }
 

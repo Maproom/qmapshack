@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
+IToolShell::IToolShell(QTextBrowser *textBrowser, QWidget * parent)
     : QWidget(parent)
     , text(textBrowser)
 {

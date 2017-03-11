@@ -134,6 +134,7 @@ void CRouterBRouter::slotDisplayError(const QString &error, const QString &detai
 {
     textBRouterError->setText(error + ": " + details);
     textBRouterError->setVisible(true);
+    QTimer::singleShot(5000,this,&CRouterBRouter::clearError);
 }
 
 void CRouterBRouter::clearError() const

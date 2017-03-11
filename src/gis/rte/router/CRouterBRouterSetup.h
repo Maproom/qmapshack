@@ -64,6 +64,7 @@ public:
     void displayProfileAsync(const QString &profile) const;
     void displayOnlineProfileAsync(const QString &profile) const;
 
+    QString findJava() const;
     bool isLocalBRouterInstalled() const;
 
     void onInvalidSetup();
@@ -89,8 +90,6 @@ private:
     void emitNetworkError(QNetworkReply * reply) const;
     mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;
-
-    QString findJava() const;
 
     QStringList onlineProfiles;
     QStringList localProfiles;

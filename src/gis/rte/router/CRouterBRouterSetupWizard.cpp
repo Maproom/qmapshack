@@ -47,6 +47,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
+    connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
     connect(lineLocalDir, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished);
     connect(lineJavaExecutable, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableFinished);
 
@@ -390,6 +391,12 @@ void CRouterBRouterSetupWizard::slotLocalToolSelectJava()
         setup->localJavaExecutable = dialog.selectedFiles().first();
         updateLocalDirectory();
     }
+}
+
+void CRouterBRouterSetupWizard::slotLocalPushFindJava() const
+{
+    setup->localJavaExecutable = setup->findJava();
+    updateLocalDirectory();
 }
 
 void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished() const

@@ -3479,12 +3479,12 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="552"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="487"/>
         <source>Error parsing online-config:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="557"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="492"/>
         <source>Network error:</source>
         <translation type="unfinished"></translation>
     </message>

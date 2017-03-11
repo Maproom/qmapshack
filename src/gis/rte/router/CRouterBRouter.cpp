@@ -91,6 +91,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
 CRouterBRouter::~CRouterBRouter()
 {
+    isShutdown = true;
     if (brouterState != QProcess::NotRunning)
     {
         stopBRouter();
@@ -515,6 +516,10 @@ void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const 
 
 void CRouterBRouter::updateLocalBRouterStatus() const
 {
+    if (isShutdown)
+    {
+        return;
+    }
     if (setup->installMode == CRouterBRouterSetup::ModeLocal)
     {
         if (setup->isLocalBRouterInstalled())

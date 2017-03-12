@@ -110,9 +110,6 @@ private:
     bool doLocalInstall;
     QUrl downloadUrl;
 
-    CRouterBRouterToolShell * localDirShell;
-    CRouterBRouterToolShell * localInstallShell;
-
     QNetworkAccessManager * networkAccessManager;
 
     bool isError { false };

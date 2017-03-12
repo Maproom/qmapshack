@@ -365,7 +365,6 @@ bool CRouterBRouterSetupWizard::validateChooseMode() const
 void CRouterBRouterSetupWizard::initLocalDirectory()
 {
     dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
-    localDirShell = new CRouterBRouterToolShell(textLocalDirectory,this);
 }
 
 void CRouterBRouterSetupWizard::beginLocalDirectory()
@@ -481,7 +480,8 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
     catch (const QString &msg)
     {
         textLocalDirectory->setVisible(true);
-        localDirShell->error(msg);
+        textLocalDirectory->setTextColor(Qt::red);
+        textLocalDirectory->append(msg);
     }
 }
 
@@ -492,7 +492,6 @@ void CRouterBRouterSetupWizard::initLocalInstall()
     webLocalBRouterVersions->load(QUrl(setup->binariesUrl));
     QWebPage *localVersionsPage = webLocalBRouterVersions->page();
     localVersionsPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    localInstallShell = new CRouterBRouterToolShell(textLocalInstall,this);
     connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
 }
 
@@ -501,7 +500,8 @@ void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
     if (!ok)
     {
         textLocalInstall->setVisible(true);
-        localInstallShell->error(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
+        textLocalInstall->setTextColor(Qt::red);
+        textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
     }
 }
 
@@ -525,7 +525,8 @@ void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl &url)
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
     textLocalInstall->setVisible(true);
-    localInstallShell->out(tr("download %1 started").arg(downloadUrl.toString()));
+    textLocalInstall->setTextColor(Qt::darkGreen);
+    textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));
     QNetworkReply * reply = networkAccessManager->get(QNetworkRequest(downloadUrl));
     reply->setProperty("fileName",downloadUrl.fileName());
 }
@@ -557,14 +558,15 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
                 throw tr("Error writing to file %1").arg(outfile.fileName());
             }
             outfile.close();
-            localInstallShell->out(tr("download %1 finished").arg(outfile.fileName()));
+            textLocalInstall->setTextColor(Qt::darkGreen);
+            textLocalInstall->append(tr("download %1 finished").arg(outfile.fileName()));
             const QStringList &unzippedNames = JlCompress::extractDir(outfile.fileName(),setup->localDir);
-            localInstallShell->out(tr("unzipping:"));
+            textLocalInstall->append(tr("unzipping:"));
             for (const QString unzipped : unzippedNames)
             {
-                localInstallShell->out(unzipped);
+                textLocalInstall->append(unzipped);
             }
-            localInstallShell->out(tr("ready."));
+            textLocalInstall->append(tr("ready."));
             pageLocalInstallation->emitCompleteChanged();
             setup->updateLocalProfiles();
         }
@@ -583,7 +585,8 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
     }
     catch (const QString &msg)
     {
-        localInstallShell->error(tr("download of brouter failed: %1").arg(msg));
+        textLocalInstall->setTextColor(Qt::red);
+        textLocalInstall->append(tr("download of brouter failed: %1").arg(msg));
     }
 }
 

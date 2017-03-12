@@ -3380,79 +3380,79 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="159"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
         <source>BRouter (offline)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="164"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="165"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="187"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="188"/>
         <source>profile: %1, alternative: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="272"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="273"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="387"/>
         <source>response is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="309"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="310"/>
         <source>Bad response from server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="357"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="358"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="251"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="360"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="252"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="361"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="420"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="421"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="410"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="411"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="514"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="515"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="538"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="539"/>
         <source>running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="532"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="533"/>
         <source>starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="544"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="545"/>
         <source>stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="554"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="555"/>
         <source>not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="565"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="566"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3473,57 +3473,57 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterBRouterSetupWizard</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="38"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="39"/>
         <source>Restore Default Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="378"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="380"/>
         <source>Open Directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="385"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="387"/>
         <source>select Java Executable</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="421"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="423"/>
         <source>please select BRouter installation directory</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="426"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="428"/>
         <source>selected directory does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="427"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="429"/>
         <source>create directory and install BRouter there</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="434"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="436"/>
         <source>existing BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="435"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="437"/>
         <source>update existing BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="440"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="442"/>
         <source>empty directory, create new BRouter installation here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="441"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="443"/>
         <source>create new BRouter installation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="458"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="460"/>
         <source>Java Executable not found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3543,47 +3543,62 @@ is not a valid coordinate system definition:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="529"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="528"/>
         <source>download %1 started</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="542"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="540"/>
         <source>Network Error: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="584"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="560"/>
+        <source>download %1 finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="562"/>
+        <source>unzipping:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="567"/>
+        <source>ready.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="586"/>
         <source>download of brouter failed: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="473"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="475"/>
         <source>Error creating directory %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="548"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="546"/>
         <source>Error directory %1 does not exist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="555"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="553"/>
         <source>Error creating file %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="559"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="557"/>
         <source>Error writing to file %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="681"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="683"/>
         <source>no Profiles available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="689"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="691"/>
         <source>available Profiles</source>
         <translation type="unfinished"></translation>
     </message>

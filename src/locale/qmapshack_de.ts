@@ -3506,7 +3506,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="386"/>
         <source>select Java Executable</source>
-        <translation type="unfinished"></translation>
+        <translation>installiertes Java-Programm auswählen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="422"/>
@@ -3546,7 +3546,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="459"/>
         <source>Java Executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Java Programm nicht gefunden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="504"/>
@@ -3576,17 +3576,17 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="562"/>
         <source>download %1 finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterladen von %1 ist fertig</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="564"/>
         <source>unzipping:</source>
-        <translation type="unfinished"></translation>
+        <translation>entpacken:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="569"/>
         <source>ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>fertig.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="589"/>
@@ -3755,7 +3755,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="845"/>
         <source>no routing-data available</source>
-        <translation>keine Routing-daten verfügbar.</translation>
+        <translation>keine Routing-daten verfügbar</translation>
     </message>
 </context>
 <context>

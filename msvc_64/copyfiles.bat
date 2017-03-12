@@ -13,6 +13,7 @@ rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
 set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
+set QMSI_QUAZIP_PATH="M:\lib\quazip_build\RelWithDebInfo"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib\mingw64"
 rem runtime libraries from mysql/mariadb 
@@ -99,6 +100,8 @@ copy %QMSI_MGW6_PATH%\libz-1.dll
 xcopy %QMSI_ROUT_PATH%\xml routino-xml /s /i
 rem section 2.2.6) MySql/MariaDB
 copy %QMSI_MSQL_PATH%\libmysql.dll
+rem section 2.2.7) QuaZip
+copy %QMSI_QUAZIP_PATH%\quazip5.dll
 
 rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe

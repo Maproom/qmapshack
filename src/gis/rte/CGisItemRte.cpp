@@ -1072,8 +1072,8 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
         subpt_t& subpt = shape.last();
         subpt.lon = elem.attribute("lon").toFloat();
         subpt.lat = elem.attribute("lat").toFloat();
+        //save elevation for later:
         ele << elem.firstChildElement("ele").text().toFloat();
-//        subpt.ele = elem.firstChildElement("ele").text().toInt();
     }
 
     // build list of maneuvers

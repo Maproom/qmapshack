@@ -58,9 +58,10 @@ public:
     void profileUp(const QString &profile);
     void profileDown(const QString &profile);
 
-    void updateLocalProfiles();
+    void readLocalProfiles();
 
     void loadOnlineConfig() const;
+    void loadLocalOnlineProfiles() const;
     void displayProfileAsync(const QString &profile) const;
     void displayOnlineProfileAsync(const QString &profile) const;
 
@@ -70,13 +71,14 @@ public:
     void onInvalidSetup();
 
 signals:
-    void sigOnlineConfigChanged() const;
+    void sigOnlineConfigLoaded() const;
     void sigProfilesChanged() const;
     void sigDisplayOnlineProfileFinished(const QString profile, const QString content) const;
     void sigError(const QString error, const QString details) const;
 
 private slots:
     void slotOnlineRequestFinished(QNetworkReply *reply);
+    void slotLoadOnlineProfilesRequestFinished(bool ok);
 
 private:
     enum request_e { type_config, type_profile };
@@ -86,8 +88,9 @@ private:
     void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
+    void mergeOnlineProfiles(const QStringList &profilesLoaded);
     void emitOnlineConfigScriptError(const QScriptValue &error) const;
-    void emitNetworkError(QNetworkReply * reply) const;
+    void emitNetworkError(QString error) const;
     mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;
 
@@ -95,6 +98,7 @@ private:
     QStringList localProfiles;
 
     QNetworkAccessManager * networkAccessManager;
+    QWebPage * profilesWebPage;
 
     bool expertMode;
     mode_e installMode;

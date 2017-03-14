@@ -31,25 +31,31 @@ CRouterBRouterSetupPage::~CRouterBRouterSetupPage()
 
 bool CRouterBRouterSetupPage::isComplete() const
 {
-    if (setup == nullptr)
-    {
-        return false;
-    }
     switch(wizard()->currentId())
     {
     case CRouterBRouterSetupWizard::Page_LocalDirectory:
     {
-        return setup->isLocalBRouterInstalled()
+        return setup != nullptr
+                && setup->isLocalBRouterInstalled()
                 && QFile(setup->localJavaExecutable).exists()
                 && QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
     }
     case CRouterBRouterSetupWizard::Page_LocalInstallation:
     {
-        return setup->isLocalBRouterInstalled();
+        return setup != nullptr
+                && setup->isLocalBRouterInstalled();
     }
     case CRouterBRouterSetupWizard::Page_Profiles:
     {
         return findChild<QListView*>("listProfiles")->model()->rowCount() > 0;
+    }
+    case CRouterBRouterSetupWizard::Page_OnlineUrl:
+    {
+        return complete;
+    }
+    case CRouterBRouterSetupWizard::Page_LocalDetails:
+    {
+        return complete;
     }
     default:
     {
@@ -58,9 +64,13 @@ bool CRouterBRouterSetupPage::isComplete() const
     }
 }
 
-void CRouterBRouterSetupPage::setSetup(CRouterBRouterSetup * setup)
+void CRouterBRouterSetupPage::setComplete(bool newComplete)
 {
-    this->setup = setup;
+    if (newComplete != complete)
+    {
+        complete = newComplete;
+        emit completeChanged();
+    }
 }
 
 void CRouterBRouterSetupPage::emitCompleteChanged()

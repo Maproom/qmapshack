@@ -54,8 +54,12 @@ private slots:
     void slotLocalToolSelectJava();
     void slotLocalPushFindJava() const;
     void slotCreateOrUpdateLocalInstallClicked();
-    void slotLocalDirectoryEditingFinished() const;
-    void slotLocalJavaExecutableFinished() const;
+    void slotLocalDirectoryCursonPositionChanged() const;
+    void slotLocalJavaExecutableCursorPositionChanged() const;
+    void slotLocalProfilesUrlCursorPositionChanged() const;
+    void slotLocalProfilesUrlEditingFinished();
+    void slotOnlineUrlCursorPositionChanged();
+    void slotOnlineUrlEditingFinished();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();
@@ -67,13 +71,12 @@ private slots:
     void slotDelProfileClicked();
     void slotProfileUpClicked();
     void slotProfileDownClicked();
-    void slotOnlineConfigChanged();
+    void slotOnlineConfigLoaded();
     void slotSetupError(const QString &error, const QString &details);
-    void slotProfilesChanged();
+    void slotOnlineProfilesLoaded();
 
 private:
     void beginChooseMode();
-    bool validateChooseMode() const;
 
     void initLocalDirectory();
     void beginLocalDirectory();
@@ -82,7 +85,6 @@ private:
     void initLocalInstall();
     void beginLocalInstall();
 
-    void initProfiles() const;
     void beginProfiles();
     void updateProfiles() const;
     QStringList selectedProfiles(const QListView * listView) const;
@@ -102,7 +104,7 @@ private:
     void resetOnlineDetails() const;
 
     void beginOnlineUrl();
-    bool validateOnlineUrl() const;
+    void updateOnlineUrl();
     void resetOnlineUrl();
 
     CRouterBRouterSetup * setup;

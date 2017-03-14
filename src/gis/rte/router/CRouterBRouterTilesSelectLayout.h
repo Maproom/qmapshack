@@ -25,15 +25,22 @@
 class CRouterBRouterTilesSelectLayout : public QLayout
 {
 public:
-    CRouterBRouterTilesSelectLayout(QWidget * parent);
-    virtual ~CRouterBRouterTilesSelectLayout();
+    CRouterBRouterTilesSelectLayout(QWidget * parent) : QLayout(parent) {}
 
-    void addItem(QLayoutItem *) override;
-    QSize sizeHint() const override;
-    void setGeometry(const QRect & r) override;
-    QLayoutItem * itemAt(int index) const override;
-    QLayoutItem * takeAt(int index) override;
-    int count() const override;
+    virtual ~CRouterBRouterTilesSelectLayout() {}
+
+    void addItem(QLayoutItem * item) override { items.append(item); }
+
+    QSize sizeHint() const override { return QSize(200,200); }
+
+    void setGeometry(const QRect & r) override { for (QLayoutItem *item : items) { item->setGeometry(r); }}
+
+    QLayoutItem * itemAt(int index) const override { return items.at(index); }
+
+    QLayoutItem * takeAt(int index) override { return items.takeAt(index); }
+
+    int count() const override { return items.size(); }
+
 private:
     QList<QLayoutItem *> items;
 };

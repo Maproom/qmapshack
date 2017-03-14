@@ -33,27 +33,27 @@ bool CRouterBRouterSetupPage::isComplete() const
 {
     switch(wizard()->currentId())
     {
-    case CRouterBRouterSetupWizard::Page_LocalDirectory:
+    case CRouterBRouterSetupWizard::ePageLocalDirectory:
     {
         return setup != nullptr
                 && setup->isLocalBRouterInstalled()
                 && QFile(setup->localJavaExecutable).exists()
                 && QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
     }
-    case CRouterBRouterSetupWizard::Page_LocalInstallation:
+    case CRouterBRouterSetupWizard::ePageLocalInstallation:
     {
         return setup != nullptr
                 && setup->isLocalBRouterInstalled();
     }
-    case CRouterBRouterSetupWizard::Page_Profiles:
+    case CRouterBRouterSetupWizard::ePageProfiles:
     {
         return findChild<QListView*>("listProfiles")->model()->rowCount() > 0;
     }
-    case CRouterBRouterSetupWizard::Page_OnlineUrl:
+    case CRouterBRouterSetupWizard::ePageOnlineUrl:
     {
         return complete;
     }
-    case CRouterBRouterSetupWizard::Page_LocalDetails:
+    case CRouterBRouterSetupWizard::ePageLocalDetails:
     {
         return complete;
     }

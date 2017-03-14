@@ -30,7 +30,7 @@ public:
     CRouterBRouterSetup(QObject * parent);
     ~CRouterBRouterSetup();
 
-    enum mode_e { ModeLocal, ModeOnline };
+    enum mode_e { eModeLocal, eModeOnline };
     struct tile_s { QPoint tile; QDateTime date; qreal size; };
 
     void load();
@@ -81,8 +81,8 @@ private slots:
     void slotLoadOnlineProfilesRequestFinished(bool ok);
 
 private:
-    enum request_e { type_config, type_profile };
-    enum profileRequest_e { ProfileInstall, ProfileDisplay };
+    enum request_e { eTypeConfig, eTypeProfile };
+    enum profileRequest_e { eProfileInstall, eProfileDisplay };
 
     QDir getProfileDir(const mode_e mode) const;
     void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
@@ -120,7 +120,7 @@ private:
     QString segmentsUrl;
 
     const bool defaultExpertMode = false;
-    const mode_e defaultInstallMode = ModeOnline;
+    const mode_e defaultInstallMode = eModeOnline;
     const QString defaultOnlineWebUrl = "http://brouter.de/brouter-web/";
     const QString defaultOnlineServiceUrl = "http://h2096617.stratoserver.net:443";
     const QString defaultOnlineProfilesUrl = "http://brouter.de/brouter/profiles2/";

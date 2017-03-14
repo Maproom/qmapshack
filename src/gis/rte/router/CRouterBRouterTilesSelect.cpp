@@ -157,7 +157,7 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
 
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         CRouterBRouterTilesStatus * status = it.value();
         if (!status->isSelected && status->isOutdated)
@@ -181,7 +181,7 @@ void CRouterBRouterTilesSelect::slotDeleteSelected()
     {
         for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
              it != tilesDownloadStatus.constEnd();
-             it++)
+             ++it)
         {
             CRouterBRouterTilesStatus * status = it.value();
             if (status->isSelected)
@@ -217,7 +217,7 @@ void CRouterBRouterTilesSelect::slotClearSelection()
     bool changed(false);
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         CRouterBRouterTilesStatus * status = it.value();
         if (status->isSelected)
@@ -243,7 +243,7 @@ void CRouterBRouterTilesSelect::updateButtons() const
 
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         CRouterBRouterTilesStatus * status = it.value();
         if (status->isSelected)
@@ -278,7 +278,7 @@ void CRouterBRouterTilesSelect::initialize()
     {
         for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
              it != tilesDownloadStatus.constEnd();
-             it++)
+             ++it)
         {
             CRouterBRouterTilesStatus * status = it.value();
             status->isLocal = false;
@@ -493,7 +493,7 @@ void CRouterBRouterTilesSelect::slotDownload()
 
     for (QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         try
         {
@@ -674,7 +674,7 @@ void CRouterBRouterTilesSelect::updateStatus()
 
     for (QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         const CRouterBRouterTilesStatus * status = it.value();
 
@@ -766,7 +766,7 @@ void CRouterBRouterTilesSelect::updateTiles() const
 
     for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
          it != tilesDownloadStatus.constEnd();
-         it++)
+         ++it)
     {
         const QPoint& tile = tileFromFileName(it.key());
         Q_ASSERT(tile != noTile);

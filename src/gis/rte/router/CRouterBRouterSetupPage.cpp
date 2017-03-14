@@ -47,7 +47,9 @@ bool CRouterBRouterSetupPage::isComplete() const
     }
     case CRouterBRouterSetupWizard::ePageProfiles:
     {
-        return findChild<QListView*>("listProfiles")->model()->rowCount() > 0;
+        const QListView *profilesListView = findChild<QListView*>("listProfiles");
+        Q_ASSERT(profilesListView != nullptr);
+        return profilesListView->model()->rowCount() > 0;
     }
     case CRouterBRouterSetupWizard::ePageOnlineUrl:
     {

@@ -144,9 +144,7 @@ void CRouterBRouterTilesSelect::slotTileClicked(const QPoint &tile)
     if (status->isLocal || status->isRemote)
     {
         status->isSelected = !status->isSelected;
-        updateButtons();
-        updateStatus();
-        updateTiles();
+        update();
     }
 }
 
@@ -167,9 +165,7 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
     }
     if (changed)
     {
-        updateButtons();
-        updateStatus();
-        updateTiles();
+        update();
     }
 }
 
@@ -205,9 +201,7 @@ void CRouterBRouterTilesSelect::slotDeleteSelected()
     }
     if (changed)
     {
-        updateButtons();
-        updateStatus();
-        updateTiles();
+        update();
     }
 }
 
@@ -227,9 +221,7 @@ void CRouterBRouterTilesSelect::slotClearSelection()
     }
     if (changed)
     {
-        updateButtons();
-        updateStatus();
-        updateTiles();
+        update();
     }
 }
 
@@ -319,9 +311,7 @@ void CRouterBRouterTilesSelect::initialize()
     {
         error(msg);
     }
-    updateStatus();
-    updateButtons();
-    updateTiles();
+    update();
     emit sigCompleteChanged();
 }
 
@@ -421,9 +411,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
     {
         error(tr("Error retrieving available routing data from %1: %2").arg(setup->segmentsUrl).arg(msg));
     }
-    updateStatus();
-    updateButtons();
-    updateTiles();
+    update();
 }
 
 QString CRouterBRouterTilesSelect::formatSize(const qint64 size)
@@ -537,9 +525,7 @@ void CRouterBRouterTilesSelect::slotDownload()
 
     if (changed)
     {
-        updateButtons();
-        updateStatus();
-        updateTiles();
+        update();
     }
 }
 
@@ -642,9 +628,7 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
             status->file = nullptr;
         }
     }
-    updateButtons();
-    updateStatus();
-    updateTiles();
+    update();
 }
 
 void CRouterBRouterTilesSelect::cancelDownload() const
@@ -653,6 +637,13 @@ void CRouterBRouterTilesSelect::cancelDownload() const
     {
         reply->abort();
     }
+}
+
+void CRouterBRouterTilesSelect::update()
+{
+    updateButtons();
+    updateStatus();
+    updateTiles();
 }
 
 void CRouterBRouterTilesSelect::updateStatus()

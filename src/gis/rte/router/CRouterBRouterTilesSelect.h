@@ -74,6 +74,7 @@ private slots:
 
 private:
     QDir segmentsDir() const;
+    void update();
     void updateStatus();
     void updateButtons() const;
     void updateTiles() const;

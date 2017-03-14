@@ -32,12 +32,14 @@ public:
 
     bool isComplete() const override;
 
-    void setSetup(CRouterBRouterSetup * setup);
+    void setSetup(CRouterBRouterSetup * newSetup) { setup = newSetup; }
+    void setComplete(bool newComplete);
 
     void emitCompleteChanged();
 
 private:
     CRouterBRouterSetup * setup { nullptr };
+    bool complete { false };
 };
 
 #endif //CROUTERBROUTERTILESPAGE_H

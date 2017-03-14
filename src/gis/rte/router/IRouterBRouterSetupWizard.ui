@@ -13,6 +13,12 @@
     <height>500</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>BRouter Setup</string>
   </property>
@@ -323,9 +329,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="QTextBrowser" name="textAvailableProfiles"/>
-        </item>
        </layout>
       </item>
       <item>
@@ -429,7 +432,7 @@
     <string notr="true">4</string>
    </attribute>
   </widget>
-  <widget class="QWizardPage" name="pageOnlineUrl">
+  <widget class="CRouterBRouterSetupPage" name="pageOnlineUrl">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
@@ -441,18 +444,38 @@
    </attribute>
    <layout class="QVBoxLayout" name="verticalLayout_9">
     <item>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineOnlineUrl"/>
-      </item>
-      <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
        <widget class="QLabel" name="labelOnlineUrl">
         <property name="text">
          <string>BRouter-Web URL:</string>
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLineEdit" name="lineOnlineUrl"/>
+      </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textOnlineUrl">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
@@ -462,12 +485,6 @@
      <horstretch>1</horstretch>
      <verstretch>1</verstretch>
     </sizepolicy>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>606</width>
-     <height>16777215</height>
-    </size>
    </property>
    <attribute name="pageId">
     <string notr="true">6</string>
@@ -500,11 +517,24 @@
       </item>
      </layout>
     </item>
+    <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
    </layout>
   </widget>
-  <widget class="QWizardPage" name="pageLocalDetails">
+  <widget class="CRouterBRouterSetupPage" name="pageLocalDetails">
    <property name="sizePolicy">
-    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>
      <verstretch>0</verstretch>
     </sizepolicy>
@@ -606,6 +636,22 @@
        <widget class="QLineEdit" name="lineLocalJavaOpts"/>
       </item>
      </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalDetails"/>
     </item>
    </layout>
   </widget>

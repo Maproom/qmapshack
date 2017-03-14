@@ -31,7 +31,9 @@ CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
     :QObject(parent)
 {
     networkAccessManager = new QNetworkAccessManager(this);
+    profilesWebPage = new QWebPage(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetup::slotOnlineRequestFinished);
+    connect(profilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished);
 }
 
 CRouterBRouterSetup::~CRouterBRouterSetup()
@@ -79,7 +81,7 @@ void CRouterBRouterSetup::load()
 
     if (installMode == ModeLocal)
     {
-        updateLocalProfiles();
+        readLocalProfiles();
     }
     else
     {
@@ -260,7 +262,7 @@ void CRouterBRouterSetup::profileDown(const QString &profile)
     }
 }
 
-void CRouterBRouterSetup::updateLocalProfiles()
+void CRouterBRouterSetup::readLocalProfiles()
 {
     bool changed(false);
     const QDir& dir = getProfileDir(ModeLocal);
@@ -329,6 +331,11 @@ QStringList CRouterBRouterSetup::getProfiles() const
     }
 }
 
+void CRouterBRouterSetup::loadLocalOnlineProfiles() const
+{
+    profilesWebPage->mainFrame()->load(QUrl(onlineProfilesUrl));
+}
+
 void CRouterBRouterSetup::loadOnlineConfig() const
 {
     const QUrl configUrl(onlineWebUrl + "config.js");
@@ -359,7 +366,8 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 
     if (reply->error() != QNetworkReply::NoError)
     {
-        emitNetworkError(reply);
+        emitNetworkError(reply->errorString());
+        return;
     }
     else
     {
@@ -401,7 +409,6 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             return;
         }
 
-        bool changed(false);
         const QScriptValue &host = conf.property("host").toString();
         if (!host.isValid() || host.isError())
         {
@@ -411,7 +418,6 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         if (onlineServiceUrl != host.toString())
         {
             onlineServiceUrl = host.toString();
-            changed = true;
         }
         const QScriptValue &url = conf.property("profilesUrl").toString();
         if (!url.isValid() || url.isError())
@@ -422,14 +428,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         if (onlineProfilesUrl != url.toString())
         {
             onlineProfilesUrl = url.toString();
-            changed = true;
         }
-        if (changed)
-        {
-            emit sigOnlineConfigChanged();
-        }
-
-        changed = false;
 
         const QScriptValue &profiles = conf.property("profiles");
         if (!profiles.isValid() || profiles.isError())
@@ -450,36 +449,75 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             }
             onlineProfilesLoaded << profile.toString();
         }
-        const QStringList onlineProfilesAvailableTmp(onlineProfilesAvailable);
-        for (const QString &profile : onlineProfilesAvailableTmp)
-        {
-            if (!onlineProfilesLoaded.contains(profile))
-            {
-                onlineProfilesAvailable.removeAt(onlineProfilesAvailable.indexOf(profile));
-                changed = true;
-            }
-        }
-        for (const QString &profile : onlineProfilesLoaded)
-        {
-            if (!onlineProfilesAvailable.contains(profile))
-            {
-                onlineProfilesAvailable << profile;
-                changed = true;
-            }
-        }
+
+        mergeOnlineProfiles(onlineProfilesLoaded);
+
         const QStringList onlineProfilesTmp(onlineProfiles);
         for (const QString &profile : onlineProfilesTmp)
         {
             if (!onlineProfilesAvailable.contains(profile))
             {
                 onlineProfiles.removeAt(onlineProfiles.indexOf(profile));
-                changed = true;
             }
         }
 
-        if (changed)
+        emit sigProfilesChanged();
+        emit sigOnlineConfigLoaded();
+    }
+}
+
+void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
+{
+    if (!ok)
+    {
+        emitNetworkError(tr("%1 not accessible").arg(onlineProfilesUrl));
+        return;
+    }
+    else
+    {
+        const QWebElement &htmlElement = profilesWebPage->mainFrame()->documentElement();
+        const QWebElementCollection &anchorElements = htmlElement.findAll("table tr td a");
+
+        if (anchorElements.count() == 0)
         {
-            emit sigProfilesChanged();
+            emitNetworkError(tr("%1 invalid result").arg(onlineProfilesUrl));
+            return;
+        }
+
+        const QRegExp rxProfileName("(\\S+)\\.brf");
+
+        QStringList onlineProfilesLoaded;
+        for (const QWebElement &anchorElement : anchorElements)
+        {
+            const QString &profileName = anchorElement.toPlainText();
+            //only anchors matching the desired pattern
+            if (rxProfileName.indexIn(profileName) > -1)
+            {
+                onlineProfilesLoaded << rxProfileName.cap(1);
+            }
+        }
+
+        mergeOnlineProfiles(onlineProfilesLoaded);
+
+        emit sigProfilesChanged();
+    }
+}
+
+void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesLoaded)
+{
+    const QStringList onlineProfilesAvailableTmp(onlineProfilesAvailable);
+    for (const QString &profile : onlineProfilesAvailableTmp)
+    {
+        if (!onlineProfilesLoaded.contains(profile))
+        {
+            onlineProfilesAvailable.removeAt(onlineProfilesAvailable.indexOf(profile));
+        }
+    }
+    for (const QString &profile : onlineProfilesLoaded)
+    {
+        if (!onlineProfilesAvailable.contains(profile))
+        {
+            onlineProfilesAvailable << profile;
         }
     }
 }
@@ -489,9 +527,9 @@ void CRouterBRouterSetup::emitOnlineConfigScriptError(const QScriptValue &error)
     emit sigError(tr("Error parsing online-config:"),error.toString());
 }
 
-void CRouterBRouterSetup::emitNetworkError(QNetworkReply * reply) const
+void CRouterBRouterSetup::emitNetworkError(QString error) const
 {
-    emit sigError(tr("Network error:"),reply->errorString());
+    emit sigError(tr("Network error:"),error);
 }
 
 void CRouterBRouterSetup::displayProfileAsync(const QString &profile) const
@@ -532,7 +570,7 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
     reply->deleteLater();
     if (reply->error() != QNetworkReply::NoError)
     {
-        emitNetworkError(reply);
+        emitNetworkError(reply->errorString());
     }
     else
     {
@@ -548,7 +586,7 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
             file.open(QIODevice::WriteOnly);
             file.write(content);
             file.close();
-            updateLocalProfiles();
+            readLocalProfiles();
         }
         else
         {

@@ -40,17 +40,17 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(this, &CRouterBRouterSetupWizard::currentIdChanged, this, &CRouterBRouterSetupWizard::slotCurrentIdChanged);
     connect(this, &CRouterBRouterSetupWizard::customButtonClicked, this, &CRouterBRouterSetupWizard::slotCustomButtonClicked);
 
-    connect(setup, &CRouterBRouterSetup::sigOnlineConfigChanged, this, &CRouterBRouterSetupWizard::slotOnlineConfigChanged);
-
     connect(radioLocal,  &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioLocalClicked);
     connect(radioOnline, &QRadioButton::clicked, this, &CRouterBRouterSetupWizard::slotRadioOnlineClicked);
     connect(checkExpert, &QCheckBox::clicked,    this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
 
+    connect(lineLocalProfilesUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
+    connect(lineLocalProfilesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlEditingFinished);
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
-    connect(lineLocalDir, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished);
-    connect(lineJavaExecutable, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableFinished);
+    connect(lineLocalDir, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalDirectoryCursonPositionChanged);
+    connect(lineJavaExecutable, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalJavaExecutableCursorPositionChanged);
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
@@ -63,8 +63,12 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(toolProfileUp, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileUpClicked);
     connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
 
+    connect(lineOnlineUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
+    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished);
+
+    connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
-    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotProfilesChanged);
+    connect(setup, &CRouterBRouterSetup::sigProfilesChanged, this, &CRouterBRouterSetupWizard::slotOnlineProfilesLoaded);
     connect(setup, &CRouterBRouterSetup::sigError, this, &CRouterBRouterSetupWizard::slotSetupError);
 
     QStringListModel *profilesModel = new QStringListModel();
@@ -184,11 +188,6 @@ void CRouterBRouterSetupWizard::initializePage(const int id)
         initLocalInstall();
         break;
     }
-    case Page_Profiles:
-    {
-        initProfiles();
-        break;
-    }
     case Page_LocalTiles:
     {
         initLocalTiles();
@@ -201,17 +200,9 @@ bool CRouterBRouterSetupWizard::validateCurrentPage()
 {
     switch(currentId())
     {
-    case Page_ChooseMode:
-    {
-        return validateChooseMode();
-    }
     case Page_OnlineDetails:
     {
         return validateOnlineDetails();
-    }
-    case Page_OnlineUrl:
-    {
-        return validateOnlineUrl();
     }
     case Page_LocalDetails:
     {
@@ -348,23 +339,9 @@ void CRouterBRouterSetupWizard::slotCheckExpertClicked() const
     setup->expertMode = checkExpert->isChecked();
 }
 
-bool CRouterBRouterSetupWizard::validateChooseMode() const
-{
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
-    {
-        setup->updateLocalProfiles();
-    }
-    else
-    {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
-        setup->loadOnlineConfig();
-    }
-    return true;
-}
-
 void CRouterBRouterSetupWizard::initLocalDirectory()
 {
-    dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
+    pageLocalDirectory->setSetup(setup);
 }
 
 void CRouterBRouterSetupWizard::beginLocalDirectory()
@@ -400,13 +377,13 @@ void CRouterBRouterSetupWizard::slotLocalPushFindJava() const
     updateLocalDirectory();
 }
 
-void CRouterBRouterSetupWizard::slotLocalDirectoryEditingFinished() const
+void CRouterBRouterSetupWizard::slotLocalDirectoryCursonPositionChanged() const
 {
     setup->localDir = lineLocalDir->text();
     updateLocalDirectory();
 }
 
-void CRouterBRouterSetupWizard::slotLocalJavaExecutableFinished() const
+void CRouterBRouterSetupWizard::slotLocalJavaExecutableCursorPositionChanged() const
 {
     setup->localJavaExecutable = lineJavaExecutable->text();
     updateLocalDirectory();
@@ -487,7 +464,7 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
 
 void CRouterBRouterSetupWizard::initLocalInstall()
 {
-    dynamic_cast<CRouterBRouterSetupPage*>(currentPage())->setSetup(setup);
+    pageLocalInstallation->setSetup(setup);
     connect(webLocalBRouterVersions, &QWebView::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
     webLocalBRouterVersions->load(QUrl(setup->binariesUrl));
     QWebPage *localVersionsPage = webLocalBRouterVersions->page();
@@ -568,7 +545,7 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
             }
             textLocalInstall->append(tr("ready."));
             pageLocalInstallation->emitCompleteChanged();
-            setup->updateLocalProfiles();
+            setup->readLocalProfiles();
         }
         catch (const QString &msg)
         {
@@ -590,36 +567,44 @@ void CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished(QNetworkReply * 
     }
 }
 
-void CRouterBRouterSetupWizard::initProfiles() const
-{
-    setup->loadOnlineConfig();
-    pageProfiles->setSetup(setup);
-}
-
 void CRouterBRouterSetupWizard::beginProfiles()
 {
+    isError = false;
     updateProfiles();
+    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    {
+        textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineProfilesUrl));
+        setup->loadLocalOnlineProfiles();
+        setup->readLocalProfiles();
+    }
+    else
+    {
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineWebUrl));
+        setup->loadOnlineConfig();
+    }
     setOption(QWizard::HaveCustomButton1, false);
 }
 
 void CRouterBRouterSetupWizard::slotProfileClicked(const QModelIndex & index) const
 {
     const QString &profile = listProfiles->model()->data(index).toString();
-    setup->displayProfileAsync(profile);
     listAvailableProfiles->clearSelection();
     updateProfiles();
+    setup->displayProfileAsync(profile);
 }
 
 void CRouterBRouterSetupWizard::slotAvailableProfileClicked(const QModelIndex & index) const
 {
     const QString &profile = listAvailableProfiles->model()->data(index).toString();
-    setup->displayOnlineProfileAsync(profile);
     listProfiles->clearSelection();
     updateProfiles();
+    setup->displayOnlineProfileAsync(profile);
 }
 
 void CRouterBRouterSetupWizard::slotDisplayProfile(const QString &profile, const QString content)
 {
+    labelProfileContent->setText(tr("content of profile"));
     textProfileContent->setText(content);
 }
 
@@ -655,10 +640,22 @@ void CRouterBRouterSetupWizard::slotProfileDownClicked()
     }
 }
 
-void CRouterBRouterSetupWizard::slotProfilesChanged()
+void CRouterBRouterSetupWizard::slotOnlineProfilesLoaded()
 {
     isError = false;
-    updateProfiles();
+    switch(currentId())
+    {
+    case Page_Profiles:
+    {
+        updateProfiles();
+        break;
+    }
+    case Page_LocalDetails:
+    {
+        updateLocalDetails();
+        break;
+    }
+    }
 }
 
 void CRouterBRouterSetupWizard::updateProfiles() const
@@ -681,17 +678,15 @@ void CRouterBRouterSetupWizard::updateProfiles() const
     if (isError)
     {
         toolAddProfile->setEnabled(false);
-        listAvailableProfiles->setVisible(false);
-        textAvailableProfiles->setVisible(true);
-        labelAvailableProfiles->setText(tr("no Profiles available"));
-        textAvailableProfiles->setText(error + ": "+ errorDetails);
+        labelProfileContent->setText(tr("Error:"));
+        textProfileContent->setText(error + ": "+ errorDetails);
     }
     else
     {
         toolAddProfile->setEnabled(!updateProfileView(listAvailableProfiles, available).isEmpty());
         listAvailableProfiles->setVisible(true);
-        textAvailableProfiles->setVisible(false);
-        labelAvailableProfiles->setText(tr("available Profiles"));
+        labelProfileContent->setText(tr("content of profile"));
+        textProfileContent->clear();
     }
     pageProfiles->emitCompleteChanged();
 }
@@ -739,16 +734,16 @@ void CRouterBRouterSetupWizard::beginLocalTiles()
     setOption(QWizard::HaveCustomButton1, false);
 }
 
+void CRouterBRouterSetupWizard::beginOnlineDetails()
+{
+    setOption(QWizard::HaveCustomButton1, true);
+    updateOnlineDetails();
+}
+
 void CRouterBRouterSetupWizard::updateOnlineDetails() const
 {
     lineOnlineProfileUrl->setText(setup->onlineProfilesUrl);
     lineOnlineService->setText(setup->onlineServiceUrl);
-}
-
-void CRouterBRouterSetupWizard::beginOnlineDetails()
-{
-    updateOnlineDetails();
-    setOption(QWizard::HaveCustomButton1, true);
 }
 
 bool CRouterBRouterSetupWizard::validateOnlineDetails() const
@@ -768,15 +763,36 @@ void CRouterBRouterSetupWizard::resetOnlineDetails() const
 
 void CRouterBRouterSetupWizard::beginOnlineUrl()
 {
-    lineOnlineUrl->setText(setup->onlineWebUrl);
     setOption(QWizard::HaveCustomButton1, true);
+    isError = false;
+    pageOnlineUrl->setComplete(false);
+    setup->loadOnlineConfig();
 }
 
-bool CRouterBRouterSetupWizard::validateOnlineUrl() const
+void CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged()
+{
+    pageOnlineUrl->setComplete(false);
+}
+
+void CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished()
 {
     setup->onlineWebUrl = lineOnlineUrl->text();
+    isError = false;
     setup->loadOnlineConfig();
-    return true;
+}
+
+void CRouterBRouterSetupWizard::updateOnlineUrl()
+{
+    lineOnlineUrl->setText(setup->onlineWebUrl);
+    textOnlineUrl->setVisible(isError);
+    if (isError)
+    {
+        textOnlineUrl->setText(error + ": "+ errorDetails);
+    }
+    else
+    {
+        pageOnlineUrl->setComplete(true);
+    }
 }
 
 void CRouterBRouterSetupWizard::resetOnlineUrl()
@@ -796,17 +812,35 @@ void CRouterBRouterSetupWizard::updateLocalDetails() const
     lineLocalMaxRuntime->setText(setup->localMaxRunningTime);
     lineLocalNumberThreads->setText(setup->localNumberThreads);
     lineLocalJavaOpts->setText(setup->localJavaOpts);
+    textLocalDetails->setVisible(isError);
+    pageLocalDetails->setComplete(!isError);
+    if (isError)
+    {
+        textLocalDetails->setText(error + ": " + errorDetails);
+    }
 }
 
 void CRouterBRouterSetupWizard::beginLocalDetails()
 {
-    updateLocalDetails();
     setOption(QWizard::HaveCustomButton1, true);
+    isError = false;
+    setup->loadLocalOnlineProfiles();
+}
+
+void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged() const
+{
+    pageLocalDetails->setComplete(false);
+}
+
+void CRouterBRouterSetupWizard::slotLocalProfilesUrlEditingFinished()
+{
+    setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
+    isError = false;
+    setup->loadLocalOnlineProfiles();
 }
 
 bool CRouterBRouterSetupWizard::validateLocalDetails() const
 {
-    setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
     setup->localHost = lineLocalHost->text();
     setup->localPort = lineLocalPort->text();
     setup->localProfileDir = lineLocalProfiles->text();
@@ -832,18 +866,26 @@ void CRouterBRouterSetupWizard::resetLocalDetails() const
     updateLocalDetails();
 }
 
-void CRouterBRouterSetupWizard::slotOnlineConfigChanged()
+void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
 {
     isError = false;
-
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    switch(currentId())
+    {
+    case Page_OnlineUrl:
+    {
+        updateOnlineUrl();
+        break;
+    }
+    case Page_OnlineDetails:
+    {
+        updateOnlineDetails();
+        break;
+    }
+    case Page_LocalDetails:
     {
         updateLocalDetails();
+        break;
     }
-    else
-    {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
-        updateOnlineDetails();
     }
 }
 
@@ -855,6 +897,16 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
 
     switch(currentId())
     {
+    case Page_OnlineUrl:
+    {
+        updateOnlineUrl();
+        break;
+    }
+    case Page_LocalDetails:
+    {
+        updateLocalDetails();
+        break;
+    }
     case Page_Profiles:
     {
         updateProfiles();

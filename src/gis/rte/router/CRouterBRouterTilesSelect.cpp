@@ -498,10 +498,10 @@ void CRouterBRouterTilesSelect::slotDownload()
             if (!status->file->open(QIODevice::WriteOnly))
             {
                 const QString tmpName = status->file->fileName();
-                const QString error = status->file->errorString();
+                const QString tmpError = status->file->errorString();
                 delete status->file;
                 status->file = nullptr;
-                error(tr("error creating file %1: %2").arg(tmpName).arg(error));
+                error(tr("error creating file %1: %2").arg(tmpName).arg(tmpError));
                 break;
             }
 

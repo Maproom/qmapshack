@@ -61,7 +61,6 @@ signals:
     void sigTileToolTipChanged(const QPoint & tile);
 
 protected:
-//    void mouseDoubleClickEvent(QMouseEvent * event) override;
     void mouseMoveEvent(QMouseEvent * event) override;
     void mousePressEvent(QMouseEvent * event) override;
     void mouseReleaseEvent(QMouseEvent * event) override;

@@ -700,28 +700,13 @@ void CRouterBRouterTilesSelect::updateStatus()
 
 void CRouterBRouterTilesSelect::error(const QString &error) const
 {
-    errorLabel->setVisible(true);
     errorLabel->setText(error);
+    errorLabel->setVisible(true);
 }
 
 void CRouterBRouterTilesSelect::clearError() const
 {
     errorLabel->setVisible(false);
-}
-
-bool CRouterBRouterTilesSelect::isInitialized() const
-{
-    return initialized;
-}
-
-bool CRouterBRouterTilesSelect::isDownloading() const
-{
-    return downloading;
-}
-
-bool CRouterBRouterTilesSelect::isDownloadSelected() const
-{
-    return downloadSelected;
 }
 
 CRouterBRouterTilesStatus * CRouterBRouterTilesSelect::getTileStatus(QPoint tile) const

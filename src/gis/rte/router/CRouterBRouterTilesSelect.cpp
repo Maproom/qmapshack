@@ -591,58 +591,58 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
         tilesDownloadManagerReplies.remove(tilesDownloadManagerReplies.indexOf(reply));
     }
     reply->deleteLater();
-    try
+
+    const QString &fileName = reply->property("tile").toString();
+    QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
+    if (it == tilesDownloadStatus.constEnd())
     {
-        const QString &fileName = reply->property("tile").toString();
-        QHash<QString,CRouterBRouterTilesStatus*>::const_iterator it = tilesDownloadStatus.constFind(fileName);
-        if (it == tilesDownloadStatus.constEnd())
-        {
-            throw tr("no valid request for filename %1").arg(fileName);
-        }
+        error(tr("no valid request for filename %1").arg(fileName));
+    }
+    else
+    {
         CRouterBRouterTilesStatus * status = it.value();
+        status->isLocal = false;
         if (status->file == nullptr)
         {
-            throw tr("no open file assigned to request for %1").arg(fileName);
+            error(tr("no open file assigned to request for %1").arg(fileName));
         }
-        try
+        else
         {
             if(reply->error() != QNetworkReply::NoError)
             {
-                throw fileName + ": "+reply->errorString();
+                error(fileName + ": "+reply->errorString());
             }
-            if (status->file->write(reply->readAll()) < 0)
+            else if (status->file->write(reply->readAll()) < 0)
             {
-                throw tr("error writing to file %1: %2").arg(status->file->fileName()).arg(status->file->errorString());
+                error(tr("error writing to file %1: %2")
+                      .arg(status->file->fileName())
+                      .arg(status->file->errorString()));
+                status->file->close();
+                status->file->remove();
             }
-            if (!status->file->rename(segmentsDir().absoluteFilePath(it.key())))
+            else if (!status->file->rename(segmentsDir().absoluteFilePath(it.key())))
             {
-                throw tr("error renaming file %1 to %2: %3").arg(status->file->fileName()).arg(segmentsDir().absoluteFilePath(it.key())).arg(status->file->errorString());
+                error(tr("error renaming file %1 to %2: %3")
+                      .arg(status->file->fileName())
+                      .arg(segmentsDir().absoluteFilePath(it.key()))
+                      .arg(status->file->errorString()));
+                status->file->close();
+                status->file->remove();
             }
-            status->file->close();
-            status->isLocal = true;
-            status->isOutdated = false;
-            QFileInfo info(*status->file);
-            status->localDate = info.created();
-            status->localSize = info.size();
+            else
+            {
+                status->isLocal = true;
+                status->isOutdated = false;
+                status->file->close();
+                QFileInfo info(*status->file);
+                status->localDate = info.created();
+                status->localSize = info.size();
+                clearError();
+            }
             delete status->file;
             status->file = nullptr;
         }
-        catch(const QString &msg)
-        {
-            status->file->close();
-            status->file->remove();
-            status->isLocal = false;
-            delete status->file;
-            status->file = nullptr;
-            throw msg;
-        }
-        clearError();
     }
-    catch (const QString &msg)
-    {
-        error(msg);
-    }
-
     updateButtons();
     updateStatus();
     updateTiles();

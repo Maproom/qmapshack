@@ -119,6 +119,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    /* stop running drawing-threads and don't destroy unless they have finished*/
+    map->quit();
+    dem->quit();
+    gis->quit();
+    map->wait();
+    dem->wait();
+    gis->wait();
     /*
         Some mouse objects call methods from their canvas on destruction.
         So they are better deleted now explicitly before any other object

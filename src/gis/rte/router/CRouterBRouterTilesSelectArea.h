@@ -70,11 +70,7 @@ private slots:
 
 private:
     void drawGrid();
-    void drawSelectedTiles();
-    void drawCurrentTiles();
-    void drawOutdatedTiles();
-    void drawOutstandingTiles();
-    void drawInvalidTiles();
+    void drawTiles(const QPen &pen, const QBrush &brush, const QVector<QPoint> & tiles);
     QPoint tileUnderMouse(const QPointF & mousePos) const;
     QPolygonF gridPolygon(const QPoint & tile) const;
     QPolygonF tilePolygon(const QPoint & tile) const;

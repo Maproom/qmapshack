@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,41 +16,27 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERSETUP_H
-#define CROUTERSETUP_H
+#ifndef CROUTERBROUTERTILESSELECTLAYOUT_H
+#define CROUTERBROUTERTILESSELECTLAYOUT_H
 
-#include "gis/IGisItem.h"
-#include "ui_IRouterSetup.h"
-#include <QWidget>
+#include <QLayout>
+#include <QList>
 
-class CRouterSetup : public QWidget, private Ui::IRouterSetup
+class CRouterBRouterTilesSelectLayout : public QLayout
 {
-    Q_OBJECT
 public:
-    static CRouterSetup& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CRouterSetup();
+    CRouterBRouterTilesSelectLayout(QWidget * parent);
+    virtual ~CRouterBRouterTilesSelectLayout();
 
-    void calcRoute(const IGisItem::key_t &key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
-
-    bool hasFastRouting();
-
-    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
-
-    void setRouterTitle(router_e, QString title);
-
-private slots:
-    void slotSelectRouter(int i);
-
+    void addItem(QLayoutItem *) override;
+    QSize sizeHint() const override;
+    void setGeometry(const QRect & r) override;
+    QLayoutItem * itemAt(int index) const override;
+    QLayoutItem * takeAt(int index) override;
+    int count() const override;
 private:
-    friend class Ui_IMainWindow;
-    CRouterSetup(QWidget * parent);
-
-    static CRouterSetup * pSelf;
+    QList<QLayoutItem *> items;
 };
 
-#endif //CROUTERSETUP_H
+#endif //CROUTERBROUTERTILESSELECTLAYOUT_H
 

@@ -172,32 +172,29 @@ void CRouterBRouterTilesSelect::slotSelectOutdated()
 void CRouterBRouterTilesSelect::slotDeleteSelected()
 {
     bool changed(false);
-    try
+
+    for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
+         it != tilesDownloadStatus.constEnd();
+         ++it)
     {
-        for (QHash<QString,CRouterBRouterTilesStatus * >::const_iterator it = tilesDownloadStatus.constBegin();
-             it != tilesDownloadStatus.constEnd();
-             ++it)
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected)
         {
-            CRouterBRouterTilesStatus * status = it.value();
-            if (status->isSelected)
+            status->isSelected = false;
+            changed = true;
+            if (status->isLocal)
             {
-                status->isSelected = false;
-                changed = true;
-                if (status->isLocal)
+                QFile segment(segmentsDir().absoluteFilePath(it.key()));
+                if (!segment.remove())
                 {
-                    QFile segment(segmentsDir().absoluteFilePath(it.key()));
-                    if (!segment.remove())
-                    {
-                        throw tr("Error removing %1: %2").arg(segment.fileName()).arg(segment.errorString());
-                    }
-                    status->isLocal = false;
+                    error(tr("Error removing %1: %2")
+                          .arg(segment.fileName())
+                          .arg(segment.errorString()));
+                    break;
                 }
+                status->isLocal = false;
             }
         }
-    }
-    catch (const QString &msg)
-    {
-        error(msg);
     }
     if (changed)
     {

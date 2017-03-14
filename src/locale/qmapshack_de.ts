@@ -122,7 +122,7 @@
         <translation>Ansicht %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="685"/>
+        <location filename="../canvas/CCanvas.cpp" line="692"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -3381,99 +3381,99 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouter</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="55"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="47"/>
         <source>original</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="56"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="48"/>
         <source>first alternative</source>
         <translation>erste Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="57"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="49"/>
         <source>second alternative</source>
         <translation>zweite Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="58"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="50"/>
         <source>third alternative</source>
         <translation>dritte Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="145"/>
         <source>BRouter (offline)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="165"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="150"/>
         <source>BRouter (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="188"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="178"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="273"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="387"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="263"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="377"/>
         <source>response is empty</source>
         <translation>Anwort ist leer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="310"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="300"/>
         <source>Bad response from server: %1</source>
         <translation>Fehlerhafte Serverantwort: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="358"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="348"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-anfrage an den Server geschickt. Bitte warten...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="252"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="361"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="242"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="351"/>
         <source>Calculate route with %1</source>
         <translation>Berechne Route mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="421"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="411"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Fehler-Antwort vom Server&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="411"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="401"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="515"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="505"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="539"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="529"/>
         <source>running</source>
         <translation>wird ausgeführt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="533"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="523"/>
         <source>starting</source>
         <translation>started</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="545"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="535"/>
         <source>stopped</source>
         <translation>angehalten</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="555"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="545"/>
         <source>not installed</source>
         <translation>nicht installiert</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="566"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="556"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3481,12 +3481,22 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="479"/>
+        <source>%1 not accessible</source>
+        <translation>%1 ist nicht erreichbar</translation>
+    </message>
+    <message>
         <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="489"/>
+        <source>%1 invalid result</source>
+        <translation>ungültige Antwort von %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="533"/>
         <source>Error parsing online-config:</source>
         <translation>Fehler beim Auswerten der Online-konfiguration:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="494"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetup.cpp" line="538"/>
         <source>Network error:</source>
         <translation>Netzwerk Fehler:</translation>
     </message>
@@ -3494,134 +3504,141 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterSetupWizard</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="39"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="38"/>
         <source>Restore Default Values</source>
         <translation>Vorgabewerte wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="379"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="348"/>
         <source>Open Directory</source>
         <translation>Verzeichnis öffnen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="386"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="355"/>
         <source>select Java Executable</source>
         <translation>installiertes Java-Programm auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="422"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="391"/>
         <source>please select BRouter installation directory</source>
         <translation>bitte das BRouter Installations-Verzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="427"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="396"/>
         <source>selected directory does not exist</source>
         <translation>ausgewähltes Verzeichnis existiert nicht</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="428"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="397"/>
         <source>create directory and install BRouter there</source>
         <translation>Verzeichnis anlegen und BRouter darin installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="435"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="404"/>
         <source>existing BRouter installation</source>
         <translation>vorhandene BRouter-Installation gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="436"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="405"/>
         <source>update existing BRouter installation</source>
         <translation>vorhandene BRouter-Installation aktualisieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="441"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="410"/>
         <source>empty directory, create new BRouter installation here</source>
         <translation>leeres Verzeichnis, neue BRouter-Installation hier einrichten</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="442"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="411"/>
         <source>create new BRouter installation</source>
         <translation>neue BRouter-Installaion erzeugen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="459"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="428"/>
         <source>Java Executable not found</source>
         <translation>Java Programm nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="504"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="473"/>
         <source>Error loading installation-page at %1</source>
         <translation>Fehler beim Laden der Installationsseite von %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="513"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="482"/>
         <source>no brouter-version to install selected</source>
         <translation>keine BRouter-Version zum Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="521"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="490"/>
         <source>selected %1 for download and installation</source>
         <translation>%1 zum Herunterladen und Installieren ausgewählt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="529"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="498"/>
         <source>download %1 started</source>
         <translation>Herunterladen von %1 gestartet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="541"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="510"/>
         <source>Network Error: %1</source>
         <translation>Netzwerkfehler: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="562"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="531"/>
         <source>download %1 finished</source>
         <translation>Herunterladen von %1 ist fertig</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="564"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="533"/>
         <source>unzipping:</source>
         <translation>entpacken:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="569"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="538"/>
         <source>ready.</source>
         <translation>fertig.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="589"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="558"/>
         <source>download of brouter failed: %1</source>
         <translation>Herunterladen von BRouter fehlgeschlagen: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="474"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="568"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="575"/>
+        <source>retrieving available profiles from %1</source>
+        <translation>Unter %1 verfügbare Profile werden ermittelt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="599"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="680"/>
+        <source>content of profile</source>
+        <translation>Profil-Inhalt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="673"/>
+        <source>Error:</source>
+        <translation>Fehler:</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="443"/>
         <source>Error creating directory %1</source>
         <translation>Fehler beim Anlegen des Verzeichnisses %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="547"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="516"/>
         <source>Error directory %1 does not exist</source>
         <translation>Fehler: Das Verzeichnis %1 existiert nicht</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="554"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="523"/>
         <source>Error creating file %1</source>
         <translation>Fehler beim Anlegen der Datei %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="558"/>
+        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="527"/>
         <source>Error writing to file %1</source>
         <translation>Fehler beim Schreiben der Datei %1</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="686"/>
-        <source>no Profiles available</source>
-        <translation>keine Profile verfügbar</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouterSetupWizard.cpp" line="694"/>
-        <source>available Profiles</source>
-        <translation>Verfügbare Profile</translation>
     </message>
 </context>
 <context>
@@ -3635,125 +3652,125 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterTilesSelect</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="99"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="98"/>
         <source>available routing-data is being determined.</source>
         <translation>verfügbare Routing-daten werden ermittelt.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="109"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="108"/>
         <source>Select outdated</source>
         <translation>Veraltete Daten auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="110"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="109"/>
         <source>Clear Selection</source>
         <translation>Auswahl aufheben</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="111"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="110"/>
         <source>Delete selection</source>
         <translation>Ausgewählte Daten löschen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="112"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="111"/>
         <source>Download</source>
         <translation>Herunterladen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="293"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="292"/>
         <source>Error creating segments directory %1</source>
         <translation>Fehler beim Anlegen des Verzeichniss für die Routingdaten %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="379"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="378"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>nicht interpretierbar: %1 ist kein Datum</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="404"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="403"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>nicht interpretierbar: %1 ist keine gültige Größenangabe</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="423"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="422"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Fehler beim Abruf der verfügbaren Routingdaten von %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="508"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="507"/>
         <source>segments directory does not exist: </source>
         <translation>Das Verzeichniss für die Routingdaten existiert nicht:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="521"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="520"/>
         <source>error creating file %1: %2</source>
         <translation>Fehler beim Anlegen der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="559"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="600"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="558"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="598"/>
         <source>no valid request for filename %1</source>
         <translation>keine gültige Netzwerkanfrage für die Datei %1 vorhanden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="564"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="605"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="563"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="606"/>
         <source>no open file assigned to request for %1</source>
         <translation>der Netzwerkanfrage für %1 ist keine offene Datei zugeordnet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="574"/>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="615"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="573"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="616"/>
         <source>error writing to file %1: %2</source>
         <translation>Fehler beim Schreiben der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="619"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="624"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Fehler beim Umbenennen der Datei von %1 nach %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="706"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="702"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), noch Herunterzuladen: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="819"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="815"/>
         <source>being downloaded: %1 of %2</source>
         <translation>wird heruntergeladen: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="839"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="835"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>lokale keine Daten. Verfügbar: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="825"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="821"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>lokale Daten veraltet (%1, %2 - auf dem Server: %3, %4)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="196"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="195"/>
         <source>Error removing %1: %2</source>
         <translation>Fehler beim Löschen der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="335"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="334"/>
         <source>Network Error</source>
         <translation>Netzwerkfehler</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="344"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="343"/>
         <source>invalid result, no files found</source>
         <translation>ungültige Anwort, keine Dateien gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="833"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="829"/>
         <source>local data up to date (%1, %2)</source>
         <translation>lokale Daten sind aktuell (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="845"/>
+        <location filename="../gis/rte/router/CRouterBRouterTilesSelect.cpp" line="841"/>
         <source>no routing-data available</source>
         <translation>keine Routing-daten verfügbar</translation>
     </message>
@@ -4615,13 +4632,7 @@ Zeile %2, Spalte %3:
         <translation></translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="402"/>
-        <source>Christian Eichler (qms@christian-eichler.de)
-Ivo Kronenberg</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../IAbout.ui" line="427"/>
+        <location filename="../IAbout.ui" line="428"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
         <translation></translation>
     </message>
@@ -4691,7 +4702,14 @@ Ivo Kronenberg</source>
         <translation>... und Danke an alle Ersteller von ausführbaren Linux-Dateien für die gute Arbeit. Ganz besonderen Dank an Dan Horák und Bas Couwenberg für ihre Teilnahme an der Diskussion in der Mailingliste distributionsbezogene Punkte betreffend.</translation>
     </message>
     <message>
-        <location filename="../IAbout.ui" line="420"/>
+        <location filename="../IAbout.ui" line="402"/>
+        <source>Christian Eichler (qms@christian-eichler.de)
+Ivo Kronenberg
+Norbert Truchsess (norbert.truchsess@t-online.de)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IAbout.ui" line="421"/>
         <source>This software is licensed under GPL3 or any later version</source>
         <translation>Diese Software steht unter der GPL3 Lizenz (oder spätere Versionen)</translation>
     </message>
@@ -7331,177 +7349,177 @@ sein</translation>
 <context>
     <name>IRouterBRouterSetupWizard</name>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="17"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="23"/>
         <source>BRouter Setup</source>
         <translation>BRouter Einrichtung</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="42"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="48"/>
         <source>choose which BRouter to use</source>
         <translation>bitte den zu verwendenden BRouters auswählen:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="48"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="54"/>
         <source>BRouter-Web (online)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="55"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="61"/>
         <source>local Installation</source>
         <translation>lokale Installation</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="62"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="68"/>
         <source>Expert Mode</source>
         <translation>Experten Modus</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="85"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="91"/>
         <source>local BRouter Installation directory:</source>
         <translation>lokales BRouter Installations-Verzeichnis:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="97"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="103"/>
         <source>select installation directory</source>
         <translation>Installationsverzeichnis auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="100"/>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="156"/>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="339"/>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="353"/>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="386"/>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="397"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="106"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="162"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="342"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="356"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="389"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="400"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="113"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="119"/>
         <source>labelLocalDirResult</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="122"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="128"/>
         <source>create or update installation</source>
         <translation>Installation neu anlegen oder aktualisieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="146"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="152"/>
         <source>Java Executable</source>
-        <translation type="unfinished"></translation>
+        <translation>ausführbares Java Programm</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="169"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="175"/>
         <source>labelLocalJavaResult</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="178"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="184"/>
         <source>search for installed java</source>
-        <translation type="unfinished"></translation>
+        <translation>nach installiertem Java-programm suchen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="235"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="241"/>
         <source>Download and install BRouter Version</source>
         <translation>BRouter-Version herunterladen und installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="249"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="255"/>
         <source>about:blank</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="257"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="263"/>
         <source>File to install</source>
         <translation>zu installierende Datei</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="266"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="272"/>
         <source>Download and Install</source>
         <translation>Herunterladen und Installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="315"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="321"/>
         <source>available Profiles</source>
         <translation>Verfügbare Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="336"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="339"/>
         <source>install profile</source>
         <translation>Profil installieren</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="350"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="353"/>
         <source>remove profile</source>
         <translation>Profil entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="368"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="371"/>
         <source>installed Profiles</source>
         <translation>Installierte Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="412"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="415"/>
         <source>content of profile</source>
         <translation>Profil-Inhalt</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="451"/>
         <source>BRouter-Web URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse (URL) von BRouter-Web</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="484"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="501"/>
         <source>Service-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse (URL) des Routing Service</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="494"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="511"/>
         <source>Profile-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresse (URL) der Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="531"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="561"/>
         <source>Hostname</source>
         <translation>Servername</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="541"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="571"/>
         <source>Port</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="551"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="581"/>
         <source>Profile directory</source>
         <translation>Profil-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="561"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="591"/>
         <source>Segments directory</source>
         <translation>Segement-Verzeichnis</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="571"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="601"/>
         <source>Custom Profiles dir</source>
         <translation>Verzeichnis für angepasste Profile</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="581"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="611"/>
         <source>Max Runtime</source>
         <translation>Maximale Laufzeit</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="591"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="621"/>
         <source>Number Threads</source>
         <translation>Anzahl Threads</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="601"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="631"/>
         <source>Java Options</source>
         <translation>Java Optionen</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="521"/>
+        <location filename="../gis/rte/router/IRouterBRouterSetupWizard.ui" line="551"/>
         <source>Profiles Url</source>
         <translation>Profil-Url</translation>
     </message>

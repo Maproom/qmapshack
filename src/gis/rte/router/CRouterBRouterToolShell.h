@@ -30,8 +30,9 @@ public:
 
     void start(const QString &dir, const QString &command, const QStringList &args);
     void stop();
-    void out(const QString &out);
-    void error(const QString &error);
+    void out(const QString &out) { stdOut(out); }
+    void error(const QString &error) { stdErr(error); }
+
     void execute(const QString &dir, const QString &command, const QStringList &args);
 
 signals:

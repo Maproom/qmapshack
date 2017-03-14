@@ -61,7 +61,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     cfg.beginGroup("Route/brouter");
     comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::ModeLocal));
+    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::eModeLocal));
     comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
     cfg.endGroup();
 
@@ -155,13 +155,13 @@ void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QStrin
 
 void CRouterBRouter::updateDialog() const
 {
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
     }
     else
     {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
     comboProfile->clear();
@@ -192,7 +192,7 @@ QString CRouterBRouter::getOptions()
 
 bool CRouterBRouter::hasFastRouting()
 {
-    return setup->installMode == CRouterBRouterSetup::ModeLocal && checkFastRecalc->isChecked();
+    return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) const
@@ -231,7 +231,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     {
         return -1;
     }
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
@@ -320,7 +320,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
     mutex.lock();
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal && brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
     {
         startBRouter();
     }
@@ -433,7 +433,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
 QUrl CRouterBRouter::getServiceUrl() const
 {
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         QUrl url(QString("http://"));
         url.setHost(setup->localHost);
@@ -442,7 +442,7 @@ QUrl CRouterBRouter::getServiceUrl() const
     }
     else
     {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
         return QUrl(setup->onlineServiceUrl);
     }
 }
@@ -522,7 +522,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
     {
         return;
     }
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         if (setup->isLocalBRouterInstalled())
         {
@@ -562,7 +562,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
     }
     else
     {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
         labelStatus->setText(tr("online"));
         toolConsole->setVisible(false);
         toolToggleBRouter->setVisible(false);

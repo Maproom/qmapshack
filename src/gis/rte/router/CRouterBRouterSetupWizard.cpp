@@ -98,77 +98,77 @@ int CRouterBRouterSetupWizard::nextId() const
 {
     switch(currentId())
     {
-    case Page_ChooseMode:
+    case ePageChooseMode:
     {
-        if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+        if (setup->installMode == CRouterBRouterSetup::eModeLocal)
         {
-            return Page_LocalDirectory;
+            return ePageLocalDirectory;
         }
         if (setup->expertMode) //ModeOnline
         {
-            return Page_OnlineUrl;
+            return ePageOnlineUrl;
         }
-        return Page_Profiles;
+        return ePageProfiles;
     }
-    case Page_LocalDirectory:
+    case ePageLocalDirectory:
     {
         if (setup->expertMode)
         {
-            return Page_OnlineUrl;
+            return ePageOnlineUrl;
         }
         if (doLocalInstall)
         {
-            return Page_LocalInstallation;
+            return ePageLocalInstallation;
         }
-        return Page_Profiles;
+        return ePageProfiles;
     }
-    case Page_LocalInstallation:
+    case ePageLocalInstallation:
     {
         if (setup->expertMode)
         {
-            return Page_LocalDetails;
+            return ePageLocalDetails;
         }
-        return Page_Profiles;
+        return ePageProfiles;
     }
-    case Page_Profiles:
+    case ePageProfiles:
     {
-        if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+        if (setup->installMode == CRouterBRouterSetup::eModeLocal)
         {
-            return Page_LocalTiles;
+            return ePageLocalTiles;
         }
         break;
     }
-    case Page_LocalTiles:
+    case ePageLocalTiles:
     {
         break;
     }
-    case Page_OnlineDetails:
+    case ePageOnlineDetails:
     {
-        return Page_Profiles;
+        return ePageProfiles;
     }
-    case Page_OnlineUrl:
+    case ePageOnlineUrl:
     {
-        if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+        if (setup->installMode == CRouterBRouterSetup::eModeLocal)
         {
             if (doLocalInstall)
             {
-                return Page_LocalInstallation;
+                return ePageLocalInstallation;
             }
             if (setup->expertMode)
             {
-                return Page_LocalDetails;
+                return ePageLocalDetails;
             }
-            return Page_Profiles;
+            return ePageProfiles;
         }
-        else if (setup->installMode == CRouterBRouterSetup::ModeOnline)
+        else if (setup->installMode == CRouterBRouterSetup::eModeOnline)
         {
-            return Page_OnlineDetails;
+            return ePageOnlineDetails;
         }
         break;
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
-        return Page_Profiles;
+        return ePageProfiles;
     }
     }
     return -1;
@@ -178,17 +178,17 @@ void CRouterBRouterSetupWizard::initializePage(const int id)
 {
     switch(id)
     {
-    case Page_LocalDirectory:
+    case ePageLocalDirectory:
     {
         initLocalDirectory();
         break;
     }
-    case Page_LocalInstallation:
+    case ePageLocalInstallation:
     {
         initLocalInstall();
         break;
     }
-    case Page_LocalTiles:
+    case ePageLocalTiles:
     {
         initLocalTiles();
         break;
@@ -200,11 +200,11 @@ bool CRouterBRouterSetupWizard::validateCurrentPage()
 {
     switch(currentId())
     {
-    case Page_OnlineDetails:
+    case ePageOnlineDetails:
     {
         return validateOnlineDetails();
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
         return validateLocalDetails();
     }
@@ -216,42 +216,42 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
 {
     switch(id)
     {
-    case Page_ChooseMode:
+    case ePageChooseMode:
     {
         beginChooseMode();
         break;
     }
-    case Page_LocalDirectory:
+    case ePageLocalDirectory:
     {
         beginLocalDirectory();
         break;
     }
-    case Page_LocalInstallation:
+    case ePageLocalInstallation:
     {
         beginLocalInstall();
         break;
     }
-    case Page_Profiles:
+    case ePageProfiles:
     {
         beginProfiles();
         break;
     }
-    case Page_LocalTiles:
+    case ePageLocalTiles:
     {
         beginLocalTiles();
         break;
     }
-    case Page_OnlineDetails:
+    case ePageOnlineDetails:
     {
         beginOnlineDetails();
         break;
     }
-    case Page_OnlineUrl:
+    case ePageOnlineUrl:
     {
         beginOnlineUrl();
         break;
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
         beginLocalDetails();
         break;
@@ -266,17 +266,17 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
         const int page = currentId();
         switch (page)
         {
-        case Page_OnlineDetails:
+        case ePageOnlineDetails:
         {
             resetOnlineDetails();
             break;
         }
-        case Page_OnlineUrl:
+        case ePageOnlineUrl:
         {
             resetOnlineUrl();
             break;
         }
-        case Page_LocalDetails:
+        case ePageLocalDetails:
         {
             resetLocalDetails();
             break;
@@ -307,13 +307,13 @@ void CRouterBRouterSetupWizard::beginChooseMode()
 {
     switch(setup->installMode)
     {
-    case CRouterBRouterSetup::ModeLocal:
+    case CRouterBRouterSetup::eModeLocal:
     {
         radioLocal->setChecked(true);
         radioOnline->setChecked(false);
         break;
     }
-    case CRouterBRouterSetup::ModeOnline:
+    case CRouterBRouterSetup::eModeOnline:
     {
         radioLocal->setChecked(false);
         radioOnline->setChecked(true);
@@ -326,12 +326,12 @@ void CRouterBRouterSetupWizard::beginChooseMode()
 
 void CRouterBRouterSetupWizard::slotRadioLocalClicked() const
 {
-    setup->installMode = CRouterBRouterSetup::ModeLocal;
+    setup->installMode = CRouterBRouterSetup::eModeLocal;
 }
 
 void CRouterBRouterSetupWizard::slotRadioOnlineClicked() const
 {
-    setup->installMode = CRouterBRouterSetup::ModeOnline;
+    setup->installMode = CRouterBRouterSetup::eModeOnline;
 }
 
 void CRouterBRouterSetupWizard::slotCheckExpertClicked() const
@@ -571,7 +571,7 @@ void CRouterBRouterSetupWizard::beginProfiles()
 {
     isError = false;
     updateProfiles();
-    if (setup->installMode == CRouterBRouterSetup::ModeLocal)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineProfilesUrl));
         setup->loadLocalOnlineProfiles();
@@ -579,7 +579,7 @@ void CRouterBRouterSetupWizard::beginProfiles()
     }
     else
     {
-        Q_ASSERT(setup->installMode == CRouterBRouterSetup::ModeOnline);
+        Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
         textProfileContent->setText(tr("retrieving available profiles from %1").arg(setup->onlineWebUrl));
         setup->loadOnlineConfig();
     }
@@ -645,12 +645,12 @@ void CRouterBRouterSetupWizard::slotOnlineProfilesLoaded()
     isError = false;
     switch(currentId())
     {
-    case Page_Profiles:
+    case ePageProfiles:
     {
         updateProfiles();
         break;
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
         updateLocalDetails();
         break;
@@ -871,17 +871,17 @@ void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
     isError = false;
     switch(currentId())
     {
-    case Page_OnlineUrl:
+    case ePageOnlineUrl:
     {
         updateOnlineUrl();
         break;
     }
-    case Page_OnlineDetails:
+    case ePageOnlineDetails:
     {
         updateOnlineDetails();
         break;
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
         updateLocalDetails();
         break;
@@ -897,17 +897,17 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
 
     switch(currentId())
     {
-    case Page_OnlineUrl:
+    case ePageOnlineUrl:
     {
         updateOnlineUrl();
         break;
     }
-    case Page_LocalDetails:
+    case ePageLocalDetails:
     {
         updateLocalDetails();
         break;
     }
-    case Page_Profiles:
+    case ePageProfiles:
     {
         updateProfiles();
         break;

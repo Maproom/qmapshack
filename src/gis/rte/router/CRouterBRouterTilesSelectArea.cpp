@@ -234,38 +234,3 @@ QPolygonF CRouterBRouterTilesSelectArea::gridPolygon(const QPoint & tile) const
 
     return polygon;
 }
-
-void CRouterBRouterTilesSelectArea::setGridTiles(const QVector<QPoint> &tiles)
-{
-    gridTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setInvalidTiles(const QVector<QPoint> &tiles)
-{
-    invalidTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setOutdatedTiles(const QVector<QPoint> &tiles)
-{
-    outdatedTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setCurrentTiles(const QVector<QPoint> &tiles)
-{
-    currentTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setOutstandingTiles(const QVector<QPoint> &tiles)
-{
-    outstandingTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setSelectedTiles(const QVector<QPoint> &tiles)
-{
-    selectedTiles = tiles;
-}
-
-void CRouterBRouterTilesSelectArea::setTileToolTip(const QString &toolTip)
-{
-    tileToolTip = toolTip;
-}

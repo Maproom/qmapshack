@@ -35,14 +35,14 @@ public:
 
     void paintEvent(QPaintEvent *event) override;
 
-    void setGridTiles(const QVector<QPoint> & tiles);
-    void setInvalidTiles(const QVector<QPoint> & tiles);
-    void setOutdatedTiles(const QVector<QPoint> & tiles);
-    void setCurrentTiles(const QVector<QPoint> & tiles);
-    void setOutstandingTiles(const QVector<QPoint> & tiles);
-    void setSelectedTiles(const QVector<QPoint> & tiles);
+    void setGridTiles(const QVector<QPoint> & tiles) { gridTiles = tiles; }
+    void setInvalidTiles(const QVector<QPoint> & tiles) { invalidTiles = tiles; }
+    void setOutdatedTiles(const QVector<QPoint> & tiles) { outdatedTiles = tiles; }
+    void setCurrentTiles(const QVector<QPoint> & tiles) { currentTiles = tiles; }
+    void setOutstandingTiles(const QVector<QPoint> & tiles) { outstandingTiles = tiles; }
+    void setSelectedTiles(const QVector<QPoint> & tiles) { selectedTiles = tiles; }
 
-    void setTileToolTip(const QString &toolTip);
+    void setTileToolTip(const QString &toolTip) { tileToolTip = toolTip; }
 
     static const QPen gridPen;
     static const QPen currentTilesPen;

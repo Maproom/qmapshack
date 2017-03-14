@@ -57,14 +57,6 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     comboAlternative->addItem(tr("second alternative"), "2");
     comboAlternative->addItem(tr("third alternative"), "3");
 
-    SETTINGS;
-
-    cfg.beginGroup("Route/brouter");
-    comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
-    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::eModeLocal));
-    comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
-    cfg.endGroup();
-
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouter::slotRequestFinished);
 
@@ -87,6 +79,14 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessError, this, &CRouterBRouter::slotBRouterError);
 
     updateDialog();
+
+    SETTINGS;
+
+    cfg.beginGroup("Route/brouter");
+    comboProfile->setCurrentIndex(cfg.value("profile", 0).toInt());
+    checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::eModeLocal));
+    comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
+    cfg.endGroup();
 }
 
 CRouterBRouter::~CRouterBRouter()
@@ -165,10 +165,15 @@ void CRouterBRouter::updateDialog() const
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
     }
     comboProfile->clear();
+    bool hasItems = false;
     for(const QString& profile : setup->getProfiles())
     {
         comboProfile->addItem(profile,profile);
+        hasItems = true;
     }
+    comboProfile->setEnabled(hasItems);
+    toolProfileInfo->setEnabled(hasItems);
+    comboAlternative->setEnabled(hasItems);
     updateLocalBRouterStatus();
 }
 

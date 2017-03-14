@@ -68,11 +68,11 @@ bool CRouterBRouterTilesSelectArea::event(QEvent * event)
 void CRouterBRouterTilesSelectArea::paintEvent(QPaintEvent *event)
 {
     drawGrid();
-    drawInvalidTiles();
-    drawOutdatedTiles();
-    drawCurrentTiles();
-    drawSelectedTiles();
-    drawOutstandingTiles();
+    drawTiles(invalidTilesPen,     invalidTilesBrush,     invalidTiles);
+    drawTiles(outdatedTilesPen,    outdatedTilesBrush,    outdatedTiles);
+    drawTiles(currentTilesPen,     currentTilesBrush,     currentTiles);
+    drawTiles(selectedTilesPen,    selectedTilesBrush,    selectedTiles);
+    drawTiles(outstandingTilesPen, outstandingTilesBrush, outstandingTiles);
 }
 
 void CRouterBRouterTilesSelectArea::mouseMoveEvent(QMouseEvent * event)
@@ -117,61 +117,13 @@ void CRouterBRouterTilesSelectArea::drawGrid()
     }
 }
 
-void CRouterBRouterTilesSelectArea::drawOutdatedTiles()
+void CRouterBRouterTilesSelectArea::drawTiles(const QPen &pen, const QBrush & brush, const QVector<QPoint> & tiles)
 {
     QPainter painter(this);
-    painter.setPen(outdatedTilesPen);
-    painter.setBrush(outdatedTilesBrush);
+    painter.setPen(pen);
+    painter.setBrush(brush);
 
-    for(const QPoint &tile : outdatedTiles)
-    {
-        painter.drawPolygon(tilePolygon(tile));
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawOutstandingTiles()
-{
-    QPainter painter(this);
-    painter.setPen(outstandingTilesPen);
-    painter.setBrush(outstandingTilesBrush);
-
-    for(const QPoint &tile : outstandingTiles)
-    {
-        painter.drawPolygon(tilePolygon(tile));
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawInvalidTiles()
-{
-    QPainter painter(this);
-    painter.setPen(invalidTilesPen);
-    painter.setBrush(invalidTilesBrush);
-
-    for(const QPoint &tile : invalidTiles)
-    {
-        painter.drawPolygon(tilePolygon(tile));
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawCurrentTiles()
-{
-    QPainter painter(this);
-    painter.setPen(currentTilesPen);
-    painter.setBrush(currentTilesBrush);
-
-    for(const QPoint &tile : currentTiles)
-    {
-        painter.drawPolygon(tilePolygon(tile));
-    }
-}
-
-void CRouterBRouterTilesSelectArea::drawSelectedTiles()
-{
-    QPainter painter(this);
-    painter.setPen(selectedTilesPen);
-    painter.setBrush(selectedTilesBrush);
-
-    for(const QPoint &tile : selectedTiles)
+    for(const QPoint &tile : tiles)
     {
         painter.drawPolygon(tilePolygon(tile));
     }

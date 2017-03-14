@@ -1057,6 +1057,7 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     QMutexLocker lock(&mutexItems);
 
     QVector<subpt_t> shape;
+    QVector<qreal> ele;
 
     const QDomElement &gpx = xml.documentElement();
     // read the shape
@@ -1071,7 +1072,8 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
         subpt_t& subpt = shape.last();
         subpt.lon = elem.attribute("lon").toFloat();
         subpt.lat = elem.attribute("lat").toFloat();
-        subpt.ele = elem.firstChildElement("ele").text().toInt();
+        ele << elem.firstChildElement("ele").text().toFloat();
+//        subpt.ele = elem.firstChildElement("ele").text().toInt();
     }
 
     // build list of maneuvers
@@ -1182,7 +1184,6 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
     rtept.fakeSubpt.lon = rtept.lon;
     rtept.fakeSubpt.lat = rtept.lat;
 
-//    rte.totalDistance  = dist;
     rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
     rte.lastRoutedWith = QString("BRouter %1").arg(options);
 
@@ -1206,7 +1207,53 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
         }
     }
 
-    deriveSecondaryData();
+    // calculate bounding rectangle
+    qreal north = -90;
+    qreal east  = -180;
+    qreal south =  90;
+    qreal west  =  180;
+
+    for(rtept_t &rtept : rte.pts)
+    {
+        west  = qMin(west,  rtept.lon);
+        east  = qMax(east,  rtept.lon);
+        south = qMin(south, rtept.lat);
+        north = qMax(north, rtept.lat);
+
+        for(subpt_t &subpt : rtept.subpts)
+        {
+            west  = qMin(west,  subpt.lon);
+            east  = qMax(east,  subpt.lon);
+            south = qMin(south, subpt.lat);
+            north = qMax(north, subpt.lat);
+
+            subpt.ele = NOINT;
+        }
+        rtept.updateIcon();
+    }
+
+    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
+
+    // set rounded elevation, calculate ascends and descents
+    if(!ele.isEmpty())
+    {
+        qreal lastEle = NOFLOAT;
+        int i = 0;
+        rte.descent = 0;
+        rte.ascent = 0;
+
+        for(rtept_t &rtept : rte.pts)
+        {
+            setElevation(ele[i], rtept.fakeSubpt, lastEle);
+            rtept.ele = rtept.fakeSubpt.ele;
+
+            for(subpt_t &subpt : rtept.subpts)
+            {
+                setElevation(ele[i++], subpt, lastEle);
+            }
+        }
+    }
+
     updateHistory();
 }
 

@@ -26,7 +26,6 @@
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
-#include "CRouterBRouterSetupException.h"
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 

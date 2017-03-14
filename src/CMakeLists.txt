@@ -523,7 +523,6 @@ set( HDRS
         gis/rte/router/CRouterBRouter.h
         gis/rte/router/CRouterBRouterInfo.h
         gis/rte/router/CRouterBRouterSetup.h
-        gis/rte/router/CRouterBRouterSetupException.h
         gis/rte/router/CRouterBRouterSetupPage.h
         gis/rte/router/CRouterBRouterSetupWizard.h
         gis/rte/router/CRouterBRouterToolShell.h

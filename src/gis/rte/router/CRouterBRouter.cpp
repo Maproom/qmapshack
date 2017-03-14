@@ -24,7 +24,6 @@
 #include "CRouterBRouter.h"
 #include "CRouterBRouterSetup.h"
 #include "CRouterBRouterInfo.h"
-#include "CRouterBRouterSetupException.h"
 #include "CRouterBRouterSetupWizard.h"
 #include "CRouterBRouterToolShell.h"
 #include "helpers/CProgressDialog.h"
@@ -38,14 +37,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     setupUi(this);
 
     setup = new CRouterBRouterSetup(this);
-    try
-    {
-        setup->load();
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
-    }
+    setup->load();
 
     connect(toolSetup, &QToolButton::clicked, this, &CRouterBRouter::slotToolSetupClicked);
     connect(toolProfileInfo, &QToolButton::clicked, this, &CRouterBRouter::slotToolProfileInfoClicked);
@@ -110,14 +102,7 @@ void CRouterBRouter::slotToolSetupClicked()
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
     clearError();
-    try
-    {
-        setup->load();
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
-    }
+    setup->load();
     updateDialog();
 }
 

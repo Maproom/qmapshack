@@ -47,9 +47,9 @@ public:
     static QPoint tileFromFileName(const QString &fileName);
     static QString fileNameFromTile(const QPoint tile);
 
-    bool isInitialized() const;
-    bool isDownloading() const;
-    bool isDownloadSelected() const;
+    bool isInitialized() const { return initialized; }
+    bool isDownloading() const { return downloading; }
+    bool isDownloadSelected() const { return downloadSelected; }
 
     static const QPoint noTile;
     static const int minTileLat;

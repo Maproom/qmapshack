@@ -608,33 +608,33 @@ void CRouterBRouterSetupWizard::slotDisplayProfile(const QString &profile, const
     textProfileContent->setText(content);
 }
 
-void CRouterBRouterSetupWizard::slotAddProfileClicked()
+void CRouterBRouterSetupWizard::slotAddProfileClicked() const
 {
-    for (QString profile : selectedProfiles(listAvailableProfiles))
+    for (const QString &profile : selectedProfiles(listAvailableProfiles))
     {
         setup->addProfile(profile);
     }
 }
 
-void CRouterBRouterSetupWizard::slotDelProfileClicked()
+void CRouterBRouterSetupWizard::slotDelProfileClicked() const
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    for (const QString &profile : selectedProfiles(listProfiles))
     {
         setup->deleteProfile(profile);
     }
 }
 
-void CRouterBRouterSetupWizard::slotProfileUpClicked()
+void CRouterBRouterSetupWizard::slotProfileUpClicked() const
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    for (const QString &profile : selectedProfiles(listProfiles))
     {
         setup->profileUp(profile);
     }
 }
 
-void CRouterBRouterSetupWizard::slotProfileDownClicked()
+void CRouterBRouterSetupWizard::slotProfileDownClicked() const
 {
-    for (QString profile : selectedProfiles(listProfiles))
+    for (const QString &profile : selectedProfiles(listProfiles))
     {
         setup->profileDown(profile);
     }

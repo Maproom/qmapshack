@@ -67,10 +67,10 @@ private slots:
     void slotProfileClicked(const QModelIndex & index) const;
     void slotAvailableProfileClicked(const QModelIndex & index) const;
     void slotDisplayProfile(const QString &profile, const QString content);
-    void slotAddProfileClicked();
-    void slotDelProfileClicked();
-    void slotProfileUpClicked();
-    void slotProfileDownClicked();
+    void slotAddProfileClicked() const;
+    void slotDelProfileClicked() const;
+    void slotProfileUpClicked() const;
+    void slotProfileDownClicked() const;
     void slotOnlineConfigLoaded();
     void slotSetupError(const QString &error, const QString &details);
     void slotOnlineProfilesLoaded();

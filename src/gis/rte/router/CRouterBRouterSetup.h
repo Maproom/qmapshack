@@ -31,7 +31,7 @@ public:
     ~CRouterBRouterSetup();
 
     enum mode_e { eModeLocal, eModeOnline };
-    struct tile_s { QPoint tile; QDateTime date; qreal size; };
+    struct tile_t { QPoint tile; QDateTime date; qreal size; };
 
     void load();
     void save();

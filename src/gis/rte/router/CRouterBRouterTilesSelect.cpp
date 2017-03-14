@@ -658,9 +658,6 @@ void CRouterBRouterTilesSelect::cancelDownload() const
 
 void CRouterBRouterTilesSelect::updateStatus()
 {
-//    Anzahl und kummulierte Größe lokaler Kacheln (aktuell + outdated)
-//    Anzahl und Größe der selektierten Kacheln (zum Download + lokal zum Löschen)
-
     int numCurrent(0);
     int sizeCurrent(0);
     int numOutdated(0);

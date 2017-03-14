@@ -21,7 +21,6 @@
 #include <QNetworkReply>
 #include "CMainWindow.h"
 #include "CRouterBRouterSetup.h"
-#include "CRouterBRouterSetupException.h"
 #include "CRouterBRouterSetupWizard.h"
 #include "CRouterBRouterToolShell.h"
 #include "setup/IAppSetup.h"
@@ -80,14 +79,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonFinished);
 
-    try
-    {
-        setup->load();
-    }
-    catch (CRouterBRouterSetupException &e)
-    {
-        setup->onInvalidSetup();
-    }
+    setup->load();
 }
 
 CRouterBRouterSetupWizard::~CRouterBRouterSetupWizard()

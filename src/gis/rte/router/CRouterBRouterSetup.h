@@ -30,13 +30,14 @@ public:
     CRouterBRouterSetup(QObject * parent);
     ~CRouterBRouterSetup();
 
-    enum mode_e { eModeLocal, eModeOnline };
+    enum mode_e { eModeLocal, eModeOnline, eModeIllegal };
     struct tile_t { QPoint tile; QDateTime date; qreal size; };
 
     void load();
     void save();
 
     void resetAll();
+    void resetInstallMode() { installMode = defaultInstallMode; }
     void resetOnlineWebUrl() { onlineWebUrl = defaultOnlineWebUrl; }
     void resetOnlineServiceUrl() { onlineServiceUrl = defaultOnlineServiceUrl; }
     void resetOnlineProfilesUrl() { onlineProfilesUrl = defaultOnlineProfilesUrl; }

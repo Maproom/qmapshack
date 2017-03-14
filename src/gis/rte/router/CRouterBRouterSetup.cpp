@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "CRouterBRouterSetup.h"
-#include "CRouterBRouterSetupException.h"
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
@@ -83,10 +82,13 @@ void CRouterBRouterSetup::load()
     {
         readLocalProfiles();
     }
+    else if (installMode == eModeOnline)
+    {
+        loadOnlineConfig();
+    }
     else
     {
-        Q_ASSERT(installMode == eModeOnline);
-        loadOnlineConfig();
+        onInvalidSetup();
     }
 }
 
@@ -130,6 +132,7 @@ void CRouterBRouterSetup::save()
 
 void CRouterBRouterSetup::resetAll()
 {
+    resetInstallMode();
     resetOnlineWebUrl();
     resetOnlineServiceUrl();
     resetOnlineProfilesUrl();
@@ -155,7 +158,10 @@ CRouterBRouterSetup::mode_e CRouterBRouterSetup::modeFromString(const QString& m
     {
         return eModeLocal;
     }
-    throw CRouterBRouterSetupException();
+    else
+    {
+        return eModeIllegal;
+    }
 }
 
 QString CRouterBRouterSetup::stringFromMode(const mode_e mode) const

@@ -479,44 +479,39 @@ void CRouterBRouterTilesSelect::slotDownload()
          it != tilesDownloadStatus.constEnd();
          ++it)
     {
-        try
+        CRouterBRouterTilesStatus * status = it.value();
+        if (status->isSelected && (status->isOutdated || !status->isLocal) && status->file == nullptr)
         {
-            CRouterBRouterTilesStatus * status = it.value();
-            if (status->isSelected && (status->isOutdated || !status->isLocal) && status->file == nullptr)
+            const QString &fileName = it.key();
+
+            const QDir &dir = segmentsDir();
+            if (!dir.exists())
             {
-                const QString &fileName = it.key();
-
-                const QDir &dir = segmentsDir();
-                if (!dir.exists())
-                {
-                    throw tr("segments directory does not exist: ").arg(dir.path());
-                }
-
-                status->isSelected = false;
-                changed = true;
-
-                status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
-                if (!status->file->open(QIODevice::WriteOnly))
-                {
-                    const QString tmpName = status->file->fileName();
-                    const QString error = status->file->errorString();
-                    delete status->file;
-                    status->file = nullptr;
-                    throw tr("error creating file %1: %2").arg(tmpName).arg(error);
-                }
-
-                QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
-                reply->setProperty("tile", fileName);
-
-                tilesDownloadManagerReplies << reply;
-
-                connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
-                connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
+                error(tr("segments directory does not exist: ").arg(dir.path()));
+                break;
             }
-        }
-        catch (const QString &msg)
-        {
-            error(msg);
+
+            status->isSelected = false;
+            changed = true;
+
+            status->file = new QFile(dir.absoluteFilePath(fileName+".tmp"));
+            if (!status->file->open(QIODevice::WriteOnly))
+            {
+                const QString tmpName = status->file->fileName();
+                const QString error = status->file->errorString();
+                delete status->file;
+                status->file = nullptr;
+                error(tr("error creating file %1: %2").arg(tmpName).arg(error));
+                break;
+            }
+
+            QNetworkReply* reply = tilesDownloadManager->get(QNetworkRequest(QUrl(setup->segmentsUrl + fileName)));
+            reply->setProperty("tile", fileName);
+
+            tilesDownloadManagerReplies << reply;
+
+            connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
+            connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
         }
     }
 

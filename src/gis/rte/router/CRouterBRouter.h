@@ -80,7 +80,7 @@ private:
     void startBRouter() const;
     void stopBRouter() const;
     void updateLocalBRouterStatus() const;
-    QNetworkRequest getRequest(const QVector<wpt_t>& route_points) const;
+    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints) const;
     QUrl getServiceUrl() const;
     void clearError();
 

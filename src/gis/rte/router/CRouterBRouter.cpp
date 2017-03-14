@@ -195,12 +195,12 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) const
 {
     QString lonLats;
     bool isNext = false;
 
-    for(const wpt_t &pt : route_points)
+    for(const wpt_t &pt : routePoints)
     {
         if (isNext)
         {

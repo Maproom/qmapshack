@@ -197,22 +197,22 @@ bool CRouterBRouter::hasFastRouting()
 
 QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& route_points) const
 {
-    QString lonlats;
+    QString lonLats;
     bool isNext = false;
 
     for(const wpt_t &pt : route_points)
     {
         if (isNext)
         {
-            lonlats.append(QString("|%1,%2").arg(pt.lon).arg(pt.lat));
+            lonLats.append(QString("|%1,%2").arg(pt.lon).arg(pt.lat));
         } else {
-            lonlats = QString("%1,%2").arg(pt.lon).arg(pt.lat);
+            lonLats = QString("%1,%2").arg(pt.lon).arg(pt.lat);
             isNext = true;
         }
     }
 
     QUrlQuery urlQuery;
-    urlQuery.addQueryItem("lonlats",lonlats.toLatin1());
+    urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
     urlQuery.addQueryItem("nogos", "");
     urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
     urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());

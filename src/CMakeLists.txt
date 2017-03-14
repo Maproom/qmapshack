@@ -277,7 +277,6 @@ set( SRCS
         gis/rte/router/CRouterBRouterTilesPage.cpp
         gis/rte/router/CRouterBRouterTilesSelect.cpp
         gis/rte/router/CRouterBRouterTilesSelectArea.cpp
-        gis/rte/router/CRouterBRouterTilesSelectLayout.cpp
         gis/rte/router/CRouterBRouterTilesStatus.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp

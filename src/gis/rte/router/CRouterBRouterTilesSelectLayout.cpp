@@ -53,9 +53,7 @@ QLayoutItem * CRouterBRouterTilesSelectLayout::itemAt(int index) const
 
 QLayoutItem * CRouterBRouterTilesSelectLayout::takeAt(int index)
 {
-    QLayoutItem * item = items.at(index);
-    items.removeAt(index);
-    return item;
+    return items.takeAt(index);
 }
 
 int CRouterBRouterTilesSelectLayout::count() const

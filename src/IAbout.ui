@@ -209,7 +209,7 @@
        <item row="1" column="1">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>Josef Latt</string>
+          <string>Oliver Eichler</string>
          </property>
         </widget>
        </item>

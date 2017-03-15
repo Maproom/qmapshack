@@ -27,11 +27,15 @@ class CRouterBRouterTilesStatus : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterTilesStatus(QObject * parent);
-    virtual ~CRouterBRouterTilesStatus();
+    CRouterBRouterTilesStatus(QObject *parent) : QObject(parent) {}
+    virtual ~CRouterBRouterTilesStatus() {}
 
 public slots:
-    void updateProgress(qint64 received, qint64 total);
+    void updateProgress(qint64 received, qint64 total)
+    {
+        progressMax = total;
+        progressVal = received;
+    }
 
 private:
     qint64 progressMax;

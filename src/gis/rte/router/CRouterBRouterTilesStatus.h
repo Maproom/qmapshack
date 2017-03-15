@@ -31,7 +31,7 @@ public:
     virtual ~CRouterBRouterTilesStatus() {}
 
 public slots:
-    void updateProgress(qint64 received, qint64 total)
+    void slotUpdateProgress(qint64 received, qint64 total)
     {
         progressMax = total;
         progressVal = received;

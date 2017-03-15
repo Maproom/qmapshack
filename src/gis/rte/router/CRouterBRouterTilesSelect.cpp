@@ -510,7 +510,7 @@ void CRouterBRouterTilesSelect::slotDownload()
 
             tilesDownloadManagerReplies << reply;
 
-            connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::updateProgress);
+            connect(reply, &QNetworkReply::downloadProgress, status, &CRouterBRouterTilesStatus::slotUpdateProgress);
             connect(reply, &QNetworkReply::readyRead, this, &CRouterBRouterTilesSelect::slotDownloadReadReady);
         }
     }

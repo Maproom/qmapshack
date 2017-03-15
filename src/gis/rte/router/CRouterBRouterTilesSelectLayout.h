@@ -21,7 +21,12 @@
 
 #include <QLayout>
 #include <QList>
-
+/*
+ * This layout class seems trivial. What it does is, it enforces the exact
+ * same geometry on its contained QLayoutItems. It's been used to overlay
+ * multiple widgets so they appear as a single unit. Standard Layout-classes
+ * arrange the items in non-overlapping manner.
+ */
 class CRouterBRouterTilesSelectLayout : public QLayout
 {
 public:

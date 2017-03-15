@@ -22,7 +22,6 @@
 #include "CMainWindow.h"
 #include "CRouterBRouterSetup.h"
 #include "CRouterBRouterSetupWizard.h"
-#include "CRouterBRouterToolShell.h"
 #include "setup/IAppSetup.h"
 #include "canvas/CCanvas.h"
 #include <proj_api.h>

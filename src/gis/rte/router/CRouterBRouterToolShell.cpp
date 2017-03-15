@@ -34,12 +34,6 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 {
 }
 
-void CRouterBRouterToolShell::execute(const QString &dir, const QString &command, const QStringList &args)
-{
-    start(dir,command,args);
-    cmd.waitForFinished();
-}
-
 void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
 {
     stdOut("cd " + dir);

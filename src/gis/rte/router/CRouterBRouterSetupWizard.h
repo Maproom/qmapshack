@@ -24,7 +24,6 @@
 class CCanvas;
 class CRouterBRouterSetup;
 class CRouterBRouterTilesSelect;
-class CRouterBRouterToolShell;
 
 class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
 {

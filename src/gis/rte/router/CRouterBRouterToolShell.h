@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsessr norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,41 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERSETUP_H
-#define CROUTERSETUP_H
+#ifndef CROUTERBROUTERTOOLSHELL_H
+#define CROUTERBROUTERTOOLSHELL_H
 
-#include "gis/IGisItem.h"
-#include "ui_IRouterSetup.h"
-#include <QWidget>
+#include "tool/IToolShell.h"
 
-class CRouterSetup : public QWidget, private Ui::IRouterSetup
+class CRouterBRouterToolShell : public IToolShell
 {
     Q_OBJECT
 public:
-    static CRouterSetup& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CRouterSetup();
+    CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent);
+    virtual ~CRouterBRouterToolShell();
 
-    void calcRoute(const IGisItem::key_t &key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
+    void start(const QString &dir, const QString &command, const QStringList &args);
+    void stop();
 
-    bool hasFastRouting();
-
-    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
-
-    void setRouterTitle(router_e, QString title);
+signals:
+    void sigProcessStateChanged(const QProcess::ProcessState newState) const;
+    void sigProcessError(const QProcess::ProcessError error, const QString &errorString) const;
 
 private slots:
-    void slotSelectRouter(int i);
+    void slotStateChanged(const QProcess::ProcessState newState) const;
+    void slotError(const QProcess::ProcessError error) const;
 
 private:
-    friend class Ui_IMainWindow;
-    CRouterSetup(QWidget * parent);
-
-    static CRouterSetup * pSelf;
+    void finished(int exitCode, QProcess::ExitStatus status) override;
 };
 
-#endif //CROUTERSETUP_H
+#endif //CROUTERBROUTERTOOLSHELL_H
 

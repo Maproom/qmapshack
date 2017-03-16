@@ -123,7 +123,9 @@ public:
 
     void draw(IDrawContext::buffer_t& buf) override;
 
-    void getToolTip(const QPoint& px, QString& infotext) override;
+    void getToolTip(const QPoint& px, QString& infotext) const override;
+
+    void findPOICloseBy(const QPoint&, poi_t& poi) const override;
 
     /**
        @brief Find a matching street polyline
@@ -181,9 +183,9 @@ private:
 
     void collectText(const CGarminPolygon& item, const QPolygonF& line, const QFont& font, const QFontMetricsF& metrics, qint32 lineWidth);
 
-    void getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict);
-    void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict);
-    void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict);
+    void getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict) const;
+    void getInfoPolylines(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
+    void getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const;
 
 #pragma pack(1)
     // Garmin IMG file header structure, to the start of the FAT blocks

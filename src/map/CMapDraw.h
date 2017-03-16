@@ -27,6 +27,7 @@ class CCanvas;
 class CMapList;
 class QSettings;
 class CMapItem;
+struct poi_t;
 
 class CMapDraw : public IDrawContext
 {
@@ -67,6 +68,8 @@ public:
        @param str   a string object to receive all information
      */
     void getToolTip(const QPoint& px, QString& str);
+
+    poi_t findPOICloseBy(const QPoint& px) const;
 
     /**
        @brief Set projection of this draw context

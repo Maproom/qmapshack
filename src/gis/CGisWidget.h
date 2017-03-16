@@ -321,7 +321,7 @@ public:
        @brief Add a new waypoint by Position
        @param pt    the position in [°]
      */
-    void addWptByPos(QPointF pt) const;
+    void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 

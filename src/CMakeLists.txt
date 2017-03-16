@@ -458,6 +458,7 @@ set( HDRS
         mouse/line/CLineOpAddPoint.h
         mouse/line/CLineOpDeletePoint.h
         mouse/line/CLineOpSelectRange.h
+        gis/Poi.h
         gis/WptIcons.h
         gis/CGisDraw.h
         gis/IGisItem.h

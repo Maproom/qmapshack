@@ -222,7 +222,10 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
         }
     }
 
-    name = lastName;
+    if(name.isEmpty())
+    {
+        name = lastName;
+    }
     icon = lastIcon;
 
     CSetupNewWpt dlg(pt, icon, name, CMainWindow::getBestWidgetForParent());

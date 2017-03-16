@@ -44,6 +44,7 @@ class QMovie;
 class QLabel;
 class IPlot;
 struct SGisLine;
+struct poi_t;
 
 class CCanvas : public QWidget
 {
@@ -86,6 +87,7 @@ public:
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);
     void displayInfo(const QPoint& px);
+    poi_t findPOICloseBy(const QPoint& px) const;
 
     enum redraw_e
     {

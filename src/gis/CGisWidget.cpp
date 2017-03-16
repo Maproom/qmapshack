@@ -592,9 +592,9 @@ void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
     }
 }
 
-void CGisWidget::addWptByPos(QPointF pt) const
+void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
-    QString name;
+    QString name = label;
     QString icon;
     if(!CGisItemWpt::getNewWptData(pt, icon, name))
     {
@@ -609,6 +609,10 @@ void CGisWidget::addWptByPos(QPointF pt) const
 
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
+    if(!desc.isEmpty())
+    {
+        wpt->setDescription(desc);
+    }
     wpt->edit();
 }
 

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -177,96 +178,70 @@ bool CGisItemRte::isCalculated()
     return yes;
 }
 
-void CGisItemRte::setElevation(qreal ele, subpt_t& subpt, qreal& lastEle)
+void CGisItemRte::deriveElevation()
 {
-    if(ele == NOFLOAT)
+    const CMainWindow &main = CMainWindow::self();
+    for(rtept_t &rtept : rte.pts)
     {
-        subpt.ele = NOINT;
-        return;
-    }
-
-    subpt.ele = qRound(ele);
-
-    if(lastEle != NOFLOAT)
-    {
-        qreal delta   = subpt.ele - lastEle;
-
-        if(qAbs(delta) > ASCENT_THRESHOLD)
+        rtept.ele = qRound(main.getElevationAt(QPointF(rtept.lon * DEG_TO_RAD,rtept.lat * DEG_TO_RAD)));
+        rtept.fakeSubpt.ele = rtept.ele;
+        for(subpt_t &subpt : rtept.subpts)
         {
-            if(delta > 0)
-            {
-                rte.ascent  += delta;
-            }
-            else
-            {
-                rte.descent -= delta;
-            }
-            lastEle = subpt.ele;
+            subpt.ele = qRound(main.getElevationAt(QPointF(subpt.lon * DEG_TO_RAD,subpt.lat * DEG_TO_RAD)));
         }
-    }
-    else
-    {
-        lastEle = subpt.ele;
     }
 }
 
 void CGisItemRte::deriveSecondaryData()
 {
-    QPolygonF pos;
-    QPolygonF ele;
-    qreal north = -90;
-    qreal east  = -180;
-    qreal south =  90;
-    qreal west  =  180;
+    secondaryData_t data;
 
-    for(rtept_t &rtept : rte.pts)
+    for(const rtept_t &rtept : rte.pts)
     {
-        west  = qMin(west,  rtept.lon);
-        east  = qMax(east,  rtept.lon);
-        south = qMin(south, rtept.lat);
-        north = qMax(north, rtept.lat);
-
-        pos << (QPointF(rtept.lon, rtept.lat) * DEG_TO_RAD);
-        rtept.ele = NOINT;
-        rtept.fakeSubpt.ele = NOINT;
-
-        for(subpt_t &subpt : rtept.subpts)
+        accumulateData(rtept.fakeSubpt,data);
+        for(const subpt_t &subpt : rtept.subpts)
         {
-            west  = qMin(west,  subpt.lon);
-            east  = qMax(east,  subpt.lon);
-            south = qMin(south, subpt.lat);
-            north = qMax(north, subpt.lat);
-
-            pos << (QPointF(subpt.lon, subpt.lat) * DEG_TO_RAD);
-            subpt.ele = NOINT;
+            accumulateData(subpt,data);
         }
-        rtept.updateIcon();
     }
 
-    ele.resize(pos.size());
-    ele.fill(NOPOINTF);
-    CMainWindow::self().getElevationAt(pos, ele);
+    rte.ascent = data.ascent;
+    rte.descent = data.descent;
+    boundingRect = QRectF(QPointF(data.west * DEG_TO_RAD, data.north * DEG_TO_RAD), QPointF(data.east * DEG_TO_RAD, data.south * DEG_TO_RAD));
+}
 
-    if(!ele.isEmpty())
+void CGisItemRte::accumulateData(const subpt_t &pt, secondaryData_t &data)
+{
+    data.west  = qMin(data.west,  pt.lon);
+    data.east  = qMax(data.east,  pt.lon);
+    data.south = qMin(data.south, pt.lat);
+    data.north = qMax(data.north, pt.lat);
+
+    if (pt.ele == NOINT)
     {
-        qreal lastEle = NOFLOAT;
-        int i = 0;
-        rte.descent = 0;
-        rte.ascent = 0;
+        return;
+    }
+    else if(data.lastEle == NOFLOAT)
+    {
+        data.lastEle = pt.ele;
+    }
+    else
+    {
+        qreal delta   = pt.ele - data.lastEle;
 
-        for(rtept_t &rtept : rte.pts)
+        if(qAbs(delta) > ASCENT_THRESHOLD)
         {
-            setElevation(ele[i++].y(), rtept.fakeSubpt, lastEle);
-            rtept.ele = rtept.fakeSubpt.ele;
-
-            for(subpt_t &subpt : rtept.subpts)
+            if (delta > 0)
             {
-                setElevation(ele[i++].y(), subpt, lastEle);
+                data.ascent  += delta;
             }
+            else
+            {
+                data.descent -= delta;
+            }
+            data.lastEle = pt.ele;
         }
     }
-
-    boundingRect = QRectF(QPointF(west * DEG_TO_RAD, north * DEG_TO_RAD), QPointF(east * DEG_TO_RAD,south * DEG_TO_RAD));
 }
 
 void CGisItemRte::edit()
@@ -287,12 +262,6 @@ void CGisItemRte::toTrack()
 
     SGisLine line;
     getPolylineFromData(line);
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->getElevationAt(line);
-    }
 
     new CGisItemTrk(line, name, project, -1);
 }
@@ -725,11 +694,14 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
         l << point_t(QPointF(rtept.lon * DEG_TO_RAD, rtept.lat * DEG_TO_RAD));
 
         point_t& pt = l.last();
+        pt.ele = rtept.ele;
 
         pt.subpts.clear();
         for(const subpt_t &subpt : rtept.subpts)
         {
             pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
+            IGisLine::subpt_t& lastPt = pt.subpts.last();
+            lastPt.ele = subpt.ele;
         }
     }
 }
@@ -897,6 +869,7 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
     rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
     rte.lastRoutedWith = "Routino, " + options;
 
+    deriveElevation();
     deriveSecondaryData();
     updateHistory();
 }
@@ -1047,8 +1020,7 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
     rte.lastRoutedWith = "MapQuest" + options;
 
+    deriveElevation();
     deriveSecondaryData();
     updateHistory();
 }
-
-

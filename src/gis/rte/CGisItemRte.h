@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -216,8 +217,19 @@ public:
     bool isCalculated();
 
 private:
+    struct secondaryData_t
+    {
+        qreal north = -90;
+        qreal east  = -180;
+        qreal south =  90;
+        qreal west  =  180;
+        qreal lastEle = NOFLOAT;
+        qreal ascent = 0;
+        qreal descent = 0;
+    };
+    void deriveElevation();
     void deriveSecondaryData();
-    void setElevation(qreal ele, subpt_t &subpt, qreal &lastEle);
+    void accumulateData(const subpt_t &pt, secondaryData_t &data);
     void setSymbol() override;
     void readRte(const QDomNode& xml, rte_t& rte);
     void readRteFromFit(CFitStream &stream);

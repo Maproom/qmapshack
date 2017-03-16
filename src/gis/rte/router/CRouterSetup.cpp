@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,6 +19,7 @@
 
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterSetup.h"
@@ -35,9 +37,11 @@ CRouterSetup::CRouterSetup(QWidget * parent)
 
     comboRouter->addItem(tr("Routino (offline)"));
     comboRouter->addItem(tr("MapQuest (online)"));
+    comboRouter->addItem(tr("BRouter (online)"));
 
     stackedWidget->addWidget(new CRouterRoutino(this));
     stackedWidget->addWidget(new CRouterMapQuest(this));
+    stackedWidget->addWidget(new CRouterBRouter(this));
 
     connect(comboRouter, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CRouterSetup::slotSelectRouter);
 
@@ -84,4 +88,9 @@ int CRouterSetup::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coo
     }
 
     return false;
+}
+
+void CRouterSetup::setRouterTitle(const router_e router, const QString title)
+{
+    comboRouter->setItemText(router,title);
 }

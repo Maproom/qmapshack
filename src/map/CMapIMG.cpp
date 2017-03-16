@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -2245,7 +2246,7 @@ void CMapIMG::drawText(QPainter& p)
     }
 }
 
-void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
+void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override */
 {
     QString str;
 
@@ -2297,7 +2298,24 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
     }
 }
 
-void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
+{
+    for(const CGarminPoint &point : points)
+    {
+        QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
+        if(x.manhattanLength() < 10)
+        {
+            poi.pos = point.pos;
+            if(!point.labels.isEmpty())
+            {
+                poi.name  = point.labels.first();
+                poi.desc  = point.getLabelText();
+            }
+        }
+    }
+}
+
+void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
     for(const CGarminPoint &point : points)
     {
@@ -2323,7 +2341,7 @@ void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiM
     }
 }
 
-void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict) const
 {
     projXY p1, p2;              // the two points of the polyline close to pt
     qreal u;                    // ratio u the tangent point will divide d_p1_p2
@@ -2413,7 +2431,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 //    pt = resPt.toPoint();
 }
 
-void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
     projXY p1, p2;               // the two points of the polyline close to pt
     const qreal x = pt.x();

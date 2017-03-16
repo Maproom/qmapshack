@@ -19,7 +19,8 @@
 #ifndef CMOUSENORMAL_H
 #define CMOUSENORMAL_H
 
-#include "IMouse.h"
+#include "gis/Poi.h"
+#include "mouse/IMouse.h"
 
 #include <QPixmap>
 #include <QPointer>
@@ -47,6 +48,7 @@ public:
     void keyPressEvent(QKeyEvent * e) override;
 
 private slots:
+    void slotAddPoi()           const;
     void slotAddWpt()           const;
     void slotAddTrk()           const;
     void slotAddRte()           const;
@@ -88,6 +90,9 @@ protected:
     QPointer<IScrOpt>  screenItemOption;
 
     QMenu * menu;
+    QAction * actionPoiAsWpt;
+
+    poi_t curPOI;
 };
 
 #endif //CMOUSENORMAL_H

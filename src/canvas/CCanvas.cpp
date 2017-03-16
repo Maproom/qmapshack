@@ -24,6 +24,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
+#include "gis/Poi.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
@@ -716,6 +717,11 @@ void CCanvas::displayInfo(const QPoint& px)
         timerToolTip->start(500);
     }
     QToolTip::hideText();
+}
+
+poi_t CCanvas::findPOICloseBy(const QPoint& px) const
+{
+    return map->findPOICloseBy(px);
 }
 
 void CCanvas::setup()

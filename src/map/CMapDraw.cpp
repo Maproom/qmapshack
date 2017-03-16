@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
@@ -182,6 +183,42 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
         }
     }
     CMapItem::mutexActiveMaps.unlock();
+}
+
+poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
+{
+    poi_t poi;
+
+    if(isRunning())
+    {
+        return poi;
+    }
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->mapfile.isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break ass soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            item->mapfile->findPOICloseBy(px, poi);
+            if(poi.pos != NOPOINTF)
+            {
+                // stop at the 1st one found
+                break;
+            }
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
+
+    return poi;
 }
 
 bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)

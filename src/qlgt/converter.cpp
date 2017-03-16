@@ -292,6 +292,7 @@ CGisItemRte::CGisItemRte(const CQlgtRoute& rte1)
         rte.pts << pt;
     }
 
+    deriveElevation();
     deriveSecondaryData();
     setSymbol();
     genKey();

@@ -36,7 +36,7 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     screenUnclutter = new CScrOptUnclutter(this);
 
     menu = new QMenu(canvas);
-    actionPoiAsWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waipoint"), this, SLOT(slotAddPoi()));
+    actionPoiAsWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
     menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     menu->addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
     menu->addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));

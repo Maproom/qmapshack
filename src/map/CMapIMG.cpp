@@ -2311,6 +2311,43 @@ void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
                 poi.name  = point.labels.first();
                 poi.desc  = point.getLabelText();
             }
+            else
+            {
+                if(pointProperties.contains(point.type))
+                {
+                    poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
+                }
+                else
+                {
+                    poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
+                }
+            }
+            return;
+        }
+    }
+    for(const CGarminPoint &point : pois)
+    {
+        QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
+        if(x.manhattanLength() < 10)
+        {
+            poi.pos = point.pos;
+            if(!point.labels.isEmpty())
+            {
+                poi.name  = point.labels.first();
+                poi.desc  = point.getLabelText();
+            }
+            else
+            {
+                if(pointProperties.contains(point.type))
+                {
+                    poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
+                }
+                else
+                {
+                    poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
+                }
+            }
+            return;
         }
     }
 }

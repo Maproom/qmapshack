@@ -1200,7 +1200,8 @@ void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &o
             // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
             const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
             int pos = rxAscDes.indexIn(commentTxt);
-            if (pos > -1) {
+            if (pos > -1)
+            {
                 rte.totalDistance = rxAscDes.cap(2).toFloat();
                 rte.cmt = QString("%1, %2, %3").arg(rxAscDes.cap(4)).arg(rxAscDes.cap(6)).arg(rxAscDes.cap(8));
             }

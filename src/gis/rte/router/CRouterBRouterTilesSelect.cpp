@@ -17,17 +17,17 @@
 
 **********************************************************************************************/
 
-#include <QWebElement>
-#include <QWebFrame>
-#include <QNetworkRequest>
-#include <QNetworkReply>
+#include "CMainWindow.h"
 #include "CRouterBRouterSetup.h"
-#include "CRouterBRouterTilesStatus.h"
 #include "CRouterBRouterTilesSelect.h"
 #include "CRouterBRouterTilesSelectArea.h"
 #include "CRouterBRouterTilesSelectLayout.h"
-#include "CMainWindow.h"
+#include "CRouterBRouterTilesStatus.h"
 #include "canvas/CCanvas.h"
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <QWebElement>
+#include <QWebFrame>
 
 const QPoint CRouterBRouterTilesSelect::noTile = QPoint(INT_MIN, INT_MIN);
 const int CRouterBRouterTilesSelect::minTileLat = -180;
@@ -377,7 +377,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                                         monthStr == "Sep" ? 9 :
                                         monthStr == "Oct" ? 10 :
                                         monthStr == "Nov" ? 11 :
-                                                            12;
+                                        12;
                             int year = rxDate.cap(3).toInt();
                             int hour = rxDate.cap(4).toInt();
                             int min  = rxDate.cap(5).toInt();
@@ -392,7 +392,7 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
                             status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
                                                                             rxSize.cap(2) == "G" ? 1073741824 :
                                                                             rxSize.cap(2) == "K" ? 1024 :
-                                                                                                   1);
+                                                                            1);
                             if (status->isLocal && status->remoteDate > status->localDate)
                             {
                                 status->isOutdated = true;
@@ -450,7 +450,7 @@ QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString &fileName)
     if (rxTileName.indexIn(fileName) > -1)
     {
         return QPoint(rxTileName.cap(2).toInt() * (rxTileName.cap(1) == "E" ? 1 : -1)
-                     ,rxTileName.cap(4).toInt() * (rxTileName.cap(3) == "N" ? 1 : -1));
+                      ,rxTileName.cap(4).toInt() * (rxTileName.cap(3) == "N" ? 1 : -1));
     }
     else
     {
@@ -461,9 +461,9 @@ QPoint CRouterBRouterTilesSelect::tileFromFileName(const QString &fileName)
 QString CRouterBRouterTilesSelect::fileNameFromTile(const QPoint tile)
 {
     return QString("%1%2_%3%4.rd5").arg(tile.x()<0 ? "W" : "E")
-                                   .arg(abs(tile.x()))
-                                   .arg(tile.y()<0 ? "S" : "N")
-                                   .arg(abs(tile.y()));
+           .arg(abs(tile.x()))
+           .arg(tile.y()<0 ? "S" : "N")
+           .arg(abs(tile.y()));
 }
 
 QDir CRouterBRouterTilesSelect::segmentsDir() const

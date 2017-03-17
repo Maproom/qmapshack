@@ -19,8 +19,8 @@
 #ifndef CROUTERBROUTERTILESPAGE_H
 #define CROUTERBROUTERTILESPAGE_H
 
-#include <QWizardPage>
 #include <QVBoxLayout>
+#include <QWizardPage>
 
 class CRouterBRouterTilesSelect;
 class CRouterBRouterSetup;

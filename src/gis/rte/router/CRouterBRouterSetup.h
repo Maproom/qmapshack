@@ -19,9 +19,9 @@
 #ifndef CROUTERBROUTERSETUP_H
 #define CROUTERBROUTERSETUP_H
 
-#include <QtCore>
-#include <QWebPage>
 #include <QScriptValue>
+#include <QWebPage>
+#include <QtCore>
 
 class CRouterBRouterSetup : public QObject
 {

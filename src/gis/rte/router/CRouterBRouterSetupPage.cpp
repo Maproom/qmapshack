@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CRouterBRouterSetupPage.h"
 #include "CRouterBRouterSetup.h"
+#include "CRouterBRouterSetupPage.h"
 #include "CRouterBRouterSetupWizard.h"
 
 CRouterBRouterSetupPage::CRouterBRouterSetupPage()
@@ -36,29 +36,34 @@ bool CRouterBRouterSetupPage::isComplete() const
     case CRouterBRouterSetupWizard::ePageLocalDirectory:
     {
         return setup != nullptr
-                && setup->isLocalBRouterInstalled()
-                && QFile(setup->localJavaExecutable).exists()
-                && QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
+               && setup->isLocalBRouterInstalled()
+               && QFile(setup->localJavaExecutable).exists()
+               && QFileInfo(setup->localJavaExecutable).baseName().startsWith("java");
     }
+
     case CRouterBRouterSetupWizard::ePageLocalInstallation:
     {
         return setup != nullptr
-                && setup->isLocalBRouterInstalled();
+               && setup->isLocalBRouterInstalled();
     }
+
     case CRouterBRouterSetupWizard::ePageProfiles:
     {
         const QListView *profilesListView = findChild<QListView*>("listProfiles");
         Q_ASSERT(profilesListView != nullptr);
         return profilesListView->model()->rowCount() > 0;
     }
+
     case CRouterBRouterSetupWizard::ePageOnlineUrl:
     {
         return complete;
     }
+
     case CRouterBRouterSetupWizard::ePageLocalDetails:
     {
         return complete;
     }
+
     default:
     {
         return false;

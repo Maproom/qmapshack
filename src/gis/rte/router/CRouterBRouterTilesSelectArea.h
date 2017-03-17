@@ -19,9 +19,9 @@
 #ifndef CROUTERBROUTERTILESSELECTAREA_H
 #define CROUTERBROUTERTILESSELECTAREA_H
 
+#include <QMouseEvent>
 #include <QPen>
 #include <QWidget>
-#include <QMouseEvent>
 
 class CCanvas;
 class CRouterBRouterTilesSelect;

@@ -37,7 +37,7 @@ public:
     bool validateCurrentPage() override;
 
     enum { ePageChooseMode, ePageLocalDirectory, ePageLocalInstallation, ePageProfiles,
-               ePageLocalTiles, ePageOnlineUrl, ePageOnlineDetails, ePageLocalDetails };
+           ePageLocalTiles, ePageOnlineUrl, ePageOnlineDetails, ePageLocalDetails };
 
 public slots:
     void accept() override;

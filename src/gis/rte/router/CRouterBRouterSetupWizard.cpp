@@ -26,6 +26,7 @@
 #include "canvas/CCanvas.h"
 #include <proj_api.h>
 #include <JlCompress.h>
+#include <QMessageBox>
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     : QWizard(CMainWindow::getBestWidgetForParent())
@@ -492,6 +493,35 @@ void CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked(const QUrl &url)
 
 void CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked()
 {
+    QMessageBox mbox;
+    mbox.setWindowTitle(tr("Warning..."));
+    mbox.setIcon(QMessageBox::Warning);
+    mbox.setStandardButtons(QMessageBox::Ok|QMessageBox::Abort);
+    mbox.setDefaultButton(QMessageBox::Abort);
+
+    QString msg = tr("Download: %1<br/>"
+                     "<br/>"
+                     "This will download and install a zip file from a download location that is not secured "
+                     "by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is "
+                     "someone redirecting the request and sending you a replacement zip with malware. There "
+                     "is no way for QMapShack to detect this. <br/>"
+                     "If you do not understand this or if you are in doubt, do not proceed and abort. "
+                     "Use the Web version of BRouter instead."
+                     ).arg(downloadUrl.toString());
+
+    mbox.setText(msg);
+
+    QCheckBox * checkAgree = new QCheckBox(tr("I understand the risk and wish to proceed."), &mbox);
+    mbox.setCheckBox(checkAgree);
+    connect(checkAgree, &QCheckBox::clicked, mbox.button(QMessageBox::Ok), &QPushButton::setEnabled);
+    mbox.button(QMessageBox::Ok)->setDisabled(true);
+
+    if(mbox.exec() != QMessageBox::Ok)
+    {
+        return;
+    }
+
+
     textLocalInstall->setVisible(true);
     textLocalInstall->setTextColor(Qt::darkGreen);
     textLocalInstall->append(tr("download %1 started").arg(downloadUrl.toString()));

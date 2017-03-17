@@ -36,6 +36,8 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 {
     setupUi(this);
 
+    labelBRouterWarning->hide();
+
     setup = new CRouterBRouterSetup(this);
     setup->load();
 
@@ -508,10 +510,21 @@ void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const 
 
 void CRouterBRouter::updateLocalBRouterStatus() const
 {
+    static const QString msgBRouterWarning = tr(
+                "QMapShack communicates with BRouter via a network connection. Usually this is done on a special "
+                "address that can't be reached from outside your device. However BRouter listens for connections "
+                "on all available interfaces. If you are in your own private network with an active firewall, this "
+                "is not much of a problem. If you are in a public network every open port is a risk as it can be "
+                "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
+                "in this case."
+                );
+
     if (isShutdown)
     {
         return;
     }
+
+    labelBRouterWarning->hide();
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         if (setup->isLocalBRouterInstalled())
@@ -520,12 +533,28 @@ void CRouterBRouter::updateLocalBRouterStatus() const
             {
             case QProcess::Starting:
             {
+                SETTINGS;
+                if(cfg.value("Route/brouter/local/showWarning", true).toBool())
+                {
+                    QMessageBox mbox;
+                    mbox.setWindowTitle(tr("Warning..."));
+                    mbox.setIcon(QMessageBox::Warning);
+                    mbox.setStandardButtons(QMessageBox::Ok);
+                    mbox.setText(msgBRouterWarning);
+
+                    QCheckBox * checkAgree = new QCheckBox(tr("I understand the risk. Don't tell me again."), &mbox);
+                    mbox.setCheckBox(checkAgree);
+                    mbox.exec();
+                    cfg.setValue("Route/brouter/local/showWarning", !checkAgree->isChecked());
+                }
+
                 labelStatus->setText(tr("starting"));
                 toolConsole->setVisible(true);
                 break;
             }
             case QProcess::Running:
             {
+                labelBRouterWarning->show();
                 labelStatus->setText(tr("running"));
                 toolConsole->setVisible(true);
                 break;

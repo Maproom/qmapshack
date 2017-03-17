@@ -135,7 +135,7 @@ QPoint CRouterBRouterTilesSelectArea::tileUnderMouse(const QPointF & mousePos) c
     canvas->convertPx2Rad(pos);
     QPointF posDegF = pos * RAD_TO_DEG;
     QPoint tile(posDegF.x() > 0 ? posDegF.x()/CRouterBRouterTilesSelect::tileSize : posDegF.x()/CRouterBRouterTilesSelect::tileSize - 1
-               ,posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
+                ,posDegF.y() > 0 ? posDegF.y()/CRouterBRouterTilesSelect::tileSize : posDegF.y()/CRouterBRouterTilesSelect::tileSize - 1);
     return tile * CRouterBRouterTilesSelect::tileSize;
 }
 

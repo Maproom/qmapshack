@@ -18,14 +18,14 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "CRouterBRouter.h"
+#include "CRouterBRouterInfo.h"
+#include "CRouterBRouterSetup.h"
+#include "CRouterBRouterSetupWizard.h"
+#include "CRouterBRouterToolShell.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
-#include "CRouterBRouter.h"
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterInfo.h"
-#include "CRouterBRouterSetupWizard.h"
-#include "CRouterBRouterToolShell.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtNetwork>
@@ -197,7 +197,9 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) co
         if (isNext)
         {
             lonLats.append(QString("|%1,%2").arg(pt.lon).arg(pt.lat));
-        } else {
+        }
+        else
+        {
             lonLats = QString("%1,%2").arg(pt.lon).arg(pt.lat);
             isNext = true;
         }
@@ -278,8 +280,8 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
                 {
                     // read the shape
                     const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
-                            .firstChildElement("trkseg")
-                            .elementsByTagName("trkpt");
+                                                    .firstChildElement("trkseg")
+                                                    .elementsByTagName("trkpt");
                     for(int n = 0; n < xmlLatLng.size(); n++)
                     {
                         const QDomElement &elem   = xmlLatLng.item(n).toElement();
@@ -511,13 +513,13 @@ void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const 
 void CRouterBRouter::updateLocalBRouterStatus() const
 {
     static const QString msgBRouterWarning = tr(
-                "QMapShack communicates with BRouter via a network connection. Usually this is done on a special "
-                "address that can't be reached from outside your device. However BRouter listens for connections "
-                "on all available interfaces. If you are in your own private network with an active firewall, this "
-                "is not much of a problem. If you are in a public network every open port is a risk as it can be "
-                "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
-                "in this case."
-                );
+        "QMapShack communicates with BRouter via a network connection. Usually this is done on a special "
+        "address that can't be reached from outside your device. However BRouter listens for connections "
+        "on all available interfaces. If you are in your own private network with an active firewall, this "
+        "is not much of a problem. If you are in a public network every open port is a risk as it can be "
+        "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
+        "in this case."
+        );
 
     if (isShutdown)
     {
@@ -552,6 +554,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
                 toolConsole->setVisible(true);
                 break;
             }
+
             case QProcess::Running:
             {
                 labelBRouterWarning->show();
@@ -559,6 +562,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
                 toolConsole->setVisible(true);
                 break;
             }
+
             case QProcess::NotRunning:
             {
                 labelStatus->setText(tr("stopped"));
@@ -566,6 +570,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
                 break;
             }
             }
+
             checkFastRecalc->setEnabled(true);
             toolToggleBRouter->setEnabled(true);
         }

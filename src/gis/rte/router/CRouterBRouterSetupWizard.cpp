@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include <QFileDialog>
-#include <QNetworkRequest>
-#include <QNetworkReply>
 #include "CMainWindow.h"
 #include "CRouterBRouterSetup.h"
 #include "CRouterBRouterSetupWizard.h"
-#include "setup/IAppSetup.h"
 #include "canvas/CCanvas.h"
-#include <proj_api.h>
+#include "setup/IAppSetup.h"
 #include <JlCompress.h>
+#include <QFileDialog>
 #include <QMessageBox>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+#include <proj_api.h>
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     : QWizard(CMainWindow::getBestWidgetForParent())
@@ -102,6 +102,7 @@ int CRouterBRouterSetupWizard::nextId() const
         }
         return ePageProfiles;
     }
+
     case ePageLocalDirectory:
     {
         if (setup->expertMode)
@@ -114,6 +115,7 @@ int CRouterBRouterSetupWizard::nextId() const
         }
         return ePageProfiles;
     }
+
     case ePageLocalInstallation:
     {
         if (setup->expertMode)
@@ -122,6 +124,7 @@ int CRouterBRouterSetupWizard::nextId() const
         }
         return ePageProfiles;
     }
+
     case ePageProfiles:
     {
         if (setup->installMode == CRouterBRouterSetup::eModeLocal)
@@ -130,14 +133,17 @@ int CRouterBRouterSetupWizard::nextId() const
         }
         break;
     }
+
     case ePageLocalTiles:
     {
         break;
     }
+
     case ePageOnlineDetails:
     {
         return ePageProfiles;
     }
+
     case ePageOnlineUrl:
     {
         if (setup->installMode == CRouterBRouterSetup::eModeLocal)
@@ -158,11 +164,13 @@ int CRouterBRouterSetupWizard::nextId() const
         }
         break;
     }
+
     case ePageLocalDetails:
     {
         return ePageProfiles;
     }
     }
+
     return -1;
 }
 
@@ -175,11 +183,13 @@ void CRouterBRouterSetupWizard::initializePage(const int id)
         initLocalDirectory();
         break;
     }
+
     case ePageLocalInstallation:
     {
         initLocalInstall();
         break;
     }
+
     case ePageLocalTiles:
     {
         initLocalTiles();
@@ -196,11 +206,13 @@ bool CRouterBRouterSetupWizard::validateCurrentPage()
     {
         return validateOnlineDetails();
     }
+
     case ePageLocalDetails:
     {
         return validateLocalDetails();
     }
     }
+
     return true;
 }
 
@@ -213,36 +225,43 @@ void CRouterBRouterSetupWizard::slotCurrentIdChanged(const int id)
         beginChooseMode();
         break;
     }
+
     case ePageLocalDirectory:
     {
         beginLocalDirectory();
         break;
     }
+
     case ePageLocalInstallation:
     {
         beginLocalInstall();
         break;
     }
+
     case ePageProfiles:
     {
         beginProfiles();
         break;
     }
+
     case ePageLocalTiles:
     {
         beginLocalTiles();
         break;
     }
+
     case ePageOnlineDetails:
     {
         beginOnlineDetails();
         break;
     }
+
     case ePageOnlineUrl:
     {
         beginOnlineUrl();
         break;
     }
+
     case ePageLocalDetails:
     {
         beginLocalDetails();
@@ -263,11 +282,13 @@ void CRouterBRouterSetupWizard::slotCustomButtonClicked(const int id)
             resetOnlineDetails();
             break;
         }
+
         case ePageOnlineUrl:
         {
             resetOnlineUrl();
             break;
         }
+
         case ePageLocalDetails:
         {
             resetLocalDetails();
@@ -305,6 +326,7 @@ void CRouterBRouterSetupWizard::beginChooseMode()
         radioOnline->setChecked(false);
         break;
     }
+
     case CRouterBRouterSetup::eModeOnline:
     {
         radioLocal->setChecked(false);
@@ -312,6 +334,7 @@ void CRouterBRouterSetupWizard::beginChooseMode()
         break;
     }
     }
+
     checkExpert->setChecked(setup->expertMode);
     setOption(QWizard::HaveCustomButton1, false);
 }
@@ -671,6 +694,7 @@ void CRouterBRouterSetupWizard::slotOnlineProfilesLoaded()
         updateProfiles();
         break;
     }
+
     case ePageLocalDetails:
     {
         updateLocalDetails();
@@ -897,11 +921,13 @@ void CRouterBRouterSetupWizard::slotOnlineConfigLoaded()
         updateOnlineUrl();
         break;
     }
+
     case ePageOnlineDetails:
     {
         updateOnlineDetails();
         break;
     }
+
     case ePageLocalDetails:
     {
         updateLocalDetails();
@@ -923,11 +949,13 @@ void CRouterBRouterSetupWizard::slotSetupError(const QString &error, const QStri
         updateOnlineUrl();
         break;
     }
+
     case ePageLocalDetails:
     {
         updateLocalDetails();
         break;
     }
+
     case ePageProfiles:
     {
         updateProfiles();

@@ -61,13 +61,13 @@ private:
 
     struct wpt_t
     {
-        wpt_t():
+        wpt_t() :
             lat(NOFLOAT),
             lon(NOFLOAT)
         {
         }
 
-        wpt_t(qreal lat, qreal lon):
+        wpt_t(qreal lat, qreal lon) :
             lat(lat),
             lon(lon)
         {
@@ -98,7 +98,7 @@ private:
     bool isError { false };
     QString error;
     QString errorDetails;
-    bool isShutdown { false };    
+    bool isShutdown { false };
 };
 
 #endif //CROUTERBROUTER_H

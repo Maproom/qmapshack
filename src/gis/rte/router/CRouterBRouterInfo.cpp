@@ -26,7 +26,6 @@ CRouterBRouterInfo::CRouterBRouterInfo() : QDialog(CMainWindow::getBestWidgetFor
 
 CRouterBRouterInfo::~CRouterBRouterInfo()
 {
-
 }
 
 void CRouterBRouterInfo::setLabel(const QString &infoLabel) const

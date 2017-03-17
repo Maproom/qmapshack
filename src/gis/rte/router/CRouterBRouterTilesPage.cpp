@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
-#include <QVBoxLayout>
-#include <QMessageBox>
-#include "CRouterBRouterTilesPage.h"
 #include "CRouterBRouterSetup.h"
+#include "CRouterBRouterTilesPage.h"
 #include "CRouterBRouterTilesSelect.h"
+#include <QMessageBox>
+#include <QVBoxLayout>
 
 CRouterBRouterTilesPage::CRouterBRouterTilesPage()
     : QWizardPage()

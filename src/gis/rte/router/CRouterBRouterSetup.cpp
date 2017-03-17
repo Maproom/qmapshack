@@ -20,14 +20,14 @@
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include <QMessageBox>
+#include <QWebFrame>
+#include <QWebPage>
 #include <QtScript>
 #include <QtWebKit>
-#include <QWebPage>
-#include <QWebFrame>
-#include <QMessageBox>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
-    :QObject(parent)
+    : QObject(parent)
 {
     networkAccessManager = new QNetworkAccessManager(this);
     profilesWebPage = new QWebPage(this);
@@ -383,8 +383,8 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 
         QScriptEngine engine;
 
-        const QString &jsSetup = QString(\
-                    "(function(){\
+        const QString &jsSetup = QString( \
+            "(function(){\
                        window = {};\
                        window.location = {};\
                        window.location.hostname = '%1';\
@@ -445,7 +445,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         const qint32 len = profiles.property("length").toInt32();
 
         QStringList onlineProfilesLoaded;
-        for(qint32 i=0;i<len;i++)
+        for(qint32 i=0; i<len; i++)
         {
             const QScriptValue &profile = profiles.property(i);
             if (!profile.isValid() || profile.isError())
@@ -605,7 +605,7 @@ void CRouterBRouterSetup::loadOnlineProfileFinished(QNetworkReply * reply)
 bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 {
     const QDir dir(localDir);
-    return (QFile(dir.absoluteFilePath("brouter.jar")).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists());
+    return QFile(dir.absoluteFilePath("brouter.jar")).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists();
 }
 
 QString CRouterBRouterSetup::findJava() const

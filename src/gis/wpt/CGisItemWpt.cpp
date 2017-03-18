@@ -572,7 +572,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
         return;
     }
 
-    p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
+    p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
 }
 
 void CGisItemWpt::drawBubble(QPainter& p)

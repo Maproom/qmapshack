@@ -290,7 +290,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     {
         if(curPOI.pos != NOPOINTF)
         {
-            p.drawImage(curPOI.pos - QPointF(31,31), QImage("://cursors/wptHighlight.png"));
+            p.drawImage(curPOI.pos - QPointF(31,31), QImage("://cursors/wptHighlightBlue.png"));
         }
 
         /*

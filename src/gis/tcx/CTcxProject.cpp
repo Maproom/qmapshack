@@ -476,11 +476,11 @@ void CTcxProject::saveAuthor(QDomNode& nodeToAttachAuthor)
     nodeToAttachAuthor.lastChild().appendChild(doc.createElement("Build"));
     nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createElement("Version"));
     nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("VersionMajor"));
-    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_MAJOR)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(_MKSTR(VER_MAJOR)));
     nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("VersionMinor"));
-    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_MINOR)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(_MKSTR(VER_MINOR)));
     nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("BuildMajor"));
-    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(QString::number(VER_STEP)));
+    nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode(_MKSTR(VER_STEP)));
     nodeToAttachAuthor.lastChild().lastChild().lastChild().appendChild(doc.createElement("BuildMinor"));
     nodeToAttachAuthor.lastChild().lastChild().lastChild().lastChild().appendChild(doc.createTextNode("0"));
     nodeToAttachAuthor.lastChild().lastChild().appendChild(doc.createElement("Type"));

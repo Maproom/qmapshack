@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 
 #include <QtWidgets>
 

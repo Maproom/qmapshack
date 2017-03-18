@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,41 +16,35 @@
 
 **********************************************************************************************/
 
-#ifndef CROUTERSETUP_H
-#define CROUTERSETUP_H
+#ifndef CROUTERBROUTERTILESPAGE_H
+#define CROUTERBROUTERTILESPAGE_H
 
-#include "gis/IGisItem.h"
-#include "ui_IRouterSetup.h"
-#include <QWidget>
+#include <QVBoxLayout>
+#include <QWizardPage>
 
-class CRouterSetup : public QWidget, private Ui::IRouterSetup
+class CRouterBRouterTilesSelect;
+class CRouterBRouterSetup;
+
+class CRouterBRouterTilesPage : public QWizardPage
 {
     Q_OBJECT
 public:
-    static CRouterSetup& self()
-    {
-        return *pSelf;
-    }
-    virtual ~CRouterSetup();
+    CRouterBRouterTilesPage();
+    virtual ~CRouterBRouterTilesPage();
 
-    void calcRoute(const IGisItem::key_t &key);
-    int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords);
+    bool isComplete() const override;
 
-    bool hasFastRouting();
-
-    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
-
-    void setRouterTitle(router_e, QString title);
+    void setSetup(CRouterBRouterSetup * setup) const;
+    void beginPage() const;
+    bool raiseWarning() const;
 
 private slots:
-    void slotSelectRouter(int i);
+    void slotTileDownloadStatusChanged();
 
 private:
-    friend class Ui_IMainWindow;
-    CRouterSetup(QWidget * parent);
-
-    static CRouterSetup * pSelf;
+    QVBoxLayout * layout;
+    CRouterBRouterTilesSelect * widgetLocalTilesSelect;
 };
 
-#endif //CROUTERSETUP_H
+#endif //CROUTERBROUTERTILESPAGE_H
 

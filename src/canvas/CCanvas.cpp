@@ -120,6 +120,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    /* stop running drawing-threads and don't destroy unless they have finished*/
+    map->quit();
+    dem->quit();
+    gis->quit();
+    map->wait();
+    dem->wait();
+    gis->wait();
     /*
         Some mouse objects call methods from their canvas on destruction.
         So they are better deleted now explicitly before any other object
@@ -697,12 +704,12 @@ void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
     grid->convertPos2Str(pos, str, simple);
 }
 
-void CCanvas::convertRad2Px(QPointF& pos)
+void CCanvas::convertRad2Px(QPointF& pos) const
 {
     map->convertRad2Px(pos);
 }
 
-void CCanvas::convertPx2Rad(QPointF& pos)
+void CCanvas::convertPx2Rad(QPointF& pos) const
 {
     map->convertPx2Rad(pos);
 }

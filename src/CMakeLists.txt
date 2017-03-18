@@ -18,14 +18,12 @@ if(BUILD_FOR_LOCAL_SYSTEM)
     if(Flag:${flag})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
 
-        message(WARNING [=[
- /===============================================================================\
- |                         BUILDING FOR LOCAL SYSTEM ONLY                        |
- |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        |
- |Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.|
- |The generated binary will exhibit higher performance,                          |
- |but will not be portable (e.g., might not work on other CPUs)                  |
- \===============================================================================/]=])
+        message(WARNING [=[ 
+ BUILDING FOR LOCAL SYSTEM ONLY
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.
+ The generated binary will exhibit higher performance,
+ but will not be portable (e.g., might not work on other CPUs)]=])
     else(Flag:${flag})
         message(WARNING [=[
  Your compiler does not support -march=native.

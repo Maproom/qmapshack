@@ -18,6 +18,7 @@ set(QT_DEV_PATH   "C:\\Qt5\\5.5\\msvc2013_64" CACHE PATH "Path to directory cont
 set(GDAL_DEV_PATH "C:\\GDAL" CACHE PATH "Path to directory containing GDAL include and lib, e.g. M:\\lib\\gdal")
 set(PROJ_DEV_PATH "C:\\PROJ" CACHE PATH "Path to directory containing PROJ.4 include and lib, e.g. M:\\lib\\PROJ")
 set(ROUTINO_DEV_PATH "C:\\routino" CACHE PATH "Path to directory containing routino include and lib, e.g. M:\\lib\\routino")
+set(QUAZIP_DEV_PATH "C:\\quazip" CACHE PATH "Path to directory containing quazip include and lib, e.g. M:\\lib\\quazip5")
 set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} ${QT_DEV_PATH})
 endif(WIN32)
 

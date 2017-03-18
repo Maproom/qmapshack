@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "CRouterBRouterInfo.h"
+#include "gis/rte/router/brouter/CRouterBRouterInfo.h"
 
 CRouterBRouterInfo::CRouterBRouterInfo() : QDialog(CMainWindow::getBestWidgetForParent())
 {

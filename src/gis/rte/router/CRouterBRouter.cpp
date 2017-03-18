@@ -18,14 +18,14 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "CRouterBRouter.h"
-#include "CRouterBRouterInfo.h"
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterSetupWizard.h"
-#include "CRouterBRouterToolShell.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/CRouterBRouter.h"
+#include "gis/rte/router/brouter/CRouterBRouterInfo.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
+#include "gis/rte/router/brouter/CRouterBRouterToolShell.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtNetwork>

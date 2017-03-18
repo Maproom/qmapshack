@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterSetupPage.h"
-#include "CRouterBRouterSetupWizard.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetupPage.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 
 CRouterBRouterSetupPage::CRouterBRouterSetupPage()
     : QWizardPage()

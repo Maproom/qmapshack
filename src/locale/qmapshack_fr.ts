@@ -117,12 +117,12 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="60"/>
+        <location filename="../canvas/CCanvas.cpp" line="61"/>
         <source>View %1</source>
         <translation>Vue %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="692"/>
+        <location filename="../canvas/CCanvas.cpp" line="693"/>
         <source>Setup Map Background</source>
         <translation>Réglage de l&apos;arrière-plan de la carte</translation>
     </message>
@@ -1353,62 +1353,62 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>_Clone</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="272"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="275"/>
         <source>Elevation: %1 %2</source>
         <translation>Altitude: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="283"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="286"/>
         <source>Proximity: %1 %2</source>
         <translation>Proximité: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="355"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
         <source>Changed name</source>
         <translation>Nom modifié</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="365"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="368"/>
         <source>Changed position</source>
         <translation>Position modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="371"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="374"/>
         <source>Changed elevation</source>
         <translation>Altitude modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="377"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="380"/>
         <source>Changed proximity</source>
         <translation>Rayon de proximité modifié</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
         <source>Changed icon</source>
         <translation>Icône modifié</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="397"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
         <source>Changed comment</source>
         <translation>Commentaire modifié</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="403"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
         <source>Changed description</source>
         <translation>Description modifiée</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="409"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="412"/>
         <source>Changed links</source>
         <translation>Liens modifiés</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="415"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="418"/>
         <source>Changed images</source>
         <translation>Images modifiées</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="421"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="424"/>
         <source>Add image</source>
         <translation>Ajouter une image</translation>
     </message>
@@ -1788,12 +1788,12 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Copier les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="660"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Cut Track...</source>
         <translation>Couper la trace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="660"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voulez-vous supprimer la trace originale?</translation>
     </message>
@@ -2029,7 +2029,7 @@ ligne %2, colonne %3:
 <context>
     <name>CMapDraw</name>
     <message>
-        <location filename="../map/CMapDraw.cpp" line="420"/>
+        <location filename="../map/CMapDraw.cpp" line="457"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
@@ -2039,625 +2039,625 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
 <context>
     <name>CMapIMG</name>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="145"/>
+        <location filename="../map/CMapIMG.cpp" line="146"/>
         <source>Failed ...</source>
         <translation>Échec...</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="156"/>
+        <location filename="../map/CMapIMG.cpp" line="157"/>
         <source>Unspecified</source>
         <translation>Non défini</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="157"/>
+        <location filename="../map/CMapIMG.cpp" line="158"/>
         <source>French</source>
         <translation>Français</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="158"/>
+        <location filename="../map/CMapIMG.cpp" line="159"/>
         <source>German</source>
         <translation>Deutsch</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="159"/>
+        <location filename="../map/CMapIMG.cpp" line="160"/>
         <source>Dutch</source>
         <translation>Néerlandais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="160"/>
+        <location filename="../map/CMapIMG.cpp" line="161"/>
         <source>English</source>
         <translation>Anglais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="161"/>
+        <location filename="../map/CMapIMG.cpp" line="162"/>
         <source>Italian</source>
         <translation>Italien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="162"/>
+        <location filename="../map/CMapIMG.cpp" line="163"/>
         <source>Finnish</source>
         <translation>Finlandais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="163"/>
+        <location filename="../map/CMapIMG.cpp" line="164"/>
         <source>Swedish</source>
         <translation>Suédois</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="164"/>
+        <location filename="../map/CMapIMG.cpp" line="165"/>
         <source>Spanish</source>
         <translation>Espagnol</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="165"/>
+        <location filename="../map/CMapIMG.cpp" line="166"/>
         <source>Basque</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="166"/>
+        <location filename="../map/CMapIMG.cpp" line="167"/>
         <source>Catalan</source>
         <translation>Catalan</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="167"/>
+        <location filename="../map/CMapIMG.cpp" line="168"/>
         <source>Galician</source>
         <translation>Galicien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="168"/>
+        <location filename="../map/CMapIMG.cpp" line="169"/>
         <source>Welsh</source>
         <translation>Gallois</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="169"/>
+        <location filename="../map/CMapIMG.cpp" line="170"/>
         <source>Gaelic</source>
         <translation>Gaëlic</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="170"/>
+        <location filename="../map/CMapIMG.cpp" line="171"/>
         <source>Danish</source>
         <translation>Danois</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="171"/>
+        <location filename="../map/CMapIMG.cpp" line="172"/>
         <source>Norwegian</source>
         <translation>Norvégien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="172"/>
+        <location filename="../map/CMapIMG.cpp" line="173"/>
         <source>Portuguese</source>
         <translation>Portugais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="173"/>
+        <location filename="../map/CMapIMG.cpp" line="174"/>
         <source>Slovak</source>
         <translation>Slovaque</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="174"/>
+        <location filename="../map/CMapIMG.cpp" line="175"/>
         <source>Czech</source>
         <translation>Tchèque</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="175"/>
+        <location filename="../map/CMapIMG.cpp" line="176"/>
         <source>Croatian</source>
         <translation>Croate</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="176"/>
+        <location filename="../map/CMapIMG.cpp" line="177"/>
         <source>Hungarian</source>
         <translation>Hongrois</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="177"/>
+        <location filename="../map/CMapIMG.cpp" line="178"/>
         <source>Polish</source>
         <translation>Polonais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="178"/>
+        <location filename="../map/CMapIMG.cpp" line="179"/>
         <source>Turkish</source>
         <translation>Turque</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="179"/>
+        <location filename="../map/CMapIMG.cpp" line="180"/>
         <source>Greek</source>
         <translation>Grèc</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="180"/>
+        <location filename="../map/CMapIMG.cpp" line="181"/>
         <source>Slovenian</source>
         <translation>Slovène</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="181"/>
+        <location filename="../map/CMapIMG.cpp" line="182"/>
         <source>Russian</source>
         <translation>Russe</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="182"/>
+        <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Estonian</source>
         <translation>Estonien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="183"/>
+        <location filename="../map/CMapIMG.cpp" line="184"/>
         <source>Latvian</source>
         <translation>Letton</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="184"/>
+        <location filename="../map/CMapIMG.cpp" line="185"/>
         <source>Romanian</source>
         <translation>Roumain</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="185"/>
+        <location filename="../map/CMapIMG.cpp" line="186"/>
         <source>Albanian</source>
         <translation>Albanais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="186"/>
+        <location filename="../map/CMapIMG.cpp" line="187"/>
         <source>Bosnian</source>
         <translation>Bosnien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="187"/>
+        <location filename="../map/CMapIMG.cpp" line="188"/>
         <source>Lithuanian</source>
         <translation>Lituanien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="188"/>
+        <location filename="../map/CMapIMG.cpp" line="189"/>
         <source>Serbian</source>
         <translation>Serbe</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="189"/>
+        <location filename="../map/CMapIMG.cpp" line="190"/>
         <source>Macedonian</source>
         <translation>Macédonien</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="190"/>
+        <location filename="../map/CMapIMG.cpp" line="191"/>
         <source>Bulgarian</source>
         <translation>Bulgare</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="247"/>
+        <location filename="../map/CMapIMG.cpp" line="248"/>
         <source>Major highway</source>
         <translation>Route majeure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="248"/>
+        <location filename="../map/CMapIMG.cpp" line="249"/>
         <source>Principal highway</source>
         <translation>Route principale</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="249"/>
+        <location filename="../map/CMapIMG.cpp" line="250"/>
         <source>Other highway</source>
         <translation>Autre route</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="250"/>
+        <location filename="../map/CMapIMG.cpp" line="251"/>
         <source>Arterial road</source>
         <translation>Artère urbaine</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="251"/>
+        <location filename="../map/CMapIMG.cpp" line="252"/>
         <source>Collector road</source>
         <translation>Rue principale</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="252"/>
+        <location filename="../map/CMapIMG.cpp" line="253"/>
         <source>Residential street</source>
         <translation>Rue résidentielle</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="253"/>
+        <location filename="../map/CMapIMG.cpp" line="254"/>
         <source>Alley/Private road</source>
         <translation>Ruelle/Route privée</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="254"/>
+        <location filename="../map/CMapIMG.cpp" line="255"/>
         <source>Highway ramp, low speed</source>
         <translation>Bretelle d&apos;accès, basse vitesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="255"/>
+        <location filename="../map/CMapIMG.cpp" line="256"/>
         <source>Highway ramp, high speed</source>
         <translation>Bretelle d&apos;accès, grande vitesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="256"/>
+        <location filename="../map/CMapIMG.cpp" line="257"/>
         <source>Unpaved road</source>
         <translation>Route non bitumé</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="257"/>
+        <location filename="../map/CMapIMG.cpp" line="258"/>
         <source>Major highway connector</source>
         <translation>Bretelle majeure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="258"/>
+        <location filename="../map/CMapIMG.cpp" line="259"/>
         <source>Roundabout</source>
         <translation>Rond-point</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="259"/>
+        <location filename="../map/CMapIMG.cpp" line="260"/>
         <source>Railroad</source>
         <translation>Voie ferrée</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="260"/>
+        <location filename="../map/CMapIMG.cpp" line="261"/>
         <source>Shoreline</source>
         <translation>Ligne côtière</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="261"/>
+        <location filename="../map/CMapIMG.cpp" line="262"/>
         <source>Trail</source>
         <translation>Sentier</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="262"/>
+        <location filename="../map/CMapIMG.cpp" line="263"/>
         <source>Stream</source>
         <translation>Ruisseau</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="263"/>
+        <location filename="../map/CMapIMG.cpp" line="264"/>
         <source>Time zone</source>
         <translation>Fuseau horaire</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="264"/>
         <location filename="../map/CMapIMG.cpp" line="265"/>
+        <location filename="../map/CMapIMG.cpp" line="266"/>
         <source>Ferry</source>
         <translation>Bac</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="266"/>
+        <location filename="../map/CMapIMG.cpp" line="267"/>
         <source>State/province border</source>
         <translation>Frontière de province</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="267"/>
+        <location filename="../map/CMapIMG.cpp" line="268"/>
         <source>County/parish border</source>
         <translation>Frontière de canton</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="268"/>
+        <location filename="../map/CMapIMG.cpp" line="269"/>
         <source>International border</source>
         <translation>Frontière internationale</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="269"/>
+        <location filename="../map/CMapIMG.cpp" line="270"/>
         <source>River</source>
         <translation>Rivière</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="270"/>
+        <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Minor land contour</source>
         <translation>Courbe de niveau mineure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="271"/>
+        <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Intermediate land contour</source>
         <translation>Courbe de niveau intermédiaire</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="272"/>
+        <location filename="../map/CMapIMG.cpp" line="273"/>
         <source>Major land contour</source>
         <translation>Courbe de niveau majeure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="273"/>
+        <location filename="../map/CMapIMG.cpp" line="274"/>
         <source>Minor depth contour</source>
         <translation>Courbe isobathe mineure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="274"/>
+        <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Intermediate depth contour</source>
         <translation>Courbe isobathe intermédiaire</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="275"/>
+        <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>Major depth contour</source>
         <translation>Courbe isobathe majeure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="276"/>
+        <location filename="../map/CMapIMG.cpp" line="277"/>
         <source>Intermittent stream</source>
         <translation>Ruisseau intermittent</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="277"/>
-        <location filename="../map/CMapIMG.cpp" line="359"/>
+        <location filename="../map/CMapIMG.cpp" line="278"/>
+        <location filename="../map/CMapIMG.cpp" line="360"/>
         <source>Airport runway</source>
         <translation>Tarmac</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="278"/>
+        <location filename="../map/CMapIMG.cpp" line="279"/>
         <source>Pipeline</source>
         <translation>Oléoduc</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="279"/>
+        <location filename="../map/CMapIMG.cpp" line="280"/>
         <source>Powerline</source>
         <translation>Ligne à haute tension</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="280"/>
+        <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>Marine boundary</source>
         <translation>Frontière maritime</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="281"/>
+        <location filename="../map/CMapIMG.cpp" line="282"/>
         <source>Hazard boundary</source>
         <translation>Limite de zone à risque</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="346"/>
+        <location filename="../map/CMapIMG.cpp" line="347"/>
         <source>Large urban area (&amp;gt;200K)</source>
         <translation>Grande agglomération urbaine (&amp;gt;200K)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="347"/>
+        <location filename="../map/CMapIMG.cpp" line="348"/>
         <source>Small urban area (&amp;lt;200K)</source>
         <translation>Petite agglomération urbaine (&amp;lt;200K)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="348"/>
+        <location filename="../map/CMapIMG.cpp" line="349"/>
         <source>Rural housing area</source>
         <translation>Zone résidentielle rurale</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="349"/>
+        <location filename="../map/CMapIMG.cpp" line="350"/>
         <source>Military base</source>
         <translation>Base militaire</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="350"/>
+        <location filename="../map/CMapIMG.cpp" line="351"/>
         <source>Parking lot</source>
         <translation>Parking</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="351"/>
+        <location filename="../map/CMapIMG.cpp" line="352"/>
         <source>Parking garage</source>
         <translation>Parking couvert</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="352"/>
+        <location filename="../map/CMapIMG.cpp" line="353"/>
         <source>Airport</source>
         <translation>Aéroport</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="353"/>
+        <location filename="../map/CMapIMG.cpp" line="354"/>
         <source>Shopping center</source>
         <translation>Centre commercial</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="354"/>
+        <location filename="../map/CMapIMG.cpp" line="355"/>
         <source>Marina</source>
         <translation>Marina</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="355"/>
+        <location filename="../map/CMapIMG.cpp" line="356"/>
         <source>University/College</source>
         <translation>Université</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="356"/>
+        <location filename="../map/CMapIMG.cpp" line="357"/>
         <source>Hospital</source>
         <translation>Hôpital</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="357"/>
+        <location filename="../map/CMapIMG.cpp" line="358"/>
         <source>Industrial complex</source>
         <translation>Complexe industriel</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="358"/>
+        <location filename="../map/CMapIMG.cpp" line="359"/>
         <source>Reservation</source>
         <translation>Reserve naturelle</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="360"/>
+        <location filename="../map/CMapIMG.cpp" line="361"/>
         <source>Man-made area</source>
         <translation>Zone industrielle</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="361"/>
+        <location filename="../map/CMapIMG.cpp" line="362"/>
         <source>Sports complex</source>
         <translation>Complexe sportif</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="362"/>
+        <location filename="../map/CMapIMG.cpp" line="363"/>
         <source>Golf course</source>
         <translation>Golf</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="363"/>
+        <location filename="../map/CMapIMG.cpp" line="364"/>
         <source>Cemetery</source>
         <translation>Cimetière</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="364"/>
         <location filename="../map/CMapIMG.cpp" line="365"/>
         <location filename="../map/CMapIMG.cpp" line="366"/>
+        <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>National park</source>
         <translation>Parc national</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="367"/>
+        <location filename="../map/CMapIMG.cpp" line="368"/>
         <source>City park</source>
         <translation>Parc urbain</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="368"/>
         <location filename="../map/CMapIMG.cpp" line="369"/>
         <location filename="../map/CMapIMG.cpp" line="370"/>
+        <location filename="../map/CMapIMG.cpp" line="371"/>
         <source>State park</source>
         <translation>Parc régional</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="371"/>
+        <location filename="../map/CMapIMG.cpp" line="372"/>
         <source>Forest</source>
         <translation>Forêt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="372"/>
+        <location filename="../map/CMapIMG.cpp" line="373"/>
         <source>Ocean</source>
         <translation>Océan</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="373"/>
-        <location filename="../map/CMapIMG.cpp" line="375"/>
-        <location filename="../map/CMapIMG.cpp" line="385"/>
+        <location filename="../map/CMapIMG.cpp" line="374"/>
+        <location filename="../map/CMapIMG.cpp" line="376"/>
+        <location filename="../map/CMapIMG.cpp" line="386"/>
         <source>Blue (unknown)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="374"/>
+        <location filename="../map/CMapIMG.cpp" line="375"/>
         <source>Sea</source>
         <translation>Mer</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="376"/>
         <location filename="../map/CMapIMG.cpp" line="377"/>
-        <location filename="../map/CMapIMG.cpp" line="384"/>
+        <location filename="../map/CMapIMG.cpp" line="378"/>
+        <location filename="../map/CMapIMG.cpp" line="385"/>
         <source>Large lake</source>
         <translation>Grand lac</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="378"/>
         <location filename="../map/CMapIMG.cpp" line="379"/>
+        <location filename="../map/CMapIMG.cpp" line="380"/>
         <source>Medium lake</source>
         <translation>Lac moyen</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="380"/>
         <location filename="../map/CMapIMG.cpp" line="381"/>
+        <location filename="../map/CMapIMG.cpp" line="382"/>
         <source>Small lake</source>
         <translation>Petit lac</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="382"/>
         <location filename="../map/CMapIMG.cpp" line="383"/>
+        <location filename="../map/CMapIMG.cpp" line="384"/>
         <source>Major lake</source>
         <translation>Lac majeur</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="386"/>
+        <location filename="../map/CMapIMG.cpp" line="387"/>
         <source>Major River</source>
         <translation>Rivière majeure</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="387"/>
+        <location filename="../map/CMapIMG.cpp" line="388"/>
         <source>Large River</source>
         <translation>Grande rivière</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="388"/>
+        <location filename="../map/CMapIMG.cpp" line="389"/>
         <source>Medium River</source>
         <translation>Rivière moyenne</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="389"/>
+        <location filename="../map/CMapIMG.cpp" line="390"/>
         <source>Small River</source>
         <translation>Petite rivière</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="392"/>
+        <location filename="../map/CMapIMG.cpp" line="393"/>
         <source>Intermittent water</source>
         <translation>Cours d&apos;eau intermittent</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="393"/>
+        <location filename="../map/CMapIMG.cpp" line="394"/>
         <source>Wetland/Swamp</source>
         <translation>Marais</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="394"/>
+        <location filename="../map/CMapIMG.cpp" line="395"/>
         <source>Glacier</source>
         <translation>Glacier</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="395"/>
+        <location filename="../map/CMapIMG.cpp" line="396"/>
         <source>Orchard/Plantation</source>
         <translation>Verger</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="396"/>
+        <location filename="../map/CMapIMG.cpp" line="397"/>
         <source>Scrub</source>
         <translation>Broussaille</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="397"/>
+        <location filename="../map/CMapIMG.cpp" line="398"/>
         <source>Tundra</source>
         <translation>Tundra</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="398"/>
+        <location filename="../map/CMapIMG.cpp" line="399"/>
         <source>Flat</source>
         <translation>Plaine</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="399"/>
+        <location filename="../map/CMapIMG.cpp" line="400"/>
         <source>???</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="435"/>
+        <location filename="../map/CMapIMG.cpp" line="436"/>
         <source>Failed to read: </source>
         <translation>Erreur de lecture : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="478"/>
+        <location filename="../map/CMapIMG.cpp" line="479"/>
         <source>Failed to open: </source>
         <translation>Échec d&apos;ouverture : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="502"/>
-        <location filename="../map/CMapIMG.cpp" line="506"/>
+        <location filename="../map/CMapIMG.cpp" line="503"/>
+        <location filename="../map/CMapIMG.cpp" line="507"/>
         <source>Bad file format: </source>
         <translation>Format de fichier invalide : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="595"/>
+        <location filename="../map/CMapIMG.cpp" line="596"/>
         <source>Failed to read file structure: </source>
         <translation>Erreur de lecture de la structure du fichier : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="630"/>
+        <location filename="../map/CMapIMG.cpp" line="631"/>
         <source>Loading %1</source>
         <translation>Chargement de %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="636"/>
+        <location filename="../map/CMapIMG.cpp" line="637"/>
         <source>User abort: </source>
         <translation>Interruption par l&apos;utilisateur : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="639"/>
+        <location filename="../map/CMapIMG.cpp" line="640"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
         <translation>Le fichier est au format NT. QMapShack ne peut pas lire des fichiers au format NT : </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="730"/>
+        <location filename="../map/CMapIMG.cpp" line="731"/>
         <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2309"/>
-        <location filename="../map/CMapIMG.cpp" line="2315"/>
-        <location filename="../map/CMapIMG.cpp" line="2319"/>
+        <location filename="../map/CMapIMG.cpp" line="2364"/>
+        <location filename="../map/CMapIMG.cpp" line="2370"/>
+        <location filename="../map/CMapIMG.cpp" line="2374"/>
         <source>Point of Interest</source>
         <translation>Point d&apos;intérêt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2405"/>
+        <location filename="../map/CMapIMG.cpp" line="2460"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2447"/>
-        <location filename="../map/CMapIMG.cpp" line="2455"/>
-        <location filename="../map/CMapIMG.cpp" line="2462"/>
+        <location filename="../map/CMapIMG.cpp" line="2502"/>
+        <location filename="../map/CMapIMG.cpp" line="2510"/>
+        <location filename="../map/CMapIMG.cpp" line="2517"/>
         <source>Area</source>
         <translation>Surface</translation>
     </message>
@@ -2974,36 +2974,41 @@ Structure inconnue.</translation>
     <name>CMouseNormal</name>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="39"/>
+        <source>Add POI as Waypoint</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseNormal.cpp" line="40"/>
         <source>Add Waypoint</source>
         <translation>Ajouter un waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="40"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
         <source>Add Track</source>
         <translation>Ajouter une trace</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Route</source>
         <translation>Ajouter une route</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Area</source>
         <translation>Ajouter une surface</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
         <source>Select Items On Map</source>
         <translation>Selectionner des objets sur la carte</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
         <source>Copy position</source>
         <translation>Copier la position</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
         <source>Copy position (Grid)</source>
         <translation>Copier la position (grille)</translation>
     </message>

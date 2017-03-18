@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
-#include "CRouterBRouterTilesSelect.h"
-#include "CRouterBRouterTilesSelectArea.h"
-#include "CRouterBRouterTilesSelectLayout.h"
-#include "CRouterBRouterTilesStatus.h"
 #include "canvas/CCanvas.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesSelect.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesStatus.h"
 #include <QToolTip>
 
 const QPen CRouterBRouterTilesSelectArea::gridPen             = QPen(Qt::magenta);

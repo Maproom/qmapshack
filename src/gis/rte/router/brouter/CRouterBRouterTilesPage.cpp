@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterTilesPage.h"
-#include "CRouterBRouterTilesSelect.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesPage.h"
+#include "gis/rte/router/brouter/CRouterBRouterTilesSelect.h"
 #include <QMessageBox>
 #include <QVBoxLayout>
 

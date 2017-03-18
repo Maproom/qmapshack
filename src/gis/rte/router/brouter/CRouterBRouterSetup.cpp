@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"

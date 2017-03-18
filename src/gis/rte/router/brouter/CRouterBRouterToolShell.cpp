@@ -18,10 +18,8 @@
 
 #include "CMainWindow.h"
 #include "CRouterBRouterToolShell.h"
-#include <QProcess>
-#include <QTextBrowser>
-#include <QWidget>
 
+#include <QtWidgets>
 
 CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent)
     : IToolShell(textBrowser,parent)

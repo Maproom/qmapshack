@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "CRouterBRouterSetup.h"
-#include "CRouterBRouterSetupWizard.h"
 #include "canvas/CCanvas.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetup.h"
+#include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "setup/IAppSetup.h"
 #include <JlCompress.h>
 #include <QFileDialog>

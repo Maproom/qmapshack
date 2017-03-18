@@ -23,15 +23,16 @@
 #include "gis/rte/router/IRouter.h"
 #include "ui_IRouterBRouter.h"
 
+#include <QNetworkAccessManager>
+#include <QProcess>
+#include <QTimer>
+
 class CRouterBRouterSetup;
 class CRouterBRouterSetupWizard;
 class CRouterBRouterInfo;
 class CRouterBRouterToolShell;
 class CRouterSetup;
 class CProgressDialog;
-#include <QNetworkAccessManager>
-#include <QProcess>
-#include <QTimer>
 
 class CRouterBRouter : public IRouter, private Ui::IRouterBRouter
 {

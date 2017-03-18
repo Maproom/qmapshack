@@ -21,7 +21,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
-#include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"

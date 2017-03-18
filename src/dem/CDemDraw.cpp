@@ -269,7 +269,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
                 if(!item || item->demfile.isNull())
                 {
                     // as all active maps have to be at the top of the list
-                    // it is ok to break ass soon as the first map with no
+                    // it is ok to break as soon as the first map with no
                     // active files is hit.
                     break;
                 }
@@ -315,7 +315,7 @@ void CDemDraw::drawt(buffer_t& currentBuffer)
             if(!item || item->demfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }

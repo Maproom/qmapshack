@@ -147,7 +147,7 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -174,7 +174,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -203,7 +203,7 @@ poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -238,7 +238,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -438,7 +438,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }

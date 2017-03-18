@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -1051,4 +1052,163 @@ void CGisItemRte::setResult(const QDomDocument& xml, const QString &options)
     updateHistory();
 }
 
+void CGisItemRte::setResultFromBRouter(const QDomDocument &xml, const QString &options)
+{
+    QMutexLocker lock(&mutexItems);
 
+    QVector<subpt_t> shape;
+
+    const QDomElement &gpx = xml.documentElement();
+    // read the shape
+    const QDomElement &xmlShape        = gpx.firstChildElement("trk");
+    const QDomElement &xmlShapePoints  = xmlShape.firstChildElement("trkseg");
+    const QDomNodeList &xmlLatLng      = xmlShapePoints.elementsByTagName("trkpt");
+    const qint32 N = xmlLatLng.size();
+    for(int n = 0; n < N; n++)
+    {
+        const QDomElement &elem   = xmlLatLng.item(n).toElement();
+        shape << subpt_t();
+        subpt_t& subpt = shape.last();
+        subpt.lon = elem.attribute("lon").toFloat();
+        subpt.lat = elem.attribute("lat").toFloat();
+        subpt.ele = elem.firstChildElement("ele").text().toFloat();
+    }
+
+    // build list of maneuvers
+    const QDomElement &xmlLeg = gpx.firstChildElement("rte");
+    if (!xmlLeg.isNull())
+    {
+        const QDomNodeList &xmlManeuvers = xmlLeg.elementsByTagName("rtept");
+        const qint32 M = xmlManeuvers.size();
+        for(int m = 0; m < M; m++)
+        {
+            const QDomNode &xmlManeuver    = xmlManeuvers.item(m);
+            /* <rtept lat="48.322380" lon="11.601220">
+                <desc>right</desc>
+                <extensions>
+                 <turn>TR</turn>
+                 <turn-angle>45.655945</turn-angle>
+                 <offset>76</offset>
+                </extensions>
+               </rtept> */
+            quint32 idx = xmlManeuver.firstChildElement("extensions").firstChildElement("offset").text().toUInt();
+            subpt_t& subpt          = shape[idx];
+            subpt.type              = subpt_t::eTypeJunct;
+            subpt.instruction       = xmlManeuver.firstChildElement("desc").text();
+            const QString &command = xmlManeuver.firstChildElement("extensions").firstChildElement("turn").text(); // command
+            if(command=="TU")        // u-turn
+            {
+                subpt.bearing = 180;
+            }
+            else if(command=="TSHL") // turn sharp left
+            {
+                subpt.bearing = -135;
+            }
+            else if(command=="TL")   // turn left
+            {
+                subpt.bearing = -90;
+            }
+            else if(command=="TSLL") // turn slight left
+            {
+                subpt.bearing = -45;
+            }
+            else if(command=="KL")   // keep left
+            {
+                subpt.bearing = 0;
+            }
+            else if(command=="C")    // straight
+            {
+                subpt.bearing = 0;
+            }
+            else if(command=="KR")   // keep right
+            {
+                subpt.bearing = 0;
+            }
+            else if(command=="TSLR") // turn slight right
+            {
+                subpt.bearing = 45;
+            }
+            else if(command=="TR")   // turn right
+            {
+                subpt.bearing = 90;
+            }
+            else if(command=="TSHR") // turn sharp right
+            {
+                subpt.bearing = 135;
+            }
+            else if(command=="TRU")  // u-turn
+            {
+                subpt.bearing = 180;
+            }
+            else if(command.startsWith("RNDB")) // take roundabout exit nr
+            {
+                subpt.bearing = 0;
+            }
+            else if(command.startsWith("RNLB")) // take roundabout exit nr. (to the left)
+            {
+                subpt.bearing = 0;
+            }
+
+            subpt.turn = xmlManeuver.firstChildElement("extensions").firstChildElement("turn-angle").text().toUInt();  // turn angle (degree)
+        }
+    }
+
+    // match routepoints to shape
+    qint32 startIdx = 0;
+    qint32 minDistIdx = 0;
+
+    for(qint32 rtIdx = 0; rtIdx < rte.pts.size() - 1; rtIdx++)
+    {
+        rtept_t &routePoint = rte.pts[rtIdx];
+        const rtept_t &nextRoutePoint = rte.pts[rtIdx+1];
+
+        qreal minDist = std::pow(nextRoutePoint.lon - shape[minDistIdx].lon, 2) + std::pow(nextRoutePoint.lat - shape[minDistIdx].lat, 2);
+        for (qint32 idx = startIdx+1; idx < shape.size(); idx++)
+        {
+            qreal dist = std::pow(nextRoutePoint.lon - shape[idx].lon, 2) + std::pow(nextRoutePoint.lat - shape[idx].lat, 2);
+            if (dist < minDist)
+            {
+                minDist = dist;
+                minDistIdx = idx;
+            }
+        }
+        routePoint.ele = shape[startIdx].ele;
+        routePoint.subpts = shape.mid(startIdx,minDistIdx-startIdx);
+        routePoint.fakeSubpt.lon = routePoint.lon;
+        routePoint.fakeSubpt.lat = routePoint.lat;
+        routePoint.fakeSubpt.ele = routePoint.ele;
+        startIdx = minDistIdx;
+    }
+
+    rtept_t &rtept = rte.pts.last();
+    rtept.ele = shape[minDistIdx].ele;
+    rtept.fakeSubpt.lon = rtept.lon;
+    rtept.fakeSubpt.lat = rtept.lat;
+    rtept.fakeSubpt.ele = rtept.ele;
+
+    rte.lastRoutedTime = QDateTime::currentDateTimeUtc();
+    rte.lastRoutedWith = QString("BRouter %1").arg(options);
+
+//    <!-- track-length = 9624 filtered ascend = 59 plain-ascend = -8 cost=19415 -->
+    const QDomNodeList &nodes = xml.childNodes();
+    for (int i = 0; i < nodes.count(); i++)
+    {
+        const QDomNode &node = nodes.at(i);
+        if (node.isComment())
+        {
+            const QString &commentTxt = node.toComment().data();
+            // ' track-length = 180864 filtered ascend = 428 plain-ascend = -172 cost=270249 '
+            const QRegExp rxAscDes("(\\s*track-length\\s*=\\s*)(-?\\d+)(\\s*)(filtered ascend\\s*=\\s*-?\\d+)(\\s*)(plain-ascend\\s*=\\s*-?\\d+)(\\s*)(cost\\s*=\\s*-?\\d+)(\\s*)");
+            int pos = rxAscDes.indexIn(commentTxt);
+            if (pos > -1)
+            {
+                rte.totalDistance = rxAscDes.cap(2).toFloat();
+                rte.cmt = QString("%1, %2, %3").arg(rxAscDes.cap(4)).arg(rxAscDes.cap(6)).arg(rxAscDes.cap(8));
+            }
+            break;
+        }
+    }
+
+    deriveSecondaryData();
+    updateHistory();
+}

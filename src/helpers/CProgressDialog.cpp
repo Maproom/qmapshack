@@ -70,6 +70,7 @@ void CProgressDialog::enableCancel(bool yes)
 void CProgressDialog::reject()
 {
     setResult(QMessageBox::Abort);
+    emit rejected();
 }
 
 void CProgressDialog::setValue(int val)

@@ -183,6 +183,11 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\share\"
 	File /r Files\share\*.*
   ;END PROJ.4 Files        
+
+  ;BEGIN QuaZip Files
+  SetOutPath $INSTDIR
+    File Files\quazip5.dll
+  ;END QuaZip Files
   
   ;BEGIN Routino Files    
   SetOutPath $INSTDIR

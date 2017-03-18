@@ -18,14 +18,12 @@ if(BUILD_FOR_LOCAL_SYSTEM)
     if(Flag:${flag})
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
 
-        message(WARNING [=[
- /===============================================================================\
- |                         BUILDING FOR LOCAL SYSTEM ONLY                        |
- |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~                        |
- |Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.|
- |The generated binary will exhibit higher performance,                          |
- |but will not be portable (e.g., might not work on other CPUs)                  |
- \===============================================================================/]=])
+        message(WARNING [=[ 
+ BUILDING FOR LOCAL SYSTEM ONLY
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.
+ The generated binary will exhibit higher performance,
+ but will not be portable (e.g., might not work on other CPUs)]=])
     else(Flag:${flag})
         message(WARNING [=[
  Your compiler does not support -march=native.
@@ -48,6 +46,7 @@ find_package(Qt5PrintSupport)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
+find_package(QuaZip REQUIRED)
 
 if(USE_QT5DBus)
     find_package(Qt5DBus)
@@ -266,7 +265,16 @@ set( SRCS
         gis/rte/router/CRouterSetup.cpp
         gis/rte/router/CRouterRoutino.cpp
         gis/rte/router/CRouterMapQuest.cpp
-        gis/rte/router/CRouterRoutinoPathSetup.cpp
+        gis/rte/router/routino/CRouterRoutinoPathSetup.cpp
+        gis/rte/router/CRouterBRouter.cpp
+        gis/rte/router/brouter/CRouterBRouterInfo.cpp
+        gis/rte/router/brouter/CRouterBRouterSetup.cpp
+        gis/rte/router/brouter/CRouterBRouterSetupPage.cpp
+        gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp
+        gis/rte/router/brouter/CRouterBRouterToolShell.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesPage.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesSelectArea.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -534,7 +542,18 @@ set( HDRS
         gis/rte/router/CRouterSetup.h
         gis/rte/router/CRouterRoutino.h
         gis/rte/router/CRouterMapQuest.h
-        gis/rte/router/CRouterRoutinoPathSetup.h
+        gis/rte/router/routino/CRouterRoutinoPathSetup.h
+        gis/rte/router/CRouterBRouter.h
+        gis/rte/router/brouter/CRouterBRouterInfo.h
+        gis/rte/router/brouter/CRouterBRouterSetup.h
+        gis/rte/router/brouter/CRouterBRouterSetupPage.h
+        gis/rte/router/brouter/CRouterBRouterSetupWizard.h
+        gis/rte/router/brouter/CRouterBRouterToolShell.h
+        gis/rte/router/brouter/CRouterBRouterTilesPage.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelect.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h
+        gis/rte/router/brouter/CRouterBRouterTilesStatus.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h
@@ -694,7 +713,10 @@ set( UIS
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
-    gis/rte/router/IRouterRoutinoPathSetup.ui
+    gis/rte/router/routino/IRouterRoutinoPathSetup.ui
+    gis/rte/router/IRouterBRouter.ui
+    gis/rte/router/brouter/IRouterBRouterInfo.ui
+    gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
@@ -768,7 +790,7 @@ include_directories(
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
-
+    ${QUAZIP_INCLUDE_DIRS}
 )
 
 if(APPLE)
@@ -798,6 +820,7 @@ target_link_libraries(QMS
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
+    ${QUAZIP_LIBRARIES}
 )
 
 target_link_libraries(${APPLICATION_NAME}
@@ -813,6 +836,7 @@ target_link_libraries(${APPLICATION_NAME}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
+    ${QUAZIP_LIBRARIES}
 )
 
 if(APPLE)

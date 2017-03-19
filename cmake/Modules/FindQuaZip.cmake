@@ -34,6 +34,10 @@ else (QUAZIP_LIBRARIES AND QUAZIP_INCLUDE_DIRS)
     )
     mark_as_advanced(QUAZIP_INCLUDE_DIR)
 
+    IF (WIN32)
+        FIND_PATH(QUAZIP_ZLIB_INCLUDE_DIR NAMES zlib.h HINTS HINTS ${QT_DEV_PATH}/include/QtZlib/)
+    ENDIF (WIN32)
+    
     find_library(LIBQUAZIP_LIBRARY
         NAMES
             quazip5
@@ -53,6 +57,7 @@ else (QUAZIP_LIBRARIES AND QUAZIP_INCLUDE_DIRS)
 
     set(QUAZIP_INCLUDE_DIRS
         ${QUAZIP_INCLUDE_DIR}
+        ${QUAZIP_ZLIB_INCLUDE_DIR}
     )
 
     if (LIBQUAZIP_FOUND)

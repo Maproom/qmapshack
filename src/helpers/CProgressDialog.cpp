@@ -42,8 +42,11 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     if(max == NOINT)
     {
         progressBar->hide();
+        // add a timer to update the elapsed time
+        QTimer * timer = new QTimer(this);
+        timer->start(1000);
+        connect(timer, &QTimer::timeout, this, [this]{setValue(0);});
     }
-
     hide();
     QTimer::singleShot(1000, this, SLOT(show()));
 }

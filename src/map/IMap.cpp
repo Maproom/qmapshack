@@ -101,6 +101,11 @@ void IMap::convertM2Rad(QPointF &p) const
 
 void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
 {
+    QVector<QPointF> tmp = l;
+
+    QTime t;
+    t.start();
+
     map->convertRad2Px(l);
 
     // adjust the tiles width and height to fit the buffer's scale
@@ -121,6 +126,69 @@ void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     p.rotate(a);
     p.drawImage(0,0,img);
     p.restore();
+
+    qint32 t1 = t.elapsed();
+
+    // test code
+    p.setPen(Qt::black);
+
+    pj_transform(pjtar, pjsrc, 4, 2, &tmp[0].rx(), &tmp[0].ry(), 0);
+
+    qreal dxSub = (tmp[1].x() - tmp[0].x()) / 10.0;
+    qreal dySub = (tmp[3].y() - tmp[0].y()) / 10.0;
+
+    QRectF rect(0,0, img.width()/10.0, img.height() / 10.0);
+    qreal ox = tmp[0].x();
+    qreal oy = tmp[0].y();
+    for(int x = 0; x < 10; ++x)
+    {
+        rect.moveTop(0);
+        rect.moveLeft(x * rect.width());
+
+        for(int y = 0; y < 10; ++y)
+        {
+            QVector<QPointF> pl = {
+            QPointF(ox, oy),
+            QPointF(ox + dxSub, oy),
+            QPointF(ox + dxSub, oy + dySub),
+            QPointF(ox, oy + dySub)
+            };
+
+            pj_transform(pjsrc, pjtar, 4, 2, &pl[0].rx(), &pl[0].ry(), 0);
+            map->convertRad2Px(pl);
+
+            // adjust the tiles width and height to fit the buffer's scale
+            qreal dx1 = pl[0].x() - pl[1].x();
+            qreal dy1 = pl[0].y() - pl[1].y();
+            qreal dx2 = pl[0].x() - pl[3].x();
+            qreal dy2 = pl[0].y() - pl[3].y();
+            qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
+            qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
+
+            // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
+            qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
+
+            rect.moveTop(rect.height() * y);
+            const QImage& i = img.copy(rect.toRect());
+
+            // finally translate, scale, rotate and draw tile
+            p.save();
+            p.translate(pl[0]);
+            p.scale(w/i.width(), h/i.height());
+            p.rotate(a);
+            p.drawImage(0,0,i);
+            p.restore();
+
+            oy += dySub;
+        }
+
+        ox += dxSub;
+        oy  = tmp[0].y();
+    }
+
+    qint32 t2 = t.elapsed() - t1;
+    qDebug() << t1 << t2;
+
 }
 
 bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&)

@@ -97,6 +97,8 @@ public:
        @param p             the point to convert
      */
     void convertRad2Px(QPointF& p) const;
+
+    void convertRad2Px(QVector<QPointF>& poly) const;
     void convertRad2Px(QPolygonF& poly) const;
 
     /**

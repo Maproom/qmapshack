@@ -294,6 +294,22 @@ void IDrawContext::convertRad2Px(QPointF &p) const
     mutex.unlock(); // --------- stop serialize with thread
 }
 
+void IDrawContext::convertRad2Px(QVector<QPointF>& poly) const
+{
+    mutex.lock(); // --------- start serialize with thread
+
+    QPointF f = focus;
+    convertRad2M(f);
+
+    for(QPointF& p : poly)
+    {
+        convertRad2M(p);
+        p = (p - f) / (scale * zoomFactor) + center;
+    }
+
+    mutex.unlock(); // --------- stop serialize with thread
+}
+
 void IDrawContext::convertRad2Px(QPolygonF& poly) const
 {
     mutex.lock(); // --------- start serialize with thread
@@ -301,15 +317,15 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
     QPointF f = focus;
     convertRad2M(f);
 
-    for(int i = 0; i < poly.size(); i++)
+    for(QPointF& p : poly)
     {
-        QPointF& p = poly[i];
         convertRad2M(p);
         p = (p - f) / (scale * zoomFactor) + center;
     }
 
     mutex.unlock(); // --------- stop serialize with thread
 }
+
 
 void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {

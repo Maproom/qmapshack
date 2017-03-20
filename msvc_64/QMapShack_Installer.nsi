@@ -284,6 +284,6 @@ SectionEnd
 
 Function .onInit
   # set section 'MSVC' as unselected
-  SectionSetFlags ${MSVC} 0
+  #SectionSetFlags ${MSVC} 0
 FunctionEnd
 

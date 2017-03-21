@@ -98,14 +98,16 @@ void IMap::convertM2Rad(QPointF &p) const
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
 }
 
-
-void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
+void IMap::detectTileDrawMode(const IDrawContext::buffer_t &buf)
 {
-    QVector<QPointF> tmp = l;
 
-    QTime t;
-    t.start();
+    fDrawTile = &IMap::drawTileLQ;
+}
 
+
+void IMap::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p)
+{
+    QPolygonF tmp = l;
     map->convertRad2Px(l);
 
     // adjust the tiles width and height to fit the buffer's scale
@@ -115,6 +117,12 @@ void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     qreal dy2 = l[0].y() - l[3].y();
     qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
     qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
+
+    if(dy1 > qAbs(1) || dx2 > qAbs(1))
+    {
+        drawTileHQ(img, tmp, p);
+        return;
+    }
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
     qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
@@ -127,68 +135,99 @@ void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     p.drawImage(0,0,img);
     p.restore();
 
-    qint32 t1 = t.elapsed();
+}
 
-    // test code
-    p.setPen(Qt::black);
 
-    pj_transform(pjtar, pjsrc, 4, 2, &tmp[0].rx(), &tmp[0].ry(), 0);
+void IMap::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p)
+{    
 
-    qreal dxSub = (tmp[1].x() - tmp[0].x()) / 10.0;
-    qreal dySub = (tmp[3].y() - tmp[0].y()) / 10.0;
+    qint32 N_STEPS_X = 8;
+    qint32 N_STEPS_Y = 8;
 
-    QRectF rect(0,0, img.width()/10.0, img.height() / 10.0);
-    qreal ox = tmp[0].x();
-    qreal oy = tmp[0].y();
-    for(int x = 0; x < 10; ++x)
+    if(img.width()/N_STEPS_X < 32)
     {
-        rect.moveTop(0);
-        rect.moveLeft(x * rect.width());
+        N_STEPS_X = 4;
+    }
+    if(img.height()/N_STEPS_Y < 32)
+    {
+        N_STEPS_Y = 4;
+    }
 
-        for(int y = 0; y < 10; ++y)
+    qDebug() << N_STEPS_X << N_STEPS_Y << img.size();
+
+
+    pj_transform(pjtar, pjsrc, 4, 2, &l[0].rx(), &l[0].ry(), 0);
+
+    qreal subStepX = (l[1].x() - l[0].x()) / N_STEPS_X;
+    qreal subStepY = (l[3].y() - l[0].y()) / N_STEPS_Y;
+    qreal offsetX  = l[0].x();
+    qreal offsetY  = l[0].y();
+
+    QPolygonF quads(N_STEPS_X * N_STEPS_Y * 4);
+    QPointF* pPt = quads.data();
+
+    for(int y = 0; y < N_STEPS_Y; ++y)
+    {
+        for(int x = 0; x < N_STEPS_X; ++x)
         {
-            QVector<QPointF> pl = {
-            QPointF(ox, oy),
-            QPointF(ox + dxSub, oy),
-            QPointF(ox + dxSub, oy + dySub),
-            QPointF(ox, oy + dySub)
-            };
+            pPt->rx() = offsetX;
+            pPt->ry() = offsetY;
+            ++pPt;
+            pPt->rx() = offsetX + subStepX;
+            pPt->ry() = offsetY;
+            ++pPt;
+            pPt->rx() = offsetX + subStepX;
+            pPt->ry() = offsetY + subStepY;
+            ++pPt;
+            pPt->rx() = offsetX;
+            pPt->ry() = offsetY + subStepY;
+            ++pPt;
 
-            pj_transform(pjsrc, pjtar, 4, 2, &pl[0].rx(), &pl[0].ry(), 0);
-            map->convertRad2Px(pl);
+            offsetX += subStepX;
+        }
 
+        offsetX  = l[0].x();
+        offsetY += subStepY;
+    }
+
+    pj_transform(pjsrc, pjtar, N_STEPS_X * N_STEPS_Y * 4, 2, &quads[0].rx(), &quads[0].ry(), 0);
+    map->convertRad2Px(quads);
+
+    QRectF rect(0,0, img.width()/N_STEPS_X, img.height() / N_STEPS_Y);
+    const qreal rw = rect.width();
+    const qreal rh = rect.height();
+
+    pPt = quads.data();
+
+    p.setPen(Qt::black);
+    for(int y = 0; y < N_STEPS_Y; ++y)
+    {
+        rect.moveTop(y * rh);
+        for(int x = 0; x < N_STEPS_X; ++x, pPt += 4)
+        {
             // adjust the tiles width and height to fit the buffer's scale
-            qreal dx1 = pl[0].x() - pl[1].x();
-            qreal dy1 = pl[0].y() - pl[1].y();
-            qreal dx2 = pl[0].x() - pl[3].x();
-            qreal dy2 = pl[0].y() - pl[3].y();
+            qreal dx1 = pPt[0].x() - pPt[1].x();
+            qreal dy1 = pPt[0].y() - pPt[1].y();
+            qreal dx2 = pPt[0].x() - pPt[3].x();
+            qreal dy2 = pPt[0].y() - pPt[3].y();
             qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
             qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
             // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
             qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
 
-            rect.moveTop(rect.height() * y);
-            const QImage& i = img.copy(rect.toRect());
+            rect.moveLeft(x * rw);
 
             // finally translate, scale, rotate and draw tile
             p.save();
-            p.translate(pl[0]);
-            p.scale(w/i.width(), h/i.height());
+            p.translate(pPt[0]);
+            p.scale(w/rw, h/rh);
             p.rotate(a);
-            p.drawImage(0,0,i);
+            p.drawImage(QPoint(0,0),img, rect);
+//            p.drawRect(0,0, rw,rh);
             p.restore();
-
-            oy += dySub;
         }
-
-        ox += dxSub;
-        oy  = tmp[0].y();
     }
-
-    qint32 t2 = t.elapsed() - t1;
-    qDebug() << t1 << t2;
-
 }
 
 bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&)

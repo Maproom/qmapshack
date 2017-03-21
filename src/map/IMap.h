@@ -190,6 +190,13 @@ protected:
     void convertRad2M(QPointF &p) const;
     void convertM2Rad(QPointF &p) const;
 
+    /**
+       @brief Detect what reprojection is needed and select the correct handler
+
+       This has to be called prior to the loop that calls drawTile();
+
+     */
+    void detectTileDrawMode(const IDrawContext::buffer_t &buf);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -197,8 +204,19 @@ protected:
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
      */
-    void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
+    void drawTile(const QImage& img, QPolygonF& l, QPainter& p)
+    {
+        (this->*fDrawTile)(img, l, p);
+    }
 
+private:
+    void (IMap::*fDrawTile)(const QImage& img, QPolygonF& l, QPainter& p) = &IMap::drawTileLQ;
+    // draw tiles with low quality re-projection but fast
+    void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p);
+    // draw tiles with hi quality re-projection but slow
+    void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p);
+
+protected:
     /// the drawcontext this map belongs to
     CMapDraw * map;
 

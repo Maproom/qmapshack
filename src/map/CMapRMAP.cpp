@@ -494,6 +494,9 @@ void CMapRMAP::draw(IDrawContext::buffer_t& buf) /* override */
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
+    // detect the best method to reproject the map
+    detectTileDrawMode(buf);
+
     QFile file(filename);
     file.open(QIODevice::ReadOnly);
 

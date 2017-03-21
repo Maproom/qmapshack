@@ -438,9 +438,6 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    // detect the best method to reproject the map
-    detectTileDrawMode(buf);
-
     // calculate maximum viewport
     qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();
     qreal y1 = buf.ref1.y() > buf.ref2.y() ? buf.ref1.y() : buf.ref2.y();

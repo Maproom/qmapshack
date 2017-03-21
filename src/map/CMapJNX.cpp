@@ -306,9 +306,6 @@ void CMapJNX::draw(IDrawContext::buffer_t& buf) /* override */
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    // detect the best method to reproject the map
-    detectTileDrawMode(buf);
-
     for(const file_t &mapFile : files)
     {
         if(!viewport.intersects(mapFile.bbox))

@@ -98,11 +98,6 @@ void IMap::convertM2Rad(QPointF &p) const
     pj_transform(pjsrc,pjtar,1,0,&p.rx(),&p.ry(),0);
 }
 
-void IMap::detectTileDrawMode(const IDrawContext::buffer_t &buf)
-{
-
-    fDrawTile = &IMap::drawTileLQ;
-}
 
 
 void IMap::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p)
@@ -118,7 +113,8 @@ void IMap::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p)
     qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
     qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
-    if(dy1 > qAbs(1) || dx2 > qAbs(1))
+    // switch to HQ if the gaps get visible
+    if((qAbs(dy1) > 2) || (qAbs(dx2) > 2))
     {
         drawTileHQ(img, tmp, p);
         return;
@@ -140,35 +136,38 @@ void IMap::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p)
 
 void IMap::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p)
 {    
-
-    qint32 N_STEPS_X = 8;
-    qint32 N_STEPS_Y = 8;
-
-    if(img.width()/N_STEPS_X < 32)
+    // the sub-tiles need a sensible size
+    // if they get too small there will be too much
+    // rounding effects.
+    qint32 nStepsX = 8;
+    qint32 nStepsY = 8;
+    if(img.width()/nStepsX < 32)
     {
-        N_STEPS_X = 4;
+        nStepsX = 4;
     }
-    if(img.height()/N_STEPS_Y < 32)
+    if(img.height()/nStepsY < 32)
     {
-        N_STEPS_Y = 4;
+        nStepsY = 4;
     }
 
-    qDebug() << N_STEPS_X << N_STEPS_Y << img.size();
-
-
+    // transform the rad coordinates from l into the coord. system
+    // of the map
     pj_transform(pjtar, pjsrc, 4, 2, &l[0].rx(), &l[0].ry(), 0);
 
-    qreal subStepX = (l[1].x() - l[0].x()) / N_STEPS_X;
-    qreal subStepY = (l[3].y() - l[0].y()) / N_STEPS_Y;
+
+    // calculate nStepsX*nStepsY squares evenly distributed over the tile
+    // in map coords
+    qreal subStepX = (l[1].x() - l[0].x()) / nStepsX;
+    qreal subStepY = (l[3].y() - l[0].y()) / nStepsY;
     qreal offsetX  = l[0].x();
     qreal offsetY  = l[0].y();
 
-    QPolygonF quads(N_STEPS_X * N_STEPS_Y * 4);
+    QPolygonF quads(nStepsX * nStepsY * 4);
     QPointF* pPt = quads.data();
 
-    for(int y = 0; y < N_STEPS_Y; ++y)
+    for(int y = 0; y < nStepsY; ++y)
     {
-        for(int x = 0; x < N_STEPS_X; ++x)
+        for(int x = 0; x < nStepsX; ++x)
         {
             pPt->rx() = offsetX;
             pPt->ry() = offsetY;
@@ -190,20 +189,23 @@ void IMap::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p)
         offsetY += subStepY;
     }
 
-    pj_transform(pjsrc, pjtar, N_STEPS_X * N_STEPS_Y * 4, 2, &quads[0].rx(), &quads[0].ry(), 0);
+    // transform the squares back to lon/lat coords in rad
+    pj_transform(pjsrc, pjtar, nStepsX * nStepsY * 4, 2, &quads[0].rx(), &quads[0].ry(), 0);
+    // convert the lon/lat coords of the squares into pixel coords of the
+    // canvas using the view's projection
     map->convertRad2Px(quads);
 
-    QRectF rect(0,0, img.width()/N_STEPS_X, img.height() / N_STEPS_Y);
+    QRectF rect(0,0, img.width()/nStepsX, img.height() / nStepsY);
     const qreal rw = rect.width();
     const qreal rh = rect.height();
 
+    // iterate over all squares, calculate the translation and rotation and draw the part of the
+    // tile matching the square.
     pPt = quads.data();
-
-    p.setPen(Qt::black);
-    for(int y = 0; y < N_STEPS_Y; ++y)
+    for(int y = 0; y < nStepsY; ++y)
     {
         rect.moveTop(y * rh);
-        for(int x = 0; x < N_STEPS_X; ++x, pPt += 4)
+        for(int x = 0; x < nStepsX; ++x, pPt += 4)
         {
             // adjust the tiles width and height to fit the buffer's scale
             qreal dx1 = pPt[0].x() - pPt[1].x();
@@ -216,6 +218,7 @@ void IMap::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p)
             // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
             qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
 
+            // move rect to select the part of the tile to draw.
             rect.moveLeft(x * rw);
 
             // finally translate, scale, rotate and draw tile
@@ -224,7 +227,6 @@ void IMap::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p)
             p.scale(w/rw, h/rh);
             p.rotate(a);
             p.drawImage(QPoint(0,0),img, rect);
-//            p.drawRect(0,0, rw,rh);
             p.restore();
         }
     }

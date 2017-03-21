@@ -169,9 +169,6 @@ void CMapGEMF::draw(IDrawContext::buffer_t &buf)
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
 
-    // detect the best method to reproject the map
-    detectTileDrawMode(buf);
-
     qreal x1 = qMin(buf.ref1.x(), buf.ref4.x());
     qreal y1 = qMax(buf.ref1.y(), buf.ref2.y());
 

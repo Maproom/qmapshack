@@ -206,11 +206,10 @@ protected:
      */
     void drawTile(const QImage& img, QPolygonF& l, QPainter& p)
     {
-        (this->*fDrawTile)(img, l, p);
+        drawTileLQ(img, l, p);
     }
 
 private:
-    void (IMap::*fDrawTile)(const QImage& img, QPolygonF& l, QPainter& p) = &IMap::drawTileLQ;
     // draw tiles with low quality re-projection but fast
     void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p);
     // draw tiles with hi quality re-projection but slow

@@ -25,9 +25,10 @@
 
 
 CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
-    : IToolShell(textBrowser, parent)
+    : IToolShell(parent)
 {
     setupUi(this);
+    setTextBrowser(textBrowser);
 
     setObjectName(tr("Create Routino Database"));
 

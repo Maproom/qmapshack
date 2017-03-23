@@ -20,9 +20,8 @@
 
 #include <QtWidgets>
 
-IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
+IToolShell::IToolShell(QWidget * parent)
     : QWidget(parent)
-    , text(textBrowser)
 {
     connect(&cmd, &QProcess::readyReadStandardError,  this, &IToolShell::slotStderr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
@@ -33,40 +32,41 @@ IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
 
 IToolShell::~IToolShell()
 {
-    // text is not owned by IToolShell:
-    text = nullptr;
 }
 
-void IToolShell::setOutputBrowser(QTextBrowser * text)
-{
-}
 
 void IToolShell::slotError(QProcess::ProcessError error)
 {
-    if (text != nullptr)
+    if (text.isNull())
     {
-        text->setTextColor(Qt::red);
-        text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
-        switch(error)
-        {
-        case QProcess::FailedToStart:
-            text->insertPlainText(QString(tr("Process cannot be started.\n")));
-            text->insertPlainText(QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n")).arg(cmd.program()));
-            break;
+        return;
+    }
+    text->setTextColor(Qt::red);
+    text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
+    switch(error)
+    {
+    case QProcess::FailedToStart:
+        text->insertPlainText(QString(tr("Process cannot be started.\n")));
+        text->insertPlainText(QString(tr("Make sure the required packages are installed, `%1` exists and is executable.\n")).arg(cmd.program()));
+        break;
 
-        case QProcess::Crashed:
-            text->insertPlainText(QString(tr("External process crashed.\n")));
-            break;
+    case QProcess::Crashed:
+        text->insertPlainText(QString(tr("External process crashed.\n")));
+        break;
 
-        default:
-            text->insertPlainText(QString(tr("An unknown error occurred.\n")));
-            break;
-        }
+    default:
+        text->insertPlainText(QString(tr("An unknown error occurred.\n")));
+        break;
     }
 }
 
 void IToolShell::slotStderr()
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     QString str;
     text->setTextColor(Qt::red);
     str = cmd.readAllStandardError();
@@ -101,6 +101,11 @@ void IToolShell::slotStderr()
 
 void IToolShell::slotStdout()
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     QString str;
     text->setTextColor(Qt::blue);
     str = cmd.readAllStandardOutput();
@@ -132,15 +137,25 @@ void IToolShell::slotStdout()
     text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
 }
 
-void IToolShell::stdOut(const QString& str, bool gui)
+void IToolShell::stdOut(const QString& str)
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     text->setTextColor(Qt::black);
     text->append(str);
 }
 
 
-void IToolShell::stdErr(const QString& str, bool gui)
+void IToolShell::stdErr(const QString& str)
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     text->setTextColor(Qt::red);
     text->append(str);
 }
@@ -150,7 +165,7 @@ void IToolShell::slotFinished(int exitCode, QProcess::ExitStatus status)
 {
     if(exitCode || status)
     {
-        if (text != nullptr)
+        if (!text.isNull())
         {
             text->setTextColor(Qt::red);
             text->append(tr("!!! failed !!!\n"));

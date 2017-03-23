@@ -28,7 +28,7 @@ class IToolShell : public QWidget
 {
     Q_OBJECT
 public:
-    IToolShell(QTextBrowser *textBrowser, QWidget *parent);
+    IToolShell(QTextBrowser *&textBrowser, QWidget *parent);
     virtual ~IToolShell();
 
 protected slots:
@@ -46,7 +46,7 @@ protected:
 
     QProcess cmd;
 
-    QTextBrowser * text;
+    QTextBrowser *& text;
 };
 
 #endif //ITOOLSHELL_H

@@ -25,7 +25,7 @@ class CRouterBRouterToolShell : public IToolShell
 {
     Q_OBJECT
 public:
-    CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent);
+    CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent);
     virtual ~CRouterBRouterToolShell();
 
     void start(const QString &dir, const QString &command, const QStringList &args);

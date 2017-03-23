@@ -21,9 +21,10 @@
 
 #include <QtWidgets>
 
-CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *&textBrowser, QWidget * parent)
-    : IToolShell(textBrowser,parent)
+CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWidget * parent)
+    : IToolShell(parent)
 {
+    setTextBrowser(textBrowser);
     connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
     connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &CRouterBRouterToolShell::slotError);
 }

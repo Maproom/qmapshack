@@ -22,9 +22,10 @@
 #include <QtWidgets>
 
 CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
-    : IToolShell(textBrowser, parent)
+    : IToolShell(parent)
 {
     setupUi(this);
+    setTextBrowser(textBrowser);
     setObjectName(tr("Build GDAL VRT"));
 
     connect(toolSourceFiles, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectSourceFiles);

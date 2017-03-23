@@ -32,6 +32,7 @@ IToolShell::IToolShell(QWidget * parent)
 
 IToolShell::~IToolShell()
 {
+    text = nullptr;
 }
 
 

@@ -269,27 +269,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
     }
 }
 
-
 void IDem::drawTile(QImage& img, QPolygonF& l, QPainter& p)
 {
-    dem->convertRad2Px(l);
-
-    // adjust the tiles width and height to fit the buffer's scale
-    qreal dx1   = l[0].x() - l[1].x();
-    qreal dy1   = l[0].y() - l[1].y();
-    qreal dx2   = l[0].x() - l[3].x();
-    qreal dy2   = l[0].y() - l[3].y();
-    qreal w    = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
-    qreal h    = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
-
-    // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-    qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
-
-    // finally translate, scale, rotate and draw tile
-    p.save();
-    p.translate(l[0]);
-    p.scale(w/img.width(), h/img.height());
-    p.rotate(a);
-    p.drawImage(0,0,img);
-    p.restore();
+    drawTileLQ(img, l, p, *dem, pjsrc, pjtar);
 }

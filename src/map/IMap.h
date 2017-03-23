@@ -19,7 +19,6 @@
 #ifndef IMAP_H
 #define IMAP_H
 
-#include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include <QImage>
 #include <QMutex>
@@ -204,16 +203,8 @@ protected:
        @param l     a 4 point polygon to fit the tile in
        @param p     the QPainter used to paint the tile
      */
-    void drawTile(const QImage& img, QPolygonF& l, QPainter& p)
-    {
-        drawTileLQ(img, l, p);
-    }
+    void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
 
-private:
-    // draw tiles with low quality re-projection but fast
-    void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p);
-    // draw tiles with hi quality re-projection but slow
-    void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p);
 
 protected:
     /// the drawcontext this map belongs to

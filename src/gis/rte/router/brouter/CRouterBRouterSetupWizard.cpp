@@ -439,11 +439,11 @@ void CRouterBRouterSetupWizard::updateLocalDirectory() const
     {
         if (QFileInfo(setup->localJavaExecutable).baseName().startsWith("java"))
         {
-            labelLocalJavaResult->setText("seems to be a valid Java-executable");
+            labelLocalJavaResult->setText(tr("seems to be a valid Java-executable"));
         }
         else
         {
-            labelLocalJavaResult->setText("doesn't seem to be a valid Java-executable");
+            labelLocalJavaResult->setText(tr("doesn't seem to be a valid Java-executable"));
         }
     }
     else

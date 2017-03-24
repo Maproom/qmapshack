@@ -21,9 +21,12 @@
 
 #include "units/IUnit.h"
 #include <QObject>
+#include <proj_api.h>
 
 class QSettings;
 class QListWidget;
+class QPainter;
+class IDrawContext;
 
 class IDrawObject : public QObject
 {
@@ -126,6 +129,12 @@ protected:
     virtual void configureCache()
     {
     }
+
+
+    // draw tiles with low quality re-projection but fast
+    void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
+    // draw tiles with high quality re-projection but slow
+    void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
 
 private:
     /// the opacity level of a map

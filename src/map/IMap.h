@@ -19,7 +19,6 @@
 #ifndef IMAP_H
 #define IMAP_H
 
-#include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include <QImage>
 #include <QMutex>
@@ -190,6 +189,13 @@ protected:
     void convertRad2M(QPointF &p) const;
     void convertM2Rad(QPointF &p) const;
 
+    /**
+       @brief Detect what reprojection is needed and select the correct handler
+
+       This has to be called prior to the loop that calls drawTile();
+
+     */
+    void detectTileDrawMode(const IDrawContext::buffer_t &buf);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -199,6 +205,8 @@ protected:
      */
     void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
 
+
+protected:
     /// the drawcontext this map belongs to
     CMapDraw * map;
 

@@ -99,31 +99,13 @@ void IMap::convertM2Rad(QPointF &p) const
 }
 
 
-void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
-{
-    map->convertRad2Px(l);
-
-    // adjust the tiles width and height to fit the buffer's scale
-    qreal dx1 = l[0].x() - l[1].x();
-    qreal dy1 = l[0].y() - l[1].y();
-    qreal dx2 = l[0].x() - l[3].x();
-    qreal dy2 = l[0].y() - l[3].y();
-    qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
-    qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
-
-    // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
-    qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;
-
-    // finally translate, scale, rotate and draw tile
-    p.save();
-    p.translate(l[0]);
-    p.scale(w/img.width(), h/img.height());
-    p.rotate(a);
-    p.drawImage(0,0,img);
-    p.restore();
-}
-
 bool IMap::findPolylineCloseBy(const QPointF&, const QPointF&, qint32, QPolygonF&)
 {
     return false;
 }
+
+void IMap::drawTile(const QImage& img, QPolygonF& l, QPainter& p)
+{
+    drawTileLQ(img, l, p, *map, pjsrc, pjtar);
+}
+

@@ -91,12 +91,20 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
         int success = 0;
         qreal idx = pBand->GetNoDataValue(&success);
-
         if(success)
         {
-            QColor tmp(colortable[idx]);
-            tmp.setAlpha(0);
-            colortable[idx] = tmp.rgba();
+            if((idx > 0) && (idx < colortable.size()))
+            {
+                QColor tmp(colortable[idx]);
+                tmp.setAlpha(0);
+                colortable[idx] = tmp.rgba();
+            }
+            else
+            {
+                qDebug() << "Index for no data value is out of bound";
+                return;
+            }
+
         }
     }
 

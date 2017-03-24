@@ -1725,7 +1725,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Change Icon (sel. waypt. only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Измененить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="627"/>
@@ -2977,7 +2977,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="39"/>
         <source>Add POI as Waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить достопримечательность как маршрутную точку</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="40"/>
@@ -3387,114 +3387,114 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="49"/>
         <source>original</source>
-        <translation type="unfinished"></translation>
+        <translation>Оригинал</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="50"/>
         <source>first alternative</source>
-        <translation type="unfinished"></translation>
+        <translation>Первая альтернатива</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="51"/>
         <source>second alternative</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторая альтернатива</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="52"/>
         <source>third alternative</source>
-        <translation type="unfinished"></translation>
+        <translation>Третья альтернатива</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="147"/>
         <source>BRouter (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (без Интернета)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="152"/>
         <source>BRouter (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (требуется связь с Интернетом)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="180"/>
         <source>profile: %1, alternative: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль: %1, альтернатива: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="267"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="381"/>
         <source>response is empty</source>
-        <translation type="unfinished"></translation>
+        <translation>Ответ пуст</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="304"/>
         <source>Bad response from server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Плохой ответ от сервера: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="352"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Запрос маршрутизации отправлен на сервер. Пожалуйста, подождите...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="246"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="355"/>
         <source>Calculate route with %1</source>
-        <translation type="unfinished">Вычислить маршрут с %1</translation>
+        <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="415"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервер:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="405"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
-        <translation type="unfinished">&lt;br/&gt;Продолжительность расчета: %1 сек</translation>
+        <translation>&lt;br/&gt;Время расчета: %1 сек.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="509"/>
         <source>Error</source>
-        <translation type="unfinished">Ошибка</translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="561"/>
         <source>running</source>
-        <translation type="unfinished"></translation>
+        <translation>Запущено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
         <source>starting</source>
-        <translation type="unfinished"></translation>
+        <translation>Идет запуск</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="515"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack взаимодействует с BRouter через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter слушает соединения на всех доступных интерфейсах. Если вы находитесь в своей частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, так как он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы не рекомендуем использовать локальную службу BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="542"/>
         <source>Warning...</source>
-        <translation type="unfinished">Предупреждение...</translation>
+        <translation>Предупреждение...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="547"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Я понимаю риск. Больше не говорите.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="568"/>
         <source>stopped</source>
-        <translation type="unfinished"></translation>
+        <translation>Остановлено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="579"/>
         <source>not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не установлено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="590"/>
         <source>online</source>
-        <translation type="unfinished"></translation>
+        <translation>Онлайн</translation>
     </message>
 </context>
 <context>
@@ -3502,22 +3502,22 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="479"/>
         <source>%1 not accessible</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 не доступно</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="489"/>
         <source>%1 invalid result</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 неверный ресультат</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="533"/>
         <source>Error parsing online-config:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при анализе онлайн конфигурации:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="538"/>
         <source>Network error:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка сети:</translation>
     </message>
 </context>
 <context>
@@ -3525,154 +3525,154 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="38"/>
         <source>Restore Default Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить умолчание</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="371"/>
         <source>Open Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть папку</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="378"/>
         <source>select Java Executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать исполняемый файл Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="414"/>
         <source>please select BRouter installation directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать папку установки BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="419"/>
         <source>selected directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранная папка не существует</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="420"/>
         <source>create directory and install BRouter there</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать папку и установить там BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="427"/>
         <source>existing BRouter installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Существующая установка BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="428"/>
         <source>update existing BRouter installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить существующую установку BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
         <source>empty directory, create new BRouter installation here</source>
-        <translation type="unfinished"></translation>
+        <translation>Пустая папка, создать там новую установку BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="434"/>
         <source>create new BRouter installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую установку BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
         <source>Java Executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемый файл Java не найден</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="496"/>
         <source>Error loading installation-page at %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка загрузки страницы установки в %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="505"/>
         <source>no brouter-version to install selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Версия BRouter для установки не выбрана</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="513"/>
         <source>selected %1 for download and installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрано %1 для загрузки и установки</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="524"/>
         <source>Warning...</source>
-        <translation type="unfinished">Предупреждение...</translation>
+        <translation>Предупреждение...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="529"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загузка:%1 &lt;br/&gt;Это загрузит и установит файл ZIP из места загрузки, которое не защищено никаким стандартом вообще, используя простой HTTP. Обычно это должно быть HTTPS. Риск заключается в том, что кто-то перенаправляет запрос и отправляет вам заменяющий ZIP с помощью вредоносной программы. QMapShack не может обнаружить это. &lt;br/&gt; Если вы не понимаете этого или если у вас есть сомнения, не начинайте и прерываете. Вместо этого используйте веб-версию BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="541"/>
         <source>I understand the risk and wish to proceed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Я понимаю риск и хочу продолжить.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="553"/>
         <source>download %1 started</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка %1 началась</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="565"/>
         <source>Network Error: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка сети: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="586"/>
         <source>download %1 finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка %1 завершена</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="588"/>
         <source>unzipping:</source>
-        <translation type="unfinished"></translation>
+        <translation>Распаковка:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="593"/>
         <source>ready.</source>
-        <translation type="unfinished"></translation>
+        <translation>Готово.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="613"/>
         <source>download of brouter failed: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка BRouter не удалась: %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="623"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="630"/>
         <source>retrieving available profiles from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить доступные профили из %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="654"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="736"/>
         <source>content of profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержание профиля</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="729"/>
         <source>Error:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка: </translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="466"/>
         <source>Error creating directory %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания папки %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="571"/>
         <source>Error directory %1 does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка: папка %1 не существует</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="578"/>
         <source>Error creating file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания фаыла %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="582"/>
         <source>Error writing to file %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка записи в файл %1</translation>
     </message>
 </context>
 <context>
@@ -3680,7 +3680,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesPage.cpp" line="82"/>
         <source>Continue with Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжать настройку</translation>
     </message>
 </context>
 <context>
@@ -3688,125 +3688,125 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="98"/>
         <source>available routing-data is being determined.</source>
-        <translation type="unfinished"></translation>
+        <translation>Определяются доступные данные маршрутизации.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="108"/>
         <source>Select outdated</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать устаревшее</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="109"/>
         <source>Clear Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить выделение</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="110"/>
         <source>Delete selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить выделение</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="111"/>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="281"/>
         <source>Error creating segments directory %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания каталога сегментов %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="365"/>
         <source>cannot parse: %1 is not a date</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно разобрать: %1 не является допустимой датой</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="390"/>
         <source>cannot parse: %1 is not a valid size</source>
-        <translation type="unfinished"></translation>
+        <translation>Невозможно разобрать: %1 не является допустимым размером</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="409"/>
         <source>Error retrieving available routing data from %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка получения доступных данных маршрутизации из %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="490"/>
         <source>segments directory does not exist: </source>
-        <translation type="unfinished"></translation>
+        <translation>Папка сегментов не существует</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="504"/>
         <source>error creating file %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка создания файла сегментов %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="536"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="576"/>
         <source>no valid request for filename %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Недействительный запрос имени файла %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="541"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
         <source>no open file assigned to request for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>К запросу для %1 не был назначен открытый файл</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="551"/>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="594"/>
         <source>error writing to file %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка записи в файл %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
         <source>error renaming file %1 to %2: %3</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка переименования файла %1 до %2: %3</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="685"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
-        <translation type="unfinished"></translation>
+        <translation>Верно: %1 (%2), устарело: %3 (%4), загрузить: %5 (%6)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="783"/>
         <source>being downloaded: %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Загружено: %1 от %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="803"/>
         <source>no local data, online available: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет локальных данных, доступно в Интернете: %1 (%2)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="789"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальные данные устарелы (%1, %2 - удаленные %3, %4)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="190"/>
         <source>Error removing %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="321"/>
         <source>Network Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка сети</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="330"/>
         <source>invalid result, no files found</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный результат, файлы не найдены</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="797"/>
         <source>local data up to date (%1, %2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальные данные верны</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="809"/>
         <source>no routing-data available</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет доступных данных маршрутизации</translation>
     </message>
 </context>
 <context>
@@ -3815,13 +3815,13 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="73"/>
         <source>!!! done !!!
 </source>
-        <translation type="unfinished">Сделано!</translation>
+        <translation>Сделано!</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="78"/>
         <source>!!! failed !!!
 </source>
-        <translation type="unfinished">!Не удалось!</translation>
+        <translation>Не удалось!</translation>
     </message>
 </context>
 <context>
@@ -4201,7 +4201,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="40"/>
         <source>BRouter (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (требуется связь с Интернетом)</translation>
     </message>
 </context>
 <context>
@@ -4458,7 +4458,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="101"/>
         <source>This TCX file contains at least 1 workout, but neither an activity nor a course. As workouts do not contain position data, they can not be imported to QMapShack.</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот файл TCX содержит по крайней мере 1 тренировку, но нет ни активности, ни курса. Поскольку тренировки не содержат данных позиции, они не могут быть импортированы в QMapShack.</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="106"/>
@@ -4468,63 +4468,63 @@ line %2, column %3:
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="275"/>
         <source>File exists ...</source>
-        <translation type="unfinished">Файл существует...</translation>
+        <translation>Файл существует...</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="276"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл существует и не создан в QMapShack. Если нажать &apos;да&apos; все данные в этом файле будут потеряны. Даже если этот файл содержит данные GPX и был загружен в QMapShack, QMapShack не может загрузить и сохранить все элементы этого файла. Такие элементы будут потеряны. Рекомендуется использовать другой файл. &lt;b&gt;Вы действительно хотите перезаписать этот файл?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="315"/>
         <source>The track &lt;b&gt;%1&lt;/b&gt; you have selected contains trackpoints with invalid timestamps. Device might not accept the generated TCX course file if left as is. &lt;b&gt;Do you want to apply a filter with constant speed (10 m/s) and continue?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранный трек &lt;b&gt;%1&lt;/b&gt; содержит точки трека с недопустимыми временными метками. Устройство может не принять сгенерированный файл курса TCX, если оставить его как есть. &lt;b&gt;Хотите вы применить фильтр с постоянной скоростью (10 м/с) и продолжить?&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
         <source>Course</source>
-        <translation type="unfinished">Курс</translation>
+        <translation>Курс</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Мероприятие</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="341"/>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="314"/>
         <source>Track with invalid timestamps...</source>
-        <translation type="unfinished"></translation>
+        <translation>Трек с неверными метками времени...</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="334"/>
         <source>Activity or course?</source>
-        <translation type="unfinished"></translation>
+        <translation>Мероприятие или курс?</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="335"/>
         <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack не знает, как следует сохранить трек &lt;b&gt;%1&lt;/b&gt;.&lt;b&gt; Сохранить его как курс или как мероприятие? &lt;/b&gt;Помните, что только путевые точки, достаточно близкие к треку, будут сохранены при сохранении в качестве курса. Путевые точки не сохраняются при сохранении в качестве мероприятия.</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="432"/>
         <source>Failed to create file &apos;%1&apos;</source>
-        <translation type="unfinished">Не удалось создать файл &apos;%1&apos;</translation>
+        <translation>Не удалось создать файл &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="453"/>
         <source>Failed to write file &apos;%1&apos;</source>
-        <translation type="unfinished">Не удалось записать файл &apos;%1&apos;</translation>
+        <translation>Не удалось записать файл &apos;%1&apos;</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="435"/>
         <location filename="../gis/tcx/CTcxProject.cpp" line="454"/>
         <source>Saving GIS data failed...</source>
-        <translation type="unfinished">Не удалось записать данные GIS...</translation>
+        <translation>Не удалось сохранить данные GIS...</translation>
     </message>
 </context>
 <context>
@@ -4647,7 +4647,7 @@ line %2, column %3:
     <message>
         <location filename="../IAbout.ui" line="212"/>
         <source>Oliver Eichler</source>
-        <translation type="unfinished"></translation>
+        <translation>Oliver Eichler</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="225"/>
@@ -4734,7 +4734,9 @@ line %2, column %3:
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</source>
-        <translation type="unfinished"></translation>
+        <translation>Christian Eichler (qms@christian-eichler.de)
+Ivo Kronenberg
+Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="421"/>
@@ -7314,64 +7316,64 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="28"/>
         <source>Profile</source>
-        <translation type="unfinished">Профиль</translation>
+        <translation>Профиль</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="35"/>
         <source>Alternative</source>
-        <translation type="unfinished"></translation>
+        <translation>Альтернатива</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="64"/>
         <source>display selected routing profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Отобразить выбранный профиль маршрутизации</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="67"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="128"/>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="142"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="87"/>
         <source>on-the-fly routing</source>
-        <translation type="unfinished"></translation>
+        <translation>Маршрутизация на лету</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="111"/>
         <source>BRouter: </source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="118"/>
         <source>not running</source>
-        <translation type="unfinished"></translation>
+        <translation>Не запущено</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="125"/>
         <source>start/stop BRouter</source>
-        <translation type="unfinished"></translation>
+        <translation>Старт / стоп BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="139"/>
         <source>show BRouter console</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать консоль BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="172"/>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="181"/>
         <source>Caution! BRouter is listening on all ports for connections.</source>
-        <translation type="unfinished"></translation>
+        <translation>Осторожно! BRouter прослушивает все порты для соединений.</translation>
     </message>
 </context>
 <context>
@@ -7379,12 +7381,12 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="14"/>
         <source>BRouter Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Профиль BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterInfo.ui" line="20"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
 </context>
 <context>
@@ -7392,37 +7394,37 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="23"/>
         <source>BRouter Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="48"/>
         <source>choose which BRouter to use</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите, какой BRouter использовать</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="54"/>
         <source>BRouter-Web (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter-Web (онлайн)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="61"/>
         <source>local Installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Локальная установка</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="68"/>
         <source>Expert Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспертный режим</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="91"/>
         <source>local BRouter Installation directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка для локальной установки:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="103"/>
         <source>select installation directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать папку установки:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
@@ -7432,137 +7434,138 @@ or
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="389"/>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="400"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="119"/>
         <source>labelLocalDirResult</source>
-        <translation type="unfinished"></translation>
+        <translation>labelLocalDirResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="128"/>
         <source>create or update installation</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать или обновить установку</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="152"/>
         <source>Java Executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Исполняемый файл Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="175"/>
         <source>labelLocalJavaResult</source>
-        <translation type="unfinished"></translation>
+        <translation>labelLocalJavaResult</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="184"/>
         <source>search for installed java</source>
-        <translation type="unfinished"></translation>
+        <translation>Искать установленный Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="241"/>
         <source>Download and install BRouter Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Зарузить и установить версия BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="255"/>
         <source>about:blank</source>
-        <translation type="unfinished">about:blank</translation>
+        <translatorcomment>about:blank</translatorcomment>
+        <translation>about:blank</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="263"/>
         <source>File to install</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл для установки</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="272"/>
         <source>Download and Install</source>
-        <translation type="unfinished"></translation>
+        <translation>Зарузить и установить</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="321"/>
         <source>available Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступные профили</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="339"/>
         <source>install profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить профиль</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="353"/>
         <source>remove profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить профиль</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="371"/>
         <source>installed Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Установленные профили</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="415"/>
         <source>content of profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Содержание профиля</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="451"/>
         <source>BRouter-Web URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter-Web URL:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="501"/>
         <source>Service-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL для сервисов</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="511"/>
         <source>Profile-URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL для профилей</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="561"/>
         <source>Hostname</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя узла </translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="571"/>
         <source>Port</source>
-        <translation type="unfinished">Порт</translation>
+        <translation>Порт</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="581"/>
         <source>Profile directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка для профилей</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="591"/>
         <source>Segments directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка для сегментов</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="601"/>
         <source>Custom Profiles dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Папка для настраиваемого профиля</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="611"/>
         <source>Max Runtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Максимальная продолжительность выполнения</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="621"/>
         <source>Number Threads</source>
-        <translation type="unfinished"></translation>
+        <translation>Количество потоков</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="631"/>
         <source>Java Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
         <source>Profiles Url</source>
-        <translation type="unfinished"></translation>
+        <translation>URL для профилей</translation>
     </message>
 </context>
 <context>
@@ -8085,7 +8088,7 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="99"/>
         <source>Change the icon of all selected waypoints.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить пиктограммы всех выбранных маршрутных точек.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="119"/>

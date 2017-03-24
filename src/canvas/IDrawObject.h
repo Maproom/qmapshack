@@ -133,7 +133,7 @@ protected:
 
     // draw tiles with low quality re-projection but fast
     void drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
-    // draw tiles with hi quality re-projection but slow
+    // draw tiles with high quality re-projection but slow
     void drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDrawContext& context, projPJ pjsrc, projPJ pjtar);
 
 private:

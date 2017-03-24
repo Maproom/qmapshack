@@ -2643,21 +2643,21 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2364"/>
-        <location filename="../map/CMapIMG.cpp" line="2370"/>
-        <location filename="../map/CMapIMG.cpp" line="2374"/>
+        <location filename="../map/CMapIMG.cpp" line="2342"/>
+        <location filename="../map/CMapIMG.cpp" line="2348"/>
+        <location filename="../map/CMapIMG.cpp" line="2352"/>
         <source>Point of Interest</source>
         <translation>Interessant punt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2460"/>
+        <location filename="../map/CMapIMG.cpp" line="2438"/>
         <source>Unknown</source>
         <translation>Onbekend</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2502"/>
-        <location filename="../map/CMapIMG.cpp" line="2510"/>
-        <location filename="../map/CMapIMG.cpp" line="2517"/>
+        <location filename="../map/CMapIMG.cpp" line="2480"/>
+        <location filename="../map/CMapIMG.cpp" line="2488"/>
+        <location filename="../map/CMapIMG.cpp" line="2495"/>
         <source>Area</source>
         <translation>Gebied</translation>
     </message>
@@ -2828,22 +2828,22 @@ lijn %2, kolom %3:
 <context>
     <name>CMapVrtBuilder</name>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="28"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="29"/>
         <source>Build GDAL VRT</source>
         <translation>GDAL VRT maken</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="46"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="47"/>
         <source>Select files...</source>
         <translation>Selecteer bestanden...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="70"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="71"/>
         <source>Select target file...</source>
         <translation>Selecteer doel bestand...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="114"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="115"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
@@ -3151,7 +3151,7 @@ y: %4 m/px</translation>
         <translation>Verstreken tijd: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="83"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="86"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation>Verstreken tijd: %1 seconden.</translation>
     </message>
@@ -3572,6 +3572,16 @@ is geen geldig coordinaat definitie:
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="442"/>
+        <source>seems to be a valid Java-executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="446"/>
+        <source>doesn&apos;t seem to be a valid Java-executable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
         <source>Java Executable not found</source>
         <translation type="unfinished"></translation>
@@ -3811,14 +3821,14 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="73"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="74"/>
         <source>!!! done !!!
 </source>
         <translation type="unfinished">!!! klaar !!!
 </translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="78"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="79"/>
         <source>!!! failed !!!
 </source>
         <translation type="unfinished">!!! Mislukt !!!
@@ -3953,7 +3963,6 @@ is geen geldig coordinaat definitie:
     <name>CRouterRoutino</name>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="55"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="238"/>
         <source>Warning...</source>
         <translation>Waarschuwing...</translation>
     </message>
@@ -4158,18 +4167,13 @@ is geen geldig coordinaat definitie:
         <translation>, modus &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="238"/>
-        <source>%1: Due to limitations in the Windows POSIX API Routino can&apos;t handle files larger than 4GB.</source>
-        <translation>%1 Door beperkingen in de Windows POSIX API Routino kunnen geen bestanden groter dan 4GB gebruikt worden.</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="338"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="425"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="332"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="419"/>
         <source>Calculate route with %1</source>
         <translation>Bereken route met %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="346"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="340"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berekenen tijd: %1s</translation>
     </message>
@@ -4208,22 +4212,22 @@ is geen geldig coordinaat definitie:
 <context>
     <name>CRoutinoDatabaseBuilder</name>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="32"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="33"/>
         <source>Create Routino Database</source>
         <translation>Maak Routino database</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="56"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="57"/>
         <source>Select files...</source>
         <translation>Selecteer bestanden...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="80"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="81"/>
         <source>Select target path...</source>
         <translation>Selecteer doel map...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="141"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="142"/>
         <source>!!! done !!!
 </source>
         <translation>!!! klaar !!!
@@ -8987,40 +8991,40 @@ of
 <context>
     <name>IToolShell</name>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="49"/>
+        <location filename="../tool/IToolShell.cpp" line="46"/>
         <source>Execution of external program `%1` failed: </source>
         <translation>Starten van extern programma `%1` mislukt:</translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="53"/>
+        <location filename="../tool/IToolShell.cpp" line="50"/>
         <source>Process cannot be started.
 </source>
         <translation>Het proces kan niet gestart worden.
 </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="54"/>
+        <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
         <translation>De benodigde pakketten dienen geïnstalleerd te zijn, `%1` bestaat en is uitvoerbaar.
 </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="58"/>
+        <location filename="../tool/IToolShell.cpp" line="55"/>
         <source>External process crashed.
 </source>
         <translation>Extern proces is vast gelopen.
 </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="62"/>
+        <location filename="../tool/IToolShell.cpp" line="59"/>
         <source>An unknown error occurred.
 </source>
         <translation>Een onbekende fout is opgetreden.
 </translation>
     </message>
     <message>
-        <location filename="../tool/IToolShell.cpp" line="156"/>
+        <location filename="../tool/IToolShell.cpp" line="172"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! Mislukt !!!

@@ -33,6 +33,8 @@ private slots:
 
 private:
     QLocalServer * server = nullptr;
+
+    QString serverName;
 };
 
 #endif //CSINGLEINSTANCEPROXY_H

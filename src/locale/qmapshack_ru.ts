@@ -1252,7 +1252,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="96"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
-        <translation>Скрыть точки при помощи алгоритма Douglas Peuker (%1%2)</translation>
+        <translation>Скрыть точки при помощи алгоритма Douglas-Peuker (%1%2)</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="122"/>
@@ -1725,7 +1725,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Change Icon (sel. waypt. only)</source>
-        <translation>Измененить пиктограмму (выбрать только маршрутные точки)</translation>
+        <translation>Изменить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="627"/>
@@ -2048,7 +2048,7 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="157"/>
         <source>Unspecified</source>
-        <translation>Неуказано</translation>
+        <translation>Не указано</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="158"/>
@@ -3575,12 +3575,12 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="442"/>
         <source>seems to be a valid Java-executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Вероятно, является допустимым исполняемым файлом Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="446"/>
         <source>doesn&apos;t seem to be a valid Java-executable</source>
-        <translation type="unfinished"></translation>
+        <translation>Не похоже на допустый исполняемый файл Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
@@ -3677,7 +3677,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="578"/>
         <source>Error creating file %1</source>
-        <translation>Ошибка создания фаыла %1</translation>
+        <translation>Ошибка создания файла %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="582"/>
@@ -3743,7 +3743,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="490"/>
         <source>segments directory does not exist: </source>
-        <translation>Папка сегментов не существует</translation>
+        <translation>Папка сегментов не существует:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="504"/>
@@ -3811,7 +3811,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="797"/>
         <source>local data up to date (%1, %2)</source>
-        <translation>Локальные данные верны</translation>
+        <translation>Локальные данные верны (%1, %2)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="809"/>
@@ -7428,7 +7428,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="103"/>
         <source>select installation directory</source>
-        <translation>Выбрать папку установки:</translation>
+        <translation>Выбрать папку установки</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="106"/>
@@ -7468,7 +7468,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="241"/>
         <source>Download and install BRouter Version</source>
-        <translation>Зарузить и установить версия BRouter</translation>
+        <translation>Загрузить и установить версия BRouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="255"/>
@@ -7484,7 +7484,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="272"/>
         <source>Download and Install</source>
-        <translation>Зарузить и установить</translation>
+        <translation>Загрузить и установить</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="321"/>
@@ -7564,7 +7564,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="631"/>
         <source>Java Options</source>
-        <translation>Параметри Java</translation>
+        <translation>Параметры Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>

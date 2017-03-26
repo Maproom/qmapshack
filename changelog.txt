@@ -1,3 +1,24 @@
+V 1.8.0
+Add: Links to quickstart help
+Add: Russian translation
+Add: TCX file read and write support
+Add: Different cut modes for track cut function
+Add: Option for optimized build for local system architecture 
+Add: Support for BRouter (online/offline)
+Add: Enhance reprojection between projections like merc/utm/lcc
+[Issue #152] Garmin maps: Alter scale to detail level table
+[Issue #189] Fix drawing of range selection in trkptedit mode
+[Issue #189] Draw bubble after line to prevent drawing over bubble
+[Issue #195] Copy errors in message (file)?
+[Issue #198] Logfile encoding
+[Issue #201] Provide 'Import GIS data' in database menu
+[Issue #204] Option to allow only one QMS instance at one time
+[Issue #211] Desired feature: change symbol for multiple selected waypoints
+[Issue #213] Adding a Garmin POI as waypoint
+[Issue #214] Crash when creating Routino database
+[Issue #217] BRouter setup window - not translated string
+[Issue #218] CSingleInstanceProxy & Multiuser
+
 V 1.7.2
 
 * Add: Export to GPX V1.1 without extensions

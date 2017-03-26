@@ -104,7 +104,6 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
                 qDebug() << "Index for no data value is out of bound";
                 return;
             }
-
         }
     }
 

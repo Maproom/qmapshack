@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "canvas/IDrawObject.h"
 #include "canvas/IDrawContext.h"
+#include "canvas/IDrawObject.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -121,7 +121,6 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     p.rotate(a);
     p.drawImage(0,0,img);
     p.restore();
-
 }
 
 

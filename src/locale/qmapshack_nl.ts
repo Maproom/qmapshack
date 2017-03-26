@@ -2804,7 +2804,7 @@ lijn %2, kolom %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="88"/>
-        <location filename="../map/CMapVRT.cpp" line="126"/>
+        <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
@@ -2820,7 +2820,7 @@ lijn %2, kolom %3:
         <translation>Bestand moet 8 bit kleur of grijs geindexeerd zijn.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="126"/>
+        <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>No georeference information found.</source>
         <translation>Geen geografische gegevens gevonden.</translation>
     </message>

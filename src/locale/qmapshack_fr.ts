@@ -2804,7 +2804,7 @@ ligne %2, colonne %3:
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
         <location filename="../map/CMapVRT.cpp" line="88"/>
-        <location filename="../map/CMapVRT.cpp" line="126"/>
+        <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>Error...</source>
         <translation>Erreur...</translation>
     </message>
@@ -2820,7 +2820,7 @@ ligne %2, colonne %3:
         <translation>Le fichier doit avoir une palette à 8 bits ou être en niveaux de gris.</translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="126"/>
+        <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>No georeference information found.</source>
         <translation>Aucune information de géoréférencement trouvé</translation>
     </message>

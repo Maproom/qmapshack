@@ -610,7 +610,7 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
 
 QString CRouterBRouterSetup::findJava() const
 {
-    return QStandardPaths::findExecutable("java");
+    return IAppSetup::getPlatformInstance()->findExecutable("java");
 }
 
 void CRouterBRouterSetup::onInvalidSetup()

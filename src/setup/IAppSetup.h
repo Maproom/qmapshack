@@ -36,6 +36,7 @@ public:
     virtual QString defaultCachePath() = 0;
     virtual QString userDataPath(QString subdir = 0) = 0;
     virtual QString logDir() = 0;
+    virtual QString findExecutable(const QString &name) = 0;
 
 protected:
     void prepareGdal(QString gdalDir, QString projDir);

@@ -296,7 +296,7 @@ void IDrawContext::convertRad2Px(QPointF &p) const
 
 
 void IDrawContext::convertRad2Px(QPolygonF& poly) const
-{    
+{
     if(pjsrc == nullptr)
     {
         return;
@@ -325,7 +325,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
         range of -180..180°. But the draw context has no
         turnaround. It exceeds the values. We have to
         apply fixes in that case.
-    */
+     */
     for(int i = 0; i < N; ++i, ++pFix, pY += 2)
     {
         if(*pY < (-180*DEG_TO_RAD))
@@ -349,7 +349,7 @@ void IDrawContext::convertRad2Px(QPolygonF& poly) const
             The idea of the fix is to calculate a point
             at the boundary with the same latitude and use it
             as offset.
-        */
+         */
         if(pFix->fixWest != NOFLOAT)
         {
             QPointF o(-180*DEG_TO_RAD, pFix->fixWest);

@@ -19,9 +19,9 @@
 #ifndef ITOOLSHELL_H
 #define ITOOLSHELL_H
 
+#include <QPointer>
 #include <QProcess>
 #include <QWidget>
-#include <QPointer>
 
 class QTextBrowser;
 

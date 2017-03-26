@@ -31,6 +31,7 @@ public:
     QString defaultCachePath() override;
     QString userDataPath(QString subdir = 0) override;
     QString logDir() override;
+    QString findExecutable(const QString &name) { return QStandardPaths::findExecutable(name); }
 };
 
 

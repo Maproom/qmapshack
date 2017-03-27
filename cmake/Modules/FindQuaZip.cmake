@@ -28,6 +28,9 @@ else (QUAZIP_LIBRARIES AND QUAZIP_INCLUDE_DIRS)
             /usr/include/quazip5
             /usr/local/include/quazip5
             /opt/local/include/quazip5
+            /usr/include/quazip
+            /usr/local/include/quazip
+            /opt/local/include/quazip
             /sw/include/quazip5
             ${CMAKE_INSTALL_PREFIX}/include
             ${QUAZIP_DEV_PATH}/include/

@@ -30,6 +30,7 @@
 class CMapDraw;
 class CGrid;
 class CDemDraw;
+class QGestureEvent;
 class CGisDraw;
 class CGisItemWpt;
 class CGisItemTrk;
@@ -155,6 +156,8 @@ public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
 
 protected:
+    bool event(QEvent *) override;
+    bool gestureEvent(QGestureEvent *e);
     void resizeEvent(QResizeEvent *e) override;
     void paintEvent(QPaintEvent  *e) override;
     void mousePressEvent(QMouseEvent  *e) override;

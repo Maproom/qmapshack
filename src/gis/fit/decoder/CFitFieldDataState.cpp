@@ -148,10 +148,10 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
     quint8 fieldDefNr = 0;
     quint8 devDataIdx = 0;
     quint8 baseType = eBaseTypeNrInvalid;
-    quint8 scale = 0;
+    qreal scale = 0;
     quint8 array = 0;
     QString components;
-    qint8 offset = 0;
+    qint16 offset = 0;
     QString units;
     QString bits;
     QString accumulate;
@@ -162,28 +162,28 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
     for (const CFitField field : mesg.getFields()) {
         switch (field.getFieldDefNr()) {
             case eFieldDescriptionDeveloperDataIndex:
-                devDataIdx = field.getValue().toUInt();
+                devDataIdx = (quint8) field.getValue().toUInt();
                 break;
             case eFieldDescriptionFieldDefinitionNumber:
-                fieldDefNr = field.getValue().toUInt();
+                fieldDefNr = (quint8) field.getValue().toUInt();
                 break;
             case eFieldDescriptionFitBaseTypeId:
-                baseType = field.getValue().toUInt(); // enum
+                baseType = (quint8) field.getValue().toUInt(); // enum
                 break;
             case eFieldDescriptionFieldName:
                 fieldName = field.getValue().toString();
                 break;
             case eFieldDescriptionArray:
-                array = field.getValue().toUInt();
+                array = (quint8) field.getValue().toUInt();
                 break;
             case eFieldDescriptionComponents:
                 components = field.getValue().toString();
                 break;
             case eFieldDescriptionScale:
-                scale = field.getValue().toUInt();
+                scale = (qreal) field.getValue().toDouble();
                 break;
             case eFieldDescriptionOffset:
-                offset = field.getValue().toInt();
+                offset = (qint16) field.getValue().toInt();
                 break;
             case eFieldDescriptionUnits:
                 units = field.getValue().toString();
@@ -195,13 +195,13 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
                 accumulate = field.getValue().toString();
                 break;
             case eFieldDescriptionFitBaseUnitId:
-                baseUnitId = field.getValue().toUInt(); // enum
+                baseUnitId = (quint8) field.getValue().toUInt(); // enum
                 break;
             case eFieldDescriptionNativeMesgNum:
-                natvieMesgNum = field.getValue().toUInt(); // enum
+                natvieMesgNum = (quint8) field.getValue().toUInt(); // enum
                 break;
             case eFieldDescriptionNativeFieldNum:
-                nativeFieldNum = field.getValue().toUInt();
+                nativeFieldNum = (quint8) field.getValue().toUInt();
                 break;
             default:
                 throw tr("FIT decoding error: invalid field def nr %1 while creating dev field profile.")
@@ -211,7 +211,7 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
     }
 
     CFitFieldProfile devFieldProfile = CFitFieldProfile(nullptr, fieldName, *CFitBaseTypeMap::get(baseType), fieldDefNr,
-                                                        (qreal) scale, (quint16) offset, units, eFieldTypeDevelopment);
+                                                        scale, offset, units, eFieldTypeDevelopment);
     // TODO complete field profile
 
     // TODO a development field definition is is linked to an developer data ID. It is needed if more than one

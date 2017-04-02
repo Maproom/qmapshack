@@ -17,9 +17,9 @@ The input for the generator are two CSV files (beware the line ending must be li
 - Profile_Messages.csv
 - Profile_Types.csv
 
-These csv files are the export from the Excel "Profiles.xlsx" within the FIT SDK (Current Version 16.20).
+These csv files are the export from the Excel "Profiles.xlsx" within the FIT SDK (Current Version 20.27).
 
-The generator "profiles.sh" is a bash script and needs at least bash version 4.3.
+The generator "profiles.py" is a python script and needs python 2.7.
 The generator creates separate files. The code must be placed at the corresponding source code manually 
 (in between the above mentioned comments).
 The generator creates files with the same name as the files mentioned above plus a prefix "gen-" 

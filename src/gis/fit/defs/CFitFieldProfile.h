@@ -26,12 +26,17 @@ class CFitSubfieldProfile;
 class CFitComponentfieldProfile;
 class CFitBaseType;
 
+typedef enum {
+    eFieldTypeFit = 0,
+    eFieldTypeDevelopment = 1,
+} field_type_e;
+
 class CFitFieldProfile
 {
 public:
     CFitFieldProfile();
     CFitFieldProfile(const CFitFieldProfile& copy);
-    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units);
+    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, field_type_e fieldType = eFieldTypeFit);
     virtual ~CFitFieldProfile();
 
     void addSubfield(CFitSubfieldProfile* subfield);
@@ -54,12 +59,15 @@ public:
     QList<CFitComponentfieldProfile*> getComponents() const;
 
     const CFitProfile* getProfile() const;
+    field_type_e getFieldType() const { return fieldType; }
+    QString fieldProfileInfo();
 private:
     QString name;
     quint8 fieldDefNr;
     qreal scale;
     quint16 offset;
     QString units;
+    field_type_e fieldType;
 
     const CFitBaseType* baseType;
     CFitProfile* profile;

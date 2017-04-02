@@ -16,28 +16,28 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/decoder/CFitFieldDefinitionState.h"
+#include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/defs/fit_const.h"
 
 /**
  * byte
- * 0: field definition number
+ * 0: field number
  * 1: size in bytes of field data
- * 2: base type
+ * 2: developer data index (maps to developer data id message)
  */
 
-void CFitFieldDefinitionState::reset()
+void CFitDevFieldDefinitionState::reset()
 {
     offset = 0;
 }
 
-decode_state_e CFitFieldDefinitionState::process(quint8 &dataByte)
+decode_state_e CFitDevFieldDefinitionState::process(quint8 &dataByte)
 {
     switch (offset++)
     {
     case 0:
-        // field definition number
-        defNr = dataByte;
+        // field number
+        fieldNr = dataByte;
         break;
 
     case 1:
@@ -46,25 +46,22 @@ decode_state_e CFitFieldDefinitionState::process(quint8 &dataByte)
         break;
 
     case 2:
-        // field base type
-        type = dataByte;
+        // field developer data index
+        devDataIndex = dataByte;
         // get the previously (in RecordHeaderState) added definition message
         CFitDefinitionMessage* def = latestDefinition();
+        CFitFieldProfile* profile = devFieldProfile(fieldNr);
+
         // add the new field definition
-        def->addField(CFitFieldDefinition(def, defNr, size, type));
+        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, size, devDataIndex));
         reset();
-        if (def->getFields().size() >= def->getNrOfFields())
+        if (def->getDevFields().size() >= def->getNrOfDevFields())
         {
-            if(def->developerFlag())
-            {
-                return eDecoderStateRecordContent;
-            }
             FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
             endDefinition();
-
             return eDecoderStateRecord;
         }
     }
 
-    return eDecoderStateFieldDef;
+    return eDecoderStateDevFieldDef;
 }

@@ -20,6 +20,7 @@
 #include "gis/fit/decoder/CFitDecoder.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/decoder/CFitFieldDefinitionState.h"
+#include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/decoder/CFitHeaderState.h"
 #include "gis/fit/decoder/CFitRecordContentState.h"
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
@@ -31,6 +32,7 @@ CFitDecoder::CFitDecoder()
     stateMap[eDecoderStateRecord] = new CFitRecordHeaderState(data);
     stateMap[eDecoderStateRecordContent] = new CFitRecordContentState(data);
     stateMap[eDecoderStateFieldDef] = new CFitFieldDefinitionState(data);
+    stateMap[eDecoderStateDevFieldDef] = new CFitDevFieldDefinitionState(data);
     stateMap[eDecoderStateFieldData] = new CFitFieldDataState(data);
     stateMap[eDecoderStateFileCrc] = new CFitCrcState(data);
 }

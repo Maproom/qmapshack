@@ -25,9 +25,11 @@ class CFitDefinitionMessage;
 class CFitBaseType;
 class CFitFieldProfile;
 
+
 class CFitFieldDefinition final
 {
 public:
+    CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 size, quint8 type);
     CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type);
     CFitFieldDefinition();
 

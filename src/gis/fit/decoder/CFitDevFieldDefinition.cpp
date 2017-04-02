@@ -25,13 +25,8 @@
 #include "gis/fit/defs/fit_const.h"
 
 
-CFitDevFieldDefinition::CFitDevFieldDefinition(CFitDefinitionMessage* parent, quint8 fieldNr, quint8 size, quint8 devDataIndex)
+CFitDevFieldDefinition::CFitDevFieldDefinition(quint8 fieldNr, quint8 size, quint8 devDataIndex)
     : fieldNr(fieldNr), size(size), devDataIndex(devDataIndex)
-{
-}
-
-CFitDevFieldDefinition::CFitDevFieldDefinition()
-    : CFitDevFieldDefinition(nullptr, 0, 0, 0)
 {
 }
 

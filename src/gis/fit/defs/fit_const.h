@@ -26,7 +26,7 @@
  * 1: prints fit messages and definitions after finishing decoding
  * 2: 1 + prints fit messages and definitions during decoding (just after finishing one)
  */
-#define FITDEBUGLVL 2
+#define FITDEBUGLVL 1
 
 #define FITDEBUG(level, cmd) if(FITDEBUGLVL >= level) { cmd; }
 

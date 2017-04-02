@@ -27,12 +27,12 @@ typedef enum {
     eFileIdTimeCreated = 4,
     eFileIdNumber = 5,
     eFileIdProductName = 8
-} messagefile_id_e;
+} message_file_id_e;
 
 typedef enum {
     eFileCreatorSoftwareVersion = 0,
     eFileCreatorHardwareVersion = 1
-} messagefile_creator_e;
+} message_file_creator_e;
 
 typedef enum {
     eTimestampCorrelationTimestamp = 253,
@@ -42,25 +42,25 @@ typedef enum {
     eTimestampCorrelationLocalTimestamp = 3,
     eTimestampCorrelationTimestampMs = 4,
     eTimestampCorrelationSystemTimestampMs = 5
-} messagetimestamp_correlation_e;
+} message_timestamp_correlation_e;
 
 typedef enum {
     eSoftwareMessageIndex = 254,
     eSoftwareVersion = 3,
     eSoftwarePartNumber = 5
-} messagesoftware_e;
+} message_software_e;
 
 typedef enum {
     eSlaveDeviceManufacturer = 0,
     eSlaveDeviceProduct = 1
-} messageslave_device_e;
+} message_slave_device_e;
 
 typedef enum {
     eCapabilitiesLanguages = 0,
     eCapabilitiesSports = 1,
     eCapabilitiesWorkoutsSupported = 21,
     eCapabilitiesConnectivitySupported = 23
-} messagecapabilities_e;
+} message_capabilities_e;
 
 typedef enum {
     eFileCapabilitiesMessageIndex = 254,
@@ -69,7 +69,7 @@ typedef enum {
     eFileCapabilitiesDirectory = 2,
     eFileCapabilitiesMaxCount = 3,
     eFileCapabilitiesMaxSize = 4
-} messagefile_capabilities_e;
+} message_file_capabilities_e;
 
 typedef enum {
     eMesgCapabilitiesMessageIndex = 254,
@@ -77,7 +77,7 @@ typedef enum {
     eMesgCapabilitiesMesgNum = 1,
     eMesgCapabilitiesCountType = 2,
     eMesgCapabilitiesCount = 3
-} messagemesg_capabilities_e;
+} message_mesg_capabilities_e;
 
 typedef enum {
     eFieldCapabilitiesMessageIndex = 254,
@@ -85,7 +85,7 @@ typedef enum {
     eFieldCapabilitiesMesgNum = 1,
     eFieldCapabilitiesFieldNum = 2,
     eFieldCapabilitiesCount = 3
-} messagefield_capabilities_e;
+} message_field_capabilities_e;
 
 typedef enum {
     eDeviceSettingsActiveTimeZone = 0,
@@ -110,7 +110,7 @@ typedef enum {
     eDeviceSettingsAutoActivityDetect = 90,
     eDeviceSettingsNumberOfScreens = 94,
     eDeviceSettingsSmartNotificationDisplayOrientation = 95
-} messagedevice_settings_e;
+} message_device_settings_e;
 
 typedef enum {
     eUserProfileMessageIndex = 254,
@@ -140,7 +140,7 @@ typedef enum {
     eUserProfileHeightSetting = 30,
     eUserProfileUserRunningStepLength = 31,
     eUserProfileUserWalkingStepLength = 32
-} messageuser_profile_e;
+} message_user_profile_e;
 
 typedef enum {
     eHrmProfileMessageIndex = 254,
@@ -148,7 +148,7 @@ typedef enum {
     eHrmProfileHrmAntId = 1,
     eHrmProfileLogHrv = 2,
     eHrmProfileHrmAntIdTransType = 3
-} messagehrm_profile_e;
+} message_hrm_profile_e;
 
 typedef enum {
     eSdmProfileMessageIndex = 254,
@@ -159,7 +159,7 @@ typedef enum {
     eSdmProfileSpeedSource = 4,
     eSdmProfileSdmAntIdTransType = 5,
     eSdmProfileOdometerRollover = 7
-} messagesdm_profile_e;
+} message_sdm_profile_e;
 
 typedef enum {
     eBikeProfileMessageIndex = 254,
@@ -194,7 +194,7 @@ typedef enum {
     eBikeProfileRearGearNum = 40,
     eBikeProfileRearGear = 41,
     eBikeProfileShimanoDi2Enabled = 44
-} messagebike_profile_e;
+} message_bike_profile_e;
 
 typedef enum {
     eConnectivityBluetoothEnabled = 0,
@@ -210,17 +210,17 @@ typedef enum {
     eConnectivityGpsEphemerisDownloadEnabled = 10,
     eConnectivityIncidentDetectionEnabled = 11,
     eConnectivityGrouptrackEnabled = 12
-} messageconnectivity_e;
+} message_connectivity_e;
 
 typedef enum {
     eWatchfaceSettingsMessageIndex = 254,
     eWatchfaceSettingsMode = 0,
     eWatchfaceSettingsLayout = 1
-} messagewatchface_settings_e;
+} message_watchface_settings_e;
 
 typedef enum {
     eOhrSettingsEnabled = 0
-} messageohr_settings_e;
+} message_ohr_settings_e;
 
 typedef enum {
     eZonesTargetMaxHeartRate = 1,
@@ -228,44 +228,44 @@ typedef enum {
     eZonesTargetFunctionalThresholdPower = 3,
     eZonesTargetHrCalcType = 5,
     eZonesTargetPwrCalcType = 7
-} messagezones_target_e;
+} message_zones_target_e;
 
 typedef enum {
     eSportSport = 0,
     eSportSubSport = 1,
     eSportName = 3
-} messagesport_e;
+} message_sport_e;
 
 typedef enum {
     eHrZoneMessageIndex = 254,
     eHrZoneHighBpm = 1,
     eHrZoneName = 2
-} messagehr_zone_e;
+} message_hr_zone_e;
 
 typedef enum {
     eSpeedZoneMessageIndex = 254,
     eSpeedZoneHighValue = 0,
     eSpeedZoneName = 1
-} messagespeed_zone_e;
+} message_speed_zone_e;
 
 typedef enum {
     eCadenceZoneMessageIndex = 254,
     eCadenceZoneHighValue = 0,
     eCadenceZoneName = 1
-} messagecadence_zone_e;
+} message_cadence_zone_e;
 
 typedef enum {
     ePowerZoneMessageIndex = 254,
     ePowerZoneHighValue = 1,
     ePowerZoneName = 2
-} messagepower_zone_e;
+} message_power_zone_e;
 
 typedef enum {
     eMetZoneMessageIndex = 254,
     eMetZoneHighBpm = 1,
     eMetZoneCalories = 2,
     eMetZoneFatCalories = 3
-} messagemet_zone_e;
+} message_met_zone_e;
 
 typedef enum {
     eGoalMessageIndex = 254,
@@ -281,7 +281,7 @@ typedef enum {
     eGoalRecurrenceValue = 9,
     eGoalEnabled = 10,
     eGoalSource = 11
-} messagegoal_e;
+} message_goal_e;
 
 typedef enum {
     eActivityTimestamp = 253,
@@ -292,7 +292,7 @@ typedef enum {
     eActivityEventType = 4,
     eActivityLocalTimestamp = 5,
     eActivityEventGroup = 6
-} messageactivity_e;
+} message_activity_e;
 
 typedef enum {
     eSessionMessageIndex = 254,
@@ -414,7 +414,7 @@ typedef enum {
     eSessionAvgStepLength = 134,
     eSessionTotalAnaerobicTrainingEffect = 137,
     eSessionAvgVam = 139
-} messagesession_e;
+} message_session_e;
 
 typedef enum {
     eLapMessageIndex = 254,
@@ -523,7 +523,7 @@ typedef enum {
     eLapAvgStanceTimeBalance = 119,
     eLapAvgStepLength = 120,
     eLapAvgVam = 121
-} messagelap_e;
+} message_lap_e;
 
 typedef enum {
     eLengthMessageIndex = 254,
@@ -544,7 +544,7 @@ typedef enum {
     eLengthOpponentScore = 19,
     eLengthStrokeCount = 20,
     eLengthZoneCount = 21
-} messagelength_e;
+} message_length_e;
 
 typedef enum {
     eRecordTimestamp = 253,
@@ -606,7 +606,7 @@ typedef enum {
     eRecordVerticalRatio = 83,
     eRecordStanceTimeBalance = 84,
     eRecordStepLength = 85
-} messagerecord_e;
+} message_record_e;
 
 typedef enum {
     eEventTimestamp = 253,
@@ -622,7 +622,7 @@ typedef enum {
     eEventRearGearNum = 11,
     eEventRearGear = 12,
     eEventDeviceIndex = 13
-} messageevent_e;
+} message_event_e;
 
 typedef enum {
     eDeviceInfoTimestamp = 253,
@@ -643,7 +643,7 @@ typedef enum {
     eDeviceInfoAntNetwork = 22,
     eDeviceInfoSourceType = 25,
     eDeviceInfoProductName = 27
-} messagedevice_info_e;
+} message_device_info_e;
 
 typedef enum {
     eTrainingFileTimestamp = 253,
@@ -652,11 +652,11 @@ typedef enum {
     eTrainingFileProduct = 2,
     eTrainingFileSerialNumber = 3,
     eTrainingFileTimeCreated = 4
-} messagetraining_file_e;
+} message_training_file_e;
 
 typedef enum {
     eHrvTime = 0
-} messagehrv_e;
+} message_hrv_e;
 
 typedef enum {
     eWeatherConditionsTimestamp = 253,
@@ -675,7 +675,7 @@ typedef enum {
     eWeatherConditionsDayOfWeek = 12,
     eWeatherConditionsHighTemperature = 13,
     eWeatherConditionsLowTemperature = 14
-} messageweather_conditions_e;
+} message_weather_conditions_e;
 
 typedef enum {
     eWeatherAlertTimestamp = 253,
@@ -684,7 +684,7 @@ typedef enum {
     eWeatherAlertExpireTime = 2,
     eWeatherAlertSeverity = 3,
     eWeatherAlertType = 4
-} messageweather_alert_e;
+} message_weather_alert_e;
 
 typedef enum {
     eGpsMetadataTimestamp = 253,
@@ -696,7 +696,7 @@ typedef enum {
     eGpsMetadataHeading = 5,
     eGpsMetadataUtcTimestamp = 6,
     eGpsMetadataVelocity = 7
-} messagegps_metadata_e;
+} message_gps_metadata_e;
 
 typedef enum {
     eCameraEventTimestamp = 253,
@@ -704,7 +704,7 @@ typedef enum {
     eCameraEventCameraEventType = 1,
     eCameraEventCameraFileUuid = 2,
     eCameraEventCameraOrientation = 3
-} messagecamera_event_e;
+} message_camera_event_e;
 
 typedef enum {
     eGyroscopeDataTimestamp = 253,
@@ -716,7 +716,7 @@ typedef enum {
     eGyroscopeDataCalibratedGyroX = 5,
     eGyroscopeDataCalibratedGyroY = 6,
     eGyroscopeDataCalibratedGyroZ = 7
-} messagegyroscope_data_e;
+} message_gyroscope_data_e;
 
 typedef enum {
     eAccelerometerDataTimestamp = 253,
@@ -731,7 +731,7 @@ typedef enum {
     eAccelerometerDataCompressedCalibratedAccelX = 8,
     eAccelerometerDataCompressedCalibratedAccelY = 9,
     eAccelerometerDataCompressedCalibratedAccelZ = 10
-} messageaccelerometer_data_e;
+} message_accelerometer_data_e;
 
 typedef enum {
     eMagnetometerDataTimestamp = 253,
@@ -743,7 +743,7 @@ typedef enum {
     eMagnetometerDataCalibratedMagX = 5,
     eMagnetometerDataCalibratedMagY = 6,
     eMagnetometerDataCalibratedMagZ = 7
-} messagemagnetometer_data_e;
+} message_magnetometer_data_e;
 
 typedef enum {
     eThreeDSensorCalibrationTimestamp = 253,
@@ -753,13 +753,13 @@ typedef enum {
     eThreeDSensorCalibrationLevelShift = 3,
     eThreeDSensorCalibrationOffsetCal = 4,
     eThreeDSensorCalibrationOrientationMatrix = 5
-} messagethree_d_sensor_calibration_e;
+} message_three_d_sensor_calibration_e;
 
 typedef enum {
     eVideoFrameTimestamp = 253,
     eVideoFrameTimestampMs = 0,
     eVideoFrameFrameNumber = 1
-} messagevideo_frame_e;
+} message_video_frame_e;
 
 typedef enum {
     eObdiiDataTimestamp = 253,
@@ -771,13 +771,13 @@ typedef enum {
     eObdiiDataSystemTime = 5,
     eObdiiDataStartTimestamp = 6,
     eObdiiDataStartTimestampMs = 7
-} messageobdii_data_e;
+} message_obdii_data_e;
 
 typedef enum {
     eNmeaSentenceTimestamp = 253,
     eNmeaSentenceTimestampMs = 0,
     eNmeaSentenceSentence = 1
-} messagenmea_sentence_e;
+} message_nmea_sentence_e;
 
 typedef enum {
     eAviationAttitudeTimestamp = 253,
@@ -792,25 +792,25 @@ typedef enum {
     eAviationAttitudeAttitudeStageComplete = 8,
     eAviationAttitudeTrack = 9,
     eAviationAttitudeValidity = 10
-} messageaviation_attitude_e;
+} message_aviation_attitude_e;
 
 typedef enum {
     eVideoUrl = 0,
     eVideoHostingProvider = 1,
     eVideoDuration = 2
-} messagevideo_e;
+} message_video_e;
 
 typedef enum {
     eVideoTitleMessageIndex = 254,
     eVideoTitleMessageCount = 0,
     eVideoTitleText = 1
-} messagevideo_title_e;
+} message_video_title_e;
 
 typedef enum {
     eVideoDescriptionMessageIndex = 254,
     eVideoDescriptionMessageCount = 0,
     eVideoDescriptionText = 1
-} messagevideo_description_e;
+} message_video_description_e;
 
 typedef enum {
     eVideoClipClipNumber = 0,
@@ -820,14 +820,14 @@ typedef enum {
     eVideoClipEndTimestampMs = 4,
     eVideoClipClipStart = 6,
     eVideoClipClipEnd = 7
-} messagevideo_clip_e;
+} message_video_clip_e;
 
 typedef enum {
     eCourseSport = 4,
     eCourseName = 5,
     eCourseCapabilities = 6,
     eCourseSubSport = 7
-} messagecourse_e;
+} message_course_e;
 
 typedef enum {
     eCoursePointMessageIndex = 254,
@@ -838,7 +838,7 @@ typedef enum {
     eCoursePointType = 5,
     eCoursePointName = 6,
     eCoursePointFavorite = 8
-} messagecourse_point_e;
+} message_course_point_e;
 
 typedef enum {
     eSegmentIdName = 0,
@@ -850,7 +850,7 @@ typedef enum {
     eSegmentIdDefaultRaceLeader = 6,
     eSegmentIdDeleteStatus = 7,
     eSegmentIdSelectionType = 8
-} messagesegment_id_e;
+} message_segment_id_e;
 
 typedef enum {
     eSegmentLeaderboardEntryMessageIndex = 254,
@@ -860,7 +860,7 @@ typedef enum {
     eSegmentLeaderboardEntryActivityId = 3,
     eSegmentLeaderboardEntrySegmentTime = 4,
     eSegmentLeaderboardEntryActivityIdString = 5
-} messagesegment_leaderboard_entry_e;
+} message_segment_leaderboard_entry_e;
 
 typedef enum {
     eSegmentPointMessageIndex = 254,
@@ -869,7 +869,7 @@ typedef enum {
     eSegmentPointDistance = 3,
     eSegmentPointAltitude = 4,
     eSegmentPointLeaderTime = 5
-} messagesegment_point_e;
+} message_segment_point_e;
 
 typedef enum {
     eSegmentLapMessageIndex = 254,
@@ -958,7 +958,7 @@ typedef enum {
     eSegmentLapAvgCadencePosition = 81,
     eSegmentLapMaxCadencePosition = 82,
     eSegmentLapManufacturer = 83
-} messagesegment_lap_e;
+} message_segment_lap_e;
 
 typedef enum {
     eSegmentFileMessageIndex = 254,
@@ -970,14 +970,14 @@ typedef enum {
     eSegmentFileLeaderActivityId = 9,
     eSegmentFileLeaderActivityIdString = 10,
     eSegmentFileDefaultRaceLeader = 11
-} messagesegment_file_e;
+} message_segment_file_e;
 
 typedef enum {
     eWorkoutSport = 4,
     eWorkoutCapabilities = 5,
     eWorkoutNumValidSteps = 6,
     eWorkoutWktName = 8
-} messageworkout_e;
+} message_workout_e;
 
 typedef enum {
     eWorkoutStepMessageIndex = 254,
@@ -990,7 +990,7 @@ typedef enum {
     eWorkoutStepCustomTargetValueHigh = 6,
     eWorkoutStepIntensity = 7,
     eWorkoutStepNotes = 8
-} messageworkout_step_e;
+} message_workout_step_e;
 
 typedef enum {
     eScheduleManufacturer = 0,
@@ -1000,7 +1000,7 @@ typedef enum {
     eScheduleCompleted = 4,
     eScheduleType = 5,
     eScheduleScheduledTime = 6
-} messageschedule_e;
+} message_schedule_e;
 
 typedef enum {
     eTotalsMessageIndex = 254,
@@ -1013,7 +1013,7 @@ typedef enum {
     eTotalsSessions = 5,
     eTotalsActiveTime = 6,
     eTotalsSportIndex = 9
-} messagetotals_e;
+} message_totals_e;
 
 typedef enum {
     eWeightScaleTimestamp = 253,
@@ -1029,7 +1029,7 @@ typedef enum {
     eWeightScaleMetabolicAge = 10,
     eWeightScaleVisceralFatRating = 11,
     eWeightScaleUserProfileIndex = 12
-} messageweight_scale_e;
+} message_weight_scale_e;
 
 typedef enum {
     eBloodPressureTimestamp = 253,
@@ -1043,7 +1043,7 @@ typedef enum {
     eBloodPressureHeartRateType = 7,
     eBloodPressureStatus = 8,
     eBloodPressureUserProfileIndex = 9
-} messageblood_pressure_e;
+} message_blood_pressure_e;
 
 typedef enum {
     eMonitoringInfoTimestamp = 253,
@@ -1052,7 +1052,7 @@ typedef enum {
     eMonitoringInfoCyclesToDistance = 3,
     eMonitoringInfoCyclesToCalories = 4,
     eMonitoringInfoRestingMetabolicRate = 5
-} messagemonitoring_info_e;
+} message_monitoring_info_e;
 
 typedef enum {
     eMonitoringTimestamp = 253,
@@ -1084,7 +1084,7 @@ typedef enum {
     eMonitoringDescent = 32,
     eMonitoringModerateActivityMinutes = 33,
     eMonitoringVigorousActivityMinutes = 34
-} messagemonitoring_e;
+} message_monitoring_e;
 
 typedef enum {
     eHrTimestamp = 253,
@@ -1093,14 +1093,14 @@ typedef enum {
     eHrFilteredBpm = 6,
     eHrEventTimestamp = 9,
     eHrEventTimestamp12 = 10
-} messagehr_e;
+} message_hr_e;
 
 typedef enum {
     eMemoGlobPartIndex = 250,
     eMemoGlobMemo = 0,
     eMemoGlobMessageNumber = 1,
     eMemoGlobMessageIndex = 2
-} messagememo_glob_e;
+} message_memo_glob_e;
 
 typedef enum {
     eAntChannelIdChannelNumber = 0,
@@ -1108,7 +1108,7 @@ typedef enum {
     eAntChannelIdDeviceNumber = 2,
     eAntChannelIdTransmissionType = 3,
     eAntChannelIdDeviceIndex = 4
-} messageant_channel_id_e;
+} message_ant_channel_id_e;
 
 typedef enum {
     eAntRxTimestamp = 253,
@@ -1117,7 +1117,7 @@ typedef enum {
     eAntRxMesgData = 2,
     eAntRxChannelNumber = 3,
     eAntRxData = 4
-} messageant_rx_e;
+} message_ant_rx_e;
 
 typedef enum {
     eAntTxTimestamp = 253,
@@ -1126,14 +1126,14 @@ typedef enum {
     eAntTxMesgData = 2,
     eAntTxChannelNumber = 3,
     eAntTxData = 4
-} messageant_tx_e;
+} message_ant_tx_e;
 
 typedef enum {
     eExdScreenConfigurationScreenIndex = 0,
     eExdScreenConfigurationFieldCount = 1,
     eExdScreenConfigurationLayout = 2,
     eExdScreenConfigurationScreenEnabled = 3
-} messageexd_screen_configuration_e;
+} message_exd_screen_configuration_e;
 
 typedef enum {
     eExdDataFieldConfigurationScreenIndex = 0,
@@ -1142,7 +1142,7 @@ typedef enum {
     eExdDataFieldConfigurationConceptCount = 3,
     eExdDataFieldConfigurationDisplayType = 4,
     eExdDataFieldConfigurationTitle = 5
-} messageexd_data_field_configuration_e;
+} message_exd_data_field_configuration_e;
 
 typedef enum {
     eExdDataConceptConfigurationScreenIndex = 0,
@@ -1156,7 +1156,7 @@ typedef enum {
     eExdDataConceptConfigurationQualifier = 9,
     eExdDataConceptConfigurationDescriptor = 10,
     eExdDataConceptConfigurationIsSigned = 11
-} messageexd_data_concept_configuration_e;
+} message_exd_data_concept_configuration_e;
 
 typedef enum {
     eFieldDescriptionDeveloperDataIndex = 0,
@@ -1173,7 +1173,7 @@ typedef enum {
     eFieldDescriptionFitBaseUnitId = 13,
     eFieldDescriptionNativeMesgNum = 14,
     eFieldDescriptionNativeFieldNum = 15
-} messagefield_description_e;
+} message_field_description_e;
 
 typedef enum {
     eDeveloperDataIdDeveloperId = 0,
@@ -1181,6 +1181,6 @@ typedef enum {
     eDeveloperDataIdManufacturerId = 2,
     eDeveloperDataIdDeveloperDataIndex = 3,
     eDeveloperDataIdApplicationVersion = 4
-} messagedeveloper_data_id_e;
+} message_developer_data_id_e;
 // ----------- end generated code -----------
 #endif // FIT_FIELDS_H

@@ -144,17 +144,17 @@ void CFitFieldDataState::devProfile(CFitMessage& mesg)
 
 CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
 {
-    QString fieldName = "";
+    QString fieldName;
     quint8 fieldDefNr = 0;
     quint8 devDataIdx = 0;
     quint8 baseType = eBaseTypeNrInvalid;
     quint8 scale = 0;
     quint8 array = 0;
-    QString components = "";
+    QString components;
     qint8 offset = 0;
-    QString units = "";
-    QString bits = "";
-    QString accumulate = "";
+    QString units;
+    QString bits;
+    QString accumulate;
     quint8 baseUnitId = 0;
     quint8 natvieMesgNum = 0;
     quint8 nativeFieldNum = 0;

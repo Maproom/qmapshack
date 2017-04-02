@@ -73,6 +73,8 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     setMouseTracking(true);
 
+    grabGesture(Qt::PinchGesture);
+
     map     = new CMapDraw(this);
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
@@ -927,4 +929,36 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     gis->draw(p, r);
 
     setDrawContextSize(oldSize);
+}
+
+bool CCanvas::event(QEvent *event)
+{
+    if (event->type() == QEvent::Gesture)
+    {
+        return gestureEvent(static_cast<QGestureEvent*>(event));
+    }
+    return QWidget::event(event);
+}
+
+bool CCanvas::gestureEvent(QGestureEvent* e)
+{
+    if (QPinchGesture *pinch = dynamic_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture)))
+    {
+        if (pinch->totalChangeFlags() & QPinchGesture::ScaleFactorChanged)
+        {
+            QPointF pos = pinch->centerPoint();
+            QPointF pt1 = pos;
+
+            map->convertPx2Rad(pt1);
+            setZoom(pinch->lastScaleFactor() < pinch->scaleFactor(), needsRedraw);
+            map->convertRad2Px(pt1);
+
+            map->convertRad2Px(posFocus);
+            posFocus -= (pos - pt1);
+            map->convertPx2Rad(posFocus);
+
+            update();
+        }
+    }
+    return true;
 }

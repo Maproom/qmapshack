@@ -21,6 +21,7 @@
 
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitMessage.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
 
 #include <QtCore>
 
@@ -31,6 +32,7 @@ typedef enum
     eDecoderStateRecord,
     eDecoderStateRecordContent,
     eDecoderStateFieldDef,
+    eDecoderStateDevFieldDef,
     eDecoderStateFieldData,
     eDecoderStateFileCrc,
     eDecoderStateEnd
@@ -52,6 +54,7 @@ public:
         QMap<quint8, CFitDefinitionMessage> defintions;
         QList<CFitDefinitionMessage> defintionHistory;
         QList<CFitMessage> messages;
+        QList<CFitFieldProfile> devFieldProfiles;
     };
 
     IFitDecoderState(shared_state_data_t &data) : data(data) { }
@@ -72,14 +75,18 @@ protected:
     quint32 bytesLeftToRead();
 
     CFitDefinitionMessage* latestDefinition() const { return data.lastDefintion; }
-    CFitDefinitionMessage* defintion(quint32 localMessageType);
+    CFitDefinitionMessage* definition(quint32 localMessageType);
     void addDefinition(const CFitDefinitionMessage &definition);
-    void endDefintion();
+    void endDefinition();
 
     void setTimestamp(quint32 fullTimestamp);
     void setTimestampOffset(quint32 offsetTimestamp);
     quint32 getTimestamp() const { return data.timestamp; }
     quint16 getCrc() const { return data.crc; }
+    void addDevFieldProfile(const CFitFieldProfile &fieldProfile);
+    CFitFieldProfile* devFieldProfile(quint32 fieldNr);
+    void clearDevFieldProfiles();
+
 
 private:
     void buildCrc(quint8 byte);

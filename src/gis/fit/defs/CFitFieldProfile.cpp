@@ -21,8 +21,8 @@
 #include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/fit_const.h"
 
-CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
-    : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units),
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, field_type_e fieldType )
+    : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units), fieldType(fieldType),
     baseType(&baseType), profile(parent), subfields(), components()
 {
 }
@@ -32,7 +32,7 @@ CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fitI
 }
 
 CFitFieldProfile::CFitFieldProfile(const CFitFieldProfile& copy)
-    : name(copy.name), fieldDefNr(copy.fieldDefNr), scale(copy.scale), offset(copy.offset), units(copy.units),
+    : name(copy.name), fieldDefNr(copy.fieldDefNr), scale(copy.scale), offset(copy.offset), units(copy.units), fieldType(copy.fieldType),
     baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields), components(copy.components)
 {
 }
@@ -120,6 +120,24 @@ const QList<CFitSubfieldProfile*> CFitFieldProfile::getSubfields() const
 QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
 {
     return components;
+}
+
+QString CFitFieldProfile::fieldProfileInfo()
+{
+    QString str = QString("%1 %2 (%3): %4 %5")
+            .arg(QString("field profile"))
+            .arg(getName())
+            .arg(getFieldDefNum())
+            .arg(getUnits())
+            .arg(getBaseType().name());
+
+    if(getBaseType().isNumber())
+    {
+        str += QString(" (%1-%2)")
+                .arg(getScale())
+                .arg(getOffset());
+    }
+    return str;
 }
 
 

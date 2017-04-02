@@ -37,6 +37,9 @@ typedef enum
     eBaseTypeNrUint16z = 11,
     eBaseTypeNrUint32z = 12,
     eBaseTypeNrByte = 13,
+    eBaseTypeNrSint64 = 14,
+    eBaseTypeNrUint64 = 15,
+    eBaseTypeNrUint64z = 16,
     eBaseTypeNrInvalid = 0xff
 } fit_base_type_nr_e;
 
@@ -74,6 +77,9 @@ static const CFitBaseType fitSint16Type = CFitBaseType(eBaseTypeNrSint16, "Sint1
 static const CFitBaseType fitUint16Type = CFitBaseType(eBaseTypeNrUint16, "Uint16", sizeof(quint16), {0xFF, 0xFF});
 static const CFitBaseType fitSint32Type = CFitBaseType(eBaseTypeNrSint32, "Sint32", sizeof(qint32), {0x7F, 0xFF, 0xFF, 0xFF});
 static const CFitBaseType fitUint32Type = CFitBaseType(eBaseTypeNrUint32, "Uint32", sizeof(quint32), {0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitSint64Type = CFitBaseType(eBaseTypeNrSint64, "Sint64", sizeof(qint64), {0x7F, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
+static const CFitBaseType fitUint64Type = CFitBaseType(eBaseTypeNrUint64, "Uint64", sizeof(quint64), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
+
 static const CFitBaseType fitStringType = CFitBaseType(eBaseTypeNrString, "String", 0, {0x00}); // Field is invalid if all bytes are invalid.
 static const CFitBaseType fitFloat32Type = CFitBaseType(eBaseTypeNrFloat32, "Float32", sizeof(float), {0xFF, 0xFF, 0xFF, 0xFF});
 static const CFitBaseType fitFloat64Type = CFitBaseType(eBaseTypeNrFloat64, "Float64", sizeof(double), {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF});
@@ -81,6 +87,8 @@ static const CFitBaseType fitFloat64Type = CFitBaseType(eBaseTypeNrFloat64, "Flo
 static const CFitBaseType fitUint8zType = CFitBaseType(eBaseTypeNrUint8z, "Uint8z", sizeof(quint8), {0x00});
 static const CFitBaseType fitUint16zType = CFitBaseType(eBaseTypeNrUint16z, "Uint16z", sizeof(quint16), {0x00, 0x00});
 static const CFitBaseType fitUint32zType = CFitBaseType(eBaseTypeNrUint32z, "Uint32z", sizeof(quint32), {0x00, 0x00, 0x00, 0x00});
+static const CFitBaseType fitUint64zType = CFitBaseType(eBaseTypeNrUint64z, "Uint64z", sizeof(quint64), {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00});
+
 static const CFitBaseType fitByteType = CFitBaseType(eBaseTypeNrByte, "Byte", 0, {0xFF}); // Field is invalid if all bytes are invalid.
 
 static const CFitBaseType fitInvalidType = CFitBaseType(eBaseTypeNrInvalid, "Invalid", 0, {0});

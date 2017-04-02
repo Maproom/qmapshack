@@ -16,32 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CFITFIELDDATASTATE_H
-#define CFITFIELDDATASTATE_H
+#ifndef CFITDEVFIELDDEFINITION_H
+#define CFITDEVFIELDDEFINITION_H
 
-#include "gis/fit/decoder/IFitDecoderState.h"
+#include <QtCore>
 
-static const int fitMaxFieldSize =255;
+class CFitDefinitionMessage;
 
-class CFitFieldDataState final : public IFitDecoderState
+// content of the field description messages
+class CFitDevFieldDefinition final
 {
 public:
-    CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
-    virtual ~CFitFieldDataState() {}
-    void reset() override;
-    decode_state_e process(quint8 &dataByte) override;
+    CFitDevFieldDefinition(CFitDefinitionMessage* parent, quint8 fieldNr, quint8 size, quint8 devDataIndex);
+    CFitDevFieldDefinition();
+
+    QString fieldInfo() const;
+
+    quint8 getFieldNr() const;
+    quint8 getSize() const;
+    quint8 getDevDataIndex() const;
+
+    const CFitDefinitionMessage& parent() const { return *parentDefinition; }
+
+    void setParent(CFitDefinitionMessage* parent) { parentDefinition = parent; }
 
 private:
-    bool handleFitField();
-    bool handleDevField();
-    void devProfile(CFitMessage& mesg);
-    CFitFieldProfile buildDevFieldProfile(CFitMessage& mesg);
+    quint8 fieldNr;
+    quint8 size;
+    quint8 devDataIndex;
 
-    quint8 fieldIndex;
-    quint8 devFieldIndex;
-    quint8 fieldDataIndex;
-    quint8 fieldData[fitMaxFieldSize];
+    const CFitDefinitionMessage* parentDefinition;
 };
 
-
-#endif // CFITFIELDDATASTATE_H
+#endif // CFITDEVFIELDDEFINITION_H

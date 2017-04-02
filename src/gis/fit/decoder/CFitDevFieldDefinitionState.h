@@ -31,11 +31,11 @@ public:
     decode_state_e process(quint8 &dataByte) override;
 
 private:
-    quint8 offset;
+    quint8 offset = 0;
 
-    quint8 fieldNr;
-    quint8 size;
-    quint8 devDataIndex;
+    quint8 fieldNr = 0;
+    quint8 size = 0;
+    quint8 devDataIndex = 0;
 };
 
 #endif //CFITDEVFIELDDEFINITIONSTATE_H

@@ -21,7 +21,7 @@
 #include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/fit_const.h"
 
-CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, field_type_e fieldType )
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, field_type_e fieldType )
     : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units), fieldType(fieldType),
     baseType(&baseType), profile(parent), subfields(), components()
 {
@@ -87,7 +87,7 @@ qreal CFitFieldProfile::getScale() const
     return scale;
 }
 
-quint16 CFitFieldProfile::getOffset() const
+qint16 CFitFieldProfile::getOffset() const
 {
     return offset;
 }
@@ -141,7 +141,7 @@ QString CFitFieldProfile::fieldProfileInfo()
 }
 
 
-CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16
+CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16
                                          offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
     : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units),
     refFieldDefNr(subRefFieldDefNr), refFieldValue(subRefFieldValue)
@@ -165,7 +165,7 @@ quint8 CFitSubfieldProfile::getReferencedFieldValue() const
 
 
 CFitComponentfieldProfile::CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
-                                                     qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
+                                                     qreal scale, qint16 offset, QString units, quint8 componentFieldDefNr, quint32 bits)
     : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units), nrOfBits(bits), componentFieldDefNr(componentFieldDefNr)
 {
 }
@@ -191,7 +191,7 @@ const CFitBaseType& CFitComponentfieldProfile::getBaseType() const
     return getProfile()->getField(componentFieldDefNr)->getBaseType();
 }
 
-quint8 CFitComponentfieldProfile::getBits() const
+quint32 CFitComponentfieldProfile::getBits() const
 {
     return nrOfBits;
 }

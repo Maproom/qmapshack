@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # vim:fileencoding=utf-8
 
 from __future__ import print_function
@@ -60,7 +60,7 @@ def write_enum_file():
     last_type_name = ''
     enum_list = []
 
-    with open(type_csv_filename, 'rb') as csvfile:
+    with open(type_csv_filename, 'r') as csvfile:
         typereader = csv.reader(csvfile, delimiter=';', quotechar='"')
         with open(enum_filename, 'w') as enum_file:
             for row in typereader:
@@ -88,7 +88,7 @@ def write_message_enums():
     last_type_name = ''
     enum_list = []
 
-    with open(messages_csv_filename, 'rb') as csvfile:
+    with open(messages_csv_filename, 'r') as csvfile:
         typereader = csv.reader(csvfile, delimiter=';', quotechar='"')
         with open(enum_profiles_filename, 'w') as enum_file:
             for row in typereader:
@@ -152,7 +152,7 @@ def write_profiles():
     profile_file = open(profile_code_filename, 'w')
     profile_init_file = open(profile_init_filename, 'w')
 
-    with open(messages_csv_filename, 'rb') as csvfile:
+    with open(messages_csv_filename, 'r') as csvfile:
         typereader = csv.reader(csvfile, delimiter=';', quotechar='"')
         for row in typereader:
             message_name = row[0]

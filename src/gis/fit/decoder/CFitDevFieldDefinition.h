@@ -21,14 +21,12 @@
 
 #include <QtCore>
 
-class CFitDefinitionMessage;
-
 // content of the field description messages
 class CFitDevFieldDefinition final
 {
 public:
-    CFitDevFieldDefinition(CFitDefinitionMessage* parent, quint8 fieldNr, quint8 size, quint8 devDataIndex);
-    CFitDevFieldDefinition();
+    CFitDevFieldDefinition(quint8 fieldNr, quint8 size, quint8 devDataIndex);
+    CFitDevFieldDefinition() = default;
 
     QString fieldInfo() const;
 
@@ -36,16 +34,10 @@ public:
     quint8 getSize() const;
     quint8 getDevDataIndex() const;
 
-    const CFitDefinitionMessage& parent() const { return *parentDefinition; }
-
-    void setParent(CFitDefinitionMessage* parent) { parentDefinition = parent; }
-
 private:
-    quint8 fieldNr;
-    quint8 size;
-    quint8 devDataIndex;
-
-    const CFitDefinitionMessage* parentDefinition;
+    quint8 fieldNr = 0;
+    quint8 size = 0;
+    quint8 devDataIndex = 0;
 };
 
 #endif // CFITDEVFIELDDEFINITION_H

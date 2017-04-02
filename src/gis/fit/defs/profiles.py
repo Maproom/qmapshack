@@ -1,7 +1,9 @@
 #!/usr/bin/env python2
 # vim:fileencoding=utf-8
 
+from __future__ import print_function
 import csv
+
 
 type_csv_filename = './Profile_Types.csv'
 messages_csv_filename = './Profile_Messages.csv'
@@ -42,15 +44,15 @@ def default_if_null(default, s, i = None):
 def write_enum_type(enum_file, enum_list, type_name):
     if len(enum_list) > 0 and type_name:
         count = 0
-        print >>enum_file, "typedef enum {"
+        print("typedef enum {", file=enum_file)
         for e in enum_list:
             if count + 1 < len(enum_list):
-                print >>enum_file, '    ' + e + ','
+                print('    ' + e + ',', file=enum_file)
             else:
-                print >>enum_file, '    ' + e
+                print('    ' + e, file=enum_file)
             count = count + 1
-        print >>enum_file, '} ' + type_name + '_e;'
-        print >>enum_file, ' '
+        print('} ' + type_name + '_e;', file=enum_file)
+        print(' ', file=enum_file)
 
 def write_enum_file():
     # field enums
@@ -97,7 +99,7 @@ def write_message_enums():
                 if count > 0:
                     if message_name:
                         # '} message_' + + '_e;'
-                        write_enum_type(enum_file, enum_list, 'message' + last_type_name)
+                        write_enum_type(enum_file, enum_list, 'message_' + last_type_name)
                         enum_list = []
                         last_type_name = message_name
 
@@ -105,25 +107,25 @@ def write_message_enums():
                         enum_list.append('e' + titlecase(last_type_name) + titlecase(field_name) + ' = ' + field_def_nr)
 
                 count = count + 1
-            write_enum_type(enum_file, enum_list, 'message' + last_type_name)
+            write_enum_type(enum_file, enum_list, 'message_' + last_type_name)
 
 
 
 def write_profile_type(profile_file, field_list, msg_name):
     if len(field_list) > 0 and msg_name:
-        print >>profile_file, 'void init' + titlecase(msg_name) + '(QMap<quint16, CFitProfile*>& profiles)'
-        print >>profile_file, '{'
-        print >>profile_file, '    CFitProfile* f = new CFitProfile("' + msg_name + '", eMesgNum' + titlecase(msg_name) + ');'
+        print('void init' + titlecase(msg_name) + '(QMap<quint16, CFitProfile*>& profiles)', file=profile_file)
+        print('{', file=profile_file)
+        print('    CFitProfile* f = new CFitProfile("' + msg_name + '", eMesgNum' + titlecase(msg_name) + ');', file=profile_file)
         for f in field_list:
-            print >>profile_file, '    f->' + f + ';'
-        print >>profile_file, '    profiles.insert(eMesgNum' + titlecase(msg_name) + ', f);'
-        print >>profile_file, '}'
-        print >>profile_file, ' '
+            print('    f->' + f + ';', file=profile_file)
+        print('    profiles.insert(eMesgNum' + titlecase(msg_name) + ', f);', file=profile_file)
+        print('}', file=profile_file)
+        print(' ', file=profile_file)
 
 
 def write_profile_init(profile_file, msg_name):
     if msg_name:
-        print >>profile_file, '    init' + titlecase(msg_name) + '(allProfiles);'
+        print('    init' + titlecase(msg_name) + '(allProfiles);', file=profile_file)
 
 
 base_type_map = {
@@ -170,7 +172,6 @@ def write_profiles():
             if count > 0:
                 if message_name:
                     # new message
-                    print message_name
                     write_profile_type(profile_file, add_list, last_msg_name)
                     write_profile_init(profile_init_file, last_msg_name)
                     add_list = []
@@ -195,7 +196,6 @@ def write_profiles():
 
                         # ref field name is for all elements the same, so take the first one
                         ref_field_name = empty_if_none(ref_field_name.split(','), 0)
-                        print ref_field_name
                         ref_field_value_list = ref_field_value.split(',')
                         components_list = components.split(',')
                         scale_list = scale.split(',')

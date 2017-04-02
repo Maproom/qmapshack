@@ -80,18 +80,18 @@ void IFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
 
 void IFitDecoderState::addDefinition(const CFitDefinitionMessage &definition)
 {
-    data.defintions[definition.getLocalMesgNr()] = definition;
-    data.lastDefintion = &data.defintions[definition.getLocalMesgNr()];
+    data.definitions[definition.getLocalMesgNr()] = definition;
+    data.lastDefinition = &data.definitions[definition.getLocalMesgNr()];
 }
 
 void IFitDecoderState::endDefinition()
 {
-    data.defintionHistory.append(*data.lastDefintion);
+    data.definitionHistory.append(*data.lastDefinition);
 }
 
 CFitDefinitionMessage*IFitDecoderState::definition(quint32 localMessageType)
 {
-    return &(data.defintions[localMessageType]);
+    return &(data.definitions[localMessageType]);
 }
 
 void IFitDecoderState::setFileLength(quint32 fileLength)

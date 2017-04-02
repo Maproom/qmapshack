@@ -49,10 +49,10 @@ public:
         quint32 fileBytesRead;
         quint8 lastTimeOffset;
         quint32 timestamp;
-        CFitDefinitionMessage* lastDefintion;
+        CFitDefinitionMessage* lastDefinition;
         CFitMessage* lastMessage;
-        QMap<quint8, CFitDefinitionMessage> defintions;
-        QList<CFitDefinitionMessage> defintionHistory;
+        QMap<quint8, CFitDefinitionMessage> definitions;
+        QList<CFitDefinitionMessage> definitionHistory;
         QList<CFitMessage> messages;
         QList<CFitFieldProfile> devFieldProfiles;
     };
@@ -74,7 +74,7 @@ protected:
     void incFileBytesRead();
     quint32 bytesLeftToRead();
 
-    CFitDefinitionMessage* latestDefinition() const { return data.lastDefintion; }
+    CFitDefinitionMessage* latestDefinition() const { return data.lastDefinition; }
     CFitDefinitionMessage* definition(quint32 localMessageType);
     void addDefinition(const CFitDefinitionMessage &definition);
     void endDefinition();

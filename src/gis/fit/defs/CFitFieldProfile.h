@@ -26,12 +26,17 @@ class CFitSubfieldProfile;
 class CFitComponentfieldProfile;
 class CFitBaseType;
 
+typedef enum {
+    eFieldTypeFit = 0,
+    eFieldTypeDevelopment = 1,
+} field_type_e;
+
 class CFitFieldProfile
 {
 public:
     CFitFieldProfile();
     CFitFieldProfile(const CFitFieldProfile& copy);
-    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units);
+    CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, field_type_e fieldType = eFieldTypeFit);
     virtual ~CFitFieldProfile();
 
     void addSubfield(CFitSubfieldProfile* subfield);
@@ -44,7 +49,7 @@ public:
     virtual QString getName() const;
     virtual quint8 getFieldDefNum() const;
     virtual qreal getScale() const;
-    virtual quint16 getOffset() const;
+    virtual qint16 getOffset() const;
     virtual bool hasScaleAndOffset() const;
     virtual QString getUnits() const;
     virtual const CFitBaseType& getBaseType() const;
@@ -54,12 +59,15 @@ public:
     QList<CFitComponentfieldProfile*> getComponents() const;
 
     const CFitProfile* getProfile() const;
+    field_type_e getFieldType() const { return fieldType; }
+    QString fieldProfileInfo();
 private:
     QString name;
     quint8 fieldDefNr;
     qreal scale;
-    quint16 offset;
+    qint16 offset;
     QString units;
+    field_type_e fieldType;
 
     const CFitBaseType* baseType;
     CFitProfile* profile;
@@ -71,7 +79,7 @@ private:
 class CFitSubfieldProfile final : public CFitFieldProfile
 {
 public:
-    CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units,
+    CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units,
                         quint8 subRefFieldDefNr, quint8 subRefFieldValue);
     CFitSubfieldProfile(const CFitSubfieldProfile& copy);
     CFitSubfieldProfile() : CFitFieldProfile(), refFieldDefNr(0), refFieldValue(0) {}
@@ -89,7 +97,7 @@ private:
 class CFitComponentfieldProfile final : public CFitFieldProfile
 {
 public:
-    CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits);
+    CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, quint8 componentFieldDefNr, quint32 bits);
     CFitComponentfieldProfile(const CFitComponentfieldProfile& copy);
     CFitComponentfieldProfile() : CFitFieldProfile(), nrOfBits(0), componentFieldDefNr(0) {}
     virtual ~CFitComponentfieldProfile() {}
@@ -99,12 +107,12 @@ public:
     const CFitBaseType& getBaseType() const override;
 
     QString getTyp() const override { return "component"; }
-    quint8 getBits() const;
+    quint32 getBits() const;
     quint32 getBitmask() const;
 
 private:
 
-    quint8 nrOfBits;
+    quint32 nrOfBits;
     quint8 componentFieldDefNr;
 };
 

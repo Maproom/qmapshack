@@ -25,7 +25,7 @@
  * bit: value description
  * 7: 0 normal Header
  * 6: 0/1 data message / definition message
- * 5: - reserved
+ * 5: 0/1 developer data flag
  * 4: - reserved
  * 3: 0/1 local message type (0-15 -> 0000 - 1111)
  * 2:     local message type
@@ -33,6 +33,7 @@
  * 0:     local message type
  */
 static const quint8 fitRecordHeaderDefBit =  ((quint8) 0x40); // bit 6: 0100 0000
+static const quint8 fitRecordHeaderDevBit = ((quint8) 0x20); // bit 5: 0010 0000
 static const quint8 fitRecordHeaderMesgMask = ((quint8) 0x0F); // bit 0-3: 0000 1111
 
 /*
@@ -58,7 +59,7 @@ decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
     {
         // this is a compressed timestamp header
         quint8 localMessageType = (dataByte & fitRecordHeaderTimeMesgMask) >> fitRecordHeaderTimeMesgShift;
-        CFitDefinitionMessage* def = defintion(localMessageType);
+        CFitDefinitionMessage* def = definition(localMessageType);
 
         if (!def->hasField(eRecordTimestamp))
         {
@@ -84,13 +85,14 @@ decode_state_e CFitRecordHeaderState::process(quint8 &dataByte)
         if ((dataByte & fitRecordHeaderDefBit) != 0)
         {
             // this is a definition message
-            addDefinition(CFitDefinitionMessage(localMessageType));
+            bool developerDataFlag = dataByte & fitRecordHeaderDevBit;
+            addDefinition(CFitDefinitionMessage(localMessageType, developerDataFlag));
             return eDecoderStateRecordContent;
         }
         else
         {
             // this is a data message
-            addMessage(*defintion(localMessageType));
+            addMessage(*definition(localMessageType));
             // go to eDecoderStateFieldData
             return eDecoderStateFieldData;
         }

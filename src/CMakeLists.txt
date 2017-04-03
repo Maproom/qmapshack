@@ -299,6 +299,8 @@ set( SRCS
         gis/fit/defs/CFitFieldProfile.cpp
         gis/fit/decoder/CFitByteDataTransformer.cpp
         gis/fit/decoder/CFitFieldBuilder.cpp
+        gis/fit/decoder/CFitDevFieldDefinition.cpp
+        gis/fit/decoder/CFitDevFieldDefinitionState.cpp
         plot/IPlot.cpp
         plot/CPlotAxis.cpp
         plot/CPlotAxisTime.cpp
@@ -584,6 +586,8 @@ set( HDRS
         gis/fit/defs/CFitFieldProfile.h
         gis/fit/decoder/CFitByteDataTransformer.h
         gis/fit/decoder/CFitFieldBuilder.h
+        gis/fit/decoder/CFitDevFieldDefinition.h
+        gis/fit/decoder/CFitDevFieldDefinitionState.h
         plot/IPlot.h
         plot/CPlotAxis.h
         plot/CPlotAxisTime.h

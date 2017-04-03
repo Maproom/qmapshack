@@ -37,7 +37,7 @@
  * 13: CRC MSB
  */
 
-static const quint8 fitProtocolVersionMajor = 1;
+static const quint8 fitProtocolVersionMajor = 2;
 static const quint8 fitProtocolMajorVersionShift = 4;
 static const quint8 fitProtocolMajorVersionMask = 0x0F << fitProtocolMajorVersionShift;
 

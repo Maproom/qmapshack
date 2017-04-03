@@ -136,7 +136,26 @@ void initDeviceSettings(QMap<quint16, CFitProfile*>& profiles)
     CFitProfile* f = new CFitProfile("device_settings", eMesgNumDeviceSettings);
     f->addField("active_time_zone", fitUint8Type, eDeviceSettingsActiveTimeZone, 0, 0, "");
     f->addField("utc_offset", fitUint32Type, eDeviceSettingsUtcOffset, 0, 0, "");
+    f->addField("time_offset", fitUint32Type, eDeviceSettingsTimeOffset, 0, 0, "s");
+    f->addField("time_mode", fitEnumType, eDeviceSettingsTimeMode, 0, 0, "");
     f->addField("time_zone_offset", fitSint8Type, eDeviceSettingsTimeZoneOffset, 4, 0, "hr");
+    f->addField("backlight_mode", fitEnumType, eDeviceSettingsBacklightMode, 0, 0, "");
+    f->addField("activity_tracker_enabled", fitEnumType, eDeviceSettingsActivityTrackerEnabled, 0, 0, "");
+    f->addField("clock_time", fitEnumType, eDeviceSettingsClockTime, 0, 0, "");
+    f->addField("pages_enabled", fitUint16Type, eDeviceSettingsPagesEnabled, 0, 0, "");
+    f->addField("move_alert_enabled", fitEnumType, eDeviceSettingsMoveAlertEnabled, 0, 0, "");
+    f->addField("date_mode", fitEnumType, eDeviceSettingsDateMode, 0, 0, "");
+    f->addField("display_orientation", fitEnumType, eDeviceSettingsDisplayOrientation, 0, 0, "");
+    f->addField("mounting_side", fitEnumType, eDeviceSettingsMountingSide, 0, 0, "");
+    f->addField("default_page", fitUint16Type, eDeviceSettingsDefaultPage, 0, 0, "");
+    f->addField("autosync_min_steps", fitUint16Type, eDeviceSettingsAutosyncMinSteps, 0, 0, "steps");
+    f->addField("autosync_min_time", fitUint16Type, eDeviceSettingsAutosyncMinTime, 0, 0, "minutes");
+    f->addField("lactate_threshold_autodetect_enabled", fitEnumType, eDeviceSettingsLactateThresholdAutodetectEnabled, 0, 0, "");
+    f->addField("ble_auto_upload_enabled", fitEnumType, eDeviceSettingsBleAutoUploadEnabled, 0, 0, "");
+    f->addField("auto_sync_frequency", fitEnumType, eDeviceSettingsAutoSyncFrequency, 0, 0, "");
+    f->addField("auto_activity_detect", fitEnumType, eDeviceSettingsAutoActivityDetect, 0, 0, "");
+    f->addField("number_of_screens", fitUint8Type, eDeviceSettingsNumberOfScreens, 0, 0, "");
+    f->addField("smart_notification_display_orientation", fitEnumType, eDeviceSettingsSmartNotificationDisplayOrientation, 0, 0, "");
     profiles.insert(eMesgNumDeviceSettings, f);
 }
 
@@ -165,7 +184,11 @@ void initUserProfile(QMap<quint16, CFitProfile*>& profiles)
     f->addField("temperature_setting", fitEnumType, eUserProfileTemperatureSetting, 0, 0, "");
     f->addField("local_id", fitEnumType, eUserProfileLocalId, 0, 0, "");
     f->addField("global_id", fitByteType, eUserProfileGlobalId, 0, 0, "");
+    f->addField("wake_time", fitEnumType, eUserProfileWakeTime, 0, 0, "");
+    f->addField("sleep_time", fitEnumType, eUserProfileSleepTime, 0, 0, "");
     f->addField("height_setting", fitEnumType, eUserProfileHeightSetting, 0, 0, "");
+    f->addField("user_running_step_length", fitUint16Type, eUserProfileUserRunningStepLength, 1000, 0, "m");
+    f->addField("user_walking_step_length", fitUint16Type, eUserProfileUserWalkingStepLength, 1000, 0, "m");
     profiles.insert(eMesgNumUserProfile, f);
 }
 
@@ -230,6 +253,43 @@ void initBikeProfile(QMap<quint16, CFitProfile*>& profiles)
     f->addField("rear_gear", fitUint8zType, eBikeProfileRearGear, 0, 0, "");
     f->addField("shimano_di2_enabled", fitEnumType, eBikeProfileShimanoDi2Enabled, 0, 0, "");
     profiles.insert(eMesgNumBikeProfile, f);
+}
+
+void initConnectivity(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("connectivity", eMesgNumConnectivity);
+    f->addField("bluetooth_enabled", fitEnumType, eConnectivityBluetoothEnabled, 0, 0, "");
+    f->addField("bluetooth_le_enabled", fitEnumType, eConnectivityBluetoothLeEnabled, 0, 0, "");
+    f->addField("ant_enabled", fitEnumType, eConnectivityAntEnabled, 0, 0, "");
+    f->addField("name", fitStringType, eConnectivityName, 0, 0, "");
+    f->addField("live_tracking_enabled", fitEnumType, eConnectivityLiveTrackingEnabled, 0, 0, "");
+    f->addField("weather_conditions_enabled", fitEnumType, eConnectivityWeatherConditionsEnabled, 0, 0, "");
+    f->addField("weather_alerts_enabled", fitEnumType, eConnectivityWeatherAlertsEnabled, 0, 0, "");
+    f->addField("auto_activity_upload_enabled", fitEnumType, eConnectivityAutoActivityUploadEnabled, 0, 0, "");
+    f->addField("course_download_enabled", fitEnumType, eConnectivityCourseDownloadEnabled, 0, 0, "");
+    f->addField("workout_download_enabled", fitEnumType, eConnectivityWorkoutDownloadEnabled, 0, 0, "");
+    f->addField("gps_ephemeris_download_enabled", fitEnumType, eConnectivityGpsEphemerisDownloadEnabled, 0, 0, "");
+    f->addField("incident_detection_enabled", fitEnumType, eConnectivityIncidentDetectionEnabled, 0, 0, "");
+    f->addField("grouptrack_enabled", fitEnumType, eConnectivityGrouptrackEnabled, 0, 0, "");
+    profiles.insert(eMesgNumConnectivity, f);
+}
+
+void initWatchfaceSettings(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("watchface_settings", eMesgNumWatchfaceSettings);
+    f->addField("message_index", fitEnumType, eWatchfaceSettingsMessageIndex, 0, 0, "");
+    f->addField("mode", fitEnumType, eWatchfaceSettingsMode, 0, 0, "");
+    f->addField("layout", fitByteType, eWatchfaceSettingsLayout, 0, 0, "");
+    f->addSubfield("digital_layout", fitEnumType, eWatchfaceSettingsLayout, 0, 0, "", eWatchfaceSettingsMode, eWatchfaceModeDigital);
+    f->addSubfield("analog_layout", fitEnumType, eWatchfaceSettingsLayout, 0, 0, "", eWatchfaceSettingsMode, eWatchfaceModeAnalog);
+    profiles.insert(eMesgNumWatchfaceSettings, f);
+}
+
+void initOhrSettings(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("ohr_settings", eMesgNumOhrSettings);
+    f->addField("enabled", fitEnumType, eOhrSettingsEnabled, 0, 0, "");
+    profiles.insert(eMesgNumOhrSettings, f);
 }
 
 void initZonesTarget(QMap<quint16, CFitProfile*>& profiles)
@@ -313,6 +373,7 @@ void initGoal(QMap<quint16, CFitProfile*>& profiles)
     f->addField("recurrence", fitEnumType, eGoalRecurrence, 0, 0, "");
     f->addField("recurrence_value", fitUint16Type, eGoalRecurrenceValue, 0, 0, "");
     f->addField("enabled", fitEnumType, eGoalEnabled, 0, 0, "");
+    f->addField("source", fitEnumType, eGoalSource, 0, 0, "");
     profiles.insert(eMesgNumGoal, f);
 }
 
@@ -346,8 +407,6 @@ void initSession(QMap<quint16, CFitProfile*>& profiles)
     f->addField("total_timer_time", fitUint32Type, eSessionTotalTimerTime, 1000, 0, "s");
     f->addField("total_distance", fitUint32Type, eSessionTotalDistance, 100, 0, "m");
     f->addField("total_cycles", fitUint32Type, eSessionTotalCycles, 0, 0, "cycles");
-    f->addSubfield("total_strides", fitUint32Type, eSessionTotalCycles, 0, 0, "strides", eSessionSport, eSportRunning);
-    f->addSubfield("total_strides", fitUint32Type, eSessionTotalCycles, 0, 0, "", eSessionSport, eSportWalking);
     f->addField("total_calories", fitUint16Type, eSessionTotalCalories, 0, 0, "kcal");
     f->addField("total_fat_calories", fitUint16Type, eSessionTotalFatCalories, 0, 0, "kcal");
     f->addField("avg_speed", fitUint16Type, eSessionAvgSpeed, 0, 0, "");
@@ -456,6 +515,11 @@ void initSession(QMap<quint16, CFitProfile*>& profiles)
     f->addField("avg_lev_motor_power", fitUint16Type, eSessionAvgLevMotorPower, 0, 0, "watts");
     f->addField("max_lev_motor_power", fitUint16Type, eSessionMaxLevMotorPower, 0, 0, "watts");
     f->addField("lev_battery_consumption", fitUint8Type, eSessionLevBatteryConsumption, 2, 0, "percent");
+    f->addField("avg_vertical_ratio", fitUint16Type, eSessionAvgVerticalRatio, 100, 0, "percent");
+    f->addField("avg_stance_time_balance", fitUint16Type, eSessionAvgStanceTimeBalance, 100, 0, "percent");
+    f->addField("avg_step_length", fitUint16Type, eSessionAvgStepLength, 10, 0, "mm");
+    f->addField("total_anaerobic_training_effect", fitUint8Type, eSessionTotalAnaerobicTrainingEffect, 10, 0, "");
+    f->addField("avg_vam", fitUint16Type, eSessionAvgVam, 1000, 0, "m/s");
     profiles.insert(eMesgNumSession, f);
 }
 
@@ -475,8 +539,6 @@ void initLap(QMap<quint16, CFitProfile*>& profiles)
     f->addField("total_timer_time", fitUint32Type, eLapTotalTimerTime, 1000, 0, "s");
     f->addField("total_distance", fitUint32Type, eLapTotalDistance, 100, 0, "m");
     f->addField("total_cycles", fitUint32Type, eLapTotalCycles, 0, 0, "cycles");
-    f->addSubfield("total_strides", fitUint32Type, eLapTotalCycles, 0, 0, "strides", eLapSport, eSportRunning);
-    f->addSubfield("total_strides", fitUint32Type, eLapTotalCycles, 0, 0, "", eLapSport, eSportWalking);
     f->addField("total_calories", fitUint16Type, eLapTotalCalories, 0, 0, "kcal");
     f->addField("total_fat_calories", fitUint16Type, eLapTotalFatCalories, 0, 0, "kcal");
     f->addField("avg_speed", fitUint16Type, eLapAvgSpeed, 0, 0, "");
@@ -573,6 +635,10 @@ void initLap(QMap<quint16, CFitProfile*>& profiles)
     f->addField("avg_lev_motor_power", fitUint16Type, eLapAvgLevMotorPower, 0, 0, "watts");
     f->addField("max_lev_motor_power", fitUint16Type, eLapMaxLevMotorPower, 0, 0, "watts");
     f->addField("lev_battery_consumption", fitUint8Type, eLapLevBatteryConsumption, 2, 0, "percent");
+    f->addField("avg_vertical_ratio", fitUint16Type, eLapAvgVerticalRatio, 100, 0, "percent");
+    f->addField("avg_stance_time_balance", fitUint16Type, eLapAvgStanceTimeBalance, 100, 0, "percent");
+    f->addField("avg_step_length", fitUint16Type, eLapAvgStepLength, 10, 0, "mm");
+    f->addField("avg_vam", fitUint16Type, eLapAvgVam, 1000, 0, "m/s");
     profiles.insert(eMesgNumLap, f);
 }
 
@@ -622,7 +688,7 @@ void initRecord(QMap<quint16, CFitProfile*>& profiles)
     f->addField("time_from_course", fitSint32Type, eRecordTimeFromCourse, 1000, 0, "s");
     f->addField("cycle_length", fitUint8Type, eRecordCycleLength, 100, 0, "m");
     f->addField("temperature", fitSint8Type, eRecordTemperature, 0, 0, "C");
-    f->addField("speed_1s", fitUint8Type, eRecordSpeed1s, 16, 0, "m/s");
+    f->addField("speed_1s", fitUint8Type, eRecordSpeed1S, 16, 0, "m/s");
     f->addField("cycles", fitUint8Type, eRecordCycles, 0, 0, "");
     f->addComponent("cycles", fitUint8Type, eRecordCycles, 0, 0, "cycles", eRecordTotalCycles, 8);
     f->addField("total_cycles", fitUint32Type, eRecordTotalCycles, 0, 0, "cycles");
@@ -665,6 +731,9 @@ void initRecord(QMap<quint16, CFitProfile*>& profiles)
     f->addField("enhanced_altitude", fitUint32Type, eRecordEnhancedAltitude, 5, 500, "m");
     f->addField("battery_soc", fitUint8Type, eRecordBatterySoc, 2, 0, "percent");
     f->addField("motor_power", fitUint16Type, eRecordMotorPower, 0, 0, "watts");
+    f->addField("vertical_ratio", fitUint16Type, eRecordVerticalRatio, 100, 0, "percent");
+    f->addField("stance_time_balance", fitUint16Type, eRecordStanceTimeBalance, 100, 0, "percent");
+    f->addField("step_length", fitUint16Type, eRecordStepLength, 10, 0, "mm");
     profiles.insert(eMesgNumRecord, f);
 }
 
@@ -694,14 +763,14 @@ void initEvent(QMap<quint16, CFitProfile*>& profiles)
     f->addSubfield("calorie_duration_alert", fitUint32Type, eEventData, 0, 0, "calories", eEventEvent, eEventCalorieDurationAlert);
     f->addSubfield("fitness_equipment_state", fitEnumType, eEventData, 0, 0, "", eEventEvent, eEventFitnessEquipment);
     f->addSubfield("sport_point", fitUint32Type, eEventData, 0, 0, "", eEventEvent, eEventSportPoint);
-    f->addComponent(16, "sport_point", fitUint32Type, eEventData, 1, 0, "", eEventScore, 16);
-    f->addComponent(16, "sport_point", fitUint32Type, eEventData, 1, 0, "", eEventOpponentScore, 16);
+    f->addComponent(16, "sport_point", fitUint32Type, eEventData, 11, 0, "", eEventScore, 1616);
+    f->addComponent(16, "sport_point", fitUint32Type, eEventData, 0, 0, "", eEventOpponentScore, 0);
     f->addSubfield("gear_change_data", fitUint32Type, eEventData, 0, 0, "", eEventEvent, eEventFrontGearChange);
     f->addSubfield("gear_change_data", fitUint32Type, eEventData, 0, 0, "", eEventEvent, eEventRearGearChange);
-    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 1, 0, "", eEventRearGearNum, 8);
-    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 1, 0, "", eEventRearGear, 8);
-    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 1, 0, "", eEventFrontGearNum, 8);
-    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 1, 0, "", eEventFrontGear, 8);
+    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 1111, 0, "", eEventRearGearNum, 8);
+    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 0, 0, "", eEventRearGear, 8);
+    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 0, 0, "", eEventFrontGearNum, 8);
+    f->addComponent(18, "gear_change_data", fitUint32Type, eEventData, 0, 0, "", eEventFrontGear, 8);
     f->addSubfield("rider_position", fitEnumType, eEventData, 0, 0, "", eEventEvent, eEventRiderPositionChange);
     f->addSubfield("comm_timeout", fitEnumType, eEventData, 0, 0, "", eEventEvent, eEventCommTimeout);
     f->addField("event_group", fitUint8Type, eEventEventGroup, 0, 0, "");
@@ -766,6 +835,55 @@ void initHrv(QMap<quint16, CFitProfile*>& profiles)
     profiles.insert(eMesgNumHrv, f);
 }
 
+void initWeatherConditions(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("weather_conditions", eMesgNumWeatherConditions);
+    f->addField("timestamp", fitEnumType, eWeatherConditionsTimestamp, 0, 0, "");
+    f->addField("weather_report", fitEnumType, eWeatherConditionsWeatherReport, 0, 0, "");
+    f->addField("temperature", fitSint8Type, eWeatherConditionsTemperature, 0, 0, "C");
+    f->addField("condition", fitEnumType, eWeatherConditionsCondition, 0, 0, "");
+    f->addField("wind_direction", fitUint16Type, eWeatherConditionsWindDirection, 0, 0, "degrees");
+    f->addField("wind_speed", fitUint16Type, eWeatherConditionsWindSpeed, 1000, 0, "m/s");
+    f->addField("precipitation_probability", fitUint8Type, eWeatherConditionsPrecipitationProbability, 0, 0, "");
+    f->addField("temperature_feels_like", fitSint8Type, eWeatherConditionsTemperatureFeelsLike, 0, 0, "C");
+    f->addField("relative_humidity", fitUint8Type, eWeatherConditionsRelativeHumidity, 0, 0, "");
+    f->addField("location", fitStringType, eWeatherConditionsLocation, 0, 0, "");
+    f->addField("observed_at_time", fitEnumType, eWeatherConditionsObservedAtTime, 0, 0, "");
+    f->addField("observed_location_lat", fitSint32Type, eWeatherConditionsObservedLocationLat, 0, 0, "semicircles");
+    f->addField("observed_location_long", fitSint32Type, eWeatherConditionsObservedLocationLong, 0, 0, "semicircles");
+    f->addField("day_of_week", fitEnumType, eWeatherConditionsDayOfWeek, 0, 0, "");
+    f->addField("high_temperature", fitSint8Type, eWeatherConditionsHighTemperature, 0, 0, "C");
+    f->addField("low_temperature", fitSint8Type, eWeatherConditionsLowTemperature, 0, 0, "C");
+    profiles.insert(eMesgNumWeatherConditions, f);
+}
+
+void initWeatherAlert(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("weather_alert", eMesgNumWeatherAlert);
+    f->addField("timestamp", fitEnumType, eWeatherAlertTimestamp, 0, 0, "");
+    f->addField("report_id", fitStringType, eWeatherAlertReportId, 0, 0, "");
+    f->addField("issue_time", fitEnumType, eWeatherAlertIssueTime, 0, 0, "");
+    f->addField("expire_time", fitEnumType, eWeatherAlertExpireTime, 0, 0, "");
+    f->addField("severity", fitEnumType, eWeatherAlertSeverity, 0, 0, "");
+    f->addField("type", fitEnumType, eWeatherAlertType, 0, 0, "");
+    profiles.insert(eMesgNumWeatherAlert, f);
+}
+
+void initGpsMetadata(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("gps_metadata", eMesgNumGpsMetadata);
+    f->addField("timestamp", fitEnumType, eGpsMetadataTimestamp, 0, 0, "s");
+    f->addField("timestamp_ms", fitUint16Type, eGpsMetadataTimestampMs, 0, 0, "ms");
+    f->addField("position_lat", fitSint32Type, eGpsMetadataPositionLat, 0, 0, "semicircles");
+    f->addField("position_long", fitSint32Type, eGpsMetadataPositionLong, 0, 0, "semicircles");
+    f->addField("enhanced_altitude", fitUint32Type, eGpsMetadataEnhancedAltitude, 5, 500, "m");
+    f->addField("enhanced_speed", fitUint32Type, eGpsMetadataEnhancedSpeed, 1000, 0, "m/s");
+    f->addField("heading", fitUint16Type, eGpsMetadataHeading, 100, 0, "degrees");
+    f->addField("utc_timestamp", fitEnumType, eGpsMetadataUtcTimestamp, 0, 0, "s");
+    f->addField("velocity", fitSint16Type, eGpsMetadataVelocity, 100, 0, "m/s");
+    profiles.insert(eMesgNumGpsMetadata, f);
+}
+
 void initCameraEvent(QMap<quint16, CFitProfile*>& profiles)
 {
     CFitProfile* f = new CFitProfile("camera_event", eMesgNumCameraEvent);
@@ -804,7 +922,25 @@ void initAccelerometerData(QMap<quint16, CFitProfile*>& profiles)
     f->addField("calibrated_accel_x", fitFloat32Type, eAccelerometerDataCalibratedAccelX, 0, 0, "g");
     f->addField("calibrated_accel_y", fitFloat32Type, eAccelerometerDataCalibratedAccelY, 0, 0, "g");
     f->addField("calibrated_accel_z", fitFloat32Type, eAccelerometerDataCalibratedAccelZ, 0, 0, "g");
+    f->addField("compressed_calibrated_accel_x", fitSint16Type, eAccelerometerDataCompressedCalibratedAccelX, 0, 0, "mG");
+    f->addField("compressed_calibrated_accel_y", fitSint16Type, eAccelerometerDataCompressedCalibratedAccelY, 0, 0, "mG");
+    f->addField("compressed_calibrated_accel_z", fitSint16Type, eAccelerometerDataCompressedCalibratedAccelZ, 0, 0, "mG");
     profiles.insert(eMesgNumAccelerometerData, f);
+}
+
+void initMagnetometerData(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("magnetometer_data", eMesgNumMagnetometerData);
+    f->addField("timestamp", fitEnumType, eMagnetometerDataTimestamp, 0, 0, "s");
+    f->addField("timestamp_ms", fitUint16Type, eMagnetometerDataTimestampMs, 0, 0, "ms");
+    f->addField("sample_time_offset", fitUint16Type, eMagnetometerDataSampleTimeOffset, 0, 0, "ms");
+    f->addField("mag_x", fitUint16Type, eMagnetometerDataMagX, 0, 0, "counts");
+    f->addField("mag_y", fitUint16Type, eMagnetometerDataMagY, 0, 0, "counts");
+    f->addField("mag_z", fitUint16Type, eMagnetometerDataMagZ, 0, 0, "counts");
+    f->addField("calibrated_mag_x", fitFloat32Type, eMagnetometerDataCalibratedMagX, 0, 0, "G");
+    f->addField("calibrated_mag_y", fitFloat32Type, eMagnetometerDataCalibratedMagY, 0, 0, "G");
+    f->addField("calibrated_mag_z", fitFloat32Type, eMagnetometerDataCalibratedMagZ, 0, 0, "G");
+    profiles.insert(eMesgNumMagnetometerData, f);
 }
 
 void initThreeDSensorCalibration(QMap<quint16, CFitProfile*>& profiles)
@@ -919,6 +1055,7 @@ void initCourse(QMap<quint16, CFitProfile*>& profiles)
     f->addField("sport", fitEnumType, eCourseSport, 0, 0, "");
     f->addField("name", fitStringType, eCourseName, 0, 0, "");
     f->addField("capabilities", fitEnumType, eCourseCapabilities, 0, 0, "");
+    f->addField("sub_sport", fitEnumType, eCourseSubSport, 0, 0, "");
     profiles.insert(eMesgNumCourse, f);
 }
 
@@ -1065,6 +1202,7 @@ void initSegmentLap(QMap<quint16, CFitProfile*>& profiles)
     f->addField("max_power_position", fitUint16Type, eSegmentLapMaxPowerPosition, 0, 0, "watts");
     f->addField("avg_cadence_position", fitUint8Type, eSegmentLapAvgCadencePosition, 0, 0, "rpm");
     f->addField("max_cadence_position", fitUint8Type, eSegmentLapMaxCadencePosition, 0, 0, "rpm");
+    f->addField("manufacturer", fitEnumType, eSegmentLapManufacturer, 0, 0, "");
     profiles.insert(eMesgNumSegmentLap, f);
 }
 
@@ -1079,6 +1217,7 @@ void initSegmentFile(QMap<quint16, CFitProfile*>& profiles)
     f->addField("leader_group_primary_key", fitUint32Type, eSegmentFileLeaderGroupPrimaryKey, 0, 0, "");
     f->addField("leader_activity_id", fitUint32Type, eSegmentFileLeaderActivityId, 0, 0, "");
     f->addField("leader_activity_id_string", fitStringType, eSegmentFileLeaderActivityIdString, 0, 0, "");
+    f->addField("default_race_leader", fitUint8Type, eSegmentFileDefaultRaceLeader, 0, 0, "");
     profiles.insert(eMesgNumSegmentFile, f);
 }
 
@@ -1102,8 +1241,8 @@ void initWorkoutStep(QMap<quint16, CFitProfile*>& profiles)
     f->addSubfield("duration_time", fitUint32Type, eWorkoutStepDurationValue, 1000, 0, "s", eWorkoutStepDurationType, eWktStepDurationTime);
     f->addSubfield("duration_time", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepetitionTime);
     f->addSubfield("duration_distance", fitUint32Type, eWorkoutStepDurationValue, 100, 0, "m", eWorkoutStepDurationType, eWktStepDurationDistance);
-    f->addSubfield("duration_hr", fitEnumType, eWorkoutStepDurationValue, 0, 0, "%", eWorkoutStepDurationType, eWktStepDurationHrLessThan);
-    f->addSubfield("duration_hr", fitEnumType, eWorkoutStepDurationValue, 0, 0, "or", eWorkoutStepDurationType, eWktStepDurationHrGreaterThan);
+    f->addSubfield("duration_hr", fitEnumType, eWorkoutStepDurationValue, 0, 0, "% or bpm", eWorkoutStepDurationType, eWktStepDurationHrLessThan);
+    f->addSubfield("duration_hr", fitEnumType, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationHrGreaterThan);
     f->addSubfield("duration_calories", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "calories", eWorkoutStepDurationType, eWktStepDurationCalories);
     f->addSubfield("duration_step", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilStepsCmplt);
     f->addSubfield("duration_step", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilTime);
@@ -1113,31 +1252,34 @@ void initWorkoutStep(QMap<quint16, CFitProfile*>& profiles)
     f->addSubfield("duration_step", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilHrGreaterThan);
     f->addSubfield("duration_step", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerLessThan);
     f->addSubfield("duration_step", fitUint32Type, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerGreaterThan);
-    f->addSubfield("duration_power", fitEnumType, eWorkoutStepDurationValue, 0, 0, "%", eWorkoutStepDurationType, eWktStepDurationPowerLessThan);
-    f->addSubfield("duration_power", fitEnumType, eWorkoutStepDurationValue, 0, 0, "or", eWorkoutStepDurationType, eWktStepDurationPowerGreaterThan);
+    f->addSubfield("duration_power", fitEnumType, eWorkoutStepDurationValue, 0, 0, "% or watts", eWorkoutStepDurationType, eWktStepDurationPowerLessThan);
+    f->addSubfield("duration_power", fitEnumType, eWorkoutStepDurationValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationPowerGreaterThan);
     f->addField("target_type", fitEnumType, eWorkoutStepTargetType, 0, 0, "");
     f->addField("target_value", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "");
+    f->addSubfield("target_speed_zone", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepTargetType, eWktStepTargetSpeed);
     f->addSubfield("target_hr_zone", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepTargetType, eWktStepTargetHeartRate);
+    f->addSubfield("target_cadence_zone", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepTargetType, eWktStepTargetCadence);
     f->addSubfield("target_power_zone", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepTargetType, eWktStepTargetPower);
     f->addSubfield("repeat_steps", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilStepsCmplt);
     f->addSubfield("repeat_time", fitUint32Type, eWorkoutStepTargetValue, 1000, 0, "s", eWorkoutStepDurationType, eWktStepDurationRepeatUntilTime);
     f->addSubfield("repeat_distance", fitUint32Type, eWorkoutStepTargetValue, 100, 0, "m", eWorkoutStepDurationType, eWktStepDurationRepeatUntilDistance);
     f->addSubfield("repeat_calories", fitUint32Type, eWorkoutStepTargetValue, 0, 0, "calories", eWorkoutStepDurationType, eWktStepDurationRepeatUntilCalories);
-    f->addSubfield("repeat_hr", fitEnumType, eWorkoutStepTargetValue, 0, 0, "%", eWorkoutStepDurationType, eWktStepDurationRepeatUntilHrLessThan);
-    f->addSubfield("repeat_hr", fitEnumType, eWorkoutStepTargetValue, 0, 0, "or", eWorkoutStepDurationType, eWktStepDurationRepeatUntilHrGreaterThan);
-    f->addSubfield("repeat_power", fitEnumType, eWorkoutStepTargetValue, 0, 0, "%", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerLessThan);
-    f->addSubfield("repeat_power", fitEnumType, eWorkoutStepTargetValue, 0, 0, "or", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerGreaterThan);
+    f->addSubfield("repeat_hr", fitEnumType, eWorkoutStepTargetValue, 0, 0, "% or bpm", eWorkoutStepDurationType, eWktStepDurationRepeatUntilHrLessThan);
+    f->addSubfield("repeat_hr", fitEnumType, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilHrGreaterThan);
+    f->addSubfield("repeat_power", fitEnumType, eWorkoutStepTargetValue, 0, 0, "% or watts", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerLessThan);
+    f->addSubfield("repeat_power", fitEnumType, eWorkoutStepTargetValue, 0, 0, "", eWorkoutStepDurationType, eWktStepDurationRepeatUntilPowerGreaterThan);
     f->addField("custom_target_value_low", fitUint32Type, eWorkoutStepCustomTargetValueLow, 0, 0, "");
     f->addSubfield("custom_target_speed_low", fitUint32Type, eWorkoutStepCustomTargetValueLow, 1000, 0, "m/s", eWorkoutStepTargetType, eWktStepTargetSpeed);
-    f->addSubfield("custom_target_heart_rate_low", fitEnumType, eWorkoutStepCustomTargetValueLow, 0, 0, "%", eWorkoutStepTargetType, eWktStepTargetHeartRate);
+    f->addSubfield("custom_target_heart_rate_low", fitEnumType, eWorkoutStepCustomTargetValueLow, 0, 0, "% or bpm", eWorkoutStepTargetType, eWktStepTargetHeartRate);
     f->addSubfield("custom_target_cadence_low", fitUint32Type, eWorkoutStepCustomTargetValueLow, 0, 0, "rpm", eWorkoutStepTargetType, eWktStepTargetCadence);
-    f->addSubfield("custom_target_power_low", fitEnumType, eWorkoutStepCustomTargetValueLow, 0, 0, "%", eWorkoutStepTargetType, eWktStepTargetPower);
+    f->addSubfield("custom_target_power_low", fitEnumType, eWorkoutStepCustomTargetValueLow, 0, 0, "% or watts", eWorkoutStepTargetType, eWktStepTargetPower);
     f->addField("custom_target_value_high", fitUint32Type, eWorkoutStepCustomTargetValueHigh, 0, 0, "");
     f->addSubfield("custom_target_speed_high", fitUint32Type, eWorkoutStepCustomTargetValueHigh, 1000, 0, "m/s", eWorkoutStepTargetType, eWktStepTargetSpeed);
-    f->addSubfield("custom_target_heart_rate_high", fitEnumType, eWorkoutStepCustomTargetValueHigh, 0, 0, "%", eWorkoutStepTargetType, eWktStepTargetHeartRate);
+    f->addSubfield("custom_target_heart_rate_high", fitEnumType, eWorkoutStepCustomTargetValueHigh, 0, 0, "% or bpm", eWorkoutStepTargetType, eWktStepTargetHeartRate);
     f->addSubfield("custom_target_cadence_high", fitUint32Type, eWorkoutStepCustomTargetValueHigh, 0, 0, "rpm", eWorkoutStepTargetType, eWktStepTargetCadence);
-    f->addSubfield("custom_target_power_high", fitEnumType, eWorkoutStepCustomTargetValueHigh, 0, 0, "%", eWorkoutStepTargetType, eWktStepTargetPower);
+    f->addSubfield("custom_target_power_high", fitEnumType, eWorkoutStepCustomTargetValueHigh, 0, 0, "% or watts", eWorkoutStepTargetType, eWktStepTargetPower);
     f->addField("intensity", fitEnumType, eWorkoutStepIntensity, 0, 0, "");
+    f->addField("notes", fitStringType, eWorkoutStepNotes, 0, 0, "");
     profiles.insert(eMesgNumWorkoutStep, f);
 }
 
@@ -1247,15 +1389,42 @@ void initMonitoring(QMap<quint16, CFitProfile*>& profiles)
     f->addField("activity_time", fitUint16Type, eMonitoringActivityTime, 0, 0, "minutes");
     f->addField("active_calories", fitUint16Type, eMonitoringActiveCalories, 0, 0, "kcal");
     f->addField("current_activity_type_intensity", fitByteType, eMonitoringCurrentActivityTypeIntensity, 0, 0, "");
-    f->addComponent("current_activity_type_intensity", fitByteType, eMonitoringCurrentActivityTypeIntensity, 0, 0, "", eMonitoringActivityType, 5);
-    f->addComponent("current_activity_type_intensity", fitByteType, eMonitoringCurrentActivityTypeIntensity, 0, 0, "", eMonitoringIntensity, 3);
+    f->addComponent("current_activity_type_intensity", fitByteType, eMonitoringCurrentActivityTypeIntensity, 0, 0, "", eMonitoringActivityType, 53);
+    f->addComponent("current_activity_type_intensity", fitByteType, eMonitoringCurrentActivityTypeIntensity, 0, 0, "", eMonitoringIntensity, 0);
     f->addField("timestamp_min_8", fitUint8Type, eMonitoringTimestampMin8, 0, 0, "min");
     f->addField("timestamp_16", fitUint16Type, eMonitoringTimestamp16, 0, 0, "s");
     f->addField("heart_rate", fitUint8Type, eMonitoringHeartRate, 0, 0, "bpm");
     f->addField("intensity", fitUint8Type, eMonitoringIntensity, 10, 0, "");
     f->addField("duration_min", fitUint16Type, eMonitoringDurationMin, 0, 0, "min");
     f->addField("duration", fitUint32Type, eMonitoringDuration, 0, 0, "s");
+    f->addField("ascent", fitUint32Type, eMonitoringAscent, 1000, 0, "m");
+    f->addField("descent", fitUint32Type, eMonitoringDescent, 1000, 0, "m");
+    f->addField("moderate_activity_minutes", fitUint16Type, eMonitoringModerateActivityMinutes, 0, 0, "minutes");
+    f->addField("vigorous_activity_minutes", fitUint16Type, eMonitoringVigorousActivityMinutes, 0, 0, "minutes");
     profiles.insert(eMesgNumMonitoring, f);
+}
+
+void initHr(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("hr", eMesgNumHr);
+    f->addField("timestamp", fitEnumType, eHrTimestamp, 0, 0, "");
+    f->addField("fractional_timestamp", fitUint16Type, eHrFractionalTimestamp, 32768, 0, "s");
+    f->addField("time256", fitUint8Type, eHrTime256, 0, 0, "");
+    f->addComponent("time256", fitUint8Type, eHrTime256, 256, 0, "s", eHrFractionalTimestamp, 8);
+    f->addField("filtered_bpm", fitUint8Type, eHrFilteredBpm, 0, 0, "bpm");
+    f->addField("event_timestamp", fitUint32Type, eHrEventTimestamp, 1024, 0, "s");
+    f->addField("event_timestamp_12", fitByteType, eHrEventTimestamp12, 0, 0, "");
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    f->addComponent("event_timestamp_12", fitByteType, eHrEventTimestamp12, 1024, 0, "s", eHrEventTimestamp, 12);
+    profiles.insert(eMesgNumHr, f);
 }
 
 void initMemoGlob(QMap<quint16, CFitProfile*>& profiles)
@@ -1266,6 +1435,133 @@ void initMemoGlob(QMap<quint16, CFitProfile*>& profiles)
     f->addField("message_number", fitUint16Type, eMemoGlobMessageNumber, 0, 0, "");
     f->addField("message_index", fitEnumType, eMemoGlobMessageIndex, 0, 0, "");
     profiles.insert(eMesgNumMemoGlob, f);
+}
+
+void initAntChannelId(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("ant_channel_id", eMesgNumAntChannelId);
+    f->addField("channel_number", fitUint8Type, eAntChannelIdChannelNumber, 0, 0, "");
+    f->addField("device_type", fitUint8zType, eAntChannelIdDeviceType, 0, 0, "");
+    f->addField("device_number", fitUint16zType, eAntChannelIdDeviceNumber, 0, 0, "");
+    f->addField("transmission_type", fitUint8zType, eAntChannelIdTransmissionType, 0, 0, "");
+    f->addField("device_index", fitEnumType, eAntChannelIdDeviceIndex, 0, 0, "");
+    profiles.insert(eMesgNumAntChannelId, f);
+}
+
+void initAntRx(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("ant_rx", eMesgNumAntRx);
+    f->addField("timestamp", fitEnumType, eAntRxTimestamp, 0, 0, "s");
+    f->addField("fractional_timestamp", fitUint16Type, eAntRxFractionalTimestamp, 32768, 0, "s");
+    f->addField("mesg_id", fitByteType, eAntRxMesgId, 0, 0, "");
+    f->addField("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "");
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxChannelNumber, 888888888);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntRxMesgData, 0, 0, "", eAntRxData, 0);
+    f->addField("channel_number", fitUint8Type, eAntRxChannelNumber, 0, 0, "");
+    f->addField("data", fitByteType, eAntRxData, 0, 0, "");
+    profiles.insert(eMesgNumAntRx, f);
+}
+
+void initAntTx(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("ant_tx", eMesgNumAntTx);
+    f->addField("timestamp", fitEnumType, eAntTxTimestamp, 0, 0, "s");
+    f->addField("fractional_timestamp", fitUint16Type, eAntTxFractionalTimestamp, 32768, 0, "s");
+    f->addField("mesg_id", fitByteType, eAntTxMesgId, 0, 0, "");
+    f->addField("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "");
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxChannelNumber, 888888888);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addComponent("mesg_data", fitByteType, eAntTxMesgData, 0, 0, "", eAntTxData, 0);
+    f->addField("channel_number", fitUint8Type, eAntTxChannelNumber, 0, 0, "");
+    f->addField("data", fitByteType, eAntTxData, 0, 0, "");
+    profiles.insert(eMesgNumAntTx, f);
+}
+
+void initExdScreenConfiguration(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("exd_screen_configuration", eMesgNumExdScreenConfiguration);
+    f->addField("screen_index", fitUint8Type, eExdScreenConfigurationScreenIndex, 0, 0, "");
+    f->addField("field_count", fitUint8Type, eExdScreenConfigurationFieldCount, 0, 0, "");
+    f->addField("layout", fitEnumType, eExdScreenConfigurationLayout, 0, 0, "");
+    f->addField("screen_enabled", fitEnumType, eExdScreenConfigurationScreenEnabled, 0, 0, "");
+    profiles.insert(eMesgNumExdScreenConfiguration, f);
+}
+
+void initExdDataFieldConfiguration(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("exd_data_field_configuration", eMesgNumExdDataFieldConfiguration);
+    f->addField("screen_index", fitUint8Type, eExdDataFieldConfigurationScreenIndex, 0, 0, "");
+    f->addField("concept_field", fitByteType, eExdDataFieldConfigurationConceptField, 0, 0, "");
+    f->addComponent("concept_field", fitByteType, eExdDataFieldConfigurationConceptField, 0, 0, "", eExdDataFieldConfigurationFieldId, 44);
+    f->addComponent("concept_field", fitByteType, eExdDataFieldConfigurationConceptField, 0, 0, "", eExdDataFieldConfigurationConceptCount, 0);
+    f->addField("field_id", fitUint8Type, eExdDataFieldConfigurationFieldId, 0, 0, "");
+    f->addField("concept_count", fitUint8Type, eExdDataFieldConfigurationConceptCount, 0, 0, "");
+    f->addField("display_type", fitEnumType, eExdDataFieldConfigurationDisplayType, 0, 0, "");
+    f->addField("title", fitStringType, eExdDataFieldConfigurationTitle, 0, 0, "");
+    profiles.insert(eMesgNumExdDataFieldConfiguration, f);
+}
+
+void initExdDataConceptConfiguration(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("exd_data_concept_configuration", eMesgNumExdDataConceptConfiguration);
+    f->addField("screen_index", fitUint8Type, eExdDataConceptConfigurationScreenIndex, 0, 0, "");
+    f->addField("concept_field", fitByteType, eExdDataConceptConfigurationConceptField, 0, 0, "");
+    f->addComponent("concept_field", fitByteType, eExdDataConceptConfigurationConceptField, 0, 0, "", eExdDataConceptConfigurationFieldId, 44);
+    f->addComponent("concept_field", fitByteType, eExdDataConceptConfigurationConceptField, 0, 0, "", eExdDataConceptConfigurationConceptIndex, 0);
+    f->addField("field_id", fitUint8Type, eExdDataConceptConfigurationFieldId, 0, 0, "");
+    f->addField("concept_index", fitUint8Type, eExdDataConceptConfigurationConceptIndex, 0, 0, "");
+    f->addField("data_page", fitUint8Type, eExdDataConceptConfigurationDataPage, 0, 0, "");
+    f->addField("concept_key", fitUint8Type, eExdDataConceptConfigurationConceptKey, 0, 0, "");
+    f->addField("scaling", fitUint8Type, eExdDataConceptConfigurationScaling, 0, 0, "");
+    f->addField("data_units", fitEnumType, eExdDataConceptConfigurationDataUnits, 0, 0, "");
+    f->addField("qualifier", fitEnumType, eExdDataConceptConfigurationQualifier, 0, 0, "");
+    f->addField("descriptor", fitEnumType, eExdDataConceptConfigurationDescriptor, 0, 0, "");
+    f->addField("is_signed", fitEnumType, eExdDataConceptConfigurationIsSigned, 0, 0, "");
+    profiles.insert(eMesgNumExdDataConceptConfiguration, f);
+}
+
+void initFieldDescription(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("field_description", eMesgNumFieldDescription);
+    f->addField("developer_data_index", fitUint8Type, eFieldDescriptionDeveloperDataIndex, 0, 0, "");
+    f->addField("field_definition_number", fitUint8Type, eFieldDescriptionFieldDefinitionNumber, 0, 0, "");
+    f->addField("fit_base_type_id", fitEnumType, eFieldDescriptionFitBaseTypeId, 0, 0, "");
+    f->addField("field_name", fitStringType, eFieldDescriptionFieldName, 0, 0, "");
+    f->addField("array", fitUint8Type, eFieldDescriptionArray, 0, 0, "");
+    f->addField("components", fitStringType, eFieldDescriptionComponents, 0, 0, "");
+    f->addField("scale", fitUint8Type, eFieldDescriptionScale, 0, 0, "");
+    f->addField("offset", fitSint8Type, eFieldDescriptionOffset, 0, 0, "");
+    f->addField("units", fitStringType, eFieldDescriptionUnits, 0, 0, "");
+    f->addField("bits", fitStringType, eFieldDescriptionBits, 0, 0, "");
+    f->addField("accumulate", fitStringType, eFieldDescriptionAccumulate, 0, 0, "");
+    f->addField("fit_base_unit_id", fitEnumType, eFieldDescriptionFitBaseUnitId, 0, 0, "");
+    f->addField("native_mesg_num", fitEnumType, eFieldDescriptionNativeMesgNum, 0, 0, "");
+    f->addField("native_field_num", fitUint8Type, eFieldDescriptionNativeFieldNum, 0, 0, "");
+    profiles.insert(eMesgNumFieldDescription, f);
+}
+
+void initDeveloperDataId(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("developer_data_id", eMesgNumDeveloperDataId);
+    f->addField("developer_id", fitByteType, eDeveloperDataIdDeveloperId, 0, 0, "");
+    f->addField("application_id", fitByteType, eDeveloperDataIdApplicationId, 0, 0, "");
+    f->addField("manufacturer_id", fitEnumType, eDeveloperDataIdManufacturerId, 0, 0, "");
+    f->addField("developer_data_index", fitUint8Type, eDeveloperDataIdDeveloperDataIndex, 0, 0, "");
+    f->addField("application_version", fitUint32Type, eDeveloperDataIdApplicationVersion, 0, 0, "");
+    profiles.insert(eMesgNumDeveloperDataId, f);
 }
 
 // ----------- end generated code -----------
@@ -1287,6 +1583,9 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     initHrmProfile(allProfiles);
     initSdmProfile(allProfiles);
     initBikeProfile(allProfiles);
+    initConnectivity(allProfiles);
+    initWatchfaceSettings(allProfiles);
+    initOhrSettings(allProfiles);
     initZonesTarget(allProfiles);
     initSport(allProfiles);
     initHrZone(allProfiles);
@@ -1304,9 +1603,13 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     initDeviceInfo(allProfiles);
     initTrainingFile(allProfiles);
     initHrv(allProfiles);
+    initWeatherConditions(allProfiles);
+    initWeatherAlert(allProfiles);
+    initGpsMetadata(allProfiles);
     initCameraEvent(allProfiles);
     initGyroscopeData(allProfiles);
     initAccelerometerData(allProfiles);
+    initMagnetometerData(allProfiles);
     initThreeDSensorCalibration(allProfiles);
     initVideoFrame(allProfiles);
     initObdiiData(allProfiles);
@@ -1331,7 +1634,16 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     initBloodPressure(allProfiles);
     initMonitoringInfo(allProfiles);
     initMonitoring(allProfiles);
+    initHr(allProfiles);
     initMemoGlob(allProfiles);
+    initAntChannelId(allProfiles);
+    initAntRx(allProfiles);
+    initAntTx(allProfiles);
+    initExdScreenConfiguration(allProfiles);
+    initExdDataFieldConfiguration(allProfiles);
+    initExdDataConceptConfiguration(allProfiles);
+    initFieldDescription(allProfiles);
+    initDeveloperDataId(allProfiles);
 
     // invalid profile
     allProfiles.insert(fitGlobalMesgNrInvalid, new CFitProfile());

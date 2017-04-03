@@ -16,32 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CFITFIELDDATASTATE_H
-#define CFITFIELDDATASTATE_H
+#ifndef CFITDEVFIELDDEFINITIONSTATE_H
+#define CFITDEVFIELDDEFINITIONSTATE_H
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-static const int fitMaxFieldSize =255;
-
-class CFitFieldDataState final : public IFitDecoderState
+class CFitDevFieldDefinitionState final : public IFitDecoderState
 {
 public:
-    CFitFieldDataState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
-    virtual ~CFitFieldDataState() {}
+    CFitDevFieldDefinitionState(shared_state_data_t &data) : IFitDecoderState(data) { reset(); }
+    virtual ~CFitDevFieldDefinitionState() {}
+
     void reset() override;
     decode_state_e process(quint8 &dataByte) override;
 
 private:
-    bool handleFitField();
-    bool handleDevField();
-    void devProfile(CFitMessage& mesg);
-    CFitFieldProfile buildDevFieldProfile(CFitMessage& mesg);
+    quint8 offset = 0;
 
-    quint8 fieldIndex;
-    quint8 devFieldIndex;
-    quint8 fieldDataIndex;
-    quint8 fieldData[fitMaxFieldSize];
+    quint8 fieldNr = 0;
+    quint8 size = 0;
+    quint8 devDataIndex = 0;
 };
 
-
-#endif // CFITFIELDDATASTATE_H
+#endif //CFITDEVFIELDDEFINITIONSTATE_H

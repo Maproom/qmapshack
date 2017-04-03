@@ -21,7 +21,7 @@
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/fit_const.h"
 
-unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quint8* rawData)
+quint64 CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quint8* rawData)
 {
     switch(baseType.nr())
     {
@@ -37,13 +37,15 @@ unsigned int CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType,
     case eBaseTypeNrUint32:
     case eBaseTypeNrUint32z:
         return getUint32(rawData);
-
+    case eBaseTypeNrUint64:
+    case eBaseTypeNrUint64z:
+        return getUint64(rawData);
     default:
         return 0;
     }
 }
 
-int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *rawData)
+qint64 CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *rawData)
 {
     switch(baseType.nr())
     {
@@ -55,7 +57,9 @@ int CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint8 *
 
     case eBaseTypeNrSint32:
         return getSint32(rawData);
-
+        
+    case eBaseTypeNrSint64:
+        return getSint64(rawData);
     default:
         return 0;
     }
@@ -91,6 +95,14 @@ quint32 CFitByteDataTransformer::getUint32(quint8* rawData)
     return ((quint32)rawData[3] << 24) | ((quint32)rawData[2] << 16) | ((quint32)rawData[1] << 8) | (quint32)rawData[0];
 }
 
+quint64 CFitByteDataTransformer::getUint64(quint8* rawData)
+{
+    return ((quint64) rawData[7] << 56) | ((quint64) rawData[6] << 48)
+           | ((quint64) rawData[5] << 40) | ((quint64) rawData[4] << 32)
+           | ((quint64) rawData[3] << 24) | ((quint64) rawData[2] << 16)
+           | ((quint64) rawData[1] << 8) | rawData[0];
+}
+
 qint8 CFitByteDataTransformer::getSint8(quint8* rawData)
 {
     return (qint8) rawData[0];
@@ -104,6 +116,15 @@ qint16 CFitByteDataTransformer::getSint16(quint8* rawData)
 qint32 CFitByteDataTransformer::getSint32(quint8* rawData)
 {
     return ((qint32)rawData[3] << 24) | ((qint32)rawData[2] << 16) | ((qint32)rawData[1] << 8) | (qint32)rawData[0];
+}
+
+
+qint64 CFitByteDataTransformer::getSint64(quint8* rawData)
+{
+    return  ((qint64) rawData[7] << 56) | ((qint64) rawData[6] << 48)
+                | ((qint64) rawData[5] << 40) | ((qint64) rawData[4] << 32)
+                | ((qint64) rawData[3] << 24) | ((qint64) rawData[2] << 16)
+                | ((qint64) rawData[1] << 8) | rawData[0];
 }
 
 qreal CFitByteDataTransformer::getFloat32(quint8* rawData)

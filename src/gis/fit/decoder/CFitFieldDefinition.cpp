@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitFieldDefinition.h"
-
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
@@ -27,8 +26,14 @@
 static const quint8 fitEndianFlagMask = 0x80;
 
 
+CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 size, quint8 type)
+   : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent), fieldProfile(fieldProfile)
+{
+}
+
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type)
-    : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent)
+   : CFitFieldDefinition(parent, nullptr, defNr, size, type)
+
 {
     fieldProfile = CFitProfileLookup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : fitGlobalMesgNrInvalid, defNr);
 }
@@ -40,9 +45,10 @@ CFitFieldDefinition::CFitFieldDefinition()
 
 QString CFitFieldDefinition::fieldInfo() const
 {
-    QString fstr = QString("%1 %2 (%3): %4, type %5, size %6, endian %7")
+    QString fstr = QString("%1 %2 %3 (%4): %5, type %6, size %7, endian %8")
                    .arg(profile().hasSubfields() ? "dynamic" : profile().hasComponents() ? "component" : "field")
                    .arg(profile().getName())
+                   .arg(profile().getFieldType() == eFieldTypeDevelopment ? " DEV" : "")
                    .arg(getDefNr())
                    .arg(getBaseType().name())
                    .arg(getType())

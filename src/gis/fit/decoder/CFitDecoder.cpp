@@ -20,6 +20,7 @@
 #include "gis/fit/decoder/CFitDecoder.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/decoder/CFitFieldDefinitionState.h"
+#include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/decoder/CFitHeaderState.h"
 #include "gis/fit/decoder/CFitRecordContentState.h"
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
@@ -31,6 +32,7 @@ CFitDecoder::CFitDecoder()
     stateMap[eDecoderStateRecord] = new CFitRecordHeaderState(data);
     stateMap[eDecoderStateRecordContent] = new CFitRecordContentState(data);
     stateMap[eDecoderStateFieldDef] = new CFitFieldDefinitionState(data);
+    stateMap[eDecoderStateDevFieldDef] = new CFitDevFieldDefinitionState(data);
     stateMap[eDecoderStateFieldData] = new CFitFieldDataState(data);
     stateMap[eDecoderStateFileCrc] = new CFitCrcState(data);
 }
@@ -45,10 +47,11 @@ CFitDecoder::~CFitDecoder()
 
 void CFitDecoder::resetSharedData()
 {
-    data.defintions = QMap<quint8, CFitDefinitionMessage>();
-    data.defintionHistory = QList<CFitDefinitionMessage>();
+    data.definitions = QMap<quint8, CFitDefinitionMessage>();
+    data.definitionHistory = QList<CFitDefinitionMessage>();
     data.messages = QList<CFitMessage>();
-    data.lastDefintion = nullptr;
+    data.devFieldProfiles = QList<CFitFieldProfile>();
+    data.lastDefinition = nullptr;
     data.lastMessage = nullptr;
     data.timestamp = 0;
     data.lastTimeOffset = 0;
@@ -57,7 +60,7 @@ void CFitDecoder::resetSharedData()
     data.crc = 0;
 }
 
-void printDefintions(const QList<CFitDefinitionMessage>& defs)
+void printDefinitions(const QList<CFitDefinitionMessage>& defs)
 {
     for(int i = 0; i < defs.size(); i++)
     {
@@ -81,7 +84,7 @@ void printMessages(const QList<CFitMessage>& messages)
 
 void CFitDecoder::printDebugInfo()
 {
-    FITDEBUG(1, printDefintions(data.defintionHistory))
+    FITDEBUG(1, printDefinitions(data.definitionHistory))
     FITDEBUG(1, printMessages(data.messages))
 }
 void CFitDecoder::decode(QFile &file)

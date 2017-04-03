@@ -199,7 +199,7 @@ quint32 CFitComponentfieldProfile::getBits() const
 quint32 CFitComponentfieldProfile::getBitmask() const
 {
     quint32 bitmask = 0;
-    for (int i = 0; i < nrOfBits; i++)
+    for (quint32 i = 0; i < nrOfBits; i++)
     {
         bitmask |= (1 << i);
     }

@@ -210,11 +210,17 @@ CFitFieldProfile CFitFieldDataState::buildDevFieldProfile(CFitMessage& mesg)
         }
     }
 
+    Q_UNUSED(devDataIdx)
+    Q_UNUSED(array)
+    Q_UNUSED(baseUnitId)
+    Q_UNUSED(natvieMesgNum)
+    Q_UNUSED(nativeFieldNum)
+
     CFitFieldProfile devFieldProfile = CFitFieldProfile(nullptr, fieldName, *CFitBaseTypeMap::get(baseType), fieldDefNr,
                                                         scale, offset, units, eFieldTypeDevelopment);
-    // TODO complete field profile
+    // for documentation: the development field profile may contain more fields in the future as can be adumbrated by
+    // the description field enumeration. According to the FIT specification Rev 2.3  table 4-9 - Field Description Messages
+    // those fields are not yet used.
 
-    // TODO a development field definition is is linked to an developer data ID. It is needed if more than one
-    // TODO developer data ID is inside a fit file.
     return devFieldProfile;
 }

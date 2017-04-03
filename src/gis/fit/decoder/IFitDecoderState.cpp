@@ -117,6 +117,13 @@ void IFitDecoderState::incFileBytesRead()
 
 void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
 {
+    // for documentation: a development field definition is linked to an developer data ID. Only the tuple developer data index
+    // and field definition number must be unique. So far no fit file with more than one developer data ID has been created.
+    if(devFieldProfile(fieldProfile.getFieldDefNum())->getFieldDefNum() ==  fieldProfile.getFieldDefNum())
+    {
+        throw tr("FIT decoding error: a development field with the field_definition_number %1 already exists.")
+                .arg(fieldProfile.getFieldDefNum());
+    }
     data.devFieldProfiles.append(fieldProfile);
 }
 

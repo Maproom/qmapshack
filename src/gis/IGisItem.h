@@ -436,7 +436,12 @@ public:
     /**
        @brief Remove all history entries younger than the current selected one.
      */
-    void cutHistory();
+    void cutHistoryAfter();
+
+    /**
+       @brief Remove all history entries older than the current selected one.
+    */
+    void cutHistoryBefore();
 
     /**
        @brief Create a clone of itself and pass back the pointer

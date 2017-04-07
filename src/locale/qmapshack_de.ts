@@ -122,7 +122,7 @@
         <translation>Ansicht %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="693"/>
+        <location filename="../canvas/CCanvas.cpp" line="695"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -728,7 +728,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitDecoder</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="116"/>
+        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="119"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
         <translation>FIT Dekodierfehler: Unerwartetes Ende der Datei %1.</translation>
     </message>
@@ -736,9 +736,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitFieldBuilder</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="70"/>
+        <location filename="../gis/fit/decoder/CFitFieldBuilder.cpp" line="77"/>
         <source>FIT decoding error: unknown base type %1.</source>
         <translation>FIT Dekodierfehler: Unbekannter Datentyp %1.</translation>
+    </message>
+</context>
+<context>
+    <name>CFitFieldDataState</name>
+    <message>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="115"/>
+        <source>Missing field definition for development field.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="207"/>
+        <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -770,12 +783,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitRecordContentState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="66"/>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="70"/>
         <source>FIT decoding error: architecture %1 not supported.</source>
         <translation>FIT Dekodierfehler: Architektur %1 wird nicht unterstützt.</translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="87"/>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="107"/>
         <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
         <translation>FIT Dekodierfehler: Ungültiger Offset %1 für Status &apos;aufgezeichneter Inhalt&apos;</translation>
     </message>
@@ -1876,14 +1889,29 @@ Zeile %2, Spalte %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="34"/>
-        <source>Cut history</source>
-        <translation>Historie kürzen</translation>
-    </message>
-    <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="61"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="62"/>
         <source> by %1</source>
         <translation> von %1</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="108"/>
+        <source>Cut history before</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="113"/>
+        <source>Cut history after</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
+        <source>Data destruction risk !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
+        <source>Cutting history before this step may erase data forever. If you press &apos;yes&apos; it will not be possible to recover erased data. It is recommended to create a backup copy of this object before pressing &apos;yes&apos;. &lt;b&gt;Do you really want to cut history before this step?&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6139,9 +6167,14 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
 <context>
     <name>IFitDecoderState</name>
     <message>
-        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="32"/>
+        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="31"/>
         <source>FIT decoding error: Decoder not in correct state %1 after last data byte in file.</source>
         <translation>FIT Dekodierfehler: Nicht zutreffender Dekoderstatus %1 nach dem letzten Datenbyte der Datei.</translation>
+    </message>
+    <message>
+        <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="124"/>
+        <source>FIT decoding error: a development field with the field_definition_number %1 already exists.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6178,56 +6211,56 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>Erstversion.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="521"/>
+        <location filename="../gis/IGisItem.cpp" line="530"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="522"/>
+        <location filename="../gis/IGisItem.cpp" line="531"/>
         <source>Read Only Mode...</source>
         <translation>Schreibgeschützt...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="692"/>
-        <location filename="../gis/IGisItem.cpp" line="745"/>
+        <location filename="../gis/IGisItem.cpp" line="701"/>
+        <location filename="../gis/IGisItem.cpp" line="754"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="695"/>
-        <location filename="../gis/IGisItem.cpp" line="748"/>
+        <location filename="../gis/IGisItem.cpp" line="704"/>
+        <location filename="../gis/IGisItem.cpp" line="757"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="706"/>
+        <location filename="../gis/IGisItem.cpp" line="715"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="709"/>
+        <location filename="../gis/IGisItem.cpp" line="718"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="720"/>
-        <location filename="../gis/IGisItem.cpp" line="759"/>
+        <location filename="../gis/IGisItem.cpp" line="729"/>
+        <location filename="../gis/IGisItem.cpp" line="768"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Verknüpfungen:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="723"/>
-        <location filename="../gis/IGisItem.cpp" line="762"/>
+        <location filename="../gis/IGisItem.cpp" line="732"/>
+        <location filename="../gis/IGisItem.cpp" line="771"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Verknüpfungen---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="838"/>
+        <location filename="../gis/IGisItem.cpp" line="847"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="838"/>
+        <location filename="../gis/IGisItem.cpp" line="847"/>
         <source>Enter new %1 name.</source>
         <translation>Geben Sie einen neuen %1namen ein.</translation>
     </message>

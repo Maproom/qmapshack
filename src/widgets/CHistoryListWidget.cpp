@@ -20,6 +20,8 @@
 #include "gis/prj/IGisProject.h"
 #include "widgets/CHistoryListWidget.h"
 
+#include "CMainWindow.h"
+
 #include <QtWidgets>
 
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
@@ -31,7 +33,6 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
-    actionCutHistory = menu->addAction(QIcon("://icons/32x32/CutHistory.png"),tr("Cut history"), this, SLOT(slotCutHistory()));
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -95,9 +96,21 @@ void CHistoryListWidget::slotSelectionChanged()
 
 void CHistoryListWidget::slotContextMenu(const QPoint& point)
 {
-    if(currentRow() == (count() - 1) || (count() == 0))
+    if ((count() == 0) || (count() == 1)) // nothing can be done if there is 0 (should not happen) or 1 event in history
     {
         return;
+    }
+
+    menu->clear();
+
+    if (currentRow() > 0)
+    {
+        actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
+    }
+
+    if (currentRow() < count() - 1)
+    {
+        actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
     }
 
     QPoint p = mapToGlobal(point);
@@ -105,7 +118,7 @@ void CHistoryListWidget::slotContextMenu(const QPoint& point)
 }
 
 
-void CHistoryListWidget::slotCutHistory()
+void CHistoryListWidget::slotCutHistoryAfter()
 {
     if(currentRow() == (count() - 1))
     {
@@ -118,11 +131,49 @@ void CHistoryListWidget::slotCutHistory()
         return;
     }
 
-    item->cutHistory();
+    item->cutHistoryAfter();
     item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
     IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
     if(project)
+    {
+        project->setChanged();
+    }
+
+    emit sigChanged();
+}
+
+
+
+void CHistoryListWidget::slotCutHistoryBefore()
+{
+    if (currentRow() == 0)
+    {
+        return;
+    }
+
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if (nullptr == item)
+    {
+        return;
+    }
+
+    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Data destruction risk !")
+        , tr("Cutting history before this step may erase data forever. "
+        "If you press 'yes' it will not be possible to recover erased data. "
+        "It is recommended to create a backup copy of this object before pressing 'yes'. "
+        "<b>Do you really want to cut history before this step?</b>")
+        , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (res == QMessageBox::No)
+    {
+        return;
+    }
+
+    item->cutHistoryBefore();
+    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    if (project)
     {
         project->setChanged();
     }

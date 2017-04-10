@@ -158,11 +158,9 @@ void CHistoryListWidget::slotCutHistoryBefore()
         return;
     }
 
-    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Data destruction risk !")
-        , tr("Cutting history before this step may erase data forever. "
-        "If you press 'yes' it will not be possible to recover erased data. "
-        "It is recommended to create a backup copy of this object before pressing 'yes'. "
-        "<b>Do you really want to cut history before this step?</b>")
+    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("History removal")
+        , tr("The removal is permanent and cannot be undone. "
+          "<b>Do you really want to delete history before this step?</b>")
         , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (res == QMessageBox::No)
     {

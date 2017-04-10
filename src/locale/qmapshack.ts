@@ -1899,12 +1899,12 @@ line %2, column %3:
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
-        <source>Data destruction risk !</source>
+        <source>History removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
-        <source>Cutting history before this step may erase data forever. If you press &apos;yes&apos; it will not be possible to recover erased data. It is recommended to create a backup copy of this object before pressing &apos;yes&apos;. &lt;b&gt;Do you really want to cut history before this step?&lt;/b&gt;</source>
+        <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6179,56 +6179,56 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="530"/>
+        <location filename="../gis/IGisItem.cpp" line="529"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="531"/>
+        <location filename="../gis/IGisItem.cpp" line="530"/>
         <source>Read Only Mode...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="701"/>
-        <location filename="../gis/IGisItem.cpp" line="754"/>
+        <location filename="../gis/IGisItem.cpp" line="700"/>
+        <location filename="../gis/IGisItem.cpp" line="753"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="704"/>
-        <location filename="../gis/IGisItem.cpp" line="757"/>
+        <location filename="../gis/IGisItem.cpp" line="703"/>
+        <location filename="../gis/IGisItem.cpp" line="756"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="715"/>
+        <location filename="../gis/IGisItem.cpp" line="714"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="718"/>
+        <location filename="../gis/IGisItem.cpp" line="717"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="729"/>
-        <location filename="../gis/IGisItem.cpp" line="768"/>
+        <location filename="../gis/IGisItem.cpp" line="728"/>
+        <location filename="../gis/IGisItem.cpp" line="767"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="732"/>
-        <location filename="../gis/IGisItem.cpp" line="771"/>
+        <location filename="../gis/IGisItem.cpp" line="731"/>
+        <location filename="../gis/IGisItem.cpp" line="770"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="847"/>
+        <location filename="../gis/IGisItem.cpp" line="846"/>
         <source>Edit name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="847"/>
+        <location filename="../gis/IGisItem.cpp" line="846"/>
         <source>Enter new %1 name.</source>
         <translation type="unfinished"></translation>
     </message>

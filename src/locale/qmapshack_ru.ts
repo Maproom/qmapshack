@@ -1905,12 +1905,12 @@ line %2, column %3:
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
-        <source>Data destruction risk !</source>
+        <source>History removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
-        <source>Cutting history before this step may erase data forever. If you press &apos;yes&apos; it will not be possible to recover erased data. It is recommended to create a backup copy of this object before pressing &apos;yes&apos;. &lt;b&gt;Do you really want to cut history before this step?&lt;/b&gt;</source>
+        <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -6214,56 +6214,56 @@ It is either a new item or it has been deleted in the database by someone else.<
         <translation>Исходная версия.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="530"/>
+        <location filename="../gis/IGisItem.cpp" line="529"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Вероятно, это элемент доступен только для чтения, потому что он не был создан внутри QMapShack. Обычно нет необходимости изменить импортированные данные. Но если для вас это приемлемо нажмите &quot;Да&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="531"/>
+        <location filename="../gis/IGisItem.cpp" line="530"/>
         <source>Read Only Mode...</source>
         <translation>Режим &apos;только чтения&apos;...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="701"/>
-        <location filename="../gis/IGisItem.cpp" line="754"/>
+        <location filename="../gis/IGisItem.cpp" line="700"/>
+        <location filename="../gis/IGisItem.cpp" line="753"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Описание:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="704"/>
-        <location filename="../gis/IGisItem.cpp" line="757"/>
+        <location filename="../gis/IGisItem.cpp" line="703"/>
+        <location filename="../gis/IGisItem.cpp" line="756"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет описания---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="715"/>
+        <location filename="../gis/IGisItem.cpp" line="714"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Комментарий:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="718"/>
+        <location filename="../gis/IGisItem.cpp" line="717"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет комментария---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="729"/>
-        <location filename="../gis/IGisItem.cpp" line="768"/>
+        <location filename="../gis/IGisItem.cpp" line="728"/>
+        <location filename="../gis/IGisItem.cpp" line="767"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Ссылки:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="732"/>
-        <location filename="../gis/IGisItem.cpp" line="771"/>
+        <location filename="../gis/IGisItem.cpp" line="731"/>
+        <location filename="../gis/IGisItem.cpp" line="770"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет ссылок---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="847"/>
+        <location filename="../gis/IGisItem.cpp" line="846"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="847"/>
+        <location filename="../gis/IGisItem.cpp" line="846"/>
         <source>Enter new %1 name.</source>
         <translation>Задать новое имя (%1).</translation>
     </message>

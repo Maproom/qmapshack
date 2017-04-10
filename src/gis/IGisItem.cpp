@@ -480,10 +480,9 @@ void IGisItem::cutHistoryAfter()
 
 void IGisItem::cutHistoryBefore()
 {
-    while (history.histIdxCurrent > 0)
+    for (int i = 0; i < history.histIdxCurrent; i++)
     {
-        history.events.pop_front();
-        history.histIdxCurrent--;
+        history.events[i].data.resize(0);
     }
 }
 

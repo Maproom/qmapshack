@@ -482,7 +482,7 @@ void IGisItem::cutHistoryBefore()
 {
     for (int i = 0; i < history.histIdxCurrent; i++)
     {
-        history.events[i].data.resize(0);
+        history.events[i].data.clear();
     }
 }
 

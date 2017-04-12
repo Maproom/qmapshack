@@ -33,6 +33,10 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
+
+    actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
+    actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
+
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -101,18 +105,9 @@ void CHistoryListWidget::slotContextMenu(const QPoint& point)
         return;
     }
 
-    menu->clear();
-
-    if (currentRow() > 0)
-    {
-        actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
-    }
-
-    if (currentRow() < count() - 1)
-    {
-        actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
-    }
-
+    actionCutHistoryBefore->setEnabled(currentRow() > 0);
+    actionCutHistoryAfter->setEnabled(currentRow() < count() - 1);
+ 
     QPoint p = mapToGlobal(point);
     menu->exec(p);
 }

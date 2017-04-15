@@ -20,6 +20,8 @@
 #include "gis/prj/IGisProject.h"
 #include "widgets/CHistoryListWidget.h"
 
+#include "CMainWindow.h"
+
 #include <QtWidgets>
 
 CHistoryListWidget::CHistoryListWidget(QWidget *parent)
@@ -31,7 +33,10 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
     connect(this, &CHistoryListWidget::customContextMenuRequested, this, &CHistoryListWidget::slotContextMenu);
 
     menu = new QMenu(this);
-    actionCutHistory = menu->addAction(QIcon("://icons/32x32/CutHistory.png"),tr("Cut history"), this, SLOT(slotCutHistory()));
+
+    actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
+    actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
+
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -95,17 +100,20 @@ void CHistoryListWidget::slotSelectionChanged()
 
 void CHistoryListWidget::slotContextMenu(const QPoint& point)
 {
-    if(currentRow() == (count() - 1) || (count() == 0))
+    if ((count() == 0) || (count() == 1)) // nothing can be done if there is 0 (should not happen) or 1 event in history
     {
         return;
     }
 
+    actionCutHistoryBefore->setEnabled(currentRow() > 0);
+    actionCutHistoryAfter->setEnabled(currentRow() < count() - 1);
+ 
     QPoint p = mapToGlobal(point);
     menu->exec(p);
 }
 
 
-void CHistoryListWidget::slotCutHistory()
+void CHistoryListWidget::slotCutHistoryAfter()
 {
     if(currentRow() == (count() - 1))
     {
@@ -118,11 +126,47 @@ void CHistoryListWidget::slotCutHistory()
         return;
     }
 
-    item->cutHistory();
+    item->cutHistoryAfter();
     item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
 
     IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
     if(project)
+    {
+        project->setChanged();
+    }
+
+    emit sigChanged();
+}
+
+
+
+void CHistoryListWidget::slotCutHistoryBefore()
+{
+    if (currentRow() == 0)
+    {
+        return;
+    }
+
+    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    if (nullptr == item)
+    {
+        return;
+    }
+
+    int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("History removal")
+        , tr("The removal is permanent and cannot be undone. "
+          "<b>Do you really want to delete history before this step?</b>")
+        , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    if (res == QMessageBox::No)
+    {
+        return;
+    }
+
+    item->cutHistoryBefore();
+    item->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(item->parent());
+    if (project)
     {
         project->setChanged();
     }

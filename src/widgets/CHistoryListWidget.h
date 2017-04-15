@@ -37,12 +37,14 @@ signals:
 private slots:
     void slotSelectionChanged();
     void slotContextMenu(const QPoint& point);
-    void slotCutHistory();
+    void slotCutHistoryAfter();
+    void slotCutHistoryBefore();
 
 private:
     IGisItem::key_t key;
     QMenu * menu;
-    QAction * actionCutHistory;
+    QAction * actionCutHistoryAfter;
+    QAction * actionCutHistoryBefore;
 };
 
 #endif //CHISTORYLISTWIDGET_H

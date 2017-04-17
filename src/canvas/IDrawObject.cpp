@@ -104,11 +104,15 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
     qreal w   = qCeil( qSqrt(dx1*dx1 + dy1*dy1));
     qreal h   = qCeil( qSqrt(dx2*dx2 + dy2*dy2));
 
+
     // switch to HQ if the gaps get visible
-    if((qAbs(dy1) > 2) || (qAbs(dx2) > 2))
+    if(context.getZoomFactor().x() > 70)
     {
-        drawTileHQ(img, tmp, p, context, pjsrc, pjtar);
-        return;
+        if((qAbs(dy1) > 2) || (qAbs(dx2) > 2))
+        {
+            drawTileHQ(img, tmp, p, context, pjsrc, pjtar);
+            return;
+        }
     }
 
     // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
@@ -202,8 +206,8 @@ void IDrawObject::drawTileHQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
             qreal dy1 = pPt[0].y() - pPt[1].y();
             qreal dx2 = pPt[0].x() - pPt[3].x();
             qreal dy2 = pPt[0].y() - pPt[3].y();
-            qreal w   = qRound( qSqrt(dx1*dx1 + dy1*dy1));
-            qreal h   = qRound( qSqrt(dx2*dx2 + dy2*dy2));
+            qreal w   = /*qRound*/( qSqrt(dx1*dx1 + dy1*dy1));
+            qreal h   = /*qRound*/( qSqrt(dx2*dx2 + dy2*dy2));
 
             // calculate rotation. This is not really a reprojection but might be good enough for close zoom levels
             qreal a = qAtan(dy1/dx1) * RAD_TO_DEG;

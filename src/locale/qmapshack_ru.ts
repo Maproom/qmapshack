@@ -746,12 +746,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="115"/>
         <source>Missing field definition for development field.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отсутствует определение поля для поля развития.</translation>
     </message>
     <message>
         <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="207"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка декодирования FIT: неправильный номер определения поля %1 при создании профиля поля развития.</translation>
     </message>
 </context>
 <context>
@@ -1896,22 +1896,22 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="108"/>
         <source>Cut history before</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить историю до этого шага</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="113"/>
         <source>Cut history after</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить историю после этого шага</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
         <source>History removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить историю</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление является постоянным и не может быть отменено. &lt;b&gt;Вы действительно хотите удалить историю перед этим шагом?&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -6176,7 +6176,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="124"/>
         <source>FIT decoding error: a development field with the field_definition_number %1 already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка декодирования FIT: поле развития с номером определения поля %1 уже существует.</translation>
     </message>
 </context>
 <context>

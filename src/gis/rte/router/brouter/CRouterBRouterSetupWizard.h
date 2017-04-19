@@ -58,7 +58,6 @@ private slots:
     void slotLocalProfilesUrlCursorPositionChanged() const;
     void slotLocalProfilesUrlEditingFinished();
     void slotOnlineUrlCursorPositionChanged();
-    void slotOnlineUrlEditingFinished();
     void slotWebLocalBRouterVersionsLoadFinished(bool ok);
     void slotLocalDownloadLinkClicked(const QUrl & url);
     void slotLocalDownloadButtonClicked();

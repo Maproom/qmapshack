@@ -63,7 +63,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
 
     connect(lineOnlineUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
-    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished);
+    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
 
     connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
@@ -813,16 +813,10 @@ void CRouterBRouterSetupWizard::beginOnlineUrl()
 {
     setOption(QWizard::HaveCustomButton1, true);
     isError = false;
-    pageOnlineUrl->setComplete(false);
     setup->loadOnlineConfig();
 }
 
 void CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged()
-{
-    pageOnlineUrl->setComplete(false);
-}
-
-void CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished()
 {
     setup->onlineWebUrl = lineOnlineUrl->text();
     isError = false;
@@ -836,10 +830,6 @@ void CRouterBRouterSetupWizard::updateOnlineUrl()
     if (isError)
     {
         textOnlineUrl->setText(error + ": "+ errorDetails);
-    }
-    else
-    {
-        pageOnlineUrl->setComplete(true);
     }
 }
 

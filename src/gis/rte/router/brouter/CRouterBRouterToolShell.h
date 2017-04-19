@@ -21,6 +21,10 @@
 
 #include "tool/IToolShell.h"
 
+#if defined (Q_OS_WIN32)
+#define USE_KILL_FOR_SHUTDOWN
+#endif
+
 class CRouterBRouterToolShell : public IToolShell
 {
     Q_OBJECT
@@ -41,6 +45,10 @@ private slots:
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
+
+#ifdef USE_KILL_FOR_SHUTDOWN
+    bool isBeingShutdown { false };
+#endif
 };
 
 #endif //CROUTERBROUTERTOOLSHELL_H

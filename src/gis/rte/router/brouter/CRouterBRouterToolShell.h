@@ -46,9 +46,7 @@ private slots:
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
 
-#ifdef USE_KILL_FOR_SHUTDOWN
-    bool isBeingShutdown { false };
-#endif
+    bool isBeingKilled { false };
 };
 
 #endif //CROUTERBROUTERTOOLSHELL_H

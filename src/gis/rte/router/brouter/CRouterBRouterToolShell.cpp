@@ -35,9 +35,7 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 
 void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
 {
-#ifdef USE_KILL_FOR_SHUTDOWN
-    isBeingShutdown = false;
-#endif
+    isBeingKilled = false;
     stdOut("cd " + dir);
     stdOut(command+" " + args.join(" ") + "\n");
     cmd.setWorkingDirectory(dir);
@@ -50,7 +48,7 @@ void CRouterBRouterToolShell::stop()
     if (cmd.state() != QProcess::NotRunning)
     {
 #ifdef USE_KILL_FOR_SHUTDOWN
-        isBeingShutdown = true;
+        isBeingKilled = true;
         cmd.kill();
 #else
         cmd.terminate();
@@ -65,12 +63,10 @@ void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newS
 
 void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) const
 {
-#ifdef USE_KILL_FOR_SHUTDOWN
-    if (isBeingShutdown)
+    if (isBeingKilled)
     {
         return;
     }
-#endif
     emit sigProcessError(error, cmd.errorString());
 }
 

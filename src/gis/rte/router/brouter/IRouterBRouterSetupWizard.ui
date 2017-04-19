@@ -106,7 +106,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="../../../resources.qrc">
+         <iconset resource="../../../../resources.qrc">
           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
         </property>
        </widget>
@@ -162,7 +162,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="../../../resources.qrc">
+         <iconset resource="../../../../resources.qrc">
           <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
         </property>
        </widget>
@@ -342,7 +342,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../resources.qrc">
+           <iconset resource="../../../../resources.qrc">
             <normaloff>:/icons/32x32/Right.png</normaloff>:/icons/32x32/Right.png</iconset>
           </property>
          </widget>
@@ -356,7 +356,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../resources.qrc">
+           <iconset resource="../../../../resources.qrc">
             <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
           </property>
          </widget>
@@ -389,7 +389,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../resources.qrc">
+           <iconset resource="../../../../resources.qrc">
             <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
           </property>
          </widget>
@@ -400,7 +400,7 @@
            <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="../../../resources.qrc">
+           <iconset resource="../../../../resources.qrc">
             <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
           </property>
          </widget>
@@ -432,7 +432,7 @@
     <string notr="true">4</string>
    </attribute>
   </widget>
-  <widget class="CRouterBRouterSetupPage" name="pageOnlineUrl">
+  <widget class="QWizardPage" name="pageOnlineUrl">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
      <horstretch>0</horstretch>

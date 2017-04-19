@@ -54,16 +54,6 @@ bool CRouterBRouterSetupPage::isComplete() const
         return profilesListView->model()->rowCount() > 0;
     }
 
-    case CRouterBRouterSetupWizard::ePageOnlineUrl:
-    {
-        return complete;
-    }
-
-    case CRouterBRouterSetupWizard::ePageLocalDetails:
-    {
-        return complete;
-    }
-
     default:
     {
         return false;

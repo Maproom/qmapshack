@@ -44,7 +44,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(checkExpert, &QCheckBox::clicked,    this, &CRouterBRouterSetupWizard::slotCheckExpertClicked);
 
     connect(lineLocalProfilesUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
-    connect(lineLocalProfilesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlEditingFinished);
+    connect(lineLocalProfilesUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged);
     connect(toolLocalDir, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectDirectory);
     connect(toolJavaExecutable, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalToolSelectJava);
     connect(pushLocalFindJava, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalPushFindJava);
@@ -63,7 +63,7 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     connect(toolProfileDown, &QToolButton::clicked, this, &CRouterBRouterSetupWizard::slotProfileDownClicked);
 
     connect(lineOnlineUrl, &QLineEdit::cursorPositionChanged, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
-    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished);
+    connect(lineOnlineUrl, &QLineEdit::editingFinished, this, &CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged);
 
     connect(setup, &CRouterBRouterSetup::sigOnlineConfigLoaded, this, &CRouterBRouterSetupWizard::slotOnlineConfigLoaded);
     connect(setup, &CRouterBRouterSetup::sigDisplayOnlineProfileFinished, this, &CRouterBRouterSetupWizard::slotDisplayProfile);
@@ -813,16 +813,10 @@ void CRouterBRouterSetupWizard::beginOnlineUrl()
 {
     setOption(QWizard::HaveCustomButton1, true);
     isError = false;
-    pageOnlineUrl->setComplete(false);
     setup->loadOnlineConfig();
 }
 
 void CRouterBRouterSetupWizard::slotOnlineUrlCursorPositionChanged()
-{
-    pageOnlineUrl->setComplete(false);
-}
-
-void CRouterBRouterSetupWizard::slotOnlineUrlEditingFinished()
 {
     setup->onlineWebUrl = lineOnlineUrl->text();
     isError = false;
@@ -836,10 +830,6 @@ void CRouterBRouterSetupWizard::updateOnlineUrl()
     if (isError)
     {
         textOnlineUrl->setText(error + ": "+ errorDetails);
-    }
-    else
-    {
-        pageOnlineUrl->setComplete(true);
     }
 }
 
@@ -861,7 +851,6 @@ void CRouterBRouterSetupWizard::updateLocalDetails() const
     lineLocalNumberThreads->setText(setup->localNumberThreads);
     lineLocalJavaOpts->setText(setup->localJavaOpts);
     textLocalDetails->setVisible(isError);
-    pageLocalDetails->setComplete(!isError);
     if (isError)
     {
         textLocalDetails->setText(error + ": " + errorDetails);
@@ -875,12 +864,7 @@ void CRouterBRouterSetupWizard::beginLocalDetails()
     setup->loadLocalOnlineProfiles();
 }
 
-void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged() const
-{
-    pageLocalDetails->setComplete(false);
-}
-
-void CRouterBRouterSetupWizard::slotLocalProfilesUrlEditingFinished()
+void CRouterBRouterSetupWizard::slotLocalProfilesUrlCursorPositionChanged()
 {
     setup->onlineProfilesUrl = lineLocalProfilesUrl->text();
     isError = false;

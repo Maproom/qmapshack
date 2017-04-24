@@ -597,24 +597,33 @@ void CRouterBRouterTilesSelect::slotDownloadFinished(QNetworkReply* reply)
                 status->file->close();
                 status->file->remove();
             }
-            else if (!status->file->rename(segmentsDir().absoluteFilePath(it.key())))
-            {
-                error(tr("error renaming file %1 to %2: %3")
-                      .arg(status->file->fileName())
-                      .arg(segmentsDir().absoluteFilePath(it.key()))
-                      .arg(status->file->errorString()));
-                status->file->close();
-                status->file->remove();
-            }
             else
             {
-                status->isLocal = true;
-                status->isOutdated = false;
-                status->file->close();
-                QFileInfo info(*status->file);
-                status->localDate = info.created();
-                status->localSize = info.size();
-                clearError();
+                const QString &finalName = segmentsDir().absoluteFilePath(it.key());
+                QFile oldFile(finalName);
+                if (oldFile.exists())
+                {
+                    oldFile.remove();
+                }
+                if (status->file->rename(finalName))
+                {
+                    status->isLocal = true;
+                    status->isOutdated = false;
+                    status->file->close();
+                    QFileInfo info(*status->file);
+                    status->localDate = info.created();
+                    status->localSize = info.size();
+                    clearError();
+                }
+                else
+                {
+                    error(tr("error renaming file %1 to %2: %3")
+                          .arg(status->file->fileName())
+                          .arg(finalName)
+                          .arg(status->file->errorString()));
+                    status->file->close();
+                    status->file->remove();
+                }
             }
             delete status->file;
             status->file = nullptr;

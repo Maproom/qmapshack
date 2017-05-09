@@ -50,6 +50,7 @@ public:
 
 private:
     QMap<quint8, CFitField> fields;
+    QMap<quint8, CFitField> devFields;
     quint16 globalMesgNr;
     quint8 localMesgNr;
     const CFitProfile* messageProfile;

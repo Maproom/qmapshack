@@ -19,17 +19,18 @@
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
 #include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/defs/CFitProfile.h"
+#include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/fit_const.h"
 
 CFitMessage::CFitMessage(const CFitDefinitionMessage& def)
-    : fields(), globalMesgNr(def.getGlobalMesgNr()), localMesgNr(def.getLocalMesgNr()),
+    : fields(), devFields(), globalMesgNr(def.getGlobalMesgNr()), localMesgNr(def.getLocalMesgNr()),
     messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
 }
 
 CFitMessage::CFitMessage()
-    : fields(), globalMesgNr(fitGlobalMesgNrInvalid), localMesgNr(fitLocalMesgNrInvalid),
+    : fields(), devFields(), globalMesgNr(fitGlobalMesgNrInvalid), localMesgNr(fitLocalMesgNrInvalid),
     messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
@@ -41,7 +42,14 @@ bool CFitMessage::isValid() const
 
 void CFitMessage::updateFieldProfile(quint8 fieldDefNr, const CFitFieldProfile* fieldProfile)
 {
-    fields[fieldDefNr].setProfile(fieldProfile);
+    if (fieldProfile->getFieldType() == eFieldTypeFit)
+    {
+        fields[fieldDefNr].setProfile(fieldProfile);
+    }
+    if (fieldProfile->getFieldType() == eFieldTypeDevelopment)
+    {
+        devFields[fieldDefNr].setProfile(fieldProfile);
+    }
 }
 
 QStringList CFitMessage::messageInfo() const
@@ -56,6 +64,10 @@ QStringList CFitMessage::messageInfo() const
     {
         list << field.fieldInfo();
     }
+    for(const CFitField &field : devFields)
+    {
+        list << field.fieldInfo();
+    }
     return list;
 }
 
@@ -66,11 +78,22 @@ bool CFitMessage::hasField(const quint8 fieldDefNum) const
 
 void CFitMessage::addField(CFitField &  field)
 {
-    if(fields.contains(field.getFieldDefNr()))
+    if (field.profile().getFieldType() == eFieldTypeFit)
     {
-        qCritical("fit field %d already added to map.", (int) field.getFieldDefNr());
+        if(fields.contains(field.getFieldDefNr()))
+        {
+            qCritical("fit field %d already added to map.", (int) field.getFieldDefNr());
+        }
+        fields.insert(field.getFieldDefNr(), field);
     }
-    fields.insert(field.getFieldDefNr(), field);
+    if (field.profile().getFieldType() == eFieldTypeDevelopment)
+    {
+        if(devFields.contains(field.getFieldDefNr()))
+        {
+            qCritical("fit dev field %d already added to map.", (int) field.getFieldDefNr());
+        }
+        devFields.insert(field.getFieldDefNr(), field);
+    }
 }
 
 bool CFitMessage::isFieldValueValid(const quint8 fieldDefNum) const

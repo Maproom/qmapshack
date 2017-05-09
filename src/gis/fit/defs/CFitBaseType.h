@@ -51,6 +51,7 @@ public:
 
     quint8 size() const;
     fit_base_type_nr_e nr() const;
+    quint8 baseTypeField() const;
     const quint8* invalidValueBytes() const;
     bool isSizeUndefined() const;
     bool isInteger() const;

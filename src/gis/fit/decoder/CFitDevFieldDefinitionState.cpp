@@ -18,6 +18,7 @@
 
 #include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/defs/fit_const.h"
+#include "gis/fit/defs/CFitBaseType.h"
 
 /**
  * byte
@@ -53,7 +54,7 @@ decode_state_e CFitDevFieldDefinitionState::process(quint8 &dataByte)
         CFitFieldProfile* profile = devFieldProfile(fieldNr);
 
         // add the new field definition
-        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, size, devDataIndex));
+        def->addDevField(CFitFieldDefinition(def, profile, fieldNr, size, profile->getBaseType().baseTypeField()));
         reset();
         if (def->getDevFields().size() >= def->getNrOfDevFields())
         {

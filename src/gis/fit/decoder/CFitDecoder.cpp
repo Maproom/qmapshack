@@ -87,6 +87,18 @@ void CFitDecoder::printDebugInfo()
     FITDEBUG(1, printDefinitions(data.definitionHistory))
     FITDEBUG(1, printMessages(data.messages))
 }
+
+QList<QString> decoderStateNames = {"File Header", "Record", "Record Content", "Field Definition",
+                                    "Development Field Definition", "Field Data", "CRC", "End"};
+
+void printByte(QFile& file, decode_state_e state, quint8 dataByte)
+{
+    FITDEBUG(3, qDebug() << QString("decoding byte %1 - %2 - %3")
+            .arg(file.pos(), 6, 10, QLatin1Char(' '))
+            .arg(dataByte, 8, 2, QLatin1Char('0'))
+            .arg(decoderStateNames.at(state)));
+}
+
 void CFitDecoder::decode(QFile &file)
 {
     resetSharedData();
@@ -100,6 +112,7 @@ void CFitDecoder::decode(QFile &file)
         file.getChar((char *) &dataByte);
         try
         {
+            printByte(file, state, dataByte);
             state = stateMap[state]->processByte(dataByte);
             if (state == eDecoderStateEnd)
             {

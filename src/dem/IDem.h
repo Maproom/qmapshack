@@ -166,7 +166,7 @@ protected:
 
 private:
     bool bHillshading = false;
-    qreal factorHillshading = 1.0;
+    qreal factorHillshading = 0.1666666716337204;
 
     bool bSlopeColor = false;
     int gradeSlopeColor = 0;

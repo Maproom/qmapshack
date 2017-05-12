@@ -58,7 +58,7 @@ IDem::IDem(CDemDraw *parent)
     : IDrawObject(parent)
     , dem(parent)
 {
-    slotSetOpacity(50);
+    slotSetOpacity(17);
     pjtar = pj_init_plus("+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs");
 
     graytable.resize(256);

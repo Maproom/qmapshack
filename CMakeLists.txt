@@ -84,11 +84,6 @@ endif(NOT ALGLIB_FOUND)
 
 add_subdirectory(src)
 
-if(UNIX AND NOT APPLE)
-    add_subdirectory(test/unittest)
-endif(UNIX AND NOT APPLE)
-
-
 if (UNIX AND NOT WIN32 AND NOT APPLE)
   install(
     FILES

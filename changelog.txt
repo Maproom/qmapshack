@@ -1,3 +1,12 @@
+V 1.8.1
+Fix: Various glitches introduced by the new FIT format
+Fix: Visual tile artefacts in the DEM layer
+[Issue #224] Support pinch-gesture
+[Issue #162] Add "keep last version only" function to objects (tracks, etc...)
+[Issue #221] Offline BRouter & network access
+[Issue #225] BRouter: Renaming tiles fails when updating tiles
+[Issue #215] BRouter (offline) issues (Windows)
+
 V 1.8.0
 Add: Links to quickstart help
 Add: Russian translation

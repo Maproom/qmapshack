@@ -83,6 +83,7 @@ endif(APPLE)
 
 
 set( SRCS
+        main.cpp
         GeoMath.cpp
         CMainWindow.cpp
         CSingleInstanceProxy.cpp
@@ -770,18 +771,13 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     )
 endif()
 
-set(LIBINP
+set(MAININP
         ${SRCS}
         ${HDRS}
         ${UI_HDRS}
         ${RC_SRCS}
         ${${APPLICATION_NAME}_QM_FILES}
         ${${APPLICATION_NAME}_DESKTOP_FILES}
-)
-
-set(MAININP
-    main.cpp
-    ${RC_SRCS}
 )
 
 include_directories(
@@ -802,7 +798,6 @@ if(APPLE)
      INCLUDE_DIRECTORIES(/System/Library/Frameworks/DiskArbitration.framework)
 endif(APPLE)
 
-add_library(QMS ${LIBINP})
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 
@@ -812,21 +807,6 @@ else(Qt5DBus_FOUND)
     set(DBUS_LIB)
 endif(Qt5DBus_FOUND)
 
-target_link_libraries(QMS
-    Qt5::Widgets
-    Qt5::Xml
-    Qt5::Script
-    Qt5::Sql
-    Qt5::WebKitWidgets
-    Qt5::PrintSupport
-    ${DBUS_LIB}
-    ${GDAL_LIBRARIES}
-    ${PROJ_LIBRARIES}
-    ${ROUTINO_LIBRARIES}
-    ${ALGLIB_LIBRARIES}
-    ${QUAZIP_LIBRARIES}
-)
-
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
     Qt5::Xml
@@ -834,7 +814,6 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
-    QMS
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

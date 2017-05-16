@@ -194,6 +194,9 @@ CMainWindow::CMainWindow()
     lblElevation = new QLabel(status);
     status->addPermanentWidget(lblElevation);
 
+    lblSlope = new QLabel(status);
+    status->addPermanentWidget(lblSlope);
+
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
@@ -703,7 +706,7 @@ void CMainWindow::slotCurrentTabDem(int i)
     }
 }
 
-void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
+void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
 {
     QString str;
     IUnit::degToStr(pos.x(), pos.y(), str);
@@ -719,6 +722,18 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele)
     else
     {
         lblElevation->hide();
+    }
+
+    if(slope != NOFLOAT)
+    {
+        QString val;
+        val.sprintf("%.1f", slope);
+        lblSlope->setText(tr("Slope: %1°").arg(val));
+        lblSlope->show();
+    }
+    else
+    {
+        lblSlope->hide();
     }
 
     if(actionShowGrid->isChecked())

@@ -148,7 +148,7 @@ public:
 
     static qreal gisLayerOpacity;
 signals:
-    void sigMousePosition(const QPointF& pos, qreal ele);
+    void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void sigZoom();
     void sigMove();
 

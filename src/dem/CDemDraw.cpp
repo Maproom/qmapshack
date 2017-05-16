@@ -286,6 +286,38 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
     return ele;
 }
 
+qreal CDemDraw::getSlopeAt(const QPointF& pos)
+{
+    qreal ele = NOFLOAT;
+    if(CDemItem::mutexActiveDems.tryLock())
+    {
+        if(demList)
+        {
+            for(int i = 0; i < demList->count(); i++)
+            {
+                CDemItem * item = demList->item(i);
+
+                if(!item || item->demfile.isNull())
+                {
+                    // as all active maps have to be at the top of the list
+                    // it is ok to break as soon as the first map with no
+                    // active files is hit.
+                    break;
+                }
+
+                ele = item->demfile->getSlopeAt(pos);
+                if(ele != NOFLOAT)
+                {
+                    break;
+                }
+            }
+        }
+        CDemItem::mutexActiveDems.unlock();
+    }
+    return ele;
+}
+
+
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
     qreal basefactor = IUnit::self().basefactor;

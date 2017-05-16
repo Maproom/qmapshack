@@ -107,7 +107,7 @@ private slots:
     void slotCurrentTabCanvas(int i);
     void slotCurrentTabMaps(int i);
     void slotCurrentTabDem(int i);
-    void slotMousePosition(const QPointF& pos, qreal ele);
+    void slotMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void slotUpdateCurrentWidget();
     void slotSetupMapFont();
     void slotSetupMapBackground();
@@ -143,6 +143,7 @@ private:
     /// status bar label
     QLabel * lblPosWGS84;
     QLabel * lblElevation;
+    QLabel * lblSlope;
     QLabel * lblPosGrid;
 
     QFont mapFont;

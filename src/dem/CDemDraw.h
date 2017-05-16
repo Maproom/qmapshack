@@ -48,6 +48,7 @@ public:
     void loadConfigForDemItem(CDemItem * item);
 
     qreal getElevationAt(const QPointF& pos);
+    qreal getSlopeAt(const QPointF& pos);
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
     void  getElevationAt(SGisLine& line);
 

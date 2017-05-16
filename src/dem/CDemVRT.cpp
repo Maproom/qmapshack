@@ -182,6 +182,64 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     return ele;
 }
 
+qreal CDemVRT::getSlopeAt(const QPointF& pos)
+{
+    if(pjsrc == 0)
+    {
+        return NOFLOAT;
+    }
+
+    QPointF pt = pos;
+
+    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+
+    if(!boundingBox.contains(pt))
+    {
+        return NOFLOAT;
+    }
+
+    pt = trInv.map(pt);
+
+    qreal x    = pt.x() - qFloor(pt.x());
+    qreal y    = pt.y() - qFloor(pt.y());
+
+    qint16 win2[16];
+    mutex.lock();
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x())-1, qFloor(pt.y())-1, 4, 4, &win2, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
+    mutex.unlock();
+    if(err == CE_Failure)
+    {
+        return NOFLOAT;
+    }
+    for(int i=0;i<16;i++)
+    {
+        if(hasNoData && win2[i] == noData)
+        {
+            return NOFLOAT;
+        }
+    }
+
+    qreal win[9];
+    win[0] = win2[0] + x * (win2[1]-win2[0]) + y * (win2[4]-win2[0]) + x*y*(win2[0]-win2[1]-win2[4]+win2[5]);
+    win[1] = win2[1] + x * (win2[2]-win2[1]) + y * (win2[5]-win2[1]) + x*y*(win2[1]-win2[2]-win2[5]+win2[6]);
+    win[2] = win2[2] + x * (win2[3]-win2[2]) + y * (win2[6]-win2[2]) + x*y*(win2[2]-win2[3]-win2[6]+win2[7]);
+
+    win[3] = win2[4] + x * (win2[5]-win2[4]) + y * (win2[8]-win2[4]) + x*y*(win2[4]-win2[5]-win2[8]+win2[9]);
+    win[4] = win2[5] + x * (win2[6]-win2[5]) + y * (win2[9]-win2[5]) + x*y*(win2[5]-win2[6]-win2[9]+win2[10]);
+    win[5] = win2[6] + x * (win2[7]-win2[6]) + y * (win2[10]-win2[6]) + x*y*(win2[6]-win2[7]-win2[10]+win2[11]);
+
+    win[6] = win2[8] + x * (win2[9]-win2[8]) + y * (win2[12]-win2[8]) + x*y*(win2[8]-win2[9]-win2[12]+win2[13]);
+    win[7] = win2[9] + x * (win2[10]-win2[9]) + y * (win2[13]-win2[9]) + x*y*(win2[9]-win2[10]-win2[13]+win2[14]);
+    win[8] = win2[10] + x * (win2[11]-win2[10]) + y * (win2[14]-win2[10]) + x*y*(win2[10]-win2[11]-win2[14]+win2[15]);
+
+    qreal dx    = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+    qreal dy    = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+    qreal k     = dx * dx + dy * dy;
+    qreal slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+
+    return slope;
+}
+
 
 void CDemVRT::draw(IDrawContext::buffer_t& buf)
 {

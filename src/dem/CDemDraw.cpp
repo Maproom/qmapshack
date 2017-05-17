@@ -288,7 +288,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
 
 qreal CDemDraw::getSlopeAt(const QPointF& pos)
 {
-    qreal ele = NOFLOAT;
+    qreal slope = NOFLOAT;
     if(CDemItem::mutexActiveDems.tryLock())
     {
         if(demList)
@@ -305,8 +305,8 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos)
                     break;
                 }
 
-                ele = item->demfile->getSlopeAt(pos);
-                if(ele != NOFLOAT)
+                slope = item->demfile->getSlopeAt(pos);
+                if(slope != NOFLOAT)
                 {
                     break;
                 }
@@ -314,7 +314,7 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos)
         }
         CDemItem::mutexActiveDems.unlock();
     }
-    return ele;
+    return slope;
 }
 
 

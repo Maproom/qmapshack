@@ -290,7 +290,9 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     {
         if(curPOI.pos != NOPOINTF)
         {
-            p.drawImage(curPOI.pos - QPointF(31,31), QImage("://cursors/wptHighlightBlue.png"));
+            const QSize  s = curPOI.symbolSize;
+            const qint32 x = (qMax(s.width(), s.height()) << 1) & 0xFFFFFFFE;
+            p.drawImage(curPOI.pos - QPointF(x,x), QImage("://cursors/wptHighlightBlue.png").scaled(x<<1, x<<1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
         }
 
         /*

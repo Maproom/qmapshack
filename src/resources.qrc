@@ -130,6 +130,8 @@
         <file>icons/32x32/PointMove.png</file>
         <file>icons/32x32/PointHide.png</file>
         <file>icons/32x32/PointShow.png</file>
+        <file>icons/32x32/PointAdd.png</file>
+        <file>icons/32x32/PointDel.png</file>
         <file>icons/32x32/AreaMove.png</file>
         <file>icons/32x32/SelectRange.png</file>
         <file>icons/32x32/SelectArea.png</file>
@@ -323,6 +325,8 @@
         <file>icons/48x48/PointMove.png</file>
         <file>icons/48x48/PointHide.png</file>
         <file>icons/48x48/PointShow.png</file>
+        <file>icons/48x48/PointAdd.png</file>
+        <file>icons/48x48/PointDel.png</file>
         <file>icons/48x48/AreaMove.png</file>
         <file>icons/48x48/SelectRange.png</file>
         <file>icons/48x48/SelectArea.png</file>

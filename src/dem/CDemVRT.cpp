@@ -219,7 +219,7 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos)
         }
     }
 
-    qreal slope = slopeOfWindowInterp(win, x, y);
+    qreal slope = slopeOfWindowInterp(win, 16, x, y);
     return slope;
 }
 

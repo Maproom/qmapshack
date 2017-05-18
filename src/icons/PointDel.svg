@@ -14,7 +14,7 @@
    id="svg3513"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="PointMove.svg">
+   sodipodi:docname="PointDel.svg">
   <defs
      id="defs3515">
     <marker
@@ -278,8 +278,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="21.066534"
-     inkscape:cy="32.697415"
+     inkscape:cx="20.384716"
+     inkscape:cy="30.971502"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -301,7 +301,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -337,72 +337,17 @@
          id="path4180"
          style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#0000ff;stroke-width:4.56263685;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
-    <g
-       id="g4291">
-      <g
-         transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
-         style="fill:#008000;stroke:#008000"
-         id="g4303">
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 7,14 3,-5 3,5"
-           id="path4299"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 13,14 7,14"
-           id="path4301"
-           inkscape:connector-curvature="0" />
-      </g>
-      <g
-         transform="matrix(2.7713857,0,0,-2.1726845,-12.642603,54.298899)"
-         style="fill:#008000;stroke:#008000"
-         id="g4303-3">
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 7,14 3,-5 3,5"
-           id="path4299-6"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 13,14 7,14"
-           id="path4301-7"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
-    <g
-       transform="matrix(0,-1,1,0,25.245663,34.078663)"
-       id="g4291-3">
-      <g
-         transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
-         style="fill:#008000;stroke:#008000"
-         id="g4303-6">
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 7,14 3,-5 3,5"
-           id="path4299-7"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 13,14 7,14"
-           id="path4301-5"
-           inkscape:connector-curvature="0" />
-      </g>
-      <g
-         transform="matrix(2.7713857,0,0,-2.1726845,-12.642603,54.298899)"
-         style="fill:#008000;stroke:#008000"
-         id="g4303-3-3">
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="m 7,14 3,-5 3,5"
-           id="path4299-6-5"
-           inkscape:connector-curvature="0" />
-        <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           d="M 13,14 7,14"
-           id="path4301-7-6"
-           inkscape:connector-curvature="0" />
-      </g>
-    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:16px;line-height:125%;font-family:Sans;-inkscape-font-specification:Sans;letter-spacing:0px;word-spacing:0px;fill:#aa0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       x="34.81818"
+       y="39.545456"
+       id="text4315"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4317"
+         x="34.81818"
+         y="39.545456"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:45px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#aa0000;">-</tspan></text>
   </g>
 </svg>

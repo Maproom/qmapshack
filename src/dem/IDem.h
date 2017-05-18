@@ -117,6 +117,15 @@ protected:
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     /**
+     @brief Slope in degrees based on a 4x4 window. Origin is at point (1,1), counting from zero.
+     @param win2  4x4 window
+     @param x     Fractional value (0..1) for interpolation in x
+     @param y     Fractional value (0..1) for interpolation in y
+     @return      Slope in degrees
+     */
+    qreal slopeOfWindowInterp(qint16* win2, qreal x, qreal y);
+
+    /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
        @param img   the tile as QImage
        @param l     a 4 point polygon to fit the tile in

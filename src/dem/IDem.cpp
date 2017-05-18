@@ -25,6 +25,8 @@
 
 inline qint16 getValue(QVector<qint16>& data, int x, int y, int dx)
 {
+    x = x > dx-1 ? dx-1 : x;
+    y = y > dx-1 ? dx-1 : y;
     return data[x + y * dx];
 }
 
@@ -39,6 +41,26 @@ inline void fillWindow(QVector<qint16>& data, int x, int y, int dx, qint16 * w)
     w[6] = getValue(data, x - 1, y + 1, dx);
     w[7] = getValue(data, x, y + 1, dx);
     w[8] = getValue(data, x + 1, y + 1, dx);
+}
+
+inline void fillWindow4x4(QVector<qint16>& data, qreal x, qreal y, int dx, qint16* w)
+{
+    w[0]  = getValue(data, qFloor(x)-1, qFloor(y)-1, dx);
+    w[1]  = getValue(data, qFloor(x)  , qFloor(y)-1, dx);
+    w[2]  = getValue(data, qFloor(x)+1, qFloor(y)-1, dx);
+    w[3]  = getValue(data, qFloor(x)+2, qFloor(y)-1, dx);
+    w[4]  = getValue(data, qFloor(x)-1, qFloor(y)  , dx);
+    w[5]  = getValue(data, qFloor(x)  , qFloor(y)  , dx);
+    w[6]  = getValue(data, qFloor(x)+1, qFloor(y)  , dx);
+    w[7]  = getValue(data, qFloor(x)+2, qFloor(y)  , dx);
+    w[8]  = getValue(data, qFloor(x)-1, qFloor(y)+1, dx);
+    w[9]  = getValue(data, qFloor(x)  , qFloor(y)+1, dx);
+    w[10] = getValue(data, qFloor(x)+1, qFloor(y)+1, dx);
+    w[11] = getValue(data, qFloor(x)+2, qFloor(y)+1, dx);
+    w[12] = getValue(data, qFloor(x)-1, qFloor(y)+2, dx);
+    w[13] = getValue(data, qFloor(x)  , qFloor(y)+2, dx);
+    w[14] = getValue(data, qFloor(x)+1, qFloor(y)+2, dx);
+    w[15] = getValue(data, qFloor(x)+2, qFloor(y)+2, dx);
 }
 
 const struct SlopePresets IDem::slopePresets[7]
@@ -222,6 +244,37 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
     }
 }
 
+qreal IDem::slopeOfWindowInterp(qint16* win2, qreal x, qreal y)
+{
+    for(int i=0;i<16;i++)
+    {
+        if(hasNoData && win2[i] == noData)
+        {
+            return NOFLOAT;
+        }
+    }
+
+     qreal win[9];
+     win[0] = win2[0] + x * (win2[1]-win2[0]) + y * (win2[4]-win2[0]) + x*y*(win2[0]-win2[1]-win2[4]+win2[5]);
+     win[1] = win2[1] + x * (win2[2]-win2[1]) + y * (win2[5]-win2[1]) + x*y*(win2[1]-win2[2]-win2[5]+win2[6]);
+     win[2] = win2[2] + x * (win2[3]-win2[2]) + y * (win2[6]-win2[2]) + x*y*(win2[2]-win2[3]-win2[6]+win2[7]);
+
+     win[3] = win2[4] + x * (win2[5]-win2[4]) + y * (win2[8]-win2[4]) + x*y*(win2[4]-win2[5]-win2[8]+win2[9]);
+     win[4] = win2[5] + x * (win2[6]-win2[5]) + y * (win2[9]-win2[5]) + x*y*(win2[5]-win2[6]-win2[9]+win2[10]);
+     win[5] = win2[6] + x * (win2[7]-win2[6]) + y * (win2[10]-win2[6]) + x*y*(win2[6]-win2[7]-win2[10]+win2[11]);
+
+     win[6] = win2[8] + x * (win2[9]-win2[8]) + y * (win2[12]-win2[8]) + x*y*(win2[8]-win2[9]-win2[12]+win2[13]);
+     win[7] = win2[9] + x * (win2[10]-win2[9]) + y * (win2[13]-win2[9]) + x*y*(win2[9]-win2[10]-win2[13]+win2[14]);
+     win[8] = win2[10] + x * (win2[11]-win2[10]) + y * (win2[14]-win2[10]) + x*y*(win2[10]-win2[11]-win2[14]+win2[15]);
+
+    qreal dx    = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
+    qreal dy    = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
+    qreal k     = dx * dx + dy * dy;
+    qreal slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+
+    return slope;
+}
+
 void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
 {
     int wp2 = w + 2;
@@ -231,13 +284,9 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[9];
-            fillWindow(data, n, m, wp2, win);
-
-            qreal dx    = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
-            qreal dy    = ((win[6] + win[7] + win[7] + win[8]) - (win[0] + win[1] + win[1] + win[2])) / (yscale);
-            qreal k     = dx * dx + dy * dy;
-            qreal slope =  qAtan(qSqrt(k) / (8 * 1.0)) * 180.0 / M_PI;
+            qint16 win16[16];
+            fillWindow4x4(data, n, m, wp2, win16);
+            qreal slope = slopeOfWindowInterp(win16, 0, 0);
 
             const qreal *currentSlopeStepTable = getCurrentSlopeStepTable();
 

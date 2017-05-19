@@ -278,7 +278,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="21.066534"
+     inkscape:cx="27.657443"
      inkscape:cy="32.697415"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -338,7 +338,8 @@
          style="opacity:1;fill:#ff0000;fill-opacity:1;stroke:#0000ff;stroke-width:4.56263685;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     </g>
     <g
-       id="g4291">
+       id="g4291"
+       transform="matrix(1.1910314,0,0,1.106179,-4.6063547,-1.9811613)">
       <g
          transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
          style="fill:#008000;stroke:#008000"
@@ -371,8 +372,8 @@
       </g>
     </g>
     <g
-       transform="matrix(0,-1,1,0,25.245663,34.078663)"
-       id="g4291-3">
+       id="g4291-3"
+       transform="matrix(0,-1.1910314,1.106179,0,21.991776,38.594107)">
       <g
          transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
          style="fill:#008000;stroke:#008000"

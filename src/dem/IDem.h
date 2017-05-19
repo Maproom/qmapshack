@@ -97,6 +97,8 @@ public:
     void setSlopeStepTable(int idx);
     void setSlopeStepTableCustomValue(int idx, int val);
 
+    enum winsize_e {eWinsize3x3 = 9, eWinsize4x4 = 16};
+
 public slots:
     void slotSetHillshading(bool yes)
     {
@@ -119,12 +121,12 @@ protected:
     /**
      @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
      @param win2  window data
-     @param size  size of window (9: 3x3 window, 16: 4x4 window)
+     @param size  size of window (eWinsize3x3 or eWinsize4x4)
      @param x     Fractional value (0..1) for interpolation in x (4x4 window only)
      @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
      @return      Slope in degrees
      */
-    qreal slopeOfWindowInterp(qint16* win2, qint32 size, qreal x, qreal y);
+    qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.

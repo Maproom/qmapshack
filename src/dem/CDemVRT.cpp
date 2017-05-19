@@ -203,7 +203,7 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos)
     qreal x    = pt.x() - qFloor(pt.x());
     qreal y    = pt.y() - qFloor(pt.y());
 
-    qint16 win[16];
+    qint16 win[eWinsize4x4];
     mutex.lock();
     CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x())-1, qFloor(pt.y())-1, 4, 4, &win, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
     mutex.unlock();
@@ -211,7 +211,7 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos)
     {
         return NOFLOAT;
     }
-    for(int i=0;i<16;i++)
+    for(int i=0; i<eWinsize4x4; i++)
     {
         if(hasNoData && win[i] == noData)
         {
@@ -219,7 +219,7 @@ qreal CDemVRT::getSlopeAt(const QPointF& pos)
         }
     }
 
-    qreal slope = slopeOfWindowInterp(win, 16, x, y);
+    qreal slope = slopeOfWindowInterp(win, eWinsize4x4, x, y);
     return slope;
 }
 

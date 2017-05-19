@@ -245,9 +245,9 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
     }
 }
 
-qreal IDem::slopeOfWindowInterp(qint16* win2, qint32 size, qreal x, qreal y)
+qreal IDem::slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y)
 {
-    for(int i=0;i<size;i++)
+    for(int i = 0; i < size; i++)
     {
         if(hasNoData && win2[i] == noData)
         {
@@ -255,27 +255,30 @@ qreal IDem::slopeOfWindowInterp(qint16* win2, qint32 size, qreal x, qreal y)
         }
     }
 
-    qreal win[9];
-    if(size == 9)
+    qreal win[eWinsize3x3];
+    switch(size)
     {
-        for(int i = 0; i < size; i++)
-        {
-            win[i] = win2[i];
-        }
-    }
-    else
-    {
-        win[0] = win2[0] + x * (win2[1]-win2[0]) + y * (win2[4]-win2[0]) + x*y*(win2[0]-win2[1]-win2[4]+win2[5]);
-        win[1] = win2[1] + x * (win2[2]-win2[1]) + y * (win2[5]-win2[1]) + x*y*(win2[1]-win2[2]-win2[5]+win2[6]);
-        win[2] = win2[2] + x * (win2[3]-win2[2]) + y * (win2[6]-win2[2]) + x*y*(win2[2]-win2[3]-win2[6]+win2[7]);
+        case eWinsize3x3:
+            for(int i = 0; i < 9; i++)
+            {
+                win[i] = win2[i];
+            }
+            break;
+        case eWinsize4x4:
+            win[0] = win2[0] + x * (win2[1]-win2[0]) + y * (win2[4]-win2[0]) + x*y*(win2[0]-win2[1]-win2[4]+win2[5]);
+            win[1] = win2[1] + x * (win2[2]-win2[1]) + y * (win2[5]-win2[1]) + x*y*(win2[1]-win2[2]-win2[5]+win2[6]);
+            win[2] = win2[2] + x * (win2[3]-win2[2]) + y * (win2[6]-win2[2]) + x*y*(win2[2]-win2[3]-win2[6]+win2[7]);
 
-        win[3] = win2[4] + x * (win2[5]-win2[4]) + y * (win2[8]-win2[4]) + x*y*(win2[4]-win2[5]-win2[8]+win2[9]);
-        win[4] = win2[5] + x * (win2[6]-win2[5]) + y * (win2[9]-win2[5]) + x*y*(win2[5]-win2[6]-win2[9]+win2[10]);
-        win[5] = win2[6] + x * (win2[7]-win2[6]) + y * (win2[10]-win2[6]) + x*y*(win2[6]-win2[7]-win2[10]+win2[11]);
+            win[3] = win2[4] + x * (win2[5]-win2[4]) + y * (win2[8]-win2[4]) + x*y*(win2[4]-win2[5]-win2[8]+win2[9]);
+            win[4] = win2[5] + x * (win2[6]-win2[5]) + y * (win2[9]-win2[5]) + x*y*(win2[5]-win2[6]-win2[9]+win2[10]);
+            win[5] = win2[6] + x * (win2[7]-win2[6]) + y * (win2[10]-win2[6]) + x*y*(win2[6]-win2[7]-win2[10]+win2[11]);
 
-        win[6] = win2[8] + x * (win2[9]-win2[8]) + y * (win2[12]-win2[8]) + x*y*(win2[8]-win2[9]-win2[12]+win2[13]);
-        win[7] = win2[9] + x * (win2[10]-win2[9]) + y * (win2[13]-win2[9]) + x*y*(win2[9]-win2[10]-win2[13]+win2[14]);
-        win[8] = win2[10] + x * (win2[11]-win2[10]) + y * (win2[14]-win2[10]) + x*y*(win2[10]-win2[11]-win2[14]+win2[15]);
+            win[6] = win2[8] + x * (win2[9]-win2[8]) + y * (win2[12]-win2[8]) + x*y*(win2[8]-win2[9]-win2[12]+win2[13]);
+            win[7] = win2[9] + x * (win2[10]-win2[9]) + y * (win2[13]-win2[9]) + x*y*(win2[9]-win2[10]-win2[13]+win2[14]);
+            win[8] = win2[10] + x * (win2[11]-win2[10]) + y * (win2[14]-win2[10]) + x*y*(win2[10]-win2[11]-win2[14]+win2[15]);
+            break;
+        default:
+            return NOFLOAT;
     }
 
     qreal dx    = ((win[0] + win[3] + win[3] + win[6]) - (win[2] + win[5] + win[5] + win[8])) / (xscale);
@@ -297,7 +300,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
         {
             qint16 win[9];
             fillWindow(data, n, m, wp2, win);
-            qreal slope = slopeOfWindowInterp(win, 9, 0, 0);
+            qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 
             const qreal *currentSlopeStepTable = getCurrentSlopeStepTable();
 

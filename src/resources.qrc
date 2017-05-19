@@ -495,7 +495,7 @@
         <file>icons/waypoints/32x32/Water.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
-        <file>cursors/cursorMovePoint.png</file>
+        <file>cursors/cursorPointMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
         <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/cursorMoveLine.png</file>
@@ -503,7 +503,8 @@
         <file>cursors/cursorDelete.png</file>
         <file>cursors/cursorSelectRange.png</file>
         <file>cursors/cursorSelectArea.png</file>
-        <file>cursors/cursorAdd.png</file>
+        <file>cursors/cursorPointAdd.png</file>
+        <file>cursors/cursorPointDel.png</file>
         <file>cursors/cursorPrint.png</file>
         <file>cursors/cursorSave.png</file>
         <file>cursors/wptHighlightRed.png</file>

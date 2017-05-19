@@ -27,6 +27,7 @@ struct poi_t
     QString name;
     QString desc;
     QPointF pos;
+    QSize   symbolSize;
 };
 
 #endif //POI_H

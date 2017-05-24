@@ -699,6 +699,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
     limits_t extremaSlope    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     limits_t extremaEle      = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
     limits_t extremaProgress = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaTerrainSlope = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
 
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
@@ -732,6 +733,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
         updateExtrema(extremaEle,      pt.ele);
         updateExtrema(extremaSlope,    pt.slope1);
         updateExtrema(extremaProgress, pt.distance);
+        updateExtrema(extremaTerrainSlope, pt.terrainSlope);
     }
 
     if(extremaEle.min < extremaEle.max)
@@ -756,6 +758,12 @@ void CGisItemTrk::updateExtremaAndExtensions()
     {
         existingExtensions << CKnownExtension::internalProgress;
         extrema[CKnownExtension::internalProgress] = extremaProgress;
+    }
+
+    if(numeric_limits<qreal>::max() != extremaTerrainSlope.min)
+    {
+        existingExtensions << CKnownExtension::internalTerrainSlope;
+        extrema[CKnownExtension::internalTerrainSlope] = extremaTerrainSlope;
     }
 
     existingExtensions.subtract(nonRealExtensions);
@@ -980,6 +988,8 @@ void CGisItemTrk::deriveSecondaryData()
         {
             trkpt.speed = NOFLOAT;
         }
+
+        trkpt.terrainSlope = CMainWindow::self().getSlopeAt(QPointF(trkpt.lon, trkpt.lat) * DEG_TO_RAD);
     }
 
     if(nullptr != lastTrkpt)

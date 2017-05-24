@@ -774,6 +774,16 @@ void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele) const
     return dem->getElevationAt(pos, ele);
 }
 
+qreal CCanvas::getSlopeAt(const QPointF& pos) const
+{
+    return dem->getSlopeAt(pos);
+}
+
+void CCanvas::getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const
+{
+    return dem->getSlopeAt(pos, slope);
+}
+
 void CCanvas::getElevationAt(SGisLine& line) const
 {
     return dem->getElevationAt(line);

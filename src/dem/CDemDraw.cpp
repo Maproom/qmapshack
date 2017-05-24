@@ -329,6 +329,14 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
     }
 }
 
+void CDemDraw::getSlopeAt(const QPolygonF& pos, QPolygonF& slope)
+{
+    for(int i = 0; i < pos.size(); i++)
+    {
+        slope[i].ry() = getSlopeAt(pos[i]);
+    }
+}
+
 void CDemDraw::getElevationAt(SGisLine& line)
 {
     line.updateElevation(this);

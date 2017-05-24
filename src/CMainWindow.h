@@ -70,6 +70,9 @@ public:
     qreal getElevationAt(const QPointF &pos) const;
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
     void  getElevationAt(SGisLine &line) const;
+
+    qreal getSlopeAt(const QPointF &pos) const;
+    void getSlopeAt(const QPolygonF &pos, QPolygonF& slope) const;
     /**
        @brief Get pointer to the currently visible canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.

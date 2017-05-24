@@ -728,7 +728,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     {
         QString val;
         val.sprintf("%.1f", slope);
-        lblSlope->setText(tr("Slope: %1°").arg(val));
+        lblSlope->setText(tr("Slope: %1%2").arg(val).arg(QChar(0260)));
         lblSlope->show();
     }
     else

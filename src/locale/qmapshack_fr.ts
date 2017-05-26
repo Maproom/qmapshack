@@ -122,7 +122,7 @@
         <translation>Vue %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="695"/>
+        <location filename="../canvas/CCanvas.cpp" line="696"/>
         <source>Setup Map Background</source>
         <translation>Réglage de l&apos;arrière-plan de la carte</translation>
     </message>
@@ -728,7 +728,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CFitDecoder</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="119"/>
+        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="132"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
         <translation>erreur de décodage FIT : fin de fichier inatendue %1.</translation>
     </message>
@@ -744,12 +744,12 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CFitFieldDataState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="115"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="116"/>
         <source>Missing field definition for development field.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="207"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="209"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1889,27 +1889,27 @@ ligne %2, colonne %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="62"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="66"/>
         <source> by %1</source>
         <translation>par %1</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="108"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="37"/>
         <source>Cut history before</source>
         <translation>Tronquer l&apos;historique antérieur</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="113"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="38"/>
         <source>Cut history after</source>
         <translation>Tronquer l&apos;historique postérieur</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
         <source>History removal</source>
         <translation>Supression de l&apos;historique</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="157"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation>La suppression est permanente et ne peut être annulée. &lt;b&gt;Voulez-vous vraiment supprimer l&apos;historique antérieur à cette étape ?&lt;/b&gt;</translation>
     </message>
@@ -2008,48 +2008,53 @@ ligne %2, colonne %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="588"/>
+        <location filename="../CMainWindow.cpp" line="591"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Add Map View&lt;/b&gt; pour ouvrir une nouvelle vue. Ou &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour charger une vue sauvegardée. Ou cliquez &lt;a href=&apos;newview&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="716"/>
+        <location filename="../CMainWindow.cpp" line="719"/>
         <source>Ele: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="732"/>
+        <location filename="../CMainWindow.cpp" line="731"/>
+        <source>Slope: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="747"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="867"/>
+        <location filename="../CMainWindow.cpp" line="882"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="901"/>
+        <location filename="../CMainWindow.cpp" line="916"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="901"/>
-        <location filename="../CMainWindow.cpp" line="927"/>
+        <location filename="../CMainWindow.cpp" line="916"/>
+        <location filename="../CMainWindow.cpp" line="942"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="927"/>
+        <location filename="../CMainWindow.cpp" line="942"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1106"/>
+        <location filename="../CMainWindow.cpp" line="1121"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1107"/>
+        <location filename="../CMainWindow.cpp" line="1122"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2671,21 +2676,21 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
         <translation>Le fichier contient des données verrouillées / cryptées. Garmin ne vous autorise pas à utiliser ce fichier avec un logiciel non fourni par Garmin.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2342"/>
-        <location filename="../map/CMapIMG.cpp" line="2348"/>
-        <location filename="../map/CMapIMG.cpp" line="2352"/>
+        <location filename="../map/CMapIMG.cpp" line="2350"/>
+        <location filename="../map/CMapIMG.cpp" line="2356"/>
+        <location filename="../map/CMapIMG.cpp" line="2360"/>
         <source>Point of Interest</source>
         <translation>Point d&apos;intérêt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2438"/>
+        <location filename="../map/CMapIMG.cpp" line="2446"/>
         <source>Unknown</source>
         <translation>Inconnu</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2480"/>
         <location filename="../map/CMapIMG.cpp" line="2488"/>
-        <location filename="../map/CMapIMG.cpp" line="2495"/>
+        <location filename="../map/CMapIMG.cpp" line="2496"/>
+        <location filename="../map/CMapIMG.cpp" line="2503"/>
         <source>Area</source>
         <translation>Surface</translation>
     </message>
@@ -3795,27 +3800,27 @@ n&apos;est pas une définition de système de coordonnées:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="620"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="685"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="694"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="783"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="792"/>
         <source>being downloaded: %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="803"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="789"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="798"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3835,12 +3840,12 @@ n&apos;est pas une définition de système de coordonnées:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="797"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
         <source>local data up to date (%1, %2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="809"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
         <source>no routing-data available</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3848,13 +3853,13 @@ n&apos;est pas une définition de système de coordonnées:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="74"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="78"/>
         <source>!!! done !!!
 </source>
         <translation type="unfinished">!!! fait !!!</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="79"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="83"/>
         <source>!!! failed !!!
 </source>
         <translation type="unfinished">!!! échec !!!</translation>
@@ -8133,8 +8138,8 @@ or
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="222"/>
-        <source>Select all itmes that are completely inside the selected area.</source>
-        <translation>Sélectionner tous les objets qui sont totalement inclus  dans la zone sélectionnée</translation>
+        <source>Select all items that are completely inside the selected area.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="282"/>

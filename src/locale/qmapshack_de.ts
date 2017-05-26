@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -122,7 +122,7 @@
         <translation>Ansicht %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="695"/>
+        <location filename="../canvas/CCanvas.cpp" line="696"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -728,7 +728,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitDecoder</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="119"/>
+        <location filename="../gis/fit/decoder/CFitDecoder.cpp" line="132"/>
         <source>FIT decoding error: unexpected end of file %1.</source>
         <translation>FIT Dekodierfehler: Unerwartetes Ende der Datei %1.</translation>
     </message>
@@ -744,14 +744,14 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFitFieldDataState</name>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="115"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="116"/>
         <source>Missing field definition for development field.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="207"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="209"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1889,29 +1889,29 @@ Zeile %2, Spalte %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="62"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="66"/>
         <source> by %1</source>
         <translation> von %1</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="108"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="37"/>
         <source>Cut history before</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie davor verkürzen</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="113"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="38"/>
         <source>Cut history after</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie danach verkürzen</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="161"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
         <source>History removal</source>
-        <translation type="unfinished"></translation>
+        <translation>Historie entfernen</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="162"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="157"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Entfernen ist permanent und kann nicht rückgängig gemacht werden. &lt;p&gt; Wollen Sie wirklich die Historie vor diesem Eintrag löschen?&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -2008,48 +2008,53 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="588"/>
+        <location filename="../CMainWindow.cpp" line="591"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="716"/>
+        <location filename="../CMainWindow.cpp" line="719"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="732"/>
+        <location filename="../CMainWindow.cpp" line="731"/>
+        <source>Slope: %1%2</source>
+        <translation>Hangneigung: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="747"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="867"/>
+        <location filename="../CMainWindow.cpp" line="882"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="901"/>
+        <location filename="../CMainWindow.cpp" line="916"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="901"/>
-        <location filename="../CMainWindow.cpp" line="927"/>
+        <location filename="../CMainWindow.cpp" line="916"/>
+        <location filename="../CMainWindow.cpp" line="942"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="927"/>
+        <location filename="../CMainWindow.cpp" line="942"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1106"/>
+        <location filename="../CMainWindow.cpp" line="1121"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1107"/>
+        <location filename="../CMainWindow.cpp" line="1122"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -2674,21 +2679,21 @@ Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgelief
         <translation>Die Datei enthält verschlüsselte Daten. Garmin möchte nicht, dass diese Datei mit einer anderen Software, als der von Garmin bereitgestellten, benutzt wird.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2342"/>
-        <location filename="../map/CMapIMG.cpp" line="2348"/>
-        <location filename="../map/CMapIMG.cpp" line="2352"/>
+        <location filename="../map/CMapIMG.cpp" line="2350"/>
+        <location filename="../map/CMapIMG.cpp" line="2356"/>
+        <location filename="../map/CMapIMG.cpp" line="2360"/>
         <source>Point of Interest</source>
         <translation>Ort von Interesse</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2438"/>
+        <location filename="../map/CMapIMG.cpp" line="2446"/>
         <source>Unknown</source>
         <translation>Unbekannt</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2480"/>
         <location filename="../map/CMapIMG.cpp" line="2488"/>
-        <location filename="../map/CMapIMG.cpp" line="2495"/>
+        <location filename="../map/CMapIMG.cpp" line="2496"/>
+        <location filename="../map/CMapIMG.cpp" line="2503"/>
         <source>Area</source>
         <translation>Gebiet</translation>
     </message>
@@ -3798,27 +3803,27 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Fehler beim Schreiben der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="620"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Fehler beim Umbenennen der Datei von %1 nach %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="685"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="694"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), noch Herunterzuladen: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="783"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="792"/>
         <source>being downloaded: %1 of %2</source>
         <translation>wird heruntergeladen: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="803"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>lokale keine Daten. Verfügbar: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="789"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="798"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>lokale Daten veraltet (%1, %2 - auf dem Server: %3, %4)</translation>
     </message>
@@ -3838,12 +3843,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>ungültige Anwort, keine Dateien gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="797"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
         <source>local data up to date (%1, %2)</source>
         <translation>lokale Daten sind aktuell (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="809"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
         <source>no routing-data available</source>
         <translation>keine Routing-daten verfügbar</translation>
     </message>
@@ -3851,13 +3856,13 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="74"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="78"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="79"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="83"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! fehlgeschlagen !!!</translation>
@@ -6174,7 +6179,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/fit/decoder/IFitDecoderState.cpp" line="124"/>
         <source>FIT decoding error: a development field with the field_definition_number %1 already exists.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -8140,8 +8145,8 @@ sein</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="222"/>
-        <source>Select all itmes that are completely inside the selected area.</source>
-        <translation>Wählt alle Elemente, die vollständig innerhalb des gewählten Bereiches liegen.</translation>
+        <source>Select all items that are completely inside the selected area.</source>
+        <translation>Alle Elemente auswählen, die komplett innerhalb des ausgewählten Gebietes sind.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="282"/>

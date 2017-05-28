@@ -1100,7 +1100,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
         <source> slope: %1%3 (%2%)</source>
-        <translation> наклон: %1%3 (%2%)</translation>
+        <translation> склон: %1%3 (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="518"/>
@@ -2020,7 +2020,7 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="731"/>
         <source>Slope: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Склон: %1%2</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="747"/>
@@ -8150,7 +8150,7 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="222"/>
         <source>Select all items that are completely inside the selected area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать все элементы полностью внутри выбранной области.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="282"/>

@@ -54,7 +54,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
         if(nullptr == pBand)
         {
-            delete dataset;
+            GDALClose(dataset);
             dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("Failed to load file: %1").arg(filename));
             return;
@@ -83,7 +83,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         }
         else
         {
-            delete dataset;
+            GDALClose(dataset);
             dataset = nullptr;
             QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("File must be 8 bit palette or gray indexed."));
             return;
@@ -175,7 +175,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
 
 CMapVRT::~CMapVRT()
 {
-    delete dataset;
+    GDALClose(dataset);
 }
 
 void CMapVRT::draw(IDrawContext::buffer_t& buf) /* override */

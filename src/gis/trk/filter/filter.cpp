@@ -199,6 +199,28 @@ void CGisItemTrk::filterSmoothProfile(int points)
     changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
 }
 
+void CGisItemTrk::filterTerrainSlope()
+{
+    QPolygonF line;
+    for(const CTrackData::trkpt_t &pt : trk)
+    {
+        line << pt.radPoint();
+    }
+
+    QPolygonF slope(line.size());
+    CMainWindow::self().getSlopeAt(line, slope);
+
+    int cnt = 0;
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        pt.extensions["ql:TerrainSlope"] = (slope[cnt].ry() == NOFLOAT) ? NOINT : slope[cnt].ry();
+        ++cnt;
+    }
+
+    deriveSecondaryData();
+    changed(tr("Calculated terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
+}
+
 void CGisItemTrk::filterReplaceElevation()
 {
     QPolygonF line;

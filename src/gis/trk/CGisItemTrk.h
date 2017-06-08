@@ -524,6 +524,7 @@ public:
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
 
+    void filterTerrainSlope();
     void filterReplaceElevation();
     void filterInterpolateElevation();
     void filterReset();

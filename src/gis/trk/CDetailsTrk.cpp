@@ -33,6 +33,7 @@
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
+#include "gis/trk/filter/CFilterTerrainSlope.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
@@ -173,7 +174,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
 
-    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt>
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
 

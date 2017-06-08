@@ -31,7 +31,6 @@ public:
             elapsedSecondsMoving = NOFLOAT;
             slope1          = NOFLOAT;
             slope2          = NOFLOAT;
-            terrainSlope    = NOFLOAT;
             speed           = NOFLOAT;
             idxVisible      = NOIDX;
         }
@@ -122,7 +121,6 @@ public:
         qreal descent;                      //< the descent from the start of the track
         qreal slope1;                       //< the slope [°] over several points close by
         qreal slope2;                       //< the slope [%] over several points close by
-        qreal terrainSlope;                 //< the slope of the terrain at a point
         qreal speed;                        //< the speed over several points close by
         qreal elapsedSeconds;               //< the seconds since the start of the track
         qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed

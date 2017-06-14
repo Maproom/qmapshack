@@ -552,7 +552,7 @@ void IPlot::setSizes()
     scaleWidthX1 = showScale ? data->x().getScaleWidth( fm ) : 0;
     scaleWidthY1 = showScale ? data->y().getScaleWidth( fm ) : 0;
 
-    scaleWidthY1 = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
+    scaleWidthY1 = (scaleWidthX1/2) > scaleWidthY1 ? scaleWidthX1/2 : scaleWidthY1;
 
     fontWidth    = fm.maxWidth();
     fontHeight   = fm.height();

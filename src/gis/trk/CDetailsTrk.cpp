@@ -450,12 +450,11 @@ void CDetailsTrk::updateData()
     widgetColorActivity->setVisible(enabledActivity);
     widgetColorActivity->setEnabled(enabledActivity);
 
+    X_____________UnBlockAllSignals_____________X(this);
 
     // refill comboboxes to select track property to be displayed by graphs
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
-
-    X_____________UnBlockAllSignals_____________X(this);
 
     CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();
     if(nullptr != filter)

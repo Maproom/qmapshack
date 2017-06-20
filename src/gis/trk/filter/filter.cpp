@@ -213,12 +213,12 @@ void CGisItemTrk::filterTerrainSlope()
     int cnt = 0;
     for(CTrackData::trkpt_t& pt : trk)
     {
-        pt.extensions["ql:TerrainSlope"] = (slope[cnt].ry() == NOFLOAT) ? NOINT : slope[cnt].ry();
+        pt.extensions[CKnownExtension::internalTerrainSlope] = slope[cnt].ry();
         ++cnt;
     }
 
     deriveSecondaryData();
-    changed(tr("Calculated terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
+    changed(tr("Added terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
 }
 
 void CGisItemTrk::filterReplaceElevation()

@@ -947,18 +947,24 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
     {
         if (pinch->totalChangeFlags() & QPinchGesture::ScaleFactorChanged)
         {
-            QPointF pos = pinch->centerPoint();
-            QPointF pt1 = pos;
+            qreal pscale = pinch->totalScaleFactor();
+            if (pscale < 0.67f or pscale > 1.5f)
+            {
+                QPointF pos = pinch->centerPoint();
+                QPointF pt1 = pos;
 
-            map->convertPx2Rad(pt1);
-            setZoom(pinch->lastScaleFactor() < pinch->scaleFactor(), needsRedraw);
-            map->convertRad2Px(pt1);
+                map->convertPx2Rad(pt1);
+                setZoom(pscale > 1.0f, needsRedraw);
+                map->convertRad2Px(pt1);
 
-            map->convertRad2Px(posFocus);
-            posFocus -= (pos - pt1);
-            map->convertPx2Rad(posFocus);
+                map->convertRad2Px(posFocus);
+                posFocus -= (pos - pt1);
+                map->convertPx2Rad(posFocus);
 
-            update();
+                pinch->setTotalScaleFactor(1.0f);
+
+                update();
+            }
         }
     }
     return true;

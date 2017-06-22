@@ -945,19 +945,12 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
 {
     if (QPinchGesture *pinch = dynamic_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture)))
     {
-        bool isMove = false;
-        bool isZoom = false;
-
         if (pinch->changeFlags() & QPinchGesture::CenterPointChanged)
         {
-            QPointF move = pinch->centerPoint() - pinch->lastCenterPoint();
-            if (move.rx() > 0 || move.ry() > 0)
+            const QPointF & move = pinch->centerPoint() - pinch->lastCenterPoint();
+            if (!move.isNull())
             {
-                map->convertRad2Px(posFocus);
-                posFocus -= move;
-                map->convertPx2Rad(posFocus);
-                emit sigMove();
-                isMove = true;
+                moveMap(move);
             }
         }
         if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged)
@@ -965,14 +958,20 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             qreal pscale = pinch->totalScaleFactor();
             if (pscale < 0.8f or pscale > 1.25f)
             {
+                const QPointF & center = pinch->centerPoint();
+                QPointF pos = mapFromGlobal(QPoint(center.x(),center.y()));
+                QPointF pt1 = pos;
+                map->convertPx2Rad(pt1);
                 setZoom(pscale > 1.0f, needsRedraw);
+                map->convertRad2Px(pt1);
+                const QPointF & move = pos - pt1;
+                if (!move.isNull())
+                {
+                    moveMap(move);
+                }
                 pinch->setTotalScaleFactor(1.0f);
-                isZoom = true;
+                slotTriggerCompleteUpdate(needsRedraw);
             }
-        }
-        if (isMove || isZoom)
-        {
-            slotTriggerCompleteUpdate(isMove ? eRedrawAll : needsRedraw);
         }
     }
     return true;

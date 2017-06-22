@@ -959,7 +959,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             if (pscale < 0.8f or pscale > 1.25f)
             {
                 const QPointF & center = pinch->centerPoint();
-                QPointF pos = mapFromGlobal(QPoint(center.x(),center.y()));
+                const QPointF & pos = mapFromGlobal(QPoint(center.x(),center.y()));
                 QPointF pt1 = pos;
                 map->convertPx2Rad(pt1);
                 setZoom(pscale > 1.0f, needsRedraw);

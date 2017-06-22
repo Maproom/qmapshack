@@ -956,7 +956,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
         if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged)
         {
             qreal pscale = pinch->totalScaleFactor();
-            if (pscale < 0.8f or pscale > 1.25f)
+            if (pscale < 0.8f || pscale > 1.25f)
             {
                 const QPointF & center = pinch->centerPoint();
                 const QPointF & pos = mapFromGlobal(QPoint(center.x(),center.y()));

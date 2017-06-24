@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -97,6 +97,7 @@
     <addaction name="actionSetupMapView"/>
     <addaction name="actionSetupTimeZone"/>
     <addaction name="actionSetupCoordFormat"/>
+    <addaction name="actionSetupToolbar"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -278,6 +279,17 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="CToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionAddMapView">
    <property name="icon">
@@ -804,6 +816,15 @@
     <string>Quickstart Help</string>
    </property>
   </action>
+  <action name="actionSetupToolbar">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Toolbar</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -811,6 +832,11 @@
    <extends>QWidget</extends>
    <header>gis/rte/router/CRouterSetup.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CToolBar</class>
+   <extends>QToolBar</extends>
+   <header>toolbar/CToolBar.h</header>
   </customwidget>
  </customwidgets>
  <resources>

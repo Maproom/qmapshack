@@ -43,6 +43,7 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
+#include "toolbar/CToolBarSetup.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -115,6 +116,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupUnits,            &QAction::triggered,            this,      &CMainWindow::slotSetupUnits);
     connect(actionSetupWorkspace,        &QAction::triggered,            this,      &CMainWindow::slotSetupWorkspace);
     connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
+    connect(actionSetupToolbar,          &QAction::triggered,            this,      &CMainWindow::slotSetupToolbar);
     connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
     connect(actionSaveGISData,           &QAction::triggered,            gisWidget, &CGisWidget::slotSaveAll);
     connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
@@ -200,6 +202,7 @@ CMainWindow::CMainWindow()
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
+    menuWindow->addAction(toolBar->toggleViewAction());
     menuWindow->addAction(dockMaps->toggleViewAction());
     menuWindow->addAction(dockDem->toggleViewAction());
     menuWindow->addAction(dockGis->toggleViewAction());
@@ -852,6 +855,12 @@ void CMainWindow::slotSetupWorkspace()
 void CMainWindow::slotSetupCoordFormat()
 {
     CCoordFormatSetup dlg(this);
+    dlg.exec();
+}
+
+void CMainWindow::slotSetupToolbar()
+{
+    CToolBarSetup dlg(this);
     dlg.exec();
 }
 

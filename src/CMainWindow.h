@@ -119,6 +119,7 @@ private slots:
     void slotSetupUnits();
     void slotSetupWorkspace();
     void slotSetupCoordFormat();
+    void slotSetupToolbar();
     void slotImportDatabase();
     void slotLoadGISData();
     void slotBuildVrt();

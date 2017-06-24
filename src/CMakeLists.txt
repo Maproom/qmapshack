@@ -111,6 +111,7 @@ set( SRCS
         helpers/CDraw.cpp
         helpers/CValue.cpp
         helpers/CLimit.cpp
+        helpers/CSelectDoubleListWidget.cpp
         canvas/CCanvas.cpp
         canvas/CCanvasSetup.cpp
         canvas/IDrawContext.cpp
@@ -337,6 +338,8 @@ set( SRCS
         setup/CAppSetupMac.cpp
         setup/CCommandProcessor.cpp
         setup/CLogHandler.cpp
+        toolbar/CToolBar.cpp
+        toolbar/CToolBarSetup.cpp
 )
 
 
@@ -396,6 +399,7 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
+        helpers/CSelectDoubleListWidget.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h
@@ -624,6 +628,8 @@ set( HDRS
         setup/CCommandProcessor.h
         setup/CLogHandler.h
         setup/IAppSetup.h
+        toolbar/CToolBar.h
+        toolbar/CToolBarSetup.h
 )
 
 
@@ -664,6 +670,7 @@ set( UIS
     helpers/IElevationDialog.ui
     helpers/ILinksDialog.ui
     helpers/IProgressDialog.ui
+    helpers/ISelectDoubleListWidget.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
@@ -730,6 +737,7 @@ set( UIS
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui
+    toolbar/IToolBarSetup.ui
     print/IPrintDialog.ui
 )
 

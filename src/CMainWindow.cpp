@@ -126,6 +126,7 @@ CMainWindow::CMainWindow()
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
+    connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
@@ -200,10 +201,17 @@ CMainWindow::CMainWindow()
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
-    menuWindow->addAction(dockMaps->toggleViewAction());
-    menuWindow->addAction(dockDem->toggleViewAction());
-    menuWindow->addAction(dockGis->toggleViewAction());
-    menuWindow->addAction(dockRte->toggleViewAction());
+    if (cfg.contains("MainWindow/activedocks"))
+    {
+        activeDocks << cfg.value("MainWindow/activedocks").toString().split(",",QString::SkipEmptyParts);
+    }
+
+    for (QString name : dockNames)
+    {
+        QDockWidget * dock = self().findChild<QDockWidget *>(name);
+        menuWindow->addAction(dock->toggleViewAction());
+        connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
+    }
 
     prepareMenuForMac();
 
@@ -214,7 +222,6 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::prepareMenuForMac()
 {
-    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
@@ -229,7 +236,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
     cfg.setValue("MainWindow/units", IUnit::self().type);
-
+    cfg.setValue("MainWindow/activedocks",activeDocks.join(","));
 
     /*
        The "Canvas" section will hold all settings global to all views
@@ -1016,6 +1023,75 @@ void CMainWindow::slotCloseTab()
         {
             widget->deleteLater();
         }
+    }
+}
+
+const QStringList CMainWindow::dockNames = {
+    "dockMaps",
+    "dockDem",
+    "dockGis",
+    "dockRte"
+};
+
+void CMainWindow::slotToggleDocks()
+{  
+    bool isHidden = true;
+    for (const QString & name : dockNames)
+    {
+        QDockWidget * dock = self().findChild<QDockWidget *>(name);
+        if (dock != nullptr && !dock->isHidden())
+        {
+            isHidden = false;
+            break;
+        }
+    }
+
+    if (isHidden)
+    {
+        if (activeDocks.isEmpty())
+        {
+            for (const QString & name : dockNames)
+            {
+                QDockWidget * dock = self().findChild<QDockWidget *>(name);
+                if (dock != nullptr)
+                {
+                    dock->show();
+                }
+            }
+        }
+        else
+        {
+            QStringList docksToShow(activeDocks);
+            for (const QString & name : docksToShow)
+            {
+                QDockWidget * dock = self().findChild<QDockWidget *>(name);
+                if (dock != nullptr)
+                {
+                    dock->show();
+                }
+            }
+        }
+    }
+    else
+    {
+        activeDocks.clear();
+        for (const QString & name : dockNames)
+        {
+            QDockWidget * dock = self().findChild<QDockWidget *>(name);
+            if (dock != nullptr && !dock->isHidden())
+            {
+                dock->hide();
+                activeDocks << name;
+            }
+        }
+    }
+}
+
+void CMainWindow::slotDockVisibilityChanged(bool visible)
+{
+    if (visible)
+    {
+        activeDocks.clear();
     }
 }
 

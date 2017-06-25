@@ -131,6 +131,8 @@ private slots:
     void slotLinkActivated(const QString& link);
     void slotSanityTest();
     void slotCloseTab();
+    void slotToggleDocks();
+    void slotDockVisibilityChanged(bool visible);
 
 private:
     friend int main(int argc, char ** argv);
@@ -149,6 +151,9 @@ private:
     QFont mapFont;
 
     CGisWidget * gisWidget;
+
+    static const QStringList dockNames;
+    QStringList activeDocks;
 };
 
 #endif //CMAINWINDOW_H

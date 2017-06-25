@@ -282,7 +282,7 @@
   </widget>
   <widget class="CToolBar" name="toolBar">
    <property name="windowTitle">
-    <string>toolBar</string>
+    <string>ToolBar</string>
    </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>

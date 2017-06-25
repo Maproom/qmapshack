@@ -30,7 +30,7 @@
   <customwidget>
    <class>CSelectDoubleListWidget</class>
    <extends>QWidget</extends>
-   <header>helpers/CSelectDoubleListWidget.h</header>
+   <header>widgets/CSelectDoubleListWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

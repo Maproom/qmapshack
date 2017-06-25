@@ -99,6 +99,7 @@ set( SRCS
         widgets/CPhotoAlbum.cpp
         widgets/CColorLegend.cpp
         widgets/CColorChooser.cpp
+        widgets/CSelectDoubleListWidget.cpp
         helpers/CInputDialog.cpp
         helpers/CPositionDialog.cpp
         helpers/CWptIconDialog.cpp
@@ -111,7 +112,6 @@ set( SRCS
         helpers/CDraw.cpp
         helpers/CValue.cpp
         helpers/CLimit.cpp
-        helpers/CSelectDoubleListWidget.cpp
         canvas/CCanvas.cpp
         canvas/CCanvasSetup.cpp
         canvas/IDrawContext.cpp
@@ -383,6 +383,7 @@ set( HDRS
         widgets/CPhotoAlbum.h
         widgets/CColorLegend.h
         widgets/CColorChooser.h
+        widgets/CSelectDoubleListWidget.h
         helpers/Platform.h
         helpers/CFileExt.h
         helpers/CSettings.h
@@ -399,7 +400,6 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
-        helpers/CSelectDoubleListWidget.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h
@@ -662,6 +662,7 @@ set( UIS
     widgets/ITextEditWidgetSelMenu.ui
     widgets/IPhotoAlbum.ui
     widgets/IColorChooser.ui
+    widgets/ISelectDoubleListWidget.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
     helpers/IWptIconDialog.ui
@@ -670,7 +671,6 @@ set( UIS
     helpers/IElevationDialog.ui
     helpers/ILinksDialog.ui
     helpers/IProgressDialog.ui
-    helpers/ISelectDoubleListWidget.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui

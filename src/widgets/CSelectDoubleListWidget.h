@@ -47,6 +47,8 @@ public:
 
     void setAvailable(const QList<sItem> & available);
     void setSelected(const QList<sItem> & selected);
+    void setLabelAvailable(const QString & label);
+    void setLabelSelected(const QString & label);
     const QList<sItem> selected();
 
 private slots:
@@ -72,6 +74,8 @@ private:
     };
 
     void filterModAvailable();
+    void updateButtons();
+
     QList<sItem> available;
     CSelectDoubleListWidget::CItemListModel modAvailable;
     CSelectDoubleListWidget::CItemListModel modSelected;

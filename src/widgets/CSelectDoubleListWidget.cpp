@@ -45,6 +45,7 @@ void CSelectDoubleListWidget::setAvailable(const QList<sItem> & available)
     this->available.clear();
     this->available << available;
     filterModAvailable();
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::setSelected(const QList<sItem> & selected)
@@ -52,6 +53,17 @@ void CSelectDoubleListWidget::setSelected(const QList<sItem> & selected)
     modSelected.items.clear();
     modSelected.items << selected;
     filterModAvailable();
+    updateButtons();
+}
+
+void CSelectDoubleListWidget::setLabelAvailable(const QString & label)
+{
+    labelAvailable->setText(label);
+}
+
+void CSelectDoubleListWidget::setLabelSelected(const QString & label)
+{
+    labelSelected->setText(label);
 }
 
 const QList<CSelectDoubleListWidget::sItem> CSelectDoubleListWidget::selected()
@@ -74,11 +86,13 @@ void CSelectDoubleListWidget::filterModAvailable()
 void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index)
 {
     listAvailable->clearSelection();
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index)
 {
     listSelected->clearSelection();
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::slotAdd()
@@ -98,6 +112,7 @@ void CSelectDoubleListWidget::slotAdd()
         modSelected.items.append(removed);
         modSelected.endInsertRows();
     }
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::slotRemove()
@@ -128,6 +143,7 @@ void CSelectDoubleListWidget::slotRemove()
         modAvailable.items.insert(index,removed);
         modAvailable.endInsertRows();
     }
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::slotUp()
@@ -159,6 +175,7 @@ void CSelectDoubleListWidget::slotUp()
         }
         i++;
     }
+    updateButtons();
 }
 
 void CSelectDoubleListWidget::slotDown()
@@ -193,6 +210,52 @@ void CSelectDoubleListWidget::slotDown()
             listSelected->selectionModel()->select(modSelected.modelIndex(index+1),QItemSelectionModel::Select);
         }
         i--;
+    }
+    updateButtons();
+}
+
+void CSelectDoubleListWidget::updateButtons()
+{
+    toolAdd->setEnabled(listAvailable->selectionModel()->hasSelection());
+
+    const QItemSelectionModel * selectedSelectionModel = listSelected->selectionModel();
+    if (selectedSelectionModel->hasSelection())
+    {
+        toolRemove->setEnabled(true);
+
+        int minSelected = modSelected.items.size();
+        int maxSelected = -1;
+        int minUnselected = modSelected.items.size();
+        int maxUnselected = -1;
+
+        for (int i = 0; i < modSelected.items.size(); i++)
+        {
+            if (selectedSelectionModel->isRowSelected(i, QModelIndex()))
+            {
+                if (i < minSelected)
+                {
+                    minSelected = i;
+                }
+                maxSelected = i;
+            }
+            else
+            {
+                if (i < minUnselected)
+                {
+                    minUnselected = i;
+                }
+                maxUnselected = i;
+            }
+        }
+
+        toolUp->setEnabled(minUnselected < maxSelected);
+        toolDown->setEnabled(maxUnselected > minSelected);
+    }
+    else
+    {
+        toolRemove->setEnabled(false);
+        toolUp->setEnabled(false);
+        toolDown->setEnabled(false);
     }
 }
 

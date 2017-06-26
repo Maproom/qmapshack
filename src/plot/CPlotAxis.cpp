@@ -181,10 +181,10 @@ int CPlotAxis::getScaleWidth( const QFontMetrics& m )
 
     if ( scaleWidth > 0 )
     {
-        return scaleWidth * m.width( " " );
+        return scaleWidth * m.width( "X" );
     }
 
-    int width = 0;
+    int width = 6 * m.width( "X" );
     QString format_single_prec = ((interval * ticScale) < 1) ? fmtdbl(interval) : fmtsgl(interval);
 
     const tic_t * t = ticmark();

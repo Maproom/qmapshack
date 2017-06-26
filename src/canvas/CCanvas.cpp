@@ -945,20 +945,33 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
 {
     if (QPinchGesture *pinch = dynamic_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture)))
     {
-        if (pinch->totalChangeFlags() & QPinchGesture::ScaleFactorChanged)
+        if (pinch->changeFlags() & QPinchGesture::CenterPointChanged)
         {
-            QPointF pos = pinch->centerPoint();
-            QPointF pt1 = pos;
-
-            map->convertPx2Rad(pt1);
-            setZoom(pinch->lastScaleFactor() < pinch->scaleFactor(), needsRedraw);
-            map->convertRad2Px(pt1);
-
-            map->convertRad2Px(posFocus);
-            posFocus -= (pos - pt1);
-            map->convertPx2Rad(posFocus);
-
-            update();
+            const QPointF & move = pinch->centerPoint() - pinch->lastCenterPoint();
+            if (!move.isNull())
+            {
+                moveMap(move);
+            }
+        }
+        if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged)
+        {
+            qreal pscale = pinch->totalScaleFactor();
+            if (pscale < 0.8f || pscale > 1.25f)
+            {
+                const QPointF & center = pinch->centerPoint();
+                const QPointF & pos = mapFromGlobal(QPoint(center.x(),center.y()));
+                QPointF pt1 = pos;
+                map->convertPx2Rad(pt1);
+                setZoom(pscale > 1.0f, needsRedraw);
+                map->convertRad2Px(pt1);
+                const QPointF & move = pos - pt1;
+                if (!move.isNull())
+                {
+                    moveMap(move);
+                }
+                pinch->setTotalScaleFactor(1.0f);
+                slotTriggerCompleteUpdate(needsRedraw);
+            }
         }
     }
     return true;

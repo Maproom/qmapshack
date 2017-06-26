@@ -57,6 +57,8 @@ void CToolBarSetup::init()
 
     selectActionsWidget->setSelected(selectedActions);
     selectActionsWidget->setAvailable(availableActions);
+    selectActionsWidget->setLabelAvailable(tr("available Actions"));
+    selectActionsWidget->setLabelSelected(tr("selected Actions"));
 }
 
 void CToolBarSetup::accept()

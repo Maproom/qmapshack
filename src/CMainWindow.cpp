@@ -32,6 +32,8 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
+#include "helpers/CToolBarConfig.h"
+#include "helpers/CToolBarSetupDialog.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -43,7 +45,6 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
-#include "toolbar/CToolBarSetup.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -207,6 +208,8 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockDem->toggleViewAction());
     menuWindow->addAction(dockGis->toggleViewAction());
     menuWindow->addAction(dockRte->toggleViewAction());
+
+    toolBarConfig = new CToolBarConfig(this,toolBar);
 
     prepareMenuForMac();
 
@@ -860,7 +863,7 @@ void CMainWindow::slotSetupCoordFormat()
 
 void CMainWindow::slotSetupToolbar()
 {
-    CToolBarSetup dlg(this);
+    CToolBarSetupDialog dlg(this,toolBarConfig);
     dlg.exec();
 }
 

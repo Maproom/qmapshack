@@ -17,23 +17,31 @@
 
 **********************************************************************************************/
 
-#ifndef CTOOLBAR_H
-#define CTOOLBAR_H
+#ifndef CTOOLBARCONFIG_H
+#define CTOOLBARCONFIG_H
 
-#include <QToolBar>
+#include <QObject>
+class T;
+class QList<T>;
+class QAction;
+class QToolBar;
 
-class CToolBar : public QToolBar
+class CToolBarConfig : public QObject
 {
     Q_OBJECT
 public:
-    CToolBar(QWidget *parent);
-    virtual ~CToolBar();
+    CToolBarConfig(QWidget *parent, QToolBar *toolBar);
+    virtual ~CToolBarConfig();
 
-    void clear();
-    void addAction(QAction * action);
+    QList<QAction *> availableActions() const;
+    QList<QAction *> configuredActions() const;
+    void setConfiguredActionsByName(const QStringList &actions);
+
+private:
+    QAction * getActionByName(const QString &name) const;
 
     static const QStringList actionNames;
-private:
-    QStringList actionIndices;
+    QStringList configuredActionNames;
+    QToolBar * toolBar;
 };
-#endif //CTOOLBAR_H
+#endif //CTOOLBARCONFIG_H

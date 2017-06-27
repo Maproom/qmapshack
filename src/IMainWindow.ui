@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -280,7 +280,7 @@
     </layout>
    </widget>
   </widget>
-  <widget class="CToolBar" name="toolBar">
+  <widget class="QToolBar" name="toolBar">
    <property name="windowTitle">
     <string>Toolbar</string>
    </property>
@@ -832,11 +832,6 @@
    <extends>QWidget</extends>
    <header>gis/rte/router/CRouterSetup.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>CToolBar</class>
-   <extends>QToolBar</extends>
-   <header>toolbar/CToolBar.h</header>
   </customwidget>
  </customwidgets>
  <resources>

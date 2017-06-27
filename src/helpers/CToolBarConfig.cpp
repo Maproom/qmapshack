@@ -17,12 +17,12 @@
 
 **********************************************************************************************/
 
-#include "CToolBar.h"
-#include "helpers/CSettings.h"
+#include "CToolBarConfig.h"
+#include "CSettings.h"
 #include "CMainWindow.h"
 #include <QDebug>
 
-const QStringList CToolBar::actionNames = {
+const QStringList CToolBarConfig::actionNames = {
     "actionAddMapView",
     "actionShowScale",
     "actionSetupMapFont",
@@ -63,59 +63,78 @@ const QStringList CToolBar::actionNames = {
     "actionToggleDocks"
 };
 
-CToolBar::CToolBar(QWidget * parent) : QToolBar(parent)
+CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(parent), toolBar(toolBar)
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
-    QString indicesStr = cfg.value("actions").toString();
+    QString actionsStr = cfg.value("actions").toString();
     cfg.endGroup();
-    if (!indicesStr.isEmpty())
+    if (!actionsStr.isEmpty())
     {
-        actionIndices = indicesStr.split(",");
-        for (const QString & indexStr : actionIndices)
+        setConfiguredActionsByName(actionsStr.split(","));
+    }
+
+}
+
+CToolBarConfig::~CToolBarConfig()
+{
+    SETTINGS;
+    cfg.beginGroup("ToolBar");
+    cfg.setValue("actions",configuredActionNames.join(","));
+    cfg.endGroup();
+}
+
+QList<QAction *> CToolBarConfig::availableActions() const
+{
+    QList<QAction *> returnActions;
+
+    for (const QString & name : actionNames)
+    {
+        QAction * action = getActionByName(name);
+        if (action != nullptr)
         {
-            const int index = indexStr.toInt();
-            if (index >= 0 && index < actionNames.size())
-            {
-                QAction * action = CMainWindow::self().findChild<QAction *>(actionNames[index]);
-                if (action != nullptr)
-                {
-                    QWidget::addAction(action);
-                }
-                else
-                {
-                    qWarning() << "error parsing config [ToolBar]->actions:" << actionNames[index] << "is not a valid action";
-                }
-            }
-            else
-            {
-                qWarning() << "error parsing config [ToolBar]->actions:" << indexStr << "is out of range";
-            }
+            returnActions << action;
+        }
+    }
+    return returnActions;
+}
+
+QList<QAction *> CToolBarConfig::configuredActions() const
+{
+    QList<QAction *> returnActions;
+    for (const QString & name : configuredActionNames)
+    {
+        QAction * action = getActionByName(name);
+        if (action != nullptr)
+        {
+            returnActions << action;
+        }
+    }
+    return returnActions;
+}
+
+void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
+{
+    QToolBar * toolBar = CMainWindow::self().findChild<QToolBar *>();
+    toolBar->clear();
+    configuredActionNames.clear();
+    for (const QString & name : names)
+    {
+        QAction * action = getActionByName(name);
+        if (action != nullptr)
+        {
+            configuredActionNames << name;
+            toolBar->addAction(action);
         }
     }
 }
 
-CToolBar::~CToolBar()
+QAction * CToolBarConfig::getActionByName(const QString & name) const
 {
-    SETTINGS;
-    cfg.beginGroup("ToolBar");
-    cfg.setValue("actions",actionIndices.join(","));
-    cfg.endGroup();
-}
-
-void CToolBar::clear()
-{
-    actionIndices.clear();
-    QToolBar::clear();
-}
-
-void CToolBar::addAction(QAction * action)
-{
-    QString actionName = action->objectName();
-    int index = actionNames.indexOf(actionName);
-    if (index >= 0)
+    QAction * action = CMainWindow::self().findChild<QAction *>(name);
+    if (action == nullptr)
     {
-        actionIndices << QString("%1").arg(index);
+        qWarning() << "error toolbar:" << name << "is not a valid action";
     }
-    QWidget::addAction(action);
+    return action;
 }

@@ -17,40 +17,34 @@
 
 **********************************************************************************************/
 
-#include <QToolBar>
-#include "CToolBarSetup.h"
-#include "CToolBar.h"
+#include "CToolBarSetupDialog.h"
+#include "CToolBarConfig.h"
 #include "CMainWindow.h"
 #include <QDebug>
 
-CToolBarSetup::CToolBarSetup(QWidget * parent) : QDialog(parent)
+CToolBarSetupDialog::CToolBarSetupDialog(QWidget * parent, CToolBarConfig *config) : QDialog(parent), config(config)
 {
     setupUi(this);
 
     init();
 }
 
-CToolBarSetup::~CToolBarSetup()
+CToolBarSetupDialog::~CToolBarSetupDialog()
 {
 
 }
 
-void CToolBarSetup::init()
+void CToolBarSetupDialog::init()
 {
     QList<CSelectDoubleListWidget::sItem> availableActions;
     QList<CSelectDoubleListWidget::sItem> selectedActions;
 
-    for(const QString & objectName : CToolBar::actionNames)
+    for(const QAction * action : config->availableActions())
     {
-        QAction * action = (CMainWindow::self().findChild<QAction *>(objectName));
-        if (action != nullptr)
-        {
-            availableActions << CSelectDoubleListWidget::sItem(action->icon(),action->iconText(),objectName);
-        }
+        availableActions << CSelectDoubleListWidget::sItem(action->icon(),action->iconText(),action->objectName());
     }
 
-    QToolBar * toolBar = CMainWindow::self().findChild<QToolBar *>("toolBar");
-    for (const QAction * action : toolBar->actions())
+    for (const QAction * action : config->configuredActions())
     {
         selectedActions << CSelectDoubleListWidget::sItem(action->icon(),action->iconText(),action->objectName());
     }
@@ -61,17 +55,13 @@ void CToolBarSetup::init()
     selectActionsWidget->setLabelSelected(tr("selected Actions"));
 }
 
-void CToolBarSetup::accept()
+void CToolBarSetupDialog::accept()
 {
-   CToolBar * toolBar = CMainWindow::self().findChild<CToolBar *>("toolBar");
-    toolBar->clear();
+    QStringList actionNames;
     for (const CSelectDoubleListWidget::sItem & item : selectActionsWidget->selected())
     {
-        QAction * action = (CMainWindow::self().findChild<QAction *>(item.data.toString()));
-        if (action != nullptr)
-        {
-            toolBar->addAction(action);
-        }
+        actionNames << item.data.toString();
     }
+    config->setConfiguredActionsByName(actionNames);
     QDialog::accept();
 }

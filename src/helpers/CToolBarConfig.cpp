@@ -67,20 +67,16 @@ CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(p
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
-    QString actionsStr = cfg.value("actions").toString();
+    QStringList actions = cfg.value("actions").toStringList();
     cfg.endGroup();
-    if (!actionsStr.isEmpty())
-    {
-        setConfiguredActionsByName(actionsStr.split(","));
-    }
-
+    setConfiguredActionsByName(actions);
 }
 
 CToolBarConfig::~CToolBarConfig()
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
-    cfg.setValue("actions",configuredActionNames.join(","));
+    cfg.setValue("actions",configuredActionNames);
     cfg.endGroup();
 }
 

@@ -37,7 +37,7 @@ CToolBarSetupDialog::~CToolBarSetupDialog()
 void CToolBarSetupDialog::init()
 {
     QList<CSelectDoubleListWidget::sItem> availableActions;
-    QList<CSelectDoubleListWidget::sItem> selectedActions;
+    QList<CSelectDoubleListWidget::sItem> configuredActions;
 
     for(const QAction * action : config->availableActions())
     {
@@ -46,10 +46,10 @@ void CToolBarSetupDialog::init()
 
     for (const QAction * action : config->configuredActions())
     {
-        selectedActions << CSelectDoubleListWidget::sItem(action->icon(),action->iconText(),action->objectName());
+        configuredActions << CSelectDoubleListWidget::sItem(action->icon(),action->iconText(),action->objectName());
     }
 
-    selectActionsWidget->setSelected(selectedActions);
+    selectActionsWidget->setSelected(configuredActions);
     selectActionsWidget->setAvailable(availableActions);
     selectActionsWidget->setLabelAvailable(tr("available Actions"));
     selectActionsWidget->setLabelSelected(tr("selected Actions"));

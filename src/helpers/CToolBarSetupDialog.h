@@ -21,10 +21,7 @@
 #define CTOOLBARSETUPDIALOG_H
 
 #include "ui_IToolBarSetupDialog.h"
-class T;
-class QList<T>;
-class QListView;
-class QVariant;
+
 class CToolBarConfig;
 
 class CToolBarSetupDialog : public QDialog, private Ui::IToolBarSetupDialog
@@ -37,7 +34,18 @@ public:
     void accept() override;
 
 private:
-    void init();
+    class CToolBarSetupDialogItem : public QListWidgetItem
+    {
+    public:
+        CToolBarSetupDialogItem(QIcon icon, QString text, QString name)
+            : QListWidgetItem(icon, text, nullptr, QListWidgetItem::UserType),
+              actionName(name) {}
+        ~CToolBarSetupDialogItem() override {}
+    private:
+        const QString actionName;
+        friend class CToolBarSetupDialog;
+    };
+
     CToolBarConfig * config;
 };
 #endif //CTOOLBARSETUPDIALOG_H

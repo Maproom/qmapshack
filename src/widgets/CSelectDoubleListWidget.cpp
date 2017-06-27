@@ -17,7 +17,7 @@
 
 **********************************************************************************************/
 
-#include <QAbstractListModel>
+#include <QListWidgetItem>
 #include "CSelectDoubleListWidget.h"
 
 CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent) : QWidget(parent)
@@ -30,30 +30,41 @@ CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent) : QWidget(par
     connect(toolRemove,    &QToolButton::clicked, this, &CSelectDoubleListWidget::slotRemove);
     connect(toolUp,        &QToolButton::clicked, this, &CSelectDoubleListWidget::slotUp);
     connect(toolDown,      &QToolButton::clicked, this, &CSelectDoubleListWidget::slotDown);
-
-    listAvailable->setModel(&modAvailable);
-    listSelected->setModel(&modSelected);
 }
 
 CSelectDoubleListWidget::~CSelectDoubleListWidget()
 {
-
 }
 
-void CSelectDoubleListWidget::setAvailable(const QList<sItem> & available)
+void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & available)
 {
     this->available.clear();
     this->available << available;
-    filterModAvailable();
+    filterListAvailable();
     updateButtons();
 }
 
-void CSelectDoubleListWidget::setSelected(const QList<sItem> & selected)
+void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected)
 {
-    modSelected.items.clear();
-    modSelected.items << selected;
-    filterModAvailable();
+    listSelected->clear();
+    for (QListWidgetItem * const item : selected)
+    {
+        listSelected->addItem(item);
+    }
+    filterListAvailable();
     updateButtons();
+}
+
+void CSelectDoubleListWidget::filterListAvailable()
+{
+    listAvailable->clear();
+    for (QListWidgetItem * const item : available)
+    {
+        if (listSelected->row(item) < 0)
+        {
+            listAvailable->addItem(item);
+        }
+    }
 }
 
 void CSelectDoubleListWidget::setLabelAvailable(const QString & label)
@@ -66,21 +77,14 @@ void CSelectDoubleListWidget::setLabelSelected(const QString & label)
     labelSelected->setText(label);
 }
 
-const QList<CSelectDoubleListWidget::sItem> CSelectDoubleListWidget::selected()
+const QList<QListWidgetItem *> CSelectDoubleListWidget::selected()
 {
-    return modSelected.items;
-}
-
-void CSelectDoubleListWidget::filterModAvailable()
-{
-    modAvailable.items.clear();
-    for (const sItem & item : available)
+    QList<QListWidgetItem *> selected;
+    for (int i=0; i < listSelected->count(); i++)
     {
-        if (!modSelected.items.contains(item))
-        {
-            modAvailable.items << item;
-        }
+        selected << listSelected->item(i);
     }
+    return selected;
 }
 
 void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index)
@@ -97,51 +101,30 @@ void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index)
 
 void CSelectDoubleListWidget::slotAdd()
 {
-    QList<sItem> items;
-    for (const QModelIndex & index : listAvailable->selectionModel()->selectedIndexes())
+    for (QListWidgetItem * const item : listAvailable->selectedItems())
     {
-        items << modAvailable.items.at(index.row());
-    }
-    for (const sItem & item : items)
-    {
-        int index = modAvailable.items.indexOf(item);
-        modAvailable.beginRemoveRows(QModelIndex(),index,index);
-        sItem removed = modAvailable.items.takeAt(index);
-        modAvailable.endRemoveRows();
-        modSelected.beginInsertRows(QModelIndex(),modSelected.items.size(),modSelected.items.size());
-        modSelected.items.append(removed);
-        modSelected.endInsertRows();
+        listAvailable->takeItem(listAvailable->row(item));
+        listSelected->addItem(item);
     }
     updateButtons();
 }
 
 void CSelectDoubleListWidget::slotRemove()
 {
-    QList<sItem> items;
-    for (const QModelIndex & index : listSelected->selectionModel()->selectedIndexes())
+    for (QListWidgetItem * const item : listSelected->selectedItems())
     {
-        items << modSelected.items.at(index.row());
-    }
-    for (const sItem & item : items)
-    {
-        int index = modSelected.items.indexOf(item);
-        modSelected.beginRemoveRows(QModelIndex(),index,index);
-        sItem removed = modSelected.items.takeAt(index);
-        modSelected.endRemoveRows();
-
-        index = -1;
-        for (int i = available.indexOf(removed)-1; i >= 0 ; i--)
+        int index = -1;
+        for (int i = available.indexOf(item)-1; i>=0; i--)
         {
-            index = modAvailable.items.indexOf(available.at(i));
+            index = listAvailable->row(available.at(i));
             if (index >= 0)
             {
                 break;
             }
         }
         index++;
-        modAvailable.beginInsertRows(QModelIndex(),index,index);
-        modAvailable.items.insert(index,removed);
-        modAvailable.endInsertRows();
+        listSelected->takeItem(listSelected->row(item));
+        listAvailable->insertItem(index,item);
     }
     updateButtons();
 }
@@ -149,29 +132,19 @@ void CSelectDoubleListWidget::slotRemove()
 void CSelectDoubleListWidget::slotUp()
 {
     QList<int> indices;
-    QList<sItem> items;
-    for (const QModelIndex & index : listSelected->selectionModel()->selectedIndexes())
+    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
     {
-        indices << index.row();
+        indices << modelIndex.row();
     }
     std::sort(indices.begin(),indices.end());
-    for (const int & index : indices)
-    {
-        items << modSelected.items.at(index);
-    }
+
     int i=0;
-    for (const sItem & item : items)
+    for (int index : indices)
     {
-        int index = modSelected.items.indexOf(item);
         if (index > i)
         {
-            modSelected.beginRemoveRows(QModelIndex(),index,index);
-            sItem removed = modSelected.items.takeAt(index);
-            modSelected.endRemoveRows();
-            modSelected.beginInsertRows(QModelIndex(),index-1,index-1);
-            modSelected.items.insert(index-1,removed);
-            modSelected.endInsertRows();
-            listSelected->selectionModel()->select(modSelected.modelIndex(index-1),QItemSelectionModel::Select);
+            listSelected->insertItem(index-1,listSelected->takeItem(index));
+            listSelected->setCurrentRow(index-1,QItemSelectionModel::Select);
         }
         i++;
     }
@@ -185,29 +158,19 @@ void CSelectDoubleListWidget::slotDown()
     } descending;
 
     QList<int> indices;
-    QList<sItem> items;
-    for (const QModelIndex & index : listSelected->selectionModel()->selectedIndexes())
+    for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
     {
-        indices << index.row();
+        indices << modelIndex.row();
     }
     std::sort(indices.begin(),indices.end(),descending);
-    for (const int & index : indices)
+
+    int i=listSelected->count()-1;
+    for (int index : indices)
     {
-        items << modSelected.items.at(index);
-    }
-    int i=modSelected.items.size()-1;
-    for (const sItem & item : items)
-    {
-        int index = modSelected.items.indexOf(item);
         if (index < i)
         {
-            modSelected.beginRemoveRows(QModelIndex(),index,index);
-            sItem removed = modSelected.items.takeAt(index);
-            modSelected.endRemoveRows();
-            modSelected.beginInsertRows(QModelIndex(),index+1,index+1);
-            modSelected.items.insert(index+1,removed);
-            modSelected.endInsertRows();
-            listSelected->selectionModel()->select(modSelected.modelIndex(index+1),QItemSelectionModel::Select);
+            listSelected->insertItem(index+1,listSelected->takeItem(index));
+            listSelected->setCurrentRow(index+1,QItemSelectionModel::Select);
         }
         i--;
     }
@@ -223,12 +186,12 @@ void CSelectDoubleListWidget::updateButtons()
     {
         toolRemove->setEnabled(true);
 
-        int minSelected = modSelected.items.size();
+        int minSelected = listSelected->count();
         int maxSelected = -1;
-        int minUnselected = modSelected.items.size();
+        int minUnselected = minSelected;
         int maxUnselected = -1;
 
-        for (int i = 0; i < modSelected.items.size(); i++)
+        for (int i = 0; i < listSelected->count(); i++)
         {
             if (selectedSelectionModel->isRowSelected(i, QModelIndex()))
             {
@@ -257,37 +220,4 @@ void CSelectDoubleListWidget::updateButtons()
         toolUp->setEnabled(false);
         toolDown->setEnabled(false);
     }
-}
-
-int CSelectDoubleListWidget::CItemListModel::rowCount(const QModelIndex &parent) const
-{
-    return items.size();
-}
-
-QVariant CSelectDoubleListWidget::CItemListModel::data(const QModelIndex &index, int role) const
-{
-    switch(role)
-    {
-    case Qt::DisplayRole:
-    {
-        return items.at(index.row()).text;
-        break;
-    }
-    case Qt::DecorationRole:
-    {
-        return items.at(index.row()).icon;
-        break;
-    }
-    case Qt::UserRole:
-    {
-        return items.at(index.row()).data;
-    }
-    default:
-        return QVariant();
-    }
-}
-
-const QModelIndex CSelectDoubleListWidget::CItemListModel::modelIndex(int row) const
-{
-    return createIndex(row,0);
 }

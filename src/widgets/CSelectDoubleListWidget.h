@@ -21,35 +21,19 @@
 #define CSELECTDOUBLELISTWIDGET_H
 
 #include "ui_ISelectDoubleListWidget.h"
-class T;
-class QList<T>;
-class QListView;
-class QVariant;
-class QModelIndex;
-class QAbstractListModel;
 
 class CSelectDoubleListWidget : public QWidget, private Ui::ISelectDoubleListWidget
 {
     Q_OBJECT
 public:
-    struct sItem {
-        const QIcon icon;
-        const QString text;
-        const QVariant data;
-        sItem(const QIcon & icon, const QString & text, const QVariant data) : icon(icon), text(text), data(data) {}
-        sItem(const sItem & item) : icon(item.icon), text(item.text), data(item.data) {}
-        sItem operator=(const sItem & other) { return sItem(other); }
-        bool operator==(const sItem & other) { return data == other.data; }
-    };
-
     CSelectDoubleListWidget(QWidget *parent);
     virtual ~CSelectDoubleListWidget();
 
-    void setAvailable(const QList<sItem> & available);
-    void setSelected(const QList<sItem> & selected);
+    void setAvailable(const QList<QListWidgetItem *> &available);
+    void setSelected(const QList<QListWidgetItem *> &selected);
     void setLabelAvailable(const QString & label);
     void setLabelSelected(const QString & label);
-    const QList<sItem> selected();
+    const QList<QListWidgetItem *> selected();
 
 private slots:
     void slotSelectedClicked(const QModelIndex & index);
@@ -60,24 +44,9 @@ private slots:
     void slotDown();
 
 private:
-    class CItemListModel : public QAbstractListModel
-    {
-    public:
-        int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-        QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
-        const QModelIndex modelIndex(int row) const;
-
-    private:
-        QList<sItem> items;
-
-        friend class CSelectDoubleListWidget;
-    };
-
-    void filterModAvailable();
+    void filterListAvailable();
     void updateButtons();
 
-    QList<sItem> available;
-    CSelectDoubleListWidget::CItemListModel modAvailable;
-    CSelectDoubleListWidget::CItemListModel modSelected;
+    QList<QListWidgetItem *> available;
 };
 #endif //CSELECTDOUBLELISTWIDGET_H

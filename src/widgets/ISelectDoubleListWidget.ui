@@ -24,7 +24,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="listAvailable">
+      <widget class="QListWidget" name="listAvailable">
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
@@ -80,7 +80,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="listSelected">
+      <widget class="QListWidget" name="listSelected">
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>

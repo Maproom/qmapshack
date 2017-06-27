@@ -60,7 +60,6 @@ const QStringList CToolBarConfig::actionNames = {
     "actionCloseTab",
     "actionQuickstart",
     "actionSetupToolbar",
-    "actionToggleDocks"
 };
 
 CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(parent), toolBar(toolBar)

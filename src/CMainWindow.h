@@ -27,8 +27,8 @@ class CDemList;
 class QLabel;
 class CGisWidget;
 class CCanvas;
+class CToolBarConfig;
 struct SGisLine;
-
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -150,6 +150,8 @@ private:
     QFont mapFont;
 
     CGisWidget * gisWidget;
+
+    CToolBarConfig * toolBarConfig;
 };
 
 #endif //CMAINWINDOW_H

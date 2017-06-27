@@ -17,25 +17,27 @@
 
 **********************************************************************************************/
 
-#ifndef CTOOLBARSETUP_H
-#define CTOOLBARSETUP_H
+#ifndef CTOOLBARSETUPDIALOG_H
+#define CTOOLBARSETUPDIALOG_H
 
-#include "ui_IToolBarSetup.h"
+#include "ui_IToolBarSetupDialog.h"
 class T;
 class QList<T>;
 class QListView;
 class QVariant;
+class CToolBarConfig;
 
-class CToolBarSetup : public QDialog, private Ui::IToolBarSetup
+class CToolBarSetupDialog : public QDialog, private Ui::IToolBarSetupDialog
 {
     Q_OBJECT
 public:
-    CToolBarSetup(QWidget *parent);
-    virtual ~CToolBarSetup();
+    CToolBarSetupDialog(QWidget *parent, CToolBarConfig * config);
+    virtual ~CToolBarSetupDialog();
 
     void accept() override;
 
 private:
     void init();
+    CToolBarConfig * config;
 };
-#endif //CTOOLBARSETUP_H
+#endif //CTOOLBARSETUPDIALOG_H

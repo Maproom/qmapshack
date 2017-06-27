@@ -17,7 +17,7 @@
 
 **********************************************************************************************/
 
-#include "CToolBarConfig.h"
+#include "helpers/CToolBarConfig.h"
 #include "CSettings.h"
 #include "CMainWindow.h"
 #include <QDebug>
@@ -111,7 +111,6 @@ QList<QAction *> CToolBarConfig::configuredActions() const
 
 void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
 {
-    QToolBar * toolBar = CMainWindow::self().findChild<QToolBar *>();
     toolBar->clear();
     configuredActionNames.clear();
     for (const QString & name : names)

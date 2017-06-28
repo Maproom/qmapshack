@@ -25,29 +25,23 @@ CToolBarSetupDialog::CToolBarSetupDialog(QWidget * parent, CToolBarConfig *confi
 {
     setupUi(this);
 
-    QList<QListWidgetItem *> availableActions;
-    QList<QListWidgetItem *> configuredActions;
+    QList<QListWidgetItem *> availableItems;
+    QList<QListWidgetItem *> selectedItems;
 
-    for(const QAction * action : config->availableActions())
-    {
-        availableActions << new CToolBarSetupDialogItem(action->icon(),action->iconText(),action->objectName());
-    }
+    QList<QAction *> configuredActions = config->configuredActions();
 
-    for (const QAction * action : config->configuredActions())
+    for(QAction * action : config->availableActions())
     {
-        for (QListWidgetItem * item : availableActions)
+        CToolBarSetupDialogItem * item = new CToolBarSetupDialogItem(action->icon(),action->iconText(),action->objectName());
+        availableItems << item;
+        if (configuredActions.contains(action))
         {
-            CToolBarSetupDialogItem * const setupDialogItem = dynamic_cast<CToolBarSetupDialogItem *>(item);
-            if (setupDialogItem != nullptr && setupDialogItem->actionName == action->objectName())
-            {
-                configuredActions << setupDialogItem;
-                break;
-            }
+            selectedItems << item;
         }
     }
 
-    selectActionsWidget->setSelected(configuredActions);
-    selectActionsWidget->setAvailable(availableActions);
+    selectActionsWidget->setSelected(selectedItems);
+    selectActionsWidget->setAvailable(availableItems);
     selectActionsWidget->setLabelAvailable(tr("available Actions"));
     selectActionsWidget->setLabelSelected(tr("selected Actions"));
 }

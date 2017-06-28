@@ -66,13 +66,38 @@ const QStringList CToolBarConfig::actionNames = {
     "actionToggleRte"
 };
 
+const QStringList CToolBarConfig::defaultActionNames = {
+    "actionSearchGoogle",
+    "actionAddEmptyProject",
+    "actionLoadGISData",
+    "actionSaveGISData",
+    "actionShowScale",
+    "actionShowGrid",
+    "actionPOIText",
+    "actionNightDay",
+    "actionMapToolTip",
+    "actionProfileIsWindow",
+    "actionSetupToolbar",
+    "actionToggleMaps",
+    "actionToggleDem",
+    "actionToggleGis",
+    "actionToggleRte"
+};
+
 CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(parent), toolBar(toolBar)
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
     QStringList actions = cfg.value("actions").toStringList();
     cfg.endGroup();
-    setConfiguredActionsByName(actions);
+    if (actions.isEmpty())
+    {
+        setDefaultConfiguredActions();
+    }
+    else
+    {
+        setConfiguredActionsByName(actions);
+    }
 }
 
 CToolBarConfig::~CToolBarConfig()
@@ -125,6 +150,11 @@ void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
             toolBar->addAction(action);
         }
     }
+}
+
+void CToolBarConfig::setDefaultConfiguredActions()
+{
+    setConfiguredActionsByName(defaultActionNames);
 }
 
 QAction * CToolBarConfig::getActionByName(const QString & name) const

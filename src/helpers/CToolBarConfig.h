@@ -36,11 +36,13 @@ public:
     QList<QAction *> availableActions() const;
     QList<QAction *> configuredActions() const;
     void setConfiguredActionsByName(const QStringList &actions);
+    void setDefaultConfiguredActions();
 
 private:
     QAction * getActionByName(const QString &name) const;
 
     static const QStringList actionNames;
+    static const QStringList defaultActionNames;
     QStringList configuredActionNames;
     QToolBar * toolBar;
 };

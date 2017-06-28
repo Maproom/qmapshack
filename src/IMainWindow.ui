@@ -819,7 +819,7 @@
   <action name="actionSetupToolbar">
    <property name="icon">
     <iconset resource="resources.qrc">
-     <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+     <normaloff>:/icons/32x32/ToolBarSetup.png</normaloff>:/icons/32x32/ToolBarSetup.png</iconset>
    </property>
    <property name="text">
     <string>Setup Toolbar</string>

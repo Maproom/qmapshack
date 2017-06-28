@@ -209,6 +209,23 @@ CMainWindow::CMainWindow()
     menuWindow->addAction(dockGis->toggleViewAction());
     menuWindow->addAction(dockRte->toggleViewAction());
 
+    QIcon toggleMapsIcon;
+    toggleMapsIcon.addFile(QStringLiteral(":/icons/32x32/ToggleMaps.png"), QSize(), QIcon::Normal, QIcon::Off);
+    dockMaps->toggleViewAction()->setObjectName("actionToggleMaps");
+    dockMaps->toggleViewAction()->setIcon(toggleMapsIcon);
+    QIcon toggleDemIcon;
+    toggleDemIcon.addFile(QStringLiteral(":/icons/32x32/ToggleDem.png"), QSize(), QIcon::Normal, QIcon::Off);
+    dockDem->toggleViewAction()->setObjectName("actionToggleDem");
+    dockDem->toggleViewAction()->setIcon(toggleDemIcon);
+    QIcon toggleGisIcon;
+    toggleGisIcon.addFile(QStringLiteral(":/icons/32x32/ToggleGis.png"), QSize(), QIcon::Normal, QIcon::Off);
+    dockGis->toggleViewAction()->setObjectName("actionToggleGis");
+    dockGis->toggleViewAction()->setIcon(toggleGisIcon);
+    QIcon toggleRteIcon;
+    toggleRteIcon.addFile(QStringLiteral(":/icons/32x32/ToggleRouter.png"), QSize(), QIcon::Normal, QIcon::Off);
+    dockRte->toggleViewAction()->setObjectName("actionToggleRte");
+    dockRte->toggleViewAction()->setIcon(toggleRteIcon);
+
     toolBarConfig = new CToolBarConfig(this,toolBar);
 
     prepareMenuForMac();

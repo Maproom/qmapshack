@@ -223,7 +223,6 @@
         <file>icons/32x32/SortName.png</file>
         <file>icons/32x32/SaveGISAsGpx11.png</file>
         <file>icons/32x32/CopyTrkWithWpt.png</file>
-
         <file>icons/48x48/Add.png</file>
         <file>icons/48x48/AddMapWorkspace.png</file>
         <file>icons/48x48/CloneMapWorkspace.png</file>
@@ -418,8 +417,6 @@
         <file>icons/48x48/SortName.png</file>
         <file>icons/48x48/SaveGISAsGpx11.png</file>
         <file>icons/48x48/CopyTrkWithWpt.png</file>
-
-
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>
@@ -521,5 +518,10 @@
         <file>map/OpenStreetMap.tms</file>
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
+        <file>icons/32x32/ToolBarSetup.png</file>
+        <file>icons/32x32/ToggleDem.png</file>
+        <file>icons/32x32/ToggleGis.png</file>
+        <file>icons/32x32/ToggleMaps.png</file>
+        <file>icons/32x32/ToggleRouter.png</file>
     </qresource>
 </RCC>

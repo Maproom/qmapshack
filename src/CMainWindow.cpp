@@ -528,6 +528,49 @@ void CMainWindow::getElevationAt(const QPolygonF &pos, QPolygonF& ele) const
     }
 }
 
+qreal CMainWindow::getSlopeAt(const QPointF& pos) const
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        return canvas->getSlopeAt(pos);
+    }
+    else
+    {
+        for(int i = 0; i < tabWidget->count(); i++)
+        {
+            canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+            if(canvas)
+            {
+                return canvas->getSlopeAt(pos);
+            }
+        }
+    }
+    return NOFLOAT;
+}
+
+void CMainWindow::getSlopeAt(const QPolygonF &pos, QPolygonF& slope) const
+{
+    CCanvas * canvas = getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->getSlopeAt(pos, slope);
+    }
+    else
+    {
+        for(int i = 0; i < tabWidget->count(); i++)
+        {
+            canvas = dynamic_cast<CCanvas*>(tabWidget->widget(i));
+            if(canvas)
+            {
+                canvas->getSlopeAt(pos, slope);
+                return;
+            }
+        }
+        slope.clear();
+    }
+}
+
 void CMainWindow::slotAbout()
 {
     CAbout dlg(this);

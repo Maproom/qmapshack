@@ -85,6 +85,9 @@ public:
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
     void  getElevationAt(SGisLine &line) const;
 
+    qreal getSlopeAt(const QPointF &pos) const;
+    void getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const;
+
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);
     void displayInfo(const QPoint& px);

@@ -97,7 +97,6 @@
     <addaction name="actionSetupMapView"/>
     <addaction name="actionSetupTimeZone"/>
     <addaction name="actionSetupCoordFormat"/>
-    <addaction name="actionSetupToolbar"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
     <property name="title">
@@ -106,6 +105,7 @@
     <addaction name="actionCloseTab"/>
     <addaction name="actionToggleDocks"/>
     <addaction name="separator"/>
+    <addaction name="actionSetupToolbar"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -827,6 +827,9 @@
    </property>
   </action>
   <action name="actionToggleDocks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="icon">
     <iconset resource="resources.qrc">
      <normaloff>:/icons/32x32/ToggleDocks.png</normaloff>:/icons/32x32/ToggleDocks.png</iconset>

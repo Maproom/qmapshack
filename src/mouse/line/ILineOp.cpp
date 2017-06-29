@@ -320,6 +320,7 @@ qint32 ILineOp::isCloseToLine(const QPoint& pos) const
         }
         else
         {
+            line << pt1.pixel;
             for(const IGisLine::subpt_t& pt : pt1.subpts)
             {
                 line << pt.pixel;

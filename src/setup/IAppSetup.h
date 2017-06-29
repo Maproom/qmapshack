@@ -42,6 +42,8 @@ protected:
     void prepareGdal(QString gdalDir, QString projDir);
     void prepareTranslator(QString translationPath, QString translationPrefix);
 
+    static IAppSetup* instance;
+
     QString path(QString path, QString subdir, bool mkdir, QString debugName);
 };
 

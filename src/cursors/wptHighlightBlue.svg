@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="wptHighlightBlue.svg">
+   sodipodi:docname="wptHighlightBlue.svg"
+   inkscape:export-filename="/home/oeichler/Code/cpp/QMapShack/src/cursors/wptHighlightBlue.png"
+   inkscape:export-xdpi="137"
+   inkscape:export-ydpi="137">
   <defs
      id="defs4">
     <linearGradient
@@ -71,14 +74,14 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="8"
-     inkscape:cx="-29.774046"
+     inkscape:cx="24.288454"
      inkscape:cy="49.055774"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:window-width="1920"
-     inkscape:window-height="989"
-     inkscape:window-x="0"
+     inkscape:window-height="1051"
+     inkscape:window-x="1920"
      inkscape:window-y="0"
      inkscape:window-maximized="1">
     <inkscape:grid
@@ -115,28 +118,26 @@
        sodipodi:rx="15"
        sodipodi:ry="15"
        d="M 45,29 A 15,15 0 0 1 30.015812,43.999992 15,15 0 0 1 15.000033,29.031623 15,15 0 0 1 29.952565,14.000075 15,15 0 0 1 44.999867,28.936754"
-       transform="matrix(0.97281118,0,0,0.97281118,0.87316707,989.09323)"
        sodipodi:start="0"
        sodipodi:end="6.2789689"
        sodipodi:open="true"
        inkscape:export-filename="/home/oeichler/Code/cpp/QMapShack/src/cursors/wptHighlightBlue.png"
        inkscape:export-xdpi="137.22581"
-       inkscape:export-ydpi="137.22581" />
+       inkscape:export-ydpi="137.22581"
+       transform="matrix(0.97281118,0,0,0.97281118,0.87316707,989.09323)" />
     <path
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#0000ff;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4144"
        sodipodi:type="arc"
-       style="fill:none;stroke:#2a2aff;stroke-width:0.50444174;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
-       id="path3823"
-       sodipodi:cx="-5"
-       sodipodi:cy="31.5"
-       sodipodi:rx="5"
-       sodipodi:ry="2.5"
-       d="m 0,31.5 a 5,2.5 0 0 1 -4.9947295,2.499999 5,2.5 0 0 1 -5.0052594,-2.494728 5,2.5 0 0 1 4.9841774,-2.505258 5,2.5 0 0 1 5.015767054842,2.489446"
-       transform="matrix(2.0535053,0,0,4.1070106,40.325029,887.93392)"
+       sodipodi:cx="30.057718"
+       sodipodi:cy="1017.3047"
+       sodipodi:rx="10"
+       sodipodi:ry="10.5"
        sodipodi:start="0"
-       sodipodi:end="6.2789689"
+       sodipodi:end="6.2789616"
        sodipodi:open="true"
-       inkscape:export-filename="/home/oeichler/Code/cpp/QMapShack/src/cursors/wptHighlightBlue.png"
-       inkscape:export-xdpi="137.22581"
-       inkscape:export-ydpi="137.22581" />
+       d="m 40.057718,1017.3047 a 10,10.5 0 0 1 -9.98944,10.5 10,10.5 0 0 1 -10.010537,-10.4778 10,10.5 0 0 1 9.9683,-10.5221 10,10.5 0 0 1 10.031588,10.4556"
+       inkscape:export-xdpi="137"
+       inkscape:export-ydpi="137" />
   </g>
 </svg>

@@ -119,7 +119,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/Add.png</normaloff>:/icons/32x32/Add.png</iconset>
+            <normaloff>:/icons/32x32/PointAdd.png</normaloff>:/icons/32x32/PointAdd.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl++</string>
@@ -165,7 +165,7 @@
           </property>
           <property name="icon">
            <iconset resource="../../resources.qrc">
-            <normaloff>:/icons/32x32/DeleteOne.png</normaloff>:/icons/32x32/DeleteOne.png</iconset>
+            <normaloff>:/icons/32x32/PointDel.png</normaloff>:/icons/32x32/PointDel.png</iconset>
           </property>
           <property name="shortcut">
            <string>Ctrl+D</string>

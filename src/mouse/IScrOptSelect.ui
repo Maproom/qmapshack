@@ -219,7 +219,7 @@
       <item>
        <widget class="QToolButton" name="toolModeExact">
         <property name="toolTip">
-         <string>Select all itmes that are completely inside the selected area.</string>
+         <string>Select all items that are completely inside the selected area.</string>
         </property>
         <property name="text">
          <string>...</string>

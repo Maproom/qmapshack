@@ -216,7 +216,7 @@ void IDem::hillshading(QVector<qint16>& data, qreal w, qreal h, QImage& img)
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[9];
+            qint16 win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
 
             if(hasNoData && win[4] == noData)
@@ -298,7 +298,7 @@ void IDem::slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img)
         unsigned char* scan = img.scanLine(m - 1);
         for(unsigned int n = 1; n <= w; n++)
         {
-            qint16 win[9];
+            qint16 win[eWinsize3x3];
             fillWindow(data, n, m, wp2, win);
             qreal slope = slopeOfWindowInterp(win, eWinsize3x3, 0, 0);
 

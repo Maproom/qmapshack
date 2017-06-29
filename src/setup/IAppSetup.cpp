@@ -28,7 +28,7 @@
 #include <gdal.h>
 
 
-static IAppSetup* instance = nullptr;
+IAppSetup* IAppSetup::instance = nullptr;
 
 IAppSetup* IAppSetup::getPlatformInstance()
 {

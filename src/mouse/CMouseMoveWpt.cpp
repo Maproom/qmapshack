@@ -52,7 +52,7 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     qreal d = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y(), a1, a2);
     IUnit::self().meter2distance(d, val, unit);
-    const QString &str = QString("%1 %2, %3").arg(val).arg(unit).arg(a2, 0, 'f', 1);
+    const QString &str = QString("%1 %2, %3%4").arg(val).arg(unit).arg(a2, 0, 'f', 1).arg(QChar(0260));
 
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);

@@ -559,32 +559,32 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="168"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="169"/>
         <source>Reduce visible track points</source>
         <translation>Omezit počet viditelných bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
         <source>Change elevation of track points</source>
         <translation>Změnit informace o výškách bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
         <source>Change timestamp of track points</source>
         <translation>Změnit časová razítka bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="402"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
         <source>Color</source>
         <translation>Barva</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="404"/>
         <source>Activity</source>
         <translation>Činnost</translation>
     </message>
@@ -1289,51 +1289,56 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="221"/>
+        <source>Added terrain slope from DEM file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="243"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Výšková data nahrazena daty ze souborů s digitálním výškovým modelem (DEM).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="239"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="261"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="255"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="277"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Výšková data posunuta o %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="268"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="290"/>
         <source>Changed start of track to %1.</source>
         <translation>Začátek stopy změněn na %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="281"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="303"/>
         <source>Remove timestamps.</source>
         <translation>Odstranit časová razítka.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="298"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="320"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Uměle utvořená časová razítka nastavena s odstupem %1 s.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="324"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="346"/>
         <source>Changed speed to %1%2.</source>
         <translation>Rychlost změněna na %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="343"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="365"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (část %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="361"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Rozšíření %1 bylo odstraněno ze všech bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="372"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="394"/>
         <source>Converted subpoints from routing to track points</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1935,66 +1940,71 @@ line %2, column %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="62"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="63"/>
         <source>Air Temperature</source>
         <translation>Teplota vzduchu</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="66"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Water Temperature</source>
         <translation>Teplota vody</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="70"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
         <source>Depth</source>
         <translation>Hloubka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="74"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="86"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="87"/>
         <source>Heart Rate</source>
         <translation>Tep srdce</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="78"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="90"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
         <source>Cadence</source>
         <translation>Rychlost chůze</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="94"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="95"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="98"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
         <source>Acceleration</source>
         <translation>Zrychlení</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="102"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
         <source>Course</source>
         <translation>Směr</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="111"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
         <source>Slope*</source>
         <translation>Sklon*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="117"/>
         <source>Speed*</source>
         <translation>Rychlost*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="121"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
         <source>Elevation</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <source>Progress</source>
         <translation>Postup</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
+        <source>Terrain slope</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2008,53 +2018,53 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="591"/>
+        <location filename="../CMainWindow.cpp" line="634"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Použít &lt;b&gt;Nabídka → Pohled → Přidat pohled na mapu&lt;/b&gt; k otevření nového pohledu. Nebo &lt;b&gt;Nabídka → Soubor → Nahrát pohled na mapu&lt;/b&gt; k obnovení uložené. Nebo klepněte &lt;a href=&apos;newview&apos;&gt;sem&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="719"/>
+        <location filename="../CMainWindow.cpp" line="762"/>
         <source>Ele: %1%2</source>
         <translation>Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="731"/>
+        <location filename="../CMainWindow.cpp" line="774"/>
         <source>Slope: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="747"/>
+        <location filename="../CMainWindow.cpp" line="790"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="882"/>
+        <location filename="../CMainWindow.cpp" line="925"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="916"/>
+        <location filename="../CMainWindow.cpp" line="959"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="916"/>
-        <location filename="../CMainWindow.cpp" line="942"/>
+        <location filename="../CMainWindow.cpp" line="959"/>
+        <location filename="../CMainWindow.cpp" line="985"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="942"/>
+        <location filename="../CMainWindow.cpp" line="985"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1121"/>
+        <location filename="../CMainWindow.cpp" line="1164"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1122"/>
+        <location filename="../CMainWindow.cpp" line="1165"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6163,6 +6173,29 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+</context>
+<context>
+    <name>IFilterTerrainSlope</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
+        <source>&lt;b&gt;Calculate Terrain Slope&lt;b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>
+        <source>Calculate slope of the terrain based on loaded DEM files.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="70"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>

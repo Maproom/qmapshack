@@ -220,35 +220,37 @@ CMainWindow::CMainWindow()
     QIcon iconToggleToolBar;
     iconToggleToolBar.addFile(QStringLiteral(":/icons/32x32/ToolBar.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleToolBar->setIcon(iconToggleToolBar);
-    menuWindow->addAction(actionToggleToolBar);
+    menuWindow->insertAction(actionSetupToolbar,actionToggleToolBar);
 
     QAction * actionToggleMaps = dockMaps->toggleViewAction();
     actionToggleMaps->setObjectName("actionToggleMaps");
     QIcon iconToggleMaps;
     iconToggleMaps.addFile(QStringLiteral(":/icons/32x32/ToggleMaps.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleMaps->setIcon(iconToggleMaps);
-    menuWindow->addAction(actionToggleMaps);
+    menuWindow->insertAction(actionSetupToolbar,actionToggleMaps);
 
     QAction * actionToggleDem = dockDem->toggleViewAction();
     actionToggleDem->setObjectName("actionToggleDem");
     QIcon iconToggleDem;
     iconToggleDem.addFile(QStringLiteral(":/icons/32x32/ToggleDem.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleDem->setIcon(iconToggleDem);
-    menuWindow->addAction(actionToggleDem);
+    menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
 
     QAction * actionToggleGis = dockGis->toggleViewAction();
     actionToggleGis->setObjectName("actionToggleGis");
     QIcon iconToggleGis;
     iconToggleGis.addFile(QStringLiteral(":/icons/32x32/ToggleGis.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleGis->setIcon(iconToggleGis);
-    menuWindow->addAction(actionToggleGis);
+    menuWindow->insertAction(actionSetupToolbar,actionToggleGis);
 
     QAction * actionToggleRte = dockRte->toggleViewAction();
     actionToggleRte->setObjectName("actionToggleRte");
     QIcon iconToggleRte;
     iconToggleRte.addFile(QStringLiteral(":/icons/32x32/ToggleRouter.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleRte->setIcon(iconToggleRte);
-    menuWindow->addAction(actionToggleRte);
+    menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
+
+    menuWindow->insertSeparator(actionSetupToolbar);
 
     toolBarConfig = new CToolBarConfig(this,toolBar);
 
@@ -1177,10 +1179,25 @@ void CMainWindow::slotToggleDocks()
 
 void CMainWindow::slotDockVisibilityChanged(bool visible)
 {
+    bool dockVisible = visible;
+
     if (visible)
     {
         activeDocks.clear();
     }
+    else
+    {
+        for (const QString & name : dockNames)
+        {
+            QDockWidget * dock = self().findChild<QDockWidget *>(name);
+            if (dock != nullptr && !dock->isHidden())
+            {
+                dockVisible = true;
+                break;
+            }
+        }
+    }
+    actionToggleDocks->setChecked(dockVisible);
 }
 
 #ifdef WIN32

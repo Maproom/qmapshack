@@ -153,16 +153,12 @@ void CSelectDoubleListWidget::slotUp()
 
 void CSelectDoubleListWidget::slotDown()
 {
-    struct {
-      bool operator() (int i,int j) { return (i>j);}
-    } descending;
-
     QList<int> indices;
     for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
     {
         indices << modelIndex.row();
     }
-    std::sort(indices.begin(),indices.end(),descending);
+    std::sort(indices.begin(), indices.end(), [] (int a, int b) { return a > b; });
 
     int i=listSelected->count()-1;
     for (int index : indices)

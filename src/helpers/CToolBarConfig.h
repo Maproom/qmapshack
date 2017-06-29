@@ -22,7 +22,7 @@
 
 #include <QObject>
 class T;
-class QList<T>;
+template <> class QList<T>;
 class QAction;
 class QToolBar;
 

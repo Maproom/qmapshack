@@ -159,8 +159,8 @@ private:
 
     CToolBarConfig * toolBarConfig;
 
-    static const QStringList dockNames;
-    QStringList activeDocks;
+    QList<QDockWidget *> docks;
+    QList<QDockWidget *> activeDocks;
 };
 
 #endif //CMAINWINDOW_H

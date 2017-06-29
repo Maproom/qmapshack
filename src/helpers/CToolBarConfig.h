@@ -30,20 +30,19 @@ class CToolBarConfig : public QObject
 {
     Q_OBJECT
 public:
-    CToolBarConfig(QWidget *parent, QToolBar *toolBar);
+    CToolBarConfig(QObject * const & parent, QToolBar * const & toolBar, const QList<QAction *> & availableActions, const QList<QAction *> & defaultActions);
     virtual ~CToolBarConfig();
 
-    QList<QAction *> availableActions() const;
-    QList<QAction *> configuredActions() const;
-    void setConfiguredActionsByName(const QStringList &actions);
+    const QList<QAction *> & availableActions() const;
+    const QList<QAction *> & configuredActions() const;
+    void setConfiguredActionsByName(const QStringList & actions);
+    void setConfiguredActions(const QList<QAction *> & actions);
     void setDefaultConfiguredActions();
 
 private:
-    QAction * getActionByName(const QString &name) const;
-
-    static const QStringList actionNames;
-    static const QStringList defaultActionNames;
-    QStringList configuredActionNames;
-    QToolBar * toolBar;
+    QToolBar * const toolBar;
+    const QList<QAction *> available;
+    const QList<QAction *> defaultActions;
+    QList<QAction *> configured;
 };
 #endif //CTOOLBARCONFIG_H

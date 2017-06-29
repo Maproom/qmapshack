@@ -19,7 +19,7 @@
      <item>
       <widget class="QLabel" name="labelAvailable">
        <property name="text">
-        <string>available</string>
+        <string>Available</string>
        </property>
       </widget>
      </item>
@@ -43,7 +43,7 @@
      <item>
       <widget class="QToolButton" name="toolAdd">
        <property name="toolTip">
-        <string>add</string>
+        <string>Add to selected items</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -57,7 +57,7 @@
      <item>
       <widget class="QToolButton" name="toolRemove">
        <property name="toolTip">
-        <string>remove</string>
+        <string>Remove from selected items</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -75,7 +75,7 @@
      <item>
       <widget class="QLabel" name="labelSelected">
        <property name="text">
-        <string>selected</string>
+        <string>Selected</string>
        </property>
       </widget>
      </item>
@@ -99,7 +99,7 @@
      <item>
       <widget class="QToolButton" name="toolUp">
        <property name="toolTip">
-        <string>move up</string>
+        <string>Move selected items up</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -113,7 +113,7 @@
      <item>
       <widget class="QToolButton" name="toolDown">
        <property name="toolTip">
-        <string>move down</string>
+        <string>Move selected items down</string>
        </property>
        <property name="text">
         <string>...</string>

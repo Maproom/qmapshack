@@ -24,7 +24,7 @@ const QString CKnownExtension::internalSlope    = "::ql:slope";
 const QString CKnownExtension::internalSpeed    = "::ql:speed";
 const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
-const QString CKnownExtension::internalTerrainSlope = "ql:TerrainSlope";
+const QString CKnownExtension::internalTerrainSlope = "::ql:terrainslope";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 QSet<QString> CKnownExtension::registeredNS;

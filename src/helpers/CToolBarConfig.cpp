@@ -64,7 +64,8 @@ const QStringList CToolBarConfig::actionNames = {
     "actionToggleDem",
     "actionToggleGis",
     "actionToggleRte",
-    "actionToggleDocks"
+    "actionToggleDocks",
+    "actionToggleToolBar"
 };
 
 const QStringList CToolBarConfig::defaultActionNames = {

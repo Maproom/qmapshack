@@ -214,6 +214,15 @@ CMainWindow::CMainWindow()
     connect(dockGis, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
     connect(dockRte, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
 
+    toolBarConfig = new CToolBarConfig(this,toolBar);
+
+    QAction * actionToggleToolBar = toolBar->toggleViewAction();
+    actionToggleToolBar->setObjectName("actionToggleToolBar");
+    QIcon iconToggleToolBar;
+    iconToggleToolBar.addFile(QStringLiteral(":/icons/32x32/ToolBar.png"), QSize(), QIcon::Normal, QIcon::Off);
+    actionToggleToolBar->setIcon(iconToggleToolBar);
+    menuWindow->addAction(actionToggleToolBar);
+
     QAction * actionToggleMaps = dockMaps->toggleViewAction();
     actionToggleMaps->setObjectName("actionToggleMaps");
     QIcon iconToggleMaps;
@@ -241,9 +250,6 @@ CMainWindow::CMainWindow()
     iconToggleRte.addFile(QStringLiteral(":/icons/32x32/ToggleRouter.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleRte->setIcon(iconToggleRte);
     menuWindow->addAction(actionToggleRte);
-
-    menuWindow->addAction(toolBar->toggleViewAction());
-    toolBarConfig = new CToolBarConfig(this,toolBar);
 
     prepareMenuForMac();
 

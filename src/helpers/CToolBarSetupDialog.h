@@ -28,7 +28,7 @@ class CToolBarSetupDialog : public QDialog, private Ui::IToolBarSetupDialog
 {
     Q_OBJECT
 public:
-    CToolBarSetupDialog(QWidget *parent, CToolBarConfig * config);
+    CToolBarSetupDialog(QWidget * const &parent, CToolBarConfig * const &config);
     virtual ~CToolBarSetupDialog();
 
     void accept() override;

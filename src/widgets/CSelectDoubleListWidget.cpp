@@ -44,10 +44,10 @@ void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & avai
     updateButtons();
 }
 
-void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected)
+void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected) const
 {
     listSelected->clear();
-    for (QListWidgetItem * const item : selected)
+    for (QListWidgetItem * const & item : selected)
     {
         listSelected->addItem(item);
     }
@@ -55,10 +55,10 @@ void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selec
     updateButtons();
 }
 
-void CSelectDoubleListWidget::filterListAvailable()
+void CSelectDoubleListWidget::filterListAvailable() const
 {
     listAvailable->clear();
-    for (QListWidgetItem * const item : available)
+    for (QListWidgetItem * const & item : available)
     {
         if (listSelected->row(item) < 0)
         {
@@ -67,17 +67,17 @@ void CSelectDoubleListWidget::filterListAvailable()
     }
 }
 
-void CSelectDoubleListWidget::setLabelAvailable(const QString & label)
+void CSelectDoubleListWidget::setLabelAvailable(const QString & label) const
 {
     labelAvailable->setText(label);
 }
 
-void CSelectDoubleListWidget::setLabelSelected(const QString & label)
+void CSelectDoubleListWidget::setLabelSelected(const QString & label) const
 {
     labelSelected->setText(label);
 }
 
-const QList<QListWidgetItem *> CSelectDoubleListWidget::selected()
+const QList<QListWidgetItem *> CSelectDoubleListWidget::selected() const
 {
     QList<QListWidgetItem *> selected;
     for (int i=0; i < listSelected->count(); i++)
@@ -87,21 +87,21 @@ const QList<QListWidgetItem *> CSelectDoubleListWidget::selected()
     return selected;
 }
 
-void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index)
+void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index) const
 {
     listAvailable->clearSelection();
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index)
+void CSelectDoubleListWidget::slotAvailableClicked(const QModelIndex & index) const
 {
     listSelected->clearSelection();
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotAdd()
+void CSelectDoubleListWidget::slotAdd() const
 {
-    for (QListWidgetItem * const item : listAvailable->selectedItems())
+    for (QListWidgetItem * const & item : listAvailable->selectedItems())
     {
         listAvailable->takeItem(listAvailable->row(item));
         listSelected->addItem(item);
@@ -109,9 +109,9 @@ void CSelectDoubleListWidget::slotAdd()
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotRemove()
+void CSelectDoubleListWidget::slotRemove() const
 {
-    for (QListWidgetItem * const item : listSelected->selectedItems())
+    for (QListWidgetItem * const & item : listSelected->selectedItems())
     {
         int index = -1;
         for (int i = available.indexOf(item)-1; i>=0; i--)
@@ -129,7 +129,7 @@ void CSelectDoubleListWidget::slotRemove()
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotUp()
+void CSelectDoubleListWidget::slotUp() const
 {
     QList<int> indices;
     for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
@@ -151,7 +151,7 @@ void CSelectDoubleListWidget::slotUp()
     updateButtons();
 }
 
-void CSelectDoubleListWidget::slotDown()
+void CSelectDoubleListWidget::slotDown() const
 {
     QList<int> indices;
     for (const QModelIndex & modelIndex : listSelected->selectionModel()->selectedIndexes())
@@ -173,11 +173,11 @@ void CSelectDoubleListWidget::slotDown()
     updateButtons();
 }
 
-void CSelectDoubleListWidget::updateButtons()
+void CSelectDoubleListWidget::updateButtons() const
 {
     toolAdd->setEnabled(listAvailable->selectionModel()->hasSelection());
 
-    const QItemSelectionModel * selectedSelectionModel = listSelected->selectionModel();
+    const QItemSelectionModel * const & selectedSelectionModel = listSelected->selectionModel();
     if (selectedSelectionModel->hasSelection())
     {
         toolRemove->setEnabled(true);

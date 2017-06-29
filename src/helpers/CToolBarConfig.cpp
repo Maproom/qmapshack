@@ -22,72 +22,11 @@
 #include "CMainWindow.h"
 #include <QDebug>
 
-const QStringList CToolBarConfig::actionNames = {
-    "actionAddMapView",
-    "actionShowScale",
-    "actionSetupMapFont",
-    "actionShowGrid",
-    "actionSetupGrid",
-    "actionFlipMouseWheel",
-    "actionSetupMapPaths",
-    "actionPOIText",
-    "actionNightDay",
-    "actionMapToolTip",
-    "actionSetupDEMPaths",
-    "actionAbout",
-    "actionHelp",
-    "actionSetupMapView",
-    "actionLoadGISData",
-    "actionSaveGISData",
-    "actionSetupTimeZone",
-    "actionAddEmptyProject",
-    "actionSearchGoogle",
-    "actionCloseAllProjects",
-    "actionSetupUnits",
-    "actionSetupWorkspace",
-    "actionImportDatabase",
-    "actionVrtBuilder",
-    "actionStoreView",
-    "actionLoadView",
-    "actionProfileIsWindow",
-    "actionClose",
-    "actionCloneMapView",
-    "actionCreateRoutinoDatabase",
-    "actionPrintMap",
-    "actionSetupCoordFormat",
-    "actionSetupMapBackground",
-    "actionSetupWaypointIcons",
-    "actionCloseTab",
-    "actionQuickstart",
-    "actionSetupToolbar",
-    "actionToggleMaps",
-    "actionToggleDem",
-    "actionToggleGis",
-    "actionToggleRte",
-    "actionToggleDocks",
-    "actionToggleToolBar"
-};
-
-const QStringList CToolBarConfig::defaultActionNames = {
-    "actionSearchGoogle",
-    "actionAddEmptyProject",
-    "actionLoadGISData",
-    "actionSaveGISData",
-    "actionShowScale",
-    "actionShowGrid",
-    "actionPOIText",
-    "actionNightDay",
-    "actionMapToolTip",
-    "actionProfileIsWindow",
-    "actionSetupToolbar",
-    "actionToggleMaps",
-    "actionToggleDem",
-    "actionToggleGis",
-    "actionToggleRte",
-    "actionToggleDocks"
-};
-
-CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(parent), toolBar(toolBar)
+CToolBarConfig::CToolBarConfig(QObject * const & parent, QToolBar * const & toolBar, const QList<QAction *> & availableActions, const QList<QAction *> & defaultActions)
+    : QObject(parent),
+      toolBar(toolBar),
+      available(availableActions),
+      defaultActions(defaultActions)
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
@@ -107,65 +46,51 @@ CToolBarConfig::~CToolBarConfig()
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");
-    cfg.setValue("actions",configuredActionNames);
+    QStringList configuredNames;
+    for (QAction * const & action : configuredActions())
+    {
+        configuredNames << action->objectName();
+    }
+    cfg.setValue("actions",configuredNames);
     cfg.endGroup();
 }
 
-QList<QAction *> CToolBarConfig::availableActions() const
+const QList<QAction *> & CToolBarConfig::availableActions() const
 {
-    QList<QAction *> returnActions;
-
-    for (const QString & name : actionNames)
-    {
-        QAction * action = getActionByName(name);
-        if (action != nullptr)
-        {
-            returnActions << action;
-        }
-    }
-    return returnActions;
+    return available;
 }
 
-QList<QAction *> CToolBarConfig::configuredActions() const
+const QList<QAction *> & CToolBarConfig::configuredActions() const
 {
-    QList<QAction *> returnActions;
-    for (const QString & name : configuredActionNames)
-    {
-        QAction * action = getActionByName(name);
-        if (action != nullptr)
-        {
-            returnActions << action;
-        }
-    }
-    return returnActions;
+    return configured;
 }
 
 void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
 {
-    toolBar->clear();
-    configuredActionNames.clear();
+    QList<QAction *> actions;
     for (const QString & name : names)
     {
-        QAction * action = getActionByName(name);
-        if (action != nullptr)
+        for (QAction * const & action : available)
         {
-            configuredActionNames << name;
-            toolBar->addAction(action);
+            if (action->objectName() == name)
+            {
+                actions << action;
+                break;
+            }
         }
     }
+    setConfiguredActions(actions);
 }
 
 void CToolBarConfig::setDefaultConfiguredActions()
 {
-    setConfiguredActionsByName(defaultActionNames);
+    setConfiguredActions(defaultActions);
 }
 
-QAction * CToolBarConfig::getActionByName(const QString & name) const
+void CToolBarConfig::setConfiguredActions(const QList<QAction *> & actions)
 {
-    QAction * action = CMainWindow::self().findChild<QAction *>(name);
-    if (action == nullptr)
-    {
-        qWarning() << "error toolbar:" << name << "is not a valid action";
-    }
-    return action;
+    configured.clear();
+    configured << actions;
+    toolBar->clear();
+    toolBar->addActions(actions);
 }

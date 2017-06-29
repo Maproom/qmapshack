@@ -30,22 +30,22 @@ public:
     virtual ~CSelectDoubleListWidget();
 
     void setAvailable(const QList<QListWidgetItem *> &available);
-    void setSelected(const QList<QListWidgetItem *> &selected);
-    void setLabelAvailable(const QString & label);
-    void setLabelSelected(const QString & label);
-    const QList<QListWidgetItem *> selected();
+    void setSelected(const QList<QListWidgetItem *> &selected) const;
+    void setLabelAvailable(const QString & label) const;
+    void setLabelSelected(const QString & label) const;
+    const QList<QListWidgetItem *> selected() const;
 
 private slots:
-    void slotSelectedClicked(const QModelIndex & index);
-    void slotAvailableClicked(const QModelIndex & index);
-    void slotAdd();
-    void slotRemove();
-    void slotUp();
-    void slotDown();
+    void slotSelectedClicked(const QModelIndex & index) const;
+    void slotAvailableClicked(const QModelIndex & index) const;
+    void slotAdd() const;
+    void slotRemove() const;
+    void slotUp() const;
+    void slotDown() const;
 
 private:
-    void filterListAvailable();
-    void updateButtons();
+    void filterListAvailable() const;
+    void updateButtons() const;
 
     QList<QListWidgetItem *> available;
 };

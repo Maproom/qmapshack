@@ -215,8 +215,6 @@ CMainWindow::CMainWindow()
     connect(dockGis, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
     connect(dockRte, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
 
-    toolBarConfig = new CToolBarConfig(this,toolBar);
-
     QAction * actionToggleToolBar = toolBar->toggleViewAction();
     actionToggleToolBar->setObjectName("actionToggleToolBar");
     QIcon iconToggleToolBar;
@@ -251,6 +249,8 @@ CMainWindow::CMainWindow()
     iconToggleRte.addFile(QStringLiteral(":/icons/32x32/ToggleRouter.png"), QSize(), QIcon::Normal, QIcon::Off);
     actionToggleRte->setIcon(iconToggleRte);
     menuWindow->addAction(actionToggleRte);
+
+    toolBarConfig = new CToolBarConfig(this,toolBar);
 
     prepareMenuForMac();
 

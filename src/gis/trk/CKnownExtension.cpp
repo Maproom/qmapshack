@@ -24,6 +24,7 @@ const QString CKnownExtension::internalSlope    = "::ql:slope";
 const QString CKnownExtension::internalSpeed    = "::ql:speed";
 const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
+const QString CKnownExtension::internalTerrainSlope = "::ql:terrainslope";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 QSet<QString> CKnownExtension::registeredNS;
@@ -125,6 +126,11 @@ void CKnownExtension::init(const IUnit &units)
         {internalProgress,
          { tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.distance; }}
+        },
+
+        {internalTerrainSlope,
+            { tr("Terrain slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
+                 getExtensionValueFunc(internalTerrainSlope)}
         }
     };
 

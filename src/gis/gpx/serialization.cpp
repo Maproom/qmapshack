@@ -299,7 +299,7 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
 static void readXml(const QDomNode& node, const QString& parentTags, QHash<QString, QVariant>& extensions)
 {
     QString tag = node.nodeName();
-    if(tag.left(3) == "ql:")
+    if(tag.left(8) == "ql:flags")
     {
         return;
     }

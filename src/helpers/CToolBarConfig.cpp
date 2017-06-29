@@ -63,7 +63,8 @@ const QStringList CToolBarConfig::actionNames = {
     "actionToggleMaps",
     "actionToggleDem",
     "actionToggleGis",
-    "actionToggleRte"
+    "actionToggleRte",
+    "actionToggleDocks"
 };
 
 const QStringList CToolBarConfig::defaultActionNames = {
@@ -81,7 +82,8 @@ const QStringList CToolBarConfig::defaultActionNames = {
     "actionToggleMaps",
     "actionToggleDem",
     "actionToggleGis",
-    "actionToggleRte"
+    "actionToggleRte",
+    "actionToggleDocks"
 };
 
 CToolBarConfig::CToolBarConfig(QWidget * parent, QToolBar * toolBar) : QObject(parent), toolBar(toolBar)

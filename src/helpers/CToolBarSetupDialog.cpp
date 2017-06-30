@@ -25,6 +25,45 @@ CToolBarSetupDialog::CToolBarSetupDialog(QWidget * const & parent, CToolBarConfi
 {
     setupUi(this);
 
+    connect(buttonBox, &QDialogButtonBox::clicked, this, &CToolBarSetupDialog::slotButtonClicked);
+
+    configure();
+
+    selectActionsWidget->setLabelAvailable(tr("available Actions"));
+    selectActionsWidget->setLabelSelected(tr("selected Actions"));
+}
+
+CToolBarSetupDialog::~CToolBarSetupDialog()
+{
+    selectActionsWidget->clear();
+}
+
+void CToolBarSetupDialog::accept()
+{
+    QStringList actionNames;
+    for (const QListWidgetItem * const selectedItem : selectActionsWidget->selected())
+    {
+        const CToolBarSetupDialogItem * const setupDialogItem = dynamic_cast<const CToolBarSetupDialogItem * const>(selectedItem);
+        if (setupDialogItem != nullptr)
+        {
+            actionNames << setupDialogItem->actionName;
+        }
+    }
+    config->setConfiguredActionsByName(actionNames);
+    QDialog::accept();
+}
+
+void CToolBarSetupDialog::slotButtonClicked(QAbstractButton *button) const
+{
+    if(buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole)
+    {
+        config->setDefaultConfiguredActions();
+        configure();
+    }
+}
+
+void CToolBarSetupDialog::configure() const
+{
     QList<QListWidgetItem *> availableItems;
     QList<QListWidgetItem *> selectedItems;
 
@@ -44,29 +83,8 @@ CToolBarSetupDialog::CToolBarSetupDialog(QWidget * const & parent, CToolBarConfi
             }
         }
     }
+    selectActionsWidget->clear();
     selectActionsWidget->setSelected(selectedItems);
     selectActionsWidget->setAvailable(availableItems);
-    selectActionsWidget->setLabelAvailable(tr("available Actions"));
-    selectActionsWidget->setLabelSelected(tr("selected Actions"));
-}
-
-CToolBarSetupDialog::~CToolBarSetupDialog()
-{
-
-}
-
-void CToolBarSetupDialog::accept()
-{
-    QStringList actionNames;
-    for (const QListWidgetItem * const selectedItem : selectActionsWidget->selected())
-    {
-        const CToolBarSetupDialogItem * const setupDialogItem = dynamic_cast<const CToolBarSetupDialogItem * const>(selectedItem);
-        if (setupDialogItem != nullptr)
-        {
-            actionNames << setupDialogItem->actionName;
-        }
-    }
-    config->setConfiguredActionsByName(actionNames);
-    QDialog::accept();
 }
 

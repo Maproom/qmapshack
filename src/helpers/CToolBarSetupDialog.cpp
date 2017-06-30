@@ -19,7 +19,6 @@
 
 #include "helpers/CToolBarSetupDialog.h"
 #include "helpers/CToolBarConfig.h"
-#include "CMainWindow.h"
 
 CToolBarSetupDialog::CToolBarSetupDialog(QWidget * const & parent, CToolBarConfig * const & config) : QDialog(parent), config(config)
 {
@@ -29,8 +28,8 @@ CToolBarSetupDialog::CToolBarSetupDialog(QWidget * const & parent, CToolBarConfi
 
     configure();
 
-    selectActionsWidget->setLabelAvailable(tr("available Actions"));
-    selectActionsWidget->setLabelSelected(tr("selected Actions"));
+    selectActionsWidget->setLabelAvailable(tr("Available Actions"));
+    selectActionsWidget->setLabelSelected(tr("Selected Actions"));
 }
 
 CToolBarSetupDialog::~CToolBarSetupDialog()

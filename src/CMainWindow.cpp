@@ -328,6 +328,7 @@ CMainWindow::CMainWindow()
     defaultActions << actionToggleDocks;
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
+    toolBarConfig->loadSettings();
 
     prepareMenuForMac();
 
@@ -431,8 +432,7 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
 
-    // need to destroy explicitly as it requires access to QAction instances that are owned by CMainWindow in destructor
-    delete toolBarConfig;
+    toolBarConfig->saveSettings();
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()

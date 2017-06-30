@@ -19,8 +19,8 @@
 
 #include "helpers/CToolBarConfig.h"
 #include "CSettings.h"
-#include "CMainWindow.h"
-#include <QDebug>
+#include <QToolBar>
+#include <QAction>
 
 CToolBarConfig::CToolBarConfig(QObject * const & parent, QToolBar * const & toolBar, const QList<QAction *> & availableActions, const QList<QAction *> & defaultActions)
     : QObject(parent),

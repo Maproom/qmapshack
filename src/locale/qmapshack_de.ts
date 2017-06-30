@@ -4592,14 +4592,14 @@ Zeile %2, Spalte %3:
 <context>
     <name>CToolBarSetupDialog</name>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="32"/>
-        <source>available Actions</source>
-        <translation>verfügbare Werkzeuge</translation>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="31"/>
+        <source>Available Actions</source>
+        <translation>Verfügbare Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="33"/>
-        <source>selected Actions</source>
-        <translation>ausgewählte Werkzeuge</translation>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="32"/>
+        <source>Selected Actions</source>
+        <translation>Ausgewählte Werkzeuge</translation>
     </message>
 </context>
 <context>

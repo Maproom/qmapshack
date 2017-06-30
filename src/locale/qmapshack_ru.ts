@@ -1290,7 +1290,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="221"/>
         <source>Added terrain slope from DEM file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавлен склон местности с файла ЦМР.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="243"/>
@@ -2004,7 +2004,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
         <source>Terrain slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Склон местности</translation>
     </message>
 </context>
 <context>
@@ -6186,22 +6186,22 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
         <source>&lt;b&gt;Calculate Terrain Slope&lt;b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вычислить склон местности&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>
         <source>Calculate slope of the terrain based on loaded DEM files.</source>
-        <translation type="unfinished"></translation>
+        <translation>Вычислить склон местности с помощью данных ЦМР.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="70"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>

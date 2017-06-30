@@ -338,6 +338,7 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::prepareMenuForMac()
 {
+    toolBar->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
@@ -430,6 +431,7 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
 
+    // need to destroy explicitly as it requires access to QAction instances that are owned by CMainWindow in destructor
     delete toolBarConfig;
 }
 

@@ -46,7 +46,11 @@ void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & avai
 
 void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected) const
 {
-    listSelected->clear();
+    //do not use clear as it destroys the items
+    while (listSelected->count() > 0)
+    {
+        listSelected->takeItem(0);
+    }
     for (QListWidgetItem * const & item : selected)
     {
         listSelected->addItem(item);
@@ -57,7 +61,11 @@ void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selec
 
 void CSelectDoubleListWidget::filterListAvailable() const
 {
-    listAvailable->clear();
+    //do not use clear as it destroys the items
+    while (listAvailable->count() > 0)
+    {
+        listAvailable->takeItem(0);
+    }
     for (QListWidgetItem * const & item : available)
     {
         if (listSelected->row(item) < 0)
@@ -85,6 +93,13 @@ const QList<QListWidgetItem *> CSelectDoubleListWidget::selected() const
         selected << listSelected->item(i);
     }
     return selected;
+}
+
+void CSelectDoubleListWidget::clear()
+{
+    this->available.clear();
+    listAvailable->clear();
+    listSelected->clear();
 }
 
 void CSelectDoubleListWidget::slotSelectedClicked(const QModelIndex & index) const

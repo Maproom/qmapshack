@@ -31,7 +31,9 @@ public:
     CToolBarSetupDialog(QWidget * const &parent, CToolBarConfig * const &config);
     virtual ~CToolBarSetupDialog();
 
+public slots:
     void accept() override;
+    void slotButtonClicked(QAbstractButton * button) const;
 
 private:
     class CToolBarSetupDialogItem : public QListWidgetItem
@@ -46,6 +48,7 @@ private:
         friend class CToolBarSetupDialog;
     };
 
+    void configure() const;
     CToolBarConfig * config;
 };
 #endif //CTOOLBARSETUPDIALOG_H

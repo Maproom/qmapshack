@@ -34,6 +34,7 @@ public:
     void setLabelAvailable(const QString & label) const;
     void setLabelSelected(const QString & label) const;
     const QList<QListWidgetItem *> selected() const;
+    void clear();
 
 private slots:
     void slotSelectedClicked(const QModelIndex & index) const;

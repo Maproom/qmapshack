@@ -2018,53 +2018,53 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="682"/>
+        <location filename="../CMainWindow.cpp" line="766"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="810"/>
+        <location filename="../CMainWindow.cpp" line="894"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="822"/>
+        <location filename="../CMainWindow.cpp" line="906"/>
         <source>Slope: %1%2</source>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="838"/>
+        <location filename="../CMainWindow.cpp" line="922"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="979"/>
+        <location filename="../CMainWindow.cpp" line="1063"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1013"/>
+        <location filename="../CMainWindow.cpp" line="1097"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1013"/>
-        <location filename="../CMainWindow.cpp" line="1039"/>
+        <location filename="../CMainWindow.cpp" line="1097"/>
+        <location filename="../CMainWindow.cpp" line="1123"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1039"/>
+        <location filename="../CMainWindow.cpp" line="1123"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1366"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1303"/>
+        <location filename="../CMainWindow.cpp" line="1367"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -4592,12 +4592,12 @@ Zeile %2, Spalte %3:
 <context>
     <name>CToolBarSetupDialog</name>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="45"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="32"/>
         <source>available Actions</source>
         <translation>verfügbare Werkzeuge</translation>
     </message>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="46"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="33"/>
         <source>selected Actions</source>
         <translation>ausgewählte Werkzeuge</translation>
     </message>
@@ -6840,12 +6840,12 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="838"/>
         <source>Toggle Docks</source>
-        <translation type="unfinished"></translation>
+        <translation>Fenster umschalten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="841"/>
         <source>Toggle visibility of dockable windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Sichtbarkeit der andockbaren Fenster umschalten</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="844"/>
@@ -8498,28 +8498,33 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="22"/>
-        <source>available</source>
-        <translation>verfügbar</translation>
+        <source>Available</source>
+        <translation>Verfügbar</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="46"/>
-        <source>add</source>
-        <translation>hinzufügen</translation>
+        <source>Add to selected items</source>
+        <translation>Zu den ausgewählten Einträgen hinzufügen</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="60"/>
-        <source>remove</source>
-        <translation>entfernen</translation>
+        <source>Remove from selected items</source>
+        <translation>Von den ausgewählten Einträgen entfernen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ISelectDoubleListWidget.ui" line="78"/>
+        <source>Selected</source>
+        <translation>Ausgewählt</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="102"/>
-        <source>move up</source>
-        <translation>nach oben</translation>
+        <source>Move selected items up</source>
+        <translation>Ausgewählte Einträge nach oben</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="116"/>
-        <source>move down</source>
-        <translation>nach unten</translation>
+        <source>Move selected items down</source>
+        <translation>Ausgewählte Einträge nach unten</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="49"/>
@@ -8528,11 +8533,6 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="119"/>
         <source>...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../widgets/ISelectDoubleListWidget.ui" line="78"/>
-        <source>selected</source>
-        <translation>ausgewählt</translation>
     </message>
 </context>
 <context>
@@ -9151,8 +9151,8 @@ sein</translation>
     <name>IToolBarSetupDialog</name>
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished">Dialog</translation>
+        <source>Setup Toolbar</source>
+        <translation>Werkzeugleiste einstellen</translation>
     </message>
 </context>
 <context>

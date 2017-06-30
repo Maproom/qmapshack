@@ -33,6 +33,8 @@ public:
     CToolBarConfig(QObject * const & parent, QToolBar * const & toolBar, const QList<QAction *> & availableActions, const QList<QAction *> & defaultActions);
     virtual ~CToolBarConfig();
 
+    void loadSettings();
+    void saveSettings() const;
     const QList<QAction *> & availableActions() const;
     const QList<QAction *> & configuredActions() const;
     void setConfiguredActionsByName(const QStringList & actions);

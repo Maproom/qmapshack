@@ -28,6 +28,14 @@ CToolBarConfig::CToolBarConfig(QObject * const & parent, QToolBar * const & tool
       available(availableActions),
       defaultActions(defaultActions)
 {
+}
+
+CToolBarConfig::~CToolBarConfig()
+{
+}
+
+void CToolBarConfig::loadSettings()
+{
     SETTINGS;
     cfg.beginGroup("ToolBar");
     QStringList actions = cfg.value("actions").toStringList();
@@ -42,7 +50,7 @@ CToolBarConfig::CToolBarConfig(QObject * const & parent, QToolBar * const & tool
     }
 }
 
-CToolBarConfig::~CToolBarConfig()
+void CToolBarConfig::saveSettings() const
 {
     SETTINGS;
     cfg.beginGroup("ToolBar");

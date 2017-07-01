@@ -37,9 +37,7 @@ CToolBarConfig::~CToolBarConfig()
 void CToolBarConfig::loadSettings()
 {
     SETTINGS;
-    cfg.beginGroup("ToolBar");
-    QStringList actions = cfg.value("actions").toStringList();
-    cfg.endGroup();
+    QStringList actions = cfg.value(QStringLiteral("ToolBar/actions")).toStringList();
     if (actions.isEmpty())
     {
         setDefaultConfiguredActions();
@@ -53,14 +51,12 @@ void CToolBarConfig::loadSettings()
 void CToolBarConfig::saveSettings() const
 {
     SETTINGS;
-    cfg.beginGroup("ToolBar");
     QStringList configuredNames;
     for (QAction * const & action : configuredActions())
     {
         configuredNames << action->objectName();
     }
-    cfg.setValue("actions",configuredNames);
-    cfg.endGroup();
+    cfg.setValue(QStringLiteral("ToolBar/actions"),configuredNames);
 }
 
 const QList<QAction *> & CToolBarConfig::availableActions() const

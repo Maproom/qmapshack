@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,8 +28,8 @@ class CDemList;
 class QLabel;
 class CGisWidget;
 class CCanvas;
+class CToolBarConfig;
 struct SGisLine;
-
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -122,6 +123,7 @@ private slots:
     void slotSetupUnits();
     void slotSetupWorkspace();
     void slotSetupCoordFormat();
+    void slotSetupToolbar();
     void slotImportDatabase();
     void slotLoadGISData();
     void slotBuildVrt();
@@ -134,6 +136,8 @@ private slots:
     void slotLinkActivated(const QString& link);
     void slotSanityTest();
     void slotCloseTab();
+    void slotToggleDocks();
+    void slotDockVisibilityChanged(bool visible);
 
 private:
     friend int main(int argc, char ** argv);
@@ -152,6 +156,11 @@ private:
     QFont mapFont;
 
     CGisWidget * gisWidget;
+
+    CToolBarConfig * toolBarConfig;
+
+    QList<QDockWidget *> docks;
+    QList<QDockWidget *> activeDocks;
 };
 
 #endif //CMAINWINDOW_H

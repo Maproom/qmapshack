@@ -36,16 +36,25 @@ public slots:
     void slotButtonClicked(QAbstractButton * button) const;
 
 private:
-    class CToolBarSetupDialogItem : public QListWidgetItem
+    class CDialogItem : public QListWidgetItem
     {
     public:
-        CToolBarSetupDialogItem(QIcon icon, QString text, QString name)
+        CDialogItem(QIcon icon, QString text, QString name)
             : QListWidgetItem(icon, text, nullptr, QListWidgetItem::UserType),
               actionName(name) {}
-        ~CToolBarSetupDialogItem() override {}
+        ~CDialogItem() override {}
+        QListWidgetItem * clone() const override { return new CDialogItem(this->icon(),this->text(),this->actionName); }
     private:
         const QString actionName;
         friend class CToolBarSetupDialog;
+    };
+
+    class CItemFilter : public QObject, public CSelectDoubleListWidget::IItemFilter
+    {
+    public:
+        CItemFilter(QObject *parent) : QObject(parent) {}
+        ~CItemFilter() override {}
+        bool shouldBeMoved(QListWidgetItem *item) override;
     };
 
     void configure() const;

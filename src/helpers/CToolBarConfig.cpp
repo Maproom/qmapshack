@@ -78,7 +78,17 @@ void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
         {
             if (action->objectName() == name)
             {
-                actions << action;
+                if (action->isSeparator())
+                {
+                    QAction * separator = new QAction(this);
+                    separator->setObjectName(QStringLiteral("separator"));
+                    separator->setSeparator(true);
+                    actions << separator;
+                }
+                else
+                {
+                    actions << action;
+                }
                 break;
             }
         }

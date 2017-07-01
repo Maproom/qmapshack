@@ -256,8 +256,13 @@ CMainWindow::CMainWindow()
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
+    QAction * separator = new QAction(QStringLiteral("---------------"),this);
+    separator->setSeparator(true);
+    separator->setObjectName(QStringLiteral("separator"));
+
     QList<QAction *> availableActions;
-    availableActions << actionAddMapView
+    availableActions << separator
+                     << actionAddMapView
                      << actionShowScale
                      << actionSetupMapFont
                      << actionShowGrid
@@ -301,17 +306,23 @@ CMainWindow::CMainWindow()
                      << actionToggleDocks
                      << actionToggleToolBar;
 
+    QAction * separator1 = new QAction(QStringLiteral("---------------"),this);
+    separator1->setSeparator(true);
+    separator1->setObjectName(QStringLiteral("separator"));
+
     QList<QAction *> defaultActions;
     defaultActions << actionSearchGoogle
                    << actionAddEmptyProject
                    << actionLoadGISData
                    << actionSaveGISData
+                   << separator
                    << actionShowScale
                    << actionShowGrid
                    << actionPOIText
                    << actionNightDay
                    << actionMapToolTip
                    << actionProfileIsWindow
+                   << separator1
                    << actionSetupToolbar
                    << actionToggleMaps
                    << actionToggleDem

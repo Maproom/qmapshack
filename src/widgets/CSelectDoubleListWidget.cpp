@@ -20,7 +20,7 @@
 #include <QListWidgetItem>
 #include "CSelectDoubleListWidget.h"
 
-CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent) : QWidget(parent)
+CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent, IItemFilter *filter) : QWidget(parent), filter(filter)
 {
     setupUi(this);
 
@@ -34,13 +34,42 @@ CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent) : QWidget(par
 
 CSelectDoubleListWidget::~CSelectDoubleListWidget()
 {
+    if (filter != nullptr)
+    {
+        for (int i=0; i < listSelected->count(); i++)
+        {
+            QListWidgetItem * const & item = listSelected->takeItem(i);
+            if (!filter->shouldBeMoved(item))
+            {
+                delete item;
+            }
+        }
+    }
 }
 
 void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & available)
 {
     this->available.clear();
     this->available << available;
-    filterListAvailable();
+    //do not use clear as it destroys the items
+    while (listAvailable->count() > 0)
+    {
+        listAvailable->takeItem(0);
+    }
+    for (QListWidgetItem * const & item : available)
+    {
+        int index = listSelected->row(item);
+        if (index < 0)
+        {
+            listAvailable->addItem(item);
+        }
+        else if(filter != nullptr && !filter->shouldBeMoved(item))
+        {
+            listSelected->takeItem(index);
+            listSelected->insertItem(index,item->clone());
+            listAvailable->addItem(item);
+        }
+    }
     updateButtons();
 }
 
@@ -53,26 +82,30 @@ void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selec
     }
     for (QListWidgetItem * const & item : selected)
     {
-        listSelected->addItem(item);
+        int index = listAvailable->row(item);
+        if (index < 0)
+        {
+            listSelected->addItem(item);
+        }
+        else
+        {
+            if(filter == nullptr || filter->shouldBeMoved(item))
+            {
+                listAvailable->takeItem(index);
+                listSelected->addItem(item);
+            }
+            else
+            {
+                listSelected->addItem(item->clone());
+            }
+        }
     }
-    filterListAvailable();
     updateButtons();
 }
 
-void CSelectDoubleListWidget::filterListAvailable() const
+void CSelectDoubleListWidget::setFilter(IItemFilter * const & filter)
 {
-    //do not use clear as it destroys the items
-    while (listAvailable->count() > 0)
-    {
-        listAvailable->takeItem(0);
-    }
-    for (QListWidgetItem * const & item : available)
-    {
-        if (listSelected->row(item) < 0)
-        {
-            listAvailable->addItem(item);
-        }
-    }
+    this->filter = filter;
 }
 
 void CSelectDoubleListWidget::setLabelAvailable(const QString & label) const
@@ -118,8 +151,15 @@ void CSelectDoubleListWidget::slotAdd() const
 {
     for (QListWidgetItem * const & item : listAvailable->selectedItems())
     {
-        listAvailable->takeItem(listAvailable->row(item));
-        listSelected->addItem(item);
+        if (filter == nullptr || filter->shouldBeMoved(item))
+        {
+            listAvailable->takeItem(listAvailable->row(item));
+            listSelected->addItem(item);
+        }
+        else
+        {
+            listSelected->addItem(item->clone());
+        }
     }
     updateButtons();
 }
@@ -128,18 +168,25 @@ void CSelectDoubleListWidget::slotRemove() const
 {
     for (QListWidgetItem * const & item : listSelected->selectedItems())
     {
-        int index = -1;
-        for (int i = available.indexOf(item)-1; i>=0; i--)
+        if (filter == nullptr || filter->shouldBeMoved(item))
         {
-            index = listAvailable->row(available.at(i));
-            if (index >= 0)
+            int index = -1;
+            for (int i = available.indexOf(item)-1; i>=0; i--)
             {
-                break;
+                index = listAvailable->row(available.at(i));
+                if (index >= 0)
+                {
+                    break;
+                }
             }
+            index++;
+            listSelected->takeItem(listSelected->row(item));
+            listAvailable->insertItem(index,item);
         }
-        index++;
-        listSelected->takeItem(listSelected->row(item));
-        listAvailable->insertItem(index,item);
+        else
+        {
+            delete listSelected->takeItem(listSelected->row(item));
+        }
     }
     updateButtons();
 }

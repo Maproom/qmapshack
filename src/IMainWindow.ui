@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>23</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -103,7 +103,9 @@
      <string>Window</string>
     </property>
     <addaction name="actionCloseTab"/>
+    <addaction name="actionToggleDocks"/>
     <addaction name="separator"/>
+    <addaction name="actionSetupToolbar"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -278,6 +280,17 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>Toolbar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
   </widget>
   <action name="actionAddMapView">
    <property name="icon">
@@ -802,6 +815,33 @@
    </property>
    <property name="text">
     <string>Quickstart Help</string>
+   </property>
+  </action>
+  <action name="actionSetupToolbar">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/ToolBarSetup.png</normaloff>:/icons/32x32/ToolBarSetup.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Toolbar</string>
+   </property>
+  </action>
+  <action name="actionToggleDocks">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/ToggleDocks.png</normaloff>:/icons/32x32/ToggleDocks.png</iconset>
+   </property>
+   <property name="text">
+    <string>Toggle Docks</string>
+   </property>
+   <property name="toolTip">
+    <string>Toggle visibility of dockable windows</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
    </property>
   </action>
  </widget>

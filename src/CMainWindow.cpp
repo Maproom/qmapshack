@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +33,8 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
+#include "helpers/CToolBarConfig.h"
+#include "helpers/CToolBarSetupDialog.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -115,6 +118,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupUnits,            &QAction::triggered,            this,      &CMainWindow::slotSetupUnits);
     connect(actionSetupWorkspace,        &QAction::triggered,            this,      &CMainWindow::slotSetupWorkspace);
     connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
+    connect(actionSetupToolbar,          &QAction::triggered,            this,      &CMainWindow::slotSetupToolbar);
     connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
     connect(actionSaveGISData,           &QAction::triggered,            gisWidget, &CGisWidget::slotSaveAll);
     connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
@@ -126,6 +130,7 @@ CMainWindow::CMainWindow()
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
+    connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
@@ -200,10 +205,133 @@ CMainWindow::CMainWindow()
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
-    menuWindow->addAction(dockMaps->toggleViewAction());
-    menuWindow->addAction(dockDem->toggleViewAction());
-    menuWindow->addAction(dockGis->toggleViewAction());
-    menuWindow->addAction(dockRte->toggleViewAction());
+
+    docks << dockMaps
+          << dockDem
+          << dockGis
+          << dockRte;
+
+    if (cfg.contains(QStringLiteral("MainWindow/activedocks")))
+    {
+        const QStringList & dockNames = cfg.value(QStringLiteral("MainWindow/activedocks")).toStringList();
+        for(QDockWidget * const & dock : docks)
+        {
+            if(dockNames.contains(dock->objectName()))
+            {
+                activeDocks << dock;
+            }
+        }
+    }
+
+    for (QDockWidget * const & dock : docks)
+    {
+        connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
+    }
+
+
+    QAction * actionToggleToolBar = toolBar->toggleViewAction();
+    actionToggleToolBar->setObjectName(QStringLiteral("actionToggleToolBar"));
+    actionToggleToolBar->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToolBar.png")));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleToolBar);
+
+    QAction * actionToggleMaps = dockMaps->toggleViewAction();
+    actionToggleMaps->setObjectName(QStringLiteral("actionToggleMaps"));
+    actionToggleMaps->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleMaps.png")));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleMaps);
+
+    QAction * actionToggleDem = dockDem->toggleViewAction();
+    actionToggleDem->setObjectName(QStringLiteral("actionToggleDem"));
+    actionToggleDem->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleDem.png")));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
+
+    QAction * actionToggleGis = dockGis->toggleViewAction();
+    actionToggleGis->setObjectName(QStringLiteral("actionToggleGis"));
+    actionToggleGis->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleGis.png")));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleGis);
+
+    QAction * actionToggleRte = dockRte->toggleViewAction();
+    actionToggleRte->setObjectName(QStringLiteral("actionToggleRte"));
+    actionToggleRte->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleRouter.png")));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
+
+    menuWindow->insertSeparator(actionSetupToolbar);
+
+    QAction * separator = new QAction(QStringLiteral("---------------"),this);
+    separator->setSeparator(true);
+    separator->setObjectName(QStringLiteral("separator"));
+
+    QList<QAction *> availableActions;
+    availableActions << separator
+                     << actionAddMapView
+                     << actionShowScale
+                     << actionSetupMapFont
+                     << actionShowGrid
+                     << actionSetupGrid
+                     << actionFlipMouseWheel
+                     << actionSetupMapPaths
+                     << actionPOIText
+                     << actionNightDay
+                     << actionMapToolTip
+                     << actionSetupDEMPaths
+                     << actionAbout
+                     << actionHelp
+                     << actionSetupMapView
+                     << actionLoadGISData
+                     << actionSaveGISData
+                     << actionSetupTimeZone
+                     << actionAddEmptyProject
+                     << actionSearchGoogle
+                     << actionCloseAllProjects
+                     << actionSetupUnits
+                     << actionSetupWorkspace
+                     << actionImportDatabase
+                     << actionVrtBuilder
+                     << actionStoreView
+                     << actionLoadView
+                     << actionProfileIsWindow
+                     << actionClose
+                     << actionCloneMapView
+                     << actionCreateRoutinoDatabase
+                     << actionPrintMap
+                     << actionSetupCoordFormat
+                     << actionSetupMapBackground
+                     << actionSetupWaypointIcons
+                     << actionCloseTab
+                     << actionQuickstart
+                     << actionSetupToolbar
+                     << actionToggleMaps
+                     << actionToggleDem
+                     << actionToggleGis
+                     << actionToggleRte
+                     << actionToggleDocks
+                     << actionToggleToolBar;
+
+    QAction * separator1 = new QAction(QStringLiteral("---------------"),this);
+    separator1->setSeparator(true);
+    separator1->setObjectName(QStringLiteral("separator"));
+
+    QList<QAction *> defaultActions;
+    defaultActions << actionSearchGoogle
+                   << actionAddEmptyProject
+                   << actionLoadGISData
+                   << actionSaveGISData
+                   << separator
+                   << actionShowScale
+                   << actionShowGrid
+                   << actionPOIText
+                   << actionNightDay
+                   << actionMapToolTip
+                   << actionProfileIsWindow
+                   << separator1
+                   << actionSetupToolbar
+                   << actionToggleMaps
+                   << actionToggleDem
+                   << actionToggleGis
+                   << actionToggleRte
+                   << actionToggleDocks;
+
+    toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
+    toolBarConfig->loadSettings();
 
     prepareMenuForMac();
 
@@ -214,7 +342,7 @@ CMainWindow::CMainWindow()
 
 void CMainWindow::prepareMenuForMac()
 {
-    dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
+    toolBar->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
@@ -229,7 +357,12 @@ CMainWindow::~CMainWindow()
     cfg.setValue("MainWindow/state", saveState());
     cfg.setValue("MainWindow/geometry", saveGeometry());
     cfg.setValue("MainWindow/units", IUnit::self().type);
-
+    QStringList activeDockNames;
+    for (QDockWidget * const & dock : activeDocks)
+    {
+        activeDockNames << dock->objectName();
+    }
+    cfg.setValue("MainWindow/activedocks",activeDockNames);
 
     /*
        The "Canvas" section will hold all settings global to all views
@@ -301,6 +434,8 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
 
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
+
+    toolBarConfig->saveSettings();
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()
@@ -898,6 +1033,12 @@ void CMainWindow::slotSetupCoordFormat()
     dlg.exec();
 }
 
+void CMainWindow::slotSetupToolbar()
+{
+    CToolBarSetupDialog dlg(this,toolBarConfig);
+    dlg.exec();
+}
+
 void CMainWindow::slotImportDatabase()
 {
     CImportDatabase * widget = new CImportDatabase(this);
@@ -1060,6 +1201,70 @@ void CMainWindow::slotCloseTab()
             widget->deleteLater();
         }
     }
+}
+
+void CMainWindow::slotToggleDocks()
+{  
+    bool isHidden = true;
+    for (QDockWidget * const & dock : docks)
+    {
+        if (!dock->isHidden())
+        {
+            isHidden = false;
+            break;
+        }
+    }
+
+    if (isHidden)
+    {
+        if (activeDocks.isEmpty())
+        {
+            for (QDockWidget * const & dock : docks)
+            {
+                dock->show();
+            }
+        }
+        else
+        {
+            const QList<QDockWidget *> docksToShow(activeDocks);
+            for (QDockWidget * const & dock : docksToShow)
+            {
+                dock->show();
+            }
+        }
+    }
+    else
+    {
+        activeDocks.clear();
+        for (QDockWidget * const & dock : docks)
+        {
+            if (!dock->isHidden())
+            {
+                dock->hide();
+                activeDocks << dock;
+            }
+        }
+    }
+}
+
+void CMainWindow::slotDockVisibilityChanged(bool visible)
+{
+    if (visible)
+    {
+        activeDocks.clear();
+    }
+    else
+    {
+        for (QDockWidget * const & dock : docks)
+        {
+            if (!dock->isHidden())
+            {
+                visible = true;
+                break;
+            }
+        }
+    }
+    actionToggleDocks->setChecked(visible);
 }
 
 #ifdef WIN32

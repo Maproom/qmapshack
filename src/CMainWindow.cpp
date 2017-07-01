@@ -205,14 +205,15 @@ CMainWindow::CMainWindow()
     lblPosGrid = new QLabel(status);
     status->addPermanentWidget(lblPosGrid);
 
-    docks << dockMaps;
-    docks << dockDem;
-    docks << dockGis;
-    docks << dockRte;
 
-    if (cfg.contains("MainWindow/activedocks"))
+    docks << dockMaps
+          << dockDem
+          << dockGis
+          << dockRte;
+
+    if (cfg.contains(QStringLiteral("MainWindow/activedocks")))
     {
-        const QStringList & dockNames = cfg.value("MainWindow/activedocks").toStringList();
+        const QStringList & dockNames = cfg.value(QStringLiteral("MainWindow/activedocks")).toStringList();
         for(QDockWidget * const & dock : docks)
         {
             if(dockNames.contains(dock->objectName()))
@@ -227,105 +228,96 @@ CMainWindow::CMainWindow()
         connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
     }
 
+
     QAction * actionToggleToolBar = toolBar->toggleViewAction();
-    actionToggleToolBar->setObjectName("actionToggleToolBar");
-    QIcon iconToggleToolBar;
-    iconToggleToolBar.addFile(QStringLiteral(":/icons/32x32/ToolBar.png"), QSize(), QIcon::Normal, QIcon::Off);
-    actionToggleToolBar->setIcon(iconToggleToolBar);
+    actionToggleToolBar->setObjectName(QStringLiteral("actionToggleToolBar"));
+    actionToggleToolBar->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToolBar.png")));
     menuWindow->insertAction(actionSetupToolbar,actionToggleToolBar);
 
     QAction * actionToggleMaps = dockMaps->toggleViewAction();
-    actionToggleMaps->setObjectName("actionToggleMaps");
-    QIcon iconToggleMaps;
-    iconToggleMaps.addFile(QStringLiteral(":/icons/32x32/ToggleMaps.png"), QSize(), QIcon::Normal, QIcon::Off);
-    actionToggleMaps->setIcon(iconToggleMaps);
+    actionToggleMaps->setObjectName(QStringLiteral("actionToggleMaps"));
+    actionToggleMaps->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleMaps.png")));
     menuWindow->insertAction(actionSetupToolbar,actionToggleMaps);
 
     QAction * actionToggleDem = dockDem->toggleViewAction();
-    actionToggleDem->setObjectName("actionToggleDem");
-    QIcon iconToggleDem;
-    iconToggleDem.addFile(QStringLiteral(":/icons/32x32/ToggleDem.png"), QSize(), QIcon::Normal, QIcon::Off);
-    actionToggleDem->setIcon(iconToggleDem);
+    actionToggleDem->setObjectName(QStringLiteral("actionToggleDem"));
+    actionToggleDem->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleDem.png")));
     menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
 
     QAction * actionToggleGis = dockGis->toggleViewAction();
-    actionToggleGis->setObjectName("actionToggleGis");
-    QIcon iconToggleGis;
-    iconToggleGis.addFile(QStringLiteral(":/icons/32x32/ToggleGis.png"), QSize(), QIcon::Normal, QIcon::Off);
-    actionToggleGis->setIcon(iconToggleGis);
+    actionToggleGis->setObjectName(QStringLiteral("actionToggleGis"));
+    actionToggleGis->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleGis.png")));
     menuWindow->insertAction(actionSetupToolbar,actionToggleGis);
 
     QAction * actionToggleRte = dockRte->toggleViewAction();
-    actionToggleRte->setObjectName("actionToggleRte");
-    QIcon iconToggleRte;
-    iconToggleRte.addFile(QStringLiteral(":/icons/32x32/ToggleRouter.png"), QSize(), QIcon::Normal, QIcon::Off);
-    actionToggleRte->setIcon(iconToggleRte);
+    actionToggleRte->setObjectName(QStringLiteral("actionToggleRte"));
+    actionToggleRte->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleRouter.png")));
     menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
     QList<QAction *> availableActions;
-    availableActions << actionAddMapView;
-    availableActions << actionShowScale;
-    availableActions << actionSetupMapFont;
-    availableActions << actionShowGrid;
-    availableActions << actionSetupGrid;
-    availableActions << actionFlipMouseWheel;
-    availableActions << actionSetupMapPaths;
-    availableActions << actionPOIText;
-    availableActions << actionNightDay;
-    availableActions << actionMapToolTip;
-    availableActions << actionSetupDEMPaths;
-    availableActions << actionAbout;
-    availableActions << actionHelp;
-    availableActions << actionSetupMapView;
-    availableActions << actionLoadGISData;
-    availableActions << actionSaveGISData;
-    availableActions << actionSetupTimeZone;
-    availableActions << actionAddEmptyProject;
-    availableActions << actionSearchGoogle;
-    availableActions << actionCloseAllProjects;
-    availableActions << actionSetupUnits;
-    availableActions << actionSetupWorkspace;
-    availableActions << actionImportDatabase;
-    availableActions << actionVrtBuilder;
-    availableActions << actionStoreView;
-    availableActions << actionLoadView;
-    availableActions << actionProfileIsWindow;
-    availableActions << actionClose;
-    availableActions << actionCloneMapView;
-    availableActions << actionCreateRoutinoDatabase;
-    availableActions << actionPrintMap;
-    availableActions << actionSetupCoordFormat;
-    availableActions << actionSetupMapBackground;
-    availableActions << actionSetupWaypointIcons;
-    availableActions << actionCloseTab;
-    availableActions << actionQuickstart;
-    availableActions << actionSetupToolbar;
-    availableActions << actionToggleMaps;
-    availableActions << actionToggleDem;
-    availableActions << actionToggleGis;
-    availableActions << actionToggleRte;
-    availableActions << actionToggleDocks;
-    availableActions << actionToggleToolBar;
+    availableActions << actionAddMapView
+                     << actionShowScale
+                     << actionSetupMapFont
+                     << actionShowGrid
+                     << actionSetupGrid
+                     << actionFlipMouseWheel
+                     << actionSetupMapPaths
+                     << actionPOIText
+                     << actionNightDay
+                     << actionMapToolTip
+                     << actionSetupDEMPaths
+                     << actionAbout
+                     << actionHelp
+                     << actionSetupMapView
+                     << actionLoadGISData
+                     << actionSaveGISData
+                     << actionSetupTimeZone
+                     << actionAddEmptyProject
+                     << actionSearchGoogle
+                     << actionCloseAllProjects
+                     << actionSetupUnits
+                     << actionSetupWorkspace
+                     << actionImportDatabase
+                     << actionVrtBuilder
+                     << actionStoreView
+                     << actionLoadView
+                     << actionProfileIsWindow
+                     << actionClose
+                     << actionCloneMapView
+                     << actionCreateRoutinoDatabase
+                     << actionPrintMap
+                     << actionSetupCoordFormat
+                     << actionSetupMapBackground
+                     << actionSetupWaypointIcons
+                     << actionCloseTab
+                     << actionQuickstart
+                     << actionSetupToolbar
+                     << actionToggleMaps
+                     << actionToggleDem
+                     << actionToggleGis
+                     << actionToggleRte
+                     << actionToggleDocks
+                     << actionToggleToolBar;
 
     QList<QAction *> defaultActions;
-    defaultActions << actionSearchGoogle;
-    defaultActions << actionAddEmptyProject;
-    defaultActions << actionLoadGISData;
-    defaultActions << actionSaveGISData;
-    defaultActions << actionShowScale;
-    defaultActions << actionShowGrid;
-    defaultActions << actionPOIText;
-    defaultActions << actionNightDay;
-    defaultActions << actionMapToolTip;
-    defaultActions << actionProfileIsWindow;
-    defaultActions << actionSetupToolbar;
-    defaultActions << actionToggleMaps;
-    defaultActions << actionToggleDem;
-    defaultActions << actionToggleGis;
-    defaultActions << actionToggleRte;
-    defaultActions << actionToggleDocks;
+    defaultActions << actionSearchGoogle
+                   << actionAddEmptyProject
+                   << actionLoadGISData
+                   << actionSaveGISData
+                   << actionShowScale
+                   << actionShowGrid
+                   << actionPOIText
+                   << actionNightDay
+                   << actionMapToolTip
+                   << actionProfileIsWindow
+                   << actionSetupToolbar
+                   << actionToggleMaps
+                   << actionToggleDem
+                   << actionToggleGis
+                   << actionToggleRte
+                   << actionToggleDocks;
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
     toolBarConfig->loadSettings();

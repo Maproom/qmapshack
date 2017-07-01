@@ -34,28 +34,13 @@ CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent, IItemFilter *
 
 CSelectDoubleListWidget::~CSelectDoubleListWidget()
 {
-    if (filter != nullptr)
-    {
-        for (int i=0; i < listSelected->count(); i++)
-        {
-            QListWidgetItem * const & item = listSelected->takeItem(i);
-            if (!filter->shouldBeMoved(item))
-            {
-                delete item;
-            }
-        }
-    }
 }
 
 void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & available)
 {
     this->available.clear();
     this->available << available;
-    //do not use clear as it destroys the items
-    while (listAvailable->count() > 0)
-    {
-        listAvailable->takeItem(0);
-    }
+    listAvailable->clear();
     for (QListWidgetItem * const & item : available)
     {
         int index = listSelected->row(item);
@@ -75,11 +60,7 @@ void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & avai
 
 void CSelectDoubleListWidget::setSelected(const QList<QListWidgetItem *> & selected) const
 {
-    //do not use clear as it destroys the items
-    while (listSelected->count() > 0)
-    {
-        listSelected->takeItem(0);
-    }
+    listSelected->clear();
     for (QListWidgetItem * const & item : selected)
     {
         int index = listAvailable->row(item);

@@ -100,7 +100,6 @@ void CToolBarSetupDialog::configure() const
             }
         }
     }
-    selectActionsWidget->clear();
     selectActionsWidget->setSelected(selectedItems);
     selectActionsWidget->setAvailable(availableItems);
 }

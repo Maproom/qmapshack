@@ -26,13 +26,20 @@ class CSelectDoubleListWidget : public QWidget, private Ui::ISelectDoubleListWid
 {
     Q_OBJECT
 public:
-    CSelectDoubleListWidget(QWidget *parent);
+    class IItemFilter
+    {
+    public:
+        virtual bool shouldBeMoved(QListWidgetItem * item) = 0;
+    };
+
+    CSelectDoubleListWidget(QWidget *parent, IItemFilter *filter = nullptr);
     virtual ~CSelectDoubleListWidget();
 
     void setAvailable(const QList<QListWidgetItem *> &available);
     void setSelected(const QList<QListWidgetItem *> &selected) const;
     void setLabelAvailable(const QString & label) const;
     void setLabelSelected(const QString & label) const;
+    void setFilter(IItemFilter * const &filter);
     const QList<QListWidgetItem *> selected() const;
     void clear();
 
@@ -45,9 +52,9 @@ private slots:
     void slotDown() const;
 
 private:
-    void filterListAvailable() const;
     void updateButtons() const;
 
     QList<QListWidgetItem *> available;
+    IItemFilter * filter;
 };
 #endif //CSELECTDOUBLELISTWIDGET_H

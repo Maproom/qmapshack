@@ -28,7 +28,7 @@ class CSelectDoubleListWidget : public QWidget, private Ui::ISelectDoubleListWid
 public:
     class IItemFilter
     {
-    public:
+public:
         virtual bool shouldBeMoved(QListWidgetItem * item) = 0;
     };
 

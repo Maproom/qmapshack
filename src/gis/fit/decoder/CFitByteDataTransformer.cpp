@@ -37,9 +37,11 @@ quint64 CFitByteDataTransformer::getUIntValue(const CFitBaseType& baseType, quin
     case eBaseTypeNrUint32:
     case eBaseTypeNrUint32z:
         return getUint32(rawData);
+
     case eBaseTypeNrUint64:
     case eBaseTypeNrUint64z:
         return getUint64(rawData);
+
     default:
         return 0;
     }
@@ -57,9 +59,10 @@ qint64 CFitByteDataTransformer::getSIntValue(const CFitBaseType& baseType, quint
 
     case eBaseTypeNrSint32:
         return getSint32(rawData);
-        
+
     case eBaseTypeNrSint64:
         return getSint64(rawData);
+
     default:
         return 0;
     }
@@ -121,10 +124,10 @@ qint32 CFitByteDataTransformer::getSint32(quint8* rawData)
 
 qint64 CFitByteDataTransformer::getSint64(quint8* rawData)
 {
-    return  ((qint64) rawData[7] << 56) | ((qint64) rawData[6] << 48)
-                | ((qint64) rawData[5] << 40) | ((qint64) rawData[4] << 32)
-                | ((qint64) rawData[3] << 24) | ((qint64) rawData[2] << 16)
-                | ((qint64) rawData[1] << 8) | rawData[0];
+    return ((qint64) rawData[7] << 56) | ((qint64) rawData[6] << 48)
+           | ((qint64) rawData[5] << 40) | ((qint64) rawData[4] << 32)
+           | ((qint64) rawData[3] << 24) | ((qint64) rawData[2] << 16)
+           | ((qint64) rawData[1] << 8) | rawData[0];
 }
 
 qreal CFitByteDataTransformer::getFloat32(quint8* rawData)

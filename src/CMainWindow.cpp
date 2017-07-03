@@ -32,9 +32,9 @@
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
-#include "helpers/CWptIconDialog.h"
 #include "helpers/CToolBarConfig.h"
 #include "helpers/CToolBarSetupDialog.h"
+#include "helpers/CWptIconDialog.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
@@ -1204,7 +1204,7 @@ void CMainWindow::slotCloseTab()
 }
 
 void CMainWindow::slotToggleDocks()
-{  
+{
     bool isHidden = true;
     for (QDockWidget * const & dock : docks)
     {

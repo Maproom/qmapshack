@@ -36,7 +36,6 @@ CHistoryListWidget::CHistoryListWidget(QWidget *parent)
 
     actionCutHistoryBefore = menu->addAction(QIcon("://icons/32x32/CutHistoryBefore.png"), tr("Cut history before"), this, SLOT(slotCutHistoryBefore()));
     actionCutHistoryAfter = menu->addAction(QIcon("://icons/32x32/CutHistoryAfter.png"), tr("Cut history after"), this, SLOT(slotCutHistoryAfter()));
-
 }
 
 CHistoryListWidget::~CHistoryListWidget()
@@ -107,7 +106,7 @@ void CHistoryListWidget::slotContextMenu(const QPoint& point)
 
     actionCutHistoryBefore->setEnabled(currentRow() > 0);
     actionCutHistoryAfter->setEnabled(currentRow() < count() - 1);
- 
+
     QPoint p = mapToGlobal(point);
     menu->exec(p);
 }
@@ -154,9 +153,9 @@ void CHistoryListWidget::slotCutHistoryBefore()
     }
 
     int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("History removal")
-        , tr("The removal is permanent and cannot be undone. "
-          "<b>Do you really want to delete history before this step?</b>")
-        , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+                                   , tr("The removal is permanent and cannot be undone. "
+                                        "<b>Do you really want to delete history before this step?</b>")
+                                   , QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (res == QMessageBox::No)
     {
         return;

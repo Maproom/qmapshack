@@ -129,8 +129,8 @@ void CKnownExtension::init(const IUnit &units)
         },
 
         {internalTerrainSlope,
-            { tr("Terrain slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
-                 getExtensionValueFunc(internalTerrainSlope)}
+         { tr("Terrain slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
+           getExtensionValueFunc(internalTerrainSlope)}
         }
     };
 

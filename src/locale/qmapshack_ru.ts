@@ -749,7 +749,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Отсутствует определение поля для поля развития.</translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="209"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="226"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
         <translation>Ошибка декодирования FIT: неправильный номер определения поля %1 при создании профиля поля развития.</translation>
     </message>
@@ -788,7 +788,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Ошибка декодирования FIT: архитектура %1 не поддерживается.</translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="107"/>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="110"/>
         <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
         <translation>Ошибка декодирования FIT: неправильное смещение %1 для состояния &apos;содержимое записи&apos;</translation>
     </message>
@@ -1894,7 +1894,7 @@ line %2, column %3:
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="66"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="65"/>
         <source> by %1</source>
         <translation>от %1</translation>
     </message>
@@ -1909,12 +1909,12 @@ line %2, column %3:
         <translation>Удалить историю после этого шага</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="155"/>
         <source>History removal</source>
         <translation>Удалить историю</translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="157"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation>Удаление является постоянным и не может быть отменено. &lt;b&gt;Вы действительно хотите удалить историю перед этим шагом?&lt;/b&gt;</translation>
     </message>
@@ -2018,53 +2018,53 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="766"/>
+        <location filename="../CMainWindow.cpp" line="769"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="894"/>
+        <location filename="../CMainWindow.cpp" line="897"/>
         <source>Ele: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="906"/>
+        <location filename="../CMainWindow.cpp" line="909"/>
         <source>Slope: %1%2</source>
         <translation>Склон: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="922"/>
+        <location filename="../CMainWindow.cpp" line="925"/>
         <source>[Grid: %1]</source>
         <translation>[Координатная сетка: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1063"/>
+        <location filename="../CMainWindow.cpp" line="1066"/>
         <source>Load GIS Data...</source>
         <translation>Загрузить данные GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
-        <location filename="../CMainWindow.cpp" line="1123"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
+        <location filename="../CMainWindow.cpp" line="1126"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack вид (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1123"/>
+        <location filename="../CMainWindow.cpp" line="1126"/>
         <source>Select file to load</source>
         <translation>Выбрать файл для загрузки</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1366"/>
+        <location filename="../CMainWindow.cpp" line="1369"/>
         <source>Fatal...</source>
         <translation>Неустранимая ошибка...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1367"/>
+        <location filename="../CMainWindow.cpp" line="1370"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для проекций EPSG обычно находятся в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета чтобы поправить это.</translation>
     </message>
@@ -3195,7 +3195,7 @@ y: %4 м/пиксель</translation>
         <translation>Истёкшее время: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="86"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="87"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation>Истёкшее время: %1 сек.</translation>
     </message>
@@ -4590,12 +4590,12 @@ line %2, column %3:
 <context>
     <name>CToolBarSetupDialog</name>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="31"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="43"/>
         <source>Available Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="32"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="44"/>
         <source>Selected Actions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6203,8 +6203,8 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
-        <source>&lt;b&gt;Calculate Terrain Slope&lt;b&gt;</source>
-        <translation>&lt;b&gt;Вычислить склон местности&lt;/b&gt;</translation>
+        <source>&lt;b&gt;Calculate Terrain Slope&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>

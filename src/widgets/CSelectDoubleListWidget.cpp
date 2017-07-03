@@ -17,8 +17,8 @@
 
 **********************************************************************************************/
 
-#include <QListWidgetItem>
 #include "CSelectDoubleListWidget.h"
+#include <QListWidgetItem>
 
 CSelectDoubleListWidget::CSelectDoubleListWidget(QWidget * parent, IItemFilter *filter) : QWidget(parent), filter(filter)
 {

@@ -17,10 +17,11 @@
 
 **********************************************************************************************/
 
-#include "helpers/CToolBarSetupDialog.h"
 #include "helpers/CToolBarConfig.h"
+#include "helpers/CToolBarSetupDialog.h"
 
-bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item) {
+bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item)
+{
     CDialogItem * dialogItem = dynamic_cast<CDialogItem *>(item);
     if (dialogItem != nullptr)
     {

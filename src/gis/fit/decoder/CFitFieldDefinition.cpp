@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/fit/decoder/CFitFieldDefinition.h"
 #include "gis/fit/decoder/CFitDefinitionMessage.h"
+#include "gis/fit/decoder/CFitFieldDefinition.h"
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
@@ -27,12 +27,12 @@ static const quint8 fitEndianFlagMask = 0x80;
 
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, CFitFieldProfile* fieldProfile, quint8 defNr, quint8 size, quint8 type)
-   : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent), fieldProfile(fieldProfile)
+    : defNr(defNr), size(size), type(type), baseType(CFitBaseTypeMap::get(type)), parentDefintion(parent), fieldProfile(fieldProfile)
 {
 }
 
 CFitFieldDefinition::CFitFieldDefinition(CFitDefinitionMessage* parent, quint8 defNr, quint8 size, quint8 type)
-   : CFitFieldDefinition(parent, nullptr, defNr, size, type)
+    : CFitFieldDefinition(parent, nullptr, defNr, size, type)
 
 {
     fieldProfile = CFitProfileLookup::getFieldForProfile(parentDefintion ? parentDefintion->getGlobalMesgNr() : fitGlobalMesgNrInvalid, defNr);

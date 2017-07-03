@@ -18,9 +18,9 @@
 
 #include "gis/fit/decoder/CFitCrcState.h"
 #include "gis/fit/decoder/CFitDecoder.h"
+#include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/decoder/CFitFieldDataState.h"
 #include "gis/fit/decoder/CFitFieldDefinitionState.h"
-#include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
 #include "gis/fit/decoder/CFitHeaderState.h"
 #include "gis/fit/decoder/CFitRecordContentState.h"
 #include "gis/fit/decoder/CFitRecordHeaderState.h"
@@ -94,9 +94,9 @@ QList<QString> decoderStateNames = {"File Header", "Record", "Record Content", "
 void printByte(QFile& file, decode_state_e state, quint8 dataByte)
 {
     FITDEBUG(3, qDebug() << QString("decoding byte %1 - %2 - %3")
-            .arg(file.pos(), 6, 10, QLatin1Char(' '))
-            .arg(dataByte, 8, 2, QLatin1Char('0'))
-            .arg(decoderStateNames.at(state)));
+             .arg(file.pos(), 6, 10, QLatin1Char(' '))
+             .arg(dataByte, 8, 2, QLatin1Char('0'))
+             .arg(decoderStateNames.at(state)));
 }
 
 void CFitDecoder::decode(QFile &file)

@@ -20,7 +20,8 @@
 #define FIT_PROFILE_H
 
 // ----------- start generated code -----------
-typedef enum {
+typedef enum
+{
     eFileDevice = 1,
     eFileSettings = 2,
     eFileSport = 3,
@@ -43,7 +44,8 @@ typedef enum {
     eFileMfgRangeMax = 0xFE
 } file_e;
 
-typedef enum {
+typedef enum
+{
     eMesgNumFileId = 0,
     eMesgNumCapabilities = 1,
     eMesgNumDeviceSettings = 2,
@@ -124,47 +126,56 @@ typedef enum {
     eMesgNumMfgRangeMax = 0xFFFE
 } mesg_num_e;
 
-typedef enum {
+typedef enum
+{
     eChecksumClear = 0,
     eChecksumOk = 1
 } checksum_e;
 
-typedef enum {
+typedef enum
+{
     eFileFlagsRead = 0x02,
     eFileFlagsWrite = 0x04,
     eFileFlagsErase = 0x08
 } file_flags_e;
 
-typedef enum {
+typedef enum
+{
     eMesgCountNumPerFile = 0,
     eMesgCountMaxPerFile = 1,
     eMesgCountMaxPerFileType = 2
 } mesg_count_e;
 
-typedef enum {
+typedef enum
+{
     eDateTimeMin = 0x10000000
 } date_time_e;
 
-typedef enum {
+typedef enum
+{
     eLocalDateTimeMin = 0x10000000
 } local_date_time_e;
 
-typedef enum {
+typedef enum
+{
     eMessageIndexSelected = 0x8000,
     eMessageIndexReserved = 0x7000,
     eMessageIndexMask = 0x0FFF
 } message_index_e;
 
-typedef enum {
+typedef enum
+{
     eDeviceIndexCreator = 0
 } device_index_e;
 
-typedef enum {
+typedef enum
+{
     eGenderFemale = 0,
     eGenderMale = 1
 } gender_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageEnglish = 0,
     eLanguageFrench = 1,
     eLanguageItalian = 2,
@@ -206,7 +217,8 @@ typedef enum {
     eLanguageCustom = 254
 } language_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageBits0English = 0x01,
     eLanguageBits0French = 0x02,
     eLanguageBits0Italian = 0x04,
@@ -217,7 +229,8 @@ typedef enum {
     eLanguageBits0Danish = 0x80
 } language_bits_0_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageBits1Dutch = 0x01,
     eLanguageBits1Finnish = 0x02,
     eLanguageBits1Greek = 0x04,
@@ -228,7 +241,8 @@ typedef enum {
     eLanguageBits1Slovakian = 0x80
 } language_bits_1_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageBits2Slovenian = 0x01,
     eLanguageBits2Swedish = 0x02,
     eLanguageBits2Russian = 0x04,
@@ -239,7 +253,8 @@ typedef enum {
     eLanguageBits2Farsi = 0x80
 } language_bits_2_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageBits3Bulgarian = 0x01,
     eLanguageBits3Romanian = 0x02,
     eLanguageBits3Chinese = 0x04,
@@ -250,7 +265,8 @@ typedef enum {
     eLanguageBits3Hebrew = 0x80
 } language_bits_3_e;
 
-typedef enum {
+typedef enum
+{
     eLanguageBits4BrazilianPortuguese = 0x01,
     eLanguageBits4Indonesian = 0x02,
     eLanguageBits4Malaysian = 0x04,
@@ -259,7 +275,8 @@ typedef enum {
     eLanguageBits4Mongolian = 0x20
 } language_bits_4_e;
 
-typedef enum {
+typedef enum
+{
     eTimeZoneAlmaty = 0,
     eTimeZoneBangkok = 1,
     eTimeZoneBombay = 2,
@@ -368,24 +385,28 @@ typedef enum {
     eTimeZoneAutomatic = 254
 } time_zone_e;
 
-typedef enum {
+typedef enum
+{
     eDisplayMeasureMetric = 0,
     eDisplayMeasureStatute = 1,
     eDisplayMeasureNautical = 2
 } display_measure_e;
 
-typedef enum {
+typedef enum
+{
     eDisplayHeartBpm = 0,
     eDisplayHeartMax = 1,
     eDisplayHeartReserve = 2
 } display_heart_e;
 
-typedef enum {
+typedef enum
+{
     eDisplayPowerWatts = 0,
     eDisplayPowerPercentFtp = 1
 } display_power_e;
 
-typedef enum {
+typedef enum
+{
     eDisplayPositionDegree = 0,
     eDisplayPositionDegreeMinute = 1,
     eDisplayPositionDegreeMinuteSecond = 2,
@@ -430,13 +451,15 @@ typedef enum {
     eDisplayPositionSwedishRef99Grid = 41
 } display_position_e;
 
-typedef enum {
+typedef enum
+{
     eSwitchOff = 0,
     eSwitchOn = 1,
     eSwitchAuto = 2
 } switch_e;
 
-typedef enum {
+typedef enum
+{
     eSportGeneric = 0,
     eSportRunning = 1,
     eSportCycling = 2,
@@ -489,7 +512,8 @@ typedef enum {
     eSportAll = 254
 } sport_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits0Generic = 0x01,
     eSportBits0Running = 0x02,
     eSportBits0Cycling = 0x04,
@@ -500,7 +524,8 @@ typedef enum {
     eSportBits0Soccer = 0x80
 } sport_bits_0_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits1Tennis = 0x01,
     eSportBits1AmericanFootball = 0x02,
     eSportBits1Training = 0x04,
@@ -511,7 +536,8 @@ typedef enum {
     eSportBits1Rowing = 0x80
 } sport_bits_1_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits2Mountaineering = 0x01,
     eSportBits2Hiking = 0x02,
     eSportBits2Multisport = 0x04,
@@ -522,7 +548,8 @@ typedef enum {
     eSportBits2Boating = 0x80
 } sport_bits_2_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits3Driving = 0x01,
     eSportBits3Golf = 0x02,
     eSportBits3HangGliding = 0x04,
@@ -533,7 +560,8 @@ typedef enum {
     eSportBits3RockClimbing = 0x80
 } sport_bits_3_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits4Sailing = 0x01,
     eSportBits4IceSkating = 0x02,
     eSportBits4SkyDiving = 0x04,
@@ -544,7 +572,8 @@ typedef enum {
     eSportBits4Wakeboarding = 0x80
 } sport_bits_4_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits5WaterSkiing = 0x01,
     eSportBits5Kayaking = 0x02,
     eSportBits5Rafting = 0x04,
@@ -555,11 +584,13 @@ typedef enum {
     eSportBits5Boxing = 0x80
 } sport_bits_5_e;
 
-typedef enum {
+typedef enum
+{
     eSportBits6FloorClimbing = 0x01
 } sport_bits_6_e;
 
-typedef enum {
+typedef enum
+{
     eSubSportGeneric = 0,
     eSubSportTreadmill = 1,
     eSubSportStreet = 2,
@@ -616,7 +647,8 @@ typedef enum {
     eSubSportAll = 254
 } sub_sport_e;
 
-typedef enum {
+typedef enum
+{
     eSportEventUncategorized = 0,
     eSportEventGeocaching = 1,
     eSportEventFitness = 2,
@@ -628,26 +660,30 @@ typedef enum {
     eSportEventTouring = 8
 } sport_event_e;
 
-typedef enum {
+typedef enum
+{
     eActivityManual = 0,
     eActivityAutoMultiSport = 1
 } activity_e;
 
-typedef enum {
+typedef enum
+{
     eIntensityActive = 0,
     eIntensityRest = 1,
     eIntensityWarmup = 2,
     eIntensityCooldown = 3
 } intensity_e;
 
-typedef enum {
+typedef enum
+{
     eSessionTriggerActivityEnd = 0,
     eSessionTriggerManual = 1,
     eSessionTriggerAutoMultiSport = 2,
     eSessionTriggerFitnessEquipment = 3
 } session_trigger_e;
 
-typedef enum {
+typedef enum
+{
     eAutolapTriggerTime = 0,
     eAutolapTriggerDistance = 1,
     eAutolapTriggerPositionStart = 2,
@@ -657,7 +693,8 @@ typedef enum {
     eAutolapTriggerOff = 6
 } autolap_trigger_e;
 
-typedef enum {
+typedef enum
+{
     eLapTriggerManual = 0,
     eLapTriggerTime = 1,
     eLapTriggerDistance = 2,
@@ -669,7 +706,8 @@ typedef enum {
     eLapTriggerFitnessEquipment = 8
 } lap_trigger_e;
 
-typedef enum {
+typedef enum
+{
     eTimeModeHour12 = 0,
     eTimeModeHour24 = 1,
     eTimeModeMilitary = 2,
@@ -678,7 +716,8 @@ typedef enum {
     eTimeModeUtc = 5
 } time_mode_e;
 
-typedef enum {
+typedef enum
+{
     eBacklightModeOff = 0,
     eBacklightModeManual = 1,
     eBacklightModeKeyAndMessages = 2,
@@ -688,12 +727,14 @@ typedef enum {
     eBacklightModeKeyAndMessagesAndSmartNotifications = 6
 } backlight_mode_e;
 
-typedef enum {
+typedef enum
+{
     eDateModeDayMonth = 0,
     eDateModeMonthDay = 1
 } date_mode_e;
 
-typedef enum {
+typedef enum
+{
     eEventTimer = 0,
     eEventWorkout = 3,
     eEventWorkoutStep = 4,
@@ -732,7 +773,8 @@ typedef enum {
     eEventCommTimeout = 47
 } event_e;
 
-typedef enum {
+typedef enum
+{
     eEventTypeStart = 0,
     eEventTypeStop = 1,
     eEventTypeConsecutiveDepreciated = 2,
@@ -745,44 +787,51 @@ typedef enum {
     eEventTypeStopDisableAll = 9
 } event_type_e;
 
-typedef enum {
+typedef enum
+{
     eTimerTriggerManual = 0,
     eTimerTriggerAuto = 1,
     eTimerTriggerFitnessEquipment = 2
 } timer_trigger_e;
 
-typedef enum {
+typedef enum
+{
     eFitnessEquipmentStateReady = 0,
     eFitnessEquipmentStateInUse = 1,
     eFitnessEquipmentStatePaused = 2,
     eFitnessEquipmentStateUnknown = 3
 } fitness_equipment_state_e;
 
-typedef enum {
+typedef enum
+{
     eAutoscrollNone = 0,
     eAutoscrollSlow = 1,
     eAutoscrollMedium = 2,
     eAutoscrollFast = 3
 } autoscroll_e;
 
-typedef enum {
+typedef enum
+{
     eActivityClassLevel = 0x7F,
     eActivityClassLevelMax = 100,
     eActivityClassAthlete = 0x80
 } activity_class_e;
 
-typedef enum {
+typedef enum
+{
     eHrZoneCalcCustom = 0,
     eHrZoneCalcPercentMaxHr = 1,
     eHrZoneCalcPercentHrr = 2
 } hr_zone_calc_e;
 
-typedef enum {
+typedef enum
+{
     ePwrZoneCalcCustom = 0,
     ePwrZoneCalcPercentFtp = 1
 } pwr_zone_calc_e;
 
-typedef enum {
+typedef enum
+{
     eWktStepDurationTime = 0,
     eWktStepDurationDistance = 1,
     eWktStepDurationHrLessThan = 2,
@@ -814,7 +863,8 @@ typedef enum {
     eWktStepDurationRepetitionTime = 28
 } wkt_step_duration_e;
 
-typedef enum {
+typedef enum
+{
     eWktStepTargetSpeed = 0,
     eWktStepTargetHeartRate = 1,
     eWktStepTargetOpen = 2,
@@ -830,7 +880,8 @@ typedef enum {
     eWktStepTargetHeartRateLap = 13
 } wkt_step_target_e;
 
-typedef enum {
+typedef enum
+{
     eGoalTime = 0,
     eGoalDistance = 1,
     eGoalCalories = 2,
@@ -840,7 +891,8 @@ typedef enum {
     eGoalActiveMinutes = 6
 } goal_e;
 
-typedef enum {
+typedef enum
+{
     eGoalRecurrenceOff = 0,
     eGoalRecurrenceDaily = 1,
     eGoalRecurrenceWeekly = 2,
@@ -849,18 +901,21 @@ typedef enum {
     eGoalRecurrenceCustom = 5
 } goal_recurrence_e;
 
-typedef enum {
+typedef enum
+{
     eGoalSourceAuto = 0,
     eGoalSourceCommunity = 1,
     eGoalSourceUser = 2
 } goal_source_e;
 
-typedef enum {
+typedef enum
+{
     eScheduleWorkout = 0,
     eScheduleCourse = 1
 } schedule_e;
 
-typedef enum {
+typedef enum
+{
     eCoursePointGeneric = 0,
     eCoursePointSummit = 1,
     eCoursePointValley = 2,
@@ -889,7 +944,8 @@ typedef enum {
     eCoursePointSegmentEnd = 25
 } course_point_e;
 
-typedef enum {
+typedef enum
+{
     eManufacturerGarmin = 1,
     eManufacturerGarminFr405Antfs = 2,
     eManufacturerZephyr = 3,
@@ -1022,7 +1078,8 @@ typedef enum {
     eManufacturerActigraphcorp = 5759
 } manufacturer_e;
 
-typedef enum {
+typedef enum
+{
     eGarminProductHrm1 = 1,
     eGarminProductAxh01 = 2,
     eGarminProductAxb01 = 3,
@@ -1172,7 +1229,8 @@ typedef enum {
     eGarminProductConnect = 65534
 } garmin_product_e;
 
-typedef enum {
+typedef enum
+{
     eAntplusDeviceTypeAntfs = 1,
     eAntplusDeviceTypeBikePower = 11,
     eAntplusDeviceTypeEnvironmentSensorLegacy = 12,
@@ -1198,14 +1256,16 @@ typedef enum {
     eAntplusDeviceTypeStrideSpeedDistance = 124
 } antplus_device_type_e;
 
-typedef enum {
+typedef enum
+{
     eAntNetworkPublic = 0,
     eAntNetworkAntplus = 1,
     eAntNetworkAntfs = 2,
     eAntNetworkPrivate = 3
 } ant_network_e;
 
-typedef enum {
+typedef enum
+{
     eWorkoutCapabilitiesInterval = 0x00000001,
     eWorkoutCapabilitiesCustom = 0x00000002,
     eWorkoutCapabilitiesFitnessEquipment = 0x00000004,
@@ -1222,7 +1282,8 @@ typedef enum {
     eWorkoutCapabilitiesProtected = 0x00004000
 } workout_capabilities_e;
 
-typedef enum {
+typedef enum
+{
     eBatteryStatusNew = 1,
     eBatteryStatusGood = 2,
     eBatteryStatusOk = 3,
@@ -1232,12 +1293,14 @@ typedef enum {
     eBatteryStatusUnknown = 7
 } battery_status_e;
 
-typedef enum {
+typedef enum
+{
     eHrTypeNormal = 0,
     eHrTypeIrregular = 1
 } hr_type_e;
 
-typedef enum {
+typedef enum
+{
     eCourseCapabilitiesProcessed = 0x00000001,
     eCourseCapabilitiesValid = 0x00000002,
     eCourseCapabilitiesTime = 0x00000004,
@@ -1251,19 +1314,23 @@ typedef enum {
     eCourseCapabilitiesBikeway = 0x00000400
 } course_capabilities_e;
 
-typedef enum {
+typedef enum
+{
     eWeightCalculating = 0xFFFE
 } weight_e;
 
-typedef enum {
+typedef enum
+{
     eWorkoutHrBpmOffset = 100
 } workout_hr_e;
 
-typedef enum {
+typedef enum
+{
     eWorkoutPowerWattsOffset = 1000
 } workout_power_e;
 
-typedef enum {
+typedef enum
+{
     eBpStatusNoError = 0,
     eBpStatusErrorIncompleteData = 1,
     eBpStatusErrorNoMeasurement = 2,
@@ -1271,7 +1338,8 @@ typedef enum {
     eBpStatusErrorIrregularHeartRate = 4
 } bp_status_e;
 
-typedef enum {
+typedef enum
+{
     eUserLocalIdLocalMin = 0x0000,
     eUserLocalIdLocalMax = 0x000F,
     eUserLocalIdStationaryMin = 0x0010,
@@ -1280,7 +1348,8 @@ typedef enum {
     eUserLocalIdPortableMax = 0xFFFE
 } user_local_id_e;
 
-typedef enum {
+typedef enum
+{
     eSwimStrokeFreestyle = 0,
     eSwimStrokeBackstroke = 1,
     eSwimStrokeBreaststroke = 2,
@@ -1290,7 +1359,8 @@ typedef enum {
     eSwimStrokeIm = 6
 } swim_stroke_e;
 
-typedef enum {
+typedef enum
+{
     eActivityTypeGeneric = 0,
     eActivityTypeRunning = 1,
     eActivityTypeCycling = 2,
@@ -1302,7 +1372,8 @@ typedef enum {
     eActivityTypeAll = 254
 } activity_type_e;
 
-typedef enum {
+typedef enum
+{
     eActivitySubtypeGeneric = 0,
     eActivitySubtypeTreadmill = 1,
     eActivitySubtypeStreet = 2,
@@ -1325,33 +1396,39 @@ typedef enum {
     eActivitySubtypeAll = 254
 } activity_subtype_e;
 
-typedef enum {
+typedef enum
+{
     eActivityLevelLow = 0,
     eActivityLevelMedium = 1,
     eActivityLevelHigh = 2
 } activity_level_e;
 
-typedef enum {
+typedef enum
+{
     eSideRight = 0,
     eSideLeft = 1
 } side_e;
 
-typedef enum {
+typedef enum
+{
     eLeftRightBalanceMask = 0x7F,
     eLeftRightBalanceRight = 0x80
 } left_right_balance_e;
 
-typedef enum {
+typedef enum
+{
     eLeftRightBalance100Mask = 0x3FFF,
     eLeftRightBalance100Right = 0x8000
 } left_right_balance_100_e;
 
-typedef enum {
+typedef enum
+{
     eLengthTypeIdle = 0,
     eLengthTypeActive = 1
 } length_type_e;
 
-typedef enum {
+typedef enum
+{
     eDayOfWeekSunday = 0,
     eDayOfWeekMonday = 1,
     eDayOfWeekTuesday = 2,
@@ -1361,7 +1438,8 @@ typedef enum {
     eDayOfWeekSaturday = 6
 } day_of_week_e;
 
-typedef enum {
+typedef enum
+{
     eConnectivityCapabilitiesBluetooth = 0x00000001,
     eConnectivityCapabilitiesBluetoothLe = 0x00000002,
     eConnectivityCapabilitiesAnt = 0x00000004,
@@ -1396,14 +1474,16 @@ typedef enum {
     eConnectivityCapabilitiesInstantInput = 0x80000000
 } connectivity_capabilities_e;
 
-typedef enum {
+typedef enum
+{
     eWeatherReportCurrent = 0,
     eWeatherReportForecast = 1,
     eWeatherReportHourlyForecast = 1,
     eWeatherReportDailyForecast = 2
 } weather_report_e;
 
-typedef enum {
+typedef enum
+{
     eWeatherStatusClear = 0,
     eWeatherStatusPartlyCloudy = 1,
     eWeatherStatusMostlyCloudy = 2,
@@ -1427,7 +1507,8 @@ typedef enum {
     eWeatherStatusCloudy = 22
 } weather_status_e;
 
-typedef enum {
+typedef enum
+{
     eWeatherSeverityUnknown = 0,
     eWeatherSeverityWarning = 1,
     eWeatherSeverityWatch = 2,
@@ -1435,7 +1516,8 @@ typedef enum {
     eWeatherSeverityStatement = 4
 } weather_severity_e;
 
-typedef enum {
+typedef enum
+{
     eWeatherSevereTypeUnspecified = 0,
     eWeatherSevereTypeTornado = 1,
     eWeatherSevereTypeTsunami = 2,
@@ -1523,7 +1605,8 @@ typedef enum {
     eWeatherSevereTypeSpecialWeather = 84
 } weather_severe_type_e;
 
-typedef enum {
+typedef enum
+{
     eStrokeTypeNoEvent = 0,
     eStrokeTypeOther = 1,
     eStrokeTypeServe = 2,
@@ -1532,7 +1615,8 @@ typedef enum {
     eStrokeTypeSmash = 5
 } stroke_type_e;
 
-typedef enum {
+typedef enum
+{
     eBodyLocationLeftLeg = 0,
     eBodyLocationLeftCalf = 1,
     eBodyLocationLeftShin = 2,
@@ -1575,12 +1659,14 @@ typedef enum {
     eBodyLocationWaistRight = 39
 } body_location_e;
 
-typedef enum {
+typedef enum
+{
     eSegmentLapStatusEnd = 0,
     eSegmentLapStatusFail = 1
 } segment_lap_status_e;
 
-typedef enum {
+typedef enum
+{
     eSegmentLeaderboardTypeOverall = 0,
     eSegmentLeaderboardTypePersonalBest = 1,
     eSegmentLeaderboardTypeConnections = 2,
@@ -1594,18 +1680,21 @@ typedef enum {
     eSegmentLeaderboardTypeClubLeader = 10
 } segment_leaderboard_type_e;
 
-typedef enum {
+typedef enum
+{
     eSegmentDeleteStatusDoNotDelete = 0,
     eSegmentDeleteStatusDeleteOne = 1,
     eSegmentDeleteStatusDeleteAll = 2
 } segment_delete_status_e;
 
-typedef enum {
+typedef enum
+{
     eSegmentSelectionTypeStarred = 0,
     eSegmentSelectionTypeSuggested = 1
 } segment_selection_type_e;
 
-typedef enum {
+typedef enum
+{
     eSourceTypeAnt = 0,
     eSourceTypeAntplus = 1,
     eSourceTypeBluetooth = 2,
@@ -1614,7 +1703,8 @@ typedef enum {
     eSourceTypeLocal = 5
 } source_type_e;
 
-typedef enum {
+typedef enum
+{
     eDisplayOrientationAuto = 0,
     eDisplayOrientationPortrait = 1,
     eDisplayOrientationLandscape = 2,
@@ -1622,37 +1712,43 @@ typedef enum {
     eDisplayOrientationLandscapeFlipped = 4
 } display_orientation_e;
 
-typedef enum {
+typedef enum
+{
     eWatchfaceModeDigital = 0,
     eWatchfaceModeAnalog = 1,
     eWatchfaceModeConnectIq = 2
 } watchface_mode_e;
 
-typedef enum {
+typedef enum
+{
     eDigitalWatchfaceLayoutTraditional = 0,
     eDigitalWatchfaceLayoutModern = 1,
     eDigitalWatchfaceLayoutBold = 2
 } digital_watchface_layout_e;
 
-typedef enum {
+typedef enum
+{
     eAnalogWatchfaceLayoutMinimal = 0,
     eAnalogWatchfaceLayoutTraditional = 1,
     eAnalogWatchfaceLayoutModern = 2
 } analog_watchface_layout_e;
 
-typedef enum {
+typedef enum
+{
     eRiderPositionTypeSeated = 0,
     eRiderPositionTypeStanding = 1
 } rider_position_type_e;
 
-typedef enum {
+typedef enum
+{
     ePowerPhaseTypePowerPhaseStartAngle = 0,
     ePowerPhaseTypePowerPhaseEndAngle = 1,
     ePowerPhaseTypePowerPhaseArcLength = 2,
     ePowerPhaseTypePowerPhaseCenter = 3
 } power_phase_type_e;
 
-typedef enum {
+typedef enum
+{
     eCameraEventTypeVideoStart = 0,
     eCameraEventTypeVideoSplit = 1,
     eCameraEventTypeVideoEnd = 2,
@@ -1668,41 +1764,47 @@ typedef enum {
     eCameraEventTypeVideoSecondStreamResume = 14
 } camera_event_type_e;
 
-typedef enum {
+typedef enum
+{
     eSensorTypeAccelerometer = 0,
     eSensorTypeGyroscope = 1,
     eSensorTypeCompass = 2
 } sensor_type_e;
 
-typedef enum {
+typedef enum
+{
     eBikeLightNetworkConfigTypeAuto = 0,
     eBikeLightNetworkConfigTypeIndividual = 4,
     eBikeLightNetworkConfigTypeHighVisibility = 5,
     eBikeLightNetworkConfigTypeTrail = 6
 } bike_light_network_config_type_e;
 
-typedef enum {
+typedef enum
+{
     eCommTimeoutTypeWildcardPairingTimeout = 0,
     eCommTimeoutTypePairingTimeout = 1,
     eCommTimeoutTypeConnectionLost = 2,
     eCommTimeoutTypeConnectionTimeout = 3
 } comm_timeout_type_e;
 
-typedef enum {
+typedef enum
+{
     eCameraOrientationTypeCameraOrientation0 = 0,
     eCameraOrientationTypeCameraOrientation90 = 1,
     eCameraOrientationTypeCameraOrientation180 = 2,
     eCameraOrientationTypeCameraOrientation270 = 3
 } camera_orientation_type_e;
 
-typedef enum {
+typedef enum
+{
     eAttitudeStageFailed = 0,
     eAttitudeStageAligning = 1,
     eAttitudeStageDegraded = 2,
     eAttitudeStageValid = 3
 } attitude_stage_e;
 
-typedef enum {
+typedef enum
+{
     eAttitudeValidityTrackAngleHeadingValid = 0x0001,
     eAttitudeValidityPitchValid = 0x0002,
     eAttitudeValidityRollValid = 0x0004,
@@ -1718,14 +1820,16 @@ typedef enum {
     eAttitudeValidityMagneticHeading = 0x1000
 } attitude_validity_e;
 
-typedef enum {
+typedef enum
+{
     eAutoSyncFrequencyNever = 0,
     eAutoSyncFrequencyOccasionally = 1,
     eAutoSyncFrequencyFrequent = 2,
     eAutoSyncFrequencyOnceADay = 3
 } auto_sync_frequency_e;
 
-typedef enum {
+typedef enum
+{
     eExdLayoutFullScreen = 0,
     eExdLayoutHalfVertical = 1,
     eExdLayoutHalfHorizontal = 2,
@@ -1736,7 +1840,8 @@ typedef enum {
     eExdLayoutHalfHorizontalTopSplit = 7
 } exd_layout_e;
 
-typedef enum {
+typedef enum
+{
     eExdDisplayTypeNumerical = 0,
     eExdDisplayTypeSimple = 1,
     eExdDisplayTypeGraph = 2,
@@ -1750,7 +1855,8 @@ typedef enum {
     eExdDisplayTypeGauge = 10
 } exd_display_type_e;
 
-typedef enum {
+typedef enum
+{
     eExdDataUnitsNoUnits = 0,
     eExdDataUnitsLaps = 1,
     eExdDataUnitsMilesPerHour = 2,
@@ -1803,7 +1909,8 @@ typedef enum {
     eExdDataUnitsEightCardinal = 49
 } exd_data_units_e;
 
-typedef enum {
+typedef enum
+{
     eExdQualifiersNoQualifier = 0,
     eExdQualifiersInstantaneous = 1,
     eExdQualifiersAverage = 2,
@@ -1849,7 +1956,8 @@ typedef enum {
     eExdQualifiersZone1 = 250
 } exd_qualifiers_e;
 
-typedef enum {
+typedef enum
+{
     eExdDescriptorsBikeLightBatteryStatus = 0,
     eExdDescriptorsBeamAngleStatus = 1,
     eExdDescriptorsBateryLevel = 2,
@@ -1948,7 +2056,8 @@ typedef enum {
     eExdDescriptorsPressure = 95
 } exd_descriptors_e;
 
-typedef enum {
+typedef enum
+{
     eAutoActivityDetectNone = 0x00000000,
     eAutoActivityDetectRunning = 0x00000001,
     eAutoActivityDetectCycling = 0x00000002,
@@ -1958,7 +2067,8 @@ typedef enum {
     eAutoActivityDetectSedentary = 0x00000400
 } auto_activity_detect_e;
 
-typedef enum {
+typedef enum
+{
     eSupportedExdScreenLayoutsFullScreen = 0x00000001,
     eSupportedExdScreenLayoutsHalfVertical = 0x00000002,
     eSupportedExdScreenLayoutsHalfHorizontal = 0x00000004,
@@ -1969,7 +2079,8 @@ typedef enum {
     eSupportedExdScreenLayoutsHalfHorizontalTopSplit = 0x00000080
 } supported_exd_screen_layouts_e;
 
-typedef enum {
+typedef enum
+{
     eFitBaseTypeEnum = 0,
     eFitBaseTypeSint8 = 1,
     eFitBaseTypeUint8 = 2,
@@ -1989,7 +2100,8 @@ typedef enum {
     eFitBaseTypeUint64Z = 144
 } fit_base_type_e;
 
-typedef enum {
+typedef enum
+{
     eTurnTypeArrivingIdx = 0,
     eTurnTypeArrivingLeftIdx = 1,
     eTurnTypeArrivingRightIdx = 2,
@@ -2030,12 +2142,14 @@ typedef enum {
     eTurnTypeIconIdxCnt = 37
 } turn_type_e;
 
-typedef enum {
+typedef enum
+{
     eBikeLightBeamAngleModeManual = 0,
     eBikeLightBeamAngleModeAuto = 1
 } bike_light_beam_angle_mode_e;
 
-typedef enum {
+typedef enum
+{
     eFitBaseUnitOther = 0,
     eFitBaseUnitKilogram = 1,
     eFitBaseUnitPound = 2

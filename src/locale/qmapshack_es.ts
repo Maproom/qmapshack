@@ -745,7 +745,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="209"/>
+        <location filename="../gis/fit/decoder/CFitFieldDataState.cpp" line="226"/>
         <source>FIT decoding error: invalid field def nr %1 while creating dev field profile.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -784,7 +784,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="107"/>
+        <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="110"/>
         <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1890,7 +1890,7 @@ línea %2, columna %3.
 <context>
     <name>CHistoryListWidget</name>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="66"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="65"/>
         <source> by %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1905,12 +1905,12 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="155"/>
         <source>History removal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CHistoryListWidget.cpp" line="157"/>
+        <location filename="../widgets/CHistoryListWidget.cpp" line="156"/>
         <source>The removal is permanent and cannot be undone. &lt;b&gt;Do you really want to delete history before this step?&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2014,53 +2014,53 @@ línea %2, columna %3.
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="766"/>
+        <location filename="../CMainWindow.cpp" line="769"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="894"/>
+        <location filename="../CMainWindow.cpp" line="897"/>
         <source>Ele: %1%2</source>
         <translation>Alt: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="906"/>
+        <location filename="../CMainWindow.cpp" line="909"/>
         <source>Slope: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="922"/>
+        <location filename="../CMainWindow.cpp" line="925"/>
         <source>[Grid: %1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1063"/>
+        <location filename="../CMainWindow.cpp" line="1066"/>
         <source>Load GIS Data...</source>
         <translation>Cargar Datos GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
-        <location filename="../CMainWindow.cpp" line="1123"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
+        <location filename="../CMainWindow.cpp" line="1126"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1123"/>
+        <location filename="../CMainWindow.cpp" line="1126"/>
         <source>Select file to load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1366"/>
+        <location filename="../CMainWindow.cpp" line="1369"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1367"/>
+        <location filename="../CMainWindow.cpp" line="1370"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3185,7 +3185,7 @@ y: %4 m/px</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="86"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="87"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4580,12 +4580,12 @@ línea %2, columna %3.
 <context>
     <name>CToolBarSetupDialog</name>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="31"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="43"/>
         <source>Available Actions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../helpers/CToolBarSetupDialog.cpp" line="32"/>
+        <location filename="../helpers/CToolBarSetupDialog.cpp" line="44"/>
         <source>Selected Actions</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6184,7 +6184,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
-        <source>&lt;b&gt;Calculate Terrain Slope&lt;b&gt;</source>
+        <source>&lt;b&gt;Calculate Terrain Slope&lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

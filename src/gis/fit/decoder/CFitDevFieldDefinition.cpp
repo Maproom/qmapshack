@@ -49,6 +49,7 @@ quint8 CFitDevFieldDefinition::getSize() const
     return size;
 }
 
-quint8 CFitDevFieldDefinition::getDevDataIndex() const {
+quint8 CFitDevFieldDefinition::getDevDataIndex() const
+{
     return devDataIndex;
 }

@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "gis/fit/decoder/CFitDevFieldDefinitionState.h"
-#include "gis/fit/defs/fit_const.h"
 #include "gis/fit/defs/CFitBaseType.h"
+#include "gis/fit/defs/fit_const.h"
 
 /**
  * byte

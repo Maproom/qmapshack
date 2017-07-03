@@ -122,7 +122,7 @@ void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
     if(devFieldProfile(fieldProfile.getFieldDefNum())->getFieldDefNum() ==  fieldProfile.getFieldDefNum())
     {
         throw tr("FIT decoding error: a development field with the field_definition_number %1 already exists.")
-                .arg(fieldProfile.getFieldDefNum());
+              .arg(fieldProfile.getFieldDefNum());
     }
     data.devFieldProfiles.append(fieldProfile);
 }

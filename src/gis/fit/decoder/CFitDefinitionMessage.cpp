@@ -42,7 +42,7 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
 
 CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr, bool devFlag)
     : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), nrOfDevFields(0), localMesgNr(localMesgNr),
-      devFlag(devFlag), fields(), devFields(), messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
+    devFlag(devFlag), fields(), devFields(), messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 

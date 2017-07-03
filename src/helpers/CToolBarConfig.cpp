@@ -17,16 +17,16 @@
 
 **********************************************************************************************/
 
-#include "helpers/CToolBarConfig.h"
 #include "CSettings.h"
-#include <QToolBar>
+#include "helpers/CToolBarConfig.h"
 #include <QAction>
+#include <QToolBar>
 
 CToolBarConfig::CToolBarConfig(QObject * const & parent, QToolBar * const & toolBar, const QList<QAction *> & availableActions, const QList<QAction *> & defaultActions)
     : QObject(parent),
-      toolBar(toolBar),
-      available(availableActions),
-      defaultActions(defaultActions)
+    toolBar(toolBar),
+    available(availableActions),
+    defaultActions(defaultActions)
 {
 }
 

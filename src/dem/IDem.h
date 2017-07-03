@@ -119,12 +119,12 @@ protected:
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     /**
-     @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
-     @param win2  window data
-     @param size  size of window (eWinsize3x3 or eWinsize4x4)
-     @param x     Fractional value (0..1) for interpolation in x (4x4 window only)
-     @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
-     @return      Slope in degrees
+       @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
+       @param win2  window data
+       @param size  size of window (eWinsize3x3 or eWinsize4x4)
+       @param x     Fractional value (0..1) for interpolation in x (4x4 window only)
+       @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
+       @return      Slope in degrees
      */
     qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y);
 

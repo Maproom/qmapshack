@@ -125,17 +125,17 @@ QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
 QString CFitFieldProfile::fieldProfileInfo()
 {
     QString str = QString("%1 %2 (%3): %4 %5")
-            .arg(QString("field profile"))
-            .arg(getName())
-            .arg(getFieldDefNum())
-            .arg(getUnits())
-            .arg(getBaseType().name());
+                  .arg(QString("field profile"))
+                  .arg(getName())
+                  .arg(getFieldDefNum())
+                  .arg(getUnits())
+                  .arg(getBaseType().name());
 
     if(getBaseType().isNumber())
     {
         str += QString(" (%1-%2)")
-                .arg(getScale())
-                .arg(getOffset());
+               .arg(getScale())
+               .arg(getOffset());
     }
     return str;
 }

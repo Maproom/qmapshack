@@ -23,8 +23,8 @@
 #include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
-#include "gis/fit/defs/CFitProfileLookup.h"
 #include "gis/fit/defs/CFitProfile.h"
+#include "gis/fit/defs/CFitProfileLookup.h"
 
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)

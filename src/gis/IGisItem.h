@@ -440,7 +440,7 @@ public:
 
     /**
        @brief Remove all history entries older than the current selected one.
-    */
+     */
     void cutHistoryBefore();
 
     /**

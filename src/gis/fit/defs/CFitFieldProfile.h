@@ -26,7 +26,8 @@ class CFitSubfieldProfile;
 class CFitComponentfieldProfile;
 class CFitBaseType;
 
-typedef enum {
+typedef enum
+{
     eFieldTypeFit = 0,
     eFieldTypeDevelopment = 1,
 } field_type_e;

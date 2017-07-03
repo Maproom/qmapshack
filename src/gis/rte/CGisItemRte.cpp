@@ -863,7 +863,6 @@ void CGisItemRte::setResult(Routino_Output * route, const QString& options)
 
             rte.totalDistance = rtept->fakeSubpt.distance;
             rte.totalTime     = rtept->fakeSubpt.time.toTime_t() - time.toTime_t();
-
         }
         else if(rtept != nullptr)
         {

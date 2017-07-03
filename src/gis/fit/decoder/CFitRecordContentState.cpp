@@ -78,7 +78,8 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         def->setNrOfFields(nrOfFields);
 
         // only reset if developer flag not set, else developer fields follow
-        if(! def->developerFlag()) {
+        if(!def->developerFlag())
+        {
             reset();
         }
         if (nrOfFields == 0)
@@ -89,6 +90,7 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         // the fields definitions follows
         return eDecoderStateFieldDef;
         break;
+
     case 5:
         // number of development fields
         nrOfFields = dataByte;
@@ -103,6 +105,7 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         // the fields definitions follows
         return eDecoderStateDevFieldDef;
         break;
+
     default:
         throw tr("FIT decoding error: invalid offset %1 for state 'record content'").arg(offset);
     }

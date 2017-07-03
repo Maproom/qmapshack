@@ -19,8 +19,8 @@
 #ifndef CFITMESSAGEDEFINTION_H
 #define CFITMESSAGEDEFINTION_H
 
-#include "gis/fit/decoder/CFitFieldDefinition.h"
 #include "gis/fit/decoder/CFitDevFieldDefinition.h"
+#include "gis/fit/decoder/CFitFieldDefinition.h"
 
 #include <QtCore>
 

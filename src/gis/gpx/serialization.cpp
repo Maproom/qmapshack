@@ -38,6 +38,7 @@ const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 const QString IGisProject::tp1_ns    = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString IGisProject::gpxdata_ns= "http://www.cluetrust.com/XML/GPXDATA/1/0";
 
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
@@ -454,13 +455,17 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
         gpx.setAttribute("xmlns:rmc",    rmc_ns);
         gpx.setAttribute("xmlns:ql",     ql_ns);
         gpx.setAttribute("xmlns:tp1",    tp1_ns);
+        gpx.setAttribute("xmlns:gpxdata",gpxdata_ns);
+
+
 
         schemaLocation = QString()
                          + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
                          + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
                          + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
                          + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
-                         + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd ";
+                         + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd "
+                         + gpxdata_ns+ " http://www.cluetrust.com/Schemas/gpxdata10.xsd";
     }
     else
     {

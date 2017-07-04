@@ -510,6 +510,7 @@ protected:
     // Those are standard GPX/XML namespaces
     static const QString gpx_ns;
     static const QString xsi_ns;
+    static const QString gpxdata_ns;
 
     QPointer<CDetailsPrj> dlgDetails;
 

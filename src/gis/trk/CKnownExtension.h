@@ -91,6 +91,7 @@ private:
     }
 
     static void initMioTPX(const IUnit &units);
+    static void initClueTrustTPX(const IUnit &units);
 };
 
 #endif // CKNOWNEXTENSION_H

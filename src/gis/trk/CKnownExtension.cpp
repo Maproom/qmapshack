@@ -106,35 +106,35 @@ void CKnownExtension::initMioTPX(const IUnit &units)
                              getExtensionValueFunc("course")});
 }
 
-void CKnownExtension::initClueTrustTPX(const IUnit &units)
+void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
 {
-    knownExtensions.insert("gpxdata:cadence",
+    knownExtensions.insert(ns % ":cadence",
                            { tr("Cadence"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
-                             getExtensionValueFunc("gpxdata:cadence")});
+                             getExtensionValueFunc(ns % ":cadence")});
 
-    knownExtensions.insert("gpxdata:temp",
+    knownExtensions.insert(ns % ":temp",
                            { tr("Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
-                             getExtensionValueFunc("gpxdata:temp")});
+                             getExtensionValueFunc(ns % ":temp")});
     
-    knownExtensions.insert("gpxdata:distance",
+    knownExtensions.insert(ns % ":distance",
                          { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
-                           getExtensionValueFunc("gpxdata:distance") });
+                           getExtensionValueFunc(ns % ":distance") });
     
-    knownExtensions.insert("gpxdata:altitude",
+    knownExtensions.insert(ns % ":altitude",
                             { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
-                                getExtensionValueFunc("gpxdata:altitude") });
+                                getExtensionValueFunc(ns % ":altitude") });
         
-    knownExtensions.insert("gpxdata:seaLevelPressure",
+    knownExtensions.insert(ns % ":seaLevelPressure",
                              { tr("Sea Level Pressure"), 4, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
-                                 getExtensionValueFunc("gpxdata:seaLevelPressure") });
+                                 getExtensionValueFunc(ns % ":seaLevelPressure") });
     
-    knownExtensions.insert("gpxdata:speed",
+    knownExtensions.insert(ns % ":speed",
                            { tr("Speed"), 5, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
-                             getExtensionValueFunc("gpxdata:speed")});
+                             getExtensionValueFunc(ns % ":speed")});
 
-    knownExtensions.insert("gpxdata:verticalSpeed",
+    knownExtensions.insert(ns % ":verticalSpeed",
                            { tr("Speed (vertical)"), 6, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
-                             getExtensionValueFunc("gpxdata:verticalSpeed")});
+                             getExtensionValueFunc(ns % ":verticalSpeed")});
 
 }
 
@@ -172,7 +172,7 @@ void CKnownExtension::init(const IUnit &units)
     initGarminTPXv1(units, "tp1");
 
     initMioTPX(units);
-    initClueTrustTPX(units);
+    initClueTrustTPXv1(units, "gpxdata");
 }
 
 const CKnownExtension CKnownExtension::get(const QString &name)

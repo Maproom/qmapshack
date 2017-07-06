@@ -1843,27 +1843,27 @@ line %2, column %3:
         <translation>Není souborem GPX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="264"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
         <source>File exists ...</source>
         <translation>Soubor existuje...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="265"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="269"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Soubor existuje a nebyl vytvořen programem QMapShack. Pokud stisknete Ano, budou všechna data v tomto souboru ztracena. I když by tento soubor obsahoval data GPX a byl nahrán programem QMapShack, QMapShack nemusí být schopen nahrát a uložit všechny prvky tohoto souboru.  Tyto prvky budou ztraceny. Doporučuje se použít jiný soubor. &lt;b&gt;Opravdu chcete soubor přepsat?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="382"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="386"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="392"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="404"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
         <source>Saving GIS data failed...</source>
         <translation>Nepodařilo se uložit data GIS...</translation>
     </message>

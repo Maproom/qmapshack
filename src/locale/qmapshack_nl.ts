@@ -1843,27 +1843,27 @@ lijn %2, kolom %3:
         <translation type="unfinished">Geen GPX bestand: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="264"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
         <source>File exists ...</source>
         <translation type="unfinished">Bestand bestaat al...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="265"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="269"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation type="unfinished">Dit bestand bestaat al en is niet in QMapShack gemaakt. Wanneer op &apos;Ja&apos; geklikt wordt zullen er gegevens verloren gaan. Alhoewel QMapShack dit GPX bestand kan openen is het mogelijk dat niet alle elementen opgeslagen kunnen worden. Geadviseerd wordt om een ander bestand te kiezen. &lt;b&gt;Moet dit bestand werkelijk overschreven worden?&lt;b/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="382"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="386"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation type="unfinished">Maken bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="392"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation type="unfinished">Schrijven bestand mislukt &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="404"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
         <source>Saving GIS data failed...</source>
         <translation type="unfinished">Opslaan GIS gegevens mislukt...</translation>
     </message>

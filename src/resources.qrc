@@ -205,6 +205,9 @@
         <file>icons/32x32/CSrcUnknown.png</file>
         <file>icons/32x32/CSrcAccel.png</file>
         <file>icons/32x32/CSrcCourse.png</file>
+        <file>icons/32x32/CSrcDistance.png</file>
+        <file>icons/32x32/CSrcSeaLevelPressure.png</file>
+        <file>icons/32x32/CSrcVertSpeed.png</file>
         <file>icons/32x32/Progress.png</file>
         <file>icons/32x32/FitProject.png</file>
         <file>icons/32x32/LineWidthUser.png</file>
@@ -399,6 +402,9 @@
         <file>icons/48x48/CSrcUnknown.png</file>
         <file>icons/48x48/CSrcAccel.png</file>
         <file>icons/48x48/CSrcCourse.png</file>
+        <file>icons/48x48/CSrcDistance.png</file>
+        <file>icons/48x48/CSrcSeaLevelPressure.png</file>
+        <file>icons/48x48/CSrcVertSpeed.png</file>
         <file>icons/48x48/Progress.png</file>
         <file>icons/48x48/FitProject.png</file>
         <file>icons/48x48/LineWidthUser.png</file>

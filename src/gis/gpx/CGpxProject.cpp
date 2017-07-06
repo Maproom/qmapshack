@@ -149,6 +149,10 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
             {
                 CKnownExtension::initGarminTPXv1(IUnit::self(), ns);
             }
+            else if(att.value() == gpxdata_ns)
+            {
+                CKnownExtension::initClueTrustTPXv1(IUnit::self(), ns);
+            }
         }
     }
 

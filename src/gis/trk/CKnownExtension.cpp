@@ -108,15 +108,6 @@ void CKnownExtension::initMioTPX(const IUnit &units)
 
 void CKnownExtension::initClueTrustTPX(const IUnit &units)
 {
-//    <gpxdata:cadence>0</gpxdata:cadence>
-//    <gpxdata:temp>31.6000003814697</gpxdata:temp>
-//    <gpxdata:distance>3</gpxdata:distance>
-//    <gpxdata:altitude>101</gpxdata:altitude>
-//    <gpxdata:seaLevelPressure>1002</gpxdata:seaLevelPressure>
-//    <gpxdata:speed>1.22307909143938</gpxdata:speed>
-//    <gpxdata:verticalSpeed>0.0299999993294477</gpxdata:verticalSpeed>
-
-
     knownExtensions.insert("gpxdata:cadence",
                            { tr("Cadence"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("gpxdata:cadence")});
@@ -124,13 +115,25 @@ void CKnownExtension::initClueTrustTPX(const IUnit &units)
     knownExtensions.insert("gpxdata:temp",
                            { tr("Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc("gpxdata:temp")});
-
+    
+    knownExtensions.insert("gpxdata:distance",
+                         { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
+                           getExtensionValueFunc("gpxdata:distance") });
+    
+    knownExtensions.insert("gpxdata:altitude",
+                            { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                                getExtensionValueFunc("gpxdata:altitude") });
+        
+    knownExtensions.insert("gpxdata:seaLevelPressure",
+                             { tr("Sea Level Pressure"), 4, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
+                                 getExtensionValueFunc("gpxdata:seaLevelPressure") });
+    
     knownExtensions.insert("gpxdata:speed",
                            { tr("Speed"), 5, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("gpxdata:speed")});
 
     knownExtensions.insert("gpxdata:verticalSpeed",
-                           { tr("Speed (vertical)"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed (vertical)"), 6, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
                              getExtensionValueFunc("gpxdata:verticalSpeed")});
 
 }

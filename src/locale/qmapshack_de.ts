@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -6873,7 +6873,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="844"/>
         <source>Ctrl+D</source>
-        <translation>Strg+D</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="511"/>

@@ -4615,12 +4615,12 @@ line %2, column %3:
     <message>
         <location filename="../helpers/CToolBarSetupDialog.cpp" line="43"/>
         <source>Available Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступные действия</translation>
     </message>
     <message>
         <location filename="../helpers/CToolBarSetupDialog.cpp" line="44"/>
         <source>Selected Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбранные действия</translation>
     </message>
 </context>
 <context>
@@ -6222,12 +6222,13 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="14"/>
         <source>Form</source>
+        <translatorcomment>Вычислить склон местности</translatorcomment>
         <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="51"/>
         <source>&lt;b&gt;Calculate Terrain Slope&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вычислить склон местности&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterTerrainSlope.ui" line="63"/>
@@ -6638,7 +6639,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="286"/>
         <source>Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель инструментов</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="301"/>
@@ -6942,22 +6943,22 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="826"/>
         <source>Setup Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка панели инструментов</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="838"/>
         <source>Toggle Docks</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить закрепленные окна</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="841"/>
         <source>Toggle visibility of dockable windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить видимость закрепленных окон</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="844"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished">Ctrl+D</translation>
+        <translation>Ctrl+D</translation>
     </message>
 </context>
 <context>
@@ -8522,37 +8523,37 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="22"/>
         <source>Available</source>
-        <translation type="unfinished">Доступно</translation>
+        <translation>Доступно</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="46"/>
         <source>Add to selected items</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить к выбранным элементам</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="60"/>
         <source>Remove from selected items</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить из выбранных элементов</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="78"/>
         <source>Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрано</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="102"/>
         <source>Move selected items up</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выбранные элементы вверх</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="116"/>
         <source>Move selected items down</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить выбранные элементы вниз</translation>
     </message>
     <message>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="49"/>
@@ -8560,7 +8561,7 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="105"/>
         <location filename="../widgets/ISelectDoubleListWidget.ui" line="119"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -9180,7 +9181,7 @@ or
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="14"/>
         <source>Setup Toolbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка панели инструментов</translation>
     </message>
 </context>
 <context>

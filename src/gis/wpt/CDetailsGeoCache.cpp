@@ -221,7 +221,7 @@ void CDetailsGeoCache::slotRequestFinished(QNetworkReply * reply)
     }
 
     QRegExp re1(".*CachePageImages.*");
-    QRegExp re2("(http://.*\\.jpg).*>(.*)</a>");
+    QRegExp re2("(https://.*\\.jpg).*>(.*)</a>");
     re2.setMinimal(true);
 
     bool watchOut       = false;

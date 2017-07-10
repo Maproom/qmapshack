@@ -1986,22 +1986,22 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Температура</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
         <source>Sea Level Pressure</source>
-        <translation type="unfinished"></translation>
+        <translation>Давление на уровень моря</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Speed (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость (вертикальная)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>

@@ -615,7 +615,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Изображение %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1063"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1068"/>
         <source>Unknown</source>
         <translation>Неизвестно</translation>
     </message>
@@ -1351,17 +1351,17 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="604"/>
+        <location filename="../gis/gpx/serialization.cpp" line="609"/>
         <source>Archived</source>
         <translation>Архивировано</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="608"/>
+        <location filename="../gis/gpx/serialization.cpp" line="613"/>
         <source>Available</source>
         <translation>Доступно</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="612"/>
+        <location filename="../gis/gpx/serialization.cpp" line="617"/>
         <source>Not Available</source>
         <translation>Не доступно</translation>
     </message>
@@ -1843,27 +1843,27 @@ line %2, column %3:
         <translation>Нет файла GPX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="264"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
         <source>File exists ...</source>
         <translation>Файл существует...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="265"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="269"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Файл существует и не создан в QMapShack. Если нажать &apos;да&apos; все данные в этом файле будут потеряны. Даже если этот файл содержит данные GPX и был загружен в QMapShack, QMapShack не может загрузить и сохранить все элементы этого файла. Такие элементы будут потеряны. Рекомендуется использовать другой файл. &lt;b&gt;Вы действительно хотите перезаписать этот файл?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="382"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="386"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Не удалось создать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="392"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Не удалось записать файл &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="404"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
         <source>Saving GIS data failed...</source>
         <translation>Не удалось сохранить данные GIS...</translation>
     </message>
@@ -1940,69 +1940,92 @@ line %2, column %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="63"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="65"/>
         <source>Air Temperature</source>
         <translation>Температура воздуха</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="69"/>
         <source>Water Temperature</source>
         <translation>Температура воды</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="73"/>
         <source>Depth</source>
         <translation>Глубина</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="87"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="77"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
         <source>Heart Rate</source>
         <translation>Пульс</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="81"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="93"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
         <source>Cadence</source>
         <translation>Каденция</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="95"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="97"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
         <source>Speed</source>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="101"/>
         <source>Acceleration</source>
         <translation>Ускорение</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="105"/>
         <source>Course</source>
         <translation>Курс</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
+        <source>Temperature</source>
+        <translation>Температура</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
+        <source>Distance</source>
+        <translation>Расстояние</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
+        <source>Sea Level Pressure</source>
+        <translation>Давление на уровень моря</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <source>Speed (vertical)</source>
+        <translation>Скорость (вертикальная)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>
         <source>Slope*</source>
         <translation>Наклон*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="117"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="151"/>
         <source>Speed*</source>
         <translation>Скорость*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="156"/>
         <source>Elevation</source>
         <translation>Высота</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
         <source>Progress</source>
         <translation>Выполнение</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="132"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
         <source>Terrain slope</source>
         <translation>Склон местности</translation>
     </message>

@@ -45,7 +45,6 @@ static QDateTime toDateTime(quint32 timestamp)
 {
     QDateTime dateTime;
     dateTime.setTime_t(sec1970to1990 + timestamp);
-    dateTime.setTimeSpec(Qt::UTC);
     return dateTime;
 }
 

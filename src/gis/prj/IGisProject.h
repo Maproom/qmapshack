@@ -478,6 +478,8 @@ public:
         return noUpdate;
     }
 
+    void filter(const QString& str);
+
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);

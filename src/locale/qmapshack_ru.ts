@@ -972,7 +972,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="247"/>
+        <location filename="../gis/fit/serialization.cpp" line="246"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>FIT файл %1 не содержит данных GPS.</translation>
     </message>
@@ -1791,27 +1791,27 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="110"/>
+        <location filename="../gis/CGisWidget.cpp" line="112"/>
         <source>Load project...</source>
         <translation>Загрузить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="110"/>
+        <location filename="../gis/CGisWidget.cpp" line="112"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="515"/>
+        <location filename="../gis/CGisWidget.cpp" line="538"/>
         <source>Copy items...</source>
         <translation>Копировать элемент ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="664"/>
+        <location filename="../gis/CGisWidget.cpp" line="687"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="664"/>
+        <location filename="../gis/CGisWidget.cpp" line="687"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
@@ -6422,28 +6422,43 @@ Filename: %1</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="49"/>
+        <location filename="../gis/IGisWidget.ui" line="37"/>
         <source>Opacity</source>
         <translation>Прозрачность</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="56"/>
+        <location filename="../gis/IGisWidget.ui" line="44"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="108"/>
-        <location filename="../gis/IGisWidget.ui" line="138"/>
+        <location filename="../gis/IGisWidget.ui" line="60"/>
+        <source>Filter</source>
+        <translation type="unfinished">Фильтр</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="72"/>
+        <source>Reset filter.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="75"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="124"/>
+        <location filename="../gis/IGisWidget.ui" line="154"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="143"/>
+        <location filename="../gis/IGisWidget.ui" line="159"/>
         <source>Age</source>
         <translation>Срок</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="177"/>
+        <location filename="../gis/IGisWidget.ui" line="193"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Для добавления базы данных сделайте щелчок правой кнопкой мышки на списке баз данных.</translation>
     </message>

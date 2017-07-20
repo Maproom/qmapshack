@@ -59,6 +59,8 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
     connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
+    connect(lineSearch, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
+    connect(toolCancelSearch, &QToolButton::pressed, lineSearch, &QLineEdit::clear);
 
     slotHelpText();
 
@@ -132,6 +134,27 @@ void CGisWidget::slotSetGisLayerOpacity(int val)
     {
         canvas->update();
     }
+}
+
+void CGisWidget::slotFilter(const QString& str)
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    const int N = treeWks->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        item->filter(str.toUpper());
+        item->setExpanded(!str.isEmpty());
+    }
+
+    CCanvas::restoreOverrideCursor("slotFilter");
 }
 
 void CGisWidget::slotSaveAll()

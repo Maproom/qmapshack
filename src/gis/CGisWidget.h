@@ -399,6 +399,7 @@ public slots:
 private slots:
     void slotHelpText();
     void slotSetGisLayerOpacity(int val);
+    void slotFilter(const QString& str);
 
 
 private:

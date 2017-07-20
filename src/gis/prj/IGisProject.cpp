@@ -1098,3 +1098,30 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
         break;
     }
 }
+
+void IGisProject::filter(const QString& str)
+{
+    const int N = childCount();
+
+    if(str.isEmpty())
+    {
+        for(int n = 0; n < N; n++)
+        {
+            child(n)->setHidden(false);
+        }
+        return;
+    }
+
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        item->setHidden(!item->getName().toUpper().contains(str));
+
+
+    }
+}

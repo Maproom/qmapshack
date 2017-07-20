@@ -972,7 +972,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="247"/>
+        <location filename="../gis/fit/serialization.cpp" line="246"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>FIT Dekodierfehler: Datei %1 enthält keine GPS Daten.</translation>
     </message>
@@ -1791,27 +1791,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="110"/>
+        <location filename="../gis/CGisWidget.cpp" line="112"/>
         <source>Load project...</source>
         <translation>Lade Projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="110"/>
+        <location filename="../gis/CGisWidget.cpp" line="112"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Das Projekt &quot;%1&quot; ist schon im Arbeitsplatz geladen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="515"/>
+        <location filename="../gis/CGisWidget.cpp" line="538"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="664"/>
+        <location filename="../gis/CGisWidget.cpp" line="687"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="664"/>
+        <location filename="../gis/CGisWidget.cpp" line="687"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
@@ -6418,28 +6418,43 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="49"/>
+        <location filename="../gis/IGisWidget.ui" line="37"/>
         <source>Opacity</source>
         <translation>Transparenz</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="56"/>
+        <location filename="../gis/IGisWidget.ui" line="44"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Ändert die Transparenz von allen GIS Elementen auf der Karte.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="108"/>
-        <location filename="../gis/IGisWidget.ui" line="138"/>
+        <location filename="../gis/IGisWidget.ui" line="60"/>
+        <source>Filter</source>
+        <translation>Filter</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="72"/>
+        <source>Reset filter.</source>
+        <translation>Filter zurücksetzen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="75"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWidget.ui" line="124"/>
+        <location filename="../gis/IGisWidget.ui" line="154"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="143"/>
+        <location filename="../gis/IGisWidget.ui" line="159"/>
         <source>Age</source>
         <translation>Alter</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="177"/>
+        <location filename="../gis/IGisWidget.ui" line="193"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
     </message>

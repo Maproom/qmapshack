@@ -165,11 +165,7 @@ void CMapIMG::slotSetTypeFile(const QString& filename)
 {
     IMap::slotSetTypeFile(filename);
     setupTyp();
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas != nullptr)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMap);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawMap);
 }
 
 

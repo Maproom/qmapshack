@@ -156,11 +156,7 @@ void CGisWidget::slotFilter(const QString& str)
 
     CCanvas::restoreOverrideCursor("slotFilter");
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas != nullptr)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisWidget::slotSaveAll()
@@ -474,11 +470,7 @@ void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
         project->blockUpdateItems(false);
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisWidget::editItemByKey(const IGisItem::key_t& key)
@@ -553,11 +545,7 @@ void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     }
     project->blockUpdateItems(false);
 
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)

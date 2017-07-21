@@ -1591,11 +1591,7 @@ void CGisListWks::slotSearchGoogle(bool on)
         searchGoogle = new CSearchGoogle(this);
     }
 
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }   
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisListWks::slotSyncWksDev()

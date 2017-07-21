@@ -160,9 +160,6 @@ void CSearchGoogle::slotRequestFinished(QNetworkReply* reply)
     }
 
     setExpanded(true);
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }

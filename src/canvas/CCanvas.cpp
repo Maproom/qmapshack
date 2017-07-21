@@ -156,6 +156,15 @@ void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
     QApplication::changeOverrideCursor(cursor);
 }
 
+void CCanvas::triggerCompleteUpdate(CCanvas::redraw_e flags)
+{
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(flags);
+    }
+}
+
 void CCanvas::saveConfig(QSettings& cfg)
 {
     map->saveConfig(cfg);

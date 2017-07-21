@@ -564,8 +564,11 @@ void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QSt
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
+    PROGRESS_SETUP(tr("Change waypoint symbols."), 0, keys.count(), this);
+    int cnt = 0;
     for(const IGisItem::key_t& key : keys)
     {
+        PROGRESS(cnt++, break);
         CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
         if(nullptr != wpt)
         {

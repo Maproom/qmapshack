@@ -155,6 +155,12 @@ void CGisWidget::slotFilter(const QString& str)
     }
 
     CCanvas::restoreOverrideCursor("slotFilter");
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas != nullptr)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    }
 }
 
 void CGisWidget::slotSaveAll()

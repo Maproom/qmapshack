@@ -115,19 +115,19 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
     knownExtensions.insert(ns % ":temp",
                            { tr("Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc(ns % ":temp")});
-    
+
     knownExtensions.insert(ns % ":distance",
-                         { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
-                           getExtensionValueFunc(ns % ":distance") });
-    
+                           { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
+                             getExtensionValueFunc(ns % ":distance") });
+
     knownExtensions.insert(ns % ":altitude",
-                            { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
-                                getExtensionValueFunc(ns % ":altitude") });
-        
+                           { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                             getExtensionValueFunc(ns % ":altitude") });
+
     knownExtensions.insert(ns % ":seaLevelPressure",
-                             { tr("Sea Level Pressure"), 4, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
-                                 getExtensionValueFunc(ns % ":seaLevelPressure") });
-    
+                           { tr("Sea Level Pressure"), 4, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
+                             getExtensionValueFunc(ns % ":seaLevelPressure") });
+
     knownExtensions.insert(ns % ":speed",
                            { tr("Speed"), 5, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":speed")});
@@ -135,7 +135,6 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
     knownExtensions.insert(ns % ":verticalSpeed",
                            { tr("Speed (vertical)"), 6, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":verticalSpeed")});
-
 }
 
 void CKnownExtension::init(const IUnit &units)

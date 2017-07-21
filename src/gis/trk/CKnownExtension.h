@@ -93,7 +93,6 @@ private:
     }
 
     static void initMioTPX(const IUnit &units);
-
 };
 
 #endif // CKNOWNEXTENSION_H

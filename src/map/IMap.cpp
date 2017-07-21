@@ -72,7 +72,7 @@ void IMap::loadConfig(QSettings& cfg) /* override */
     slotSetAdjustDetailLevel(cfg.value("adjustDetailLevel", getAdjustDetailLevel()).toInt());
     slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
     slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
-    slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());  
+    slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());
 }
 
 IMapProp *IMap::getSetup()

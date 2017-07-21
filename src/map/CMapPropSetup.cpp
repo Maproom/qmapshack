@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "helpers/Signals.h"
 #include "helpers/CSettings.h"
+#include "helpers/Signals.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"

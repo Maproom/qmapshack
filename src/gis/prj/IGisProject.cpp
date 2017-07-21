@@ -593,7 +593,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -615,7 +615,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -637,7 +637,7 @@ void IGisProject::mouseMove(const QPointF& pos)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -652,7 +652,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(nullptr == item)
+        if(nullptr == item )
         {
             continue;
         }
@@ -818,7 +818,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -837,7 +837,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -862,7 +862,7 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -1121,7 +1121,5 @@ void IGisProject::filter(const QString& str)
         }
 
         item->setHidden(!item->getName().toUpper().contains(str));
-
-
     }
 }

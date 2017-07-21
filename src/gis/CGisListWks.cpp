@@ -1595,7 +1595,7 @@ void CGisListWks::slotSearchGoogle(bool on)
     if(nullptr != canvas)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    }   
 }
 
 void CGisListWks::slotSyncWksDev()

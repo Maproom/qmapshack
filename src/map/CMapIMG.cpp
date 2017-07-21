@@ -127,7 +127,7 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 
 
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatVectorItems,parent)
+    : IMap(eFeatVisibility|eFeatVectorItems|eFeatTypFile,parent)
     , filename(filename)
     , fm(CMainWindow::self().getMapFont())
     , selectedLanguage(NOIDX)
@@ -150,6 +150,28 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
 
     isActivated = true;
 }
+
+void CMapIMG::loadConfig(QSettings& cfg)
+{
+    IMap::loadConfig(cfg);
+
+    if(!typeFile.isEmpty())
+    {
+        setupTyp();
+    }
+}
+
+void CMapIMG::slotSetTypeFile(const QString& filename)
+{
+    IMap::slotSetTypeFile(filename);
+    setupTyp();
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas != nullptr)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMap);
+    }
+}
+
 
 void CMapIMG::setupTyp()
 {
@@ -406,26 +428,47 @@ void CMapIMG::setupTyp()
 
     pointProperties.clear();
 
-    QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
-    while(subfile != subfiles.end())
+    if(!typeFile.isEmpty())
     {
-        if(!(*subfile).parts.contains("TYP"))
+        QFile file(typeFile);
+        if(!file.open(QIODevice::ReadOnly))
         {
-            ++subfile;
-            continue;
+            QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), tr("Raed external type file..."), tr("Failed to read type file: %1\nFall back to internal types.").arg(typeFile), QMessageBox::Ok);
+            typeFile.clear();
+            setupTyp();
+            return;
         }
 
-        CFileExt file(filename);
-        file.open(QIODevice::ReadOnly);
-
-        QByteArray array;
-        readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
-
+        QByteArray array = file.readAll();
         CGarminTyp typ;
         typ.decode(array, polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
 
         file.close();
-        break;
+    }
+    else
+    {
+
+        QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
+        while(subfile != subfiles.end())
+        {
+            if(!(*subfile).parts.contains("TYP"))
+            {
+                ++subfile;
+                continue;
+            }
+
+            CFileExt file(filename);
+            file.open(QIODevice::ReadOnly);
+
+            QByteArray array;
+            readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
+
+            CGarminTyp typ;
+            typ.decode(array, polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
+
+            file.close();
+            break;
+        }
     }
 }
 

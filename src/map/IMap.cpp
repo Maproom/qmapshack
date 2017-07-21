@@ -55,6 +55,11 @@ void IMap::saveConfig(QSettings& cfg) /* override */
         cfg.setValue("cacheSizeMB",     cacheSizeMB);
         cfg.setValue("cacheExpiration", cacheExpiration);
     }
+
+    if(hasFeatureTypFile())
+    {
+        cfg.setValue("typeFile", typeFile);
+    }
 }
 
 void IMap::loadConfig(QSettings& cfg) /* override */
@@ -67,6 +72,7 @@ void IMap::loadConfig(QSettings& cfg) /* override */
     slotSetAdjustDetailLevel(cfg.value("adjustDetailLevel", getAdjustDetailLevel()).toInt());
     slotSetCacheSize(cfg.value("cacheSizeMB", getCacheSize()).toInt());
     slotSetCacheExpiration(cfg.value("cacheExpiration", getCacheExpiration()).toInt());
+    slotSetTypeFile(cfg.value("typeFile", getTypeFile()).toString());  
 }
 
 IMapProp *IMap::getSetup()

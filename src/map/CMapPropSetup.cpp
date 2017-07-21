@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "helpers/Signals.h"
+#include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
 #include "map/CMapPropSetup.h"
 #include "map/IMap.h"
@@ -50,6 +51,9 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     connect(spinCacheSize,       static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheSize);
     connect(spinCacheExpiration, static_cast<void (QSpinBox::*)(int) >(&QSpinBox::valueChanged), mapfile, &IMap::slotSetCacheExpiration);
 
+    connect(toolOpenTypFile,    &QToolButton::pressed,      this,      &CMapPropSetup::slotLoadTypeFile);
+    connect(toolClearTypFile,   &QToolButton::pressed,      this,      &CMapPropSetup::slotClearTypeFile);
+
     frameVectorItems->setVisible( mapfile->hasFeatureVectorItems() );
     frameTileCache->setVisible( mapfile->hasFeatureTileCache() );
 
@@ -62,6 +66,8 @@ CMapPropSetup::CMapPropSetup(IMap * mapfile, CMapDraw *map)
     {
         frameLayers->hide();
     }
+
+    frameTypFile->setVisible(mapfile->hasFeatureTypFile());
 }
 
 CMapPropSetup::~CMapPropSetup()
@@ -99,6 +105,12 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
     labelCachePath->setToolTip(lbl);
     spinCacheSize->setValue(mapfile->getCacheSize());
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
+
+    // type file
+    QFileInfo fi(mapfile->getTypeFile());
+    labelTypeFile->setText(fi.completeBaseName());
+    labelTypeFile->setToolTip(fi.absoluteFilePath());
+    toolClearTypFile->setEnabled(!labelTypeFile->text().isEmpty());
 
     // unblock all signals
     X_____________UnBlockAllSignals_____________X(this);
@@ -174,4 +186,28 @@ void CMapPropSetup::updateScaleLabel()
     p.drawRect(ind);
 
     labelScale->setPixmap(pix);
+}
+
+
+void CMapPropSetup::slotLoadTypeFile()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/lastTypePath",QDir::homePath()).toString();
+    QString filename = QFileDialog::getOpenFileName(this, tr("Select type file..."), path, "Garmin type file (*.typ)");
+    if(filename.isEmpty())
+    {
+        return;
+    }
+
+    QFileInfo fi(filename);
+    cfg.setValue("Paths/lastTypePath", fi.absolutePath());
+
+    mapfile->slotSetTypeFile(filename);
+    slotPropertiesChanged();
+}
+
+void CMapPropSetup::slotClearTypeFile()
+{
+    mapfile->slotSetTypeFile("");
+    slotPropertiesChanged();
 }

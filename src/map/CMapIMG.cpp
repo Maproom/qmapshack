@@ -428,8 +428,8 @@ void CMapIMG::setupTyp()
     {
         QFile file(typeFile);
         if(!file.open(QIODevice::ReadOnly))
-        {
-            QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), tr("Raed external type file..."), tr("Failed to read type file: %1\nFall back to internal types.").arg(typeFile), QMessageBox::Ok);
+        {            
+            QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), tr("Read external type file..."), tr("Failed to read type file: %1\nFall back to internal types.").arg(typeFile), QMessageBox::Ok);
             typeFile.clear();
             setupTyp();
             return;
@@ -443,7 +443,6 @@ void CMapIMG::setupTyp()
     }
     else
     {
-
         QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
         while(subfile != subfiles.end())
         {

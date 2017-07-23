@@ -1791,27 +1791,32 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="112"/>
+        <location filename="../gis/CGisWidget.cpp" line="120"/>
         <source>Load project...</source>
         <translation>Загрузить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="112"/>
+        <location filename="../gis/CGisWidget.cpp" line="120"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="538"/>
+        <location filename="../gis/CGisWidget.cpp" line="564"/>
         <source>Copy items...</source>
         <translation>Копировать элемент ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="687"/>
+        <location filename="../gis/CGisWidget.cpp" line="587"/>
+        <source>Change waypoint symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="716"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="687"/>
+        <location filename="../gis/CGisWidget.cpp" line="716"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
@@ -2004,28 +2009,28 @@ line %2, column %3:
         <translation>Скорость (вертикальная)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="145"/>
         <source>Slope*</source>
         <translation>Наклон*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="151"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="150"/>
         <source>Speed*</source>
         <translation>Скорость*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="156"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
         <source>Elevation</source>
         <translation>Высота</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="160"/>
         <source>Progress</source>
         <translation>Выполнение</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
         <source>Terrain slope</source>
         <translation>Склон местности</translation>
     </message>
@@ -6422,43 +6427,43 @@ Filename: %1</source>
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="37"/>
+        <location filename="../gis/IGisWidget.ui" line="43"/>
         <source>Opacity</source>
         <translation>Прозрачность</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="44"/>
+        <location filename="../gis/IGisWidget.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="60"/>
+        <location filename="../gis/IGisWidget.ui" line="66"/>
         <source>Filter</source>
         <translation type="unfinished">Фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="72"/>
-        <source>Reset filter.</source>
+        <location filename="../gis/IGisWidget.ui" line="205"/>
+        <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="75"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
+        <location filename="../gis/IGisWidget.ui" line="214"/>
+        <source>Setup Filter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="124"/>
-        <location filename="../gis/IGisWidget.ui" line="154"/>
+        <location filename="../gis/IGisWidget.ui" line="116"/>
+        <location filename="../gis/IGisWidget.ui" line="146"/>
         <source>Name</source>
         <translation>Имя</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="159"/>
+        <location filename="../gis/IGisWidget.ui" line="151"/>
         <source>Age</source>
         <translation>Срок</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="193"/>
+        <location filename="../gis/IGisWidget.ui" line="185"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Для добавления базы данных сделайте щелчок правой кнопкой мышки на списке баз данных.</translation>
     </message>
@@ -8755,6 +8760,29 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/db/ISetupDatabase.ui" line="153"/>
         <source>SQLite</source>
         <translation>SQLite</translation>
+    </message>
+</context>
+<context>
+    <name>ISetupFilter</name>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="38"/>
+        <source>Apply filter to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="45"/>
+        <source>name only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="52"/>
+        <source>complete text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

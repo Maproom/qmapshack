@@ -1791,27 +1791,32 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="112"/>
+        <location filename="../gis/CGisWidget.cpp" line="120"/>
         <source>Load project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="112"/>
+        <location filename="../gis/CGisWidget.cpp" line="120"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="538"/>
+        <location filename="../gis/CGisWidget.cpp" line="564"/>
         <source>Copy items...</source>
         <translation type="unfinished">Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="687"/>
+        <location filename="../gis/CGisWidget.cpp" line="587"/>
+        <source>Change waypoint symbols.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWidget.cpp" line="716"/>
         <source>Cut Track...</source>
         <translation>Partir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="687"/>
+        <location filename="../gis/CGisWidget.cpp" line="716"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Desea borrar el track original?</translation>
     </message>
@@ -2004,28 +2009,28 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="145"/>
         <source>Slope*</source>
         <translation>Pendiente</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="151"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="150"/>
         <source>Speed*</source>
         <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="156"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
         <source>Elevation</source>
         <translation>Altitud</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="160"/>
         <source>Progress</source>
         <translation type="unfinished">Progreso</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
         <source>Terrain slope</source>
         <translation>Pendiente del terreno</translation>
     </message>
@@ -6421,43 +6426,43 @@ Nombre de archivo %1</translation>
         <translation type="unfinished">Formar</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="37"/>
+        <location filename="../gis/IGisWidget.ui" line="43"/>
         <source>Opacity</source>
         <translation type="unfinished">Opacidad</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="44"/>
+        <location filename="../gis/IGisWidget.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation type="unfinished">Cambiar opacidad para todos los elementos GIS del mapa</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="60"/>
+        <location filename="../gis/IGisWidget.ui" line="66"/>
         <source>Filter</source>
         <translation type="unfinished">Filtro</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="72"/>
-        <source>Reset filter.</source>
+        <location filename="../gis/IGisWidget.ui" line="205"/>
+        <source>Clear Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="75"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
+        <location filename="../gis/IGisWidget.ui" line="214"/>
+        <source>Setup Filter</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="124"/>
-        <location filename="../gis/IGisWidget.ui" line="154"/>
+        <location filename="../gis/IGisWidget.ui" line="116"/>
+        <location filename="../gis/IGisWidget.ui" line="146"/>
         <source>Name</source>
         <translation>Nombre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="159"/>
+        <location filename="../gis/IGisWidget.ui" line="151"/>
         <source>Age</source>
         <translation>Edad</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="193"/>
+        <location filename="../gis/IGisWidget.ui" line="185"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Para añadir una base de datos haga click-derecho en el espacio superior.  </translation>
     </message>
@@ -8752,6 +8757,29 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
         <source>Open existing database.</source>
         <translation>Abrir base de datos existente.</translation>
+    </message>
+</context>
+<context>
+    <name>ISetupFilter</name>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formar</translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="38"/>
+        <source>Apply filter to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="45"/>
+        <source>name only</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/ISetupFilter.ui" line="52"/>
+        <source>complete text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

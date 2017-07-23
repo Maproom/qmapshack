@@ -62,6 +62,12 @@ public:
         ,eSortFolderSymbol
     };
 
+    enum filter_mode_e
+    {
+        eFilterModeName
+        ,eFilterModeText
+    };
+
     struct person_t
     {
         QString name;
@@ -102,6 +108,8 @@ public:
     static const QString filedialogFilterFIT;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
+
+    static filter_mode_e filterMode;
 
     IGisProject(type_e type, const QString &filename, CGisListWks *parent);
     IGisProject(type_e type, const QString &filename, IDevice     *parent);

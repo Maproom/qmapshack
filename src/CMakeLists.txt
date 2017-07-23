@@ -194,6 +194,7 @@ set( SRCS
         gis/CGisListDB.cpp
         gis/CGisListWks.cpp
         gis/CSelDevices.cpp
+        gis/CSetupFilter.cpp
         gis/prj/IGisProject.cpp
         gis/prj/CDetailsPrj.cpp
         gis/gpx/CGpxProject.cpp
@@ -487,6 +488,7 @@ set( HDRS
         gis/CGisListDB.h
         gis/CGisListWks.h
         gis/CSelDevices.h
+        gis/CSetupFilter.h
         gis/qms/CQmsProject.h
         gis/tnv/CTwoNavProject.h
         gis/tcx/CTcxProject.h
@@ -690,6 +692,7 @@ set( UIS
     mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui
     gis/ISelDevices.ui
+    gis/ISetupFilter.ui
     gis/prj/IDetailsPrj.ui
     gis/db/ISetupDatabase.ui
     gis/db/ISetupWorkspace.ui

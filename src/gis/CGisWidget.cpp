@@ -20,6 +20,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
+#include "gis/CSetupFilter.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
@@ -50,17 +51,21 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
+
     treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
     treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
+    IGisProject::filterMode = IGisProject::filter_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::filterMode).toInt());
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
     connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
-    connect(lineSearch, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
-    connect(toolCancelSearch, &QToolButton::pressed, lineSearch, &QLineEdit::clear);
+    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
+    connect(actionSetupFilter, &QAction::triggered, this, &CGisWidget::slotSetupFilter);
 
     slotHelpText();
 
@@ -72,7 +77,7 @@ CGisWidget::~CGisWidget()
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
-
+    cfg.setValue("Workspace/projects/filterMode", IGisProject::filterMode);
     /*
         Explicitly delete workspace here, as database projects use
         CGisWidget upon destruction to signal the database their destruction.
@@ -136,6 +141,11 @@ void CGisWidget::slotSetGisLayerOpacity(int val)
     }
 }
 
+void CGisWidget::applyFilter()
+{
+    slotFilter(lineFilter->text());
+}
+
 void CGisWidget::slotFilter(const QString& str)
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
@@ -161,6 +171,14 @@ void CGisWidget::slotFilter(const QString& str)
     {
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
+}
+
+void CGisWidget::slotSetupFilter()
+{
+    CSetupFilter * setupFilter = new CSetupFilter(this);
+    setupFilter->adjustSize();
+    setupFilter->move(lineFilter->geometry().topLeft());
+    setupFilter->show();
 }
 
 void CGisWidget::slotSaveAll()

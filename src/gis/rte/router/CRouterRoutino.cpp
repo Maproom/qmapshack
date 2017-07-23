@@ -358,11 +358,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     mutex.unlock();
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 

@@ -1388,11 +1388,7 @@ void IPlot::slotAddWpt()
     }
 
     CGisWidget::self().addWptByPos({trkpt->lon, trkpt->lat});
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas != nullptr)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void IPlot::slotCutTrk()

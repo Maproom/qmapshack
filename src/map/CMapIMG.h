@@ -121,6 +121,8 @@ public:
     CMapIMG(const QString &filename, CMapDraw *parent);
     virtual ~CMapIMG() = default;
 
+    void loadConfig(QSettings& cfg) override;
+
     void draw(IDrawContext::buffer_t& buf) override;
 
     void getToolTip(const QPoint& px, QString& infotext) const override;
@@ -141,6 +143,8 @@ public:
      */
     bool findPolylineCloseBy(const QPointF &pt1, const QPointF &pt2, qint32 threshold, QPolygonF& polyline) override;
 
+public slots:
+    void slotSetTypeFile(const QString& filename) override;
 
 private:
     enum exce_e {eErrOpen, eErrAccess, errFormat, errLock, errAbort};

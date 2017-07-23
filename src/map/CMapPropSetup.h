@@ -40,6 +40,8 @@ private slots:
     void slotScaleChanged(const QPointF& s);
     void slotSetMinScale(bool checked);
     void slotSetMaxScale(bool checked);
+    void slotLoadTypeFile();
+    void slotClearTypeFile();
 
 private:
     void updateScaleLabel();

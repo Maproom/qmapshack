@@ -972,7 +972,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="246"/>
+        <location filename="../gis/fit/serialization.cpp" line="247"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1791,32 +1791,27 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="110"/>
         <source>Load project...</source>
         <translation>Project laden...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="110"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Het project &quot;%1&quot; is al geopend.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="564"/>
+        <location filename="../gis/CGisWidget.cpp" line="515"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopieer elementen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="587"/>
-        <source>Change waypoint symbols.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisWidget.cpp" line="716"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Cut Track...</source>
         <translation>Track knippen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="716"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Do you want to delete the original track?</source>
         <translation>Moet de orginele track verwijderd worden?</translation>
     </message>
@@ -2009,28 +2004,28 @@ lijn %2, kolom %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="145"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>
         <source>Slope*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="150"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="151"/>
         <source>Speed*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="156"/>
         <source>Elevation</source>
         <translation>Hoogte</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="160"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
         <source>Progress</source>
         <translation>Voortgang</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
         <source>Terrain slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6422,43 +6417,28 @@ Bestandsnaam: %1</translation>
         <translation>Formulier</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="43"/>
+        <location filename="../gis/IGisWidget.ui" line="49"/>
         <source>Opacity</source>
         <translation type="unfinished">Transparantie</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="50"/>
+        <location filename="../gis/IGisWidget.ui" line="56"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="66"/>
-        <source>Filter</source>
-        <translation type="unfinished">Filter</translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="205"/>
-        <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="214"/>
-        <source>Setup Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="116"/>
-        <location filename="../gis/IGisWidget.ui" line="146"/>
+        <location filename="../gis/IGisWidget.ui" line="108"/>
+        <location filename="../gis/IGisWidget.ui" line="138"/>
         <source>Name</source>
         <translation>Naam</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="151"/>
+        <location filename="../gis/IGisWidget.ui" line="143"/>
         <source>Age</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="185"/>
+        <location filename="../gis/IGisWidget.ui" line="177"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Om nieuwe database te maken doe een rechterklik op database erboven.</translation>
     </message>
@@ -8751,29 +8731,6 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
         <source>Open existing database.</source>
         <translation>Open bestaande database.</translation>
-    </message>
-</context>
-<context>
-    <name>ISetupFilter</name>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulier</translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="38"/>
-        <source>Apply filter to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="45"/>
-        <source>name only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="52"/>
-        <source>complete text</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

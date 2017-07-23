@@ -972,7 +972,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="246"/>
+        <location filename="../gis/fit/serialization.cpp" line="247"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Soubor FIT %1 neobsahuje žádná data GPS.</translation>
     </message>
@@ -1791,32 +1791,27 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="110"/>
         <source>Load project...</source>
         <translation>Nahrát projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="110"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Projekt &quot;%1&quot; je již náhrán do pracovního prostoru.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="564"/>
+        <location filename="../gis/CGisWidget.cpp" line="515"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="587"/>
-        <source>Change waypoint symbols.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisWidget.cpp" line="716"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Cut Track...</source>
         <translation>Rozkrojit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="716"/>
+        <location filename="../gis/CGisWidget.cpp" line="664"/>
         <source>Do you want to delete the original track?</source>
         <translation>Opravdu chcete smazat původní stopu?</translation>
     </message>
@@ -2009,28 +2004,28 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="145"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="146"/>
         <source>Slope*</source>
         <translation>Sklon*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="150"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="151"/>
         <source>Speed*</source>
         <translation>Rychlost*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="156"/>
         <source>Elevation</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="160"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="161"/>
         <source>Progress</source>
         <translation>Postup</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="166"/>
         <source>Terrain slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6422,43 +6417,28 @@ Název souboru: %1</translation>
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="43"/>
+        <location filename="../gis/IGisWidget.ui" line="49"/>
         <source>Opacity</source>
         <translation type="unfinished">Neprůhlednost</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="50"/>
+        <location filename="../gis/IGisWidget.ui" line="56"/>
         <source>Change the opacity of all GIS Items on the map.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="66"/>
-        <source>Filter</source>
-        <translation type="unfinished">Filtr</translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="205"/>
-        <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="214"/>
-        <source>Setup Filter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/IGisWidget.ui" line="116"/>
-        <location filename="../gis/IGisWidget.ui" line="146"/>
+        <location filename="../gis/IGisWidget.ui" line="108"/>
+        <location filename="../gis/IGisWidget.ui" line="138"/>
         <source>Name</source>
         <translation>Název</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="151"/>
+        <location filename="../gis/IGisWidget.ui" line="143"/>
         <source>Age</source>
         <translation>Věk</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWidget.ui" line="185"/>
+        <location filename="../gis/IGisWidget.ui" line="177"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Pro přidání databáze klepněte pravým tlačítkem myši na seznam s databázemi výše.</translation>
     </message>
@@ -8751,29 +8731,6 @@ Pokud zadáte &apos;slovo&apos;, provede se hledání přesné shody. Pokud zad�
         <location filename="../gis/db/ISetupDatabase.ui" line="89"/>
         <source>Open existing database.</source>
         <translation>Otevřít stávající databázi.</translation>
-    </message>
-</context>
-<context>
-    <name>ISetupFilter</name>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="14"/>
-        <source>Form</source>
-        <translation type="unfinished">Formulář</translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="38"/>
-        <source>Apply filter to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="45"/>
-        <source>name only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="52"/>
-        <source>complete text</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

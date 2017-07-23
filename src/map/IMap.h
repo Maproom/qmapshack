@@ -46,6 +46,7 @@ public:
         ,eFeatVectorItems = 0x00000002
         ,eFeatTileCache   = 0x00000004
         ,eFeatLayers      = 0x00000008
+        ,eFeatTypFile     = 0x00000010
     };
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
@@ -101,6 +102,11 @@ public:
         return flagsFeature & eFeatLayers;
     }
 
+    bool hasFeatureTypFile() const
+    {
+        return flagsFeature & eFeatTypFile;
+    }
+
     bool getShowPolygons() const
     {
         return showPolygons;
@@ -134,6 +140,11 @@ public:
     qint32 getAdjustDetailLevel() const
     {
         return adjustDetailLevel;
+    }
+
+    const QString& getTypeFile() const
+    {
+        return typeFile;
     }
 
     /**
@@ -183,6 +194,11 @@ public slots:
     void slotSetAdjustDetailLevel(qint32 level)
     {
         adjustDetailLevel = level;
+    }
+
+    virtual void slotSetTypeFile(const QString& filename)
+    {
+        typeFile = filename;
     }
 
 protected:
@@ -244,6 +260,8 @@ protected:
     qint32 cacheExpiration =   8; //< streaming map only: maximum age of tiles in cache [days]
 
     QString copyright; //< a copyright string to be displayed as tool tip
+
+    QString typeFile;
 };
 
 

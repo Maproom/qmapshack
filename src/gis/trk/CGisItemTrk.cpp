@@ -1977,13 +1977,7 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     resetMouseRange();
     mouseFocusOwner = (mode == eModeRange) ? owner : "";
 
-
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
     return true;
 }
 

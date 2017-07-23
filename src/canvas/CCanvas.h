@@ -58,6 +58,7 @@ public:
     static void restoreOverrideCursor(const QString &src);
     static void changeOverrideCursor(const QCursor& cursor, const QString &src);
 
+
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 
@@ -102,6 +103,8 @@ public:
         , eRedrawMouse = 0x08
         , eRedrawAll = 0xFFFFFFFF
     };
+
+    static void triggerCompleteUpdate(CCanvas::redraw_e flags);
 
 
     void resetMouse();

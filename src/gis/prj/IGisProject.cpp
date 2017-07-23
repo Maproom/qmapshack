@@ -49,7 +49,7 @@ const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
 const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
-
+IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -1120,6 +1120,15 @@ void IGisProject::filter(const QString& str)
             continue;
         }
 
-        item->setHidden(!item->getName().toUpper().contains(str));
+        switch(filterMode)
+        {
+        case eFilterModeName:
+            item->setHidden(!item->getName().toUpper().contains(str));
+            break;
+
+        case eFilterModeText:
+            item->setHidden(!item->getInfo(true, true).toUpper().contains(str));
+            break;
+        }
     }
 }

@@ -1701,7 +1701,8 @@ bool CGisListWks::event(QEvent * e)
 {
     if(e->type() > QEvent::User)
     {
-        CGisListWksEditLock lock(true, IGisItem::mutexItems);
+        const bool doWaitCursoer = (eEvtA2WCutTrk != event_types_e(e->type()));
+        CGisListWksEditLock lock(doWaitCursoer, IGisItem::mutexItems);
 
         switch(e->type())
         {

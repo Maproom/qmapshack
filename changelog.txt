@@ -1,3 +1,16 @@
+V 1.9.0
+Add: Garmin Maps: Allow external TYP files
+Add: Filter items on workspace by string
+Add: GPX: Support for Cluetrust extensions
+Add: Trk: Add filter to add terrain slope as extension
+Fix: Issue with time zone in fit files (Zulu instead of local time zone)
+Fix: GeoCaches: Fix regex to find attached images
+[Issue #84]  Have a floating toolbar with common tools
+[Issue #232] Zoom on touchscreen using two fingers is very jumpy
+[Issue #226] Display slope under cursor in status bar
+[Issue #230] New layout of edit toolbar and POI highlighting
+[Issue #229] Failure to add point to track
+
 V 1.8.1
 Fix: Various glitches introduced by the new FIT format
 Fix: Visual tile artefacts in the DEM layer

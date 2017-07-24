@@ -1808,7 +1808,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisWidget.cpp" line="573"/>
         <source>Change waypoint symbols.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить символов путевых точек.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="702"/>
@@ -2677,13 +2677,14 @@ If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready fo
     <message>
         <location filename="../map/CMapIMG.cpp" line="432"/>
         <source>Read external type file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить внешний файл типов...</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="432"/>
         <source>Failed to read type file: %1
 Fall back to internal types.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось читать файл типов: %1
+Возврат к внутренним типам.</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="474"/>
@@ -2805,7 +2806,7 @@ Fall back to internal types.</source>
     <message>
         <location filename="../map/CMapPropSetup.cpp" line="196"/>
         <source>Select type file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать файл типов...</translation>
     </message>
 </context>
 <context>
@@ -6458,7 +6459,7 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWidget.ui" line="66"/>
         <source>Filter</source>
-        <translation type="unfinished">Фильтр</translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="116"/>
@@ -6479,12 +6480,12 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWidget.ui" line="205"/>
         <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить фильтр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="214"/>
         <source>Setup Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка фильтра</translation>
     </message>
 </context>
 <context>
@@ -7166,17 +7167,17 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="353"/>
         <source>Type File:</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл типов:</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="367"/>
         <source>Forget external type file and use internal types.</source>
-        <translation type="unfinished"></translation>
+        <translation>Забыть внешний файл типов и использовать внутренние типы.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="381"/>
         <source>Load an external type file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить внешний файл типов.</translation>
     </message>
 </context>
 <context>
@@ -8803,22 +8804,22 @@ If you enter &apos;word&apos; a search with an exact match is done. If you enter
     <message>
         <location filename="../gis/ISetupFilter.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/ISetupFilter.ui" line="38"/>
         <source>Apply filter to</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить фильтр</translation>
     </message>
     <message>
         <location filename="../gis/ISetupFilter.ui" line="45"/>
         <source>name only</source>
-        <translation type="unfinished"></translation>
+        <translation>только к имени</translation>
     </message>
     <message>
         <location filename="../gis/ISetupFilter.ui" line="52"/>
         <source>complete text</source>
-        <translation type="unfinished"></translation>
+        <translation>к полному тексту</translation>
     </message>
 </context>
 <context>

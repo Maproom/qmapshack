@@ -261,7 +261,7 @@
     <message>
         <location filename="../gis/db/CDBItem.cpp" line="99"/>
         <source>%1 days</source>
-        <translation type="unfinished">%1 dias</translation>
+        <translation>%1 dias</translation>
     </message>
 </context>
 <context>
@@ -1808,7 +1808,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisWidget.cpp" line="573"/>
         <source>Change waypoint symbols.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar símbolos de waypoint</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="702"/>
@@ -1901,7 +1901,7 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="65"/>
         <source> by %1</source>
-        <translation type="unfinished">de %1</translation>
+        <translation>de %1</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="37"/>
@@ -1991,22 +1991,22 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
         <source>Temperature</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
         <source>Sea Level Pressure</source>
-        <translation type="unfinished"></translation>
+        <translation>Presión a nivel del mar</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Speed (vertical)</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad vertical</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="145"/>
@@ -2677,13 +2677,14 @@ Si no es divertido, ¿por qué no proporciona mapas? Bueno para alojar mapas lis
     <message>
         <location filename="../map/CMapIMG.cpp" line="432"/>
         <source>Read external type file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar archivo TYP externo...</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="432"/>
         <source>Failed to read type file: %1
 Fall back to internal types.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al cargar archivo TYP: %1
+Volver al TYP interno</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="474"/>
@@ -2805,7 +2806,7 @@ Fall back to internal types.</source>
     <message>
         <location filename="../map/CMapPropSetup.cpp" line="196"/>
         <source>Select type file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar archivo TYP</translation>
     </message>
 </context>
 <context>
@@ -4335,7 +4336,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="93"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Modo exacto&lt;/b&gt;&lt;br/&gt;Todos los elementos seleccionados estan completamente dentro del área.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="97"/>
@@ -4375,7 +4376,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="132"/>
         <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ignorar rutas&lt;/b&gt;&lt;br/&gt;Ignorar rutas en la lista de elementos seleccionados&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CScrOptSelect.cpp" line="136"/>
@@ -6456,7 +6457,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWidget.ui" line="66"/>
         <source>Filter</source>
-        <translation type="unfinished">Filtro</translation>
+        <translation>Filtro</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="116"/>
@@ -6477,12 +6478,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWidget.ui" line="205"/>
         <source>Clear Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar filtro</translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="214"/>
         <source>Setup Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar filtro</translation>
     </message>
 </context>
 <context>
@@ -7153,17 +7154,17 @@ No quiero ver la documentación</translation>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="353"/>
         <source>Type File:</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivo TYP:</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="367"/>
         <source>Forget external type file and use internal types.</source>
-        <translation type="unfinished"></translation>
+        <translation>Olvidar TYP externo y utilizar el interno.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="381"/>
         <source>Load an external type file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargar un archivo TYP externo.</translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="227"/>
@@ -8114,7 +8115,7 @@ o
     <message>
         <location filename="../mouse/IScrOptPrint.ui" line="55"/>
         <source>Print selected area.</source>
-        <translation type="unfinished">Imprimir área seleccionada</translation>
+        <translation>Imprimir área seleccionada</translation>
     </message>
 </context>
 <context>
@@ -8562,7 +8563,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation type="unfinished">Seleccione la carpeta principal.</translation>
+        <translation>Seleccione la carpeta principal.</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
@@ -8725,7 +8726,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="252"/>
         <source>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Caution!&lt;/span&gt; It is recommended to leave the password blank, as QMapShack will store it as plain text. If you don&apos;t give a password you will be asked for it on each startup.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Precación&lt;/span&gt; Se recomienda dejar la contraseña en blanco, ya que QMapShack lo almacenará como texto sin formato. Si no introduce una contraseña, se le pedirá que en cada inicio.&lt;/p&gt;</translation>
+        <translation>&lt;p align=&quot;justify&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Precación&lt;/span&gt; Se recomienda dejar la contraseña en blanco, ya que QMapShack lo almacenará como texto sin formato. Si no introduce una contraseña, se le pedirá que en cada inicio.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="239"/>
@@ -8804,17 +8805,17 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/ISetupFilter.ui" line="38"/>
         <source>Apply filter to</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar filtro a</translation>
     </message>
     <message>
         <location filename="../gis/ISetupFilter.ui" line="45"/>
         <source>name only</source>
-        <translation type="unfinished"></translation>
+        <translation>Solo nombre</translation>
     </message>
     <message>
         <location filename="../gis/ISetupFilter.ui" line="52"/>
         <source>complete text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto completo</translation>
     </message>
 </context>
 <context>
@@ -8870,7 +8871,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="49"/>
         <source>Name</source>
-        <translation type="unfinished">Nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <location filename="../gis/wpt/ISetupNewWpt.ui" line="59"/>
@@ -9309,7 +9310,7 @@ o
     <message>
         <location filename="../units/IUnit.cpp" line="728"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
-        <translation type="unfinished">Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
+        <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
         <location filename="../units/IUnit.cpp" line="734"/>

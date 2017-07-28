@@ -61,6 +61,7 @@ void CToolBarSetupDialog::accept()
         }
     }
     config->setConfiguredActionsByName(actionNames);
+    config->setVisibleInFullscreen(checkFullscreen->isChecked());
     QDialog::accept();
 }
 
@@ -103,5 +104,6 @@ void CToolBarSetupDialog::configure() const
     }
     selectActionsWidget->setSelected(selectedItems);
     selectActionsWidget->setAvailable(availableItems);
+    checkFullscreen->setChecked(config->visibleInFullscreen());
 }
 

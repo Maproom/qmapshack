@@ -538,5 +538,9 @@
         <file>icons/48x48/ToolBarSetup.png</file>
         <file>icons/32x32/ToolBar.png</file>
         <file>icons/48x48/ToolBar.png</file>
+        <file>icons/32x32/FullScreen.png</file>
+        <file>icons/32x32/RegularScreen.png</file>
+        <file>icons/48x48/FullScreen.png</file>
+        <file>icons/48x48/RegularScreen.png</file>
     </qresource>
 </RCC>

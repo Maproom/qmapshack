@@ -114,6 +114,8 @@ CMainWindow::CMainWindow()
 
     if(windowState() == Qt::WindowFullScreen)
     {
+        tabWidget->setTabBarVisible(false);
+        statusBar()->setVisible(false);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
     }
     cfg.endGroup();
@@ -155,9 +157,9 @@ CMainWindow::CMainWindow()
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
-    connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
+    connect(tabWidget,                   &CMainWidget::tabCloseRequested, this,     &CMainWindow::slotTabCloseRequest);
 
-    connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
+    connect(tabWidget,                   &CMainWidget::currentChanged,   this,      &CMainWindow::slotCurrentTabCanvas);
     connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
     connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
 
@@ -809,6 +811,7 @@ void CMainWindow::testForNoView()
 
     if(label && tabWidget->count() > 1)
     {
+        tabWidget->removeTab(tabWidget->indexOf(label));
         delete label;
     }
 }
@@ -817,7 +820,9 @@ void CMainWindow::slotTabCloseRequest(int i)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    delete tabWidget->widget(i);
+    QWidget * widget = tabWidget->widget(i);
+    tabWidget->removeTab(i);
+    delete widget;
 
     testForNoView();
 }
@@ -1230,6 +1235,7 @@ void CMainWindow::slotCloseTab()
         QWidget * widget = tabWidget->currentWidget();
         if(widget != nullptr)
         {
+            tabWidget->removeTab(tabWidget->indexOf(widget));
             widget->deleteLater();
         }
     }
@@ -1328,11 +1334,11 @@ void CMainWindow::slotFullScreen()
         {
             toolBar->setVisible(true);
         }
+        tabWidget->setTabBarVisible(true);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     }
     else
     {
-        windowStates = state;
         setWindowState(Qt::WindowFullScreen);
         statusBar()->setVisible(false);
         hasVisibleDocks = docksVisible();
@@ -1345,8 +1351,10 @@ void CMainWindow::slotFullScreen()
         {
             toolBar->setVisible(false);
         }
+        tabWidget->setTabBarVisible(false);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
     }
+    windowStates = state;
 }
 
 #ifdef WIN32

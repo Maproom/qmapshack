@@ -131,6 +131,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
+    connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
 
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
@@ -1265,6 +1266,24 @@ void CMainWindow::slotDockVisibilityChanged(bool visible)
         }
     }
     actionToggleDocks->setChecked(visible);
+}
+
+void CMainWindow::slotFullScreen()
+{
+    Qt::WindowStates state = windowState();
+    if(state == Qt::WindowFullScreen)
+    {
+        setWindowState(Qt::WindowMaximized);
+//        menuBar()->setVisible(true);
+        statusBar()->setVisible(true);
+    }
+    else
+    {
+        setWindowState(Qt::WindowFullScreen);
+//        menuBar()->setVisible(false);
+        statusBar()->setVisible(false);
+    }
+
 }
 
 #ifdef WIN32

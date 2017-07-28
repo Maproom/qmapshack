@@ -1,3 +1,21 @@
+/**********************************************************************************************
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
 #include "widgets/CMainWidget.h"
 
 #include <QVBoxLayout>
@@ -30,34 +48,34 @@ CMainWidget::~CMainWidget()
 
 }
 
-void CMainWidget::addTab(QWidget * widget, QString name)
+void CMainWidget::addTab(QWidget * widget, const QString & name) const
 {
     stackWidget->addWidget(widget);
     tabBar->addTab(name);
 }
 
-QWidget * CMainWidget::widget(int index)
+QWidget * CMainWidget::widget(int index) const
 {
     return stackWidget->widget(index);
 }
 
-QWidget * CMainWidget::currentWidget()
+QWidget * CMainWidget::currentWidget() const
 {
     return stackWidget->currentWidget();
 }
 
-int CMainWidget::currentIndex()
+int CMainWidget::currentIndex() const
 {
     return stackWidget->currentIndex();
 }
 
-void CMainWidget::setCurrentIndex(int index)
+void CMainWidget::setCurrentIndex(int index) const
 {
     stackWidget->setCurrentIndex(index);
     tabBar->setCurrentIndex(index);
 }
 
-void CMainWidget::setCurrentWidget(QWidget *widget)
+void CMainWidget::setCurrentWidget(QWidget *widget) const
 {
     stackWidget->setCurrentWidget(widget);
     tabBar->setCurrentIndex(stackWidget->currentIndex());
@@ -74,27 +92,27 @@ void CMainWidget::slotTabCloseRequested(int index)
     emit tabCloseRequested(index);
 }
 
-int CMainWidget::indexOf(QWidget *widget)
+int CMainWidget::indexOf(QWidget *widget) const
 {
     return stackWidget->indexOf(widget);
 }
 
-int CMainWidget::count()
+int CMainWidget::count() const
 {
     return stackWidget->count();
 }
 
-QString CMainWidget::tabText(int index)
+QString CMainWidget::tabText(int index) const
 {
     return tabBar->tabText(index);
 }
 
-void CMainWidget::setTabBarVisible(bool visible)
+void CMainWidget::setTabBarVisible(bool visible) const
 {
     tabBar->setVisible(visible);
 }
 
-void CMainWidget::removeTab(int index)
+void CMainWidget::removeTab(int index) const
 {
     tabBar->removeTab(index);
     QWidget * widget = stackWidget->widget(index);

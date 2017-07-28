@@ -226,6 +226,7 @@
         <file>icons/32x32/SortName.png</file>
         <file>icons/32x32/SaveGISAsGpx11.png</file>
         <file>icons/32x32/CopyTrkWithWpt.png</file>
+        <file>icons/32x32/Template.png</file>
         <file>icons/48x48/Add.png</file>
         <file>icons/48x48/AddMapWorkspace.png</file>
         <file>icons/48x48/CloneMapWorkspace.png</file>
@@ -423,6 +424,7 @@
         <file>icons/48x48/SortName.png</file>
         <file>icons/48x48/SaveGISAsGpx11.png</file>
         <file>icons/48x48/CopyTrkWithWpt.png</file>
+        <file>icons/48x48/Template.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>

@@ -22,6 +22,7 @@
 #include "CTextEditWidget.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
+#include "widgets/CTemplateWidget.h"
 #include "widgets/CTextEditWidgetSelMenu.h"
 
 #include <QtWidgets>
@@ -88,6 +89,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     colorChanged(textEdit->textColor());
     alignmentChanged(textEdit->alignment());
 
+    toolInsertFromTemplate->setDefaultAction(actionInsertFromTemplate);
     toolUndo->setDefaultAction(actionUndo);
     toolRedo->setDefaultAction(actionRedo);
     toolCut->setDefaultAction(actionCut);
@@ -101,6 +103,8 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
 
     /* Setup contextmenu for textEdit */
     menuTextEdit = new QMenu(this);
+    menuTextEdit->addAction(actionInsertFromTemplate);
+    menuTextEdit->addSeparator();
     menuTextEdit->addAction(actionUndo);
     menuTextEdit->addAction(actionRedo);
     menuTextEdit->addSeparator();
@@ -130,6 +134,7 @@ CTextEditWidget::CTextEditWidget(const QString &html, QWidget * parent)
     connect(textEdit->document(), &QTextDocument::undoAvailable, actionUndo, &QAction::setEnabled);
     connect(textEdit->document(), &QTextDocument::redoAvailable, actionRedo, &QAction::setEnabled);
 
+    connect(actionInsertFromTemplate, &QAction::triggered, this, &CTextEditWidget::insertFromTemplate);
     connect(actionUndo, &QAction::triggered, textEdit, &QTextEdit::undo);
     connect(actionRedo, &QAction::triggered, textEdit, &QTextEdit::redo);
 
@@ -178,6 +183,7 @@ QString CTextEditWidget::getHtml()
 
     return str;
 }
+
 
 void CTextEditWidget::textBold()
 {
@@ -505,4 +511,11 @@ void CTextEditWidget::updateSelectionWindow()
     {
         selectionWindow->hide();
     }
+}
+
+
+void CTextEditWidget::insertFromTemplate()
+{
+    CTemplateWidget dlg(this);
+    dlg.exec();
 }

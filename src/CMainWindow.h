@@ -145,6 +145,9 @@ private:
     CMainWindow();
     void prepareMenuForMac();
     void testForNoView();
+    bool docksVisible();
+    void showDocks();
+    void hideDocks();
 
     static CMainWindow * pSelf;
 
@@ -162,6 +165,10 @@ private:
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;
+    bool hasVisibleDocks;
+    bool hasVisibleToolbar;
+    Qt::WindowStates windowStates;
+
 };
 
 #endif //CMAINWINDOW_H

@@ -82,19 +82,42 @@ CMainWindow::CMainWindow()
     dockGis->setWidget(gisWidget);
 
     // start ---- restore window geometry -----
-    if ( cfg.contains("MainWindow/geometry"))
+    cfg.beginGroup(QStringLiteral("MainWindow"));
+    if ( cfg.contains(QStringLiteral("geometry")))
     {
-        restoreGeometry(cfg.value("MainWindow/geometry").toByteArray());
+        restoreGeometry(cfg.value(QStringLiteral("geometry")).toByteArray());
     }
     else
     {
         QTimer::singleShot(500, this, SLOT(showMaximized()));
     }
 
-    if ( cfg.contains("MainWindow/state"))
+    if ( cfg.contains(QStringLiteral("state")))
     {
-        restoreState(cfg.value("MainWindow/state").toByteArray());
+        restoreState(cfg.value(QStringLiteral("state")).toByteArray());
     }
+
+    if (cfg.contains(QStringLiteral("regularstate")))
+    {
+        windowStates = static_cast<Qt::WindowState>(cfg.value(QStringLiteral("regularstate")).toInt());
+    }
+
+    if (cfg.contains(QStringLiteral("visibledocks")))
+    {
+        hasVisibleDocks = cfg.value(QStringLiteral("visibledocks")).toBool();
+    }
+
+    if (cfg.contains(QStringLiteral("visibletoolbar")))
+    {
+        hasVisibleToolbar = cfg.value(QStringLiteral("visibletoolbar")).toBool();
+    }
+
+    if(windowState() == Qt::WindowFullScreen)
+    {
+        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
+    }
+    cfg.endGroup();
+
     // end ---- restore window geometry -----
 
     connect(actionAbout,                 &QAction::triggered,            this,      &CMainWindow::slotAbout);
@@ -305,7 +328,8 @@ CMainWindow::CMainWindow()
                      << actionToggleGis
                      << actionToggleRte
                      << actionToggleDocks
-                     << actionToggleToolBar;
+                     << actionToggleToolBar
+                     << actionFullScreen;
 
     QAction * separator1 = new QAction(QStringLiteral("---------------"),this);
     separator1->setSeparator(true);
@@ -329,7 +353,8 @@ CMainWindow::CMainWindow()
                    << actionToggleDem
                    << actionToggleGis
                    << actionToggleRte
-                   << actionToggleDocks;
+                   << actionToggleDocks
+                   << actionFullScreen;
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
     toolBarConfig->loadSettings();
@@ -355,15 +380,21 @@ CMainWindow::~CMainWindow()
     CActivityTrk::release();
 
     SETTINGS;
-    cfg.setValue("MainWindow/state", saveState());
-    cfg.setValue("MainWindow/geometry", saveGeometry());
-    cfg.setValue("MainWindow/units", IUnit::self().type);
+    cfg.beginGroup(QStringLiteral("MainWindow"));
+    cfg.setValue(QStringLiteral("state"), saveState());
+    cfg.setValue(QStringLiteral("geometry"), saveGeometry());
+    cfg.setValue(QStringLiteral("units"), IUnit::self().type);
     QStringList activeDockNames;
     for (QDockWidget * const & dock : activeDocks)
     {
         activeDockNames << dock->objectName();
     }
-    cfg.setValue("MainWindow/activedocks",activeDockNames);
+    cfg.setValue(QStringLiteral("activedocks"),activeDockNames);
+
+    cfg.setValue(QStringLiteral("regularstate"),static_cast<int>(windowStates));
+    cfg.setValue(QStringLiteral("visibledocks"),hasVisibleDocks);
+    cfg.setValue(QStringLiteral("visibletoolbar"),hasVisibleToolbar);
+    cfg.endGroup();
 
     /*
        The "Canvas" section will hold all settings global to all views
@@ -1206,44 +1237,58 @@ void CMainWindow::slotCloseTab()
 
 void CMainWindow::slotToggleDocks()
 {
-    bool isHidden = true;
+    if (docksVisible())
+    {
+        hideDocks();
+    }
+    else
+    {
+        showDocks();
+    }
+}
+
+bool CMainWindow::docksVisible()
+{
+    bool visible = false;
     for (QDockWidget * const & dock : docks)
     {
         if (!dock->isHidden())
         {
-            isHidden = false;
+            visible = true;
             break;
         }
     }
+    return visible;
+}
 
-    if (isHidden)
+void CMainWindow::showDocks()
+{
+    if (activeDocks.isEmpty())
     {
-        if (activeDocks.isEmpty())
+        for (QDockWidget * const & dock : docks)
         {
-            for (QDockWidget * const & dock : docks)
-            {
-                dock->show();
-            }
-        }
-        else
-        {
-            const QList<QDockWidget *> docksToShow(activeDocks);
-            for (QDockWidget * const & dock : docksToShow)
-            {
-                dock->show();
-            }
+            dock->show();
         }
     }
     else
     {
-        activeDocks.clear();
-        for (QDockWidget * const & dock : docks)
+        const QList<QDockWidget *> docksToShow(activeDocks);
+        for (QDockWidget * const & dock : docksToShow)
         {
-            if (!dock->isHidden())
-            {
-                dock->hide();
-                activeDocks << dock;
-            }
+            dock->show();
+        }
+    }
+}
+
+void CMainWindow::hideDocks()
+{
+    activeDocks.clear();
+    for (QDockWidget * const & dock : docks)
+    {
+        if (!dock->isHidden())
+        {
+            dock->hide();
+            activeDocks << dock;
         }
     }
 }
@@ -1273,17 +1318,35 @@ void CMainWindow::slotFullScreen()
     Qt::WindowStates state = windowState();
     if(state == Qt::WindowFullScreen)
     {
-        setWindowState(Qt::WindowMaximized);
-//        menuBar()->setVisible(true);
+        setWindowState(windowStates);
         statusBar()->setVisible(true);
+        if (hasVisibleDocks)
+        {
+            showDocks();
+        }
+        if (hasVisibleToolbar)
+        {
+            toolBar->setVisible(true);
+        }
+        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     }
     else
     {
+        windowStates = state;
         setWindowState(Qt::WindowFullScreen);
-//        menuBar()->setVisible(false);
         statusBar()->setVisible(false);
+        hasVisibleDocks = docksVisible();
+        if (hasVisibleDocks)
+        {
+            hideDocks();
+        }
+        hasVisibleToolbar = toolBar->isVisible();
+        if (hasVisibleToolbar && !toolBarConfig->visibleInFullscreen())
+        {
+            toolBar->setVisible(false);
+        }
+        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
     }
-
 }
 
 #ifdef WIN32

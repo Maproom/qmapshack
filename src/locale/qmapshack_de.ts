@@ -7949,7 +7949,7 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="89"/>
         <source>Move points. (Ctrl+M)</source>
-        <translation>Punkte verschieben. (Ctrl+M)</translation>
+        <translation>Punkte verschieben. (Strg+M)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="99"/>
@@ -7959,7 +7959,7 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="115"/>
         <source>Add new points. (Ctrl++)</source>
-        <translation>Punkte hinzufügen. (Ctrl++)</translation>
+        <translation>Punkte hinzufügen. (Strg++)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
@@ -7977,19 +7977,9 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
-        <source>Delete a point. (Ctrl+D)</source>
-        <translation>Einen Punkt löschen (Ctrl+D)</translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
-        <source>Ctrl+D</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
-        <translation>Kein Auto-Routing oder Fangen an Linie (Ctrl+O)</translation>
+        <translation>Kein Auto-Routing oder Fangen an Linie (Strg+O)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
@@ -7999,7 +7989,7 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
         <source>Use auto-routing to between points. (Ctrl+A)</source>
-        <translation>Auto-Routing zwischen Punkten benutzen. (Ctrl+A)</translation>
+        <translation>Auto-Routing zwischen Punkten benutzen. (Strg+A)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
@@ -8009,7 +7999,7 @@ sein</translation>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
         <source>Snap line along lines of a vector map. (Ctrl+V)</source>
-        <translation>Fängt die Linie entlang Linien einer Vektorkarte. (Ctrl+V)</translation>
+        <translation>Fängt die Linie entlang Linien einer Vektorkarte. (Strg+V)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="92"/>
@@ -8019,6 +8009,16 @@ sein</translation>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="300"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
         <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
+        <source>Delete a point. (Ctrl+-)</source>
+        <translation>Punkte löschen (Strg+-)</translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
+        <source>Ctrl+-</source>
         <translation></translation>
     </message>
     <message>

@@ -7947,12 +7947,12 @@ or
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
-        <source>Delete a point. (Ctrl+D)</source>
+        <source>Delete a point. (Ctrl+-)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
-        <source>Ctrl+D</source>
+        <source>Ctrl+-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

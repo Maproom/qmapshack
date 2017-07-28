@@ -7969,16 +7969,6 @@ or
         <translation>CTRL + R</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
-        <source>Delete a point. (Ctrl+D)</source>
-        <translation>Supprimer une point (CTRL + D)</translation>
-    </message>
-    <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
-        <source>Ctrl+D</source>
-        <translation>CTRL + D</translation>
-    </message>
-    <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
         <source>No auto-routing or line snapping (Ctrl+O)</source>
         <translation>Pas d&apos;autoroutge ou de suivi le ligne automatique (CTRL + O)</translation>
@@ -8012,6 +8002,16 @@ or
         <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
         <source>...</source>
         <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
+        <source>Delete a point. (Ctrl+-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
+        <source>Ctrl+-</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>

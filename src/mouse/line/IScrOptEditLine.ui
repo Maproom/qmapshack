@@ -158,7 +158,7 @@
         <item>
          <widget class="QToolButton" name="toolDeletePoint">
           <property name="toolTip">
-           <string>Delete a point. (Ctrl+D)</string>
+           <string>Delete a point. (Ctrl+-)</string>
           </property>
           <property name="text">
            <string>...</string>
@@ -168,7 +168,7 @@
             <normaloff>:/icons/32x32/PointDel.png</normaloff>:/icons/32x32/PointDel.png</iconset>
           </property>
           <property name="shortcut">
-           <string>Ctrl+D</string>
+           <string>Ctrl+-</string>
           </property>
           <property name="checkable">
            <bool>true</bool>

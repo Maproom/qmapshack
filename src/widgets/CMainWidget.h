@@ -1,3 +1,21 @@
+/**********************************************************************************************
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
 #ifndef CMAINWIDGET_H
 #define CMAINWIDGET_H
 
@@ -13,25 +31,23 @@ public:
     CMainWidget(QWidget * parent);
     virtual ~CMainWidget();
 
-    void addTab(QWidget * widget, QString name);
-    QWidget * widget(int index);
-    QWidget * currentWidget();
-    int currentIndex();
-    int indexOf(QWidget * widget);
-    int count();
-    QString tabText(int index);
-    void setTabBarVisible(bool visible);
-    void removeTab(int index);
+    void addTab(QWidget * widget, QString const & name) const;
+    QWidget * widget(int index) const;
+    QWidget * currentWidget() const;
+    int currentIndex() const;
+    int indexOf(QWidget * widget) const;
+    int count() const;
+    QString tabText(int index) const;
+    void setTabBarVisible(bool visible) const;
+    void removeTab(int index) const;
 
 public slots:
-    void setCurrentIndex(int index);
-    void setCurrentWidget(QWidget *widget);
+    void setCurrentIndex(int index) const;
+    void setCurrentWidget(QWidget * widget) const;
 
 signals:
     void currentChanged(int index);
     void tabCloseRequested(int index);
-//    void tabBarClicked(int index);
-//    void tabBarDoubleClicked(int index);
 
 private slots:
     void slotCurrentChanged(int index);

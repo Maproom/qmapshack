@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -103,6 +103,7 @@
      <string>Window</string>
     </property>
     <addaction name="actionCloseTab"/>
+    <addaction name="actionFullScreen"/>
     <addaction name="actionToggleDocks"/>
     <addaction name="separator"/>
     <addaction name="actionSetupToolbar"/>
@@ -842,6 +843,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionFullScreen">
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
    </property>
   </action>
  </widget>

@@ -138,6 +138,7 @@ private slots:
     void slotCloseTab();
     void slotToggleDocks();
     void slotDockVisibilityChanged(bool visible);
+    void slotFullScreen();
 
 private:
     friend int main(int argc, char ** argv);

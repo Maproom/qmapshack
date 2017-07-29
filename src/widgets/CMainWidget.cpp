@@ -30,7 +30,7 @@ CMainWidget::CMainWidget(QWidget * parent) : QWidget(parent)
     tabBar = new QTabBar(this);
     tabBar->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
     tabBar->setTabsClosable(true);
-    tabBar->setMovable(true);
+    tabBar->setMovable(false);
     tabBar->setCurrentIndex(-1);
     layout->addWidget(tabBar);
     tabBar->show();

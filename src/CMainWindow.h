@@ -138,12 +138,16 @@ private slots:
     void slotCloseTab();
     void slotToggleDocks();
     void slotDockVisibilityChanged(bool visible);
+    void slotFullScreen();
 
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();
     void prepareMenuForMac();
     void testForNoView();
+    bool docksVisible();
+    void showDocks();
+    void hideDocks();
 
     static CMainWindow * pSelf;
 
@@ -161,6 +165,10 @@ private:
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;
+    bool hasVisibleDocks;
+    bool hasVisibleToolbar;
+    Qt::WindowStates windowStates;
+
 };
 
 #endif //CMAINWINDOW_H

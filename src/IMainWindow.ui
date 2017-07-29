@@ -20,34 +20,13 @@
    <iconset resource="resources.qrc">
     <normaloff>:/icons/48x48/QMapShack.png</normaloff>:/icons/48x48/QMapShack.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>0</number>
-    </property>
-    <property name="topMargin">
-     <number>0</number>
-    </property>
-    <property name="rightMargin">
-     <number>0</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
-    <item>
-     <widget class="QTabWidget" name="tabWidget">
-      <property name="currentIndex">
-       <number>-1</number>
-      </property>
-      <property name="tabsClosable">
-       <bool>true</bool>
-      </property>
-     </widget>
-    </item>
-   </layout>
+  <widget class="CMainWidget" name="tabWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -55,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -103,6 +82,7 @@
      <string>Window</string>
     </property>
     <addaction name="actionCloseTab"/>
+    <addaction name="actionFullScreen"/>
     <addaction name="actionToggleDocks"/>
     <addaction name="separator"/>
     <addaction name="actionSetupToolbar"/>
@@ -844,12 +824,30 @@
     <string>Ctrl+D</string>
    </property>
   </action>
+  <action name="actionFullScreen">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/FullScreen.png</normaloff>:/icons/32x32/FullScreen.png</iconset>
+   </property>
+   <property name="text">
+    <string>Full Screen</string>
+   </property>
+   <property name="shortcut">
+    <string>F11</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
    <class>CRouterSetup</class>
    <extends>QWidget</extends>
    <header>gis/rte/router/CRouterSetup.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CMainWidget</class>
+   <extends>QWidget</extends>
+   <header>widgets/CMainWidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -818,8 +818,7 @@ void CMainWindow::slotTabCloseRequest(int i)
 {
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
-    QWidget * widget = tabWidget->widget(i);
-    delete widget;
+    delete tabWidget->widget(i);
 
     testForNoView();
 }

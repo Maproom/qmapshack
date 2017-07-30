@@ -1351,6 +1351,8 @@ void CMainWindow::displayFullscreen()
     setWindowState(Qt::WindowFullScreen);
     statusBar()->setVisible(false);
     menuVisible = menuBar()->isVisible();
+    // menu is handled dynamically as on some platforms (e.g. ubuntu with unity)
+    // the menu is not visible but it's actions are active nevertheless
     if (menuVisible)
     {
         menuBar()->setVisible(false);

@@ -16,7 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CTemplateWidget.h"
+#include "helpers/CSettings.h"
+#include "helpers/String.h"
+#include "widgets/CTemplateWidget.h"
 
 #include <QtGui>
 #include <QtUiTools>
@@ -25,14 +27,150 @@ CTemplateWidget::CTemplateWidget(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
-
-//    QUiLoader loader;
-//    QFile file(filename);
-//    file.open(QFile::ReadOnly);
-//    QWidget *myWidget = loader.load(&file, this);
-//    file.close();
-
-//    layoutWidget->addWidget(myWidget);
+    connect(comboTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CTemplateWidget::slotTemplateActivated);
+    connect(pushPreview, &QPushButton::pressed, this, &CTemplateWidget::slotPreview);
+    listTemplates();
 }
 
 
+void CTemplateWidget::listTemplates()
+{
+    comboTemplates->clear();
+    comboTemplates->addItem(tr("choose one..."));
+    comboTemplates->addItem(tr("Hiking Tour Summary"), s_("://templates/Hiking_Tour_Summary.ui"));
+
+    SETTINGS;
+    const QVariant& data = cfg.value(s_("TextEditWidget/template"), "");
+
+    if(int idx = comboTemplates->findData(data) != -1)
+    {
+        comboTemplates->setCurrentIndex(idx);
+    }
+}
+
+QString CTemplateWidget::text()
+{
+    if(widget.isNull())
+    {
+        return s_("");
+    }
+    QString str;
+
+    QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegExp("group.*"), Qt::FindDirectChildrenOnly);
+    qSort(groups.begin(), groups.end(), [](const QGroupBox * g1, const QGroupBox * g2){return g1->objectName() < g2->objectName();});
+
+    for(const QGroupBox * group : groups)
+    {
+        str += QString(s_("<p><b>%1</b>: ")).arg(group->title());
+        str += resolveGroup(group);
+        str += s_("</p>");
+    }
+
+    return str;
+}
+
+QString CTemplateWidget::resolveGroup(const QGroupBox * group)
+{
+
+    QString str;
+    QList<QWidget *> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
+    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->objectName() < w2->objectName();});
+
+    for(const QWidget * w : widgets)
+    {
+        const QString pre(str.isEmpty() ? s_("") : s_(", "));
+
+
+        if(w->objectName().startsWith(s_("check")))
+        {
+            const QCheckBox * obj = dynamic_cast<const QCheckBox*>(w);
+            if((obj != nullptr) && obj->isChecked())
+            {
+                str += pre + obj->text().replace(s_("&"),s_(""));
+            }
+        }
+        else if(w->objectName().startsWith(s_("radio")))
+        {
+            const QRadioButton * obj = dynamic_cast<const QRadioButton*>(w);
+            if((obj != nullptr) && obj->isChecked())
+            {
+                str += pre + obj->text().replace(s_("&"),s_(""));
+            }
+        }
+        else if(w->objectName().startsWith(s_("combo")))
+        {
+            const QComboBox * obj = dynamic_cast<const QComboBox*>(w);
+            if(obj != nullptr && !obj->currentText().isEmpty())
+            {
+                str += pre + obj->currentText();
+            }
+        }
+        else if(w->objectName().startsWith(s_("line")))
+        {
+            const QLineEdit * obj = dynamic_cast<const QLineEdit*>(w);
+            if((obj != nullptr) && !obj->text().simplified().isEmpty())
+            {
+                str += pre + obj->text();
+            }
+        }
+        else if(w->objectName().startsWith(s_("text")))
+        {
+            const QTextEdit * obj = dynamic_cast<const QTextEdit*>(w);
+            if((obj != nullptr) && !obj->toPlainText().simplified().isEmpty())
+            {
+                str += pre + obj->toHtml();
+            }
+        }
+    }
+
+    return str;
+}
+
+void CTemplateWidget::slotTemplateActivated(int idx)
+{
+    SETTINGS;
+
+    delete widget;
+    if(idx == 0)
+    {
+        return;
+    }
+
+    const QString& filename = comboTemplates->itemData(idx).toString();
+    QFile file(filename);
+    if(!file.open(QFile::ReadOnly))
+    {
+        QMessageBox::critical(this, tr("Failed..."), tr("Failed to read template file %1.").arg(filename));
+        comboTemplates->setCurrentIndex(0);
+        cfg.setValue(s_("TextEditWidget/template"), s_(""));
+    }
+    else
+    {
+        widget = QUiLoader().load(&file, this);
+        layoutWidget->addWidget(widget);
+        file.close();
+        cfg.setValue(s_("TextEditWidget/template"), filename);
+    }   
+}
+
+void CTemplateWidget::slotPreview()
+{
+    QTextBrowser * preview = new QTextBrowser();
+
+    preview->setAttribute(Qt::WA_DeleteOnClose, true);
+    preview->setWindowModality(Qt::ApplicationModal);
+    preview->setReadOnly(true);
+    preview->setHtml(text());
+    preview->setWindowTitle(tr("Preview..."));
+
+    preview->setMinimumWidth(600);
+    preview->move(QApplication::desktop()->screen()->rect().center() - preview->rect().center());
+    preview->show();
+    preview->raise();
+
+    QAction * action = new QAction(preview);
+    action->setShortcut(Qt::Key_Escape);
+
+    preview->addAction(action);
+    connect(action, &QAction::triggered, preview, &QTextBrowser::close);
+}

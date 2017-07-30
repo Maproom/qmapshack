@@ -517,5 +517,9 @@ void CTextEditWidget::updateSelectionWindow()
 void CTextEditWidget::insertFromTemplate()
 {
     CTemplateWidget dlg(this);
-    dlg.exec();
+    if(dlg.exec() == QDialog::Accepted)
+    {
+        textEdit->insertHtml(dlg.text());
+    }
+
 }

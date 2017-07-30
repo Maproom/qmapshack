@@ -405,6 +405,7 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
+        helpers/String.h
         helpers/CToolBarConfig.h
         helpers/CToolBarSetupDialog.h
         canvas/CCanvas.h
@@ -749,6 +750,7 @@ set( UIS
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui
     print/IPrintDialog.ui
+    templates/Hiking_Tour_Summary.ui
 )
 
 

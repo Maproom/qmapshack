@@ -16,35 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef CTEMPLATEWIDGET_H
-#define CTEMPLATEWIDGET_H
+#ifndef STRING_H
+#define STRING_H
 
-#include <QDialog>
-#include <QPointer>
+#define s_(x) QStringLiteral(x)
 
-#include "ui_ITemplateWidget.h"
-
-class QGroupBox;
-
-class CTemplateWidget : public QDialog, private Ui::ITemplateWidget
-{
-public:
-    CTemplateWidget(QWidget * parent);
-    virtual ~CTemplateWidget() = default;
-
-    QString text();
-
-private slots:
-    void slotTemplateActivated(int idx);
-    void slotPreview();
-
-private:
-    void listTemplates();
-    QString resolveGroup(const QGroupBox * group);
-
-
-    QPointer<QWidget> widget;
-};
-
-#endif //CTEMPLATEWIDGET_H
+#endif //STRING_H
 

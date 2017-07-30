@@ -170,6 +170,8 @@ private:
     Qt::WindowStates displayMode = Qt::WindowMaximized;
     QByteArray dockStates;
     bool menuVisible = false;
+
+    static QMutex mutex;
 };
 
 #endif //CMAINWINDOW_H

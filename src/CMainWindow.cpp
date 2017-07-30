@@ -1336,6 +1336,10 @@ void CMainWindow::displayRegular()
     if (menuVisible)
     {
         menuBar()->setVisible(true);
+        for (QAction * action : menuBar()->actions())
+        {
+            removeAction(action);
+        }
     }
     actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     setWindowState(displayMode);
@@ -1350,6 +1354,10 @@ void CMainWindow::displayFullscreen()
     if (menuVisible)
     {
         menuBar()->setVisible(false);
+        for (QAction * action : menuBar()->actions())
+        {
+            addAction(action);
+        }
     }
     if (docksVisible())
     {

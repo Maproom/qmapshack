@@ -526,6 +526,7 @@
         <file>map/OpenStreetMap.tms</file>
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
+        <file>templates/Hiking_Tour_Summary.ui</file>
         <file>icons/32x32/ToolBarSetup.png</file>
         <file>icons/32x32/ToggleDem.png</file>
         <file>icons/32x32/ToggleGis.png</file>

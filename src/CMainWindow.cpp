@@ -810,7 +810,6 @@ void CMainWindow::testForNoView()
 
     if(label && tabWidget->count() > 1)
     {
-        tabWidget->removeTab(tabWidget->indexOf(label));
         delete label;
     }
 }
@@ -820,7 +819,6 @@ void CMainWindow::slotTabCloseRequest(int i)
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
 
     QWidget * widget = tabWidget->widget(i);
-    tabWidget->removeTab(i);
     delete widget;
 
     testForNoView();
@@ -1234,7 +1232,6 @@ void CMainWindow::slotCloseTab()
         QWidget * widget = tabWidget->currentWidget();
         if(widget != nullptr)
         {
-            tabWidget->removeTab(tabWidget->indexOf(widget));
             widget->deleteLater();
         }
     }

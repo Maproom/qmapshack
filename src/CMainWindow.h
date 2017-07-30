@@ -148,6 +148,8 @@ private:
     bool docksVisible() const;
     void showDocks() const;
     void hideDocks();
+    void displayRegular();
+    void displayFullscreen();
 
     static CMainWindow * pSelf;
 
@@ -165,10 +167,8 @@ private:
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;
-    bool hasVisibleDocks = true;
-    bool hasVisibleToolbar = true;
-    Qt::WindowStates windowStates = Qt::WindowMaximized;
-
+    Qt::WindowStates displayMode = Qt::WindowMaximized;
+    QByteArray dockStates;
 };
 
 #endif //CMAINWINDOW_H

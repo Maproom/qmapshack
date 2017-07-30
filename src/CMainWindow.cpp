@@ -361,6 +361,16 @@ CMainWindow::CMainWindow()
 
     prepareMenuForMac();
 
+    // make sure all actions that have a shortcut are available even when menu and toolbar are not visible
+    for (QAction * action : availableActions)
+    {
+        if (!action->shortcuts().isEmpty())
+        {
+            addAction(action);
+        }
+    }
+
+
     loadGISData(qlOpts->arguments);
 
     QTimer::singleShot(100, this, SLOT(slotSanityTest()));
@@ -1336,10 +1346,6 @@ void CMainWindow::displayRegular()
     if (menuVisible)
     {
         menuBar()->setVisible(true);
-        for (QAction * action : menuBar()->actions())
-        {
-            removeAction(action);
-        }
     }
     actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     setWindowState(displayMode);
@@ -1356,10 +1362,6 @@ void CMainWindow::displayFullscreen()
     if (menuVisible)
     {
         menuBar()->setVisible(false);
-        for (QAction * action : menuBar()->actions())
-        {
-            addAction(action);
-        }
     }
     if (docksVisible())
     {

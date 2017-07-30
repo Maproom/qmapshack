@@ -37,6 +37,7 @@ public:
 private slots:
     void slotTemplateActivated(int idx);
     void slotPreview();
+    void slotSetPath();
 
 private:
     void listTemplates();

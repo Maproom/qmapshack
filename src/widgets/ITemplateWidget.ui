@@ -38,6 +38,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolPathTemplates">
+       <property name="toolTip">
+        <string>Select a path with your own templates.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>

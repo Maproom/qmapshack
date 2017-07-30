@@ -29,6 +29,7 @@ CTemplateWidget::CTemplateWidget(QWidget *parent)
     setupUi(this);
     connect(comboTemplates, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CTemplateWidget::slotTemplateActivated);
     connect(pushPreview, &QPushButton::pressed, this, &CTemplateWidget::slotPreview);
+    connect(toolPathTemplates, &QToolButton::pressed, this, &CTemplateWidget::slotSetPath);
     listTemplates();
 }
 
@@ -37,12 +38,25 @@ void CTemplateWidget::listTemplates()
 {
     comboTemplates->clear();
     comboTemplates->addItem(tr("choose one..."));
-    comboTemplates->addItem(tr("Hiking Tour Summary"), s_("://templates/Hiking_Tour_Summary.ui"));
+    comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), s_("://templates/Hiking_Tour_Summary.ui"));
 
-    SETTINGS;
-    const QVariant& data = cfg.value(s_("TextEditWidget/template"), "");
+    SETTINGS;    
+    const QString& path = cfg.value(s_("TextEditWidget/templatePath"), s_("")).toString();
 
-    if(int idx = comboTemplates->findData(data) != -1)
+    if(!path.isEmpty())
+    {
+        QDir dir(path);
+        QStringList files = dir.entryList(QStringList(s_("*.ui")), QDir::Files);
+        for(const QString& file : files)
+        {
+            QString name = QFileInfo(file).completeBaseName().replace(s_("_"), s_(" "));
+            comboTemplates->addItem(name, dir.absoluteFilePath(file));
+        }
+    }
+
+    const QString& data = cfg.value(s_("TextEditWidget/template"), "").toString();
+    const int idx = comboTemplates->findData(data);
+    if(idx != -1)
     {
         comboTemplates->setCurrentIndex(idx);
     }
@@ -123,7 +137,24 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         }
     }
 
+    if(str.isEmpty())
+    {
+        str += tr("-");
+    }
+
     return str;
+}
+
+void CTemplateWidget::slotSetPath()
+{
+    SETTINGS;
+    QString path = cfg.value(s_("TextEditWidget/templatePath"), QDir::homePath()).toString();
+    path = QFileDialog::getExistingDirectory(this, tr("Template path..."), path);
+    if(path.isEmpty())
+    {
+        return;
+    }
+    cfg.setValue(s_("TextEditWidget/templatePath"), path);
 }
 
 void CTemplateWidget::slotTemplateActivated(int idx)
@@ -147,7 +178,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
     else
     {
         widget = QUiLoader().load(&file, this);
-        layoutWidget->addWidget(widget);
+        layoutWidget->insertWidget(0,widget);
         file.close();
         cfg.setValue(s_("TextEditWidget/template"), filename);
     }   

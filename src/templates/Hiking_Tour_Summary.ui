@@ -14,6 +14,18 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="3" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox4">
+     <property name="title">
+      <string>Participants</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLineEdit" name="lineEdit"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox1">
      <property name="title">
@@ -238,17 +250,49 @@
    <item row="1" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox3">
      <property name="title">
-      <string>Participants</string>
+      <string>Equipment</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_10">
+        <property name="text">
+         <string>night gear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4">
+       <widget class="QCheckBox" name="checkBox_9">
+        <property name="text">
+         <string>snow shoes</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
+        <property name="text">
+         <string>climbing gear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QCheckBox" name="checkBox_8">
+        <property name="text">
+         <string>ski</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="checkBox_12">
+        <property name="text">
+         <string>camping gear</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="2" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox4">
+   <item row="4" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox5">
      <property name="title">
       <string>Details</string>
      </property>

@@ -97,26 +97,23 @@ CMainWindow::CMainWindow()
         restoreState(cfg.value(QStringLiteral("state")).toByteArray());
     }
 
-    if (cfg.contains(QStringLiteral("regularstate")))
+    if (cfg.contains(QStringLiteral("displaymode")))
     {
-        windowStates = static_cast<Qt::WindowState>(cfg.value(QStringLiteral("regularstate")).toInt());
+        displayMode = static_cast<Qt::WindowStates>(cfg.value(QStringLiteral("displaymode")).toInt());
+        if (displayMode == Qt::WindowFullScreen)
+        {
+            displayMode = Qt::WindowMaximized;
+        }
     }
 
-    if (cfg.contains(QStringLiteral("visibledocks")))
+    if (cfg.contains(QStringLiteral("dockstate")))
     {
-        hasVisibleDocks = cfg.value(QStringLiteral("visibledocks")).toBool();
-    }
-
-    if (cfg.contains(QStringLiteral("visibletoolbar")))
-    {
-        hasVisibleToolbar = cfg.value(QStringLiteral("visibletoolbar")).toBool();
+        dockStates = cfg.value(QStringLiteral("dockstate")).toByteArray();
     }
 
     if(windowState() == Qt::WindowFullScreen)
     {
-        tabWidget->tabBar()->setVisible(false);
-        statusBar()->setVisible(false);
-        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
+        displayRegular();
     }
     cfg.endGroup();
 
@@ -392,9 +389,8 @@ CMainWindow::~CMainWindow()
     }
     cfg.setValue(QStringLiteral("activedocks"),activeDockNames);
 
-    cfg.setValue(QStringLiteral("regularstate"),static_cast<int>(windowStates));
-    cfg.setValue(QStringLiteral("visibledocks"),hasVisibleDocks);
-    cfg.setValue(QStringLiteral("visibletoolbar"),hasVisibleToolbar);
+    cfg.setValue(QStringLiteral("displaymode"),static_cast<int>(displayMode));
+    cfg.setValue(QStringLiteral("dockstate"),dockStates);
     cfg.endGroup();
 
     /*
@@ -1317,37 +1313,43 @@ void CMainWindow::slotFullScreen()
     Qt::WindowStates state = windowState();
     if(state == Qt::WindowFullScreen)
     {
-        setWindowState(windowStates);
-        statusBar()->setVisible(true);
-        if (hasVisibleDocks)
-        {
-            showDocks();
-        }
-        if (hasVisibleToolbar)
-        {
-            toolBar->setVisible(true);
-        }
-        tabWidget->tabBar()->setVisible(true);
-        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
+        displayRegular();
     }
     else
     {
-        setWindowState(Qt::WindowFullScreen);
-        statusBar()->setVisible(false);
-        hasVisibleDocks = docksVisible();
-        if (hasVisibleDocks)
-        {
-            hideDocks();
-        }
-        hasVisibleToolbar = toolBar->isVisible();
-        if (hasVisibleToolbar && !toolBarConfig->visibleInFullscreen())
-        {
-            toolBar->setVisible(false);
-        }
-        tabWidget->tabBar()->setVisible(false);
-        actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
+        displayMode = state;
+        displayFullscreen();
     }
-    windowStates = state;
+}
+
+void CMainWindow::displayRegular()
+{
+    if (!dockStates.isEmpty())
+    {
+        restoreState(dockStates);
+    }
+    tabWidget->tabBar()->setVisible(true);
+    statusBar()->setVisible(true);
+    actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
+    setWindowState(displayMode);
+}
+
+void CMainWindow::displayFullscreen()
+{
+    dockStates = saveState();
+    setWindowState(Qt::WindowFullScreen);
+    statusBar()->setVisible(false);
+    menuBar()->setVisible(false);
+    if (docksVisible())
+    {
+        hideDocks();
+    }
+    if (!toolBarConfig->visibleInFullscreen())
+    {
+        toolBar->setVisible(false);
+    }
+    tabWidget->tabBar()->setVisible(false);
+    actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
 }
 
 #ifdef WIN32

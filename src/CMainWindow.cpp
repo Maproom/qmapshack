@@ -114,7 +114,7 @@ CMainWindow::CMainWindow()
 
     if(windowState() == Qt::WindowFullScreen)
     {
-        tabWidget->setTabBarVisible(false);
+        tabWidget->tabBar()->setVisible(false);
         statusBar()->setVisible(false);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
     }
@@ -157,9 +157,8 @@ CMainWindow::CMainWindow()
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
-    connect(tabWidget,                   &CMainWidget::tabCloseRequested, this,     &CMainWindow::slotTabCloseRequest);
-
-    connect(tabWidget,                   &CMainWidget::currentChanged,   this,      &CMainWindow::slotCurrentTabCanvas);
+    connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
+    connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
     connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
     connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
 
@@ -1253,21 +1252,19 @@ void CMainWindow::slotToggleDocks()
     }
 }
 
-bool CMainWindow::docksVisible()
+bool CMainWindow::docksVisible() const
 {
-    bool visible = false;
     for (QDockWidget * const & dock : docks)
     {
         if (!dock->isHidden())
         {
-            visible = true;
-            break;
+            return true;
         }
     }
-    return visible;
+    return false;
 }
 
-void CMainWindow::showDocks()
+void CMainWindow::showDocks() const
 {
     if (activeDocks.isEmpty())
     {
@@ -1334,7 +1331,7 @@ void CMainWindow::slotFullScreen()
         {
             toolBar->setVisible(true);
         }
-        tabWidget->setTabBarVisible(true);
+        tabWidget->tabBar()->setVisible(true);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     }
     else
@@ -1351,7 +1348,7 @@ void CMainWindow::slotFullScreen()
         {
             toolBar->setVisible(false);
         }
-        tabWidget->setTabBarVisible(false);
+        tabWidget->tabBar()->setVisible(false);
         actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
     }
     windowStates = state;

@@ -100,7 +100,6 @@ set( SRCS
         widgets/CColorLegend.cpp
         widgets/CColorChooser.cpp
         widgets/CSelectDoubleListWidget.cpp
-        widgets/CMainWidget.cpp
         helpers/CInputDialog.cpp
         helpers/CPositionDialog.cpp
         helpers/CWptIconDialog.cpp
@@ -387,7 +386,6 @@ set( HDRS
         widgets/CColorLegend.h
         widgets/CColorChooser.h
         widgets/CSelectDoubleListWidget.h
-        widgets/CMainWidget.h
         helpers/Platform.h
         helpers/CFileExt.h
         helpers/CSettings.h

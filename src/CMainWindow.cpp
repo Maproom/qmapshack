@@ -111,6 +111,8 @@ CMainWindow::CMainWindow()
         dockStates = cfg.value(QStringLiteral("dockstate")).toByteArray();
     }
 
+    menuVisible = cfg.value(QStringLiteral("menuvisible"),false).toBool();
+
     if(windowState() == Qt::WindowFullScreen)
     {
         displayRegular();
@@ -391,6 +393,7 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue(QStringLiteral("displaymode"),static_cast<int>(displayMode));
     cfg.setValue(QStringLiteral("dockstate"),dockStates);
+    cfg.setValue(QStringLiteral("menuvisible"),menuVisible);
     cfg.endGroup();
 
     /*
@@ -1330,6 +1333,10 @@ void CMainWindow::displayRegular()
     }
     tabWidget->tabBar()->setVisible(true);
     statusBar()->setVisible(true);
+    if (menuVisible)
+    {
+        menuBar()->setVisible(true);
+    }
     actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
     setWindowState(displayMode);
 }
@@ -1339,7 +1346,11 @@ void CMainWindow::displayFullscreen()
     dockStates = saveState();
     setWindowState(Qt::WindowFullScreen);
     statusBar()->setVisible(false);
-    menuBar()->setVisible(false);
+    menuVisible = menuBar()->isVisible();
+    if (menuVisible)
+    {
+        menuBar()->setVisible(false);
+    }
     if (docksVisible())
     {
         hideDocks();

@@ -169,6 +169,7 @@ private:
     QList<QDockWidget *> activeDocks;
     Qt::WindowStates displayMode = Qt::WindowMaximized;
     QByteArray dockStates;
+    bool menuVisible = false;
 };
 
 #endif //CMAINWINDOW_H

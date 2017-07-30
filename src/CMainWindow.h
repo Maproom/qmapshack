@@ -145,8 +145,8 @@ private:
     CMainWindow();
     void prepareMenuForMac();
     void testForNoView();
-    bool docksVisible();
-    void showDocks();
+    bool docksVisible() const;
+    void showDocks() const;
     void hideDocks();
 
     static CMainWindow * pSelf;

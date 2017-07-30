@@ -123,17 +123,22 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
     knownExtensions.insert(ns % ":altitude",
                            { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
                              getExtensionValueFunc(ns % ":altitude") });
+    
+    knownExtensions.insert(ns % ":energy",
+                            { tr("Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
+                                getExtensionValueFunc(ns % ":energy") });
+
 
     knownExtensions.insert(ns % ":seaLevelPressure",
-                           { tr("Sea Level Pressure"), 4, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
+                           { tr("Sea Level Pressure"), 5, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
                              getExtensionValueFunc(ns % ":seaLevelPressure") });
 
     knownExtensions.insert(ns % ":speed",
-                           { tr("Speed"), 5, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":speed")});
 
     knownExtensions.insert(ns % ":verticalSpeed",
-                           { tr("Speed (vertical)"), 6, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
+                           { tr("Speed (vertical)"), 7, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 

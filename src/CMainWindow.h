@@ -165,9 +165,9 @@ private:
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;
-    bool hasVisibleDocks;
-    bool hasVisibleToolbar;
-    Qt::WindowStates windowStates;
+    bool hasVisibleDocks = true;
+    bool hasVisibleToolbar = true;
+    Qt::WindowStates windowStates = Qt::WindowMaximized;
 
 };
 

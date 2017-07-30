@@ -49,6 +49,6 @@ private:
     const QList<QAction *> available;
     const QList<QAction *> defaultActions;
     QList<QAction *> configured;
-    bool fullscreen;
+    bool fullscreen = false;
 };
 #endif //CTOOLBARCONFIG_H

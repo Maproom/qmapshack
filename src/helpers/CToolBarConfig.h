@@ -41,11 +41,14 @@ public:
     void setConfiguredActionsByName(const QStringList & actions);
     void setConfiguredActions(const QList<QAction *> & actions);
     void setDefaultConfiguredActions();
+    void setVisibleInFullscreen(bool visible) { fullscreen = visible; }
+    bool visibleInFullscreen() { return fullscreen; }
 
 private:
     QToolBar * const toolBar;
     const QList<QAction *> available;
     const QList<QAction *> defaultActions;
     QList<QAction *> configured;
+    bool fullscreen = false;
 };
 #endif //CTOOLBARCONFIG_H

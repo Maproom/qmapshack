@@ -18,6 +18,13 @@
     <widget class="CSelectDoubleListWidget" name="selectActionsWidget" native="true"/>
    </item>
    <item>
+    <widget class="QCheckBox" name="checkFullscreen">
+     <property name="text">
+      <string>Toolbar is visible in Fullscreen-mode</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok|QDialogButtonBox::RestoreDefaults</set>

@@ -62,6 +62,8 @@
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
+QMutex CMainWindow::mutex(QMutex::NonRecursive);
+
 CMainWindow::CMainWindow()
     : id(qrand())
 {
@@ -1323,6 +1325,8 @@ void CMainWindow::slotDockVisibilityChanged(bool visible)
 
 void CMainWindow::slotFullScreen()
 {
+    QMutexLocker lock(&CMainWindow::mutex);
+
     Qt::WindowStates state = windowState();
     if(state == Qt::WindowFullScreen)
     {

@@ -88,7 +88,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
 
     QString str;
     QList<QWidget *> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
-    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->objectName() < w2->objectName();});
+    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->property("order") < w2->property("order");});
 
     for(const QWidget * w : widgets)
     {
@@ -181,6 +181,28 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         layoutWidget->insertWidget(0,widget);
         file.close();
         cfg.setValue(s_("TextEditWidget/template"), filename);
+
+        // convert focus chain into a sortable property.
+        quint32 cnt     = 0;
+        QWidget * first = nextInFocusChain();
+        QWidget * next  = first;
+        do
+        {
+            const QString& name = next->objectName();
+            if(name.startsWith(s_("check"))
+                ||name.startsWith(s_("radio"))
+                ||name.startsWith(s_("combo"))
+                ||name.startsWith(s_("line"))
+                ||name.startsWith(s_("text")))
+            {
+                next->setProperty("order", cnt++);
+            }
+
+            next = next->nextInFocusChain();
+        }
+        while(next != first);
+
+
     }   
 }
 

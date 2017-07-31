@@ -28,6 +28,7 @@ class QGroupBox;
 
 class CTemplateWidget : public QDialog, private Ui::ITemplateWidget
 {
+    Q_OBJECT
 public:
     CTemplateWidget(QWidget * parent);
     virtual ~CTemplateWidget() = default;

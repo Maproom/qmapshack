@@ -72,20 +72,10 @@
         </property>
        </widget>
       </item>
-      <item row="5" column="0">
-       <widget class="QCheckBox" name="checkBox_18">
-        <property name="text">
-         <string>windy</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" colspan="2">
+      <item row="6" column="0" colspan="3">
        <widget class="QLineEdit" name="lineEdit_2"/>
       </item>
-      <item row="1" column="1">
+      <item row="1" column="2">
        <widget class="QRadioButton" name="radioButton">
         <property name="text">
          <string>hot</string>
@@ -95,7 +85,7 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="2" column="2">
        <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
          <string>warm</string>
@@ -105,7 +95,7 @@
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="3" column="2">
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
          <string>cold</string>
@@ -115,7 +105,7 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="4" column="2">
        <widget class="QRadioButton" name="radioButton_4">
         <property name="text">
          <string>freezing</string>
@@ -125,7 +115,24 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="0">
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_20">
+        <property name="text">
+         <string>foggy</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_18">
+        <property name="text">
+         <string>windy</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox_11">
         <property name="text">
          <string>humid</string>
@@ -134,6 +141,19 @@
          <string notr="true"/>
         </property>
        </widget>
+      </item>
+      <item row="5" column="0">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -144,73 +164,38 @@
       <string>Character</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="checkBox_2">
-        <property name="text">
-         <string>easy hiking</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox_17">
-        <property name="text">
-         <string>climbing</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBox_4">
-        <property name="text">
-         <string>alpine</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox_15">
-        <property name="text">
-         <string>steep</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
        <widget class="QCheckBox" name="checkBox_14">
         <property name="text">
          <string>large ascend</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBox_13">
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_17">
         <property name="text">
-         <string>long distance</string>
+         <string>climbing</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="6" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+      <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox_16">
         <property name="text">
          <string>via ferrata</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Rating</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="5" column="1">
        <widget class="QComboBox" name="comboBox">
         <item>
          <property name="text">
@@ -242,6 +227,27 @@
           <string>Rating 1 star</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_6">
+        <property name="text">
+         <string>easy hiking</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_13">
+        <property name="text">
+         <string>long distance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_5">
+        <property name="text">
+         <string>alpine</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -317,6 +323,7 @@
   <tabstop>checkBox_5</tabstop>
   <tabstop>checkBox_6</tabstop>
   <tabstop>checkBox_7</tabstop>
+  <tabstop>checkBox_20</tabstop>
   <tabstop>checkBox_18</tabstop>
   <tabstop>checkBox_11</tabstop>
   <tabstop>radioButton</tabstop>
@@ -324,20 +331,19 @@
   <tabstop>radioButton_3</tabstop>
   <tabstop>radioButton_4</tabstop>
   <tabstop>lineEdit_2</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>checkBox_4</tabstop>
-  <tabstop>checkBox_13</tabstop>
+  <tabstop>radioButton_6</tabstop>
+  <tabstop>radioButton_5</tabstop>
   <tabstop>checkBox_14</tabstop>
-  <tabstop>checkBox_15</tabstop>
+  <tabstop>checkBox_13</tabstop>
   <tabstop>checkBox_17</tabstop>
   <tabstop>checkBox_16</tabstop>
   <tabstop>comboBox</tabstop>
   <tabstop>lineEdit_3</tabstop>
   <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_12</tabstop>
   <tabstop>checkBox_19</tabstop>
-  <tabstop>checkBox_10</tabstop>
   <tabstop>checkBox_8</tabstop>
+  <tabstop>checkBox_12</tabstop>
+  <tabstop>checkBox_10</tabstop>
   <tabstop>checkBox_9</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>textEdit</tabstop>

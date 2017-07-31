@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -2001,7 +2001,7 @@ Zeile %2, Spalte %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
         <source>Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Energie</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="133"/>
@@ -2051,53 +2051,53 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="803"/>
+        <location filename="../CMainWindow.cpp" line="813"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="934"/>
+        <location filename="../CMainWindow.cpp" line="941"/>
         <source>Ele: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="946"/>
+        <location filename="../CMainWindow.cpp" line="953"/>
         <source>Slope: %1%2</source>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="962"/>
+        <location filename="../CMainWindow.cpp" line="969"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1103"/>
+        <location filename="../CMainWindow.cpp" line="1110"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1137"/>
+        <location filename="../CMainWindow.cpp" line="1144"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1137"/>
-        <location filename="../CMainWindow.cpp" line="1163"/>
+        <location filename="../CMainWindow.cpp" line="1144"/>
+        <location filename="../CMainWindow.cpp" line="1170"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1163"/>
+        <location filename="../CMainWindow.cpp" line="1170"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1459"/>
+        <location filename="../CMainWindow.cpp" line="1481"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1460"/>
+        <location filename="../CMainWindow.cpp" line="1482"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -4630,14 +4630,52 @@ Zeile %2, Spalte %3:
     </message>
 </context>
 <context>
+    <name>CTemplateWidget</name>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
+        <source>choose one...</source>
+        <translation>auswählen...</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
+        <source>Hiking Tour Summary (built-in)</source>
+        <translation>Wanderung Zusammenfassung (built-in)</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="141"/>
+        <source>-</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="151"/>
+        <source>Template path...</source>
+        <translation>Vorlagenpfad...</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="173"/>
+        <source>Failed...</source>
+        <translation>Fehlgeschlagen...</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="173"/>
+        <source>Failed to read template file %1.</source>
+        <translation>Datei &apos;%1&apos; konnte nicht gelesen werden.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/CTemplateWidget.cpp" line="214"/>
+        <source>Preview...</source>
+        <translation>Vorschau...</translation>
+    </message>
+</context>
+<context>
     <name>CTextEditWidget</name>
     <message>
-        <location filename="../widgets/CTextEditWidget.cpp" line="70"/>
+        <location filename="../widgets/CTextEditWidget.cpp" line="71"/>
         <source>&amp;Color...</source>
         <translation>&amp;Farbe...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTextEditWidget.cpp" line="113"/>
+        <location filename="../widgets/CTextEditWidget.cpp" line="117"/>
         <source>Reset format</source>
         <translation>Format zurücksetzen</translation>
     </message>
@@ -4701,6 +4739,184 @@ Zeile %2, Spalte %3:
         <location filename="../helpers/CWptIconDialog.cpp" line="161"/>
         <source>Path to user icons...</source>
         <translation>Pfad zu Benutzersymbolen...</translation>
+    </message>
+</context>
+<context>
+    <name>Form</name>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
+        <source>Participants</source>
+        <translation>Teilnehmer</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
+        <source>Weather</source>
+        <translation>Wetter</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
+        <source>rain</source>
+        <translation>Regen</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
+        <source>sunny</source>
+        <translation>Sonne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
+        <source>snow</source>
+        <translation>Schnee</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
+        <source>clouds</source>
+        <translation>Wolken</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="78"/>
+        <source>windy</source>
+        <translation>Wind</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
+        <source>hot</source>
+        <translation>heiß</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
+        <source>warm</source>
+        <translation>warm</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
+        <source>cold</source>
+        <translation>kalt</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
+        <source>freezing</source>
+        <translation>eiskalt</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="131"/>
+        <source>humid</source>
+        <translation>schwül</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="144"/>
+        <source>Character</source>
+        <translation>Charakter</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="150"/>
+        <source>easy hiking</source>
+        <translation>einfache Wanderung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="157"/>
+        <source>climbing</source>
+        <translation>Klettern</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="164"/>
+        <source>alpine</source>
+        <translation>alpine Tour</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="178"/>
+        <source>steep</source>
+        <translation>steil</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="185"/>
+        <source>large ascend</source>
+        <translation>langer Anstieg</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="195"/>
+        <source>long distance</source>
+        <translation>lange Distanz</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="202"/>
+        <source>via ferrata</source>
+        <translation>Klettersteig</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="209"/>
+        <source>Rating</source>
+        <translation>Beurteilung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="222"/>
+        <source>Rating 5 stars</source>
+        <translation>Beurteilung 5 Sterne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="227"/>
+        <source>Rating 4 stars</source>
+        <translation>Beurteilung 4 Sterne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="232"/>
+        <source>Rating 3 stars</source>
+        <translation>Beurteilung 3 Sterne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="237"/>
+        <source>Rating 2 stars</source>
+        <translation>Beurteilung 2 Sterne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="242"/>
+        <source>Rating 1 star</source>
+        <translation>Beurteilung 1 Sterne</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="253"/>
+        <source>Equipment</source>
+        <translation>Ausrüstung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
+        <source>ferrata gear</source>
+        <translation>Klettersteigset</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="287"/>
+        <source>night gear</source>
+        <translation>Nachtausrüstung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="294"/>
+        <source>snow shoes</source>
+        <translation>Schneeschuhe</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="266"/>
+        <source>climbing gear</source>
+        <translation>Kletterausrüstung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="259"/>
+        <source>ski</source>
+        <translation>Ski</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="280"/>
+        <source>camping gear</source>
+        <translation>Campingausrüstung</translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="304"/>
+        <source>Details</source>
+        <translation>Details</translation>
     </message>
 </context>
 <context>
@@ -6628,385 +6844,385 @@ Dateiname: %1</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="42"/>
+        <location filename="../IMainWindow.ui" line="63"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="59"/>
+        <location filename="../IMainWindow.ui" line="80"/>
         <source>View</source>
         <translation>Ansicht</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="82"/>
+        <location filename="../IMainWindow.ui" line="103"/>
         <source>Window</source>
         <translation>Fenster</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="92"/>
+        <location filename="../IMainWindow.ui" line="113"/>
         <source>?</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="100"/>
+        <location filename="../IMainWindow.ui" line="121"/>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="111"/>
+        <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Werkzeug</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="136"/>
+        <location filename="../IMainWindow.ui" line="157"/>
         <source>Maps</source>
         <translation>Karten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="179"/>
+        <location filename="../IMainWindow.ui" line="200"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Dig. Höhenmodell (DEM)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="218"/>
+        <location filename="../IMainWindow.ui" line="239"/>
         <source>Data</source>
         <translation>Daten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="236"/>
+        <location filename="../IMainWindow.ui" line="257"/>
         <source>Route</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="266"/>
+        <location filename="../IMainWindow.ui" line="287"/>
         <source>Toolbar</source>
         <translation>Werkzeugleiste</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="281"/>
-        <location filename="../IMainWindow.ui" line="284"/>
+        <location filename="../IMainWindow.ui" line="302"/>
+        <location filename="../IMainWindow.ui" line="305"/>
         <source>Add Map View</source>
         <translation>Kartenansicht hinzufügen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="287"/>
+        <location filename="../IMainWindow.ui" line="308"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="302"/>
+        <location filename="../IMainWindow.ui" line="323"/>
         <source>Show Scale</source>
         <translation>Maßstab</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="314"/>
+        <location filename="../IMainWindow.ui" line="335"/>
         <source>Setup Map Font</source>
         <translation>Kartenfont einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="329"/>
+        <location filename="../IMainWindow.ui" line="350"/>
         <source>Show Grid</source>
         <translation>Gitter</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="332"/>
+        <location filename="../IMainWindow.ui" line="353"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="344"/>
+        <location filename="../IMainWindow.ui" line="365"/>
         <source>Setup Grid</source>
         <translation>Gitter einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="347"/>
+        <location filename="../IMainWindow.ui" line="368"/>
         <source>Ctrl+Alt+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="362"/>
+        <location filename="../IMainWindow.ui" line="383"/>
         <source>Flip Mouse Wheel</source>
         <translation>Mausrad umdrehen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="374"/>
-        <location filename="../IMainWindow.ui" line="377"/>
+        <location filename="../IMainWindow.ui" line="395"/>
+        <location filename="../IMainWindow.ui" line="398"/>
         <source>Setup Map Paths</source>
         <translation>Kartenverzeichnisse angeben</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="392"/>
+        <location filename="../IMainWindow.ui" line="413"/>
         <source>POI Text</source>
         <translation>POI Text</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="407"/>
+        <location filename="../IMainWindow.ui" line="428"/>
         <source>Night / Day</source>
         <translation>Nacht / Tag</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="422"/>
+        <location filename="../IMainWindow.ui" line="443"/>
         <source>Map Tool Tip</source>
         <translation>Kartentooltip</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="425"/>
+        <location filename="../IMainWindow.ui" line="446"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="437"/>
+        <location filename="../IMainWindow.ui" line="458"/>
         <source>Setup DEM Paths</source>
         <translation>DEM Verzeichnisse angeben</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="449"/>
+        <location filename="../IMainWindow.ui" line="470"/>
         <source>About</source>
         <translation>Über</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="461"/>
+        <location filename="../IMainWindow.ui" line="482"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="464"/>
+        <location filename="../IMainWindow.ui" line="485"/>
         <source>F1</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="476"/>
-        <location filename="../IMainWindow.ui" line="479"/>
+        <location filename="../IMainWindow.ui" line="497"/>
+        <location filename="../IMainWindow.ui" line="500"/>
         <source>Setup Map View</source>
         <translation>Kartenansicht einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="623"/>
+        <location filename="../IMainWindow.ui" line="644"/>
         <source>VRT Builder</source>
         <translation>VRT Builder</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="626"/>
+        <location filename="../IMainWindow.ui" line="647"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Eine graphische Benutzerschnittstelle zu gdalbuildvrt </translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="638"/>
+        <location filename="../IMainWindow.ui" line="659"/>
         <source>Store Map View</source>
         <translation>Kartenansicht speichern</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="641"/>
+        <location filename="../IMainWindow.ui" line="662"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Speichert die aktiven Karten und DEM Dateien inklusive der Eigenschaften in einer Datei</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="653"/>
+        <location filename="../IMainWindow.ui" line="674"/>
         <source>Load Map View</source>
         <translation>Kartenansicht laden</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="656"/>
+        <location filename="../IMainWindow.ui" line="677"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Stellt die aktiven Karten und DEM Dateien inklusive der Eigenschaften aus einer Datei wieder her</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="671"/>
+        <location filename="../IMainWindow.ui" line="692"/>
         <source>Ext. Profile</source>
         <translation>Erw. Profil</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="674"/>
+        <location filename="../IMainWindow.ui" line="695"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="686"/>
+        <location filename="../IMainWindow.ui" line="707"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="689"/>
+        <location filename="../IMainWindow.ui" line="710"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="701"/>
+        <location filename="../IMainWindow.ui" line="722"/>
         <source>Clone Map View</source>
         <translation>Kartenansicht klonen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="704"/>
+        <location filename="../IMainWindow.ui" line="725"/>
         <source>Ctrl+Shift+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="716"/>
+        <location filename="../IMainWindow.ui" line="737"/>
         <source>Create Routino Database</source>
         <translation>Routino Datenbank erstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="728"/>
+        <location filename="../IMainWindow.ui" line="749"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Kartenausschnitt speichern (drucken)</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="731"/>
+        <location filename="../IMainWindow.ui" line="752"/>
         <source>Print a selected area of the map</source>
         <translation>Einen ausgewählten Bereich der Karte drucken</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="734"/>
+        <location filename="../IMainWindow.ui" line="755"/>
         <source>Ctrl+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="746"/>
+        <location filename="../IMainWindow.ui" line="767"/>
         <source>Setup Coord. Format</source>
         <translation>Koordinatenformat einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="749"/>
+        <location filename="../IMainWindow.ui" line="770"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Ändert das Format der angezeigten Koordinaten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="761"/>
+        <location filename="../IMainWindow.ui" line="782"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="773"/>
+        <location filename="../IMainWindow.ui" line="794"/>
         <source>Setup Waypoint Icons</source>
         <translation>Wegpunktsymbole konfigurieren</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="776"/>
+        <location filename="../IMainWindow.ui" line="797"/>
         <source>Setup path to custom icons</source>
         <translation>Pfad zu individuellen Symbolen einrichten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="785"/>
+        <location filename="../IMainWindow.ui" line="806"/>
         <source>Close Tab</source>
         <translation>Reiter schließen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="788"/>
+        <location filename="../IMainWindow.ui" line="809"/>
         <source>Ctrl+W</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="797"/>
+        <location filename="../IMainWindow.ui" line="818"/>
         <source>Quickstart Help</source>
         <translation>Schnellstartanleitung</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="806"/>
+        <location filename="../IMainWindow.ui" line="827"/>
         <source>Setup Toolbar</source>
         <translation>Werkzeugleiste einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="818"/>
+        <location filename="../IMainWindow.ui" line="839"/>
         <source>Toggle Docks</source>
         <translation>Fenster umschalten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="821"/>
+        <location filename="../IMainWindow.ui" line="842"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Sichtbarkeit der andockbaren Fenster umschalten</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="824"/>
+        <location filename="../IMainWindow.ui" line="845"/>
         <source>Ctrl+D</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="833"/>
+        <location filename="../IMainWindow.ui" line="854"/>
         <source>Full Screen</source>
         <translation>Vollbild</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="836"/>
+        <location filename="../IMainWindow.ui" line="857"/>
         <source>F11</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="491"/>
+        <location filename="../IMainWindow.ui" line="512"/>
         <source>Load GIS Data</source>
         <translation>GIS Daten laden</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="494"/>
+        <location filename="../IMainWindow.ui" line="515"/>
         <source>Load projects from file</source>
         <translation>Lade Datei als Projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="497"/>
+        <location filename="../IMainWindow.ui" line="518"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="509"/>
+        <location filename="../IMainWindow.ui" line="530"/>
         <source>Save All GIS Data</source>
         <translation>Alle GIS Daten speichern</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="512"/>
+        <location filename="../IMainWindow.ui" line="533"/>
         <source>Save all projects in the workspace</source>
         <translation>Alle Projekte, die sich auf dem Arbeitsplatz befinden, speichern</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="515"/>
+        <location filename="../IMainWindow.ui" line="536"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="527"/>
+        <location filename="../IMainWindow.ui" line="548"/>
         <source>Setup Time Zone</source>
         <translation>Zeitzone einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="539"/>
+        <location filename="../IMainWindow.ui" line="560"/>
         <source>Add empty project</source>
         <translation>Leeres Projekt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="554"/>
+        <location filename="../IMainWindow.ui" line="575"/>
         <source>Search Google</source>
         <translation>Mit Google suchen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="566"/>
+        <location filename="../IMainWindow.ui" line="587"/>
         <source>Close all projects</source>
         <translation>Alle Projekte schließen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="569"/>
+        <location filename="../IMainWindow.ui" line="590"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="581"/>
+        <location filename="../IMainWindow.ui" line="602"/>
         <source>Setup Units</source>
         <translation>Einheiten einstellen</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="593"/>
+        <location filename="../IMainWindow.ui" line="614"/>
         <source>Setup Workspace</source>
         <translation>Arbeitsplatz konfigurieren</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="596"/>
+        <location filename="../IMainWindow.ui" line="617"/>
         <source>Setup save on exit.</source>
         <translation>Speichert Einstellungen beim Beenden.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="608"/>
+        <location filename="../IMainWindow.ui" line="629"/>
         <source>Import Database from QLandkarte</source>
         <translation>Datenbankimport aus QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="611"/>
+        <location filename="../IMainWindow.ui" line="632"/>
         <source>Import QLandkarte GT database</source>
         <translation>QLandkarte GT Datenbank importieren</translation>
     </message>
@@ -8928,6 +9144,34 @@ sein</translation>
     </message>
 </context>
 <context>
+    <name>ITemplateWidget</name>
+    <message>
+        <location filename="../widgets/ITemplateWidget.ui" line="14"/>
+        <source>Insert Template...</source>
+        <translation>Vorlage einfügen...</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITemplateWidget.ui" line="32"/>
+        <source>Templates</source>
+        <translation>Vorlagen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITemplateWidget.ui" line="42"/>
+        <source>Select a path with your own templates.</source>
+        <translation>Wählen Sie einen Pfad mit ihren eigenen Vorlagen aus.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITemplateWidget.ui" line="45"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITemplateWidget.ui" line="77"/>
+        <source>Preview</source>
+        <translation>Vorschau</translation>
+    </message>
+</context>
+<context>
     <name>ITextEditWidget</name>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="14"/>
@@ -8935,263 +9179,278 @@ sein</translation>
         <translation>Text bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="25"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="331"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="45"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="351"/>
         <source>Undo</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="334"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="354"/>
         <source>Ctrl+Z</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="38"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="343"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="58"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="363"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="346"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="366"/>
         <source>Ctrl+Shift+Z</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="51"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="355"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="71"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="375"/>
         <source>Cut</source>
         <translation>Ausschneiden</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="358"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="378"/>
         <source>Ctrl+X</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="64"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="367"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="84"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="387"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="370"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="390"/>
         <source>Ctrl+C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="77"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="375"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="97"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="395"/>
         <source>Paste</source>
         <translation>Einfügen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="100"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="25"/>
+        <source>Templ.</source>
+        <translation>Vorl.</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITextEditWidget.ui" line="120"/>
         <source>A:L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="113"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="133"/>
         <source>A:C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="126"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="146"/>
         <source>A:R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="139"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="159"/>
         <source>A:B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="172"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="192"/>
         <source>B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="185"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="205"/>
         <source>I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="198"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="218"/>
         <source>U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="218"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="238"/>
         <source>C</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="265"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="285"/>
         <source>Standard</source>
         <translation>Standard</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="270"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="290"/>
         <source>Bullet List (Disc)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="275"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="295"/>
         <source>Bullet List (Circle)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="280"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="300"/>
         <source>Bullet List (Square)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="285"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="305"/>
         <source>Ordered List (Decimal)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="290"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="310"/>
         <source>Ordered List (Alpha lower)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="295"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="315"/>
         <source>Ordered List (Alpha upper)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="300"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="320"/>
         <source>Ordered List (Roman lower)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="305"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="325"/>
         <source>Ordered List (Roman upper)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="378"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="398"/>
         <source>Ctrl+V</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="390"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="410"/>
         <source>Align Left</source>
         <translation>Linksbündig</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="393"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="413"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="405"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="425"/>
         <source>Align Right</source>
         <translation>Rechtsbündig</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="408"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="428"/>
         <source>Ctrl+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="420"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="440"/>
         <source>Align Center</source>
         <translation>Zentriert</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="423"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="443"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="435"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="455"/>
         <source>Align Block</source>
         <translation>Blocksatz</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="438"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="458"/>
         <source>Ctrl+J</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="450"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="470"/>
         <source>Underline</source>
         <translation>Unterstreichen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="453"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="473"/>
         <source>Ctrl+U</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="465"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="485"/>
         <source>Bold</source>
         <translation>Fett</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="468"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="488"/>
         <source>Ctrl+B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="480"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="500"/>
         <source>Italic</source>
         <translation>Kursiv</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="483"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="503"/>
         <source>Ctrl+I</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="495"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="515"/>
         <source>Plain</source>
         <translation>Schlicht</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="498"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="518"/>
         <source>Reset the text&apos;s format before pasting</source>
         <translation>Das Textformat wird entfernt bevor der Text eingefügt wird</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="503"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="506"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="523"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="526"/>
         <source>Select All</source>
         <translation>Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="509"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="529"/>
         <source>Ctrl+A</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="514"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="517"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="534"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="537"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="522"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="525"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="542"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="545"/>
         <source>Reset Font</source>
         <translation>Font zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="530"/>
-        <location filename="../widgets/ITextEditWidget.ui" line="533"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="550"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="553"/>
         <source>Reset Layout</source>
         <translation>Layout zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="545"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="565"/>
         <source>Normal</source>
         <translation>Normal</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidget.ui" line="548"/>
+        <location filename="../widgets/ITextEditWidget.ui" line="568"/>
         <source>Paste without resetting the text&apos;s format</source>
         <translation>Einfügen ohne das Format zurückzusetzen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITextEditWidget.ui" line="577"/>
+        <source>Insert From Template</source>
+        <translation>Aus Vorlage einfügen</translation>
+    </message>
+    <message>
+        <location filename="../widgets/ITextEditWidget.ui" line="580"/>
+        <source>Create text from template.</source>
+        <translation>Text aus einer Vorlage erzeugen.</translation>
     </message>
 </context>
 <context>

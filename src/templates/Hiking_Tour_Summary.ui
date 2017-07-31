@@ -253,17 +253,10 @@
       <string>Equipment</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox_10">
-        <property name="text">
-         <string>night gear</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="4">
-       <widget class="QCheckBox" name="checkBox_9">
+       <widget class="QCheckBox" name="checkBox_8">
         <property name="text">
-         <string>snow shoes</string>
+         <string>ski</string>
         </property>
        </widget>
       </item>
@@ -274,17 +267,31 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="3">
-       <widget class="QCheckBox" name="checkBox_8">
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_19">
         <property name="text">
-         <string>ski</string>
+         <string>ferrata gear</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
+      <item row="1" column="0">
        <widget class="QCheckBox" name="checkBox_12">
         <property name="text">
          <string>camping gear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_10">
+        <property name="text">
+         <string>night gear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QCheckBox" name="checkBox_9">
+        <property name="text">
+         <string>snow shoes</string>
         </property>
        </widget>
       </item>
@@ -327,8 +334,9 @@
   <tabstop>comboBox</tabstop>
   <tabstop>lineEdit_3</tabstop>
   <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_10</tabstop>
   <tabstop>checkBox_12</tabstop>
+  <tabstop>checkBox_19</tabstop>
+  <tabstop>checkBox_10</tabstop>
   <tabstop>checkBox_8</tabstop>
   <tabstop>checkBox_9</tabstop>
   <tabstop>lineEdit</tabstop>

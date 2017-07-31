@@ -521,5 +521,4 @@ void CTextEditWidget::insertFromTemplate()
     {
         textEdit->insertHtml(dlg.text());
     }
-
 }

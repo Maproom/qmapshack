@@ -40,7 +40,7 @@ void CTemplateWidget::listTemplates()
     comboTemplates->addItem(tr("choose one..."));
     comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), s_("://templates/Hiking_Tour_Summary.ui"));
 
-    SETTINGS;    
+    SETTINGS;
     const QString& path = cfg.value(s_("TextEditWidget/templatePath"), s_("")).toString();
 
     if(!path.isEmpty())
@@ -71,7 +71,7 @@ QString CTemplateWidget::text()
     QString str;
 
     QList<QGroupBox*> groups = widget->findChildren<QGroupBox*>(QRegExp("group.*"), Qt::FindDirectChildrenOnly);
-    qSort(groups.begin(), groups.end(), [](const QGroupBox * g1, const QGroupBox * g2){return g1->objectName() < g2->objectName();});
+    qSort(groups.begin(), groups.end(), [](const QGroupBox * g1, const QGroupBox * g2){return g1->objectName() < g2->objectName(); });
 
     for(const QGroupBox * group : groups)
     {
@@ -85,10 +85,9 @@ QString CTemplateWidget::text()
 
 QString CTemplateWidget::resolveGroup(const QGroupBox * group)
 {
-
     QString str;
     QList<QWidget *> widgets = group->findChildren<QWidget*>(QRegExp(".*"), Qt::FindDirectChildrenOnly);
-    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->property("order") < w2->property("order");});
+    qSort(widgets.begin(), widgets.end(), [](const QWidget * w1, const QWidget * w2){return w1->property("order") < w2->property("order"); });
 
     for(const QWidget * w : widgets)
     {
@@ -190,10 +189,10 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         {
             const QString& name = next->objectName();
             if(name.startsWith(s_("check"))
-                ||name.startsWith(s_("radio"))
-                ||name.startsWith(s_("combo"))
-                ||name.startsWith(s_("line"))
-                ||name.startsWith(s_("text")))
+               ||name.startsWith(s_("radio"))
+               ||name.startsWith(s_("combo"))
+               ||name.startsWith(s_("line"))
+               ||name.startsWith(s_("text")))
             {
                 next->setProperty("order", cnt++);
             }
@@ -201,9 +200,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
             next = next->nextInFocusChain();
         }
         while(next != first);
-
-
-    }   
+    }
 }
 
 void CTemplateWidget::slotPreview()

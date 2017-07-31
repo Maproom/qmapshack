@@ -305,6 +305,35 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>checkBox</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>checkBox_7</tabstop>
+  <tabstop>checkBox_18</tabstop>
+  <tabstop>checkBox_11</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_3</tabstop>
+  <tabstop>radioButton_4</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>checkBox_13</tabstop>
+  <tabstop>checkBox_14</tabstop>
+  <tabstop>checkBox_15</tabstop>
+  <tabstop>checkBox_17</tabstop>
+  <tabstop>checkBox_16</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_12</tabstop>
+  <tabstop>checkBox_8</tabstop>
+  <tabstop>checkBox_9</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>textEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

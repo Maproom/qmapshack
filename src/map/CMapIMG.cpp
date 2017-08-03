@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"
@@ -126,7 +127,7 @@ static inline bool isCluttered(QVector<QRectF>& rectPois, const QRectF& rect)
 
 
 CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatVectorItems,parent)
+    : IMap(eFeatVisibility|eFeatVectorItems|eFeatTypFile,parent)
     , filename(filename)
     , fm(CMainWindow::self().getMapFont())
     , selectedLanguage(NOIDX)
@@ -149,6 +150,24 @@ CMapIMG::CMapIMG(const QString &filename, CMapDraw *parent)
 
     isActivated = true;
 }
+
+void CMapIMG::loadConfig(QSettings& cfg)
+{
+    IMap::loadConfig(cfg);
+
+    if(!typeFile.isEmpty())
+    {
+        setupTyp();
+    }
+}
+
+void CMapIMG::slotSetTypeFile(const QString& filename)
+{
+    IMap::slotSetTypeFile(filename);
+    setupTyp();
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawMap);
+}
+
 
 void CMapIMG::setupTyp()
 {
@@ -405,26 +424,46 @@ void CMapIMG::setupTyp()
 
     pointProperties.clear();
 
-    QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
-    while(subfile != subfiles.end())
+    if(!typeFile.isEmpty())
     {
-        if(!(*subfile).parts.contains("TYP"))
-        {
-            ++subfile;
-            continue;
+        QFile file(typeFile);
+        if(!file.open(QIODevice::ReadOnly))
+        {            
+            QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), tr("Read external type file..."), tr("Failed to read type file: %1\nFall back to internal types.").arg(typeFile), QMessageBox::Ok);
+            typeFile.clear();
+            setupTyp();
+            return;
         }
 
-        CFileExt file(filename);
-        file.open(QIODevice::ReadOnly);
-
-        QByteArray array;
-        readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
-
+        QByteArray array = file.readAll();
         CGarminTyp typ;
         typ.decode(array, polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
 
         file.close();
-        break;
+    }
+    else
+    {
+        QMap<QString,subfile_desc_t>::iterator subfile = subfiles.begin();
+        while(subfile != subfiles.end())
+        {
+            if(!(*subfile).parts.contains("TYP"))
+            {
+                ++subfile;
+                continue;
+            }
+
+            CFileExt file(filename);
+            file.open(QIODevice::ReadOnly);
+
+            QByteArray array;
+            readFile(file, (*subfile).parts["TYP"].offset, (*subfile).parts["TYP"].size, array);
+
+            CGarminTyp typ;
+            typ.decode(array, polygonProperties, polylineProperties, polygonDrawOrder, pointProperties);
+
+            file.close();
+            break;
+        }
     }
 }
 
@@ -1085,95 +1124,97 @@ void CMapIMG::processPrimaryMapData()
 
 quint8 CMapIMG::scale2bits(const QPointF& scale)
 {
+    qint32 bits = 24;
     if(scale.x() >= 70000.0)
     {
-        return 2;
+        bits = 2;
     }
-    if(scale.x() >= 50000.0)
+    else if(scale.x() >= 50000.0)
     {
-        return 3;
+        bits = 3;
     }
-    if(scale.x() >= 30000.0)
+    else if(scale.x() >= 30000.0)
     {
-        return 4;
+        bits = 4;
     }
-    if(scale.x() >= 20000.0)
+    else if(scale.x() >= 20000.0)
     {
-        return 5;
+        bits = 5;
     }
-    if(scale.x() >= 15000.0)
+    else if(scale.x() >= 15000.0)
     {
-        return 6;
+        bits = 6;
     }
-    if(scale.x() >= 10000.0)
+    else if(scale.x() >= 10000.0)
     {
-        return 7;
+        bits = 7;
     }
-    if(scale.x() >= 7000.0)
+    else if(scale.x() >= 7000.0)
     {
-        return 8;
+        bits = 8;
     }
-    if(scale.x() >= 5000.0)
+    else if(scale.x() >= 5000.0)
     {
-        return 9;
+        bits = 9;
     }
-    if(scale.x() >= 3000.0)
+    else if(scale.x() >= 3000.0)
     {
-        return 10;
+        bits = 10;
     }
-    if(scale.x() >= 2000.0)
+    else if(scale.x() >= 2000.0)
     {
-        return 11;
+        bits = 11;
     }
-    if(scale.x() >= 1500.0)
+    else if(scale.x() >= 1500.0)
     {
-        return 12;
+        bits = 12;
     }
-    if(scale.x() >= 1000.0)
+    else if(scale.x() >= 1000.0)
     {
-        return 13;
+        bits = 13;
     }
-    if(scale.x() >= 700.0)
+    else if(scale.x() >= 700.0)
     {
-        return 14;
+        bits = 14;
     }
-    if(scale.x() >= 500.0)
+    else if(scale.x() >= 500.0)
     {
-        return 15;
+        bits = 15;
     }
-    if(scale.x() >= 300.0)
+    else if(scale.x() >= 300.0)
     {
-        return 16;
+        bits = 16;
     }
-    if(scale.x() >= 200.0)
+    else if(scale.x() >= 200.0)
     {
-        return 17;
+        bits = 17;
     }
-    if(scale.x() >= 100.0)
+    else if(scale.x() >= 100.0)
     {
-        return 18;
+        bits = 18;
     }
-    if(scale.x() >= 70.0)
+    else if(scale.x() >= 70.0)
     {
-        return 19;
+        bits = 19;
     }
-    if(scale.x() >= 30.0)
+    else if(scale.x() >= 30.0)
     {
-        return 20;
+        bits = 20;
     }
-    if(scale.x() >= 15.0)
+    else if(scale.x() >= 15.0)
     {
-        return 21;
+        bits = 21;
     }
-    if(scale.x() >= 7.0)
+    else if(scale.x() >= 7.0)
     {
-        return 22;
+        bits = 22;
     }
-    if(scale.x() >= 3.0)
+    else if(scale.x() >= 3.0)
     {
-        return 23;
+        bits = 23;
     }
-    return 24;
+
+    return qMax(2, qMin(24, bits + getAdjustDetailLevel()));
 }
 
 void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
@@ -1202,14 +1243,6 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
     p.setBrush(Qt::NoBrush);
 
     quint8 bits = scale2bits(bufferScale);
-//    if((zoomidx >= 25) && (detailsFineTune < 0))
-//    {
-//        bits += detailsFineTune + (zoomidx - 25);
-//    }
-//    else
-//    {
-//        bits += detailsFineTune;
-//    }
 
     QVector<map_level_t>::const_iterator maplevel = maplevels.constEnd();
     do
@@ -1252,7 +1285,17 @@ void CMapIMG::draw(IDrawContext::buffer_t& buf) /* override */
         p.restore();
         return;
     }
-    loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+
+    try
+    {
+        loadVisibleData(false, polygons, polylines, points, pois, maplevel->level, viewport, p);
+    }
+    catch(std::bad_alloc)
+    {
+        qWarning() << "GarminIMG: Allocation error. Abort map rendering.";
+        p.restore();
+        return;
+    }
 
     if(map->needsRedraw())
     {
@@ -2241,7 +2284,7 @@ void CMapIMG::drawText(QPainter& p)
     }
 }
 
-void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
+void CMapIMG::getToolTip(const QPoint& px, QString& infotext) const /* override */
 {
     QString str;
 
@@ -2293,7 +2336,47 @@ void CMapIMG::getToolTip(const QPoint& px, QString& infotext) /* override */
     }
 }
 
-void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::findPOICloseBy(const QPoint& pt, poi_t& poi) const /*override;*/
+{
+    for(auto &list : {points, pois})
+    {
+        for(const CGarminPoint &point : list)
+        {
+            QPoint x = pt - QPoint(point.pos.x(), point.pos.y());
+            if(x.manhattanLength() < 10)
+            {
+                poi.pos = point.pos;
+                if(!point.labels.isEmpty())
+                {
+                    poi.name  = point.labels.first();
+                    poi.desc  = point.getLabelText();
+                }
+                else
+                {
+                    if(pointProperties.contains(point.type))
+                    {
+                        poi.name = pointProperties[point.type].strings[selectedLanguage != NOIDX ? selectedLanguage : 0];
+                    }
+                    else
+                    {
+                        poi.name = QString(" (%1)").arg(point.type, 2, 16, QChar('0'));
+                    }
+                }
+                if(pointProperties.contains(point.type))
+                {
+                    poi.symbolSize = pointProperties[point.type].imgDay.size();
+                }
+                else
+                {
+                    poi.symbolSize = QSize(16,16);
+                }
+                return;
+            }
+        }
+    }
+}
+
+void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
     for(const CGarminPoint &point : points)
     {
@@ -2319,7 +2402,7 @@ void CMapIMG::getInfoPoints(const pointtype_t &points, const QPoint& pt, QMultiM
     }
 }
 
-void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& dict) const
 {
     projXY p1, p2;              // the two points of the polyline close to pt
     qreal u;                    // ratio u the tangent point will divide d_p1_p2
@@ -2409,7 +2492,7 @@ void CMapIMG::getInfoPolylines(const QPoint &pt, QMultiMap<QString, QString>& di
 //    pt = resPt.toPoint();
 }
 
-void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict)
+void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dict) const
 {
     projXY p1, p2;               // the two points of the polyline close to pt
     const qreal x = pt.x();

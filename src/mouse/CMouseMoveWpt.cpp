@@ -36,6 +36,7 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
     key     = wpt.getKey();
     icon    = getWptIconByName(wpt.getIconName(), focus);
     origPos = wpt.getPosition() * DEG_TO_RAD;
+    newPos  = wpt.getPosition() * DEG_TO_RAD;
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()
@@ -51,7 +52,7 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     qreal d = GPS_Math_Distance(p1.x(), p1.y(), p2.x(), p2.y(), a1, a2);
     IUnit::self().meter2distance(d, val, unit);
-    const QString &str = QString("%1 %2, %3").arg(val).arg(unit).arg(a2, 0, 'f', 1);
+    const QString &str = QString("%1 %2, %3%4").arg(val).arg(unit).arg(a2, 0, 'f', 1).arg(QChar(0260));
 
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
@@ -84,13 +85,6 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
     p.drawPixmap(p2 - focus, icon);
 }
 
-void CMouseMoveWpt::slotPanCanvas()
-{
-    IMouse::slotPanCanvas();
-
-    newPos = point;
-    gis->convertPx2Rad(newPos);
-}
 
 void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
 {
@@ -101,6 +95,38 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
         canvas->update();
     }
     else if(e->button() == Qt::LeftButton)
+    {
+        mapMove = true;
+    }
+}
+
+void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
+{
+    point  = e->pos();
+
+    if(mapMove)
+    {
+        if(point != lastPoint)
+        {
+            QPoint delta = point - lastPoint;
+            canvas->moveMap(delta);
+            mapDidMove = true;
+        }
+    }
+    else
+    {
+        newPos = point;
+        gis->convertPx2Rad(newPos);
+    }
+
+    lastPoint = point;
+    canvas->update();
+}
+
+void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
+{
+    point = e->pos();
+    if(!mapDidMove && (e->button() == Qt::LeftButton))
     {
         QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -114,20 +140,9 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
         canvas->resetMouse();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
-}
 
-void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
-{
-    point  = e->pos();
-    newPos = point;
-    gis->convertPx2Rad(newPos);
-
-    panCanvas(point);
-}
-
-void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
-{
-    point = e->pos();
+    mapMove     = false;
+    mapDidMove    = false;
 }
 
 void CMouseMoveWpt::wheelEvent(QWheelEvent*)

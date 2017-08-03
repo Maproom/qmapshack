@@ -21,7 +21,7 @@
 #include "gis/CGisWidget.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
-#include "gis/rte/router/CRouterRoutinoPathSetup.h"
+#include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
@@ -232,12 +232,6 @@ void CRouterRoutino::buildDatabaseList()
             }
 
 #ifdef Q_OS_WIN
-            QFileInfo fi(dir.absoluteFilePath(filename));
-            if(fi.size() > 0x0FFFFFFFFLL)
-            {
-                QMessageBox::warning(this, tr("Warning..."), tr("%1: Due to limitations in the Windows POSIX API Routino can't handle files larger than 4GB.").arg(prefix), QMessageBox::Ok);
-                continue;
-            }
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toLocal8Bit(), prefix.toLocal8Bit());
 #else
             Routino_Database * data = Routino_LoadDatabase(dir.absolutePath().toUtf8(), prefix.toUtf8());
@@ -364,11 +358,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
 
     mutex.unlock();
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 

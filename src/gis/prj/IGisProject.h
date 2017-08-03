@@ -45,6 +45,7 @@ public:
         , eTypeTwoNav
         , eTypeSlf       // the Sigma Log Format
         , eTypeFit
+        , eTypeTcx
     };
 
     enum sorting_roadbook_e
@@ -59,6 +60,12 @@ public:
         eSortFolderTime
         ,eSortFolderName
         ,eSortFolderSymbol
+    };
+
+    enum filter_mode_e
+    {
+        eFilterModeName
+        ,eFilterModeText
     };
 
     struct person_t
@@ -95,15 +102,20 @@ public:
 
     static const QString filedialogAllSupported;
     static const QString filedialogFilterGPX;
+    static const QString filedialogFilterTCX;
     static const QString filedialogFilterQMS;
     static const QString filedialogFilterSLF;
     static const QString filedialogFilterFIT;
     static const QString filedialogSaveFilters;
     static const QString filedialogLoadFilters;
 
+    static filter_mode_e filterMode;
+
     IGisProject(type_e type, const QString &filename, CGisListWks *parent);
     IGisProject(type_e type, const QString &filename, IDevice     *parent);
     virtual ~IGisProject();
+
+    static IGisProject * create(const QString filename, CGisListWks * parent);
 
     /**
        @brief Ask to save the project before it is closed.
@@ -228,6 +240,11 @@ public:
     const QList<IGisItem::link_t>& getLinks() const
     {
         return metadata.links;
+    }
+
+    const metadata_t& getMetadata() const
+    {
+        return metadata;
     }
 
     /**
@@ -469,6 +486,8 @@ public:
         return noUpdate;
     }
 
+    void filter(const QString& str);
+
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);
@@ -501,6 +520,7 @@ protected:
     // Those are standard GPX/XML namespaces
     static const QString gpx_ns;
     static const QString xsi_ns;
+    static const QString gpxdata_ns;
 
     QPointer<CDetailsPrj> dlgDetails;
 

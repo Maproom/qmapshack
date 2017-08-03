@@ -148,7 +148,7 @@ void CDemDraw::buildMapList()
 
             CDemItem * item = new CDemItem(*demList, this);
 
-            item->setText(0,fi.baseName().replace("_", " "));
+            item->setText(0,fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
@@ -269,7 +269,7 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
                 if(!item || item->demfile.isNull())
                 {
                     // as all active maps have to be at the top of the list
-                    // it is ok to break ass soon as the first map with no
+                    // it is ok to break as soon as the first map with no
                     // active files is hit.
                     break;
                 }
@@ -286,6 +286,38 @@ qreal CDemDraw::getElevationAt(const QPointF& pos)
     return ele;
 }
 
+qreal CDemDraw::getSlopeAt(const QPointF& pos)
+{
+    qreal slope = NOFLOAT;
+    if(CDemItem::mutexActiveDems.tryLock())
+    {
+        if(demList)
+        {
+            for(int i = 0; i < demList->count(); i++)
+            {
+                CDemItem * item = demList->item(i);
+
+                if(!item || item->demfile.isNull())
+                {
+                    // as all active maps have to be at the top of the list
+                    // it is ok to break as soon as the first map with no
+                    // active files is hit.
+                    break;
+                }
+
+                slope = item->demfile->getSlopeAt(pos);
+                if(slope != NOFLOAT)
+                {
+                    break;
+                }
+            }
+        }
+        CDemItem::mutexActiveDems.unlock();
+    }
+    return slope;
+}
+
+
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
     qreal basefactor = IUnit::self().basefactor;
@@ -294,6 +326,14 @@ void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
     {
         qreal tmp = getElevationAt(pos[i]);
         ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp * basefactor;
+    }
+}
+
+void CDemDraw::getSlopeAt(const QPolygonF& pos, QPolygonF& slope)
+{
+    for(int i = 0; i < pos.size(); i++)
+    {
+        slope[i].ry() = getSlopeAt(pos[i]);
     }
 }
 
@@ -315,7 +355,7 @@ void CDemDraw::drawt(buffer_t& currentBuffer)
             if(!item || item->demfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }

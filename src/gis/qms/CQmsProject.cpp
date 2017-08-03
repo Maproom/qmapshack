@@ -57,7 +57,7 @@ CQmsProject::CQmsProject(const QString &filename, CGisListWks *parent)
 
     markAsSaved();
 
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
     valid = true;

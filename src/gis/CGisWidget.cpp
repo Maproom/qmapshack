@@ -20,18 +20,17 @@
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
+#include "gis/CSetupFilter.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
-#include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
-#include "gis/slf/CSlfProject.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -52,15 +51,21 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    lineFilter->addAction(actionClearFilter,QLineEdit::TrailingPosition);
+    lineFilter->addAction(actionSetupFilter, QLineEdit::LeadingPosition);
+
     treeWks->setExternalMenu(menuProject);
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
     treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
+    IGisProject::filterMode = IGisProject::filter_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::filterMode).toInt());
 
     connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
     connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
+    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
+    connect(actionSetupFilter, &QAction::triggered, this, &CGisWidget::slotSetupFilter);
 
     slotHelpText();
 
@@ -72,7 +77,7 @@ CGisWidget::~CGisWidget()
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
     cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
-
+    cfg.setValue("Workspace/projects/filterMode", IGisProject::filterMode);
     /*
         Explicitly delete workspace here, as database projects use
         CGisWidget upon destruction to signal the database their destruction.
@@ -85,6 +90,7 @@ void CGisWidget::setOpacity(qreal val)
 {
     sliderOpacity->setValue(val * 100);
 }
+
 void CGisWidget::postEventForWks(QEvent * event)
 {
     QCoreApplication::postEvent(treeWks, event);
@@ -103,36 +109,8 @@ void CGisWidget::loadGisProject(const QString& filename)
     treeWks->blockSignals(true);
 
     QMutexLocker lock(&IGisItem::mutexItems);
-    IGisProject *item = nullptr;
-    QString suffix = QFileInfo(filename).suffix().toLower();
-    if(suffix == "gpx")
-    {
-        item = new CGpxProject(filename, treeWks);
-    }
-    else if(suffix == "qms")
-    {
-        item = new CQmsProject(filename, treeWks);
-    }
-    else if(suffix == "slf")
-    {
-        item = new CSlfProject(filename);
 
-        // the CSlfProject does not - as the other C*Project - register itself in the list
-        // of currently opened projects. This is done manually here.
-        treeWks->addProject(item);
-    }
-    else if(suffix == "fit")
-    {
-        item = new CFitProject(filename, treeWks);
-    }
-
-
-    if(item && !item->isValid())
-    {
-        delete item;
-        item = nullptr;
-    }
-
+    IGisProject * item = IGisProject::create(filename, treeWks);
     // skip if project is already loaded
     if(item && treeWks->hasProject(item))
     {
@@ -161,6 +139,42 @@ void CGisWidget::slotSetGisLayerOpacity(int val)
     {
         canvas->update();
     }
+}
+
+void CGisWidget::applyFilter()
+{
+    slotFilter(lineFilter->text());
+}
+
+void CGisWidget::slotFilter(const QString& str)
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    const int N = treeWks->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * item = dynamic_cast<IGisProject*>(treeWks->topLevelItem(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        item->filter(str.toUpper());
+        item->setExpanded(!str.isEmpty());
+    }
+
+    CCanvas::restoreOverrideCursor("slotFilter");
+
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CGisWidget::slotSetupFilter()
+{
+    CSetupFilter * setupFilter = new CSetupFilter(this);
+    setupFilter->adjustSize();
+    setupFilter->move(lineFilter->geometry().topLeft());
+    setupFilter->show();
 }
 
 void CGisWidget::slotSaveAll()
@@ -474,11 +488,7 @@ void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
         project->blockUpdateItems(false);
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisWidget::editItemByKey(const IGisItem::key_t& key)
@@ -553,12 +563,28 @@ void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     }
     project->blockUpdateItems(false);
 
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
+
+void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    PROGRESS_SETUP(tr("Change waypoint symbols."), 0, keys.count(), this);
+    int cnt = 0;
+    for(const IGisItem::key_t& key : keys)
+    {
+        PROGRESS(cnt++, break);
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+        if(nullptr != wpt)
+        {
+            wpt->setIcon(sym);
+        }
+    }
+
+    emit sigChanged();
+}
+
 
 void CGisWidget::projWptByKey(const IGisItem::key_t& key)
 {
@@ -604,9 +630,9 @@ void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
     }
 }
 
-void CGisWidget::addWptByPos(QPointF pt) const
+void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
-    QString name;
+    QString name = label;
     QString icon;
     if(!CGisItemWpt::getNewWptData(pt, icon, name))
     {
@@ -621,6 +647,10 @@ void CGisWidget::addWptByPos(QPointF pt) const
 
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = new CGisItemWpt(pt, name, icon, project);
+    if(!desc.isEmpty())
+    {
+        wpt->setDescription(desc);
+    }
     wpt->edit();
 }
 
@@ -787,18 +817,15 @@ void CGisWidget::copyTrkWithWptByKey(const IGisItem::key_t &key)
     {
         keys << key;
 
-        const CGisItemTrk::trk_t& t = trk->getTrackData();
-        for(const CGisItemTrk::trkseg_t& seg : t.segs)
+        const CTrackData& t = trk->getTrackData();
+        for(const CTrackData::trkpt_t& trkpt : t)
         {
-            for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+            if(trkpt.isHidden() || trkpt.keyWpt.item.isEmpty())
             {
-                if((trkpt.flags & CGisItemTrk::trkpt_t::eHidden) || trkpt.keyWpt.item.isEmpty())
-                {
-                    continue;
-                }
-
-                keys << trkpt.keyWpt;
+                continue;
             }
+
+            keys << trkpt.keyWpt;
         }
 
         copyItemsByKey(keys);
@@ -875,6 +902,7 @@ void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
     CCreateRouteFromWpt dlg(keys, this);
     dlg.exec();
 }
+
 
 void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
 {
@@ -956,3 +984,5 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
         }
     }
 }
+
+

@@ -102,6 +102,61 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     valid = true;
 }
 
+CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisListWks *parent)
+    : IGisProject(eTypeDb, parentFolder->getDBName(), parent)
+    , db(parentFolder->getDb())
+{
+    IGisProject * prjIn = IGisProject::create(filename, nullptr);
+    if(prjIn == nullptr)
+    {
+        QMessageBox::information(CMainWindow::self().getBestWidgetForParent(), tr("Failed to load..."),
+                                 tr("Can't load file \"%1\" . It will be skipped.").arg(QFileInfo(filename).completeBaseName()),
+                                 QMessageBox::Ok);
+        return;
+    }
+
+
+    // test if the project has been imported already
+    QSqlQuery query(db);
+    query.prepare("SELECT id FROM folders WHERE keyqms=:keyqms");
+    query.bindValue(":keyqms", prjIn->getKey());
+    QUERY_EXEC(return );
+    if(query.next())
+    {
+        QMessageBox::information(CMainWindow::self().getBestWidgetForParent(), tr("Project already in database..."),
+                                 tr("The project \"%1\" has already been imported into the database. It will be skipped.").arg(prjIn->getName()),
+                                 QMessageBox::Ok);
+        return;
+    }
+
+    // create a new folder in the database
+    id = parentFolder->addFolder(IDBFolder::eTypeProject, prjIn->getName());
+    query.prepare("UPDATE folders SET keyqms=:keyqms WHERE id=:id");
+    query.bindValue(":keyqms", prjIn->getKey());
+    query.bindValue(":id", id);
+    QUERY_EXEC(return );
+
+
+    // copy data
+    key         = prjIn->getKey();
+    metadata    = prjIn->getMetadata();
+
+    QList<QTreeWidgetItem*> items = prjIn->takeChildren();
+    addChildren(items);
+
+    // set change indication else the item will not be saved
+    for(QTreeWidgetItem * item : items)
+    {
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        if(gisItem)
+        {
+            gisItem->updateDecoration(IGisItem::eMarkChanged, IGisItem::eMarkNone);
+        }
+    }
+
+    valid = true;
+}
+
 CDBProject::~CDBProject()
 {
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
@@ -504,7 +559,7 @@ bool CDBProject::save()
     bool success    = true;
     int lastResult  = CSelectSaveAction::eResultNone;
 
-    // check if project is still part of the databasse
+    // check if project is still part of the database
     query.prepare("SELECT keyqms FROM folders WHERE id=:id");
     query.bindValue(":id", id);
     QUERY_EXEC(return false);

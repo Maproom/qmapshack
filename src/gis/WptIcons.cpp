@@ -55,7 +55,22 @@ void initWptIcons()
     wptIcons["Parking Area"]        = icon_t("://icons/cache/32x32/parking.png", 16, 16);
     wptIcons["Trailhead"]           = icon_t("://icons/cache/32x32/trailhead.png", 16, 16);
     wptIcons["Waypoint"]            = icon_t("://icons/waypoints/32x32/Waypoint.png", 16, 16);
-
+    wptIcons["1stCategory"]         = icon_t("://icons/waypoints/32x32/1stCategory.png", 16, 16);
+    wptIcons["2ndCategory"]         = icon_t("://icons/waypoints/32x32/2ndCategory.png", 16, 16);
+    wptIcons["3rdCategory"]         = icon_t("://icons/waypoints/32x32/3rdCategory.png", 16, 16);
+    wptIcons["4thCategory"]         = icon_t("://icons/waypoints/32x32/4thCategory.png", 16, 16);
+    wptIcons["Danger"]              = icon_t("://icons/waypoints/32x32/Danger.png", 16, 16);
+    wptIcons["FirstAid"]            = icon_t("://icons/waypoints/32x32/FirstAid.png", 16, 16);
+    wptIcons["Food"]                = icon_t("://icons/waypoints/32x32/Food.png", 16, 16);
+    wptIcons["Generic"]             = icon_t("://icons/waypoints/32x32/Generic.png", 16, 16);
+    wptIcons["HorsCategory"]        = icon_t("://icons/waypoints/32x32/HorsCategory.png", 16, 16);
+    wptIcons["Left"]                = icon_t("://icons/waypoints/32x32/Left.png", 16, 16);
+    wptIcons["Right"]               = icon_t("://icons/waypoints/32x32/Right.png", 16, 16);
+    wptIcons["Sprint"]              = icon_t("://icons/waypoints/32x32/Sprint.png", 16, 16);
+    wptIcons["Straight"]            = icon_t("://icons/waypoints/32x32/Straight.png", 16, 16);
+    wptIcons["Summit"]              = icon_t("://icons/waypoints/32x32/Summit.png", 16, 16);
+    wptIcons["Valley"]              = icon_t("://icons/waypoints/32x32/Valley.png", 16, 16);
+    wptIcons["Water"]               = icon_t("://icons/waypoints/32x32/Water.png", 16, 16);
 
     setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");
     setWptIconByName("Multi-cache", "://icons/cache/32x32/multi.png");
@@ -76,7 +91,7 @@ void initWptIcons()
     for(const QString &filename : filenames)
     {
         QFileInfo fi(filename);
-        QString name = fi.baseName();
+        QString name = fi.completeBaseName();
         setWptIconByName(name, dirIcon.filePath(filename));
     }
 }

@@ -87,39 +87,36 @@ void CPlotProfile::updateData()
     IGisProject * project = dynamic_cast<IGisProject*>(trk->parent());
 
     qreal basefactor = IUnit::self().basefactor;
-    const CGisItemTrk::trk_t& t = trk->getTrackData();
-    for(const CGisItemTrk::trkseg_t& seg : t.segs)
+    const CTrackData& t = trk->getTrackData();
+    for(const CTrackData::trkpt_t& trkpt : t)
     {
-        for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+        if(trkpt.isHidden())
         {
-            if(trkpt.flags & CGisItemTrk::trkpt_t::eHidden)
-            {
-                continue;
-            }
+            continue;
+        }
 
-            if(trkpt.ele == NOINT)
-            {
-                continue;
-            }
+        if(trkpt.ele == NOINT)
+        {
+            continue;
+        }
 
-            lineEle << QPointF(trkpt.distance, trkpt.ele * basefactor);
-            coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
-            lineDem << QPointF(trkpt.distance, NOFLOAT);
+        lineEle << QPointF(trkpt.distance, trkpt.ele * basefactor);
+        coords << QPointF(trkpt.lon * DEG_TO_RAD, trkpt.lat * DEG_TO_RAD);
+        lineDem << QPointF(trkpt.distance, NOFLOAT);
 
-            if(nullptr == project || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
-            {
-                continue;
-            }
+        if(nullptr == project || trkpt.keyWpt.item.isEmpty() || (mode == eModeIcon))
+        {
+            continue;
+        }
 
-            CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
-            if(wpt)
-            {
-                CPlotData::point_t tag;
-                tag.point = lineEle.last();
-                tag.icon  = wpt->getIcon();
-                tag.label = wpt->getName();
-                data->tags << tag;
-            }
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+        if(wpt)
+        {
+            CPlotData::point_t tag;
+            tag.point = lineEle.last();
+            tag.icon  = wpt->getIcon();
+            tag.label = wpt->getName();
+            data->tags << tag;
         }
     }
 
@@ -146,7 +143,7 @@ void CPlotProfile::updateData()
     resetZoom();
 }
 
-void CPlotProfile::setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove)
+void CPlotProfile::setMouseFocus(const CTrackData::trkpt_t * ptMouseMove)
 {
     if(nullptr == ptMouseMove)
     {

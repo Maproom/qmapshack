@@ -18,7 +18,6 @@
 
 #include "gis/fit/decoder/IFitDecoderState.h"
 
-
 decode_state_e IFitDecoderState::processByte(quint8 &dataByte)
 {
     incFileBytesRead();
@@ -81,18 +80,18 @@ void IFitDecoderState::addMessage(const CFitDefinitionMessage& definition)
 
 void IFitDecoderState::addDefinition(const CFitDefinitionMessage &definition)
 {
-    data.defintions[definition.getLocalMesgNr()] = definition;
-    data.lastDefintion = &data.defintions[definition.getLocalMesgNr()];
+    data.definitions[definition.getLocalMesgNr()] = definition;
+    data.lastDefinition = &data.definitions[definition.getLocalMesgNr()];
 }
 
-void IFitDecoderState::endDefintion()
+void IFitDecoderState::endDefinition()
 {
-    data.defintionHistory.append(*data.lastDefintion);
+    data.definitionHistory.append(*data.lastDefinition);
 }
 
-CFitDefinitionMessage*IFitDecoderState::defintion(quint32 localMessageType)
+CFitDefinitionMessage*IFitDecoderState::definition(quint32 localMessageType)
 {
-    return &(data.defintions[localMessageType]);
+    return &(data.definitions[localMessageType]);
 }
 
 void IFitDecoderState::setFileLength(quint32 fileLength)
@@ -114,4 +113,37 @@ void IFitDecoderState::resetFileBytesRead()
 void IFitDecoderState::incFileBytesRead()
 {
     data.fileBytesRead++;
+}
+
+void IFitDecoderState::addDevFieldProfile(const CFitFieldProfile &fieldProfile)
+{
+    // for documentation: a development field definition is linked to an developer data ID. Only the tuple developer data index
+    // and field definition number must be unique. So far no fit file with more than one developer data ID has been created.
+    if(devFieldProfile(fieldProfile.getFieldDefNum())->getFieldDefNum() ==  fieldProfile.getFieldDefNum())
+    {
+        throw tr("FIT decoding error: a development field with the field_definition_number %1 already exists.")
+              .arg(fieldProfile.getFieldDefNum());
+    }
+    data.devFieldProfiles.append(fieldProfile);
+}
+
+CFitFieldProfile* IFitDecoderState::devFieldProfile(quint32 fieldNr)
+{
+    for (int i=0; i < data.devFieldProfiles.size(); i++)
+    {
+        if (fieldNr == data.devFieldProfiles[i].getFieldDefNum())
+        {
+            return &data.devFieldProfiles[i];
+        }
+    }
+    // dummy field for unknown field nr.
+    static CFitFieldProfile dummyFieldProfile;
+    return &dummyFieldProfile;
+
+    //return data.devFieldProfiles[fieldNr];
+}
+
+void IFitDecoderState::clearDevFieldProfiles()
+{
+    data.devFieldProfiles.clear();
 }

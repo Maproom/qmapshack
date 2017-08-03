@@ -30,15 +30,21 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="horizontalSpacing">
+      <number>3</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>3</number>
+     </property>
+     <item row="0" column="0">
       <widget class="QLabel" name="label_3">
        <property name="text">
         <string>Opacity</string>
        </property>
       </widget>
      </item>
-     <item>
+     <item row="0" column="1">
       <widget class="QSlider" name="sliderOpacity">
        <property name="toolTip">
         <string>Change the opacity of all GIS Items on the map.</string>
@@ -51,6 +57,20 @@
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Filter</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineFilter">
+       <property name="clearButtonEnabled">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -176,6 +196,24 @@
     </widget>
    </item>
   </layout>
+  <action name="actionClearFilter">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Cancel.png</normaloff>:/icons/32x32/Cancel.png</iconset>
+   </property>
+   <property name="text">
+    <string>Clear Filter</string>
+   </property>
+  </action>
+  <action name="actionSetupFilter">
+   <property name="icon">
+    <iconset resource="../resources.qrc">
+     <normaloff>:/icons/32x32/Apply.png</normaloff>:/icons/32x32/Apply.png</iconset>
+   </property>
+   <property name="text">
+    <string>Setup Filter</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>
@@ -192,5 +230,22 @@
  <resources>
   <include location="../resources.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionClearFilter</sender>
+   <signal>triggered()</signal>
+   <receiver>lineFilter</receiver>
+   <slot>clear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>228</x>
+     <y>34</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

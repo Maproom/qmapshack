@@ -48,6 +48,17 @@ CCutTrk::CCutTrk(QWidget *parent)
         break;
     }
 
+    switch(cfg.value("cutMode", eCutMode2).toInt())
+    {
+    case eCutMode1:
+        radioCutMode1->setChecked(true);
+        break;
+
+    case eCutMode2:
+        radioCutMode2->setChecked(true);
+        break;
+    }
+
     cfg.endGroup();
 }
 
@@ -58,6 +69,7 @@ void CCutTrk::accept()
     cfg.beginGroup("TrackCut");
     cfg.setValue("checkCreateClone", checkCreateClone->isChecked());
     cfg.setValue("mode", radioKeepFirst->isChecked() ? eModeKeepFirst : radioKeepBoth->isChecked() ? eModeKeepBoth : radioKeepSecond->isChecked() ? eModeKeepSecond : eModeNone);
+    cfg.setValue("cutMode", radioCutMode1->isChecked() ? eCutMode1 : eCutMode2);
     cfg.endGroup();
 
     if(radioKeepFirst->isChecked())
@@ -71,6 +83,15 @@ void CCutTrk::accept()
     else if(radioKeepSecond->isChecked())
     {
         mode = eModeKeepSecond;
+    }
+
+    if(radioCutMode1->isChecked())
+    {
+        cutMode = eCutMode1;
+    }
+    else
+    {
+        cutMode = eCutMode2;
     }
 
     QDialog::accept();

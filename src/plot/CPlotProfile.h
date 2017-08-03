@@ -34,7 +34,7 @@ public:
 
     void setTrack(CGisItemTrk * track, CLimit& lim);
     void updateData() override;
-    void setMouseFocus(const CGisItemTrk::trkpt_t * ptMouseMove) override;
+    void setMouseFocus(const CTrackData::trkpt_t * ptMouseMove) override;
 
 public slots:
     void setLimits();

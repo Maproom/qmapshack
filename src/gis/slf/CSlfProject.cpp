@@ -50,6 +50,6 @@ CSlfProject::CSlfProject(const QString &filename, bool readFile)
 
     sortItems();
     blockUpdateItems(false);
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
 }
 

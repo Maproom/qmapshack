@@ -19,6 +19,7 @@
 #ifndef IGISLINE_H
 #define IGISLINE_H
 
+#include "units/IUnit.h"
 #include <QPointF>
 #include <QVector>
 
@@ -36,8 +37,8 @@ public:
     struct subpt_t
     {
         subpt_t() = default;
-        subpt_t(const QPointF& pt);
-        subpt_t(const QPointF& pt, const QString &name);
+        subpt_t(const QPointF& pt) : coord(pt) {}
+        subpt_t(const QPointF& pt, const QString &name) : coord(pt), name(name) {}
         QPointF coord;
         QPointF pixel;
         QString name;
@@ -47,8 +48,8 @@ public:
     struct point_t : public subpt_t
     {
         point_t() = default;
-        point_t(const QPointF &pt);
-        point_t(const QPointF &pt, const QString &name);
+        point_t(const QPointF &pt) : subpt_t(pt) {}
+        point_t(const QPointF &pt, const QString &name) : subpt_t(pt, name) {}
         void resetElevation();
         QVector<subpt_t> subpts;
     };

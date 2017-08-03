@@ -70,8 +70,6 @@ public:
     bool useAutoRouting() const;
     bool useVectorRouting() const;
 
-    void setCanvasPanning(bool enable);
-
     void storeToHistory(const SGisLine& line);
     void restoreFromHistory(SGisLine& line);
 
@@ -108,8 +106,6 @@ protected slots:
     void slotUndo();
     void slotRedo();
 
-    void slotPanCanvas() override;
-
 protected:
     virtual void drawLine(const QPolygonF& l, const QColor color, int width, QPainter& p);
     /**
@@ -136,12 +132,11 @@ protected:
     /// the key of the GIS item to edit
     IGisItem::key_t key;
 
+    QString docPanning = tr("<br/><b>Move the map</b><br/>If you keep the left mouse button pressed and move the mouse, you will move the map.<br/><br/>");
+
 private:
     void commonSetup();
     void changeCursor();
-
-    /// flag to enable/disable canvas/map panning
-    bool doCanvasPanning = false;
 
     QPolygonF pixelLine;
     QPolygonF pixelPts;

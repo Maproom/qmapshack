@@ -151,7 +151,7 @@
             </size>
            </property>
            <property name="toolTip">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </string>
            </property>
            <property name="text">
             <string/>

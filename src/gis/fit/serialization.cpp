@@ -45,14 +45,13 @@ static QDateTime toDateTime(quint32 timestamp)
 {
     QDateTime dateTime;
     dateTime.setTime_t(sec1970to1990 + timestamp);
-    dateTime.setTimeSpec(Qt::UTC);
     return dateTime;
 }
 
 static QString dateTimeAsString(quint32 timestamp)
 {
     QDateTime dateTime = toDateTime(timestamp);
-    return dateTime.toString("yyyy-dd-MM-HH-mm-ss");
+    return IUnit::datetime2string(dateTime, true);
 }
 
 template<typename T>
@@ -95,7 +94,7 @@ static bool readFitRecord(const CFitMessage &mesg, IGisItem::wpt_t &pt)
     return false;
 }
 
-static bool readFitRecord(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt)
+static bool readFitRecord(const CFitMessage &mesg, CTrackData::trkpt_t &pt)
 {
     if(readFitRecord(mesg, (IGisItem::wpt_t &)pt))
     {
@@ -131,7 +130,7 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 }
 
 
-static bool readFitSegmentPoint(const CFitMessage &mesg, CGisItemTrk::trkpt_t &pt, quint32 timeCreated)
+static bool readFitSegmentPoint(const CFitMessage &mesg, CTrackData::trkpt_t &pt, quint32 timeCreated)
 {
     if(mesg.isFieldValueValid(eSegmentPointPositionLong) && mesg.isFieldValueValid(eSegmentPointPositionLat))
     {
@@ -178,7 +177,7 @@ static QString evaluateTrkName(CFitStream &stream)
     }
 
     // fourth place: take the filename of the fit file
-    return QFileInfo(stream.getFileName()).baseName().replace("_", " ");
+    return QFileInfo(stream.getFileName()).completeBaseName().replace("_", " ");
 }
 
 
@@ -198,14 +197,14 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
     // Record messages can either be at the beginning or in chronological order within the record
     // messages. Garmin devices uses the chronological ordering. We only consider the chronological
     // order, otherwise timestamps (of records and events) must be compared to each other.
-    trkseg_t seg;
+    CTrackData::trkseg_t seg;
     do
     {
         const CFitMessage& mesg = stream.nextMesg();
         if(mesg.getGlobalMesgNr() == eMesgNumRecord)
         {
             // for documentation: MesgNumActivity, MesgNumSession, MesgNumLap, MesgNumLength could also contain data
-            CGisItemTrk::trkpt_t pt;
+            CTrackData::trkpt_t pt;
             if(readFitRecord(mesg, pt))
             {
                 seg.pts.append(std::move(pt));
@@ -221,14 +220,14 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
                     if(!seg.pts.isEmpty())
                     {
                         trk.segs.append(seg);
-                        seg = trkseg_t();
+                        seg = CTrackData::trkseg_t();
                     }
                 }
             }
         }
         else if(mesg.getGlobalMesgNr() == eMesgNumSegmentPoint)
         {
-            CGisItemTrk::trkpt_t pt;
+            CTrackData::trkpt_t pt;
             if(readFitSegmentPoint(mesg, pt, timeCreated))
             {
                 seg.pts.append(std::move(pt));

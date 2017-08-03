@@ -32,9 +32,7 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
     }
     setupUi(this);
 
-    qint32 idx1 = 0, idx2 = 0;
-    trk->getSelectedVisiblePoints(idx1, idx2);
-    bool noRange = idx1 == idx2;
+    bool noRange = !trk->isRangeSelected();
 
     label->setFont(CMainWindow::self().getMapFont());
     label->setText(noRange ?  tr("No range selected") : trk->getInfoRange());
@@ -45,7 +43,6 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
     move(point.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    toolShowPoints->setDisabled(noRange);
     toolCopy->setDisabled(noRange);
     toolActivity->setDisabled(noRange);
 

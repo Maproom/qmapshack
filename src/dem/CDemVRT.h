@@ -36,6 +36,7 @@ public:
     void draw(IDrawContext::buffer_t& buf) override;
 
     qreal getElevationAt(const QPointF& pos) override;
+    qreal getSlopeAt(const QPointF& pos) override;
 
 private:
     QMutex mutex;

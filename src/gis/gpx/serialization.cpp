@@ -38,6 +38,7 @@ const QString IGisProject::rmc_ns    = "urn:net:trekbuddy:1.0:nmea:rmc";
 const QString IGisProject::ql_ns     = "http://www.qlandkarte.org/xmlschemas/v1.1";
 const QString IGisProject::gs_ns     = "http://www.groundspeak.com/cache/1/0";
 const QString IGisProject::tp1_ns    = "http://www.garmin.com/xmlschemas/TrackPointExtension/v1";
+const QString IGisProject::gpxdata_ns= "http://www.cluetrust.com/XML/GPXDATA/1/0";
 
 
 static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
@@ -299,7 +300,7 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
 static void readXml(const QDomNode& node, const QString& parentTags, QHash<QString, QVariant>& extensions)
 {
     QString tag = node.nodeName();
-    if(tag.left(3) == "ql:")
+    if(tag.left(8) == "ql:flags")
     {
         return;
     }
@@ -454,13 +455,17 @@ QDomNode IGisProject::writeMetadata(QDomDocument& doc, bool strictGpx11)
         gpx.setAttribute("xmlns:rmc",    rmc_ns);
         gpx.setAttribute("xmlns:ql",     ql_ns);
         gpx.setAttribute("xmlns:tp1",    tp1_ns);
+        gpx.setAttribute("xmlns:gpxdata",gpxdata_ns);
+
+
 
         schemaLocation = QString()
                          + gpx_ns    + " http://www.topografix.com/GPX/1/1/gpx.xsd "
                          + gpxx_ns   + " http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd "
                          + gpxtpx_ns + " http://www.garmin.com/xmlschemas/TrackPointExtensionv1.xsd "
                          + wptx1_ns  + " http://www.garmin.com/xmlschemas/WaypointExtensionv1.xsd "
-                         + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd ";
+                         + ql_ns     + " http://www.qlandkarte.org/xmlschemas/v1.1/ql-extensions.xsd "
+                         + gpxdata_ns+ " http://www.cluetrust.com/Schemas/gpxdata10.xsd";
     }
     else
     {
@@ -715,7 +720,7 @@ void CGisItemWpt::writeGcExt(QDomNode& xmlCache)
 }
 
 
-void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
+void CGisItemTrk::readTrk(const QDomNode& xml, CTrackData& trk)
 {
     readXml(xml, "name",   trk.name);
     readXml(xml, "cmt",    trk.cmt);
@@ -731,14 +736,14 @@ void CGisItemTrk::readTrk(const QDomNode& xml, trk_t& trk)
     for(int n = 0; n < N; ++n)
     {
         const QDomNode& trkseg = trksegs.item(n);
-        trkseg_t& seg = trk.segs[n];
+        CTrackData::trkseg_t& seg = trk.segs[n];
 
         const QDomNodeList& xmlTrkpts = trkseg.toElement().elementsByTagName("trkpt");
         int M = xmlTrkpts.count();
         seg.pts.resize(M);
         for(int m = 0; m < M; ++m)
         {
-            trkpt_t& trkpt = seg.pts[m];
+            CTrackData::trkpt_t& trkpt = seg.pts[m];
             const QDomNode& xmlTrkpt = xmlTrkpts.item(m);
             readWpt(xmlTrkpt, trkpt);
 
@@ -799,12 +804,12 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
         writeXml(gpxx, "gpxx:DisplayColor", trk.color);
     }
 
-    for(const trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : trk.segs)
     {
         QDomElement xmlTrkseg = doc.createElement("trkseg");
         xmlTrk.appendChild(xmlTrkseg);
 
-        for(const trkpt_t &pt : seg.pts)
+        for(const CTrackData::trkpt_t &pt : seg.pts)
         {
             QDomElement xmlTrkpt = doc.createElement("trkpt");
             xmlTrkseg.appendChild(xmlTrkpt);
@@ -1042,7 +1047,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
         CGisItemTrk * track = dynamic_cast<CGisItemTrk*>(project->child(i));
         if(track != nullptr)
         {
-            const CGisItemTrk::trk_t& trk = track->getTrackData();
+            const CTrackData& trk = track->getTrackData();
             if(trk.segs.isEmpty())
             {
                 continue;
@@ -1053,7 +1058,7 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
                 continue;
             }
 
-            const CGisItemTrk::trkpt_t& origin = trk.segs.first().pts.first();
+            const CTrackData::trkpt_t& origin = trk.segs.first().pts.first();
 
             QDomElement startPosition = doc.createElement("StartPosition");
             adventure.appendChild(startPosition);
@@ -1072,29 +1077,25 @@ void CDeviceGarmin::createAdventureFromProject(IGisProject * project, const QStr
             QDomElement waypointOrder = doc.createElement("WaypointOrder");
             adventure.appendChild(waypointOrder);
 
-            for(const CGisItemTrk::trkseg_t& seg : trk.segs)
+            for(const CTrackData::trkpt_t& trkpt : trk)
             {
-                for(const CGisItemTrk::trkpt_t& trkpt : seg.pts)
+                if(trkpt.keyWpt.item.isEmpty())
                 {
-                    if(trkpt.keyWpt.item.isEmpty())
-                    {
-                        continue;
-                    }
-
-                    const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
-                    if(wpt == nullptr)
-                    {
-                        continue;
-                    }
-
-                    QDomElement waypoints = doc.createElement("Waypoints");
-                    waypointOrder.appendChild(waypoints);
-
-                    writeXml(waypoints, "ID", wpt->getName());
-                    writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+                    continue;
                 }
-            }
 
+                const CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(trkpt.keyWpt));
+                if(wpt == nullptr)
+                {
+                    continue;
+                }
+
+                QDomElement waypoints = doc.createElement("Waypoints");
+                waypointOrder.appendChild(waypoints);
+
+                writeXml(waypoints, "ID", wpt->getName());
+                writeXml(waypoints, "DistanceFromOrigin", trkpt.distance);
+            }
 
             break;
         }

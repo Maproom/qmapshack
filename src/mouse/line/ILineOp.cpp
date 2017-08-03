@@ -114,17 +114,16 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     {
         mousePressEventEx(e);
     }
-    else
-    {
-        const QPoint& pos = e->pos();
 
-        if(e->button() == Qt::LeftButton)
-        {
-            lastPos    = pos;
-            mapMove    = true;
-            mapDidMove = false;
-        }
+
+    if(e->button() == Qt::LeftButton)
+    {
+        lastPos    = e->pos();
+        firstPos   = lastPos;
+        mapMove    = true;
+        mapDidMove = false;
     }
+
     showRoutingErrorMessage(QString());
 }
 
@@ -132,27 +131,26 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if(mapMove)
+    if(mapMove && ((pos - firstPos).manhattanLength() >= 4))
     {
-        if(pos != lastPos)
-        {
-            QPoint delta = pos - lastPos;
-            canvas->moveMap(delta);
-            mapDidMove  = true;
-        }
+        QPoint delta = pos - lastPos;
+        canvas->moveMap(delta);
+        mapDidMove  = true;
     }
-    else
-    {
-        updateLeadLines(idxFocus);
-        mouseMoveEventEx(e);
-    }
+
+    updateLeadLines(idxFocus);
+    mouseMoveEventEx(e);
 
     lastPos = pos;
 }
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    mouseReleaseEventEx(e);
+    if(!mapDidMove)
+    {
+        mouseReleaseEventEx(e);
+    }
+
     mapMove     = false;
     mapDidMove  = false;
 }
@@ -322,6 +320,7 @@ qint32 ILineOp::isCloseToLine(const QPoint& pos) const
         }
         else
         {
+            line << pt1.pixel;
             for(const IGisLine::subpt_t& pt : pt1.subpts)
             {
                 line << pt.pixel;

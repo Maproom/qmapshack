@@ -9,13 +9,14 @@ Additional Software & Installation
 **********************************
 To be able to build QMapShack there are several software packages and libraries 
 required:
-- proj4 library (version x)
-- gdal library (version x)
-- qt5 framework (version 5.5 and above)
-- routino library (version)
+- proj4 library (version 4.9.x)
+- gdal library (version 2.1.x)
+- qt5 framework (version 5.5.x)
+- routino library (version 3.1.x)
+- quazip library (version 0.7.x)
 - qmapshack
 - cmake (version 3.x and above)
-- svn command line tool
+- svn command line tool (for routino)
 - mercurial (hg) command line tool
 
 The best way is to install most of the required packages is by using brew.
@@ -24,7 +25,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 After istalling brew use it to install most of the required packages:
 brew install proj4
-brew install gdal
+brew install gdal  (unfortunately not the newest version is prvided with brew)
 brew install cmake
 brew install qt5 --with-d-bus, --with-mysql
 brew install svn
@@ -49,14 +50,23 @@ variables in advanced:
 ROUTINO_LIB_DIR=... (absolute path to directory where the build library and other files will be stored)
 ROUTINO_SRC_DIR=... (absolute path to directory where the source code will be checked out)
 
-Now call the script:
-
+Script call:
 ./build-routino.sh routino-build
+
+For building the Quazip library there is the bash script "build-quazip.sh" in the MacOSX subdirectory.
+The Quazip source has to be downloaded manually from "https://sourceforge.net/projects/quazip/".
+To run the script, you need to set three environment variables in advanced:
+QUAZIP_LIB_DIR=..   (absolute path to directory where the build library and other files will be stored)
+QUAZIP_SRC_DIR=..   (absolute path to directory where the extracted source code has been saved to)
+QT_DIR=..           (absolute path to directory where QT has been installed to. If done with brew, it is like /usr/local/Cellar/qt5/5.5..)
+
+Script call:
+./build-quazip.sh quazip-build
 
 
 Building and Bundling QMapShack
 *******************************
-Now you need to get the source of QMapShack:
+To get the source of QMapShack:
 hg clone https://bitbucket.org/maproom/qmapshack
 
 In the same directory as this how to is the bash script "bundle.sh". The script 
@@ -65,7 +75,7 @@ So you need to build the binary first with the command:
 
 mkdir build_QMapShack
 cd build_QMapShack
-cmake ../QMapShack -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5.1_2 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 -DROUTINO_DEV_PATH=/data/GPS/dev/routino-lib -DCMAKE_BUILD_TYPE=Release
+cmake ../QMapShack -DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5... -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DQUAZIP_DEV_PATH=... -DCMAKE_BUILD_TYPE=Release
 make
 
 "QMapShack" is the relative path to where you have checked out QMapShack.
@@ -75,6 +85,7 @@ The four passed parameter are more or less self describing:
 CMAKE_PREFIX_PATH path to used libraries by QMapShack, QT5 needs to be set by default.
 CMAKE_OSX_DEPLOYMENT_TARGET the target system of the build (10.11 is the El Capitan OS-X, see https://en.wikipedia.org/wiki/OS_X#Versions for a full list)
 ROUTINO_DEV_PATH  The path to the routino library (is the same as you set previously with ROUTINO_LIB_DIR)
+QUAZIP_DEV_PATH   The path to the quazip library (is the same as you set previously with QUAZIP_LIB_DIR)
 CMAKE_BUILD_TYPE "Debug" or "Release" depending what you want.
 
 If the build was successful, you can run the packaging with several environment 
@@ -84,6 +95,7 @@ QT_DIR=...            (absolute path to the qt5 library base package, same as in
 GDAL_DIR=...          (absolute path to the gdal library base package)
 PROJ_DIR=...          (absolute path to the proj4 library base package)
 ROUTINO_LIB_DIR=..    (absolute path to the routino library base package, same as ROUTINO_LIB_DIR / ROUTINO_DEV_PATH)
+QUAZIP_LIB_DIR=..     (absolute path to the Quazip library base package)
 BUILD_DIR=..          (absolute path to the QMapShack build directory, the created directory "build_QMapShack" for the cmake build)
 QMS_SRC_DIR=...       (absolute path to the QMapShack source, the directory "QMapShack" used by cmake)
 BUILD_BIN_DIR=...     (absolute path to the directory with the qmapshack binary, typically build_QMapShack/bin for cmake build; depends on IDE)
@@ -111,8 +123,7 @@ option "-G Xcode".
 Nothing to be done, just open the Project folder in CLion.
 You need to set "CMake options" under "Preferences > Build, Execution, Development > CMake".
 
--DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5.1_2 -DCMAKE_OSX_DEPLOYMENT_TARGET=10.11 -DROUTINO_DEV_PATH=/data/GPS/dev/routino-lib
-
+-DCMAKE_PREFIX_PATH=/usr/local/Cellar/qt5/5.5... -DCMAKE_OSX_DEPLOYMENT_TARGET=10.12 -DROUTINO_DEV_PATH=... -DQUAZIP_DEV_PATH=...
 The list is the same as described for the cmake build above.
 
 

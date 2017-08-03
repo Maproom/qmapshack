@@ -38,7 +38,7 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
         if(nullptr != itemTrk)
         {
-            const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
+            const CTrackData &trk = itemTrk->getTrackData();
 
             // filter all internal extensions (starting with ::ql:)
             QStringList extensions = itemTrk->getExistingDataSources().filter(QRegExp("^((?!::ql:).)*$"));
@@ -57,26 +57,23 @@ void test_QMapShack::readExtGarminTPX1(const QString &file, const QString &ns)
             const fTrkPtGetVal &getCad   = CKnownExtension::get(ns + ":TrackPointExtension|" + ns + ":cad").valueFunc;
 
             int i = 0;
-            for(const CGisItemTrk::trkseg_t &seg : trk.segs)
+            for(const trkpt_t &trkpt : trk)
             {
-                for(const CGisItemTrk::trkpt_t &trkpt : seg.pts)
+                SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
+
+                for(const QString &ext : trkpt.extensions.keys())
                 {
-                    SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
-
-                    for(const QString &ext : trkpt.extensions.keys())
-                    {
-                        VERIFY_EQUAL(true, CKnownExtension::isKnown(ext));
-                    }
-
-                    // try to read values from the file, they start at a specific value and are incremented from trkpt to trkpt
-                    VERIFY_EQUAL( 20 + i, getAtemp(trkpt));
-                    VERIFY_EQUAL( 10 + i, getWtemp(trkpt));
-                    VERIFY_EQUAL(100 + i, getDepth(trkpt));
-                    VERIFY_EQUAL( 90 + i, getHR(trkpt));
-                    VERIFY_EQUAL( 60 + i, getCad(trkpt));
-
-                    ++i;
+                    VERIFY_EQUAL(true, CKnownExtension::isKnown(ext));
                 }
+
+                // try to read values from the file, they start at a specific value and are incremented from trkpt to trkpt
+                VERIFY_EQUAL( 20 + i, getAtemp(trkpt));
+                VERIFY_EQUAL( 10 + i, getWtemp(trkpt));
+                VERIFY_EQUAL(100 + i, getDepth(trkpt));
+                VERIFY_EQUAL( 90 + i, getHR(trkpt));
+                VERIFY_EQUAL( 60 + i, getCad(trkpt));
+
+                ++i;
             }
         }
     }

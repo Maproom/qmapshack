@@ -123,6 +123,11 @@ public:
         return scalesType;
     }
 
+    const QPointF& getZoomFactor() const
+    {
+        return zoomFactor;
+    }
+
     /**
        @brief Set the projection of the draw context
 
@@ -138,6 +143,7 @@ public:
     virtual void setProjection(const QString& proj);
 
     virtual void setScales(const CCanvas::scales_type_e type);
+
 
 signals:
     void sigCanvasUpdate(CCanvas::redraw_e flags);

@@ -28,6 +28,9 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/slf/CSlfProject.h"
+#include "gis/tcx/CTcxProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -37,15 +40,16 @@
 #include <QtWidgets>
 
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.qms *.slf *.fit)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.qms *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
+const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
-const QString IGisProject::filedialogSaveFilters  = filedialogFilterGPX + ";; " + filedialogFilterQMS;
-const QString IGisProject::filedialogLoadFilters  = filedialogAllSupported +";; " + filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
+const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
+const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
 
-
+IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
 IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *parent)
     : QTreeWidgetItem(parent)
@@ -92,6 +96,48 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
 IGisProject::~IGisProject()
 {
     delete dlgDetails;
+}
+
+IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
+{
+    IGisProject *item = nullptr;
+    QString suffix = QFileInfo(filename).suffix().toLower();
+    if(suffix == "gpx")
+    {
+        item = new CGpxProject(filename, parent);
+    }
+    else if(suffix == "qms")
+    {
+        item = new CQmsProject(filename, parent);
+    }
+    else if(suffix == "slf")
+    {
+        item = new CSlfProject(filename);
+
+        // the CSlfProject does not - as the other C*Project - register itself in the list
+        // of currently opened projects. This is done manually here.
+        if(parent)
+        {
+            parent->addProject(item);
+        }
+    }
+    else if(suffix == "fit")
+    {
+        item = new CFitProject(filename, parent);
+    }
+    else if(suffix == "tcx")
+    {
+        item = new CTcxProject(filename, parent);
+    }
+
+
+    if(item && !item->isValid())
+    {
+        delete item;
+        item = nullptr;
+    }
+
+    return item;
 }
 
 QString IGisProject::html2Dev(const QString& str)
@@ -259,7 +305,7 @@ void IGisProject::updateItems()
         return;
     }
 
-
+    sortItems();
     updateItemCounters();
 
     if(noCorrelation)
@@ -358,6 +404,10 @@ bool IGisProject::saveAs(QString fn, QString filter)
     else if(filter == filedialogFilterQMS)
     {
         res = CQmsProject::saveAs(fn, *this);
+    }
+    else if (filter == filedialogFilterTCX)
+    {
+        res = CTcxProject::saveAs(fn, *this);
     }
     else
     {
@@ -543,7 +593,7 @@ void IGisProject::getItemsByPos(const QPointF& pos, QList<IGisItem *> &items)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -565,7 +615,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -587,7 +637,7 @@ void IGisProject::mouseMove(const QPointF& pos)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -602,7 +652,7 @@ bool IGisProject::delItemByKey(const IGisItem::key_t& key, QMessageBox::Standard
     for(int i = childCount(); i > 0; i--)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i-1));
-        if(nullptr == item)
+        if(nullptr == item )
         {
             continue;
         }
@@ -768,7 +818,7 @@ void IGisProject::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -787,7 +837,7 @@ void IGisProject::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -812,7 +862,7 @@ void IGisProject::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
         }
 
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
-        if(nullptr == item)
+        if(nullptr == item || item->isHidden())
         {
             continue;
         }
@@ -1046,5 +1096,39 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     case IGisProject::eSortFolderTime:
         qSort(items.begin(), items.end(), &sortByTime);
         break;
+    }
+}
+
+void IGisProject::filter(const QString& str)
+{
+    const int N = childCount();
+
+    if(str.isEmpty())
+    {
+        for(int n = 0; n < N; n++)
+        {
+            child(n)->setHidden(false);
+        }
+        return;
+    }
+
+    for(int n = 0; n < N; n++)
+    {
+        IGisItem * item = dynamic_cast<IGisItem*>(child(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        switch(filterMode)
+        {
+        case eFilterModeName:
+            item->setHidden(!item->getName().toUpper().contains(str));
+            break;
+
+        case eFilterModeText:
+            item->setHidden(!item->getInfo(true, true).toUpper().contains(str));
+            break;
+        }
     }
 }

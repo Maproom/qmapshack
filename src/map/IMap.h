@@ -19,7 +19,6 @@
 #ifndef IMAP_H
 #define IMAP_H
 
-#include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
 #include <QImage>
 #include <QMutex>
@@ -28,6 +27,7 @@
 
 class CMapDraw;
 class IMapProp;
+struct poi_t;
 
 class IMap : public IDrawObject
 {
@@ -46,6 +46,7 @@ public:
         ,eFeatVectorItems = 0x00000002
         ,eFeatTileCache   = 0x00000004
         ,eFeatLayers      = 0x00000008
+        ,eFeatTypFile     = 0x00000010
     };
 
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
@@ -71,7 +72,9 @@ public:
 
     virtual void getInfo(const QPoint&, QString&) {}
 
-    virtual void getToolTip(const QPoint&, QString&) {}
+    virtual void getToolTip(const QPoint&, QString&) const {}
+
+    virtual void findPOICloseBy(const QPoint&, poi_t&) const {}
 
     /**
        @brief Return copyright notice if any
@@ -97,6 +100,11 @@ public:
     bool hasFeatureLayers() const
     {
         return flagsFeature & eFeatLayers;
+    }
+
+    bool hasFeatureTypFile() const
+    {
+        return flagsFeature & eFeatTypFile;
     }
 
     bool getShowPolygons() const
@@ -129,6 +137,15 @@ public:
         return cacheExpiration;
     }
 
+    qint32 getAdjustDetailLevel() const
+    {
+        return adjustDetailLevel;
+    }
+
+    const QString& getTypeFile() const
+    {
+        return typeFile;
+    }
 
     /**
        @brief Find a matching street polyline
@@ -174,11 +191,27 @@ public slots:
         configureCache();
     }
 
+    void slotSetAdjustDetailLevel(qint32 level)
+    {
+        adjustDetailLevel = level;
+    }
+
+    virtual void slotSetTypeFile(const QString& filename)
+    {
+        typeFile = filename;
+    }
 
 protected:
     void convertRad2M(QPointF &p) const;
     void convertM2Rad(QPointF &p) const;
 
+    /**
+       @brief Detect what reprojection is needed and select the correct handler
+
+       This has to be called prior to the loop that calls drawTile();
+
+     */
+    void detectTileDrawMode(const IDrawContext::buffer_t &buf);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -188,6 +221,8 @@ protected:
      */
     void drawTile(const QImage& img, QPolygonF& l, QPainter& p);
 
+
+protected:
     /// the drawcontext this map belongs to
     CMapDraw * map;
 
@@ -218,12 +253,15 @@ protected:
     bool showPolygons  = true; //< vector maps only: hide/show polygons
     bool showPolylines = true; //< vector maps only: hide/show polylines
     bool showPOIs      = true; //< vector maps only: hide/show point of interest
+    qint32 adjustDetailLevel = 0; //< vector maps only: alter threshold to show deatils.
 
     QString cachePath;            //< streaming map only: path to cached tiles
     qint32 cacheSizeMB     = 100; //< streaming map only: maximum size of all tiles in cache [MByte]
     qint32 cacheExpiration =   8; //< streaming map only: maximum age of tiles in cache [days]
 
     QString copyright; //< a copyright string to be displayed as tool tip
+
+    QString typeFile;
 };
 
 

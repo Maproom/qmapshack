@@ -19,6 +19,7 @@
 #ifndef ITOOLSHELL_H
 #define ITOOLSHELL_H
 
+#include <QPointer>
 #include <QProcess>
 #include <QWidget>
 
@@ -28,11 +29,18 @@ class IToolShell : public QWidget
 {
     Q_OBJECT
 public:
-    IToolShell(QTextBrowser *&textBrowser, QWidget *parent);
+    IToolShell(QWidget *parent);
     virtual ~IToolShell();
 
+    void setTextBrowser(QTextBrowser * textbrowser)
+    {
+        text = textbrowser;
+    }
+
 protected slots:
+    /// read the stderr from the process and paste it into the text browswer
     void slotStderr();
+    /// read the stdout from the process and paste it into the text browswer
     void slotStdout();
     void slotError(QProcess::ProcessError error);
     virtual void slotFinished(int exitCode, QProcess::ExitStatus status);
@@ -40,13 +48,14 @@ protected slots:
 protected:
     virtual void finished(int exitCode, QProcess::ExitStatus status) = 0;
 
-    void setOutputBrowser(QTextBrowser * textBrowser);
-    void stdOut(const QString& str, bool gui = false);
-    void stdErr(const QString& str, bool gui = false);
+    /// write text to stdout color channel of the text browser
+    void stdOut(const QString& str);
+    /// write text to stderr color channel of the text browser
+    void stdErr(const QString& str);
 
     QProcess cmd;
 
-    QTextBrowser *& text;
+    QPointer<QTextBrowser> text;
 };
 
 #endif //ITOOLSHELL_H

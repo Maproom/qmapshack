@@ -33,6 +33,11 @@ pointDP::pointDP() : used(true), idx(NOIDX)
 {
 }
 
+pointDP::pointDP(const qreal &x, const qreal &y, const qreal &z)
+    : point3D(x, y, z), used(true), idx(NOIDX)
+{
+}
+
 segment_t::segment_t() : idx11(NOIDX), idx12(NOIDX), idx21(NOIDX)
 {
 }

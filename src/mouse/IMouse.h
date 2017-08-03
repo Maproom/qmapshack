@@ -64,12 +64,7 @@ public:
         return canvas;
     }
 
-    void panCanvas(const QPoint& pos);
-
     virtual void setMouseTracking(bool enabled);
-
-protected slots:
-    virtual void slotPanCanvas();
 
 protected:
     /// the functions mouse icon
@@ -80,8 +75,6 @@ protected:
     QPointer<CCanvas>  canvas;
     // the current point reported by the mouse events
     QPoint point;
-
-    QTimer * timer;
 };
 
 #endif //IMOUSE_H

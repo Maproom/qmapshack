@@ -42,8 +42,8 @@ public:
     IPlot(CGisItemTrk * trk, CPlotData::axistype_e type, mode_e mode, QWidget * parent);
     virtual ~IPlot();
 
-    void setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t * ptRange2) override;
-    void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) override {}
+    void setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t * ptRange2) override;
+    void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
 
     void save(QImage& image);
     void setSolid(bool yes)
@@ -70,6 +70,7 @@ private slots:
     void slotStopRange();
     void slotResetZoom();
     void slotAddWpt();
+    void slotCutTrk();
 
 
 protected:
@@ -180,6 +181,7 @@ protected:
     QAction * actionPrint;
     QAction * actionStopRange;
     QAction * actionAddWpt;
+    QAction * actionCutTrk;
 
     qint32 idxSel1 = NOIDX;
     qint32 idxSel2 = NOIDX;

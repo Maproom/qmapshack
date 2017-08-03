@@ -55,8 +55,13 @@ decode_state_e CFitFieldDefinitionState::process(quint8 &dataByte)
         reset();
         if (def->getFields().size() >= def->getNrOfFields())
         {
+            if(def->developerFlag())
+            {
+                return eDecoderStateRecordContent;
+            }
             FITDEBUG(2, qDebug() << latestDefinition()->messageInfo())
-            endDefintion();
+            endDefinition();
+
             return eDecoderStateRecord;
         }
     }

@@ -22,6 +22,7 @@
 #include "gis/IGisItem.h"
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/trk/CTrackData.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -30,6 +31,7 @@
 #include <QPointer>
 #include <functional>
 #include <interpolation.h>
+
 
 class QDomNode;
 class IGisProject;
@@ -51,9 +53,6 @@ class CGisItemTrk : public IGisItem, public IGisLine
 {
     Q_DECLARE_TR_FUNCTIONS(CGisItemTrk)
 public:
-    struct trk_t;
-    struct trkpt_t;
-
     enum focusmode_e
     {
         eFocusMouseMove
@@ -79,7 +78,7 @@ public:
     };
 
     /** @brief Used to create a new track from a part of an existing track */
-    CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const trk_t &srctrk, IGisProject *project);
+    CGisItemTrk(const QString& name, qint32 idx1, qint32 idx2, const CTrackData &srctrk, IGisProject *project);
 
     /** @brief Used to create a copy of track with new parent */
     CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject * project, int idx, bool clone);
@@ -109,7 +108,7 @@ public:
        @param trkdata  The track's new data (will be moved, don't use your "copy" after construction!
        @param project  The project this track belongs to
      */
-    CGisItemTrk(trk_t& trkdata, IGisProject *project);
+    CGisItemTrk(CTrackData& trkdata, IGisProject *project);
 
     CGisItemTrk(CFitStream& stream, IGisProject * project);
 
@@ -141,11 +140,27 @@ public:
        @param gpx   The <gpx> node to append by the track
      */
     void save(QDomNode& gpx, bool strictGpx11) override;
+
     /**
        @brief Save track to TwoNav track file
        @param dir   the path to store the file
      */
     bool saveTwoNav(const QString& filename);
+
+    /**
+       @brief Save track as TCX course (including correlated course points)
+       @param coursesNode   The node to append by the course
+     */
+    void saveTCXcourse(QDomNode& coursesNode);
+
+
+    /**
+       @brief Save track as TCX activity
+       @param activitiesNode   The node to append by the activity
+     */
+    void saveTCXactivity(QDomNode& activitiesNode);
+
+
     /**
        @brief Read serialized track from a binary data stream
        @param stream  the data stream to read from
@@ -165,22 +180,16 @@ public:
         return trk.name.isEmpty() ? noName : trk.name;
     }
 
-    QDateTime getTimestamp() const override
-    {
-        return getTimeStart();
-    }
+    /// returns "true" when trk has no time-related invalid points
+    bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
+
+    QDateTime getTimestamp() const override { return getTimeStart(); }
 
     /// get the track color as index into the Garmin color table
-    int getColorIdx() const
-    {
-        return colorIdx;
-    }
+    int getColorIdx() const { return colorIdx; }
 
     /// get the track color a Qt color object
-    const QColor& getColor() const
-    {
-        return color;
-    }
+    const QColor& getColor() const { return color; }
 
     /**
        @brief get a summary of the track
@@ -191,54 +200,31 @@ public:
     /// get a summary of a selected range
     QString getInfoRange() const;
     /// get a summary of a selected range defined by two track points
-    QString getInfoRange(const trkpt_t& pt1, const trkpt_t& pt2) const;
+    QString getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackData::trkpt_t& pt2) const;
     /// get a summary for a track point
-    QString getInfoTrkPt(const trkpt_t& pt) const;
+    QString getInfoTrkPt(const CTrackData::trkpt_t& pt) const;
     /// get a progress summary for a selected track point
-    QString getInfoProgress(const trkpt_t& pt) const;
+    QString getInfoProgress(const CTrackData::trkpt_t& pt) const;
 
-    quint32 getTotalElapsedSeconds() const
-    {
-        return totalElapsedSeconds;
-    }
+    quint32 getTotalElapsedSeconds()       const { return totalElapsedSeconds;       }
+    quint32 getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
 
-    quint32 getTotalElapsedSecondsMoving() const
-    {
-        return totalElapsedSecondsMoving;
-    }
+    qreal getTotalAscent()   const { return totalAscent;   }
+    qreal getTotalDescent()  const { return totalDescent;  }
+    qreal getTotalDistance() const { return totalDistance; }
 
-    qreal getTotalAscent() const
-    {
-        return totalAscent;
-    }
+    const QString&       getComment()     const override { return trk.cmt;   }
+    const QString&       getDescription() const override { return trk.desc;  }
+    const QList<link_t>& getLinks()       const override { return trk.links; }
 
-    qreal getTotalDescent() const
-    {
-        return totalDescent;
-    }
+    qint32 getCntTotalPoints() const { return cntTotalPoints; }
 
-    qreal getTotalDistance() const
-    {
-        return totalDistance;
-    }
-
-    const QString& getComment() const override
-    {
-        return trk.cmt;
-    }
-    const QString& getDescription() const override
-    {
-        return trk.desc;
-    }
-    const QList<link_t>& getLinks() const override
-    {
-        return trk.links;
-    }
-
-    qint32 getCntTotalPoints()
-    {
-        return cntTotalPoints;
-    }
+    const QDateTime& getTimeStart()           const { return timeStart;        }
+    qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
+    const CActivityTrk& getActivities()       const { return activities;       }
+    const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
+    const CTrackData::trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
+    quint32 getAllValidFlags()                const { return allValidFlags;    }
 
 
     /// get the track as a simple coordinate polyline
@@ -246,42 +232,14 @@ public:
     /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l) override;
 
-    const QDateTime& getTimeStart() const
-    {
-        return timeStart;
-    }
-
-    qint32 getNumberOfVisiblePoints() const
-    {
-        return cntVisiblePoints;
-    }
-
-    const CActivityTrk& getActivities() const
-    {
-        return activities;
-    }
-
-    const CPropertyTrk * getPropertyHandler() const
-    {
-        return propHandler;
-    }
-
-    const trkpt_t * getMouseMoveFocusPoint() const
-    {
-        return mouseMoveFocus;
-    }
-
-    quint32 getAllValidFlags() const
-    {
-        return allValidFlags;
-    }
-
     /**
        @brief Get the elevation of a track point
        @param idx   The total index of the point
        @return The elevation or NOINT if the index is invalid, or the track point has no elevation value.
      */
     qint32 getElevation(qint32 idx) const;
+
+    void getMouseRange(int &idx1, int &idx2, bool total) const;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 
@@ -333,15 +291,7 @@ private:
 
 
 public:
-    /**
-       @brief Get the indices of visible points for a selected range
-
-       If no range is selected both indices will be NOIDX.
-
-       @param idx1 a reference to receive the first index
-       @param idx2 a reference to receive the second index
-     */
-    void getSelectedVisiblePoints(qint32& idx1, qint32& idx2) const;
+    bool isRangeSelected() const;
 
     void setName(const QString& str);
     void setColor(int idx);
@@ -437,7 +387,7 @@ public:
     void combine(const QList<key_t> &keys);
 
     /**
-       @brief Set the trkpt_t::eHidden flag
+       @brief Set the CTrackData::trkpt_t::eHidden flag
 
        The flag is set for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -446,7 +396,7 @@ public:
     void hideSelectedPoints();
 
     /**
-       @brief Reset the trkpt_t::eHidden flag
+       @brief Reset the CTrackData::trkpt_t::eHidden flag
 
        The flag is reset for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -456,7 +406,7 @@ public:
 
     /**
        @brief Set the activity flag for all track points
-       @param flag  one of trkpt_t::flag_e::eAct...
+       @param flag  one of CTrackData::trkpt_t::flag_e::eAct...
      */
     void setActivity(quint32 flags);
 
@@ -472,7 +422,7 @@ public:
        @brief Copy a section into a new track object
 
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
-       including the hidden (trkpt_t::eHidden) ones.
+       including the hidden (CTrackData::trkpt_t::eHidden) ones.
 
      */
     void copySelectedPoints() const;
@@ -574,19 +524,21 @@ public:
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
 
+    void filterTerrainSlope();
     void filterReplaceElevation();
     void filterInterpolateElevation();
     void filterReset();
     void filterDelete();
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
+    void filterSubPt2Pt();
     /** @} */
 
     /**
        @brief Correlate waypoints with the track points
 
        If a waypoint correlates with a trackpoint it's key is written to
-       trkpt_t::keyWpt.
+       CTrackData::trkpt_t::keyWpt.
 
        @param progress  a progress dialog as this operation can take quite some time
        @param current   the current progress if the operation is done for several tracks
@@ -606,7 +558,7 @@ private:
        @param xml   The XML <trk> section
        @param trk   The track structure to fill
      */
-    void readTrk(const QDomNode& xml, trk_t& trk);
+    void readTrk(const QDomNode& xml, CTrackData& trk);
 
     /**
        @brief Restore track from TwoNav *trk file
@@ -620,6 +572,11 @@ private:
     void readTrkFromFit(CFitStream &stream);
 
     /**
+       @brief Consolidate points and subpoints
+     */
+    void consolidatePoints();
+
+    /**
        @brief Derive secondary data from the track data
 
        This has to be called each time the track data is changed.
@@ -631,7 +588,7 @@ private:
      */
     void resetInternalData();
 
-    void verifyTrkPt(trkpt_t *&last, trkpt_t& trkpt);
+    void verifyTrkPt(CTrackData::trkpt_t *&last, CTrackData::trkpt_t& trkpt);
 
     /** @defgroup ExtremaExtensions Stuff related to calculation of extrema/extensions
 
@@ -650,44 +607,6 @@ private:
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
 
-    const trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond) const;
-
-    trkpt_t* getTrkPtByCondition(std::function<bool(const trkpt_t&)> cond);
-
-    /**
-       @brief Try to get access Nth visible point matching the idx
-
-       This will iterate over all segments and count the visible points. If the
-       count matches idx a pointer to the track point is returned.
-
-       @param idx The index into all visible points
-       @return A null pointer of no point is found.
-     */
-    const trkpt_t *getTrkPtByVisibleIndex(qint32 idx) const;
-    /**
-       @brief Try to get access Nth point
-
-       This will iterate over all segments. If the index matches
-       a pointer to the track point is returned.
-
-       @param idx The index into all points
-       @return A null pointer of no point is found.
-     */
-    const trkpt_t *getTrkPtByTotalIndex(qint32 idx) const;
-
-    /**
-       @brief Check if the track point at index it the last one visible
-       @param idxTotal  The point's index
-       @return True if it is the last one visible
-     */
-    bool isTrkPtLastVisible(qint32 idxTotal) const;
-
-    /**
-       @brief Check if the track point at index it the first one visible
-       @param idxTotal  The point's index
-       @return True if it is the first one visible
-     */
-    bool isTrkPtFirstVisible(qint32 idxTotal) const;
     /**
        @brief Tell the point of focus to all plots and the detail dialog
 
@@ -695,9 +614,9 @@ private:
        @param fmode     The reason for the focus
        @param owner     A string to identify owner of the operation
      */
-    bool publishMouseFocus(const trkpt_t * pt, focusmode_e fmode, const QString &owner);
-    void publishMouseFocusNormalMode(const trkpt_t * pt, focusmode_e fmode);
-    void publishMouseFocusRangeMode(const trkpt_t * pt, focusmode_e fmode);
+    bool publishMouseFocus(const CTrackData::trkpt_t * pt, focusmode_e fmode, const QString &owner);
+    void publishMouseFocusNormalMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
+    void publishMouseFocusRangeMode(const CTrackData::trkpt_t * pt, focusmode_e fmode);
     void resetMouseRange();
 
     /**
@@ -727,143 +646,16 @@ private:
     /// setup track icon by color
     void setIcon(const QString& iconColor);
 
-    void setMouseFocusVisuals(const trkpt_t * pt);
-    void setMouseRangeFocusVisuals(const trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2);
-    void setMouseClickFocusVisuals(const trkpt_t * pt);
+    void setMouseFocusVisuals(const CTrackData::trkpt_t * pt);
+    void setMouseRangeFocusVisuals(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2);
+    void setMouseClickFocusVisuals(const CTrackData::trkpt_t * pt);
 
 public:
-    struct trkpt_t : public wpt_t
-    {
-        trkpt_t()
-        {
-            reset();
-        }
-
-        void reset()
-        {
-            deltaDistance   = NOFLOAT;
-            distance        = NOFLOAT;
-            ascent          = NOFLOAT;
-            descent         = NOFLOAT;
-            elapsedSeconds  = NOFLOAT;
-            elapsedSecondsMoving = NOFLOAT;
-            slope1          = NOFLOAT;
-            slope2          = NOFLOAT;
-            speed           = NOFLOAT;
-            idxVisible      = NOIDX;
-        }
-
-        enum flag_e
-        {
-            eHidden         = 0x00000004      ///< mark point as deleted
-                              // activity flags
-            ,eActNone   = 0x00000000
-            ,eActFoot   = 0x80000000
-            ,eActCycle  = 0x40000000
-            ,eActBike   = 0x20000000
-            ,eActCar    = 0x10000000
-            ,eActCable  = 0x08000000
-            ,eActSwim   = 0x04000000
-            ,eActShip   = 0x02000000
-            ,eActAero   = 0x01000000
-            ,eActSki    = 0x00800000
-            ,eActMask   = 0xFF800000    ///< mask for activity flags
-            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
-        };
-
-        enum valid_e
-        {
-            eValidTime     = 0x00000001
-            ,eValidEle      = 0x00000002
-            ,eValidPos      = 0x00000004
-            ,eValidMask     = 0x0000FFFF
-        };
-
-        enum invalid_e
-        {
-            eInvalidTime    = eValidTime << 16
-            ,eInvalidEle    = eValidEle  << 16
-            ,eInvalidPos    = eValidPos  << 16
-            ,eInvalidMask   = 0xFFFF0000
-        };
-
-
-        inline bool isHidden() const
-        {
-            return hasFlag(trkpt_t::eHidden);
-        }
-
-        inline bool hasFlag(enum flag_e flag) const
-        {
-            return flags & flag;
-        }
-
-        inline void setFlag(enum flag_e flag)
-        {
-            flags |= flag;
-        }
-
-        inline void unsetFlag(enum flag_e flag)
-        {
-            flags &= ~flag;
-        }
-
-        inline bool isValid(valid_e flag) const
-        {
-            return (valid & flag) != 0;
-        }
-
-        inline bool isInvalid(invalid_e flag) const
-        {
-            return (valid & flag) != 0;
-        }
-
-        quint32 flags = 0;
-        quint32 valid = 0;
-        qint32 idxTotal = NOIDX;            //< index within the complete track
-        qint32 idxVisible;                  //< offset into lineSimple
-        qreal deltaDistance;                //< the distance to the last point
-        qreal distance;                     //< the distance from the start of the track
-        qreal ascent;                       //< the ascent from the start of the track
-        qreal descent;                      //< the descent from the start of the track
-        qreal slope1;                       //< the slope [°] over several points close by
-        qreal slope2;                       //< the slope [%] over several points close by
-        qreal speed;                        //< the speed over several points close by
-        qreal elapsedSeconds;               //< the seconds since the start of the track
-        qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed
-        key_t keyWpt;                       //< the key of an attached waypoint
-        QHash<QString,QVariant> extensions; //< track point extensions
-    };
-
-    struct trkseg_t
-    {
-        QVector<trkpt_t> pts;
-    };
-
-    struct trk_t
-    {
-        trk_t()
-        {
-        }
-        // -- all gpx tags - start
-        QString name;
-        QString cmt;
-        QString desc;
-        QString src;
-        QList<link_t> links;
-        quint64 number = 0;
-        QString type;
-        QVector<trkseg_t> segs;
-        // -- all gpx tags - stop
-
-        QString color;
-    };
-
     /**
        @brief Read only access to the track data.
        @return
      */
-    const trk_t& getTrackData() const
+    const CTrackData& getTrackData() const
     {
         return trk;
     }
@@ -914,7 +706,7 @@ public:
 
 private:
     /// this is the GPX structure oriented data of the track
-    trk_t trk;
+    CTrackData trk;
 
     /// the key of the track having the user focus.
     static key_t keyUserFocus;
@@ -1030,10 +822,10 @@ private:
      */
     QString mouseFocusOwner;
 
-    const trkpt_t *mouseMoveFocus  = nullptr; //< the current track point selected by mouse movement
-    const trkpt_t *mouseClickFocus = nullptr; //< the last track point the user clicked on
-    const trkpt_t *mouseRange1     = nullptr; //< the first point of a range selection
-    const trkpt_t *mouseRange2     = nullptr; //< the second point of a range selection
+    const CTrackData::trkpt_t *mouseMoveFocus  = nullptr; //< the current track point selected by mouse movement
+    const CTrackData::trkpt_t *mouseClickFocus = nullptr; //< the last track point the user clicked on
+    const CTrackData::trkpt_t *mouseRange1     = nullptr; //< the first point of a range selection
+    const CTrackData::trkpt_t *mouseRange2     = nullptr; //< the second point of a range selection
     /**@}*/
 
     QPointer<CDetailsTrk> dlgDetails; //< the track's details dialog if any
@@ -1063,7 +855,7 @@ public:
         return interp.valid;
     }
 
-    qreal getElevationInterpolated(qreal d) const;
+    qreal getElevationInterpolated(qreal d);
 
 private:
     struct interpolate_t
@@ -1088,13 +880,13 @@ public:
     virtual ~INotifyTrk() = default;
 
     virtual void updateData() = 0;
-    virtual void setMouseFocus(const CGisItemTrk::trkpt_t * pt) = 0;
-    virtual void setMouseRangeFocus(const CGisItemTrk::trkpt_t * pt1, const CGisItemTrk::trkpt_t * pt2) = 0;
-    virtual void setMouseClickFocus(const CGisItemTrk::trkpt_t * pt) = 0;
+    virtual void setMouseFocus(const CTrackData::trkpt_t * pt) = 0;
+    virtual void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) = 0;
+    virtual void setMouseClickFocus(const CTrackData::trkpt_t * pt) = 0;
 
     const CGisItemTrk::visual_e mask;
 };
 
-using fTrkPtGetVal = std::function<qreal(const CGisItemTrk::trkpt_t&)>;
+using fTrkPtGetVal = std::function<qreal(const CTrackData::trkpt_t&)>;
 
 #endif //CGISITEMTRK_H

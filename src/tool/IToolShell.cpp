@@ -20,9 +20,8 @@
 
 #include <QtWidgets>
 
-IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
+IToolShell::IToolShell(QWidget * parent)
     : QWidget(parent)
-    , text(textBrowser)
 {
     connect(&cmd, &QProcess::readyReadStandardError,  this, &IToolShell::slotStderr);
     connect(&cmd, &QProcess::readyReadStandardOutput, this, &IToolShell::slotStdout);
@@ -33,14 +32,16 @@ IToolShell::IToolShell(QTextBrowser *&textBrowser, QWidget * parent)
 
 IToolShell::~IToolShell()
 {
+    text = nullptr;
 }
 
-void IToolShell::setOutputBrowser(QTextBrowser * text)
-{
-}
 
 void IToolShell::slotError(QProcess::ProcessError error)
 {
+    if (text.isNull())
+    {
+        return;
+    }
     text->setTextColor(Qt::red);
     text->insertPlainText(QString(tr("Execution of external program `%1` failed: ")).arg(cmd.program()));
     switch(error)
@@ -62,6 +63,11 @@ void IToolShell::slotError(QProcess::ProcessError error)
 
 void IToolShell::slotStderr()
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     QString str;
     text->setTextColor(Qt::red);
     str = cmd.readAllStandardError();
@@ -96,6 +102,11 @@ void IToolShell::slotStderr()
 
 void IToolShell::slotStdout()
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     QString str;
     text->setTextColor(Qt::blue);
     str = cmd.readAllStandardOutput();
@@ -127,15 +138,25 @@ void IToolShell::slotStdout()
     text->verticalScrollBar()->setValue(text->verticalScrollBar()->maximum());
 }
 
-void IToolShell::stdOut(const QString& str, bool gui)
+void IToolShell::stdOut(const QString& str)
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     text->setTextColor(Qt::black);
     text->append(str);
 }
 
 
-void IToolShell::stdErr(const QString& str, bool gui)
+void IToolShell::stdErr(const QString& str)
 {
+    if (text.isNull())
+    {
+        return;
+    }
+
     text->setTextColor(Qt::red);
     text->append(str);
 }
@@ -145,8 +166,11 @@ void IToolShell::slotFinished(int exitCode, QProcess::ExitStatus status)
 {
     if(exitCode || status)
     {
-        text->setTextColor(Qt::red);
-        text->append(tr("!!! failed !!!\n"));
+        if (!text.isNull())
+        {
+            text->setTextColor(Qt::red);
+            text->append(tr("!!! failed !!!\n"));
+        }
         return;
     }
 

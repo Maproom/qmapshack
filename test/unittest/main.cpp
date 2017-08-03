@@ -90,18 +90,18 @@ void test_QMapShack::verify(expectedGisProject exp, const IGisProject &proj)
         CGisItemTrk *itemTrk = dynamic_cast<CGisItemTrk*>(item);
         if(nullptr != itemTrk)
         {
-            const CGisItemTrk::trk_t &trk = itemTrk->getTrackData();
+            const CTrackData &trk = itemTrk->getTrackData();
 
             SUBVERIFY(exp.trks.contains(itemTrk->getName()), QString("Found track `%1`, there shouldn't be any track with that name").arg(itemTrk->getName()));
 
             const expectedTrack &expTrk = exp.trks.take(itemTrk->getName());
 
             int trkptCount = 0;
-            for(const CGisItemTrk::trkseg_t &seg : trk.segs)
+            for(const trkseg_t &seg : trk.segs)
             {
                 trkptCount += seg.pts.count();
 
-                for(const CGisItemTrk::trkpt_t &trkpt : seg.pts)
+                for(const trkpt_t &trkpt : seg.pts)
                 {
                     SUBVERIFY((0. != trkpt.lat) || (0. != trkpt.lon), "Trackpoint has position 0/0");
 

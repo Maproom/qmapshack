@@ -1,0 +1,682 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>IRouterBRouterSetupWizard</class>
+ <widget class="QWizard" name="IRouterBRouterSetupWizard">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>BRouter Setup</string>
+  </property>
+  <property name="options">
+   <set>QWizard::CancelButtonOnLeft|QWizard::HaveCustomButton1</set>
+  </property>
+  <widget class="QWizardPage" name="pageChooseMode">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">0</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_11">
+    <item>
+     <widget class="QGroupBox" name="groupRadioMode">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="title">
+       <string>choose which BRouter to use</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="radioOnline">
+         <property name="text">
+          <string>BRouter-Web (online)</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioLocal">
+         <property name="text">
+          <string>local Installation</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="checkExpert">
+         <property name="text">
+          <string>Expert Mode</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="CRouterBRouterSetupPage" name="pageLocalDirectory">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">1</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <widget class="QLabel" name="labelLocalDir">
+      <property name="text">
+       <string>local BRouter Installation directory:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineLocalDir"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolLocalDir">
+        <property name="toolTip">
+         <string>select installation directory</string>
+        </property>
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../../resources.qrc">
+          <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelLocalDirResult">
+      <property name="text">
+       <string>labelLocalDirResult</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_4">
+      <item>
+       <widget class="QPushButton" name="pushCreateOrUpdateLocalInstall">
+        <property name="text">
+         <string>create or update installation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_5">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Java Executable</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineJavaExecutable"/>
+      </item>
+      <item>
+       <widget class="QToolButton" name="toolJavaExecutable">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../../../../resources.qrc">
+          <normaloff>:/icons/32x32/PathBlue.png</normaloff>:/icons/32x32/PathBlue.png</iconset>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelLocalJavaResult">
+      <property name="text">
+       <string>labelLocalJavaResult</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_6">
+      <item>
+       <widget class="QPushButton" name="pushLocalFindJava">
+        <property name="text">
+         <string>search for installed java</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer_3">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>269</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalDirectory"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="CRouterBRouterSetupPage" name="pageLocalInstallation">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="title">
+    <string/>
+   </property>
+   <property name="subTitle">
+    <string/>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">2</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <item>
+     <widget class="QLabel" name="labelLocalInstallTitle">
+      <property name="text">
+       <string>Download and install BRouter Version</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QWebView" name="webLocalBRouterVersions">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="url">
+       <url>
+        <string>about:blank</string>
+       </url>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelLocalInstallLink">
+      <property name="text">
+       <string>File to install</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="pushLocalInstall">
+        <property name="text">
+         <string>Download and Install</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalInstall">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="CRouterBRouterSetupPage" name="pageProfiles">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">3</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_4">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="labelAvailableProfiles">
+          <property name="text">
+           <string>available Profiles</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListView" name="listAvailableProfiles">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QToolButton" name="toolAddProfile">
+          <property name="toolTip">
+           <string>install profile</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../resources.qrc">
+            <normaloff>:/icons/32x32/Right.png</normaloff>:/icons/32x32/Right.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolDeleteProfile">
+          <property name="toolTip">
+           <string>remove profile</string>
+          </property>
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../resources.qrc">
+            <normaloff>:/icons/32x32/Left.png</normaloff>:/icons/32x32/Left.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLabel" name="labelProfiles">
+          <property name="text">
+           <string>installed Profiles</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListView" name="listProfiles">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_12">
+        <item>
+         <widget class="QToolButton" name="toolProfileUp">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../resources.qrc">
+            <normaloff>:/icons/32x32/Up.png</normaloff>:/icons/32x32/Up.png</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QToolButton" name="toolProfileDown">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../../../../resources.qrc">
+            <normaloff>:/icons/32x32/Down.png</normaloff>:/icons/32x32/Down.png</iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="labelProfileContent">
+      <property name="text">
+       <string>content of profile</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textProfileContent"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="CRouterBRouterTilesPage" name="pageLocalTiles">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">4</string>
+   </attribute>
+  </widget>
+  <widget class="QWizardPage" name="pageOnlineUrl">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">5</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_9">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
+      <item>
+       <widget class="QLabel" name="labelOnlineUrl">
+        <property name="text">
+         <string>BRouter-Web URL:</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="lineOnlineUrl"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_2">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textOnlineUrl">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="pageOnlineDetails">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>1</horstretch>
+     <verstretch>1</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">6</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_8">
+    <item>
+     <layout class="QFormLayout" name="formLayout_2">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetNoConstraint</enum>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelOnlineService">
+        <property name="text">
+         <string>Service-URL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineOnlineService"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelOnlineProfileUrl">
+        <property name="text">
+         <string>Profile-URL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineOnlineProfileUrl"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_3">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWizardPage" name="pageLocalDetails">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <attribute name="pageId">
+    <string notr="true">7</string>
+   </attribute>
+   <layout class="QVBoxLayout" name="verticalLayout_13">
+    <item>
+     <layout class="QFormLayout" name="formLayout_3">
+      <item row="0" column="0">
+       <widget class="QLabel" name="labelLocalProfilesUrl">
+        <property name="text">
+         <string>Profiles Url</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineLocalProfilesUrl"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="labelLocalHost">
+        <property name="text">
+         <string>Hostname</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineLocalHost"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="labelLocalPort">
+        <property name="text">
+         <string>Port</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineLocalPort"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="labelLocalProfiles">
+        <property name="text">
+         <string>Profile directory</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineLocalProfiles"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="labelLocalSegments">
+        <property name="text">
+         <string>Segments directory</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineLocalSegments"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="labelLocalCustomProfiles">
+        <property name="text">
+         <string>Custom Profiles dir</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineLocalCustomProfiles"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelLocalMaxRuntime">
+        <property name="text">
+         <string>Max Runtime</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineLocalMaxRuntime"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="labelLocalNumberThreads">
+        <property name="text">
+         <string>Number Threads</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="lineLocalNumberThreads"/>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="labelLocalJavaOpts">
+        <property name="text">
+         <string>Java Options</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="lineLocalJavaOpts"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="verticalSpacer_4">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textLocalDetails"/>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+  <customwidget>
+   <class>CRouterBRouterTilesPage</class>
+   <extends>QWizardPage</extends>
+   <header>gis/rte/router/brouter/CRouterBRouterTilesPage.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>CRouterBRouterSetupPage</class>
+   <extends>QWizardPage</extends>
+   <header>gis/rte/router/brouter/CRouterBRouterSetupPage.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../../resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

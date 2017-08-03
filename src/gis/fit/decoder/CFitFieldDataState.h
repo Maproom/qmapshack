@@ -32,7 +32,13 @@ public:
     decode_state_e process(quint8 &dataByte) override;
 
 private:
+    bool handleFitField();
+    bool handleDevField();
+    void devProfile(CFitMessage& mesg);
+    CFitFieldProfile buildDevFieldProfile(CFitMessage& mesg);
+
     quint8 fieldIndex;
+    quint8 devFieldIndex;
     quint8 fieldDataIndex;
     quint8 fieldData[fitMaxFieldSize];
 };

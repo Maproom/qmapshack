@@ -470,11 +470,19 @@ void IGisItem::loadHistory(int idx)
     history.histIdxCurrent = idx;
 }
 
-void IGisItem::cutHistory()
+void IGisItem::cutHistoryAfter()
 {
     while(history.events.size() > (history.histIdxCurrent + 1))
     {
         history.events.pop_back();
+    }
+}
+
+void IGisItem::cutHistoryBefore()
+{
+    for (int i = 0; i < history.histIdxCurrent; i++)
+    {
+        history.events[i].data.clear();
     }
 }
 

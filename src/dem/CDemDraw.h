@@ -51,6 +51,9 @@ public:
     void  getElevationAt(const QPolygonF& pos, QPolygonF& ele);
     void  getElevationAt(SGisLine& line);
 
+    qreal getSlopeAt(const QPointF& pos);
+    void  getSlopeAt(const QPolygonF& pos, QPolygonF& slope);
+
     void setProjection(const QString& proj) override;
 
     static const QStringList& getDemPaths()

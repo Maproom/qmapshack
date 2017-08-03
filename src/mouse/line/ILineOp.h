@@ -62,10 +62,6 @@ public:
         return cursor;
     }
 
-    virtual void canvasPanned(QPointF)
-    {
-    }
-
     /**
        @brief   (try to) abort a step in the current operation
 
@@ -95,8 +91,12 @@ protected:
     void drawSinglePointSmall(const QPointF& pt, QPainter& p);
     void drawSinglePointLarge(const QPointF &pt, QPainter& p);
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
-
     void updateLeadLines(qint32 idx);
+
+    bool mapDidNotMove()
+    {
+        return !mapDidMove;
+    }
 
     IMouseEditLine * parentHandler;
     SGisLine& points;
@@ -106,10 +106,9 @@ protected:
     QCursor cursor;
 
     qint32 idxFocus = NOIDX;
-    bool mapMove = false;
-    bool mapDidMove = false;
 
     QPoint lastPos;
+    QPoint firstPos;
 
     QRect rectPoint {0,0,9,9};
     const QPen penBgPoint {Qt::white, 4};
@@ -132,6 +131,9 @@ private:
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
     QTimer * timerRouting;
+
+    bool mapMove = false;
+    bool mapDidMove = false;
 };
 
 #endif //ILINEOP_H

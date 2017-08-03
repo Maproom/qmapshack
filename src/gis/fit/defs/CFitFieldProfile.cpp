@@ -21,8 +21,8 @@
 #include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/fit_const.h"
 
-CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16 offset, QString units)
-    : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units),
+CFitFieldProfile::CFitFieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16 offset, QString units, field_type_e fieldType )
+    : name(name), fieldDefNr(fieldDefNr), scale(scale), offset(offset), units(units), fieldType(fieldType),
     baseType(&baseType), profile(parent), subfields(), components()
 {
 }
@@ -32,7 +32,7 @@ CFitFieldProfile::CFitFieldProfile() : CFitFieldProfile(nullptr, "unknown", fitI
 }
 
 CFitFieldProfile::CFitFieldProfile(const CFitFieldProfile& copy)
-    : name(copy.name), fieldDefNr(copy.fieldDefNr), scale(copy.scale), offset(copy.offset), units(copy.units),
+    : name(copy.name), fieldDefNr(copy.fieldDefNr), scale(copy.scale), offset(copy.offset), units(copy.units), fieldType(copy.fieldType),
     baseType(copy.baseType), profile(copy.profile), subfields(copy.subfields), components(copy.components)
 {
 }
@@ -87,7 +87,7 @@ qreal CFitFieldProfile::getScale() const
     return scale;
 }
 
-quint16 CFitFieldProfile::getOffset() const
+qint16 CFitFieldProfile::getOffset() const
 {
     return offset;
 }
@@ -122,8 +122,26 @@ QList<CFitComponentfieldProfile*> CFitFieldProfile::getComponents() const
     return components;
 }
 
+QString CFitFieldProfile::fieldProfileInfo()
+{
+    QString str = QString("%1 %2 (%3): %4 %5")
+                  .arg(QString("field profile"))
+                  .arg(getName())
+                  .arg(getFieldDefNum())
+                  .arg(getUnits())
+                  .arg(getBaseType().name());
 
-CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, quint16
+    if(getBaseType().isNumber())
+    {
+        str += QString(" (%1-%2)")
+               .arg(getScale())
+               .arg(getOffset());
+    }
+    return str;
+}
+
+
+CFitSubfieldProfile::CFitSubfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr, qreal scale, qint16
                                          offset, QString units, quint8 subRefFieldDefNr, quint8 subRefFieldValue)
     : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units),
     refFieldDefNr(subRefFieldDefNr), refFieldValue(subRefFieldValue)
@@ -147,7 +165,7 @@ quint8 CFitSubfieldProfile::getReferencedFieldValue() const
 
 
 CFitComponentfieldProfile::CFitComponentfieldProfile(CFitProfile* parent, QString name, const CFitBaseType& baseType, quint8 fieldDefNr,
-                                                     qreal scale, quint16 offset, QString units, quint8 componentFieldDefNr, quint8 bits)
+                                                     qreal scale, qint16 offset, QString units, quint8 componentFieldDefNr, quint32 bits)
     : CFitFieldProfile(parent, name, baseType, fieldDefNr, scale, offset, units), nrOfBits(bits), componentFieldDefNr(componentFieldDefNr)
 {
 }
@@ -173,7 +191,7 @@ const CFitBaseType& CFitComponentfieldProfile::getBaseType() const
     return getProfile()->getField(componentFieldDefNr)->getBaseType();
 }
 
-quint8 CFitComponentfieldProfile::getBits() const
+quint32 CFitComponentfieldProfile::getBits() const
 {
     return nrOfBits;
 }
@@ -181,7 +199,7 @@ quint8 CFitComponentfieldProfile::getBits() const
 quint32 CFitComponentfieldProfile::getBitmask() const
 {
     quint32 bitmask = 0;
-    for (int i = 0; i < nrOfBits; i++)
+    for (quint32 i = 0; i < nrOfBits; i++)
     {
         bitmask |= (1 << i);
     }

@@ -36,6 +36,7 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
     screenUnclutter = new CScrOptUnclutter(this);
 
     menu = new QMenu(canvas);
+    actionPoiAsWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
     menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     menu->addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
     menu->addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
@@ -71,6 +72,7 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos     = e->pos();
+        firstPos    = lastPos;
         // start to block map moving when a previous click
         // has triggered a selection of any kind
         mapMove     = (stateItemSel < eStateNoMapMovePossible);
@@ -79,6 +81,8 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     else if(e->button() == Qt::RightButton)
     {
         QPoint p = canvas->mapToGlobal(point);
+
+        actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
         menu->exec(p);
     }
 }
@@ -95,12 +99,12 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 
     if(mapMove)
     {
-        if(point != lastPos)
+        if((point - firstPos).manhattanLength() >= 4)
         {
             QPoint delta = point - lastPos;
             canvas->moveMap(delta);
-            lastPos     = point;
-            mapDidMove  = true;
+            lastPos    = point;
+            mapDidMove = true;
         }
     }
     else
@@ -139,6 +143,8 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         default:
             ;
         }
+
+        curPOI = canvas->findPOICloseBy(point);
 
         canvas->displayInfo(point);
         canvas->update();
@@ -282,6 +288,14 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     case eStateHooverSingle:
     case eStateHooverMultiple:
     {
+        if(curPOI.pos != NOPOINTF)
+        {
+            const QSize s = curPOI.symbolSize;
+            const qint32 x = (qMax(qMax(s.width(), s.height()), 7)<<1) & 0xFFFFFFFE;
+
+            p.drawImage(curPOI.pos - QPointF(x,x), QImage("://cursors/wptHighlightBlue.png").scaled(x<<1, x<<1, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        }
+
         /*
             Collect and draw items close to the last mouse position in the draw method.
 
@@ -344,6 +358,15 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     }
 }
 
+void CMouseNormal::slotAddPoi() const
+{
+    QPointF pt = curPOI.pos;
+    gis->convertPx2Rad(pt);
+    pt *= RAD_TO_DEG;
+
+    CGisWidget::self().addWptByPos(pt, curPOI.name, curPOI.desc);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
 
 void CMouseNormal::slotAddWpt() const
 {

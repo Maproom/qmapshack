@@ -42,6 +42,7 @@
         <file>icons/32x32/Font.png</file>
         <file>icons/32x32/FromMap.png</file>
         <file>icons/32x32/FilterModifyExtension.png</file>
+        <file>icons/32x32/FilterSubPt2Pt.png</file>
         <file>icons/32x32/Grid.png</file>
         <file>icons/32x32/GridSetup.png</file>
         <file>icons/32x32/GridWizzard.png</file>
@@ -79,6 +80,7 @@
         <file>icons/32x32/SaveAllGIS.png</file>
         <file>icons/32x32/LoadGIS.png</file>
         <file>icons/32x32/GpxProject.png</file>
+        <file>icons/32x32/TcxProject.png</file>
         <file>icons/32x32/QmsProject.png</file>
         <file>icons/32x32/SlfProject.png</file>
         <file>icons/32x32/DBProject.png</file>
@@ -95,7 +97,10 @@
         <file>icons/32x32/Undo.png</file>
         <file>icons/32x32/Redo.png</file>
         <file>icons/32x32/Cut.png</file>
-        <file>icons/32x32/CutHistory.png</file>
+        <file>icons/32x32/CutMode1.png</file>
+        <file>icons/32x32/CutMode2.png</file>
+        <file>icons/32x32/CutHistoryAfter.png</file>
+        <file>icons/32x32/CutHistoryBefore.png</file>
         <file>icons/32x32/Copy.png</file>
         <file>icons/32x32/Move.png</file>
         <file>icons/32x32/Paste.png</file>
@@ -125,6 +130,8 @@
         <file>icons/32x32/PointMove.png</file>
         <file>icons/32x32/PointHide.png</file>
         <file>icons/32x32/PointShow.png</file>
+        <file>icons/32x32/PointAdd.png</file>
+        <file>icons/32x32/PointDel.png</file>
         <file>icons/32x32/AreaMove.png</file>
         <file>icons/32x32/SelectRange.png</file>
         <file>icons/32x32/SelectArea.png</file>
@@ -198,6 +205,10 @@
         <file>icons/32x32/CSrcUnknown.png</file>
         <file>icons/32x32/CSrcAccel.png</file>
         <file>icons/32x32/CSrcCourse.png</file>
+        <file>icons/32x32/CSrcDistance.png</file>
+        <file>icons/32x32/CSrcEnergy.png</file>
+        <file>icons/32x32/CSrcSeaLevelPressure.png</file>
+        <file>icons/32x32/CSrcVertSpeed.png</file>
         <file>icons/32x32/Progress.png</file>
         <file>icons/32x32/FitProject.png</file>
         <file>icons/32x32/LineWidthUser.png</file>
@@ -216,7 +227,15 @@
         <file>icons/32x32/SortName.png</file>
         <file>icons/32x32/SaveGISAsGpx11.png</file>
         <file>icons/32x32/CopyTrkWithWpt.png</file>
-
+        <file>icons/32x32/ToolBarSetup.png</file>
+        <file>icons/32x32/ToggleDem.png</file>
+        <file>icons/32x32/ToggleGis.png</file>
+        <file>icons/32x32/ToggleMaps.png</file>
+        <file>icons/32x32/ToggleRouter.png</file>
+        <file>icons/32x32/ToggleDocks.png</file>
+        <file>icons/32x32/ToolBar.png</file>
+        <file>icons/32x32/FullScreen.png</file>
+        <file>icons/32x32/RegularScreen.png</file>
         <file>icons/48x48/Add.png</file>
         <file>icons/48x48/AddMapWorkspace.png</file>
         <file>icons/48x48/CloneMapWorkspace.png</file>
@@ -230,6 +249,7 @@
         <file>icons/48x48/Font.png</file>
         <file>icons/48x48/FromMap.png</file>
         <file>icons/48x48/FilterModifyExtension.png</file>
+        <file>icons/48x48/FilterSubPt2Pt.png</file>
         <file>icons/48x48/Grid.png</file>
         <file>icons/48x48/GridSetup.png</file>
         <file>icons/48x48/GridWizzard.png</file>
@@ -267,6 +287,7 @@
         <file>icons/48x48/SaveAllGIS.png</file>
         <file>icons/48x48/LoadGIS.png</file>
         <file>icons/48x48/GpxProject.png</file>
+        <file>icons/48x48/TcxProject.png</file>
         <file>icons/48x48/QmsProject.png</file>
         <file>icons/48x48/SlfProject.png</file>
         <file>icons/48x48/DBProject.png</file>
@@ -283,7 +304,10 @@
         <file>icons/48x48/Undo.png</file>
         <file>icons/48x48/Redo.png</file>
         <file>icons/48x48/Cut.png</file>
-        <file>icons/48x48/CutHistory.png</file>
+        <file>icons/48x48/CutMode1.png</file>
+        <file>icons/48x48/CutMode2.png</file>
+        <file>icons/48x48/CutHistoryAfter.png</file>
+        <file>icons/48x48/CutHistoryBefore.png</file>
         <file>icons/48x48/Copy.png</file>
         <file>icons/48x48/Move.png</file>
         <file>icons/48x48/Paste.png</file>
@@ -313,6 +337,8 @@
         <file>icons/48x48/PointMove.png</file>
         <file>icons/48x48/PointHide.png</file>
         <file>icons/48x48/PointShow.png</file>
+        <file>icons/48x48/PointAdd.png</file>
+        <file>icons/48x48/PointDel.png</file>
         <file>icons/48x48/AreaMove.png</file>
         <file>icons/48x48/SelectRange.png</file>
         <file>icons/48x48/SelectArea.png</file>
@@ -386,6 +412,10 @@
         <file>icons/48x48/CSrcUnknown.png</file>
         <file>icons/48x48/CSrcAccel.png</file>
         <file>icons/48x48/CSrcCourse.png</file>
+        <file>icons/48x48/CSrcDistance.png</file>
+        <file>icons/48x48/CSrcEnergy.png</file>
+        <file>icons/48x48/CSrcSeaLevelPressure.png</file>
+        <file>icons/48x48/CSrcVertSpeed.png</file>
         <file>icons/48x48/Progress.png</file>
         <file>icons/48x48/FitProject.png</file>
         <file>icons/48x48/LineWidthUser.png</file>
@@ -404,8 +434,15 @@
         <file>icons/48x48/SortName.png</file>
         <file>icons/48x48/SaveGISAsGpx11.png</file>
         <file>icons/48x48/CopyTrkWithWpt.png</file>
-
-
+        <file>icons/48x48/ToggleDem.png</file>
+        <file>icons/48x48/ToggleDocks.png</file>
+        <file>icons/48x48/ToggleGis.png</file>
+        <file>icons/48x48/ToggleMaps.png</file>
+        <file>icons/48x48/ToggleRouter.png</file>
+        <file>icons/48x48/ToolBarSetup.png</file>
+        <file>icons/48x48/ToolBar.png</file>
+        <file>icons/48x48/FullScreen.png</file>
+        <file>icons/48x48/RegularScreen.png</file>
         <file>icons/cache/32x32/bluepin.png</file>
         <file>icons/cache/32x32/cito.png</file>
         <file>icons/cache/32x32/corrected.png</file>
@@ -463,9 +500,25 @@
         <file>icons/waypoints/32x32/CityLarge.png</file>
         <file>icons/waypoints/32x32/CityMedium.png</file>
         <file>icons/waypoints/32x32/CitySmall.png</file>
+        <file>icons/waypoints/32x32/1stCategory.png</file>
+        <file>icons/waypoints/32x32/2ndCategory.png</file>
+        <file>icons/waypoints/32x32/3rdCategory.png</file>
+        <file>icons/waypoints/32x32/4thCategory.png</file>
+        <file>icons/waypoints/32x32/Danger.png</file>
+        <file>icons/waypoints/32x32/FirstAid.png</file>
+        <file>icons/waypoints/32x32/Food.png</file>
+        <file>icons/waypoints/32x32/Generic.png</file>
+        <file>icons/waypoints/32x32/HorsCategory.png</file>
+        <file>icons/waypoints/32x32/Left.png</file>
+        <file>icons/waypoints/32x32/Right.png</file>
+        <file>icons/waypoints/32x32/Sprint.png</file>
+        <file>icons/waypoints/32x32/Straight.png</file>
+        <file>icons/waypoints/32x32/Summit.png</file>
+        <file>icons/waypoints/32x32/Valley.png</file>
+        <file>icons/waypoints/32x32/Water.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
-        <file>cursors/cursorMovePoint.png</file>
+        <file>cursors/cursorPointMove.png</file>
         <file>cursors/cursorMoveMap.png</file>
         <file>cursors/cursorMoveWpt.png</file>
         <file>cursors/cursorMoveLine.png</file>
@@ -473,10 +526,12 @@
         <file>cursors/cursorDelete.png</file>
         <file>cursors/cursorSelectRange.png</file>
         <file>cursors/cursorSelectArea.png</file>
-        <file>cursors/cursorAdd.png</file>
+        <file>cursors/cursorPointAdd.png</file>
+        <file>cursors/cursorPointDel.png</file>
         <file>cursors/cursorPrint.png</file>
         <file>cursors/cursorSave.png</file>
-        <file>cursors/wptHighlight.png</file>
+        <file>cursors/wptHighlightRed.png</file>
+        <file>cursors/wptHighlightBlue.png</file>
         <file>animation/loader.gif</file>
         <file>animation/loader2.gif</file>
         <file>pics/timezones.png</file>

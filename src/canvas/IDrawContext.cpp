@@ -294,22 +294,81 @@ void IDrawContext::convertRad2Px(QPointF &p) const
     mutex.unlock(); // --------- stop serialize with thread
 }
 
+
 void IDrawContext::convertRad2Px(QPolygonF& poly) const
 {
+    if(pjsrc == nullptr)
+    {
+        return;
+    }
+
     mutex.lock(); // --------- start serialize with thread
 
     QPointF f = focus;
     convertRad2M(f);
 
-    for(int i = 0; i < poly.size(); i++)
+    const int N = poly.size();
+
+    struct p_t
     {
-        QPointF& p = poly[i];
-        convertRad2M(p);
-        p = (p - f) / (scale * zoomFactor) + center;
+        qreal fixWest;
+        qreal fixEast;
+    };
+
+    QVector<p_t> fixes(N, {NOFLOAT, NOFLOAT});
+
+    qreal * pY  = &poly.data()->ry();
+    p_t * pFix  = fixes.data();
+
+    /*
+        Proj4 makes a wrap around for values outside the
+        range of -180..180°. But the draw context has no
+        turnaround. It exceeds the values. We have to
+        apply fixes in that case.
+     */
+    for(int i = 0; i < N; ++i, ++pFix, pY += 2)
+    {
+        if(*pY < (-180*DEG_TO_RAD))
+        {
+            pFix->fixWest = *pY;
+        }
+        if(*pY > ( 180*DEG_TO_RAD))
+        {
+            pFix->fixEast = *pY;
+        }
+    }
+
+    pj_transform(pjtar, pjsrc, N, 2, &poly.data()->rx(), &poly.data()->ry(), 0);
+
+
+    QPointF * pPt = poly.data();
+    pFix          = fixes.data();
+    for(int i = 0; i < N; ++i, ++pFix, ++pPt)
+    {
+        /*
+            The idea of the fix is to calculate a point
+            at the boundary with the same latitude and use it
+            as offset.
+         */
+        if(pFix->fixWest != NOFLOAT)
+        {
+            QPointF o(-180*DEG_TO_RAD, pFix->fixWest);
+            convertRad2M(o);
+            pPt->rx() = 2*o.x() + pPt->x();
+        }
+        if(pFix->fixEast != NOFLOAT)
+        {
+            QPointF o(180*DEG_TO_RAD, pFix->fixEast);
+            convertRad2M(o);
+            pPt->rx() = 2*o.x() + pPt->x();
+        }
+
+        *pPt = (*pPt - f) / (scale * zoomFactor) + center;
     }
 
     mutex.unlock(); // --------- stop serialize with thread
 }
+
 
 void IDrawContext::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QPointF& f)
 {

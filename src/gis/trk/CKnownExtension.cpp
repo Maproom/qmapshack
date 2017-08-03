@@ -24,13 +24,16 @@ const QString CKnownExtension::internalSlope    = "::ql:slope";
 const QString CKnownExtension::internalSpeed    = "::ql:speed";
 const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
+const QString CKnownExtension::internalTerrainSlope = "::ql:terrainslope";
 
 QHash<QString, CKnownExtension> CKnownExtension::knownExtensions;
 QSet<QString> CKnownExtension::registeredNS;
 
+static const int NOORDER = std::numeric_limits<int>::max();
+
 static fTrkPtGetVal getExtensionValueFunc(const QString ext)
 {
-    return [ext](const CGisItemTrk::trkpt_t &p)
+    return [ext](const CTrackData::trkpt_t &p)
            {
                bool ok;
                qreal val = p.extensions.value(ext).toReal(&ok);
@@ -83,24 +86,60 @@ void CKnownExtension::initMioTPX(const IUnit &units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
-                           { tr("Heart Rate"), std::numeric_limits<int>::max(), 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
+                           { tr("Heart Rate"), NOORDER, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("heartrate")});
 
     knownExtensions.insert("cadence",
-                           { tr("Cadence"), std::numeric_limits<int>::max(), 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), NOORDER, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("cadence")});
 
     knownExtensions.insert("speed",
-                           { tr("Speed"), std::numeric_limits<int>::max(), 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed"), NOORDER, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("speed")});
 
     knownExtensions.insert("acceleration",
-                           { tr("Acceleration"), std::numeric_limits<int>::max(), std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
+                           { tr("Acceleration"), NOORDER, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
                              getExtensionValueFunc("acceleration")});
 
     knownExtensions.insert("course",
-                           { tr("Course"), std::numeric_limits<int>::max(), -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
+                           { tr("Course"), NOORDER, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
                              getExtensionValueFunc("course")});
+}
+
+void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
+{
+    knownExtensions.insert(ns % ":cadence",
+                           { tr("Cadence"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                             getExtensionValueFunc(ns % ":cadence")});
+
+    knownExtensions.insert(ns % ":temp",
+                           { tr("Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
+                             getExtensionValueFunc(ns % ":temp")});
+
+    knownExtensions.insert(ns % ":distance",
+                           { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
+                             getExtensionValueFunc(ns % ":distance") });
+
+    knownExtensions.insert(ns % ":altitude",
+                           { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                             getExtensionValueFunc(ns % ":altitude") });
+    
+    knownExtensions.insert(ns % ":energy",
+                            { tr("Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
+                                getExtensionValueFunc(ns % ":energy") });
+
+
+    knownExtensions.insert(ns % ":seaLevelPressure",
+                           { tr("Sea Level Pressure"), 5, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
+                             getExtensionValueFunc(ns % ":seaLevelPressure") });
+
+    knownExtensions.insert(ns % ":speed",
+                           { tr("Speed"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                             getExtensionValueFunc(ns % ":speed")});
+
+    knownExtensions.insert(ns % ":verticalSpeed",
+                           { tr("Speed (vertical)"), 7, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
+                             getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 
 void CKnownExtension::init(const IUnit &units)
@@ -109,22 +148,27 @@ void CKnownExtension::init(const IUnit &units)
     {
         {internalSlope,
          { tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.slope1; }}
+           [](const CTrackData::trkpt_t &p) { return p.slope1; }}
         },
 
         {internalSpeed,
          { tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.speed; }}
+           [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
          { tr("Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
+           [](const CTrackData::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
          { tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
-           [](const CGisItemTrk::trkpt_t &p) { return p.distance; }}
+           [](const CTrackData::trkpt_t &p) { return p.distance; }}
+        },
+
+        {internalTerrainSlope,
+         { tr("Terrain slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
+           getExtensionValueFunc(internalTerrainSlope)}
         }
     };
 
@@ -132,11 +176,12 @@ void CKnownExtension::init(const IUnit &units)
     initGarminTPXv1(units, "tp1");
 
     initMioTPX(units);
+    initClueTrustTPXv1(units, "gpxdata");
 }
 
 const CKnownExtension CKnownExtension::get(const QString &name)
 {
-    CKnownExtension def("", std::numeric_limits<int>::max(), -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
+    CKnownExtension def("", NOORDER, -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
                         getExtensionValueFunc(name)
                         );
     return knownExtensions.value(name, def);

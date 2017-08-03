@@ -262,7 +262,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </string>
               </property>
               <property name="text">
                <string/>
@@ -1644,10 +1644,10 @@
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupLineWidth"/>
   <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph1"/>
+  <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph2"/>
  </buttongroups>
 </ui>

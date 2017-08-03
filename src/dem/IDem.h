@@ -50,6 +50,7 @@ public:
     virtual void draw(IDrawContext::buffer_t& buf) = 0;
 
     virtual qreal getElevationAt(const QPointF& pos) = 0;
+    virtual qreal getSlopeAt(const QPointF& pos) = 0;
 
     bool activated()
     {
@@ -96,6 +97,8 @@ public:
     void setSlopeStepTable(int idx);
     void setSlopeStepTableCustomValue(int idx, int val);
 
+    enum winsize_e {eWinsize3x3 = 9, eWinsize4x4 = 16};
+
 public slots:
     void slotSetHillshading(bool yes)
     {
@@ -114,6 +117,16 @@ protected:
     void hillshading(QVector<qint16>& data, qreal w, qreal h, QImage &img);
 
     void slopecolor(QVector<qint16>& data, qreal w, qreal h, QImage &img);
+
+    /**
+       @brief Slope in degrees based on a window. Origin is at point (1,1), counting from zero.
+       @param win2  window data
+       @param size  size of window (eWinsize3x3 or eWinsize4x4)
+       @param x     Fractional value (0..1) for interpolation in x (4x4 window only)
+       @param y     Fractional value (0..1) for interpolation in y (4x4 window only)
+       @return      Slope in degrees
+     */
+    qreal slopeOfWindowInterp(qint16* win2, winsize_e size, qreal x, qreal y);
 
     /**
        @brief Reproject (translate, rotate, scale) tile before drawing it.
@@ -166,7 +179,7 @@ protected:
 
 private:
     bool bHillshading = false;
-    qreal factorHillshading = 1.0;
+    qreal factorHillshading = 0.1666666716337204;
 
     bool bSlopeColor = false;
     int gradeSlopeColor = 0;

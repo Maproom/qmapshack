@@ -39,6 +39,7 @@ typedef enum
     eFileMonitoringB = 32,
     eFileSegment = 34,
     eFileSegmentList = 35,
+    eFileExdConfiguration = 40,
     eFileMfgRangeMin = 0xF7,
     eFileMfgRangeMax = 0xFE
 } file_e;
@@ -81,17 +82,25 @@ typedef enum
     eMesgNumMonitoring = 55,
     eMesgNumTrainingFile = 72,
     eMesgNumHrv = 78,
+    eMesgNumAntRx = 80,
+    eMesgNumAntTx = 81,
+    eMesgNumAntChannelId = 82,
     eMesgNumLength = 101,
     eMesgNumMonitoringInfo = 103,
     eMesgNumPad = 105,
     eMesgNumSlaveDevice = 106,
+    eMesgNumConnectivity = 127,
+    eMesgNumWeatherConditions = 128,
+    eMesgNumWeatherAlert = 129,
     eMesgNumCadenceZone = 131,
+    eMesgNumHr = 132,
     eMesgNumSegmentLap = 142,
     eMesgNumMemoGlob = 145,
     eMesgNumSegmentId = 148,
     eMesgNumSegmentLeaderboardEntry = 149,
     eMesgNumSegmentPoint = 150,
     eMesgNumSegmentFile = 151,
+    eMesgNumWatchfaceSettings = 159,
     eMesgNumGpsMetadata = 160,
     eMesgNumCameraEvent = 161,
     eMesgNumTimestampCorrelation = 162,
@@ -106,6 +115,13 @@ typedef enum
     eMesgNumVideoTitle = 185,
     eMesgNumVideoDescription = 186,
     eMesgNumVideoClip = 187,
+    eMesgNumOhrSettings = 188,
+    eMesgNumExdScreenConfiguration = 200,
+    eMesgNumExdDataFieldConfiguration = 201,
+    eMesgNumExdDataConceptConfiguration = 202,
+    eMesgNumFieldDescription = 206,
+    eMesgNumDeveloperDataId = 207,
+    eMesgNumMagnetometerData = 208,
     eMesgNumMfgRangeMin = 0xFF00,
     eMesgNumMfgRangeMax = 0xFFFE
 } mesg_num_e;
@@ -186,8 +202,78 @@ typedef enum
     eLanguageFarsi = 23,
     eLanguageBulgarian = 24,
     eLanguageRomanian = 25,
+    eLanguageChinese = 26,
+    eLanguageJapanese = 27,
+    eLanguageKorean = 28,
+    eLanguageTaiwanese = 29,
+    eLanguageThai = 30,
+    eLanguageHebrew = 31,
+    eLanguageBrazilianPortuguese = 32,
+    eLanguageIndonesian = 33,
+    eLanguageMalaysian = 34,
+    eLanguageVietnamese = 35,
+    eLanguageBurmese = 36,
+    eLanguageMongolian = 37,
     eLanguageCustom = 254
 } language_e;
+
+typedef enum
+{
+    eLanguageBits0English = 0x01,
+    eLanguageBits0French = 0x02,
+    eLanguageBits0Italian = 0x04,
+    eLanguageBits0German = 0x08,
+    eLanguageBits0Spanish = 0x10,
+    eLanguageBits0Croatian = 0x20,
+    eLanguageBits0Czech = 0x40,
+    eLanguageBits0Danish = 0x80
+} language_bits_0_e;
+
+typedef enum
+{
+    eLanguageBits1Dutch = 0x01,
+    eLanguageBits1Finnish = 0x02,
+    eLanguageBits1Greek = 0x04,
+    eLanguageBits1Hungarian = 0x08,
+    eLanguageBits1Norwegian = 0x10,
+    eLanguageBits1Polish = 0x20,
+    eLanguageBits1Portuguese = 0x40,
+    eLanguageBits1Slovakian = 0x80
+} language_bits_1_e;
+
+typedef enum
+{
+    eLanguageBits2Slovenian = 0x01,
+    eLanguageBits2Swedish = 0x02,
+    eLanguageBits2Russian = 0x04,
+    eLanguageBits2Turkish = 0x08,
+    eLanguageBits2Latvian = 0x10,
+    eLanguageBits2Ukrainian = 0x20,
+    eLanguageBits2Arabic = 0x40,
+    eLanguageBits2Farsi = 0x80
+} language_bits_2_e;
+
+typedef enum
+{
+    eLanguageBits3Bulgarian = 0x01,
+    eLanguageBits3Romanian = 0x02,
+    eLanguageBits3Chinese = 0x04,
+    eLanguageBits3Japanese = 0x08,
+    eLanguageBits3Korean = 0x10,
+    eLanguageBits3Taiwanese = 0x20,
+    eLanguageBits3Thai = 0x40,
+    eLanguageBits3Hebrew = 0x80
+} language_bits_3_e;
+
+typedef enum
+{
+    eLanguageBits4BrazilianPortuguese = 0x01,
+    eLanguageBits4Indonesian = 0x02,
+    eLanguageBits4Malaysian = 0x04,
+    eLanguageBits4Vietnamese = 0x08,
+    eLanguageBits4Burmese = 0x10,
+    eLanguageBits4Mongolian = 0x20
+} language_bits_4_e;
 
 typedef enum
 {
@@ -302,7 +388,8 @@ typedef enum
 typedef enum
 {
     eDisplayMeasureMetric = 0,
-    eDisplayMeasureStatute = 1
+    eDisplayMeasureStatute = 1,
+    eDisplayMeasureNautical = 2
 } display_measure_e;
 
 typedef enum
@@ -334,14 +421,14 @@ typedef enum
     eDisplayPositionIndonesianIrian = 11,
     eDisplayPositionIndonesianSouthern = 12,
     eDisplayPositionIndiaZone0 = 13,
-    eDisplayPositionIndiaZoneIA = 14,
-    eDisplayPositionIndiaZoneIB = 15,
-    eDisplayPositionIndiaZoneIIA = 16,
-    eDisplayPositionIndiaZoneIIB = 17,
-    eDisplayPositionIndiaZoneIIIA = 18,
-    eDisplayPositionIndiaZoneIIIB = 19,
-    eDisplayPositionIndiaZoneIVA = 20,
-    eDisplayPositionIndiaZoneIVB = 21,
+    eDisplayPositionIndiaZoneIa = 14,
+    eDisplayPositionIndiaZoneIb = 15,
+    eDisplayPositionIndiaZoneIia = 16,
+    eDisplayPositionIndiaZoneIib = 17,
+    eDisplayPositionIndiaZoneIiia = 18,
+    eDisplayPositionIndiaZoneIiib = 19,
+    eDisplayPositionIndiaZoneIva = 20,
+    eDisplayPositionIndiaZoneIvb = 21,
     eDisplayPositionIrishTransverse = 22,
     eDisplayPositionIrishGrid = 23,
     eDisplayPositionLoran = 24,
@@ -363,6 +450,13 @@ typedef enum
     eDisplayPositionLatvianGrid = 40,
     eDisplayPositionSwedishRef99Grid = 41
 } display_position_e;
+
+typedef enum
+{
+    eSwitchOff = 0,
+    eSwitchOn = 1,
+    eSwitchAuto = 2
+} switch_e;
 
 typedef enum
 {
@@ -411,6 +505,10 @@ typedef enum
     eSportRafting = 42,
     eSportWindsurfing = 43,
     eSportKitesurfing = 44,
+    eSportTactical = 45,
+    eSportJumpmaster = 46,
+    eSportBoxing = 47,
+    eSportFloorClimbing = 48,
     eSportAll = 254
 } sport_e;
 
@@ -480,8 +578,16 @@ typedef enum
     eSportBits5Kayaking = 0x02,
     eSportBits5Rafting = 0x04,
     eSportBits5Windsurfing = 0x08,
-    eSportBits5Kitesurfing = 0x10
+    eSportBits5Kitesurfing = 0x10,
+    eSportBits5Tactical = 0x20,
+    eSportBits5Jumpmaster = 0x40,
+    eSportBits5Boxing = 0x80
 } sport_bits_5_e;
+
+typedef enum
+{
+    eSportBits6FloorClimbing = 0x01
+} sport_bits_6_e;
 
 typedef enum
 {
@@ -527,6 +633,17 @@ typedef enum
     eSubSportRcDrone = 39,
     eSubSportWingsuit = 40,
     eSubSportWhitewater = 41,
+    eSubSportSkateSkiing = 42,
+    eSubSportYoga = 43,
+    eSubSportPilates = 44,
+    eSubSportIndoorRunning = 45,
+    eSubSportGravelCycling = 46,
+    eSubSportEBikeMountain = 47,
+    eSubSportCommuting = 48,
+    eSubSportMixedSurface = 49,
+    eSubSportNavigate = 50,
+    eSubSportTrackMe = 51,
+    eSubSportMap = 52,
     eSubSportAll = 254
 } sub_sport_e;
 
@@ -588,6 +705,33 @@ typedef enum
     eLapTriggerSessionEnd = 7,
     eLapTriggerFitnessEquipment = 8
 } lap_trigger_e;
+
+typedef enum
+{
+    eTimeModeHour12 = 0,
+    eTimeModeHour24 = 1,
+    eTimeModeMilitary = 2,
+    eTimeModeHour12WithSeconds = 3,
+    eTimeModeHour24WithSeconds = 4,
+    eTimeModeUtc = 5
+} time_mode_e;
+
+typedef enum
+{
+    eBacklightModeOff = 0,
+    eBacklightModeManual = 1,
+    eBacklightModeKeyAndMessages = 2,
+    eBacklightModeAutoBrightness = 3,
+    eBacklightModeSmartNotifications = 4,
+    eBacklightModeKeyAndMessagesNight = 5,
+    eBacklightModeKeyAndMessagesAndSmartNotifications = 6
+} backlight_mode_e;
+
+typedef enum
+{
+    eDateModeDayMonth = 0,
+    eDateModeMonthDay = 1
+} date_mode_e;
 
 typedef enum
 {
@@ -660,6 +804,14 @@ typedef enum
 
 typedef enum
 {
+    eAutoscrollNone = 0,
+    eAutoscrollSlow = 1,
+    eAutoscrollMedium = 2,
+    eAutoscrollFast = 3
+} autoscroll_e;
+
+typedef enum
+{
     eActivityClassLevel = 0x7F,
     eActivityClassLevelMax = 100,
     eActivityClassAthlete = 0x80
@@ -696,6 +848,18 @@ typedef enum
     eWktStepDurationRepeatUntilPowerGreaterThan = 13,
     eWktStepDurationPowerLessThan = 14,
     eWktStepDurationPowerGreaterThan = 15,
+    eWktStepDurationTrainingPeaksTss = 16,
+    eWktStepDurationRepeatUntilPowerLastLapLessThan = 17,
+    eWktStepDurationRepeatUntilMaxPowerLastLapLessThan = 18,
+    eWktStepDurationPower3SLessThan = 19,
+    eWktStepDurationPower10SLessThan = 20,
+    eWktStepDurationPower30SLessThan = 21,
+    eWktStepDurationPower3SGreaterThan = 22,
+    eWktStepDurationPower10SGreaterThan = 23,
+    eWktStepDurationPower30SGreaterThan = 24,
+    eWktStepDurationPowerLapLessThan = 25,
+    eWktStepDurationPowerLapGreaterThan = 26,
+    eWktStepDurationRepeatUntilTrainingPeaksTss = 27,
     eWktStepDurationRepetitionTime = 28
 } wkt_step_duration_e;
 
@@ -707,7 +871,13 @@ typedef enum
     eWktStepTargetCadence = 3,
     eWktStepTargetPower = 4,
     eWktStepTargetGrade = 5,
-    eWktStepTargetResistance = 6
+    eWktStepTargetResistance = 6,
+    eWktStepTargetPower3S = 7,
+    eWktStepTargetPower10S = 8,
+    eWktStepTargetPower30S = 9,
+    eWktStepTargetPowerLap = 10,
+    eWktStepTargetSpeedLap = 12,
+    eWktStepTargetHeartRateLap = 13
 } wkt_step_target_e;
 
 typedef enum
@@ -716,7 +886,9 @@ typedef enum
     eGoalDistance = 1,
     eGoalCalories = 2,
     eGoalFrequency = 3,
-    eGoalSteps = 4
+    eGoalSteps = 4,
+    eGoalAscent = 5,
+    eGoalActiveMinutes = 6
 } goal_e;
 
 typedef enum
@@ -728,6 +900,13 @@ typedef enum
     eGoalRecurrenceYearly = 4,
     eGoalRecurrenceCustom = 5
 } goal_recurrence_e;
+
+typedef enum
+{
+    eGoalSourceAuto = 0,
+    eGoalSourceCommunity = 1,
+    eGoalSourceUser = 2
+} goal_source_e;
 
 typedef enum
 {
@@ -760,7 +939,9 @@ typedef enum
     eCoursePointSharpLeft = 20,
     eCoursePointSlightRight = 21,
     eCoursePointSharpRight = 22,
-    eCoursePointUTurn = 23
+    eCoursePointUTurn = 23,
+    eCoursePointSegmentStart = 24,
+    eCoursePointSegmentEnd = 25
 } course_point_e;
 
 typedef enum
@@ -810,11 +991,11 @@ typedef enum
     eManufacturerBrimBrothers = 44,
     eManufacturerXplova = 45,
     eManufacturerPerceptionDigital = 46,
-    eManufacturerBf1systems = 47,
+    eManufacturerBf1Systems = 47,
     eManufacturerPioneer = 48,
     eManufacturerSpantec = 49,
     eManufacturerMetalogics = 50,
-    eManufacturer4iiiis = 51,
+    eManufacturer4Iiiis = 51,
     eManufacturerSeikoEpson = 52,
     eManufacturerSeikoEpsonOem = 53,
     eManufacturerIforPowell = 54,
@@ -853,14 +1034,25 @@ typedef enum
     eManufacturerTacx = 89,
     eManufacturerDirectionTechnology = 90,
     eManufacturerMagtonic = 91,
-    eManufacturer1partcarbon = 92,
+    eManufacturer1Partcarbon = 92,
     eManufacturerInsideRideTechnologies = 93,
     eManufacturerSoundOfMotion = 94,
     eManufacturerStryd = 95,
     eManufacturerIcg = 96,
-    eManufacturerMiPulse = 97,
+    eManufacturerMipulse = 97,
     eManufacturerBsxAthletics = 98,
     eManufacturerLook = 99,
+    eManufacturerCampagnoloSrl = 100,
+    eManufacturerBodyBikeSmart = 101,
+    eManufacturerPraxisworks = 102,
+    eManufacturerLimitsTechnology = 103,
+    eManufacturerTopactionTechnology = 104,
+    eManufacturerCosinuss = 105,
+    eManufacturerFitcare = 106,
+    eManufacturerMagene = 107,
+    eManufacturerGiantManufacturingCo = 108,
+    eManufacturerTigrasport = 109,
+    eManufacturerSalutron = 110,
     eManufacturerDevelopment = 255,
     eManufacturerHealthandlife = 257,
     eManufacturerLezyne = 258,
@@ -871,6 +1063,18 @@ typedef enum
     eManufacturerFaveroElectronics = 263,
     eManufacturerDynovelo = 264,
     eManufacturerStrava = 265,
+    eManufacturerPrecor = 266,
+    eManufacturerBryton = 267,
+    eManufacturerSram = 268,
+    eManufacturerNavman = 269,
+    eManufacturerCobi = 270,
+    eManufacturerSpivi = 271,
+    eManufacturerMioMagellan = 272,
+    eManufacturerEvesports = 273,
+    eManufacturerSensitivusGauge = 274,
+    eManufacturerPodoon = 275,
+    eManufacturerLifeTimeFitness = 276,
+    eManufacturerFalcoEMotors = 277,
     eManufacturerActigraphcorp = 5759
 } manufacturer_e;
 
@@ -880,9 +1084,9 @@ typedef enum
     eGarminProductAxh01 = 2,
     eGarminProductAxb01 = 3,
     eGarminProductAxb02 = 4,
-    eGarminProductHrm2ss = 5,
+    eGarminProductHrm2Ss = 5,
     eGarminProductDsiAlf02 = 6,
-    eGarminProductHrm3ss = 7,
+    eGarminProductHrm3Ss = 7,
     eGarminProductHrmRunSingleByteProductId = 8,
     eGarminProductBsm = 9,
     eGarminProductBcm = 10,
@@ -898,7 +1102,7 @@ typedef enum
     eGarminProductFr405Japan = 987,
     eGarminProductFr60 = 988,
     eGarminProductDsiAlf01 = 1011,
-    eGarminProductFr310xt = 1018,
+    eGarminProductFr310Xt = 1018,
     eGarminProductEdge500 = 1036,
     eGarminProductFr110 = 1124,
     eGarminProductEdge800 = 1169,
@@ -907,7 +1111,7 @@ typedef enum
     eGarminProductChirp = 1253,
     eGarminProductFr110Japan = 1274,
     eGarminProductEdge200 = 1325,
-    eGarminProductFr910xt = 1328,
+    eGarminProductFr910Xt = 1328,
     eGarminProductEdge800Taiwan = 1333,
     eGarminProductEdge800Japan = 1334,
     eGarminProductAlf04 = 1341,
@@ -920,21 +1124,21 @@ typedef enum
     eGarminProductFr610Japan = 1410,
     eGarminProductEdge500Korea = 1422,
     eGarminProductFr70 = 1436,
-    eGarminProductFr310xt4t = 1446,
+    eGarminProductFr310Xt4T = 1446,
     eGarminProductAmx = 1461,
     eGarminProductFr10 = 1482,
     eGarminProductEdge800Korea = 1497,
     eGarminProductSwim = 1499,
-    eGarminProductFr910xtChina = 1537,
+    eGarminProductFr910XtChina = 1537,
     eGarminProductFenix = 1551,
     eGarminProductEdge200Taiwan = 1555,
     eGarminProductEdge510 = 1561,
     eGarminProductEdge810 = 1567,
     eGarminProductTempe = 1570,
-    eGarminProductFr910xtJapan = 1600,
+    eGarminProductFr910XtJapan = 1600,
     eGarminProductFr620 = 1623,
     eGarminProductFr220 = 1632,
-    eGarminProductFr910xtKorea = 1664,
+    eGarminProductFr910XtKorea = 1664,
     eGarminProductFr10Japan = 1688,
     eGarminProductEdge810Japan = 1721,
     eGarminProductVirbElite = 1735,
@@ -942,7 +1146,7 @@ typedef enum
     eGarminProductEdge510Japan = 1742,
     eGarminProductHrmTri = 1743,
     eGarminProductHrmRun = 1752,
-    eGarminProductFr920xt = 1765,
+    eGarminProductFr920Xt = 1765,
     eGarminProductEdge510Asia = 1821,
     eGarminProductEdge810China = 1822,
     eGarminProductEdge810Taiwan = 1823,
@@ -971,34 +1175,56 @@ typedef enum
     eGarminProductFr220Russia = 2073,
     eGarminProductVectorS = 2079,
     eGarminProductEdge1000Korea = 2100,
-    eGarminProductFr920xtTaiwan = 2130,
-    eGarminProductFr920xtChina = 2131,
-    eGarminProductFr920xtJapan = 2132,
+    eGarminProductFr920XtTaiwan = 2130,
+    eGarminProductFr920XtChina = 2131,
+    eGarminProductFr920XtJapan = 2132,
     eGarminProductVirbx = 2134,
     eGarminProductVivoSmartApac = 2135,
     eGarminProductEtrexTouch = 2140,
     eGarminProductEdge25 = 2147,
+    eGarminProductFr25 = 2148,
     eGarminProductVivoFit2 = 2150,
     eGarminProductFr225 = 2153,
+    eGarminProductFr630 = 2156,
+    eGarminProductFr230 = 2157,
     eGarminProductVivoActiveApac = 2160,
     eGarminProductVector2 = 2161,
-    eGarminProductVector2s = 2162,
+    eGarminProductVector2S = 2162,
     eGarminProductVirbxe = 2172,
     eGarminProductFr620Taiwan = 2173,
     eGarminProductFr220Taiwan = 2174,
+    eGarminProductTruswing = 2175,
     eGarminProductFenix3China = 2188,
     eGarminProductFenix3Twn = 2189,
     eGarminProductVariaHeadlight = 2192,
     eGarminProductVariaTaillightOld = 2193,
+    eGarminProductEdgeExplore1000 = 2204,
     eGarminProductFr225Asia = 2219,
     eGarminProductVariaRadarTaillight = 2225,
     eGarminProductVariaRadarDisplay = 2226,
     eGarminProductEdge20 = 2238,
     eGarminProductD2Bravo = 2262,
+    eGarminProductApproachS20 = 2266,
     eGarminProductVariaRemote = 2276,
+    eGarminProductHrm4Run = 2327,
+    eGarminProductVivoActiveHr = 2337,
+    eGarminProductVivoSmartGpsHr = 2347,
+    eGarminProductVivoSmartHr = 2348,
+    eGarminProductVivoMove = 2368,
+    eGarminProductVariaVision = 2398,
+    eGarminProductVivoFit3 = 2406,
+    eGarminProductFenix3Hr = 2413,
+    eGarminProductIndexSmartScale = 2429,
+    eGarminProductFr235 = 2431,
+    eGarminProductOregon7Xx = 2441,
+    eGarminProductRino7Xx = 2444,
+    eGarminProductNautix = 2496,
+    eGarminProductEdge820 = 2530,
+    eGarminProductEdgeExplore820 = 2531,
     eGarminProductSdm4 = 10007,
     eGarminProductEdgeRemote = 10014,
     eGarminProductTrainingCenter = 20119,
+    eGarminProductConnectiqSimulator = 65531,
     eGarminProductAndroidAntplusPlugin = 65532,
     eGarminProductConnect = 65534
 } garmin_product_e;
@@ -1016,6 +1242,12 @@ typedef enum
     eAntplusDeviceTypeLightElectricVehicle = 20,
     eAntplusDeviceTypeEnvSensor = 25,
     eAntplusDeviceTypeRacquet = 26,
+    eAntplusDeviceTypeControlHub = 27,
+    eAntplusDeviceTypeMuscleOxygen = 31,
+    eAntplusDeviceTypeBikeLightMain = 35,
+    eAntplusDeviceTypeBikeLightShared = 36,
+    eAntplusDeviceTypeExd = 38,
+    eAntplusDeviceTypeBikeRadar = 40,
     eAntplusDeviceTypeWeightScale = 119,
     eAntplusDeviceTypeHeartRate = 120,
     eAntplusDeviceTypeBikeSpeedCadence = 121,
@@ -1057,6 +1289,7 @@ typedef enum
     eBatteryStatusOk = 3,
     eBatteryStatusLow = 4,
     eBatteryStatusCritical = 5,
+    eBatteryStatusCharging = 6,
     eBatteryStatusUnknown = 7
 } battery_status_e;
 
@@ -1135,6 +1368,7 @@ typedef enum
     eActivityTypeFitnessEquipment = 4,
     eActivityTypeSwimming = 5,
     eActivityTypeWalking = 6,
+    eActivityTypeSedentary = 8,
     eActivityTypeAll = 254
 } activity_type_e;
 
@@ -1171,6 +1405,12 @@ typedef enum
 
 typedef enum
 {
+    eSideRight = 0,
+    eSideLeft = 1
+} side_e;
+
+typedef enum
+{
     eLeftRightBalanceMask = 0x7F,
     eLeftRightBalanceRight = 0x80
 } left_right_balance_e;
@@ -1189,6 +1429,17 @@ typedef enum
 
 typedef enum
 {
+    eDayOfWeekSunday = 0,
+    eDayOfWeekMonday = 1,
+    eDayOfWeekTuesday = 2,
+    eDayOfWeekWednesday = 3,
+    eDayOfWeekThursday = 4,
+    eDayOfWeekFriday = 5,
+    eDayOfWeekSaturday = 6
+} day_of_week_e;
+
+typedef enum
+{
     eConnectivityCapabilitiesBluetooth = 0x00000001,
     eConnectivityCapabilitiesBluetoothLe = 0x00000002,
     eConnectivityCapabilitiesAnt = 0x00000004,
@@ -1202,8 +1453,157 @@ typedef enum
     eConnectivityCapabilitiesExplicitArchive = 0x00000400,
     eConnectivityCapabilitiesSetupIncomplete = 0x00000800,
     eConnectivityCapabilitiesContinueSyncAfterSoftwareUpdate = 0x00001000,
-    eConnectivityCapabilitiesConnectIqAppDownload = 0x00002000
+    eConnectivityCapabilitiesConnectIqAppDownload = 0x00002000,
+    eConnectivityCapabilitiesGolfCourseDownload = 0x00004000,
+    eConnectivityCapabilitiesDeviceInitiatesSync = 0x00008000,
+    eConnectivityCapabilitiesConnectIqWatchAppDownload = 0x00010000,
+    eConnectivityCapabilitiesConnectIqWidgetDownload = 0x00020000,
+    eConnectivityCapabilitiesConnectIqWatchFaceDownload = 0x00040000,
+    eConnectivityCapabilitiesConnectIqDataFieldDownload = 0x00080000,
+    eConnectivityCapabilitiesConnectIqAppManagment = 0x00100000,
+    eConnectivityCapabilitiesSwingSensor = 0x00200000,
+    eConnectivityCapabilitiesSwingSensorRemote = 0x00400000,
+    eConnectivityCapabilitiesIncidentDetection = 0x00800000,
+    eConnectivityCapabilitiesAudioPrompts = 0x01000000,
+    eConnectivityCapabilitiesWifiVerification = 0x02000000,
+    eConnectivityCapabilitiesTrueUp = 0x04000000,
+    eConnectivityCapabilitiesFindMyWatch = 0x08000000,
+    eConnectivityCapabilitiesRemoteManualSync = 0x10000000,
+    eConnectivityCapabilitiesLiveTrackAutoStart = 0x20000000,
+    eConnectivityCapabilitiesLiveTrackMessaging = 0x40000000,
+    eConnectivityCapabilitiesInstantInput = 0x80000000
 } connectivity_capabilities_e;
+
+typedef enum
+{
+    eWeatherReportCurrent = 0,
+    eWeatherReportForecast = 1,
+    eWeatherReportHourlyForecast = 1,
+    eWeatherReportDailyForecast = 2
+} weather_report_e;
+
+typedef enum
+{
+    eWeatherStatusClear = 0,
+    eWeatherStatusPartlyCloudy = 1,
+    eWeatherStatusMostlyCloudy = 2,
+    eWeatherStatusRain = 3,
+    eWeatherStatusSnow = 4,
+    eWeatherStatusWindy = 5,
+    eWeatherStatusThunderstorms = 6,
+    eWeatherStatusWintryMix = 7,
+    eWeatherStatusFog = 8,
+    eWeatherStatusHazy = 11,
+    eWeatherStatusHail = 12,
+    eWeatherStatusScatteredShowers = 13,
+    eWeatherStatusScatteredThunderstorms = 14,
+    eWeatherStatusUnknownPrecipitation = 15,
+    eWeatherStatusLightRain = 16,
+    eWeatherStatusHeavyRain = 17,
+    eWeatherStatusLightSnow = 18,
+    eWeatherStatusHeavySnow = 19,
+    eWeatherStatusLightRainSnow = 20,
+    eWeatherStatusHeavyRainSnow = 21,
+    eWeatherStatusCloudy = 22
+} weather_status_e;
+
+typedef enum
+{
+    eWeatherSeverityUnknown = 0,
+    eWeatherSeverityWarning = 1,
+    eWeatherSeverityWatch = 2,
+    eWeatherSeverityAdvisory = 3,
+    eWeatherSeverityStatement = 4
+} weather_severity_e;
+
+typedef enum
+{
+    eWeatherSevereTypeUnspecified = 0,
+    eWeatherSevereTypeTornado = 1,
+    eWeatherSevereTypeTsunami = 2,
+    eWeatherSevereTypeHurricane = 3,
+    eWeatherSevereTypeExtremeWind = 4,
+    eWeatherSevereTypeTyphoon = 5,
+    eWeatherSevereTypeInlandHurricane = 6,
+    eWeatherSevereTypeHurricaneForceWind = 7,
+    eWeatherSevereTypeWaterspout = 8,
+    eWeatherSevereTypeSevereThunderstorm = 9,
+    eWeatherSevereTypeWreckhouseWinds = 10,
+    eWeatherSevereTypeLesSuetesWind = 11,
+    eWeatherSevereTypeAvalanche = 12,
+    eWeatherSevereTypeFlashFlood = 13,
+    eWeatherSevereTypeTropicalStorm = 14,
+    eWeatherSevereTypeInlandTropicalStorm = 15,
+    eWeatherSevereTypeBlizzard = 16,
+    eWeatherSevereTypeIceStorm = 17,
+    eWeatherSevereTypeFreezingRain = 18,
+    eWeatherSevereTypeDebrisFlow = 19,
+    eWeatherSevereTypeFlashFreeze = 20,
+    eWeatherSevereTypeDustStorm = 21,
+    eWeatherSevereTypeHighWind = 22,
+    eWeatherSevereTypeWinterStorm = 23,
+    eWeatherSevereTypeHeavyFreezingSpray = 24,
+    eWeatherSevereTypeExtremeCold = 25,
+    eWeatherSevereTypeWindChill = 26,
+    eWeatherSevereTypeColdWave = 27,
+    eWeatherSevereTypeHeavySnowAlert = 28,
+    eWeatherSevereTypeLakeEffectBlowingSnow = 29,
+    eWeatherSevereTypeSnowSquall = 30,
+    eWeatherSevereTypeLakeEffectSnow = 31,
+    eWeatherSevereTypeWinterWeather = 32,
+    eWeatherSevereTypeSleet = 33,
+    eWeatherSevereTypeSnowfall = 34,
+    eWeatherSevereTypeSnowAndBlowingSnow = 35,
+    eWeatherSevereTypeBlowingSnow = 36,
+    eWeatherSevereTypeSnowAlert = 37,
+    eWeatherSevereTypeArcticOutflow = 38,
+    eWeatherSevereTypeFreezingDrizzle = 39,
+    eWeatherSevereTypeStorm = 40,
+    eWeatherSevereTypeStormSurge = 41,
+    eWeatherSevereTypeRainfall = 42,
+    eWeatherSevereTypeArealFlood = 43,
+    eWeatherSevereTypeCoastalFlood = 44,
+    eWeatherSevereTypeLakeshoreFlood = 45,
+    eWeatherSevereTypeExcessiveHeat = 46,
+    eWeatherSevereTypeHeat = 47,
+    eWeatherSevereTypeWeather = 48,
+    eWeatherSevereTypeHighHeatAndHumidity = 49,
+    eWeatherSevereTypeHumidexAndHealth = 50,
+    eWeatherSevereTypeHumidex = 51,
+    eWeatherSevereTypeGale = 52,
+    eWeatherSevereTypeFreezingSpray = 53,
+    eWeatherSevereTypeSpecialMarine = 54,
+    eWeatherSevereTypeSquall = 55,
+    eWeatherSevereTypeStrongWind = 56,
+    eWeatherSevereTypeLakeWind = 57,
+    eWeatherSevereTypeMarineWeather = 58,
+    eWeatherSevereTypeWind = 59,
+    eWeatherSevereTypeSmallCraftHazardousSeas = 60,
+    eWeatherSevereTypeHazardousSeas = 61,
+    eWeatherSevereTypeSmallCraft = 62,
+    eWeatherSevereTypeSmallCraftWinds = 63,
+    eWeatherSevereTypeSmallCraftRoughBar = 64,
+    eWeatherSevereTypeHighWaterLevel = 65,
+    eWeatherSevereTypeAshfall = 66,
+    eWeatherSevereTypeFreezingFog = 67,
+    eWeatherSevereTypeDenseFog = 68,
+    eWeatherSevereTypeDenseSmoke = 69,
+    eWeatherSevereTypeBlowingDust = 70,
+    eWeatherSevereTypeHardFreeze = 71,
+    eWeatherSevereTypeFreeze = 72,
+    eWeatherSevereTypeFrost = 73,
+    eWeatherSevereTypeFireWeather = 74,
+    eWeatherSevereTypeFlood = 75,
+    eWeatherSevereTypeRipTide = 76,
+    eWeatherSevereTypeHighSurf = 77,
+    eWeatherSevereTypeSmog = 78,
+    eWeatherSevereTypeAirQuality = 79,
+    eWeatherSevereTypeBriskWind = 80,
+    eWeatherSevereTypeAirStagnation = 81,
+    eWeatherSevereTypeLowWater = 82,
+    eWeatherSevereTypeHydrological = 83,
+    eWeatherSevereTypeSpecialWeather = 84
+} weather_severe_type_e;
 
 typedef enum
 {
@@ -1252,7 +1652,11 @@ typedef enum
     eBodyLocationRightBrachioradialis = 32,
     eBodyLocationRightForearmExtensors = 33,
     eBodyLocationNeck = 34,
-    eBodyLocationThroat = 35
+    eBodyLocationThroat = 35,
+    eBodyLocationWaistMidBack = 36,
+    eBodyLocationWaistFront = 37,
+    eBodyLocationWaistLeft = 38,
+    eBodyLocationWaistRight = 39
 } body_location_e;
 
 typedef enum
@@ -1301,6 +1705,36 @@ typedef enum
 
 typedef enum
 {
+    eDisplayOrientationAuto = 0,
+    eDisplayOrientationPortrait = 1,
+    eDisplayOrientationLandscape = 2,
+    eDisplayOrientationPortraitFlipped = 3,
+    eDisplayOrientationLandscapeFlipped = 4
+} display_orientation_e;
+
+typedef enum
+{
+    eWatchfaceModeDigital = 0,
+    eWatchfaceModeAnalog = 1,
+    eWatchfaceModeConnectIq = 2
+} watchface_mode_e;
+
+typedef enum
+{
+    eDigitalWatchfaceLayoutTraditional = 0,
+    eDigitalWatchfaceLayoutModern = 1,
+    eDigitalWatchfaceLayoutBold = 2
+} digital_watchface_layout_e;
+
+typedef enum
+{
+    eAnalogWatchfaceLayoutMinimal = 0,
+    eAnalogWatchfaceLayoutTraditional = 1,
+    eAnalogWatchfaceLayoutModern = 2
+} analog_watchface_layout_e;
+
+typedef enum
+{
     eRiderPositionTypeSeated = 0,
     eRiderPositionTypeStanding = 1
 } rider_position_type_e;
@@ -1323,7 +1757,11 @@ typedef enum
     eCameraEventTypeVideoSecondStreamSplit = 5,
     eCameraEventTypeVideoSecondStreamEnd = 6,
     eCameraEventTypeVideoSplitStart = 7,
-    eCameraEventTypeVideoSecondStreamSplitStart = 8
+    eCameraEventTypeVideoSecondStreamSplitStart = 8,
+    eCameraEventTypeVideoPause = 11,
+    eCameraEventTypeVideoSecondStreamPause = 12,
+    eCameraEventTypeVideoResume = 13,
+    eCameraEventTypeVideoSecondStreamResume = 14
 } camera_event_type_e;
 
 typedef enum
@@ -1335,9 +1773,18 @@ typedef enum
 
 typedef enum
 {
+    eBikeLightNetworkConfigTypeAuto = 0,
+    eBikeLightNetworkConfigTypeIndividual = 4,
+    eBikeLightNetworkConfigTypeHighVisibility = 5,
+    eBikeLightNetworkConfigTypeTrail = 6
+} bike_light_network_config_type_e;
+
+typedef enum
+{
     eCommTimeoutTypeWildcardPairingTimeout = 0,
     eCommTimeoutTypePairingTimeout = 1,
     eCommTimeoutTypeConnectionLost = 2,
+    eCommTimeoutTypeConnectionTimeout = 3
 } comm_timeout_type_e;
 
 typedef enum
@@ -1373,6 +1820,340 @@ typedef enum
     eAttitudeValidityMagneticHeading = 0x1000
 } attitude_validity_e;
 
+typedef enum
+{
+    eAutoSyncFrequencyNever = 0,
+    eAutoSyncFrequencyOccasionally = 1,
+    eAutoSyncFrequencyFrequent = 2,
+    eAutoSyncFrequencyOnceADay = 3
+} auto_sync_frequency_e;
+
+typedef enum
+{
+    eExdLayoutFullScreen = 0,
+    eExdLayoutHalfVertical = 1,
+    eExdLayoutHalfHorizontal = 2,
+    eExdLayoutHalfVerticalRightSplit = 3,
+    eExdLayoutHalfHorizontalBottomSplit = 4,
+    eExdLayoutFullQuarterSplit = 5,
+    eExdLayoutHalfVerticalLeftSplit = 6,
+    eExdLayoutHalfHorizontalTopSplit = 7
+} exd_layout_e;
+
+typedef enum
+{
+    eExdDisplayTypeNumerical = 0,
+    eExdDisplayTypeSimple = 1,
+    eExdDisplayTypeGraph = 2,
+    eExdDisplayTypeBar = 3,
+    eExdDisplayTypeCircleGraph = 4,
+    eExdDisplayTypeVirtualPartner = 5,
+    eExdDisplayTypeBalance = 6,
+    eExdDisplayTypeStringList = 7,
+    eExdDisplayTypeString = 8,
+    eExdDisplayTypeSimpleDynamicIcon = 9,
+    eExdDisplayTypeGauge = 10
+} exd_display_type_e;
+
+typedef enum
+{
+    eExdDataUnitsNoUnits = 0,
+    eExdDataUnitsLaps = 1,
+    eExdDataUnitsMilesPerHour = 2,
+    eExdDataUnitsKilometersPerHour = 3,
+    eExdDataUnitsFeetPerHour = 4,
+    eExdDataUnitsMetersPerHour = 5,
+    eExdDataUnitsDegreesCelsius = 6,
+    eExdDataUnitsDegreesFarenheit = 7,
+    eExdDataUnitsZone = 8,
+    eExdDataUnitsGear = 9,
+    eExdDataUnitsRpm = 10,
+    eExdDataUnitsBpm = 11,
+    eExdDataUnitsDegrees = 12,
+    eExdDataUnitsMillimeters = 13,
+    eExdDataUnitsMeters = 14,
+    eExdDataUnitsKilometers = 15,
+    eExdDataUnitsFeet = 16,
+    eExdDataUnitsYards = 17,
+    eExdDataUnitsKilofeet = 18,
+    eExdDataUnitsMiles = 19,
+    eExdDataUnitsTime = 20,
+    eExdDataUnitsEnumTurnType = 21,
+    eExdDataUnitsPercent = 22,
+    eExdDataUnitsWatts = 23,
+    eExdDataUnitsWattsPerKilogram = 24,
+    eExdDataUnitsEnumBatteryStatus = 25,
+    eExdDataUnitsEnumBikeLightBeamAngleMode = 26,
+    eExdDataUnitsEnumBikeLightBatteryStatus = 27,
+    eExdDataUnitsEnumBikeLightNetworkConfigType = 28,
+    eExdDataUnitsLights = 29,
+    eExdDataUnitsSeconds = 30,
+    eExdDataUnitsMinutes = 31,
+    eExdDataUnitsHours = 32,
+    eExdDataUnitsCalories = 33,
+    eExdDataUnitsKilojoules = 34,
+    eExdDataUnitsMilliseconds = 35,
+    eExdDataUnitsSecondPerMile = 36,
+    eExdDataUnitsSecondPerKilometer = 37,
+    eExdDataUnitsCentimeter = 38,
+    eExdDataUnitsEnumCoursePoint = 39,
+    eExdDataUnitsBradians = 40,
+    eExdDataUnitsEnumSport = 41,
+    eExdDataUnitsInchesHg = 42,
+    eExdDataUnitsMmHg = 43,
+    eExdDataUnitsMbars = 44,
+    eExdDataUnitsHectoPascals = 45,
+    eExdDataUnitsFeetPerMin = 46,
+    eExdDataUnitsMetersPerMin = 47,
+    eExdDataUnitsMetersPerSec = 48,
+    eExdDataUnitsEightCardinal = 49
+} exd_data_units_e;
+
+typedef enum
+{
+    eExdQualifiersNoQualifier = 0,
+    eExdQualifiersInstantaneous = 1,
+    eExdQualifiersAverage = 2,
+    eExdQualifiersLap = 3,
+    eExdQualifiersMaximum = 4,
+    eExdQualifiersMaximumAverage = 5,
+    eExdQualifiersMaximumLap = 6,
+    eExdQualifiersLastLap = 7,
+    eExdQualifiersAverageLap = 8,
+    eExdQualifiersToDestination = 9,
+    eExdQualifiersToGo = 10,
+    eExdQualifiersToNext = 11,
+    eExdQualifiersNextCoursePoint = 12,
+    eExdQualifiersTotal = 13,
+    eExdQualifiersThreeSecondAverage = 14,
+    eExdQualifiersTenSecondAverage = 15,
+    eExdQualifiersThirtySecondAverage = 16,
+    eExdQualifiersPercentMaximum = 17,
+    eExdQualifiersPercentMaximumAverage = 18,
+    eExdQualifiersLapPercentMaximum = 19,
+    eExdQualifiersElapsed = 20,
+    eExdQualifiersSunrise = 21,
+    eExdQualifiersSunset = 22,
+    eExdQualifiersComparedToVirtualPartner = 23,
+    eExdQualifiersMaximum24H = 24,
+    eExdQualifiersMinimum24H = 25,
+    eExdQualifiersMinimum = 26,
+    eExdQualifiersFirst = 27,
+    eExdQualifiersSecond = 28,
+    eExdQualifiersThird = 29,
+    eExdQualifiersShifter = 30,
+    eExdQualifiersLastSport = 31,
+    eExdQualifiersMoving = 32,
+    eExdQualifiersStopped = 33,
+    eExdQualifiersZone9 = 242,
+    eExdQualifiersZone8 = 243,
+    eExdQualifiersZone7 = 244,
+    eExdQualifiersZone6 = 245,
+    eExdQualifiersZone5 = 246,
+    eExdQualifiersZone4 = 247,
+    eExdQualifiersZone3 = 248,
+    eExdQualifiersZone2 = 249,
+    eExdQualifiersZone1 = 250
+} exd_qualifiers_e;
+
+typedef enum
+{
+    eExdDescriptorsBikeLightBatteryStatus = 0,
+    eExdDescriptorsBeamAngleStatus = 1,
+    eExdDescriptorsBateryLevel = 2,
+    eExdDescriptorsLightNetworkMode = 3,
+    eExdDescriptorsNumberLightsConnected = 4,
+    eExdDescriptorsCadence = 5,
+    eExdDescriptorsDistance = 6,
+    eExdDescriptorsEstimatedTimeOfArrival = 7,
+    eExdDescriptorsHeading = 8,
+    eExdDescriptorsTime = 9,
+    eExdDescriptorsBatteryLevel = 10,
+    eExdDescriptorsTrainerResistance = 11,
+    eExdDescriptorsTrainerTargetPower = 12,
+    eExdDescriptorsTimeSeated = 13,
+    eExdDescriptorsTimeStanding = 14,
+    eExdDescriptorsElevation = 15,
+    eExdDescriptorsGrade = 16,
+    eExdDescriptorsAscent = 17,
+    eExdDescriptorsDescent = 18,
+    eExdDescriptorsVerticalSpeed = 19,
+    eExdDescriptorsDi2BatteryLevel = 20,
+    eExdDescriptorsFrontGear = 21,
+    eExdDescriptorsRearGear = 22,
+    eExdDescriptorsGearRatio = 23,
+    eExdDescriptorsHeartRate = 24,
+    eExdDescriptorsHeartRateZone = 25,
+    eExdDescriptorsTimeInHeartRateZone = 26,
+    eExdDescriptorsHeartRateReserve = 27,
+    eExdDescriptorsCalories = 28,
+    eExdDescriptorsGpsAccuracy = 29,
+    eExdDescriptorsGpsSignalStrength = 30,
+    eExdDescriptorsTemperature = 31,
+    eExdDescriptorsTimeOfDay = 32,
+    eExdDescriptorsBalance = 33,
+    eExdDescriptorsPedalSmoothness = 34,
+    eExdDescriptorsPower = 35,
+    eExdDescriptorsFunctionalThresholdPower = 36,
+    eExdDescriptorsIntensityFactor = 37,
+    eExdDescriptorsWork = 38,
+    eExdDescriptorsPowerRatio = 39,
+    eExdDescriptorsNormalizedPower = 40,
+    eExdDescriptorsTrainingStressScore = 41,
+    eExdDescriptorsTimeOnZone = 42,
+    eExdDescriptorsSpeed = 43,
+    eExdDescriptorsLaps = 44,
+    eExdDescriptorsReps = 45,
+    eExdDescriptorsWorkoutStep = 46,
+    eExdDescriptorsCourseDistance = 47,
+    eExdDescriptorsNavigationDistance = 48,
+    eExdDescriptorsCourseEstimatedTimeOfArrival = 49,
+    eExdDescriptorsNavigationEstimatedTimeOfArrival = 50,
+    eExdDescriptorsCourseTime = 51,
+    eExdDescriptorsNavigationTime = 52,
+    eExdDescriptorsCourseHeading = 53,
+    eExdDescriptorsNavigationHeading = 54,
+    eExdDescriptorsPowerZone = 55,
+    eExdDescriptorsTorqueEffectiveness = 56,
+    eExdDescriptorsTimerTime = 57,
+    eExdDescriptorsPowerWeightRatio = 58,
+    eExdDescriptorsLeftPlatformCenterOffset = 59,
+    eExdDescriptorsRightPlatformCenterOffset = 60,
+    eExdDescriptorsLeftPowerPhaseStartAngle = 61,
+    eExdDescriptorsRightPowerPhaseStartAngle = 62,
+    eExdDescriptorsLeftPowerPhaseFinishAngle = 63,
+    eExdDescriptorsRightPowerPhaseFinishAngle = 64,
+    eExdDescriptorsGears = 65,
+    eExdDescriptorsPace = 66,
+    eExdDescriptorsTrainingEffect = 67,
+    eExdDescriptorsVerticalOscillation = 68,
+    eExdDescriptorsVerticalRatio = 69,
+    eExdDescriptorsGroundContactTime = 70,
+    eExdDescriptorsLeftGroundContactTimeBalance = 71,
+    eExdDescriptorsRightGroundContactTimeBalance = 72,
+    eExdDescriptorsStrideLength = 73,
+    eExdDescriptorsRunningCadence = 74,
+    eExdDescriptorsPerformanceCondition = 75,
+    eExdDescriptorsCourseType = 76,
+    eExdDescriptorsTimeInPowerZone = 77,
+    eExdDescriptorsNavigationTurn = 78,
+    eExdDescriptorsCourseLocation = 79,
+    eExdDescriptorsNavigationLocation = 80,
+    eExdDescriptorsCompass = 81,
+    eExdDescriptorsGearCombo = 82,
+    eExdDescriptorsMuscleOxygen = 83,
+    eExdDescriptorsIcon = 84,
+    eExdDescriptorsCompassHeading = 85,
+    eExdDescriptorsGpsHeading = 86,
+    eExdDescriptorsGpsElevation = 87,
+    eExdDescriptorsAnaerobicTrainingEffect = 88,
+    eExdDescriptorsCourse = 89,
+    eExdDescriptorsOffCourse = 90,
+    eExdDescriptorsGlideRatio = 91,
+    eExdDescriptorsVerticalDistance = 92,
+    eExdDescriptorsVmg = 93,
+    eExdDescriptorsAmbientPressure = 94,
+    eExdDescriptorsPressure = 95
+} exd_descriptors_e;
+
+typedef enum
+{
+    eAutoActivityDetectNone = 0x00000000,
+    eAutoActivityDetectRunning = 0x00000001,
+    eAutoActivityDetectCycling = 0x00000002,
+    eAutoActivityDetectSwimming = 0x00000004,
+    eAutoActivityDetectWalking = 0x00000008,
+    eAutoActivityDetectElliptical = 0x00000020,
+    eAutoActivityDetectSedentary = 0x00000400
+} auto_activity_detect_e;
+
+typedef enum
+{
+    eSupportedExdScreenLayoutsFullScreen = 0x00000001,
+    eSupportedExdScreenLayoutsHalfVertical = 0x00000002,
+    eSupportedExdScreenLayoutsHalfHorizontal = 0x00000004,
+    eSupportedExdScreenLayoutsHalfVerticalRightSplit = 0x00000008,
+    eSupportedExdScreenLayoutsHalfHorizontalBottomSplit = 0x00000010,
+    eSupportedExdScreenLayoutsFullQuarterSplit = 0x00000020,
+    eSupportedExdScreenLayoutsHalfVerticalLeftSplit = 0x00000040,
+    eSupportedExdScreenLayoutsHalfHorizontalTopSplit = 0x00000080
+} supported_exd_screen_layouts_e;
+
+typedef enum
+{
+    eFitBaseTypeEnum = 0,
+    eFitBaseTypeSint8 = 1,
+    eFitBaseTypeUint8 = 2,
+    eFitBaseTypeSint16 = 131,
+    eFitBaseTypeUint16 = 132,
+    eFitBaseTypeSint32 = 133,
+    eFitBaseTypeUint32 = 134,
+    eFitBaseTypeString = 7,
+    eFitBaseTypeFloat32 = 136,
+    eFitBaseTypeFloat64 = 137,
+    eFitBaseTypeUint8Z = 10,
+    eFitBaseTypeUint16Z = 139,
+    eFitBaseTypeUint32Z = 140,
+    eFitBaseTypeByte = 13,
+    eFitBaseTypeSint64 = 142,
+    eFitBaseTypeUint64 = 143,
+    eFitBaseTypeUint64Z = 144
+} fit_base_type_e;
+
+typedef enum
+{
+    eTurnTypeArrivingIdx = 0,
+    eTurnTypeArrivingLeftIdx = 1,
+    eTurnTypeArrivingRightIdx = 2,
+    eTurnTypeArrivingViaIdx = 3,
+    eTurnTypeArrivingViaLeftIdx = 4,
+    eTurnTypeArrivingViaRightIdx = 5,
+    eTurnTypeBearKeepLeftIdx = 6,
+    eTurnTypeBearKeepRightIdx = 7,
+    eTurnTypeContinueIdx = 8,
+    eTurnTypeExitLeftIdx = 9,
+    eTurnTypeExitRightIdx = 10,
+    eTurnTypeFerryIdx = 11,
+    eTurnTypeRoundabout45Idx = 12,
+    eTurnTypeRoundabout90Idx = 13,
+    eTurnTypeRoundabout135Idx = 14,
+    eTurnTypeRoundabout180Idx = 15,
+    eTurnTypeRoundabout225Idx = 16,
+    eTurnTypeRoundabout270Idx = 17,
+    eTurnTypeRoundabout315Idx = 18,
+    eTurnTypeRoundabout360Idx = 19,
+    eTurnTypeRoundaboutNeg45Idx = 20,
+    eTurnTypeRoundaboutNeg90Idx = 21,
+    eTurnTypeRoundaboutNeg135Idx = 22,
+    eTurnTypeRoundaboutNeg180Idx = 23,
+    eTurnTypeRoundaboutNeg225Idx = 24,
+    eTurnTypeRoundaboutNeg270Idx = 25,
+    eTurnTypeRoundaboutNeg315Idx = 26,
+    eTurnTypeRoundaboutNeg360Idx = 27,
+    eTurnTypeRoundaboutGenericIdx = 28,
+    eTurnTypeRoundaboutNegGenericIdx = 29,
+    eTurnTypeSharpTurnLeftIdx = 30,
+    eTurnTypeSharpTurnRightIdx = 31,
+    eTurnTypeTurnLeftIdx = 32,
+    eTurnTypeTurnRightIdx = 33,
+    eTurnTypeUturnLeftIdx = 34,
+    eTurnTypeUturnRightIdx = 35,
+    eTurnTypeIconInvIdx = 36,
+    eTurnTypeIconIdxCnt = 37
+} turn_type_e;
+
+typedef enum
+{
+    eBikeLightBeamAngleModeManual = 0,
+    eBikeLightBeamAngleModeAuto = 1
+} bike_light_beam_angle_mode_e;
+
+typedef enum
+{
+    eFitBaseUnitOther = 0,
+    eFitBaseUnitKilogram = 1,
+    eFitBaseUnitPound = 2
+} fit_base_unit_e;
 // ----------- end generated code -----------
 
 #endif // FIT_PROFILE_H

@@ -40,15 +40,17 @@ public:
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *e) override;
 
-protected slots:
-    void slotPanCanvas() override;
-
 private:
     IGisItem::key_t key;
     QPointF origPos;
     QPointF newPos;
     QPointF focus;
     QPixmap icon;
+
+    bool mapMove    = false;
+    bool mapDidMove   = false;
+
+    QPoint lastPoint;
 };
 
 #endif //CMOUSEMOVEWPT_H

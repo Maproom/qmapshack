@@ -295,7 +295,7 @@ void CDeviceGarmin::loadImages(CGisItemWpt& wpt)
             if(!image.pixmap.isNull())
             {
                 image.fileName  = file;
-                image.info      = QFileInfo(file).baseName();
+                image.info      = QFileInfo(file).completeBaseName();
                 images << image;
             }
         }

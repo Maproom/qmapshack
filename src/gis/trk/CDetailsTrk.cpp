@@ -32,6 +32,8 @@
 #include "gis/trk/filter/CFilterReset.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "gis/trk/filter/CFilterSplitSegment.h"
+#include "gis/trk/filter/CFilterSubPt2Pt.h"
+#include "gis/trk/filter/CFilterTerrainSlope.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
@@ -172,11 +174,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
 
-    addFilterGroup<CFilterDeleteExtension>
-        (treeFilter, trk, tr("Modify track points' extensions"), "://icons/48x48/FilterModifyExtension.png");
-
-    addFilterGroup<CFilterSplitSegment>
-        (treeFilter, trk, tr("Cut track into pieces"), "://icons/48x48/TrkCut.png");
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope>
+        (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
 
     slotShowPlots();
@@ -186,11 +185,11 @@ CDetailsTrk::~CDetailsTrk()
 {
     SETTINGS;
     cfg.beginGroup("TrackDetails");
-    cfg.setValue("showGraph1",          checkGraph1->isChecked());
-    cfg.setValue("showGraph2",          checkGraph2->isChecked());
-    cfg.setValue("showGraph3",          checkGraph3->isChecked());
-    cfg.setValue("splitterSizes",       splitter->saveState());
-    cfg.setValue("visibleTab",          tabWidget->currentIndex());
+    cfg.setValue("showGraph1",    checkGraph1->isChecked());
+    cfg.setValue("showGraph2",    checkGraph2->isChecked());
+    cfg.setValue("showGraph3",    checkGraph3->isChecked());
+    cfg.setValue("splitterSizes", splitter->saveState());
+    cfg.setValue("visibleTab",    tabWidget->currentIndex());
     cfg.endGroup();
 
     saveGraphSource(comboGraph2, 2);
@@ -373,7 +372,7 @@ void CDetailsTrk::updateData()
     labelActivityInfo->setText(str);
 
     quint32 flags = trk.getActivities().getAllFlags();
-    bool hasActivity = 0 != (flags & CGisItemTrk::trkpt_t::eActMask);
+    bool hasActivity = 0 != (flags & CTrackData::trkpt_t::eActMask);
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
 
@@ -451,12 +450,11 @@ void CDetailsTrk::updateData()
     widgetColorActivity->setVisible(enabledActivity);
     widgetColorActivity->setEnabled(enabledActivity);
 
+    X_____________UnBlockAllSignals_____________X(this);
 
     // refill comboboxes to select track property to be displayed by graphs
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
-
-    X_____________UnBlockAllSignals_____________X(this);
 
     CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();
     if(nullptr != filter)
@@ -468,7 +466,7 @@ void CDetailsTrk::updateData()
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }
 
-void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
+void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
 {
     if(nullptr != pt)
     {
@@ -483,12 +481,12 @@ void CDetailsTrk::setMouseFocus(const CGisItemTrk::trkpt_t * pt)
     }
 }
 
-void CDetailsTrk::setMouseRangeFocus(const CGisItemTrk::trkpt_t *pt1, const CGisItemTrk::trkpt_t *pt2)
+void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2)
 {
     labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
 }
 
-void CDetailsTrk::setMouseClickFocus(const CGisItemTrk::trkpt_t *pt)
+void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)
 {
     if(nullptr != pt)
     {
@@ -578,7 +576,7 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
 {
     trk.setReadOnlyMode(on);
     // as setReadOnlyMode() is a method of IGisItem it will bypass updateHistory() of the track
-    // Therefore we have to call updateVisuals() explicitely.
+    // Therefore we have to call updateVisuals() explicitly.
     trk.updateVisuals(CGisItemTrk::eVisualProject, "CDetailsTrk::slotChangeReadOnlyMode()");
     updateData();
 }
@@ -634,7 +632,7 @@ void CDetailsTrk::slotRemoveActivities()
 {
     if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok)
     {
-        trk.setActivity(CGisItemTrk::trkpt_t::eActNone);
+        trk.setActivity(CTrackData::trkpt_t::eActNone);
     }
 }
 

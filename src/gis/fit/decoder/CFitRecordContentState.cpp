@@ -19,14 +19,18 @@
 #include "gis/fit/decoder/CFitRecordContentState.h"
 #include "gis/fit/defs/fit_const.h"
 
-
 /**
  * record content (without field definitions)
  * 0: reserved
  * 1: architecture (0 little, 1 big endian)
  * 2: global message number
  * 3: global message number
+ *
  * 4: number of fields in the data message
+ * 5 - 7: field definitions
+ * if developer flag set
+ * 8: number of developer fields in the data message
+ * 9 - 11: developer field definitions
  */
 void CFitRecordContentState::reset()
 {
@@ -73,7 +77,11 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         nrOfFields = dataByte;
         def->setNrOfFields(nrOfFields);
 
-        reset();
+        // only reset if developer flag not set, else developer fields follow
+        if(!def->developerFlag())
+        {
+            reset();
+        }
         if (nrOfFields == 0)
         {
             // no fields, records may follow (either for a data message or definition message)
@@ -81,6 +89,21 @@ decode_state_e CFitRecordContentState::process(quint8 &dataByte)
         }
         // the fields definitions follows
         return eDecoderStateFieldDef;
+        break;
+
+    case 5:
+        // number of development fields
+        nrOfFields = dataByte;
+        def->setNrOfDevFields(nrOfFields);
+
+        reset();
+        if (nrOfFields == 0)
+        {
+            // no fields, records may follow (either for a data message or definition message)
+            return eDecoderStateRecord;
+        }
+        // the fields definitions follows
+        return eDecoderStateDevFieldDef;
         break;
 
     default:

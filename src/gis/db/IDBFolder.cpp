@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
@@ -23,6 +24,7 @@
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
 #include "gis/db/CDBItem.h"
+#include "gis/db/CExportDatabase.h"
 #include "gis/db/IDB.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/IDBFolderSql.h"
@@ -273,9 +275,9 @@ bool IDBFolder::update()
      * left overs are the folders to add.
      *
      * Update existing folders. If the update return s false the folder was removed from
-     * the database or an error occured. In both cases remove the folder item.
+     * the database or an error occurred. In both cases remove the folder item.
      *
-     * Collect all items in dbItems. They will be removed and the item list ist rebuilt
+     * Collect all items in dbItems. They will be removed and the item list is rebuilt
      * from scratch.
      */
     QSet<QString>       activeChildren;
@@ -298,7 +300,7 @@ bool IDBFolder::update()
         QTreeWidgetItem * item = child(i);
 
         // test for folder and update folder
-        // remove the folder from the add list as it is allready known
+        // remove the folder from the add list as it is already known
         // if the update returns false register it for removal
         IDBFolder * dbFolder = dynamic_cast<IDBFolder*>(item);
         if(dbFolder != nullptr)
@@ -629,3 +631,10 @@ bool IDBFolder::isSiblingFrom(IDBFolder * folder) const
 
     return false;
 }
+
+void IDBFolder::exportToGpx()
+{
+    CExportDatabase dlg(getId(), getDb(), CMainWindow::self().getBestWidgetForParent());
+    dlg.exec();
+}
+

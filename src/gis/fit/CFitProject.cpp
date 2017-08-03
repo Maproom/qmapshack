@@ -142,15 +142,13 @@ void CFitProject::createGisItems(QFile& file)
     }
     // ql:area is not directly available in FIT (could be calculated)
 
-    // use name of first trk
-    if(name.length() > 0)
+    QString tmp = QFileInfo(filename).completeBaseName().replace("_", " ");
+    if(!name.isEmpty())
     {
-        setupName(name);
+        tmp += QString("(%1)").arg(name);
     }
-    else
-    {
-        setupName(QFileInfo(filename).baseName().replace("_", " "));
-    }
+
+    setupName(tmp);
 }
 
 CFitProject::~CFitProject()

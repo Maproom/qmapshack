@@ -26328,7 +26328,7 @@ static void mlpbase_mlphessianbatchinternal(multilayerperceptron* network,
                 
                 /*
                  * For a softmax + squared error we have expression
-                 * far beyond human imagination so we dont even try
+                 * far beyond human imagination so we don't even try
                  * to comment on it. Just enjoy the code...
                  *
                  * P.S. That's why "natural error" is called "natural" -

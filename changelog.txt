@@ -1,3 +1,75 @@
+V 1.9.0
+Add: Garmin Maps: Allow external TYP files
+Add: Filter items on workspace by string
+Add: GPX: Support for Cluetrust extensions
+Add: Trk: Add filter to add terrain slope as extension
+Fix: Issue with time zone in fit files (Zulu instead of local time zone)
+Fix: GeoCaches: Fix regex to find attached images
+[Issue #84]  Have a floating toolbar with common tools
+[Issue #232] Zoom on touchscreen using two fingers is very jumpy
+[Issue #226] Display slope under cursor in status bar
+[Issue #230] New layout of edit toolbar and POI highlighting
+[Issue #229] Failure to add point to track
+
+V 1.8.1
+Fix: Various glitches introduced by the new FIT format
+Fix: Visual tile artefacts in the DEM layer
+[Issue #224] Support pinch-gesture
+[Issue #162] Add "keep last version only" function to objects (tracks, etc...)
+[Issue #221] Offline BRouter & network access
+[Issue #225] BRouter: Renaming tiles fails when updating tiles
+[Issue #215] BRouter (offline) issues (Windows)
+
+V 1.8.0
+Add: Links to quickstart help
+Add: Russian translation
+Add: TCX file read and write support
+Add: Different cut modes for track cut function
+Add: Option for optimized build for local system architecture 
+Add: Support for BRouter (online/offline)
+Add: Enhance reprojection between projections like merc/utm/lcc
+[Issue #152] Garmin maps: Alter scale to detail level table
+[Issue #189] Fix drawing of range selection in trkptedit mode
+[Issue #189] Draw bubble after line to prevent drawing over bubble
+[Issue #195] Copy errors in message (file)?
+[Issue #198] Logfile encoding
+[Issue #201] Provide 'Import GIS data' in database menu
+[Issue #204] Option to allow only one QMS instance at one time
+[Issue #211] Desired feature: change symbol for multiple selected waypoints
+[Issue #213] Adding a Garmin POI as waypoint
+[Issue #214] Crash when creating Routino database
+[Issue #217] BRouter setup window - not translated string
+[Issue #218] CSingleInstanceProxy & Multiuser
+
+V 1.7.2
+
+* Add: Export to GPX V1.1 without extensions
+* Add: Copy a track with all attached waypoints.
+* Add: Interpolate elevation filter for tracks
+* Add: Ctrl+W to close tabs that are not a map view
+* Add: Plot: X&Y zoom and drag graph by left mouse button
+* Add: Implement filter `Convert SubPoint to Point`
+* Add: Database: Export database to folders and GPX files 
+* Fix: Trk/Prj: Fixed missing update when changing roadbook mode. Disable copy with waypoints when no waypoints attached.
+* Fix: Prj: Fix update of project summary when changing the sorting mode
+* Fix: Trk: Fix nodata values for elevations applied by filter
+* Fix: Garmin: Fix path for devices that use "GARMIN" instead of "Garmin" in their path
+* [Issue #168] Invalid GPX 1.1 header?
+* [Issue #170] No new project when copying track with waypoints
+* [Issue #52] Track/path features in vector maps hidden by track line
+* [Issue #171] QMS crashes on "no or bad data"
+* [Issue #173] Crash with interpolation preview
+* [Issue #175] Invalid timestamps with MapQuest routing?
+* [Issue #176] Inconsistent states of diagrams
+* [Issue #179] Missing activity color selection
+* [Issue #181] Spelling: ascent vs. ascend, descent vs. descend
+* [Issue #177] High zoom level when double clicking on waypoint
+* [Issue #182] Missing project sorting?
+* [Issue #83] Only zoom every 15deg of mousewheel rotation
+* [Issue #163] Allow filenames with several '.'
+* [Issue #184] Track/Route Edit Mode: Move map with left mouse pressed
+* [Issue #117] Implement storing and loading of subpts as subpts
+
 V 1.7.1
 * Fix: Compile issue for GCC4
 

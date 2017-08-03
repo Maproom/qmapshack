@@ -12,6 +12,9 @@ fi
 if [[ "$ROUTINO_LIB_DIR" == "" ]]; then
 	echo "ROUTINO_LIB_DIR not set"
 fi
+if [[ "$QUAZIP_LIB_DIR" == "" ]]; then
+	echo "QUAZIP_LIB_DIR not set"
+fi
 if [[ "$BUILD_DIR" == "" ]]; then
 	echo "BUILD_DIR not set"
 fi
@@ -50,4 +53,7 @@ BUILD_BUNDLE_RES_BIN_DIR=$BUILD_BUNDLE_CONTENTS_DIR/Tools
 ROUTINO_LIB_LIB_DIR=$ROUTINO_LIB_DIR/lib
 ROUTINO_LIB_H_DIR=$ROUTINO_LIB_DIR/include
 ROUTINO_LIB_XML_DIR=$ROUTINO_LIB_DIR/xml
+
+QUAZIP_LIB_LIB_DIR=$QUAZIP_LIB_DIR/lib
+QUAZIP_LIB_H_DIR=$QUAZIP_LIB_DIR/include
 set +a

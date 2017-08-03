@@ -35,16 +35,7 @@ CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
     // switch to full mode to show deleted (hidden) track points, too
     trk.setMode(CGisItemTrk::eModeRange, "CMouseRangeTrk");
 
-    // reset user focus if the track has it
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
-    trk.setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-
-    canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point. And then a second one.<br/>"));
-    /*
-        trigger complete update of GIS components to make sure all changes to
-        the originating object are reflected on the canvas
-     */
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+    resetState();
 }
 
 CMouseRangeTrk::~CMouseRangeTrk()
@@ -67,7 +58,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
     if(trk)
     {
         trk->drawRange(p);
-        if(anchor != NOPOINTF)
+        if(!mapDidMove && (anchor != NOPOINTF))
         {
             p.setPen(Qt::darkBlue);
             p.setBrush(QColor(255,255,255,200));
@@ -87,7 +78,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
 void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
 {
     canvas->reportStatus(key.item, "");
-    point  = e->pos();
+    point = e->pos();
     if(e->button() == Qt::RightButton)
     {
         canvas->resetMouse();
@@ -95,20 +86,35 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::LeftButton)
     {
+        mapMove     = true;
+        firstPoint  = point;
+    }
+}
+
+void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
+{
+    point = e->pos();
+
+    if(mapMove)
+    {
+        if((point - firstPoint).manhattanLength() >= 4)
+        {
+            QPoint delta = point - lastPoint;
+            canvas->moveMap(delta);
+            mapDidMove = true;
+        }
+    }
+    else
+    {
         switch(state)
         {
         case eStateIdle:
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-            if(trk != nullptr && anchor != NOPOINTF)
+            if(trk != nullptr)
             {
-                anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-                state = eStateSelectRange;
+                anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
                 canvas->update();
-            }
-            else
-            {
-                state = eStateMoveMap;
             }
             break;
         }
@@ -116,25 +122,11 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
         case eStateSelectRange:
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-            if(trk != nullptr && anchor != NOPOINTF)
+            if(trk != nullptr)
             {
-                QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-                scrOptRange = new CScrOptRangeTrk(pt, trk, this);
-                connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
-                connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
-                connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
-                connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
-
-                state = eStateRangeSelected;
+                anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
                 canvas->update();
             }
-
-            break;
-        }
-
-        case eStateRangeSelected:
-        {
-            resetState();
             break;
         }
 
@@ -142,51 +134,6 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
             ;
         }
     }
-}
-
-void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
-{
-    point  = e->pos();
-
-    switch(state)
-    {
-    case eStateIdle:
-    {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk != nullptr)
-        {
-            anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
-            canvas->update();
-        }
-        break;
-    }
-
-    case eStateMoveMap:
-    {
-        if(point != lastPoint)
-        {
-            QPoint delta = point - lastPoint;
-            canvas->moveMap(delta);
-        }
-        break;
-    }
-
-    case eStateSelectRange:
-    {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
-        if(trk != nullptr)
-        {
-            anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
-            canvas->update();
-        }
-        panCanvas(point);
-        break;
-    }
-
-    default:
-        ;
-    }
-
     lastPoint = point;
 }
 
@@ -194,10 +141,51 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 {
     if(e->button() == Qt::LeftButton)
     {
-        if(state == eStateMoveMap)
+        if(!mapDidMove)
         {
-            state = eStateIdle;
+            switch(state)
+            {
+            case eStateIdle:
+            {
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                if(trk != nullptr && anchor != NOPOINTF)
+                {
+                    anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
+                    state = eStateSelectRange;
+                    canvas->update();
+                }
+                break;
+            }
+
+
+            case eStateSelectRange:
+            {
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                if(trk != nullptr && anchor != NOPOINTF)
+                {
+                    QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
+                    scrOptRange = new CScrOptRangeTrk(pt, trk, this);
+                    connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
+                    connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
+                    connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
+                    connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
+
+                    state = eStateRangeSelected;
+                    canvas->update();
+                }
+
+                break;
+            }
+
+            case eStateRangeSelected:
+            {
+                resetState();
+                break;
+            }
+            }
         }
+        mapDidMove = false;
+        mapMove  = false;
     }
 }
 
@@ -230,9 +218,11 @@ void CMouseRangeTrk::resetState()
     {
         scrOptRange->deleteLater();
     }
-    state   = eStateIdle;
-    anchor  = NOPOINTF;
-    canvas->update();
+    state  = eStateIdle;
+    anchor = NOPOINTF;
+
+    canvas->reportStatus(key.item, tr("<b>Select Range</b><br/>Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.<br/>"));
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CMouseRangeTrk::slotHidePoints()
@@ -246,8 +236,7 @@ void CMouseRangeTrk::slotHidePoints()
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
-    scrOptRange->deleteLater();
-    canvas->resetMouse();
+    resetState();
 }
 
 void CMouseRangeTrk::slotShowPoints()
@@ -261,8 +250,7 @@ void CMouseRangeTrk::slotShowPoints()
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
-    scrOptRange->deleteLater();
-    canvas->resetMouse();
+    resetState();
 }
 
 void CMouseRangeTrk::slotActivity(quint32 flags)

@@ -36,10 +36,13 @@ public:
     virtual QString defaultCachePath() = 0;
     virtual QString userDataPath(QString subdir = 0) = 0;
     virtual QString logDir() = 0;
+    virtual QString findExecutable(const QString &name) = 0;
 
 protected:
     void prepareGdal(QString gdalDir, QString projDir);
     void prepareTranslator(QString translationPath, QString translationPrefix);
+
+    static IAppSetup* instance;
 
     QString path(QString path, QString subdir, bool mkdir, QString debugName);
 };

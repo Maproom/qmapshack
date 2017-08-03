@@ -10,6 +10,30 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary might not work on other systems!)" OFF)
+
+if(BUILD_FOR_LOCAL_SYSTEM)
+    set(flag "-march=native")
+    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
+    if(Flag:${flag})
+        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+
+        message(WARNING [=[ 
+ BUILDING FOR LOCAL SYSTEM ONLY
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.
+ The generated binary will exhibit higher performance,
+ but will not be portable (e.g., might not work on other CPUs)]=])
+    else(Flag:${flag})
+        message(WARNING [=[
+ Your compiler does not support -march=native.
+ Ignoring -DBUILD_FOR_LOCAL_SYSTEM=ON!]=])
+    endif(Flag:${flag})
+
+
+   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+endif(BUILD_FOR_LOCAL_SYSTEM)
+
 # Find the QtWidgets library
 find_package(Qt5Widgets)
 find_package(Qt5Core)
@@ -19,12 +43,18 @@ find_package(Qt5Sql)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(Qt5PrintSupport)
-if(UNIX AND NOT APPLE)
-find_package(Qt5DBus)
-endif(UNIX AND NOT APPLE)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
+find_package(QuaZip REQUIRED)
+
+if(USE_QT5DBus)
+    find_package(Qt5DBus)
+    if(Qt5DBus_FOUND)
+        add_definitions(-DHAVE_DBUS)
+    endif(Qt5DBus_FOUND)
+endif(USE_QT5DBus)
+
 
 if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]+\\..*")
     message( SEND_ERROR "You need at least Qt5.3 or newer.")
@@ -53,8 +83,10 @@ endif(APPLE)
 
 
 set( SRCS
+        main.cpp
         GeoMath.cpp
         CMainWindow.cpp
+        CSingleInstanceProxy.cpp
         CAbout.cpp
         widgets/CTinySpinBox.cpp
         widgets/CDoubleSpinBox.cpp
@@ -67,6 +99,7 @@ set( SRCS
         widgets/CPhotoAlbum.cpp
         widgets/CColorLegend.cpp
         widgets/CColorChooser.cpp
+        widgets/CSelectDoubleListWidget.cpp
         helpers/CInputDialog.cpp
         helpers/CPositionDialog.cpp
         helpers/CWptIconDialog.cpp
@@ -79,6 +112,8 @@ set( SRCS
         helpers/CDraw.cpp
         helpers/CValue.cpp
         helpers/CLimit.cpp
+        helpers/CToolBarConfig.cpp
+        helpers/CToolBarSetupDialog.cpp
         canvas/CCanvas.cpp
         canvas/CCanvasSetup.cpp
         canvas/IDrawContext.cpp
@@ -159,6 +194,7 @@ set( SRCS
         gis/CGisListDB.cpp
         gis/CGisListWks.cpp
         gis/CSelDevices.cpp
+        gis/CSetupFilter.cpp
         gis/prj/IGisProject.cpp
         gis/prj/CDetailsPrj.cpp
         gis/gpx/CGpxProject.cpp
@@ -169,6 +205,8 @@ set( SRCS
         gis/slf/CSlfReader.cpp
         gis/tnv/CTwoNavProject.cpp
         gis/tnv/serialization.cpp
+        gis/tcx/CTcxProject.cpp
+        gis/tcx/serialization.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp
@@ -189,6 +227,8 @@ set( SRCS
         gis/db/CSelectSaveAction.cpp
         gis/db/CSelectDBFolder.cpp
         gis/db/CSearchDatabase.cpp
+        gis/db/CExportDatabase.cpp
+        gis/db/CExportDatabaseThread.cpp
         gis/search/CSearchGoogle.cpp
         gis/wpt/CGisItemWpt.cpp
         gis/wpt/CScrOptWpt.cpp
@@ -210,6 +250,7 @@ set( SRCS
         gis/trk/filter/CFilterDouglasPeuker.cpp
         gis/trk/filter/CFilterInvalid.cpp
         gis/trk/filter/CFilterReset.cpp
+        gis/trk/filter/CFilterSubPt2Pt.cpp
         gis/trk/filter/CFilterDelete.cpp
         gis/trk/filter/CFilterDeleteExtension.cpp
         gis/trk/filter/CFilterMedian.cpp
@@ -220,6 +261,8 @@ set( SRCS
         gis/trk/filter/CFilterObscureDate.cpp
         gis/trk/filter/CFilterSpeed.cpp
         gis/trk/filter/CFilterSplitSegment.cpp
+        gis/trk/filter/CFilterTerrainSlope.cpp
+        gis/trk/CTrackData.cpp
         gis/rte/CGisItemRte.cpp
         gis/rte/CScrOptRte.cpp
         gis/rte/CCreateRouteFromWpt.cpp
@@ -228,7 +271,16 @@ set( SRCS
         gis/rte/router/CRouterSetup.cpp
         gis/rte/router/CRouterRoutino.cpp
         gis/rte/router/CRouterMapQuest.cpp
-        gis/rte/router/CRouterRoutinoPathSetup.cpp
+        gis/rte/router/routino/CRouterRoutinoPathSetup.cpp
+        gis/rte/router/CRouterBRouter.cpp
+        gis/rte/router/brouter/CRouterBRouterInfo.cpp
+        gis/rte/router/brouter/CRouterBRouterSetup.cpp
+        gis/rte/router/brouter/CRouterBRouterSetupPage.cpp
+        gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp
+        gis/rte/router/brouter/CRouterBRouterToolShell.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesPage.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp
+        gis/rte/router/brouter/CRouterBRouterTilesSelectArea.cpp
         gis/ovl/CGisItemOvlArea.cpp
         gis/ovl/CScrOptOvlArea.cpp
         gis/ovl/CDetailsOvlArea.cpp
@@ -253,6 +305,8 @@ set( SRCS
         gis/fit/defs/CFitFieldProfile.cpp
         gis/fit/decoder/CFitByteDataTransformer.cpp
         gis/fit/decoder/CFitFieldBuilder.cpp
+        gis/fit/decoder/CFitDevFieldDefinition.cpp
+        gis/fit/decoder/CFitDevFieldDefinitionState.cpp
         plot/IPlot.cpp
         plot/CPlotAxis.cpp
         plot/CPlotAxisTime.cpp
@@ -290,12 +344,14 @@ set( SRCS
         setup/CLogHandler.cpp
 )
 
-if(UNIX AND NOT APPLE)
+
+if(Qt5DBus_FOUND)
 set( SRCS
     ${SRCS}
     device/CDeviceWatcherLinux.cpp
 )
-endif(UNIX AND NOT APPLE)
+endif(Qt5DBus_FOUND)
+
 
 if (APPLE)
 set( SRCS
@@ -316,6 +372,7 @@ set( HDRS
         version.h
         GeoMath.h
         CMainWindow.h
+        CSingleInstanceProxy.h
         CAbout.h
         widgets/CTinySpinBox.h
         widgets/CDoubleSpinBox.h
@@ -328,6 +385,7 @@ set( HDRS
         widgets/CPhotoAlbum.h
         widgets/CColorLegend.h
         widgets/CColorChooser.h
+        widgets/CSelectDoubleListWidget.h
         helpers/Platform.h
         helpers/CFileExt.h
         helpers/CSettings.h
@@ -344,6 +402,8 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
+        helpers/CToolBarConfig.h
+        helpers/CToolBarSetupDialog.h
         canvas/CCanvas.h
         canvas/CCanvasSetup.h
         canvas/IDrawContext.h
@@ -417,6 +477,7 @@ set( HDRS
         mouse/line/CLineOpAddPoint.h
         mouse/line/CLineOpDeletePoint.h
         mouse/line/CLineOpSelectRange.h
+        gis/Poi.h
         gis/WptIcons.h
         gis/CGisDraw.h
         gis/IGisItem.h
@@ -427,8 +488,10 @@ set( HDRS
         gis/CGisListDB.h
         gis/CGisListWks.h
         gis/CSelDevices.h
+        gis/CSetupFilter.h
         gis/qms/CQmsProject.h
         gis/tnv/CTwoNavProject.h
+        gis/tcx/CTcxProject.h
         gis/db/IDB.h
         gis/db/IDBSqlite.h
         gis/db/IDBMysql.h
@@ -450,6 +513,8 @@ set( HDRS
         gis/db/CSelectSaveAction.h
         gis/db/CSelectDBFolder.h
         gis/db/CSearchDatabase.h
+        gis/db/CExportDatabase.h
+        gis/db/CExportDatabaseThread.h
         gis/wpt/CGisItemWpt.h
         gis/wpt/CScrOptWpt.h
         gis/wpt/CDetailsWpt.h
@@ -469,6 +534,7 @@ set( HDRS
         gis/trk/filter/CFilterDouglasPeuker.h
         gis/trk/filter/CFilterInvalid.h
         gis/trk/filter/CFilterReset.h
+        gis/trk/filter/CFilterSubPt2Pt.h
         gis/trk/filter/CFilterDelete.h
         gis/trk/filter/CFilterDeleteExtension.h
         gis/trk/filter/CFilterMedian.h
@@ -479,6 +545,8 @@ set( HDRS
         gis/trk/filter/CFilterObscureDate.h
         gis/trk/filter/CFilterSpeed.h
         gis/trk/filter/CFilterSplitSegment.h
+        gis/trk/filter/CFilterTerrainSlope.h
+        gis/trk/CTrackData.h
         gis/rte/CGisItemRte.h
         gis/rte/CScrOptRte.h
         gis/rte/CCreateRouteFromWpt.h
@@ -487,7 +555,18 @@ set( HDRS
         gis/rte/router/CRouterSetup.h
         gis/rte/router/CRouterRoutino.h
         gis/rte/router/CRouterMapQuest.h
-        gis/rte/router/CRouterRoutinoPathSetup.h
+        gis/rte/router/routino/CRouterRoutinoPathSetup.h
+        gis/rte/router/CRouterBRouter.h
+        gis/rte/router/brouter/CRouterBRouterInfo.h
+        gis/rte/router/brouter/CRouterBRouterSetup.h
+        gis/rte/router/brouter/CRouterBRouterSetupPage.h
+        gis/rte/router/brouter/CRouterBRouterSetupWizard.h
+        gis/rte/router/brouter/CRouterBRouterToolShell.h
+        gis/rte/router/brouter/CRouterBRouterTilesPage.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelect.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h
+        gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h
+        gis/rte/router/brouter/CRouterBRouterTilesStatus.h
         gis/ovl/CGisItemOvlArea.h
         gis/ovl/CScrOptOvlArea.h
         gis/ovl/CDetailsOvlArea.h
@@ -518,6 +597,8 @@ set( HDRS
         gis/fit/defs/CFitFieldProfile.h
         gis/fit/decoder/CFitByteDataTransformer.h
         gis/fit/decoder/CFitFieldBuilder.h
+        gis/fit/decoder/CFitDevFieldDefinition.h
+        gis/fit/decoder/CFitDevFieldDefinitionState.h
         plot/IPlot.h
         plot/CPlotAxis.h
         plot/CPlotAxisTime.h
@@ -555,12 +636,14 @@ set( HDRS
         setup/IAppSetup.h
 )
 
-if(UNIX AND NOT APPLE)
+
+if(Qt5DBus_FOUND)
 set( HDRS
     ${HDRS}
     device/CDeviceWatcherLinux.h
 )
-endif(UNIX AND NOT APPLE)
+endif(Qt5DBus_FOUND)
+
 
 if(APPLE)
 set( HDRS
@@ -583,21 +666,23 @@ set( UIS
     widgets/ITextEditWidgetSelMenu.ui
     widgets/IPhotoAlbum.ui
     widgets/IColorChooser.ui
+    widgets/ISelectDoubleListWidget.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
-    helpers/IWptIconDialog.ui    
+    helpers/IWptIconDialog.ui
     helpers/ISelectProjectDialog.ui
     helpers/ISelectCopyAction.ui
     helpers/IElevationDialog.ui
-    helpers/ILinksDialog.ui    
+    helpers/ILinksDialog.ui
     helpers/IProgressDialog.ui
+    helpers/IToolBarSetupDialog.ui
     canvas/ICanvasSetup.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
     dem/IDemPropSetup.ui
     map/IMapList.ui
     map/IMapPathSetup.ui
-    map/IMapPropSetup.ui    
+    map/IMapPropSetup.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui
     mouse/IScrOptRangeTrk.ui
@@ -607,6 +692,7 @@ set( UIS
     mouse/line/IScrOptRangeLine.ui
     gis/IGisWidget.ui
     gis/ISelDevices.ui
+    gis/ISetupFilter.ui
     gis/prj/IDetailsPrj.ui
     gis/db/ISetupDatabase.ui
     gis/db/ISetupWorkspace.ui
@@ -614,6 +700,7 @@ set( UIS
     gis/db/ISelectSaveAction.ui
     gis/db/ISelectDBFolder.ui
     gis/db/ISearchDatabase.ui
+    gis/db/IExportDatabase.ui
     gis/wpt/IScrOptWpt.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui
@@ -627,6 +714,7 @@ set( UIS
     gis/trk/filter/IFilterDouglasPeuker.ui
     gis/trk/filter/IFilterInvalid.ui
     gis/trk/filter/IFilterReset.ui
+    gis/trk/filter/IFilterSubPt2Pt.ui
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterMedian.ui
@@ -637,13 +725,17 @@ set( UIS
     gis/trk/filter/IFilterObscureDate.ui
     gis/trk/filter/IFilterSpeed.ui
     gis/trk/filter/IFilterSplitSegment.ui
+    gis/trk/filter/IFilterTerrainSlope.ui
     gis/rte/IScrOptRte.ui
     gis/rte/ICreateRouteFromWpt.ui
     gis/rte/IDetailsRte.ui
     gis/rte/router/IRouterSetup.ui
     gis/rte/router/IRouterRoutino.ui
     gis/rte/router/IRouterMapQuest.ui
-    gis/rte/router/IRouterRoutinoPathSetup.ui    
+    gis/rte/router/routino/IRouterRoutinoPathSetup.ui
+    gis/rte/router/IRouterBRouter.ui
+    gis/rte/router/brouter/IRouterBRouterInfo.ui
+    gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/ovl/IScrOptOvlArea.ui
     gis/ovl/IDetailsOvlArea.ui
     units/ITimeZoneSetup.ui
@@ -680,7 +772,7 @@ add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}"
+    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" "-no-obsolete"
     SOURCES ${SRCS} ${HDRS} ${UIS}
     TEMPLATE ${APPLICATION_NAME}
     TRANSLATION_DIR "locale"
@@ -693,18 +785,13 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     )
 endif()
 
-set(LIBINP
+set(MAININP
         ${SRCS}
         ${HDRS}
         ${UI_HDRS}
         ${RC_SRCS}
         ${${APPLICATION_NAME}_QM_FILES}
         ${${APPLICATION_NAME}_DESKTOP_FILES}
-)
-
-set(MAININP
-    main.cpp
-    ${RC_SRCS}
 )
 
 include_directories(
@@ -717,7 +804,7 @@ include_directories(
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
     ${ALGLIB_INCLUDE_DIRS}
-
+    ${QUAZIP_INCLUDE_DIRS}
 )
 
 if(APPLE)
@@ -725,28 +812,14 @@ if(APPLE)
      INCLUDE_DIRECTORIES(/System/Library/Frameworks/DiskArbitration.framework)
 endif(APPLE)
 
-add_library(QMS ${LIBINP})
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
-if(UNIX AND NOT APPLE)
-    set(DBUS_LIB Qt5::DBus)
-else(UNIX AND NOT APPLE)
-    set(DBUS_LIB)
-endif(UNIX AND NOT APPLE)
 
-target_link_libraries(QMS
-    Qt5::Widgets
-    Qt5::Xml
-    Qt5::Script
-    Qt5::Sql
-    Qt5::WebKitWidgets
-    Qt5::PrintSupport
-    ${DBUS_LIB}
-    ${GDAL_LIBRARIES}
-    ${PROJ_LIBRARIES}
-    ${ROUTINO_LIBRARIES}
-    ${ALGLIB_LIBRARIES}
-)
+if(Qt5DBus_FOUND)
+    set(DBUS_LIB Qt5::DBus)
+else(Qt5DBus_FOUND)
+    set(DBUS_LIB)
+endif(Qt5DBus_FOUND)
 
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
@@ -755,12 +828,12 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
-    QMS
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
     ${ALGLIB_LIBRARIES}
+    ${QUAZIP_LIBRARIES}
 )
 
 if(APPLE)

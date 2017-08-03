@@ -30,6 +30,7 @@
 class CMapDraw;
 class CGrid;
 class CDemDraw;
+class QGestureEvent;
 class CGisDraw;
 class CGisItemWpt;
 class CGisItemTrk;
@@ -44,6 +45,7 @@ class QMovie;
 class QLabel;
 class IPlot;
 struct SGisLine;
+struct poi_t;
 
 class CCanvas : public QWidget
 {
@@ -56,13 +58,14 @@ public:
     static void restoreOverrideCursor(const QString &src);
     static void changeOverrideCursor(const QCursor& cursor, const QString &src);
 
+
     void saveConfig(QSettings& cfg);
     void loadConfig(QSettings& cfg);
 
     void setupGrid();
     void convertGridPos2Str(const QPointF& pos, QString& str, bool simple);
-    void convertRad2Px(QPointF &pos);
-    void convertPx2Rad(QPointF& pos);
+    void convertRad2Px(QPointF &pos) const;
+    void convertPx2Rad(QPointF& pos) const;
 
     void setupBackgroundColor();
 
@@ -83,9 +86,13 @@ public:
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
     void  getElevationAt(SGisLine &line) const;
 
+    qreal getSlopeAt(const QPointF &pos) const;
+    void getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const;
+
     void moveMap(const QPointF &delta);
     void zoomTo(const QRectF& rect);
     void displayInfo(const QPoint& px);
+    poi_t findPOICloseBy(const QPoint& px) const;
 
     enum redraw_e
     {
@@ -96,6 +103,8 @@ public:
         , eRedrawMouse = 0x08
         , eRedrawAll = 0xFFFFFFFF
     };
+
+    static void triggerCompleteUpdate(CCanvas::redraw_e flags);
 
 
     void resetMouse();
@@ -145,7 +154,7 @@ public:
 
     static qreal gisLayerOpacity;
 signals:
-    void sigMousePosition(const QPointF& pos, qreal ele);
+    void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void sigZoom();
     void sigMove();
 
@@ -153,6 +162,8 @@ public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
 
 protected:
+    bool event(QEvent *) override;
+    bool gestureEvent(QGestureEvent *e);
     void resizeEvent(QResizeEvent *e) override;
     void paintEvent(QPaintEvent  *e) override;
     void mousePressEvent(QMouseEvent  *e) override;
@@ -205,6 +216,9 @@ private:
     QLabel * demLoadIndicator;
 
     QPointer<CColorLegend> colorLegend;
+
+    /// current accumulated angleDelta, used/required for zooming on trackpads
+    int zoomAngleDelta = 0;
 
     /// timer to poll for track gaining/loosing focus
     QTimer * timerTrackOnFocus;

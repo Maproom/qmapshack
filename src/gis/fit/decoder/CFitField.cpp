@@ -77,9 +77,10 @@ void CFitField::setProfile(const CFitFieldProfile* profile)
 
 QString CFitField::fieldInfo() const
 {
-    QString str = QString("%1 %2 (%3): %4 %5 %6 %7")
+    QString str = QString("%1 %2%3 (%4): %5 %6 %7 %8")
                   .arg(profile().getTyp())
                   .arg(profile().getName())
+                  .arg(profile().getFieldType()  == eFieldTypeDevelopment ? " DEV" : "")
                   .arg(getFieldDefNr())
                   .arg(value.toString())
                   .arg(profile().getUnits())

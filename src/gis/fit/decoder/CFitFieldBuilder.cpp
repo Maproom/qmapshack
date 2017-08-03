@@ -23,7 +23,9 @@
 #include "gis/fit/decoder/CFitMessage.h"
 #include "gis/fit/defs/CFitBaseType.h"
 #include "gis/fit/defs/CFitFieldProfile.h"
+#include "gis/fit/defs/CFitProfile.h"
 #include "gis/fit/defs/CFitProfileLookup.h"
+
 
 void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
 {
@@ -37,11 +39,16 @@ void CFitFieldBuilder::evaluateSubfieldsAndExpandComponents(CFitMessage& mesg)
     }
 }
 
-CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& message)
+CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition& def, quint8* fieldData, const CFitMessage& message)
+{
+    const CFitFieldProfile* fieldProfile = CFitProfileLookup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
+    return buildField(*fieldProfile, def, fieldData, message);
+}
+
+CFitField CFitFieldBuilder::buildField(const CFitFieldProfile &fieldProfile, const CFitFieldDefinition &def, quint8 *fieldData, const CFitMessage& message)
 {
     CFitByteDataTransformer::swapFieldData(def, fieldData);
     const CFitBaseType& baseType = def.getBaseType();
-    const CFitFieldProfile* fieldProfile = CFitProfileLookup::getFieldForProfile(message.getGlobalMesgNr(), def.getDefNr());
 
     QVariant value;
     if (baseType.isSignedInt())
@@ -70,7 +77,7 @@ CFitField CFitFieldBuilder::buildField(const CFitFieldDefinition &def, quint8 *f
         throw tr("FIT decoding error: unknown base type %1.").arg(baseType.nr());
     }
     bool valid = isValueValid(def, fieldData);
-    return CFitField(def, fieldProfile, value, valid);
+    return CFitField(def, &fieldProfile, value, valid);
 }
 
 

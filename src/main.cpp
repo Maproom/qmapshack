@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "CSingleInstanceProxy.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
 
@@ -37,6 +38,17 @@ int main(int argc, char ** argv)
     env->processArguments();
     env->initLogHandler();
     env->initQMapShack();
+
+    // setup random number generator. currently used for an
+    // unique instance ID.
+    uint seed = QDateTime::currentDateTime().toTime_t();
+    qsrand(seed);
+
+    // setup default proxy
+    QNetworkProxyFactory::setUseSystemConfiguration(true);
+
+    // make sure this is the one and only instance on the system
+    CSingleInstanceProxy s(qlOpts->arguments);
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)
@@ -59,10 +71,6 @@ int main(int argc, char ** argv)
         splash->show();
     }
 
-    uint seed = QDateTime::currentDateTime().toTime_t();
-    qsrand(seed);
-
-    QNetworkProxyFactory::setUseSystemConfiguration(true);
 
     CMainWindow w;
     w.show();

@@ -47,7 +47,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(dataset->GetRasterCount() != 1)
     {
-        delete dataset;
+        GDALClose(dataset);
         dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
@@ -56,7 +56,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
     GDALRasterBand *pBand = dataset->GetRasterBand(1);
     if(nullptr == pBand)
     {
-        delete dataset;
+        GDALClose(dataset);
         dataset = nullptr;
         QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."), tr("DEM must have one band with 16bit or 32bit data."));
         return;
@@ -85,7 +85,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
     if(pjsrc == 0)
     {
-        delete dataset;
+        GDALClose(dataset);
         dataset = nullptr;
         QMessageBox::warning(0, tr("Error..."), tr("No georeference information found."));
         return;
@@ -134,7 +134,7 @@ CDemVRT::CDemVRT(const QString &filename, CDemDraw *parent)
 
 CDemVRT::~CDemVRT()
 {
-    delete dataset;
+    GDALClose(dataset);
 }
 
 qreal CDemVRT::getElevationAt(const QPointF& pos)
@@ -180,6 +180,47 @@ qreal CDemVRT::getElevationAt(const QPointF& pos)
     qreal ele = b1 + b2 * x + b3 * y + b4 * x * y;
 
     return ele;
+}
+
+qreal CDemVRT::getSlopeAt(const QPointF& pos)
+{
+    if(pjsrc == 0)
+    {
+        return NOFLOAT;
+    }
+
+    QPointF pt = pos;
+
+    pj_transform(pjtar, pjsrc, 1, 0, &pt.rx(), &pt.ry(), 0);
+
+    if(!boundingBox.contains(pt))
+    {
+        return NOFLOAT;
+    }
+
+    pt = trInv.map(pt);
+
+    qreal x    = pt.x() - qFloor(pt.x());
+    qreal y    = pt.y() - qFloor(pt.y());
+
+    qint16 win[eWinsize4x4];
+    mutex.lock();
+    CPLErr err = dataset->RasterIO(GF_Read, qFloor(pt.x())-1, qFloor(pt.y())-1, 4, 4, &win, 4, 4, GDT_Int16, 1, 0, 0, 0, 0);
+    mutex.unlock();
+    if(err == CE_Failure)
+    {
+        return NOFLOAT;
+    }
+    for(int i=0; i<eWinsize4x4; i++)
+    {
+        if(hasNoData && win[i] == noData)
+        {
+            return NOFLOAT;
+        }
+    }
+
+    qreal slope = slopeOfWindowInterp(win, eWinsize4x4, x, y);
+    return slope;
 }
 
 

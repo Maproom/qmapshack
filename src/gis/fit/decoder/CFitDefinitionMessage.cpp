@@ -25,13 +25,14 @@ static const quint8 fitArchitecureEndianMask = 0x01;
 
 
 CFitDefinitionMessage::CFitDefinitionMessage()
-    : CFitDefinitionMessage(fitLocalMesgNrInvalid)
+    : CFitDefinitionMessage(fitLocalMesgNrInvalid, false)
 {
 }
 
 CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
     : globalMesgNr(copy.globalMesgNr), architecture(copy.architecture), nrOfFields(copy.nrOfFields),
-    localMesgNr(copy.localMesgNr), fields(copy.fields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
+    nrOfDevFields(copy.nrOfDevFields), localMesgNr(copy.localMesgNr), devFlag(copy.devFlag), fields(copy.fields),
+    devFields(copy.devFields), messageProfile(CFitProfileLookup::getProfile(globalMesgNr))
 {
     for(CFitFieldDefinition& field : fields)
     {
@@ -39,9 +40,9 @@ CFitDefinitionMessage::CFitDefinitionMessage(const CFitDefinitionMessage& copy)
     }
 }
 
-CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr)
-    : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), localMesgNr(localMesgNr), fields(),
-    messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
+CFitDefinitionMessage::CFitDefinitionMessage(quint8 localMesgNr, bool devFlag)
+    : globalMesgNr(fitGlobalMesgNrInvalid), architecture(0), nrOfFields(0), nrOfDevFields(0), localMesgNr(localMesgNr),
+    devFlag(devFlag), fields(), devFields(), messageProfile(CFitProfileLookup::getProfile(fitGlobalMesgNrInvalid))
 {
 }
 
@@ -62,6 +63,11 @@ void CFitDefinitionMessage::setNrOfFields(quint8 nrOfFields)
     this->nrOfFields = nrOfFields;
 }
 
+void CFitDefinitionMessage::setNrOfDevFields(quint8 nrOfDevFields)
+{
+    this->nrOfDevFields = nrOfDevFields;
+}
+
 quint8 CFitDefinitionMessage::getArchitectureBit() const
 {
     return architecture & fitArchitecureEndianMask;
@@ -70,6 +76,11 @@ quint8 CFitDefinitionMessage::getArchitectureBit() const
 void CFitDefinitionMessage::addField(CFitFieldDefinition fieldDef)
 {
     fields.append(fieldDef);
+}
+
+void CFitDefinitionMessage::addDevField(CFitFieldDefinition fieldDef)
+{
+    devFields.append(fieldDef);
 }
 
 bool CFitDefinitionMessage::hasField(const quint8 fieldNum) const
@@ -112,21 +123,40 @@ const CFitFieldDefinition& CFitDefinitionMessage::getFieldByIndex(const quint16 
     return dummyDefinitionField;
 }
 
+const CFitFieldDefinition& CFitDefinitionMessage::getDevFieldByIndex(const quint16 index) const
+{
+    if (index < devFields.size())
+    {
+        return devFields[index];
+    }
+    // dummy field for unknown field nr.
+    static const CFitFieldDefinition dummyDefinitionDevField;
+
+    return dummyDefinitionDevField;
+}
+
 
 QStringList CFitDefinitionMessage::messageInfo() const
 {
     QStringList list;
-    list << QString("Definition %1 (%2) local nr %3, arch %4, # fields %5")
+    list << QString("Definition %1 (%2) local nr %3, arch %4, # fields %5, # dev fields %6")
         .arg(profile().getName())
         .arg(getGlobalMesgNr())
         .arg(getLocalMesgNr())
         .arg(getArchitectureBit())
-        .arg(getNrOfFields());
+        .arg(getNrOfFields())
+        .arg(getNrOfDevFields());
 
     for(const CFitFieldDefinition& field: fields)
     {
         list << field.fieldInfo();
     }
+
+    for(const CFitFieldDefinition& devField: devFields)
+    {
+        list << devField.fieldInfo();
+    }
+
     return list;
 }
 

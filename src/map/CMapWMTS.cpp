@@ -244,13 +244,13 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
 
     // create default cache path from filename
     QFileInfo fi(filename);
-    slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.baseName()));
+    slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.completeBaseName()));
 
     accessManager   = new QNetworkAccessManager(parent->thread());
     connect(this,          &CMapWMTS::sigQueueChanged,       this, &CMapWMTS::slotQueueChanged);
     connect(accessManager, &QNetworkAccessManager::finished, this, &CMapWMTS::slotRequestFinished);
 
-    name = fi.baseName().replace("_", " ");
+    name = fi.completeBaseName().replace("_", " ");
 
     isActivated = true;
 }
@@ -480,7 +480,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     USE_ANTI_ALIASING(p,true);
     p.setOpacity(getOpacity()/100.0);
     p.translate(-pp);
-
 
     // calculate maximum viewport
     qreal x1 = buf.ref1.x() < buf.ref4.x() ? buf.ref1.x() : buf.ref4.x();

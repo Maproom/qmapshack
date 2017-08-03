@@ -24,6 +24,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWidget.h"
 #include "gis/IGisLine.h"
+#include "gis/Poi.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
@@ -72,6 +73,8 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     setMouseTracking(true);
 
+    grabGesture(Qt::PinchGesture);
+
     map     = new CMapDraw(this);
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
@@ -119,6 +122,13 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
 CCanvas::~CCanvas()
 {
+    /* stop running drawing-threads and don't destroy unless they have finished*/
+    map->quit();
+    dem->quit();
+    gis->quit();
+    map->wait();
+    dem->wait();
+    gis->wait();
     /*
         Some mouse objects call methods from their canvas on destruction.
         So they are better deleted now explicitly before any other object
@@ -144,6 +154,15 @@ void CCanvas::changeOverrideCursor(const QCursor& cursor, const QString &src)
 {
 //    qDebug() << "changeOverrideCursor" << src;
     QApplication::changeOverrideCursor(cursor);
+}
+
+void CCanvas::triggerCompleteUpdate(CCanvas::redraw_e flags)
+{
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->slotTriggerCompleteUpdate(flags);
+    }
 }
 
 void CCanvas::saveConfig(QSettings& cfg)
@@ -387,7 +406,8 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
     QPointF pos = e->pos();
     map->convertPx2Rad(pos);
     qreal ele = dem->getElevationAt(pos);
-    emit sigMousePosition(pos * RAD_TO_DEG, ele);
+    qreal slope = dem->getSlopeAt(pos);
+    emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
 
     mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
@@ -410,6 +430,18 @@ void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
     mouse->wheelEvent(e);
+
+    // angleDelta() returns the eighths of a degree
+    // of the mousewheel
+    // -> zoom in/out every 15 degress = every 120 eights
+    const int EIGHTS_ZOOM = 15 * 8;
+    zoomAngleDelta += e->angleDelta().y();
+    if(abs(zoomAngleDelta) < EIGHTS_ZOOM)
+    {
+        return;
+    }
+
+    zoomAngleDelta = 0;
 
     QPointF pos = e->posF();
     QPointF pt1 = pos;
@@ -684,12 +716,12 @@ void CCanvas::convertGridPos2Str(const QPointF& pos, QString& str, bool simple)
     grid->convertPos2Str(pos, str, simple);
 }
 
-void CCanvas::convertRad2Px(QPointF& pos)
+void CCanvas::convertRad2Px(QPointF& pos) const
 {
     map->convertRad2Px(pos);
 }
 
-void CCanvas::convertPx2Rad(QPointF& pos)
+void CCanvas::convertPx2Rad(QPointF& pos) const
 {
     map->convertPx2Rad(pos);
 }
@@ -704,6 +736,11 @@ void CCanvas::displayInfo(const QPoint& px)
         timerToolTip->start(500);
     }
     QToolTip::hideText();
+}
+
+poi_t CCanvas::findPOICloseBy(const QPoint& px) const
+{
+    return map->findPOICloseBy(px);
 }
 
 void CCanvas::setup()
@@ -744,6 +781,16 @@ qreal CCanvas::getElevationAt(const QPointF& pos) const
 void CCanvas::getElevationAt(const QPolygonF& pos, QPolygonF& ele) const
 {
     return dem->getElevationAt(pos, ele);
+}
+
+qreal CCanvas::getSlopeAt(const QPointF& pos) const
+{
+    return dem->getSlopeAt(pos);
+}
+
+void CCanvas::getSlopeAt(const QPolygonF& pos, QPolygonF& slope) const
+{
+    return dem->getSlopeAt(pos, slope);
 }
 
 void CCanvas::getElevationAt(SGisLine& line) const
@@ -902,4 +949,49 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
     gis->draw(p, r);
 
     setDrawContextSize(oldSize);
+}
+
+bool CCanvas::event(QEvent *event)
+{
+    if (event->type() == QEvent::Gesture)
+    {
+        return gestureEvent(static_cast<QGestureEvent*>(event));
+    }
+    return QWidget::event(event);
+}
+
+bool CCanvas::gestureEvent(QGestureEvent* e)
+{
+    if (QPinchGesture *pinch = dynamic_cast<QPinchGesture *>(e->gesture(Qt::PinchGesture)))
+    {
+        if (pinch->changeFlags() & QPinchGesture::CenterPointChanged)
+        {
+            const QPointF & move = pinch->centerPoint() - pinch->lastCenterPoint();
+            if (!move.isNull())
+            {
+                moveMap(move);
+            }
+        }
+        if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged)
+        {
+            qreal pscale = pinch->totalScaleFactor();
+            if (pscale < 0.8f || pscale > 1.25f)
+            {
+                const QPointF & center = pinch->centerPoint();
+                const QPointF & pos = mapFromGlobal(QPoint(center.x(),center.y()));
+                QPointF pt1 = pos;
+                map->convertPx2Rad(pt1);
+                setZoom(pscale > 1.0f, needsRedraw);
+                map->convertRad2Px(pt1);
+                const QPointF & move = pos - pt1;
+                if (!move.isNull())
+                {
+                    moveMap(move);
+                }
+                pinch->setTotalScaleFactor(1.0f);
+                slotTriggerCompleteUpdate(needsRedraw);
+            }
+        }
+    }
+    return true;
 }

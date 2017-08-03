@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,8 +28,8 @@ class CDemList;
 class QLabel;
 class CGisWidget;
 class CCanvas;
+class CToolBarConfig;
 struct SGisLine;
-
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -70,6 +71,9 @@ public:
     qreal getElevationAt(const QPointF &pos) const;
     void  getElevationAt(const QPolygonF& pos, QPolygonF &ele) const;
     void  getElevationAt(SGisLine &line) const;
+
+    qreal getSlopeAt(const QPointF &pos) const;
+    void getSlopeAt(const QPolygonF &pos, QPolygonF& slope) const;
     /**
        @brief Get pointer to the currently visible canvas object.
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.
@@ -86,6 +90,8 @@ public:
         return actionSetupDEMPaths;
     }
 
+    void loadGISData(const QStringList& filenames);
+
     const qint32 id;
 protected:
 #ifdef WIN32
@@ -98,13 +104,14 @@ protected:
 private slots:
     void slotAbout();
     void slotHelp();
+    void slotQuickstart();
     void slotAddCanvas();
     void slotCloneCanvas();
     void slotTabCloseRequest(int i);
     void slotCurrentTabCanvas(int i);
     void slotCurrentTabMaps(int i);
     void slotCurrentTabDem(int i);
-    void slotMousePosition(const QPointF& pos, qreal ele);
+    void slotMousePosition(const QPointF& pos, qreal ele, qreal slope);
     void slotUpdateCurrentWidget();
     void slotSetupMapFont();
     void slotSetupMapBackground();
@@ -116,6 +123,7 @@ private slots:
     void slotSetupUnits();
     void slotSetupWorkspace();
     void slotSetupCoordFormat();
+    void slotSetupToolbar();
     void slotImportDatabase();
     void slotLoadGISData();
     void slotBuildVrt();
@@ -128,24 +136,42 @@ private slots:
     void slotLinkActivated(const QString& link);
     void slotSanityTest();
     void slotCloseTab();
+    void slotToggleDocks();
+    void slotDockVisibilityChanged(bool visible);
+    void slotFullScreen();
 
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();
-    void loadGISData(const QStringList& filenames);
     void prepareMenuForMac();
     void testForNoView();
+    bool docksVisible() const;
+    void showDocks() const;
+    void hideDocks();
+    void displayRegular();
+    void displayFullscreen();
 
     static CMainWindow * pSelf;
 
     /// status bar label
     QLabel * lblPosWGS84;
     QLabel * lblElevation;
+    QLabel * lblSlope;
     QLabel * lblPosGrid;
 
     QFont mapFont;
 
     CGisWidget * gisWidget;
+
+    CToolBarConfig * toolBarConfig;
+
+    QList<QDockWidget *> docks;
+    QList<QDockWidget *> activeDocks;
+    Qt::WindowStates displayMode = Qt::WindowMaximized;
+    QByteArray dockStates;
+    bool menuVisible = false;
+
+    static QMutex mutex;
 };
 
 #endif //CMAINWINDOW_H

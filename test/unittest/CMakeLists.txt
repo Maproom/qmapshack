@@ -14,14 +14,18 @@ find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(Qt5PrintSupport)
 if(UNIX)
-find_package(Qt5DBus)
+    if(Qt5DBus_FOUND)
+        find_package(Qt5DBus)
+    endif(Qt5DBus_FOUND)
 endif(UNIX)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
 
 if(UNIX)
-    set(DBUS_LIB Qt5::DBus)
+    if(Qt5DBus_FOUND)
+        set(DBUS_LIB Qt5::DBus)
+    endif(Qt5DBus_FOUND)
 else(UNIX)
     set(DBUS_LIB)
 endif(UNIX)
@@ -41,6 +45,7 @@ include_directories(
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
+    ${ALGLIB_INCLUDE_DIRS}
 )
 
 qt5_add_resources(RC_SRCS ./../../src/resources.qrc)
@@ -73,6 +78,7 @@ target_link_libraries(qttest
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
     ${ROUTINO_LIBRARIES}
+    ${ALGLIB_LIBRARIES}
 )
 
 add_custom_command(

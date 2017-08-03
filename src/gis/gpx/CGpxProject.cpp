@@ -69,7 +69,7 @@ CGpxProject::CGpxProject(const QString &filename, const IGisProject * project, I
         }
     }
 
-    setupName(QFileInfo(filename).baseName().replace("_", " "));
+    setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     blockUpdateItems(false);
     setToolTip(CGisListWks::eColumnName, getInfo());
     valid = true;
@@ -149,6 +149,10 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
             {
                 CKnownExtension::initGarminTPXv1(IUnit::self(), ns);
             }
+            else if(att.value() == gpxdata_ns)
+            {
+                CKnownExtension::initClueTrustTPXv1(IUnit::self(), ns);
+            }
         }
     }
 
@@ -227,7 +231,7 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
     }
 
     project->sortItems();
-    project->setupName(QFileInfo(filename).baseName().replace("_", " "));
+    project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
     project->setToolTip(CGisListWks::eColumnName, project->getInfo());
     project->valid = true;
 }
@@ -394,7 +398,19 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
     }
     catch(const QString& msg)
     {
-        QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        // as saveAs() can be called from the thread that exports a database showing the
+        // message box will crash the app. Therefore we test if the current thread is the
+        // application's main thread. If not we forward the exception.
+        //
+        // Not sure if that is a good concept.
+        if(QThread::currentThread() == qApp->thread())
+        {
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Saving GIS data failed..."), msg, QMessageBox::Abort);
+        }
+        else
+        {
+            throw msg;
+        }
         res = false;
     }
     project.umount();

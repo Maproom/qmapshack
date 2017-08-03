@@ -27,11 +27,6 @@ IMouse::IMouse(CGisDraw *gis, CCanvas *canvas)
     , gis(gis)
     , canvas(canvas)
 {
-    timer = new QTimer(this);
-    timer->setSingleShot(true);
-    timer->setInterval(50);
-
-    connect(timer, &QTimer::timeout, this, &IMouse::slotPanCanvas);
 }
 
 IMouse::~IMouse()
@@ -41,49 +36,6 @@ IMouse::~IMouse()
 void IMouse::setMouseTracking(bool enabled)
 {
     canvas->setMouseTracking(enabled);
-    if(!enabled)
-    {
-        timer->stop();
-    }
 }
 
-void IMouse::slotPanCanvas()
-{
-    panCanvas(point);
-}
 
-#define SENSITIVE_FRAME 100
-#define DAMPING_FACTOR  0.25
-void IMouse::panCanvas(const QPoint& pos)
-{
-    if(pos.x() < SENSITIVE_FRAME)
-    {
-        int d = (SENSITIVE_FRAME - pos.x()) * DAMPING_FACTOR;
-        canvas->moveMap(QPointF(d/2, 0));
-        timer->start();
-    }
-    else if(pos.x() > canvas->width() - SENSITIVE_FRAME)
-    {
-        int d = (canvas->width() - SENSITIVE_FRAME - pos.x()) * DAMPING_FACTOR;
-        canvas->moveMap(QPointF(d/2, 0));
-        timer->start();
-    }
-    else if(pos.y() < SENSITIVE_FRAME)
-    {
-        int d = (SENSITIVE_FRAME - pos.y()) * DAMPING_FACTOR;
-        canvas->moveMap(QPointF(0, d/2));
-        timer->start();
-    }
-    else if(pos.y() > canvas->height() - SENSITIVE_FRAME)
-    {
-        int d = (canvas->height() - SENSITIVE_FRAME - pos.y()) * DAMPING_FACTOR;
-        canvas->moveMap(QPointF(0, d/2));
-        timer->start();
-    }
-    else
-    {
-        timer->stop();
-    }
-
-    canvas->update();
-}

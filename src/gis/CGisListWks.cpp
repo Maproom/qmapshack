@@ -45,12 +45,14 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
 
 #include <QApplication>
@@ -111,7 +113,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
     actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save as..."     ), this, SLOT(slotSaveAsProject()));
-    actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"  ), tr("Save as strict GPX 1.1..."), this, SLOT(slotSaveAsStrictGpx11Project()));
+    actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"  ), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
@@ -191,6 +193,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
+    actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionDelete);
 
@@ -208,18 +211,20 @@ CGisListWks::CGisListWks(QWidget *parent)
         QTimer::singleShot(saveEvery * 60000, this, SLOT(slotSaveWorkspace()));
     }
 
-#if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
-    deviceWatcher = new CDeviceWatcherLinux(this);
-    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
-#endif
 #ifdef Q_OS_MAC
     deviceWatcher = new CDeviceWatcherMac(this);
     connect(deviceWatcher, &CDeviceWatcherMac::sigChanged, this, &CGisListWks::sigChanged);
-#endif
-#ifdef Q_OS_WIN
+#else
+    #ifdef Q_OS_WIN
     deviceWatcher = new CDeviceWatcherWindows(this);
     connect(deviceWatcher, &CDeviceWatcherWindows::sigChanged, this, &CGisListWks::sigChanged);
-#endif
+    #else
+        #ifdef HAVE_DBUS
+    deviceWatcher = new CDeviceWatcherLinux(this);
+    connect(deviceWatcher, &CDeviceWatcherLinux::sigChanged, this, &CGisListWks::sigChanged);
+        #endif // HAVE_DBUS
+    #endif // Q_OS_WIN
+#endif // Q_OS_MAC
 }
 
 CGisListWks::~CGisListWks()
@@ -892,6 +897,14 @@ void CGisListWks::slotLoadWorkspace()
             *project << stream;
             break;
         }
+
+        case IGisProject::eTypeTcx:
+        {
+            project = new CTcxProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
+            break;
+        }
         }
 
         if(nullptr != project)
@@ -975,6 +988,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem *gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(nullptr != gisItem)
         {
+            bool hasWpts  = false;
             bool onlyWpts = true;
             bool onlyTrks = true;
             for(QTreeWidgetItem *item : selectedItems())
@@ -982,6 +996,10 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 if(item->type() != IGisItem::eTypeWpt)
                 {
                     onlyWpts = false;
+                }
+                else
+                {
+                    hasWpts = true;
                 }
 
                 if(item->type() != IGisItem::eTypeTrk)
@@ -997,6 +1015,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
+            actionSymWpt->setEnabled(hasWpts);
 
             menuItem->exec(p);
             return;
@@ -1317,7 +1336,7 @@ void CGisListWks::slotCopyItem()
      *
      * As a fix the keys of the selected items are stored temporarily and
      * later used to retrieve the item on the workspace via CGisWidget::getItemByKey()
-     * again. This is allways safe.
+     * again. This is always safe.
      */
     QList<QTreeWidgetItem*> items = selectedItems();
     QList<IGisItem::key_t>  keys;
@@ -1572,11 +1591,7 @@ void CGisListWks::slotSearchGoogle(bool on)
         searchGoogle = new CSearchGoogle(this);
     }
 
-    CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
-    if(nullptr != canvas)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGisListWks::slotSyncWksDev()
@@ -1686,7 +1701,8 @@ bool CGisListWks::event(QEvent * e)
 {
     if(e->type() > QEvent::User)
     {
-        CGisListWksEditLock lock(true, IGisItem::mutexItems);
+        const bool doWaitCursoer = (eEvtA2WCutTrk != event_types_e(e->type()));
+        CGisListWksEditLock lock(doWaitCursoer, IGisItem::mutexItems);
 
         switch(e->type())
         {
@@ -1820,7 +1836,15 @@ bool CGisListWks::event(QEvent * e)
             {
                 project->blockUpdateItems(false);
             }
+            e->accept();
+            return true;
+        }
 
+        case eEvtA2WCutTrk:
+        {
+            CEvtA2WCutTrk * evt = (CEvtA2WCutTrk*)e;
+            CGisWidget::self().cutTrkByKey(evt->key);
+            e->accept();
             return true;
         }
         }
@@ -1908,4 +1932,30 @@ void CGisListWks::slotCopyProject()
     }
 
     CGisWidget::self().copyItemsByKey(keys);
+}
+
+
+void CGisListWks::slotSymWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+    QToolButton tb;
+    CWptIconDialog dlg(&tb);
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
+
+    QList<IGisItem::key_t> keys;
+    for(QTreeWidgetItem * item : selectedItems())
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+        if(wpt == nullptr)
+        {
+            continue;
+        }
+
+        keys << wpt->getKey();
+    }
+
+    CGisWidget::self().changeWptSymByKey(keys, tb.objectName());
 }

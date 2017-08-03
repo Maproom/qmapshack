@@ -43,6 +43,8 @@ enum event_types_e
 
     ,eEvtW2DAckInfo     = QEvent::User + 100
     ,eEvtW2DCreate      = QEvent::User + 101
+
+    ,eEvtA2WCutTrk        = QEvent::User + 200
 };
 
 struct evt_item_t
@@ -195,6 +197,17 @@ public:
 };
 
 
+class CEvtA2WCutTrk : public QEvent
+{
+public:
+    CEvtA2WCutTrk(const IGisItem::key_t& key) : QEvent(QEvent::Type(eEvtA2WCutTrk)), key(key)
+    {
+    }
+
+    const IGisItem::key_t key;
+};
+
+
 class CGisWidget : public QWidget, private Ui::IGisWidget
 {
     Q_OBJECT
@@ -306,9 +319,9 @@ public:
 
     /**
        @brief Add a new waypoint by Position
-       @param pt    the position in [°]
+       @param pt    the position in [?]
      */
-    void addWptByPos(QPointF pt) const;
+    void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
 
@@ -361,6 +374,7 @@ public:
 
     void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
 
+    void changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym);
     /**
        @brief Select a project via dialog
 
@@ -376,6 +390,8 @@ public:
 
     void setOpacity(qreal val);
 
+    void applyFilter();
+
 signals:
     void sigChanged();
 
@@ -385,6 +401,8 @@ public slots:
 private slots:
     void slotHelpText();
     void slotSetGisLayerOpacity(int val);
+    void slotFilter(const QString& str);
+    void slotSetupFilter();
 
 
 private:

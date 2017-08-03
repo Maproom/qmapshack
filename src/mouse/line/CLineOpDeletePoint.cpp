@@ -26,7 +26,7 @@
 CLineOpDeletePoint::CLineOpDeletePoint(SGisLine& points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine * parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor  = QCursor(QPixmap(":/cursors/cursorDelete.png"), 0, 0);
+    cursor  = QCursor(QPixmap(":/cursors/cursorPointDel.png"), 0, 0);
 }
 
 CLineOpDeletePoint::~CLineOpDeletePoint()
@@ -41,7 +41,7 @@ void CLineOpDeletePoint::mouseMoveEventEx(QMouseEvent * e)
 
 void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
 {
-    if(!mapDidMove && idxFocus != NOIDX)
+    if(mapDidNotMove() && idxFocus != NOIDX)
     {
         if(idxFocus > 0)
         {

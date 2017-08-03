@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
@@ -146,7 +147,7 @@ void CMapDraw::getInfo(const QPoint& px, QString& str)
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -173,7 +174,7 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -182,6 +183,42 @@ void CMapDraw::getToolTip(const QPoint& px, QString& str)
         }
     }
     CMapItem::mutexActiveMaps.unlock();
+}
+
+poi_t CMapDraw::findPOICloseBy(const QPoint& px) const
+{
+    poi_t poi;
+
+    if(isRunning())
+    {
+        return poi;
+    }
+    CMapItem::mutexActiveMaps.lock();
+    if(mapList)
+    {
+        for(int i = 0; i < mapList->count(); i++)
+        {
+            CMapItem * item = mapList->item(i);
+
+            if(!item || item->mapfile.isNull())
+            {
+                // as all active maps have to be at the top of the list
+                // it is ok to break as soon as the first map with no
+                // active files is hit.
+                break;
+            }
+
+            item->mapfile->findPOICloseBy(px, poi);
+            if(poi.pos != NOPOINTF)
+            {
+                // stop at the 1st one found
+                break;
+            }
+        }
+    }
+    CMapItem::mutexActiveMaps.unlock();
+
+    return poi;
 }
 
 bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
@@ -201,7 +238,7 @@ bool CMapDraw::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint3
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -272,9 +309,9 @@ void CMapDraw::buildMapList()
 
             CMapItem * item = new CMapItem(*mapList, this);
 
-            maps.insert(fi.baseName());
+            maps.insert(fi.completeBaseName());
 
-            item->setText(0, fi.baseName().replace("_", " "));
+            item->setText(0, fi.completeBaseName().replace("_", " "));
             item->filename = dir.absoluteFilePath(filename);
             item->updateIcon();
 
@@ -401,7 +438,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             if(!item || item->mapfile.isNull())
             {
                 // as all active maps have to be at the top of the list
-                // it is ok to break ass soon as the first map with no
+                // it is ok to break as soon as the first map with no
                 // active files is hit.
                 break;
             }
@@ -428,7 +465,7 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             "map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package "
             "the data. This is not that easy as it might sound and for some data you have to pay royalties. "
             "The project simply lacks resources to do this. And we think installing the stuff yourself is not "
-            "that much to ask from you. After all the software is ditributed without a fee."
+            "that much to ask from you. After all the software is distributed without a fee."
             );
 
         QTextDocument doc;

@@ -183,6 +183,11 @@ Section "QMapShack" QMapShack
   SetOutPath "$INSTDIR\share\"
 	File /r Files\share\*.*
   ;END PROJ.4 Files        
+
+  ;BEGIN QuaZip Files
+  SetOutPath $INSTDIR
+    File Files\quazip5.dll
+  ;END QuaZip Files
   
   ;BEGIN Routino Files    
   SetOutPath $INSTDIR
@@ -198,6 +203,7 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\libmysql.dll  
     File Files\3rdparty.txt
+    File Files\qt.conf
     ;File Files\libexif-12.dll
   ;END additional Files    
     
@@ -278,6 +284,6 @@ SectionEnd
 
 Function .onInit
   # set section 'MSVC' as unselected
-  SectionSetFlags ${MSVC} 0
+  #SectionSetFlags ${MSVC} 0
 FunctionEnd
 

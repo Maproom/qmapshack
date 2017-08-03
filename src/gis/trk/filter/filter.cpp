@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2016 Christian Eichler code@christian-eichler.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -31,18 +32,12 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     QVector<pointDP> line;
     bool nothingDone = true;
 
-    for(const trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkpt_t &pt : trk)
     {
-        for(const trkpt_t &pt : seg.pts)
-        {
-            pointDP dp;
-            dp.x = pt.lon * DEG_TO_RAD;
-            dp.y = pt.lat * DEG_TO_RAD;
-            dp.z = pt.ele;
-            dp.used = !(pt.flags & CGisItemTrk::trkpt_t::eHidden);
+        pointDP dp(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD, pt.ele);
+        dp.used = !pt.isHidden();
 
-            line << dp;
-        }
+        line << dp;
     }
 
     if(line.size() < 3)
@@ -56,11 +51,11 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     line[0].y = 0;
     for(int i = 1; i < line.size(); i++)
     {
-        qreal d, a1, a2;
         pointDP& pt1 = line[i - 1];
         pointDP& pt2 = line[i];
 
-        d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
+        qreal a1, a2;
+        qreal d = GPS_Math_Distance(pt0.x, pt0.y, pt2.x, pt2.y, a1, a2);
 
         pt0 = pt2;
 
@@ -72,29 +67,22 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
     int cnt = 0;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(line[cnt].used)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(line[cnt].used)
-            {
-                pt.flags &= ~trkpt_t::eHidden;
-            }
-            else
-            {
-                if((pt.flags & trkpt_t::eHidden) == 0)
-                {
-                    nothingDone = false;
-                    pt.flags |=  trkpt_t::eHidden;
-                }
-            }
-
-            cnt++;
+            pt.unsetFlag(CTrackData::trkpt_t::eHidden);
         }
+        else
+        {
+            if(!pt.isHidden())
+            {
+                nothingDone = false;
+                pt.setFlag(CTrackData::trkpt_t::eHidden);
+            }
+        }
+
+        cnt++;
     }
 
     if(nothingDone)
@@ -110,25 +98,18 @@ void CGisItemTrk::filterReducePoints(qreal dist)
 
 void CGisItemTrk::filterRemoveInvalidPoints()
 {
-    bool nothingDone    = true;
+    bool nothingDone = true;
 
     // use all valid flags as invalid mask. By that only
     // invalid flags for properties with valid points count
-    quint32 invalidMask = (getAllValidFlags() & trkpt_t::eValidMask) << 16;
+    quint32 invalidMask = (getAllValidFlags() & CTrackData::trkpt_t::eValidMask) << 16;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.isInvalid(trkpt_t::invalid_e(invalidMask)))
-            {
-                pt.flags |= trkpt_t::eHidden;
-                nothingDone = false;
-            }
+            pt.setFlag(CTrackData::trkpt_t::eHidden);
+            nothingDone = false;
         }
     }
 
@@ -143,15 +124,9 @@ void CGisItemTrk::filterRemoveInvalidPoints()
 
 void CGisItemTrk::filterReset()
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.flags &= ~trkpt_t::eHidden;
-        }
+        pt.unsetFlag(CTrackData::trkpt_t::eHidden);
     }
     deriveSecondaryData();
     changed(tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
@@ -161,16 +136,12 @@ void CGisItemTrk::filterDelete()
 {
     bool nothingDone = true;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkseg_t& seg : trk.segs)
     {
-        QVector<trkpt_t> pts;
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        QVector<CTrackData::trkpt_t> pts;
+        for(const CTrackData::trkpt_t &pt : seg.pts)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.flags & trkpt_t::eHidden)
+            if(pt.isHidden())
             {
                 nothingDone = false;
                 continue;
@@ -196,17 +167,10 @@ void CGisItemTrk::filterSmoothProfile(int points)
     QVector<int> window(points, 0);
     QVector<int> ele1, ele2;
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(const CTrackData::trkpt_t &pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-
-            ele1 << pt.ele;
-            ele2 << pt.ele;
-        }
+        ele1 << pt.ele;
+        ele2 << pt.ele;
     }
 
     if(ele1.size() < (points + 1))
@@ -227,50 +191,52 @@ void CGisItemTrk::filterSmoothProfile(int points)
     }
 
     int cnt = 0;
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.ele = ele2[cnt++];
-        }
+        pt.ele = ele2[cnt++];
     }
     deriveSecondaryData();
     changed(tr("Smoothed profile with a Median filter of size %1").arg(points), "://icons/48x48/SetEle.png");
 }
 
+void CGisItemTrk::filterTerrainSlope()
+{
+    QPolygonF line;
+    for(const CTrackData::trkpt_t &pt : trk)
+    {
+        line << pt.radPoint();
+    }
+
+    QPolygonF slope(line.size());
+    CMainWindow::self().getSlopeAt(line, slope);
+
+    int cnt = 0;
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        pt.extensions[CKnownExtension::internalTerrainSlope] = slope[cnt].ry();
+        ++cnt;
+    }
+
+    deriveSecondaryData();
+    changed(tr("Added terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
+}
+
 void CGisItemTrk::filterReplaceElevation()
 {
     QPolygonF line;
-
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(const CTrackData::trkpt_t &pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-
-            line << QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD);
-        }
+        line << pt.radPoint();
     }
 
     QPolygonF ele(line.size());
     CMainWindow::self().getElevationAt(line, ele);
 
     int cnt = 0;
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
-            cnt++;
-        }
+        pt.ele = (ele[cnt].y() == NOFLOAT) ? NOINT : ele[cnt].y();
+        ++cnt;
     }
 
     deriveSecondaryData();
@@ -284,12 +250,10 @@ void CGisItemTrk::filterInterpolateElevation()
         return;
     }
 
-    for(trkseg_t& seg : trk.segs)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        for(trkpt_t& pt : seg.pts)
-        {
-            pt.ele = getElevationInterpolated(pt.distance);
-        }
+        qreal ele = getElevationInterpolated(pt.distance);
+        pt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
     }
 
     interp.valid = false;
@@ -299,18 +263,11 @@ void CGisItemTrk::filterInterpolateElevation()
 
 void CGisItemTrk::filterOffsetElevation(int offset)
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.ele != NOINT)
         {
-            trkpt_t& pt = seg.pts[n];
-
-            if(pt.ele != NOINT)
-            {
-                pt.ele += offset;
-            }
+            pt.ele += offset;
         }
     }
 
@@ -324,15 +281,9 @@ void CGisItemTrk::filterNewDate(const QDateTime& date)
 {
     qint64 delta = qint64(date.toTime_t()) - qint64(timeStart.toUTC().toTime_t());
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            trkpt_t& pt = seg.pts[n];
-            pt.time = pt.time.addSecs(delta);
-        }
+        pt.time = pt.time.addSecs(delta);
     }
 
     deriveSecondaryData();
@@ -343,15 +294,9 @@ void CGisItemTrk::filterObscureDate(int delta)
 {
     if(delta == 0)
     {
-        for(int i = 0; i < trk.segs.size(); i++)
+        for(CTrackData::trkpt_t& pt : trk)
         {
-            trkseg_t& seg = trk.segs[i];
-
-            for(int n = 0; n < seg.pts.size(); n++)
-            {
-                trkpt_t& pt = seg.pts[n];
-                pt.time = QDateTime();
-            }
+            pt.time = QDateTime();
         }
 
         deriveSecondaryData();
@@ -365,16 +310,10 @@ void CGisItemTrk::filterObscureDate(int delta)
             timestamp = QDateTime::currentDateTime().toUTC();
         }
 
-        for(int i = 0; i < trk.segs.size(); i++)
+        for(CTrackData::trkpt_t& pt : trk)
         {
-            trkseg_t& seg = trk.segs[i];
-
-            for(int n = 0; n < seg.pts.size(); n++)
-            {
-                trkpt_t& pt = seg.pts[n];
-                pt.time = timestamp;
-                timestamp = timestamp.addSecs(delta);
-            }
+            pt.time = timestamp;
+            timestamp = timestamp.addSecs(delta);
         }
 
         deriveSecondaryData();
@@ -390,21 +329,15 @@ void CGisItemTrk::filterSpeed(qreal speed)
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
+        if(pt.isHidden())
         {
-            trkpt_t& pt = seg.pts[n];
-            if(pt.flags & trkpt_t::eHidden)
-            {
-                continue;
-            }
-
-            timestamp   = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
-            pt.time     = timestamp;
+            continue;
         }
+
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        pt.time   = timestamp;
     }
 
     deriveSecondaryData();
@@ -422,7 +355,7 @@ void CGisItemTrk::filterSplitSegment()
     }
 
     int part = 0;
-    for(const trkseg_t &seg : trk.segs)
+    for(const CTrackData::trkseg_t &seg : trk.segs)
     {
         if(0 < seg.pts.count())
         {
@@ -430,21 +363,16 @@ void CGisItemTrk::filterSplitSegment()
             qint32 idx2 = seg.pts[seg.pts.count() - 1].idxTotal;
 
             new CGisItemTrk(tr("%1 (Segment %2)").arg(trk.name).arg(part), idx1, idx2, trk, project);
-            part++;
+            ++part;
         }
     }
 }
 
 void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 {
-    for(int i = 0; i < trk.segs.size(); i++)
+    for(CTrackData::trkpt_t& pt : trk)
     {
-        trkseg_t& seg = trk.segs[i];
-
-        for(int n = 0; n < seg.pts.size(); n++)
-        {
-            seg.pts[n].extensions.remove(extStr);
-        }
+        pt.extensions.remove(extStr);
     }
 
     extrema.remove(extStr);
@@ -453,4 +381,15 @@ void CGisItemTrk::filterDeleteExtension(const QString &extStr)
 
     const CKnownExtension &ext = CKnownExtension::get(extStr);
     changed(tr("Removed extension %1 from all Track Points").arg(ext.name), "://icons/48x48/FilterModifyExtension.png");
+}
+
+void CGisItemTrk::filterSubPt2Pt()
+{
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        pt.unsetFlag(CTrackData::trkpt_t::eSubpt);
+    }
+    propHandler->setupData();
+
+    changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
 }

@@ -30,6 +30,11 @@ class IDrawContext;
 
 struct point3D
 {
+    point3D() {}
+
+    point3D(const qreal &x, const qreal &y, const qreal &z)
+        : x(x), y(y), z(z) {}
+
     qreal x = 0;
     qreal y = 0;
     qreal z = 0;
@@ -38,6 +43,7 @@ struct point3D
 struct pointDP : public point3D
 {
     pointDP();
+    pointDP(const qreal &x, const qreal &y, const qreal &z);
     bool used;
     qint32 idx;
 };

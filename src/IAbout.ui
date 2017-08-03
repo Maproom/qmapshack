@@ -64,6 +64,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="labelNoDBus">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -202,7 +209,7 @@
        <item row="1" column="1">
         <widget class="QLabel" name="label_10">
          <property name="text">
-          <string>Josef Latt</string>
+          <string>Oliver Eichler</string>
          </property>
         </widget>
        </item>
@@ -279,6 +286,20 @@
         <widget class="QLabel" name="label_8">
          <property name="text">
           <string>&lt;b&gt;Translation:&lt;/b&gt;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2">
+        <widget class="QLabel" name="label_29">
+         <property name="text">
+          <string>Russian:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3">
+        <widget class="QLabel" name="label_30">
+         <property name="text">
+          <string>Wolfgang Thämelt</string>
          </property>
         </widget>
        </item>
@@ -379,7 +400,8 @@
       <widget class="QLabel" name="label_26">
        <property name="text">
         <string>Christian Eichler (qms@christian-eichler.de)
-Ivo Kronenberg</string>
+Ivo Kronenberg
+Norbert Truchsess (norbert.truchsess@t-online.de)</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -403,7 +425,7 @@ Ivo Kronenberg</string>
      <item>
       <widget class="QLabel" name="label_7">
        <property name="text">
-        <string>© 2014 Oliver Eichler (oliver.eichler@gmx.de)</string>
+        <string>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</string>
        </property>
       </widget>
      </item>

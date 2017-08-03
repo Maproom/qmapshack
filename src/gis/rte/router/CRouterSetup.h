@@ -38,6 +38,10 @@ public:
 
     bool hasFastRouting();
 
+    enum router_e {RouterRoutino, RouterMapquest, RouterBRouter};
+
+    void setRouterTitle(router_e, QString title);
+
 private slots:
     void slotSelectRouter(int i);
 

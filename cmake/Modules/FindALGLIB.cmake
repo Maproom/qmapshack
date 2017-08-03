@@ -30,14 +30,15 @@ else (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
         ${CMAKE_INSTALL_PREFIX}/include
     PATH_SUFFIXES
         alglib
-
+        libalglib
   )
   mark_as_advanced(ALGLIB_INCLUDE_DIR)
 
   find_library(ALGLIB_LIBRARY
     NAMES
-        alg
+        alglib
     PATHS
+        /usr/lib64
         /usr/lib
         /usr/local/lib
         /opt/local/lib
@@ -50,11 +51,9 @@ else (ALGLIB_LIBRARIES AND ALGLIB_INCLUDE_DIRS)
     ${ALGLIB_INCLUDE_DIR}
   )
 
-  if (ALGLIB_FOUND)
-    set(ALGLIB_LIBRARIES
-      ${ALGLIB_LIBRARY}
-    )
-  endif (ALGLIB_FOUND)
+  set(ALGLIB_LIBRARIES
+    ${ALGLIB_LIBRARY}
+  )
 
   if (ALGLIB_INCLUDE_DIRS AND ALGLIB_LIBRARIES)
      set(ALGLIB_FOUND TRUE)

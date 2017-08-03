@@ -27,14 +27,14 @@
 CLineOpMovePoint::CLineOpMovePoint(SGisLine &points, CGisDraw *gis, CCanvas * canvas, IMouseEditLine *parent)
     : ILineOp(points, gis, canvas, parent)
 {
-    cursor = QCursor(QPixmap(":/cursors/cursorMovePoint.png"),0,0);
+    cursor = QCursor(QPixmap(":/cursors/cursorPointMove.png"),0,0);
 }
 
 CLineOpMovePoint::~CLineOpMovePoint()
 {
 }
 
-void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
+void CLineOpMovePoint::mouseReleaseEventEx(QMouseEvent * e)
 {
     if(e->button() == Qt::LeftButton)
     {
@@ -47,7 +47,7 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
             // store new state of line to undo/redo history
             parentHandler->storeToHistory(points);
         }
-        else
+        else if(idxFocus != NOIDX)
         {
             QPointF coord = e->pos();
             gis->convertPx2Rad(coord);
@@ -73,8 +73,6 @@ void CLineOpMovePoint::mousePressEventEx(QMouseEvent * e)
         abortStep();
     }
 
-    // switch on map panning if move operation is in progress
-    parentHandler->setCanvasPanning(movePoint);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -89,8 +87,6 @@ bool CLineOpMovePoint::abortStep()
         movePoint = false;
         idxFocus  = NOIDX;
 
-        // switch on map panning if move operation is in progress
-        parentHandler->setCanvasPanning(movePoint);
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 
         return true;
@@ -129,16 +125,6 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::canvasPanned(QPointF pos)
-{
-    // update point position after canvas/map panning
-    if(movePoint)
-    {
-        gis->convertPx2Rad(pos);
-        points[idxFocus].coord = pos;
-    }
-    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
-}
 
 void CLineOpMovePoint::drawFg(QPainter& p)
 {

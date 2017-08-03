@@ -55,16 +55,17 @@ private:
     enum state_e
     {
         eStateIdle
-        ,eStateMoveMap
         ,eStateSelectRange
         ,eStateRangeSelected
     };
 
-    state_e state = eStateIdle;
-
-    QPointF anchor = NOPOINTF;
+    bool mapMove    = false;
+    bool mapDidMove = false;
+    state_e state   = eStateIdle;
+    QPointF anchor  = NOPOINTF;
 
     QPoint lastPoint;
+    QPoint firstPoint;
 
     QPointer<CScrOptRangeTrk> scrOptRange;
 };

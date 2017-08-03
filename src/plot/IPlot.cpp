@@ -96,6 +96,7 @@ IPlot::IPlot(CGisItemTrk *trk, CPlotData::axistype_e type, mode_e mode, QWidget 
     actionPrint     = menu->addAction(QIcon("://icons/32x32/Save.png"),        tr("Save..."),    this, SLOT(slotSave()));
     menu->addSeparator();
     actionAddWpt    = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),      tr("Add Waypoint"), this, SLOT(slotAddWpt()));
+    actionCutTrk    = menu->addAction(QIcon("://icons/32x32/TrkCut.png"),       tr("Cut..."),    this, SLOT(slotCutTrk()));
 
     connect(this, &IPlot::customContextMenuRequested, this, &IPlot::slotContextMenu);
 }
@@ -511,9 +512,11 @@ void IPlot::wheelEvent(QWheelEvent * e)
     case Qt::AltModifier:
         doHorizontalZoom    = true;
         break;
+
     case Qt::ControlModifier:
         doVerticalZoom      = true;
         break;
+
     case Qt::NoModifier:
         doHorizontalZoom    = true;
         doVerticalZoom      = true;
@@ -549,7 +552,7 @@ void IPlot::setSizes()
     scaleWidthX1 = showScale ? data->x().getScaleWidth( fm ) : 0;
     scaleWidthY1 = showScale ? data->y().getScaleWidth( fm ) : 0;
 
-    scaleWidthY1 = scaleWidthX1 > scaleWidthY1 ? scaleWidthX1 : scaleWidthY1;
+    scaleWidthY1 = (scaleWidthX1/2) > scaleWidthY1 ? scaleWidthX1/2 : scaleWidthY1;
 
     fontWidth    = fm.maxWidth();
     fontHeight   = fm.height();
@@ -1279,6 +1282,7 @@ void IPlot::slotContextMenu(const QPoint & point)
     actionStopRange->setEnabled((mouseClickState != eMouseClickIdle) && !(idxSel1 == NOIDX || idxSel2 == NOIDX));
     actionPrint->setEnabled(mouseClickState != eMouseClick2nd);
     actionAddWpt->setDisabled(posMouse1 == NOPOINT);
+    actionCutTrk->setDisabled(actionStopRange->isEnabled());
 
     posMouse2 = posMouse1;
 
@@ -1377,21 +1381,33 @@ void IPlot::slotAddWpt()
         return;
     }
 
-    const CGisItemTrk::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
+    const CTrackData::trkpt_t * trkpt = trk->getMouseMoveFocusPoint();
     if(trkpt == nullptr)
     {
         return;
     }
 
     CGisWidget::self().addWptByPos({trkpt->lon, trkpt->lat});
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas != nullptr)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGisItemTrk::trkpt_t *ptRange2)
+void IPlot::slotCutTrk()
+{
+    // set point of mouse click focus to position of context menu stored in
+    // secondary mouse point
+    qreal x = data->x().pt2val(posMouse2.x() - left);
+    setMouseFocus(x, CGisItemTrk::eFocusMouseClick);
+
+    /*
+       Trigger cut by event not by direct call to API. This is because cutting the track
+       might result into deleting the original one. The original one is the parent of this
+       plot and needs to destroy it. This would be impossible if we are still in this method
+       because the API call did not return yet.
+     */
+    CGisWidget::self().postEventForWks(new CEvtA2WCutTrk(trk->getKey()));
+}
+
+void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t *ptRange2)
 {
     if(nullptr == ptRange1 || nullptr == ptRange2)
     {
@@ -1402,11 +1418,11 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
     {
         if(ptRange1->idxTotal < ptRange2->idxTotal)
         {
-            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->isHidden())
             {
                 ptRange1++;
             }
-            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->isHidden())
             {
                 ptRange2--;
             }
@@ -1415,11 +1431,11 @@ void IPlot::setMouseRangeFocus(const CGisItemTrk::trkpt_t * ptRange1, const CGis
         }
         else
         {
-            while(ptRange1->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange1->isHidden())
             {
                 ptRange1--;
             }
-            while(ptRange2->flags & CGisItemTrk::trkpt_t::eHidden)
+            while(ptRange2->isHidden())
             {
                 ptRange2++;
             }

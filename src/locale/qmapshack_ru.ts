@@ -3603,7 +3603,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="489"/>
         <source>%1 invalid result</source>
-        <translation>%1 неверный ресультат</translation>
+        <translation>%1 неверный результат</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="533"/>
@@ -3676,7 +3676,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="446"/>
         <source>doesn&apos;t seem to be a valid Java-executable</source>
-        <translation>Не похоже на допустый исполняемый файл Java</translation>
+        <translation>Не похоже на допустимый исполняемый файл Java</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
@@ -3706,7 +3706,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="529"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
-        <translation>Загузка:%1 &lt;br/&gt;Это загрузит и установит файл ZIP из места загрузки, которое не защищено никаким стандартом вообще, используя простой HTTP. Обычно это должно быть HTTPS. Риск заключается в том, что кто-то перенаправляет запрос и отправляет вам заменяющий ZIP с помощью вредоносной программы. QMapShack не может обнаружить это. &lt;br/&gt; Если вы не понимаете этого или если у вас есть сомнения, не начинайте и прерываете. Вместо этого используйте веб-версию BRouter.</translation>
+        <translation>Загрузка:%1 &lt;br/&gt;Это загрузит и установит файл ZIP из места загрузки, которое не защищено никаким стандартом вообще, используя простой HTTP. Обычно это должно быть HTTPS. Риск заключается в том, что кто-то перенаправляет запрос и отправляет вам заменяющий ZIP с помощью вредоносной программы. QMapShack не может обнаружить это. &lt;br/&gt; Если вы не понимаете этого или если у вас есть сомнения, не начинайте и прерываете. Вместо этого используйте веб-версию BRouter.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="541"/>
@@ -3887,7 +3887,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="798"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
-        <translation>Локальные данные устарелы (%1, %2 - удаленные %3, %4)</translation>
+        <translation>Локальные данные устарели (%1, %2 - удаленные %3, %4)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="190"/>
@@ -5527,7 +5527,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="451"/>
         <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation>Использовать/изменить определённая пользователем видимость стрелок направления для этого трека</translation>
+        <translation>Использовать/изменить определённую пользователем видимость стрелок направления для этого трека</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="480"/>

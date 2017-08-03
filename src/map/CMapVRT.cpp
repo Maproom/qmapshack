@@ -60,11 +60,6 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
             return;
         }
 
-
-        hasOverviews = pBand->GetOverviewCount() != 0;
-
-        //        qDebug() << pBand->GetColorInterpretation();
-
         if(pBand->GetColorInterpretation() ==  GCI_PaletteIndex )
         {
             GDALColorTable * pct = pBand->GetColorTable();
@@ -105,6 +100,11 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
                 return;
             }
         }
+    }
+
+    if(dataset->GetRasterCount() > 0)
+    {
+        hasOverviews = dataset->GetRasterBand(1)->GetOverviewCount() != 0;
     }
 
     qDebug() << "has overviews" << hasOverviews;

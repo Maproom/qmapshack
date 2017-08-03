@@ -154,6 +154,7 @@ void CTemplateWidget::slotSetPath()
         return;
     }
     cfg.setValue(s_("TextEditWidget/templatePath"), path);
+    listTemplates();
 }
 
 void CTemplateWidget::slotTemplateActivated(int idx)

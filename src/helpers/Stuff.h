@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef STRING_H
-#define STRING_H
+#ifndef STUFF_H
+#define STUFF_H
 
 #define s_(x) QStringLiteral(x)
 
-#endif //STRING_H
+#endif //STUFF_H
 

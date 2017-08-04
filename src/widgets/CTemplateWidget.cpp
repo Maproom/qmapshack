@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "helpers/CSettings.h"
-#include "helpers/String.h"
+#include "helpers/Stuff.h"
 #include "widgets/CTemplateWidget.h"
 
 #include <QtGui>

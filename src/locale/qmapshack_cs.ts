@@ -2898,7 +2898,7 @@ line %2, column %3:
     <message>
         <location filename="../map/CMapVRT.cpp" line="45"/>
         <location filename="../map/CMapVRT.cpp" line="59"/>
-        <location filename="../map/CMapVRT.cpp" line="88"/>
+        <location filename="../map/CMapVRT.cpp" line="83"/>
         <location filename="../map/CMapVRT.cpp" line="133"/>
         <source>Error...</source>
         <translation>Chyba...</translation>
@@ -2911,7 +2911,7 @@ line %2, column %3:
 </translation>
     </message>
     <message>
-        <location filename="../map/CMapVRT.cpp" line="88"/>
+        <location filename="../map/CMapVRT.cpp" line="83"/>
         <source>File must be 8 bit palette or gray indexed.</source>
         <translation>Soubor musí mít 8 bitovou barevnou paletu nebo být v odstínech šedi.</translation>
     </message>
@@ -4648,17 +4648,17 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="173"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
         <source>Failed...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="173"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
         <source>Failed to read template file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="214"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="215"/>
         <source>Preview...</source>
         <translation type="unfinished"></translation>
     </message>

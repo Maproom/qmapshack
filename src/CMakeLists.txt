@@ -43,6 +43,7 @@ find_package(Qt5Sql)
 find_package(Qt5WebKitWidgets)
 find_package(Qt5LinguistTools)
 find_package(Qt5PrintSupport)
+find_package(Qt5UiTools)
 find_package(GDAL REQUIRED)
 find_package(PROJ REQUIRED)
 find_package(ROUTINO REQUIRED)
@@ -100,6 +101,7 @@ set( SRCS
         widgets/CColorLegend.cpp
         widgets/CColorChooser.cpp
         widgets/CSelectDoubleListWidget.cpp
+        widgets/CTemplateWidget.cpp
         helpers/CInputDialog.cpp
         helpers/CPositionDialog.cpp
         helpers/CWptIconDialog.cpp
@@ -386,6 +388,7 @@ set( HDRS
         widgets/CColorLegend.h
         widgets/CColorChooser.h
         widgets/CSelectDoubleListWidget.h
+        widgets/CTemplateWidget.h
         helpers/Platform.h
         helpers/CFileExt.h
         helpers/CSettings.h
@@ -402,6 +405,7 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
+        helpers/String.h
         helpers/CToolBarConfig.h
         helpers/CToolBarSetupDialog.h
         canvas/CCanvas.h
@@ -667,6 +671,7 @@ set( UIS
     widgets/IPhotoAlbum.ui
     widgets/IColorChooser.ui
     widgets/ISelectDoubleListWidget.ui
+    widgets/ITemplateWidget.ui
     helpers/IInputDialog.ui
     helpers/IPositionDialog.ui
     helpers/IWptIconDialog.ui
@@ -745,6 +750,7 @@ set( UIS
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui
     print/IPrintDialog.ui
+    templates/Hiking_Tour_Summary.ui
 )
 
 
@@ -828,6 +834,7 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Sql
     Qt5::WebKitWidgets
     Qt5::PrintSupport
+    Qt5::UiTools
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

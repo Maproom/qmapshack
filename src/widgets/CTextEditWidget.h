@@ -23,6 +23,7 @@
 
 #include "ui_ITextEditWidget.h"
 #include <QDialog>
+#include <QDir>
 #include <QTextCharFormat>
 
 
@@ -60,12 +61,12 @@ private slots:
 
     void textEditScrolled();
 
+    void insertFromTemplate();
 private:
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
     void fontChanged(const QFont &f);
     void colorChanged(const QColor &c);
     void alignmentChanged(Qt::Alignment a);
-
     void updateSelectionWindow();
 
     QAction *actionTextColor;

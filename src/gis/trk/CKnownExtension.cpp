@@ -123,10 +123,10 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
     knownExtensions.insert(ns % ":altitude",
                            { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
                              getExtensionValueFunc(ns % ":altitude") });
-    
+
     knownExtensions.insert(ns % ":energy",
-                            { tr("Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
-                                getExtensionValueFunc(ns % ":energy") });
+                           { tr("Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
+                             getExtensionValueFunc(ns % ":energy") });
 
 
     knownExtensions.insert(ns % ":seaLevelPressure",

@@ -38,9 +38,9 @@ public:
     }
 
 protected slots:
-    /// read the stderr from the process and paste it into the text browswer
+    /// read the stderr from the process and paste it into the text browser
     void slotStderr();
-    /// read the stdout from the process and paste it into the text browswer
+    /// read the stdout from the process and paste it into the text browser
     void slotStdout();
     void slotError(QProcess::ProcessError error);
     virtual void slotFinished(int exitCode, QProcess::ExitStatus status);

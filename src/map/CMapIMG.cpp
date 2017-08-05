@@ -428,7 +428,7 @@ void CMapIMG::setupTyp()
     {
         QFile file(typeFile);
         if(!file.open(QIODevice::ReadOnly))
-        {            
+        {
             QMessageBox::warning(CMainWindow::self().getBestWidgetForParent(), tr("Read external type file..."), tr("Failed to read type file: %1\nFall back to internal types.").arg(typeFile), QMessageBox::Ok);
             typeFile.clear();
             setupTyp();
@@ -1508,7 +1508,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
 #ifdef DEBUG_SHOW_POLY_DATA
     qDebug() << "--- Subdivision" << subdiv.n << "---";
-    qDebug() << "adress:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
+    qDebug() << "address:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
     qDebug() << "points:            " << hex << opnt;
     qDebug() << "indexed points:    " << hex << oidx;
     qDebug() << "polylines:         " << hex << opline;

@@ -28,7 +28,7 @@
 #include <QtXml>
 
 #include <ogr_spatialref.h>
-#include <proj_api.h>
+
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     : IMapOnline(parent)

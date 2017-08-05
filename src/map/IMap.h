@@ -253,7 +253,7 @@ protected:
     bool showPolygons  = true; //< vector maps only: hide/show polygons
     bool showPolylines = true; //< vector maps only: hide/show polylines
     bool showPOIs      = true; //< vector maps only: hide/show point of interest
-    qint32 adjustDetailLevel = 0; //< vector maps only: alter threshold to show deatils.
+    qint32 adjustDetailLevel = 0; //< vector maps only: alter threshold to show details.
 
     QString cachePath;            //< streaming map only: path to cached tiles
     qint32 cacheSizeMB     = 100; //< streaming map only: maximum size of all tiles in cache [MByte]

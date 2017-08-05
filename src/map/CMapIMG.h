@@ -65,7 +65,7 @@ public:
 
 
         bool hasPoints;    //< there are points stored in the RGN subsection
-        bool hasIdxPoints; //< there are indexd points stored in the RGN subsection
+        bool hasIdxPoints; //< there are index points stored in the RGN subsection
         bool hasPolylines; //< there are polylines stored in the RGN subsection
         bool hasPolygons;  //< there are polygons stored in the RGN subsection
 

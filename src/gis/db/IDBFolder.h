@@ -125,7 +125,7 @@ public:
      *
      * The folder will be attached to it's parent folder
      *
-     * @param type          the tye of the new folder
+     * @param type          the type of the new folder
      * @param name          the name of the new folder
      * @param idParent      the 64bit database key of the parent
      * @param db            the database to work on
@@ -188,7 +188,7 @@ protected:
     virtual void addChildren(const QSet<QString> &activeChildren, bool skipFolders);
 
     /**
-       @brief Remove a folder to folder realtion
+       @brief Remove a folder to folder relation
 
        If the folder has no other relation the folder's relation to it's children is removed, too.
 

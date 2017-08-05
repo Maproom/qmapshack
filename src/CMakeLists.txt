@@ -128,6 +128,7 @@ set( SRCS
         dem/CDemPathSetup.cpp
         dem/CDemPropSetup.cpp
         map/IMap.cpp
+        map/IMapOnline.cpp
         map/CMapDraw.cpp
         map/CMapGEMF.cpp
         map/CMapItem.cpp
@@ -417,6 +418,7 @@ set( HDRS
         dem/CDemPathSetup.h
         dem/CDemPropSetup.h
         map/IMap.h
+        map/IMapOnline.h
         map/IMapProp.h
         map/CMapDraw.h
         map/CMapGEMF.h

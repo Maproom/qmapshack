@@ -31,7 +31,7 @@
 #include <proj_api.h>
 
 CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatTileCache, parent)
+    : IMapOnline(parent)
 {
     qDebug() << "------------------------------";
     qDebug() << "WTMS: try to open" << filename;
@@ -146,21 +146,13 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
             layer.resourceURL  = layer.resourceURL.replace("{" + Identifier + "}", Default, Qt::CaseInsensitive);
         }
 
-        if(layer.resourceURL.toLower().startsWith("https") && !QSslSocket::supportsSsl())
+        if(!httpsCheck(layer.resourceURL))
         {
-            QString msg = tr(
-                "This map requires OpenSSL support. However due to legal restrictions in some countries "
-                "OpenSSL is not packaged with QMapShack. You can have a look at the "
-                "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
-                "for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory."
-                );
-            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),tr("Error..."),msg,QMessageBox::Abort);
             return;
         }
 
-
         // enable layer by default
-        layer.enabled     = true;
+        layer.enabled = true;
         layers << layer;
     }
 
@@ -246,18 +238,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     QFileInfo fi(filename);
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.completeBaseName()));
 
-    accessManager   = new QNetworkAccessManager(parent->thread());
-    connect(this,          &CMapWMTS::sigQueueChanged,       this, &CMapWMTS::slotQueueChanged);
-    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapWMTS::slotRequestFinished);
-
     name = fi.completeBaseName().replace("_", " ");
 
     isActivated = true;
-}
-
-CMapWMTS::~CMapWMTS()
-{
-//    map->reportStatusToCanvas(name, "");
 }
 
 void CMapWMTS::getLayers(QListWidget& list)
@@ -281,11 +264,12 @@ void CMapWMTS::getLayers(QListWidget& list)
     connect(&list, &QListWidget::itemChanged, this, &CMapWMTS::slotLayersChanged);
 }
 
+
 void CMapWMTS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
-    IMap::saveConfig(cfg);
+    IMapOnline::saveConfig(cfg);
     if(layers.size() < 2)
     {
         return;
@@ -307,7 +291,7 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
-    IMap::loadConfig(cfg);
+    IMapOnline::loadConfig(cfg);
     if(layers.size() < 2)
     {
         return;
@@ -333,14 +317,6 @@ void CMapWMTS::loadConfig(QSettings& cfg) /* override */
     }
 }
 
-
-void CMapWMTS::configureCache()
-{
-    QMutexLocker lock(&mutex);
-
-    delete diskCache;
-    diskCache = new CDiskCache(getCachePath(), getCacheSize(), getCacheExpiration(), this);
-}
 
 void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
 {
@@ -369,87 +345,6 @@ void CMapWMTS::slotLayersChanged(QListWidgetItem * item)
     map->emitSigCanvasUpdate();
 }
 
-void CMapWMTS::slotQueueChanged()
-{
-    QMutexLocker lock(&mutex);
-
-    if(!urlQueue.isEmpty() && urlPending.size() < 6)
-    {
-        // request up to 6 pending request
-        for(int i = 0; i < (6 - urlPending.size()); i++)
-        {
-            QString url = urlQueue.dequeue();
-            lastRequest = urlQueue.isEmpty();
-
-            QNetworkRequest request;
-            request.setUrl(url);
-            accessManager->get(request);
-            urlPending << url;
-
-            if(lastRequest)
-            {
-                break;
-            }
-        }
-    }
-    else if(lastRequest && urlPending.isEmpty())
-    {
-        lastRequest = false;
-        // if all tiles are received the map layer can be redrawn with all tiles from cache
-        map->emitSigCanvasUpdate();
-    }
-
-    if(timeLastUpdate.elapsed() > 2000)
-    {
-        timeLastUpdate.start();
-        map->emitSigCanvasUpdate();
-    }
-
-
-    // report status of pending tiles
-    int pending = urlQueue.size() + urlPending.size();
-    if(pending)
-    {
-        map->reportStatusToCanvas(name, tr("<b>%1</b>: %2 tiles pending<br/>").arg(name).arg(pending));
-    }
-    else
-    {
-        map->reportStatusToCanvas(name, "");
-    }
-}
-
-void CMapWMTS::slotRequestFinished(QNetworkReply* reply)
-{
-    QMutexLocker lock(&mutex);
-
-    QString url = reply->url().toString();
-    if(urlPending.contains(url))
-    {
-        QImage img;
-        // only take good responses
-        if(!reply->error())
-        {
-            // read image data
-            img.loadFromData(reply->readAll());
-        }
-        // always store image to cache, the cache will take care of NULL images
-        diskCache->store(url, img);
-
-        urlPending.removeAll(url);
-    }
-
-    // debug output any error
-    if(reply->error())
-    {
-        qDebug() << reply->errorString();
-    }
-
-    // delete reply object
-    reply->deleteLater();
-
-    // check for more items to be queued
-    slotQueueChanged();
-}
 
 void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
 {
@@ -469,7 +364,6 @@ void CMapWMTS::draw(IDrawContext::buffer_t& buf) /* override */
     {
         return;
     }
-
 
     // get pixel offset of top left buffer corner
     QPointF pp = buf.ref1;

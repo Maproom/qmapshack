@@ -27,6 +27,7 @@
 #include <QtScript>
 #include <QtWidgets>
 #include <QtXml>
+
 #include <ogr_spatialref.h>
 #include <proj_api.h>
 
@@ -52,7 +53,7 @@ inline double tile2lat(int y, int z)
 }
 
 CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
-    : IMap(eFeatVisibility|eFeatTileCache, parent)
+    : IMapOnline(parent)
 {
     qDebug() << "------------------------------";
     qDebug() << "TMS: try to open" << filename;
@@ -125,15 +126,8 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
             layers[idx].maxZoomLevel = xmlLayer.firstChildElement("MaxZoomLevel").text().toInt();
         }
 
-        if(layers[idx].strUrl.toLower().startsWith("https") && !QSslSocket::supportsSsl())
+        if(!httpsCheck(layers[idx].strUrl))
         {
-            QString msg = tr(
-                "This map requires OpenSSL support. However due to legal restrictions in some countries "
-                "OpenSSL is not packaged with QMapShack. You can have a look at the "
-                "<a href='https://www.openssl.org/community/binaries.html'>OpenSSL Homepage</a> "
-                "for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory."
-                );
-            QMessageBox::critical(CMainWindow::getBestWidgetForParent(),tr("Error..."),msg,QMessageBox::Abort);
             return;
         }
     }
@@ -143,11 +137,11 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     N = xmlValues.count();
     for(qint32 n = 0; n < N; ++n)
     {
-        rawHeaderItem_t item;
         const QDomNode& xmlValue = xmlValues.item(n);
-        item.name  = xmlValue.attributes().namedItem("name").nodeValue();
-        item.value = xmlValue.toElement().text();
-        rawHeaderItems << item;
+        registerHeaderItem(
+            xmlValue.attributes().namedItem("name").nodeValue(),
+            xmlValue.toElement().text()
+        );
     }
 
     // if there is more than one layer the layer list in the properties widget has to be enabled.
@@ -160,10 +154,6 @@ CMapTMS::CMapTMS(const QString &filename, CMapDraw *parent)
     // create default cache path from filename
     QFileInfo fi(filename);
     slotSetCachePath(QDir(CMapDraw::getCacheRoot()).absoluteFilePath(fi.completeBaseName()));
-
-    accessManager = new QNetworkAccessManager(parent->thread());
-    connect(this,          &CMapTMS::sigQueueChanged,        this, &CMapTMS::slotQueueChanged);
-    connect(accessManager, &QNetworkAccessManager::finished, this, &CMapTMS::slotRequestFinished);
 
     name = fi.completeBaseName().replace("_", " ");
 
@@ -196,7 +186,7 @@ void CMapTMS::saveConfig(QSettings& cfg) /* override */
 {
     QMutexLocker lock(&mutex);
 
-    IMap::saveConfig(cfg);
+    IMapOnline::saveConfig(cfg);
     if(layers.size() < 2)
     {
         return;
@@ -218,7 +208,7 @@ void CMapTMS::loadConfig(QSettings& cfg)
 {
     QMutexLocker lock(&mutex);
 
-    IMap::loadConfig(cfg);
+    IMapOnline::loadConfig(cfg);
     if(layers.size() < 2)
     {
         return;
@@ -244,98 +234,6 @@ void CMapTMS::loadConfig(QSettings& cfg)
     }
 }
 
-void CMapTMS::configureCache() /* override */
-{
-    QMutexLocker lock(&mutex);
-
-    delete diskCache;
-    diskCache = new CDiskCache(getCachePath(), getCacheSize(), getCacheExpiration(), this);
-}
-
-void CMapTMS::slotQueueChanged()
-{
-    QMutexLocker lock(&mutex);
-
-    if(!urlQueue.isEmpty() && urlPending.size() < 6)
-    {
-        // request up to 6 pending request
-        for(int i = 0; i < (6 - urlPending.size()); i++)
-        {
-            QString url = urlQueue.dequeue();
-            lastRequest = urlQueue.isEmpty();
-
-            QNetworkRequest request;
-            request.setUrl(url);
-            for(const rawHeaderItem_t &item : rawHeaderItems)
-            {
-                request.setRawHeader(item.name.toLatin1(), item.value.toLatin1());
-            }
-            accessManager->get(request);
-            urlPending << url;
-
-            if(lastRequest)
-            {
-                break;
-            }
-        }
-    }
-    else if(lastRequest && urlPending.isEmpty())
-    {
-        lastRequest = false;
-        // if all tiles are received the map layer can be redrawn with all tiles from cache
-        map->emitSigCanvasUpdate();
-    }
-
-    if(timeLastUpdate.elapsed() > 2000)
-    {
-        timeLastUpdate.start();
-        map->emitSigCanvasUpdate();
-    }
-
-    // report status of pending tiles
-    int pending = urlQueue.size() + urlPending.size();
-    if(pending)
-    {
-        map->reportStatusToCanvas(name, tr("<b>%1</b>: %2 tiles pending<br/>").arg(name).arg(pending));
-    }
-    else
-    {
-        map->reportStatusToCanvas(name, "");
-    }
-}
-
-void CMapTMS::slotRequestFinished(QNetworkReply* reply)
-{
-    QMutexLocker lock(&mutex);
-
-    QString url = reply->url().toString();
-    if(urlPending.contains(url))
-    {
-        QImage img;
-        // only take good responses
-        if(!reply->error())
-        {
-            // read image data
-            img.loadFromData(reply->readAll());
-        }
-        // always store image to cache, the cache will take care of NULL images
-        diskCache->store(url, img);
-
-        urlPending.removeAll(url);
-    }
-
-    // debug output any error
-    if(reply->error())
-    {
-        qDebug() << reply->errorString();
-    }
-
-    // delete reply object
-    reply->deleteLater();
-
-    // check for more items to be queued
-    slotQueueChanged();
-}
 
 void CMapTMS::slotLayersChanged(QListWidgetItem * item)
 {
@@ -522,6 +420,7 @@ void CMapTMS::draw(IDrawContext::buffer_t& buf) /* override */
                 }
             }
         }
+
         emit sigQueueChanged();
     }
 }

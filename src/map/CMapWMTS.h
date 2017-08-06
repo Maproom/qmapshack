@@ -18,11 +18,8 @@
 
 #ifndef CMAPWMTS_H
 #define CMAPWMTS_H
-#include "map/IMap.h"
+#include "map/IMapOnline.h"
 #include <QMap>
-#include <QMutex>
-#include <QQueue>
-#include <QTime>
 
 
 class CMapDraw;
@@ -32,31 +29,21 @@ class QNetworkReply;
 class QListWidgetItem;
 
 
-class CMapWMTS : public IMap
+class CMapWMTS : public IMapOnline
 {
     Q_OBJECT
 public:
     CMapWMTS(const QString& filename, CMapDraw *parent);
-    virtual ~CMapWMTS();
+    virtual ~CMapWMTS() {}
 
     void draw(IDrawContext::buffer_t& buf) override;
 
     void getLayers(QListWidget& list) override;
 
     void saveConfig(QSettings& cfg) override;
-
     void loadConfig(QSettings& cfg) override;
 
-
-signals:
-    void sigQueueChanged();
-
-protected:
-    void configureCache() override;
-
 private slots:
-    void slotQueueChanged();
-    void slotRequestFinished(QNetworkReply* reply);
     void slotLayersChanged(QListWidgetItem * item);
 
 private:
@@ -109,22 +96,6 @@ private:
     };
 
     QMap<QString,tileset_t> tilesets;
-
-    QString name;
-    /// Mutex to control access to url queue
-    QMutex mutex {QMutex::Recursive};
-    /// a queue with all tile urls to request
-    QQueue<QString> urlQueue;
-    /// the tile cache
-    CDiskCache * diskCache = nullptr;
-    /// access manager to request tiles
-    QNetworkAccessManager * accessManager = nullptr;
-
-    QList<QString> urlPending;
-
-    bool lastRequest = false;
-
-    QTime timeLastUpdate;
 };
 
 #endif //CMAPWMTS_H

@@ -19,16 +19,14 @@
 #ifndef CMAPTMS_H
 #define CMAPTMS_H
 
-#include "map/IMap.h"
-#include <QQueue>
-#include <QTime>
+#include "map/IMapOnline.h"
 
 class CDiskCache;
 class QListWidgetItem;
 class QNetworkAccessManager;
 class QNetworkReply;
 
-class CMapTMS : public IMap
+class CMapTMS : public IMapOnline
 {
     Q_OBJECT
 public:
@@ -40,20 +38,10 @@ public:
     void getLayers(QListWidget& list) override;
 
     void saveConfig(QSettings& cfg) override;
-
     void loadConfig(QSettings& cfg) override;
 
-signals:
-    void sigQueueChanged();
-
-protected:
-    void configureCache() override;
-
 private slots:
-    void slotQueueChanged();
-    void slotRequestFinished(QNetworkReply* reply);
     void slotLayersChanged(QListWidgetItem * item);
-
 
 private:
     struct layer_t;
@@ -72,36 +60,10 @@ private:
         QString script;
     };
 
-    struct rawHeaderItem_t
-    {
-        QString name;
-        QString value;
-    };
-
     QVector<layer_t> layers;
 
-    QString name;
-
     qint32 minZoomLevel = 1;
-
     qint32 maxZoomLevel = 21;
-
-    QList<rawHeaderItem_t> rawHeaderItems;
-
-    /// Mutex to control access to url queue
-    QMutex mutex {QMutex::Recursive};
-    /// a queue with all tile urls to request
-    QQueue<QString> urlQueue;
-    /// the tile cache
-    CDiskCache * diskCache = nullptr;
-    /// access manager to request tiles
-    QNetworkAccessManager * accessManager = nullptr;
-
-    QList<QString> urlPending;
-
-    bool lastRequest = false;
-
-    QTime timeLastUpdate;
 };
 
 #endif //CMAPTMS_H

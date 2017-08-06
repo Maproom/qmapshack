@@ -1508,7 +1508,7 @@ void CMapIMG::loadSubDiv(CFileExt &file, const subdiv_desc_t& subdiv, IGarminStr
 
 #ifdef DEBUG_SHOW_POLY_DATA
     qDebug() << "--- Subdivision" << subdiv.n << "---";
-    qDebug() << "adress:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
+    qDebug() << "address:" << hex << subdiv.rgn_start << "- " << subdiv.rgn_end;
     qDebug() << "points:            " << hex << opnt;
     qDebug() << "indexed points:    " << hex << oidx;
     qDebug() << "polylines:         " << hex << opline;

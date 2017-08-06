@@ -77,7 +77,7 @@ void CSingleInstanceProxy::slotNewConnection()
         return;
     }
 
-    // Each secondoray instance will send a QStringList with files to open
+    // Each secondary instance will send a QStringList with files to open
     // The list can be empty.
     if(socket->waitForReadyRead(3000))
     {

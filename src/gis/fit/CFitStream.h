@@ -67,7 +67,7 @@ public:
 
     /**
        return: gets the first message of the given type (xx_MESG_NUM) beginning reading at start of stream.
-       Sets the strema to the beginning again.
+       Sets the stream to the beginning again.
      */
     const CFitMessage& firstMesgOf(quint16 mesgNum);
 

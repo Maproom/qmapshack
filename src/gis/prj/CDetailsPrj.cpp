@@ -285,7 +285,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
     for(int i = 0; i < N; i++)
     {
         CGisItemTrk *trk = dynamic_cast<CGisItemTrk*>(prj.child(i));
-        if(nullptr != trk)
+        if(nullptr != trk && !trk->isHidden())
         {
             trks << trk;
             nItems++;
@@ -293,7 +293,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         }
 
         CGisItemRte *rte = dynamic_cast<CGisItemRte*>(prj.child(i));
-        if(nullptr != rte)
+        if(nullptr != rte && !rte->isHidden())
         {
             rtes << rte;
             nItems++;
@@ -301,7 +301,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         }
 
         CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(prj.child(i));
-        if(nullptr != wpt)
+        if(nullptr != wpt && !wpt->isHidden())
         {
             wpts << wpt;
             nItems++;
@@ -309,7 +309,7 @@ void CDetailsPrj::draw(QTextDocument& doc, bool printable)
         }
 
         CGisItemOvlArea *area = dynamic_cast<CGisItemOvlArea*>(prj.child(i));
-        if(nullptr != area)
+        if(nullptr != area && !area->isHidden())
         {
             areas << area;
             nItems++;

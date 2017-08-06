@@ -483,7 +483,7 @@ public:
        @param desc          the description string
        @param links         a list of links
        @param key           some key to be sent with the header links
-       @return The formated text ready to be used.
+       @return The formatted text ready to be used.
      */
     static QString createText(bool isReadOnly, const QString& desc, const QList<link_t>& links, const QString& key = "");
     /**

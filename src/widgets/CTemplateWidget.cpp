@@ -162,7 +162,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
     SETTINGS;
 
     delete widget;
-    if(idx == 0)
+    if(idx < 1)
     {
         return;
     }

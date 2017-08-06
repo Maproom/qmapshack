@@ -4812,107 +4812,117 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="164"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
         <source>Character</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="235"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="242"/>
         <source>easy hiking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="177"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="184"/>
         <source>climbing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
         <source>alpine</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="170"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="177"/>
         <source>large ascend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="242"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
         <source>long distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="187"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="194"/>
         <source>via ferrata</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="194"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
+        <source>hail/soft hail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="201"/>
         <source>Rating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="207"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="214"/>
         <source>Rating 5 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="212"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="219"/>
         <source>Rating 4 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="217"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="224"/>
         <source>Rating 3 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="222"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="229"/>
         <source>Rating 2 stars</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="227"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="234"/>
         <source>Rating 1 star</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="259"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
+        <source>aborted</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
         <source>Equipment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
         <source>ferrata gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
         <source>night gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
         <source>snow shoes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="272"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
         <source>climbing gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="265"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
         <source>ski</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
         <source>camping gear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary.ui" line="310"/>
+        <location filename="../templates/Hiking_Tour_Summary.ui" line="324"/>
         <source>Details</source>
         <translation type="unfinished">Detalle</translation>
     </message>

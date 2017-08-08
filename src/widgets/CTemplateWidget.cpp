@@ -185,46 +185,49 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         return;
     }
 
-    bool success = true;
+    bool success = false;
     const QString& filename = comboTemplates->itemData(idx).toString();
     QFile file(filename);
     if(!file.open(QFile::ReadOnly))
     {
         widget = new QLabel(tr("Failed to read template file %1.").arg(filename));
-        success = false;
     }
     else
     {
         QUiLoader loader;
         widget = loader.load(&file, this);
+        file.close();
+
         if(widget.isNull())
         {
             widget = new QLabel(loader.errorString());
-            success = false;
         }
-
-        // convert focus chain into a sortable property.
-        quint32 cnt     = 0;
-        QWidget * first = nextInFocusChain();
-        QWidget * next  = first;
-        do
+        else
         {
-            if(  (dynamic_cast<QCheckBox*>(next) != nullptr)
-                 || (dynamic_cast<QRadioButton*>(next) != nullptr)
-                 || (dynamic_cast<QComboBox*>(next) != nullptr)
-                 || (dynamic_cast<QLineEdit*>(next) != nullptr)
-                 || (dynamic_cast<QTextEdit*>(next) != nullptr)
-                 )
+            // convert focus chain into a sortable property.
+            quint32 cnt     = 0;
+            QWidget * first = nextInFocusChain();
+            QWidget * next  = first;
+            do
             {
-                next->setProperty("order", cnt++);
-            }
+                if(  (dynamic_cast<QCheckBox*>(next) != nullptr)
+                     || (dynamic_cast<QRadioButton*>(next) != nullptr)
+                     || (dynamic_cast<QComboBox*>(next) != nullptr)
+                     || (dynamic_cast<QLineEdit*>(next) != nullptr)
+                     || (dynamic_cast<QTextEdit*>(next) != nullptr)
+                     )
+                {
+                    next->setProperty("order", cnt++);
+                }
 
-            next = next->nextInFocusChain();
+                next = next->nextInFocusChain();
+            }
+            while(next != first);
+
+            success = true;
         }
-        while(next != first);
     }
 
-    file.close();
     layoutWidget->insertWidget(0,widget);
     pushPreview->setEnabled(success);
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(success);

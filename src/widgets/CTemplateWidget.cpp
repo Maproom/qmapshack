@@ -93,44 +93,63 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
     {
         const QString pre(str.isEmpty() ? s_("") : s_(", "));
 
-
         {
             const QCheckBox * obj = dynamic_cast<const QCheckBox*>(w);
-            if((obj != nullptr) && obj->isChecked())
+            if(obj != nullptr)
             {
-                str += pre + obj->text().replace(s_("&"),s_(""));
+                if(obj->isChecked())
+                {
+                    str += pre + obj->text().replace(s_("&"),s_(""));
+                }
+                continue;
             }
         }
 
         {
             const QRadioButton * obj = dynamic_cast<const QRadioButton*>(w);
-            if((obj != nullptr) && obj->isChecked())
+            if(obj != nullptr)
             {
-                str += pre + obj->text().replace(s_("&"),s_(""));
+                if(obj->isChecked())
+                {
+                    str += pre + obj->text().replace(s_("&"),s_(""));
+                }
+                continue;
             }
         }
 
         {
             const QComboBox * obj = dynamic_cast<const QComboBox*>(w);
-            if(obj != nullptr && !obj->currentText().isEmpty())
+            if(obj != nullptr)
             {
-                str += pre + obj->currentText();
+                if(!obj->currentText().isEmpty())
+                {
+                    str += pre + obj->currentText();
+                }
+                continue;
             }
         }
 
         {
             const QLineEdit * obj = dynamic_cast<const QLineEdit*>(w);
-            if((obj != nullptr) && !obj->text().simplified().isEmpty())
+            if(obj != nullptr)
             {
-                str += pre + obj->text();
+                if(!obj->text().simplified().isEmpty())
+                {
+                    str += pre + obj->text();
+                }
+                continue;
             }
         }
 
         {
             const QTextEdit * obj = dynamic_cast<const QTextEdit*>(w);
-            if((obj != nullptr) && !obj->toPlainText().simplified().isEmpty())
+            if(obj != nullptr)
             {
-                str += pre + obj->toHtml();
+                if(!obj->toPlainText().simplified().isEmpty())
+                {
+                    str += pre + obj->toHtml();
+                }
+                continue;
             }
         }
     }
@@ -158,10 +177,6 @@ void CTemplateWidget::slotSetPath()
 
 void CTemplateWidget::slotTemplateActivated(int idx)
 {
-    SETTINGS;
-
-
-
     delete widget;
     if(idx < 1)
     {
@@ -193,7 +208,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         QWidget * first = nextInFocusChain();
         QWidget * next  = first;
         do
-        {            
+        {
             if(  (dynamic_cast<QCheckBox*>(next) != nullptr)
                  || (dynamic_cast<QRadioButton*>(next) != nullptr)
                  || (dynamic_cast<QComboBox*>(next) != nullptr)
@@ -213,6 +228,8 @@ void CTemplateWidget::slotTemplateActivated(int idx)
     layoutWidget->insertWidget(0,widget);
     pushPreview->setEnabled(success);
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(success);
+
+    SETTINGS;
     cfg.setValue(s_("TextEditWidget/template"), filename);
 }
 

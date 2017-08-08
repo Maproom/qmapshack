@@ -94,7 +94,6 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
         const QString pre(str.isEmpty() ? s_("") : s_(", "));
 
 
-        if(w->objectName().startsWith(s_("check")))
         {
             const QCheckBox * obj = dynamic_cast<const QCheckBox*>(w);
             if((obj != nullptr) && obj->isChecked())
@@ -102,7 +101,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
                 str += pre + obj->text().replace(s_("&"),s_(""));
             }
         }
-        else if(w->objectName().startsWith(s_("radio")))
+
         {
             const QRadioButton * obj = dynamic_cast<const QRadioButton*>(w);
             if((obj != nullptr) && obj->isChecked())
@@ -110,7 +109,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
                 str += pre + obj->text().replace(s_("&"),s_(""));
             }
         }
-        else if(w->objectName().startsWith(s_("combo")))
+
         {
             const QComboBox * obj = dynamic_cast<const QComboBox*>(w);
             if(obj != nullptr && !obj->currentText().isEmpty())
@@ -118,7 +117,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
                 str += pre + obj->currentText();
             }
         }
-        else if(w->objectName().startsWith(s_("line")))
+
         {
             const QLineEdit * obj = dynamic_cast<const QLineEdit*>(w);
             if((obj != nullptr) && !obj->text().simplified().isEmpty())
@@ -126,7 +125,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
                 str += pre + obj->text();
             }
         }
-        else if(w->objectName().startsWith(s_("text")))
+
         {
             const QTextEdit * obj = dynamic_cast<const QTextEdit*>(w);
             if((obj != nullptr) && !obj->toPlainText().simplified().isEmpty())
@@ -187,13 +186,13 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         QWidget * first = nextInFocusChain();
         QWidget * next  = first;
         do
-        {
-            const QString& name = next->objectName();
-            if(name.startsWith(s_("check"))
-               ||name.startsWith(s_("radio"))
-               ||name.startsWith(s_("combo"))
-               ||name.startsWith(s_("line"))
-               ||name.startsWith(s_("text")))
+        {            
+            if(  (dynamic_cast<QCheckBox*>(next) != nullptr)
+                 || (dynamic_cast<QRadioButton*>(next) != nullptr)
+                 || (dynamic_cast<QComboBox*>(next) != nullptr)
+                 || (dynamic_cast<QLineEdit*>(next) != nullptr)
+                 || (dynamic_cast<QTextEdit*>(next) != nullptr)
+                 )
             {
                 next->setProperty("order", cnt++);
             }

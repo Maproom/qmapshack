@@ -160,26 +160,33 @@ void CTemplateWidget::slotTemplateActivated(int idx)
 {
     SETTINGS;
 
+
+
     delete widget;
     if(idx < 1)
     {
+        pushPreview->setEnabled(false);
+        buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
         return;
     }
 
+    bool success = true;
     const QString& filename = comboTemplates->itemData(idx).toString();
     QFile file(filename);
     if(!file.open(QFile::ReadOnly))
     {
-        QMessageBox::critical(this, tr("Failed..."), tr("Failed to read template file %1.").arg(filename));
-        comboTemplates->setCurrentIndex(0);
-        cfg.setValue(s_("TextEditWidget/template"), s_(""));
+        widget = new QLabel(tr("Failed to read template file %1.").arg(filename));
+        success = false;
     }
     else
     {
-        widget = QUiLoader().load(&file, this);
-        layoutWidget->insertWidget(0,widget);
-        file.close();
-        cfg.setValue(s_("TextEditWidget/template"), filename);
+        QUiLoader loader;
+        widget = loader.load(&file, this);
+        if(widget.isNull())
+        {
+            widget = new QLabel(loader.errorString());
+            success = false;
+        }
 
         // convert focus chain into a sortable property.
         quint32 cnt     = 0;
@@ -201,6 +208,12 @@ void CTemplateWidget::slotTemplateActivated(int idx)
         }
         while(next != first);
     }
+
+    file.close();
+    layoutWidget->insertWidget(0,widget);
+    pushPreview->setEnabled(success);
+    buttonBox->button(QDialogButtonBox::Ok)->setEnabled(success);
+    cfg.setValue(s_("TextEditWidget/template"), filename);
 }
 
 void CTemplateWidget::slotPreview()

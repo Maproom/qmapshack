@@ -20,8 +20,8 @@
 #ifndef IMAPONLINE_H
 #define IMAPONLINE_H
 #include "map/IMap.h"
-#include <QQueue>
 #include <QMutex>
+#include <QQueue>
 #include <QTime>
 
 class CDiskCache;
@@ -61,7 +61,8 @@ protected:
 
     static bool httpsCheck(const QString &url);
 
-    void registerHeaderItem(const QString &name, const QString &value) {
+    void registerHeaderItem(const QString &name, const QString &value)
+    {
         struct rawHeaderItem_t item;
         item.name  = name;
         item.value = value;

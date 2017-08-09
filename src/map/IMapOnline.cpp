@@ -18,23 +18,24 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
 #include "map/IMapOnline.h"
+#include "map/cache/CDiskCache.h"
 
-#include <QtNetwork>
 #include <QMessageBox>
+#include <QtNetwork>
 
 IMapOnline::IMapOnline(CMapDraw * parent)
-    : IMap(eFeatVisibility | eFeatTileCache, parent) {
-
+    : IMap(eFeatVisibility | eFeatTileCache, parent)
+{
     accessManager = new QNetworkAccessManager(parent->thread());
     connect(accessManager, &QNetworkAccessManager::finished, this, &IMapOnline::slotRequestFinished);
 
     connect(this, &IMapOnline::sigQueueChanged, this, &IMapOnline::slotQueueChanged);
 }
 
-bool IMapOnline::httpsCheck(const QString &url) {
+bool IMapOnline::httpsCheck(const QString &url)
+{
     if(url.toLower().startsWith("https") && !QSslSocket::supportsSsl())
     {
         QString msg = tr(

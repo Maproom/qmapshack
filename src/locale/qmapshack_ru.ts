@@ -2001,7 +2001,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
         <source>Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="133"/>
@@ -3540,7 +3540,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="415"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
-        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервер:&lt;br/&gt;%1</translation>
+        <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервера:&lt;br/&gt;%1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="405"/>
@@ -4632,37 +4632,37 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>choose one...</source>
-        <translation type="unfinished"></translation>
+        <translation>выбрать один...</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Hiking Tour Summary (built-in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сводка пеших экскурсий (встроенная)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="141"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="151"/>
         <source>Template path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Путь к шаблонам...</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
         <source>Failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось...</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
         <source>Failed to read template file %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось читать шаблон %1.</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="215"/>
         <source>Preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр...</translation>
     </message>
 </context>
 <context>
@@ -4736,7 +4736,7 @@ line %2, column %3:
     <message>
         <location filename="../helpers/CWptIconDialog.cpp" line="161"/>
         <source>Path to user icons...</source>
-        <translation>Путь к пользовательскими пиктограммами...</translation>
+        <translation>Путь к пользовательским пиктограммам...</translation>
     </message>
 </context>
 <context>
@@ -4744,187 +4744,187 @@ line %2, column %3:
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
         <source>Participants</source>
-        <translation type="unfinished"></translation>
+        <translation>Участники</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Погода</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
         <source>rain</source>
-        <translation type="unfinished"></translation>
+        <translation>дождь</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
         <source>sunny</source>
-        <translation type="unfinished"></translation>
+        <translation>солнце</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
         <source>snow</source>
-        <translation type="unfinished"></translation>
+        <translation>снег</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
         <source>clouds</source>
-        <translation type="unfinished"></translation>
+        <translation>облака</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="128"/>
         <source>windy</source>
-        <translation type="unfinished"></translation>
+        <translation>ветер</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
         <source>hot</source>
-        <translation type="unfinished"></translation>
+        <translation>жарко</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
         <source>warm</source>
-        <translation type="unfinished"></translation>
+        <translation>тепло</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
         <source>cold</source>
-        <translation type="unfinished"></translation>
+        <translation>холодно</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
         <source>freezing</source>
-        <translation type="unfinished"></translation>
+        <translation>заморозка</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
         <source>foggy</source>
-        <translation type="unfinished"></translation>
+        <translation>туман</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
         <source>humid</source>
-        <translation type="unfinished"></translation>
+        <translation>влажно</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Характер</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="242"/>
         <source>easy hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>легкий поход</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="184"/>
         <source>climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>альпинизм</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
         <source>alpine</source>
-        <translation type="unfinished"></translation>
+        <translation>высокогорно</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="177"/>
         <source>large ascend</source>
-        <translation type="unfinished"></translation>
+        <translation>большой подъем</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
         <source>long distance</source>
-        <translation type="unfinished"></translation>
+        <translation>длинная дистанция</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="194"/>
         <source>via ferrata</source>
-        <translation type="unfinished"></translation>
+        <translation>феррата</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished"></translation>
+        <translation>град</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="201"/>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="214"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг 5 звезд</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="219"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг 4 звезды</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="224"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг 3 звезды</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="229"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг 2 звезды</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="234"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished"></translation>
+        <translation>Рейтинг 1 звезда</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>прервано</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
         <source>Equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Экипировка</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
         <source>ferrata gear</source>
-        <translation type="unfinished"></translation>
+        <translation>принадлежности для ферраты</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
         <source>night gear</source>
-        <translation type="unfinished"></translation>
+        <translation>ночные принадлежности</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
         <source>snow shoes</source>
-        <translation type="unfinished"></translation>
+        <translation>снежная обувь</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
         <source>climbing gear</source>
-        <translation type="unfinished"></translation>
+        <translation>альпинистские принадлежности</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
         <source>ski</source>
-        <translation type="unfinished"></translation>
+        <translation>лыжи</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
         <source>camping gear</source>
-        <translation type="unfinished"></translation>
+        <translation>походные принадлежности</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="324"/>
         <source>Details</source>
-        <translation type="unfinished">Деталь</translation>
+        <translation>Деталь</translation>
     </message>
 </context>
 <context>
@@ -6200,7 +6200,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="105"/>
         <source>Preview</source>
-        <translation>Предпросмотр</translation>
+        <translation>Просмотр</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterInterpolateElevation.ui" line="112"/>
@@ -7234,12 +7234,12 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="854"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Во весь экран</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="857"/>
         <source>F11</source>
-        <translation type="unfinished">F11</translation>
+        <translation>F11</translation>
     </message>
 </context>
 <context>
@@ -9163,27 +9163,27 @@ or
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="14"/>
         <source>Insert Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить шаблон...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="32"/>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблоны</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="42"/>
         <source>Select a path with your own templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать путь собственных шаблонов.</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="45"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="77"/>
         <source>Preview</source>
-        <translation type="unfinished">Предпросмотр</translation>
+        <translation>Просмотр</translation>
     </message>
 </context>
 <context>
@@ -9246,7 +9246,7 @@ or
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
         <source>Templ.</source>
-        <translation type="unfinished"></translation>
+        <translation>Шаблон</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="120"/>
@@ -9460,12 +9460,12 @@ or
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="577"/>
         <source>Insert From Template</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить из шаблона</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="580"/>
         <source>Create text from template.</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать текст из шаблона.</translation>
     </message>
 </context>
 <context>
@@ -9550,7 +9550,7 @@ or
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="23"/>
         <source>Toolbar is visible in Fullscreen-mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Панель инструментов видна в полноэкранном режиме</translation>
     </message>
 </context>
 <context>

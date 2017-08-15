@@ -19,6 +19,29 @@
 #ifndef FIT_PROFILE_H
 #define FIT_PROFILE_H
 
+typedef enum
+{
+    eLocationName = 0,
+    eLocationPositionLat = 1,
+    eLocationPositionLong = 2,
+    eLocationSymbol = 3,
+    eLocationAltitude = 4,
+    eLocation5 = 5,
+    eLocationComment = 6,
+    eLocationTimestamp = 253,
+    eLocationMessageIndex = 254
+} message_location_e;
+
+typedef enum
+{
+    eMesgNumLocation = 29
+} ext_mesg_num_e;
+
+typedef enum
+{
+    eFileLocation = 8
+} ext_file_e;
+
 // ----------- start generated code -----------
 typedef enum
 {

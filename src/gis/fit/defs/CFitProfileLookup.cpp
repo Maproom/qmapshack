@@ -1566,6 +1566,21 @@ void initDeveloperDataId(QMap<quint16, CFitProfile*>& profiles)
 
 // ----------- end generated code -----------
 
+void initExtProfiles(QMap<quint16, CFitProfile*>& profiles)
+{
+    CFitProfile* f = new CFitProfile("location", eMesgNumLocation);
+    f->addField("name", fitStringType, eLocationName, 0, 0, "");
+    f->addField("timestamp", fitUint32Type, eLocationTimestamp, 0, 0, "s");
+    f->addField("index", fitUint16Type, eLocationMessageIndex, 0, 0, "");
+    f->addField("position_lat", fitSint32Type, eLocationPositionLat, 0, 0, "semicircles");
+    f->addField("position_long", fitSint32Type, eLocationPositionLong, 0, 0, "semicircles");
+    f->addField("symbol", fitUint32Type, eLocationSymbol, 0, 0, "");
+    f->addField("altitude", fitUint16Type, eLocationAltitude, 5, 500, "m");
+    f->addField("???", fitUint16Type, eLocation5, 0, 0, "");
+    f->addField("comment", fitStringType, eLocationComment, 0, 0, "");
+    profiles.insert(eMesgNumLocation, f);
+}
+
 
 void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
 {
@@ -1644,6 +1659,8 @@ void initProfiles(QMap<quint16, CFitProfile*>& allProfiles)
     initExdDataConceptConfiguration(allProfiles);
     initFieldDescription(allProfiles);
     initDeveloperDataId(allProfiles);
+
+    initExtProfiles(allProfiles);
 
     // invalid profile
     allProfiles.insert(fitGlobalMesgNrInvalid, new CFitProfile());

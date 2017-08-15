@@ -130,6 +130,15 @@ void CFitProject::createGisItems(QFile& file)
     // fit does not have routes
     // new CGisItemRte(in, this);
 
+    // Locations file containing waypoints
+    if (mesg.getFieldValue(eFileIdType).toUInt() ==  eFileLocation)
+    {
+        while(in.nextMesgOf(eMesgNumLocation).isValid())
+        {
+            CGisItemWpt* wpt = new CGisItemWpt(in, this);
+        }
+    }
+
     in.reset();
     // course point is a message of a course file. Thus, wpt is only for a course file. There might be n wpt per fit file
     while(in.nextMesgOf(eMesgNumCoursePoint).isValid())

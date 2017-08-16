@@ -95,6 +95,10 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
             // courses
             pathCourses = xmlPath.toElement().text();
         }
+        else if(name == "FIT_TYPE_8")
+        {
+            pathLocations = xmlPath.toElement().text();
+        }
         else if(name == "Adventures")
         {
             pathAdventures = xmlPath.toElement().text();
@@ -106,7 +110,9 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
     qDebug() << dir.absoluteFilePath(pathSpoilers);
     qDebug() << dir.absoluteFilePath(pathActivities);
     qDebug() << dir.absoluteFilePath(pathCourses);
+    qDebug() << dir.absoluteFilePath(pathLocations);
     qDebug() << dir.absoluteFilePath(pathAdventures);
+
 
     if(!dir.exists(pathGpx))
     {
@@ -137,6 +143,7 @@ CDeviceGarmin::CDeviceGarmin(const QString &path, const QString &key, const QStr
 
     this->createProjectsFromFiles(pathActivities, "fit");
     this->createProjectsFromFiles(pathCourses, "fit");
+    this->createProjectsFromFiles(pathLocations, "fit");
 }
 
 void CDeviceGarmin::createProjectsFromFiles(QString subdirecoty, QString fileEnding)

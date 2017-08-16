@@ -48,6 +48,7 @@ private:
     QString pathSpoilers      = "Garmin/GeocachePhotos";
     QString pathActivities    = "Garmin/Activities";
     QString pathCourses       = "Garmin/Courses";
+    QString pathLocations     = "Garmin/Locations";
     QString pathAdventures; // no default
 
     int cntImages = 0;

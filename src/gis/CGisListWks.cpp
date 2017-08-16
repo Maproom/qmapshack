@@ -1543,7 +1543,10 @@ void CGisListWks::slotAddEmptyProject()
     QString key, name;
     IGisProject::type_e type;
     CSelectProjectDialog dlg(key, name, type, nullptr);
-    dlg.exec();
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return;
+    }
     if(name.isEmpty() && (type != IGisProject::eTypeDb))
     {
         return;

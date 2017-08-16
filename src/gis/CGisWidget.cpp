@@ -207,7 +207,10 @@ IGisProject * CGisWidget::selectProject()
     IGisProject::type_e type = IGisProject::eTypeQms;
 
     CSelectProjectDialog dlg(key, name, type, treeWks);
-    dlg.exec();
+    if(dlg.exec() == QDialog::Rejected)
+    {
+        return nullptr;
+    }
 
     IGisProject *project = nullptr;
     if(!key.isEmpty())

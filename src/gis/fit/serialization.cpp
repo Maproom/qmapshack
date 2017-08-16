@@ -158,7 +158,10 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
         wpt.lat = toDegree(mesg.getFieldValue(eCoursePointPositionLat).toInt());
     }
 
-    wpt.sym = wptIconNames[mesg.getFieldValue(eCoursePointType).toInt()];
+    if (mesg.isFieldValueValid(eCoursePointType))
+    {
+        wpt.sym = wptIconNames[mesg.getFieldValue(eCoursePointType).toInt()];
+    }
 }
 
 

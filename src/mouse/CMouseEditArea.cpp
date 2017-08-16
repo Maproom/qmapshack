@@ -74,9 +74,7 @@ void CMouseEditArea::slotCopyToOrig()
 }
 
 void CMouseEditArea::slotCopyToNew()
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-
+{   
     canvas->reportStatus(key.item,"");
 
     if(points.size() < 3)
@@ -98,7 +96,10 @@ void CMouseEditArea::slotCopyToNew()
         return;
     }
 
-    new CGisItemOvlArea(points, name, project, NOIDX);
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+        new CGisItemOvlArea(points, name, project, NOIDX);
+    }
 
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

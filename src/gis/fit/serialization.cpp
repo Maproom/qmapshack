@@ -135,47 +135,11 @@ static void readFitLocation(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 }
 
 
-QMap<int, QString> wptIconNameMap;
+QString wptIconNames[26] { "Default", "Summit", "Valley", "Water", "Food", "Danger", "Left", "Right", "Straight",
+                          "FirstAid", "4thCategory", "3rdCategory", "2ndCategory", "1stCategory", "HorsCategory",
+                          "Sprint", "LeftFork", "RightFork", "MiddleFork", "SlightLeft", "SharpLeft",
+                          "SlightRight", "SharpRight", "UTurn", "Start", "End" };
 
-static QString iconForCoursePoint(int coursePoint)
-{
-    if(wptIconNameMap.size() == 0)
-    {
-        // see WptIcons.initWptIcons() for all values
-        wptIconNameMap[eCoursePointGeneric] = "Default";
-        wptIconNameMap[eCoursePointSummit] = "Summit";
-        wptIconNameMap[eCoursePointValley] = "Valley";
-        wptIconNameMap[eCoursePointWater] = "Water";
-        wptIconNameMap[eCoursePointFood] = "Food";
-        wptIconNameMap[eCoursePointDanger] = "Danger";
-        wptIconNameMap[eCoursePointLeft] = "Left";
-        wptIconNameMap[eCoursePointRight] = "Right";
-        wptIconNameMap[eCoursePointStraight] = "Straight";
-        wptIconNameMap[eCoursePointFirstAid] = "FirstAid";
-        wptIconNameMap[eCoursePointFourthCategory] = "4thCategory";
-        wptIconNameMap[eCoursePointThirdCategory] = "3rdCategory";
-        wptIconNameMap[eCoursePointSecondCategory] = "2ndCategory";
-        wptIconNameMap[eCoursePointFirstCategory] = "1stCategory";
-        wptIconNameMap[eCoursePointHorsCategory] = "HorsCategory";
-
-        wptIconNameMap[eCoursePointLeftFork] = "Default";
-        wptIconNameMap[eCoursePointRightFork] = "Default";
-        wptIconNameMap[eCoursePointMiddleFork] = "Default";
-        wptIconNameMap[eCoursePointSlightLeft] = "Default";
-        wptIconNameMap[eCoursePointSharpLeft] = "Default";
-        wptIconNameMap[eCoursePointSlightRight] = "Default";
-        wptIconNameMap[eCoursePointSharpRight] = "Default";
-        wptIconNameMap[eCoursePointUTurn] = "Default";
-        wptIconNameMap[eCoursePointSegmentStart] = "Default";
-        wptIconNameMap[eCoursePointSegmentEnd] = "Default";
-    }
-
-    if (wptIconNameMap.contains(coursePoint))
-    {
-        return wptIconNameMap[coursePoint];
-    }
-    return "Default";
-}
 
 static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 {
@@ -194,7 +158,7 @@ static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
         wpt.lat = toDegree(mesg.getFieldValue(eCoursePointPositionLat).toInt());
     }
 
-    wpt.sym = iconForCoursePoint(mesg.getFieldValue(eCoursePointType).toInt());
+    wpt.sym = wptIconNames[mesg.getFieldValue(eCoursePointType).toInt()];
 }
 
 

@@ -71,6 +71,16 @@ void initWptIcons()
     wptIcons["Summit"]              = icon_t("://icons/waypoints/32x32/Summit.png", 16, 16);
     wptIcons["Valley"]              = icon_t("://icons/waypoints/32x32/Valley.png", 16, 16);
     wptIcons["Water"]               = icon_t("://icons/waypoints/32x32/Water.png", 16, 16);
+    wptIcons["LeftFork"]            = icon_t("://icons/waypoints/32x32/LeftFork.png", 16, 16);
+    wptIcons["RightFork"]           = icon_t("://icons/waypoints/32x32/RightFork.png", 16, 16);
+    wptIcons["MiddleFork"]          = icon_t("://icons/waypoints/32x32/MiddleFork.png", 16, 16);
+    wptIcons["SlightLeft"]          = icon_t("://icons/waypoints/32x32/SlightLeft.png", 16, 16);
+    wptIcons["SharpLeft"]           = icon_t("://icons/waypoints/32x32/SharpLeft.png", 16, 16);
+    wptIcons["SlightRight"]         = icon_t("://icons/waypoints/32x32/SlightRight.png", 16, 16);
+    wptIcons["SharpRight"]          = icon_t("://icons/waypoints/32x32/SharpRight.png", 16, 16);
+    wptIcons["UTurn"]               = icon_t("://icons/waypoints/32x32/UTurn.png", 16, 16);
+    wptIcons["Start"]               = icon_t("://icons/waypoints/32x32/Start.png", 16, 16);
+    wptIcons["End"]                 = icon_t("://icons/waypoints/32x32/End.png", 16, 16);
 
     setWptIconByName("Traditional Cache", "://icons/cache/32x32/traditional.png");
     setWptIconByName("Multi-cache", "://icons/cache/32x32/multi.png");

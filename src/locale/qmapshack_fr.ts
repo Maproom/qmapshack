@@ -972,7 +972,7 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="281"/>
+        <location filename="../gis/fit/serialization.cpp" line="282"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Le fichier FIT %1 ne contient pas de donnée GPS.</translation>
     </message>

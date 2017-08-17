@@ -50,8 +50,9 @@ public:
             ,eActShip   = 0x02000000
             ,eActAero   = 0x01000000
             ,eActSki    = 0x00800000
-            ,eActMask   = 0xFF800000    ///< mask for activity flags
-            ,eActMaxNum = 9             ///< maximum number of activity flags. this is defined by the mask
+            ,eActTrain  = 0x00400000
+            ,eActMask   = 0xFFC00000    ///< mask for activity flags
+            ,eActMaxNum = 10            ///< maximum number of activity flags. this is defined by the mask
         };
 
         enum valid_e

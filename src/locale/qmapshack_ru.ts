@@ -62,14 +62,22 @@
         <translation>Лыжи/зима</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="267"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="303"/>
+        <source>No Act.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
+        <source>Total</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="337"/>
         <source>Ascent:</source>
         <translation>Подъем:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="269"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="329"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="361"/>
         <source>Descent:</source>
         <translation>Спуск:</translation>
     </message>
@@ -79,37 +87,37 @@
         <translation>Аэронавтика</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="265"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="111"/>
+        <source>Public Transport</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="313"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="271"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="340"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="385"/>
         <source>Speed Moving:</source>
         <translation>Скорость движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="273"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="351"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="409"/>
         <source>Speed Total:</source>
         <translation>Общая скорость:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="275"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="362"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="433"/>
         <source>Time Moving:</source>
         <translation>Время движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="277"/>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="373"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="457"/>
         <source>Time Total:</source>
         <translation>Общее время:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="414"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="511"/>
         <source>None</source>
         <translation>Никакое</translation>
     </message>

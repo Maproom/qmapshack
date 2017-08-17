@@ -74,7 +74,7 @@ void CMouseEditArea::slotCopyToOrig()
 }
 
 void CMouseEditArea::slotCopyToNew()
-{   
+{
     canvas->reportStatus(key.item,"");
 
     if(points.size() < 3)

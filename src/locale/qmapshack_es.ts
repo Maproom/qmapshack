@@ -610,7 +610,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CDeviceGarmin</name>
     <message>
-        <location filename="../device/CDeviceGarmin.cpp" line="265"/>
+        <location filename="../device/CDeviceGarmin.cpp" line="272"/>
         <source>Picture%1</source>
         <translation>foto%1</translation>
     </message>
@@ -972,7 +972,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="246"/>
+        <location filename="../gis/fit/serialization.cpp" line="281"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Archivo FIT %1 no contiene datos GPS.</translation>
     </message>
@@ -1681,8 +1681,8 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="652"/>
-        <location filename="../gis/CGisListWks.cpp" line="1646"/>
-        <location filename="../gis/CGisListWks.cpp" line="1684"/>
+        <location filename="../gis/CGisListWks.cpp" line="1649"/>
+        <location filename="../gis/CGisListWks.cpp" line="1687"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
@@ -1801,22 +1801,22 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>El proyecto &quot;%1&quot; ya está en el area de trabajo.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="554"/>
+        <location filename="../gis/CGisWidget.cpp" line="557"/>
         <source>Copy items...</source>
         <translation>Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="573"/>
+        <location filename="../gis/CGisWidget.cpp" line="576"/>
         <source>Change waypoint symbols.</source>
         <translation>Cambiar símbolos de waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Cut Track...</source>
         <translation>Dividir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Desea borrar el track original?</translation>
     </message>
@@ -2860,19 +2860,18 @@ Volver al TYP interno</translation>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
-        <location filename="../map/CMapTMS.cpp" line="136"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
         <source>Failed to open %1</source>
         <translation>Fallo al abrir %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -2881,19 +2880,9 @@ línea %2, columna %3.
  %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="115"/>
+        <location filename="../map/CMapTMS.cpp" line="116"/>
         <source>Layer %1</source>
         <translation>Capa %1</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="130"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; Para binarios. Tienes que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="299"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 teselas pendientes&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -2954,8 +2943,7 @@ línea %2, columna %3.
         <location filename="../map/CMapWMTS.cpp" line="53"/>
         <location filename="../map/CMapWMTS.cpp" line="63"/>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
-        <location filename="../map/CMapWMTS.cpp" line="157"/>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
@@ -2986,19 +2974,9 @@ Estructura desconocida.</translation>
         <translation>Servicio inesperado. &apos;* WMTS 1.0.0&apos; es el esperado. &apos;%1 %2&apos; esta cargado</translation>
     </message>
     <message>
-        <location filename="../map/CMapWMTS.cpp" line="151"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; Para binarios. Tienes que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>No georeference information found.</source>
         <translation>No se encontró información de georreferenciación.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="413"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 teselas pendientes&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3015,7 +2993,7 @@ Estructura desconocida.</translation>
         <translation>&lt;b&gt;Editar área&lt;/b&gt;&lt;br/&gt;Seleccione una función y un modo de enrutamiento a través de los botones de herramientas. A continuación, seleccione un punto de la línea. Sólo se pueden cambiar los puntos marcados con un cuadrado grande. Los que tienen un punto negro son subpuntos introducidos por el enrutamiento.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="94"/>
         <source>area</source>
         <translation>área</translation>
     </message>
@@ -3034,7 +3012,7 @@ Estructura desconocida.</translation>
         <translation>&lt;/b&gt;Editar puntos de ruta&lt;br/&gt;Seleccione una función y un modo de enrutamiento a través de los botones de herramientas. A continuación, seleccione un punto de la línea. Sólo se pueden cambiar los puntos marcados con un cuadrado grande. Los que tienen un punto negro son subpuntos introducidos por el enrutamiento.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="105"/>
         <source>route</source>
         <translation>Ruta</translation>
     </message>
@@ -3063,7 +3041,7 @@ Estructura desconocida.</translation>
         <translation>Esto sustituirá todos los datos del original con una simple línea de coordenadas. Todos los demás datos se perderán definitivamente.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4640,27 +4618,22 @@ línea %2, columna %3.
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="141"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="151"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
-        <source>Failed...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="215"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7292,6 +7265,24 @@ No quiero leer la documentación!</translation>
         <location filename="../map/IMapList.ui" line="182"/>
         <source>Reload Maps</source>
         <translation>Recargar mapas</translation>
+    </message>
+</context>
+<context>
+    <name>IMapOnline</name>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="41"/>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
+        <translation type="unfinished">Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; Para binarios. Tienes que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="47"/>
+        <source>Error...</source>
+        <translation type="unfinished">Error...</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="98"/>
+        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
+        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 teselas pendientes&lt;br/&gt;</translation>
     </message>
 </context>
 <context>

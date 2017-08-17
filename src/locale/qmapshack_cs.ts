@@ -610,7 +610,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CDeviceGarmin</name>
     <message>
-        <location filename="../device/CDeviceGarmin.cpp" line="265"/>
+        <location filename="../device/CDeviceGarmin.cpp" line="272"/>
         <source>Picture%1</source>
         <translation>Obrázek %1</translation>
     </message>
@@ -972,7 +972,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="246"/>
+        <location filename="../gis/fit/serialization.cpp" line="281"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Soubor FIT %1 neobsahuje žádná data GPS.</translation>
     </message>
@@ -1681,8 +1681,8 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="652"/>
-        <location filename="../gis/CGisListWks.cpp" line="1646"/>
-        <location filename="../gis/CGisListWks.cpp" line="1684"/>
+        <location filename="../gis/CGisListWks.cpp" line="1649"/>
+        <location filename="../gis/CGisListWks.cpp" line="1687"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
@@ -1801,22 +1801,22 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Projekt &quot;%1&quot; je již náhrán do pracovního prostoru.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="554"/>
+        <location filename="../gis/CGisWidget.cpp" line="557"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="573"/>
+        <location filename="../gis/CGisWidget.cpp" line="576"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Cut Track...</source>
         <translation>Rozkrojit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Do you want to delete the original track?</source>
         <translation>Opravdu chcete smazat původní stopu?</translation>
     </message>
@@ -2857,19 +2857,18 @@ Fall back to internal types.</source>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
-        <location filename="../map/CMapTMS.cpp" line="136"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Error...</source>
         <translation>Chyba...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
         <source>Failed to open %1</source>
         <translation>Nepodařilo se otevřít %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -2878,19 +2877,9 @@ line %2, column %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="115"/>
+        <location filename="../map/CMapTMS.cpp" line="116"/>
         <source>Layer %1</source>
         <translation>Vrstva %1</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="130"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Tato mapa vyžaduje podporu pro OpenSSL. Nicméně kvůli právním omezením v některých zemích není OpenSSL k QMapShack přibaleno. Můžete se podívat na &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;stránky OpenSSL&lt;/a&gt;, kde najdete spustitelné soubory. Musíte zkopírovat libeay32.dll a ssleay32.dll do adresáře s programem QMapShack.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="299"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -2952,8 +2941,7 @@ line %2, column %3:
         <location filename="../map/CMapWMTS.cpp" line="53"/>
         <location filename="../map/CMapWMTS.cpp" line="63"/>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
-        <location filename="../map/CMapWMTS.cpp" line="157"/>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>Error...</source>
         <translation>Chyba...</translation>
     </message>
@@ -2984,19 +2972,9 @@ Neznámá stavba.</translation>
         <translation>Neočekávaná služba. Očekáváno &apos;* WMTS 1.0.0&apos;. Přečteno &apos;%1 %2&apos;.</translation>
     </message>
     <message>
-        <location filename="../map/CMapWMTS.cpp" line="151"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Tato mapa vyžaduje podporu pro OpenSSL. Nicméně kvůli právním omezením v některých zemích není OpenSSL k QMapShack přibaleno. Můžete se podívat na &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;stránky OpenSSL&lt;/a&gt;, kde najdete spustitelné soubory. Musíte zkopírovat libeay32.dll a ssleay32.dll do adresáře s programem QMapShack.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>No georeference information found.</source>
         <translation>Nenalezeny žádné údaje o soustavě souřadnic.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="413"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3013,7 +2991,7 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit oblast&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="94"/>
         <source>area</source>
         <translation>Oblast</translation>
     </message>
@@ -3032,7 +3010,7 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="105"/>
         <source>route</source>
         <translation>Cesta</translation>
     </message>
@@ -3061,7 +3039,7 @@ Neznámá stavba.</translation>
         <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
         <source>track</source>
         <translation>Stopa</translation>
     </message>
@@ -4638,27 +4616,22 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="141"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="151"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
-        <source>Failed...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="215"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7288,6 +7261,24 @@ Nechce se mi číst dokumentaci!</translation>
         <location filename="../map/IMapList.ui" line="182"/>
         <source>Reload Maps</source>
         <translation>Nahrát mapy znovu</translation>
+    </message>
+</context>
+<context>
+    <name>IMapOnline</name>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="41"/>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
+        <translation type="unfinished">Tato mapa vyžaduje podporu pro OpenSSL. Nicméně kvůli právním omezením v některých zemích není OpenSSL k QMapShack přibaleno. Můžete se podívat na &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;stránky OpenSSL&lt;/a&gt;, kde najdete spustitelné soubory. Musíte zkopírovat libeay32.dll a ssleay32.dll do adresáře s programem QMapShack.</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="47"/>
+        <source>Error...</source>
+        <translation type="unfinished">Chyba...</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="98"/>
+        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
+        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 dlaždic čeká&lt;br/&gt;</translation>
     </message>
 </context>
 <context>

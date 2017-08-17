@@ -517,7 +517,17 @@
         <file>icons/waypoints/32x32/Straight.png</file>
         <file>icons/waypoints/32x32/Summit.png</file>
         <file>icons/waypoints/32x32/Valley.png</file>
-        <file>icons/waypoints/32x32/Water.png</file>
+        <file>icons/waypoints/32x32/Water.png</file>       
+        <file>icons/waypoints/32x32/LeftFork.png</file>
+        <file>icons/waypoints/32x32/RightFork.png</file>
+        <file>icons/waypoints/32x32/MiddleFork.png</file>
+        <file>icons/waypoints/32x32/SlightLeft.png</file>
+        <file>icons/waypoints/32x32/SharpLeft.png</file>
+        <file>icons/waypoints/32x32/SlightRight.png</file>
+        <file>icons/waypoints/32x32/SharpRight.png</file>
+        <file>icons/waypoints/32x32/UTurn.png</file>
+        <file>icons/waypoints/32x32/Start.png</file>
+        <file>icons/waypoints/32x32/End.png</file>
         <file>cursors/cursorArrow.png</file>
         <file>cursors/cursorMove.png</file>
         <file>cursors/cursorPointMove.png</file>

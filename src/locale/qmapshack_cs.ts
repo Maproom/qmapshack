@@ -972,7 +972,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="281"/>
+        <location filename="../gis/fit/serialization.cpp" line="282"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Soubor FIT %1 neobsahuje žádná data GPS.</translation>
     </message>

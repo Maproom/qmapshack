@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -972,7 +972,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="281"/>
+        <location filename="../gis/fit/serialization.cpp" line="282"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>FIT Dekodierfehler: Datei %1 enthält keine GPS Daten.</translation>
     </message>

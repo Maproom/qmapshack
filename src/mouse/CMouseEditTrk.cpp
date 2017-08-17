@@ -90,8 +90,6 @@ void CMouseEditTrk::slotCopyToOrig()
 
 void CMouseEditTrk::slotCopyToNew()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
-
     canvas->reportStatus(key.item,"");
 
     if(points.size() < 2)
@@ -117,8 +115,10 @@ void CMouseEditTrk::slotCopyToNew()
 
     CMainWindow::self().getElevationAt(points);
 
-    new CGisItemTrk(points, name, project, NOIDX);
-
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+        new CGisItemTrk(points, name, project, NOIDX);
+    }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }

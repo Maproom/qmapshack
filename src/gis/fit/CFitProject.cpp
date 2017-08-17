@@ -135,7 +135,7 @@ void CFitProject::createGisItems(QFile& file)
     {
         while(in.nextMesgOf(eMesgNumLocation).isValid())
         {
-            CGisItemWpt* wpt = new CGisItemWpt(in, this);
+            new CGisItemWpt(in, this);
         }
     }
 

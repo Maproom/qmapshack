@@ -69,7 +69,7 @@ function(cxx_add_flag_if_supported flag)
 endfunction(cxx_add_flag_if_supported)
 
 if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++ -lm")
 endif(UNIX)
 
 if (APPLE)

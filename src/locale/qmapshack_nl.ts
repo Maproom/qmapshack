@@ -610,7 +610,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CDeviceGarmin</name>
     <message>
-        <location filename="../device/CDeviceGarmin.cpp" line="265"/>
+        <location filename="../device/CDeviceGarmin.cpp" line="272"/>
         <source>Picture%1</source>
         <translation>Afbeelding%1</translation>
     </message>
@@ -972,7 +972,7 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="246"/>
+        <location filename="../gis/fit/serialization.cpp" line="281"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1752,8 +1752,8 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="652"/>
-        <location filename="../gis/CGisListWks.cpp" line="1646"/>
-        <location filename="../gis/CGisListWks.cpp" line="1684"/>
+        <location filename="../gis/CGisListWks.cpp" line="1649"/>
+        <location filename="../gis/CGisListWks.cpp" line="1687"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Updaten GPS&lt;/b&gt;&lt;p&gt;Updaten %1&lt;br/&gt;Moment geduld...&lt;/p&gt;</translation>
     </message>
@@ -1801,22 +1801,22 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation>Het project &quot;%1&quot; is al geopend.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="554"/>
+        <location filename="../gis/CGisWidget.cpp" line="557"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopieer elementen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="573"/>
+        <location filename="../gis/CGisWidget.cpp" line="576"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Cut Track...</source>
         <translation>Track knippen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="702"/>
+        <location filename="../gis/CGisWidget.cpp" line="705"/>
         <source>Do you want to delete the original track?</source>
         <translation>Moet de orginele track verwijderd worden?</translation>
     </message>
@@ -2857,19 +2857,18 @@ Fall back to internal types.</source>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
-        <location filename="../map/CMapTMS.cpp" line="136"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="67"/>
+        <location filename="../map/CMapTMS.cpp" line="68"/>
         <source>Failed to open %1</source>
         <translation>Openen mislukt-%1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="77"/>
+        <location filename="../map/CMapTMS.cpp" line="78"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -2878,19 +2877,9 @@ lijn %2, kolom %3:
  %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="115"/>
+        <location filename="../map/CMapTMS.cpp" line="116"/>
         <source>Layer %1</source>
         <translation>Laag-%1</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="130"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; voor binaries. Er kan wel libeay32.dll en ssleay32.dll in de QMapShack map gekopieerd worden.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapTMS.cpp" line="299"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -2952,8 +2941,7 @@ lijn %2, kolom %3:
         <location filename="../map/CMapWMTS.cpp" line="53"/>
         <location filename="../map/CMapWMTS.cpp" line="63"/>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
-        <location filename="../map/CMapWMTS.cpp" line="157"/>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>Error...</source>
         <translation>Fout...</translation>
     </message>
@@ -2984,19 +2972,9 @@ Onbekende structuur.</translation>
         <translation>Onverwachte service. &apos;*WMTS 1.0.0&apos; is verwacht. &apos;%1 %2&apos; is gelezen.</translation>
     </message>
     <message>
-        <location filename="../map/CMapWMTS.cpp" line="151"/>
-        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation>Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; voor binaries. Er kan wel libeay32.dll en ssleay32.dll in de QMapShack map gekopieerd worden.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="217"/>
+        <location filename="../map/CMapWMTS.cpp" line="209"/>
         <source>No georeference information found.</source>
         <translation>Geen geografische gegevens gevonden.</translation>
-    </message>
-    <message>
-        <location filename="../map/CMapWMTS.cpp" line="413"/>
-        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -3013,7 +2991,7 @@ Onbekende structuur.</translation>
         <translation>&lt;b&gt;Bewerk gebied&lt;/b&gt;&lt;br/&gt;Selecteer een functie en een routeoptie via de gereedschapknoppen. Selecteer dan een punt op de lijn. Alleen zwarte vierkante punten kunnen gewijzigd worden. De ronde zwarte subpunten niet.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="96"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="94"/>
         <source>area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3032,7 +3010,7 @@ Onbekende structuur.</translation>
         <translation>&lt;b&gt;Bewerk route punten&lt;/b&gt;&lt;br/&gt;Selecteer een functie en een routeoptie via de gereedschapknoppen. Selecteer dan een punt op de lijn. Alleen zwarte vierkante punten kunnen gewijzigd worden. De ronde zwarte subpunten niet.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="107"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="105"/>
         <source>route</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3061,7 +3039,7 @@ Onbekende structuur.</translation>
         <translation>Dit zal alle gegevens overschrijven van het origineel door een simpele lijn met coördinaten. Alle andere gegevens zullen verloren gaan.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="112"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4641,27 +4619,22 @@ lijn %2, kolom %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="141"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="151"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
-        <source>Failed...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="174"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="215"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7288,6 +7261,24 @@ Ik wil de documentatie niet lezen!</translation>
         <location filename="../map/IMapList.ui" line="182"/>
         <source>Reload Maps</source>
         <translation>Kaarten herladen</translation>
+    </message>
+</context>
+<context>
+    <name>IMapOnline</name>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="41"/>
+        <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
+        <translation type="unfinished">Deze kaart heeft OpenSSL onderteuning nodig. Door restricte beperkingen in bepaalde landen kan QMapShack geen OpenSSL pakket aanbieden. Neem een kijkje op &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; voor binaries. Er kan wel libeay32.dll en ssleay32.dll in de QMapShack map gekopieerd worden.</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="47"/>
+        <source>Error...</source>
+        <translation type="unfinished">Fout...</translation>
+    </message>
+    <message>
+        <location filename="../map/IMapOnline.cpp" line="98"/>
+        <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
+        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 delen ontvangen&lt;br/&gt;</translation>
     </message>
 </context>
 <context>

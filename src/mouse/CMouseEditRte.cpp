@@ -84,7 +84,7 @@ void CMouseEditRte::slotCopyToOrig()
 
 
 void CMouseEditRte::slotCopyToNew()
-{    
+{
     canvas->reportStatus(key.item,"");
 
     if(points.size() < 2)
@@ -114,5 +114,4 @@ void CMouseEditRte::slotCopyToNew()
     }
     canvas->resetMouse();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-
 }

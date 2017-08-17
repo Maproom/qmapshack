@@ -136,9 +136,9 @@ static void readFitLocation(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
 
 
 QString wptIconNames[26] { "Default", "Summit", "Valley", "Water", "Food", "Danger", "Left", "Right", "Straight",
-                          "FirstAid", "4thCategory", "3rdCategory", "2ndCategory", "1stCategory", "HorsCategory",
-                          "Sprint", "LeftFork", "RightFork", "MiddleFork", "SlightLeft", "SharpLeft",
-                          "SlightRight", "SharpRight", "UTurn", "Start", "End" };
+                           "FirstAid", "4thCategory", "3rdCategory", "2ndCategory", "1stCategory", "HorsCategory",
+                           "Sprint", "LeftFork", "RightFork", "MiddleFork", "SlightLeft", "SharpLeft",
+                           "SlightRight", "SharpRight", "UTurn", "Start", "End" };
 
 
 static void readFitCoursePoint(const CFitMessage &mesg, IGisItem::wpt_t &wpt)
@@ -290,7 +290,8 @@ void CGisItemWpt::readWptFromFit(CFitStream &stream)
     {
         readFitLocation(mesg, wpt);
     }
-    else {
+    else
+    {
         readFitCoursePoint(mesg, wpt);
     }
 }

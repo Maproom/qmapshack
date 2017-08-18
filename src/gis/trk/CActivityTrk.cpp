@@ -143,20 +143,24 @@ void CActivityTrk::release()
 quint32 CActivityTrk::selectActivity(QWidget *parent)
 {
     QMenu menu(parent);
+    QAction * act;
+
+    act = menu.addAction(QIcon("://icons/32x32/NoActivity.png"), tr("No Activity"));
+    act->setData(QVariant(CTrackData::trkpt_t::eActNone));
 
     for(const desc_t &desc : actDescriptor)
     {
-        QAction *act = menu.addAction(QIcon(desc.iconLarge), desc.name);
+        act = menu.addAction(QIcon(desc.iconLarge), desc.name);
         act->setData(QVariant(desc.flag));
     }
 
-    QAction *act = menu.exec(QCursor::pos());
+    act = menu.exec(QCursor::pos());
     if(nullptr != act)
     {
         return act->data().toUInt(nullptr);
     }
 
-    return 0;
+    return 0xFFFFFFFF;
 }
 
 

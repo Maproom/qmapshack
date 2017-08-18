@@ -131,7 +131,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,        this, &CDetailsTrk::slotLinkActivated);
 
     connect(pushSetActivities,    &QPushButton::clicked, this, &CDetailsTrk::slotSetActivities);
-    connect(pushRemoveActivities, &QPushButton::clicked, this, &CDetailsTrk::slotRemoveActivities);
 
     connect(lineName,         &QLineEdit::textEdited,              this, &CDetailsTrk::slotNameChanged);
     connect(lineName,         &QLineEdit::editingFinished,         this, &CDetailsTrk::slotNameChangeFinished);
@@ -622,17 +621,9 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 void CDetailsTrk::slotSetActivities()
 {
     quint32 flags = CActivityTrk::selectActivity(this);
-    if(0 != flags)
+    if(0xFFFFFFFF != flags)
     {
         trk.setActivity(flags);
-    }
-}
-
-void CDetailsTrk::slotRemoveActivities()
-{
-    if(QMessageBox::warning(this, tr("Reset activities..."), tr("This will remove all activities from the track. Proceed?"), QMessageBox::Ok|QMessageBox::No, QMessageBox::Ok) == QMessageBox::Ok)
-    {
-        trk.setActivity(CTrackData::trkpt_t::eActNone);
     }
 }
 

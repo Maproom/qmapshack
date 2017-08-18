@@ -360,6 +360,8 @@ public:
      */
     void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
 
+    void activityTrkByKey(const QList<IGisItem::key_t>& keys);
+
     void rangeTrkByKey(const IGisItem::key_t &key);
 
     void copyTrkWithWptByKey(const IGisItem::key_t &key);

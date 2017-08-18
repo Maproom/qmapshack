@@ -776,6 +776,29 @@ void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList
     emit sigChanged();
 }
 
+void CGisWidget::activityTrkByKey(const QList<IGisItem::key_t>& keys)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    quint32 flags = CActivityTrk::selectActivity(this);
+    if(0xFFFFFFFF != flags)
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+        for(const IGisItem::key_t& key : keys)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+            if(trk != nullptr)
+            {
+                trk->setActivity(flags);
+            }
+        }
+    }
+
+}
+
 void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

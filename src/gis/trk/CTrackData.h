@@ -52,7 +52,7 @@ public:
             ,eActSki    = 0x00800000
             ,eActTrain  = 0x00400000
             ,eActMask   = 0xFFC00000    ///< mask for activity flags
-            ,eActMaxNum = 10            ///< maximum number of activity flags. this is defined by the mask
+            ,eActMaxNum = 10            ///< maximum number of activity flags. this is defined by the mask            
         };
 
         enum valid_e

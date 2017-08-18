@@ -62,22 +62,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="303"/>
-        <source>No Act.</source>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="148"/>
+        <source>No Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
+        <source>No Act.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="311"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="337"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="341"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="361"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -92,32 +97,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="313"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="317"/>
         <source>Distance:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="385"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="389"/>
         <source>Speed Moving:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="409"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="413"/>
         <source>Speed Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="437"/>
         <source>Time Moving:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="457"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="461"/>
         <source>Time Total:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="511"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="515"/>
         <source>None</source>
         <translation type="unfinished"></translation>
     </message>
@@ -563,43 +568,33 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="169"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="168"/>
         <source>Reduce visible track points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
         <source>Change elevation of track points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
         <source>Change timestamp of track points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
         <source>Miscellaneous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="402"/>
         <source>Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="404"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
         <source>Activity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
-        <source>Reset activities...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
-        <source>This will remove all activities from the track. Proceed?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1750,44 +1745,49 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="627"/>
+        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <source>Set Track Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="628"/>
         <source>Drop items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="652"/>
-        <location filename="../gis/CGisListWks.cpp" line="1649"/>
-        <location filename="../gis/CGisListWks.cpp" line="1687"/>
+        <location filename="../gis/CGisListWks.cpp" line="653"/>
+        <location filename="../gis/CGisListWks.cpp" line="1669"/>
+        <location filename="../gis/CGisListWks.cpp" line="1707"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="778"/>
+        <location filename="../gis/CGisListWks.cpp" line="779"/>
         <source>Saving workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="824"/>
+        <location filename="../gis/CGisListWks.cpp" line="825"/>
         <source>Loading workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1174"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1174"/>
+        <location filename="../gis/CGisListWks.cpp" line="1176"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1197"/>
+        <location filename="../gis/CGisListWks.cpp" line="1199"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1197"/>
+        <location filename="../gis/CGisListWks.cpp" line="1199"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3107,27 +3107,27 @@ Unknown structure.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="98"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="106"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="107"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="111"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="112"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="116"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="117"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5814,72 +5814,67 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1364"/>
-        <source>Remove Track Activity</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1403"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1400"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1430"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1427"/>
         <source>Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1478"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1483"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1480"/>
         <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1488"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1485"/>
         <source>Delta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1493"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1490"/>
         <source>Dist.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1498"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1495"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1503"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1500"/>
         <source>Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1505"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1510"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1515"/>
         <source>Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1527"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1524"/>
         <source>Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1564"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1561"/>
         <source>Hist.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8458,13 +8453,14 @@ or
         <location filename="../mouse/IScrOptSelect.ui" line="82"/>
         <location filename="../mouse/IScrOptSelect.ui" line="102"/>
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="142"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="196"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="225"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="285"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="312"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="339"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="366"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="139"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="153"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8484,37 +8480,37 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="139"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="150"/>
         <source>Delete all selected items.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="193"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="204"/>
         <source>Select all items that intersect the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="222"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="233"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="282"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="293"/>
         <source>Add tracks to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="309"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="320"/>
         <source>Add waypoints to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="336"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="347"/>
         <source>Add routes to selection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="363"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="374"/>
         <source>Add areas to selection.</source>
         <translation type="unfinished"></translation>
     </message>

@@ -40,7 +40,8 @@ private slots:
     void slotCopy() const;
     void slotRoute() const;
     void slotSymWpt() const;
-    void slotCombine() const;
+    void slotCombineTrk() const;
+    void slotActivityTrk() const;
     void slotDelete() const;
 
 private:

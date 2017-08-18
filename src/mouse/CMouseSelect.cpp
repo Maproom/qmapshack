@@ -37,7 +37,8 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
     connect(scrOptSelect->toolCopy,         &QToolButton::clicked, this, &CMouseSelect::slotCopy);
     connect(scrOptSelect->toolRoute,        &QToolButton::clicked, this, &CMouseSelect::slotRoute);
     connect(scrOptSelect->toolSymWpt,       &QToolButton::clicked, this, &CMouseSelect::slotSymWpt);
-    connect(scrOptSelect->toolCombineTracks, &QToolButton::clicked, this, &CMouseSelect::slotCombine);
+    connect(scrOptSelect->toolCombineTrk,   &QToolButton::clicked, this, &CMouseSelect::slotCombineTrk);
+    connect(scrOptSelect->toolActivityTrk,  &QToolButton::clicked, this, &CMouseSelect::slotActivityTrk);
     connect(scrOptSelect->toolDelete,       &QToolButton::clicked, this, &CMouseSelect::slotDelete);
 }
 
@@ -125,7 +126,8 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
     scrOptSelect->frameFunction->setDisabled(items.isEmpty());
     scrOptSelect->toolSymWpt->setEnabled(cntWpt);
     scrOptSelect->toolRoute->setEnabled(cntWpt > 1);
-    scrOptSelect->toolCombineTracks->setEnabled(cntTrk > 1);
+    scrOptSelect->toolCombineTrk->setEnabled(cntTrk > 1);
+    scrOptSelect->toolActivityTrk->setEnabled(cntTrk > 0);
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
@@ -166,9 +168,15 @@ void CMouseSelect::slotRoute() const
     canvas->resetMouse();
 }
 
-void CMouseSelect::slotCombine() const
+void CMouseSelect::slotCombineTrk() const
 {
     CGisWidget::self().combineTrkByKey(itemKeys, itemKeys);
+    canvas->resetMouse();
+}
+
+void CMouseSelect::slotActivityTrk() const
+{
+    CGisWidget::self().activityTrkByKey(itemKeys);
     canvas->resetMouse();
 }
 

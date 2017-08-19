@@ -66,6 +66,16 @@ void CAppSetupMac::initQMapShack()
     prepareTranslator(translationPath, "qt_");
     prepareTranslator(translationPath, "qmapshack_");
 
+    // load and apply style sheet
+    QApplication* app =  (QApplication*) QCoreApplication::instance();
+
+    QString fileName = QDir(getApplicationDir("Resources")).absoluteFilePath("qms-style.qss");
+    qDebug() << "Stylesheet" << fileName;
+    QFile styleFile(fileName);
+    styleFile.open(QFile::ReadOnly);
+    QString style(QLatin1String(styleFile.readAll()));
+    app->setStyleSheet(style);
+
     migrateDirContent(defaultCachePath());
     migrateDirContent(userDataPath());
 

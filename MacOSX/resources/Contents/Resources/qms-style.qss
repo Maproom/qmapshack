@@ -1,0 +1,31 @@
+
+QToolBar {
+    padding-left: 5px;
+    spacing: 2px;
+    background: #ececec;
+    border: none
+}
+
+QToolBar > QToolButton {
+    border-radius: 5px;
+    padding: 0px;
+    background-color: #ececec;
+    border: none;
+    width: 24px;
+    height: 24px;
+}
+
+QToolBar > QToolButton:checked {
+    border: 1px solid #cdcdcd;
+    background-color: #d7d7d7;
+}
+
+QToolBar > QToolButton:pressed {
+    border: 1px solid #cdcdcd;
+    background-color: #d7d7d7;
+}
+
+QToolBar > QToolButton:hover {
+    border: 1px solid #cdcdcd;
+    background-color: #d7d7d7;
+}

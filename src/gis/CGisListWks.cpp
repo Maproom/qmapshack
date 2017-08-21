@@ -102,7 +102,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCopyPrj    = menuProjectWks->addAction(QIcon("://icons/32x32/Copy.png"       ), tr("Copy to..."     ), this, SLOT(slotCopyProject()));
     actionShowOnMap  = menuProjectWks->addAction(QIcon("://icons/32x32/ShowAll.png"    ), tr("Show on Map"    ), this, SLOT(slotShowOnMap()));
     actionHideFrMap  = menuProjectWks->addAction(QIcon("://icons/32x32/ShowNone.png"   ), tr("Hide from Map"  ), this, SLOT(slotHideFrMap()));
-
+    actionAutoSave   = menuProjectWks->addAction(QIcon("://icons/32x32/Save.png"), tr("AutoSave"));
+    actionAutoSave->setCheckable(true);
 
     menuProjectWks->addSeparator();
     actionGroup = new QActionGroup(menuProjectWks);
@@ -113,7 +114,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
     actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save as..."     ), this, SLOT(slotSaveAsProject()));
-    actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"  ), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
+    actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));
 
     menuProjectWks->addSeparator();
     actionSyncWksDev = menuProjectWks->addAction(QIcon("://icons/32x32/Device.png"     ), tr("Send to Devices"), this, SLOT(slotSyncWksDev()));
@@ -199,9 +200,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem->addAction(actionDelete);
 
 
-    connect(actionFocusTrk, &QAction::triggered,        this, &CGisListWks::slotFocusTrk);
-    connect(actionFocusRte, &QAction::triggered,        this, &CGisListWks::slotFocusRte);
-    connect(qApp,           &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
+    connect(actionFocusTrk, &QAction::triggered, this, &CGisListWks::slotFocusTrk);
+    connect(actionFocusRte, &QAction::triggered, this, &CGisListWks::slotFocusRte);
+    connect(actionAutoSave, &QAction::triggered, this, &CGisListWks::slotAutoSaveProject);
+    connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
 
     SETTINGS;
     saveOnExit  = cfg.value("Database/saveOnExit", saveOnExit).toBool();
@@ -920,6 +922,7 @@ void CGisListWks::slotLoadWorkspace()
             {
                 project->setChanged();
             }
+
         }
     }
 
@@ -981,6 +984,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionGroup->setEnabled(false);
                 actionSyncWksDev->setEnabled(IDevice::count());
                 actionSyncDB->setEnabled(project->getType() == IGisProject::eTypeDb);
+                actionAutoSave->setVisible(false);
                 menuProjectWks->exec(p);
             }
             return;
@@ -1059,6 +1063,10 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                     }
 
                     blockSorting = false;
+
+                    actionAutoSave->setVisible(true);
+                    actionAutoSave->setEnabled(project->canSave());
+                    actionAutoSave->setChecked(project->isAutoSave());
 
                     menuProjectWks->exec(p);
                 }
@@ -1262,6 +1270,17 @@ void CGisListWks::slotSaveAsStrictGpx11Project()
         {
             project->saveAsStrictGpx11();
         }
+    }
+}
+
+void CGisListWks::slotAutoSaveProject(bool on)
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    IGisProject * project = dynamic_cast<IGisProject*>(currentItem());
+    if(project != nullptr)
+    {
+        project->setAutoSave(on);
     }
 }
 
@@ -1867,6 +1886,20 @@ bool CGisListWks::event(QEvent * e)
         {
             CEvtA2WCutTrk * evt = (CEvtA2WCutTrk*)e;
             CGisWidget::self().cutTrkByKey(evt->key);
+            e->accept();
+            return true;
+        }
+
+        case eEvtA2WSave:
+        {
+            CEvtA2WSave * evt = (CEvtA2WSave*)e;
+
+            IGisProject * project = getProjectByKey(evt->key);
+            if(project)
+            {
+                project->save();
+                project->confirmPendingAutoSave();
+            }
             e->accept();
             return true;
         }

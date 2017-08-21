@@ -44,7 +44,8 @@ enum event_types_e
     ,eEvtW2DAckInfo     = QEvent::User + 100
     ,eEvtW2DCreate      = QEvent::User + 101
 
-    ,eEvtA2WCutTrk        = QEvent::User + 200
+    ,eEvtA2WCutTrk      = QEvent::User + 200
+    ,eEvtA2WSave        = QEvent::User + 201
 };
 
 struct evt_item_t
@@ -205,6 +206,16 @@ public:
     }
 
     const IGisItem::key_t key;
+};
+
+class CEvtA2WSave : public QEvent
+{
+public:
+    CEvtA2WSave(const QString& key) : QEvent(QEvent::Type(eEvtA2WSave)), key(key)
+    {
+    }
+
+    const QString key;
 };
 
 

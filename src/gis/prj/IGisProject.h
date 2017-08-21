@@ -347,6 +347,8 @@ public:
 
     void switchOnCorrelation();
 
+    void setAutoSave(bool on);
+
     /**
        @brief Receive the current mouse position
 
@@ -400,6 +402,11 @@ public:
        @return True if project is visible
      */
     bool isVisible() const;
+
+    bool isAutoSave() const
+    {
+        return autoSave;
+    }
 
     /**
        @brief Test if this project is handled by a device
@@ -488,6 +495,11 @@ public:
 
     void filter(const QString& str);
 
+    void confirmPendingAutoSave()
+    {
+        autoSavePending = true;
+    }
+
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);
@@ -531,6 +543,8 @@ protected:
     bool noUpdate      = false;
     bool noCorrelation = false;
     bool changedRoadbookMode = false;
+    bool autoSave      = false; ///< flag to show if auto save is on or off
+    bool autoSavePending = false; ///< flag to show if auto save event has been sent. will be reset by save()
 
     metadata_t metadata;
     QString nameSuffix;

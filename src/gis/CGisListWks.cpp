@@ -1292,7 +1292,7 @@ void CGisListWks::slotItemChanged(QTreeWidgetItem * item, int column)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    if(column == CGisListDB::eColumnCheckbox)
+    if(column == eColumnCheckBox)
     {
         emit sigChanged();
     }

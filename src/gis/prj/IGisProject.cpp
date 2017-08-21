@@ -57,7 +57,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, CGisListWks *pare
     , filename(filename)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
-    setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
+    setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
 
     if(parent)
     {
@@ -89,7 +89,7 @@ IGisProject::IGisProject(type_e type, const QString &filename, IDevice *parent)
     , filename(filename)
 {
     memset(cntItemsByType, 0, sizeof(cntItemsByType));
-    setCheckState(CGisListWks::eColumnDecoration, Qt::Checked);
+    setCheckState(CGisListWks::eColumnCheckBox, Qt::Checked);
     nameSuffix = parent->getName();
 }
 
@@ -175,7 +175,7 @@ bool IGisProject::askBeforClose()
 
 bool IGisProject::isVisible() const
 {
-    return checkState(CGisListWks::eColumnDecoration) == Qt::Checked;
+    return checkState(CGisListWks::eColumnCheckBox) == Qt::Checked;
 }
 
 void IGisProject::genKey() const

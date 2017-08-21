@@ -113,6 +113,7 @@ private slots:
     void slotSetSortMode(IGisProject::sorting_folder_e mode, bool checked);
     void slotCopyProject();
     void slotSymWpt();
+    void slotAutoSaveProject(bool on);
 
 
 private:
@@ -130,6 +131,7 @@ private:
     QAction  * actionSave;
     QAction  * actionSaveAs;
     QAction  * actionSaveAsStrict;
+    QAction  * actionAutoSave;
     QAction  * actionCopyPrj;
     QAction  * actionEditPrj;
     QAction  * actionCloseProj;

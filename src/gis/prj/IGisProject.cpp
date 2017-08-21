@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWidget.h"
 #include "gis/CGisListWks.h"
 #include "gis/IGisItem.h"
 #include "gis/fit/CFitProject.h"
@@ -178,6 +179,7 @@ bool IGisProject::isVisible() const
     return checkState(CGisListWks::eColumnCheckBox) == Qt::Checked;
 }
 
+
 void IGisProject::genKey() const
 {
     if(key.isEmpty())
@@ -286,8 +288,25 @@ void IGisProject::setSortingFolder(sorting_folder_e s)
 
 void IGisProject::setChanged()
 {
-    setText(CGisListWks::eColumnDecoration,"*");
+    if(autoSave)
+    {
+        if(!autoSavePending)
+        {
+            autoSavePending = true;
+            CGisWidget::self().postEventForWks(new CEvtA2WSave(getKey()));
+        }
+    }
+    else
+    {
+        setText(CGisListWks::eColumnDecoration,"*");
+    }
     updateItems();
+}
+
+void IGisProject::setAutoSave(bool on)
+{
+    autoSave = on;
+    updateDecoration();
 }
 
 void IGisProject::switchOnCorrelation()
@@ -464,8 +483,8 @@ void IGisProject::setupName(const QString &defaultName)
 }
 
 void IGisProject::markAsSaved()
-{
-    setText(CGisListWks::eColumnDecoration,"");
+{    
+    setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
     for(int i = 0; i < childCount(); i++)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(child(i));
@@ -1006,8 +1025,7 @@ void IGisProject::updateDecoration()
             break;
         }
     }
-
-    setText(CGisListWks::eColumnDecoration, saved ? "" : "*");
+    setText(CGisListWks::eColumnDecoration, autoSave ? "A" : saved ? "" : "*");
 }
 
 void IGisProject::sortItems()

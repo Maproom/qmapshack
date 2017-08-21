@@ -99,6 +99,7 @@ CDBProject::CDBProject(const QString& dbName, quint64 id, CGisListWks *parent)
     setupName(name);
     setToolTip(CGisListWks::eColumnName, getInfo());
     updateItems();
+
     valid = true;
 }
 
@@ -246,7 +247,7 @@ void CDBProject::postStatus(bool updateLostFound)
     // updateItems(); <--- don't! this is causing a crash
     if(!changedItems)
     {
-        setText(CGisListWks::eColumnDecoration,"");
+        setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
     }
 
     CGisWidget::self().postEventForDb(info);
@@ -668,8 +669,7 @@ bool CDBProject::save()
     query.bindValue(":id", getId());
     QUERY_EXEC(return false);
 
-    postStatus(true);
-
+    postStatus(true);   
     // update change flag
     updateDecoration();
     return success;

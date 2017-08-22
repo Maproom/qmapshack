@@ -272,11 +272,15 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
     }
     while (stream.hasMoreMesg());
 
-    if(trk.segs.size() == 0 && !seg.pts.isEmpty())
+    // append last segment if it is not empty.
+    // navigation course files do not have to have start / stop event, so add the segment now.
+    // and some records do not have a stop event
+    if(!seg.pts.isEmpty())
     {
-        // navigation course files do not have to have start / stop event, so add the segment now.
+
         trk.segs.append(seg);
     }
+
     if(trk.segs.isEmpty())
     {
         throw tr("FIT file %1 contains no GPS data.").arg(stream.getFileName());

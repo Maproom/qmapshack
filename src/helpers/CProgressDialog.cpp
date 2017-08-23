@@ -28,6 +28,10 @@ QStack<CProgressDialog*> CProgressDialog::stackSelf;
 CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *parent)
     : QDialog(parent)
 {
+    if(!stackSelf.isEmpty())
+    {
+        stackSelf.top()->pause();
+    }
     stackSelf.push(this);
 
     setupUi(this);
@@ -71,6 +75,10 @@ CProgressDialog * CProgressDialog::self()
 CProgressDialog::~CProgressDialog()
 {
     stackSelf.pop();
+    if(!stackSelf.isEmpty())
+    {
+        stackSelf.top()->goOn();
+    }
 }
 
 void CProgressDialog::pause()
@@ -95,10 +103,12 @@ void CProgressDialog::goOn()
 
 void CProgressDialog::setAllVisible(bool yes)
 {
-    for(CProgressDialog * progress : stackSelf)
+    if(stackSelf.isEmpty())
     {
-        yes ? progress->goOn() : progress->pause();
+        return;
     }
+
+    yes ? stackSelf.top()->goOn() : stackSelf.top()->pause();
 }
 
 void CProgressDialog::enableCancel(bool yes)

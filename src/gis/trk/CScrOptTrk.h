@@ -45,7 +45,9 @@ private slots:
     void slotReverse();
     void slotCombine();
     void slotRange();
+    void slotActivity();
     void slotCopyWithWpt();
+
 
 
 private:

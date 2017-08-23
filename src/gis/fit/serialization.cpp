@@ -277,7 +277,6 @@ void CGisItemTrk::readTrkFromFit(CFitStream &stream)
     // and some records do not have a stop event
     if(!seg.pts.isEmpty())
     {
-
         trk.segs.append(seg);
     }
 

@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CSelectSaveAction.h"
+#include "helpers/CProgressDialog.h"
 
 CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)
     : QDialog(parent)
@@ -37,11 +38,13 @@ CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushClone, &QPushButton::clicked, this, &CSelectSaveAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectSaveAction");
+    CProgressDialog::setAllVisible(false);
 }
 
 CSelectSaveAction::~CSelectSaveAction()
 {
     CCanvas::restoreOverrideCursor("~CSelectSaveAction");
+    CProgressDialog::setAllVisible(true);
 }
 
 bool CSelectSaveAction::allOthersToo()

@@ -796,7 +796,6 @@ void CGisWidget::activityTrkByKey(const QList<IGisItem::key_t>& keys)
             }
         }
     }
-
 }
 
 void CGisWidget::editTrkByKey(const IGisItem::key_t& key)

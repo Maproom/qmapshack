@@ -1449,7 +1449,7 @@ void CGisListWks::slotCombineTrk()
 }
 
 void CGisListWks::slotActivityTrk()
-{   
+{
     quint32 flags = CActivityTrk::selectActivity(this);
     if(0xFFFFFFFF != flags)
     {

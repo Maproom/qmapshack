@@ -150,8 +150,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionFocusTrk->setCheckable(true);
     actionRangeTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Select Range"           ), this, SLOT(slotRangeTrk()));
     actionEditTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),    tr("Edit Track Points"      ), this, SLOT(slotEditTrk()));
-    actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));
+    actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));    
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
+    actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
@@ -193,9 +194,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
-    actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
+    actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));    
     menuItem->addAction(actionCombineTrk);
-    actionActivityTrk = menuItem->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
+    menuItem->addAction(actionActivityTrk);
+
     menuItem->addAction(actionDelete);
 
 

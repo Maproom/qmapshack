@@ -48,6 +48,13 @@ public:
         , eTypeTcx
     };
 
+    /// flags used to serialize trivial flags in qms file
+    enum flags_e
+    {
+        eFlagNoCorrelation  = 0x1
+        , eFlagAutoSave     = 0x2
+    };
+
     enum sorting_roadbook_e
     {
         eSortRoadbookNone
@@ -497,7 +504,7 @@ public:
 
     void confirmPendingAutoSave()
     {
-        autoSavePending = true;
+        autoSavePending = false;
     }
 
 protected:

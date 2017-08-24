@@ -290,6 +290,8 @@ void IGisProject::setChanged()
 {
     if(autoSave)
     {
+        setText(CGisListWks::eColumnDecoration,"A");
+
         if(!autoSavePending)
         {
             autoSavePending = true;
@@ -305,8 +307,14 @@ void IGisProject::setChanged()
 
 void IGisProject::setAutoSave(bool on)
 {
+    // make sure project is saved one more time to remove autoSave flag in storage
+    if(!on && autoSave)
+    {
+        CGisWidget::self().postEventForWks(new CEvtA2WSave(getKey()));
+    }
+
     autoSave = on;
-    updateDecoration();
+    setChanged();
 }
 
 void IGisProject::switchOnCorrelation()
@@ -1100,7 +1108,16 @@ bool sortByName(IGisItem * item1, IGisItem * item2)
 
 bool sortByTime(IGisItem * item1, IGisItem * item2)
 {
-    return item1->getTimestamp() < item2->getTimestamp();
+    const QDateTime& t1 = item1->getTimestamp();
+    const QDateTime& t2 = item2->getTimestamp();
+
+    // avoid jumping items due to invalid timestamps
+    if(!t1.isValid() || !t2.isValid())
+    {
+        return sortByName(item1, item2);
+    }
+
+    return t1 < t2;
 }
 
 void IGisProject::sortItems(QList<IGisItem *> &items) const

@@ -41,7 +41,7 @@
 #define VER_GC_T        quint8(1)
 #define VER_GCLOG_T     quint8(1)
 #define VER_IMAGE       quint8(1)
-#define VER_PROJECT     quint8(6)
+#define VER_PROJECT     quint8(5)
 #define VER_COPYRIGHT   quint8(1)
 #define VER_PERSON      quint8(1)
 #define VER_HIST        quint8(1)
@@ -888,7 +888,8 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
     {
         qint8 tmp;
         stream >> tmp;
-        noCorrelation = tmp != 0;
+        noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
+        autoSave        = (tmp & eFlagAutoSave) != 0;
     }
 
     if(version > 4)
@@ -896,12 +897,6 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         qint32 tmp;
         stream >> tmp;
         sortingFolder = (sorting_folder_e)tmp;
-    }
-    if(version > 5)
-    {
-        qint8 tmp;
-        stream >> tmp;
-        setAutoSave(tmp != 0);
     }
 
     while(!stream.atEnd())
@@ -975,9 +970,8 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8(noCorrelation);
+    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
-    stream << quint8(autoSave);
 
     for(int i = 0; i < childCount(); i++)
     {
@@ -1074,7 +1068,8 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
     {
         qint8 tmp;
         stream >> tmp;
-        noCorrelation = tmp != 0;
+        noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
+        autoSave        = (tmp & eFlagAutoSave) != 0;
     }
     if(version > 4)
     {
@@ -1082,13 +1077,6 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
         stream >> tmp;
         sortingFolder = (sorting_folder_e)tmp;
     }
-    if(version > 5)
-    {
-        qint8 tmp;
-        stream >> tmp;
-        setAutoSave(tmp != 0);
-    }
-
 
     return stream;
 }
@@ -1109,9 +1097,8 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8(noCorrelation);
+    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
-    stream << qint8(autoSave);
 
     return stream;
 }

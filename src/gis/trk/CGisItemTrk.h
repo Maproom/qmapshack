@@ -183,7 +183,7 @@ public:
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
 
-    QDateTime getTimestamp() const override { return getTimeStart(); }
+    QDateTime getTimestamp() const override {return getTimeStart(); }
 
     /// get the track color as index into the Garmin color table
     int getColorIdx() const { return colorIdx; }

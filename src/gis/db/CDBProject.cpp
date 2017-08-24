@@ -288,7 +288,9 @@ int CDBProject::checkForAction2(IGisItem * item, quint64 &itemId, QString& hashI
         QAbstractButton* pButUpdate = msgBox.addButton(tr("Take remote"),   QMessageBox::DestructiveRole);
         msgBox.addButton(QMessageBox::Abort);
 
+        CProgressDialog::setAllVisible(false);
         msgBox.exec();
+        CProgressDialog::setAllVisible(true);
 
         if(msgBox.clickedButton() == pButClone)
         {
@@ -635,6 +637,7 @@ bool CDBProject::save()
         }
         catch(reasons_e reason)
         {
+            CProgressDialog::setAllVisible(false);
             switch(reason)
             {
             case eReasonQueryFail:
@@ -650,6 +653,7 @@ bool CDBProject::save()
                 i--;
                 break;
             }
+            CProgressDialog::setAllVisible(true);
         }
     }
 

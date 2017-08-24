@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "gis/IGisItem.h"
 #include "gis/prj/IGisProject.h"
+#include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 
 #include <QtWidgets>
@@ -40,6 +41,7 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
     connect(pushClone, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
+    CProgressDialog::setAllVisible(false);
 }
 
 CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject * tar, QWidget * parent)
@@ -61,11 +63,13 @@ CSelectCopyAction::CSelectCopyAction(const IGisProject * src, const IGisProject 
     connect(pushSkip, &QPushButton::clicked, this, &CSelectCopyAction::slotSelectResult);
 
     CCanvas::setOverrideCursor(Qt::ArrowCursor, "CSelectCopyAction");
+    CProgressDialog::setAllVisible(false);
 }
 
 CSelectCopyAction::~CSelectCopyAction()
 {
     CCanvas::restoreOverrideCursor("~CSelectCopyAction");
+    CProgressDialog::setAllVisible(true);
 }
 
 bool CSelectCopyAction::allOthersToo()

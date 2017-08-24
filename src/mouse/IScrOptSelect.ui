@@ -135,6 +135,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="toolActivityTrk">
+        <property name="toolTip">
+         <string>Set an activity for all selected tracks.</string>
+        </property>
         <property name="text">
          <string>...</string>
         </property>

@@ -77,6 +77,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::slotReverse);
     connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::slotCombine);
     connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::slotRange);
+    connect(toolActivity,    &QToolButton::clicked, this, &CScrOptTrk::slotActivity);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
 
 
@@ -140,6 +141,14 @@ void CScrOptTrk::slotCombine()
 void CScrOptTrk::slotRange()
 {
     CGisWidget::self().rangeTrkByKey(key);
+    deleteLater();
+}
+
+void CScrOptTrk::slotActivity()
+{
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWidget::self().activityTrkByKey(keys);
     deleteLater();
 }
 

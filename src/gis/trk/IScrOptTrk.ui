@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>300</width>
+    <width>311</width>
     <height>65</height>
    </rect>
   </property>
@@ -172,6 +172,20 @@
        <property name="icon">
         <iconset resource="../../resources.qrc">
          <normaloff>:/icons/32x32/TrkCut.png</normaloff>:/icons/32x32/TrkCut.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolActivity">
+       <property name="toolTip">
+        <string>Set an activity for the complete track.</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/Activity.png</normaloff>:/icons/32x32/Activity.png</iconset>
        </property>
       </widget>
      </item>

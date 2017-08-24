@@ -65,7 +65,7 @@
      <item>
       <widget class="QToolButton" name="toolActivity">
        <property name="toolTip">
-        <string>Select an activity for the selected range.</string>
+        <string>Set an activity for the selected range.</string>
        </property>
        <property name="text">
         <string>...</string>

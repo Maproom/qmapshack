@@ -62,22 +62,27 @@
         <translation>Лыжи/зима</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="303"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="148"/>
+        <source>No Activity</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
         <source>No Act.</source>
         <translation>Без мероприятия</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="311"/>
         <source>Total</source>
         <translation>Всего</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="337"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="341"/>
         <source>Ascent:</source>
         <translation>Подъем:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="361"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
         <source>Descent:</source>
         <translation>Спуск:</translation>
     </message>
@@ -92,32 +97,32 @@
         <translation>Общественный транспорт</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="313"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="317"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="385"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="389"/>
         <source>Speed Moving:</source>
         <translation>Скорость движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="409"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="413"/>
         <source>Speed Total:</source>
         <translation>Общая скорость:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="437"/>
         <source>Time Moving:</source>
         <translation>Время движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="457"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="461"/>
         <source>Time Total:</source>
         <translation>Общее время:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="511"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="515"/>
         <source>None</source>
         <translation>Никакое</translation>
     </message>
@@ -324,27 +329,27 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Взять удаленную версию</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="569"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Отсутствует папка...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="570"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Не удалось сохранить проект. Папка удалена с базы данных.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="577"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Сохранить ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="640"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="640"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -353,12 +358,12 @@ To solve this conflict you can create and save a clone, force your version or dr
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="755"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Проект &apos;%1&apos; собирается обновить себя с базы данных. Однако имеются несохранённые изменения.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="756"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>Сохранить изменения?</translation>
     </message>
@@ -567,44 +572,34 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="169"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="168"/>
         <source>Reduce visible track points</source>
         <translation>Уменьшить число видимых точек трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
         <source>Change elevation of track points</source>
         <translation>Изменить высоту точек трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
         <source>Change timestamp of track points</source>
         <translation>Изменить метки времени точек трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
         <source>Miscellaneous</source>
         <translation>Разное</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="402"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="404"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
         <source>Activity</source>
         <translation>Мероприятие</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
-        <source>Reset activities...</source>
-        <translation>Сбросить мероприятия...</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="633"/>
-        <source>This will remove all activities from the track. Proceed?</source>
-        <translation>Это удалит все мероприятия с трека. Продолжить?</translation>
     </message>
 </context>
 <context>
@@ -980,7 +975,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="282"/>
+        <location filename="../gis/fit/serialization.cpp" line="285"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>FIT файл %1 не содержит данных GPS.</translation>
     </message>
@@ -1648,7 +1643,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="134"/>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -1695,103 +1690,108 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <source>Set Track Activity</source>
+        <translation type="unfinished">Добавить мероприятие</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Copy Track with Waypoints</source>
         <translation>Копировать трек с маршрутными точками</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Show Bubble</source>
         <translation>Показать пузырек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Move Waypoint</source>
         <translation>Переместить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Proj. Waypoint...</source>
         <translation>Проекция маршрутной точки...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Calculate Route</source>
         <translation>Вычислить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Reset Route</source>
         <translation>Сбросить маршрутизацию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Edit Route</source>
         <translation>Изменить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Convert to Track</source>
         <translation>Преобразовать в трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="188"/>
+        <location filename="../gis/CGisListWks.cpp" line="189"/>
         <source>Edit Area Points</source>
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Create Route</source>
         <translation>Создать маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Изменить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="627"/>
+        <location filename="../gis/CGisListWks.cpp" line="630"/>
         <source>Drop items...</source>
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="652"/>
-        <location filename="../gis/CGisListWks.cpp" line="1649"/>
-        <location filename="../gis/CGisListWks.cpp" line="1687"/>
+        <location filename="../gis/CGisListWks.cpp" line="655"/>
+        <location filename="../gis/CGisListWks.cpp" line="1671"/>
+        <location filename="../gis/CGisListWks.cpp" line="1709"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="778"/>
+        <location filename="../gis/CGisListWks.cpp" line="781"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Сохранить рабочую область. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="824"/>
+        <location filename="../gis/CGisListWks.cpp" line="827"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1174"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1174"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты с рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1197"/>
+        <location filename="../gis/CGisListWks.cpp" line="1201"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1197"/>
+        <location filename="../gis/CGisListWks.cpp" line="1201"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -1809,22 +1809,22 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="557"/>
+        <location filename="../gis/CGisWidget.cpp" line="559"/>
         <source>Copy items...</source>
         <translation>Копировать элемент ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="576"/>
+        <location filename="../gis/CGisWidget.cpp" line="578"/>
         <source>Change waypoint symbols.</source>
         <translation>Изменить символов путевых точек.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="705"/>
+        <location filename="../gis/CGisWidget.cpp" line="707"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="705"/>
+        <location filename="../gis/CGisWidget.cpp" line="707"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
@@ -3121,27 +3121,27 @@ Unknown structure.</source>
         <translation>&lt;b&gt;Выбрать элементы на карте&lt;/b&gt;&lt;br/&gt; Выберите прямоугольную область на карте. Используйте левую кнопку мышки и двигайте её. Прервать с правой кнопкой мышки. Уточните выбор с помощью метода указать-нажать-переместить по углам.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="98"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрано:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="106"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="107"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 маршрутных точек&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 треков&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="111"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="112"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 маршрутов&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="116"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="117"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 областей&lt;br/&gt;</translation>
     </message>
@@ -3229,12 +3229,12 @@ y: %4 м/пиксель</translation>
 <context>
     <name>CProgressDialog</name>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="40"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="46"/>
         <source>Elapsed time: %1</source>
         <translation>Истёкшее время: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="87"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="132"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation>Истёкшее время: %1 сек.</translation>
     </message>
@@ -5849,72 +5849,67 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Добавить мероприятие</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1364"/>
-        <source>Remove Track Activity</source>
-        <translation>Сбросить мероприятия</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1403"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1400"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Чтобы получить статистику трека выбрать мероприятие для полного трека из списка.  Или выбрать часть трека, чтобы назначить мероприятие.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1430"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1427"/>
         <source>Points</source>
         <translation>Точки</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1478"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
         <source>Time</source>
         <translation>Время</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1483"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1480"/>
         <source>Ele.</source>
         <translation>Высота</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1488"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1485"/>
         <source>Delta</source>
         <translation>Разница</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1493"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1490"/>
         <source>Dist.</source>
         <translation>Расстояние</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1498"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1495"/>
         <source>Speed</source>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1503"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1500"/>
         <source>Slope</source>
         <translation>Наклон</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1505"/>
         <source>Ascent</source>
         <translation>Подъем</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1510"/>
         <source>Descent</source>
         <translation>Спуск</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1515"/>
         <source>Position</source>
         <translation>Позиция</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1527"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1524"/>
         <source>Filter</source>
         <translation>Фильтр</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1564"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1561"/>
         <source>Hist.</source>
         <translation>История</translation>
     </message>
@@ -8413,8 +8408,8 @@ or
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
-        <source>Select an activity for the selected range.</source>
-        <translation>Выбрать мероприятие для выбранного интервала.</translation>
+        <source>Set an activity for the selected range.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -8505,12 +8500,13 @@ or
         <location filename="../mouse/IScrOptSelect.ui" line="102"/>
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
         <location filename="../mouse/IScrOptSelect.ui" line="142"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="196"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="225"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="285"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="312"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="339"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="366"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="156"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="210"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="326"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="353"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="380"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8531,36 +8527,41 @@ or
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="139"/>
+        <source>Set an activity for all selected tracks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="153"/>
         <source>Delete all selected items.</source>
         <translation>Удалить все выбранные элементы.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="193"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Выбрать все элементы, которые пересекают выбранную область.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="222"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Выбрать все элементы полностью внутри выбранной области.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="282"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
         <source>Add tracks to selection.</source>
         <translation>Добавить треки к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="309"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
         <source>Add waypoints to selection.</source>
         <translation>Добавить маршрутные точки к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="336"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
         <source>Add routes to selection.</source>
         <translation>Добавить маршруты к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="363"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
         <source>Add areas to selection.</source>
         <translation>Добавить области к выбору.</translation>
     </message>
@@ -8588,6 +8589,7 @@ or
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8643,11 +8645,16 @@ or
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
+        <source>Set an activity for the complete track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Скопировать трек вместе со всеми присоединёнными маршрутными точками в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="224"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>

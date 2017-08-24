@@ -23,9 +23,15 @@
 
 QStack<CProgressDialog*> CProgressDialog::stackSelf;
 
+#define DELAY 1000
+
 CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *parent)
     : QDialog(parent)
 {
+    if(!stackSelf.isEmpty())
+    {
+        stackSelf.top()->pause();
+    }
     stackSelf.push(this);
 
     setupUi(this);
@@ -43,13 +49,18 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
     {
         progressBar->hide();
         // add a timer to update the elapsed time
-        QTimer * timer = new QTimer(this);
-        timer->start(1000);
-        connect(timer, &QTimer::timeout, this, [this] {setValue(0);
+        QTimer * t = new QTimer(this);
+        t->start(DELAY);
+        connect(t, &QTimer::timeout, this, [this] {setValue(0);
                 });
     }
-    hide();
-    QTimer::singleShot(1000, this, SLOT(show()));
+
+    QDialog::hide();
+    timer = new QTimer(this);
+    timer->setSingleShot(true);
+    connect(timer, &QTimer::timeout, this, [this] {show();
+            });
+    timer->start(DELAY);
 }
 
 CProgressDialog * CProgressDialog::self()
@@ -64,6 +75,40 @@ CProgressDialog * CProgressDialog::self()
 CProgressDialog::~CProgressDialog()
 {
     stackSelf.pop();
+    if(!stackSelf.isEmpty())
+    {
+        stackSelf.top()->goOn();
+    }
+}
+
+void CProgressDialog::pause()
+{
+    hide();
+    timer->stop();
+    timeElapsed = time.elapsed();
+}
+
+void CProgressDialog::goOn()
+{
+    if(timeElapsed <= DELAY)
+    {
+        timer->start(DELAY - timeElapsed);
+    }
+    else
+    {
+        show();
+    }
+}
+
+
+void CProgressDialog::setAllVisible(bool yes)
+{
+    if(stackSelf.isEmpty())
+    {
+        return;
+    }
+
+    yes ? stackSelf.top()->goOn() : stackSelf.top()->pause();
 }
 
 void CProgressDialog::enableCancel(bool yes)
@@ -79,7 +124,7 @@ void CProgressDialog::reject()
 
 void CProgressDialog::setValue(int val)
 {
-    if(time.elapsed() > 1000)
+    if(time.elapsed() > DELAY)
     {
         QApplication::processEvents();
     }

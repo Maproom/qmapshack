@@ -24,6 +24,7 @@
 #include <QStack>
 #include <QTime>
 
+class QTimer;
 
 #define PROGRESS_SETUP(lbl, min, max, parent) \
     CProgressDialog progress(lbl, min, max, parent);
@@ -42,6 +43,8 @@ public:
 
     static CProgressDialog * self();
 
+    static void setAllVisible(bool yes);
+
     void setValue(int val);
 
     bool wasCanceled();
@@ -52,9 +55,15 @@ public slots:
     void reject() override;
 
 private:
-    QTime time;
+    void pause();
+    void goOn();
+
     static QStack<CProgressDialog*> stackSelf;
+    QTime time;
+    QTimer * timer;
+    qint32 timeElapsed = 0;
 };
+
 
 #endif //CPROGRESSDIALOG_H
 

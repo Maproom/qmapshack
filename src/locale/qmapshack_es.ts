@@ -329,27 +329,27 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Toma remota</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="569"/>
+        <location filename="../gis/db/CDBProject.cpp" line="571"/>
         <source>Missing folder...</source>
         <translation>Falta la carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="570"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Error al guardar el proyecto. La carpeta se ha eliminado de la base de datos.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="577"/>
+        <location filename="../gis/db/CDBProject.cpp" line="579"/>
         <source>Save ...</source>
         <translation>Guardar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="640"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="640"/>
+        <location filename="../gis/db/CDBProject.cpp" line="643"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -358,12 +358,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 % 1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="755"/>
+        <location filename="../gis/db/CDBProject.cpp" line="759"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>El proyecto &apos;%1&apos; Está a punto de actualizarse desde la base de datos. Sin embargo, hay cambios no guardados.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="756"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>Save changes?</source>
         <translation>¿Guardar cambios?</translation>
     </message>
@@ -975,7 +975,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CGisItemTrk</name>
     <message>
-        <location filename="../gis/fit/serialization.cpp" line="282"/>
+        <location filename="../gis/fit/serialization.cpp" line="285"/>
         <source>FIT file %1 contains no GPS data.</source>
         <translation>Archivo FIT %1 no contiene datos GPS.</translation>
     </message>
@@ -1623,84 +1623,84 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Guardar como...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Copy Track with Waypoints</source>
         <translation>Copiar tracks y waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Show Bubble</source>
         <translation>Mostrar burbuja de texto</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Move Waypoint</source>
         <translation>Mover Waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Proj. Waypoint...</source>
         <translation>Proyectar Waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Route Instructions</source>
         <translation>Instrucciones de ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Calculate Route</source>
         <translation>Calcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Reset Route</source>
         <translation>Recalcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Edit Route</source>
         <translation>Editar ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Convert to Track</source>
         <translation>Convertir en track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Create Route</source>
         <translation>Crear ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Cambiar icono</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Set Track Activity</source>
         <translation type="unfinished">Establecer actividad del track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="628"/>
+        <location filename="../gis/CGisListWks.cpp" line="630"/>
         <source>Drop items...</source>
         <translation>Descartar elementos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="653"/>
-        <location filename="../gis/CGisListWks.cpp" line="1669"/>
-        <location filename="../gis/CGisListWks.cpp" line="1707"/>
+        <location filename="../gis/CGisListWks.cpp" line="655"/>
+        <location filename="../gis/CGisListWks.cpp" line="1671"/>
+        <location filename="../gis/CGisListWks.cpp" line="1709"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1199"/>
+        <location filename="../gis/CGisListWks.cpp" line="1201"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1199"/>
+        <location filename="../gis/CGisListWks.cpp" line="1201"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>
@@ -1765,33 +1765,33 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Combinar Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="188"/>
+        <location filename="../gis/CGisListWks.cpp" line="189"/>
         <source>Edit Area Points</source>
         <translation>Editar Puntos del Área</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="134"/>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="779"/>
+        <location filename="../gis/CGisListWks.cpp" line="781"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Guardando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="825"/>
+        <location filename="../gis/CGisListWks.cpp" line="827"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1176"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1176"/>
+        <location filename="../gis/CGisListWks.cpp" line="1178"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto eliminará todos los proyectos del espacio de trabajo.</translation>
     </message>
@@ -1809,22 +1809,22 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>El proyecto &quot;%1&quot; ya está en el area de trabajo.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="557"/>
+        <location filename="../gis/CGisWidget.cpp" line="559"/>
         <source>Copy items...</source>
         <translation>Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="576"/>
+        <location filename="../gis/CGisWidget.cpp" line="578"/>
         <source>Change waypoint symbols.</source>
         <translation>Cambiar símbolos de waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="705"/>
+        <location filename="../gis/CGisWidget.cpp" line="707"/>
         <source>Cut Track...</source>
         <translation>Dividir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="705"/>
+        <location filename="../gis/CGisWidget.cpp" line="707"/>
         <source>Do you want to delete the original track?</source>
         <translation>¿Desea borrar el track original?</translation>
     </message>
@@ -3229,12 +3229,12 @@ y: %4 m/px</translation>
 <context>
     <name>CProgressDialog</name>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="40"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="46"/>
         <source>Elapsed time: %1</source>
         <translation>Tiempo transcurrido: %1</translation>
     </message>
     <message>
-        <location filename="../helpers/CProgressDialog.cpp" line="87"/>
+        <location filename="../helpers/CProgressDialog.cpp" line="132"/>
         <source>Elapsed time: %1 seconds.</source>
         <translation>Tiempo transcurrido: %1 segundos.</translation>
     </message>
@@ -8404,8 +8404,8 @@ o
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
-        <source>Select an activity for the selected range.</source>
-        <translation>Seleccionar una actividad para el rango seleccionado</translation>
+        <source>Set an activity for the selected range.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -8495,14 +8495,14 @@ o
         <location filename="../mouse/IScrOptSelect.ui" line="82"/>
         <location filename="../mouse/IScrOptSelect.ui" line="102"/>
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="139"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="153"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="142"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="156"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="210"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="326"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="353"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="380"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8522,37 +8522,42 @@ o
         <translation>Combinar todos los tracks seleccionadas en uno nuevo</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="150"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="139"/>
+        <source>Set an activity for all selected tracks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="153"/>
         <source>Delete all selected items.</source>
         <translation>Borrar los elementos seleccionados</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="204"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Seleccione los elementos que interseccionan el área seleccionada.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="233"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Seleccione los elementos que estan dentro del area seleccionada. </translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="293"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
         <source>Add tracks to selection.</source>
         <translation>Añadir tracks a la selección</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="320"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
         <source>Add waypoints to selection.</source>
         <translation>Añadir waypoints a la selección.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="347"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
         <source>Add routes to selection.</source>
         <translation>Añadir rutas a selección.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="374"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
         <source>Add areas to selection.</source>
         <translation>Añadir áreas a la selección.</translation>
     </message>
@@ -8590,6 +8595,7 @@ o
         <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8635,11 +8641,16 @@ o
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
+        <source>Set an activity for the complete track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Copiar track junto con todos los waypoints conectados en otro proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="210"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="224"/>
         <source>TextLabel</source>
         <translation>Denominación</translation>
     </message>

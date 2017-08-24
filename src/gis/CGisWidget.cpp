@@ -148,6 +148,8 @@ void CGisWidget::applyFilter()
 
 void CGisWidget::slotFilter(const QString& str)
 {
+    actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Zoom.png") : QIcon("://icons/32x32/Cancel.png"));
+
     CCanvas::setOverrideCursor(Qt::WaitCursor, "slotFilter");
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -796,7 +798,6 @@ void CGisWidget::activityTrkByKey(const QList<IGisItem::key_t>& keys)
             }
         }
     }
-
 }
 
 void CGisWidget::editTrkByKey(const IGisItem::key_t& key)

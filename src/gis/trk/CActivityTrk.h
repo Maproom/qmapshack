@@ -140,6 +140,8 @@ private:
 
     static QVector<desc_t> actDescriptor;
 
+    static const desc_t dummyDesc;
+
     CGisItemTrk * trk;
     quint32 allFlags;
     QList<activity_range_t> activityRanges;

@@ -23,11 +23,23 @@
 
 QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
+
+const CActivityTrk::desc_t CActivityTrk::dummyDesc =
+{
+    "-"
+    , CTrackData::trkpt_t::eActNone
+    , "-"
+    , "://icons/48x48/ActNone.png"
+    , "://icons/16x16/ActNone.png"
+    , QColor()
+};
+
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
     , allFlags(0)
 {
 }
+
 
 void CActivityTrk::init()
 {
@@ -116,6 +128,7 @@ void CActivityTrk::init()
     };
 
 
+
     SETTINGS;
     cfg.beginGroup("Activities");
     int i = 0;
@@ -145,7 +158,7 @@ quint32 CActivityTrk::selectActivity(QWidget *parent)
     QMenu menu(parent);
     QAction * act;
 
-    act = menu.addAction(QIcon("://icons/32x32/NoActivity.png"), tr("No Activity"));
+    act = menu.addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
     act->setData(QVariant(CTrackData::trkpt_t::eActNone));
 
     for(const desc_t &desc : actDescriptor)
@@ -205,10 +218,7 @@ void CActivityTrk::update()
 
                 const desc_t& desc = getDescriptor(lastFlag);
                 activity.name = desc.name;
-                if(desc.flag != CTrackData::trkpt_t::eActNone)
-                {
-                    activity.icon = desc.iconSmall;
-                }
+                activity.icon = desc.iconSmall;
             }
 
             startTrkpt  = &pt;
@@ -238,10 +248,7 @@ void CActivityTrk::update()
 
     const desc_t& desc = getDescriptor(lastFlag);
     activity.name = desc.name;
-    if(desc.flag != CTrackData::trkpt_t::eActNone)
-    {
-        activity.icon = desc.iconSmall;
-    }
+    activity.icon = desc.iconSmall;
 
 
 
@@ -304,7 +311,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     }
     if(printNoAct)
     {
-        str += "<th align='right'>" + tr("No Act.") + "</th>";
+        str += QString("<th align='right'><img src='://icons/16x16/ActNone.png'/></th>");
     }
     if(printTotal)
     {
@@ -508,15 +515,6 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
         }
     }
 
-    static desc_t dummyDesc =
-    {
-        "None"
-        , CTrackData::trkpt_t::eActNone
-        , tr("None")
-        , "://icons/48x48/ActNone.png"
-        , "://icons/16x16/ActNone.png"
-        , QColor()
-    };
     return dummyDesc;
 }
 

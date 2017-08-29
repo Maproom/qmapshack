@@ -110,8 +110,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
 
     menuProjectWks->addSeparator();
-    actionAutoSave   = menuProjectWks->addAction(QIcon("://icons/32x32/Save.png"), tr("AutoSave"));
+    actionAutoSave   = menuProjectWks->addAction(QIcon("://icons/32x32/Save.png"), tr("Autom. Save"));
     actionAutoSave->setCheckable(true);
+
+    menuProjectWks->addSeparator();
     actionSave       = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGIS.png"    ), tr("Save"           ), this, SLOT(slotSaveProject()));
     actionSaveAs     = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAs.png"  ), tr("Save as..."     ), this, SLOT(slotSaveAsProject()));
     actionSaveAsStrict = menuProjectWks->addAction(QIcon("://icons/32x32/SaveGISAsGpx11.png"), tr("Save as GPX 1.1 w/o ext..."), this, SLOT(slotSaveAsStrictGpx11Project()));

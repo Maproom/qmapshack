@@ -110,7 +110,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSortByName = addSortAction(menuProjectWks, actionGroup, "://icons/32x32/SortName.png", tr("Sort by Name"), IGisProject::eSortFolderName);
 
     menuProjectWks->addSeparator();
-    actionAutoSave   = menuProjectWks->addAction(QIcon("://icons/32x32/Save.png"), tr("Autom. Save"));
+    actionAutoSave   = menuProjectWks->addAction(QIcon("://icons/32x32/AutoSave.png"), tr("Autom. Save"));
     actionAutoSave->setCheckable(true);
 
     menuProjectWks->addSeparator();

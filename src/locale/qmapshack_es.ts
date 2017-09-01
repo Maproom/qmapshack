@@ -22,109 +22,99 @@
 <context>
     <name>CActivityTrk</name>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="39"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
         <source>Foot</source>
         <translation>A pié</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="47"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Bicycle</source>
         <translation>Bicicleta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="67"/>
         <source>Motor Bike</source>
         <translation>Moto</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="63"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="75"/>
         <source>Car</source>
         <translation>Coche</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="71"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="83"/>
         <source>Cable Car</source>
         <translation>Teleférico</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="79"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="91"/>
         <source>Swim</source>
         <translation>Natación</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="87"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="99"/>
         <source>Ship</source>
         <translation>Barco</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="103"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="115"/>
         <source>Ski/Winter</source>
         <translation>Esquí</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="148"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="161"/>
         <source>No Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="307"/>
-        <source>No Act.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="311"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="341"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
         <source>Ascent:</source>
         <translation>Ascenso:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="365"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="372"/>
         <source>Descent:</source>
         <translation>Descenso:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="95"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="107"/>
         <source>Aeronautics</source>
         <translation>Aeronáutica</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="111"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="123"/>
         <source>Public Transport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="317"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="324"/>
         <source>Distance:</source>
         <translation>Distancia:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="389"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="396"/>
         <source>Speed Moving:</source>
         <translation>Velocidad en movimiento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="413"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="420"/>
         <source>Speed Total:</source>
         <translation>Velocidad Total:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="437"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="444"/>
         <source>Time Moving:</source>
         <translation>Tiempo en movimiento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="461"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="468"/>
         <source>Time Total:</source>
         <translation>Tiempo Total:</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="515"/>
-        <source>None</source>
-        <translation>Ninguno</translation>
     </message>
 </context>
 <context>
@@ -2928,17 +2918,17 @@ línea %2, columna %3.
         <translation>Crear GDAL VRT</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="47"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="63"/>
         <source>Select files...</source>
         <translation>Seleccionar ficheros de origen...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="71"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="87"/>
         <source>Select target file...</source>
         <translation>Seleccionar fichero de destino...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="115"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="150"/>
         <source>!!! done !!!
 </source>
         <translation>¡¡¡ hecho !!!</translation>
@@ -7420,28 +7410,64 @@ No quiero ver la documentación</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="27"/>
+        <source>Advanced Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
+        <source>Source No Data (-srcnodata)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
+        <source>Traget No Data (-vrtnodata)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
+        <source>Traget Projection (-a_srs)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
+        <source>See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="81"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="122"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
         <source>Select source files:</source>
         <translation>Seleccionar ficheros de origen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="79"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="178"/>
+        <source>1. Select one or multiple source files.
+2. Select a file name for the target VRT file.
+3. Press &quot;Start&quot; button.
+
+Tip:
+* If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
+* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="104"/>
         <source>Target Filename:</source>
         <translation>Fichero de destino:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="86"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="111"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="95"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="20"/>
         <source>Start</source>
         <translation>Comenzar</translation>
     </message>

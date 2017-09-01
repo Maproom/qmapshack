@@ -34,6 +34,7 @@ private slots:
     void slotSelectSourceFiles();
     void slotSelectTargetFile();
     void slotStart();
+    void slotLinkActivated(const QUrl& url);
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;

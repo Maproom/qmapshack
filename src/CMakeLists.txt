@@ -406,7 +406,6 @@ set( HDRS
         helpers/CValue.h
         helpers/CLimit.h
         helpers/Signals.h
-        helpers/Stuff.h
         helpers/CToolBarConfig.h
         helpers/CToolBarSetupDialog.h
         canvas/CCanvas.h

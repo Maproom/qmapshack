@@ -25,7 +25,7 @@ bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item)
     CDialogItem * dialogItem = dynamic_cast<CDialogItem *>(item);
     if (dialogItem != nullptr)
     {
-        return dialogItem->actionName != QStringLiteral("separator");
+        return dialogItem->actionName != "separator";
     }
     return true;
 }
@@ -87,7 +87,7 @@ void CToolBarSetupDialog::configure() const
     {
         if (action->isSeparator())
         {
-            selectedItems << new CDialogItem(action->icon(),QStringLiteral("---------------"),action->objectName());
+            selectedItems << new CDialogItem(action->icon(),"---------------",action->objectName());
         }
         else
         {

@@ -84,36 +84,36 @@ CMainWindow::CMainWindow()
     dockGis->setWidget(gisWidget);
 
     // start ---- restore window geometry -----
-    cfg.beginGroup(QStringLiteral("MainWindow"));
-    if ( cfg.contains(QStringLiteral("geometry")))
+    cfg.beginGroup("MainWindow");
+    if ( cfg.contains("geometry"))
     {
-        restoreGeometry(cfg.value(QStringLiteral("geometry")).toByteArray());
+        restoreGeometry(cfg.value("geometry").toByteArray());
     }
     else
     {
         QTimer::singleShot(500, this, SLOT(showMaximized()));
     }
 
-    if ( cfg.contains(QStringLiteral("state")))
+    if ( cfg.contains("state"))
     {
-        restoreState(cfg.value(QStringLiteral("state")).toByteArray());
+        restoreState(cfg.value("state").toByteArray());
     }
 
-    if (cfg.contains(QStringLiteral("displaymode")))
+    if (cfg.contains("displaymode"))
     {
-        displayMode = static_cast<Qt::WindowStates>(cfg.value(QStringLiteral("displaymode")).toInt());
+        displayMode = static_cast<Qt::WindowStates>(cfg.value("displaymode").toInt());
         if (displayMode == Qt::WindowFullScreen)
         {
             displayMode = Qt::WindowMaximized;
         }
     }
 
-    if (cfg.contains(QStringLiteral("dockstate")))
+    if (cfg.contains("dockstate"))
     {
-        dockStates = cfg.value(QStringLiteral("dockstate")).toByteArray();
+        dockStates = cfg.value("dockstate").toByteArray();
     }
 
-    menuVisible = cfg.value(QStringLiteral("menuvisible"),false).toBool();
+    menuVisible = cfg.value("menuvisible",false).toBool();
 
     if(windowState() == Qt::WindowFullScreen)
     {
@@ -237,9 +237,9 @@ CMainWindow::CMainWindow()
           << dockGis
           << dockRte;
 
-    if (cfg.contains(QStringLiteral("MainWindow/activedocks")))
+    if (cfg.contains("MainWindow/activedocks"))
     {
-        const QStringList & dockNames = cfg.value(QStringLiteral("MainWindow/activedocks")).toStringList();
+        const QStringList & dockNames = cfg.value("MainWindow/activedocks").toStringList();
         for(QDockWidget * const & dock : docks)
         {
             if(dockNames.contains(dock->objectName()))
@@ -256,35 +256,35 @@ CMainWindow::CMainWindow()
 
 
     QAction * actionToggleToolBar = toolBar->toggleViewAction();
-    actionToggleToolBar->setObjectName(QStringLiteral("actionToggleToolBar"));
-    actionToggleToolBar->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToolBar.png")));
+    actionToggleToolBar->setObjectName("actionToggleToolBar");
+    actionToggleToolBar->setIcon(QIcon(":/icons/32x32/ToolBar.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleToolBar);
 
     QAction * actionToggleMaps = dockMaps->toggleViewAction();
-    actionToggleMaps->setObjectName(QStringLiteral("actionToggleMaps"));
-    actionToggleMaps->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleMaps.png")));
+    actionToggleMaps->setObjectName("actionToggleMaps");
+    actionToggleMaps->setIcon(QIcon(":/icons/32x32/ToggleMaps.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleMaps);
 
     QAction * actionToggleDem = dockDem->toggleViewAction();
-    actionToggleDem->setObjectName(QStringLiteral("actionToggleDem"));
-    actionToggleDem->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleDem.png")));
+    actionToggleDem->setObjectName("actionToggleDem");
+    actionToggleDem->setIcon(QIcon(":/icons/32x32/ToggleDem.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
 
     QAction * actionToggleGis = dockGis->toggleViewAction();
-    actionToggleGis->setObjectName(QStringLiteral("actionToggleGis"));
-    actionToggleGis->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleGis.png")));
+    actionToggleGis->setObjectName("actionToggleGis");
+    actionToggleGis->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleGis);
 
     QAction * actionToggleRte = dockRte->toggleViewAction();
-    actionToggleRte->setObjectName(QStringLiteral("actionToggleRte"));
-    actionToggleRte->setIcon(QIcon(QStringLiteral(":/icons/32x32/ToggleRouter.png")));
+    actionToggleRte->setObjectName("actionToggleRte");
+    actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
-    QAction * separator = new QAction(QStringLiteral("---------------"),this);
+    QAction * separator = new QAction("---------------",this);
     separator->setSeparator(true);
-    separator->setObjectName(QStringLiteral("separator"));
+    separator->setObjectName("separator");
 
     QList<QAction *> availableActions;
     availableActions << separator
@@ -333,9 +333,9 @@ CMainWindow::CMainWindow()
                      << actionToggleToolBar
                      << actionFullScreen;
 
-    QAction * separator1 = new QAction(QStringLiteral("---------------"),this);
+    QAction * separator1 = new QAction("---------------",this);
     separator1->setSeparator(true);
-    separator1->setObjectName(QStringLiteral("separator"));
+    separator1->setObjectName("separator");
 
     QList<QAction *> defaultActions;
     defaultActions << actionSearchGoogle
@@ -392,20 +392,20 @@ CMainWindow::~CMainWindow()
     CActivityTrk::release();
 
     SETTINGS;
-    cfg.beginGroup(QStringLiteral("MainWindow"));
-    cfg.setValue(QStringLiteral("state"), saveState());
-    cfg.setValue(QStringLiteral("geometry"), saveGeometry());
-    cfg.setValue(QStringLiteral("units"), IUnit::self().type);
+    cfg.beginGroup("MainWindow");
+    cfg.setValue("state", saveState());
+    cfg.setValue("geometry", saveGeometry());
+    cfg.setValue("units", IUnit::self().type);
     QStringList activeDockNames;
     for (QDockWidget * const & dock : activeDocks)
     {
         activeDockNames << dock->objectName();
     }
-    cfg.setValue(QStringLiteral("activedocks"),activeDockNames);
+    cfg.setValue("activedocks",activeDockNames);
 
-    cfg.setValue(QStringLiteral("displaymode"),static_cast<int>(displayMode));
-    cfg.setValue(QStringLiteral("dockstate"),dockStates);
-    cfg.setValue(QStringLiteral("menuvisible"),menuVisible);
+    cfg.setValue("displaymode",static_cast<int>(displayMode));
+    cfg.setValue("dockstate",dockStates);
+    cfg.setValue("menuvisible",menuVisible);
     cfg.endGroup();
 
     /*
@@ -1351,7 +1351,7 @@ void CMainWindow::displayRegular()
     {
         menuBar()->setVisible(true);
     }
-    actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/FullScreen.png")));
+    actionFullScreen->setIcon(QIcon(":/icons/32x32/FullScreen.png"));
     setWindowState(displayMode);
 }
 
@@ -1376,7 +1376,7 @@ void CMainWindow::displayFullscreen()
         toolBar->setVisible(false);
     }
     tabWidget->tabBar()->setVisible(false);
-    actionFullScreen->setIcon(QIcon(QStringLiteral(":/icons/32x32/RegularScreen.png")));
+    actionFullScreen->setIcon(QIcon(":/icons/32x32/RegularScreen.png"));
 }
 
 #ifdef WIN32

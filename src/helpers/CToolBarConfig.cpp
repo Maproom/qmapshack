@@ -37,7 +37,7 @@ CToolBarConfig::~CToolBarConfig()
 void CToolBarConfig::loadSettings()
 {
     SETTINGS;
-    QStringList actions = cfg.value(QStringLiteral("ToolBar/actions")).toStringList();
+    QStringList actions = cfg.value("ToolBar/actions").toStringList();
     if (actions.isEmpty())
     {
         setDefaultConfiguredActions();
@@ -46,7 +46,7 @@ void CToolBarConfig::loadSettings()
     {
         setConfiguredActionsByName(actions);
     }
-    fullscreen = cfg.value(QStringLiteral("ToolBar/fullscreen"),false).toBool();
+    fullscreen = cfg.value("ToolBar/fullscreen",false).toBool();
 }
 
 void CToolBarConfig::saveSettings() const
@@ -57,8 +57,8 @@ void CToolBarConfig::saveSettings() const
     {
         configuredNames << action->objectName();
     }
-    cfg.setValue(QStringLiteral("ToolBar/actions"),configuredNames);
-    cfg.setValue(QStringLiteral("ToolBar/fullscreen"),fullscreen);
+    cfg.setValue("ToolBar/actions",configuredNames);
+    cfg.setValue("ToolBar/fullscreen",fullscreen);
 }
 
 const QList<QAction *> & CToolBarConfig::availableActions() const
@@ -83,7 +83,7 @@ void CToolBarConfig::setConfiguredActionsByName(const QStringList & names)
                 if (action->isSeparator())
                 {
                     QAction * separator = new QAction(this);
-                    separator->setObjectName(QStringLiteral("separator"));
+                    separator->setObjectName("separator");
                     separator->setSeparator(true);
                     actions << separator;
                 }

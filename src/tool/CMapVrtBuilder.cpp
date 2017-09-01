@@ -31,12 +31,28 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     connect(toolSourceFiles, &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectSourceFiles);
     connect(toolTargetFile,  &QToolButton::clicked, this, &CMapVrtBuilder::slotSelectTargetFile);
     connect(pushStart,       &QPushButton::clicked, this, &CMapVrtBuilder::slotStart);
+    connect(labelHelpGDAL,   &QLabel::linkActivated,this, &CMapVrtBuilder::slotLinkActivated);
 
     pushStart->setDisabled(true);
+
+    SETTINGS;
+    cfg.beginGroup("VrtBuilder");
+    groupAdvancedOptions->setChecked(cfg.value("AdvancedOptions", false).toBool());
+    lineASrs->setText(cfg.value("a_srs", "").toString());
+    lineSrcNoData->setText(cfg.value("srcndata", "").toString());
+    lineVrtNoData->setText(cfg.value("vrtndata", "").toString());
+    cfg.endGroup();
 }
 
 CMapVrtBuilder::~CMapVrtBuilder()
 {
+    SETTINGS;
+    cfg.beginGroup("VrtBuilder");
+    cfg.setValue("AdvancedOptions", groupAdvancedOptions->isChecked());
+    cfg.setValue("a_srs", lineASrs->text());
+    cfg.setValue("srcndata", lineSrcNoData->text());
+    cfg.setValue("vrtndata", lineVrtNoData->text());
+    cfg.endGroup();
 }
 
 void CMapVrtBuilder::slotSelectSourceFiles()
@@ -98,6 +114,25 @@ void CMapVrtBuilder::slotStart()
     pushStart->setDisabled(true);
 
     QStringList args;
+
+    if(groupAdvancedOptions->isChecked())
+    {
+        if(!lineASrs->text().isEmpty())
+        {
+            args << "-a_srs" << lineASrs->text();
+        }
+
+        if(!lineSrcNoData->text().isEmpty())
+        {
+            args << "-srcnodata" << lineSrcNoData->text();
+        }
+
+        if(!lineVrtNoData->text().isEmpty())
+        {
+            args << "-vrtnodata" << lineVrtNoData->text();
+        }
+    }
+
     args << labelTargetFilename->text();
 
     for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
@@ -114,4 +149,9 @@ void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status)
     textBrowser->setTextColor(Qt::darkGreen);
     textBrowser->append(tr("!!! done !!!\n"));
     pushStart->setEnabled(true);
+}
+
+void CMapVrtBuilder::slotLinkActivated(const QUrl& url)
+{
+    QDesktopServices::openUrl(url);
 }

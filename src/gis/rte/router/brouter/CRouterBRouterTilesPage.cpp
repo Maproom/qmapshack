@@ -27,7 +27,7 @@ CRouterBRouterTilesPage::CRouterBRouterTilesPage()
 {
     layout = new QVBoxLayout(this);
     widgetLocalTilesSelect = new CRouterBRouterTilesSelect(this);
-    widgetLocalTilesSelect->setObjectName(QStringLiteral("widgetLocalTilesSelect"));
+    widgetLocalTilesSelect->setObjectName("widgetLocalTilesSelect");
     QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     sizePolicy.setHorizontalStretch(0);
     sizePolicy.setVerticalStretch(0);

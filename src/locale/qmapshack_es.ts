@@ -270,27 +270,27 @@
 <context>
     <name>CDBProject</name>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="112"/>
+        <location filename="../gis/db/CDBProject.cpp" line="113"/>
         <source>Failed to load...</source>
         <translation>Falló al cargar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="113"/>
+        <location filename="../gis/db/CDBProject.cpp" line="114"/>
         <source>Can&apos;t load file &quot;%1&quot; . It will be skipped.</source>
         <translation>No se puede cargar el archivo &quot;%1&quot; . Se omitirá.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="126"/>
+        <location filename="../gis/db/CDBProject.cpp" line="127"/>
         <source>Project already in database...</source>
         <translation>Proyecto ya en base de datos ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="127"/>
+        <location filename="../gis/db/CDBProject.cpp" line="128"/>
         <source>The project &quot;%1&quot; has already been imported into the database. It will be skipped.</source>
         <translation>El proyecto &quot;%1&quot; Ya se ha importado a la base de datos. Se omitirá.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="278"/>
+        <location filename="../gis/db/CDBProject.cpp" line="279"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -299,47 +299,47 @@ To solve this conflict you can create and save a clone, force your version or dr
 Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar tu versión y tomar la de la base de datos</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="284"/>
+        <location filename="../gis/db/CDBProject.cpp" line="285"/>
         <source>Conflict with database...</source>
         <translation>Conflicto con la base de datos...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="285"/>
+        <location filename="../gis/db/CDBProject.cpp" line="286"/>
         <source>Clone &amp;&amp; Save</source>
         <translation>Duplicar y Guardar</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="286"/>
+        <location filename="../gis/db/CDBProject.cpp" line="287"/>
         <source>Force Save</source>
         <translation>Forzar guardado</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="287"/>
+        <location filename="../gis/db/CDBProject.cpp" line="288"/>
         <source>Take remote</source>
         <translation>Toma remota</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="571"/>
+        <location filename="../gis/db/CDBProject.cpp" line="572"/>
         <source>Missing folder...</source>
         <translation>Falta la carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="572"/>
+        <location filename="../gis/db/CDBProject.cpp" line="573"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Error al guardar el proyecto. La carpeta se ha eliminado de la base de datos.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="579"/>
+        <location filename="../gis/db/CDBProject.cpp" line="580"/>
         <source>Save ...</source>
         <translation>Guardar...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="643"/>
+        <location filename="../gis/db/CDBProject.cpp" line="644"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="643"/>
+        <location filename="../gis/db/CDBProject.cpp" line="644"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -1577,7 +1577,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="114"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
@@ -1587,115 +1587,120 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Editar..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Close</source>
         <translation>Cerrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Update Project on Device</source>
         <translation>Actualizar Proyecto en Dsipositivo</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="146"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Edit...</source>
         <translation>Editar...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="102"/>
-        <location filename="../gis/CGisListWks.cpp" line="147"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Copy to...</source>
         <translation>Copiar a...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <source>Autom. Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Save as...</source>
         <translation>Guardar como...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Copy Track with Waypoints</source>
         <translation>Copiar tracks y waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Show Bubble</source>
         <translation>Mostrar burbuja de texto</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Move Waypoint</source>
         <translation>Mover Waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Proj. Waypoint...</source>
         <translation>Proyectar Waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="175"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Route Instructions</source>
         <translation>Instrucciones de ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Calculate Route</source>
         <translation>Calcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Reset Route</source>
         <translation>Recalcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Edit Route</source>
         <translation>Editar ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Convert to Track</source>
         <translation>Convertir en track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Create Route</source>
         <translation>Crear ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Cambiar icono</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Set Track Activity</source>
         <translation type="unfinished">Establecer actividad del track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="630"/>
+        <location filename="../gis/CGisListWks.cpp" line="634"/>
         <source>Drop items...</source>
         <translation>Descartar elementos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="655"/>
-        <location filename="../gis/CGisListWks.cpp" line="1671"/>
-        <location filename="../gis/CGisListWks.cpp" line="1709"/>
+        <location filename="../gis/CGisListWks.cpp" line="659"/>
+        <location filename="../gis/CGisListWks.cpp" line="1692"/>
+        <location filename="../gis/CGisListWks.cpp" line="1730"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1201"/>
+        <location filename="../gis/CGisListWks.cpp" line="1211"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1201"/>
+        <location filename="../gis/CGisListWks.cpp" line="1211"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="149"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Track Profile</source>
         <translation>Perfil del Track</translation>
     </message>
@@ -1710,78 +1715,78 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Ocultar en el mapa</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="110"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
         <source>Sort by Time</source>
         <translation>Ordenar por fecha</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="111"/>
+        <location filename="../gis/CGisListWks.cpp" line="110"/>
         <source>Sort by Name</source>
         <translation>Ordenar por nombre</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation>Guardar como GPX 1.1 w/o ext...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Send to Devices</source>
         <translation>Enviar a dispositivo</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="120"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Sync. with Database</source>
         <translation>Sincronizar con base de datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="151"/>
+        <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Select Range</source>
         <translation>Seleccionar Rango</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Edit Track Points</source>
         <translation>Editar Puntos del Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Reverse Track</source>
         <translation>Invertir Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Combine Tracks</source>
         <translation>Combinar Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="189"/>
+        <location filename="../gis/CGisListWks.cpp" line="192"/>
         <source>Edit Area Points</source>
         <translation>Editar Puntos del Área</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="134"/>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="137"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="781"/>
+        <location filename="../gis/CGisListWks.cpp" line="785"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Guardando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="827"/>
+        <location filename="../gis/CGisListWks.cpp" line="831"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1178"/>
+        <location filename="../gis/CGisListWks.cpp" line="1188"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1178"/>
+        <location filename="../gis/CGisListWks.cpp" line="1188"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto eliminará todos los proyectos del espacio de trabajo.</translation>
     </message>
@@ -6566,70 +6571,70 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por otra persona</t
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="155"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="156"/>
         <source>Save project?</source>
         <translation>¿Guardar proyecto?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="155"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="156"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;Ha habido cambios en el proyecto. ¿Guardar antes de cerrar?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="329"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="356"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: Correlacionar tracks y waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="339"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="366"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt;¿Desea omitir la correlación de pistas y waypoints para este proyecto en el futuro?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="340"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="367"/>
         <source>Canceled correlation...</source>
         <translation>Correlación cancelada</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="385"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="442"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="412"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="469"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Guardar &quot;%1&quot; como...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="527"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="554"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Nombre de archivo %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="532"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="559"/>
         <source>Waypoints: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="536"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="563"/>
         <source>Tracks: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="540"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="567"/>
         <source>Routes: %1</source>
         <translation>Rutas: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="544"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="571"/>
         <source>Areas: %1</source>
         <translation>Áreas: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="664"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="691"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>¿Desea realmente eliminar &apos;%1&apos; del proyecto &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="665"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="692"/>
         <source>Delete...</source>
         <translation>Borrar...</translation>
     </message>

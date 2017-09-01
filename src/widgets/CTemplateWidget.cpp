@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "helpers/CSettings.h"
-#include "helpers/Stuff.h"
 #include "widgets/CTemplateWidget.h"
 
 #include <QtGui>
@@ -38,23 +37,23 @@ void CTemplateWidget::listTemplates()
 {
     comboTemplates->clear();
     comboTemplates->addItem(tr("choose one..."));
-    comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), s_("://templates/Hiking_Tour_Summary.ui"));
+    comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), "://templates/Hiking_Tour_Summary.ui");
 
     SETTINGS;
-    const QString& path = cfg.value(s_("TextEditWidget/templatePath"), s_("")).toString();
+    const QString& path = cfg.value("TextEditWidget/templatePath", "").toString();
 
     if(!path.isEmpty())
     {
         QDir dir(path);
-        QStringList files = dir.entryList(QStringList(s_("*.ui")), QDir::Files);
+        QStringList files = dir.entryList(QStringList("*.ui"), QDir::Files);
         for(const QString& file : files)
         {
-            QString name = QFileInfo(file).completeBaseName().replace(s_("_"), s_(" "));
+            QString name = QFileInfo(file).completeBaseName().replace("_", " ");
             comboTemplates->addItem(name, dir.absoluteFilePath(file));
         }
     }
 
-    const QString& data = cfg.value(s_("TextEditWidget/template"), "").toString();
+    const QString& data = cfg.value("TextEditWidget/template", "").toString();
     const int idx = comboTemplates->findData(data);
     if(idx != -1)
     {
@@ -66,7 +65,7 @@ QString CTemplateWidget::text()
 {
     if(widget.isNull())
     {
-        return s_("");
+        return "";
     }
     QString str;
 
@@ -75,9 +74,9 @@ QString CTemplateWidget::text()
 
     for(const QGroupBox * group : groups)
     {
-        str += QString(s_("<p><b>%1</b>: ")).arg(group->title());
+        str += QString("<p><b>%1</b>: ").arg(group->title());
         str += resolveGroup(group);
-        str += s_("</p>");
+        str += "</p>";
     }
 
     return str;
@@ -91,7 +90,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
 
     for(const QWidget * w : widgets)
     {
-        const QString pre(str.isEmpty() ? s_("") : s_(", "));
+        const QString pre(str.isEmpty() ? "" : ", ");
 
         {
             const QCheckBox * obj = dynamic_cast<const QCheckBox*>(w);
@@ -99,7 +98,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
             {
                 if(obj->isChecked())
                 {
-                    str += pre + obj->text().replace(s_("&"),s_(""));
+                    str += pre + obj->text().replace("&","");
                 }
                 continue;
             }
@@ -111,7 +110,7 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
             {
                 if(obj->isChecked())
                 {
-                    str += pre + obj->text().replace(s_("&"),s_(""));
+                    str += pre + obj->text().replace("&","");
                 }
                 continue;
             }
@@ -165,13 +164,13 @@ QString CTemplateWidget::resolveGroup(const QGroupBox * group)
 void CTemplateWidget::slotSetPath()
 {
     SETTINGS;
-    QString path = cfg.value(s_("TextEditWidget/templatePath"), QDir::homePath()).toString();
+    QString path = cfg.value("TextEditWidget/templatePath", QDir::homePath()).toString();
     path = QFileDialog::getExistingDirectory(this, tr("Template path..."), path);
     if(path.isEmpty())
     {
         return;
     }
-    cfg.setValue(s_("TextEditWidget/templatePath"), path);
+    cfg.setValue("TextEditWidget/templatePath", path);
     listTemplates();
 }
 
@@ -233,7 +232,7 @@ void CTemplateWidget::slotTemplateActivated(int idx)
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(success);
 
     SETTINGS;
-    cfg.setValue(s_("TextEditWidget/template"), filename);
+    cfg.setValue("TextEditWidget/template", filename);
 }
 
 void CTemplateWidget::slotPreview()

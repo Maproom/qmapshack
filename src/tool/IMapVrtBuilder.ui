@@ -43,7 +43,7 @@
       <item row="3" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Traget No Data (-vrtnodata)</string>
+         <string>Target No Data (-vrtnodata)</string>
         </property>
        </widget>
       </item>
@@ -53,22 +53,39 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Traget Projection (-a_srs)</string>
+         <string>Target Projection (-a_srs)</string>
         </property>
        </widget>
       </item>
       <item row="0" column="0" colspan="2">
        <widget class="QLabel" name="labelHelpGDAL">
         <property name="text">
-         <string>See GDAL &lt;a href='http://www.gdal.org/gdalbuildvrt.html'&gt;Help&lt;/a&gt; for more information</string>
+         <string>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href='http://www.gdal.org/gdalbuildvrt.html'&gt;Help&lt;/a&gt; for more information.</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineSrcNoData"/>
+       <widget class="QLineEdit" name="lineSrcNoData">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineASrs"/>
+       <widget class="QLineEdit" name="lineASrs">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -143,7 +160,14 @@
     </layout>
    </item>
    <item row="1" column="0">
-    <widget class="QListWidget" name="listWidget"/>
+    <widget class="QListWidget" name="listWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
    <item row="2" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -181,7 +205,8 @@
 
 Tip:
 * If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
-* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.</string>
+* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
+* The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

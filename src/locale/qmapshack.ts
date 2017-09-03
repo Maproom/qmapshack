@@ -4586,32 +4586,32 @@ line %2, column %3:
 <context>
     <name>CTemplateWidget</name>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="39"/>
         <source>choose one...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>Hiking Tour Summary (built-in)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="158"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="168"/>
         <source>Template path...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="192"/>
         <source>Failed to read template file %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="246"/>
         <source>Preview...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5066,7 +5066,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
-        <source>Square (optimized for TMS and WTMS tiles)</source>
+        <source>Square (optimized for TMS and WMTS tiles)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7388,48 +7388,49 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
-        <source>Traget No Data (-vrtnodata)</source>
+        <source>Target No Data (-vrtnodata)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
-        <source>Traget Projection (-a_srs)</source>
+        <source>Target Projection (-a_srs)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
-        <source>See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information</source>
+        <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="81"/>
-        <location filename="../tool/IMapVrtBuilder.ui" line="122"/>
-        <source>...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
-        <source>Select source files:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="178"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
         <source>1. Select one or multiple source files.
 2. Select a file name for the target VRT file.
 3. Press &quot;Start&quot; button.
 
 Tip:
 * If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
-* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.</source>
+* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
+* The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="104"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="156"/>
+        <source>Select source files:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="121"/>
         <source>Target Filename:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="111"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="128"/>
         <source>-</source>
         <translation type="unfinished"></translation>
     </message>

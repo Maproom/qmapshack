@@ -64,12 +64,12 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="161"/>
         <source>No Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin Actividad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
         <source>Total</source>
-        <translation type="unfinished"></translation>
+        <translation>Total</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
@@ -89,7 +89,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="123"/>
         <source>Public Transport</source>
-        <translation type="unfinished"></translation>
+        <translation>Transporte Público</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="324"/>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../widgets/CColorChooser.cpp" line="51"/>
         <source>Esc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Esc.</translation>
     </message>
 </context>
 <context>
@@ -254,12 +254,12 @@
     <message>
         <location filename="../gis/db/CDBItem.cpp" line="91"/>
         <source>%1 min.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 min.</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBItem.cpp" line="95"/>
         <source>%1 h</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 h</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBItem.cpp" line="99"/>
@@ -893,7 +893,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="284"/>
         <source>track</source>
-        <translation type="unfinished"></translation>
+        <translation>track</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="311"/>
@@ -923,7 +923,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
         <source>Length: -</source>
-        <translation>Longitud:</translation>
+        <translation>Longitud: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
@@ -934,7 +934,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
         <source>Time: -</source>
-        <translation>Tiempo:</translation>
+        <translation>Tiempo: -</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="372"/>
@@ -1107,7 +1107,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1336"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1475"/>
         <source>track</source>
-        <translation type="unfinished"></translation>
+        <translation>track</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1427"/>
@@ -1128,7 +1128,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
         <source>, %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
@@ -1138,7 +1138,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="316"/>
         <source>, %1-, %2-</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1-, %2-</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="324"/>
@@ -1610,7 +1610,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Autom. Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardado Automático</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="118"/>
@@ -1675,7 +1675,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished">Establecer actividad del track</translation>
+        <translation>Establecer actividad del track</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="634"/>
@@ -2004,7 +2004,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
         <source>Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Energía</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="133"/>
@@ -3046,7 +3046,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
         <source>track</source>
-        <translation type="unfinished"></translation>
+        <translation>track</translation>
     </message>
 </context>
 <context>
@@ -3123,12 +3123,12 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="107"/>
         <source>%1 waypoints&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 waypoints&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>%1 tracks&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 tracks&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseSelect.cpp" line="112"/>
@@ -3464,7 +3464,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="49"/>
         <source>original</source>
-        <translation type="unfinished"></translation>
+        <translation>original</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="50"/>
@@ -3484,12 +3484,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="147"/>
         <source>BRouter (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (offline)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="152"/>
         <source>BRouter (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (online)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="180"/>
@@ -3571,7 +3571,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="590"/>
         <source>online</source>
-        <translation type="unfinished"></translation>
+        <translation>online</translation>
     </message>
 </context>
 <context>
@@ -4272,17 +4272,17 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="38"/>
         <source>Routino (offline)</source>
-        <translation type="unfinished"></translation>
+        <translation>Routino (offline)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="39"/>
         <source>MapQuest (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>MapQuest (online)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterSetup.cpp" line="40"/>
         <source>BRouter (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (online)</translation>
     </message>
 </context>
 <context>
@@ -4613,32 +4613,32 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>choose one...</source>
-        <translation type="unfinished"></translation>
+        <translation>elige una...</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Hiking Tour Summary (built-in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Datos de la actividad (genérico)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta de las Plantillas...</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al leer la plantilla %1.</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
-        <translation type="unfinished"></translation>
+        <translation>Previsualizar...</translation>
     </message>
 </context>
 <context>
@@ -4720,187 +4720,187 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficha</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="20"/>
         <source>Participants</source>
-        <translation type="unfinished"></translation>
+        <translation>Participantes</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="32"/>
         <source>Weather</source>
-        <translation type="unfinished"></translation>
+        <translation>Meteo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="38"/>
         <source>rain</source>
-        <translation type="unfinished"></translation>
+        <translation>lluvia</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="48"/>
         <source>sunny</source>
-        <translation type="unfinished"></translation>
+        <translation>soleado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="58"/>
         <source>snow</source>
-        <translation type="unfinished"></translation>
+        <translation>nieve</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="68"/>
         <source>clouds</source>
-        <translation type="unfinished"></translation>
+        <translation>nuboso</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="128"/>
         <source>windy</source>
-        <translation type="unfinished"></translation>
+        <translation>viento</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
         <source>hot</source>
-        <translation type="unfinished"></translation>
+        <translation>caluroso</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
         <source>warm</source>
-        <translation type="unfinished"></translation>
+        <translation>templado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
         <source>cold</source>
-        <translation type="unfinished"></translation>
+        <translation>frío</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
         <source>freezing</source>
-        <translation type="unfinished"></translation>
+        <translation>helador</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="121"/>
         <source>foggy</source>
-        <translation type="unfinished"></translation>
+        <translation>niebla</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
         <source>humid</source>
-        <translation type="unfinished"></translation>
+        <translation>humedo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="171"/>
         <source>Character</source>
-        <translation type="unfinished"></translation>
+        <translation>Carácter</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="242"/>
         <source>easy hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>Excursión fácil</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="184"/>
         <source>climbing</source>
-        <translation type="unfinished"></translation>
+        <translation>escalada</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="256"/>
         <source>alpine</source>
-        <translation type="unfinished"></translation>
+        <translation>Salida Alpina</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="177"/>
         <source>large ascend</source>
-        <translation type="unfinished"></translation>
+        <translation>gran desnivel</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="249"/>
         <source>long distance</source>
-        <translation type="unfinished"></translation>
+        <translation>larga distancia</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="194"/>
         <source>via ferrata</source>
-        <translation type="unfinished"></translation>
+        <translation>ferrata</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="161"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished"></translation>
+        <translation>granizo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="201"/>
         <source>Rating</source>
-        <translation type="unfinished"></translation>
+        <translation>Calificación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="214"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>***** Excepcional</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="219"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>**** Muy buena</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="224"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>*** Buena</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="229"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished"></translation>
+        <translation>** Regular</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="234"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished"></translation>
+        <translation>* Mala</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="263"/>
         <source>aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>abortada</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="273"/>
         <source>Equipment</source>
-        <translation type="unfinished"></translation>
+        <translation>Equipamiento</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
         <source>ferrata gear</source>
-        <translation type="unfinished"></translation>
+        <translation>ferrata</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
         <source>night gear</source>
-        <translation type="unfinished"></translation>
+        <translation>iluminación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
         <source>snow shoes</source>
-        <translation type="unfinished"></translation>
+        <translation>raquetas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
         <source>climbing gear</source>
-        <translation type="unfinished"></translation>
+        <translation>escalada</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
         <source>ski</source>
-        <translation type="unfinished"></translation>
+        <translation>ski</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="300"/>
         <source>camping gear</source>
-        <translation type="unfinished"></translation>
+        <translation>acampada / vivac</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="324"/>
         <source>Details</source>
-        <translation type="unfinished">Detalle</translation>
+        <translation>Detalle</translation>
     </message>
 </context>
 <context>
@@ -4942,7 +4942,7 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="148"/>
         <source>Routino</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="179"/>
@@ -4957,7 +4957,7 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="212"/>
         <source>Oliver Eichler</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="225"/>
@@ -4972,7 +4972,7 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="258"/>
         <source>Rainer Unseld </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="295"/>
@@ -4982,17 +4982,17 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="302"/>
         <source>Wolfgang Thämelt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="428"/>
         <source>© 2017 Oliver Eichler (oliver.eichler@gmx.de)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="189"/>
         <source>Pavel Fric</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="288"/>
@@ -5002,7 +5002,7 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="235"/>
         <source>Harrie Klomp</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="278"/>
@@ -5012,12 +5012,12 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="326"/>
         <source>Win64:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="342"/>
         <source>OS X:</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="366"/>
@@ -5032,17 +5032,17 @@ línea %2, columna %3.
     <message>
         <location filename="../IAbout.ui" line="265"/>
         <source>Jose Luis Domingo Lopez</source>
-        <translation type="unfinished">Jose Luis Domingo, Javi Segovia</translation>
+        <translation>Jose Luis Domingo, Javi Segovia</translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="359"/>
         <source>Ivo Kronenberg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="352"/>
         <source>Helmut Schmidt</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="375"/>
@@ -5054,7 +5054,7 @@ línea %2, columna %3.
         <source>Christian Eichler (qms@christian-eichler.de)
 Ivo Kronenberg
 Norbert Truchsess (norbert.truchsess@t-online.de)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../IAbout.ui" line="421"/>
@@ -5087,12 +5087,12 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="59"/>
         <source>Logarithmic</source>
-        <translation>Logarítmico</translation>
+        <translation>Logarítmica</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
         <source>Square (optimized for TMS and WTMS tiles)</source>
-        <translation>Cuadrado (optimizado para teselas TMS y WTMS)</translation>
+        <translation>Cuadrada (optimizada para teselas TMS y WMTS)</translation>
     </message>
 </context>
 <context>
@@ -5217,11 +5217,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/db/IDB.cpp" line="60"/>
         <source>The internal database format of &apos;%1&apos; has changed. QMapShack will migrate your database, now. After the migration the database won&apos;t be usable with older versions of QMapShack. It is recommended to backup the database first.</source>
-        <translation>Compruebe esto para almacenar el resultado en un nuevo track.
-
-Si mantiene ambas partes del track tiene que crear otras nuevas.
-
-Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marcar esto para crear un nuevo track</translation>
+        <translation>El formato interno de base de datos de  &apos;%1&apos; ha cambiado. QMapShack hará la conversión de tu base de datos ahora.Después de esta conversión la nueva base de datos no puede utilizarse en versiones más antiguas de QMapShack. Se recomienda hacer una copia de seguridad antes de comenzar.</translation>
     </message>
     <message>
         <location filename="../gis/db/IDB.cpp" line="64"/>
@@ -5335,7 +5331,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>ficha</translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="35"/>
@@ -5389,7 +5385,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
         <location filename="../dem/IDemPropSetup.ui" line="497"/>
         <location filename="../dem/IDemPropSetup.ui" line="581"/>
         <source>&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemPropSetup.ui" line="251"/>
@@ -5406,7 +5402,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../dem/IDemList.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="118"/>
@@ -5582,7 +5578,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/prj/IDetailsPrj.ui" line="50"/>
@@ -5643,7 +5639,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="205"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="170"/>
@@ -5701,14 +5697,14 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
         <location filename="../gis/trk/IDetailsTrk.ui" line="875"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="961"/>
         <source>max.</source>
-        <translation type="unfinished"></translation>
+        <translation>max.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="994"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1001"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1015"/>
         <source>min.</source>
-        <translation type="unfinished"></translation>
+        <translation>min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1029"/>
@@ -5793,7 +5789,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="648"/>
         <source>x </source>
-        <translation type="unfinished"></translation>
+        <translation>x </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
@@ -5913,7 +5909,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished">Diálogo</translation>
+        <translation>Diálogo</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="268"/>
@@ -6611,12 +6607,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="559"/>
         <source>Waypoints: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Waypoints: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="563"/>
         <source>Tracks: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Tracks: %1</translation>
     </message>
     <message>
         <location filename="../gis/prj/IGisProject.cpp" line="567"/>
@@ -6644,7 +6640,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/IGisWidget.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/IGisWidget.ui" line="43"/>
@@ -6739,7 +6735,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IImportDatabase.ui" line="45"/>
@@ -6864,7 +6860,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="200"/>
         <source>Dig. Elev. Model (DEM)</source>
-        <translation>Modelo Digital del Terreno (DEM)</translation>
+        <translation type="unfinished">MDT (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="239"/>
@@ -6951,7 +6947,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="446"/>
         <source>Ctrl+I</source>
-        <translation type="unfinished">Ctrl+I</translation>
+        <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="458"/>
@@ -6971,7 +6967,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="485"/>
         <source>F1</source>
-        <translation type="unfinished"></translation>
+        <translation>F1</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="497"/>
@@ -7017,7 +7013,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="695"/>
         <source>Ctrl+E</source>
-        <translation type="unfinished">Ctrl+E</translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="707"/>
@@ -7027,7 +7023,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="710"/>
         <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="722"/>
@@ -7037,7 +7033,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="725"/>
         <source>Ctrl+Shift+T</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="737"/>
@@ -7057,7 +7053,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="755"/>
         <source>Ctrl+P</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="767"/>
@@ -7092,7 +7088,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="809"/>
         <source>Ctrl+W</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+W</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="818"/>
@@ -7117,17 +7113,17 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="845"/>
         <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="854"/>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla Completa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="857"/>
         <source>F11</source>
-        <translation type="unfinished"></translation>
+        <translation>F11</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="512"/>
@@ -7182,7 +7178,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="590"/>
         <source>F8</source>
-        <translation type="unfinished"></translation>
+        <translation>F8</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="602"/>
@@ -7215,7 +7211,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../map/IMapList.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
@@ -7270,17 +7266,17 @@ No quiero leer la documentación!</translation>
     <message>
         <location filename="../map/IMapOnline.cpp" line="41"/>
         <source>This map requires OpenSSL support. However due to legal restrictions in some countries OpenSSL is not packaged with QMapShack. You can have a look at the &lt;a href=&apos;https://www.openssl.org/community/binaries.html&apos;&gt;OpenSSL Homepage&lt;/a&gt; for binaries. You have to copy libeay32.dll and ssleay32.dll into the QMapShack program directory.</source>
-        <translation type="unfinished">Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; Para binarios. Tienes que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
+        <translation>Este mapa requiere soporte de OpenSSL. Sin embargo, debido a restricciones legales en algunos países, OpenSSL no se incluye con QMapShack. Puede consultar la página &lt; a href = &lt; https: //www.openssl.org/community/binaries.html &apos;&gt; OpenSSL Homepage&lt;/a&gt; Para binarios. Tienes que copiar libeay32.dll y ssleay32.dll en el directorio del programa QMapShack.</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="47"/>
         <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
+        <translation>Error...</translation>
     </message>
     <message>
         <location filename="../map/IMapOnline.cpp" line="98"/>
         <source>&lt;b&gt;%1&lt;/b&gt;: %2 tiles pending&lt;br/&gt;</source>
-        <translation type="unfinished">&lt;b&gt;%1&lt;/b&gt;: %2 teselas pendientes&lt;br/&gt;</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt;: %2 teselas pendientes&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -7321,7 +7317,7 @@ No quiero ver la documentación</translation>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="35"/>
@@ -7412,32 +7408,32 @@ No quiero ver la documentación</translation>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="27"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones Avanzadas</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Source No Data (-srcnodata)</source>
-        <translation type="unfinished"></translation>
+        <translation>No Data  origen (-srcnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
         <source>Traget No Data (-vrtnodata)</source>
-        <translation type="unfinished"></translation>
+        <translation>No Data destino (-vrtnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
         <source>Traget Projection (-a_srs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Proyección/Datum (-a_srs)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
         <source>See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Estas opciones son para casos particulares y normalmente se dejan en blanco. Consulta la &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;ayuda&lt;/a&gt; de GDAL para más información</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="81"/>
@@ -7459,7 +7455,14 @@ No quiero ver la documentación</translation>
 Tip:
 * If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
 * Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Selecciona uno o varios ficheros de origen
+2. Selecciona el nombre del fichero destino 
+3. Pulsa en &quot;Comenzar&quot;
+
+Notas:
+* Es posible mantener los ficheros de origen en una subcarpeta y generar el fichero VRT de destino en otra carpeta diferente, como tu carpeta raíz de mapas.
+* Usa las opciones avanzadas  para asignar un valor &quot;no data&quot; si los ficheros de origen carecen del mismo y no forman un área rectangular. Las áreas no cubiertas por el mapa se harán transparentes.
+* La opción avanzada &quot;-a_srs&quot; sirve para asignar una Proyección/Datum cuando el fichero de origen carece de ella, ...pero NO reproyecta los datos.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="104"/>
@@ -7805,7 +7808,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="111"/>
         <source>BRouter: </source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter: </translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="118"/>
@@ -7815,7 +7818,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="125"/>
         <source>start/stop BRouter</source>
-        <translation type="unfinished"></translation>
+        <translation>iniciar/parar Brouter</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="139"/>
@@ -7861,7 +7864,7 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="54"/>
         <source>BRouter-Web (online)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter-Web (online)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="61"/>
@@ -7966,17 +7969,17 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="451"/>
         <source>BRouter-Web URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter-Web URL:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="501"/>
         <source>Service-URL</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Servicio-URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="511"/>
         <source>Profile-URL</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Perfil-URL</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="561"/>
@@ -8221,7 +8224,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="99"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="115"/>
@@ -8231,7 +8234,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="125"/>
         <source>Ctrl++</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl++</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="138"/>
@@ -8241,7 +8244,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="148"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished">Ctrl+R</translation>
+        <translation>Ctrl+R</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="215"/>
@@ -8251,7 +8254,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="225"/>
         <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="238"/>
@@ -8261,7 +8264,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="248"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="261"/>
@@ -8281,27 +8284,27 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="161"/>
         <source>Delete a point. (Ctrl+-)</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar un punto. (Ctrl+-)</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="171"/>
         <source>Ctrl+-</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+-</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="218"/>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="241"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="264"/>
         <source>V</source>
-        <translation type="unfinished"></translation>
+        <translation>V</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="271"/>
@@ -8436,7 +8439,7 @@ o
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Set an activity for the selected range.</source>
-        <translation type="unfinished"></translation>
+        <translation>Asigna una Actividad para el rango seleccionado.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -8555,7 +8558,7 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="139"/>
         <source>Set an activity for all selected tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Asigna una Actividad para todos los tracks seleccionados.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
@@ -8673,7 +8676,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
         <source>Set an activity for the complete track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Asigna una Actividad al track completo.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
@@ -9014,12 +9017,12 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="153"/>
         <source>SQLite</source>
-        <translation type="unfinished"></translation>
+        <translation>SQLite</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="115"/>
         <source>MySQL</source>
-        <translation type="unfinished"></translation>
+        <translation>MySQL</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="181"/>
@@ -9196,27 +9199,27 @@ o
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="14"/>
         <source>Insert Template...</source>
-        <translation type="unfinished"></translation>
+        <translation>Insertar plantilla...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="32"/>
         <source>Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantillas</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="42"/>
         <source>Select a path with your own templates.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona una ruta con tus propias plantillas</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="45"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../widgets/ITemplateWidget.ui" line="77"/>
         <source>Preview</source>
-        <translation type="unfinished">Vista previa</translation>
+        <translation>Vista previa</translation>
     </message>
 </context>
 <context>
@@ -9279,7 +9282,7 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="25"/>
         <source>Templ.</source>
-        <translation type="unfinished"></translation>
+        <translation>Plantilla</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="120"/>
@@ -9460,7 +9463,7 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="529"/>
         <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="534"/>
@@ -9483,7 +9486,7 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="565"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="568"/>
@@ -9493,12 +9496,12 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="577"/>
         <source>Insert From Template</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Insertar desde plantilla</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="580"/>
         <source>Create text from template.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear texto desde plantilla.</translation>
     </message>
 </context>
 <context>
@@ -9582,7 +9585,7 @@ o
     <message>
         <location filename="../helpers/IToolBarSetupDialog.ui" line="23"/>
         <source>Toolbar is visible in Fullscreen-mode</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Barra de herramientas visible en modo Pantalla Completa</translation>
     </message>
 </context>
 <context>

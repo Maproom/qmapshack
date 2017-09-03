@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>446</width>
-    <height>179</height>
+    <height>196</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,7 +63,7 @@
         <item>
          <widget class="QRadioButton" name="radioScalesSquare">
           <property name="text">
-           <string>Square (optimized for TMS and WTMS tiles)</string>
+           <string>Square (optimized for TMS and WMTS tiles)</string>
           </property>
          </widget>
         </item>

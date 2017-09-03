@@ -4613,32 +4613,32 @@ Zeile %2, Spalte %3:
 <context>
     <name>CTemplateWidget</name>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="39"/>
         <source>choose one...</source>
         <translation>auswählen...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>Hiking Tour Summary (built-in)</source>
         <translation>Wanderung Zusammenfassung (built-in)</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="158"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="168"/>
         <source>Template path...</source>
         <translation>Vorlagenpfad...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="192"/>
         <source>Failed to read template file %1.</source>
         <translation>Datei &apos;%1&apos; konnte nicht gelesen werden.</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="246"/>
         <source>Preview...</source>
         <translation>Vorschau...</translation>
     </message>
@@ -5093,8 +5093,8 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     </message>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
-        <source>Square (optimized for TMS and WTMS tiles)</source>
-        <translation>Quadratisch (optimal für TMS und WMTS Karten)</translation>
+        <source>Square (optimized for TMS and WMTS tiles)</source>
+        <translation>Quadratisch (optimiert für TMS und WMTS Kacheln)</translation>
     </message>
 </context>
 <context>
@@ -7424,54 +7424,56 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
-        <source>Traget No Data (-vrtnodata)</source>
-        <translation>Kein Datenwert Ziel (-vrtnodata)</translation>
+        <source>Target No Data (-vrtnodata)</source>
+        <translation>Kein Datenwert Zieldatei (-vrtnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
-        <source>Traget Projection (-a_srs)</source>
-        <translation>Ziel Projektion (-a_srs)</translation>
+        <source>Target Projection (-a_srs)</source>
+        <translation>Projektion Zieldatei</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
-        <source>See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information</source>
-        <translation>Für mehr Information die GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Hilfe&lt;/a&gt; lesen</translation>
+        <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
+        <translation>Diese Optionen sind für spezielle Fälle. Normalerweise werden sie leer gelassen. Für mehr Information lesen Sie die GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Hilfe&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="81"/>
-        <location filename="../tool/IMapVrtBuilder.ui" line="122"/>
-        <source>...</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
-        <source>Select source files:</source>
-        <translation>Quelldateien auswählen:</translation>
-    </message>
-    <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="178"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
         <source>1. Select one or multiple source files.
 2. Select a file name for the target VRT file.
 3. Press &quot;Start&quot; button.
 
 Tip:
 * If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
-* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.</source>
-        <translation>1. Eine oder mehrere Quelldateien auswählen
-2. Einen Dateinamen für die Zieldatei auswählen
-3. Den &quot;Start&quot; Knopf drücken
+* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
+* The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</source>
+        <translation>1. Wählen Sie eine oder mehrere Quelldateien.
+2. Geben Sie einen Namen für die VRT Zieldatei an.
+3. Drücken Sie &quot;Start&quot;
 
-Tip:
-* Wenn Sie mehrere Dateien haben, sollten Sie diese in einen Unterordner des Kartenpfades verschieben. Die VRT Datei erstellen Sie im Kartenpfad.
-* Benützen Sie die erweiterten Optionen, um einen &quot;Keine Daten&quot; Wert zu definiere, falls ihre Quelldaten keinen haben und keine rechteckige Karte bilden. Gebiete mit keiner Kartendatei werden dann transparent dargestellt.</translation>
+Tipp:
+* Wenn Sie mehrere Dateien haben, verschieben Sie sie in einnen Unterordner des Kartenpfades. Erstellen Sie die VRT Datei im Kartenpfad.
+* Benützen Sie die erweiterten Optionen, um einen &quot;keine Daten&quot; Wert anzugeben, wenn ihre Quelldateien keinen haben und keinen rechteckigen Bereich abdecken. Gebiete ohne Karte werden dann transparent dargestellt.
+* Mit der &quot;-a_srs&quot; Option können sie eine Projektion/Datum vorgeben, wenn dieses in den Quellen fehlt. Damit werden die Daten aber NICHT neu projiziert. </translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="104"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="156"/>
+        <source>Select source files:</source>
+        <translation>Quelldateien auswählen:</translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="121"/>
         <source>Target Filename:</source>
         <translation>Zieldatei auswählen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="111"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="128"/>
         <source>-</source>
         <translation></translation>
     </message>

@@ -233,6 +233,8 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
     {
         showRoutingErrorMessage(msg);
     }
+    // that is a workaround for canvas loosing mousetracking caused by modal CProgressDialog:
+    canvas->setMouseTracking(true);
 }
 
 void ILineOp::finalizeOperation(qint32 idx)

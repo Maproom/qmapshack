@@ -980,7 +980,7 @@ bool CCanvas::event(QEvent *event)
                                                me->globalPos(),
                                                Qt::LeftButton,
                                                Qt::LeftButton,
-                                               Qt::NoModifier));
+                                               me->modifiers()));
             }
         }
     }

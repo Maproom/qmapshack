@@ -231,6 +231,7 @@ private:
     QMap<QString, QString> statusMessages;
 
     QMutex mousePressMutex;
+    bool isPinch = false;
 };
 
 #endif //CCANVAS_H

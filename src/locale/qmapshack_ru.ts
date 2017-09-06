@@ -64,7 +64,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="161"/>
         <source>No Activity</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет мероприятия</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
@@ -1651,7 +1651,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="113"/>
         <source>Autom. Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить автоматически</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="118"/>
@@ -1686,7 +1686,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished">Добавить мероприятие</translation>
+        <translation>Добавить мероприятие</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="159"/>
@@ -5094,7 +5094,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     <message>
         <location filename="../canvas/ICanvasSetup.ui" line="66"/>
         <source>Square (optimized for TMS and WMTS tiles)</source>
-        <translation type="unfinished"></translation>
+        <translation>Квадратичный (оптимальный для карт TMS и WMTS)</translation>
     </message>
 </context>
 <context>
@@ -7420,27 +7420,27 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="27"/>
         <source>Advanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Дополнительные параметры</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Source No Data (-srcnodata)</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных в источнике (-srcnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
         <source>Target No Data (-vrtnodata)</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет данных в цели (-vrtnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
         <source>Target Projection (-a_srs)</source>
-        <translation type="unfinished"></translation>
+        <translation>Целевая проекция (-a_srs)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
         <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Эти параметры относятся к частным случаям и обычно не заполняются. Сравните &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;GDAL справка &lt;/a&gt; для дополнительной информации.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
@@ -7452,7 +7452,14 @@ Tip:
 * If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
 * Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
 * The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Выбрать один или несколько исходных файлов.
+2. Выбрать имя файла для целевого файла VRT.
+3. Нажать кнопку &quot;Начать&quot;
+
+Намек:
+* Если у вас есть несколько файлов, поместите их в подпапку вашего пути к картам. Создайте файл VRT в вашем пути к картам.
+* Используйте дополнительные параметры, чтобы добавить значение &quot;нет данных&quot;, если исходные файлы не имеют одного и файлы не образуют прямоугольную карту. Области без файла карты станут прозрачными.
+* Параметр &quot;-a_srs&quot; предназначен для назначения проекции/датума, когда в исходном файле этого нет. Это НЕ перепроектирует данные.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
@@ -8441,7 +8448,7 @@ or
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="68"/>
         <source>Set an activity for the selected range.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить мероприятие для выбранного интервала..</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRangeTrk.ui" line="82"/>
@@ -8560,7 +8567,7 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="139"/>
         <source>Set an activity for all selected tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить мероприятие для всех выбранных треков.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
@@ -8678,7 +8685,7 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
         <source>Set an activity for the complete track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить мероприятие для всего трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>

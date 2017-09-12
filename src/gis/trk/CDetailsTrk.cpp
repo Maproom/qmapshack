@@ -354,7 +354,7 @@ void CDetailsTrk::updateData()
 
     labelTainted->setVisible(trk.isTainted());
 
-    labelInfo->setText(trk.getInfo(false, false));
+    labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
     comboColor->setCurrentIndex(trk.getColorIdx());
     toolLock->setChecked(isReadOnly);
 

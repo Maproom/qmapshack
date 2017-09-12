@@ -341,7 +341,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":date",    item->getTimestamp());
-    query.bindValue(":comment", item->getInfo(true, true));
+    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
     query.bindValue(":id",      idItem);
@@ -389,7 +389,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
             query.bindValue(":icon",    buffer.data());
             query.bindValue(":name",    item->getName());
             query.bindValue(":date",    item->getTimestamp());
-            query.bindValue(":comment", item->getInfo(true, true));
+            query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
             query.bindValue(":data",    data);
             query.bindValue(":hash",    item->getHash());
             query.bindValue(":id",      idItem);
@@ -442,7 +442,7 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     query.bindValue(":icon",    buffer.data());
     query.bindValue(":name",    item->getName());
     query.bindValue(":date",    item->getTimestamp());
-    query.bindValue(":comment", item->getInfo(true, true));
+    query.bindValue(":comment", item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText));
     query.bindValue(":data",    data);
     query.bindValue(":hash",    item->getHash());
     QUERY_EXEC(throw eReasonQueryFail);

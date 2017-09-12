@@ -237,7 +237,7 @@ bool IDBMysql::migrateDB4to5()
         }
 
         // get full size info text
-        QString comment = item->getInfo(true, true);
+        QString comment = item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText);
 
         // replace comment with full size info text in items table
         QSqlQuery query2(db);
@@ -288,7 +288,7 @@ bool IDBMysql::migrateDB5to6()
         }
 
         // get full size info text
-        QString comment = item->getInfo(true, true);
+        QString comment = item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText);
         QDateTime date  = item->getTimestamp();
 
         // replace comment with full size info text in items table

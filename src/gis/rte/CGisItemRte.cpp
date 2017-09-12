@@ -331,12 +331,12 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
 
 
 
-QString CGisItemRte::getInfo(bool showName, bool showFullText) const
+QString CGisItemRte::getInfo(quint32 feature) const
 {
     QString val1, unit1;
     QString str = "<div>";
 
-    if(showName)
+    if(feature & eFeatureShowName)
     {
         str += "<b>" + getName() + "</b><br />";
     }
@@ -388,7 +388,7 @@ QString CGisItemRte::getInfo(bool showName, bool showFullText) const
             str += "<br/>\n";
         }
 
-        if(showFullText || (desc.count() < 300))
+        if((feature & eFeatureShowFullText) || (desc.count() < 300))
         {
             str += desc;
         }
@@ -406,7 +406,7 @@ QString CGisItemRte::getInfo(bool showName, bool showFullText) const
             str += "<br/>\n";
         }
 
-        if(showFullText || cmt.count() < 300)
+        if((feature & eFeatureShowFullText) || cmt.count() < 300)
         {
             str += cmt;
         }

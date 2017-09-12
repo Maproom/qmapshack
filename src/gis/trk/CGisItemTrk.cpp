@@ -281,13 +281,13 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
+QString CGisItemTrk::getInfo(quint32 feature) const
 {
     QString val1, unit1, val2, unit2;
 
     if(cntVisiblePoints == 0)
     {
-        return showName ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
+        return feature ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
     }
 
     bool timeIsValid = (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;
@@ -296,7 +296,7 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
 
     QString str = "<div>";
 
-    if(showName)
+    if(feature & eFeatureShowName)
     {
         str += "<b>" + getName() + "</b><br />";
     }
@@ -378,7 +378,7 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
-    if(showFullText)
+    if(feature & eFeatureShowFullText)
     {
         QStringList actNames;
         activities.getActivityNames(actNames);
@@ -407,6 +407,13 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
             str += cmt;
         }
     }
+
+
+    if((feature & eFeatureShowActivity) && (activities.getActivityCount() > 1))
+    {
+        activities.printSummary(str);
+    }
+
     return str + "</div>";
 }
 

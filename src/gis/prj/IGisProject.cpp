@@ -1162,7 +1162,7 @@ void IGisProject::filter(const QString& str)
             break;
 
         case eFilterModeText:
-            item->setHidden(!item->getInfo(true, true).toUpper().contains(str));
+            item->setHidden(!item->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowFullText).toUpper().contains(str));
             break;
         }
     }

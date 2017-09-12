@@ -58,7 +58,7 @@ public:
     {
         return colorIdx;
     }
-    QString getInfo(bool showName, bool showFullText) const override;
+    QString getInfo(quint32 feature) const override;
     void getPolylineFromData(SGisLine& l) override;
     const QString& getComment() const override
     {

@@ -540,3 +540,17 @@ void CActivityTrk::getActivityNames(QStringList& names) const
         }
     }
 }
+
+qint32 CActivityTrk::getActivityCount() const
+{
+    qint32 cnt = 0;
+    for(const desc_t &desc : actDescriptor)
+    {
+        if((allFlags & desc.flag) != 0)
+        {
+            ++cnt;
+        }
+    }
+
+    return cnt;
+}

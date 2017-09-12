@@ -1476,7 +1476,7 @@ void CGisListWks::slotActivityTrk()
     quint32 flags = CActivityTrk::selectActivity(this);
     if(0xFFFFFFFF != flags)
     {
-        CGisListWksEditLock lock(false, IGisItem::mutexItems);
+        CGisListWksEditLock lock(true, IGisItem::mutexItems);
         QList<QTreeWidgetItem*> items = selectedItems();
         for(QTreeWidgetItem * item : items)
         {

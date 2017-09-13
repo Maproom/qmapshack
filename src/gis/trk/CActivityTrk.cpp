@@ -540,3 +540,25 @@ void CActivityTrk::getActivityNames(QStringList& names) const
         }
     }
 }
+
+qint32 CActivityTrk::getActivityCount() const
+{
+    qint32 cnt = 0;
+    for(const desc_t &desc : actDescriptor)
+    {
+        if((allFlags & desc.flag) != 0)
+        {
+            ++cnt;
+        }
+    }
+
+    const activity_summary_t& sumActNone = activitySummary[CTrackData::trkpt_t::eActNone];
+
+    if(sumActNone.distance != 0)
+    {
+        cnt++;
+    }
+
+
+    return cnt;
+}

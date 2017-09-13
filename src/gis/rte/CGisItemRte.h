@@ -125,7 +125,7 @@ public:
         return rte.name.isEmpty() ? noName : rte.name;
     }
 
-    QString getInfo(bool showName, bool showFullText) const override;
+    QString getInfo(quint32 feature) const override;
     IScrOpt * getScreenOptions(const QPoint &origin, IMouse * mouse) override;
     QPointF getPointCloseBy(const QPoint& screenPos) override;
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;

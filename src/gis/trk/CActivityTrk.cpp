@@ -552,5 +552,13 @@ qint32 CActivityTrk::getActivityCount() const
         }
     }
 
+    const activity_summary_t& sumActNone = activitySummary[CTrackData::trkpt_t::eActNone];
+
+    if(sumActNone.distance != 0)
+    {
+        cnt++;
+    }
+
+
     return cnt;
 }

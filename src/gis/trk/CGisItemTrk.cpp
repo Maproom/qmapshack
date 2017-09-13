@@ -281,13 +281,13 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
+QString CGisItemTrk::getInfo(quint32 feature) const
 {
     QString val1, unit1, val2, unit2;
 
     if(cntVisiblePoints == 0)
     {
-        return showName ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
+        return feature ? QString("<div><b>%1</b></div>").arg(getName()) : QString("<div></div>");
     }
 
     bool timeIsValid = (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;
@@ -296,50 +296,68 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
 
     QString str = "<div>";
 
-    if(showName)
+    if(feature & eFeatureShowName)
     {
-        str += "<b>" + getName() + "</b><br />";
+        str += "<b>" + getName() + "</b>";
     }
 
-    IUnit::self().meter2distance(totalDistance, val1, unit1);
-    str += tr("Length: %1 %2").arg(val1).arg(unit1);
-
-    if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
+    if((feature & eFeatureShowActivity) && (activities.getActivityCount() > 1))
     {
-        IUnit::self().meter2elevation(totalAscent,  val1, unit1);
-        IUnit::self().meter2elevation(totalDescent, val2, unit2);
-
-        str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+        str += "<br/>";
+        activities.printSummary(str);
+        str += "<br/>";
     }
     else
     {
-        str += tr(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
-    }
-    str += "<br />";
+        if((feature & eFeatureShowName) && (activities.getActivityCount() == 1))
+        {
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(activities.getAllFlags());
+            str += QString("&nbsp;&nbsp;&nbsp;<img src='%1'/>").arg(desc.iconSmall);
+        }
 
-    if(timeIsValid && (totalElapsedSeconds != NOTIME))
-    {
-        IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
-        IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
-        str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
-    }
-    else
-    {
-        str += tr("Time: -, Speed: -");
-    }
-    str += "<br />";
+        str += "<br/>";
+        IUnit::self().meter2distance(totalDistance, val1, unit1);
+        str += tr("Length: %1 %2").arg(val1).arg(unit1);
 
-    if(timeIsValid && (totalElapsedSecondsMoving != NOTIME))
-    {
-        IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
-        IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
-        str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+        if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
+        {
+            IUnit::self().meter2elevation(totalAscent,  val1, unit1);
+            IUnit::self().meter2elevation(totalDescent, val2, unit2);
+
+            str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+        }
+        else
+        {
+            str += tr(", %1-, %2-").arg(QChar(0x2197)).arg(QChar(0x2198));
+        }
+        str += "<br />";
+
+        if(timeIsValid && (totalElapsedSeconds != NOTIME))
+        {
+            IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
+            IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
+            str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+        }
+        else
+        {
+            str += tr("Time: -, Speed: -");
+        }
+        str += "<br />";
+
+        if(timeIsValid && (totalElapsedSecondsMoving != NOTIME))
+        {
+            IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
+            IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
+            str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+        }
+        else
+        {
+            str += tr("Moving: -, Speed: -");
+        }
+        str += "<br />";
     }
-    else
-    {
-        str += tr("Moving: -, Speed: -");
-    }
-    str += "<br />";
+
+    str += "<br/>";
 
     if(timeIsValid && timeStart.isValid())
     {
@@ -378,7 +396,7 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
-    if(showFullText)
+    if(feature & eFeatureShowFullText)
     {
         QStringList actNames;
         activities.getActivityNames(actNames);
@@ -407,6 +425,8 @@ QString CGisItemTrk::getInfo(bool showName, bool showFullText) const
             str += cmt;
         }
     }
+
+
     return str + "</div>";
 }
 

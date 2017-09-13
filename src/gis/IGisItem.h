@@ -248,6 +248,15 @@ public:
      */
     virtual QString getNameEx() const;
 
+
+    enum features_e
+    {
+        eFeatureNone            = 0
+        , eFeatureShowName      = 0x00000001
+        , eFeatureShowFullText  = 0x00000002
+        , eFeatureShowActivity  = 0x00000004
+    };
+
     /**
        @brief Get a short string with the items properties to be displayed in tool tips or similar
 
@@ -256,7 +265,7 @@ public:
 
        @return A string object.
      */
-    virtual QString getInfo(bool showName, bool showFullText) const = 0;
+    virtual QString getInfo(quint32 features) const = 0;
 
     virtual const QString& getComment() const = 0;
     virtual const QString& getDescription() const = 0;

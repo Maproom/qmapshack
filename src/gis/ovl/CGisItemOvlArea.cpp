@@ -376,12 +376,12 @@ IScrOpt * CGisItemOvlArea::getScreenOptions(const QPoint& origin, IMouse * mouse
     return scrOpt;
 }
 
-QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
+QString CGisItemOvlArea::getInfo(quint32 feature) const
 {
     QString unit, val;
     QString str = "<div>";
 
-    if(showName)
+    if(feature && eFeatureShowName)
     {
         str += "<b>" + getName() + "</b>";
     }
@@ -398,7 +398,7 @@ QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
             str += "<br/>\n";
         }
 
-        if(showFullText || (desc.count() < 300))
+        if((feature & eFeatureShowFullText) || (desc.count() < 300))
         {
             str += desc;
         }
@@ -416,7 +416,7 @@ QString CGisItemOvlArea::getInfo(bool showName, bool showFullText) const
             str += "<br/>\n";
         }
 
-        if(showFullText || cmt.count() < 300)
+        if((feature & eFeatureShowFullText) || (cmt.count() < 300))
         {
             str += cmt;
         }

@@ -95,6 +95,8 @@ public:
         return allFlags;
     }
 
+    qint32 getActivityCount() const;
+
     void getActivityNames(QStringList& names) const;
 
     static quint32 selectActivity(QWidget *parent);

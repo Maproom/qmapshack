@@ -225,7 +225,7 @@ public:
         return wpt.name.isEmpty() ? noName : wpt.name;
     }
 
-    QString getInfo(bool showName, bool showFullText) const override;
+    QString getInfo(quint32 feature) const override;
     QPointF getPosition() const
     {
         return QPointF(wpt.lon, wpt.lat);

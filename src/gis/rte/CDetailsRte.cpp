@@ -64,7 +64,7 @@ void CDetailsRte::setupGui()
     lineName->setText(rte.getName());
     lineName->setReadOnly(isReadOnly);
 
-    labelInfo->setText(rte.getInfo(false, false));
+    labelInfo->setText(rte.getInfo(IGisItem::eFeatureNone));
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, rte.getComment(), rte.getDescription(), rte.getLinks()));

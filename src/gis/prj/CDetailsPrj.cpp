@@ -403,24 +403,6 @@ void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item,
 {
     table->cellAt(row,col).firstCursorPosition().insertImage(item->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
-    if(trk)
-    {
-        QSet<QString> icons;
-        for(const CActivityTrk::activity_range_t& range : trk->getActivities().getActivityRanges())
-        {
-            icons << range.icon;
-        }
-
-        for(const QString &icon : icons)
-        {
-            if(!icon.isEmpty())
-            {
-                table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><br/><img src='%1'/></p>").arg(icon));
-            }
-        }
-    }
-
     if(!(printable||item->isReadOnly()))
     {
         table->cellAt(row,col).lastCursorPosition().insertHtml(QString("<p><a href='edit?key=%1'><img src='://icons/16x16/EditDetails.png'/></a></p>").arg(item->getKey().item));
@@ -483,7 +465,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
 
             if(w1 < 300)
             {
-                table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName));
+                table->cellAt(cnt,eInfo1).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
                 QTextTable * table1 = table->cellAt(cnt,eInfo1).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
@@ -499,7 +481,7 @@ void CDetailsPrj::drawByGroup(QTextCursor &cursor, QList<CGisItemTrk*>& trks, QL
             {
                 QTextTable * table1 = table->cellAt(cnt,eInfo1).firstCursorPosition().insertTable(1, 3, fmtTableInfo);
 
-                table1->cellAt(0,0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName));
+                table1->cellAt(0,0).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
                 QImage profile(w1,h1,QImage::Format_ARGB32);
                 getTrackProfile(trk, profile);
@@ -675,7 +657,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
         }
 
         addIcon(table, eSym1, cnt, trk, printable);
-        table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName));
+        table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
 
         QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 

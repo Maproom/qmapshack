@@ -309,7 +309,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     }
     else
     {
-        if(activities.getActivityCount() == 1)
+        if((feature & eFeatureShowName) && (activities.getActivityCount() == 1))
         {
             const CActivityTrk::desc_t& desc = activities.getDescriptor(activities.getAllFlags());
             str += QString("&nbsp;&nbsp;&nbsp;<img src='%1'/>").arg(desc.iconSmall);

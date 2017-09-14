@@ -296,13 +296,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     QString str = "<div>";
 
-    qint32 actCnt = activities.getActivityCount();
+    qint32 actCnt       = activities.getActivityCount();
+    quint32 actFlags    = activities.getAllFlags();
 
     if(feature & eFeatureShowName)
     {
-        if(actCnt == 1)
+        if((actCnt == 1) && actFlags)
         {
-            const CActivityTrk::desc_t& desc = activities.getDescriptor(activities.getAllFlags());
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(actFlags);
             str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
         }
         str += "<b>" + getName() + "</b>";

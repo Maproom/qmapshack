@@ -296,12 +296,19 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     QString str = "<div>";
 
+    qint32 actCnt = activities.getActivityCount();
+
     if(feature & eFeatureShowName)
     {
+        if(actCnt == 1)
+        {
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(activities.getAllFlags());
+            str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
+        }
         str += "<b>" + getName() + "</b>";
     }
 
-    if((feature & eFeatureShowActivity) && (activities.getActivityCount() > 1))
+    if((feature & eFeatureShowActivity) && (actCnt > 1))
     {
         str += "<br/>";
         activities.printSummary(str);
@@ -309,12 +316,6 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     }
     else
     {
-        if((feature & eFeatureShowName) && (activities.getActivityCount() == 1))
-        {
-            const CActivityTrk::desc_t& desc = activities.getDescriptor(activities.getAllFlags());
-            str += QString("&nbsp;&nbsp;&nbsp;<img src='%1'/>").arg(desc.iconSmall);
-        }
-
         str += "<br/>";
         IUnit::self().meter2distance(totalDistance, val1, unit1);
         str += tr("Length: %1 %2").arg(val1).arg(unit1);

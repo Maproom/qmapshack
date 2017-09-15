@@ -3648,7 +3648,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="434"/>
         <source>create new BRouter installation</source>
-        <translation>neue BRouter-Installaion erzeugen</translation>
+        <translation>neue BRouter-Installation erzeugen</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="442"/>

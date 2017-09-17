@@ -653,6 +653,7 @@ bool CDBProject::save()
                 i--;
                 break;
             }
+
             CProgressDialog::setAllVisible(true);
         }
     }
@@ -673,7 +674,7 @@ bool CDBProject::save()
     query.bindValue(":id", getId());
     QUERY_EXEC(return false);
 
-    postStatus(true);   
+    postStatus(true);
     // update change flag
     updateDecoration();
     return success;

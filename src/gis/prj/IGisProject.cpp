@@ -19,8 +19,8 @@
 #include "CMainWindow.h"
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
 #include "gis/CGisListWks.h"
+#include "gis/CGisWidget.h"
 #include "gis/IGisItem.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
@@ -491,7 +491,7 @@ void IGisProject::setupName(const QString &defaultName)
 }
 
 void IGisProject::markAsSaved()
-{    
+{
     setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
     for(int i = 0; i < childCount(); i++)
     {

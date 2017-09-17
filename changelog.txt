@@ -1,3 +1,22 @@
+V 1.9.1
+Add: Fullscreen mode
+Add: Templates for project documentation
+Add: FIT: added support for location file (containing waypoints).
+Add: Trk: Add action to set activity for a group of tracks
+Add: VRT Builder: Add advanced options (-a_srs -srcndata -vrtndata)
+Add: Optional auto save for projects
+Add: Trk: Add activity summary to screen option dialog
+Add: Prj: Show activity summary for tracks in project details dialog
+Fix: VRT: Test for overviews on multi-band maps, too
+Fix: FIT: Fixing missing last segment for records that miss the stop event.
+Fix: Progress dialog hides other dialogs in certain window managers
+Fix: Workaround CCanvas loss of mousetracking due to modal CProgressDialog
+Fix: Jump after pinch gesture
+[Issue #245] QMS hangs when entering new track name and window sizing in parallel
+[Issue #243] Incosistent behavior of "copy to ..." dialog
+[Issue #216] "No activity" statistics column missing in diary
+[Issue #248] Regularscreen.png vs. RegularScreen.png
+
 V 1.9.0
 Add: Garmin Maps: Allow external TYP files
 Add: Filter items on workspace by string

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -348,12 +348,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="759"/>
+        <location filename="../gis/db/CDBProject.cpp" line="760"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Das Projekt &apos;%1&apos; will sich gerade aus der Datenbank aktualisieren. Es gibt allerdings nicht gespeicherte Änderungen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="760"/>
+        <location filename="../gis/db/CDBProject.cpp" line="761"/>
         <source>Save changes?</source>
         <translation>Änderungen speichern?</translation>
     </message>
@@ -439,7 +439,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <name>CDetailsPrj</name>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="774"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
         <source>none</source>
         <translation>keine</translation>
     </message>
@@ -454,60 +454,60 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>&lt;b&gt;Auswertung aller Tracks im Projekt&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="437"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="419"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Wegpunkte&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="444"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="470"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="591"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="709"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="739"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="573"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="691"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="721"/>
         <source>Info</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="445"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="471"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="427"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="453"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="574"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="692"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="722"/>
         <source>Comment</source>
         <translation>Kommentar</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="463"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="445"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
         <source>From Start</source>
         <translation>Vom Anfang</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
         <source>To Next</source>
         <translation>Zum Nächsten</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="610"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
         <source>To End</source>
         <translation>Zum Ende</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="613"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
         <source>distance: </source>
         <translation>Entfernung:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="623"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
         <source>ascent: </source>
         <translation>Anstieg:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="702"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Gebiete&lt;/h2&gt;</translation>
     </message>
@@ -522,39 +522,39 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Verknüpfungen...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="732"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Routen&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="760"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="787"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="760"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="787"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
         <source>Enter new project name.</source>
         <translation>Geben Sie einen neuen Namen für das Projekt ein.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="915"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
         <source>Print Diary</source>
         <translation>Tagebuch drucken</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
         <source>Edit keywords...</source>
         <translation>Stichwörter bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="633"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
         <source>descent: </source>
         <translation>Abstieg: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
         <source>Enter keywords.</source>
         <translation>Stichwörter eingeben.</translation>
     </message>
@@ -1006,252 +1006,252 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Wegpunkte geändert, alle vorherigen Daten sind verloren.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="305"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
         <source>Length: %1 %2</source>
         <translation>Länge: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="312"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
         <source>, %1%2 %3, %4%5 %6</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="316"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="333"/>
         <source>, %1-, %2-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="328"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
         <source>Time: -, Speed: -</source>
         <translation>Zeit: -, Geschwindigkeit: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="340"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
         <source>Moving: -, Speed: -</source>
         <translation>Zeit in Bew.: -, Geschw. -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="346"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="366"/>
         <source>Start: %1</source>
         <translation>Beginn: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="350"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="370"/>
         <source>Start: -</source>
         <translation>Beginn: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="356"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="376"/>
         <source>End: %1</source>
         <translation>Ende: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="360"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="380"/>
         <source>End: -</source>
         <translation>Ende: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="364"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="384"/>
         <source>Points: %1 (%2)</source>
         <translation>Punkte: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="368"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="388"/>
         <source>Invalid elevations!</source>
         <translation>Ungültige Höhenwerte!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="373"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="393"/>
         <source>Invalid timestamps!</source>
         <translation>Ungültige Zeitmarken!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="378"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="398"/>
         <source>Invalid positions!</source>
         <translation>Ungültige Positionsdaten!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="387"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="407"/>
         <source>Activities: %1</source>
         <translation>Aktivitäten: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="495"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="517"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="499"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="521"/>
         <source>Index: visible %1, total %2</source>
         <translation>Index: angez. %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="510"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
         <source>Ele.: %1 %2</source>
         <translation>Höhe: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="513"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
         <source> slope: %1%3 (%2%)</source>
         <translation>, Neigung: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="518"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="540"/>
         <source> speed: %1%2</source>
         <translation>, Geschw.: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="546"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
         <source>... and %1 tags not displayed</source>
         <translation>... und %1 Tags werden nicht angezeigt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="558"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="580"/>
         <source>Distance: - (-)</source>
         <translation>Entfernung: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="559"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
         <source>Moving: - (-)</source>
         <translation>Zeit in Bew.: - (-) </translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1223"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1236"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1292"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1336"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1475"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1245"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1258"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1314"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1358"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1497"/>
         <source>track</source>
         <translation>Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1427"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1449"/>
         <source>Hide point %1.</source>
         <translation>Punkt %1 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1431"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1453"/>
         <source>Hide points %1..%2.</source>
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation>, Zeit in Bew.: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="609"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>, %1%2</source>
         <translation>, %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source> Time: %1%2</source>
         <translation> Zeit: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="324"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>Time: %1, Speed: %2 %3</source>
         <translation>Zeit: %1, Geschwindigkeit: %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="336"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
         <source>Moving: %1, Speed: %2 %3</source>
         <translation>Zeit in Bew.: %1, Geschw. %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="556"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="578"/>
         <source>Ascent: - (-)</source>
         <translation>Anstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="557"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="579"/>
         <source>Descent: - (-)</source>
         <translation>Abstieg: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="564"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="570"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
         <source> Descent: %1%2 (%3%)</source>
         <translation>, Abstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="576"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Entf.: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="620"/>
         <source>Ascent: -</source>
         <translation>Anstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
         <source>Descent: -</source>
         <translation>Abstieg: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
         <source>Ascent: %1%2</source>
         <translation>Anstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="616"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
         <source> Descent: %1%2</source>
         <translation> Abstieg: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Distance: %1%2</source>
         <translation>Entfernung: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1282"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1304"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Punkte %1..%2 dauerhaft entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1460"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1482"/>
         <source>Show points.</source>
         <translation>Punkte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1988"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2010"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1994"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2016"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2000"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2022"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2006"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2028"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2017"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2039"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Höhe von Punkt %1 auf %2 %3 geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2041"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2063"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2080"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2102"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
@@ -1689,18 +1689,18 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="659"/>
-        <location filename="../gis/CGisListWks.cpp" line="1692"/>
-        <location filename="../gis/CGisListWks.cpp" line="1730"/>
+        <location filename="../gis/CGisListWks.cpp" line="1691"/>
+        <location filename="../gis/CGisListWks.cpp" line="1729"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1211"/>
+        <location filename="../gis/CGisListWks.cpp" line="1210"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1211"/>
+        <location filename="../gis/CGisListWks.cpp" line="1210"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -1781,12 +1781,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1188"/>
+        <location filename="../gis/CGisListWks.cpp" line="1187"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1188"/>
+        <location filename="../gis/CGisListWks.cpp" line="1187"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>

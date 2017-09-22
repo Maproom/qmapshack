@@ -1103,7 +1103,10 @@ void IGisProject::sortItems()
 
 bool sortByName(IGisItem * item1, IGisItem * item2)
 {
-    return item1->getName() < item2->getName();
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1->getName(), item2->getName()) < 0;
 }
 
 bool sortByTime(IGisItem * item1, IGisItem * item2)

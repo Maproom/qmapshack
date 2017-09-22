@@ -32,6 +32,7 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/tcx/CTcxProject.h"
+#include "gis/sml/CSmlProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -41,14 +42,15 @@
 #include <QtWidgets>
 
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.qms *.slf *.fit)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.qms *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
 const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
+const QString IGisProject::filedialogFilterSML    = "Suunto XML format (*.sml)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
 const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
-const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";;" + filedialogFilterFIT;
+const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
 IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
@@ -130,6 +132,11 @@ IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
     {
         item = new CTcxProject(filename, parent);
     }
+    else if (suffix == "sml")
+    {
+        item = new CSmlProject(filename, parent);
+    }
+
 
 
     if(item && !item->isValid())

@@ -167,10 +167,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
                 if(nullptr != item)
                 {
-                    item->treeWidget()->collapseAll();
-                    item->treeWidget()->setCurrentItem(item);
-                    item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
-
+                    scrollToItem(item);
                     if(setScreenOption(point, item))
                     {
                         stateItemSel = eStateShowItemOptions;
@@ -198,10 +195,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                     scrOpt = nullptr;
                     if(item)
                     {
-                        item->treeWidget()->collapseAll();
-                        item->treeWidget()->setCurrentItem(item);
-                        item->treeWidget()->scrollToItem(item, QAbstractItemView::PositionAtCenter);
-
+                        scrollToItem(item);
                         if(setScreenOption(screenUnclutter->getOrigin(), item))
                         {
                             stateItemSel = eStateShowItemOptions;
@@ -259,6 +253,19 @@ void CMouseNormal::resetState()
     stateItemSel = eStateIdle;
 }
 
+void CMouseNormal::scrollToItem(IGisItem * item)
+{
+    QTreeWidget * treeWidget = item->treeWidget();
+    // block signals as this is an internal
+    // change and no user interaction with
+    // the tree widget
+    treeWidget->blockSignals(true);
+    treeWidget->collapseAll();
+    treeWidget->setCurrentItem(item);
+    treeWidget->scrollToItem(item, QAbstractItemView::PositionAtCenter);
+    treeWidget->blockSignals(false);
+}
+
 bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem * item)
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
@@ -302,7 +309,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
             This might be a bit odd but there are two reasons:
 
             1) Multiple update events are combined by the event loop. Thus multiple mouse move
-               events are reduced a single paint event. As getItemsByPos() is quite cycle
+               events are reduced to a single paint event. As getItemsByPos() is quite cycle
                intense this seems like a good idea.
 
             2) The list of items passed back by getItemsByPos() must not be stored. That is why

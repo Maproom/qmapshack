@@ -66,6 +66,9 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
     connect(lineFilter, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
     connect(actionSetupFilter, &QAction::triggered, this, &CGisWidget::slotSetupFilter);
+    connect(treeWks, &CGisListWks::itemPressed, this, &CGisWidget::slotWksItemPressed);
+    connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWidget::slotWksItemSelectionChanged);
+
 
     slotHelpText();
 
@@ -203,6 +206,28 @@ void CGisWidget::slotSaveAll()
     CCanvas::restoreOverrideCursor("slotSaveAll");
 }
 
+
+void CGisWidget::slotWksItemSelectionChanged()
+{
+    slotWksItemPressed(treeWks->currentItem());
+}
+
+void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
+{
+    IGisItem * item     = dynamic_cast<IGisItem*>(i);
+    CCanvas * canvas    = CMainWindow::self().getVisibleCanvas();
+
+    if((item != nullptr) && (canvas != nullptr))
+    {
+        keyWksSelection = item->getKey();
+        canvas->update();
+    }
+    else
+    {
+        keyWksSelection.clear();
+    }
+}
+
 IGisProject * CGisWidget::selectProject()
 {
     QString key, name;
@@ -289,6 +314,7 @@ IGisProject * CGisWidget::selectProject()
 void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
+
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
     {
         QTreeWidgetItem * item = treeWks->topLevelItem(i);
@@ -305,6 +331,17 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
             continue;
         }
     }
+
+    /*
+        getItemsByPos() is called by CMouseNormal to collect all items
+        close to pos. If the items list has etries we can assume that
+        the highlight from the workspace selection is not needed anymore.
+    */
+    if(!items.isEmpty())
+    {
+        keyWksSelection.clear();
+    }
+
 }
 
 void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
@@ -1009,6 +1046,13 @@ void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
             device->drawItem(p, viewport, gis);
             continue;
         }
+    }
+
+
+    IGisItem * item = getItemByKey(keyWksSelection);
+    if(item != nullptr)
+    {
+        item->drawHighlight(p);
     }
 }
 

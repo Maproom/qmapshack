@@ -59,7 +59,7 @@ private slots:
 
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);
-
+    void scrollToItem(IGisItem * item);
 protected:
     void stopTracking() const;
     void resetState();

@@ -105,20 +105,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         smlSample_t sample;
         sample.time = Time0.addMSecs(smlSamples.item(i).toElement().elementsByTagName("Time").item(0).firstChild().nodeValue().toDouble() * 1000);
     
-        /*
-          	<Sample>
-				<UTC>2017-09-22T14:57:28.896Z</UTC>
-				<Time>85.896000000000001</Time>
-				<Events>
-					<Lap>
-						<Type>Manual</Type>
-						<Duration>86.5</Duration>
-						<Distance>586</Distance>
-					</Lap>
-				</Events>
-			</Sample>
-        
-        */
         if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().isElement())
         {
             if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().elementsByTagName("Laps").item(0).toElement().isElement())
@@ -162,7 +148,9 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             {   sample.cadence = NOFLOAT; }
 
             if (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement())
-            {   sample.temperature = smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble(); }
+            {
+                sample.temperature = smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble()- 273.15; // from °K to °C
+            }
             else
             {   sample.temperature = NOFLOAT; }
 
@@ -185,6 +173,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     fillMissingData("Latitude", samplesList);
     fillMissingData("Longitude", samplesList);
     fillMissingData("HR", samplesList);
+    fillMissingData("Temperature", samplesList);
 
 
     trk.segs.resize(1);
@@ -192,17 +181,15 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
     for (int i = 0; i < samplesList.size(); i++)
     {
-        if (samplesList[i].longitude != NOFLOAT)
-        {
-            CTrackData::trkpt_t trkpt;
-            trkpt.time = samplesList[i].time;
-            trkpt.lat = samplesList[i].latitude;
-            trkpt.lon = samplesList[i].longitude;
-            trkpt.ele = samplesList[i].altitude;
-            trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = samplesList[i].HR;
-    
-            seg->pts.append(trkpt);
-        }
+        CTrackData::trkpt_t trkpt;
+        trkpt.time = samplesList[i].time;
+        trkpt.lat = samplesList[i].latitude;
+        trkpt.lon = samplesList[i].longitude;
+        if (samplesList[i].altitude != NOFLOAT) { trkpt.ele = samplesList[i].altitude; }
+        if (samplesList[i].HR != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = samplesList[i].HR; }
+        if (samplesList[i].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[i].temperature; }
+
+        seg->pts.append(trkpt);
     }
     
     new CGisItemTrk(trk, project);
@@ -285,11 +272,6 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &
 
 double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t * smlSample)
 {
-    /*if (dataField == "Time")
-    {
-        return smlSample->time.toMSecsSinceEpoch;
-    }*/
-
     if (dataField == "Latitude")
     {
         return smlSample->latitude;
@@ -347,12 +329,7 @@ double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t *
 
 
 void CSmlProject::setDataToSmlSample(const QString &dataField, smlSample_t * smlSample, const double data)
-{/*
-    if (dataField == "Time")
-    {
-        smlSample->time.fromMSecsSinceEpoch = data;
-    }*/
-
+{
     if (dataField == "Latitude")
     {
         smlSample->latitude = data;
@@ -403,54 +380,4 @@ void CSmlProject::setDataToSmlSample(const QString &dataField, smlSample_t * sml
     {
         smlSample->speed = data;
     }
-
-
-
 }
-
-/*
-   if (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() )
-            {   sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654)) * 360; }
-            else
-            {    sample.latitude = NOFLOAT; }
-        
-            if (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement())
-            {   sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654)) * 360; }
-            else
-            {   sample.longitude = NOFLOAT;  }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement())
-            {   sample.altitude = smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.altitude = NOFLOAT; }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).toElement().isElement())
-            {   sample.verticalSpeed = smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.verticalSpeed = NOFLOAT; }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement())
-            {   sample.HR = smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.HR = NOFLOAT; }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement())
-            {   sample.cadence = smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.cadence = NOFLOAT; }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement())
-            {   sample.temperature = smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.temperature = NOFLOAT; }
-
-            if (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement())
-            {   sample.seaLevelPressure = smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.seaLevelPressure = NOFLOAT; }
-        
-            if (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement())
-            {   sample.speed = smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.speed = NOFLOAT; } */
-

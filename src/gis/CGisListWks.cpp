@@ -46,6 +46,7 @@
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/tcx/CTcxProject.h"
+#include "gis/sml/CSmlProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -912,6 +913,15 @@ void CGisListWks::slotLoadWorkspace()
             *project << stream;
             break;
         }
+
+        case IGisProject::eTypeSml:
+        {
+            project = new CSmlProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
+            break;
+        }
+
         }
 
         if(nullptr != project)

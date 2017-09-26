@@ -47,14 +47,18 @@ private:
         QDateTime time; // as UTC timestamp
         double latitude; // in degrees
         double longitude; // in degrees
-        double altitude;
-        double verticalSpeed;
-        double HR;
-        double cadence;
-        double temperature;
-        double seaLevelPressure;
-        double speed;
+        double altitude; 
+        double verticalSpeed; // in m/h
+        double HR; // in bpm
+        double cadence; // in bpm
+        double temperature; // in °C
+        double seaLevelPressure; // in hPa
+        double speed; // in speed units
     };
+
+    static double getDataFromSmlSample(const QString &dataField, smlSample_t *smlSample);
+    static void setDataToSmlSample(const QString &dataField, smlSample_t *smlSample, const double data);
+    static void fillMissingData(const QString &dataField, QList<smlSample_t> &samplesList);
 };
 
 #endif //CSMLPROJECT_H

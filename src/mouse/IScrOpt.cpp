@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisWidget.h"
 #include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 #include "mouse/IScrOpt.h"
 #include "units/IUnit.h"
-#include "gis/CGisWidget.h"
 #include <QtWidgets>
 
 

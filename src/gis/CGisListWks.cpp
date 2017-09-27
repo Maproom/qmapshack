@@ -1124,7 +1124,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionEditArea->setDisabled(isOnDevice);
                 menuItemOvl->exec(p);
                 break;
-            }            
+            }
+
             return;
         }
     }

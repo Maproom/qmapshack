@@ -165,6 +165,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 CGisWidget::self().slotWksItemSelectionReset();
                 break;
             }
+
             case eStateHooverSingle:
             {
                 stateItemSel = eStateIdle;
@@ -256,7 +257,7 @@ void CMouseNormal::resetState()
     if(!screenItemOption.isNull())
     {
         screenItemOption->deleteLater();
-    }    
+    }
     stateItemSel = eStateIdle;
 }
 

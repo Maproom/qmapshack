@@ -432,8 +432,8 @@ private:
         The item key of last item pressed in the workspace list.
         The key will be reset by getItemsByPos() which is used by
         the mouse object to find items close by for highlight.
-    */
-    IGisItem::key_t  keyWksSelection;
+     */
+    IGisItem::key_t keyWksSelection;
 };
 
 #endif //CGISWIDGET_H

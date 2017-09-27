@@ -216,7 +216,7 @@ void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
 {
     IGisItem * item     = dynamic_cast<IGisItem*>(i);
     if(item != nullptr)
-    {        
+    {
         keyWksSelection = item->getKey();
         for(CCanvas * canvas : CMainWindow::self().getCanvas())
         {
@@ -342,6 +342,11 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         }
     }
 
+    /*
+        If there is an item selected by the workspace limit
+        the list of items to this item. But only if the item
+        is part of the items close to position.
+    */
     if(!keyWksSelection.item.isEmpty() && !items.isEmpty())
     {
         IGisItem * item = getItemByKey(keyWksSelection);
@@ -355,17 +360,6 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
             items.clear();
         }
     }
-
-//    /*
-//        getItemsByPos() is called by CMouseNormal to collect all items
-//        close to pos. If the items list has etries we can assume that
-//        the highlight from the workspace selection is not needed anymore.
-//    */
-//    if(!items.isEmpty())
-//    {
-//        slotWksItemSelectionReset();
-//    }
-
 }
 
 void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)

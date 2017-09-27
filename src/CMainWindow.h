@@ -79,6 +79,7 @@ public:
        @return If the currently visible tab does not contain a CCanvas object 0 is returned.
      */
     CCanvas* getVisibleCanvas() const;
+    QList<CCanvas*> getCanvas() const;
 
     QAction * getMapSetupAction()
     {

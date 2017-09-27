@@ -582,6 +582,22 @@ CCanvas* CMainWindow::getVisibleCanvas() const
     return dynamic_cast<CCanvas*>(tabWidget->currentWidget());
 }
 
+QList<CCanvas*> CMainWindow::getCanvas() const
+{
+    QList<CCanvas*> result;
+    const int N = tabWidget->count();
+    for(int n = 0; n < N; n++)
+    {
+        CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+        if(canvas != nullptr)
+        {
+            result << canvas;
+        }
+    }
+
+    return result;
+}
+
 void CMainWindow::zoomCanvasTo(const QRectF rect)
 {
     CCanvas * canvas = getVisibleCanvas();

@@ -104,7 +104,6 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelStatusMessages = new QLabel(this);
     labelStatusMessages->setWordWrap(true);
     labelStatusMessages->setMinimumWidth(300);
-    labelStatusMessages->setAlignment(Qt::AlignJustify);
     labelStatusMessages->hide();
 
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);

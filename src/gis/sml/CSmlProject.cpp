@@ -68,7 +68,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         throw tr("Failed to open %1").arg(filename);
     }
 
-
     // load file content to xml document
     QDomDocument xml;
     QString msg;
@@ -88,8 +87,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     }
 
     CTrackData trk;
-
-  
+      
     trk.name = xmlSml.elementsByTagName("DateTime").item(0).firstChild().nodeValue(); // date of beginning of recording is chosen as track name
 
     const QDomNodeList& smlSamples = xmlSml.elementsByTagName("Sample");
@@ -107,87 +105,82 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     
         if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().isElement())
         {
-            if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().elementsByTagName("Laps").item(0).toElement().isElement())
+            if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().elementsByTagName("Lap").item(0).toElement().isElement())
             {
                 lapsList << sample.time; // stores timestamps of the samples where the the "Lap" button has been pressed
             }
         }
         else // samples without "event" are the ones containing position, heartrate, etc... that we want to store
         {
-//   const QString &lat = (y < 0) ? "S" : "N";
-            if (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() )
-            {   sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654)) * 360; }
-            else
-            {    sample.latitude = NOFLOAT; }
+            sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() == TRUE) ? 
+                smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360 : NOFLOAT; // from radians to degrees
         
-            if (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement())
-            {   sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654)) * 360; }
-            else
-            {   sample.longitude = NOFLOAT;  }
+            sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360 : NOFLOAT;// from radians to degrees
 
-            if (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement())
-            {   sample.altitude = smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.altitude = NOFLOAT; }
+            sample.altitude = (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
-            if (smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).toElement().isElement())
-            {   sample.verticalSpeed = smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.verticalSpeed = NOFLOAT; }
+            sample.verticalSpeed = (smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
-            if (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement())
-            {   sample.HR = smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble() * 60; }
-            else
-            {   sample.HR = NOFLOAT; }
+            sample.HR = (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble() * 60 : NOFLOAT; // from Hz to bpm
 
-            if (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement())
-            {
-                sample.cadence = smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble() * 60;
-            }
-            else
-            {   sample.cadence = NOFLOAT; }
+            sample.cadence = (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble() * 60 : NOFLOAT; // from Hz to bpm
 
-            if (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement())
-            {
-                sample.temperature = smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble()- 273.15; // from °K to °C
-            }
-            else
-            {   sample.temperature = NOFLOAT; }
+            sample.temperature = (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble() -273.15: NOFLOAT;// from °K to °C
 
-            if (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement())
-            {   sample.seaLevelPressure = smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.seaLevelPressure = NOFLOAT; }
-        
-            if (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement())
-            {   sample.speed = smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble(); }
-            else
-            {   sample.speed = NOFLOAT; }
+            sample.seaLevelPressure = (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble() / 100: NOFLOAT;// /100 to get hPa
+
+            sample.speed = (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
              samplesList << sample;
-
         }
     }
 
-    fillMissingData("Altitude", samplesList);
     fillMissingData("Latitude", samplesList);
     fillMissingData("Longitude", samplesList);
+    fillMissingData("Altitude", samplesList);
+    fillMissingData("VerticalSpeed", samplesList);
     fillMissingData("HR", samplesList);
+    fillMissingData("Cadence", samplesList);
     fillMissingData("Temperature", samplesList);
+    fillMissingData("SeaLevelPressure", samplesList);
+    fillMissingData("Speed", samplesList);
 
 
-    trk.segs.resize(1);
-    CTrackData::trkseg_t *seg = &(trk.segs[0]);
+   lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
+    
+    trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap
+    
+    int lap = 0;
+    CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-    for (int i = 0; i < samplesList.size(); i++)
+    for (int j = 0; j < samplesList.size(); j++)
     {
+       
+        if (samplesList[j].time > lapsList[lap])
+        {
+            lap++;
+            seg = &(trk.segs[lap]);
+        }
+        
         CTrackData::trkpt_t trkpt;
-        trkpt.time = samplesList[i].time;
-        trkpt.lat = samplesList[i].latitude;
-        trkpt.lon = samplesList[i].longitude;
-        if (samplesList[i].altitude != NOFLOAT) { trkpt.ele = samplesList[i].altitude; }
-        if (samplesList[i].HR != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = samplesList[i].HR; }
-        if (samplesList[i].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[i].temperature; }
+        trkpt.time = samplesList[j].time;
+        trkpt.lat = samplesList[j].latitude;
+        trkpt.lon = samplesList[j].longitude;
+        if (samplesList[j].altitude != NOFLOAT) { trkpt.ele = samplesList[j].altitude; }
+        if (samplesList[j].verticalSpeed != NOFLOAT) { trkpt.extensions["gpxdata:verticalSpeed"] = samplesList[j].verticalSpeed; }
+        if (samplesList[j].HR != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = samplesList[j].HR; }
+        if (samplesList[j].cadence != NOFLOAT) { trkpt.extensions["gpxdata:cadence"] = samplesList[j].cadence; }
+        if (samplesList[j].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[j].temperature; }
+        if (samplesList[j].seaLevelPressure != NOFLOAT) { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[j].seaLevelPressure; }
+        if (samplesList[j].speed != NOFLOAT) { trkpt.extensions["gpxdata:speed"] = samplesList[j].speed; }
 
         seg->pts.append(trkpt);
     }

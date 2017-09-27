@@ -159,6 +159,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+    connect(menuItemTrk, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
 
     menuItemWpt     = new QMenu(this);
     menuItemWpt->addAction(actionEditDetails);
@@ -170,6 +171,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
+    connect(menuItemWpt, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
 
     menuItemRte     = new QMenu(this);
     menuItemRte->addAction(actionEditDetails);
@@ -183,6 +185,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionRte2Trk   = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
+    connect(menuItemRte, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
 
 
     menuItemOvl     = new QMenu(this);
@@ -192,6 +195,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);
+    connect(menuItemOvl, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
 
 
     menuItem        = new QMenu(this);
@@ -200,9 +204,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
-
     menuItem->addAction(actionDelete);
-
+    connect(menuItem, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
 
     connect(actionFocusTrk, &QAction::triggered, this, &CGisListWks::slotFocusTrk);
     connect(actionFocusRte, &QAction::triggered, this, &CGisListWks::slotFocusRte);
@@ -1121,8 +1124,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionEditArea->setDisabled(isOnDevice);
                 menuItemOvl->exec(p);
                 break;
-            }
-
+            }            
             return;
         }
     }

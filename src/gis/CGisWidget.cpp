@@ -206,10 +206,6 @@ void CGisWidget::slotSaveAll()
     CCanvas::restoreOverrideCursor("slotSaveAll");
 }
 
-void CGisWidget::slotWksItemSelectionReset()
-{
-    treeWks->setCurrentItem(nullptr, 0);
-}
 
 void CGisWidget::slotWksItemSelectionChanged()
 {
@@ -219,24 +215,26 @@ void CGisWidget::slotWksItemSelectionChanged()
 void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
 {
     IGisItem * item     = dynamic_cast<IGisItem*>(i);
-    CCanvas * canvas    = CMainWindow::self().getVisibleCanvas();
-
     if(item != nullptr)
-    {
+    {        
         keyWksSelection = item->getKey();
-        if(canvas != nullptr)
+        for(CCanvas * canvas : CMainWindow::self().getCanvas())
         {
-            canvas->update();
             canvas->reportStatus("WksSelection", tr("<b>Item Selection: </b>Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior."));
         }
     }
     else
     {
-        keyWksSelection.clear();
-        if(canvas != nullptr)
-        {
-            canvas->reportStatus("WksSelection", "");
-        }
+        slotWksItemSelectionReset();
+    }
+}
+
+void CGisWidget::slotWksItemSelectionReset()
+{
+    keyWksSelection.clear();
+    for(CCanvas * canvas : CMainWindow::self().getCanvas())
+    {
+        canvas->reportStatus("WksSelection", "");
     }
 }
 

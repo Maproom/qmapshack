@@ -206,6 +206,10 @@ void CGisWidget::slotSaveAll()
     CCanvas::restoreOverrideCursor("slotSaveAll");
 }
 
+void CGisWidget::slotWksItemSelectionReset()
+{
+    treeWks->setCurrentItem(nullptr, 0);
+}
 
 void CGisWidget::slotWksItemSelectionChanged()
 {
@@ -217,14 +221,22 @@ void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
     IGisItem * item     = dynamic_cast<IGisItem*>(i);
     CCanvas * canvas    = CMainWindow::self().getVisibleCanvas();
 
-    if((item != nullptr) && (canvas != nullptr))
+    if(item != nullptr)
     {
         keyWksSelection = item->getKey();
-        canvas->update();
+        if(canvas != nullptr)
+        {
+            canvas->update();
+            canvas->reportStatus("WksSelection", tr("<b>Item Selection: </b>Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior."));
+        }
     }
     else
     {
         keyWksSelection.clear();
+        if(canvas != nullptr)
+        {
+            canvas->reportStatus("WksSelection", "");
+        }
     }
 }
 
@@ -332,15 +344,29 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         }
     }
 
-    /*
-        getItemsByPos() is called by CMouseNormal to collect all items
-        close to pos. If the items list has etries we can assume that
-        the highlight from the workspace selection is not needed anymore.
-    */
-    if(!items.isEmpty())
+    if(!keyWksSelection.item.isEmpty() && !items.isEmpty())
     {
-        keyWksSelection.clear();
+        IGisItem * item = getItemByKey(keyWksSelection);
+        if(item && items.contains(item))
+        {
+            items.clear();
+            items << item;
+        }
+        else
+        {
+            items.clear();
+        }
     }
+
+//    /*
+//        getItemsByPos() is called by CMouseNormal to collect all items
+//        close to pos. If the items list has etries we can assume that
+//        the highlight from the workspace selection is not needed anymore.
+//    */
+//    if(!items.isEmpty())
+//    {
+//        slotWksItemSelectionReset();
+//    }
 
 }
 

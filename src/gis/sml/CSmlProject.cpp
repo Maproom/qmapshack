@@ -86,10 +86,29 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         throw tr("Not an sml file: %1").arg(filename);
     }
 
+    if (xmlSml.elementsByTagName("Latitude").count() == 0)
+    {
+        throw tr("This SML file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
+    }
+
     CTrackData trk;
       
     trk.name = xmlSml.elementsByTagName("DateTime").item(0).firstChild().nodeValue(); // date of beginning of recording is chosen as track name
-
+    trk.desc = xmlSml.elementsByTagName("Activity").item(0).firstChild().nodeValue();
+    
+    trk.cmt = tr("Device: %1<br>"
+        "Recovery time: %2 h<br>"
+        "Peak Training Effect: %3<br>"
+        "Energy: %4 kCal<br>"
+        "Battery usage: %5 %/hour")
+        .arg(xmlSml.elementsByTagName("Name").item(0).firstChild().nodeValue())
+        .arg(xmlSml.elementsByTagName("RecoveryTime").item(0).firstChild().nodeValue().toInt() / 3600)
+        .arg(xmlSml.elementsByTagName("PeakTrainingEffect").item(0).firstChild().nodeValue().toDouble())
+        .arg((int)(xmlSml.elementsByTagName("Energy").item(0).firstChild().nodeValue().toDouble()/ 4184))
+        .arg( 100*(xmlSml.elementsByTagName("BatteryChargeAtStart").item(0).firstChild().nodeValue().toDouble() 
+            - xmlSml.elementsByTagName("BatteryCharge").item(0).firstChild().nodeValue().toDouble())
+            / (xmlSml.elementsByTagName("Duration").item(0).firstChild().nodeValue().toDouble() / 3600), 0, 'f', 1);
+    
     const QDomNodeList& smlSamples = xmlSml.elementsByTagName("Sample");
 
     QDateTime Time0;

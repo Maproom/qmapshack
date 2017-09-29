@@ -101,7 +101,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     for (int i = 0; i < smlSamples.count(); i++)	// browse XML samples
     {
         smlSample_t sample;
-        sample.time = Time0.addMSecs(smlSamples.item(i).toElement().elementsByTagName("Time").item(0).firstChild().nodeValue().toDouble() * 1000);
+        sample.time = Time0.addMSecs(smlSamples.item(i).toElement().elementsByTagName("Time").item(0).firstChild().nodeValue().toDouble() * 1000.0);
     
         if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().isElement())
         {
@@ -113,10 +113,10 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         else // samples without "event" are the ones containing position, heartrate, etc... that we want to store
         {
             sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() == TRUE) ? 
-                smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360 : NOFLOAT; // from radians to degrees
+                smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360.0 : NOFLOAT; // from radians to degrees
         
             sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement() == TRUE) ?
-                smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360 : NOFLOAT;// from radians to degrees
+                smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360.0 : NOFLOAT;// from radians to degrees
 
             sample.altitude = (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement() == TRUE) ?
                 smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
@@ -125,16 +125,16 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                 smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
             sample.HR = (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement() == TRUE) ?
-                smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble() * 60 : NOFLOAT; // from Hz to bpm
+                smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble() * 60.0 : NOFLOAT; // from Hz to bpm
 
             sample.cadence = (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement() == TRUE) ?
-                smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble() * 60 : NOFLOAT; // from Hz to bpm
+                smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble() * 60.0 : NOFLOAT; // from Hz to bpm
 
             sample.temperature = (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement() == TRUE) ?
                 smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble() -273.15: NOFLOAT;// from °K to °C
 
             sample.seaLevelPressure = (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement() == TRUE) ?
-                smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble() / 100: NOFLOAT;// /100 to get hPa
+                smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble() / 100.0: NOFLOAT;// /100 to get hPa
 
             sample.speed = (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement() == TRUE) ?
                 smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
@@ -176,7 +176,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         trkpt.lon = samplesList[j].longitude;
         if (samplesList[j].altitude != NOFLOAT) { trkpt.ele = samplesList[j].altitude; }
         if (samplesList[j].verticalSpeed != NOFLOAT) { trkpt.extensions["gpxdata:verticalSpeed"] = samplesList[j].verticalSpeed; }
-        if (samplesList[j].HR != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = samplesList[j].HR; }
+        if (samplesList[j].HR != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = (int)samplesList[j].HR; }
         if (samplesList[j].cadence != NOFLOAT) { trkpt.extensions["gpxdata:cadence"] = samplesList[j].cadence; }
         if (samplesList[j].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[j].temperature; }
         if (samplesList[j].seaLevelPressure != NOFLOAT) { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[j].seaLevelPressure; }
@@ -223,21 +223,23 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &
             else
             {
                 double dY = getDataFromSmlSample(dataField, currentSample) - getDataFromSmlSample(dataField, previousSampleWithData);
-                double dT = ((double)(currentSample->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch())) / 1000;
+                double dT = ((double)(currentSample->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch())) / 1000.0;
                 double slope = dY / dT;
+                double offsetAt0 = getDataFromSmlSample(dataField, previousSampleWithData)
+                    - slope * ( (  (double)(previousSampleWithData->time.toMSecsSinceEpoch())  ) / 1000.0 );
 
                 int j;
                 for (j = 0; j < samplesWithMissingDataList.size(); j++)
                 {
-                    // interpolate data and apply them to position samples in-between
-                    setDataToSmlSample(dataField, samplesWithMissingDataList[j],
-                        getDataFromSmlSample(dataField, previousSampleWithData) + slope * (double)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch()) / 1000));
+                 //    interpolate data and apply them to samples in-between
+             
+                   setDataToSmlSample(dataField, samplesWithMissingDataList[j], (double)(
+                     slope * (double)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  ));
                 }
                 previousSampleWithData = currentSample;
                 samplesWithMissingDataList.clear();
             }
         }
-
 
         if (++i >= samplesList.size())
         {

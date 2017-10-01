@@ -1806,7 +1806,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisWidget.cpp" line="223"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWidget.cpp" line="614"/>

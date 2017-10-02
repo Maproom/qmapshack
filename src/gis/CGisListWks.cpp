@@ -1308,6 +1308,7 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != nullptr)
     {
+        CGisWidget::self().slotWksItemSelectionReset();
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
         CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
     }

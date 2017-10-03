@@ -532,7 +532,7 @@ void IPlot::wheelEvent(QWheelEvent * e)
 
     if(doVerticalZoom)
     {
-        data->y().zoom(in, e->pos().y() - bottom);
+        data->y().zoom(in, bottom - e->pos().y());
         setSizes();
         data->y().setScale(rectGraphArea.height());
     }

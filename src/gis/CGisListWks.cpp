@@ -1195,6 +1195,9 @@ void CGisListWks::slotCloseAllProjects()
 
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
     closeProjects(findItems("*", Qt::MatchWildcard));
+
+    CGisWidget::self().slotWksItemSelectionReset();
+
     emit sigChanged();
 }
 

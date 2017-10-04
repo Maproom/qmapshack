@@ -54,6 +54,7 @@ private:
         double temperature; // in °C
         double seaLevelPressure; // in hPa
         double speed; // in speed units
+        double energyConsumption; // in kCal/min
     };
 
     static double getDataFromSmlSample(const QString &dataField, smlSample_t *smlSample);

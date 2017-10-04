@@ -1774,19 +1774,19 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1213"/>
+        <location filename="../gis/CGisListWks.cpp" line="1216"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1213"/>
+        <location filename="../gis/CGisListWks.cpp" line="1216"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="662"/>
-        <location filename="../gis/CGisListWks.cpp" line="1694"/>
-        <location filename="../gis/CGisListWks.cpp" line="1732"/>
+        <location filename="../gis/CGisListWks.cpp" line="1698"/>
+        <location filename="../gis/CGisListWks.cpp" line="1736"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -1953,97 +1953,102 @@ ligne %2, colonne %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="65"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
         <source>Air Temperature</source>
         <translation>Température de l&apos;air</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="69"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
         <source>Water Temperature</source>
         <translation>Température de l&apos;eau</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="73"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <translation>Profondeur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="77"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="89"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
         <source>Heart Rate</source>
         <translation>Fréquence cardiaque</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="81"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="93"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="112"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
         <translation>Cadence</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="97"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="137"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
         <source>Speed</source>
         <translation>Vitesse</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="101"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
         <source>Acceleration</source>
         <translation>Accélération</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="105"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <translation>Cap</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="116"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Temperature</source>
         <translation>Température</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="120"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
         <source>Distance</source>
         <translation>Distance</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="128"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <translation>Energie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="133"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Sea Level Pressure</source>
         <translation>Pression au niveau de la mer</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="141"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <source>Speed (vertical)</source>
         <translation>Vitesse (verticale)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="150"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
         <source>Slope*</source>
         <translation>Pente*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="155"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
         <source>Speed*</source>
         <translation>Vitesse*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="124"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="160"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="169"/>
         <source>Elevation</source>
         <translation>Altitude</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="165"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="164"/>
+        <source>SpeedTime*</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="174"/>
         <source>Progress</source>
         <translation>Progression</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="170"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="179"/>
         <source>Terrain slope</source>
         <translation>Pente du terrain</translation>
     </message>

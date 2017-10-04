@@ -16,12 +16,15 @@
 
 **********************************************************************************************/
 
+// KKA modified
+
 #include "gis/trk/CKnownExtension.h"
 #include "units/IUnit.h"
 #include <QStringBuilder>
 
 const QString CKnownExtension::internalSlope    = "::ql:slope";
 const QString CKnownExtension::internalSpeed    = "::ql:speed";
+const QString CKnownExtension::internalSpeedTime    = "::ql:speed"; //Add by KKA
 const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
 const QString CKnownExtension::internalTerrainSlope = "::ql:terrainslope";
@@ -153,6 +156,12 @@ void CKnownExtension::init(const IUnit &units)
 
         {internalSpeed,
          { tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+           [](const CTrackData::trkpt_t &p) { return p.speed; }}
+        },
+
+// Add by KKA
+        {internalSpeedTime,
+         { tr("SpeedTime*"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 

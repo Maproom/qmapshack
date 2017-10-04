@@ -158,6 +158,9 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             sample.speed = (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement() == TRUE) ?
                 smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
+            sample.speed = (smlSamples.item(i).toElement().elementsByTagName("EnergyConsumption").item(0).toElement().isElement() == TRUE) ?
+                smlSamples.item(i).toElement().elementsByTagName("EnergyConsumption").item(0).firstChild().nodeValue().toDouble() * 60.0 / 4184.0 : NOFLOAT; // from joule/s to kCal/min
+
              samplesList << sample;
         }
     }
@@ -171,6 +174,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     fillMissingData("Temperature", samplesList);
     fillMissingData("SeaLevelPressure", samplesList);
     fillMissingData("Speed", samplesList);
+    fillMissingData("EnergyConsumption", samplesList);
 
 
    lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
@@ -200,6 +204,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         if (samplesList[j].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[j].temperature; }
         if (samplesList[j].seaLevelPressure != NOFLOAT) { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[j].seaLevelPressure; }
         if (samplesList[j].speed != NOFLOAT) { trkpt.extensions["gpxdata:speed"] = samplesList[j].speed; }
+        if (samplesList[j].energyConsumption != NOFLOAT) { trkpt.extensions["gpxdata:energy"] = samplesList[j].speed; }
 
         seg->pts.append(trkpt);
     }
@@ -301,44 +306,42 @@ double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t *
         return smlSample->altitude;
     }
 
-
     if (dataField == "VerticalSpeed")
     {
         return smlSample->verticalSpeed;
     }
-
 
     if (dataField == "HR")
     {
         return smlSample->HR;
     }
 
-
     if (dataField == "Cadence")
     {
         return smlSample->cadence;
     }
-
 
     if (dataField == "Temperature")
     {
         return smlSample->temperature;
     }
 
-
     if (dataField == "SeaLevelPressure")
     {
         return smlSample->seaLevelPressure;
     }
-
 
     if (dataField == "Speed")
     {
         return smlSample->speed;
     }
 
-    return NOFLOAT;
+    if (dataField == "EnergyConsumption")
+    {
+        return smlSample->energyConsumption;
+    }
 
+    return NOFLOAT;
 }
 
 
@@ -358,40 +361,39 @@ void CSmlProject::setDataToSmlSample(const QString &dataField, smlSample_t * sml
     {
         smlSample->altitude = data;
     }
-
-
+    
     if (dataField == "VerticalSpeed")
     {
         smlSample->verticalSpeed = data;
     }
-
-
+    
     if (dataField == "HR")
     {
         smlSample->HR = data;
     }
-
-
+    
     if (dataField == "Cadence")
     {
         smlSample->cadence = data;
     }
-
-
+    
     if (dataField == "Temperature")
     {
         smlSample->temperature = data;
     }
-
-
+    
     if (dataField == "SeaLevelPressure")
     {
         smlSample->seaLevelPressure = data;
     }
 
-
     if (dataField == "Speed")
     {
         smlSample->speed = data;
+    }
+
+    if (dataField == "EnergyConsumption")
+    {
+        smlSample->energyConsumption = data;
     }
 }

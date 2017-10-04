@@ -68,7 +68,7 @@ void CPropertyTrk::setupData()
         };
 
         // lame hack for properties off the usual scheme
-        if(key == CKnownExtension::internalProgress)
+        if((key == CKnownExtension::internalProgress) || (key == CKnownExtension::internalSpeedTime)) // Modified by KKA
         {
             property.min        = 0;
             property.axisType   = property_t::eAxisTime;

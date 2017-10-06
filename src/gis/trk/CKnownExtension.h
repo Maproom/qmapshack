@@ -44,7 +44,7 @@ public:
 
     static const QString internalSlope;    //< name of internally derived slope
     static const QString internalSpeed;    //< name of internally derived speed
-    static const QString internalSpeedTime;    //< name of internally derived speed over time; Add by KKA
+    static const QString internalSpeedTime;    //< name of internally derived speed over time
     static const QString internalEle;      //< name of internally derived elevation (DEM)
     static const QString internalProgress; //< name of internally derived progress
     static const QString internalTerrainSlope; //< name of internally derived terrain slope

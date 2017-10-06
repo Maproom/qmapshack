@@ -771,6 +771,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
     if(numeric_limits<qreal>::max() != extremaSpeed.min)
     {
         existingExtensions << CKnownExtension::internalSpeed;
+        existingExtensions << CKnownExtension::internalSpeedTime;
         extrema[CKnownExtension::internalSpeed] = extremaSpeed;
     }
 

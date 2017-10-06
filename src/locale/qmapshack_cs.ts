@@ -1101,21 +1101,21 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Pohyb: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1245"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1258"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1314"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1358"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1497"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1246"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1315"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1359"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1498"/>
         <source>track</source>
         <translation>Stopa</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1449"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1450"/>
         <source>Hide point %1.</source>
         <translation>Skrýt bod %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1453"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1454"/>
         <source>Hide points %1..%2.</source>
         <translation>Skrýt body %1  %2.</translation>
     </message>
@@ -1211,47 +1211,47 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Vzdálenost: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1304"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1305"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Trvale odstraněné body %1 ... %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1482"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1483"/>
         <source>Show points.</source>
         <translation>Ukázat body.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2010"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2011"/>
         <source>Changed name</source>
         <translation>Změněný název</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2016"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2017"/>
         <source>Changed comment</source>
         <translation>Změněná poznámka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2022"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2023"/>
         <source>Changed description</source>
         <translation>Změněný popis</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2028"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2029"/>
         <source>Changed links</source>
         <translation>Změněné odkazy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2039"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2040"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Výška bodu %1 byla změněna na %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2063"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2064"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Činnost byla pro celou stopu změněna na &apos;%1&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2102"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2103"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Činnost byla změněna pro oblast (%2...%3) na &apos;%1&apos;.</translation>
     </message>
@@ -1953,102 +1953,102 @@ line %2, column %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Air Temperature</source>
         <translation>Teplota vzduchu</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
         <source>Water Temperature</source>
         <translation>Teplota vody</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
         <source>Depth</source>
         <translation>Hloubka</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
         <source>Heart Rate</source>
         <translation>Tep srdce</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="83"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="95"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="114"/>
         <source>Cadence</source>
         <translation>Rychlost chůze</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="139"/>
         <source>Speed</source>
         <translation>Rychlost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
         <source>Acceleration</source>
         <translation>Zrychlení</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="107"/>
         <source>Course</source>
         <translation>Směr</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="118"/>
         <source>Temperature</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
         <source>Energy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
         <source>Sea Level Pressure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="143"/>
         <source>Speed (vertical)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="152"/>
         <source>Slope*</source>
         <translation>Sklon*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
         <source>Speed*</source>
         <translation>Rychlost*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="169"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
         <source>Elevation</source>
         <translation>Výška</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="164"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
         <source>SpeedTime*</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="174"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>
         <source>Progress</source>
         <translation>Postup</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="179"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="177"/>
         <source>Terrain slope</source>
         <translation type="unfinished"></translation>
     </message>

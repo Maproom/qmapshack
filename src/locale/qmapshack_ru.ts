@@ -2032,15 +2032,15 @@ line %2, column %3:
         <translation>Скорость*</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
+        <source>Speed over time*</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
         <source>Elevation</source>
         <translation>Высота</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
-        <source>SpeedTime*</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>

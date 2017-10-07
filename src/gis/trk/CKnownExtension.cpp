@@ -154,12 +154,12 @@ void CKnownExtension::init(const IUnit &units)
         },
 
         {internalSpeed,
-         { tr("Speed*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed ov. d.*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalSpeedTime,
-         { tr("Speed over time*"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed ov. t.*"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 

@@ -2027,20 +2027,20 @@ Zeile %2, Spalte %3:
         <translation>Neigung*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
-        <source>Speed*</source>
-        <translation>Geschwindigkeit_s*</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
-        <source>Speed over time*</source>
-        <translation>Geschwindigkeit_t*</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
         <source>Elevation</source>
         <translation>Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
+        <source>Speed ov. d.*</source>
+        <translation>Geschw. ü. Entf.*</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
+        <source>Speed ov. t.*</source>
+        <translation>Geschw. ü. Zeit*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>

@@ -440,10 +440,7 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
     , speedfactor(speedfactor)
 {
     //there can be only one...
-    if(nullptr != m_self)
-    {
-        delete m_self;
-    }
+    delete m_self;
     m_self = this;
 }
 

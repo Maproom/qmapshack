@@ -1071,67 +1071,67 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Indice: visible %1. total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="533"/>
         <source>Ele.: %1 %2</source>
         <translation>Altitud: %1 %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
         <source> slope: %1%3 (%2%)</source>
         <translation> pendiente: %1%3 (%2%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="540"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="541"/>
         <source> speed: %1%2</source>
         <translation> velocidad: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="569"/>
         <source>... and %1 tags not displayed</source>
         <translation>Y %1 etiquetas no mostradas</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="580"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
         <source>Distance: - (-)</source>
         <translation>Distancia: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="581"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>Moving: - (-)</source>
         <translation>En movimiento: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1246"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1259"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1315"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1359"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1498"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1247"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1260"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1316"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1360"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1499"/>
         <source>track</source>
         <translation>track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1450"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1451"/>
         <source>Hide point %1.</source>
         <translation>Ocultar punto %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1454"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1455"/>
         <source>Hide points %1..%2.</source>
         <translation>Ocultar puntos %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
         <source> Moving: %1%2 (%3%)</source>
         <translation> En movimiento: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="632"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="644"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
         <source> Time: %1%2</source>
         <translation>Tiempo: %1%2</translation>
     </message>
@@ -1161,97 +1161,97 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>En movimiento: -, Velocidad: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="578"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="579"/>
         <source>Ascent: - (-)</source>
         <translation>Ascenso: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="579"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="580"/>
         <source>Descent: - (-)</source>
         <translation>Descenso: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="586"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="587"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Ascenso: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
         <source> Descent: %1%2 (%3%)</source>
         <translation> Descenso: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Distancia: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="620"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
         <source>Ascent: -</source>
         <translation>Ascenso: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="622"/>
         <source>Descent: -</source>
         <translation>Descenso: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="627"/>
         <source>Ascent: %1%2</source>
         <translation>Ascenso: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
         <source> Descent: %1%2</source>
         <translation>Descenso: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
         <source>Distance: %1%2</source>
         <translation>Distancia: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1305"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1306"/>
         <source>Permanently removed points %1..%2</source>
         <translation>Puntos eliminados definitivamente %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1483"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1484"/>
         <source>Show points.</source>
         <translation>Mostrar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2011"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2012"/>
         <source>Changed name</source>
         <translation>Se cambió el nombre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2017"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2018"/>
         <source>Changed comment</source>
         <translation>Se cambió el comentario</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2023"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2024"/>
         <source>Changed description</source>
         <translation>Se cambió la descripción</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2029"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2030"/>
         <source>Changed links</source>
         <translation>Se cambió el enlace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2040"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2041"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Se cambió altitud de los puntos %1 a %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2064"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2065"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Actividad cambiada a &apos;%1&apos; para todo el track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2103"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2104"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Actividad cambiada a &apos;%1&apos; para el rango (%2..%3).</translation>
     </message>
@@ -1953,25 +1953,9 @@ línea %2, columna %3.
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
-        <source>Air Temperature</source>
-        <translation>Temperatura del aire</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
-        <source>Water Temperature</source>
-        <translation>Temperatura del agua</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
         <source>Depth</source>
         <translation>Profundidad</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
-        <source>Heart Rate</source>
-        <translation>Ritmo cardiaco</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="83"/>
@@ -1983,13 +1967,10 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="139"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
         <source>Speed</source>
         <translation>Velocidad</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
-        <source>Acceleration</source>
-        <translation>Aceleración</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="107"/>
@@ -1997,60 +1978,187 @@ línea %2, columna %3.
         <translation>Rumbo</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="118"/>
-        <source>Temperature</source>
-        <translation>Temperatura</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
-        <source>Distance</source>
-        <translation>Distancia</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
         <source>Energy</source>
         <translation>Energía</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
-        <source>Sea Level Pressure</source>
-        <translation>Presión a nivel del mar</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="143"/>
-        <source>Speed (vertical)</source>
-        <translation>Velocidad vertical</translation>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="152"/>
+        <source>Slope</source>
+        <translation type="unfinished">Pendiente</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="152"/>
-        <source>Slope*</source>
-        <translation>Pendiente</translation>
+        <source>QMS Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
+        <source>QMS Speed over Distance</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
-        <source>Elevation</source>
-        <translation>Altitud</translation>
+        <source>Elev.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
-        <source>Speed ov. d.*</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
+        <source>Air Temp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
+        <source>Garmin Air Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
+        <source>Water Temp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
+        <source>Garmin Water Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
+        <source>Garmin Depth</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
+        <source>Heart R.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
+        <source>Garmin Heart Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="83"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="114"/>
+        <source>Garmin Cadence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
+        <source>Mio Heart Rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="95"/>
+        <source>Mio Cadence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
+        <source>Mio Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
+        <source>Accel.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
+        <source>Mio Acceleration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="107"/>
+        <source>Mio Course</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="118"/>
+        <source>Temp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="118"/>
+        <source>Garmin Temperature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
+        <source>Dist.</source>
+        <translation type="unfinished">Distancia</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
+        <source>Garmin Distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <source>Garmin Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
+        <source>Garmin Energy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
+        <source>Sea Lev. Pres.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
+        <source>Garmin Sea Level Pressure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="139"/>
+        <source>Garmin Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="143"/>
+        <source>v. Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="143"/>
+        <source>Garmin vertical Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
-        <source>Speed ov. t.*</source>
+        <source>QMS Speed over Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
+        <source>QMS Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>
+        <source>QMS Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="177"/>
+        <source>Terr. Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="177"/>
+        <source>QMS Terrain Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>
         <source>Progress</source>
         <translation>Progreso</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="177"/>
-        <source>Terrain slope</source>
-        <translation>Pendiente del terreno</translation>
     </message>
 </context>
 <context>
@@ -9643,18 +9751,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="728"/>
-        <location filename="../units/IUnit.cpp" line="734"/>
+        <location filename="../units/IUnit.cpp" line="725"/>
+        <location filename="../units/IUnit.cpp" line="731"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="728"/>
+        <location filename="../units/IUnit.cpp" line="725"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="734"/>
+        <location filename="../units/IUnit.cpp" line="731"/>
         <source>Position values out of bounds. </source>
         <translation>Valores de posición fuera del límite.</translation>
     </message>
@@ -9672,7 +9780,7 @@ o
         <translation>Métrico</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="47"/>
+        <location filename="../units/IUnitsSetup.ui" line="53"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Nota:&lt;/b&gt; Para algunos elementos de la interfaz de usuario, cambiar las unidades no tendrá efecto hasta que se reinicie QMapShack.</translation>
     </message>

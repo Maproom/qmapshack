@@ -520,7 +520,8 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     {
         str += tr("Index: visible %1, total %2").arg(pt.idxVisible).arg(pt.idxTotal);
     }
-    str += "\n";
+    //    str += "\n";
+    str += ", "; // Index and date in one row
 
     if(totalElapsedSeconds != 0)
     {
@@ -554,7 +555,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
         const CKnownExtension &ext = CKnownExtension::get(key);
         if(ext.known)
         {
-            str += "\n" + ext.name + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor, 0, 'f', 1).arg(ext.unit);
+            str += "\n" + ext.nameLongText + ": " + QString("%1%2").arg(ext.valueFunc(pt)*ext.factor, 0, 'f', 1).arg(ext.unit);
         }
         else
         {
@@ -770,9 +771,9 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
     if(numeric_limits<qreal>::max() != extremaSpeed.min)
     {
-        existingExtensions << CKnownExtension::internalSpeed;
+        existingExtensions << CKnownExtension::internalSpeedDist;
         existingExtensions << CKnownExtension::internalSpeedTime;
-        extrema[CKnownExtension::internalSpeed] = extremaSpeed;
+        extrema[CKnownExtension::internalSpeedDist] = extremaSpeed;
     }
 
     if(numeric_limits<qreal>::max() != extremaProgress.min)

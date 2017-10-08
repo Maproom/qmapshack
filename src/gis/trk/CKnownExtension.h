@@ -43,7 +43,7 @@ public:
     static void initClueTrustTPXv1(const IUnit &units, const QString &ns);
 
     static const QString internalSlope;    //< name of internally derived slope
-    static const QString internalSpeed;    //< name of internally derived speed
+    static const QString internalSpeedDist;    //< name of internally derived speed over distance
     static const QString internalSpeedTime;    //< name of internally derived speed over time
     static const QString internalEle;      //< name of internally derived elevation (DEM)
     static const QString internalProgress; //< name of internally derived progress
@@ -61,10 +61,11 @@ public:
 
        @return a valid extension descriptor (for both known and unknown extensions)
      */
-    static const CKnownExtension get(const QString &name);
-    static bool isKnown(const QString &name);
+    static const CKnownExtension get(const QString &key);
+    static bool isKnown(const QString &key);
 
-    QString name;              //< userfriendly name ("Speed" "Heart Rate")
+    QString nameShortText;     //< short text name to display in GUI (ex. "Heart R." in y-axis)
+    QString nameLongText;      //< long text name to display in GUI (ex. Heart Rate" in ComboBox)
     int order;                 //< the order used for exporting ("relative position")
     qreal minimum;             //< hard (enforced) minimum, cannot go lower
     qreal maximum;             //< hard (enforced) maximum, cannot go higher
@@ -82,13 +83,13 @@ private:
     static QHash<QString, CKnownExtension> knownExtensions;
     static QSet<QString> registeredNS;
 
-    CKnownExtension(QString name,      int order,
+    CKnownExtension(QString nameShortText, QString nameLongText, int order,
                     qreal minimum,     qreal maximum,
                     qreal factor,      QString unit,
                     QString icon,      bool known,
                     bool derivedQMS,   fTrkPtGetVal valueFunc
                     )
-        : name(name), order(order), minimum(minimum), maximum(maximum), factor(factor),
+        : nameShortText(nameShortText), nameLongText(nameLongText), order(order), minimum(minimum), maximum(maximum), factor(factor),
         unit(unit), icon(icon), known(known), derivedQMS(derivedQMS), valueFunc(valueFunc)
     {
     }

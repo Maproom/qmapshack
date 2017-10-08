@@ -161,7 +161,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     // setting up the graph properties will trigger the signals
     // this is good because the signals are connected at this point
     // invoking the slots
-    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
+    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeedDist);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
     addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
@@ -405,7 +405,7 @@ void CDetailsTrk::updateData()
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
         QIcon icon(ext.icon);
-        comboColorSource->addItem(icon, ext.known ? ext.name : key, key);
+        comboColorSource->addItem(icon, ext.known ? ext.nameLongText : key, key);
     }
     int currentIdx = comboColorSource->findData(trk.getColorizeSource());
     if(-1 == currentIdx)
@@ -452,7 +452,7 @@ void CDetailsTrk::updateData()
     X_____________UnBlockAllSignals_____________X(this);
 
     // refill comboboxes to select track property to be displayed by graphs
-    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeed);
+    loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeedDist);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
     CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();

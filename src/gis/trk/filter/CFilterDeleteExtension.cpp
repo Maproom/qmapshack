@@ -44,7 +44,7 @@ void CFilterDeleteExtension::update()
         if(!ext.derivedQMS)
         {
             QIcon icon(ext.icon);
-            comboExtensions->addItem(icon, ext.known ? ext.name : key, key);
+            comboExtensions->addItem(icon, ext.known ? ext.nameLongText : key, key);
         }
     }
 

@@ -22,7 +22,7 @@
 #include <QStringBuilder>
 
 const QString CKnownExtension::internalSlope    = "::ql:slope";
-const QString CKnownExtension::internalSpeed    = "::ql:speed";
+const QString CKnownExtension::internalSpeedDist    = "::ql:speeddist";
 const QString CKnownExtension::internalSpeedTime    = "::ql:speedtime";
 const QString CKnownExtension::internalEle      = "::ql:ele";
 const QString CKnownExtension::internalProgress = "::ql:progress";
@@ -64,23 +64,23 @@ void CKnownExtension::initGarminTPXv1(const IUnit &units, const QString &ns)
     // support for the Garmin TrackPointExtension v1
     //  https://www8.garmin.com/xmlschemas/TrackPointExtensionv1.xsd
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":atemp",
-                           { tr("Air Temperature"), 0, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
+                           { tr("Air Temp."), tr("Garmin Air Temperature"), 0, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":atemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":wtemp",
-                           { tr("Water Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
+                           { tr("Water Temp."), tr("Garmin Water Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcWTemp.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":wtemp")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":depth",
-                           { tr("Depth"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
+                           { tr("Depth"), tr("Garmin Depth"), 2, 0., 12000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDepth.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":depth")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":hr",
-                           { tr("Heart Rate"), 3, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
+                           { tr("Heart R."), tr("Garmin Heart Rate"), 3, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":hr")});
 
     knownExtensions.insert(ns % ":TrackPointExtension|" % ns % ":cad",
-                           { tr("Cadence"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), tr("Garmin Cadence"), 4, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc(ns % ":TrackPointExtension|" % ns % ":cad")});
 }
 
@@ -88,59 +88,59 @@ void CKnownExtension::initMioTPX(const IUnit &units)
 {
     // support for extensions used by MIO Cyclo ver. 4.2 (who needs xml namespaces?!)
     knownExtensions.insert("heartrate",
-                           { tr("Heart Rate"), NOORDER, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
+                           { tr("Heart R."), tr("Mio Heart Rate"), NOORDER, 0., 300., 1., "bpm", "://icons/32x32/CSrcHR.png", true, false,
                              getExtensionValueFunc("heartrate")});
 
     knownExtensions.insert("cadence",
-                           { tr("Cadence"), NOORDER, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), tr("Mio Cadence"), NOORDER, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc("cadence")});
 
     knownExtensions.insert("speed",
-                           { tr("Speed"), NOORDER, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed"), tr("Mio Speed"), NOORDER, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc("speed")});
 
     knownExtensions.insert("acceleration",
-                           { tr("Acceleration"), NOORDER, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
+                           { tr("Accel."), tr("Mio Acceleration"), NOORDER, std::numeric_limits<qreal>::lowest(), std::numeric_limits<qreal>::max(), units.basefactor, units.baseunit + "/s²", "://icons/32x32/CSrcAccel.png", true, false,
                              getExtensionValueFunc("acceleration")});
 
     knownExtensions.insert("course",
-                           { tr("Course"), NOORDER, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
+                           { tr("Course"), tr("Mio Course"), NOORDER, -3.2, 3.2, 1., "rad", "://icons/32x32/CSrcCourse.png", true, false,
                              getExtensionValueFunc("course")});
 }
 
 void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
 {
     knownExtensions.insert(ns % ":cadence",
-                           { tr("Cadence"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
+                           { tr("Cadence"), tr("Garmin Cadence"), 0, 0., 500., 1., "rpm", "://icons/32x32/CSrcCAD.png", true, false,
                              getExtensionValueFunc(ns % ":cadence")});
 
     knownExtensions.insert(ns % ":temp",
-                           { tr("Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
+                           { tr("Temp."), tr("Garmin Temperature"), 1, -100., 100., 1., "°C", "://icons/32x32/CSrcATemp.png", true, false,
                              getExtensionValueFunc(ns % ":temp")});
 
     knownExtensions.insert(ns % ":distance",
-                           { tr("Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
+                           { tr("Dist."), tr("Garmin Distance"), 2, 0., +100000000., units.basefactor, units.baseunit, "://icons/32x32/CSrcDistance.png", true, false,
                              getExtensionValueFunc(ns % ":distance") });
 
     knownExtensions.insert(ns % ":altitude",
-                           { tr("Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                           { tr("Elev."), tr("Garmin Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
                              getExtensionValueFunc(ns % ":altitude") });
 
     knownExtensions.insert(ns % ":energy",
-                           { tr("Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
+                           { tr("Energy"), tr("Garmin Energy"), 4, 0., 10000., 1., "kcal/min", "://icons/32x32/CSrcEnergy.png", true, false,
                              getExtensionValueFunc(ns % ":energy") });
 
 
     knownExtensions.insert(ns % ":seaLevelPressure",
-                           { tr("Sea Level Pressure"), 5, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
+                           { tr("Sea Lev. Pres."), tr("Garmin Sea Level Pressure"), 5, 0., 1500., 1., "hPa", "://icons/32x32/CSrcSeaLevelPressure.png", true, false,
                              getExtensionValueFunc(ns % ":seaLevelPressure") });
 
     knownExtensions.insert(ns % ":speed",
-                           { tr("Speed"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
+                           { tr("Speed"), tr("Garmin Speed"), 6, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":speed")});
 
     knownExtensions.insert(ns % ":verticalSpeed",
-                           { tr("Speed (vertical)"), 7, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
+                           { tr("v. Speed"), tr("Garmin vertical Speed"), 7, 0., 50., units.speedfactor, units.speedunit, "://icons/32x32/CSrcVertSpeed.png", true, false,
                              getExtensionValueFunc(ns % ":verticalSpeed")});
 }
 
@@ -149,32 +149,32 @@ void CKnownExtension::init(const IUnit &units)
     knownExtensions =
     {
         {internalSlope,
-         { tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
+         { tr("Slope"), tr("QMS Slope"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.slope1; }}
         },
 
-        {internalSpeed,
-         { tr("Speed ov. d.*"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+        {internalSpeedDist,
+         { tr("Speed"), tr("QMS Speed over Distance"), -1, 0., 600., units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalSpeedTime,
-         { tr("Speed ov. t.*"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
+         { tr("Speed"), tr("QMS Speed over Time"), -1, 0., NOFLOAT, units.speedfactor, units.speedunit, "://icons/32x32/CSrcSpeed.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.speed; }}
         },
 
         {internalEle,
-         { tr("Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
+         { tr("Elev."), tr("QMS Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
            [](const CTrackData::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 
         {internalProgress,
-         { tr("Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
+         { tr("Progress"), tr("QMS Progress"), -1, 0., NOFLOAT, units.basefactor, units.baseunit, "://icons/32x32/Progress.png", true, true,
            [](const CTrackData::trkpt_t &p) { return p.distance; }}
         },
 
         {internalTerrainSlope,
-         { tr("Terrain slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
+         { tr("Terr. Slope"), tr("QMS Terrain Slope"), -1, 0, 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, false,
            getExtensionValueFunc(internalTerrainSlope)}
         }
     };
@@ -186,15 +186,15 @@ void CKnownExtension::init(const IUnit &units)
     initClueTrustTPXv1(units, "gpxdata");
 }
 
-const CKnownExtension CKnownExtension::get(const QString &name)
+const CKnownExtension CKnownExtension::get(const QString &key)
 {
-    CKnownExtension def("", NOORDER, -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
-                        getExtensionValueFunc(name)
+    CKnownExtension def("", "", NOORDER, -100000., 100000., 1., "", "://icons/32x32/CSrcUnknown.png", false, true,
+                        getExtensionValueFunc(key)
                         );
-    return knownExtensions.value(name, def);
+    return knownExtensions.value(key, def);
 }
 
-bool CKnownExtension::isKnown(const QString &name)
+bool CKnownExtension::isKnown(const QString &key)
 {
-    return knownExtensions.contains(name);
+    return knownExtensions.contains(key);
 }

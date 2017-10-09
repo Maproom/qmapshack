@@ -8228,7 +8228,7 @@ sein</translation>
         <translation>&lt;p&gt;Damit Sie eine Routingdatenbank für Routino erstellen können, müssen Sie *pbf Dateien von &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt; herunterladen. Es dauert sehr lange eine Datenbank für Routino zu erstellen und die erstellten Dateien sind sehr groß. Deswegen ist es nicht empfehlenswert ganze Kontinente herunterzuladen. Allerdings kann Routino nicht über mehrere Datenbanken routen. Deswegen sollten alle Länder, die von einer länderübergreifenden Route berührt werden, in der Datenbank dabei sein.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Eine oder mehrere *.pdf Dateien auswählen.&lt;/li&gt;
+&lt;li&gt;Eine oder mehrere *.pbf Dateien auswählen.&lt;/li&gt;
 &lt;li&gt;Ein Verzeichnis für die Datenbank angeben.&lt;/li&gt;
 &lt;li&gt;Einen Prefix bestimmen. Die Datenbank wird mit diesem Prefix gelistet.&lt;/li&gt;
 &lt;li&gt;Den &quot;&quot;Start&quot; Knopf drücken.&lt;/li&gt;

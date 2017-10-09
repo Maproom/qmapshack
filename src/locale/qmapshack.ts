@@ -504,7 +504,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
-        <source>distance: </source>
+        <source>Distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1088,12 +1088,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
-        <source> slope: %1%3 (%2%)</source>
+        <source> | Slope: %1%3 (%2%)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="541"/>
-        <source> speed: %1%2</source>
+        <source> | Speed: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1109,6 +1109,26 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>Moving: - (-)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
+        <source> | Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
+        <source> | Moving: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
+        <source> | Descent: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
+        <source> | Time: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1131,19 +1151,9 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
-        <source> Moving: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="632"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="644"/>
         <source>, %1%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
-        <source> Time: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1172,11 +1182,6 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
-        <source> Descent: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation type="unfinished"></translation>
@@ -1194,11 +1199,6 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="627"/>
         <source>Ascent: %1%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
-        <source> Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1992,12 +1992,6 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
-        <source>Elev.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Air Temp.</source>
         <translation type="unfinished"></translation>
@@ -2092,6 +2086,12 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <source>Garmin Elevation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
+        <source>Ele.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -3257,12 +3257,12 @@ Unknown structure.</source>
     <name>CPlot</name>
     <message>
         <location filename="../plot/CPlot.cpp" line="55"/>
-        <source>distance [%1]</source>
+        <source>Distance [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
-        <source>time</source>
+        <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3270,12 +3270,12 @@ Unknown structure.</source>
     <name>CPlotProfile</name>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="79"/>
-        <source>distance [%1]</source>
+        <source>Distance [%1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="80"/>
-        <source>alt. [%1]</source>
+        <source>Ele. [%1]</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

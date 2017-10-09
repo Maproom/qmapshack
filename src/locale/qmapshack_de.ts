@@ -497,11 +497,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Zum Ende</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
-        <source>distance: </source>
-        <translation>Entfernung:</translation>
-    </message>
-    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
         <source>ascent: </source>
         <translation>Anstieg:</translation>
@@ -520,6 +515,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
         <source>Correlation...</source>
         <translation>Verknüpfungen...</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <source>Distance: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
@@ -1092,13 +1092,13 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
-        <source> slope: %1%3 (%2%)</source>
-        <translation>, Neigung: %1%3 (%2%)</translation>
+        <source> | Slope: %1%3 (%2%)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="541"/>
-        <source> speed: %1%2</source>
-        <translation>, Geschw.: %1 %2</translation>
+        <source> | Speed: %1%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="569"/>
@@ -1114,6 +1114,26 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>Moving: - (-)</source>
         <translation>Zeit in Bew.: - (-) </translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
+        <source> | Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
+        <source> | Moving: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
+        <source> | Descent: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
+        <source> | Time: %1%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1247"/>
@@ -1135,20 +1155,10 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Punkte %1  %2 verbergen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
-        <source> Moving: %1%2 (%3%)</source>
-        <translation>, Zeit in Bew.: %1 %2 (%3%)</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="632"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="644"/>
         <source>, %1%2</source>
         <translation>, %1 %2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
-        <source> Time: %1%2</source>
-        <translation> Zeit: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
@@ -1176,11 +1186,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Anstieg: %1 %2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
-        <source> Descent: %1%2 (%3%)</source>
-        <translation>, Abstieg: %1 %2 (%3%)</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Entf.: %1 %2 (%3%)</translation>
@@ -1199,11 +1204,6 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="627"/>
         <source>Ascent: %1%2</source>
         <translation>Anstieg: %1 %2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
-        <source> Descent: %1%2</source>
-        <translation> Abstieg: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="649"/>
@@ -1998,12 +1998,6 @@ Zeile %2, Spalte %3:
         <translation>QMS Geschwindigkeit ü. Entf.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
-        <source>Elev.</source>
-        <translation>Höhe</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Air Temp.</source>
         <translation>Temp.</translation>
@@ -2099,6 +2093,12 @@ Zeile %2, Spalte %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <source>Garmin Elevation</source>
         <translation>Garmin Höhe</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
+        <source>Ele.</source>
+        <translation type="unfinished">Höhe</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
@@ -3272,26 +3272,26 @@ Unbekannte Struktur.</translation>
     <name>CPlot</name>
     <message>
         <location filename="../plot/CPlot.cpp" line="55"/>
-        <source>distance [%1]</source>
-        <translation>Entfernung [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
-        <source>time</source>
-        <translation>Uhrzeit</translation>
+        <source>Time</source>
+        <translation type="unfinished">Zeit</translation>
     </message>
 </context>
 <context>
     <name>CPlotProfile</name>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="79"/>
-        <source>distance [%1]</source>
-        <translation>Entfernung [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="80"/>
-        <source>alt. [%1]</source>
-        <translation>Höhe [%1]</translation>
+        <source>Ele. [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

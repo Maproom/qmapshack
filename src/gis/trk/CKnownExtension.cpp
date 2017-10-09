@@ -123,7 +123,7 @@ void CKnownExtension::initClueTrustTPXv1(const IUnit &units, const QString &ns)
                              getExtensionValueFunc(ns % ":distance") });
 
     knownExtensions.insert(ns % ":altitude",
-                           { tr("Elev."), tr("Garmin Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
+                           { tr("Ele."), tr("Garmin Elevation"), 3, -1000., +10000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, false,
                              getExtensionValueFunc(ns % ":altitude") });
 
     knownExtensions.insert(ns % ":energy",
@@ -164,7 +164,7 @@ void CKnownExtension::init(const IUnit &units)
         },
 
         {internalEle,
-         { tr("Elev."), tr("QMS Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
+         { tr("Ele."), tr("QMS Elevation"), -1, 0., 100000., units.basefactor, units.baseunit, "://icons/32x32/CSrcElevation.png", true, true,
            [](const CTrackData::trkpt_t &p) { return (NOINT == p.ele) ? NOFLOAT : p.ele; }}
         },
 

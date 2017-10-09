@@ -36,6 +36,7 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     connect(toolTargetPath,   &QToolButton::clicked,   this, &CRoutinoDatabaseBuilder::slotSelectTargetPath);
     connect(pushStart,        &QPushButton::clicked,   this, &CRoutinoDatabaseBuilder::slotStart);
     connect(lineTargetPrefix, &QLineEdit::textChanged, this, &CRoutinoDatabaseBuilder::enabelStartButton);
+    connect(labelHelp,        &QLabel::linkActivated,  this, &CRoutinoDatabaseBuilder::slotLinkActivated);
 
     pushStart->setDisabled(true);
 
@@ -182,4 +183,9 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         stdOut("planetsplitter " +  args.join(" ") + "\n");
         cmd.start("planetsplitter", args);
     }
+}
+
+void CRoutinoDatabaseBuilder::slotLinkActivated(const QUrl& url)
+{
+    QDesktopServices::openUrl(url);
 }

@@ -199,14 +199,18 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>1. Select one or multiple source files.
-2. Select a file name for the target VRT file.
-3. Press &quot;Start&quot; button.
+        <string>&lt;ol&gt;
+&lt;li&gt;Select one or multiple source files.&lt;/li&gt;
+&lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
+&lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
+&lt;/ol&gt;
 
 Tip:
-* If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
-* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
-* The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</string>
+&lt;ul&gt;
+&lt;li&gt;If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.&lt;/li&gt;
+&lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
+&lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
+&lt;/ul&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

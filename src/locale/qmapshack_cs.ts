@@ -492,11 +492,6 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Na konec</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
-        <source>distance: </source>
-        <translation>Vzdálenost: </translation>
-    </message>
-    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
         <source>ascent: </source>
         <translation>Stoupání: </translation>
@@ -525,6 +520,11 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <location filename="../gis/prj/CDetailsPrj.cpp" line="395"/>
         <source>&lt;b&gt;Summary over all tracks in project&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehled všech stop v projektu&lt;/b&gt;&lt;br/&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <source>Distance: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
@@ -1077,13 +1077,13 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="536"/>
-        <source> slope: %1%3 (%2%)</source>
-        <translation> sklon: %1%3 (%2%)</translation>
+        <source> | Slope: %1%3 (%2%)</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="541"/>
-        <source> speed: %1%2</source>
-        <translation> rychlost: %1%2</translation>
+        <source> | Speed: %1%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="569"/>
@@ -1099,6 +1099,26 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <location filename="../gis/trk/CGisItemTrk.cpp" line="582"/>
         <source>Moving: - (-)</source>
         <translation>Pohyb: - (-)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
+        <source> | Descent: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
+        <source> | Moving: %1%2 (%3%)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
+        <source> | Descent: %1%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
+        <source> | Time: %1%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1247"/>
@@ -1120,20 +1140,10 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Skrýt body %1  %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="605"/>
-        <source> Moving: %1%2 (%3%)</source>
-        <translation> Pohyb: %1%2 (%3%)</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="632"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="644"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
-        <source> Time: %1%2</source>
-        <translation> Čas: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="333"/>
@@ -1176,11 +1186,6 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="593"/>
-        <source> Descent: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Vzdálenost: %1%2 (%3%)</translation>
@@ -1198,11 +1203,6 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="627"/>
         <source>Ascent: %1%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="639"/>
-        <source> Descent: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1998,12 +1998,6 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
-        <source>Elev.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
         <source>Air Temp.</source>
         <translation type="unfinished"></translation>
@@ -2099,6 +2093,12 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
         <source>Garmin Elevation</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
+        <source>Ele.</source>
+        <translation type="unfinished">Výška</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
@@ -3269,26 +3269,26 @@ Neznámá stavba.</translation>
     <name>CPlot</name>
     <message>
         <location filename="../plot/CPlot.cpp" line="55"/>
-        <source>distance [%1]</source>
-        <translation>Vzdálenost [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
-        <source>time</source>
-        <translation>Čas</translation>
+        <source>Time</source>
+        <translation type="unfinished">Čas</translation>
     </message>
 </context>
 <context>
     <name>CPlotProfile</name>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="79"/>
-        <source>distance [%1]</source>
-        <translation>Vzdálenost [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="80"/>
-        <source>alt. [%1]</source>
-        <translation>Výška [%1]</translation>
+        <source>Ele. [%1]</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

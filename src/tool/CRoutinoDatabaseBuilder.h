@@ -37,6 +37,7 @@ private slots:
     void slotStart();
 
     void enabelStartButton();
+    void slotLinkActivated(const QUrl& url);
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;

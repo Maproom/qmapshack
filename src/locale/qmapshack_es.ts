@@ -4303,17 +4303,17 @@ no es una definición de sistema de coordenadas válido:
         <translation>Crear base de datos de Routino</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="57"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="58"/>
         <source>Select files...</source>
         <translation>Seleccionar ficheros de origen...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="81"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="82"/>
         <source>Select target path...</source>
         <translation>Seleccionar carpeta de destino...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="142"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="143"/>
         <source>!!! done !!!
 </source>
         <translation>¡¡¡Hecho!!!</translation>
@@ -7448,22 +7448,19 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
-        <source>1. Select one or multiple source files.
-2. Select a file name for the target VRT file.
-3. Press &quot;Start&quot; button.
+        <source>&lt;ol&gt;
+&lt;li&gt;Select one or multiple source files.&lt;/li&gt;
+&lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
+&lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
+&lt;/ol&gt;
 
 Tip:
-* If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.
-* Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.
-* The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.</source>
-        <translation>1. Selecciona uno o varios ficheros de origen
-2. Selecciona el nombre y la ubicación para el fichero VRT de salida 
-3. Pulsa en &quot;Comenzar&quot;
-
-Notas:
-* Es posible mantener los ficheros de origen en una subcarpeta y generar el fichero VRT de salida en otra carpeta diferente, como tu carpeta raíz de mapas.
-* Usa las opciones avanzadas  para asignar un valor &quot;no data&quot; si los ficheros de origen carecen del mismo y no forman un área rectangular. Las áreas no cubiertas por el mapa se harán transparentes.
-* La opción avanzada &quot;-a_srs&quot; sirve para asignar una Proyección/Datum cuando el fichero de origen carece de ella, ...pero NO reproyecta los datos.</translation>
+&lt;ul&gt;
+&lt;li&gt;If you have several files place them in a subfolder of your map path. Create the VRT file in your map path.&lt;/li&gt;
+&lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
+&lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
+&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
@@ -8175,13 +8172,13 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="22"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="25"/>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="63"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="39"/>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="42"/>
         <source>Select source files:</source>
         <translation>Seleccionar ficheros de origen:</translation>
     </message>
@@ -8204,6 +8201,18 @@ o
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="100"/>
         <source>File Prefix</source>
         <translation>Prefijo del archivo</translation>
+    </message>
+    <message>
+        <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
+        <source>&lt;p&gt;To create a Roution routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommneded not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
+&lt;li&gt;Select a path for your Routino database.&lt;/li&gt;
+&lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
+&lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
+&lt;/ol&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -9643,18 +9652,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="728"/>
-        <location filename="../units/IUnit.cpp" line="734"/>
+        <location filename="../units/IUnit.cpp" line="725"/>
+        <location filename="../units/IUnit.cpp" line="731"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="728"/>
+        <location filename="../units/IUnit.cpp" line="725"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="734"/>
+        <location filename="../units/IUnit.cpp" line="731"/>
         <source>Position values out of bounds. </source>
         <translation>Valores de posición fuera del límite.</translation>
     </message>
@@ -9672,7 +9681,7 @@ o
         <translation>Métrico</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="47"/>
+        <location filename="../units/IUnitsSetup.ui" line="53"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Nota:&lt;/b&gt; Para algunos elementos de la interfaz de usuario, cambiar las unidades no tendrá efecto hasta que se reinicie QMapShack.</translation>
     </message>

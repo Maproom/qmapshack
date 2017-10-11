@@ -2035,12 +2035,12 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
         <source>Speed ov. d.*</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость(расстояние)*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
         <source>Speed ov. t.*</source>
-        <translation type="unfinished"></translation>
+        <translation>Скорость(время)*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>
@@ -7466,7 +7466,20 @@ Tip:
 &lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
 &lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ol&gt;
+&lt;li&gt;Выберите один или несколько исходных файлов.&lt;/li&gt;
+&lt;li&gt;Выберите имя файла для целевого файла VRT.&lt;/li&gt;
+&lt;li&gt;Нажмите кнопку &quot;Начать&quot;.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+	
+Намек:
+&lt;ul&gt;
+&lt;li&gt;Если у вас несколько файлов, поместите их в подпапку вашего папки к карте. Создайте файл VRT в вашей папки к картам.&lt;/li&gt;
+&lt;li&gt;Используйте дополнительные параметры, чтобы добавить значение для &quot;нет данных&quot;, если исходные файлы не имеют этого и не образуют прямоугольную карту. Области без файла карты станут прозрачными.&lt;/li&gt;
+&lt;li&gt;Параметр &quot;-a_srs&quot; предназначен для назначения проекции/датума, когда в исходном файле этого нет. Это НЕ перепроектирует данные.&lt;/li&gt;
+&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
@@ -8219,7 +8232,14 @@ or
 &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
 &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
 &lt;/ol&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Чтобы создать базу данных маршрутизации Routino, вам необходимо загрузить файлы *.pbf из &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. Процесс создания базы данных Routino довольно медленный, и результирующие файлы довольно большие. Поэтому рекомендуется не загружать целые континенты. Ограничьте загрузку теми странами, которые вам действительно нужны. Однако, поскольку Routino не может маршрутизировать через несколько баз данных, вы должны включить все страны, затронутые трансграничным маршрутом.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Выберите один или несколько исходных файлов *.pbf.&lt;/li&gt;
+&lt;li&gt;Выберите путь для вашей базы данных Routino.&lt;/li&gt;
+&lt;li&gt;Выберите префикс. База данных будет указана с этим префиксом.&lt;/li&gt;
+&lt;li&gt;Нажмите кнопку &quot;Начать&quot;.&lt;/li&gt;
+&lt;/ol&gt;</translation>
     </message>
 </context>
 <context>

@@ -585,7 +585,7 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
         IUnit::self().meter2elevation(pt.ascent, val, unit);
         asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100/totalAscent, 2, 'f', 0);
     }
-qDebug() << asc;
+
     if(pt.descent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descent, val, unit);

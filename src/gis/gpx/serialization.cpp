@@ -246,7 +246,7 @@ static void writeXml(QDomNode& xml, const QString& tag, const QDateTime& time)
     {
         QDomElement elem = xml.ownerDocument().createElement(tag);
         xml.appendChild(elem);
-        QDomText text = xml.ownerDocument().createTextNode(time.toString("yyyy-MM-dd'T'hh:mm:ss'Z'"));
+        QDomText text = xml.ownerDocument().createTextNode(time.toString("yyyy-MM-dd'T'hh:mm:ss.zzz'Z'"));
         elem.appendChild(text);
     }
 }

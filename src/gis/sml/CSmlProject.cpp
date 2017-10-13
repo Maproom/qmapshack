@@ -49,6 +49,7 @@ void CSmlProject::loadSml(const QString& filename)
 }
 
 
+
 void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 {
     QFile file(filename);
@@ -131,68 +132,119 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         }
         else // samples without "event" are the ones containing position, heartrate, etc... that we want to store
         {
-            sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() == TRUE) ? 
-                smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360.0 : NOFLOAT; // from radians to degrees
+            sample.latitude = (smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).toElement().isElement() == true) ?
+                smlSamples.item(i).toElement().elementsByTagName("Latitude").item(0).firstChild().nodeValue().toDouble() * RAD_TO_DEG : NOFLOAT;
         
-            sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement() == TRUE) ?
-                smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() / (2 * 3.141592654) * 360.0 : NOFLOAT;// from radians to degrees
+            sample.longitude = (smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).toElement().isElement() == true) ?
+                smlSamples.item(i).toElement().elementsByTagName("Longitude").item(0).firstChild().nodeValue().toDouble() * RAD_TO_DEG : NOFLOAT;
 
-            sample.altitude = (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement() == TRUE) ?
+            sample.altitude = (smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("Altitude").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
-            sample.verticalSpeed = (smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).toElement().isElement() == TRUE) ?
+            sample.verticalSpeed = (smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("VerticalSpeed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
-            sample.HR = (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement() == TRUE) ?
+            sample.HR = (smlSamples.item(i).toElement().elementsByTagName("HR").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("HR").item(0).firstChild().nodeValue().toDouble() * 60.0 : NOFLOAT; // from Hz to bpm
 
-            sample.cadence = (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement() == TRUE) ?
+            sample.cadence = (smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("Cadence").item(0).firstChild().nodeValue().toDouble() * 60.0 : NOFLOAT; // from Hz to bpm
 
-            sample.temperature = (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement() == TRUE) ?
+            sample.temperature = (smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("Temperature").item(0).firstChild().nodeValue().toDouble() -273.15: NOFLOAT;// from °K to °C
 
-            sample.seaLevelPressure = (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement() == TRUE) ?
+            sample.seaLevelPressure = (smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("SeaLevelPressure").item(0).firstChild().nodeValue().toDouble() / 100.0: NOFLOAT;// /100 to get hPa
 
-            sample.speed = (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement() == TRUE) ?
+            sample.speed = (smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("Speed").item(0).firstChild().nodeValue().toDouble() : NOFLOAT;
 
-            sample.speed = (smlSamples.item(i).toElement().elementsByTagName("EnergyConsumption").item(0).toElement().isElement() == TRUE) ?
+            sample.energyConsumption = (smlSamples.item(i).toElement().elementsByTagName("EnergyConsumption").item(0).toElement().isElement() == true) ?
                 smlSamples.item(i).toElement().elementsByTagName("EnergyConsumption").item(0).firstChild().nodeValue().toDouble() * 60.0 / 4184.0 : NOFLOAT; // from joule/s to kCal/min
 
              samplesList << sample;
         }
     }
 
-    fillMissingData("Latitude", samplesList);
-    fillMissingData("Longitude", samplesList);
-    fillMissingData("Altitude", samplesList);
-    fillMissingData("VerticalSpeed", samplesList);
-    fillMissingData("HR", samplesList);
-    fillMissingData("Cadence", samplesList);
-    fillMissingData("Temperature", samplesList);
-    fillMissingData("SeaLevelPressure", samplesList);
-    fillMissingData("Speed", samplesList);
-    fillMissingData("EnergyConsumption", samplesList);
+    QStringList extensionsNames;
+    extensionsNames <<"Latitude"<<"Longitude"<<"Altitude"<<"VerticalSpeed"<<"HR"<<"Cadence"<<"Temperature"<<"SeaLevelPressure"<<"Speed"<<"EnergyConsumption";
+    for (int i = 0 ; i < extensionsNames.size() ; i++)
+    {
+       fillMissingData(extensionsNames[i], samplesList);
+    }
 
 
-   lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
-    
+    if (samplesList.count() >= 2)
+    {   // code below merges samples with identical timestamps.
+        // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
+        QList<smlSample_t *> samplesWithSameTimestampList;
+        samplesWithSameTimestampList << &samplesList[0];
+        for (int i = 1; i < samplesList.size(); i++)
+        {
+            if ( (samplesWithSameTimestampList.count() == 0) ) // should not happen here...
+            {
+                samplesWithSameTimestampList << &samplesList[i];
+            }
+            else if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
+            {
+                samplesWithSameTimestampList << &samplesList[i];
+            }
+            else if ( (samplesWithSameTimestampList.count() == 1) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
+            {   // the single stored sample and current sample have different timestamps
+                samplesWithSameTimestampList.clear();
+                samplesWithSameTimestampList << &samplesList[i];
+            }
+            else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
+            {   // samples with identical timestamps have been found, and the current sample has a different timestamp
+                for(int j = 0; j < extensionsNames.count(); j++)
+                {
+                    double sum = 0;
+                    double samplesWithDataCount = 0;
+                    for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
+                    {
+                        if ( getDataFromSmlSample(extensionsNames[j], samplesWithSameTimestampList[k]) != NOFLOAT )
+                        {
+                            samplesWithDataCount++;
+                            sum += getDataFromSmlSample(extensionsNames[j], samplesWithSameTimestampList[k]);
+                        }
+                    }
+                    if ( samplesWithDataCount != 0)
+                    {   // averaging among samples
+                        setDataToSmlSample(extensionsNames[j], samplesWithSameTimestampList[0], sum / samplesWithDataCount);
+                    }
+                 }
+
+                // remove samples with same timestamp but the first one
+                for (int j = 0 ; j < samplesWithSameTimestampList.size() - 1 ; j++)
+                {
+                    samplesList.removeAt(1+i-samplesWithSameTimestampList.size());
+                }
+
+                i -= samplesWithSameTimestampList.count() - 1; // index i has to be moved because of removed samples
+
+                samplesWithSameTimestampList.clear();
+                samplesWithSameTimestampList << &samplesList[i]; // and current sample has to be stored
+
+            }
+        }
+    }
+
+    lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
+
     trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap
-    
+
     int lap = 0;
     CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
     for (int j = 0; j < samplesList.size(); j++)
     {
-       
+
         if (samplesList[j].time > lapsList[lap])
         {
             lap++;
             seg = &(trk.segs[lap]);
         }
-        
+
         CTrackData::trkpt_t trkpt;
         trkpt.time = samplesList[j].time;
         trkpt.lat = samplesList[j].latitude;
@@ -204,11 +256,11 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         if (samplesList[j].temperature != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[j].temperature; }
         if (samplesList[j].seaLevelPressure != NOFLOAT) { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[j].seaLevelPressure; }
         if (samplesList[j].speed != NOFLOAT) { trkpt.extensions["gpxdata:speed"] = samplesList[j].speed; }
-        if (samplesList[j].energyConsumption != NOFLOAT) { trkpt.extensions["gpxdata:energy"] = samplesList[j].speed; }
+        if (samplesList[j].energyConsumption != NOFLOAT) { trkpt.extensions["gpxdata:energy"] = samplesList[j].energyConsumption; }
 
         seg->pts.append(trkpt);
     }
-    
+
     new CGisItemTrk(trk, project);
 
     project->sortItems();
@@ -218,13 +270,15 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 }
 
 void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &samplesList)
-{
+{   // Suunto samples contain lat/lon OR heartrate, elevation, etc.., each one with its own timestamp.
+    // The purpose of the code below is to "spread" data among samples.
+    // At the end each sample contains data, linearly interpolated from its neighbours according to timestamps.
     QList<smlSample_t*> samplesWithMissingDataList;
     smlSample_t* currentSample = &samplesList.first();
     smlSample_t* previousSampleWithData = nullptr;
     bool keepBrowsing = samplesList.size() > 0;
     int i = 0;
-    
+
     while (keepBrowsing)
     {
         if (getDataFromSmlSample(dataField, currentSample) == NOFLOAT) // sample with missing data found
@@ -256,7 +310,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &
                 for (j = 0; j < samplesWithMissingDataList.size(); j++)
                 {
                  //    interpolate data and apply them to samples in-between
-             
+
                    setDataToSmlSample(dataField, samplesWithMissingDataList[j], (double)(
                      slope * (double)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  ));
                 }
@@ -267,14 +321,14 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &
 
         if (++i >= samplesList.size())
         {
-            keepBrowsing = FALSE;
+            keepBrowsing = false;
 
             if (nullptr != previousSampleWithData)
             {
                 int j;
                 for (j = 0; j < samplesWithMissingDataList.size(); j++) //  case where samplesWithMissingDataList is not empty at the end can happen when last samples contain no data
                 {
-                    setDataToSmlSample(dataField, samplesWithMissingDataList[j], getDataFromSmlSample(dataField, previousSampleWithData));// apply previous data found to all of the previous samples with no data 
+                    setDataToSmlSample(dataField, samplesWithMissingDataList[j], getDataFromSmlSample(dataField, previousSampleWithData));// apply previous data found to all of the previous samples with no data
                 }
             }
         }
@@ -295,7 +349,7 @@ double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t *
     {
         return smlSample->latitude;
     }
-    
+
     if (dataField == "Longitude")
     {
         return smlSample->longitude;
@@ -361,27 +415,27 @@ void CSmlProject::setDataToSmlSample(const QString &dataField, smlSample_t * sml
     {
         smlSample->altitude = data;
     }
-    
+
     if (dataField == "VerticalSpeed")
     {
         smlSample->verticalSpeed = data;
     }
-    
+
     if (dataField == "HR")
     {
         smlSample->HR = data;
     }
-    
+
     if (dataField == "Cadence")
     {
         smlSample->cadence = data;
     }
-    
+
     if (dataField == "Temperature")
     {
         smlSample->temperature = data;
     }
-    
+
     if (dataField == "SeaLevelPressure")
     {
         smlSample->seaLevelPressure = data;

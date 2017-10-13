@@ -34,6 +34,8 @@ IUnit::coord_format_e IUnit::coordFormat = IUnit::eCoordFormat1;
 QByteArray IUnit::timeZone = "UTC";
 bool IUnit::useShortFormat = false;
 
+IUnit::slope_mode_e IUnit::slopeMode = IUnit::eSlopeDegrees;
+
 const char * IUnit::tblTimezone[] =
 {
     "Africa/Abidjan",
@@ -444,6 +446,35 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
     m_self = this;
 }
 
+void IUnit::slope2string(qreal slope, QString &val, QString &unit)
+{
+    switch(slopeMode)
+    {
+    case eSlopeDegrees:
+            val.sprintf("%.1f", slope);
+            unit = "°";
+            break;
+    case eSlopePercent:
+            val.sprintf("%.0f", qTan(qDegreesToRadians(slope))*100.0);
+            unit = "%";
+            break;
+    }
+}
+
+void IUnit::slope2unit(qreal slope, qreal &val, QString &unit)
+{
+    switch(slopeMode)
+    {
+        case eSlopeDegrees:
+            val = slope;
+            unit = "°";
+            break;
+        case eSlopePercent:
+            val = qTan(qDegreesToRadians(slope))*100.0;
+            unit = "%";
+            break;
+    }
+}
 
 void IUnit::setUnitType(type_e t, QObject * parent)
 {

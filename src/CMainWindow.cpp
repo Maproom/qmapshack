@@ -77,6 +77,8 @@ CMainWindow::CMainWindow()
     initWptIcons();
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::setSlopeMode((IUnit::slope_mode_e)cfg.value("Units/slopeMode", IUnit::eSlopeDegrees).toInt());
+
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 
@@ -216,7 +218,6 @@ CMainWindow::CMainWindow()
     IUnit::coord_format_e coordFormat;
     coordFormat = (IUnit::coord_format_e)cfg.value("Units/coordFormat", IUnit::eCoordFormat1).toInt();
     IUnit::setCoordFormat(coordFormat);
-
 
     QStatusBar * status = statusBar();
     lblPosWGS84 = new QLabel(status);
@@ -478,6 +479,8 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
 
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
+
+    cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
 }
@@ -964,9 +967,9 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
 
     if(slope != NOFLOAT)
     {
-        QString val;
-        val.sprintf("%.1f", slope);
-        lblSlope->setText(tr("Slope: %1%2").arg(val).arg(QChar(0260)));
+        QString val, unit;
+        IUnit::self().slope2string(slope, val, unit);
+        lblSlope->setText(tr("Slope: %1%2").arg(val).arg(unit));
         lblSlope->show();
     }
     else

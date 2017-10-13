@@ -954,7 +954,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     {
         QString val, unit;
         IUnit::self().meter2elevation(ele, val, unit);
-        lblElevation->setText(tr("Ele: %1%2").arg(val).arg(unit));
+        lblElevation->setText(tr("Ele.: %1%2").arg(val).arg(unit));
         lblElevation->show();
     }
     else

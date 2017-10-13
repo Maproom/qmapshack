@@ -520,8 +520,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     {
         str += tr("Index: visible %1, total %2").arg(pt.idxVisible).arg(pt.idxTotal);
     }
-    //    str += "\n";
-    str += " | "; // Index and date in one row
+    str += "\n";
 
     if(totalElapsedSeconds != 0)
     {
@@ -533,12 +532,12 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     str += tr("Ele.: %1 %2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)
     {
-        str += tr(" | Slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
+        str += tr(", Slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
     }
     if(pt.speed != NOFLOAT)
     {
         IUnit::self().meter2speed(pt.speed, val1, unit1);
-        str += tr(" | Speed: %1%2").arg(val1).arg(unit1);
+        str += tr(", Speed: %1%2").arg(val1).arg(unit1);
     }
 
     QStringList keys = pt.extensions.keys();
@@ -586,11 +585,11 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
         IUnit::self().meter2elevation(pt.ascent, val, unit);
         asc = tr("Ascent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.ascent * 100/totalAscent, 2, 'f', 0);
     }
-
+qDebug() << asc;
     if(pt.descent != NOFLOAT)
     {
         IUnit::self().meter2elevation(pt.descent, val, unit);
-        dsc = tr(" | Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100/totalDescent, 2, 'f', 0);
+        dsc = tr(", Descent: %1%2 (%3%)").arg(val).arg(unit).arg(pt.descent * 100/totalDescent, 2, 'f', 0);
     }
 
     if(pt.distance != NOFLOAT)
@@ -602,10 +601,10 @@ QString CGisItemTrk::getInfoProgress(const CTrackData::trkpt_t& pt) const
     if(pt.elapsedSeconds != NOFLOAT)
     {
         IUnit::self().seconds2time(pt.elapsedSecondsMoving, val, unit);
-        mov = tr(" | Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2, 'f', 0);
+        mov = tr(", Moving: %1%2 (%3%)").arg(val).arg(unit).arg(pt.elapsedSecondsMoving * 100/totalElapsedSecondsMoving, 2, 'f', 0);
     }
 
-    return QString("%1 %2\n%3 %4").arg(asc).arg(dsc).arg(dst).arg(mov);
+    return QString("%1%2\n%3%4").arg(asc).arg(dsc).arg(dst).arg(mov);
 }
 
 QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackData::trkpt_t& pt2) const
@@ -636,7 +635,7 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackDa
     if((pt1.descent != NOFLOAT) && (pt2.descent != NOFLOAT))
     {
         IUnit::self().meter2elevation(pt2.descent - pt1.descent, val, unit);
-        dsc = tr(" | Descent: %1%2").arg(val).arg(unit);
+        dsc = tr(", Descent: %1%2").arg(val).arg(unit);
 
         if(dt != NOFLOAT)
         {
@@ -651,10 +650,10 @@ QString CGisItemTrk::getInfoRange(const CTrackData::trkpt_t& pt1, const CTrackDa
     if(dt != NOFLOAT)
     {
         IUnit::self().seconds2time(dt, val, unit);
-        dsttme += tr(" | Time: %1%2").arg(val).arg(unit);
+        dsttme += tr(", Time: %1%2").arg(val).arg(unit);
     }
 
-    return QString("%1 %2\n%3").arg(asc).arg(dsc).arg(dsttme);
+    return QString("%1%2\n%3").arg(asc).arg(dsc).arg(dsttme);
 }
 
 qint32 CGisItemTrk::getElevation(qint32 idx) const

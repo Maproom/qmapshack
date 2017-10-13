@@ -57,10 +57,14 @@ private:
         double energyConsumption; // in kCal/min
     };
 
+
+
     static double getDataFromSmlSample(const QString &dataField, smlSample_t *smlSample);
     static void setDataToSmlSample(const QString &dataField, smlSample_t *smlSample, const double data);
     static void fillMissingData(const QString &dataField, QList<smlSample_t> &samplesList);
-};
 
+
+
+};
 #endif //CSMLPROJECT_H
 

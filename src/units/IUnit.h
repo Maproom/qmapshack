@@ -61,6 +61,18 @@ public:
     /// instantiate the correct unit object
     static void setUnitType(type_e t, QObject * parent);
 
+    enum slope_mode_e {eSlopePercent, eSlopeDegrees};
+    static void setSlopeMode(slope_mode_e mode)
+    {
+        slopeMode = mode;
+    }
+    static enum slope_mode_e getSlopeMode()
+    {
+        return slopeMode;
+    }
+    static void slope2string(qreal slope, QString& val, QString& unit);
+    static void slope2unit(qreal slope, qreal& val, QString& unit);
+
     /// parse a string for a timestamp
     static bool parseTimestamp(const QString &time, QDateTime &datetime);
 
@@ -132,6 +144,8 @@ public:
 
 protected:
     IUnit(const type_e& type, const QString& baseunit, const qreal basefactor, const QString& speedunit, const qreal speedfactor, QObject *parent);
+
+    static slope_mode_e slopeMode;
 
     static QDateTime parseTimestamp(const QString &timetext, int& tzoffset);
 

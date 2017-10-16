@@ -198,8 +198,8 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             {   // samples with identical timestamps have been found, and the current sample has a different timestamp
                 for(int j = 0; j < extensionsNames.count(); j++)
                 {
-                    double sum = 0;
-                    double samplesWithDataCount = 0;
+                    qreal sum = 0;
+                    qreal samplesWithDataCount = 0;
                     for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
                     {
                         if ( getDataFromSmlSample(extensionsNames[j], samplesWithSameTimestampList[k]) != NOFLOAT )
@@ -300,19 +300,19 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
             }
             else
             {
-                double dY = getDataFromSmlSample(dataField, currentSample) - getDataFromSmlSample(dataField, previousSampleWithData);
-                double dT = ((double)(currentSample->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch())) / 1000.0;
-                double slope = dY / dT;
-                double offsetAt0 = getDataFromSmlSample(dataField, previousSampleWithData)
-                    - slope * ( (  (double)(previousSampleWithData->time.toMSecsSinceEpoch())  ) / 1000.0 );
+                qreal dY = getDataFromSmlSample(dataField, currentSample) - getDataFromSmlSample(dataField, previousSampleWithData);
+                qreal dT = ((qreal)(currentSample->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch())) / 1000.0;
+                qreal slope = dY / dT;
+                qreal offsetAt0 = getDataFromSmlSample(dataField, previousSampleWithData)
+                    - slope * ( (  (qreal)(previousSampleWithData->time.toMSecsSinceEpoch())  ) / 1000.0 );
 
                 int j;
                 for (j = 0; j < samplesWithMissingDataList.size(); j++)
                 {
                  //    interpolate data and apply them to samples in-between
 
-                   setDataToSmlSample(dataField, samplesWithMissingDataList[j], (double)(
-                     slope * (double)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  ));
+                   setDataToSmlSample(dataField, samplesWithMissingDataList[j], (qreal)(
+                     slope * (qreal)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  ));
                 }
                 previousSampleWithData = currentSample;
                 samplesWithMissingDataList.clear();
@@ -343,7 +343,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
 }
 
 
-double CSmlProject::getDataFromSmlSample(const QString &dataField, sml_sample_t * smlSample)
+qreal CSmlProject::getDataFromSmlSample(const QString &dataField, sml_sample_t * smlSample)
 {
     if (dataField == "Latitude")
     {
@@ -399,7 +399,7 @@ double CSmlProject::getDataFromSmlSample(const QString &dataField, sml_sample_t 
 }
 
 
-void CSmlProject::setDataToSmlSample(const QString &dataField, sml_sample_t * smlSample, const double data)
+void CSmlProject::setDataToSmlSample(const QString &dataField, sml_sample_t * smlSample, const qreal data)
 {
     if (dataField == "Latitude")
     {

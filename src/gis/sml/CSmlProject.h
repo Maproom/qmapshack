@@ -61,6 +61,7 @@ private:
     };
 
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);
+    static void deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samplesList);
 };
 #endif //CSMLPROJECT_H
 

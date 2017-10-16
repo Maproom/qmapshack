@@ -160,57 +160,8 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
        fillMissingData(extensionsNames[i], samplesList);
     }
 
+    deleteSamplesWithDuplicateTimestamps(samplesList);
 
-    if (samplesList.count() >= 2)
-    {   // code below merges samples with identical timestamps.
-        // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
-        QList<sml_sample_t *> samplesWithSameTimestampList;
-        samplesWithSameTimestampList << &samplesList[0];
-        for (int i = 1; i < samplesList.size(); i++)
-        {
-            if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
-            {// todo case where samplesList[i] is the last one (easy example : activity with 2 samples only)
-                samplesWithSameTimestampList << &samplesList[i];
-            }
-            else if ( (samplesWithSameTimestampList.count() == 1) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
-            {   // the single stored sample and current sample have different timestamps
-                samplesWithSameTimestampList.clear();
-                samplesWithSameTimestampList << &samplesList[i];
-            }
-            else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
-            {   // samples with identical timestamps have been found, and the current sample has a different timestamp
-                for(int j = 0; j < extensionsNames.count(); j++)
-                {
-                    qreal sum = 0;
-                    qreal samplesWithDataCount = 0;
-                    for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
-                    {
-                        if ( samplesWithSameTimestampList[k]->data.contains(extensionsNames[j]) )
-                        {
-                            samplesWithDataCount++;
-                            sum += samplesWithSameTimestampList[k]->data.value(extensionsNames[j]);
-                        }
-                    }
-                    if ( samplesWithDataCount != 0)
-                    {
-                        samplesWithSameTimestampList[0]->data.insert(extensionsNames[j], sum / samplesWithDataCount); // first sample gets the averaged value
-                    }
-                 }
-
-                // remove samples with same timestamp but the first one
-                for (int j = 0 ; j < samplesWithSameTimestampList.size() - 1 ; j++)
-                {
-                    samplesList.removeAt(1+i-samplesWithSameTimestampList.size());
-                }
-
-                i -= samplesWithSameTimestampList.count() - 1; // index i has to be moved because of removed samples
-
-                samplesWithSameTimestampList.clear();
-                samplesWithSameTimestampList << &samplesList[i]; // and current sample has to be stored
-
-            }
-        }
-    }
 
     lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
 
@@ -219,26 +170,26 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     int lap = 0;
     CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-    for (int j = 0; j < samplesList.size(); j++)
+    for (int i = 0; i < samplesList.size(); i++)
     {
-        if (samplesList[j].time > lapsList[lap])
+        if (samplesList[i].time > lapsList[lap])
         {
             lap++;
             seg = &(trk.segs[lap]);
         }
 
         CTrackData::trkpt_t trkpt;
-        trkpt.time = samplesList[j].time;
-        trkpt.lat = samplesList[j].data.value("Latitude");
-        trkpt.lon = samplesList[j].data.value("Longitude");
-        if (samplesList[j].data.contains("Altitude"))  { trkpt.ele = samplesList[j].data.value("Altitude"); }
-        if (samplesList[j].data.contains("VerticalSpeed"))  { trkpt.extensions["gpxdata:verticalSpeed"] = samplesList[j].data.value("VerticalSpeed"); }
-        if (samplesList[j].data.contains("HR"))  { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = (int)samplesList[j].data.value("HR"); }
-        if (samplesList[j].data.contains("Cadence"))  { trkpt.extensions["gpxdata:cadence"] = samplesList[j].data.value("Cadence"); }
-        if (samplesList[j].data.contains("Temperature"))  { trkpt.extensions["gpxdata:temp"] = samplesList[j].data.value("Temperature"); }
-        if (samplesList[j].data.contains("SeaLevelPressure"))  { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[j].data.value("SeaLevelPressure"); }
-        if (samplesList[j].data.contains("Speed"))  { trkpt.extensions["gpxdata:speed"] = samplesList[j].data.value("Speed"); }
-        if (samplesList[j].data.contains("EnergyConsumption"))  { trkpt.extensions["gpxdata:energy"] = samplesList[j].data.value("EnergyConsumption"); }
+        trkpt.time = samplesList[i].time;
+        trkpt.lat = samplesList[i].data.value("Latitude");
+        trkpt.lon = samplesList[i].data.value("Longitude");
+        if (samplesList[i].data.contains("Altitude"))  { trkpt.ele = samplesList[i].data.value("Altitude"); }
+        if (samplesList[i].data.contains("VerticalSpeed"))  { trkpt.extensions["gpxdata:verticalSpeed"] = samplesList[i].data.value("VerticalSpeed"); }
+        if (samplesList[i].data.contains("HR"))  { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = (int)samplesList[i].data.value("HR"); }
+        if (samplesList[i].data.contains("Cadence"))  { trkpt.extensions["gpxdata:cadence"] = samplesList[i].data.value("Cadence"); }
+        if (samplesList[i].data.contains("Temperature"))  { trkpt.extensions["gpxdata:temp"] = samplesList[i].data.value("Temperature"); }
+        if (samplesList[i].data.contains("SeaLevelPressure"))  { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[i].data.value("SeaLevelPressure"); }
+        if (samplesList[i].data.contains("Speed"))  { trkpt.extensions["gpxdata:speed"] = samplesList[i].data.value("Speed"); }
+        if (samplesList[i].data.contains("EnergyConsumption"))  { trkpt.extensions["gpxdata:energy"] = samplesList[i].data.value("EnergyConsumption"); }
 
         seg->pts.append(trkpt);
     }
@@ -316,6 +267,78 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
         else
         {
             currentSample = &(samplesList[i]);
+        }
+    }
+}
+
+
+void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samplesList)
+{
+    QStringList extensionsNames;
+    extensionsNames << "Latitude"<<"Longitude"<<"Altitude"<<"VerticalSpeed"<<"HR"<<"Cadence"<<"Temperature"<<"SeaLevelPressure"<<"Speed"<<"EnergyConsumption";
+
+    if (samplesList.count() >= 2)
+    {   // code below merges samples with identical timestamps.
+        // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
+        bool removeDummySample = false;
+        QList<sml_sample_t *> samplesWithSameTimestampList;
+
+        samplesWithSameTimestampList << &samplesList[0];
+        for (int i = 1; i < samplesList.size(); i++)
+        {
+            if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
+            {
+                samplesWithSameTimestampList << &samplesList[i];
+
+                if (i == samplesList.size() - 1) // if this is the last sample
+                {   //special case where identical timestamps are at the end of samplesList
+                    sml_sample_t lastDummySample;
+                    lastDummySample.time = samplesList.last().time.addSecs(1);
+                    samplesList << lastDummySample; // this dummy sample will force the processing of the last samples with identical timestamps
+                    removeDummySample = true;
+                }
+            }
+            else if ( (samplesWithSameTimestampList.count() == 1) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
+            {   // the single stored sample and current sample have different timestamps
+                samplesWithSameTimestampList.clear();
+                samplesWithSameTimestampList << &samplesList[i];
+            }
+            else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
+            {   // samples with identical timestamps have been found, and the current sample has a different timestamp (current sample can be the last dummy sample, see above)
+                for(int j = 0; j < extensionsNames.count(); j++)
+                {
+                    qreal sum = 0;
+                    qreal samplesWithDataCount = 0;
+                    for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
+                    {
+                        if ( samplesWithSameTimestampList[k]->data.contains(extensionsNames[j]) )
+                        {
+                            samplesWithDataCount++;
+                            sum += samplesWithSameTimestampList[k]->data.value(extensionsNames[j]);
+                        }
+                    }
+                    if ( samplesWithDataCount != 0)
+                    {
+                        samplesWithSameTimestampList[0]->data.insert(extensionsNames[j], sum / samplesWithDataCount); // the first sample gets the averaged value
+                    }
+                 }
+
+                // remove samples with same timestamp but the first one
+                for (int j = 0 ; j < samplesWithSameTimestampList.size() - 1 ; j++)
+                {
+                    samplesList.removeAt(1+i-samplesWithSameTimestampList.size());
+                }
+
+                i -= samplesWithSameTimestampList.count() - 1; // index i has to be moved because of removed samples
+
+                samplesWithSameTimestampList.clear();
+                samplesWithSameTimestampList << &samplesList[i]; // and current sample has to be stored
+            }
+        }
+
+        if (removeDummySample)
+        {
+            samplesList.removeLast();
         }
     }
 }

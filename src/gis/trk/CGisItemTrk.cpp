@@ -319,14 +319,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     {
         str += "<br/>";
         IUnit::self().meter2distance(totalDistance, val1, unit1);
-        str += tr("Length: %1 %2").arg(val1).arg(unit1);
+        str += tr("Length: %1%2").arg(val1).arg(unit1);
 
         if(eleIsValid && totalAscent != NOFLOAT && totalDescent != NOFLOAT)
         {
             IUnit::self().meter2elevation(totalAscent,  val1, unit1);
             IUnit::self().meter2elevation(totalDescent, val2, unit2);
 
-            str += tr(", %1%2 %3, %4%5 %6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
+            str += tr(", %1%2%3, %4%5%6").arg(QChar(0x2197)).arg(val1).arg(unit1).arg(QChar(0x2198)).arg(val2).arg(unit2);
         }
         else
         {
@@ -338,7 +338,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         {
             IUnit::self().seconds2time(totalElapsedSeconds, val1, unit1);
             IUnit::self().meter2speed(totalDistance / totalElapsedSeconds, val2, unit2);
-            str += tr("Time: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+            str += tr("Time: %1%2, Speed: %3%4").arg(val1).arg(unit1).arg(val2).arg(unit2);
         }
         else
         {
@@ -350,7 +350,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         {
             IUnit::self().seconds2time(totalElapsedSecondsMoving, val1, unit1);
             IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val2, unit2);
-            str += tr("Moving: %1, Speed: %2 %3").arg(val1).arg(val2).arg(unit2);
+            str += tr("Moving: %1%2, Speed: %3%4").arg(val1).arg(unit1).arg(val2).arg(unit2);
         }
         else
         {
@@ -529,7 +529,7 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     }
 
     IUnit::self().meter2elevation(pt.ele, val1, unit1);
-    str += tr("Ele.: %1 %2").arg(val1).arg(unit1);
+    str += tr("Ele.: %1%2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)
     {
         str += tr(", Slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));

@@ -602,7 +602,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 text += "</tr>";
 
                 text += "<tr>";
-                text += "<td>" + tr("ascent: ") + "</td>";
+                text += "<td>" + tr("Ascent: ") + "</td>";
                 IUnit::self().meter2elevation(info.ascent1, val, unit);
                 text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
                 IUnit::self().meter2elevation(info.ascent2, val, unit);
@@ -612,7 +612,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 text += "</tr>";
 
                 text += "<tr>";
-                text += "<td>" + tr("descent: ") + "</td>";
+                text += "<td>" + tr("Descent: ") + "</td>";
                 IUnit::self().meter2elevation(info.descent1, val, unit);
                 text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
                 IUnit::self().meter2elevation(info.descent2, val, unit);

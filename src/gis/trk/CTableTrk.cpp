@@ -122,7 +122,7 @@ void CTableTrk::updateData()
         if(trkpt.ele != NOINT)
         {
             IUnit::self().meter2elevation(trkpt.ele, val, unit);
-            item->setText(eColEle, tr("%1 %2").arg(val).arg(unit));
+            item->setText(eColEle, tr("%1%2").arg(val).arg(unit));
         }
         else
         {
@@ -130,15 +130,15 @@ void CTableTrk::updateData()
         }
 
         IUnit::self().meter2distance(trkpt.deltaDistance, val, unit);
-        item->setText(eColDelta, tr("%1 %2").arg(val).arg(unit));
+        item->setText(eColDelta, tr("%1%2").arg(val).arg(unit));
 
         IUnit::self().meter2distance(trkpt.distance, val, unit);
-        item->setText(eColDist, tr("%1 %2").arg(val).arg(unit));
+        item->setText(eColDist, tr("%1%2").arg(val).arg(unit));
 
         if(trkpt.speed != NOFLOAT)
         {
             IUnit::self().meter2speed(trkpt.speed, val, unit);
-            item->setText(eColSpeed, tr("%1 %2").arg(val).arg(unit));
+            item->setText(eColSpeed, tr("%1%2").arg(val).arg(unit));
         }
         else
         {
@@ -152,9 +152,9 @@ void CTableTrk::updateData()
                       );
 
         IUnit::self().meter2elevation(trkpt.ascent, val, unit);
-        item->setText(eColAscent, tr("%1 %2").arg(val).arg(unit));
+        item->setText(eColAscent, tr("%1%2").arg(val).arg(unit));
         IUnit::self().meter2elevation(trkpt.descent, val, unit);
-        item->setText(eColDescent, tr("%1 %2").arg(val).arg(unit));
+        item->setText(eColDescent, tr("%1%2").arg(val).arg(unit));
 
         // position
         QString str;

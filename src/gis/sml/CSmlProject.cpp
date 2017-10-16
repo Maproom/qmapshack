@@ -115,12 +115,12 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     QDateTime Time0;
     IUnit::parseTimestamp(smlSamples.item(0).toElement().elementsByTagName("UTC").item(0).firstChild().nodeValue(), Time0);
 
-    QList<smlSample_t> samplesList;
+    QList<sml_sample_t> samplesList;
     QList<QDateTime> lapsList;
 
     for (int i = 0; i < smlSamples.count(); i++)	// browse XML samples
     {
-        smlSample_t sample;
+        sml_sample_t sample;
         sample.time = Time0.addMSecs(smlSamples.item(i).toElement().elementsByTagName("Time").item(0).firstChild().nodeValue().toDouble() * 1000.0);
     
         if (smlSamples.item(i).toElement().elementsByTagName("Events").item(0).toElement().isElement())
@@ -177,7 +177,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     if (samplesList.count() >= 2)
     {   // code below merges samples with identical timestamps.
         // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
-        QList<smlSample_t *> samplesWithSameTimestampList;
+        QList<sml_sample_t *> samplesWithSameTimestampList;
         samplesWithSameTimestampList << &samplesList[0];
         for (int i = 1; i < samplesList.size(); i++)
         {
@@ -269,13 +269,13 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     project->valid = true;
 }
 
-void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &samplesList)
+void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList)
 {   // Suunto samples contain lat/lon OR heartrate, elevation, etc.., each one with its own timestamp.
     // The purpose of the code below is to "spread" data among samples.
     // At the end each sample contains data, linearly interpolated from its neighbours according to timestamps.
-    QList<smlSample_t*> samplesWithMissingDataList;
-    smlSample_t* currentSample = &samplesList.first();
-    smlSample_t* previousSampleWithData = nullptr;
+    QList<sml_sample_t*> samplesWithMissingDataList;
+    sml_sample_t* currentSample = &samplesList.first();
+    sml_sample_t* previousSampleWithData = nullptr;
     bool keepBrowsing = samplesList.size() > 0;
     int i = 0;
 
@@ -343,7 +343,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<smlSample_t> &
 }
 
 
-double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t * smlSample)
+double CSmlProject::getDataFromSmlSample(const QString &dataField, sml_sample_t * smlSample)
 {
     if (dataField == "Latitude")
     {
@@ -399,7 +399,7 @@ double CSmlProject::getDataFromSmlSample(const QString &dataField, smlSample_t *
 }
 
 
-void CSmlProject::setDataToSmlSample(const QString &dataField, smlSample_t * smlSample, const double data)
+void CSmlProject::setDataToSmlSample(const QString &dataField, sml_sample_t * smlSample, const double data)
 {
     if (dataField == "Latitude")
     {

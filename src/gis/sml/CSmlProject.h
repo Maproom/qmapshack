@@ -45,26 +45,22 @@ private:
     struct sml_sample_t
     {
         QDateTime time; // as UTC timestamp
-        qreal latitude; // in degrees
-        qreal longitude; // in degrees
-        qreal altitude;
-        qreal verticalSpeed; // in m/h
-        qreal HR; // in bpm
-        qreal cadence; // in bpm
-        qreal temperature; // in °C
-        qreal seaLevelPressure; // in hPa
-        qreal speed; // in speed units
-        qreal energyConsumption; // in kCal/min
+
+        QMap<QString, qreal> data;
+        /* with
+         latitude in degrees
+         longitude in degrees
+         altitude in meters
+         verticalSpeed in m/h
+         HR in bpm
+         cadence in bpm
+         temperature in °C
+         seaLevelPressure in hPa
+         speed in speed units
+         energyConsumption in kCal/min*/
     };
 
-
-
-    static qreal getDataFromSmlSample(const QString &dataField, sml_sample_t *smlSample);
-    static void setDataToSmlSample(const QString &dataField, sml_sample_t *smlSample, const qreal data);
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);
-
-
-
 };
 #endif //CSMLPROJECT_H
 

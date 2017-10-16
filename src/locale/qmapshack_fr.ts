@@ -492,16 +492,6 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Jusqu&apos;à la fin</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
-        <source>ascent: </source>
-        <translation>montée:</translation>
-    </message>
-    <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
-        <source>descent: </source>
-        <translation>descente:</translation>
-    </message>
-    <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Surfaces&lt;/h2&gt;</translation>
@@ -524,6 +514,16 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
         <source>Distance: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
+        <source>Ascent: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
+        <source>Descent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -917,19 +917,24 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
-        <source>Length: %1 %2</source>
-        <translation>Longueur: %1 %2</translation>
+        <source>Length: %1%2</source>
+        <translation type="unfinished">Longueur: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
+        <source>Time: %1%2</source>
+        <translation type="unfinished">Durée: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
+        <source>Distance: %1%2</source>
+        <translation type="unfinished">Distance: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
         <source>Length: -</source>
         <translation>Longueur: -</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
-        <source>Time: %1 %2</source>
-        <translation>Durée: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
@@ -950,11 +955,6 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <location filename="../gis/rte/CGisItemRte.cpp" line="380"/>
         <source>with %1</source>
         <translation>avec %1</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
-        <source>Distance: %1 %2</source>
-        <translation>Distance: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="717"/>
@@ -1006,14 +1006,14 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Points de la trace modifiés, les données antérieures sont perdues.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
-        <source>Length: %1 %2</source>
-        <translation>Longueur: %1 %2</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
+        <source>Time: %1%2, Speed: %3%4</source>
+        <translation type="unfinished">Temps: %1, Vitesse: %2%3 {1,?} {1%2,?} {3%4?}</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
-        <source>, %1%2 %3, %4%5 %6</source>
-        <translation>, %1%2 %3, %4%5 %6</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
+        <source>Moving: %1%2, Speed: %3%4</source>
+        <translation type="unfinished">En déplacement: %1, Vitesse: %2%3 {1,?} {1%2,?} {3%4?}</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="366"/>
@@ -1071,11 +1071,6 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Index: visibles %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
-        <source>Ele.: %1 %2</source>
-        <translation>Altitude: %1 %2</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
         <source>... and %1 tags not displayed</source>
         <translation>... and %1 tags non affichés</translation>
@@ -1116,14 +1111,19 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>,%1,%2</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
+        <source>Length: %1%2</source>
+        <translation type="unfinished">Longueur: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
+        <source>, %1%2%3, %4%5%6</source>
+        <translation type="unfinished">, %1%2 %3, %4%5%6 {1%2%3,?}</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="333"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
-        <source>Time: %1, Speed: %2 %3</source>
-        <translation>Temps: %1, Vitesse: %2 %3</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
@@ -1131,14 +1131,14 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Time: -, Speed: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
-        <source>Moving: %1, Speed: %2 %3</source>
-        <translation>En déplacement: %1, Vitesse: %2 %3</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
         <source>Moving: -, Speed: -</source>
         <translation>En déplacement: -, Vitesse: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
+        <source>Ele.: %1%2</source>
+        <translation type="unfinished">Altitude: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
@@ -1365,13 +1365,13 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="275"/>
-        <source>Elevation: %1 %2</source>
-        <translation>Altitude: %1 %2</translation>
+        <source>Elevation: %1%2</source>
+        <translation type="unfinished">Altitude: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="286"/>
-        <source>Proximity: %1 %2</source>
-        <translation>Proximité: %1 %2</translation>
+        <source>Proximity: %1%2</source>
+        <translation type="unfinished">Proximité: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
@@ -4645,8 +4645,8 @@ ligne %2, colonne %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="141"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
-        <source>%1 %2</source>
-        <translation>%1 %2</translation>
+        <source>%1%2</source>
+        <translation type="unfinished">%1%2</translation>
     </message>
 </context>
 <context>

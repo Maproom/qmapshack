@@ -42,7 +42,7 @@ public:
 private:
     void loadSml(const QString& filename);
 
-    struct smlSample_t
+    struct sml_sample_t
     {
         QDateTime time; // as UTC timestamp
         double latitude; // in degrees
@@ -59,9 +59,9 @@ private:
 
 
 
-    static double getDataFromSmlSample(const QString &dataField, smlSample_t *smlSample);
-    static void setDataToSmlSample(const QString &dataField, smlSample_t *smlSample, const double data);
-    static void fillMissingData(const QString &dataField, QList<smlSample_t> &samplesList);
+    static double getDataFromSmlSample(const QString &dataField, sml_sample_t *smlSample);
+    static void setDataToSmlSample(const QString &dataField, sml_sample_t *smlSample, const double data);
+    static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);
 
 
 

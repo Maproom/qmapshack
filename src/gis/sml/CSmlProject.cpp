@@ -160,7 +160,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
        fillMissingData(extensionsNames[i], samplesList);
     }
 
-/*
+
     if (samplesList.count() >= 2)
     {   // code below merges samples with identical timestamps.
         // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
@@ -168,11 +168,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         samplesWithSameTimestampList << &samplesList[0];
         for (int i = 1; i < samplesList.size(); i++)
         {
-            if ( (samplesWithSameTimestampList.count() == 0) ) // should not happen here...
-            {
-                samplesWithSameTimestampList << &samplesList[i];
-            }
-            else if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
+            if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
             {// todo case where samplesList[i] is the last one (easy example : activity with 2 samples only)
                 samplesWithSameTimestampList << &samplesList[i];
             }
@@ -189,15 +185,15 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                     qreal samplesWithDataCount = 0;
                     for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
                     {
-                        if ( getDataFromSmlSample(extensionsNames[j], samplesWithSameTimestampList[k]) != NOFLOAT )
+                        if ( samplesWithSameTimestampList[k]->data.contains(extensionsNames[j]) )
                         {
                             samplesWithDataCount++;
-                            sum += getDataFromSmlSample(extensionsNames[j], samplesWithSameTimestampList[k]);
+                            sum += samplesWithSameTimestampList[k]->data.value(extensionsNames[j]);
                         }
                     }
                     if ( samplesWithDataCount != 0)
-                    {   // averaging among samples
-                        setDataToSmlSample(extensionsNames[j], samplesWithSameTimestampList[0], sum / samplesWithDataCount);
+                    {
+                        samplesWithSameTimestampList[0]->data.insert(extensionsNames[j], sum / samplesWithDataCount); // first sample gets the averaged value
                     }
                  }
 
@@ -215,7 +211,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             }
         }
     }
-*/
+
     lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
 
     trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap

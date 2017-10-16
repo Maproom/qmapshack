@@ -210,7 +210,7 @@ set( SRCS
         gis/tnv/serialization.cpp
         gis/tcx/CTcxProject.cpp
         gis/tcx/serialization.cpp
-		gis/sml/CSmlProject.cpp
+        gis/sml/CSmlProject.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp

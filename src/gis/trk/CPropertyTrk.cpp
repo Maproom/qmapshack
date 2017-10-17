@@ -90,16 +90,6 @@ void CPropertyTrk::setupData()
             property.getY = [](const CTrackData::trkpt_t &p) {qreal val; QString unit; IUnit::self().slope2unit(p.slope1, val, unit); return val;};
         }
 
-        if(key == CKnownExtension::internalTerrainSlope)
-        {
-            qreal val;
-            QString unit;
-            IUnit::self().slope2unit(0, val, unit);
-            property.unit = unit;
-            property.yLabel = QString("%1 [%2]").arg(name).arg(unit);
-            property.getY = [key](const CTrackData::trkpt_t &p) {qreal val; QString unit; IUnit::self().slope2unit(p.extensions.value(key).toReal(), val, unit); return val;};
-        }
-
         properties << property;
     }
 }

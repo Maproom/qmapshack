@@ -967,9 +967,9 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
 
     if(slope != NOFLOAT)
     {
-        QString val, unit;
-        IUnit::self().slope2string(slope, val, unit);
-        lblSlope->setText(tr("Slope: %1%2").arg(val).arg(unit));
+        QString val;
+        val.sprintf("%.1f", slope);
+        lblSlope->setText(tr("Slope: %1%2", "terrain").arg(val).arg("°"));
         lblSlope->show();
     }
     else

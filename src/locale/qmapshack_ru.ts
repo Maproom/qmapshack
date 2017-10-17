@@ -509,17 +509,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
         <source>Distance: </source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
         <source>Ascent: </source>
-        <translation type="unfinished"></translation>
+        <translation>Подъем: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
         <source>Descent: </source>
-        <translation type="unfinished"></translation>
+        <translation>Спуск: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
@@ -918,18 +918,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
         <source>Length: %1%2</source>
-        <translation type="unfinished">Длина: %1%2</translation>
+        <translation>Длина: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
         <source>Time: %1%2</source>
-        <translation type="unfinished">Время: %1%2</translation>
+        <translation>Время: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
         <source>Distance: %1%2</source>
-        <translation type="unfinished">Расстояние: %1 %2</translation>
+        <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
@@ -1013,7 +1013,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>Time: %1%2, Speed: %3%4</source>
-        <translation type="unfinished">Время: %1, скорость: %2%3 {1,?} {1%2,?} {3%4?}</translation>
+        <translation>Время: %1%2, Скорость: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
@@ -1023,7 +1023,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
         <source>Moving: %1%2, Speed: %3%4</source>
-        <translation type="unfinished">В движении: %1, скорость: %2%3 {1,?} {1%2,?} {3%4?}</translation>
+        <translation>В движении: %1%2, Скорость: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
@@ -1128,27 +1128,27 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
         <source>Length: %1%2</source>
-        <translation type="unfinished">Длина: %1%2</translation>
+        <translation>Длина: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
         <source>, %1%2%3, %4%5%6</source>
-        <translation type="unfinished">, %1%2 %3, %4%5%6 {1%2%3,?}</translation>
+        <translation>, %1%2 %3, %4%5%6</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
         <source>Ele.: %1%2</source>
-        <translation type="unfinished">Высота: %1%2</translation>
+        <translation>Высота: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
         <source>, Slope: %1%3 (%2%)</source>
-        <translation type="unfinished"></translation>
+        <translation>, Склон: %1%3 (%2%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="540"/>
         <source>, Speed: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, Скорость: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="578"/>
@@ -1168,7 +1168,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
         <source>, Descent: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
+        <translation>, Спуск: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
@@ -1178,7 +1178,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source>, Moving: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
+        <translation>, В движении: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="620"/>
@@ -1198,7 +1198,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
         <source>, Descent: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, Спуск: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
@@ -1208,7 +1208,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source>, Time: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, Время: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1305"/>
@@ -1366,12 +1366,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="275"/>
         <source>Elevation: %1%2</source>
-        <translation type="unfinished">Высота: %1%2</translation>
+        <translation>Высота: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="286"/>
         <source>Proximity: %1%2</source>
-        <translation type="unfinished">Приближение: %1%2</translation>
+        <translation>Приближение: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
@@ -1956,51 +1956,51 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
         <source>Air Temp.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Темп. возд.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
         <source>Air Temperature</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Температура воздуха</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
         <source>Water Temp.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Темп. воды</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
         <source>Water Temperature</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Температура воды</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Глубина</translation>
+        <translation>Глубина</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Глубина</translation>
+        <translation>Глубина</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
         <source>Heart R.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
         <source>Heart Rate</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Пульс</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
@@ -2008,7 +2008,7 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Каденция</translation>
+        <translation>Каденция</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
@@ -2016,7 +2016,7 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Каденция</translation>
+        <translation>Каденция</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
@@ -2025,164 +2025,164 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
         <source>Speed</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
         <source>Accel.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ускор.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
         <source>Acceleration</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ускорение</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Курс</translation>
+        <translation>Курс</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Курс</translation>
+        <translation>Курс</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Temp.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Темп.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Temperature</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Температура</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
         <source>Dist.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Расстояние</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
         <source>Distance</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
         <source>Ele.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <source>Elevation</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Энергия</translation>
+        <translation>Энергия</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Энергия</translation>
+        <translation>Энергия</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Sea Lev. Pres.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Давл. на уровне моря</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Sea Level Pressure</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Давление на уровне моря</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <source>v. Speed</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Скорость (верт.)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <source>Vertical Speed</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Скорость (вертикальная)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
         <source>Slope</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Наклон</translation>
+        <translation>Наклон</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
         <source>Slope*</source>
-        <translation type="unfinished"></translation>
+        <translation>Наклон*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
         <source>Speed over Distance*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Скорость(расстояние)*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed over Time*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Скорость(время)*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
         <source>Elevation*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Высота*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Progress</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Выполнение</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
         <source>Progress*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
         <source>Terr. Slope</source>
         <comment>extShortName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Склон местн.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
         <source>Terrain Slope*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished"></translation>
+        <translation>Склон местности*</translation>
     </message>
 </context>
 <context>
@@ -2203,7 +2203,7 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="957"/>
         <source>Ele.: %1%2</source>
-        <translation type="unfinished">Высота: %1%2</translation>
+        <translation>Высота: %1%2</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="969"/>
@@ -2256,7 +2256,7 @@ line %2, column %3:
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
         <translation>В данный момент, карт ещё нет. Использование QMapShack без карт совсем непривлекательно. Вы можете установить карты, нажав кнопку &apos;Помогите! Я хочу карты!&apos; в окне &apos;Карты&apos;. Или Вы можете нажать клавишу F1, чтобы открыть документацию в Интернете, которая объяснит как использовать QMapShack.
 
-Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это небесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
+Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это не бесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
     </message>
 </context>
 <context>
@@ -3296,12 +3296,12 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlot.cpp" line="55"/>
         <source>Distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время</translation>
     </message>
 </context>
 <context>
@@ -3309,12 +3309,12 @@ Unknown structure.</source>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="79"/>
         <source>Distance [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="80"/>
         <source>Ele. [%1]</source>
-        <translation type="unfinished"></translation>
+        <translation>Высота: [%1]</translation>
     </message>
 </context>
 <context>
@@ -4649,7 +4649,7 @@ line %2, column %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
         <source>%1%2</source>
-        <translation type="unfinished">%1%2</translation>
+        <translation>%1%2</translation>
     </message>
 </context>
 <context>
@@ -7598,7 +7598,19 @@ Tip:
 &lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
 &lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ol&gt;
+&lt;li&gt;Выберите один или несколько исходных файлов.&lt;/li&gt;
+&lt;li&gt;Выберите имя файла для целевого файла VRT.&lt;/li&gt;
+&lt;li&gt;Нажмите кнопку &quot;Начать&quot;.&lt;/li&gt;
+&lt;/ol&gt;
+
+Намек:
+&lt;ul&gt;
+&lt;li&gt;Если у вас несколько файлов, поместите их в подпапку вашей папки к карте. Создайте файл VRT в вашей папки к картам.&lt;/li&gt;
+&lt;li&gt;Используйте дополнительные параметры, чтобы добавить значение для &quot;нет данных&quot;, если исходные файлы не имеют этого и не образуют прямоугольную карту. Области без файла карты станут прозрачными.&lt;/li&gt;
+&lt;li&gt;Параметр &quot;-a_srs&quot; предназначен для назначения проекции/датума, когда в исходном файле этого нет. Это НЕ перепроектирует данные.&lt;/li&gt;
+&lt;/ul&gt;
+</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
@@ -8351,7 +8363,14 @@ or
 &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
 &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
 &lt;/ol&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Чтобы создать базу данных маршрутизации Routino, вам необходимо загрузить файлы *.pbf из &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. Процесс создания базы данных Routino довольно медленный, и результирующие файлы довольно большие. Поэтому рекомендуется не загружать целые континенты. Ограничьте загрузку теми странами, которые вам действительно нужны. Однако, поскольку Routino не может маршрутизировать через несколько баз данных, вы должны включить все страны, затронутые трансграничным маршрутом.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Выберите один или несколько исходных файлов *.pbf.&lt;/li&gt;
+&lt;li&gt;Выберите путь для вашей базы данных Routino.&lt;/li&gt;
+&lt;li&gt;Выберите префикс. База данных будет указана с этим префиксом.&lt;/li&gt;
+&lt;li&gt;Нажмите кнопку &quot;Начать&quot;.&lt;/li&gt;
+&lt;/ol&gt;</translation>
     </message>
 </context>
 <context>

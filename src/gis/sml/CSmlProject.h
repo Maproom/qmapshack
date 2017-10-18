@@ -20,6 +20,7 @@
 #define CSMLPROJECT_H
 
 #include "gis/prj/IGisProject.h"
+#include <proj_api.h>
 
 class CSmlProject : public IGisProject
 {
@@ -55,9 +56,16 @@ private:
                                         {"Cadence", NOFLOAT},         // in bpm
                                         {"Temperature", NOFLOAT},     // in °C
                                         {"SeaLevelPressure", NOFLOAT},// in hPa
-                                        {"Speed", NOFLOAT},           // in km/hours
+                                        {"Speed", NOFLOAT},           // in m/s
                                         {"EnergyConsumption", NOFLOAT}// in kCal/min
                                     };
+    };
+
+    struct extension_t
+    {
+        QString tag;
+        qreal scale;
+        qreal offset;
     };
 
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);

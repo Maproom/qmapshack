@@ -140,35 +140,40 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                 const QDomNode& xmlSample = xmlSampleList.item(0);
                 if(xmlSample.namedItem("UTC").isElement())
-                {  IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);}
-
-
-                /*
-                    if (xmlSml.elementsByTagName("Latitude").count() == 0)
-                    {
-                        throw tr("This SML file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
-                    }
-                */
-
+                {   IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);}
 
                 QList<sml_sample_t> samplesList;
                 QList<QDateTime> lapsList;
 
-                QStringList extensionsNames;
-               extensionsNames << "Latitude"<<"Longitude"<<"Altitude"<<"VerticalSpeed"<<"HR"<<"Cadence"<<"Temperature"<<"SeaLevelPressure"<<"Speed"<<"EnergyConsumption";
-               // sml_sample_t dictionnarySample; // sample to be used once to get its keys
-               // extensionsNames = dictionnarySample.data.keys();
+                const QList<extension_t> extensions = {
+                        {"Latitude", RAD_TO_DEG, 0.0},
+                        {"Longitude", RAD_TO_DEG, 0.0},
+                        {"Altitude", 1.0, 0.0},
+                        {"VerticalSpeed", 1.0, 0.0},
+                        {"HR", 60.0, 0.0},
+                        {"Cadence", 60.0, 0.0},
+                        {"Temperature", 1.0, -273.15},
+                        {"SeaLevelPressure", 0.01, 0.0},
+                        {"Speed", 1.0, 0.0},
+                        {"EnergyConsumption", 60.0 / 4184.0, 0.0}
+                };
+
+                bool sampleWithPositionFound = false;
 
                 for (int i = 0; i < xmlSampleList.count(); i++)	// browse XML samples
                 {
                     sml_sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 
+                    if(xmlSample.namedItem("Latitude").isElement())
+                    {
+                        sampleWithPositionFound = true;
+                    }
+
                     if(xmlSample.namedItem("Time").isElement())
                     {
                         sample.time = time0.addMSecs(xmlSample.namedItem("Time").toElement().text().toDouble() * 1000.0);
                     }
-
 
                     if(xmlSample.namedItem("Events").isElement())
                     {
@@ -180,26 +185,27 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                     }
                     else // samples without "Events" are the ones containing position, heartrate, etc... that we want to store
                     {
-                        QList<qreal> extensionsScalingFactors;
-                        QList<qreal> extensionsOffsets;
-                        extensionsScalingFactors << RAD_TO_DEG<<RAD_TO_DEG<<1.0<<1.0<<60.0<<60.0<<1.0<<0.01<<1.0<< (60.0 / 4184.0);
-                        extensionsOffsets << 0.0<<0.0<<0.0<<0.0<<0.0<<0.0<<-273.15<<0.0<<0.0<<0.0;
-
-                        for (int j = 0 ; j < extensionsNames.size() ; j++)
+                        for (const extension_t& ext  : extensions)
                         {
-                            if (xmlSample.namedItem(extensionsNames[j]).isElement())
+                            if (xmlSample.namedItem(ext.tag).isElement())
                             {
-                                sample.data[extensionsNames[j]] = xmlSampleList.item(i).namedItem(extensionsNames[j]).toElement().text().toDouble()
-                                                     * extensionsScalingFactors[j] + extensionsOffsets[j];
+                                const QDomNode& xmlSampleData = xmlSample.namedItem(ext.tag);
+                                sample.data[ext.tag] = xmlSampleData.toElement().text().toDouble() * ext.scale + ext.offset;
                             }
                         }
                         samplesList << sample;
                     }
                 }
 
-                for (int i = 0 ; i < extensionsNames.size() ; i++)
+                if (!sampleWithPositionFound)
                 {
-                   fillMissingData(extensionsNames[i], samplesList);
+                    throw tr("This SML file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
+                }
+
+
+                for (const extension_t& ext  : extensions)
+                {
+                   fillMissingData(ext.tag, samplesList);
                 }
 
                 deleteSamplesWithDuplicateTimestamps(samplesList);
@@ -246,10 +252,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         }
     }
 }
-
-
-
-      
 
 
 void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList)
@@ -324,14 +326,11 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
 
 void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samplesList)
 {
-    QStringList extensionsNames;
-    extensionsNames << "Latitude"<<"Longitude"<<"Altitude"<<"VerticalSpeed"<<"HR"<<"Cadence"<<"Temperature"<<"SeaLevelPressure"<<"Speed"<<"EnergyConsumption";
-
     sml_sample_t lastDummySample;
     lastDummySample.time = samplesList.last().time.addSecs(1);
     samplesList << lastDummySample; // this dummy sample will force the processing of the last samples when they have identical timestamps
 
-    if (samplesList.count() >= 3)
+    if (samplesList.count() >= 3) // = dummy sample + at least 2 samples with hypothetical identical timestamp
     {   // code below merges samples with identical timestamps.
         // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
         QList<sml_sample_t *> samplesWithSameTimestampList;
@@ -350,21 +349,36 @@ void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samp
             }
             else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
             {   // samples with identical timestamps have been found, and the current sample has a different timestamp (current sample can be the last dummy sample, see above)
-                for(int j = 0; j < extensionsNames.count(); j++)
+
+                const QList<extension_t> extensions = {
+                        {"Latitude", RAD_TO_DEG, 0.0},
+                        {"Longitude", RAD_TO_DEG, 0.0},
+                        {"Altitude", 1.0, 0.0},
+                        {"VerticalSpeed", 1.0, 0.0},
+                        {"HR", 60.0, 0.0},
+                        {"Cadence", 60.0, 0.0},
+                        {"Temperature", 1.0, -273.15},
+                        {"SeaLevelPressure", 0.01, 0.0},
+                        {"Speed", 1.0, 0.0},
+                        {"EnergyConsumption", 60.0 / 4184.0, 0.0}
+                };
+
+                for (const extension_t& ext  : extensions)
                 {
                     qreal sum = 0;
                     qreal samplesWithDataCount = 0;
-                    for(int k = 0; k < samplesWithSameTimestampList.size(); k++)
+
+                    for(int j = 0; j < samplesWithSameTimestampList.size(); j++)
                     {
-                        if ( samplesWithSameTimestampList[k]->data[extensionsNames[j]] != NOFLOAT)
+                        if ( samplesWithSameTimestampList[j]->data[ext.tag] != NOFLOAT)
                         {
                             samplesWithDataCount++;
-                            sum += samplesWithSameTimestampList[k]->data[extensionsNames[j]];
+                            sum += samplesWithSameTimestampList[j]->data[ext.tag];
                         }
                     }
                     if ( samplesWithDataCount != 0)
                     {
-                        samplesWithSameTimestampList[0]->data[extensionsNames[j]] = sum / samplesWithDataCount; // the first sample gets the averaged value
+                        samplesWithSameTimestampList[0]->data[ext.tag] = sum / samplesWithDataCount; // the first sample gets the averaged value
                     }
                  }
 

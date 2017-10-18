@@ -46,18 +46,18 @@ private:
     {
         QDateTime time; // as UTC timestamp
 
-        QMap<QString, qreal> data;
-        /* with
-         latitude in degrees
-         longitude in degrees
-         altitude in meters
-         verticalSpeed in m/h
-         HR in bpm
-         cadence in bpm
-         temperature in °C
-         seaLevelPressure in hPa
-         speed in speed units
-         energyConsumption in kCal/min*/
+        QMap<QString, qreal> data = {
+                                        {"Latitude", NOFLOAT},        // in degrees
+                                        {"Longitude", NOFLOAT},       // in degrees
+                                        {"Altitude", NOFLOAT},        // in meters
+                                        {"VerticalSpeed", NOFLOAT},   // in m/h
+                                        {"HR", NOFLOAT},              // in bpm
+                                        {"Cadence", NOFLOAT},         // in bpm
+                                        {"Temperature", NOFLOAT},     // in °C
+                                        {"SeaLevelPressure", NOFLOAT},// in hPa
+                                        {"Speed", NOFLOAT},           // in km/hours
+                                        {"EnergyConsumption", NOFLOAT}// in kCal/min
+                                    };
     };
 
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);

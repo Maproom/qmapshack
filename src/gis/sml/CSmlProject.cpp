@@ -22,6 +22,112 @@
 #include "gis/trk/CGisItemTrk.h"
 
 #include <QtWidgets>
+#include <functional>
+
+using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal val)>;
+
+struct extension_t
+{
+    QString tag;
+    qreal scale;
+    qreal offset;
+    fTrkPtSetVal func;
+};
+
+static const QList<extension_t> extensions =
+{
+    {"Latitude", RAD_TO_DEG, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.lat = val;
+         }
+     }
+    },
+    {"Longitude", RAD_TO_DEG, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.lon = val;
+         }
+     }
+    },
+    {"Altitude", 1.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.ele = val;
+         }
+     }
+    },
+    {"VerticalSpeed", 1.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:verticalSpeed"] = val;
+         }
+     }
+    },
+    {"HR", 60.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = val;
+         }
+     }
+    },
+    {"Cadence", 60.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:cadence"] = val;
+         }
+     }
+    },
+    {"Temperature", 1.0, -273.15,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:temp"] = val;
+         }
+     }
+    },
+    {"SeaLevelPressure", 0.01, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:seaLevelPressure"] = val;
+         }
+     }
+    },
+    {"Speed", 1.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:speed"] = val;
+         }
+     }
+    },
+    {"EnergyConsumption", 60.0 / 4184.0, 0.0,
+     [](CTrackData::trkpt_t &pt, qreal val)
+     {
+         if(val != NOFLOAT)
+         {
+             pt.extensions["gpxdata:energy"] = val;
+         }
+     }
+    }
+};
+
 
 CSmlProject::CSmlProject(const QString &filename, CGisListWks * parent)
     : IGisProject(eTypeSml, filename, parent)
@@ -96,18 +202,28 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
         {
             const QDomNode& xmlHeader = xmlDeviceLog.namedItem("Header");
             if(xmlHeader.namedItem("DateTime").isElement())
-            {   trk.name = xmlHeader.namedItem("DateTime").toElement().text();}// date of beginning of recording is chosen as track name
+            {
+                trk.name = xmlHeader.namedItem("DateTime").toElement().text();
+            }                                                                  // date of beginning of recording is chosen as track name
             if(xmlHeader.namedItem("Activity").isElement())
-            {   trk.desc = xmlHeader.namedItem("Activity").toElement().text(); }
+            {
+                trk.desc = xmlHeader.namedItem("Activity").toElement().text();
+            }
 
             if(xmlHeader.namedItem("RecoveryTime").isElement())
-            {   trk.cmt = tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600); }
+            {
+                trk.cmt = tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600);
+            }
 
             if(xmlHeader.namedItem("PeakTrainingEffect").isElement())
-            {   trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble()); }
+            {
+                trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble());
+            }
 
             if(xmlHeader.namedItem("Energy").isElement())
-            {   trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() / 4184); }
+            {
+                trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() / 4184);
+            }
 
 
             if(xmlHeader.namedItem("BatteryChargeAtStart").isElement() &&
@@ -116,17 +232,19 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
             {
                 trk.cmt += tr("Battery usage: %1 %/hour")
-                              .arg( 100*(xmlHeader.namedItem("BatteryChargeAtStart").toElement().text().toDouble()
-                                  - xmlHeader.namedItem("BatteryCharge").toElement().text().toDouble())
-                                  / (xmlHeader.namedItem("Duration").toElement().text().toDouble() / 3600), 0, 'f', 1);
+                           .arg( 100*(xmlHeader.namedItem("BatteryChargeAtStart").toElement().text().toDouble()
+                                      - xmlHeader.namedItem("BatteryCharge").toElement().text().toDouble())
+                                 / (xmlHeader.namedItem("Duration").toElement().text().toDouble() / 3600), 0, 'f', 1);
             }
         }
 
         if(xmlDeviceLog.namedItem("Device").isElement())
         {
-             const QDomNode& xmlDevice = xmlDeviceLog.namedItem("Device");
-             if(xmlDevice.namedItem("Name").isElement())
-             {  trk.cmt =  tr("Device: %1<br>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;  }
+            const QDomNode& xmlDevice = xmlDeviceLog.namedItem("Device");
+            if(xmlDevice.namedItem("Name").isElement())
+            {
+                trk.cmt =  tr("Device: %1<br>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;
+            }
         }
 
         if(xmlDeviceLog.namedItem("Samples").isElement())
@@ -140,27 +258,16 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                 const QDomNode& xmlSample = xmlSampleList.item(0);
                 if(xmlSample.namedItem("UTC").isElement())
-                {   IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);}
+                {
+                    IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);
+                }
 
                 QList<sml_sample_t> samplesList;
                 QList<QDateTime> lapsList;
 
-                const QList<extension_t> extensions = {
-                        {"Latitude", RAD_TO_DEG, 0.0},
-                        {"Longitude", RAD_TO_DEG, 0.0},
-                        {"Altitude", 1.0, 0.0},
-                        {"VerticalSpeed", 1.0, 0.0},
-                        {"HR", 60.0, 0.0},
-                        {"Cadence", 60.0, 0.0},
-                        {"Temperature", 1.0, -273.15},
-                        {"SeaLevelPressure", 0.01, 0.0},
-                        {"Speed", 1.0, 0.0},
-                        {"EnergyConsumption", 60.0 / 4184.0, 0.0}
-                };
-
                 bool sampleWithPositionFound = false;
 
-                for (int i = 0; i < xmlSampleList.count(); i++)	// browse XML samples
+                for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
                     sml_sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
@@ -205,7 +312,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                 for (const extension_t& ext  : extensions)
                 {
-                   fillMissingData(ext.tag, samplesList);
+                    fillMissingData(ext.tag, samplesList);
                 }
 
                 deleteSamplesWithDuplicateTimestamps(samplesList);
@@ -228,16 +335,11 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                     CTrackData::trkpt_t trkpt;
                     trkpt.time = samplesList[i].time;
-                    trkpt.lat = samplesList[i].data["Latitude"];
-                    trkpt.lon = samplesList[i].data["Longitude"];
-                    if (samplesList[i].data["Altitude"] != NOFLOAT) { trkpt.ele = samplesList[i].data["Altitude"]; }
-                    if (samplesList[i].data["VerticalSpeed"] != NOFLOAT) { trkpt.extensions["gpxdata:verticalSpeed"] = samplesList[i].data["VerticalSpeed"];}
-                    if (samplesList[i].data["HR"] != NOFLOAT) { trkpt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = (int)samplesList[i].data["HR"];}
-                    if (samplesList[i].data["Cadence"] != NOFLOAT) { trkpt.extensions["gpxdata:cadence"] = samplesList[i].data["Cadence"];}
-                    if (samplesList[i].data["Temperature"] != NOFLOAT) { trkpt.extensions["gpxdata:temp"] = samplesList[i].data["Temperature"];}
-                    if (samplesList[i].data["SeaLevelPressure"] != NOFLOAT) { trkpt.extensions["gpxdata:seaLevelPressure"] = samplesList[i].data["SeaLevelPressure"];}
-                    if (samplesList[i].data["Speed"] != NOFLOAT) { trkpt.extensions["gpxdata:speed"] = samplesList[i].data["Speed"];}
-                    if (samplesList[i].data["EnergyConsumption"] != NOFLOAT) { trkpt.extensions["gpxdata:energy"] = samplesList[i].data["EnergyConsumption"];}
+
+                    for(const extension_t& ext : extensions)
+                    {
+                        ext.func(trkpt, samplesList[i][ext.tag]);
+                    }
 
                     seg->pts.append(trkpt);
                 }
@@ -293,10 +395,10 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
                 int j;
                 for (j = 0; j < samplesWithMissingDataList.size(); j++)
                 {
-                 //    interpolate data and apply them to samples in-between
+                    //    interpolate data and apply them to samples in-between
 
-                   samplesWithMissingDataList[j]->data[dataField] = (qreal)(
-                                        slope * (qreal)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  );
+                    samplesWithMissingDataList[j]->data[dataField] = (qreal)(
+                        slope * (qreal)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  );
                 }
                 previousSampleWithData = currentSample;
                 samplesWithMissingDataList.clear();
@@ -349,20 +451,6 @@ void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samp
             }
             else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
             {   // samples with identical timestamps have been found, and the current sample has a different timestamp (current sample can be the last dummy sample, see above)
-
-                const QList<extension_t> extensions = {
-                        {"Latitude", RAD_TO_DEG, 0.0},
-                        {"Longitude", RAD_TO_DEG, 0.0},
-                        {"Altitude", 1.0, 0.0},
-                        {"VerticalSpeed", 1.0, 0.0},
-                        {"HR", 60.0, 0.0},
-                        {"Cadence", 60.0, 0.0},
-                        {"Temperature", 1.0, -273.15},
-                        {"SeaLevelPressure", 0.01, 0.0},
-                        {"Speed", 1.0, 0.0},
-                        {"EnergyConsumption", 60.0 / 4184.0, 0.0}
-                };
-
                 for (const extension_t& ext  : extensions)
                 {
                     qreal sum = 0;
@@ -380,10 +468,10 @@ void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samp
                     {
                         samplesWithSameTimestampList[0]->data[ext.tag] = sum / samplesWithDataCount; // the first sample gets the averaged value
                     }
-                 }
+                }
 
                 // remove samples with same timestamp but the first one
-                for (int j = 0 ; j < samplesWithSameTimestampList.size() - 1 ; j++)
+                for (int j = 0; j < samplesWithSameTimestampList.size() - 1; j++)
                 {
                     samplesList.removeAt(1+i-samplesWithSameTimestampList.size());
                 }

@@ -46,24 +46,18 @@ private:
     struct sml_sample_t
     {
         QDateTime time; // as UTC timestamp
+        QMap<QString, qreal> data;
 
-        QMap<QString, qreal> data =
-        {
-            {"Latitude", NOFLOAT},                                    // in degrees
-            {"Longitude", NOFLOAT},                                   // in degrees
-            {"Altitude", NOFLOAT},                                    // in meters
-            {"VerticalSpeed", NOFLOAT},                               // in m/h
-            {"HR", NOFLOAT},                                          // in bpm
-            {"Cadence", NOFLOAT},                                     // in bpm
-            {"Temperature", NOFLOAT},                                 // in °C
-            {"SeaLevelPressure", NOFLOAT},                            // in hPa
-            {"Speed", NOFLOAT},                                       // in m/s
-            {"EnergyConsumption", NOFLOAT}                            // in kCal/min
-        };
-        qreal operator[](const QString& key)
+        qreal& operator[](const QString& key)
         {
             return data[key];
         }
+
+        qreal operator[](const QString& key) const
+        {
+            return data[key];
+        }
+
     };
 
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);

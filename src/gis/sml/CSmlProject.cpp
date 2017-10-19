@@ -55,6 +55,8 @@ static const QList<extension_t> extensions =
 {
     // example how to do it without a lambda function
     //{"Latitude", RAD_TO_DEG, 0.0,assignLat}
+
+    // unit [°]
     {"Latitude", RAD_TO_DEG, 0.0,
      // this is a c++11 lambda function.
      // think of it like a fTrkPtSetVal function that does
@@ -70,6 +72,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [°]
     {"Longitude", RAD_TO_DEG, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -79,6 +83,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [m]
     {"Altitude", 1.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -88,6 +94,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [m/h]
     {"VerticalSpeed", 1.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -97,6 +105,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [bpm]
     {"HR", 60.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -106,6 +116,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [bpm]
     {"Cadence", 60.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -115,6 +127,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [°C]
     {"Temperature", 1.0, -273.15,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -124,6 +138,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [hPa]
     {"SeaLevelPressure", 0.01, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -133,6 +149,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [m/s]
     {"Speed", 1.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -142,6 +160,8 @@ static const QList<extension_t> extensions =
          }
      }
     },
+
+    // unit [kCal/min]
     {"EnergyConsumption", 60.0 / 4184.0, 0.0,
      [](CTrackData::trkpt_t &pt, qreal val)
      {
@@ -315,14 +335,14 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                             lapsList << sample.time; // stores timestamps of the samples where the the "Lap" button has been pressed
                         }
                     }
-                    else // samples without "Events" are the ones containing position, heartrate, etc... that we want to store
+                    else // samples without "Events" are the ones containing position, heart rate, etc... that we want to store
                     {
                         for (const extension_t& ext  : extensions)
                         {
                             if (xmlSample.namedItem(ext.tag).isElement())
                             {
                                 const QDomNode& xmlSampleData = xmlSample.namedItem(ext.tag);
-                                sample.data[ext.tag] = xmlSampleData.toElement().text().toDouble() * ext.scale + ext.offset;
+                                sample[ext.tag] = xmlSampleData.toElement().text().toDouble() * ext.scale + ext.offset;
                             }
                         }
                         samplesList << sample;
@@ -350,20 +370,23 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                 int lap = 0;
                 CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-                for (int i = 0; i < samplesList.size(); i++)
+                for(const sml_sample_t& sample : samplesList)
                 {
-                    if (samplesList[i].time > lapsList[lap])
+                    if (sample.time > lapsList[lap])
                     {
                         lap++;
                         seg = &(trk.segs[lap]);
                     }
 
                     CTrackData::trkpt_t trkpt;
-                    trkpt.time = samplesList[i].time;
+                    trkpt.time = sample.time;
 
                     for(const extension_t& ext : extensions)
                     {
-                        ext.func(trkpt, samplesList[i][ext.tag]);
+                        if(sample.data.contains(ext.tag))
+                        {
+                            ext.func(trkpt, sample[ext.tag]);
+                        }
                     }
 
                     seg->pts.append(trkpt);
@@ -382,9 +405,9 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
 
 void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList)
-{   // Suunto samples contain lat/lon OR heartrate, elevation, etc.., each one with its own timestamp.
+{   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
     // The purpose of the code below is to "spread" data among samples.
-    // At the end each sample contains data, linearly interpolated from its neighbours according to timestamps.
+    // At the end each sample contains data, linearly interpolated from its neighbors according to timestamps.
     QList<sml_sample_t*> samplesWithMissingDataList;
     sml_sample_t* currentSample = &samplesList.first();
     sml_sample_t* previousSampleWithData = nullptr;
@@ -393,7 +416,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
 
     while (keepBrowsing)
     {
-        if (currentSample->data[dataField] == NOFLOAT) // sample with missing data found
+        if (!currentSample->data.contains(dataField)) // sample with missing data found
         {
             samplesWithMissingDataList << currentSample;
         }
@@ -483,7 +506,7 @@ void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samp
 
                     for(int j = 0; j < samplesWithSameTimestampList.size(); j++)
                     {
-                        if ( samplesWithSameTimestampList[j]->data[ext.tag] != NOFLOAT)
+                        if ( samplesWithSameTimestampList[j]->data.contains(ext.tag))
                         {
                             samplesWithDataCount++;
                             sum += samplesWithSameTimestampList[j]->data[ext.tag];

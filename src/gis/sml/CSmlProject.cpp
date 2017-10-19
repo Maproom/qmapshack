@@ -24,19 +24,44 @@
 #include <QtWidgets>
 #include <functional>
 
-using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal val)>;
+// this is the c++11 way of defining a function type. In other words
+// every function that looks like:
+// void foo(CTrackData::trkpt_t& pt, qreal val);
+// will be of that type
+using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
+
+//void assignLat(CTrackData::trkpt_t &pt, qreal val)
+//{
+//    if(val != NOFLOAT)
+//    {
+//        pt.lat = val;
+//    }
+//}
+
 
 struct extension_t
 {
+    /// the tag as used in the SML file
     QString tag;
+    /// a scale factor to be applied to the value stored in the SML file
     qreal scale;
+    /// an offset to be applied to the value stored in the SML file
     qreal offset;
+    /// an assignment function that assigns a value to a member of a trkpt_t object
     fTrkPtSetVal func;
 };
 
 static const QList<extension_t> extensions =
 {
+    // example how to do it without a lambda function
+    //{"Latitude", RAD_TO_DEG, 0.0,assignLat}
     {"Latitude", RAD_TO_DEG, 0.0,
+     // this is a c++11 lambda function.
+     // think of it like a fTrkPtSetVal function that does
+     // not need a function name. Of course I could define
+     // those functions like a normal function and use their
+     // name here. The lambda function simply allows me to
+     // define what has to be done inline.
      [](CTrackData::trkpt_t &pt, qreal val)
      {
          if(val != NOFLOAT)

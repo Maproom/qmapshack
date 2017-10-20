@@ -200,7 +200,6 @@ void CSmlProject::loadSml(const QString& filename)
 }
 
 
-
 void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 {
     QFile file(filename);
@@ -408,128 +407,110 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
 {   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
     // The purpose of the code below is to "spread" data among samples.
     // At the end each sample contains data, linearly interpolated from its neighbors according to timestamps.
-    QList<sml_sample_t*> samplesWithMissingDataList;
-    sml_sample_t* currentSample = &samplesList.first();
-    sml_sample_t* previousSampleWithData = nullptr;
-    bool keepBrowsing = samplesList.size() > 0;
-    int i = 0;
+    QList<sml_sample_t> collect;
+    QList<sml_sample_t> result;
+    sml_sample_t previousSampleWithData;
 
-    while (keepBrowsing)
+    for(sml_sample_t& sample : samplesList)
     {
-        if (!currentSample->data.contains(dataField)) // sample with missing data found
+        collect << sample;
+
+        if (sample.data.contains(dataField))
         {
-            samplesWithMissingDataList << currentSample;
-        }
-        else
-        {
-            if (nullptr == previousSampleWithData) // if this is the first sample containing data found
-            {
-                int j;
-                for (j = 0; j < samplesWithMissingDataList.size(); j++)
+            if (!previousSampleWithData.data.contains(dataField))
+            {   // case where, at the beginning, first samples have no data
+                for(sml_sample_t& collectedSample : collect)
                 {
-                    samplesWithMissingDataList[j]->data[dataField] =  currentSample->data[dataField];
+                    collectedSample[dataField] = sample[dataField];
                 }
-                previousSampleWithData = currentSample;
-                samplesWithMissingDataList.clear();
             }
             else
-            {
-                qreal dY = currentSample->data[dataField] - previousSampleWithData->data[dataField];
-                qreal dT = ((qreal)(currentSample->time.toMSecsSinceEpoch() - previousSampleWithData->time.toMSecsSinceEpoch())) / 1000.0;
-                qreal slope = dY / dT;
-                qreal offsetAt0 = previousSampleWithData->data[dataField]
-                                  - slope * ( (  (qreal)(previousSampleWithData->time.toMSecsSinceEpoch())  ) / 1000.0 );
-
-                int j;
-                for (j = 0; j < samplesWithMissingDataList.size(); j++)
+            {   // case where linear interpolation can be applied
+                qreal dT = ((qreal)(collect.last().time.toMSecsSinceEpoch() - previousSampleWithData.time.toMSecsSinceEpoch())) / 1000.0;
+                if (dT != 0) // dT == 0 when samples have the same timestamps ; this is managed later in deleteSamplesWithDuplicateTimestamps function
                 {
-                    //    interpolate data and apply them to samples in-between
+                    qreal dY = collect.last().data[dataField] - previousSampleWithData.data[dataField];
+                    qreal slope = dY / dT;
+                    qreal offsetAt0 = previousSampleWithData.data[dataField]
+                                      - slope * ( (  (qreal)(previousSampleWithData.time.toMSecsSinceEpoch())  ) / 1000.0 );
 
-                    samplesWithMissingDataList[j]->data[dataField] = (qreal)(
-                        slope * (qreal)((samplesWithMissingDataList[j]->time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  );
-                }
-                previousSampleWithData = currentSample;
-                samplesWithMissingDataList.clear();
-            }
-        }
-
-        if (++i >= samplesList.size())
-        {
-            keepBrowsing = false;
-
-            if (nullptr != previousSampleWithData)
-            {
-                int j;
-                for (j = 0; j < samplesWithMissingDataList.size(); j++) //  case where samplesWithMissingDataList is not empty at the end can happen when last samples contain no data
-                {
-                    samplesWithMissingDataList[j]->data[dataField] = previousSampleWithData->data[dataField];// apply previous data found to all of the previous samples with no data
+                    for(sml_sample_t& collectedSample : collect)
+                    {   // apply interpolation to collected samples
+                        collectedSample[dataField] = (qreal)(slope * (qreal)((collectedSample.time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  );
+                    }
                 }
             }
+
+            previousSampleWithData = collect.last();
+            result << collect;
+            collect.clear();
         }
-        else
-        {
-            currentSample = &(samplesList[i]);
-        }
+     }
+
+    for(sml_sample_t& collectedSample : collect)
+    {   // processing last remaining collected samples without data
+        collectedSample[dataField] = previousSampleWithData[dataField];
     }
+
+    result << collect;
+    samplesList = result;
 }
 
 
-void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samplesList)
+void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samples)
 {
-    sml_sample_t lastDummySample;
-    lastDummySample.time = samplesList.last().time.addSecs(1);
-    samplesList << lastDummySample; // this dummy sample will force the processing of the last samples when they have identical timestamps
+    QList<sml_sample_t> result;
+    QList<sml_sample_t> collect;
 
-    if (samplesList.count() >= 3) // = dummy sample + at least 2 samples with hypothetical identical timestamp
-    {   // code below merges samples with identical timestamps.
-        // Samples with identical timestamps are found when "pause" button is pressed (and maybe in some other cases, I can not say)
-        QList<sml_sample_t *> samplesWithSameTimestampList;
 
-        samplesWithSameTimestampList << &samplesList[0];
-        for (int i = 1; i < samplesList.size(); i++)
+    for(sml_sample_t& sample : samples)
+    {
+        if(!collect.isEmpty())
         {
-            if (samplesWithSameTimestampList[0]->time == samplesList[i].time) // a sample with identical timestamp has been found
+            if(sample.time != collect.first().time)
             {
-                samplesWithSameTimestampList << &samplesList[i];
-            }
-            else if ( (samplesWithSameTimestampList.count() == 1) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
-            {   // the single stored sample and current sample have different timestamps
-                samplesWithSameTimestampList.clear();
-                samplesWithSameTimestampList << &samplesList[i];
-            }
-            else if  ( (samplesWithSameTimestampList.count() >= 2) && (samplesWithSameTimestampList[0]->time != samplesList[i].time) )
-            {   // samples with identical timestamps have been found, and the current sample has a different timestamp (current sample can be the last dummy sample, see above)
-                for (const extension_t& ext  : extensions)
-                {
-                    qreal sum = 0;
-                    qreal samplesWithDataCount = 0;
-
-                    for(int j = 0; j < samplesWithSameTimestampList.size(); j++)
-                    {
-                        if ( samplesWithSameTimestampList[j]->data.contains(ext.tag))
-                        {
-                            samplesWithDataCount++;
-                            sum += samplesWithSameTimestampList[j]->data[ext.tag];
-                        }
-                    }
-                    if ( samplesWithDataCount != 0)
-                    {
-                        samplesWithSameTimestampList[0]->data[ext.tag] = sum / samplesWithDataCount; // the first sample gets the averaged value
-                    }
-                }
-
-                // remove samples with same timestamp but the first one
-                for (int j = 0; j < samplesWithSameTimestampList.size() - 1; j++)
-                {
-                    samplesList.removeAt(1+i-samplesWithSameTimestampList.size());
-                }
-
-                i -= samplesWithSameTimestampList.count() - 1; // index i has to be moved because of removed samples
-
-                samplesWithSameTimestampList.clear();
-                samplesWithSameTimestampList << &samplesList[i]; // and current sample has to be stored
+                result << sumUpSamples(collect);
+                collect.clear();
             }
         }
+        collect << sample;
     }
-    samplesList.removeLast(); // remove dummy sample
+
+    result << sumUpSamples(collect);
+    samples = result;
+}
+
+
+CSmlProject::sml_sample_t CSmlProject::sumUpSamples(QList<sml_sample_t> samples)
+{
+    if(samples.count() == 1)
+    {
+        return samples.first();
+    }
+
+    sml_sample_t result;
+
+    result.time = samples.first().time;
+
+    for (const extension_t& ext  : extensions)
+    {
+        qreal  sum = 0;
+        qint32 cnt = 0;
+
+        for(const sml_sample_t& sample : samples)
+        {
+            if(sample.data.contains(ext.tag))
+            {
+                sum += sample[ext.tag];
+                cnt++;
+            }
+        }
+
+        if(cnt != 0)
+        {
+            result[ext.tag] = sum/cnt;
+        }
+    }
+
+    return result;
 }

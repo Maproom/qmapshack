@@ -44,7 +44,8 @@ public:
 
         property_t() = default;
         property_t(const QString& key,
-                   const QString& name,
+                   const QString& nameShortText,
+                   const QString& nameLongText,
                    const QIcon& icon,
                    axistype_e axisType,
                    fTrkPtGetVal getX,
@@ -53,7 +54,8 @@ public:
                    qreal factor,
                    fTrkPtGetVal getY)
             : key(key)
-            , name(name)
+            , nameShortText(nameShortText)
+            , nameLongText(nameLongText)
             , icon(icon)
             , axisType(axisType)
             , getX(getX)
@@ -66,8 +68,9 @@ public:
 
         // key/extension source of the property
         QString key;
-        // name of the property
-        QString name;
+        // long and short name of the property
+        QString nameShortText;
+        QString nameLongText;
         // symbol representing the property
         QIcon icon;
 

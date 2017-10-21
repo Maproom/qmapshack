@@ -4637,17 +4637,17 @@ line %2, column %3:
 <context>
     <name>CSmlProject</name>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="197"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="184"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Не удалось загрузить файл %1...</translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="219"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="206"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Не удалось открыть %1</translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="230"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="217"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -4656,37 +4656,37 @@ line %2, column %3:
 %4</translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="237"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="224"/>
         <source>Not an sml file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="259"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="246"/>
         <source>Recovery time: %1 h&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="264"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="251"/>
         <source>Peak Training Effect: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="269"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="256"/>
         <source>Energy: %1 kCal&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="278"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="265"/>
         <source>Battery usage: %1 %/hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="290"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="277"/>
         <source>Device: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="353"/>
+        <location filename="../gis/sml/CSmlProject.cpp" line="340"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>

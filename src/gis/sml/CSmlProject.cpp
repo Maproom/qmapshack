@@ -24,20 +24,7 @@
 #include <QtWidgets>
 #include <functional>
 
-// this is the c++11 way of defining a function type. In other words
-// every function that looks like:
-// void foo(CTrackData::trkpt_t& pt, qreal val);
-// will be of that type
 using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
-
-//void assignLat(CTrackData::trkpt_t &pt, qreal val)
-//{
-//    if(val != NOFLOAT)
-//    {
-//        pt.lat = val;
-//    }
-//}
-
 
 struct extension_t
 {

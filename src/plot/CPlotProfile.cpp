@@ -76,8 +76,8 @@ void CPlotProfile::updateData()
     }
     else
     {
-        setXLabel(tr("distance [%1]").arg(unit));
-        setYLabel(tr("alt. [%1]").arg(IUnit::self().baseunit));
+        setXLabel(tr("Distance [%1]").arg(unit));
+        setYLabel(tr("Ele. [%1]").arg(IUnit::self().baseunit));
     }
 
     QPolygonF lineEle;

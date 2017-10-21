@@ -52,12 +52,12 @@ void CPlot::setup(const CPropertyTrk::property_t& p)
         QString unit;
         IUnit::self().meter2unit(trk->getTotalDistance(), scale, unit);
         setXTicScale(scale);
-        setXLabel(tr("distance [%1]").arg(unit));
+        setXLabel(tr("Distance [%1]").arg(unit));
     }
     else if(p.axisType == CPropertyTrk::property_t::eAxisTime)
     {
         data->setXAxisType(CPlotData::eAxisTime);
-        setXLabel(tr("time"));
+        setXLabel(tr("Time"));
     }
 
     setYLabel(p.yLabel);

@@ -38,6 +38,7 @@ void CPropertyTrk::setupData()
     {
         QString()
         , QString()
+        , QString()
         , QIcon()
         , property_t::eAxisDistance
         , nullptr
@@ -52,17 +53,19 @@ void CPropertyTrk::setupData()
     for(const QString &key : keys)
     {
         const CKnownExtension &ext = CKnownExtension::get(key);
-        QString name = (ext.known ? ext.name : key);
+        QString nameShortText = (ext.known ? ext.nameShortText : key);
+        QString nameLongText = (ext.known ? ext.nameLongText : key);
 
         property_t property
         {
             key
-            , name
+            , nameShortText
+            , nameLongText
             , QIcon(ext.icon)
             , property_t::eAxisDistance
             , [](const CTrackData::trkpt_t &p) { return p.distance; }
             , ext.unit
-            , ext.known ? QString("%1 [%2]").arg(name).arg(ext.unit) : name
+            , ext.known ? QString("%1 [%2]").arg(nameShortText).arg(ext.unit) : nameShortText
             , ext.factor
             , ext.valueFunc
         };
@@ -75,7 +78,7 @@ void CPropertyTrk::setupData()
             property.getX       = [](const CTrackData::trkpt_t &p) {return p.time.isValid() ? p.time.toTime_t() : NOFLOAT; };
         }
 
-        if(key == CKnownExtension::internalSpeed)
+        if(key == CKnownExtension::internalSpeedDist)
         {
             property.min        = 0;
         }
@@ -108,14 +111,14 @@ void CPropertyTrk::fillComboBox(QComboBox * box) const
             // skip it as there is a dedicated profile plot
             continue;
         }
-        box->addItem(p.icon, p.name, p.key);
+        box->addItem(p.icon, p.nameLongText, p.key);
     }
 }
 
 void CPropertyTrk::setupPlot(CPlot * plot, const QString& source) const
 {
     const property_t& p = propBySource(source);
-    if(p.name.isEmpty())
+    if(p.nameLongText.isEmpty())
     {
         plot->clear();
         return;

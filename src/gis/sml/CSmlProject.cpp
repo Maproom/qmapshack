@@ -38,117 +38,28 @@ struct extension_t
     fTrkPtSetVal func;
 };
 
+
+#define ASSIGN_VALUE(tarval) \
+    [](CTrackData::trkpt_t &pt, qreal val) \
+    { \
+        if(val != NOFLOAT) \
+        { \
+            pt.tarval = val; \
+        } \
+    } \
+
 static const QList<extension_t> extensions =
 {
-    // unit [°]
-    {"Latitude", RAD_TO_DEG, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.lat = val;
-         }
-     }
-    },
-
-    // unit [°]
-    {"Longitude", RAD_TO_DEG, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.lon = val;
-         }
-     }
-    },
-
-    // unit [m]
-    {"Altitude", 1.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.ele = val;
-         }
-     }
-    },
-
-    // unit [m/h]
-    {"VerticalSpeed", 1.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:verticalSpeed"] = val;
-         }
-     }
-    },
-
-    // unit [bpm]
-    {"HR", 60.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"] = val;
-         }
-     }
-    },
-
-    // unit [bpm]
-    {"Cadence", 60.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:cadence"] = val;
-         }
-     }
-    },
-
-    // unit [°C]
-    {"Temperature", 1.0, -273.15,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:temp"] = val;
-         }
-     }
-    },
-
-    // unit [hPa]
-    {"SeaLevelPressure", 0.01, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:seaLevelPressure"] = val;
-         }
-     }
-    },
-
-    // unit [m/s]
-    {"Speed", 1.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:speed"] = val;
-         }
-     }
-    },
-
-    // unit [kCal/min]
-    {"EnergyConsumption", 60.0 / 4184.0, 0.0,
-     [](CTrackData::trkpt_t &pt, qreal val)
-     {
-         if(val != NOFLOAT)
-         {
-             pt.extensions["gpxdata:energy"] = val;
-         }
-     }
-    }
+    {"Latitude",            RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat)}  // unit [°]
+    ,{"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon)}  // unit [°]
+    ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele)}  // unit [m]
+    ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"])}                  // unit [m/h]
+    ,{"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"])}   // unit [bpm]
+    ,{"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"])}                        // unit [bpm]
+    ,{"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"])}                           // unit [°C]
+    ,{"SeaLevelPressure",   0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"])}               // unit [hPa]
+    ,{"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"])}                          // unit [m/s]
+    ,{"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"])}                         // unit [kCal/min]
 };
 
 
@@ -423,7 +334,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
             result << collect;
             collect.clear();
         }
-     }
+    }
 
     if (previousSampleWithData.data.contains(dataField))
     {
@@ -475,7 +386,7 @@ CSmlProject::sml_sample_t CSmlProject::sumUpSamples(QList<sml_sample_t> samples)
 
     for (const extension_t& ext  : extensions)
     {
-        qreal  sum = 0;
+        qreal sum = 0;
         qint32 cnt = 0;
 
         for(const sml_sample_t& sample : samples)

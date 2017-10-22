@@ -40,17 +40,8 @@ struct extension_t
 
 static const QList<extension_t> extensions =
 {
-    // example how to do it without a lambda function
-    //{"Latitude", RAD_TO_DEG, 0.0,assignLat}
-
     // unit [°]
     {"Latitude", RAD_TO_DEG, 0.0,
-     // this is a c++11 lambda function.
-     // think of it like a fTrkPtSetVal function that does
-     // not need a function name. Of course I could define
-     // those functions like a normal function and use their
-     // name here. The lambda function simply allows me to
-     // define what has to be done inline.
      [](CTrackData::trkpt_t &pt, qreal val)
      {
          if(val != NOFLOAT)

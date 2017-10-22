@@ -457,19 +457,19 @@ void CSmlProject::deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samp
         {
             if(sample.time != collect.first().time)
             {
-                result << sumUpSamples(collect);
+                result << mergeSamples(collect);
                 collect.clear();
             }
         }
         collect << sample;
     }
 
-    result << sumUpSamples(collect);
+    result << mergeSamples(collect);
     samples = result;
 }
 
 
-CSmlProject::sml_sample_t CSmlProject::sumUpSamples(QList<sml_sample_t> samples)
+CSmlProject::sml_sample_t CSmlProject::mergeSamples(QList<sml_sample_t> samples)
 {
     if(samples.count() == 1)
     {
@@ -496,7 +496,7 @@ CSmlProject::sml_sample_t CSmlProject::sumUpSamples(QList<sml_sample_t> samples)
 
         if(cnt != 0)
         {
-            result[ext.tag] = sum/cnt;
+            result[ext.tag] = sum/cnt; // averaged value is assigned to the merged sample
         }
     }
 

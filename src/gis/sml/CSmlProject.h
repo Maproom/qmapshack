@@ -62,7 +62,7 @@ private:
 
     static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);
 
-    static sml_sample_t sumUpSamples(QList<sml_sample_t> samples);
+    static sml_sample_t mergeSamples(QList<sml_sample_t> samples);
     static void deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samples);
 };
 #endif //CSMLPROJECT_H

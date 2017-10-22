@@ -428,7 +428,7 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
                 }
             }
 
-            previousSampleWithData = collect.last();
+            previousSampleWithData = sample;
             result << collect;
             collect.clear();
         }

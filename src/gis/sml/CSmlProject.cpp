@@ -418,12 +418,10 @@ void CSmlProject::fillMissingData(const QString &dataField, QList<sml_sample_t> 
                 {
                     qreal dY = collect.last().data[dataField] - previousSampleWithData.data[dataField];
                     qreal slope = dY / dT;
-                    qreal offsetAt0 = previousSampleWithData.data[dataField]
-                                      - slope * ( (  (qreal)(previousSampleWithData.time.toMSecsSinceEpoch())  ) / 1000.0 );
 
                     for(sml_sample_t& collectedSample : collect)
                     {   // apply interpolation to collected samples
-                        collectedSample[dataField] = (qreal)(slope * (qreal)((collectedSample.time.toMSecsSinceEpoch()) / 1000.0) + offsetAt0  );
+                        collectedSample[dataField] = previousSampleWithData.data[dataField] + slope * ( (qreal)(collectedSample.time.toMSecsSinceEpoch() - previousSampleWithData.time.toMSecsSinceEpoch()) / 1000.0 );
                     }
                 }
             }

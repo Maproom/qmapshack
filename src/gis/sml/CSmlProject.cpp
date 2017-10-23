@@ -38,28 +38,28 @@ struct extension_t
     fTrkPtSetVal func;
 };
 
-
-#define ASSIGN_VALUE(tarval) \
+#define NIL ///< this is to silence the MSVC compiler
+#define ASSIGN_VALUE(var, op) \
     [](CTrackData::trkpt_t &pt, qreal val) \
     { \
         if(val != NOFLOAT) \
         { \
-            pt.tarval = val; \
+            pt.var = op(val); \
         } \
     } \
 
 static const QList<extension_t> extensions =
 {
-    {"Latitude",            RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat)}  // unit [°]
-    ,{"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon)}  // unit [°]
-    ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele)}  // unit [m]
-    ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"])}                  // unit [m/h]
-    ,{"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"])}   // unit [bpm]
-    ,{"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"])}                        // unit [bpm]
-    ,{"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"])}                           // unit [°C]
-    ,{"SeaLevelPressure",   0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"])}               // unit [hPa]
-    ,{"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"])}                          // unit [m/s]
-    ,{"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"])}                         // unit [kCal/min]
+    {"Latitude",            RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
+    ,{"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
+    ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
+    ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
+    ,{"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"],qRound)}   // unit [bpm]
+    ,{"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"],NIL)}                        // unit [bpm]
+    ,{"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"],NIL)}                           // unit [°C]
+    ,{"SeaLevelPressure",   0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"],NIL)}               // unit [hPa]
+    ,{"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"],NIL)}                          // unit [m/s]
+    ,{"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"],NIL)}                         // unit [kCal/min]
 };
 
 

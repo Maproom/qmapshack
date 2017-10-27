@@ -211,6 +211,7 @@ set( SRCS
         gis/tcx/CTcxProject.cpp
         gis/tcx/serialization.cpp
         gis/sml/CSmlProject.cpp
+        gis/log/CLogProject.cpp
         gis/db/IDB.cpp
         gis/db/IDBSqlite.cpp
         gis/db/IDBMysql.cpp
@@ -498,7 +499,8 @@ set( HDRS
         gis/qms/CQmsProject.h
         gis/tnv/CTwoNavProject.h
         gis/tcx/CTcxProject.h
-		gis/sml/CSmlProject.h
+        gis/sml/CSmlProject.h
+        gis/log/CLogProject.h
         gis/db/IDB.h
         gis/db/IDBSqlite.h
         gis/db/IDBMysql.h

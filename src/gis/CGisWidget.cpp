@@ -72,7 +72,9 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
 
     slotHelpText();
 
-    treeWks->slotLoadWorkspace();
+    // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
+    //              is up and running.
+    QTimer::singleShot(500, treeWks, SLOT(slotLoadWorkspace()));
 }
 
 CGisWidget::~CGisWidget()

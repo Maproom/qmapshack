@@ -2210,32 +2210,27 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="160"/>
+        <location filename="../gis/log/CLogProject.cpp" line="159"/>
         <source>Recovery time: %1 h&lt;br&gt;</source>
         <translation type="unfinished">Temps de récupération : %1 h&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="165"/>
+        <location filename="../gis/log/CLogProject.cpp" line="164"/>
         <source>Peak Training Effect: %1&lt;br&gt;</source>
         <translation type="unfinished">Pic d&quot;effet d&apos;entraînement : %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="170"/>
+        <location filename="../gis/log/CLogProject.cpp" line="169"/>
         <source>Energy: %1 kCal&lt;br&gt;</source>
         <translation type="unfinished">Energie : %1 kCal&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="179"/>
-        <source>Battery usage: %1 %/hour</source>
-        <translation type="unfinished">Utilisation de la batterie : %1 %/heure</translation>
-    </message>
-    <message>
-        <location filename="../gis/log/CLogProject.cpp" line="142"/>
+        <location filename="../gis/log/CLogProject.cpp" line="141"/>
         <source>Device: %1&lt;br&gt;</source>
         <translation type="unfinished">Appareil : %1&lt;br&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="247"/>
+        <location filename="../gis/log/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>

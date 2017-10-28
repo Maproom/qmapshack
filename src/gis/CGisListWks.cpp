@@ -47,6 +47,7 @@
 #include "gis/slf/CSlfProject.h"
 #include "gis/tcx/CTcxProject.h"
 #include "gis/sml/CSmlProject.h"
+#include "gis/log/CLogProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -918,6 +919,14 @@ void CGisListWks::slotLoadWorkspace()
         }
 
         case IGisProject::eTypeSml:
+        {
+            project = new CSmlProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+            *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeLog:
         {
             project = new CSmlProject(name, this);
             project->setCheckState(CGisListDB::eColumnCheckbox, visible);

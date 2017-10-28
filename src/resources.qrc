@@ -524,7 +524,7 @@
         <file>icons/waypoints/32x32/Straight.png</file>
         <file>icons/waypoints/32x32/Summit.png</file>
         <file>icons/waypoints/32x32/Valley.png</file>
-        <file>icons/waypoints/32x32/Water.png</file>       
+        <file>icons/waypoints/32x32/Water.png</file>
         <file>icons/waypoints/32x32/LeftFork.png</file>
         <file>icons/waypoints/32x32/RightFork.png</file>
         <file>icons/waypoints/32x32/MiddleFork.png</file>
@@ -564,5 +564,7 @@
         <file>map/OSM_Topo.tms</file>
         <file>map/OpenCycleMap.tms</file>
         <file>templates/Hiking_Tour_Summary.ui</file>
+        <file>icons/32x32/LogProject.png</file>
+        <file>icons/48x48/LogProject.png</file>
     </qresource>
 </RCC>

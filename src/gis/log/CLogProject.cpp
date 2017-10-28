@@ -50,16 +50,16 @@ struct extension_t
 
 static const QList<extension_t> extensions =
 {
-    {"Latitude",            0.0000001,      0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
+     {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
     ,{"Longitude",          0.0000001,      0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
     ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
-    ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
-    ,{"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"],qRound)}   // unit [bpm]
-    ,{"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"],NIL)}                        // unit [bpm]
-    ,{"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"],NIL)}                           // unit [°C]
-    ,{"SeaLevelPressure",   0.1,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"],NIL)}               // unit [hPa]
-    ,{"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"],NIL)}                          // unit [m/s]
-    ,{"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"],NIL)}                         // unit [kCal/min]
+    ,{"VerticalSpeed",      0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
+    ,{"HR",                 1.0,            0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"],qRound)}   // unit [bpm]
+    ,{"Cadence",            1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"],NIL)}                        // unit [bpm]
+    ,{"Temperature",        0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:temp"],NIL)}                           // unit [°C]
+    ,{"SeaLevelPressure",   0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"],NIL)}               // unit [hPa]
+    ,{"Speed",              0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"],NIL)}                          // unit [m/s]
+    ,{"EnergyConsumption",  0.1,            0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"],NIL)}                         // unit [kCal/min]
 };
 
 
@@ -133,7 +133,6 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
         trk.name = xmlOpenambitlog.namedItem("Time").toElement().text();                            // date of beginning of recording is chosen as track name
     }
 
-
     if(xmlOpenambitlog.namedItem("DeviceInfo").isElement())
     {
         const QDomNode& xmlDeviceInfo = xmlOpenambitlog.namedItem("DeviceInfo");
@@ -157,33 +156,19 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
 
             if(xmlHeader.namedItem("RecoveryTime").isElement())
             {
-                trk.cmt += tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600);
+                trk.cmt += tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600000);
             }
 
             if(xmlHeader.namedItem("PeakTrainingEffect").isElement())
             {
-                trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble());
+                trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble()/10.0);
             }
 
             if(xmlHeader.namedItem("Energy").isElement())
             {
-                trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() / 4184);
-            }
-
-
-            if(xmlHeader.namedItem("BatteryChargeAtStart").isElement() &&
-               xmlHeader.namedItem("BatteryCharge").isElement() &&
-               xmlHeader.namedItem("Duration").isElement() )
-
-            {
-                trk.cmt += tr("Battery usage: %1 %/hour")
-                           .arg( 100*(xmlHeader.namedItem("BatteryChargeAtStart").toElement().text().toDouble()
-                                      - xmlHeader.namedItem("BatteryCharge").toElement().text().toDouble())
-                                 / (xmlHeader.namedItem("Duration").toElement().text().toDouble() / 3600), 0, 'f', 1);
+                trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() );
             }
         }
-
-
 
         if(xmlLog.namedItem("Samples").isElement())
         {
@@ -217,28 +202,41 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
 
                     if(xmlSample.namedItem("Time").isElement())
                     {
-                        sample.time = time0.addMSecs(xmlSample.namedItem("Time").toElement().text().toDouble() * 1000.0);
+                        sample.time = time0.addMSecs(xmlSample.namedItem("Time").toElement().text().toDouble() );
                     }
 
-                    if(xmlSample.namedItem("Events").isElement())
+                    if(xmlSample.namedItem("Type").isElement())
                     {
-                        const QDomNode& xmlEvents = xmlSample.namedItem("Events");
-                        if(xmlEvents.namedItem("Lap").isElement())
+                        if ( xmlSample.namedItem("Type").toElement().text() == "lap-info" )
                         {
-                            lapsList << sample.time; // stores timestamps of the samples where the the "Lap" button has been pressed
-                        }
-                    }
-                    else // samples without "Events" are the ones containing position, heart rate, etc... that we want to store
-                    {
-                        for (const extension_t& ext  : extensions)
-                        {
-                            if (xmlSample.namedItem(ext.tag).isElement())
+                            if ( xmlSample.namedItem("Lap").isElement() )
                             {
-                                const QDomNode& xmlSampleData = xmlSample.namedItem(ext.tag);
-                                sample[ext.tag] = xmlSampleData.toElement().text().toDouble() * ext.scale + ext.offset;
+                                const QDomNode& xmlLap = xmlSample.namedItem("Lap");
+                                if(xmlLap.namedItem("Type").isElement())
+                                {
+                                    if (xmlLap.namedItem("Type").toElement().text() == "Manual")
+                                    {
+                                        lapsList << sample.time; // stores timestamps of the samples where the the "Lap" button has been pressed
+                                    }
+                                }
+                             }
+                         }
+                        else if (xmlSample.namedItem("Type").toElement().text() == "gps-small"
+                              || xmlSample.namedItem("Type").toElement().text() == "gps-base"
+                              || xmlSample.namedItem("Type").toElement().text() == "gps-tiny"
+                              || xmlSample.namedItem("Type").toElement().text() == "position"
+                              || xmlSample.namedItem("Type").toElement().text() == "periodic")
+                        {
+                            for (const extension_t& ext  : extensions)
+                            {
+                                if (xmlSample.namedItem(ext.tag).isElement())
+                                {
+                                    const QDomNode& xmlSampleData = xmlSample.namedItem(ext.tag);
+                                    sample[ext.tag] = xmlSampleData.toElement().text().toDouble() * ext.scale + ext.offset;
+                                }
                             }
+                            samplesList << sample;
                         }
-                        samplesList << sample;
                     }
                 }
 
@@ -247,14 +245,12 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
                     throw tr("This LOG file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
                 }
 
-
                 for (const extension_t& ext  : extensions)
                 {
                     fillMissingData(ext.tag, samplesList);
                 }
 
                 deleteSamplesWithDuplicateTimestamps(samplesList);
-
 
                 lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
 

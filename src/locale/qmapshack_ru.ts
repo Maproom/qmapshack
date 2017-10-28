@@ -1853,7 +1853,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="133"/>
         <source>Not a GPX file: %1</source>
-        <translation>Нет файла GPX: %1</translation>
+        <translation>Это не файл GPX: %1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
@@ -2111,7 +2111,7 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
         <source>Sea Lev. Pres.</source>
         <comment>extShortName</comment>
-        <translation>Давл. на уровне моря</translation>
+        <translation>Давление</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
@@ -2123,7 +2123,7 @@ line %2, column %3:
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
         <source>v. Speed</source>
         <comment>extShortName</comment>
-        <translation>Скорость (верт.)</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
@@ -4639,56 +4639,57 @@ line %2, column %3:
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="184"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Не удалось загрузить файл %1...</translation>
+        <translation>Не удалось загрузить файл %1...</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="206"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Не удалось открыть %1</translation>
+        <translation>Не удалось открыть %1</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="217"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Не удалось читать %1
+        <translation>Не удалось читать %1
 строка %2, столбец %3:
 %4</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="224"/>
         <source>Not an sml file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Это не файл SML: %1</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="246"/>
         <source>Recovery time: %1 h&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Время восстановления: %1 h&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="251"/>
         <source>Peak Training Effect: %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Пиковый эффект тренировка: %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="256"/>
         <source>Energy: %1 kCal&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия: %1 kCal&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="265"/>
         <source>Battery usage: %1 %/hour</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Изпользование батареи: %1 %/час</translatorcomment>
+        <translation></translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="277"/>
         <source>Device: %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство: %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="340"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack</translation>
     </message>
 </context>
 <context>

@@ -351,19 +351,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().meter2elevation(s.ascent, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ascent;
     }
     if(printNoAct)
     {
         IUnit::self().meter2elevation(sumActNone.ascent, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ascent;
     }
     if(printTotal)
     {
         IUnit::self().meter2elevation(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -375,19 +375,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().meter2elevation(s.descent, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.descent;
     }
     if(printNoAct)
     {
         IUnit::self().meter2elevation(sumActNone.descent, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.descent;
     }
     if(printTotal)
     {
         IUnit::self().meter2elevation(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -399,19 +399,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
     }
     if(printNoAct)
     {
         IUnit::self().meter2speed(sumActNone.distance/sumActNone.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ellapsedSecondsMoving;
     }
     if(printTotal)
     {
         IUnit::self().meter2speed(distance/total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -423,19 +423,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
     }
     if(printNoAct)
     {
         IUnit::self().meter2speed(sumActNone.distance/sumActNone.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ellapsedSeconds;
     }
     if(printTotal)
     {
         IUnit::self().meter2speed(distance/total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -447,19 +447,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
     }
     if(printNoAct)
     {
         IUnit::self().seconds2time(sumActNone.ellapsedSecondsMoving, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ellapsedSecondsMoving;
     }
     if(printTotal)
     {
         IUnit::self().seconds2time(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 
@@ -471,19 +471,19 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     {
         const activity_summary_t& s = summary[desc->flag];
         IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
     }
     if(printNoAct)
     {
         IUnit::self().seconds2time(sumActNone.ellapsedSeconds, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += sumActNone.ellapsedSeconds;
     }
     if(printTotal)
     {
         IUnit::self().seconds2time(total, val, unit);
-        str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
+        str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
     }
     str += "</tr>";
 

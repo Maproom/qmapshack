@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>398</width>
-    <height>106</height>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -110,6 +110,25 @@
       </spacer>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">

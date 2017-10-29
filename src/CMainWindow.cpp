@@ -79,6 +79,18 @@ CMainWindow::CMainWindow()
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     IUnit::setSlopeMode((IUnit::slope_mode_e)cfg.value("Units/slopeMode", IUnit::eSlopeDegrees).toInt());
 
+    QByteArray tz;
+    IUnit::tz_mode_e tzmode;
+    bool useShortFormat;
+    tz = cfg.value("Units/timezone", "UTC").toByteArray();
+    tzmode = (IUnit::tz_mode_e)cfg.value("Units/timezone/mode", IUnit::eTZUtc).toInt();
+    useShortFormat = cfg.value("Units/time/useShortFormat", false).toBool();
+    IUnit::setTimeZoneSetup(tzmode, tz, useShortFormat);
+
+    IUnit::coord_format_e coordFormat;
+    coordFormat = (IUnit::coord_format_e)cfg.value("Units/coordFormat", IUnit::eCoordFormat1).toInt();
+    IUnit::setCoordFormat(coordFormat);
+
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 
@@ -206,18 +218,7 @@ CMainWindow::CMainWindow()
     tabWidget->setCurrentIndex(cfg.value("visibleCanvas",0).toInt());
     cfg.endGroup(); // Canvas
 
-    QByteArray tz;
-    IUnit::tz_mode_e tzmode;
-    bool useShortFormat;
-    tz = cfg.value("Units/timezone", "UTC").toByteArray();
-    tzmode = (IUnit::tz_mode_e)cfg.value("Units/timezone/mode", IUnit::eTZUtc).toInt();
-    useShortFormat = cfg.value("Units/time/useShortFormat", false).toBool();
 
-    IUnit::setTimeZoneSetup(tzmode, tz, useShortFormat);
-
-    IUnit::coord_format_e coordFormat;
-    coordFormat = (IUnit::coord_format_e)cfg.value("Units/coordFormat", IUnit::eCoordFormat1).toInt();
-    IUnit::setCoordFormat(coordFormat);
 
     QStatusBar * status = statusBar();
     lblPosWGS84 = new QLabel(status);
@@ -477,9 +478,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone", tz);
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
-
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
-
     cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
@@ -957,7 +956,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     {
         QString val, unit;
         IUnit::self().meter2elevation(ele, val, unit);
-        lblElevation->setText(tr("Ele: %1%2").arg(val).arg(unit));
+        lblElevation->setText(tr("Ele.: %1%2").arg(val).arg(unit));
         lblElevation->show();
     }
     else
@@ -1469,7 +1468,7 @@ void CMainWindow::dragEnterEvent(QDragEnterEvent *event)
         QFileInfo fi(urls[0].path());
         QString ext = fi.suffix().toUpper();
 
-        if ((ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") || (ext == "TCX"))
+        if ((ext == "QMS") || (ext == "GPX") || (ext == "SLF") || (ext == "FIT") || (ext == "TCX") || (ext == "SML"))
         {
             event->acceptProposedAction();
         }

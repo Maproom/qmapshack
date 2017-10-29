@@ -344,7 +344,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     if(rte.totalDistance != NOFLOAT)
     {
         IUnit::self().meter2distance(rte.totalDistance, val1, unit1);
-        str += tr("Length: %1 %2").arg(val1).arg(unit1);
+        str += tr("Length: %1%2").arg(val1).arg(unit1);
     }
     else
     {
@@ -355,7 +355,7 @@ QString CGisItemRte::getInfo(quint32 feature) const
     if(rte.totalTime != 0)
     {
         IUnit::self().seconds2time(rte.totalTime, val1, unit1);
-        str += tr("Time: %1 %2").arg(val1).arg(unit1);
+        str += tr("Time: %1%2").arg(val1).arg(unit1);
     }
     else
     {
@@ -597,9 +597,9 @@ void CGisItemRte::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
         QString str, val, unit;
         IUnit::self().seconds2time((mouseMoveFocus->time.toTime_t() - startTime.toTime_t()), val, unit);
-        str += tr("Time: %1 %2").arg(val).arg(unit) + " ";
+        str += tr("Time: %1%2").arg(val).arg(unit) + " ";
         IUnit::self().meter2distance(mouseMoveFocus->distance, val, unit);
-        str += tr("Distance: %1 %2").arg(val).arg(unit);
+        str += tr("Distance: %1%2").arg(val).arg(unit);
         str += "\n" + mouseMoveFocus->instruction;
 
         // calculate bounding box of text

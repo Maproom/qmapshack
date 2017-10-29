@@ -508,17 +508,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
-        <source>distance: </source>
+        <source>Distance: </source>
         <translation>Расстояние: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
-        <source>ascent: </source>
+        <source>Ascent: </source>
         <translation>Подъем: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
-        <source>descent: </source>
+        <source>Descent: </source>
         <translation>Спуск: </translation>
     </message>
     <message>
@@ -917,19 +917,24 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
-        <source>Length: %1 %2</source>
-        <translation>Длина: %1 %2</translation>
+        <source>Length: %1%2</source>
+        <translation>Длина: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
+        <source>Time: %1%2</source>
+        <translation>Время: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
+        <source>Distance: %1%2</source>
+        <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
         <source>Length: -</source>
         <translation>Длина: -</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
-        <source>Time: %1 %2</source>
-        <translation>Время: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
@@ -950,11 +955,6 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/rte/CGisItemRte.cpp" line="380"/>
         <source>with %1</source>
         <translation>с %1</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
-        <source>Distance: %1 %2</source>
-        <translation>Расстояние: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="717"/>
@@ -1006,24 +1006,24 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Изменены точки трека, удалены все предыдущие данные.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
-        <source>Length: %1 %2</source>
-        <translation>Длина: %1 %2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
-        <source>, %1%2 %3, %4%5 %6</source>
-        <translation>, %1%2 %3, %4%5 %6</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="333"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
+        <source>Time: %1%2, Speed: %3%4</source>
+        <translation>Время: %1%2, Скорость: %3%4</translation>
+    </message>
+    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
         <source>Time: -, Speed: -</source>
         <translation>Время: -, скорость: -</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
+        <source>Moving: %1%2, Speed: %3%4</source>
+        <translation>В движении: %1%2, Скорость: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="357"/>
@@ -1086,21 +1086,6 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Индекс: видимо %1, всего %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
-        <source>Ele.: %1 %2</source>
-        <translation>Высота: %1 %2</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
-        <source> slope: %1%3 (%2%)</source>
-        <translation> склон: %1%3 (%2%)</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="540"/>
-        <source> speed: %1%2</source>
-        <translation> скорость: %1 %2</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="568"/>
         <source>... and %1 tags not displayed</source>
         <translation>... и %1 не показанных элементов</translation>
@@ -1135,30 +1120,35 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Скрыть точки %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
-        <source> Moving: %1%2 (%3%)</source>
-        <translation> В движении: %1 %2 (%3%)</translation>
-    </message>
-    <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="631"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="643"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
-        <source> Time: %1%2</source>
-        <translation> Время: %1 %2</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="322"/>
+        <source>Length: %1%2</source>
+        <translation>Длина: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
-        <source>Time: %1, Speed: %2 %3</source>
-        <translation>Время: %1, скорость: %2 %3</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
+        <source>, %1%2%3, %4%5%6</source>
+        <translation>, %1%2 %3, %4%5%6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
-        <source>Moving: %1, Speed: %2 %3</source>
-        <translation>В движении: %1, скорость: %2 %3</translation>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="532"/>
+        <source>Ele.: %1%2</source>
+        <translation>Высота: %1%2</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="535"/>
+        <source>, Slope: %1%3 (%2%)</source>
+        <translation>, Склон: %1%3 (%2%)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="540"/>
+        <source>, Speed: %1%2</source>
+        <translation>, Скорость: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="578"/>
@@ -1177,13 +1167,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="592"/>
-        <source> Descent: %1%2 (%3%)</source>
-        <translation> Спуск: %1 %2 (%3%)</translation>
+        <source>, Descent: %1%2 (%3%)</source>
+        <translation>, Спуск: %1 %2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="598"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Расстояние: %1 %2 (%3%)</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
+        <source>, Moving: %1%2 (%3%)</source>
+        <translation>, В движении: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="620"/>
@@ -1202,13 +1197,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="638"/>
-        <source> Descent: %1%2</source>
-        <translation> Спуск: %1 %2</translation>
+        <source>, Descent: %1%2</source>
+        <translation>, Спуск: %1 %2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="648"/>
         <source>Distance: %1%2</source>
         <translation>Расстояние: %1 %2</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
+        <source>, Time: %1%2</source>
+        <translation>, Время: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1305"/>
@@ -1365,13 +1365,13 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="275"/>
-        <source>Elevation: %1 %2</source>
-        <translation>Высота: %1 %2</translation>
+        <source>Elevation: %1%2</source>
+        <translation>Высота: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="286"/>
-        <source>Proximity: %1 %2</source>
-        <translation>Приближение: %1 %2</translation>
+        <source>Proximity: %1%2</source>
+        <translation>Приближение: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
@@ -1577,216 +1577,216 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="101"/>
+        <location filename="../gis/CGisListWks.cpp" line="102"/>
         <source>Edit..</source>
         <translation>Изменить..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="103"/>
+        <location filename="../gis/CGisListWks.cpp" line="104"/>
         <source>Show on Map</source>
         <translation>Показать на карте</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="104"/>
+        <location filename="../gis/CGisListWks.cpp" line="105"/>
         <source>Hide from Map</source>
         <translation>Скрыть с карты</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="110"/>
         <source>Sort by Time</source>
         <translation>Сортировать по времени</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="110"/>
+        <location filename="../gis/CGisListWks.cpp" line="111"/>
         <source>Sort by Name</source>
         <translation>Сортировать по именам</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="120"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation>Сохранить как GPX 1.1 без расширений...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="122"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Send to Devices</source>
         <translation>Отправить в устройства</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="124"/>
         <source>Sync. with Database</source>
         <translation>Синхронизировать с базой данных</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="126"/>
+        <location filename="../gis/CGisListWks.cpp" line="127"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="135"/>
+        <location filename="../gis/CGisListWks.cpp" line="136"/>
         <source>Update Project on Device</source>
         <translation>Обновить проект на устройстве</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="137"/>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="149"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Edit...</source>
         <translation>Изменить...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="102"/>
-        <location filename="../gis/CGisListWks.cpp" line="150"/>
+        <location filename="../gis/CGisListWks.cpp" line="103"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Copy to...</source>
         <translation>Копировать в...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="113"/>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
         <source>Autom. Save</source>
         <translation>Сохранить автоматически</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="118"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Save as...</source>
         <translation>Сохранить как...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
         <source>Track Profile</source>
         <translation>Профиль трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
         <source>Select Range</source>
         <translation>Выделить интервал</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Edit Track Points</source>
         <translation>Изменить точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Reverse Track</source>
         <translation>Обратить трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Combine Tracks</source>
         <translation>Соединить треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Set Track Activity</source>
         <translation>Добавить мероприятие</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="160"/>
         <source>Copy Track with Waypoints</source>
         <translation>Копировать трек с маршрутными точками</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Show Bubble</source>
         <translation>Показать пузырек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Move Waypoint</source>
         <translation>Переместить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="171"/>
+        <location filename="../gis/CGisListWks.cpp" line="172"/>
         <source>Proj. Waypoint...</source>
         <translation>Проекция маршрутной точки...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Calculate Route</source>
         <translation>Вычислить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="183"/>
+        <location filename="../gis/CGisListWks.cpp" line="184"/>
         <source>Reset Route</source>
         <translation>Сбросить маршрутизацию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="184"/>
+        <location filename="../gis/CGisListWks.cpp" line="185"/>
         <source>Edit Route</source>
         <translation>Изменить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="185"/>
+        <location filename="../gis/CGisListWks.cpp" line="186"/>
         <source>Convert to Track</source>
         <translation>Преобразовать в трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Edit Area Points</source>
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="203"/>
+        <location filename="../gis/CGisListWks.cpp" line="204"/>
         <source>Create Route</source>
         <translation>Создать маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="204"/>
+        <location filename="../gis/CGisListWks.cpp" line="205"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Изменить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="637"/>
+        <location filename="../gis/CGisListWks.cpp" line="638"/>
         <source>Drop items...</source>
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="662"/>
-        <location filename="../gis/CGisListWks.cpp" line="1698"/>
-        <location filename="../gis/CGisListWks.cpp" line="1736"/>
+        <location filename="../gis/CGisListWks.cpp" line="663"/>
+        <location filename="../gis/CGisListWks.cpp" line="1708"/>
+        <location filename="../gis/CGisListWks.cpp" line="1746"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="788"/>
+        <location filename="../gis/CGisListWks.cpp" line="789"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Сохранить рабочую область. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="834"/>
+        <location filename="../gis/CGisListWks.cpp" line="835"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1190"/>
+        <location filename="../gis/CGisListWks.cpp" line="1200"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1190"/>
+        <location filename="../gis/CGisListWks.cpp" line="1200"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты с рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1216"/>
+        <location filename="../gis/CGisListWks.cpp" line="1226"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1216"/>
+        <location filename="../gis/CGisListWks.cpp" line="1226"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -1853,7 +1853,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="133"/>
         <source>Not a GPX file: %1</source>
-        <translation>Нет файла GPX: %1</translation>
+        <translation>Это не файл GPX: %1</translation>
     </message>
     <message>
         <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
@@ -1953,104 +1953,236 @@ line %2, column %3:
 <context>
     <name>CKnownExtension</name>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="67"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
+        <source>Air Temp.</source>
+        <comment>extShortName</comment>
+        <translation>Темп. возд.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
         <source>Air Temperature</source>
+        <comment>extLongName</comment>
         <translation>Температура воздуха</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="71"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
+        <source>Water Temp.</source>
+        <comment>extShortName</comment>
+        <translation>Темп. воды</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="72"/>
         <source>Water Temperature</source>
+        <comment>extLongName</comment>
         <translation>Температура воды</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="75"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
+        <comment>extShortName</comment>
         <translation>Глубина</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="79"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="91"/>
-        <source>Heart Rate</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
+        <source>Depth</source>
+        <comment>extLongName</comment>
+        <translation>Глубина</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <source>Heart R.</source>
+        <comment>extShortName</comment>
         <translation>Пульс</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="83"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="95"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="114"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
+        <source>Heart Rate</source>
+        <comment>extLongName</comment>
+        <translation>Пульс</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
+        <comment>extShortName</comment>
         <translation>Каденция</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="99"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="139"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="96"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
+        <source>Cadence</source>
+        <comment>extLongName</comment>
+        <translation>Каденция</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed</source>
+        <comment>extShortName</comment>
         <translation>Скорость</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="103"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
+        <source>Speed</source>
+        <comment>extLongName</comment>
+        <translation>Скорость</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
+        <source>Accel.</source>
+        <comment>extShortName</comment>
+        <translation>Ускор.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
         <source>Acceleration</source>
+        <comment>extLongName</comment>
         <translation>Ускорение</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="107"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
+        <comment>extShortName</comment>
         <translation>Курс</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="118"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
+        <source>Course</source>
+        <comment>extLongName</comment>
+        <translation>Курс</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
+        <source>Temp.</source>
+        <comment>extShortName</comment>
+        <translation>Темп.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
         <source>Temperature</source>
+        <comment>extLongName</comment>
         <translation>Температура</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="122"/>
-        <source>Distance</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
+        <source>Dist.</source>
+        <comment>extShortName</comment>
         <translation>Расстояние</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="130"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="123"/>
+        <source>Distance</source>
+        <comment>extLongName</comment>
+        <translation>Расстояние</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <source>Ele.</source>
+        <comment>extShortName</comment>
+        <translation>Высота</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
+        <source>Elevation</source>
+        <comment>extLongName</comment>
+        <translation>Высота</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
+        <comment>extShortName</comment>
         <translation>Энергия</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="135"/>
-        <source>Sea Level Pressure</source>
-        <translation>Давление на уровень моря</translation>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
+        <source>Energy</source>
+        <comment>extLongName</comment>
+        <translation>Энергия</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="143"/>
-        <source>Speed (vertical)</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <source>Sea Lev. Pres.</source>
+        <comment>extShortName</comment>
+        <translation>Давление</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
+        <source>Sea Level Pressure</source>
+        <comment>extLongName</comment>
+        <translation>Давление на уровне моря</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <source>v. Speed</source>
+        <comment>extShortName</comment>
+        <translation>Скорость</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="144"/>
+        <source>Vertical Speed</source>
+        <comment>extLongName</comment>
         <translation>Скорость (вертикальная)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="152"/>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
+        <source>Slope</source>
+        <comment>extShortName</comment>
+        <translation>Наклон</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="153"/>
         <source>Slope*</source>
         <translation>Наклон*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="126"/>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="167"/>
-        <source>Elevation</source>
-        <translation>Высота</translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="157"/>
-        <source>Speed ov. d.*</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
+        <source>Speed over Distance*</source>
+        <comment>extLongName</comment>
         <translation>Скорость(расстояние)*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="162"/>
-        <source>Speed ov. t.*</source>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
+        <source>Speed over Time*</source>
+        <comment>extLongName</comment>
         <translation>Скорость(время)*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="172"/>
-        <source>Progress</source>
-        <translation>Выполнение</translation>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
+        <source>Elevation*</source>
+        <comment>extLongName</comment>
+        <translation>Высота*</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CKnownExtension.cpp" line="177"/>
-        <source>Terrain slope</source>
-        <translation>Склон местности</translation>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
+        <source>Progress</source>
+        <comment>extShortName</comment>
+        <translation>Расстояние</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
+        <source>Progress*</source>
+        <comment>extLongName</comment>
+        <translation>Расстояние*</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
+        <source>Terr. Slope</source>
+        <comment>extShortName</comment>
+        <translation>Склон местн.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CKnownExtension.cpp" line="178"/>
+        <source>Terrain Slope*</source>
+        <comment>extLongName</comment>
+        <translation>Склон местности*</translation>
     </message>
 </context>
 <context>
@@ -2070,7 +2202,7 @@ line %2, column %3:
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="957"/>
-        <source>Ele: %1%2</source>
+        <source>Ele.: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
@@ -2124,7 +2256,7 @@ line %2, column %3:
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
         <translation>В данный момент, карт ещё нет. Использование QMapShack без карт совсем непривлекательно. Вы можете установить карты, нажав кнопку &apos;Помогите! Я хочу карты!&apos; в окне &apos;Карты&apos;. Или Вы можете нажать клавишу F1, чтобы открыть документацию в Интернете, которая объяснит как использовать QMapShack.
 
-Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это небесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
+Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это не бесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
     </message>
 </context>
 <context>
@@ -3163,26 +3295,26 @@ Unknown structure.</source>
     <name>CPlot</name>
     <message>
         <location filename="../plot/CPlot.cpp" line="55"/>
-        <source>distance [%1]</source>
-        <translation>расстояние [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation>Расстояние [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
-        <source>time</source>
-        <translation>время</translation>
+        <source>Time</source>
+        <translation>Время</translation>
     </message>
 </context>
 <context>
     <name>CPlotProfile</name>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="79"/>
-        <source>distance [%1]</source>
-        <translation>расстояние [%1]</translation>
+        <source>Distance [%1]</source>
+        <translation>Расстояние [%1]</translation>
     </message>
     <message>
         <location filename="../plot/CPlotProfile.cpp" line="80"/>
-        <source>alt. [%1]</source>
-        <translation>высота [%1]</translation>
+        <source>Ele. [%1]</source>
+        <translation>Высота: [%1]</translation>
     </message>
 </context>
 <context>
@@ -4503,6 +4635,64 @@ line %2, column %3:
     </message>
 </context>
 <context>
+    <name>CSmlProject</name>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="184"/>
+        <source>Failed to load file %1...</source>
+        <translation>Не удалось загрузить файл %1...</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="206"/>
+        <source>Failed to open %1</source>
+        <translation>Не удалось открыть %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="217"/>
+        <source>Failed to read: %1
+line %2, column %3:
+ %4</source>
+        <translation>Не удалось читать %1
+строка %2, столбец %3:
+%4</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="224"/>
+        <source>Not an sml file: %1</source>
+        <translation>Это не файл SML: %1</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="246"/>
+        <source>Recovery time: %1 h&lt;br&gt;</source>
+        <translation>Время восстановления: %1 h&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="251"/>
+        <source>Peak Training Effect: %1&lt;br&gt;</source>
+        <translation>Пиковый эффект тренировка: %1&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="256"/>
+        <source>Energy: %1 kCal&lt;br&gt;</source>
+        <translation>Энергия: %1 kCal&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="265"/>
+        <source>Battery usage: %1 %/hour</source>
+        <translatorcomment>Изпользование батареи: %1 %/час</translatorcomment>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="277"/>
+        <source>Device: %1&lt;br&gt;</source>
+        <translation>Устройство: %1&lt;br&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/sml/CSmlProject.cpp" line="340"/>
+        <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
+        <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack</translation>
+    </message>
+</context>
+<context>
     <name>CTableTrk</name>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="99"/>
@@ -4516,8 +4706,8 @@ line %2, column %3:
         <location filename="../gis/trk/CTableTrk.cpp" line="141"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
-        <source>%1 %2</source>
-        <translation>%1 %2</translation>
+        <source>%1%2</source>
+        <translation>%1%2</translation>
     </message>
 </context>
 <context>
@@ -6583,70 +6773,70 @@ It is either a new item or it has been deleted in the database by someone else.<
 <context>
     <name>IGisProject</name>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="156"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="163"/>
         <source>Save project?</source>
         <translation>Сохранить проект?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="156"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="163"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;The project was changed. Save before closing it?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Проект изменен. Сохранить его перед закрытием?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="356"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="363"/>
         <source>%1: Correlate tracks and waypoints.</source>
         <translation>%1: коррелировать треки и маршрутные точки.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="366"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="373"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt;Did that take too long for you? Do you want to skip correlation of tracks and waypoints for this project in the future?</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Было слишком долго? Желаете ли вы пропускать корреляцию треков и маршрутных точек для этого проекта в будущем?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="367"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="374"/>
         <source>Canceled correlation...</source>
         <translation>Корреляция отменена ...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="412"/>
-        <location filename="../gis/prj/IGisProject.cpp" line="469"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="419"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="476"/>
         <source>Save &quot;%1&quot; to...</source>
         <translation>Сохранить &quot;%1&quot; в...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="554"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="561"/>
         <source>&lt;br/&gt;
 Filename: %1</source>
         <translation>&lt;br/&gt;
 Имя файла: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="559"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="566"/>
         <source>Waypoints: %1</source>
         <translation>Маршрутные точки: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="563"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="570"/>
         <source>Tracks: %1</source>
         <translation>Треки: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="567"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="574"/>
         <source>Routes: %1</source>
         <translation>Маршруты: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="571"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="578"/>
         <source>Areas: %1</source>
         <translation>Области: %1</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="691"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="698"/>
         <source>Are you sure you want to delete &apos;%1&apos; from project &apos;%2&apos;?</source>
         <translation>Вы уверены что хотите удалить &apos;%1&apos; из проекта &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/prj/IGisProject.cpp" line="692"/>
+        <location filename="../gis/prj/IGisProject.cpp" line="699"/>
         <source>Delete...</source>
         <translation>Удалить...</translation>
     </message>
@@ -7472,14 +7662,13 @@ Tip:
 &lt;li&gt;Нажмите кнопку &quot;Начать&quot;.&lt;/li&gt;
 &lt;/ol&gt;
 
-
-	
 Намек:
 &lt;ul&gt;
-&lt;li&gt;Если у вас несколько файлов, поместите их в подпапку вашего папки к карте. Создайте файл VRT в вашей папки к картам.&lt;/li&gt;
+&lt;li&gt;Если у вас несколько файлов, поместите их в подпапку вашей папки к карте. Создайте файл VRT в вашей папки к картам.&lt;/li&gt;
 &lt;li&gt;Используйте дополнительные параметры, чтобы добавить значение для &quot;нет данных&quot;, если исходные файлы не имеют этого и не образуют прямоугольную карту. Области без файла карты станут прозрачными.&lt;/li&gt;
 &lt;li&gt;Параметр &quot;-a_srs&quot; предназначен для назначения проекции/датума, когда в исходном файле этого нет. Это НЕ перепроектирует данные.&lt;/li&gt;
-&lt;/ul&gt;</translation>
+&lt;/ul&gt;
+</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="98"/>

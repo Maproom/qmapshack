@@ -918,7 +918,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
         <source>Length: %1%2</source>
-        <translation type="unfinished">Longitud: %1%2</translation>
+        <translation>Longitud: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
@@ -929,7 +929,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
         <source>Distance: %1%2</source>
-        <translation type="unfinished">Distancia: %1%2</translation>
+        <translation>Distancia: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
@@ -1008,12 +1008,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>Time: %1%2, Speed: %3%4</source>
-        <translation type="unfinished">Tiempo: %1, Velocidad: %2%3 {1,?} {1%2,?} {3%4?}</translation>
+        <translation>Tiempo: %1%2, Velocidad: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="353"/>
         <source>Moving: %1%2, Speed: %3%4</source>
-        <translation type="unfinished">En movimiento: %1, Velocidad: %2%3 {1,?} {1%2,?} {3%4?}</translation>
+        <translation type="unfinished">Tiempo: %1%2, Velocidad: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="366"/>
@@ -1118,7 +1118,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="329"/>
         <source>, %1%2%3, %4%5%6</source>
-        <translation type="unfinished">, %1%2 %3, %4%5%6 {1%2%3,?}</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="333"/>

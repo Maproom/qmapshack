@@ -155,6 +155,17 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
     mapDidMove  = false;
 }
 
+void ILineOp::pinchFinishedEvent(QMouseEvent *e)
+{
+    if (e->type() == QEvent::MouseMove)
+    {
+        lastPos    = e->pos();
+        firstPos   = lastPos;
+        mapMove    = true;
+    }
+    mapDidMove = true;
+}
+
 void ILineOp::updateLeadLines(qint32 idx)
 {
     leadLinePixel1.clear();

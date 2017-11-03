@@ -37,7 +37,7 @@ public:
     void mouseMoveEvent(QMouseEvent * e) override;
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent * e) override;
-
+    void pinchFinishedEvent(QMouseEvent *e) override;
 
 protected:
     void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;

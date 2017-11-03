@@ -46,6 +46,7 @@ public:
     void mouseDoubleClickEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent * e) override;
     void keyPressEvent(QKeyEvent * e) override;
+    void pinchFinishedEvent(QMouseEvent *e) override;
 
 private slots:
     void slotAddPoi()           const;

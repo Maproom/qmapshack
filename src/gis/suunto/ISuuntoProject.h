@@ -16,34 +16,18 @@
 
 **********************************************************************************************/
 
-#ifndef CLOGPROJECT_H
-#define CLOGPROJECT_H
+#ifndef ISUUNTOPROJECT_H
+#define ISUUNTOPROJECT_H
 
 #include "gis/prj/IGisProject.h"
 
 
-class CLogProject : public IGisProject
+class ISuuntoProject : public IGisProject
 {
-    Q_DECLARE_TR_FUNCTIONS(CLogProject)
+    Q_DECLARE_TR_FUNCTIONS(CSuuntoProject)
 public:
-    CLogProject(const QString &filename, CGisListWks * parent);
-    virtual ~CLogProject() = default;
-
-    const QString getFileDialogFilter() const override
-    {
-        return IGisProject::filedialogFilterLOG;
-    }
-
-    const QString getFileExtension() const override
-    {
-        return "log";
-    }
-
-    static void loadLog(const QString &filename, CLogProject *project);
-private:
-    void loadLog(const QString& filename);
-
-    struct log_sample_t
+    ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent);
+    struct suunto_sample_t
     {
         QDateTime time; // as UTC timestamp
         QMap<QString, qreal> data;
@@ -60,10 +44,12 @@ private:
 
     };
 
-    static void fillMissingData(const QString &dataField, QList<log_sample_t> &samplesList);
+    static void fillMissingData(const QString &dataField, QList<suunto_sample_t> &samplesList);
 
-    static log_sample_t mergeSamples(QList<log_sample_t> samples);
-    static void deleteSamplesWithDuplicateTimestamps(QList<log_sample_t> &samples);
+    static suunto_sample_t mergeSamples(QList<suunto_sample_t> samples);
+    static void deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples);
+private:
+
 };
-#endif //CLOGPROJECT_H
+#endif //CSUUNTOPROJECT_H
 

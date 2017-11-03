@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>365</width>
-    <height>147</height>
+    <width>269</width>
+    <height>229</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,52 +15,98 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <item>
-        <widget class="QRadioButton" name="radioNautic">
-         <property name="text">
-          <string>Nautic</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioImperial">
-         <property name="text">
-          <string>Imperial</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioMetric">
-         <property name="text">
-          <string>Metric</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>1</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <property name="documentMode">
+      <bool>false</bool>
+     </property>
+     <property name="tabBarAutoHide">
+      <bool>false</bool>
+     </property>
+     <widget class="QWidget" name="tabLength">
+      <attribute name="title">
+       <string>Length unit</string>
+      </attribute>
+      <widget class="QRadioButton" name="radioNautic">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>0</y>
+         <width>343</width>
+         <height>20</height>
+        </rect>
        </property>
        <property name="text">
-        <string>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-       </property>
-       <property name="wordWrap">
-        <bool>true</bool>
+        <string>Nautic</string>
        </property>
       </widget>
-     </item>
-    </layout>
+      <widget class="QRadioButton" name="radioImperial">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>343</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Imperial</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioMetric">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>343</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Metric</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabSlope">
+      <attribute name="title">
+       <string>Slope unit</string>
+      </attribute>
+      <widget class="QRadioButton" name="radioDegrees">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>343</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Degrees (°)</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioPercent">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>343</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Percent (%)</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
    </item>
    <item>
     <spacer name="verticalSpacer">
@@ -74,6 +120,25 @@
       </size>
      </property>
     </spacer>
+   </item>
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="buttonBox">

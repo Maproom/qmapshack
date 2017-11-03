@@ -77,6 +77,7 @@ CMainWindow::CMainWindow()
     initWptIcons();
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
+    IUnit::setSlopeMode((IUnit::slope_mode_e)cfg.value("Units/slopeMode", IUnit::eSlopeDegrees).toInt());
 
     QByteArray tz;
     IUnit::tz_mode_e tzmode;
@@ -478,6 +479,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/timezone/mode", tzmode);
     cfg.setValue("Units/time/useShortFormat", useShortFormat);
     cfg.setValue("Units/coordFormat", IUnit::getCoordFormat());
+    cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
 }
@@ -966,7 +968,7 @@ void CMainWindow::slotMousePosition(const QPointF& pos, qreal ele, qreal slope)
     {
         QString val;
         val.sprintf("%.1f", slope);
-        lblSlope->setText(tr("Slope: %1%2").arg(val).arg(QChar(0260)));
+        lblSlope->setText(tr("Slope: %1%2", "terrain").arg(val).arg("°"));
         lblSlope->show();
     }
     else

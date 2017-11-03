@@ -205,6 +205,21 @@ void CMouseRangeTrk::keyPressEvent(QKeyEvent * e)
     }
 }
 
+void CMouseRangeTrk::pinchFinishedEvent(QMouseEvent *e)
+{
+    if(state == eStateRangeSelected)
+    {
+        resetState();
+    }
+
+    if (e->type() == QEvent::MouseMove)
+    {
+        firstPoint = e->pos();
+        mapMove    = true;
+    }
+    mapDidMove = true;
+}
+
 void CMouseRangeTrk::resetState()
 {
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));

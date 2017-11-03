@@ -92,3 +92,7 @@ void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
 void CMouseWptBubble::wheelEvent(QWheelEvent*)
 {
 }
+
+void CMouseWptBubble::pinchFinishedEvent(QMouseEvent *e)
+{
+}

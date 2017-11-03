@@ -48,6 +48,7 @@ public:
     virtual void keyPressEvent(QKeyEvent *e)
     {
     }
+    virtual void pinchFinishedEvent(QMouseEvent *e) = 0;
 
     /// the current mouse cursor
     /**

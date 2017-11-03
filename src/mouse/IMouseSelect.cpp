@@ -304,3 +304,6 @@ void IMouseSelect::wheelEvent(QWheelEvent * e)
 {
 }
 
+void IMouseSelect::pinchFinishedEvent(QMouseEvent *e)
+{
+}

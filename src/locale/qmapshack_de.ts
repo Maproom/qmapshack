@@ -1794,37 +1794,37 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisWidget</name>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="122"/>
         <source>Load project...</source>
         <translation>Lade Projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="120"/>
+        <location filename="../gis/CGisWidget.cpp" line="122"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Das Projekt &quot;%1&quot; ist schon im Arbeitsplatz geladen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="223"/>
+        <location filename="../gis/CGisWidget.cpp" line="225"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="614"/>
+        <location filename="../gis/CGisWidget.cpp" line="616"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="633"/>
+        <location filename="../gis/CGisWidget.cpp" line="635"/>
         <source>Change waypoint symbols.</source>
         <translation>Symbol der Wegpunkte wird geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="762"/>
+        <location filename="../gis/CGisWidget.cpp" line="764"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="762"/>
+        <location filename="../gis/CGisWidget.cpp" line="764"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
@@ -2188,49 +2188,49 @@ Zeile %2, Spalte %3:
 <context>
     <name>CLogProject</name>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="86"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="86"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Datei %1 konnte nicht geladen werden...</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="108"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="108"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Die Datei %1 konnte nicht geöffnet werden. {1?}</translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="119"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="119"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="126"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="126"/>
         <source>Not an Openambit log file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="159"/>
-        <source>Recovery time: %1 h&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/log/CLogProject.cpp" line="164"/>
-        <source>Peak Training Effect: %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/log/CLogProject.cpp" line="169"/>
-        <source>Energy: %1 kCal&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/log/CLogProject.cpp" line="141"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="141"/>
         <source>Device: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/log/CLogProject.cpp" line="245"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="159"/>
+        <source>Recovery time: %1 h&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="164"/>
+        <source>Peak Training Effect: %1&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="169"/>
+        <source>Energy: %1 kCal&lt;br&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4689,54 +4689,54 @@ Zeile %2, Spalte %3:
 <context>
     <name>CSmlProject</name>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="86"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="89"/>
         <source>Failed to load file %1...</source>
         <translation type="unfinished">Datei %1 konnte nicht geladen werden...</translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="108"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="111"/>
         <source>Failed to open %1</source>
         <translation type="unfinished">Die Datei %1 konnte nicht geöffnet werden. {1?}</translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="119"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="122"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="126"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="129"/>
         <source>Not an sml file: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="151"/>
         <source>Recovery time: %1 h&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="153"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="156"/>
         <source>Peak Training Effect: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="158"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="161"/>
         <source>Energy: %1 kCal&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="167"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="170"/>
         <source>Battery usage: %1 %/hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="179"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="182"/>
         <source>Device: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/sml/CSmlProject.cpp" line="242"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="245"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9852,6 +9852,11 @@ sein</translation>
         <location filename="../units/ITimeZoneSetup.ui" line="92"/>
         <source>short format</source>
         <translation>kurzem Format ausgeben</translation>
+    </message>
+    <message>
+        <location filename="../units/ITimeZoneSetup.ui" line="123"/>
+        <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
+        <translation type="unfinished">&lt;b&gt;Anmerkung:&lt;/b&gt; Das Ändern der Einheiten wird bei einigen GUI-Elementen erst nach einem Neustart von QMapShack wirksam.</translation>
     </message>
 </context>
 <context>

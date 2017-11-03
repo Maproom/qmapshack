@@ -16,54 +16,34 @@
 
 **********************************************************************************************/
 
-#ifndef CSMLPROJECT_H
-#define CSMLPROJECT_H
+#ifndef CLOGPROJECT_H
+#define CLOGPROJECT_H
 
 #include "gis/prj/IGisProject.h"
-#include <proj_api.h>
+#include "gis/suunto/ISuuntoProject.h"
 
-class CSmlProject : public IGisProject
+class CLogProject : public ISuuntoProject
 {
-    Q_DECLARE_TR_FUNCTIONS(CSmlProject)
+    Q_DECLARE_TR_FUNCTIONS(CLogProject)
 public:
-    CSmlProject(const QString &filename, CGisListWks * parent);
-    virtual ~CSmlProject() = default;
+    CLogProject(const QString &filename, CGisListWks * parent);
+    virtual ~CLogProject() = default;
 
     const QString getFileDialogFilter() const override
     {
-        return IGisProject::filedialogFilterSML;
+        return IGisProject::filedialogFilterLOG;
     }
 
     const QString getFileExtension() const override
     {
-        return "sml";
+        return "log";
     }
 
-    static void loadSml(const QString &filename, CSmlProject *project);
+    static void loadLog(const QString &filename, CLogProject *project);
 private:
-    void loadSml(const QString& filename);
+    void loadLog(const QString& filename);
 
-    struct sml_sample_t
-    {
-        QDateTime time; // as UTC timestamp
-        QMap<QString, qreal> data;
 
-        qreal& operator[](const QString& key)
-        {
-            return data[key];
-        }
-
-        qreal operator[](const QString& key) const
-        {
-            return data[key];
-        }
-
-    };
-
-    static void fillMissingData(const QString &dataField, QList<sml_sample_t> &samplesList);
-
-    static sml_sample_t mergeSamples(QList<sml_sample_t> samples);
-    static void deleteSamplesWithDuplicateTimestamps(QList<sml_sample_t> &samples);
 };
-#endif //CSMLPROJECT_H
+#endif //CLOGPROJECT_H
 

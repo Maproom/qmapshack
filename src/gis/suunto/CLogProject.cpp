@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
-#include "gis/log/CLogProject.h"
+#include "gis/suunto/CLogProject.h"
+#include "gis/suunto/ISuuntoProject.h"
 #include "gis/trk/CGisItemTrk.h"
-
 #include <QtWidgets>
 #include <functional>
 
@@ -64,7 +64,7 @@ static const QList<extension_t> extensions =
 
 
 CLogProject::CLogProject(const QString &filename, CGisListWks * parent)
-    : IGisProject(eTypeLog, filename, parent)
+  : ISuuntoProject(eTypeLog, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/LogProject.png"));
     blockUpdateItems(true);
@@ -185,14 +185,14 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
                     IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);
                 }
 
-                QList<log_sample_t> samplesList;
+                QList<suunto_sample_t> samplesList;
                 QList<QDateTime> lapsList;
 
                 bool sampleWithPositionFound = false;
 
                 for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
-                    log_sample_t sample;
+                    suunto_sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 
                     if(xmlSample.namedItem("Latitude").isElement())
@@ -259,7 +259,7 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
                 int lap = 0;
                 CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-                for(const log_sample_t& sample : samplesList)
+                for(const suunto_sample_t& sample : samplesList)
                 {
                     if (sample.time > lapsList[lap])
                     {
@@ -292,116 +292,3 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
     }
 }
 
-
-void CLogProject::fillMissingData(const QString &dataField, QList<log_sample_t> &samplesList)
-{   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
-    // The purpose of the code below is to "spread" data among samples.
-    // At the end each sample contains data, linearly interpolated from its neighbors according to timestamps.
-    QList<log_sample_t> collect;
-    QList<log_sample_t> result;
-    log_sample_t previousSampleWithData;
-
-    for(log_sample_t& sample : samplesList)
-    {
-        collect << sample;
-
-        if (sample.data.contains(dataField))
-        {
-            if (!previousSampleWithData.data.contains(dataField))
-            {   // case where, at the beginning, first samples have no data
-                for(log_sample_t& collectedSample : collect)
-                {
-                    collectedSample[dataField] = sample[dataField];
-                }
-            }
-            else
-            {   // case where linear interpolation can be applied
-                qreal dT = ((qreal)(collect.last().time.toMSecsSinceEpoch() - previousSampleWithData.time.toMSecsSinceEpoch())) / 1000.0;
-                if (dT != 0) // dT == 0 when samples have the same timestamps ; this is managed later in deleteSamplesWithDuplicateTimestamps function
-                {
-                    qreal dY = collect.last().data[dataField] - previousSampleWithData.data[dataField];
-                    qreal slope = dY / dT;
-
-                    for(log_sample_t& collectedSample : collect)
-                    {   // apply interpolation to collected samples
-                        collectedSample[dataField] = previousSampleWithData.data[dataField] + slope * ( (qreal)(collectedSample.time.toMSecsSinceEpoch() - previousSampleWithData.time.toMSecsSinceEpoch()) / 1000.0 );
-                    }
-                }
-            }
-
-            previousSampleWithData = sample;
-            result << collect;
-            collect.clear();
-        }
-    }
-
-    if (previousSampleWithData.data.contains(dataField))
-    {
-        for(log_sample_t& collectedSample : collect)
-        {   // processing last remaining collected samples without data
-            collectedSample[dataField] = previousSampleWithData[dataField];
-        }
-    }
-
-    result << collect;
-    samplesList = result;
-}
-
-
-void CLogProject::deleteSamplesWithDuplicateTimestamps(QList<log_sample_t> &samples)
-{
-    QList<log_sample_t> result;
-    QList<log_sample_t> collect;
-
-
-    for(log_sample_t& sample : samples)
-    {
-        if(!collect.isEmpty())
-        {
-            if(sample.time != collect.first().time)
-            {
-                result << mergeSamples(collect);
-                collect.clear();
-            }
-        }
-        collect << sample;
-    }
-
-    result << mergeSamples(collect);
-    samples = result;
-}
-
-
-CLogProject::log_sample_t CLogProject::mergeSamples(QList<log_sample_t> samples)
-{
-    if(samples.count() == 1)
-    {
-        return samples.first();
-    }
-
-    log_sample_t result;
-
-    result.time = samples.first().time;
-
-    for (const extension_t& ext  : extensions)
-    {
-        qreal sum = 0;
-        qint32 cnt = 0;
-
-        for(const log_sample_t& sample : samples)
-        {
-            if(sample.data.contains(ext.tag))
-            {
-                sum += sample[ext.tag];
-                cnt++;
-            }
-        }
-
-        if(cnt != 0)
-        {
-            result[ext.tag] = sum/cnt; // averaged value is assigned to the merged sample
-        }
-    }
-
-    return result;
-}

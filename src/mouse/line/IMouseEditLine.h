@@ -64,6 +64,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *e) override;
     void keyPressEvent(QKeyEvent *e) override;
+    void pinchFinishedEvent(QMouseEvent *e) override;
 
     void abortStep();
 

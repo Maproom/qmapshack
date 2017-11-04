@@ -88,7 +88,3 @@ void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
         canvas->resetMouse();
     }
 }
-
-void CMouseWptBubble::wheelEvent(QWheelEvent*)
-{
-}

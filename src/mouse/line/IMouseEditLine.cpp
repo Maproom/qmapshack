@@ -283,6 +283,12 @@ void IMouseEditLine::keyPressEvent(QKeyEvent * e)
     lineOp->keyPressEvent(e);
 }
 
+void IMouseEditLine::pinchFinishedEvent(QMouseEvent *e)
+{
+    point = e->pos();
+    lineOp->pinchFinishedEvent(e);
+}
+
 
 void IMouseEditLine::slotDeletePoint()
 {

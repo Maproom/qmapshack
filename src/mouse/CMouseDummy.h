@@ -40,9 +40,6 @@ public:
     void mouseReleaseEvent(QMouseEvent *e) override
     {
     }
-    void wheelEvent(QWheelEvent * e) override
-    {
-    }
 };
 
 #endif //CMOUSEDUMMY_H

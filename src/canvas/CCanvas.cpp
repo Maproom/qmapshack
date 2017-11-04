@@ -961,26 +961,10 @@ bool CCanvas::event(QEvent *event)
         QMouseEvent * me = dynamic_cast<QMouseEvent*>(event);
         if (me != nullptr)
         {
+            // notify IMouse that the upcomming QMouseEvent needs special treatment
+            // as the coordinates of the mouse have changed by executing the gesture
+            mouse->pinchFinishedEvent(me);
             isPinch = false;
-
-            // right after executing a pinchgesture when placing the finger at some
-            // other place on the screen the generated QMouseEvent sometimes is not the expected
-            // MouseButtonPress but a MouseMove. As the last known position is where the first
-            // finger was set to start the pinch this MouseMove forces the map to 'jump' by a major
-            // and unexpected distance.
-            // As a workouround an artificial MouseButtonPress-event is inserted which resets the start
-            // of the beginning MouseMove to the current finger-position.
-
-            if (event->type() == QEvent::MouseMove)
-            {
-                QWidget::event(new QMouseEvent(QEvent::MouseButtonPress,
-                                               me->pos(),
-                                               me->windowPos(),
-                                               me->globalPos(),
-                                               Qt::LeftButton,
-                                               Qt::LeftButton,
-                                               me->modifiers()));
-            }
         }
     }
     return QWidget::event(event);

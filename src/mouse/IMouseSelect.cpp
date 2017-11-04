@@ -299,11 +299,3 @@ void IMouseSelect::mouseReleaseEvent(QMouseEvent *e)
 
     canvas->update();
 }
-
-void IMouseSelect::wheelEvent(QWheelEvent * e)
-{
-}
-
-void IMouseSelect::pinchFinishedEvent(QMouseEvent *e)
-{
-}

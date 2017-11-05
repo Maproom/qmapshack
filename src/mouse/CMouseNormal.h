@@ -46,7 +46,7 @@ public:
     void mouseDoubleClickEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent * e) override;
     void keyPressEvent(QKeyEvent * e) override;
-    void pinchFinishedEvent(QMouseEvent *e) override;
+    void afterMouseLostEvent(QMouseEvent *e) override;
 
 private slots:
     void slotAddPoi()           const;
@@ -65,9 +65,6 @@ protected:
     void stopTracking() const;
     void resetState();
 
-
-    /// the flag is true if the map moving is in progress
-    bool mapMove = false;
     /// the flag is true if the map has been moved actually
     bool mapDidMove = false;
     /// always the last seen mouse cursor position

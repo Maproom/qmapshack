@@ -41,7 +41,7 @@ public:
     void mouseReleaseEvent(QMouseEvent *e) override;
     void wheelEvent(QWheelEvent *e) override;
     void keyPressEvent(QKeyEvent *e) override;
-    void pinchFinishedEvent(QMouseEvent *e) override;
+    void afterMouseLostEvent(QMouseEvent *e) override;
 
 private slots:
     void slotHidePoints();
@@ -60,7 +60,6 @@ private:
         ,eStateRangeSelected
     };
 
-    bool mapMove    = false;
     bool mapDidMove = false;
     state_e state   = eStateIdle;
     QPointF anchor  = NOPOINTF;

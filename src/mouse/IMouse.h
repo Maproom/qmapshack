@@ -50,7 +50,7 @@ public:
     virtual void keyPressEvent(QKeyEvent *e)
     {
     }
-    virtual void pinchFinishedEvent(QMouseEvent *e)
+    virtual void afterMouseLostEvent(QMouseEvent *e)
     {
     }
 

@@ -96,7 +96,6 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::LeftButton)
     {
-        mapMove = true;
         lastPoint = point;
     }
 }
@@ -105,7 +104,7 @@ void CMouseMoveWpt::mouseMoveEvent(QMouseEvent * e)
 {
     point  = e->pos();
 
-    if(mapMove)
+    if(e->buttons() & Qt::LeftButton)
     {
         if(point != lastPoint)
         {
@@ -142,7 +141,6 @@ void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
 
-    mapMove     = false;
     mapDidMove    = false;
 }
 
@@ -151,12 +149,11 @@ void CMouseMoveWpt::wheelEvent(QWheelEvent*)
     canvas->update();
 }
 
-void CMouseMoveWpt::pinchFinishedEvent(QMouseEvent *e)
+void CMouseMoveWpt::afterMouseLostEvent(QMouseEvent *e)
 {
     if (e->type() == QEvent::MouseMove)
     {
         lastPoint = e->pos();
-        mapMove     = true;
     }
     mapDidMove = true;
 }

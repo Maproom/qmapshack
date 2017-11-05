@@ -206,6 +206,11 @@ void CCanvas::resetMouse()
     }
 }
 
+void CCanvas::mouseTrackingLost()
+{
+    mouseLost = true;
+}
+
 void CCanvas::setMouseCursor(IMouse& mouse, const QString& src)
 {
     if(underMouse())
@@ -956,15 +961,15 @@ bool CCanvas::event(QEvent *event)
     {
         return gestureEvent(static_cast<QGestureEvent*>(event));
     }
-    else if (isPinch)
+    else if (mouseLost)
     {
         QMouseEvent * me = dynamic_cast<QMouseEvent*>(event);
         if (me != nullptr)
         {
             // notify IMouse that the upcomming QMouseEvent needs special treatment
-            // as the coordinates of the mouse have changed by executing the gesture
-            mouse->pinchFinishedEvent(me);
-            isPinch = false;
+            // as some mouse-events may have been lost
+            mouse->afterMouseLostEvent(me);
+            mouseLost = false;
         }
     }
     return QWidget::event(event);
@@ -1002,7 +1007,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
                 slotTriggerCompleteUpdate(needsRedraw);
             }
         }
-        isPinch = true;
+        mouseTrackingLost();
     }
     return true;
 }

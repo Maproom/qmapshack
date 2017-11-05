@@ -108,6 +108,7 @@ public:
 
 
     void resetMouse();
+    void mouseTrackingLost();
     void setMouseMoveWpt(CGisItemWpt& wpt);
     void setMouseEditTrk(CGisItemTrk& trk);
     void setMouseRangeTrk(CGisItemTrk& trk);
@@ -231,7 +232,7 @@ private:
     QMap<QString, QString> statusMessages;
 
     QMutex mousePressMutex;
-    bool isPinch = false;
+    bool mouseLost = false;
 };
 
 #endif //CCANVAS_H

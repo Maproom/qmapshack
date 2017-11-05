@@ -54,7 +54,7 @@ public:
     {
     }
 
-    virtual void pinchFinishedEvent(QMouseEvent *e);
+    virtual void afterMouseLostEvent(QMouseEvent *e);
 
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
@@ -134,7 +134,6 @@ private:
 
     QTimer * timerRouting;
 
-    bool mapMove = false;
     bool mapDidMove = false;
 };
 

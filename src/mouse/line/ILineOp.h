@@ -134,6 +134,7 @@ private:
 
     QTimer * timerRouting;
 
+    bool mapMove = false;
     bool mapDidMove = false;
 };
 

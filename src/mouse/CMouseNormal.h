@@ -65,6 +65,9 @@ protected:
     void stopTracking() const;
     void resetState();
 
+
+    /// the flag is true if the map moving is in progress
+    bool mapMove = false;
     /// the flag is true if the map has been moved actually
     bool mapDidMove = false;
     /// always the last seen mouse cursor position

@@ -86,6 +86,7 @@ void CMouseRangeTrk::mousePressEvent(QMouseEvent * e)
     }
     else if(e->button() == Qt::LeftButton)
     {
+        mapMove     = true;
         firstPoint  = point;
     }
 }
@@ -94,7 +95,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
 {
     point = e->pos();
 
-    if(e->buttons() & Qt::LeftButton)
+    if(mapMove)
     {
         if((point - firstPoint).manhattanLength() >= 4)
         {
@@ -184,6 +185,7 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
             }
         }
         mapDidMove = false;
+        mapMove  = false;
     }
 }
 
@@ -214,6 +216,7 @@ void CMouseRangeTrk::afterMouseLostEvent(QMouseEvent *e)
     {
         firstPoint = e->pos();
     }
+    mapMove = e->buttons() & Qt::LeftButton;
     mapDidMove = true;
 }
 

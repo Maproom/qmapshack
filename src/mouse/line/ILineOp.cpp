@@ -120,6 +120,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     {
         lastPos    = e->pos();
         firstPos   = lastPos;
+        mapMove    = true;
         mapDidMove = false;
     }
 
@@ -130,7 +131,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if ((e->buttons() & Qt::LeftButton) && ((pos - firstPos).manhattanLength() >= 4))
+    if(mapMove && ((pos - firstPos).manhattanLength() >= 4))
     {
         QPoint delta = pos - lastPos;
         canvas->moveMap(delta);
@@ -150,6 +151,7 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
         mouseReleaseEventEx(e);
     }
 
+    mapMove     = false;
     mapDidMove  = false;
 }
 
@@ -160,6 +162,7 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
         lastPos    = e->pos();
         firstPos   = lastPos;
     }
+    mapMove = e->buttons() & Qt::LeftButton;
     mapDidMove = true;
 }
 
@@ -262,11 +265,9 @@ void ILineOp::finalizeOperation(qint32 idx)
             tryRouting(points[idx], points[idx + 1]);
         }
         // that is a workaround for canvas loosing mousetracking caused by modal CProgressDialog:
-        if (!canvas->hasMouseTracking())
-        {
-            canvas->mouseTrackingLost();
-            canvas->setMouseTracking(true);
-        }
+        canvas->mouseTrackingLost();
+        canvas->setMouseTracking(true);
+
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting())

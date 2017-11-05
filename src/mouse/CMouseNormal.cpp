@@ -73,6 +73,9 @@ void CMouseNormal::mousePressEvent(QMouseEvent * e)
     {
         lastPos     = e->pos();
         firstPos    = lastPos;
+        // start to block map moving when a previous click
+        // has triggered a selection of any kind
+        mapMove     = (stateItemSel < eStateNoMapMovePossible);
         mapDidMove  = false;
     }
     else if(e->button() == Qt::RightButton)
@@ -94,9 +97,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
 
     point = e->pos();
 
-    // start to block map moving when a previous click
-    // has triggered a selection of any kind
-    if((e->buttons() & Qt::LeftButton) && (stateItemSel < eStateNoMapMovePossible))
+    if(mapMove)
     {
         if((point - firstPos).manhattanLength() >= 4)
         {
@@ -223,6 +224,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
 
             canvas->update();
         }
+        mapMove     = false;
         mapDidMove  = false;
     }
 }
@@ -258,6 +260,7 @@ void CMouseNormal::afterMouseLostEvent(QMouseEvent *e)
         lastPos    = e->pos();
         firstPos   = lastPos;
     }
+    mapMove = e->buttons() & Qt::LeftButton;
     mapDidMove = true;
 }
 

@@ -1007,7 +1007,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
                 slotTriggerCompleteUpdate(needsRedraw);
             }
         }
-        mouseTrackingLost();
+        mouseLost = true;
     }
     return true;
 }

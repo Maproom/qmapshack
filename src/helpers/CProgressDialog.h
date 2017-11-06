@@ -54,6 +54,9 @@ public:
 public slots:
     void reject() override;
 
+protected:
+    void showEvent(QShowEvent *) override;
+
 private:
     void pause();
     void goOn();
@@ -62,6 +65,7 @@ private:
     QTime time;
     QTimer * timer;
     qint32 timeElapsed = 0;
+    bool hasBeenShown = false;
 };
 
 

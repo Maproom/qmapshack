@@ -264,9 +264,6 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             tryRouting(points[idx], points[idx + 1]);
         }
-        // that is a workaround for canvas loosing mousetracking caused by modal CProgressDialog:
-        canvas->mouseTrackingLost();
-        canvas->setMouseTracking(true);
 
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }

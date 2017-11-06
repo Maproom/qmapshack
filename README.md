@@ -15,7 +15,7 @@ And change back to build_QMapShack:
 
         make
 
-As everything is better with a GUI you might want to have a look at [TortoiseHg](http://tortoisehg.bitbucket.org/).
+As everything is better with a GUI you might want to have a look at [TortoiseHg](https://tortoisehg.bitbucket.io/).
 
 Dependencies
 

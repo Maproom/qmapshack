@@ -1178,7 +1178,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="604"/>
         <source>, Moving: %1%2 (%3%)</source>
-        <translation type="unfinished"></translation>
+        <translation>, En Movimiento: %1%2 (%3%)</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="620"/>
@@ -4639,56 +4639,56 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="184"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al cargar archivo %1...</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="206"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Fallo al abrir %1</translation>
+        <translation>Fallo al abrir %1</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="217"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Fallo al leer: %1
+        <translation>Fallo al leer: %1
 línea %2, columna %3.
  %4</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="224"/>
         <source>Not an sml file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>No es un archivo sml: %1</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="246"/>
         <source>Recovery time: %1 h&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de recuperación: %1 h&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="251"/>
         <source>Peak Training Effect: %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto Pico de Entrenamiento: %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="256"/>
         <source>Energy: %1 kCal&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Energía: %1 kCal&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="265"/>
         <source>Battery usage: %1 %/hour</source>
-        <translation type="unfinished"></translation>
+        <translation>Uso de la Batería: %1 %/hour</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="277"/>
         <source>Device: %1&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dispositivo: %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/sml/CSmlProject.cpp" line="340"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Este archivo SML no contiene ningún dato de posición y QMapShack no puede mostrarlo: %1</translation>
     </message>
 </context>
 <context>
@@ -6472,7 +6472,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="54"/>
         <source>Increase timestamp by</source>
-        <translation>Incrementar marca de tiempo en</translation>
+        <translation>Incrementar marcas de tiempo en</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterObscureDate.ui" line="61"/>

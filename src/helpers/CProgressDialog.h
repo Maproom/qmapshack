@@ -65,7 +65,6 @@ private:
     QTime time;
     QTimer * timer;
     qint32 timeElapsed = 0;
-    bool hasBeenShown = false;
 };
 
 

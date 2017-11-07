@@ -81,16 +81,6 @@ CProgressDialog::~CProgressDialog()
     {
         stackSelf.top()->goOn();
     }
-    if (hasBeenShown)
-    {
-        // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
-        CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-        if (canvas != nullptr)
-        {
-            canvas->mouseTrackingLost();
-            canvas->setMouseTracking(true);
-        }
-    }
 }
 
 void CProgressDialog::pause()
@@ -151,5 +141,10 @@ bool CProgressDialog::wasCanceled()
 
 void CProgressDialog::showEvent(QShowEvent *)
 {
-    hasBeenShown = true;
+    // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if (canvas != nullptr)
+    {
+        canvas->mouseTrackingLost();
+    }
 }

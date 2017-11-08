@@ -120,6 +120,18 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
 
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
+
+    if(cntInvalidPoints != 0)
+    {
+        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Invalid points...."),
+                                        tr("The track '%1' has %2 invalid points out of %3 visible points. "
+                                           "Do you want to hide invalid points now?").arg(getName()).arg(cntInvalidPoints).arg(cntVisiblePoints),
+                                        QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
+        if(res == QMessageBox::Yes)
+        {
+            filterRemoveInvalidPoints();
+        }
+    }
 }
 
 CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
@@ -842,6 +854,7 @@ void CGisItemTrk::deriveSecondaryData()
 
     // reset all secondary data
     allValidFlags             = 0;
+    cntInvalidPoints          = 0;
     cntTotalPoints            = 0;
     cntVisiblePoints          = 0;
     timeStart                 = QDateTime();
@@ -883,6 +896,10 @@ void CGisItemTrk::deriveSecondaryData()
 
         // count only visible points to allValidFlags
         allValidFlags |= trkpt.valid;
+        if((trkpt.valid & 0xFFFF0000) != 0)
+        {
+            cntInvalidPoints++;
+        }
 
         trkpt.idxVisible = cntVisiblePoints++;
         lintrk << &trkpt;

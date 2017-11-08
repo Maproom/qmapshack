@@ -717,7 +717,8 @@ private:
        \defgroup TrackStatistics Some statistical values over the complete track
      */
     /**@{*/
-    quint32 allValidFlags = 0;
+    quint32 allValidFlags   = 0;
+    qint32 cntInvalidPoints = 0;
     qint32 cntTotalPoints   = 0;
     qint32 cntVisiblePoints = 0;
     QDateTime timeStart;

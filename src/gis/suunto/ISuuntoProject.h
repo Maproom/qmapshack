@@ -49,11 +49,10 @@ struct extension_t
 
 class ISuuntoProject : public IGisProject
 {
-    Q_DECLARE_TR_FUNCTIONS(CSuuntoProject)
 public:
     ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent);
 
-    struct suunto_sample_t
+    struct sample_t
     {
         QDateTime time; // as UTC timestamp
         QMap<QString, qreal> data;
@@ -70,12 +69,12 @@ public:
 
     };
 
-    static void fillMissingData(const QString &dataField, QList<suunto_sample_t> &samplesList);
+    static void fillMissingData(const QString &dataField, QList<sample_t> &samplesList);
 
-    static suunto_sample_t mergeSamples(QList<suunto_sample_t> samples, QList<extension_t> extensions);
-    static void deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples, QList<extension_t> extensions);
+    static sample_t mergeSamples(QList<sample_t> samples, QList<extension_t> extensions);
+    static void deleteSamplesWithDuplicateTimestamps(QList<sample_t> &samples, QList<extension_t> extensions);
 
-    static void fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions);
+    static void fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions);
 };
 
 

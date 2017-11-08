@@ -175,14 +175,14 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                     IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);
                 }
 
-                QList<suunto_sample_t> samplesList;
+                QList<sample_t> samplesList;
                 QList<QDateTime> lapsList;
 
                 bool sampleWithPositionFound = false;
 
                 for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
-                    suunto_sample_t sample;
+                    sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 
                     if(xmlSample.namedItem("Latitude").isElement())
@@ -222,7 +222,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                     throw tr("This SML file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
                 }
 
-               fillTrackPointsFromSuuntoSamples(samplesList, lapsList, trk, extensions);
+               fillTrackPointsFromSamples(samplesList, lapsList, trk, extensions);
 
 
                new CGisItemTrk(trk, project);

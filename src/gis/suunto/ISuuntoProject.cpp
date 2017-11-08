@@ -28,7 +28,7 @@ ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks
 }
 
 
-void ISuuntoProject::fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions)
+void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions)
 {
 
     for (const extension_t& ext  : extensions)
@@ -45,7 +45,7 @@ void ISuuntoProject::fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &sa
     int lap = 0;
     CTrackData::trkseg_t *seg = &(trk.segs[lap]);
 
-    for(const suunto_sample_t& sample : samplesList)
+    for(const sample_t& sample : samplesList)
     {
         if (sample.time > lapsList[lap])
         {
@@ -70,15 +70,15 @@ void ISuuntoProject::fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &sa
 }
 
 
-void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_sample_t> &samplesList)
+void ISuuntoProject::fillMissingData(const QString &dataField, QList<sample_t> &samplesList)
 {   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
     // The purpose of the code below is to "spread" data among samples.
     // At the end each sample contains data, linearly interpolated from its neighbors according to timestamps.
-    QList<suunto_sample_t> collect;
-    QList<suunto_sample_t> result;
-    suunto_sample_t previousSampleWithData;
+    QList<sample_t> collect;
+    QList<sample_t> result;
+    sample_t previousSampleWithData;
 
-    for(suunto_sample_t& sample : samplesList)
+    for(sample_t& sample : samplesList)
     {
         collect << sample;
 
@@ -86,7 +86,7 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_samp
         {
             if (!previousSampleWithData.data.contains(dataField))
             {   // case where, at the beginning, first samples have no data
-                for(suunto_sample_t& collectedSample : collect)
+                for(sample_t& collectedSample : collect)
                 {
                     collectedSample[dataField] = sample[dataField];
                 }
@@ -99,7 +99,7 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_samp
                     qreal dY = collect.last().data[dataField] - previousSampleWithData.data[dataField];
                     qreal slope = dY / dT;
 
-                    for(suunto_sample_t& collectedSample : collect)
+                    for(sample_t& collectedSample : collect)
                     {   // apply interpolation to collected samples
                         collectedSample[dataField] = previousSampleWithData.data[dataField] + slope * ( (qreal)(collectedSample.time.toMSecsSinceEpoch() - previousSampleWithData.time.toMSecsSinceEpoch()) / 1000.0 );
                     }
@@ -114,7 +114,7 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_samp
 
     if (previousSampleWithData.data.contains(dataField))
     {
-        for(suunto_sample_t& collectedSample : collect)
+        for(sample_t& collectedSample : collect)
         {   // processing last remaining collected samples without data
             collectedSample[dataField] = previousSampleWithData[dataField];
         }
@@ -125,13 +125,13 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_samp
 }
 
 
-void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples, QList<extension_t> extensions)
+void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<sample_t> &samples, QList<extension_t> extensions)
 {
-    QList<suunto_sample_t> result;
-    QList<suunto_sample_t> collect;
+    QList<sample_t> result;
+    QList<sample_t> collect;
 
 
-    for(suunto_sample_t& sample : samples)
+    for(sample_t& sample : samples)
     {
         if(!collect.isEmpty())
         {
@@ -149,14 +149,14 @@ void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t>
 }
 
 
-ISuuntoProject::suunto_sample_t ISuuntoProject::mergeSamples(QList<suunto_sample_t> samples, QList<extension_t> extensions)
+ISuuntoProject::sample_t ISuuntoProject::mergeSamples(QList<sample_t> samples, QList<extension_t> extensions)
 {
     if(samples.count() == 1)
     {
         return samples.first();
     }
 
-    suunto_sample_t result;
+    sample_t result;
 
     result.time = samples.first().time;
 
@@ -165,7 +165,7 @@ ISuuntoProject::suunto_sample_t ISuuntoProject::mergeSamples(QList<suunto_sample
         qreal sum = 0;
         qint32 cnt = 0;
 
-        for(const suunto_sample_t& sample : samples)
+        for(const sample_t& sample : samples)
         {
             if(sample.data.contains(ext.tag))
             {

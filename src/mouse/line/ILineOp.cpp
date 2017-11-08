@@ -155,6 +155,17 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
     mapDidMove  = false;
 }
 
+void ILineOp::afterMouseLostEvent(QMouseEvent *e)
+{
+    if (e->type() == QEvent::MouseMove)
+    {
+        lastPos    = e->pos();
+        firstPos   = lastPos;
+    }
+    mapMove = e->buttons() & Qt::LeftButton;
+    mapDidMove = true;
+}
+
 void ILineOp::updateLeadLines(qint32 idx)
 {
     leadLinePixel1.clear();
@@ -233,7 +244,7 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
     {
         showRoutingErrorMessage(msg);
     }
-    // that is a workaround for canvas loosing mousetracking caused by modal CProgressDialog:
+    // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
     canvas->setMouseTracking(true);
 }
 

@@ -122,6 +122,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
         firstPos   = lastPos;
         mapMove    = true;
         mapDidMove = false;
+        buttonPressTime.start();
     }
 
     showRoutingErrorMessage(QString());
@@ -146,7 +147,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(!mapDidMove)
+    if(!mapDidMove && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
     {
         mouseReleaseEventEx(e);
     }

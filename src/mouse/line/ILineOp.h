@@ -111,6 +111,7 @@ protected:
 
     QPoint lastPos;
     QPoint firstPos;
+    QTime  buttonPressTime;
 
     QRect rectPoint {0,0,9,9};
     const QPen penBgPoint {Qt::white, 4};

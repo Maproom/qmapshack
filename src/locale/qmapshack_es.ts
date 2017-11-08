@@ -2223,23 +2223,23 @@ línea %2, columna %3.
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
-        <source>Device: %1&lt;br&gt;</source>
-        <translation type="unfinished">Dispositivo: %1&lt;br&gt;</translation>
+        <source>Device: %1&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
-        <source>Recovery time: %1 h&lt;br&gt;</source>
-        <translation type="unfinished">Tiempo de recuperación: %1 h&lt;br&gt;</translation>
+        <source>Recovery time: %1 h&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
-        <source>Peak Training Effect: %1&lt;br&gt;</source>
-        <translation type="unfinished">Efecto Pico de Entrenamiento: %1&lt;br&gt;</translation>
+        <source>Peak Training Effect: %1&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
-        <source>Energy: %1 kCal&lt;br&gt;</source>
-        <translation type="unfinished">Energía: %1 kCal&lt;br&gt;</translation>
+        <source>Energy: %1 kCal&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="224"/>
@@ -4725,28 +4725,28 @@ línea %2, columna %3.
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="128"/>
-        <source>Recovery time: %1 h&lt;br&gt;</source>
-        <translation>Tiempo de recuperación: %1 h&lt;br&gt;</translation>
+        <source>Recovery time: %1 h&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="133"/>
-        <source>Peak Training Effect: %1&lt;br&gt;</source>
-        <translation>Efecto Pico de Entrenamiento: %1&lt;br&gt;</translation>
+        <source>Peak Training Effect: %1&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="138"/>
-        <source>Energy: %1 kCal&lt;br&gt;</source>
-        <translation>Energía: %1 kCal&lt;br&gt;</translation>
+        <source>Energy: %1 kCal&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
+        <source>Device: %1&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="147"/>
         <source>Battery usage: %1 %/hour</source>
         <translation>Uso de la Batería: %1 %/hour</translation>
-    </message>
-    <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
-        <source>Device: %1&lt;br&gt;</source>
-        <translation type="unfinished">Dispositivo: %1&lt;br&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="222"/>

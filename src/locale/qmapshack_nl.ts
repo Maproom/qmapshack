@@ -2223,22 +2223,22 @@ lijn %2, kolom %3:
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
-        <source>Device: %1&lt;br&gt;</source>
+        <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
-        <source>Recovery time: %1 h&lt;br&gt;</source>
+        <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
-        <source>Peak Training Effect: %1&lt;br&gt;</source>
+        <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
-        <source>Energy: %1 kCal&lt;br&gt;</source>
+        <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4726,27 +4726,27 @@ lijn %2, kolom %3:
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="128"/>
-        <source>Recovery time: %1 h&lt;br&gt;</source>
+        <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="133"/>
-        <source>Peak Training Effect: %1&lt;br&gt;</source>
+        <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="138"/>
-        <source>Energy: %1 kCal&lt;br&gt;</source>
+        <source>Energy: %1 kCal&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
+        <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="147"/>
         <source>Battery usage: %1 %/hour</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
-        <source>Device: %1&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

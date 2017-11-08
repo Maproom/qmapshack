@@ -125,17 +125,17 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
             if(xmlHeader.namedItem("RecoveryTime").isElement())
             {
-                trk.cmt = tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600);
+                trk.cmt = tr("Recovery time: %1 h<br/>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600);
             }
 
             if(xmlHeader.namedItem("PeakTrainingEffect").isElement())
             {
-                trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble());
+                trk.cmt += tr("Peak Training Effect: %1<br/>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble());
             }
 
             if(xmlHeader.namedItem("Energy").isElement())
             {
-                trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() / 4184);
+                trk.cmt += tr("Energy: %1 kCal<br/>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() / 4184);
             }
 
 
@@ -156,7 +156,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             const QDomNode& xmlDevice = xmlDeviceLog.namedItem("Device");
             if(xmlDevice.namedItem("Name").isElement())
             {
-                trk.cmt =  tr("Device: %1<br>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;
+                trk.cmt =  tr("Device: %1<br/>").arg(xmlDevice.namedItem("Name").toElement().text()) + trk.cmt;
             }
         }
 

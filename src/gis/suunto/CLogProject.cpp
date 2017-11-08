@@ -117,7 +117,7 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
         const QDomNode& xmlDeviceInfo = xmlOpenambitlog.namedItem("DeviceInfo");
         if(xmlDeviceInfo.namedItem("Name").isElement())
         {
-            trk.cmt =  tr("Device: %1<br>").arg(xmlDeviceInfo.namedItem("Name").toElement().text());
+            trk.cmt =  tr("Device: %1<br/>").arg(xmlDeviceInfo.namedItem("Name").toElement().text());
         }
     }
 
@@ -135,17 +135,17 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
 
             if(xmlHeader.namedItem("RecoveryTime").isElement())
             {
-                trk.cmt += tr("Recovery time: %1 h<br>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600000);
+                trk.cmt += tr("Recovery time: %1 h<br/>").arg(xmlHeader.namedItem("RecoveryTime").toElement().text().toInt() / 3600000);
             }
 
             if(xmlHeader.namedItem("PeakTrainingEffect").isElement())
             {
-                trk.cmt += tr("Peak Training Effect: %1<br>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble()/10.0);
+                trk.cmt += tr("Peak Training Effect: %1<br/>").arg(xmlHeader.namedItem("PeakTrainingEffect").toElement().text().toDouble()/10.0);
             }
 
             if(xmlHeader.namedItem("Energy").isElement())
             {
-                trk.cmt += tr("Energy: %1 kCal<br>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() );
+                trk.cmt += tr("Energy: %1 kCal<br/>").arg((int)xmlHeader.namedItem("Energy").toElement().text().toDouble() );
             }
         }
 

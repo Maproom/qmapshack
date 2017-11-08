@@ -22,7 +22,6 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/suunto/ISuuntoProject.h"
 
-
 class CSmlProject : public ISuuntoProject
 {
     Q_DECLARE_TR_FUNCTIONS(CSmlProject)
@@ -41,10 +40,9 @@ public:
     }
 
     static void loadSml(const QString &filename, CSmlProject *project);
+
 private:
     void loadSml(const QString& filename);
-
-
 };
 #endif //CSMLPROJECT_H
 

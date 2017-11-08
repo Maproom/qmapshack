@@ -40,10 +40,9 @@ public:
     }
 
     static void loadLog(const QString &filename, CLogProject *project);
+
 private:
     void loadLog(const QString& filename);
-
-
 };
 #endif //CLOGPROJECT_H
 

@@ -20,13 +20,39 @@
 #define ISUUNTOPROJECT_H
 
 #include "gis/prj/IGisProject.h"
+#include "gis/trk/CGisItemTrk.h"
+#include <functional>
 
+using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
+
+#define NIL ///< this is to silence the MSVC compiler
+#define ASSIGN_VALUE(var, op) \
+    [](CTrackData::trkpt_t &pt, qreal val) \
+    { \
+        if(val != NOFLOAT) \
+        { \
+            pt.var = op(val); \
+        } \
+    } \
+
+struct extension_t
+{
+    /// the tag as used in the xml file
+    QString tag;
+    /// a scale factor to be applied to the value stored in the xml file
+    qreal scale;
+    /// an offset to be applied to the value stored in the xml file
+    qreal offset;
+    /// an assignment function that assigns a value to a member of a trkpt_t object
+    fTrkPtSetVal func;
+};
 
 class ISuuntoProject : public IGisProject
 {
     Q_DECLARE_TR_FUNCTIONS(CSuuntoProject)
 public:
     ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent);
+
     struct suunto_sample_t
     {
         QDateTime time; // as UTC timestamp
@@ -46,10 +72,12 @@ public:
 
     static void fillMissingData(const QString &dataField, QList<suunto_sample_t> &samplesList);
 
-    static suunto_sample_t mergeSamples(QList<suunto_sample_t> samples);
-    static void deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples);
-private:
+    static suunto_sample_t mergeSamples(QList<suunto_sample_t> samples, QList<extension_t> extensions);
+    static void deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples, QList<extension_t> extensions);
 
+    static void fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions);
 };
+
+
 #endif //CSUUNTOPROJECT_H
 

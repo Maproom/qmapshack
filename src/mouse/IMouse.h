@@ -71,6 +71,8 @@ public:
 
     virtual void setMouseTracking(bool enabled);
 
+    const static int longButtonPressTimeout = 700;
+
 protected:
     /// the functions mouse icon
     QCursor cursor;

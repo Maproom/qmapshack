@@ -21,48 +21,54 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/suunto/ISuuntoProject.h"
 
-using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
-
-struct extension_t
-{
-    /// the tag as used in the SML/LOG file
-    QString tag;
-    /// a scale factor to be applied to the value stored in the SML/LOG file
-    qreal scale;
-    /// an offset to be applied to the value stored in the SML/LOG file
-    qreal offset;
-    /// an assignment function that assigns a value to a member of a trkpt_t object
-    fTrkPtSetVal func;
-};
-#define NIL ///< this is to silence the MSVC compiler
-#define ASSIGN_VALUE(var, op) \
-    [](CTrackData::trkpt_t &pt, qreal val) \
-    { \
-        if(val != NOFLOAT) \
-        { \
-            pt.var = op(val); \
-        } \
-    } \
-
-static const QList<extension_t> extensions =
-{
-    {"Latitude",            RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
-    ,{"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
-    ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
-    ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
-    ,{"HR",                 60.0,           0.0,        ASSIGN_VALUE(extensions["gpxtpx:TrackPointExtension|gpxtpx:hr"],qRound)}   // unit [bpm]
-    ,{"Cadence",            60.0,           0.0,        ASSIGN_VALUE(extensions["gpxdata:cadence"],NIL)}                        // unit [bpm]
-    ,{"Temperature",        1.0,            -273.15,    ASSIGN_VALUE(extensions["gpxdata:temp"],NIL)}                           // unit [°C]
-    ,{"SeaLevelPressure",   0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:seaLevelPressure"],NIL)}               // unit [hPa]
-    ,{"Speed",              1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:speed"],NIL)}                          // unit [m/s]
-    ,{"EnergyConsumption",  60.0 / 4184.0,  0.0,        ASSIGN_VALUE(extensions["gpxdata:energy"],NIL)}                         // unit [kCal/min]
-};
-
 
 ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent)
     : IGisProject(type, filename, parent)
 {
 }
+
+
+void ISuuntoProject::fillTrackPointsFromSuuntoSamples(QList<suunto_sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions)
+{
+
+    for (const extension_t& ext  : extensions)
+    {
+        fillMissingData(ext.tag, samplesList);
+    }
+
+    deleteSamplesWithDuplicateTimestamps(samplesList, extensions);
+
+    lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
+
+    trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap
+
+    int lap = 0;
+    CTrackData::trkseg_t *seg = &(trk.segs[lap]);
+
+    for(const suunto_sample_t& sample : samplesList)
+    {
+        if (sample.time > lapsList[lap])
+        {
+            lap++;
+            seg = &(trk.segs[lap]);
+        }
+
+        CTrackData::trkpt_t trkpt;
+        trkpt.time = sample.time;
+
+        for(const extension_t& ext : extensions)
+        {
+            if(sample.data.contains(ext.tag))
+            {
+                ext.func(trkpt, sample[ext.tag]);
+            }
+        }
+
+        seg->pts.append(trkpt);
+    }
+
+}
+
 
 void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_sample_t> &samplesList)
 {   // Suunto samples contain lat/lon OR heart rate, elevation, etc.., each one with its own timestamp.
@@ -119,7 +125,7 @@ void ISuuntoProject::fillMissingData(const QString &dataField, QList<suunto_samp
 }
 
 
-void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples)
+void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t> &samples, QList<extension_t> extensions)
 {
     QList<suunto_sample_t> result;
     QList<suunto_sample_t> collect;
@@ -131,19 +137,19 @@ void ISuuntoProject::deleteSamplesWithDuplicateTimestamps(QList<suunto_sample_t>
         {
             if(sample.time != collect.first().time)
             {
-                result << mergeSamples(collect);
+                result << mergeSamples(collect, extensions);
                 collect.clear();
             }
         }
         collect << sample;
     }
 
-    result << mergeSamples(collect);
+    result << mergeSamples(collect, extensions);
     samples = result;
 }
 
 
-ISuuntoProject::suunto_sample_t ISuuntoProject::mergeSamples(QList<suunto_sample_t> samples)
+ISuuntoProject::suunto_sample_t ISuuntoProject::mergeSamples(QList<suunto_sample_t> samples, QList<extension_t> extensions)
 {
     if(samples.count() == 1)
     {

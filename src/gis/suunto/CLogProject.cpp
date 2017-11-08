@@ -22,31 +22,7 @@
 #include "gis/suunto/ISuuntoProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include <QtWidgets>
-#include <functional>
 
-using fTrkPtSetVal = std::function<void(CTrackData::trkpt_t&, qreal)>;
-
-struct extension_t
-{
-    /// the tag as used in the LOG file
-    QString tag;
-    /// a scale factor to be applied to the value stored in the LOG file
-    qreal scale;
-    /// an offset to be applied to the value stored in the LOG file
-    qreal offset;
-    /// an assignment function that assigns a value to a member of a trkpt_t object
-    fTrkPtSetVal func;
-};
-
-#define NIL ///< this is to silence the MSVC compiler
-#define ASSIGN_VALUE(var, op) \
-    [](CTrackData::trkpt_t &pt, qreal val) \
-    { \
-        if(val != NOFLOAT) \
-        { \
-            pt.var = op(val); \
-        } \
-    } \
 
 static const QList<extension_t> extensions =
 {
@@ -91,6 +67,9 @@ void CLogProject::loadLog(const QString& filename)
 
 void CLogProject::loadLog(const QString &filename, CLogProject *project)
 {
+
+
+
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
@@ -245,41 +224,7 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
                     throw tr("This LOG file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
                 }
 
-                for (const extension_t& ext  : extensions)
-                {
-                    fillMissingData(ext.tag, samplesList);
-                }
-
-                deleteSamplesWithDuplicateTimestamps(samplesList);
-
-                lapsList << samplesList.last().time.addSecs(1); // a last dummy lap button push is added with timestamp = 1 s later than the last sample timestamp
-
-                trk.segs.resize(lapsList.size() ); // segments are created and each of them contains 1 lap
-
-                int lap = 0;
-                CTrackData::trkseg_t *seg = &(trk.segs[lap]);
-
-                for(const suunto_sample_t& sample : samplesList)
-                {
-                    if (sample.time > lapsList[lap])
-                    {
-                        lap++;
-                        seg = &(trk.segs[lap]);
-                    }
-
-                    CTrackData::trkpt_t trkpt;
-                    trkpt.time = sample.time;
-
-                    for(const extension_t& ext : extensions)
-                    {
-                        if(sample.data.contains(ext.tag))
-                        {
-                            ext.func(trkpt, sample[ext.tag]);
-                        }
-                    }
-
-                    seg->pts.append(trkpt);
-                }
+                fillTrackPointsFromSuuntoSamples(samplesList, lapsList, trk, extensions);
 
                 new CGisItemTrk(trk, project);
 
@@ -291,4 +236,3 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
         }
     }
 }
-

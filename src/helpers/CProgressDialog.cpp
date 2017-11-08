@@ -18,6 +18,8 @@
 
 #include "helpers/CProgressDialog.h"
 #include "units/IUnit.h"
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
 
 #include <QtWidgets>
 
@@ -135,4 +137,14 @@ void CProgressDialog::setValue(int val)
 bool CProgressDialog::wasCanceled()
 {
     return result() == QMessageBox::Abort;
+}
+
+void CProgressDialog::showEvent(QShowEvent *)
+{
+    // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if (canvas != nullptr)
+    {
+        canvas->mouseTrackingLost();
+    }
 }

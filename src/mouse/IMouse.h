@@ -44,8 +44,13 @@ public:
     virtual void mouseDoubleClickEvent(QMouseEvent *e)
     {
     }
-    virtual void wheelEvent(QWheelEvent *e) = 0;
+    virtual void wheelEvent(QWheelEvent *e)
+    {
+    }
     virtual void keyPressEvent(QKeyEvent *e)
+    {
+    }
+    virtual void afterMouseLostEvent(QMouseEvent *e)
     {
     }
 

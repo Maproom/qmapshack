@@ -54,6 +54,9 @@ public:
 public slots:
     void reject() override;
 
+protected:
+    void showEvent(QShowEvent *) override;
+
 private:
     void pause();
     void goOn();

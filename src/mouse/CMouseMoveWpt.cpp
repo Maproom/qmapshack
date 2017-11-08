@@ -97,6 +97,7 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
     else if(e->button() == Qt::LeftButton)
     {
         mapMove = true;
+        lastPoint = point;
     }
 }
 
@@ -148,5 +149,15 @@ void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
 void CMouseMoveWpt::wheelEvent(QWheelEvent*)
 {
     canvas->update();
+}
+
+void CMouseMoveWpt::afterMouseLostEvent(QMouseEvent *e)
+{
+    if (e->type() == QEvent::MouseMove)
+    {
+        lastPoint = e->pos();
+    }
+    mapMove = e->buttons() & Qt::LeftButton;
+    mapDidMove = true;
 }
 

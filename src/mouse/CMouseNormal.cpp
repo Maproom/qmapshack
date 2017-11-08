@@ -251,6 +251,19 @@ void CMouseNormal::keyPressEvent(QKeyEvent * e)
     resetState();
 }
 
+void CMouseNormal::afterMouseLostEvent(QMouseEvent *e)
+{
+    resetState();
+
+    if (e->type() == QEvent::MouseMove)
+    {
+        lastPos    = e->pos();
+        firstPos   = lastPos;
+    }
+    mapMove = e->buttons() & Qt::LeftButton;
+    mapDidMove = true;
+}
+
 void CMouseNormal::resetState()
 {
     screenUnclutter->clear();

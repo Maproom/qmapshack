@@ -54,6 +54,8 @@ public:
     {
     }
 
+    virtual void afterMouseLostEvent(QMouseEvent *e);
+
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
 

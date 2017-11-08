@@ -283,6 +283,12 @@ void IMouseEditLine::keyPressEvent(QKeyEvent * e)
     lineOp->keyPressEvent(e);
 }
 
+void IMouseEditLine::afterMouseLostEvent(QMouseEvent *e)
+{
+    point = e->pos();
+    lineOp->afterMouseLostEvent(e);
+}
+
 
 void IMouseEditLine::slotDeletePoint()
 {

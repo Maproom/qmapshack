@@ -1128,12 +1128,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="126"/>
         <source>Invalid points....</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверные точки...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="127"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Трек &apos;%1&apos; имеет %2 неверных точек из %3 видимых точек. Вы хотите скрыть неверные очки?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
@@ -2200,51 +2200,51 @@ line %2, column %3:
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="62"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished">Не удалось загрузить файл %1...</translation>
+        <translation>Не удалось загрузить файл %1...</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="87"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Не удалось открыть %1</translation>
+        <translation>Не удалось открыть %1</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="98"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Не удалось читать %1
+        <translation>Не удалось читать %1
 строка %2, столбец %3:
 %4</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="105"/>
         <source>Not an Openambit log file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Это не файл Openambit LOG: %1</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
         <source>Device: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Время восстановления: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Пиковый эффект тренинга: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="224"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Этот файл LOG не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
 </context>
 <context>
@@ -2271,7 +2271,7 @@ line %2, column %3:
         <location filename="../CMainWindow.cpp" line="971"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
-        <translation type="unfinished">Склон: %1%2</translation>
+        <translation>Склон: %1%2</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="987"/>
@@ -4726,22 +4726,22 @@ line %2, column %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="128"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Время восстановления: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="133"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Пиковый эффект тренинга: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="138"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Энергия: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
         <source>Device: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="147"/>
@@ -4752,7 +4752,7 @@ line %2, column %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="222"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
-        <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack</translation>
+        <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
 </context>
 <context>
@@ -9878,7 +9878,7 @@ or
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="123"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation type="unfinished">&lt;b&gt;Примечание:&lt;/b&gt; Изменение единиц для некоторых элементов графического пользовательского интерфейса вступят в силу только после перезапуска QMapShack.</translation>
+        <translation>&lt;b&gt;Примечание:&lt;/b&gt; Изменение единиц для некоторых элементов графического пользовательского интерфейса вступит в силу только после перезапуска QMapShack.</translation>
     </message>
 </context>
 <context>
@@ -9963,7 +9963,7 @@ or
     <message>
         <location filename="../units/IUnitsSetup.ui" line="36"/>
         <source>Length unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Единица длины</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="48"/>
@@ -9983,17 +9983,17 @@ or
     <message>
         <location filename="../units/IUnitsSetup.ui" line="80"/>
         <source>Slope unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Единица спуска</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="92"/>
         <source>Degrees (°)</source>
-        <translation type="unfinished"></translation>
+        <translation>Градус (°)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="105"/>
         <source>Percent (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Процент (%)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="133"/>

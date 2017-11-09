@@ -1113,12 +1113,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="126"/>
         <source>Invalid points....</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Puntos inválidos...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="127"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="unfinished"></translation>
+        <translation>El track &apos;%1&apos; tiene %2 puntos inválidos de  %3 visibles. ¿Quiere ocultar los puntos inválidos?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
@@ -1218,7 +1218,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
         <source>, Time: %1%2</source>
-        <translation type="unfinished">, Tiempo: %1%2</translation>
+        <translation>, Tiempo: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1322"/>
@@ -2200,12 +2200,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="62"/>
         <source>Failed to load file %1...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al cargar archivo %1...</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="87"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Fallo al abrir %1</translation>
+        <translation>Fallo al abrir %1</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="98"/>
@@ -2219,32 +2219,32 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="105"/>
         <source>Not an Openambit log file: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 no es un archivo log de Openambit</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
         <source>Device: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de recuperación: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto Pico de Entrenamiento: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Energía: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="224"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Este archivo LOG no contiene datos de posición que puedan ser mostrados por QMapShack: %1</translation>
     </message>
 </context>
 <context>
@@ -4726,22 +4726,22 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="128"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de recuperación: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="133"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Efecto Pico de Entrenamiento: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="138"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Energy: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="159"/>
         <source>Device: %1&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Device: %1&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="147"/>
@@ -6334,7 +6334,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="63"/>
         <source>Remove all hidden track points permanently.</source>
-        <translation>Eliminar todos los puntos ocultos del track definitavamente.</translation>
+        <translation>Eliminar todos los puntos ocultos del track definitivamente.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="70"/>
@@ -6385,7 +6385,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="57"/>
         <source>Hide track points if the distance to a line between neighboring points is less than</source>
-        <translation>Ocultar puntos del track si la distancia a una linea entre puntos vecinos es menor que</translation>
+        <translation>Ocultar puntos del track si la distancia entre puntos vecinos en linea recta es menor que</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterDouglasPeuker.ui" line="70"/>
@@ -6647,7 +6647,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
         <source> km/h</source>
-        <translation></translation>
+        <translation> km/h</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
@@ -6670,7 +6670,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="63"/>
         <source>Creates a new track for every segment within this track.</source>
-        <translation>Crea un nuevo track por cada segmento de este track.</translation>
+        <translation>Crear un nuevo track por cada segmento de este track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSplitSegment.ui" line="70"/>
@@ -6693,7 +6693,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
-        <translation>Convierta subpuntos obtenidos por el enrutamiento a puntos de track ordinarios</translation>
+        <translation>Conviertir subpuntos obtenidos por el enrutamiento a puntos de track ordinarios</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
@@ -7817,7 +7817,7 @@ Consejos:
     <message>
         <location filename="../mouse/line/IMouseEditLine.h" line="136"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
-        <translation>&lt;br/&gt;&lt;b&gt;Mover el mapa&lt;/b&gt;&lt;br/&gt;Mantega pulsado el botón izquierdo mientras mueve el ratón, y moverá el mapa.&lt;br/&gt;&lt;br/&gt;</translation>
+        <translation>&lt;br/&gt;&lt;b&gt;Mover el mapa&lt;/b&gt;&lt;br/&gt;Mantega pulsado el botón izquierdo mientras mueve el ratón y moverá el mapa.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
 </context>
 <context>
@@ -9953,7 +9953,7 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="36"/>
         <source>Length unit</source>
-        <translation type="unfinished"></translation>
+        <translation>Unidad de longitud</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="74"/>
@@ -9963,17 +9963,17 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="80"/>
         <source>Slope unit</source>
-        <translation type="unfinished"></translation>
+        <translation>">Unidad de pendiente</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="92"/>
         <source>Degrees (°)</source>
-        <translation type="unfinished"></translation>
+        <translation>Grados (°)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="105"/>
         <source>Percent (%)</source>
-        <translation type="unfinished"></translation>
+        <translation>Porcentaje (%)</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="133"/>

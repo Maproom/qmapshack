@@ -31,6 +31,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
+#include "helpers/CSettings.h"
 #include "units/IUnit.h"
 
 #include <QtSql>
@@ -523,16 +524,28 @@ bool IGisItem::setReadOnlyMode(bool readOnly)
     // warn if item is external and read only
     if(!(flags & (eFlagCreatedInQms|eFlagTainted)))
     {
-        if(isReadOnly() && !readOnly)
+        SETTINGS;
+        bool doNotAsk = cfg.value("Dialog/Items/ReadOnly/doNotAsk", false).toBool();
+
+        if(isReadOnly() && !readOnly && !doNotAsk)
         {
             CCanvas::setOverrideCursor(Qt::ArrowCursor, "setReadOnlyMode");
-            QString str = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
-            int res = QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Read Only Mode..."), str, QMessageBox::Ok|QMessageBox::Abort, QMessageBox::Ok);
+
+            QCheckBox * checkBox = new QCheckBox(tr("Never ask again."), 0);
+            QString msg = tr("<h3>%1</h3> This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press 'Ok'.").arg(getName());
+            QMessageBox box(QMessageBox::Warning, tr("Read Only Mode..."), msg, QMessageBox::Ok|QMessageBox::Abort, CMainWindow::getBestWidgetForParent());
+            box.setDefaultButton(QMessageBox::Ok);
+            box.setCheckBox(checkBox);
+            int res = box.exec();
+
             CCanvas::restoreOverrideCursor("setReadOnlyMode");
+
             if(res != QMessageBox::Ok)
             {
                 return false;
             }
+
+            cfg.setValue("Dialog/Items/ReadOnly/doNotAsk", checkBox->isChecked());
         }
     }
 

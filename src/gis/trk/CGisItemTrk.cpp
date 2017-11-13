@@ -923,17 +923,19 @@ void CGisItemTrk::deriveSecondaryData()
                 trkpt.ascent  = lastTrkpt->ascent;
                 trkpt.descent = lastTrkpt->descent;
 
-                if(qAbs(delta) > ASCENT_THRESHOLD)
+                if(qAbs(delta) >= ASCENT_THRESHOLD)
                 {
+                    const qint32 step = (delta/ASCENT_THRESHOLD)*ASCENT_THRESHOLD;
+
                     if(delta > 0)
                     {
-                        trkpt.ascent  += delta;
+                        trkpt.ascent  += step;
                     }
                     else
                     {
-                        trkpt.descent -= delta;
+                        trkpt.descent -= step;
                     }
-                    lastEle = trkpt.ele;
+                    lastEle += step;
                 }
             }
 

@@ -143,6 +143,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
         {
             QPoint delta = pos - lastPos;
             canvas->moveMap(delta);
+            timerRouting->stop();
         }
         else
         {

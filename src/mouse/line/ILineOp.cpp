@@ -119,9 +119,8 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos    = e->pos();
-        firstPos   = lastPos;
+        startMouseMove(lastPos);
         mapMove    = true;
-        mapDidMove = false;
     }
 
     buttonPressTime.start();
@@ -133,28 +132,37 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if(mapMove && ((pos - firstPos).manhattanLength() >= 4))
+    if (!mouseDidMove && (pos - firstPos).manhattanLength() >= 4)
     {
-        QPoint delta = pos - lastPos;
-        canvas->moveMap(delta);
-        mapDidMove  = true;
+        mouseDidMove = true;
     }
 
-    updateLeadLines(idxFocus);
-    mouseMoveEventEx(e);
+    if (mouseDidMove)
+    {
+        if(mapMove)
+        {
+            QPoint delta = pos - lastPos;
+            canvas->moveMap(delta);
+        }
+        else
+        {
+            updateLeadLines(idxFocus);
+            mouseMoveEventEx(e);
+        }
+    }
 
     lastPos = pos;
 }
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(!mapDidMove && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
+    if(mapDidNotMove() && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
     {
         mouseReleaseEventEx(e);
     }
 
     mapMove     = false;
-    mapDidMove  = false;
+    mouseDidMove  = false;
 }
 
 void ILineOp::afterMouseLostEvent(QMouseEvent *e)
@@ -165,7 +173,18 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
         firstPos   = lastPos;
     }
     mapMove = e->buttons() & Qt::LeftButton;
-    mapDidMove = true;
+    startMouseMove(e->pos());
+}
+
+bool ILineOp::mapDidNotMove()
+{
+    return !(mouseDidMove && mapMove);
+}
+
+void ILineOp::startMouseMove(const QPointF& pos)
+{
+    firstPos = pos.toPoint();
+    mouseDidMove = false;
 }
 
 void ILineOp::updateLeadLines(qint32 idx)
@@ -268,7 +287,6 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             tryRouting(points[idx], points[idx + 1]);
         }
-
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting())
@@ -293,6 +311,8 @@ void ILineOp::finalizeOperation(qint32 idx)
             }
         }
     }
+
+    startMouseMove(points[idx].pixel);
 
     parentHandler->updateStatus();
 }

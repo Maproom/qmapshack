@@ -95,10 +95,8 @@ protected:
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
     void updateLeadLines(qint32 idx);
 
-    bool mapDidNotMove()
-    {
-        return !mapDidMove;
-    }
+    bool mapDidNotMove();
+    void startMouseMove(const QPointF &pos);
 
     IMouseEditLine * parentHandler;
     SGisLine& points;
@@ -136,7 +134,7 @@ private:
     QTimer * timerRouting;
 
     bool mapMove = false;
-    bool mapDidMove = false;
+    bool mouseDidMove = false;
 };
 
 #endif //ILINEOP_H

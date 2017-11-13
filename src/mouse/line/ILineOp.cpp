@@ -122,8 +122,9 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
         firstPos   = lastPos;
         mapMove    = true;
         mapDidMove = false;
-        buttonPressTime.start();
     }
+
+    buttonPressTime.start();
 
     showRoutingErrorMessage(QString());
 }

@@ -26,6 +26,7 @@
 #include <QPointer>
 
 class QMouseEvent;
+class QPinchGesture;
 class QWheelEvent;
 class QTimer;
 class CGisDraw;
@@ -48,6 +49,9 @@ public:
     {
     }
     virtual void keyPressEvent(QKeyEvent *e)
+    {
+    }
+    virtual void pinchGestureEvent(QPinchGesture *e)
     {
     }
     virtual void afterMouseLostEvent(QMouseEvent *e)

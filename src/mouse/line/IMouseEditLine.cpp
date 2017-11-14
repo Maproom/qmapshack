@@ -283,6 +283,11 @@ void IMouseEditLine::keyPressEvent(QKeyEvent * e)
     lineOp->keyPressEvent(e);
 }
 
+void IMouseEditLine::pinchGestureEvent(QPinchGesture *e)
+{
+    lineOp->pinchGestureEvent(e);
+}
+
 void IMouseEditLine::afterMouseLostEvent(QMouseEvent *e)
 {
     point = e->pos();

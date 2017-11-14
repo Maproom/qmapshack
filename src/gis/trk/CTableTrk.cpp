@@ -145,11 +145,12 @@ void CTableTrk::updateData()
             item->setText(eColSpeed, "-");
         }
 
-        item->setText(eColSlope,
-                      (trkpt.slope1 != NOFLOAT)
-                      ? QString("%1%3(%2%)").arg(trkpt.slope1, 2, 'f', 0).arg(trkpt.slope2, 2, 'f', 0).arg(QChar(0x00b0))
-                      : "-"
-                      );
+        IUnit::self().slope2string(trkpt.slope1, val, unit);
+          item->setText(eColSlope,
+                        (trkpt.slope1 != NOFLOAT)
+                          ? QString("%1%2").arg(val).arg(unit)
+                         : "-"
+                         );
 
         IUnit::self().meter2elevation(trkpt.ascent, val, unit);
         item->setText(eColAscent, tr("%1%2").arg(val).arg(unit));

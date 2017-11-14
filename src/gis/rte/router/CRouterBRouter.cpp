@@ -248,7 +248,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         QEventLoop eventLoop;
         connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
         connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
-        eventLoop.exec();
+        eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
 
         delete progress;
 

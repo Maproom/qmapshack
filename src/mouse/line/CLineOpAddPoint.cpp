@@ -42,6 +42,7 @@ void CLineOpAddPoint::append()
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
     isPoint  = true;
+    startMouseMove(points.last().pixel);
 }
 
 void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)

@@ -26,6 +26,7 @@
 #include <QPointer>
 
 class QMouseEvent;
+class QPinchGesture;
 class QWheelEvent;
 class QTimer;
 class CGisDraw;
@@ -50,6 +51,9 @@ public:
     virtual void keyPressEvent(QKeyEvent *e)
     {
     }
+    virtual void pinchGestureEvent(QPinchGesture *e)
+    {
+    }
     virtual void afterMouseLostEvent(QMouseEvent *e)
     {
     }
@@ -70,6 +74,8 @@ public:
     }
 
     virtual void setMouseTracking(bool enabled);
+
+    const static int longButtonPressTimeout = 700;
 
 protected:
     /// the functions mouse icon

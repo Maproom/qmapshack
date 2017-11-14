@@ -119,10 +119,11 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos    = e->pos();
-        firstPos   = lastPos;
         mapMove    = true;
-        mapDidMove = false;
     }
+
+    startMouseMove(e->pos());
+    buttonPressTime.start();
 
     showRoutingErrorMessage(QString());
 }
@@ -131,28 +132,49 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if(mapMove && ((pos - firstPos).manhattanLength() >= 4))
+    if (!mouseDidMove && (pos - firstPos).manhattanLength() >= 4)
     {
-        QPoint delta = pos - lastPos;
-        canvas->moveMap(delta);
-        mapDidMove  = true;
+        mouseDidMove = true;
     }
 
-    updateLeadLines(idxFocus);
-    mouseMoveEventEx(e);
+    if (mouseDidMove)
+    {
+        if(mapMove)
+        {
+            QPoint delta = pos - lastPos;
+            canvas->moveMap(delta);
+        }
+        else
+        {
+            updateLeadLines(idxFocus);
+            mouseMoveEventEx(e);
+        }
+    }
 
     lastPos = pos;
 }
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(!mapDidMove)
+    if(mapDidNotMove() && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
     {
         mouseReleaseEventEx(e);
     }
 
     mapMove     = false;
-    mapDidMove  = false;
+    mouseDidMove  = false;
+}
+
+void ILineOp::wheelEvent(QWheelEvent *e)
+{
+    startMouseMove(e->pos());
+}
+
+void ILineOp::pinchGestureEvent(QPinchGesture *e)
+{
+    mapMove = true;
+    mouseDidMove = true;
+    timerRouting->stop();
 }
 
 void ILineOp::afterMouseLostEvent(QMouseEvent *e)
@@ -160,10 +182,25 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
     if (e->type() == QEvent::MouseMove)
     {
         lastPos    = e->pos();
-        firstPos   = lastPos;
+        startMouseMove(e->pos());
+        if (e->buttons() != Qt::NoButton)
+        {
+            buttonPressTime.start();
+        }
     }
     mapMove = e->buttons() & Qt::LeftButton;
-    mapDidMove = true;
+}
+
+bool ILineOp::mapDidNotMove()
+{
+    return !(mouseDidMove && mapMove);
+}
+
+void ILineOp::startMouseMove(const QPointF& pos)
+{
+    firstPos = pos.toPoint();
+    mouseDidMove = false;
+    timerRouting->stop();
 }
 
 void ILineOp::updateLeadLines(qint32 idx)
@@ -266,7 +303,6 @@ void ILineOp::finalizeOperation(qint32 idx)
         {
             tryRouting(points[idx], points[idx + 1]);
         }
-
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
     else if(parentHandler->useVectorRouting())
@@ -291,6 +327,8 @@ void ILineOp::finalizeOperation(qint32 idx)
             }
         }
     }
+
+    startMouseMove(points[idx].pixel);
 
     parentHandler->updateStatus();
 }

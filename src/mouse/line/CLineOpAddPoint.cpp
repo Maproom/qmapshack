@@ -118,6 +118,11 @@ void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+void CLineOpAddPoint::wheelEvent(QWheelEvent *e)
+{
+    startMouseMove(e->pos());
+}
+
 bool CLineOpAddPoint::abortStep()
 {
     if(addPoint)

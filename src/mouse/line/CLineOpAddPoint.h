@@ -32,6 +32,7 @@ public:
     }
     void mouseMoveEventEx(QMouseEvent *e) override;
     void mouseReleaseEventEx(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent *e) override;
 
     void drawFg(QPainter& p) override;
 

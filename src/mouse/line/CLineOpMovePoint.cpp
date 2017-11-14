@@ -76,11 +76,6 @@ void CLineOpMovePoint::mouseReleaseEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpMovePoint::wheelEvent(QWheelEvent *e)
-{
-    startMouseMove(e->pos());
-}
-
 bool CLineOpMovePoint::abortStep()
 {
     if(movePoint)

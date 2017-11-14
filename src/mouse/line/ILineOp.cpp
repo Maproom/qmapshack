@@ -165,6 +165,18 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
     mouseDidMove  = false;
 }
 
+void ILineOp::wheelEvent(QWheelEvent *e)
+{
+    startMouseMove(e->pos());
+}
+
+void ILineOp::pinchGestureEvent(QPinchGesture *e)
+{
+    mapMove = true;
+    mouseDidMove = true;
+    timerRouting->stop();
+}
+
 void ILineOp::afterMouseLostEvent(QMouseEvent *e)
 {
     if (e->type() == QEvent::MouseMove)

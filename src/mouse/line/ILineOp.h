@@ -27,6 +27,7 @@
 #include <QRect>
 
 class QMouseEvent;
+class QPinchGesture;
 class CCanvas;
 class QPainter;
 class IMouseEditLine;
@@ -46,14 +47,13 @@ public:
     virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
     virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
 
-    virtual void wheelEvent(QWheelEvent*)
-    {
-    }
+    virtual void wheelEvent(QWheelEvent*);
 
     virtual void keyPressEvent(QKeyEvent*)
     {
     }
 
+    virtual void pinchGestureEvent(QPinchGesture *e);
     virtual void afterMouseLostEvent(QMouseEvent *e);
 
     virtual void drawFg(QPainter& p) = 0;

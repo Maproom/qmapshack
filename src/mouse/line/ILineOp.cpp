@@ -119,10 +119,10 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
     if(e->button() == Qt::LeftButton)
     {
         lastPos    = e->pos();
-        startMouseMove(lastPos);
         mapMove    = true;
     }
 
+    startMouseMove(e->pos());
     buttonPressTime.start();
 
     showRoutingErrorMessage(QString());
@@ -143,7 +143,6 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
         {
             QPoint delta = pos - lastPos;
             canvas->moveMap(delta);
-            timerRouting->stop();
         }
         else
         {
@@ -171,10 +170,13 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
     if (e->type() == QEvent::MouseMove)
     {
         lastPos    = e->pos();
-        firstPos   = lastPos;
+        startMouseMove(e->pos());
+        if (e->buttons() != Qt::NoButton)
+        {
+            buttonPressTime.start();
+        }
     }
     mapMove = e->buttons() & Qt::LeftButton;
-    startMouseMove(e->pos());
 }
 
 bool ILineOp::mapDidNotMove()
@@ -186,6 +188,7 @@ void ILineOp::startMouseMove(const QPointF& pos)
 {
     firstPos = pos.toPoint();
     mouseDidMove = false;
+    timerRouting->stop();
 }
 
 void ILineOp::updateLeadLines(qint32 idx)

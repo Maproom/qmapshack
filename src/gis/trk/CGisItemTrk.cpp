@@ -494,10 +494,14 @@ QString CGisItemTrk::getInfoRange() const
 
     tmp    = qAtan(deltaAscent / distance);
     slope1 = qAbs(tmp * 360.0 / (2 * M_PI));
-    slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
+    //slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
+    QString val2, unit2;
+    IUnit::self().slope2string(slope1, val2, unit2);
+
 
     IUnit::self().meter2elevation(deltaAscent, val, unit);
-    str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    //str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2197)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2197)).arg(val2).arg(unit2);
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaAscent/deltaTime, val, unit);
@@ -507,10 +511,12 @@ QString CGisItemTrk::getInfoRange() const
 
     tmp    = qAtan(deltaDescent/distance);
     slope1 = qAbs(tmp * 360.0/(2 * M_PI));
-    slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
+    //slope2 = qTan(slope1 * DEG_TO_RAD) * 100;
+    IUnit::self().slope2string(slope1, val2, unit2);
 
     IUnit::self().meter2elevation(deltaDescent, val, unit);
-    str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    //str += QString("%3 %1%2 (%4%5, %6%)").arg(val).arg(unit).arg(QChar(0x2198)).arg(qRound(slope1)).arg(QChar(0260)).arg(qRound(slope2));
+    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2197)).arg(val2).arg(unit2);
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaDescent/deltaTime, val, unit);
@@ -544,7 +550,9 @@ QString CGisItemTrk::getInfoTrkPt(const CTrackData::trkpt_t& pt) const
     str += tr("Ele.: %1%2").arg(val1).arg(unit1);
     if(pt.slope1 != NOFLOAT)
     {
-        str += tr(", Slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
+        IUnit::self().slope2string(pt.slope1, val1, unit1);
+        //str += tr(", Slope: %1%3 (%2%)").arg(pt.slope1, 2, 'f', 0).arg(pt.slope2, 2, 'f', 0).arg(QChar(0260));
+        str += tr(", Slope: %1%2").arg(val1).arg(unit1);
     }
     if(pt.speed != NOFLOAT)
     {

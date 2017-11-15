@@ -109,7 +109,6 @@ protected:
 
     QPoint lastPos;
     QPoint firstPos;
-    QTime  buttonPressTime;
 
     QRect rectPoint {0,0,9,9};
     const QPen penBgPoint {Qt::white, 4};
@@ -132,7 +131,9 @@ private:
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
     QTimer * timerRouting;
+    QTime  buttonPressTime;
 
+    bool ignoreClick = false;
     bool mapMove = false;
     bool mouseDidMove = false;
 };

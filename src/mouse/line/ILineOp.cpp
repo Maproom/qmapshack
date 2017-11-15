@@ -124,6 +124,7 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
 
     startMouseMove(e->pos());
     buttonPressTime.start();
+    ignoreClick = false;
 
     showRoutingErrorMessage(QString());
 }
@@ -156,7 +157,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(mapDidNotMove() && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
+    if(mapDidNotMove() && !ignoreClick && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
     {
         mouseReleaseEventEx(e);
     }
@@ -168,12 +169,16 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 void ILineOp::wheelEvent(QWheelEvent *e)
 {
     startMouseMove(e->pos());
+    if (e->buttons() != Qt::NoButton)
+    {
+        ignoreClick = true;
+    }
 }
 
 void ILineOp::pinchGestureEvent(QPinchGesture *e)
 {
     mapMove = true;
-    mouseDidMove = true;
+    ignoreClick = true;
     timerRouting->stop();
 }
 
@@ -183,10 +188,6 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
     {
         lastPos    = e->pos();
         startMouseMove(e->pos());
-        if (e->buttons() != Qt::NoButton)
-        {
-            buttonPressTime.start();
-        }
     }
     mapMove = e->buttons() & Qt::LeftButton;
 }

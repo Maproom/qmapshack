@@ -75,7 +75,7 @@ public:
 
     virtual void setMouseTracking(bool enabled);
 
-    const static int longButtonPressTimeout = 700;
+    const static int longButtonPressTimeout = 400;
 
 protected:
     /// the functions mouse icon

@@ -157,7 +157,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
-    if(mapDidNotMove() && !ignoreClick && buttonPressTime.elapsed() < IMouse::longButtonPressTimeout)
+    if(!(mouseDidMove && mapMove) && !ignoreClick && (buttonPressTime.elapsed() < IMouse::longButtonPressTimeout))
     {
         mouseReleaseEventEx(e);
     }
@@ -190,11 +190,6 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
         startMouseMove(e->pos());
     }
     mapMove = e->buttons() & Qt::LeftButton;
-}
-
-bool ILineOp::mapDidNotMove()
-{
-    return !(mouseDidMove && mapMove);
 }
 
 void ILineOp::startMouseMove(const QPointF& pos)

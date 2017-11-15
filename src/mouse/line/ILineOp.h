@@ -95,7 +95,6 @@ protected:
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
     void updateLeadLines(qint32 idx);
 
-    bool mapDidNotMove();
     void startMouseMove(const QPointF &pos);
 
     IMouseEditLine * parentHandler;

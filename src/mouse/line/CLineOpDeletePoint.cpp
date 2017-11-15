@@ -41,7 +41,7 @@ void CLineOpDeletePoint::mouseMoveEventEx(QMouseEvent * e)
 
 void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
 {
-    if(mapDidNotMove() && idxFocus != NOIDX)
+    if(idxFocus != NOIDX)
     {
         if(idxFocus > 0)
         {

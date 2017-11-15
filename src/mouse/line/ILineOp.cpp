@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -122,7 +123,10 @@ void ILineOp::mousePressEvent(QMouseEvent * e)
         mapMove    = true;
     }
 
+    // make sure that on-the-fly-routing will
+    // not trigger before the mouse has been moved a bit
     startMouseMove(e->pos());
+    // make sure a click is actually shorter than longButtonPressTimeout
     buttonPressTime.start();
     ignoreClick = false;
 
@@ -133,7 +137,11 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 {
     const QPoint& pos = e->pos();
 
-    if (!mouseDidMove && (pos - firstPos).manhattanLength() >= 4)
+    // do not take the mouse as moving unless it has been moved
+    // by significant distance away from starting point.
+    // this helps doing clicks with the finger on a touchscreen
+    // and suppresses routing triggered by very small movements.
+    if (!mouseDidMove && (pos - firstPos).manhattanLength() >= IMouse::minimalMouseMovingDistance)
     {
         mouseDidMove = true;
     }
@@ -157,6 +165,7 @@ void ILineOp::mouseMoveEvent(QMouseEvent * e)
 
 void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 {
+    // suppress map-movement, long-clicks and button-release after zooming or display of CProgressDialog
     if(!(mouseDidMove && mapMove) && !ignoreClick && (buttonPressTime.elapsed() < IMouse::longButtonPressTimeout))
     {
         mouseReleaseEventEx(e);
@@ -168,25 +177,34 @@ void ILineOp::mouseReleaseEvent(QMouseEvent *e)
 
 void ILineOp::wheelEvent(QWheelEvent *e)
 {
+    // suppress little mouse-movements that are likely to happen when scrolling the mousewheel.
     startMouseMove(e->pos());
     if (e->buttons() != Qt::NoButton)
     {
+        // no shortclick by releasing button right after scrolling the wheel
         ignoreClick = true;
     }
 }
 
 void ILineOp::pinchGestureEvent(QPinchGesture *e)
 {
+    // consider finger being down (equivalent to button pressed) during pinch
     mapMove = true;
+    // no shortclick by lifting the finger right after a pinch
     ignoreClick = true;
+    // no on-the-fly-routing during pinch
     timerRouting->stop();
 }
 
 void ILineOp::afterMouseLostEvent(QMouseEvent *e)
 {
+    // pinch or modal dialog interrupt tracking of mouse. As result the mouse
+    // is at an arbitrary position.
     if (e->type() == QEvent::MouseMove)
     {
+        // suppress jump of map when touching screen right afterwards
         lastPos    = e->pos();
+        // consider the move starting at this position
         startMouseMove(e->pos());
     }
     mapMove = e->buttons() & Qt::LeftButton;
@@ -194,8 +212,13 @@ void ILineOp::afterMouseLostEvent(QMouseEvent *e)
 
 void ILineOp::startMouseMove(const QPointF& pos)
 {
+    // the mouse is not considered as moving
+    // as long it has not been moved away from firstPos
+    // by at least a few pixels.
     firstPos = pos.toPoint();
     mouseDidMove = false;
+    // as long the mouse is not taken as moving
+    // to not trigger on-the-fly-routing
     timerRouting->stop();
 }
 
@@ -324,6 +347,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         }
     }
 
+    // need to move the mouse away by some pixels to trigger next routing event
     startMouseMove(points[idx].pixel);
 
     parentHandler->updateStatus();

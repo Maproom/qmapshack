@@ -248,6 +248,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         QEventLoop eventLoop;
         connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
         connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
+        //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
         eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
 
         delete progress;

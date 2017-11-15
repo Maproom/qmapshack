@@ -512,7 +512,7 @@ QString CGisItemTrk::getInfoRange() const
     IUnit::self().slope2string(slope1, val2, unit2);
 
     IUnit::self().meter2elevation(deltaDescent, val, unit);
-    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2197)).arg(val2).arg(unit2);
+    str += QString("%3 %1%2 (%4%5)").arg(val).arg(unit).arg(QChar(0x2198)).arg(val2).arg(unit2);
     if(timeIsValid)
     {
         IUnit::self().meter2speed(deltaDescent/deltaTime, val, unit);

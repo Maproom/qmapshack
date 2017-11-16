@@ -42,6 +42,9 @@ void CLineOpAddPoint::append()
     points.insert(idxFocus, IGisLine::point_t(points.last()));
     addPoint = true;
     isPoint  = true;
+    // make sure that when starting the line-edit on-the-fly-routing will
+    // not trigger before the mouse has been moved a bit away from last point of line
+    startMouseMove(points.last().pixel);
 }
 
 void CLineOpAddPoint::mouseReleaseEventEx(QMouseEvent * e)

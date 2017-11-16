@@ -1008,6 +1008,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             }
         }
         mouseLost = true;
+        mouse->pinchGestureEvent(pinch);
     }
     return true;
 }

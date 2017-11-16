@@ -27,6 +27,7 @@
 #include <QRect>
 
 class QMouseEvent;
+class QPinchGesture;
 class CCanvas;
 class QPainter;
 class IMouseEditLine;
@@ -46,14 +47,13 @@ public:
     virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
     virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
 
-    virtual void wheelEvent(QWheelEvent*)
-    {
-    }
+    virtual void wheelEvent(QWheelEvent*);
 
     virtual void keyPressEvent(QKeyEvent*)
     {
     }
 
+    virtual void pinchGestureEvent(QPinchGesture *e);
     virtual void afterMouseLostEvent(QMouseEvent *e);
 
     virtual void drawFg(QPainter& p) = 0;
@@ -95,10 +95,7 @@ protected:
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
     void updateLeadLines(qint32 idx);
 
-    bool mapDidNotMove()
-    {
-        return !mapDidMove;
-    }
+    void startMouseMove(const QPointF &pos);
 
     IMouseEditLine * parentHandler;
     SGisLine& points;
@@ -133,9 +130,11 @@ private:
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
     QTimer * timerRouting;
+    QTime  buttonPressTime;
 
+    bool ignoreClick = false;
     bool mapMove = false;
-    bool mapDidMove = false;
+    bool mouseDidMove = false;
 };
 
 #endif //ILINEOP_H

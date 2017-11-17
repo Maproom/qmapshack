@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "helpers/CWptIconDialog.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
@@ -58,7 +58,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
     {
         if(!itemKeys.isEmpty())
         {
-            CGisWidget::self().getItemsByKeys(itemKeys, items);
+            CGisWorkspace::self().getItemsByKeys(itemKeys, items);
         }
     }
     else
@@ -67,7 +67,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
 
         QRectF area;
         rectRad2Px(rectSelection, area);
-        CGisWidget::self().getItemsByArea(area, modeSelection, items);
+        CGisWorkspace::self().getItemsByArea(area, modeSelection, items);
 
         cntWpt = 0;
         cntTrk = 0;
@@ -152,31 +152,31 @@ void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
 
 void CMouseSelect::slotCopy() const
 {
-    CGisWidget::self().copyItemsByKey(itemKeys);
+    CGisWorkspace::self().copyItemsByKey(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotDelete() const
 {
-    CGisWidget::self().delItemsByKey(itemKeys);
+    CGisWorkspace::self().delItemsByKey(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotRoute() const
 {
-    CGisWidget::self().makeRteFromWpt(itemKeys);
+    CGisWorkspace::self().makeRteFromWpt(itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotCombineTrk() const
 {
-    CGisWidget::self().combineTrkByKey(itemKeys, itemKeys);
+    CGisWorkspace::self().combineTrkByKey(itemKeys, itemKeys);
     canvas->resetMouse();
 }
 
 void CMouseSelect::slotActivityTrk() const
 {
-    CGisWidget::self().activityTrkByKey(itemKeys);
+    CGisWorkspace::self().activityTrkByKey(itemKeys);
     canvas->resetMouse();
 }
 
@@ -189,6 +189,6 @@ void CMouseSelect::slotSymWpt() const
         return;
     }
 
-    CGisWidget::self().changeWptSymByKey(itemKeys, tb.objectName());
+    CGisWorkspace::self().changeWptSymByKey(itemKeys, tb.objectName());
     canvas->resetMouse();
 }

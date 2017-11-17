@@ -21,7 +21,7 @@
 #include "plot/IPlot.h"
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -1387,7 +1387,7 @@ void IPlot::slotAddWpt()
         return;
     }
 
-    CGisWidget::self().addWptByPos({trkpt->lon, trkpt->lat});
+    CGisWorkspace::self().addWptByPos({trkpt->lon, trkpt->lat});
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -1404,7 +1404,7 @@ void IPlot::slotCutTrk()
        plot and needs to destroy it. This would be impossible if we are still in this method
        because the API call did not return yet.
      */
-    CGisWidget::self().postEventForWks(new CEvtA2WCutTrk(trk->getKey()));
+    CGisWorkspace::self().postEventForWks(new CEvtA2WCutTrk(trk->getKey()));
 }
 
 void IPlot::setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t *ptRange2)

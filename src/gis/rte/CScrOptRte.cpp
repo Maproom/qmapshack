@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "helpers/CDraw.h"
@@ -73,55 +73,55 @@ CScrOptRte::~CScrOptRte()
 
 void CScrOptRte::slotEditDetails()
 {
-    CGisWidget::self().editItemByKey(key);
+    CGisWorkspace::self().editItemByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotDelete()
 {
-    CGisWidget::self().delItemByKey(key);
+    CGisWorkspace::self().delItemByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotCopy()
 {
-    CGisWidget::self().copyItemByKey(key);
+    CGisWorkspace::self().copyItemByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotCalc()
 {
-    CGisWidget::self().calcRteByKey(key);
+    CGisWorkspace::self().calcRteByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotReset()
 {
-    CGisWidget::self().resetRteByKey(key);
+    CGisWorkspace::self().resetRteByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotEdit()
 {
-    CGisWidget::self().editRteByKey(key);
+    CGisWorkspace::self().editRteByKey(key);
     deleteLater();
 }
 
 void CScrOptRte::slotInstruction(bool on)
 {
-    CGisWidget::self().focusRteByKey(on, key);
+    CGisWorkspace::self().focusRteByKey(on, key);
     deleteLater();
 }
 
 void CScrOptRte::slotToTrack()
 {
-    CGisWidget::self().convertRouteToTrack(key);
+    CGisWorkspace::self().convertRouteToTrack(key);
     deleteLater();
 }
 
 void CScrOptRte::draw(QPainter& p)
 {
-    IGisItem *item = CGisWidget::self().getItemByKey(key);
+    IGisItem *item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         QWidget::deleteLater();

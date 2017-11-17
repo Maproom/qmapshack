@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/macros.h"
@@ -32,7 +32,7 @@ CDBFolderLostFound::CDBFolderLostFound(QSqlDatabase& db, QTreeWidgetItem *parent
 
     setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
-    CGisWidget::self().postEventForWks(evt);
+    CGisWorkspace::self().postEventForWks(evt);
 }
 
 CDBFolderLostFound::~CDBFolderLostFound()
@@ -66,7 +66,7 @@ void CDBFolderLostFound::setupFromDB()
     }
 
     CEvtD2WUpdateLnF * evt = new CEvtD2WUpdateLnF(getId(), getDBName());
-    CGisWidget::self().postEventForWks(evt);
+    CGisWorkspace::self().postEventForWks(evt);
 }
 
 void CDBFolderLostFound::update(CEvtW2DAckInfo * info)
@@ -114,7 +114,7 @@ bool CDBFolderLostFound::delItem(CDBItem * item)
     {
         CEvtD2WHideItems * evt = new CEvtD2WHideItems(getId(), getDBName());
         evt->keys << item->getKey();
-        CGisWidget::self().postEventForWks(evt);
+        CGisWorkspace::self().postEventForWks(evt);
     }
 
     query.prepare("DELETE FROM items WHERE id=:id AND id NOT IN (SELECT child from folder2item)");

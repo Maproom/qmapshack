@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "helpers/CDraw.h"
 #include "mouse/IMouse.h"
 #include "mouse/IScrOpt.h"
@@ -37,7 +37,7 @@ IScrOpt::~IScrOpt()
     {
         CCanvas::setOverrideCursor(*mouse,"IScrOpt::~IScrOpt");
     }
-    CGisWidget::self().slotWksItemSelectionReset();
+    CGisWorkspace::self().slotWksItemSelectionReset();
 }
 
 void IScrOpt::mouseMoveEvent(QMouseEvent * e)

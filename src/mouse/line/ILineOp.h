@@ -130,7 +130,7 @@ private:
     void tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const;
 
     QTimer * timerRouting;
-    QTime  buttonPressTime;
+    QTime buttonPressTime;
 
     bool ignoreClick = false;
     bool mapMove = false;

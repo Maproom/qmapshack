@@ -22,7 +22,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisItem.h"
 #include "gis/db/macros.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -862,7 +862,7 @@ bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QSt
         return false;
     }
 
-    project = CGisWidget::self().selectProject();
+    project = CGisWorkspace::self().selectProject();
     return nullptr != project;
 }
 

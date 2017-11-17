@@ -451,13 +451,14 @@ void IUnit::slope2string(qreal slope, QString &val, QString &unit)
     switch(slopeMode)
     {
     case eSlopeDegrees:
-            val.sprintf("%.1f", slope);
-            unit = "°";
-            break;
+        val.sprintf("%.1f", slope);
+        unit = "°";
+        break;
+
     case eSlopePercent:
-            val.sprintf("%.0f", qTan(qDegreesToRadians(slope))*100.0);
-            unit = "%";
-            break;
+        val.sprintf("%.0f", qTan(qDegreesToRadians(slope))*100.0);
+        unit = "%";
+        break;
     }
 }
 
@@ -465,14 +466,15 @@ void IUnit::slope2unit(qreal slope, qreal &val, QString &unit)
 {
     switch(slopeMode)
     {
-        case eSlopeDegrees:
-            val = slope;
-            unit = "°";
-            break;
-        case eSlopePercent:
-            val = qTan(qDegreesToRadians(slope))*100.0;
-            unit = "%";
-            break;
+    case eSlopeDegrees:
+        val = slope;
+        unit = "°";
+        break;
+
+    case eSlopePercent:
+        val = qTan(qDegreesToRadians(slope))*100.0;
+        unit = "%";
+        break;
     }
 }
 

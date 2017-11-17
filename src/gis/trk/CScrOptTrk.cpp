@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CScrOptTrk.h"
@@ -92,55 +92,55 @@ CScrOptTrk::~CScrOptTrk()
 
 void CScrOptTrk::slotDelete()
 {
-    CGisWidget::self().delItemByKey(key);
+    CGisWorkspace::self().delItemByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotCopy()
 {
-    CGisWidget::self().copyItemByKey(key);
+    CGisWorkspace::self().copyItemByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotEditDetails()
 {
-    CGisWidget::self().editItemByKey(key);
+    CGisWorkspace::self().editItemByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotProfile(bool on)
 {
-    CGisWidget::self().focusTrkByKey(on, key);
+    CGisWorkspace::self().focusTrkByKey(on, key);
     deleteLater();
 }
 
 void CScrOptTrk::slotCut()
 {
-    CGisWidget::self().cutTrkByKey(key);
+    CGisWorkspace::self().cutTrkByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotEdit()
 {
-    CGisWidget::self().editTrkByKey(key);
+    CGisWorkspace::self().editTrkByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotReverse()
 {
-    CGisWidget::self().reverseTrkByKey(key);
+    CGisWorkspace::self().reverseTrkByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotCombine()
 {
-    CGisWidget::self().combineTrkByKey(key);
+    CGisWorkspace::self().combineTrkByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::slotRange()
 {
-    CGisWidget::self().rangeTrkByKey(key);
+    CGisWorkspace::self().rangeTrkByKey(key);
     deleteLater();
 }
 
@@ -148,19 +148,19 @@ void CScrOptTrk::slotActivity()
 {
     QList<IGisItem::key_t> keys;
     keys << key;
-    CGisWidget::self().activityTrkByKey(keys);
+    CGisWorkspace::self().activityTrkByKey(keys);
     deleteLater();
 }
 
 void CScrOptTrk::slotCopyWithWpt()
 {
-    CGisWidget::self().copyTrkWithWptByKey(key);
+    CGisWorkspace::self().copyTrkWithWptByKey(key);
     deleteLater();
 }
 
 void CScrOptTrk::draw(QPainter& p)
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         QWidget::deleteLater();

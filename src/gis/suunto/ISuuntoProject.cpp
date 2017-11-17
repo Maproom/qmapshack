@@ -18,8 +18,8 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisListWks.h"
-#include "gis/trk/CGisItemTrk.h"
 #include "gis/suunto/ISuuntoProject.h"
+#include "gis/trk/CGisItemTrk.h"
 
 
 ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks *parent)
@@ -30,7 +30,6 @@ ISuuntoProject::ISuuntoProject(type_e type, const QString &filename, CGisListWks
 
 void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QList<QDateTime> &lapsList, CTrackData &trk, QList<extension_t> extensions)
 {
-
     for (const extension_t& ext  : extensions)
     {
         fillMissingData(ext.tag, samplesList);
@@ -66,7 +65,6 @@ void ISuuntoProject::fillTrackPointsFromSamples(QList<sample_t> &samplesList, QL
 
         seg->pts.append(trkpt);
     }
-
 }
 
 

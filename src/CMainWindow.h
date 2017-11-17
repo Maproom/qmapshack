@@ -26,7 +26,8 @@
 class CMapList;
 class CDemList;
 class QLabel;
-class CGisWidget;
+class CGisWorkspace;
+class CGisDatabase;
 class CCanvas;
 class CToolBarConfig;
 struct SGisLine;
@@ -162,7 +163,8 @@ private:
 
     QFont mapFont;
 
-    CGisWidget * gisWidget;
+    CGisWorkspace * widgetGisWorkspace;
+    CGisDatabase * widgetGisDatabase;
 
     CToolBarConfig * toolBarConfig;
 

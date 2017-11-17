@@ -26,7 +26,7 @@
 
 static const QList<extension_t> extensions =
 {
-     {"Latitude",           RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
+    {"Latitude",           RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lat,NIL)}   // unit [°]
     ,{"Longitude",          RAD_TO_DEG,     0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
     ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
     ,{"VerticalSpeed",      1.0,            0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
@@ -68,9 +68,6 @@ void CSmlProject::loadSml(const QString& filename)
 
 void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 {
-
-
-
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
@@ -222,15 +219,15 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                     throw tr("This SML file does not contain any position data and can not be displayed by QMapShack: %1").arg(filename);
                 }
 
-               fillTrackPointsFromSamples(samplesList, lapsList, trk, extensions);
+                fillTrackPointsFromSamples(samplesList, lapsList, trk, extensions);
 
 
-               new CGisItemTrk(trk, project);
+                new CGisItemTrk(trk, project);
 
-               project->sortItems();
-               project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
-               project->setToolTip(CGisListWks::eColumnName, project->getInfo());
-               project->valid = true;
+                project->sortItems();
+                project->setupName(QFileInfo(filename).completeBaseName().replace("_", " "));
+                project->setToolTip(CGisListWks::eColumnName, project->getInfo());
+                project->valid = true;
             }
         }
     }

@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CExportDatabaseThread.h"
 #include "gis/db/IDBFolder.h"

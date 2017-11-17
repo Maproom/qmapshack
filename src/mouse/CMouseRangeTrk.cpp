@@ -18,7 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CScrOptRangeTrk.h"
@@ -42,7 +42,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
 {
     canvas->reportStatus(key.item, "");
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk)
     {
         trk->setMode(CGisItemTrk::eModeNormal, "CMouseRangeTrk");
@@ -54,7 +54,7 @@ CMouseRangeTrk::~CMouseRangeTrk()
 
 void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk)
     {
         trk->drawRange(p);
@@ -110,7 +110,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
         {
         case eStateIdle:
         {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
             if(trk != nullptr)
             {
                 anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
@@ -121,7 +121,7 @@ void CMouseRangeTrk::mouseMoveEvent(QMouseEvent * e)
 
         case eStateSelectRange:
         {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
             if(trk != nullptr)
             {
                 anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
@@ -147,7 +147,7 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
             {
             case eStateIdle:
             {
-                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
                 if(trk != nullptr && anchor != NOPOINTF)
                 {
                     anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
@@ -160,7 +160,7 @@ void CMouseRangeTrk::mouseReleaseEvent(QMouseEvent *e)
 
             case eStateSelectRange:
             {
-                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
                 if(trk != nullptr && anchor != NOPOINTF)
                 {
                     QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
@@ -222,7 +222,7 @@ void CMouseRangeTrk::afterMouseLostEvent(QMouseEvent *e)
 
 void CMouseRangeTrk::resetState()
 {
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
@@ -244,7 +244,7 @@ void CMouseRangeTrk::slotHidePoints()
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         trk->hideSelectedPoints();
@@ -258,7 +258,7 @@ void CMouseRangeTrk::slotShowPoints()
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         trk->showSelectedPoints();
@@ -272,7 +272,7 @@ void CMouseRangeTrk::slotActivity(quint32 flags)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr != trk)
     {
         trk->setActivityRange(flags);
@@ -287,7 +287,7 @@ void CMouseRangeTrk::slotCopy()
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         trk->copySelectedPoints();

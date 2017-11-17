@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBItem.h"
 #include "gis/db/IDBFolder.h"
 #include "gis/db/macros.h"
@@ -114,19 +114,19 @@ void CDBItem::toggle()
     {
         // make sure the project is shown on the workspace
         CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(folder->getId(), folder->getDBName());
-        CGisWidget::self().postEventForWks(evt1);
+        CGisWorkspace::self().postEventForWks(evt1);
 
         // tell the project to load the item from the database
         CEvtD2WShowItems * evt2 = new CEvtD2WShowItems(folder->getId(), folder->getDBName());
         evt2->items << evt_item_t(id, type);
-        CGisWidget::self().postEventForWks(evt2);
+        CGisWorkspace::self().postEventForWks(evt2);
     }
     else
     {
         // tell the project to remove the item
         CEvtD2WHideItems * evt2 = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt2->keys << key;
-        CGisWidget::self().postEventForWks(evt2);
+        CGisWorkspace::self().postEventForWks(evt2);
     }
 }
 
@@ -142,7 +142,7 @@ void CDBItem::remove()
     {
         CEvtD2WHideItems * evt = new CEvtD2WHideItems(folder->getId(), folder->getDBName());
         evt->keys << key;
-        CGisWidget::self().postEventForWks(evt);
+        CGisWorkspace::self().postEventForWks(evt);
     }
 
     QSqlQuery query(db);

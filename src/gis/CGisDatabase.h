@@ -16,36 +16,34 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/CSetupFilter.h"
-#include "gis/prj/IGisProject.h"
+#ifndef CGISDATABASE_H
+#define CGISDATABASE_H
 
-CSetupFilter::CSetupFilter(CGisWorkspace *parent)
-    : QWidget(parent)
-    , widgetGisWorkspace(parent)
+#include "ui_IGisDatabase.h"
+
+class CGisDatabase : public QWidget, private Ui::IGisDatabase
 {
-    setupUi(this);
-
-    switch (IGisProject::filterMode)
+    Q_OBJECT
+public:
+    static CGisDatabase& self()
     {
-    case IGisProject::eFilterModeName:
-        radioName->setChecked(true);
-        break;
-
-    case IGisProject::eFilterModeText:
-        radioText->setChecked(true);
-        break;
+        return *pSelf;
     }
 
-    connect(radioName, &QRadioButton::clicked, this, &CSetupFilter::slotSelect);
-    connect(radioText, &QRadioButton::clicked, this, &CSetupFilter::slotSelect);
-}
+    virtual ~CGisDatabase();
 
+    void postEventForDb(QEvent * event);
+    void sendEventForDb(QEvent * event);
 
-void CSetupFilter::slotSelect()
-{
-    IGisProject::filterMode = radioName->isChecked() ? IGisProject::eFilterModeName : IGisProject::eFilterModeText;
-    widgetGisWorkspace->applyFilter();
-    deleteLater();
-}
+private slots:
+    void slotHelpText();
+
+private:
+    friend class CMainWindow;
+    CGisDatabase(QWidget * parent);
+
+    static CGisDatabase * pSelf;
+};
+
+#endif //CGISDATABASE_H
 

@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterMapQuest.h"
 #include "helpers/CSettings.h"
@@ -187,7 +187,7 @@ void CRouterMapQuest::addMapQuestLocations(QDomDocument& xml, QDomElement& locat
 
 void CRouterMapQuest::calcRoute(const IGisItem::key_t& key)
 {
-    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr == rte)
     {
         return;
@@ -357,7 +357,7 @@ void CRouterMapQuest::slotRequestFinished(QNetworkReply* reply)
 
     time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
-    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(rte != nullptr)
     {
         rte->setResult(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));

@@ -28,8 +28,9 @@
 #include "device/CDeviceWatcherMac.h"
 #endif
 #include "device/IDevice.h"
+#include "gis/CGisDatabase.h"
 #include "gis/CGisListWks.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/CSelDevices.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
@@ -45,9 +46,9 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
 #include "gis/slf/CSlfProject.h"
-#include "gis/tcx/CTcxProject.h"
-#include "gis/suunto/CSmlProject.h"
 #include "gis/suunto/CLogProject.h"
+#include "gis/suunto/CSmlProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -161,7 +162,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
-    connect(menuItemTrk, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
+    connect(menuItemTrk, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
     menuItemWpt     = new QMenu(this);
     menuItemWpt->addAction(actionEditDetails);
@@ -173,7 +174,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
-    connect(menuItemWpt, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
+    connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
     menuItemRte     = new QMenu(this);
     menuItemRte->addAction(actionEditDetails);
@@ -187,7 +188,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionRte2Trk   = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
-    connect(menuItemRte, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
+    connect(menuItemRte, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
 
     menuItemOvl     = new QMenu(this);
@@ -197,7 +198,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);
-    connect(menuItemOvl, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
+    connect(menuItemOvl, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
 
     menuItem        = new QMenu(this);
@@ -207,7 +208,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
     menuItem->addAction(actionDelete);
-    connect(menuItem, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
+    connect(menuItem, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
     connect(actionFocusTrk, &QAction::triggered, this, &CGisListWks::slotFocusTrk);
     connect(actionFocusRte, &QAction::triggered, this, &CGisListWks::slotFocusRte);
@@ -933,7 +934,6 @@ void CGisListWks::slotLoadWorkspace()
             *project << stream;
             break;
         }
-
         }
 
         if(nullptr != project)
@@ -1215,7 +1215,7 @@ void CGisListWks::slotCloseAllProjects()
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
     closeProjects(findItems("*", Qt::MatchWildcard));
 
-    CGisWidget::self().slotWksItemSelectionReset();
+    CGisWorkspace::self().slotWksItemSelectionReset();
 
     emit sigChanged();
 }
@@ -1330,9 +1330,9 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
     if(gisItem != nullptr)
     {
-        CGisWidget::self().slotWksItemSelectionReset();
+        CGisWorkspace::self().slotWksItemSelectionReset();
         CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
-        CGisWidget::self().focusTrkByKey(true, gisItem->getKey());
+        CGisWorkspace::self().focusTrkByKey(true, gisItem->getKey());
     }
 }
 
@@ -1353,7 +1353,7 @@ void CGisListWks::slotEditItem()
     IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().editItemByKey(gisItem->getKey());
+        CGisWorkspace::self().editItemByKey(gisItem->getKey());
     }
 }
 
@@ -1372,7 +1372,7 @@ void CGisListWks::slotDeleteItem()
         }
     }
 
-    CGisWidget::self().delItemsByKey(keys);
+    CGisWorkspace::self().delItemsByKey(keys);
 }
 
 void CGisListWks::slotCopyItem()
@@ -1385,7 +1385,7 @@ void CGisListWks::slotCopyItem()
      * to get invalid, causing a segfault when used.
      *
      * As a fix the keys of the selected items are stored temporarily and
-     * later used to retrieve the item on the workspace via CGisWidget::getItemByKey()
+     * later used to retrieve the item on the workspace via CGisWorkspace::getItemByKey()
      * again. This is always safe.
      */
     QList<QTreeWidgetItem*> items = selectedItems();
@@ -1399,7 +1399,7 @@ void CGisListWks::slotCopyItem()
         }
     }
 
-    CGisWidget::self().copyItemsByKey(keys);
+    CGisWorkspace::self().copyItemsByKey(keys);
 }
 
 void CGisListWks::slotProjWpt()
@@ -1409,7 +1409,7 @@ void CGisListWks::slotProjWpt()
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().projWptByKey(gisItem->getKey());
+        CGisWorkspace::self().projWptByKey(gisItem->getKey());
     }
 }
 
@@ -1420,7 +1420,7 @@ void CGisListWks::slotBubbleWpt()
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().toggleWptBubble(gisItem->getKey());
+        CGisWorkspace::self().toggleWptBubble(gisItem->getKey());
     }
 }
 
@@ -1431,7 +1431,7 @@ void CGisListWks::slotMoveWpt()
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().moveWptByKey(gisItem->getKey());
+        CGisWorkspace::self().moveWptByKey(gisItem->getKey());
     }
 }
 
@@ -1442,7 +1442,7 @@ void CGisListWks::slotFocusTrk(bool on)
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().focusTrkByKey(on, gisItem->getKey());
+        CGisWorkspace::self().focusTrkByKey(on, gisItem->getKey());
     }
 }
 
@@ -1453,7 +1453,7 @@ void CGisListWks::slotEditTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().editTrkByKey(gisItem->getKey());
+        CGisWorkspace::self().editTrkByKey(gisItem->getKey());
     }
 }
 
@@ -1464,7 +1464,7 @@ void CGisListWks::slotReverseTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().reverseTrkByKey(gisItem->getKey());
+        CGisWorkspace::self().reverseTrkByKey(gisItem->getKey());
     }
 }
 
@@ -1487,11 +1487,11 @@ void CGisListWks::slotCombineTrk()
     {
         if(keys.size() == 1)
         {
-            CGisWidget::self().combineTrkByKey(keys.first());
+            CGisWorkspace::self().combineTrkByKey(keys.first());
         }
         else
         {
-            CGisWidget::self().combineTrkByKey(keys, keys);
+            CGisWorkspace::self().combineTrkByKey(keys, keys);
         }
     }
 }
@@ -1521,7 +1521,7 @@ void CGisListWks::slotRangeTrk()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().rangeTrkByKey(gisItem->getKey());
+        CGisWorkspace::self().rangeTrkByKey(gisItem->getKey());
     }
 }
 
@@ -1532,7 +1532,7 @@ void CGisListWks::slotCopyTrkWithWpt()
     CGisItemTrk * gisItem = dynamic_cast<CGisItemTrk*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().copyTrkWithWptByKey(gisItem->getKey());
+        CGisWorkspace::self().copyTrkWithWptByKey(gisItem->getKey());
     }
 }
 
@@ -1543,7 +1543,7 @@ void CGisListWks::slotFocusRte(bool on)
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().focusRteByKey(on, gisItem->getKey());
+        CGisWorkspace::self().focusRteByKey(on, gisItem->getKey());
     }
 }
 
@@ -1554,7 +1554,7 @@ void CGisListWks::slotCalcRte()
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().calcRteByKey(gisItem->getKey());
+        CGisWorkspace::self().calcRteByKey(gisItem->getKey());
     }
 }
 
@@ -1565,7 +1565,7 @@ void CGisListWks::slotResetRte()
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().resetRteByKey(gisItem->getKey());
+        CGisWorkspace::self().resetRteByKey(gisItem->getKey());
     }
 }
 
@@ -1577,7 +1577,7 @@ void CGisListWks::slotEditRte()
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().editRteByKey(gisItem->getKey());
+        CGisWorkspace::self().editRteByKey(gisItem->getKey());
     }
 }
 
@@ -1588,7 +1588,7 @@ void CGisListWks::slotRte2Trk()
     CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().convertRouteToTrack(gisItem->getKey());
+        CGisWorkspace::self().convertRouteToTrack(gisItem->getKey());
     }
 }
 
@@ -1599,7 +1599,7 @@ void CGisListWks::slotEditArea()
     CGisItemOvlArea * gisItem = dynamic_cast<CGisItemOvlArea*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWidget::self().editAreaByKey(gisItem->getKey());
+        CGisWorkspace::self().editAreaByKey(gisItem->getKey());
     }
 }
 
@@ -1648,7 +1648,7 @@ void CGisListWks::slotAddEmptyProject()
         }
 
         CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, idParent, db, host);
-        CGisWidget::self().postEventForDb(evt);
+        CGisDatabase::self().postEventForDb(evt);
     }
 }
 
@@ -1914,7 +1914,7 @@ bool CGisListWks::event(QEvent * e)
         case eEvtA2WCutTrk:
         {
             CEvtA2WCutTrk * evt = (CEvtA2WCutTrk*)e;
-            CGisWidget::self().cutTrkByKey(evt->key);
+            CGisWorkspace::self().cutTrkByKey(evt->key);
             e->accept();
             return true;
         }
@@ -1955,7 +1955,7 @@ void CGisListWks::slotRteFromWpt()
 
     if(!keys.isEmpty())
     {
-        CGisWidget::self().makeRteFromWpt(keys);
+        CGisWorkspace::self().makeRteFromWpt(keys);
     }
 }
 
@@ -2016,7 +2016,7 @@ void CGisListWks::slotCopyProject()
         }
     }
 
-    CGisWidget::self().copyItemsByKey(keys);
+    CGisWorkspace::self().copyItemsByKey(keys);
 }
 
 
@@ -2042,5 +2042,5 @@ void CGisListWks::slotSymWpt()
         keys << wpt->getKey();
     }
 
-    CGisWidget::self().changeWptSymByKey(keys, tb.objectName());
+    CGisWorkspace::self().changeWptSymByKey(keys, tb.objectName());
 }

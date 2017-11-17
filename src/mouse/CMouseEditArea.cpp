@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "mouse/CMouseEditArea.h"
 
@@ -58,7 +58,7 @@ void CMouseEditArea::drawLine(const QPolygonF &l, const QColor color, int width,
 
 IGisLine * CMouseEditArea::getGisLine() const
 {
-    return dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
+    return dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
 }
 
 void CMouseEditArea::slotAbort()
@@ -85,7 +85,7 @@ void CMouseEditArea::slotCopyToNew()
     IGisProject * project = nullptr;
 
     QString name;
-    CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(CGisWidget::self().getItemByKey(key));
+    CGisItemOvlArea * area = dynamic_cast<CGisItemOvlArea*>(CGisWorkspace::self().getItemByKey(key));
     if(area != nullptr)
     {
         name = area->getName();

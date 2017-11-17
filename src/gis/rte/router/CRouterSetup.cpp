@@ -17,7 +17,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterMapQuest.h"

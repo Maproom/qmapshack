@@ -66,7 +66,6 @@ public:
         {
             return data[key];
         }
-
     };
 
     static void fillMissingData(const QString &dataField, QList<sample_t> &samplesList);

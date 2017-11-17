@@ -22,7 +22,7 @@
 #include "canvas/CCanvasSetup.h"
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/Poi.h"
 #include "gis/ovl/CGisItemOvlArea.h"
@@ -654,7 +654,7 @@ void CCanvas::slotCheckTrackOnFocus()
         keyTrackOnFocus.clear();
 
         // get access to next track object
-        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+        CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == trk2)
         {
             return;
@@ -890,7 +890,7 @@ void CCanvas::showProfileAsWindow(bool yes)
         delete plotTrackProfile;
         keyTrackOnFocus.clear();
 
-        CGisWidget::self().focusTrkByKey(true, key);
+        CGisWorkspace::self().focusTrkByKey(true, key);
     }
 }
 

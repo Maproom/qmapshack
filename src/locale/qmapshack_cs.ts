@@ -1819,22 +1819,22 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="616"/>
+        <location filename="../gis/CGisWidget.cpp" line="621"/>
         <source>Copy items...</source>
         <translation>Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="635"/>
+        <location filename="../gis/CGisWidget.cpp" line="640"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="764"/>
+        <location filename="../gis/CGisWidget.cpp" line="769"/>
         <source>Cut Track...</source>
         <translation>Rozkrojit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="764"/>
+        <location filename="../gis/CGisWidget.cpp" line="769"/>
         <source>Do you want to delete the original track?</source>
         <translation>Opravdu chcete smazat původní stopu?</translation>
     </message>
@@ -2258,54 +2258,54 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="831"/>
+        <location filename="../CMainWindow.cpp" line="840"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Použít &lt;b&gt;Nabídka → Pohled → Přidat pohled na mapu&lt;/b&gt; k otevření nového pohledu. Nebo &lt;b&gt;Nabídka → Soubor → Nahrát pohled na mapu&lt;/b&gt; k obnovení uložené. Nebo klepněte &lt;a href=&apos;newview&apos;&gt;sem&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="959"/>
+        <location filename="../CMainWindow.cpp" line="968"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="971"/>
+        <location filename="../CMainWindow.cpp" line="980"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="987"/>
+        <location filename="../CMainWindow.cpp" line="996"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1128"/>
+        <location filename="../CMainWindow.cpp" line="1137"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1162"/>
+        <location filename="../CMainWindow.cpp" line="1171"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1162"/>
-        <location filename="../CMainWindow.cpp" line="1188"/>
+        <location filename="../CMainWindow.cpp" line="1171"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1188"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1499"/>
+        <location filename="../CMainWindow.cpp" line="1508"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1500"/>
+        <location filename="../CMainWindow.cpp" line="1509"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7471,6 +7471,11 @@ Název souboru: %1</translation>
         <location filename="../IMainWindow.ui" line="857"/>
         <source>F11</source>
         <translation type="unfinished">F11</translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="869"/>
+        <source>Database</source>
+        <translation type="unfinished">Databáze</translation>
     </message>
 </context>
 <context>

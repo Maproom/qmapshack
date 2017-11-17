@@ -69,8 +69,10 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWidget::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWidget::slotWksItemSelectionChanged);
 
-
-    slotHelpText();
+    // as the help text is dependent on the visibility of the treeDB widget the initial call
+    // to slotHelpText() is delayed to allow the Qt subsystem to setup the GUI and to set
+    // visibility of the tree widget according to other settings.
+    QTimer::singleShot(1, this, SLOT(slotHelpText()));
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
@@ -133,7 +135,7 @@ void CGisWidget::loadGisProject(const QString& filename)
 
 void CGisWidget::slotHelpText()
 {
-    frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
+    frameHelp->setVisible(treeDB->topLevelItemCount() == 0 && treeDB->isVisible());
 }
 
 void CGisWidget::slotSetGisLayerOpacity(int val)
@@ -238,6 +240,12 @@ void CGisWidget::slotWksItemSelectionReset()
     {
         canvas->reportStatus("WksSelection", "");
     }
+}
+
+void CGisWidget::slotShowDatabase(bool yes)
+{
+    treeDB->setVisible(yes);
+    slotHelpText();
 }
 
 IGisProject * CGisWidget::selectProject()

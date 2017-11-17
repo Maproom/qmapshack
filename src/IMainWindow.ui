@@ -55,7 +55,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -855,6 +855,18 @@
    </property>
    <property name="shortcut">
     <string>F11</string>
+   </property>
+  </action>
+  <action name="actionToggleDatabase">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/ToggleDatabase.png</normaloff>:/icons/32x32/ToggleDatabase.png</iconset>
+   </property>
+   <property name="text">
+    <string>Database</string>
    </property>
   </action>
  </widget>

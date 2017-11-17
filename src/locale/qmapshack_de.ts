@@ -1819,22 +1819,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>&lt;b&gt;Elementauswahl: &lt;/b&gt; Ein Element wurde aus der Arbeitplatzliste heraus ausgewählt. Klicken Sie auf die Karte, um wieder auf die normale Auswahl mit der Maus umzuschalten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="616"/>
+        <location filename="../gis/CGisWidget.cpp" line="621"/>
         <source>Copy items...</source>
         <translation>Elemente kopieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="635"/>
+        <location filename="../gis/CGisWidget.cpp" line="640"/>
         <source>Change waypoint symbols.</source>
         <translation>Symbol der Wegpunkte wird geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="764"/>
+        <location filename="../gis/CGisWidget.cpp" line="769"/>
         <source>Cut Track...</source>
         <translation>Track teilen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWidget.cpp" line="764"/>
+        <location filename="../gis/CGisWidget.cpp" line="769"/>
         <source>Do you want to delete the original track?</source>
         <translation>Wollen Sie den ursprünglichen Track löschen?</translation>
     </message>
@@ -2258,54 +2258,54 @@ Zeile %2, Spalte %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="831"/>
+        <location filename="../CMainWindow.cpp" line="840"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="959"/>
+        <location filename="../CMainWindow.cpp" line="968"/>
         <source>Ele.: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="971"/>
+        <location filename="../CMainWindow.cpp" line="980"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="987"/>
+        <location filename="../CMainWindow.cpp" line="996"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1128"/>
+        <location filename="../CMainWindow.cpp" line="1137"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1162"/>
+        <location filename="../CMainWindow.cpp" line="1171"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1162"/>
-        <location filename="../CMainWindow.cpp" line="1188"/>
+        <location filename="../CMainWindow.cpp" line="1171"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1188"/>
+        <location filename="../CMainWindow.cpp" line="1197"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1499"/>
+        <location filename="../CMainWindow.cpp" line="1508"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1500"/>
+        <location filename="../CMainWindow.cpp" line="1509"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -7393,6 +7393,11 @@ Dateiname: %1</translation>
         <location filename="../IMainWindow.ui" line="857"/>
         <source>F11</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="869"/>
+        <source>Database</source>
+        <translation>Datenbank</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="512"/>

@@ -3700,79 +3700,79 @@ není platným vymezením soustavy souřadnic
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="267"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="381"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="268"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="382"/>
         <source>response is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="304"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="305"/>
         <source>Bad response from server: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="352"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="353"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="246"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="355"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="356"/>
         <source>Calculate route with %1</source>
         <translation type="unfinished">Spočítat cestu s %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="415"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="416"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="405"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="406"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation type="unfinished">&lt;br/&gt;Doba výpočtu: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="509"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="510"/>
         <source>Error</source>
         <translation type="unfinished">Chyba</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="561"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="562"/>
         <source>running</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="554"/>
         <source>starting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="515"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="516"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="542"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="543"/>
         <source>Warning...</source>
         <translation type="unfinished">Varování...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="547"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="568"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="569"/>
         <source>stopped</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="579"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="580"/>
         <source>not installed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="590"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="591"/>
         <source>online</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7048,7 +7048,7 @@ Název souboru: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="223"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="279"/>
         <source>Routing</source>
         <translation>Cesta</translation>
     </message>
@@ -7753,62 +7753,62 @@ Tip:
         <translation>&lt;b&gt;Nová čára&lt;/b&gt;&lt;br/&gt;Posuňte ukazovátko myši a použijte levé tlačítko myši k upuštění bodů. Až to bude uděláno, použijte pravé tlačítko myši k zastavení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="295"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Smazat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho smazání.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="303"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Upravit rozsah bodů&lt;/b&gt;&lt;br/&gt;Klepněte levým tlačítkem myši na první bod pro započetí výběru. Klepněte levým tlačítkem myši na druhý bod pro dokončení výběru a vyberte z voleb. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přesunout bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho držení v blízkosti ukazovátka. Posuňte myší pro přesunutí bodu. Upustěte bod klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="319"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k čáře a stiskněte levé tlačítko myši pro přidání bodu. Bod přilne k ukazovátku a vy jím budete moci pohnout. Bod upustěte klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="327"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Žádné stanovení cesty&lt;/b&gt;&lt;br/&gt;Všechny body budou spojeny přímou čarou.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="333"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Automatické stanovení cesty&lt;/b&gt;&lt;br/&gt;Nynější nastavení směrování je používáno k vytváření cesty mezi body. &lt;b&gt;Poznámka:&lt;/b&gt; Vybraný směrovač musí být schopen rychle směrovat (za běhu). Směrovače nepřipojené k internetu toto obvykle dokáží, směrovače připojené k internetu to běžně neumí.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vektorové stanovení cesty&lt;/b&gt;&lt;br/&gt;Spojuje body čárou z nahrané vektorové mapy, je-li to možné.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="510"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 metrika&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="513"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="518"/>
         <source>Distance:</source>
         <translation>Vzdálenost:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="517"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="522"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="136"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="137"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>

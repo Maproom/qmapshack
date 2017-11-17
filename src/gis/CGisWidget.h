@@ -411,6 +411,7 @@ signals:
 public slots:
     void slotSaveAll();
     void slotWksItemSelectionReset();
+    void slotShowDatabase(bool yes);
 
 private slots:
     void slotHelpText();

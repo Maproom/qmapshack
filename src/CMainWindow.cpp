@@ -94,11 +94,15 @@ CMainWindow::CMainWindow()
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 
-    gisWidget = new CGisWidget(menuProject, this);
+    gisWidget = new CGisWidget(menuProject, this);    
+    connect(actionToggleDatabase, &QAction::triggered, gisWidget, &CGisWidget::slotShowDatabase);
     dockGis->setWidget(gisWidget);
+
 
     // start ---- restore window geometry -----
     cfg.beginGroup("MainWindow");
+    actionToggleDatabase->setChecked(cfg.value("showDatabase", true).toBool());
+    gisWidget->slotShowDatabase(actionToggleDatabase->isChecked());
     if ( cfg.contains("geometry"))
     {
         restoreGeometry(cfg.value("geometry").toByteArray());
@@ -282,6 +286,8 @@ CMainWindow::CMainWindow()
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
 
+    menuWindow->insertAction(actionSetupToolbar, actionToggleDatabase);
+
     menuWindow->insertSeparator(actionSetupToolbar);
 
     QAction * separator = new QAction("---------------",this);
@@ -331,6 +337,7 @@ CMainWindow::CMainWindow()
                      << actionToggleDem
                      << actionToggleGis
                      << actionToggleRte
+                     << actionToggleDatabase
                      << actionToggleDocks
                      << actionToggleToolBar
                      << actionFullScreen;
@@ -357,6 +364,7 @@ CMainWindow::CMainWindow()
                    << actionToggleDem
                    << actionToggleGis
                    << actionToggleRte
+                   << actionToggleDatabase
                    << actionToggleDocks
                    << actionFullScreen;
 
@@ -395,6 +403,7 @@ CMainWindow::~CMainWindow()
 
     SETTINGS;
     cfg.beginGroup("MainWindow");
+    cfg.setValue("showDatabase", actionToggleDatabase->isChecked());
     cfg.setValue("state", saveState());
     cfg.setValue("geometry", saveGeometry());
     cfg.setValue("units", IUnit::self().type);

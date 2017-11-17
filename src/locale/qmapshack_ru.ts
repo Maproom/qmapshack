@@ -3702,79 +3702,79 @@ is not a valid coordinate system definition:
         <translation>Профиль: %1, альтернатива: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="267"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="381"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="268"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="382"/>
         <source>response is empty</source>
         <translation>Ответ пуст</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="304"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="305"/>
         <source>Bad response from server: %1</source>
         <translation>Плохой ответ от сервера: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="352"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="353"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Запрос маршрутизации отправлен на сервер. Пожалуйста, подождите...</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="246"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="355"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="356"/>
         <source>Calculate route with %1</source>
         <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="415"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="416"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервера:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="405"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="406"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Время расчета: %1 сек.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="509"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="510"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="561"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="562"/>
         <source>running</source>
         <translation>Запущено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="554"/>
         <source>starting</source>
         <translation>Идет запуск</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="515"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="516"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case.</source>
         <translation>QMapShack взаимодействует с BRouter через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter слушает соединения на всех доступных интерфейсах. Если вы находитесь в своей частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, так как он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы не рекомендуем использовать локальную службу BRouter.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="542"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="543"/>
         <source>Warning...</source>
         <translation>Предупреждение...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="547"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Я понимаю риск. Больше не говорите.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="568"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="569"/>
         <source>stopped</source>
         <translation>Остановлено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="579"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="580"/>
         <source>not installed</source>
         <translation>Не установлено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="590"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="591"/>
         <source>online</source>
         <translation>Онлайн</translation>
     </message>
@@ -7055,7 +7055,7 @@ Filename: %1</source>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="223"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="279"/>
         <source>Routing</source>
         <translation>Маршрутизация</translation>
     </message>
@@ -7773,62 +7773,62 @@ Tip:
         <translation>&lt;b&gt;Новая линия&lt;/b&gt;&lt;br/&gt;Переместить мышку и использовать левую кнопку мышки, чтобы создать точки. Когда это сделано остановить с помощью правой кнопки мышки.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="295"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Удалить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к точке и нажать левую кнопку, чтобы удалить её.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="303"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрать интервал точек&lt;/b&gt;&lt;br/&gt;Нажать левой кнопкой на первой точке, чтобы начать выбор. Нажать левой кнопкой на второй точке, чтобы завершить выбор и выбрать параметры. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="311"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Переместить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к точке и нажать левую кнопку. Точка будет прилипать к курсору, и вы можете переместить её. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="319"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Добавить точку&lt;/b&gt;&lt;br/&gt;Переместить мышку близко к сегменту линии и нажать левую кнопку, чтобы добавить точку. Точка будет прилипать к курсору, и вы можете переместить его. Отбросьте точку с помощью левой кнопки мышки. Использовать правую кнопку мышки для отмены.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="327"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Без маршрутизации&lt;/b&gt;&lt;br/&gt;Все точки будут соединены прямыми линиями.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="333"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Автоматическая маршрутизация&lt;/b&gt;&lt;br/&gt;Настройка маршрутизатора используется для вычисления маршрута между точками.&lt;b&gt;Замечание&lt;/b&gt;Выбранный маршрутизатор должен быть способным вычислять маршруты налету. Оффлайновые маршрутизаторы обычно это могут, Интернет маршрутизаторы этого не могут.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Векторная маршрутизация&lt;/b&gt;&lt;br/&gt;Если возможно соединить точки линией с загруженной векторной карты.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="510"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1. Метрика&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="513"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="518"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
         <source>Ascent:</source>
         <translation>Подъем:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="517"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="522"/>
         <source>Descent:</source>
         <translation>Спуск:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="136"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="137"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Переместить карту&lt;/b&gt;&lt;br/&gt;Если удержите нажатой левую кнопку мышки и переместите мышку, вы будете перемещать карту.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>

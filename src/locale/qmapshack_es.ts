@@ -5411,7 +5411,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot</translation>
+        <translation>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</translation>
     </message>
 </context>
 <context>

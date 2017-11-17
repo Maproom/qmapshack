@@ -343,7 +343,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <source>There was an unexpected database error:
 
 %1</source>
-        <translation>Se produjo un error de base de datos inesperado:
+        <translation>Se produjo un error inesperado en la base de datos :
 
 %1</translation>
     </message>
@@ -783,7 +783,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/fit/decoder/CFitRecordContentState.cpp" line="110"/>
         <source>FIT decoding error: invalid offset %1 for state &apos;record content&apos;</source>
-        <translation>FIT error de decodificación: desplazamiento no válido %1 para el contenido de registro de estado&apos;</translation>
+        <translation>FIT error de decodificación: desplazamiento no válido %1 para el contenido de registro de estado</translation>
     </message>
 </context>
 <context>
@@ -924,7 +924,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
         <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
         <source>Time: %1%2</source>
-        <translation type="unfinished">Tiempo: %1%2</translation>
+        <translation>Tiempo: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
@@ -944,7 +944,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="372"/>
         <source>%1%2 %3, %4%5 %6</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%2 %3, %4%5 %6</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="378"/>
@@ -1013,7 +1013,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="365"/>
         <source>Moving: %1%2, Speed: %3%4</source>
-        <translation type="unfinished">Tiempo: %1%2, Velocidad: %3%4</translation>
+        <translation>Tiempo en movimiento: %1%2, Velocidad: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="378"/>
@@ -1053,7 +1053,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="410"/>
         <source>Invalid positions!</source>
-        <translation>¡Posiciones invalidas!</translation>
+        <translation>¡Posiciones inválidas!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="419"/>
@@ -1073,7 +1073,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="550"/>
         <source>, Slope: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>, Pendiente: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="583"/>
@@ -1118,7 +1118,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="126"/>
         <source>Invalid points....</source>
-        <translation type="unfinished">Puntos inválidos...</translation>
+        <translation>Puntos inválidos...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="127"/>
@@ -1128,12 +1128,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="334"/>
         <source>Length: %1%2</source>
-        <translation type="unfinished">Longitud: %1%2</translation>
+        <translation>Longitud: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="341"/>
         <source>, %1%2%3, %4%5%6</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1%2%3, %4%5%6</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="345"/>
@@ -1153,7 +1153,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="546"/>
         <source>Ele.: %1%2</source>
-        <translation type="unfinished">Altitud: %1%2</translation>
+        <translation>Altitud: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="555"/>
@@ -1208,7 +1208,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="653"/>
         <source>, Descent: %1%2</source>
-        <translation type="unfinished">, Descenso: %1%2</translation>
+        <translation>, Descenso: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="663"/>
@@ -1376,12 +1376,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="275"/>
         <source>Elevation: %1%2</source>
-        <translation type="unfinished">Altitud: %1%2</translation>
+        <translation>Altitud: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="286"/>
         <source>Proximity: %1%2</source>
-        <translation type="unfinished">Proximidad: %1%2</translation>
+        <translation>Proximidad: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="358"/>
@@ -1550,7 +1550,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="864"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
-        <translation>¿Desea realmente eleiminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
+        <translation>¿Desea realmente eliminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="865"/>
@@ -1604,7 +1604,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="137"/>
         <source>Update Project on Device</source>
-        <translation>Actualizar Proyecto en Dsipositivo</translation>
+        <translation>Actualizar Proyecto en Dispositivo</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="151"/>
@@ -1896,22 +1896,22 @@ línea %2, columna %3.
     <message>
         <location filename="../grid/CGrid.cpp" line="61"/>
         <source>%1 %2 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="65"/>
         <source>%1%2%5 %3%4%5 </source>
-        <translation type="unfinished"></translation>
+        <translation>%1%2%5 %3%4%5 </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="72"/>
         <source>%1m, %2m </source>
-        <translation type="unfinished"></translation>
+        <translation>%1m, %2m </translation>
     </message>
     <message>
         <location filename="../grid/CGrid.cpp" line="76"/>
         <source>N %1m, E %2m </source>
-        <translation type="unfinished"></translation>
+        <translation>N %1m, E %2m </translation>
     </message>
 </context>
 <context>
@@ -1967,7 +1967,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="140"/>
         <source>Speed</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Velocidad</translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="84"/>
@@ -1975,7 +1975,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Cadencia</translation>
+        <translation>Cadencia</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="68"/>
@@ -2005,20 +2005,20 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Profundidad</translation>
+        <translation>Profundidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Profundidad</translation>
+        <translation>Profundidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
         <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
         <source>Heart R.</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">R. Cardiaco</translation>
+        <translation>R. Cardiaco</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
@@ -2033,7 +2033,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="115"/>
         <source>Cadence</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Cadencia</translation>
+        <translation>Cadencia</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="100"/>
@@ -2042,7 +2042,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Velocidad</translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
@@ -2060,13 +2060,13 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Carrera</translation>
+        <translation>Carrera</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Carrera</translation>
+        <translation>Carrera</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="119"/>
@@ -2103,19 +2103,19 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="127"/>
         <source>Elevation</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Altitud</translation>
+        <translation>Altitud</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <comment>extShortName</comment>
-        <translation type="unfinished">Energía</translation>
+        <translation>Energía</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Energía</translation>
+        <translation>Energía</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="136"/>
@@ -2163,7 +2163,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="168"/>
         <source>Elevation*</source>
         <comment>extLongName</comment>
-        <translation type="unfinished">Altitud*</translation>
+        <translation>Altitud*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="173"/>
@@ -2212,7 +2212,7 @@ línea %2, columna %3.
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
-        <translation type="unfinished">Fallo al leer: %1
+        <translation>Fallo al leer: %1
 línea %2, columna %3.
  %4</translation>
     </message>
@@ -2260,18 +2260,18 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="831"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation>Usar &lt;b&gt;Menu-&gt;ver-&gt;Añadir vista de mapa&lt;/b&gt; para abrir nueva vista, o &lt;b&gt;Menu-&gt;archivo-&gt;cargar vista de mapa&lt;/b&gt; para restaurar una vista guardada. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</translation>
+        <translation>Usar &lt;b&gt;Menu-&gt;ver-&gt;Añadir vista de mapa&lt;/b&gt; para abrir nueva vista, o &lt;b&gt;Menu-&gt;archivo-&gt;cargar vista de mapa&lt;/b&gt; para restaurar una vista guardada. O click &lt;a href=&apos;nueva vista&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="959"/>
         <source>Ele.: %1%2</source>
-        <translation type="unfinished">Altitud: %1%2</translation>
+        <translation>Altitud: %1%2</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="971"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
-        <translation type="unfinished">Pendiente: %1%2</translation>
+        <translation>Pendiente: %1%2</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="987"/>
@@ -2302,12 +2302,12 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1499"/>
         <source>Fatal...</source>
-        <translation type="unfinished"></translation>
+        <translation>Fatal...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1500"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
-        <translation>QMapShack detectó una biblioteca Proj4 mal instalada. Las tablas de traducción para las proyecciones EPSG usualmente almacenadas en / usr / share / proj faltan. Póngase en contacto con el responsable del paquete de su distribución para solucionarlo.</translation>
+        <translation>QMapShack detectó una biblioteca Proj4 mal instalada. Las tablas de traducción para las proyecciones EPSG usualmente almacenadas en /usr/share/proj faltan. Póngase en contacto con el responsable del paquete de su distribución para solucionarlo.</translation>
     </message>
 </context>
 <context>
@@ -2618,17 +2618,17 @@ Si no es divertido, ¿por qué no proporciona mapas? Bueno para alojar mapas lis
     <message>
         <location filename="../map/CMapIMG.cpp" line="289"/>
         <source>Minor land contour</source>
-        <translation>Curva altimétrica menor</translation>
+        <translation>Curva de nivel menor</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="290"/>
         <source>Intermediate land contour</source>
-        <translation>Curva altimétrica intermedia</translation>
+        <translation>Curva de nivel intermedia</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Major land contour</source>
-        <translation>Curva altimétrica principal</translation>
+        <translation>Curva de nivel principal</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="292"/>
@@ -2754,7 +2754,7 @@ Si no es divertido, ¿por qué no proporciona mapas? Bueno para alojar mapas lis
     <message>
         <location filename="../map/CMapIMG.cpp" line="381"/>
         <source>Golf course</source>
-        <translation>Recorrido de golf</translation>
+        <translation>Campo de golf</translation>
     </message>
     <message>
         <location filename="../map/CMapIMG.cpp" line="382"/>
@@ -3231,7 +3231,7 @@ Estructura desconocida.</translation>
         <location filename="../mouse/CMouseEditTrk.cpp" line="28"/>
         <location filename="../mouse/CMouseEditTrk.cpp" line="35"/>
         <source>Track</source>
-        <translation></translation>
+        <translation>Track</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseEditTrk.cpp" line="38"/>
@@ -4769,7 +4769,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
         <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
         <source>%1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1%2</translation>
     </message>
 </context>
 <context>
@@ -5401,17 +5401,17 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="36"/>
         <source>N48° 53.660 E013° 31.113</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53.660 E013° 31.113</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="29"/>
         <source>N48.8943° E013.51855°</source>
-        <translation type="unfinished"></translation>
+        <translation>N48.8943° E013.51855°</translation>
     </message>
     <message>
         <location filename="../units/ICoordFormatSetup.ui" line="22"/>
         <source>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>N48° 53&apos; 39.6&quot; E13° 31&apos; 6.78&quot</translation>
     </message>
 </context>
 <context>
@@ -5419,7 +5419,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="14"/>
         <source>Create Route from Waypoints</source>
-        <translation>Crear rutas con los waypoints</translation>
+        <translation>Crear una ruta con los waypoints</translation>
     </message>
     <message>
         <location filename="../gis/rte/ICreateRouteFromWpt.ui" line="30"/>
@@ -6507,7 +6507,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="51"/>
         <source>dd.MM.yy HH:mm:ss</source>
-        <translation type="unfinished"></translation>
+        <translation>dd.MM.yy HH:mm:ss</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterNewDate.ui" line="61"/>
@@ -6774,12 +6774,12 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por otra persona</t
     <message>
         <location filename="../gis/IGisItem.cpp" line="534"/>
         <source>Never ask again.</source>
-        <translation type="unfinished"></translation>
+        <translation>No volver a preguntar</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="535"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
-        <translation>&lt;h3&gt;%1&lt;/h3&gt; Posiblemente este elemento es de sólo lectura porque no lo creó QMapShack. Por lo general no es conveniente cambiar los datos importados. Pero si piensa que esta bien, presione &apos;Ok&apos;.</translation>
+        <translation>&lt;h3&gt;%1&lt;/h3&gt; Posiblemente este elemento es de sólo lectura porque no lo creó QMapShack. Por lo general no es conveniente cambiar los datos importados, pero si piensa que esta bien, presione &apos;Ok&apos;.</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="536"/>
@@ -9140,7 +9140,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation type="unfinished">Seleccione la carpeta principal...</translation>
+        <translation>Seleccione la carpeta principal...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
@@ -9333,7 +9333,7 @@ Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia 
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="206"/>
         <source>00000</source>
-        <translation type="unfinished">00000</translation>
+        <translation>00000</translation>
     </message>
     <message>
         <location filename="../gis/db/ISetupDatabase.ui" line="215"/>
@@ -9487,7 +9487,7 @@ o
     <message>
         <location filename="../gis/db/ISetupWorkspace.ui" line="63"/>
         <source>00000</source>
-        <translation type="unfinished">00000</translation>
+        <translation>00000</translation>
     </message>
 </context>
 <context>
@@ -9583,47 +9583,47 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="120"/>
         <source>A:L</source>
-        <translation type="unfinished"></translation>
+        <translation>A:L</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="133"/>
         <source>A:C</source>
-        <translation type="unfinished"></translation>
+        <translation>A:C</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="146"/>
         <source>A:R</source>
-        <translation type="unfinished"></translation>
+        <translation>A:R</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="159"/>
         <source>A:B</source>
-        <translation type="unfinished"></translation>
+        <translation>A:B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="192"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="205"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="218"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="238"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>C</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="285"/>
         <source>Standard</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="290"/>
@@ -9805,17 +9805,17 @@ o
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="55"/>
         <source>B</source>
-        <translation type="unfinished"></translation>
+        <translation>B</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="68"/>
         <source>I</source>
-        <translation type="unfinished"></translation>
+        <translation>I</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="81"/>
         <source>U</source>
-        <translation type="unfinished"></translation>
+        <translation>U</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="101"/>
@@ -9873,7 +9873,7 @@ o
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="123"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
-        <translation type="unfinished">&lt;b&gt;Nota:&lt;/b&gt; Para algunos elementos de la interfaz de usuario, cambiar las unidades no tendrá efecto hasta que se reinicie QMapShack.</translation>
+        <translation>&lt;b&gt;Nota:&lt;/b&gt; Para algunos elementos de la interfaz de usuario, cambiar las unidades no tendrá efecto hasta que se reinicie QMapShack.</translation>
     </message>
 </context>
 <context>
@@ -9968,7 +9968,7 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="80"/>
         <source>Slope unit</source>
-        <translation>&quot;&gt;Unidad de pendiente</translation>
+        <translation>">Unidad de pendiente</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="92"/>

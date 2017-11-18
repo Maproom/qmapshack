@@ -7122,11 +7122,6 @@ Bestandsnaam: %1</translation>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Project</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Extra</translation>
@@ -7142,6 +7137,7 @@ Bestandsnaam: %1</translation>
         <translation>Dig. Elev. Model (DEM)</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

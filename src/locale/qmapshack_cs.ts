@@ -7122,11 +7122,6 @@ Název souboru: %1</translation>
         <translation>Nápověda</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Projekt</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Nástroj</translation>
@@ -7218,6 +7213,7 @@ Název souboru: %1</translation>
         <translation>Nápověda</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

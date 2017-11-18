@@ -118,7 +118,7 @@
    </widget>
    <widget class="QMenu" name="menuProject">
     <property name="title">
-     <string>Project</string>
+     <string>Workspace</string>
     </property>
     <addaction name="actionAddEmptyProject"/>
     <addaction name="actionSearchGoogle"/>

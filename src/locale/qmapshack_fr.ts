@@ -7117,11 +7117,6 @@ Nom de fichier: %1</translation>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Projet</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Outils</translation>
@@ -7137,6 +7132,7 @@ Nom de fichier: %1</translation>
         <translation>Modèle numérique de terrain (DEM)</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

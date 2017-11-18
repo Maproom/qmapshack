@@ -1821,7 +1821,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="602"/>
         <source>Copy items...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Копировать элементы ...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="621"/>
@@ -7129,11 +7129,6 @@ Filename: %1</source>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Проект</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Инструмент</translation>
@@ -7149,6 +7144,7 @@ Filename: %1</source>
         <translation>Цифровая модель рельефа (ЦМР)</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

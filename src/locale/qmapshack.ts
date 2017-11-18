@@ -7086,11 +7086,6 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation type="unfinished"></translation>
@@ -7106,6 +7101,7 @@ Filename: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

@@ -7122,11 +7122,6 @@ Nombre de archivo %1</translation>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Proyecto</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Herramientas</translation>
@@ -7406,6 +7401,7 @@ Nombre de archivo %1</translation>
         <translation type="unfinished">Base de datos</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -7124,11 +7124,6 @@ Dateiname: %1</translation>
         <translation>?</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="121"/>
-        <source>Project</source>
-        <translation>Projekt</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="132"/>
         <source>Tool</source>
         <translation>Werkzeug</translation>
@@ -7407,6 +7402,7 @@ Dateiname: %1</translation>
         <translation>Datenbank</translation>
     </message>
     <message>
+        <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
         <translation>Arbeitsplatz</translation>

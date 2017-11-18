@@ -41,7 +41,7 @@ CGisDatabase::CGisDatabase(QWidget *parent)
 CGisDatabase::~CGisDatabase()
 {
     SETTINGS;
-    cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
+    cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
 }
 
 void CGisDatabase::slotHelpText()

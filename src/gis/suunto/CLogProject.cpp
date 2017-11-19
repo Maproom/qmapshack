@@ -106,10 +106,13 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
     }
 
     CTrackData trk;
+    QDateTime time0;
 
     if(xmlOpenambitlog.namedItem("Time").isElement())
     {
-        trk.name = xmlOpenambitlog.namedItem("Time").toElement().text();                            // date of beginning of recording is chosen as track name
+        QString dateTimeStr = xmlOpenambitlog.namedItem("Time").toElement().text();
+        trk.name = dateTimeStr; // date of beginning of recording is chosen as track name
+        IUnit::parseTimestamp(dateTimeStr, time0);
     }
 
     if(xmlOpenambitlog.namedItem("DeviceInfo").isElement())
@@ -156,14 +159,6 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
 
             if (xmlSampleList.count() > 0)
             {
-                QDateTime time0;
-
-                const QDomNode& xmlSample = xmlSampleList.item(0);
-                if(xmlSample.namedItem("UTC").isElement())
-                {
-                    IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);
-                }
-
                 QList<sample_t> samplesList;
                 QList<QDateTime> lapsList;
 

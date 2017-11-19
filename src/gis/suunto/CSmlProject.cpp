@@ -109,6 +109,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     if(xmlSml.namedItem("DeviceLog").isElement())
     {
         CTrackData trk;
+        QDateTime time0;
 
         const QDomNode& xmlDeviceLog = xmlSml.namedItem("DeviceLog");
         if(xmlDeviceLog.namedItem("Header").isElement())
@@ -116,8 +117,11 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             const QDomNode& xmlHeader = xmlDeviceLog.namedItem("Header");
             if(xmlHeader.namedItem("DateTime").isElement())
             {
-                trk.name = xmlHeader.namedItem("DateTime").toElement().text();
-            }                                                                  // date of beginning of recording is chosen as track name
+                QString dateTimeStr = xmlHeader.namedItem("DateTime").toElement().text();
+                trk.name = dateTimeStr; // date of beginning of recording is chosen as track name
+                IUnit::parseTimestamp(dateTimeStr, time0);
+            }
+
             if(xmlHeader.namedItem("Activity").isElement())
             {
                 trk.desc = xmlHeader.namedItem("Activity").toElement().text();
@@ -167,14 +171,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
             if (xmlSampleList.count() > 0)
             {
-                QDateTime time0;
-
-                const QDomNode& xmlSample = xmlSampleList.item(0);
-                if(xmlSample.namedItem("UTC").isElement())
-                {
-                    IUnit::parseTimestamp(xmlSample.namedItem("UTC").toElement().text(), time0);
-                }
-
                 QList<sample_t> samplesList;
                 QList<QDateTime> lapsList;
 

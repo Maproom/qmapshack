@@ -20,7 +20,7 @@
 #include "canvas/CCanvas.h"
 #include "config.h"
 #include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderLostFound.h"
 #include "gis/db/CDBFolderMysql.h"
 #include "gis/db/CDBFolderSqlite.h"
@@ -308,7 +308,7 @@ bool CGisListDB::event(QEvent * e)
 
                 evt->idChild = idChild;
                 CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(idChild, evt->db);
-                CGisWidget::self().postEventForWks(evt1);
+                CGisWorkspace::self().postEventForWks(evt1);
             }
 
             db->announceChange();
@@ -948,7 +948,7 @@ void CGisListDB::slotUpdateDatabase()
             folder->update();
 
             CEvtD2WReload * evt = new CEvtD2WReload(folder->getDBName());
-            CGisWidget::self().postEventForWks(evt);
+            CGisWorkspace::self().postEventForWks(evt);
         }
     }
 }
@@ -1020,7 +1020,7 @@ void CGisListDB::slotReadyRead()
             folder->update();
 
             CEvtD2WReload * evt = new CEvtD2WReload(folder->getDBName());
-            CGisWidget::self().postEventForWks(evt);
+            CGisWorkspace::self().postEventForWks(evt);
         }
     }
 }

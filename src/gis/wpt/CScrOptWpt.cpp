@@ -19,7 +19,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
@@ -70,43 +70,43 @@ CScrOptWpt::~CScrOptWpt()
 
 void CScrOptWpt::slotDelete()
 {
-    CGisWidget::self().delItemByKey(key);
+    CGisWorkspace::self().delItemByKey(key);
     deleteLater();
 }
 
 void CScrOptWpt::slotEdit()
 {
-    CGisWidget::self().editItemByKey(key);
+    CGisWorkspace::self().editItemByKey(key);
     deleteLater();
 }
 
 void CScrOptWpt::slotCopy()
 {
-    CGisWidget::self().copyItemByKey(key);
+    CGisWorkspace::self().copyItemByKey(key);
     deleteLater();
 }
 
 void CScrOptWpt::slotMove()
 {
-    CGisWidget::self().moveWptByKey(key);
+    CGisWorkspace::self().moveWptByKey(key);
     deleteLater();
 }
 
 void CScrOptWpt::slotProj()
 {
-    CGisWidget::self().projWptByKey(key);
+    CGisWorkspace::self().projWptByKey(key);
     deleteLater();
 }
 
 void CScrOptWpt::slotBubble()
 {
-    CGisWidget::self().toggleWptBubble(key);
+    CGisWorkspace::self().toggleWptBubble(key);
     deleteLater();
 }
 
 void CScrOptWpt::draw(QPainter& p)
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         deleteLater();

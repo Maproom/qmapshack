@@ -193,7 +193,8 @@ set( SRCS
         gis/CGisDraw.cpp
         gis/IGisItem.cpp
         gis/IGisLine.cpp
-        gis/CGisWidget.cpp
+        gis/CGisWorkspace.cpp
+        gis/CGisDatabase.cpp
         gis/CGisListDB.cpp
         gis/CGisListWks.cpp
         gis/CSelDevices.cpp
@@ -492,7 +493,8 @@ set( HDRS
         gis/IGisLine.h
         gis/prj/IGisProject.h
         gis/prj/CDetailsPrj.h
-        gis/CGisWidget.h
+        gis/CGisWorkspace.h
+        gis/CGisDatabase.h
         gis/CGisListDB.h
         gis/CGisListWks.h
         gis/CSelDevices.h
@@ -702,7 +704,8 @@ set( UIS
     mouse/IScrOptPrint.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
-    gis/IGisWidget.ui
+    gis/IGisWorkspace.ui
+    gis/IGisDatabase.ui
     gis/ISelDevices.ui
     gis/ISetupFilter.ui
     gis/prj/IDetailsPrj.ui

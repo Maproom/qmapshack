@@ -23,7 +23,8 @@
 #include "config.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisDatabase.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
@@ -94,15 +95,14 @@ CMainWindow::CMainWindow()
     CKnownExtension::init(IUnit::self());
     CActivityTrk::init();
 
-    gisWidget = new CGisWidget(menuProject, this);    
-    connect(actionToggleDatabase, &QAction::triggered, gisWidget, &CGisWidget::slotShowDatabase);
-    dockGis->setWidget(gisWidget);
+    widgetGisWorkspace = new CGisWorkspace(menuProject, this);
+    dockWorkspace->setWidget(widgetGisWorkspace);
 
+    widgetGisDatabase = new CGisDatabase(this);
+    dockDatabase->setWidget(widgetGisDatabase);
 
     // start ---- restore window geometry -----
     cfg.beginGroup("MainWindow");
-    actionToggleDatabase->setChecked(cfg.value("showDatabase", true).toBool());
-    gisWidget->slotShowDatabase(actionToggleDatabase->isChecked());
     if ( cfg.contains("geometry"))
     {
         restoreGeometry(cfg.value("geometry").toByteArray());
@@ -164,7 +164,7 @@ CMainWindow::CMainWindow()
     connect(actionSetupCoordFormat,      &QAction::triggered,            this,      &CMainWindow::slotSetupCoordFormat);
     connect(actionSetupToolbar,          &QAction::triggered,            this,      &CMainWindow::slotSetupToolbar);
     connect(actionImportDatabase,        &QAction::triggered,            this,      &CMainWindow::slotImportDatabase);
-    connect(actionSaveGISData,           &QAction::triggered,            gisWidget, &CGisWidget::slotSaveAll);
+    connect(actionSaveGISData,           &QAction::triggered,            widgetGisWorkspace, &CGisWorkspace::slotSaveAll);
     connect(actionLoadGISData,           &QAction::triggered,            this,      &CMainWindow::slotLoadGISData);
     connect(actionVrtBuilder,            &QAction::triggered,            this,      &CMainWindow::slotBuildVrt);
     connect(actionStoreView,             &QAction::triggered,            this,      &CMainWindow::slotStoreView);
@@ -209,7 +209,7 @@ CMainWindow::CMainWindow()
     testForNoView();
 
     CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity",1.0).toFloat();
-    gisWidget->setOpacity(CCanvas::gisLayerOpacity);
+    widgetGisWorkspace->setOpacity(CCanvas::gisLayerOpacity);
 
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", false).toBool());
@@ -240,7 +240,8 @@ CMainWindow::CMainWindow()
 
     docks << dockMaps
           << dockDem
-          << dockGis
+          << dockWorkspace
+          << dockDatabase
           << dockRte;
 
     if (cfg.contains("MainWindow/activedocks"))
@@ -276,17 +277,21 @@ CMainWindow::CMainWindow()
     actionToggleDem->setIcon(QIcon(":/icons/32x32/ToggleDem.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleDem);
 
-    QAction * actionToggleGis = dockGis->toggleViewAction();
-    actionToggleGis->setObjectName("actionToggleGis");
-    actionToggleGis->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
-    menuWindow->insertAction(actionSetupToolbar,actionToggleGis);
+    QAction * actionToggleWorkspace = dockWorkspace->toggleViewAction();
+    actionToggleWorkspace->setObjectName("actionToggleWorkspace");
+    actionToggleWorkspace->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleWorkspace);
+
+    QAction * actionToggleDatabase = dockDatabase->toggleViewAction();
+    actionToggleDatabase->setObjectName("actionToggleDatabase");
+    actionToggleDatabase->setIcon(QIcon(":/icons/32x32/ToggleDatabase.png"));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleDatabase);
 
     QAction * actionToggleRte = dockRte->toggleViewAction();
     actionToggleRte->setObjectName("actionToggleRte");
     actionToggleRte->setIcon(QIcon(":/icons/32x32/ToggleRouter.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleRte);
 
-    menuWindow->insertAction(actionSetupToolbar, actionToggleDatabase);
 
     menuWindow->insertSeparator(actionSetupToolbar);
 
@@ -335,9 +340,9 @@ CMainWindow::CMainWindow()
                      << actionSetupToolbar
                      << actionToggleMaps
                      << actionToggleDem
-                     << actionToggleGis
-                     << actionToggleRte
+                     << actionToggleWorkspace
                      << actionToggleDatabase
+                     << actionToggleRte
                      << actionToggleDocks
                      << actionToggleToolBar
                      << actionFullScreen;
@@ -362,9 +367,9 @@ CMainWindow::CMainWindow()
                    << actionSetupToolbar
                    << actionToggleMaps
                    << actionToggleDem
-                   << actionToggleGis
-                   << actionToggleRte
+                   << actionToggleWorkspace
                    << actionToggleDatabase
+                   << actionToggleRte
                    << actionToggleDocks
                    << actionFullScreen;
 
@@ -393,7 +398,8 @@ void CMainWindow::prepareMenuForMac()
     toolBar->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
-    dockGis->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockWorkspace->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockDatabase->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }
 
@@ -403,7 +409,6 @@ CMainWindow::~CMainWindow()
 
     SETTINGS;
     cfg.beginGroup("MainWindow");
-    cfg.setValue("showDatabase", actionToggleDatabase->isChecked());
     cfg.setValue("state", saveState());
     cfg.setValue("geometry", saveGeometry());
     cfg.setValue("units", IUnit::self().type);
@@ -474,7 +479,7 @@ CMainWindow::~CMainWindow()
     /*
         Delete all canvas objects now to make sure they are destroyed before all
         other objects. This allows children of the canvas to access central objects
-        like CGisWidget safely upon their destruction. (e.g. CMouseRangeTrk to reset
+        like CGisWorkspace safely upon their destruction. (e.g. CMouseRangeTrk to reset
         it's track's draw mode by key)
      */
     qDeleteAll(allViews);
@@ -1153,7 +1158,7 @@ void CMainWindow::loadGISData(const QStringList& filenames)
 {
     for(const QString &filename : filenames)
     {
-        gisWidget->loadGisProject(filename);
+        widgetGisWorkspace->loadGisProject(filename);
     }
 }
 
@@ -1278,11 +1283,16 @@ void CMainWindow::slotToggleDocks()
 {
     if (docksVisible())
     {
+        dockStates = saveState();
         hideDocks();
     }
     else
-    {
+    {       
         showDocks();
+        if (!dockStates.isEmpty())
+        {
+            restoreState(dockStates);
+        }
     }
 }
 

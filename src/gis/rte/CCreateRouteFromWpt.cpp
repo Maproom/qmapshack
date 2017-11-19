@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
@@ -36,7 +36,7 @@ CCreateRouteFromWpt::CCreateRouteFromWpt(const QList<IGisItem::key_t> &keys, QWi
 
     for(const IGisItem::key_t& key : keys)
     {
-        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == wpt)
         {
             continue;

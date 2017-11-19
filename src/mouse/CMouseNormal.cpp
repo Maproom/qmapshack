@@ -18,7 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
@@ -57,7 +57,7 @@ void CMouseNormal::stopTracking() const
     const IGisItem::key_t& key = CGisItemTrk::getKeyUserFocus();
     if(!key.item.isEmpty())
     {
-        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(trk != nullptr)
         {
             trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
@@ -112,7 +112,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
         switch(stateItemSel)
         {
         case eStateIdle:
-            CGisWidget::self().mouseMove(point);
+            CGisWorkspace::self().mouseMove(point);
 
         //break; skip break intentionally
         case eStateHooverSingle:
@@ -121,7 +121,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
             if(!keyTrk.item.isEmpty())
             {
-                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(keyTrk));
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrk));
                 if(trk != nullptr)
                 {
                     trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
@@ -131,7 +131,7 @@ void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
             const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
             if(!keyRte.item.isEmpty())
             {
-                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(keyRte));
+                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(keyRte));
                 if(rte != nullptr)
                 {
                     rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
@@ -162,7 +162,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
             {
             case eStateIdle:
             {
-                CGisWidget::self().slotWksItemSelectionReset();
+                CGisWorkspace::self().slotWksItemSelectionReset();
                 break;
             }
 
@@ -170,7 +170,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
             {
                 stateItemSel = eStateIdle;
 
-                IGisItem * item = CGisWidget::self().getItemByKey(screenUnclutter->getItemKey());
+                IGisItem * item = CGisWorkspace::self().getItemByKey(screenUnclutter->getItemKey());
                 if(nullptr != item)
                 {
                     scrollToItem(item);
@@ -196,7 +196,7 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                 const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
                 if(scrOpt != nullptr)
                 {
-                    IGisItem * item = CGisWidget::self().getItemByKey(scrOpt->key);
+                    IGisItem * item = CGisWorkspace::self().getItemByKey(scrOpt->key);
                     screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
                     scrOpt = nullptr;
                     if(item)
@@ -210,14 +210,14 @@ void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
                     }
                 }
                 resetState();
-                CGisWidget::self().slotWksItemSelectionReset();
+                CGisWorkspace::self().slotWksItemSelectionReset();
                 break;
             }
 
             case eStateShowItemOptions:
             {
                 resetState();
-                CGisWidget::self().slotWksItemSelectionReset();
+                CGisWorkspace::self().slotWksItemSelectionReset();
                 break;
             }
             }
@@ -234,10 +234,10 @@ void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
     if(stateItemSel == eStateIdle)
     {
         const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
-        CGisWidget::self().focusTrkByKey(false, keyTrk);
+        CGisWorkspace::self().focusTrkByKey(false, keyTrk);
 
         const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
-        CGisWidget::self().focusRteByKey(false, keyRte);
+        CGisWorkspace::self().focusRteByKey(false, keyRte);
     }
 }
 
@@ -341,7 +341,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         screenUnclutter->clear();
 
         QList<IGisItem*> items;
-        CGisWidget::self().getItemsByPos(point, items);
+        CGisWorkspace::self().getItemsByPos(point, items);
 
         if(items.empty() || items.size() > 8)
         {
@@ -392,7 +392,7 @@ void CMouseNormal::slotAddPoi() const
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
-    CGisWidget::self().addWptByPos(pt, curPOI.name, curPOI.desc);
+    CGisWorkspace::self().addWptByPos(pt, curPOI.name, curPOI.desc);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
@@ -402,7 +402,7 @@ void CMouseNormal::slotAddWpt() const
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
-    CGisWidget::self().addWptByPos(pt);
+    CGisWorkspace::self().addWptByPos(pt);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 

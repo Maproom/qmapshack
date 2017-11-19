@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "helpers/CProgressDialog.h"
-#include "units/IUnit.h"
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CProgressDialog.h"
+#include "units/IUnit.h"
 
 #include <QtWidgets>
 

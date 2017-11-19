@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "plot/CPlotTrack.h"
@@ -29,7 +29,7 @@ CCombineTrk::CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisIte
 {
     setupUi(this);
 
-    CGisWidget& gis = CGisWidget::self();
+    CGisWorkspace& gis = CGisWorkspace::self();
     for(const IGisItem::key_t& key : keys)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));
@@ -66,7 +66,7 @@ CCombineTrk::~CCombineTrk()
 
 void CCombineTrk::accept()
 {
-    CGisWidget& gis = CGisWidget::self();
+    CGisWorkspace& gis = CGisWorkspace::self();
 
     // get name of first track in list
     IGisItem::key_t key;
@@ -199,7 +199,7 @@ void CCombineTrk::slotDown()
 
 void CCombineTrk::updatePreview()
 {
-    CGisWidget& gis = CGisWidget::self();
+    CGisWorkspace& gis = CGisWorkspace::self();
 
     QPolygonF line;
     for(int i = 0; i < listSelected->count(); i++)

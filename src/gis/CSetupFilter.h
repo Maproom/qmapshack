@@ -22,20 +22,20 @@
 #include "ui_ISetupFilter.h"
 #include <QWidget>
 
-class CGisWidget;
+class CGisWorkspace;
 
 class CSetupFilter : public QWidget, private Ui::ISetupFilter
 {
     Q_OBJECT
 public:
-    CSetupFilter(CGisWidget *parent);
+    CSetupFilter(CGisWorkspace *parent);
     virtual ~CSetupFilter() = default;
 
 private slots:
     void slotSelect();
 
 private:
-    CGisWidget * gisWidget;
+    CGisWorkspace * widgetGisWorkspace;
 };
 
 #endif //CSETUPFILTER_H

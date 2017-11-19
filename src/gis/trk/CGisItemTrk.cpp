@@ -19,7 +19,7 @@
 #include "CMainWindow.h"
 #include "GeoMath.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
@@ -1398,7 +1398,7 @@ void CGisItemTrk::combine(const QList<IGisItem::key_t>& keys)
     trk1->history.events.clear();
 
     // copy the segments of all tracks to new track
-    CGisWidget& gis = CGisWidget::self();
+    CGisWorkspace& gis = CGisWorkspace::self();
     for(const IGisItem::key_t &key : keys)
     {
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(gis.getItemByKey(key));

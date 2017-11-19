@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "mouse/CMouseWptBubble.h"
 
@@ -44,7 +44,7 @@ void CMouseWptBubble::mousePressEvent(QMouseEvent * e)
 
     QPointF pos = e->pos();
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->mousePress(pos);
@@ -61,7 +61,7 @@ void CMouseWptBubble::mouseMoveEvent(QMouseEvent * e)
 
     QPointF pos = e->pos();
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->mouseMove(pos);
@@ -78,7 +78,7 @@ void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
 
     QPointF pos = e->pos();
 
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
         wpt->mouseRelease(pos);

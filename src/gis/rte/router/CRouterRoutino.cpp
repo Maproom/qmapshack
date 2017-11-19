@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/routino/CRouterRoutinoPathSetup.h"
@@ -278,7 +278,7 @@ void CRouterRoutino::calcRoute(const IGisItem::key_t& key)
         QTime time;
         time.start();
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(nullptr == rte)
         {
             throw QString();

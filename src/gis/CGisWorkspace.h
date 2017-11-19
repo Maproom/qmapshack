@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#ifndef CGISWIDGET_H
-#define CGISWIDGET_H
+#ifndef CGISWORKSPACE_H
+#define CGISWORKSPACE_H
 
-#include "ui_IGisWidget.h"
+#include "ui_IGisWorkspace.h"
 #include <QEvent>
 #include <QSqlDatabase>
 #include <QWidget>
@@ -219,15 +219,15 @@ public:
 };
 
 
-class CGisWidget : public QWidget, private Ui::IGisWidget
+class CGisWorkspace : public QWidget, private Ui::IGisWorkspace
 {
     Q_OBJECT
 public:
-    static CGisWidget& self()
+    static CGisWorkspace& self()
     {
         return *pSelf;
     }
-    virtual ~CGisWidget();
+    virtual ~CGisWorkspace();
 
     void loadGisProject(const QString& filename);
     /**
@@ -399,7 +399,6 @@ public:
     IGisProject * selectProject();
 
     void postEventForWks(QEvent * event);
-    void postEventForDb(QEvent * event);
 
     void setOpacity(qreal val);
 
@@ -411,10 +410,8 @@ signals:
 public slots:
     void slotSaveAll();
     void slotWksItemSelectionReset();
-    void slotShowDatabase(bool yes);
 
 private slots:
-    void slotHelpText();
     void slotSetGisLayerOpacity(int val);
     void slotFilter(const QString& str);
     void slotSetupFilter();
@@ -425,9 +422,9 @@ private slots:
 
 private:
     friend class CMainWindow;
-    CGisWidget(QMenu * menuProject, QWidget * parent);
+    CGisWorkspace(QMenu * menuProject, QWidget * parent);
 
-    static CGisWidget * pSelf;
+    static CGisWorkspace * pSelf;
 
     /**
         The item key of last item pressed in the workspace list.
@@ -437,5 +434,5 @@ private:
     IGisItem::key_t keyWksSelection;
 };
 
-#endif //CGISWIDGET_H
+#endif //CGISWORKSPACE_H
 

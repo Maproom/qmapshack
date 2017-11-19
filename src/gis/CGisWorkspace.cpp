@@ -18,8 +18,9 @@
 
 #include "CMainWindow.h"
 #include "device/IDevice.h"
+#include "gis/CGisDatabase.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/CSetupFilter.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
@@ -43,9 +44,9 @@
 #include <QtWidgets>
 #include <QtXml>
 
-CGisWidget * CGisWidget::pSelf = nullptr;
+CGisWorkspace * CGisWorkspace::pSelf = nullptr;
 
-CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
+CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     : QWidget(parent)
 {
     pSelf = this;
@@ -58,58 +59,44 @@ CGisWidget::CGisWidget(QMenu *menuProject, QWidget *parent)
 
     SETTINGS;
     treeWks->header()->restoreState(cfg.value("Workspace/treeWks/state", treeWks->header()->saveState()).toByteArray());
-    treeDB->header()->restoreState(cfg.value("Workspace/treeDB/state", treeDB->header()->saveState()).toByteArray());
     IGisProject::filterMode = IGisProject::filter_mode_e(cfg.value("Workspace/projects/filterMode", IGisProject::filterMode).toInt());
 
-    connect(treeWks, &CGisListWks::sigChanged, this, &CGisWidget::sigChanged);
-    connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisWidget::slotHelpText);
-    connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWidget::slotSetGisLayerOpacity);
-    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWidget::slotFilter);
-    connect(actionSetupFilter, &QAction::triggered, this, &CGisWidget::slotSetupFilter);
-    connect(treeWks, &CGisListWks::itemPressed, this, &CGisWidget::slotWksItemPressed);
-    connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWidget::slotWksItemSelectionChanged);
-
-    // as the help text is dependent on the visibility of the treeDB widget the initial call
-    // to slotHelpText() is delayed to allow the Qt subsystem to setup the GUI and to set
-    // visibility of the tree widget according to other settings.
-    QTimer::singleShot(1, this, SLOT(slotHelpText()));
+    connect(treeWks, &CGisListWks::sigChanged, this, &CGisWorkspace::sigChanged);
+    connect(sliderOpacity, &QSlider::valueChanged, this, &CGisWorkspace::slotSetGisLayerOpacity);
+    connect(lineFilter, &QLineEdit::textChanged, this, &CGisWorkspace::slotFilter);
+    connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupFilter);
+    connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
+    connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
     QTimer::singleShot(500, treeWks, SLOT(slotLoadWorkspace()));
 }
 
-CGisWidget::~CGisWidget()
+CGisWorkspace::~CGisWorkspace()
 {
     SETTINGS;
     cfg.setValue("Workspace/treeWks/state", treeWks->header()->saveState());
-    cfg.setValue("Workspace/treeDB/state", treeDB->header()->saveState());
     cfg.setValue("Workspace/projects/filterMode", IGisProject::filterMode);
     /*
         Explicitly delete workspace here, as database projects use
-        CGisWidget upon destruction to signal the database their destruction.
+        CGisWorkspace upon destruction to signal the database their destruction.
 
      */
     delete treeWks;
 }
 
-void CGisWidget::setOpacity(qreal val)
+void CGisWorkspace::setOpacity(qreal val)
 {
     sliderOpacity->setValue(val * 100);
 }
 
-void CGisWidget::postEventForWks(QEvent * event)
+void CGisWorkspace::postEventForWks(QEvent * event)
 {
     QCoreApplication::postEvent(treeWks, event);
 }
 
-void CGisWidget::postEventForDb(QEvent * event)
-{
-    QCoreApplication::postEvent(treeDB, event);
-}
-
-
-void CGisWidget::loadGisProject(const QString& filename)
+void CGisWorkspace::loadGisProject(const QString& filename)
 {
     // add project to workspace
     CCanvas::setOverrideCursor(Qt::WaitCursor, "loadGisProject");
@@ -133,12 +120,8 @@ void CGisWidget::loadGisProject(const QString& filename)
     emit sigChanged();
 }
 
-void CGisWidget::slotHelpText()
-{
-    frameHelp->setVisible(treeDB->topLevelItemCount() == 0 && treeDB->isVisible());
-}
 
-void CGisWidget::slotSetGisLayerOpacity(int val)
+void CGisWorkspace::slotSetGisLayerOpacity(int val)
 {
     CCanvas::gisLayerOpacity = qreal(val)/100;
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -148,12 +131,12 @@ void CGisWidget::slotSetGisLayerOpacity(int val)
     }
 }
 
-void CGisWidget::applyFilter()
+void CGisWorkspace::applyFilter()
 {
     slotFilter(lineFilter->text());
 }
 
-void CGisWidget::slotFilter(const QString& str)
+void CGisWorkspace::slotFilter(const QString& str)
 {
     actionClearFilter->setIcon(str.isEmpty() ? QIcon("://icons/32x32/Filter.png") : QIcon("://icons/32x32/Cancel.png"));
 
@@ -178,7 +161,7 @@ void CGisWidget::slotFilter(const QString& str)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisWidget::slotSetupFilter()
+void CGisWorkspace::slotSetupFilter()
 {
     CSetupFilter * setupFilter = new CSetupFilter(this);
     setupFilter->adjustSize();
@@ -186,7 +169,7 @@ void CGisWidget::slotSetupFilter()
     setupFilter->show();
 }
 
-void CGisWidget::slotSaveAll()
+void CGisWorkspace::slotSaveAll()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "slotSaveAll");
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -211,12 +194,12 @@ void CGisWidget::slotSaveAll()
 }
 
 
-void CGisWidget::slotWksItemSelectionChanged()
+void CGisWorkspace::slotWksItemSelectionChanged()
 {
     slotWksItemPressed(treeWks->currentItem());
 }
 
-void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
+void CGisWorkspace::slotWksItemPressed(QTreeWidgetItem * i)
 {
     IGisItem * item     = dynamic_cast<IGisItem*>(i);
     if(item != nullptr)
@@ -233,7 +216,7 @@ void CGisWidget::slotWksItemPressed(QTreeWidgetItem * i)
     }
 }
 
-void CGisWidget::slotWksItemSelectionReset()
+void CGisWorkspace::slotWksItemSelectionReset()
 {
     keyWksSelection.clear();
     for(CCanvas * canvas : CMainWindow::self().getCanvas())
@@ -242,13 +225,8 @@ void CGisWidget::slotWksItemSelectionReset()
     }
 }
 
-void CGisWidget::slotShowDatabase(bool yes)
-{
-    treeDB->setVisible(yes);
-    slotHelpText();
-}
 
-IGisProject * CGisWidget::selectProject()
+IGisProject * CGisWorkspace::selectProject()
 {
     QString key, name;
     IGisProject::type_e type = IGisProject::eTypeQms;
@@ -297,7 +275,7 @@ IGisProject * CGisWidget::selectProject()
 
         QMutexLocker lock(&IGisItem::mutexItems);
         CEvtW2DCreate evt(name, type, idParent, db, host);
-        QApplication::sendEvent(treeDB, &evt);
+        CGisDatabase::self().sendEventForDb(&evt);
 
         if(evt.idChild)
         {
@@ -331,7 +309,7 @@ IGisProject * CGisWidget::selectProject()
     return project;
 }
 
-void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
+void CGisWorkspace::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -356,7 +334,7 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
         If there is an item selected by the workspace limit
         the list of items to this item. But only if the item
         is part of the items close to position.
-    */
+     */
     if(!keyWksSelection.item.isEmpty() && !items.isEmpty())
     {
         IGisItem * item = getItemByKey(keyWksSelection);
@@ -372,7 +350,7 @@ void CGisWidget::getItemsByPos(const QPointF& pos, QList<IGisItem*>& items)
     }
 }
 
-void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
+void CGisWorkspace::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -393,7 +371,7 @@ void CGisWidget::getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisIt
     }
 }
 
-void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
+void CGisWorkspace::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -414,7 +392,7 @@ void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, 
     }
 }
 
-void CGisWidget::mouseMove(const QPointF& pos)
+void CGisWorkspace::mouseMove(const QPointF& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -429,7 +407,7 @@ void CGisWidget::mouseMove(const QPointF& pos)
     }
 }
 
-IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
+IGisItem * CGisWorkspace::getItemByKey(const IGisItem::key_t& key)
 {
     IGisItem *item = nullptr;
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -472,7 +450,7 @@ IGisItem * CGisWidget::getItemByKey(const IGisItem::key_t& key)
     return item;
 }
 
-void CGisWidget::delItemByKey(const IGisItem::key_t& key)
+void CGisWorkspace::delItemByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     QMessageBox::StandardButtons last = QMessageBox::NoButton;
@@ -504,7 +482,7 @@ void CGisWidget::delItemByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
+void CGisWorkspace::delItemsByKey(const QList<IGisItem::key_t> &keys)
 {
     QMessageBox::StandardButtons last   = QMessageBox::NoButton;
 
@@ -561,7 +539,7 @@ void CGisWidget::delItemsByKey(const QList<IGisItem::key_t> &keys)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisWidget::editItemByKey(const IGisItem::key_t& key)
+void CGisWorkspace::editItemByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -584,7 +562,7 @@ void CGisWidget::editItemByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
+void CGisWorkspace::copyItemByKey(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -607,7 +585,7 @@ void CGisWidget::copyItemByKey(const IGisItem::key_t &key)
     emit sigChanged();
 }
 
-void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
+void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -636,7 +614,7 @@ void CGisWidget::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
-void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
+void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -656,7 +634,7 @@ void CGisWidget::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QSt
 }
 
 
-void CGisWidget::projWptByKey(const IGisItem::key_t& key)
+void CGisWorkspace::projWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -671,7 +649,7 @@ void CGisWidget::projWptByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
+void CGisWorkspace::moveWptByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
@@ -690,7 +668,7 @@ void CGisWidget::moveWptByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
+void CGisWorkspace::toggleWptBubble(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
@@ -700,7 +678,7 @@ void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
     }
 }
 
-void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
+void CGisWorkspace::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
     QString name = label;
     QString icon;
@@ -709,7 +687,7 @@ void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& de
         return;
     }
 
-    IGisProject * project = CGisWidget::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject();
     if(nullptr == project)
     {
         return;
@@ -724,7 +702,7 @@ void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& de
     wpt->edit();
 }
 
-void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
+void CGisWorkspace::focusTrkByKey(bool yes, const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -737,7 +715,7 @@ void CGisWidget::focusTrkByKey(bool yes, const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::focusRteByKey(bool yes, const IGisItem::key_t &key)
+void CGisWorkspace::focusRteByKey(bool yes, const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -750,7 +728,7 @@ void CGisWidget::focusRteByKey(bool yes, const IGisItem::key_t &key)
     emit sigChanged();
 }
 
-void CGisWidget::convertRouteToTrack(const IGisItem::key_t &key)
+void CGisWorkspace::convertRouteToTrack(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
@@ -762,7 +740,7 @@ void CGisWidget::convertRouteToTrack(const IGisItem::key_t &key)
     emit sigChanged();
 }
 
-void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
+void CGisWorkspace::cutTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -779,7 +757,7 @@ void CGisWidget::cutTrkByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
+void CGisWorkspace::reverseTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -792,7 +770,7 @@ void CGisWidget::reverseTrkByKey(const IGisItem::key_t& key)
     emit sigChanged();
 }
 
-void CGisWidget::combineTrkByKey(const IGisItem::key_t& keyTrk)
+void CGisWorkspace::combineTrkByKey(const IGisItem::key_t& keyTrk)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -828,7 +806,7 @@ void CGisWidget::combineTrkByKey(const IGisItem::key_t& keyTrk)
     combineTrkByKey(keys, {keyTrk});
 }
 
-void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel)
+void CGisWorkspace::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t>& keysPreSel)
 {
     if(keys.isEmpty())
     {
@@ -843,7 +821,7 @@ void CGisWidget::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList
     emit sigChanged();
 }
 
-void CGisWidget::activityTrkByKey(const QList<IGisItem::key_t>& keys)
+void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
 {
     if(keys.isEmpty())
     {
@@ -865,7 +843,7 @@ void CGisWidget::activityTrkByKey(const QList<IGisItem::key_t>& keys)
     }
 }
 
-void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
+void CGisWorkspace::editTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -885,7 +863,7 @@ void CGisWidget::editTrkByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
+void CGisWorkspace::rangeTrkByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -900,11 +878,11 @@ void CGisWidget::rangeTrkByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::copyTrkWithWptByKey(const IGisItem::key_t &key)
+void CGisWorkspace::copyTrkWithWptByKey(const IGisItem::key_t &key)
 {
     QList<IGisItem::key_t> keys;
 
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr != trk)
     {
         keys << key;
@@ -924,7 +902,7 @@ void CGisWidget::copyTrkWithWptByKey(const IGisItem::key_t &key)
     }
 }
 
-void CGisWidget::editRteByKey(const IGisItem::key_t& key)
+void CGisWorkspace::editRteByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -944,7 +922,7 @@ void CGisWidget::editRteByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
+void CGisWorkspace::calcRteByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -955,7 +933,7 @@ void CGisWidget::calcRteByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
+void CGisWorkspace::resetRteByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -967,7 +945,7 @@ void CGisWidget::resetRteByKey(const IGisItem::key_t& key)
 }
 
 
-void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
+void CGisWorkspace::editAreaByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -987,7 +965,7 @@ void CGisWidget::editAreaByKey(const IGisItem::key_t& key)
     }
 }
 
-void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
+void CGisWorkspace::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -996,7 +974,7 @@ void CGisWidget::makeRteFromWpt(const QList<IGisItem::key_t>& keys)
 }
 
 
-void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
+void CGisWorkspace::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
 {
     QFontMetricsF fm(CMainWindow::self().getMapFont());
     QList<QRectF> blockedAreas;
@@ -1051,7 +1029,7 @@ void CGisWidget::draw(QPainter& p, const QPolygonF& viewport, CGisDraw * gis)
     }
 }
 
-void CGisWidget::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
+void CGisWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
 {
     /*
         Mutex locking will make map moving very slow if there are many GIS items

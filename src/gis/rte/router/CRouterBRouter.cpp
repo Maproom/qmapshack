@@ -19,7 +19,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/brouter/CRouterBRouterInfo.h"
@@ -319,7 +319,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     {
         startBRouter();
     }
-    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+    CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr == rte)
     {
         mutex.unlock();
@@ -400,7 +400,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         qint64 time = reply->property("time").toLongLong();
         time = QDateTime::currentDateTimeUtc().toMSecsSinceEpoch() - time;
 
-        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWidget::self().getItemByKey(key));
+        CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
         if(rte != nullptr)
         {
             rte->setResultFromBRouter(xml, reply->property("options").toString() + tr("<br/>Calculation time: %1s").arg(time/1000.0, 0,'f',2));

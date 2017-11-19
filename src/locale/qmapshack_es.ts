@@ -7404,7 +7404,7 @@ Nombre de archivo %1</translation>
         <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Espacio de trabajo</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="485"/>

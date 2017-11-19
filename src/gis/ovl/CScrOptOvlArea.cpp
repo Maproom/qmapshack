@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "helpers/CDraw.h"
@@ -58,31 +58,31 @@ CScrOptOvlArea::~CScrOptOvlArea()
 
 void CScrOptOvlArea::slotEditDetails()
 {
-    CGisWidget::self().editItemByKey(key);
+    CGisWorkspace::self().editItemByKey(key);
     deleteLater();
 }
 
 void CScrOptOvlArea::slotCopy()
 {
-    CGisWidget::self().copyItemByKey(key);
+    CGisWorkspace::self().copyItemByKey(key);
     deleteLater();
 }
 
 void CScrOptOvlArea::slotDelete()
 {
-    CGisWidget::self().delItemByKey(key);
+    CGisWorkspace::self().delItemByKey(key);
     deleteLater();
 }
 
 void CScrOptOvlArea::slotEdit()
 {
-    CGisWidget::self().editAreaByKey(key);
+    CGisWorkspace::self().editAreaByKey(key);
     deleteLater();
 }
 
 void CScrOptOvlArea::draw(QPainter& p)
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         QWidget::deleteLater();

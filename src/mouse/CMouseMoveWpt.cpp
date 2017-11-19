@@ -19,7 +19,7 @@
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/WptIcons.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
@@ -133,7 +133,7 @@ void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
 
         QPointF pos = e->pos();
         gis->convertPx2Rad(pos);
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWidget::self().getItemByKey(key));
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
         if(wpt != nullptr)
         {
             wpt->setPosition(pos * RAD_TO_DEG);

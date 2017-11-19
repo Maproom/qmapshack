@@ -26,7 +26,7 @@
 
 static const QList<extension_t> extensions =
 {
-     {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat,NIL)}  // unit [°]
+    {"Latitude",           0.0000001,      0.0,        ASSIGN_VALUE(lat,NIL)}   // unit [°]
     ,{"Longitude",          0.0000001,      0.0,        ASSIGN_VALUE(lon,NIL)}  // unit [°]
     ,{"Altitude",           1.0,            0.0,        ASSIGN_VALUE(ele,NIL)}  // unit [m]
     ,{"VerticalSpeed",      0.01,           0.0,        ASSIGN_VALUE(extensions["gpxdata:verticalSpeed"],NIL)}                  // unit [m/h]
@@ -40,7 +40,7 @@ static const QList<extension_t> extensions =
 
 
 CLogProject::CLogProject(const QString &filename, CGisListWks * parent)
-  : ISuuntoProject(eTypeLog, filename, parent)
+    : ISuuntoProject(eTypeLog, filename, parent)
 {
     setIcon(CGisListWks::eColumnIcon, QIcon("://icons/32x32/LogProject.png"));
     blockUpdateItems(true);
@@ -67,9 +67,6 @@ void CLogProject::loadLog(const QString& filename)
 
 void CLogProject::loadLog(const QString &filename, CLogProject *project)
 {
-
-
-
     QFile file(filename);
 
     // if the file does not exist, the filename is assumed to be a name for a new project
@@ -193,13 +190,13 @@ void CLogProject::loadLog(const QString &filename, CLogProject *project)
                                         lapsList << sample.time; // stores timestamps of the samples where the the "Lap" button has been pressed
                                     }
                                 }
-                             }
-                         }
+                            }
+                        }
                         else if (xmlSample.namedItem("Type").toElement().text() == "gps-small"
-                              || xmlSample.namedItem("Type").toElement().text() == "gps-base"
-                              || xmlSample.namedItem("Type").toElement().text() == "gps-tiny"
-                              || xmlSample.namedItem("Type").toElement().text() == "position"
-                              || xmlSample.namedItem("Type").toElement().text() == "periodic")
+                                 || xmlSample.namedItem("Type").toElement().text() == "gps-base"
+                                 || xmlSample.namedItem("Type").toElement().text() == "gps-tiny"
+                                 || xmlSample.namedItem("Type").toElement().text() == "position"
+                                 || xmlSample.namedItem("Type").toElement().text() == "periodic")
                         {
                             for (const extension_t& ext  : extensions)
                             {

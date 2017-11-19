@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "helpers/CDraw.h"
 
 #include <QtWidgets>
@@ -25,7 +25,7 @@
 CGisDraw::CGisDraw(CCanvas *parent)
     : IDrawContext("gis", CCanvas::eRedrawGis, parent)
 {
-    connect(&CGisWidget::self(), &CGisWidget::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
+    connect(&CGisWorkspace::self(), &CGisWorkspace::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
 }
 
 CGisDraw::~CGisDraw()
@@ -34,7 +34,7 @@ CGisDraw::~CGisDraw()
 
 void CGisDraw::draw(QPainter& p, const QRect& rect)
 {
-    CGisWidget::self().fastDraw(p, rect, this);
+    CGisWorkspace::self().fastDraw(p, rect, this);
 }
 
 void CGisDraw::drawt(buffer_t& currentBuffer)
@@ -63,5 +63,5 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
     USE_ANTI_ALIASING(p,true);
     p.translate(-pp);
 
-    CGisWidget::self().draw(p,viewport, this);
+    CGisWorkspace::self().draw(p,viewport, this);
 }

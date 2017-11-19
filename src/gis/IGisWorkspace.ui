@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IGisWidget</class>
- <widget class="QWidget" name="IGisWidget">
+ <class>IGisWorkspace</class>
+ <widget class="QWidget" name="IGisWorkspace">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -117,82 +117,6 @@
        </property>
       </column>
      </widget>
-     <widget class="CGisListDB" name="treeDB">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ExtendedSelection</enum>
-      </property>
-      <property name="selectionBehavior">
-       <enum>QAbstractItemView::SelectRows</enum>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="indentation">
-       <number>10</number>
-      </property>
-      <column>
-       <property name="text">
-        <string notr="true">-</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Age</string>
-       </property>
-      </column>
-     </widget>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="frameHelp">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLabel" name="labelHelp1">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="labelHelp2">
-        <property name="text">
-         <string>To add a database do a right click on the database list above.</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
-        </property>
-        <property name="wordWrap">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
    </item>
   </layout>
@@ -220,11 +144,6 @@
    <class>CGisListWks</class>
    <extends>QTreeWidget</extends>
    <header>gis/CGisListWks.h</header>
-  </customwidget>
-  <customwidget>
-   <class>CGisListDB</class>
-   <extends>QTreeWidget</extends>
-   <header>gis/CGisListDB.h</header>
   </customwidget>
  </customwidgets>
  <resources>

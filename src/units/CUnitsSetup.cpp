@@ -45,6 +45,7 @@ CUnitsSetup::CUnitsSetup(QWidget *parent)
     case IUnit::eSlopeDegrees:
         radioDegrees->setChecked(true);
         break;
+
     case IUnit::eSlopePercent:
         radioPercent->setChecked(true);
         break;

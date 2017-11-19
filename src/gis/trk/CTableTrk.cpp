@@ -147,9 +147,9 @@ void CTableTrk::updateData()
 
         IUnit::self().slope2string(trkpt.slope1, val, unit);
         item->setText(eColSlope, (trkpt.slope1 != NOFLOAT)
-                                 ? QString("%1%2").arg(val).arg(unit)
-                                 : "-"
-                     );
+                      ? QString("%1%2").arg(val).arg(unit)
+                      : "-"
+                      );
 
         IUnit::self().meter2elevation(trkpt.ascent, val, unit);
         item->setText(eColAscent, tr("%1%2").arg(val).arg(unit));

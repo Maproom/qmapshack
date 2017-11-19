@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "mouse/CMouseEditTrk.h"
 
@@ -62,7 +62,7 @@ void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
 
 IGisLine * CMouseEditTrk::getGisLine() const
 {
-    return dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
 }
 
 void CMouseEditTrk::slotAbort()
@@ -101,7 +101,7 @@ void CMouseEditTrk::slotCopyToNew()
     IGisProject * project = nullptr;
 
     QString name;
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWidget::self().getItemByKey(key));
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk != nullptr)
     {
         name = trk->getName();

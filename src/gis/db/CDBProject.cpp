@@ -17,7 +17,8 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisDatabase.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectSaveAction.h"
 #include "gis/db/IDB.h"
@@ -161,7 +162,7 @@ CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisLi
 CDBProject::~CDBProject()
 {
     CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
-    CGisWidget::self().postEventForDb(info);
+    CGisDatabase::self().postEventForDb(info);
 }
 
 void CDBProject::restoreDBLink()
@@ -250,7 +251,7 @@ void CDBProject::postStatus(bool updateLostFound)
         setText(CGisListWks::eColumnDecoration,autoSave ? "A" : "");
     }
 
-    CGisWidget::self().postEventForDb(info);
+    CGisDatabase::self().postEventForDb(info);
 }
 
 
@@ -816,7 +817,7 @@ void CDBProject::update()
             evt->items << evt_item_t(query.value(0).toULongLong(), query.value(1).toUInt());
         }
 
-        CGisWidget::self().postEventForWks(evt);
+        CGisWorkspace::self().postEventForWks(evt);
     }
     else
     {

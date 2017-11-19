@@ -16,36 +16,45 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWorkspace.h"
-#include "gis/CSetupFilter.h"
-#include "gis/prj/IGisProject.h"
+#include "gis/CGisDatabase.h"
+#include "helpers/CSettings.h"
 
-CSetupFilter::CSetupFilter(CGisWorkspace *parent)
+#include <QtWidgets>
+
+CGisDatabase * CGisDatabase::pSelf = nullptr;
+
+CGisDatabase::CGisDatabase(QWidget *parent)
     : QWidget(parent)
-    , widgetGisWorkspace(parent)
 {
+    pSelf = this;
     setupUi(this);
 
-    switch (IGisProject::filterMode)
-    {
-    case IGisProject::eFilterModeName:
-        radioName->setChecked(true);
-        break;
+    SETTINGS;
+    treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
-    case IGisProject::eFilterModeText:
-        radioText->setChecked(true);
-        break;
-    }
+    connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisDatabase::slotHelpText);
 
-    connect(radioName, &QRadioButton::clicked, this, &CSetupFilter::slotSelect);
-    connect(radioText, &QRadioButton::clicked, this, &CSetupFilter::slotSelect);
+
+    QTimer::singleShot(1, this, SLOT(slotHelpText()));
 }
 
-
-void CSetupFilter::slotSelect()
+CGisDatabase::~CGisDatabase()
 {
-    IGisProject::filterMode = radioName->isChecked() ? IGisProject::eFilterModeName : IGisProject::eFilterModeText;
-    widgetGisWorkspace->applyFilter();
-    deleteLater();
+    SETTINGS;
+    cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
 }
 
+void CGisDatabase::slotHelpText()
+{
+    frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
+}
+
+void CGisDatabase::postEventForDb(QEvent * event)
+{
+    QCoreApplication::postEvent(treeDB, event);
+}
+
+void CGisDatabase::sendEventForDb(QEvent * event)
+{
+    QCoreApplication::sendEvent(treeDB, event);
+}

@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"

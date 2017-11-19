@@ -18,7 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/CGisListDB.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisItem.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
@@ -189,7 +189,7 @@ void IDBFolder::expanding()
     addChildren(QSet<QString>(), false);
 
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
-    CGisWidget::self().postEventForWks(evt);
+    CGisWorkspace::self().postEventForWks(evt);
 }
 
 void IDBFolder::update(CEvtW2DAckInfo * info)
@@ -354,7 +354,7 @@ void IDBFolder::toggle()
     if(checkState(CGisListDB::eColumnCheckbox) == Qt::Checked)
     {
         CEvtD2WShowFolder * evt1 = new CEvtD2WShowFolder(getId(), getDBName());
-        CGisWidget::self().postEventForWks(evt1);
+        CGisWorkspace::self().postEventForWks(evt1);
 
         QSqlQuery query(db);
         if(getId() == 0)
@@ -375,12 +375,12 @@ void IDBFolder::toggle()
         {
             evt2->items << evt_item_t(query.value(0).toULongLong(), query.value(1).toUInt());
         }
-        CGisWidget::self().postEventForWks(evt2);
+        CGisWorkspace::self().postEventForWks(evt2);
     }
     else
     {
         CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
-        CGisWidget::self().postEventForWks(evt1);
+        CGisWorkspace::self().postEventForWks(evt1);
     }
 }
 
@@ -394,7 +394,7 @@ void IDBFolder::remove()
     remove(folder->getId(), getId());
 
     CEvtD2WHideFolder * evt1 = new CEvtD2WHideFolder(getId(), getDBName());
-    CGisWidget::self().postEventForWks(evt1);
+    CGisWorkspace::self().postEventForWks(evt1);
 }
 
 
@@ -427,7 +427,7 @@ void IDBFolder::setupFromDB()
     {
         setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
         CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
-        CGisWidget::self().postEventForWks(evt);
+        CGisWorkspace::self().postEventForWks(evt);
     }
 }
 
@@ -547,7 +547,7 @@ void IDBFolder::remove(quint64 idParent, quint64 idFolder)
 void IDBFolder::updateItemsOnWks()
 {
     CEvtD2WUpdateItems * evt = new CEvtD2WUpdateItems(getId(), getDBName());
-    CGisWidget::self().postEventForWks(evt);
+    CGisWorkspace::self().postEventForWks(evt);
 }
 
 void IDBFolder::setChildIndicator()

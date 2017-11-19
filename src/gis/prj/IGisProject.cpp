@@ -20,7 +20,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/IGisItem.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
@@ -30,10 +30,10 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
-#include "gis/tcx/CTcxProject.h"
-#include "gis/tcx/CTcxProject.h"
-#include "gis/suunto/CSmlProject.h"
 #include "gis/suunto/CLogProject.h"
+#include "gis/suunto/CSmlProject.h"
+#include "gis/tcx/CTcxProject.h"
+#include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -308,7 +308,7 @@ void IGisProject::setChanged()
         if(!autoSavePending)
         {
             autoSavePending = true;
-            CGisWidget::self().postEventForWks(new CEvtA2WSave(getKey()));
+            CGisWorkspace::self().postEventForWks(new CEvtA2WSave(getKey()));
         }
     }
     else
@@ -323,7 +323,7 @@ void IGisProject::setAutoSave(bool on)
     // make sure project is saved one more time to remove autoSave flag in storage
     if(!on && autoSave)
     {
-        CGisWidget::self().postEventForWks(new CEvtA2WSave(getKey()));
+        CGisWorkspace::self().postEventForWks(new CEvtA2WSave(getKey()));
     }
 
     autoSave = on;

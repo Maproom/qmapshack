@@ -16,7 +16,7 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "widgets/CHistoryListWidget.h"
 
@@ -85,7 +85,7 @@ void CHistoryListWidget::setupHistory(IGisItem& gisItem)
 
 void CHistoryListWidget::slotSelectionChanged()
 {
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         return;
@@ -119,7 +119,7 @@ void CHistoryListWidget::slotCutHistoryAfter()
         return;
     }
 
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
         return;
@@ -146,7 +146,7 @@ void CHistoryListWidget::slotCutHistoryBefore()
         return;
     }
 
-    IGisItem * item = CGisWidget::self().getItemByKey(key);
+    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if (nullptr == item)
     {
         return;

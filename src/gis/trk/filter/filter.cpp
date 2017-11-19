@@ -19,7 +19,7 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
-#include "gis/CGisWidget.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
@@ -348,7 +348,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
 
 void CGisItemTrk::filterSplitSegment()
 {
-    IGisProject * project = CGisWidget::self().selectProject();
+    IGisProject * project = CGisWorkspace::self().selectProject();
     if(nullptr == project)
     {
         return;

@@ -1806,37 +1806,37 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="111"/>
         <source>Load project...</source>
-        <translation type="unfinished">Загрузить проект...</translation>
+        <translation>Загрузить проект...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="111"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
-        <translation type="unfinished">Проект &quot;%1&quot; уже находится в рабочей области.</translation>
+        <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="210"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
-        <translation type="unfinished">&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
+        <translation>&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="602"/>
         <source>Copy items...</source>
-        <translation type="unfinished">Копировать элементы ...</translation>
+        <translation>Копировать элементы ...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="621"/>
         <source>Change waypoint symbols.</source>
-        <translation type="unfinished">Изменить символов путевых точек.</translation>
+        <translation>Изменить символы путевых точек.</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="750"/>
         <source>Cut Track...</source>
-        <translation type="unfinished">Вырезать трек...</translation>
+        <translation>Вырезать трек...</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="750"/>
         <source>Do you want to delete the original track?</source>
-        <translation type="unfinished">Желаете удалить изначальный трек?</translation>
+        <translation>Желаете удалить изначальный трек?</translation>
     </message>
 </context>
 <context>
@@ -6749,22 +6749,22 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="59"/>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="64"/>
         <source>Age</source>
-        <translation type="unfinished">Срок</translation>
+        <translation>Срок</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="97"/>
         <source>To add a database do a right click on the database list above.</source>
-        <translation type="unfinished">Для добавления базы данных сделайте щелчок правой кнопкой мышки на списке баз данных.</translation>
+        <translation>Для добавления базы данных сделайте щелчок правой кнопкой мышки на списке баз данных.</translation>
     </message>
 </context>
 <context>
@@ -6937,37 +6937,37 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="43"/>
         <source>Opacity</source>
-        <translation type="unfinished">Прозрачность</translation>
+        <translation>Прозрачность</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="50"/>
         <source>Change the opacity of all GIS Items on the map.</source>
-        <translation type="unfinished">Изменить прозрачность всех элементов ГИС на карте.</translation>
+        <translation>Изменить прозрачность всех элементов ГИС на карте.</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="66"/>
         <source>Filter</source>
-        <translation type="unfinished">Фильтр</translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="116"/>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="129"/>
         <source>Clear Filter</source>
-        <translation type="unfinished">Очистить фильтр</translation>
+        <translation>Очистить фильтр</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="138"/>
         <source>Setup Filter</source>
-        <translation type="unfinished">Настройка фильтра</translation>
+        <translation>Настройка фильтра</translation>
     </message>
 </context>
 <context>
@@ -7147,7 +7147,7 @@ Filename: %1</source>
         <location filename="../IMainWindow.ui" line="121"/>
         <location filename="../IMainWindow.ui" line="221"/>
         <source>Workspace</source>
-        <translation type="unfinished"></translation>
+        <translation>Рабочая область</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="230"/>
@@ -7157,7 +7157,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="256"/>
         <source>Routing</source>
-        <translation type="unfinished">Маршрутизация</translation>
+        <translation>Маршрутизация</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="275"/>
@@ -7491,7 +7491,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="244"/>
         <source>Database</source>
-        <translation type="unfinished">База данных</translation>
+        <translation>База данных</translation>
     </message>
 </context>
 <context>

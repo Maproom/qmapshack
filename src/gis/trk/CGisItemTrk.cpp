@@ -121,7 +121,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 
-    if(cntInvalidPoints != 0)
+    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
     {
         int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Invalid points...."),
                                         tr("The track '%1' has %2 invalid points out of %3 visible points. "

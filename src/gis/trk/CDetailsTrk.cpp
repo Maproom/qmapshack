@@ -350,7 +350,6 @@ void CDetailsTrk::updateData()
     bool isReadOnly = trk.isReadOnly();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
-    tabWidget->widget(eTabActivity)->setEnabled(!isReadOnly);
 
     labelTainted->setVisible(trk.isTainted());
 
@@ -374,6 +373,7 @@ void CDetailsTrk::updateData()
     bool hasActivity = 0 != (flags & CTrackData::trkpt_t::eActMask);
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
+    pushSetActivities->setEnabled(!isReadOnly);
 
     plotTrack->setTrack(&trk);
     listHistory->setupHistory(trk);

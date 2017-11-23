@@ -75,11 +75,11 @@
      </property>
      <item>
       <widget class="QLabel" name="labelIcon">
-       <property name="maximumSize">
-        <size>
-         <width>64</width>
-         <height>16777215</height>
-        </size>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
        <property name="text">
         <string/>
@@ -88,7 +88,7 @@
         <pixmap resource="../resources.qrc">:/icons/48x48/Help.png</pixmap>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignHCenter|Qt::AlignTop</set>
        </property>
       </widget>
      </item>

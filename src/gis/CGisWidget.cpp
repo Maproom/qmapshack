@@ -406,6 +406,27 @@ void CGisWidget::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, 
     }
 }
 
+void CGisWidget::getAvoidAreas(QList<CGisItemWpt*>& items)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
+        {
+            project->getAvoidAreas(items);
+            continue;
+        }
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->getAvoidAreas(items);
+            continue;
+        }
+    }
+}
+
 void CGisWidget::mouseMove(const QPointF& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

@@ -26,6 +26,7 @@
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "gis/rte/router/brouter/CRouterBRouterToolShell.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtNetwork>
@@ -187,7 +188,7 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, const QVector<area_t>& areas) const
 {
     QString lonLats;
     bool isNext = false;
@@ -205,9 +206,25 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) co
         }
     }
 
+    QString nogos;
+    isNext = false;
+
+    for(const area_t &pt : areas)
+    {
+        if (isNext)
+        {
+            nogos.append(QString("|%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad));
+        }
+        else
+        {
+            nogos = QString("%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad);
+            isNext = true;
+        }
+    }
+
     QUrlQuery urlQuery;
     urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
-    urlQuery.addQueryItem("nogos", "");
+    urlQuery.addQueryItem("nogos", nogos.toLatin1());
     urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
     urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
     urlQuery.addQueryItem("format", "gpx");
@@ -234,9 +251,22 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     points << wpt_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG);
     points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
 
+    QList<CGisItemWpt *> wpts;
+    CGisWidget::self().getAvoidAreas(wpts);
+
+    QVector<area_t> areas;
+    for(CGisItemWpt* const wpt : wpts)
+    {
+        if (wpt->getProximity() < NOFLOAT)
+        {
+            QPointF pos = wpt->getPosition();
+            areas << area_t(pos.ry(),pos.rx(),wpt->getProximity());
+        }
+    }
+
     synchronous = true;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));
 
     try
     {
@@ -326,6 +356,9 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
+    QList<CGisItemWpt *> wpts;
+    CGisWidget::self().getAvoidAreas(wpts);
+
     rte->reset();
 
     slotCloseStatusMsg();
@@ -336,9 +369,19 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         points << wpt_t(pt.lat,pt.lon);
     }
 
+    QVector<area_t> areas;
+    for(CGisItemWpt* const wpt : wpts)
+    {
+        if (wpt->getProximity() < NOFLOAT)
+        {
+            QPointF pos = wpt->getPosition();
+            areas << area_t(pos.ry(),pos.rx(),wpt->getProximity());
+        }
+    }
+
     synchronous = false;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));
 
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);

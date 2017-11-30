@@ -169,6 +169,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt->addSeparator();
     actionBubbleWpt = menuItemWpt->addAction(QIcon("://icons/32x32/Bubble.png"),  tr("Show Bubble"),       this, SLOT(slotBubbleWpt()));
     actionBubbleWpt->setCheckable(true);
+    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Avoid Area"), this, SLOT(slotAvoidWpt()));
+    actionAvoidWpt->setCheckable(true);
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     menuItemWpt->addSeparator();
@@ -1129,6 +1131,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             case IGisItem::eTypeWpt:
                 actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
+                actionAvoidWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->isAvoid());
                 actionMoveWpt->setDisabled(isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
@@ -1421,6 +1424,17 @@ void CGisListWks::slotBubbleWpt()
     if(gisItem != nullptr)
     {
         CGisWidget::self().toggleWptBubble(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotAvoidWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWidget::self().toggleWptAvoid(gisItem->getKey());
     }
 }
 

@@ -110,6 +110,23 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolAvoid">
+       <property name="toolTip">
+        <string>Wapoint defines an avoid-area for routing</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/WptAvoid.png</normaloff>:/icons/32x32/WptAvoid.png</iconset>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolMove">
        <property name="toolTip">
         <string>Move waypoint to a new location.</string>

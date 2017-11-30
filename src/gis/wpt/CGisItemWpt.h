@@ -294,6 +294,13 @@ public:
     {
         return geocache.hasData;
     }
+
+    void toggleAvoid();
+    bool isAvoid()
+    {
+        return bool(flags & eFlagWptAvoid);
+    }
+
     void gainUserFocus(bool yes) override;
 
     void edit() override;

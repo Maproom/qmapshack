@@ -44,6 +44,7 @@ private slots:
     void slotMove();
     void slotProj();
     void slotBubble();
+    void slotAvoid();
 
 private:
     IGisItem::key_t key;

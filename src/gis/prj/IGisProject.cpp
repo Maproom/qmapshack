@@ -677,7 +677,7 @@ void IGisProject::getAvoidAreas(QList<CGisItemWpt *> &items) const
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr == item || item->isHidden())
+        if(nullptr == item || item->isHidden() || !item->isAvoid())
         {
             continue;
         }

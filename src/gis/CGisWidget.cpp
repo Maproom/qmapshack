@@ -713,6 +713,16 @@ void CGisWidget::toggleWptBubble(const IGisItem::key_t &key)
     }
 }
 
+void CGisWidget::toggleWptAvoid(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        wpt->toggleAvoid();
+    }
+}
+
 void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
     QString name = label;

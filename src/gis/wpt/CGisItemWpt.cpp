@@ -471,10 +471,6 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     gis->convertRad2Px(posScreen);
 
-    drawBubble(p);
-
-    p.drawPixmap(posScreen - focus, icon);
-
     if(proximity != NOFLOAT)
     {
         QPointF pt1(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
@@ -488,9 +484,17 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         p.setPen(QPen(Qt::white,3));
         p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
         p.setPen(QPen(Qt::red,1));
+        if (this->isAvoid())
+        {
+            p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
+        }
         p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
         p.restore();
     }
+
+    drawBubble(p);
+
+    p.drawPixmap(posScreen - focus, icon);
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
 }
@@ -778,6 +782,19 @@ void CGisItemWpt::toggleBubble()
     else
     {
         flags |= eFlagWptBubble;
+    }
+    updateHistory();
+}
+
+void CGisItemWpt::toggleAvoid()
+{
+    if(flags & eFlagWptAvoid)
+    {
+        flags &= ~eFlagWptAvoid;
+    }
+    else
+    {
+        flags |= eFlagWptAvoid;
     }
     updateHistory();
 }

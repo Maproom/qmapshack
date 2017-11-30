@@ -42,6 +42,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
     toolBubble->setChecked(wpt->hasBubble());
+    toolAvoid->setChecked(wpt->isAvoid());
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
@@ -60,6 +61,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::slotMove);
     connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::slotProj);
     connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+    connect(toolAvoid,  &QToolButton::clicked, this, &CScrOptWpt::slotAvoid);
 
     adjustSize();
 }
@@ -101,6 +103,12 @@ void CScrOptWpt::slotProj()
 void CScrOptWpt::slotBubble()
 {
     CGisWidget::self().toggleWptBubble(key);
+    deleteLater();
+}
+
+void CScrOptWpt::slotAvoid()
+{
+    CGisWidget::self().toggleWptAvoid(key);
     deleteLater();
 }
 

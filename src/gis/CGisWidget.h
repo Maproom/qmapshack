@@ -338,6 +338,8 @@ public:
 
     void toggleWptBubble(const IGisItem::key_t &key);
 
+    void toggleWptAvoid(const IGisItem::key_t &key);
+
     /**
        @brief Set user focus to track
        @param yes       true if focus is set

@@ -289,6 +289,8 @@ public:
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
+
+    void getAvoidAreas(QList<CGisItemWpt *> &items);
     /**
        @brief Delete all items with matching key from workspace
 

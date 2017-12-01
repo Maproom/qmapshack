@@ -36,8 +36,6 @@
 #include <QtXml>
 #include <proj_api.h>
 
-using std::numeric_limits;
-
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      200
@@ -721,21 +719,23 @@ bool CGisItemTrk::isRangeSelected() const
     return mouseRange1 != mouseRange2;
 }
 
-static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
+static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val, const QPointF& pos)
 {
     if(NOFLOAT != val)
     {
-        extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+        extrema.setMin(val, pos);
+        extrema.setMax(val, pos);
     }
 }
 
 void CGisItemTrk::updateExtremaAndExtensions()
 {
     extrema = QHash<QString, limits_t>();
-    limits_t extremaSpeed    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaSlope    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaEle      = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaProgress = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSpeed;
+    limits_t extremaSlope;
+    limits_t extremaEle;
+    limits_t extremaProgress;
+
 
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
@@ -749,15 +749,20 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
         existingExtensions.unite(pt.extensions.keys().toSet());
 
+        const QPointF& pos = {pt.lon, pt.lat};
         for(const QString &key : pt.extensions.keys())
         {
             bool isReal = false;
             qreal val = pt.extensions.value(key).toReal(&isReal);
 
+
             if(isReal)
             {
-                const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
-                extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
+                if(!extrema.contains(key))
+                {
+                    extrema[key] = limits_t();
+                }
+                updateExtrema(extrema[key], val, pos);
             }
             else
             {
@@ -765,10 +770,10 @@ void CGisItemTrk::updateExtremaAndExtensions()
             }
         }
 
-        updateExtrema(extremaSpeed,    pt.speed);
-        updateExtrema(extremaEle,      pt.ele);
-        updateExtrema(extremaSlope,    pt.slope1);
-        updateExtrema(extremaProgress, pt.distance);
+        updateExtrema(extremaSpeed,    pt.speed, pos);
+        updateExtrema(extremaEle,      pt.ele, pos);
+        updateExtrema(extremaSlope,    pt.slope1, pos);
+        updateExtrema(extremaProgress, pt.distance, pos);
     }
 
     if(extremaEle.min < extremaEle.max)
@@ -1656,6 +1661,72 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         drawColorized(p);
     }
     // -------------------------
+
+
+
+    const QFont& f = CMainWindow::self().getMapFont();
+    const QFontMetrics fm(f);
+
+    for(const QString& key : extrema.keys())
+    {
+        const CKnownExtension& ext = CKnownExtension::get(key);
+        const limits_t& limit = extrema[key];
+        QPointF posMin = limit.posMin * DEG_TO_RAD;
+        QPointF posMax = limit.posMax * DEG_TO_RAD;
+
+        gis->convertRad2Px(posMin);
+        gis->convertRad2Px(posMax);
+
+        if(key == CKnownExtension::internalProgress)
+        {
+            continue;
+        }
+        else if(key.contains("speed"))
+        {
+            QString val, unit;
+            IUnit::self().meter2speed(limit.max, val, unit);
+
+            QString labelMax = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
+            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm);
+        }
+        else if(key == CKnownExtension::internalEle)
+        {
+            QString val, unit, label;
+            IUnit::self().meter2elevation(limit.min, val, unit);
+            label = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
+            drawLimit(eLimitTypeMin, label, posMin, p, fm);
+
+
+            IUnit::self().meter2elevation(limit.max, val, unit);
+            label = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
+            drawLimit(eLimitTypeMax, label, posMax, p, fm);
+        }
+        else
+        {
+            QString labelMin = QString("%1 %2%3").arg(ext.nameShortText).arg(limit.min * ext.factor).arg(ext.unit);
+            QString labelMax = QString("%1 %2%3").arg(ext.nameShortText).arg(limit.max * ext.factor).arg(ext.unit);
+
+            drawLimit(eLimitTypeMin, labelMin, posMin, p, fm);
+            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm);
+        }
+
+
+    }
+}
+
+void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetrics& fm)
+{
+    p.setPen(Qt::white);
+    p.setBrush(type == eLimitTypeMin ? Qt::green : Qt::red);
+    p.drawEllipse(pos, 5, 5);
+
+    const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
+
+    QRect rect  = fm.boundingRect(fullLabel);
+    rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
+    rect.adjust(-1,-1,1,1);
+    CDraw::text(fullLabel, p, rect, Qt::black);
+
 }
 
 void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const

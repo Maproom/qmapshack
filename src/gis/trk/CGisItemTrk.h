@@ -32,6 +32,7 @@
 #include <functional>
 #include <interpolation.h>
 
+using std::numeric_limits;
 
 class QDomNode;
 class IGisProject;
@@ -287,7 +288,6 @@ private:
     void drawColorizedByActivity(QPainter& p) const;
     void setPen(QPainter& p, QPen& pen, quint32 flag) const;
     /**@}*/
-
 
 
 public:
@@ -597,8 +597,30 @@ private:
 public:
     struct limits_t
     {
-        qreal min;
-        qreal max;
+        void setMin(qreal val, const QPointF& pos)
+        {
+
+            if(min > val)
+            {
+                min     = val;
+                posMin  = pos;
+            }
+        }
+
+        void setMax(qreal val, const QPointF& pos)
+        {
+            if(max < val)
+            {
+                max     = val;
+                posMax  = pos;
+            }
+        }
+
+        qreal   min     = numeric_limits<qreal>::max();
+        QPointF posMin  = NOPOINTF;
+
+        qreal   max     = numeric_limits<qreal>::lowest();
+        QPointF posMax  = NOPOINTF;
     };
     /**@}*/
 
@@ -606,6 +628,13 @@ private:
     QSet<QString> existingExtensions;
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
+
+    enum limit_type_e
+    {
+          eLimitTypeMin
+        , eLimitTypeMax
+    };
+    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm);
 
     /**
        @brief Tell the point of focus to all plots and the detail dialog

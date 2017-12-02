@@ -56,6 +56,7 @@ public:
     bool isNight()         const;
     bool isPOIText()       const;
     bool isMapToolTip()    const;
+    bool isMinMaxTrackValues() const;
     bool flipMouseWheel()  const;
     bool profileIsWindow() const;
     const QFont& getMapFont() const

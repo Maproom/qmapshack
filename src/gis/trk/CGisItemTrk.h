@@ -634,7 +634,7 @@ private:
           eLimitTypeMin
         , eLimitTypeMax
     };
-    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm);
+    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect> &usedRect);
 
     /**
        @brief Tell the point of focus to all plots and the detail dialog

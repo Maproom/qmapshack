@@ -1663,70 +1663,139 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 
 
-
-    const QFont& f = CMainWindow::self().getMapFont();
-    const QFontMetrics fm(f);
-
-    for(const QString& key : extrema.keys())
+    if(CMainWindow::self().isMinMaxTrackValues())
     {
-        const CKnownExtension& ext = CKnownExtension::get(key);
-        const limits_t& limit = extrema[key];
-        QPointF posMin = limit.posMin * DEG_TO_RAD;
-        QPointF posMax = limit.posMax * DEG_TO_RAD;
+        const QFont& f = CMainWindow::self().getMapFont();
+        const QFontMetrics fm(f);
+        QList<QRect> usedRect;
 
-        gis->convertRad2Px(posMin);
-        gis->convertRad2Px(posMax);
 
-        if(key == CKnownExtension::internalProgress)
+        for(const QString& key : extrema.keys())
         {
-            continue;
+            const CKnownExtension& ext = CKnownExtension::get(key);
+            const limits_t& limit = extrema[key];
+            QPointF posMin = limit.posMin * DEG_TO_RAD;
+            QPointF posMax = limit.posMax * DEG_TO_RAD;
+
+            gis->convertRad2Px(posMin);
+            gis->convertRad2Px(posMax);
+
+            QString name = ext.nameShortText.isEmpty() ? key : ext.nameShortText;
+
+            if(key == CKnownExtension::internalProgress)
+            {
+                continue;
+            }
+            else if(key.contains("speed"))
+            {
+                QString val, unit;
+                IUnit::self().meter2speed(limit.max, val, unit);
+                QString labelMax = QString("%1 %2%3").arg(name).arg(val).arg(unit);
+                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
+            }
+            else if(key == CKnownExtension::internalEle)
+            {
+                QString val, unit, label;
+                IUnit::self().meter2elevation(limit.min, val, unit);
+                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
+                drawLimit(eLimitTypeMin, label, posMin, p, fm, usedRect);
+
+
+                IUnit::self().meter2elevation(limit.max, val, unit);
+                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
+                drawLimit(eLimitTypeMax, label, posMax, p, fm, usedRect);
+            }
+            else if(key == CKnownExtension::internalSlope)
+            {
+                QString val, unit, label;
+                IUnit::self().slope2string(limit.min, val, unit);
+                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
+                drawLimit(eLimitTypeMin, label, posMin, p, fm, usedRect);
+
+
+                IUnit::self().slope2string(limit.max, val, unit);
+                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
+                drawLimit(eLimitTypeMax, label, posMax, p, fm, usedRect);
+            }
+            else
+            {
+                QString labelMin = QString("%1 %2%3").arg(name).arg(limit.min * ext.factor).arg(ext.unit);
+                QString labelMax = QString("%1 %2%3").arg(name).arg(limit.max * ext.factor).arg(ext.unit);
+
+                drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
+                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
+            }
         }
-        else if(key.contains("speed"))
-        {
-            QString val, unit;
-            IUnit::self().meter2speed(limit.max, val, unit);
-
-            QString labelMax = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
-            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm);
-        }
-        else if(key == CKnownExtension::internalEle)
-        {
-            QString val, unit, label;
-            IUnit::self().meter2elevation(limit.min, val, unit);
-            label = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
-            drawLimit(eLimitTypeMin, label, posMin, p, fm);
-
-
-            IUnit::self().meter2elevation(limit.max, val, unit);
-            label = QString("%1 %2%3").arg(ext.nameShortText).arg(val).arg(ext.unit);
-            drawLimit(eLimitTypeMax, label, posMax, p, fm);
-        }
-        else
-        {
-            QString labelMin = QString("%1 %2%3").arg(ext.nameShortText).arg(limit.min * ext.factor).arg(ext.unit);
-            QString labelMax = QString("%1 %2%3").arg(ext.nameShortText).arg(limit.max * ext.factor).arg(ext.unit);
-
-            drawLimit(eLimitTypeMin, labelMin, posMin, p, fm);
-            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm);
-        }
-
-
     }
 }
 
-void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetrics& fm)
+static bool doesOverlap(const QList<QRect>& usedRect, const QRect& rect)
 {
-    p.setPen(Qt::white);
-    p.setBrush(type == eLimitTypeMin ? Qt::green : Qt::red);
-    p.drawEllipse(pos, 5, 5);
+    for(const QRect& r : usedRect)
+    {
+        if(r.intersects(rect))
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
+void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect>& usedRect)
+{
     const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
-
-    QRect rect  = fm.boundingRect(fullLabel);
+    QRect rect = fm.boundingRect(fullLabel);
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
     rect.adjust(-1,-1,1,1);
-    CDraw::text(fullLabel, p, rect, Qt::black);
 
+    QPoint p1 = rect.bottomLeft();
+    QPoint p2 = rect.bottomRight();
+
+    QColor color = type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed;
+
+    if(doesOverlap(usedRect, rect))
+    {
+        rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
+        p1 = rect.bottomRight();
+        p2 = rect.bottomLeft();
+
+        if(doesOverlap(usedRect, rect))
+        {
+            rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
+            p1 = rect.bottomLeft();
+            p2 = rect.bottomRight();
+
+            if(doesOverlap(usedRect, rect))
+            {
+                rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
+                p1 = rect.bottomRight();
+                p2 = rect.bottomLeft();
+
+                if(doesOverlap(usedRect, rect))
+                {
+                    p.setPen(Qt::white);
+                    p.setBrush(color);
+                    p.drawEllipse(pos, 5, 5);
+
+                    return;
+                }
+            }
+        }
+    }
+
+    p.setPen(QPen(Qt::white, 3));
+    p.drawLine(pos, p1);
+    p.drawLine(p1, p2);
+    p.setPen(color);
+    p.drawLine(pos, p1);
+    p.drawLine(p1, p2);
+
+    p.setPen(Qt::white);
+    p.setBrush(color);
+    p.drawEllipse(pos, 5, 5);
+
+    CDraw::text(fullLabel, p, rect, color);
+    usedRect << rect;
 }
 
 void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const

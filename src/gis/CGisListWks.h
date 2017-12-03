@@ -88,6 +88,7 @@ private slots:
     void slotDeleteItem();
     void slotBubbleWpt();
     void slotAvoidWpt();
+    void slotRadiusWpt();
     void slotProjWpt();
     void slotMoveWpt();
     void slotFocusTrk(bool on);
@@ -163,6 +164,7 @@ private:
     QAction * actionDelete;
     QAction * actionBubbleWpt;
     QAction * actionAvoidWpt;
+    QAction * actionRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
     QAction * actionFocusTrk;

@@ -723,6 +723,25 @@ void CGisWidget::toggleWptAvoid(const IGisItem::key_t &key)
     }
 }
 
+void CGisWidget::editWptRadius(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        if(!wpt->setReadOnlyMode(false))
+        {
+            return;
+        }
+
+        CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+        if(nullptr != canvas)
+        {
+            canvas->setMouseRadiusWpt(*wpt);
+        }
+    }
+}
+
 void CGisWidget::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
     QString name = label;

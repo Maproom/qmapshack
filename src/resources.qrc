@@ -118,6 +118,7 @@
         <file>icons/32x32/Lock.png</file>
         <file>icons/32x32/UnLock.png</file>
         <file>icons/32x32/WptAvoid.png</file>
+        <file>icons/32x32/WptEditProx.png</file>
         <file>icons/32x32/WptMove.png</file>
         <file>icons/32x32/WptProj.png</file>
         <file>icons/32x32/WptProx.png</file>
@@ -548,6 +549,7 @@
         <file>cursors/cursorMoveLine.png</file>
         <file>cursors/cursorMoveArea.png</file>
         <file>cursors/cursorDelete.png</file>
+        <file>cursors/cursorRadiusWpt.png</file>
         <file>cursors/cursorSelectRange.png</file>
         <file>cursors/cursorSelectArea.png</file>
         <file>cursors/cursorPointAdd.png</file>

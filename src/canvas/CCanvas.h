@@ -110,6 +110,7 @@ public:
     void resetMouse();
     void mouseTrackingLost();
     void setMouseMoveWpt(CGisItemWpt& wpt);
+    void setMouseRadiusWpt(CGisItemWpt& wpt);
     void setMouseEditTrk(CGisItemTrk& trk);
     void setMouseRangeTrk(CGisItemTrk& trk);
     void setMouseEditTrk(const QPointF& pt);

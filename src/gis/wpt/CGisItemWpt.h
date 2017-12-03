@@ -28,6 +28,7 @@
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
+class CScrOptWptRadius;
 class QSqlDatabase;
 class CQlgtWpt;
 class QTextEdit;
@@ -276,10 +277,7 @@ public:
 
     IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
 
-    QPointF getPointCloseBy(const QPoint& ) override
-    {
-        return posScreen;
-    }
+    QPointF getPointCloseBy(const QPoint& point) override;
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
@@ -299,6 +297,17 @@ public:
     bool isAvoid()
     {
         return bool(flags & eFlagWptAvoid);
+    }
+
+    void editRadius();
+    bool hasRadius()
+    {
+        return proximity < NOFLOAT;
+    }
+
+    qreal getRadius()
+    {
+        return radius;
     }
 
     void gainUserFocus(bool yes) override;
@@ -343,6 +352,8 @@ private:
     // --- start all waypoint data ----
     wpt_t wpt;
     qreal proximity = NOFLOAT;
+    qreal radius = NOFLOAT;
+    bool closeToRadius = false;
     geocache_t geocache;
     QList<image_t> images;
 
@@ -353,7 +364,8 @@ private:
 
     // --- stop all waypoint data ----
 
-    QPointer<CScrOptWpt> scrOpt;
+    QPointer<CScrOptWpt> scrOptWpt;
+    QPointer<CScrOptWptRadius> scrOptRadius;
 
     bool doBubble          = false;
     bool doSpecialCursor   = false;

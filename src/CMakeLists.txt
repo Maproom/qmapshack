@@ -175,6 +175,7 @@ set( SRCS
         mouse/CMouseEditArea.cpp
         mouse/CMouseRangeTrk.cpp
         mouse/CMouseWptBubble.cpp
+        mouse/CMouseRadiusWpt.cpp
         mouse/CMousePrint.cpp
         mouse/CMouseSelect.cpp
         mouse/CScrOptUnclutter.cpp
@@ -238,6 +239,7 @@ set( SRCS
         gis/search/CSearchGoogle.cpp
         gis/wpt/CGisItemWpt.cpp
         gis/wpt/CScrOptWpt.cpp
+        gis/wpt/CScrOptWptRadius.cpp
         gis/wpt/CDetailsWpt.cpp
         gis/wpt/CDetailsGeoCache.cpp
         gis/wpt/CProjWpt.cpp
@@ -471,6 +473,7 @@ set( HDRS
         mouse/CMouseEditArea.h
         mouse/CMouseRangeTrk.h
         mouse/CMouseWptBubble.h
+        mouse/CMouseRadiusWpt.h
         mouse/CMousePrint.h
         mouse/CMouseSelect.h
         mouse/CScrOptUnclutter.h
@@ -528,6 +531,7 @@ set( HDRS
         gis/db/CExportDatabaseThread.h
         gis/wpt/CGisItemWpt.h
         gis/wpt/CScrOptWpt.h
+        gis/wpt/CScrOptWptRadius.h
         gis/wpt/CDetailsWpt.h
         gis/wpt/CDetailsGeoCache.h
         gis/wpt/CProjWpt.h
@@ -714,6 +718,7 @@ set( UIS
     gis/db/ISearchDatabase.ui
     gis/db/IExportDatabase.ui
     gis/wpt/IScrOptWpt.ui
+    gis/wpt/IScrOptWptRadius.ui
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IDetailsGeoCache.ui
     gis/wpt/IProjWpt.ui

@@ -16,41 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CSCROPTWPT_H
-#define CSCROPTWPT_H
+#ifndef CSCROPTWPTRADIUS_H
+#define CSCROPTWPTRADIUS_H
 
 #include "gis/IGisItem.h"
 #include "mouse/IScrOpt.h"
 
-#include "ui_IScrOptWpt.h"
+#include "ui_IScrOptWptRadius.h"
 #include <QWidget>
 
 class CGisItemWpt;
 class IMouse;
 
-class CScrOptWpt : public IScrOpt, private Ui::IScrOptWpt
+class CScrOptWptRadius : public IScrOpt, private Ui::IScrOptWptRadius
 {
     Q_OBJECT
 public:
-    CScrOptWpt(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
-    virtual ~CScrOptWpt();
+    CScrOptWptRadius(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
+    virtual ~CScrOptWptRadius();
 
     void draw(QPainter& p) override;
 
 private slots:
     void slotDelete();
-    void slotEdit();
-    void slotCopy();
-    void slotMove();
-    void slotProj();
-    void slotBubble();
     void slotAvoid();
-    void slotEditRadius();
+    void slotEdit();
 
 private:
     IGisItem::key_t key;
     QPointF anchor;
 };
 
-#endif //CSCROPTWPT_H
+#endif //CSCROPTWPTRADIUS_H
 

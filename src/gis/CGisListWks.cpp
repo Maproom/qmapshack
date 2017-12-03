@@ -169,10 +169,11 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemWpt->addSeparator();
     actionBubbleWpt = menuItemWpt->addAction(QIcon("://icons/32x32/Bubble.png"),  tr("Show Bubble"),       this, SLOT(slotBubbleWpt()));
     actionBubbleWpt->setCheckable(true);
-    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Avoid Area"), this, SLOT(slotAvoidWpt()));
-    actionAvoidWpt->setCheckable(true);
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    actionRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotRadiusWpt()));
+    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Avoid Area"), this, SLOT(slotAvoidWpt()));
+    actionAvoidWpt->setCheckable(true);
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWidget::self(), &CGisWidget::slotWksItemSelectionReset);
@@ -1130,12 +1131,17 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             }
 
             case IGisItem::eTypeWpt:
-                actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
-                actionAvoidWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->isAvoid());
+            {
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+                actionBubbleWpt->setChecked(wpt->hasBubble());
+                bool radius = wpt->hasRadius();
+                actionAvoidWpt->setEnabled(radius);
+                actionAvoidWpt->setChecked(radius && wpt->isAvoid());
                 actionMoveWpt->setDisabled(isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
+            }
 
             case IGisItem::eTypeRte:
                 actionFocusRte->setChecked(gisItem->hasUserFocus());
@@ -1435,6 +1441,17 @@ void CGisListWks::slotAvoidWpt()
     if(gisItem != nullptr)
     {
         CGisWidget::self().toggleWptAvoid(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotRadiusWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWidget::self().editWptRadius(gisItem->getKey());
     }
 }
 

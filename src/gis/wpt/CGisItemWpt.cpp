@@ -27,6 +27,7 @@
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
+#include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupNewWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -326,11 +327,35 @@ QString CGisItemWpt::getInfo(quint32 feature) const
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    if(scrOpt.isNull())
+    if (closeToRadius)
     {
-        scrOpt = new CScrOptWpt(this, origin, mouse);
+        if(scrOptRadius.isNull())
+        {
+            scrOptRadius = new CScrOptWptRadius(this, origin, mouse);
+        }
+        return scrOptRadius;
     }
-    return scrOpt;
+    else
+    {
+        if(scrOptWpt.isNull())
+        {
+            scrOptWpt = new CScrOptWpt(this, origin, mouse);
+        }
+        return scrOptWpt;
+    }
+}
+
+QPointF CGisItemWpt::getPointCloseBy(const QPoint& point)
+{
+    if (closeToRadius)
+    {
+        QPointF l = (QPointF(point) - posScreen);
+        return posScreen + l * (radius / sqrt(QPointF::dotProduct(l,l)));
+    }
+    else
+    {
+        return posScreen;
+    }
 }
 
 void CGisItemWpt::setIcon()
@@ -377,6 +402,7 @@ void CGisItemWpt::setElevation(qint32 val)
 void CGisItemWpt::setProximity(qreal val)
 {
     proximity = val;
+    radius = NOFLOAT; //radius is proximity in set on redraw
     changed(tr("Changed proximity"),"://icons/48x48/WptProx.png");
 }
 
@@ -427,12 +453,25 @@ void CGisItemWpt::addImage(const image_t& img)
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
+    closeToRadius = false;
+
     if(posScreen == NOPOINTF)
     {
         return false;
     }
 
-    return (pos - posScreen).manhattanLength() < 22;
+    QPointF dist = (pos - posScreen);
+    if(dist.manhattanLength() < 22)
+    {
+        return true;
+    }
+    if (radius == NOFLOAT)
+    {
+        return false;
+    }
+
+    closeToRadius = abs(QPointF::dotProduct(dist,dist) - radius*radius) < 625;
+    return closeToRadius;
 }
 
 bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
@@ -490,6 +529,9 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         }
         p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
         p.restore();
+
+        //remember radius for isCloseTo-method
+        radius = r;
     }
 
     drawBubble(p);
@@ -576,7 +618,22 @@ void CGisItemWpt::drawHighlight(QPainter& p)
         return;
     }
 
-    p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
+    if (closeToRadius)
+    {
+        p.save();
+        p.setBrush(Qt::NoBrush);
+        p.setPen(QPen(Qt::red,3));
+        if (this->isAvoid())
+        {
+            p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
+        }
+        p.drawEllipse(QRect(posScreen.x() - radius - 1, posScreen.y() - radius - 1, 2*radius + 1, 2*radius + 1));
+        p.restore();
+    }
+    else
+    {
+        p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
+    }
 }
 
 void CGisItemWpt::drawBubble(QPainter& p)
@@ -787,6 +844,19 @@ void CGisItemWpt::toggleBubble()
 }
 
 void CGisItemWpt::toggleAvoid()
+{
+    if(flags & eFlagWptAvoid)
+    {
+        flags &= ~eFlagWptAvoid;
+    }
+    else
+    {
+        flags |= eFlagWptAvoid;
+    }
+    updateHistory();
+}
+
+void CGisItemWpt::editRadius()
 {
     if(flags & eFlagWptAvoid)
     {

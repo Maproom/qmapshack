@@ -41,6 +41,7 @@
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
+#include "mouse/CMouseRadiusWpt.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -225,6 +226,13 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     mouse->deleteLater();
     mouse = new CMouseMoveWpt(wpt, gis, this);
     setMouseCursor(*mouse, "setMouseMoveWpt");
+}
+
+void CCanvas::setMouseRadiusWpt(CGisItemWpt& wpt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseRadiusWpt(wpt, gis, this);
+    setMouseCursor(*mouse, "setMouseWptRadius");
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)

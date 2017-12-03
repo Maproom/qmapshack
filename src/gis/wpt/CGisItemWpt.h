@@ -347,6 +347,7 @@ private:
     void drawBubble(QPainter& p);
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
     bool processMouseOverBubble(const QPoint &pos);
+    void detBoundingRect();
 
     static key_t keyUserFocus;
 

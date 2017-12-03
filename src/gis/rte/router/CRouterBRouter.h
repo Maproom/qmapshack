@@ -68,7 +68,7 @@ private:
         {
         }
 
-        wpt_t(qreal lat, qreal lon) :
+        wpt_t(const qreal& lat, const qreal& lon) :
             lat(lat),
             lon(lon)
         {
@@ -77,11 +77,25 @@ private:
         qreal lon;
     };
 
+    struct area_t : wpt_t
+    {
+        area_t() : wpt_t(),rad(NOFLOAT)
+        {
+        }
+
+        area_t(const qreal& lat, const qreal& lon, const qreal& rad) :
+            wpt_t(lat,lon),
+            rad(rad)
+        {
+        }
+        qreal rad;
+    };
+
     void updateDialog() const;
     void startBRouter() const;
     void stopBRouter() const;
     void updateLocalBRouterStatus() const;
-    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints) const;
+    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<area_t> &areas) const;
     QUrl getServiceUrl() const;
     void clearError();
 

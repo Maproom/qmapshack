@@ -807,7 +807,7 @@ bool IGisItem::isVisible(const QRectF &rect, const QPolygonF& viewport, CGisDraw
     QPolygonF tmp2 = viewport;
     gis->convertRad2Px(tmp2);
 
-    return tmp2.boundingRect().intersects(tmp2.boundingRect());
+    return tmp2.boundingRect().intersects(tmp1.boundingRect());
 }
 
 bool IGisItem::isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis)

@@ -79,7 +79,7 @@ private:
 
     struct area_t : wpt_t
     {
-        area_t() : wpt_t(),rad(NOFLOAT)
+        area_t() : wpt_t(),rad(NOINT)
         {
         }
 
@@ -88,7 +88,7 @@ private:
             rad(rad)
         {
         }
-        qreal rad;
+        quint32 rad;
     };
 
     void updateDialog() const;

@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -87,6 +88,8 @@ private slots:
     void slotEditItem();
     void slotDeleteItem();
     void slotBubbleWpt();
+    void slotAvoidWpt();
+    void slotRadiusWpt();
     void slotProjWpt();
     void slotMoveWpt();
     void slotFocusTrk(bool on);
@@ -161,6 +164,8 @@ private:
     QAction * actionCopyItem;
     QAction * actionDelete;
     QAction * actionBubbleWpt;
+    QAction * actionAvoidWpt;
+    QAction * actionRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
     QAction * actionFocusTrk;

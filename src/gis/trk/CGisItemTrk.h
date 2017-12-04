@@ -207,6 +207,8 @@ public:
     /// get a progress summary for a selected track point
     QString getInfoProgress(const CTrackData::trkpt_t& pt) const;
 
+    QString getInfoLimits() const;
+
     quint32 getTotalElapsedSeconds()       const { return totalElapsedSeconds;       }
     quint32 getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
 
@@ -634,7 +636,7 @@ private:
           eLimitTypeMin
         , eLimitTypeMax
     };
-    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect> &usedRect);
+    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect> &usedRect);    
 
     /**
        @brief Tell the point of focus to all plots and the detail dialog

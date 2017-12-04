@@ -291,7 +291,7 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-void CGisItemTrk::addRowLimit(QString& str, const QString& name, const QString& min, const QString& max) const
+void addRowLimit(QString& str, const QString& name, const QString& min, const QString& max)
 {
     str += "<tr>";
     str += "<td align='left'>" + name + "</td>";

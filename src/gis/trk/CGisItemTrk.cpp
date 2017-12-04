@@ -1746,30 +1746,35 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
     const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
     QRect rect = fm.boundingRect(fullLabel);
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
-    rect.adjust(-1,-1,1,1);
+    rect.adjust(-3,-1,3,1);
 
-    QPoint p1 = rect.bottomLeft();
-    QPoint p2 = rect.bottomRight();
+    QPoint p1           = rect.bottomLeft();
+    QPoint p2           = rect.bottomRight();
+    qint32 baseWidth    = 10;
+    qint32 basePos      = 10;
 
     QColor color = type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed;
 
     if(doesOverlap(usedRect, rect))
     {
         rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
-        p1 = rect.bottomRight();
-        p2 = rect.bottomLeft();
+        p1      = rect.bottomRight();
+        p2      = rect.bottomLeft();
+        basePos = rect.width() - 10;
 
         if(doesOverlap(usedRect, rect))
         {
             rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
-            p1 = rect.bottomLeft();
-            p2 = rect.bottomRight();
+            p1      = rect.bottomLeft();
+            p2      = rect.bottomRight();
+            basePos = 10;
 
             if(doesOverlap(usedRect, rect))
             {
                 rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
-                p1 = rect.bottomRight();
-                p2 = rect.bottomLeft();
+                p1      = rect.bottomRight();
+                p2      = rect.bottomLeft();
+                basePos = rect.width() - 10;
 
                 if(doesOverlap(usedRect, rect))
                 {
@@ -1783,12 +1788,9 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
         }
     }
 
-    p.setPen(QPen(Qt::white, 3));
-    p.drawLine(pos, p1);
-    p.drawLine(p1, p2);
-    p.setPen(color);
-    p.drawLine(pos, p1);
-    p.drawLine(p1, p2);
+    p.setPen(Qt::black);
+    p.setBrush(Qt::white);
+    CDraw::bubble(p, rect, pos.toPoint(), baseWidth, basePos);
 
     p.setPen(Qt::white);
     p.setBrush(color);

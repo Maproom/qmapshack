@@ -153,6 +153,7 @@ private:
     void hideDocks();
     void displayRegular();
     void displayFullscreen();
+    CCanvas * addView(const QString &name);
 
     static CMainWindow * pSelf;
 

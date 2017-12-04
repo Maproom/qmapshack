@@ -191,9 +191,7 @@ CMainWindow::CMainWindow()
 
     for(const QString &name : names)
     {
-        CCanvas * view = new CCanvas(tabWidget, name);
-        tabWidget->addTab(view, view->objectName());
-        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
+        CCanvas * view = addView(name);
 
         cfg.beginGroup(name);
         view->loadConfig(cfg);
@@ -201,10 +199,9 @@ CMainWindow::CMainWindow()
     }
     if(names.isEmpty())
     {
-        CCanvas * view = new CCanvas(tabWidget, QString());
+        CCanvas * view = addView(QString());
+        // call just to setup default values
         view->loadConfig(cfg);
-        tabWidget->addTab(view, view->objectName());
-        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
     testForNoView();
@@ -503,6 +500,16 @@ CMainWindow::~CMainWindow()
     toolBarConfig->saveSettings();
 }
 
+CCanvas *CMainWindow::addView(const QString& name)
+{
+    CCanvas * view = new CCanvas(tabWidget, name);
+    tabWidget->addTab(view, view->objectName());
+    connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
+    connect(actionMinMaxTrackValues, &QAction::triggered, view, &CCanvas::slotUpdateTrackStatistic);
+
+    return view;
+}
+
 QWidget * CMainWindow::getBestWidgetForParent()
 {
     QWidget * w = CProgressDialog::self();
@@ -796,11 +803,8 @@ void CMainWindow::slotAddCanvas()
         }
     }
 
-    CCanvas * canvas = new CCanvas(tabWidget, QString());
-    tabWidget->addTab(canvas, canvas->objectName());
-    connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-
-    tabWidget->setCurrentWidget(canvas);
+    CCanvas * view = addView(QString());
+    tabWidget->setCurrentWidget(view);
 
     testForNoView();
 }

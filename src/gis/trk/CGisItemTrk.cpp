@@ -291,6 +291,89 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
+void CGisItemTrk::addRowLimit(QString& str, const QString& name, const QString& min, const QString& max) const
+{
+    str += "<tr>";
+    str += "<td align='left'>" + name + "</td>";
+    str += "<td align='right'>" + min + "</td>";
+    str += "<td align='right'>" + max + "</td>";
+    str += "</tr>";
+}
+
+static bool sortByName(const QString& item1, const QString& item2)
+{
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1, item2) < 0;
+}
+
+
+QString CGisItemTrk::getInfoLimits() const
+{
+    QString str = "<table width='100%'>";
+
+    str += "<tr><th align='left'></th><th align='right'>" + tr("min.") + "</th><th align='right'>" + tr("max.") + "</th></tr>";
+
+    QStringList keys = extrema.keys();
+    qSort(keys.begin(), keys.end(), sortByName);
+
+    for(const QString& key : keys)
+    {
+        const CKnownExtension& ext = CKnownExtension::get(key);
+        const limits_t& limit = extrema[key];
+
+        bool hasNoName  = ext.nameShortText.isEmpty();
+        QString name    = hasNoName ? key : ext.nameShortText;
+
+        if(ext.derivedQMS && !hasNoName)
+        {
+            name += "*";
+        }
+
+        if(key == CKnownExtension::internalProgress)
+        {
+            continue;
+        }
+        else if(key.contains("speed"))
+        {
+            QString val, unit;
+            IUnit::self().meter2speed(limit.max, val, unit);
+            QString labelMax = QString("%1%2").arg(val).arg(unit);
+
+            addRowLimit(str, name, "", labelMax);
+        }
+        else if(key == CKnownExtension::internalEle)
+        {
+            QString val, unit, labelMin, labelMax;
+            IUnit::self().meter2elevation(limit.min, val, unit);
+            labelMin = QString("%1%2").arg(val).arg(unit);
+            IUnit::self().meter2elevation(limit.max, val, unit);
+            labelMax = QString("%1%2").arg(val).arg(unit);
+            addRowLimit(str, name, labelMin, labelMax);
+        }
+        else if(key == CKnownExtension::internalSlope)
+        {
+            QString val, unit, labelMin, labelMax;
+            IUnit::self().slope2string(limit.min, val, unit);
+            labelMin = QString("%1%2").arg(val).arg(unit);
+            IUnit::self().slope2string(limit.max, val, unit);
+            labelMax = QString("%1%2").arg(val).arg(unit);
+            addRowLimit(str, name, labelMin, labelMax);
+        }
+        else
+        {
+            QString labelMin = QString("%1%2").arg(limit.min * ext.factor).arg(ext.unit);
+            QString labelMax = QString("%1%2").arg(limit.max * ext.factor).arg(ext.unit);
+            addRowLimit(str, name, labelMin, labelMax);
+        }
+    }
+
+
+    str += "</table>";
+    return str;
+}
+
 QString CGisItemTrk::getInfo(quint32 feature) const
 {
     QString val1, unit1, val2, unit2;

@@ -200,7 +200,20 @@ bool CKnownExtension::isKnown(const QString &key)
     return knownExtensions.contains(key);
 }
 
-QString CKnownExtension::toString(qreal value, const QString &key) const
+QString CKnownExtension::getName(const QString& altName) const
+{
+    bool hasNoName  = nameShortText.isEmpty();
+    QString name    = hasNoName ? altName : nameShortText;
+
+    if(derivedQMS && !hasNoName)
+    {
+        name += "*";
+    }
+
+    return name;
+}
+
+QString CKnownExtension::toString(qreal value, bool withName, const QString &key) const
 {
     QString str;
     if(key == CKnownExtension::internalProgress)
@@ -229,5 +242,11 @@ QString CKnownExtension::toString(qreal value, const QString &key) const
     {
         str = QString("%1%2").arg(value * factor).arg(unit);
     }
+
+    if(withName)
+    {
+        str = getName(key) + " " + str;
+    }
+
     return str;
 }

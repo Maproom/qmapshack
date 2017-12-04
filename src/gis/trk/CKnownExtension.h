@@ -76,7 +76,26 @@ public:
     bool derivedQMS;           //< if set to true the value is derived by QMS (p.x. slope*)
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
-    QString toString(qreal value, const QString& key) const;
+    /**
+     * @brief Convert a value to a string
+
+       @param value         the value to convert
+       @param withName      set true to prepend the value with the extension's name
+       @param key           the key used to retrieve the extension via CKnownExtension::get()
+
+       @return A string.
+     */
+    QString toString(qreal value, bool withName, const QString& key) const;
+
+
+    /**
+       @brief Get the short name of the extension
+
+       @param altName alternative name if the extension does not have a short name
+
+       @return A string.
+     */
+    QString getName(const QString& altName) const;
 
 private:
 

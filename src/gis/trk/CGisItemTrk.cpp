@@ -1762,7 +1762,7 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
     const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
     QRect rect = fm.boundingRect(fullLabel);
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
-    rect.adjust(-3,-1,3,1);
+    rect.adjust(-4,-2,4,2);
 
     qint32 baseWidth    = 10;
     qint32 basePos      = 10;
@@ -1796,9 +1796,7 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
         }
     }
 
-    p.setPen(Qt::black);
-    p.setBrush(Qt::white);
-    CDraw::bubble(p, rect, pos.toPoint(), baseWidth, basePos);
+    CDraw::bubble(p, rect, pos.toPoint(), baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
 
     p.setPen(Qt::white);
     p.setBrush(color);

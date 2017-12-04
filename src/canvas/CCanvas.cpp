@@ -709,6 +709,7 @@ void CCanvas::slotUpdateTrackStatistic(bool show)
         QString text = trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
         text += trk->getInfoLimits();
 
+        labelTrackStatistic->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
         labelTrackStatistic->setText(text);
         labelTrackStatistic->adjustSize();
 

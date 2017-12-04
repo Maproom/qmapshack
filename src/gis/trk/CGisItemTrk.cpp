@@ -1748,8 +1748,6 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
     rect.adjust(-3,-1,3,1);
 
-    QPoint p1           = rect.bottomLeft();
-    QPoint p2           = rect.bottomRight();
     qint32 baseWidth    = 10;
     qint32 basePos      = 10;
 
@@ -1758,22 +1756,16 @@ void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPoin
     if(doesOverlap(usedRect, rect))
     {
         rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
-        p1      = rect.bottomRight();
-        p2      = rect.bottomLeft();
         basePos = rect.width() - 10;
 
         if(doesOverlap(usedRect, rect))
         {
             rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
-            p1      = rect.bottomLeft();
-            p2      = rect.bottomRight();
             basePos = 10;
 
             if(doesOverlap(usedRect, rect))
             {
                 rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
-                p1      = rect.bottomRight();
-                p2      = rect.bottomLeft();
                 basePos = rect.width() - 10;
 
                 if(doesOverlap(usedRect, rect))

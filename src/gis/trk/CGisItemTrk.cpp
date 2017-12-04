@@ -323,20 +323,12 @@ QString CGisItemTrk::getInfoLimits() const
         const CKnownExtension& ext = CKnownExtension::get(key);
         const limits_t& limit = extrema[key];
 
-        bool hasNoName  = ext.nameShortText.isEmpty();
-        QString name    = hasNoName ? key : ext.nameShortText;
-
-        if(ext.derivedQMS && !hasNoName)
-        {
-            name += "*";
-        }
-
-        const QString& labelMin = ext.toString(limit.min, key);
-        const QString& labelMax = ext.toString(limit.max, key);
+        const QString& labelMin = ext.toString(limit.min, false, key);
+        const QString& labelMax = ext.toString(limit.max, false, key);
 
         if(!labelMin.isEmpty() && !labelMax.isEmpty())
         {
-            addRowLimit(str, name, labelMin, labelMax);
+            addRowLimit(str, ext.getName(key), labelMin, labelMax);
         }
     }
 
@@ -1732,13 +1724,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             gis->convertRad2Px(posMin);
             gis->convertRad2Px(posMax);
 
-            QString name = ext.nameShortText.isEmpty() ? key : ext.nameShortText;
+            QString labelMin = ext.toString(limit.min, true, key);
+            QString labelMax = ext.toString(limit.max, true, key);
 
-            QString labelMin = ext.toString(limit.min, key);
-            QString labelMax = ext.toString(limit.max, key);
-
-            drawLimit(eLimitTypeMin, name + " " + labelMin, posMin, p, fm, usedRect);
-            drawLimit(eLimitTypeMax, name + " " + labelMax, posMax, p, fm, usedRect);
+            drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
+            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
         }
     }
 }

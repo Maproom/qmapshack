@@ -76,6 +76,8 @@ public:
     bool derivedQMS;           //< if set to true the value is derived by QMS (p.x. slope*)
     fTrkPtGetVal valueFunc;    //< the function used to retrieve the value
 
+    QString toString(qreal value, const QString& key) const;
+
 private:
 
     static bool registerNS(const QString &ns);

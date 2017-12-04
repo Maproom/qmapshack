@@ -1708,6 +1708,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     // -------------------------
 
 
+    if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+    {
+        return;
+    }
+
     if(CMainWindow::self().isMinMaxTrackValues())
     {
         const QFont& f = CMainWindow::self().getMapFont();

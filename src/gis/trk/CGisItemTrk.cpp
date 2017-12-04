@@ -1727,8 +1727,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             QString labelMin = ext.toString(limit.min, true, key);
             QString labelMax = ext.toString(limit.max, true, key);
 
-            drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
-            drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
+            if(!labelMin.isEmpty())
+            {
+                drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
+            }
+
+            if(!labelMax.isEmpty())
+            {
+                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
+            }
         }
     }
 }

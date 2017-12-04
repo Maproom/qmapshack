@@ -28,6 +28,7 @@
 QPen CDraw::penBorderBlue(QColor(10,10,150,220),2);
 QPen CDraw::penBorderGray(Qt::lightGray,2);
 QPen CDraw::penBorderBlack(QColor(0,0,0,200),2);
+QPen CDraw::penBorderRed(Qt::red,2);
 QBrush CDraw::brushBackWhite(QColor(255,255,255,255));
 QBrush CDraw::brushBackYellow(QColor(0xff, 0xff, 0xcc, 0xE0));
 
@@ -154,7 +155,7 @@ void CDraw::text(const QString &str, QPainter &p, const QRect &r, const QColor &
     p.drawText(r, Qt::AlignCenter, str);
 }
 
-QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth, float pointerBasePos)
+QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth, float pointerBasePos, const QPen &pen)
 {
     QPainterPath bubblePath;
     bubblePath.addRoundedRect(contentRect, RECT_RADIUS, RECT_RADIUS);
@@ -192,7 +193,7 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
         bubblePath = bubblePath.united(pointerPath);
     }
 
-    p.setPen  (CDraw::penBorderGray);
+    p.setPen  (pen);
     p.setBrush(CDraw::brushBackWhite);
 
     p.drawPolygon(bubblePath.toFillPolygon());

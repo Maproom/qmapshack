@@ -291,7 +291,7 @@ void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
     registeredVisuals.remove(visual);
 }
 
-void addRowLimit(QString& str, const QString& name, const QString& min, const QString& max)
+static void addRowLimit(QString& str, const QString& name, const QString& min, const QString& max)
 {
     str += "<tr>";
     str += "<td align='left'>" + name + "</td>";
@@ -331,44 +331,14 @@ QString CGisItemTrk::getInfoLimits() const
             name += "*";
         }
 
-        if(key == CKnownExtension::internalProgress)
-        {
-            continue;
-        }
-        else if(key.contains("speed"))
-        {
-            QString val, unit;
-            IUnit::self().meter2speed(limit.max, val, unit);
-            QString labelMax = QString("%1%2").arg(val).arg(unit);
+        const QString& labelMin = ext.toString(limit.min, key);
+        const QString& labelMax = ext.toString(limit.max, key);
 
-            addRowLimit(str, name, "", labelMax);
-        }
-        else if(key == CKnownExtension::internalEle)
+        if(!labelMin.isEmpty() && !labelMax.isEmpty())
         {
-            QString val, unit, labelMin, labelMax;
-            IUnit::self().meter2elevation(limit.min, val, unit);
-            labelMin = QString("%1%2").arg(val).arg(unit);
-            IUnit::self().meter2elevation(limit.max, val, unit);
-            labelMax = QString("%1%2").arg(val).arg(unit);
-            addRowLimit(str, name, labelMin, labelMax);
-        }
-        else if(key == CKnownExtension::internalSlope)
-        {
-            QString val, unit, labelMin, labelMax;
-            IUnit::self().slope2string(limit.min, val, unit);
-            labelMin = QString("%1%2").arg(val).arg(unit);
-            IUnit::self().slope2string(limit.max, val, unit);
-            labelMax = QString("%1%2").arg(val).arg(unit);
-            addRowLimit(str, name, labelMin, labelMax);
-        }
-        else
-        {
-            QString labelMin = QString("%1%2").arg(limit.min * ext.factor).arg(ext.unit);
-            QString labelMax = QString("%1%2").arg(limit.max * ext.factor).arg(ext.unit);
             addRowLimit(str, name, labelMin, labelMax);
         }
     }
-
 
     str += "</table>";
     return str;
@@ -1752,7 +1722,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         const QFontMetrics fm(f);
         QList<QRect> usedRect;
 
-
         for(const QString& key : extrema.keys())
         {
             const CKnownExtension& ext = CKnownExtension::get(key);
@@ -1765,49 +1734,11 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
             QString name = ext.nameShortText.isEmpty() ? key : ext.nameShortText;
 
-            if(key == CKnownExtension::internalProgress)
-            {
-                continue;
-            }
-            else if(key.contains("speed"))
-            {
-                QString val, unit;
-                IUnit::self().meter2speed(limit.max, val, unit);
-                QString labelMax = QString("%1 %2%3").arg(name).arg(val).arg(unit);
-                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
-            }
-            else if(key == CKnownExtension::internalEle)
-            {
-                QString val, unit, label;
-                IUnit::self().meter2elevation(limit.min, val, unit);
-                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
-                drawLimit(eLimitTypeMin, label, posMin, p, fm, usedRect);
+            QString labelMin = ext.toString(limit.min, key);
+            QString labelMax = ext.toString(limit.max, key);
 
-
-                IUnit::self().meter2elevation(limit.max, val, unit);
-                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
-                drawLimit(eLimitTypeMax, label, posMax, p, fm, usedRect);
-            }
-            else if(key == CKnownExtension::internalSlope)
-            {
-                QString val, unit, label;
-                IUnit::self().slope2string(limit.min, val, unit);
-                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
-                drawLimit(eLimitTypeMin, label, posMin, p, fm, usedRect);
-
-
-                IUnit::self().slope2string(limit.max, val, unit);
-                label = QString("%1 %2%3").arg(name).arg(val).arg(unit);
-                drawLimit(eLimitTypeMax, label, posMax, p, fm, usedRect);
-            }
-            else
-            {
-                QString labelMin = QString("%1 %2%3").arg(name).arg(limit.min * ext.factor).arg(ext.unit);
-                QString labelMax = QString("%1 %2%3").arg(name).arg(limit.max * ext.factor).arg(ext.unit);
-
-                drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
-                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
-            }
+            drawLimit(eLimitTypeMin, name + " " + labelMin, posMin, p, fm, usedRect);
+            drawLimit(eLimitTypeMax, name + " " + labelMax, posMax, p, fm, usedRect);
         }
     }
 }

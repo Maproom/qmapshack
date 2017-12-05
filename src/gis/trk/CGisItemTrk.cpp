@@ -1707,13 +1707,14 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     // -------------------------
 
-    if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
-    {
-        return;
-    }
-
+    // draw min/max labels
     if(CMainWindow::self().isMinMaxTrackValues())
     {
+        if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+        {
+            return;
+        }
+
         for(const QString& key : extrema.keys())
         {
             if(key == CKnownExtension::internalProgress)

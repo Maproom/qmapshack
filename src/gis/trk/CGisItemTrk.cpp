@@ -1707,7 +1707,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
     // -------------------------
 
-
     if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
     {
         return;
@@ -1715,12 +1714,13 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if(CMainWindow::self().isMinMaxTrackValues())
     {
-        const QFont& f = CMainWindow::self().getMapFont();
-        const QFontMetrics fm(f);
-        QList<QRect> usedRect;
-
         for(const QString& key : extrema.keys())
         {
+            if(key == CKnownExtension::internalProgress)
+            {
+                continue;
+            }
+
             const CKnownExtension& ext = CKnownExtension::get(key);
             const limits_t& limit = extrema[key];
             QPointF posMin = limit.posMin * DEG_TO_RAD;
@@ -1729,25 +1729,18 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
             gis->convertRad2Px(posMin);
             gis->convertRad2Px(posMax);
 
-            QString labelMin = ext.toString(limit.min, true, key);
-            QString labelMax = ext.toString(limit.max, true, key);
-
-            if(!labelMin.isEmpty())
-            {
-                drawLimit(eLimitTypeMin, labelMin, posMin, p, fm, usedRect);
-            }
-
-            if(!labelMax.isEmpty())
-            {
-                drawLimit(eLimitTypeMax, labelMax, posMax, p, fm, usedRect);
-            }
+            p.setPen(Qt::white);
+            p.setBrush(Qt::darkGreen);
+            p.drawEllipse(posMin, 5, 5);
+            p.setBrush(Qt::darkRed);
+            p.drawEllipse(posMax, 5, 5);
         }
     }
 }
 
-static bool doesOverlap(const QList<QRect>& usedRect, const QRect& rect)
+static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
 {
-    for(const QRect& r : usedRect)
+    for(const QRectF& r : blockedAreas)
     {
         if(r.intersects(rect))
         {
@@ -1757,53 +1750,43 @@ static bool doesOverlap(const QList<QRect>& usedRect, const QRect& rect)
     return false;
 }
 
-void CGisItemTrk::drawLimit(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect>& usedRect)
+void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetricsF& fm, QList<QRectF>& blockedAreas)
 {
     const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
-    QRect rect = fm.boundingRect(fullLabel);
+    QRectF rect = fm.boundingRect(fullLabel);
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
     rect.adjust(-4,-2,4,2);
 
     qint32 baseWidth    = 10;
     qint32 basePos      = 10;
 
-    QColor color = type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed;
 
-    if(doesOverlap(usedRect, rect))
+    if(doesOverlap(blockedAreas, rect))
     {
         rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
         basePos = rect.width() - 10;
 
-        if(doesOverlap(usedRect, rect))
+        if(doesOverlap(blockedAreas, rect))
         {
             rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
             basePos = 10;
 
-            if(doesOverlap(usedRect, rect))
+            if(doesOverlap(blockedAreas, rect))
             {
                 rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
                 basePos = rect.width() - 10;
 
-                if(doesOverlap(usedRect, rect))
+                if(doesOverlap(blockedAreas, rect))
                 {
-                    p.setPen(Qt::white);
-                    p.setBrush(color);
-                    p.drawEllipse(pos, 5, 5);
-
                     return;
                 }
             }
         }
     }
 
-    CDraw::bubble(p, rect, pos.toPoint(), baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
-
-    p.setPen(Qt::white);
-    p.setBrush(color);
-    p.drawEllipse(pos, 5, 5);
-
-    CDraw::text(fullLabel, p, rect, color);
-    usedRect << rect;
+    CDraw::bubble(p, rect.toRect(), pos.toPoint(), baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
+    CDraw::text(fullLabel, p, rect.toRect(), type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed);
+    blockedAreas << rect;
 }
 
 void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const
@@ -2107,9 +2090,39 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     drawRange(p);
 }
 
-void CGisItemTrk::drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*)
+void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
 {
-    // tracks don't have labels
+    if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+    {
+        return;
+    }
+
+    if(CMainWindow::self().isMinMaxTrackValues())
+    {
+        for(const QString& key : extrema.keys())
+        {
+            const CKnownExtension& ext = CKnownExtension::get(key);
+            const limits_t& limit = extrema[key];
+            QPointF posMin = limit.posMin * DEG_TO_RAD;
+            QPointF posMax = limit.posMax * DEG_TO_RAD;
+
+            gis->convertRad2Px(posMin);
+            gis->convertRad2Px(posMax);
+
+            QString labelMin = ext.toString(limit.min, true, key);
+            QString labelMax = ext.toString(limit.max, true, key);
+
+            if(!labelMin.isEmpty())
+            {
+                drawLimitLabels(eLimitTypeMin, labelMin, posMin, p, fm, blockedAreas);
+            }
+
+            if(!labelMax.isEmpty())
+            {
+                drawLimitLabels(eLimitTypeMax, labelMax, posMax, p, fm, blockedAreas);
+            }
+        }
+    }
 }
 
 

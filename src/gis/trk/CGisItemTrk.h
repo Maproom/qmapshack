@@ -340,7 +340,7 @@ public:
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    void drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*) override;
+    void drawLabel(QPainter&p, const QPolygonF&, QList<QRectF>&blockedAreas, const QFontMetricsF&fm, CGisDraw*gis) override;
     void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
@@ -636,7 +636,7 @@ private:
           eLimitTypeMin
         , eLimitTypeMax
     };
-    void drawLimit(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetrics& fm, QList<QRect> &usedRect);    
+    void drawLimitLabels(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetricsF &fm, QList<QRectF> &blockedAreas);
 
     /**
        @brief Tell the point of focus to all plots and the detail dialog

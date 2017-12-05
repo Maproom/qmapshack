@@ -558,8 +558,9 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     // trailing "Z" explicitly declares the timestamp to be UTC
     if (timetext.indexOf("Z") != NOIDX)
     {
-        format += "'Z'";
-    }
+        format += "'Z'"; // @kiozen : I did not find 'Z' in format string on http://doc.qt.io/qt-5/qdatetime.html#fromString
+    } // can this be removed ?
+
     else if ((i = tzRE.indexIn(timetext)) != NOIDX)
     {
         // trailing timezone offset [-+]HH:MM present
@@ -588,7 +589,15 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     }
 
     QDateTime datetime = QDateTime::fromString(timetext, format);
-    datetime.setOffsetFromUtc(tzoffset);
+
+    if ( (timetext.indexOf("Z") != NOIDX) || ((i = tzRE.indexIn(timetext)) != NOIDX) )
+    {
+        datetime.setOffsetFromUtc(tzoffset);
+    }
+    else if ( (timetext.indexOf("Z") == NOIDX) && ((i = tzRE.indexIn(timetext)) == NOIDX) )
+    {   // if timetext has no 'Z' and no [-+]HH:MM then this is local time then simply switch to UTC without applying any offset
+        datetime = datetime.toUTC();
+    }
 
     return datetime;
 }

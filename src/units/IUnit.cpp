@@ -558,8 +558,8 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     // trailing "Z" explicitly declares the timestamp to be UTC
     if (timetext.indexOf("Z") != NOIDX)
     {
-        format += "'Z'"; // @kiozen : I did not find 'Z' in format string on http://doc.qt.io/qt-5/qdatetime.html#fromString
-    } // can this be removed ?
+        format += "'Z'";
+    }
 
     else if ((i = tzRE.indexIn(timetext)) != NOIDX)
     {

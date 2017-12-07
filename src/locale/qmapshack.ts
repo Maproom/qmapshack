@@ -2214,27 +2214,27 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="117"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="135"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="221"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4697,32 +4697,42 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="125"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="129"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="130"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="134"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="135"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="139"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="156"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="160"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="144"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="148"/>
         <source>Battery usage: %1 %/hour</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="219"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="197"/>
+        <source>No UTC time has been found. Local computer time will be used. You can adjust the time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="247"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5634,42 +5644,42 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="118"/>
+        <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="131"/>
+        <location filename="../dem/IDemList.ui" line="125"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="156"/>
+        <location filename="../dem/IDemList.ui" line="150"/>
         <source>Activate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="165"/>
+        <location filename="../dem/IDemList.ui" line="159"/>
         <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="168"/>
+        <location filename="../dem/IDemList.ui" line="162"/>
         <source>Hide DEM behind previous one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="177"/>
+        <location filename="../dem/IDemList.ui" line="171"/>
         <source>Move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="180"/>
+        <location filename="../dem/IDemList.ui" line="174"/>
         <source>Show DEM on top of next one</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="189"/>
+        <location filename="../dem/IDemList.ui" line="183"/>
         <source>Reload DEM</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8359,7 +8369,7 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="118"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -9873,18 +9883,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Position values out of bounds. </source>
         <translation type="unfinished"></translation>
     </message>

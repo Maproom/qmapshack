@@ -2220,27 +2220,27 @@ line %2, column %3:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="117"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="135"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="221"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4719,32 +4719,42 @@ ligne %2, colonne %3:
         <translation>Ce n&apos;est pas un fichier sml : %1</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="125"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="129"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="130"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="134"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="135"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="139"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="156"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="160"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="144"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="148"/>
         <source>Battery usage: %1 %/hour</source>
         <translation>Utilisation de la batterie : %1 %/heure</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="219"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="197"/>
+        <source>No UTC time has been found. Local computer time will be used. You can adjust the time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="247"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Ce fichier SML ne contient aucune donnée de position et ne peut pas être affiché par QMapShack : %1</translation>
     </message>
@@ -5662,42 +5672,42 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <translation></translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="118"/>
+        <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
         <translation>Pour ajouter des fichiers DEM cliquez sur &lt;b&gt;Fichier -&gt; Configurer les répertoires DEM&lt;/b&gt;.  Or cliquez &lt;a href=réglages&apos;&gt;&lt;b&gt;ici&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="131"/>
+        <location filename="../dem/IDemList.ui" line="125"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
         <translation>Utilisez le menu contextuel (clic droite sur le fichier) pour activer un fichier. Utilisez glisser-déposer pour changer la position du fichier dans la liste.</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="156"/>
+        <location filename="../dem/IDemList.ui" line="150"/>
         <source>Activate</source>
         <translation>Activer</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="165"/>
+        <location filename="../dem/IDemList.ui" line="159"/>
         <source>Move Up</source>
         <translation>Déplacer vers le haut</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="168"/>
+        <location filename="../dem/IDemList.ui" line="162"/>
         <source>Hide DEM behind previous one</source>
         <translation>Cacher le DEM derrière le précédent</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="177"/>
+        <location filename="../dem/IDemList.ui" line="171"/>
         <source>Move down</source>
         <translation>Déplacer vers le bas</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="180"/>
+        <location filename="../dem/IDemList.ui" line="174"/>
         <source>Show DEM on top of next one</source>
         <translation>Afficher DEM par-dessus le suivant</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="189"/>
+        <location filename="../dem/IDemList.ui" line="183"/>
         <source>Reload DEM</source>
         <translation>Recharger DEM</translation>
     </message>
@@ -8394,7 +8404,7 @@ or
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="131"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="118"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
         <translation>Pour pouvoir utiliser le calcul d&apos;itinéraire hors ligne, vous devez spécifier les répertoires qui contiennent les données locales de calcul d&apos;itinéraire. Utilisez le bouton de configuration pour ajouter des répertoires. Vous pouvez créer vos propres données de calcul d&apos;itinéraires avec &lt;b&gt;Outils-&gt;Créer une base de données Routino&lt;/b&gt;.</translation>
     </message>
@@ -9917,18 +9927,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format de position incorrect. Formats valides: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; ou &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; </translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Position values out of bounds. </source>
         <translation>Valeurs de la position hors de la plage autorisée.</translation>
     </message>

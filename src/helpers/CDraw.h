@@ -41,6 +41,7 @@ public:
     static QPen penBorderBlue;
     static QPen penBorderGray;
     static QPen penBorderBlack;
+    static QPen penBorderRed;
     static QBrush brushBackWhite;
     static QBrush brushBackYellow;
 
@@ -78,7 +79,7 @@ public:
        @param pointerBaseWidth  The width of the pointer
        @param pointerBasePos    The (relative) location of the pointer (in percent / pixels)
      */
-    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f);
+    static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
 
 private:
     /**

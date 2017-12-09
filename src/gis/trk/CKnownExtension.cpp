@@ -199,3 +199,54 @@ bool CKnownExtension::isKnown(const QString &key)
 {
     return knownExtensions.contains(key);
 }
+
+QString CKnownExtension::getName(const QString& altName) const
+{
+    bool hasNoName  = nameShortText.isEmpty();
+    QString name    = hasNoName ? altName : nameShortText;
+
+    if(derivedQMS && !hasNoName)
+    {
+        name += "*";
+    }
+
+    return name;
+}
+
+QString CKnownExtension::toString(qreal value, bool withName, const QString &key) const
+{
+    QString str;
+    if(key == CKnownExtension::internalProgress)
+    {
+        return str;
+    }
+    else if(key.contains("speed"))
+    {
+        QString v, u;
+        IUnit::self().meter2speed(value, v, u);
+        str = v + u;
+    }
+    else if(key == CKnownExtension::internalEle)
+    {
+        QString v, u;
+        IUnit::self().meter2elevation(value, v, u);
+        str = v + u;
+    }
+    else if(key == CKnownExtension::internalSlope)
+    {
+        QString v, u;
+        IUnit::self().slope2string(value, v, u);
+        str = v + u;
+    }
+    else
+    {
+        str = QString("%1%2").arg(value * factor).arg(unit);
+    }
+
+    if(withName)
+    {
+        str = getName(key) + " " + str;
+    }
+
+    return str;
+}

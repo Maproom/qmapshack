@@ -32,6 +32,7 @@
 #include <functional>
 #include <interpolation.h>
 
+using std::numeric_limits;
 
 class QDomNode;
 class IGisProject;
@@ -206,6 +207,8 @@ public:
     /// get a progress summary for a selected track point
     QString getInfoProgress(const CTrackData::trkpt_t& pt) const;
 
+    QString getInfoLimits() const;
+
     quint32 getTotalElapsedSeconds()       const { return totalElapsedSeconds;       }
     quint32 getTotalElapsedSecondsMoving() const { return totalElapsedSecondsMoving; }
 
@@ -289,7 +292,6 @@ private:
     /**@}*/
 
 
-
 public:
     bool isRangeSelected() const;
 
@@ -338,7 +340,7 @@ public:
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
-    void drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*) override;
+    void drawLabel(QPainter&p, const QPolygonF&, QList<QRectF>&blockedAreas, const QFontMetricsF&fm, CGisDraw*gis) override;
     void drawHighlight(QPainter& p) override;
     void drawRange(QPainter& p);
 
@@ -597,8 +599,30 @@ private:
 public:
     struct limits_t
     {
-        qreal min;
-        qreal max;
+        void setMin(qreal val, const QPointF& pos)
+        {
+
+            if(min > val)
+            {
+                min     = val;
+                posMin  = pos;
+            }
+        }
+
+        void setMax(qreal val, const QPointF& pos)
+        {
+            if(max < val)
+            {
+                max     = val;
+                posMax  = pos;
+            }
+        }
+
+        qreal   min     = numeric_limits<qreal>::max();
+        QPointF posMin  = NOPOINTF;
+
+        qreal   max     = numeric_limits<qreal>::lowest();
+        QPointF posMax  = NOPOINTF;
     };
     /**@}*/
 
@@ -606,6 +630,13 @@ private:
     QSet<QString> existingExtensions;
     QHash<QString, limits_t> extrema;
     void updateExtremaAndExtensions();
+
+    enum limit_type_e
+    {
+          eLimitTypeMin
+        , eLimitTypeMax
+    };
+    void drawLimitLabels(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetricsF &fm, QList<QRectF> &blockedAreas);
 
     /**
        @brief Tell the point of focus to all plots and the detail dialog

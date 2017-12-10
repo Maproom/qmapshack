@@ -1144,13 +1144,13 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/CGisItemTrk.cpp" line="316"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
         <source>min.</source>
-        <translation type="unfinished">мин.</translation>
+        <translation>мин.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="316"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1755"/>
         <source>max.</source>
-        <translation type="unfinished">макс.</translation>
+        <translation>макс.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="377"/>
@@ -7503,17 +7503,17 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="843"/>
         <source>Min./Max. Track Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин./макс. значения трека</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="846"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать минимальные и максимальные значения свойств трека в просмотре карт.</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="849"/>
         <source>Ctrl+M</source>
-        <translation type="unfinished">Ctrl+M</translation>
+        <translation>Ctrl+M</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="245"/>

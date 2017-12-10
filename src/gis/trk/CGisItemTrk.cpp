@@ -1722,7 +1722,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
                 continue;
             }
 
-            const CKnownExtension& ext = CKnownExtension::get(key);
             const limits_t& limit = extrema[key];
             QPointF posMin = limit.posMin * DEG_TO_RAD;
             QPointF posMax = limit.posMax * DEG_TO_RAD;
@@ -1753,7 +1752,7 @@ static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
 
 void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetricsF& fm, QList<QRectF>& blockedAreas)
 {
-    const QString& fullLabel = (type == eLimitTypeMin ? tr("min. ") : tr("max. ")) + label;
+    const QString& fullLabel = (type == eLimitTypeMin ? tr("min.") : tr("max.")) + " " + label;
     QRectF rect = fm.boundingRect(fullLabel);
     rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
     rect.adjust(-4,-2,4,2);

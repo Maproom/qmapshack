@@ -846,7 +846,7 @@
     <string>Show the minimum and maximum values of the track properties along the track in the map view.</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+M</string>
+    <string>Ctrl+N</string>
    </property>
   </action>
  </widget>

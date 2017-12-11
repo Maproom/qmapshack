@@ -519,26 +519,10 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     if(proximity != NOFLOAT)
     {
-        QPointF pt1(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-        pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
-        gis->convertRad2Px(pt1);
-
-        qreal r = pt1.x() - posScreen.x();
-
-        p.save();
-        p.setBrush(Qt::NoBrush);
-        p.setPen(QPen(Qt::white,3));
-        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
-        p.setPen(QPen(Qt::red,1));
-        if (this->isAvoid())
-        {
-            p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
-        }
-        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
-        p.restore();
-
         //remember radius for isCloseTo-method
-        radius = r;
+        radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
+
+        drawCircle(p, posScreen, radius, isAvoid(), false);
     }
 
     drawBubble(p);
@@ -627,15 +611,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
 
     if (closeToRadius)
     {
-        p.save();
-        p.setBrush(Qt::NoBrush);
-        p.setPen(QPen(Qt::red,3));
-        if (this->isAvoid())
-        {
-            p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
-        }
-        p.drawEllipse(QRect(posScreen.x() - radius - 1, posScreen.y() - radius - 1, 2*radius + 1, 2*radius + 1));
-        p.restore();
+        drawCircle(p, posScreen, radius, isAvoid(), true);
     }
     else
     {
@@ -686,6 +662,38 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.setPen(Qt::black);
     doc.drawContents(&p);
     p.restore();
+}
+
+void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected) const
+{
+    QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
+    p.save();
+    p.setBrush(Qt::NoBrush);
+    if (selected)
+    {
+        p.setPen(QPen(Qt::red,3));
+    }
+    else
+    {
+        p.setPen(QPen(Qt::white,3));
+        p.drawEllipse(circle);
+        p.setPen(QPen(Qt::red,1));
+    }
+    if (filled)
+    {
+        p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
+    }
+    p.drawEllipse(circle);
+    p.restore();
+}
+
+qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis) const
+{
+    QPointF pt1 = posRad;
+    pt1 = GPS_Math_Wpt_Projection(pt1, radiusRad, 90 * DEG_TO_RAD);
+    gis->convertRad2Px(pt1);
+
+    return pt1.x() - posPx.x();
 }
 
 QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)

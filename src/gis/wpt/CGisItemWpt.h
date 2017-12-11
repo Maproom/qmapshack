@@ -345,6 +345,8 @@ private:
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
+    void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected) const;
+    qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis) const;
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
     bool processMouseOverBubble(const QPoint &pos);
     void detBoundingRect();

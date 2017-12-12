@@ -601,7 +601,6 @@ public:
     {
         void setMin(qreal val, const QPointF& pos)
         {
-
             if(min > val)
             {
                 min     = val;
@@ -618,10 +617,10 @@ public:
             }
         }
 
-        qreal   min     = numeric_limits<qreal>::max();
+        qreal min     = numeric_limits<qreal>::max();
         QPointF posMin  = NOPOINTF;
 
-        qreal   max     = numeric_limits<qreal>::lowest();
+        qreal max     = numeric_limits<qreal>::lowest();
         QPointF posMax  = NOPOINTF;
     };
     /**@}*/
@@ -633,7 +632,7 @@ private:
 
     enum limit_type_e
     {
-          eLimitTypeMin
+        eLimitTypeMin
         , eLimitTypeMax
     };
     void drawLimitLabels(limit_type_e type, const QString &label, const QPointF& pos, QPainter& p, const QFontMetricsF &fm, QList<QRectF> &blockedAreas);

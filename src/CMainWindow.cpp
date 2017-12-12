@@ -1301,7 +1301,7 @@ void CMainWindow::slotToggleDocks()
         hideDocks();
     }
     else
-    {       
+    {
         showDocks();
         if (!dockStates.isEmpty())
         {

@@ -261,7 +261,7 @@ public:
        @brief Get a short string with the items properties to be displayed in tool tips or similar
 
        @param showName          set true if the first line should be the item's name
-       @apram showFullText      set false to get a 200 characters limited info text
+       @param features          a combination of features_e types
 
        @return A string object.
      */
@@ -480,7 +480,7 @@ public:
        @param desc          the description string
        @param links         a list of links
        @param key           some key to be sent with the header links
-       @return The formated text ready to be used.
+       @return The formatted text ready to be used.
      */
     static QString createText(bool isReadOnly, const QString& cmt, const QString& desc, const QList<link_t>& links, const QString& key = "");
     /**

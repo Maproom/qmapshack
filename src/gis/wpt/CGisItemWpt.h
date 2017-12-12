@@ -332,9 +332,15 @@ public:
         return bool(flags & eFlagWptBubble);
     }
 
+    void setHideArea(bool hide)
+    {
+        hideArea = hide;
+    }
+
     static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
 
-
+    static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
+    static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);
 
 private:
     void setIcon();
@@ -345,8 +351,6 @@ private:
     void readGcExt(const QDomNode& xmlCache);
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
-    void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected) const;
-    qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis) const;
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
     bool processMouseOverBubble(const QPoint &pos);
     void detBoundingRect();
@@ -358,6 +362,7 @@ private:
     qreal proximity = NOFLOAT;
     qreal radius = NOFLOAT;
     bool closeToRadius = false;
+    bool hideArea = false;
     geocache_t geocache;
     QList<image_t> images;
 

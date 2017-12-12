@@ -522,7 +522,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         //remember radius for isCloseTo-method
         radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
 
-        drawCircle(p, posScreen, radius, isAvoid(), false);
+        drawCircle(p, posScreen, radius, !hideArea && isAvoid(), false);
     }
 
     drawBubble(p);
@@ -664,7 +664,7 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.restore();
 }
 
-void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected) const
+void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected)
 {
     QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
     p.save();
@@ -687,7 +687,7 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
     p.restore();
 }
 
-qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis) const
+qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis)
 {
     QPointF pt1 = posRad;
     pt1 = GPS_Math_Wpt_Projection(pt1, radiusRad, 90 * DEG_TO_RAD);

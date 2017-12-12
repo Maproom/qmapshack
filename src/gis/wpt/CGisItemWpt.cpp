@@ -871,19 +871,6 @@ void CGisItemWpt::toggleAvoid()
     updateHistory();
 }
 
-void CGisItemWpt::editRadius()
-{
-    if(flags & eFlagWptAvoid)
-    {
-        flags &= ~eFlagWptAvoid;
-    }
-    else
-    {
-        flags |= eFlagWptAvoid;
-    }
-    updateHistory();
-}
-
 bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();

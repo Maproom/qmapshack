@@ -1135,7 +1135,7 @@ void IGisProject::sortItems()
     addChildren(items);
 }
 
-bool sortByName(IGisItem * item1, IGisItem * item2)
+static bool sortByName(IGisItem * item1, IGisItem * item2)
 {
     static QCollator collator;
     // this will set collator to natural sorting mode (instead of lexical)
@@ -1143,7 +1143,7 @@ bool sortByName(IGisItem * item1, IGisItem * item2)
     return collator.compare(item1->getName(), item2->getName()) < 0;
 }
 
-bool sortByTime(IGisItem * item1, IGisItem * item2)
+static bool sortByTime(IGisItem * item1, IGisItem * item2)
 {
     const QDateTime& t1 = item1->getTimestamp();
     const QDateTime& t2 = item2->getTimestamp();

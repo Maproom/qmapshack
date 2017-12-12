@@ -163,6 +163,7 @@ signals:
 
 public slots:
     void slotTriggerCompleteUpdate(CCanvas::redraw_e flags);
+    void slotUpdateTrackStatistic(bool show);
 
 protected:
     bool event(QEvent *) override;
@@ -183,14 +184,17 @@ private slots:
     void slotToolTip();
     void slotCheckTrackOnFocus();
 
+
 private:
     void drawStatusMessages(QPainter& p);
+    void drawTrackStatistic(QPainter& p);
     void drawScale(QPainter& p);
     void setZoom(bool in, redraw_e &needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
     void setDrawContextSize(const QSize& s);
     void setMouseCursor(IMouse& mouse, const QString& src);
+
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
@@ -229,6 +233,8 @@ private:
     IGisItem::key_t keyTrackOnFocus;
     /// the track profile plot
     QPointer<IPlot>  plotTrackProfile;
+    /// a label with a track
+    QLabel * labelTrackStatistic;
 
     QLabel * labelStatusMessages;
     QMap<QString, QString> statusMessages;

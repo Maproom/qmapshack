@@ -151,6 +151,7 @@ CMainWindow::CMainWindow()
     connect(actionPOIText,               &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionMapToolTip,            &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionNightDay,              &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
+    connect(actionMinMaxTrackValues,     &QAction::changed,              this,      &CMainWindow::slotUpdateCurrentWidget);
     connect(actionProfileIsWindow,       &QAction::toggled,              this,      &CMainWindow::slotSetProfileMode);
     connect(actionSetupMapFont,          &QAction::triggered,            this,      &CMainWindow::slotSetupMapFont);
     connect(actionSetupMapBackground,    &QAction::triggered,            this,      &CMainWindow::slotSetupMapBackground);
@@ -190,9 +191,7 @@ CMainWindow::CMainWindow()
 
     for(const QString &name : names)
     {
-        CCanvas * view = new CCanvas(tabWidget, name);
-        tabWidget->addTab(view, view->objectName());
-        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
+        CCanvas * view = addView(name);
 
         cfg.beginGroup(name);
         view->loadConfig(cfg);
@@ -200,10 +199,9 @@ CMainWindow::CMainWindow()
     }
     if(names.isEmpty())
     {
-        CCanvas * view = new CCanvas(tabWidget, QString());
+        CCanvas * view = addView(QString());
+        // call just to setup default values
         view->loadConfig(cfg);
-        tabWidget->addTab(view, view->objectName());
-        connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
     }
     cfg.endGroup(); // Views
     testForNoView();
@@ -216,6 +214,7 @@ CMainWindow::CMainWindow()
     actionPOIText->setChecked(cfg.value("POIText", true).toBool());
     actionMapToolTip->setChecked(cfg.value("MapToolTip", true).toBool());
     actionNightDay->setChecked(cfg.value("isNight", false).toBool());
+    actionMinMaxTrackValues->setChecked(cfg.value("MinMaxTrackValues", false).toBool());
     actionFlipMouseWheel->setChecked(cfg.value("flipMouseWheel", false).toBool());
     actionProfileIsWindow->setChecked(cfg.value("profileIsWindow", false).toBool());
     mapFont = cfg.value("mapFont", font()).value<QFont>();
@@ -311,6 +310,7 @@ CMainWindow::CMainWindow()
                      << actionPOIText
                      << actionNightDay
                      << actionMapToolTip
+                     << actionMinMaxTrackValues
                      << actionSetupDEMPaths
                      << actionAbout
                      << actionHelp
@@ -362,6 +362,7 @@ CMainWindow::CMainWindow()
                    << actionPOIText
                    << actionNightDay
                    << actionMapToolTip
+                   << actionMinMaxTrackValues
                    << actionProfileIsWindow
                    << separator1
                    << actionSetupToolbar
@@ -462,6 +463,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("POIText", actionPOIText->isChecked());
     cfg.setValue("MapToolTip", actionMapToolTip->isChecked());
     cfg.setValue("isNight", actionNightDay->isChecked());
+    cfg.setValue("MinMaxTrackValues", actionMinMaxTrackValues->isChecked());
     cfg.setValue("flipMouseWheel", actionFlipMouseWheel->isChecked());
     cfg.setValue("profileIsWindow",actionProfileIsWindow->isChecked());
     cfg.setValue("mapFont", mapFont);
@@ -496,6 +498,16 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
+}
+
+CCanvas *CMainWindow::addView(const QString& name)
+{
+    CCanvas * view = new CCanvas(tabWidget, name);
+    tabWidget->addTab(view, view->objectName());
+    connect(view, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
+    connect(actionMinMaxTrackValues, &QAction::triggered, view, &CCanvas::slotUpdateTrackStatistic);
+
+    return view;
 }
 
 QWidget * CMainWindow::getBestWidgetForParent()
@@ -560,6 +572,11 @@ bool CMainWindow::isPOIText() const
 bool CMainWindow::isMapToolTip() const
 {
     return actionMapToolTip->isChecked();
+}
+
+bool CMainWindow::isMinMaxTrackValues() const
+{
+    return actionMinMaxTrackValues->isChecked();
 }
 
 bool CMainWindow::flipMouseWheel() const
@@ -786,11 +803,8 @@ void CMainWindow::slotAddCanvas()
         }
     }
 
-    CCanvas * canvas = new CCanvas(tabWidget, QString());
-    tabWidget->addTab(canvas, canvas->objectName());
-    connect(canvas, &CCanvas::sigMousePosition, this, &CMainWindow::slotMousePosition);
-
-    tabWidget->setCurrentWidget(canvas);
+    CCanvas * view = addView(QString());
+    tabWidget->setCurrentWidget(view);
 
     testForNoView();
 }
@@ -1287,7 +1301,7 @@ void CMainWindow::slotToggleDocks()
         hideDocks();
     }
     else
-    {       
+    {
         showDocks();
         if (!dockStates.isEmpty())
         {

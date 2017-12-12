@@ -42,11 +42,14 @@ public:
     void afterMouseLostEvent(QMouseEvent *e) override;
 
 private:
-    IGisItem::key_t key;
-    QPointF origPos;
+    const IGisItem::key_t key;
+    const QPointF origPos;
+    const QPixmap icon;
+    const qreal radius;
+    const bool avoid;
+
     QPointF newPos;
     QPointF focus;
-    QPixmap icon;
 
     bool mapMove    = false;
     bool mapDidMove   = false;

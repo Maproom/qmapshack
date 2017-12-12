@@ -42,9 +42,10 @@ public:
     void afterMouseLostEvent(QMouseEvent *e) override;
 
 private:
-    IGisItem::key_t key;
-    QPointF wptPosition;
-    qreal   origProximity;
+    const IGisItem::key_t key;
+    const QPointF wptPosition;
+    const bool avoid;
+    qreal   dist;
 
     bool mapMove    = false;
     bool mapDidMove   = false;

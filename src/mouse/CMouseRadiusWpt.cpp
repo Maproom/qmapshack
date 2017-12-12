@@ -34,12 +34,14 @@
 #include <QtWidgets>
 
 CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * parent)
-    : IMouse(gis, parent)
+    : IMouse(gis, parent),
+      key(wpt.getKey()),
+      wptPosition(wpt.getPosition() * DEG_TO_RAD),
+      avoid(wpt.isAvoid())
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorRadiusWpt.png"), 0, 0);
-    key     = wpt.getKey();
-    origProximity = wpt.getProximity();
-    wptPosition = wpt.getPosition() * DEG_TO_RAD;
+    wpt.setHideArea(true);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 CMouseRadiusWpt::~CMouseRadiusWpt()
@@ -48,6 +50,14 @@ CMouseRadiusWpt::~CMouseRadiusWpt()
 
 void CMouseRadiusWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 {
+    QPointF pos = point;
+    gis->convertPx2Rad(pos);
+    dist = GPS_Math_Distance(pos.rx(),pos.ry(),wptPosition.x(),wptPosition.y());
+    QPointF screenPos = wptPosition;
+    gis->convertRad2Px(screenPos);
+    qreal radius = CGisItemWpt::calcRadius(wptPosition,screenPos,dist,gis);
+
+    CGisItemWpt::drawCircle(p,screenPos,radius,avoid,false);
 }
 
 void CMouseRadiusWpt::mousePressEvent(QMouseEvent * e)
@@ -60,10 +70,10 @@ void CMouseRadiusWpt::mousePressEvent(QMouseEvent * e)
         CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
         if(wpt != nullptr)
         {
-            wpt->setProximity(origProximity);
+            wpt->setHideArea(false);
         }
         canvas->resetMouse();
-        canvas->update();
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }
     else if(e->button() == Qt::LeftButton)
     {
@@ -85,23 +95,6 @@ void CMouseRadiusWpt::mouseMoveEvent(QMouseEvent * e)
             mapDidMove = true;
         }
     }
-    else
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-
-        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
-        if(wpt)
-        {
-            QPointF pos = point;
-            gis->convertPx2Rad(pos);
-            qreal dist = GPS_Math_Distance(pos.rx(),pos.ry(),wptPosition.rx(),wptPosition.ry());
-            wpt->setProximity(dist);
-        }
-        else
-        {
-            canvas->resetMouse();
-        }
-    }
 
     lastPoint = point;
     canvas->update();
@@ -110,8 +103,16 @@ void CMouseRadiusWpt::mouseMoveEvent(QMouseEvent * e)
 void CMouseRadiusWpt::mouseReleaseEvent(QMouseEvent *e)
 {
     point = e->pos();
-    if(!mapDidMove)
+    if(!mapDidMove && e->button()==Qt::LeftButton)
     {
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+        if(wpt != nullptr)
+        {
+            wpt->setProximity(dist);
+            wpt->setHideArea(false);
+        }
         canvas->resetMouse();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     }

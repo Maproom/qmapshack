@@ -300,7 +300,6 @@ public:
         return bool(flags & eFlagWptAvoid);
     }
 
-    void editRadius();
     bool hasRadius()
     {
         return proximity < NOFLOAT;

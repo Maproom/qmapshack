@@ -36,8 +36,6 @@
 #include <QtXml>
 #include <proj_api.h>
 
-using std::numeric_limits;
-
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10
 #define MIN_DIST_FOCUS      200
@@ -291,6 +289,51 @@ void CGisItemTrk::registerVisual(INotifyTrk * visual)
 void CGisItemTrk::unregisterVisual(INotifyTrk * visual)
 {
     registeredVisuals.remove(visual);
+}
+
+static void addRowLimit(QString& str, const QString& name, const QString& min, const QString& max)
+{
+    str += "<tr>";
+    str += "<td align='left'>" + name + "</td>";
+    str += "<td align='right'>" + min + "</td>";
+    str += "<td align='right'>" + max + "</td>";
+    str += "</tr>";
+}
+
+static bool sortByName(const QString& item1, const QString& item2)
+{
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1, item2) < 0;
+}
+
+
+QString CGisItemTrk::getInfoLimits() const
+{
+    QString str = "<table width='100%'>";
+
+    str += "<tr><th align='left'></th><th align='right'>" + tr("min.") + "</th><th align='right'>" + tr("max.") + "</th></tr>";
+
+    QStringList keys = extrema.keys();
+    qSort(keys.begin(), keys.end(), sortByName);
+
+    for(const QString& key : keys)
+    {
+        const CKnownExtension& ext = CKnownExtension::get(key);
+        const limits_t& limit = extrema[key];
+
+        const QString& labelMin = ext.toString(limit.min, false, key);
+        const QString& labelMax = ext.toString(limit.max, false, key);
+
+        if(!labelMin.isEmpty() && !labelMax.isEmpty())
+        {
+            addRowLimit(str, ext.getName(key), labelMin, labelMax);
+        }
+    }
+
+    str += "</table>";
+    return str;
 }
 
 QString CGisItemTrk::getInfo(quint32 feature) const
@@ -721,21 +764,23 @@ bool CGisItemTrk::isRangeSelected() const
     return mouseRange1 != mouseRange2;
 }
 
-static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val)
+static inline void updateExtrema(CGisItemTrk::limits_t &extrema, qreal val, const QPointF& pos)
 {
     if(NOFLOAT != val)
     {
-        extrema = { qMin(extrema.min, val), qMax(extrema.max, val) };
+        extrema.setMin(val, pos);
+        extrema.setMax(val, pos);
     }
 }
 
 void CGisItemTrk::updateExtremaAndExtensions()
 {
     extrema = QHash<QString, limits_t>();
-    limits_t extremaSpeed    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaSlope    = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaEle      = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
-    limits_t extremaProgress = { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() };
+    limits_t extremaSpeed;
+    limits_t extremaSlope;
+    limits_t extremaEle;
+    limits_t extremaProgress;
+
 
     existingExtensions = QSet<QString>();
     QSet<QString> nonRealExtensions;
@@ -749,15 +794,20 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
         existingExtensions.unite(pt.extensions.keys().toSet());
 
+        const QPointF& pos = {pt.lon, pt.lat};
         for(const QString &key : pt.extensions.keys())
         {
             bool isReal = false;
             qreal val = pt.extensions.value(key).toReal(&isReal);
 
+
             if(isReal)
             {
-                const limits_t &current = extrema.value(key, { numeric_limits<qreal>::max(), numeric_limits<qreal>::lowest() });
-                extrema[key] = { qMin(current.min, val), qMax(current.max, val) };
+                if(!extrema.contains(key))
+                {
+                    extrema[key] = limits_t();
+                }
+                updateExtrema(extrema[key], val, pos);
             }
             else
             {
@@ -765,10 +815,10 @@ void CGisItemTrk::updateExtremaAndExtensions()
             }
         }
 
-        updateExtrema(extremaSpeed,    pt.speed);
-        updateExtrema(extremaEle,      pt.ele);
-        updateExtrema(extremaSlope,    pt.slope1);
-        updateExtrema(extremaProgress, pt.distance);
+        updateExtrema(extremaSpeed,    pt.speed, pos);
+        updateExtrema(extremaEle,      pt.ele, pos);
+        updateExtrema(extremaSlope,    pt.slope1, pos);
+        updateExtrema(extremaProgress, pt.distance, pos);
     }
 
     if(extremaEle.min < extremaEle.max)
@@ -1656,6 +1706,87 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         drawColorized(p);
     }
     // -------------------------
+
+    // draw min/max labels
+    if(CMainWindow::self().isMinMaxTrackValues())
+    {
+        if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+        {
+            return;
+        }
+
+        for(const QString& key : extrema.keys())
+        {
+            if(key == CKnownExtension::internalProgress)
+            {
+                continue;
+            }
+
+            const limits_t& limit = extrema[key];
+            QPointF posMin = limit.posMin * DEG_TO_RAD;
+            QPointF posMax = limit.posMax * DEG_TO_RAD;
+
+            gis->convertRad2Px(posMin);
+            gis->convertRad2Px(posMax);
+
+            p.setPen(Qt::white);
+            p.setBrush(Qt::darkGreen);
+            p.drawEllipse(posMin, 5, 5);
+            p.setBrush(Qt::darkRed);
+            p.drawEllipse(posMax, 5, 5);
+        }
+    }
+}
+
+static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
+{
+    for(const QRectF& r : blockedAreas)
+    {
+        if(r.intersects(rect))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetricsF& fm, QList<QRectF>& blockedAreas)
+{
+    const QString& fullLabel = (type == eLimitTypeMin ? tr("min.") : tr("max.")) + " " + label;
+    QRectF rect = fm.boundingRect(fullLabel);
+    rect.moveBottomLeft(pos.toPoint() + QPoint(10,-10));
+    rect.adjust(-4,-2,4,2);
+
+    qint32 baseWidth    = 10;
+    qint32 basePos      = 10;
+
+
+    if(doesOverlap(blockedAreas, rect))
+    {
+        rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
+        basePos = rect.width() - 10;
+
+        if(doesOverlap(blockedAreas, rect))
+        {
+            rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
+            basePos = 10;
+
+            if(doesOverlap(blockedAreas, rect))
+            {
+                rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
+                basePos = rect.width() - 10;
+
+                if(doesOverlap(blockedAreas, rect))
+                {
+                    return;
+                }
+            }
+        }
+    }
+
+    CDraw::bubble(p, rect.toRect(), pos.toPoint(), baseWidth, basePos, (key == keyUserFocus) ? CDraw::penBorderRed : CDraw::penBorderGray);
+    CDraw::text(fullLabel, p, rect.toRect(), type == eLimitTypeMin ? Qt::darkGreen : Qt::darkRed);
+    blockedAreas << rect;
 }
 
 void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const
@@ -1959,9 +2090,39 @@ void CGisItemTrk::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
     drawRange(p);
 }
 
-void CGisItemTrk::drawLabel(QPainter&, const QPolygonF&, QList<QRectF>&, const QFontMetricsF&, CGisDraw*)
+void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blockedAreas, const QFontMetricsF& fm, CGisDraw* gis)
 {
-    // tracks don't have labels
+    if(!keyUserFocus.item.isEmpty() && (key != keyUserFocus))
+    {
+        return;
+    }
+
+    if(CMainWindow::self().isMinMaxTrackValues())
+    {
+        for(const QString& key : extrema.keys())
+        {
+            const CKnownExtension& ext = CKnownExtension::get(key);
+            const limits_t& limit = extrema[key];
+            QPointF posMin = limit.posMin * DEG_TO_RAD;
+            QPointF posMax = limit.posMax * DEG_TO_RAD;
+
+            gis->convertRad2Px(posMin);
+            gis->convertRad2Px(posMax);
+
+            QString labelMin = ext.toString(limit.min, true, key);
+            QString labelMax = ext.toString(limit.max, true, key);
+
+            if(!labelMin.isEmpty())
+            {
+                drawLimitLabels(eLimitTypeMin, labelMin, posMin, p, fm, blockedAreas);
+            }
+
+            if(!labelMax.isEmpty())
+            {
+                drawLimitLabels(eLimitTypeMax, labelMax, posMax, p, fm, blockedAreas);
+            }
+        }
+    }
 }
 
 

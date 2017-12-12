@@ -68,6 +68,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     connect(actionSetupFilter, &QAction::triggered, this, &CGisWorkspace::slotSetupFilter);
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
+    connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.

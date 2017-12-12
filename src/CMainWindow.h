@@ -56,6 +56,7 @@ public:
     bool isNight()         const;
     bool isPOIText()       const;
     bool isMapToolTip()    const;
+    bool isMinMaxTrackValues() const;
     bool flipMouseWheel()  const;
     bool profileIsWindow() const;
     const QFont& getMapFont() const
@@ -152,6 +153,7 @@ private:
     void hideDocks();
     void displayRegular();
     void displayFullscreen();
+    CCanvas * addView(const QString &name);
 
     static CMainWindow * pSelf;
 

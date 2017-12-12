@@ -1863,6 +1863,7 @@ bool CGisListWks::event(QEvent * e)
 
             e->accept();
             emit sigChanged();
+            emit sigItemDeleted();
             return true;
         }
 
@@ -1889,6 +1890,7 @@ bool CGisListWks::event(QEvent * e)
             }
             e->accept();
             emit sigChanged();
+            emit sigItemDeleted();
             return true;
         }
 

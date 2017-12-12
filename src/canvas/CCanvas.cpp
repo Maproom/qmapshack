@@ -108,6 +108,11 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     labelStatusMessages->setMinimumWidth(300);
     labelStatusMessages->hide();
 
+    labelTrackStatistic = new QLabel(this);
+    labelTrackStatistic->setWordWrap(true);
+    labelTrackStatistic->setMinimumWidth(300);
+    labelTrackStatistic->hide();
+
     connect(map, &CMapDraw::sigStartThread, mapLoadIndicator, &QLabel::show);
     connect(map, &CMapDraw::sigStopThread,  mapLoadIndicator, &QLabel::hide);
 
@@ -345,15 +350,18 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     setDrawContextSize(e->size());
     QWidget::resizeEvent(e);
 
+    const QRect& r = rect();
+
     // move map loading indicator to new center of canvas
     QPoint p1(mapLoadIndicator->width()>>1, mapLoadIndicator->height()>>1);
-    mapLoadIndicator->move(rect().center() - p1);
+    mapLoadIndicator->move(r.center() - p1);
 
     QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
-    demLoadIndicator->move(rect().center() - p2);
+    demLoadIndicator->move(r.center() - p2);
 
     labelStatusMessages->move(20,50);
 
+    slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
     setSizeTrackProfile();
 }
 
@@ -394,6 +402,7 @@ void CCanvas::paintEvent(QPaintEvent*)
 
 
     drawStatusMessages(p);
+    drawTrackStatistic(p);
     drawScale(p);
 
     p.end();
@@ -557,9 +566,20 @@ void CCanvas::drawStatusMessages(QPainter& p)
 {
     if(labelStatusMessages->isVisible())
     {
-        QRect r = labelStatusMessages->rect();
+        QRect r = labelStatusMessages->frameGeometry();
         r.adjust(-5, -5, 5, 5);
-        r.moveTopLeft(QPoint(15,45));
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
+        p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
+    }
+}
+
+void CCanvas::drawTrackStatistic(QPainter& p)
+{
+    if(labelTrackStatistic->isVisible())
+    {
+        QRect r = labelTrackStatistic->frameGeometry();
+        r.adjust(-5, -5, 5, 5);
         p.setPen(CDraw::penBorderGray);
         p.setBrush(CDraw::brushBackWhite);
         p.drawRoundedRect(r, RECT_RADIUS, RECT_RADIUS);
@@ -661,6 +681,8 @@ void CCanvas::slotCheckTrackOnFocus()
         delete plotTrackProfile;
         delete colorLegend;
         keyTrackOnFocus.clear();
+        labelTrackStatistic->clear();
+        labelTrackStatistic->hide();
 
         // get access to next track object
         CGisItemTrk * trk2 = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
@@ -682,6 +704,32 @@ void CCanvas::slotCheckTrackOnFocus()
 
         // finally store the new key as track on focus
         keyTrackOnFocus = key;
+
+        slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
+    }
+}
+
+void CCanvas::slotUpdateTrackStatistic(bool show)
+{
+    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrackOnFocus));
+
+    if(show && trk)
+    {
+        QString text = trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity);
+        text += trk->getInfoLimits();
+
+        labelTrackStatistic->setMinimumWidth((trk->getActivities().getActivityCount() > 1) ? 450 : 350);
+        labelTrackStatistic->setText(text);
+        labelTrackStatistic->adjustSize();
+
+        labelTrackStatistic->move(rect().width() - labelTrackStatistic->width() - 20, rect().height() - labelTrackStatistic->height() - 60);
+        labelTrackStatistic->show();
+        update();
+    }
+    else
+    {
+        labelTrackStatistic->clear();
+        labelTrackStatistic->hide();
     }
 }
 

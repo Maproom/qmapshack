@@ -67,6 +67,7 @@ public slots:
 
 signals:
     void sigChanged();
+    void sigItemDeleted();
 
 protected:
     void dragMoveEvent(QDragMoveEvent *e) override;

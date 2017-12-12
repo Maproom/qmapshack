@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,13 +31,18 @@
 #include <proj_api.h>
 
 CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
-    : IMouse(gis, parent)
+    : IMouse(gis, parent),
+      key(wpt.getKey()),
+      origPos(wpt.getPosition()*DEG_TO_RAD),
+      icon(getWptIconByName(wpt.getIconName(), focus)),
+      radius(wpt.getProximity()),
+      avoid(wpt.isAvoid())
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
-    key     = wpt.getKey();
-    icon    = getWptIconByName(wpt.getIconName(), focus);
-    origPos = wpt.getPosition() * DEG_TO_RAD;
-    newPos  = wpt.getPosition() * DEG_TO_RAD;
+    newPos  = origPos;
+    wpt.setHideArea(true);
+    canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);
+
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()
@@ -83,6 +89,9 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     p.drawPixmap(p1 - focus, icon);
     p.drawPixmap(p2 - focus, icon);
+
+    qreal r = CGisItemWpt::calcRadius(newPos,p2,radius,gis);
+    CGisItemWpt::drawCircle(p,p2,r,avoid,false);
 }
 
 
@@ -91,8 +100,13 @@ void CMouseMoveWpt::mousePressEvent(QMouseEvent * e)
     point  = e->pos();
     if(e->button() == Qt::RightButton)
     {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+        if(wpt != nullptr)
+        {
+            wpt->setHideArea(false);
+        }
         canvas->resetMouse();
-        canvas->update();
+        canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);
     }
     else if(e->button() == Qt::LeftButton)
     {
@@ -137,6 +151,7 @@ void CMouseMoveWpt::mouseReleaseEvent(QMouseEvent *e)
         if(wpt != nullptr)
         {
             wpt->setPosition(pos * RAD_TO_DEG);
+            wpt->setHideArea(false);
         }
         canvas->resetMouse();
         canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);

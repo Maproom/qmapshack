@@ -2222,27 +2222,37 @@ Zeile %2, Spalte %3:
         <translation>Keine Openambit Logdatei: %1</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="113"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation>Gerät: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation>Erholungszeit: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation>Trainingseffekt Spitze: %1 &lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="150"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation>Energie: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Diese LOG Datei enthält keine Positionsdaten und kann nicht in QMapShack angezeigt werden: %1</translation>
     </message>
@@ -4746,22 +4756,22 @@ Zeile %2, Spalte %3:
         <translation>Gerät: %1&lt;br/&gt;</translation>
     </message>
     <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="148"/>
         <source>Battery usage: %1 %/hour</source>
         <translation>Batteriebenutzung: %1 %/h</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
         <source>Use of local time...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="197"/>
-        <source>No UTC time has been found. Local computer time will be used. You can adjust the time using a time filter if needed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="247"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="246"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Diese SML Datei enthält keine Positionsdaten und kann nicht in QMapShack angezeigt werden: %1</translation>
     </message>

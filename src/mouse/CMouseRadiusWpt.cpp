@@ -37,8 +37,12 @@ CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * par
     : IMouse(gis, parent),
       key(wpt.getKey()),
       wptPosition(wpt.getPosition() * DEG_TO_RAD),
-      avoid(wpt.isAvoid())
+      avoid(wpt.isAvoid()),
+      start(true)
 {
+    QPointF pos = GPS_Math_Wpt_Projection(wptPosition,wpt.getProximity(),90 * DEG_TO_RAD);
+    gis->convertRad2Px(pos);
+    point = QPoint(pos.rx(),pos.ry());
     cursor  = QCursor(QPixmap(":/cursors/cursorRadiusWpt.png"), 0, 0);
     wpt.setHideArea(true);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
@@ -57,7 +61,7 @@ void CMouseRadiusWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
     gis->convertRad2Px(screenPos);
     qreal radius = CGisItemWpt::calcRadius(wptPosition,screenPos,dist,gis);
 
-    CGisItemWpt::drawCircle(p,screenPos,radius,avoid,false);
+    CGisItemWpt::drawCircle(p,screenPos,radius,avoid,start);
 }
 
 void CMouseRadiusWpt::mousePressEvent(QMouseEvent * e)
@@ -80,6 +84,7 @@ void CMouseRadiusWpt::mousePressEvent(QMouseEvent * e)
         mapMove = true;
         lastPoint = point;
     }
+    start = false;
 }
 
 void CMouseRadiusWpt::mouseMoveEvent(QMouseEvent * e)
@@ -98,6 +103,7 @@ void CMouseRadiusWpt::mouseMoveEvent(QMouseEvent * e)
 
     lastPoint = point;
     canvas->update();
+    start = false;
 }
 
 void CMouseRadiusWpt::mouseReleaseEvent(QMouseEvent *e)
@@ -119,6 +125,7 @@ void CMouseRadiusWpt::mouseReleaseEvent(QMouseEvent *e)
 
     mapMove     = false;
     mapDidMove    = false;
+    start = false;
 }
 
 void CMouseRadiusWpt::wheelEvent(QWheelEvent*)

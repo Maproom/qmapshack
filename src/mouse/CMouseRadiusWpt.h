@@ -45,7 +45,8 @@ private:
     const IGisItem::key_t key;
     const QPointF wptPosition;
     const bool avoid;
-    qreal   dist;
+    bool start;
+    qreal dist;
 
     bool mapMove    = false;
     bool mapDidMove   = false;

@@ -402,7 +402,7 @@ void CGisItemWpt::setElevation(qint32 val)
 
 void CGisItemWpt::setProximity(qreal val)
 {
-    proximity = val;
+    proximity = qRound(val);
 
     detBoundingRect();
 

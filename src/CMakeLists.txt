@@ -167,6 +167,7 @@ set( SRCS
     gis/ovl/CScrOptOvlArea.cpp
     gis/prj/CDetailsPrj.cpp
     gis/prj/IGisProject.cpp
+    gis/qlb/CQlbProject.cpp
     gis/qms/CQmsProject.cpp
     gis/qms/serialization.cpp
     gis/rte/CCreateRouteFromWpt.cpp
@@ -462,6 +463,7 @@ set( HDRS
         gis/ovl/CScrOptOvlArea.h
         gis/prj/CDetailsPrj.h
         gis/prj/IGisProject.h
+        gis/qlb/CQlbProject.h
         gis/qms/CQmsProject.h
         gis/rte/CCreateRouteFromWpt.h
         gis/rte/CDetailsRte.h

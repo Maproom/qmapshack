@@ -28,6 +28,7 @@
 #include "gis/prj/CDetailsPrj.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qms/CQmsProject.h"
+#include "gis/qlb/CQlbProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/suunto/CLogProject.h"
@@ -43,16 +44,17 @@
 #include <QtWidgets>
 
 
-const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.log *.qms *.slf *.fit)";
+const QString IGisProject::filedialogAllSupported = "All Supported (*.gpx *.GPX *.tcx *.TCX *.sml *.log *.qms *.qlb *.slf *.fit)";
 const QString IGisProject::filedialogFilterGPX    = "GPS Exchange Format (*.gpx *.GPX)";
 const QString IGisProject::filedialogFilterTCX    = "TCX Garmin Proprietary (*.tcx *.TCX)";
 const QString IGisProject::filedialogFilterSML    = "Suunto XML format (*.sml)";
 const QString IGisProject::filedialogFilterLOG    = "Openambit XML format (*.log)";
+const QString IGisProject::filedialogFilterQLB    = "QLandkarte Binary (*.qlb)";
 const QString IGisProject::filedialogFilterQMS    = "QMapShack Binary (*.qms)";
 const QString IGisProject::filedialogFilterSLF    = "Sigma Log Format (*.slf)";
 const QString IGisProject::filedialogFilterFIT    = "Garmin FIT Format (*.fit)";
-const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
-const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
+const QString IGisProject::filedialogSaveFilters = filedialogFilterGPX + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterTCX;
+const QString IGisProject::filedialogLoadFilters = filedialogAllSupported + ";; " + filedialogFilterGPX + ";; " + filedialogFilterTCX + ";; " + filedialogFilterSML + ";; " + filedialogFilterLOG + ";; " + filedialogFilterQLB + ";; " + filedialogFilterQMS + ";; " + filedialogFilterSLF + ";; " + filedialogFilterFIT;
 
 IGisProject::filter_mode_e IGisProject::filterMode = IGisProject::eFilterModeName;
 
@@ -142,8 +144,10 @@ IGisProject * IGisProject::create(const QString filename, CGisListWks * parent)
     {
         item = new CLogProject(filename, parent);
     }
-
-
+    else if (suffix == "qlb")
+    {
+        item = new CQlbProject(filename, parent);
+    }
 
     if(item && !item->isValid())
     {

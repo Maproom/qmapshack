@@ -203,6 +203,7 @@ set( SRCS
         gis/prj/CDetailsPrj.cpp
         gis/gpx/CGpxProject.cpp
         gis/gpx/serialization.cpp
+        gis/qlb/CQlbProject.cpp
         gis/qms/CQmsProject.cpp
         gis/qms/serialization.cpp
         gis/slf/CSlfProject.cpp
@@ -499,6 +500,7 @@ set( HDRS
         gis/CGisListWks.h
         gis/CSelDevices.h
         gis/CSetupFilter.h
+        gis/qlb/CQlbProject.h
         gis/qms/CQmsProject.h
         gis/tnv/CTwoNavProject.h
         gis/tcx/CTcxProject.h

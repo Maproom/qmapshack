@@ -83,6 +83,7 @@
         <file>icons/32x32/GpxProject.png</file>
         <file>icons/32x32/TcxProject.png</file>
         <file>icons/32x32/SmlProject.png</file>
+        <file>icons/32x32/QlbProject.png</file>
         <file>icons/32x32/QmsProject.png</file>
         <file>icons/32x32/SlfProject.png</file>
         <file>icons/32x32/DBProject.png</file>
@@ -298,6 +299,7 @@
         <file>icons/48x48/GpxProject.png</file>
         <file>icons/48x48/TcxProject.png</file>
         <file>icons/48x48/SmlProject.png</file>
+        <file>icons/48x48/QlbProject.png</file>
         <file>icons/48x48/QmsProject.png</file>
         <file>icons/48x48/SlfProject.png</file>
         <file>icons/48x48/DBProject.png</file>

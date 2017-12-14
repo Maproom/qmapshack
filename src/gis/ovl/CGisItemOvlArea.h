@@ -41,7 +41,7 @@ public:
     CGisItemOvlArea(const QDomNode &xml, IGisProject *project);
     CGisItemOvlArea(const history_t& hist, const QString& dbHash, IGisProject * project);
     CGisItemOvlArea(quint64 id, QSqlDatabase& db, IGisProject * project);
-    CGisItemOvlArea(const IQlgtOverlay& ovl);
+    CGisItemOvlArea(const IQlgtOverlay& ovl, IGisProject *project = nullptr);
     virtual ~CGisItemOvlArea();
 
     IGisItem * createClone() override;

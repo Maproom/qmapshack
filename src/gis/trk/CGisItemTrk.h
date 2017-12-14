@@ -97,12 +97,12 @@ public:
     CGisItemTrk(quint64 id, QSqlDatabase& db, IGisProject * project);
 
     /** @brief Clone QLandkarte GT track */
-    CGisItemTrk(const CQlgtTrack& trk1);
+    CGisItemTrk(const CQlgtTrack& trk1, IGisProject *project = nullptr);
 
     /** @brief Load track from file (e.g. TwoNav *trk) */
     CGisItemTrk(const QString& filename, IGisProject * project);
 
-    CGisItemTrk(const IQlgtOverlay& ovl);
+    CGisItemTrk(const IQlgtOverlay& ovl, IGisProject *project = nullptr);
 
     /**
        @brief Creates a new track via provided trkdata

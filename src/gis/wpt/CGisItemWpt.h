@@ -138,7 +138,7 @@ public:
      */
     CGisItemWpt(const CTwoNavProject::wpt_t& tnvWpt, IGisProject * project);
 
-    CGisItemWpt(const CQlgtWpt& wpt1);
+    CGisItemWpt(const CQlgtWpt& wpt1, IGisProject *project = nullptr);
 
     CGisItemWpt(CFitStream& stream, IGisProject * project);
 

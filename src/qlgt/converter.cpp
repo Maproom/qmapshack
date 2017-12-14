@@ -46,8 +46,8 @@ CDBProject::CDBProject(CQlgtFolder& folder)
     }
 }
 
-CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
-    : IGisItem(nullptr, eTypeWpt, NOIDX)
+CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1, IGisProject * project)
+    : IGisItem(project, eTypeWpt, NOIDX)
 {
     qreal direction;
     QDateTime time = QDateTime::fromTime_t(wpt1.timestamp,QTimeZone("UTC"));
@@ -127,14 +127,15 @@ CGisItemWpt::CGisItemWpt(const CQlgtWpt& wpt1)
 
         images << image;
     }
+    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
     setIcon();
     genKey();
     setupHistory();
 }
 
 
-CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
-    : IGisItem(nullptr, eTypeTrk, NOIDX)
+CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1, IGisProject * project)
+    : IGisItem(project, eTypeTrk, NOIDX)
     , activities(this)
 {
     trk.name        = trk1.name;
@@ -209,8 +210,8 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1)
     }
 }
 
-CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
-    : IGisItem(0, eTypeTrk, NOIDX)
+CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl, IGisProject * project)
+    : IGisItem(project, eTypeTrk, NOIDX)
     , activities(this)
 {
     trk.name    = ovl.name;
@@ -243,8 +244,8 @@ CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl)
 
 
 
-CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
-    : IGisItem(0, eTypeOvl, NOIDX)
+CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl, IGisProject * project)
+    : IGisItem(project, eTypeOvl, NOIDX)
 {
     area.name       = ovl.name;
     area.cmt        = ovl.comment;
@@ -271,8 +272,8 @@ CGisItemOvlArea::CGisItemOvlArea(const IQlgtOverlay& ovl)
 }
 
 
-CGisItemRte::CGisItemRte(const CQlgtRoute& rte1)
-    : IGisItem(0, eTypeRte, NOIDX)
+CGisItemRte::CGisItemRte(const CQlgtRoute& rte1, IGisProject * project)
+    : IGisItem(project, eTypeRte, NOIDX)
 {
     rte.name        = rte1.name;
     rte.cmt         = rte1.comment;

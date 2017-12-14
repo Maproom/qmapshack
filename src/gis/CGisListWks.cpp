@@ -42,6 +42,7 @@
 #include "gis/gpx/CGpxProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/qlb/CQlbProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CSearchGoogle.h"
@@ -857,6 +858,14 @@ void CGisListWks::slotLoadWorkspace()
         case IGisProject::eTypeQms:
         {
             project = new CQmsProject(name, this);
+            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
+            *project << stream;
+            break;
+        }
+
+        case IGisProject::eTypeQlb:
+        {
+            project = new CQlbProject(name, this);
             project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
             *project << stream;
             break;

@@ -79,6 +79,7 @@ void CQlbProject::load(const QString& filename)
 void CQlbProject::loadWpts(QByteArray& array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_4_5);
 
     while(!stream.atEnd())
     {
@@ -91,6 +92,7 @@ void CQlbProject::loadWpts(QByteArray& array)
 void CQlbProject::loadTrks(QByteArray &array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_4_5);
 
     while(!stream.atEnd())
     {
@@ -103,6 +105,7 @@ void CQlbProject::loadTrks(QByteArray &array)
 void CQlbProject::loadRtes(QByteArray &array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_4_5);
 
     while(!stream.atEnd())
     {
@@ -115,6 +118,7 @@ void CQlbProject::loadRtes(QByteArray &array)
 void CQlbProject::loadOvls(QByteArray &array)
 {
     QDataStream stream(&array, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_4_5);
 
     bool warningDone = false;
     while(!stream.atEnd())

@@ -171,6 +171,7 @@
         <file>icons/32x32/ProfileToWindow.png</file>
         <file>icons/32x32/Progress.png</file>
         <file>icons/32x32/QMapShack.png</file>
+        <file>icons/32x32/QlbProject.png</file>
         <file>icons/32x32/QmsProject.png</file>
         <file>icons/32x32/Redo.png</file>
         <file>icons/32x32/RegularScreen.png</file>
@@ -387,6 +388,7 @@
         <file>icons/48x48/ProfileToWindow.png</file>
         <file>icons/48x48/Progress.png</file>
         <file>icons/48x48/QMapShack.png</file>
+        <file>icons/48x48/QlbProject.png</file>
         <file>icons/48x48/QmsProject.png</file>
         <file>icons/48x48/Redo.png</file>
         <file>icons/48x48/RegularScreen.png</file>

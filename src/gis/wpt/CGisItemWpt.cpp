@@ -508,7 +508,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 {
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
 
-    if (proximity == NOFLOAT ? !isVisible(posScreen, viewport, gis) : !isVisible(boundingRect, viewport, gis))
+    if (proximity == NOFLOAT || proximity == 0. ? !isVisible(posScreen, viewport, gis) : !isVisible(boundingRect, viewport, gis))
     {
         rectBubble  = QRect();
         posScreen   = NOPOINTF;

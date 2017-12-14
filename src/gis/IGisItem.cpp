@@ -828,6 +828,11 @@ bool IGisItem::isChanged() const
 
 bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points)
 {
+    if(points.isEmpty())
+    {
+        return false;
+    }
+
     if(flags & eSelectionExact)
     {
         for(const QPointF &point : points)

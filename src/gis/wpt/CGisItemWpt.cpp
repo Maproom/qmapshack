@@ -475,7 +475,7 @@ bool CGisItemWpt::isCloseTo(const QPointF& pos)
         return false;
     }
 
-    closeToRadius = abs(QPointF::dotProduct(dist,dist) - radius*radius) < 625;
+    closeToRadius = abs(QPointF::dotProduct(dist,dist)/radius - radius) < 22;
     return closeToRadius;
 }
 

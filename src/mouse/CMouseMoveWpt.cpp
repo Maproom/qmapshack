@@ -37,8 +37,8 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
       radius(wpt.getProximity()),
       avoid(wpt.isAvoid())
 {
-    icon = getWptIconByName(wpt.getIconName(), focus);
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
+    icon    = getWptIconByName(wpt.getIconName(), focus);
     newPos  = origPos;
     wpt.setHideArea(true);
     canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);

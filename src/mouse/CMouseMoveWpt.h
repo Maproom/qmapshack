@@ -47,9 +47,9 @@ private:
     const qreal radius;
     const bool avoid;
 
-    QPixmap icon;
     QPointF newPos;
     QPointF focus;
+    QPixmap icon;
 
     bool mapMove    = false;
     bool mapDidMove   = false;

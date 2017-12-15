@@ -44,10 +44,10 @@ public:
 private:
     const IGisItem::key_t key;
     const QPointF origPos;
-    const QPixmap icon;
     const qreal radius;
     const bool avoid;
 
+    QPixmap icon;
     QPointF newPos;
     QPointF focus;
 

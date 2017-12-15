@@ -67,7 +67,7 @@ CQlbProject::CQlbProject(const QString &filename, CGisListWks *parent)
 
 void CQlbProject::load(const QString& filename)
 {
-    CQlb qlb(0);
+    CQlb qlb(nullptr);
     qlb.load(filename);
 
     loadWpts(qlb.waypoints());
@@ -83,7 +83,7 @@ void CQlbProject::loadWpts(QByteArray& array)
 
     while(!stream.atEnd())
     {
-        CQlgtWpt wpt(0,0);
+        CQlgtWpt wpt(0, nullptr);
         stream >> wpt;
         new CGisItemWpt(wpt, this);
     }
@@ -96,7 +96,7 @@ void CQlbProject::loadTrks(QByteArray &array)
 
     while(!stream.atEnd())
     {
-        CQlgtTrack trk(0,0);
+        CQlgtTrack trk(0, nullptr);
         stream >> trk;
         new CGisItemTrk(trk, this);
     }
@@ -109,7 +109,7 @@ void CQlbProject::loadRtes(QByteArray &array)
 
     while(!stream.atEnd())
     {
-        CQlgtRoute rte(0,0);
+        CQlgtRoute rte(0, nullptr);
         stream >> rte;
         new CGisItemRte(rte, this);
     }
@@ -123,7 +123,7 @@ void CQlbProject::loadOvls(QByteArray &array)
     bool warningDone = false;
     while(!stream.atEnd())
     {
-        IQlgtOverlay ovl(0,0);
+        IQlgtOverlay ovl(0,nullptr);
         stream >> ovl;
         if(ovl.type == "Area")
         {

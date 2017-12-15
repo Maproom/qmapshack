@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -289,6 +290,8 @@ public:
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
+
+    void getAvoidAreas(QList<CGisItemWpt *> &items);
     /**
        @brief Delete all items with matching key from workspace
 
@@ -335,6 +338,10 @@ public:
     void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
+
+    void toggleWptAvoid(const IGisItem::key_t &key);
+
+    void editWptRadius(const IGisItem::key_t &key);
 
     /**
        @brief Set user focus to track

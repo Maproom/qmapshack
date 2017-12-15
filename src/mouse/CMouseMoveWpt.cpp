@@ -42,7 +42,6 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
     newPos  = origPos;
     wpt.setHideArea(true);
     canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);
-
 }
 
 CMouseMoveWpt::~CMouseMoveWpt()
@@ -62,6 +61,9 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     gis->convertRad2Px(p1);
     gis->convertRad2Px(p2);
+
+    qreal r = CGisItemWpt::calcRadius(newPos,p2,radius,gis);
+    CGisItemWpt::drawCircle(p,p2,r,avoid,false);
 
     QPointF p11 = p1 + QPoint(17 * qCos((a1 - 90) * DEG_TO_RAD), 17 * qSin((a1 - 90) * DEG_TO_RAD));
     QPointF p22 = p2 + QPoint(21 * qCos((a2 + 90) * DEG_TO_RAD), 21 * qSin((a2 + 90) * DEG_TO_RAD));
@@ -89,9 +91,6 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
 
     p.drawPixmap(p1 - focus, icon);
     p.drawPixmap(p2 - focus, icon);
-
-    qreal r = CGisItemWpt::calcRadius(newPos,p2,radius,gis);
-    CGisItemWpt::drawCircle(p,p2,r,avoid,false);
 }
 
 

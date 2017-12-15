@@ -6,12 +6,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>157</height>
+    <width>306</width>
+    <height>52</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -39,6 +39,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
       <number>3</number>
+     </property>
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
      </property>
      <item>
       <widget class="QToolButton" name="toolDelete">
@@ -93,7 +96,7 @@
        </property>
        <property name="sizeHint" stdset="0">
         <size>
-         <width>40</width>
+         <width>0</width>
          <height>20</height>
         </size>
        </property>
@@ -104,14 +107,14 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="minimumSize">
       <size>
-       <width>300</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
@@ -132,26 +135,8 @@
      </property>
     </widget>
    </item>
-   <item>
-    <widget class="CPhotoAlbum" name="photoAlbum" native="true">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>100</height>
-      </size>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>CPhotoAlbum</class>
-   <extends>QWidget</extends>
-   <header>widgets/CPhotoAlbum.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

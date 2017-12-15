@@ -36,7 +36,17 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo(IGisItem::eFeatureShowName));
+
+    qreal proximity = wpt->getProximity();
+    if(proximity == NOFLOAT)
+    {
+        proximity = 0.;
+    }
+
+    QString val, unit;
+    IUnit::self().meter2distance(proximity, val, unit);
+    label->setText(QString("%1%2").arg(val).arg(unit));
+
     adjustSize();
 
     toolAvoid->setChecked(wpt->isAvoid());

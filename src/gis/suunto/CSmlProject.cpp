@@ -106,7 +106,7 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
     if(xmlSml.namedItem("DeviceLog").isElement())
     {
         CTrackData trk;
-        QDateTime time0;
+        QDateTime time0; // start time of the track
 
         const QDomNode& xmlDeviceLog = xmlSml.namedItem("DeviceLog");
         if(xmlDeviceLog.namedItem("Header").isElement())
@@ -115,8 +115,8 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
             if(xmlHeader.namedItem("DateTime").isElement())
             {
                 QString dateTimeStr = xmlHeader.namedItem("DateTime").toElement().text();
-                trk.name = dateTimeStr; // date of beginning of recording is chosen as track name
-                IUnit::parseTimestamp(dateTimeStr, time0);
+                trk.name = dateTimeStr; // date (in local time) of beginning of recording is chosen as track name
+                IUnit::parseTimestamp(dateTimeStr, time0); // as local time
             }
 
             if(xmlHeader.namedItem("Activity").isElement())
@@ -168,13 +168,44 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
             if (xmlSampleList.count() > 0)
             {
+                bool UTCtimeFound = false;
+                for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
+                { //look for samples with UTC timestamp
+                    const QDomNode& xmlSample = xmlSampleList.item(i);
+
+                    if (xmlSample.namedItem("UTC").isElement())
+                    {
+                        QString timeStr = xmlSample.namedItem("UTC").toElement().text();
+
+                        if (timeStr.indexOf("Z") != NOIDX) // "Z" means "UTC timestamp" ; note the even this element is <UTC>, this does not mean that time is expressed as UTC
+                        {
+                            if(xmlSample.namedItem("Time").isElement())
+                            {
+                                IUnit::parseTimestamp(timeStr, time0);
+                                time0 = time0.addMSecs(-xmlSample.namedItem("Time").toElement().text().toDouble() * 1000.0 );  // substract current sample time to get start time
+                                UTCtimeFound = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if ( !UTCtimeFound)
+                {
+                    QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Use of local time...")
+                                                   , tr("No UTC time has been found in file %1. "
+                                                       "Local computer time will be used. "
+                                                        "You can adjust time using a time filter if needed.").arg(filename)
+                                                   , QMessageBox::Ok);
+                }
+
+                bool sampleWithPositionFound = false;
                 QList<sample_t> samplesList;
                 QList<QDateTime> lapsList;
 
-                bool sampleWithPositionFound = false;
-
                 for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
+
                     sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 

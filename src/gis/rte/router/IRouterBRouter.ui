@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>342</height>
+    <height>388</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -214,7 +214,7 @@
    <item>
     <widget class="QLabel" name="labelCopyrightBRouter">
      <property name="text">
-      <string>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; &lt;/p&gt;</string>
+      <string>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>
@@ -225,6 +225,16 @@
     <widget class="QLabel" name="labelCopyrightBRouterWeb">
      <property name="text">
       <string>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</string>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelCopyrightOSM">
+     <property name="text">
+      <string>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</string>
      </property>
      <property name="openExternalLinks">
       <bool>true</bool>

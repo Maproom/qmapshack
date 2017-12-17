@@ -58,6 +58,20 @@
       </widget>
      </item>
      <item>
+      <widget class="QToolButton" name="toolEdit">
+       <property name="toolTip">
+        <string>edit radius of circular area</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/WptEditProx.png</normaloff>:/icons/32x32/WptEditProx.png</iconset>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QToolButton" name="toolAvoid">
        <property name="toolTip">
         <string>Wapoint defines an avoid-area for routing</string>
@@ -72,20 +86,6 @@
        </property>
        <property name="checkable">
         <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="toolEdit">
-       <property name="toolTip">
-        <string>edit radius of circular area</string>
-       </property>
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/WptEditProx.png</normaloff>:/icons/32x32/WptEditProx.png</iconset>
        </property>
       </widget>
      </item>

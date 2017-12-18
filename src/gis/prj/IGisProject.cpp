@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -670,6 +671,26 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
         }
     }
 }
+
+void IGisProject::getAvoidAreas(QList<CGisItemWpt *> &items) const
+{
+    if(!isVisible())
+    {
+        return;
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+        if(nullptr == item || item->isHidden() || !item->isAvoid())
+        {
+            continue;
+        }
+
+        items << item;
+    }
+}
+
 
 void IGisProject::mouseMove(const QPointF& pos)
 {

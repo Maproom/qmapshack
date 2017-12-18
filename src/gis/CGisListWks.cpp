@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -173,6 +174,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionBubbleWpt->setCheckable(true);
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    actionRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotRadiusWpt()));
+    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Avoid Area"), this, SLOT(slotAvoidWpt()));
+    actionAvoidWpt->setCheckable(true);
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -1137,11 +1141,17 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             }
 
             case IGisItem::eTypeWpt:
-                actionBubbleWpt->setChecked(dynamic_cast<CGisItemWpt*>(gisItem)->hasBubble());
+            {
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
+                actionBubbleWpt->setChecked(wpt->hasBubble());
+                bool radius = wpt->hasRadius();
+                actionAvoidWpt->setEnabled(radius);
+                actionAvoidWpt->setChecked(radius && wpt->isAvoid());
                 actionMoveWpt->setDisabled(isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
+            }
 
             case IGisItem::eTypeRte:
                 actionFocusRte->setChecked(gisItem->hasUserFocus());
@@ -1430,6 +1440,28 @@ void CGisListWks::slotBubbleWpt()
     if(gisItem != nullptr)
     {
         CGisWorkspace::self().toggleWptBubble(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotAvoidWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWorkspace::self().toggleWptAvoid(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotRadiusWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWorkspace::self().editWptRadius(gisItem->getKey());
     }
 }
 

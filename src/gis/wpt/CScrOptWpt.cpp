@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -42,6 +43,9 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     toolMove->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
     photoAlbum->reload(wpt->getImages());
     toolBubble->setChecked(wpt->hasBubble());
+    bool radius = wpt->hasRadius();
+    toolAvoid->setEnabled(radius);
+    toolAvoid->setChecked(radius && wpt->isAvoid());
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
@@ -60,6 +64,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::slotMove);
     connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::slotProj);
     connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+    connect(toolAvoid,  &QToolButton::clicked, this, &CScrOptWpt::slotAvoid);
+    connect(toolRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
 
     adjustSize();
 }
@@ -101,6 +107,18 @@ void CScrOptWpt::slotProj()
 void CScrOptWpt::slotBubble()
 {
     CGisWorkspace::self().toggleWptBubble(key);
+    deleteLater();
+}
+
+void CScrOptWpt::slotAvoid()
+{
+    CGisWorkspace::self().toggleWptAvoid(key);
+    deleteLater();
+}
+
+void CScrOptWpt::slotEditRadius()
+{
+    CGisWorkspace::self().editWptRadius(key);
     deleteLater();
 }
 

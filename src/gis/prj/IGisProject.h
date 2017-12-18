@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +28,7 @@
 
 class CGisListWks;
 class CGisDraw;
+class CGisItemWpt;
 class QDataStream;
 class CDetailsPrj;
 class IDevice;
@@ -326,6 +328,7 @@ public:
 
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
+    void getAvoidAreas(QList<CGisItemWpt *> &items) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {

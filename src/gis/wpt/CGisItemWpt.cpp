@@ -408,7 +408,14 @@ void CGisItemWpt::setProximity(qreal val)
 
     radius = NOFLOAT; //radius is proximity in set on redraw
 
-    changed(tr("Changed proximity"),"://icons/48x48/WptProx.png");
+    if (proximity == NOFLOAT)
+    {
+        changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
+    }
+    else
+    {
+        changed(tr("Changed proximity"),"://icons/48x48/WptEditProx.png");
+    }
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -863,12 +870,13 @@ void CGisItemWpt::toggleAvoid()
     if(flags & eFlagWptAvoid)
     {
         flags &= ~eFlagWptAvoid;
+        changed(tr("Changed to regular waypoint"),"://icons/48x48/WptProx.png");
     }
     else
     {
         flags |= eFlagWptAvoid;
+        changed(tr("Changed to avoid-area"),"://icons/48x48/WptAvoid.png");
     }
-    updateHistory();
 }
 
 bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)

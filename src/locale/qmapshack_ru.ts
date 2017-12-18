@@ -2234,27 +2234,37 @@ line %2, column %3:
         <translation>Это не файл Openambit LOG: %1</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="113"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation>Устройство: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation>Время восстановления: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation>Пиковый эффект тренинга: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="150"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation>Энергия: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Этот файл LOG не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
@@ -4756,13 +4766,23 @@ line %2, column %3:
         <translation>Устройство: %1&lt;br/&gt;</translation>
     </message>
     <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="148"/>
         <source>Battery usage: %1 %/hour</source>
         <translatorcomment>Изпользование батареи: %1 %/час</translatorcomment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="215"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="246"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
@@ -9982,18 +10002,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="767"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Неверный формат позиции. Должен быть: &quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot; или &quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="773"/>
         <source>Position values out of bounds. </source>
         <translation>Значения позиции вне допустимого интервала.</translation>
     </message>

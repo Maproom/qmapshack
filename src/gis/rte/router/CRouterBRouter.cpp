@@ -287,7 +287,12 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         delete progress;
 
-        if (reply->error() != QNetworkReply::NoError)
+        const QNetworkReply::NetworkError& netErr = reply->error();
+        if (netErr == QNetworkReply::RemoteHostClosedError && areas.size() > 1)
+        {
+            throw tr("BRouter does not support more then 1 avoid-area in this version, consider to upgrade");
+        }
+        else if(netErr != QNetworkReply::NoError)
         {
             throw reply->errorString();
         }
@@ -392,6 +397,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     reply->setProperty("key.device", key.device);
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
+    reply->setProperty("nogos", areas.size());
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -416,7 +422,12 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
     try
     {
-        if(reply->error() != QNetworkReply::NoError)
+        const QNetworkReply::NetworkError& netErr = reply->error();
+        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1)
+        {
+            throw tr("BRouter does not support more then 1 avoid-area in this version, consider to upgrade");
+        }
+        else if(netErr != QNetworkReply::NoError)
         {
             throw reply->errorString();
         }

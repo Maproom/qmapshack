@@ -145,11 +145,15 @@ void CRouterBRouter::updateDialog() const
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (offline)"));
+        labelCopyrightBRouter->setVisible(true);
+        labelCopyrightBRouterWeb->setVisible(false);
     }
     else
     {
         Q_ASSERT(setup->installMode == CRouterBRouterSetup::eModeOnline);
         routerSetup->setRouterTitle(CRouterSetup::RouterBRouter,tr("BRouter (online)"));
+        labelCopyrightBRouter->setVisible(false);
+        labelCopyrightBRouterWeb->setVisible(true);
     }
     comboProfile->clear();
     bool hasItems = false;

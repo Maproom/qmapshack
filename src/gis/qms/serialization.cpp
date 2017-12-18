@@ -648,6 +648,8 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     setText   (CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
 
+    detBoundingRect();
+
     return stream;
 }
 

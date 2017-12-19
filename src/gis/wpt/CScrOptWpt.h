@@ -45,6 +45,7 @@ private slots:
     void slotMove();
     void slotProj();
     void slotBubble();
+    void slotDeleteRadius();
     void slotAvoid();
     void slotEditRadius();
 

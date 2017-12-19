@@ -68,14 +68,7 @@ CScrOptWptRadius::~CScrOptWptRadius()
 
 void CScrOptWptRadius::slotDelete()
 {
-    IGisItem * item = CGisWorkspace::self().getItemByKey(key);
-    if(nullptr == item)
-    {
-        deleteLater();
-        return;
-    }
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt *>(item);
-    wpt->setProximity(NOFLOAT);
+    CGisWorkspace::self().deleteWptRadius(key);
     deleteLater();
 }
 

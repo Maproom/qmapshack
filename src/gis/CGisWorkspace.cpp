@@ -701,6 +701,16 @@ void CGisWorkspace::toggleWptBubble(const IGisItem::key_t &key)
     }
 }
 
+void CGisWorkspace::deleteWptRadius(const IGisItem::key_t &key)
+{
+    IGisItem * item = getItemByKey(key);
+    if(nullptr != item)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt *>(item);
+        wpt->setProximity(NOFLOAT);
+    }
+}
+
 void CGisWorkspace::toggleWptAvoid(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

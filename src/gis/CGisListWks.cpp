@@ -174,9 +174,10 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionBubbleWpt->setCheckable(true);
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
-    actionRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotRadiusWpt()));
-    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Avoid Area"), this, SLOT(slotAvoidWpt()));
+    actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
+    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Nogo-Area"), this, SLOT(slotAvoidWpt()));
     actionAvoidWpt->setCheckable(true);
+    actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -1145,6 +1146,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
                 actionBubbleWpt->setChecked(wpt->hasBubble());
                 bool radius = wpt->hasRadius();
+                actionDelRadiusWpt->setEnabled(radius);
                 actionAvoidWpt->setEnabled(radius);
                 actionAvoidWpt->setChecked(radius && wpt->isAvoid());
                 actionMoveWpt->setDisabled(isOnDevice);
@@ -1454,7 +1456,18 @@ void CGisListWks::slotAvoidWpt()
     }
 }
 
-void CGisListWks::slotRadiusWpt()
+void CGisListWks::slotDelRadiusWpt()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWorkspace::self().deleteWptRadius(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotEditRadiusWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 

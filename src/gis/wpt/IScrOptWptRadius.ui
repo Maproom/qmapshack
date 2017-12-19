@@ -44,20 +44,6 @@
       <enum>QLayout::SetNoConstraint</enum>
      </property>
      <item>
-      <widget class="QToolButton" name="toolDelete">
-       <property name="toolTip">
-        <string>Delete circle defined by waypoint</string>
-       </property>
-       <property name="text">
-        <string>...</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../../resources.qrc">
-         <normaloff>:/icons/32x32/WptDelProx.png</normaloff>:/icons/32x32/WptDelProx.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
       <widget class="QToolButton" name="toolEdit">
        <property name="toolTip">
         <string>edit radius of circular area</string>
@@ -74,7 +60,7 @@
      <item>
       <widget class="QToolButton" name="toolAvoid">
        <property name="toolTip">
-        <string>Wapoint defines an avoid-area for routing</string>
+        <string>Switch between proximity and nogo-area</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -86,6 +72,20 @@
        </property>
        <property name="checkable">
         <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QToolButton" name="toolDelete">
+       <property name="toolTip">
+        <string>Delete circle defined by waypoint</string>
+       </property>
+       <property name="text">
+        <string>...</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../../resources.qrc">
+         <normaloff>:/icons/32x32/WptDelProx.png</normaloff>:/icons/32x32/WptDelProx.png</iconset>
        </property>
       </widget>
      </item>

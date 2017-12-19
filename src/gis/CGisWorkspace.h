@@ -339,6 +339,8 @@ public:
 
     void toggleWptBubble(const IGisItem::key_t &key);
 
+    void deleteWptRadius(const IGisItem::key_t &key);
+
     void toggleWptAvoid(const IGisItem::key_t &key);
 
     void editWptRadius(const IGisItem::key_t &key);

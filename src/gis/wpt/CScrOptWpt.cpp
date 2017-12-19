@@ -46,26 +46,28 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     bool radius = wpt->hasRadius();
     toolAvoid->setEnabled(radius);
     toolAvoid->setChecked(radius && wpt->isAvoid());
+    toolDelRadius->setEnabled(radius);
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::hide);
-    connect(toolEdit,   &QToolButton::clicked, this, &CScrOptWpt::hide);
-    connect(toolCopy,   &QToolButton::clicked, this, &CScrOptWpt::hide);
-    connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::hide);
-    connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::hide);
-    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolDelete,     &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolEdit,       &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolCopy,       &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolMove,       &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolProj,       &QToolButton::clicked, this, &CScrOptWpt::hide);
+    connect(toolBubble,     &QToolButton::clicked, this, &CScrOptWpt::hide);
 
-    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
-    connect(toolEdit,   &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
-    connect(toolCopy,   &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
-    connect(toolMove,   &QToolButton::clicked, this, &CScrOptWpt::slotMove);
-    connect(toolProj,   &QToolButton::clicked, this, &CScrOptWpt::slotProj);
-    connect(toolBubble, &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
-    connect(toolAvoid,  &QToolButton::clicked, this, &CScrOptWpt::slotAvoid);
-    connect(toolRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
+    connect(toolDelete,     &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
+    connect(toolEdit,       &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
+    connect(toolCopy,       &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
+    connect(toolMove,       &QToolButton::clicked, this, &CScrOptWpt::slotMove);
+    connect(toolProj,       &QToolButton::clicked, this, &CScrOptWpt::slotProj);
+    connect(toolBubble,     &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
+    connect(toolDelRadius,  &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
+    connect(toolAvoid,      &QToolButton::clicked, this, &CScrOptWpt::slotAvoid);
+    connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
 
     adjustSize();
 }
@@ -107,6 +109,12 @@ void CScrOptWpt::slotProj()
 void CScrOptWpt::slotBubble()
 {
     CGisWorkspace::self().toggleWptBubble(key);
+    deleteLater();
+}
+
+void CScrOptWpt::slotDeleteRadius()
+{
+    CGisWorkspace::self().deleteWptRadius(key);
     deleteLater();
 }
 

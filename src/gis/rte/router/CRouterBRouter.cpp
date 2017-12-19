@@ -192,7 +192,7 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, const QVector<area_t>& areas) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, const QVector<IRouter::circle_t>& areas) const
 {
     QString lonLats;
     bool isNext = false;
@@ -213,7 +213,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, co
     QString nogos;
     isNext = false;
 
-    for(const area_t &pt : areas)
+    for(const IRouter::circle_t &pt : areas)
     {
         if (isNext)
         {
@@ -255,18 +255,8 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     points << wpt_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG);
     points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
 
-    QList<CGisItemWpt *> wpts;
-    CGisWorkspace::self().getNogoAreas(wpts);
-
-    QVector<area_t> areas;
-    for(CGisItemWpt* const wpt : wpts)
-    {
-        if (wpt->getProximity() < NOFLOAT)
-        {
-            QPointF pos = wpt->getPosition();
-            areas << area_t(pos.ry(),pos.rx(),wpt->getProximity());
-        }
-    }
+    QVector<IRouter::circle_t> areas;
+    CGisWorkspace::self().getNogoAreas(areas);
 
     synchronous = true;
 
@@ -365,8 +355,8 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
-    QList<CGisItemWpt *> wpts;
-    CGisWorkspace::self().getNogoAreas(wpts);
+    QVector<IRouter::circle_t> areas;
+    CGisWorkspace::self().getNogoAreas(areas);
 
     rte->reset();
 
@@ -376,16 +366,6 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     for(const CGisItemRte::rtept_t &pt : rte->getRoute().pts)
     {
         points << wpt_t(pt.lat,pt.lon);
-    }
-
-    QVector<area_t> areas;
-    for(CGisItemWpt* const wpt : wpts)
-    {
-        if (wpt->getProximity() < NOFLOAT)
-        {
-            QPointF pos = wpt->getPosition();
-            areas << area_t(pos.ry(),pos.rx(),wpt->getProximity());
-        }
     }
 
     synchronous = false;

@@ -21,6 +21,7 @@
 #define IGISPROJECT_H
 
 #include "gis/IGisItem.h"
+#include "gis/rte/router/IRouter.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
@@ -328,7 +329,7 @@ public:
 
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
-    void getNogoAreas(QList<CGisItemWpt *> &items) const;
+    void getNogoAreas(QVector<IRouter::circle_t> &areas) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {

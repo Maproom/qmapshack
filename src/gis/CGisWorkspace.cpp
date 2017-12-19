@@ -33,6 +33,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/IRouter.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -394,7 +395,7 @@ void CGisWorkspace::getItemsByArea(const QRectF& area, IGisItem::selflags_t flag
     }
 }
 
-void CGisWorkspace::getNogoAreas(QList<CGisItemWpt*>& items)
+void CGisWorkspace::getNogoAreas(QVector<IRouter::circle_t> &areas)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -403,13 +404,13 @@ void CGisWorkspace::getNogoAreas(QList<CGisItemWpt*>& items)
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project)
         {
-            project->getNogoAreas(items);
+            project->getNogoAreas(areas);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
         if(device)
         {
-            device->getNogoAreas(items);
+            device->getNogoAreas(areas);
             continue;
         }
     }

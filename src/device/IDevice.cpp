@@ -21,6 +21,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/router/IRouter.h"
 #include "helpers/CSelectCopyAction.h"
 
 #ifdef HAVE_DBUS
@@ -123,7 +124,7 @@ void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QLi
     }
 }
 
-void IDevice::getNogoAreas(QList<CGisItemWpt *> & items)
+void IDevice::getNogoAreas(QVector<IRouter::circle_t> & areas)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
@@ -131,14 +132,14 @@ void IDevice::getNogoAreas(QList<CGisItemWpt *> & items)
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
-            project->getNogoAreas(items);
+            project->getNogoAreas(areas);
             continue;
         }
 
         IDevice * device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
-            device->getNogoAreas(items);
+            device->getNogoAreas(areas);
         }
     }
 }

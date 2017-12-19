@@ -31,6 +31,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/qlb/CQlbProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/IRouter.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/suunto/CLogProject.h"
 #include "gis/suunto/CSmlProject.h"
@@ -672,7 +673,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getNogoAreas(QList<CGisItemWpt *> &items) const
+void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
 {
     if(!isVisible())
     {
@@ -682,12 +683,15 @@ void IGisProject::getNogoAreas(QList<CGisItemWpt *> &items) const
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr == item || item->isHidden() || !item->isNogoArea())
+        if(nullptr != item && !item->isHidden() && item->isNogoArea())
         {
-            continue;
+            const qreal& rad = item->getProximity();
+            if (rad != NOFLOAT && rad > 0.)
+            {
+                const QPointF& pos = item->getPosition();
+                areas << IRouter::circle_t(pos.y(),pos.x(),rad);
+            }
         }
-
-        items << item;
     }
 }
 

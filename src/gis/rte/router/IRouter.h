@@ -26,6 +26,26 @@ class IRouter : public QWidget
 {
     Q_OBJECT
 public:
+
+    struct circle_t
+    {
+
+        circle_t() : lon(NOFLOAT), lat(NOFLOAT), rad(NOINT)
+        {
+        }
+
+        circle_t(const qreal& lat, const qreal& lon, const qreal& rad) :
+            lon(lon),
+            lat(lat),
+            rad(rad)
+        {
+        }
+
+        qreal lon;
+        qreal lat;
+        quint32 rad;
+    };
+
     IRouter(bool fastRouting, QWidget * parent);
     virtual ~IRouter();
 

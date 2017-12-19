@@ -27,6 +27,7 @@
 
 #include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
+#include "gis/rte/router/IRouter.h"
 
 class CGisDraw;
 class IGisProject;
@@ -291,7 +292,7 @@ public:
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
-    void getNogoAreas(QList<CGisItemWpt *> &items);
+    void getNogoAreas(QVector<IRouter::circle_t> &areas);
     /**
        @brief Delete all items with matching key from workspace
 

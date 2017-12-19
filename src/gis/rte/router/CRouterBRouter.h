@@ -77,25 +77,11 @@ private:
         qreal lon;
     };
 
-    struct area_t : wpt_t
-    {
-        area_t() : wpt_t(),rad(NOINT)
-        {
-        }
-
-        area_t(const qreal& lat, const qreal& lon, const qreal& rad) :
-            wpt_t(lat,lon),
-            rad(rad)
-        {
-        }
-        quint32 rad;
-    };
-
     void updateDialog() const;
     void startBRouter() const;
     void stopBRouter() const;
     void updateLocalBRouterStatus() const;
-    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<area_t> &areas) const;
+    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
     QUrl getServiceUrl() const;
     void clearError();
 

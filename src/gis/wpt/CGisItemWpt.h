@@ -294,10 +294,10 @@ public:
         return geocache.hasData;
     }
 
-    void toggleAvoid();
-    bool isAvoid()
+    void toggleNogoArea();
+    bool isNogoArea()
     {
-        return bool(flags & eFlagWptAvoid);
+        return bool(flags & eFlagWptNogo);
     }
 
     bool hasRadius()

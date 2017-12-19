@@ -46,7 +46,7 @@ private slots:
     void slotProj();
     void slotBubble();
     void slotDeleteRadius();
-    void slotAvoid();
+    void slotNogoArea();
     void slotEditRadius();
 
 private:

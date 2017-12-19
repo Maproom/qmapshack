@@ -256,7 +256,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
 
     QList<CGisItemWpt *> wpts;
-    CGisWorkspace::self().getAvoidAreas(wpts);
+    CGisWorkspace::self().getNogoAreas(wpts);
 
     QVector<area_t> areas;
     for(CGisItemWpt* const wpt : wpts)
@@ -366,7 +366,7 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
     }
 
     QList<CGisItemWpt *> wpts;
-    CGisWorkspace::self().getAvoidAreas(wpts);
+    CGisWorkspace::self().getNogoAreas(wpts);
 
     rte->reset();
 

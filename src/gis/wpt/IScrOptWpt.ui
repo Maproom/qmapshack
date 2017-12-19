@@ -162,7 +162,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QToolButton" name="toolAvoid">
+      <widget class="QToolButton" name="toolNogoArea">
        <property name="toolTip">
         <string>Switch between proximity and nogo-area</string>
        </property>

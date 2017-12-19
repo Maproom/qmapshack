@@ -672,7 +672,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getAvoidAreas(QList<CGisItemWpt *> &items) const
+void IGisProject::getNogoAreas(QList<CGisItemWpt *> &items) const
 {
     if(!isVisible())
     {
@@ -682,7 +682,7 @@ void IGisProject::getAvoidAreas(QList<CGisItemWpt *> &items) const
     for(int i = 0; i < childCount(); i++)
     {
         CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr == item || item->isHidden() || !item->isAvoid())
+        if(nullptr == item || item->isHidden() || !item->isNogoArea())
         {
             continue;
         }

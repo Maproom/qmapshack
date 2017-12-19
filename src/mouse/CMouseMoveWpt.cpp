@@ -35,7 +35,7 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *parent)
       key(wpt.getKey()),
       origPos(wpt.getPosition()*DEG_TO_RAD),
       radius(wpt.getProximity()),
-      avoid(wpt.isAvoid())
+      avoid(wpt.isNogoArea())
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
     icon    = getWptIconByName(wpt.getIconName(), focus);

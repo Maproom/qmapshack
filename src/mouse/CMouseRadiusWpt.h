@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,51 +17,42 @@
 
 **********************************************************************************************/
 
-#ifndef IROUTER_H
-#define IROUTER_H
+#ifndef CMOUSERADIUSWPT_H
+#define CMOUSERADIUSWPT_H
 
 #include "gis/IGisItem.h"
-#include <QWidget>
+#include "mouse/IMouse.h"
 
-class IRouter : public QWidget
+class CGisItemWpt;
+class CGisDraw;
+class CCanvas;
+
+class CMouseRadiusWpt : public IMouse
 {
     Q_OBJECT
 public:
+    CMouseRadiusWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
+    virtual ~CMouseRadiusWpt();
 
-    struct circle_t
-    {
-
-        circle_t() : lon(NOFLOAT), lat(NOFLOAT), rad(NOINT)
-        {
-        }
-
-        circle_t(const qreal& lat, const qreal& lon, const qreal& rad) :
-            lon(lon),
-            lat(lat),
-            rad(rad)
-        {
-        }
-
-        qreal lon;
-        qreal lat;
-        quint32 rad;
-    };
-
-    IRouter(bool fastRouting, QWidget * parent);
-    virtual ~IRouter();
-
-    virtual void calcRoute(const IGisItem::key_t& key) = 0;
-    virtual int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) = 0;
-    virtual bool hasFastRouting()
-    {
-        return fastRouting;
-    }
-
-    virtual QString getOptions() = 0;
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+    void mousePressEvent(QMouseEvent *e) override;
+    void mouseMoveEvent(QMouseEvent *e) override;
+    void mouseReleaseEvent(QMouseEvent *e) override;
+    void wheelEvent(QWheelEvent *e) override;
+    void afterMouseLostEvent(QMouseEvent *e) override;
 
 private:
-    bool fastRouting;
+    const IGisItem::key_t key;
+    const QPointF wptPosition;
+    const bool avoid;
+    bool start;
+    qreal dist;
+
+    bool mapMove    = false;
+    bool mapDidMove   = false;
+
+    QPoint lastPoint;
 };
 
-#endif //IROUTER_H
+#endif //CMOUSERADIUSWPT_H
 

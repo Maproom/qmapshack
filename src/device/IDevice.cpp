@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@
 #include "device/IDevice.h"
 #include "gis/CGisListWks.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/router/IRouter.h"
 #include "helpers/CSelectCopyAction.h"
 
 #ifdef HAVE_DBUS
@@ -118,6 +120,26 @@ void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QLi
         if(device != nullptr)
         {
             device->getItemsByArea(area, flags, items);
+        }
+    }
+}
+
+void IDevice::getNogoAreas(QVector<IRouter::circle_t> & areas)
+{
+    const int N = childCount();
+    for(int n = 0; n < N; n++)
+    {
+        IGisProject * project = dynamic_cast<IGisProject*>(child(n));
+        if(project != nullptr)
+        {
+            project->getNogoAreas(areas);
+            continue;
+        }
+
+        IDevice * device = dynamic_cast<IDevice*>(child(n));
+        if(device != nullptr)
+        {
+            device->getNogoAreas(areas);
         }
     }
 }

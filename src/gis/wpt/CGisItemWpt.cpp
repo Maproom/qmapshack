@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -27,6 +28,7 @@
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
+#include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupNewWpt.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -48,7 +50,7 @@ CGisItemWpt::CGisItemWpt(const QPointF &pos, qreal ele, const QDateTime &time, c
     wpt.ele     = (ele == NOFLOAT) ? NOINT : qRound(ele);
     wpt.time    = time;
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
@@ -62,7 +64,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const QString& name, const QString 
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -84,7 +86,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     setupHistory();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -114,7 +116,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
     updateDecoration(eMarkChanged, eMarkNone);
 }
 
@@ -123,7 +125,7 @@ CGisItemWpt::CGisItemWpt(const QDomNode &xml, IGisProject *project)
     : IGisItem(project, eTypeWpt, project->childCount())
 {
     readGpx(xml);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     genKey();
     setupHistory();
@@ -135,7 +137,7 @@ CGisItemWpt::CGisItemWpt(const history_t& hist, const QString &dbHash, IGisProje
 {
     history = hist;
     loadHistory(hist.histIdxCurrent);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
     if(!dbHash.isEmpty())
     {
         lastDatabaseHash = dbHash;
@@ -146,14 +148,14 @@ CGisItemWpt::CGisItemWpt(quint64 id, QSqlDatabase& db, IGisProject * project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     loadFromDb(id, db);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 }
 
 CGisItemWpt::CGisItemWpt(const CTwoNavProject::wpt_t &tnvWpt, IGisProject * project)
     : IGisItem(project, eTypeWpt, NOIDX)
 {
     readTwoNav(tnvWpt);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     genKey();
     setupHistory();
@@ -166,7 +168,7 @@ CGisItemWpt::CGisItemWpt(CFitStream& stream, IGisProject * project)
     , posScreen(NOPOINTF)
 {
     readWptFromFit(stream);
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     genKey();
     setupHistory();
@@ -326,11 +328,35 @@ QString CGisItemWpt::getInfo(quint32 feature) const
 
 IScrOpt * CGisItemWpt::getScreenOptions(const QPoint& origin, IMouse * mouse)
 {
-    if(scrOpt.isNull())
+    if (closeToRadius)
     {
-        scrOpt = new CScrOptWpt(this, origin, mouse);
+        if(scrOptRadius.isNull())
+        {
+            scrOptRadius = new CScrOptWptRadius(this, origin, mouse);
+        }
+        return scrOptRadius;
     }
-    return scrOpt;
+    else
+    {
+        if(scrOptWpt.isNull())
+        {
+            scrOptWpt = new CScrOptWpt(this, origin, mouse);
+        }
+        return scrOptWpt;
+    }
+}
+
+QPointF CGisItemWpt::getPointCloseBy(const QPoint& point)
+{
+    if (closeToRadius)
+    {
+        QPointF l = (QPointF(point) - posScreen);
+        return posScreen + l * (radius / sqrt(QPointF::dotProduct(l,l)));
+    }
+    else
+    {
+        return posScreen;
+    }
 }
 
 void CGisItemWpt::setIcon()
@@ -363,7 +389,7 @@ void CGisItemWpt::setPosition(const QPointF& pos)
     wpt.lon = pos.x();
     wpt.lat = pos.y();
 
-    boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    detBoundingRect();
 
     changed(tr("Changed position"),"://icons/48x48/WptMove.png");
 }
@@ -376,8 +402,20 @@ void CGisItemWpt::setElevation(qint32 val)
 
 void CGisItemWpt::setProximity(qreal val)
 {
-    proximity = val;
-    changed(tr("Changed proximity"),"://icons/48x48/WptProx.png");
+    proximity = val == NOFLOAT ? val : qRound(val);
+
+    detBoundingRect();
+
+    radius = NOFLOAT; //radius is proximity in set on redraw
+
+    if (proximity == NOFLOAT)
+    {
+        changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
+    }
+    else
+    {
+        changed(tr("Changed proximity"),"://icons/48x48/WptEditProx.png");
+    }
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -427,12 +465,25 @@ void CGisItemWpt::addImage(const image_t& img)
 
 bool CGisItemWpt::isCloseTo(const QPointF& pos)
 {
+    closeToRadius = false;
+
     if(posScreen == NOPOINTF)
     {
         return false;
     }
 
-    return (pos - posScreen).manhattanLength() < 22;
+    QPointF dist = (pos - posScreen);
+    if(dist.manhattanLength() < 22)
+    {
+        return true;
+    }
+    if (radius == NOFLOAT)
+    {
+        return false;
+    }
+
+    closeToRadius = abs(QPointF::dotProduct(dist,dist)/radius - radius) < 22;
+    return closeToRadius;
 }
 
 bool CGisItemWpt::isWithin(const QRectF& area, selflags_t flags)
@@ -463,34 +514,31 @@ void CGisItemWpt::edit()
 void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF> &blockedAreas, CGisDraw *gis)
 {
     posScreen = QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-    if(!isVisible(posScreen, viewport, gis))
+
+    if (proximity == NOFLOAT || proximity == 0. ? !isVisible(posScreen, viewport, gis) : !isVisible(boundingRect, viewport, gis))
     {
         rectBubble  = QRect();
         posScreen   = NOPOINTF;
         return;
     }
+
     gis->convertRad2Px(posScreen);
+
+    if(proximity == NOFLOAT)
+    {
+        radius = NOFLOAT;
+    }
+    else
+    {
+        //remember radius for isCloseTo-method
+        radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
+
+        drawCircle(p, posScreen, radius, !hideArea && isNogoArea(), false);
+    }
 
     drawBubble(p);
 
     p.drawPixmap(posScreen - focus, icon);
-
-    if(proximity != NOFLOAT)
-    {
-        QPointF pt1(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
-        pt1 = GPS_Math_Wpt_Projection(pt1, proximity, 90 * DEG_TO_RAD);
-        gis->convertRad2Px(pt1);
-
-        qreal r = pt1.x() - posScreen.x();
-
-        p.save();
-        p.setBrush(Qt::NoBrush);
-        p.setPen(QPen(Qt::white,3));
-        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
-        p.setPen(QPen(Qt::red,1));
-        p.drawEllipse(QRect(posScreen.x() - r - 1, posScreen.y() - r - 1, 2*r + 1, 2*r + 1));
-        p.restore();
-    }
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
 }
@@ -572,7 +620,14 @@ void CGisItemWpt::drawHighlight(QPainter& p)
         return;
     }
 
-    p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
+    if (closeToRadius)
+    {
+        drawCircle(p, posScreen, radius, isNogoArea(), true);
+    }
+    else
+    {
+        p.drawImage(posScreen - QPointF(31,31), QImage("://cursors/wptHighlightRed.png"));
+    }
 }
 
 void CGisItemWpt::drawBubble(QPainter& p)
@@ -618,6 +673,38 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.setPen(Qt::black);
     doc.drawContents(&p);
     p.restore();
+}
+
+void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected)
+{
+    QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
+    p.save();
+    p.setBrush(Qt::NoBrush);
+    if (selected)
+    {
+        p.setPen(QPen(Qt::red,3));
+    }
+    else
+    {
+        p.setPen(QPen(Qt::white,3));
+        p.drawEllipse(circle);
+        p.setPen(QPen(Qt::red,1));
+    }
+    if (filled)
+    {
+        p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
+    }
+    p.drawEllipse(circle);
+    p.restore();
+}
+
+qreal CGisItemWpt::calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis)
+{
+    QPointF pt1 = posRad;
+    pt1 = GPS_Math_Wpt_Projection(pt1, radiusRad, 90 * DEG_TO_RAD);
+    gis->convertRad2Px(pt1);
+
+    return pt1.x() - posPx.x();
 }
 
 QPolygonF CGisItemWpt::makePolyline(const QPointF& anchor, const QRectF& r)
@@ -782,6 +869,20 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
+void CGisItemWpt::toggleNogoArea()
+{
+    if(flags & eFlagWptNogo)
+    {
+        flags &= ~eFlagWptNogo;
+        changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
+    }
+    else
+    {
+        flags |= eFlagWptNogo;
+        changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
+    }
+}
+
 bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
@@ -826,4 +927,22 @@ bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
     }
 
     return false;
+}
+
+void CGisItemWpt::detBoundingRect()
+{
+    if(proximity == NOFLOAT)
+    {
+        boundingRect = QRectF(QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD,QPointF(wpt.lon,wpt.lat)*DEG_TO_RAD);
+    }
+    else
+    {
+        qreal diag = proximity * 1.414213562;
+        QPointF cent(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD);
+
+        QPointF pt1 = GPS_Math_Wpt_Projection(cent, diag, 225 * DEG_TO_RAD);
+        QPointF pt2 = GPS_Math_Wpt_Projection(cent, diag, 45 * DEG_TO_RAD);
+
+        boundingRect = QRectF(pt1,pt2);
+    }
 }

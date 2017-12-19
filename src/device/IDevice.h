@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -23,6 +24,7 @@
 #include <QTreeWidgetItem>
 
 #include "gis/IGisItem.h"
+#include "gis/rte/router/IRouter.h"
 class CGisDraw;
 class CGisItemWpt;
 class CDeviceGarmin;
@@ -68,6 +70,7 @@ public:
 
     void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
+    void getNogoAreas(QVector<IRouter::circle_t> &areas);
     IGisItem * getItemByKey(const IGisItem::key_t& key);
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     void editItemByKey(const IGisItem::key_t& key);

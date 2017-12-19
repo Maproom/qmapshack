@@ -230,6 +230,7 @@ set( SRCS
     gis/wpt/CGisItemWpt.cpp
     gis/wpt/CProjWpt.cpp
     gis/wpt/CScrOptWpt.cpp
+    gis/wpt/CScrOptWptRadius.cpp
     gis/wpt/CSetupNewWpt.cpp
     grid/CGrid.cpp
     grid/CGridSetup.cpp
@@ -282,6 +283,7 @@ set( SRCS
     mouse/CMouseMoveWpt.cpp
     mouse/CMouseNormal.cpp
     mouse/CMousePrint.cpp
+    mouse/CMouseRadiusWpt.cpp
     mouse/CMouseRangeTrk.cpp
     mouse/CMouseSelect.cpp
     mouse/CMouseWptBubble.cpp
@@ -524,6 +526,7 @@ set( HDRS
         gis/wpt/CGisItemWpt.h
         gis/wpt/CProjWpt.h
         gis/wpt/CScrOptWpt.h
+        gis/wpt/CScrOptWptRadius.h
         gis/wpt/CSetupNewWpt.h
         grid/CGrid.h
         grid/CGridSetup.h
@@ -580,6 +583,7 @@ set( HDRS
         mouse/CMouseMoveWpt.h
         mouse/CMouseNormal.h
         mouse/CMousePrint.h
+        mouse/CMouseRadiusWpt.h
         mouse/CMouseRangeTrk.h
         mouse/CMouseSelect.h
         mouse/CMouseWptBubble.h
@@ -729,6 +733,7 @@ set( UIS
     gis/wpt/IDetailsWpt.ui
     gis/wpt/IProjWpt.ui
     gis/wpt/IScrOptWpt.ui
+    gis/wpt/IScrOptWptRadius.ui
     gis/wpt/ISetupNewWpt.ui
     grid/IGridSetup.ui
     grid/IProjWizard.ui

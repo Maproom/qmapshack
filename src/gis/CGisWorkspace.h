@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,6 +27,7 @@
 
 #include "db/IDBFolder.h"
 #include "gis/IGisItem.h"
+#include "gis/rte/router/IRouter.h"
 
 class CGisDraw;
 class IGisProject;
@@ -289,6 +291,8 @@ public:
     IGisItem * getItemByKey(const IGisItem::key_t &key);
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
+
+    void getNogoAreas(QVector<IRouter::circle_t> &areas);
     /**
        @brief Delete all items with matching key from workspace
 
@@ -335,6 +339,12 @@ public:
     void addWptByPos(QPointF pt, const QString& label = QString::Null(), const QString& desc = QString::Null()) const;
 
     void toggleWptBubble(const IGisItem::key_t &key);
+
+    void deleteWptRadius(const IGisItem::key_t &key);
+
+    void toggleWptNogoArea(const IGisItem::key_t &key);
+
+    void editWptRadius(const IGisItem::key_t &key);
 
     /**
        @brief Set user focus to track

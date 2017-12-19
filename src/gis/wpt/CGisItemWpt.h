@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,6 +29,7 @@
 class IGisProject;
 class QDomNode;
 class CScrOptWpt;
+class CScrOptWptRadius;
 class QSqlDatabase;
 class CQlgtWpt;
 class QTextEdit;
@@ -276,10 +278,7 @@ public:
 
     IScrOpt* getScreenOptions(const QPoint &origin, IMouse * mouse) override;
 
-    QPointF getPointCloseBy(const QPoint& ) override
-    {
-        return posScreen;
-    }
+    QPointF getPointCloseBy(const QPoint& point) override;
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CGisDraw * gis) override;
     void drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis) override;
@@ -294,6 +293,23 @@ public:
     {
         return geocache.hasData;
     }
+
+    void toggleNogoArea();
+    bool isNogoArea()
+    {
+        return bool(flags & eFlagWptNogo);
+    }
+
+    bool hasRadius()
+    {
+        return proximity < NOFLOAT;
+    }
+
+    qreal getRadius()
+    {
+        return radius;
+    }
+
     void gainUserFocus(bool yes) override;
 
     void edit() override;
@@ -315,9 +331,15 @@ public:
         return bool(flags & eFlagWptBubble);
     }
 
+    void setHideArea(bool hide)
+    {
+        hideArea = hide;
+    }
+
     static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
 
-
+    static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);
+    static qreal calcRadius(const QPointF& posRad, const QPointF& posPx, const qreal& radiusRad, CGisDraw *gis);
 
 private:
     void setIcon();
@@ -330,12 +352,16 @@ private:
     void drawBubble(QPainter& p);
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
     bool processMouseOverBubble(const QPoint &pos);
+    void detBoundingRect();
 
     static key_t keyUserFocus;
 
     // --- start all waypoint data ----
     wpt_t wpt;
     qreal proximity = NOFLOAT;
+    qreal radius = NOFLOAT;
+    bool closeToRadius = false;
+    bool hideArea = false;
     geocache_t geocache;
     QList<image_t> images;
 
@@ -346,7 +372,8 @@ private:
 
     // --- stop all waypoint data ----
 
-    QPointer<CScrOptWpt> scrOpt;
+    QPointer<CScrOptWpt> scrOptWpt;
+    QPointer<CScrOptWptRadius> scrOptRadius;
 
     bool doBubble          = false;
     bool doSpecialCursor   = false;

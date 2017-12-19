@@ -26,6 +26,7 @@
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "gis/rte/router/brouter/CRouterBRouterToolShell.h"
+#include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include <QtNetwork>
@@ -191,7 +192,7 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, const QVector<IRouter::circle_t>& areas) const
 {
     QString lonLats;
     bool isNext = false;
@@ -209,9 +210,25 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints) co
         }
     }
 
+    QString nogos;
+    isNext = false;
+
+    for(const IRouter::circle_t &pt : areas)
+    {
+        if (isNext)
+        {
+            nogos.append(QString("|%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad));
+        }
+        else
+        {
+            nogos = QString("%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad);
+            isNext = true;
+        }
+    }
+
     QUrlQuery urlQuery;
     urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
-    urlQuery.addQueryItem("nogos", "");
+    urlQuery.addQueryItem("nogos", nogos.toLatin1());
     urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
     urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
     urlQuery.addQueryItem("format", "gpx");
@@ -238,9 +255,12 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     points << wpt_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG);
     points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
 
+    QVector<IRouter::circle_t> areas;
+    CGisWorkspace::self().getNogoAreas(areas);
+
     synchronous = true;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));
 
     try
     {
@@ -257,7 +277,12 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
         delete progress;
 
-        if (reply->error() != QNetworkReply::NoError)
+        const QNetworkReply::NetworkError& netErr = reply->error();
+        if (netErr == QNetworkReply::RemoteHostClosedError && areas.size() > 1)
+        {
+            throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
+        }
+        else if(netErr != QNetworkReply::NoError)
         {
             throw reply->errorString();
         }
@@ -330,6 +355,9 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
+    QVector<IRouter::circle_t> areas;
+    CGisWorkspace::self().getNogoAreas(areas);
+
     rte->reset();
 
     slotCloseStatusMsg();
@@ -342,13 +370,14 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 
     synchronous = false;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));
 
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);
     reply->setProperty("key.device", key.device);
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
+    reply->setProperty("nogos", areas.size());
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -373,7 +402,12 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
 
     try
     {
-        if(reply->error() != QNetworkReply::NoError)
+        const QNetworkReply::NetworkError& netErr = reply->error();
+        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1)
+        {
+            throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
+        }
+        else if(netErr != QNetworkReply::NoError)
         {
             throw reply->errorString();
         }

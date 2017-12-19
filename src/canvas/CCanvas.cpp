@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -41,6 +42,7 @@
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
+#include "mouse/CMouseRadiusWpt.h"
 #include "plot/CPlotProfile.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
@@ -230,6 +232,13 @@ void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
     mouse->deleteLater();
     mouse = new CMouseMoveWpt(wpt, gis, this);
     setMouseCursor(*mouse, "setMouseMoveWpt");
+}
+
+void CCanvas::setMouseRadiusWpt(CGisItemWpt& wpt)
+{
+    mouse->deleteLater();
+    mouse = new CMouseRadiusWpt(wpt, gis, this);
+    setMouseCursor(*mouse, "setMouseWptRadius");
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)

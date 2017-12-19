@@ -595,6 +595,7 @@ protected:
         ,eFlagWriteAllowed  = 0x00000002
         ,eFlagTainted       = 0x00000004
         ,eFlagWptBubble     = 0x00000100
+        ,eFlagWptNogo      = 0x00000200
     };
 
     static inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)

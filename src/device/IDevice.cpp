@@ -123,7 +123,7 @@ void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QLi
     }
 }
 
-void IDevice::getAvoidAreas(QList<CGisItemWpt *> & items)
+void IDevice::getNogoAreas(QList<CGisItemWpt *> & items)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
@@ -131,14 +131,14 @@ void IDevice::getAvoidAreas(QList<CGisItemWpt *> & items)
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
-            project->getAvoidAreas(items);
+            project->getNogoAreas(items);
             continue;
         }
 
         IDevice * device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
-            device->getAvoidAreas(items);
+            device->getNogoAreas(items);
         }
     }
 }

@@ -328,7 +328,7 @@ public:
 
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
-    void getAvoidAreas(QList<CGisItemWpt *> &items) const;
+    void getNogoAreas(QList<CGisItemWpt *> &items) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {

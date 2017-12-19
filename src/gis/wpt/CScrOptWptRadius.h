@@ -40,7 +40,7 @@ public:
 
 private slots:
     void slotDelete();
-    void slotAvoid();
+    void slotNogoArea();
     void slotEdit();
 
 private:

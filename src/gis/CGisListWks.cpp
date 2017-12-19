@@ -175,8 +175,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
-    actionAvoidWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Nogo-Area"), this, SLOT(slotAvoidWpt()));
-    actionAvoidWpt->setCheckable(true);
+    actionNogoAreaWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Nogo-Area"), this, SLOT(slotNogoAreaWpt()));
+    actionNogoAreaWpt->setCheckable(true);
     actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
@@ -1147,8 +1147,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionBubbleWpt->setChecked(wpt->hasBubble());
                 bool radius = wpt->hasRadius();
                 actionDelRadiusWpt->setEnabled(radius);
-                actionAvoidWpt->setEnabled(radius);
-                actionAvoidWpt->setChecked(radius && wpt->isAvoid());
+                actionNogoAreaWpt->setEnabled(radius);
+                actionNogoAreaWpt->setChecked(radius && wpt->isNogoArea());
                 actionMoveWpt->setDisabled(isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
@@ -1445,14 +1445,14 @@ void CGisListWks::slotBubbleWpt()
     }
 }
 
-void CGisListWks::slotAvoidWpt()
+void CGisListWks::slotNogoAreaWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWorkspace::self().toggleWptAvoid(gisItem->getKey());
+        CGisWorkspace::self().toggleWptNogoArea(gisItem->getKey());
     }
 }
 

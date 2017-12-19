@@ -44,8 +44,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     photoAlbum->reload(wpt->getImages());
     toolBubble->setChecked(wpt->hasBubble());
     bool radius = wpt->hasRadius();
-    toolAvoid->setEnabled(radius);
-    toolAvoid->setChecked(radius && wpt->isAvoid());
+    toolNogoArea->setEnabled(radius);
+    toolNogoArea->setChecked(radius && wpt->isNogoArea());
     toolDelRadius->setEnabled(radius);
 
     anchor = wpt->getPointCloseBy(point);
@@ -66,7 +66,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolProj,       &QToolButton::clicked, this, &CScrOptWpt::slotProj);
     connect(toolBubble,     &QToolButton::clicked, this, &CScrOptWpt::slotBubble);
     connect(toolDelRadius,  &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
-    connect(toolAvoid,      &QToolButton::clicked, this, &CScrOptWpt::slotAvoid);
+    connect(toolNogoArea,   &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
     connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
 
     adjustSize();
@@ -118,9 +118,9 @@ void CScrOptWpt::slotDeleteRadius()
     deleteLater();
 }
 
-void CScrOptWpt::slotAvoid()
+void CScrOptWpt::slotNogoArea()
 {
-    CGisWorkspace::self().toggleWptAvoid(key);
+    CGisWorkspace::self().toggleWptNogoArea(key);
     deleteLater();
 }
 

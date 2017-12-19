@@ -529,7 +529,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         //remember radius for isCloseTo-method
         radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
 
-        drawCircle(p, posScreen, radius, !hideArea && isAvoid(), false);
+        drawCircle(p, posScreen, radius, !hideArea && isNogoArea(), false);
     }
 
     drawBubble(p);
@@ -618,7 +618,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
 
     if (closeToRadius)
     {
-        drawCircle(p, posScreen, radius, isAvoid(), true);
+        drawCircle(p, posScreen, radius, isNogoArea(), true);
     }
     else
     {
@@ -865,17 +865,17 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-void CGisItemWpt::toggleAvoid()
+void CGisItemWpt::toggleNogoArea()
 {
-    if(flags & eFlagWptAvoid)
+    if(flags & eFlagWptNogo)
     {
-        flags &= ~eFlagWptAvoid;
-        changed(tr("Changed to regular waypoint"),"://icons/48x48/WptProx.png");
+        flags &= ~eFlagWptNogo;
+        changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
     }
     else
     {
-        flags |= eFlagWptAvoid;
-        changed(tr("Changed to avoid-area"),"://icons/48x48/WptAvoid.png");
+        flags |= eFlagWptNogo;
+        changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
     }
 }
 

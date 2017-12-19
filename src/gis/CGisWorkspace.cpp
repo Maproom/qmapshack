@@ -394,7 +394,7 @@ void CGisWorkspace::getItemsByArea(const QRectF& area, IGisItem::selflags_t flag
     }
 }
 
-void CGisWorkspace::getAvoidAreas(QList<CGisItemWpt*>& items)
+void CGisWorkspace::getNogoAreas(QList<CGisItemWpt*>& items)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -403,13 +403,13 @@ void CGisWorkspace::getAvoidAreas(QList<CGisItemWpt*>& items)
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project)
         {
-            project->getAvoidAreas(items);
+            project->getNogoAreas(items);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
         if(device)
         {
-            device->getAvoidAreas(items);
+            device->getNogoAreas(items);
             continue;
         }
     }
@@ -711,13 +711,13 @@ void CGisWorkspace::deleteWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::toggleWptAvoid(const IGisItem::key_t &key)
+void CGisWorkspace::toggleWptNogoArea(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(nullptr != wpt)
     {
-        wpt->toggleAvoid();
+        wpt->toggleNogoArea();
     }
 }
 

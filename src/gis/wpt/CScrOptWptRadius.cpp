@@ -49,15 +49,15 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
 
     adjustSize();
 
-    toolAvoid->setChecked(wpt->isAvoid());
+    toolNogoArea->setChecked(wpt->isNogoArea());
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolDelete, &QToolButton::clicked, this, &CScrOptWptRadius::slotDelete);
-    connect(toolEdit,   &QToolButton::clicked, this, &CScrOptWptRadius::slotEdit);
-    connect(toolAvoid,  &QToolButton::clicked, this, &CScrOptWptRadius::slotAvoid);
+    connect(toolDelete,   &QToolButton::clicked, this, &CScrOptWptRadius::slotDelete);
+    connect(toolEdit,     &QToolButton::clicked, this, &CScrOptWptRadius::slotEdit);
+    connect(toolNogoArea, &QToolButton::clicked, this, &CScrOptWptRadius::slotNogoArea);
 
     adjustSize();
 }
@@ -72,9 +72,9 @@ void CScrOptWptRadius::slotDelete()
     deleteLater();
 }
 
-void CScrOptWptRadius::slotAvoid()
+void CScrOptWptRadius::slotNogoArea()
 {
-    CGisWorkspace::self().toggleWptAvoid(key);
+    CGisWorkspace::self().toggleWptNogoArea(key);
     deleteLater();
 }
 

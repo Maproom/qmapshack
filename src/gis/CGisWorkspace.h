@@ -291,7 +291,7 @@ public:
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
-    void getAvoidAreas(QList<CGisItemWpt *> &items);
+    void getNogoAreas(QList<CGisItemWpt *> &items);
     /**
        @brief Delete all items with matching key from workspace
 
@@ -341,7 +341,7 @@ public:
 
     void deleteWptRadius(const IGisItem::key_t &key);
 
-    void toggleWptAvoid(const IGisItem::key_t &key);
+    void toggleWptNogoArea(const IGisItem::key_t &key);
 
     void editWptRadius(const IGisItem::key_t &key);
 

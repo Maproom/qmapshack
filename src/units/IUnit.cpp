@@ -539,6 +539,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     int i;
 
     tzoffset = 0;
+    bool applyTzOffset = false;
 
     QString format = "yyyy-MM-dd'T'hh:mm:ss";
 
@@ -559,6 +560,7 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
     if (timetext.indexOf("Z") != NOIDX)
     {
         format += "'Z'";
+        applyTzOffset = true;
     }
 
     else if ((i = tzRE.indexIn(timetext)) != NOIDX)
@@ -586,15 +588,16 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
             tzoffset = 60 * offsetHours + offsetMinutes;
         }
         tzoffset *= 60;          // seconds
+        applyTzOffset = true;
     }
 
     QDateTime datetime = QDateTime::fromString(timetext, format);
 
-    if ( (timetext.indexOf("Z") != NOIDX) || ((i = tzRE.indexIn(timetext)) != NOIDX) )
+    if (applyTzOffset)
     {
         datetime.setOffsetFromUtc(tzoffset);
     }
-    else if ( (timetext.indexOf("Z") == NOIDX) && ((i = tzRE.indexIn(timetext)) == NOIDX) )
+    else
     {   // if timetext has no 'Z' and no [-+]HH:MM then this is local time then simply switch to UTC without applying any offset
         datetime = datetime.toUTC();
     }

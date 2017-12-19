@@ -216,7 +216,7 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
         {
             lastName = QString::number(lastName.toInt() + 1);
         }
-        else
+        else if(idx < s)
         {
             lastName = lastName.left(idx) + QString::number(lastName.mid(idx).toInt() + 1);
         }

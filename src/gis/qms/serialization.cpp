@@ -649,6 +649,7 @@ QDataStream& CGisItemWpt::operator<<(QDataStream& stream)
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
 
     detBoundingRect();
+    radius = NOFLOAT;
 
     return stream;
 }

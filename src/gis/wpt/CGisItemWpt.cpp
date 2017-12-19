@@ -524,7 +524,11 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     gis->convertRad2Px(posScreen);
 
-    if(proximity != NOFLOAT)
+    if(proximity == NOFLOAT)
+    {
+        radius = NOFLOAT;
+    }
+    else
     {
         //remember radius for isCloseTo-method
         radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);

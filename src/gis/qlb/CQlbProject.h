@@ -43,7 +43,7 @@ private:
     void loadWpts(QByteArray &array);
     void loadTrks(QByteArray &array);
     void loadRtes(QByteArray &array);
-    void loadOvls(QByteArray &array);    
+    void loadOvls(QByteArray &array);
 };
 
 #endif //CQLBPROJECT_H

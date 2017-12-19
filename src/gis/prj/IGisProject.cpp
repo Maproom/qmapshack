@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,6 +31,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/qlb/CQlbProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/IRouter.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/suunto/CLogProject.h"
 #include "gis/suunto/CSmlProject.h"
@@ -670,6 +672,29 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
         }
     }
 }
+
+void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
+{
+    if(!isVisible())
+    {
+        return;
+    }
+
+    for(int i = 0; i < childCount(); i++)
+    {
+        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
+        if(nullptr != item && !item->isHidden() && item->isNogoArea())
+        {
+            const qreal& rad = item->getProximity();
+            if (rad != NOFLOAT && rad > 0.)
+            {
+                const QPointF& pos = item->getPosition();
+                areas << IRouter::circle_t(pos.y(),pos.x(),rad);
+            }
+        }
+    }
+}
+
 
 void IGisProject::mouseMove(const QPointF& pos)
 {

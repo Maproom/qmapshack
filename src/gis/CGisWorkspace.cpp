@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,6 +33,7 @@
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/rte/router/IRouter.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -393,6 +395,27 @@ void CGisWorkspace::getItemsByArea(const QRectF& area, IGisItem::selflags_t flag
     }
 }
 
+void CGisWorkspace::getNogoAreas(QVector<IRouter::circle_t> &areas)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item);
+        if(project)
+        {
+            project->getNogoAreas(areas);
+            continue;
+        }
+        IDevice * device = dynamic_cast<IDevice*>(item);
+        if(device)
+        {
+            device->getNogoAreas(areas);
+            continue;
+        }
+    }
+}
+
 void CGisWorkspace::mouseMove(const QPointF& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -676,6 +699,45 @@ void CGisWorkspace::toggleWptBubble(const IGisItem::key_t &key)
     if(nullptr != wpt)
     {
         wpt->toggleBubble();
+    }
+}
+
+void CGisWorkspace::deleteWptRadius(const IGisItem::key_t &key)
+{
+    IGisItem * item = getItemByKey(key);
+    if(nullptr != item)
+    {
+        CGisItemWpt * wpt = dynamic_cast<CGisItemWpt *>(item);
+        wpt->setProximity(NOFLOAT);
+    }
+}
+
+void CGisWorkspace::toggleWptNogoArea(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        wpt->toggleNogoArea();
+    }
+}
+
+void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        if(!wpt->setReadOnlyMode(false))
+        {
+            return;
+        }
+
+        CCanvas *canvas = CMainWindow::self().getVisibleCanvas();
+        if(nullptr != canvas)
+        {
+            canvas->setMouseRadiusWpt(*wpt);
+        }
     }
 }
 

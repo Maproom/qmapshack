@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,51 +17,36 @@
 
 **********************************************************************************************/
 
-#ifndef IROUTER_H
-#define IROUTER_H
+#ifndef CSCROPTWPTRADIUS_H
+#define CSCROPTWPTRADIUS_H
 
 #include "gis/IGisItem.h"
+#include "mouse/IScrOpt.h"
+
+#include "ui_IScrOptWptRadius.h"
 #include <QWidget>
 
-class IRouter : public QWidget
+class CGisItemWpt;
+class IMouse;
+
+class CScrOptWptRadius : public IScrOpt, private Ui::IScrOptWptRadius
 {
     Q_OBJECT
 public:
+    CScrOptWptRadius(CGisItemWpt * wpt, const QPoint &point, IMouse *parent);
+    virtual ~CScrOptWptRadius();
 
-    struct circle_t
-    {
+    void draw(QPainter& p) override;
 
-        circle_t() : lon(NOFLOAT), lat(NOFLOAT), rad(NOINT)
-        {
-        }
-
-        circle_t(const qreal& lat, const qreal& lon, const qreal& rad) :
-            lon(lon),
-            lat(lat),
-            rad(rad)
-        {
-        }
-
-        qreal lon;
-        qreal lat;
-        quint32 rad;
-    };
-
-    IRouter(bool fastRouting, QWidget * parent);
-    virtual ~IRouter();
-
-    virtual void calcRoute(const IGisItem::key_t& key) = 0;
-    virtual int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) = 0;
-    virtual bool hasFastRouting()
-    {
-        return fastRouting;
-    }
-
-    virtual QString getOptions() = 0;
+private slots:
+    void slotDelete();
+    void slotNogoArea();
+    void slotEdit();
 
 private:
-    bool fastRouting;
+    IGisItem::key_t key;
+    QPointF anchor;
 };
 
-#endif //IROUTER_H
+#endif //CSCROPTWPTRADIUS_H
 

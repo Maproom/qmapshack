@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,6 +21,7 @@
 #define IGISPROJECT_H
 
 #include "gis/IGisItem.h"
+#include "gis/rte/router/IRouter.h"
 #include <QDebug>
 #include <QMessageBox>
 #include <QPointer>
@@ -27,6 +29,7 @@
 
 class CGisListWks;
 class CGisDraw;
+class CGisItemWpt;
 class QDataStream;
 class CDetailsPrj;
 class IDevice;
@@ -326,6 +329,7 @@ public:
 
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
+    void getNogoAreas(QVector<IRouter::circle_t> &areas) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {

@@ -68,7 +68,7 @@ private:
         {
         }
 
-        wpt_t(qreal lat, qreal lon) :
+        wpt_t(const qreal& lat, const qreal& lon) :
             lat(lat),
             lon(lon)
         {
@@ -81,7 +81,7 @@ private:
     void startBRouter() const;
     void stopBRouter() const;
     void updateLocalBRouterStatus() const;
-    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints) const;
+    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
     QUrl getServiceUrl() const;
     void clearError();
 

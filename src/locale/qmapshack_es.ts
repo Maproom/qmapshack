@@ -7355,7 +7355,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="768"/>
         <source>Setup Waypoint Icons</source>
-        <translation>Configurar iconos de Waypoint</translation>
+        <translation>Configurar Iconos de Waypoint</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="771"/>
@@ -7410,12 +7410,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="843"/>
         <source>Min./Max. Track Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Valores Máx/min del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="846"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
-        <translation type="unfinished"></translation>
+        <translation>En la vista del mapa mostrar superpuestos los valores máximo y mínimo de los datos del track</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="849"/>
@@ -10065,3 +10065,4 @@ o
     </message>
 </context>
 </TS>
+

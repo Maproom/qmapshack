@@ -27,6 +27,9 @@ CRouterBRouterToolShell::CRouterBRouterToolShell(QTextBrowser *textBrowser, QWid
     setTextBrowser(textBrowser);
     connect(&cmd, &QProcess::stateChanged, this, &CRouterBRouterToolShell::slotStateChanged);
     connect(&cmd, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), this, &CRouterBRouterToolShell::slotError);
+    startupTimer = new QTimer(this);
+    startupTimer->setSingleShot(true);
+    connect(startupTimer, &QTimer::timeout, this, &CRouterBRouterToolShell::slotStartupTimer);
 }
 
 CRouterBRouterToolShell::~CRouterBRouterToolShell()
@@ -36,9 +39,11 @@ CRouterBRouterToolShell::~CRouterBRouterToolShell()
 void CRouterBRouterToolShell::start(const QString &dir, const QString &command, const QStringList &args)
 {
     isBeingKilled = false;
+    isStarting = true;
     stdOut("cd " + dir);
     stdOut(command+" " + args.join(" ") + "\n");
     cmd.setWorkingDirectory(dir);
+    startupTimer->start(200);
     cmd.start(command,args);
     cmd.waitForStarted();
 }
@@ -58,6 +63,11 @@ void CRouterBRouterToolShell::stop()
 
 void CRouterBRouterToolShell::slotStateChanged(const QProcess::ProcessState newState) const
 {
+    if (newState == QProcess::NotRunning && isStarting)
+    {
+        emit sigProcessError(QProcess::FailedToStart, text->toPlainText());
+    }
+
     emit sigProcessStateChanged(newState);
 }
 
@@ -68,6 +78,11 @@ void CRouterBRouterToolShell::slotError(const QProcess::ProcessError error) cons
         return;
     }
     emit sigProcessError(error, cmd.errorString());
+}
+
+void CRouterBRouterToolShell::slotStartupTimer()
+{
+    isStarting = false;
 }
 
 void CRouterBRouterToolShell::finished(const int exitCode, const QProcess::ExitStatus status)

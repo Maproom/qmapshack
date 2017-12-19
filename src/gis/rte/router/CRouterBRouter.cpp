@@ -62,16 +62,18 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 
     routerSetup = dynamic_cast<CRouterSetup*>(parent);
 
-    connect(toolConsole, &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
+    connect(toolConsole,       &QToolButton::clicked, this, &CRouterBRouter::slotToggleConsole);
     connect(toolToggleBRouter, &QToolButton::clicked, this, &CRouterBRouter::slotToggleBRouter);
+    connect(pushBRouterError,  &QPushButton::clicked, this, &CRouterBRouter::slotClearError);
 
     textBRouterOutput->setVisible(false);
     textBRouterError->setVisible(false);
+    pushBRouterError->setVisible(false);
 
     //set textBRouterOutput as parent of ToolShell to ensure Toolshell is destroyed before text
     brouterShell = new CRouterBRouterToolShell(textBRouterOutput,textBRouterOutput);
     connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
-    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError, this, &CRouterBRouter::slotBRouterError);
+    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError,        this, &CRouterBRouter::slotBRouterError);
 
     updateDialog();
 
@@ -104,7 +106,7 @@ void CRouterBRouter::slotToolSetupClicked()
     stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
-    clearError();
+    slotClearError();
     setup->load();
     updateDialog();
 }
@@ -120,21 +122,30 @@ void CRouterBRouter::slotToolProfileInfoClicked() const
 
 void CRouterBRouter::slotDisplayError(const QString &error, const QString &details) const
 {
-    textBRouterError->setText(error + ": " + details);
+    textBRouterError->setText(error);
+    if (!details.isEmpty())
+    {
+        textBRouterError->append(details);
+    }
+    QTextCursor cursor = textBRouterError->textCursor();
+    cursor.movePosition(QTextCursor::Start);
+    textBRouterError->setTextCursor(cursor);
     textBRouterError->setVisible(true);
-    QTimer::singleShot(5000,this,&CRouterBRouter::clearError);
+    textBRouterOutput->setVisible(false);
+    pushBRouterError->setVisible(true);
 }
 
-void CRouterBRouter::clearError()
+void CRouterBRouter::slotClearError()
 {
     textBRouterError->clear();
     textBRouterError->setVisible(false);
+    pushBRouterError->setVisible(false);
     brouterError = QProcess::UnknownError;
 }
 
 void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content)
 {
-    clearError();
+    slotClearError();
     CRouterBRouterInfo info;
     info.setLabel(profile);
     info.setInfo(content);
@@ -288,7 +299,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         }
         else
         {
-            clearError();
+            slotClearError();
 
             const QByteArray &res = reply->readAll();
 
@@ -420,7 +431,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
             throw tr("response is empty");
         }
 
-        clearError();
+        slotClearError();
 
         QDomDocument xml;
         xml.setContent(res);
@@ -483,7 +494,9 @@ QUrl CRouterBRouter::getServiceUrl() const
 void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
-    textBRouterError->setVisible(brouterError != QProcess::UnknownError && !textBRouterOutput->isVisible());
+    bool showError = brouterError != QProcess::UnknownError && !textBRouterOutput->isVisible();
+    textBRouterError->setVisible(showError);
+    pushBRouterError->setVisible(showError);
 }
 
 void CRouterBRouter::slotToggleBRouter() const
@@ -522,6 +535,10 @@ void CRouterBRouter::startBRouter() const
             args << setup->localCustomProfileDir;
             args << setup->localPort;
             args << setup->localNumberThreads;
+            if (setup->localBindLocalonly)
+            {
+                args << setup->localHost;
+            }
             brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
         }
     }
@@ -545,7 +562,27 @@ void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newSta
 void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
 {
     brouterError = error;
-    slotDisplayError(tr("Error"),errorString);
+    if (error == QProcess::FailedToStart)
+    {
+        if (setup->localBindLocalonly
+                && errorString.contains("<maxthreads>")
+                && !errorString.contains("[bindaddress]"))
+        {
+            slotDisplayError(tr("Failure to start:\n"
+                                "Local BRouter is configured to bind to %1 only, but "
+                                "this version doesnt support this yet.\n"
+                                "This can be turned of in expert-mode, uncheck 'Bind to hostname only'\n\n"
+                                "Consider upgrading BRouter!").arg(setup->localHost),"");
+        }
+        else
+        {
+            slotDisplayError(tr("Failure to start local BRouter:"),errorString);
+        }
+    }
+    else
+    {
+        slotDisplayError(tr("Error:"),errorString);
+    }
     updateLocalBRouterStatus();
 }
 
@@ -557,7 +594,8 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         "on all available interfaces. If you are in your own private network with an active firewall, this "
         "is not much of a problem. If you are in a public network every open port is a risk as it can be "
         "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
-        "in this case."
+        "in this case. In configuration of brouter use expert-mode and configure 'bind to hostname only' to "
+        "change this behaviour."
         );
 
     if (isShutdown)
@@ -575,7 +613,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
             case QProcess::Starting:
             {
                 SETTINGS;
-                if(cfg.value("Route/brouter/local/showWarning", true).toBool())
+                if(!setup->localBindLocalonly && cfg.value("Route/brouter/local/showWarning", true).toBool())
                 {
                     QMessageBox mbox;
                     mbox.setWindowTitle(tr("Warning..."));
@@ -588,7 +626,6 @@ void CRouterBRouter::updateLocalBRouterStatus() const
                     mbox.exec();
                     cfg.setValue("Route/brouter/local/showWarning", !checkAgree->isChecked());
                 }
-
                 labelStatus->setText(tr("starting"));
                 toolConsole->setVisible(true);
                 break;
@@ -596,7 +633,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
 
             case QProcess::Running:
             {
-                labelBRouterWarning->show();
+                labelBRouterWarning->setVisible(!setup->localBindLocalonly);
                 labelStatus->setText(tr("running"));
                 toolConsole->setVisible(true);
                 break;

@@ -29,7 +29,6 @@ public:
 
     struct circle_t
     {
-
         circle_t() : lon(NOFLOAT), lat(NOFLOAT), rad(NOINT)
         {
         }

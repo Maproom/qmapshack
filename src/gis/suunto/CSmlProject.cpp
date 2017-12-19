@@ -193,10 +193,10 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
                 if ( !UTCtimeFound)
                 {
                     QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Use of local time...")
-                                                   , tr("No UTC time has been found in file %1. "
-                                                       "Local computer time will be used. "
-                                                        "You can adjust time using a time filter if needed.").arg(filename)
-                                                   , QMessageBox::Ok);
+                                         , tr("No UTC time has been found in file %1. "
+                                              "Local computer time will be used. "
+                                              "You can adjust time using a time filter if needed.").arg(filename)
+                                         , QMessageBox::Ok);
                 }
 
                 bool sampleWithPositionFound = false;
@@ -205,7 +205,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                 for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
-
                     sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 

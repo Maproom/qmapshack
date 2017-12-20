@@ -575,65 +575,79 @@
       <item row="2" column="1">
        <widget class="QLineEdit" name="lineLocalPort"/>
       </item>
-      <item row="3" column="0">
+      <item row="4" column="0">
        <widget class="QLabel" name="labelLocalProfiles">
         <property name="text">
          <string>Profile directory</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="4" column="1">
        <widget class="QLineEdit" name="lineLocalProfiles"/>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="labelLocalSegments">
         <property name="text">
          <string>Segments directory</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
+      <item row="5" column="1">
        <widget class="QLineEdit" name="lineLocalSegments"/>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="labelLocalCustomProfiles">
         <property name="text">
          <string>Custom Profiles dir</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
+      <item row="6" column="1">
        <widget class="QLineEdit" name="lineLocalCustomProfiles"/>
       </item>
-      <item row="6" column="0">
+      <item row="7" column="0">
        <widget class="QLabel" name="labelLocalMaxRuntime">
         <property name="text">
          <string>Max Runtime</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
+      <item row="7" column="1">
        <widget class="QLineEdit" name="lineLocalMaxRuntime"/>
       </item>
-      <item row="7" column="0">
+      <item row="8" column="0">
        <widget class="QLabel" name="labelLocalNumberThreads">
         <property name="text">
          <string>Number Threads</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="1">
+      <item row="8" column="1">
        <widget class="QLineEdit" name="lineLocalNumberThreads"/>
       </item>
-      <item row="8" column="0">
+      <item row="9" column="0">
        <widget class="QLabel" name="labelLocalJavaOpts">
         <property name="text">
          <string>Java Options</string>
         </property>
        </widget>
       </item>
-      <item row="8" column="1">
+      <item row="9" column="1">
        <widget class="QLineEdit" name="lineLocalJavaOpts"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="labelLocalBindLocalonly">
+        <property name="text">
+         <string>Bind to hostname only</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="checkLocalBindLocalonly">
+        <property name="text">
+         <string notr="true"/>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>

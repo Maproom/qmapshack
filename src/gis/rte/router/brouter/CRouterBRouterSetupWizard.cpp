@@ -844,6 +844,7 @@ void CRouterBRouterSetupWizard::updateLocalDetails() const
     lineLocalProfilesUrl->setText(setup->onlineProfilesUrl);
     lineLocalHost->setText(setup->localHost);
     lineLocalPort->setText(setup->localPort);
+    checkLocalBindLocalonly->setChecked(setup->localBindLocalonly);
     lineLocalProfiles->setText(setup->localProfileDir);
     lineLocalSegments->setText(setup->localSegmentsDir);
     lineLocalCustomProfiles->setText(setup->localCustomProfileDir);
@@ -875,6 +876,7 @@ bool CRouterBRouterSetupWizard::validateLocalDetails() const
 {
     setup->localHost = lineLocalHost->text();
     setup->localPort = lineLocalPort->text();
+    setup->localBindLocalonly = checkLocalBindLocalonly->isChecked();
     setup->localProfileDir = lineLocalProfiles->text();
     setup->localSegmentsDir = lineLocalSegments->text();
     setup->localCustomProfileDir = lineLocalCustomProfiles->text();
@@ -889,6 +891,7 @@ void CRouterBRouterSetupWizard::resetLocalDetails() const
     setup->resetOnlineProfilesUrl();
     setup->resetLocalHost();
     setup->resetLocalPort();
+    setup->resetLocalBindLocalonly();
     setup->resetLocalProfileDir();
     setup->resetLocalSegmentsDir();
     setup->resetLocalCustomProfileDir();

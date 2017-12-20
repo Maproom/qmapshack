@@ -570,9 +570,9 @@ void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const 
         {
             slotDisplayError(tr("Failure to start:\n"
                                 "Local BRouter is configured to bind to %1 only, but "
-                                "this version doesnt support this yet.\n"
-                                "This can be turned of in expert-mode, uncheck 'Bind to hostname only'\n\n"
-                                "Consider upgrading BRouter!").arg(setup->localHost),"");
+                                "this version doesn't support this yet.\n"
+                                "This can be turned of in expert mode, uncheck 'Bind to hostname only'\n\n"
+                                "Consider to update BRouter!").arg(setup->localHost),"");
         }
         else
         {
@@ -594,8 +594,8 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         "on all available interfaces. If you are in your own private network with an active firewall, this "
         "is not much of a problem. If you are in a public network every open port is a risk as it can be "
         "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
-        "in this case. In configuration of brouter use expert-mode and configure 'bind to hostname only' to "
-        "change this behaviour."
+        "in this case. In the configuration of BRouter use expert mode and configure 'Bind to hostname only' to "
+        "change this behavior."
         );
 
     if (isShutdown)

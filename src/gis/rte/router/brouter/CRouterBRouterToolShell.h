@@ -42,11 +42,14 @@ signals:
 private slots:
     void slotStateChanged(const QProcess::ProcessState newState) const;
     void slotError(const QProcess::ProcessError error) const;
+    void slotStartupTimer();
 
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
 
     bool isBeingKilled { false };
+    bool isStarting { false };
+    QTimer * startupTimer { nullptr };
 };
 
 #endif //CROUTERBROUTERTOOLSHELL_H

@@ -57,7 +57,7 @@ if(USE_QT5DBus)
 endif(USE_QT5DBus)
 
 
-if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]+\\..*")
+if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]{1}\\..*")
     message( SEND_ERROR "You need at least Qt5.3 or newer.")
 endif()
 

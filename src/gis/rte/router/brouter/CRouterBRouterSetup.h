@@ -46,6 +46,7 @@ public:
     void resetLocalSegmentsDir() { localSegmentsDir = defaultLocalSegmentsDir; }
     void resetLocalHost() { localHost = defaultLocalHost; }
     void resetLocalPort() { localPort = defaultLocalPort; }
+    void resetLocalBindLocalonly() { localBindLocalonly = defaultLocalBindLocalonly; }
     void resetLocalNumberThreads() { localNumberThreads = defaultLocalNumberThreads; }
     void resetLocalMaxRunningTime() { localMaxRunningTime = defaultLocalMaxRunningTime; }
     void resetLocalJavaOpts() { localJavaOpts = defaultLocalJavaOpts; }
@@ -114,6 +115,7 @@ private:
     QString localSegmentsDir;
     QString localHost;
     QString localPort;
+    bool    localBindLocalonly;
     QString localNumberThreads;
     QString localMaxRunningTime;
     QString localJavaOpts;
@@ -131,6 +133,7 @@ private:
     const QString defaultLocalSegmentsDir = "segments4";
     const QString defaultLocalHost = "127.0.0.1";
     const QString defaultLocalPort = "17777";
+    const bool    defaultLocalBindLocalonly = true;
     const QString defaultLocalNumberThreads = "1";
     const QString defaultLocalMaxRunningTime = "300";
     const QString defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";

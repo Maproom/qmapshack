@@ -206,6 +206,7 @@ public:
     void calc();
     void reset();
     void edit() override;
+    void reverse();
     void toTrack();
 
 

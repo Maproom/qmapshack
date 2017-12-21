@@ -389,6 +389,8 @@ public:
 
     void editRteByKey(const IGisItem::key_t& key);
 
+    void reverseRteByKey(const IGisItem::key_t& key);
+
     void calcRteByKey(const IGisItem::key_t& key);
 
     void resetRteByKey(const IGisItem::key_t& key);

@@ -63,6 +63,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolCalc,        &QToolButton::clicked, this, &CScrOptRte::slotCalc);
     connect(toolReset,       &QToolButton::clicked, this, &CScrOptRte::slotReset);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptRte::slotEdit);
+    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptRte::slotReverse);
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
     connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
 }
@@ -104,6 +105,12 @@ void CScrOptRte::slotReset()
 void CScrOptRte::slotEdit()
 {
     CGisWorkspace::self().editRteByKey(key);
+    deleteLater();
+}
+
+void CScrOptRte::slotReverse()
+{
+    CGisWorkspace::self().reverseRteByKey(key);
     deleteLater();
 }
 

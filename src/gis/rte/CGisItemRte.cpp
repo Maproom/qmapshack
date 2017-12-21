@@ -172,6 +172,7 @@ bool CGisItemRte::isCalculated()
         if((pt.fakeSubpt.lat == NOFLOAT) || (pt.fakeSubpt.lon == NOFLOAT))
         {
             yes = false;
+            break;
         }
     }
 
@@ -274,6 +275,42 @@ void CGisItemRte::edit()
 {
     CDetailsRte dlg(*this, CMainWindow::getBestWidgetForParent());
     dlg.exec();
+}
+
+void CGisItemRte::reverse()
+{
+    QString name = getName() + "_rev";
+    IGisProject *project = nullptr;
+    if(!getNameAndProject(name, project, tr("route")))
+    {
+        return;
+    }
+
+    // start with a 1:1 copy of the first route
+    CGisItemRte * rte1 = new CGisItemRte(*this, project, NOIDX, false);
+    rte1->rte.name = name;
+    rte1->rte.pts.clear();
+    rte1->key.clear();
+    rte1->history.events.clear();
+
+    for(rtept_t &rtept : rte.pts)
+    {
+        rtept_t rtept1 = rtept;
+        rtept1.subpts.clear();
+        rtept1.fakeSubpt = subpt_t();
+        rte1->rte.pts.push_front(rtept1);
+    }
+
+    rte1->mouseMoveFocus  = nullptr;
+    rte1->rte.totalDistance   = NOFLOAT;
+    rte1->rte.totalTime       = 0;
+    rte1->rte.lastRoutedTime  = QDateTime();
+    rte1->rte.lastRoutedWith  = "";
+
+    // restore secondary data and create a new history
+    rte1->deriveSecondaryData();
+    rte1->setupHistory();
+    rte1->updateDecoration(eMarkChanged, eMarkNone);
 }
 
 void CGisItemRte::toTrack()

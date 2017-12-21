@@ -57,6 +57,7 @@ private slots:
     void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
     void slotToggleBRouter() const;
     void slotToggleConsole() const;
+    void slotClearError();
 
 private:
 
@@ -83,7 +84,6 @@ private:
     void updateLocalBRouterStatus() const;
     QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
     QUrl getServiceUrl() const;
-    void clearError();
 
     QNetworkAccessManager * networkAccessManager;
     QTimer * timerCloseStatusMsg;

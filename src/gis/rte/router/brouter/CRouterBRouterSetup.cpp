@@ -55,6 +55,7 @@ void CRouterBRouterSetup::load()
     localSegmentsDir = cfg.value("localSegmentsDir", defaultLocalSegmentsDir).toString();
     localHost = cfg.value("localHost", defaultLocalHost).toString();
     localPort = cfg.value("localPort", defaultLocalPort).toString();
+    localBindLocalonly = cfg.value("localBindLocalonly", defaultLocalBindLocalonly).toBool();
     localNumberThreads = cfg.value("localNumberThreads", defaultLocalNumberThreads).toString();
     localMaxRunningTime = cfg.value("localMaxRunningTime", defaultLocalMaxRunningTime).toString();
     localJavaOpts = cfg.value("localJavaOpts", defaultLocalJavaOpts).toString();
@@ -108,6 +109,7 @@ void CRouterBRouterSetup::save()
     cfg.setValue("localSegmentsDir", localSegmentsDir);
     cfg.setValue("localHost", localHost);
     cfg.setValue("localPort", localPort);
+    cfg.setValue("localBindLocalonly", localBindLocalonly);
     cfg.setValue("localNumberThreads", localNumberThreads);
     cfg.setValue("localMaxRunningTime", localMaxRunningTime);
     cfg.setValue("localJavaOpts", localJavaOpts);
@@ -141,6 +143,7 @@ void CRouterBRouterSetup::resetAll()
     resetLocalSegmentsDir();
     resetLocalHost();
     resetLocalPort();
+    resetLocalBindLocalonly();
     resetLocalNumberThreads();
     resetLocalMaxRunningTime();
     resetLocalJavaOpts();

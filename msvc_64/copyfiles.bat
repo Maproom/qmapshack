@@ -117,5 +117,9 @@ copy ..\3rdparty.txt
 rem section 2.6) qt.conf
 copy ..\qt.conf
 
+rem section 2.7 (PRELIMINARY) qmaptool.exe
+copy %QMSI_VCREDIST_PATH%\qmaptool.exe
+copy %QMSI_VCREDIST_PATH%\QMapTool.ico
+
 
 pause

@@ -107,8 +107,9 @@ Section "QMapShack" QMapShack
   ;BEGIN QMapShack Files    
   SetOutPath $INSTDIR
     File Files\qmapshack.exe
-	File Files\*.ico
-	;File Files\*.png
+    File Files\qmaptool.exe
+    File Files\*.ico
+    ;File Files\*.png
   SetOutPath "$INSTDIR\translations"
     File Files\translations\qmapshack_*.qm  
   ;END QMapShack Files    
@@ -117,28 +118,28 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\Qt5Core.dll
     File Files\Qt5Gui.dll
-	File Files\Qt5Multimedia.dll
-	File Files\Qt5MultimediaWidgets.dll
+    File Files\Qt5Multimedia.dll
+    File Files\Qt5MultimediaWidgets.dll
     File Files\Qt5Network.dll
     File Files\Qt5OpenGL.dll
-	File Files\Qt5Positioning.dll
-	File Files\Qt5PrintSupport.dll
-	File Files\Qt5Qml.dll
-	File Files\Qt5Quick.dll
+    File Files\Qt5Positioning.dll
+    File Files\Qt5PrintSupport.dll
+    File Files\Qt5Qml.dll
+    File Files\Qt5Quick.dll
     File Files\Qt5Script.dll
-	File Files\Qt5Sensors.dll
+    File Files\Qt5Sensors.dll
     File Files\Qt5Sql.dll
     File Files\Qt5Svg.dll
-	File Files\Qt5WebChannel.dll
+    File Files\Qt5WebChannel.dll
     File Files\Qt5WebKit.dll
     File Files\Qt5Widgets.dll 
     File Files\Qt5WebKitWidgets.dll	
     File Files\Qt5Xml.dll
-	File Files\icudt54.dll
-	File Files\icuin54.dll
-	File Files\icuuc54.dll
-	File Files\libEGL.dll
-	File Files\libGLESv2.dll
+    File Files\icudt54.dll
+    File Files\icuin54.dll
+    File Files\icuuc54.dll
+    File Files\libEGL.dll
+    File Files\libGLESv2.dll
 
   SetOutPath "$INSTDIR\imageformats\"
     File Files\imageformats\qgif.dll
@@ -181,7 +182,7 @@ Section "QMapShack" QMapShack
     File Files\proj*.dll
     File Files\proj*.exe
   SetOutPath "$INSTDIR\share\"
-	File /r Files\share\*.*
+    File /r Files\share\*.*
   ;END PROJ.4 Files        
 
   ;BEGIN QuaZip Files
@@ -196,7 +197,7 @@ Section "QMapShack" QMapShack
     File Files\libwinpthread-1.dll
     File Files\libz-1.dll
   SetOutPath "$INSTDIR\routino-xml\"
-	File /r Files\routino-xml\*.*
+    File /r Files\routino-xml\*.*
   ;END Routino Files     
   
   ;BEGIN additional Files    
@@ -231,6 +232,7 @@ Section "StartMenue" StartMenue
     CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk" "$INSTDIR\qmapshack.exe" "" "$INSTDIR\QMapShack.ico"
+    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk" "$INSTDIR\qmaptool.exe" "" "$INSTDIR\QMapTool.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/Home" "" "$INSTDIR\kfm_home.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Help.lnk" "https://bitbucket.org/maproom/qmapshack/wiki/DocMain" "" "$INSTDIR\Help.ico"
     CreateShortCut "$SMPROGRAMS\$StartMenuFolder\gdal.org.lnk" "http://www.gdal.org/" "" "$INSTDIR\gdalicon.ico"
@@ -270,6 +272,7 @@ Section "Uninstall"
 
   Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\QMapShack.lnk"
+  Delete "$SMPROGRAMS\$StartMenuFolder\QMapTool.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\qmapshack.org.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\Help.lnk"
   Delete "$SMPROGRAMS\$StartMenuFolder\gdal.org.lnk"

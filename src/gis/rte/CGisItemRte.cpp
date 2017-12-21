@@ -302,14 +302,21 @@ void CGisItemRte::reverse()
     }
 
     rte1->mouseMoveFocus  = nullptr;
-    rte1->rte.totalDistance   = NOFLOAT;
-    rte1->rte.totalTime       = 0;
-    rte1->rte.lastRoutedTime  = QDateTime();
-    rte1->rte.lastRoutedWith  = "";
 
-    // restore secondary data and create a new history
-    rte1->deriveSecondaryData();
     rte1->setupHistory();
+
+    if (rte.lastRoutedTime.isValid())
+    {
+        rte1->calc();
+    }
+    else
+    {
+        rte1->rte.totalDistance   = NOFLOAT;
+        rte1->rte.totalTime       = 0;
+        rte1->rte.lastRoutedTime  = QDateTime();
+        rte1->rte.lastRoutedWith  = "";
+        rte1->deriveSecondaryData();
+    }
     rte1->updateDecoration(eMarkChanged, eMarkNone);
 }
 

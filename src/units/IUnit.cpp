@@ -593,7 +593,6 @@ QDateTime IUnit::parseTimestamp(const QString &timetext, int& tzoffset)
 
     QDateTime datetime = QDateTime::fromString(timetext, format);
 
-
     if (applyTzOffset)
     {
         datetime.setOffsetFromUtc(tzoffset);

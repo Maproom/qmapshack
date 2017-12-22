@@ -35,10 +35,10 @@
 
 CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * parent)
     : IMouse(gis, parent),
-      key(wpt.getKey()),
-      wptPosition(wpt.getPosition() * DEG_TO_RAD),
-      avoid(wpt.isNogoArea()),
-      start(true)
+    key(wpt.getKey()),
+    wptPosition(wpt.getPosition() * DEG_TO_RAD),
+    avoid(wpt.isNogoArea()),
+    start(true)
 {
     QPointF pos = GPS_Math_Wpt_Projection(wptPosition,wpt.getProximity(),90 * DEG_TO_RAD);
     gis->convertRad2Px(pos);

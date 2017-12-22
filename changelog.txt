@@ -1,3 +1,22 @@
+V 1.10.0
+* Fine tune code for screen gestures.
+[Issue #253] Tracksorting in Datawindow somehow random- should be alphabetical
+[Issue #254] Selection in Datawindow does not highligt track on map
+[Issue #257] Diagram - Zoom: Center of zoom should be the mouse position
+[Issue #276] No-go areas in BRouter
+[Issue #279] Suunto SML/LOG : wrong start time
+[Issue #285] Do not add auto-increment number to waypoint names that have no number as last character
+[Issue #284] Read *.qlb from QLandkarte
+[Issue #277] Show position of min/max values for track properties like elevation, speed, etc
+[Issue #275] Some Suunto sml files do not have <UTC> in first <sample>
+[Issue #274] Make visibility of database a toggle option in the menu
+[Issue #256] Option to show inclination in % instead of °
+[Issue #272] Skip message box when changing an imported item
+[Issue #271] Drag'n drop missing - Openambit files
+[Issue #263] Reduce size of y label strings in graphs to avoid unintended truncation
+[Issue #270] Ask to hide invalid points when loading a GPX file with invalid points.
+[Issue #265] Inconsistent timestamp formats?
+
 V 1.9.1
 Add: Fullscreen mode
 Add: Templates for project documentation

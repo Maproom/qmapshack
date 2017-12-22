@@ -597,7 +597,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CDetailsWpt.cpp" line="166"/>
         <source>Enter new proximity range.</source>
-        <translation>Ввести новый диапазон приближения.</translation>
+        <translation>Ввести новый радиус близости.</translation>
     </message>
 </context>
 <context>
@@ -1393,7 +1393,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="288"/>
         <source>Proximity: %1%2</source>
-        <translation>Приближение: %1%2</translation>
+        <translation>Радиус близости: %1%2</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
@@ -1413,12 +1413,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="413"/>
         <source>Removed proximity</source>
-        <translation type="unfinished"></translation>
+        <translation>Удален радиус близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="417"/>
         <source>Changed proximity</source>
-        <translation>Изменена приближение</translation>
+        <translation>Изменен радиус близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="432"/>
@@ -1453,12 +1453,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="877"/>
         <source>Changed to proximity-radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменено на круг близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="882"/>
         <source>Changed to nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменено на запретную зону </translation>
     </message>
 </context>
 <context>
@@ -1748,17 +1748,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Change Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить радиус близости</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Toggle Nogo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить запретную зону</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Delete Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить радиус близости</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="189"/>
@@ -2264,27 +2264,37 @@ line %2, column %3:
         <translation>Это не файл Openambit LOG: %1</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="113"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation>Устройство: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation>Время восстановления: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation>Пиковый эффект тренинга: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="150"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation>Энергия: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
+        <source>Use of local time...</source>
+        <translation>Использование местного времени...</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation>Не найдено время UTC в файле %1. Используется локальное время компьютера. При необходимости вы можете настроить время, используя фильтр времени.</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Этот файл LOG не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
@@ -3528,22 +3538,22 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open...</source>
-        <translation type="unfinished">Не удалось открыть...</translation>
+        <translation>Не удалось открыть...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Не удалось открыть %1</translation>
+        <translation>Не удалось открыть %1</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="138"/>
         <source>Could not convert...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось преобразовать...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="139"/>
         <source>The file contains overlays that can not be converted. This is because QMapShack does not support all overlay types of QLandkarte.</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл содержит наложения, которые невозможно преобразовать. Это связано с тем, что QMapShack не поддерживает все типы наложений QLandkarte.</translation>
     </message>
 </context>
 <context>
@@ -3770,7 +3780,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="283"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
         <source>BRouter does not support more then 1 nogo-area in this version, consider to upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter в данной версии не поддерживает более 1 запретной зоны, рассмотрите возможность обновления</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="297"/>
@@ -4821,7 +4831,17 @@ line %2, column %3:
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="215"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
+        <source>Use of local time...</source>
+        <translation>Использование местного времени...</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation>Не найдено время UTC в файле %1. Используется локальное время компьютера. При необходимости вы можете настроить время, используя фильтр времени.</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="245"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Этот файл SML не содержит данных о местоположении и не может отображаться в QMapShack: %1</translation>
     </message>
@@ -6276,7 +6296,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="123"/>
         <source>Proximity:</source>
-        <translation>Близость:</translation>
+        <translation>Радиус близости:</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="268"/>
@@ -7572,7 +7592,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="849"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="245"/>
@@ -8222,17 +8242,17 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="217"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, лицензия GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="227"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Любезно предоставлены &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="237"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Данные маршрутизации &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -9160,17 +9180,17 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="150"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить радиус круга близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить между кругом близости и запретной зоной</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="185"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить круг близости маршрутной точки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="232"/>
@@ -9183,34 +9203,34 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить радиус круга близости</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="84"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Переключить между кругом близости и запретной зоной</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="81"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить круг близости маршрутной точки</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="128"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
 </context>
 <context>
@@ -10108,18 +10128,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Неверный формат позиции. Должен быть: &quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot; или &quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Position values out of bounds. </source>
         <translation>Значения позиции вне допустимого интервала.</translation>
     </message>

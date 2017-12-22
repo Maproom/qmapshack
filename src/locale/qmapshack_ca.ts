@@ -2264,27 +2264,37 @@ línia %2, columna %3:
         <translation>No és un fitxer de registre Openambit: %1</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="113"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation>Dispositiu: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation>Temps de recuperació: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation>Efecte de la Sessió d&apos;Entrenament: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="150"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation>Energia: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Aquest fitxer de LOG no conté cap dada i QMapShack no el pot visualitzar: %1</translation>
     </message>
@@ -4824,7 +4834,17 @@ línia %2, columna %3:
         <translation>Ús de la bateria: %1 %/hores</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="215"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
+        <source>Use of local time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="245"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Aquest fitxer SML no conté cap dada i QMapShack no el pot visualitzar: %1</translation>
     </message>
@@ -10108,18 +10128,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format amb possicions incorrectes. Ha de ser: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; o &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Position values out of bounds. </source>
         <translation>Els valors de la posició estan fora dels límits.</translation>
     </message>

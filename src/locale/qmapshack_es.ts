@@ -127,7 +127,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="766"/>
         <source>Setup Map Background</source>
-        <translation>Configuracion del Mapa de Fondo</translation>
+        <translation>Configuracion del Fondo del Mapa</translation>
     </message>
 </context>
 <context>
@@ -1413,7 +1413,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="413"/>
         <source>Removed proximity</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Eliminada proximidad</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="417"/>
@@ -1453,12 +1453,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="877"/>
         <source>Changed to proximity-radius</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiado a radio de proximidad</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="882"/>
         <source>Changed to nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiado a área prohibida</translation>
     </message>
 </context>
 <context>
@@ -1677,17 +1677,17 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Change Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar radio</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Toggle Nogo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta área prohibida</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Delete Radius</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar Radio</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="189"/>
@@ -2264,27 +2264,37 @@ línea %2, columna %3.
         <translation>%1 no es un archivo log de Openambit</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="120"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="113"/>
         <source>Device: %1&lt;br/&gt;</source>
         <translation>Dispositivo: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="138"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="140"/>
         <source>Recovery time: %1 h&lt;br/&gt;</source>
         <translation>Tiempo de recuperación: %1 h&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="143"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="145"/>
         <source>Peak Training Effect: %1&lt;br/&gt;</source>
         <translation>Efecto Pico de Entrenamiento: %1&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="148"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="150"/>
         <source>Energy: %1 kCal&lt;br/&gt;</source>
         <translation>Energía: %1 kCal&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CLogProject.cpp" line="216"/>
+        <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
+        <source>Use of local time...</source>
+        <translation>Uso de la hora local ...</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation>No se ha encontrado hora UTC en el archivo %1. Se usará la hora local del ordenador. Puede ajustar la hora usando un filtro de tiempo si es necesario.</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
         <source>This LOG file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Este archivo LOG no contiene datos de posición que puedan ser mostrados por QMapShack: %1</translation>
     </message>
@@ -3538,12 +3548,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="138"/>
         <source>Could not convert...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">No se pudo convertir ...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="139"/>
         <source>The file contains overlays that can not be converted. This is because QMapShack does not support all overlay types of QLandkarte.</source>
-        <translation type="unfinished"></translation>
+        <translation>El archivo contiene superposiciones que no se pueden convertir. Esto se debe a que QMapShack no es compatible con todos los tipos de superposición de QLandkarte.</translation>
     </message>
 </context>
 <context>
@@ -3770,7 +3780,7 @@ no es una definición de sistema de coordenadas válido:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="283"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
         <source>BRouter does not support more then 1 nogo-area in this version, consider to upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter no admite más de un área prohibida en esta versión, considere actualizar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="297"/>
@@ -4820,7 +4830,17 @@ línea %2, columna %3.
         <translation>Uso de la Batería: %1 %/hour</translation>
     </message>
     <message>
-        <location filename="../gis/suunto/CSmlProject.cpp" line="215"/>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
+        <source>Use of local time...</source>
+        <translation>Uso de hora loccal</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
+        <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
+        <translation>No se ha encontrado hora UTC en el archivo %1. Se usará la hora local del ordenador. Puede ajustar hora usando un filtro de tiempo si es necesario.</translation>
+    </message>
+    <message>
+        <location filename="../gis/suunto/CSmlProject.cpp" line="245"/>
         <source>This SML file does not contain any position data and can not be displayed by QMapShack: %1</source>
         <translation>Este archivo SML no contiene ningún dato de posición y QMapShack no puede mostrarlo: %1</translation>
     </message>
@@ -6179,7 +6199,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1475"/>
         <source>Time</source>
-        <translation>Tiempo</translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1480"/>
@@ -8219,12 +8239,12 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="227"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Direcciones de &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="237"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Enrutamiento de &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -9151,17 +9171,17 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="150"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>editar radio de área circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar entre proximidad y área prohibida</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="185"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar círculo definido por waypoint</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="232"/>
@@ -9179,7 +9199,7 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>editar radio de área circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
@@ -9191,12 +9211,12 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cambiar entre proximidad y área prohibida</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="81"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar circulo definido por waypoint</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="128"/>
@@ -10098,18 +10118,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="758"/>
+        <location filename="../units/IUnit.cpp" line="770"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="764"/>
+        <location filename="../units/IUnit.cpp" line="776"/>
         <source>Position values out of bounds. </source>
         <translation>Valores de posición fuera del límite.</translation>
     </message>

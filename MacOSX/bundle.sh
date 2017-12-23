@@ -60,7 +60,7 @@ function buildAppStructure {
     mkdir $BUILD_BUNDLE_RES_PROJ_DIR
     mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
     mkdir $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $BUILD_BIN_DIR/*.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 function qtDeploy {
@@ -264,8 +264,17 @@ function archiveBundle {
     echo $ARCHIVE
     rm $ARCHIVE
 
+    BUILD_RELEASE_REL_DIR=${BUILD_RELEASE_DIR##*/}
+    BUILD_RELEASE_QMAPTOOL_DIR="../../qmaptool-default/$BUILD_RELEASE_REL_DIR"
+
     cd $BUILD_RELEASE_DIR
-    tar -zcvf $ARCHIVE $APP_BUNDLE
+    rm -rf $APP_BUNDLE_QMAPTOOL
+    if [ -d $BUILD_RELEASE_QMAPTOOL_DIR ]; then
+        cp -v -R $BUILD_RELEASE_QMAPTOOL_DIR/$APP_BUNDLE_QMAPTOOL $BUILD_RELEASE_DIR/
+        tar -zcvf $ARCHIVE $APP_BUNDLE $APP_BUNDLE_QMAPTOOL
+    else
+        tar -zcvf $ARCHIVE $APP_BUNDLE
+    fi
     cd ..
 }
 

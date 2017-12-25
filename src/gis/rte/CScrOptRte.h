@@ -44,6 +44,7 @@ private slots:
     void slotCalc();
     void slotReset();
     void slotEdit();
+    void slotReverse();
     void slotInstruction(bool on);
     void slotToTrack();
 

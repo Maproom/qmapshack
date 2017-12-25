@@ -992,11 +992,6 @@ void CGisWorkspace::reverseRteByKey(const IGisItem::key_t& key)
     CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
     if(nullptr != rte)
     {
-        if(!rte->setReadOnlyMode(false))
-        {
-            return;
-        }
-
         rte->reverse();
     }
 }

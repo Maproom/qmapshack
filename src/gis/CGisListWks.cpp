@@ -186,12 +186,13 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemRte->addAction(actionEditDetails);
     menuItemRte->addAction(actionCopyItem);
     menuItemRte->addSeparator();
-    actionFocusRte  = menuItemRte->addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"));
+    actionFocusRte   = menuItemRte->addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"));
     actionFocusRte->setCheckable(true);
-    actionCalcRte   = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"),    tr("Calculate Route"), this, SLOT(slotCalcRte()));
-    actionResetRte  = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"),    tr("Reset Route"),     this, SLOT(slotResetRte()));
-    actionEditRte   = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
-    actionRte2Trk   = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
+    actionCalcRte    = menuItemRte->addAction(QIcon("://icons/32x32/Apply.png"),    tr("Calculate Route"), this, SLOT(slotCalcRte()));
+    actionResetRte   = menuItemRte->addAction(QIcon("://icons/32x32/Reset.png"),    tr("Reset Route"),     this, SLOT(slotResetRte()));
+    actionEditRte    = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
+    actionReverseRte = menuItemRte->addAction(QIcon("://icons/32x32/Reverse.png"),  tr("Reverse Route"),   this, SLOT(slotReverseRte()));
+    actionRte2Trk    = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
     connect(menuItemRte, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -1632,6 +1633,17 @@ void CGisListWks::slotEditRte()
     if(gisItem != nullptr)
     {
         CGisWorkspace::self().editRteByKey(gisItem->getKey());
+    }
+}
+
+void CGisListWks::slotReverseRte()
+{
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
+
+    CGisItemRte * gisItem = dynamic_cast<CGisItemRte*>(currentItem());
+    if(gisItem != nullptr)
+    {
+        CGisWorkspace::self().reverseRteByKey(gisItem->getKey());
     }
 }
 

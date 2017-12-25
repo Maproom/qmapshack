@@ -985,6 +985,17 @@ void CGisWorkspace::editRteByKey(const IGisItem::key_t& key)
     }
 }
 
+void CGisWorkspace::reverseRteByKey(const IGisItem::key_t& key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemRte * rte = dynamic_cast<CGisItemRte*>(getItemByKey(key));
+    if(nullptr != rte)
+    {
+        rte->reverse();
+    }
+}
+
 void CGisWorkspace::calcRteByKey(const IGisItem::key_t& key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);

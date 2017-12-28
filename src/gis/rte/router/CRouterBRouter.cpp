@@ -298,7 +298,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         delete progress;
 
         const QNetworkReply::NetworkError& netErr = reply->error();
-        if (netErr == QNetworkReply::RemoteHostClosedError && areas.size() > 1)
+        if (netErr == QNetworkReply::RemoteHostClosedError && areas.size() > 1 && !isMinimumVersion(1,4,10))
         {
             throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
         }
@@ -424,7 +424,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
     try
     {
         const QNetworkReply::NetworkError& netErr = reply->error();
-        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1)
+        if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1 && !isMinimumVersion(1,4,10))
         {
             throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
         }
@@ -619,6 +619,7 @@ void CRouterBRouter::getBRouterVersion()
         QPointF p2(0.1944047317331012, 0.8495732565736816);
         QPolygonF rt;
         isVersionRequest = true;
+        // version is taken from remote brouters xml-response with every routing-request:
         calcRoute(p1,p2,rt);
         isVersionRequest = false;
     }

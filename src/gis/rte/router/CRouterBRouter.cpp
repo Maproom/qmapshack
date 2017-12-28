@@ -623,6 +623,18 @@ void CRouterBRouter::getBRouterVersion()
         calcRoute(p1,p2,rt);
         isVersionRequest = false;
     }
+
+    if (versionMajor == NOINT || versionMinor == NOINT || versionPatch == NOINT)
+    {
+        labelBRouter->setText("BRouter:");
+    }
+    else
+    {
+        labelBRouter->setText(tr("BRouter (Version %1.%2.%3):")
+                              .arg(versionMajor)
+                              .arg(versionMinor)
+                              .arg(versionPatch));
+    }
 }
 
 void CRouterBRouter::parseRemoteVersion(const QString &text)

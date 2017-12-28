@@ -57,6 +57,8 @@ public:
 
     virtual QString getOptions() = 0;
 
+    virtual void routerSelected() {}
+
 private:
     bool fastRouting;
 };

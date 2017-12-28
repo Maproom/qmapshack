@@ -45,6 +45,7 @@ public:
     int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
     bool hasFastRouting() override;
     QString getOptions() override;
+    void routerSelected() override;
 
 private slots:
     void slotToolSetupClicked();
@@ -83,6 +84,7 @@ private:
     void stopBRouter() const;
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
+    void parseRemoteVersion(const QString& text);
     bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
     QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
@@ -107,7 +109,7 @@ private:
     int versionMajor { NOINT };
     int versionMinor { NOINT };
     int versionPatch { NOINT };
-    QString versionTag;
+    bool isVersionRequest { false };
 };
 
 #endif //CROUTERBROUTER_H

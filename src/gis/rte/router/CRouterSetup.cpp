@@ -68,6 +68,11 @@ bool CRouterSetup::hasFastRouting()
 void CRouterSetup::slotSelectRouter(int i)
 {
     stackedWidget->setCurrentIndex(i);
+    IRouter * router = dynamic_cast<IRouter *>(stackedWidget->currentWidget());
+    if (router != nullptr)
+    {
+        router->routerSelected();
+    }
 }
 
 void CRouterSetup::calcRoute(const IGisItem::key_t& key)

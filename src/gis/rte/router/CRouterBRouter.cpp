@@ -300,7 +300,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         const QNetworkReply::NetworkError& netErr = reply->error();
         if (netErr == QNetworkReply::RemoteHostClosedError && areas.size() > 1 && !isMinimumVersion(1,4,10))
         {
-            throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
+            throw tr("this version of BRouter does not support more then 1 nogo-area");
         }
         else if(netErr != QNetworkReply::NoError)
         {
@@ -426,7 +426,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         const QNetworkReply::NetworkError& netErr = reply->error();
         if (netErr == QNetworkReply::RemoteHostClosedError && reply->property("nogos").toInt() > 1 && !isMinimumVersion(1,4,10))
         {
-            throw tr("BRouter does not support more then 1 nogo-area in this version, consider to upgrade");
+            throw tr("this version of BRouter does not support more then 1 nogo-area");
         }
         else if(netErr != QNetworkReply::NoError)
         {

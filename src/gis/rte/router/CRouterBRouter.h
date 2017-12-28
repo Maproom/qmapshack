@@ -81,6 +81,9 @@ private:
     void updateDialog() const;
     void startBRouter() const;
     void stopBRouter() const;
+    void getBRouterVersion();
+    bool isMinimumVersion(int major, int minor, int patch) const;
+    bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
     QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
     QUrl getServiceUrl() const;
@@ -100,6 +103,11 @@ private:
     QString error;
     QString errorDetails;
     bool isShutdown { false };
+
+    int versionMajor { NOINT };
+    int versionMinor { NOINT };
+    int versionPatch { NOINT };
+    QString versionTag;
 };
 
 #endif //CROUTERBROUTER_H

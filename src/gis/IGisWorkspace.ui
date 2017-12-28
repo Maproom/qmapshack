@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="leftMargin">
     <number>0</number>
@@ -77,46 +77,41 @@
     </layout>
    </item>
    <item>
-    <widget class="QSplitter" name="splitter">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
+    <widget class="CGisListWks" name="treeWks">
+     <property name="contextMenuPolicy">
+      <enum>Qt::CustomContextMenu</enum>
      </property>
-     <widget class="CGisListWks" name="treeWks">
-      <property name="contextMenuPolicy">
-       <enum>Qt::CustomContextMenu</enum>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="dragDropMode">
+      <enum>QAbstractItemView::InternalMove</enum>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::ExtendedSelection</enum>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="indentation">
+      <number>14</number>
+     </property>
+     <attribute name="headerDefaultSectionSize">
+      <number>100</number>
+     </attribute>
+     <column>
+      <property name="text">
+       <string notr="true"/>
       </property>
-      <property name="dragEnabled">
-       <bool>true</bool>
+     </column>
+     <column>
+      <property name="text">
+       <string>Name</string>
       </property>
-      <property name="dragDropMode">
-       <enum>QAbstractItemView::InternalMove</enum>
-      </property>
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ExtendedSelection</enum>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>20</width>
-        <height>20</height>
-       </size>
-      </property>
-      <property name="indentation">
-       <number>14</number>
-      </property>
-      <attribute name="headerDefaultSectionSize">
-       <number>100</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string notr="true"/>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Name</string>
-       </property>
-      </column>
-     </widget>
+     </column>
     </widget>
    </item>
   </layout>

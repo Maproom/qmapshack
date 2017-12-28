@@ -244,42 +244,48 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
 
 QString CGisItemWpt::getInfo(quint32 feature) const
 {
-    QString str = "<div>";
+    QString str = "<div>";  // KKA: Hmm ?! str can never be checked to be empty in the following code structure when it filled initially with "<div>"
+    qint32 initialSize = str.size(); // So I used this instead
 
     if(feature & eFeatureShowName)
     {
-        str = "<b>" + getName() + "</b><br/>\n";
+        str = "<b>" + getName() + "</b>";
     }
 
     if(geocache.hasData)
     {
-        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
-    }
+//        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
+//    }
 
-    if(wpt.time.isValid())
-    {
-        if(!str.isEmpty())
+//    if(wpt.time.isValid())
+//    {
+//        if(!str.isEmpty())
+//        {
+        if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
 
-        str += IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
+//        str += IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD));
+        str += QString(" %4 (%1, D %2, T %3)").arg(geocache.container).arg(geocache.difficulty, 0,'f',1).arg(geocache.terrain, 0,'f',1).arg(geocache.name);
     }
 
     if(wpt.ele != NOINT)
     {
-        if(!str.isEmpty())
+//        if(!str.isEmpty())
+        if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
         QString val, unit;
         IUnit::self().meter2elevation(wpt.ele, val, unit);
-        str += tr("Elevation: %1%2").arg(val).arg(unit); // KKA
+        str += tr("Elevation: %1%2").arg(val).arg(unit);
     }
 
     if(proximity != NOFLOAT)
     {
-        if(!str.isEmpty())
+//        if(!str.isEmpty())
+        if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
@@ -291,7 +297,8 @@ QString CGisItemWpt::getInfo(quint32 feature) const
     QString desc = removeHtml(wpt.desc).simplified();
     if(desc.count())
     {
-        if(!str.isEmpty())
+//        if(!str.isEmpty())
+        if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
@@ -309,7 +316,8 @@ QString CGisItemWpt::getInfo(quint32 feature) const
     QString cmt = removeHtml(wpt.cmt).simplified();
     if((cmt != desc) && cmt.count())
     {
-        if(!str.isEmpty())
+//        if(!str.isEmpty())
+        if(str.size() > initialSize)
         {
             str += "<br/>\n";
         }
@@ -323,6 +331,19 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             str += cmt.left(297) + "...";
         }
     }
+// KKA start
+    if(feature & eFeatureShowDateTime)
+    {
+        if(wpt.time.isValid())
+        {
+            if(str.size() > initialSize)
+            {
+                str += "<br/>\n";
+            }
+            str += tr("Created: %1").arg(IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD)));
+        }
+    }
+// KKA end
     return str + "</div>";
 }
 

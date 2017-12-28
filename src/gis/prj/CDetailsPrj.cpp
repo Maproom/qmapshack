@@ -507,13 +507,16 @@ struct wpt_info_t
     IGisItem::key_t key;
     qreal distance1 = NOFLOAT;
     qreal ascent1 = NOFLOAT;
+    qreal elapsedSeconds1 = 0; // KKA
     qreal descent1 = NOFLOAT;
 
     qreal distance2 = NOFLOAT;
+    qreal elapsedSeconds2 = 0; // KKA
     qreal ascent2 = NOFLOAT;
     qreal descent2 = NOFLOAT;
 
     qreal distance3 = NOFLOAT;
+    qreal elapsedSeconds3 = 0; // KKA
     qreal ascent3 = NOFLOAT;
     qreal descent3 = NOFLOAT;
 };
@@ -544,17 +547,20 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             wpt_info_t& info = wptInfo.last();
             info.key        = trkpt.keyWpt;
             info.distance1  = trkpt.distance;
+            info.elapsedSeconds1 = trkpt.elapsedSeconds; // KKA
             info.ascent1    = trkpt.ascent;
             info.descent1   = trkpt.descent;
 
             if(lastWptInfo != nullptr)
             {
                 lastWptInfo->distance2  = trkpt.distance - lastTrkpt->distance;
+                lastWptInfo->elapsedSeconds2  = trkpt.elapsedSeconds - lastTrkpt->elapsedSeconds; // KKA
                 lastWptInfo->ascent2    = trkpt.ascent   - lastTrkpt->ascent;
                 lastWptInfo->descent2   = trkpt.descent  - lastTrkpt->descent;
             }
 
             info.distance3  = trk->getTotalDistance() - trkpt.distance;
+            info.elapsedSeconds3  = trk->getTotalElapsedSeconds() - trkpt.elapsedSeconds; // KKA
             info.ascent3    = trk->getTotalAscent() - trkpt.ascent;
             info.descent3   = trk->getTotalDescent() - trkpt.descent;
 
@@ -583,8 +589,21 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
             if(wpt != nullptr)
             {
                 addIcon(table, eSym2, cnt, wpt, printable);
-                table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
-
+//                table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(wpt->getInfo(IGisItem::eFeatureShowName));
+// KKA start
+                QString timeStr = "";
+                QDateTime arrivalTime = trk->getTimeStart();
+                if (arrivalTime.isValid())
+                {
+                    timeStr += wpt->getInfo(IGisItem::eFeatureShowName) + "<br/>\n" +
+                    tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
+                }
+                else
+                {
+                    timeStr = wpt->getInfo(IGisItem::eFeatureShowName | IGisItem::eFeatureShowDateTime);
+                }
+                table->cellAt(cnt,eInfo2).firstCursorPosition().insertHtml(timeStr);
+// KKA end
                 QTextTable * table1 = table->cellAt(cnt,eData2).lastCursorPosition().insertTable(1, 2, fmtTableInfo);
 
                 QString text, val, unit;
@@ -600,7 +619,17 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 IUnit::self().meter2distance(info.distance3, val, unit);
                 text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "</td>";
                 text += "</tr>";
-
+// KKA start
+                text += "<tr>";
+                text += "<td>" + tr("Time: ") + "</td>";
+                IUnit::self().seconds2time(info.elapsedSeconds1, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+                IUnit::self().seconds2time(info.elapsedSeconds2, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+                IUnit::self().seconds2time(info.elapsedSeconds3, val, unit);
+                text += "<td>"+ QString("%1%2").arg(val).arg(unit) + "&nbsp;</td>";
+                text += "</tr>";
+// KKA end
                 text += "<tr>";
                 text += "<td>" + tr("Ascent: ") + "</td>";
                 IUnit::self().meter2elevation(info.ascent1, val, unit);

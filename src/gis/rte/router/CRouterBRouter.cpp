@@ -84,6 +84,8 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     checkFastRecalc->setChecked(cfg.value("fastRecalc", false).toBool() && (setup->installMode == CRouterBRouterSetup::eModeLocal));
     comboAlternative->setCurrentIndex(cfg.value("alternative", 0).toInt());
     cfg.endGroup();
+
+    getBRouterVersion();
 }
 
 CRouterBRouter::~CRouterBRouter()
@@ -108,6 +110,7 @@ void CRouterBRouter::slotToolSetupClicked()
     setupWizard.exec();
     slotClearError();
     setup->load();
+    getBRouterVersion();
     updateDialog();
 }
 
@@ -535,7 +538,7 @@ void CRouterBRouter::startBRouter() const
             args << setup->localCustomProfileDir;
             args << setup->localPort;
             args << setup->localNumberThreads;
-            if (setup->localBindLocalonly)
+            if (usesLocalBindaddress())
             {
                 args << setup->localHost;
             }
@@ -553,6 +556,92 @@ void CRouterBRouter::stopBRouter() const
     textBRouterOutput->setVisible(false);
 }
 
+void CRouterBRouter::getBRouterVersion()
+{
+    if (setup->isLocalBRouterInstalled() && brouterState == QProcess::NotRunning)
+    {
+        versionMajor = NOINT;
+        versionMinor = NOINT;
+        versionPatch = NOINT;
+        versionTag.clear();
+
+        QTextBrowser output;
+        CRouterBRouterToolShell shell(&output,nullptr);
+        QStringList args;
+        args << "-cp";
+        args << "brouter.jar";
+        args << "btools.server.RouteServer";
+        QEventLoop eventLoop;
+        QTimer stopTimer;
+        stopTimer.setSingleShot(true);
+        connect(&shell, &CRouterBRouterToolShell::sigProcessError, this, [&](const QProcess::ProcessError error, const QString &errorString) {
+            if (error == QProcess::FailedToStart)
+            {
+                // search output for version (like "BRouter 1.4.9 / 24092017")
+                QRegExp rx("\\bBRouter (\\d+)\\.(\\d+)\\.(\\d+) / (\\d+)\\b");
+                if (rx.indexIn(errorString) > -1)
+                {
+                    versionMajor = rx.cap(1).toInt();
+                    versionMinor = rx.cap(2).toInt();
+                    versionPatch = rx.cap(3).toInt();
+                    versionTag   = rx.cap(4);
+                }
+            }
+        });
+        connect(&shell, &CRouterBRouterToolShell::sigProcessStateChanged, this, [&](const QProcess::ProcessState newState) {
+            if (newState == QProcess::NotRunning)
+            {
+                eventLoop.exit();
+            }
+        });
+        connect(&stopTimer, &QTimer::timeout, this, [&]() {
+            shell.stop();
+            eventLoop.exit();
+        });
+        shell.start(setup->localDir, setup->localJavaExecutable, args);
+        stopTimer.start(500);
+        eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+    }
+}
+
+bool CRouterBRouter::isMinimumVersion(int major, int minor, int patch) const
+{
+    if (versionMajor == NOINT || versionMinor == NOINT || versionPatch == NOINT)
+    {
+        return false;
+    }
+    if (versionMajor > major)
+    {
+        return true;
+    }
+    if (versionMajor < major)
+    {
+        return false;
+    }
+    if (versionMinor > minor)
+    {
+        return true;
+    }
+    if (versionMinor < minor)
+    {
+        return false;
+    }
+    if (versionPatch > patch)
+    {
+        return true;
+    }
+    if (versionPatch < patch)
+    {
+        return false;
+    }
+    return true;
+}
+
+bool CRouterBRouter::usesLocalBindaddress() const
+{
+    return setup->localBindLocalonly && isMinimumVersion(1,4,10);
+}
+
 void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
 {
     brouterState = newState;
@@ -562,27 +651,7 @@ void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newSta
 void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
 {
     brouterError = error;
-    if (error == QProcess::FailedToStart)
-    {
-        if (setup->localBindLocalonly
-                && errorString.contains("<maxthreads>")
-                && !errorString.contains("[bindaddress]"))
-        {
-            slotDisplayError(tr("Failure to start:\n"
-                                "Local BRouter is configured to bind to %1 only, but "
-                                "this version doesn't support this yet.\n"
-                                "This can be turned of in expert mode, uncheck 'Bind to hostname only'\n\n"
-                                "Consider to update BRouter!").arg(setup->localHost),"");
-        }
-        else
-        {
-            slotDisplayError(tr("Failure to start local BRouter:"),errorString);
-        }
-    }
-    else
-    {
-        slotDisplayError(tr("Error:"),errorString);
-    }
+    slotDisplayError(tr("Error:"),errorString);
     updateLocalBRouterStatus();
 }
 
@@ -595,7 +664,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         "is not much of a problem. If you are in a public network every open port is a risk as it can be "
         "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
         "in this case. In the configuration of BRouter use expert mode and configure 'Bind to hostname only' to "
-        "change this behavior."
+        "change this behavior (requires BRouter version >= 1.4.10)."
         );
 
     if (isShutdown)
@@ -613,7 +682,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
             case QProcess::Starting:
             {
                 SETTINGS;
-                if(!setup->localBindLocalonly && cfg.value("Route/brouter/local/showWarning", true).toBool())
+                if(!usesLocalBindaddress() && cfg.value("Route/brouter/local/showWarning", true).toBool())
                 {
                     QMessageBox mbox;
                     mbox.setWindowTitle(tr("Warning..."));
@@ -633,7 +702,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
 
             case QProcess::Running:
             {
-                labelBRouterWarning->setVisible(!setup->localBindLocalonly);
+                labelBRouterWarning->setVisible(!usesLocalBindaddress());
                 labelStatus->setText(tr("running"));
                 toolConsole->setVisible(true);
                 break;

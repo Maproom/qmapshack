@@ -84,7 +84,7 @@ private:
     void stopBRouter() const;
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
-    void parseRemoteVersion(const QString& text);
+    void parseBRouterVersion(const QString& text);
     bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
     QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;

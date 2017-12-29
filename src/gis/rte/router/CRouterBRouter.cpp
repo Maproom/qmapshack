@@ -328,7 +328,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
                 }
                 else
                 {
-                    parseRemoteVersion(xmlGpx.attribute("creator"));
+                    parseBRouterVersion(xmlGpx.attribute("creator"));
                     // read the shape
                     const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
                                                     .firstChildElement("trkseg")
@@ -452,7 +452,7 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
             throw QString(res);
         }
 
-        parseRemoteVersion(xmlGpx.attribute("creator"));
+        parseBRouterVersion(xmlGpx.attribute("creator"));
 
         IGisItem::key_t key;
         key.item    = reply->property("key.item").toString();
@@ -587,14 +587,7 @@ void CRouterBRouter::getBRouterVersion()
             connect(&shell, &CRouterBRouterToolShell::sigProcessError, this, [&](const QProcess::ProcessError error, const QString &errorString) {
                 if (error == QProcess::FailedToStart)
                 {
-                    // search output for version (like "BRouter 1.4.9 / 24092017")
-                    QRegExp rx("\\bBRouter (\\d+)\\.(\\d+)\\.(\\d+) / (\\d+)\\b");
-                    if (rx.indexIn(errorString) > -1)
-                    {
-                        versionMajor = rx.cap(1).toInt();
-                        versionMinor = rx.cap(2).toInt();
-                        versionPatch = rx.cap(3).toInt();
-                    }
+                    parseBRouterVersion(errorString);
                 }
             });
             connect(&shell, &CRouterBRouterToolShell::sigProcessStateChanged, this, [&](const QProcess::ProcessState newState) {
@@ -620,7 +613,13 @@ void CRouterBRouter::getBRouterVersion()
         QPolygonF rt;
         isVersionRequest = true;
         // version is taken from remote brouters xml-response with every routing-request:
-        calcRoute(p1,p2,rt);
+        try
+        {
+            calcRoute(p1,p2,rt);
+        }
+        catch(const QString& msg) {
+            QString lmsg = msg;
+        } //fail silently
         isVersionRequest = false;
     }
 
@@ -637,10 +636,11 @@ void CRouterBRouter::getBRouterVersion()
     }
 }
 
-void CRouterBRouter::parseRemoteVersion(const QString &text)
+void CRouterBRouter::parseBRouterVersion(const QString &text)
 {
-    // search output for version (like "BRouter-1.4.9")
-    QRegExp rx("\\bBRouter-(\\d+)\\.(\\d+)\\.(\\d+)\\b");
+    // version string is either like "BRouter 1.4.9 / 24092017"
+    // or (without the date) like "BRouter-1.4.9"
+    QRegExp rx("\\bBRouter[- ](\\d+)\\.(\\d+)\\.(\\d+)\\b");
     if (rx.indexIn(text) > -1)
     {
         versionMajor = rx.cap(1).toInt();

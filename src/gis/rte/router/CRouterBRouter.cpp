@@ -259,7 +259,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, co
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    if((!isVersionRequest && !hasFastRouting()) || !mutex.tryLock())
+    if(!hasFastRouting() || !mutex.tryLock())
     {
         return -1;
     }
@@ -273,11 +273,13 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
     points << wpt_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG);
 
     QVector<IRouter::circle_t> areas;
-    if (!isVersionRequest)
-    {
-        CGisWorkspace::self().getNogoAreas(areas);
-    }
+    CGisWorkspace::self().getNogoAreas(areas);
 
+    return synchronousRequest(points,areas,coords,false);
+}
+
+int CRouterBRouter::synchronousRequest(const QVector<wpt_t>& points, const QVector<IRouter::circle_t> &areas, QPolygonF &coords, bool isVersionRequest)
+{
     synchronous = true;
 
     QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));
@@ -328,18 +330,24 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
                 }
                 else
                 {
-                    parseBRouterVersion(xmlGpx.attribute("creator"));
-                    // read the shape
-                    const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
-                                                    .firstChildElement("trkseg")
-                                                    .elementsByTagName("trkpt");
-                    for(int n = 0; n < xmlLatLng.size(); n++)
+                    if (isVersionRequest)
                     {
-                        const QDomElement &elem   = xmlLatLng.item(n).toElement();
-                        coords << QPointF();
-                        QPointF &point = coords.last();
-                        point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
-                        point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+                        parseBRouterVersion(xmlGpx.attribute("creator"));
+                    }
+                    else
+                    {
+                        // read the shape
+                        const QDomNodeList &xmlLatLng = xmlGpx.firstChildElement("trk")
+                                                        .firstChildElement("trkseg")
+                                                        .elementsByTagName("trkpt");
+                        for(int n = 0; n < xmlLatLng.size(); n++)
+                        {
+                            const QDomElement &elem   = xmlLatLng.item(n).toElement();
+                            coords << QPointF();
+                            QPointF &point = coords.last();
+                            point.setX(elem.attribute("lon").toFloat()*DEG_TO_RAD);
+                            point.setY(elem.attribute("lat").toFloat()*DEG_TO_RAD);
+                        }
                     }
                 }
             }
@@ -352,6 +360,10 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         {
             reply->deleteLater();
             mutex.unlock();
+            if (isVersionRequest)
+            {
+                parseBRouterVersion("");
+            }
             throw tr("Bad response from server: %1").arg(msg);
         }
     }
@@ -451,8 +463,6 @@ void CRouterBRouter::slotRequestFinished(QNetworkReply* reply)
         {
             throw QString(res);
         }
-
-        parseBRouterVersion(xmlGpx.attribute("creator"));
 
         IGisItem::key_t key;
         key.item    = reply->property("key.item").toString();
@@ -569,70 +579,48 @@ void CRouterBRouter::getBRouterVersion()
 {
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
-        if (setup->isLocalBRouterInstalled() && brouterState == QProcess::NotRunning)
+        if (setup->isLocalBRouterInstalled())
         {
-            versionMajor = NOINT;
-            versionMinor = NOINT;
-            versionPatch = NOINT;
+            QProcess cmd;
+            QTimer timer;
+            QEventLoop eventLoop;
 
-            QTextBrowser output;
-            CRouterBRouterToolShell shell(&output,nullptr);
+            connect(&cmd,   static_cast<void (QProcess::*)(int)>(&QProcess::finished), &eventLoop, &QEventLoop::exit);
+            connect(&timer, &QTimer::timeout, &cmd,  &QProcess::kill);
+
             QStringList args;
             args << "-cp";
             args << "brouter.jar";
             args << "btools.server.RouteServer";
-            QEventLoop eventLoop;
-            QTimer stopTimer;
-            stopTimer.setSingleShot(true);
-            connect(&shell, &CRouterBRouterToolShell::sigProcessError, this, [&](const QProcess::ProcessError error, const QString &errorString) {
-                if (error == QProcess::FailedToStart)
-                {
-                    parseBRouterVersion(errorString);
-                }
-            });
-            connect(&shell, &CRouterBRouterToolShell::sigProcessStateChanged, this, [&](const QProcess::ProcessState newState) {
-                if (newState == QProcess::NotRunning)
-                {
-                    eventLoop.exit();
-                }
-            });
-            connect(&stopTimer, &QTimer::timeout, this, [&]() {
-                shell.stop();
-                eventLoop.exit();
-            });
-            shell.start(setup->localDir, setup->localJavaExecutable, args);
-            stopTimer.start(500);
+
+            cmd.setWorkingDirectory(setup->localDir);
+            cmd.start(setup->localJavaExecutable,args);
+            timer.setSingleShot(true);
+            timer.start(200);
+
             eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+
+            parseBRouterVersion(QString(cmd.readAll()));
+        }
+        else
+        {
+            labelBRouter->setText("BRouter: not found");
         }
     }
     else
     {
         // use 2 points known to be routable:
-        QPointF p1(0.1944047317331011, 0.8495732565736815);
-        QPointF p2(0.1944047317331012, 0.8495732565736816);
+        QVector<wpt_t> points;
+        points << wpt_t(0.8495732565736815*RAD_TO_DEG,0.1944047317331011*RAD_TO_DEG);
+        points << wpt_t(0.8495732565736816*RAD_TO_DEG,0.1944047317331012*RAD_TO_DEG);
         QPolygonF rt;
-        isVersionRequest = true;
-        // version is taken from remote brouters xml-response with every routing-request:
+        QVector<IRouter::circle_t> areas;
+        // parseBRouterVersion is called while parsing remote brouters xml-response:
         try
         {
-            calcRoute(p1,p2,rt);
+            synchronousRequest(points,areas,rt,true);
         }
-        catch(const QString& msg) {
-            QString lmsg = msg;
-        } //fail silently
-        isVersionRequest = false;
-    }
-
-    if (versionMajor == NOINT || versionMinor == NOINT || versionPatch == NOINT)
-    {
-        labelBRouter->setText("BRouter:");
-    }
-    else
-    {
-        labelBRouter->setText(tr("BRouter (Version %1.%2.%3):")
-                              .arg(versionMajor)
-                              .arg(versionMinor)
-                              .arg(versionPatch));
+        catch(const QString&) {} //fail silently
     }
 }
 
@@ -646,6 +634,19 @@ void CRouterBRouter::parseBRouterVersion(const QString &text)
         versionMajor = rx.cap(1).toInt();
         versionMinor = rx.cap(2).toInt();
         versionPatch = rx.cap(3).toInt();
+
+        labelBRouter->setText(tr("BRouter (Version %1.%2.%3):")
+                              .arg(versionMajor)
+                              .arg(versionMinor)
+                              .arg(versionPatch));
+    }
+    else
+    {
+        versionMajor = NOINT;
+        versionMinor = NOINT;
+        versionPatch = NOINT;
+
+        labelBRouter->setText("BRouter:");
     }
 }
 

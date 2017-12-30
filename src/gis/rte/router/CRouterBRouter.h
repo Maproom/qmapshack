@@ -87,6 +87,7 @@ private:
     void parseBRouterVersion(const QString& text);
     bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
+    int synchronousRequest(const QVector<wpt_t>& points, const QVector<IRouter::circle_t> &areas, QPolygonF &coords, bool isVersionRequest);
     QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
     QUrl getServiceUrl() const;
 
@@ -109,7 +110,6 @@ private:
     int versionMajor { NOINT };
     int versionMinor { NOINT };
     int versionPatch { NOINT };
-    bool isVersionRequest { false };
 };
 
 #endif //CROUTERBROUTER_H

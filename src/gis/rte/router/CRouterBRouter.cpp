@@ -259,13 +259,9 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<wpt_t>& routePoints, co
 
 int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords)
 {
-    if(!hasFastRouting() || !mutex.tryLock())
+    if(!hasFastRouting())
     {
         return -1;
-    }
-    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
-    {
-        startBRouter();
     }
 
     QVector<wpt_t> points;
@@ -280,6 +276,22 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
 
 int CRouterBRouter::synchronousRequest(const QVector<wpt_t>& points, const QVector<IRouter::circle_t> &areas, QPolygonF &coords, bool isVersionRequest)
 {
+    if (isVersionRequest)
+    {
+        // wait for previous request to finish before issuing version-request
+        mutex.lock();
+    }
+    else if (!mutex.tryLock())
+    {
+        // skip further on-the-fly-requests as long a previous request is still running
+        return -1;
+    }
+
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
+    {
+        startBRouter();
+    }
+
     synchronous = true;
 
     QNetworkReply * reply = networkAccessManager->get(getRequest(points,areas));

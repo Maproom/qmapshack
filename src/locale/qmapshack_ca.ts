@@ -892,72 +892,77 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="284"/>
+        <source>route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
         <source>track</source>
         <translation>track</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="311"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="355"/>
         <source>Changed name.</source>
         <translation>Nom canviat.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="317"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="361"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="323"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="367"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="329"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="373"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="347"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="391"/>
         <source>Length: %1%2</source>
         <translation>Llargada: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="358"/>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="600"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="402"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="644"/>
         <source>Time: %1%2</source>
         <translation>Temps: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="602"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="646"/>
         <source>Distance: %1%2</source>
         <translation>Distància: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="351"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="395"/>
         <source>Length: -</source>
         <translation>Llargada: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="362"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="406"/>
         <source>Time: -</source>
         <translation>Temps: -</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="372"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="416"/>
         <source>%1%2 %3, %4%5 %6</source>
         <translation>%1%2 %3, %4%5 %6</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="378"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="422"/>
         <source>Last time routed:&lt;br/&gt;%1</source>
         <translation>Enrutat per darrera vegada :&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="380"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="424"/>
         <source>with %1</source>
         <translation>amb %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/CGisItemRte.cpp" line="717"/>
+        <location filename="../gis/rte/CGisItemRte.cpp" line="761"/>
         <source>Changed route points.</source>
         <translation>Punts de la ruta canviats.</translation>
     </message>
@@ -1777,21 +1782,26 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
+        <source>Reverse Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="195"/>
         <source>Convert to Track</source>
         <translation>Convertir a track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="204"/>
+        <location filename="../gis/CGisListWks.cpp" line="205"/>
         <source>Edit Area Points</source>
         <translation>Edita els Punts de l&apos;Àrea</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="212"/>
+        <location filename="../gis/CGisListWks.cpp" line="213"/>
         <source>Create Route</source>
         <translation>Crear Ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="213"/>
+        <location filename="../gis/CGisListWks.cpp" line="214"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Canviar Icona (sols sel. fita)</translation>
     </message>
@@ -1801,44 +1811,44 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Assigna una Activitat al Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="646"/>
+        <location filename="../gis/CGisListWks.cpp" line="647"/>
         <source>Drop items...</source>
         <translation>Deixar anar elements...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="671"/>
-        <location filename="../gis/CGisListWks.cpp" line="1771"/>
-        <location filename="../gis/CGisListWks.cpp" line="1809"/>
+        <location filename="../gis/CGisListWks.cpp" line="672"/>
+        <location filename="../gis/CGisListWks.cpp" line="1783"/>
+        <location filename="../gis/CGisListWks.cpp" line="1821"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Modifica els dispositius &lt;/b&gt;&lt;p&gt;Modifica %1&lt;br/&gt;Si us plau, espereu...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="797"/>
+        <location filename="../gis/CGisListWks.cpp" line="798"/>
         <source>Saving workspace. Please wait.</source>
         <translation>S&apos;està desant l&apos;espai de treball. Espera.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="843"/>
+        <location filename="../gis/CGisListWks.cpp" line="844"/>
         <source>Loading workspace. Please wait.</source>
         <translation>S&apos;està carregant l&apos;espai de treball. Espera.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1230"/>
+        <location filename="../gis/CGisListWks.cpp" line="1231"/>
         <source>Close all projects...</source>
         <translation>Tancar tots els projectes...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1230"/>
+        <location filename="../gis/CGisListWks.cpp" line="1231"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>S&apos;eliminaran tots els projectes de l&apos;espai de treball.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1256"/>
+        <location filename="../gis/CGisListWks.cpp" line="1257"/>
         <source>Delete project...</source>
         <translation>Suprimeix el projecte...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1256"/>
+        <location filename="../gis/CGisListWks.cpp" line="1257"/>
         <source>Do you really want to delete %1?</source>
         <translation>Esteu segur que voleu suprimir %1?</translation>
     </message>
@@ -3763,100 +3773,105 @@ no és una coordenada vàlida en la configuración activa:
         <translation>tercera alternativa</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="148"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
         <source>BRouter (offline)</source>
         <translation>BRouter (desconnectat)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="155"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="167"/>
         <source>BRouter (online)</source>
         <translation>BRouter (connectat)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="185"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="197"/>
         <source>profile: %1, alternative: %2</source>
         <translation>perfil: %1, alternativa: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="283"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="408"/>
-        <source>BRouter does not support more then 1 nogo-area in this version, consider to upgrade</source>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
+        <source>BRouter (Version %1.%2.%3):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="297"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="420"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="714"/>
+        <source>Error:</source>
+        <translation type="unfinished">Error:</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="720"/>
+        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="331"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="465"/>
         <source>response is empty</source>
         <translation>resposta buida</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="334"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="379"/>
         <source>Bad response from server: %1</source>
         <translation>Resposta dolente del servidor: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="431"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;La petició d&apos;Itinerari s&apos;ha enviat al servidor. Si us plau, espereu...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="270"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="389"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="304"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="434"/>
         <source>Calculate route with %1</source>
         <translation>Calcular l&apos;itinerari amb %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="454"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="317"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="453"/>
+        <source>this version of BRouter does not support more then 1 nogo-area</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="499"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Resposta dolenta del servidor:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="444"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="489"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Calculant el temps: %1s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="548"/>
-        <source>Error</source>
-        <translation>Error</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="600"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="767"/>
         <source>running</source>
         <translation>correr</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="592"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="759"/>
         <source>starting</source>
         <translation>iniciant</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="554"/>
-        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case.</source>
-        <translation>QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. De normal, això es fa mitjançant una adreça especial a la que no ets pots connectar des de fora del dispositiu. Tanmateix BRouter escolta les connexions de totes les interfícies disponibles. No hi ha cap problema si estàs connectat a una xarxa privada amb un tallafocs actiu. Si estàs connectat a una xarxa pública, cada un dels ports que tinguis oberts representa un risc que algú pot utilitzar per atacar el sistema. En aquest cas, no es recomana utilitzar BRouter.</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="581"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="749"/>
         <source>Warning...</source>
         <translation>Avís...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="586"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="754"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Entenc el risc. No m&apos;ho diguis un altre cop.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="607"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="774"/>
         <source>stopped</source>
         <translation>Aturat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="618"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="785"/>
         <source>not installed</source>
         <translation>No instal·lat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="629"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="796"/>
         <source>online</source>
         <translation>En línia</translation>
     </message>
@@ -3864,22 +3879,22 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="479"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="482"/>
         <source>%1 not accessible</source>
         <translation>%1 no és accessible</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="489"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="492"/>
         <source>%1 invalid result</source>
         <translation>%1 resultat invàlid</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="533"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="536"/>
         <source>Error parsing online-config:</source>
         <translation>Error en analitzar la configuració en línia:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="538"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="541"/>
         <source>Network error:</source>
         <translation>Error de xarxa:</translation>
     </message>
@@ -4186,14 +4201,14 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="78"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="93"/>
         <source>!!! done !!!
 </source>
         <translation>!!! fet !!!
 </translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="83"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="98"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! ha fallat !!!
@@ -7047,17 +7062,17 @@ Nom del fitxer: %1</translation>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="116"/>
+        <location filename="../gis/IGisWorkspace.ui" line="112"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="129"/>
+        <location filename="../gis/IGisWorkspace.ui" line="124"/>
         <source>Clear Filter</source>
         <translation>Neteja el Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="138"/>
+        <location filename="../gis/IGisWorkspace.ui" line="133"/>
         <source>Setup Filter</source>
         <translation>Configura el Filtre</translation>
     </message>
@@ -8239,17 +8254,22 @@ o
         <translation>Precaució! BRouter està mirant a tots els ports cercant connexions.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="217"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="219"/>
+        <source>Dismiss</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="241"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="227"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="254"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="237"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="267"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8438,6 +8458,11 @@ o
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="631"/>
         <source>Java Options</source>
         <translation>Opcions de Java</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
+        <source>Bind to hostname only</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
@@ -8910,6 +8935,7 @@ o
         <location filename="../gis/rte/IScrOptRte.ui" line="120"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="134"/>
         <location filename="../gis/rte/IScrOptRte.ui" line="148"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="162"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8940,11 +8966,16 @@ o
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
+        <source>Reverse Route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
         <source>Convert route to track</source>
         <translation>Converteix la ruta a track</translation>
     </message>
     <message>
-        <location filename="../gis/rte/IScrOptRte.ui" line="174"/>
+        <location filename="../gis/rte/IScrOptRte.ui" line="188"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
     </message>

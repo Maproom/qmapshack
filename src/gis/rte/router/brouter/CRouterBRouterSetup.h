@@ -115,7 +115,7 @@ private:
     QString localSegmentsDir;
     QString localHost;
     QString localPort;
-    bool    localBindLocalonly;
+    bool localBindLocalonly;
     QString localNumberThreads;
     QString localMaxRunningTime;
     QString localJavaOpts;
@@ -133,7 +133,7 @@ private:
     const QString defaultLocalSegmentsDir = "segments4";
     const QString defaultLocalHost = "127.0.0.1";
     const QString defaultLocalPort = "17777";
-    const bool    defaultLocalBindLocalonly = true;
+    const bool defaultLocalBindLocalonly = true;
     const QString defaultLocalNumberThreads = "1";
     const QString defaultLocalMaxRunningTime = "300";
     const QString defaultLocalJavaOpts = "-Xmx128M -Xms128M -Xmn8M";

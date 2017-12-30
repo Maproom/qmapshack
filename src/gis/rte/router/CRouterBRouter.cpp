@@ -368,14 +368,14 @@ int CRouterBRouter::synchronousRequest(const QVector<wpt_t>& points, const QVect
     catch(const QString& msg)
     {
         coords.clear();
+        if (isVersionRequest)
+        {
+            parseBRouterVersion("");
+        }
         if(!msg.isEmpty())
         {
             reply->deleteLater();
             mutex.unlock();
-            if (isVersionRequest)
-            {
-                parseBRouterVersion("");
-            }
             throw tr("Bad response from server: %1").arg(msg);
         }
     }

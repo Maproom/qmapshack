@@ -632,7 +632,9 @@ void CRouterBRouter::getBRouterVersion()
         {
             synchronousRequest(points,areas,rt,true);
         }
-        catch(const QString&) {} //fail silently
+        catch(const QString&)
+        {
+        }                        //fail silently
     }
 }
 

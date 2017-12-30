@@ -397,7 +397,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -432,7 +432,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -449,7 +449,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="785"/>
         <source>none</source>
         <translation>Cap</translation>
     </message>
@@ -471,18 +471,18 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="573"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="691"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="721"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="579"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="720"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="750"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="427"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="453"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="574"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="692"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="722"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="580"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="721"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
         <source>Comment</source>
         <translation>Comentari</translation>
     </message>
@@ -492,69 +492,79 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>&lt;h2&gt;Pistes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="599"/>
+        <source>Arrival: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>From Start</source>
         <translation>Des de l&apos;inici</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>To Next</source>
         <translation>Al Següent</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>To End</source>
         <translation>Al Final</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="614"/>
         <source>Distance: </source>
         <translation>Distància:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="624"/>
+        <source>Time: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="634"/>
         <source>Ascent: </source>
         <translation>Ascens:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="644"/>
         <source>Descent: </source>
         <translation>Descens:</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="713"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Àrees&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="743"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Rutes&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="771"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="798"/>
         <source>Edit name...</source>
         <translation>Edita el nom...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="771"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="798"/>
         <source>Enter new project name.</source>
         <translation>Introdueix el nom del nou projecte.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="780"/>
         <source>Edit keywords...</source>
         <translation>Edita les paraules clau...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="780"/>
         <source>Enter keywords.</source>
         <translation> Introduïu les paraules clau.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="926"/>
         <source>Print Diary</source>
         <translation>Imprimir Diari</translation>
     </message>
@@ -676,7 +686,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>  Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
@@ -765,12 +775,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -1391,77 +1401,82 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>_Clona</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="277"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="282"/>
         <source>Elevation: %1%2</source>
         <translation>Elevació: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="288"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="294"/>
         <source>Proximity: %1%2</source>
         <translation>Proximitat: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="343"/>
+        <source>Created: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="405"/>
         <source>Changed name</source>
         <translation>Nom canviat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="415"/>
         <source>Changed position</source>
         <translation>Posició canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="421"/>
         <source>Changed elevation</source>
         <translation>Elevació canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="413"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="434"/>
         <source>Removed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="417"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="438"/>
         <source>Changed proximity</source>
         <translation>Proximitat canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="432"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="453"/>
         <source>Changed icon</source>
         <translation>Icona canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="438"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="459"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="465"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="450"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="471"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="456"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="477"/>
         <source>Changed images</source>
         <translation>Imatges canviades</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="462"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="483"/>
         <source>Add image</source>
         <translation>Afegir imatge</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="877"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="898"/>
         <source>Changed to proximity-radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="882"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="903"/>
         <source>Changed to nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6153,7 +6168,7 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <location filename="../gis/trk/IDetailsTrk.ui" line="1144"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1241"/>
         <source>User defined limits for this track</source>
-        <translation>Límits d&apos;aquest track definits per l&apos;usuari </translation>
+        <translation>Límits d&apos;aquest track definits per l&apos;usuari </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
@@ -10131,7 +10146,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -10159,18 +10174,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="789"/>
+        <location filename="../units/IUnit.cpp" line="795"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="789"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format amb possicions incorrectes. Ha de ser: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; o &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="795"/>
         <source>Position values out of bounds. </source>
         <translation>Els valors de la posició estan fora dels límits.</translation>
     </message>

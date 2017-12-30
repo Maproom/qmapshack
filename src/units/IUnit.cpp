@@ -507,20 +507,39 @@ void IUnit::meter2speed(qreal meter, QString& val, QString& unit) const
 
 void IUnit::seconds2time(quint32 ttime, QString& val, QString& unit) const
 {
-    QTime time(0,0,0);
-    quint32 days  = ttime / 86400;
+//    QTime time(0,0,0);
+//    quint32 days  = ttime / 86400;
 
-    time = time.addSecs(ttime);
+//    time = time.addSecs(ttime);
 
-    if(days)
+//    if(days)
+    if(ttime == 0)
     {
-        val = QString("%1:").arg(days) + time.toString("HH:mm:ss");
-        unit = "d";
+//        val = QString("%1:").arg(days) + time.toString("HH:mm:ss");
+//        unit = "d";
+        val  = "-";
+        unit = "";
+
     }
     else
     {
-        val = time.toString("HH:mm:ss");
-        unit = "h";
+//        val = time.toString("HH:mm:ss");
+//        unit = "h";
+        QTime time(0,0,0);
+        quint32 days  = ttime / 86400;
+
+        time = time.addSecs(ttime);
+
+        if(days)
+        {
+            val = QString("%1:").arg(days) + time.toString("HH:mm:ss");
+            unit = "d";
+        }
+        else
+        {
+            val = time.toString("HH:mm:ss");
+            unit = "h";
+        }
     }
 }
 

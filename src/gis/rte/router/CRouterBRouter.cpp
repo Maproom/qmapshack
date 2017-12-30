@@ -721,8 +721,9 @@ void CRouterBRouter::updateLocalBRouterStatus() const
         "on all available interfaces. If you are in your own private network with an active firewall, this "
         "is not much of a problem. If you are in a public network every open port is a risk as it can be "
         "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
-        "in this case. In the configuration of BRouter use expert mode and configure 'Bind to hostname only' to "
-        "change this behavior (requires BRouter version >= 1.4.10)."
+        "in this case. If you see this warning and use BRouter version >= 1.4.10 you can enforce binding to "
+        "local address by setting hostname to \"localhost\" and check \"Bind to hostname only\" in the setup "
+        "using expert mode."
         );
 
     if (isShutdown)

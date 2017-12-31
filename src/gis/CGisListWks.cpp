@@ -197,7 +197,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemRte->addAction(actionDelete);
     connect(menuItemRte, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
-
     menuItemOvl     = new QMenu(this);
     menuItemOvl->addAction(actionEditDetails);
     menuItemOvl->addAction(actionCopyItem);
@@ -206,7 +205,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);
     connect(menuItemOvl, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
-
 
     menuItem        = new QMenu(this);
     menuItem->addAction(actionCopyItem);
@@ -1118,13 +1116,14 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(nullptr != gisItem)
         {
             bool isOnDevice = gisItem->isOnDevice();
+            IGisProject * project = gisItem->getParentProject();
+            bool isProjectVisible = project == nullptr ? false : project->isVisible();
 
             switch(gisItem->type())
             {
             case IGisItem::eTypeTrk:
             {
                 CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(gisItem);
-                IGisProject * project = gisItem->getParentProject();
                 if(project != nullptr)
                 {
                     actionCombineTrk->setEnabled(project->getItemCountByType(IGisItem::eTypeTrk) > 1);
@@ -1133,11 +1132,12 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 {
                     actionCombineTrk->setEnabled(false);
                 }
-                actionRangeTrk->setDisabled(isOnDevice);
+                actionRangeTrk->setEnabled(isProjectVisible && !isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
-                actionEditTrk->setDisabled(isOnDevice);
+                actionEditTrk->setEnabled(isProjectVisible && !isOnDevice);
                 actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
+                actionFocusTrk->setEnabled(isProjectVisible);
                 menuItemTrk->exec(p);
                 break;
             }
@@ -1146,11 +1146,13 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             {
                 CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(gisItem);
                 actionBubbleWpt->setChecked(wpt->hasBubble());
+                actionBubbleWpt->setEnabled(isProjectVisible);
+                actionEditRadiusWpt->setEnabled(isProjectVisible);
                 bool radius = wpt->hasRadius();
                 actionDelRadiusWpt->setEnabled(radius);
                 actionNogoAreaWpt->setEnabled(radius);
                 actionNogoAreaWpt->setChecked(radius && wpt->isNogoArea());
-                actionMoveWpt->setDisabled(isOnDevice);
+                actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
                 break;
@@ -1158,11 +1160,15 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             case IGisItem::eTypeRte:
                 actionFocusRte->setChecked(gisItem->hasUserFocus());
+                actionFocusRte->setEnabled(isProjectVisible);
+                actionCalcRte->setEnabled(isProjectVisible);
+                actionEditRte->setEnabled(isProjectVisible);
+                actionResetRte->setEnabled(isProjectVisible);
                 menuItemRte->exec(p);
                 break;
 
             case IGisItem::eTypeOvl:
-                actionEditArea->setDisabled(isOnDevice);
+                actionEditArea->setEnabled(isProjectVisible && !isOnDevice);
                 menuItemOvl->exec(p);
                 break;
             }

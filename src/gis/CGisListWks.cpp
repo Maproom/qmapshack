@@ -1359,8 +1359,12 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
     if(gisItem != nullptr)
     {
         CGisWorkspace::self().slotWksItemSelectionReset();
-        CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
-        CGisWorkspace::self().focusTrkByKey(true, gisItem->getKey());
+        IGisProject * project = gisItem->getParentProject();
+        if (project != nullptr && project->isVisible())
+        {
+            CMainWindow::self().zoomCanvasTo(gisItem->getBoundingRect());
+            CGisWorkspace::self().focusTrkByKey(true, gisItem->getKey());
+        }
     }
 }
 

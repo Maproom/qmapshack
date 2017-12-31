@@ -321,8 +321,76 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
+void CGisItemTrk::filterSpeedOnSlope(qreal speed)
+{
+   QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime().toUTC();
+    }
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+// KKA start
+        qreal linearSpeed;
+        QList<qreal> minSpeed, maxSpeed;
+
+        linearSpeed = 23;            // P0Y
+        // << slope2 << speed
+        minSpeed <<  10 << 5;        // Ascent P1[x,y]
+        maxSpeed << -15 << 45;       // Descent P2[x,y]
+
+        if(pt.slope2 < maxSpeed[0])
+        {
+           speed = maxSpeed[1];
+        }
+        else if(pt.slope2 < 0 && pt.slope2 >= maxSpeed[0])
+        {
+
+            // -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y
+            speed = -(maxSpeed[1]-linearSpeed)/pow(maxSpeed[0],2)*pow(pt.slope2-maxSpeed[0],2)+maxSpeed[1];
+
+        }
+        else if(pt.slope2 == 0)
+        {
+           speed = linearSpeed;
+        }
+        else if(pt.slope2 > 0 && pt.slope2 <= minSpeed[0])
+        {
+            // (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y
+            speed = (linearSpeed-minSpeed[1])/pow(minSpeed[0],2)*pow(minSpeed[0]-pt.slope2,2)+minSpeed[1];
+        }
+        else if(pt.slope2 > minSpeed[0])
+        {
+            speed = minSpeed[1];
+
+        }
+        speed /= 3.6;
+
+//        qDebug() << "pt.slope: " << pt.slope2 << " speed: " << speed*3.6 << "\n";
+
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        pt.time   = timestamp;
+
+    }
+// KKA end
+
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2speed(speed, val, unit);
+    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+}
+
 void CGisItemTrk::filterSpeed(qreal speed)
 {
+    filterSpeedOnSlope(speed); // KKA: Bypassing for experimental
+    return;
+
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {

@@ -1132,7 +1132,11 @@ void CGisWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
     IGisItem * item = getItemByKey(keyWksSelection);
     if(item != nullptr)
     {
-        item->drawHighlight(p);
+        IGisProject * project = item->getParentProject();
+        if (project != nullptr && project->isVisible())
+        {
+            item->drawHighlight(p);
+        }
     }
 }
 

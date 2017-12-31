@@ -305,7 +305,7 @@ void CGisItemRte::reverse()
 
     rte1->setupHistory();
 
-    if (rte.lastRoutedTime.isValid())
+    if (rte.lastRoutedTime.isValid() && project->isVisible())
     {
         rte1->calc();
     }

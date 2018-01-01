@@ -903,7 +903,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="284"/>
         <source>route</source>
-        <translation type="unfinished">маршрут</translation>
+        <translation>маршрут</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
@@ -1803,7 +1803,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратить маршрут</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="195"/>
@@ -3804,17 +3804,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
         <source>BRouter (Version %1.%2.%3):</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Версия %1.%2.%3):</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="714"/>
         <source>Error:</source>
-        <translation type="unfinished">Ошибка: </translation>
+        <translation>Ошибка:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="720"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы pекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="331"/>
@@ -3842,7 +3842,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="317"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="453"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>эта версия BRouter не поддерживает более 1 запретной зоны</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="499"/>
@@ -8272,7 +8272,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="219"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Отклонить</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="241"/>
@@ -8479,7 +8479,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
         <source>Bind to hostname only</source>
-        <translation type="unfinished"></translation>
+        <translation>Привязать только к localhost</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
@@ -8984,7 +8984,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратить маршрут</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="159"/>

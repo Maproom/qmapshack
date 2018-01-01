@@ -29,23 +29,61 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    doubleSpinBox->setSuffix(IUnit::self().speedunit);
+    linearSpeed->setSuffix(IUnit::self().speedunit);
+    minSpeed->setSuffix(IUnit::self().speedunit);
+    maxSpeed->setSuffix(IUnit::self().speedunit);
 
     SETTINGS;
-    doubleSpinBox->setValue(cfg.value("TrackDetails/Filter/Speed/speed",1).toDouble());
+    linearSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed",1).toDouble());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
+    connect(isSlopeCalcEnabled, &QCheckBox::toggled, this, &CFilterSpeed::slotSlopeCalcEnabled);
 }
 
 CFilterSpeed::~CFilterSpeed()
 {
     SETTINGS;
-    cfg.setValue("TrackDetails/Filter/Speed/speed", doubleSpinBox->value());
+    cfg.setValue("TrackDetails/Filter/Speed/speed", linearSpeed->value());
 }
 
 void CFilterSpeed::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSpeed");
-    trk.filterSpeed(doubleSpinBox->value()/IUnit::self().speedfactor);
+
+    if(isSlopeCalcEnabled)
+    {
+        QMessageBox msgBox;
+        msgBox.setText("The document has been modified.");
+        msgBox.exec();
+        trk.filterSpeed(linearSpeed->value()/IUnit::self().speedfactor);
+    }
+    else
+    {
+        trk.filterSpeed(linearSpeed->value()/IUnit::self().speedfactor);
+
+    }
+
+
     CCanvas::restoreOverrideCursor("CFilterSpeed");
+}
+
+void CFilterSpeed::slotSlopeCalcEnabled(bool checked)
+{
+    if (checked)
+    {
+//        speedSlopeWidget->setVisible(true);
+//        minSpeed->setEnabled(true);
+//        maxSpeed->setEnabled(true);
+//        minSlope->setEnabled(true);
+//        maxSlope->setEnabled(true);
+    }
+    else
+    {
+//        speedSlopeWidget->setVisible(false);
+//        minSpeed->setEnabled(false);
+//        maxSpeed->setEnabled(false);
+//        minSlope->setEnabled(false);
+//        maxSlope->setEnabled(false);
+    }
+
 }

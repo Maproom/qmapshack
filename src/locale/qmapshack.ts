@@ -445,7 +445,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="782"/>
         <source>none</source>
         <translation type="unfinished"></translation>
     </message>
@@ -467,18 +467,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="573"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="691"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="721"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="579"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="717"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="427"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="453"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="574"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="692"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="722"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="580"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="718"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="748"/>
         <source>Comment</source>
         <translation type="unfinished"></translation>
     </message>
@@ -488,69 +488,79 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
+        <source>Arrival: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>From Start</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>To Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>To End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>Distance: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
+        <source>Time: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="631"/>
         <source>Ascent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="641"/>
         <source>Descent: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="768"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="795"/>
         <source>Edit name...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="768"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="795"/>
         <source>Enter new project name.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
         <source>Edit keywords...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
         <source>Enter keywords.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="923"/>
         <source>Print Diary</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1392,77 +1402,82 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="277"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="273"/>
         <source>Elevation: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="288"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="284"/>
         <source>Proximity: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
+        <source>Created: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>
         <source>Changed name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="401"/>
         <source>Changed position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="407"/>
         <source>Changed elevation</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="413"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="420"/>
         <source>Removed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="417"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="424"/>
         <source>Changed proximity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="432"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="439"/>
         <source>Changed icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="438"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="445"/>
         <source>Changed comment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="451"/>
         <source>Changed description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="450"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="457"/>
         <source>Changed links</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="456"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="463"/>
         <source>Changed images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="462"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
         <source>Add image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="877"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="884"/>
         <source>Changed to proximity-radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="882"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="889"/>
         <source>Changed to nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10119,18 +10134,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="778"/>
+        <location filename="../units/IUnit.cpp" line="784"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="778"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="784"/>
         <source>Position values out of bounds. </source>
         <translation type="unfinished"></translation>
     </message>

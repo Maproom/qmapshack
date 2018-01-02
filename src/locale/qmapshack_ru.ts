@@ -449,7 +449,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="756"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="782"/>
         <source>none</source>
         <translation>нет</translation>
     </message>
@@ -471,18 +471,18 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="452"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="573"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="691"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="721"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="579"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="717"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="747"/>
         <source>Info</source>
         <translation>Информация</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="427"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="453"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="574"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="692"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="722"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="580"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="718"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="748"/>
         <source>Comment</source>
         <translation>Комментарий</translation>
     </message>
@@ -492,69 +492,79 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>&lt;h2&gt;Треки&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
+        <source>Arrival: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>From Start</source>
         <translation>С начала</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>To Next</source>
         <translation>До следующего</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="592"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
         <source>To End</source>
         <translation>До конца</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="595"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="611"/>
         <source>Distance: </source>
         <translation>Расстояние: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="605"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
+        <source>Time: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="631"/>
         <source>Ascent: </source>
         <translation>Подъем: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="615"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="641"/>
         <source>Descent: </source>
         <translation>Спуск: </translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="684"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Области&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="714"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="740"/>
         <source>&lt;h2&gt;Routes&lt;/h2&gt;</source>
         <translation>&lt;h2&gt;Маршруты&lt;/h2&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="768"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="795"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="742"/>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="769"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="768"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="795"/>
         <source>Enter new project name.</source>
         <translation>Ввести новое имя проекта.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
         <source>Edit keywords...</source>
         <translation>Изменить ключевые слова...</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="751"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="777"/>
         <source>Enter keywords.</source>
         <translation>Ввести ключевые слова.</translation>
     </message>
     <message>
-        <location filename="../gis/prj/CDetailsPrj.cpp" line="897"/>
+        <location filename="../gis/prj/CDetailsPrj.cpp" line="923"/>
         <source>Print Diary</source>
         <translation>Печатать дневник</translation>
     </message>
@@ -893,7 +903,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="284"/>
         <source>route</source>
-        <translation type="unfinished">маршрут</translation>
+        <translation>маршрут</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="328"/>
@@ -1396,77 +1406,82 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>_клон</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="277"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="273"/>
         <source>Elevation: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="288"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="284"/>
         <source>Proximity: %1%2</source>
         <translation>Радиус близости: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="384"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
+        <source>Created: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="394"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="401"/>
         <source>Changed position</source>
         <translation>Изменена позиция</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="400"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="407"/>
         <source>Changed elevation</source>
         <translation>Изменена высота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="413"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="420"/>
         <source>Removed proximity</source>
         <translation>Удален радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="417"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="424"/>
         <source>Changed proximity</source>
         <translation>Изменен радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="432"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="439"/>
         <source>Changed icon</source>
         <translation>Изменена пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="438"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="445"/>
         <source>Changed comment</source>
         <translation>Изменен комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="451"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="450"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="457"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="456"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="463"/>
         <source>Changed images</source>
         <translation>Изменены изображения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="462"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="469"/>
         <source>Add image</source>
         <translation>Добавить изображение</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="877"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="884"/>
         <source>Changed to proximity-radius</source>
         <translation>Изменено на круг близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="882"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="889"/>
         <source>Changed to nogo-area</source>
         <translation>Изменено на запретную зону </translation>
     </message>
@@ -1793,7 +1808,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратить маршрут</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="195"/>
@@ -3794,17 +3809,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
         <source>BRouter (Version %1.%2.%3):</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Версия %1.%2.%3):</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="714"/>
         <source>Error:</source>
-        <translation type="unfinished">Ошибка: </translation>
+        <translation>Ошибка:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="720"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы pекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="331"/>
@@ -3832,7 +3847,7 @@ is not a valid coordinate system definition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="317"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="453"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>эта версия BRouter не поддерживает более 1 запретной зоны</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="499"/>
@@ -8299,7 +8314,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="219"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Отклонить</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="241"/>
@@ -8506,7 +8521,7 @@ or
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
         <source>Bind to hostname only</source>
-        <translation type="unfinished"></translation>
+        <translation>Привязать только к localhost</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
@@ -9011,7 +9026,7 @@ or
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Обратить маршрут</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
@@ -10201,18 +10216,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="778"/>
+        <location filename="../units/IUnit.cpp" line="784"/>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="770"/>
+        <location filename="../units/IUnit.cpp" line="778"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Неверный формат позиции. Должен быть: &quot;[С|Ю] ddd mm.sss [З|В] ddd mm.sss&quot; или &quot;[С|Ю] ddd.ddd [З|В] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="776"/>
+        <location filename="../units/IUnit.cpp" line="784"/>
         <source>Position values out of bounds. </source>
         <translation>Значения позиции вне допустимого интервала.</translation>
     </message>

@@ -35,55 +35,64 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 
     SETTINGS;
     linearSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed",1).toDouble());
+    minSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/minSpeed",1).toDouble());
+    maxSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/maxSpeed",1).toDouble());
+    slopeAtMinSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/slopeAtMinSpeed",1).toDouble());
+    slopeAtMaxSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/slopeAtMaxSpeed",1).toDouble());
+    isSlopeEnabled->setChecked(cfg.value("TrackDetails/Filter/Speed/isSlopeEnabled",1).toBool());
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
-    connect(isSlopeCalcEnabled, &QCheckBox::toggled, this, &CFilterSpeed::slotSlopeCalcEnabled);
+    connect(isSlopeEnabled, &QCheckBox::toggled, this, &CFilterSpeed::slotSlopeEnabled);
+
+    slotSlopeEnabled(isSlopeEnabled->isChecked());
 }
 
 CFilterSpeed::~CFilterSpeed()
 {
     SETTINGS;
     cfg.setValue("TrackDetails/Filter/Speed/speed", linearSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/minSpeed", minSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/maxSpeed", maxSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/slopeAtMinSpeed", slopeAtMinSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/slopeAtMaxSpeed", slopeAtMaxSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/isSlopeEnabled", isSlopeEnabled->isChecked());
 }
 
 void CFilterSpeed::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSpeed");
 
-    if(isSlopeCalcEnabled)
+    if(isSlopeEnabled->isChecked())
     {
-        QMessageBox msgBox;
-        msgBox.setText("The document has been modified.");
-        msgBox.exec();
-        trk.filterSpeed(linearSpeed->value()/IUnit::self().speedfactor);
+//        QMessageBox msgBox;
+//        msgBox.setText("The document has been modified.");
+//        msgBox.exec();
+        trk.filterSpeed(linearSpeed->value() / IUnit::self().speedfactor,
+                        minSpeed->value() / IUnit::self().speedfactor, slopeAtMinSpeed->value(),
+                        maxSpeed->value() / IUnit::self().speedfactor, slopeAtMaxSpeed->value());
     }
     else
     {
         trk.filterSpeed(linearSpeed->value()/IUnit::self().speedfactor);
-
     }
-
 
     CCanvas::restoreOverrideCursor("CFilterSpeed");
 }
 
-void CFilterSpeed::slotSlopeCalcEnabled(bool checked)
+void CFilterSpeed::slotSlopeEnabled(bool checked)
 {
     if (checked)
     {
-//        speedSlopeWidget->setVisible(true);
-//        minSpeed->setEnabled(true);
-//        maxSpeed->setEnabled(true);
-//        minSlope->setEnabled(true);
-//        maxSlope->setEnabled(true);
+        minSpeed->setEnabled(true);
+        maxSpeed->setEnabled(true);
+        slopeAtMinSpeed->setEnabled(true);
+        slopeAtMaxSpeed->setEnabled(true);
     }
     else
     {
-//        speedSlopeWidget->setVisible(false);
-//        minSpeed->setEnabled(false);
-//        maxSpeed->setEnabled(false);
-//        minSlope->setEnabled(false);
-//        maxSlope->setEnabled(false);
+        minSpeed->setEnabled(false);
+        maxSpeed->setEnabled(false);
+        slopeAtMinSpeed->setEnabled(false);
+        slopeAtMaxSpeed->setEnabled(false);
     }
-
 }

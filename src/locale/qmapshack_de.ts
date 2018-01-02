@@ -1343,23 +1343,27 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="386"/>
-        <location filename="../gis/trk/filter/filter.cpp" line="414"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="378"/>
+        <source>Changed average speed to %1%2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="403"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="433"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="422"/>
         <source>%1 (Segment %2)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="451"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="440"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="462"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="451"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
     </message>
@@ -6745,53 +6749,59 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="71"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="88"/>
         <source>Set linear speed to </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="94"/>
-        <source>CheckBox</source>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="138"/>
+        <source>Uphill: Min Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="62"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="152"/>
+        <source>at positive Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="159"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="197"/>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="176"/>
+        <source>Downhill: Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="190"/>
+        <source>at negative Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="79"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Geschwindigkeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="118"/>
-        <source>Uphill: Set min speed to</source>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="111"/>
+        <source>Speed dependent on Slope [%]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="149"/>
-        <source>Downhill: Set max speed to</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="125"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="156"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="145"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="183"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="132"/>
-        <source>by a max positive slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="163"/>
-        <source>by a max negative slope</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="78"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="95"/>
         <source> km/h</source>
         <translation> km/h</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="190"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
         <source>...</source>
         <translation></translation>
     </message>

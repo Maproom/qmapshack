@@ -34,7 +34,7 @@ public:
 private slots:
     void slotApply();
 
-    void slotSlopeCalcEnabled(bool checked);
+    void slotSlopeEnabled(bool checked);
 
 private:
     CGisItemTrk& trk;

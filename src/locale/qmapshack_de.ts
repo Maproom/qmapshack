@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -484,7 +484,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
         <source>Arrival: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ankunft: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
@@ -504,7 +504,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
         <source>Time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
@@ -1413,7 +1413,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
         <source>Created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellt: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>

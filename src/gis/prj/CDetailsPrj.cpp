@@ -594,7 +594,7 @@ void CDetailsPrj::drawByTrack(QTextCursor& cursor, QList<CGisItemTrk *> &trks, Q
                 if (arrivalTime.isValid())
                 {
                     timeStr += wpt->getInfo(IGisItem::eFeatureShowName) + "<br/>\n" +
-                    tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
+                               tr("Arrival: ") + QString("%1").arg(IUnit::datetime2string(arrivalTime.addSecs(info.elapsedSeconds1), false));
                 }
                 else
                 {

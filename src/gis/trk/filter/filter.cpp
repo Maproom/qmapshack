@@ -321,7 +321,7 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
-void CGisItemTrk::filterSpeedOnSlope(qreal speed)
+void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMinSpeed, qreal maxSpeed, qreal slopeAtMaxSpeed)
 {
    QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
@@ -329,6 +329,9 @@ void CGisItemTrk::filterSpeedOnSlope(qreal speed)
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
+    qreal averageSpeed = 0;
+    qreal speed;
+    qint32 noOfPoints = 0;
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -336,61 +339,47 @@ void CGisItemTrk::filterSpeedOnSlope(qreal speed)
             continue;
         }
 
-// KKA start
-        qreal linearSpeed;
-        QList<qreal> minSpeed, maxSpeed;
-
-        linearSpeed = 23;            // P0Y
-        // << slope2 << speed
-        minSpeed <<  10 << 5;        // Ascent P1[x,y]
-        maxSpeed << -15 << 45;       // Descent P2[x,y]
-
-        if(pt.slope2 < maxSpeed[0])
+        if(pt.slope2 < slopeAtMaxSpeed)
         {
-           speed = maxSpeed[1];
+           speed = maxSpeed;
         }
-        else if(pt.slope2 < 0 && pt.slope2 >= maxSpeed[0])
+        else if(pt.slope2 < 0 && pt.slope2 >= slopeAtMaxSpeed)
         {
-
             // -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y
-            speed = -(maxSpeed[1]-linearSpeed)/pow(maxSpeed[0],2)*pow(pt.slope2-maxSpeed[0],2)+maxSpeed[1];
-
-        }
+            speed = -(maxSpeed - linearSpeed) / pow(slopeAtMaxSpeed, 2) * pow(pt.slope2 - slopeAtMaxSpeed, 2) + maxSpeed;
+       }
         else if(pt.slope2 == 0)
         {
            speed = linearSpeed;
         }
-        else if(pt.slope2 > 0 && pt.slope2 <= minSpeed[0])
+        else if(pt.slope2 > 0 && pt.slope2 <= slopeAtMinSpeed)
         {
             // (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y
-            speed = (linearSpeed-minSpeed[1])/pow(minSpeed[0],2)*pow(minSpeed[0]-pt.slope2,2)+minSpeed[1];
+            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - pt.slope2, 2) + minSpeed;
         }
-        else if(pt.slope2 > minSpeed[0])
+        else if(pt.slope2 > slopeAtMinSpeed)
         {
-            speed = minSpeed[1];
-
+            speed = minSpeed;
         }
-        speed /= 3.6;
-
 //        qDebug() << "pt.slope: " << pt.slope2 << " speed: " << speed*3.6 << "\n";
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
         pt.time   = timestamp;
 
+        averageSpeed += speed;
+        ++noOfPoints;
     }
-// KKA end
+
+    speed = averageSpeed / noOfPoints;
 
     deriveSecondaryData();
     QString val, unit;
-    IUnit::self().meter2speed(speed, val, unit);
-    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    IUnit::self().meter2speed(averageSpeed, val, unit);
+    changed(tr("Changed average speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(qreal speed)
 {
-    filterSpeedOnSlope(speed); // KKA: Bypassing for experimental
-    return;
-
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {

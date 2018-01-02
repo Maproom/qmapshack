@@ -374,7 +374,7 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMi
 
     deriveSecondaryData();
     QString val, unit;
-    IUnit::self().meter2speed(averageSpeed, val, unit);
+    IUnit::self().meter2speed(speed, val, unit);
     changed(tr("Changed average speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 

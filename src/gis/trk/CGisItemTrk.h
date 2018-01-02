@@ -525,6 +525,7 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
+    void filterSpeedOnSlope(qreal speed); // KKA
 
     void filterTerrainSlope();
     void filterReplaceElevation();

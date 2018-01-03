@@ -7829,32 +7829,32 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="27"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
         <source>Advanced Options</source>
         <translation>Erweiterte Optionen</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
         <source>Source No Data (-srcnodata)</source>
         <translation>Kein Datenwert Quelle (-srcndata)</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="80"/>
         <source>Target No Data (-vrtnodata)</source>
         <translation>Kein Datenwert Zieldatei (-vrtnodata)</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="90"/>
         <source>Target Projection (-a_srs)</source>
         <translation>Projektion Zieldatei</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="97"/>
         <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
         <translation>Diese Optionen sind für spezielle Fälle. Normalerweise werden sie leer gelassen. Für mehr Information lesen Sie die GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Hilfe&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="157"/>
         <source>&lt;ol&gt;
 &lt;li&gt;Select one or multiple source files.&lt;/li&gt;
 &lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
@@ -7881,28 +7881,68 @@ Tipp:
 &lt;/ul&gt;</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
-        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="245"/>
         <source>...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="156"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Quelldateien auswählen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="121"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
+        <source>Overviews will allow you to show the map for a larger range of zooms.</source>
+        <translation>Übersichtsebenen erlauben es Ihnen die Karte in einem größeren Zoombereich anzuzeigen.</translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
+        <source>Create overviews for result.</source>
+        <translation>Übersichtsebenen erstellen.</translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
+        <source>:2</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="205"/>
+        <source>:4</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="212"/>
+        <source>:8</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="219"/>
+        <source>:16</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="226"/>
+        <source>:32</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="233"/>
+        <source>:64</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
         <source>Target Filename:</source>
         <translation>Zieldatei auswählen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="128"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="275"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="20"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="284"/>
         <source>Start</source>
         <translation></translation>
     </message>

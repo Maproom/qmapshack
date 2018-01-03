@@ -41,6 +41,13 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     lineASrs->setText(cfg.value("a_srs", "").toString());
     lineSrcNoData->setText(cfg.value("srcndata", "").toString());
     lineVrtNoData->setText(cfg.value("vrtndata", "").toString());
+    groupOverviews->setChecked(cfg.value("Overviews", false).toBool());
+    checkBy2->setChecked(cfg.value("by2", false).toBool());
+    checkBy4->setChecked(cfg.value("by4", false).toBool());
+    checkBy8->setChecked(cfg.value("by8", false).toBool());
+    checkBy16->setChecked(cfg.value("by16", false).toBool());
+    checkBy32->setChecked(cfg.value("by32", false).toBool());
+    checkBy64->setChecked(cfg.value("by64", false).toBool());
     cfg.endGroup();
 }
 
@@ -52,6 +59,13 @@ CMapVrtBuilder::~CMapVrtBuilder()
     cfg.setValue("a_srs", lineASrs->text());
     cfg.setValue("srcndata", lineSrcNoData->text());
     cfg.setValue("vrtndata", lineVrtNoData->text());
+    cfg.setValue("Overviews", groupOverviews->isChecked());
+    cfg.setValue("by2", checkBy2->isChecked());
+    cfg.setValue("by4", checkBy4->isChecked());
+    cfg.setValue("by8", checkBy8->isChecked());
+    cfg.setValue("by16", checkBy16->isChecked());
+    cfg.setValue("by32", checkBy32->isChecked());
+    cfg.setValue("by64", checkBy64->isChecked());
     cfg.endGroup();
 }
 
@@ -112,6 +126,7 @@ void CMapVrtBuilder::enableStartButton()
 void CMapVrtBuilder::slotStart()
 {
     pushStart->setDisabled(true);
+    last = false;
 
     QStringList args;
 
@@ -146,6 +161,40 @@ void CMapVrtBuilder::slotStart()
 
 void CMapVrtBuilder::finished(int exitCode, QProcess::ExitStatus status)
 {
+    if(!last && groupOverviews->isChecked())
+    {
+        QStringList args;
+        args << labelTargetFilename->text();
+        if(checkBy2->isChecked())
+        {
+            args << "2";
+        }
+        if(checkBy4->isChecked())
+        {
+            args << "4";
+        }
+        if(checkBy8->isChecked())
+        {
+            args << "8";
+        }
+        if(checkBy16->isChecked())
+        {
+            args << "16";
+        }
+        if(checkBy32->isChecked())
+        {
+            args << "32";
+        }
+        if(checkBy64->isChecked())
+        {
+            args << "64";
+        }
+        stdOut("gdaladdo " +  args.join(" ") + "\n");
+        cmd.start("gdaladdo", args);
+
+        last = true;
+        return;
+    }
     textBrowser->setTextColor(Qt::darkGreen);
     textBrowser->append(tr("!!! done !!!\n"));
     pushStart->setEnabled(true);

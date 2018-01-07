@@ -321,7 +321,9 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
-void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMinSpeed, qreal maxSpeed, qreal slopeAtMaxSpeed)
+void CGisItemTrk::filterSpeed(qreal linearSpeed,
+                              qreal minSpeed, qreal slopeAtMinSpeed, QEasingCurve::Type upHillCurveType,
+                              qreal maxSpeed, qreal slopeAtMaxSpeed, QEasingCurve::Type downHillCurveType)
 {
    QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
@@ -329,9 +331,12 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMi
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
-    qreal averageSpeed = 0;
-    qreal speed;
+    qreal averageSpeed = 0, speed;
     qint32 noOfPoints = 0;
+
+    QEasingCurve upHillCurve(upHillCurveType);
+    QEasingCurve downHillCurve(downHillCurveType);
+
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -346,8 +351,9 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMi
         else if(pt.slope2 < 0 && pt.slope2 >= slopeAtMaxSpeed)
         {
             // -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y
-            speed = -(maxSpeed - linearSpeed) / pow(slopeAtMaxSpeed, 2) * pow(pt.slope2 - slopeAtMaxSpeed, 2) + maxSpeed;
-       }
+//            speed = -(maxSpeed - linearSpeed) / pow(slopeAtMaxSpeed, 2) * pow(pt.slope2 - slopeAtMaxSpeed, 2) + maxSpeed;
+            speed = linearSpeed + (maxSpeed - linearSpeed) * downHillCurve.valueForProgress(pt.slope2 / slopeAtMaxSpeed);
+        }
         else if(pt.slope2 == 0)
         {
            speed = linearSpeed;
@@ -355,7 +361,8 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMi
         else if(pt.slope2 > 0 && pt.slope2 <= slopeAtMinSpeed)
         {
             // (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y
-            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - pt.slope2, 2) + minSpeed;
+//            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - pt.slope2, 2) + minSpeed;
+            speed = linearSpeed + (minSpeed - linearSpeed) * upHillCurve.valueForProgress(pt.slope2 / slopeAtMinSpeed);
         }
         else if(pt.slope2 > slopeAtMinSpeed)
         {
@@ -375,7 +382,7 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed, qreal minSpeed, qreal slopeAtMi
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
-    changed(tr("Changed average speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed average speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(qreal speed)

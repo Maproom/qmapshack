@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>1070</width>
-    <height>102</height>
+    <height>139</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -81,7 +81,7 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
+      <layout class="QHBoxLayout" name="linearLayout">
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
@@ -128,7 +128,68 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="speedSlopeLayout">
+      <layout class="QHBoxLayout" name="downHillLayout">
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>Downhill: Max Speed</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="maxSpeed">
+         <property name="suffix">
+          <string>km/h</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>at negative Slope</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QDoubleSpinBox" name="slopeAtMaxSpeed">
+         <property name="suffix">
+          <string>%</string>
+         </property>
+         <property name="minimum">
+          <double>-45.000000000000000</double>
+         </property>
+         <property name="maximum">
+          <double>0.000000000000000</double>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Progress Curve</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cbDownHill"/>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="upHillLayout">
        <property name="spacing">
         <number>6</number>
        </property>
@@ -164,45 +225,14 @@
         </widget>
        </item>
        <item>
-        <widget class="Line" name="line_2">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_6">
+        <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Downhill: Max Speed</string>
+          <string>Progress Curve</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QDoubleSpinBox" name="maxSpeed">
-         <property name="suffix">
-          <string>km/h</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_7">
-         <property name="text">
-          <string>at negative Slope</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QDoubleSpinBox" name="slopeAtMaxSpeed">
-         <property name="suffix">
-          <string>%</string>
-         </property>
-         <property name="minimum">
-          <double>-45.000000000000000</double>
-         </property>
-         <property name="maximum">
-          <double>0.000000000000000</double>
-         </property>
-        </widget>
+        <widget class="QComboBox" name="cbUpHill"/>
        </item>
        <item>
         <spacer name="horizontalSpacer_2">

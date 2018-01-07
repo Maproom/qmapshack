@@ -29,6 +29,23 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
+    cbUpHill->addItem("Linear", QEasingCurve::Linear);
+    cbUpHill->addItem("Quadratic", QEasingCurve::OutQuad);
+    cbUpHill->addItem("Cubic", QEasingCurve::OutCubic);
+    cbUpHill->addItem("Quartic", QEasingCurve::OutQuart);
+    cbUpHill->addItem("Quintic", QEasingCurve::OutQuint);
+    cbUpHill->addItem("Sinusoidal", QEasingCurve::OutSine);
+    cbUpHill->addItem("Exponential", QEasingCurve::OutExpo);
+    cbUpHill->addItem("Circular", QEasingCurve::OutCirc);
+    cbDownHill->addItem("Linear", QEasingCurve::Linear);
+    cbDownHill->addItem("Quadratic", QEasingCurve::InQuad);
+    cbDownHill->addItem("Cubic", QEasingCurve::InCubic);
+    cbDownHill->addItem("Quartic", QEasingCurve::InQuart);
+    cbDownHill->addItem("Quintic", QEasingCurve::InQuint);
+    cbDownHill->addItem("Sinusoidal", QEasingCurve::InSine);
+    cbDownHill->addItem("Exponential", QEasingCurve::InExpo);
+    cbDownHill->addItem("Circular", QEasingCurve::InCirc);
+
     linearSpeed->setSuffix(IUnit::self().speedunit);
     minSpeed->setSuffix(IUnit::self().speedunit);
     maxSpeed->setSuffix(IUnit::self().speedunit);
@@ -40,6 +57,9 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     slopeAtMinSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/slopeAtMinSpeed",1).toDouble());
     slopeAtMaxSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/slopeAtMaxSpeed",1).toDouble());
     isSlopeEnabled->setChecked(cfg.value("TrackDetails/Filter/Speed/isSlopeEnabled",1).toBool());
+    cbUpHill->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cbUpHill",1).toInt());
+    cbDownHill->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cbDownHill",1).toInt());
+
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
     connect(isSlopeEnabled, &QCheckBox::toggled, this, &CFilterSpeed::slotSlopeEnabled);
@@ -56,6 +76,8 @@ CFilterSpeed::~CFilterSpeed()
     cfg.setValue("TrackDetails/Filter/Speed/slopeAtMinSpeed", slopeAtMinSpeed->value());
     cfg.setValue("TrackDetails/Filter/Speed/slopeAtMaxSpeed", slopeAtMaxSpeed->value());
     cfg.setValue("TrackDetails/Filter/Speed/isSlopeEnabled", isSlopeEnabled->isChecked());
+    cfg.setValue("TrackDetails/Filter/Speed/cbUpHill", cbUpHill->currentIndex());
+    cfg.setValue("TrackDetails/Filter/Speed/cbDownHill", cbDownHill->currentIndex());
 }
 
 void CFilterSpeed::slotApply()
@@ -64,12 +86,11 @@ void CFilterSpeed::slotApply()
 
     if(isSlopeEnabled->isChecked())
     {
-//        QMessageBox msgBox;
-//        msgBox.setText("The document has been modified.");
-//        msgBox.exec();
+//        QEasingCurve::Type up = cbUpHill->currentData().toInt();
+//        QEasingCurve::Type down = cbUpHill->currentData()toInt();
         trk.filterSpeed(linearSpeed->value() / IUnit::self().speedfactor,
-                        minSpeed->value() / IUnit::self().speedfactor, slopeAtMinSpeed->value(),
-                        maxSpeed->value() / IUnit::self().speedfactor, slopeAtMaxSpeed->value());
+                        minSpeed->value() / IUnit::self().speedfactor, slopeAtMinSpeed->value(), (QEasingCurve::Type)cbUpHill->currentData().toInt(),
+                        maxSpeed->value() / IUnit::self().speedfactor, slopeAtMaxSpeed->value(), (QEasingCurve::Type)cbDownHill->currentData().toInt());
     }
     else
     {
@@ -87,6 +108,8 @@ void CFilterSpeed::slotSlopeEnabled(bool checked)
         maxSpeed->setEnabled(true);
         slopeAtMinSpeed->setEnabled(true);
         slopeAtMaxSpeed->setEnabled(true);
+        cbDownHill->setEnabled(true);
+        cbUpHill->setEnabled(true);
     }
     else
     {
@@ -94,5 +117,7 @@ void CFilterSpeed::slotSlopeEnabled(bool checked)
         maxSpeed->setEnabled(false);
         slopeAtMinSpeed->setEnabled(false);
         slopeAtMaxSpeed->setEnabled(false);
+        cbDownHill->setEnabled(false);
+        cbUpHill->setEnabled(false);
     }
 }

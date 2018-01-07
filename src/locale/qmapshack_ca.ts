@@ -1353,27 +1353,27 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Posa una marca horària inventada amb %1 sec. de valor delta.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="378"/>
-        <source>Changed average speed to %1%2.</source>
+        <location filename="../gis/trk/filter/filter.cpp" line="385"/>
+        <source>Changed average speed depending on slope to %1%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="403"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="410"/>
         <source>Changed speed to %1%2.</source>
         <translation>Velocitat canviada a %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="422"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="429"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="440"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="447"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>S&apos;ha suprimit definitivament l&apos;extensió %1 de tots els punts del track. </translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="451"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="458"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Convertir els subpunts obtinguts d&apos;un itinerari a punts de track</translation>
     </message>
@@ -6774,28 +6774,34 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="138"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="169"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="230"/>
+        <source>Progress Curve</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="199"/>
         <source>Uphill: Min Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="152"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="213"/>
         <source>at positive Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="159"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="197"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="156"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="220"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="176"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="135"/>
         <source>Downhill: Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="190"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="149"/>
         <source>at negative Slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6810,8 +6816,8 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="145"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="183"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="142"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="206"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>

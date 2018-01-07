@@ -7874,32 +7874,32 @@ Nechce se mi číst dokumentaci!</translation>
         <translation>Formulář</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="27"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
         <source>Advanced Options</source>
         <translation>Pokročilé volby</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
         <source>Source No Data (-srcnodata)</source>
         <translation>Zdroj, žádná data (-srcnodata)</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="46"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="80"/>
         <source>Target No Data (-vrtnodata)</source>
         <translation>Cíl, žádná data (-vrtnodata)</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="56"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="90"/>
         <source>Target Projection (-a_srs)</source>
         <translation>Cíl, promítání (-a_srs)</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="63"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="97"/>
         <source>These options are for particular cases and usually you would like to leave blank.See GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Help&lt;/a&gt; for more information.</source>
         <translation>Tyto volby jsou pro určité případy a obyčejně je chcete ponechat prázdné. Podívejte se na GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Nápověda&lt;/a&gt; pro další informace.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="202"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="157"/>
         <source>&lt;ol&gt;
 &lt;li&gt;Select one or multiple source files.&lt;/li&gt;
 &lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
@@ -7915,28 +7915,68 @@ Tip:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="98"/>
-        <location filename="../tool/IMapVrtBuilder.ui" line="139"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="245"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="156"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="39"/>
         <source>Select source files:</source>
         <translation>Vybrat zdrojové soubory:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="121"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
+        <source>Overviews will allow you to show the map for a larger range of zooms.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
+        <source>Create overviews for result.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
+        <source>:2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="205"/>
+        <source>:4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="212"/>
+        <source>:8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="219"/>
+        <source>:16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="226"/>
+        <source>:32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="233"/>
+        <source>:64</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
         <source>Target Filename:</source>
         <translation>Název cílového souboru:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="128"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="275"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="20"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="284"/>
         <source>Start</source>
         <translation>Spustit</translation>
     </message>

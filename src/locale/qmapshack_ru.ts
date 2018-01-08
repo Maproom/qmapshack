@@ -3205,17 +3205,17 @@ line %2, column %3:
         <translation>Построить GDAL VRT</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="63"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="77"/>
         <source>Select files...</source>
         <translation>Выбрать файлы...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="87"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="101"/>
         <source>Select target file...</source>
         <translation>Выбрать целевой файл...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="150"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="199"/>
         <source>!!! done !!!
 </source>
         <translation>Сделано!</translation>
@@ -3530,6 +3530,7 @@ y: %4 м/пиксель</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="222"/>
+        <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
@@ -3543,6 +3544,11 @@ is not a valid coordinate system definition:
 &apos;%1&apos;
 недопустимое определение координатной системы:
 %2</translation>
+    </message>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="230"/>
+        <source>Lat/Lon projection is not allowed in this case.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

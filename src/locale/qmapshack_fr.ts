@@ -3202,17 +3202,17 @@ ligne %2, colonne %3:
         <translation>Générer le VRT GDAL</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="63"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="77"/>
         <source>Select files...</source>
         <translation>Sélectionnez les fichiers...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="87"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="101"/>
         <source>Select target file...</source>
         <translation>Sélectionnez le fichier à créer...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="150"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="199"/>
         <source>!!! done !!!
 </source>
         <translation>!!! fait !!!</translation>
@@ -3527,6 +3527,7 @@ y: %4 m/px</translation>
     </message>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="222"/>
+        <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Error...</source>
         <translation>Erreur...</translation>
     </message>
@@ -3540,6 +3541,11 @@ is not a valid coordinate system definition:
 &apos;%1&apos;
 n&apos;est pas une définition de système de coordonnées:
 %2</translation>
+    </message>
+    <message>
+        <location filename="../grid/CProjWizard.cpp" line="230"/>
+        <source>Lat/Lon projection is not allowed in this case.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

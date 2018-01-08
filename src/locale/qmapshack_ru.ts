@@ -494,7 +494,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
         <source>Arrival: </source>
-        <translation type="unfinished"></translation>
+        <translation>Прибытие: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
@@ -519,7 +519,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
         <source>Time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Время: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="631"/>
@@ -1413,7 +1413,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
         <source>Created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Создан: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>
@@ -2358,7 +2358,7 @@ line %2, column %3:
     <message>
         <location filename="../CMainWindow.cpp" line="1156"/>
         <source>Load GIS Data...</source>
-        <translation>Загрузить данные GIS...</translation>
+        <translation>Загрузить данные ГИС...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1190"/>
@@ -3548,7 +3548,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lat/Lon проекция в этом случае не допускается.</translation>
     </message>
 </context>
 <context>
@@ -7907,42 +7907,42 @@ Tip:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзоры позволят вам отображать карту для большего диапазона масштабирования.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
         <source>Create overviews for result.</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать обзоры для результата.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
         <source>:2</source>
-        <translation type="unfinished"></translation>
+        <translation>:2</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="205"/>
         <source>:4</source>
-        <translation type="unfinished"></translation>
+        <translation>:4</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="212"/>
         <source>:8</source>
-        <translation type="unfinished"></translation>
+        <translation>:8</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="219"/>
         <source>:16</source>
-        <translation type="unfinished"></translation>
+        <translation>:16</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="226"/>
         <source>:32</source>
-        <translation type="unfinished"></translation>
+        <translation>:32</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="233"/>
         <source>:64</source>
-        <translation type="unfinished"></translation>
+        <translation>:64</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
@@ -8328,7 +8328,7 @@ or
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="254"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
-        <translation>&lt;p&gt;Любезно предоставлены &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Любезность &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="267"/>

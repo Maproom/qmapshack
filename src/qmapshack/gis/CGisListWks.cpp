@@ -1370,6 +1370,8 @@ void CGisListWks::slotItemDoubleClicked(QTreeWidgetItem * item, int )
 
 void CGisListWks::slotItemChanged(QTreeWidgetItem * item, int column)
 {
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
     if(column == eColumnCheckBox)
     {
         CGisWorkspace::self().slotWksItemSelectionReset();

@@ -29,7 +29,15 @@ CAbout::CAbout(QWidget *parent)
 {
     setupUi(this);
 
-    labelVersion->setText(VER_STR);
+    if(QString(VER_SUFFIX).isEmpty())
+    {
+        labelVersion->setText(VER_STR);
+    }
+    else
+    {
+        labelVersion->setText(VER_STR "." VER_SUFFIX);
+    }
+
     labelQtVersion->setText(qVersion());
     labelGDALVersion->setText(GDALVersionInfo("--version"));
     labelProj4Version->setText(QString::number(PJ_VERSION));

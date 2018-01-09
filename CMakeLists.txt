@@ -1,6 +1,5 @@
-project(QMapShack)
 ###############################################################################################
-# CMake specific stuff like policies, module includes etc....
+# CMake compatibility requirements
 ###############################################################################################
 cmake_minimum_required(VERSION 3.0.0)
 
@@ -11,6 +10,18 @@ if (COMMAND CMAKE_POLICY)
         cmake_policy(SET CMP0058 NEW)
     endif()
 endif()
+
+if (COMMAND CMAKE_POLICY)
+    if (POLICY CMP0048)
+        cmake_policy(SET CMP0048 NEW)
+    endif()
+endif()
+
+###############################################################################################
+# CMake specific stuff like module includes, paths etc....
+###############################################################################################
+project(QMapShack VERSION 1.10.0)
+set(VERSION_SUFFIX post)
 
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
@@ -160,7 +171,7 @@ if (APPLE)
   set(PROGNAME "QMapShack")
   set(CONFIGDIR "Library/Application Support/${PROGNAME}/")
 else(APPLE)
-  set(PROGNAME ${APPLICATION_NAME})
+  set(PROGNAME ${PROJECT_NAME})
   set(CONFIGDIR ".config/QLandkarte/")
 endif(APPLE)
 

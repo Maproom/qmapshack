@@ -4,18 +4,16 @@
 # WARNING: Only works with Makefile generator.
 # See: https://cmake.org/gitweb?p=cmake.git;a=commitdiff;h=15c454fe
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed.
+set(CMAKE_AUTOMOC ON)
 
 set(APPLICATION_NAME qmapshack)
 set(APPLICATION_VERSION_MAJOR "1")
 set(APPLICATION_VERSION_MINOR "10")
 set(APPLICATION_VERSION_PATCH "0.post")
 add_definitions(-DVER_MAJOR=${APPLICATION_VERSION_MAJOR} -DVER_MINOR=${APPLICATION_VERSION_MINOR} -DVER_STEP=${APPLICATION_VERSION_PATCH} -DAPPLICATION_NAME=${PROJECT_NAME})
-
-# Find includes in corresponding build directories
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-# Instruct CMake to run moc automatically when needed.
-set(CMAKE_AUTOMOC ON)
-
 
 set( SRCS    
     CAbout.cpp

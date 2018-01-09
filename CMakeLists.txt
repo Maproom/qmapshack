@@ -169,21 +169,18 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 ###############################################################################################
 # Now we are ready to compile all sub-projects
 ###############################################################################################
-add_subdirectory(src)
+add_subdirectory(src/qmapshack)
 
 ###############################################################################################
 # Copy a few more files need by the install/unistall target
 ###############################################################################################
 if (UNIX AND NOT WIN32 AND NOT APPLE)
-  install( FILES        src/icons/48x48/QMapShack.png   DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
-  install( DIRECTORY    src/icons/hicolor               DESTINATION     ${ICON_INSTALL_DIR} )
-  install( FILES        qmapshack.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+    install( FILES        src/qmapshack/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
+    install( DIRECTORY    src/qmapshack/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
+    install( FILES        qmapshack.1                                 DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 
-CONFIGURE_FILE(
-  "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
-  IMMEDIATE @ONLY)
+CONFIGURE_FILE( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
 
 ADD_CUSTOM_TARGET(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 

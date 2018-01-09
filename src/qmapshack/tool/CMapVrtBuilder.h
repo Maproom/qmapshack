@@ -39,6 +39,8 @@ private slots:
 private:
     void finished(int exitCode, QProcess::ExitStatus status) override;
     void enableStartButton();
+
+    bool last = false;
 };
 
 #endif //CMAPVRTBUILDER_H

@@ -10891,8 +10891,8 @@ bool rmatrixschur(real_2d_array &a, const ae_int_t n, real_2d_array &s)
 /////////////////////////////////////////////////////////////////////////
 namespace alglib_impl
 {
-static ae_int_t ablas_rgemmparallelsize = 64;
-static ae_int_t ablas_cgemmparallelsize = 64;
+//static ae_int_t ablas_rgemmparallelsize = 64;
+//static ae_int_t ablas_cgemmparallelsize = 64;
 static void ablas_ablasinternalsplitlength(ae_int_t n,
      ae_int_t nb,
      ae_int_t* n1,
@@ -11363,7 +11363,7 @@ static void rcond_internalcomplexrcondloadall(/* Integer */ ae_vector* isave,
      ae_state *_state);
 
 
-static ae_int_t matinv_parallelsize = 64;
+//static ae_int_t matinv_parallelsize = 64;
 static void matinv_rmatrixtrinverserec(/* Real    */ ae_matrix* a,
      ae_int_t offs,
      ae_int_t n,

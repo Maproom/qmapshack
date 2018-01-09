@@ -50,7 +50,7 @@ CGridSetup::~CGridSetup()
 
 void CGridSetup::accept()
 {
-    if (CProjWizard::validProjStr(lineProjection->text()))
+    if (CProjWizard::validProjStr(lineProjection->text(), true))
     {
         QPalette palette = labelGridColor->palette();
         grid->setProjAndColor(lineProjection->text(), palette.color(labelGridColor->foregroundRole()));

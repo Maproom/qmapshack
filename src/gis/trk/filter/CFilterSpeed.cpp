@@ -46,6 +46,11 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     cbDownHill->addItem("Exponential", QEasingCurve::InExpo);
     cbDownHill->addItem("Circular", QEasingCurve::InCirc);
 
+//    cbxActivityType->addItem("Linear Speed");
+//    cbxActivityType->addItem("Cycling");
+//    cbxActivityType->addItem("Hiking");
+
+
     linearSpeed->setSuffix(IUnit::self().speedunit);
     minSpeed->setSuffix(IUnit::self().speedunit);
     maxSpeed->setSuffix(IUnit::self().speedunit);
@@ -59,6 +64,10 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     isSlopeEnabled->setChecked(cfg.value("TrackDetails/Filter/Speed/isSlopeEnabled",1).toBool());
     cbUpHill->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cbUpHill",1).toInt());
     cbDownHill->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cbDownHill",1).toInt());
+
+    connect(cbxActivityType, SIGNAL(activated(int)), stackedWidget, SLOT(setCurrentIndex(int)));
+    cbxActivityType->setCurrentIndex(0);
+    stackedWidget->setCurrentIndex(0);
 
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);

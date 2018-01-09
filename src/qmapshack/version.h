@@ -25,7 +25,10 @@
 #endif
 
 #define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
+#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+
 #define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+
 
 #endif //VERSION_H
 

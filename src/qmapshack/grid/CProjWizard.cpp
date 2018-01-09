@@ -204,7 +204,7 @@ void CProjWizard::slotChange()
 
 void CProjWizard::accept()
 {
-    if (CProjWizard::validProjStr(labelResult->text()))
+    if (CProjWizard::validProjStr(labelResult->text(), true))
     {
         line.setText(labelResult->text());
         line.setCursorPosition(0);
@@ -213,7 +213,7 @@ void CProjWizard::accept()
 }
 
 
-bool CProjWizard::validProjStr(const QString projStr)
+bool CProjWizard::validProjStr(const QString projStr, bool allowLonLatToo)
 {
     projPJ projCheck = pj_init_plus(projStr.toUtf8().data());
 
@@ -224,8 +224,15 @@ bool CProjWizard::validProjStr(const QString projStr)
     }
     else
     {
+        bool res = true;
+        if(!allowLonLatToo && pj_is_latlong(projCheck))
+        {
+            QMessageBox::warning(CMainWindow::getBestWidgetForParent(), tr("Error..."),tr("Lat/Lon projection is not allowed in this case."), QMessageBox::Abort, QMessageBox::Abort);
+            res = false;
+        }
+
         pj_free(projCheck);
-        return true;
+        return res;
     }
 }
 

@@ -28,7 +28,7 @@ class CProjWizard : public QDialog, private Ui::IProjWizard
 public:
     CProjWizard(QLineEdit& line);
     virtual ~CProjWizard();
-    static bool validProjStr(const QString projStr);
+    static bool validProjStr(const QString projStr, bool allowLonLatToo);
 
 public slots:
     void accept() override;

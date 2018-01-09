@@ -56,7 +56,7 @@ void CCanvasSetup::slotProjWizard()
 
 void CCanvasSetup::accept()
 {
-    if(!CProjWizard::validProjStr(lineProjection->text()))
+    if(!CProjWizard::validProjStr(lineProjection->text(), false))
     {
         return;
     }

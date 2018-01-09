@@ -4,84 +4,21 @@
 # WARNING: Only works with Makefile generator.
 # See: https://cmake.org/gitweb?p=cmake.git;a=commitdiff;h=15c454fe
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
-
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary might not work on other systems!)" OFF)
 
-if(BUILD_FOR_LOCAL_SYSTEM)
-    set(flag "-march=native")
-    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
-    if(Flag:${flag})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
+STRING(TOLOWER ${PROJECT_NAME} APPLICATION_NAME)
 
-        message(WARNING [=[ 
- BUILDING FOR LOCAL SYSTEM ONLY
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.
- The generated binary will exhibit higher performance,
- but will not be portable (e.g., might not work on other CPUs)]=])
-    else(Flag:${flag})
-        message(WARNING [=[
- Your compiler does not support -march=native.
- Ignoring -DBUILD_FOR_LOCAL_SYSTEM=ON!]=])
-    endif(Flag:${flag})
-
-
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
-endif(BUILD_FOR_LOCAL_SYSTEM)
-
-# Find the QtWidgets library
-find_package(Qt5Widgets REQUIRED)
-find_package(Qt5Core REQUIRED)
-find_package(Qt5Xml REQUIRED)
-find_package(Qt5Script REQUIRED)
-find_package(Qt5Sql REQUIRED)
-find_package(Qt5WebKitWidgets REQUIRED)
-find_package(Qt5LinguistTools REQUIRED)
-find_package(Qt5PrintSupport REQUIRED)
-find_package(Qt5UiTools REQUIRED)
-find_package(GDAL REQUIRED)
-find_package(PROJ REQUIRED)
-find_package(ROUTINO REQUIRED)
-find_package(QuaZip REQUIRED)
-
-if(USE_QT5DBus)
-    find_package(Qt5DBus REQUIRED)
-    if(Qt5DBus_FOUND)
-        add_definitions(-DHAVE_DBUS)
-    endif(Qt5DBus_FOUND)
-endif(USE_QT5DBus)
-
-
-if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]{1}\\..*")
-    message( SEND_ERROR "You need at least Qt5.3 or newer.")
-endif()
-
-function(cxx_add_flag_if_supported flag)
-    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
-    if(Flag:${flag})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}" PARENT_SCOPE)
-    endif(Flag:${flag})
-endfunction(cxx_add_flag_if_supported)
-
-if(UNIX)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lstdc++ -lm")
-endif(UNIX)
-
-if (APPLE)
-     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
-     SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")
-endif(APPLE)
-
-if(APPLE)
-     FIND_LIBRARY(DiskArbitration_LIBRARY DiskArbitration)
-     FIND_LIBRARY(Foundation_LIBRARY Foundation)
-endif(APPLE)
-
+add_definitions(
+    -DVER_MAJOR=${PROJECT_VERSION_MAJOR}
+    -DVER_MINOR=${PROJECT_VERSION_MINOR}
+    -DVER_STEP=${PROJECT_VERSION_PATCH}
+    -DVER_TWEAK=${VERSION_SUFFIX}
+    -DAPPLICATION_NAME=${PROJECT_NAME}
+)
 
 set( SRCS    
     CAbout.cpp
@@ -779,17 +716,6 @@ set( RCS
 qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
-# try to figure out which compiler flags are supported (and add them)
-cxx_add_flag_if_supported(-Wsuggest-override)
-cxx_add_flag_if_supported(-Woverloaded-virtual)
-
-if(UNIX)
-    add_definitions(-Wall -Wpedantic -Wno-switch -Wno-strict-aliasing)
-endif(UNIX)
-
-if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif(WIN32)
 
 add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
 
@@ -818,11 +744,8 @@ set(MAININP
 )
 
 include_directories(
-    ${CMAKE_BINARY_DIR}
-)
-
-include_directories(
     SYSTEM # this prevents warnings from non-QMS headers
+    ${CMAKE_BINARY_DIR}
     ${GDAL_INCLUDE_DIRS}
     ${PROJ_INCLUDE_DIRS}
     ${ROUTINO_INCLUDE_DIRS}
@@ -831,8 +754,8 @@ include_directories(
 )
 
 if(APPLE)
-     INCLUDE_DIRECTORIES(/System/Library/Frameworks/Foundation.framework)
-     INCLUDE_DIRECTORIES(/System/Library/Frameworks/DiskArbitration.framework)
+     include_directories(/System/Library/Frameworks/Foundation.framework)
+     include_directories(/System/Library/Frameworks/DiskArbitration.framework)
 endif(APPLE)
 
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})

@@ -4,7 +4,7 @@ include(InstallRequiredSystemLibraries)
 # http://www.cmake.org/Wiki/CMake:CPackConfiguration
 
 ### general settings
-string(TOLOWER ${APPLICATION_NAME} CPACK_PACKAGE_NAME)
+string(TOLOWER ${PROJECT_NAME} CPACK_PACKAGE_NAME)
 set(CPACK_PACKAGE_VENDOR "QLandkarte")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "GPS Map, Route, Waypoint and Tracking Tool")
 

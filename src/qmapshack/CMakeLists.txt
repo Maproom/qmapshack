@@ -2,13 +2,16 @@
 # We need this to prevent .ts files from being deleted with make clean, when
 # UPDATE_TRANSLATIONS=ON
 # WARNING: Only works with Makefile generator.
-# See: https://cmake.org/gitweb?p=cmake.git;a=commitdiff;h=15c454fe
 set_directory_properties(PROPERTIES CLEAN_NO_CUSTOM TRUE)
 # Find includes in corresponding build directories
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
+
+###############################################################################################
+# Setup application name and version tags
+###############################################################################################
 
 STRING(TOLOWER ${PROJECT_NAME} APPLICATION_NAME)
 
@@ -19,6 +22,13 @@ add_definitions(
     -DVER_TWEAK=${VERSION_SUFFIX}
     -DAPPLICATION_NAME=${PROJECT_NAME}
 )
+
+# and other funny defines -> maybe config.h is a better place for that
+add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
+
+###############################################################################################
+# All source files needed to compile
+###############################################################################################
 
 set( SRCS    
     CAbout.cpp
@@ -316,280 +326,280 @@ endif(WIN32)
 
 
 set( HDRS
-        CAbout.h
-        CMainWindow.h
-        CSingleInstanceProxy.h
-        GeoMath.h
-        canvas/CCanvas.h
-        canvas/CCanvasSetup.h
-        canvas/IDrawContext.h
-        canvas/IDrawObject.h
-        dem/CDemDraw.h
-        dem/CDemItem.h
-        dem/CDemList.h
-        dem/CDemPathSetup.h
-        dem/CDemPropSetup.h
-        dem/CDemVRT.h
-        dem/IDem.h
-        dem/IDemProp.h
-        device/CDeviceGarmin.h
-        device/CDeviceGarminArchive.h
-        device/CDeviceTwoNav.h
-        device/IDevice.h
-        device/IDeviceWatcher.h
-        gis/CGisDatabase.h
-        gis/CGisDraw.h
-        gis/CGisListDB.h
-        gis/CGisListWks.h
-        gis/CGisWorkspace.h
-        gis/CSelDevices.h
-        gis/CSetupFilter.h
-        gis/IGisItem.h
-        gis/IGisLine.h
-        gis/Poi.h
-        gis/WptIcons.h
-        gis/db/CDBFolderGroup.h
-        gis/db/CDBFolderLostFound.h
-        gis/db/CDBFolderMysql.h
-        gis/db/CDBFolderOther.h
-        gis/db/CDBFolderProject.h
-        gis/db/CDBFolderSqlite.h
-        gis/db/CDBItem.h
-        gis/db/CDBProject.h
-        gis/db/CExportDatabase.h
-        gis/db/CExportDatabaseThread.h
-        gis/db/CLostFoundProject.h
-        gis/db/CSearchDatabase.h
-        gis/db/CSelectDBFolder.h
-        gis/db/CSelectSaveAction.h
-        gis/db/CSetupDatabase.h
-        gis/db/CSetupFolder.h
-        gis/db/CSetupWorkspace.h
-        gis/db/IDB.h
-        gis/db/IDBFolder.h
-        gis/db/IDBFolderSql.h
-        gis/db/IDBMysql.h
-        gis/db/IDBSqlite.h
-        gis/db/macros.h
-        gis/fit/CFitProject.h
-        gis/fit/CFitStream.h
-        gis/fit/decoder/CFitByteDataTransformer.h
-        gis/fit/decoder/CFitCrcState.h
-        gis/fit/decoder/CFitDecoder.h
-        gis/fit/decoder/CFitDefinitionMessage.h
-        gis/fit/decoder/CFitDevFieldDefinition.h
-        gis/fit/decoder/CFitDevFieldDefinitionState.h
-        gis/fit/decoder/CFitField.h
-        gis/fit/decoder/CFitFieldBuilder.h
-        gis/fit/decoder/CFitFieldDataState.h
-        gis/fit/decoder/CFitFieldDefinition.h
-        gis/fit/decoder/CFitFieldDefinitionState.h
-        gis/fit/decoder/CFitHeaderState.h
-        gis/fit/decoder/CFitMessage.h
-        gis/fit/decoder/CFitRecordContentState.h
-        gis/fit/decoder/CFitRecordHeaderState.h
-        gis/fit/decoder/IFitDecoderState.h
-        gis/fit/defs/CFitBaseType.h
-        gis/fit/defs/CFitFieldProfile.h
-        gis/fit/defs/CFitProfile.h
-        gis/fit/defs/CFitProfileLookup.h
-        gis/fit/defs/fit_const.h
-        gis/fit/defs/fit_enums.h
-        gis/fit/defs/fit_fields.h
-        gis/gpx/CGpxProject.h
-        gis/ovl/CDetailsOvlArea.h
-        gis/ovl/CGisItemOvlArea.h
-        gis/ovl/CScrOptOvlArea.h
-        gis/prj/CDetailsPrj.h
-        gis/prj/IGisProject.h
-        gis/qlb/CQlbProject.h
-        gis/qms/CQmsProject.h
-        gis/rte/CCreateRouteFromWpt.h
-        gis/rte/CDetailsRte.h
-        gis/rte/CGisItemRte.h
-        gis/rte/CScrOptRte.h
-        gis/rte/router/CRouterBRouter.h
-        gis/rte/router/CRouterMapQuest.h
-        gis/rte/router/CRouterRoutino.h
-        gis/rte/router/CRouterSetup.h
-        gis/rte/router/IRouter.h
-        gis/rte/router/brouter/CRouterBRouterInfo.h
-        gis/rte/router/brouter/CRouterBRouterSetup.h
-        gis/rte/router/brouter/CRouterBRouterSetupPage.h
-        gis/rte/router/brouter/CRouterBRouterSetupWizard.h
-        gis/rte/router/brouter/CRouterBRouterTilesPage.h
-        gis/rte/router/brouter/CRouterBRouterTilesSelect.h
-        gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h
-        gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h
-        gis/rte/router/brouter/CRouterBRouterTilesStatus.h
-        gis/rte/router/brouter/CRouterBRouterToolShell.h
-        gis/rte/router/routino/CRouterRoutinoPathSetup.h
-        gis/search/CSearchGoogle.h
-        gis/slf/CSlfProject.h
-        gis/slf/CSlfReader.h
-        gis/suunto/CLogProject.h
-        gis/suunto/CSmlProject.h
-        gis/suunto/ISuuntoProject.h
-        gis/tcx/CTcxProject.h
-        gis/tnv/CTwoNavProject.h
-        gis/trk/CActivityTrk.h
-        gis/trk/CCombineTrk.h
-        gis/trk/CCutTrk.h
-        gis/trk/CDetailsTrk.h
-        gis/trk/CGisItemTrk.h
-        gis/trk/CKnownExtension.h
-        gis/trk/CPropertyTrk.h
-        gis/trk/CScrOptTrk.h
-        gis/trk/CSelectActivityColor.h
-        gis/trk/CTableTrk.h
-        gis/trk/CTrackData.h
-        gis/trk/filter/CFilterDelete.h
-        gis/trk/filter/CFilterDeleteExtension.h
-        gis/trk/filter/CFilterDouglasPeuker.h
-        gis/trk/filter/CFilterInterpolateElevation.h
-        gis/trk/filter/CFilterInvalid.h
-        gis/trk/filter/CFilterMedian.h
-        gis/trk/filter/CFilterNewDate.h
-        gis/trk/filter/CFilterObscureDate.h
-        gis/trk/filter/CFilterOffsetElevation.h
-        gis/trk/filter/CFilterReplaceElevation.h
-        gis/trk/filter/CFilterReset.h
-        gis/trk/filter/CFilterSpeed.h
-        gis/trk/filter/CFilterSplitSegment.h
-        gis/trk/filter/CFilterSubPt2Pt.h
-        gis/trk/filter/CFilterTerrainSlope.h
-        gis/wpt/CDetailsGeoCache.h
-        gis/wpt/CDetailsWpt.h
-        gis/wpt/CGisItemWpt.h
-        gis/wpt/CProjWpt.h
-        gis/wpt/CScrOptWpt.h
-        gis/wpt/CScrOptWptRadius.h
-        gis/wpt/CSetupNewWpt.h
-        grid/CGrid.h
-        grid/CGridSetup.h
-        grid/CProjWizard.h
-        grid/mitab.h
-        helpers/CDraw.h
-        helpers/CElevationDialog.h
-        helpers/CFileExt.h
-        helpers/CInputDialog.h
-        helpers/CLimit.h
-        helpers/CLinksDialog.h
-        helpers/CPhotoViewer.h
-        helpers/CPositionDialog.h
-        helpers/CProgressDialog.h
-        helpers/CSelectCopyAction.h
-        helpers/CSelectProjectDialog.h
-        helpers/CSettings.h
-        helpers/CToolBarConfig.h
-        helpers/CToolBarSetupDialog.h
-        helpers/CValue.h
-        helpers/CWptIconDialog.h
-        helpers/Platform.h
-        helpers/Signals.h
-        map/CMapDraw.h
-        map/CMapGEMF.h
-        map/CMapIMG.h
-        map/CMapItem.h
-        map/CMapJNX.h
-        map/CMapList.h
-        map/CMapMAP.h
-        map/CMapPathSetup.h
-        map/CMapPropSetup.h
-        map/CMapRMAP.h
-        map/CMapTMS.h
-        map/CMapVRT.h
-        map/CMapWMTS.h
-        map/IMap.h
-        map/IMapOnline.h
-        map/IMapProp.h
-        map/cache/CDiskCache.h
-        map/garmin/CGarminPoint.h
-        map/garmin/CGarminPolygon.h
-        map/garmin/CGarminStrTbl6.h
-        map/garmin/CGarminStrTbl8.h
-        map/garmin/CGarminStrTblUtf8.h
-        map/garmin/CGarminTyp.h
-        map/garmin/Garmin.h
-        map/garmin/IGarminStrTbl.h
-        map/mapsforge/types.h
-        mouse/CMouseDummy.h
-        mouse/CMouseEditArea.h
-        mouse/CMouseEditRte.h
-        mouse/CMouseEditTrk.h
-        mouse/CMouseMoveWpt.h
-        mouse/CMouseNormal.h
-        mouse/CMousePrint.h
-        mouse/CMouseRadiusWpt.h
-        mouse/CMouseRangeTrk.h
-        mouse/CMouseSelect.h
-        mouse/CMouseWptBubble.h
-        mouse/CScrOptPrint.h
-        mouse/CScrOptRangeTrk.h
-        mouse/CScrOptSelect.h
-        mouse/CScrOptUnclutter.h
-        mouse/IMouse.h
-        mouse/IMouseSelect.h
-        mouse/IScrOpt.h
-        mouse/line/CLineOpAddPoint.h
-        mouse/line/CLineOpDeletePoint.h
-        mouse/line/CLineOpMovePoint.h
-        mouse/line/CLineOpSelectRange.h
-        mouse/line/CScrOptEditLine.h
-        mouse/line/CScrOptRangeLine.h
-        mouse/line/ILineOp.h
-        mouse/line/IMouseEditLine.h
-        plot/CPlot.h
-        plot/CPlotAxis.h
-        plot/CPlotAxisTime.h
-        plot/CPlotData.h
-        plot/CPlotProfile.h
-        plot/CPlotTrack.h
-        plot/IPlot.h
-        plot/ITrack.h
-        print/CPrintDialog.h
-        qlgt/CQlb.h
-        qlgt/CQlgtDb.h
-        qlgt/CQlgtDiary.h
-        qlgt/CQlgtFolder.h
-        qlgt/CQlgtRoute.h
-        qlgt/CQlgtTrack.h
-        qlgt/CQlgtWpt.h
-        qlgt/CQmsDb.h
-        qlgt/IItem.h
-        qlgt/IQlgtOverlay.h
-        setup/CAppOpts.h
-        setup/CAppSetupLinux.h
-        setup/CAppSetupMac.h
-        setup/CAppSetupWin.h
-        setup/CCommandProcessor.h
-        setup/CLogHandler.h
-        setup/IAppSetup.h
-        tool/CImportDatabase.h
-        tool/CMapVrtBuilder.h
-        tool/CRoutinoDatabaseBuilder.h
-        tool/IToolShell.h
-        units/CCoordFormatSetup.h
-        units/CTimeZoneSetup.h
-        units/CUnitImperial.h
-        units/CUnitMetric.h
-        units/CUnitNautic.h
-        units/CUnitsSetup.h
-        units/IUnit.h
-        version.h
-        widgets/CColorChooser.h
-        widgets/CColorLegend.h
-        widgets/CDoubleSpinBox.h
-        widgets/CFadingIcon.h
-        widgets/CHistoryListWidget.h
-        widgets/CLineEdit.h
-        widgets/CPhotoAlbum.h
-        widgets/CSelectDoubleListWidget.h
-        widgets/CTemplateWidget.h
-        widgets/CTextEdit.h
-        widgets/CTextEditWidget.h
-        widgets/CTextEditWidgetSelMenu.h
-        widgets/CTinySpinBox.h
+    CAbout.h
+    CMainWindow.h
+    CSingleInstanceProxy.h
+    GeoMath.h
+    canvas/CCanvas.h
+    canvas/CCanvasSetup.h
+    canvas/IDrawContext.h
+    canvas/IDrawObject.h
+    dem/CDemDraw.h
+    dem/CDemItem.h
+    dem/CDemList.h
+    dem/CDemPathSetup.h
+    dem/CDemPropSetup.h
+    dem/CDemVRT.h
+    dem/IDem.h
+    dem/IDemProp.h
+    device/CDeviceGarmin.h
+    device/CDeviceGarminArchive.h
+    device/CDeviceTwoNav.h
+    device/IDevice.h
+    device/IDeviceWatcher.h
+    gis/CGisDatabase.h
+    gis/CGisDraw.h
+    gis/CGisListDB.h
+    gis/CGisListWks.h
+    gis/CGisWorkspace.h
+    gis/CSelDevices.h
+    gis/CSetupFilter.h
+    gis/IGisItem.h
+    gis/IGisLine.h
+    gis/Poi.h
+    gis/WptIcons.h
+    gis/db/CDBFolderGroup.h
+    gis/db/CDBFolderLostFound.h
+    gis/db/CDBFolderMysql.h
+    gis/db/CDBFolderOther.h
+    gis/db/CDBFolderProject.h
+    gis/db/CDBFolderSqlite.h
+    gis/db/CDBItem.h
+    gis/db/CDBProject.h
+    gis/db/CExportDatabase.h
+    gis/db/CExportDatabaseThread.h
+    gis/db/CLostFoundProject.h
+    gis/db/CSearchDatabase.h
+    gis/db/CSelectDBFolder.h
+    gis/db/CSelectSaveAction.h
+    gis/db/CSetupDatabase.h
+    gis/db/CSetupFolder.h
+    gis/db/CSetupWorkspace.h
+    gis/db/IDB.h
+    gis/db/IDBFolder.h
+    gis/db/IDBFolderSql.h
+    gis/db/IDBMysql.h
+    gis/db/IDBSqlite.h
+    gis/db/macros.h
+    gis/fit/CFitProject.h
+    gis/fit/CFitStream.h
+    gis/fit/decoder/CFitByteDataTransformer.h
+    gis/fit/decoder/CFitCrcState.h
+    gis/fit/decoder/CFitDecoder.h
+    gis/fit/decoder/CFitDefinitionMessage.h
+    gis/fit/decoder/CFitDevFieldDefinition.h
+    gis/fit/decoder/CFitDevFieldDefinitionState.h
+    gis/fit/decoder/CFitField.h
+    gis/fit/decoder/CFitFieldBuilder.h
+    gis/fit/decoder/CFitFieldDataState.h
+    gis/fit/decoder/CFitFieldDefinition.h
+    gis/fit/decoder/CFitFieldDefinitionState.h
+    gis/fit/decoder/CFitHeaderState.h
+    gis/fit/decoder/CFitMessage.h
+    gis/fit/decoder/CFitRecordContentState.h
+    gis/fit/decoder/CFitRecordHeaderState.h
+    gis/fit/decoder/IFitDecoderState.h
+    gis/fit/defs/CFitBaseType.h
+    gis/fit/defs/CFitFieldProfile.h
+    gis/fit/defs/CFitProfile.h
+    gis/fit/defs/CFitProfileLookup.h
+    gis/fit/defs/fit_const.h
+    gis/fit/defs/fit_enums.h
+    gis/fit/defs/fit_fields.h
+    gis/gpx/CGpxProject.h
+    gis/ovl/CDetailsOvlArea.h
+    gis/ovl/CGisItemOvlArea.h
+    gis/ovl/CScrOptOvlArea.h
+    gis/prj/CDetailsPrj.h
+    gis/prj/IGisProject.h
+    gis/qlb/CQlbProject.h
+    gis/qms/CQmsProject.h
+    gis/rte/CCreateRouteFromWpt.h
+    gis/rte/CDetailsRte.h
+    gis/rte/CGisItemRte.h
+    gis/rte/CScrOptRte.h
+    gis/rte/router/CRouterBRouter.h
+    gis/rte/router/CRouterMapQuest.h
+    gis/rte/router/CRouterRoutino.h
+    gis/rte/router/CRouterSetup.h
+    gis/rte/router/IRouter.h
+    gis/rte/router/brouter/CRouterBRouterInfo.h
+    gis/rte/router/brouter/CRouterBRouterSetup.h
+    gis/rte/router/brouter/CRouterBRouterSetupPage.h
+    gis/rte/router/brouter/CRouterBRouterSetupWizard.h
+    gis/rte/router/brouter/CRouterBRouterTilesPage.h
+    gis/rte/router/brouter/CRouterBRouterTilesSelect.h
+    gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h
+    gis/rte/router/brouter/CRouterBRouterTilesSelectLayout.h
+    gis/rte/router/brouter/CRouterBRouterTilesStatus.h
+    gis/rte/router/brouter/CRouterBRouterToolShell.h
+    gis/rte/router/routino/CRouterRoutinoPathSetup.h
+    gis/search/CSearchGoogle.h
+    gis/slf/CSlfProject.h
+    gis/slf/CSlfReader.h
+    gis/suunto/CLogProject.h
+    gis/suunto/CSmlProject.h
+    gis/suunto/ISuuntoProject.h
+    gis/tcx/CTcxProject.h
+    gis/tnv/CTwoNavProject.h
+    gis/trk/CActivityTrk.h
+    gis/trk/CCombineTrk.h
+    gis/trk/CCutTrk.h
+    gis/trk/CDetailsTrk.h
+    gis/trk/CGisItemTrk.h
+    gis/trk/CKnownExtension.h
+    gis/trk/CPropertyTrk.h
+    gis/trk/CScrOptTrk.h
+    gis/trk/CSelectActivityColor.h
+    gis/trk/CTableTrk.h
+    gis/trk/CTrackData.h
+    gis/trk/filter/CFilterDelete.h
+    gis/trk/filter/CFilterDeleteExtension.h
+    gis/trk/filter/CFilterDouglasPeuker.h
+    gis/trk/filter/CFilterInterpolateElevation.h
+    gis/trk/filter/CFilterInvalid.h
+    gis/trk/filter/CFilterMedian.h
+    gis/trk/filter/CFilterNewDate.h
+    gis/trk/filter/CFilterObscureDate.h
+    gis/trk/filter/CFilterOffsetElevation.h
+    gis/trk/filter/CFilterReplaceElevation.h
+    gis/trk/filter/CFilterReset.h
+    gis/trk/filter/CFilterSpeed.h
+    gis/trk/filter/CFilterSplitSegment.h
+    gis/trk/filter/CFilterSubPt2Pt.h
+    gis/trk/filter/CFilterTerrainSlope.h
+    gis/wpt/CDetailsGeoCache.h
+    gis/wpt/CDetailsWpt.h
+    gis/wpt/CGisItemWpt.h
+    gis/wpt/CProjWpt.h
+    gis/wpt/CScrOptWpt.h
+    gis/wpt/CScrOptWptRadius.h
+    gis/wpt/CSetupNewWpt.h
+    grid/CGrid.h
+    grid/CGridSetup.h
+    grid/CProjWizard.h
+    grid/mitab.h
+    helpers/CDraw.h
+    helpers/CElevationDialog.h
+    helpers/CFileExt.h
+    helpers/CInputDialog.h
+    helpers/CLimit.h
+    helpers/CLinksDialog.h
+    helpers/CPhotoViewer.h
+    helpers/CPositionDialog.h
+    helpers/CProgressDialog.h
+    helpers/CSelectCopyAction.h
+    helpers/CSelectProjectDialog.h
+    helpers/CSettings.h
+    helpers/CToolBarConfig.h
+    helpers/CToolBarSetupDialog.h
+    helpers/CValue.h
+    helpers/CWptIconDialog.h
+    helpers/Platform.h
+    helpers/Signals.h
+    map/CMapDraw.h
+    map/CMapGEMF.h
+    map/CMapIMG.h
+    map/CMapItem.h
+    map/CMapJNX.h
+    map/CMapList.h
+    map/CMapMAP.h
+    map/CMapPathSetup.h
+    map/CMapPropSetup.h
+    map/CMapRMAP.h
+    map/CMapTMS.h
+    map/CMapVRT.h
+    map/CMapWMTS.h
+    map/IMap.h
+    map/IMapOnline.h
+    map/IMapProp.h
+    map/cache/CDiskCache.h
+    map/garmin/CGarminPoint.h
+    map/garmin/CGarminPolygon.h
+    map/garmin/CGarminStrTbl6.h
+    map/garmin/CGarminStrTbl8.h
+    map/garmin/CGarminStrTblUtf8.h
+    map/garmin/CGarminTyp.h
+    map/garmin/Garmin.h
+    map/garmin/IGarminStrTbl.h
+    map/mapsforge/types.h
+    mouse/CMouseDummy.h
+    mouse/CMouseEditArea.h
+    mouse/CMouseEditRte.h
+    mouse/CMouseEditTrk.h
+    mouse/CMouseMoveWpt.h
+    mouse/CMouseNormal.h
+    mouse/CMousePrint.h
+    mouse/CMouseRadiusWpt.h
+    mouse/CMouseRangeTrk.h
+    mouse/CMouseSelect.h
+    mouse/CMouseWptBubble.h
+    mouse/CScrOptPrint.h
+    mouse/CScrOptRangeTrk.h
+    mouse/CScrOptSelect.h
+    mouse/CScrOptUnclutter.h
+    mouse/IMouse.h
+    mouse/IMouseSelect.h
+    mouse/IScrOpt.h
+    mouse/line/CLineOpAddPoint.h
+    mouse/line/CLineOpDeletePoint.h
+    mouse/line/CLineOpMovePoint.h
+    mouse/line/CLineOpSelectRange.h
+    mouse/line/CScrOptEditLine.h
+    mouse/line/CScrOptRangeLine.h
+    mouse/line/ILineOp.h
+    mouse/line/IMouseEditLine.h
+    plot/CPlot.h
+    plot/CPlotAxis.h
+    plot/CPlotAxisTime.h
+    plot/CPlotData.h
+    plot/CPlotProfile.h
+    plot/CPlotTrack.h
+    plot/IPlot.h
+    plot/ITrack.h
+    print/CPrintDialog.h
+    qlgt/CQlb.h
+    qlgt/CQlgtDb.h
+    qlgt/CQlgtDiary.h
+    qlgt/CQlgtFolder.h
+    qlgt/CQlgtRoute.h
+    qlgt/CQlgtTrack.h
+    qlgt/CQlgtWpt.h
+    qlgt/CQmsDb.h
+    qlgt/IItem.h
+    qlgt/IQlgtOverlay.h
+    setup/CAppOpts.h
+    setup/CAppSetupLinux.h
+    setup/CAppSetupMac.h
+    setup/CAppSetupWin.h
+    setup/CCommandProcessor.h
+    setup/CLogHandler.h
+    setup/IAppSetup.h
+    tool/CImportDatabase.h
+    tool/CMapVrtBuilder.h
+    tool/CRoutinoDatabaseBuilder.h
+    tool/IToolShell.h
+    units/CCoordFormatSetup.h
+    units/CTimeZoneSetup.h
+    units/CUnitImperial.h
+    units/CUnitMetric.h
+    units/CUnitNautic.h
+    units/CUnitsSetup.h
+    units/IUnit.h
+    version.h
+    widgets/CColorChooser.h
+    widgets/CColorLegend.h
+    widgets/CDoubleSpinBox.h
+    widgets/CFadingIcon.h
+    widgets/CHistoryListWidget.h
+    widgets/CLineEdit.h
+    widgets/CPhotoAlbum.h
+    widgets/CSelectDoubleListWidget.h
+    widgets/CTemplateWidget.h
+    widgets/CTextEdit.h
+    widgets/CTextEditWidget.h
+    widgets/CTextEditWidgetSelMenu.h
+    widgets/CTinySpinBox.h
 )
 
 
@@ -713,12 +723,17 @@ set( RCS
 )
 
 
+
+###############################################################################################
+# Some Qt magic
+###############################################################################################
+
 qt5_wrap_ui(UI_HDRS ${UIS})
 qt5_add_resources(RC_SRCS ${RCS})
 
-
-add_definitions(-DROUTINO_XML_PATH=${ROUTINO_XML_PATH})
-
+###############################################################################################
+# Translation related stuff
+###############################################################################################
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
     UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" "-no-obsolete"
@@ -734,13 +749,16 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     )
 endif()
 
+###############################################################################################
+# Build source file and include paths lists
+###############################################################################################
 set(MAININP
-        ${SRCS}
-        ${HDRS}
-        ${UI_HDRS}
-        ${RC_SRCS}
-        ${${APPLICATION_NAME}_QM_FILES}
-        ${${APPLICATION_NAME}_DESKTOP_FILES}
+    ${SRCS}
+    ${HDRS}
+    ${UI_HDRS}
+    ${RC_SRCS}
+    ${${APPLICATION_NAME}_QM_FILES}
+    ${${APPLICATION_NAME}_DESKTOP_FILES}
 )
 
 include_directories(
@@ -758,8 +776,11 @@ if(APPLE)
      include_directories(/System/Library/Frameworks/DiskArbitration.framework)
 endif(APPLE)
 
-add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
+###############################################################################################
+# Build the executable and define necessary libraries.
+###############################################################################################
+add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 if(Qt5DBus_FOUND)
     set(DBUS_LIB Qt5::DBus)
@@ -790,24 +811,13 @@ if(APPLE)
     )
 endif(APPLE)
 
-install(
-    TARGETS
-      ${APPLICATION_NAME}
-    DESTINATION
-      ${BIN_INSTALL_DIR}
-)
+
+###############################################################################################
+# Install target related stuff
+###############################################################################################
+install(TARGETS     ${APPLICATION_NAME}                     DESTINATION     ${BIN_INSTALL_DIR})
 
 if (UNIX AND NOT WIN32 AND NOT APPLE)
-install(
-    FILES
-        ${${APPLICATION_NAME}_QM_FILES}
-    DESTINATION
-        ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)
-
-install(
-    FILES
-        ${${APPLICATION_NAME}_DESKTOP_FILES}
-    DESTINATION
-        ${XDG_APPS_DIR}
-)
+    install(FILES   ${${APPLICATION_NAME}_QM_FILES}         DESTINATION     ${DATA_INSTALL_PREFIX}/${APPLICATION_NAME}/translations)
+    install(FILES   ${${APPLICATION_NAME}_DESKTOP_FILES}    DESTINATION     ${XDG_APPS_DIR})
 endif (UNIX AND NOT WIN32 AND NOT APPLE)

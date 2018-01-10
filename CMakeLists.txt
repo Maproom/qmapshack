@@ -18,11 +18,17 @@ if (COMMAND CMAKE_POLICY)
 endif()
 
 ###############################################################################################
-# CMake specific stuff like module includes, paths etc....
+# Define project name and version tags
 ###############################################################################################
+# this is not only the QMS version it will be the package version, too.
 project(QMapShack VERSION 1.10.0)
-set(VERSION_SUFFIX post)
 
+# remove "development" for a release
+set(VERSION_SUFFIX development)
+
+###############################################################################################
+# Define paths and include other modules
+###############################################################################################
 # where to look first for cmake modules, before ${CMAKE_ROOT}/Modules/ is checked
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 
@@ -87,22 +93,7 @@ endif(UNIX)
 # GCC specific compiler tweaks
 ###############################################################################################
 if(BUILD_FOR_LOCAL_SYSTEM)
-    set(flag "-march=native")
-    CHECK_CXX_COMPILER_FLAG(${flag} Flag:${flag})
-    if(Flag:${flag})
-        set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${flag}")
-        message(WARNING [=[
- BUILDING FOR LOCAL SYSTEM ONLY
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- Specifying -DBUILD_FOR_LOCAL_SYSTEM=ON will pass -march=native to the compiler.
- The generated binary will exhibit higher performance,
- but will not be portable (e.g., might not work on other CPUs)]=])
-    else(Flag:${flag})
-        message(WARNING [=[
- Your compiler does not support -march=native.
- Ignoring -DBUILD_FOR_LOCAL_SYSTEM=ON!]=])
-    endif(Flag:${flag})
-   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
+    cxx_local_system_optimization()
 endif(BUILD_FOR_LOCAL_SYSTEM)
 
 # try to figure out which compiler flags are supported (and add them)
@@ -111,7 +102,7 @@ cxx_add_flag_if_supported(-Woverloaded-virtual)
 
 
 ###############################################################################################
-# Test for packages and setup all library variables
+# Find all required packages and setup internal variables
 ###############################################################################################
 find_package(Qt5Widgets         REQUIRED)
 find_package(Qt5Core            REQUIRED)
@@ -191,8 +182,8 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     install( FILES        qmapshack.1                                 DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 
+# this is used by the uninstall target
 CONFIGURE_FILE( "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in" "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake" IMMEDIATE @ONLY)
-
 ADD_CUSTOM_TARGET(uninstall "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
 
 

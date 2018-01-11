@@ -16,18 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CPROJWIZARD_H
+#define CPROJWIZARD_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "ui_IProjWizard.h"
+#include <QDialog>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CProjWizard : public QDialog, private Ui::IProjWizard
+{
+    Q_OBJECT
+public:
+    CProjWizard(QLineEdit& line, QWidget *parent);
+    virtual ~CProjWizard();
+    static bool validProjStr(const QString projStr);
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+public slots:
+    void accept() override;
+    void slotChange();
 
-#endif //VERSION_H
+private:
+    void findDatum(const QString& str);
+
+    QLineEdit& line;
+};
+
+#endif //CPROJWIZARD_H
 

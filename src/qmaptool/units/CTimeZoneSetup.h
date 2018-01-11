@@ -16,18 +16,21 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CTIMEZONESETUP_H
+#define CTIMEZONESETUP_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "ui_ITimeZoneSetup.h"
+#include <QDialog>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CTimeZoneSetup : public QDialog, private Ui::ITimeZoneSetup
+{
+public:
+    CTimeZoneSetup(QWidget * parent);
+    virtual ~CTimeZoneSetup();
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+public slots:
+    void accept() override;
+};
 
-#endif //VERSION_H
+#endif //CTIMEZONESETUP_H
 

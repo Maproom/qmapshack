@@ -23,6 +23,12 @@ endif()
 # this is not only the QMS version it will be the package version, too.
 project(QMapShack VERSION 1.10.0)
 
+
+set(QMAPTOOL_VERSION_MAJOR 1)
+set(QMAPTOOL_VERSION_MINOR 0)
+set(QMAPTOOL_VERSION_PATCH 0)
+
+
 # remove "development" for a release
 set(VERSION_SUFFIX development)
 
@@ -98,7 +104,6 @@ endif(BUILD_FOR_LOCAL_SYSTEM)
 cxx_add_flag_if_supported(-Wsuggest-override)
 cxx_add_flag_if_supported(-Woverloaded-virtual)
 
-
 ###############################################################################################
 # Find all required packages and setup internal variables
 ###############################################################################################
@@ -152,7 +157,6 @@ if(NOT ALGLIB_FOUND)
     add_subdirectory(3rdparty/alglib)
 endif(NOT ALGLIB_FOUND)
 
-
 ###############################################################################################
 # Create global config.h
 ###############################################################################################
@@ -170,14 +174,17 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 # Now we are ready to compile all sub-projects
 ###############################################################################################
 add_subdirectory(src/qmapshack)
+add_subdirectory(src/qmaptool)
 
 ###############################################################################################
 # Copy a few more files need by the install/unistall target
 ###############################################################################################
 if (UNIX AND NOT WIN32 AND NOT APPLE)
-    install( FILES        src/qmapshack/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
-    install( DIRECTORY    src/qmapshack/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
-    install( FILES        qmapshack.1                                 DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+    install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
+    install( FILES        src/icons/48x48/QMapTool.png      DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
+    install( DIRECTORY    src/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
+    install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+    install( FILES        qmaptool.1                        DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 
 # this is used by the uninstall target

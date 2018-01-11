@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CSETUPEXTTOOLS_H
+#define CSETUPEXTTOOLS_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include <QDialog>
+#include <functional>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+#include "ui_ISetupExtTools.h"
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+using fSetPath = std::function<void(const QString&)>;
 
-#endif //VERSION_H
+class CSetupExtTools : public QDialog, private Ui::ISetupExtTools
+{
+    Q_OBJECT
+public:
+    CSetupExtTools(QWidget * parent);
+    virtual ~CSetupExtTools() = default;
+
+private slots:
+    void slotSetPathXOverride(const QString& name, fSetPath setPath);
+
+private:
+    void setupGui();
+};
+
+#endif //CSETUPEXTTOOLS_H
 

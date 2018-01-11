@@ -1,0 +1,15 @@
+[Desktop Entry]
+Version=1.0
+Name=QMapTool
+Exec=qmaptool %F
+Icon=QMapTool
+Terminal=false
+Type=Application
+X-MultipleArgs=false
+Categories=Qt;Geoscience;Geography;Science;
+GenericName=Tool to create raster maps
+Keywords=map;raster;referencing
+MimeType=application/x-tif;
+StartupNotify=true
+
+#TRANSLATIONS_DIR=src/locale

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CDIALOGREFPOINT_H
+#define CDIALOGREFPOINT_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "ui_IDialogRefPoint.h"
+#include <QDialog>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class QPointF;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+class CDialogRefPoint : public QDialog, private Ui::IDialogRefPoint
+{
+    Q_OBJECT
+public:
+    CDialogRefPoint(QPointF& ptPtx, QPointF& ptRef, QWidget * parent);
+    virtual ~CDialogRefPoint() = default;
 
-#endif //VERSION_H
+public slots:
+    void accept() override;
+
+private slots:
+    void slotEditPosition(const QString& str);
+
+private:
+    QPointF& ptPtx;
+    QPointF& ptRef;
+};
+
+#endif //CDIALOGREFPOINT_H
 

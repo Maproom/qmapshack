@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CSHELLCMD_H
+#define CSHELLCMD_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include <QString>
+#include <QStringList>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CShellCmd
+{
+public:
+    CShellCmd(const QString& cmd, const QStringList& args);
+    virtual ~CShellCmd() = default;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+    const QString& getCmd() const
+    {
+        return cmd;
+    }
 
-#endif //VERSION_H
+    const QStringList& getArgs() const
+    {
+        return args;
+    }
+
+private:
+    QString cmd;
+    QStringList args;
+};
+
+#endif //CSHELLCMD_H
 

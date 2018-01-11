@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CTOOLOVERVIEWGROUPBOX_H
+#define CTOOLOVERVIEWGROUPBOX_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "shell/CShellCmd.h"
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+#include "ui_IToolOverviewGroupBox.h"
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+class QSettings;
 
-#endif //VERSION_H
+class CToolOverviewGroupBox : public QGroupBox, private Ui::IToolOverviewGroupBox
+{
+    Q_OBJECT
+public:
+    CToolOverviewGroupBox(QWidget * parent);
+    virtual ~CToolOverviewGroupBox() = default;
+
+    void saveSettings(QSettings& cfg);
+    void loadSettings(QSettings& cfg);
+
+
+    void buildCmd(QList<CShellCmd>& cmds, const QString& filename, const QString &resampling);
+};
+
+#endif //CTOOLOVERVIEWGROUPBOX_H
 

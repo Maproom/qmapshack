@@ -15,19 +15,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
+#ifndef CUNITSSETUP_H
+#define CUNITSSETUP_H
 
-#ifndef VERSION_H
-#define VERSION_H
+#include "ui_IUnitsSetup.h"
+#include <QDialog>
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+class CUnitsSetup : public QDialog, private Ui::IUnitsSetup
+{
+public:
+    CUnitsSetup(QWidget * parent);
+    virtual ~CUnitsSetup() = default;
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+public slots:
+    void accept() override;
+};
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
-
-#endif //VERSION_H
+#endif //CUNITSSETUP_H
 

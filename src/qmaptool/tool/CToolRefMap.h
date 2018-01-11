@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,37 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CTOOLREFMAP_H
+#define CTOOLREFMAP_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "items/IItem.h"
+#include "tool/ITool.h"
+#include "tool/IToolGui.h"
+#include "ui_IToolRefMap.h"
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+class CToolRefMap : public IToolGui, public ITool, private Ui::IToolRefMap
+{
+    Q_OBJECT
+public:
+    CToolRefMap(QWidget * parent);
+    virtual ~CToolRefMap();
 
-#endif //VERSION_H
+    void setupChanged() override;
+
+    FORWARD_LIST_ALL(itemList)
+
+
+private slots:
+    void slotAddItem(const QString& filename, QListWidget * list);
+    void slotMapSelectionChanged();
+    void slotSomethingChanged();
+    void slotStart();
+    void slotFinished(qint32 id);
+
+private:
+    void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) override;
+};
+
+#endif //CTOOLREFMAP_H
 

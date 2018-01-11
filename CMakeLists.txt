@@ -35,10 +35,8 @@ set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake/Modules)
 # all binaries are collected in the ./bin directory
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/bin)
 
-# Bring translation support in
 include(TranslateTs)
 include(TranslateDesktop)
-# add definitions
 include(DefineCMakeDefaults)
 include(DefineCompilerFlags)
 include(DefineInstallationPaths)

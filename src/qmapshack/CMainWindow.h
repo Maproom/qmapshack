@@ -142,6 +142,7 @@ private slots:
     void slotToggleDocks();
     void slotDockVisibilityChanged(bool visible);
     void slotFullScreen();
+    void slotStartQMapTool();
 
 private:
     friend int main(int argc, char ** argv);

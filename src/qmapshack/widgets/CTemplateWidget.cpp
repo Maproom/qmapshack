@@ -21,6 +21,7 @@
 
 #include <QtGui>
 #include <QtUiTools>
+#include <QtWidgets>
 
 CTemplateWidget::CTemplateWidget(QWidget *parent)
     : QDialog(parent)

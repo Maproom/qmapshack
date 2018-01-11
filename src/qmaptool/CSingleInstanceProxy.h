@@ -16,18 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CSINGLEINSTANCEPROXY_H
+#define CSINGLEINSTANCEPROXY_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include <QObject>
+class QLocalServer;
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CSingleInstanceProxy : public QObject
+{
+public:
+    CSingleInstanceProxy(const QStringList filenames);
+    virtual ~CSingleInstanceProxy();
 
-#define WHAT_STR      "QMapTool, Version " VER_STR
+private slots:
+    void slotNewConnection();
 
-#endif //VERSION_H
+private:
+    QLocalServer * server = nullptr;
+
+    QString serverName;
+};
+
+#endif //CSINGLEINSTANCEPROXY_H
 

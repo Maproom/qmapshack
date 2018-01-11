@@ -17,8 +17,10 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "CSingleInstanceProxy.h"
 #include "setup/IAppSetup.h"
 #include "version.h"
+
 #include <QApplication>
 #include <QtWidgets>
 
@@ -34,6 +36,9 @@ int main(int argc, char ** argv)
     env.processArguments();
     env.initLogHandler();
     env.initQMapTool();
+
+    // make sure this is the one and only instance on the system
+    CSingleInstanceProxy s(qlOpts->arguments);
 
     QSplashScreen *splash = nullptr;
     if (!qlOpts->nosplash)

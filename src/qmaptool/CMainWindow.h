@@ -42,6 +42,8 @@ public:
 
     virtual ~CMainWindow();
 
+    static QString getUser();
+
     CCanvas * getCanvas() const
     {
         return canvas;

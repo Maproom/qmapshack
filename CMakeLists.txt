@@ -175,6 +175,7 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 ###############################################################################################
 add_subdirectory(src/qmapshack)
 add_subdirectory(src/qmaptool)
+add_subdirectory(src/qmt_rgb2pct)
 
 ###############################################################################################
 # Copy a few more files need by the install/unistall target

@@ -17,25 +17,41 @@
 **********************************************************************************************/
 
 #include "CApp.h"
+#include "version.h"
 #include <QtCore>
 
 int main(int argc, char ** argv)
 {
     QCoreApplication app(argc, argv);
-    QCoreApplication::setApplicationName("qmt_rgb2pct");
-    QCoreApplication::setApplicationVersion("1.0");
+    QCoreApplication::setApplicationName(APP_STR);
+    QCoreApplication::setApplicationVersion(VER_STR);
+    if(QString(VER_SUFFIX).isEmpty())
+    {
+        QCoreApplication::setApplicationVersion(VER_STR);
+    }
+    else
+    {
+        QCoreApplication::setApplicationVersion(VER_STR "." VER_SUFFIX);
+    }
+
 
     QCommandLineParser parser;
-    parser.setApplicationDescription("Convert a map file with RGBA color coding to a color palette coding.");
+    parser.setApplicationDescription("\nConvert a map file with RGBA color coding to a color palette coding.");
     parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("source", QCoreApplication::translate("main", "Source file."));
     parser.addPositionalArgument("target", QCoreApplication::translate("main", "Target file."));
 
     parser.addOptions({
-        {{"n","ncolors"}, QCoreApplication::translate("main", "Number of colors. (default: 255)"), "number", "255"},
-        {{"p","pct"},  QCoreApplication::translate("main", "Input palette file for color table (*.vrt)"), "filename", ""},
-        {{"s","sct"},  QCoreApplication::translate("main", "Save color table to palette file (*.vrt)"), "filename", ""},
+        {
+            {"n","ncolors"}, QCoreApplication::translate("main", "Number of colors. (default: 255)"), "number", "255"
+        },
+        {
+            {"p","pct"},  QCoreApplication::translate("main", "Input palette file for color table (*.vrt)"), "filename", ""
+        },
+        {
+            {"s","sct"},  QCoreApplication::translate("main", "Save color table to palette file (*.vrt)"), "filename", ""
+        },
     });
 
     // Process the actual command line arguments given by the user
@@ -46,6 +62,11 @@ int main(int argc, char ** argv)
         printStderrQString("");
         printStderrQString(QCoreApplication::translate("main","There must be a source and destination file."));
         printStderrQString("");
+        parser.showHelp(-1);
+    }
+
+    if(parser.positionalArguments().isEmpty())
+    {
         parser.showHelp(-1);
     }
 

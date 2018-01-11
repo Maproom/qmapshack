@@ -8,7 +8,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-
 ###############################################################################################
 # Setup application name and version tags
 ###############################################################################################
@@ -22,7 +21,6 @@ add_definitions(
     -DVER_TWEAK=${VERSION_SUFFIX}
     -DAPPLICATION_NAME=${APPLICATION_NAME}
 )
-
 
 ###############################################################################################
 # All source files needed to compile

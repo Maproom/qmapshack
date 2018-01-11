@@ -30,6 +30,7 @@ set( SRCS
     GeoMath.cpp
     CMainWindow.cpp
     CAbout.cpp
+    CSingleInstanceProxy.cpp
     canvas/CCanvas.cpp
     canvas/IDrawContext.cpp
     canvas/CDrawContextPixel.cpp
@@ -84,6 +85,7 @@ set( HDRS
     GeoMath.h
     CMainWindow.h
     CAbout.h
+    CSingleInstanceProxy.h
     canvas/CCanvas.h
     canvas/IDrawContext.h
     canvas/CDrawContextPixel.h
@@ -224,6 +226,7 @@ add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
+    Qt5::Network
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
 )

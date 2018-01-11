@@ -111,6 +111,22 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Tool/showHelp", actionShowToolHelp->isChecked());
 }
 
+QString CMainWindow::getUser()
+{
+    QString user = getenv("USER");
+    if(user.isEmpty())
+    {
+        user = getenv("USERNAME"); //for windows
+
+        if(user.isEmpty())
+        {
+            user = "QMapTool";
+        }
+    }
+
+    return user;
+}
+
 void CMainWindow::prepareMenuForMac()
 {
     dockTools->toggleViewAction()->setMenuRole(QAction::NoRole);

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef ITOOLGUI_H
+#define ITOOLGUI_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include <QWidget>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class IToolGui : public QWidget
+{
+    Q_OBJECT
+public:
+    IToolGui(QWidget * parent);
+    virtual ~IToolGui() = default;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
 
-#endif //VERSION_H
+protected:
+    virtual void start(CItemListWidget * itemList, bool allFiles);
+    virtual bool finished(qint32 id);
+    virtual void buildCmd(QList<CShellCmd>& cmds, const IItem * iitem) = 0;
+    virtual void buildCmdFinal(QList<CShellCmd>& cmds){}
+
+    QString createTempFile(const QString &ext);
+    qint32 jobId = 0;
+    QList<QTemporaryFile*> tmpFiles;
+};
+
+#endif //ITOOLGUI_H
 

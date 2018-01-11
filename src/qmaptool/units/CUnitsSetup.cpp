@@ -16,18 +16,44 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#include "CMainWindow.h"
+#include "units/CUnitsSetup.h"
+#include "units/IUnit.h"
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+CUnitsSetup::CUnitsSetup(QWidget *parent)
+    : QDialog(parent)
+{
+    setupUi(this);
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+    switch(IUnit::self().type)
+    {
+    case IUnit::eTypeMetric:
+        radioMetric->setChecked(true);
+        break;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+    case IUnit::eTypeImperial:
+        radioImperial->setChecked(true);
+        break;
 
-#endif //VERSION_H
+    case IUnit::eTypeNautic:
+        radioNautic->setChecked(true);
+        break;
+    }
+}
 
+void CUnitsSetup::accept()
+{
+    if(radioMetric->isChecked())
+    {
+        IUnit::setUnitType(IUnit::eTypeMetric, &CMainWindow::self());
+    }
+    else if(radioImperial->isChecked())
+    {
+        IUnit::setUnitType(IUnit::eTypeImperial, &CMainWindow::self());
+    }
+    else if(radioNautic->isChecked())
+    {
+        IUnit::setUnitType(IUnit::eTypeNautic, &CMainWindow::self());
+    }
+    QDialog::accept();
+}

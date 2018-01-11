@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef IOVERLAY_H
+#define IOVERLAY_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include <QWidget>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class QStackedWidget;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+class IOverlay : public QWidget
+{
+    Q_OBJECT
+public:
+    IOverlay(QStackedWidget * parent);
+    virtual ~IOverlay() = default;
 
-#endif //VERSION_H
+    void toFront();
+
+signals:
+    void sigChanged();
+
+protected:
+    QStackedWidget * stackedWidget;
+};
+
+#endif //IOVERLAY_H
 

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CITEMFILE_H
+#define CITEMFILE_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "items/IItem.h"
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CItemFile : public IItem
+{
+public:
+    CItemFile(const QString& filename, QListWidget *parent);
+    virtual ~CItemFile() = default;
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+    void setupChanged() override {}
+};
 
-#endif //VERSION_H
+#endif //CITEMFILE_H
 

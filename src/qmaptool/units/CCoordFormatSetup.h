@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2014-2015 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,22 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#ifndef CCOORDFORMATSETUP_H
+#define CCOORDFORMATSETUP_H
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+#include "ui_ICoordFormatSetup.h"
+#include <QDialog>
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+class CCoordFormatSetup : public QDialog, private Ui::ICoordFormatSetup
+{
+    Q_OBJECT
+public:
+    CCoordFormatSetup(QWidget * parent);
+    virtual ~CCoordFormatSetup();
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+public slots:
+    void accept() override;
+};
 
-#endif //VERSION_H
+#endif //CCOORDFORMATSETUP_H
 

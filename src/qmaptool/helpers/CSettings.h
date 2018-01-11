@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2012 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,19 +15,40 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 **********************************************************************************************/
+#ifndef CSETTINGS_H
+#define CSETTINGS_H
 
-#ifndef VERSION_H
-#define VERSION_H
+#include "setup/CAppOpts.h"
+#include <QtCore>
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+class CSettings : public QObject
+{
+public:
+    CSettings()
+    {
+        if(!qlOpts->configfile.isEmpty())
+        {
+            cfg = new QSettings(qlOpts->configfile, QSettings::IniFormat, this);
+        }
+        else
+        {
+            cfg = new QSettings(this);
+        }
+    }
+    ~CSettings()
+    {
+    }
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+    QSettings& get()
+    {
+        return *cfg;
+    }
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
+private:
+    QSettings  * cfg;
+};
 
-#endif //VERSION_H
-
+#define SETTINGS \
+    CSettings ccfg; \
+    QSettings& cfg = ccfg.get()
+#endif                           //CSETTINGS_H

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,29 @@
 
 **********************************************************************************************/
 
-#ifndef VERSION_H
-#define VERSION_H
+#include "CMainWindow.h"
+#include "tool/CToolBox.h"
 
-#ifndef _MKSTR_1
-#define _MKSTR_1(x)    #x
-#define _MKSTR(x)      _MKSTR_1(x)
-#endif
+CToolBox::CToolBox(QWidget *parent)
+    : QToolBox(parent)
+{
+    connect(this, &CToolBox::currentChanged, this, &CToolBox::slotToolChanged);
+}
 
-#define VER_STR       _MKSTR(VER_MAJOR) "." _MKSTR (VER_MINOR) "." _MKSTR (VER_STEP)
-#define VER_SUFFIX    _MKSTR(VER_TWEAK)
+void CToolBox::setupChanged()
+{
+    const int N = count();
+    for(int n = 0; n < N; n++)
+    {
+        ITool * tool = dynamic_cast<ITool*>(widget(n));
+        if(nullptr != tool)
+        {
+            tool->setupChanged();
+        }
+    }
+}
 
-#define WHAT_STR      _MKSTR(APPLICATION_NAME) ", Version " VER_STR
-
-#endif //VERSION_H
-
+void CToolBox::slotToolChanged(int idx)
+{
+    CMainWindow::self().getCanvas()->slotTriggerCompleteUpdate(CCanvas::eRedrawAll);
+}

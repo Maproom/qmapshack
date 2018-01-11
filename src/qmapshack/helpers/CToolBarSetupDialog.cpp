@@ -104,6 +104,7 @@ void CToolBarSetupDialog::configure() const
     }
     selectActionsWidget->setSelected(selectedItems);
     selectActionsWidget->setAvailable(availableItems);
+    selectActionsWidget->sortAvailable();
     checkFullscreen->setChecked(config->visibleInFullscreen());
 }
 

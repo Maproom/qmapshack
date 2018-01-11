@@ -36,6 +36,11 @@ CSelectDoubleListWidget::~CSelectDoubleListWidget()
 {
 }
 
+void CSelectDoubleListWidget::sortAvailable()
+{
+    listAvailable->sortItems();
+}
+
 void CSelectDoubleListWidget::setAvailable(const QList<QListWidgetItem *> & available)
 {
     this->available.clear();

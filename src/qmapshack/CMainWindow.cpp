@@ -47,6 +47,7 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
+#include "setup/IAppSetup.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -177,10 +178,16 @@ CMainWindow::CMainWindow()
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
+    connect(actionStartQMapTool,         &QAction::triggered,            this,      &CMainWindow::slotStartQMapTool);
     connect(tabWidget,                   &QTabWidget::tabCloseRequested, this,      &CMainWindow::slotTabCloseRequest);
     connect(tabWidget,                   &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabCanvas);
     connect(tabMaps,                     &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabMaps);
     connect(tabDem,                      &QTabWidget::currentChanged,    this,      &CMainWindow::slotCurrentTabDem);
+
+    if(IAppSetup::getPlatformInstance()->findExecutable("qmaptool").isEmpty())
+    {
+        actionStartQMapTool->setVisible(false);
+    }
 
     cfg.beginGroup("Canvas");
     CMapDraw::loadMapPath(cfg);
@@ -345,7 +352,8 @@ CMainWindow::CMainWindow()
                      << actionToggleRte
                      << actionToggleDocks
                      << actionToggleToolBar
-                     << actionFullScreen;
+                     << actionFullScreen
+                     << actionStartQMapTool;
 
     QAction * separator1 = new QAction("---------------",this);
     separator1->setSeparator(true);
@@ -1388,6 +1396,11 @@ void CMainWindow::slotFullScreen()
         displayMode = state;
         displayFullscreen();
     }
+}
+
+void CMainWindow::slotStartQMapTool()
+{
+    QProcess::startDetached("qmaptool");
 }
 
 void CMainWindow::displayRegular()

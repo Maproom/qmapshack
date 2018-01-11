@@ -135,6 +135,7 @@
     <addaction name="actionImportDatabase"/>
     <addaction name="actionVrtBuilder"/>
     <addaction name="actionCreateRoutinoDatabase"/>
+    <addaction name="actionStartQMapTool"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuProject"/>
@@ -847,6 +848,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionStartQMapTool">
+   <property name="icon">
+    <iconset resource="resources.qrc">
+     <normaloff>:/icons/32x32/QMapTool.png</normaloff>:/icons/32x32/QMapTool.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start QMapTool</string>
    </property>
   </action>
  </widget>

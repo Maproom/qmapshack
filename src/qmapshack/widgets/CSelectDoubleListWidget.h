@@ -43,6 +43,8 @@ public:
     const QList<QListWidgetItem *> selected() const;
     void clear();
 
+    void sortAvailable();
+
 private slots:
     void slotSelectedClicked(const QModelIndex & index) const;
     void slotAvailableClicked(const QModelIndex & index) const;

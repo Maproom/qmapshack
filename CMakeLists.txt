@@ -28,6 +28,9 @@ set(QMAPTOOL_VERSION_MAJOR 1)
 set(QMAPTOOL_VERSION_MINOR 0)
 set(QMAPTOOL_VERSION_PATCH 0)
 
+set(RGB2PCT_VERSION_MAJOR 1)
+set(RGB2PCT_VERSION_MINOR 0)
+set(RGB2PCT_VERSION_PATCH 0)
 
 # remove "development" for a release
 set(VERSION_SUFFIX development)
@@ -186,6 +189,7 @@ if (UNIX AND NOT WIN32 AND NOT APPLE)
     install( DIRECTORY    src/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qmaptool.1                        DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+    install( FILES        qmt_rgb2pct.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 
 # this is used by the uninstall target

@@ -8,7 +8,6 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Instruct CMake to run moc automatically when needed.
 set(CMAKE_AUTOMOC ON)
 
-
 ###############################################################################################
 # Setup application name and version tags
 ###############################################################################################
@@ -16,13 +15,12 @@ set(CMAKE_AUTOMOC ON)
 set(APPLICATION_NAME qmt_rgb2pct)
 
 add_definitions(
-    -DVER_MAJOR=${RGB2PTC_VERSION_MAJOR}
-    -DVER_MINOR=${RGB2PTCL_VERSION_MINOR}
-    -DVER_STEP=${RGB2PTC_VERSION_PATCH}
+    -DVER_MAJOR=${RGB2PCT_VERSION_MAJOR}
+    -DVER_MINOR=${RGB2PCT_VERSION_MINOR}
+    -DVER_STEP=${RGB2PCT_VERSION_PATCH}
     -DVER_TWEAK=${VERSION_SUFFIX}
     -DAPPLICATION_NAME=${APPLICATION_NAME}
 )
-
 
 ###############################################################################################
 # All source files needed to compile
@@ -33,17 +31,15 @@ set( SRCS
 )
 
 set( HDRS
+    version.h
     CApp.h
 )
-
-
 
 set( UIS
 )
 
 set( RCS
 )
-
 
 ###############################################################################################
 # Some Qt magic
@@ -101,7 +97,7 @@ endif(APPLE)
 add_executable(${APPLICATION_NAME} WIN32 ${MAININP})
 
 target_link_libraries(${APPLICATION_NAME}
-    Qt5::Widgets
+    Qt5::Core
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}
 )

@@ -57,13 +57,16 @@ include(ConfigureChecks.cmake)
 ###############################################################################################
 
 # Translation related
-option(UPDATE_TRANSLATIONS "Update source translation translations/*.ts files" OFF)
+option(UPDATE_TRANSLATIONS  "Update source translation translations/*.ts files"     OFF)
 
 # Feature related
+option(BUILD_QMAPSHACK      "Build QMapShack Binary"                                ON)
+option(BUILD_QMAPTOOL       "Build QMapTool Binary including command line tools"    ON)
+
 if(WIN32)
-option(USE_QT5DBus "Enable device detection via DBus" OFF)
+option(USE_QT5DBus          "Enable device detection via DBus"                      OFF)
 else(WIN32)
-option(USE_QT5DBus "Enable device detection via DBus" ON)
+option(USE_QT5DBus          "Enable device detection via DBus"                      ON)
 endif(WIN32)
 
 # Compiler related
@@ -154,7 +157,7 @@ if(APPLE)
 endif(APPLE)
 
 
-if(NOT ALGLIB_FOUND)
+if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     set(ALGLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/alglib/src)
     set(ALGLIB_LIBRARIES alg)
     add_subdirectory(3rdparty/alglib)
@@ -176,20 +179,30 @@ configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h)
 ###############################################################################################
 # Now we are ready to compile all sub-projects
 ###############################################################################################
+if(BUILD_QMAPSHACK)
 add_subdirectory(src/qmapshack)
+endif(BUILD_QMAPSHACK)
+
+if(BUILD_QMAPTOOL)
 add_subdirectory(src/qmaptool)
 add_subdirectory(src/qmt_rgb2pct)
+endif(BUILD_QMAPTOOL)
 
 ###############################################################################################
 # Copy a few more files need by the install/unistall target
 ###############################################################################################
 if (UNIX AND NOT WIN32 AND NOT APPLE)
-    install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
-    install( FILES        src/icons/48x48/QMapTool.png      DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
+if(BUILD_QMAPSHACK)
+    install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )    
     install( DIRECTORY    src/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+endif(BUILD_QMAPSHACK)
+
+if(BUILD_QMAPTOOL)
+    install( FILES        src/icons/48x48/QMapTool.png      DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
     install( FILES        qmaptool.1                        DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qmt_rgb2pct.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
+endif(BUILD_QMAPTOOL)
 endif (UNIX AND NOT WIN32 AND NOT APPLE)
 
 # this is used by the uninstall target

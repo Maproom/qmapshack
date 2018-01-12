@@ -39,22 +39,11 @@ public:
     ILineOp(SGisLine &points, CGisDraw * gis, CCanvas * canvas, IMouseEditLine * parent);
     virtual ~ILineOp();
 
-    virtual void mousePressEvent(QMouseEvent * e);
-    virtual void mouseMoveEvent(QMouseEvent * e);
-    virtual void mouseReleaseEvent(QMouseEvent *e);
-
-    virtual void mousePressEventEx(QMouseEvent * e) = 0;
-    virtual void mouseMoveEventEx(QMouseEvent * e) = 0;
-    virtual void mouseReleaseEventEx(QMouseEvent *e) = 0;
-
-    virtual void wheelEvent(QWheelEvent*);
-
-    virtual void keyPressEvent(QKeyEvent*)
-    {
-    }
-
-    virtual void pinchGestureEvent(QPinchGesture *e);
-    virtual void afterMouseLostEvent(QMouseEvent *e);
+    virtual void leftClick(const QPoint& pos) = 0;
+    virtual void mouseMove(const QPoint& pos);
+    virtual void leftButtonDown(const QPoint& pos);
+    virtual void rightButtonDown(const QPoint& pos);
+    virtual void scaleChanged();
 
     virtual void drawFg(QPainter& p) = 0;
     virtual void drawBg(QPainter& p);
@@ -95,7 +84,7 @@ protected:
     void drawLeadLine(const QPolygonF& line, QPainter& p) const;
     void updateLeadLines(qint32 idx);
 
-    void startMouseMove(const QPointF &pos);
+    void startMouseMove(const QPointF &point);
 
     IMouseEditLine * parentHandler;
     SGisLine& points;

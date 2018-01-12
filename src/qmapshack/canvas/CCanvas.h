@@ -38,6 +38,7 @@ class CGisItemTrk;
 class CGisItemRte;
 class CGisItemOvlArea;
 class CColorLegend;
+class CMouseAdapter;
 class QSettings;
 class QPointF;
 class IMouse;
@@ -107,6 +108,7 @@ public:
 
     static void triggerCompleteUpdate(CCanvas::redraw_e flags);
 
+    CMouseAdapter * getMouse() { return mouseBase; }
 
     void resetMouse();
     void mouseTrackingLost();
@@ -195,7 +197,6 @@ private:
     void setDrawContextSize(const QSize& s);
     void setMouseCursor(IMouse& mouse, const QString& src);
 
-
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
     CMapDraw * map;                     //< the map object attached to this canvas
@@ -206,6 +207,7 @@ private:
     /// the current point of focus (usually the canvas center)
     QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};
 
+    CMouseAdapter * mouseBase;
     /// the current mouse handler
     IMouse * mouse;
 

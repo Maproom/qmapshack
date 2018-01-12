@@ -32,8 +32,6 @@ public:
     CMouseEditArea(CGisItemOvlArea &area, CGisDraw * gis, CCanvas * parent);
     virtual ~CMouseEditArea();
 
-    void mousePressEvent(QMouseEvent * e) override;
-
 protected slots:
     void slotAbort()      override;
     void slotCopyToNew()  override;

@@ -38,11 +38,9 @@ void CMouseWptBubble::draw(QPainter&, CCanvas::redraw_e, const QRect&)
 {
 }
 
-void CMouseWptBubble::mousePressEvent(QMouseEvent * e)
+void CMouseWptBubble::leftClicked(const QPoint &pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
-
-    QPointF pos = e->pos();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
@@ -55,11 +53,24 @@ void CMouseWptBubble::mousePressEvent(QMouseEvent * e)
     }
 }
 
-void CMouseWptBubble::mouseMoveEvent(QMouseEvent * e)
+void CMouseWptBubble::leftButtonDown(const QPoint& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
-    QPointF pos = e->pos();
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
+    if(wpt)
+    {
+        wpt->mousePress(pos);
+    }
+    else
+    {
+        canvas->resetMouse();
+    }
+}
+
+void CMouseWptBubble::mouseMoved(const QPoint &pos)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
@@ -72,11 +83,14 @@ void CMouseWptBubble::mouseMoveEvent(QMouseEvent * e)
     }
 }
 
-void CMouseWptBubble::mouseReleaseEvent(QMouseEvent *e)
+void CMouseWptBubble::mouseDraged(const QPoint& start, const QPoint &last, const QPoint&end)
+{
+    mouseMoved(end);
+}
+
+void CMouseWptBubble::dragFinished(const QPoint& pos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
-
-    QPointF pos = e->pos();
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)

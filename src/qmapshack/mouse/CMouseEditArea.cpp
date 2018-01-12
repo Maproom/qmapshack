@@ -43,12 +43,6 @@ CMouseEditArea::~CMouseEditArea()
     canvas->reportStatus(key.item, "");
 }
 
-void CMouseEditArea::mousePressEvent(QMouseEvent * e)
-{
-    canvas->reportStatus(key.item, "");
-    IMouseEditLine::mousePressEvent(e);
-}
-
 void CMouseEditArea::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
 {
     p.setPen(QPen(color, width, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));

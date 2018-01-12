@@ -36,12 +36,12 @@ public:
     virtual ~CMouseRangeTrk();
 
     void draw(QPainter& p, CCanvas::redraw_e, const QRect &) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent *e) override;
-    void keyPressEvent(QKeyEvent *e) override;
-    void afterMouseLostEvent(QMouseEvent *e) override;
+
+    void leftClicked(const QPoint& point) override;
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void mouseMoved(const QPoint& pos) override;
+    void leftButtonDown(const QPoint& pos) override;
+    void scaleChanged() override;
 
 private slots:
     void slotHidePoints();
@@ -60,13 +60,9 @@ private:
         ,eStateRangeSelected
     };
 
-    bool mapMove    = false;
     bool mapDidMove = false;
     state_e state   = eStateIdle;
     QPointF anchor  = NOPOINTF;
-
-    QPoint lastPoint;
-    QPoint firstPoint;
 
     QPointer<CScrOptRangeTrk> scrOptRange;
 };

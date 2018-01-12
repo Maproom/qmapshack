@@ -35,23 +35,20 @@ public:
     virtual ~CMouseRadiusWpt();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent *e) override;
-    void afterMouseLostEvent(QMouseEvent *e) override;
+
+    void leftClicked(const QPoint& point) override;
+    void mouseMoved(const QPoint &pos) override;
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void rightButtonDown(const QPoint& point) override;
+    void scaleChanged() override;
 
 private:
     const IGisItem::key_t key;
     const QPointF wptPosition;
     const bool avoid;
-    bool start;
+    bool initial;
+    QPointF startPos;
     qreal dist;
-
-    bool mapMove    = false;
-    bool mapDidMove   = false;
-
-    QPoint lastPoint;
 };
 
 #endif //CMOUSERADIUSWPT_H

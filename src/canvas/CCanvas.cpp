@@ -38,6 +38,7 @@
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/CMousePrint.h"
 #include "mouse/CMouseRadiusWpt.h"
 #include "mouse/CMouseRangeTrk.h"
@@ -81,6 +82,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
     gis     = new CGisDraw(this);
+    mouseBase = new CMouseAdapter(this);
     mouse   = new CMouseNormal(gis, this);
 
     connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
@@ -140,7 +142,7 @@ CCanvas::~CCanvas()
         So they are better deleted now explicitly before any other object
         in CCanvas is destroyed.
      */
-    delete mouse;
+    delete mouseBase;
     saveSizeTrackProfile();
 }
 
@@ -201,7 +203,6 @@ void CCanvas::loadConfig(QSettings& cfg)
 
 void CCanvas::resetMouse()
 {
-    mouse->deleteLater();
     mouse = new CMouseNormal(gis, this);
     if(underMouse())
     {
@@ -229,84 +230,72 @@ void CCanvas::setMouseCursor(IMouse& mouse, const QString& src)
 
 void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 {
-    mouse->deleteLater();
     mouse = new CMouseMoveWpt(wpt, gis, this);
     setMouseCursor(*mouse, "setMouseMoveWpt");
 }
 
 void CCanvas::setMouseRadiusWpt(CGisItemWpt& wpt)
 {
-    mouse->deleteLater();
     mouse = new CMouseRadiusWpt(wpt, gis, this);
     setMouseCursor(*mouse, "setMouseWptRadius");
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditTrk(pt, gis, this);
     setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseEditRte(const QPointF &pt)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditRte(pt, gis, this);
     setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditTrk(trk, gis, this);
     setMouseCursor(*mouse, "setMouseEditTrk");
 }
 
 void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
 {
-    mouse->deleteLater();
     mouse = new CMouseRangeTrk(trk, gis, this);
     setMouseCursor(*mouse, "setMouseRangeTrk");
 }
 
 void CCanvas::setMouseEditArea(const QPointF& pt)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditArea(pt, gis, this);
     setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditArea(area, gis, this);
     setMouseCursor(*mouse, "setMouseEditArea");
 }
 
 void CCanvas::setMouseEditRte(CGisItemRte& rte)
 {
-    mouse->deleteLater();
     mouse = new CMouseEditRte(rte, gis, this);
     setMouseCursor(*mouse, "setMouseEditRte");
 }
 
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
-    mouse->deleteLater();
     mouse = new CMouseWptBubble(key, gis, this);
     setMouseCursor(*mouse, "setMouseWptBubble");
 }
 
 void CCanvas::setMousePrint()
 {
-    mouse->deleteLater();
     mouse = new CMousePrint(gis, this);
     setMouseCursor(*mouse, "setMousePrint");
 }
 
 void CCanvas::setMouseSelect()
 {
-    mouse->deleteLater();
     mouse = new CMouseSelect(gis, this);
     setMouseCursor(*mouse, "setMouseSelect");
 }
@@ -416,7 +405,7 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
         return;
     }
 
-    mouse->mousePressEvent(e);
+    mouseBase->mousePressEvent(e);
     QWidget::mousePressEvent(e);
     e->accept();
 
@@ -431,27 +420,27 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
     qreal slope = dem->getSlopeAt(pos);
     emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
 
-    mouse->mouseMoveEvent(e);
+    mouseBase->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
     e->accept();
 }
 
 void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 {
-    mouse->mouseReleaseEvent(e);
+    mouseBase->mouseReleaseEvent(e);
     QWidget::mouseReleaseEvent(e);
     e->accept();
 }
 
 void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
 {
-    mouse->mouseDoubleClickEvent(e);
+    mouseBase->mouseDoubleClickEvent(e);
     QWidget::mouseDoubleClickEvent(e);
 }
 
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
-    mouse->wheelEvent(e);
+    mouseBase->wheelEvent(e);
 
     // angleDelta() returns the eighths of a degree
     // of the mousewheel
@@ -485,7 +474,7 @@ void CCanvas::enterEvent(QEvent * e)
     Q_UNUSED(e);
     CCanvas::setOverrideCursor(*mouse, "enterEvent");
 
-    mouse->setMouseTracking(true);
+    setMouseTracking(true);
 }
 
 
@@ -497,7 +486,7 @@ void CCanvas::leaveEvent(QEvent *)
         CCanvas::restoreOverrideCursor("leaveEvent");
     }
 
-    mouse->setMouseTracking(false);
+    setMouseTracking(false);
 }
 
 void CCanvas::keyPressEvent(QKeyEvent * e)
@@ -552,7 +541,7 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     if(doUpdate)
     {
-        mouse->keyPressEvent(e);
+        mouseBase->keyPressEvent(e);
         e->accept();
         update();
     }
@@ -1025,7 +1014,7 @@ bool CCanvas::event(QEvent *event)
         {
             // notify IMouse that the upcomming QMouseEvent needs special treatment
             // as some mouse-events may have been lost
-            mouse->afterMouseLostEvent(me);
+            mouseBase->afterMouseLostEvent(me);
             mouseLost = false;
         }
     }
@@ -1065,7 +1054,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             }
         }
         mouseLost = true;
-        mouse->pinchGestureEvent(pinch);
+        mouseBase->pinchGestureEvent(pinch);
     }
     return true;
 }

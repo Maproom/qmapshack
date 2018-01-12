@@ -27,11 +27,9 @@ public:
     CLineOpAddPoint(SGisLine& points, CGisDraw *gis, CCanvas *canvas, IMouseEditLine *parent);
     virtual ~CLineOpAddPoint();
 
-    void mousePressEventEx(QMouseEvent *e) override
-    {
-    }
-    void mouseMoveEventEx(QMouseEvent *e) override;
-    void mouseReleaseEventEx(QMouseEvent *e) override;
+    void leftClick(const QPoint& pos) override;
+    void mouseMove(const QPoint& pos) override;
+    void rightButtonDown(const QPoint &pos) override;
 
     void drawFg(QPainter& p) override;
 

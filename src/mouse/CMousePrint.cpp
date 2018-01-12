@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/CMousePrint.h"
 #include "mouse/CScrOptPrint.h"
 #include "print/CPrintDialog.h"

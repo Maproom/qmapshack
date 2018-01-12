@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDraw.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/IMouseSelect.h"
 #include "mouse/IScrOpt.h"
 
@@ -120,59 +121,41 @@ void IMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
     placeScrOpt();
 }
 
-void IMouseSelect::mousePressEvent(QMouseEvent * e)
+void IMouseSelect::leftButtonDown(const QPoint& point)
 {
-    e->accept();
-
     canvas->reportStatus("IMouseSelect", "");
-
-    if(e->button() == Qt::RightButton)
-    {
-        canvas->resetMouse();
-        canvas->update();
-    }
-    else if(e->button() == Qt::LeftButton)
-    {
-        switch(state)
-        {
-        case eStateIdle:
-        {
-            QPointF pos = e->pos();
-            gis->convertPx2Rad(pos);
-            rectSelection.setTopLeft(pos);
-            rectSelection.setBottomRight(pos);
-            posInitial = pos;
-            state = eStateInitial;
-            break;
-        }
-
-        case eStateMap:
-        {
-            if(corner != eCornerNone)
-            {
-                state = eStateResize;
-            }
-            else
-            {
-                lastPos = e->pos();
-                state = eStateMapMoving;
-            }
-            break;
-        }
-        }
-    }
+    canvas->update();
 }
 
-
-void IMouseSelect::mouseMoveEvent(QMouseEvent * e)
+void IMouseSelect::mouseDraged(const QPoint& start, const QPoint& last, const QPoint &end)
 {
-    e->accept();
-
     switch(state)
     {
+    case eStateIdle:
+    {
+        QPointF pos(start);
+        gis->convertPx2Rad(pos);
+        rectSelection.setTopLeft(pos);
+        rectSelection.setBottomRight(pos);
+        posInitial = pos;
+        state = eStateInitial;
+        break;
+    }
+    case eStateMap:
+    {
+        if(corner != eCornerNone)
+        {
+            state = eStateResize;
+        }
+        else
+        {
+            state = eStateMapMoving;
+        }
+        break;
+    }
     case eStateInitial:
     {
-        QPointF pos = e->pos();
+        QPointF pos(end);
         gis->convertPx2Rad(pos);
 
         if(pos.x() < posInitial.x())
@@ -196,11 +179,51 @@ void IMouseSelect::mouseMoveEvent(QMouseEvent * e)
         canvas->update();
         break;
     }
+    case eStateResize:
+    {
+        QPointF pos = end - offset;
+        gis->convertPx2Rad(pos);
+        switch(corner)
+        {
+        case eCornerTopLeft:
+            rectSelection.setTopLeft(pos);
+            break;
 
+        case eCornerTopRight:
+            rectSelection.setTopRight(pos);
+            break;
+
+        case eCornerBottomLeft:
+            rectSelection.setBottomLeft(pos);
+            break;
+
+        case eCornerBottomRight:
+            rectSelection.setBottomRight(pos);
+            break;
+        }
+
+        canvas->update();
+        break;
+    }
+    case eStateMapMoving:
+    {
+        IMouse::mouseDraged(start, last, end);
+        break;
+    }
+    default:
+    {
+        Q_ASSERT(true);
+    }
+    }
+}
+
+void IMouseSelect::mouseMoved(const QPoint &pos)
+{
+    switch(state)
+    {
     case eStateMap:
     {
         corner_e _corner = corner;
-        QPoint pos = e->pos();
         if(rectTopLeft.contains(pos))
         {
             offset = pos - rectTopLeft.topLeft();
@@ -232,53 +255,11 @@ void IMouseSelect::mouseMoveEvent(QMouseEvent * e)
         }
         break;
     }
-
-    case eStateMapMoving:
-    {
-        QPoint pos = e->pos();
-
-        if(pos != lastPos)
-        {
-            QPoint delta = pos - lastPos;
-            canvas->moveMap(delta);
-            lastPos     = pos;
-        }
-        break;
-    }
-
-    case eStateResize:
-    {
-        QPointF pos = e->pos() - offset;
-        gis->convertPx2Rad(pos);
-        switch(corner)
-        {
-        case eCornerTopLeft:
-            rectSelection.setTopLeft(pos);
-            break;
-
-        case eCornerTopRight:
-            rectSelection.setTopRight(pos);
-            break;
-
-        case eCornerBottomLeft:
-            rectSelection.setBottomLeft(pos);
-            break;
-
-        case eCornerBottomRight:
-            rectSelection.setBottomRight(pos);
-            break;
-        }
-
-        canvas->update();
-        break;
-    }
     }
 }
 
-void IMouseSelect::mouseReleaseEvent(QMouseEvent *e)
+void IMouseSelect::dragFinished(const QPoint& pos)
 {
-    e->accept();
-
     if(!rectSelection.isNull())
     {
         QPointF pt1 = rectSelection.topLeft();

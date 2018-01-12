@@ -34,47 +34,49 @@ CLineOpMovePoint::~CLineOpMovePoint()
 {
 }
 
-void CLineOpMovePoint::mouseReleaseEventEx(QMouseEvent * e)
+void CLineOpMovePoint::leftClick(const QPoint &pos)
 {
-    if(e->button() == Qt::LeftButton)
+    if(movePoint)
     {
-        if(movePoint)
-        {
-            // update subpoints by triggering the routing, if any.
-            slotTimeoutRouting();
-            // terminate moving the point
-            movePoint = false;
-            // store new state of line to undo/redo history
-            parentHandler->storeToHistory(points);
-        }
-        else if(idxFocus != NOIDX)
-        {
-            QPointF coord = e->pos();
-            gis->convertPx2Rad(coord);
-
-            // start moving the point
-            IGisLine::point_t& pt = points[idxFocus];
-            pt.coord = coord;
-            // clear the subpoints from this point to the next
-            pt.subpts.clear();
-
-
-            // clear the subpoints from the previous point to this point
-            if(idxFocus != 0)
-            {
-                points[idxFocus - 1].subpts.clear();
-            }
-
-            movePoint = true;
-        }
+        // update subpoints by triggering the routing, if any.
+        slotTimeoutRouting();
+        // terminate moving the point
+        movePoint = false;
+        // store new state of line to undo/redo history
+        parentHandler->storeToHistory(points);
     }
-    else if(e->button() == Qt::RightButton)
+    else if(idxFocus != NOIDX)
     {
-        abortStep();
+        QPointF coord = pos;
+        gis->convertPx2Rad(coord);
+
+        // start moving the point
+        IGisLine::point_t& pt = points[idxFocus];
+        pt.coord = coord;
+        // clear the subpoints from this point to the next
+        pt.subpts.clear();
+
+
+        // clear the subpoints from the previous point to this point
+        if(idxFocus != 0)
+        {
+            points[idxFocus - 1].subpts.clear();
+        }
+
+        movePoint = true;
     }
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
+
+//TODO right button
+//    else if(e->button() == Qt::RightButton)
+//    {
+//        abortStep();
+//    }
+
+//    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+
 
 bool CLineOpMovePoint::abortStep()
 {
@@ -94,11 +96,13 @@ bool CLineOpMovePoint::abortStep()
     return false;
 }
 
-void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
+void CLineOpMovePoint::mouseMove(const QPoint &pos)
 {
+    ILineOp::mouseMove(pos);
+
     if(movePoint)
     {
-        QPointF coord = e->pos();
+        QPointF coord = pos;
         gis->convertPx2Rad(coord);
 
         IGisLine::point_t& pt = points[idxFocus];
@@ -120,7 +124,7 @@ void CLineOpMovePoint::mouseMoveEventEx(QMouseEvent * e)
     else
     {
         // no point selected yet, find point to highlight
-        idxFocus = isCloseTo(e->pos());
+        idxFocus = isCloseTo(pos);
     }
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }

@@ -276,6 +276,7 @@ set( SRCS
     map/garmin/CGarminTyp.cpp
     map/garmin/IGarminStrTbl.cpp
     map/mapsforge/types.cpp
+    mouse/CMouseAdapter.cpp
     mouse/CMouseDummy.cpp
     mouse/CMouseEditArea.cpp
     mouse/CMouseEditRte.cpp
@@ -576,6 +577,7 @@ set( HDRS
         map/garmin/Garmin.h
         map/garmin/IGarminStrTbl.h
         map/mapsforge/types.h
+        mouse/CMouseAdapter.h
         mouse/CMouseDummy.h
         mouse/CMouseEditArea.h
         mouse/CMouseEditRte.h

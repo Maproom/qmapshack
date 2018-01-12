@@ -479,7 +479,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
         <source>Arrival: </source>
-        <translation type="unfinished"></translation>
+        <translation>Llegada: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
@@ -499,7 +499,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
         <source>Time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo: </translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="631"/>
@@ -1413,7 +1413,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="330"/>
         <source>Created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Creado: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="391"/>
@@ -1732,7 +1732,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta Inversa</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="195"/>
@@ -3548,7 +3548,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>La proyección de Lat / Lon no está permitida en este caso.</translation>
     </message>
 </context>
 <context>
@@ -3810,17 +3810,17 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
         <source>BRouter (Version %1.%2.%3):</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Version %1.%2.%3):</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="714"/>
         <source>Error:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="720"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack se comunica con BRouter a través de una conexión de red. Por lo general, esto se hace en una dirección especial que no se puede alcanzar desde fuera de su dispositivo. Sin embargo, BRouter escucha las conexiones en todas las interfaces disponibles. Si se encuentra en su propia red privada con un firewall activo, esto no es un problema. Si se encuentra en una red pública, cada puerto abierto es un riesgo, ya que puede ser utilizado por otra persona para comprometer su sistema. No recomendamos utilizar el servicio local BRouter en este caso. Si ve esta advertencia y utiliza la versión de BRouter &gt;= 1.4.10 puede aplicar el enlace a la dirección local estableciendo el nombre de host en &quot;localhost&quot; y probar &quot;Nombre host solamente&quot; en la cofiguración en modo experto</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="331"/>
@@ -3848,7 +3848,7 @@ no es una definición de sistema de coordenadas válido:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="317"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="453"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta versión de BRouter no soporta más de un área</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="499"/>
@@ -7899,12 +7899,12 @@ Consejos:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
-        <translation type="unfinished"></translation>
+        <translation>Las vistas generales le permitirán mostrar el mapa para una mayor gama de zoom's.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
         <source>Create overviews for result.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Crear</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
@@ -8310,7 +8310,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="219"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechazar</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="241"/>
@@ -8516,7 +8516,7 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
         <source>Bind to hostname only</source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace al nombre de host solamente</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
@@ -9021,7 +9021,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Ruta Inversa</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="159"/>

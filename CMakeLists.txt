@@ -161,7 +161,7 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     set(ALGLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/alglib/src)
     set(ALGLIB_LIBRARIES alg)
     add_subdirectory(3rdparty/alglib)
-endif(NOT ALGLIB_FOUND)
+endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
 
 ###############################################################################################
 # Create global config.h

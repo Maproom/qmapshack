@@ -24,6 +24,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/line/CLineOpAddPoint.h"
 #include "mouse/line/CLineOpDeletePoint.h"
 #include "mouse/line/CLineOpMovePoint.h"
@@ -249,51 +250,35 @@ void IMouseEditLine::startNewLine(const QPointF& point)
     canvas->reportStatus(key.item, tr("<b>New Line</b><br/>Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.<br/>") + docPanning);
 }
 
-void IMouseEditLine::mousePressEvent(QMouseEvent * e)
+void IMouseEditLine::leftButtonDown(const QPoint& pos)
 {
-    point  = e->pos();
-    lineOp->mousePressEvent(e);
+    canvas->reportStatus(key.item, "");
+    lineOp->leftButtonDown(pos);
 }
 
-void IMouseEditLine::mouseMoveEvent(QMouseEvent * e)
+void IMouseEditLine::rightButtonDown(const QPoint& pos)
 {
-    point  = e->pos();
+    canvas->reportStatus(key.item, "");
+    lineOp->rightButtonDown(pos);
+}
 
-    lineOp->mouseMoveEvent(e);
+void IMouseEditLine::mouseMoved(const QPoint &pos)
+{
+    lineOp->mouseMove(pos);
 
-    canvas->displayInfo(point);
+    canvas->displayInfo(pos);
     canvas->update();
 }
 
-void IMouseEditLine::mouseReleaseEvent(QMouseEvent *e)
+void IMouseEditLine::leftClicked(const QPoint& pos)
 {
-    point  = e->pos();
-    lineOp->mouseReleaseEvent(e);
+    lineOp->leftClick(pos);
 }
 
-void IMouseEditLine::wheelEvent(QWheelEvent * e)
+void IMouseEditLine::scaleChanged()
 {
-    canvas->update();
-    lineOp->wheelEvent(e);
+    lineOp->scaleChanged();
 }
-
-void IMouseEditLine::keyPressEvent(QKeyEvent * e)
-{
-    canvas->update();
-    lineOp->keyPressEvent(e);
-}
-
-void IMouseEditLine::pinchGestureEvent(QPinchGesture *e)
-{
-    lineOp->pinchGestureEvent(e);
-}
-
-void IMouseEditLine::afterMouseLostEvent(QMouseEvent *e)
-{
-    point = e->pos();
-    lineOp->afterMouseLostEvent(e);
-}
-
 
 void IMouseEditLine::slotDeletePoint()
 {

@@ -111,9 +111,9 @@ void CScrOptUnclutter::clear()
     items.clear();
 }
 
-void CScrOptUnclutter::mouseMoveEvent(QMouseEvent * e)
+void CScrOptUnclutter::mouseMove(const QPoint& pos)
 {
-    IScrOpt::mouseMoveEvent(e);
+    IScrOpt::mouseMove(pos);
 
     for(const item_t &item : items)
     {

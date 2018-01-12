@@ -24,8 +24,6 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptSelect.h"
 
-class IMouse;
-
 class CScrOptSelect : public IScrOpt, public Ui::IScrOptSelect
 {
     Q_OBJECT

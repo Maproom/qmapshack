@@ -19,6 +19,7 @@
 #include "canvas/CCanvas.h"
 #include "helpers/CSettings.h"
 #include "mouse/CScrOptSelect.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/IMouse.h"
 
 #include <QtWidgets>

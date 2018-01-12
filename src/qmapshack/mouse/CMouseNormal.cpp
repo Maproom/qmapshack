@@ -25,6 +25,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "mouse/CMouseNormal.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/CScrOptUnclutter.h"
 #include "widgets/CFadingIcon.h"
 
@@ -66,171 +67,147 @@ void CMouseNormal::stopTracking() const
     }
 }
 
-void CMouseNormal::mousePressEvent(QMouseEvent * e)
+void CMouseNormal::rightButtonDown(const QPoint& point)
 {
-    point = e->pos();
+    QPoint p = canvas->mapToGlobal(point);
 
-    if(e->button() == Qt::LeftButton)
-    {
-        lastPos     = e->pos();
-        firstPos    = lastPos;
-        // start to block map moving when a previous click
-        // has triggered a selection of any kind
-        mapMove     = (stateItemSel < eStateNoMapMovePossible);
-        mapDidMove  = false;
-    }
-    else if(e->button() == Qt::RightButton)
-    {
-        QPoint p = canvas->mapToGlobal(point);
-
-        actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
-        menu->exec(p);
-    }
+    actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
+    menu->exec(p);
 }
 
-void CMouseNormal::mouseMoveEvent(QMouseEvent * e)
+void CMouseNormal::mouseMoved(const QPoint& point)
 {
-    screenUnclutter->mouseMoveEvent(e);
+    screenUnclutter->mouseMove(point);
     if(!screenItemOption.isNull())
     {
-        screenItemOption->mouseMoveEvent(e);
+        screenItemOption->mouseMove(point);
     }
 
-    point = e->pos();
-
-    if(mapMove)
+    switch(stateItemSel)
     {
-        if((point - firstPos).manhattanLength() >= 4)
+    case eStateIdle:
+        CGisWorkspace::self().mouseMove(point);
+
+    //break; skip break intentionally
+    case eStateHooverSingle:
+    case eStateHooverMultiple:
+    {
+        const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
+        if(!keyTrk.item.isEmpty())
         {
-            QPoint delta = point - lastPos;
-            canvas->moveMap(delta);
-            lastPos    = point;
-            mapDidMove = true;
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrk));
+            if(trk != nullptr)
+            {
+                trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
+            }
         }
+
+        const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
+        if(!keyRte.item.isEmpty())
+        {
+            CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(keyRte));
+            if(rte != nullptr)
+            {
+                rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
+            }
+        }
+        break;
+    }
+
+    default:
+        ;
+    }
+
+    curPOI = canvas->findPOICloseBy(point);
+
+    canvas->displayInfo(point);
+    canvas->update();
+}
+
+void CMouseNormal::mouseDraged(const QPoint& start, const QPoint& last, const QPoint &end)
+{
+    // start to block map moving when a previous click
+    // has triggered a selection of any kind
+    if (stateItemSel < eStateNoMapMovePossible)
+    {
+        IMouse::mouseDraged(start,last,end);
     }
     else
     {
-        switch(stateItemSel)
-        {
-        case eStateIdle:
-            CGisWorkspace::self().mouseMove(point);
-
-        //break; skip break intentionally
-        case eStateHooverSingle:
-        case eStateHooverMultiple:
-        {
-            const IGisItem::key_t& keyTrk = CGisItemTrk::getKeyUserFocus();
-            if(!keyTrk.item.isEmpty())
-            {
-                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(keyTrk));
-                if(trk != nullptr)
-                {
-                    trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseMove, "CMouseNormal");
-                }
-            }
-
-            const IGisItem::key_t& keyRte = CGisItemRte::getKeyUserFocus();
-            if(!keyRte.item.isEmpty())
-            {
-                CGisItemRte * rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(keyRte));
-                if(rte != nullptr)
-                {
-                    rte->setMouseFocusByPoint(point, CGisItemRte::eFocusMouseMove, "CMouseNormal");
-                }
-            }
-            break;
-        }
-
-        default:
-            ;
-        }
-
-        curPOI = canvas->findPOICloseBy(point);
-
-        canvas->displayInfo(point);
-        canvas->update();
+        mouseMoved(end);
     }
 }
 
-void CMouseNormal::mouseReleaseEvent(QMouseEvent *e)
+void CMouseNormal::leftClicked(const QPoint& point)
 {
-    point = e->pos();
-    if(e->button() == Qt::LeftButton)
+    switch(stateItemSel)
     {
-        if(!mapDidMove)
-        {
-            switch(stateItemSel)
-            {
-            case eStateIdle:
-            {
-                CGisWorkspace::self().slotWksItemSelectionReset();
-                break;
-            }
-
-            case eStateHooverSingle:
-            {
-                stateItemSel = eStateIdle;
-
-                IGisItem * item = CGisWorkspace::self().getItemByKey(screenUnclutter->getItemKey());
-                if(nullptr != item)
-                {
-                    scrollToItem(item);
-                    if(setScreenOption(point, item))
-                    {
-                        stateItemSel = eStateShowItemOptions;
-                    }
-                    stopTracking();
-                }
-                break;
-            }
-
-            case eStateHooverMultiple:
-            {
-                screenUnclutter->setOrigin(e->pos());
-                stateItemSel = eStateUnclutterMultiple;
-                stopTracking();
-                break;
-            }
-
-            case eStateUnclutterMultiple:
-            {
-                const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
-                if(scrOpt != nullptr)
-                {
-                    IGisItem * item = CGisWorkspace::self().getItemByKey(scrOpt->key);
-                    screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
-                    scrOpt = nullptr;
-                    if(item)
-                    {
-                        scrollToItem(item);
-                        if(setScreenOption(screenUnclutter->getOrigin(), item))
-                        {
-                            stateItemSel = eStateShowItemOptions;
-                            break;
-                        }
-                    }
-                }
-                resetState();
-                CGisWorkspace::self().slotWksItemSelectionReset();
-                break;
-            }
-
-            case eStateShowItemOptions:
-            {
-                resetState();
-                CGisWorkspace::self().slotWksItemSelectionReset();
-                break;
-            }
-            }
-
-            canvas->update();
-        }
-        mapMove     = false;
-        mapDidMove  = false;
+    case eStateIdle:
+    {
+        CGisWorkspace::self().slotWksItemSelectionReset();
+        break;
     }
+
+    case eStateHooverSingle:
+    {
+        stateItemSel = eStateIdle;
+
+        IGisItem * item = CGisWorkspace::self().getItemByKey(screenUnclutter->getItemKey());
+        if(nullptr != item)
+        {
+            scrollToItem(item);
+            if(setScreenOption(point, item))
+            {
+                stateItemSel = eStateShowItemOptions;
+            }
+            stopTracking();
+        }
+        break;
+    }
+
+    case eStateHooverMultiple:
+    {
+        screenUnclutter->setOrigin(point);
+        stateItemSel = eStateUnclutterMultiple;
+        stopTracking();
+        break;
+    }
+
+    case eStateUnclutterMultiple:
+    {
+        const CScrOptUnclutter::item_t * scrOpt = screenUnclutter->selectItem(point);
+        if(scrOpt != nullptr)
+        {
+            IGisItem * item = CGisWorkspace::self().getItemByKey(scrOpt->key);
+            screenUnclutter->clear(); // CAUTION!! this will delete the object scrOpt is pointing to.
+            scrOpt = nullptr;
+            if(item)
+            {
+                scrollToItem(item);
+                if(setScreenOption(screenUnclutter->getOrigin(), item))
+                {
+                    stateItemSel = eStateShowItemOptions;
+                    break;
+                }
+            }
+        }
+        resetState();
+        CGisWorkspace::self().slotWksItemSelectionReset();
+        break;
+    }
+
+    case eStateShowItemOptions:
+    {
+        resetState();
+        CGisWorkspace::self().slotWksItemSelectionReset();
+        break;
+    }
+    }
+
+    canvas->update();
 }
 
-void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
+void CMouseNormal::doubleClicked(const QPoint & point)
 {
     if(stateItemSel == eStateIdle)
     {
@@ -242,27 +219,9 @@ void CMouseNormal::mouseDoubleClickEvent(QMouseEvent *e)
     }
 }
 
-void CMouseNormal::wheelEvent(QWheelEvent * e)
+void CMouseNormal::scaleChanged()
 {
     resetState();
-}
-
-void CMouseNormal::keyPressEvent(QKeyEvent * e)
-{
-    resetState();
-}
-
-void CMouseNormal::afterMouseLostEvent(QMouseEvent *e)
-{
-    resetState();
-
-    if (e->type() == QEvent::MouseMove)
-    {
-        lastPos    = e->pos();
-        firstPos   = lastPos;
-    }
-    mapMove = e->buttons() & Qt::LeftButton;
-    mapDidMove = true;
 }
 
 void CMouseNormal::resetState()
@@ -342,7 +301,7 @@ void CMouseNormal::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect 
         screenUnclutter->clear();
 
         QList<IGisItem*> items;
-        CGisWorkspace::self().getItemsByPos(point, items);
+        CGisWorkspace::self().getItemsByPos(mouse->getPoint(), items);
 
         if(items.empty() || items.size() > 8)
         {
@@ -399,7 +358,7 @@ void CMouseNormal::slotAddPoi() const
 
 void CMouseNormal::slotAddWpt() const
 {
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
     pt *= RAD_TO_DEG;
 
@@ -409,7 +368,7 @@ void CMouseNormal::slotAddWpt() const
 
 void CMouseNormal::slotAddTrk() const
 {
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
     canvas->setMouseEditTrk(pt);
@@ -418,7 +377,7 @@ void CMouseNormal::slotAddTrk() const
 
 void CMouseNormal::slotAddRte() const
 {
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
     canvas->setMouseEditRte(pt);
@@ -427,7 +386,7 @@ void CMouseNormal::slotAddRte() const
 
 void CMouseNormal::slotAddArea() const
 {
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
     canvas->setMouseEditArea(pt);
@@ -436,7 +395,7 @@ void CMouseNormal::slotAddArea() const
 
 void CMouseNormal::slotCopyPosition() const
 {
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
     QString position;
@@ -449,7 +408,7 @@ void CMouseNormal::slotCopyPosition() const
 void CMouseNormal::slotCopyPositionGrid() const
 {
     QString position;
-    QPointF pt = point;
+    QPointF pt = mouse->getPoint();
     gis->convertPx2Rad(pt);
 
     canvas->convertGridPos2Str(pt * RAD_TO_DEG, position, true);

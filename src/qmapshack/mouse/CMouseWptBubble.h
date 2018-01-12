@@ -34,9 +34,12 @@ public:
     virtual ~CMouseWptBubble();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
+
+    void leftClicked(const QPoint& pos) override;
+    void mouseMoved(const QPoint &pos) override;
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void leftButtonDown(const QPoint& pos) override;
+    void dragFinished(const QPoint& pos) override;
 
 private:
     const IGisItem::key_t& key;

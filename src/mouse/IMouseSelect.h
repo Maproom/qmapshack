@@ -24,7 +24,6 @@
 
 class CGisDraw;
 
-
 class IMouseSelect : public IMouse
 {
     Q_OBJECT
@@ -33,15 +32,16 @@ public:
     virtual ~IMouseSelect();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent * e) override;
-    void mouseMoveEvent(QMouseEvent * e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
+
+    void mouseMoved(const QPoint& pos) override;
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void leftButtonDown(const QPoint &pos) override;
+    void dragFinished(const QPoint& pos) override;
 
 protected:
     void rectRad2Px(const QRectF& rectSrc, QRectF& rectTar) const;
     void placeScrOpt();
 
-    QPoint lastPos;
     QPointF offset;
     QPointF posInitial;
 

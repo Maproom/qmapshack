@@ -31,13 +31,16 @@ public:
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override
     {
     }
-    void mousePressEvent(QMouseEvent * e) override
+    void leftClicked(const QPoint& point) override
     {
     }
-    void mouseMoveEvent(QMouseEvent * e) override
+    void mouseMoved(const QPoint& pos) override
     {
     }
-    void mouseReleaseEvent(QMouseEvent *e) override
+    void leftButtonDown(const QPoint& pos) override
+    {
+    }
+    void scaleChanged() override
     {
     }
 };

@@ -1,6 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2017 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,45 +20,38 @@
 #ifndef IMOUSE_H
 #define IMOUSE_H
 
+#include <QObject>
+#include <QPoint>
 #include "canvas/CCanvas.h"
 
-#include <QCursor>
-#include <QObject>
-#include <QPointer>
-
-class QMouseEvent;
-class QPinchGesture;
-class QWheelEvent;
-class QTimer;
 class CGisDraw;
+class QPainter;
+class CMouseAdapter;
 
 class IMouse : public QObject
 {
     Q_OBJECT
 public:
-    IMouse(CGisDraw * gis, CCanvas * canvas);
+    explicit IMouse(CGisDraw * gis, CCanvas * canvas);
     virtual ~IMouse();
 
-    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
-    virtual void mousePressEvent(QMouseEvent *e) = 0;
-    virtual void mouseMoveEvent(QMouseEvent *e) = 0;
-    virtual void mouseReleaseEvent(QMouseEvent *e) = 0;
-    virtual void mouseDoubleClickEvent(QMouseEvent *e)
-    {
-    }
-    virtual void wheelEvent(QWheelEvent *e)
-    {
-    }
-    virtual void keyPressEvent(QKeyEvent *e)
-    {
-    }
-    virtual void pinchGestureEvent(QPinchGesture *e)
-    {
-    }
-    virtual void afterMouseLostEvent(QMouseEvent *e)
-    {
-    }
+    virtual void leftClicked(const QPoint& pos) {}
+    virtual void mouseMoved(const QPoint& pos) {}
+    virtual void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end);
+    virtual void leftButtonDown(const QPoint& pos) {}
+    virtual void rightButtonDown(const QPoint& pos);
+    virtual void doubleClicked(const QPoint& pos) {}
+    virtual void dragFinished(const QPoint& pos) {}
+    virtual void scaleChanged() {}
 
+    virtual void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) = 0;
+
+protected:
+    CCanvas * canvas;
+    CGisDraw * gis;
+    CMouseAdapter * mouse;
+
+public:
     /// the current mouse cursor
     /**
         Each mouse function is represented by a special cursor. The main
@@ -74,21 +67,12 @@ public:
         return canvas;
     }
 
-    virtual void setMouseTracking(bool enabled);
-
-    const static int longButtonPressTimeout = 400;
-    const static int minimalMouseMovingDistance = 4;
+    void startMouseMove(const QPoint& pos);
 
 protected:
     /// the functions mouse icon
     QCursor cursor;
 
-    QPointer<CGisDraw> gis;
-
-    QPointer<CCanvas>  canvas;
-    // the current point reported by the mouse events
-    QPoint point;
 };
 
-#endif //IMOUSE_H
-
+#endif // IMOUSE_H

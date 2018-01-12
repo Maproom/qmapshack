@@ -34,55 +34,55 @@ CLineOpSelectRange::~CLineOpSelectRange()
     delete scrOptRangeLine;
 }
 
-void CLineOpSelectRange::mouseReleaseEventEx(QMouseEvent * e)
+void CLineOpSelectRange::leftClick(const QPoint &pos)
 {
-    if(e->button() == Qt::LeftButton)
+    switch(state)
     {
-        switch(state)
+    case eStateIdle:
+    {
+        if(idxFocus != NOIDX)
         {
-        case eStateIdle:
+            state = eState1st;
+        }
+        break;
+    }
+
+    case eState1st:
+    {
+        if(idx2nd < 0 || points.size() <= idx2nd)
         {
-            if(idxFocus != NOIDX)
-            {
-                state = eState1st;
-            }
             break;
         }
 
-        case eState1st:
+        qint32 d = qAbs(idxFocus - idx2nd);
+        if(d < 1)
         {
-            if(idx2nd < 0 || points.size() <= idx2nd)
-            {
-                break;
-            }
-
-            qint32 d = qAbs(idxFocus - idx2nd);
-            if(d < 1)
-            {
-                resetState();
-                return;
-            }
-
-            scrOptRangeLine = new CScrOptRangeLine(points[idx2nd].pixel, parentHandler, canvas);
-            connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, this,            &CLineOpSelectRange::slotDelete);
-            connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, this,            &CLineOpSelectRange::slotCalc);
-            connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
-            connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
-
-            if(d < 2)
-            {
-                scrOptRangeLine->toolDelete->setEnabled(false);
-            }
-
-            state = eState2nd;
-            break;
+            resetState();
+            return;
         }
+
+        scrOptRangeLine = new CScrOptRangeLine(points[idx2nd].pixel, parentHandler, canvas);
+        connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, this,            &CLineOpSelectRange::slotDelete);
+        connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, this,            &CLineOpSelectRange::slotCalc);
+        connect(scrOptRangeLine->toolDelete,    &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
+        connect(scrOptRangeLine->toolCalcRoute, &QToolButton::clicked, scrOptRangeLine.data(), &CScrOptRangeLine::hide);
+
+        if(d < 2)
+        {
+            scrOptRangeLine->toolDelete->setEnabled(false);
         }
+
+        state = eState2nd;
+        break;
     }
-    else if(e->button() == Qt::RightButton)
-    {
-        resetState();
     }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CLineOpSelectRange::rightButtonDown(const QPoint &pos)
+{
+    ILineOp::rightButtonDown(pos);
+    resetState();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -97,23 +97,25 @@ bool CLineOpSelectRange::abortStep()
     return false;
 }
 
-void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
+void CLineOpSelectRange::mouseMove(const QPoint &pos)
 {
+    ILineOp::mouseMove(pos);
+
     switch(state)
     {
     case eStateIdle:
     {
         // no point selected yet, find point to highlight
-        idxFocus = isCloseTo(e->pos());
+        idxFocus = isCloseTo(pos);
         break;
     }
 
     case eState1st:
     {
-        idx2nd = isCloseTo(e->pos());
+        idx2nd = isCloseTo(pos);
         if(idx2nd == NOIDX)
         {
-            idx2nd = isCloseToLine(e->pos());
+            idx2nd = isCloseToLine(pos);
             if((idx2nd != NOIDX) && ((idx2nd + 1) < points.size()))
             {
                 idx2nd++;
@@ -126,22 +128,14 @@ void CLineOpSelectRange::mouseMoveEventEx(QMouseEvent * e)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpSelectRange::wheelEvent(QWheelEvent * e)
+void CLineOpSelectRange::scaleChanged()
 {
+    ILineOp::scaleChanged();
     if(state == eState2nd)
     {
         resetState();
     }
 }
-
-void CLineOpSelectRange::keyPressEvent(QKeyEvent * e)
-{
-    if(state == eState2nd)
-    {
-        resetState();
-    }
-}
-
 
 void CLineOpSelectRange::drawFg(QPainter& p)
 {

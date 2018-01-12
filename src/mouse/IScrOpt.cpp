@@ -40,9 +40,9 @@ IScrOpt::~IScrOpt()
     CGisWorkspace::self().slotWksItemSelectionReset();
 }
 
-void IScrOpt::mouseMoveEvent(QMouseEvent * e)
+void IScrOpt::mouseMove(const QPoint& pos)
 {
-    mousePos = e->pos();
+    mousePos = pos;
 }
 
 void IScrOpt::enterEvent(QEvent * e)

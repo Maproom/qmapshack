@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,26 +17,35 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "gis/CGisDraw.h"
 #include "mouse/IMouse.h"
+#include "mouse/CMouseAdapter.h"
+#include "canvas/CCanvas.h"
 
-#include <QtWidgets>
-
-IMouse::IMouse(CGisDraw *gis, CCanvas *canvas)
-    : QObject(canvas)
-    , gis(gis)
-    , canvas(canvas)
+IMouse::IMouse(CGisDraw * gis, CCanvas * canvas)
+    :QObject(canvas),
+      canvas(canvas),
+      gis(gis),
+      mouse(canvas->getMouse())
 {
+    mouse->setDelegate(this);
 }
 
 IMouse::~IMouse()
 {
 }
 
-void IMouse::setMouseTracking(bool enabled)
+void IMouse::mouseDraged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
-    canvas->setMouseTracking(enabled);
+    canvas->moveMap(end-last);
 }
 
+void IMouse::rightButtonDown(const QPoint &pos)
+{
+    canvas->resetMouse();
+    canvas->update();
+}
 
+void IMouse::startMouseMove(const QPoint &pos)
+{
+    mouse->startMouseMove(pos);
+}

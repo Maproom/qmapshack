@@ -59,13 +59,12 @@ public:
     virtual ~IMouseEditLine();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent *e) override;
-    void keyPressEvent(QKeyEvent *e) override;
-    void pinchGestureEvent(QPinchGesture *e) override;
-    void afterMouseLostEvent(QMouseEvent *e) override;
+
+    void leftClicked(const QPoint& pos) override;
+    void mouseMoved(const QPoint& pos) override;
+    void leftButtonDown(const QPoint& pos) override;
+    void rightButtonDown(const QPoint& pos) override;
+    void scaleChanged() override;
 
     void abortStep();
 

@@ -40,14 +40,14 @@ public:
     CMouseNormal(CGisDraw * gis, CCanvas *canvas);
     virtual ~CMouseNormal();
 
-    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw,  const QRect &rect) override;
-    void mousePressEvent(QMouseEvent * e) override;
-    void mouseMoveEvent(QMouseEvent * e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void mouseDoubleClickEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent * e) override;
-    void keyPressEvent(QKeyEvent * e) override;
-    void afterMouseLostEvent(QMouseEvent *e) override;
+    void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
+
+    void leftClicked(const QPoint& point) override;
+    void mouseMoved(const QPoint& pos) override;
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void rightButtonDown(const QPoint& point) override;
+    void doubleClicked(const QPoint & point) override;
+    void scaleChanged() override;
 
 private slots:
     void slotAddPoi()           const;
@@ -65,16 +65,6 @@ private:
 protected:
     void stopTracking() const;
     void resetState();
-
-
-    /// the flag is true if the map moving is in progress
-    bool mapMove = false;
-    /// the flag is true if the map has been moved actually
-    bool mapDidMove = false;
-    /// always the last seen mouse cursor position
-    QPoint lastPos;
-    /// the last mouse press event position
-    QPoint firstPos;
 
     enum item_selection_states_e
     {

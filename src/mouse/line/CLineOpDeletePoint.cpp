@@ -33,13 +33,14 @@ CLineOpDeletePoint::~CLineOpDeletePoint()
 {
 }
 
-void CLineOpDeletePoint::mouseMoveEventEx(QMouseEvent * e)
+void CLineOpDeletePoint::mouseMove(const QPoint &pos)
 {
-    idxFocus = isCloseTo(e->pos());
+    ILineOp::mouseMove(pos);
+    idxFocus = isCloseTo(pos);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
+void CLineOpDeletePoint::leftClick(const QPoint &pos)
 {
     if(idxFocus != NOIDX)
     {
@@ -59,7 +60,6 @@ void CLineOpDeletePoint::mouseReleaseEventEx(QMouseEvent *e)
     idxFocus = NOIDX;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
-
 
 void CLineOpDeletePoint::drawFg(QPainter& p)
 {

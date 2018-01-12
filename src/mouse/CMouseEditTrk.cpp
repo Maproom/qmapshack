@@ -54,12 +54,6 @@ CMouseEditTrk::~CMouseEditTrk()
 //    canvas->reportStatus(key,"");
 }
 
-void CMouseEditTrk::mousePressEvent(QMouseEvent * e)
-{
-    canvas->reportStatus(key.item, "");
-    IMouseEditLine::mousePressEvent(e);
-}
-
 IGisLine * CMouseEditTrk::getGisLine() const
 {
     return dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));

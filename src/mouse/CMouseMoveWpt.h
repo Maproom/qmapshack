@@ -35,11 +35,11 @@ public:
     virtual ~CMouseMoveWpt();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-    void mousePressEvent(QMouseEvent *e) override;
-    void mouseMoveEvent(QMouseEvent *e) override;
-    void mouseReleaseEvent(QMouseEvent *e) override;
-    void wheelEvent(QWheelEvent *e) override;
-    void afterMouseLostEvent(QMouseEvent *e) override;
+
+    void leftClicked(const QPoint& point) override;
+    void mouseMoved(const QPoint &pos) override;
+    void rightButtonDown(const QPoint& point) override;
+    void scaleChanged() override;
 
 private:
     const IGisItem::key_t key;
@@ -50,11 +50,6 @@ private:
     QPointF newPos;
     QPointF focus;
     QPixmap icon;
-
-    bool mapMove    = false;
-    bool mapDidMove   = false;
-
-    QPoint lastPoint;
 };
 
 #endif //CMOUSEMOVEWPT_H

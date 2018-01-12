@@ -51,7 +51,7 @@ public:
     const item_t *selectItem(const QPoint& point);
 
     void draw(QPainter& p) override;
-    void mouseMoveEvent(QMouseEvent * e) override;
+    void mouseMove(const QPoint& pos) override;
 
 private:
     static const QPoint positions[9][8];

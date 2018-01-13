@@ -287,8 +287,9 @@ public:
     bool isCloseTo(const QPointF& pos) override;
     bool isWithin(const QRectF &area, selflags_t flags) override;
     void mouseMove(const QPointF& pos) override;
-    void mousePress(const QPointF& pos);
-    void mouseRelease(const QPointF& pos);
+    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& pos);
+    void dragFinished(const QPoint& pos);
+    void leftClicked(const QPoint& pos);
     bool isGeocache()
     {
         return geocache.hasData;
@@ -351,7 +352,7 @@ private:
     void writeGcExt(QDomNode& xmlCache);
     void drawBubble(QPainter& p);
     QPolygonF makePolyline(const QPointF& anchor, const QRectF& r);
-    bool processMouseOverBubble(const QPoint &pos);
+    void processMouseOverBubble(const QPoint &pos);
     void detBoundingRect();
 
     static key_t keyUserFocus;
@@ -375,7 +376,6 @@ private:
     QPointer<CScrOptWpt> scrOptWpt;
     QPointer<CScrOptWptRadius> scrOptRadius;
 
-    bool doBubble          = false;
     bool doSpecialCursor   = false;
     bool doBubbleMove      = false;
     bool doBubbleSize      = false;

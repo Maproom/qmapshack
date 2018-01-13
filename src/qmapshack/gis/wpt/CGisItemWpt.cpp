@@ -788,53 +788,83 @@ void CGisItemWpt::mouseMove(const QPointF& pos)
     {
         return;
     }
-
-    if(!processMouseOverBubble(pos.toPoint()))
-    {
-        if(mouseIsOverBubble)
-        {
-            if(!rectBubble.contains(pos.toPoint()))
-            {
-                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-                if(canvas)
-                {
-                    doBubbleMove = doBubbleSize = false;
-                    canvas->resetMouse();
-                }
-                mouseIsOverBubble = false;
-            }
-        }
-        else
-        {
-            if(rectBubble.contains(pos.toPoint()))
-            {
-                CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-                if(canvas)
-                {
-                    doBubbleMove = doBubbleSize = false;
-                    canvas->setMouseWptBubble(getKey());
-                }
-                mouseIsOverBubble = true;
-            }
-        }
-    }
-}
-
-void CGisItemWpt::mousePress(const QPointF& pos)
-{
-    if(!mouseIsOverBubble)
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(!canvas)
     {
         return;
     }
 
-    QPoint pos1 = pos.toPoint();
-
-    if(rectBubbleMove.contains(pos1))
+    if(mouseIsOverBubble)
     {
-        offsetMouse = pos1 - rectBubble.topLeft();
-        doBubbleMove = true;
+        processMouseOverBubble(pos.toPoint());
+        if(!rectBubble.contains(pos.toPoint()))
+        {
+            doBubbleMove = doBubbleSize = false;
+            canvas->resetMouse();
+            mouseIsOverBubble = false;
+        }
     }
-    else if(rectBubbleEdit.contains(pos1))
+    else
+    {
+        if(rectBubble.contains(pos.toPoint()))
+        {
+            doBubbleMove = doBubbleSize = false;
+            canvas->setMouseWptBubble(getKey());
+            mouseIsOverBubble = true;
+        }
+    }
+}
+
+void CGisItemWpt::mouseDraged(const QPoint& start, const QPoint& last, const QPoint& pos)
+{
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(!canvas)
+    {
+        return;
+    }
+    if (!doBubbleMove && !doBubbleSize)
+    {
+        if(rectBubbleMove.contains(pos))
+        {
+            offsetMouse = pos - rectBubble.topLeft();
+            doBubbleMove = true;
+        }
+        else if(rectBubbleSize.contains(pos))
+        {
+            offsetMouse = pos - rectBubble.bottomRight();
+            doBubbleSize = true;
+        }
+        else
+        {
+            return;
+        }
+    }
+    if(doBubbleMove)
+    {
+        offsetBubble  = pos - posScreen.toPoint();
+        offsetBubble -= offsetMouse;
+    }
+    else if(doBubbleSize)
+    {
+        qDebug() << offsetMouse;
+        int width  = pos.x() - rectBubble.left() - offsetMouse.x();
+        if(width > 50)
+        {
+            widthBubble = width;
+        }
+    }
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
+void CGisItemWpt::dragFinished(const QPoint& pos)
+{
+    updateHistory();
+    doBubbleMove = doBubbleSize = false;
+}
+
+void CGisItemWpt::leftClicked(const QPoint& pos)
+{
+    if(rectBubbleEdit.contains(pos))
     {
         CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
         if(canvas)
@@ -845,22 +875,6 @@ void CGisItemWpt::mousePress(const QPointF& pos)
         mouseIsOverBubble = false;
         edit();
     }
-    else if(rectBubbleSize.contains(pos1))
-    {
-        offsetMouse = pos1 - rectBubble.bottomRight();
-        doBubbleSize = true;
-    }
-}
-
-void CGisItemWpt::mouseRelease(const QPointF& pos)
-{
-    if(!mouseIsOverBubble)
-    {
-        return;
-    }
-
-    updateHistory();
-    doBubbleMove = doBubbleSize = false;
 }
 
 void CGisItemWpt::toggleBubble()
@@ -890,33 +904,9 @@ void CGisItemWpt::toggleNogoArea()
     }
 }
 
-bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
+void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(!canvas || !mouseIsOverBubble)
-    {
-        return false;
-    }
-
-    if(doBubbleMove)
-    {
-        offsetBubble  = pos - posScreen.toPoint();
-        offsetBubble -= offsetMouse;
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-        return true;
-    }
-    else if(doBubbleSize)
-    {
-        qDebug() << offsetMouse;
-        int width  = pos.x() - rectBubble.left() - offsetMouse.x();
-        if(width > 50)
-        {
-            widthBubble = width;
-        }
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-        return true;
-    }
-    else if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
+    if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))
     {
         if(!doSpecialCursor)
         {
@@ -932,8 +922,6 @@ bool CGisItemWpt::processMouseOverBubble(const QPoint &pos)
             doSpecialCursor = false;
         }
     }
-
-    return false;
 }
 
 void CGisItemWpt::detBoundingRect()

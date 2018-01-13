@@ -23,17 +23,11 @@ endif()
 # this is not only the QMS version it will be the package version, too.
 project(QMapShack VERSION 1.10.0)
 
-
-set(QMAPTOOL_VERSION_MAJOR 1)
-set(QMAPTOOL_VERSION_MINOR 0)
-set(QMAPTOOL_VERSION_PATCH 0)
-
-set(RGB2PCT_VERSION_MAJOR 1)
-set(RGB2PCT_VERSION_MINOR 0)
-set(RGB2PCT_VERSION_PATCH 0)
-
+# FOR A RELEASE:
 # remove "development" for a release
 set(VERSION_SUFFIX development)
+# !!! Do not forget to update versions in the sub-repos, too!!!
+
 
 ###############################################################################################
 # Define paths and include other modules
@@ -161,7 +155,7 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     set(ALGLIB_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}/3rdparty/alglib/src)
     set(ALGLIB_LIBRARIES alg)
     add_subdirectory(3rdparty/alglib)
-endif(NOT ALGLIB_FOUND)
+endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
 
 ###############################################################################################
 # Create global config.h
@@ -194,12 +188,13 @@ endif(BUILD_QMAPTOOL)
 if (UNIX AND NOT WIN32 AND NOT APPLE)
 if(BUILD_QMAPSHACK)
     install( FILES        src/icons/48x48/QMapShack.png     DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )    
-    install( DIRECTORY    src/icons/hicolor                 DESTINATION     ${ICON_INSTALL_DIR} )
+    install( DIRECTORY    src/icons/qmapshack/hicolor       DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmapshack.1                       DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif(BUILD_QMAPSHACK)
 
 if(BUILD_QMAPTOOL)
     install( FILES        src/icons/48x48/QMapTool.png      DESTINATION     ${DATA_INSTALL_PREFIX}/pixmaps )
+    install( DIRECTORY    src/icons/qmaptool/hicolor        DESTINATION     ${ICON_INSTALL_DIR} )
     install( FILES        qmaptool.1                        DESTINATION     ${MAN_INSTALL_DIR}/man1  )
     install( FILES        qmt_rgb2pct.1                     DESTINATION     ${MAN_INSTALL_DIR}/man1  )
 endif(BUILD_QMAPTOOL)

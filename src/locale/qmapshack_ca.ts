@@ -3210,17 +3210,17 @@ línia %2, columna %3:
         <translation>Creació de GDAL VRT</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="63"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="77"/>
         <source>Select files...</source>
         <translation>Selecciona els fitxers...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="87"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="101"/>
         <source>Select target file...</source>
         <translation>Selecciona el fitxer destí...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="150"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="199"/>
         <source>!!! done !!!
 </source>
         <translation>!!! fet !!!
@@ -6769,65 +6769,105 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <translation>Formulari</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="88"/>
-        <source>Set linear speed to </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="169"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="230"/>
-        <source>Progress Curve</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="199"/>
-        <source>Uphill: Min Speed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="213"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="268"/>
         <source>at positive Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="156"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="220"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="318"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="345"/>
         <source>%</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="135"/>
-        <source>Downhill: Max Speed</source>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="141"/>
+        <source>Set constant speed to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="149"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="241"/>
+        <source>Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="278"/>
+        <source>Min Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="335"/>
         <source>at negative Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="79"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="288"/>
+        <source>Uphill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="185"/>
+        <source>Cycling Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="308"/>
+        <source>Speed at zero Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="251"/>
+        <source>Plain Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="415"/>
+        <source>not yet implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="49"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Canviar Velocitat&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="111"/>
-        <source>Speed dependent on Slope [%]</source>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="73"/>
+        <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="142"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="206"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="78"/>
+        <source>Cycling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="83"/>
+        <source>Hiking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="261"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="328"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="358"/>
         <source>km/h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="95"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="128"/>
         <source> km/h</source>
         <translation> km/h</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="298"/>
+        <source>Downhill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="442"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply filter now.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="445"/>
         <source>...</source>
         <translation>...</translation>
     </message>

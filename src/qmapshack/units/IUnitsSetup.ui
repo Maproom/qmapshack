@@ -45,7 +45,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Nautic</string>
+        <string>Nautical</string>
        </property>
       </widget>
       <widget class="QRadioButton" name="radioImperial">

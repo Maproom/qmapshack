@@ -525,9 +525,9 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeed(qreal speed,
-                     qreal minSpeed, qreal slopeAtMinSpeed, QEasingCurve::Type upHillCurveType,
-                     qreal maxSpeed, qreal slopeAtMaxSpeed, QEasingCurve::Type downHillCurveType);
+    void filterSpeed(qreal plainSpeed,
+                     qreal minSpeed, qreal slopeAtMinSpeed,
+                     qreal maxSpeed, qreal slopeAtMaxSpeed);
 
     void filterTerrainSlope();
     void filterReplaceElevation();

@@ -321,9 +321,9 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
-void CGisItemTrk::filterSpeed(qreal linearSpeed,
-                              qreal minSpeed, qreal slopeAtMinSpeed, QEasingCurve::Type upHillCurveType,
-                              qreal maxSpeed, qreal slopeAtMaxSpeed, QEasingCurve::Type downHillCurveType)
+void CGisItemTrk::filterSpeed(qreal plainSpeed,
+                              qreal minSpeed, qreal slopeAtMinSpeed,
+                              qreal maxSpeed, qreal slopeAtMaxSpeed)
 {
    QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
@@ -334,8 +334,8 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed,
     qreal averageSpeed = 0, speed;
     qint32 noOfPoints = 0;
 
-    QEasingCurve upHillCurve(upHillCurveType);
-    QEasingCurve downHillCurve(downHillCurveType);
+    QEasingCurve upHillCurve(QEasingCurve::OutQuad);
+    QEasingCurve downHillCurve(QEasingCurve::InQuad);
 
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -352,17 +352,17 @@ void CGisItemTrk::filterSpeed(qreal linearSpeed,
         {
             // -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y
 //            speed = -(maxSpeed - linearSpeed) / pow(slopeAtMaxSpeed, 2) * pow(pt.slope2 - slopeAtMaxSpeed, 2) + maxSpeed;
-            speed = linearSpeed + (maxSpeed - linearSpeed) * downHillCurve.valueForProgress(pt.slope2 / slopeAtMaxSpeed);
+            speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(pt.slope2 / slopeAtMaxSpeed);
         }
         else if(pt.slope2 == 0)
         {
-           speed = linearSpeed;
+           speed = plainSpeed;
         }
         else if(pt.slope2 > 0 && pt.slope2 <= slopeAtMinSpeed)
         {
             // (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y
 //            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - pt.slope2, 2) + minSpeed;
-            speed = linearSpeed + (minSpeed - linearSpeed) * upHillCurve.valueForProgress(pt.slope2 / slopeAtMinSpeed);
+            speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(pt.slope2 / slopeAtMinSpeed);
         }
         else if(pt.slope2 > slopeAtMinSpeed)
         {

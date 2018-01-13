@@ -60,7 +60,6 @@ private:
         ,eStateRangeSelected
     };
 
-    bool mapDidMove = false;
     state_e state   = eStateIdle;
     QPointF anchor  = NOPOINTF;
 

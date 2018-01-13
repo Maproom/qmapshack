@@ -38,7 +38,6 @@ public:
     void leftClicked(const QPoint& pos) override;
     void mouseMoved(const QPoint &pos) override;
     void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
-    void leftButtonDown(const QPoint& pos) override;
     void dragFinished(const QPoint& pos) override;
 
 private:

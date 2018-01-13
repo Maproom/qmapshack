@@ -342,15 +342,6 @@ public:
     {
         Q_UNUSED(pos);
     }
-    void mousePress(const QPointF& pos)
-    {
-        Q_UNUSED(pos);
-    }
-    void mouseRelease(const QPointF& pos)
-    {
-        Q_UNUSED(pos);
-    }
-
 
     /**
        @brief Query if this item is read only

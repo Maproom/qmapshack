@@ -24,10 +24,13 @@
 IMouse::IMouse(CGisDraw * gis, CCanvas * canvas)
     :QObject(canvas),
       canvas(canvas),
-      gis(gis),
-      mouse(canvas->getMouse())
+      gis(gis)
 {
-    mouse->setDelegate(this);
+    if (canvas != nullptr)
+    {
+        mouse = canvas->getMouse();
+        mouse->setDelegate(this);
+    }
 }
 
 IMouse::~IMouse()

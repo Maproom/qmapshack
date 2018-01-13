@@ -58,7 +58,7 @@ void CMouseRangeTrk::draw(QPainter& p,  CCanvas::redraw_e, const QRect &)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
     if(trk)
     {
-        if(!mapDidMove && (anchor != NOPOINTF))
+        if(anchor != NOPOINTF)
         {
             p.setPen(Qt::darkBlue);
             p.setBrush(QColor(255,255,255,200));
@@ -82,13 +82,18 @@ void CMouseRangeTrk::leftButtonDown(const QPoint& pos)
 
 void CMouseRangeTrk::mouseDraged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
-    IMouse::mouseDraged(start, last, end);
-    mapDidMove = true;
+    if (state != eStateRangeSelected)
+    {
+        IMouse::mouseDraged(start, last, end);
+        if (anchor != NOPOINTF)
+        {
+            anchor += end-last;
+        }
+    }
 }
 
 void CMouseRangeTrk::mouseMoved(const QPoint& pos)
 {
-    mapDidMove = false;
     switch(state)
     {
     case eStateIdle:
@@ -140,8 +145,8 @@ void CMouseRangeTrk::leftClicked(const QPoint& point)
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
         if(trk != nullptr && anchor != NOPOINTF)
         {
-            QPointF pt = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
-            scrOptRange = new CScrOptRangeTrk(pt, trk, this);
+            anchor = trk->setMouseFocusByPoint(point, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
+            scrOptRange = new CScrOptRangeTrk(anchor, trk, this);
             connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
             connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
             connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);

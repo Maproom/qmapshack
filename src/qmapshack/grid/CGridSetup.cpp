@@ -40,7 +40,7 @@ CGridSetup::CGridSetup(CGrid *grid, CMapDraw * map)
 
     connect(toolRestoreDefault, &QToolButton::clicked, this, &CGridSetup::slotRestoreDefault);
     connect(toolFromMap,        &QToolButton::clicked, this, &CGridSetup::slotProjFromMap);
-    connect(toolProjWizzard,    &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
+    connect(toolProjWizard,    &QToolButton::clicked, this, &CGridSetup::slotProjWizard);
     connect(toolGridColor,      &QToolButton::clicked, this, &CGridSetup::slotSelectGridColor);
 }
 

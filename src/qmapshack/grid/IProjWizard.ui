@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Proj4 Wizzard</string>
+   <string>Proj4 Wizard</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

@@ -28,6 +28,7 @@ IScrOpt::IScrOpt(IMouse *mouse)
     : QWidget(mouse->getCanvas())
     , mouse(mouse)
 {
+    setAttribute(Qt::WA_DeleteOnClose);
     setFocusPolicy(Qt::WheelFocus);
 }
 

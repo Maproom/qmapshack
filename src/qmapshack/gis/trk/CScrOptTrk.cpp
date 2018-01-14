@@ -93,55 +93,55 @@ CScrOptTrk::~CScrOptTrk()
 void CScrOptTrk::slotDelete()
 {
     CGisWorkspace::self().delItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotCopy()
 {
     CGisWorkspace::self().copyItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotEditDetails()
 {
     CGisWorkspace::self().editItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotProfile(bool on)
 {
     CGisWorkspace::self().focusTrkByKey(on, key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotCut()
 {
     CGisWorkspace::self().cutTrkByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotEdit()
 {
     CGisWorkspace::self().editTrkByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotReverse()
 {
     CGisWorkspace::self().reverseTrkByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotCombine()
 {
     CGisWorkspace::self().combineTrkByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotRange()
 {
     CGisWorkspace::self().rangeTrkByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotActivity()
@@ -149,13 +149,13 @@ void CScrOptTrk::slotActivity()
     QList<IGisItem::key_t> keys;
     keys << key;
     CGisWorkspace::self().activityTrkByKey(keys);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::slotCopyWithWpt()
 {
     CGisWorkspace::self().copyTrkWithWptByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptTrk::draw(QPainter& p)
@@ -163,7 +163,7 @@ void CScrOptTrk::draw(QPainter& p)
     IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
-        QWidget::deleteLater();
+        close();
         return;
     }
     item->drawHighlight(p);

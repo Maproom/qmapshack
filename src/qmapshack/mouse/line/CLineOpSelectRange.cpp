@@ -81,7 +81,6 @@ void CLineOpSelectRange::leftClick(const QPoint &pos)
 
 void CLineOpSelectRange::rightButtonDown(const QPoint &pos)
 {
-    ILineOp::rightButtonDown(pos);
     resetState();
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }

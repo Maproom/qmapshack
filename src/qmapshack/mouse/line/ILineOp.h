@@ -42,7 +42,7 @@ public:
     virtual void leftClick(const QPoint& pos) = 0;
     virtual void mouseMove(const QPoint& pos);
     virtual void leftButtonDown(const QPoint& pos);
-    virtual void rightButtonDown(const QPoint& pos);
+    virtual void rightButtonDown(const QPoint& pos) {}
     virtual void scaleChanged();
 
     virtual void drawFg(QPainter& p) = 0;

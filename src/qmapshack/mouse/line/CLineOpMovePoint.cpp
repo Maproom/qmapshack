@@ -69,13 +69,11 @@ void CLineOpMovePoint::leftClick(const QPoint &pos)
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
-//TODO right button
-//    else if(e->button() == Qt::RightButton)
-//    {
-//        abortStep();
-//    }
-
-//    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+void CLineOpMovePoint::rightButtonDown(const QPoint &pos)
+{
+    abortStep();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
 
 
 bool CLineOpMovePoint::abortStep()

@@ -75,55 +75,55 @@ CScrOptRte::~CScrOptRte()
 void CScrOptRte::slotEditDetails()
 {
     CGisWorkspace::self().editItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotDelete()
 {
     CGisWorkspace::self().delItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotCopy()
 {
     CGisWorkspace::self().copyItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotCalc()
 {
     CGisWorkspace::self().calcRteByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotReset()
 {
     CGisWorkspace::self().resetRteByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotEdit()
 {
     CGisWorkspace::self().editRteByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotReverse()
 {
     CGisWorkspace::self().reverseRteByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotInstruction(bool on)
 {
     CGisWorkspace::self().focusRteByKey(on, key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::slotToTrack()
 {
     CGisWorkspace::self().convertRouteToTrack(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptRte::draw(QPainter& p)
@@ -131,7 +131,7 @@ void CScrOptRte::draw(QPainter& p)
     IGisItem *item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
-        QWidget::deleteLater();
+        close();
         return;
     }
     item->drawHighlight(p);

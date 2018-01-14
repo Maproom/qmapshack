@@ -79,55 +79,55 @@ CScrOptWpt::~CScrOptWpt()
 void CScrOptWpt::slotDelete()
 {
     CGisWorkspace::self().delItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotEdit()
 {
     CGisWorkspace::self().editItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotCopy()
 {
     CGisWorkspace::self().copyItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotMove()
 {
     CGisWorkspace::self().moveWptByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotProj()
 {
     CGisWorkspace::self().projWptByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotBubble()
 {
     CGisWorkspace::self().toggleWptBubble(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotDeleteRadius()
 {
     CGisWorkspace::self().deleteWptRadius(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotNogoArea()
 {
     CGisWorkspace::self().toggleWptNogoArea(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::slotEditRadius()
 {
     CGisWorkspace::self().editWptRadius(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWpt::draw(QPainter& p)
@@ -135,7 +135,7 @@ void CScrOptWpt::draw(QPainter& p)
     IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
-        deleteLater();
+        close();
         return;
     }
     item->drawHighlight(p);

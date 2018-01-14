@@ -59,25 +59,25 @@ CScrOptOvlArea::~CScrOptOvlArea()
 void CScrOptOvlArea::slotEditDetails()
 {
     CGisWorkspace::self().editItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptOvlArea::slotCopy()
 {
     CGisWorkspace::self().copyItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptOvlArea::slotDelete()
 {
     CGisWorkspace::self().delItemByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptOvlArea::slotEdit()
 {
     CGisWorkspace::self().editAreaByKey(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptOvlArea::draw(QPainter& p)

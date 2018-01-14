@@ -69,19 +69,19 @@ CScrOptWptRadius::~CScrOptWptRadius()
 void CScrOptWptRadius::slotDelete()
 {
     CGisWorkspace::self().deleteWptRadius(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWptRadius::slotNogoArea()
 {
     CGisWorkspace::self().toggleWptNogoArea(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWptRadius::slotEdit()
 {
     CGisWorkspace::self().editWptRadius(key);
-    deleteLater();
+    close();
 }
 
 void CScrOptWptRadius::draw(QPainter& p)
@@ -89,7 +89,7 @@ void CScrOptWptRadius::draw(QPainter& p)
     IGisItem * item = CGisWorkspace::self().getItemByKey(key);
     if(nullptr == item)
     {
-        deleteLater();
+        close();
         return;
     }
     item->drawHighlight(p);

@@ -176,7 +176,6 @@ void CLineOpAddPoint::mouseMove(const QPoint& pos)
 
 void CLineOpAddPoint::rightButtonDown(const QPoint &pos)
 {
-    ILineOp::rightButtonDown(pos);
     abortStep();
     idxFocus = NOIDX;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);

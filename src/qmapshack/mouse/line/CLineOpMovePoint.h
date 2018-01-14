@@ -29,6 +29,7 @@ public:
 
     void leftClick(const QPoint& pos) override;
     void mouseMove(const QPoint& pos) override;
+    void rightButtonDown(const QPoint &pos) override;
 
     void drawFg(QPainter& p) override;
 

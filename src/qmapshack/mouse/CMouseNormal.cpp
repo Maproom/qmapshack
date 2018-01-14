@@ -124,13 +124,13 @@ void CMouseNormal::mouseMoved(const QPoint& point)
     canvas->update();
 }
 
-void CMouseNormal::mouseDraged(const QPoint& start, const QPoint& last, const QPoint &end)
+void CMouseNormal::mouseDragged(const QPoint& start, const QPoint& last, const QPoint &end)
 {
     // start to block map moving when a previous click
     // has triggered a selection of any kind
     if (stateItemSel < eStateNoMapMovePossible)
     {
-        IMouse::mouseDraged(start,last,end);
+        IMouse::mouseDragged(start,last,end);
     }
     else
     {

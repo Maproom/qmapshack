@@ -81,9 +81,9 @@ void CMouseRadiusWpt::mouseMoved(const QPoint &pos)
     initial = false;
 }
 
-void CMouseRadiusWpt::mouseDraged(const QPoint &start, const QPoint &last, const QPoint &end)
+void CMouseRadiusWpt::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
-    IMouse::mouseDraged(start,last,end);
+    IMouse::mouseDragged(start,last,end);
     initial = false;
 }
 

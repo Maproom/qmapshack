@@ -287,7 +287,7 @@ public:
     bool isCloseTo(const QPointF& pos) override;
     bool isWithin(const QRectF &area, selflags_t flags) override;
     void mouseMove(const QPointF& pos) override;
-    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& pos);
+    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos);
     void dragFinished(const QPoint& pos);
     void leftClicked(const QPoint& pos);
     bool isGeocache()

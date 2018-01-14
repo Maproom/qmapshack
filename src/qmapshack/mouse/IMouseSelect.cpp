@@ -127,7 +127,7 @@ void IMouseSelect::leftButtonDown(const QPoint& point)
     canvas->update();
 }
 
-void IMouseSelect::mouseDraged(const QPoint& start, const QPoint& last, const QPoint &end)
+void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const QPoint &end)
 {
     switch(state)
     {
@@ -207,12 +207,12 @@ void IMouseSelect::mouseDraged(const QPoint& start, const QPoint& last, const QP
     }
     case eStateMapMoving:
     {
-        IMouse::mouseDraged(start, last, end);
+        IMouse::mouseDragged(start, last, end);
         break;
     }
     default:
     {
-        Q_ASSERT(true);
+        Q_ASSERT(false);
     }
     }
 }

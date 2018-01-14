@@ -815,7 +815,7 @@ void CGisItemWpt::mouseMove(const QPointF& pos)
     }
 }
 
-void CGisItemWpt::mouseDraged(const QPoint& start, const QPoint& last, const QPoint& pos)
+void CGisItemWpt::mouseDragged(const QPoint& start, const QPoint& last, const QPoint& pos)
 {
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(!canvas)

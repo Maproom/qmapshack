@@ -38,7 +38,7 @@ public:
     void draw(QPainter& p, CCanvas::redraw_e, const QRect &) override;
 
     void leftClicked(const QPoint& point) override;
-    void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end) override;
+    void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
     void mouseMoved(const QPoint& pos) override;
     void leftButtonDown(const QPoint& pos) override;
     void scaleChanged() override;

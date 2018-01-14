@@ -82,8 +82,8 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
     gis     = new CGisDraw(this);
-    mouseBase = new CMouseAdapter(this);
-    mouse   = new CMouseNormal(gis, this);
+    mouse = new CMouseAdapter(this);
+    mouse->setDelegate(new CMouseNormal(gis, this, mouse));
 
     connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
@@ -142,7 +142,7 @@ CCanvas::~CCanvas()
         So they are better deleted now explicitly before any other object
         in CCanvas is destroyed.
      */
-    delete mouseBase;
+    delete mouse;
     saveSizeTrackProfile();
 }
 
@@ -203,7 +203,7 @@ void CCanvas::loadConfig(QSettings& cfg)
 
 void CCanvas::resetMouse()
 {
-    mouse = new CMouseNormal(gis, this);
+    mouse->setDelegate(new CMouseNormal(gis, this, mouse));
     if(underMouse())
     {
         while(QApplication::overrideCursor())
@@ -219,85 +219,64 @@ void CCanvas::mouseTrackingLost()
     mouseLost = true;
 }
 
-void CCanvas::setMouseCursor(IMouse& mouse, const QString& src)
-{
-    if(underMouse())
-    {
-        CCanvas::restoreOverrideCursor(src);
-        CCanvas::setOverrideCursor(mouse, src);
-    }
-}
-
 void CCanvas::setMouseMoveWpt(CGisItemWpt& wpt)
 {
-    mouse = new CMouseMoveWpt(wpt, gis, this);
-    setMouseCursor(*mouse, "setMouseMoveWpt");
+    mouse->setDelegate(new CMouseMoveWpt(wpt, gis, this, mouse));
 }
 
 void CCanvas::setMouseRadiusWpt(CGisItemWpt& wpt)
 {
-    mouse = new CMouseRadiusWpt(wpt, gis, this);
-    setMouseCursor(*mouse, "setMouseWptRadius");
+    mouse->setDelegate(new CMouseRadiusWpt(wpt, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditTrk(const QPointF &pt)
 {
-    mouse = new CMouseEditTrk(pt, gis, this);
-    setMouseCursor(*mouse, "setMouseEditTrk");
+    mouse->setDelegate(new CMouseEditTrk(pt, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditRte(const QPointF &pt)
 {
-    mouse = new CMouseEditRte(pt, gis, this);
-    setMouseCursor(*mouse, "setMouseEditRte");
+    mouse->setDelegate(new CMouseEditRte(pt, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditTrk(CGisItemTrk& trk)
 {
-    mouse = new CMouseEditTrk(trk, gis, this);
-    setMouseCursor(*mouse, "setMouseEditTrk");
+    mouse->setDelegate(new CMouseEditTrk(trk, gis, this, mouse));
 }
 
 void CCanvas::setMouseRangeTrk(CGisItemTrk& trk)
 {
-    mouse = new CMouseRangeTrk(trk, gis, this);
-    setMouseCursor(*mouse, "setMouseRangeTrk");
+    mouse->setDelegate(new CMouseRangeTrk(trk, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditArea(const QPointF& pt)
 {
-    mouse = new CMouseEditArea(pt, gis, this);
-    setMouseCursor(*mouse, "setMouseEditArea");
+    mouse->setDelegate(new CMouseEditArea(pt, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditArea(CGisItemOvlArea& area)
 {
-    mouse = new CMouseEditArea(area, gis, this);
-    setMouseCursor(*mouse, "setMouseEditArea");
+    mouse->setDelegate(new CMouseEditArea(area, gis, this, mouse));
 }
 
 void CCanvas::setMouseEditRte(CGisItemRte& rte)
 {
-    mouse = new CMouseEditRte(rte, gis, this);
-    setMouseCursor(*mouse, "setMouseEditRte");
+    mouse->setDelegate(new CMouseEditRte(rte, gis, this, mouse));
 }
 
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
-    mouse = new CMouseWptBubble(key, gis, this);
-    setMouseCursor(*mouse, "setMouseWptBubble");
+    mouse->setDelegate(new CMouseWptBubble(key, gis, this, mouse));
 }
 
 void CCanvas::setMousePrint()
 {
-    mouse = new CMousePrint(gis, this);
-    setMouseCursor(*mouse, "setMousePrint");
+    mouse->setDelegate(new CMousePrint(gis, this, mouse));
 }
 
 void CCanvas::setMouseSelect()
 {
-    mouse = new CMouseSelect(gis, this);
-    setMouseCursor(*mouse, "setMouseSelect");
+    mouse->setDelegate(new CMouseSelect(gis, this, mouse));
 }
 
 void CCanvas::reportStatus(const QString& key, const QString& msg)
@@ -405,7 +384,7 @@ void CCanvas::mousePressEvent(QMouseEvent * e)
         return;
     }
 
-    mouseBase->mousePressEvent(e);
+    mouse->mousePressEvent(e);
     QWidget::mousePressEvent(e);
     e->accept();
 
@@ -420,27 +399,27 @@ void CCanvas::mouseMoveEvent(QMouseEvent * e)
     qreal slope = dem->getSlopeAt(pos);
     emit sigMousePosition(pos * RAD_TO_DEG, ele, slope);
 
-    mouseBase->mouseMoveEvent(e);
+    mouse->mouseMoveEvent(e);
     QWidget::mouseMoveEvent(e);
     e->accept();
 }
 
 void CCanvas::mouseReleaseEvent(QMouseEvent *e)
 {
-    mouseBase->mouseReleaseEvent(e);
+    mouse->mouseReleaseEvent(e);
     QWidget::mouseReleaseEvent(e);
     e->accept();
 }
 
 void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
 {
-    mouseBase->mouseDoubleClickEvent(e);
+    mouse->mouseDoubleClickEvent(e);
     QWidget::mouseDoubleClickEvent(e);
 }
 
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
-    mouseBase->wheelEvent(e);
+    mouse->wheelEvent(e);
 
     // angleDelta() returns the eighths of a degree
     // of the mousewheel
@@ -523,15 +502,6 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     case Qt::Key_Escape:
     {
-        IMouseEditLine *lineMouse = dynamic_cast<IMouseEditLine*>(mouse);
-        if(nullptr != lineMouse)
-        {
-            lineMouse->abortStep();
-        }
-        else
-        {
-            doUpdate = false;
-        }
         break;
     }
 
@@ -541,7 +511,7 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
     if(doUpdate)
     {
-        mouseBase->keyPressEvent(e);
+        mouse->keyPressEvent(e);
         e->accept();
         update();
     }
@@ -1014,7 +984,7 @@ bool CCanvas::event(QEvent *event)
         {
             // notify IMouse that the upcomming QMouseEvent needs special treatment
             // as some mouse-events may have been lost
-            mouseBase->afterMouseLostEvent(me);
+            mouse->afterMouseLostEvent(me);
             mouseLost = false;
         }
     }
@@ -1054,7 +1024,7 @@ bool CCanvas::gestureEvent(QGestureEvent* e)
             }
         }
         mouseLost = true;
-        mouseBase->pinchGestureEvent(pinch);
+        mouse->pinchGestureEvent(pinch);
     }
     return true;
 }

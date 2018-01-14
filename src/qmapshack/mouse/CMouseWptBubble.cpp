@@ -23,8 +23,8 @@
 
 #include <QtWidgets>
 
-CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t &key, CGisDraw * gis, CCanvas * parent)
-    : IMouse(gis, parent)
+CMouseWptBubble::CMouseWptBubble(const IGisItem::key_t &key, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
     , key(key)
 {
     cursor = QCursor(QPixmap("://cursors/cursorArrow.png"), 0, 0);

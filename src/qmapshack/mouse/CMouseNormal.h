@@ -37,7 +37,7 @@ class CMouseNormal : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseNormal(CGisDraw * gis, CCanvas *canvas);
+    CMouseNormal(CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse);
     virtual ~CMouseNormal();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;

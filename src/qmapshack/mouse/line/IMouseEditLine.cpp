@@ -35,8 +35,8 @@
 
 #include <QtWidgets>
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, bool enableStatus, const QString &type, CGisDraw * gis, CCanvas * parent)
-    : IMouse(gis, parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point, bool enableStatus, const QString &type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
     , key(key)
     , enableStatus(enableStatus)
     , type(type)
@@ -50,8 +50,8 @@ IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, const QPointF& point,
     storeToHistory(points);
 }
 
-IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *parent)
-    : IMouse(gis, parent)
+IMouseEditLine::IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString &type, CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
     , key(key)
     , enableStatus(enableStatus)
     , type(type)

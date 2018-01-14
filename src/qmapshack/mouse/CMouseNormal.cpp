@@ -31,8 +31,8 @@
 
 #include <QtWidgets>
 
-CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas)
-    : IMouse(gis, canvas)
+CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
     screenUnclutter = new CScrOptUnclutter(this);

@@ -28,8 +28,8 @@ class CMouseEditRte : public IMouseEditLine
 {
     Q_OBJECT
 public:
-    CMouseEditRte(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * parent);
+    CMouseEditRte(const QPointF& point, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMouseEditRte(CGisItemRte &rte, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~CMouseEditRte();
 
 protected slots:

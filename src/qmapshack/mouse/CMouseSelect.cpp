@@ -24,8 +24,8 @@
 
 #include <QtWidgets>
 
-CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *parent)
-    : IMouseSelect(gis, parent)
+CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouseSelect(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap("://cursors/cursorSelectArea.png"),0,0);
 

@@ -28,7 +28,7 @@ class IMouseSelect : public IMouse
 {
     Q_OBJECT
 public:
-    IMouseSelect(CGisDraw * gis, CCanvas * canvas);
+    IMouseSelect(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~IMouseSelect();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;

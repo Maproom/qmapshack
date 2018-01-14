@@ -31,8 +31,8 @@
 #include <QtWidgets>
 #include <proj_api.h>
 
-CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * parent)
-    : IMouse(gis, parent),
+CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse),
     key(wpt.getKey()),
     wptPosition(wpt.getPosition() * DEG_TO_RAD),
     avoid(wpt.isNogoArea()),

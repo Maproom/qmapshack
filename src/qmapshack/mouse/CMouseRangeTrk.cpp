@@ -27,8 +27,8 @@
 #include <QtWidgets>
 
 
-CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *parent)
-    : IMouse(gis, parent)
+CMouseRangeTrk::CMouseRangeTrk(CGisItemTrk &trk, CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
 {
     cursor      = QCursor(QPixmap("://cursors/cursorSelectRange.png"),0,0);
     key         = trk.getKey();

@@ -6,6 +6,7 @@
 #include <QTime>
 #include <QPointer>
 
+class CCanvas;
 class QMouseEvent;
 class QWheelEvent;
 class QPinchGesture;
@@ -16,8 +17,10 @@ class CMouseAdapter : public QObject
 {
     Q_OBJECT
 public:
-    explicit CMouseAdapter(QObject *canvas);
+    explicit CMouseAdapter(CCanvas *canvas);
     virtual ~CMouseAdapter();
+
+    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect);
 
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
@@ -28,18 +31,21 @@ public:
     void pinchGestureEvent(QPinchGesture *e);
     void afterMouseLostEvent(QMouseEvent *e);
 
-    QPoint getPoint() { return lastPos; }
+    void startMouseMove(const QPoint& pos);
 
     void setDelegate(IMouse * delegate);
 
-    void startMouseMove(const QPoint& pos);
+    QPoint getPoint() { return lastPos; }
+
+    operator const QCursor&() const;
 
     const static int longButtonPressTimeout = 400;
     const static int minimalMouseMovingDistance = 4;
 
 private:
 
-    QPointer<IMouse> delegate { nullptr };
+    CCanvas * canvas { nullptr };
+    IMouse * delegate { nullptr };
 
     QTime buttonPressTime;
 

@@ -23,8 +23,8 @@
 
 #include <QtWidgets>
 
-IMouseSelect::IMouseSelect(CGisDraw *gis, CCanvas *canvas)
-    : IMouse(gis, canvas)
+IMouseSelect::IMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouse(gis, canvas, mouse)
 {
 }
 

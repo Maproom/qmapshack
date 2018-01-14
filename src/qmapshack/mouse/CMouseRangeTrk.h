@@ -32,7 +32,7 @@ class CMouseRangeTrk : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * parent);
+    CMouseRangeTrk(CGisItemTrk& trk, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~CMouseRangeTrk();
 
     void draw(QPainter& p, CCanvas::redraw_e, const QRect &) override;

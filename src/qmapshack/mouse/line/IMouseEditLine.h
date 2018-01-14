@@ -48,14 +48,14 @@ public:
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t& key, const QPointF& point, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     /**
        @brief Edit an existing track
        @param trk       the track to edit
        @param gis       the draw context to use
        @param parent    the canvas to use
      */
-    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * parent);
+    IMouseEditLine(const IGisItem::key_t &key, IGisLine &src, bool enableStatus, const QString& type, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~IMouseEditLine();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
@@ -66,7 +66,7 @@ public:
     void rightButtonDown(const QPoint& pos) override;
     void scaleChanged() override;
 
-    void abortStep();
+    void abortStep() override;
 
     bool useAutoRouting() const;
     bool useVectorRouting() const;

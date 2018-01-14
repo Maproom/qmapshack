@@ -21,16 +21,12 @@
 #include "mouse/CMouseAdapter.h"
 #include "canvas/CCanvas.h"
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas)
-    :QObject(canvas),
+IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
+    :QObject(mouse),
       canvas(canvas),
-      gis(gis)
+      gis(gis),
+      mouse(mouse)
 {
-    if (canvas != nullptr)
-    {
-        mouse = canvas->getMouse();
-        mouse->setDelegate(this);
-    }
 }
 
 IMouse::~IMouse()

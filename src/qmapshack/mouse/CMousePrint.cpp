@@ -24,8 +24,8 @@
 
 #include <QtWidgets>
 
-CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *parent)
-    : IMouseSelect(gis, parent)
+CMousePrint::CMousePrint(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
+    : IMouseSelect(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap("://cursors/cursorSave.png"),0,0);
 

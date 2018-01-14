@@ -30,7 +30,7 @@ class CMouseWptBubble : public IMouse
 {
     Q_OBJECT
 public:
-    CMouseWptBubble(const IGisItem::key_t& key, CGisDraw * gis, CCanvas * parent);
+    CMouseWptBubble(const IGisItem::key_t& key, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~CMouseWptBubble();
 
     void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;

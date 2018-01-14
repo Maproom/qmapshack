@@ -1,19 +1,29 @@
+#include "canvas/CCanvas.h"
 #include "mouse/CMouseAdapter.h"
+#include "mouse/CMouseEditArea.h"
+#include "mouse/CMouseEditRte.h"
+#include "mouse/CMouseEditTrk.h"
+#include "mouse/CMouseMoveWpt.h"
+#include "mouse/CMouseNormal.h"
+#include "mouse/CMousePrint.h"
+#include "mouse/CMouseRadiusWpt.h"
+#include "mouse/CMouseRangeTrk.h"
 #include "mouse/IMouse.h"
-
 #include <QMouseEvent>
 #include <QPinchGesture>
 
-CMouseAdapter::CMouseAdapter(QObject *canvas) : QObject(canvas)
+CMouseAdapter::CMouseAdapter(CCanvas *canvas) : QObject(canvas),
+    canvas(canvas)
 {
 }
 
 CMouseAdapter::~CMouseAdapter()
 {
-    if (delegate != nullptr)
-    {
-        delete delegate;
-    }
+}
+
+void CMouseAdapter::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
+{
+    delegate->draw(p, needsRedraw, rect);
 }
 
 void CMouseAdapter::mousePressEvent(QMouseEvent *e)
@@ -101,7 +111,18 @@ void CMouseAdapter::wheelEvent(QWheelEvent *e)
 
 void CMouseAdapter::keyPressEvent(QKeyEvent *e)
 {
-    delegate->scaleChanged();
+    switch (e->key())
+    {
+    case Qt::Key_Escape:
+    {
+        delegate->abortStep();
+        break;
+    }
+    default:
+    {
+        delegate->scaleChanged();
+    }
+    }
 }
 
 void CMouseAdapter::pinchGestureEvent(QPinchGesture *e)
@@ -137,8 +158,6 @@ void CMouseAdapter::startMouseMove(const QPoint& pos)
     // by at least a few pixels.
     firstPos = pos;
     mouseDidMove = false;
-    // as long the mouse is not taken as moving
-    // to not trigger on-the-fly-routing
 }
 
 void CMouseAdapter::setDelegate(IMouse *delegate)
@@ -148,4 +167,16 @@ void CMouseAdapter::setDelegate(IMouse *delegate)
         this->delegate->deleteLater();
     }
     this->delegate = delegate;
+
+    if(canvas->underMouse())
+    {
+        const QString& src = QString("CMouseAdapter::setDelegate(%1)").arg(delegate->metaObject()->className());
+        CCanvas::restoreOverrideCursor(src);
+        CCanvas::setOverrideCursor(*delegate, src);
+    }
+}
+
+CMouseAdapter::operator const QCursor&() const
+{
+    return *delegate;
 }

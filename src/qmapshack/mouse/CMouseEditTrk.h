@@ -27,8 +27,8 @@ class CMouseEditTrk : public IMouseEditLine
 {
     Q_OBJECT
 public:
-    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * parent);
-    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * parent);
+    CMouseEditTrk(const QPointF& point, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
+    CMouseEditTrk(CGisItemTrk &trk, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~CMouseEditTrk();
 
 protected slots:

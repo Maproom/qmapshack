@@ -31,7 +31,7 @@ class CGisDraw;
 class CMouseMoveWpt : public IMouse
 {
 public:
-    CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * parent);
+    CMouseMoveWpt(CGisItemWpt& wpt, CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse);
     virtual ~CMouseMoveWpt();
 
     void draw(QPainter& p,  CCanvas::redraw_e needsRedraw, const QRect &rect) override;

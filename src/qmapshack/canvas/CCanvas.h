@@ -108,8 +108,6 @@ public:
 
     static void triggerCompleteUpdate(CCanvas::redraw_e flags);
 
-    CMouseAdapter * getMouse() { return mouseBase; }
-
     void resetMouse();
     void mouseTrackingLost();
     void setMouseMoveWpt(CGisItemWpt& wpt);
@@ -195,7 +193,6 @@ private:
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
     void setDrawContextSize(const QSize& s);
-    void setMouseCursor(IMouse& mouse, const QString& src);
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
@@ -207,9 +204,8 @@ private:
     /// the current point of focus (usually the canvas center)
     QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};
 
-    CMouseAdapter * mouseBase;
-    /// the current mouse handler
-    IMouse * mouse;
+    /// the mouse handler
+    CMouseAdapter * mouse;
 
     /// tool tip timer for vector map tool tips
     QTimer * timerToolTip;

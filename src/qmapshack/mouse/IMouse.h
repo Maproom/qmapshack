@@ -37,7 +37,7 @@ public:
 
     virtual void leftClicked(const QPoint& pos) {}
     virtual void mouseMoved(const QPoint& pos) {}
-    virtual void mouseDraged(const QPoint& start, const QPoint& last, const QPoint& end);
+    virtual void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end);
     virtual void leftButtonDown(const QPoint& pos) {}
     virtual void rightButtonDown(const QPoint& pos);
     virtual void doubleClicked(const QPoint& pos) {}

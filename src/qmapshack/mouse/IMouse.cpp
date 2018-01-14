@@ -33,7 +33,7 @@ IMouse::~IMouse()
 {
 }
 
-void IMouse::mouseDraged(const QPoint &start, const QPoint &last, const QPoint &end)
+void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
     canvas->moveMap(end-last);
 }

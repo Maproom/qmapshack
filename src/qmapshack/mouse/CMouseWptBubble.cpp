@@ -68,14 +68,14 @@ void CMouseWptBubble::mouseMoved(const QPoint &pos)
     }
 }
 
-void CMouseWptBubble::mouseDraged(const QPoint& start, const QPoint &last, const QPoint&end)
+void CMouseWptBubble::mouseDragged(const QPoint& start, const QPoint &last, const QPoint&end)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(CGisWorkspace::self().getItemByKey(key));
     if(wpt)
     {
-        wpt->mouseDraged(start,last,end);
+        wpt->mouseDragged(start,last,end);
     }
     else
     {

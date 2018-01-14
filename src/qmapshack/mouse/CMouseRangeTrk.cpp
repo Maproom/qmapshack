@@ -80,11 +80,11 @@ void CMouseRangeTrk::leftButtonDown(const QPoint& pos)
     canvas->reportStatus(key.item, "");
 }
 
-void CMouseRangeTrk::mouseDraged(const QPoint &start, const QPoint &last, const QPoint &end)
+void CMouseRangeTrk::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
 {
     if (state != eStateRangeSelected)
     {
-        IMouse::mouseDraged(start, last, end);
+        IMouse::mouseDragged(start, last, end);
         if (anchor != NOPOINTF)
         {
             anchor += end-last;

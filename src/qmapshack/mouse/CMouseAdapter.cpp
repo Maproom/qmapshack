@@ -62,7 +62,7 @@ void CMouseAdapter::mouseMoveEvent(QMouseEvent *e)
     {
         if(mouseDown)
         {
-            delegate->mouseDraged(firstPos, lastPos, pos);
+            delegate->mouseDragged(firstPos, lastPos, pos);
         }
         else
         {

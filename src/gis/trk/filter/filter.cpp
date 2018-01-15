@@ -337,6 +337,13 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
     QEasingCurve upHillCurve(QEasingCurve::OutQuad);
     QEasingCurve downHillCurve(QEasingCurve::InQuad);
 
+    qreal minP = -100000; // Debug only
+    qreal maxP = 100000;
+    qreal minD = -100000;
+    qreal maxD = 100000;
+    qreal minS = 100000;
+    qreal maxS = -100000;
+
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -350,19 +357,27 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
         }
         else if(pt.slope2 < 0 && pt.slope2 >= slopeAtMaxSpeed)
         {
-            // -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y
+//             -(P2Y-P0Y)/POTENZ(P2X;2)*POTENZ(slope-P2X;2)+P2Y old math
 //            speed = -(maxSpeed - linearSpeed) / pow(slopeAtMaxSpeed, 2) * pow(pt.slope2 - slopeAtMaxSpeed, 2) + maxSpeed;
             speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(pt.slope2 / slopeAtMaxSpeed);
+
+            maxP = qMin(maxP, pt.slope2); // KKA: Debug only
+            maxD = qMin(maxD, pt.slope1);
+            maxS = qMax(maxS, speed);
         }
         else if(pt.slope2 == 0)
         {
            speed = plainSpeed;
         }
-        else if(pt.slope2 > 0 && pt.slope2 <= slopeAtMinSpeed)
+        else if(pt.slope2    > 0 && pt.slope2 <= slopeAtMinSpeed)
         {
-            // (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y
+//             (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y old math
 //            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - pt.slope2, 2) + minSpeed;
             speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(pt.slope2 / slopeAtMinSpeed);
+
+            minP = qMax(minP, pt.slope2); // KKA: Debug only
+            minD = qMax(minD, pt.slope1);
+            minS = qMin(minS, speed);
         }
         else if(pt.slope2 > slopeAtMinSpeed)
         {
@@ -377,12 +392,17 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
         ++noOfPoints;
     }
 
-    speed = averageSpeed / noOfPoints;
+    qDebug() << "KKA: Min Speed=" << minS * 3.6 << "Max Speed=" << maxS * 3.6;
 
-    deriveSecondaryData();
-    QString val, unit;
-    IUnit::self().meter2speed(speed, val, unit);
-    changed(tr("Changed average speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    if (noOfPoints)
+    {
+        speed = averageSpeed / noOfPoints;
+
+        deriveSecondaryData();
+        QString val, unit;
+        IUnit::self().meter2speed(speed, val, unit);
+        changed(tr("Changed average speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    }
 }
 
 void CGisItemTrk::filterSpeed(qreal speed)
@@ -408,6 +428,40 @@ void CGisItemTrk::filterSpeed(qreal speed)
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+}
+
+bool CGisItemTrk::filterCheckForValidSlopes()
+{
+    bool ret = true;
+
+    if((getAllValidFlags() & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))
+    {
+        ret = false;
+    }
+    else
+    {
+        for(CTrackData::trkpt_t &pt : trk)
+        {
+            if(pt.isHidden())
+            {
+                continue;
+            }
+
+            if(qIsInf(pt.slope2) || qIsNaN(pt.slope2) || pt.slope2 == NOFLOAT || pt.ele == NOINT)
+            {
+                ret = false;
+                break;
+            }
+        }
+    }
+    return ret;
+}
+
+void CGisItemTrk::filterGetMinMaxSlopes(qreal &minSlope, qreal &maxSlope)
+{
+    const limits_t& limit = extrema["::ql:slope"];
+    minSlope = limit.min;
+    maxSlope = limit.max;
 }
 
 void CGisItemTrk::filterSplitSegment()

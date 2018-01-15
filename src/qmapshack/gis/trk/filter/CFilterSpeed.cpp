@@ -158,7 +158,7 @@ void CFilterSpeed::slotApply()
     case 1:
     {
         qint32 i = cbxCyclingType->currentIndex();
-        qreal slopeAtMinSpeedUnit, slopeAtMaxSpeedUnit;
+        qreal slopeAtMinSpeedUnit = 0, slopeAtMaxSpeedUnit = 0;
 
         if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
         {

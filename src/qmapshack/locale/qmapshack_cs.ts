@@ -4,17 +4,17 @@
 <context>
     <name>CAbout</name>
     <message>
-        <location filename="../CAbout.cpp" line="38"/>
+        <location filename="../CAbout.cpp" line="46"/>
         <source>%1 (API V%2, expected V%3)</source>
         <translation>%1 (API verze %2, očekávána verze %3)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="42"/>
+        <location filename="../CAbout.cpp" line="50"/>
         <source>%1 (API V%2)</source>
         <translation>%1 (API verze %2)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="49"/>
+        <location filename="../CAbout.cpp" line="57"/>
         <source>(no DBUS: device detection and handling disabled)</source>
         <translation>(žádné DBUS: zjišťování zařízení a zacházení s ním zakázáno)</translation>
     </message>
@@ -120,12 +120,12 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="63"/>
+        <location filename="../canvas/CCanvas.cpp" line="64"/>
         <source>View %1</source>
         <translation>Pohled %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="766"/>
+        <location filename="../canvas/CCanvas.cpp" line="725"/>
         <source>Setup Map Background</source>
         <translation>Nastavit pozadí mapy</translation>
     </message>
@@ -1471,12 +1471,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Přidat obrázek</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="884"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="898"/>
         <source>Changed to proximity-radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="889"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="903"/>
         <source>Changed to nogo-area</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1740,12 +1740,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Převést na stopu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="213"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Create Route</source>
         <translation>Vytvořit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="214"/>
+        <location filename="../gis/CGisListWks.cpp" line="212"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Změnit ikonu (pouze vybrané cestovní body)</translation>
     </message>
@@ -1755,24 +1755,24 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Nastavit činnost stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="647"/>
+        <location filename="../gis/CGisListWks.cpp" line="645"/>
         <source>Drop items...</source>
         <translation>Zahodit prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="672"/>
-        <location filename="../gis/CGisListWks.cpp" line="1783"/>
-        <location filename="../gis/CGisListWks.cpp" line="1821"/>
+        <location filename="../gis/CGisListWks.cpp" line="670"/>
+        <location filename="../gis/CGisListWks.cpp" line="1794"/>
+        <location filename="../gis/CGisListWks.cpp" line="1832"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1257"/>
+        <location filename="../gis/CGisListWks.cpp" line="1263"/>
         <source>Delete project...</source>
         <translation>Smazat projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1257"/>
+        <location filename="../gis/CGisListWks.cpp" line="1263"/>
         <source>Do you really want to delete %1?</source>
         <translation>Opravdu chcete smazat %1?</translation>
     </message>
@@ -1837,7 +1837,7 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Spojit stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="205"/>
+        <location filename="../gis/CGisListWks.cpp" line="204"/>
         <source>Edit Area Points</source>
         <translation>Upravit body oblasti</translation>
     </message>
@@ -1848,22 +1848,22 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="798"/>
+        <location filename="../gis/CGisListWks.cpp" line="796"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ukládá se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="844"/>
+        <location filename="../gis/CGisListWks.cpp" line="842"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Nahrává se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1231"/>
+        <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>Close all projects...</source>
         <translation>Zavřít všechny projekty...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1231"/>
+        <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tímto budou všechny projekty odstraněny z pracovního prostoru.</translation>
     </message>
@@ -1881,27 +1881,27 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation type="unfinished">Projekt &quot;%1&quot; je již náhrán do pracovního prostoru.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="213"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation type="unfinished">&lt;b&gt;Výběr prvků: &lt;/b&gt;Prvek vybrán ze seznamu pracovního prostoru. Klepněte na mapu pro přepnutí zpět do běžného chování při výběru myší.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="626"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="630"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="645"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="649"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished">Změnit značky cestovních bodů.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="813"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Rozkrojit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="813"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
         <source>Do you want to delete the original track?</source>
         <translation type="unfinished">Opravdu chcete smazat původní stopu?</translation>
     </message>
@@ -2335,54 +2335,54 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="859"/>
+        <location filename="../CMainWindow.cpp" line="867"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Použít &lt;b&gt;Nabídka → Pohled → Přidat pohled na mapu&lt;/b&gt; k otevření nového pohledu. Nebo &lt;b&gt;Nabídka → Soubor → Nahrát pohled na mapu&lt;/b&gt; k obnovení uložené. Nebo klepněte &lt;a href=&apos;newview&apos;&gt;sem&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="987"/>
+        <location filename="../CMainWindow.cpp" line="995"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished">Výška: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="999"/>
+        <location filename="../CMainWindow.cpp" line="1007"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished">Sklon: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1015"/>
+        <location filename="../CMainWindow.cpp" line="1023"/>
         <source>[Grid: %1]</source>
         <translation>[Mřížka: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1156"/>
+        <location filename="../CMainWindow.cpp" line="1164"/>
         <source>Load GIS Data...</source>
         <translation>Nahrát data GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1190"/>
+        <location filename="../CMainWindow.cpp" line="1198"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1190"/>
-        <location filename="../CMainWindow.cpp" line="1216"/>
+        <location filename="../CMainWindow.cpp" line="1198"/>
+        <location filename="../CMainWindow.cpp" line="1224"/>
         <source>QMapShack View (*.view)</source>
         <translation>Pohled QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1216"/>
+        <location filename="../CMainWindow.cpp" line="1224"/>
         <source>Select file to load</source>
         <translation>Vybrat soubor k nahrání</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1532"/>
+        <location filename="../CMainWindow.cpp" line="1545"/>
         <source>Fatal...</source>
         <translation>Kritické...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1533"/>
+        <location filename="../CMainWindow.cpp" line="1546"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack zjistil, že knihovna Proj4 je nainstalována špatně. Chybí překladové tabulky pro promítání EPSG, jež jsou obvykle uloženy v /usr/share/proj. Spojte se, prosím, s údržbářem balíčku ve vaší distribuci, aby to spravil.</translation>
     </message>
@@ -3279,7 +3279,7 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit oblast&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="94"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="88"/>
         <source>area</source>
         <translation>Oblast</translation>
     </message>
@@ -3298,7 +3298,7 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="105"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="99"/>
         <source>route</source>
         <translation>Cesta</translation>
     </message>
@@ -3317,17 +3317,17 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Upravit body cesty&lt;/b&gt;&lt;br/&gt;Vyberte funkci a režim stanovení směru cesty přes nástrojová tlačítka. Dále vyberte bod na čáře. Lze měnit pouze body označené velkým čtverečkem. Černé body jsou podbody vytvořenými při stanovení směru cesty.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="74"/>
         <source>Warning!</source>
         <translation>Varování!</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="74"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation>Tímto budou všechny původní údaje nahrazeny jednoduchou čárou souřadnic. Všechna ostatní data budou trvale ztracena.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>track</source>
         <translation>Stopa</translation>
     </message>
@@ -3335,42 +3335,42 @@ Neznámá stavba.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="40"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
         <source>Add POI as Waypoint</source>
         <translation>Přidat POI jako cestovní bod</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Přidat cestovní bod</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
         <translation>Přidat stopu</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Route</source>
         <translation>Přidat cestu</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
         <source>Add Area</source>
         <translation>Přidat oblast</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
         <source>Select Items On Map</source>
         <translation>Vybrat prvky na mapě</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="49"/>
         <source>Copy position</source>
         <translation>Kopírovat polohu</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="49"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="50"/>
         <source>Copy position (Grid)</source>
         <translation>Kopírovat polohu (mřížka)</translation>
     </message>
@@ -3378,7 +3378,7 @@ Neznámá stavba.</translation>
 <context>
     <name>CMousePrint</name>
     <message>
-        <location filename="../mouse/CMousePrint.cpp" line="31"/>
+        <location filename="../mouse/CMousePrint.cpp" line="32"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation>&lt;b&gt;Uložit mapu (vytisknout)&lt;/b&gt;&lt;br/&gt;Vyberte na mapě obdélníkovou oblast. použijte levé tlačítko myši a pohybujte myší. Zrušte výběr klepnutím pravým tlačítkem myši. Výběr lze upravit posunutím rohových bodů myší. Uložení/Vytištění následuje po klepnutí levým tlačítkem myši na odpovídající symbol uprostřed výběru.</translation>
     </message>
@@ -3386,7 +3386,7 @@ Neznámá stavba.</translation>
 <context>
     <name>CMouseRangeTrk</name>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="239"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="194"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Upravit rozsah&lt;/b&gt;&lt;br/&gt;Vyberte první bod stopy klepnutím levým tlačítkem myši. A potom druhý bod. Opusťte výběr rozsahu klepnutím pravým tlačítkem myši.&lt;br/&gt;</translation>
     </message>
@@ -4643,52 +4643,52 @@ není platným vymezením soustavy souřadnic
 <context>
     <name>CScrOptSelect</name>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="93"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="94"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přesný režim&lt;/b&gt;&lt;br/&gt;Všechny vybrané prvky musí být úplně uvnitř vybrané oblasti.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="97"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="98"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Protínající se režim&lt;/b&gt;&lt;br/&gt;Všechny vybrané prvky musí být uvnitř nebo alespoň protínat vybranou oblast.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="101"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="102"/>
         <source>&lt;b&gt;Add Tracks&lt;/b&gt;&lt;br/&gt;Add tracks to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat stopy&lt;/b&gt;&lt;br/&gt;Přidat stopy do seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="105"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="106"/>
         <source>&lt;b&gt;Add Waypoints&lt;/b&gt;&lt;br/&gt;Add waypoints to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat cestovní body&lt;/b&gt;&lt;br/&gt;Přidat cestovní body do seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="109"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="110"/>
         <source>&lt;b&gt;Add Routes&lt;/b&gt;&lt;br/&gt;Add routes to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat cesty&lt;/b&gt;&lt;br/&gt;Přidat cesty do seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="113"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="114"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat oblasti&lt;/b&gt;&lt;br/&gt;Přidat oblasti do seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="124"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="125"/>
         <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehlížet stopy&lt;/b&gt;&lt;br/&gt;Přehlížet stopy v seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="128"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="129"/>
         <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehlížet cestovní body&lt;/b&gt;&lt;br/&gt;Přehlížet cestovní body v seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="132"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="133"/>
         <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehlížet cesty&lt;/b&gt;&lt;br/&gt;Přehlížet cesty v seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="136"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="137"/>
         <source>&lt;b&gt;Ignore Areas&lt;/b&gt;&lt;br/&gt;Ignore areas in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přehlížet oblasti&lt;/b&gt;&lt;br/&gt;Přehlížet oblasti v seznamu vybraných prvků.&lt;br/&gt;</translation>
     </message>
@@ -5001,32 +5001,32 @@ line %2, column %3:
 <context>
     <name>CTemplateWidget</name>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="39"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>choose one...</source>
         <translation>Vybrat jeden...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Hiking Tour Summary (built-in)</source>
         <translation>Přehled pěšího výletu (vestavěno)</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="158"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="168"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
         <translation>Cesta k předloze...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="192"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
         <translation>Nepodařilo se přečíst soubor s předlohou %1.</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="246"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
         <translation>Náhled...</translation>
     </message>
@@ -7192,7 +7192,7 @@ Název souboru: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="279"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="190"/>
         <source>Routing</source>
         <translation>Cesta</translation>
     </message>
@@ -7259,377 +7259,382 @@ Název souboru: %1</translation>
         <translation>Nástroj</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="152"/>
+        <location filename="../IMainWindow.ui" line="153"/>
         <source>Maps</source>
         <translation>Mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="189"/>
+        <location filename="../IMainWindow.ui" line="190"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Digitální výškový model</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="282"/>
+        <location filename="../IMainWindow.ui" line="283"/>
         <source>Ctrl+T</source>
         <translation>Ctrl+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="297"/>
+        <location filename="../IMainWindow.ui" line="298"/>
         <source>Show Scale</source>
         <translation>Ukázat měřítko</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="309"/>
+        <location filename="../IMainWindow.ui" line="310"/>
         <source>Setup Map Font</source>
         <translation>Nastavit písmo mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="324"/>
+        <location filename="../IMainWindow.ui" line="325"/>
         <source>Show Grid</source>
         <translation>Ukázat mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="327"/>
+        <location filename="../IMainWindow.ui" line="328"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="339"/>
+        <location filename="../IMainWindow.ui" line="340"/>
         <source>Setup Grid</source>
         <translation>Nastavit mřížku</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="342"/>
+        <location filename="../IMainWindow.ui" line="343"/>
         <source>Ctrl+Alt+G</source>
         <translation>Ctrl+Alt+G</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="357"/>
+        <location filename="../IMainWindow.ui" line="358"/>
         <source>Flip Mouse Wheel</source>
         <translation>Obrátit kolečko myši</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="369"/>
-        <location filename="../IMainWindow.ui" line="372"/>
+        <location filename="../IMainWindow.ui" line="370"/>
+        <location filename="../IMainWindow.ui" line="373"/>
         <source>Setup Map Paths</source>
         <translation>Nastavit cesty k mapám</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="387"/>
+        <location filename="../IMainWindow.ui" line="388"/>
         <source>POI Text</source>
         <translation>Text POI</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="402"/>
+        <location filename="../IMainWindow.ui" line="403"/>
         <source>Night / Day</source>
         <translation>Noc/Den</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="417"/>
+        <location filename="../IMainWindow.ui" line="418"/>
         <source>Map Tool Tip</source>
         <translation>Rada k nástroji pro mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="432"/>
+        <location filename="../IMainWindow.ui" line="433"/>
         <source>Setup DEM Paths</source>
         <translation>Nastavit cesty k výškovým modelům</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="444"/>
+        <location filename="../IMainWindow.ui" line="445"/>
         <source>About</source>
         <translation>O programu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="456"/>
+        <location filename="../IMainWindow.ui" line="457"/>
         <source>Help</source>
         <translation>Nápověda</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="122"/>
-        <location filename="../IMainWindow.ui" line="222"/>
+        <location filename="../IMainWindow.ui" line="223"/>
         <source>Workspace</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="231"/>
+        <location filename="../IMainWindow.ui" line="232"/>
         <source>Toolbar</source>
         <translation>Nástrojový panel</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="245"/>
+        <location filename="../IMainWindow.ui" line="246"/>
         <source>Database</source>
         <translation type="unfinished">Databáze</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="257"/>
+        <location filename="../IMainWindow.ui" line="258"/>
         <source>Routing</source>
         <translation type="unfinished">Cesta</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="276"/>
-        <location filename="../IMainWindow.ui" line="279"/>
+        <location filename="../IMainWindow.ui" line="277"/>
+        <location filename="../IMainWindow.ui" line="280"/>
         <source>Add Map View</source>
         <translation>Přidat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="420"/>
+        <location filename="../IMainWindow.ui" line="421"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="459"/>
+        <location filename="../IMainWindow.ui" line="460"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="471"/>
-        <location filename="../IMainWindow.ui" line="474"/>
+        <location filename="../IMainWindow.ui" line="472"/>
+        <location filename="../IMainWindow.ui" line="475"/>
         <source>Setup Map View</source>
         <translation>Nastavit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="486"/>
+        <location filename="../IMainWindow.ui" line="487"/>
         <source>Load GIS Data</source>
         <translation>Nahrát data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="489"/>
+        <location filename="../IMainWindow.ui" line="490"/>
         <source>Load projects from file</source>
         <translation>Nahrát projekty ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="492"/>
+        <location filename="../IMainWindow.ui" line="493"/>
         <source>Ctrl+L</source>
         <translation>Ctrl+L</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="504"/>
+        <location filename="../IMainWindow.ui" line="505"/>
         <source>Save All GIS Data</source>
         <translation>Uložit všechna data GIS</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="507"/>
+        <location filename="../IMainWindow.ui" line="508"/>
         <source>Save all projects in the workspace</source>
         <translation>Uložit všechny projekty nacházející se v pracovním prostoru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="510"/>
+        <location filename="../IMainWindow.ui" line="511"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="522"/>
+        <location filename="../IMainWindow.ui" line="523"/>
         <source>Setup Time Zone</source>
         <translation>Nastavit časové pásmo</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
+        <location filename="../IMainWindow.ui" line="535"/>
         <source>Add empty project</source>
         <translation>Přidat prázdný projekt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="549"/>
+        <location filename="../IMainWindow.ui" line="550"/>
         <source>Search Google</source>
         <translation>Hledat pomocí Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="561"/>
+        <location filename="../IMainWindow.ui" line="562"/>
         <source>Close all projects</source>
         <translation>Zavřít všechny projekty</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="564"/>
+        <location filename="../IMainWindow.ui" line="565"/>
         <source>F8</source>
         <translation>F8</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="576"/>
+        <location filename="../IMainWindow.ui" line="577"/>
         <source>Setup Units</source>
         <translation>Nastavit jednotky</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="588"/>
+        <location filename="../IMainWindow.ui" line="589"/>
         <source>Setup Workspace</source>
         <translation>Nastavit pracovní prostor</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="591"/>
+        <location filename="../IMainWindow.ui" line="592"/>
         <source>Setup save on exit.</source>
         <translation>Nastavit uložení při ukončení.</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="603"/>
+        <location filename="../IMainWindow.ui" line="604"/>
         <source>Import Database from QLandkarte</source>
         <translation>Zavést databázi z QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="606"/>
+        <location filename="../IMainWindow.ui" line="607"/>
         <source>Import QLandkarte GT database</source>
         <translation>Zavést databázi GT QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="618"/>
+        <location filename="../IMainWindow.ui" line="619"/>
         <source>VRT Builder</source>
         <translation>Sestavovač VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="621"/>
+        <location filename="../IMainWindow.ui" line="622"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Rozhraní pro gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="633"/>
+        <location filename="../IMainWindow.ui" line="634"/>
         <source>Store Map View</source>
         <translation>Uložit pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="636"/>
+        <location filename="../IMainWindow.ui" line="637"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Zapsat nynější činnou mapu a seznam výškových modelů včetně vlastností do souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="648"/>
+        <location filename="../IMainWindow.ui" line="649"/>
         <source>Load Map View</source>
         <translation>Nahrát pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="651"/>
+        <location filename="../IMainWindow.ui" line="652"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Obnovit pohled s činnou mapou a seznam výškových modelů včetně vlastností ze souboru</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="666"/>
+        <location filename="../IMainWindow.ui" line="667"/>
         <source>Ext. Profile</source>
         <translation>Ext. Profil</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="669"/>
+        <location filename="../IMainWindow.ui" line="670"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="681"/>
+        <location filename="../IMainWindow.ui" line="682"/>
         <source>Close</source>
         <translation>Zavřít</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="684"/>
+        <location filename="../IMainWindow.ui" line="685"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="696"/>
+        <location filename="../IMainWindow.ui" line="697"/>
         <source>Clone Map View</source>
         <translation>Klonovat pohled na mapu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="699"/>
+        <location filename="../IMainWindow.ui" line="700"/>
         <source>Ctrl+Shift+T</source>
         <translation>Ctrl+Shift+T</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="711"/>
+        <location filename="../IMainWindow.ui" line="712"/>
         <source>Create Routino Database</source>
         <translation>Vytvořit databázi Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="723"/>
+        <location filename="../IMainWindow.ui" line="724"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Uložit (vytisknout) snímek obrazovky s mapou</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="726"/>
+        <location filename="../IMainWindow.ui" line="727"/>
         <source>Print a selected area of the map</source>
         <translation>Vytisknout vybranou oblast mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="729"/>
+        <location filename="../IMainWindow.ui" line="730"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="741"/>
+        <location filename="../IMainWindow.ui" line="742"/>
         <source>Setup Coord. Format</source>
         <translation>Nastavit formát souřadnic</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="744"/>
+        <location filename="../IMainWindow.ui" line="745"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Změnit formát, v němž jsou souřadnice zobrazeny</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="756"/>
+        <location filename="../IMainWindow.ui" line="757"/>
         <source>Setup Map Background</source>
         <translation>Nastavit pozadí mapy</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="768"/>
+        <location filename="../IMainWindow.ui" line="769"/>
         <source>Setup Waypoint Icons</source>
         <translation>Stanovit ikony cestovních bodů</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="771"/>
+        <location filename="../IMainWindow.ui" line="772"/>
         <source>Setup path to custom icons</source>
         <translation>Stanovit cestu k vlastním ikonám</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="780"/>
+        <location filename="../IMainWindow.ui" line="781"/>
         <source>Close Tab</source>
         <translation>Zavřít kartu</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="783"/>
+        <location filename="../IMainWindow.ui" line="784"/>
         <source>Ctrl+W</source>
         <translation>Ctrl+W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="792"/>
+        <location filename="../IMainWindow.ui" line="793"/>
         <source>Quickstart Help</source>
         <translation>Nápověda pro rychlý začátek</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="801"/>
+        <location filename="../IMainWindow.ui" line="802"/>
         <source>Setup Toolbar</source>
         <translation>Nastavit nástrojový panel</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="813"/>
+        <location filename="../IMainWindow.ui" line="814"/>
         <source>Toggle Docks</source>
         <translation>Přepnout panely</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="816"/>
+        <location filename="../IMainWindow.ui" line="817"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Přepnout viditelnost ukotvitelných oken</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="819"/>
+        <location filename="../IMainWindow.ui" line="820"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="828"/>
+        <location filename="../IMainWindow.ui" line="829"/>
         <source>Full Screen</source>
         <translation>Celá obrazovka</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="831"/>
+        <location filename="../IMainWindow.ui" line="832"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="843"/>
+        <location filename="../IMainWindow.ui" line="844"/>
         <source>Min./Max. Track Values</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="846"/>
+        <location filename="../IMainWindow.ui" line="847"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="849"/>
+        <location filename="../IMainWindow.ui" line="850"/>
         <source>Ctrl+N</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="859"/>
+        <source>Start QMapTool</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7948,67 +7953,67 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="249"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="250"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Nová čára&lt;/b&gt;&lt;br/&gt;Posuňte ukazovátko myši a použijte levé tlačítko myši k upuštění bodů. Až to bude uděláno, použijte pravé tlačítko myši k zastavení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="285"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Smazat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho smazání.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="293"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Upravit rozsah bodů&lt;/b&gt;&lt;br/&gt;Klepněte levým tlačítkem myši na první bod pro započetí výběru. Klepněte levým tlačítkem myši na druhý bod pro dokončení výběru a vyberte z voleb. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="301"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přesunout bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho držení v blízkosti ukazovátka. Posuňte myší pro přesunutí bodu. Upustěte bod klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="309"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k čáře a stiskněte levé tlačítko myši pro přidání bodu. Bod přilne k ukazovátku a vy jím budete moci pohnout. Bod upustěte klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="317"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Žádné stanovení cesty&lt;/b&gt;&lt;br/&gt;Všechny body budou spojeny přímou čarou.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="323"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Automatické stanovení cesty&lt;/b&gt;&lt;br/&gt;Nynější nastavení směrování je používáno k vytváření cesty mezi body. &lt;b&gt;Poznámka:&lt;/b&gt; Vybraný směrovač musí být schopen rychle směrovat (za běhu). Směrovače nepřipojené k internetu toto obvykle dokáží, směrovače připojené k internetu to běžně neumí.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="328"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vektorové stanovení cesty&lt;/b&gt;&lt;br/&gt;Spojuje body čárou z nahrané vektorové mapy, je-li to možné.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="500"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 metrika&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="518"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="503"/>
         <source>Distance:</source>
         <translation>Vzdálenost:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="505"/>
         <source>Ascent:</source>
         <translation>Stoupání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="522"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="507"/>
         <source>Descent:</source>
         <translation>Klesání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="137"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="136"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Posunout mapu&lt;/b&gt;&lt;br/&gt;Pokud levé tlačítko myši podržíte stisknuté a myší pohnete, posunete mapu.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
@@ -8149,8 +8154,8 @@ nebo
     <name>IProjWizard</name>
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
-        <source>Proj4 Wizzard</source>
-        <translation>Průvodce pro Proj4</translation>
+        <source>Proj4 Wizard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -10222,6 +10227,11 @@ nebo
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../units/IUnitsSetup.ui" line="48"/>
+        <source>Nautical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../units/IUnitsSetup.ui" line="74"/>
         <source>Metric</source>
         <translation>Metrické</translation>
@@ -10250,11 +10260,6 @@ nebo
         <location filename="../units/IUnitsSetup.ui" line="61"/>
         <source>Imperial</source>
         <translation>Anglické</translation>
-    </message>
-    <message>
-        <location filename="../units/IUnitsSetup.ui" line="48"/>
-        <source>Nautic</source>
-        <translation>Nautické</translation>
     </message>
 </context>
 <context>

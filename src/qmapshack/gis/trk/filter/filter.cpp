@@ -331,7 +331,7 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
-    qreal averageSpeed = 0, speed;
+    qreal averageSpeed = 0, speed = 0;
     qint32 noOfPoints = 0;
 
     QEasingCurve upHillCurve(QEasingCurve::OutQuad);

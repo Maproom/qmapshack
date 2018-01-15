@@ -4,17 +4,17 @@
 <context>
     <name>CAbout</name>
     <message>
-        <location filename="../CAbout.cpp" line="38"/>
+        <location filename="../CAbout.cpp" line="46"/>
         <source>%1 (API V%2, expected V%3)</source>
         <translation>%1 (API V%2, attendu V%3)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="42"/>
+        <location filename="../CAbout.cpp" line="50"/>
         <source>%1 (API V%2)</source>
         <translation>%1 (API V%2)</translation>
     </message>
     <message>
-        <location filename="../CAbout.cpp" line="49"/>
+        <location filename="../CAbout.cpp" line="57"/>
         <source>(no DBUS: device detection and handling disabled)</source>
         <translation>(DBUS absent : détection et gestion d&apos;appareil désactivée)</translation>
     </message>
@@ -120,12 +120,12 @@
 <context>
     <name>CCanvas</name>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="63"/>
+        <location filename="../canvas/CCanvas.cpp" line="64"/>
         <source>View %1</source>
         <translation>Vue %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="766"/>
+        <location filename="../canvas/CCanvas.cpp" line="725"/>
         <source>Setup Map Background</source>
         <translation>Réglage de l&apos;arrière-plan de la carte</translation>
     </message>
@@ -1471,12 +1471,12 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Ajouter une image</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="884"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="898"/>
         <source>Changed to proximity-radius</source>
         <translation>Changé pour rayon de proximité</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="889"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="903"/>
         <source>Changed to nogo-area</source>
         <translation>Changé pour zone interdite</translation>
     </message>
@@ -1806,17 +1806,17 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Convertir en trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="205"/>
+        <location filename="../gis/CGisListWks.cpp" line="204"/>
         <source>Edit Area Points</source>
         <translation>Éditer les points de la surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="213"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Create Route</source>
         <translation>Créer une route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="214"/>
+        <location filename="../gis/CGisListWks.cpp" line="212"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Change l&apos;icône (waypoint séléctionné seulement)</translation>
     </message>
@@ -1826,44 +1826,44 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Choisir l&apos;activité de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="647"/>
+        <location filename="../gis/CGisListWks.cpp" line="645"/>
         <source>Drop items...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="798"/>
+        <location filename="../gis/CGisListWks.cpp" line="796"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="844"/>
+        <location filename="../gis/CGisListWks.cpp" line="842"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1231"/>
+        <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1231"/>
+        <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1257"/>
+        <location filename="../gis/CGisListWks.cpp" line="1263"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1257"/>
+        <location filename="../gis/CGisListWks.cpp" line="1263"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="672"/>
-        <location filename="../gis/CGisListWks.cpp" line="1783"/>
-        <location filename="../gis/CGisListWks.cpp" line="1821"/>
+        <location filename="../gis/CGisListWks.cpp" line="670"/>
+        <location filename="../gis/CGisListWks.cpp" line="1794"/>
+        <location filename="../gis/CGisListWks.cpp" line="1832"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -1881,27 +1881,27 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Le projet &quot;%1&quot; est déjà présent dans l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="213"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Sélection d&apos;objets : &lt;/b&gt;Objet sélectionné depuis l&apos;espace de travail. Cliquez sur la carte pour revenir au mode normal de sélection à la souris.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="626"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="630"/>
         <source>Copy items...</source>
         <translation>Copier les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="645"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="649"/>
         <source>Change waypoint symbols.</source>
         <translation>Changer les symboles de waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="813"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
         <source>Cut Track...</source>
         <translation>Couper la trace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="813"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voulez-vous supprimer la trace originale?</translation>
     </message>
@@ -2335,54 +2335,54 @@ ligne %2, colonne %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="859"/>
+        <location filename="../CMainWindow.cpp" line="867"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Add Map View&lt;/b&gt; pour ouvrir une nouvelle vue. Ou &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour charger une vue sauvegardée. Ou cliquez &lt;a href=&apos;newview&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="987"/>
+        <location filename="../CMainWindow.cpp" line="995"/>
         <source>Ele.: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="999"/>
+        <location filename="../CMainWindow.cpp" line="1007"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pente du terrain : %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1015"/>
+        <location filename="../CMainWindow.cpp" line="1023"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1156"/>
+        <location filename="../CMainWindow.cpp" line="1164"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1190"/>
+        <location filename="../CMainWindow.cpp" line="1198"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1190"/>
-        <location filename="../CMainWindow.cpp" line="1216"/>
+        <location filename="../CMainWindow.cpp" line="1198"/>
+        <location filename="../CMainWindow.cpp" line="1224"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1216"/>
+        <location filename="../CMainWindow.cpp" line="1224"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1532"/>
+        <location filename="../CMainWindow.cpp" line="1545"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1533"/>
+        <location filename="../CMainWindow.cpp" line="1546"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG lstockées en généra dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
     </message>
@@ -3275,7 +3275,7 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Éditer la surface&lt;/b&gt;&lt;br/&gt;Choisissez und fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seulement les points marqués d&apos;un carré large peuvet être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditArea.cpp" line="94"/>
+        <location filename="../mouse/CMouseEditArea.cpp" line="88"/>
         <source>area</source>
         <translation>surface</translation>
     </message>
@@ -3294,7 +3294,7 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Éditer les points de la route&lt;/b&gt;&lt;br/&gt;Choisissez une fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seul les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditRte.cpp" line="105"/>
+        <location filename="../mouse/CMouseEditRte.cpp" line="99"/>
         <source>route</source>
         <translation>route</translation>
     </message>
@@ -3313,17 +3313,17 @@ Structure inconnue.</translation>
         <translation>&lt;b&gt;Éditer les points de la trace&lt;/b&gt;&lt;br/&gt;Choisissez une fonction et un mode de calcul d&apos;itinéraire à l&apos;aide des boutons d&apos;outils. Ensuite, sélectionnez un point de la ligne. Seul les points marqués d&apos;un carré large peuvent être modifiés. Les points noirs sont des sous-points introduits par le calcul d&apos;itinéraire.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="74"/>
         <source>Warning!</source>
         <translation>Avertissement !</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="80"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="74"/>
         <source>This will replace all data of the original by a simple line of coordinates. All other data will be lost permanently.</source>
         <translation>La trace obtenue ne contiendra que des données de position. Toutes les autres données (altitude, temps, etc...) seront perdues.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseEditTrk.cpp" line="110"/>
+        <location filename="../mouse/CMouseEditTrk.cpp" line="104"/>
         <source>track</source>
         <translation>trace</translation>
     </message>
@@ -3331,42 +3331,42 @@ Structure inconnue.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="40"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
         <source>Add POI as Waypoint</source>
         <translation>Ajouter PI comme waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="41"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
         <source>Add Waypoint</source>
         <translation>Ajouter un waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
         <source>Add Track</source>
         <translation>Ajouter une trace</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
         <source>Add Route</source>
         <translation>Ajouter une route</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
         <source>Add Area</source>
         <translation>Ajouter une surface</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="47"/>
         <source>Select Items On Map</source>
         <translation>Selectionner des objets sur la carte</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="49"/>
         <source>Copy position</source>
         <translation>Copier la position</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="49"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="50"/>
         <source>Copy position (Grid)</source>
         <translation>Copier la position (grille)</translation>
     </message>
@@ -3374,7 +3374,7 @@ Structure inconnue.</translation>
 <context>
     <name>CMousePrint</name>
     <message>
-        <location filename="../mouse/CMousePrint.cpp" line="31"/>
+        <location filename="../mouse/CMousePrint.cpp" line="32"/>
         <source>&lt;b&gt;Save(Print) Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation>&lt;b&gt;Sauvegarder (Imprimer) la carte&lt;/b&gt;&lt;/br&gt;Sélectionnez une zone rectangulaire sur la carte. Utilisez le clic gauche et déplacez la souris. Pour annuler utilisez le clic droit. Ajustez la sélection en déplaçant les coins en gardant enfoncé le bouton gauche de la souris.</translation>
     </message>
@@ -3382,7 +3382,7 @@ Structure inconnue.</translation>
 <context>
     <name>CMouseRangeTrk</name>
     <message>
-        <location filename="../mouse/CMouseRangeTrk.cpp" line="239"/>
+        <location filename="../mouse/CMouseRangeTrk.cpp" line="194"/>
         <source>&lt;b&gt;Select Range&lt;/b&gt;&lt;br/&gt;Select first track point with left mouse button. And then a second one. Leave range selection with a click of the right mouse button.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Sélectionner une plage&lt;/b&gt;&lt;br/&gt;Sélectionner le 1er pointpar un clic gauche. Puis un second point. Clic droit pour quitter le mode &quot;sélection de plage&quot;.&lt;br/&gt;</translation>
     </message>
@@ -4639,52 +4639,52 @@ n&apos;est pas une définition de système de coordonnées:
 <context>
     <name>CScrOptSelect</name>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="93"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="94"/>
         <source>&lt;b&gt;Exact Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be completely inside the selected area.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Mode exact&lt;/b&gt;&lt;br/&gt;Tous les objets selectionnés doivent être totalement inclus dans la zone sélectionnée.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="97"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="98"/>
         <source>&lt;b&gt;Intersecting Mode&lt;/b&gt;&lt;br/&gt;All selected items have to be inside or at least intersect the selected area.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Mode intersection&lt;/b&gt;&lt;br/&gt;Tous les objets selectionnés doivent avoir au moins une partie incluse dans la zone sélectionnée.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="101"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="102"/>
         <source>&lt;b&gt;Add Tracks&lt;/b&gt;&lt;br/&gt;Add tracks to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ajouter des traces&lt;/b&gt;&lt;br/&gt;Ajouter des traces à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="105"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="106"/>
         <source>&lt;b&gt;Add Waypoints&lt;/b&gt;&lt;br/&gt;Add waypoints to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ajouter des waypoints&lt;/b&gt;&lt;br/&gt;Ajouter des waypoints à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="109"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="110"/>
         <source>&lt;b&gt;Add Routes&lt;/b&gt;&lt;br/&gt;Add routes to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ajouter des routes&lt;/b&gt;&lt;br/&gt;Ajouter des routes à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="113"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="114"/>
         <source>&lt;b&gt;Add Areas&lt;/b&gt;&lt;br/&gt;Add areas to list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ajouter des surfaces&lt;/b&gt;&lt;br/&gt;Ajouter des surfaces à la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="124"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="125"/>
         <source>&lt;b&gt;Ignore Tracks&lt;/b&gt;&lt;br/&gt;Ignore tracks in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ignorer les traces&lt;/b&gt;&lt;br/&gt;Ignore les traces dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="128"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="129"/>
         <source>&lt;b&gt;Ignore Waypoints&lt;/b&gt;&lt;br/&gt;Ignore waypoints in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ignorer les waypoints&lt;/b&gt;&lt;br/&gt;Ignore les waypoints dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="132"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="133"/>
         <source>&lt;b&gt;Ignore Routes&lt;/b&gt;&lt;br/&gt;Ignore routes in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ignorer les routes&lt;/b&gt;&lt;br/&gt;Ignore les routes dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CScrOptSelect.cpp" line="136"/>
+        <location filename="../mouse/CScrOptSelect.cpp" line="137"/>
         <source>&lt;b&gt;Ignore Areas&lt;/b&gt;&lt;br/&gt;Ignore areas in list of selected items&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ignorer les surfaces&lt;/b&gt;&lt;br/&gt;Ignore les surfaces dans la liste d&apos;objets selectionnés&lt;br/&gt;</translation>
     </message>
@@ -4997,32 +4997,32 @@ ligne %2, colonne %3:
 <context>
     <name>CTemplateWidget</name>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="39"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
         <source>choose one...</source>
         <translation>choisir ...</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="40"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Hiking Tour Summary (built-in)</source>
         <translation>Compte-rendu de randonnée (intégré)</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="158"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="168"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="169"/>
         <source>Template path...</source>
         <translation>Chemin du template</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="192"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="193"/>
         <source>Failed to read template file %1.</source>
         <translation>Impossible de lire le template %1.</translation>
     </message>
     <message>
-        <location filename="../widgets/CTemplateWidget.cpp" line="246"/>
+        <location filename="../widgets/CTemplateWidget.cpp" line="247"/>
         <source>Preview...</source>
         <translation>Aperçu...</translation>
     </message>
@@ -7186,7 +7186,7 @@ Nom de fichier: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="279"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="190"/>
         <source>Routing</source>
         <translation>Routage</translation>
     </message>
@@ -7253,376 +7253,381 @@ Nom de fichier: %1</translation>
         <translation>Outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="152"/>
+        <location filename="../IMainWindow.ui" line="153"/>
         <source>Maps</source>
         <translation>Cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="189"/>
+        <location filename="../IMainWindow.ui" line="190"/>
         <source>Dig. Elev. Model (DEM)</source>
         <translation>Modèle numérique de terrain (DEM)</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="122"/>
-        <location filename="../IMainWindow.ui" line="222"/>
+        <location filename="../IMainWindow.ui" line="223"/>
         <source>Workspace</source>
         <translation>Espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="231"/>
+        <location filename="../IMainWindow.ui" line="232"/>
         <source>Toolbar</source>
         <translation>Barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="257"/>
+        <location filename="../IMainWindow.ui" line="258"/>
         <source>Routing</source>
         <translation>Routage</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="276"/>
-        <location filename="../IMainWindow.ui" line="279"/>
+        <location filename="../IMainWindow.ui" line="277"/>
+        <location filename="../IMainWindow.ui" line="280"/>
         <source>Add Map View</source>
         <translation>Ajouter une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="282"/>
+        <location filename="../IMainWindow.ui" line="283"/>
         <source>Ctrl+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="297"/>
+        <location filename="../IMainWindow.ui" line="298"/>
         <source>Show Scale</source>
         <translation>Afficher l&apos;échelle</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="309"/>
+        <location filename="../IMainWindow.ui" line="310"/>
         <source>Setup Map Font</source>
         <translation>Configurer la police de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="324"/>
+        <location filename="../IMainWindow.ui" line="325"/>
         <source>Show Grid</source>
         <translation>Afficher la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="327"/>
+        <location filename="../IMainWindow.ui" line="328"/>
         <source>Ctrl+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="339"/>
+        <location filename="../IMainWindow.ui" line="340"/>
         <source>Setup Grid</source>
         <translation>Configurer la grille</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="342"/>
+        <location filename="../IMainWindow.ui" line="343"/>
         <source>Ctrl+Alt+G</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="357"/>
+        <location filename="../IMainWindow.ui" line="358"/>
         <source>Flip Mouse Wheel</source>
         <translation>Inverser le sens de la molette de souris</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="369"/>
-        <location filename="../IMainWindow.ui" line="372"/>
+        <location filename="../IMainWindow.ui" line="370"/>
+        <location filename="../IMainWindow.ui" line="373"/>
         <source>Setup Map Paths</source>
         <translation>Configurer les répertoires des cartes</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="387"/>
+        <location filename="../IMainWindow.ui" line="388"/>
         <source>POI Text</source>
         <translation>Libellés des points d&apos;interêt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="402"/>
+        <location filename="../IMainWindow.ui" line="403"/>
         <source>Night / Day</source>
         <translation>Jour / Nuit</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="417"/>
+        <location filename="../IMainWindow.ui" line="418"/>
         <source>Map Tool Tip</source>
         <translation>Infobulles sur la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="420"/>
+        <location filename="../IMainWindow.ui" line="421"/>
         <source>Ctrl+I</source>
         <translation>CTRL + I</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="432"/>
+        <location filename="../IMainWindow.ui" line="433"/>
         <source>Setup DEM Paths</source>
         <translation>Configurer les répertoires DEM</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="444"/>
+        <location filename="../IMainWindow.ui" line="445"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="456"/>
+        <location filename="../IMainWindow.ui" line="457"/>
         <source>Help</source>
         <translation>Aide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="459"/>
+        <location filename="../IMainWindow.ui" line="460"/>
         <source>F1</source>
         <translation>F1</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="471"/>
-        <location filename="../IMainWindow.ui" line="474"/>
+        <location filename="../IMainWindow.ui" line="472"/>
+        <location filename="../IMainWindow.ui" line="475"/>
         <source>Setup Map View</source>
         <translation>Configurer la vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="486"/>
+        <location filename="../IMainWindow.ui" line="487"/>
         <source>Load GIS Data</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="489"/>
+        <location filename="../IMainWindow.ui" line="490"/>
         <source>Load projects from file</source>
         <translation>Charger un fichier projet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="492"/>
+        <location filename="../IMainWindow.ui" line="493"/>
         <source>Ctrl+L</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="504"/>
+        <location filename="../IMainWindow.ui" line="505"/>
         <source>Save All GIS Data</source>
         <translation>Enregistrer toutes les données SIG</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="507"/>
+        <location filename="../IMainWindow.ui" line="508"/>
         <source>Save all projects in the workspace</source>
         <translation>Enregistrer tous les projets de l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="510"/>
+        <location filename="../IMainWindow.ui" line="511"/>
         <source>Ctrl+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="522"/>
+        <location filename="../IMainWindow.ui" line="523"/>
         <source>Setup Time Zone</source>
         <translation>Configurer le fuseau horaire</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="534"/>
+        <location filename="../IMainWindow.ui" line="535"/>
         <source>Add empty project</source>
         <translation>Ajouter un projet vide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="549"/>
+        <location filename="../IMainWindow.ui" line="550"/>
         <source>Search Google</source>
         <translation>Recherche Google</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="561"/>
+        <location filename="../IMainWindow.ui" line="562"/>
         <source>Close all projects</source>
         <translation>Fermer tous les projets</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="564"/>
+        <location filename="../IMainWindow.ui" line="565"/>
         <source>F8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="576"/>
+        <location filename="../IMainWindow.ui" line="577"/>
         <source>Setup Units</source>
         <translation>Configurer les unités</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="588"/>
+        <location filename="../IMainWindow.ui" line="589"/>
         <source>Setup Workspace</source>
         <translation>Configurer l&apos;espace de travail</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="591"/>
+        <location filename="../IMainWindow.ui" line="592"/>
         <source>Setup save on exit.</source>
         <translation>Sauvegarde de la configuration en quittant</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="603"/>
+        <location filename="../IMainWindow.ui" line="604"/>
         <source>Import Database from QLandkarte</source>
         <translation>Importer une base de données QLandkarte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="606"/>
+        <location filename="../IMainWindow.ui" line="607"/>
         <source>Import QLandkarte GT database</source>
         <translation>Importer une base de données QLandkarte GT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="618"/>
+        <location filename="../IMainWindow.ui" line="619"/>
         <source>VRT Builder</source>
         <translation>Générateur de VRT</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="621"/>
+        <location filename="../IMainWindow.ui" line="622"/>
         <source>GUI front end to gdalbuildvrt</source>
         <translation>Interface utilisateur pour gdalbuildvrt</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="633"/>
+        <location filename="../IMainWindow.ui" line="634"/>
         <source>Store Map View</source>
         <translation>Enregistrer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="636"/>
+        <location filename="../IMainWindow.ui" line="637"/>
         <source>Write current active map and DEM list including the properties to a file</source>
         <translation>Sauvegarder les cartes et calques DEM actives et leurs paramètres dans un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="648"/>
+        <location filename="../IMainWindow.ui" line="649"/>
         <source>Load Map View</source>
         <translation>Charger une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="651"/>
+        <location filename="../IMainWindow.ui" line="652"/>
         <source>Restore view with active map and DEM list including the properties from a file</source>
         <translation>Rétablir une vue avec les cartes et calques DEM et leurs paramètres à partir d&apos;un fichier</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="666"/>
+        <location filename="../IMainWindow.ui" line="667"/>
         <source>Ext. Profile</source>
         <translation>Profile externe</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="669"/>
+        <location filename="../IMainWindow.ui" line="670"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="681"/>
+        <location filename="../IMainWindow.ui" line="682"/>
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="684"/>
+        <location filename="../IMainWindow.ui" line="685"/>
         <source>Ctrl+Q</source>
         <translation>CTRL + Q</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="696"/>
+        <location filename="../IMainWindow.ui" line="697"/>
         <source>Clone Map View</source>
         <translation>Dupliquer une vue cartographique</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="699"/>
+        <location filename="../IMainWindow.ui" line="700"/>
         <source>Ctrl+Shift+T</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="711"/>
+        <location filename="../IMainWindow.ui" line="712"/>
         <source>Create Routino Database</source>
         <translation>Créer une base de données Routino</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="723"/>
+        <location filename="../IMainWindow.ui" line="724"/>
         <source>Save(Print) Map Screenshot</source>
         <translation>Sauvegarder (Imprimer) une capture d&apos;écran de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="726"/>
+        <location filename="../IMainWindow.ui" line="727"/>
         <source>Print a selected area of the map</source>
         <translation>Imprimer une zone sélectionnée de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="729"/>
+        <location filename="../IMainWindow.ui" line="730"/>
         <source>Ctrl+P</source>
         <translation>CTRL + P</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="741"/>
+        <location filename="../IMainWindow.ui" line="742"/>
         <source>Setup Coord. Format</source>
         <translation>Choisir le format de coordonnées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="744"/>
+        <location filename="../IMainWindow.ui" line="745"/>
         <source>Change the format coordinates are displayed</source>
         <translation>Modifier le format des coordonnées affichées</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="756"/>
+        <location filename="../IMainWindow.ui" line="757"/>
         <source>Setup Map Background</source>
         <translation>Modifier l&apos;arrière-plan de la carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="768"/>
+        <location filename="../IMainWindow.ui" line="769"/>
         <source>Setup Waypoint Icons</source>
         <translation>Modifer les icônes des waypoints</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="771"/>
+        <location filename="../IMainWindow.ui" line="772"/>
         <source>Setup path to custom icons</source>
         <translation>Modifier le chemin des icônes personnalisés</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="780"/>
+        <location filename="../IMainWindow.ui" line="781"/>
         <source>Close Tab</source>
         <translation>Fermer l&apos;onglet</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="783"/>
+        <location filename="../IMainWindow.ui" line="784"/>
         <source>Ctrl+W</source>
         <translation>CTRL + W</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="792"/>
+        <location filename="../IMainWindow.ui" line="793"/>
         <source>Quickstart Help</source>
         <translation>Aide Rapide</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="801"/>
+        <location filename="../IMainWindow.ui" line="802"/>
         <source>Setup Toolbar</source>
         <translation>Réglages barre d&apos;outils</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="813"/>
+        <location filename="../IMainWindow.ui" line="814"/>
         <source>Toggle Docks</source>
         <translation>Activer les docks</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="816"/>
+        <location filename="../IMainWindow.ui" line="817"/>
         <source>Toggle visibility of dockable windows</source>
         <translation>Activer la visibilité des fenêtres dockables</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="819"/>
+        <location filename="../IMainWindow.ui" line="820"/>
         <source>Ctrl+D</source>
         <translation>CTRL + D</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="828"/>
+        <location filename="../IMainWindow.ui" line="829"/>
         <source>Full Screen</source>
         <translation>Plein écran</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="831"/>
+        <location filename="../IMainWindow.ui" line="832"/>
         <source>F11</source>
         <translation>F11</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="843"/>
+        <location filename="../IMainWindow.ui" line="844"/>
         <source>Min./Max. Track Values</source>
         <translation>Valeurs Min./Max. des traces</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="846"/>
+        <location filename="../IMainWindow.ui" line="847"/>
         <source>Show the minimum and maximum values of the track properties along the track in the map view.</source>
         <translation>Afficher les valeurs min/max le long de la trace dans la vue carte</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="849"/>
+        <location filename="../IMainWindow.ui" line="850"/>
         <source>Ctrl+N</source>
         <translation>Ctrl+N</translation>
     </message>
     <message>
-        <location filename="../IMainWindow.ui" line="245"/>
+        <location filename="../IMainWindow.ui" line="859"/>
+        <source>Start QMapTool</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../IMainWindow.ui" line="246"/>
         <source>Database</source>
         <translation>Base de données</translation>
     </message>
@@ -7942,67 +7947,67 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="249"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="250"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Nouvelle ligne&lt;/b&gt;&lt;br/&gt;Déplacez la souris et utilisez le bouton gauche pour ajouter des points. Cliquez droit pour terminer.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="285"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Supprimer un point&lt;/b&gt;&lt;br/&gt;Approchez le pointeur du point et cliquez gauche pour le supprimer.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="293"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Sélectionner une série de points&lt;/b&gt;&lt;br/&gt; Pour commencer la sélection, cliquez gauche sur le premier point. Cliquez gauche sur le sur le deuxième point pour terminer la sélection et choisissez une option. Utilisez le bouton droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="301"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Déplacer un point&lt;/b&gt;&lt;br/&gt;Approchez le pointeur près d&apos;un point et cliquez gauche pour le coller au pointeur. Déplacez le point avec la souris. Déposez le point avec un clic gauche. Utilisez le bouton droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="309"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Ajouter un point&lt;/b&gt;&lt;br/&gt;Placez le pointeur de la souris près d&apos;un segment de ligne et cliquez gauche pour ajouter un point. Le nouveau point va coller au pointeur et vous pouvez le déplacer. Déposez le point par un clic gauche. Utilisez le clic droit pour annuler.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="317"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Aucun calcul d&apos;itinéraire&lt;/b&gt;&lt;br/&gt;Les points seront connectés par une ligne droite.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="323"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Calcul d&apos;itinéraire automatique&lt;/b&gt;&lt;br/&gt;Les paramètres de calcul d&apos;itinéraire actuels serviront pour calculer un tracé entre les points. &lt;b&gt;Remarque :&lt;/b&gt;Le routeur sélectionné doit être capable de faire le calcul à la volée. Généralement, les routeurs hors ligne en sont capables, les routeurs en ligne ne le sont pas.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="328"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Calcul d&apos;itinéraire vecteur&lt;/b&gt;&lt;br/&gt;Connecter les points avec une ligne basée sur une carte vecteur active, si possible.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="515"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="500"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 Mesures&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="518"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="503"/>
         <source>Distance:</source>
         <translation>Distance:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="505"/>
         <source>Ascent:</source>
         <translation>Montée:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="522"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="507"/>
         <source>Descent:</source>
         <translation>Descente:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="137"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="136"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -8141,8 +8146,8 @@ or
     <name>IProjWizard</name>
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
-        <source>Proj4 Wizzard</source>
-        <translation></translation>
+        <source>Proj4 Wizard</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -10215,6 +10220,11 @@ or
         <translation>Unité de longueur</translation>
     </message>
     <message>
+        <location filename="../units/IUnitsSetup.ui" line="48"/>
+        <source>Nautical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../units/IUnitsSetup.ui" line="74"/>
         <source>Metric</source>
         <translation>Métrique</translation>
@@ -10243,11 +10253,6 @@ or
         <location filename="../units/IUnitsSetup.ui" line="61"/>
         <source>Imperial</source>
         <translation>Impérial</translation>
-    </message>
-    <message>
-        <location filename="../units/IUnitsSetup.ui" line="48"/>
-        <source>Nautic</source>
-        <translation>Nautique</translation>
     </message>
 </context>
 <context>

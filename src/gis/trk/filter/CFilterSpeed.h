@@ -34,12 +34,15 @@ public:
 private slots:
     void slotApply();
 
-    void setCyclingType(int type);
-    void setPlainSpeed(double speed);
-    void setMinSpeed(double speed);
-    void setSlopeAtMinSpeed(double speed);
-    void setMaxSpeed(double speed);
-    void setSlopeAtMaxSpeed(double slope);
+    void slotSetActivityType(int type);
+    void slotSetCyclingType(int type);
+    void slotSetPlainSpeed(double speed);
+    void slotSetMinSpeed(double speed);
+    void slotSetSlopeAtMinSpeed(double speed);
+    void slotSetMaxSpeed(double speed);
+    void slotSetSlopeAtMaxSpeed(double slope);
+    void slotSetMinMaxSlopes(bool);
+
 
 private:
     CGisItemTrk& trk;
@@ -55,7 +58,6 @@ private:
     };
 
     QList <cycling_type_t> cyclingTypes;
-
 
 };
 

@@ -9,13 +9,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>908</width>
-    <height>281</height>
+    <width>1070</width>
+    <height>228</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1070</width>
+    <width>16777215</width>
     <height>16777215</height>
    </size>
   </property>
@@ -23,8 +23,11 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetDefaultConstraint</enum>
+   </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>3</number>
    </property>
    <property name="topMargin">
     <number>0</number>
@@ -83,6 +86,13 @@
          <string>Hiking</string>
         </property>
        </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblWarning">
+       <property name="text">
+        <string>lblWarning</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -258,7 +268,16 @@
             <item row="1" column="2">
              <widget class="QDoubleSpinBox" name="plainSpeed">
               <property name="suffix">
-               <string>km/h</string>
+               <string/>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -315,17 +334,32 @@
             <item row="2" column="4">
              <widget class="QDoubleSpinBox" name="slopeAtMinSpeed">
               <property name="suffix">
-               <string>%</string>
+               <string/>
+              </property>
+              <property name="decimals">
+               <number>1</number>
               </property>
               <property name="maximum">
                <double>45.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
             <item row="3" column="2">
              <widget class="QDoubleSpinBox" name="maxSpeed">
               <property name="suffix">
-               <string>km/h</string>
+               <string/>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -342,7 +376,10 @@
             <item row="3" column="4">
              <widget class="QDoubleSpinBox" name="slopeAtMaxSpeed">
               <property name="suffix">
-               <string>%</string>
+               <string/>
+              </property>
+              <property name="decimals">
+               <number>1</number>
               </property>
               <property name="minimum">
                <double>-45.000000000000000</double>
@@ -350,12 +387,34 @@
               <property name="maximum">
                <double>0.000000000000000</double>
               </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
              </widget>
             </item>
             <item row="2" column="2">
              <widget class="QDoubleSpinBox" name="minSpeed">
               <property name="suffix">
-               <string>km/h</string>
+               <string/>
+              </property>
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <double>100.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="3" colspan="2">
+             <widget class="QPushButton" name="pbSetMinMaxSlope">
+              <property name="toolTip">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+              <property name="text">
+               <string>Set min/max slopes from Track</string>
               </property>
              </widget>
             </item>
@@ -376,19 +435,6 @@
           </spacer>
          </item>
         </layout>
-       </item>
-       <item row="1" column="2">
-        <spacer name="horizontalSpacer_3">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
        </item>
       </layout>
      </widget>
@@ -436,6 +482,13 @@
      </property>
     </widget>
    </item>
+   <item row="2" column="1" colspan="5">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
    <item row="1" column="5">
     <widget class="QToolButton" name="toolApply">
      <property name="toolTip">
@@ -456,15 +509,31 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1" colspan="5">
-    <widget class="Line" name="line">
+   <item row="1" column="4">
+    <spacer name="horizontalSpacer_3">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-    </widget>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>cbxActivityType</tabstop>
+  <tabstop>cbxCyclingType</tabstop>
+  <tabstop>plainSpeed</tabstop>
+  <tabstop>minSpeed</tabstop>
+  <tabstop>slopeAtMinSpeed</tabstop>
+  <tabstop>maxSpeed</tabstop>
+  <tabstop>slopeAtMaxSpeed</tabstop>
+  <tabstop>constantSpeed</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>
  </resources>

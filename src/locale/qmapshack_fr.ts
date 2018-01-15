@@ -721,6 +721,14 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
     </message>
 </context>
 <context>
+    <name>CFilterSpeed</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="192"/>
+        <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CFitCrcState</name>
     <message>
         <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
@@ -1353,27 +1361,27 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Horodatage artificiel ajouté avec un décalage de %1 sec.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="385"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="404"/>
         <source>Changed average speed depending on slope to %1%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="410"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="430"/>
         <source>Changed speed to %1%2.</source>
         <translation>Vitesse modifiée à %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="429"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="483"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="447"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="501"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Extension %1 supprimée de tous les points</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="458"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="512"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Converti les sous-points de routage en points de trace</translation>
     </message>
@@ -6761,105 +6769,107 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="268"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="287"/>
         <source>at positive Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="318"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="345"/>
-        <source>%</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="141"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="151"/>
         <source>Set constant speed to</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="241"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="251"/>
         <source>Max Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="278"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="297"/>
         <source>Min Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="335"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="369"/>
         <source>at negative Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="288"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="307"/>
         <source>Uphill:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="185"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="195"/>
         <source>Cycling Type</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="308"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="327"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="251"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="261"/>
         <source>Plain Level:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="415"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="414"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="461"/>
         <source>not yet implemented</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="49"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="52"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Modifier la vitesse&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="73"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="76"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="78"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="81"/>
         <source>Cycling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="83"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="86"/>
         <source>Hiking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="261"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="328"/>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="358"/>
-        <source>km/h</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="128"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="138"/>
         <source> km/h</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="298"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="317"/>
         <source>Downhill:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="442"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="94"/>
+        <source>lblWarning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="417"/>
+        <source>Set min/max slopes from Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="495"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply filter now.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="445"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="498"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -10268,18 +10278,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format de position incorrect. Formats valides: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; ou &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; </translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Position values out of bounds. </source>
         <translation>Valeurs de la position hors de la plage autorisée.</translation>
     </message>

@@ -528,6 +528,8 @@ public:
     void filterSpeed(qreal plainSpeed,
                      qreal minSpeed, qreal slopeAtMinSpeed,
                      qreal maxSpeed, qreal slopeAtMaxSpeed);
+    bool filterCheckForValidSlopes();
+    void filterGetMinMaxSlopes(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();
     void filterReplaceElevation();

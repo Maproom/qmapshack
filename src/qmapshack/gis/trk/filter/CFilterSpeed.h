@@ -34,8 +34,31 @@ public:
 private slots:
     void slotApply();
 
+    void slotSetActivityType(int type);
+    void slotSetCyclingType(int type);
+    void slotSetPlainSpeed(double speed);
+    void slotSetMinSpeed(double speed);
+    void slotSetSlopeAtMinSpeed(double speed);
+    void slotSetMaxSpeed(double speed);
+    void slotSetSlopeAtMaxSpeed(double slope);
+    void slotSetMinMaxSlopes(bool);
+
+
 private:
     CGisItemTrk& trk;
+
+    struct cycling_type_t
+    {
+        QString name;
+        qreal plainSpeed;
+        qreal minSpeed;
+        qreal slopeAtMinSpeed;
+        qreal maxSpeed;
+        qreal slopeAtMaxSpeed;
+    };
+
+    QList <cycling_type_t> cyclingTypes;
+
 };
 
 #endif //CFILTERSPEED_H

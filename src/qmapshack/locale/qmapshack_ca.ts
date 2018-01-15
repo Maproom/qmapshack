@@ -721,6 +721,14 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
 </context>
 <context>
+    <name>CFilterSpeed</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="192"/>
+        <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CFitCrcState</name>
     <message>
         <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
@@ -1353,22 +1361,27 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Posa una marca horària inventada amb %1 sec. de valor delta.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="346"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="404"/>
+        <source>Changed average speed depending on slope to %1%2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="430"/>
         <source>Changed speed to %1%2.</source>
         <translation>Velocitat canviada a %1%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="365"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="483"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (Segment %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="501"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>S&apos;ha suprimit definitivament l&apos;extensió %1 de tots els punts del track. </translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="394"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="512"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Convertir els subpunts obtinguts d&apos;un itinerari a punts de track</translation>
     </message>
@@ -6765,27 +6778,112 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
 <context>
     <name>IFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="14"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="23"/>
         <source>Form</source>
         <translation>Formulari</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="35"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="287"/>
+        <source>at positive Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="151"/>
+        <source>Set constant speed to</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="251"/>
+        <source>Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="297"/>
+        <source>Min Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="369"/>
+        <source>at negative Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="307"/>
+        <source>Uphill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="195"/>
+        <source>Cycling Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="327"/>
+        <source>Speed at zero Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="261"/>
+        <source>Plain Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="414"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="461"/>
+        <source>not yet implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="52"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Canviar Velocitat&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
-        <source>Set speed to </source>
-        <translation>Estableix la velocitat a</translation>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="76"/>
+        <source>Constant</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="81"/>
+        <source>Cycling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="86"/>
+        <source>Hiking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="138"/>
         <source> km/h</source>
         <translation> km/h</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="317"/>
+        <source>Downhill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="94"/>
+        <source>lblWarning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="417"/>
+        <source>Set min/max slopes from Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="495"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply filter now.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="498"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10225,18 +10323,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Format amb possicions incorrectes. Ha de ser: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; o &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Position values out of bounds. </source>
         <translation>Els valors de la posició estan fora dels límits.</translation>
     </message>

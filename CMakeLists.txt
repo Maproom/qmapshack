@@ -180,6 +180,7 @@ endif(BUILD_QMAPSHACK)
 if(BUILD_QMAPTOOL)
 add_subdirectory(src/qmaptool)
 add_subdirectory(src/qmt_rgb2pct)
+add_subdirectory(src/qmt_map2jnx)
 endif(BUILD_QMAPTOOL)
 
 ###############################################################################################

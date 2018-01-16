@@ -7633,7 +7633,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="859"/>
         <source>Start QMapTool</source>
-        <translation type="unfinished"></translation>
+        <translation>Запуск QMapTool</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="246"/>
@@ -8170,7 +8170,7 @@ or
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
         <source>Proj4 Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Proj4 мастер</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -10256,7 +10256,7 @@ or
     <message>
         <location filename="../units/IUnitsSetup.ui" line="48"/>
         <source>Nautical</source>
-        <translation type="unfinished"></translation>
+        <translation>Морские</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="61"/>

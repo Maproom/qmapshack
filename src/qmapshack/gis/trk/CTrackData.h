@@ -60,14 +60,16 @@ public:
             eValidTime  = 0x00000001
             ,eValidEle  = 0x00000002
             ,eValidPos  = 0x00000004
+            ,eValidSlope= 0x00000008
             ,eValidMask = 0x0000FFFF
         };
 
         enum invalid_e
         {
-            eInvalidTime  = eValidTime << 16
-            ,eInvalidEle  = eValidEle  << 16
-            ,eInvalidPos  = eValidPos  << 16
+            eInvalidTime  = eValidTime  << 16
+            ,eInvalidEle  = eValidEle   << 16
+            ,eInvalidPos  = eValidPos   << 16
+            ,eInvalidSlope= eValidSlope << 16
             ,eInvalidMask = 0xFFFF0000
         };
 

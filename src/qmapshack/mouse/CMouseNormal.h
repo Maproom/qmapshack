@@ -46,6 +46,7 @@ public:
     void mouseMoved(const QPoint& pos) override;
     void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end) override;
     void rightButtonDown(const QPoint& point) override;
+    void longPress(const QPoint& point) override;
     void doubleClicked(const QPoint & point) override;
     void scaleChanged() override;
 
@@ -62,6 +63,8 @@ private slots:
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);
     void scrollToItem(IGisItem * item);
+    void showContextMenu(const QPoint &point);
+
 protected:
     void stopTracking() const;
     void resetState();

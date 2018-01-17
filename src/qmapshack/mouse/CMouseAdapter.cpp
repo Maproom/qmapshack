@@ -1,3 +1,22 @@
+/**********************************************************************************************
+    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+**********************************************************************************************/
+
 #include "canvas/CCanvas.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseEditArea.h"
@@ -11,10 +30,14 @@
 #include "mouse/IMouse.h"
 #include <QMouseEvent>
 #include <QPinchGesture>
+#include <QTimer>
 
 CMouseAdapter::CMouseAdapter(CCanvas *canvas) : QObject(canvas),
     canvas(canvas)
 {
+    longPressTimer = new QTimer(this);
+    longPressTimer->setSingleShot(true);
+    connect(longPressTimer, &QTimer::timeout, this, &CMouseAdapter::slotLongPressTimeout);
 }
 
 CMouseAdapter::~CMouseAdapter()
@@ -30,10 +53,11 @@ void CMouseAdapter::mousePressEvent(QMouseEvent *e)
 {
     // set firstPos and mouseDidMove to suppress small movements when clicking
     startMouseMove(e->pos());
+    buttonPressTime.start();
     if(e->button() == Qt::LeftButton)
     {
         lastPos    = firstPos;
-        mouseDown  = true;
+        longPressTimer->start(longButtonPressTimeout);
         delegate->leftButtonDown(firstPos);
     }
     else if (e->button() == Qt::RightButton)
@@ -41,7 +65,6 @@ void CMouseAdapter::mousePressEvent(QMouseEvent *e)
         delegate->rightButtonDown(firstPos);
     }
     // make sure a click is actually shorter than longButtonPressTimeout
-    buttonPressTime.start();
     ignoreClick = false;
 }
 
@@ -56,11 +79,12 @@ void CMouseAdapter::mouseMoveEvent(QMouseEvent *e)
     if (!mouseDidMove && (pos - firstPos).manhattanLength() >= minimalMouseMovingDistance)
     {
         mouseDidMove = true;
+        longPressTimer->stop();
     }
 
     if (mouseDidMove)
     {
-        if(mouseDown)
+        if(e->buttons() & Qt::LeftButton)
         {
             delegate->mouseDragged(firstPos, lastPos, pos);
         }
@@ -75,7 +99,8 @@ void CMouseAdapter::mouseMoveEvent(QMouseEvent *e)
 
 void CMouseAdapter::mouseReleaseEvent(QMouseEvent *e)
 {
-    if (mouseDown)
+    longPressTimer->stop();
+    if (e->button() == Qt::LeftButton)
     {
         // suppress clicks when mouse was moved for more a few pixel
         if (mouseDidMove)
@@ -83,13 +108,12 @@ void CMouseAdapter::mouseReleaseEvent(QMouseEvent *e)
             delegate->dragFinished(e->pos());
         }
         //suppress clicks when pressing too long or after zooming or display of CProgressDialog
-        else if (!ignoreClick && buttonPressTime.elapsed() < longButtonPressTimeout)
+        else if (!ignoreClick && buttonPressTime.elapsed() < clickTimeout)
         {
             delegate->leftClicked(e->pos());
         }
     }
 
-    mouseDown    = false;
     mouseDidMove = false;
 }
 
@@ -102,7 +126,7 @@ void CMouseAdapter::wheelEvent(QWheelEvent *e)
 {
     // suppress little mouse-movements that are likely to happen when scrolling the mousewheel.
     startMouseMove(e->pos());
-    if (e->buttons() != Qt::NoButton)
+    if (e->buttons() & Qt::LeftButton)
     {
         // no shortclick by releasing button right after scrolling the wheel
         ignoreClick = true;
@@ -127,12 +151,10 @@ void CMouseAdapter::keyPressEvent(QKeyEvent *e)
 
 void CMouseAdapter::pinchGestureEvent(QPinchGesture *e)
 {
-    // consider finger being down (equivalent to button pressed) during pinch
-    mouseDown = true;
+    // ensure first press of pinch doesn't result in longPress
+    longPressTimer->stop();
     // no shortclick by lifting the finger right after a pinch
     ignoreClick = true;
-    // no on-the-fly-routing during pinch
-    // timerRouting->stop();
 
     delegate->scaleChanged();
 }
@@ -148,7 +170,6 @@ void CMouseAdapter::afterMouseLostEvent(QMouseEvent *e)
         // consider the move starting at this position
         startMouseMove(e->pos());
     }
-    mouseDown = e->buttons() & Qt::LeftButton;
 }
 
 void CMouseAdapter::startMouseMove(const QPoint& pos)
@@ -179,4 +200,9 @@ void CMouseAdapter::setDelegate(IMouse *delegate)
 CMouseAdapter::operator const QCursor&() const
 {
     return *delegate;
+}
+
+void CMouseAdapter::slotLongPressTimeout()
+{
+    delegate->longPress(lastPos);
 }

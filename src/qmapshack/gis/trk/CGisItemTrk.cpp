@@ -453,6 +453,11 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         str += "<b style='color: red;'>" + tr("Invalid positions!") + "</b><br/>";
     }
 
+    if((allValidFlags & (CTrackData::trkpt_t::eValidSlope|CTrackData::trkpt_t::eInvalidSlope)) == (CTrackData::trkpt_t::eValidSlope|CTrackData::trkpt_t::eInvalidSlope))
+    {
+        str += "<b style='color: red;'>" + tr("Invalid slopes!") + "</b><br/>";
+    }
+
     if(feature & eFeatureShowFullText)
     {
         QStringList actNames;
@@ -880,6 +885,8 @@ void CGisItemTrk::verifyTrkPt(CTrackData::trkpt_t*& last, CTrackData::trkpt_t& t
     {
         trkpt.valid |= CTrackData::trkpt_t::eInvalidTime;
     }
+
+    trkpt.valid |= (trkpt.slope1 == NOFLOAT) || (trkpt.slope2 == NOFLOAT) ? quint32(CTrackData::trkpt_t::eInvalidSlope) : quint32(CTrackData::trkpt_t::eValidSlope);
 }
 
 void CGisItemTrk::consolidatePoints()
@@ -1063,11 +1070,19 @@ void CGisItemTrk::deriveSecondaryData()
             }
         }
 
-        qreal a      = qAtan((e2 - e1)/(d2 - d1));
-        trkpt.slope1 = a * 360.0/(2 * M_PI);
-        trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
+        if(d1 < d2)
+        {
+            qreal a      = qAtan((e2 - e1)/(d2 - d1));
+            trkpt.slope1 = a * 360.0/(2 * M_PI);
+            trkpt.slope2 = qTan(trkpt.slope1 * DEG_TO_RAD) * 100;
+        }
+        else
+        {
+            trkpt.slope1 = NOFLOAT;
+            trkpt.slope2 = NOFLOAT;
+        }
 
-        if((t2 - t1) > 0)
+        if(t1 < t2)
         {
             trkpt.speed = (d2 - d1) / (t2 - t1);
         }

@@ -36,6 +36,7 @@ public:
     virtual ~IMouse();
 
     virtual void leftClicked(const QPoint& pos) {}
+    virtual void longPress(const QPoint& pos) {}
     virtual void mouseMoved(const QPoint& pos) {}
     virtual void mouseDragged(const QPoint& start, const QPoint& last, const QPoint& end);
     virtual void leftButtonDown(const QPoint& pos) {}

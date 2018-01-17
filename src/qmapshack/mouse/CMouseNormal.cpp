@@ -69,10 +69,26 @@ void CMouseNormal::stopTracking() const
 
 void CMouseNormal::rightButtonDown(const QPoint& point)
 {
-    QPoint p = canvas->mapToGlobal(point);
+    // right button cancels unclutter and item-options
+    if (screenUnclutter->size() > 0 || !screenItemOption.isNull())
+    {
+        resetState();
+    }
+    // if neither unclutter nor options are active show menu
+    else
+    {
+        showContextMenu(point);
+    }
+}
 
-    actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
-    menu->exec(p);
+void CMouseNormal::longPress(const QPoint& point)
+{
+    // longpress does not simulate right button, it just opens menu if
+    // neiterh unclutter nor options are active
+    if (screenUnclutter->size() == 0 && screenItemOption.isNull())
+    {
+        showContextMenu(point);
+    }
 }
 
 void CMouseNormal::mouseMoved(const QPoint& point)
@@ -229,9 +245,10 @@ void CMouseNormal::resetState()
     screenUnclutter->clear();
     if(!screenItemOption.isNull())
     {
-        screenItemOption->deleteLater();
+        screenItemOption->close();
     }
     stateItemSel = eStateIdle;
+    canvas->update();
 }
 
 void CMouseNormal::scrollToItem(IGisItem * item)
@@ -420,4 +437,12 @@ void CMouseNormal::slotCopyPositionGrid() const
 void CMouseNormal::slotSelectArea() const
 {
     canvas->setMouseSelect();
+}
+
+void CMouseNormal::showContextMenu(const QPoint &point)
+{
+    QPoint p = canvas->mapToGlobal(point);
+
+    actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
+    menu->exec(p);
 }

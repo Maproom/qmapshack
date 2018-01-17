@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -64,6 +65,7 @@ public:
     void mouseMoved(const QPoint& pos) override;
     void leftButtonDown(const QPoint& pos) override;
     void rightButtonDown(const QPoint& pos) override;
+
     void scaleChanged() override;
 
     void abortStep() override;

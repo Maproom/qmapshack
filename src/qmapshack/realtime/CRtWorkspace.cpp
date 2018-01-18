@@ -18,6 +18,8 @@
 
 #include "realtime/CRtDraw.h"
 #include "realtime/CRtWorkspace.h"
+#include "realtime/opensky/CRtOpenSky.h"
+#include "helpers/CSettings.h"
 
 #include <QtGui>
 
@@ -28,12 +30,54 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 {
     pSelf = this;
     setupUi(this);
+
+    connect(treeWidget, &QTreeWidget::itemChanged, this, &CRtWorkspace::slotItemChanged);
+
+    SETTINGS;
+    cfg.beginGroup("Realtime");
+    treeWidget->header()->restoreState(cfg.value("treeWks/state", treeWidget->header()->saveState()).toByteArray());
+    cfg.endGroup();
+
+    new CRtOpenSky(treeWidget);
 }
 
-void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *gis)
+CRtWorkspace::~CRtWorkspace()
+{
+    SETTINGS;
+    cfg.beginGroup("Realtime");
+    cfg.remove("");
+    cfg.setValue("treeWks/state", treeWidget->header()->saveState());
+    cfg.endGroup();
+}
+
+void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt)
+{
+    QMutexLocker lock(&IRtItem::mutexItems);
+    QList<QRectF> blockedAreas;
+
+    const int N = treeWidget->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IRtItem * item = dynamic_cast<IRtItem*>(treeWidget->topLevelItem(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        item->drawItem(p, viewport, blockedAreas, rt);
+    }
+}
+
+void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 {
 }
 
-void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *gis)
+void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
 {
+    QMutexLocker lock(&IRtItem::mutexItems);
+
+    if(column == IRtItem::eColumnCheckBox)
+    {
+        emit sigChanged();
+    }
 }

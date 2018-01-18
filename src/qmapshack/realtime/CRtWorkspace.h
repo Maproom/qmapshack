@@ -31,7 +31,7 @@ public:
     {
         return *pSelf;
     }
-    virtual ~CRtWorkspace() = default;
+    virtual ~CRtWorkspace();
 
     /**
        @brief Draw all loaded data in the workspace that is visible
@@ -41,9 +41,9 @@ public:
 
        @param p         the painter to be used
        @param viewport  the viewport in units of rad
-       @param gis       the draw context to be used
+       @param rt       the draw context to be used
      */
-    void draw(QPainter& p, const QPolygonF &viewport, CRtDraw *gis);
+    void draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt);
 
     /**
        @brief Draw all data that is time variant and can't wait for a full update
@@ -52,13 +52,16 @@ public:
 
        @param p         the painter to be used
        @param viewport  the viewport in units of rad
-       @param gis       the draw context to be used
+       @param rt       the draw context to be used
      */
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *gis);
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt);
 
 
 signals:
     void sigChanged();
+
+private slots:
+    void slotItemChanged(QTreeWidgetItem * item, int column);
 
 private:
     friend class CMainWindow;

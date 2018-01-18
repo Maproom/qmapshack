@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,24 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDRAW_H
-#define CGISDRAW_H
+#include "realtime/CRtDraw.h"
+#include "realtime/CRtWorkspace.h"
 
-#include "canvas/IDrawContext.h"
+#include <QtGui>
 
-class CCanvas;
+CRtWorkspace * CRtWorkspace::pSelf = nullptr;
 
-class CGisDraw : public IDrawContext
+CRtWorkspace::CRtWorkspace(QWidget *parent)
+    : QWidget(parent)
 {
-public:
-    CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw() = default;
+    pSelf = this;
+    setupUi(this);
+}
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
+void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *gis)
+{
+}
 
-protected:
-    void drawt(buffer_t& currentBuffer) override;
-};
-
-#endif //CGISDRAW_H
-
+void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *gis)
+{
+}

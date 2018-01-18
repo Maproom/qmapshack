@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDRAW_H
-#define CGISDRAW_H
+#include "realtime/opensky/CRtOpenSky.h"
 
-#include "canvas/IDrawContext.h"
+#include <QtGui>
 
-class CCanvas;
-
-class CGisDraw : public IDrawContext
+CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
+    : IRtItem(parent)
 {
-public:
-    CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw() = default;
+    setIcon(eColumnIcon, QIcon("://icons/32x32/OpenSky.png"));
+    setText(eColumnName, "OpenSky");    
+    setCheckState(eColumnCheckBox, Qt::Checked);
+}
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
 
-protected:
-    void drawt(buffer_t& currentBuffer) override;
-};
+void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+{
+    if(checkState(eColumnCheckBox) != Qt::Checked)
+    {
+        return;
+    }
 
-#endif //CGISDRAW_H
-
+    p.setPen(Qt::black);
+    p.drawRect(QRect(200,200,100,100));
+}

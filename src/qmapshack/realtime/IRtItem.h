@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,32 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDRAW_H
-#define CGISDRAW_H
+#ifndef IRTITEM_H
+#define IRTITEM_H
 
-#include "canvas/IDrawContext.h"
+#include <QTreeWidgetItem>
+#include <QMutex>
 
-class CCanvas;
+class CRtDraw;
 
-class CGisDraw : public IDrawContext
+class IRtItem : public QTreeWidgetItem
 {
 public:
-    CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw() = default;
+    IRtItem(QTreeWidget * parent);
+    virtual ~IRtItem() = default;
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
+    static QMutex mutexItems;
 
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+    enum column_e
+    {
+        eColumnIcon = 0
+        ,eColumnCheckBox = eColumnIcon
+        ,eColumnDecoration = eColumnIcon
+        ,eColumnName = 1
+    };
+
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
 };
 
-#endif //CGISDRAW_H
+#endif //IRTITEM_H
 

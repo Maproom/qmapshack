@@ -16,32 +16,13 @@
 
 **********************************************************************************************/
 
-#ifndef IRTITEM_H
-#define IRTITEM_H
+#include "realtime/IRtSource.h"
 
-#include <QTreeWidgetItem>
-#include <QMutex>
+QMutex IRtSource::mutex(QMutex::Recursive);
 
-class CRtDraw;
-
-class IRtItem : public QTreeWidgetItem
+IRtSource::IRtSource(QTreeWidget *parent)
+    : QTreeWidgetItem(parent)
 {
-public:
-    IRtItem(QTreeWidget * parent);
-    virtual ~IRtItem() = default;
+}
 
-    static QMutex mutexItems;
-
-    enum column_e
-    {
-        eColumnIcon = 0
-        ,eColumnCheckBox = eColumnIcon
-        ,eColumnDecoration = eColumnIcon
-        ,eColumnName = 1
-    };
-
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
-};
-
-#endif //IRTITEM_H
 

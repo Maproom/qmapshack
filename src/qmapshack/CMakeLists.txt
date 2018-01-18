@@ -272,7 +272,7 @@ set( SRCS
     qlgt/converter.cpp
     realtime/CRtDraw.cpp
     realtime/CRtWorkspace.cpp
-    realtime/IRtItem.cpp
+    realtime/IRtSource.cpp
     realtime/opensky/CRtOpenSky.cpp
     setup/CAppSetupLinux.cpp
     setup/CAppSetupMac.cpp
@@ -576,7 +576,7 @@ set( HDRS
     qlgt/IQlgtOverlay.h
     realtime/CRtDraw.h
     realtime/CRtWorkspace.h
-    realtime/IRtItem.h
+    realtime/IRtSource.h
     realtime/opensky/CRtOpenSky.h
     setup/CAppOpts.h
     setup/CAppSetupLinux.h

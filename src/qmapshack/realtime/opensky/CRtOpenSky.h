@@ -19,9 +19,9 @@
 #ifndef CRTOPENSKY_H
 #define CRTOPENSKY_H
 
-#include "realtime/IRtItem.h"
+#include "realtime/IRtSource.h"
 
-class CRtOpenSky : public IRtItem
+class CRtOpenSky : public IRtSource
 {
 public:
     CRtOpenSky(QTreeWidget * parent);

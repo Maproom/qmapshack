@@ -38,7 +38,11 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
     treeWidget->header()->restoreState(cfg.value("treeWks/state", treeWidget->header()->saveState()).toByteArray());
     cfg.endGroup();
 
-    new CRtOpenSky(treeWidget);
+    frame->setVisible(treeWidget->topLevelItemCount() == 0);
+    labelHelp->setText(tr("To add a real time source do a right click on the list above. "));
+
+
+//    new CRtOpenSky(treeWidget);
 }
 
 CRtWorkspace::~CRtWorkspace()

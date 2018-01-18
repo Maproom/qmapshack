@@ -28,11 +28,13 @@
 
 #include "gis/IGisItem.h"
 
+class IDrawContext;
 class CMapDraw;
 class CGrid;
 class CDemDraw;
 class QGestureEvent;
 class CGisDraw;
+class CRtDraw;
 class CGisItemWpt;
 class CGisItemTrk;
 class CGisItemRte;
@@ -200,7 +202,10 @@ private:
     CMapDraw * map;                     //< the map object attached to this canvas
     CDemDraw * dem;                     //< the elevation data layer attached to this canvas
     CGisDraw * gis;                     //< the GIS data layer attached to this canvas
+    CRtDraw * rt;                       //< the real time data layer attached to this canvas
     CGrid * grid;                       //< the grid attached to this canvas
+
+    QList<IDrawContext*> allDrawContext;
 
     /// the current point of focus (usually the canvas center)
     QPointF posFocus {12.00 * DEG_TO_RAD, 49.00 * DEG_TO_RAD};

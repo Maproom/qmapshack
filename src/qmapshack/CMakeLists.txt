@@ -270,6 +270,8 @@ set( SRCS
     qlgt/IItem.cpp
     qlgt/IQlgtOverlay.cpp
     qlgt/converter.cpp
+    realtime/CRtDraw.cpp
+    realtime/CRtWorkspace.cpp
     setup/CAppSetupLinux.cpp
     setup/CAppSetupMac.cpp
     setup/CAppSetupWin.cpp
@@ -570,6 +572,8 @@ set( HDRS
     qlgt/CQmsDb.h
     qlgt/IItem.h
     qlgt/IQlgtOverlay.h
+    realtime/CRtDraw.h
+    realtime/CRtWorkspace.h
     setup/CAppOpts.h
     setup/CAppSetupLinux.h
     setup/CAppSetupMac.h
@@ -704,6 +708,7 @@ set( UIS
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     print/IPrintDialog.ui
+    realtime/IRtWorkspace.ui
     templates/Hiking_Tour_Summary.ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui

@@ -231,6 +231,7 @@
         <file>../icons/32x32/ToggleDocks.png</file>
         <file>../icons/32x32/ToggleGis.png</file>
         <file>../icons/32x32/ToggleMaps.png</file>
+        <file>../icons/32x32/ToggleRealTime.png</file>
         <file>../icons/32x32/ToggleRouter.png</file>
         <file>../icons/32x32/ToolBar.png</file>
         <file>../icons/32x32/ToolBarSetup.png</file>
@@ -452,6 +453,7 @@
         <file>../icons/48x48/ToggleDocks.png</file>
         <file>../icons/48x48/ToggleGis.png</file>
         <file>../icons/48x48/ToggleMaps.png</file>
+        <file>../icons/48x48/ToggleRealTime.png</file>
         <file>../icons/48x48/ToggleRouter.png</file>
         <file>../icons/48x48/ToolBar.png</file>
         <file>../icons/48x48/ToolBarSetup.png</file>

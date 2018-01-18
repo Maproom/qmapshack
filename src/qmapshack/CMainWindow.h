@@ -28,6 +28,7 @@ class CDemList;
 class QLabel;
 class CGisWorkspace;
 class CGisDatabase;
+class CRtWorkspace;
 class CCanvas;
 class CToolBarConfig;
 struct SGisLine;
@@ -168,6 +169,7 @@ private:
 
     CGisWorkspace * widgetGisWorkspace;
     CGisDatabase * widgetGisDatabase;
+    CRtWorkspace * widgetRtWorkspace;
 
     CToolBarConfig * toolBarConfig;
 

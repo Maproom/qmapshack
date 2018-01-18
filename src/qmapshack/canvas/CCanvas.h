@@ -103,6 +103,7 @@ public:
         , eRedrawDem = 0x02
         , eRedrawGis = 0x04
         , eRedrawMouse = 0x08
+        , eRedrawRt = 0x10
         , eRedrawAll = 0xFFFFFFFF
     };
 

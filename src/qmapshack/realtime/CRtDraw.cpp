@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,23 @@
 
 **********************************************************************************************/
 
-#include "gis/CGisDraw.h"
-#include "gis/CGisWorkspace.h"
 #include "helpers/CDraw.h"
+#include "realtime/CRtDraw.h"
+#include "realtime/CRtWorkspace.h"
 
-#include <QtWidgets>
-
-CGisDraw::CGisDraw(CCanvas *parent)
-    : IDrawContext("gis", CCanvas::eRedrawGis, parent)
+CRtDraw::CRtDraw(CCanvas *parent)
+    : IDrawContext("rt", CCanvas::eRedrawRt, parent)
 {
-    connect(&CGisWorkspace::self(), &CGisWorkspace::sigChanged, this, &CGisDraw::emitSigCanvasUpdate);
+    connect(&CRtWorkspace::self(), &CRtWorkspace::sigChanged, this, &CRtDraw::emitSigCanvasUpdate);
 }
 
 
-void CGisDraw::draw(QPainter& p, const QRect& rect)
+void CRtDraw::draw(QPainter& p, const QRect& rect)
 {
-    CGisWorkspace::self().fastDraw(p, rect, this);
+    CRtWorkspace::self().fastDraw(p, rect, this);
 }
 
-void CGisDraw::drawt(buffer_t& currentBuffer)
+void CRtDraw::drawt(buffer_t& currentBuffer)
 {
     QPointF pt1 = currentBuffer.ref1;
     QPointF pt2 = currentBuffer.ref2;
@@ -60,5 +58,8 @@ void CGisDraw::drawt(buffer_t& currentBuffer)
     USE_ANTI_ALIASING(p,true);
     p.translate(-pp);
 
-    CGisWorkspace::self().draw(p,viewport, this);
+    CRtWorkspace::self().draw(p,viewport, this);
 }
+
+
+

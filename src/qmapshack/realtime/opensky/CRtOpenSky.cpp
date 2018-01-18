@@ -21,7 +21,7 @@
 #include <QtGui>
 
 CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
-    : IRtItem(parent)
+    : IRtSource(parent)
 {
     setIcon(eColumnIcon, QIcon("://icons/32x32/OpenSky.png"));
     setText(eColumnName, "OpenSky");    

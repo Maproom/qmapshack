@@ -56,13 +56,13 @@ CRtWorkspace::~CRtWorkspace()
 
 void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt)
 {
-    QMutexLocker lock(&IRtItem::mutexItems);
+    QMutexLocker lock(&IRtSource::mutex);
     QList<QRectF> blockedAreas;
 
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
-        IRtItem * item = dynamic_cast<IRtItem*>(treeWidget->topLevelItem(n));
+        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
         if(item == nullptr)
         {
             continue;
@@ -78,9 +78,9 @@ void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 
 void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
 {
-    QMutexLocker lock(&IRtItem::mutexItems);
+    QMutexLocker lock(&IRtSource::mutex);
 
-    if(column == IRtItem::eColumnCheckBox)
+    if(column == IRtSource::eColumnCheckBox)
     {
         emit sigChanged();
     }

@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,19 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDRAW_H
-#define CGISDRAW_H
+#ifndef CRTOPENSKY_H
+#define CRTOPENSKY_H
 
-#include "canvas/IDrawContext.h"
+#include "realtime/IRtItem.h"
 
-class CCanvas;
-
-class CGisDraw : public IDrawContext
+class CRtOpenSky : public IRtItem
 {
 public:
-    CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw() = default;
+    CRtOpenSky(QTreeWidget * parent);
+    virtual ~CRtOpenSky() = default;
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
-
-protected:
-    void drawt(buffer_t& currentBuffer) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 };
 
-#endif //CGISDRAW_H
+#endif //CRTOPENSKY_H
 

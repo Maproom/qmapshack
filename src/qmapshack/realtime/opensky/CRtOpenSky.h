@@ -23,11 +23,16 @@
 
 class CRtOpenSky : public IRtSource
 {
+    Q_DECLARE_TR_FUNCTIONS(CRtOpenSky)
 public:
     CRtOpenSky(QTreeWidget * parent);
     virtual ~CRtOpenSky() = default;
 
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
+
+    QString getDescription() override;
+
+    static const QString strIcon;
 };
 
 #endif //CRTOPENSKY_H

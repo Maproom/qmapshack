@@ -271,6 +271,7 @@ set( SRCS
     qlgt/IQlgtOverlay.cpp
     qlgt/converter.cpp
     realtime/CRtDraw.cpp
+    realtime/CRtSelectSource.cpp
     realtime/CRtWorkspace.cpp
     realtime/IRtSource.cpp
     realtime/opensky/CRtOpenSky.cpp
@@ -575,6 +576,7 @@ set( HDRS
     qlgt/IItem.h
     qlgt/IQlgtOverlay.h
     realtime/CRtDraw.h
+    realtime/CRtSelectSource.h
     realtime/CRtWorkspace.h
     realtime/IRtSource.h
     realtime/opensky/CRtOpenSky.h
@@ -712,6 +714,7 @@ set( UIS
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     print/IPrintDialog.ui
+    realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     templates/Hiking_Tour_Summary.ui
     tool/IImportDatabase.ui

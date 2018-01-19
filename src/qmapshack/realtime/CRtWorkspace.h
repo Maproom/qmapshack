@@ -22,6 +22,8 @@
 #include "ui_IRtWorkspace.h"
 
 class CRtDraw;
+class QMenu;
+class IRtSource;
 
 class CRtWorkspace : public QWidget, private Ui::IRtWorkspace
 {
@@ -57,17 +59,25 @@ public:
     void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt);
 
 
+    bool hasSourceOfType(int type);
+
+    void addSource(IRtSource * source);
+
 signals:
     void sigChanged();
 
 private slots:
     void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotContextMenu(const QPoint& point);
+    void slotAddSource();
 
 private:
     friend class CMainWindow;
     CRtWorkspace(QWidget * parent);
 
     static CRtWorkspace * pSelf;
+
+    QMenu * menu;
 };
 
 #endif //CRTWORKSPACE_H

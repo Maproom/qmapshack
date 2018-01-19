@@ -16,34 +16,29 @@
 
 **********************************************************************************************/
 
-#include "realtime/opensky/CRtOpenSky.h"
+#ifndef CRTSELECTSOURCE_H
+#define CRTSELECTSOURCE_H
 
-#include <QtGui>
+#include "ui_IRtSelectSource.h"
 
-const QString CRtOpenSky::strIcon("://icons/48x48/OpenSky.png");
+class CRtWorkspace;
 
-CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
-    : IRtSource(eTypeOpenSky, true, parent)
+class CRtSelectSource : public QDialog, private Ui::IRtSelectSource
 {
-    setIcon(eColumnIcon, QIcon(strIcon));
-    setText(eColumnName, "OpenSky");
-    setCheckState(eColumnCheckBox, Qt::Checked);
-}
+    Q_OBJECT
+public:
+    CRtSelectSource(CRtWorkspace& wks);
+    virtual ~CRtSelectSource();
 
-QString CRtOpenSky::getDescription()
-{
-    return tr("<b>OpenSky</b><br/>"
-              "An online service that provides positional data of civil aircrafts"
-              );
-}
+public slots:
+    void accept() override;
 
-void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
-{
-    if(checkState(eColumnCheckBox) != Qt::Checked)
-    {
-        return;
-    }
+private slots:
+    void slotSelectionChanged();
 
-    p.setPen(Qt::black);
-    p.drawRect(QRect(200,200,100,100));
-}
+private:
+    CRtWorkspace& wks;
+};
+
+#endif //CRTSELECTSOURCE_H
+

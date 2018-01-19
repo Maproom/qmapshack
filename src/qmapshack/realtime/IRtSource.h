@@ -19,15 +19,25 @@
 #ifndef IRTSOURCE_H
 #define IRTSOURCE_H
 
-#include <QTreeWidgetItem>
 #include <QMutex>
+#include <QTreeWidgetItem>
+#include <QCoreApplication>
+#include <QDebug>
 
 class CRtDraw;
+
 
 class IRtSource : public QTreeWidgetItem
 {
 public:
-    IRtSource(QTreeWidget * parent);
+    enum type_e
+    {
+        eTypeNone
+        ,eTypeOpenSky
+    };
+
+
+    IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);
     virtual ~IRtSource() = default;
 
     static QMutex mutex;
@@ -39,9 +49,15 @@ public:
         ,eColumnDecoration = eColumnIcon
         ,eColumnName = 1
     };
-
     virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
+
+    virtual QString getDescription() = 0;
+
+    const type_e type;
+    const bool singleInstanceOnly;
+protected:
 };
 
+Q_DECLARE_METATYPE(IRtSource*)
 #endif //IRTSOURCE_H
 

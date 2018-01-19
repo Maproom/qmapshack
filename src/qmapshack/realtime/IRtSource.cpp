@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,25 +16,13 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDRAW_H
-#define CGISDRAW_H
+#include "realtime/IRtSource.h"
 
-#include "canvas/IDrawContext.h"
+QMutex IRtSource::mutex(QMutex::Recursive);
 
-class CCanvas;
-
-class CGisDraw : public IDrawContext
+IRtSource::IRtSource(QTreeWidget *parent)
+    : QTreeWidgetItem(parent)
 {
-public:
-    CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw() = default;
+}
 
-    using IDrawContext::draw;
-    void draw(QPainter& p, const QRect& rect);
-
-protected:
-    void drawt(buffer_t& currentBuffer) override;
-};
-
-#endif //CGISDRAW_H
 

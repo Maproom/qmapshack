@@ -20,8 +20,10 @@
 
 QMutex IRtSource::mutex(QMutex::Recursive);
 
-IRtSource::IRtSource(QTreeWidget *parent)
+IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
     : QTreeWidgetItem(parent)
+    , type(type)
+    , singleInstanceOnly(singleInstanceOnly)
 {
 }
 

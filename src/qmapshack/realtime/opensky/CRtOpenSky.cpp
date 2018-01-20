@@ -16,9 +16,14 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
+#include "canvas/CCanvas.h"
+#include "realtime/CRtDraw.h"
 #include "realtime/opensky/CRtOpenSky.h"
 
-#include <QtGui>
+#include <QJsonDocument>
+#include <QtNetwork>
+#include <QtWidgets>
 
 const QString CRtOpenSky::strIcon("://icons/48x48/OpenSky.png");
 
@@ -28,6 +33,15 @@ CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
     setIcon(eColumnIcon, QIcon(strIcon));
     setText(eColumnName, "OpenSky");
     setCheckState(eColumnCheckBox, Qt::Checked);
+
+    timer = new QTimer(this);
+    timer->setInterval(5000);
+    timer->setSingleShot(false);
+    timer->start();
+    connect(timer, &QTimer::timeout, this, &CRtOpenSky::slotUpdate);
+
+    networkAccessManager = new QNetworkAccessManager(this);
+    connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRtOpenSky::slotRequestFinished);
 }
 
 QString CRtOpenSky::getDescription() const
@@ -44,8 +58,31 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
         return;
     }
 
-    p.setPen(Qt::black);
-    p.drawRect(QRect(200,200,100,100));
+    QPolygonF tmp2 = viewport;
+    rt->convertRad2Px(tmp2);
+
+    p.setPen(Qt::yellow);
+    p.setBrush(Qt::yellow);
+    QPixmap icon("://icons/16x16/Aircraft.png");
+    QRect rect = icon.rect();
+    rect.moveCenter(QPoint(0,0));
+
+    for(const aircraft_t& aircraft : aircrafts)
+    {
+        QPointF pos = aircraft.pos * DEG_TO_RAD;
+        rt->convertRad2Px(pos);
+
+        if(!tmp2.boundingRect().contains(pos))
+        {
+            continue;
+        }
+
+        p.save();
+        p.translate(pos);
+        p.rotate(aircraft.heading);
+        p.drawPixmap(rect, icon);
+        p.restore();
+    }
 }
 
 void CRtOpenSky::loadSettings(QSettings& cfg)
@@ -57,3 +94,68 @@ void CRtOpenSky::saveSettings(QSettings& cfg) const
 {
     IRtSource::saveSettings(cfg);
 }
+
+void CRtOpenSky::slotUpdate()
+{
+    if(checkState(eColumnCheckBox) != Qt::Checked)
+    {
+        return;
+    }
+
+    QUrl url("https://opensky-network.org/");
+    url.setPath("/api/states/all");
+
+    QNetworkRequest request;
+    request.setUrl(url);
+    networkAccessManager->get(request);
+}
+
+void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
+{
+    if(reply->error() != QNetworkReply::NoError)
+    {
+        qDebug() << reply->errorString();
+        reply->deleteLater();
+        return;
+    }
+
+    QByteArray data = reply->readAll();
+    reply->deleteLater();
+
+    if(data.isEmpty())
+    {
+        return;
+    }
+
+    QJsonParseError error;
+    QJsonDocument json = QJsonDocument::fromJson(data, &error);
+    if(error.error != QJsonParseError::NoError)
+    {
+        qDebug() << error.errorString();
+        return;
+    }
+
+    QMutexLocker lock(&IRtSource::mutex);
+    aircrafts.clear();
+    const QJsonArray& jsonStates = json.object().value("states").toArray();
+    for(const QJsonValue& jsonState : jsonStates)
+    {
+        aircraft_t aircraft;
+        const QJsonArray& jsonStateArray = jsonState.toArray();
+        QString key         = jsonStateArray[0].toString();
+        aircraft.callsign   = jsonStateArray[1].toString();
+        qreal lon           = jsonStateArray[5].toDouble();
+        qreal lat           = jsonStateArray[6].toDouble();
+        aircraft.pos        = QPointF(lon,lat);
+        aircraft.heading    = jsonStateArray[10].toDouble();
+
+        aircrafts[key] = aircraft;
+    }
+
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas != nullptr)
+    {
+        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawRt);
+    }
+}
+

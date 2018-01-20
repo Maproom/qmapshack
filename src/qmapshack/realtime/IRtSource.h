@@ -19,17 +19,18 @@
 #ifndef IRTSOURCE_H
 #define IRTSOURCE_H
 
-#include <QMutex>
-#include <QTreeWidgetItem>
 #include <QCoreApplication>
 #include <QDebug>
+#include <QMutex>
+#include <QObject>
+#include <QTreeWidgetItem>
 
 class CRtDraw;
 class QSettings;
 
-
-class IRtSource : public QTreeWidgetItem
+class IRtSource : public QObject, public QTreeWidgetItem
 {
+    Q_OBJECT
 public:
     enum type_e
     {
@@ -62,7 +63,6 @@ public:
 
     const type_e type;
     const bool singleInstanceOnly;
-protected:
 };
 
 Q_DECLARE_METATYPE(IRtSource*)

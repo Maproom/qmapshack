@@ -32,7 +32,9 @@
         <file>../icons/16x16/ActSki.png</file>
         <file>../icons/16x16/ActSwim.png</file>
         <file>../icons/16x16/ActTrain.png</file>
+        <file>../icons/16x16/Aircraft.png</file>
         <file>../icons/16x16/EditDetails.png</file>
+
         
         <file>../icons/32x32/2NavProject.png</file>
         <file>../icons/32x32/A.png</file>
@@ -56,7 +58,8 @@
         <file>../icons/32x32/AddRte.png</file>
         <file>../icons/32x32/AddTrk.png</file>
         <file>../icons/32x32/AddWpt.png</file>
-        <file>../icons/32x32/Apply.png</file>
+        <file>../icons/32x32/Aircraft.png</file>
+        <file>../icons/32x32/Apply.png</file>        
         <file>../icons/32x32/Area.png</file>
         <file>../icons/32x32/AreaMove.png</file>
         <file>../icons/32x32/AreaOn.png</file>
@@ -279,6 +282,7 @@
         <file>../icons/48x48/AddRte.png</file>
         <file>../icons/48x48/AddTrk.png</file>
         <file>../icons/48x48/AddWpt.png</file>
+        <file>../icons/48x48/Aircraft.png</file>
         <file>../icons/48x48/Apply.png</file>
         <file>../icons/48x48/Area.png</file>
         <file>../icons/48x48/AreaMove.png</file>

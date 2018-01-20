@@ -28,6 +28,9 @@ function convert {
     if [[ $1 =~ EditDetails\.svg ]]; then
         call_inkscape 16 $1 $NAME
     fi
+    if [[ $1 =~ Aircraft\.svg ]]; then
+        call_inkscape 16 $1 $NAME
+    fi
     if [[ $1 =~ QMapShack\.svg ]]; then
         call_inkscape   8 $1 $NAME qmapshack/hicolor
         call_inkscape  16 $1 $NAME qmapshack/hicolor 

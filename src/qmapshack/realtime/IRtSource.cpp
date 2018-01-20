@@ -24,7 +24,8 @@
 QMutex IRtSource::mutex(QMutex::Recursive);
 
 IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
-    : QTreeWidgetItem(parent)
+    : QObject(parent)
+    , QTreeWidgetItem(parent)
     , type(type)
     , singleInstanceOnly(singleInstanceOnly)
 {
@@ -43,7 +44,6 @@ void IRtSource::saveSettings(QSettings& cfg) const
 
 IRtSource* IRtSource::create(int type, QTreeWidget * parent)
 {
-
     switch(type)
     {
     case eTypeOpenSky:

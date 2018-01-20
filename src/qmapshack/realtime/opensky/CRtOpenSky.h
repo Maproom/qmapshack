@@ -20,10 +20,15 @@
 #define CRTOPENSKY_H
 
 #include "realtime/IRtSource.h"
+#include "units/IUnit.h"
+
+class QTimer;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class CRtOpenSky : public IRtSource
 {
-    Q_DECLARE_TR_FUNCTIONS(CRtOpenSky)
+    Q_OBJECT
 public:
     CRtOpenSky(QTreeWidget * parent);
     virtual ~CRtOpenSky() = default;
@@ -35,6 +40,23 @@ public:
 
 
     static const QString strIcon;
+
+private slots:
+    void slotUpdate();
+    void slotRequestFinished(QNetworkReply* reply);
+
+private:
+    QTimer * timer;
+    QNetworkAccessManager * networkAccessManager;
+
+    struct aircraft_t
+    {
+        QString callsign;
+        QPointF pos = NOPOINTF;
+        qreal heading = 0;
+    };
+
+    QMap<QString, aircraft_t> aircrafts;
 };
 
 #endif //CRTOPENSKY_H

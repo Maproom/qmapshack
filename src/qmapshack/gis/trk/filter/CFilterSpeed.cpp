@@ -29,7 +29,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 {
     setupUi(this);
 
-    lblWarning->setText("");
+    labelWarning->setText("");
     constantSpeed->setSuffix(IUnit::self().speedunit);
     plainSpeed->setSuffix(IUnit::self().speedunit);
     minSpeed->setSuffix(IUnit::self().speedunit);
@@ -42,7 +42,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 
     cycling_type_t cyclingType;
     cyclingType.name = "City";
-    cbxCyclingType->addItem(cyclingType.name);
+    comboCyclingType->addItem(cyclingType.name);
     cyclingType.plainSpeed = 15;
     cyclingType.minSpeed = 5;
     cyclingType.slopeAtMinSpeed = 5;
@@ -50,7 +50,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     cyclingType.slopeAtMaxSpeed = -5;
     cyclingTypes << cyclingType;
     cyclingType.name = "Trekking";
-    cbxCyclingType->addItem(cyclingType.name);
+    comboCyclingType->addItem(cyclingType.name);
     cyclingType.plainSpeed = 20;
     cyclingType.minSpeed = 5;
     cyclingType.slopeAtMinSpeed = 8;
@@ -58,7 +58,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     cyclingType.slopeAtMaxSpeed = -5;
     cyclingTypes << cyclingType;
     cyclingType.name = "Sportive";
-    cbxCyclingType->addItem(cyclingType.name);
+    comboCyclingType->addItem(cyclingType.name);
     cyclingType.plainSpeed = 27;
     cyclingType.minSpeed = 7;
     cyclingType.slopeAtMinSpeed = 10;
@@ -66,7 +66,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     cyclingType.slopeAtMaxSpeed = -8;
     cyclingTypes << cyclingType;
     cyclingType.name = "Mountain";
-    cbxCyclingType->addItem(cyclingType.name);
+    comboCyclingType->addItem(cyclingType.name);
     cyclingType.plainSpeed = 15;
     cyclingType.minSpeed = 4;
     cyclingType.slopeAtMinSpeed = 15;
@@ -77,7 +77,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     for (int i = 0; i < 3; ++i)
     {
         cyclingType.name = QString("Custom %1").arg(i);
-        cbxCyclingType->addItem(cyclingType.name);
+        comboCyclingType->addItem(cyclingType.name);
         cyclingType.plainSpeed = 20;
         cyclingType.minSpeed = 5;
         cyclingType.slopeAtMinSpeed = 8;
@@ -100,17 +100,17 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
         cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", -10).toDouble();
 
         cyclingTypes.replace(i, cyclingType);
-        cbxCyclingType->setItemText(i, cyclingType.name);
+        comboCyclingType->setItemText(i, cyclingType.name);
     }
     cfg.endArray();
 
-    cbxActivityType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/activityType", 0).toInt());
-    slotSetActivityType(cbxActivityType->currentIndex());
-    connect(cbxActivityType, SIGNAL(activated(int)), this, SLOT(slotSetActivityType(int)));
+    comboActivityType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/activityType", 0).toInt());
+    slotSetActivityType(comboActivityType->currentIndex());
+    connect(comboActivityType, SIGNAL(activated(int)), this, SLOT(slotSetActivityType(int)));
 
-    cbxCyclingType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cyclingType", 0).toInt());
-    slotSetCyclingType(cbxCyclingType->currentIndex());
-    connect(cbxCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
+    comboCyclingType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cyclingType", 0).toInt());
+    slotSetCyclingType(comboCyclingType->currentIndex());
+    connect(comboCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
 
     constantSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed", 18.0).toDouble());
 
@@ -122,7 +122,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
 
-    connect(pbSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
+    connect(pushSetMinMaxSlope, SIGNAL(clicked(bool)), this, SLOT(slotSetMinMaxSlopes(bool)));
 }
 
 CFilterSpeed::~CFilterSpeed()
@@ -140,8 +140,8 @@ CFilterSpeed::~CFilterSpeed()
     }
     cfg.endArray();
 
-    cfg.setValue("TrackDetails/Filter/Speed/activityType", cbxActivityType->currentIndex());
-    cfg.setValue("TrackDetails/Filter/Speed/cyclingType", cbxCyclingType->currentIndex());
+    cfg.setValue("TrackDetails/Filter/Speed/activityType", comboActivityType->currentIndex());
+    cfg.setValue("TrackDetails/Filter/Speed/cyclingType", comboCyclingType->currentIndex());
 
     cfg.setValue("TrackDetails/Filter/Speed/speed", constantSpeed->value());
 }
@@ -150,14 +150,14 @@ void CFilterSpeed::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor, "CFilterSpeed");
 
-    switch (cbxActivityType->currentIndex())
+    switch (comboActivityType->currentIndex())
     {
     case 0:
         trk.filterSpeed(constantSpeed->value()/IUnit::self().speedfactor);
         break;
     case 1:
     {
-        qint32 i = cbxCyclingType->currentIndex();
+        qint32 i = comboCyclingType->currentIndex();
         qreal slopeAtMinSpeedUnit = 0, slopeAtMaxSpeedUnit = 0;
 
         if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
@@ -186,20 +186,31 @@ void CFilterSpeed::slotSetActivityType(int type)
 {
     stackedWidget->setCurrentIndex(type);
 
-    if(type == 1 && !trk.filterCheckForValidSlopes())
+    if(type == 1 && trk.isTrkElevationInvalid())
+    {
+        SetElevationValid(trk);
+    }
+}
+
+void CFilterSpeed::SetElevationValid(CGisItemTrk &trk)
+{
+    if(trk.isTrkElevationInvalid())
     {
         QString str = QString("<b style='color: red;'>" +
                               tr("Track has no or invalid elevation data. Please correct or set constant speed!") +
                               "</b><br/>");
-        lblWarning->setText(str);
-        pgeCycling->setEnabled(false);
+        labelWarning->setText(str);
+        pageCycling->setEnabled(false);
         toolApply->setEnabled(false);
         return;
     }
+    else
+    {
+        labelWarning->setText("");
+        pageCycling->setEnabled(true);
+        toolApply->setEnabled(true);
+    }
 
-    lblWarning->setText("");
-    pgeCycling->setEnabled(true);
-    toolApply->setEnabled(true);
 }
 
 void CFilterSpeed::slotSetCyclingType(int type)
@@ -229,24 +240,24 @@ void CFilterSpeed::slotSetCyclingType(int type)
 
     if (type < 4)
     {
-        frmCyclingParameter->hide();
+        frameCycling->setEnabled(false);
     }
     else
     {
-        frmCyclingParameter->show();
+        frameCycling->setEnabled(true);
     }
 }
 
 void CFilterSpeed::slotSetPlainSpeed(double speed)
 {
-    cyclingTypes[cbxCyclingType->currentIndex()].plainSpeed = speed;
+    cyclingTypes[comboCyclingType->currentIndex()].plainSpeed = speed;
     maxSpeed->setMinimum(speed);
     minSpeed->setMaximum(speed);
 }
 
 void CFilterSpeed::slotSetMinSpeed(double speed)
 {
-    cyclingTypes[cbxCyclingType->currentIndex()].minSpeed = speed;
+    cyclingTypes[comboCyclingType->currentIndex()].minSpeed = speed;
     plainSpeed->setMinimum(speed);
 }
 
@@ -255,17 +266,17 @@ void CFilterSpeed::slotSetSlopeAtMinSpeed(double slope)
     if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
         qreal val = IUnit::slopeConvert(IUnit::eSlopeDegrees, slope);
-        cyclingTypes[cbxCyclingType->currentIndex()].slopeAtMinSpeed = val;
+        cyclingTypes[comboCyclingType->currentIndex()].slopeAtMinSpeed = val;
     }
     else if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {
-        cyclingTypes[cbxCyclingType->currentIndex()].slopeAtMinSpeed = slope;
+        cyclingTypes[comboCyclingType->currentIndex()].slopeAtMinSpeed = slope;
     }
 }
 
 void CFilterSpeed::slotSetMaxSpeed(double speed)
 {
-    cyclingTypes[cbxCyclingType->currentIndex()].maxSpeed = speed;
+    cyclingTypes[comboCyclingType->currentIndex()].maxSpeed = speed;
     plainSpeed->setMaximum(speed);
 }
 
@@ -274,18 +285,18 @@ void CFilterSpeed::slotSetSlopeAtMaxSpeed(double slope)
     if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
         qreal val = IUnit::slopeConvert(IUnit::eSlopeDegrees, slope);
-        cyclingTypes[cbxCyclingType->currentIndex()].slopeAtMaxSpeed = val;
+        cyclingTypes[comboCyclingType->currentIndex()].slopeAtMaxSpeed = val;
     }
     else if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {
-        cyclingTypes[cbxCyclingType->currentIndex()].slopeAtMaxSpeed = slope;
+        cyclingTypes[comboCyclingType->currentIndex()].slopeAtMaxSpeed = slope;
     }
 }
 
 void CFilterSpeed::slotSetMinMaxSlopes(bool)
 {
     qreal minSlope, maxSlope;
-    trk.filterGetMinMaxSlopes(minSlope, maxSlope);
+    trk.filterGetSlopeLimits(minSlope, maxSlope);
 
     if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {

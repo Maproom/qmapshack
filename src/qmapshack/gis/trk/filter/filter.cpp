@@ -430,34 +430,7 @@ void CGisItemTrk::filterSpeed(qreal speed)
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
-bool CGisItemTrk::filterCheckForValidSlopes()
-{
-    bool ret = true;
-
-    if((getAllValidFlags() & (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle)) == (CTrackData::trkpt_t::eValidEle|CTrackData::trkpt_t::eInvalidEle))
-    {
-        ret = false;
-    }
-    else
-    {
-        for(CTrackData::trkpt_t &pt : trk)
-        {
-            if(pt.isHidden())
-            {
-                continue;
-            }
-
-            if(qIsInf(pt.slope2) || qIsNaN(pt.slope2) || pt.slope2 == NOFLOAT || pt.ele == NOINT)
-            {
-                ret = false;
-                break;
-            }
-        }
-    }
-    return ret;
-}
-
-void CGisItemTrk::filterGetMinMaxSlopes(qreal &minSlope, qreal &maxSlope)
+void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope)
 {
     const limits_t& limit = extrema["::ql:slope"];
     minSlope = limit.min;

@@ -47,7 +47,7 @@
       <number>3</number>
      </property>
      <item>
-      <widget class="QLabel" name="lblTitel">
+      <widget class="QLabel" name="labelTitel">
        <property name="text">
         <string>&lt;b&gt;Change Speed&lt;/b&gt;</string>
        </property>
@@ -70,9 +70,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="lblWarning">
+      <widget class="QLabel" name="labelWarning">
        <property name="text">
-        <string>lblWarning</string>
+        <string>labelWarning</string>
        </property>
       </widget>
      </item>
@@ -133,7 +133,7 @@
      <property name="currentIndex">
       <number>1</number>
      </property>
-     <widget class="QWidget" name="pgeConstant">
+     <widget class="QWidget" name="pageConstant">
       <layout class="QGridLayout" name="gridLayout_3">
        <property name="leftMargin">
         <number>0</number>
@@ -206,7 +206,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pgeCycling">
+     <widget class="QWidget" name="pageCycling">
       <layout class="QGridLayout" name="gridLayout_2">
        <property name="leftMargin">
         <number>0</number>
@@ -243,7 +243,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QComboBox" name="cbxCyclingType"/>
+              <widget class="QComboBox" name="comboCyclingType"/>
              </item>
             </layout>
            </item>
@@ -279,7 +279,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QFrame" name="frmCyclingParameter">
+          <widget class="QFrame" name="frameCycling">
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -469,7 +469,7 @@
              </widget>
             </item>
             <item row="1" column="3" colspan="2">
-             <widget class="QPushButton" name="pbSetMinMaxSlope">
+             <widget class="QPushButton" name="pushSetMinMaxSlope">
               <property name="toolTip">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -498,7 +498,7 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="pgeHiking">
+     <widget class="QWidget" name="pageHiking">
       <layout class="QGridLayout" name="gridLayout_4">
        <property name="leftMargin">
         <number>0</number>
@@ -536,7 +536,7 @@
    <item row="1" column="3">
     <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <widget class="QComboBox" name="cbxActivityType">
+      <widget class="QComboBox" name="comboActivityType">
        <item>
         <property name="text">
          <string>Constant</string>
@@ -572,7 +572,7 @@
    <item row="0" column="2" rowspan="2">
     <layout class="QVBoxLayout" name="verticalLayout_9">
      <item>
-      <widget class="QLabel" name="lblTimePix">
+      <widget class="QLabel" name="labelTimePix">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -616,4 +616,3 @@
  </resources>
  <connections/>
 </ui>
-

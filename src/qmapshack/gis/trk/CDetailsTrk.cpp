@@ -357,12 +357,6 @@ void CDetailsTrk::updateData()
     comboColor->setCurrentIndex(trk.getColorIdx());
     toolLock->setChecked(isReadOnly);
 
-    CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
-    if(filterSpeed)
-    {
-        filterSpeed->SetElevationValid(trk);
-    }
-
     lineName->setText(trk.getName());
     lineName->setReadOnly(isReadOnly);
 
@@ -465,6 +459,12 @@ void CDetailsTrk::updateData()
     if(nullptr != filter)
     {
         filter->update();
+    }
+
+    CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
+    if(nullptr != filterSpeed)
+    {
+        filterSpeed->SetElevationValid();
     }
 
     originator = false;

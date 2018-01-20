@@ -592,12 +592,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Разное</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="402"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="409"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="403"/>
         <source>Activity</source>
         <translation>Активность</translation>
     </message>
@@ -723,7 +723,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="200"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="184"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1366,29 +1366,29 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Установить искусственные метки времени с интервалом в %1 секунд.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="404"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="413"/>
         <source>Changed average speed depending on slope to %1%2.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="430"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="439"/>
         <source>Changed speed to %1%2.</source>
-        <translation>Изменена скорость на %1 %2.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="456"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="465"/>
         <source>%1 (Segment %2)</source>
-        <translation>%1 (сегмент %2)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="474"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="483"/>
         <source>Removed extension %1 from all Track Points</source>
-        <translation>Удалено расширение %1 со всех точек трека</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="485"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="494"/>
         <source>Converted subpoints from routing to track points</source>
-        <translation>Преобразованы подточки с маршрутных в точки трека</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6786,7 +6786,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="347"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="350"/>
         <source>at positive Slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6796,22 +6796,22 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="357"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="360"/>
         <source>Min Speed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="429"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="438"/>
         <source>at negative Slope</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="367"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="370"/>
         <source>Uphill:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="387"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="390"/>
         <source>Speed at zero Slope</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6821,12 +6821,12 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="474"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="486"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="521"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="533"/>
         <source>not yet implemented</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6851,17 +6851,17 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="542"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="554"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="547"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="559"/>
         <source>Cycling</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="552"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="564"/>
         <source>Hiking</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6871,12 +6871,12 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation> км/ч</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="377"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="380"/>
         <source>Downhill:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="477"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="489"/>
         <source>Set min/max slopes from Track</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6992,7 +6992,7 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Срок</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="97"/>
+        <location filename="../gis/IGisDatabase.ui" line="109"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Для добавления базы данных сделайте щелчок правой кнопкой мышки на списке баз данных.</translation>
     </message>
@@ -8367,79 +8367,79 @@ or
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="28"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="43"/>
         <source>Profile</source>
         <translation>Профиль</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="35"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="50"/>
         <source>Alternative</source>
         <translation>Альтернатива</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="64"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="79"/>
         <source>display selected routing profile</source>
         <translation>Отобразить выбранный профиль маршрутизации</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="67"/>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="128"/>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="142"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="82"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="143"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="157"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="87"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="102"/>
         <source>on-the-fly routing</source>
         <translation>Маршрутизация на лету</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="111"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="126"/>
         <source>BRouter: </source>
         <translation>BRouter:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="118"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="133"/>
         <source>not running</source>
         <translation>Не запущено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="125"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="140"/>
         <source>start/stop BRouter</source>
         <translation>Старт / стоп BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="139"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="154"/>
         <source>show BRouter console</source>
         <translation>Показать консоль BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="172"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="187"/>
         <source>Setup</source>
         <translation>Настройка</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="181"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="196"/>
         <source>Caution! BRouter is listening on all ports for connections.</source>
         <translation>Осторожно! BRouter прослушивает все порты для соединений.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="219"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="234"/>
         <source>Dismiss</source>
         <translation>Отклонить</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="241"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="256"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, лицензия GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="254"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="269"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
         <translation>&lt;p&gt;Любезность &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterBRouter.ui" line="267"/>
+        <location filename="../gis/rte/router/IRouterBRouter.ui" line="282"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
         <translation>&lt;p&gt;Данные маршрутизации &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
@@ -8649,52 +8649,52 @@ or
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="22"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="37"/>
         <source>Highways</source>
         <translation>Автомагистрали</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="29"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="44"/>
         <source>Seasonal</source>
         <translation>Сезонные дороги</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="36"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="51"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="43"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="58"/>
         <source>Country Border</source>
         <translation>Государственная граница</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="53"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="68"/>
         <source>Profile</source>
         <translation>Профиль</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="60"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="75"/>
         <source>Avoid:</source>
         <translation>Избегать:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="67"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="82"/>
         <source>Ferry</source>
         <translation>Парома</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="74"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="89"/>
         <source>Toll Road</source>
         <translation>Платные дороги</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="84"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="99"/>
         <source>Unpaved</source>
         <translation>Дороги без покрытия</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="106"/>
+        <location filename="../gis/rte/router/IRouterMapQuest.ui" line="121"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</source>
         <translation>&lt;p&gt;Маршрутные направления с разрешением &lt;a href=&quot;http://www.mapquest.com/&quot; target=&quot;_blank&quot;&gt;MapQuest&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
@@ -8707,37 +8707,37 @@ or
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="31"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="46"/>
         <source>Profile</source>
         <translation>Профиль</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="38"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="53"/>
         <source>Mode</source>
         <translation>Режим</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="45"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="60"/>
         <source>Database</source>
         <translation>База данных</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="52"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="67"/>
         <source>Add paths with Routino database.</source>
         <translation>Добавить путь к базе данных Routino.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="55"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="70"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="66"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="81"/>
         <source>Language</source>
         <translation>Язык</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/IRouterRoutino.ui" line="118"/>
+        <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
         <translation>Для использования маршрутизации без доступа к сети вам необходимо определить пути к локальным данным маршрутизации. Использовать кнопку настройки чтобы зарегистрировать пути. Вы можете создать свои собственные данные для маршрутизации с помощью &lt;b&gt;Инструмент-&gt;Создать базу данных Routino&lt;/b&gt;.</translation>
     </message>

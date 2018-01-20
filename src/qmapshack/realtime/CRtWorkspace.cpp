@@ -34,14 +34,29 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 
     menu = new QMenu(treeWidget);
     menu->addAction(actionAddSource);
+    menu->addAction(actionDeleteSource);
 
     connect(treeWidget, &QTreeWidget::itemChanged, this, &CRtWorkspace::slotItemChanged);
     connect(treeWidget, &QTreeWidget::customContextMenuRequested, this, &CRtWorkspace::slotContextMenu);
     connect(actionAddSource, &QAction::triggered, this, &CRtWorkspace::slotAddSource);
+    connect(actionDeleteSource, &QAction::triggered, this, &CRtWorkspace::slotDeleteSource);
 
     SETTINGS;
     cfg.beginGroup("Realtime");
     treeWidget->header()->restoreState(cfg.value("treeWks/state", treeWidget->header()->saveState()).toByteArray());
+    const int N = cfg.value("numberOfSources", 0).toInt();
+    for(int n = 0; n < N; n++)
+    {
+        cfg.beginGroup(QString("source%1").arg(n));
+        IRtSource * source = IRtSource::create(cfg.value("type", IRtSource::eTypeNone).toInt(), treeWidget);
+        if(source != nullptr)
+        {
+            source->loadSettings(cfg);
+        }
+
+        cfg.endGroup();
+    }
+
     cfg.endGroup();
 
     frame->setVisible(treeWidget->topLevelItemCount() == 0);
@@ -54,10 +69,26 @@ CRtWorkspace::~CRtWorkspace()
     cfg.beginGroup("Realtime");
     cfg.remove("");
     cfg.setValue("treeWks/state", treeWidget->header()->saveState());
+
+    const int N = treeWidget->topLevelItemCount();
+    cfg.setValue("numberOfSources", N);
+    for(int n = 0; n < N; n++)
+    {
+        IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        if(source == nullptr)
+        {
+            continue;
+        }
+        cfg.beginGroup(QString("source%1").arg(n));
+        cfg.setValue("type", source->type);
+        source->saveSettings(cfg);
+        cfg.endGroup();
+    }
+
     cfg.endGroup();
 }
 
-void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt)
+void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) const
 {
     QMutexLocker lock(&IRtSource::mutex);
     QList<QRectF> blockedAreas;
@@ -75,17 +106,20 @@ void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt)
     }
 }
 
-void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
+void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) const
 {
 }
 
 void CRtWorkspace::addSource(IRtSource * source)
 {
+    QMutexLocker lock(&IRtSource::mutex);
     treeWidget->insertTopLevelItem(treeWidget->topLevelItemCount(), source);
 }
 
-bool CRtWorkspace::hasSourceOfType(int type)
+bool CRtWorkspace::hasSourceOfType(int type) const
 {
+    QMutexLocker lock(&IRtSource::mutex);
+
     const int N = treeWidget->topLevelItemCount();
     for(int n = 0; n < N; n++)
     {
@@ -116,6 +150,10 @@ void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)
 
 void CRtWorkspace::slotContextMenu(const QPoint& point)
 {
+    IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+
+    actionDeleteSource->setEnabled(source != nullptr);
+
     QPoint p = mapToGlobal(point);
     menu->exec(p);
 }
@@ -127,3 +165,21 @@ void CRtWorkspace::slotAddSource()
     dlg.exec();
 }
 
+void CRtWorkspace::slotDeleteSource()
+{
+    int res = QMessageBox::question(this, tr("Delete Source..."), tr("Do you really want to remove the realtime source?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    if(res != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    QMutexLocker lock(&IRtSource::mutex);
+
+    IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+    if(source == nullptr)
+    {
+        return;
+    }
+
+    delete source;
+}

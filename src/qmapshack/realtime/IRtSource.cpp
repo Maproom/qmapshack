@@ -17,6 +17,9 @@
 **********************************************************************************************/
 
 #include "realtime/IRtSource.h"
+#include "realtime/opensky/CRtOpenSky.h"
+
+#include <QtWidgets>
 
 QMutex IRtSource::mutex(QMutex::Recursive);
 
@@ -27,4 +30,26 @@ IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
 {
 }
 
+void IRtSource::loadSettings(QSettings& cfg)
+{
+    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
+}
 
+void IRtSource::saveSettings(QSettings& cfg) const
+{
+    cfg.setValue("checkState", checkState(eColumnCheckBox));
+}
+
+
+IRtSource* IRtSource::create(int type, QTreeWidget * parent)
+{
+
+    switch(type)
+    {
+    case eTypeOpenSky:
+        return new CRtOpenSky(parent);
+        break;
+    }
+
+    return nullptr;
+}

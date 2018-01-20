@@ -28,9 +28,11 @@ public:
     CRtOpenSky(QTreeWidget * parent);
     virtual ~CRtOpenSky() = default;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const override;
+    QString getDescription() const override;
+    void loadSettings(QSettings& cfg) override;
+    void saveSettings(QSettings& cfg) const override;
 
-    QString getDescription() override;
 
     static const QString strIcon;
 };

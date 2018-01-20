@@ -30,14 +30,14 @@ CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
     setCheckState(eColumnCheckBox, Qt::Checked);
 }
 
-QString CRtOpenSky::getDescription()
+QString CRtOpenSky::getDescription() const
 {
     return tr("<b>OpenSky</b><br/>"
               "An online service that provides positional data of civil aircrafts"
               );
 }
 
-void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const
 {
     if(checkState(eColumnCheckBox) != Qt::Checked)
     {
@@ -46,4 +46,14 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
 
     p.setPen(Qt::black);
     p.drawRect(QRect(200,200,100,100));
+}
+
+void CRtOpenSky::loadSettings(QSettings& cfg)
+{
+    IRtSource::loadSettings(cfg);
+}
+
+void CRtOpenSky::saveSettings(QSettings& cfg) const
+{
+    IRtSource::saveSettings(cfg);
 }

@@ -25,6 +25,7 @@
 #include <QDebug>
 
 class CRtDraw;
+class QSettings;
 
 
 class IRtSource : public QTreeWidgetItem
@@ -37,8 +38,11 @@ public:
     };
 
 
+
     IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);
     virtual ~IRtSource() = default;
+
+    static IRtSource* create(int type, QTreeWidget * parent);
 
     static QMutex mutex;
 
@@ -49,9 +53,12 @@ public:
         ,eColumnDecoration = eColumnIcon
         ,eColumnName = 1
     };
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const = 0;
 
-    virtual QString getDescription() = 0;
+    virtual QString getDescription() const = 0;
+
+    virtual void loadSettings(QSettings& cfg);
+    virtual void saveSettings(QSettings& cfg) const;
 
     const type_e type;
     const bool singleInstanceOnly;

@@ -45,7 +45,7 @@ public:
        @param viewport  the viewport in units of rad
        @param rt       the draw context to be used
      */
-    void draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt);
+    void draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) const;
 
     /**
        @brief Draw all data that is time variant and can't wait for a full update
@@ -56,11 +56,21 @@ public:
        @param viewport  the viewport in units of rad
        @param rt       the draw context to be used
      */
-    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt);
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) const;
 
+    /**
+       @brief Check if a source of a given type is already loaded
+       @param type      the IRtSource::type_e to check
 
-    bool hasSourceOfType(int type);
+       @return Return true if a source of the given type is found.
+     */
+    bool hasSourceOfType(int type) const;
 
+    /**
+       @brief Add a realtime source object to the list
+
+       @param source    pointer to the source, the treewidget will take over pointer as parent
+     */
     void addSource(IRtSource * source);
 
 signals:
@@ -70,6 +80,7 @@ private slots:
     void slotItemChanged(QTreeWidgetItem * item, int column);
     void slotContextMenu(const QPoint& point);
     void slotAddSource();
+    void slotDeleteSource();
 
 private:
     friend class CMainWindow;

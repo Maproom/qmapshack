@@ -158,21 +158,9 @@ void CFilterSpeed::slotApply()
     case 1:
     {
         qint32 i = comboCyclingType->currentIndex();
-        qreal slopeAtMinSpeedUnit = 0, slopeAtMaxSpeedUnit = 0;
-
-        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
-        {
-            slopeAtMinSpeedUnit = IUnit::slopeConvert(IUnit::eSlopeDegrees, cyclingTypes[i].slopeAtMinSpeed);
-            slopeAtMaxSpeedUnit = IUnit::slopeConvert(IUnit::eSlopeDegrees, cyclingTypes[i].slopeAtMaxSpeed);
-        }
-        else if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
-        {
-            slopeAtMinSpeedUnit = cyclingTypes[i].slopeAtMinSpeed;
-            slopeAtMaxSpeedUnit = cyclingTypes[i].slopeAtMaxSpeed;
-        }
         trk.filterSpeed(cyclingTypes[i].plainSpeed / IUnit::self().speedfactor,
-                        cyclingTypes[i].minSpeed / IUnit::self().speedfactor, slopeAtMinSpeedUnit,
-                        cyclingTypes[i].maxSpeed / IUnit::self().speedfactor, slopeAtMaxSpeedUnit);
+                        cyclingTypes[i].minSpeed / IUnit::self().speedfactor, cyclingTypes[i].slopeAtMinSpeed,
+                        cyclingTypes[i].maxSpeed / IUnit::self().speedfactor, cyclingTypes[i].slopeAtMaxSpeed);
         break;
     }
     default:
@@ -185,16 +173,12 @@ void CFilterSpeed::slotApply()
 void CFilterSpeed::slotSetActivityType(int type)
 {
     stackedWidget->setCurrentIndex(type);
-
-    if(type == 1 && trk.isTrkElevationInvalid())
-    {
-        SetElevationValid(trk);
-    }
+    SetElevationValid();
 }
 
-void CFilterSpeed::SetElevationValid(CGisItemTrk &trk)
+void CFilterSpeed::SetElevationValid()
 {
-    if(trk.isTrkElevationInvalid())
+    if(trk.isTrkElevationInvalid() && comboActivityType->currentIndex() == 1)
     {
         QString str = QString("<b style='color: red;'>" +
                               tr("Track has no or invalid elevation data. Please correct or set constant speed!") +

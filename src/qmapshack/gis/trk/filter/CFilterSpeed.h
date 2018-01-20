@@ -31,7 +31,7 @@ public:
     CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
     virtual ~CFilterSpeed();
 
-    void SetElevationValid(CGisItemTrk &trk);
+    void SetElevationValid();
 
 private slots:
     void slotApply();
@@ -44,7 +44,6 @@ private slots:
     void slotSetMaxSpeed(double speed);
     void slotSetSlopeAtMaxSpeed(double slope);
     void slotSetMinMaxSlopes(bool);
-
 
 private:
     CGisItemTrk& trk;

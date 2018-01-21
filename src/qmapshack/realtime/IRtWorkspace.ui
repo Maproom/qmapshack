@@ -35,7 +35,7 @@
       <enum>Qt::CustomContextMenu</enum>
      </property>
      <attribute name="headerVisible">
-      <bool>false</bool>
+      <bool>true</bool>
      </attribute>
      <column>
       <property name="text">
@@ -44,7 +44,7 @@
      </column>
      <column>
       <property name="text">
-       <string/>
+       <string>Source</string>
       </property>
      </column>
     </widget>

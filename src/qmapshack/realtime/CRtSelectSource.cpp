@@ -24,9 +24,9 @@
 #include <QtWidgets>
 
 enum datatypes_e
-{
-    eDataPointer = Qt::UserRole
-    ,eDataUsed = Qt::UserRole + 1
+{   
+    eDataPointer = Qt::UserRole     ///< to store the pointer to the IRtSource
+    ,eDataUsed = Qt::UserRole + 1   ///< to store a flag if the value in eDataPointer is used and must not be destroyed
 };
 
 template<typename T>
@@ -64,12 +64,21 @@ CRtSelectSource::CRtSelectSource(CRtWorkspace &wks)
                           "For others only a single instance can be added."
                           ));
 
+    // append the list by adding other sources
     addSource<CRtOpenSky>(wks, listWidget);
+
+    // update GUI state
     slotSelectionChanged();
 }
 
 CRtSelectSource::~CRtSelectSource()
 {
+    /*
+       In ctor we built a list with items that hold an instance to a IRtSource each.
+       These instances to not have a parent, except one if a source has been added
+       to the workspace. We have to iterate over the list of itmes and destroy those
+       that do not have true in eDataPointer.
+    */
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
@@ -85,7 +94,6 @@ CRtSelectSource::~CRtSelectSource()
 void CRtSelectSource::slotSelectionChanged()
 {
     QListWidgetItem * item = listWidget->currentItem();
-
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled((item != nullptr) && (item->flags() & Qt::ItemIsEnabled));
 }
 
@@ -96,6 +104,8 @@ void CRtSelectSource::accept()
     IRtSource * source = item->data(eDataPointer).value<IRtSource*>();
     if(source != nullptr)
     {
+        // as we use the IRtSource instance in the workspace we have to
+        // eDataUsed to true to avoid destruction in the dtor.
         item->setData(eDataUsed, true);
         wks.addSource(source);
     }

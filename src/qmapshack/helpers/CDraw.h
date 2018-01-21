@@ -81,6 +81,7 @@ public:
      */
     static QPoint bubble(QPainter &p, const QRect &contentRect, const QPoint &pointerPos, int pointerBaseWidth = 20, float pointerBasePos = .5f, const QPen& pen = penBorderGray);
 
+    static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect);
 private:
     /**
        @brief   Creates a new arrow using the brush specified

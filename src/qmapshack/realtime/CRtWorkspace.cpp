@@ -51,6 +51,7 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
         IRtSource * source = IRtSource::create(cfg.value("type", IRtSource::eTypeNone).toInt(), treeWidget);
         if(source != nullptr)
         {
+            connect(source, &IRtSource::sigChanged, this, &CRtWorkspace::sigChanged);
             source->loadSettings(cfg);
         }
 
@@ -114,6 +115,9 @@ void CRtWorkspace::addSource(IRtSource * source)
 {
     QMutexLocker lock(&IRtSource::mutex);
     treeWidget->insertTopLevelItem(treeWidget->topLevelItemCount(), source);
+    source->registerWithTreeWidget();
+    connect(source, &IRtSource::sigChanged, this, &CRtWorkspace::sigChanged);
+    emit sigChanged();
 }
 
 bool CRtWorkspace::hasSourceOfType(int type) const
@@ -182,4 +186,5 @@ void CRtWorkspace::slotDeleteSource()
     }
 
     delete source;
+    emit sigChanged();
 }

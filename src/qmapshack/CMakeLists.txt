@@ -275,6 +275,7 @@ set( SRCS
     realtime/CRtWorkspace.cpp
     realtime/IRtSource.cpp
     realtime/opensky/CRtOpenSky.cpp
+    realtime/opensky/CRtOpenSkyInfo.cpp
     setup/CAppSetupLinux.cpp
     setup/CAppSetupMac.cpp
     setup/CAppSetupWin.cpp
@@ -580,6 +581,7 @@ set( HDRS
     realtime/CRtWorkspace.h
     realtime/IRtSource.h
     realtime/opensky/CRtOpenSky.h
+    realtime/opensky/CRtOpenSkyInfo.h
     setup/CAppOpts.h
     setup/CAppSetupLinux.h
     setup/CAppSetupMac.h
@@ -716,6 +718,7 @@ set( UIS
     print/IPrintDialog.ui
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
+    realtime/opensky/IRtOpenSkyInfo.ui
     templates/Hiking_Tour_Summary.ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui

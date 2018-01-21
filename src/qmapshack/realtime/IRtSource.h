@@ -38,31 +38,67 @@ public:
         ,eTypeOpenSky
     };
 
-
-
     IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget * parent);
     virtual ~IRtSource() = default;
 
+    /**
+       @brief Create new IRtSource items by type id
+
+       @param type      the type id of the new item
+       @param parent    the tree widget the item belongs to (can be nullptr, too)
+
+       @return The pointer to the item or nullptr if type is unknown
+    */
     static IRtSource* create(int type, QTreeWidget * parent);
 
-    static QMutex mutex;
+    /**
+       @brief Do everything necessary to setup item after it has been reparented to tree widget
 
+       This will give you the chance to register widgets with sub-items and to setup singnal/slot
+       connections.
+
+    */
+    virtual void registerWithTreeWidget() = 0;
+    /**
+       @brief Load item configuration from QSettings
+
+       @param cfg   the QSettings object with proper group focus
+    */
+    virtual void loadSettings(QSettings& cfg);
+    /**
+       @brief Save item configuration to QSettings
+
+       @param cfg   the QSettings object with proper group focus
+    */
+    virtual void saveSettings(QSettings& cfg) const;
+    /**
+       @brief Get string with description
+
+       @return A descriptive text.
+    */
+    virtual QString getDescription() const = 0;
+
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const = 0;
+
+    /// the global mutex. Has to be used for all operations on a IRtItem
+    static QMutex mutex;
+    /// the item's type id
+    const type_e type;
+    /// set true if only one instance at a time can exist
+    const bool singleInstanceOnly;
+
+    /// used to identify tre widget columns
     enum column_e
     {
         eColumnIcon = 0
         ,eColumnCheckBox = eColumnIcon
         ,eColumnDecoration = eColumnIcon
         ,eColumnName = 1
+        ,eColumnWidget = eColumnName
     };
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const = 0;
 
-    virtual QString getDescription() const = 0;
-
-    virtual void loadSettings(QSettings& cfg);
-    virtual void saveSettings(QSettings& cfg) const;
-
-    const type_e type;
-    const bool singleInstanceOnly;
+signals:
+    void sigChanged();
 };
 
 Q_DECLARE_METATYPE(IRtSource*)

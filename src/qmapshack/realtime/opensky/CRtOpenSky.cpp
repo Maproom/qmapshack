@@ -18,8 +18,10 @@
 
 #include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "helpers/CDraw.h"
 #include "realtime/CRtDraw.h"
 #include "realtime/opensky/CRtOpenSky.h"
+#include "realtime/opensky/CRtOpenSkyInfo.h"
 
 #include <QJsonDocument>
 #include <QtNetwork>
@@ -34,14 +36,46 @@ CRtOpenSky::CRtOpenSky(QTreeWidget *parent)
     setText(eColumnName, "OpenSky");
     setCheckState(eColumnCheckBox, Qt::Checked);
 
+    registerWithTreeWidget();
+
     timer = new QTimer(this);
-    timer->setInterval(5000);
+    timer->setInterval(10100);
     timer->setSingleShot(false);
     timer->start();
     connect(timer, &QTimer::timeout, this, &CRtOpenSky::slotUpdate);
 
     networkAccessManager = new QNetworkAccessManager(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRtOpenSky::slotRequestFinished);
+
+    slotUpdate();
+}
+
+void CRtOpenSky::registerWithTreeWidget()
+{
+    QTreeWidget * tree = treeWidget();
+    if(tree != nullptr)
+    {
+        QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
+        tree->setItemWidget(itemInfo, eColumnWidget, new CRtOpenSkyInfo(*this, tree));
+        emit sigChanged();
+    }
+}
+
+void CRtOpenSky::loadSettings(QSettings& cfg)
+{
+    QMutexLocker lock(&IRtSource::mutex);
+
+    IRtSource::loadSettings(cfg);
+    showNames = cfg.value("showNames", showNames).toBool();
+    emit sigChanged();
+}
+
+void CRtOpenSky::saveSettings(QSettings& cfg) const
+{
+    QMutexLocker lock(&IRtSource::mutex);
+
+    IRtSource::saveSettings(cfg);
+    cfg.setValue("showNames", showNames);
 }
 
 QString CRtOpenSky::getDescription() const
@@ -49,6 +83,24 @@ QString CRtOpenSky::getDescription() const
     return tr("<b>OpenSky</b><br/>"
               "An online service that provides positional data of civil aircrafts"
               );
+}
+
+const QDateTime& CRtOpenSky::getTimestamp() const
+{
+    QMutexLocker lock(&IRtSource::mutex);
+    return timestamp;
+}
+
+qint32 CRtOpenSky::getNumberOfAircrafts() const
+{
+    QMutexLocker lock(&IRtSource::mutex);
+    return aircrafts.count();
+}
+
+bool CRtOpenSky::getShowNames() const
+{
+    QMutexLocker lock(&IRtSource::mutex);
+    return showNames;
 }
 
 void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const
@@ -61,11 +113,13 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
     QPolygonF tmp2 = viewport;
     rt->convertRad2Px(tmp2);
 
+    QFontMetrics fm(p.font());
+
     p.setPen(Qt::yellow);
     p.setBrush(Qt::yellow);
     QPixmap icon("://icons/16x16/Aircraft.png");
-    QRect rect = icon.rect();
-    rect.moveCenter(QPoint(0,0));
+    QRect rectIcon = icon.rect();
+    rectIcon.moveCenter(QPoint(0,0));
 
     for(const aircraft_t& aircraft : aircrafts)
     {
@@ -80,19 +134,29 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
         p.save();
         p.translate(pos);
         p.rotate(aircraft.heading);
-        p.drawPixmap(rect, icon);
+        p.drawPixmap(rectIcon, icon);
         p.restore();
+
+        if(showNames)
+        {
+            QString name = aircraft.callsign.isEmpty() ? tr("unkn.") : aircraft.callsign;
+            QRect rectLabel = fm.boundingRect(name);
+            rectLabel.moveCenter(pos.toPoint() + QPoint(0,-8));
+            rectLabel.adjust(-1,-1,1,1);
+            if(!CDraw::doesOverlap(blockedAreas, rectLabel))
+            {
+                CDraw::text(name, p, rectLabel.center(), Qt::darkBlue);
+                blockedAreas << rectLabel;
+            }
+        }
     }
 }
 
-void CRtOpenSky::loadSettings(QSettings& cfg)
+void CRtOpenSky::slotSetShowNames(bool yes)
 {
-    IRtSource::loadSettings(cfg);
-}
-
-void CRtOpenSky::saveSettings(QSettings& cfg) const
-{
-    IRtSource::saveSettings(cfg);
+    QMutexLocker lock(&IRtSource::mutex);
+    showNames = yes;
+    emit sigChanged();
 }
 
 void CRtOpenSky::slotUpdate()
@@ -135,27 +199,27 @@ void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
         return;
     }
 
-    QMutexLocker lock(&IRtSource::mutex);
-    aircrafts.clear();
-    const QJsonArray& jsonStates = json.object().value("states").toArray();
-    for(const QJsonValue& jsonState : jsonStates)
     {
-        aircraft_t aircraft;
-        const QJsonArray& jsonStateArray = jsonState.toArray();
-        QString key         = jsonStateArray[0].toString();
-        aircraft.callsign   = jsonStateArray[1].toString();
-        qreal lon           = jsonStateArray[5].toDouble();
-        qreal lat           = jsonStateArray[6].toDouble();
-        aircraft.pos        = QPointF(lon,lat);
-        aircraft.heading    = jsonStateArray[10].toDouble();
+        QMutexLocker lock(&IRtSource::mutex);
+        aircrafts.clear();
 
-        aircrafts[key] = aircraft;
+        timestamp = QDateTime::fromTime_t(json.object().value("time").toInt());
+        const QJsonArray& jsonStates = json.object().value("states").toArray();
+        for(const QJsonValue& jsonState : jsonStates)
+        {
+            aircraft_t aircraft;
+            const QJsonArray& jsonStateArray = jsonState.toArray();
+            QString key         = jsonStateArray[0].toString();
+            aircraft.callsign   = jsonStateArray[1].toString();
+            qreal lon           = jsonStateArray[5].toDouble();
+            qreal lat           = jsonStateArray[6].toDouble();
+            aircraft.pos        = QPointF(lon,lat);
+            aircraft.heading    = jsonStateArray[10].toDouble();
+
+            aircrafts[key] = aircraft;
+        }
     }
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas != nullptr)
-    {
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawRt);
-    }
+    emit sigChanged();
 }
 

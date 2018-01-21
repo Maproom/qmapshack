@@ -56,6 +56,7 @@ void CRtOpenSky::registerWithTreeWidget()
     if(tree != nullptr)
     {
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
+        itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
         tree->setItemWidget(itemInfo, eColumnWidget, new CRtOpenSkyInfo(*this, tree));
         emit sigChanged();
     }

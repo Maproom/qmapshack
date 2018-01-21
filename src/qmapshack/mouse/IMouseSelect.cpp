@@ -142,6 +142,7 @@ void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const Q
         state = eStateInitial;
         break;
     }
+
     case eStateMap:
     {
         if(corner != eCornerNone)
@@ -154,6 +155,7 @@ void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const Q
         }
         break;
     }
+
     case eStateInitial:
     {
         QPointF pos(end);
@@ -180,6 +182,7 @@ void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const Q
         canvas->update();
         break;
     }
+
     case eStateResize:
     {
         QPointF pos = end - offset;
@@ -206,11 +209,13 @@ void IMouseSelect::mouseDragged(const QPoint& start, const QPoint& last, const Q
         canvas->update();
         break;
     }
+
     case eStateMapMoving:
     {
         IMouse::mouseDragged(start, last, end);
         break;
     }
+
     default:
     {
         Q_ASSERT(false);

@@ -39,6 +39,8 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "realtime/CRtWorkspace.h"
+#include "setup/IAppSetup.h"
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
@@ -47,8 +49,6 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
-#include "setup/IAppSetup.h"
-#include "realtime/CRtWorkspace.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -362,7 +362,7 @@ CMainWindow::CMainWindow()
                      << actionToggleWorkspace
                      << actionToggleRealtime
                      << actionToggleDatabase
-                     << actionToggleRte                     
+                     << actionToggleRte
                      << actionToggleDocks
                      << actionToggleToolBar
                      << actionFullScreen
@@ -391,7 +391,7 @@ CMainWindow::CMainWindow()
                    << actionToggleDem
                    << actionToggleWorkspace
                    << actionToggleRealtime
-                   << actionToggleDatabase                   
+                   << actionToggleDatabase
                    << actionToggleRte
                    << actionToggleDocks
                    << actionFullScreen;
@@ -425,7 +425,6 @@ void CMainWindow::prepareMenuForMac()
     dockRealtime->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDatabase->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
-
 }
 
 CMainWindow::~CMainWindow()

@@ -109,6 +109,18 @@ void CRtWorkspace::draw(QPainter& p, const QPolygonF &viewport, CRtDraw *rt) con
 
 void CRtWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) const
 {
+    QMutexLocker lock(&IRtSource::mutex);
+    const int N = treeWidget->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+
+        item->fastDraw(p, viewport, rt);
+    }
 }
 
 void CRtWorkspace::addSource(IRtSource * source)
@@ -140,6 +152,21 @@ bool CRtWorkspace::hasSourceOfType(int type) const
     }
 
     return false;
+}
+
+void CRtWorkspace::mouseMove(const QPointF& pos)
+{
+    QMutexLocker lock(&IRtSource::mutex);
+    const int N = treeWidget->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IRtSource * item = dynamic_cast<IRtSource*>(treeWidget->topLevelItem(n));
+        if(item == nullptr)
+        {
+            continue;
+        }
+        item->mouseMove(pos);
+    }
 }
 
 void CRtWorkspace::slotItemChanged(QTreeWidgetItem * item, int column)

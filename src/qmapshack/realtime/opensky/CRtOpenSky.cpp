@@ -103,7 +103,7 @@ bool CRtOpenSky::getShowNames() const
     return showNames;
 }
 
-void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const
+void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
 {
     if(checkState(eColumnCheckBox) != Qt::Checked)
     {
@@ -121,18 +121,20 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
     QRect rectIcon = icon.rect();
     rectIcon.moveCenter(QPoint(0,0));
 
-    for(const aircraft_t& aircraft : aircrafts)
+    for(const QString& key : aircrafts.keys())
     {
-        QPointF pos = aircraft.pos * DEG_TO_RAD;
-        rt->convertRad2Px(pos);
+        aircraft_t& aircraft = aircrafts[key];
 
-        if(!tmp2.boundingRect().contains(pos))
+        aircraft.point = aircraft.pos * DEG_TO_RAD;
+        rt->convertRad2Px(aircraft.point);
+
+        if(!tmp2.boundingRect().contains(aircraft.point))
         {
             continue;
         }
 
         p.save();
-        p.translate(pos);
+        p.translate(aircraft.point);
         p.rotate(aircraft.heading);
         p.drawPixmap(rectIcon, icon);
         p.restore();
@@ -141,13 +143,74 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
         {
             QString name = aircraft.callsign.isEmpty() ? tr("unkn.") : aircraft.callsign;
             QRect rectLabel = fm.boundingRect(name);
-            rectLabel.moveCenter(pos.toPoint() + QPoint(0,-8));
+            rectLabel.moveCenter(aircraft.point.toPoint() + QPoint(0,-8));
             rectLabel.adjust(-1,-1,1,1);
             if(!CDraw::doesOverlap(blockedAreas, rectLabel))
             {
                 CDraw::text(name, p, rectLabel.center(), Qt::darkBlue);
                 blockedAreas << rectLabel;
             }
+        }
+    }
+}
+
+void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
+{
+    if(!keyFocus.isEmpty())
+    {
+        p.save();
+        p.setFont(QFont("Courier",10));
+
+        const aircraft_t& aircraft = aircrafts[keyFocus];
+        p.setPen(Qt::red);
+        p.setBrush(Qt::NoBrush);
+        p.drawEllipse(aircraft.point, 10, 10);
+
+        QString text;
+        text += tr("callsign:        %1").arg(aircraft.callsign) + "\n";
+        text += tr("origin country:  %1").arg(aircraft.originCountry) + "\n";
+        text += tr("time position:   %1").arg(QDateTime::fromTime_t(aircraft.timePosition).toString()) + "\n";
+        text += tr("last contact:    %1").arg(QDateTime::fromTime_t(aircraft.lastContact).toString()) + "\n";
+        text += tr("longitude:       %1°").arg(aircraft.longitude) + "\n";
+        text += tr("latitude:        %1°").arg(aircraft.latitude) + "\n";
+        text += tr("geo. alt.:       %1m").arg(aircraft.geoAltitude) + "\n";
+        text += tr("on ground:       %1").arg(aircraft.onGround) + "\n";
+        text += tr("velocity:        %1km/h").arg(aircraft.velocity*3.6) + "\n";
+        text += tr("heading:         %1°").arg(aircraft.heading) + "\n";
+        text += tr("vert. rate:      %1m/s").arg(aircraft.vertical_rate) + "\n";
+        text += tr("baro. alt.:      %1m").arg(aircraft.baroAltitude) + "\n";
+        text += tr("squak:           %1").arg(aircraft.squawk) + "\n";
+        text += tr("spi:             %1").arg(aircraft.spi) + "\n";
+        text += tr("position source: %1").arg(aircraft.positionSource);
+
+        QFontMetricsF fm(p.font());
+        QRectF rectText = fm.boundingRect(QRect(0, 0, 500, 0), Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, text);
+        rectText.moveTopLeft(aircraft.point + QPointF(32,0));
+        QRectF rectFrame = rectText.adjusted(-5,-5,5,5);
+
+        p.setPen(CDraw::penBorderGray);
+        p.setBrush(CDraw::brushBackWhite);
+        PAINT_ROUNDED_RECT(p, rectFrame);
+
+        p.setPen(Qt::black);
+        p.drawText(rectText, Qt::AlignLeft|Qt::AlignTop|Qt::TextWordWrap, text);
+
+        p.restore();
+    }
+}
+
+void CRtOpenSky::mouseMove(const QPointF& pos)
+{
+    QMutexLocker lock(&IRtSource::mutex);
+
+    keyFocus.clear();
+    for(const QString& key : aircrafts.keys())
+    {
+        const aircraft_t& aircraft = aircrafts[key];
+        if((aircraft.point - pos).manhattanLength() < 20)
+        {
+            keyFocus = key;
+            break;
         }
     }
 }
@@ -210,12 +273,25 @@ void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
             aircraft_t aircraft;
             const QJsonArray& jsonStateArray = jsonState.toArray();
             QString key         = jsonStateArray[0].toString();
-            aircraft.callsign   = jsonStateArray[1].toString();
-            qreal lon           = jsonStateArray[5].toDouble();
-            qreal lat           = jsonStateArray[6].toDouble();
-            aircraft.pos        = QPointF(lon,lat);
-            aircraft.heading    = jsonStateArray[10].toDouble();
 
+            aircraft.callsign       = jsonStateArray[1].toString();
+            aircraft.originCountry  = jsonStateArray[2].toString();
+            aircraft.timePosition   = jsonStateArray[3].toInt();
+            aircraft.lastContact    = jsonStateArray[4].toInt();
+            aircraft.longitude      = jsonStateArray[5].toDouble();
+            aircraft.latitude       = jsonStateArray[6].toDouble();
+            aircraft.geoAltitude    = jsonStateArray[7].toDouble();
+            aircraft.onGround       = jsonStateArray[8].toBool();
+            aircraft.velocity       = jsonStateArray[9].toDouble();
+            aircraft.heading        = jsonStateArray[10].toDouble();
+            aircraft.vertical_rate  = jsonStateArray[11].toDouble();
+
+            aircraft.baroAltitude   = jsonStateArray[13].toDouble();
+            aircraft.squawk         = jsonStateArray[14].toString();
+            aircraft.spi            = jsonStateArray[15].toBool();
+            aircraft.positionSource = jsonStateArray[16].toInt();
+
+            aircraft.pos            = QPointF(aircraft.longitude,aircraft.latitude);
             aircrafts[key] = aircraft;
         }
     }

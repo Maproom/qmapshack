@@ -48,7 +48,7 @@ public:
        @param parent    the tree widget the item belongs to (can be nullptr, too)
 
        @return The pointer to the item or nullptr if type is unknown
-    */
+     */
     static IRtSource* create(int type, QTreeWidget * parent);
 
     /**
@@ -57,28 +57,34 @@ public:
        This will give you the chance to register widgets with sub-items and to setup singnal/slot
        connections.
 
-    */
+     */
     virtual void registerWithTreeWidget() = 0;
     /**
        @brief Load item configuration from QSettings
 
        @param cfg   the QSettings object with proper group focus
-    */
+     */
     virtual void loadSettings(QSettings& cfg);
     /**
        @brief Save item configuration to QSettings
 
        @param cfg   the QSettings object with proper group focus
-    */
+     */
     virtual void saveSettings(QSettings& cfg) const;
     /**
        @brief Get string with description
 
        @return A descriptive text.
-    */
+     */
     virtual QString getDescription() const = 0;
 
-    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const = 0;
+    virtual void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) = 0;
+
+    virtual void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt) = 0;
+
+    virtual void mouseMove(const QPointF& pos)
+    {
+    }
 
     /// the global mutex. Has to be used for all operations on a IRtItem
     static QMutex mutex;

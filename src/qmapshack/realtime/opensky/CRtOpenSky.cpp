@@ -201,6 +201,11 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
 
 void CRtOpenSky::mouseMove(const QPointF& pos)
 {
+    if(checkState(eColumnCheckBox) != Qt::Checked)
+    {
+        return;
+    }
+
     QMutexLocker lock(&IRtSource::mutex);
 
     keyFocus.clear();

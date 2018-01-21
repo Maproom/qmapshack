@@ -73,6 +73,11 @@ public:
      */
     void addSource(IRtSource * source);
 
+    /**
+       @brief Distribute mouse move event over all availabal sources.
+
+       @param pos   the pixel coordinate in the canvas
+     */
     void mouseMove(const QPointF& pos);
 
 signals:

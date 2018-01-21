@@ -73,6 +73,8 @@ public:
      */
     void addSource(IRtSource * source);
 
+    void mouseMove(const QPointF& pos);
+
 signals:
     void sigChanged();
 

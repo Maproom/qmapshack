@@ -644,7 +644,7 @@ void CCanvas::slotToolTip()
     {
         return;
     }
-    QPoint p = mapToGlobal(posToolTip + QPoint(32,0));
+    QPoint p = (posToolTip + QPoint(32,0));
     QToolTip::showText(p,str);
 }
 
@@ -949,7 +949,6 @@ void CCanvas::showProfile(bool yes)
 
 void CCanvas::setDrawContextSize(const QSize& s)
 {
-
     for(IDrawContext * context : allDrawContext)
     {
         context->resize(s);

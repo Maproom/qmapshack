@@ -17,15 +17,15 @@
 
 **********************************************************************************************/
 
-#include "mouse/IMouse.h"
-#include "mouse/CMouseAdapter.h"
 #include "canvas/CCanvas.h"
+#include "mouse/CMouseAdapter.h"
+#include "mouse/IMouse.h"
 
 IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    :QObject(mouse),
-      canvas(canvas),
-      gis(gis),
-      mouse(mouse)
+    : QObject(mouse),
+    canvas(canvas),
+    gis(gis),
+    mouse(mouse)
 {
 }
 

@@ -19,9 +19,9 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/line/CLineOpAddPoint.h"
 #include "mouse/line/IMouseEditLine.h"
-#include "mouse/CMouseAdapter.h"
 
 #include <QtWidgets>
 

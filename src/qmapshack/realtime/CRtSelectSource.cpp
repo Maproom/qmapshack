@@ -24,7 +24,7 @@
 #include <QtWidgets>
 
 enum datatypes_e
-{   
+{
     eDataPointer = Qt::UserRole     ///< to store the pointer to the IRtSource
     ,eDataUsed = Qt::UserRole + 1   ///< to store a flag if the value in eDataPointer is used and must not be destroyed
 };
@@ -78,7 +78,7 @@ CRtSelectSource::~CRtSelectSource()
        These instances to not have a parent, except one if a source has been added
        to the workspace. We have to iterate over the list of itmes and destroy those
        that do not have true in eDataPointer.
-    */
+     */
     const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {

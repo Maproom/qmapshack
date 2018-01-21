@@ -16,14 +16,14 @@
 
 **********************************************************************************************/
 
-#include "realtime/opensky/CRtOpenSkyInfo.h"
 #include "realtime/opensky/CRtOpenSky.h"
+#include "realtime/opensky/CRtOpenSkyInfo.h"
 
 CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     : QWidget(parent)
     , source(source)
 {
-    setupUi(this);            
+    setupUi(this);
     connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
     connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
 }

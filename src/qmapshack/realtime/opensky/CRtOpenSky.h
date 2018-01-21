@@ -66,8 +66,11 @@ public:
      */
     bool getShowNames() const;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const override;
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
+    void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)  override;
+
+    void mouseMove(const QPointF& pos) override;
     static const QString strIcon;
 public slots:
     /**
@@ -94,14 +97,32 @@ private:
 
     struct aircraft_t
     {
+        QPointF pos     = NOPOINTF;
+        QPointF point   = NOPOINTF;
+
         QString callsign;
-        QPointF pos = NOPOINTF;
-        qreal heading = 0;
+        QString originCountry;
+        qint32 timePosition     = NOINT;
+        qint32 lastContact      = NOINT;
+        qreal longitude         = NOFLOAT;
+        qreal latitude          = NOFLOAT;
+        qreal geoAltitude       = NOFLOAT;
+        bool onGround           = false;
+        qreal velocity          = NOFLOAT;
+        qreal heading           = NOFLOAT;
+        qreal vertical_rate     = NOFLOAT;
+
+        qreal baroAltitude      = NOFLOAT;
+        QString squawk;
+        bool spi                = false;
+        qint32 positionSource   = NOINT;
     };
 
     QDateTime timestamp;
     QMap<QString, aircraft_t> aircrafts;
     bool showNames = true;
+
+    QString keyFocus;       
 };
 
 #endif //CRTOPENSKY_H

@@ -22,6 +22,8 @@
 #include "realtime/IRtSource.h"
 #include "units/IUnit.h"
 
+#include <QDateTime>
+
 class QTimer;
 class QNetworkAccessManager;
 class QNetworkReply;
@@ -33,16 +35,57 @@ public:
     CRtOpenSky(QTreeWidget * parent);
     virtual ~CRtOpenSky() = default;
 
-    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const override;
-    QString getDescription() const override;
+    /**
+       @brief Setup sub-item
+
+       The parent tree widgte is used to setup a subitem with CRtOpenSkyInfo as widget.
+     */
+    void registerWithTreeWidget() override;
     void loadSettings(QSettings& cfg) override;
     void saveSettings(QSettings& cfg) const override;
 
+    QString getDescription() const override;
+
+    /**
+       @brief Get the timestamp of the last OpenSky update
+
+       @return The timestamo as QDateTime instance
+     */
+    const QDateTime& getTimestamp() const;
+
+    /**
+       @brief Get the number of entries in the current record
+
+       @return The number as integer.
+     */
+    qint32 getNumberOfAircrafts() const;
+    /**
+       @brief Get flag to control visibility of callsign names
+
+       @return True to show names.
+     */
+    bool getShowNames() const;
+
+    void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) const override;
 
     static const QString strIcon;
+public slots:
+    /**
+       @brief Set visiblity of callsign names
+
+       @param yes   set true to show names
+     */
+    void slotSetShowNames(bool yes);
 
 private slots:
+    /**
+       @brief Request a new dataset from OpenSky
+     */
     void slotUpdate();
+    /**
+       @brief Handle incomming dataset from OpenSky
+       @param reply
+     */
     void slotRequestFinished(QNetworkReply* reply);
 
 private:
@@ -56,7 +99,9 @@ private:
         qreal heading = 0;
     };
 
+    QDateTime timestamp;
     QMap<QString, aircraft_t> aircrafts;
+    bool showNames = true;
 };
 
 #endif //CRTOPENSKY_H

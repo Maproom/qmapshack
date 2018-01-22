@@ -31,6 +31,7 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 {
     pSelf = this;
     setupUi(this);
+    connect(this, &CRtWorkspace::sigChanged, this, &CRtWorkspace::slotChanged);
 
     menu = new QMenu(treeWidget);
     menu->addAction(actionAddSource);
@@ -60,8 +61,8 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 
     cfg.endGroup();
 
-    frame->setVisible(treeWidget->topLevelItemCount() == 0);
     labelHelp->setText(tr("To add a real time source do a right click on the list above. "));
+    slotChanged();
 }
 
 CRtWorkspace::~CRtWorkspace()
@@ -214,4 +215,9 @@ void CRtWorkspace::slotDeleteSource()
 
     delete source;
     emit sigChanged();
+}
+
+void CRtWorkspace::slotChanged()
+{
+    frame->setVisible(treeWidget->topLevelItemCount() == 0);
 }

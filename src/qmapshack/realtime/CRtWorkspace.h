@@ -88,6 +88,7 @@ private slots:
     void slotContextMenu(const QPoint& point);
     void slotAddSource();
     void slotDeleteSource();
+    void slotChanged();
 
 private:
     friend class CMainWindow;

@@ -278,15 +278,15 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="11"
-     inkscape:cx="27.657443"
+     inkscape:cx="26.012402"
      inkscape:cy="32.697415"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
      inkscape:grid-bbox="true"
      inkscape:window-width="1920"
-     inkscape:window-height="1051"
-     inkscape:window-x="1920"
+     inkscape:window-height="989"
+     inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1">
     <inkscape:grid
@@ -339,33 +339,34 @@
     </g>
     <g
        id="g4291"
-       transform="matrix(1.1910314,0,0,1.106179,-4.6063547,-1.9811613)">
+       transform="matrix(1.1910314,0,0,1.106179,-4.6063547,-1.9811613)"
+       style="fill:#55d400;stroke:#55d400">
       <g
          transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
-         style="fill:#008000;stroke:#008000"
+         style="fill:#55d400;stroke:#55d400"
          id="g4303">
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 7,14 3,-5 3,5"
            id="path4299"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 13,14 7,14"
            id="path4301"
            inkscape:connector-curvature="0" />
       </g>
       <g
          transform="matrix(2.7713857,0,0,-2.1726845,-12.642603,54.298899)"
-         style="fill:#008000;stroke:#008000"
+         style="fill:#55d400;stroke:#55d400"
          id="g4303-3">
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 7,14 3,-5 3,5"
            id="path4299-6"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 13,14 7,14"
            id="path4301-7"
            inkscape:connector-curvature="0" />
@@ -373,33 +374,34 @@
     </g>
     <g
        id="g4291-3"
-       transform="matrix(0,-1.1910314,1.106179,0,21.991776,38.594107)">
+       transform="matrix(0,-1.1910314,1.106179,0,21.991776,38.594107)"
+       style="fill:#55d400;stroke:#55d400">
       <g
          transform="matrix(2.7713857,0,0,2.1726845,-12.642604,-13.556808)"
-         style="fill:#008000;stroke:#008000"
+         style="fill:#55d400;stroke:#55d400"
          id="g4303-6">
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 7,14 3,-5 3,5"
            id="path4299-7"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 13,14 7,14"
            id="path4301-5"
            inkscape:connector-curvature="0" />
       </g>
       <g
          transform="matrix(2.7713857,0,0,-2.1726845,-12.642603,54.298899)"
-         style="fill:#008000;stroke:#008000"
+         style="fill:#55d400;stroke:#55d400"
          id="g4303-3-3">
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="m 7,14 3,-5 3,5"
            id="path4299-6-5"
            inkscape:connector-curvature="0" />
         <path
-           style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="fill:#55d400;fill-rule:evenodd;stroke:#55d400;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            d="M 13,14 7,14"
            id="path4301-7-6"
            inkscape:connector-curvature="0" />

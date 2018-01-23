@@ -187,7 +187,7 @@ void CRtWorkspace::slotContextMenu(const QPoint& point)
 
     if(item != nullptr)
     {
-        IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+        IRtSource * source = dynamic_cast<IRtSource*>(item);
         if(source != nullptr)
         {
             actionDeleteSource->setEnabled(true);
@@ -198,7 +198,7 @@ void CRtWorkspace::slotContextMenu(const QPoint& point)
             QTreeWidgetItem * child = item;
             while(item->parent() != nullptr)
             {
-                IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+                IRtSource * source = dynamic_cast<IRtSource*>(item);
                 if(source != nullptr)
                 {
                     source->contextMenuChild(child, menu);
@@ -219,7 +219,7 @@ void CRtWorkspace::slotItemClicked(QTreeWidgetItem * item, int column)
     {
         return;
     }
-    IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+    IRtSource * source = dynamic_cast<IRtSource*>(item);
     if(source != nullptr)
     {
         source->itemClicked(column);
@@ -229,7 +229,7 @@ void CRtWorkspace::slotItemClicked(QTreeWidgetItem * item, int column)
         QTreeWidgetItem * child = item;
         while(item->parent() != nullptr)
         {
-            IRtSource * source = dynamic_cast<IRtSource*>(treeWidget->currentItem());
+            IRtSource * source = dynamic_cast<IRtSource*>(item);
             if(source != nullptr)
             {
                 source->itemClicked(child, column);

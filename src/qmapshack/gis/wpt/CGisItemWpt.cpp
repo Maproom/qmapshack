@@ -892,14 +892,14 @@ void CGisItemWpt::toggleBubble()
 
 void CGisItemWpt::toggleNogoArea()
 {
-    if(flags & eFlagWptNogo)
+    if(flags & eFlagNogo)
     {
-        flags &= ~eFlagWptNogo;
+        flags &= ~eFlagNogo;
         changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
     }
     else
     {
-        flags |= eFlagWptNogo;
+        flags |= eFlagNogo;
         changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
     }
 }

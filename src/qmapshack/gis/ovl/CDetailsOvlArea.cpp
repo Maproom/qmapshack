@@ -66,7 +66,8 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     connect(comboBorderWidth, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetWidth);
     connect(comboStyle,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
 
-    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpyacity);
+    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpacity);
+    connect(checkNogo,        &QCheckBox::toggled,             this, &CDetailsOvlArea::slotNogo);
     connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
     connect(lineName,         &CLineEdit::textEdited,          this, &CDetailsOvlArea::slotNameChanged);
@@ -111,7 +112,7 @@ void CDetailsOvlArea::slotSetStyle(int idx)
     setupGui();
 }
 
-void CDetailsOvlArea::slotOpyacity(bool yes)
+void CDetailsOvlArea::slotOpacity(bool yes)
 {
     if(area.isReadOnly() || originator)
     {
@@ -119,6 +120,16 @@ void CDetailsOvlArea::slotOpyacity(bool yes)
     }
 
     area.setOpacity(yes);
+    setupGui();
+}
+
+void CDetailsOvlArea::slotNogo(bool yes)
+{
+    if(area.isReadOnly() || originator)
+    {
+        return;
+    }
+    area.setNogoArea(yes);
     setupGui();
 }
 
@@ -210,6 +221,9 @@ void CDetailsOvlArea::setupGui()
     checkOpacity->setEnabled    (!isReadOnly);
 
     checkOpacity->setChecked(area.getOpacity());
+
+    checkNogo->setEnabled(!isReadOnly);
+    checkNogo->setChecked(area.isNogoArea());
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));

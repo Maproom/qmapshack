@@ -673,7 +673,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
+void IGisProject::getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter::polygon_t> &polygons) const
 {
     if(!isVisible())
     {
@@ -682,15 +682,42 @@ void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
 
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr != item && !item->isHidden() && item->isNogoArea())
+        QTreeWidgetItem * treeItem = child(i);
+        switch(treeItem->type())
         {
-            const qreal& rad = item->getProximity();
-            if (rad != NOFLOAT && rad > 0.)
+        case IGisItem::eTypeWpt:
+        {
+            CGisItemWpt * item = static_cast<CGisItemWpt*>(child(i));
+            if(!item->isHidden() && item->isNogoArea())
             {
-                const QPointF& pos = item->getPosition();
-                areas << IRouter::circle_t(pos.y(),pos.x(),rad);
+                const qreal& rad = item->getProximity();
+                if (rad != NOFLOAT && rad > 0.)
+                {
+                    const QPointF& pos = item->getPosition();
+                    discs << IRouter::disc_t(pos.y(),pos.x(),rad);
+                }
             }
+            break;
+        }
+        case IGisItem::eTypeOvl:
+        {
+            CGisItemOvlArea * item = static_cast<CGisItemOvlArea*>(child(i));
+            if(!item->isHidden() && item->isNogoArea())
+            {
+                const CGisItemOvlArea::area_t &area = item->getAreaData();
+                if (area.pts.size() > 0)
+                {
+                    IRouter::polygon_t nogos(area.pts.size());
+                    int i=0;
+                    for (const CGisItemOvlArea::pt_t & pt : area.pts)
+                    {
+                        nogos.points.replace(i++,IRouter::point_t(pt.lat,pt.lon));
+                    }
+                    polygons << nogos;
+                }
+            }
+            break;
+        }
         }
     }
 }

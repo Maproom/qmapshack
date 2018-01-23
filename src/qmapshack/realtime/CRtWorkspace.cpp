@@ -39,6 +39,7 @@ CRtWorkspace::CRtWorkspace(QWidget *parent)
 
     connect(treeWidget, &QTreeWidget::itemChanged, this, &CRtWorkspace::slotItemChanged);
     connect(treeWidget, &QTreeWidget::customContextMenuRequested, this, &CRtWorkspace::slotContextMenu);
+    connect(treeWidget, &QTreeWidget::itemClicked, this, &CRtWorkspace::slotItemClicked);
     connect(actionAddSource, &QAction::triggered, this, &CRtWorkspace::slotAddSource);
     connect(actionDeleteSource, &QAction::triggered, this, &CRtWorkspace::slotDeleteSource);
 

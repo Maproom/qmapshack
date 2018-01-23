@@ -6,7 +6,7 @@ include(CheckTypeSize)
 include(CheckCXXSourceCompiles)
 include(TestBigEndian)
 
-set(PACKAGE ${APPLICATION_NAME})
+set(PACKAGE ${PROJECT_NAME})
 set(VERSION ${APPLICATION_VERSION})
 set(DATADIR ${DATA_INSTALL_DIR})
 set(LIBDIR ${LIB_INSTALL_DIR})

@@ -1,0 +1,68 @@
+.TH "QMT_RGB2PCT" "1" "Jan 2018" "" ""
+.SH "NAME"
+qmt_rgb2pct - a rgb2pct replacement that does not need python
+.br
+
+.SH "SYNOPSIS"
+qmt_rgb2pct\fB \fR\fB [ -v \fR| \fB--version \fR] [ \fB-h \fR| \fB--help \fR] [ \fB-n \fR| \fB--ncolors \fR<number>] [ \fB-p \fR| \fB--pct \fR<filename>] [ \fB-s \fR| \fB--sct \fR<filename>] source traget
+.br
+
+.SH "DESCRIPTION"
+Convert GeoTiff files with RGB or RGBA color scheme into a dithered GeoTiff with color table
+.br
+
+Main features:
+.br
+	- Optional read external color table
+.br
+	- Optional save external color table	
+.br
+	- Convert aplha band into a no data value	
+.br
+
+.SH "OPTIONS"
+\fB-h, --help\fR
+.br
+	Displays this help.
+.br
+
+\fB-v, --version           \fR
+.br
+	Displays version information.
+.br
+	
+.br
+\fB-n, --ncolors <number>  \fR
+.br
+	Number of colors. (default: 255)
+.br
+	
+.br
+\fB-p, --pct <filename>    \fR
+.br
+	Input palette file for color table (*.vrt)
+.br
+	
+.br
+\fB-s, --sct <filename>    \fR
+.br
+	Save color table to palette file (*.vrt)
+.br
+
+\fBsource                  \fR
+.br
+	Source file.
+.br
+	
+.br
+\fBtarget                  \fR
+.br
+	Target file.
+.br
+.SH "SEE ALSO"
+https://bitbucket.org/maproom/qmapshack/wiki/DocMain
+.br
+
+.SH "AUTHOR"
+qmt_rgb2pct was written and is currently maintained by Oliver Eichler \fB<oliver.eichler@gmx.de>\fR.
+.br

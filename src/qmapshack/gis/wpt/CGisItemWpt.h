@@ -298,7 +298,7 @@ public:
     void toggleNogoArea();
     bool isNogoArea()
     {
-        return bool(flags & eFlagWptNogo);
+        return bool(flags & eFlagNogo);
     }
 
     bool hasRadius()

@@ -196,7 +196,8 @@ void CRtWorkspace::slotContextMenu(const QPoint& point)
         else
         {
             QTreeWidgetItem * child = item;
-            while(item->parent() != nullptr)
+            item = item->parent();
+            while(item != nullptr)
             {
                 IRtSource * source = dynamic_cast<IRtSource*>(item);
                 if(source != nullptr)
@@ -227,7 +228,8 @@ void CRtWorkspace::slotItemClicked(QTreeWidgetItem * item, int column)
     else
     {
         QTreeWidgetItem * child = item;
-        while(item->parent() != nullptr)
+        item = item->parent();
+        while(item != nullptr)
         {
             IRtSource * source = dynamic_cast<IRtSource*>(item);
             if(source != nullptr)
@@ -235,11 +237,9 @@ void CRtWorkspace::slotItemClicked(QTreeWidgetItem * item, int column)
                 source->itemClicked(child, column);
                 break;
             }
-
             item = item->parent();
         }
     }
-
 }
 
 void CRtWorkspace::slotAddSource()

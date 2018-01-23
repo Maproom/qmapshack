@@ -86,6 +86,47 @@ public:
     {
     }
 
+    /**
+       @brief Add actions to the context menu for this source
+
+       @param menu  the context menu
+     */
+    virtual void contextMenu(QMenu * menu) const
+    {
+    }
+
+    /**
+       @brief Add actions to the context menu for a child of this source
+
+       @param child     the child
+       @param menu      the context menu
+     */
+    virtual void contextMenuChild(QTreeWidgetItem * child, QMenu * menu) const
+    {
+    }
+
+
+    /**
+       @brief This source item has been clicked
+
+       @param column    the item's column that was clicked
+     */
+    virtual void itemClicked(int column) const
+    {
+
+    }
+
+    /**
+       @brief A child item of the source has been clicked
+
+       @param child     the child item
+       @param column    the item's column that was clicked
+     */
+    virtual void itemClicked(QTreeWidgetItem * child, int column) const
+    {
+
+    }
+
     /// the global mutex. Has to be used for all operations on a IRtItem
     static QMutex mutex;
     /// the item's type id

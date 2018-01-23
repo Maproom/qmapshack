@@ -85,6 +85,7 @@ signals:
 
 private slots:
     void slotItemChanged(QTreeWidgetItem * item, int column);
+    void slotItemClicked(QTreeWidgetItem * item, int column);
     void slotContextMenu(const QPoint& point);
     void slotAddSource();
     void slotDeleteSource();

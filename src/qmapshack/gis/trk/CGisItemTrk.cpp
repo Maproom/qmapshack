@@ -944,8 +944,6 @@ void CGisItemTrk::deriveSecondaryData()
 
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        // verify data of all points
-        verifyTrkPt(lastValid, trkpt);
         trkpt.idxTotal = cntTotalPoints++;
 
         if(trkpt.isHidden())
@@ -954,12 +952,6 @@ void CGisItemTrk::deriveSecondaryData()
             continue;
         }
 
-        // count only visible points to allValidFlags
-        allValidFlags |= trkpt.valid;
-        if((trkpt.valid & 0xFFFF0000) != 0)
-        {
-            cntInvalidPoints++;
-        }
 
         trkpt.idxVisible = cntVisiblePoints++;
         lintrk << &trkpt;
@@ -1089,6 +1081,15 @@ void CGisItemTrk::deriveSecondaryData()
         else
         {
             trkpt.speed = NOFLOAT;
+        }
+
+        // verify data
+        verifyTrkPt(lastValid, trkpt);
+        // add current status to allValidFlags
+        allValidFlags |= trkpt.valid;
+        if((trkpt.valid & 0xFFFF0000) != 0)
+        {
+            cntInvalidPoints++;
         }
     }
 

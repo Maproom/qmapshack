@@ -100,7 +100,7 @@ void CTableTrk::updateData()
         }
 
         QBrush bg = item->background(0);
-        if(trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
+        if(trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)) && !trkpt.isHidden())
         {
             bg = QColor(255, 100, 100);
         }

@@ -589,18 +589,6 @@ protected:
         ,eFlagWptBubble     = 0x00000100
         ,eFlagWptNogo      = 0x00000200
     };
-
-    static inline bool isBlocked(const QRectF& rect, const QList<QRectF> &blockedAreas)
-    {
-        for(const QRectF &r : blockedAreas)
-        {
-            if(rect.intersects(r))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 };
 
 QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3462"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="ToggleRealTime.svg"
+   inkscape:export-filename="/home/norbert/Development/QMapShack/QMapShack_touch/src/icons/48x48/ToggleGis.png"
+   inkscape:export-xdpi="67.5"
+   inkscape:export-ydpi="67.5">
+  <defs
+     id="defs3464">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect4326"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="11.78"
+     inkscape:cx="-1.2056779"
+     inkscape:cy="30.311762"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1015"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid3346" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3467">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.12671447px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3336"
+       width="30.114006"
+       height="30.114006"
+       x="21.06686"
+       y="11.871966" />
+    <rect
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.12671447px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3338"
+       width="20.690577"
+       height="20.690577"
+       x="35.816578"
+       y="5.9311075" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:1.54111087px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3336-3"
+       width="41.189693"
+       height="41.189693"
+       x="3.9911385"
+       y="18.45553" />
+    <rect
+       style="fill:none;stroke:none"
+       id="rect3769"
+       width="28.615273"
+       height="28.615273"
+       x="5.4218798"
+       y="21.03591" />
+    <flowRoot
+       transform="translate(-47.854615,-997.38718)"
+       xml:space="preserve"
+       id="flowRoot3859"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+         id="flowRegion3861"><rect
+           id="rect3863"
+           width="75.35714"
+           height="62.142857"
+           x="-9.4642859"
+           y="2.2142856" /></flowRegion><flowPara
+         id="flowPara3865" /></flowRoot>    <path
+       style="fill:#000080;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1"
+       d="m 7.776619,35.095081 14.142135,7.071068 7.071068,14.142135 10.606602,-31.819805 z"
+       id="path3377"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

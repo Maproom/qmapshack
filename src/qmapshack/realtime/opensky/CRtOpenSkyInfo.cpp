@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,34 +16,22 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
-#include "mouse/IMouse.h"
+#include "realtime/opensky/CRtOpenSky.h"
+#include "realtime/opensky/CRtOpenSkyInfo.h"
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
+CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
+    : QWidget(parent)
+    , source(source)
 {
+    setupUi(this);
+    connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
+    connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
 }
 
-IMouse::~IMouse()
-{
-}
 
-void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
+void CRtOpenSkyInfo::slotUpdate()
 {
-    canvas->moveMap(end-last);
-}
-
-void IMouse::rightButtonDown(const QPoint &pos)
-{
-    canvas->resetMouse();
-    canvas->update();
-}
-
-void IMouse::startMouseMove(const QPoint &pos)
-{
-    mouse->startMouseMove(pos);
+    checkShowNames->setChecked(source.getShowNames());
+    labelTimestamp->setText(source.getTimestamp().toString());
+    labelNumberOfAircrafts->setText(QString::number(source.getNumberOfAircrafts()));
 }

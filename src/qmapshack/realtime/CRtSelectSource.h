@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,34 +16,29 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
-#include "mouse/IMouse.h"
+#ifndef CRTSELECTSOURCE_H
+#define CRTSELECTSOURCE_H
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
-{
-}
+#include "ui_IRtSelectSource.h"
 
-IMouse::~IMouse()
-{
-}
+class CRtWorkspace;
 
-void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
+class CRtSelectSource : public QDialog, private Ui::IRtSelectSource
 {
-    canvas->moveMap(end-last);
-}
+    Q_OBJECT
+public:
+    CRtSelectSource(CRtWorkspace& wks);
+    virtual ~CRtSelectSource();
 
-void IMouse::rightButtonDown(const QPoint &pos)
-{
-    canvas->resetMouse();
-    canvas->update();
-}
+public slots:
+    void accept() override;
 
-void IMouse::startMouseMove(const QPoint &pos)
-{
-    mouse->startMouseMove(pos);
-}
+private slots:
+    void slotSelectionChanged();
+
+private:
+    CRtWorkspace& wks;
+};
+
+#endif //CRTSELECTSOURCE_H
+

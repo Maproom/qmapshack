@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,34 +16,26 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
-#include "mouse/IMouse.h"
+#ifndef CRTOPENSKYINFO_H
+#define CRTOPENSKYINFO_H
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
-{
-}
+#include "ui_IRtOpenSkyInfo.h"
 
-IMouse::~IMouse()
-{
-}
+class CRtOpenSky;
 
-void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
+class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
 {
-    canvas->moveMap(end-last);
-}
+    Q_OBJECT
+public:
+    CRtOpenSkyInfo(CRtOpenSky& source, QWidget * parent);
+    virtual ~CRtOpenSkyInfo() = default;
 
-void IMouse::rightButtonDown(const QPoint &pos)
-{
-    canvas->resetMouse();
-    canvas->update();
-}
+public slots:
+    void slotUpdate();
 
-void IMouse::startMouseMove(const QPoint &pos)
-{
-    mouse->startMouseMove(pos);
-}
+private:
+    CRtOpenSky& source;
+};
+
+#endif //CRTOPENSKYINFO_H
+

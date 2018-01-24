@@ -33,18 +33,19 @@
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"
+#include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseEditArea.h"
 #include "mouse/CMouseEditRte.h"
 #include "mouse/CMouseEditTrk.h"
 #include "mouse/CMouseMoveWpt.h"
 #include "mouse/CMouseNormal.h"
-#include "mouse/CMouseAdapter.h"
 #include "mouse/CMousePrint.h"
 #include "mouse/CMouseRadiusWpt.h"
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
+#include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
 #include "widgets/CColorLegend.h"
 
@@ -82,12 +83,18 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     grid    = new CGrid(map);
     dem     = new CDemDraw(this);
     gis     = new CGisDraw(this);
+    rt      = new CRtDraw(this);
+
+    // map has to be first!
+    allDrawContext << map << dem << gis << rt;
+
     mouse = new CMouseAdapter(this);
     mouse->setDelegate(new CMouseNormal(gis, this, mouse));
 
     connect(map, &CMapDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(dem, &CDemDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
     connect(gis, &CGisDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
+    connect(rt,  &CRtDraw::sigCanvasUpdate, this, &CCanvas::slotTriggerCompleteUpdate);
 
     timerToolTip = new QTimer(this);
     timerToolTip->setSingleShot(true);
@@ -131,12 +138,15 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 CCanvas::~CCanvas()
 {
     /* stop running drawing-threads and don't destroy unless they have finished*/
-    map->quit();
-    dem->quit();
-    gis->quit();
-    map->wait();
-    dem->wait();
-    gis->wait();
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->quit();
+    }
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->wait();
+    }
+
     /*
         Some mouse objects call methods from their canvas on destruction.
         So they are better deleted now explicitly before any other object
@@ -197,8 +207,10 @@ void CCanvas::loadConfig(QSettings& cfg)
     dem->loadConfig(cfg);
     grid->loadConfig(cfg);
 
-    dem->zoom(map->zoom());
-    gis->zoom(map->zoom());
+    for(IDrawContext * context : allDrawContext.mid(1))
+    {
+        context->zoom(map->zoom());
+    }
 }
 
 void CCanvas::resetMouse()
@@ -355,6 +367,7 @@ void CCanvas::paintEvent(QPaintEvent*)
     dem->draw(p, needsRedraw, posFocus);
     p.setOpacity(gisLayerOpacity);
     gis->draw(p, needsRedraw, posFocus);
+    rt->draw(p, needsRedraw, posFocus);
     p.setOpacity(1.0);
 
     // restore coordinate system to default
@@ -362,9 +375,16 @@ void CCanvas::paintEvent(QPaintEvent*)
     // ----- start to draw fast content -----
 
     grid->draw(p, rect());
-    if(map->isFinished() && dem->isFinished() && gis->isFinished())
+    if(map->isFinished() && dem->isFinished())
     {
-        gis->draw(p, rect());
+        if(gis->isFinished())
+        {
+            gis->draw(p, rect());
+        }
+        if(rt->isFinished())
+        {
+            rt->draw(p, rect());
+        }
     }
     mouse->draw(p, needsRedraw, rect());
 
@@ -624,7 +644,7 @@ void CCanvas::slotToolTip()
     {
         return;
     }
-    QPoint p = mapToGlobal(posToolTip + QPoint(32,0));
+    QPoint p = (posToolTip + QPoint(32,0));
     QToolTip::showText(p,str);
 }
 
@@ -707,8 +727,11 @@ void CCanvas::zoomTo(const QRectF& rect)
 {
     posFocus = rect.center();
     map->zoom(rect);
-    dem->zoom(map->zoom());
-    gis->zoom(map->zoom());
+    for(IDrawContext * context : allDrawContext.mid(1))
+    {
+        context->zoom(map->zoom());
+    }
+
     slotTriggerCompleteUpdate(eRedrawAll);
 }
 
@@ -776,15 +799,18 @@ QString CCanvas::getProjection()
 
 void CCanvas::setProjection(const QString& proj)
 {
-    map->setProjection(proj);
-    dem->setProjection(proj);
-    gis->setProjection(proj);
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->setProjection(proj);
+    }
 }
+
 void CCanvas::setScales(const scales_type_e type)
 {
-    map->setScales(type);
-    dem->setScales(type);
-    gis->setScales(type);
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->setScales(type);
+    }
 }
 
 CCanvas::scales_type_e CCanvas::getScalesType()
@@ -821,8 +847,11 @@ void CCanvas::getElevationAt(SGisLine& line) const
 void CCanvas::setZoom(bool in, redraw_e& needsRedraw)
 {
     map->zoom(in, needsRedraw);
-    dem->zoom(map->zoom());
-    gis->zoom(map->zoom());
+
+    for(IDrawContext * context : allDrawContext.mid(1))
+    {
+        context->zoom(map->zoom());
+    }
 
     emit sigZoom();
 }
@@ -920,17 +949,9 @@ void CCanvas::showProfile(bool yes)
 
 void CCanvas::setDrawContextSize(const QSize& s)
 {
-    if(map)
+    for(IDrawContext * context : allDrawContext)
     {
-        map->resize(s);
-    }
-    if(dem)
-    {
-        dem->resize(s);
-    }
-    if(gis)
-    {
-        gis->resize(s);
+        context->resize(s);
     }
 }
 
@@ -947,17 +968,20 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
 
     redraw_e redraw = eRedrawAll;
 
-    map->draw(p, redraw, focus);
-    dem->draw(p, redraw, focus);
-    gis->draw(p, redraw, focus);
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->draw(p, redraw, focus);
+    }
 
-    map->wait();
-    dem->wait();
-    gis->wait();
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->wait();
+    }
 
-    map->draw(p, redraw, focus);
-    dem->draw(p, redraw, focus);
-    gis->draw(p, redraw, focus);
+    for(IDrawContext * context : allDrawContext)
+    {
+        context->draw(p, redraw, focus);
+    }
 
     // restore coordinate system to default
     p.resetTransform();
@@ -967,6 +991,7 @@ void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)
 
     grid->draw(p, r);
     gis->draw(p, r);
+    rt->draw(p, r);
 
     setDrawContextSize(oldSize);
 }

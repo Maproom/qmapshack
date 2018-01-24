@@ -270,6 +270,12 @@ set( SRCS
     qlgt/IItem.cpp
     qlgt/IQlgtOverlay.cpp
     qlgt/converter.cpp
+    realtime/CRtDraw.cpp
+    realtime/CRtSelectSource.cpp
+    realtime/CRtWorkspace.cpp
+    realtime/IRtSource.cpp
+    realtime/opensky/CRtOpenSky.cpp
+    realtime/opensky/CRtOpenSkyInfo.cpp
     setup/CAppSetupLinux.cpp
     setup/CAppSetupMac.cpp
     setup/CAppSetupWin.cpp
@@ -570,6 +576,12 @@ set( HDRS
     qlgt/CQmsDb.h
     qlgt/IItem.h
     qlgt/IQlgtOverlay.h
+    realtime/CRtDraw.h
+    realtime/CRtSelectSource.h
+    realtime/CRtWorkspace.h
+    realtime/IRtSource.h
+    realtime/opensky/CRtOpenSky.h
+    realtime/opensky/CRtOpenSkyInfo.h
     setup/CAppOpts.h
     setup/CAppSetupLinux.h
     setup/CAppSetupMac.h
@@ -704,6 +716,9 @@ set( UIS
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui
     print/IPrintDialog.ui
+    realtime/IRtSelectSource.ui
+    realtime/IRtWorkspace.ui
+    realtime/opensky/IRtOpenSkyInfo.ui
     templates/Hiking_Tour_Summary.ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui

@@ -200,3 +200,15 @@ QPoint CDraw::bubble(QPainter &p, const QRect &contentRect, const QPoint &pointe
 
     return contentRect.topLeft();
 }
+
+bool CDraw::doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
+{
+    for(const QRectF& r : blockedAreas)
+    {
+        if(r.intersects(rect))
+        {
+            return true;
+        }
+    }
+    return false;
+}

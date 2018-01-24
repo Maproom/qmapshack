@@ -39,6 +39,8 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "realtime/CRtWorkspace.h"
+#include "setup/IAppSetup.h"
 #include "tool/CImportDatabase.h"
 #include "tool/CMapVrtBuilder.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
@@ -47,7 +49,6 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
-#include "setup/IAppSetup.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -75,6 +76,7 @@ CMainWindow::CMainWindow()
     pSelf = this;
     setupUi(this);
     setWindowTitle(WHAT_STR);
+    dockRealtime->toggleViewAction()->setChecked(false);
 
     initWptIcons();
 
@@ -101,6 +103,9 @@ CMainWindow::CMainWindow()
 
     widgetGisDatabase = new CGisDatabase(this);
     dockDatabase->setWidget(widgetGisDatabase);
+
+    widgetRtWorkspace = new CRtWorkspace(this);
+    dockRealtime->setWidget(widgetRtWorkspace);
 
     // start ---- restore window geometry -----
     cfg.beginGroup("MainWindow");
@@ -248,7 +253,9 @@ CMainWindow::CMainWindow()
           << dockDem
           << dockWorkspace
           << dockDatabase
-          << dockRte;
+          << dockRte
+          << dockRealtime;
+
 
     if (cfg.contains("MainWindow/activedocks"))
     {
@@ -287,6 +294,11 @@ CMainWindow::CMainWindow()
     actionToggleWorkspace->setObjectName("actionToggleWorkspace");
     actionToggleWorkspace->setIcon(QIcon(":/icons/32x32/ToggleGis.png"));
     menuWindow->insertAction(actionSetupToolbar,actionToggleWorkspace);
+
+    QAction * actionToggleRealtime = dockRealtime->toggleViewAction();
+    actionToggleRealtime->setObjectName("actionToggleRealtime");
+    actionToggleRealtime->setIcon(QIcon(":/icons/32x32/ToggleRealTime.png"));
+    menuWindow->insertAction(actionSetupToolbar,actionToggleRealtime);
 
     QAction * actionToggleDatabase = dockDatabase->toggleViewAction();
     actionToggleDatabase->setObjectName("actionToggleDatabase");
@@ -348,6 +360,7 @@ CMainWindow::CMainWindow()
                      << actionToggleMaps
                      << actionToggleDem
                      << actionToggleWorkspace
+                     << actionToggleRealtime
                      << actionToggleDatabase
                      << actionToggleRte
                      << actionToggleDocks
@@ -377,6 +390,7 @@ CMainWindow::CMainWindow()
                    << actionToggleMaps
                    << actionToggleDem
                    << actionToggleWorkspace
+                   << actionToggleRealtime
                    << actionToggleDatabase
                    << actionToggleRte
                    << actionToggleDocks
@@ -408,6 +422,7 @@ void CMainWindow::prepareMenuForMac()
     dockMaps->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDem->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockWorkspace->toggleViewAction()->setMenuRole(QAction::NoRole);
+    dockRealtime->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockDatabase->toggleViewAction()->setMenuRole(QAction::NoRole);
     dockRte->toggleViewAction()->setMenuRole(QAction::NoRole);
 }

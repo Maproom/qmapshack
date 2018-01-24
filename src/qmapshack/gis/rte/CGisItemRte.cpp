@@ -30,6 +30,7 @@
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"
+#include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -686,19 +687,19 @@ void CGisItemRte::drawLabel(QPainter& p, const QPolygonF& viewport, QList<QRectF
 
         // place label on top
         rect.moveCenter(pt + QPointF(rtept.icon.width()/2, -fm.height()));
-        if(isBlocked(rect, blockedAreas))
+        if(CDraw::doesOverlap(blockedAreas, rect))
         {
             // place label on bottom
             rect.moveCenter(pt + QPointF( rtept.icon.width()/2, +fm.height() + rtept.icon.height()));
-            if(isBlocked(rect, blockedAreas))
+            if(CDraw::doesOverlap(blockedAreas, rect))
             {
                 // place label on right
                 rect.moveCenter(pt + QPointF( rtept.icon.width() + rect.width()/2, +fm.height()));
-                if(isBlocked(rect, blockedAreas))
+                if(CDraw::doesOverlap(blockedAreas, rect))
                 {
                     // place label on left
                     rect.moveCenter(pt + QPointF( -rect.width()/2, +fm.height()));
-                    if(isBlocked(rect, blockedAreas))
+                    if(CDraw::doesOverlap(blockedAreas, rect))
                     {
                         // failed to place label anywhere
                         return;

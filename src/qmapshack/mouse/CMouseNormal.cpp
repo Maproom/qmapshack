@@ -24,9 +24,10 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "mouse/CMouseNormal.h"
 #include "mouse/CMouseAdapter.h"
+#include "mouse/CMouseNormal.h"
 #include "mouse/CScrOptUnclutter.h"
+#include "realtime/CRtWorkspace.h"
 #include "widgets/CFadingIcon.h"
 
 #include <QtWidgets>
@@ -103,6 +104,7 @@ void CMouseNormal::mouseMoved(const QPoint& point)
     {
     case eStateIdle:
         CGisWorkspace::self().mouseMove(point);
+        CRtWorkspace::self().mouseMove(point);
 
     //break; skip break intentionally
     case eStateHooverSingle:

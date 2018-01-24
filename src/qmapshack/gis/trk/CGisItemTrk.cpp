@@ -944,8 +944,6 @@ void CGisItemTrk::deriveSecondaryData()
 
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        // verify data of all points
-        verifyTrkPt(lastValid, trkpt);
         trkpt.idxTotal = cntTotalPoints++;
 
         if(trkpt.isHidden())
@@ -954,12 +952,6 @@ void CGisItemTrk::deriveSecondaryData()
             continue;
         }
 
-        // count only visible points to allValidFlags
-        allValidFlags |= trkpt.valid;
-        if((trkpt.valid & 0xFFFF0000) != 0)
-        {
-            cntInvalidPoints++;
-        }
 
         trkpt.idxVisible = cntVisiblePoints++;
         lintrk << &trkpt;
@@ -1089,6 +1081,15 @@ void CGisItemTrk::deriveSecondaryData()
         else
         {
             trkpt.speed = NOFLOAT;
+        }
+
+        // verify data
+        verifyTrkPt(lastValid, trkpt);
+        // add current status to allValidFlags
+        allValidFlags |= trkpt.valid;
+        if((trkpt.valid & 0xFFFF0000) != 0)
+        {
+            cntInvalidPoints++;
         }
     }
 
@@ -1753,17 +1754,6 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     }
 }
 
-static bool doesOverlap(const QList<QRectF>& blockedAreas, const QRectF& rect)
-{
-    for(const QRectF& r : blockedAreas)
-    {
-        if(r.intersects(rect))
-        {
-            return true;
-        }
-    }
-    return false;
-}
 
 void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const QPointF& pos, QPainter& p, const QFontMetricsF& fm, QList<QRectF>& blockedAreas)
 {
@@ -1776,22 +1766,22 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
     qint32 basePos      = 10;
 
 
-    if(doesOverlap(blockedAreas, rect))
+    if(CDraw::doesOverlap(blockedAreas, rect))
     {
         rect.moveBottomRight(pos.toPoint() + QPoint(-10,-10));
         basePos = rect.width() - 10;
 
-        if(doesOverlap(blockedAreas, rect))
+        if(CDraw::doesOverlap(blockedAreas, rect))
         {
             rect.moveTopLeft(pos.toPoint() + QPoint(10,10));
             basePos = 10;
 
-            if(doesOverlap(blockedAreas, rect))
+            if(CDraw::doesOverlap(blockedAreas, rect))
             {
                 rect.moveTopRight(pos.toPoint() + QPoint(-10,10));
                 basePos = rect.width() - 10;
 
-                if(doesOverlap(blockedAreas, rect))
+                if(CDraw::doesOverlap(blockedAreas, rect))
                 {
                     return;
                 }

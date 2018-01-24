@@ -77,6 +77,7 @@ void CLineOpSelectRange::leftClick(const QPoint &pos)
         break;
     }
     }
+
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 

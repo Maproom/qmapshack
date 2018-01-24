@@ -24,8 +24,8 @@
 #include "gis/WptIcons.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CDraw.h"
-#include "mouse/CMouseRadiusWpt.h"
 #include "mouse/CMouseAdapter.h"
+#include "mouse/CMouseRadiusWpt.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>

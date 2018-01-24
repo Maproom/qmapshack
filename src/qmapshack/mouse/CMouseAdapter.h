@@ -22,8 +22,8 @@
 
 #include <QObject>
 #include <QPoint>
-#include <QTime>
 #include <QPointer>
+#include <QTime>
 
 class CCanvas;
 class QMouseEvent;
@@ -79,7 +79,6 @@ private:
 
     bool ignoreClick = false;
     bool mouseDidMove = false;
-
 };
 
 #endif // CMOUSEADAPTER_H

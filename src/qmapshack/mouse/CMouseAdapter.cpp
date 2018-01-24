@@ -142,6 +142,7 @@ void CMouseAdapter::keyPressEvent(QKeyEvent *e)
         delegate->abortStep();
         break;
     }
+
     default:
     {
         delegate->scaleChanged();

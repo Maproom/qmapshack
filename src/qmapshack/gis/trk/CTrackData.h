@@ -33,6 +33,7 @@ public:
             slope2          = NOFLOAT;
             speed           = NOFLOAT;
             idxVisible      = NOIDX;
+            valid           = 0;
         }
 
         enum flag_e

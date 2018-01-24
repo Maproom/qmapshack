@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,34 +16,26 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
-#include "mouse/IMouse.h"
+#ifndef CRTDRAW_H
+#define CRTDRAW_H
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
-{
-}
+#include "canvas/IDrawContext.h"
 
-IMouse::~IMouse()
-{
-}
+class CCanvas;
 
-void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
-{
-    canvas->moveMap(end-last);
-}
 
-void IMouse::rightButtonDown(const QPoint &pos)
+class CRtDraw : public IDrawContext
 {
-    canvas->resetMouse();
-    canvas->update();
-}
+public:
+    CRtDraw(CCanvas *parent);
+    virtual ~CRtDraw() = default;
 
-void IMouse::startMouseMove(const QPoint &pos)
-{
-    mouse->startMouseMove(pos);
-}
+    using IDrawContext::draw;
+    void draw(QPainter& p, const QRect& rect);
+
+protected:
+    void drawt(buffer_t& currentBuffer) override;
+};
+
+#endif //CRTDRAW_H
+

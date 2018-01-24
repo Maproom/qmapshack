@@ -27,7 +27,7 @@ class CGisDraw : public IDrawContext
 {
 public:
     CGisDraw(CCanvas *parent);
-    virtual ~CGisDraw();
+    virtual ~CGisDraw() = default;
 
     using IDrawContext::draw;
     void draw(QPainter& p, const QRect& rect);

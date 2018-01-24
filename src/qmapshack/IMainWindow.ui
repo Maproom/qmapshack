@@ -268,6 +268,18 @@
     </layout>
    </widget>
   </widget>
+  <widget class="QDockWidget" name="dockRealtime">
+   <property name="features">
+    <set>QDockWidget::DockWidgetFeatureMask</set>
+   </property>
+   <property name="windowTitle">
+    <string>Realtime</string>
+   </property>
+   <attribute name="dockWidgetArea">
+    <number>2</number>
+   </attribute>
+   <widget class="QWidget" name="dockWidgetContents_5"/>
+  </widget>
   <action name="actionAddMapView">
    <property name="icon">
     <iconset resource="resources.qrc">

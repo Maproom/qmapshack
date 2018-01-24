@@ -20,9 +20,9 @@
 #ifndef IMOUSE_H
 #define IMOUSE_H
 
+#include "canvas/CCanvas.h"
 #include <QObject>
 #include <QPoint>
-#include "canvas/CCanvas.h"
 
 class CGisDraw;
 class QPainter;
@@ -74,7 +74,6 @@ public:
 protected:
     /// the functions mouse icon
     QCursor cursor;
-
 };
 
 #endif // IMOUSE_H

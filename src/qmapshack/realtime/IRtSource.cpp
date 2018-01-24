@@ -1,6 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
-    Copyright (C) 2018 Norbert Truchsess norbert.truchsess@t-online.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -17,34 +16,40 @@
 
 **********************************************************************************************/
 
-#include "canvas/CCanvas.h"
-#include "mouse/CMouseAdapter.h"
-#include "mouse/IMouse.h"
+#include "realtime/IRtSource.h"
+#include "realtime/opensky/CRtOpenSky.h"
 
-IMouse::IMouse(CGisDraw * gis, CCanvas * canvas, CMouseAdapter * mouse)
-    : QObject(mouse),
-    canvas(canvas),
-    gis(gis),
-    mouse(mouse)
+#include <QtWidgets>
+
+QMutex IRtSource::mutex(QMutex::Recursive);
+
+IRtSource::IRtSource(type_e type, bool singleInstanceOnly, QTreeWidget *parent)
+    : QObject(parent)
+    , QTreeWidgetItem(parent)
+    , type(type)
+    , singleInstanceOnly(singleInstanceOnly)
 {
 }
 
-IMouse::~IMouse()
+void IRtSource::loadSettings(QSettings& cfg)
 {
+    setCheckState(eColumnCheckBox, Qt::CheckState(cfg.value("checkState", Qt::Checked).toInt()));
 }
 
-void IMouse::mouseDragged(const QPoint &start, const QPoint &last, const QPoint &end)
+void IRtSource::saveSettings(QSettings& cfg) const
 {
-    canvas->moveMap(end-last);
+    cfg.setValue("checkState", checkState(eColumnCheckBox));
 }
 
-void IMouse::rightButtonDown(const QPoint &pos)
-{
-    canvas->resetMouse();
-    canvas->update();
-}
 
-void IMouse::startMouseMove(const QPoint &pos)
+IRtSource* IRtSource::create(int type, QTreeWidget * parent)
 {
-    mouse->startMouseMove(pos);
+    switch(type)
+    {
+    case eTypeOpenSky:
+        return new CRtOpenSky(parent);
+        break;
+    }
+
+    return nullptr;
 }

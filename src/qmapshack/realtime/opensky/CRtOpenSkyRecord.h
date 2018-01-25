@@ -16,32 +16,18 @@
 
 **********************************************************************************************/
 
-#ifndef CRTOPENSKYINFO_H
-#define CRTOPENSKYINFO_H
+#ifndef CRTOPENSKYRECORD_H
+#define CRTOPENSKYRECORD_H
 
-#include "ui_IRtOpenSkyInfo.h"
+#include "realtime/IRtRecord.h"
 
-class CRtOpenSky;
-
-class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
+class CRtOpenSkyRecord : public IRtRecord
 {
     Q_OBJECT
 public:
-    CRtOpenSkyInfo(CRtOpenSky& source, QWidget * parent);
-    virtual ~CRtOpenSkyInfo() = default;
-
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
-
-public slots:
-    void slotUpdate();    
-
-private slots:
-    void slotSetFilename();
-
-private:
-    CRtOpenSky& source;
+    CRtOpenSkyRecord(QObject * parent);
+    virtual ~CRtOpenSkyRecord() = default;
 };
 
-#endif //CRTOPENSKYINFO_H
+#endif //CRTOPENSKYRECORD_H
 

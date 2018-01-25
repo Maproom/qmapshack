@@ -68,6 +68,18 @@ void CRtOpenSky::loadSettings(QSettings& cfg)
 
     IRtSource::loadSettings(cfg);
     showNames = cfg.value("showNames", showNames).toBool();
+
+    QTreeWidget * tree = treeWidget();
+    QTreeWidgetItem * item = child(0);
+    if((item != nullptr) && (tree != nullptr))
+    {
+        CRtOpenSkyInfo * info = dynamic_cast<CRtOpenSkyInfo*>(tree->itemWidget(item, eColumnWidget));
+        if(info != nullptr)
+        {
+            info->loadSettings(cfg);
+        }
+    }
+
     emit sigChanged();
 }
 
@@ -77,6 +89,17 @@ void CRtOpenSky::saveSettings(QSettings& cfg) const
 
     IRtSource::saveSettings(cfg);
     cfg.setValue("showNames", showNames);
+
+    QTreeWidget * tree = treeWidget();
+    QTreeWidgetItem * item = child(0);
+    if((item != nullptr) && (tree != nullptr))
+    {
+        CRtOpenSkyInfo * info = dynamic_cast<CRtOpenSkyInfo*>(tree->itemWidget(item, eColumnWidget));
+        if(info != nullptr)
+        {
+            info->saveSettings(cfg);
+        }
+    }
 }
 
 QString CRtOpenSky::getDescription() const

@@ -127,6 +127,19 @@ bool CRtOpenSky::getShowNames() const
     return showNames;
 }
 
+CRtOpenSky::aircraft_t CRtOpenSky::getAircraftByKey(const QString& key, bool& ok) const
+{
+    QMutexLocker lock(&IRtSource::mutex);
+    ok = false;
+    if(aircrafts.contains(key))
+    {
+        ok = true;
+        return aircrafts[key];
+    }
+
+    return aircraft_t();
+}
+
 void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
 {
     if(checkState(eColumnCheckBox) != Qt::Checked)
@@ -191,6 +204,7 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
         p.drawEllipse(aircraft.point, 10, 10);
 
         QString text;
+        text += tr("key:             %1").arg(aircraft.key) + "\n";
         text += tr("callsign:        %1").arg(aircraft.callsign) + "\n";
         text += tr("origin country:  %1").arg(aircraft.originCountry) + "\n";
         text += tr("time position:   %1").arg(QDateTime::fromTime_t(aircraft.timePosition).toString()) + "\n";
@@ -303,6 +317,7 @@ void CRtOpenSky::slotRequestFinished(QNetworkReply* reply)
             const QJsonArray& jsonStateArray = jsonState.toArray();
             QString key         = jsonStateArray[0].toString();
 
+            aircraft.key            = key;
             aircraft.callsign       = jsonStateArray[1].toString();
             aircraft.originCountry  = jsonStateArray[2].toString();
             aircraft.timePosition   = jsonStateArray[3].toInt();

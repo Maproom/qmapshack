@@ -20,6 +20,7 @@
 #define CRTOPENSKYRECORD_H
 
 #include "realtime/IRtRecord.h"
+#include "realtime/opensky/CRtOpenSky.h"
 
 class CRtOpenSkyRecord : public IRtRecord
 {
@@ -27,6 +28,12 @@ class CRtOpenSkyRecord : public IRtRecord
 public:
     CRtOpenSkyRecord(QObject * parent);
     virtual ~CRtOpenSkyRecord() = default;
+
+    void writeEntry(const CRtOpenSky::aircraft_t &aircraft);
+
+protected:
+    using IRtRecord::writeEntry;
+    bool readEntry(QByteArray& data) override;
 };
 
 #endif //CRTOPENSKYRECORD_H

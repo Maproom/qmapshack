@@ -21,6 +21,9 @@
 
 #include "ui_IRtOpenSkyInfo.h"
 
+#include <QPointer>
+
+class CRtOpenSkyRecord;
 class CRtOpenSky;
 
 class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
@@ -40,7 +43,10 @@ private slots:
     void slotSetFilename();
 
 private:
+    void startRecord(const QString& filename);
+
     CRtOpenSky& source;
+    QPointer<CRtOpenSkyRecord> record;
 };
 
 #endif //CRTOPENSKYINFO_H

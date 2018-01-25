@@ -24,3 +24,33 @@ CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
 }
 
 
+void CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
+{
+    QByteArray data;
+    QDataStream stream(&data, QIODevice::WriteOnly);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
+    // it's always a good idea to start with a version tag for future changes.
+    stream << quint8(1);
+    stream << aircraft.latitude << aircraft.longitude << aircraft.geoAltitude << aircraft.timePosition;
+
+    writeEntry(data);
+}
+
+bool CRtOpenSkyRecord::readEntry(QByteArray& data)
+{
+    QDataStream stream(&data, QIODevice::ReadOnly);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
+
+    quint8 version;
+    CRtOpenSky::aircraft_t aircraft;
+    stream >> version;
+    stream >> aircraft.latitude >> aircraft.longitude >> aircraft.geoAltitude >> aircraft.timePosition;
+
+    qDebug() << aircraft.latitude << aircraft.longitude << aircraft.geoAltitude << aircraft.timePosition;
+
+    return true;
+}

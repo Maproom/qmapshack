@@ -19,6 +19,7 @@
 #include "helpers/CSettings.h"
 #include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
+#include "realtime/opensky/CRtOpenSkyRecord.h"
 
 #include <QtWidgets>
 
@@ -31,19 +32,19 @@ CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
     connect(toolPause, &QToolButton::toggled, toolDelete, &QToolButton::setEnabled);
     connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
-    connect(toolPause, &QToolButton::toggled, lineCallsign, &QLineEdit::setEnabled);
+    connect(toolPause, &QToolButton::toggled, lineKey, &QLineEdit::setEnabled);
     connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
 }
 
 void CRtOpenSkyInfo::loadSettings(QSettings& cfg)
 {
-    lineCallsign->setText(cfg.value("callsign", "").toString());
-    toolFile->setToolTip(cfg.value("filename", "").toString());
+    lineKey->setText(cfg.value("callsign", "").toString());
+    startRecord(cfg.value("filename", "").toString());
 }
 
 void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
 {
-    cfg.setValue("callsign", lineCallsign->text());
+    cfg.setValue("callsign", lineKey->text());
     cfg.setValue("filename", toolFile->toolTip());
 }
 
@@ -52,6 +53,16 @@ void CRtOpenSkyInfo::slotUpdate()
     checkShowNames->setChecked(source.getShowNames());
     labelTimestamp->setText(source.getTimestamp().toString());
     labelNumberOfAircrafts->setText(QString::number(source.getNumberOfAircrafts()));
+
+    if(!record.isNull() && toolRecord->isChecked())
+    {
+        bool ok = false;
+        const CRtOpenSky::aircraft_t& aircraft = source.getAircraftByKey(lineKey->text(), ok);
+        if(ok)
+        {
+            record->writeEntry(aircraft);
+        }
+    }
 }
 
 void CRtOpenSkyInfo::slotSetFilename()
@@ -70,8 +81,32 @@ void CRtOpenSkyInfo::slotSetFilename()
         filename += ".rec";
     }
 
-    toolFile->setToolTip(filename);
+    startRecord(filename);
 
     path = fi.absolutePath();
     cfg.setValue("Paths/realtimeData", path);
+}
+
+void CRtOpenSkyInfo::startRecord(const QString& filename)
+{
+    delete record;
+
+    toolFile->setToolTip(filename);
+    toolRecord->setEnabled(false);
+
+    if(filename.trimmed().isEmpty())
+    {
+        return;
+    }
+
+    record = new CRtOpenSkyRecord(this);
+
+    if(!record->open(filename))
+    {
+        QMessageBox::critical(this, tr("Failed..."), tr("Failed to open record."), QMessageBox::Ok);
+        delete record;
+        return;
+    }
+
+    toolRecord->setEnabled(true);
 }

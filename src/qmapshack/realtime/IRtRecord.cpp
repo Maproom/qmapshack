@@ -18,9 +18,88 @@
 
 #include "realtime/IRtRecord.h"
 
+#include <QtCore>
+
 IRtRecord::IRtRecord(QObject *parent)
     : QObject(parent)
 {
+
+    stream.setDevice(&file);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
 }
 
+IRtRecord::~IRtRecord()
+{
+    if(file.isOpen())
+    {
+        file.close();
+    }
+}
 
+bool IRtRecord::open(const QString& filename)
+{
+    if(file.isOpen())
+    {
+        file.close();
+    }
+
+    if(QFile::exists(filename))
+    {
+        if(!readFile(filename))
+        {
+            return false;
+        }
+    }
+
+    file.setFileName(filename);
+    if(!file.open(QIODevice::Append))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool IRtRecord::readFile(const QString& filename)
+{
+    QFile tmp(filename);
+    if(!tmp.open(QIODevice::ReadOnly))
+    {
+        return false;
+    }
+
+    QDataStream in(&tmp);
+    in.setVersion(QDataStream::Qt_5_2);
+    in.setByteOrder(QDataStream::LittleEndian);
+
+    while(!in.atEnd())
+    {
+        quint16 crc;
+        QByteArray data;
+        in >> crc >> data;
+
+        if(qChecksum(data.data(), data.size()) != crc)
+        {
+            return false;
+        }
+
+        readEntry(data);
+    }
+
+    tmp.close();
+    return true;
+}
+
+bool IRtRecord::writeEntry(const QByteArray& data)
+{
+    if(!file.isOpen())
+    {
+        return false;
+    }
+
+    quint16 crc = qChecksum(data.data(), data.size());
+    stream << crc << data;
+    file.flush();
+    return true;
+}

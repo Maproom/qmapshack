@@ -75,7 +75,7 @@
     </widget>
    </item>
    <item row="3" column="1">
-    <widget class="QLineEdit" name="lineCallsign">
+    <widget class="QLineEdit" name="lineKey">
      <property name="toolTip">
       <string>Enter a valid callsign.</string>
      </property>
@@ -84,7 +84,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Record callsign</string>
+      <string>Record by key</string>
      </property>
     </widget>
    </item>

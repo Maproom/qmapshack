@@ -20,13 +20,25 @@
 #define IRTRECORD_H
 
 #include <QObject>
+#include <QFile>
+#include <QDataStream>
 
 class IRtRecord : public QObject
 {
     Q_OBJECT
 public:
     IRtRecord(QObject * parent);
-    virtual ~IRtRecord() = default;
+    virtual ~IRtRecord();
+
+    virtual bool open(const QString& filename);
+
+protected:
+    virtual bool writeEntry(const QByteArray& data);
+    virtual bool readEntry(QByteArray& data) = 0;
+    virtual bool readFile(const QString& filename);
+
+    QFile file;
+    QDataStream stream;
 };
 
 #endif //IRTRECORD_H

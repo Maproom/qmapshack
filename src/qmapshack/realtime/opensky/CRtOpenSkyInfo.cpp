@@ -16,8 +16,11 @@
 
 **********************************************************************************************/
 
+#include "helpers/CSettings.h"
 #include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
+
+#include <QtWidgets>
 
 CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     : QWidget(parent)
@@ -26,12 +29,49 @@ CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     setupUi(this);
     connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
     connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
+    connect(toolPause, &QToolButton::toggled, toolDelete, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, lineCallsign, &QLineEdit::setEnabled);
+    connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
 }
 
+void CRtOpenSkyInfo::loadSettings(QSettings& cfg)
+{
+    lineCallsign->setText(cfg.value("callsign", "").toString());
+    toolFile->setToolTip(cfg.value("filename", "").toString());
+}
+
+void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
+{
+    cfg.setValue("callsign", lineCallsign->text());
+    cfg.setValue("filename", toolFile->toolTip());
+}
 
 void CRtOpenSkyInfo::slotUpdate()
 {
     checkShowNames->setChecked(source.getShowNames());
     labelTimestamp->setText(source.getTimestamp().toString());
     labelNumberOfAircrafts->setText(QString::number(source.getNumberOfAircrafts()));
+}
+
+void CRtOpenSkyInfo::slotSetFilename()
+{
+    SETTINGS;
+    QString path = cfg.value("Paths/realtimeData", QDir::homePath()).toString();
+    QString filename = QFileDialog::getSaveFileName( this, tr("Select record file"), path, "QMapShack Record (*.rec)");
+
+    if(filename.isEmpty())
+    {
+        return;
+    }
+    QFileInfo fi(filename);
+    if(fi.suffix().toLower() != "rec")
+    {
+        filename += ".rec";
+    }
+
+    toolFile->setToolTip(filename);
+
+    path = fi.absolutePath();
+    cfg.setValue("Paths/realtimeData", path);
 }

@@ -273,9 +273,11 @@ set( SRCS
     realtime/CRtDraw.cpp
     realtime/CRtSelectSource.cpp
     realtime/CRtWorkspace.cpp
+    realtime/IRtRecord.cpp
     realtime/IRtSource.cpp
     realtime/opensky/CRtOpenSky.cpp
     realtime/opensky/CRtOpenSkyInfo.cpp
+    realtime/opensky/CRtOpenSkyRecord.cpp
     setup/CAppSetupLinux.cpp
     setup/CAppSetupMac.cpp
     setup/CAppSetupWin.cpp
@@ -579,9 +581,11 @@ set( HDRS
     realtime/CRtDraw.h
     realtime/CRtSelectSource.h
     realtime/CRtWorkspace.h
+    realtime/IRtRecord.h
     realtime/IRtSource.h
     realtime/opensky/CRtOpenSky.h
     realtime/opensky/CRtOpenSkyInfo.h
+    realtime/opensky/CRtOpenSkyRecord.h
     setup/CAppOpts.h
     setup/CAppSetupLinux.h
     setup/CAppSetupMac.h

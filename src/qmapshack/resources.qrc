@@ -166,6 +166,7 @@
         <file>../icons/32x32/PathGreen.png</file>
         <file>../icons/32x32/PathOrange.png</file>
         <file>../icons/32x32/Pattern.png</file>
+        <file>../icons/32x32/Pause.png</file>
         <file>../icons/32x32/PointAdd.png</file>
         <file>../icons/32x32/PointDel.png</file>
         <file>../icons/32x32/PointHide.png</file>
@@ -179,6 +180,7 @@
         <file>../icons/32x32/QlbProject.png</file>
         <file>../icons/32x32/QMapTool.png</file>
         <file>../icons/32x32/QmsProject.png</file>
+        <file>../icons/32x32/Record.png</file>
         <file>../icons/32x32/Redo.png</file>
         <file>../icons/32x32/RegularScreen.png</file>
         <file>../icons/32x32/ReloadImage.png</file>
@@ -390,6 +392,7 @@
         <file>../icons/48x48/PathGreen.png</file>
         <file>../icons/48x48/PathOrange.png</file>
         <file>../icons/48x48/Pattern.png</file>
+        <file>../icons/48x48/Pause.png</file>
         <file>../icons/48x48/PointAdd.png</file>
         <file>../icons/48x48/PointDel.png</file>
         <file>../icons/48x48/PointHide.png</file>
@@ -403,6 +406,7 @@
         <file>../icons/48x48/QlbProject.png</file>
         <file>../icons/48x48/QMapTool.png</file>
         <file>../icons/48x48/QmsProject.png</file>
+        <file>../icons/48x48/Record.png</file>
         <file>../icons/48x48/Redo.png</file>
         <file>../icons/48x48/RegularScreen.png</file>
         <file>../icons/48x48/ReloadImage.png</file>

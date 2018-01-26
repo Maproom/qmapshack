@@ -4712,8 +4712,8 @@ ist keine gültige Koordinatensystemdefinition:
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
-        <source>squak:           %1</source>
-        <translation>Squak:              %1</translation>
+        <source>squawk:          %1</source>
+        <translation>squawk:             %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="184"/>

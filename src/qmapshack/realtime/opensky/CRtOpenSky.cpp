@@ -180,7 +180,7 @@ void CRtOpenSky::fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)
         text += tr("heading:         %1°").arg(aircraft.heading) + "\n";
         text += tr("vert. rate:      %1m/s").arg(aircraft.vertical_rate) + "\n";
         text += tr("baro. alt.:      %1m").arg(aircraft.baroAltitude) + "\n";
-        text += tr("squak:           %1").arg(aircraft.squawk) + "\n";
+        text += tr("squawk:          %1").arg(aircraft.squawk) + "\n";
         text += tr("spi:             %1").arg(aircraft.spi) + "\n";
         text += tr("position source: %1").arg(aircraft.positionSource);
 

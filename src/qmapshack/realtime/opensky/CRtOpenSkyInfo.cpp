@@ -48,6 +48,14 @@ void CRtOpenSkyInfo::saveSettings(QSettings& cfg) const
     cfg.setValue("filename", toolFile->toolTip());
 }
 
+void CRtOpenSkyInfo::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+{
+    if(record != nullptr)
+    {
+        record->draw(p, viewport, blockedAreas, rt);
+    }
+}
+
 void CRtOpenSkyInfo::slotUpdate()
 {
     checkShowNames->setChecked(source.getShowNames());
@@ -60,7 +68,11 @@ void CRtOpenSkyInfo::slotUpdate()
         const CRtOpenSky::aircraft_t& aircraft = source.getAircraftByKey(lineKey->text(), ok);
         if(ok)
         {
-            record->writeEntry(aircraft);
+            if(!record->writeEntry(aircraft))
+            {
+                QMessageBox::critical(this, tr("Error..."), tr("Failed to write record."), QMessageBox::Ok);
+                toolPause->setChecked(true);
+            }
         }
     }
 }
@@ -101,7 +113,7 @@ void CRtOpenSkyInfo::startRecord(const QString& filename)
 
     record = new CRtOpenSkyRecord(this);
 
-    if(!record->open(filename))
+    if(!record->setFile(filename))
     {
         QMessageBox::critical(this, tr("Failed..."), tr("Failed to open record."), QMessageBox::Ok);
         delete record;

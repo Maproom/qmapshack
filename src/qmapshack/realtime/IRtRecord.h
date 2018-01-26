@@ -19,26 +19,33 @@
 #ifndef IRTRECORD_H
 #define IRTRECORD_H
 
-#include <QObject>
-#include <QFile>
 #include <QDataStream>
+#include <QFile>
+#include <QObject>
+
+class CRtDraw;
+class QPainter;
 
 class IRtRecord : public QObject
 {
     Q_OBJECT
 public:
     IRtRecord(QObject * parent);
-    virtual ~IRtRecord();
+    virtual ~IRtRecord() = default;
 
-    virtual bool open(const QString& filename);
+    virtual bool setFile(const QString& filename);
+    virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+    {
+    }
 
 protected:
     virtual bool writeEntry(const QByteArray& data);
     virtual bool readEntry(QByteArray& data) = 0;
+
+private:
     virtual bool readFile(const QString& filename);
 
     QFile file;
-    QDataStream stream;
 };
 
 #endif //IRTRECORD_H

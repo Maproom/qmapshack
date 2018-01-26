@@ -25,6 +25,7 @@
 
 class CRtOpenSkyRecord;
 class CRtOpenSky;
+class CRtDraw;
 
 class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
 {
@@ -35,6 +36,8 @@ public:
 
     void loadSettings(QSettings& cfg);
     void saveSettings(QSettings& cfg) const;
+
+    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
 
 public slots:
     void slotUpdate();    

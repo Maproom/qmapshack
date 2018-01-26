@@ -23,27 +23,10 @@
 IRtRecord::IRtRecord(QObject *parent)
     : QObject(parent)
 {
-
-    stream.setDevice(&file);
-    stream.setVersion(QDataStream::Qt_5_2);
-    stream.setByteOrder(QDataStream::LittleEndian);
 }
 
-IRtRecord::~IRtRecord()
+bool IRtRecord::setFile(const QString& filename)
 {
-    if(file.isOpen())
-    {
-        file.close();
-    }
-}
-
-bool IRtRecord::open(const QString& filename)
-{
-    if(file.isOpen())
-    {
-        file.close();
-    }
-
     if(QFile::exists(filename))
     {
         if(!readFile(filename))
@@ -53,11 +36,6 @@ bool IRtRecord::open(const QString& filename)
     }
 
     file.setFileName(filename);
-    if(!file.open(QIODevice::Append))
-    {
-        return false;
-    }
-
     return true;
 }
 
@@ -69,19 +47,24 @@ bool IRtRecord::readFile(const QString& filename)
         return false;
     }
 
-    QDataStream in(&tmp);
-    in.setVersion(QDataStream::Qt_5_2);
-    in.setByteOrder(QDataStream::LittleEndian);
+    QDataStream stream(&tmp);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
 
-    while(!in.atEnd())
+    while(!stream.atEnd())
     {
         quint16 crc;
         QByteArray data;
-        in >> crc >> data;
+        stream >> crc >> data;
 
         if(qChecksum(data.data(), data.size()) != crc)
         {
             return false;
+        }
+
+        if(stream.status() != QDataStream::Ok)
+        {
+            return  false;
         }
 
         readEntry(data);
@@ -93,13 +76,28 @@ bool IRtRecord::readFile(const QString& filename)
 
 bool IRtRecord::writeEntry(const QByteArray& data)
 {
-    if(!file.isOpen())
+    if(file.isOpen())
     {
         return false;
     }
 
+    if(!file.open(QIODevice::Append))
+    {
+        return false;
+    }
+
+    QDataStream stream(&file);
+    stream.setVersion(QDataStream::Qt_5_2);
+    stream.setByteOrder(QDataStream::LittleEndian);
+
     quint16 crc = qChecksum(data.data(), data.size());
     stream << crc << data;
-    file.flush();
+
+    if(stream.status() != QDataStream::Ok)
+    {
+        return false;
+    }
+
+    file.close();
     return true;
 }

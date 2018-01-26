@@ -33,16 +33,69 @@ public:
     IRtRecord(QObject * parent);
     virtual ~IRtRecord() = default;
 
+    /**
+       @brief Set record file size to 0.
+     */
+    virtual void reset();
+    /**
+       @brief Set file name to record into
+
+       If the file exists this will read the file and append new data.
+
+       @param filename  the filename as string
+
+       @return Return true on success.
+     */
     virtual bool setFile(const QString& filename);
+
+    /**
+       @brief Draw the record data into the draw context
+
+       This does nothing and you have to override it.
+
+       @param p             the paint device
+       @param viewport      the visible viewport
+       @param blockedAreas  a list of blocked areas
+       @param rt            the draw context
+     */
     virtual void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
     {
     }
 
 protected:
+    /**
+       @brief Write block of data to file
+
+       A crc16 is calculated and stored together with the byte array into the file.
+
+       @param data  the byte array to store
+
+       @return Return true on success.
+     */
     virtual bool writeEntry(const QByteArray& data);
+
+    /**
+       @brief A block data has been read and needs further processing
+
+       If a filename is set and the file exists, the data entries in the file are read
+       one by one and passed to this API. If the method returns with false the file will
+       be truncated to the last valid entry.
+
+       @param data  the byte array with the data entry.
+
+       @return Return true on success.
+     */
     virtual bool readEntry(QByteArray& data) = 0;
 
 private:
+
+    /**
+       @brief Reads file content entry by entry and tests for the checksum
+
+       @param filename  the file name to open and read.
+
+       @return Return true on success.
+     */
     virtual bool readFile(const QString& filename);
 
     QFile file;

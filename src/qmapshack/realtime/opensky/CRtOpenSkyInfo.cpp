@@ -30,10 +30,11 @@ CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     setupUi(this);
     connect(&source, &CRtOpenSky::sigChanged, this, &CRtOpenSkyInfo::slotUpdate);
     connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
-    connect(toolPause, &QToolButton::toggled, toolDelete, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, toolReset, &QToolButton::setEnabled);
     connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
     connect(toolPause, &QToolButton::toggled, lineKey, &QLineEdit::setEnabled);
     connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
+    connect(toolReset, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotResetRecord);
 }
 
 void CRtOpenSkyInfo::loadSettings(QSettings& cfg)
@@ -97,6 +98,21 @@ void CRtOpenSkyInfo::slotSetFilename()
 
     path = fi.absolutePath();
     cfg.setValue("Paths/realtimeData", path);
+}
+
+void CRtOpenSkyInfo::slotResetRecord()
+{
+    if(record == nullptr)
+    {
+        return;
+    }
+
+    int res = QMessageBox::question(this, tr("Reset record..."), tr("Do you really want to reset the current record?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    if(res == QMessageBox::Yes)
+    {
+        record->reset();
+        emit source.sigChanged();
+    }
 }
 
 void CRtOpenSkyInfo::startRecord(const QString& filename)

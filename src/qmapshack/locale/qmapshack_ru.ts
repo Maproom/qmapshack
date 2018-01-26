@@ -1180,7 +1180,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
         <source>Invalid slopes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверные склоны!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
@@ -4641,76 +4641,76 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="84"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Онлайн-сервис, который предоставляет позиционные данные гражданских самолетов</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="145"/>
         <source>unkn.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">не известно</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
         <source>callsign:        %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">позывной:        %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="172"/>
         <source>origin country:  %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">страна происхождения  %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="173"/>
         <source>time position:   %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">время позиции:   %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="174"/>
         <source>last contact:    %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">последний контакт:    %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="175"/>
         <source>longitude:       %1°</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">долгота:       %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="176"/>
         <source>latitude:        %1°</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ширина:        %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="177"/>
         <source>geo. alt.:       %1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">геогр. высота:       %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
         <source>on ground:       %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">на землю:       %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
         <source>velocity:        %1km/h</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">скорость:        %1km/h</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
         <source>heading:         %1°</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">курс:         %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="181"/>
         <source>vert. rate:      %1m/s</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">верт. скорость:      %1m/s</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="182"/>
         <source>baro. alt.:      %1m</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">баром. высота:      %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
-        <source>squak:           %1</source>
+        <source>squawk:          %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -4721,7 +4721,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="185"/>
         <source>position source: %1</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">источник позиции: %1</translation>
     </message>
 </context>
 <context>
@@ -4729,7 +4729,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать источник данных в реальном времени из списка. Некоторые источники могут быть добавлены несколько раз. Другие можно добавить только один раз.</translation>
     </message>
 </context>
 <context>
@@ -4737,17 +4737,17 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
         <source>To add a real time source do a right click on the list above. </source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы добавить источник данных в реальном времени, щелкните правой кнопкой мышки на верхнем списке.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Delete Source...</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить источник...</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Do you really want to remove the realtime source?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите удалить источник данных в реальном времени?</translation>
     </message>
 </context>
 <context>
@@ -7408,7 +7408,7 @@ Filename: %1</source>
     <message>
         <location filename="../IMainWindow.ui" line="276"/>
         <source>Realtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Реальное время</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="289"/>
@@ -8853,33 +8853,34 @@ or
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translatorcomment>-</translatorcomment>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Последнее обновление</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
         <source>Aircrafts seen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Замеченные самолеты:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>Show names</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать имена</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Подробности см. &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -8887,7 +8888,7 @@ or
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
         <source>Select a source...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать источник...</translation>
     </message>
 </context>
 <context>
@@ -8895,27 +8896,27 @@ or
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
         <source>Source</source>
-        <translation type="unfinished">Источник</translation>
+        <translation>Источник</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
         <source>Add Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить источник</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="124"/>
         <source>Delete Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить источник</translation>
     </message>
 </context>
 <context>

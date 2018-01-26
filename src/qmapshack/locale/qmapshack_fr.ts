@@ -4707,7 +4707,7 @@ n&apos;est pas une définition de système de coordonnées:
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
-        <source>squak:           %1</source>
+        <source>squawk:          %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

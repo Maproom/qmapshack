@@ -23,10 +23,12 @@
 #include "units/IUnit.h"
 
 #include <QDateTime>
+#include <QPointer>
 
 class QTimer;
 class QNetworkAccessManager;
 class QNetworkReply;
+class CRtOpenSkyInfo;
 
 class CRtOpenSky : public IRtSource
 {
@@ -62,7 +64,7 @@ public:
     /**
        @brief Setup sub-item
 
-       The parent tree widgte is used to setup a subitem with CRtOpenSkyInfo as widget.
+       The parent tree widget is used to setup a sub item with CRtOpenSkyInfo as widget.
      */
     void registerWithTreeWidget() override;
     void loadSettings(QSettings& cfg) override;
@@ -73,7 +75,7 @@ public:
     /**
        @brief Get the timestamp of the last OpenSky update
 
-       @return The timestamo as QDateTime instance
+       @return The timestamp as QDateTime instance
      */
     const QDateTime& getTimestamp() const;
 
@@ -98,7 +100,7 @@ public:
     static const QString strIcon;
 public slots:
     /**
-       @brief Set visiblity of callsign names
+       @brief Set visibility of callsign names
 
        @param yes   set true to show names
      */
@@ -106,16 +108,17 @@ public slots:
 
 private slots:
     /**
-       @brief Request a new dataset from OpenSky
+       @brief Request a new data set from OpenSky
      */
     void slotUpdate();
     /**
-       @brief Handle incomming dataset from OpenSky
+       @brief Handle incoming data set from OpenSky
        @param reply
      */
     void slotRequestFinished(QNetworkReply* reply);
 
 private:
+    QPointer<CRtOpenSkyInfo> info;
     QTimer * timer;
     QNetworkAccessManager * networkAccessManager;
 
@@ -123,7 +126,7 @@ private:
     QMap<QString, aircraft_t> aircrafts;
     bool showNames = true;
 
-    QString keyFocus;       
+    QString keyFocus;
 };
 
 #endif //CRTOPENSKY_H

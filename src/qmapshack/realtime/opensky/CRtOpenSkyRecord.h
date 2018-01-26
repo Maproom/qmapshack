@@ -29,8 +29,10 @@ public:
     CRtOpenSkyRecord(QObject * parent);
     virtual ~CRtOpenSkyRecord() = default;
 
+    void reset() override;
     bool setFile(const QString& filename) override;
     bool writeEntry(const CRtOpenSky::aircraft_t &aircraft);
+    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
 protected:
     using IRtRecord::writeEntry;

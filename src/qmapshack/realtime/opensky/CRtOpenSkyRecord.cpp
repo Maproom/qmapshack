@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "realtime/opensky/CRtOpenSkyRecord.h"
+#include "realtime/CRtDraw.h"
 
 CRtOpenSkyRecord::CRtOpenSkyRecord(QObject *parent)
     : IRtRecord(parent)
@@ -39,9 +40,9 @@ bool CRtOpenSkyRecord::writeEntry(const CRtOpenSky::aircraft_t& aircraft)
 
     // it's always a good idea to start with a version tag for future changes.
     stream << quint8(1);
-    stream << aircraft.latitude << aircraft.longitude << aircraft.geoAltitude << aircraft.timePosition;
+    stream << aircraft.latitude << aircraft.longitude;
 
-    track << aircraft.pos;
+    track << (aircraft.pos * DEG_TO_RAD);
 
     return writeEntry(data);
 }
@@ -56,11 +57,24 @@ bool CRtOpenSkyRecord::readEntry(QByteArray& data)
     quint8 version;
     CRtOpenSky::aircraft_t aircraft;
     stream >> version;
-    stream >> aircraft.latitude >> aircraft.longitude >> aircraft.geoAltitude >> aircraft.timePosition;
+    stream >> aircraft.latitude >> aircraft.longitude;
 
-    qDebug() << aircraft.latitude << aircraft.longitude << aircraft.geoAltitude << aircraft.timePosition;
-
-    track << QPointF(aircraft.longitude, aircraft.latitude);
+    track << (QPointF(aircraft.longitude, aircraft.latitude) * DEG_TO_RAD);
 
     return true;
+}
+
+void CRtOpenSkyRecord::draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt)
+{
+    QPolygonF tmp = track;
+    rt->convertRad2Px(tmp);
+
+    p.setPen(QPen(Qt::black, 3));
+    p.drawPolyline(tmp);
+}
+
+void CRtOpenSkyRecord::reset()
+{
+    track.clear();
+    IRtRecord::reset();
 }

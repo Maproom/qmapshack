@@ -101,3 +101,14 @@ bool IRtRecord::writeEntry(const QByteArray& data)
     file.close();
     return true;
 }
+
+void IRtRecord::reset()
+{
+    if(file.isOpen())
+    {
+        file.close();
+    }
+
+    file.open(QIODevice::WriteOnly);
+    file.close();
+}

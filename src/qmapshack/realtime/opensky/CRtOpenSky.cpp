@@ -57,7 +57,8 @@ void CRtOpenSky::registerWithTreeWidget()
     {
         QTreeWidgetItem * itemInfo = new QTreeWidgetItem(this);
         itemInfo->setFlags(Qt::ItemIsEnabled|Qt::ItemNeverHasChildren);
-        tree->setItemWidget(itemInfo, eColumnWidget, new CRtOpenSkyInfo(*this, tree));
+        info = new CRtOpenSkyInfo(*this, tree);
+        tree->setItemWidget(itemInfo, eColumnWidget, info);
         emit sigChanged();
     }
 }
@@ -69,15 +70,9 @@ void CRtOpenSky::loadSettings(QSettings& cfg)
     IRtSource::loadSettings(cfg);
     showNames = cfg.value("showNames", showNames).toBool();
 
-    QTreeWidget * tree = treeWidget();
-    QTreeWidgetItem * item = child(0);
-    if((item != nullptr) && (tree != nullptr))
+    if(info != nullptr)
     {
-        CRtOpenSkyInfo * info = dynamic_cast<CRtOpenSkyInfo*>(tree->itemWidget(item, eColumnWidget));
-        if(info != nullptr)
-        {
-            info->loadSettings(cfg);
-        }
+        info->loadSettings(cfg);
     }
 
     emit sigChanged();
@@ -90,15 +85,9 @@ void CRtOpenSky::saveSettings(QSettings& cfg) const
     IRtSource::saveSettings(cfg);
     cfg.setValue("showNames", showNames);
 
-    QTreeWidget * tree = treeWidget();
-    QTreeWidgetItem * item = child(0);
-    if((item != nullptr) && (tree != nullptr))
+    if(info != nullptr)
     {
-        CRtOpenSkyInfo * info = dynamic_cast<CRtOpenSkyInfo*>(tree->itemWidget(item, eColumnWidget));
-        if(info != nullptr)
-        {
-            info->saveSettings(cfg);
-        }
+        info->saveSettings(cfg);
     }
 }
 
@@ -188,6 +177,11 @@ void CRtOpenSky::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>&
                 blockedAreas << rectLabel;
             }
         }
+    }
+
+    if(info != nullptr)
+    {
+        info->draw(p, viewport, blockedAreas, rt);
     }
 }
 

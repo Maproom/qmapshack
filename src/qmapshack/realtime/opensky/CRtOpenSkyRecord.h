@@ -29,11 +29,14 @@ public:
     CRtOpenSkyRecord(QObject * parent);
     virtual ~CRtOpenSkyRecord() = default;
 
-    void writeEntry(const CRtOpenSky::aircraft_t &aircraft);
+    bool setFile(const QString& filename) override;
+    bool writeEntry(const CRtOpenSky::aircraft_t &aircraft);
 
 protected:
     using IRtRecord::writeEntry;
     bool readEntry(QByteArray& data) override;
+
+    QPolygonF track;
 };
 
 #endif //CRTOPENSKYRECORD_H

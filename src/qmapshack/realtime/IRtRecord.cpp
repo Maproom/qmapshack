@@ -25,64 +25,60 @@ IRtRecord::IRtRecord(QObject *parent)
 {
 }
 
-bool IRtRecord::setFile(const QString& filename)
+bool IRtRecord::setFile(const QString& fn)
 {
+    filename = fn;
+
     if(QFile::exists(filename))
     {
-        if(!readFile(filename))
-        {
-            return false;
-        }
+        return readFile(filename);
     }
-
-    file.setFileName(filename);
     return true;
 }
 
 bool IRtRecord::readFile(const QString& filename)
 {
-    QFile tmp(filename);
-    if(!tmp.open(QIODevice::ReadOnly))
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly))
     {
+        error = tr("Failed to open record for reading.");
         return false;
     }
 
-    QDataStream stream(&tmp);
+    QDataStream stream(&file);
     stream.setVersion(QDataStream::Qt_5_2);
     stream.setByteOrder(QDataStream::LittleEndian);
 
     while(!stream.atEnd())
     {
+        quint64 size = stream.device()->pos();
+        qDebug() << "size" << size;
+
         quint16 crc;
         QByteArray data;
         stream >> crc >> data;
 
-        if(qChecksum(data.data(), data.size()) != crc)
+        if((qChecksum(data.data(), data.size()) != crc) || (stream.status() != QDataStream::Ok))
         {
+            error = tr("Failed to read entry. Truncate record to last valid entry.");
+            file.close();
+            QFile::resize(filename, size);
             return false;
-        }
-
-        if(stream.status() != QDataStream::Ok)
-        {
-            return  false;
         }
 
         readEntry(data);
     }
 
-    tmp.close();
+    file.close();
     return true;
 }
 
 bool IRtRecord::writeEntry(const QByteArray& data)
 {
-    if(file.isOpen())
-    {
-        return false;
-    }
-
+    QFile file(filename);
     if(!file.open(QIODevice::Append))
     {
+        error = tr("Failed to open record for writing.");
         return false;
     }
 
@@ -95,6 +91,8 @@ bool IRtRecord::writeEntry(const QByteArray& data)
 
     if(stream.status() != QDataStream::Ok)
     {
+        error = tr("Failed to write entry.");
+        file.close();
         return false;
     }
 
@@ -104,11 +102,5 @@ bool IRtRecord::writeEntry(const QByteArray& data)
 
 void IRtRecord::reset()
 {
-    if(file.isOpen())
-    {
-        file.close();
-    }
-
-    file.open(QIODevice::WriteOnly);
-    file.close();
+    QFile::resize(filename, 0);
 }

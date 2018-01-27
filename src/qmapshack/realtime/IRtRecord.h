@@ -42,11 +42,16 @@ public:
 
        If the file exists this will read the file and append new data.
 
-       @param filename  the filename as string
+       @param fn  the filename as string
 
        @return Return true on success.
      */
-    virtual bool setFile(const QString& filename);
+    virtual bool setFile(const QString& fn);
+
+    virtual const QString& getError() const
+    {
+        return error;
+    }
 
     /**
        @brief Draw the record data into the draw context
@@ -98,7 +103,9 @@ private:
      */
     virtual bool readFile(const QString& filename);
 
-    QFile file;
+    QString filename;
+
+    QString error;
 };
 
 #endif //IRTRECORD_H

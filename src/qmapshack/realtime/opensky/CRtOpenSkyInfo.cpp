@@ -20,6 +20,8 @@
 #include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
 #include "realtime/opensky/CRtOpenSkyRecord.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/trk/CGisItemTrk.h"
 
 #include <QtWidgets>
 
@@ -32,9 +34,11 @@ CRtOpenSkyInfo::CRtOpenSkyInfo(CRtOpenSky &source, QWidget *parent)
     connect(checkShowNames, &QCheckBox::toggled, &source, &CRtOpenSky::slotSetShowNames);
     connect(toolPause, &QToolButton::toggled, toolReset, &QToolButton::setEnabled);
     connect(toolPause, &QToolButton::toggled, toolFile, &QToolButton::setEnabled);
+    connect(toolPause, &QToolButton::toggled, toolToTrack, &QToolButton::setEnabled);
     connect(toolPause, &QToolButton::toggled, lineKey, &QLineEdit::setEnabled);
     connect(toolFile, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotSetFilename);
     connect(toolReset, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotResetRecord);
+    connect(toolToTrack, &QToolButton::clicked, this, &CRtOpenSkyInfo::slotToTrack);
 }
 
 void CRtOpenSkyInfo::loadSettings(QSettings& cfg)
@@ -71,7 +75,7 @@ void CRtOpenSkyInfo::slotUpdate()
         {
             if(!record->writeEntry(aircraft))
             {
-                QMessageBox::critical(this, tr("Error..."), tr("Failed to write record."), QMessageBox::Ok);
+                QMessageBox::critical(this, tr("Error..."), record->getError(), QMessageBox::Ok);
                 toolPause->setChecked(true);
             }
         }
@@ -115,6 +119,28 @@ void CRtOpenSkyInfo::slotResetRecord()
     }
 }
 
+void CRtOpenSkyInfo::slotToTrack()
+{
+    if(record == nullptr)
+    {
+        return;
+    }
+
+    IGisProject * prj = CGisWorkspace::self().selectProject();
+    if(prj == nullptr)
+    {
+        return;
+    }
+
+    CTrackData data;
+    CTrackData::trkseg_t seg;
+    seg.pts = record->geTrack();
+    data.segs << seg;
+    data.name = lineKey->text();
+
+    new CGisItemTrk(data, prj);
+}
+
 void CRtOpenSkyInfo::startRecord(const QString& filename)
 {
     delete record;
@@ -131,9 +157,7 @@ void CRtOpenSkyInfo::startRecord(const QString& filename)
 
     if(!record->setFile(filename))
     {
-        QMessageBox::critical(this, tr("Failed..."), tr("Failed to open record."), QMessageBox::Ok);
-        delete record;
-        return;
+        QMessageBox::critical(this, tr("Failed..."), record->getError(), QMessageBox::Ok);
     }
 
     toolRecord->setEnabled(true);

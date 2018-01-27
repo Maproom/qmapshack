@@ -45,6 +45,7 @@ public slots:
 private slots:
     void slotSetFilename();
     void slotResetRecord();
+    void slotToTrack();
 
 private:
     void startRecord(const QString& filename);

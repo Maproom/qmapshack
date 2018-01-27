@@ -53,7 +53,7 @@ public:
         bool onGround           = false;
         qreal velocity          = NOFLOAT;
         qreal heading           = NOFLOAT;
-        qreal vertical_rate     = NOFLOAT;
+        qreal verticalRate     = NOFLOAT;
 
         qreal baroAltitude      = NOFLOAT;
         QString squawk;

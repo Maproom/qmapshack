@@ -19,6 +19,7 @@
 #ifndef CRTOPENSKYRECORD_H
 #define CRTOPENSKYRECORD_H
 
+#include "gis/trk/CTrackData.h"
 #include "realtime/IRtRecord.h"
 #include "realtime/opensky/CRtOpenSky.h"
 
@@ -34,11 +35,16 @@ public:
     bool writeEntry(const CRtOpenSky::aircraft_t &aircraft);
     void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
+    const QVector<CTrackData::trkpt_t>& geTrack() const
+    {
+        return track;
+    }
+
 protected:
     using IRtRecord::writeEntry;
     bool readEntry(QByteArray& data) override;
 
-    QPolygonF track;
+    QVector<CTrackData::trkpt_t> track;
 };
 
 #endif //CRTOPENSKYRECORD_H

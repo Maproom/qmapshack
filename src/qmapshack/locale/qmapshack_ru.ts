@@ -4641,87 +4641,87 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="84"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
-        <translation type="unfinished">&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Онлайн-сервис, который предоставляет позиционные данные гражданских самолетов</translation>
+        <translation>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Онлайн-сервис, который предоставляет позиционные данные гражданских самолетов</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="145"/>
         <source>unkn.</source>
-        <translation type="unfinished">не известно</translation>
+        <translation>не известно</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
         <source>callsign:        %1</source>
-        <translation type="unfinished">позывной:        %1</translation>
+        <translation>позывной:            %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="172"/>
         <source>origin country:  %1</source>
-        <translation type="unfinished">страна происхождения  %1</translation>
+        <translation>страна происхождения: %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="173"/>
         <source>time position:   %1</source>
-        <translation type="unfinished">время позиции:   %1</translation>
+        <translation>время для позиции:   %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="174"/>
         <source>last contact:    %1</source>
-        <translation type="unfinished">последний контакт:    %1</translation>
+        <translation>последний контакт:    %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="175"/>
         <source>longitude:       %1°</source>
-        <translation type="unfinished">долгота:       %1°</translation>
+        <translation>долгота:             %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="176"/>
         <source>latitude:        %1°</source>
-        <translation type="unfinished">ширина:        %1°</translation>
+        <translation>ширина:             %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="177"/>
         <source>geo. alt.:       %1m</source>
-        <translation type="unfinished">геогр. высота:       %1m</translation>
+        <translation>геом. высота:         %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
         <source>on ground:       %1</source>
-        <translation type="unfinished">на землю:       %1</translation>
+        <translation>на земле:            %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
         <source>velocity:        %1km/h</source>
-        <translation type="unfinished">скорость:        %1km/h</translation>
+        <translation>скорость:             %1km/h</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
         <source>heading:         %1°</source>
-        <translation type="unfinished">курс:         %1°</translation>
+        <translation>курс:                 %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="181"/>
         <source>vert. rate:      %1m/s</source>
-        <translation type="unfinished">верт. скорость:      %1m/s</translation>
+        <translation>верт. скорость:        %1m/s</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="182"/>
         <source>baro. alt.:      %1m</source>
-        <translation type="unfinished">баром. высота:      %1m</translation>
+        <translation>баром. высота:        %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
-        <source>squawk:          %1</source>
-        <translation type="unfinished"></translation>
+        <source>squak:           %1</source>
+        <translation>ответчик:             %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="184"/>
         <source>spi:             %1</source>
-        <translation type="unfinished"></translation>
+        <translation>индик. спец. назнач.    %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="185"/>
         <source>position source: %1</source>
-        <translation type="unfinished">источник позиции: %1</translation>
+        <translation>источник позиции:     %1</translation>
     </message>
 </context>
 <context>

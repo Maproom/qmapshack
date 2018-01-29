@@ -108,7 +108,11 @@ copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
 
 rem section 2.4) Copy QMapShack Files
 copy %QMSI_BUILD_PATH%\bin\Release\qmapshack.exe
-copy %QMSI_BUILD_PATH%\src\*.qm translations
+copy %QMSI_BUILD_PATH%\bin\Release\qmaptool.exe
+copy %QMSI_BUILD_PATH%\bin\Release\qmt_map2jnx.exe
+copy %QMSI_BUILD_PATH%\bin\Release\qmt_rgb2pct.exe
+copy %QMSI_BUILD_PATH%\src\qmapshack\*.qm translations
+copy %QMSI_BUILD_PATH%\src\qmaptool\*.qm translations
 copy ..\*.ico
 
 rem section 2.5) 3rd party SW description
@@ -116,10 +120,5 @@ copy ..\3rdparty.txt
 
 rem section 2.6) qt.conf
 copy ..\qt.conf
-
-rem section 2.7 (PRELIMINARY) qmaptool.exe
-copy %QMSI_VCREDIST_PATH%\qmaptool.exe
-copy %QMSI_VCREDIST_PATH%\QMapTool.ico
-
 
 pause

@@ -108,6 +108,8 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\qmapshack.exe
     File Files\qmaptool.exe
+    File Files\qmt_map2jnx.exe
+    File Files\qmt_rgb2pct.exe
     File Files\*.ico
     ;File Files\*.png
   SetOutPath "$INSTDIR\translations"

@@ -649,7 +649,7 @@ void CRouterBRouter::parseBRouterVersion(const QString &text)
         versionMinor = rx.cap(2).toInt();
         versionPatch = rx.cap(3).toInt();
 
-        labelBRouter->setText(tr("BRouter (Version %1.%2.%3):")
+        labelBRouter->setToolTip(tr("BRouter (Version %1.%2.%3)")
                               .arg(versionMajor)
                               .arg(versionMinor)
                               .arg(versionPatch));

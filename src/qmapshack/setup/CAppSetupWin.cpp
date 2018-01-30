@@ -35,9 +35,9 @@ void CAppSetupWin::initQMapShack()
     prepareTranslator(appResourceDir, "qtbase_");
     prepareTranslator(appResourceDir, "qmapshack_");
 
-    path = qgetenv("PATH");
-    //reset PATH to avoid that wrong .dll's are loaded
-    qputenv("PATH", "");
+	// limit PATH to application directory in order to avoid that wrong .dll's are loaded
+	path = apppath.toUtf8();
+	qputenv("PATH", path);
 
     // create directories
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");
@@ -75,7 +75,5 @@ QString CAppSetupWin::logDir()
 
 QString CAppSetupWin::findExecutable(const QString &name)
 {
-    qputenv("PATH",path);
     return QStandardPaths::findExecutable(name);
-    qputenv("PATH","");
 }

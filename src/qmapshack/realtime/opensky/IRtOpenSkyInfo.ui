@@ -141,6 +141,9 @@
      </item>
      <item>
       <widget class="QToolButton" name="toolToTrack">
+       <property name="toolTip">
+        <string>Convert record to track.</string>
+       </property>
        <property name="text">
         <string>...</string>
        </property>

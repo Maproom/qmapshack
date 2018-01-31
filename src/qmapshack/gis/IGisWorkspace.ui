@@ -114,6 +114,9 @@
      </column>
     </widget>
    </item>
+   <item>
+    <widget class="CGisSummary" name="widget" native="true"/>
+   </item>
   </layout>
   <action name="actionClearFilter">
    <property name="icon">
@@ -139,6 +142,12 @@
    <class>CGisListWks</class>
    <extends>QTreeWidget</extends>
    <header>gis/CGisListWks.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CGisSummary</class>
+   <extends>QWidget</extends>
+   <header>gis/summary/CGisSummary.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

@@ -1180,7 +1180,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
         <source>Invalid slopes!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Pendientes inválidas!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
@@ -4641,57 +4641,57 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="84"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Un servicio en línea que proporciona datos de posición de aeronaves civiles.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="145"/>
         <source>unkn.</source>
-        <translation type="unfinished"></translation>
+        <translation>Desc.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
         <source>callsign:        %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Distintivo de llamada:        %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="172"/>
         <source>origin country:  %1</source>
-        <translation type="unfinished"></translation>
+        <translation>País de origen:  %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="173"/>
         <source>time position:   %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Posición temporal:   %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="174"/>
         <source>last contact:    %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Último contacto:    %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="175"/>
         <source>longitude:       %1°</source>
-        <translation type="unfinished"></translation>
+        <translation>longitud:       %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="176"/>
         <source>latitude:        %1°</source>
-        <translation type="unfinished"></translation>
+        <translation>latitud:        %1°</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="177"/>
         <source>geo. alt.:       %1m</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt. geo.:       %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
         <source>on ground:       %1</source>
-        <translation type="unfinished"></translation>
+        <translation>En tierra:       %1</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
         <source>velocity:        %1km/h</source>
-        <translation type="unfinished"></translation>
+        <translation>velocidad:        %1km/h</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
@@ -4706,7 +4706,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="182"/>
         <source>baro. alt.:      %1m</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt. bar.:        %1m</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
@@ -4721,7 +4721,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="185"/>
         <source>position source: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuente de posición: %1</translation>
     </message>
 </context>
 <context>
@@ -4729,7 +4729,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione una fuente en tiempo real de la lista. Algunas fuentes se pueden agregar varias veces, el resto solo se pueden agregar en una sola instancia.</translation>
     </message>
 </context>
 <context>
@@ -4737,17 +4737,17 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
         <source>To add a real time source do a right click on the list above. </source>
-        <translation type="unfinished"></translation>
+        <translation>Para agregar una fuente en tiempo real haga un clic derecho en la lista de arriba.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Delete Source...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar Fuente...</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Do you really want to remove the realtime source?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Realmente quiere eliminar esta fuente en tiempo real?</translation>
     </message>
 </context>
 <context>
@@ -7396,7 +7396,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="276"/>
         <source>Realtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo Real</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="289"/>
@@ -7589,7 +7589,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="769"/>
         <source>Setup Map Background</source>
-        <translation>Configuración del Mapa de Fondo</translation>
+        <translation>Configuración del Fondo del Mapa</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="781"/>
@@ -7664,7 +7664,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="871"/>
         <source>Start QMapTool</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar QMapTool</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="246"/>
@@ -8855,22 +8855,22 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Última actualización</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
         <source>Aircrafts seen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aviones vistos:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>Show names</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar nombres</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vea &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; para más detalles.</translation>
     </message>
 </context>
 <context>
@@ -8878,7 +8878,7 @@ o
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
         <source>Select a source...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione una fuente...</translation>
     </message>
 </context>
 <context>
@@ -8901,12 +8901,12 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
         <source>Add Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir fuente</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="124"/>
         <source>Delete Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar Fuente</translation>
     </message>
 </context>
 <context>
@@ -10440,7 +10440,7 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="48"/>
         <source>Nautical</source>
-        <translation type="unfinished"></translation>
+        <translation>Náutico</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="74"/>

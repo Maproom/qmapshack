@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDatabase.h"
+#include "gis/db/IDBFolderSql.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -46,7 +47,9 @@ CGisDatabase::~CGisDatabase()
 
 void CGisDatabase::slotHelpText()
 {
-    frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
+    bool databaseAvailable = treeDB->topLevelItemCount() != 0;
+    frameHelp->setVisible(!databaseAvailable);
+    widgetSummary->setVisible(databaseAvailable);
 }
 
 void CGisDatabase::postEventForDb(QEvent * event)
@@ -57,4 +60,21 @@ void CGisDatabase::postEventForDb(QEvent * event)
 void CGisDatabase::sendEventForDb(QEvent * event)
 {
     QCoreApplication::sendEvent(treeDB, event);
+}
+
+IDBFolder * CGisDatabase::getFolderById(quint64 id, const QString& db)
+{
+    const int N = treeDB->topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        IDBFolder * dbfolder = dynamic_cast<IDBFolder*>(treeDB->topLevelItem(n));
+        if((dbfolder == nullptr) || (dbfolder->getDBName() != db))
+        {
+            continue;
+        }
+
+        return IDBFolder::createFolderByType(dbfolder->getDb(), IDBFolder::eTypeProject, id, nullptr);
+    }
+
+    return nullptr;
 }

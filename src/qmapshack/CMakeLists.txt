@@ -138,6 +138,8 @@ set( SRCS
     gis/search/CSearchGoogle.cpp
     gis/slf/CSlfProject.cpp
     gis/slf/CSlfReader.cpp
+    gis/summary/CGisSummary.cpp
+    gis/summary/CGisSummarySetup.cpp
     gis/suunto/CLogProject.cpp
     gis/suunto/CSmlProject.cpp
     gis/suunto/ISuuntoProject.cpp
@@ -444,6 +446,8 @@ set( HDRS
     gis/search/CSearchGoogle.h
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
+    gis/summary/CGisSummary.h
+    gis/summary/CGisSummarySetup.h
     gis/suunto/CLogProject.h
     gis/suunto/CSmlProject.h
     gis/suunto/ISuuntoProject.h
@@ -670,6 +674,8 @@ set( UIS
     gis/rte/router/brouter/IRouterBRouterInfo.ui
     gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/rte/router/routino/IRouterRoutinoPathSetup.ui
+    gis/summary/IGisSummary.ui
+    gis/summary/IGisSummarySetup.ui
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/IDetailsTrk.ui

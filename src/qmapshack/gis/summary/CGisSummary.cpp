@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,37 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDATABASE_H
-#define CGISDATABASE_H
+#include "gis/summary/CGisSummary.h"
+#include "gis/summary/CGisSummarySetup.h"
 
-#include "ui_IGisDatabase.h"
+#include <QtWidgets>
 
-class IDBFolder;
-
-class CGisDatabase : public QWidget, private Ui::IGisDatabase
+CGisSummary::CGisSummary(QWidget *parent)
+    : QWidget(parent)
 {
-    Q_OBJECT
-public:
-    static CGisDatabase& self()
-    {
-        return *pSelf;
-    }
+    setupUi(this);
+    connect(toolSetup, &QToolButton::clicked, this, &CGisSummary::slotSetup);
+    connect(toolShow, &QToolButton::clicked, this, &CGisSummary::slotShow);
+}
 
-    virtual ~CGisDatabase();
 
-    void postEventForDb(QEvent * event);
-    void sendEventForDb(QEvent * event);
+void CGisSummary::slotSetup()
+{
+    CGisSummarySetup dlg(*this);
+    dlg.exec();
+}
 
-    IDBFolder * getFolderById(quint64 id, const QString& db);
-private slots:
-    void slotHelpText();
-
-private:
-    friend class CMainWindow;
-    CGisDatabase(QWidget * parent);
-
-    static CGisDatabase * pSelf;
-};
-
-#endif //CGISDATABASE_H
-
+void CGisSummary::slotShow()
+{
+}

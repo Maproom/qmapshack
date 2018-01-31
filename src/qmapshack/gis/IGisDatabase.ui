@@ -30,6 +30,9 @@
     <number>0</number>
    </property>
    <item>
+    <widget class="CGisSummary" name="widgetSummary" native="true"/>
+   </item>
+   <item>
     <widget class="CGisListDB" name="treeDB">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
@@ -122,6 +125,12 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>CGisSummary</class>
+   <extends>QWidget</extends>
+   <header>gis/summary/CGisSummary.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>CGisListDB</class>
    <extends>QTreeWidget</extends>

@@ -21,6 +21,8 @@
 
 #include "ui_IGisSummarySetup.h"
 
+#include <QListWidgetItem>
+
 class CGisSummary;
 
 class CGisSummarySetup : public QDialog, private Ui::IGisSummarySetup
@@ -30,11 +32,24 @@ public:
     CGisSummarySetup(CGisSummary& parent);
     virtual ~CGisSummarySetup() = default;
 
+public slots:
+    void accept() override;
+
 private slots:
-    void slotAdd();
-    void slotDel();
+    void slotAdd(QListWidget *listWidget);
+    void slotDel(QListWidget *listWidget);
+    void slotItemSelectionChanged(QListWidget *listWidget, QToolButton *toolDel);
 
 private:
+    void setupSignals(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel);
+    void addFolder(quint64 id, const QString& db, QListWidget *listWidget);
+
+    enum data_e
+    {
+        eDataId = Qt::UserRole
+        , eDataDb = Qt::UserRole + 1
+    };
+
     CGisSummary& summary;
 };
 

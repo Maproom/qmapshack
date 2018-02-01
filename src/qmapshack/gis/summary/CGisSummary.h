@@ -26,11 +26,38 @@ class CGisSummary : public QWidget, private Ui::IGisSummary
     Q_OBJECT
 public:
     CGisSummary(QWidget * parent);
-    virtual ~CGisSummary() = default;
+    virtual ~CGisSummary();
+
+    enum dropzone_e
+    {
+        eDropZone1 = 0
+        ,eDropZone2 = 1
+        ,eDropZoneMax = 2
+    };
+
+    struct folder_t
+    {
+        QString name;
+        QString db;
+        quint64 id = 0;
+    };
+
+    struct dropzone_t
+    {
+        QString name;
+        QList<folder_t> folders;
+    };
+
+    dropzone_t& getDropZone(dropzone_e dropzone)
+    {
+        return dropZones[dropzone];
+    }
 
 private slots:
     void slotSetup();
-    void slotShow();
+
+private:
+    QVector<dropzone_t> dropZones {eDropZoneMax};
 };
 
 #endif //CGISSUMMARY_H

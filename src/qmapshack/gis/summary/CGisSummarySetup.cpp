@@ -23,14 +23,18 @@
 #include "gis/summary/CGisSummarySetup.h"
 
 #include <QtWidgets>
+#include <functional>
+
+using std::bind;
 
 CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
     : QDialog(&parent)
     , summary(parent)
 {
     setupUi(this);
-    connect(toolAdd, &QToolButton::clicked, this, &CGisSummarySetup::slotAdd);
-    connect(toolDel, &QToolButton::clicked, this, &CGisSummarySetup::slotDel);
+
+    setupSignals(CGisSummary::eDropZone1, lineName1, listWidget1, toolAdd1, toolDel1);
+    setupSignals(CGisSummary::eDropZone2, lineName2, listWidget2, toolAdd2, toolDel2);
 
     labelHelp->setText(tr("<b>What is this about?</b><br/>"
                           "When using the database GIS items can be referenced by several projects. "
@@ -38,15 +42,56 @@ CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
                           "the items are copied (referenced) into folders collecting items of a certain "
                           "time span, e.g. monthly, yearly, total. You can do this manually by loading the "
                           "summary projects into the workspace, coping the items and saving the changes. Or "
-                          "you use this dialog to define  projects folders in the database as summary folders "
+                          "you use this dialog to define project folders in the database as summary folders "
                           "and copy the items by dragging them into the drag-n-drop area."
                           ));
+
 
     adjustSize();
 }
 
+void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel)
+{
+    auto func1 = std::bind(&CGisSummarySetup::slotAdd, this, listWidget);
+    auto func2 = std::bind(&CGisSummarySetup::slotDel, this, listWidget);
+    auto func3 = std::bind(&CGisSummarySetup::slotItemSelectionChanged, this, listWidget, toolDel);
 
-void CGisSummarySetup::slotAdd()
+    connect(toolAdd, &QToolButton::clicked, this, func1);
+    connect(toolDel, &QToolButton::clicked, this, func2);
+    connect(listWidget, &QListWidget::itemSelectionChanged, this, func3);
+
+    CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
+    for(const CGisSummary::folder_t& folder : dropzone.folders)
+    {
+        addFolder(folder.id, folder.db, listWidget);
+    }
+
+    lineName->setText(dropzone.name);
+}
+
+void CGisSummarySetup::accept()
+{
+    CGisSummary::dropzone_t& dropzone = summary.getDropZone(CGisSummary::eDropZone1);
+
+    dropzone.name = lineName1->text();
+    dropzone.folders.clear();
+    const int N = listWidget1->count();
+    for(int n = 0; n < N; n++)
+    {
+        QListWidgetItem * item = listWidget1->item(n);
+
+        CGisSummary::folder_t folder;
+        folder.name = item->text();
+        folder.id   = item->data(eDataId).toULongLong();
+        folder.db   = item->data(eDataDb).toString();
+
+        dropzone.folders << folder;
+    }
+
+    QDialog::accept();
+}
+
+void CGisSummarySetup::slotAdd(QListWidget * listWidget)
 {
     quint64 id;
     QString db;
@@ -59,16 +104,29 @@ void CGisSummarySetup::slotAdd()
         return;
     }
 
+    addFolder(id, db, listWidget);
+}
 
+void CGisSummarySetup::slotDel(QListWidget * listWidget)
+{
+    QList<QListWidgetItem*> items = listWidget->selectedItems();
+    qDeleteAll(items);
+}
+
+void CGisSummarySetup::slotItemSelectionChanged(QListWidget * listWidget, QToolButton * toolDel)
+{
+    bool items = !listWidget->selectedItems().isEmpty();
+    toolDel->setEnabled(items);
+}
+
+void CGisSummarySetup::addFolder(quint64 id, const QString& db, QListWidget * listWidget)
+{
     IDBFolder * folder = CGisDatabase::self().getFolderById(id, db);
     if(folder != nullptr)
     {
-        qDebug() << folder->getDBName() << folder->getName() << folder->getId();
+        QListWidgetItem * item = new QListWidgetItem(folder->getName(), listWidget);
+        item->setData(eDataId, id);
+        item->setData(eDataDb, db);
+        delete folder;
     }
-
-    delete folder;
-}
-
-void CGisSummarySetup::slotDel()
-{
 }

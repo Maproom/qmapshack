@@ -353,7 +353,7 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
             continue;
         }
 
-        // calculation based on slope2 == Percent
+        // calculation based on slope2 (Percent)
         qreal slope = pt.slope2;
         if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
         {
@@ -395,7 +395,7 @@ void CGisItemTrk::filterSpeed(qreal plainSpeed,
         }
 //        qDebug() << "pt.slope: " << slope << " speed: " << speed*3.6 << "\n";
 
-        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
 
         averageSpeed += speed;

@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/summary/CGisSummary.h"
+#include "gis/summary/CGisSummaryDropZone.h"
 #include "gis/summary/CGisSummarySetup.h"
 #include "helpers/CSettings.h"
 
@@ -52,6 +53,8 @@ CGisSummary::CGisSummary(QWidget *parent)
     }
     cfg.endGroup(); // Summary
     cfg.endGroup(); // Database
+
+    setupDropZones();
 }
 
 CGisSummary::~CGisSummary()
@@ -88,6 +91,27 @@ void CGisSummary::slotSetup()
 {
     CGisSummarySetup dlg(*this);
     dlg.exec();
+
+    setupDropZones();
 }
 
+void CGisSummary::setupDropZones()
+{
+    QLayout * theLayout = layout();
 
+    bool isEmpty = true;
+    for(dropzone_t& dropZone : dropZones)
+    {
+        delete dropZone.zone;
+        dropZone.zone = nullptr;
+
+        if(!dropZone.folders.isEmpty())
+        {
+            dropZone.zone = new CGisSummaryDropZone(dropZone,this);
+            theLayout->addWidget(dropZone.zone);
+            isEmpty = false;
+        }
+    }
+
+    labelDrop->setVisible(isEmpty);
+}

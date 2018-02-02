@@ -35,6 +35,8 @@ CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
 
     setupSignals(CGisSummary::eDropZone1, lineName1, listWidget1, toolAdd1, toolDel1);
     setupSignals(CGisSummary::eDropZone2, lineName2, listWidget2, toolAdd2, toolDel2);
+    setupSignals(CGisSummary::eDropZone3, lineName3, listWidget3, toolAdd3, toolDel3);
+    setupSignals(CGisSummary::eDropZone4, lineName4, listWidget4, toolAdd4, toolDel4);
 
     labelHelp->setText(tr("<b>What is this about?</b><br/>"
                           "When using the database GIS items can be referenced by several projects. "
@@ -63,7 +65,7 @@ void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * 
     CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
     for(const CGisSummary::folder_t& folder : dropzone.folders)
     {
-        addFolder(folder.id, folder.db, listWidget);
+        addFolder(folder.id, folder.db, folder.name, listWidget);
     }
 
     lineName->setText(dropzone.name);
@@ -71,14 +73,23 @@ void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * 
 
 void CGisSummarySetup::accept()
 {
-    CGisSummary::dropzone_t& dropzone = summary.getDropZone(CGisSummary::eDropZone1);
+    writeResults(CGisSummary::eDropZone1, lineName1, listWidget1);
+    writeResults(CGisSummary::eDropZone2, lineName2, listWidget2);
+    writeResults(CGisSummary::eDropZone3, lineName3, listWidget3);
+    writeResults(CGisSummary::eDropZone4, lineName4, listWidget4);
+    QDialog::accept();
+}
 
-    dropzone.name = lineName1->text();
+void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget)
+{
+    CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
+
+    dropzone.name = lineName->text();
     dropzone.folders.clear();
-    const int N = listWidget1->count();
+    const int N = listWidget->count();
     for(int n = 0; n < N; n++)
     {
-        QListWidgetItem * item = listWidget1->item(n);
+        QListWidgetItem * item = listWidget->item(n);
 
         CGisSummary::folder_t folder;
         folder.name = item->text();
@@ -87,8 +98,6 @@ void CGisSummarySetup::accept()
 
         dropzone.folders << folder;
     }
-
-    QDialog::accept();
 }
 
 void CGisSummarySetup::slotAdd(QListWidget * listWidget)
@@ -96,15 +105,16 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
     quint64 id;
     QString db;
     QString host;
+    QString name;
 
-    CSelectDBFolder dlg(id, db, host, this);
+    CSelectDBFolder dlg(id, db, host, name, this);
     dlg.setWindowTitle(tr("Select summary project..."));
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
     }
 
-    addFolder(id, db, listWidget);
+    addFolder(id, db, name, listWidget);
 }
 
 void CGisSummarySetup::slotDel(QListWidget * listWidget)
@@ -119,14 +129,9 @@ void CGisSummarySetup::slotItemSelectionChanged(QListWidget * listWidget, QToolB
     toolDel->setEnabled(items);
 }
 
-void CGisSummarySetup::addFolder(quint64 id, const QString& db, QListWidget * listWidget)
+void CGisSummarySetup::addFolder(quint64 id, const QString& db, const QString& name, QListWidget * listWidget)
 {
-    IDBFolder * folder = CGisDatabase::self().getFolderById(id, db);
-    if(folder != nullptr)
-    {
-        QListWidgetItem * item = new QListWidgetItem(folder->getName(), listWidget);
-        item->setData(eDataId, id);
-        item->setData(eDataDb, db);
-        delete folder;
-    }
+    QListWidgetItem * item = new QListWidgetItem(name, listWidget);
+    item->setData(eDataId, id);
+    item->setData(eDataDb, db);
 }

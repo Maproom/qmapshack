@@ -21,6 +21,8 @@
 
 #include "ui_IGisSummary.h"
 
+class CGisSummaryDropZone;
+
 class CGisSummary : public QWidget, private Ui::IGisSummary
 {
     Q_OBJECT
@@ -32,7 +34,9 @@ public:
     {
         eDropZone1 = 0
         ,eDropZone2 = 1
-        ,eDropZoneMax = 2
+        ,eDropZone3 = 2
+        ,eDropZone4 = 3
+        ,eDropZoneMax = 4
     };
 
     struct folder_t
@@ -46,6 +50,7 @@ public:
     {
         QString name;
         QList<folder_t> folders;
+        CGisSummaryDropZone * zone = nullptr;
     };
 
     dropzone_t& getDropZone(dropzone_e dropzone)
@@ -57,6 +62,7 @@ private slots:
     void slotSetup();
 
 private:
+    void setupDropZones();
     QVector<dropzone_t> dropZones {eDropZoneMax};
 };
 

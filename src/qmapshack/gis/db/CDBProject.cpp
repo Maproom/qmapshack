@@ -161,8 +161,22 @@ CDBProject::CDBProject(const QString& filename, IDBFolder * parentFolder, CGisLi
 
 CDBProject::~CDBProject()
 {
-    CEvtW2DAckInfo * info = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
-    CGisDatabase::self().postEventForDb(info);
+    CEvtW2DAckInfo * evt = new CEvtW2DAckInfo(Qt::Unchecked, getId(), getDBName(), getDBHost());
+    CGisDatabase::self().postEventForDb(evt);
+
+    /*
+        The project is not connected to the workspace tree widget. This is because it's a
+        temporary project to manipulate the database outside the workspace. In this case
+        we have to tell the workspace tree to update the databse tree with it's status.
+
+        Thus the first event will remove all check marks. And this event will post a status
+        to set the check marks according to what ever is loaded in the workspace.
+     */
+    if(treeWidget() == nullptr)
+    {
+        CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
+        CGisWorkspace::self().postEventForWks(evt);
+    }
 }
 
 void CDBProject::restoreDBLink()

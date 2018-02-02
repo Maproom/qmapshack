@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2017 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CGISDATABASE_H
-#define CGISDATABASE_H
+#ifndef CGISSUMMARYDROPZONE_H
+#define CGISSUMMARYDROPZONE_H
 
-#include "ui_IGisDatabase.h"
+#include "gis/summary/CGisSummary.h"
 
-class IDBFolder;
+#include <QLabel>
 
-class CGisDatabase : public QWidget, private Ui::IGisDatabase
+class CGisSummaryDropZone : public QLabel
 {
     Q_OBJECT
 public:
-    static CGisDatabase& self()
-    {
-        return *pSelf;
-    }
+    CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget * parent);
+    virtual ~CGisSummaryDropZone() = default;
 
-    virtual ~CGisDatabase();
-
-    void postEventForDb(QEvent * event);
-    void sendEventForDb(QEvent * event);
-
-private slots:
-    void slotHelpText();
+protected:
+    void dragEnterEvent(QDragEnterEvent *e) override;
+    void dragMoveEvent(QDragMoveEvent *e) override;
+    void dragLeaveEvent(QDragLeaveEvent *e) override;
+    void dropEvent(QDropEvent *e) override;
 
 private:
-    friend class CMainWindow;
-    CGisDatabase(QWidget * parent);
+    void setHighlighted(bool yes);
 
-    static CGisDatabase * pSelf;
+    const QList<CGisSummary::folder_t>& folders;
 };
 
-#endif //CGISDATABASE_H
+#endif //CGISSUMMARYDROPZONE_H
 

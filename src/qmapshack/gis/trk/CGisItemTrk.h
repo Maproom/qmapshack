@@ -183,6 +183,7 @@ public:
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
+    bool isTrkElevationInvalid() { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
 
     QDateTime getTimestamp() const override {return getTimeStart(); }
 
@@ -525,6 +526,10 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
+    void filterSpeed(qreal plainSpeed,
+                     qreal minSpeed, qreal slopeAtMinSpeed,
+                     qreal maxSpeed, qreal slopeAtMaxSpeed);
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();
     void filterReplaceElevation();

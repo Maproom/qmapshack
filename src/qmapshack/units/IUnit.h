@@ -72,6 +72,7 @@ public:
     }
     static void slope2string(qreal slope, QString& val, QString& unit);
     static void slope2unit(qreal slope, qreal& val, QString& unit);
+    static qreal slopeConvert(slope_mode_e fromMode, qreal fromSlope);
 
     /// parse a string for a timestamp
     static bool parseTimestamp(const QString &time, QDateTime &datetime);

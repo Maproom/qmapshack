@@ -569,8 +569,9 @@ void CGisListDB::slotCopyFolder()
     quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
+    QString name;
 
-    CSelectDBFolder dlg(idTarget, db, host, this);
+    CSelectDBFolder dlg(idTarget, db, host, name, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
@@ -636,8 +637,9 @@ void CGisListDB::slotMoveFolder()
     quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
+    QString name;
 
-    CSelectDBFolder dlg(idTarget, db, host, this);
+    CSelectDBFolder dlg(idTarget, db, host, name, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

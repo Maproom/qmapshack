@@ -139,6 +139,7 @@ set( SRCS
     gis/slf/CSlfProject.cpp
     gis/slf/CSlfReader.cpp
     gis/summary/CGisSummary.cpp
+    gis/summary/CGisSummaryDropZone.cpp
     gis/summary/CGisSummarySetup.cpp
     gis/suunto/CLogProject.cpp
     gis/suunto/CSmlProject.cpp
@@ -447,6 +448,7 @@ set( HDRS
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
     gis/summary/CGisSummary.h
+    gis/summary/CGisSummaryDropZone.h
     gis/summary/CGisSummarySetup.h
     gis/suunto/CLogProject.h
     gis/suunto/CSmlProject.h

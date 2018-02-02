@@ -24,11 +24,12 @@
 
 #include <QtWidgets>
 
-CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidget *parent)
+CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QString &name, QWidget *parent)
     : QDialog(parent)
     , id(id)
     , db(db)
     , host(host)
+    , name(name)
 {
     setupUi(this);
 
@@ -94,6 +95,15 @@ void CSelectDBFolder::slotItemSelectionChanged()
         id      = folder->getId();
         db      = folder->getDBName();
         host    = folder->getDBHost();
+
+        name    = folder->getName();
+        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->parent());
+        while(folder1 != nullptr)
+        {
+            name += "@" + folder1->getName();
+            folder1 = dynamic_cast<IDBFolder*>(folder1->parent());
+        }
+
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
     else

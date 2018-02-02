@@ -32,7 +32,7 @@
    <item>
     <widget class="QToolButton" name="toolSetup">
      <property name="toolTip">
-      <string>Setup summary projetcs.</string>
+      <string>Setup summary drop zones.</string>
      </property>
      <property name="text">
       <string>...</string>

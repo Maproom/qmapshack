@@ -169,6 +169,22 @@ CGisListDB::~CGisListDB()
     saveDatabaseConfiguration();
 }
 
+void CGisListDB::addGlobalActions(const QList<QAction*> actions)
+{
+    menuNone->addSeparator();
+    menuNone->addActions(actions);
+    menuFolder->addSeparator();
+    menuFolder->addActions(actions);
+    menuDatabase->addSeparator();
+    menuDatabase->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
+}
+
 void CGisListDB::saveDatabaseConfiguration()
 {
     QStringList names;

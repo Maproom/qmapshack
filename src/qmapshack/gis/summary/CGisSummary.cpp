@@ -50,7 +50,7 @@ CGisSummary::CGisSummary(QWidget *parent)
             cfg.endGroup(); // Folder%1
         }
         cfg.endGroup(); // "Dropzone%1"
-    }
+    }    
     cfg.endGroup(); // Summary
     cfg.endGroup(); // Database
 
@@ -82,7 +82,7 @@ CGisSummary::~CGisSummary()
             cfg.endGroup(); // Folder%1
         }
         cfg.endGroup(); // "Dropzone%1"
-    }
+    }    
     cfg.endGroup(); // Summary
     cfg.endGroup(); // Database
 }

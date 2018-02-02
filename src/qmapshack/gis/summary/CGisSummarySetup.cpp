@@ -41,7 +41,7 @@ CGisSummarySetup::CGisSummarySetup(CGisSummary &parent)
     labelHelp->setText(tr("<b>What is this about?</b><br/>"
                           "When using the database GIS items can be referenced by several projects. "
                           "A common use-case is to store tour data in it's own project folder. Additionally "
-                          "the items are copied (referenced) into folders collecting items of a certain "
+                          "the items are copied (referenced) into folders summarizing items of a certain "
                           "time span, e.g. monthly, yearly, total. You can do this manually by loading the "
                           "summary projects into the workspace, coping the items and saving the changes. Or "
                           "you use this dialog to define project folders in the database as summary folders "

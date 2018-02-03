@@ -109,6 +109,7 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
 
     CSelectDBFolder dlg(id, db, host, name, this);
     dlg.setWindowTitle(tr("Select summary project..."));
+    dlg.setProjectsOnly(true);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

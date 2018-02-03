@@ -29,7 +29,6 @@ class CEvtW2DAckInfo;
 class IDBFolderSql;
 class CDBItem;
 
-
 /**
  * @brief Baseclass for all folders in the database view
  */
@@ -183,9 +182,11 @@ protected:
 
        The checkbox of active items will be set checked.
 
-       @param activeChildren     a set of item keys that are active on the workspace
+       @param activeChildren    a set of item keys that are active on the workspace
+       @param showFolders       true to add child folders to folder
+       @param showItems         true to add child items to folder
      */
-    virtual void addChildren(const QSet<QString> &activeChildren, bool skipFolders);
+    virtual void addChildren(const QSet<QString> &activeChildren, bool showFolders, bool showItems);
 
     /**
        @brief Remove a folder to folder relation
@@ -201,6 +202,13 @@ protected:
 
     void addItemsSorted(QList<CDBItem *> &items);
     void sortItems(QList<CDBItem *> &items) const;
+
+    bool showItems() const;
+    bool showCheckBoxes() const;
+    bool showLostFound() const;
+
+    bool getBoolProperty(const char * name, bool defaultValue) const;
+
 
     QSqlDatabase& db;
 

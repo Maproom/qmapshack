@@ -29,6 +29,11 @@ public:
     CSelectDBFolder(quint64& id, QString& db, QString& host, QString& name, QWidget * parent);
     virtual ~CSelectDBFolder();
 
+    void setProjectsOnly(bool yes)
+    {
+        projectsOnly = yes;
+    }
+
 private slots:
     void slotItemExpanded(QTreeWidgetItem * item);
     void slotItemSelectionChanged();
@@ -38,6 +43,8 @@ private:
     QString& db;
     QString& host;
     QString& name;
+
+    bool projectsOnly = false;
 };
 
 #endif //CSELECTDBFOLDER_H

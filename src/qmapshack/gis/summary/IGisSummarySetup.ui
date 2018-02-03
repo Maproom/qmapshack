@@ -108,7 +108,11 @@
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="1" column="0">
-        <widget class="QListWidget" name="listWidget2"/>
+        <widget class="QListWidget" name="listWidget2">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
        </item>
        <item row="1" column="1">
         <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -188,7 +192,11 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QListWidget" name="listWidget3"/>
+        <widget class="QListWidget" name="listWidget3">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
        </item>
        <item row="1" column="1">
         <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -254,7 +262,11 @@
         </layout>
        </item>
        <item row="1" column="0">
-        <widget class="QListWidget" name="listWidget4"/>
+        <widget class="QListWidget" name="listWidget4">
+         <property name="selectionMode">
+          <enum>QAbstractItemView::ExtendedSelection</enum>
+         </property>
+        </widget>
        </item>
        <item row="1" column="1">
         <layout class="QVBoxLayout" name="verticalLayout_5">

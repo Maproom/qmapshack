@@ -50,6 +50,8 @@ CUnitsSetup::CUnitsSetup(QWidget *parent)
         radioPercent->setChecked(true);
         break;
     }
+
+    adjustSize();
 }
 
 void CUnitsSetup::accept()

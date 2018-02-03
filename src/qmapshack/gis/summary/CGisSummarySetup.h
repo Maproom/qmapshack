@@ -43,7 +43,7 @@ private slots:
 private:
     void setupSignals(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel);
     void addFolder(quint64 id, const QString& db, const QString &name, QListWidget *listWidget);
-    void writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget);
+    void writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget) const;
 
     enum data_e
     {

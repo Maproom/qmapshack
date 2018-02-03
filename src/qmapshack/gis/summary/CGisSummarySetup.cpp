@@ -80,7 +80,7 @@ void CGisSummarySetup::accept()
     QDialog::accept();
 }
 
-void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget)
+void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget) const
 {
     CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
 

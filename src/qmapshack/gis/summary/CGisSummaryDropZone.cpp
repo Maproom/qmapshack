@@ -117,7 +117,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
         }
     }
 
-    int lastResult = CSelectCopyAction::eResultNone;
+    int lastResult = CSelectCopyAction::eResultSkip;
     for(const CGisSummary::folder_t& folder : folders)
     {
         CDBProject * project = new CDBProject(folder.db, folder.id, nullptr);

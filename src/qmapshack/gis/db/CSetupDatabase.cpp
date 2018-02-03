@@ -57,6 +57,7 @@ CSetupDatabase::CSetupDatabase(CGisListDB &parent)
     }
 
     slotUpdateButtonBox();
+    adjustSize();
 }
 
 CSetupDatabase::~CSetupDatabase()

@@ -67,6 +67,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
     , socket(nullptr)
 {
+    setProperty("showItems", true);
+    setProperty("showCheckBoxes", true);
+    setProperty("showLostFound", true);
+
     SETTINGS;
     cfg.beginGroup("Database");
     QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
@@ -585,9 +589,9 @@ void CGisListDB::slotCopyFolder()
     quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
-    QString name;
+    QString name1;
 
-    CSelectDBFolder dlg(idTarget, db, host, name, this);
+    CSelectDBFolder dlg(idTarget, db, host, name1, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;
@@ -653,9 +657,9 @@ void CGisListDB::slotMoveFolder()
     quint64 idTarget    = 0;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
-    QString name;
+    QString name1;
 
-    CSelectDBFolder dlg(idTarget, db, host, name, this);
+    CSelectDBFolder dlg(idTarget, db, host, name1, this);
     if(dlg.exec() == QDialog::Rejected)
     {
         return;

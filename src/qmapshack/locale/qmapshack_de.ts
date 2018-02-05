@@ -3814,11 +3814,6 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
-        <source>BRouter (Version %1.%2.%3):</source>
-        <translation>BRouter (Version %1.%2.%3):</translation>
-    </message>
-    <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="714"/>
         <source>Error:</source>
         <translation>Fehler:</translation>
@@ -3875,6 +3870,11 @@ ist keine gültige Koordinatensystemdefinition:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="759"/>
         <source>starting</source>
         <translation>started</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
+        <source>BRouter (Version %1.%2.%3)</source>
+        <translation>BRouter (Version %1.%2.%3)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="749"/>
@@ -4641,89 +4641,122 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CRtOpenSky</name>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="84"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="96"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
         <translation>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Ein Onlinedienst, der Positionsdaten der zivilen Luftfahrt anbietet</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="145"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="170"/>
         <source>unkn.</source>
         <translation>unbek.</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
-        <source>callsign:        %1</source>
-        <translation>Kennung:            %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="201"/>
+        <source>key:</source>
+        <translation>Schlüssel:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="172"/>
-        <source>origin country:  %1</source>
-        <translation>Herkunftsland:      %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
+        <source>callsign:</source>
+        <translation>Kennung:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="173"/>
-        <source>time position:   %1</source>
-        <translation>Zeit a.d. Position: %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
+        <source>origin country:</source>
+        <translation>Herkunftsland:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="174"/>
-        <source>last contact:    %1</source>
-        <translation>letzter Kontakt:    %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
+        <source>time position:</source>
+        <translation>Zeit a. d. Pos.:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="175"/>
-        <source>longitude:       %1°</source>
-        <translation>Längengrad:         %1°</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
+        <source>last contact:</source>
+        <translation>letzter Kontakt:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="176"/>
-        <source>latitude:        %1°</source>
-        <translation>Breitengrad:        %1°</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
+        <source>longitude:</source>
+        <translation>Longitude:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="177"/>
-        <source>geo. alt.:       %1m</source>
-        <translation>geogr. Höhe:        %1m</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
+        <source>latitude:</source>
+        <translation>Latitude:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
-        <source>on ground:       %1</source>
-        <translation>am Boden:           %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
+        <source>geo. alt.:</source>
+        <translation>geo. Höhe:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
-        <source>velocity:        %1km/h</source>
-        <translation>Geschwindigkeit:    %1km/h</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
+        <source>on ground:</source>
+        <translation>gelandet:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
-        <source>heading:         %1°</source>
-        <translation>Richtung:           %1°</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
+        <source>velocity:</source>
+        <translation>Geschwindigkeit:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="181"/>
-        <source>vert. rate:      %1m/s</source>
-        <translation>Steigrate:          %1m/s</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
+        <source>heading:</source>
+        <translation>Richtung:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="182"/>
-        <source>baro. alt.:      %1m</source>
-        <translation>barom. Höhe:        %1m</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
+        <source>vert. rate:</source>
+        <translation>Steigrate:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
-        <source>squawk:          %1</source>
-        <translation>squawk:             %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
+        <source>baro. alt.:</source>
+        <translation>baro. Höhe:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="184"/>
-        <source>spi:             %1</source>
-        <translation>SPI:                %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
+        <source>squawk:</source>
+        <translation>Squawk:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="185"/>
-        <source>position source: %1</source>
-        <translation>Positionsquelle:    %1</translation>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
+        <source>spi:</source>
+        <translation>SPI:</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
+        <source>position source:</source>
+        <translation>Positionsquelle:</translation>
+    </message>
+</context>
+<context>
+    <name>CRtOpenSkyInfo</name>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
+        <source>Error...</source>
+        <translation>Fehler...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
+        <source>Select record file</source>
+        <translation>Aufzeichnung auswählen</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
+        <source>Reset record...</source>
+        <translation>Aufzeichnung zurücksetzen...</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
+        <source>Do you really want to reset the current record?</source>
+        <translation>Wollen Sie die Aufzeichnung wirklich zurücksetzen?</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
+        <source>Failed...</source>
+        <translation>Fehlgeschlagen...</translation>
     </message>
 </context>
 <context>
@@ -4847,22 +4880,22 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>MySQL kann derzeit nicht genutzt werden, weil der entsprechende Treiber (QMYSQL) nicht verfügbar ist.&lt;br /&gt;Stellen Sie bitte sicher, dass das entsprechende Paket installiert ist.&lt;br /&gt;Wenn Sie nicht wissen, was zu tun ist, sollten Sie einen Blick auf das &lt;a href=&quot;%1&quot;&gt;Wiki&lt;/a&gt; werfen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="102"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="103"/>
         <source>Error...</source>
         <translation>Fehler...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="102"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="103"/>
         <source>There is already a database with name &apos;%1&apos;</source>
         <translation>Es gibt schon eine Datenbank mit dem Namen &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="115"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="116"/>
         <source>New database...</source>
         <translation>Neue Datenbank...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="140"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="141"/>
         <source>Open database...</source>
         <translation>Datenbank öffnen...</translation>
     </message>
@@ -8850,30 +8883,97 @@ sein</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
         <source>Last update</source>
         <translation>letzte Aktualisierung</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
         <source>Aircrafts seen:</source>
         <translation>Flugzeuge in Sicht:</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
         <source>Show names</source>
         <translation>zeige Namen</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
-        <translation>Gehen Sie zu &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; für weitere Details.</translation>
+        <translation type="unfinished">Weitere Details &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
+        <source>Enter a valid key.</source>
+        <translation>Geben Sie einen gültigen Schlüssel ein.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
+        <source>Record by key</source>
+        <translation>Schlüssel</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
+        <source>Start recording.</source>
+        <translation>Aufzeichnung starten.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="125"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="148"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
+        <source>Pause recording.</source>
+        <translation>Aufzeichnung anhalten.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
+        <source>Convert record to track.</source>
+        <translation>Aufzeichnung in einen Track umwandeln.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
+        <source>Reset record.</source>
+        <translation>Aufzeichnung zurücksetzen.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
+        <source>Select record file.</source>
+        <translation>Eine Datei für die Aufzeichnung auswählen.</translation>
+    </message>
+</context>
+<context>
+    <name>IRtRecord</name>
+    <message>
+        <location filename="../realtime/IRtRecord.cpp" line="44"/>
+        <source>Failed to open record for reading.</source>
+        <translation>Die Aufzeichnungsdatei konnte nicht zum Lesen geöffnet werden.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtRecord.cpp" line="63"/>
+        <source>Failed to read entry. Truncate record to last valid entry.</source>
+        <translation>Ein Eintrag konnte nicht gelesen werden. Die Aufzeichnung wird auf den letzten gültigen Eintrag reduziert.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtRecord.cpp" line="81"/>
+        <source>Failed to open record for writing.</source>
+        <translation>Die Aufzeichnungsdatei konnte nicht zum Schreiben geöffnet werden.</translation>
+    </message>
+    <message>
+        <location filename="../realtime/IRtRecord.cpp" line="94"/>
+        <source>Failed to write entry.</source>
+        <translation>Eintrag konnte nicht geschrieben werden.</translation>
     </message>
 </context>
 <context>
@@ -10434,42 +10534,42 @@ sein</translation>
         <translation>Einheiten einrichten...</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="36"/>
+        <location filename="../units/IUnitsSetup.ui" line="24"/>
         <source>Length unit</source>
         <translation>Längeneinheit</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="48"/>
+        <location filename="../units/IUnitsSetup.ui" line="30"/>
         <source>Nautical</source>
         <translation>nautisch</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="74"/>
+        <location filename="../units/IUnitsSetup.ui" line="44"/>
         <source>Metric</source>
         <translation>metrisch</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="80"/>
+        <location filename="../units/IUnitsSetup.ui" line="52"/>
         <source>Slope unit</source>
         <translation>Steigung</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="92"/>
+        <location filename="../units/IUnitsSetup.ui" line="58"/>
         <source>Degrees (°)</source>
         <translation>Grad (°)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="105"/>
+        <location filename="../units/IUnitsSetup.ui" line="65"/>
         <source>Percent (%)</source>
         <translation>Prozent (%)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="133"/>
+        <location filename="../units/IUnitsSetup.ui" line="95"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Anmerkung:&lt;/b&gt; Das Ändern der Einheiten wird bei einigen GUI-Elementen erst nach einem Neustart von QMapShack wirksam.</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="61"/>
+        <location filename="../units/IUnitsSetup.ui" line="37"/>
         <source>Imperial</source>
         <translation>imperial</translation>
     </message>

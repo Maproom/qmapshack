@@ -126,7 +126,7 @@ void CGisSummaryDropZone::dropEvent(QDropEvent  * e)
             project->insertCopyOfItem(gisItem, -1, lastResult);
         }
 
-        project->save();
+        project->save(lastResult);
         delete project;
     }
 }

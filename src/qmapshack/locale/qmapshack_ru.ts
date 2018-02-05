@@ -3873,7 +3873,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="652"/>
         <source>BRouter (Version %1.%2.%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Версия %1.%2.%3)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="749"/>
@@ -4651,82 +4651,82 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="201"/>
         <source>key:</source>
-        <translation type="unfinished"></translation>
+        <translation>ключ:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
         <source>callsign:</source>
-        <translation type="unfinished"></translation>
+        <translation>позывной:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
         <source>origin country:</source>
-        <translation type="unfinished"></translation>
+        <translation>страна происхождения:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
         <source>time position:</source>
-        <translation type="unfinished"></translation>
+        <translation>время для позиции:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
         <source>last contact:</source>
-        <translation type="unfinished"></translation>
+        <translation>последний контакт:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
         <source>longitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>долгота:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
         <source>latitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>ширина:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
         <source>geo. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>геом. высота:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
         <source>on ground:</source>
-        <translation type="unfinished"></translation>
+        <translation>на земле:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
         <source>velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>скорость:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
         <source>heading:</source>
-        <translation type="unfinished"></translation>
+        <translation>курс:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
         <source>vert. rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>верт. скорость:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
         <source>baro. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>баром. высота:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
         <source>squawk:</source>
-        <translation type="unfinished"></translation>
+        <translation>ответчик:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
         <source>spi:</source>
-        <translation type="unfinished"></translation>
+        <translation>индик. спец. назнач.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
         <source>position source:</source>
-        <translation type="unfinished"></translation>
+        <translation>источник позиции:</translation>
     </message>
 </context>
 <context>
@@ -4734,27 +4734,27 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
         <source>Error...</source>
-        <translation type="unfinished">Ошибка...</translation>
+        <translation>Ошибка...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
         <source>Select record file</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать файл записи</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Reset record...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить запись...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished"></translation>
+        <translation>Вы действительно хотите сбросить текущую запись?</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
         <source>Failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось...</translation>
     </message>
 </context>
 <context>
@@ -8892,7 +8892,6 @@ or
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>-</source>
-        <translatorcomment>-</translatorcomment>
         <translation>-</translation>
     </message>
     <message>
@@ -8918,17 +8917,17 @@ or
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
         <source>Enter a valid key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввести действительный ключ.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
         <source>Record by key</source>
-        <translation type="unfinished"></translation>
+        <translation>Запись по ключу</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
         <source>Start recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Начать запись.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
@@ -8937,27 +8936,27 @@ or
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
         <source>Pause recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Приостановить записи.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать запись в трек.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
         <source>Reset record.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
         <source>Select record file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать файл записи.</translation>
     </message>
 </context>
 <context>
@@ -8965,22 +8964,22 @@ or
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="44"/>
         <source>Failed to open record for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть запись для чтения.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="63"/>
         <source>Failed to read entry. Truncate record to last valid entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось прочитать запись. Запись обрезана до последнего допустимого элемента.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="81"/>
         <source>Failed to open record for writing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось открыть запись для записи.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="94"/>
         <source>Failed to write entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось записать элемент.</translation>
     </message>
 </context>
 <context>

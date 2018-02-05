@@ -569,13 +569,16 @@ int CDBProject::checkForAction1(IGisItem * item, quint64& itemId, int& lastResul
     return action;
 }
 
-
 bool CDBProject::save()
+{
+    return save(CSelectSaveAction::eResultNone);
+}
+
+bool CDBProject::save(int lastResult)
 {
     QSqlQuery query(db);
     bool stop       = false;
     bool success    = true;
-    int lastResult  = CSelectSaveAction::eResultNone;
 
     // check if project is still part of the database
     query.prepare("SELECT keyqms FROM folders WHERE id=:id");

@@ -16,43 +16,36 @@
 
 **********************************************************************************************/
 
-#ifndef CRTOPENSKYINFO_H
-#define CRTOPENSKYINFO_H
+#ifndef CRTOPENSKYRECORD_H
+#define CRTOPENSKYRECORD_H
 
-#include "ui_IRtOpenSkyInfo.h"
+#include "gis/trk/CTrackData.h"
+#include "realtime/IRtRecord.h"
+#include "realtime/opensky/CRtOpenSky.h"
 
-#include <QPointer>
-
-class CRtOpenSkyRecord;
-class CRtOpenSky;
-class CRtDraw;
-
-class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
+class CRtOpenSkyRecord : public IRtRecord
 {
     Q_OBJECT
 public:
-    CRtOpenSkyInfo(CRtOpenSky& source, QWidget * parent);
-    virtual ~CRtOpenSkyInfo() = default;
+    CRtOpenSkyRecord(QObject * parent);
+    virtual ~CRtOpenSkyRecord() = default;
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
+    void reset() override;
+    bool setFile(const QString& filename) override;
+    bool writeEntry(const CRtOpenSky::aircraft_t &aircraft);
+    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
 
-    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
+    const QVector<CTrackData::trkpt_t>& geTrack() const
+    {
+        return track;
+    }
 
-public slots:
-    void slotUpdate();    
+protected:
+    using IRtRecord::writeEntry;
+    bool readEntry(QByteArray& data) override;
 
-private slots:
-    void slotSetFilename();
-    void slotResetRecord();
-    void slotToTrack();
-
-private:
-    void startRecord(const QString& filename);
-
-    CRtOpenSky& source;
-    QPointer<CRtOpenSkyRecord> record;
+    QVector<CTrackData::trkpt_t> track;
 };
 
-#endif //CRTOPENSKYINFO_H
+#endif //CRTOPENSKYRECORD_H
 

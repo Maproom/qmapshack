@@ -23,10 +23,12 @@
 #include "units/IUnit.h"
 
 #include <QDateTime>
+#include <QPointer>
 
 class QTimer;
 class QNetworkAccessManager;
 class QNetworkReply;
+class CRtOpenSkyInfo;
 
 class CRtOpenSky : public IRtSource
 {
@@ -35,10 +37,34 @@ public:
     CRtOpenSky(QTreeWidget * parent);
     virtual ~CRtOpenSky() = default;
 
+    struct aircraft_t
+    {
+        QPointF pos     = NOPOINTF;
+        QPointF point   = NOPOINTF;
+
+        QString key;
+        QString callsign;
+        QString originCountry;
+        qint32 timePosition     = NOINT;
+        qint32 lastContact      = NOINT;
+        qreal longitude         = NOFLOAT;
+        qreal latitude          = NOFLOAT;
+        qreal geoAltitude       = NOFLOAT;
+        bool onGround           = false;
+        qreal velocity          = NOFLOAT;
+        qreal heading           = NOFLOAT;
+        qreal verticalRate     = NOFLOAT;
+
+        qreal baroAltitude      = NOFLOAT;
+        QString squawk;
+        bool spi                = false;
+        qint32 positionSource   = NOINT;
+    };
+
     /**
        @brief Setup sub-item
 
-       The parent tree widgte is used to setup a subitem with CRtOpenSkyInfo as widget.
+       The parent tree widget is used to setup a sub item with CRtOpenSkyInfo as widget.
      */
     void registerWithTreeWidget() override;
     void loadSettings(QSettings& cfg) override;
@@ -49,7 +75,7 @@ public:
     /**
        @brief Get the timestamp of the last OpenSky update
 
-       @return The timestamo as QDateTime instance
+       @return The timestamp as QDateTime instance
      */
     const QDateTime& getTimestamp() const;
 
@@ -66,15 +92,15 @@ public:
      */
     bool getShowNames() const;
 
+    aircraft_t getAircraftByKey(const QString& key, bool& ok) const;
+
     void drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt) override;
-
     void fastDraw(QPainter& p, const QRectF& viewport, CRtDraw *rt)  override;
-
     void mouseMove(const QPointF& pos) override;
     static const QString strIcon;
 public slots:
     /**
-       @brief Set visiblity of callsign names
+       @brief Set visibility of callsign names
 
        @param yes   set true to show names
      */
@@ -82,47 +108,25 @@ public slots:
 
 private slots:
     /**
-       @brief Request a new dataset from OpenSky
+       @brief Request a new data set from OpenSky
      */
     void slotUpdate();
     /**
-       @brief Handle incomming dataset from OpenSky
+       @brief Handle incoming data set from OpenSky
        @param reply
      */
     void slotRequestFinished(QNetworkReply* reply);
 
 private:
+    QPointer<CRtOpenSkyInfo> info;
     QTimer * timer;
     QNetworkAccessManager * networkAccessManager;
-
-    struct aircraft_t
-    {
-        QPointF pos     = NOPOINTF;
-        QPointF point   = NOPOINTF;
-
-        QString callsign;
-        QString originCountry;
-        qint32 timePosition     = NOINT;
-        qint32 lastContact      = NOINT;
-        qreal longitude         = NOFLOAT;
-        qreal latitude          = NOFLOAT;
-        qreal geoAltitude       = NOFLOAT;
-        bool onGround           = false;
-        qreal velocity          = NOFLOAT;
-        qreal heading           = NOFLOAT;
-        qreal vertical_rate     = NOFLOAT;
-
-        qreal baroAltitude      = NOFLOAT;
-        QString squawk;
-        bool spi                = false;
-        qint32 positionSource   = NOINT;
-    };
 
     QDateTime timestamp;
     QMap<QString, aircraft_t> aircrafts;
     bool showNames = true;
 
-    QString keyFocus;       
+    QString keyFocus;
 };
 
 #endif //CRTOPENSKY_H

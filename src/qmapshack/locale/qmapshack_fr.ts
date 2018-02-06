@@ -200,28 +200,23 @@
 <context>
     <name>CDBFolderMysql</name>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="33"/>
-        <source>All your data grouped by folders.</source>
-        <translation>Vos données groupées par dossiers.</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="53"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="59"/>
         <source>MySQL Database</source>
         <translation>Base de données MySQL</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="56"/>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="60"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="62"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="66"/>
         <source>Server: </source>
         <translation>Serveur:</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="65"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="71"/>
         <source> (No PW)</source>
         <translation>(aucun mot de passe)</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="73"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="79"/>
         <source>Error: </source>
         <translation>Erreur: </translation>
     </message>
@@ -229,22 +224,17 @@
 <context>
     <name>CDBFolderSqlite</name>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="30"/>
-        <source>All your data grouped by folders.</source>
-        <translation>Vos données groupées par dossiers.</translation>
-    </message>
-    <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="52"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="51"/>
         <source>SQLite Database</source>
         <translation>Base de données SQLite</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="62"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="61"/>
         <source>File: </source>
         <translation>Fichier:</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="66"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="65"/>
         <source>Error: </source>
         <translation>Erreur: </translation>
     </message>
@@ -1499,139 +1489,139 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Sélectionnez un fichier de base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="118"/>
+        <location filename="../gis/CGisListDB.cpp" line="116"/>
         <source>Add Database</source>
         <translation>Ajouter une base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <location filename="../gis/CGisListDB.cpp" line="119"/>
         <source>Add Folder</source>
         <translation>Ajouter un dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Rename Folder</source>
         <translation>Renommer dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="121"/>
         <source>Copy Folder</source>
         <translation>Copier dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="124"/>
+        <location filename="../gis/CGisListDB.cpp" line="122"/>
         <source>Move Folder</source>
         <translation>Déplacer dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Delete Folder</source>
         <translation>Supprimer le dossier</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="127"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Import from Files...</source>
         <translation>Importer depuis des fichiers ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="128"/>
+        <location filename="../gis/CGisListDB.cpp" line="126"/>
         <source>Export to GPX...</source>
         <translation>Exporter vers GPX...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="131"/>
-        <location filename="../gis/CGisListDB.cpp" line="147"/>
+        <location filename="../gis/CGisListDB.cpp" line="129"/>
+        <location filename="../gis/CGisListDB.cpp" line="145"/>
         <source>Delete Item</source>
         <translation>Supprimer un élément</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
         <source>Search Database</source>
         <translation>Rechercher dans la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="136"/>
+        <location filename="../gis/CGisListDB.cpp" line="134"/>
         <source>Sync. with Database</source>
         <translation>Synchroniser avec la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="137"/>
+        <location filename="../gis/CGisListDB.cpp" line="135"/>
         <source>Remove Database</source>
         <translation>Enlever la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="144"/>
+        <location filename="../gis/CGisListDB.cpp" line="142"/>
         <source>Empty</source>
         <translation>Vider</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="444"/>
+        <location filename="../gis/CGisListDB.cpp" line="442"/>
         <source>Remove database...</source>
         <translation>Enlever la base de données</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="444"/>
+        <location filename="../gis/CGisListDB.cpp" line="442"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Voulez-vous vraiment supprimere &apos;%1&apos; de la liste ?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="508"/>
+        <location filename="../gis/CGisListDB.cpp" line="506"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Etes-vous sûr de vouloir supprimer les dossiers selectionnés ainsi que leur sous-dossiers de la base de données ?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="676"/>
+        <location filename="../gis/CGisListDB.cpp" line="674"/>
         <source>Bad operation....</source>
         <translation>Mauvaise opération...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="676"/>
+        <location filename="../gis/CGisListDB.cpp" line="674"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>Le dossier cible est un sous-dossier de celui à déplacer. Cela ne fonctionnera pas.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="735"/>
+        <location filename="../gis/CGisListDB.cpp" line="733"/>
         <source>Folder name...</source>
         <translation>Name du dossier...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="735"/>
+        <location filename="../gis/CGisListDB.cpp" line="733"/>
         <source>Rename folder:</source>
         <translation>Renommer le dossier:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="864"/>
+        <location filename="../gis/CGisListDB.cpp" line="862"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1 du dossier %2?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="865"/>
+        <location filename="../gis/CGisListDB.cpp" line="863"/>
         <source>Delete...</source>
         <translation>Supprimer...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="1055"/>
+        <location filename="../gis/CGisListDB.cpp" line="1053"/>
         <source>Import GIS Data...</source>
         <translation>Importer des données SIG...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="508"/>
+        <location filename="../gis/CGisListDB.cpp" line="506"/>
         <source>Delete database folder...</source>
         <translation>Supprimer la base de données...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="756"/>
-        <location filename="../gis/CGisListDB.cpp" line="777"/>
+        <location filename="../gis/CGisListDB.cpp" line="754"/>
+        <location filename="../gis/CGisListDB.cpp" line="775"/>
         <source>Remove items...</source>
         <translation>Supprimer les éléments...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="756"/>
+        <location filename="../gis/CGisListDB.cpp" line="754"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Êtes-vous sûr de vouloir supprimer tous les éléments dans Perdu &amp; Trouvé ? Les éléments seront supprimés définitivement.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="777"/>
+        <location filename="../gis/CGisListDB.cpp" line="775"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Êtes-vous sûr de vouloir supprimer les éléments sélectionnés dans Perdu &amp; Trouvé ? Les éléments seront supprimés définitivement.</translation>
     </message>

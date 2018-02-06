@@ -25,7 +25,7 @@
 
 class CDBFolderMysql : public IDBFolderSql, public IDBMysql
 {
-    Q_DECLARE_TR_FUNCTIONS(CDBFolderMysql)
+    Q_OBJECT
 public:
     CDBFolderMysql(const QString &server, const QString &port, const QString &user, const QString &passwd, bool noPasswd, const QString &name, QTreeWidget *parent);
     virtual ~CDBFolderMysql() = default;
@@ -44,12 +44,17 @@ public:
     bool search(const QString& str, QSqlQuery& query) override;
 
     void copyFolder(quint64 child, quint64 parent) override;
-private:
+
+private slots:
+    void slotDelayedSetup();
+
+private:    
     const QString server;
     const QString port;
     const QString user;
-    const QString passwd;
+    const QString passwd;    
     const bool noPasswd;
+    const QString name;
 };
 
 #endif //CDBFOLDERMYSQL_H

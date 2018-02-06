@@ -29,10 +29,14 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     , user(user)
     , passwd(passwd)
     , noPasswd(noPasswd)
+    , name(name)
 {
-    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
     setText(CGisListDB::eColumnName, name);
+    QTimer::singleShot(200, this, SLOT(slotDelayedSetup()));
+}
 
+void CDBFolderMysql::slotDelayedSetup()
+{
     if(setupDB(server, port, user, passwd, noPasswd, name, name))
     {
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQL.png"));
@@ -45,6 +49,8 @@ CDBFolderMysql::CDBFolderMysql(const QString &server, const QString &port, const
     {
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/MySQLNoConn.png"));
     }
+
+    setToolTip(CGisListDB::eColumnName, getDBInfo());
 }
 
 QString CDBFolderMysql::getDBInfo() const

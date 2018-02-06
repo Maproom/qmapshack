@@ -89,8 +89,7 @@ CGisListDB::CGisListDB(QWidget *parent)
                     continue;
                 }
             }
-            CDBFolderSqlite *folder = new CDBFolderSqlite(filename, name, this);
-            folder->setToolTip(eColumnName, folder->getDBInfo());
+            CDBFolderSqlite *folder = new CDBFolderSqlite(filename, name, this);            
         }
         if(type == "MySQL")
         {
@@ -105,8 +104,7 @@ CGisListDB::CGisListDB(QWidget *parent)
                 cfg.endGroup(); // name
                 continue;
             }
-            CDBFolderMysql *folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);
-            folder->setToolTip(eColumnName, folder->getDBInfo());
+            CDBFolderMysql *folder = new CDBFolderMysql(server, port, user, passwd, noPasswd, name, this);            
         }
         cfg.endGroup(); // name
     }

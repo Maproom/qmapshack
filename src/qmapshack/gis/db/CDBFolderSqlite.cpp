@@ -27,10 +27,7 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
     : IDBFolderSql(IDB::db, parent)
     , filename(filename)
 {
-    setToolTip(CGisListDB::eColumnName, tr("All your data grouped by folders."));
-
     setText(CGisListDB::eColumnName, name);
-
     if(setupDB(filename, name, error))
     {
         setupFromDB();
@@ -44,6 +41,8 @@ CDBFolderSqlite::CDBFolderSqlite(const QString& filename, const QString& name, Q
 
         setIcon(CGisListDB::eColumnCheckbox, QIcon("://icons/32x32/SQLiteNoConn.png"));
     }
+
+    setToolTip(CGisListDB::eColumnName, getDBInfo());
 }
 
 QString CDBFolderSqlite::getDBInfo() const

@@ -534,7 +534,7 @@ void CGisItemOvlArea::setColor(const QColor& c)
 void CGisItemOvlArea::setIcon(const QString& c)
 {
     area.color  = c;
-    icon        = QPixmap("://icons/48x48/Area.png");
+    icon        = isNogo() ? QPixmap("://icons/48x48/NoGoArea.png") : QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(c) );
@@ -550,11 +550,11 @@ bool CGisItemOvlArea::setNogo(bool yes)
     {
         if(yes)
         {
-            changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
+            changed(tr("Changed to nogo-area"),"://icons/48x48/NoGoArea.png");
         }
         else
         {
-            changed(tr("Changed to normal area"),"://icons/48x48/WptProx.png");
+            changed(tr("Changed to normal area"),"://icons/48x48/Area.png");
         }
         return true;
     }

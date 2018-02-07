@@ -2307,7 +2307,7 @@ void CGisItemTrk::setColor(const QColor& c)
 void CGisItemTrk::setIcon(const QString& iconColor)
 {
     trk.color = iconColor;
-    icon      = QPixmap("://icons/48x48/Track.png");
+    icon      = isNogo() ? QPixmap("://icons/48x48/NoGoTrack.png") : QPixmap("://icons/48x48/Track.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );
@@ -2317,6 +2317,22 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
+bool CGisItemTrk::setNogo(bool yes)
+{
+    if (IGisItem::setNogo(yes))
+    {
+        if(yes)
+        {
+            changed(tr("Changed to nogo-line"),"://icons/48x48/NoGoTrack.png");
+        }
+        else
+        {
+            changed(tr("Changed to normal track"),"://icons/48x48/Track.png");
+        }
+        return true;
+    }
+    return false;
+}
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {

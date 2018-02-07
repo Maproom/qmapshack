@@ -373,7 +373,22 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
     changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
-
+bool CGisItemRte::setNogo(bool yes)
+{
+    if (IGisItem::setNogo(yes))
+    {
+        if(yes)
+        {
+            changed(tr("Changed to nogo-line"),"://icons/48x48/NoGoRoute.png");
+        }
+        else
+        {
+            changed(tr("Changed to normal route"),"://icons/48x48/Route.png");
+        }
+        return true;
+    }
+    return false;
+}
 
 QString CGisItemRte::getInfo(quint32 feature) const
 {

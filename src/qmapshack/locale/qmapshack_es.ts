@@ -200,23 +200,28 @@
 <context>
     <name>CDBFolderMysql</name>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="59"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="33"/>
+        <source>All your data grouped by folders.</source>
+        <translation>Todos tus datos agrupados en carpetas.</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="53"/>
         <source>MySQL Database</source>
         <translation>Mi base de datos SQL</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="62"/>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="66"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="56"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="60"/>
         <source>Server: </source>
         <translation>Servidor:</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="71"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="65"/>
         <source> (No PW)</source>
         <translation>(Sin PW)</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderMysql.cpp" line="79"/>
+        <location filename="../gis/db/CDBFolderMysql.cpp" line="73"/>
         <source>Error: </source>
         <translation>Error: </translation>
     </message>
@@ -224,17 +229,22 @@
 <context>
     <name>CDBFolderSqlite</name>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="51"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="30"/>
+        <source>All your data grouped by folders.</source>
+        <translation>Todos tus datos agrupados en carpetas.</translation>
+    </message>
+    <message>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="52"/>
         <source>SQLite Database</source>
         <translation>Base de Datos SQLite</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="61"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="62"/>
         <source>File: </source>
         <translation>Archivo:</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBFolderSqlite.cpp" line="65"/>
+        <location filename="../gis/db/CDBFolderSqlite.cpp" line="66"/>
         <source>Error: </source>
         <translation>Error: </translation>
     </message>
@@ -711,6 +721,14 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     </message>
 </context>
 <context>
+    <name>CFilterSpeed</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="184"/>
+        <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CFitCrcState</name>
     <message>
         <location filename="../gis/fit/decoder/CFitCrcState.cpp" line="32"/>
@@ -1170,7 +1188,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="458"/>
         <source>Invalid slopes!</source>
-        <translation>¡Pendientes inválidas!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="594"/>
@@ -1348,24 +1366,29 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Marcas de tiempo ficticias con incremento de %1 sec.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="346"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="413"/>
+        <source>Changed average speed depending on slope to %1%2.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="439"/>
         <source>Changed speed to %1%2.</source>
-        <translation>Velocidad modificada a %1%2.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="365"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="465"/>
         <source>%1 (Segment %2)</source>
-        <translation>%1 (Segmento %2)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="383"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="483"/>
         <source>Removed extension %1 from all Track Points</source>
-        <translation>Eliminada extensión %1 a todos los puntos del track</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="394"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="494"/>
         <source>Converted subpoints from routing to track points</source>
-        <translation>Convertidos puntos secundarios del ruteo a puntos de track</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -1489,139 +1512,139 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Seleccionar archivo de base de datos.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="118"/>
         <source>Add Database</source>
         <translation>Añadir Base de Datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
+        <location filename="../gis/CGisListDB.cpp" line="121"/>
         <source>Add Folder</source>
         <translation>Añadir carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="122"/>
         <source>Rename Folder</source>
         <translation>Renombrar carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Copy Folder</source>
         <translation>Copiar carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Move Folder</source>
         <translation>Mover carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Delete Folder</source>
         <translation>Eliminar Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
         <source>Import from Files...</source>
         <translation>Importar desde archivos..</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="126"/>
+        <location filename="../gis/CGisListDB.cpp" line="128"/>
         <source>Export to GPX...</source>
         <translation>Exportar a GPX...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="129"/>
-        <location filename="../gis/CGisListDB.cpp" line="145"/>
+        <location filename="../gis/CGisListDB.cpp" line="131"/>
+        <location filename="../gis/CGisListDB.cpp" line="147"/>
         <source>Delete Item</source>
         <translation>Eliminar Elemento</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="135"/>
         <source>Search Database</source>
         <translation>Buscar base de datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="134"/>
+        <location filename="../gis/CGisListDB.cpp" line="136"/>
         <source>Sync. with Database</source>
         <translation>Sincronizar con base de datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="137"/>
         <source>Remove Database</source>
         <translation>Quitar Base de Datos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="142"/>
+        <location filename="../gis/CGisListDB.cpp" line="144"/>
         <source>Empty</source>
         <translation>Vacío</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="444"/>
         <source>Remove database...</source>
         <translation>Quitar Base de Datos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="444"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>¿Seguro que quiere eliminar &apos;%1&apos; de la lista?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="508"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>¿Está seguro que quiere borrar las carpetas seleccionadas y sus subcarpetas de la base de datos?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="676"/>
         <source>Bad operation....</source>
         <translation>Mala operación...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="676"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>La carpeta de destino es una subcarpeta de la que se va a mover. Esto no funcionará.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="735"/>
         <source>Folder name...</source>
         <translation>Nombre de carpeta...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="735"/>
         <source>Rename folder:</source>
         <translation>Renombrar carpeta:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="862"/>
+        <location filename="../gis/CGisListDB.cpp" line="864"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>¿Desea realmente eliminar &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="863"/>
+        <location filename="../gis/CGisListDB.cpp" line="865"/>
         <source>Delete...</source>
         <translation>Borrar...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="1053"/>
+        <location filename="../gis/CGisListDB.cpp" line="1055"/>
         <source>Import GIS Data...</source>
         <translation>Importar datos GIS...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="508"/>
         <source>Delete database folder...</source>
         <translation>Eliminar Carpeta de la Base de Datos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="756"/>
+        <location filename="../gis/CGisListDB.cpp" line="777"/>
         <source>Remove items...</source>
         <translation>Eliminar elementos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
+        <location filename="../gis/CGisListDB.cpp" line="756"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>¿Desea realmente eliminar todos los elementos de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="777"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>¿Desea realmente eliminar todos los elementos.seleccionados de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
     </message>
@@ -4629,121 +4652,88 @@ no es una definición de sistema de coordenadas válido:
 <context>
     <name>CRtOpenSky</name>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="96"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="84"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
-        <translation>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;Un servicio en línea que proporciona datos de posición de aeronaves civiles.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="170"/>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="145"/>
         <source>unkn.</source>
-        <translation>Desc.</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="201"/>
-        <source>key:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
-        <source>callsign:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="171"/>
+        <source>callsign:        %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
-        <source>origin country:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="172"/>
+        <source>origin country:  %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
-        <source>time position:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="173"/>
+        <source>time position:   %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
-        <source>last contact:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="174"/>
+        <source>last contact:    %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
-        <source>longitude:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="175"/>
+        <source>longitude:       %1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
-        <source>latitude:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="176"/>
+        <source>latitude:        %1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
-        <source>geo. alt.:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="177"/>
+        <source>geo. alt.:       %1m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
-        <source>on ground:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="178"/>
+        <source>on ground:       %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
-        <source>velocity:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="179"/>
+        <source>velocity:        %1km/h</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
-        <source>heading:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="180"/>
+        <source>heading:         %1°</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
-        <source>vert. rate:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="181"/>
+        <source>vert. rate:      %1m/s</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
-        <source>baro. alt.:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="182"/>
+        <source>baro. alt.:      %1m</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
-        <source>squawk:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="183"/>
+        <source>squawk:          %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
-        <source>spi:</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="184"/>
+        <source>spi:             %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
-        <source>position source:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>CRtOpenSkyInfo</name>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
-        <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
-        <source>Select record file</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Reset record...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
-        <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
-        <source>Failed...</source>
+        <location filename="../realtime/opensky/CRtOpenSky.cpp" line="185"/>
+        <source>position source: %1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4752,7 +4742,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation>Seleccione una fuente en tiempo real de la lista. Algunas fuentes se pueden agregar varias veces, el resto solo se pueden agregar en una sola instancia.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4760,17 +4750,17 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
         <source>To add a real time source do a right click on the list above. </source>
-        <translation>Para agregar una fuente en tiempo real haga un clic derecho en la lista de arriba.</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Delete Source...</source>
-        <translation type="unfinished">Borrar Fuente...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Do you really want to remove the realtime source?</source>
-        <translation>¿Realmente quiere eliminar esta fuente en tiempo real?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4868,22 +4858,22 @@ no es una definición de sistema de coordenadas válido:
         <translation>SQL no se puede utilizar en este momento, ya que el controlador correspondiente (QMYSQL) no está disponible.&lt;br /&gt;Asegúrese de haber instalado el paquete correspondiente.&lt;br /&gt;Si usted no sabe qué hacer ahora debe &lt;a href=&quot;%1&quot;&gt;consultar la wiki&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="103"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="102"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="103"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="102"/>
         <source>There is already a database with name &apos;%1&apos;</source>
         <translation>Ya existe una base de datos con el nombre &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="116"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="115"/>
         <source>New database...</source>
         <translation>Nueva base de datos...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CSetupDatabase.cpp" line="141"/>
+        <location filename="../gis/db/CSetupDatabase.cpp" line="140"/>
         <source>Open database...</source>
         <translation>Abrir base de datos...</translation>
     </message>
@@ -6899,24 +6889,109 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
 <context>
     <name>IFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="14"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="23"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="35"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="353"/>
+        <source>at positive Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="311"/>
+        <source>Max Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="363"/>
+        <source>Min Speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="441"/>
+        <source>at negative Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="373"/>
+        <source>Uphill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="393"/>
+        <source>Speed at zero Slope</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="321"/>
+        <source>Plain Level:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="492"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="539"/>
+        <source>not yet implemented</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="52"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Modificar Velocidad&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="44"/>
-        <source>Set speed to </source>
-        <translation>Ajustar velocidad a </translation>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="75"/>
+        <source>labelWarning</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="51"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="160"/>
+        <source>speed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="238"/>
+        <source> Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="560"/>
+        <source>Constant</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="565"/>
+        <source>Cycling</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="570"/>
+        <source>Hiking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="167"/>
         <source> km/h</source>
         <translation> km/h</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="383"/>
+        <source>Downhill:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="495"/>
+        <source>Set min/max slopes from Track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="99"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply filter now.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
@@ -7419,7 +7494,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="276"/>
         <source>Realtime</source>
-        <translation>Tiempo Real</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="289"/>
@@ -7612,7 +7687,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="769"/>
         <source>Setup Map Background</source>
-        <translation>Configuración del Fondo del Mapa</translation>
+        <translation>Configuración del Mapa de Fondo</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="781"/>
@@ -7687,7 +7762,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="871"/>
         <source>Start QMapTool</source>
-        <translation>Iniciar QMapTool</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="246"/>
@@ -8870,96 +8945,29 @@ o
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
         <source>-</source>
         <translation type="unfinished">-</translation>
     </message>
     <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <source>Last update</source>
-        <translation>Última actualización</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
-        <source>Aircrafts seen:</source>
-        <translation>Aviones vistos:</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
+        <source>Aircrafts seen:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>Show names</source>
-        <translation>Mostrar nombres</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
-        <translation>Vea &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; para más detalles.</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
-        <source>Enter a valid key.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
-        <source>Record by key</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
-        <source>Start recording.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="125"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="148"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
-        <source>...</source>
-        <translation type="unfinished">...</translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
-        <source>Pause recording.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
-        <source>Convert record to track.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
-        <source>Reset record.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
-        <source>Select record file.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>IRtRecord</name>
-    <message>
-        <location filename="../realtime/IRtRecord.cpp" line="44"/>
-        <source>Failed to open record for reading.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/IRtRecord.cpp" line="63"/>
-        <source>Failed to read entry. Truncate record to last valid entry.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/IRtRecord.cpp" line="81"/>
-        <source>Failed to open record for writing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../realtime/IRtRecord.cpp" line="94"/>
-        <source>Failed to write entry.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -8968,7 +8976,7 @@ o
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
         <source>Select a source...</source>
-        <translation>Seleccione una fuente...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8991,12 +8999,12 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
         <source>Add Source</source>
-        <translation>Añadir fuente</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="124"/>
         <source>Delete Source</source>
-        <translation>Borrar Fuente</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -10499,18 +10507,18 @@ o
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="778"/>
+        <location filename="../units/IUnit.cpp" line="792"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Formato de coordenadas incorrecto. Debe ser: &quot;[N|S] ggg mm.sss [W|E] ggg mm.sss&quot; o &quot;[N|S] ggg.ggg [W|E] ggg.ggg&quot;</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="784"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Position values out of bounds. </source>
         <translation>Valores de posición fuera del límite.</translation>
     </message>
@@ -10523,42 +10531,42 @@ o
         <translation>Configurar unidades...</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="24"/>
+        <location filename="../units/IUnitsSetup.ui" line="36"/>
         <source>Length unit</source>
         <translation>Unidad de longitud</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="30"/>
+        <location filename="../units/IUnitsSetup.ui" line="48"/>
         <source>Nautical</source>
-        <translation>Náutico</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="44"/>
+        <location filename="../units/IUnitsSetup.ui" line="74"/>
         <source>Metric</source>
         <translation>Métrico</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="52"/>
+        <location filename="../units/IUnitsSetup.ui" line="80"/>
         <source>Slope unit</source>
         <translation>&quot;&gt;Unidad de pendiente</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="58"/>
+        <location filename="../units/IUnitsSetup.ui" line="92"/>
         <source>Degrees (°)</source>
         <translation>Grados (°)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="65"/>
+        <location filename="../units/IUnitsSetup.ui" line="105"/>
         <source>Percent (%)</source>
         <translation>Porcentaje (%)</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="95"/>
+        <location filename="../units/IUnitsSetup.ui" line="133"/>
         <source>&lt;b&gt;Note:&lt;/b&gt; For some GUI elements changing the units will not take effect until you restart QMapShack.</source>
         <translation>&lt;b&gt;Nota:&lt;/b&gt; Para algunos elementos de la interfaz de usuario, cambiar las unidades no tendrá efecto hasta que se reinicie QMapShack.</translation>
     </message>
     <message>
-        <location filename="../units/IUnitsSetup.ui" line="37"/>
+        <location filename="../units/IUnitsSetup.ui" line="61"/>
         <source>Imperial</source>
         <translation>Imperial</translation>
     </message>

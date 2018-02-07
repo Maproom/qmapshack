@@ -297,6 +297,8 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
         polygonArea << pt1;
     }
 
+    const pt_t &pt = area.pts.first();
+
     gis->convertRad2Px(polygonArea);
 
     p.save();
@@ -312,6 +314,14 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(polygonArea);
+
+    //close polygon (required by isCloseTo)
+    pt1.setX(pt.lon);
+    pt1.setY(pt.lat);
+    pt1 *= DEG_TO_RAD;
+    gis->convertRad2Px(pt1);
+    polygonArea << pt1;
+
     p.restore();
 }
 

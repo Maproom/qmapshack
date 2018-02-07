@@ -228,23 +228,26 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<point_t>& routePoints, 
     }
 
     QString nogos;
-    isNext = false;
+    bool isNextNogo = false;
 
     for(const disc_t &pt : discs)
     {
-        if (isNext)
+        if (isNextNogo)
         {
             nogos.append(QString("|%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad));
         }
         else
         {
             nogos = QString("%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad);
-            isNext = true;
+            isNextNogo = true;
         }
     }
 
     QString nogoPolygons;
+    QString nogoPolylines;
+
     bool isNextPolygon = false;
+    bool isNextPolyline = false;
 
     for(const polygon_t &p : polygons)
     {
@@ -252,33 +255,60 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<point_t>& routePoints, 
         {
             continue;
         }
+        QString nogoPoints;
         bool isNextPoint = false;
         for (const point_t point : p.points)
         {
             if (isNextPoint)
             {
-                nogoPolygons.append(QString(",%1,%2").arg(point.lon).arg(point.lat));
+                nogoPoints.append(QString(",%1,%2").arg(point.lon).arg(point.lat));
             }
             else
             {
-                if (isNextPolygon)
-                {
-                    nogoPolygons.append(QString("|%1,%2").arg(point.lon).arg(point.lat));
-                }
-                else
-                {
-                    nogoPolygons = QString("%1,%2").arg(point.lon).arg(point.lat);
-                    isNextPolygon = true;
-                }
+                nogoPoints.append(QString("%1,%2").arg(point.lon).arg(point.lat));
                 isNextPoint = true;
+            }
+        }
+        if (p.closed)
+        {
+            if (isNextPolygon)
+            {
+                nogoPolygons.append(QString("|%1").arg(nogoPoints));
+            }
+            else
+            {
+                nogoPolygons = nogoPoints;
+                isNextPolygon = true;
+            }
+        }
+        else
+        {
+            if (isNextPolyline)
+            {
+                nogoPolylines.append(QString("|%1").arg(nogoPoints));
+            }
+            else
+            {
+                nogoPolylines = nogoPoints;
+                isNextPolyline = true;
             }
         }
     }
 
     QUrlQuery urlQuery;
     urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
-    urlQuery.addQueryItem("nogos", nogos.toLatin1());
-    urlQuery.addQueryItem("polygons", nogoPolygons.toLatin1());
+    if (isNextNogo)
+    {
+        urlQuery.addQueryItem("nogos", nogos.toLatin1());
+    }
+    if (isNextPolygon)
+    {
+        urlQuery.addQueryItem("polygons", nogoPolygons.toLatin1());
+    }
+    if (isNextPolyline)
+    {
+        urlQuery.addQueryItem("polylines", nogoPolylines.toLatin1());
+    }
     urlQuery.addQueryItem("profile", comboProfile->currentData().toString());
     urlQuery.addQueryItem("alternativeidx", comboAlternative->currentData().toString());
     urlQuery.addQueryItem("format", "gpx");

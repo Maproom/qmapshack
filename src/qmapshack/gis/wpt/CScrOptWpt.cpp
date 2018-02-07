@@ -45,7 +45,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     toolBubble->setChecked(wpt->hasBubble());
     bool radius = wpt->hasRadius();
     toolNogoArea->setEnabled(radius);
-    toolNogoArea->setChecked(radius && wpt->isNogoArea());
+    toolNogoArea->setChecked(radius && wpt->isNogo());
     toolDelRadius->setEnabled(radius);
 
     anchor = wpt->getPointCloseBy(point);

@@ -99,11 +99,7 @@ public:
     void setComment(const QString& str)       override;
     void setDescription(const QString& str)   override;
     void setLinks(const QList<link_t>& links) override;
-    void setNogoArea(bool yes);
-    bool isNogoArea()
-    {
-        return bool(flags & eFlagNogo);
-    }
+    bool setNogo(bool yes) override;
 
     void save(QDomNode& gpx, bool strictGpx11) override;
     void edit() override;

@@ -1151,7 +1151,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 bool radius = wpt->hasRadius();
                 actionDelRadiusWpt->setEnabled(isProjectVisible && radius);
                 actionNogoAreaWpt->setEnabled(isProjectVisible && radius);
-                actionNogoAreaWpt->setChecked(radius && wpt->isNogoArea());
+                actionNogoAreaWpt->setChecked(radius && wpt->isNogo());
                 actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);

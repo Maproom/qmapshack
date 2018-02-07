@@ -682,42 +682,53 @@ void IGisProject::getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter:
 
     for(int i = 0; i < childCount(); i++)
     {
-        QTreeWidgetItem * treeItem = child(i);
-        switch(treeItem->type())
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if (item != nullptr && !item->isHidden() && item->isNogo())
         {
-        case IGisItem::eTypeWpt:
-        {
-            CGisItemWpt * item = static_cast<CGisItemWpt*>(child(i));
-            if(!item->isHidden() && item->isNogoArea())
+            switch(item->type())
             {
-                const qreal& rad = item->getProximity();
+            case IGisItem::eTypeWpt:
+            {
+                CGisItemWpt * wpt = static_cast<CGisItemWpt*>(item);
+                const qreal& rad = wpt->getProximity();
                 if (rad != NOFLOAT && rad > 0.)
                 {
-                    const QPointF& pos = item->getPosition();
+                    const QPointF& pos = wpt->getPosition();
                     discs << IRouter::disc_t(pos.y(),pos.x(),rad);
                 }
+                break;
             }
-            break;
-        }
-        case IGisItem::eTypeOvl:
-        {
-            CGisItemOvlArea * item = static_cast<CGisItemOvlArea*>(child(i));
-            if(!item->isHidden() && item->isNogoArea())
+            case IGisItem::eTypeOvl:
+            case IGisItem::eTypeRte:
+            case IGisItem::eTypeTrk:
             {
-                const CGisItemOvlArea::area_t &area = item->getAreaData();
-                if (area.pts.size() > 0)
+                IGisLine* line = dynamic_cast<IGisLine*>(item);
+                Q_ASSERT(line!=nullptr);
+                SGisLine sline;
+                line->getPolylineFromData(sline);
+                int size = sline.size();
+                for (const IGisLine::point_t & pt : sline)
                 {
-                    IRouter::polygon_t nogos(area.pts.size());
+                    size+=pt.subpts.size();
+                }
+                if (size > 0)
+                {
+                    IRouter::polygon_t nogos(size);
+                    nogos.closed = item->type() == IGisItem::eTypeOvl;
                     int i=0;
-                    for (const CGisItemOvlArea::pt_t & pt : area.pts)
+                    for (const IGisLine::point_t & pt : sline)
                     {
-                        nogos.points.replace(i++,IRouter::point_t(pt.lat,pt.lon));
+                        nogos.points.replace(i++,IRouter::point_t(pt.coord.y()*RAD_TO_DEG,pt.coord.x()*RAD_TO_DEG));
+                        for (const IGisLine::subpt_t subpt : pt.subpts)
+                        {
+                            nogos.points.replace(i++,IRouter::point_t(subpt.coord.y()*RAD_TO_DEG,subpt.coord.x()*RAD_TO_DEG));
+                        }
                     }
                     polygons << nogos;
                 }
+                break;
             }
-            break;
-        }
+            }
         }
     }
 }

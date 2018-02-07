@@ -129,8 +129,10 @@ void CDetailsOvlArea::slotNogo(bool yes)
     {
         return;
     }
-    area.setNogoArea(yes);
-    setupGui();
+    if (area.setNogo(yes))
+    {
+        setupGui();
+    }
 }
 
 void CDetailsOvlArea::slotChangeReadOnlyMode(bool on)
@@ -223,7 +225,7 @@ void CDetailsOvlArea::setupGui()
     checkOpacity->setChecked(area.getOpacity());
 
     checkNogo->setEnabled(!isReadOnly);
-    checkNogo->setChecked(area.isNogoArea());
+    checkNogo->setChecked(area.isNogo());
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));

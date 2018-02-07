@@ -453,6 +453,11 @@ public:
      */
     virtual IGisItem * createClone() = 0;
 
+    virtual bool setNogo(bool yes);
+    bool isNogo()
+    {
+        return bool(flags & eFlagNogo);
+    }
 
     IGisProject * getParentProject() const;
 

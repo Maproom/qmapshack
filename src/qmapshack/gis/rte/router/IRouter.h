@@ -70,6 +70,8 @@ public:
         }
 
         QVector<point_t> points;
+
+        bool closed;
     };
 
     IRouter(bool fastRouting, QWidget * parent);

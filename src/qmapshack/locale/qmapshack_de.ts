@@ -6960,7 +6960,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="539"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="542"/>
         <source>not yet implemented</source>
         <translation type="unfinished"></translation>
     </message>
@@ -6985,18 +6985,13 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="560"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="563"/>
         <source>Constant</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="565"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="568"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="570"/>
-        <source>Hiking</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

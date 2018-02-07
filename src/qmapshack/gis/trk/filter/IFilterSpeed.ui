@@ -131,7 +131,7 @@
    <item row="1" column="5">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="pageConstant">
       <layout class="QGridLayout" name="gridLayout_3">
@@ -517,6 +517,9 @@
       </layout>
      </widget>
      <widget class="QWidget" name="pageHiking">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <layout class="QGridLayout" name="gridLayout_4">
        <property name="leftMargin">
         <number>0</number>
@@ -563,11 +566,6 @@
        <item>
         <property name="text">
          <string>Cycling</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Hiking</string>
         </property>
        </item>
       </widget>

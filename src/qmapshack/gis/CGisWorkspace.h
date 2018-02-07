@@ -342,7 +342,7 @@ public:
 
     void deleteWptRadius(const IGisItem::key_t &key);
 
-    void toggleWptNogoArea(const IGisItem::key_t &key);
+    void toggleNogoItem(const IGisItem::key_t &key);
 
     void editWptRadius(const IGisItem::key_t &key);
 

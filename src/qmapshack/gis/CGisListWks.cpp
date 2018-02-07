@@ -162,6 +162,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
     actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
+    actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGoTrack.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
+    actionNogoTrk->setCheckable(true);
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
     connect(menuItemTrk, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -175,8 +177,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
-    actionNogoAreaWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"), tr("Toggle Nogo-Area"), this, SLOT(slotNogoAreaWpt()));
-    actionNogoAreaWpt->setCheckable(true);
+    actionNogoWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"),  tr("Toggle Nogo-Area"),  this, SLOT(slotNogoItem()));
+    actionNogoWpt->setCheckable(true);
     actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
@@ -193,6 +195,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditRte    = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
     actionReverseRte = menuItemRte->addAction(QIcon("://icons/32x32/Reverse.png"),  tr("Reverse Route"),   this, SLOT(slotReverseRte()));
     actionRte2Trk    = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
+    actionNogoRte    = menuItemRte->addAction(QIcon("://icons/32x32/NoGoRoute.png"),tr("Toggle Nogo-Line"),this, SLOT(slotNogoItem()));
+    actionNogoRte->setCheckable(true);
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
     connect(menuItemRte, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -202,6 +206,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemOvl->addAction(actionCopyItem);
     menuItemOvl->addSeparator();
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
+    actionNogoArea  = menuItemOvl->addAction(QIcon("://icons/32x32/NoGoArea.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
+    actionNogoArea->setCheckable(true);
     menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);
     connect(menuItemOvl, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -1135,6 +1141,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionRangeTrk->setEnabled(isProjectVisible && !isOnDevice);
                 actionReverseTrk->setDisabled(isOnDevice);
                 actionEditTrk->setEnabled(isProjectVisible && !isOnDevice);
+                actionNogoTrk->setEnabled(isProjectVisible);
+                actionNogoTrk->setChecked(gisItem->isNogo());
                 actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 actionFocusTrk->setEnabled(isProjectVisible);
@@ -1150,8 +1158,8 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionEditRadiusWpt->setEnabled(isProjectVisible);
                 bool radius = wpt->hasRadius();
                 actionDelRadiusWpt->setEnabled(isProjectVisible && radius);
-                actionNogoAreaWpt->setEnabled(isProjectVisible && radius);
-                actionNogoAreaWpt->setChecked(radius && wpt->isNogo());
+                actionNogoWpt->setEnabled(isProjectVisible && radius);
+                actionNogoWpt->setChecked(radius && wpt->isNogo());
                 actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
                 menuItemWpt->exec(p);
@@ -1163,12 +1171,16 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionFocusRte->setEnabled(isProjectVisible);
                 actionCalcRte->setEnabled(isProjectVisible);
                 actionEditRte->setEnabled(isProjectVisible);
+                actionNogoRte->setEnabled(isProjectVisible);
+                actionNogoRte->setChecked(gisItem->isNogo());
                 actionResetRte->setEnabled(isProjectVisible);
                 menuItemRte->exec(p);
                 break;
 
             case IGisItem::eTypeOvl:
                 actionEditArea->setEnabled(isProjectVisible && !isOnDevice);
+                actionNogoArea->setEnabled(isProjectVisible);
+                actionNogoArea->setChecked(gisItem->isNogo());
                 menuItemOvl->exec(p);
                 break;
             }
@@ -1457,14 +1469,14 @@ void CGisListWks::slotBubbleWpt()
     }
 }
 
-void CGisListWks::slotNogoAreaWpt()
+void CGisListWks::slotNogoItem()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
-    CGisItemWpt * gisItem = dynamic_cast<CGisItemWpt*>(currentItem());
+    IGisItem * gisItem = dynamic_cast<IGisItem*>(currentItem());
     if(gisItem != nullptr)
     {
-        CGisWorkspace::self().toggleWptNogoArea(gisItem->getKey());
+        CGisWorkspace::self().toggleNogoItem(gisItem->getKey());
     }
 }
 
@@ -1679,7 +1691,6 @@ void CGisListWks::slotEditArea()
         CGisWorkspace::self().editAreaByKey(gisItem->getKey());
     }
 }
-
 
 void CGisListWks::slotAddEmptyProject()
 {

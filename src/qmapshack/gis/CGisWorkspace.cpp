@@ -716,13 +716,13 @@ void CGisWorkspace::deleteWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::toggleWptNogoArea(const IGisItem::key_t &key)
+void CGisWorkspace::toggleNogoItem(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(nullptr != wpt)
+    IGisItem * item = getItemByKey(key);
+    if(nullptr != item)
     {
-        wpt->toggleNogoArea();
+        item->setNogo(!item->isNogo());
     }
 }
 

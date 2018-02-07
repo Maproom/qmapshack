@@ -39,6 +39,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
         anchor = point;
     }
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    toolNogo->setChecked(area->isNogo());
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptOvlArea::hide);
@@ -50,6 +51,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptOvlArea::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
+    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
 }
 
 CScrOptOvlArea::~CScrOptOvlArea()
@@ -77,6 +79,12 @@ void CScrOptOvlArea::slotDelete()
 void CScrOptOvlArea::slotEdit()
 {
     CGisWorkspace::self().editAreaByKey(key);
+    close();
+}
+
+void CScrOptOvlArea::slotNogo()
+{
+    CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 

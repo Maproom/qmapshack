@@ -46,6 +46,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
         anchor = point;
     }
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
+    toolNogo->setChecked(rte->isNogo());
     show();
 
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptRte::hide);
@@ -66,6 +67,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolReverse,     &QToolButton::clicked, this, &CScrOptRte::slotReverse);
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
     connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
+    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptRte::slotNogo);
 }
 
 CScrOptRte::~CScrOptRte()
@@ -123,6 +125,12 @@ void CScrOptRte::slotInstruction(bool on)
 void CScrOptRte::slotToTrack()
 {
     CGisWorkspace::self().convertRouteToTrack(key);
+    close();
+}
+
+void CScrOptRte::slotNogo()
+{
+    CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 

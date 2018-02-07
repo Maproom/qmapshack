@@ -890,12 +890,11 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-void CGisItemWpt::toggleNogoArea()
+bool CGisItemWpt::setNogo(bool yes)
 {
-    bool nogo = !isNogo();
-    if (setNogo(nogo))
+    if (IGisItem::setNogo(yes))
     {
-        if (nogo)
+        if (yes)
         {
             changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
         }
@@ -903,7 +902,9 @@ void CGisItemWpt::toggleNogoArea()
         {
             changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
         }
+        return true;
     }
+    return false;
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)

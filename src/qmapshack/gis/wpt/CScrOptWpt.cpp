@@ -120,7 +120,7 @@ void CScrOptWpt::slotDeleteRadius()
 
 void CScrOptWpt::slotNogoArea()
 {
-    CGisWorkspace::self().toggleWptNogoArea(key);
+    CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 

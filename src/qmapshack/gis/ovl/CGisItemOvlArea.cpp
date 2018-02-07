@@ -544,22 +544,19 @@ void CGisItemOvlArea::setIcon(const QString& c)
     QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
-void CGisItemOvlArea::setNogoArea(bool yes)
+bool CGisItemOvlArea::setNogo(bool yes)
 {
-    if(yes)
+    if (IGisItem::setNogo(yes))
     {
-        if(!(flags & eFlagNogo))
+        if(yes)
         {
-            flags |= eFlagNogo;
             changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
         }
-    }
-    else
-    {
-        if(flags & eFlagNogo)
+        else
         {
-            flags &= ~eFlagNogo;
             changed(tr("Changed to normal area"),"://icons/48x48/WptProx.png");
         }
+        return true;
     }
+    return false;
 }

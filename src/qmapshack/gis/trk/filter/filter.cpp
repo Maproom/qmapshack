@@ -321,6 +321,99 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
+void CGisItemTrk::filterSpeed(qreal plainSpeed,
+                              qreal minSpeed, qreal slopeAtMinSpeed,
+                              qreal maxSpeed, qreal slopeAtMaxSpeed)
+{
+   QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime().toUTC();
+    }
+
+    qreal averageSpeed = 0, speed = 0;
+    qint32 noOfPoints = 0;
+
+    QEasingCurve upHillCurve(QEasingCurve::OutQuad);
+    QEasingCurve downHillCurve(QEasingCurve::InQuad);
+
+    // Debug only - start
+    qreal minP = -100000;
+    qreal maxP = 100000;
+    qreal minD = -100000;
+    qreal maxD = 100000;
+    qreal minS = 100000;
+    qreal maxS = -100000;
+    // Debug only - end
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+        // calculation based on slope2 (Percent)
+        qreal slope = pt.slope2;
+        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
+        {
+            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
+        }
+
+        if(slope < slopeAtMaxSpeed)
+        {
+           speed = maxSpeed;
+        }
+        else if(slope < 0 && slope >= slopeAtMaxSpeed)
+        {
+            speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(slope / slopeAtMaxSpeed);
+            // Debug only - start
+            maxP = qMin(maxP, pt.slope2);
+            maxD = qMin(maxD, pt.slope1);
+            maxS = qMax(maxS, speed);
+            // Debug only - end
+        }
+        else if(slope == 0)
+        {
+           speed = plainSpeed;
+        }
+        else if(slope > 0 && slope <= slopeAtMinSpeed)
+        {
+//             (P0Y-P1Y)/POTENZ(P1X;2)*POTENZ(P1X-slope;2)+P1Y old math
+//            speed = (linearSpeed - minSpeed) / pow(slopeAtMinSpeed , 2) * pow(slopeAtMinSpeed - slope, 2) + minSpeed;
+            speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(slope / slopeAtMinSpeed);
+
+            // Debug only - start
+            minP = qMax(minP, pt.slope2);
+            minD = qMax(minD, pt.slope1);
+            minS = qMin(minS, speed);
+            // Debug only - end
+        }
+        else if(slope > slopeAtMinSpeed)
+        {
+            speed = minSpeed;
+        }
+//        qDebug() << "pt.slope: " << slope << " speed: " << speed*3.6 << "\n";
+
+        timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
+        pt.time   = timestamp;
+
+        averageSpeed += speed;
+        ++noOfPoints;
+    }
+//    qDebug() << "KKA: Min Speed=" << minS * 3.6 << "Max Speed=" << maxS * 3.6;
+
+    if (noOfPoints)
+    {
+        speed = averageSpeed / noOfPoints;
+
+        deriveSecondaryData();
+        QString val, unit;
+        IUnit::self().meter2speed(speed, val, unit);
+        changed(tr("Changed average speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    }
+}
+
 void CGisItemTrk::filterSpeed(qreal speed)
 {
     QDateTime timestamp = timeStart;
@@ -344,6 +437,13 @@ void CGisItemTrk::filterSpeed(qreal speed)
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+}
+
+void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope)
+{
+    const limits_t& limit = extrema["::ql:slope"];
+    minSlope = limit.min;
+    maxSlope = limit.max;
 }
 
 void CGisItemTrk::filterSplitSegment()

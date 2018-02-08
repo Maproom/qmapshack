@@ -2307,14 +2307,12 @@ void CGisItemTrk::setColor(const QColor& c)
 void CGisItemTrk::setIcon(const QString& iconColor)
 {
     trk.color = iconColor;
-    icon      = isNogo() ? QPixmap("://icons/48x48/NoGoTrack.png") : QPixmap("://icons/48x48/Track.png");
+    QPixmap icon = QPixmap("://icons/48x48/Track.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    icon = mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
+    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 bool CGisItemTrk::setNogo(bool yes)

@@ -344,8 +344,7 @@ void CGisItemRte::toTrack()
 
 void CGisItemRte::setSymbol()
 {
-    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    setIcon(CGisListWks::eColumnIcon, icon);
+    IGisItem::setIcon(QPixmap("://icons/48x48/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void CGisItemRte::setName(const QString& str)

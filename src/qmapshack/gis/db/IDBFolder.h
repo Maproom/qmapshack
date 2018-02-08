@@ -143,6 +143,8 @@ public:
      */
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
+    static QString getNameEx(const QString& dbName, quint64 id);
+
     bool operator<(const QTreeWidgetItem &other) const override;
 
     void updateItemsOnWks();
@@ -209,6 +211,7 @@ protected:
 
     bool getBoolProperty(const char * name, bool defaultValue) const;
 
+    static QString getNameEx(QSqlDatabase& db, quint64 id, const QString& name);
 
     QSqlDatabase& db;
 

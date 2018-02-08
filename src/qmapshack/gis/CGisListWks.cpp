@@ -1710,10 +1710,9 @@ void CGisListWks::slotAddEmptyProject()
         quint64 idParent;
         QString db;
         QString host;
-        QString name1;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, host, name1, this);
+        CSelectDBFolder dlg1(idParent, db, host, this);
         if(dlg1.exec() == QDialog::Rejected)
         {
             return;

@@ -26,7 +26,7 @@ class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
 {
     Q_OBJECT
 public:
-    CSelectDBFolder(quint64& id, QString& db, QString& host, QString& name, QWidget * parent);
+    CSelectDBFolder(quint64& id, QString& db, QString& host, QWidget * parent);
     virtual ~CSelectDBFolder();
 
     void setProjectsOnly(bool yes)
@@ -42,7 +42,6 @@ private:
     quint64& id;
     QString& db;
     QString& host;
-    QString& name;
 
     bool projectsOnly = false;
 };

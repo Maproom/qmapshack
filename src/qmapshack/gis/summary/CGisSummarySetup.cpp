@@ -65,7 +65,7 @@ void CGisSummarySetup::setupSignals(CGisSummary::dropzone_e number, QLineEdit * 
     CGisSummary::dropzone_t& dropzone = summary.getDropZone(number);
     for(const CGisSummary::folder_t& folder : dropzone.folders)
     {
-        addFolder(folder.id, folder.db, folder.name, listWidget);
+        addFolder(folder.id, folder.db, listWidget);
     }
 
     lineName->setText(dropzone.name);
@@ -105,9 +105,8 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
     quint64 id;
     QString db;
     QString host;
-    QString name;
 
-    CSelectDBFolder dlg(id, db, host, name, this);
+    CSelectDBFolder dlg(id, db, host, this);
     dlg.setWindowTitle(tr("Select summary project..."));
     dlg.setProjectsOnly(true);
     if(dlg.exec() == QDialog::Rejected)
@@ -115,7 +114,7 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
         return;
     }
 
-    addFolder(id, db, name, listWidget);
+    addFolder(id, db, listWidget);
 }
 
 void CGisSummarySetup::slotDel(QListWidget * listWidget)
@@ -130,8 +129,10 @@ void CGisSummarySetup::slotItemSelectionChanged(QListWidget * listWidget, QToolB
     toolDel->setEnabled(items);
 }
 
-void CGisSummarySetup::addFolder(quint64 id, const QString& db, const QString& name, QListWidget * listWidget)
+void CGisSummarySetup::addFolder(quint64 id, const QString& db, QListWidget * listWidget)
 {
+    const QString& name = IDBFolder::getNameEx(db, id);
+
     QListWidgetItem * item = new QListWidgetItem(name, listWidget);
     item->setData(eDataId, id);
     item->setData(eDataDb, db);

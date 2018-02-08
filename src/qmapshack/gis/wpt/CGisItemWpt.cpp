@@ -370,14 +370,12 @@ void CGisItemWpt::setIcon()
 {
     if(geocache.hasData)
     {
-        icon = getWptIconByName(geocache.type, focus);
+        IGisItem::setIcon(getWptIconByName(geocache.type, focus));
     }
     else
     {
-        icon = getWptIconByName(wpt.sym, focus);
+        IGisItem::setIcon(getWptIconByName(wpt.sym, focus));
     }
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
 void CGisItemWpt::setName(const QString& str)
@@ -545,6 +543,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     drawBubble(p);
 
+    const QPixmap& icon = getIcon();
     p.drawPixmap(posScreen - focus, icon);
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
@@ -593,6 +592,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);
 
+    const QPixmap& icon = getIcon();
     // place label on top
     rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
     if(isBlocked(rect, blockedAreas))

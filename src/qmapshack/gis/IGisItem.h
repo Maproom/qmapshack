@@ -27,6 +27,7 @@
 #include <QDomNode>
 #include <QMap>
 #include <QMutex>
+#include <QPainter>
 #include <QString>
 #include <QStringList>
 #include <QUrl>
@@ -232,9 +233,11 @@ public:
        @brief Get the icon attached to object
        @return
      */
-    virtual const QPixmap& getIcon() const
+    void setIcon(QPixmap icon);
+
+    const QPixmap& getIcon() const
     {
-        return icon;
+        return displayIcon;
     }
     /**
        @brief Get name of this item.
@@ -577,8 +580,6 @@ protected:
     quint32 flags = 0;
     /// the item's unique key
     mutable key_t key;
-    /// each item has an icon for the tree widget
-    QPixmap icon;
     /// the dimensions of the item
     QRectF boundingRect;
     /// that's where the real data is. An item is completely defined by it's history
@@ -606,7 +607,14 @@ protected:
         }
         return false;
     }
-};
+
+private:
+    /// each item has an icon for the tree widget
+    QPixmap icon;
+    QPixmap displayIcon;
+
+    void showIcon();
+ };
 
 QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);
 QDataStream& operator<<(QDataStream& stream, const IGisItem::history_t& h);

@@ -152,6 +152,7 @@
         <file>../icons/32x32/NightDay.png</file>
         <file>../icons/32x32/NoGo.png</file>
         <file>../icons/32x32/NoGoArea.png</file>
+        <file>../icons/32x32/NoGoLine.png</file>
         <file>../icons/32x32/NoGoRoute.png</file>
         <file>../icons/32x32/NoGoTrack.png</file>
         <file>../icons/32x32/O.png</file>
@@ -376,6 +377,7 @@
         <file>../icons/48x48/NightDay.png</file>
         <file>../icons/48x48/NoGo.png</file>
         <file>../icons/48x48/NoGoArea.png</file>
+        <file>../icons/48x48/NoGoLine.png</file>
         <file>../icons/48x48/NoGoRoute.png</file>
         <file>../icons/48x48/NoGoTrack.png</file>
         <file>../icons/48x48/O.png</file>

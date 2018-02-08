@@ -329,7 +329,7 @@ public:
 
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
 
-    void getNogoAreas(QVector<IRouter::circle_t> &areas) const;
+    void getNogoAreas(QVector<IRouter::disc_t> &circles, QVector<IRouter::polygon_t> &areas) const;
 
     int getItemCountByType(IGisItem::type_e type) const
     {

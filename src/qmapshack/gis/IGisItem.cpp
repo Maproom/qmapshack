@@ -598,6 +598,32 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
     lastDatabaseHash = getHash();
 }
 
+void IGisItem::setIcon(QPixmap icon)
+{
+    this->icon = icon;
+    showIcon();
+}
+
+void IGisItem::showIcon()
+{
+    if (isNogo())
+    {
+        const int & width = icon.width();
+        const int & height = icon.height();
+        displayIcon = QPixmap(width,height);
+        displayIcon.fill(Qt::transparent);
+        QPainter painter(&displayIcon);
+        painter.drawPixmap(0,0,icon);
+        painter.drawPixmap(width*0.4,height*0.4,QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6,height*0.6,Qt::KeepAspectRatio));
+    }
+    else
+    {
+        displayIcon = icon;
+    }
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,displayIcon);
+}
+
+
 QColor IGisItem::str2color(const QString& name)
 {
     for(size_t i = 0; i < colorMapSize; i++)
@@ -857,6 +883,32 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     }
 
     return false;
+}
+
+bool IGisItem::setNogo(bool yes)
+{
+    bool changed = false;
+    if(yes)
+    {
+        if(!(flags & eFlagNogo))
+        {
+            flags |= eFlagNogo;
+            changed = true;
+        }
+    }
+    else
+    {
+        if(flags & eFlagNogo)
+        {
+            flags &= ~eFlagNogo;
+            changed = true;
+        }
+    }
+    if (changed)
+    {
+        showIcon();
+    }
+    return changed;
 }
 
 bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QString& itemtype)

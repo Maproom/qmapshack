@@ -295,11 +295,7 @@ public:
         return geocache.hasData;
     }
 
-    void toggleNogoArea();
-    bool isNogoArea()
-    {
-        return bool(flags & eFlagWptNogo);
-    }
+    bool setNogo(bool yes) override;
 
     bool hasRadius()
     {

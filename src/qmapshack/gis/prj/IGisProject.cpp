@@ -673,7 +673,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
+void IGisProject::getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter::polygon_t> &polygons) const
 {
     if(!isVisible())
     {
@@ -682,14 +682,52 @@ void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
 
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr != item && !item->isHidden() && item->isNogoArea())
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if (item != nullptr && !item->isHidden() && item->isNogo())
         {
-            const qreal& rad = item->getProximity();
-            if (rad != NOFLOAT && rad > 0.)
+            switch(item->type())
             {
-                const QPointF& pos = item->getPosition();
-                areas << IRouter::circle_t(pos.y(),pos.x(),rad);
+            case IGisItem::eTypeWpt:
+            {
+                CGisItemWpt * wpt = static_cast<CGisItemWpt*>(item);
+                const qreal& rad = wpt->getProximity();
+                if (rad != NOFLOAT && rad > 0.)
+                {
+                    const QPointF& pos = wpt->getPosition();
+                    discs << IRouter::disc_t(pos.y(),pos.x(),rad);
+                }
+                break;
+            }
+            case IGisItem::eTypeOvl:
+            case IGisItem::eTypeRte:
+            case IGisItem::eTypeTrk:
+            {
+                IGisLine* line = dynamic_cast<IGisLine*>(item);
+                Q_ASSERT(line!=nullptr);
+                SGisLine sline;
+                line->getPolylineFromData(sline);
+                int size = sline.size();
+                for (const IGisLine::point_t & pt : sline)
+                {
+                    size+=pt.subpts.size();
+                }
+                if (size > 0)
+                {
+                    IRouter::polygon_t nogos(size);
+                    nogos.closed = item->type() == IGisItem::eTypeOvl;
+                    int i=0;
+                    for (const IGisLine::point_t & pt : sline)
+                    {
+                        nogos.points.replace(i++,IRouter::point_t(pt.coord.y()*RAD_TO_DEG,pt.coord.x()*RAD_TO_DEG));
+                        for (const IGisLine::subpt_t subpt : pt.subpts)
+                        {
+                            nogos.points.replace(i++,IRouter::point_t(subpt.coord.y()*RAD_TO_DEG,subpt.coord.x()*RAD_TO_DEG));
+                        }
+                    }
+                    polygons << nogos;
+                }
+                break;
+            }
             }
         }
     }

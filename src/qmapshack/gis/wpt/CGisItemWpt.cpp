@@ -370,14 +370,12 @@ void CGisItemWpt::setIcon()
 {
     if(geocache.hasData)
     {
-        icon = getWptIconByName(geocache.type, focus);
+        IGisItem::setIcon(getWptIconByName(geocache.type, focus));
     }
     else
     {
-        icon = getWptIconByName(wpt.sym, focus);
+        IGisItem::setIcon(getWptIconByName(wpt.sym, focus));
     }
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
 void CGisItemWpt::setName(const QString& str)
@@ -540,11 +538,12 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         //remember radius for isCloseTo-method
         radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
 
-        drawCircle(p, posScreen, radius, !hideArea && isNogoArea(), false);
+        drawCircle(p, posScreen, radius, !hideArea && isNogo(), false);
     }
 
     drawBubble(p);
 
+    const QPixmap& icon = getIcon();
     p.drawPixmap(posScreen - focus, icon);
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
@@ -593,6 +592,7 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);
 
+    const QPixmap& icon = getIcon();
     // place label on top
     rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
     if(CDraw::doesOverlap(blockedAreas, rect))
@@ -629,7 +629,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
 
     if (closeToRadius)
     {
-        drawCircle(p, posScreen, radius, isNogoArea(), true);
+        drawCircle(p, posScreen, radius, isNogo(), true);
     }
     else
     {
@@ -890,18 +890,21 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-void CGisItemWpt::toggleNogoArea()
+bool CGisItemWpt::setNogo(bool yes)
 {
-    if(flags & eFlagWptNogo)
+    if (IGisItem::setNogo(yes))
     {
-        flags &= ~eFlagWptNogo;
-        changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
+        if (yes)
+        {
+            changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
+        }
+        else
+        {
+            changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
+        }
+        return true;
     }
-    else
-    {
-        flags |= eFlagWptNogo;
-        changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
-    }
+    return false;
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)

@@ -59,6 +59,7 @@ public:
     }
 
 private slots:
+    void slotStartup();
     void slotSetup();
 
 private:

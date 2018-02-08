@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "gis/db/IDBFolder.h"
 #include "gis/summary/CGisSummary.h"
 #include "gis/summary/CGisSummaryDropZone.h"
 #include "gis/summary/CGisSummarySetup.h"
@@ -28,33 +29,9 @@ CGisSummary::CGisSummary(QWidget *parent)
 {
     setupUi(this);
     connect(toolSetup, &QToolButton::clicked, this, &CGisSummary::slotSetup);
-
-    SETTINGS;
-    cfg.beginGroup("Database");
-    cfg.beginGroup("Summary");
-    int cnt = 1;
-    for(dropzone_t& dropZone : dropZones)
-    {
-        const QString& name = QString("DropZone%1").arg(cnt++);
-        cfg.beginGroup(name);
-        dropZone.name = cfg.value("name", name).toString();
-        const int N = cfg.value("numberOfFolders",0).toInt();
-        for(int n = 0; n < N; n++)
-        {
-            cfg.beginGroup(QString("Folder%1").arg(n));
-            folder_t folder;
-            folder.name = cfg.value("name", "").toString();
-            folder.id   = cfg.value("id", 0).toULongLong();
-            folder.db   = cfg.value("db", "").toString();
-            dropZone.folders << folder;
-            cfg.endGroup(); // Folder%1
-        }
-        cfg.endGroup(); // "Dropzone%1"
-    }    
-    cfg.endGroup(); // Summary
-    cfg.endGroup(); // Database
-
-    setupDropZones();
+    // As it is not guaranteed that at this point the databases are up
+    // and running the setup of the drop zones at startup is delayed.
+    QTimer::singleShot(500, this, SLOT(slotStartup()));
 }
 
 CGisSummary::~CGisSummary()
@@ -76,22 +53,53 @@ CGisSummary::~CGisSummary()
         {
             cfg.beginGroup(QString("Folder%1").arg(n));
             const folder_t& folder = dropZone.folders[n];
-            cfg.setValue("name", folder.name);
             cfg.setValue("id", folder.id);
             cfg.setValue("db", folder.db);
             cfg.endGroup(); // Folder%1
         }
         cfg.endGroup(); // "Dropzone%1"
-    }    
+    }
     cfg.endGroup(); // Summary
     cfg.endGroup(); // Database
+}
+
+void CGisSummary::slotStartup()
+{
+    SETTINGS;
+    cfg.beginGroup("Database");
+    cfg.beginGroup("Summary");
+    int cnt = 1;
+    for(dropzone_t& dropZone : dropZones)
+    {
+        const QString& name = QString("DropZone%1").arg(cnt++);
+        cfg.beginGroup(name);
+        dropZone.name = cfg.value("name", name).toString();
+        const int N = cfg.value("numberOfFolders",0).toInt();
+        for(int n = 0; n < N; n++)
+        {
+            cfg.beginGroup(QString("Folder%1").arg(n));
+            folder_t folder;
+            folder.id   = cfg.value("id", 0).toULongLong();
+            folder.db   = cfg.value("db", "").toString();
+            folder.name = IDBFolder::getNameEx(folder.db, folder.id);
+            if(!folder.name.isEmpty())
+            {
+                dropZone.folders << folder;
+            }
+            cfg.endGroup(); // Folder%1
+        }
+        cfg.endGroup(); // "Dropzone%1"
+    }
+    cfg.endGroup(); // Summary
+    cfg.endGroup(); // Database
+
+    setupDropZones();
 }
 
 void CGisSummary::slotSetup()
 {
     CGisSummarySetup dlg(*this);
     dlg.exec();
-
     setupDropZones();
 }
 

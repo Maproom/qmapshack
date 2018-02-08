@@ -82,6 +82,36 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     }
 }
 
+QString IDBFolder::getNameEx(const QString& dbName, quint64 id)
+{
+    QString name;
+    QSqlDatabase db = QSqlDatabase::database(dbName);
+    return getNameEx(db, id, name);
+}
+
+QString IDBFolder::getNameEx(QSqlDatabase& db, quint64 id, const QString& name)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT name FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return name);
+    if(!query.next())
+    {
+        return name;
+    }
+    QString thisName = name.isEmpty() ? query.value(0).toString() : name + "@" + query.value(0).toString();
+
+    query.prepare("SELECT parent FROM folder2folder WHERE child=:child");
+    query.bindValue(":child", id);
+    QUERY_EXEC(return thisName);
+    if(!query.next())
+    {
+        return thisName;
+    }
+
+    return getNameEx(db, query.value(0).toULongLong(), thisName);
+}
+
 QString IDBFolder::getDBName() const
 {
     return db.connectionName();

@@ -702,6 +702,13 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
         p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
     }
     p.drawEllipse(circle);
+    if (filled)
+    {
+        p.setBrush(getNogoTextureBrush());
+        p.setPen(Qt::NoPen);
+        p.setOpacity(0.3);
+        p.drawEllipse(circle);
+    }
     p.restore();
 }
 

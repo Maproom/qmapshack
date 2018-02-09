@@ -614,7 +614,7 @@ void IGisItem::showIcon()
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);
         painter.drawPixmap(0,0,icon);
-        painter.drawPixmap(width*0.4,height*0.4,QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6,height*0.6,Qt::KeepAspectRatio));
+        painter.drawPixmap(width*0.4,height*0.4,QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6,height*0.6,Qt::KeepAspectRatio, Qt::SmoothTransformation));
     }
     else
     {
@@ -909,6 +909,20 @@ bool IGisItem::setNogo(bool yes)
         showIcon();
     }
     return changed;
+}
+
+const QBrush& IGisItem::getNogoTextureBrush()
+{
+    static QBrush texture = []()->QBrush{
+        QPixmap texture(40,40);
+        texture.fill(Qt::transparent);
+        QPainter painter(&texture);
+        QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14,14,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        painter.drawPixmap(0,0,nogo);
+        painter.drawPixmap(20,20,nogo);
+        return QBrush(texture);
+    }();
+    return texture;
 }
 
 bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QString& itemtype)

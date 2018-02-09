@@ -462,6 +462,8 @@ public:
         return bool(flags & eFlagNogo);
     }
 
+    static const QBrush& getNogoTextureBrush();
+
     IGisProject * getParentProject() const;
 
     /**

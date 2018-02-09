@@ -1866,12 +1866,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisSummary</name>
     <message>
-        <location filename="../gis/summary/CGisSummary.cpp" line="106"/>
+        <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
         <translation>Es konnten nicht alle Ordner in den Sammelablagen wiederhergestellt werden. Wahrscheinlich wurden die Ordner oder die Datenbank entfernt. Bitte überprüfen Sie die Einstellungen für die Sammelablagen.</translation>
     </message>
     <message>
-        <location filename="../gis/summary/CGisSummary.cpp" line="110"/>
+        <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
         <source>Failed....</source>
         <translation>Fehlgeschlagen...</translation>
     </message>
@@ -1889,7 +1889,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation>&lt;b&gt;Worum geht es?&lt;/b&gt;&lt;br/&gt;Wenn man eine Datenbank benutzt, können GIS Element in mehreren Projekten referenziert werden. Das wird üblicherweise dannn gebraucht, wenn man Tourdaten in einem eigenen Projekt abspeichert und zudem die Elemente in einen anderen Ordner kopiert (referenziert), um alle Daten zu sammeln, z.B. nach Monat, Jahr oder gesamt. Man kann das selber machen, indem man die Sammelprojekte in den Arbeitsplatz lädt, die Elemente hineinkopiert und die Änderung speichert. Oder Sie benutzen diesen Dialog, um Projekte in der Datenbank anzugeben, in die Elemente kopiert werden, wenn sie über &quot;drag-n-drop&quot; auf die Sammelablage verschoben werden.</translation>
+        <translation>&lt;b&gt;Worum geht es?&lt;/b&gt;&lt;br/&gt;Wenn man eine Datenbank benutzt, können GIS Element in mehreren Projekten referenziert werden. Das wird üblicherweise dann gebraucht, wenn man Tourdaten in einem eigenen Projekt abspeichert und zudem die Elemente in einen anderen Ordner kopiert (referenziert), um alle Daten zu sammeln, z.B. nach Monat, Jahr oder gesamt. Man kann das selber machen, indem man die Sammelprojekte in den Arbeitsplatz lädt, die Elemente hineinkopiert und die Änderung speichert. Oder Sie benutzen diesen Dialog, um Projekte in der Datenbank anzugeben, in die Elemente kopiert werden, wenn sie über &quot;drag-n-drop&quot; auf die Sammelablage verschoben werden.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
@@ -7263,7 +7263,7 @@ Dateiname: %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation>Sammelablagen einrichtem...</translation>
+        <translation type="unfinished">Sammelablagen einrichten...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>

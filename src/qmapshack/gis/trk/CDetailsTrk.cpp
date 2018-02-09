@@ -464,7 +464,7 @@ void CDetailsTrk::updateData()
     CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
     if(nullptr != filterSpeed)
     {
-        filterSpeed->SetElevationValid();
+        filterSpeed->setElevationValid();
     }
 
     originator = false;

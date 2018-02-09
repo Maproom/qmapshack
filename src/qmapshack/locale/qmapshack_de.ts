@@ -713,7 +713,42 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="184"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="46"/>
+        <source>City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="54"/>
+        <source>Trekking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="57"/>
+        <source>Sportive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="60"/>
+        <source>Mountain</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="63"/>
+        <source>Custom 0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="66"/>
+        <source>Custom 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="69"/>
+        <source>Custom 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="169"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation type="unfinished"></translation>
     </message>

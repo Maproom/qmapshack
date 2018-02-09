@@ -65,6 +65,8 @@ CGisSummary::~CGisSummary()
 
 void CGisSummary::slotStartup()
 {
+    bool restoreComplete = true;
+
     SETTINGS;
     cfg.beginGroup("Database");
     cfg.beginGroup("Summary");
@@ -86,6 +88,10 @@ void CGisSummary::slotStartup()
             {
                 dropZone.folders << folder;
             }
+            else
+            {
+                restoreComplete = false;
+            }
             cfg.endGroup(); // Folder%1
         }
         cfg.endGroup(); // "Dropzone%1"
@@ -94,6 +100,15 @@ void CGisSummary::slotStartup()
     cfg.endGroup(); // Database
 
     setupDropZones();
+
+    if(!restoreComplete)
+    {
+        const QString& msg = tr("Failed to restore all folders in the summary drop zones. "
+                                "Probably the folder or database has been removed. Please "
+                                "check summary drop zone setup.");
+
+        QMessageBox::critical(this, tr("Failed...."), msg, QMessageBox::Ok);
+    }
 }
 
 void CGisSummary::slotSetup()

@@ -143,6 +143,13 @@ public:
      */
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
+    /**
+       @brief Get name extended by parent folders and database name
+
+       @param dbName    the connection name of the database
+       @param id        the folder ID
+       @return          The name can be empty if the has been a failure
+     */
     static QString getNameEx(const QString& dbName, quint64 id);
 
     bool operator<(const QTreeWidgetItem &other) const override;

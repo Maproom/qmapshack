@@ -21,6 +21,8 @@
 
 #include "ui_IGisDatabase.h"
 
+class IDBFolder;
+
 class CGisDatabase : public QWidget, private Ui::IGisDatabase
 {
     Q_OBJECT

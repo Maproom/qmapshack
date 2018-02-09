@@ -46,6 +46,8 @@ public:
     bool hasDatabase(const QString& name);
     bool event(QEvent * e) override;
 
+    void addGlobalActions(const QList<QAction*> actions);
+
 signals:
     void sigChanged();
 

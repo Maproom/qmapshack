@@ -82,6 +82,36 @@ IDBFolder * IDBFolder::createFolderByType(QSqlDatabase& db, int type, quint64 id
     }
 }
 
+QString IDBFolder::getNameEx(const QString& dbName, quint64 id)
+{
+    QString name;
+    QSqlDatabase db = QSqlDatabase::database(dbName);
+    return getNameEx(db, id, name);
+}
+
+QString IDBFolder::getNameEx(QSqlDatabase& db, quint64 id, const QString& name)
+{
+    QSqlQuery query(db);
+    query.prepare("SELECT name FROM folders WHERE id=:id");
+    query.bindValue(":id", id);
+    QUERY_EXEC(return name);
+    if(!query.next())
+    {
+        return name;
+    }
+    QString thisName = name.isEmpty() ? query.value(0).toString() : name + "@" + query.value(0).toString();
+
+    query.prepare("SELECT parent FROM folder2folder WHERE child=:child");
+    query.bindValue(":child", id);
+    QUERY_EXEC(return thisName);
+    if(!query.next())
+    {
+        return thisName;
+    }
+
+    return getNameEx(db, query.value(0).toULongLong(), thisName);
+}
+
 QString IDBFolder::getDBName() const
 {
     return db.connectionName();
@@ -186,7 +216,7 @@ quint64 IDBFolder::addFolderToDb(type_e type, const QString& name, quint64 idPar
 void IDBFolder::expanding()
 {
     qDeleteAll(takeChildren());
-    addChildren(QSet<QString>(), false);
+    addChildren(QSet<QString>(), true, showItems());
 
     CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
     CGisWorkspace::self().postEventForWks(evt);
@@ -227,7 +257,7 @@ void IDBFolder::update(CEvtW2DAckInfo * info)
     if(isExpanded())
     {
         qDeleteAll(takeChildren());
-        addChildren(info->keysChildren, false);
+        addChildren(info->keysChildren, true, showItems());
     }
 }
 
@@ -345,7 +375,7 @@ bool IDBFolder::update()
     sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
 
     // add children
-    addChildren(activeChildren, true);
+    addChildren(activeChildren, false, showItems());
     return true;
 }
 
@@ -421,9 +451,9 @@ void IDBFolder::setupFromDB()
     // check if folder has child folders (to set expand indicator)
     setChildIndicator();
 
-    // if the folder is loadable the checkbox has to be displayed and
-    // an event to query the state has to be sent to the workspace
-    if(isLoadable)
+    // If the folder is loadable the checkbox has to be displayed and
+    // an event to query the state has to be sent to the workspace.
+    if(isLoadable && showCheckBoxes())
     {
         setCheckState(CGisListDB::eColumnCheckbox, Qt::Unchecked);
         CEvtD2WReqInfo * evt = new CEvtD2WReqInfo(getId(), getDBName());
@@ -431,11 +461,11 @@ void IDBFolder::setupFromDB()
     }
 }
 
-void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolders)
+void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool showFolders, bool showItems)
 {
     QSqlQuery query(db);
 
-    if(!skipFolders)
+    if(showFolders)
     {
         // folders 1st
         query.prepare("SELECT t1.child, t2.type FROM folder2folder AS t1, folders AS t2 WHERE t1.parent = :id AND t2.id = t1.child ORDER BY t2.id");
@@ -451,62 +481,65 @@ void IDBFolder::addChildren(const QSet<QString>& activeChildren, bool skipFolder
         sortChildren(CGisListDB::eColumnName, Qt::AscendingOrder);
     }
 
-    QList<CDBItem*> items;
-    // tracks 2nd
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
-    query.bindValue(":id", id);
-    query.bindValue(":type", IGisItem::eTypeTrk);
-    QUERY_EXEC(return );
-    while(query.next())
+    if(showItems)
     {
-        quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, nullptr);
-        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
-        items << item;
-    }
-    addItemsSorted(items);
+        QList<CDBItem*> items;
+        // tracks 2nd
+        query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
+        query.bindValue(":id", id);
+        query.bindValue(":type", IGisItem::eTypeTrk);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild = query.value(0).toULongLong();
+            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+            items << item;
+        }
+        addItemsSorted(items);
 
-    // routes 3rd
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
-    query.bindValue(":id", id);
-    query.bindValue(":type", IGisItem::eTypeRte);
-    QUERY_EXEC(return );
-    while(query.next())
-    {
-        quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, nullptr);
-        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
-        items << item;
-    }
-    addItemsSorted(items);
+        // routes 3rd
+        query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
+        query.bindValue(":id", id);
+        query.bindValue(":type", IGisItem::eTypeRte);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild = query.value(0).toULongLong();
+            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+            items << item;
+        }
+        addItemsSorted(items);
 
-    //waypoints 4th
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
-    query.bindValue(":id", id);
-    query.bindValue(":type", IGisItem::eTypeWpt);
-    QUERY_EXEC(return );
-    while(query.next())
-    {
-        quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, nullptr);
-        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
-        items << item;
-    }
-    addItemsSorted(items);
+        //waypoints 4th
+        query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
+        query.bindValue(":id", id);
+        query.bindValue(":type", IGisItem::eTypeWpt);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild = query.value(0).toULongLong();
+            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+            items << item;
+        }
+        addItemsSorted(items);
 
-    // overlays 5th
-    query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
-    query.bindValue(":id", id);
-    query.bindValue(":type", IGisItem::eTypeOvl);
-    QUERY_EXEC(return );
-    while(query.next())
-    {
-        quint64 idChild = query.value(0).toULongLong();
-        CDBItem * item = new CDBItem(db, idChild, nullptr);
-        item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
-        items << item;
+        // overlays 5th
+        query.prepare("SELECT t1.child FROM folder2item AS t1, items AS t2 WHERE t1.parent = :id AND t2.id = t1.child AND t2.type=:type ORDER BY t2.id");
+        query.bindValue(":id", id);
+        query.bindValue(":type", IGisItem::eTypeOvl);
+        QUERY_EXEC(return );
+        while(query.next())
+        {
+            quint64 idChild = query.value(0).toULongLong();
+            CDBItem * item = new CDBItem(db, idChild, nullptr);
+            item->setCheckState(CGisListDB::eColumnCheckbox, activeChildren.contains(item->getKey()) ? Qt::Checked : Qt::Unchecked);
+            items << item;
+        }
+        addItemsSorted(items);
     }
-    addItemsSorted(items);
 }
 
 void IDBFolder::remove(quint64 idParent, quint64 idFolder)
@@ -562,13 +595,16 @@ void IDBFolder::setChildIndicator()
 
     qint32 nFolders = query.value(0).toInt();
 
-    // count items linked to this folder
-    query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
-    query.bindValue(":id", id);
-    QUERY_EXEC(return );
-    query.next();
-
-    qint32 nItems = query.value(0).toInt();
+    qint32 nItems = 0;
+    if(showItems())
+    {
+        // count items linked to this folder
+        query.prepare("SELECT COUNT(*) FROM folder2item WHERE parent=:id");
+        query.bindValue(":id", id);
+        QUERY_EXEC(return );
+        query.next();
+        nItems = query.value(0).toInt();
+    }
 
     // set indicator according to items
     if(nFolders || nItems)
@@ -638,3 +674,28 @@ void IDBFolder::exportToGpx()
     dlg.exec();
 }
 
+
+bool IDBFolder::showItems() const
+{
+    return getBoolProperty("showItems", true);
+}
+
+bool IDBFolder::showCheckBoxes() const
+{
+    return getBoolProperty("showCheckBoxes", true);
+}
+
+bool IDBFolder::showLostFound() const
+{
+    return getBoolProperty("showLostFound", true);
+}
+
+bool IDBFolder::getBoolProperty(const char * name, bool defaultValue) const
+{
+    QTreeWidget * tree = treeWidget();
+    if(tree == nullptr)
+    {
+        return defaultValue;
+    }
+    return tree->property(name).toBool();
+}

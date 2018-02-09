@@ -35,9 +35,9 @@ void CAppSetupWin::initQMapShack()
     prepareTranslator(appResourceDir, "qtbase_");
     prepareTranslator(appResourceDir, "qmapshack_");
 
-	// limit PATH to application directory in order to avoid that wrong .dll's are loaded
-	path = apppath.toUtf8();
-	qputenv("PATH", path);
+    // limit PATH to application directory in order to avoid that wrong .dll's are loaded
+    path = apppath.toUtf8();
+    qputenv("PATH", path);
 
     // create directories
     IAppSetup::path(defaultCachePath(), 0, true, "CACHE");

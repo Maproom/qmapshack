@@ -64,7 +64,7 @@ private slots:
 
 private:
     void setupDropZones();
-    QVector<dropzone_t> dropZones {eDropZoneMax};    
+    QVector<dropzone_t> dropZones {eDropZoneMax};
 };
 
 #endif //CGISSUMMARY_H

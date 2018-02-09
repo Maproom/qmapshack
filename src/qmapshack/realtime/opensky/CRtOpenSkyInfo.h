@@ -40,7 +40,7 @@ public:
     void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
 
 public slots:
-    void slotUpdate();    
+    void slotUpdate();
 
 private slots:
     void slotSetFilename();

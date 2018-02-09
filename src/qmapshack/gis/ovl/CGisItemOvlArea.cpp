@@ -313,6 +313,14 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     p.setPen(penForeground);
     p.drawPolygon(polygonArea);
 
+    if (isNogo())
+    {
+        p.setBrush(getNogoTextureBrush());
+        p.setPen(Qt::NoPen);
+        p.setOpacity(0.3);
+        p.drawPolygon(polygonArea);
+    }
+
     //close polygon (required by isCloseTo)
     const pt_t &pt = area.pts.first();
     pt1.setX(pt.lon);

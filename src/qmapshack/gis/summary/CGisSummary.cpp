@@ -26,6 +26,7 @@
 
 CGisSummary::CGisSummary(QWidget *parent)
     : QWidget(parent)
+    , dropZones(eDropZoneMax)
 {
     setupUi(this);
     connect(toolSetup, &QToolButton::clicked, this, &CGisSummary::slotSetup);

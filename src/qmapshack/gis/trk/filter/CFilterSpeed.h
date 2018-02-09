@@ -24,14 +24,14 @@
 
 class CGisItemTrk;
 
-class CFilterSpeed : public QWidget, public Ui::IFilterSpeed
+class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
 {
     Q_OBJECT
 public:
     CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
     virtual ~CFilterSpeed();
 
-    void SetElevationValid();
+    void setElevationValid();
 
 private slots:
     void slotApply();

@@ -40,67 +40,51 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     slopeAtMaxSpeed->setSuffix(slopeUnit);
     slopeAtMinSpeed->setSuffix(slopeUnit);
 
-    cycling_type_t cyclingType;
-    cyclingType.name = "City";
-    comboCyclingType->addItem(cyclingType.name);
-    cyclingType.plainSpeed = 15;
-    cyclingType.minSpeed = 5;
-    cyclingType.slopeAtMinSpeed = 5;
-    cyclingType.maxSpeed = 35;
-    cyclingType.slopeAtMaxSpeed = -5;
-    cyclingTypes << cyclingType;
-    cyclingType.name = "Trekking";
-    comboCyclingType->addItem(cyclingType.name);
-    cyclingType.plainSpeed = 20;
-    cyclingType.minSpeed = 5;
-    cyclingType.slopeAtMinSpeed = 8;
-    cyclingType.maxSpeed = 40;
-    cyclingType.slopeAtMaxSpeed = -5;
-    cyclingTypes << cyclingType;
-    cyclingType.name = "Sportive";
-    comboCyclingType->addItem(cyclingType.name);
-    cyclingType.plainSpeed = 27;
-    cyclingType.minSpeed = 7;
-    cyclingType.slopeAtMinSpeed = 10;
-    cyclingType.maxSpeed = 60;
-    cyclingType.slopeAtMaxSpeed = -8;
-    cyclingTypes << cyclingType;
-    cyclingType.name = "Mountain";
-    comboCyclingType->addItem(cyclingType.name);
-    cyclingType.plainSpeed = 15;
-    cyclingType.minSpeed = 4;
-    cyclingType.slopeAtMinSpeed = 15;
-    cyclingType.maxSpeed = 40;
-    cyclingType.slopeAtMaxSpeed = -15;
-    cyclingTypes << cyclingType;
-
-    for (int i = 0; i < 3; ++i)
+    const QList<cycling_type_t> cyclingTypeDefaults =
     {
-        cyclingType.name = QString("Custom %1").arg(i);
-        comboCyclingType->addItem(cyclingType.name);
-        cyclingType.plainSpeed = 20;
-        cyclingType.minSpeed = 5;
-        cyclingType.slopeAtMinSpeed = 8;
-        cyclingType.maxSpeed = 40;
-        cyclingType.slopeAtMaxSpeed = -5;
-        cyclingTypes << cyclingType;
-    }
+        {
+           tr("City")           // name
+           , 15                 // plainSpeed
+           , 5                  // minSpeed
+           , 5                  // slopeAtMinSpeed
+           , 35                 // maxSpeed
+           , -5                 // slopeAtMaxSpeed
+        },
+        {
+            tr("Trekking"), 20, 5, 8, 40, -5
+        },
+        {
+            tr("Sportive"), 27, 7, 10, 60, -8
+        },
+        {
+            tr("Mountain"), 15, 4, 15, 40, -15
+        },
+        {
+            tr("Custom 0"), 20, 5, 8, 40,-5
+        },
+        {
+            tr("Custom 1"), 20, 5, 8, 40,-5
+        },
+        {
+            tr("Custom 2"), 20, 5, 8, 40,-5
+        }
+    };
 
     SETTINGS;
-    int size = cfg.beginReadArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
-    for (int i = 0; i < size; ++i)
+    cycling_type_t cyclingType;
+    cfg.beginReadArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
+    for (int i = 0; i < cyclingTypeDefaults.size(); ++i)
     {
         cfg.setArrayIndex(i);
-        QString defaultName = QString("Custom %1").arg(i);
-        cyclingType.name = cfg.value("name", defaultName).toString();
-        cyclingType.plainSpeed = cfg.value("plainSpeed", 20).toDouble();
-        cyclingType.minSpeed = cfg.value("minSpeed", 5).toDouble();
-        cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", 8).toDouble();
-        cyclingType.maxSpeed = cfg.value("maxSpeed", 40).toDouble();
-        cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", -10).toDouble();
+        cyclingType.name = cfg.value("name", cyclingTypeDefaults[i].name).toString();
+        cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefaults[i].plainSpeed).toDouble();
+        cyclingType.minSpeed = cfg.value("minSpeed", cyclingTypeDefaults[i].minSpeed).toDouble();
+        cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", cyclingTypeDefaults[i].slopeAtMinSpeed).toDouble();
+        cyclingType.maxSpeed = cfg.value("maxSpeed", cyclingTypeDefaults[i].maxSpeed).toDouble();
+        cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", cyclingTypeDefaults[i].slopeAtMaxSpeed).toDouble();
 
-        cyclingTypes.replace(i, cyclingType);
-        comboCyclingType->setItemText(i, cyclingType.name);
+        comboCyclingType->addItem(cyclingType.name);
+        cyclingTypes << cyclingType;
     }
     cfg.endArray();
 
@@ -129,20 +113,21 @@ CFilterSpeed::~CFilterSpeed()
 {
     SETTINGS;
     cfg.beginWriteArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
-    for (int i = 0; i < cyclingTypes.size(); ++i) {
-        cfg.setArrayIndex(i);
-        cfg.setValue("name", cyclingTypes.at(i).name);
-        cfg.setValue("plainSpeed", cyclingTypes.at(i).plainSpeed);
-        cfg.setValue("minSpeed", cyclingTypes.at(i).minSpeed);
-        cfg.setValue("slopeAtMinSpeed", cyclingTypes.at(i).slopeAtMinSpeed);
-        cfg.setValue("maxSpeed", cyclingTypes.at(i).maxSpeed);
-        cfg.setValue("slopeAtMaxSpeed", cyclingTypes.at(i).slopeAtMaxSpeed);
+    int i = 0;
+    for(const cycling_type_t& cyclingType : cyclingTypes)
+    {
+        cfg.setArrayIndex(i++);
+        cfg.setValue("name", cyclingType.name);
+        cfg.setValue("plainSpeed", cyclingType.plainSpeed);
+        cfg.setValue("minSpeed", cyclingType.minSpeed);
+        cfg.setValue("slopeAtMinSpeed", cyclingType.slopeAtMinSpeed);
+        cfg.setValue("maxSpeed", cyclingType.maxSpeed);
+        cfg.setValue("slopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
     }
     cfg.endArray();
 
     cfg.setValue("TrackDetails/Filter/Speed/activityType", comboActivityType->currentIndex());
     cfg.setValue("TrackDetails/Filter/Speed/cyclingType", comboCyclingType->currentIndex());
-
     cfg.setValue("TrackDetails/Filter/Speed/speed", constantSpeed->value());
 }
 
@@ -173,10 +158,10 @@ void CFilterSpeed::slotApply()
 void CFilterSpeed::slotSetActivityType(int type)
 {
     stackedWidget->setCurrentIndex(type);
-    SetElevationValid();
+    setElevationValid();
 }
 
-void CFilterSpeed::SetElevationValid()
+void CFilterSpeed::setElevationValid()
 {
     if(trk.isTrkElevationInvalid() && comboActivityType->currentIndex() == 1)
     {
@@ -199,27 +184,29 @@ void CFilterSpeed::SetElevationValid()
 
 void CFilterSpeed::slotSetCyclingType(int type)
 {
-    plainSpeed->setValue(cyclingTypes[type].plainSpeed);
-    maxSpeed->setMinimum(cyclingTypes[type].plainSpeed);
-    minSpeed->setMaximum(cyclingTypes[type].plainSpeed);
+    const cycling_type_t &cyclingType = cyclingTypes[type];
 
-    minSpeed->setValue(cyclingTypes[type].minSpeed);
-    plainSpeed->setMinimum(cyclingTypes[type].minSpeed);
+    plainSpeed->setValue(cyclingType.plainSpeed);
+    maxSpeed->setMinimum(cyclingType.plainSpeed);
+    minSpeed->setMaximum(cyclingType.plainSpeed);
 
-    maxSpeed->setValue(cyclingTypes[type].maxSpeed);
-    plainSpeed->setMaximum(cyclingTypes[type].maxSpeed);
+    minSpeed->setValue(cyclingType.minSpeed);
+    plainSpeed->setMinimum(cyclingType.minSpeed);
+
+    maxSpeed->setValue(cyclingType.maxSpeed);
+    plainSpeed->setMaximum(cyclingType.maxSpeed);
 
     if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
-        qreal val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingTypes[type].slopeAtMinSpeed);
+        qreal val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingType.slopeAtMinSpeed);
         slopeAtMinSpeed->setValue(val);
-        val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingTypes[type].slopeAtMaxSpeed);
+        val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingType.slopeAtMaxSpeed);
         slopeAtMaxSpeed->setValue(val);
     }
     else if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {
-        slopeAtMinSpeed->setValue(cyclingTypes[type].slopeAtMinSpeed);
-        slopeAtMaxSpeed->setValue(cyclingTypes[type].slopeAtMaxSpeed);
+        slopeAtMinSpeed->setValue(cyclingType.slopeAtMinSpeed);
+        slopeAtMaxSpeed->setValue(cyclingType.slopeAtMaxSpeed);
     }
 
     if (type < 4)

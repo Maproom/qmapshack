@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisWorkspace.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "realtime/opensky/CRtOpenSky.h"
 #include "realtime/opensky/CRtOpenSkyInfo.h"
 #include "realtime/opensky/CRtOpenSkyRecord.h"
-#include "gis/CGisWorkspace.h"
-#include "gis/trk/CGisItemTrk.h"
 
 #include <QtWidgets>
 

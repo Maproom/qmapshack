@@ -16,43 +16,43 @@
 
 **********************************************************************************************/
 
-#ifndef CRTOPENSKYINFO_H
-#define CRTOPENSKYINFO_H
+#ifndef CGISSUMMARYSETUP_H
+#define CGISSUMMARYSETUP_H
 
-#include "ui_IRtOpenSkyInfo.h"
+#include "ui_IGisSummarySetup.h"
 
-#include <QPointer>
+#include <QListWidgetItem>
 
-class CRtOpenSkyRecord;
-class CRtOpenSky;
-class CRtDraw;
+class CGisSummary;
 
-class CRtOpenSkyInfo : public QWidget, private Ui::IRtOpenSkyInfo
+class CGisSummarySetup : public QDialog, private Ui::IGisSummarySetup
 {
     Q_OBJECT
 public:
-    CRtOpenSkyInfo(CRtOpenSky& source, QWidget * parent);
-    virtual ~CRtOpenSkyInfo() = default;
-
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg) const;
-
-    void draw(QPainter& p, const QPolygonF& viewport, QList<QRectF>& blockedAreas, CRtDraw * rt);
+    CGisSummarySetup(CGisSummary& parent);
+    virtual ~CGisSummarySetup() = default;
 
 public slots:
-    void slotUpdate();
+    void accept() override;
 
 private slots:
-    void slotSetFilename();
-    void slotResetRecord();
-    void slotToTrack();
+    void slotAdd(QListWidget *listWidget);
+    void slotDel(QListWidget *listWidget);
+    void slotItemSelectionChanged(QListWidget *listWidget, QToolButton *toolDel);
 
 private:
-    void startRecord(const QString& filename);
+    void setupSignals(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget, QToolButton * toolAdd, QToolButton * toolDel);
+    void addFolder(quint64 id, const QString& db, QListWidget *listWidget);
+    void writeResults(CGisSummary::dropzone_e number, QLineEdit *lineName, QListWidget * listWidget) const;
 
-    CRtOpenSky& source;
-    QPointer<CRtOpenSkyRecord> record;
+    enum data_e
+    {
+        eDataId = Qt::UserRole
+        , eDataDb = Qt::UserRole + 1
+    };
+
+    CGisSummary& summary;
 };
 
-#endif //CRTOPENSKYINFO_H
+#endif //CGISSUMMARYSETUP_H
 

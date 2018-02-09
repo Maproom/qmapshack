@@ -280,7 +280,7 @@
         <translation>Das Projekt &quot;%1&quot; wurde schon in die Datenbank importiert. Wird asugelassen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="280"/>
+        <location filename="../gis/db/CDBProject.cpp" line="294"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -289,47 +289,47 @@ To solve this conflict you can create and save a clone, force your version or dr
 Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihre Version oder verwerfen diese und nehmen die Version in der Datenbank</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="286"/>
+        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
         <translation>Konflikt mit der Datenbank...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="287"/>
+        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
         <translation>Klonen &amp;&amp; Speichern</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="288"/>
+        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
         <translation>Speichern erzwingen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="289"/>
+        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
         <translation>Entfernte Version nehmen</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="573"/>
+        <location filename="../gis/db/CDBProject.cpp" line="590"/>
         <source>Missing folder...</source>
         <translation>Fehlender Ordner...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="574"/>
+        <location filename="../gis/db/CDBProject.cpp" line="591"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Speichern des Projektes fehlgeschlagen. Der Ordner wurde in der Datenbank gelöscht.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="581"/>
+        <location filename="../gis/db/CDBProject.cpp" line="598"/>
         <source>Save ...</source>
         <translation>Speichern ...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -338,12 +338,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="761"/>
+        <location filename="../gis/db/CDBProject.cpp" line="778"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Das Projekt &apos;%1&apos; will sich gerade aus der Datenbank aktualisieren. Es gibt allerdings nicht gespeicherte Änderungen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="762"/>
+        <location filename="../gis/db/CDBProject.cpp" line="779"/>
         <source>Save changes?</source>
         <translation>Änderungen speichern?</translation>
     </message>
@@ -1492,149 +1492,149 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGisListDB</name>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Add Folder</source>
         <translation>Ordner hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
         <source>Delete Folder</source>
         <translation>Ordner löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="84"/>
+        <location filename="../gis/CGisListDB.cpp" line="88"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
         <translation>Aufgrund der Änderungen im Datenbanksystem kennt QMapShack den Dateinamen Ihrer Datenbank &apos;%1&apos; nicht mehr. Sie müssen diesen im nächsten Schritt erneut wählen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="85"/>
+        <location filename="../gis/CGisListDB.cpp" line="89"/>
         <source>Select database file.</source>
         <translation>Datenbankdatei wählen.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Add Database</source>
         <translation>Datenbank hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Rename Folder</source>
         <translation>Ordner umbenennen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Copy Folder</source>
         <translation>Ordner kopieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <location filename="../gis/CGisListDB.cpp" line="126"/>
         <source>Move Folder</source>
         <translation>Ordner verschieben</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
+        <location filename="../gis/CGisListDB.cpp" line="129"/>
         <source>Import from Files...</source>
         <translation>Aus Dateien importieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="126"/>
+        <location filename="../gis/CGisListDB.cpp" line="130"/>
         <source>Export to GPX...</source>
         <translation>Als GPX exportieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="129"/>
-        <location filename="../gis/CGisListDB.cpp" line="145"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="149"/>
         <source>Delete Item</source>
         <translation>Element löschen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="137"/>
         <source>Search Database</source>
         <translation>Datenbank durchsuchen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="134"/>
+        <location filename="../gis/CGisListDB.cpp" line="138"/>
         <source>Sync. with Database</source>
         <translation>Mit der Datenbank synchronisieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="139"/>
         <source>Remove Database</source>
         <translation>Datenbank entfernen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="142"/>
+        <location filename="../gis/CGisListDB.cpp" line="146"/>
         <source>Empty</source>
         <translation>Leeren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Remove database...</source>
         <translation>Datenbank entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Wollen Sie &apos;%1&apos; wirklich aus der Liste entfernen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Ordner und alle Unterordner löschen wollen?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>Bad operation....</source>
         <translation>Falsche Funktion...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>Der Zielordner ist ein Unterordner von dem zu verschiebenden. Das kann nicht funktionieren.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Folder name...</source>
         <translation>Ordnername...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Rename folder:</source>
         <translation>Ordner umbenennen:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="862"/>
+        <location filename="../gis/CGisListDB.cpp" line="882"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Sind Sie sicher, dass Sie &apos;%1&apos; aus dem Ordner &apos;%2&apos; löschen wollen? </translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="863"/>
+        <location filename="../gis/CGisListDB.cpp" line="883"/>
         <source>Delete...</source>
         <translation>Löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="1053"/>
+        <location filename="../gis/CGisListDB.cpp" line="1073"/>
         <source>Import GIS Data...</source>
         <translation>GIS Daten importieren...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Delete database folder...</source>
         <translation>Datenbankordner löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Remove items...</source>
         <translation>Element entfernen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Sind Sie sicher, dass Sie alle ausgewählten Elemente in Verloren &amp; Gefunden löschen wollen? Sie werden dauerhaft entfernt.</translation>
     </message>
@@ -1874,6 +1874,40 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummary</name>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
+        <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
+        <translation>Es konnten nicht alle Ordner in den Sammelablagen wiederhergestellt werden. Wahrscheinlich wurden die Ordner oder die Datenbank entfernt. Bitte überprüfen Sie die Einstellungen für die Sammelablagen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
+        <source>Failed....</source>
+        <translation>Fehlgeschlagen...</translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummaryDropZone</name>
+    <message>
+        <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
+        <source>Drag-n-drop items from the workspace into this drop zone.</source>
+        <translation>Benützen Sie &quot;drag-n-drop&quot;, um Elemente aus dem Arbeitsplatz in die Ablage zu ziehen. </translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
+        <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
+        <translation>&lt;b&gt;Worum geht es?&lt;/b&gt;&lt;br/&gt;Wenn man eine Datenbank benutzt, können GIS Element in mehreren Projekten referenziert werden. Das wird üblicherweise dann gebraucht, wenn man Tourdaten in einem eigenen Projekt abspeichert und zudem die Elemente in einen anderen Ordner kopiert (referenziert), um alle Daten zu sammeln, z.B. nach Monat, Jahr oder gesamt. Man kann das selber machen, indem man die Sammelprojekte in den Arbeitsplatz lädt, die Elemente hineinkopiert und die Änderung speichert. Oder Sie benutzen diesen Dialog, um Projekte in der Datenbank anzugeben, in die Elemente kopiert werden, wenn sie über &quot;drag-n-drop&quot; auf die Sammelablage verschoben werden.</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
+        <source>Select summary project...</source>
+        <translation>Sammelprojekte auswählen...</translation>
     </message>
 </context>
 <context>
@@ -7110,19 +7144,24 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="59"/>
+        <location filename="../gis/IGisDatabase.ui" line="62"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="64"/>
+        <location filename="../gis/IGisDatabase.ui" line="67"/>
         <source>Age</source>
         <translation>Alter</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="109"/>
+        <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Eine neue Datenbank wird über einen Rechtsklick im Fenster erstellt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisDatabase.ui" line="135"/>
+        <source>Show Summary Drop Zones</source>
+        <translation>Sammelablagen anzeigen</translation>
     </message>
 </context>
 <context>
@@ -7290,6 +7329,82 @@ Dateiname: %1</translation>
     </message>
 </context>
 <context>
+    <name>IGisSummary</name>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="14"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="35"/>
+        <source>Setup summary drop zones.</source>
+        <translation>Sammelablage einrichten.</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="38"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="49"/>
+        <source>Needs setup...</source>
+        <translation>Muss noch eingerichtet werden...</translation>
+    </message>
+</context>
+<context>
+    <name>IGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
+        <source>Setup summary projects...</source>
+        <translation type="unfinished">Sammelablagen einrichten...</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
+        <source>-</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
+        <source>Drop Zone 1</source>
+        <translation>Ablage 1</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="66"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="122"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="136"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="206"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="220"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="94"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="164"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
+        <source>Drop Zone 2</source>
+        <translation>Ablage 2</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
+        <source>Drop Zone 3</source>
+        <translation>Ablage 3</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
+        <source>Drop Zone 4</source>
+        <translation>Ablage 4</translation>
+    </message>
+</context>
+<context>
     <name>IGisWorkspace</name>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
@@ -7312,17 +7427,17 @@ Dateiname: %1</translation>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="112"/>
+        <location filename="../gis/IGisWorkspace.ui" line="115"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="124"/>
+        <location filename="../gis/IGisWorkspace.ui" line="127"/>
         <source>Clear Filter</source>
         <translation>Filter zurücksetzen</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="133"/>
+        <location filename="../gis/IGisWorkspace.ui" line="136"/>
         <source>Setup Filter</source>
         <translation>Filter einstellen</translation>
     </message>

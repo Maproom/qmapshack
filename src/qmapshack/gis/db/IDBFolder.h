@@ -29,7 +29,6 @@ class CEvtW2DAckInfo;
 class IDBFolderSql;
 class CDBItem;
 
-
 /**
  * @brief Baseclass for all folders in the database view
  */
@@ -144,6 +143,15 @@ public:
      */
     static IDBFolder * createFolderByType(QSqlDatabase &db, int type, quint64 id, QTreeWidgetItem *parent);
 
+    /**
+       @brief Get name extended by parent folders and database name
+
+       @param dbName    the connection name of the database
+       @param id        the folder ID
+       @return          The name can be empty if the has been a failure
+     */
+    static QString getNameEx(const QString& dbName, quint64 id);
+
     bool operator<(const QTreeWidgetItem &other) const override;
 
     void updateItemsOnWks();
@@ -183,9 +191,11 @@ protected:
 
        The checkbox of active items will be set checked.
 
-       @param activeChildren     a set of item keys that are active on the workspace
+       @param activeChildren    a set of item keys that are active on the workspace
+       @param showFolders       true to add child folders to folder
+       @param showItems         true to add child items to folder
      */
-    virtual void addChildren(const QSet<QString> &activeChildren, bool skipFolders);
+    virtual void addChildren(const QSet<QString> &activeChildren, bool showFolders, bool showItems);
 
     /**
        @brief Remove a folder to folder relation
@@ -201,6 +211,14 @@ protected:
 
     void addItemsSorted(QList<CDBItem *> &items);
     void sortItems(QList<CDBItem *> &items) const;
+
+    bool showItems() const;
+    bool showCheckBoxes() const;
+    bool showLostFound() const;
+
+    bool getBoolProperty(const char * name, bool defaultValue) const;
+
+    static QString getNameEx(QSqlDatabase& db, quint64 id, const QString& name);
 
     QSqlDatabase& db;
 

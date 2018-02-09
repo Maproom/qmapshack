@@ -280,7 +280,7 @@
         <translation>Projekt &quot;%1&quot; již byl zaveden do databáze. Bude přeskočen.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="280"/>
+        <location filename="../gis/db/CDBProject.cpp" line="294"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -289,47 +289,47 @@ To solve this conflict you can create and save a clone, force your version or dr
 K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji verzi, nebo ji zahodit a vzít jednu z databáze</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="286"/>
+        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
         <translation>Střet s databází...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="287"/>
+        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
         <translation>Klonovat a uložit</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="288"/>
+        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
         <translation>Vynutit uložení</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="289"/>
+        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
         <translation>Vzít vzdálenou verzi</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="573"/>
+        <location filename="../gis/db/CDBProject.cpp" line="590"/>
         <source>Missing folder...</source>
         <translation>Chybí složka...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="574"/>
+        <location filename="../gis/db/CDBProject.cpp" line="591"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>Nepodařilo se uložit projekt. Složka byla v databázi smazána.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="581"/>
+        <location filename="../gis/db/CDBProject.cpp" line="598"/>
         <source>Save ...</source>
         <translation>Uložit...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -338,12 +338,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="761"/>
+        <location filename="../gis/db/CDBProject.cpp" line="778"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>Projekt &apos;%1&apos; se právě bude aktualizovat z databáze. Jsou tu ovšem neuložené změny.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="762"/>
+        <location filename="../gis/db/CDBProject.cpp" line="779"/>
         <source>Save changes?</source>
         <translation>Uložit změny?</translation>
     </message>
@@ -1492,149 +1492,149 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisListDB</name>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="84"/>
+        <location filename="../gis/CGisListDB.cpp" line="88"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
         <translation>Na základě změn v databázovém systému QMapShack souborové názvy ve vaší databázi &apos;%1&apos; už nezná. Musíte je v dalším kroku znovu zvolit.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="85"/>
+        <location filename="../gis/CGisListDB.cpp" line="89"/>
         <source>Select database file.</source>
         <translation>Vybrat soubor s databází.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Add Database</source>
         <translation>Přidat databázi</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Add Folder</source>
         <translation>Přidat složku</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Rename Folder</source>
         <translation>Přejmenovat složku</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Copy Folder</source>
         <translation>Kopírovat složku</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <location filename="../gis/CGisListDB.cpp" line="126"/>
         <source>Move Folder</source>
         <translation>Přesunout složku</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
         <source>Delete Folder</source>
         <translation>Smazat složku</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
+        <location filename="../gis/CGisListDB.cpp" line="129"/>
         <source>Import from Files...</source>
         <translation>Zavést ze souborů...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="126"/>
+        <location filename="../gis/CGisListDB.cpp" line="130"/>
         <source>Export to GPX...</source>
         <translation>Vyvést do GPX...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="129"/>
-        <location filename="../gis/CGisListDB.cpp" line="145"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="149"/>
         <source>Delete Item</source>
         <translation>Smazat prvek</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="137"/>
         <source>Search Database</source>
         <translation>Prohledat databázi</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="134"/>
+        <location filename="../gis/CGisListDB.cpp" line="138"/>
         <source>Sync. with Database</source>
         <translation>Seřídit s databází</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="139"/>
         <source>Remove Database</source>
         <translation>Odstranit databázi</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="142"/>
+        <location filename="../gis/CGisListDB.cpp" line="146"/>
         <source>Empty</source>
         <translation>Prázdný</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Remove database...</source>
         <translation>Odstranit databázi...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Opravdu chcete &apos;%1&apos; odstranit ze seznamu?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Opravdu chcete smazat vybrané složky a všechny podsložky z databáze?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>Bad operation....</source>
         <translation>Špatná operace...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>Cílová složka je podsložkou složky k přesunutí. Toto nebude pracovat.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Folder name...</source>
         <translation>Název složky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Rename folder:</source>
         <translation>Přejmenovat složku:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="862"/>
+        <location filename="../gis/CGisListDB.cpp" line="882"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Jste si jistý, že chcete smazat &apos;%1&apos; ze složky &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="863"/>
+        <location filename="../gis/CGisListDB.cpp" line="883"/>
         <source>Delete...</source>
         <translation>Smazat...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="1053"/>
+        <location filename="../gis/CGisListDB.cpp" line="1073"/>
         <source>Import GIS Data...</source>
         <translation>Zavést údaje GIS...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Delete database folder...</source>
         <translation>Smazat složku s databází...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Remove items...</source>
         <translation>Odstranit prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Opravdu chcete smazat všechny prvky ze ztracených a nalezených? Tím budou trvale odstraněny.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Opravdu chcete smazat všechny vybrané prvky ze ztracených a nalezených? Tím budou trvale odstraněny.</translation>
     </message>
@@ -1874,6 +1874,40 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <location filename="../gis/CGisListWks.cpp" line="1237"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tímto budou všechny projekty odstraněny z pracovního prostoru.</translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummary</name>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
+        <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
+        <source>Failed....</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummaryDropZone</name>
+    <message>
+        <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
+        <source>Drag-n-drop items from the workspace into this drop zone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
+        <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
+        <source>Select summary project...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7112,19 +7146,24 @@ Pokud chcete zachovat pouze jednu polovinu, můžete jednoduše odstranit body, 
         <translation type="unfinished">Formulář</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="59"/>
+        <location filename="../gis/IGisDatabase.ui" line="62"/>
         <source>Name</source>
         <translation type="unfinished">Název</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="64"/>
+        <location filename="../gis/IGisDatabase.ui" line="67"/>
         <source>Age</source>
         <translation type="unfinished">Věk</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="109"/>
+        <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation type="unfinished">Pro přidání databáze klepněte pravým tlačítkem myši na seznam s databázemi výše.</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisDatabase.ui" line="135"/>
+        <source>Show Summary Drop Zones</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7293,6 +7332,82 @@ Název souboru: %1</translation>
     </message>
 </context>
 <context>
+    <name>IGisSummary</name>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulář</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="35"/>
+        <source>Setup summary drop zones.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="38"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="49"/>
+        <source>Needs setup...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
+        <source>Setup summary projects...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
+        <source>Drop Zone 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="66"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="122"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="136"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="206"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="220"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="94"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="164"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
+        <source>Name</source>
+        <translation type="unfinished">Název</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
+        <source>Drop Zone 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
+        <source>Drop Zone 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
+        <source>Drop Zone 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IGisWorkspace</name>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
@@ -7315,17 +7430,17 @@ Název souboru: %1</translation>
         <translation type="unfinished">Filtr</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="112"/>
+        <location filename="../gis/IGisWorkspace.ui" line="115"/>
         <source>Name</source>
         <translation type="unfinished">Název</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="124"/>
+        <location filename="../gis/IGisWorkspace.ui" line="127"/>
         <source>Clear Filter</source>
         <translation type="unfinished">Vyprázdnit filtr</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="133"/>
+        <location filename="../gis/IGisWorkspace.ui" line="136"/>
         <source>Setup Filter</source>
         <translation type="unfinished">Nastavit filtr</translation>
     </message>

@@ -210,9 +210,11 @@
         <file>../icons/32x32/SetEle.png</file>
         <file>../icons/32x32/SetupCoordFormat.png</file>
         <file>../icons/32x32/SetupMapWorkspace.png</file>
+        <file>../icons/32x32/SetupSummary.png</file>
         <file>../icons/32x32/SetupWptSym.png</file>
         <file>../icons/32x32/ShowAll.png</file>
         <file>../icons/32x32/ShowNone.png</file>
+        <file>../icons/32x32/ShowSummary.png</file>
         <file>../icons/32x32/SizeArrow.png</file>
         <file>../icons/32x32/SlfProject.png</file>
         <file>../icons/32x32/SmlProject.png</file>
@@ -436,9 +438,11 @@
         <file>../icons/48x48/SetEle.png</file>
         <file>../icons/48x48/SetupCoordFormat.png</file>
         <file>../icons/48x48/SetupMapWorkspace.png</file>
+        <file>../icons/48x48/SetupSummary.png</file>
         <file>../icons/48x48/SetupWptSym.png</file>
         <file>../icons/48x48/ShowAll.png</file>
         <file>../icons/48x48/ShowNone.png</file>
+        <file>../icons/48x48/ShowSummary.png</file>
         <file>../icons/48x48/SizeArrow.png</file>
         <file>../icons/48x48/SlfProject.png</file>
         <file>../icons/48x48/SmlProject.png</file>

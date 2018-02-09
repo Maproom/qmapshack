@@ -1866,12 +1866,12 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisSummary</name>
     <message>
-        <location filename="../gis/summary/CGisSummary.cpp" line="106"/>
+        <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
         <translation>Не удалось восстановить все папки в сводных зонах перетаскивания. Вероятно, папка или база данных была удалена. Пожалуйста, проверьте настройку сводных зон перетаскивания.</translation>
     </message>
     <message>
-        <location filename="../gis/summary/CGisSummary.cpp" line="110"/>
+        <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
         <source>Failed....</source>
         <translation>Не удалось...</translation>
     </message>

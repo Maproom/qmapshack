@@ -113,7 +113,6 @@ public:
      */
     virtual void itemClicked(int column) const
     {
-
     }
 
     /**
@@ -124,7 +123,6 @@ public:
      */
     virtual void itemClicked(QTreeWidgetItem * child, int column) const
     {
-
     }
 
     /// the global mutex. Has to be used for all operations on a IRtItem

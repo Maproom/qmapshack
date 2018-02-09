@@ -55,7 +55,7 @@ CGisDatabase::~CGisDatabase()
 void CGisDatabase::slotHelpText()
 {
     bool databaseAvailable = treeDB->topLevelItemCount() != 0;
-    frameHelp->setVisible(!databaseAvailable);    
+    frameHelp->setVisible(!databaseAvailable);
     widgetSummary->setVisible(actionShowSummaryDropZones->isChecked());
 }
 

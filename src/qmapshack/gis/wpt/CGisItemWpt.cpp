@@ -543,7 +543,6 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     drawBubble(p);
 
-    const QPixmap& icon = getIcon();
     p.drawPixmap(posScreen - focus, icon);
 
     blockedAreas << QRectF(posScreen - focus, icon.size());
@@ -592,7 +591,6 @@ void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF
     QRectF rect = fm.boundingRect(wpt.name);
     rect.adjust(-2,-2,2,2);
 
-    const QPixmap& icon = getIcon();
     // place label on top
     rect.moveCenter(pt + QPointF(icon.width()/2, -fm.height()));
     if(CDraw::doesOverlap(blockedAreas, rect))

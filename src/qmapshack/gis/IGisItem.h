@@ -582,6 +582,9 @@ protected:
     quint32 flags = 0;
     /// the item's unique key
     mutable key_t key;
+    /// each item has an icon for the tree widget
+    QPixmap icon;
+    QPixmap displayIcon;
     /// the dimensions of the item
     QRectF boundingRect;
     /// that's where the real data is. An item is completely defined by it's history
@@ -599,9 +602,6 @@ protected:
     };
 
 private:
-    /// each item has an icon for the tree widget
-    QPixmap icon;
-    QPixmap displayIcon;
 
     void showIcon();
 };

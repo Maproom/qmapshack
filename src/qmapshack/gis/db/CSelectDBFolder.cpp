@@ -31,6 +31,9 @@ CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidge
     , host(host)
 {
     setupUi(this);
+    treeWidget->setProperty("showItems", false);
+    treeWidget->setProperty("showCheckBoxes", false);
+    setProperty("showLostFound", false);
 
     buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
 
@@ -91,9 +94,24 @@ void CSelectDBFolder::slotItemSelectionChanged()
     IDBFolder * folder = dynamic_cast<IDBFolder*>(treeWidget->currentItem());
     if(folder)
     {
+        if(projectsOnly && (folder->type() != IDBFolder::eTypeProject) && (folder->type() != IDBFolder::eTypeOther))
+        {
+            id = -1;
+            db.clear();
+            buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
+            return;
+        }
+
         id      = folder->getId();
         db      = folder->getDBName();
         host    = folder->getDBHost();
+
+        IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->parent());
+        while(folder1 != nullptr)
+        {
+            folder1 = dynamic_cast<IDBFolder*>(folder1->parent());
+        }
+
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(true);
     }
     else

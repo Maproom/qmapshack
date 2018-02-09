@@ -50,6 +50,8 @@ public:
         return true;
     }
 
+    bool save(int lastResult);
+
     bool save() override;
 
     quint64 getId() const

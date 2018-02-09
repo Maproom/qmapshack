@@ -67,6 +67,10 @@ CGisListDB::CGisListDB(QWidget *parent)
     : QTreeWidget(parent)
     , socket(nullptr)
 {
+    setProperty("showItems", true);
+    setProperty("showCheckBoxes", true);
+    setProperty("showLostFound", true);
+
     SETTINGS;
     cfg.beginGroup("Database");
     QString path = cfg.value("lastDatabasePath", QDir::homePath()).toString();
@@ -165,6 +169,22 @@ CGisListDB::CGisListDB(QWidget *parent)
 CGisListDB::~CGisListDB()
 {
     saveDatabaseConfiguration();
+}
+
+void CGisListDB::addGlobalActions(const QList<QAction*> actions)
+{
+    menuNone->addSeparator();
+    menuNone->addActions(actions);
+    menuFolder->addSeparator();
+    menuFolder->addActions(actions);
+    menuDatabase->addSeparator();
+    menuDatabase->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
+    menuItem->addSeparator();
+    menuItem->addActions(actions);
 }
 
 void CGisListDB::saveDatabaseConfiguration()

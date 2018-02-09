@@ -1018,7 +1018,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="396"/>
         <source>Time: %1%2, Speed: %3%4</source>
-        <translation>Время: %1%2, Скорость: %3%4</translation>
+        <translation>Время: %1%2, скорость: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="400"/>
@@ -1028,7 +1028,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
         <source>Moving: %1%2, Speed: %3%4</source>
-        <translation>В движении: %1%2, Скорость: %3%4</translation>
+        <translation>В движении: %1%2, скорость: %3%4</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
@@ -1868,12 +1868,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="106"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось восстановить все папки в сводных зонах перетаскивания. Вероятно, папка или база данных была удалена. Пожалуйста, проверьте настройку сводных зон перетаскивания.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="110"/>
         <source>Failed....</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось...</translation>
     </message>
 </context>
 <context>
@@ -1881,7 +1881,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Перетащите элементы рабочей области в эту зону перетаскивания.</translation>
     </message>
 </context>
 <context>
@@ -1889,12 +1889,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Что это значит?&lt;/b&gt;&lt;br/&gt;При использовании базы данных элементы ГИС могут использоваться в нескольких проектах. Обычный вариант использования - это хранение данных тур в собственной папке проекта. Кроме того, элементы копируются в папки, суммирующие элементы определенного периода времени, например, ежемесячно, ежегодно, итого. Это можно сделать вручную: загрузить сводные проекты в рабочую область, скопировать элементы и сохранить изменения. Другая возможность: использовать это диалоговое окно: определить папки проекта в базе данных как сводные папки и скопировать элементы, перетащив их в зону перетаскивания.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
         <source>Select summary project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите сводный проект...</translation>
     </message>
 </context>
 <context>
@@ -6390,14 +6390,14 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../gis/trk/IDetailsTrk.ui" line="875"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="961"/>
         <source>max.</source>
-        <translation>макс.</translation>
+        <translation>Макс.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="994"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1001"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1015"/>
         <source>min.</source>
-        <translation>мин.</translation>
+        <translation>Мин.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1334"/>
@@ -7072,7 +7072,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
         <source>Show Summary Drop Zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать сводные зоны перетаскивания</translation>
     </message>
 </context>
 <context>
@@ -7245,22 +7245,23 @@ Filename: %1</source>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
         <source>Setup summary drop zones.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка сводных зон перетаскивания.</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translatorcomment>...</translatorcomment>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="49"/>
         <source>Needs setup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Необходимо настройка...</translation>
     </message>
 </context>
 <context>
@@ -7268,17 +7269,18 @@ Filename: %1</source>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка сводных проектов...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translatorcomment>-</translatorcomment>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
         <source>Drop Zone 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Зона перетаскивания 1</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
@@ -7290,7 +7292,7 @@ Filename: %1</source>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="94"/>
@@ -7298,22 +7300,22 @@ Filename: %1</source>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
         <source>Drop Zone 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Зона перетаскивания 2</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
         <source>Drop Zone 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Зона перетаскивания 3</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
         <source>Drop Zone 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Зона перетаскивания 4</translation>
     </message>
 </context>
 <context>
@@ -9046,7 +9048,7 @@ or
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
         <source>Pause recording.</source>
-        <translation>Приостановить записи.</translation>
+        <translation>Приостановить запись.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>

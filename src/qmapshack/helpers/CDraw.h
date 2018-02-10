@@ -61,6 +61,7 @@ public:
        @param minArrowDist  The minimum distance of two consecutive arrows (in px)
      */
     static void arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale);
+    static void nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minNogoDist);
 
     static void text(const QString& str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font = CMainWindow::self().getMapFont());
     static void text(const QString& str, QPainter &p, const QRect  &r,      const QColor &color);

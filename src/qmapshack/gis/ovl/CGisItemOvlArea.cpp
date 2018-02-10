@@ -309,17 +309,9 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
     penForeground.setColor(color);
     penForeground.setWidth(area.width);
-    p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
+    p.setBrush(isNogo() ? getNogoTextureBrush() : QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(polygonArea);
-
-    if (isNogo())
-    {
-        p.setBrush(getNogoTextureBrush());
-        p.setPen(Qt::NoPen);
-        p.setOpacity(0.3);
-        p.drawPolygon(polygonArea);
-    }
 
     //close polygon (required by isCloseTo)
     const pt_t &pt = area.pts.first();

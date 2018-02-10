@@ -680,7 +680,7 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.restore();
 }
 
-void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected)
+void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& nogo, const bool& selected)
 {
     QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
     p.save();
@@ -695,16 +695,11 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
         p.drawEllipse(circle);
         p.setPen(QPen(Qt::red,1));
     }
-    if (filled)
-    {
-        p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
-    }
     p.drawEllipse(circle);
-    if (filled)
+    if (nogo)
     {
         p.setBrush(getNogoTextureBrush());
         p.setPen(Qt::NoPen);
-        p.setOpacity(0.3);
         p.drawEllipse(circle);
     }
     p.restore();

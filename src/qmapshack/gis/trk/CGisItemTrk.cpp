@@ -1697,7 +1697,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     for(const QPolygonF &l : lines)
     {
         p.drawPolyline(l);
-        if(showArrows.val().toBool())
+        if(!isNogo() && showArrows.val().toBool())
         {
             CDraw::arrows(l, extViewport, p, 10, 80, lineScale.val().toDouble());
         }
@@ -1721,6 +1721,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     {
         drawColorized(p);
     }
+
+    if (isNogo())
+    {
+        for(const QPolygonF &l : lines)
+        {
+            CDraw::nogos(l, extViewport, p, 80);
+        }
+    }
+
     // -------------------------
 
     // draw min/max labels

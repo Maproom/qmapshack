@@ -607,8 +607,16 @@ void CGisItemRte::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
 
     p.setPen(hasUserFocus() ? penForegroundFocus : penForeground);
     p.setBrush(hasUserFocus() ? penForegroundFocus.color() : penForeground.color());
-    CDraw::arrows(line, extViewport, p, 10, 80, 1.0);
+    if (!isNogo())
+    {
+        CDraw::arrows(line, extViewport, p, 10, 80, 1.0);
+    }
     p.drawPolyline(line);
+
+    if (isNogo())
+    {
+        CDraw::nogos(line, extViewport, p, 80);
+    }
 
     p.setPen(Qt::NoPen);
     for(int i = 0, n = 0; i < line.size(); i++)

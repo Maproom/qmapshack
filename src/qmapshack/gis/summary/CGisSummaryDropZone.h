@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CSELECTDBFOLDER_H
-#define CSELECTDBFOLDER_H
+#ifndef CGISSUMMARYDROPZONE_H
+#define CGISSUMMARYDROPZONE_H
 
-#include "ui_ISelectDBFolder.h"
-#include <QDialog>
+#include "gis/summary/CGisSummary.h"
 
-class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
+#include <QLabel>
+
+class CGisSummaryDropZone : public QLabel
 {
     Q_OBJECT
 public:
-    CSelectDBFolder(quint64& id, QString& db, QString& host, QWidget * parent);
-    virtual ~CSelectDBFolder();
+    CGisSummaryDropZone(const CGisSummary::dropzone_t& dropZone, QWidget * parent);
+    virtual ~CGisSummaryDropZone() = default;
 
-    void setProjectsOnly(bool yes)
-    {
-        projectsOnly = yes;
-    }
-
-private slots:
-    void slotItemExpanded(QTreeWidgetItem * item);
-    void slotItemSelectionChanged();
+protected:
+    void dragEnterEvent(QDragEnterEvent *e) override;
+    void dragMoveEvent(QDragMoveEvent *e) override;
+    void dragLeaveEvent(QDragLeaveEvent *e) override;
+    void dropEvent(QDropEvent *e) override;
 
 private:
-    quint64& id;
-    QString& db;
-    QString& host;
+    void setHighlighted(bool yes);
 
-    bool projectsOnly = false;
+    const QList<CGisSummary::folder_t>& folders;
 };
 
-#endif //CSELECTDBFOLDER_H
-
+#endif //CGISSUMMARYDROPZONE_H
 

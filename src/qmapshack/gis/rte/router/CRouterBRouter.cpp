@@ -716,9 +716,9 @@ void CRouterBRouter::parseBRouterVersion(const QString &text)
         versionPatch = rx.cap(3).toInt();
 
         labelBRouter->setToolTip(tr("BRouter (Version %1.%2.%3)")
-                              .arg(versionMajor)
-                              .arg(versionMinor)
-                              .arg(versionPatch));
+                                 .arg(versionMajor)
+                                 .arg(versionMinor)
+                                 .arg(versionPatch));
     }
     else
     {

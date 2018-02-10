@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "gis/CGisDatabase.h"
+#include "gis/db/IDBFolderSql.h"
 #include "helpers/CSettings.h"
 
 #include <QtWidgets>
@@ -33,7 +34,13 @@ CGisDatabase::CGisDatabase(QWidget *parent)
     treeDB->header()->restoreState(cfg.value("Database/treeDB/state", treeDB->header()->saveState()).toByteArray());
 
     connect(treeDB,  &CGisListDB::sigChanged,  this, &CGisDatabase::slotHelpText);
+    connect(actionShowSummaryDropZones, &QAction::toggled, widgetSummary, &CGisSummary::setVisible);
 
+    QList<QAction*> actions;
+    actions << actionShowSummaryDropZones;
+    treeDB->addGlobalActions(actions);
+
+    actionShowSummaryDropZones->setChecked(cfg.value("Database/isSummaryVisible", true).toBool());
 
     QTimer::singleShot(1, this, SLOT(slotHelpText()));
 }
@@ -42,11 +49,14 @@ CGisDatabase::~CGisDatabase()
 {
     SETTINGS;
     cfg.setValue("Database/treeDB/state", treeDB->header()->saveState());
+    cfg.setValue("Database/isSummaryVisible", actionShowSummaryDropZones->isChecked());
 }
 
 void CGisDatabase::slotHelpText()
 {
-    frameHelp->setVisible(treeDB->topLevelItemCount() == 0);
+    bool databaseAvailable = treeDB->topLevelItemCount() != 0;
+    frameHelp->setVisible(!databaseAvailable);
+    widgetSummary->setVisible(actionShowSummaryDropZones->isChecked());
 }
 
 void CGisDatabase::postEventForDb(QEvent * event)
@@ -58,3 +68,4 @@ void CGisDatabase::sendEventForDb(QEvent * event)
 {
     QCoreApplication::sendEvent(treeDB, event);
 }
+

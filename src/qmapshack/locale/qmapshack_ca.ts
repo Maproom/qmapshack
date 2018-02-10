@@ -280,7 +280,7 @@
         <translation>El projecte &quot;%1&quot; ja és a la base de dades. S&apos;ometrà l&apos;element.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="280"/>
+        <location filename="../gis/db/CDBProject.cpp" line="294"/>
         <source>The item %1 has been changed by %2 (%3). 
 
 To solve this conflict you can create and save a clone, force your version or drop your version and take the one from the database</source>
@@ -289,47 +289,47 @@ To solve this conflict you can create and save a clone, force your version or dr
 Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forçar la vostra versió o deixar-la estar I agafar-ne una de la base de dades</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="286"/>
+        <location filename="../gis/db/CDBProject.cpp" line="300"/>
         <source>Conflict with database...</source>
         <translation>Conflicte amb la base de dades...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="287"/>
+        <location filename="../gis/db/CDBProject.cpp" line="301"/>
         <source>Clone &amp;&amp; Save</source>
         <translation>Clona &amp;&amp; Desa</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="288"/>
+        <location filename="../gis/db/CDBProject.cpp" line="302"/>
         <source>Force Save</source>
         <translation>Desa forçosament</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="289"/>
+        <location filename="../gis/db/CDBProject.cpp" line="303"/>
         <source>Take remote</source>
         <translation>Agafa&apos;l remot</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="573"/>
+        <location filename="../gis/db/CDBProject.cpp" line="590"/>
         <source>Missing folder...</source>
         <translation>Manca la carpeta...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="574"/>
+        <location filename="../gis/db/CDBProject.cpp" line="591"/>
         <source>Failed to save project. The folder has been deleted in the database.</source>
         <translation>No s&apos;ha pogut desar el projecte. La carpeta s&apos;ha esborrat de la base de dades.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="581"/>
+        <location filename="../gis/db/CDBProject.cpp" line="598"/>
         <source>Save ...</source>
         <translation>Desa...</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>Error</source>
         <translation>Error</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="645"/>
+        <location filename="../gis/db/CDBProject.cpp" line="662"/>
         <source>There was an unexpected database error:
 
 %1</source>
@@ -338,12 +338,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 %1</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="761"/>
+        <location filename="../gis/db/CDBProject.cpp" line="778"/>
         <source>The project &apos;%1&apos; is about to update itself from the database. However there are changes not saved.</source>
         <translation>El projecte &apos;%1&apos; és a punt de modificar-se desde la base de dades. Tanmateix hi ha canvis que no s&apos;han desat.</translation>
     </message>
     <message>
-        <location filename="../gis/db/CDBProject.cpp" line="762"/>
+        <location filename="../gis/db/CDBProject.cpp" line="779"/>
         <source>Save changes?</source>
         <translation>Desar els canvis?</translation>
     </message>
@@ -1479,149 +1479,149 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CGisListDB</name>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="84"/>
+        <location filename="../gis/CGisListDB.cpp" line="88"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
         <translation>Degut a canvis en el sistema de base de dades, QMapShack desconeix el nom de fitxer de la vostre base de dades &apos;%1&apos;. Heu de seleccionar-la de nou en el següent pas.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="85"/>
+        <location filename="../gis/CGisListDB.cpp" line="89"/>
         <source>Select database file.</source>
         <translation>Selecciona el fitxer de base de dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="116"/>
+        <location filename="../gis/CGisListDB.cpp" line="120"/>
         <source>Add Database</source>
         <translation>Afegeix base de dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="119"/>
+        <location filename="../gis/CGisListDB.cpp" line="123"/>
         <source>Add Folder</source>
         <translation>Afegir Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="120"/>
+        <location filename="../gis/CGisListDB.cpp" line="124"/>
         <source>Rename Folder</source>
         <translation>Canvia el nom de la Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="121"/>
+        <location filename="../gis/CGisListDB.cpp" line="125"/>
         <source>Copy Folder</source>
         <translation>Copia la carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="122"/>
+        <location filename="../gis/CGisListDB.cpp" line="126"/>
         <source>Move Folder</source>
         <translation>Moure Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="123"/>
+        <location filename="../gis/CGisListDB.cpp" line="127"/>
         <source>Delete Folder</source>
         <translation>Suprimeix Carpeta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="125"/>
+        <location filename="../gis/CGisListDB.cpp" line="129"/>
         <source>Import from Files...</source>
         <translation>Importar de Fitxers...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="126"/>
+        <location filename="../gis/CGisListDB.cpp" line="130"/>
         <source>Export to GPX...</source>
         <translation>Exportar a GPX...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="129"/>
-        <location filename="../gis/CGisListDB.cpp" line="145"/>
+        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="149"/>
         <source>Delete Item</source>
         <translation>Esborrar l&apos;element</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="133"/>
+        <location filename="../gis/CGisListDB.cpp" line="137"/>
         <source>Search Database</source>
         <translation>Cercant Base de Dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="134"/>
+        <location filename="../gis/CGisListDB.cpp" line="138"/>
         <source>Sync. with Database</source>
         <translation>Sinc. amb Base de Dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="135"/>
+        <location filename="../gis/CGisListDB.cpp" line="139"/>
         <source>Remove Database</source>
         <translation>Suprimir base de dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="142"/>
+        <location filename="../gis/CGisListDB.cpp" line="146"/>
         <source>Empty</source>
         <translation>Buit</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Remove database...</source>
         <translation>Suprimir base de dades...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="442"/>
+        <location filename="../gis/CGisListDB.cpp" line="462"/>
         <source>Do you really want to remove &apos;%1&apos; from the list?</source>
         <translation>Esteu segur que voleu suprimir &apos;%1&apos; de la llista?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Delete database folder...</source>
         <translation>Elimina la carpeta de les bases de dades...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="506"/>
+        <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Are you sure you want to delete selected folders and all subfolders from the database?</source>
         <translation>Segur que voleu suprimir de la base de dades les carpetes seleccionades i totes les subcarpetes?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>Bad operation....</source>
         <translation>Operació incorrecta...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="674"/>
+        <location filename="../gis/CGisListDB.cpp" line="694"/>
         <source>The target folder is a subfolder of the one to move. This will not work.</source>
         <translation>La carpeta destí és una subcarpeta d&apos;una de les que voleu moure. No es pot fer aquesta operació.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Folder name...</source>
         <translation>Nom de la carpeta...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="733"/>
+        <location filename="../gis/CGisListDB.cpp" line="753"/>
         <source>Rename folder:</source>
         <translation>Canvia el nom de la carpeta:</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Remove items...</source>
         <translation>Suprimir elements...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="754"/>
+        <location filename="../gis/CGisListDB.cpp" line="774"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Voleu esborrar tots els elements de Perdut i Trobat? Això els eliminarà de forma permament.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="775"/>
+        <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
         <translation>Voleu esborrar tots els elements seleccionats de Perdut i Trobat? Això els eliminarà de forma permament.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="862"/>
+        <location filename="../gis/CGisListDB.cpp" line="882"/>
         <source>Are you sure you want to delete &apos;%1&apos; from folder &apos;%2&apos;?</source>
         <translation>Segur que voleu suprimir &apos;%1&apos; de la carpeta &apos;%2&apos;?</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="863"/>
+        <location filename="../gis/CGisListDB.cpp" line="883"/>
         <source>Delete...</source>
         <translation>Suprimeix...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListDB.cpp" line="1053"/>
+        <location filename="../gis/CGisListDB.cpp" line="1073"/>
         <source>Import GIS Data...</source>
         <translation>Importar Dades GIS...</translation>
     </message>
@@ -1861,6 +1861,40 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/CGisListWks.cpp" line="1263"/>
         <source>Do you really want to delete %1?</source>
         <translation>Esteu segur que voleu suprimir %1?</translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummary</name>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="106"/>
+        <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummary.cpp" line="110"/>
+        <source>Failed....</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummaryDropZone</name>
+    <message>
+        <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
+        <source>Drag-n-drop items from the workspace into this drop zone.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>CGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
+        <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
+        <source>Select summary project...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7022,19 +7056,24 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <translation>Formulari</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="59"/>
+        <location filename="../gis/IGisDatabase.ui" line="62"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="64"/>
+        <location filename="../gis/IGisDatabase.ui" line="67"/>
         <source>Age</source>
         <translation>Edat</translation>
     </message>
     <message>
-        <location filename="../gis/IGisDatabase.ui" line="109"/>
+        <location filename="../gis/IGisDatabase.ui" line="112"/>
         <source>To add a database do a right click on the database list above.</source>
         <translation>Per afegir una base de dades feu clic en el botó dret sobre la llista de bases de dades.</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisDatabase.ui" line="135"/>
+        <source>Show Summary Drop Zones</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7203,6 +7242,82 @@ Nom del fitxer: %1</translation>
     </message>
 </context>
 <context>
+    <name>IGisSummary</name>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished">Formulari</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="35"/>
+        <source>Setup summary drop zones.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="38"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummary.ui" line="49"/>
+        <source>Needs setup...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>IGisSummarySetup</name>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
+        <source>Setup summary projects...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
+        <source>-</source>
+        <translation type="unfinished">-</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
+        <source>Drop Zone 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="66"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="122"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="136"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="206"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="220"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="94"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="164"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
+        <source>Drop Zone 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
+        <source>Drop Zone 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
+        <source>Drop Zone 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IGisWorkspace</name>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="14"/>
@@ -7225,17 +7340,17 @@ Nom del fitxer: %1</translation>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="112"/>
+        <location filename="../gis/IGisWorkspace.ui" line="115"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="124"/>
+        <location filename="../gis/IGisWorkspace.ui" line="127"/>
         <source>Clear Filter</source>
         <translation>Neteja el Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/IGisWorkspace.ui" line="133"/>
+        <location filename="../gis/IGisWorkspace.ui" line="136"/>
         <source>Setup Filter</source>
         <translation>Configura el Filtre</translation>
     </message>

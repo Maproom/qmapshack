@@ -35,7 +35,7 @@ CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * can
     : IMouse(gis, canvas, mouse),
     key(wpt.getKey()),
     wptPosition(wpt.getPosition() * DEG_TO_RAD),
-    avoid(wpt.isNogoArea()),
+    avoid(wpt.isNogo()),
     initial(true)
 {
     startPos = GPS_Math_Wpt_Projection(wptPosition,wpt.getProximity(),90 * DEG_TO_RAD);

@@ -47,7 +47,7 @@ private slots:
     void slotRange();
     void slotActivity();
     void slotCopyWithWpt();
-
+    void slotNogo();
 
 
 private:

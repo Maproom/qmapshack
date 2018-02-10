@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64"
+   height="64"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="NoGoLine.svg"
+   inkscape:export-filename="/home/norbert/Development/QMapShack/QMapShack_brouter/src/icons/48x48/NoGoLine.png"
+   inkscape:export-xdpi="108"
+   inkscape:export-ydpi="108">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="7.919596"
+     inkscape:cx="26.121241"
+     inkscape:cy="37.655226"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-988.36218)">
+    <g
+       id="g4142"
+       transform="translate(11.116094,-6.9697291)">
+      <g
+         style="stroke-width:5.42198038;stroke-miterlimit:4;stroke-dasharray:none"
+         transform="matrix(0.72084543,0,0,0.72318949,1.5918202,288.01362)"
+         id="g2999">
+        <path
+           sodipodi:nodetypes="csssc"
+           inkscape:connector-curvature="0"
+           id="path3078"
+           d="m 54.195846,1014.5765 c 0,0 -15,1 -22.999999,6 -6.836782,4.273 14.726779,4.2732 10.999999,8 -3.72678,3.7268 -28.376052,2.4145 -32.8593748,5.1854 -2.005004,1.2391 -5.0000008,5 -5.0000008,5"
+           style="fill:none;stroke:#000080;stroke-width:5.42198038;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      </g>
+      <rect
+         y="1001.2178"
+         x="2.6406245"
+         height="40"
+         width="40"
+         id="rect3769"
+         style="fill:none;stroke:none" />
+    </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot3859"
+       style="font-style:normal;font-weight:normal;font-size:12px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(55.714286,1.25)"><flowRegion
+         id="flowRegion3861"><rect
+           id="rect3863"
+           width="75.35714"
+           height="62.142857"
+           x="-9.4642859"
+           y="2.2142856" /></flowRegion><flowPara
+         id="flowPara3865" /></flowRoot>    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ff0000;stroke:#000080;stroke-width:0.54192591;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 26.295564,994.61555 c -6.734185,0.009 -12.185584,5.47605 -12.176397,12.21025 l 0,0.033 c 0.02988,6.7195 5.490756,12.1517 12.210268,12.1425 6.734185,-0.01 12.185584,-5.4761 12.176397,-12.2102 -0.0092,-6.7343 -5.476083,-12.18561 -12.210268,-12.17643 z m 0,4.2338 c 1.415653,0 2.74323,0.36906 3.895093,1.01611 l -10.821583,10.82164 c -0.639335,-1.1409 -1.009888,-2.4451 -1.016111,-3.8444 l 0,-0.017 c -0.0059,-4.392 3.550741,-7.97059 7.942601,-7.97655 z m 6.960362,4.08135 c 0.636252,1.1419 0.997265,2.4612 0.999175,3.8613 0.0059,4.3917 -3.550741,7.9704 -7.942601,7.9764 -1.412568,0 -2.727813,-0.3704 -3.878158,-1.0162 l 10.821584,-10.8215 z"
+       id="path3005" />
+  </g>
+</svg>

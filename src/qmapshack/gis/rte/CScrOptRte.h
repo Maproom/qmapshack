@@ -47,6 +47,7 @@ private slots:
     void slotReverse();
     void slotInstruction(bool on);
     void slotToTrack();
+    void slotNogo();
 
 private:
     IGisItem::key_t key;

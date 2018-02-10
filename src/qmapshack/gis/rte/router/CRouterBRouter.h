@@ -62,23 +62,6 @@ private slots:
 
 private:
 
-    struct wpt_t
-    {
-        wpt_t() :
-            lat(NOFLOAT),
-            lon(NOFLOAT)
-        {
-        }
-
-        wpt_t(const qreal& lat, const qreal& lon) :
-            lat(lat),
-            lon(lon)
-        {
-        }
-        qreal lat;
-        qreal lon;
-    };
-
     void updateDialog() const;
     void startBRouter() const;
     void stopBRouter() const;
@@ -87,8 +70,8 @@ private:
     void parseBRouterVersion(const QString& text);
     bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
-    int synchronousRequest(const QVector<wpt_t>& points, const QVector<IRouter::circle_t> &areas, QPolygonF &coords, bool isVersionRequest);
-    QNetworkRequest getRequest(const QVector<wpt_t>& routePoints, const QVector<circle_t> &areas) const;
+    int synchronousRequest(const QVector<point_t>& points, const QVector<disc_t> &areas, const QVector<polygon_t> &polygons, QPolygonF &coords, bool isVersionRequest);
+    QNetworkRequest getRequest(const QVector<point_t>& routePoints, const QVector<disc_t> &areas, const QVector<polygon_t> &polygons) const;
     QUrl getServiceUrl() const;
 
     QNetworkAccessManager * networkAccessManager;

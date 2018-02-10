@@ -89,7 +89,7 @@ private slots:
     void slotEditItem();
     void slotDeleteItem();
     void slotBubbleWpt();
-    void slotNogoAreaWpt();
+    void slotNogoItem();
     void slotDelRadiusWpt();
     void slotEditRadiusWpt();
     void slotProjWpt();
@@ -168,7 +168,7 @@ private:
     QAction * actionDelete;
     QAction * actionBubbleWpt;
     QAction * actionDelRadiusWpt;
-    QAction * actionNogoAreaWpt;
+    QAction * actionNogoWpt;
     QAction * actionEditRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
@@ -178,14 +178,17 @@ private:
     QAction * actionCombineTrk;
     QAction * actionRangeTrk;
     QAction * actionActivityTrk;
+    QAction * actionNogoTrk;
     QAction * actionCopyTrkWithWpt;
     QAction * actionFocusRte;
     QAction * actionCalcRte;
     QAction * actionResetRte;
     QAction * actionEditRte;
+    QAction * actionNogoRte;
     QAction * actionReverseRte;
     QAction * actionRte2Trk;
     QAction * actionEditArea;
+    QAction * actionNogoArea;
     QAction * actionRteFromWpt;
     QAction * actionSymWpt;
 

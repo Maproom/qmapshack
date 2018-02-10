@@ -312,6 +312,23 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
     p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(polygonArea);
+
+    if (isNogo())
+    {
+        p.setBrush(getNogoTextureBrush());
+        p.setPen(Qt::NoPen);
+        p.setOpacity(0.3);
+        p.drawPolygon(polygonArea);
+    }
+
+    //close polygon (required by isCloseTo)
+    const pt_t &pt = area.pts.first();
+    pt1.setX(pt.lon);
+    pt1.setY(pt.lat);
+    pt1 *= DEG_TO_RAD;
+    gis->convertRad2Px(pt1);
+    polygonArea << pt1;
+
     p.restore();
 }
 
@@ -534,12 +551,27 @@ void CGisItemOvlArea::setColor(const QColor& c)
 void CGisItemOvlArea::setIcon(const QString& c)
 {
     area.color  = c;
-    icon        = QPixmap("://icons/48x48/Area.png");
+    QPixmap icon = QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+}
 
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
+bool CGisItemOvlArea::setNogo(bool yes)
+{
+    if (IGisItem::setNogo(yes))
+    {
+        if(yes)
+        {
+            changed(tr("Changed to nogo-area"),"://icons/48x48/NoGoArea.png");
+        }
+        else
+        {
+            changed(tr("Changed to normal area"),"://icons/48x48/Area.png");
+        }
+        return true;
+    }
+    return false;
 }

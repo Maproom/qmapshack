@@ -345,8 +345,7 @@ void CGisItemRte::toTrack()
 
 void CGisItemRte::setSymbol()
 {
-    icon = QPixmap("://icons/32x32/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    setIcon(CGisListWks::eColumnIcon, icon);
+    IGisItem::setIcon(QPixmap("://icons/48x48/Route.png").scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
 void CGisItemRte::setName(const QString& str)
@@ -374,7 +373,22 @@ void CGisItemRte::setLinks(const QList<link_t>& links)
     changed(tr("Changed links"), "://icons/48x48/Link.png");
 }
 
-
+bool CGisItemRte::setNogo(bool yes)
+{
+    if (IGisItem::setNogo(yes))
+    {
+        if(yes)
+        {
+            changed(tr("Changed to nogo-line"),"://icons/48x48/NoGoRoute.png");
+        }
+        else
+        {
+            changed(tr("Changed to normal route"),"://icons/48x48/Route.png");
+        }
+        return true;
+    }
+    return false;
+}
 
 QString CGisItemRte::getInfo(quint32 feature) const
 {

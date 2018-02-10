@@ -27,22 +27,51 @@ class IRouter : public QWidget
     Q_OBJECT
 public:
 
-    struct circle_t
+    struct point_t
     {
-        circle_t() : lon(NOFLOAT), lat(NOFLOAT), rad(NOINT)
-        {
-        }
+        point_t() : lon(NOFLOAT), lat(NOFLOAT) {}
 
-        circle_t(const qreal& lat, const qreal& lon, const qreal& rad) :
+        point_t(const qreal&lat, const qreal& lon) :
             lon(lon),
-            lat(lat),
-            rad(rad)
+            lat(lat)
         {
         }
 
         qreal lon;
         qreal lat;
+    };
+
+    struct disc_t : public point_t
+    {
+        disc_t() :
+            point_t(),
+            rad(NOINT)
+        {
+        }
+
+        disc_t(const qreal& lat, const qreal& lon, const qreal& rad) :
+            point_t(lat,lon),
+            rad(rad)
+        {
+        }
+
         quint32 rad;
+    };
+
+    struct polygon_t
+    {
+        polygon_t()
+        {
+        }
+
+        polygon_t(int size) :
+            points(size)
+        {
+        }
+
+        QVector<point_t> points;
+
+        bool closed;
     };
 
     IRouter(bool fastRouting, QWidget * parent);

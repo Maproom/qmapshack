@@ -36,8 +36,11 @@ void IDBFolderSql::expanding()
 {
     IDBFolder::expanding();
 
-    folderLostFound  = new CDBFolderLostFound(db, nullptr);
-    insertChild(0, folderLostFound);
+    if(showLostFound())
+    {
+        folderLostFound  = new CDBFolderLostFound(db, nullptr);
+        insertChild(0, folderLostFound);
+    }
 }
 
 void IDBFolderSql::updateLostFound()

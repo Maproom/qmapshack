@@ -48,11 +48,11 @@ public:
 private slots:
     void slotDelayedSetup();
 
-private:    
+private:
     const QString server;
     const QString port;
     const QString user;
-    const QString passwd;    
+    const QString passwd;
     const bool noPasswd;
     const QString name;
 };

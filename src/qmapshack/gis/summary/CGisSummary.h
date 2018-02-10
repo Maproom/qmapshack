@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,36 +16,56 @@
 
 **********************************************************************************************/
 
-#ifndef CSELECTDBFOLDER_H
-#define CSELECTDBFOLDER_H
+#ifndef CGISSUMMARY_H
+#define CGISSUMMARY_H
 
-#include "ui_ISelectDBFolder.h"
-#include <QDialog>
+#include "ui_IGisSummary.h"
 
-class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
+class CGisSummaryDropZone;
+
+class CGisSummary : public QWidget, private Ui::IGisSummary
 {
     Q_OBJECT
 public:
-    CSelectDBFolder(quint64& id, QString& db, QString& host, QWidget * parent);
-    virtual ~CSelectDBFolder();
+    CGisSummary(QWidget * parent);
+    virtual ~CGisSummary();
 
-    void setProjectsOnly(bool yes)
+    enum dropzone_e
     {
-        projectsOnly = yes;
+        eDropZone1 = 0
+        ,eDropZone2 = 1
+        ,eDropZone3 = 2
+        ,eDropZone4 = 3
+        ,eDropZoneMax = 4
+    };
+
+    struct folder_t
+    {
+        QString name;
+        QString db;
+        quint64 id = 0;
+    };
+
+    struct dropzone_t
+    {
+        QString name;
+        QList<folder_t> folders;
+        CGisSummaryDropZone * zone = nullptr;
+    };
+
+    dropzone_t& getDropZone(dropzone_e dropzone)
+    {
+        return dropZones[dropzone];
     }
 
 private slots:
-    void slotItemExpanded(QTreeWidgetItem * item);
-    void slotItemSelectionChanged();
+    void slotStartup();
+    void slotSetup();
 
 private:
-    quint64& id;
-    QString& db;
-    QString& host;
-
-    bool projectsOnly = false;
+    void setupDropZones();
+    QVector<dropzone_t> dropZones;
 };
 
-#endif //CSELECTDBFOLDER_H
-
+#endif //CGISSUMMARY_H
 

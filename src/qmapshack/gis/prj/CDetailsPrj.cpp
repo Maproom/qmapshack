@@ -401,7 +401,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
 
 void CDetailsPrj::addIcon(QTextTable * table, int col, int row, IGisItem * item, bool printable)
 {
-    table->cellAt(row,col).firstCursorPosition().insertImage(item->getIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
+    table->cellAt(row,col).firstCursorPosition().insertImage(item->getDisplayIcon().toImage().scaledToWidth(16, Qt::SmoothTransformation));
 
     if(!(printable||item->isReadOnly()))
     {

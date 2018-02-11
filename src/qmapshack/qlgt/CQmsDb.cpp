@@ -254,7 +254,7 @@ quint64 CQmsDb::store(IGisItem& item)
 
     QBuffer buffer;
     buffer.open(QIODevice::ReadWrite);
-    QPixmap pixmap = item.getIcon();
+    QPixmap pixmap = item.getDisplayIcon();
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 

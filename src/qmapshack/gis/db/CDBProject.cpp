@@ -344,7 +344,7 @@ void CDBProject::updateItem(IGisItem *&item, quint64 idItem, QSqlQuery &query)
     // prepare icon to be saved
     QBuffer buffer;
     buffer.open(QIODevice::ReadWrite);
-    QPixmap pixmap = item->getIcon();
+    QPixmap pixmap = item->getDisplayIcon();
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 
@@ -447,7 +447,7 @@ quint64 CDBProject::insertItem(IGisItem * item, QSqlQuery &query)
     // prepare icon to be saved
     QBuffer buffer;
     buffer.open(QIODevice::ReadWrite);
-    QPixmap pixmap = item->getIcon();
+    QPixmap pixmap = item->getDisplayIcon();
     pixmap.save(&buffer, "PNG");
     buffer.seek(0);
 

@@ -237,6 +237,11 @@ public:
 
     const QPixmap& getIcon() const
     {
+        return icon;
+    }
+
+    const QPixmap& getDisplayIcon() const
+    {
         return displayIcon;
     }
     /**

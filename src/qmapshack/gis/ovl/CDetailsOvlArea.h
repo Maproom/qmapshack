@@ -38,7 +38,6 @@ private slots:
     void slotSetWidth(int idx);
     void slotSetStyle(int idx);
     void slotOpacity(bool yes);
-    void slotNogo(bool yes);
     void slotChangeReadOnlyMode(bool on);
     void slotLinkActivated(const QUrl& url);
     void setupGui();

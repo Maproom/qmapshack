@@ -66,6 +66,8 @@ void CDetailsRte::setupGui()
 
     labelInfo->setText(rte.getInfo(IGisItem::eFeatureNone));
 
+    QString info = labelInfo->text();
+
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, rte.getComment(), rte.getDescription(), rte.getLinks()));
     textCmtDesc->moveCursor (QTextCursor::Start);
@@ -97,6 +99,7 @@ void CDetailsRte::setupGui()
 //    }
 
     toolLock->setChecked(isReadOnly);
+    labelNogo->setVisible(rte.isNogo());
     listHistory->setupHistory(rte);
     originator = false;
 }

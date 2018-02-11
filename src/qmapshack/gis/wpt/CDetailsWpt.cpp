@@ -118,6 +118,7 @@ void CDetailsWpt::setupGui()
     textCmtDesc->ensureCursorVisible();
 
     toolLock->setChecked(isReadOnly);
+    labelNogo->setVisible(wpt.isNogo());
 
     listHistory->setupHistory(wpt);
 
@@ -230,7 +231,6 @@ void CDetailsWpt::slotChangeIcon()
         }
     }
 }
-
 
 void CDetailsWpt::slotChangeReadOnlyMode(bool on)
 {

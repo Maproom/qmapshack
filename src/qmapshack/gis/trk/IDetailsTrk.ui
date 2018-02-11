@@ -276,6 +276,34 @@
              </widget>
             </item>
             <item>
+             <widget class="QLabel" name="labelNogo">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>22</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>This Track is a NoGo-Line</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="pixmap">
+               <pixmap resource="../../resources.qrc">:/icons/32x32/NoGo.png</pixmap>
+              </property>
+              <property name="scaledContents">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QToolButton" name="toolLock">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
@@ -348,7 +376,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1642,8 +1670,8 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupGraph3"/>
-  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupGraph2"/>
+  <buttongroup name="buttonGroupGraph1"/>
   <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupLineWidth"/>
  </buttongroups>

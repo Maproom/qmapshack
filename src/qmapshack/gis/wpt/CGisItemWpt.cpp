@@ -86,6 +86,8 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
+    this->setNogo(parentWpt.isNogo());
+
     detBoundingRect();
 
     setupHistory();
@@ -115,6 +117,8 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     {
         flags &= ~eFlagWriteAllowed;
     }
+
+    this->setNogo(parentWpt.isNogo());
 
     detBoundingRect();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -627,7 +631,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
 
     if (closeToRadius)
     {
-        drawCircle(p, posScreen, radius, isNogo(), true);
+        drawCircle(p, posScreen, radius, false, true);
     }
     else
     {

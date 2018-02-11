@@ -802,6 +802,10 @@ void CMainWindow::slotQuickstart()
         {
             QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartRussian"));
         }
+        else if(locale == "es")
+        {
+            QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartSpanish"));
+        }
         else
         {
             QDesktopServices::openUrl(QUrl("https://bitbucket.org/maproom/qmapshack/wiki/DocQuickStartEnglish"));

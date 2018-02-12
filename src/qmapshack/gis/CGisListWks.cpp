@@ -162,7 +162,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
     actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
-    actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGoTrack.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
+    actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGo.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
     actionNogoTrk->setCheckable(true);
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
@@ -177,9 +177,9 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
     actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
-    actionNogoWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptAvoid.png"),  tr("Toggle Nogo-Area"),  this, SLOT(slotNogoItem()));
-    actionNogoWpt->setCheckable(true);
     actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
+    actionNogoWpt = menuItemWpt->addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"),  this, SLOT(slotNogoItem()));
+    actionNogoWpt->setCheckable(true);
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -195,7 +195,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditRte    = menuItemRte->addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Route"),      this, SLOT(slotEditRte()));
     actionReverseRte = menuItemRte->addAction(QIcon("://icons/32x32/Reverse.png"),  tr("Reverse Route"),   this, SLOT(slotReverseRte()));
     actionRte2Trk    = menuItemRte->addAction(QIcon("://icons/32x32/Track.png"),    tr("Convert to Track"),this, SLOT(slotRte2Trk()));
-    actionNogoRte    = menuItemRte->addAction(QIcon("://icons/32x32/NoGoRoute.png"),tr("Toggle Nogo-Line"),this, SLOT(slotNogoItem()));
+    actionNogoRte    = menuItemRte->addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Line"),this, SLOT(slotNogoItem()));
     actionNogoRte->setCheckable(true);
     menuItemRte->addSeparator();
     menuItemRte->addAction(actionDelete);
@@ -206,7 +206,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItemOvl->addAction(actionCopyItem);
     menuItemOvl->addSeparator();
     actionEditArea  = menuItemOvl->addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
-    actionNogoArea  = menuItemOvl->addAction(QIcon("://icons/32x32/NoGoArea.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
+    actionNogoArea  = menuItemOvl->addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoArea->setCheckable(true);
     menuItemOvl->addSeparator();
     menuItemOvl->addAction(actionDelete);

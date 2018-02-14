@@ -209,89 +209,112 @@ bool CRouterBRouter::hasFastRouting()
     return setup->installMode == CRouterBRouterSetup::eModeLocal && checkFastRecalc->isChecked();
 }
 
-QNetworkRequest CRouterBRouter::getRequest(const QVector<point_t>& routePoints, const QVector<disc_t>& discs, const QVector<polygon_t>& polygons) const
+QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, const QList<IGisItem*> &nogos) const
 {
     QString lonLats;
-    bool isNext = false;
+    bool isNextPoint = false;
 
-    for(const point_t &pt : routePoints)
+    for(const QPointF &pt : routePoints)
     {
-        if (isNext)
+        if (isNextPoint)
         {
-            lonLats.append(QString("|%1,%2").arg(pt.lon).arg(pt.lat));
+            lonLats.append(QString("|%1,%2").arg(pt.x()).arg(pt.y()));
         }
         else
         {
-            lonLats = QString("%1,%2").arg(pt.lon).arg(pt.lat);
-            isNext = true;
+            lonLats = QString("%1,%2").arg(pt.x()).arg(pt.y());
+            isNextPoint = true;
         }
     }
 
-    QString nogos;
-    bool isNextNogo = false;
-
-    for(const disc_t &pt : discs)
-    {
-        if (isNextNogo)
-        {
-            nogos.append(QString("|%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad));
-        }
-        else
-        {
-            nogos = QString("%1,%2,%3").arg(pt.lon).arg(pt.lat).arg(pt.rad);
-            isNextNogo = true;
-        }
-    }
-
+    QString nogoStr;
     QString nogoPolygons;
     QString nogoPolylines;
 
+    bool isNextNogo = false;
     bool isNextPolygon = false;
     bool isNextPolyline = false;
-
-    for(const polygon_t &p : polygons)
+    for(IGisItem* const & item : nogos)
     {
-        if (p.points.size() == 0)
+        switch(item->type())
         {
-            continue;
+        case IGisItem::eTypeWpt:
+        {
+            CGisItemWpt * wpt = static_cast<CGisItemWpt*>(item);
+            const qreal& rad = wpt->getProximity();
+            if (rad != NOFLOAT && rad > 0.)
+            {
+                const QPointF& pos = wpt->getPosition();
+                if (isNextNogo)
+                {
+                    nogoStr.append(QString("|%1,%2,%3").arg(pos.x()).arg(pos.y()).arg(rad));
+                }
+                else
+                {
+                    nogoStr = QString("%1,%2,%3").arg(pos.x()).arg(pos.y()).arg(rad);
+                    isNextNogo = true;
+                }
+            }
+            break;
         }
-        QString nogoPoints;
-        bool isNextPoint = false;
-        for (const point_t point : p.points)
+        case IGisItem::eTypeOvl:
+        case IGisItem::eTypeRte:
+        case IGisItem::eTypeTrk:
         {
-            if (isNextPoint)
+            IGisLine* line = dynamic_cast<IGisLine*>(item);
+            Q_ASSERT(line!=nullptr);
+            SGisLine sline;
+            line->getPolylineFromData(sline);
+            QString nogoPoints;
+            bool isNextPoint = false;
+            for (const IGisLine::point_t & pt : sline)
             {
-                nogoPoints.append(QString(",%1,%2").arg(point.lon).arg(point.lat));
+                const QPointF & point = pt.coord*RAD_TO_DEG;
+                if (isNextPoint)
+                {
+                    nogoPoints.append(QString(",%1,%2").arg(point.x()).arg(point.y()));
+                }
+                else
+                {
+                    nogoPoints.append(QString("%1,%2").arg(point.x()).arg(point.y()));
+                    isNextPoint = true;
+                }
+                for (const IGisLine::subpt_t & subpt : pt.subpts)
+                {
+                    const QPointF &subPoint = subpt.coord*RAD_TO_DEG;
+                    nogoPoints.append(QString(",%1,%2").arg(subPoint.x()).arg(subPoint.y()));
+                }
+                if (item->type() == IGisItem::eTypeOvl)
+                {
+                    if (isNextPolygon)
+                    {
+                        nogoPolygons.append(QString("|%1").arg(nogoPoints));
+                    }
+                    else
+                    {
+                        nogoPolygons = nogoPoints;
+                        isNextPolygon = true;
+                    }
+                }
+                else
+                {
+                    if (isNextPolyline)
+                    {
+                        nogoPolylines.append(QString("|%1").arg(nogoPoints));
+                    }
+                    else
+                    {
+                        nogoPolylines = nogoPoints;
+                        isNextPolyline = true;
+                    }
+                }
             }
-            else
-            {
-                nogoPoints.append(QString("%1,%2").arg(point.lon).arg(point.lat));
-                isNextPoint = true;
-            }
+            break;
         }
-        if (p.closed)
+        default:
         {
-            if (isNextPolygon)
-            {
-                nogoPolygons.append(QString("|%1").arg(nogoPoints));
-            }
-            else
-            {
-                nogoPolygons = nogoPoints;
-                isNextPolygon = true;
-            }
+            Q_ASSERT(false);
         }
-        else
-        {
-            if (isNextPolyline)
-            {
-                nogoPolylines.append(QString("|%1").arg(nogoPoints));
-            }
-            else
-            {
-                nogoPolylines = nogoPoints;
-                isNextPolyline = true;
-            }
         }
     }
 
@@ -299,7 +322,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<point_t>& routePoints, 
     urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
     if (isNextNogo)
     {
-        urlQuery.addQueryItem("nogos", nogos.toLatin1());
+        urlQuery.addQueryItem("nogos", nogoStr.toLatin1());
     }
     if (isNextPolygon)
     {
@@ -327,18 +350,17 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         return -1;
     }
 
-    QVector<point_t> points(2);
-    points.replace(0,point_t(p1.y()*RAD_TO_DEG,p1.x()*RAD_TO_DEG));
-    points.replace(1,point_t(p2.y()*RAD_TO_DEG,p2.x()*RAD_TO_DEG));
+    QVector<QPointF> points(2);
+    points.replace(0,p1*RAD_TO_DEG);
+    points.replace(1,p2*RAD_TO_DEG);
 
-    QVector<disc_t> discs;
-    QVector<polygon_t> polygons;
-    CGisWorkspace::self().getNogoAreas(discs,polygons);
+    QList<IGisItem*> nogos;
+    CGisWorkspace::self().getNogoAreas(nogos);
 
-    return synchronousRequest(points,discs,polygons,coords,false);
+    return synchronousRequest(points,nogos,coords,false);
 }
 
-int CRouterBRouter::synchronousRequest(const QVector<point_t>& points, const QVector<disc_t> &discs, const QVector<polygon_t> &polygons, QPolygonF &coords, bool isVersionRequest)
+int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest)
 {
     if (isVersionRequest)
     {
@@ -358,7 +380,7 @@ int CRouterBRouter::synchronousRequest(const QVector<point_t>& points, const QVe
 
     synchronous = true;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points,discs,polygons));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,nogos));
 
     try
     {
@@ -376,7 +398,7 @@ int CRouterBRouter::synchronousRequest(const QVector<point_t>& points, const QVe
         delete progress;
 
         const QNetworkReply::NetworkError& netErr = reply->error();
-        if (netErr == QNetworkReply::RemoteHostClosedError && discs.size() > 1 && !isMinimumVersion(1,4,10))
+        if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1,4,10))
         {
             throw tr("this version of BRouter does not support more then 1 nogo-area");
         }
@@ -464,30 +486,28 @@ void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
         return;
     }
 
-    QVector<disc_t> discs;
-    QVector<polygon_t> polygons;
-    CGisWorkspace::self().getNogoAreas(discs,polygons);
+    QList<IGisItem*> nogos;
+    CGisWorkspace::self().getNogoAreas(nogos);
 
     rte->reset();
 
     slotCloseStatusMsg();
 
-    QVector<point_t> points;
+    QVector<QPointF> points;
     for(const CGisItemRte::rtept_t &pt : rte->getRoute().pts)
     {
-        points << point_t(pt.lat,pt.lon);
+        points << QPointF(pt.lon,pt.lat);
     }
 
     synchronous = false;
 
-    QNetworkReply * reply = networkAccessManager->get(getRequest(points,discs,polygons));
+    QNetworkReply * reply = networkAccessManager->get(getRequest(points,nogos));
 
     reply->setProperty("key.item", key.item);
     reply->setProperty("key.project", key.project);
     reply->setProperty("key.device", key.device);
     reply->setProperty("options", getOptions());
     reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
-    reply->setProperty("nogos", discs.size());
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -687,16 +707,15 @@ void CRouterBRouter::getBRouterVersion()
     else
     {
         // use 2 points known to be routable:
-        QVector<point_t> points(2);
-        points.replace(0,point_t(0.8495732565736815*RAD_TO_DEG,0.1944047317331011*RAD_TO_DEG));
-        points.replace(1,point_t(0.8495732565736816*RAD_TO_DEG,0.1944047317331012*RAD_TO_DEG));
+        QVector<QPointF> points(2);
+        points.replace(0,QPointF(0.1944047317331011,0.8495732565736815)*RAD_TO_DEG);
+        points.replace(1,QPointF(0.1944047317331012,0.8495732565736816)*RAD_TO_DEG);
         QPolygonF rt;
-        QVector<disc_t> discs(0);
-        QVector<polygon_t> polygons(0);
+        QList<IGisItem*> nogos;
         // parseBRouterVersion is called while parsing remote brouters xml-response:
         try
         {
-            synchronousRequest(points,discs,polygons,rt,true);
+            synchronousRequest(points,nogos,rt,true);
         }
         catch(const QString&)
         {

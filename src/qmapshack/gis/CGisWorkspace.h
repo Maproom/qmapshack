@@ -292,7 +292,7 @@ public:
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
-    void getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter::polygon_t> &polygons);
+    void getNogoAreas(QList<IGisItem *> &nogos);
     /**
        @brief Delete all items with matching key from workspace
 

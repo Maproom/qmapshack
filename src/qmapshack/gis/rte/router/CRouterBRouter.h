@@ -70,8 +70,8 @@ private:
     void parseBRouterVersion(const QString& text);
     bool usesLocalBindaddress() const;
     void updateLocalBRouterStatus() const;
-    int synchronousRequest(const QVector<point_t>& points, const QVector<disc_t> &areas, const QVector<polygon_t> &polygons, QPolygonF &coords, bool isVersionRequest);
-    QNetworkRequest getRequest(const QVector<point_t>& routePoints, const QVector<disc_t> &areas, const QVector<polygon_t> &polygons) const;
+    int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest);
+    QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem *> &nogos) const;
     QUrl getServiceUrl() const;
 
     QNetworkAccessManager * networkAccessManager;

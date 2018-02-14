@@ -399,7 +399,7 @@ void CGisWorkspace::getItemsByArea(const QRectF& area, IGisItem::selflags_t flag
     }
 }
 
-void CGisWorkspace::getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter::polygon_t> &polygons)
+void CGisWorkspace::getNogoAreas(QList<IGisItem*> &nogos)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     for(int i = 0; i < treeWks->topLevelItemCount(); i++)
@@ -408,13 +408,13 @@ void CGisWorkspace::getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRoute
         IGisProject * project = dynamic_cast<IGisProject*>(item);
         if(project)
         {
-            project->getNogoAreas(discs, polygons);
+            project->getNogoAreas(nogos);
             continue;
         }
         IDevice * device = dynamic_cast<IDevice*>(item);
         if(device)
         {
-            device->getNogoAreas(discs, polygons);
+            device->getNogoAreas(nogos);
             continue;
         }
     }

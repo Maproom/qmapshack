@@ -70,7 +70,7 @@ public:
 
     void getItemsByPos(const QPointF& pos, QList<IGisItem *> &items);
     void getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QList<IGisItem *> &items);
-    void getNogoAreas(QVector<IRouter::disc_t> &discs, QVector<IRouter::polygon_t> &polygons);
+    void getNogoAreas(QList<IGisItem *> &nogos);
     IGisItem * getItemByKey(const IGisItem::key_t& key);
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
     void editItemByKey(const IGisItem::key_t& key);

@@ -302,7 +302,6 @@ public:
     void setComment(const QString& str)         override;
     void setDescription(const QString& str)     override;
     void setLinks(const QList<link_t>& links)   override;
-    bool setNogo(bool yes)                      override;
     void setDataFromPolyline(const SGisLine &l) override;
     quint32 getNumberOfAttachedWpt()
     {

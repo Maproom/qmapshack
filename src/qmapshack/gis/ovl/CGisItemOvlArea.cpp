@@ -550,20 +550,3 @@ void CGisItemOvlArea::setIcon(const QString& c)
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
     IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
-
-bool CGisItemOvlArea::setNogo(bool yes)
-{
-    if (IGisItem::setNogo(yes))
-    {
-        if(yes)
-        {
-            changed(tr("Changed to nogo-area"),"://icons/48x48/NoGoArea.png");
-        }
-        else
-        {
-            changed(tr("Changed to normal area"),"://icons/48x48/Area.png");
-        }
-        return true;
-    }
-    return false;
-}

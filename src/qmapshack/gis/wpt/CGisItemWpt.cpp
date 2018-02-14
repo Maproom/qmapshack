@@ -894,23 +894,6 @@ void CGisItemWpt::toggleBubble()
     updateHistory();
 }
 
-bool CGisItemWpt::setNogo(bool yes)
-{
-    if (IGisItem::setNogo(yes))
-    {
-        if (yes)
-        {
-            changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
-        }
-        else
-        {
-            changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
-        }
-        return true;
-    }
-    return false;
-}
-
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)
 {
     if(rectBubbleMove.contains(pos) || rectBubbleEdit.contains(pos) || rectBubbleSize.contains(pos))

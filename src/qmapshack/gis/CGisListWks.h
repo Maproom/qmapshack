@@ -100,6 +100,7 @@ private slots:
     void slotCombineTrk();
     void slotRangeTrk();
     void slotActivityTrk();
+    void slotColorTrk();
     void slotCopyTrkWithWpt();
     void slotFocusRte(bool on);
     void slotCalcRte();
@@ -178,6 +179,7 @@ private:
     QAction * actionCombineTrk;
     QAction * actionRangeTrk;
     QAction * actionActivityTrk;
+    QAction * actionColorTrk;
     QAction * actionCopyTrkWithWpt;
     QAction * actionFocusRte;
     QAction * actionCalcRte;

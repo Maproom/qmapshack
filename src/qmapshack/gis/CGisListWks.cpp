@@ -161,6 +161,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
     actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
+    actionColorTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     menuItemTrk->addSeparator();
     actionDelete    = menuItemTrk->addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
@@ -212,6 +213,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
+    menuItem->addAction(actionColorTrk);
     menuItem->addAction(actionDelete);
     connect(menuItem, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
@@ -1059,6 +1061,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
             actionActivityTrk->setEnabled(onlyTrks);
+            actionColorTrk->setEnabled(onlyTrks);
             actionSymWpt->setEnabled(hasWpts);
 
             menuItem->exec(p);
@@ -1579,6 +1582,26 @@ void CGisListWks::slotActivityTrk()
         }
     }
 }
+
+
+void CGisListWks::slotColorTrk()
+{
+    quint32 color = CColorTrk::selectColor(this);
+    if(0xFFFFFFFF != color)
+    {
+        CGisListWksEditLock lock(true, IGisItem::mutexItems);
+        QList<QTreeWidgetItem*> items = selectedItems();
+        for(QTreeWidgetItem * item : items)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+            if(trk)
+            {
+                trk->setColor(color);
+            }
+        }
+    }
+}
+
 
 void CGisListWks::slotRangeTrk()
 {

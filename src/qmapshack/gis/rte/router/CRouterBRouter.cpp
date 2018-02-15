@@ -218,11 +218,11 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
     {
         if (isNextPoint)
         {
-            lonLats.append(QString("|%1,%2").arg(pt.x()).arg(pt.y()));
+            lonLats.append(QString("|%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6));
         }
         else
         {
-            lonLats = QString("%1,%2").arg(pt.x()).arg(pt.y());
+            lonLats = QString("%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6);
             isNextPoint = true;
         }
     }
@@ -247,11 +247,11 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
                 const QPointF& pos = wpt->getPosition();
                 if (isNextNogo)
                 {
-                    nogoStr.append(QString("|%1,%2,%3").arg(pos.x()).arg(pos.y()).arg(rad));
+                    nogoStr.append(QString("|%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad));
                 }
                 else
                 {
-                    nogoStr = QString("%1,%2,%3").arg(pos.x()).arg(pos.y()).arg(rad);
+                    nogoStr = QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad);
                     isNextNogo = true;
                 }
             }
@@ -263,50 +263,44 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
         {
             IGisLine* line = dynamic_cast<IGisLine*>(item);
             Q_ASSERT(line!=nullptr);
-            SGisLine sline;
-            line->getPolylineFromData(sline);
+            QPolygonF polygon;
+            line->getPolylineFromData(polygon);
             QString nogoPoints;
             bool isNextPoint = false;
-            for (const IGisLine::point_t & pt : sline)
+            for (const QPointF point : polygon)
             {
-                const QPointF & point = pt.coord*RAD_TO_DEG;
                 if (isNextPoint)
                 {
-                    nogoPoints.append(QString(",%1,%2").arg(point.x()).arg(point.y()));
+                    nogoPoints.append(QString(",%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
                 }
                 else
                 {
-                    nogoPoints.append(QString("%1,%2").arg(point.x()).arg(point.y()));
+                    nogoPoints.append(QString("%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
                     isNextPoint = true;
                 }
-                for (const IGisLine::subpt_t & subpt : pt.subpts)
+            }
+            if (item->type() == IGisItem::eTypeOvl)
+            {
+                if (isNextPolygon)
                 {
-                    const QPointF &subPoint = subpt.coord*RAD_TO_DEG;
-                    nogoPoints.append(QString(",%1,%2").arg(subPoint.x()).arg(subPoint.y()));
-                }
-                if (item->type() == IGisItem::eTypeOvl)
-                {
-                    if (isNextPolygon)
-                    {
-                        nogoPolygons.append(QString("|%1").arg(nogoPoints));
-                    }
-                    else
-                    {
-                        nogoPolygons = nogoPoints;
-                        isNextPolygon = true;
-                    }
+                    nogoPolygons.append(QString("|%1").arg(nogoPoints));
                 }
                 else
                 {
-                    if (isNextPolyline)
-                    {
-                        nogoPolylines.append(QString("|%1").arg(nogoPoints));
-                    }
-                    else
-                    {
-                        nogoPolylines = nogoPoints;
-                        isNextPolyline = true;
-                    }
+                    nogoPolygons = nogoPoints;
+                    isNextPolygon = true;
+                }
+            }
+            else
+            {
+                if (isNextPolyline)
+                {
+                    nogoPolylines.append(QString("|%1").arg(nogoPoints));
+                }
+                else
+                {
+                    nogoPolylines = nogoPoints;
+                    isNextPolyline = true;
                 }
             }
             break;

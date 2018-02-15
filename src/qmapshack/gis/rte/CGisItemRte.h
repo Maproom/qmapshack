@@ -173,7 +173,7 @@ public:
     void setDataFromPolyline(const SGisLine& l) override;
 
     void getPolylineFromData(SGisLine &l) const override;
-    void getPolylineFromData(QPolygonF &polygon) const override;
+    void getPolylineDegFromData(QPolygonF &polygon) const override;
 
     const QString& getComment() const override
     {

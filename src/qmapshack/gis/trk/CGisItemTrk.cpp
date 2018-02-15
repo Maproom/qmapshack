@@ -273,6 +273,12 @@ void CGisItemTrk::getPolylineFromData(SGisLine &l) const
     trk.getPolyline(l);
 }
 
+void CGisItemTrk::getPolylineDegFromData(QPolygonF &l) const
+{
+    QMutexLocker lock(&mutexItems);
+    trk.getPolylineDeg(l);
+}
+
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
     QMutexLocker lock(&mutexItems);

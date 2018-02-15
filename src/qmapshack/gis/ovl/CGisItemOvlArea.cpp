@@ -449,7 +449,7 @@ void CGisItemOvlArea::getPolylineFromData(SGisLine &l) const
     }
 }
 
-void CGisItemOvlArea::getPolylineFromData(QPolygonF &polygon) const
+void CGisItemOvlArea::getPolylineDegFromData(QPolygonF &polygon) const
 {
     QMutexLocker lock(&mutexItems);
 

@@ -2328,6 +2328,23 @@ void CGisItemTrk::setIcon(const QString& iconColor)
     IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
 
+bool CGisItemTrk::setNogo(bool yes)
+{
+    if (IGisItem::setNogo(yes))
+    {
+        if(yes)
+        {
+            changed(tr("Changed to nogo-line"),"://icons/48x48/NoGoTrack.png");
+        }
+        else
+        {
+            changed(tr("Changed to normal track"),"://icons/48x48/Track.png");
+        }
+        return true;
+    }
+    return false;
+}
+
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {
     const CTrackData::trkpt_t * newPointOfFocus = nullptr;

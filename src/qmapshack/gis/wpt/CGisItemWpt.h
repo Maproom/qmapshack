@@ -295,6 +295,8 @@ public:
         return geocache.hasData;
     }
 
+    bool setNogo(bool yes) override;
+
     bool hasRadius()
     {
         return proximity < NOFLOAT;

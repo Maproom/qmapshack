@@ -114,6 +114,17 @@ void CTrackData::getPolyline(QPolygonF &l) const
     }
 }
 
+void CTrackData::getPolylineDeg(QPolygonF &l) const
+{
+    l.clear();
+    for(const trkpt_t &pt : *this)
+    {
+        if(!pt.isHidden())
+        {
+            l << QPointF(pt.lon,pt.lat);
+        }
+    }
+}
 
 bool CTrackData::isTrkPtFirstVisible(qint32 idxTotal) const
 {

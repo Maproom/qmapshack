@@ -598,7 +598,7 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
     lastDatabaseHash = getHash();
 }
 
-void IGisItem::setIcon(QPixmap icon)
+void IGisItem::setIcon(const QPixmap &icon)
 {
     this->icon = icon;
     showIcon();

@@ -802,7 +802,7 @@ void CGisItemRte::getPolylineFromData(SGisLine& l) const
     }
 }
 
-void CGisItemRte::getPolylineFromData(QPolygonF &polygon) const
+void CGisItemRte::getPolylineDegFromData(QPolygonF &polygon) const
 {
     QMutexLocker lock(&mutexItems);
     polygon.clear();

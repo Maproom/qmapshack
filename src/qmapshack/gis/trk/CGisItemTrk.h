@@ -231,9 +231,10 @@ public:
 
 
     /// get the track as a simple coordinate polyline
-    void getPolylineFromData(QPolygonF &l) const override;
+    void getPolylineFromData(QPolygonF &l) const;
     /// get the track as polyline with elevation, pixel and GIS coordinates.
     void getPolylineFromData(SGisLine& l) const override;
+    void getPolylineDegFromData(QPolygonF &l) const override;
 
     /**
        @brief Get the elevation of a track point

@@ -233,7 +233,7 @@ public:
        @brief Get the icon attached to object
        @return
      */
-    void setIcon(QPixmap icon);
+    void setIcon(const QPixmap & icon);
 
     const QPixmap& getIcon() const
     {

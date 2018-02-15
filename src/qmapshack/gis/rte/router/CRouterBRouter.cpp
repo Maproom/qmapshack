@@ -264,7 +264,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             IGisLine* line = dynamic_cast<IGisLine*>(item);
             Q_ASSERT(line!=nullptr);
             QPolygonF polygon;
-            line->getPolylineFromData(polygon);
+            line->getPolylineDegFromData(polygon);
             QString nogoPoints;
             bool isNextPoint = false;
             for (const QPointF point : polygon)

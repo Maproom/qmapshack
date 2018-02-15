@@ -767,7 +767,7 @@ void CGisItemRte::setDataFromPolyline(const SGisLine &l)
     changed(tr("Changed route points."), "://icons/48x48/LineMove.png");
 }
 
-void CGisItemRte::getPolylineFromData(SGisLine& l)
+void CGisItemRte::getPolylineFromData(SGisLine& l) const
 {
     QMutexLocker lock(&mutexItems);
     l.clear();
@@ -781,6 +781,21 @@ void CGisItemRte::getPolylineFromData(SGisLine& l)
         for(const subpt_t &subpt : rtept.subpts)
         {
             pt.subpts << IGisLine::subpt_t(QPointF(subpt.lon * DEG_TO_RAD, subpt.lat * DEG_TO_RAD));
+        }
+    }
+}
+
+void CGisItemRte::getPolylineFromData(QPolygonF &polygon) const
+{
+    QMutexLocker lock(&mutexItems);
+    polygon.clear();
+    for(const rtept_t &rtept : rte.pts)
+    {
+        polygon << QPointF(rtept.lon, rtept.lat);
+
+        for(const subpt_t &subpt : rtept.subpts)
+        {
+            polygon << QPointF(subpt.lon, subpt.lat);
         }
     }
 }

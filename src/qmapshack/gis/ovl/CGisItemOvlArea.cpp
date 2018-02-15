@@ -438,7 +438,7 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
+void CGisItemOvlArea::getPolylineFromData(SGisLine &l) const
 {
     QMutexLocker lock(&mutexItems);
 
@@ -446,6 +446,17 @@ void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
     for(const pt_t &pt : area.pts)
     {
         l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+    }
+}
+
+void CGisItemOvlArea::getPolylineFromData(QPolygonF &polygon) const
+{
+    QMutexLocker lock(&mutexItems);
+
+    polygon.clear();
+    for(const pt_t &pt : area.pts)
+    {
+        polygon << QPointF(pt.lon, pt.lat);
     }
 }
 

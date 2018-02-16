@@ -411,20 +411,21 @@ void CGisItemWpt::setElevation(qint32 val)
 
 void CGisItemWpt::setProximity(qreal val)
 {
-    proximity = val == NOFLOAT ? val : qRound(val);
-
-    detBoundingRect();
-
-    radius = NOFLOAT; //radius is proximity in set on redraw
-
-    if (proximity == NOFLOAT)
+    if (val == NOFLOAT)
     {
+        proximity = NOFLOAT;
+        setNogo(false);
         changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
     }
     else
     {
+        proximity = qRound(val);
         changed(tr("Changed proximity"),"://icons/48x48/WptEditProx.png");
     }
+
+    detBoundingRect();
+
+    radius = NOFLOAT; //radius is proximity in set on redraw
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -892,23 +893,6 @@ void CGisItemWpt::toggleBubble()
         flags |= eFlagWptBubble;
     }
     updateHistory();
-}
-
-bool CGisItemWpt::setNogo(bool yes)
-{
-    if (IGisItem::setNogo(yes))
-    {
-        if (yes)
-        {
-            changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
-        }
-        else
-        {
-            changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
-        }
-        return true;
-    }
-    return false;
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)

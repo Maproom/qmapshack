@@ -885,7 +885,7 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     return false;
 }
 
-bool IGisItem::setNogo(bool yes)
+void IGisItem::setNogo(bool yes)
 {
     bool changed = false;
     if(yes)
@@ -907,8 +907,8 @@ bool IGisItem::setNogo(bool yes)
     if (changed)
     {
         showIcon();
+        updateHistory();
     }
-    return changed;
 }
 
 const QBrush& IGisItem::getNogoTextureBrush()

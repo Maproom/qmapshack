@@ -461,7 +461,7 @@ public:
      */
     virtual IGisItem * createClone() = 0;
 
-    virtual bool setNogo(bool yes);
+    void setNogo(bool yes);
     bool isNogo() const
     {
         return bool(flags & eFlagNogo);

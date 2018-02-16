@@ -203,7 +203,6 @@ public:
     void setComment(const QString& str)       override;
     void setDescription(const QString& str)   override;
     void setLinks(const QList<link_t>& links) override;
-    bool setNogo(bool yes)                    override;
 
     void calc();
     void reset();

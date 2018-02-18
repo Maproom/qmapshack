@@ -20,12 +20,9 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CSettings.h"
-#include "units/IUnit.h"
-
 
 CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
-    : QWidget(parent)
-    , trk(trk)
+    : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
 {
     setupUi(this);
 
@@ -40,10 +37,11 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     slopeAtMaxSpeed->setSuffix(slopeUnit);
     slopeAtMinSpeed->setSuffix(slopeUnit);
 
+    // 4 fix and 3 custom cycling types has be defined as default!
     const QList<cycling_type_t> cyclingTypeDefaults =
     {
         {
-           tr("City")           // name
+           tr("City")           // name           Fix
            , 15                 // plainSpeed
            , 5                  // minSpeed
            , 5                  // slopeAtMinSpeed
@@ -51,37 +49,51 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
            , -5                 // slopeAtMaxSpeed
         },
         {
-            tr("Trekking"), 20, 5, 8, 40, -5
+            tr("Trekking"), 20, 5, 8, 40, -5   // Fix
         },
         {
-            tr("Sportive"), 27, 7, 10, 60, -8
+            tr("Sportive"), 27, 7, 10, 60, -8  // Fix
         },
         {
-            tr("Mountain"), 15, 4, 15, 40, -15
+            tr("Mountain"), 15, 4, 15, 40, -15 // Fix
         },
         {
-            tr("Custom 0"), 20, 5, 8, 40,-5
+            tr("Custom 0"), 20, 5, 8, 40, -5 // Custom
         },
         {
-            tr("Custom 1"), 20, 5, 8, 40,-5
+            tr("Custom 1"), 20, 5, 8, 40, -5 // Custom
         },
         {
-            tr("Custom 2"), 20, 5, 8, 40,-5
+            tr("Custom 2"), 20, 5, 8, 40, -5 // Custom
         }
     };
 
-    SETTINGS;
     cycling_type_t cyclingType;
-    cfg.beginReadArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
-    for (int i = 0; i < cyclingTypeDefaults.size(); ++i)
+    for (int i = 0; i < noOfFixTypes; ++i)
     {
+        cyclingType.name = cyclingTypeDefaults[i].name;
+        cyclingType.plainSpeed = cyclingTypeDefaults[i].plainSpeed;
+        cyclingType.minSpeed = cyclingTypeDefaults[i].minSpeed;
+        cyclingType.slopeAtMinSpeed = cyclingTypeDefaults[i].slopeAtMinSpeed;
+        cyclingType.maxSpeed = cyclingTypeDefaults[i].maxSpeed;
+        cyclingType.slopeAtMaxSpeed = cyclingTypeDefaults[i].slopeAtMaxSpeed;
+
+        comboCyclingType->addItem(cyclingType.name);
+        cyclingTypes << cyclingType;
+    }
+
+    SETTINGS;
+    cfg.beginReadArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
+    for (int i = 0; i < noOfCustomTypes; ++i)
+    {
+        const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
-        cyclingType.name = cfg.value("name", cyclingTypeDefaults[i].name).toString();
-        cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefaults[i].plainSpeed).toDouble();
-        cyclingType.minSpeed = cfg.value("minSpeed", cyclingTypeDefaults[i].minSpeed).toDouble();
-        cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", cyclingTypeDefaults[i].slopeAtMinSpeed).toDouble();
-        cyclingType.maxSpeed = cfg.value("maxSpeed", cyclingTypeDefaults[i].maxSpeed).toDouble();
-        cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", cyclingTypeDefaults[i].slopeAtMaxSpeed).toDouble();
+        cyclingType.name = cfg.value("name", cyclingTypeDefault.name).toString();
+        cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefault.plainSpeed).toDouble();
+        cyclingType.minSpeed = cfg.value("minSpeed", cyclingTypeDefault.minSpeed).toDouble();
+        cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", cyclingTypeDefault.slopeAtMinSpeed).toDouble();
+        cyclingType.maxSpeed = cfg.value("maxSpeed", cyclingTypeDefault.maxSpeed).toDouble();
+        cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", cyclingTypeDefault.slopeAtMaxSpeed).toDouble();
 
         comboCyclingType->addItem(cyclingType.name);
         cyclingTypes << cyclingType;
@@ -113,10 +125,10 @@ CFilterSpeed::~CFilterSpeed()
 {
     SETTINGS;
     cfg.beginWriteArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
-    int i = 0;
-    for(const cycling_type_t& cyclingType : cyclingTypes)
+    for (int i = 0; i < noOfCustomTypes; ++i)
     {
-        cfg.setArrayIndex(i++);
+        const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
+        cfg.setArrayIndex(i);
         cfg.setValue("name", cyclingType.name);
         cfg.setValue("plainSpeed", cyclingType.plainSpeed);
         cfg.setValue("minSpeed", cyclingType.minSpeed);
@@ -142,10 +154,7 @@ void CFilterSpeed::slotApply()
         break;
     case 1:
     {
-        qint32 i = comboCyclingType->currentIndex();
-        trk.filterSpeed(cyclingTypes[i].plainSpeed / IUnit::self().speedfactor,
-                        cyclingTypes[i].minSpeed / IUnit::self().speedfactor, cyclingTypes[i].slopeAtMinSpeed,
-                        cyclingTypes[i].maxSpeed / IUnit::self().speedfactor, cyclingTypes[i].slopeAtMaxSpeed);
+        trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
         break;
     }
     default:

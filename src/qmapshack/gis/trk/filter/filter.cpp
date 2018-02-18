@@ -24,6 +24,7 @@
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 
+
 #include <QtMath>
 #include <proj_api.h>
 
@@ -321,11 +322,15 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
-void CGisItemTrk::filterSpeed(qreal plainSpeed,
-                              qreal minSpeed, qreal slopeAtMinSpeed,
-                              qreal maxSpeed, qreal slopeAtMaxSpeed)
+void CGisItemTrk::filterSpeed(const struct CFilterSpeed::cycling_type_t &cyclingType)
 {
-   QDateTime timestamp = timeStart;
+    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
+    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
+    qreal slopeAtMinSpeed = cyclingType.slopeAtMinSpeed;
+    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedfactor;
+    qreal slopeAtMaxSpeed = cyclingType.slopeAtMaxSpeed;
+
+    QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
     {
         timestamp = QDateTime::currentDateTime().toUTC();

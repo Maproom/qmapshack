@@ -131,7 +131,7 @@
    <item row="1" column="5">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pageConstant">
       <layout class="QGridLayout" name="gridLayout_3">
@@ -157,7 +157,7 @@
            <item>
             <widget class="QLabel" name="label_2">
              <property name="text">
-              <string>speed</string>
+              <string>Speed</string>
              </property>
             </widget>
            </item>
@@ -169,7 +169,13 @@
              <property name="decimals">
               <number>1</number>
              </property>
+             <property name="minimum">
+              <double>0.100000000000000</double>
+             </property>
              <property name="singleStep">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="value">
               <double>0.100000000000000</double>
              </property>
             </widget>

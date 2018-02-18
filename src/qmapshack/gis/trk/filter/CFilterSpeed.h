@@ -33,6 +33,16 @@ public:
 
     void setElevationValid();
 
+    struct cycling_type_t
+    {
+        QString name;
+        qreal plainSpeed;
+        qreal minSpeed;
+        qreal slopeAtMinSpeed;
+        qreal maxSpeed;
+        qreal slopeAtMaxSpeed;
+    };
+
 private slots:
     void slotApply();
 
@@ -47,16 +57,8 @@ private slots:
 
 private:
     CGisItemTrk& trk;
-
-    struct cycling_type_t
-    {
-        QString name;
-        qreal plainSpeed;
-        qreal minSpeed;
-        qreal slopeAtMinSpeed;
-        qreal maxSpeed;
-        qreal slopeAtMaxSpeed;
-    };
+    const qint32 noOfFixTypes;
+    const qint32 noOfCustomTypes;
 
     QList <cycling_type_t> cyclingTypes;
 

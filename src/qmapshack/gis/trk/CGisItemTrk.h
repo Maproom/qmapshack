@@ -25,6 +25,7 @@
 #include "gis/trk/CTrackData.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
+#include "gis/trk/filter/CFilterSpeed.h"
 
 #include <QDebug>
 #include <QPen>
@@ -526,9 +527,7 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeed(qreal plainSpeed,
-                     qreal minSpeed, qreal slopeAtMinSpeed,
-                     qreal maxSpeed, qreal slopeAtMaxSpeed);
+    void filterSpeed(const struct CFilterSpeed::cycling_type_t &cyclingType);
     void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();

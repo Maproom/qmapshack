@@ -73,13 +73,9 @@ void CMouseNormal::rightButtonDown(const QPoint& point)
     // right button cancels unclutter and item-options
     if (screenUnclutter->size() > 0 || !screenItemOption.isNull())
     {
-        resetState();
+        resetState();        
     }
-    // if neither unclutter nor options are active show menu
-    else
-    {
-        showContextMenu(point);
-    }
+    showContextMenu(point);
 }
 
 void CMouseNormal::longPress(const QPoint& point)

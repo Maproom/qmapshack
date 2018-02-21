@@ -41,6 +41,7 @@ CColorChooser::CColorChooser(QToolButton *parent)
         button->setAutoRaise(true);
         button->setIcon(QIcon(pixmap));
         button->setProperty("color", IGisItem::colorMap[i].color.name());
+        button->setToolTip(IGisItem::colorMap[i].name);
         horizontalLayout->addWidget(button);
 
         auto selectFunc = bind(&CColorChooser::slotSelect, this, button);

@@ -1588,12 +1588,13 @@ void CGisListWks::slotActivityTrk()
 void CGisListWks::slotColorTrk()
 {
     QColor chosenQcolor;
-    QToolButton * colorSelectButton = new QToolButton(this);
-    CColorChooser colorChooserBar(colorSelectButton);
+    QToolButton colorSelectButton(this);
+    CColorChooser colorChooserBar(&colorSelectButton);
+    colorChooserBar.move(QCursor::pos());
 
     if(colorChooserBar.exec() == QDialog::Accepted)
     {
-        chosenQcolor = QColor(colorSelectButton->property("color").toString());
+        chosenQcolor = QColor(colorSelectButton.property("color").toString());
 
         quint32 colorIdx = 0;
         for(int i=0; i < TRK_N_COLORS; ++i)

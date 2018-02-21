@@ -150,7 +150,6 @@ set( SRCS
     gis/tnv/serialization.cpp
     gis/trk/CActivityTrk.cpp
     gis/trk/CCombineTrk.cpp
-    gis/trk/CColorTrk.cpp
     gis/trk/CCutTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CGisItemTrk.cpp
@@ -460,7 +459,6 @@ set( HDRS
     gis/tnv/CTwoNavProject.h
     gis/trk/CActivityTrk.h
     gis/trk/CCombineTrk.h
-    gis/trk/CColorTrk.h
     gis/trk/CCutTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CGisItemTrk.h

@@ -59,6 +59,7 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
+#include "widgets/CColorChooser.h"
 
 #include <QApplication>
 #include <QtSql>
@@ -1586,9 +1587,24 @@ void CGisListWks::slotActivityTrk()
 
 void CGisListWks::slotColorTrk()
 {
-    quint32 color = CColorTrk::selectColor(this);
-    if(0xFFFFFFFF != color)
+    QColor chosenQcolor;
+    QToolButton * colorSelectButton = new QToolButton(this);
+    CColorChooser colorChooserBar(colorSelectButton);
+
+    if(colorChooserBar.exec() == QDialog::Accepted)
     {
+        chosenQcolor = QColor(colorSelectButton->property("color").toString());
+
+        quint32 colorIdx = 0;
+        for(int i=0; i < TRK_N_COLORS; ++i)
+        {
+            if (IGisItem::colorMap[i].color == chosenQcolor)
+            {
+                colorIdx = i;
+                break;
+            }
+        }
+
         CGisListWksEditLock lock(true, IGisItem::mutexItems);
         QList<QTreeWidgetItem*> items = selectedItems();
         for(QTreeWidgetItem * item : items)
@@ -1596,7 +1612,7 @@ void CGisListWks::slotColorTrk()
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
             if(trk)
             {
-                trk->setColor(color);
+                trk->setColor(colorIdx);
             }
         }
     }

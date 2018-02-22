@@ -88,7 +88,7 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
         qreal idx = pBand->GetNoDataValue(&success);
         if(success)
         {
-            if((idx > 0) && (idx < colortable.size()))
+            if((idx >= 0) && (idx < colortable.size()))
             {
                 QColor tmp(colortable[idx]);
                 tmp.setAlpha(0);

@@ -212,28 +212,20 @@ bool CRouterBRouter::hasFastRouting()
 QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, const QList<IGisItem*> &nogos) const
 {
     QString lonLats;
-    bool isNextPoint = false;
 
     for(const QPointF &pt : routePoints)
     {
-        if (isNextPoint)
+        if (!lonLats.isEmpty())
         {
-            lonLats.append(QString("|%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6));
+            lonLats.append("|");
         }
-        else
-        {
-            lonLats = QString("%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6);
-            isNextPoint = true;
-        }
+        lonLats.append(QString("%1,%2").arg(pt.x(),0,'f',6).arg(pt.y(),0,'f',6));
     }
 
     QString nogoStr;
     QString nogoPolygons;
     QString nogoPolylines;
 
-    bool isNextNogo = false;
-    bool isNextPolygon = false;
-    bool isNextPolyline = false;
     for(IGisItem* const & item : nogos)
     {
         switch(item->type())
@@ -245,15 +237,11 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             if (rad != NOFLOAT && rad > 0.)
             {
                 const QPointF& pos = wpt->getPosition();
-                if (isNextNogo)
+                if (!nogoStr.isEmpty())
                 {
-                    nogoStr.append(QString("|%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad));
+                    nogoStr.append("|");
                 }
-                else
-                {
-                    nogoStr = QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad);
-                    isNextNogo = true;
-                }
+                nogoStr.append(QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad));
             }
             break;
         }
@@ -266,42 +254,29 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             QPolygonF polygon;
             line->getPolylineDegFromData(polygon);
             QString nogoPoints;
-            bool isNextPoint = false;
             for (const QPointF point : polygon)
             {
-                if (isNextPoint)
+                if (!nogoPoints.isEmpty())
                 {
-                    nogoPoints.append(QString(",%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
+                    nogoPoints.append(",");
                 }
-                else
-                {
-                    nogoPoints.append(QString("%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
-                    isNextPoint = true;
-                }
+                nogoPoints.append(QString("%1,%2").arg(point.x(),0,'f',6).arg(point.y(),0,'f',6));
             }
             if (item->type() == IGisItem::eTypeOvl)
             {
-                if (isNextPolygon)
+                if (!nogoPolygons.isEmpty())
                 {
-                    nogoPolygons.append(QString("|%1").arg(nogoPoints));
+                    nogoPolygons.append("|");
                 }
-                else
-                {
-                    nogoPolygons = nogoPoints;
-                    isNextPolygon = true;
-                }
+                nogoPolygons.append(QString("%1").arg(nogoPoints));
             }
             else
             {
-                if (isNextPolyline)
+                if (!nogoPolylines.isEmpty())
                 {
-                    nogoPolylines.append(QString("|%1").arg(nogoPoints));
+                    nogoPolylines.append("|");
                 }
-                else
-                {
-                    nogoPolylines = nogoPoints;
-                    isNextPolyline = true;
-                }
+                nogoPolylines.append(QString("%1").arg(nogoPoints));
             }
             break;
         }
@@ -314,15 +289,15 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
 
     QUrlQuery urlQuery;
     urlQuery.addQueryItem("lonlats",lonLats.toLatin1());
-    if (isNextNogo)
+    if (!nogoStr.isEmpty())
     {
         urlQuery.addQueryItem("nogos", nogoStr.toLatin1());
     }
-    if (isNextPolygon)
+    if (!nogoPolygons.isEmpty())
     {
         urlQuery.addQueryItem("polygons", nogoPolygons.toLatin1());
     }
-    if (isNextPolyline)
+    if (!nogoPolylines.isEmpty())
     {
         urlQuery.addQueryItem("polylines", nogoPolylines.toLatin1());
     }
@@ -344,9 +319,7 @@ int CRouterBRouter::calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& c
         return -1;
     }
 
-    QVector<QPointF> points(2);
-    points.replace(0,p1*RAD_TO_DEG);
-    points.replace(1,p2*RAD_TO_DEG);
+    const QVector<QPointF> points = {p1*RAD_TO_DEG, p2*RAD_TO_DEG};
 
     QList<IGisItem*> nogos;
     CGisWorkspace::self().getNogoAreas(nogos);

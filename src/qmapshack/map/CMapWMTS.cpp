@@ -90,11 +90,20 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         const QDomNode& xmlBoundingBox = xmlLayer.firstChildElement("WGS84BoundingBox");
         str = xmlBoundingBox.namedItem("LowerCorner").toElement().text();
         values = str.split(" ");
-        QPointF bottomLeft(values[0].toDouble(), values[1].toDouble());
+
+        QPointF bottomLeft;
+        if(values.size() == 2)
+        {
+            bottomLeft = QPointF(values[0].toDouble(), values[1].toDouble());
+        }
 
         str = xmlBoundingBox.namedItem("UpperCorner").toElement().text();
         values = str.split(" ");
-        QPointF topRight(values[0].toDouble(), values[1].toDouble());
+        QPointF topRight;
+        if(values.size() == 2)
+        {
+            topRight = QPointF(values[0].toDouble(), values[1].toDouble());
+        }
 
         layer.boundingBox.setBottomLeft(bottomLeft);
         layer.boundingBox.setTopRight(topRight);

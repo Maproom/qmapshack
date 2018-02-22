@@ -208,7 +208,7 @@ void CDetailsOvlArea::setupGui()
     comboColor->setEnabled      (!isReadOnly);
     comboBorderWidth->setEnabled(!isReadOnly);
     comboStyle->setEnabled      (!isReadOnly && !isNogo);
-    checkOpacity->setEnabled    (!isReadOnly);
+    checkOpacity->setEnabled    (!isReadOnly && !isNogo);
 
     checkOpacity->setChecked(area.getOpacity());
 

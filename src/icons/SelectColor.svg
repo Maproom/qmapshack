@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6568542"
-     inkscape:cx="19.337614"
-     inkscape:cy="35.450343"
+     inkscape:cx="-46.24654"
+     inkscape:cy="34.743237"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:document-units="px"
@@ -157,5 +157,34 @@
        sodipodi:open="true"
        inkscape:transform-center-x="357.02561"
        inkscape:transform-center-y="-86.449058" />
+    <g
+       id="g3856"
+       transform="matrix(1.880201,0,0,1.4854749,77.517952,-39.050083)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3828"
+         d="m -23.809459,52.661657 -0.134742,-7.426612 5.927764,-16.286397 3.098624,-0.716586 1.91307,2.540693 -5.927764,16.286397 z"
+         style="fill:none;stroke:#ffffff;stroke-width:3.04031777;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3026"
+         d="m -18.016437,28.948648 5.011694,1.824107 -5.927764,16.286397 -4.876952,5.602505 -0.134742,-7.426612 z"
+         style="fill:#00ff00;stroke:#008000;stroke-width:1.52015889px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3032"
+         d="m -23.809459,52.661657 -0.134742,-7.426612 3.098624,-0.716586 1.91307,2.540693 z"
+         style="fill:none;stroke:#000000;stroke-width:1.52015889px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3034"
+         d="m -15.51059,29.860701 -5.334987,14.657758"
+         style="fill:none;stroke:#008000;stroke-width:1.52015889px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path3036"
+         d="m -18.016437,28.948648 3.098624,-0.716586 1.91307,2.540693 z"
+         style="fill:none;stroke:#008000;stroke-width:1.52015889px;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1" />
+    </g>
   </g>
 </svg>

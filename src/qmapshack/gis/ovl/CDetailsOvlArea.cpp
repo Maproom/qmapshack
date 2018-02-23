@@ -66,7 +66,7 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     connect(comboBorderWidth, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetWidth);
     connect(comboStyle,       static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsOvlArea::slotSetStyle);
 
-    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpyacity);
+    connect(checkOpacity,     &QCheckBox::toggled,             this, &CDetailsOvlArea::slotOpacity);
     connect(toolLock,         &QToolButton::toggled,           this, &CDetailsOvlArea::slotChangeReadOnlyMode);
     connect(textCmtDesc,      &QTextBrowser::anchorClicked,    this, static_cast<void (CDetailsOvlArea::*)(const QUrl&)>(&CDetailsOvlArea::slotLinkActivated));
     connect(lineName,         &CLineEdit::textEdited,          this, &CDetailsOvlArea::slotNameChanged);
@@ -111,7 +111,7 @@ void CDetailsOvlArea::slotSetStyle(int idx)
     setupGui();
 }
 
-void CDetailsOvlArea::slotOpyacity(bool yes)
+void CDetailsOvlArea::slotOpacity(bool yes)
 {
     if(area.isReadOnly() || originator)
     {
@@ -194,6 +194,7 @@ void CDetailsOvlArea::setupGui()
     originator = true;
 
     bool isReadOnly = area.isReadOnly();
+    bool isNogo = area.isNogo();
     setWindowTitle(area.getName());
 
     labelTainted->setVisible(area.isTainted());
@@ -202,14 +203,17 @@ void CDetailsOvlArea::setupGui()
 
     comboColor->setCurrentIndex      (area.getColorIdx());
     comboBorderWidth->setCurrentIndex(comboBorderWidth->findData(area.getWidth()));
-    comboStyle->setCurrentIndex      (comboStyle->findData      (area.getStyle()));
+    comboStyle->setCurrentIndex      (isNogo ? Qt::NoBrush : comboStyle->findData(area.getStyle()));
 
     comboColor->setEnabled      (!isReadOnly);
     comboBorderWidth->setEnabled(!isReadOnly);
-    comboStyle->setEnabled      (!isReadOnly);
-    checkOpacity->setEnabled    (!isReadOnly);
+    comboStyle->setEnabled      (!isReadOnly && !isNogo);
+    checkOpacity->setEnabled    (!isReadOnly && !isNogo);
 
     checkOpacity->setChecked(area.getOpacity());
+
+    labelNogo->setVisible(isNogo);
+    labelStyle->setEnabled(!isNogo);
 
     textCmtDesc->document()->clear();
     textCmtDesc->append(IGisItem::createText(isReadOnly, area.getComment(), area.getDescription(), area.getLinks()));

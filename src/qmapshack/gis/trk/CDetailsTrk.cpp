@@ -348,6 +348,7 @@ void CDetailsTrk::updateData()
     originator = true;
 
     bool isReadOnly = trk.isReadOnly();
+    bool isNogo = trk.isNogo();
 
     tabWidget->widget(eTabFilter)->setEnabled(!isReadOnly);
 
@@ -356,6 +357,7 @@ void CDetailsTrk::updateData()
     labelInfo->setText(trk.getInfo(IGisItem::eFeatureNone));
     comboColor->setCurrentIndex(trk.getColorIdx());
     toolLock->setChecked(isReadOnly);
+    labelNogo->setVisible(isNogo);
 
     lineName->setText(trk.getName());
     lineName->setReadOnly(isReadOnly);
@@ -394,8 +396,11 @@ void CDetailsTrk::updateData()
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
     toolUserLineWith->setChecked(trk.lineScale.getMode() == CValue::eModeUser);
 
-    checkWithArrows->setChecked(trk.showArrows.val().toBool());
-    toolUserArrow->setChecked(trk.showArrows.getMode() == CValue::eModeUser);
+    checkWithArrows->setEnabled(!isNogo);
+    checkWithArrows->setChecked(!isNogo && trk.showArrows.val().toBool());
+    toolUserArrow->setEnabled(!isNogo);
+    toolUserArrow->setChecked(!isNogo && trk.showArrows.getMode() == CValue::eModeUser);
+    toolDefArrow->setEnabled(!isNogo);
 
     comboColorSource->clear();
     // the first entry `solid color`, it is always available
@@ -585,8 +590,6 @@ void CDetailsTrk::slotChangeReadOnlyMode(bool on)
     trk.updateVisuals(CGisItemTrk::eVisualProject, "CDetailsTrk::slotChangeReadOnlyMode()");
     updateData();
 }
-
-
 
 void CDetailsTrk::slotLinkActivated(const QUrl& url)
 {

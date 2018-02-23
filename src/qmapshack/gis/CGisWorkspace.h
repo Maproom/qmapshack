@@ -292,7 +292,7 @@ public:
 
     void getItemsByKeys(const QList<IGisItem::key_t>& keys, QList<IGisItem*>& items);
 
-    void getNogoAreas(QVector<IRouter::circle_t> &areas);
+    void getNogoAreas(QList<IGisItem *> &nogos);
     /**
        @brief Delete all items with matching key from workspace
 
@@ -342,7 +342,7 @@ public:
 
     void deleteWptRadius(const IGisItem::key_t &key);
 
-    void toggleWptNogoArea(const IGisItem::key_t &key);
+    void toggleNogoItem(const IGisItem::key_t &key);
 
     void editWptRadius(const IGisItem::key_t &key);
 

@@ -29,9 +29,9 @@ CSelectCopyAction::CSelectCopyAction(const IGisItem *src, const IGisItem *tar, Q
 {
     setupUi(this);
 
-    labelIcon1->setPixmap(src->getIcon());
+    labelIcon1->setPixmap(src->getDisplayIcon());
     labelInfo1->setText(src->getInfo(IGisItem::eFeatureShowName));
-    labelIcon2->setPixmap(tar->getIcon());
+    labelIcon2->setPixmap(tar->getDisplayIcon());
     labelInfo2->setText(tar->getInfo(IGisItem::eFeatureShowName));
 
     adjustSize();

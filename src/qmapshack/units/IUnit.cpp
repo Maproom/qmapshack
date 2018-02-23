@@ -462,6 +462,20 @@ void IUnit::slope2string(qreal slope, QString &val, QString &unit)
     }
 }
 
+qreal IUnit::slopeConvert(IUnit::slope_mode_e fromMode, qreal fromSlope)
+{
+    qreal ret = NOFLOAT;
+    if(fromMode == eSlopeDegrees)
+    {
+        ret = qTan(qDegreesToRadians(fromSlope)) * 100.0;
+    }
+    else if(fromMode == eSlopePercent)
+    {
+        ret = qAtan2(fromSlope, 100.0) * RAD_TO_DEG;
+    }
+    return ret;
+}
+
 void IUnit::slope2unit(qreal slope, qreal &val, QString &unit)
 {
     switch(slopeMode)

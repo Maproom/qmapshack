@@ -461,6 +461,12 @@ void CDetailsTrk::updateData()
         filter->update();
     }
 
+    CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
+    if(nullptr != filterSpeed)
+    {
+        filterSpeed->setElevationValid();
+    }
+
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }

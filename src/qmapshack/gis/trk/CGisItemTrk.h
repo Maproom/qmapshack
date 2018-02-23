@@ -527,7 +527,7 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeed(const struct CFilterSpeed::cycling_type_t &cyclingType);
+    void filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType);
     void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();

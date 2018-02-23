@@ -322,7 +322,7 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
-void CGisItemTrk::filterSpeed(const struct CFilterSpeed::cycling_type_t &cyclingType)
+void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
 {
     qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
     qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
@@ -336,8 +336,7 @@ void CGisItemTrk::filterSpeed(const struct CFilterSpeed::cycling_type_t &cycling
         timestamp = QDateTime::currentDateTime().toUTC();
     }
 
-    qreal averageSpeed = 0, speed = 0;
-    qint32 noOfPoints = 0;
+    qreal speed = 0;
 
     QEasingCurve upHillCurve(QEasingCurve::OutQuad);
     QEasingCurve downHillCurve(QEasingCurve::InQuad);
@@ -379,20 +378,13 @@ void CGisItemTrk::filterSpeed(const struct CFilterSpeed::cycling_type_t &cycling
 
         timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;
-
-        averageSpeed += speed;
-        ++noOfPoints;
     }
 
-    if (noOfPoints)
-    {
-        speed = averageSpeed / noOfPoints;
+    deriveSecondaryData();
 
-        deriveSecondaryData();
-        QString val, unit;
-        IUnit::self().meter2speed(speed, val, unit);
-        changed(tr("Changed average speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
-    }
+    QString val, unit;
+    IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
+    changed(tr("Changed average moving speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(qreal speed)

@@ -124,7 +124,7 @@ void IDevice::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags, QLi
     }
 }
 
-void IDevice::getNogoAreas(QVector<IRouter::circle_t> & areas)
+void IDevice::getNogoAreas(QList<IGisItem*> &nogos)
 {
     const int N = childCount();
     for(int n = 0; n < N; n++)
@@ -132,14 +132,14 @@ void IDevice::getNogoAreas(QVector<IRouter::circle_t> & areas)
         IGisProject * project = dynamic_cast<IGisProject*>(child(n));
         if(project != nullptr)
         {
-            project->getNogoAreas(areas);
+            project->getNogoAreas(nogos);
             continue;
         }
 
         IDevice * device = dynamic_cast<IDevice*>(child(n));
         if(device != nullptr)
         {
-            device->getNogoAreas(areas);
+            device->getNogoAreas(nogos);
         }
     }
 }

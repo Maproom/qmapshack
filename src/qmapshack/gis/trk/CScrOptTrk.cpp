@@ -42,6 +42,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     toolReverse->setDisabled(isOnDevice);
     toolRange->setDisabled(isOnDevice);
     toolCopyWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
+    toolNogo->setChecked(trk->isNogo());
 
     IGisProject * project = trk->getParentProject();
     if(project != nullptr)
@@ -79,7 +80,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::slotRange);
     connect(toolActivity,    &QToolButton::clicked, this, &CScrOptTrk::slotActivity);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
-
+    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
 
     // reset user focus if the track has it
     trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CScrOptTrk");
@@ -155,6 +156,12 @@ void CScrOptTrk::slotActivity()
 void CScrOptTrk::slotCopyWithWpt()
 {
     CGisWorkspace::self().copyTrkWithWptByKey(key);
+    close();
+}
+
+void CScrOptTrk::slotNogo()
+{
+    CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 

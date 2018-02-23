@@ -598,6 +598,32 @@ void IGisItem::setLastDatabaseHash(quint64 id, QSqlDatabase& db)
     lastDatabaseHash = getHash();
 }
 
+void IGisItem::setIcon(const QPixmap &icon)
+{
+    this->icon = icon;
+    showIcon();
+}
+
+void IGisItem::showIcon()
+{
+    if (isNogo())
+    {
+        const int & width = icon.width();
+        const int & height = icon.height();
+        displayIcon = QPixmap(width,height);
+        displayIcon.fill(Qt::transparent);
+        QPainter painter(&displayIcon);
+        painter.drawPixmap(0,0,icon);
+        painter.drawPixmap(width*0.4,height*0.4,QPixmap("://icons/48x48/NoGo.png").scaled(width*0.6,height*0.6,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    }
+    else
+    {
+        displayIcon = icon;
+    }
+    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,displayIcon);
+}
+
+
 QColor IGisItem::str2color(const QString& name)
 {
     for(size_t i = 0; i < colorMapSize; i++)
@@ -857,6 +883,48 @@ bool IGisItem::isWithin(const QRectF& area, selflags_t flags, const QPolygonF& p
     }
 
     return false;
+}
+
+void IGisItem::setNogo(bool yes)
+{
+    bool changed = false;
+    if(yes)
+    {
+        if(!(flags & eFlagNogo))
+        {
+            flags |= eFlagNogo;
+            changed = true;
+        }
+    }
+    else
+    {
+        if(flags & eFlagNogo)
+        {
+            flags &= ~eFlagNogo;
+            changed = true;
+        }
+    }
+    if (changed)
+    {
+        showIcon();
+        updateHistory();
+    }
+}
+
+const QBrush& IGisItem::getNogoTextureBrush()
+{
+    static QBrush texture = []()->QBrush{
+        QPixmap texture(40,40);
+        QColor color = QColor(255,0,0,77);
+        texture.fill(color);
+        QPainter painter(&texture);
+        QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14,14,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        painter.setOpacity(0.5);
+        painter.drawPixmap(0,0,nogo);
+        painter.drawPixmap(20,20,nogo);
+        return QBrush(texture);
+    }();
+    return texture;
 }
 
 bool IGisItem::getNameAndProject(QString &name, IGisProject *&project, const QString& itemtype)

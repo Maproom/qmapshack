@@ -27,6 +27,7 @@
 #include <QDomNode>
 #include <QMap>
 #include <QMutex>
+#include <QPainter>
 #include <QString>
 #include <QStringList>
 #include <QUrl>
@@ -232,9 +233,16 @@ public:
        @brief Get the icon attached to object
        @return
      */
-    virtual const QPixmap& getIcon() const
+    void setIcon(const QPixmap & icon);
+
+    const QPixmap& getIcon() const
     {
         return icon;
+    }
+
+    const QPixmap& getDisplayIcon() const
+    {
+        return displayIcon;
     }
     /**
        @brief Get name of this item.
@@ -453,6 +461,13 @@ public:
      */
     virtual IGisItem * createClone() = 0;
 
+    void setNogo(bool yes);
+    bool isNogo() const
+    {
+        return bool(flags & eFlagNogo);
+    }
+
+    static const QBrush& getNogoTextureBrush();
 
     IGisProject * getParentProject() const;
 
@@ -574,6 +589,7 @@ protected:
     mutable key_t key;
     /// each item has an icon for the tree widget
     QPixmap icon;
+    QPixmap displayIcon;
     /// the dimensions of the item
     QRectF boundingRect;
     /// that's where the real data is. An item is completely defined by it's history
@@ -587,8 +603,12 @@ protected:
         ,eFlagWriteAllowed  = 0x00000002
         ,eFlagTainted       = 0x00000004
         ,eFlagWptBubble     = 0x00000100
-        ,eFlagWptNogo      = 0x00000200
+        ,eFlagNogo          = 0x00000200
     };
+
+private:
+
+    void showIcon();
 };
 
 QDataStream& operator>>(QDataStream& stream, IGisItem::history_t& h);

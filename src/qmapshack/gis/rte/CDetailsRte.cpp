@@ -97,6 +97,7 @@ void CDetailsRte::setupGui()
 //    }
 
     toolLock->setChecked(isReadOnly);
+    labelNogo->setVisible(rte.isNogo());
     listHistory->setupHistory(rte);
     originator = false;
 }

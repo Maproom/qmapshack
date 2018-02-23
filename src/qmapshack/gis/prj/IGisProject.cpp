@@ -673,7 +673,7 @@ void IGisProject::getItemsByArea(const QRectF& area, IGisItem::selflags_t flags,
     }
 }
 
-void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
+void IGisProject::getNogoAreas(QList<IGisItem*> &nogos) const
 {
     if(!isVisible())
     {
@@ -682,15 +682,10 @@ void IGisProject::getNogoAreas(QVector<IRouter::circle_t> &areas) const
 
     for(int i = 0; i < childCount(); i++)
     {
-        CGisItemWpt * item = dynamic_cast<CGisItemWpt*>(child(i));
-        if(nullptr != item && !item->isHidden() && item->isNogoArea())
+        IGisItem * item = dynamic_cast<IGisItem*>(child(i));
+        if (item != nullptr && !item->isHidden() && item->isNogo())
         {
-            const qreal& rad = item->getProximity();
-            if (rad != NOFLOAT && rad > 0.)
-            {
-                const QPointF& pos = item->getPosition();
-                areas << IRouter::circle_t(pos.y(),pos.x(),rad);
-            }
+            nogos << item;
         }
     }
 }

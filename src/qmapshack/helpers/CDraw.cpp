@@ -70,7 +70,7 @@ static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
 
 void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
 {
-    QImage arrow = createBasicArrow(p.brush(), scale);
+    static const QImage arrow = createBasicArrow(p.brush(), scale);
     qreal xoff = qCeil(arrow.width()/2.0);
     qreal yoff = qFloor((arrow.height()-1)/2.0);
 
@@ -89,7 +89,7 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
         {
             QPointF arrowPos = prevPt + (pt - prevPt)/2;
 
-            if( (viewport.contains(pt) || 0 == viewport.height()) // ensure the point is visible
+            if( (viewport.contains(arrowPos) || 0 == viewport.height()) // ensure the point is visible
                 && (firstArrow || pointDistanceSquare(prevArrow, arrowPos) >= minArrowDistSquare) )
             {
                 p.save();
@@ -106,6 +106,43 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
                 firstArrow = false;
             }
         }
+    }
+}
+
+void CDraw::nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minNogoDist)
+{
+    static const QImage nogo = QImage("://icons/48x48/NoGo.png").scaled(14,14, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+
+    double l = minNogoDist / 3;
+
+    for(int i = 1; i < line.size(); i++)
+    {
+        const QPointF &pt     = line[i    ];
+        const QPointF &prevPt = line[i - 1];
+
+        const double dist = sqrt(pointDistanceSquare(pt, prevPt));
+
+        if ( l <= dist )
+        {
+            const QPointF line = pt - prevPt;
+            do
+            {
+                const QPointF nogoPos = prevPt + line * l/dist;
+
+                if( (viewport.contains(nogoPos) || 0 == viewport.height())) // ensure the point is visible
+                {
+                    p.save();
+
+                    p.translate(nogoPos);
+                    p.drawImage(-7, -7, nogo);
+
+                    p.restore();
+                }
+                l += minNogoDist;
+            }
+            while ( l <= dist );
+        }
+        l -= dist;
     }
 }
 

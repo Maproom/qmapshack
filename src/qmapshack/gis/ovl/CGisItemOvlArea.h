@@ -59,7 +59,9 @@ public:
         return colorIdx;
     }
     QString getInfo(quint32 feature) const override;
-    void getPolylineFromData(SGisLine& l) override;
+    void getPolylineFromData(SGisLine& l) const override;
+    void getPolylineDegFromData(QPolygonF &polygon) const override;
+
     const QString& getComment() const override
     {
         return area.cmt;

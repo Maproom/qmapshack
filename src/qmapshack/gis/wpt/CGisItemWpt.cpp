@@ -86,6 +86,8 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
+    this->setNogo(parentWpt.isNogo());
+
     detBoundingRect();
 
     setupHistory();
@@ -115,6 +117,8 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
     {
         flags &= ~eFlagWriteAllowed;
     }
+
+    this->setNogo(parentWpt.isNogo());
 
     detBoundingRect();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -370,14 +374,12 @@ void CGisItemWpt::setIcon()
 {
     if(geocache.hasData)
     {
-        icon = getWptIconByName(geocache.type, focus);
+        IGisItem::setIcon(getWptIconByName(geocache.type, focus));
     }
     else
     {
-        icon = getWptIconByName(wpt.sym, focus);
+        IGisItem::setIcon(getWptIconByName(wpt.sym, focus));
     }
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
 }
 
 void CGisItemWpt::setName(const QString& str)
@@ -409,20 +411,21 @@ void CGisItemWpt::setElevation(qint32 val)
 
 void CGisItemWpt::setProximity(qreal val)
 {
-    proximity = val == NOFLOAT ? val : qRound(val);
-
-    detBoundingRect();
-
-    radius = NOFLOAT; //radius is proximity in set on redraw
-
-    if (proximity == NOFLOAT)
+    if (val == NOFLOAT)
     {
+        proximity = NOFLOAT;
+        setNogo(false);
         changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
     }
     else
     {
+        proximity = qRound(val);
         changed(tr("Changed proximity"),"://icons/48x48/WptEditProx.png");
     }
+
+    detBoundingRect();
+
+    radius = NOFLOAT; //radius is proximity in set on redraw
 }
 
 void CGisItemWpt::setIcon(const QString& name)
@@ -540,7 +543,7 @@ void CGisItemWpt::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
         //remember radius for isCloseTo-method
         radius = calcRadius(QPointF(wpt.lon * DEG_TO_RAD, wpt.lat * DEG_TO_RAD),posScreen,proximity,gis);
 
-        drawCircle(p, posScreen, radius, !hideArea && isNogoArea(), false);
+        drawCircle(p, posScreen, radius, !hideArea && isNogo(), false);
     }
 
     drawBubble(p);
@@ -629,7 +632,7 @@ void CGisItemWpt::drawHighlight(QPainter& p)
 
     if (closeToRadius)
     {
-        drawCircle(p, posScreen, radius, isNogoArea(), true);
+        drawCircle(p, posScreen, radius, false, true);
     }
     else
     {
@@ -682,7 +685,7 @@ void CGisItemWpt::drawBubble(QPainter& p)
     p.restore();
 }
 
-void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& filled, const bool& selected)
+void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool& nogo, const bool& selected)
 {
     QRect circle(pos.x() - r - 1, pos.y() - r - 1, 2*r + 1, 2*r + 1);
     p.save();
@@ -697,11 +700,13 @@ void CGisItemWpt::drawCircle(QPainter& p, const QPointF& pos, const qreal& r, co
         p.drawEllipse(circle);
         p.setPen(QPen(Qt::red,1));
     }
-    if (filled)
-    {
-        p.setBrush(QBrush(Qt::red,Qt::DiagCrossPattern));
-    }
     p.drawEllipse(circle);
+    if (nogo)
+    {
+        p.setBrush(getNogoTextureBrush());
+        p.setPen(Qt::NoPen);
+        p.drawEllipse(circle);
+    }
     p.restore();
 }
 
@@ -888,20 +893,6 @@ void CGisItemWpt::toggleBubble()
         flags |= eFlagWptBubble;
     }
     updateHistory();
-}
-
-void CGisItemWpt::toggleNogoArea()
-{
-    if(flags & eFlagWptNogo)
-    {
-        flags &= ~eFlagWptNogo;
-        changed(tr("Changed to proximity-radius"),"://icons/48x48/WptProx.png");
-    }
-    else
-    {
-        flags |= eFlagWptNogo;
-        changed(tr("Changed to nogo-area"),"://icons/48x48/WptAvoid.png");
-    }
 }
 
 void CGisItemWpt::processMouseOverBubble(const QPoint &pos)

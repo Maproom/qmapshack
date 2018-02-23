@@ -49,7 +49,7 @@ CScrOptWptRadius::CScrOptWptRadius(CGisItemWpt *wpt, const QPoint& point, IMouse
 
     adjustSize();
 
-    toolNogoArea->setChecked(wpt->isNogoArea());
+    toolNogoArea->setChecked(wpt->isNogo());
 
     anchor = wpt->getPointCloseBy(point);
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
@@ -74,7 +74,7 @@ void CScrOptWptRadius::slotDelete()
 
 void CScrOptWptRadius::slotNogoArea()
 {
-    CGisWorkspace::self().toggleWptNogoArea(key);
+    CGisWorkspace::self().toggleNogoItem(key);
     close();
 }
 

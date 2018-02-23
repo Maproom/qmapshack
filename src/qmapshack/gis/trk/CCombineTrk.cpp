@@ -40,7 +40,7 @@ CCombineTrk::CCombineTrk(const QList<IGisItem::key_t> &keys, const QList<IGisIte
 
         QListWidgetItem * item = new QListWidgetItem(keysPreSel.contains(key) ? listSelected : listAvailable);
         item->setText(trk->getName());
-        item->setIcon(trk->getIcon());
+        item->setIcon(trk->getDisplayIcon());
         item->setData(Qt::UserRole + 1, key.item);
         item->setData(Qt::UserRole + 2, key.project);
         item->setData(Qt::UserRole + 3, key.device);

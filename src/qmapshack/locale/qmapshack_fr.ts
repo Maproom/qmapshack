@@ -7018,11 +7018,6 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Apply filter now.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="163"/>
         <source>Speed</source>
         <translation type="unfinished"></translation>
@@ -7074,7 +7069,7 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <source>User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -7101,6 +7096,11 @@ Si vous voulez conserver seulement une moitié vous pouvez simplement enlever le
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="170"/>
         <source> km/h</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
+        <source>Apply filter now.</source>
+        <translation type="unfinished">Appliquer le filtre maintenant.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="105"/>

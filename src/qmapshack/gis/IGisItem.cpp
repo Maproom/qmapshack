@@ -913,17 +913,17 @@ void IGisItem::setNogo(bool yes)
 
 const QBrush& IGisItem::getNogoTextureBrush()
 {
-    static QBrush texture = []()->QBrush{
-        QPixmap texture(40,40);
-        QColor color = QColor(255,0,0,77);
-        texture.fill(color);
-        QPainter painter(&texture);
-        QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14,14,Qt::KeepAspectRatio, Qt::SmoothTransformation);
-        painter.setOpacity(0.5);
-        painter.drawPixmap(0,0,nogo);
-        painter.drawPixmap(20,20,nogo);
-        return QBrush(texture);
-    }();
+    static QBrush texture = []() -> QBrush {
+                                QPixmap texture(40,40);
+                                QColor color = QColor(255,0,0,77);
+                                texture.fill(color);
+                                QPainter painter(&texture);
+                                QPixmap nogo = QPixmap("://icons/48x48/NoGo.png").scaled(14,14,Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                                painter.setOpacity(0.5);
+                                painter.drawPixmap(0,0,nogo);
+                                painter.drawPixmap(20,20,nogo);
+                                return QBrush(texture);
+                            } ();
     return texture;
 }
 

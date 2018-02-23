@@ -23,9 +23,9 @@
 #include "gis/IGisLine.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CTrackData.h"
+#include "gis/trk/filter/CFilterSpeed.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
-#include "gis/trk/filter/CFilterSpeed.h"
 
 #include <QDebug>
 #include <QPen>

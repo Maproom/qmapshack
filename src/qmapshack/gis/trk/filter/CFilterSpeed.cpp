@@ -41,12 +41,12 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     const QList<cycling_type_t> cyclingTypeDefaults =
     {
         {
-           tr("City")           // name           Fix
-           , 15                 // plainSpeed
-           , 5                  // minSpeed
-           , 5                  // slopeAtMinSpeed
-           , 35                 // maxSpeed
-           , -5                 // slopeAtMaxSpeed
+            tr("City")          // name           Fix
+            , 15                // plainSpeed
+            , 5                 // minSpeed
+            , 5                 // slopeAtMinSpeed
+            , 35                // maxSpeed
+            , -5                // slopeAtMaxSpeed
         },
         {
             tr("Trekking"), 20, 5, 8, 40, -5   // Fix
@@ -152,11 +152,13 @@ void CFilterSpeed::slotApply()
     case 0:
         trk.filterSpeed(constantSpeed->value()/IUnit::self().speedfactor);
         break;
+
     case 1:
     {
         trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
         break;
     }
+
     default:
         break;
     }
@@ -188,7 +190,6 @@ void CFilterSpeed::setElevationValid()
         pageCycling->setEnabled(true);
         toolApply->setEnabled(true);
     }
-
 }
 
 void CFilterSpeed::slotSetCyclingType(int type)

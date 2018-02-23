@@ -89,7 +89,7 @@ private slots:
     void slotEditItem();
     void slotDeleteItem();
     void slotBubbleWpt();
-    void slotNogoAreaWpt();
+    void slotNogoItem();
     void slotDelRadiusWpt();
     void slotEditRadiusWpt();
     void slotProjWpt();
@@ -100,6 +100,7 @@ private slots:
     void slotCombineTrk();
     void slotRangeTrk();
     void slotActivityTrk();
+    void slotColorTrk();
     void slotCopyTrkWithWpt();
     void slotFocusRte(bool on);
     void slotCalcRte();

@@ -61,7 +61,6 @@ private:
     const qint32 noOfCustomTypes;
 
     QList <cycling_type_t> cyclingTypes;
-
 };
 
 #endif //CFILTERSPEED_H

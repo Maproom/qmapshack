@@ -205,7 +205,6 @@ void CSmlProject::loadSml(const QString &filename, CSmlProject *project)
 
                 for (int i = 0; i < xmlSampleList.count(); i++) // browse XML samples
                 {
-
                     sample_t sample;
                     const QDomNode& xmlSample = xmlSampleList.item(i);
 

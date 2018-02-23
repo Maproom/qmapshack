@@ -245,6 +245,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             }
             break;
         }
+
         case IGisItem::eTypeOvl:
         case IGisItem::eTypeRte:
         case IGisItem::eTypeTrk:
@@ -280,6 +281,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
             }
             break;
         }
+
         default:
         {
             Q_ASSERT(false);

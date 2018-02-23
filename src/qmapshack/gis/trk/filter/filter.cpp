@@ -357,7 +357,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
 
         if(slope < slopeAtMaxSpeed)
         {
-           speed = maxSpeed;
+            speed = maxSpeed;
         }
         else if(slope < 0 && slope >= slopeAtMaxSpeed)
         {
@@ -365,7 +365,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
         }
         else if(slope == 0)
         {
-           speed = plainSpeed;
+            speed = plainSpeed;
         }
         else if(slope > 0 && slope <= slopeAtMinSpeed)
         {

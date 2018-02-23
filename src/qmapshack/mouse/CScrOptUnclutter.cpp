@@ -143,7 +143,7 @@ void CScrOptUnclutter::addItem(IGisItem * gisItem)
     item.hasUserFocus   = gisItem->hasUserFocus();
     item.name           = gisItem->getNameEx();
     item.key            = gisItem->getKey();
-    item.icon           = gisItem->getIcon();
+    item.icon           = gisItem->getDisplayIcon();
     item.area           = item.icon.rect();
     item.active         = item.area.adjusted(-10,-10,10,10);
 }

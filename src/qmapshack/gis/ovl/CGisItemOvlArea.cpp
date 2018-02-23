@@ -309,9 +309,18 @@ void CGisItemOvlArea::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRe
 
     penForeground.setColor(color);
     penForeground.setWidth(area.width);
-    p.setBrush(QBrush(color, (Qt::BrushStyle)area.style));
+    p.setBrush(isNogo() ? getNogoTextureBrush() : QBrush(color, (Qt::BrushStyle)area.style));
     p.setPen(penForeground);
     p.drawPolygon(polygonArea);
+
+    //close polygon (required by isCloseTo)
+    const pt_t &pt = area.pts.first();
+    pt1.setX(pt.lon);
+    pt1.setY(pt.lat);
+    pt1 *= DEG_TO_RAD;
+    gis->convertRad2Px(pt1);
+    polygonArea << pt1;
+
     p.restore();
 }
 
@@ -429,7 +438,7 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const
     return str + "</div>";
 }
 
-void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
+void CGisItemOvlArea::getPolylineFromData(SGisLine &l) const
 {
     QMutexLocker lock(&mutexItems);
 
@@ -437,6 +446,17 @@ void CGisItemOvlArea::getPolylineFromData(SGisLine &l)
     for(const pt_t &pt : area.pts)
     {
         l << point_t(QPointF(pt.lon * DEG_TO_RAD, pt.lat * DEG_TO_RAD));
+    }
+}
+
+void CGisItemOvlArea::getPolylineDegFromData(QPolygonF &polygon) const
+{
+    QMutexLocker lock(&mutexItems);
+
+    polygon.clear();
+    for(const pt_t &pt : area.pts)
+    {
+        polygon << QPointF(pt.lon, pt.lat);
     }
 }
 
@@ -534,12 +554,10 @@ void CGisItemOvlArea::setColor(const QColor& c)
 void CGisItemOvlArea::setIcon(const QString& c)
 {
     area.color  = c;
-    icon        = QPixmap("://icons/48x48/Area.png");
+    QPixmap icon = QPixmap("://icons/48x48/Area.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(c) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    icon = mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
+    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }

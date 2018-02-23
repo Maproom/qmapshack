@@ -55,7 +55,8 @@ public:
     };
 
     virtual void setDataFromPolyline(const SGisLine& line) = 0;
-    virtual void getPolylineFromData(SGisLine& line) = 0;
+    virtual void getPolylineFromData(SGisLine& line) const = 0;
+    virtual void getPolylineDegFromData(QPolygonF& polygon) const = 0;
 };
 
 struct SGisLine : public QVector<IGisLine::point_t>

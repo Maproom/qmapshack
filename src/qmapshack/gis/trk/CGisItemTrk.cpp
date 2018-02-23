@@ -267,12 +267,17 @@ void CGisItemTrk::getPolylineFromData(QPolygonF &l) const
     trk.getPolyline(l);
 }
 
-void CGisItemTrk::getPolylineFromData(SGisLine &l)
+void CGisItemTrk::getPolylineFromData(SGisLine &l) const
 {
     QMutexLocker lock(&mutexItems);
     trk.getPolyline(l);
 }
 
+void CGisItemTrk::getPolylineDegFromData(QPolygonF &l) const
+{
+    QMutexLocker lock(&mutexItems);
+    trk.getPolylineDeg(l);
+}
 
 void CGisItemTrk::readTrackDataFromGisLine(const SGisLine &l)
 {
@@ -1697,7 +1702,7 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     for(const QPolygonF &l : lines)
     {
         p.drawPolyline(l);
-        if(showArrows.val().toBool())
+        if(!isNogo() && showArrows.val().toBool())
         {
             CDraw::arrows(l, extViewport, p, 10, 80, lineScale.val().toDouble());
         }
@@ -1721,6 +1726,15 @@ void CGisItemTrk::drawItem(QPainter& p, const QPolygonF& viewport, QList<QRectF>
     {
         drawColorized(p);
     }
+
+    if (isNogo())
+    {
+        for(const QPolygonF &l : lines)
+        {
+            CDraw::nogos(l, extViewport, p, 80);
+        }
+    }
+
     // -------------------------
 
     // draw min/max labels
@@ -2312,16 +2326,13 @@ void CGisItemTrk::setColor(const QColor& c)
 void CGisItemTrk::setIcon(const QString& iconColor)
 {
     trk.color = iconColor;
-    icon      = QPixmap("://icons/48x48/Track.png");
+    QPixmap icon = QPixmap("://icons/48x48/Track.png");
 
     QPixmap mask( icon.size() );
     mask.fill( str2color(iconColor) );
     mask.setMask( icon.createMaskFromColor( Qt::transparent ) );
-    icon = mask.scaled(22, 22, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-
-    QTreeWidgetItem::setIcon(CGisListWks::eColumnIcon,icon);
+    IGisItem::setIcon(mask.scaled(22,22, Qt::KeepAspectRatio, Qt::SmoothTransformation));
 }
-
 
 bool CGisItemTrk::setMouseFocusByDistance(qreal dist, focusmode_e fmode, const QString &owner)
 {

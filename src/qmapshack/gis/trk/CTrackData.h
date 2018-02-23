@@ -166,6 +166,7 @@ public:
     void readFrom(const SGisLine &l);
     void getPolyline(SGisLine  &l) const;
     void getPolyline(QPolygonF &l) const;
+    void getPolylineDeg(QPolygonF &l) const;
 
     bool isEmpty() const
     {

@@ -25,6 +25,7 @@
 #include "gis/trk/CTrackData.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
+#include "gis/trk/filter/CFilterSpeed.h"
 
 #include <QDebug>
 #include <QPen>
@@ -183,6 +184,7 @@ public:
 
     /// returns "true" when trk has no time-related invalid points
     bool isTrkTimeValid() { return (allValidFlags & CTrackData::trkpt_t::eInvalidTime) == 0;  }
+    bool isTrkElevationInvalid() { return allValidFlags & CTrackData::trkpt_t::eInvalidEle; }
 
     QDateTime getTimestamp() const override {return getTimeStart(); }
 
@@ -525,6 +527,8 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
+    void filterSpeed(const struct CFilterSpeed::cycling_type_t &cyclingType);
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();
     void filterReplaceElevation();

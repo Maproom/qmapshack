@@ -59,6 +59,7 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
+#include "widgets/CColorChooser.h"
 
 #include <QApplication>
 #include <QtSql>
@@ -160,7 +161,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/LineMove.png"),    tr("Edit Track Points"      ), this, SLOT(slotEditTrk()));
     actionReverseTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Reverse.png"),     tr("Reverse Track"          ), this, SLOT(slotReverseTrk()));
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
-    actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
+    actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));    
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGo.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
     actionNogoTrk->setCheckable(true);
@@ -218,6 +219,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
+    actionColorTrk   = menuItem->addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
     menuItem->addAction(actionDelete);
     connect(menuItem, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
 
@@ -1065,6 +1067,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
             actionActivityTrk->setEnabled(onlyTrks);
+            actionColorTrk->setEnabled(onlyTrks);
             actionSymWpt->setEnabled(hasWpts);
 
             menuItem->exec(p);
@@ -1591,6 +1594,42 @@ void CGisListWks::slotActivityTrk()
         }
     }
 }
+
+
+void CGisListWks::slotColorTrk()
+{
+    QColor chosenQcolor;
+    QToolButton colorSelectButton(this);
+    CColorChooser colorChooserBar(&colorSelectButton);
+    colorChooserBar.move(QCursor::pos());
+
+    if(colorChooserBar.exec() == QDialog::Accepted)
+    {
+        chosenQcolor = QColor(colorSelectButton.property("color").toString());
+
+        quint32 colorIdx = 0;
+        for(int i=0; i < TRK_N_COLORS; ++i)
+        {
+            if (IGisItem::colorMap[i].color == chosenQcolor)
+            {
+                colorIdx = i;
+                break;
+            }
+        }
+
+        CGisListWksEditLock lock(true, IGisItem::mutexItems);
+        QList<QTreeWidgetItem*> items = selectedItems();
+        for(QTreeWidgetItem * item : items)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+            if(trk)
+            {
+                trk->setColor(colorIdx);
+            }
+        }
+    }
+}
+
 
 void CGisListWks::slotRangeTrk()
 {

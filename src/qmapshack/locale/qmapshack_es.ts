@@ -133,7 +133,7 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="53"/>
+        <location filename="../widgets/CColorChooser.cpp" line="54"/>
         <source>Esc.</source>
         <translation>Esc.</translation>
     </message>
@@ -1708,78 +1708,78 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Guardar como...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Copy Track with Waypoints</source>
         <translation>Copiar tracks y waypoints</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Show Bubble</source>
         <translation>Mostrar burbuja de texto</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Move Waypoint</source>
         <translation>Mover Waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Proj. Waypoint...</source>
         <translation>Proyectar Waypoint...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Change Radius</source>
         <translation>Cambiar radio</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
-        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Toggle Nogo-Area</source>
         <translation>Herramienta área prohibida</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Delete Radius</source>
         <translation type="unfinished">Borrar Radio</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="192"/>
+        <location filename="../gis/CGisListWks.cpp" line="193"/>
         <source>Route Instructions</source>
         <translation>Instrucciones de ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="194"/>
+        <location filename="../gis/CGisListWks.cpp" line="195"/>
         <source>Calculate Route</source>
         <translation>Calcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Reset Route</source>
         <translation>Recalcular ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Edit Route</source>
         <translation>Editar ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="198"/>
         <source>Reverse Route</source>
         <translation>Ruta Inversa</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Convert to Track</source>
         <translation>Convertir en track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="218"/>
+        <location filename="../gis/CGisListWks.cpp" line="219"/>
         <source>Create Route</source>
         <translation>Crear ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="219"/>
+        <location filename="../gis/CGisListWks.cpp" line="220"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Cambiar icono</translation>
     </message>
@@ -1789,29 +1789,29 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Establecer actividad del track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="222"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="653"/>
+        <location filename="../gis/CGisListWks.cpp" line="654"/>
         <source>Drop items...</source>
         <translation>Descartar elementos</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="678"/>
-        <location filename="../gis/CGisListWks.cpp" line="1844"/>
-        <location filename="../gis/CGisListWks.cpp" line="1882"/>
+        <location filename="../gis/CGisListWks.cpp" line="679"/>
+        <location filename="../gis/CGisListWks.cpp" line="1828"/>
+        <location filename="../gis/CGisListWks.cpp" line="1866"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>
@@ -1876,39 +1876,39 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Combinar Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="209"/>
+        <location filename="../gis/CGisListWks.cpp" line="210"/>
         <source>Edit Area Points</source>
         <translation>Editar Puntos del Área</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Delete</source>
         <translation>Borrar</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="804"/>
+        <location filename="../gis/CGisListWks.cpp" line="805"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Guardando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="850"/>
+        <location filename="../gis/CGisListWks.cpp" line="851"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto eliminará todos los proyectos del espacio de trabajo.</translation>
     </message>
@@ -1950,37 +1950,37 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>Load project...</source>
         <translation type="unfinished">Cargar proyecto</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation type="unfinished">El proyecto &quot;%1&quot; ya está en el area de trabajo.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="217"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation type="unfinished">&lt;b&gt;Selección de elementos: &lt;/b&gt;Elemento seleccionado de la lista del espacio de trabajo. Haga clic en el mapa para volver al comportamiento normal de selección del mouse.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="630"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="631"/>
         <source>Copy items...</source>
         <translation type="unfinished">Copia elementos....</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="649"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="650"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished">Cambiar símbolos de waypoint</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Dividir Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Do you want to delete the original track?</source>
         <translation type="unfinished">¿Desea borrar el track original?</translation>
     </message>
@@ -3477,27 +3477,27 @@ Estructura desconocida.</translation>
         <translation>&lt;b&gt;Seleccionar elementos en el mapa&lt;/b&gt;&lt;br/&gt;Seleccione un area rectangular con el boton izquierdo del ratón. Cancelar con clic derecho. Ajuste la seleccion haciendo clic y desplazando en las esquinas.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Seleccionado:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="107"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="108"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 waypoints&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 tracks&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="112"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="113"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 rutas&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="117"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="118"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 áreas&lt;br/&gt;</translation>
     </message>
@@ -9619,12 +9619,13 @@ o
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
         <location filename="../mouse/IScrOptSelect.ui" line="142"/>
         <location filename="../mouse/IScrOptSelect.ui" line="156"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="210"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="326"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="353"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="380"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="170"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="224"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="253"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="313"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="340"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="367"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="394"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9650,36 +9651,41 @@ o
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
+        <source>Change the color of all selected tracks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="167"/>
         <source>Delete all selected items.</source>
         <translation>Borrar los elementos seleccionados.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="221"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Seleccione los elementos que interseccionan el área seleccionada.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="250"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Seleccione los elementos que estan dentro del area seleccionada. </translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="310"/>
         <source>Add tracks to selection.</source>
         <translation>Añadir tracks a la selección.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="337"/>
         <source>Add waypoints to selection.</source>
         <translation>Añadir waypoints a la selección.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="364"/>
         <source>Add routes to selection.</source>
         <translation>Añadir rutas a selección.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="391"/>
         <source>Add areas to selection.</source>
         <translation>Añadir áreas a la selección.</translation>
     </message>
@@ -9719,6 +9725,7 @@ o
         <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="212"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="226"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9769,16 +9776,21 @@ o
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
+        <source>Change the color of the track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Copiar track junto con todos los waypoints conectados en otro proyecto.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="241"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>
         <source>TextLabel</source>
         <translation>Denominación</translation>
     </message>

@@ -31,12 +31,14 @@ public:
     CColorChooser(QToolButton * parent);
     virtual ~CColorChooser() = default;
 
-    void moveToCursor();
+    static qint32 selectColor(QWidget *parent);
 
 private slots:
     void slotSelect(QToolButton * button);
 
 private:
+    void moveToCursor();
+
     QToolButton* parentButton;
 };
 

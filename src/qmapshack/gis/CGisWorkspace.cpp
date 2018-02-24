@@ -42,6 +42,7 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
+#include "widgets/CColorChooser.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -905,6 +906,28 @@ void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
             if(trk != nullptr)
             {
                 trk->setActivity(flags);
+            }
+        }
+    }
+}
+
+void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    qint32 colorIdx = CColorChooser::selectColor(this);
+    if(colorIdx != NOIDX)
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+        for(const IGisItem::key_t& key : keys)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+            if(trk != nullptr)
+            {
+                trk->setColor(colorIdx);
             }
         }
     }

@@ -46,6 +46,7 @@ private slots:
     void slotCombine();
     void slotRange();
     void slotActivity();
+    void slotColor();
     void slotCopyWithWpt();
     void slotNogo();
 

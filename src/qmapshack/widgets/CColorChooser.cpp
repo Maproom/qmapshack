@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/IGisItem.h"
+#include "gis/trk/CGisItemTrk.h"
 #include "widgets/CColorChooser.h"
 
 #include <QtWidgets>
@@ -58,6 +59,30 @@ CColorChooser::CColorChooser(QToolButton *parent)
     adjustSize();
 }
 
+qint32 CColorChooser::selectColor(QWidget * parent)
+{
+    QColor color;
+    QToolButton colorSelectButton(parent);
+    CColorChooser colorChooser(&colorSelectButton);
+    colorChooser.moveToCursor();
+
+    if(colorChooser.exec() != QDialog::Accepted)
+    {
+        return NOIDX;
+    }
+
+    color = QColor(colorSelectButton.property("color").toString());
+    quint32 colorIdx = NOIDX;
+    for(int i=0; i < TRK_N_COLORS; ++i)
+    {
+        if (IGisItem::colorMap[i].color == color)
+        {
+            colorIdx = i;
+            break;
+        }
+    }
+    return colorIdx;
+}
 
 void CColorChooser::moveToCursor()
 {

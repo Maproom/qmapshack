@@ -79,6 +79,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::slotCombine);
     connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::slotRange);
     connect(toolActivity,    &QToolButton::clicked, this, &CScrOptTrk::slotActivity);
+    connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::slotColor);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
 
@@ -150,6 +151,14 @@ void CScrOptTrk::slotActivity()
     QList<IGisItem::key_t> keys;
     keys << key;
     CGisWorkspace::self().activityTrkByKey(keys);
+    close();
+}
+
+void CScrOptTrk::slotColor()
+{
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWorkspace::self().colorTrkByKey(keys);
     close();
 }
 

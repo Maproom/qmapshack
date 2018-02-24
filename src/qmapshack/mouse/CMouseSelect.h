@@ -42,6 +42,7 @@ private slots:
     void slotSymWpt() const;
     void slotCombineTrk() const;
     void slotActivityTrk() const;
+    void slotColorTrk() const;
     void slotDelete() const;
 
 private:

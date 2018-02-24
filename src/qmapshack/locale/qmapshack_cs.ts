@@ -133,7 +133,7 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="53"/>
+        <location filename="../widgets/CColorChooser.cpp" line="54"/>
         <source>Esc.</source>
         <translation>Esc</translation>
     </message>
@@ -1708,78 +1708,78 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Uložit jako...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Copy Track with Waypoints</source>
         <translation>Kopírovat stopu s cestovními body</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Show Bubble</source>
         <translation>Ukázat bublinu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Move Waypoint</source>
         <translation>Přesunout cestovní bod</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Proj. Waypoint...</source>
         <translation>Promítnutí cestovního bodu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Change Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
-        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Delete Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="192"/>
+        <location filename="../gis/CGisListWks.cpp" line="193"/>
         <source>Route Instructions</source>
         <translation>Pokyny pro cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="194"/>
+        <location filename="../gis/CGisListWks.cpp" line="195"/>
         <source>Calculate Route</source>
         <translation>Spočítat cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Reset Route</source>
         <translation>Nastavit cestu znovu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Edit Route</source>
         <translation>Upravit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="198"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Convert to Track</source>
         <translation>Převést na stopu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="218"/>
+        <location filename="../gis/CGisListWks.cpp" line="219"/>
         <source>Create Route</source>
         <translation>Vytvořit cestu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="219"/>
+        <location filename="../gis/CGisListWks.cpp" line="220"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Změnit ikonu (pouze vybrané cestovní body)</translation>
     </message>
@@ -1789,29 +1789,29 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Nastavit činnost stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="222"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="653"/>
+        <location filename="../gis/CGisListWks.cpp" line="654"/>
         <source>Drop items...</source>
         <translation>Zahodit prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="678"/>
-        <location filename="../gis/CGisListWks.cpp" line="1844"/>
-        <location filename="../gis/CGisListWks.cpp" line="1882"/>
+        <location filename="../gis/CGisListWks.cpp" line="679"/>
+        <location filename="../gis/CGisListWks.cpp" line="1828"/>
+        <location filename="../gis/CGisListWks.cpp" line="1866"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualizovat zařízení&lt;/b&gt;&lt;p&gt;Aktualizovat %1&lt;br/&gt;Počkejte, prosím...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Delete project...</source>
         <translation>Smazat projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Do you really want to delete %1?</source>
         <translation>Opravdu chcete smazat %1?</translation>
     </message>
@@ -1876,39 +1876,39 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
         <translation>Spojit stopy</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="209"/>
+        <location filename="../gis/CGisListWks.cpp" line="210"/>
         <source>Edit Area Points</source>
         <translation>Upravit body oblasti</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="804"/>
+        <location filename="../gis/CGisListWks.cpp" line="805"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Ukládá se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="850"/>
+        <location filename="../gis/CGisListWks.cpp" line="851"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Nahrává se pracovní prostor. Počkejte, prosím.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>Close all projects...</source>
         <translation>Zavřít všechny projekty...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Tímto budou všechny projekty odstraněny z pracovního prostoru.</translation>
     </message>
@@ -1950,37 +1950,37 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>Load project...</source>
         <translation type="unfinished">Nahrát projekt...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation type="unfinished">Projekt &quot;%1&quot; je již náhrán do pracovního prostoru.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="217"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation type="unfinished">&lt;b&gt;Výběr prvků: &lt;/b&gt;Prvek vybrán ze seznamu pracovního prostoru. Klepněte na mapu pro přepnutí zpět do běžného chování při výběru myší.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="630"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="631"/>
         <source>Copy items...</source>
         <translation type="unfinished">Kopírovat prvky...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="649"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="650"/>
         <source>Change waypoint symbols.</source>
         <translation type="unfinished">Změnit značky cestovních bodů.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Cut Track...</source>
         <translation type="unfinished">Rozkrojit stopu...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Do you want to delete the original track?</source>
         <translation type="unfinished">Opravdu chcete smazat původní stopu?</translation>
     </message>
@@ -3478,27 +3478,27 @@ Neznámá stavba.</translation>
         <translation>&lt;b&gt;Vybrat prvky na mapě&lt;/b&gt;&lt;br/&gt;Vyberte na mapě klepnutím levým tlačítkem myši obdélníkovou oblast. Výběr zrušíte klepnutím pravým tlačítkem myši. Výběr lze upravit posunutím rohových bodů myší.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vybráno:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="107"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="108"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 cestovní body&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 stopy&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="112"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="113"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 cesty&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="117"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="118"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 oblasti&lt;br/&gt;</translation>
     </message>
@@ -9605,12 +9605,13 @@ nebo
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
         <location filename="../mouse/IScrOptSelect.ui" line="142"/>
         <location filename="../mouse/IScrOptSelect.ui" line="156"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="210"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="326"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="353"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="380"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="170"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="224"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="253"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="313"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="340"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="367"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="394"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9636,36 +9637,41 @@ nebo
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
+        <source>Change the color of all selected tracks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="167"/>
         <source>Delete all selected items.</source>
         <translation>Smazat všechny vybrané prvky.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="221"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Vybrat všechny prvky, které protínají vybranou oblast.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="250"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Vybrat všechny prvky, které jsou úplně uvnitř vybrané oblasti.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="310"/>
         <source>Add tracks to selection.</source>
         <translation>Přidat stopy do výběru.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="337"/>
         <source>Add waypoints to selection.</source>
         <translation>Přidat cestovní body do výběru.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="364"/>
         <source>Add routes to selection.</source>
         <translation>Přidat cesty do výběru.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="391"/>
         <source>Add areas to selection.</source>
         <translation>Přidat oblasti do výběru.</translation>
     </message>
@@ -9733,6 +9739,11 @@ nebo
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
+        <source>Change the color of the track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Kopírovat stopu společně se všemi připojenými cestovními body do jiného projektu.</translation>
     </message>
@@ -9749,6 +9760,7 @@ nebo
         <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="212"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="226"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9758,12 +9770,12 @@ nebo
         <translation>Nastavit činnost pro celou stopu.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="241"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>
         <source>TextLabel</source>
         <translation>Textový štítek</translation>
     </message>

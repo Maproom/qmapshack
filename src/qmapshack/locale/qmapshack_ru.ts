@@ -133,7 +133,7 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="52"/>
+        <location filename="../widgets/CColorChooser.cpp" line="53"/>
         <source>Esc.</source>
         <translation>Esc.</translation>
     </message>
@@ -748,7 +748,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="180"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -7075,7 +7075,7 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
-        <source>User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
+        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

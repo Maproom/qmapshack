@@ -133,7 +133,7 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="52"/>
+        <location filename="../widgets/CColorChooser.cpp" line="53"/>
         <source>Esc.</source>
         <translation>Esc</translation>
     </message>
@@ -715,22 +715,22 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="44"/>
         <source>City</source>
-        <translation>Stadt</translation>
+        <translation>Stadtrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="52"/>
         <source>Trekking</source>
-        <translation>Wandern</translation>
+        <translation>Trekkingrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="55"/>
         <source>Sportive</source>
-        <translation>Sport</translation>
+        <translation>Sportrad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="58"/>
         <source>Mountain</source>
-        <translation>Berg</translation>
+        <translation>Mountain Bike</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="61"/>
@@ -740,15 +740,15 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="64"/>
         <source>Custom 1</source>
-        <translation>Benutzer 0</translation>
+        <translation>Benutzer 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="67"/>
         <source>Custom 2</source>
-        <translation>Benutzer 0</translation>
+        <translation>Benutzer 2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="180"/>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
         <translation>Der Track hat entweder keine oder ungültige Höhendaten. Bitte korrigieren oder nur eine konstante Geswindigkeit benutzen!</translation>
     </message>
@@ -1741,7 +1741,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/CGisListWks.cpp" line="182"/>
         <location filename="../gis/CGisListWks.cpp" line="210"/>
         <source>Toggle Nogo-Area</source>
-        <translation>Gebietsvermeidung umschalten</translation>
+        <translation>Gebietsvermeidung</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="181"/>
@@ -1752,7 +1752,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/CGisListWks.cpp" line="166"/>
         <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Toggle Nogo-Line</source>
-        <translation>Streckenvermeidung umschalten</translation>
+        <translation>Streckenvermeidung</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="192"/>
@@ -7053,12 +7053,12 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="382"/>
         <source>Uphill:</source>
-        <translation>bergauf:</translation>
+        <translation>Bergauf:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="392"/>
         <source>Downhill:</source>
-        <translation>bergab:</translation>
+        <translation>Bergab:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="402"/>
@@ -7072,8 +7072,8 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
-        <source>User definied positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation>Benutzerdefinierte positive und negative Steigung aus dem Track lesen.</translation>
+        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
+        <translation>Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="504"/>

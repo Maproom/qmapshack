@@ -71,12 +71,13 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     cycling_type_t cyclingType;
     for (int i = 0; i < noOfFixTypes; ++i)
     {
-        cyclingType.name = cyclingTypeDefaults[i].name;
-        cyclingType.plainSpeed = cyclingTypeDefaults[i].plainSpeed;
-        cyclingType.minSpeed = cyclingTypeDefaults[i].minSpeed;
-        cyclingType.slopeAtMinSpeed = cyclingTypeDefaults[i].slopeAtMinSpeed;
-        cyclingType.maxSpeed = cyclingTypeDefaults[i].maxSpeed;
-        cyclingType.slopeAtMaxSpeed = cyclingTypeDefaults[i].slopeAtMaxSpeed;
+        const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[i];
+        cyclingType.name = cyclingTypeDefault.name;
+        cyclingType.plainSpeed = cyclingTypeDefault.plainSpeed;
+        cyclingType.minSpeed = cyclingTypeDefault.minSpeed;
+        cyclingType.slopeAtMinSpeed = cyclingTypeDefault.slopeAtMinSpeed;
+        cyclingType.maxSpeed = cyclingTypeDefault.maxSpeed;
+        cyclingType.slopeAtMaxSpeed = cyclingTypeDefault.slopeAtMaxSpeed;
 
         comboCyclingType->addItem(cyclingType.name);
         cyclingTypes << cyclingType;
@@ -88,7 +89,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     {
         const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
-        cyclingType.name = cfg.value("name", cyclingTypeDefault.name).toString();
+        cyclingType.name = cyclingTypeDefault.name;
         cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefault.plainSpeed).toDouble();
         cyclingType.minSpeed = cfg.value("minSpeed", cyclingTypeDefault.minSpeed).toDouble();
         cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", cyclingTypeDefault.slopeAtMinSpeed).toDouble();

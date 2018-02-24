@@ -70,7 +70,7 @@ static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
 
 void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
 {
-    static const QImage arrow = createBasicArrow(p.brush(), scale);
+    const QImage& arrow = createBasicArrow(p.brush(), scale);
     qreal xoff = qCeil(arrow.width()/2.0);
     qreal yoff = qFloor((arrow.height()-1)/2.0);
 
@@ -93,7 +93,6 @@ void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, i
                 && (firstArrow || pointDistanceSquare(prevArrow, arrowPos) >= minArrowDistSquare) )
             {
                 p.save();
-
                 // rotate and draw the arrow (between bullets)
                 p.translate(arrowPos);
                 qreal direction = ( qAtan2((pt.y() - prevPt.y()), (pt.x() - prevPt.x())) * 180.) / M_PI;

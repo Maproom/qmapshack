@@ -31,6 +31,8 @@ public:
     CColorChooser(QToolButton * parent);
     virtual ~CColorChooser() = default;
 
+    void moveToCursor();
+
 private slots:
     void slotSelect(QToolButton * button);
 

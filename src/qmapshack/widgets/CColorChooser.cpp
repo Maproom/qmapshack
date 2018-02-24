@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/IGisItem.h"
 #include "widgets/CColorChooser.h"
 
@@ -55,6 +56,19 @@ CColorChooser::CColorChooser(QToolButton *parent)
     connect(butEsc, &QToolButton::clicked, this, &CColorChooser::reject);
 
     adjustSize();
+}
+
+
+void CColorChooser::moveToCursor()
+{
+    CMainWindow& main = CMainWindow::self();
+
+    QPoint pos = main.mapFromGlobal(QCursor::pos());
+    if(pos.x() + width() > main.width())
+    {
+        pos.rx() += main.width() - (pos.x() + width());
+    }
+    move(main.mapToGlobal(pos));
 }
 
 void CColorChooser::slotSelect(QToolButton * button)

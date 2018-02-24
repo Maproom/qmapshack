@@ -1601,7 +1601,7 @@ void CGisListWks::slotColorTrk()
     QColor chosenQcolor;
     QToolButton colorSelectButton(this);
     CColorChooser colorChooserBar(&colorSelectButton);
-    colorChooserBar.move(QCursor::pos());
+    colorChooserBar.moveToCursor();
 
     if(colorChooserBar.exec() == QDialog::Accepted)
     {

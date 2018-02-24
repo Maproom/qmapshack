@@ -715,7 +715,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="44"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciudad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="52"/>
@@ -725,12 +725,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="55"/>
         <source>Sportive</source>
-        <translation type="unfinished"></translation>
+        <translation>Deportivo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="58"/>
         <source>Mountain</source>
-        <translation type="unfinished"></translation>
+        <translation>Montaña</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="61"/>
@@ -750,7 +750,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation type="unfinished"></translation>
+        <translation>El Track no contiene datos de elevación o son incorrectos. ¡Por favor, corregir o establecer velocidad constante!</translation>
     </message>
 </context>
 <context>
@@ -1393,7 +1393,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="387"/>
         <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se cambió la velocidad media dependiendo de la pendiente a %1%2</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="412"/>
@@ -1791,7 +1791,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer color del Track</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="654"/>
@@ -1879,7 +1879,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/CGisListWks.cpp" line="167"/>
         <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta Linea de Prohibición</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="210"/>
@@ -1918,12 +1918,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ailed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
         <source>Failed....</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló...</translation>
     </message>
 </context>
 <context>
@@ -1931,7 +1931,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrastrar y soltar elementos del espacio de trabajo en esta zona.</translation>
     </message>
 </context>
 <context>
@@ -4730,12 +4730,12 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
         <source>callsign:</source>
-        <translation type="unfinished"></translation>
+        <translation>Distintivo de llamada:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
         <source>origin country:</source>
-        <translation type="unfinished"></translation>
+        <translation>País de origen:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
@@ -4745,32 +4745,32 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
         <source>last contact:</source>
-        <translation type="unfinished"></translation>
+        <translation>Último contacto:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
         <source>longitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Longitud:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
         <source>latitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>Latitud:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
         <source>geo. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt. geo.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
         <source>on ground:</source>
-        <translation type="unfinished"></translation>
+        <translation>En tierra:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
         <source>velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
@@ -4785,7 +4785,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
         <source>baro. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>Alt. bar.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
@@ -4808,27 +4808,27 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
         <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
+        <translation>Error...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
         <source>Select record file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar archivo de grabación</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Reset record...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reiniciar grabación...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro de reiniciar la grabación actual?</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
         <source>Failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló...</translation>
     </message>
 </context>
 <context>
@@ -6140,7 +6140,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="160"/>
         <source>This is a NoGo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Esto es un aŕea prohibida</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="176"/>
@@ -6259,7 +6259,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="182"/>
         <source>This Route is a NoGo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta ruta es una línea de prohibición</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="233"/>
@@ -6431,7 +6431,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="293"/>
         <source>This Track is a NoGo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Este Track es una Linea de Prohibición</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="464"/>
@@ -6590,7 +6590,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="296"/>
         <source>This Waypoint is a NoGo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Este Waypoint es una Área Prohibida</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="447"/>
@@ -7025,62 +7025,62 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="247"/>
         <source> Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="320"/>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vel. Máx.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="330"/>
         <source>Plain Level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Llano:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="362"/>
         <source>at positive Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>en la pendiente positiva</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="372"/>
         <source>Min Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Vel. Min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="382"/>
         <source>Uphill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascenso:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="392"/>
         <source>Downhill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descenso:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="402"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad en llano</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="450"/>
         <source>at negative Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>En Pendiente negativa</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Los valores de pendiente positivos y negativos definidos por el usuario serán reemplazados por los del Track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="504"/>
         <source>Set min/max slopes from Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer pendiente Max/Min del Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="551"/>
         <source>not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>no implementado aun</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="572"/>
@@ -7090,7 +7090,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="577"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclismo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="170"/>
@@ -7403,7 +7403,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="49"/>
         <source>Needs setup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Necesita configuración...</translation>
     </message>
 </context>
 <context>
@@ -7411,7 +7411,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar proyectos de resumen...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
@@ -8356,7 +8356,7 @@ Consejos:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
         <source>Target Filename:</source>
-        <translation>Fichero VRT de salida:</translation>
+        <translation>Archivo VRT de salida:</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="275"/>
@@ -9163,7 +9163,7 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
         <source>Enter a valid key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir una clave válida.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
@@ -9173,7 +9173,7 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
         <source>Start recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar grabación.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
@@ -9187,22 +9187,22 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
         <source>Pause recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausar grabación.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir grabación en track.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
         <source>Reset record.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar grabación.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
         <source>Select record file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar archivo de grabación.</translation>
     </message>
 </context>
 <context>
@@ -9210,7 +9210,7 @@ o
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="44"/>
         <source>Failed to open record for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al abrir la grabación para cargar.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="63"/>
@@ -9592,7 +9592,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="173"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta Linea de Prohibición</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="205"/>
@@ -9652,7 +9652,7 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
         <source>Change the color of all selected tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar color a los Track seleccionados.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="167"/>
@@ -9777,7 +9777,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
         <source>Change the color of the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar color del Track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
@@ -9787,7 +9787,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Herramienta Linea de Prohibición</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>

@@ -241,7 +241,7 @@ QNetworkRequest CRouterBRouter::getRequest(const QVector<QPointF> &routePoints, 
                 {
                     nogoStr.append("|");
                 }
-                nogoStr.append(QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad));
+                nogoStr.append(QString("%1,%2,%3").arg(pos.x(),0,'f',6).arg(pos.y(),0,'f',6).arg(rad,0,'f',0));
             }
             break;
         }

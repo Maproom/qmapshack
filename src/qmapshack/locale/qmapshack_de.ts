@@ -750,7 +750,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation>Der Track hat entweder keine oder ungültige Höhendaten. Bitte korrigieren oder nur eine konstante Geswindigkeit benutzen!</translation>
+        <translation>Der Track hat entweder keine oder ungültige Höhendaten. Bitte korrigieren oder nur eine konstante Geschwindigkeit benutzen!</translation>
     </message>
 </context>
 <context>
@@ -1393,7 +1393,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="387"/>
         <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation>Die Durchschittsgeschwindigkeit abhängig von der Steigung auf %1%2 gesetzt.</translation>
+        <translation>Die Durchschnittsgeschwindigkeit abhängig von der Steigung auf %1%2 gesetzt.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="412"/>
@@ -4202,7 +4202,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="281"/>
         <source>Error creating segments directory %1</source>
-        <translation>Fehler beim Anlegen des Verzeichniss für die Routingdaten %1</translation>
+        <translation>Fehler beim Anlegen des Verzeichnisses für die Routingdaten %1</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="365"/>
@@ -4222,7 +4222,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="490"/>
         <source>segments directory does not exist: </source>
-        <translation>Das Verzeichniss für die Routingdaten existiert nicht:</translation>
+        <translation>Das Verzeichnis für die Routingdaten existiert nicht:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="504"/>
@@ -4285,7 +4285,7 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="330"/>
         <source>invalid result, no files found</source>
-        <translation>ungültige Anwort, keine Dateien gefunden</translation>
+        <translation>ungültige Antwort, keine Dateien gefunden</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
@@ -4752,12 +4752,12 @@ ist keine gültige Koordinatensystemdefinition:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
         <source>longitude:</source>
-        <translation>Longitude:</translation>
+        <translation>Länge:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
         <source>latitude:</source>
-        <translation>Latitude:</translation>
+        <translation>Breite:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
@@ -6376,7 +6376,7 @@ Wenn Sie nur die eine Hälfte behalten wollen, können Sie einfach die Punkte l�
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="293"/>
         <source>This Track is a NoGo-Line</source>
-        <translation></translation>
+        <translation>Dieser Track ist eine NoGo-Linie</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="669"/>
@@ -8910,7 +8910,7 @@ sein</translation>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="591"/>
         <source>Segments directory</source>
-        <translation>Segement-Verzeichnis</translation>
+        <translation>Segment-Verzeichnis</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="601"/>
@@ -9877,7 +9877,7 @@ sein</translation>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
         <source>edit radius of circular area</source>
-        <translation>Den Abstabdsradius ändern.</translation>
+        <translation>Den Abstandsradius ändern.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>

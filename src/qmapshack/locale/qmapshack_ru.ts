@@ -133,7 +133,7 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="53"/>
+        <location filename="../widgets/CColorChooser.cpp" line="54"/>
         <source>Esc.</source>
         <translation>Esc.</translation>
     </message>
@@ -1723,7 +1723,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="143"/>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -1779,136 +1779,136 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Добавить активность</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Copy Track with Waypoints</source>
         <translation>Копировать трек с маршрутными точками</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="176"/>
+        <location filename="../gis/CGisListWks.cpp" line="177"/>
         <source>Show Bubble</source>
         <translation>Показать пузырёк</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="179"/>
         <source>Move Waypoint</source>
         <translation>Переместить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Proj. Waypoint...</source>
         <translation>Проекция маршрутной точки...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Change Radius</source>
         <translation>Изменить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
-        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Toggle Nogo-Area</source>
         <translation>Переключить запретную зону</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Delete Radius</source>
         <translation>Удалить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="192"/>
+        <location filename="../gis/CGisListWks.cpp" line="193"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="194"/>
+        <location filename="../gis/CGisListWks.cpp" line="195"/>
         <source>Calculate Route</source>
         <translation>Вычислить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Reset Route</source>
         <translation>Сбросить маршрутизацию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Edit Route</source>
         <translation>Изменить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="198"/>
         <source>Reverse Route</source>
         <translation>Обратить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Convert to Track</source>
         <translation>Преобразовать в трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="209"/>
+        <location filename="../gis/CGisListWks.cpp" line="210"/>
         <source>Edit Area Points</source>
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="218"/>
+        <location filename="../gis/CGisListWks.cpp" line="219"/>
         <source>Create Route</source>
         <translation>Создать маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="219"/>
+        <location filename="../gis/CGisListWks.cpp" line="220"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Изменить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="222"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Color</source>
         <translation>Установить цвет трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="653"/>
+        <location filename="../gis/CGisListWks.cpp" line="654"/>
         <source>Drop items...</source>
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="678"/>
-        <location filename="../gis/CGisListWks.cpp" line="1844"/>
-        <location filename="../gis/CGisListWks.cpp" line="1882"/>
+        <location filename="../gis/CGisListWks.cpp" line="679"/>
+        <location filename="../gis/CGisListWks.cpp" line="1828"/>
+        <location filename="../gis/CGisListWks.cpp" line="1866"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="804"/>
+        <location filename="../gis/CGisListWks.cpp" line="805"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Сохранение рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="850"/>
+        <location filename="../gis/CGisListWks.cpp" line="851"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1252"/>
+        <location filename="../gis/CGisListWks.cpp" line="1253"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты из рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1278"/>
+        <location filename="../gis/CGisListWks.cpp" line="1279"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -1950,37 +1950,37 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>Load project...</source>
         <translation>Загрузить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="114"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="115"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Проект &quot;%1&quot; уже находится в рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="216"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="217"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="630"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="631"/>
         <source>Copy items...</source>
         <translation>Копировать элементы ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="649"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="650"/>
         <source>Change waypoint symbols.</source>
         <translation>Изменить символы путевых точек.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="817"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="818"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
@@ -3477,27 +3477,27 @@ Unknown structure.</source>
         <translation>&lt;b&gt;Выбрать элементы на карте&lt;/b&gt;&lt;br/&gt; Выберите прямоугольную область на карте. Используйте левую кнопку мышки и двигайте её. Прервать с правой кнопкой мышки. Уточните выбор с помощью метода указать-нажать-переместить по углам.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="99"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="100"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрано:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="107"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="108"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 маршрутных точек&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="103"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 треков&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="112"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="113"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 маршрутов&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="117"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="118"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 областей&lt;br/&gt;</translation>
     </message>
@@ -9630,12 +9630,13 @@ or
         <location filename="../mouse/IScrOptSelect.ui" line="122"/>
         <location filename="../mouse/IScrOptSelect.ui" line="142"/>
         <location filename="../mouse/IScrOptSelect.ui" line="156"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="210"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="239"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="299"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="326"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="353"/>
-        <location filename="../mouse/IScrOptSelect.ui" line="380"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="170"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="224"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="253"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="313"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="340"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="367"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="394"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9661,36 +9662,41 @@ or
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="153"/>
+        <source>Change the color of all selected tracks.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptSelect.ui" line="167"/>
         <source>Delete all selected items.</source>
         <translation>Удалить все выбранные элементы.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="207"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="221"/>
         <source>Select all items that intersect the selected area.</source>
         <translation>Выбрать все элементы, которые пересекают выбранную область.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="236"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="250"/>
         <source>Select all items that are completely inside the selected area.</source>
         <translation>Выбрать все элементы полностью внутри выбранной области.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="296"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="310"/>
         <source>Add tracks to selection.</source>
         <translation>Добавить треки к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="323"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="337"/>
         <source>Add waypoints to selection.</source>
         <translation>Добавить маршрутные точки к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="350"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="364"/>
         <source>Add routes to selection.</source>
         <translation>Добавить маршруты к выбору.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptSelect.ui" line="377"/>
+        <location filename="../mouse/IScrOptSelect.ui" line="391"/>
         <source>Add areas to selection.</source>
         <translation>Добавить области к выбору.</translation>
     </message>
@@ -9720,6 +9726,7 @@ or
         <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="212"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="226"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9780,16 +9787,21 @@ or
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
+        <source>Change the color of the track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation>Скопировать трек вместе со всеми присоединёнными маршрутными точками в другой проект.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="241"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>
         <source>TextLabel</source>
         <translation>Метка текста</translation>
     </message>

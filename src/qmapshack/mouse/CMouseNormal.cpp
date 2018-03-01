@@ -267,7 +267,7 @@ bool CMouseNormal::setScreenOption(const QPoint& pt, IGisItem * item)
     CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
     if(trk && trk->setMouseFocusByPoint(pt, CGisItemTrk::eFocusMouseClick, "CMouseNormal") == NOPOINTF)
     {
-        new CFadingIcon(pt, "://icons/48x48/NoGo.png", canvas);
+        new CFadingIcon(pt, "://icons/48x48/NotPossible.png", canvas);
         return false;
     }
 

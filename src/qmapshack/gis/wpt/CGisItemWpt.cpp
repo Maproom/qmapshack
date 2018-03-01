@@ -414,7 +414,7 @@ void CGisItemWpt::setProximity(qreal val)
     if (val == NOFLOAT)
     {
         proximity = NOFLOAT;
-        setNogo(false);
+        flags &= ~eFlagNogo;
         changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
     }
     else

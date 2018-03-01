@@ -572,6 +572,7 @@ protected:
     bool isVisible(const QRectF& rect, const QPolygonF& viewport, CGisDraw * gis);
     bool isVisible(const QPointF& point, const QPolygonF& viewport, CGisDraw * gis);
     bool isWithin(const QRectF& area, selflags_t flags, const QPolygonF& points);
+    void _setNogo(bool yes);
 
     /**
        @brief Converts a string with HTML tags to a string without HTML depending on the device

@@ -86,7 +86,7 @@ CGisItemWpt::CGisItemWpt(const QPointF& pos, const CGisItemWpt& parentWpt, IGisP
     qreal ele = CMainWindow::self().getElevationAt(pos * DEG_TO_RAD);
     wpt.ele = (ele == NOFLOAT) ? NOINT : qRound(ele);
 
-    this->setNogo(parentWpt.isNogo());
+    _setNogo(parentWpt.isNogo());
 
     detBoundingRect();
 
@@ -118,7 +118,7 @@ CGisItemWpt::CGisItemWpt(const CGisItemWpt &parentWpt, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
-    this->setNogo(parentWpt.isNogo());
+    _setNogo(parentWpt.isNogo());
 
     detBoundingRect();
     updateDecoration(eMarkChanged, eMarkNone);
@@ -414,7 +414,7 @@ void CGisItemWpt::setProximity(qreal val)
     if (val == NOFLOAT)
     {
         proximity = NOFLOAT;
-        flags &= ~eFlagNogo;
+        _setNogo(false);
         changed(tr("Removed proximity"),"://icons/48x48/WptDelProx.png");
     }
     else

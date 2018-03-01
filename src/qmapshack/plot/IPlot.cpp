@@ -418,7 +418,7 @@ void IPlot::mouseReleaseEvent(QMouseEvent * e)
                         If the object is not the owner of the range selection, no action has to be taken.
                         However the user has to be informed, that he clicked on the wrong widget.
                      */
-                    new CFadingIcon(posMouse1, "://icons/48x48/NoGo.png", this);
+                    new CFadingIcon(posMouse1, "://icons/48x48/NotPossible.png", this);
                     wasProcessed = false;
                 }
                 break;

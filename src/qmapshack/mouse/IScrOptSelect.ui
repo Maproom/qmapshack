@@ -65,12 +65,6 @@
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/Copy.png</normaloff>:/icons/32x32/Copy.png</iconset>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
        </widget>
       </item>
       <item>
@@ -84,12 +78,6 @@
         <property name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
        </widget>
       </item>
@@ -105,12 +93,6 @@
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/waypoints/32x32/PinBlue.png</normaloff>:/icons/waypoints/32x32/PinBlue.png</iconset>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
        </widget>
       </item>
       <item>
@@ -124,12 +106,6 @@
         <property name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/Combine.png</normaloff>:/icons/32x32/Combine.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
        </widget>
       </item>
@@ -172,12 +148,6 @@
         <property name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/DeleteMultiple.png</normaloff>:/icons/32x32/DeleteMultiple.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
        </widget>
       </item>
@@ -227,12 +197,6 @@
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/SelectIntersectArea.png</normaloff>:/icons/32x32/SelectIntersectArea.png</iconset>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
         <property name="checkable">
          <bool>true</bool>
         </property>
@@ -255,12 +219,6 @@
         <property name="icon">
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/SelectExactArea.png</normaloff>:/icons/32x32/SelectExactArea.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -317,12 +275,6 @@
           <normaloff>:/icons/32x32/Track.png</normaloff>
           <normalon>:/icons/32x32/TrackOn.png</normalon>:/icons/32x32/Track.png</iconset>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
         <property name="checkable">
          <bool>true</bool>
         </property>
@@ -343,12 +295,6 @@
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/waypoints/32x32/FlagBlue.png</normaloff>
           <normalon>:/icons/32x32/WaypointOn.png</normalon>:/icons/waypoints/32x32/FlagBlue.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>
@@ -371,12 +317,6 @@
           <normaloff>:/icons/32x32/Route.png</normaloff>
           <normalon>:/icons/32x32/RouteOn.png</normalon>:/icons/32x32/Route.png</iconset>
         </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
-        </property>
         <property name="checkable">
          <bool>true</bool>
         </property>
@@ -397,12 +337,6 @@
          <iconset resource="../resources.qrc">
           <normaloff>:/icons/32x32/Area.png</normaloff>
           <normalon>:/icons/32x32/AreaOn.png</normalon>:/icons/32x32/Area.png</iconset>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>16</width>
-          <height>16</height>
-         </size>
         </property>
         <property name="checkable">
          <bool>true</bool>

@@ -890,17 +890,17 @@ void IGisItem::setNogo(bool yes)
     bool changed = false;
     if(yes)
     {
-        if(!(flags & eFlagNogo))
+        if(!isNogo())
         {
-            flags |= eFlagNogo;
+            _setNogo(yes);
             changed = true;
         }
     }
     else
     {
-        if(flags & eFlagNogo)
+        if(isNogo())
         {
-            flags &= ~eFlagNogo;
+            _setNogo(false);
             changed = true;
         }
     }
@@ -908,6 +908,18 @@ void IGisItem::setNogo(bool yes)
     {
         showIcon();
         updateHistory();
+    }
+}
+
+void IGisItem::_setNogo(bool yes)
+{
+    if (yes)
+    {
+        flags |= eFlagNogo;
+    }
+    else
+    {
+        flags &= ~eFlagNogo;
     }
 }
 

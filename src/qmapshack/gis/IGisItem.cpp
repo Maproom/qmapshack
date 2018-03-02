@@ -892,7 +892,7 @@ void IGisItem::setNogo(bool yes)
     {
         if(!isNogo())
         {
-            _setNogo(yes);
+            setNogoFlag(true);
             changed = true;
         }
     }
@@ -900,7 +900,7 @@ void IGisItem::setNogo(bool yes)
     {
         if(isNogo())
         {
-            _setNogo(false);
+            setNogoFlag(false);
             changed = true;
         }
     }
@@ -911,7 +911,7 @@ void IGisItem::setNogo(bool yes)
     }
 }
 
-void IGisItem::_setNogo(bool yes)
+void IGisItem::setNogoFlag(bool yes)
 {
     if (yes)
     {

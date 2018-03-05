@@ -21,11 +21,11 @@ endif()
 # Define project name and version tags
 ###############################################################################################
 # this is not only the QMS version it will be the package version, too.
-project(QMapShack VERSION 1.10.0)
+project(QMapShack VERSION 1.11.0)
 
 # FOR A RELEASE:
 # remove "development" for a release
-set(VERSION_SUFFIX development)
+set(VERSION_SUFFIX )
 # !!! Do not forget to update versions in the sub-repos, too!!!
 
 
@@ -127,6 +127,7 @@ find_package(Qt5PrintSupport    REQUIRED)
 find_package(Qt5UiTools         REQUIRED)
 find_package(GDAL               REQUIRED)
 find_package(PROJ               REQUIRED)
+find_package(JPEG               REQUIRED)
 find_package(ROUTINO            REQUIRED)
 find_package(QuaZip             REQUIRED)
 find_package(ALGLIB                     ) # optional as we can use our local version

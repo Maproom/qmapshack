@@ -90,6 +90,8 @@ CGisItemTrk::CGisItemTrk(const CGisItemTrk& parentTrk, IGisProject *project, int
         flags &= ~eFlagWriteAllowed;
     }
 
+    setNogoFlag(parentTrk.isNogo());
+
     deriveSecondaryData();
     updateDecoration(eMarkChanged, eMarkNone);
 }

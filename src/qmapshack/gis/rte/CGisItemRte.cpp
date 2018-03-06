@@ -82,7 +82,7 @@ CGisItemRte::CGisItemRte(const CGisItemRte& parentRte, IGisProject * project, in
         flags &= ~eFlagWriteAllowed;
     }
 
-
+    setNogoFlag(parentRte.isNogo());
 
     setupHistory();
     deriveSecondaryData();

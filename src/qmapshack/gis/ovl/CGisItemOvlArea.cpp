@@ -90,6 +90,8 @@ CGisItemOvlArea::CGisItemOvlArea(const CGisItemOvlArea& parentArea, IGisProject 
         flags &= ~eFlagWriteAllowed;
     }
 
+    setNogoFlag(parentArea.isNogo());
+
     deriveSecondaryData();
     updateDecoration(eMarkChanged, eMarkNone);
 }

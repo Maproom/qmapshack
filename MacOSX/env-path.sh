@@ -30,7 +30,7 @@ if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
 fi
 
 set -a
-APP_NAME=QMapShack
+APP_NAME_LOWER="$(tr [A-Z] [a-z] <<< "$APP_NAME")"
 APP_BUNDLE=$APP_NAME.app
 
 APP_BUNDLE_QMAPTOOL=QMapTool.app

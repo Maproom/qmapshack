@@ -1,8 +1,5 @@
 #!/bin/bash
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-source $DIR/env-path.sh
-
 APP_VERSION=0
 BUILD_TIME=$(date +"%y-%m-%dT%H:%M:%S")
 BUILD_HASH_KEY=0
@@ -28,13 +25,13 @@ function buildIcon {
 
 function buildAppStructure {
     # structure bundle
-    # QmapShack.app/
+    # *.app/
     #   Contents/
     #      Info.plist
     #      MacOS/
-    #         QMapShack
+    #         <binary>
     #      Resources/
-    #         QMapShack.icns
+    #         *.icns
     #      Frameworks/
     #         <libs>
     #      PlugIns
@@ -42,31 +39,45 @@ function buildAppStructure {
     
     rm -rf $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_DIR
-    
+
+    # TODO not all copied from predefined data is needed in every case (eg icon)
     # predefined data
     cp -v -R $SRC_RESOURCES_DIR/Contents $BUILD_BUNDLE_DIR
     
-    # new icon, if one has been created (otherwise the one from predefined data
+    # new icon, if one has been created (otherwise the one from predefined data)
     if [ -f "$BUILD_BIN_DIR/$APP_NAME.icns" ]; then
+        echo "cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/"
         cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/
     fi
     
     # binary
     mkdir $BUILD_BUNDLE_APP_DIR
-    cp -v $BUILD_BIN_DIR/qmapshack  $BUILD_BUNDLE_APP_DIR/$APP_NAME
-    
+
+    cp -v $BUILD_BIN_DIR/$APP_NAME_LOWER  $BUILD_BUNDLE_APP_DIR/$APP_NAME
+
     mkdir $BUILD_BUNDLE_RES_QM_DIR
-    mkdir $BUILD_BUNDLE_RES_GDAL_DIR
-    mkdir $BUILD_BUNDLE_RES_PROJ_DIR
-    mkdir $BUILD_BUNDLE_RES_ROUTINO_DIR
-    mkdir $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $BUILD_DIR/src/*.qm $BUILD_BUNDLE_RES_QM_DIR
+
+    cp -v $BUILD_DIR/src/$APP_NAME_LOWER/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
+
+
+function copyQtTrqnslations {
+    cp -v $QT_DIR/translations/*_ca.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
+    cp -v $QT_DIR/translations/*_ru.qm $BUILD_BUNDLE_RES_QM_DIR
+}
+
 
 function qtDeploy {
     # -no-strip 
     $QT_DIR/bin/macdeployqt $BUILD_BUNDLE_DIR -always-overwrite -verbose=3
 }
+
 
 function printLinkingApp {
     printLinking $BUILD_BUNDLE_APP_FILE
@@ -104,6 +115,7 @@ function printLinkingApp {
     done   
 }
 
+
 function adjustLinking {
  
     for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
@@ -127,6 +139,7 @@ function adjustLinking {
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "libroutino"
 }
+
 
 function adjustLinkQt {
     F=$1 # file
@@ -193,64 +206,6 @@ function checkLibraries {
     done
 }
 
-function copyAdditionalLibraries {
-    cp -v    $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
-    cp -v    $QUAZIP_LIB_LIB_DIR/libquazip.1.dylib $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtMultimedia.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtWebKitWidgets.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
-    # TODO remove QT Bus, is only for linux needed
-    #cp -v -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
-}
-
-function copyExternalFiles {
-    cp -v $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
-
-    cp -v $GDAL_DIR/share/gdal/* $BUILD_BUNDLE_RES_GDAL_DIR
-    cp -v $PROJ_DIR/share/proj/* $BUILD_BUNDLE_RES_PROJ_DIR
-    
-    cp -v $ROUTINO_LIB_XML_DIR/profiles.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp -v $ROUTINO_LIB_XML_DIR/translations.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-    cp -v $ROUTINO_LIB_XML_DIR/tagging.xml $BUILD_BUNDLE_RES_ROUTINO_DIR
-}
-
-
-function adjustLinkingExtTools {
-    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
-    do
-        adjustLinkQt $F "/usr/local/opt/"
-        adjustLinkQt $F "/usr/local/Cellar/"
-        adjustLinkQt $F "/usr/local/lib/"
-    done
-}
-
-
-function printLinkingExtTools {
-    for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
-    do
-        printLinking $F
-    done
-}
-
-
-function copyExtTools {
-    # at least gdalbuildvrt is used
-    cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
-    cp -v $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
-}
-
 
 function printLinking {
     echo "--------------------"
@@ -259,38 +214,28 @@ function printLinking {
     echo "--------------------"
 }
 
-function archiveBundle {
-    ARCHIVE=$(printf "%s/%s-MacOSX_%s.tar.gz" "$BUILD_RELEASE_DIR" "$APP_NAME" "$APP_VERSION")
-    echo $ARCHIVE
-    rm $ARCHIVE
-
-    BUILD_RELEASE_REL_DIR=${BUILD_RELEASE_DIR##*/}
-    BUILD_RELEASE_QMAPTOOL_DIR="../../qmaptool-default/$BUILD_RELEASE_REL_DIR"
-
-    cd $BUILD_RELEASE_DIR
-    rm -rf $APP_BUNDLE_QMAPTOOL
-    if [ -d $BUILD_RELEASE_QMAPTOOL_DIR ]; then
-        cp -v -R $BUILD_RELEASE_QMAPTOOL_DIR/$APP_BUNDLE_QMAPTOOL $BUILD_RELEASE_DIR/
-        tar -zcvf $ARCHIVE $APP_BUNDLE $APP_BUNDLE_QMAPTOOL
-    else
-        tar -zcvf $ARCHIVE $APP_BUNDLE
-    fi
-    cd ..
-}
-
 
 function extractVersion {
     # Version CMakeList.txt
+
     # set(APPLICATION_VERSION_MAJOR "1")
     # set(APPLICATION_VERSION_MINOR "3")
     # set(APPLICATION_VERSION_PATCH "0.libroutino")
-    
-    MAJOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MAJOR.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
-    MINOR_VERSION=$(sed -n 's/.*APPLICATION_VERSION_MINOR.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
-    PATCH_VERSION=$(sed -n 's/.*APPLICATION_VERSION_PATCH.*\"\(.*\)\".*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
-    echo "$MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION"
+    MAJOR_VERSION=$(sed -E -n 's/.*_VERSION_MAJOR.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
+    MINOR_VERSION=$(sed -E -n 's/.*_VERSION_MINOR.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
+    PATCH_VERSION=$(sed -E -n 's/.*_VERSION_PATCH.*([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/src/$APP_NAME_LOWER/CMakeLists.txt)
+
+    if [[ -z "$MAJOR_VERSION" ]]; then
+         # project(QMapShack VERSION 1.11.0)
+        MAJOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\1/p' $QMS_SRC_DIR/CMakeLists.txt)
+        MINOR_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\2/p' $QMS_SRC_DIR/CMakeLists.txt)
+        PATCH_VERSION=$(sed -E -n 's/.*QMapShack VERSION.*([[:digit:]]+)\.([[:digit:]]+)\.([[:digit:]]+).*/\3/p' $QMS_SRC_DIR/CMakeLists.txt)
+    fi
+
+    echo "Version: $MAJOR_VERSION $MINOR_VERSION $PATCH_VERSION"
     APP_VERSION="$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION"
 }
+
 
 function readRevisionHash {
     cd $QMS_SRC_DIR
@@ -307,43 +252,24 @@ function updateInfoPlist {
     /usr/libexec/PlistBuddy -c "Set :CFBundleVersion $APP_VERSION"            "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
     /usr/libexec/PlistBuddy -c "Set :BuildHashKey $BUILD_HASH_KEY"            "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
     /usr/libexec/PlistBuddy -c "Set :BuildTime $BUILD_TIME"                   "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
+
+    /usr/libexec/PlistBuddy -c "Set :CFBundleIconFile $APP_NAME"              "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
+    /usr/libexec/PlistBuddy -c "Set :CFBundleExecutable $APP_NAME"            "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
+    /usr/libexec/PlistBuddy -c "Set :CFBundleName $APP_NAME"                  "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
+
+    /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier org.qlandkarte.$APP_NAME" "$BUILD_BUNDLE_CONTENTS_DIR/Info.plist"
 }
 
 
 if [[ "$1" == "icon" ]]; then
     buildIcon
 fi
-if [[ "$1" == "bundle" ]]; then
-    echo "---extract version -----------------"
-    extractVersion
-    readRevisionHash
-    echo "---build bundle --------------------"
-    buildAppStructure
-    echo "---replace version string ----------"
-    updateInfoPlist
-    echo "---qt deploy tool ------------------"
-    qtDeploy
-    echo "---copy libraries ------------------"
-    copyAdditionalLibraries
-    echo "---copy external files -------------"
-    copyExternalFiles
-    echo "---adjust linking ------------------"
-    adjustLinking
-    echo "---external tools ------------------"
-    copyExtTools
-    adjustLinkingExtTools
-    printLinkingExtTools
-    echo "------------------------------------"
-    # chmod a+x $BUILD_BUNDLE_DIR/Contents/Frameworks/*
-fi
 if [[ "$1" == "info" ]]; then
     printLinkingApp
 fi
 if [[ "$1" == "info-before" ]]; then
     printLinking $BUILD_RELEASE_DIR/$APP_NAME
+    # TODO
     printLinking $LIB_ROUTINO_LIB_DIR/libroutino.so
 fi
-if [[ "$1" == "archive" ]]; then
-    extractVersion
-    archiveBundle
-fi
+

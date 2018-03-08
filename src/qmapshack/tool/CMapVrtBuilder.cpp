@@ -49,6 +49,8 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     checkBy32->setChecked(cfg.value("by32", false).toBool());
     checkBy64->setChecked(cfg.value("by64", false).toBool());
     cfg.endGroup();
+
+    tempFile = new QTemporaryFile(this);
 }
 
 CMapVrtBuilder::~CMapVrtBuilder()
@@ -149,11 +151,20 @@ void CMapVrtBuilder::slotStart()
     }
 
     args << labelTargetFilename->text();
+    if(QFile::exists(labelTargetFilename->text()))
+    {
+        QFile::remove(labelTargetFilename->text());
+    }
 
+    tempFile->open();
+    tempFile->resize(0);
+    QTextStream stream(tempFile);
     for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
     {
-        args << item->text();
+        stream << item->text() << endl;
     }
+    tempFile->close();
+    args << "-input_file_list" << args << tempFile->fileName();
 
     stdOut("gdalbuildvrt " +  args.join(" ") + "\n");
     cmd.start("gdalbuildvrt", args);

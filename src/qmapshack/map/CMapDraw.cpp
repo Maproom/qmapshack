@@ -325,6 +325,8 @@ void CMapDraw::buildMapList()
         }
     }
 
+    mapList->sort();
+
     CDiskCache::cleanupRemovedMaps(maps);
 
     mapList->updateHelpText();

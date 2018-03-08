@@ -60,6 +60,8 @@ public:
 
     void updateHelpText();
 
+    void sort();
+
 signals:
     void sigChanged();
     void sigSetupDemPath();

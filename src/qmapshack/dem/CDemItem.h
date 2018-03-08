@@ -76,6 +76,11 @@ public:
     void showChildren(bool yes);
 
 
+    QString getName() const
+    {
+        return text(0);
+    }
+
 private:
     friend class CDemDraw;
     CDemDraw * dem;

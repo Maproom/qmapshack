@@ -161,6 +161,8 @@ void CDemDraw::buildMapList()
             f.close();
         }
     }
+
+    demList->sort();
     demList->updateHelpText();
 }
 

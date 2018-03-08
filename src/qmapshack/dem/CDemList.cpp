@@ -89,6 +89,37 @@ void CDemList::clear()
     treeWidget->clear();
 }
 
+
+static bool sortByName(CDemItem * item1, CDemItem * item2)
+{
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1->getName(), item2->getName()) < 0;
+}
+
+void CDemList::sort()
+{
+    QList<CDemItem*> items1;
+    while(treeWidget->topLevelItemCount())
+    {
+        CDemItem * item = dynamic_cast<CDemItem*>(treeWidget->takeTopLevelItem(0));
+        if(item != nullptr)
+        {
+            items1 << item;
+        }
+    }
+
+    qSort(items1.begin(), items1.end(), &sortByName);
+
+    QList<QTreeWidgetItem*> items2;
+    for(CDemItem * item : items1)
+    {
+        items2 << item;
+    }
+    treeWidget->addTopLevelItems(items2);
+}
+
 int CDemList::count()
 {
     return treeWidget->topLevelItemCount();

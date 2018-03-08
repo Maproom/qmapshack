@@ -52,6 +52,7 @@ public:
     virtual ~CMapList();
 
     void clear();
+    void sort();
     int count();
     CMapItem * item(int i);
     operator QTreeWidget*()

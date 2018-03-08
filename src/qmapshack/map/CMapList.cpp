@@ -94,6 +94,36 @@ void CMapList::clear()
     treeWidget->clear();
 }
 
+static bool sortByName(CMapItem * item1, CMapItem * item2)
+{
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1->getName(), item2->getName()) < 0;
+}
+
+void CMapList::sort()
+{
+    QList<CMapItem*> items1;
+    while(treeWidget->topLevelItemCount())
+    {
+        CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->takeTopLevelItem(0));
+        if(item != nullptr)
+        {
+            items1 << item;
+        }
+    }
+
+    qSort(items1.begin(), items1.end(), &sortByName);
+
+    QList<QTreeWidgetItem*> items2;
+    for(CMapItem * item : items1)
+    {
+        items2 << item;
+    }
+    treeWidget->addTopLevelItems(items2);
+}
+
 int CMapList::count()
 {
     return treeWidget->topLevelItemCount();

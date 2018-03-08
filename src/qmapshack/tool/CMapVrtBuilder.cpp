@@ -164,7 +164,7 @@ void CMapVrtBuilder::slotStart()
         stream << item->text() << endl;
     }
     tempFile->close();
-    args << "-input_file_list" << args << tempFile->fileName();
+    args << "-input_file_list" << tempFile->fileName();
 
     stdOut("gdalbuildvrt " +  args.join(" ") + "\n");
     cmd.start("gdalbuildvrt", args);

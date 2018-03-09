@@ -20,6 +20,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "misc.h"
 
 #include <QtWidgets>
 
@@ -94,13 +95,6 @@ void CMapList::clear()
     treeWidget->clear();
 }
 
-static bool sortByName(CMapItem * item1, CMapItem * item2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(item1->getName(), item2->getName()) < 0;
-}
 
 void CMapList::sort()
 {
@@ -114,7 +108,7 @@ void CMapList::sort()
         }
     }
 
-    qSort(items1.begin(), items1.end(), &sortByName);
+    qSort(items1.begin(), items1.end(), &sortByName<CMapItem>);
 
     QList<QTreeWidgetItem*> items2;
     for(CMapItem * item : items1)

@@ -54,6 +54,8 @@ public:
     }
 
 
+    QString getName() const;
+
     /**
        @brief Send show/hide events to the workspace
      */

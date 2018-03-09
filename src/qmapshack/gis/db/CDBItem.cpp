@@ -57,6 +57,11 @@ CDBItem::CDBItem(QSqlDatabase &db, quint64 id, IDBFolder *parent)
 }
 
 
+QString CDBItem::getName() const
+{
+    return text(CGisListDB::eColumnName);
+}
+
 void CDBItem::updateAge()
 {
     QSqlQuery query(db);

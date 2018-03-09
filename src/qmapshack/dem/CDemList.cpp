@@ -20,6 +20,7 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemList.h"
+#include "misc.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -90,14 +91,6 @@ void CDemList::clear()
 }
 
 
-static bool sortByName(CDemItem * item1, CDemItem * item2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(item1->getName(), item2->getName()) < 0;
-}
-
 void CDemList::sort()
 {
     QList<CDemItem*> items1;
@@ -110,7 +103,7 @@ void CDemList::sort()
         }
     }
 
-    qSort(items1.begin(), items1.end(), &sortByName);
+    qSort(items1.begin(), items1.end(), &sortByName<CDemItem>);
 
     QList<QTreeWidgetItem*> items2;
     for(CDemItem * item : items1)

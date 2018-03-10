@@ -19,6 +19,7 @@
 #include "dem/CDemDraw.h"
 #include "dem/CDemItem.h"
 #include "dem/CDemVRT.h"
+#include "dem/CDemWCS.h"
 #include "dem/IDemProp.h"
 
 #include <QtWidgets>
@@ -92,6 +93,10 @@ void CDemItem::updateIcon()
     {
         img = QPixmap("://icons/32x32/MimeDemVRT.png");
     }
+    else if(fi.suffix().toLower() == "wcs")
+    {
+        img = QPixmap("://icons/32x32/MimeDemWCS.png");
+    }
 
     setIcon(0,QIcon(img));
 }
@@ -147,6 +152,10 @@ bool CDemItem::activate()
     if(fi.suffix().toLower() == "vrt")
     {
         demfile = new CDemVRT(filename, dem);
+    }
+    else if(fi.suffix().toLower() == "wcs")
+    {
+        demfile = new CDemWCS(filename, dem);
     }
 
     updateIcon();

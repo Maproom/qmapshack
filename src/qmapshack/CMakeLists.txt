@@ -45,6 +45,7 @@ set( SRCS
     dem/CDemPathSetup.cpp
     dem/CDemPropSetup.cpp
     dem/CDemVRT.cpp
+    dem/CDemWCS.cpp
     dem/IDem.cpp
     dem/IDemProp.cpp
     device/CDeviceGarmin.cpp
@@ -353,6 +354,7 @@ set( HDRS
     dem/CDemPathSetup.h
     dem/CDemPropSetup.h
     dem/CDemVRT.h
+    dem/CDemWCS.h
     dem/IDem.h
     dem/IDemProp.h
     device/CDeviceGarmin.h

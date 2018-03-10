@@ -32,7 +32,7 @@
 
 QList<CDemDraw*> CDemDraw::dems;
 QStringList CDemDraw::demPaths;
-QStringList CDemDraw::supportedFormats = QString("*.vrt").split('|');
+QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
 
 
 CDemDraw::CDemDraw(CCanvas *canvas)

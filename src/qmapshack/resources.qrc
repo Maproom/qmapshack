@@ -139,6 +139,7 @@
         <file>../icons/32x32/LogProject.png</file>
         <file>../icons/32x32/Map.png</file>
         <file>../icons/32x32/MimeDemVRT.png</file>
+        <file>../icons/32x32/MimeDemWCS.png</file>
         <file>../icons/32x32/MimeGEMF.png</file>
         <file>../icons/32x32/MimeIMG.png</file>
         <file>../icons/32x32/MimeJNX.png</file>
@@ -368,6 +369,7 @@
         <file>../icons/48x48/LogProject.png</file>
         <file>../icons/48x48/Map.png</file>
         <file>../icons/48x48/MimeDemVRT.png</file>
+        <file>../icons/48x48/MimeDemWCS.png</file>
         <file>../icons/48x48/MimeGEMF.png</file>
         <file>../icons/48x48/MimeIMG.png</file>
         <file>../icons/48x48/MimeJNX.png</file>

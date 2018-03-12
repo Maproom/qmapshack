@@ -97,6 +97,10 @@ public:
     void loadGISData(const QStringList& filenames);
 
     const qint32 id;
+
+public slots:
+    void slotLinkActivated(const QString& link);
+
 protected:
 #ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
@@ -137,7 +141,6 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
-    void slotLinkActivated(const QString& link);
     void slotSanityTest();
     void slotCloseTab();
     void slotToggleDocks();

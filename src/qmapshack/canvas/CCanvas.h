@@ -245,6 +245,8 @@ private:
 
     QMutex mousePressMutex;
     bool mouseLost = false;
+
+    QLabel * labelHelp = nullptr;
 };
 
 #endif //CCANVAS_H

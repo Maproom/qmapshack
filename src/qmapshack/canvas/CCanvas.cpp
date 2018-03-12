@@ -133,6 +133,37 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     timerTrackOnFocus->start(1000);
 
     connect(timerTrackOnFocus, &QTimer::timeout, this, &CCanvas::slotCheckTrackOnFocus);
+
+    const QString msg = tr(
+        "<h1>Welcome</h1>"
+        "<p>Thank you for using QMapShack. As a first step make yourself comfortable by arranging the dock "
+        "widgets around this area to your personal liking. You can do this by grabbing the title bars with "
+        "your mouse (keep left button pressed on title bar) to move them where you want them. You can attach the "
+        "doc widgets at the left, right, top or bottom. And you can stack them by placing them right above another "
+        "dock widget. If you do not want to use the functionality of a dock widget you can close it and "
+        "make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it "
+        "anywhere you like.</p> "
+        "<h2>First Steps</h2> "
+        "<p>QMapShack has an extensive <a href='wiki'>Wiki</a> with a lot of information about how to use it. "
+        "Right now is the perfect time to start reading it's <a href='quick'>Quick Start Guide</a> section.</p> "
+        "<h2>Maps!</h2>"
+        "<p>Please keep in mind that QMapShack is a non-profit project, that does not have the resources to "
+        "provide you with a variety of map collections easy to download from a central server. You have to "
+        "download maps and all other useful data like elevation and routing data on your own from various "
+        "sources. But we like to help you a bit. As first action you can think about a folder on your disk "
+        "where you want to store all data. The impatient ones will proceed with the 'Help! I want maps!' "
+        "button. This will ask you for he path to that folder and install all necessary files to access "
+        "some online maps. </p> "
+        "The more patient ones already had a look at the <a href='quick'>Quick Start Guide</a> guiding you "
+        "to various map and data sources in the internet. There is also a <a href='list'>list</a> in the "
+        "Wiki where we try to collect information about all kind of available sources. "
+        );
+
+    labelHelp = new QLabel(this);
+    labelHelp->setText(msg);
+    labelHelp->setWordWrap(true);
+    connect(map, &CMapDraw::sigActiveMapsChanged, labelHelp, &QLabel::setVisible);
+    connect(labelHelp, &QLabel::linkActivated, &CMainWindow::self(), &CMainWindow::slotLinkActivated);
 }
 
 CCanvas::~CCanvas()
@@ -343,6 +374,12 @@ void CCanvas::resizeEvent(QResizeEvent * e)
 
     slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
     setSizeTrackProfile();
+
+    QSize s = e->size() - QSize(50,50);
+
+    labelHelp->move(25,25);
+
+    labelHelp->resize(s);
 }
 
 void CCanvas::paintEvent(QPaintEvent*)
@@ -399,6 +436,11 @@ void CCanvas::paintEvent(QPaintEvent*)
 
 void CCanvas::mousePressEvent(QMouseEvent * e)
 {
+    if(labelHelp->isVisible())
+    {
+        return;
+    }
+
     if(!mousePressMutex.tryLock())
     {
         return;
@@ -470,9 +512,13 @@ void CCanvas::wheelEvent(QWheelEvent * e)
 
 void CCanvas::enterEvent(QEvent * e)
 {
+    if(labelHelp->isVisible())
+    {
+        return;
+    }
+
     Q_UNUSED(e);
     CCanvas::setOverrideCursor(*mouse, "enterEvent");
-
     setMouseTracking(true);
 }
 

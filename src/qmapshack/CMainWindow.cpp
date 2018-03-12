@@ -1298,6 +1298,14 @@ void CMainWindow::slotLinkActivated(const QString& link)
     {
         actionAddMapView->trigger();
     }
+    else if(link == "wiki")
+    {
+        slotHelp();
+    }
+    else if(link == "quick")
+    {
+        slotQuickstart();
+    }
 }
 
 void CMainWindow::slotSetupWptIcons()

@@ -139,7 +139,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         "<p>Thank you for using QMapShack. As a first step make yourself comfortable by arranging the dock "
         "widgets around this area to your personal liking. You can do this by grabbing the title bars with "
         "your mouse (keep left button pressed on title bar) to move them where you want them. You can attach the "
-        "doc widgets at the left, right, top or bottom. And you can stack them by placing them right above another "
+        "dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another "
         "dock widget. If you do not want to use the functionality of a dock widget you can close it and "
         "make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it "
         "anywhere you like.</p> "

@@ -885,7 +885,7 @@ void CMainWindow::testForNoView()
         label->setWordWrap(true);
         label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one. Or click <a href='newview'>here</a>."));
         label->setObjectName("NoViewInfo");
-        connect(label, &QLabel::linkActivated, this, &CMainWindow::slotLinkActivated);
+        connect(label, &QLabel::linkActivated, this, static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
         tabWidget->addTab(label, "*");
         return;
     }
@@ -1306,6 +1306,27 @@ void CMainWindow::slotLinkActivated(const QString& link)
     {
         slotQuickstart();
     }
+    else if(link == "maps")
+    {
+        CMapList * list = dynamic_cast<CMapList*>(tabMaps->currentWidget());
+        if(list == nullptr)
+        {
+            return;
+        }
+        list->slotMapHonk();
+    }
+}
+
+void CMainWindow::slotLinkActivated(const QUrl& url)
+{
+    const QString& link = url.toString();
+    if(link.startsWith("http"))
+    {
+        QDesktopServices::openUrl(url);
+        return;
+    }
+
+    slotLinkActivated(link);
 }
 
 void CMainWindow::slotSetupWptIcons()

@@ -47,6 +47,7 @@ class IMouse;
 class QTimer;
 class QMovie;
 class QLabel;
+class QTextBrowser;
 class IPlot;
 struct SGisLine;
 struct poi_t;
@@ -246,7 +247,7 @@ private:
     QMutex mousePressMutex;
     bool mouseLost = false;
 
-    QLabel * labelHelp = nullptr;
+    QTextBrowser * labelHelp = nullptr;
 };
 
 #endif //CCANVAS_H

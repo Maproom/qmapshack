@@ -611,6 +611,7 @@
         <file>pics/noMap256x256.png</file>
         <file>pics/splash.png</file>
         <file>pics/timezones.png</file>
+        <file>pics/DockWidgets.png</file>
         
         <file>templates/Hiking_Tour_Summary.ui</file>
     </qresource>

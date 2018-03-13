@@ -100,6 +100,7 @@ public:
 
 public slots:
     void slotLinkActivated(const QString& link);
+    void slotLinkActivated(const QUrl& url);
 
 protected:
 #ifdef WIN32

@@ -22,6 +22,7 @@
 
 #include "ui_IMainWindow.h"
 #include <QMainWindow>
+#include <QDir>
 
 class CMapList;
 class CDemList;
@@ -43,6 +44,37 @@ public:
     }
 
     static QWidget * getBestWidgetForParent();
+
+    QString getHomePath()
+    {
+        return homeDir.exists() ? homeDir.absolutePath() : "";
+    }
+
+    QString getMapsPath()
+    {
+        return homeDir.exists(mapsPath) ? homeDir.absoluteFilePath(mapsPath) : "";
+    }
+    QString getDemPath()
+    {
+        return homeDir.exists(demPath) ? homeDir.absoluteFilePath(demPath) : "";
+    }
+    QString getRoutinoPath()
+    {
+        return homeDir.exists(routinoPath) ? homeDir.absoluteFilePath(routinoPath) : "";
+    }
+    QString getBRouterPath()
+    {
+        return homeDir.exists(brouterPath) ? homeDir.absoluteFilePath(brouterPath) : "";
+    }
+    QString getDatabasePath()
+    {
+        return homeDir.exists(databasePath) ? homeDir.absoluteFilePath(databasePath) : "";
+    }
+    QString getGpxPath()
+    {
+        return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : "";
+    }
+
 
     static QString getUser();
 
@@ -163,12 +195,12 @@ private:
     void setupHomePath();
 
     static CMainWindow * pSelf;
-    static QString homePath;
+    static QDir homeDir;
     static const QString mapsPath;
     static const QString demPath;
     static const QString routinoPath;
     static const QString brouterPath;
-    static const QString datbasePath;
+    static const QString databasePath;
     static const QString gpxPath;
     static const QSet<QString> paths;
 

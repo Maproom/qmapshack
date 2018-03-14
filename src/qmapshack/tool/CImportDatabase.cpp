@@ -19,6 +19,7 @@
 #include "helpers/CSettings.h"
 #include "qlgt/CQlgtDb.h"
 #include "tool/CImportDatabase.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -92,8 +93,15 @@ void CImportDatabase::slotSelectSource()
 
 void CImportDatabase::slotSelectTarget()
 {
-    SETTINGS;
-    QString path = cfg.value("ConvertDB/targetPath",QDir::homePath()).toString();
+    SETTINGS;            
+    QString path = CMainWindow::self().getDatabasePath();
+    if(path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+    path = cfg.value("ConvertDB/targetPath", path).toString();
+
+
     QString filename = QFileDialog::getSaveFileName(this, tr("Select target database..."), path, "QMapShack Database (*.db)");
     if(filename.isEmpty())
     {

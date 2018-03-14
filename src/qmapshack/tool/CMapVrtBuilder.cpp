@@ -16,8 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CMapVrtBuilder.h"
+#include "tool/CMapVrtBuilder.h"
 #include "helpers/CSettings.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -97,8 +98,14 @@ void CMapVrtBuilder::slotSelectSourceFiles()
 
 void CMapVrtBuilder::slotSelectTargetFile()
 {
-    SETTINGS;
-    QString path = cfg.value("VrtBuilder/targetPath",QDir::homePath()).toString();
+    SETTINGS;  
+    QString path = CMainWindow::self().getMapsPath();
+    if(path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+    path = cfg.value("VrtBuilder/targetPath", path).toString();
+
 
     QString file = QFileDialog::getSaveFileName(this, tr("Select target file..."), path, "GDAL vrt (*.vrt)");
     if(file.isEmpty())

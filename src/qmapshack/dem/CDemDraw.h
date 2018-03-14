@@ -62,6 +62,7 @@ public:
     }
 
     static void setupDemPath();
+    static void setupDemPath(const QString &path);
     static void setupDemPath(const QStringList &paths);
     static void saveDemPath(QSettings &cfg);
     static void loadDemPath(QSettings &cfg);

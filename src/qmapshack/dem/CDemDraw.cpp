@@ -78,6 +78,19 @@ void CDemDraw::setupDemPath()
     setupDemPath(paths);
 }
 
+void CDemDraw::setupDemPath(const QString &path)
+{
+    if(demPaths.contains(path))
+    {
+        return;
+    }
+
+    QStringList paths(demPaths);
+    paths << path;
+    setupDemPath(paths);
+}
+
+
 void CDemDraw::setupDemPath(const QStringList &paths)
 {
     demPaths = paths;

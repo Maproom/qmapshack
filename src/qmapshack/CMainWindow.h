@@ -158,8 +158,9 @@ private:
     void showDocks() const;
     void hideDocks();
     void displayRegular();
-    void displayFullscreen();
+    void displayFullscreen();    
     CCanvas * addView(const QString &name);
+    void setupHomePath();
 
     static CMainWindow * pSelf;
 

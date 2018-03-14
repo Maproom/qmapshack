@@ -32,7 +32,11 @@ class CRouterRoutino : public IRouter, private Ui::IRouterRoutino
     Q_OBJECT
 public:
     CRouterRoutino(QWidget * parent);
-    virtual ~CRouterRoutino();
+    static CRouterRoutino& self()
+    {
+        return *pSelf;
+    }
+
 
     void calcRoute(const IGisItem::key_t& key) override;
     int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
@@ -43,15 +47,20 @@ public:
 
     static QPointer<CProgressDialog> progress;
 
+    void setupPath(const QString& path);
+
 private slots:
     void slotSetupPaths();
 
 
 private:
+    virtual ~CRouterRoutino();
     void buildDatabaseList();
     void freeDatabaseList();
     void updateHelpText();
     QString xlateRoutinoError(int err);
+    static CRouterRoutino * pSelf;
+
     QStringList dbPaths;
 
     QMutex mutex {QMutex::NonRecursive};

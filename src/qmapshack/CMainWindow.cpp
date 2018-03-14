@@ -49,6 +49,7 @@
 #include "units/CUnitsSetup.h"
 #include "units/IUnit.h"
 #include "version.h"
+#include "gis/rte/router/CRouterRoutino.h"
 
 #include <QtGui>
 #include <QtSql>
@@ -521,6 +522,36 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
+}
+
+void CMainWindow::setupHomePath()
+{
+    SETTINGS;
+    QString homePath = cfg.value("Paths/homePath", QDir::homePath()).toString();
+    homePath = QFileDialog::getExistingDirectory(this, tr("Select folder..."), homePath);
+    if(homePath.isEmpty())
+    {
+        return;
+    }
+
+    QDir home(homePath);
+    static const QSet<QString> paths = {"Maps", "Dem", "Routino", "BRouter", "Database", "GPX"};
+
+    for(const QString& path : paths)
+    {
+        if(!home.exists(path))
+        {
+            home.mkpath(path);
+        }
+    }
+
+    CMapDraw::setupMapPath(home.absoluteFilePath("Maps"));
+    CDemDraw::setupDemPath(home.absoluteFilePath("Dem"));
+    CRouterRoutino::self().setupPath(home.absoluteFilePath("Routino"));
+    //todo: BRouter
+    cfg.setValue("Database/lastDatabasePath", home.absoluteFilePath("Database"));
+    cfg.setValue("Paths/lastGisPath", home.absoluteFilePath("GPX"));
+
 }
 
 CCanvas *CMainWindow::addView(const QString& name)
@@ -1298,13 +1329,17 @@ void CMainWindow::slotLinkActivated(const QString& link)
     {
         actionAddMapView->trigger();
     }
-    else if(link == "wiki")
+    else if(link == "ShowWiki")
     {
         slotHelp();
     }
-    else if(link == "quick")
+    else if(link == "ShowQuickStart")
     {
         slotQuickstart();
+    }
+    else if(link == "SetupHome")
+    {
+        setupHomePath();
     }
     else if(link == "maps")
     {

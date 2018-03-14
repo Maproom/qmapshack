@@ -163,6 +163,15 @@ private:
     void setupHomePath();
 
     static CMainWindow * pSelf;
+    static QString homePath;
+    static const QString mapsPath;
+    static const QString demPath;
+    static const QString routinoPath;
+    static const QString brouterPath;
+    static const QString datbasePath;
+    static const QString gpxPath;
+    static const QSet<QString> paths;
+
 
     /// status bar label
     QLabel * lblPosWGS84;

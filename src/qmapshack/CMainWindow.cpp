@@ -66,6 +66,15 @@
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
+QString CMainWindow::homePath = QDir::homePath();
+const QString CMainWindow::mapsPath = "Maps";
+const QString CMainWindow::demPath = "Dem";
+const QString CMainWindow::routinoPath = "Routino";
+const QString CMainWindow::brouterPath = "BRouter";
+const QString CMainWindow::datbasePath = "Database";
+const QString CMainWindow::gpxPath = "GPX";
+const QSet<QString> CMainWindow::paths = {mapsPath, demPath, routinoPath, brouterPath, datbasePath, gpxPath};
+
 QMutex CMainWindow::mutex(QMutex::NonRecursive);
 
 CMainWindow::CMainWindow()
@@ -534,9 +543,7 @@ void CMainWindow::setupHomePath()
         return;
     }
 
-    QDir home(homePath);
-    static const QSet<QString> paths = {"Maps", "Dem", "Routino", "BRouter", "Database", "GPX"};
-
+    QDir home(homePath);    
     for(const QString& path : paths)
     {
         if(!home.exists(path))
@@ -545,13 +552,14 @@ void CMainWindow::setupHomePath()
         }
     }
 
-    CMapDraw::setupMapPath(home.absoluteFilePath("Maps"));
-    CDemDraw::setupDemPath(home.absoluteFilePath("Dem"));
-    CRouterRoutino::self().setupPath(home.absoluteFilePath("Routino"));
+    CMapDraw::setupMapPath(home.absoluteFilePath(mapsPath));
+    CDemDraw::setupDemPath(home.absoluteFilePath(demPath));
+    CRouterRoutino::self().setupPath(home.absoluteFilePath(routinoPath));
     //todo: BRouter
-    cfg.setValue("Database/lastDatabasePath", home.absoluteFilePath("Database"));
-    cfg.setValue("Paths/lastGisPath", home.absoluteFilePath("GPX"));
+    cfg.setValue("Database/lastDatabasePath", home.absoluteFilePath(datbasePath));
+    cfg.setValue("Paths/lastGisPath", home.absoluteFilePath(gpxPath));
 
+    cfg.setValue("Paths/homePath", homePath);
 }
 
 CCanvas *CMainWindow::addView(const QString& name)

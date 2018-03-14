@@ -66,14 +66,14 @@
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
-QString CMainWindow::homePath = QDir::homePath();
+QDir CMainWindow::homeDir;
 const QString CMainWindow::mapsPath = "Maps";
 const QString CMainWindow::demPath = "Dem";
 const QString CMainWindow::routinoPath = "Routino";
 const QString CMainWindow::brouterPath = "BRouter";
-const QString CMainWindow::datbasePath = "Database";
+const QString CMainWindow::databasePath = "Database";
 const QString CMainWindow::gpxPath = "GPX";
-const QSet<QString> CMainWindow::paths = {mapsPath, demPath, routinoPath, brouterPath, datbasePath, gpxPath};
+const QSet<QString> CMainWindow::paths = {mapsPath, demPath, routinoPath, brouterPath, databasePath, gpxPath};
 
 QMutex CMainWindow::mutex(QMutex::NonRecursive);
 
@@ -82,6 +82,7 @@ CMainWindow::CMainWindow()
 {
     qDebug() << "Application ID:" << id;
     SETTINGS;
+    homeDir = cfg.value("Paths/homePath", QDir::homePath()).toString();
 
     pSelf = this;
     setupUi(this);
@@ -536,30 +537,30 @@ CMainWindow::~CMainWindow()
 void CMainWindow::setupHomePath()
 {
     SETTINGS;
-    QString homePath = cfg.value("Paths/homePath", QDir::homePath()).toString();
-    homePath = QFileDialog::getExistingDirectory(this, tr("Select folder..."), homePath);
+    homeDir = cfg.value("Paths/homePath", QDir::homePath()).toString();
+    const QString& homePath = QFileDialog::getExistingDirectory(this, tr("Select folder..."), homeDir.absolutePath());
     if(homePath.isEmpty())
     {
         return;
     }
 
-    QDir home(homePath);    
+    homeDir = homePath;
     for(const QString& path : paths)
     {
-        if(!home.exists(path))
+        if(!homeDir.exists(path))
         {
-            home.mkpath(path);
+            homeDir.mkpath(path);
         }
     }
 
-    CMapDraw::setupMapPath(home.absoluteFilePath(mapsPath));
-    CDemDraw::setupDemPath(home.absoluteFilePath(demPath));
-    CRouterRoutino::self().setupPath(home.absoluteFilePath(routinoPath));
+    CMapDraw::setupMapPath(homeDir.absoluteFilePath(mapsPath));
+    CDemDraw::setupDemPath(homeDir.absoluteFilePath(demPath));
+    CRouterRoutino::self().setupPath(homeDir.absoluteFilePath(routinoPath));
     //todo: BRouter
-    cfg.setValue("Database/lastDatabasePath", home.absoluteFilePath(datbasePath));
-    cfg.setValue("Paths/lastGisPath", home.absoluteFilePath(gpxPath));
+    cfg.setValue("Database/lastDatabasePath", homeDir.absoluteFilePath(databasePath));
+    cfg.setValue("Paths/lastGisPath", homeDir.absoluteFilePath(gpxPath));
 
-    cfg.setValue("Paths/homePath", homePath);
+    cfg.setValue("Paths/homePath", homeDir.absolutePath());
 }
 
 CCanvas *CMainWindow::addView(const QString& name)

@@ -134,10 +134,17 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
 
     connect(timerTrackOnFocus, &QTimer::timeout, this, &CCanvas::slotCheckTrackOnFocus);
 
+    QString home = CMainWindow::self().getHomePath();
+    if(home.isEmpty())
+    {
+        home = tr("None selected");
+    }
+
     const QString msg = tr(
         "<table>"
         "<tr>"
-        "<td>"
+        "<td rowspan='2' style='padding-right: 20px;'>"
+        "<img src='://pics/DockWidgets.png' style='float: left;'/>"
         "</td>"
         "<td>"
         "<h1>Welcome</h1>"
@@ -149,9 +156,9 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         "</td>"
         "</tr>"
         "<tr>"
-        "<td>"
-        "<img src='://pics/DockWidgets.png' style='float: left;'/>"
-        "</td>"
+        // missing by intention: rowspan
+        //"<td>"
+        //"</td>"
         "<td>"
         "<h2>Let's Start</h2>"
         "<p>As a first step make yourself comfortable by arranging the dock "
@@ -161,10 +168,24 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         "dock widget. If you do not want to use the functionality of a dock widget you can close it and "
         "make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it "
         "anywhere you like.</p>"
+        "</td>"
+        "</tr>"
+        "<tr>"
+        "<td>"
+        "</td>"
+        "<td>"
         "<h2>The Wiki</h2>"
         "<p>QMapShack has an extensive <a href='ShowWiki'>Wiki</a> with a lot of information about how to use it. "
         "There is a <a href='ShowQuickStart'>Quick Start Guide</a> translated into several languages. Read it and you will "
         "discover the full variety of features QMapShack offers you.</p>"
+        "</td>"
+        "</tr>"
+        "<tr>"
+        "<td>"
+        "<br/>Current home:<br/>"
+        "%1"
+        "</td>"
+        "<td>"
         "<h2>Give it a home</h2>"
         "<p>QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We "
         "recommend a folder with some subfolders:</p>"
@@ -176,8 +197,8 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         "<li>Database - where you create databases to organize your GIS data</li>"
         "<li>GPX - where you keep GPX files</li>"
         "</ul>"
-        "<p>Do you want to create these folders now? Give me a <a  href='SetupHome'>path</a> and QMapShack will create all "
-        "sub-folder and register the paths in it's setup.</p>"
+        "<p>Do you want to create these folders right now? Give me a <a  href='SetupHome'>path</a> and QMapShack will create all "
+        "sub-folder and update all settings.</p>"
         "</td>"
         "</tr>"
         "<tr>"
@@ -212,7 +233,7 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
         "</td>"
         "</tr>"
         "</table>"
-        );
+        ).arg(home);
 
     labelHelp = new QTextBrowser(this);
     labelHelp->setHtml(msg);

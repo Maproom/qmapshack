@@ -74,7 +74,6 @@ CMapList::CMapList(QWidget *parent)
     connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
     connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
-    connect(pushMapHonk,    &QPushButton::clicked,                       this, &CMapList::slotMapHonk);
     connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CMapList::slotLinkActivated);
 
     menu = new QMenu(this);
@@ -132,7 +131,6 @@ void CMapList::updateHelpText()
 {
     bool haveMaps = (treeWidget->topLevelItemCount() > 0);
 
-    pushMapHonk->setVisible(!haveMaps);
     labelHelpFillMapList->setVisible(!haveMaps);
 
     if(!haveMaps)
@@ -248,13 +246,19 @@ void saveResource(const QString& name, QDir& dir)
 
 void CMapList::slotMapHonk()
 {
-    QString path = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store maps?"), QDir::homePath());
-    if(path.isEmpty())
+    QString mapPath = CMainWindow::self().getMapsPath();
+    if(mapPath.isEmpty())
+    {
+        mapPath = QDir::homePath();
+    }
+
+    mapPath = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store maps?"), mapPath);
+    if(mapPath.isEmpty())
     {
         return;
     }
 
-    QDir dir(path);
+    QDir dir(mapPath);
 
     saveResource("WorldSat.wmts", dir);
     saveResource("WorldTopo.wmts", dir);
@@ -262,7 +266,7 @@ void CMapList::slotMapHonk()
     saveResource("OSM_Topo.tms", dir);
     saveResource("OpenCycleMap.tms", dir);
 
-    CMapDraw::setupMapPath(path);
+    CMapDraw::setupMapPath(mapPath);
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)

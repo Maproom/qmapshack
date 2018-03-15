@@ -89,13 +89,11 @@ void CMapDraw::setupMapPath()
 
 void CMapDraw::setupMapPath(const QString &path)
 {
-    if(mapPaths.contains(path))
-    {
-        return;
-    }
-
     QStringList paths(mapPaths);
-    paths << path;
+    if(!mapPaths.contains(path))
+    {                
+        paths << path;
+    }
     setupMapPath(paths);
 }
 

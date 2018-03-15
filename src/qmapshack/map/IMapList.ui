@@ -123,14 +123,6 @@
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QPushButton" name="pushMapHonk">
-         <property name="text">
-          <string>Help! I want maps!
-I don't want to read the documentation!</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
     </layout>

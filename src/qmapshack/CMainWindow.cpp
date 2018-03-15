@@ -1380,6 +1380,14 @@ void CMainWindow::slotLinkActivated(const QString& link)
     {
         slotSetupDemPath();
     }
+    else if(link == "CreateRoutino")
+    {
+        slotCreateRoutinoDatabase();
+    }
+    else if(link == "BRouterSetup")
+    {
+        ///@todo we need a setup handler
+    }
 }
 
 void CMainWindow::slotLinkActivated(const QUrl& url)

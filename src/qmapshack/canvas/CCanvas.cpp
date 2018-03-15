@@ -184,7 +184,7 @@ void CCanvas::buildHelpText()
 
     QString msg = "<table>";
 
-    const QString msgWelcome = tr("<h1>Welcome</h1>"
+    const QString& msgWelcome = tr("<h1>Welcome</h1>"
                                   "<p>Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It's maintained by "
                                   "enthusiast and volunteers. It's very mature and useful but lacks certain amenities you might be used "
                                   "from 'free' commercial software. As a matter of fact we lack the resources to provide you with a centralized and "
@@ -193,7 +193,7 @@ void CCanvas::buildHelpText()
                                   );
     addHtmlRow(msg,"<img src='://pics/DockWidgets.png'/>", msgWelcome, "rowspan='2' style='padding-right: 20px;'", "");
 
-    const QString msgLetsStart = tr("<h2>Let's Start</h2>"
+    const QString& msgLetsStart = tr("<h2>Let's Start</h2>"
                                     "<p>As a first step make yourself comfortable by arranging the dock "
                                     "widgets around this area to your personal liking. You can do this by grabbing the dock widget's title bars with "
                                     "your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the "
@@ -203,7 +203,7 @@ void CCanvas::buildHelpText()
                                     "anywhere you like.</p>"
                                     );
 
-    const QString msgWiki = tr("<h2>The Wiki</h2>"
+    const QString& msgWiki = tr("<h2>The Wiki</h2>"
                                "<p>QMapShack has an extensive <a href='ShowWiki'>Wiki</a> with a lot of information about how to use it. "
                                "There is a <a href='ShowQuickStart'>Quick Start Guide</a> translated into several languages. Read it and you will "
                                "discover the full variety of features QMapShack offers you.</p>"
@@ -211,12 +211,12 @@ void CCanvas::buildHelpText()
 
     addHtmlRow(msg, msgLetsStart + msgWiki, "");
 
-    const QString msgCurHome = tr("<h2>&nbsp;</h2>"
+    const QString& msgCurHome = tr("<h2>&nbsp;</h2>"
                                   "<p>Current home:<br/>"
                                   "%1</p>"
                                   ).arg(home);
 
-    const QString msgGiveHome = tr("<h2>Give it a home</h2>"
+    const QString& msgGiveHome = tr("<h2>Give it a home</h2>"
                                    "<p>QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We "
                                    "recommend a folder with some subfolders:</p>"
                                    "<ul>"
@@ -233,7 +233,7 @@ void CCanvas::buildHelpText()
 
     addHtmlRow(msg, msgCurHome, msgGiveHome, "", "");
 
-    const QString msgMapLinks = tr("<h2>&nbsp;</h2>"
+    const QString& msgMapLinks = tr("<h2>&nbsp;</h2>"
                                    "<p>Impatient Users:<p>"
                                    "<ul>"
                                    "<li><a href='GetMaps'>I want some online maps.</a></li>"
@@ -247,38 +247,53 @@ void CCanvas::buildHelpText()
                                    "</ul>"
                                    );
 
-    const QString msgMaps = tr("<h2>Maps!</h2>"
+    const QString& msgMaps = tr("<h2>Maps!</h2>"
                                "<p>A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one "
-                               "of the <a href='MapFolders'>registered map folders</a>. QMapShack will find it and list it. You can reload the list of maps by doing "
-                               "a right click on the map list and select 'Reload Maps' from the menu.</p> "
+                               "of the registered map folders (<a href='MapFolders'>Menu->File->Setup Map Paths</a>). QMapShack will find it and list "
+                               "it. You can reload the list of maps by doing a right click on the map list and select 'Reload Maps' from the menu.</p> "
                                "<p>A map must be activated to be visible. Right click on the map entry and select 'Activate' from the menu. The moment a map "
                                "is activated this help will disappear. To see it again you simply add another map view "
                                "(<a href='NewView'>Menu->View->Add Map View</a>).</p> "
                                "<p>To start with some online maps click on the link for <a href='GetMaps'>impatient users</a>. If you have a Garmin GPS device "
                                "with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.</p> "
                                "</p>If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. "
-                               "A *.vrt file can reference one or several other files. You can use QMapShack's built-in <a href='VrtBuilder'>VRT Builder</a> "
+                               "A *.vrt file can reference one or several other files. You can use QMapShack's built-in <a href='VrtBuilder'>Menu->Tool->VRT Builder</a> "
                                "to create such a file.</p>"
                                );
 
     addHtmlRow(msg, msgMapLinks, msgMaps, "", "");
 
-    const QString msgDEMLinks = tr("<h2>&nbsp;</h2>"
+    const QString& msgDEMLinks = tr("<h2>&nbsp;</h2>"
                                    "<p>DEM Sources:<p>"
                                    "<ul>"
                                    "<li><a href='http://viewfinderpanoramas.org/dem3.html'>viewfinderpanoramas.org</a></li>"
                                    "</ul>"
                                    );
 
-    const QString msgDem = tr("<h2>Elevation Data</h2>"
-                              "<p>Elevation data (Digital Elevation Model - DEM) is used for various functions in QMapShack and is completely independent from "
+    const QString& msgDem = tr("<h2>Elevation Data</h2>"
+                              "<p>Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from "
                               "the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by "
-                              "QMapShack. This file has to be placed into one of the <a href='DemFolders'>registered DEM folders</a>. QMapShack will find it "
-                              "and list it. You can reload the list of DEM files by doing a right click on the DEM list and select 'Reload DEM' from the menu.</p>"
+                              "QMapShack. This file has to be placed into one of the registered DEM folders (<a href='DemFolders'>Menu->File->Setup DEM Paths</a>). "
+                              "QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select "
+                              "'Reload DEM' from the menu.</p>"
                               "<p>Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one "
-                              "or several other files. Again, you can use QMapShack's built-in <a href='VrtBuilder'>VRT Builder</a> to create such a file.</p>");
+                              "or several other files. Again, you can use QMapShack's built-in <a href='VrtBuilder'>Menu->Tool->VRT Builder</a> to create such a file.</p>"
+                              );
 
     addHtmlRow(msg, msgDEMLinks, msgDem, "", "");
+
+    const QString& msgRouting = tr("<h2>Routing</h2>"
+                                   "<p>QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need "
+                                   "the routing database stored locally. There are two offline routing engines available.</p>"
+                                   "<h3>Routino</h3>"
+                                   "<p>For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in "
+                                   "<a href='CreateRoutino'>Menu->Tool->Create Routino Database</a> tool.</p>"
+                                   "<h3>BRouter</h3>"
+                                   "<p>A second option is to use a local BRouter installation with a local routing database. Use the <a href='BRouterSetup'>"
+                                   "BRouter setup</a> to download and install all necessary data.</p>"
+                                   );
+
+    addHtmlRow(msg, "", msgRouting, "", "");
 
     labelHelp->clear();
     labelHelp->setHtml(msg);
@@ -579,6 +594,11 @@ void CCanvas::mouseDoubleClickEvent(QMouseEvent * e)
 
 void CCanvas::wheelEvent(QWheelEvent * e)
 {
+    if(labelHelp->isVisible())
+    {
+        return;
+    }
+
     mouse->wheelEvent(e);
 
     // angleDelta() returns the eighths of a degree

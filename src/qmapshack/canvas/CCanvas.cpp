@@ -184,6 +184,9 @@ void CCanvas::buildHelpText()
 
     QString msg = "<table>";
 
+    const QString& msgHelp = tr("<p align='right'>This help will be closed the moment you activate a map.</p>");
+    addHtmlRow(msg, "", msgHelp, "", "");
+
     const QString& msgWelcome = tr("<h1>Welcome</h1>"
                                    "<p>Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It's maintained by "
                                    "enthusiast and volunteers. It's very mature and useful but lacks certain amenities you might be used "

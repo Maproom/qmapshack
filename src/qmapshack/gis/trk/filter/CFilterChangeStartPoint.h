@@ -36,7 +36,9 @@ private slots:
     void slotApply();
 
 private:
-    CGisItemTrk& trk; 
+    CGisItemTrk& trk;
+
+    void fillComboBox();
 };
 
 #endif // CFILTERCHANGESTARTPOINT_H

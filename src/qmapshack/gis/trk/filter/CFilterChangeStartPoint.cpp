@@ -26,7 +26,21 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
     , trk(trk)
 {
     setupUi(this);
+    fillComboBox();
 
+    connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
+}
+
+void CFilterChangeStartPoint::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
+    trk.filterChangeStartPoint(comboBox->currentData().toInt());
+    fillComboBox();
+    CCanvas::restoreOverrideCursor("filterChangeStartPoint");
+}
+
+void CFilterChangeStartPoint::fillComboBox()
+{
     IGisProject *project = trk.getParentProject();
     if(nullptr == project)
     {
@@ -35,6 +49,8 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
 
     CTrackData trkData = trk.getTrackData();
     qint32 noOfItems = 0;
+
+    comboBox->clear();
 
     for(CTrackData::trkpt_t& pt : trkData)
     {
@@ -47,7 +63,7 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
         {
             continue;
         }
-        if (pt.idxTotal) // exclude original start point
+        if (pt.idxVisible > 0) // to exclude original start point
         {
             comboBox->insertItem(noOfItems, wpt->getName(), pt.idxVisible);
             ++noOfItems;
@@ -62,12 +78,4 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
     {
         toolApply->setEnabled(true);
     }
-    connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
-}
-
-void CFilterChangeStartPoint::slotApply()
-{
-    CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
-    trk.filterChangeStartPoint(comboBox->currentData().toInt());
-    CCanvas::restoreOverrideCursor("filterChangeStartPoint");
 }

@@ -476,6 +476,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint)
         {
             continue;
         }
+        pt.keyWpt.clear();
         pts << pt;
     }
 
@@ -503,6 +504,7 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint)
     }
 
     trk.readFrom(pts);
+
     deriveSecondaryData();
 
     changed(tr("Change to new Start Point"), "://icons/48x48/FilterSubPt2Pt.png");

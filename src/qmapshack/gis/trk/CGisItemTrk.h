@@ -225,6 +225,7 @@ public:
     qint32 getCntTotalPoints() const { return cntTotalPoints; }
 
     const QDateTime& getTimeStart()           const { return timeStart;        }
+    const QDateTime& getTimeEnd()             const { return timeEnd;          }
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
@@ -539,6 +540,7 @@ public:
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
+    void filterChangeStartPoint(qint32 idxNewStartPoint);
     /** @} */
 
     /**

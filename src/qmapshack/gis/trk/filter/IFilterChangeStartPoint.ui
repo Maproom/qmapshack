@@ -51,18 +51,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
-       <item>
-        <property name="text">
-         <string>New Start Point I</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>New Start Point II</string>
-        </property>
-       </item>
-      </widget>
+      <widget class="QComboBox" name="comboBox"/>
      </item>
      <item>
       <spacer name="horizontalSpacer">

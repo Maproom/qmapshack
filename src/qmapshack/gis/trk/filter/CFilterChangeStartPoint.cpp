@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,8 +16,10 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
 #include "CFilterChangeStartPoint.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
 
 CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent) :
     QWidget(parent)
@@ -25,6 +27,47 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
 {
     setupUi(this);
 
-    comboBox->addItem("toto");
-    comboBox->addItem("toto2");
+    IGisProject *project = trk.getParentProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    CTrackData trkData = trk.getTrackData();
+    qint32 noOfItems = 0;
+
+    for(CTrackData::trkpt_t& pt : trkData)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+        CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(project->getItemByKey(pt.keyWpt));
+        if(nullptr == wpt)
+        {
+            continue;
+        }
+        if (pt.idxTotal) // exclude original start point
+        {
+            comboBox->insertItem(noOfItems, wpt->getName(), pt.idxVisible);
+            ++noOfItems;
+        }
+    }
+
+    if (noOfItems == 0)
+    {
+        toolApply->setEnabled(false);
+    }
+    else
+    {
+        toolApply->setEnabled(true);
+    }
+    connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
+}
+
+void CFilterChangeStartPoint::slotApply()
+{
+    CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
+    trk.filterChangeStartPoint(comboBox->currentData().toInt());
+    CCanvas::restoreOverrideCursor("filterChangeStartPoint");
 }

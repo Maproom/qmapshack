@@ -32,8 +32,11 @@ public:
     CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterChangeStartPoint() = default;
 
+private slots:
+    void slotApply();
+
 private:
-    CGisItemTrk& trk;
+    CGisItemTrk& trk; 
 };
 
 #endif // CFILTERCHANGESTARTPOINT_H

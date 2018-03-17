@@ -64,7 +64,7 @@ void IDeviceWatcher::probeForDevice(const QString& mountPoint, const QString& pa
             emit sigChanged();
         }
     }
-    else if(entries.contains("TwoNavData"))
+    else if(entries.contains("TwoNavData") || dir.exists("AppData/RegInfo.ini"))
     {
         new CDeviceTwoNav(mountPoint, path, label, listWks);
         emit sigChanged();

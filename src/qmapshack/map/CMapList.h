@@ -64,7 +64,6 @@ public:
 
 signals:
     void sigChanged();
-    void sigSetupMapPath();
 
 public slots:
     static void slotMapHonk();
@@ -75,7 +74,6 @@ private slots:
     void slotMoveDown();
     void slotReloadMaps();
     void slotContextMenu(const QPoint &point);
-    void slotLinkActivated(const QString& link);
 
 private:
     QMenu * menu;

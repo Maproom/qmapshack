@@ -74,7 +74,7 @@ CMapList::CMapList(QWidget *parent)
     connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
     connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
-    connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CMapList::slotLinkActivated);
+    connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -280,10 +280,3 @@ void CMapList::slotReloadMaps()
     CMapDraw::setupMapPath(CMapDraw::getMapPaths());
 }
 
-void CMapList::slotLinkActivated(const QString& link)
-{
-    if(link == "setup")
-    {
-        emit sigSetupMapPath();
-    }
-}

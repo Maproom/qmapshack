@@ -70,7 +70,7 @@ CDemList::CDemList(QWidget *parent)
     connect(actionActivate, &QAction::triggered,                         this, &CDemList::slotActivate);
     connect(actionReloadDem, &QAction::triggered,                        this, &CDemList::slotReloadDem);
     connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
-    connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CDemList::slotLinkActivated);
+    connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -232,12 +232,4 @@ void CDemList::slotContextMenu(const QPoint& point)
 void CDemList::slotReloadDem()
 {
     CDemDraw::setupDemPath(CDemDraw::getDemPaths());
-}
-
-void CDemList::slotLinkActivated(const QString& link)
-{
-    if(link == "setup")
-    {
-        emit sigSetupDemPath();
-    }
 }

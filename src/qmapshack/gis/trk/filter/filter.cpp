@@ -467,7 +467,7 @@ void CGisItemTrk::filterSubPt2Pt()
     changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
 }
 
-void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint)
+void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
     QList<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)
@@ -507,5 +507,6 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint)
 
     deriveSecondaryData();
 
-    changed(tr("Change to new Start Point"), "://icons/48x48/FilterSubPt2Pt.png");
+
+    changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterSubPt2Pt.png");
 }

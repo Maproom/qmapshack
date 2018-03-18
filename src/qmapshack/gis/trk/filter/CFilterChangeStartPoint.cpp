@@ -34,8 +34,10 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
 void CFilterChangeStartPoint::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
-    trk.filterChangeStartPoint(comboBox->currentData().toInt());
+
+    trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
     fillComboBox();
+
     CCanvas::restoreOverrideCursor("filterChangeStartPoint");
 }
 
@@ -63,7 +65,9 @@ void CFilterChangeStartPoint::fillComboBox()
         {
             continue;
         }
-        if (pt.idxVisible > 0) // to exclude original start point
+
+//        qDebug() << "wptName=" << wpt->getName() << "pntIdx=" << pt.idxVisible << "maxIdx=" << trk.getNumberOfVisiblePoints();
+        if (pt.idxVisible > 0 && pt.idxVisible < trk.getNumberOfVisiblePoints() - 1) // to exclude original start and end point
         {
             comboBox->insertItem(noOfItems, wpt->getName(), pt.idxVisible);
             ++noOfItems;

@@ -266,6 +266,21 @@ void CCanvas::buildHelpText()
 
     addHtmlRow(msg, msgMapLinks, msgMaps, "", "");
 
+    const QString msgDataLinks = tr("<h2>&nbsp;</h2>"
+                                    "<ul>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase'>Databases</a></li>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects'>Databases & Projects</a></li>"
+                                    "</ul>"
+                                    );
+
+    const QString msgData = tr("<h2>My Data</h2>"
+                               "<p>To load tracks and waypoints use <a href='LoadData'>File->Load GIS Data</a> from the menu. Each file will be an independent project "
+                               "in the workspace. You can manage your data in single files or you use a database. You can <a href='CreateDB'>create a database</a> in "
+                               "the database dockwidget.</p>"
+                               );
+
+    addHtmlRow(msg, msgDataLinks, msgData, "", "");
+
     const QString& msgDEMLinks = tr("<h2>&nbsp;</h2>"
                                     "<p>Impatient Users:<p>"
                                     "<ul>"

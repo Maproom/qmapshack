@@ -1395,6 +1395,14 @@ void CMainWindow::slotLinkActivated(const QString& link)
     {
         ///@todo we need a setup handler
     }
+    else if(link == "LoadData")
+    {
+        slotLoadGISData();
+    }
+    else if(link == "CreateDB")
+    {
+        widgetGisDatabase->createDatabase();
+    }
 }
 
 void CMainWindow::slotLinkActivated(const QUrl& url)

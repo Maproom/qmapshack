@@ -267,6 +267,10 @@ void CCanvas::buildHelpText()
     addHtmlRow(msg, msgMapLinks, msgMaps, "", "");
 
     const QString& msgDEMLinks = tr("<h2>&nbsp;</h2>"
+                                    "<p>Impatient Users:<p>"
+                                    "<ul>"
+                                    "<li><a href='GetDems'>I want some online DEMs.</a></li>"
+                                    "</ul>"
                                     "<p>DEM Sources:<p>"
                                     "<ul>"
                                     "<li><a href='http://viewfinderpanoramas.org/dem3.html'>viewfinderpanoramas.org</a></li>"
@@ -282,6 +286,8 @@ void CCanvas::buildHelpText()
                                "<p>Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one "
                                "or several other files. Again, you can use QMapShack's built-in VRT Builder (<a href='VrtBuilder'>Tool->VRT Builder</a>) "
                                "to create such a file.</p>"
+                               "<p>To start with some online DEMs you can click on the link for <a href='GetDems'>impatient users</a>. But keep in mind "
+                               "that using online DEMs slows down QMapShack significantly.</p>"
                                );
 
     addHtmlRow(msg, msgDEMLinks, msgDem, "", "");

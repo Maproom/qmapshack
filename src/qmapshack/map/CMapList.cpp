@@ -233,7 +233,7 @@ void CMapList::slotContextMenu(const QPoint& point)
     menu->exec(p);
 }
 
-void saveResource(const QString& name, QDir& dir)
+static void saveResource(const QString& name, QDir& dir)
 {
     QFile resource1(QString("://map/%1").arg(name));
     resource1.open(QIODevice::ReadOnly);

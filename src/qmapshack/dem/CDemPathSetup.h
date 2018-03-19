@@ -36,6 +36,7 @@ private slots:
     void slotAddPath();
     void slotDelPath();
     void slotItemSelectionChanged();
+    void slotDemHonk();
 
 
 private:

@@ -1366,6 +1366,15 @@ void CMainWindow::slotLinkActivated(const QString& link)
         }
         list->slotMapHonk();
     }
+    else if(link == "GetDems")
+    {
+        CDemList * list = dynamic_cast<CDemList*>(tabDem->currentWidget());
+        if(list == nullptr)
+        {
+            return;
+        }
+        list->slotDemHonk();
+    }
     else if(link == "MapFolders")
     {
         slotSetupMapPath();

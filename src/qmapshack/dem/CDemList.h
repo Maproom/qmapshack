@@ -65,6 +65,9 @@ public:
 signals:
     void sigChanged();
 
+public slots:
+    static void slotDemHonk();
+
 private slots:
     void slotActivate();
     void slotMoveUp();

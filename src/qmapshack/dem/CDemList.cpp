@@ -233,3 +233,36 @@ void CDemList::slotReloadDem()
 {
     CDemDraw::setupDemPath(CDemDraw::getDemPaths());
 }
+
+static void saveResource(const QString& name, QDir& dir)
+{
+    QFile resource1(QString("://dem/%1").arg(name));
+    resource1.open(QIODevice::ReadOnly);
+
+    QFile file(dir.absoluteFilePath(name));
+    file.open(QIODevice::WriteOnly);
+    file.write(resource1.readAll());
+    file.close();
+}
+
+void CDemList::slotDemHonk()
+{
+    QString demPath = CMainWindow::self().getDemPath();
+    if(demPath.isEmpty())
+    {
+        demPath = QDir::homePath();
+    }
+
+    demPath = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store DEMs?"), demPath);
+    if(demPath.isEmpty())
+    {
+        return;
+    }
+
+    QDir dir(demPath);
+
+    saveResource("World_Online_SRTM900.wcs", dir);
+    saveResource("Europe_Online_DEM25.vrt", dir);
+
+    CDemDraw::setupDemPath(demPath);
+}

@@ -104,7 +104,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="../../../resources.qrc">:/icons/48x48/CSrcSlope.png</pixmap>
+      <pixmap resource="../../../resources.qrc">:/icons/48x48/FilterChangeStartPoint.png</pixmap>
      </property>
     </widget>
    </item>

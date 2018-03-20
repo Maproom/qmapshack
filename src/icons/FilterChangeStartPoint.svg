@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="64px"
+   height="64px"
+   id="svg3513"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="FilterChangeStartPoint.svg">
+  <defs
+     id="defs3515">
+    <inkscape:path-effect
+       effect="powerstroke"
+       id="path-effect3452"
+       is_visible="true"
+       offset_points="0,0.5"
+       sort_points="true"
+       interpolator_type="CubicBezierJohan"
+       interpolator_beta="0.2"
+       start_linecap_type="zerowidth"
+       linejoin_type="round"
+       miter_limit="4"
+       end_linecap_type="zerowidth"
+       cusp_linecap_type="round" />
+    <inkscape:path-effect
+       effect="powerstroke"
+       id="path-effect3448"
+       is_visible="true"
+       offset_points="0,0.60211787"
+       sort_points="true"
+       interpolator_type="CubicBezierJohan"
+       interpolator_beta="0.24705882"
+       start_linecap_type="zerowidth"
+       linejoin_type="round"
+       miter_limit="45"
+       end_linecap_type="zerowidth"
+       cusp_linecap_type="round" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.5"
+     inkscape:cx="19.035437"
+     inkscape:cy="72.303901"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:document-units="px"
+     inkscape:grid-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:snap-others="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2983" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3518">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer">
+    <g
+       id="g3001" />
+    <path
+       style="fill:none;stroke:#000080;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 6.1818182,7.8181818 19.7272728,5.4090912 20,-9.1363637 1.272727,13.7272727 6.75244,5.400284 L 43.545454,35.772727 59.781466,53.612447 28.556391,58.578373 13.71617,42.905061 3.8181817,24"
+       id="path2989"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccccc" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.04456007px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3410"
+       width="10.95544"
+       height="10.95544"
+       x="2.6053905"
+       y="3.7248182" />
+    <rect
+       style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.04456019px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="rect3410-3"
+       width="10.95544"
+       height="10.95544"
+       x="39.736629"
+       y="30.21056" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.48397473;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 16.731691,15.514926 13.094047,9.57834 2.209488,-2.727354 5.018683,10.181802 -11.948362,-1.375308 2.177347,-2.952343 -13.094047,-9.578341 2.542844,-3.126796"
+       id="path3052-5"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccccc"
+       inkscape:export-filename="/home/oeichler/Code/android/QLandkarteM/QLandkarteM/icons/32x32/next.png"
+       inkscape:export-xdpi="83"
+       inkscape:export-ydpi="83"
+       inkscape:transform-center-x="-0.89996255"
+       inkscape:transform-center-y="-2.0556912" />
+  </g>
+</svg>

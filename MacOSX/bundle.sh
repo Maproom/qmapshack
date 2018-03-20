@@ -39,11 +39,28 @@ function buildAppStructure {
     
     rm -rf $BUILD_BUNDLE_DIR
     mkdir $BUILD_BUNDLE_DIR
+    mkdir $BUILD_BUNDLE_CONTENTS_DIR
+    mkdir $BUILD_BUNDLE_APP_DIR
+    mkdir $BUILD_BUNDLE_RES_DIR
+    mkdir $BUILD_BUNDLE_RES_QM_DIR
+    mkdir $BUILD_BUNDLE_FRW_DIR
+    mkdir $BUILD_BUNDLE_PLUGIN_DIR
 
     # TODO not all copied from predefined data is needed in every case (eg icon)
     # predefined data
-    cp -v -R $SRC_RESOURCES_DIR/Contents $BUILD_BUNDLE_DIR
-    
+    for i in "${APP_LANG[@]}"
+    do
+        BUILD_BUNDLE_LOCVERSION_DIR=$BUILD_BUNDLE_RES_DIR/${i}.lproj
+        mkdir $BUILD_BUNDLE_LOCVERSION_DIR
+        cp -v $SRC_RESOURCES_DIR/locversion.plist $BUILD_BUNDLE_LOCVERSION_DIR
+        /usr/libexec/PlistBuddy -c "Set :LprojLocale $i" "$BUILD_BUNDLE_LOCVERSION_DIR/locversion.plist"
+        echo "$i"
+     done
+
+    cp -v $SRC_RESOURCES_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR
+    cp -v $SRC_RESOURCES_DIR/*.qss $BUILD_BUNDLE_RES_DIR
+    cp -v $SRC_RESOURCES_DIR/Info.plist $BUILD_BUNDLE_CONTENTS_DIR
+
     # new icon, if one has been created (otherwise the one from predefined data)
     if [ -f "$BUILD_BIN_DIR/$APP_NAME.icns" ]; then
         echo "cp -v $BUILD_BIN_DIR/$APP_NAME.icns $BUILD_BUNDLE_RES_DIR/"
@@ -51,25 +68,18 @@ function buildAppStructure {
     fi
     
     # binary
-    mkdir $BUILD_BUNDLE_APP_DIR
-
     cp -v $BUILD_BIN_DIR/$APP_NAME_LOWER  $BUILD_BUNDLE_APP_DIR/$APP_NAME
 
-    mkdir $BUILD_BUNDLE_RES_QM_DIR
-
+    # app translations
     cp -v $BUILD_DIR/src/$APP_NAME_LOWER/*.qm $BUILD_BUNDLE_RES_QM_DIR
 }
 
 
 function copyQtTrqnslations {
-    cp -v $QT_DIR/translations/*_ca.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_cs.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_de.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_es.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_en.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_fr.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_nl.qm $BUILD_BUNDLE_RES_QM_DIR
-    cp -v $QT_DIR/translations/*_ru.qm $BUILD_BUNDLE_RES_QM_DIR
+    for i in "${APP_LANG[@]}"
+    do
+        cp -v $QT_DIR/translations/*_${i}.qm $BUILD_BUNDLE_RES_QM_DIR
+    done
 }
 
 

@@ -49,6 +49,9 @@ function copyExtTools {
     cp -v $GDAL_DIR/bin/*                       $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $PROJ_DIR/bin/proj                    $BUILD_BUNDLE_RES_BIN_DIR
     cp -v $ROUTINO_LIB_LIB_DIR/planetsplitter   $BUILD_BUNDLE_RES_BIN_DIR
+
+    # currently only used by QMapTool.
+    cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 

@@ -30,6 +30,7 @@ if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
 fi
 
 set -a
+declare APP_LANG=("ca" "cs" "de" "en" "es" "fr" "nl" "ru")
 APP_NAME_LOWER="$(tr [A-Z] [a-z] <<< "$APP_NAME")"
 APP_BUNDLE=$APP_NAME.app
 

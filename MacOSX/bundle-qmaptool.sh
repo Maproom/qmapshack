@@ -27,8 +27,8 @@ function linkToQMapShack {
 function removeDuplicatedQtLibs {
     rm -rf $BUILD_BUNDLE_FRW_DIR
     rm -rf $BUILD_BUNDLE_PLUGIN_DIR
-
 }
+
 
 if [[ "$1" == "bundle" ]]; then
     echo "---extract version -----------------"

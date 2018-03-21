@@ -469,6 +469,10 @@ void CGisItemTrk::filterSubPt2Pt()
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
+    // reset any focus the track might have
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CGisItemTrk");
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CGisItemTrk");
+
     QList<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)
     {

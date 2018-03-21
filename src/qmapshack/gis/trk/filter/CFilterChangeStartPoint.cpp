@@ -26,7 +26,7 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
     , trk(trk)
 {
     setupUi(this);
-    fillComboBox();
+    update();
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
 }
@@ -36,12 +36,12 @@ void CFilterChangeStartPoint::slotApply()
     CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
 
     trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
-    fillComboBox();
+    update();
 
     CCanvas::restoreOverrideCursor("filterChangeStartPoint");
 }
 
-void CFilterChangeStartPoint::fillComboBox()
+void CFilterChangeStartPoint::update()
 {
     IGisProject *project = trk.getParentProject();
     if(nullptr == project)

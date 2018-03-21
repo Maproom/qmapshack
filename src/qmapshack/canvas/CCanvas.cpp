@@ -273,7 +273,7 @@ void CCanvas::buildHelpText()
                                     "</ul>"
                                     );
 
-    const QString msgData = tr("<h2>My Data</h2>"
+    const QString msgData = tr("<h2>Your Data</h2>"
                                "<p>To load tracks and waypoints use <a href='LoadData'>File->Load GIS Data</a> from the menu. Each file will be an independent project "
                                "in the workspace. You can manage your data in single files or you use a database. You can <a href='CreateDB'>create a database</a> in "
                                "the database dockwidget.</p>"

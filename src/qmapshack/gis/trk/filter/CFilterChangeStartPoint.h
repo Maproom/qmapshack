@@ -32,13 +32,13 @@ public:
     CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterChangeStartPoint() = default;
 
+    void update();
+
 private slots:
     void slotApply();
 
 private:
     CGisItemTrk& trk;
-
-    void fillComboBox();
 };
 
 #endif // CFILTERCHANGESTARTPOINT_H

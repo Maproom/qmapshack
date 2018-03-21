@@ -473,6 +473,12 @@ void CDetailsTrk::updateData()
         filterSpeed->setElevationValid();
     }
 
+    CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
+    if(nullptr != filterChangeStartPoint)
+    {
+        filterChangeStartPoint->update();
+    }
+
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
 }

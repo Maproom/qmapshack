@@ -20,6 +20,7 @@
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
+#include "misc.h"
 
 #include <QtWidgets>
 
@@ -73,8 +74,7 @@ CMapList::CMapList(QWidget *parent)
     connect(actionMoveUp,   &QAction::triggered,                         this, &CMapList::slotMoveUp);
     connect(actionMoveDown, &QAction::triggered,                         this, &CMapList::slotMoveDown);
     connect(actionReloadMaps, &QAction::triggered,                       this, &CMapList::slotReloadMaps);
-    connect(pushMapHonk,    &QPushButton::clicked,                       this, &CMapList::slotMapHonk);
-    connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CMapList::slotLinkActivated);
+    connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -94,6 +94,29 @@ void CMapList::clear()
     treeWidget->clear();
 }
 
+
+void CMapList::sort()
+{
+    QList<CMapItem*> items1;
+    while(treeWidget->topLevelItemCount())
+    {
+        CMapItem * item = dynamic_cast<CMapItem*>(treeWidget->takeTopLevelItem(0));
+        if(item != nullptr)
+        {
+            items1 << item;
+        }
+    }
+
+    qSort(items1.begin(), items1.end(), &sortByName<CMapItem>);
+
+    QList<QTreeWidgetItem*> items2;
+    for(CMapItem * item : items1)
+    {
+        items2 << item;
+    }
+    treeWidget->addTopLevelItems(items2);
+}
+
 int CMapList::count()
 {
     return treeWidget->topLevelItemCount();
@@ -108,7 +131,6 @@ void CMapList::updateHelpText()
 {
     bool haveMaps = (treeWidget->topLevelItemCount() > 0);
 
-    pushMapHonk->setVisible(!haveMaps);
     labelHelpFillMapList->setVisible(!haveMaps);
 
     if(!haveMaps)
@@ -211,7 +233,7 @@ void CMapList::slotContextMenu(const QPoint& point)
     menu->exec(p);
 }
 
-void saveResource(const QString& name, QDir& dir)
+static void saveResource(const QString& name, QDir& dir)
 {
     QFile resource1(QString("://map/%1").arg(name));
     resource1.open(QIODevice::ReadOnly);
@@ -224,13 +246,19 @@ void saveResource(const QString& name, QDir& dir)
 
 void CMapList::slotMapHonk()
 {
-    QString path = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store maps?"), QDir::homePath());
-    if(path.isEmpty())
+    QString mapPath = CMainWindow::self().getMapsPath();
+    if(mapPath.isEmpty())
+    {
+        mapPath = QDir::homePath();
+    }
+
+    mapPath = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store maps?"), mapPath);
+    if(mapPath.isEmpty())
     {
         return;
     }
 
-    QDir dir(path);
+    QDir dir(mapPath);
 
     saveResource("WorldSat.wmts", dir);
     saveResource("WorldTopo.wmts", dir);
@@ -238,7 +266,7 @@ void CMapList::slotMapHonk()
     saveResource("OSM_Topo.tms", dir);
     saveResource("OpenCycleMap.tms", dir);
 
-    CMapDraw::setupMapPath(path);
+    CMapDraw::setupMapPath(mapPath);
 
     CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas)
@@ -252,10 +280,3 @@ void CMapList::slotReloadMaps()
     CMapDraw::setupMapPath(CMapDraw::getMapPaths());
 }
 
-void CMapList::slotLinkActivated(const QString& link)
-{
-    if(link == "setup")
-    {
-        emit sigSetupMapPath();
-    }
-}

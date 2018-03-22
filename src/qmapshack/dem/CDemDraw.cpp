@@ -32,7 +32,7 @@
 
 QList<CDemDraw*> CDemDraw::dems;
 QStringList CDemDraw::demPaths;
-QStringList CDemDraw::supportedFormats = QString("*.vrt").split('|');
+QStringList CDemDraw::supportedFormats = QString("*.vrt|*.wcs").split('|');
 
 
 CDemDraw::CDemDraw(CCanvas *canvas)
@@ -77,6 +77,17 @@ void CDemDraw::setupDemPath()
 
     setupDemPath(paths);
 }
+
+void CDemDraw::setupDemPath(const QString &path)
+{
+    QStringList paths(demPaths);
+    if(!demPaths.contains(path))
+    {
+        paths << path;
+    }
+    setupDemPath(paths);
+}
+
 
 void CDemDraw::setupDemPath(const QStringList &paths)
 {
@@ -161,6 +172,8 @@ void CDemDraw::buildMapList()
             f.close();
         }
     }
+
+    demList->sort();
     demList->updateHelpText();
 }
 

@@ -123,6 +123,9 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
+signals:
+    void sigActiveMapsChanged(bool noActiveMap);
+
 protected:
     void drawt(buffer_t& currentBuffer) override;
 
@@ -156,8 +159,6 @@ private:
 
     void restoreActiveMapsList(const QStringList& keys, QSettings& cfg);
 
-
-
     /// the treewidget holding all active and inactive map items
     CMapList * mapList;
 
@@ -174,6 +175,9 @@ private:
 
     /// a list of supported map formats
     static QStringList supportedFormats;
+
+    bool hasActiveMap = false;
+
 };
 
 #endif //CMAPDRAW_H

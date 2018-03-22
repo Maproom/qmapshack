@@ -22,6 +22,7 @@
 
 #include "ui_IMainWindow.h"
 #include <QMainWindow>
+#include <QDir>
 
 class CMapList;
 class CDemList;
@@ -43,6 +44,37 @@ public:
     }
 
     static QWidget * getBestWidgetForParent();
+
+    QString getHomePath()
+    {
+        return homeDir.exists() ? homeDir.absolutePath() : "";
+    }
+
+    QString getMapsPath()
+    {
+        return homeDir.exists(mapsPath) ? homeDir.absoluteFilePath(mapsPath) : "";
+    }
+    QString getDemPath()
+    {
+        return homeDir.exists(demPath) ? homeDir.absoluteFilePath(demPath) : "";
+    }
+    QString getRoutinoPath()
+    {
+        return homeDir.exists(routinoPath) ? homeDir.absoluteFilePath(routinoPath) : "";
+    }
+    QString getBRouterPath()
+    {
+        return homeDir.exists(brouterPath) ? homeDir.absoluteFilePath(brouterPath) : "";
+    }
+    QString getDatabasePath()
+    {
+        return homeDir.exists(databasePath) ? homeDir.absoluteFilePath(databasePath) : "";
+    }
+    QString getGpxPath()
+    {
+        return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : "";
+    }
+
 
     static QString getUser();
 
@@ -97,6 +129,11 @@ public:
     void loadGISData(const QStringList& filenames);
 
     const qint32 id;
+
+public slots:
+    void slotLinkActivated(const QString& link);
+    void slotLinkActivated(const QUrl& url);
+
 protected:
 #ifdef WIN32
     bool CMainWindow::nativeEvent(const QByteArray & eventType, void * message, long * result);
@@ -137,7 +174,6 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
-    void slotLinkActivated(const QString& link);
     void slotSanityTest();
     void slotCloseTab();
     void slotToggleDocks();
@@ -154,10 +190,20 @@ private:
     void showDocks() const;
     void hideDocks();
     void displayRegular();
-    void displayFullscreen();
+    void displayFullscreen();    
     CCanvas * addView(const QString &name);
+    void setupHomePath();
 
     static CMainWindow * pSelf;
+    static QDir homeDir;
+    static const QString mapsPath;
+    static const QString demPath;
+    static const QString routinoPath;
+    static const QString brouterPath;
+    static const QString databasePath;
+    static const QString gpxPath;
+    static const QSet<QString> paths;
+
 
     /// status bar label
     QLabel * lblPosWGS84;

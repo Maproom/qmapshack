@@ -219,7 +219,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
     menuItem->addAction(actionCombineTrk);
-    menuItem->addAction(actionActivityTrk);    
+    menuItem->addAction(actionActivityTrk);
     menuItem->addAction(actionColorTrk);
     menuItem->addAction(actionDelete);
     connect(menuItem, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);

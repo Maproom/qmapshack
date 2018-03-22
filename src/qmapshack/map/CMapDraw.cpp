@@ -89,13 +89,11 @@ void CMapDraw::setupMapPath()
 
 void CMapDraw::setupMapPath(const QString &path)
 {
-    if(mapPaths.contains(path))
-    {
-        return;
-    }
-
     QStringList paths(mapPaths);
-    paths << path;
+    if(!mapPaths.contains(path))
+    {                
+        paths << path;
+    }
     setupMapPath(paths);
 }
 
@@ -325,6 +323,8 @@ void CMapDraw::buildMapList()
         }
     }
 
+    mapList->sort();
+
     CDiskCache::cleanupRemovedMaps(maps);
 
     mapList->updateHelpText();
@@ -427,6 +427,7 @@ void CMapDraw::reportStatusToCanvas(const QString& key, const QString& msg)
 
 void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
 {
+    bool seenActiveMap = false;
     // iterate over all active maps and call the draw method
     CMapItem::mutexActiveMaps.lock();
     if(mapList && (mapList->count() != 0))
@@ -444,36 +445,16 @@ void CMapDraw::drawt(IDrawContext::buffer_t& currentBuffer) /* override */
             }
 
             item->mapfile->draw(currentBuffer);
+            seenActiveMap = true;
         }
     }
-    else
-    {
-        const int offMargin = currentBuffer.image.size().width()*0.1;
-        const int offTop    = currentBuffer.image.size().height()/3;
-        QPainter p(&currentBuffer.image);
-        p.setPen(Qt::black);
-        p.translate(offMargin,offTop);
-
-        QString msg = tr(
-            "There are no maps right now. "
-            "QMapShack is no fun without maps. "
-            "You can install maps by pressing the 'Help! I want maps!' button in the 'Maps' dock window. "
-            "Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. "
-            "\n\n"
-            "If it's no fun, why don't you provide maps? Well to host maps ready for download and installation "
-            "requires a good server. And this is not a free service. The project lacks the money. Additionally "
-            "map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package "
-            "the data. This is not that easy as it might sound and for some data you have to pay royalties. "
-            "The project simply lacks resources to do this. And we think installing the stuff yourself is not "
-            "that much to ask from you. After all the software is distributed without a fee."
-            );
-
-        QTextDocument doc;
-        doc.setPlainText(msg);
-        doc.setTextWidth(currentBuffer.image.width() - offMargin*2);
-        doc.drawContents(&p);
-    }
     CMapItem::mutexActiveMaps.unlock();
+
+    if(seenActiveMap != hasActiveMap)
+    {
+        hasActiveMap = seenActiveMap;
+        sigActiveMapsChanged(!hasActiveMap);
+    }
 }
 
 

@@ -23,6 +23,8 @@
 #include "ui_IMapVrtBuilder.h"
 #include <QWidget>
 
+class QTemporaryFile;
+
 class CMapVrtBuilder : public IToolShell, private Ui::IMapVrtBuilder
 {
     Q_OBJECT
@@ -41,6 +43,7 @@ private:
     void enableStartButton();
 
     bool last = false;
+    QTemporaryFile * tempFile;
 };
 
 #endif //CMAPVRTBUILDER_H

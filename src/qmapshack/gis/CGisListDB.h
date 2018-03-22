@@ -48,6 +48,9 @@ public:
 
     void addGlobalActions(const QList<QAction*> actions);
 
+public slots:
+    void slotAddDatabase();
+
 signals:
     void sigChanged();
 
@@ -59,7 +62,6 @@ private slots:
     void slotDelLostFoundItem();
     void slotItemExpanded(QTreeWidgetItem * item);
     void slotItemChanged(QTreeWidgetItem * item, int column);
-    void slotAddDatabase();
     void slotDelDatabase();
     void slotDelItem();
     void slotUpdateDatabase();

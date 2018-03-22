@@ -16,8 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CMapVrtBuilder.h"
+#include "tool/CMapVrtBuilder.h"
 #include "helpers/CSettings.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -49,6 +50,8 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     checkBy32->setChecked(cfg.value("by32", false).toBool());
     checkBy64->setChecked(cfg.value("by64", false).toBool());
     cfg.endGroup();
+
+    tempFile = new QTemporaryFile(this);
 }
 
 CMapVrtBuilder::~CMapVrtBuilder()
@@ -95,8 +98,14 @@ void CMapVrtBuilder::slotSelectSourceFiles()
 
 void CMapVrtBuilder::slotSelectTargetFile()
 {
-    SETTINGS;
-    QString path = cfg.value("VrtBuilder/targetPath",QDir::homePath()).toString();
+    SETTINGS;  
+    QString path = CMainWindow::self().getMapsPath();
+    if(path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+    path = cfg.value("VrtBuilder/targetPath", path).toString();
+
 
     QString file = QFileDialog::getSaveFileName(this, tr("Select target file..."), path, "GDAL vrt (*.vrt)");
     if(file.isEmpty())
@@ -149,11 +158,20 @@ void CMapVrtBuilder::slotStart()
     }
 
     args << labelTargetFilename->text();
+    if(QFile::exists(labelTargetFilename->text()))
+    {
+        QFile::remove(labelTargetFilename->text());
+    }
 
+    tempFile->open();
+    tempFile->resize(0);
+    QTextStream stream(tempFile);
     for(const QListWidgetItem * item : listWidget->findItems("*", Qt::MatchWildcard))
     {
-        args << item->text();
+        stream << item->text() << endl;
     }
+    tempFile->close();
+    args << "-input_file_list" << tempFile->fileName();
 
     stdOut("gdalbuildvrt " +  args.join(" ") + "\n");
     cmd.start("gdalbuildvrt", args);

@@ -29,6 +29,7 @@
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/rte/router/CRouterRoutino.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
@@ -65,6 +66,15 @@
 
 CMainWindow * CMainWindow::pSelf = nullptr;
 
+QDir CMainWindow::homeDir;
+const QString CMainWindow::mapsPath = "Maps";
+const QString CMainWindow::demPath = "Dem";
+const QString CMainWindow::routinoPath = "Routino";
+const QString CMainWindow::brouterPath = "BRouter";
+const QString CMainWindow::databasePath = "Database";
+const QString CMainWindow::gpxPath = "GPX";
+const QSet<QString> CMainWindow::paths = {mapsPath, demPath, routinoPath, brouterPath, databasePath, gpxPath};
+
 QMutex CMainWindow::mutex(QMutex::NonRecursive);
 
 CMainWindow::CMainWindow()
@@ -72,6 +82,7 @@ CMainWindow::CMainWindow()
 {
     qDebug() << "Application ID:" << id;
     SETTINGS;
+    homeDir = cfg.value("Paths/homePath", "").toString();
 
     pSelf = this;
     setupUi(this);
@@ -523,6 +534,35 @@ CMainWindow::~CMainWindow()
     toolBarConfig->saveSettings();
 }
 
+void CMainWindow::setupHomePath()
+{
+    SETTINGS;
+    homeDir = cfg.value("Paths/homePath", QDir::homePath()).toString();
+    const QString& homePath = QFileDialog::getExistingDirectory(this, tr("Select folder..."), homeDir.absolutePath());
+    if(homePath.isEmpty())
+    {
+        return;
+    }
+
+    homeDir = homePath;
+    for(const QString& path : paths)
+    {
+        if(!homeDir.exists(path))
+        {
+            homeDir.mkpath(path);
+        }
+    }
+
+    CMapDraw::setupMapPath(homeDir.absoluteFilePath(mapsPath));
+    CDemDraw::setupDemPath(homeDir.absoluteFilePath(demPath));
+    CRouterRoutino::self().setupPath(homeDir.absoluteFilePath(routinoPath));
+    //todo: BRouter
+    cfg.setValue("Database/lastDatabasePath", homeDir.absoluteFilePath(databasePath));
+    cfg.setValue("Paths/lastGisPath", homeDir.absoluteFilePath(gpxPath));
+
+    cfg.setValue("Paths/homePath", homeDir.absolutePath());
+}
+
 CCanvas *CMainWindow::addView(const QString& name)
 {
     CCanvas * view = new CCanvas(tabWidget, name);
@@ -615,13 +655,11 @@ bool CMainWindow::profileIsWindow() const
 void CMainWindow::addMapList(CMapList * list, const QString &name)
 {
     tabMaps->addTab(list,name);
-    connect(list, &CMapList::sigSetupMapPath, this, &CMainWindow::slotSetupMapPath);
 }
 
 void CMainWindow::addDemList(CDemList * list, const QString &name)
 {
     tabDem->addTab(list,name);
-    connect(list, &CDemList::sigSetupDemPath, this, &CMainWindow::slotSetupDemPath);
 }
 
 void CMainWindow::addWidgetToTab(QWidget * w)
@@ -883,9 +921,9 @@ void CMainWindow::testForNoView()
         QLabel * label = new QLabel(tabWidget);
         label->setAlignment(Qt::AlignCenter);
         label->setWordWrap(true);
-        label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one. Or click <a href='newview'>here</a>."));
+        label->setText(tr("Use <b>Menu->View->Add Map View</b> to open a new view. Or <b>Menu->File->Load Map View</b> to restore a saved one. Or click <a href='NewView'>here</a>."));
         label->setObjectName("NoViewInfo");
-        connect(label, &QLabel::linkActivated, this, &CMainWindow::slotLinkActivated);
+        connect(label, &QLabel::linkActivated, this, static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
         tabWidget->addTab(label, "*");
         return;
     }
@@ -1294,10 +1332,89 @@ void CMainWindow::slotPrintMap()
 
 void CMainWindow::slotLinkActivated(const QString& link)
 {
-    if(link == "newview")
+    if(link == "NewView")
     {
         actionAddMapView->trigger();
     }
+    else if(link == "ShowWiki")
+    {
+        slotHelp();
+    }
+    else if(link == "ShowQuickStart")
+    {
+        slotQuickstart();
+    }
+    else if(link == "SetupHome")
+    {
+        setupHomePath();
+        const int N = tabMaps->count();
+        for(int n = 0; n < N; n++)
+        {
+            CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->widget(n));
+            if(canvas != nullptr)
+            {
+                canvas->buildHelpText();
+            }
+        }
+    }
+    else if(link == "GetMaps")
+    {
+        CMapList * list = dynamic_cast<CMapList*>(tabMaps->currentWidget());
+        if(list == nullptr)
+        {
+            return;
+        }
+        list->slotMapHonk();
+    }
+    else if(link == "GetDems")
+    {
+        CDemList * list = dynamic_cast<CDemList*>(tabDem->currentWidget());
+        if(list == nullptr)
+        {
+            return;
+        }
+        list->slotDemHonk();
+    }
+    else if(link == "MapFolders")
+    {
+        slotSetupMapPath();
+    }
+    else if(link == "VrtBuilder")
+    {
+        slotBuildVrt();
+    }
+    else if(link == "DemFolders")
+    {
+        slotSetupDemPath();
+    }
+    else if(link == "CreateRoutino")
+    {
+        slotCreateRoutinoDatabase();
+    }
+    else if(link == "BRouterSetup")
+    {
+        ///@todo we need a setup handler
+    }
+    else if(link == "LoadData")
+    {
+        slotLoadGISData();
+    }
+    else if(link == "CreateDB")
+    {
+        widgetGisDatabase->createDatabase();
+    }
+}
+
+void CMainWindow::slotLinkActivated(const QUrl& url)
+{
+    const QString& link = url.toString();
+    if(link.startsWith("http"))
+    {
+        QDesktopServices::openUrl(url);
+        return;
+    }
+
+    slotLinkActivated(link);
 }
 
 void CMainWindow::slotSetupWptIcons()

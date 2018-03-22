@@ -58,6 +58,7 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
     // create path of to drive the block device belongs to
     QDBusInterface * blockIface = new QDBusInterface("org.freedesktop.UDisks2", path.path(), "org.freedesktop.UDisks2.Block", QDBusConnection::systemBus(), this);
     QDBusObjectPath drive_object = blockIface->property("Drive").value<QDBusObjectPath>();
+    QString idLabel = blockIface->property("IdLabel").toString().toUpper();
 
     // read vendor string attached to drive
     QDBusInterface * driveIface = new QDBusInterface("org.freedesktop.UDisks2", drive_object.path(),"org.freedesktop.UDisks2.Drive", QDBusConnection::systemBus(), this);
@@ -69,17 +70,18 @@ void CDeviceWatcherLinux::slotDeviceAdded(const QDBusObjectPath& path, const QVa
 
 #if !defined(Q_OS_FREEBSD)
 // currently bsdisks does not report model or vendor
-    qDebug() << "model:" << model << "vendor:" << vendor;
+    qDebug() << "model:" << model << "vendor:" << vendor << "idLabel:" << idLabel;
 
-    if(model.isEmpty() || vendor.isEmpty())
+    if(!idLabel.contains("TWONAV"))
     {
-        return;
+        if(model.isEmpty() || vendor.isEmpty())
+        {
+            return;
+        }
     }
 #endif
 
     QString strPath = path.path();
-
-
     IDevice::mount(strPath);
     QString mountPoint = readMountPoint(strPath);
     probeForDevice(mountPoint, strPath, QFileInfo(mountPoint).fileName());

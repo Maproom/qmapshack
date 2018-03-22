@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,17 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMPATHSETUP_H
-#define CDEMPATHSETUP_H
+#ifndef CDEMWCS_H
+#define CDEMWCS_H
 
-#include "ui_IDemPathSetup.h"
-#include <QDialog>
+#include "dem/CDemVRT.h"
 
-class CDemPathSetup : public QDialog, private Ui::IDemPathSetup
+class CDemWCS : public CDemVRT
 {
-    Q_OBJECT
-public:
-    CDemPathSetup(QStringList& paths);
-    virtual ~CDemPathSetup();
-
-public slots:
-    void accept() override;
-
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
-    void slotDemHonk();
-
-
-private:
-    QStringList& paths;
+    public:
+        CDemWCS(const QString& filename, CDemDraw *parent);
+        virtual ~CDemWCS() = default;
 };
 
-#endif //CDEMPATHSETUP_H
+#endif //CDEMWCS_H
 

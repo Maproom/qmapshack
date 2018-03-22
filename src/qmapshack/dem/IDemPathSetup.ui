@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>450</width>
-    <height>200</height>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -136,6 +136,14 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushDemHonk">
+     <property name="text">
+      <string>Help! I want DEMs!
+I don't want to read the documentation!</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -45,6 +45,7 @@ set( SRCS
     dem/CDemPathSetup.cpp
     dem/CDemPropSetup.cpp
     dem/CDemVRT.cpp
+    dem/CDemWCS.cpp
     dem/IDem.cpp
     dem/IDemProp.cpp
     device/CDeviceGarmin.cpp
@@ -226,6 +227,7 @@ set( SRCS
     map/garmin/CGarminTyp.cpp
     map/garmin/IGarminStrTbl.cpp
     map/mapsforge/types.cpp
+    misc.h
     mouse/CMouseAdapter.cpp
     mouse/CMouseDummy.cpp
     mouse/CMouseEditArea.cpp
@@ -352,6 +354,7 @@ set( HDRS
     dem/CDemPathSetup.h
     dem/CDemPropSetup.h
     dem/CDemVRT.h
+    dem/CDemWCS.h
     dem/IDem.h
     dem/IDemProp.h
     device/CDeviceGarmin.h
@@ -765,7 +768,7 @@ qt5_add_resources(RC_SRCS ${RCS})
 ###############################################################################################
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" "-no-obsolete"
+    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" ${KEEP_OLD_TRANSLATIONS}
     SOURCES ${SRCS} ${HDRS} ${UIS}
     TEMPLATE ${APPLICATION_NAME}
     TRANSLATION_DIR "locale"

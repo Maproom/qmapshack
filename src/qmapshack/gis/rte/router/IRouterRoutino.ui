@@ -143,12 +143,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_4">
+         <widget class="QLabel" name="labelHelp">
           <property name="text">
-           <string>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</string>
+           <string>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href='CreateRoutino'&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignJustify|Qt::AlignTop</set>
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
           </property>
           <property name="wordWrap">
            <bool>true</bool>

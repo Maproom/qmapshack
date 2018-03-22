@@ -69,3 +69,7 @@ void CGisDatabase::sendEventForDb(QEvent * event)
     QCoreApplication::sendEvent(treeDB, event);
 }
 
+void CGisDatabase::createDatabase()
+{
+    treeDB->slotAddDatabase();
+}

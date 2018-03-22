@@ -18,8 +18,8 @@
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
-
 #include "tool/CRoutinoDatabaseBuilder.h"
+#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -41,7 +41,12 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     pushStart->setDisabled(true);
 
     SETTINGS;
-    QString path = cfg.value("RoutinoDatabaseBuilder/targetPath",QDir::homePath()).toString();
+    QString path = CMainWindow::self().getRoutinoPath();
+    if(path.isEmpty())
+    {
+        path = QDir::homePath();
+    }
+    path = cfg.value("RoutinoDatabaseBuilder/targetPath", path).toString();
 
     labelTargetPath->setText(path);
 }

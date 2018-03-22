@@ -60,9 +60,13 @@ public:
 
     void updateHelpText();
 
+    void sort();
+
 signals:
     void sigChanged();
-    void sigSetupDemPath();
+
+public slots:
+    static void slotDemHonk();
 
 private slots:
     void slotActivate();
@@ -70,7 +74,6 @@ private slots:
     void slotMoveDown();
     void slotReloadDem();
     void slotContextMenu(const QPoint &point);
-    void slotLinkActivated(const QString& link);
 
 private:
     QMenu * menu;

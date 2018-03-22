@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,32 +16,20 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMPATHSETUP_H
-#define CDEMPATHSETUP_H
+#ifndef MISC_H
+#define MISC_H
 
-#include "ui_IDemPathSetup.h"
-#include <QDialog>
+#include <QCollator>
 
-class CDemPathSetup : public QDialog, private Ui::IDemPathSetup
+template<typename T>
+bool sortByName(T * item1, T * item2)
 {
-    Q_OBJECT
-public:
-    CDemPathSetup(QStringList& paths);
-    virtual ~CDemPathSetup();
-
-public slots:
-    void accept() override;
-
-private slots:
-    void slotAddPath();
-    void slotDelPath();
-    void slotItemSelectionChanged();
-    void slotDemHonk();
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(item1->getName(), item2->getName()) < 0;
+}
 
 
-private:
-    QStringList& paths;
-};
-
-#endif //CDEMPATHSETUP_H
+#endif //MISC_H
 

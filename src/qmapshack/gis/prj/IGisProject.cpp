@@ -42,6 +42,7 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
+#include "misc.h"
 
 #include <QtWidgets>
 
@@ -1138,13 +1139,6 @@ void IGisProject::sortItems()
     addChildren(items);
 }
 
-static bool sortByName(IGisItem * item1, IGisItem * item2)
-{
-    static QCollator collator;
-    // this will set collator to natural sorting mode (instead of lexical)
-    collator.setNumericMode(true);
-    return collator.compare(item1->getName(), item2->getName()) < 0;
-}
 
 static bool sortByTime(IGisItem * item1, IGisItem * item2)
 {
@@ -1154,7 +1148,7 @@ static bool sortByTime(IGisItem * item1, IGisItem * item2)
     // avoid jumping items due to invalid timestamps
     if(!t1.isValid() || !t2.isValid())
     {
-        return sortByName(item1, item2);
+        return sortByName<IGisItem>(item1, item2);
     }
 
     return t1 < t2;
@@ -1165,7 +1159,7 @@ void IGisProject::sortItems(QList<IGisItem *> &items) const
     switch(sortingFolder)
     {
     case IGisProject::eSortFolderName:
-        qSort(items.begin(), items.end(), &sortByName);
+        qSort(items.begin(), items.end(), &sortByName<IGisItem>);
         break;
 
     case IGisProject::eSortFolderTime:

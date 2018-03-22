@@ -25,11 +25,14 @@ else (JPEG_LIBRARIES AND JPEG_INCLUDE_DIRS)
     NAMES
       jpeglib.h
     PATHS
+if(WIN32)
+        ${JPEG_DEV_PATH}/include
+endif(WIN32)
         /usr/include
         /usr/local/include
         /opt/local/include
         /sw/include
-        ${CMAKE_SOURCE_DIR}/Win32/GDAL/include
+        ${CMAKE_SOURCE_DIR}/Win32/JPEG/include
   )
   mark_as_advanced(JPEG_INCLUDE_DIR)
 
@@ -37,15 +40,18 @@ else (JPEG_LIBRARIES AND JPEG_INCLUDE_DIRS)
     NAMES
 if (WIN32)
         libjpeg
-else (WIN32)    
+else (WIN32)
         jpeg
-endif (WIN32)    
+endif (WIN32)
     PATHS
+if(WIN32)
+        ${JPEG_DEV_PATH}/lib
+endif(WIN32)
         /usr/lib
         /usr/local/lib
         /opt/local/lib
         /sw/lib
-        ${CMAKE_SOURCE_DIR}/Win32/GDAL/lib
+        ${CMAKE_SOURCE_DIR}/Win32/JPEG/lib
   )
   mark_as_advanced(LIBJPEG_LIBRARY)
 

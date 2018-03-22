@@ -37,6 +37,8 @@ public:
     void postEventForDb(QEvent * event);
     void sendEventForDb(QEvent * event);
 
+    void createDatabase();
+
 private slots:
     void slotHelpText();
 

@@ -735,17 +735,17 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="61"/>
         <source>Custom 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="64"/>
         <source>Custom 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado 2</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="67"/>
         <source>Custom 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalizado 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
@@ -1939,12 +1939,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;Al usar la base de datos, los elementos SIG pueden ser usados por varios proyectos. Un caso común es almacenar datos de recorrido en su propia carpeta de proyecto. Además, los elementos se copian (se referencian) en carpetas que agrupan elementos en un cierto intervalo de tiempo, mensual, anual, total. Puede hacerlo manualmente cargando los proyectos de recopilación en el espacio de trabajo, adaptando los elementos y guardando los cambios, o puede usar este cuadro de diálogo para definir carpetas de proyectos en la base de datos como carpetas de recopilación y copiar los elementos arrastrándolos al área de "arrastrar y soltar".</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
         <source>Select summary project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione proyecto de recopilación...</translation>
     </message>
 </context>
 <context>
@@ -7080,7 +7080,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="551"/>
         <source>not yet implemented</source>
-        <translation>no implementado aun</translation>
+        <translation>todavia no implementado</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="572"/>
@@ -7146,7 +7146,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>
         <source>Convert subpoints obtained from routing to ordinary track points </source>
-        <translation>Conviertir subpuntos obtenidos por el enrutamiento a puntos de track ordinarios</translation>
+        <translation>Convertir subpuntos obtenidos por el enrutamiento a puntos de track ordinarios</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="54"/>
@@ -7215,7 +7215,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
         <source>Show Summary Drop Zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar recopilación de zonas de arrastrar y soltar</translation>
     </message>
 </context>
 <context>
@@ -7411,7 +7411,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation>Configurar proyectos de resumen...</translation>
+        <translation>Configurar proyectos de recopilación...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>

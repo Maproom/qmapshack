@@ -47,6 +47,7 @@ class IMouse;
 class QTimer;
 class QMovie;
 class QLabel;
+class QTextBrowser;
 class IPlot;
 struct SGisLine;
 struct poi_t;
@@ -129,6 +130,8 @@ public:
     void showProfileAsWindow(bool yes);
     void showProfile(bool yes);
 
+    void buildHelpText();
+
     /**
        @brief Add a message by key to be reported on the canvas
 
@@ -195,7 +198,7 @@ private:
     void setZoom(bool in, redraw_e &needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
-    void setDrawContextSize(const QSize& s);
+    void setDrawContextSize(const QSize& s);    
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content
@@ -245,6 +248,8 @@ private:
 
     QMutex mousePressMutex;
     bool mouseLost = false;
+
+    QTextBrowser * labelHelp = nullptr;
 };
 
 #endif //CCANVAS_H

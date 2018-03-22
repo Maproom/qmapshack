@@ -45,10 +45,15 @@ int ProgressFunc(double complete)
     return !CRouterRoutino::progress->wasCanceled();
 }
 
+CRouterRoutino * CRouterRoutino::pSelf = nullptr;
+
 CRouterRoutino::CRouterRoutino(QWidget *parent)
     : IRouter(true, parent)
 {
+    pSelf = this;
     setupUi(this);
+
+    connect(labelHelp, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
     {
@@ -200,6 +205,18 @@ QString CRouterRoutino::getOptions()
     str  = tr("profile \"%1\"").arg(comboProfile->currentText());
     str += tr(", mode \"%1\"").arg(comboMode->currentText());
     return str;
+}
+
+void CRouterRoutino::setupPath(const QString& path)
+{
+    if(dbPaths.contains(path))
+    {
+        return;
+    }
+
+    dbPaths << path;
+    buildDatabaseList();
+    updateHelpText();
 }
 
 void CRouterRoutino::slotSetupPaths()

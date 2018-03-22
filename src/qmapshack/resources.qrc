@@ -139,6 +139,7 @@
         <file>../icons/32x32/LogProject.png</file>
         <file>../icons/32x32/Map.png</file>
         <file>../icons/32x32/MimeDemVRT.png</file>
+        <file>../icons/32x32/MimeDemWCS.png</file>
         <file>../icons/32x32/MimeGEMF.png</file>
         <file>../icons/32x32/MimeIMG.png</file>
         <file>../icons/32x32/MimeJNX.png</file>
@@ -368,6 +369,7 @@
         <file>../icons/48x48/LogProject.png</file>
         <file>../icons/48x48/Map.png</file>
         <file>../icons/48x48/MimeDemVRT.png</file>
+        <file>../icons/48x48/MimeDemWCS.png</file>
         <file>../icons/48x48/MimeGEMF.png</file>
         <file>../icons/48x48/MimeIMG.png</file>
         <file>../icons/48x48/MimeJNX.png</file>
@@ -603,12 +605,15 @@
         <file>map/OpenStreetMap.tms</file>
         <file>map/WorldSat.wmts</file>
         <file>map/WorldTopo.wmts</file>
+        <file>dem/World_Online_SRTM900.wcs</file>
+        <file>dem/Europe_Online_DEM25.vrt</file>
         
         <file>pics/about.png</file>
         <file>pics/compass.png</file>
         <file>pics/noMap256x256.png</file>
         <file>pics/splash.png</file>
         <file>pics/timezones.png</file>
+        <file>pics/DockWidgets.png</file>
         
         <file>templates/Hiking_Tour_Summary.ui</file>
     </qresource>

@@ -135,6 +135,8 @@ void CGisItemTrk::filterReset()
 
 void CGisItemTrk::filterDelete()
 {
+    stopPlotRange();
+
     bool nothingDone = true;
 
     for(CTrackData::trkseg_t& seg : trk.segs)
@@ -469,9 +471,7 @@ void CGisItemTrk::filterSubPt2Pt()
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
-    // reset any focus the track might have
-    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CGisItemTrk");
-    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CGisItemTrk");
+    stopPlotRange();
 
     QList<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)

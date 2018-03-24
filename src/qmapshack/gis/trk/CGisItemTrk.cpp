@@ -2566,6 +2566,20 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
     }
 }
 
+void CGisItemTrk::stopPlotRange()
+{
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CGisItemTrk");
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CGisItemTrk");
+
+    for(INotifyTrk * visual : registeredVisuals)
+    {
+        if((visual->mask & eVisualPlot) == eVisualPlot)
+        {
+            visual->stopRange();
+        }
+    }
+}
+
 void CGisItemTrk::setMouseFocusVisuals(const CTrackData::trkpt_t * pt)
 {
     if(!dlgDetails.isNull())

@@ -44,6 +44,7 @@ public:
 
     void setMouseRangeFocus(const CTrackData::trkpt_t * ptRange1, const CTrackData::trkpt_t * ptRange2) override;
     void setMouseClickFocus(const CTrackData::trkpt_t * pt) override {}
+    void stopRange() override;
 
     void save(QImage& image);
     void setSolid(bool yes)

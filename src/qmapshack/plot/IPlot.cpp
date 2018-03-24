@@ -1348,19 +1348,21 @@ void IPlot::slotCopy()
 
 void IPlot::slotStopRange()
 {
-    scrOptRange->deleteLater();
-    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-    idxSel1 = idxSel2 = NOIDX;
-    mouseClickState = eMouseClickIdle;
+    stopRange();
+// all moved to stopRange()
+//    scrOptRange->deleteLater();
+//    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+//    idxSel1 = idxSel2 = NOIDX;
+//    mouseClickState = eMouseClickIdle;
 
-    emit sigMouseClickState(mouseClickState);
+//    emit sigMouseClickState(mouseClickState);
 
-    // update canvas if visible
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-    if(canvas)
-    {
-        canvas->update();
-    }
+//    // update canvas if visible
+//    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+//    if(canvas)
+//    {
+//        canvas->update();
+//    }
 }
 
 void IPlot::slotResetZoom()
@@ -1456,4 +1458,22 @@ bool IPlot::isZoomed() const
     zoomed |= !((limMax - limMin) <= (useMax - useMin));
 
     return zoomed;
+}
+
+void IPlot::stopRange()
+{
+    scrOptRange->deleteLater();
+    trk->setMode(CGisItemTrk::eModeNormal, objectName());
+    idxSel1 = idxSel2 = NOIDX;
+    mouseClickState = eMouseClickIdle;
+
+    emit sigMouseClickState(mouseClickState);
+
+    // update canvas if visible
+    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
+    if(canvas)
+    {
+        canvas->update();
+    }
+
 }

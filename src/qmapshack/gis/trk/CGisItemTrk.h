@@ -131,6 +131,8 @@ public:
      */
     void updateVisuals(quint32 visuals, const QString &who);
 
+    void stopPlotRange();
+
     /**
        @brief Create a cloned copy of this track
        @return The cloned item a pointer
@@ -921,6 +923,7 @@ public:
     virtual void setMouseFocus(const CTrackData::trkpt_t * pt) = 0;
     virtual void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) = 0;
     virtual void setMouseClickFocus(const CTrackData::trkpt_t * pt) = 0;
+    virtual void stopRange() = 0;
 
     const CGisItemTrk::visual_e mask;
 };

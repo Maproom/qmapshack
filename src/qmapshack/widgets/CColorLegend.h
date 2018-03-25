@@ -40,6 +40,7 @@ public:
     void setMouseFocus(const CTrackData::trkpt_t *pt) override;
     void setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2) override {}
     void setMouseClickFocus(const CTrackData::trkpt_t *pt) override {}
+    void stopRange() override {}
 
 
 protected:

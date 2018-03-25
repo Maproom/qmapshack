@@ -135,6 +135,8 @@ void CGisItemTrk::filterReset()
 
 void CGisItemTrk::filterDelete()
 {
+    stopPlotRange();
+
     bool nothingDone = true;
 
     for(CTrackData::trkseg_t& seg : trk.segs)
@@ -465,4 +467,50 @@ void CGisItemTrk::filterSubPt2Pt()
     propHandler->setupData();
 
     changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
+}
+
+void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
+{
+    stopPlotRange();
+
+    QList<CTrackData::trkpt_t> pts;
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+        pt.keyWpt.clear();
+        pts << pt;
+    }
+
+    QDateTime oldTimeStart = getTimeStart();
+    QDateTime oldTimeEnd = getTimeEnd();
+    QDateTime newTimeStart = pts[idxNewStartPoint].time;
+    QDateTime newTimeEnd = pts[idxNewStartPoint - 1].time;
+
+    qint64 deltaStart = qint64(oldTimeStart.toUTC().toTime_t()) - qint64(newTimeStart.toUTC().toTime_t());
+    qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toTime_t()) - qint64(newTimeEnd.toUTC().toTime_t());
+
+    for (qint32 i = idxNewStartPoint; i < pts.size(); ++i) // Adjust new Start to End
+    {
+        pts[i].time = pts[i].time.addSecs(deltaStart);
+    }
+
+    for (qint32 i = 0; i < idxNewStartPoint; ++i) // Adjust old Start to new Start
+    {
+        pts[i].time = pts[i].time.addSecs(deltaEnd);
+    }
+
+    for (qint32 i = 0; i < idxNewStartPoint; ++i) // Reorder points
+    {
+        pts.move(0, pts.size() - 1);
+    }
+
+    trk.readFrom(pts);
+
+    deriveSecondaryData();
+
+
+    changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterChangeStartPoint.png");
 }

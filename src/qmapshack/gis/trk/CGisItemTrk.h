@@ -131,6 +131,8 @@ public:
      */
     void updateVisuals(quint32 visuals, const QString &who);
 
+    void stopPlotRange();
+
     /**
        @brief Create a cloned copy of this track
        @return The cloned item a pointer
@@ -225,6 +227,7 @@ public:
     qint32 getCntTotalPoints() const { return cntTotalPoints; }
 
     const QDateTime& getTimeStart()           const { return timeStart;        }
+    const QDateTime& getTimeEnd()             const { return timeEnd;          }
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
@@ -539,6 +542,7 @@ public:
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
+    void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
     /** @} */
 
     /**
@@ -919,6 +923,7 @@ public:
     virtual void setMouseFocus(const CTrackData::trkpt_t * pt) = 0;
     virtual void setMouseRangeFocus(const CTrackData::trkpt_t * pt1, const CTrackData::trkpt_t * pt2) = 0;
     virtual void setMouseClickFocus(const CTrackData::trkpt_t * pt) = 0;
+    virtual void stopRange() = 0;
 
     const CGisItemTrk::visual_e mask;
 };

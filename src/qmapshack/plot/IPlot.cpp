@@ -1349,20 +1349,6 @@ void IPlot::slotCopy()
 void IPlot::slotStopRange()
 {
     stopRange();
-// all moved to stopRange()
-//    scrOptRange->deleteLater();
-//    trk->setMode(CGisItemTrk::eModeNormal, objectName());
-//    idxSel1 = idxSel2 = NOIDX;
-//    mouseClickState = eMouseClickIdle;
-
-//    emit sigMouseClickState(mouseClickState);
-
-//    // update canvas if visible
-//    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
-//    if(canvas)
-//    {
-//        canvas->update();
-//    }
 }
 
 void IPlot::slotResetZoom()

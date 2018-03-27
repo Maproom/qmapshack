@@ -224,10 +224,10 @@ void CCanvas::buildHelpText()
                                     "recommend a folder with some subfolders:</p>"
                                     "<ul>"
                                     "<li>Maps - where all maps are stored</li>"
-                                    "<li>Dem - where all elevation data is stored</li>"
+                                    "<li>DEM - where all elevation data is stored</li>"
                                     "<li>Routino - where routing data for the Routino offline router is stored</li>"
                                     "<li>BRouter - where routing data for the BRouter offline router is stored</li>"
-                                    "<li>Database - where you create databases to organize your GIS data</li>"
+                                    "<li>Databases - where you create databases to organize your GIS data</li>"
                                     "<li>GPX - where you keep GPX files</li>"
                                     "</ul>"
                                     "<p>Do you want to create these folders right now? Give me a <a  href='SetupHome'>path</a> and QMapShack will create all "
@@ -273,7 +273,7 @@ void CCanvas::buildHelpText()
                                     "</ul>"
                                     );
 
-    const QString msgData = tr("<h2>My Data</h2>"
+    const QString msgData = tr("<h2>Your Data</h2>"
                                "<p>To load tracks and waypoints use <a href='LoadData'>File->Load GIS Data</a> from the menu. Each file will be an independent project "
                                "in the workspace. You can manage your data in single files or you use a database. You can <a href='CreateDB'>create a database</a> in "
                                "the database dockwidget.</p>"

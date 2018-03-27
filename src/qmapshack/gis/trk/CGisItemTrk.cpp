@@ -2568,8 +2568,8 @@ void CGisItemTrk::updateVisuals(quint32 visuals, const QString& who)
 
 void CGisItemTrk::stopPlotRange()
 {
-    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CGisItemTrk");
-    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CGisItemTrk");
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CMouseRangeTrk");
+    setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseClick, "CMouseRangeTrk");
 
     for(INotifyTrk * visual : registeredVisuals)
     {

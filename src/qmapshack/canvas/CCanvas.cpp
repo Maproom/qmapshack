@@ -247,6 +247,7 @@ void CCanvas::buildHelpText()
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps'>Getting Started.</a></li>"
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem'>Install Maps & DEM</a></li>"
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem'>Basics Maps & DEM.</a></li>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for Maps</a></li>"
                                     "</ul>"
                                     );
 
@@ -286,9 +287,9 @@ void CCanvas::buildHelpText()
                                     "<ul>"
                                     "<li><a href='GetDems'>I want some online DEMs.</a></li>"
                                     "</ul>"
-                                    "<p>DEM Sources:<p>"
+                                    "<p>Patient Users:<p>"
                                     "<ul>"
-                                    "<li><a href='http://viewfinderpanoramas.org/dem3.html'>viewfinderpanoramas.org</a></li>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for DEM</a></li>"
                                     "</ul>"
                                     );
 

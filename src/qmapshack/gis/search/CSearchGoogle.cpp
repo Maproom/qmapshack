@@ -36,6 +36,7 @@ CSearchGoogle::CSearchGoogle(CGisListWks * parent)
 
     SETTINGS;
     QString symName = cfg.value("Search/symbol","Default").toString();
+    key = cfg.value("Search/google/key",defaultkey).toString();
 
     parent->takeTopLevelItem(parent->indexOfTopLevelItem(this));
     parent->insertTopLevelItem(0, this);
@@ -72,11 +73,15 @@ void CSearchGoogle::slotStartSearch()
 
     QString addr = edit->text();
 
-    QUrl url("http://maps.googleapis.com");
+    QUrl url("https://maps.googleapis.com");
     url.setPath("/maps/api/geocode/xml");
 
     QUrlQuery urlQuery;
     urlQuery.addQueryItem("address",addr.replace(" ","+"));
+    if (!key.isEmpty())
+    {
+        urlQuery.addQueryItem("key",key);
+    }
     urlQuery.addQueryItem("sensor","false");
     url.setQuery(urlQuery);
 

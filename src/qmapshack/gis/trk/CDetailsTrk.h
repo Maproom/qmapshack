@@ -36,6 +36,7 @@ public:
 
     void setMouseFocus(const CTrackData::trkpt_t *pt) override;
     void setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2) override;
+    void enableTabFilter();
     void setMouseClickFocus(const CTrackData::trkpt_t *pt) override;
 
 public slots:

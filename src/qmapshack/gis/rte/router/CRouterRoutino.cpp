@@ -53,6 +53,8 @@ CRouterRoutino::CRouterRoutino(QWidget *parent)
     pSelf = this;
     setupUi(this);
 
+    connect(labelHelp, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
+
     if(Routino_CheckAPIVersion() != ROUTINO_ERROR_NONE)
     {
         QMessageBox::warning(this, tr("Warning..."), tr("Found Routino with a wrong version. Expected %1 found %2").arg(ROUTINO_API_VERSION).arg(Routino_APIVersion), QMessageBox::Ok);

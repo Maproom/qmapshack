@@ -29,16 +29,16 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     setText(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
     setToolTip(CGisListWks::eColumnName, QString("TwoNav (%1)").arg(model));
 
-    if(QFile::exists(dir.absoluteFilePath("TwoNav/RegInfo.ini")))
+    if(QFile::exists(dir.absoluteFilePath("RegInfo.ini")))
     {
-        readReginfo(dir.absoluteFilePath("TwoNav/RegInfo.ini"));
+        readReginfo(dir.absoluteFilePath("RegInfo.ini"));
     }
-    else if(QFile::exists(dir.absoluteFilePath("TwoNavData/RegInfo.ini")))
+    else if(QFile::exists(dir.absoluteFilePath("AppData/RegInfo.ini")))
     {
-        readReginfo(dir.absoluteFilePath("TwoNavData/RegInfo.ini"));
+        readReginfo(dir.absoluteFilePath("AppData/RegInfo.ini"));
     }
 
-    pathData = "TwoNavData/Data/";
+    pathData = "Data/";
 
 
     QDir dirData(dir.absoluteFilePath(pathData));

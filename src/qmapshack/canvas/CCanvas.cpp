@@ -224,10 +224,10 @@ void CCanvas::buildHelpText()
                                     "recommend a folder with some subfolders:</p>"
                                     "<ul>"
                                     "<li>Maps - where all maps are stored</li>"
-                                    "<li>Dem - where all elevation data is stored</li>"
+                                    "<li>DEM - where all elevation data is stored</li>"
                                     "<li>Routino - where routing data for the Routino offline router is stored</li>"
                                     "<li>BRouter - where routing data for the BRouter offline router is stored</li>"
-                                    "<li>Database - where you create databases to organize your GIS data</li>"
+                                    "<li>Databases - where you create databases to organize your GIS data</li>"
                                     "<li>GPX - where you keep GPX files</li>"
                                     "</ul>"
                                     "<p>Do you want to create these folders right now? Give me a <a  href='SetupHome'>path</a> and QMapShack will create all "
@@ -247,6 +247,7 @@ void CCanvas::buildHelpText()
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps'>Getting Started.</a></li>"
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem'>Install Maps & DEM</a></li>"
                                     "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem'>Basics Maps & DEM.</a></li>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for Maps</a></li>"
                                     "</ul>"
                                     );
 
@@ -286,9 +287,9 @@ void CCanvas::buildHelpText()
                                     "<ul>"
                                     "<li><a href='GetDems'>I want some online DEMs.</a></li>"
                                     "</ul>"
-                                    "<p>DEM Sources:<p>"
+                                    "<p>Patient Users:<p>"
                                     "<ul>"
-                                    "<li><a href='http://viewfinderpanoramas.org/dem3.html'>viewfinderpanoramas.org</a></li>"
+                                    "<li><a href='https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources'>Sources for DEM</a></li>"
                                     "</ul>"
                                     );
 

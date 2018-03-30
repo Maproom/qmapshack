@@ -415,7 +415,8 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             CTrackData::trkpt_t pt;
             QStringList values = line.split(' ', QString::SkipEmptyParts);
 
-            if(values.size() < 8)
+            const int N = values.size();
+            if(N < 8)
             {
                 QMessageBox::information(CMainWindow::getBestWidgetForParent(),tr("Error..."), tr("Failed to read data."),QMessageBox::Abort,QMessageBox::Abort);
                 return false;
@@ -426,7 +427,17 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
             IUnit::strToDeg(lat + " " + lon, pt.lon, pt.lat);
 
             pt.time = readCompeTime(values[4] + " " + values[5], true);
-            pt.ele = values[7].toFloat();
+            pt.ele = qRound(values[7].toFloat());
+
+            if(N > 13)
+            {
+                pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = values[13].toFloat();
+            }
+
+            if(N > 14)
+            {
+                pt.sat = values[14].toInt();
+            }
 
             seg.pts << pt;
             break;
@@ -442,6 +453,32 @@ bool CGisItemTrk::readTwoNav(const QString& filename)
         case 'y':
         {
             key.item = line.mid(1).simplified();
+            break;
+        }
+
+        case 'x':
+        {
+            if(seg.pts.isEmpty())
+            {
+                break;
+            }
+            QStringList values = line.mid(1).split(",");
+            CTrackData::trkpt_t& pt = seg.pts.last();
+
+            const int N = values.size();
+            if(N > 0)
+            {
+                pt.extensions["gpxtpx:TrackPointExtension|gpxtpx:atemp"] = values[0].toFloat()/10;
+            }
+            if(N > 1)
+            {
+                pt.hdop = values[1].toInt();
+            }
+            if(N > 2)
+            {
+                pt.vdop = values[2].toInt();
+            }
+
             break;
         }
         }

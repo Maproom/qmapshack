@@ -68,10 +68,10 @@ CMainWindow * CMainWindow::pSelf = nullptr;
 
 QDir CMainWindow::homeDir;
 const QString CMainWindow::mapsPath = "Maps";
-const QString CMainWindow::demPath = "Dem";
+const QString CMainWindow::demPath = "DEM";
 const QString CMainWindow::routinoPath = "Routino";
 const QString CMainWindow::brouterPath = "BRouter";
-const QString CMainWindow::databasePath = "Database";
+const QString CMainWindow::databasePath = "Databases";
 const QString CMainWindow::gpxPath = "GPX";
 const QSet<QString> CMainWindow::paths = {mapsPath, demPath, routinoPath, brouterPath, databasePath, gpxPath};
 

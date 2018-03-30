@@ -41,14 +41,23 @@ public:
     CRouterBRouter(QWidget * parent);
     virtual ~CRouterBRouter();
 
+    static CRouterBRouter& self()
+    {
+        return *pSelf;
+    }
+
     void calcRoute(const IGisItem::key_t& key) override;
     int calcRoute(const QPointF& p1, const QPointF& p2, QPolygonF& coords) override;
     bool hasFastRouting() override;
     QString getOptions() override;
     void routerSelected() override;
 
-private slots:
+    void setupLocalDir(QString localDir);
+
+public slots:
     void slotToolSetupClicked();
+
+private slots:
     void slotRequestFinished(QNetworkReply* reply);
     void slotCloseStatusMsg() const;
     void slotToolProfileInfoClicked() const;
@@ -93,6 +102,8 @@ private:
     int versionMajor { NOINT };
     int versionMinor { NOINT };
     int versionPatch { NOINT };
+
+    static CRouterBRouter * pSelf;
 };
 
 #endif //CROUTERBROUTER_H

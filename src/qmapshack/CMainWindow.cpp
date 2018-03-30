@@ -30,6 +30,7 @@
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/router/CRouterRoutino.h"
+#include "gis/rte/router/CRouterBRouter.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
@@ -556,7 +557,7 @@ void CMainWindow::setupHomePath()
     CMapDraw::setupMapPath(homeDir.absoluteFilePath(mapsPath));
     CDemDraw::setupDemPath(homeDir.absoluteFilePath(demPath));
     CRouterRoutino::self().setupPath(homeDir.absoluteFilePath(routinoPath));
-    //todo: BRouter
+    CRouterBRouter::self().setupLocalDir(homeDir.absoluteFilePath(brouterPath));
     cfg.setValue("Database/lastDatabasePath", homeDir.absoluteFilePath(databasePath));
     cfg.setValue("Paths/lastGisPath", homeDir.absoluteFilePath(gpxPath));
 
@@ -1393,7 +1394,7 @@ void CMainWindow::slotLinkActivated(const QString& link)
     }
     else if(link == "BRouterSetup")
     {
-        ///@todo we need a setup handler
+        CRouterBRouter::self().slotToolSetupClicked();
     }
     else if(link == "LoadData")
     {

@@ -69,6 +69,7 @@ public:
 
     QString findJava() const;
     bool isLocalBRouterInstalled() const;
+    bool isLocalBRouterDefaultDir() const;
 
     void onInvalidSetup();
 

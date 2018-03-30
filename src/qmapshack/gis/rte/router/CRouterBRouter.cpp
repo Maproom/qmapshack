@@ -32,9 +32,12 @@
 #include <QtNetwork>
 #include <QtWidgets>
 
+CRouterBRouter* CRouterBRouter::pSelf;
+
 CRouterBRouter::CRouterBRouter(QWidget *parent)
     : IRouter(false, parent)
 {
+    pSelf = this;
     setupUi(this);
 
     labelBRouterWarning->hide();
@@ -151,6 +154,15 @@ void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QStrin
     info.setLabel(profile);
     info.setInfo(content);
     info.exec();
+}
+
+void CRouterBRouter::setupLocalDir(QString localDir)
+{
+    if (setup->isLocalBRouterDefaultDir())
+    {
+        setup->localDir = localDir;
+        setup->save();
+    }
 }
 
 void CRouterBRouter::updateDialog() const

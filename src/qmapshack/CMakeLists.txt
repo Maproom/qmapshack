@@ -771,7 +771,7 @@ qt5_add_resources(RC_SRCS ${RCS})
 ###############################################################################################
 translate_ts(${APPLICATION_NAME}_QM_FILES
     UPDATE_TRANSLATIONS ${UPDATE_TRANSLATIONS}
-    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" "-no-obsolete"
+    UPDATE_OPTIONS "-I${CMAKE_CURRENT_SOURCE_DIR}" ${KEEP_OLD_TRANSLATIONS}
     SOURCES ${SRCS} ${HDRS} ${UIS}
     TEMPLATE ${APPLICATION_NAME}
     TRANSLATION_DIR "locale"

@@ -70,7 +70,7 @@ CDemList::CDemList(QWidget *parent)
     connect(actionActivate, &QAction::triggered,                         this, &CDemList::slotActivate);
     connect(actionReloadDem, &QAction::triggered,                        this, &CDemList::slotReloadDem);
     connect(treeWidget,     &CDemTreeWidget::sigChanged,                 this, &CDemList::sigChanged);
-    connect(labelHelpFillMapList, &QLabel::linkActivated,                this, &CDemList::slotLinkActivated);
+    connect(labelHelpFillMapList, &QLabel::linkActivated, &CMainWindow::self(), static_cast<void (CMainWindow::*)(const QString&)>(&CMainWindow::slotLinkActivated));
 
     menu = new QMenu(this);
     menu->addAction(actionActivate);
@@ -234,10 +234,35 @@ void CDemList::slotReloadDem()
     CDemDraw::setupDemPath(CDemDraw::getDemPaths());
 }
 
-void CDemList::slotLinkActivated(const QString& link)
+static void saveResource(const QString& name, QDir& dir)
 {
-    if(link == "setup")
+    QFile resource1(QString("://dem/%1").arg(name));
+    resource1.open(QIODevice::ReadOnly);
+
+    QFile file(dir.absoluteFilePath(name));
+    file.open(QIODevice::WriteOnly);
+    file.write(resource1.readAll());
+    file.close();
+}
+
+void CDemList::slotDemHonk()
+{
+    QString demPath = CMainWindow::self().getDemPath();
+    if(demPath.isEmpty())
     {
-        emit sigSetupDemPath();
+        demPath = QDir::homePath();
     }
+
+    demPath = QFileDialog::getExistingDirectory(CMainWindow::getBestWidgetForParent(), tr("Where do you want to store DEMs?"), demPath);
+    if(demPath.isEmpty())
+    {
+        return;
+    }
+
+    QDir dir(demPath);
+
+    saveResource("World_Online_SRTM900.wcs", dir);
+    saveResource("Europe_Online_DEM25.vrt", dir);
+
+    CDemDraw::setupDemPath(demPath);
 }

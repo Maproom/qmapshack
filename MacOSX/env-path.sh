@@ -30,8 +30,11 @@ if [[ "$BUILD_RELEASE_DIR" == "" ]]; then
 fi
 
 set -a
-APP_NAME=QMapShack
+declare APP_LANG=("ca" "cs" "de" "en" "es" "fr" "nl" "ru")
+APP_NAME_LOWER="$(tr [A-Z] [a-z] <<< "$APP_NAME")"
 APP_BUNDLE=$APP_NAME.app
+
+APP_BUNDLE_QMAPTOOL=QMapTool.app
 
 SRC_OSX_DIR=$QMS_SRC_DIR/MacOSX
 SRC_RESOURCES_DIR=$SRC_OSX_DIR/resources

@@ -52,6 +52,7 @@ include(ConfigureChecks.cmake)
 
 # Translation related
 option(UPDATE_TRANSLATIONS  "Update source translation translations/*.ts files"     OFF)
+option(KEEP_OLD_TRANSLATIONS "Keep obsolete translations"                           ON)
 
 # Feature related
 option(BUILD_QMAPSHACK      "Build QMapShack Binary"                                ON)
@@ -65,6 +66,12 @@ endif(WIN32)
 
 # Compiler related
 option(BUILD_FOR_LOCAL_SYSTEM "Build for local system ONLY (resulting binary might not work on other systems!)" OFF)
+
+if(KEEP_OLD_TRANSLATIONS)
+    set(KEEP_OLD_TRANSLATIONS "")
+else(KEEP_OLD_TRANSLATIONS)
+    set(KEEP_OLD_TRANSLATIONS "-no-obsolete")
+endif(KEEP_OLD_TRANSLATIONS)
 
 
 ###############################################################################################

@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "dem/CDemDraw.h"
+#include "dem/CDemList.h"
 #include "dem/CDemPathSetup.h"
 
 #include <QtWidgets>
@@ -31,6 +32,7 @@ CDemPathSetup::CDemPathSetup(QStringList &paths)
     connect(toolAdd,    &QToolButton::clicked,              this, &CDemPathSetup::slotAddPath);
     connect(toolDelete, &QToolButton::clicked,              this, &CDemPathSetup::slotDelPath);
     connect(listWidget, &QListWidget::itemSelectionChanged, this, &CDemPathSetup::slotItemSelectionChanged);
+    connect(pushDemHonk, &QPushButton::clicked,             this, &CDemPathSetup::slotDemHonk);
 
     for(const QString &path : paths)
     {
@@ -68,6 +70,13 @@ void CDemPathSetup::slotDelPath()
 {
     QList<QListWidgetItem *> items = listWidget->selectedItems();
     qDeleteAll(items);
+}
+
+
+void CDemPathSetup::slotDemHonk()
+{
+    CDemList::slotDemHonk();
+    close();
 }
 
 void CDemPathSetup::accept()

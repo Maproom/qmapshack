@@ -2205,6 +2205,12 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     mouseFocusOwner = (mode == eModeRange) ? owner : "";
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+
+    if (!dlgDetails.isNull())
+    {
+        dlgDetails->enableTabFilter();
+    }
+
     return true;
 }
 

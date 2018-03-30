@@ -611,6 +611,12 @@ bool CRouterBRouterSetup::isLocalBRouterInstalled() const
     return QFile(dir.absoluteFilePath("brouter.jar")).exists() && QDir(dir.absoluteFilePath(localProfileDir)).exists();
 }
 
+bool CRouterBRouterSetup::isLocalBRouterDefaultDir() const
+{
+    return localDir == defaultLocalDir;
+}
+
+
 QString CRouterBRouterSetup::findJava() const
 {
     return IAppSetup::getPlatformInstance()->findExecutable("java");

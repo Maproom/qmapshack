@@ -177,8 +177,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
-
-    slotShowPlots();
+   slotShowPlots();
+   enableTabFilter();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -194,6 +194,8 @@ CDetailsTrk::~CDetailsTrk()
 
     saveGraphSource(comboGraph2, 2);
     saveGraphSource(comboGraph3, 3);
+
+    trk.clearDlgDetails();
 }
 
 void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
@@ -501,6 +503,11 @@ void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
 void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2)
 {
     labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
+}
+
+void CDetailsTrk::enableTabFilter()
+{
+    tabWidget->widget(eTabFilter)->setEnabled(!trk.getMode());
 }
 
 void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)

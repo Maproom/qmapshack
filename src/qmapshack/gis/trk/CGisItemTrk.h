@@ -131,8 +131,6 @@ public:
      */
     void updateVisuals(quint32 visuals, const QString &who);
 
-    void stopPlotRange();
-
     /**
        @brief Create a cloned copy of this track
        @return The cloned item a pointer

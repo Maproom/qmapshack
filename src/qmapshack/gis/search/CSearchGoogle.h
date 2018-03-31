@@ -20,6 +20,7 @@
 #define CSEARCHGOOGLE_H
 
 #include "gis/prj/IGisProject.h"
+#include "config.h"
 
 #include <QNetworkAccessManager>
 #include <QObject>
@@ -45,6 +46,14 @@ private:
     QAction * actSymbol;
 
     QNetworkAccessManager networkAccessManager;
+
+    QString key;
+
+#ifdef GOOGLEAPIKEY
+    const QString defaultkey = GOOGLEAPIKEY;
+#else
+    const QString defaultkey = "";
+#endif
 };
 
 #endif //CSEARCHGOOGLE_H

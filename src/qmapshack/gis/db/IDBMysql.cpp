@@ -57,7 +57,12 @@ bool IDBMysql::setupDB(const QString& server, const QString& port, const QString
         {
             if(passwd.isEmpty())
             {
-                QString p = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), tr("Password..."), tr("Password for database '%1':").arg(name), QLineEdit::Password, "");
+                bool ok;
+                QString p = QInputDialog::getText(CMainWindow::self().getBestWidgetForParent(), tr("Password..."), tr("Password for database '%1':").arg(name), QLineEdit::Password, "", &ok);
+                if (!ok || p.isEmpty())
+                {
+                    return false;
+                }
                 db.setPassword(p);
             }
             else

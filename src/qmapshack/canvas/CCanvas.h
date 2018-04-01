@@ -161,6 +161,13 @@ public:
 
     void print(QPainter &p, const QRectF& area, const QPointF &focus);
 
+    /**
+       @brief Set a single map file to be shown on the canvas
+
+       @param filename   the map's file path, can be a resource, too
+    */
+    void setMap(const QString& filename);
+
     static qreal gisLayerOpacity;
 signals:
     void sigMousePosition(const QPointF& pos, qreal ele, qreal slope);

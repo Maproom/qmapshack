@@ -31,6 +31,7 @@ class CGisWorkspace;
 class CGisDatabase;
 class CRtWorkspace;
 class CCanvas;
+class CGeoSearchConfig;
 class CToolBarConfig;
 struct SGisLine;
 
@@ -75,6 +76,10 @@ public:
         return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : "";
     }
 
+    CGeoSearchConfig* getGeoSearchConfig()
+    {
+        return geoSearchConfig;
+    }
 
     static QString getUser();
 
@@ -174,6 +179,7 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
+    void slotSetupGeoSearch();
     void slotSanityTest();
     void slotCloseTab();
     void slotToggleDocks();
@@ -218,6 +224,7 @@ private:
     CRtWorkspace * widgetRtWorkspace;
 
     CToolBarConfig * toolBarConfig;
+    CGeoSearchConfig * geoSearchConfig;
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;

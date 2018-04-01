@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess <norbert.truchsess@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,45 +16,46 @@
 
 **********************************************************************************************/
 
-#ifndef CSEARCHGOOGLE_H
-#define CSEARCHGOOGLE_H
+#ifndef CGEOSEARCHCONFIG_H
+#define CGEOSEARCHCONFIG_H
 
-#include "gis/prj/IGisProject.h"
-#include "config.h"
-
-#include <QNetworkAccessManager>
 #include <QObject>
 
-class CGisListWks;
-class QLineEdit;
+class QPixmap;
 
-class CSearchGoogle : public QObject, public IGisProject
+class CGeoSearchConfig : public QObject
 {
     Q_OBJECT
 public:
-    CSearchGoogle(CGisListWks * parent);
-    virtual ~CSearchGoogle();
+    enum search_service_e
+    {
+        eGoogle,
+        eGeonamesSearch,
+        eGeonamesAddress,
+        eNominatim
+    };
 
-private slots:
-    void slotChangeSymbol();
-    void slotStartSearch();
-    void slotRequestFinished(QNetworkReply* reply);
+    CGeoSearchConfig(QObject* parent);
+    virtual ~CGeoSearchConfig();
+
+    void load();
+    void save() const;
+
+signals:
+    void sigConfigChanged();
 
 private:
-    QLineEdit * edit;
+    bool googleApiEnabled;
+    bool geonamesSearchEnabled;
+    bool geonamesAddressEnabled;
+    bool nominatimEnabled;
+    QString googleApiKey;
+    QString geonamesUsername;
+    QString nominatimEmail;
+    QString symbolName;
 
-    QAction * actSymbol;
-
-    QNetworkAccessManager networkAccessManager;
-
-    QString key;
-
-#ifdef GOOGLEAPIKEY
-    const QString defaultkey = GOOGLEAPIKEY;
-#else
-    const QString defaultkey = "";
-#endif
+    friend class CGeoSearchConfigDialog;
+    friend class CGeoSearch;
 };
 
-#endif //CSEARCHGOOGLE_H
-
+#endif

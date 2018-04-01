@@ -29,5 +29,3 @@
 
 /* are we on a 64 bit system? */
 #cmakedefine HOST_IS_64_BIT 1
-
-#cmakedefine GOOGLEAPIKEY "${GOOGLEAPIKEY}"

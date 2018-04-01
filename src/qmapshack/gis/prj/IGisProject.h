@@ -40,7 +40,7 @@ class IGisProject : public QTreeWidgetItem
 public:
     enum type_e
     {
-        eTypeGoogle
+        eTypeGeoSearch
         , eTypeQms
         , eTypeGpx
         , eTypeDb

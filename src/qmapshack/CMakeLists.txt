@@ -136,7 +136,9 @@ set( SRCS
     gis/rte/router/brouter/CRouterBRouterTilesSelectArea.cpp
     gis/rte/router/brouter/CRouterBRouterToolShell.cpp
     gis/rte/router/routino/CRouterRoutinoPathSetup.cpp
-    gis/search/CSearchGoogle.cpp
+    gis/search/CGeoSearch.cpp
+    gis/search/CGeoSearchConfig.cpp
+    gis/search/CGeoSearchConfigDialog.cpp
     gis/slf/CSlfProject.cpp
     gis/slf/CSlfReader.cpp
     gis/summary/CGisSummary.cpp
@@ -449,7 +451,9 @@ set( HDRS
     gis/rte/router/brouter/CRouterBRouterTilesStatus.h
     gis/rte/router/brouter/CRouterBRouterToolShell.h
     gis/rte/router/routino/CRouterRoutinoPathSetup.h
-    gis/search/CSearchGoogle.h
+    gis/search/CGeoSearch.h
+    gis/search/CGeoSearchConfig.h
+    gis/search/CGeoSearchConfigDialog.h
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
     gis/summary/CGisSummary.h
@@ -683,6 +687,7 @@ set( UIS
     gis/rte/router/brouter/IRouterBRouterInfo.ui
     gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/rte/router/routino/IRouterRoutinoPathSetup.ui
+    gis/search/IGeoSearchConfigDialog.ui
     gis/summary/IGisSummary.ui
     gis/summary/IGisSummarySetup.ui
     gis/trk/ICombineTrk.ui

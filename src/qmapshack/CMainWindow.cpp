@@ -31,6 +31,8 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterBRouter.h"
+#include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
@@ -192,6 +194,7 @@ CMainWindow::CMainWindow()
     connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
+    connect(actionSetupGeoSearch,        &QAction::triggered,            this,      &CMainWindow::slotSetupGeoSearch);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
@@ -350,7 +353,7 @@ CMainWindow::CMainWindow()
                      << actionSaveGISData
                      << actionSetupTimeZone
                      << actionAddEmptyProject
-                     << actionSearchGoogle
+                     << actionGeoSearch
                      << actionCloseAllProjects
                      << actionSetupUnits
                      << actionSetupWorkspace
@@ -385,7 +388,7 @@ CMainWindow::CMainWindow()
     separator1->setObjectName("separator");
 
     QList<QAction *> defaultActions;
-    defaultActions << actionSearchGoogle
+    defaultActions << actionGeoSearch
                    << actionAddEmptyProject
                    << actionLoadGISData
                    << actionSaveGISData
@@ -410,6 +413,9 @@ CMainWindow::CMainWindow()
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
     toolBarConfig->loadSettings();
+
+    geoSearchConfig = new CGeoSearchConfig(this);
+    geoSearchConfig->load();
 
     prepareMenuForMac();
 
@@ -533,6 +539,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
+    geoSearchConfig->save();
 }
 
 void CMainWindow::setupHomePath()
@@ -1424,6 +1431,11 @@ void CMainWindow::slotSetupWptIcons()
     dlg.exec();
 }
 
+void CMainWindow::slotSetupGeoSearch()
+{
+    CGeoSearchConfigDialog dlg(this,geoSearchConfig);
+    dlg.exec();
+}
 
 void CMainWindow::slotCloseTab()
 {

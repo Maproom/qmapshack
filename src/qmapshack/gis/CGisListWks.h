@@ -28,7 +28,7 @@
 
 struct action_t;
 class QAction;
-class CSearchGoogle;
+class CGeoSearch;
 class IGisProject;
 class CDBProject;
 class IDeviceWatcher;
@@ -111,7 +111,7 @@ private slots:
     void slotEditArea();
     void slotAddEmptyProject();
     void slotCloseAllProjects();
-    void slotSearchGoogle(bool on);
+    void slotGeoSearch(bool on);
     void slotCopyItem();
     void slotSyncWksDev();
     void slotSyncDevWks();
@@ -196,7 +196,7 @@ private:
 
     QMenu * menuNone = nullptr;
 
-    QPointer<CSearchGoogle> searchGoogle;
+    QPointer<CGeoSearch> geoSearch;
 
     bool saveOnExit = true;
     qint32 saveEvery = 5;

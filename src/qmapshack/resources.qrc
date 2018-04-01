@@ -605,6 +605,7 @@
         <file>map/OpenStreetMap.tms</file>
         <file>map/WorldSat.wmts</file>
         <file>map/WorldTopo.wmts</file>
+        <file>map/World.gemf</file>
         <file>dem/World_Online_SRTM900.wcs</file>
         <file>dem/Europe_Online_DEM25.vrt</file>
         

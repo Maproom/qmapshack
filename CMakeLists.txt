@@ -57,7 +57,6 @@ option(KEEP_OLD_TRANSLATIONS "Keep obsolete translations"                       
 # Feature related
 option(BUILD_QMAPSHACK      "Build QMapShack Binary"                                ON)
 option(BUILD_QMAPTOOL       "Build QMapTool Binary including command line tools"    ON)
-option(USE_GOOGLE_APIKEY    "Provide you own Google geoencoding service API-key"    OFF)
 
 if(WIN32)
 option(USE_QT5DBus          "Enable device detection via DBus"                      OFF)
@@ -73,6 +72,7 @@ if(KEEP_OLD_TRANSLATIONS)
 else(KEEP_OLD_TRANSLATIONS)
     set(KEEP_OLD_TRANSLATIONS "-no-obsolete")
 endif(KEEP_OLD_TRANSLATIONS)
+
 
 ###############################################################################################
 # All OS and compiler specific tweaks
@@ -165,12 +165,6 @@ if(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
     set(ALGLIB_LIBRARIES alg)
     add_subdirectory(3rdparty/alglib)
 endif(NOT ALGLIB_FOUND AND BUILD_QMAPSHACK)
-
-if(USE_GOOGLE_APIKEY)
-    set(GOOGLEAPIKEY "" CACHE STRING "Google geoencoding API key")
-else(USE_GOOGLE_APIKEY)
-    unset(GOOGLEAPIKEY CACHE)
-endif(USE_GOOGLE_APIKEY)
 
 ###############################################################################################
 # Create global config.h

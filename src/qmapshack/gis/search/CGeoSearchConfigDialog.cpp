@@ -70,6 +70,21 @@ void CGeoSearchConfigDialog::slotAccepted()
     default:
         searchConfig->currentService = CGeoSearchConfig::eNone;
     }
+    if (searchConfig->currentService == CGeoSearchConfig::eNone)
+    {
+        if (!searchConfig->nominatimEmail.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eNominatim;
+        }
+        else if (!searchConfig->geonamesUsername.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eGeonamesSearch;
+        }
+        else if (!searchConfig->googleApiKey.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eGoogle;
+        }
+    }
     searchConfig->emitChanged();
     accept();
 }

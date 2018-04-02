@@ -226,6 +226,7 @@ public:
     qint32 getCntTotalPoints() const { return cntTotalPoints; }
 
     const QDateTime& getTimeStart()           const { return timeStart;        }
+    const QDateTime& getTimeEnd()             const { return timeEnd;          }
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
@@ -303,6 +304,8 @@ public:
     void setColor(int idx);
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
+    const mode_e getMode() const { return mode; }
+    void clearDlgDetails() { dlgDetails.clear(); }
     void setComment(const QString& str)         override;
     void setDescription(const QString& str)     override;
     void setLinks(const QList<link_t>& links)   override;
@@ -540,6 +543,7 @@ public:
     void filterSplitSegment();
     void filterDeleteExtension(const QString &ext);
     void filterSubPt2Pt();
+    void filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName);
     /** @} */
 
     /**

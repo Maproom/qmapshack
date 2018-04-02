@@ -39,6 +39,12 @@ public:
 
 private slots:
     void slotChangeSymbol();
+    void slotSelectService();
+    void slotNominatimSelected();
+    void slotGeonamesSearchSelected();
+    void slotGeonamesAddressSelected();
+    void slotGoogleSelected();
+    void slotSetupGeoSearch();
     void slotStartSearch();
     void slotRequestFinished(QNetworkReply* reply);
     void slotConfigChanged();
@@ -51,9 +57,6 @@ private:
     QNetworkAccessManager networkAccessManager;
 
     CGeoSearchConfig* searchConfig;
-
-    QMutex mutex;
-    int outstanding;
 
     void createErrorItem(const QString& status);
 };

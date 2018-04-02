@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>349</width>
-    <height>260</height>
+    <width>319</width>
+    <height>146</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,44 +15,16 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <widget class="QCheckBox" name="checkNominatim">
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelNominatimEmail">
        <property name="text">
-        <string>Nominatim</string>
+        <string>Nominatim email:</string>
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QCheckBox" name="checkGeoSearch">
-       <property name="text">
-        <string>Geonames Place Search</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkGeoAddress">
-       <property name="text">
-        <string>Geonames Address Search</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkGoogle">
-       <property name="text">
-        <string>Google Geocoding API</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineGoogleKey"/>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineGeonamesLogin"/>
+      <widget class="QLineEdit" name="lineNominatimEmail"/>
      </item>
      <item row="1" column="0">
       <widget class="QLabel" name="labelGeonamesLogin">
@@ -61,43 +33,18 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="0">
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="lineGeonamesLogin"/>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="labelGoogleKey">
        <property name="text">
         <string>Google API-Key:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QToolButton" name="toolHelpGoogle">
-       <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QToolButton" name="toolHelpGeonames">
-       <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="labelNominatimEmail">
-       <property name="text">
-        <string>Nominatim email:</string>
-       </property>
-      </widget>
-     </item>
      <item row="2" column="1">
-      <widget class="QLineEdit" name="lineNominatimEmail"/>
-     </item>
-     <item row="2" column="2">
-      <widget class="QToolButton" name="toolButton">
-       <property name="text">
-        <string>...</string>
-       </property>
-      </widget>
+      <widget class="QLineEdit" name="lineGoogleKey"/>
      </item>
     </layout>
    </item>

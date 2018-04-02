@@ -33,20 +33,18 @@ void CGeoSearchConfig::load()
     SETTINGS;
     cfg.beginGroup("Search");
     symbolName = cfg.value("symbol","Default").toString();
+    currentService = search_service_e(cfg.value("current",eNone).toInt());
     cfg.beginGroup("google");
-    googleApiEnabled = cfg.value("enabled",true).toBool();
     googleApiKey = cfg.value("key","").toString();
     cfg.endGroup();
     cfg.beginGroup("geonames");
-    geonamesSearchEnabled = cfg.value("search",true).toBool();
-    geonamesAddressEnabled = cfg.value("address",true).toBool();
     geonamesUsername = cfg.value("username","").toString();
     cfg.endGroup();
     cfg.beginGroup("nominatim");
-    nominatimEnabled = cfg.value("enabled",true).toBool();
     nominatimEmail = cfg.value("email","").toString();
     cfg.endGroup();
     cfg.endGroup();
+    emit sigConfigChanged();
 }
 
 void CGeoSearchConfig::save() const
@@ -54,18 +52,20 @@ void CGeoSearchConfig::save() const
     SETTINGS;
     cfg.beginGroup("Search");
     cfg.setValue("symbol",symbolName);
+    cfg.setValue("current",currentService);
     cfg.beginGroup("google");
-    cfg.setValue("enabled",googleApiEnabled);
     cfg.setValue("key",googleApiKey);
     cfg.endGroup();
     cfg.beginGroup("geonames");
-    cfg.setValue("search",geonamesSearchEnabled);
-    cfg.setValue("address",geonamesAddressEnabled);
     cfg.setValue("username",geonamesUsername);
     cfg.endGroup();
     cfg.beginGroup("nominatim");
-    cfg.setValue("enabled",nominatimEnabled);
     cfg.setValue("email",nominatimEmail);
     cfg.endGroup();
     cfg.endGroup();
+}
+
+void CGeoSearchConfig::emitChanged() const
+{
+    emit sigConfigChanged();
 }

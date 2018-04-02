@@ -127,7 +127,6 @@
     <addaction name="separator"/>
     <addaction name="actionSetupWorkspace"/>
     <addaction name="actionSetupWaypointIcons"/>
-    <addaction name="actionSetupGeoSearch"/>
    </widget>
    <widget class="QMenu" name="menuExtra">
     <property name="title">

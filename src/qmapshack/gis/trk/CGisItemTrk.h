@@ -46,6 +46,7 @@ class IQlgtOverlay;
 class CProgressDialog;
 class CPropertyTrk;
 class CFitStream;
+class CCanvas;
 
 #define TRK_N_COLORS          17
 #define ASCENT_THRESHOLD       5
@@ -535,7 +536,7 @@ public:
     void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
 
     void filterTerrainSlope();
-    void filterReplaceElevation();
+    void filterReplaceElevation(CCanvas *canvas);
     void filterInterpolateElevation();
     void filterReset();
     void filterDelete();

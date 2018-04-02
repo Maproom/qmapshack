@@ -31,10 +31,13 @@ public:
     CFilterReplaceElevation(CGisItemTrk& trk, QWidget * parent);
     virtual ~CFilterReplaceElevation() = default;
 
+public slots:
+    void updateUi();
+
 private slots:
     void slotApply();
 
-private:
+private:    
     CGisItemTrk& trk;
 };
 

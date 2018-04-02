@@ -61,12 +61,6 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
 
     QSettings view(temp.fileName(), QSettings::IniFormat);
     view.clear();
-
-    CCanvas * source = CMainWindow::self().getVisibleCanvas();
-    if(source)
-    {
-        source->saveConfig(view);
-    }
     view.setValue("map/zoomIndex",16);
     view.setValue("scales",1);
     view.setValue("proj","+proj=merc");
@@ -74,8 +68,8 @@ CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
 
     CCanvas * canvas = new CCanvas(widgetSelect,"BRouterTileDownload");
     // clone canvas by a temporary configuration file
-
     canvas->loadConfig(view);
+    canvas->setMap("://map/World.gemf");
 
     selectArea = new CRouterBRouterTilesSelectArea(widgetSelect,canvas);
 

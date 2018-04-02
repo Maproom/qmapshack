@@ -123,6 +123,15 @@ public:
      */
     bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
 
+    /**
+       @brief Build a usable map list from a single map file
+
+       This will clear the map list and add the gven map as the only one. The map will be activated, too.
+
+       @param filename  the map's filename, can be a resource, too
+     */
+    void buildMapList(const QString& filename);
+
 signals:
     void sigActiveMapsChanged(bool noActiveMap);
 
@@ -131,6 +140,15 @@ protected:
 
 
 private:
+    /**
+       @brief Create a CMapItem from a filename
+
+       @param filename the map's filename, can be a resuource, too
+       @param maps  a set to collect the paths of all collected maps.
+
+       @return The created map item.
+     */
+    CMapItem *createMapItem(const QString& filename, QSet<QString> &maps);
     /**
        @brief Search in paths found in mapPaths for files with supported extensions and add them to mapList.
 
@@ -177,7 +195,6 @@ private:
     static QStringList supportedFormats;
 
     bool hasActiveMap = false;
-
 };
 
 #endif //CMAPDRAW_H

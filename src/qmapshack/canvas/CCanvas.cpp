@@ -384,6 +384,11 @@ void CCanvas::loadConfig(QSettings& cfg)
     }
 }
 
+void CCanvas::setMap(const QString& filename)
+{
+    map->buildMapList(filename);
+}
+
 void CCanvas::resetMouse()
 {
     mouse->setDelegate(new CMouseNormal(gis, this, mouse));

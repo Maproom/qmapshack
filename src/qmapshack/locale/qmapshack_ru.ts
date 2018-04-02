@@ -125,7 +125,77 @@
         <translation>Вид %1</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="748"/>
+        <location filename="../canvas/CCanvas.cpp" line="182"/>
+        <source>None selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="187"/>
+        <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="190"/>
+        <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="199"/>
+        <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="209"/>
+        <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="217"/>
+        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="222"/>
+        <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="239"/>
+        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="254"/>
+        <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="270"/>
+        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="277"/>
+        <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="285"/>
+        <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="296"/>
+        <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="311"/>
+        <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../canvas/CCanvas.cpp" line="943"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
     </message>
@@ -360,16 +430,21 @@ To solve this conflict you can create and save a clone, force your version or dr
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
+    <message>
+        <location filename="../dem/CDemList.cpp" line="256"/>
+        <source>Where do you want to store DEMs?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CDemPathSetup</name>
     <message>
-        <location filename="../dem/CDemPathSetup.cpp" line="41"/>
+        <location filename="../dem/CDemPathSetup.cpp" line="43"/>
         <source>Add or remove paths containing DEM data. There can be multiple files in a path but no sub-path is parsed. Supported formats are: %1</source>
         <translation>Добавить или удалить путь к данным ЦМР. Несколько файлов может быть в пути, но вложенные пути не проанализированы. Поддерживаемые форматы: %1</translation>
     </message>
     <message>
-        <location filename="../dem/CDemPathSetup.cpp" line="56"/>
+        <location filename="../dem/CDemPathSetup.cpp" line="58"/>
         <source>Select DEM file path...</source>
         <translation>Выбрать путь к файлам ЦМР...</translation>
     </message>
@@ -1022,7 +1097,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/tnv/serialization.cpp" line="347"/>
         <location filename="../gis/tnv/serialization.cpp" line="376"/>
         <location filename="../gis/tnv/serialization.cpp" line="387"/>
-        <location filename="../gis/tnv/serialization.cpp" line="420"/>
+        <location filename="../gis/tnv/serialization.cpp" line="421"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
@@ -1039,7 +1114,7 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Поддерживается долгота/широта только в формате WGS 84.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="420"/>
+        <location filename="../gis/tnv/serialization.cpp" line="421"/>
         <source>Failed to read data.</source>
         <translation>Не удалось читать данные.</translation>
     </message>
@@ -1331,87 +1406,87 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Активность изменена на &apos;%1&apos; для интервала (%2..%3).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="97"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="98"/>
         <source>Hide points by Douglas Peuker algorithm (%1%2)</source>
         <translation>Скрыть точки при помощи алгоритма Douglas-Peuker (%1%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="123"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="124"/>
         <source>Hide points with invalid data.</source>
         <translation>Скрыть точки с неверными данными.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="133"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="134"/>
         <source>Reset all hidden track points to visible</source>
         <translation>Сделать видимыми все скрытые точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="163"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="164"/>
         <source>Permanently removed all hidden track points</source>
         <translation>Удалены безвозвратно все скрытые точки трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="200"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="201"/>
         <source>Smoothed profile with a Median filter of size %1</source>
         <translation>Сгладить профиль используя фильтр Медиан с размером %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="222"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="223"/>
         <source>Added terrain slope from DEM file.</source>
         <translation>Добавлен склон местности с файла ЦМР.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="244"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="252"/>
         <source>Replaced elevation data with data from DEM files.</source>
         <translation>Заменены высоты данными файлов ЦМР.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="262"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="270"/>
         <source>Replaced elevation data with interpolated values. (M=%1, RMSErr=%2)</source>
         <translation>Заменены высоты интерполированными значениями. (M=%1, RMSErr=%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="278"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="286"/>
         <source>Offset elevation data by %1%2.</source>
         <translation>Добавить %1 %2 к высоте.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="291"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="299"/>
         <source>Changed start of track to %1.</source>
         <translation>Изменено начало трека на %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="304"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="312"/>
         <source>Remove timestamps.</source>
         <translation>Удалить метки времени.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="321"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="329"/>
         <source>Set artificial timestamps with delta of %1 sec.</source>
         <translation>Установить искусственные метки времени с интервалом в %1 секунд.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="387"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="395"/>
         <source>Changed average moving speed depending on slope to %1%2.</source>
         <translation>Изменена средняя скорость движения в зависимости от склона до %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="412"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="420"/>
         <source>Changed speed to %1%2.</source>
         <translation>Изменена скорость на %1 %2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="438"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="446"/>
         <source>%1 (Segment %2)</source>
         <translation>%1 (сегмент %2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="456"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="464"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Удалено расширение %1 со всех точек трека</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="467"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="475"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Преобразованы подточки с маршрутных в точки трека</translation>
     </message>
@@ -2091,17 +2166,17 @@ line %2, column %3:
 <context>
     <name>CImportDatabase</name>
     <message>
-        <location filename="../tool/CImportDatabase.cpp" line="29"/>
+        <location filename="../tool/CImportDatabase.cpp" line="30"/>
         <source>Import QLandkarte Database</source>
         <translation>Импортировать базу данных QLandkarte</translation>
     </message>
     <message>
-        <location filename="../tool/CImportDatabase.cpp" line="75"/>
+        <location filename="../tool/CImportDatabase.cpp" line="76"/>
         <source>Select source database...</source>
         <translation>Выбрать исходную базу данных...</translation>
     </message>
     <message>
-        <location filename="../tool/CImportDatabase.cpp" line="97"/>
+        <location filename="../tool/CImportDatabase.cpp" line="105"/>
         <source>Select target database...</source>
         <translation>Выбрать целевую базу данных...</translation>
     </message>
@@ -2414,54 +2489,63 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="886"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation>Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
+        <translation type="vanished">Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1014"/>
+        <location filename="../CMainWindow.cpp" line="543"/>
+        <source>Select folder...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="933"/>
+        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../CMainWindow.cpp" line="1062"/>
         <source>Ele.: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1026"/>
+        <location filename="../CMainWindow.cpp" line="1074"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Склон: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1042"/>
+        <location filename="../CMainWindow.cpp" line="1090"/>
         <source>[Grid: %1]</source>
         <translation>[Координатная сетка: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1183"/>
+        <location filename="../CMainWindow.cpp" line="1231"/>
         <source>Load GIS Data...</source>
         <translation>Загрузить данные ГИС...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1217"/>
+        <location filename="../CMainWindow.cpp" line="1265"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1217"/>
-        <location filename="../CMainWindow.cpp" line="1243"/>
+        <location filename="../CMainWindow.cpp" line="1265"/>
+        <location filename="../CMainWindow.cpp" line="1291"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack вид (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1243"/>
+        <location filename="../CMainWindow.cpp" line="1291"/>
         <source>Select file to load</source>
         <translation>Выбрать файл для загрузки</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1564"/>
+        <location filename="../CMainWindow.cpp" line="1691"/>
         <source>Fatal...</source>
         <translation>Неустранимая ошибка...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1565"/>
+        <location filename="../CMainWindow.cpp" line="1692"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для проекций EPSG обычно находятся в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета, чтобы поправить это.</translation>
     </message>
@@ -2469,11 +2553,10 @@ line %2, column %3:
 <context>
     <name>CMapDraw</name>
     <message>
-        <location filename="../map/CMapDraw.cpp" line="459"/>
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation>В данный момент карт ещё нет. Использование QMapShack без карт совсем непривлекательно. Вы можете установить карты, нажав кнопку &apos;Помогите! Я хочу карты!&apos; в окне &apos;Карты&apos;. Или Вы можете нажать клавишу F1, чтобы открыть документацию в Интернете, которая объяснит как использовать QMapShack.
+        <translation type="vanished">В данный момент карт ещё нет. Использование QMapShack без карт совсем непривлекательно. Вы можете установить карты, нажав кнопку &apos;Помогите! Я хочу карты!&apos; в окне &apos;Карты&apos;. Или Вы можете нажать клавишу F1, чтобы открыть документацию в Интернете, которая объяснит как использовать QMapShack.
 
 Так не очень удобно, почему не поставлять сразу с картами? Поддержка готовых для загрузки и установки карт требует хорошего сервера. И это не бесплатно. У проекта нет денег. Вдобавок карты и данные ЦМР зачастую распространяются под ограничительными лицензиями. Поэтому требуется разрешение правообладателя перед упаковкой его данных. Это не так просто как звучит, к тому же за некоторые данные требуется платить комиссионные. У проекта просто нет ресурсов для этого. И мы надеемся, что установка карт Вами лично не будет уж такой затруднительной. Кстати сама эта программа свободна и распространяется бесплатно.</translation>
     </message>
@@ -3119,17 +3202,17 @@ Fall back to internal types.</source>
 <context>
     <name>CMapList</name>
     <message>
-        <location filename="../map/CMapList.cpp" line="226"/>
+        <location filename="../map/CMapList.cpp" line="224"/>
         <source>Deactivate</source>
         <translation>Деактивировать</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="226"/>
+        <location filename="../map/CMapList.cpp" line="224"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../map/CMapList.cpp" line="251"/>
+        <location filename="../map/CMapList.cpp" line="255"/>
         <source>Where do you want to store maps?</source>
         <translation>Где вы хотите хранить карты?</translation>
     </message>
@@ -3279,22 +3362,22 @@ line %2, column %3:
 <context>
     <name>CMapVrtBuilder</name>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="29"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="30"/>
         <source>Build GDAL VRT</source>
         <translation>Построить GDAL VRT</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="79"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="80"/>
         <source>Select files...</source>
         <translation>Выбрать файлы...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="103"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="110"/>
         <source>Select target file...</source>
         <translation>Выбрать целевой файл...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="210"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="217"/>
         <source>!!! done !!!
 </source>
         <translation>Сделано!</translation>
@@ -3852,125 +3935,125 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterBRouter</name>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="50"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="53"/>
         <source>original</source>
         <translation>Оригинал</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="51"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="54"/>
         <source>first alternative</source>
         <translation>Первая альтернатива</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="52"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="55"/>
         <source>second alternative</source>
         <translation>Вторая альтернатива</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="53"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="56"/>
         <source>third alternative</source>
         <translation>Третья альтернатива</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="160"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="172"/>
         <source>BRouter (offline)</source>
         <translation>BRouter (без Интернета)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="167"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="179"/>
         <source>BRouter (online)</source>
         <translation>BRouter (требуется связь с Интернетом)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="197"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="209"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Профиль: %1, альтернатива: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="768"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="780"/>
         <source>Error:</source>
         <translation>Ошибка:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="774"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="786"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
         <translation>QMapShack связывается с маршрутизатором через сетевое соединение. Обычно это делается по специальному адресу, который не может быть достигнут вне вашего устройства. Однако BRouter прослушивает соединения на всех доступных интерфейсах. Если вы находитесь в своей собственной частной сети с активным брандмауэром, это не проблема. Если вы находитесь в общедоступной сети, каждый открытый порт представляет собой риск, поскольку он может быть использован кем-то другим для компрометации вашей системы. В этом случае мы pекомендуем не использовать локальный сервис BRouter. Если вы видите это предупреждение и используете версию BRouter &gt; = 1.4.10, вы можете принудительно привязать локальный адрес, установив имя хоста на &quot;localhost&quot; и установить флажок &quot;Привязать только к localhost&quot; в настройке с использованием экспертного режима.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="386"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="519"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="398"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="531"/>
         <source>response is empty</source>
         <translation>Ответ пуст</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="434"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="446"/>
         <source>Bad response from server: %1</source>
         <translation>Плохой ответ от сервера: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="485"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="497"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Запрос маршрутизации отправлен на сервер. Пожалуйста, подождите...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="359"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="488"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="371"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="500"/>
         <source>Calculate route with %1</source>
         <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="372"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="507"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="519"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>эта версия BRouter не поддерживает более 1 запретной зоны</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="553"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="565"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Плохой ответ от сервера:&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="543"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="555"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Время расчёта: %1 сек.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="821"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="833"/>
         <source>running</source>
         <translation>Запущено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="813"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="825"/>
         <source>starting</source>
         <translation>Идет запуск</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="706"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="718"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Версия %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="803"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="815"/>
         <source>Warning...</source>
         <translation>Предупреждение...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="808"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="820"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Я понимаю риск. Больше не говорите.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="828"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="840"/>
         <source>stopped</source>
         <translation>Остановлено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="839"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="851"/>
         <source>not installed</source>
         <translation>Не установлено</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="850"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="862"/>
         <source>online</source>
         <translation>Онлайн</translation>
     </message>
@@ -4174,125 +4257,125 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterBRouterTilesSelect</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="98"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="92"/>
         <source>available routing-data is being determined.</source>
         <translation>Определяются доступные данные маршрутизации.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="108"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="102"/>
         <source>Select outdated</source>
         <translation>Выбрать устаревшее</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="109"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="103"/>
         <source>Clear Selection</source>
         <translation>Очистить выделение</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="110"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="104"/>
         <source>Delete selection</source>
         <translation>Удалить выделение</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="111"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="105"/>
         <source>Download</source>
         <translation>Загрузка</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="281"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="275"/>
         <source>Error creating segments directory %1</source>
         <translation>Ошибка создания каталога сегментов %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="365"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="359"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>Невозможно разобрать: %1 не является допустимой датой</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="390"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="384"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>Невозможно разобрать: %1 не является допустимым размером</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="409"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Ошибка получения доступных данных маршрутизации из %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="490"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="484"/>
         <source>segments directory does not exist: </source>
         <translation>Папка сегментов не существует:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="504"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
         <source>error creating file %1: %2</source>
         <translation>Ошибка создания файла сегментов %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="536"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="576"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="530"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="570"/>
         <source>no valid request for filename %1</source>
         <translation>Недействительный запрос имени файла %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="541"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="535"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="578"/>
         <source>no open file assigned to request for %1</source>
         <translation>К запросу для %1 не был назначен открытый файл</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="551"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="594"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="545"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="588"/>
         <source>error writing to file %1: %2</source>
         <translation>Ошибка записи в файл %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="620"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="614"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Ошибка переименования файла %1 до %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="694"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="688"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Верно: %1 (%2), устарело: %3 (%4), загрузить: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="792"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="786"/>
         <source>being downloaded: %1 of %2</source>
         <translation>Загружено: %1 от %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>Нет локальных данных, доступно в Интернете: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="798"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="792"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>Локальные данные устарели (%1, %2 - удаленные %3, %4)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="190"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="184"/>
         <source>Error removing %1: %2</source>
         <translation>Ошибка удаления %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="321"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="315"/>
         <source>Network Error</source>
         <translation>Ошибка сети</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="330"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="324"/>
         <source>invalid result, no files found</source>
         <translation>Неверный результат, файлы не найдены</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="800"/>
         <source>local data up to date (%1, %2)</source>
         <translation>Локальные данные верны (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
         <source>no routing-data available</source>
         <translation>Нет доступных данных маршрутизации</translation>
     </message>
@@ -4439,218 +4522,218 @@ is not a valid coordinate system definition:
 <context>
     <name>CRouterRoutino</name>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="55"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="60"/>
         <source>Warning...</source>
         <translation>Предупреждение...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="55"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="60"/>
         <source>Found Routino with a wrong version. Expected %1 found %2</source>
         <translation>Найдено Routino с неправильной версией. Ожидаема %1б найдена %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="59"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="64"/>
         <source>Shortest</source>
         <translation>Самый короткий</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="60"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="65"/>
         <source>Quickest</source>
         <translation>Самый быстрый</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="78"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
         <source>Foot</source>
         <translation>Пешком</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="79"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
         <source>Horse</source>
         <translation>Лошадь</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="80"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
         <source>Wheelchair</source>
         <translation>Инвалидная коляска</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="81"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="86"/>
         <source>Bicycle</source>
         <translation>Велосипед</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="82"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
         <source>Moped</source>
         <translation>Мопед</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="83"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
         <source>Motorcycle</source>
         <translation>Мотоцикл</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="84"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
         <source>Motorcar</source>
         <translation>Автомобиль</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="85"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
         <source>Goods</source>
         <translation>Товары</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="87"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
         <source>English</source>
         <translation>Английский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="88"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
         <source>German</source>
         <translation>Немецкий</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="89"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="94"/>
         <source>French</source>
         <translation>Французский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="90"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="95"/>
         <source>Hungarian</source>
         <translation>Венгерский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="91"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="96"/>
         <source>Dutch</source>
         <translation>Голландский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="92"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="97"/>
         <source>Russian</source>
         <translation>Русский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="93"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="98"/>
         <source>Polish</source>
         <translation>Польский</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="128"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="133"/>
         <source>A function was called without the database variable set.</source>
         <translation>Функция была вызвана без переменной для базы данных.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="131"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="136"/>
         <source>A function was called without the profile variable set.</source>
         <translation>Функция была вызвана без переменной профиля.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="134"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="139"/>
         <source>A function was called without the translation variable set.</source>
         <translation>Функция была вызвана без переменной перевода.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="137"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="142"/>
         <source>The specified database to load did not exist.</source>
         <translation>Указанная к загрузке база данных не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="140"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="145"/>
         <source>The specified database could not be loaded.</source>
         <translation>Указанная база данных не может быть загружена.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="143"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="148"/>
         <source>The specified profiles XML file did not exist.</source>
         <translation>Указанный XML файл профилей не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="146"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="151"/>
         <source>The specified profiles XML file could not be loaded.</source>
         <translation>Указанный XML файл профилей невозможно загрузить.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="149"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="154"/>
         <source>The specified translations XML file did not exist.</source>
         <translation>Указанный XML файл перевода не существует.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="152"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="157"/>
         <source>The specified translations XML file could not be loaded.</source>
         <translation>Указанный XML файл перевода невозможно загрузить.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="155"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="160"/>
         <source>The requested profile name does not exist in the loaded XML file.</source>
         <translation>Запрошенное имя профиля не существует в загруженном XML файле.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="158"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="163"/>
         <source>The requested translation language does not exist in the loaded XML file.</source>
         <translation>Запрошенный язык перевода не существует в загруженном XML файле.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="161"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
         <translation>В базе данных маршрутизации нет дороги вблизи координат данной маршрутной точки.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="164"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
         <source>The profile and database do not work together.</source>
         <translation>Профиль и базы данных не работают совместно.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="167"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="172"/>
         <source>The profile being used has not been validated.</source>
         <translation>Использованный профиль не был подтвержден.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="170"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="175"/>
         <source>The user specified profile contained invalid data.</source>
         <translation>Указанный профиль содержит недопустимые данные.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="173"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="178"/>
         <source>The routing options specified are not consistent with each other.</source>
         <translation>Параметры маршрутизации несовместимы между собой.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="176"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="181"/>
         <source>There is a mismatch between the library and caller API version.</source>
         <translation>Есть несоответствие между API версиями библиотеки и абонента.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="179"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="184"/>
         <source>Route calculation was aborted by user.</source>
         <translation>Расчет маршрута был прерван пользователем.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="185"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="190"/>
         <source>A route could not be found to waypoint %1.</source>
         <translation>Невозможно найти маршрут к маршрутной точке %1.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="188"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="193"/>
         <source>Unknown error: %1</source>
         <translation>Неизвестная ошибка: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="200"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="205"/>
         <source>profile &quot;%1&quot;</source>
         <translation>профиль &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="201"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="206"/>
         <source>, mode &quot;%1&quot;</source>
         <translation>, режим &quot;%1&quot;</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="332"/>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="415"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="349"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="432"/>
         <source>Calculate route with %1</source>
         <translation>Вычислить маршрут с %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="340"/>
+        <location filename="../gis/rte/router/CRouterRoutino.cpp" line="357"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Время расчета: %1 сек.</translation>
     </message>
@@ -4694,17 +4777,17 @@ is not a valid coordinate system definition:
         <translation>Создать базу данных Routino</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="58"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="63"/>
         <source>Select files...</source>
         <translation>Выбрать файлы...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="82"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="87"/>
         <source>Select target path...</source>
         <translation>Выбрать целевой путь...</translation>
     </message>
     <message>
-        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="143"/>
+        <location filename="../tool/CRoutinoDatabaseBuilder.cpp" line="148"/>
         <source>!!! done !!!
 </source>
         <translation>Сделано!</translation>
@@ -5286,19 +5369,19 @@ line %2, column %3:
 <context>
     <name>CTwoNavProject</name>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
-        <location filename="../gis/tnv/serialization.cpp" line="588"/>
-        <location filename="../gis/tnv/serialization.cpp" line="599"/>
-        <location filename="../gis/tnv/serialization.cpp" line="617"/>
-        <location filename="../gis/tnv/serialization.cpp" line="645"/>
-        <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/serialization.cpp" line="597"/>
+        <location filename="../gis/tnv/serialization.cpp" line="625"/>
+        <location filename="../gis/tnv/serialization.cpp" line="636"/>
+        <location filename="../gis/tnv/serialization.cpp" line="654"/>
+        <location filename="../gis/tnv/serialization.cpp" line="682"/>
+        <location filename="../gis/tnv/serialization.cpp" line="756"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <source>Error...</source>
         <translation>Ошибка...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="560"/>
+        <location filename="../gis/tnv/serialization.cpp" line="597"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
         <source>Failed to open %1.</source>
@@ -5310,15 +5393,15 @@ line %2, column %3:
         <translation>Сохранить данные ГИС в...</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="588"/>
-        <location filename="../gis/tnv/serialization.cpp" line="599"/>
+        <location filename="../gis/tnv/serialization.cpp" line="625"/>
+        <location filename="../gis/tnv/serialization.cpp" line="636"/>
         <source>Only support lon/lat WGS 84 format.</source>
         <translation>Поддерживается долгота/широта только в формате WGS 84.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/serialization.cpp" line="617"/>
-        <location filename="../gis/tnv/serialization.cpp" line="645"/>
-        <location filename="../gis/tnv/serialization.cpp" line="719"/>
+        <location filename="../gis/tnv/serialization.cpp" line="654"/>
+        <location filename="../gis/tnv/serialization.cpp" line="682"/>
+        <location filename="../gis/tnv/serialization.cpp" line="756"/>
         <source>Failed to read data.</source>
         <translation>Не удалось читать данные.</translation>
     </message>
@@ -5893,17 +5976,17 @@ If you want to keep just one half you can simply remove the points, or check thi
 <context>
     <name>IDBMysql</name>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="60"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="61"/>
         <source>Password...</source>
         <translation>Пароль...</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="60"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="61"/>
         <source>Password for database &apos;%1&apos;:</source>
         <translation>Пароль для базы данных &apos;%1&apos;:</translation>
     </message>
     <message>
-        <location filename="../gis/db/IDBMysql.cpp" line="222"/>
+        <location filename="../gis/db/IDBMysql.cpp" line="227"/>
         <source>Update to database version 5. Migrate all GIS items.</source>
         <translation>Обновить базы данных к версии 5. Перенести все элементы ГИС.</translation>
     </message>
@@ -5943,6 +6026,12 @@ If you want to keep just one half you can simply remove the points, or check thi
         <location filename="../dem/IDemPathSetup.ui" line="112"/>
         <source>-</source>
         <translation>-</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPathSetup.ui" line="143"/>
+        <source>Help! I want DEMs!
+I don&apos;t want to read the documentation!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6024,9 +6113,13 @@ If you want to keep just one half you can simply remove the points, or check thi
         <translation>Форма</translation>
     </message>
     <message>
-        <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Чтобы добавить файлы с высотными данными, использовать &lt;b&gt;Файл-&gt;Настройка пути к ЦМР&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Чтобы добавить файлы с высотными данными, использовать &lt;b&gt;Файл-&gt;Настройка пути к ЦМР&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemList.ui" line="112"/>
+        <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="125"/>
@@ -6974,11 +7067,15 @@ If you want to keep just one half you can simply remove the points, or check thi
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
-        <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Заменить высотные данные данными файлов ЦМР.</translation>
+        <source>Replace elevation of track points with the values from loaded DEM files in view</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="70"/>
+        <source>Replace elevation of track points with the values from loaded DEM files.</source>
+        <translation type="vanished">Заменить высотные данные данными файлов ЦМР.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8063,9 +8160,8 @@ Filename: %1</source>
         <translation>форма</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Чтобы добавить карты, использовать &lt;b&gt;Файл-&gt;Настройка пути к картам&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Чтобы добавить карты, использовать &lt;b&gt;Файл-&gt;Настройка пути к картам&lt;/b&gt;. Или нажать &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;здесь&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
@@ -8073,39 +8169,43 @@ Filename: %1</source>
         <translation>Использовать контекстное меню (нажать правой кнопкой мышки на элемент), чтобы активировать карту. Использовать перетаскивание мышкой, для перемещения активированной карты в порядке рисования.</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="129"/>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
-        <translation>Помогите! Я хочу карты!
+        <translation type="vanished">Помогите! Я хочу карты!
 Мне не хочется читать документацию!</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="149"/>
+        <location filename="../map/IMapList.ui" line="103"/>
+        <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../map/IMapList.ui" line="141"/>
         <source>Activate</source>
         <translation>Активировать</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="158"/>
+        <location filename="../map/IMapList.ui" line="150"/>
         <source>Move Up</source>
         <translation>Переместить вверх</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="161"/>
+        <location filename="../map/IMapList.ui" line="153"/>
         <source>Hide map behind previous map</source>
         <translation>Скрыть карту за предыдущей картой</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="170"/>
+        <location filename="../map/IMapList.ui" line="162"/>
         <source>Move down</source>
         <translation>Переместить вниз</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="173"/>
+        <location filename="../map/IMapList.ui" line="165"/>
         <source>Show map on top of next map</source>
         <translation>Показать карту над следующей картой</translation>
     </message>
     <message>
-        <location filename="../map/IMapList.ui" line="182"/>
+        <location filename="../map/IMapList.ui" line="174"/>
         <source>Reload Maps</source>
         <translation>Перезагрузить карты</translation>
     </message>
@@ -9049,8 +9149,12 @@ or
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
+        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation>Для использования маршрутизации без доступа к сети вам необходимо определить пути к локальным данным маршрутизации. Использовать кнопку настройки, чтобы зарегистрировать пути. Вы можете создать свои собственные данные для маршрутизации с помощью &lt;b&gt;Инструмент-&gt;Создать базу данных Routino&lt;/b&gt;.</translation>
+        <translation type="vanished">Для использования маршрутизации без доступа к сети вам необходимо определить пути к локальным данным маршрутизации. Использовать кнопку настройки, чтобы зарегистрировать пути. Вы можете создать свои собственные данные для маршрутизации с помощью &lt;b&gt;Инструмент-&gt;Создать базу данных Routino&lt;/b&gt;.</translation>
     </message>
 </context>
 <context>

@@ -32,7 +32,6 @@
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/search/CGeoSearchConfig.h"
-#include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -195,7 +194,6 @@ CMainWindow::CMainWindow()
     connect(actionCreateRoutinoDatabase, &QAction::triggered,            this,      &CMainWindow::slotCreateRoutinoDatabase);
     connect(actionPrintMap,              &QAction::triggered,            this,      &CMainWindow::slotPrintMap);
     connect(actionSetupWaypointIcons,    &QAction::triggered,            this,      &CMainWindow::slotSetupWptIcons);
-    connect(actionSetupGeoSearch,        &QAction::triggered,            this,      &CMainWindow::slotSetupGeoSearch);
     connect(actionCloseTab,              &QAction::triggered,            this,      &CMainWindow::slotCloseTab);
     connect(actionToggleDocks,           &QAction::triggered,            this,      &CMainWindow::slotToggleDocks);
     connect(actionFullScreen,            &QAction::triggered,            this,      &CMainWindow::slotFullScreen);
@@ -1437,12 +1435,6 @@ void CMainWindow::slotLinkActivated(const QUrl& url)
 void CMainWindow::slotSetupWptIcons()
 {
     CWptIconDialog dlg(this);
-    dlg.exec();
-}
-
-void CMainWindow::slotSetupGeoSearch()
-{
-    CGeoSearchConfigDialog dlg(this,geoSearchConfig);
     dlg.exec();
 }
 

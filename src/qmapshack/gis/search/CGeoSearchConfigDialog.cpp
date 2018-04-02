@@ -28,10 +28,6 @@ CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig
 
     this->searchConfig = searchConfig;
 
-    this->checkGoogle->setChecked(searchConfig->googleApiEnabled);
-    this->checkGeoSearch->setChecked(searchConfig->geonamesSearchEnabled);
-    this->checkGeoAddress->setChecked(searchConfig->geonamesAddressEnabled);
-    this->checkNominatim->setChecked(searchConfig->nominatimEnabled);
     this->lineGoogleKey->setText(searchConfig->googleApiKey);
     this->lineGeonamesLogin->setText(searchConfig->geonamesUsername);
     this->lineNominatimEmail->setText(searchConfig->nominatimEmail);
@@ -39,13 +35,41 @@ CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig
 
 void CGeoSearchConfigDialog::slotAccepted()
 {
-    searchConfig->googleApiEnabled = checkGoogle->isChecked();
-    searchConfig->geonamesSearchEnabled = checkGeoSearch->isChecked();
-    searchConfig->geonamesAddressEnabled = checkGeoAddress->isChecked();
-    searchConfig->nominatimEnabled = checkNominatim->isChecked();
     searchConfig->googleApiKey = lineGoogleKey->text();
     searchConfig->geonamesUsername = lineGeonamesLogin->text();
     searchConfig->nominatimEmail = lineNominatimEmail->text();
-
+    switch(searchConfig->currentService)
+    {
+    case CGeoSearchConfig::eNone:
+        break;
+    case CGeoSearchConfig::eNominatim:
+    {
+        if (searchConfig->nominatimEmail.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eNone;
+        }
+        break;
+    }
+    case CGeoSearchConfig::eGeonamesSearch:
+    case CGeoSearchConfig::eGeonamesAddress:
+    {
+        if (searchConfig->geonamesUsername.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eNone;
+        }
+        break;
+    }
+    case CGeoSearchConfig::eGoogle:
+    {
+        if (searchConfig->googleApiKey.isEmpty())
+        {
+            searchConfig->currentService = CGeoSearchConfig::eNone;
+        }
+        break;
+    }
+    default:
+        searchConfig->currentService = CGeoSearchConfig::eNone;
+    }
+    searchConfig->emitChanged();
     accept();
 }

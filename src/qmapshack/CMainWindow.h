@@ -182,7 +182,6 @@ private slots:
     void slotCreateRoutinoDatabase();
     void slotPrintMap();
     void slotSetupWptIcons();
-    void slotSetupGeoSearch();
     void slotSanityTest();
     void slotCloseTab();
     void slotToggleDocks();

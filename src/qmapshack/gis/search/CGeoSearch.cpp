@@ -23,6 +23,7 @@
 #include "gis/WptIcons.h"
 #include "gis/search/CGeoSearch.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
@@ -47,6 +48,9 @@ CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
     actSymbol = edit->addAction(getWptIconByName(config->symbolName, focus), QLineEdit::TrailingPosition);
     actSymbol->setObjectName(config->symbolName);
     connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
+    QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
+    actSetup->setToolTip(tr("Setup Geosearch"));
+    connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);
 
     parent->setItemWidget(this, CGisListWks::eColumnName, edit);
 
@@ -68,12 +72,76 @@ void CGeoSearch::slotChangeSymbol()
     searchConfig->symbolName = actSymbol->objectName();
 }
 
+void CGeoSearch::slotSelectService()
+{
+    QMenu * menu = new QMenu(edit);
+
+    menu->addSection(tr("select Geosearch service"));
+
+    QAction* actNominatim = menu->addAction(tr("OSM Nominatim"));
+    actNominatim->setEnabled(!searchConfig->nominatimEmail.isEmpty());
+    actNominatim->setCheckable(true);
+    actNominatim->setChecked(searchConfig->currentService == CGeoSearchConfig::eNominatim);
+    connect(actNominatim, &QAction::triggered, this, &CGeoSearch::slotNominatimSelected);
+
+    QAction* actGeoSearch = menu->addAction(tr("Geonames Places search"));
+    actGeoSearch->setEnabled(!searchConfig->geonamesUsername.isEmpty());
+    actGeoSearch->setCheckable(true);
+    actGeoSearch->setChecked(searchConfig->currentService == CGeoSearchConfig::eGeonamesSearch);
+    connect(actGeoSearch, &QAction::triggered, this, &CGeoSearch::slotGeonamesSearchSelected);
+
+    QAction* actGeoAddress = menu->addAction(tr("Geonames Address search"));
+    actGeoAddress->setEnabled(!searchConfig->geonamesUsername.isEmpty());
+    actGeoAddress->setCheckable(true);
+    actGeoAddress->setChecked(searchConfig->currentService == CGeoSearchConfig::eGeonamesAddress);
+    connect(actGeoAddress, &QAction::triggered, this, &CGeoSearch::slotGeonamesAddressSelected);
+
+    QAction* actGoogle = menu->addAction(tr("Google Geocoding API"));
+    actGoogle->setEnabled(!searchConfig->googleApiKey.isEmpty());
+    actGoogle->setCheckable(true);
+    actGoogle->setChecked(searchConfig->currentService == CGeoSearchConfig::eGoogle);
+    connect(actGoogle, &QAction::triggered, this, &CGeoSearch::slotGoogleSelected);
+
+    menu->addSeparator();
+    QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+    actSetup->setToolTip(tr("configure providers of geocoding search services"));
+
+    connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
+
+    menu->move(edit->geometry().topLeft());
+    menu->exec();
+
+    return;
+}
+
+void CGeoSearch::slotNominatimSelected()
+{
+    searchConfig->currentService = CGeoSearchConfig::eNominatim;
+}
+
+void CGeoSearch::slotGeonamesSearchSelected()
+{
+    searchConfig->currentService = CGeoSearchConfig::eGeonamesSearch;
+}
+
+void CGeoSearch::slotGeonamesAddressSelected()
+{
+    searchConfig->currentService = CGeoSearchConfig::eGeonamesAddress;
+}
+
+void CGeoSearch::slotGoogleSelected()
+{
+    searchConfig->currentService = CGeoSearchConfig::eGoogle;
+}
+
+void CGeoSearch::slotSetupGeoSearch()
+{
+    CGeoSearchConfigDialog dlg(this->treeWidget(),searchConfig);
+    dlg.exec();
+}
+
 void CGeoSearch::slotStartSearch()
 {
-    QMutexLocker locker(&mutex);
-
-    outstanding = 0;
-
     qDeleteAll(takeChildren());
 
     QString addr = edit->text();
@@ -81,7 +149,15 @@ void CGeoSearch::slotStartSearch()
     QString userAgent(WHAT_STR);
     userAgent.append(" (Nokia; Qt)");
 
-    if(searchConfig->googleApiEnabled)
+    switch(searchConfig->currentService)
+    {
+    case CGeoSearchConfig::eNone:
+    {
+        this->createErrorItem(tr("no service configured - please click setup-icon in search-field"));
+        setExpanded(true);
+        break;
+    }
+    case CGeoSearchConfig::eGoogle:
     {
         QUrl url("https://maps.googleapis.com");
         url.setPath("/maps/api/geocode/xml");
@@ -100,9 +176,10 @@ void CGeoSearch::slotStartSearch()
         request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
         QNetworkReply* reply = networkAccessManager.get(request);
         reply->setProperty("service",QVariant(CGeoSearchConfig::eGoogle));
-        outstanding++;
+        edit->setEnabled(false);
+        break;
     }
-    if (searchConfig->geonamesSearchEnabled)
+    case CGeoSearchConfig::eGeonamesSearch:
     {
         QUrl url("https://secure.geonames.org");
         url.setPath("/search");
@@ -120,9 +197,10 @@ void CGeoSearch::slotStartSearch()
         request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
         QNetworkReply* reply = networkAccessManager.get(request);
         reply->setProperty("service",QVariant(CGeoSearchConfig::eGeonamesSearch));
-        outstanding++;
+        edit->setEnabled(false);
+        break;
     }
-    if (searchConfig->geonamesAddressEnabled)
+    case CGeoSearchConfig::eGeonamesAddress:
     {
         QUrl url("http://api.geonames.org");
         url.setPath("/geoCodeAddress");
@@ -140,9 +218,10 @@ void CGeoSearch::slotStartSearch()
         request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
         QNetworkReply* reply = networkAccessManager.get(request);
         reply->setProperty("service",QVariant(CGeoSearchConfig::eGeonamesAddress));
-        outstanding++;
+        edit->setEnabled(false);
+        break;
     }
-    if (searchConfig->nominatimEnabled)
+    case CGeoSearchConfig::eNominatim:
     {
         QUrl url("https://nominatim.openstreetmap.org");
         url.setPath("/search");
@@ -162,25 +241,19 @@ void CGeoSearch::slotStartSearch()
         request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
         QNetworkReply* reply = networkAccessManager.get(request);
         reply->setProperty("service",QVariant(CGeoSearchConfig::eNominatim));
-        outstanding++;
-    }
-    if (outstanding > 0)
-    {
         edit->setEnabled(false);
+        break;
+    }
+    default:
+        searchConfig->currentService = CGeoSearchConfig::eNone;
     }
 }
 
 void CGeoSearch::slotRequestFinished(QNetworkReply* reply)
 {
-    QMutexLocker lock1(&mutex);
     QMutexLocker lock2(&IGisItem::mutexItems);
 
-    outstanding--;
-
-    if (outstanding < 1)
-    {
-        edit->setEnabled(true);
-    }
+    edit->setEnabled(true);
 
     if(reply->error() != QNetworkReply::NoError)
     {
@@ -201,6 +274,8 @@ void CGeoSearch::slotRequestFinished(QNetworkReply* reply)
     CGeoSearchConfig::search_service_e service = CGeoSearchConfig::search_service_e(reply->property("service").toInt());
     switch(service)
     {
+    case CGeoSearchConfig::eNone:
+        break;
     case CGeoSearchConfig::eGoogle:
     {
         QString status;
@@ -582,21 +657,19 @@ void CGeoSearch::slotRequestFinished(QNetworkReply* reply)
         break;
     }
     default:
-        Q_ASSERT(false);
+        searchConfig->currentService = CGeoSearchConfig::eNone;
     }
 
-    if (outstanding < 1)
-    {
-        setExpanded(true);
+    setExpanded(true);
 
-        CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
+    CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
 void CGeoSearch::createErrorItem(const QString& status)
 {
     QTreeWidgetItem * item = new QTreeWidgetItem(this);
     item->setText(CGisListWks::eColumnName, status);
+    item->setToolTip(CGisListWks::eColumnName, status);
     item->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
     return;
 }

@@ -29,6 +29,7 @@ class CGeoSearchConfig : public QObject
 public:
     enum search_service_e
     {
+        eNone,
         eGoogle,
         eGeonamesSearch,
         eGeonamesAddress,
@@ -42,17 +43,16 @@ public:
     void save() const;
 
 signals:
-    void sigConfigChanged();
+    void sigConfigChanged() const;
 
 private:
-    bool googleApiEnabled;
-    bool geonamesSearchEnabled;
-    bool geonamesAddressEnabled;
-    bool nominatimEnabled;
+    search_service_e currentService;
     QString googleApiKey;
     QString geonamesUsername;
     QString nominatimEmail;
     QString symbolName;
+
+    void emitChanged() const;
 
     friend class CGeoSearchConfigDialog;
     friend class CGeoSearch;

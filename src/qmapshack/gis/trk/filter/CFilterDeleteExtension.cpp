@@ -29,12 +29,12 @@ CFilterDeleteExtension::CFilterDeleteExtension(CGisItemTrk &trk, QWidget *parent
 {
     setupUi(this);
 
-    update();
+    updateUi();
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterDeleteExtension::slotApply);
 }
 
-void CFilterDeleteExtension::update()
+void CFilterDeleteExtension::updateUi()
 {
     comboExtensions->clear();
 

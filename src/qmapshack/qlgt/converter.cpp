@@ -232,7 +232,7 @@ CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl, IGisProject * project)
     setColor(str2color(trk.color));
     deriveSecondaryData();
 
-    filterReplaceElevation();
+    filterReplaceElevation(nullptr);
     if(ovl.speed != 0)
     {
         filterSpeed(ovl.speed);

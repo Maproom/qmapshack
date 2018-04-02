@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
@@ -25,13 +26,42 @@ CFilterReplaceElevation::CFilterReplaceElevation(CGisItemTrk &trk, QWidget *pare
     , trk(trk)
 {
     setupUi(this);
+    updateUi();
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterReplaceElevation::slotApply);
+    connect(comboView, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CFilterReplaceElevation::updateUi);
 }
 
 void CFilterReplaceElevation::slotApply()
 {
     CCanvas::setOverrideCursor(Qt::WaitCursor,"CFilterReplaceElevation");
-    trk.filterReplaceElevation();
+
+    CCanvas * canvas = comboView->currentData().value<CCanvas*>();
+    if(canvas != nullptr)
+    {
+        trk.filterReplaceElevation(canvas);
+    }
     CCanvas::restoreOverrideCursor("CFilterReplaceElevation");
+}
+
+
+void CFilterReplaceElevation::updateUi()
+{
+    comboView->blockSignals(true);
+    QString current = comboView->currentText();
+    comboView->clear();
+
+    QList<CCanvas*> list = CMainWindow::self().getCanvas();
+    for(CCanvas * canvas : list)
+    {
+        comboView->addItem(canvas->objectName(), QVariant::fromValue<CCanvas*>(canvas));
+    }
+
+    if(!current.isEmpty())
+    {
+        comboView->setCurrentIndex(comboView->findText(current));
+    }
+
+    toolApply->setEnabled(comboView->currentIndex() != NOIDX);
+    comboView->blockSignals(false);
 }

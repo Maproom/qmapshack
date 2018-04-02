@@ -477,7 +477,7 @@ void CGisItemTrk::filterSubPt2Pt()
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
-    QList<CTrackData::trkpt_t> pts;
+    QVector<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -508,13 +508,12 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
 
     for (qint32 i = 0; i < idxNewStartPoint; ++i) // Reorder points
     {
-        pts.move(0, pts.size() - 1);
+        pts.insert(pts.size(), pts.takeAt(0));
     }
 
     trk.readFrom(pts);
 
     deriveSecondaryData();
-
 
     changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterChangeStartPoint.png");
 }

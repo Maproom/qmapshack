@@ -74,7 +74,7 @@ void CFilterChangeStartPoint::update()
         }
     }
 
-    if (noOfItems == 0 || trk.getMode() == CGisItemTrk::eModeRange)
+    if (noOfItems == 0)
     {
         toolApply->setEnabled(false);
     }

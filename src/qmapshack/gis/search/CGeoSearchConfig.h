@@ -42,6 +42,8 @@ public:
     void load();
     void save() const;
 
+    const QIcon getCurrentIcon() const;
+
 signals:
     void sigConfigChanged() const;
 

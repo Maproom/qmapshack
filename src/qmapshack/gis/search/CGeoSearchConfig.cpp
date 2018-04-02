@@ -19,6 +19,7 @@
 #include "gis/search/CGeoSearchConfig.h"
 #include "helpers/CSettings.h"
 #include "gis/WptIcons.h"
+#include <QIcon>
 
 CGeoSearchConfig::CGeoSearchConfig(QObject *parent) : QObject(parent)
 {
@@ -63,6 +64,31 @@ void CGeoSearchConfig::save() const
     cfg.setValue("email",nominatimEmail);
     cfg.endGroup();
     cfg.endGroup();
+}
+
+const QIcon CGeoSearchConfig::getCurrentIcon() const
+{
+    switch(currentService)
+    {
+    case CGeoSearchConfig::eNominatim:
+    {
+        return QIcon("://icons/32x32/SearchNominatim.png");
+        break;
+    }
+    case CGeoSearchConfig::eGeonamesSearch:
+    case CGeoSearchConfig::eGeonamesAddress:
+    {
+        return QIcon("://icons/32x32/SearchGeonames.png");
+        break;
+    }
+    case CGeoSearchConfig::eGoogle:
+    {
+        return QIcon("://icons/32x32/SearchGoogle.png");
+        break;
+    }
+    default:
+        return QIcon("://icons/32x32/CSrcUnknown.png");
+    }
 }
 
 void CGeoSearchConfig::emitChanged() const

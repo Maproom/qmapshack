@@ -188,6 +188,7 @@ private slots:
     void slotDockVisibilityChanged(bool visible);
     void slotFullScreen();
     void slotStartQMapTool();
+    void slotGeoSearchConfigChanged();
 
 private:
     friend int main(int argc, char ** argv);

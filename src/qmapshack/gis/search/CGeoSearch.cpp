@@ -58,7 +58,7 @@ CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
     connect(&networkAccessManager, &QNetworkAccessManager::finished, this, &CGeoSearch::slotRequestFinished);
     connect(searchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CGeoSearch::slotConfigChanged);
 
-    setIcon(CGisListWks::eColumnDecoration, QIcon("://icons/32x32/SearchGoogle.png"));
+    setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
 }
 
 CGeoSearch::~CGeoSearch()
@@ -70,6 +70,7 @@ void CGeoSearch::slotChangeSymbol()
     CWptIconDialog dlg(actSymbol);
     dlg.exec();
     searchConfig->symbolName = actSymbol->objectName();
+    searchConfig->emitChanged();
 }
 
 void CGeoSearch::slotSelectService()
@@ -117,21 +118,25 @@ void CGeoSearch::slotSelectService()
 void CGeoSearch::slotNominatimSelected()
 {
     searchConfig->currentService = CGeoSearchConfig::eNominatim;
+    searchConfig->emitChanged();
 }
 
 void CGeoSearch::slotGeonamesSearchSelected()
 {
     searchConfig->currentService = CGeoSearchConfig::eGeonamesSearch;
+    searchConfig->emitChanged();
 }
 
 void CGeoSearch::slotGeonamesAddressSelected()
 {
     searchConfig->currentService = CGeoSearchConfig::eGeonamesAddress;
+    searchConfig->emitChanged();
 }
 
 void CGeoSearch::slotGoogleSelected()
 {
     searchConfig->currentService = CGeoSearchConfig::eGoogle;
+    searchConfig->emitChanged();
 }
 
 void CGeoSearch::slotSetupGeoSearch()
@@ -679,4 +684,5 @@ void CGeoSearch::slotConfigChanged()
     QPointF focus;
     actSymbol->setIcon(getWptIconByName(searchConfig->symbolName, focus));
     actSymbol->setObjectName(searchConfig->symbolName);
+    setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
 }

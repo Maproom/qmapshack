@@ -109,7 +109,7 @@ void CGeoSearch::slotSelectService()
 
     connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
-    menu->move(edit->geometry().topLeft());
+    menu->move(edit->parentWidget()->mapToGlobal(edit->geometry().topLeft()));
     menu->exec();
 
     return;

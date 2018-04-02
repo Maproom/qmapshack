@@ -19,6 +19,7 @@
 
 #include "CMainWindow.h"
 #include "GeoMath.h"
+#include "canvas/CCanvas.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -222,7 +223,7 @@ void CGisItemTrk::filterTerrainSlope()
     changed(tr("Added terrain slope from DEM file."), "://icons/48x48/CSrcSlope.png");
 }
 
-void CGisItemTrk::filterReplaceElevation()
+void CGisItemTrk::filterReplaceElevation(CCanvas * canvas)
 {
     QPolygonF line;
     for(const CTrackData::trkpt_t &pt : trk)
@@ -231,7 +232,14 @@ void CGisItemTrk::filterReplaceElevation()
     }
 
     QPolygonF ele(line.size());
-    CMainWindow::self().getElevationAt(line, ele);
+    if(canvas != nullptr)
+    {
+        canvas->getElevationAt(line, ele);
+    }
+    else
+    {
+        CMainWindow::self().getElevationAt(line, ele);
+    }
 
     int cnt = 0;
     for(CTrackData::trkpt_t& pt : trk)

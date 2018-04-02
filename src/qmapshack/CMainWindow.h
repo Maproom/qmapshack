@@ -135,6 +135,9 @@ public:
 
     const qint32 id;
 
+signals:
+    void sigCanvasChange();
+
 public slots:
     void slotLinkActivated(const QString& link);
     void slotLinkActivated(const QUrl& url);

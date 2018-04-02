@@ -259,5 +259,7 @@ private:
     QTextBrowser * labelHelp = nullptr;
 };
 
+Q_DECLARE_METATYPE(CCanvas*)
+
 #endif //CCANVAS_H
 

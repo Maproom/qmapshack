@@ -29,9 +29,10 @@
 #include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/prj/IGisProject.h"
-#include "gis/rte/router/CRouterRoutino.h"
 #include "gis/rte/router/CRouterBRouter.h"
+#include "gis/rte/router/CRouterRoutino.h"
 #include "gis/trk/CActivityTrk.h"
+#include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
@@ -670,6 +671,12 @@ void CMainWindow::addWidgetToTab(QWidget * w)
         tabWidget->addTab(w, w->objectName().replace("&", "&&"));
     }
     tabWidget->setCurrentWidget(w);
+
+    CDetailsTrk * detailsTrk = dynamic_cast<CDetailsTrk*>(w);
+    if(detailsTrk != nullptr)
+    {
+        connect(this, &CMainWindow::sigCanvasChange, detailsTrk, &CDetailsTrk::updateData);
+    }
 }
 
 CCanvas* CMainWindow::getVisibleCanvas() const
@@ -873,6 +880,7 @@ void CMainWindow::slotAddCanvas()
     tabWidget->setCurrentWidget(view);
 
     testForNoView();
+    emit sigCanvasChange();
 }
 
 void CMainWindow::slotCloneCanvas()
@@ -944,6 +952,7 @@ void CMainWindow::slotTabCloseRequest(int i)
     delete tabWidget->widget(i);
 
     testForNoView();
+    emit sigCanvasChange();
 }
 
 static inline bool compareNames(QString s1, QString s2)

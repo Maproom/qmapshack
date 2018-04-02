@@ -285,12 +285,40 @@ void CMapDraw::loadConfig(QSettings& cfg) /* override */
     zoom(idx);
 }
 
+CMapItem * CMapDraw::createMapItem(const QString& filename, QSet<QString>& maps)
+{       
+    CMapItem * item = new CMapItem(*mapList, this);
 
+    QFileInfo fi(filename);
+    maps.insert(fi.completeBaseName());
+
+    item->setText(0, fi.completeBaseName().replace("_", " "));
+    item->filename = filename;
+    item->updateIcon();
+
+    // calculate MD5 hash from the file's first 1024 bytes
+    QFile f(filename);
+    f.open(QIODevice::ReadOnly);
+    QCryptographicHash md5(QCryptographicHash::Md5);
+    md5.addData(f.read(1024));
+    item->key = md5.result().toHex();
+    f.close();
+
+    return item;
+}
+
+void CMapDraw::buildMapList(const QString& filename)
+{
+    QMutexLocker lock(&CMapItem::mutexActiveMaps);
+    mapList->clear();
+
+    QSet<QString> maps;
+    CMapItem * item = createMapItem(filename, maps);
+    item->activate();
+}
 
 void CMapDraw::buildMapList()
 {
-    QCryptographicHash md5(QCryptographicHash::Md5);
-
     QMutexLocker lock(&CMapItem::mutexActiveMaps);
     mapList->clear();
 
@@ -303,23 +331,7 @@ void CMapDraw::buildMapList()
         // find available maps
         for(const QString &filename : dir.entryList(supportedFormats, QDir::Files|QDir::Readable, QDir::Name))
         {
-            QFileInfo fi(filename);
-
-            CMapItem * item = new CMapItem(*mapList, this);
-
-            maps.insert(fi.completeBaseName());
-
-            item->setText(0, fi.completeBaseName().replace("_", " "));
-            item->filename = dir.absoluteFilePath(filename);
-            item->updateIcon();
-
-            // calculate MD5 hash from the file's first 1024 bytes
-            QFile f(dir.absoluteFilePath(filename));
-            f.open(QIODevice::ReadOnly);
-            md5.reset();
-            md5.addData(f.read(1024));
-            item->key = md5.result().toHex();
-            f.close();
+            createMapItem(dir.absoluteFilePath(filename), maps);
         }
     }
 

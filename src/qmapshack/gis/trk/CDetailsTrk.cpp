@@ -463,10 +463,16 @@ void CDetailsTrk::updateData()
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeedDist);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
-    CFilterDeleteExtension *filter = treeFilter->findChild<CFilterDeleteExtension*>();
-    if(nullptr != filter)
+    CFilterDeleteExtension *filterDeleteExtension = treeFilter->findChild<CFilterDeleteExtension*>();
+    if(nullptr != filterDeleteExtension)
     {
-        filter->update();
+        filterDeleteExtension->updateUi();
+    }
+
+    CFilterReplaceElevation *filterReplaceElevation = treeFilter->findChild<CFilterReplaceElevation*>();
+    if(nullptr != filterReplaceElevation)
+    {
+        filterReplaceElevation->updateUi();
     }
 
     CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");

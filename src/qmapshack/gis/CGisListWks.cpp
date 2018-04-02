@@ -974,6 +974,8 @@ void CGisListWks::slotLoadWorkspace()
         }
     }
 
+    slotGeoSearch(static_cast<QAction*>(CMainWindow::self().findChild<QAction*>("actionGeoSearch"))->isChecked());
+
     emit sigChanged();
 }
 

@@ -235,6 +235,7 @@ CMainWindow::CMainWindow()
     CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity",1.0).toFloat();
     widgetGisWorkspace->setOpacity(CCanvas::gisLayerOpacity);
 
+    actionGeoSearch->setChecked(cfg.value("isGeosearchVisible", false).toBool());
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", false).toBool());
     actionPOIText->setChecked(cfg.value("POIText", true).toBool());
@@ -499,6 +500,7 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
     cfg.setValue("visibleCanvas", tabWidget->currentIndex());
+    cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("POIText", actionPOIText->isChecked());

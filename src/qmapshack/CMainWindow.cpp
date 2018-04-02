@@ -414,6 +414,7 @@ CMainWindow::CMainWindow()
     toolBarConfig->loadSettings();
 
     geoSearchConfig = new CGeoSearchConfig(this);
+    connect(geoSearchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CMainWindow::slotGeoSearchConfigChanged);
     geoSearchConfig->load();
 
     prepareMenuForMac();
@@ -1551,6 +1552,11 @@ void CMainWindow::slotFullScreen()
 void CMainWindow::slotStartQMapTool()
 {
     QProcess::startDetached("qmaptool");
+}
+
+void CMainWindow::slotGeoSearchConfigChanged()
+{
+    actionGeoSearch->setIcon(geoSearchConfig->getCurrentIcon());
 }
 
 void CMainWindow::displayRegular()

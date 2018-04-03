@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
+#include "gis/WptIcons.h"
 #include "gis/search/CGeoSearchConfig.h"
 #include "helpers/CSettings.h"
-#include "gis/WptIcons.h"
 #include <QIcon>
 
 CGeoSearchConfig::CGeoSearchConfig(QObject *parent) : QObject(parent)
@@ -34,7 +34,7 @@ void CGeoSearchConfig::load()
     SETTINGS;
     cfg.beginGroup("Search");
     symbolName = cfg.value("symbol","Default").toString();
-    currentService = search_service_e(cfg.value("current",eNominatim).toInt());
+    currentService = service_e(cfg.value("current",eServiceNominatim).toInt());
     cfg.beginGroup("google");
     googleApiKey = cfg.value("key","").toString();
     cfg.endGroup();
@@ -72,22 +72,25 @@ const QIcon CGeoSearchConfig::getCurrentIcon() const
 {
     switch(currentService)
     {
-    case CGeoSearchConfig::eNominatim:
+    case CGeoSearchConfig::eServiceNominatim:
     {
         return QIcon("://icons/32x32/SearchNominatim.png");
         break;
     }
-    case CGeoSearchConfig::eGeonamesSearch:
-    case CGeoSearchConfig::eGeonamesAddress:
+
+    case CGeoSearchConfig::eServiceGeonamesSearch:
+    case CGeoSearchConfig::eServiceGeonamesAddress:
     {
         return QIcon("://icons/32x32/SearchGeonames.png");
         break;
     }
-    case CGeoSearchConfig::eGoogle:
+
+    case CGeoSearchConfig::eServiceGoogle:
     {
         return QIcon("://icons/32x32/SearchGoogle.png");
         break;
     }
+
     default:
         return QIcon("://icons/32x32/Zoom.png");
     }

@@ -22,7 +22,6 @@
 #include "gis/CGisListWks.h"
 #include "gis/WptIcons.h"
 #include "gis/search/CGeoSearch.h"
-#include "gis/search/CGeoSearchConfig.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
@@ -33,6 +32,11 @@
 #include <QtNetwork>
 #include <QtWidgets>
 #include <QtXml>
+
+#include <functional>
+
+using std::bind;
+
 
 CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
     : IGisProject(eTypeGeoSearch, "", parent)
@@ -51,7 +55,7 @@ CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
     actSymbol->setObjectName(config->symbolName);
     connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
     QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
-    actSetup->setToolTip(tr("Setup Geosearch"));
+    actSetup->setToolTip(tr("Setup Search"));
     connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);
 
     parent->setItemWidget(this, CGisListWks::eColumnName, edit);
@@ -79,53 +83,14 @@ void CGeoSearch::slotSelectService()
 {
     QMenu * menu = new QMenu(edit);
 
-    menu->addSection(tr("select Geosearch service"));
+    menu->addSection(tr("Select Service"));
 
     QActionGroup* actionGroup = new QActionGroup(menu);
 
-    QAction* actNominatim  = menu->addAction(tr("OSM Nominatim"));
-    QAction* actGeoSearch  = menu->addAction(tr("Geonames Places search"));
-    QAction* actGeoAddress = menu->addAction(tr("Geonames Address search"));
-    QAction* actGoogle     = menu->addAction(tr("Google Geocoding API"));
-
-    actNominatim->setCheckable(true);
-    actGeoSearch->setCheckable(true);
-    actGeoAddress->setCheckable(true);
-    actGoogle->setCheckable(true);
-
-    connect(actNominatim,  &QAction::triggered, this, &CGeoSearch::slotNominatimSelected);
-    connect(actGeoSearch,  &QAction::triggered, this, &CGeoSearch::slotGeonamesSearchSelected);
-    connect(actGeoAddress, &QAction::triggered, this, &CGeoSearch::slotGeonamesAddressSelected);
-    connect(actGoogle,     &QAction::triggered, this, &CGeoSearch::slotGoogleSelected);
-
-    actionGroup->addAction(actNominatim);
-    actionGroup->addAction(actGeoSearch);
-    actionGroup->addAction(actGeoAddress);
-    actionGroup->addAction(actGoogle);
-
-    switch(searchConfig->currentService)
-    {
-    case CGeoSearchConfig::eNominatim:
-    {
-        actNominatim->setChecked(true);
-        break;
-    }
-    case CGeoSearchConfig::eGeonamesSearch:
-    {
-        actGeoSearch->setChecked(true);
-        break;
-    }
-    case CGeoSearchConfig::eGeonamesAddress:
-    {
-        actGeoAddress->setChecked(true);
-        break;
-    }
-    case CGeoSearchConfig::eGoogle:
-    {
-        actGoogle->setChecked(true);
-        break;
-    }
-    }
+    actionGroup->addAction(addService(CGeoSearchConfig::eServiceNominatim, tr("OSM Nominatim"), menu));
+    actionGroup->addAction(addService(CGeoSearchConfig::eServiceGeonamesSearch, tr("Geonames Places"), menu));
+    actionGroup->addAction(addService(CGeoSearchConfig::eServiceGeonamesAddress, tr("Geonames Address"), menu));
+    actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
     menu->addSeparator();
     QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
@@ -135,31 +100,25 @@ void CGeoSearch::slotSelectService()
 
     menu->move(edit->parentWidget()->mapToGlobal(edit->geometry().topLeft()));
     menu->exec();
-
-    return;
 }
 
-void CGeoSearch::slotNominatimSelected()
+QAction * CGeoSearch::addService(CGeoSearchConfig::service_e service, const QString& name, QMenu * menu)
 {
-    searchConfig->currentService = CGeoSearchConfig::eNominatim;
-    searchConfig->emitChanged();
+    QAction* action  = menu->addAction(name);
+    action->setCheckable(true);
+    connect(action,  &QAction::triggered, this, bind(&CGeoSearch::slotServiceSelected, this, service, std::placeholders::_1));
+    action->setChecked(searchConfig->currentService == service);
+
+    return action;
 }
 
-void CGeoSearch::slotGeonamesSearchSelected()
+void CGeoSearch::slotServiceSelected(CGeoSearchConfig::service_e service, bool checked)
 {
-    searchConfig->currentService = CGeoSearchConfig::eGeonamesSearch;
-    searchConfig->emitChanged();
-}
-
-void CGeoSearch::slotGeonamesAddressSelected()
-{
-    searchConfig->currentService = CGeoSearchConfig::eGeonamesAddress;
-    searchConfig->emitChanged();
-}
-
-void CGeoSearch::slotGoogleSelected()
-{
-    searchConfig->currentService = CGeoSearchConfig::eGoogle;
+    if(!checked)
+    {
+        return;
+    }
+    searchConfig->currentService = service;
     searchConfig->emitChanged();
 }
 
@@ -177,38 +136,43 @@ void CGeoSearch::slotStartSearch()
 
     switch(searchConfig->currentService)
     {
-    case CGeoSearchConfig::eNone:
+    case CGeoSearchConfig::eServiceNone:
     {
         this->createErrorItem(tr("no service configured - please click setup-icon in search-field"));
         setExpanded(true);
         break;
     }
-    case CGeoSearchConfig::eGoogle:
+
+    case CGeoSearchConfig::eServiceGoogle:
     {
         requestGoogle(addr);
         edit->setEnabled(false);
         break;
     }
-    case CGeoSearchConfig::eGeonamesSearch:
+
+    case CGeoSearchConfig::eServiceGeonamesSearch:
     {
         requestGeonamesSearch(addr);
         edit->setEnabled(false);
         break;
     }
-    case CGeoSearchConfig::eGeonamesAddress:
+
+    case CGeoSearchConfig::eServiceGeonamesAddress:
     {
         requestGeonamesAddress(addr);
         edit->setEnabled(false);
         break;
     }
-    case CGeoSearchConfig::eNominatim:
+
+    case CGeoSearchConfig::eServiceNominatim:
     {
         requestNominatim(addr);
         edit->setEnabled(false);
         break;
     }
+
     default:
-        searchConfig->currentService = CGeoSearchConfig::eNone;
+        searchConfig->currentService = CGeoSearchConfig::eServiceNone;
     }
 }
 
@@ -226,7 +190,7 @@ void CGeoSearch::slotRequestFinished(QNetworkReply* reply)
     }
 
     QByteArray data = reply->readAll();
-    CGeoSearchConfig::search_service_e service = CGeoSearchConfig::search_service_e(reply->property("service").toInt());
+    CGeoSearchConfig::service_e service = CGeoSearchConfig::service_e(reply->property("service").toInt());
 
     reply->deleteLater();
 
@@ -238,26 +202,30 @@ void CGeoSearch::slotRequestFinished(QNetworkReply* reply)
 
     switch(service)
     {
-    case CGeoSearchConfig::eGoogle:
+    case CGeoSearchConfig::eServiceGoogle:
     {
-        this->parseGoogle(data);
+        parseGoogle(data);
         break;
     }
-    case CGeoSearchConfig::eGeonamesSearch:
+
+    case CGeoSearchConfig::eServiceGeonamesSearch:
     {
-        this->parseGeonamesSearch(data);
+        parseGeonamesSearch(data);
         break;
     }
-    case CGeoSearchConfig::eGeonamesAddress:
+
+    case CGeoSearchConfig::eServiceGeonamesAddress:
     {
-        this->parseGeonamesAddress(data);
+        parseGeonamesAddress(data);
         break;
     }
-    case CGeoSearchConfig::eNominatim:
+
+    case CGeoSearchConfig::eServiceNominatim:
     {
-        this->parseNominatim(data);
+        parseNominatim(data);
         break;
     }
+
     default:
     {
         createErrorItem(tr("unexpected service-identifier %1").arg(service));
@@ -286,7 +254,7 @@ void CGeoSearch::requestGoogle(QString& addr) const
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eGoogle));
+    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGoogle));
 }
 
 void CGeoSearch::requestGeonamesSearch(QString& addr) const
@@ -305,7 +273,7 @@ void CGeoSearch::requestGeonamesSearch(QString& addr) const
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eGeonamesSearch));
+    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGeonamesSearch));
 }
 
 void CGeoSearch::requestGeonamesAddress(QString& addr) const
@@ -324,7 +292,7 @@ void CGeoSearch::requestGeonamesAddress(QString& addr) const
     QNetworkRequest request;
     request.setUrl(url);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eGeonamesAddress));
+    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceGeonamesAddress));
 }
 
 void CGeoSearch::requestNominatim(QString& addr) const
@@ -353,7 +321,7 @@ void CGeoSearch::requestNominatim(QString& addr) const
     request.setUrl(url);
     request.setHeader(QNetworkRequest::UserAgentHeader, userAgent);
     QNetworkReply* reply = networkAccessManager->get(request);
-    reply->setProperty("service",QVariant(CGeoSearchConfig::eNominatim));
+    reply->setProperty("service",QVariant(CGeoSearchConfig::eServiceNominatim));
 }
 
 void CGeoSearch::parseGoogle(const QByteArray& data)
@@ -786,7 +754,6 @@ void CGeoSearch::createErrorItem(const QString& status)
     item->setText(CGisListWks::eColumnName, status);
     item->setToolTip(CGisListWks::eColumnName, status);
     item->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
-    return;
 }
 
 void CGeoSearch::slotConfigChanged()

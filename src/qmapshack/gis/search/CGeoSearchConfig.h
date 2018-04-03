@@ -27,13 +27,13 @@ class CGeoSearchConfig : public QObject
 {
     Q_OBJECT
 public:
-    enum search_service_e
+    enum service_e
     {
-        eNone,
-        eGoogle,
-        eGeonamesSearch,
-        eGeonamesAddress,
-        eNominatim
+        eServiceNone,
+        eServiceGoogle,
+        eServiceGeonamesSearch,
+        eServiceGeonamesAddress,
+        eServiceNominatim
     };
 
     CGeoSearchConfig(QObject* parent);
@@ -48,7 +48,7 @@ signals:
     void sigConfigChanged() const;
 
 private:
-    search_service_e currentService;
+    service_e currentService;
     QString googleApiKey;
     QString geonamesUsername;
     QString nominatimEmail;

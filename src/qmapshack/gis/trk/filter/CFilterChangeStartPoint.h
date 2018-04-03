@@ -31,7 +31,7 @@ public:
     CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterChangeStartPoint() = default;
 
-    void update();
+    void updateUi();
 
 private slots:
     void slotApply();

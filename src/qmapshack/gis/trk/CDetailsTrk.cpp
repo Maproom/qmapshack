@@ -195,6 +195,8 @@ CDetailsTrk::~CDetailsTrk()
     saveGraphSource(comboGraph2, 2);
     saveGraphSource(comboGraph3, 3);
 
+    // Note: Maybe we have a race condition here.
+    // Usually the QPointer to "dlgDetails" should be cleared if the object is destroyed.
     trk.clearDlgDetails();
 }
 
@@ -478,7 +480,7 @@ void CDetailsTrk::updateData()
     CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
     if(nullptr != filterSpeed)
     {
-        filterSpeed->setElevationValid();
+        filterSpeed->updateUi();
     }
 
     CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");

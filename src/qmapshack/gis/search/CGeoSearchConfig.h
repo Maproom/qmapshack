@@ -53,6 +53,7 @@ private:
     QString geonamesUsername;
     QString nominatimEmail;
     QString symbolName;
+    int nominatimLimit;
 
     void emitChanged() const;
 

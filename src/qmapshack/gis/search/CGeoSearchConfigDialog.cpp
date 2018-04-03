@@ -28,9 +28,13 @@ CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig
 
     this->searchConfig = searchConfig;
 
-    this->lineGoogleKey->setText(searchConfig->googleApiKey);
-    this->lineGeonamesLogin->setText(searchConfig->geonamesUsername);
-    this->lineNominatimEmail->setText(searchConfig->nominatimEmail);
+    lineGoogleKey->setText(searchConfig->googleApiKey);
+    lineGeonamesLogin->setText(searchConfig->geonamesUsername);
+    lineNominatimEmail->setText(searchConfig->nominatimEmail);
+
+    QString limit;
+    limit.setNum(searchConfig->nominatimLimit);
+    lineNominatimLimit->setText(limit);
 }
 
 void CGeoSearchConfigDialog::slotAccepted()
@@ -38,53 +42,11 @@ void CGeoSearchConfigDialog::slotAccepted()
     searchConfig->googleApiKey = lineGoogleKey->text();
     searchConfig->geonamesUsername = lineGeonamesLogin->text();
     searchConfig->nominatimEmail = lineNominatimEmail->text();
-    switch(searchConfig->currentService)
-    {
-    case CGeoSearchConfig::eNone:
-        break;
-    case CGeoSearchConfig::eNominatim:
-    {
-        if (searchConfig->nominatimEmail.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eNone;
-        }
-        break;
-    }
-    case CGeoSearchConfig::eGeonamesSearch:
-    case CGeoSearchConfig::eGeonamesAddress:
-    {
-        if (searchConfig->geonamesUsername.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eNone;
-        }
-        break;
-    }
-    case CGeoSearchConfig::eGoogle:
-    {
-        if (searchConfig->googleApiKey.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eNone;
-        }
-        break;
-    }
-    default:
-        searchConfig->currentService = CGeoSearchConfig::eNone;
-    }
-    if (searchConfig->currentService == CGeoSearchConfig::eNone)
-    {
-        if (!searchConfig->nominatimEmail.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eNominatim;
-        }
-        else if (!searchConfig->geonamesUsername.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eGeonamesSearch;
-        }
-        else if (!searchConfig->googleApiKey.isEmpty())
-        {
-            searchConfig->currentService = CGeoSearchConfig::eGoogle;
-        }
-    }
+
+    bool conversionOk;
+    int limit = lineNominatimLimit->text().toInt(&conversionOk);
+    searchConfig->nominatimLimit = (conversionOk && limit > 0) ? limit : 10;
+
     searchConfig->emitChanged();
     accept();
 }

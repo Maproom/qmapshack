@@ -496,14 +496,16 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     qint64 deltaStart = qint64(oldTimeStart.toUTC().toTime_t()) - qint64(newTimeStart.toUTC().toTime_t());
     qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toTime_t()) - qint64(newTimeEnd.toUTC().toTime_t());
 
-    for (qint32 i = idxNewStartPoint; i < pts.size(); ++i) // Adjust new Start to End
+    for (qint32 i = 0; i < pts.size(); ++i)
     {
-        pts[i].time = pts[i].time.addSecs(deltaStart);
-    }
-
-    for (qint32 i = 0; i < idxNewStartPoint; ++i) // Adjust old Start to new Start
-    {
-        pts[i].time = pts[i].time.addSecs(deltaEnd);
+       if (i < idxNewStartPoint)
+       {
+           pts[i].time = pts[i].time.addSecs(deltaEnd); // Adjust old Start to new Start
+       }
+       else
+       {
+           pts[i].time = pts[i].time.addSecs(deltaStart); // Adjust new Start to End
+       }
     }
 
     for (qint32 i = 0; i < idxNewStartPoint; ++i) // Reorder points

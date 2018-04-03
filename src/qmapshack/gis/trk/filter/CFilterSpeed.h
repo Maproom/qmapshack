@@ -31,7 +31,7 @@ public:
     CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
     virtual ~CFilterSpeed();
 
-    void setElevationValid();
+    void updateUi();
 
     struct cycling_type_t
     {

@@ -305,7 +305,11 @@ public:
     /// set the width of the inner track line by factor
     bool setMode(mode_e m, const QString &owner);
     const mode_e getMode() const { return mode; }
+
+    // Note: Maybe we have a race condition here.
+    // Usually the QPointer to "dlgDetails" should be cleared if the object is destroyed.
     void clearDlgDetails() { dlgDetails.clear(); }
+
     void setComment(const QString& str)         override;
     void setDescription(const QString& str)     override;
     void setLinks(const QList<link_t>& links)   override;

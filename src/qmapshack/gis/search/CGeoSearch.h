@@ -1,5 +1,6 @@
 /**********************************************************************************************
     Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess <norbert.truchsess@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,10 +17,12 @@
 
 **********************************************************************************************/
 
-#ifndef CSEARCHGOOGLE_H
-#define CSEARCHGOOGLE_H
+#ifndef CGEOSEARCH_H
+#define CGEOSEARCH_H
 
+#include "config.h"
 #include "gis/prj/IGisProject.h"
+#include "gis/search/CGeoSearchConfig.h"
 
 #include <QNetworkAccessManager>
 #include <QObject>
@@ -27,24 +30,41 @@
 class CGisListWks;
 class QLineEdit;
 
-class CSearchGoogle : public QObject, public IGisProject
+
+class CGeoSearch : public QObject, public IGisProject
 {
     Q_OBJECT
 public:
-    CSearchGoogle(CGisListWks * parent);
-    virtual ~CSearchGoogle();
+    CGeoSearch(CGisListWks * parent);
+    virtual ~CGeoSearch();
 
 private slots:
     void slotChangeSymbol();
+    void slotSelectService();
+    void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
+    void slotSetupGeoSearch();
     void slotStartSearch();
     void slotRequestFinished(QNetworkReply* reply);
+    void slotConfigChanged();
 
 private:
+    QAction *addService(CGeoSearchConfig::service_e service, const QString &name, QMenu *menu);
+    void requestNominatim(QString& addr) const;
+    void requestGeonamesSearch(QString& addr) const;
+    void requestGeonamesAddress(QString& addr) const;
+    void requestGoogle(QString& addr) const;
+
+    void parseNominatim(const QByteArray& data);
+    void parseGeonamesSearch(const QByteArray& data);
+    void parseGeonamesAddress(const QByteArray& data);
+    void parseGoogle(const QByteArray& data);
+
+    void createErrorItem(const QString& status);
+
     QLineEdit * edit;
-
     QAction * actSymbol;
-
-    QNetworkAccessManager networkAccessManager;
+    QNetworkAccessManager* networkAccessManager;
+    CGeoSearchConfig* searchConfig;
 };
 
 #endif //CSEARCHGOOGLE_H

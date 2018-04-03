@@ -164,7 +164,7 @@ public:
     void removeEmptySegments();
 
     void readFrom(const SGisLine &l);
-    void readFrom(const QList<CTrackData::trkpt_t> &pts);
+    void readFrom(const QVector<trkpt_t> &pts);
     void getPolyline(SGisLine  &l) const;
     void getPolyline(QPolygonF &l) const;
     void getPolylineDeg(QPolygonF &l) const;

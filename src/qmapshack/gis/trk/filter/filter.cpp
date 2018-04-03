@@ -477,7 +477,7 @@ void CGisItemTrk::filterSubPt2Pt()
 
 void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
 {
-    QList<CTrackData::trkpt_t> pts;
+    QVector<CTrackData::trkpt_t> pts;
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -496,25 +496,26 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
     qint64 deltaStart = qint64(oldTimeStart.toUTC().toTime_t()) - qint64(newTimeStart.toUTC().toTime_t());
     qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toTime_t()) - qint64(newTimeEnd.toUTC().toTime_t());
 
-    for (qint32 i = idxNewStartPoint; i < pts.size(); ++i) // Adjust new Start to End
+    for (qint32 i = 0; i < pts.size(); ++i)
     {
-        pts[i].time = pts[i].time.addSecs(deltaStart);
-    }
-
-    for (qint32 i = 0; i < idxNewStartPoint; ++i) // Adjust old Start to new Start
-    {
-        pts[i].time = pts[i].time.addSecs(deltaEnd);
+       if (i < idxNewStartPoint)
+       {
+           pts[i].time = pts[i].time.addSecs(deltaEnd); // Adjust old Start to new Start
+       }
+       else
+       {
+           pts[i].time = pts[i].time.addSecs(deltaStart); // Adjust new Start to End
+       }
     }
 
     for (qint32 i = 0; i < idxNewStartPoint; ++i) // Reorder points
     {
-        pts.move(0, pts.size() - 1);
+        pts.insert(pts.size(), pts.takeAt(0));
     }
 
     trk.readFrom(pts);
 
     deriveSecondaryData();
-
 
     changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterChangeStartPoint.png");
 }

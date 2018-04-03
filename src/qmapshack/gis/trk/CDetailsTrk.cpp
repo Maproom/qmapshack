@@ -484,7 +484,7 @@ void CDetailsTrk::updateData()
     CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
     if(nullptr != filterChangeStartPoint)
     {
-        filterChangeStartPoint->update();
+        filterChangeStartPoint->updateUi();
     }
 
     originator = false;
@@ -513,7 +513,20 @@ void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrac
 
 void CDetailsTrk::enableTabFilter()
 {
-    tabWidget->widget(eTabFilter)->setEnabled(!trk.getMode());
+    if (trk.isReadOnly())
+    {
+        return;
+    }
+
+    switch(trk.getMode())
+    {
+    case CGisItemTrk::eModeNormal:
+        tabWidget->widget(eTabFilter)->setEnabled(true);
+        break;
+    case CGisItemTrk::eModeRange:
+        tabWidget->widget(eTabFilter)->setEnabled(false);
+        break;
+    }
 }
 
 void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)

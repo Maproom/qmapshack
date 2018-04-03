@@ -1,5 +1,4 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -26,7 +25,7 @@ CFilterChangeStartPoint::CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *pare
     , trk(trk)
 {
     setupUi(this);
-    update();
+    updateUi();
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterChangeStartPoint::slotApply);
 }
@@ -36,12 +35,12 @@ void CFilterChangeStartPoint::slotApply()
     CCanvas::setOverrideCursor(Qt::WaitCursor,"filterChangeStartPoint");
 
     trk.filterChangeStartPoint(comboBox->currentData().toInt(), comboBox->currentText());
-    update();
+    updateUi();
 
     CCanvas::restoreOverrideCursor("filterChangeStartPoint");
 }
 
-void CFilterChangeStartPoint::update()
+void CFilterChangeStartPoint::updateUi()
 {
     IGisProject *project = trk.getParentProject();
     if(nullptr == project)

@@ -1773,7 +1773,7 @@ void CGisListWks::slotGeoSearch(bool on)
     delete geoSearch;
     if(on)
     {
-        geoSearch = new CGeoSearch(this, CMainWindow::self().getGeoSearchConfig());
+        geoSearch = new CGeoSearch(this);
     }
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);

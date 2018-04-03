@@ -35,9 +35,8 @@ public:
         eServiceGeonamesAddress,
         eServiceNominatim
     };
-
-    CGeoSearchConfig(QObject* parent);
-    virtual ~CGeoSearchConfig();
+    static CGeoSearchConfig& self(){return *pSelf; }
+    virtual ~CGeoSearchConfig() = default;
 
     void load();
     void save() const;
@@ -48,6 +47,11 @@ signals:
     void sigConfigChanged() const;
 
 private:
+    CGeoSearchConfig(QObject* parent);
+    void emitChanged() const;
+
+    static CGeoSearchConfig * pSelf;
+
     service_e currentService;
     QString googleApiKey;
     QString geonamesUsername;
@@ -55,10 +59,10 @@ private:
     QString symbolName;
     int nominatimLimit;
 
-    void emitChanged() const;
 
     friend class CGeoSearchConfigDialog;
     friend class CGeoSearch;
+    friend class CMainWindow;
 };
 
 #endif

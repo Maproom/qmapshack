@@ -76,11 +76,6 @@ public:
         return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : "";
     }
 
-    CGeoSearchConfig* getGeoSearchConfig()
-    {
-        return geoSearchConfig;
-    }
-
     static QString getUser();
 
     virtual ~CMainWindow();

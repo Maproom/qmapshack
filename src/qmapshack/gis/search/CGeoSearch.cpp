@@ -38,11 +38,10 @@
 using std::bind;
 
 
-CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
+CGeoSearch::CGeoSearch(CGisListWks * parent)
     : IGisProject(eTypeGeoSearch, "", parent)
+    , searchConfig(&CGeoSearchConfig::self())
 {
-    searchConfig = config;
-
     networkAccessManager = new QNetworkAccessManager(this);
 
     QPointF focus;
@@ -51,9 +50,11 @@ CGeoSearch::CGeoSearch(CGisListWks * parent, CGeoSearchConfig* config)
     parent->insertTopLevelItem(0, this);
 
     edit = new QLineEdit(parent);
-    actSymbol = edit->addAction(getWptIconByName(config->symbolName, focus), QLineEdit::TrailingPosition);
-    actSymbol->setObjectName(config->symbolName);
+
+    actSymbol = edit->addAction(getWptIconByName(searchConfig->symbolName, focus), QLineEdit::TrailingPosition);
+    actSymbol->setObjectName(searchConfig->symbolName);
     connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
+
     QAction* actSetup = edit->addAction(QIcon("://icons/32x32/Apply.png"), QLineEdit::LeadingPosition);
     actSetup->setToolTip(tr("Setup Search"));
     connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSelectService);

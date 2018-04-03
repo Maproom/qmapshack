@@ -35,7 +35,7 @@ class CGeoSearch : public QObject, public IGisProject
 {
     Q_OBJECT
 public:
-    CGeoSearch(CGisListWks * parent, CGeoSearchConfig *config);
+    CGeoSearch(CGisListWks * parent);
     virtual ~CGeoSearch();
 
 private slots:

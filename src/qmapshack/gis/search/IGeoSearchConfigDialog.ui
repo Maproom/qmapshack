@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
-    <height>426</height>
+    <width>473</width>
+    <height>463</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,6 +70,33 @@
          <string>please specify a valid email-address</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <item>
+         <spacer name="horizontalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="labelNominatimLimit">
+          <property name="text">
+           <string>maximum number of results (default is 10):</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineNominatimLimit"/>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

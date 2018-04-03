@@ -34,7 +34,7 @@ void CGeoSearchConfig::load()
     SETTINGS;
     cfg.beginGroup("Search");
     symbolName = cfg.value("symbol","Default").toString();
-    currentService = search_service_e(cfg.value("current",eNone).toInt());
+    currentService = search_service_e(cfg.value("current",eNominatim).toInt());
     cfg.beginGroup("google");
     googleApiKey = cfg.value("key","").toString();
     cfg.endGroup();
@@ -43,6 +43,7 @@ void CGeoSearchConfig::load()
     cfg.endGroup();
     cfg.beginGroup("nominatim");
     nominatimEmail = cfg.value("email","").toString();
+    nominatimLimit = cfg.value("limit",10).toInt();
     cfg.endGroup();
     cfg.endGroup();
     emit sigConfigChanged();
@@ -62,6 +63,7 @@ void CGeoSearchConfig::save() const
     cfg.endGroup();
     cfg.beginGroup("nominatim");
     cfg.setValue("email",nominatimEmail);
+    cfg.setValue("limit",nominatimLimit);
     cfg.endGroup();
     cfg.endGroup();
 }
@@ -87,7 +89,7 @@ const QIcon CGeoSearchConfig::getCurrentIcon() const
         break;
     }
     default:
-        return QIcon("://icons/32x32/CSrcUnknown.png");
+        return QIcon("://icons/32x32/Zoom.png");
     }
 }
 

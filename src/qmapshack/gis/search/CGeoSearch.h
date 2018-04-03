@@ -54,9 +54,19 @@ private:
 
     QAction * actSymbol;
 
-    QNetworkAccessManager networkAccessManager;
+    QNetworkAccessManager* networkAccessManager;
 
     CGeoSearchConfig* searchConfig;
+
+    void requestNominatim(QString& addr) const;
+    void requestGeonamesSearch(QString& addr) const;
+    void requestGeonamesAddress(QString& addr) const;
+    void requestGoogle(QString& addr) const;
+
+    void parseNominatim(const QByteArray& data);
+    void parseGeonamesSearch(const QByteArray& data);
+    void parseGeonamesAddress(const QByteArray& data);
+    void parseGoogle(const QByteArray& data);
 
     void createErrorItem(const QString& status);
 };

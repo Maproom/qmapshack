@@ -21,8 +21,8 @@
 #define CMAINWINDOW_H
 
 #include "ui_IMainWindow.h"
-#include <QMainWindow>
 #include <QDir>
+#include <QMainWindow>
 
 class CMapList;
 class CDemList;
@@ -194,7 +194,7 @@ private:
     void showDocks() const;
     void hideDocks();
     void displayRegular();
-    void displayFullscreen();    
+    void displayFullscreen();
     CCanvas * addView(const QString &name);
     void setupHomePath();
 

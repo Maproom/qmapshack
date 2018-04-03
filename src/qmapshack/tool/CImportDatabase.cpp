@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "qlgt/CQlgtDb.h"
 #include "tool/CImportDatabase.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 
@@ -93,7 +93,7 @@ void CImportDatabase::slotSelectSource()
 
 void CImportDatabase::slotSelectTarget()
 {
-    SETTINGS;            
+    SETTINGS;
     QString path = CMainWindow::self().getDatabasePath();
     if(path.isEmpty())
     {

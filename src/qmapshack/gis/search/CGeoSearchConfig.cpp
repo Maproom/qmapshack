@@ -21,13 +21,13 @@
 #include "helpers/CSettings.h"
 #include <QIcon>
 
+CGeoSearchConfig * CGeoSearchConfig::pSelf = nullptr;
+
 CGeoSearchConfig::CGeoSearchConfig(QObject *parent) : QObject(parent)
 {
+    pSelf = this;
 }
 
-CGeoSearchConfig::~CGeoSearchConfig()
-{
-}
 
 void CGeoSearchConfig::load()
 {

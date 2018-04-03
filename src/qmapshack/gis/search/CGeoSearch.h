@@ -20,15 +20,16 @@
 #ifndef CGEOSEARCH_H
 #define CGEOSEARCH_H
 
-#include "gis/prj/IGisProject.h"
 #include "config.h"
+#include "gis/prj/IGisProject.h"
+#include "gis/search/CGeoSearchConfig.h"
 
 #include <QNetworkAccessManager>
 #include <QObject>
 
 class CGisListWks;
 class QLineEdit;
-class CGeoSearchConfig;
+
 
 class CGeoSearch : public QObject, public IGisProject
 {
@@ -40,24 +41,14 @@ public:
 private slots:
     void slotChangeSymbol();
     void slotSelectService();
-    void slotNominatimSelected();
-    void slotGeonamesSearchSelected();
-    void slotGeonamesAddressSelected();
-    void slotGoogleSelected();
+    void slotServiceSelected(CGeoSearchConfig::service_e service, bool checked);
     void slotSetupGeoSearch();
     void slotStartSearch();
     void slotRequestFinished(QNetworkReply* reply);
     void slotConfigChanged();
 
 private:
-    QLineEdit * edit;
-
-    QAction * actSymbol;
-
-    QNetworkAccessManager* networkAccessManager;
-
-    CGeoSearchConfig* searchConfig;
-
+    QAction *addService(CGeoSearchConfig::service_e service, const QString &name, QMenu *menu);
     void requestNominatim(QString& addr) const;
     void requestGeonamesSearch(QString& addr) const;
     void requestGeonamesAddress(QString& addr) const;
@@ -69,6 +60,11 @@ private:
     void parseGoogle(const QByteArray& data);
 
     void createErrorItem(const QString& status);
+
+    QLineEdit * edit;
+    QAction * actSymbol;
+    QNetworkAccessManager* networkAccessManager;
+    CGeoSearchConfig* searchConfig;
 };
 
 #endif //CSEARCHGOOGLE_H

@@ -91,7 +91,7 @@ void CMapDraw::setupMapPath(const QString &path)
 {
     QStringList paths(mapPaths);
     if(!mapPaths.contains(path))
-    {                
+    {
         paths << path;
     }
     setupMapPath(paths);
@@ -286,7 +286,7 @@ void CMapDraw::loadConfig(QSettings& cfg) /* override */
 }
 
 CMapItem * CMapDraw::createMapItem(const QString& filename, QSet<QString>& maps)
-{       
+{
     CMapItem * item = new CMapItem(*mapList, this);
 
     QFileInfo fi(filename);

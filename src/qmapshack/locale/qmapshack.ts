@@ -920,6 +920,74 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
 </context>
 <context>
+    <name>CGeoSearch</name>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="59"/>
+        <source>Setup Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="87"/>
+        <source>Select Service</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="91"/>
+        <source>OSM Nominatim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="92"/>
+        <source>Geonames Places</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="93"/>
+        <source>Geonames Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="94"/>
+        <source>Google</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="97"/>
+        <source>Configure Services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="98"/>
+        <source>configure providers of geocoding search services</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="142"/>
+        <source>no service configured - please click setup-icon in search-field</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="232"/>
+        <source>unexpected service-identifier %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="339"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="391"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="471"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="621"/>
+        <source>Unknown response</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="347"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="399"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="479"/>
+        <source>Error: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>CGisItemOvlArea</name>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="36"/>
@@ -1738,248 +1806,248 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGisListWks</name>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="107"/>
+        <location filename="../gis/CGisListWks.cpp" line="108"/>
         <source>Edit..</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="110"/>
         <source>Show on Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="110"/>
+        <location filename="../gis/CGisListWks.cpp" line="111"/>
         <source>Hide from Map</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="115"/>
+        <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Sort by Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="117"/>
         <source>Sort by Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="123"/>
+        <location filename="../gis/CGisListWks.cpp" line="124"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="125"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="128"/>
+        <location filename="../gis/CGisListWks.cpp" line="129"/>
         <source>Send to Devices</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="129"/>
+        <location filename="../gis/CGisListWks.cpp" line="130"/>
         <source>Sync. with Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="132"/>
+        <location filename="../gis/CGisListWks.cpp" line="133"/>
         <source>Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="141"/>
+        <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Update Project on Device</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
-        <location filename="../gis/CGisListWks.cpp" line="170"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="156"/>
         <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="108"/>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="109"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Copy to...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="119"/>
+        <location filename="../gis/CGisListWks.cpp" line="120"/>
         <source>Autom. Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="125"/>
         <source>Save as...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Track Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="160"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Select Range</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Edit Track Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Reverse Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Combine Tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Copy Track with Waypoints</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
-        <location filename="../gis/CGisListWks.cpp" line="200"/>
+        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="201"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="178"/>
         <source>Show Bubble</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="180"/>
         <source>Move Waypoint</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="180"/>
+        <location filename="../gis/CGisListWks.cpp" line="181"/>
         <source>Proj. Waypoint...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Change Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="183"/>
-        <location filename="../gis/CGisListWks.cpp" line="211"/>
+        <location filename="../gis/CGisListWks.cpp" line="184"/>
+        <location filename="../gis/CGisListWks.cpp" line="212"/>
         <source>Toggle Nogo-Area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
+        <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Delete Radius</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="193"/>
+        <location filename="../gis/CGisListWks.cpp" line="194"/>
         <source>Route Instructions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="195"/>
+        <location filename="../gis/CGisListWks.cpp" line="196"/>
         <source>Calculate Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="196"/>
+        <location filename="../gis/CGisListWks.cpp" line="197"/>
         <source>Reset Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="198"/>
         <source>Edit Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="198"/>
+        <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Reverse Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="200"/>
         <source>Convert to Track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="210"/>
+        <location filename="../gis/CGisListWks.cpp" line="211"/>
         <source>Edit Area Points</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="219"/>
+        <location filename="../gis/CGisListWks.cpp" line="220"/>
         <source>Create Route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="220"/>
+        <location filename="../gis/CGisListWks.cpp" line="221"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Set Track Color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="654"/>
+        <location filename="../gis/CGisListWks.cpp" line="655"/>
         <source>Drop items...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="679"/>
-        <location filename="../gis/CGisListWks.cpp" line="1828"/>
-        <location filename="../gis/CGisListWks.cpp" line="1866"/>
+        <location filename="../gis/CGisListWks.cpp" line="680"/>
+        <location filename="../gis/CGisListWks.cpp" line="1831"/>
+        <location filename="../gis/CGisListWks.cpp" line="1869"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="805"/>
+        <location filename="../gis/CGisListWks.cpp" line="806"/>
         <source>Saving workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="851"/>
+        <location filename="../gis/CGisListWks.cpp" line="852"/>
         <source>Loading workspace. Please wait.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1253"/>
+        <location filename="../gis/CGisListWks.cpp" line="1256"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1253"/>
+        <location filename="../gis/CGisListWks.cpp" line="1256"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1279"/>
+        <location filename="../gis/CGisListWks.cpp" line="1282"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1279"/>
+        <location filename="../gis/CGisListWks.cpp" line="1282"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2481,59 +2549,59 @@ line %2, column %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="543"/>
+        <location filename="../CMainWindow.cpp" line="551"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="933"/>
+        <location filename="../CMainWindow.cpp" line="941"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1062"/>
+        <location filename="../CMainWindow.cpp" line="1070"/>
         <source>Ele.: %1%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1074"/>
+        <location filename="../CMainWindow.cpp" line="1082"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1090"/>
+        <location filename="../CMainWindow.cpp" line="1098"/>
         <source>[Grid: %1]</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1231"/>
+        <location filename="../CMainWindow.cpp" line="1239"/>
         <source>Load GIS Data...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1265"/>
+        <location filename="../CMainWindow.cpp" line="1273"/>
         <source>Select output file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1265"/>
-        <location filename="../CMainWindow.cpp" line="1291"/>
+        <location filename="../CMainWindow.cpp" line="1273"/>
+        <location filename="../CMainWindow.cpp" line="1299"/>
         <source>QMapShack View (*.view)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1291"/>
+        <location filename="../CMainWindow.cpp" line="1299"/>
         <source>Select file to load</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1691"/>
+        <location filename="../CMainWindow.cpp" line="1703"/>
         <source>Fatal...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1692"/>
+        <location filename="../CMainWindow.cpp" line="1704"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4974,19 +5042,6 @@ is not a valid coordinate system definition:
     </message>
 </context>
 <context>
-    <name>CSearchGoogle</name>
-    <message>
-        <location filename="../gis/search/CSearchGoogle.cpp" line="118"/>
-        <source>Unknown response</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/search/CSearchGoogle.cpp" line="128"/>
-        <source>Error: </source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>CSetupDatabase</name>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="47"/>
@@ -7233,6 +7288,52 @@ I don&apos;t want to read the documentation!</source>
     </message>
 </context>
 <context>
+    <name>IGeoSearchConfigDialog</name>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
+        <source>Setup Geo-Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="44"/>
+        <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="70"/>
+        <source>please specify a valid email-address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="92"/>
+        <source>maximum number of results (default is 10):</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="151"/>
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="164"/>
+        <source>enter geonames username here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="201"/>
+        <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="227"/>
+        <source>enter Google API-key here</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IGisDatabase</name>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
@@ -7871,7 +7972,7 @@ Filename: %1</source>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="562"/>
-        <source>Search Google</source>
+        <source>Geosearch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

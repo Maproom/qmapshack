@@ -21,7 +21,6 @@
 CDemWCS::CDemWCS(const QString &filename, CDemDraw *parent)
     : CDemVRT(filename, parent)
 {
-
 }
 
 

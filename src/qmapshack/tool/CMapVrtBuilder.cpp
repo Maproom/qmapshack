@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "tool/CMapVrtBuilder.h"
-#include "helpers/CSettings.h"
 #include "CMainWindow.h"
+#include "helpers/CSettings.h"
+#include "tool/CMapVrtBuilder.h"
 
 #include <QtWidgets>
 
@@ -98,7 +98,7 @@ void CMapVrtBuilder::slotSelectSourceFiles()
 
 void CMapVrtBuilder::slotSelectTargetFile()
 {
-    SETTINGS;  
+    SETTINGS;
     QString path = CMainWindow::self().getMapsPath();
     if(path.isEmpty())
     {

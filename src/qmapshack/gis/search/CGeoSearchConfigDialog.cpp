@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchConfigDialog.h"
 
 CGeoSearchConfigDialog::CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig *searchConfig) : QDialog(parent)
 {

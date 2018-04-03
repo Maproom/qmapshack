@@ -1,5 +1,4 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -32,7 +31,7 @@ public:
     CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
     virtual ~CFilterChangeStartPoint() = default;
 
-    void update();
+    void updateUi();
 
 private slots:
     void slotApply();

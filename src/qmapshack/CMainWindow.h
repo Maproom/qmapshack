@@ -21,8 +21,8 @@
 #define CMAINWINDOW_H
 
 #include "ui_IMainWindow.h"
-#include <QMainWindow>
 #include <QDir>
+#include <QMainWindow>
 
 class CMapList;
 class CDemList;
@@ -31,6 +31,7 @@ class CGisWorkspace;
 class CGisDatabase;
 class CRtWorkspace;
 class CCanvas;
+class CGeoSearchConfig;
 class CToolBarConfig;
 struct SGisLine;
 
@@ -74,7 +75,6 @@ public:
     {
         return homeDir.exists(gpxPath) ? homeDir.absoluteFilePath(gpxPath) : "";
     }
-
 
     static QString getUser();
 
@@ -183,6 +183,7 @@ private slots:
     void slotDockVisibilityChanged(bool visible);
     void slotFullScreen();
     void slotStartQMapTool();
+    void slotGeoSearchConfigChanged();
 
 private:
     friend int main(int argc, char ** argv);
@@ -193,7 +194,7 @@ private:
     void showDocks() const;
     void hideDocks();
     void displayRegular();
-    void displayFullscreen();    
+    void displayFullscreen();
     CCanvas * addView(const QString &name);
     void setupHomePath();
 
@@ -221,6 +222,7 @@ private:
     CRtWorkspace * widgetRtWorkspace;
 
     CToolBarConfig * toolBarConfig;
+    CGeoSearchConfig * geoSearchConfig;
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;

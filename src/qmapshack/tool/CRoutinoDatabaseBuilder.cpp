@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 #include "tool/CRoutinoDatabaseBuilder.h"
-#include "CMainWindow.h"
 
 #include <QtWidgets>
 

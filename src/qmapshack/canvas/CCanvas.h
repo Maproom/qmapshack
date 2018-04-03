@@ -165,7 +165,7 @@ public:
        @brief Set a single map file to be shown on the canvas
 
        @param filename   the map's file path, can be a resource, too
-    */
+     */
     void setMap(const QString& filename);
 
     static qreal gisLayerOpacity;
@@ -205,7 +205,7 @@ private:
     void setZoom(bool in, redraw_e &needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
-    void setDrawContextSize(const QSize& s);    
+    void setDrawContextSize(const QSize& s);
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content

@@ -31,6 +31,7 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
+#include "gis/search/CGeoSearchConfig.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -234,6 +235,7 @@ CMainWindow::CMainWindow()
     CCanvas::gisLayerOpacity = cfg.value("gisLayerOpacity",1.0).toFloat();
     widgetGisWorkspace->setOpacity(CCanvas::gisLayerOpacity);
 
+    actionGeoSearch->setChecked(cfg.value("isGeosearchVisible", false).toBool());
     actionShowScale->setChecked(cfg.value("isScaleVisible", true).toBool());
     actionShowGrid->setChecked(cfg.value("isGridVisible", false).toBool());
     actionPOIText->setChecked(cfg.value("POIText", true).toBool());
@@ -351,7 +353,7 @@ CMainWindow::CMainWindow()
                      << actionSaveGISData
                      << actionSetupTimeZone
                      << actionAddEmptyProject
-                     << actionSearchGoogle
+                     << actionGeoSearch
                      << actionCloseAllProjects
                      << actionSetupUnits
                      << actionSetupWorkspace
@@ -386,7 +388,7 @@ CMainWindow::CMainWindow()
     separator1->setObjectName("separator");
 
     QList<QAction *> defaultActions;
-    defaultActions << actionSearchGoogle
+    defaultActions << actionGeoSearch
                    << actionAddEmptyProject
                    << actionLoadGISData
                    << actionSaveGISData
@@ -411,6 +413,10 @@ CMainWindow::CMainWindow()
 
     toolBarConfig = new CToolBarConfig(this, toolBar, availableActions, defaultActions);
     toolBarConfig->loadSettings();
+
+    geoSearchConfig = new CGeoSearchConfig(this);
+    connect(geoSearchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CMainWindow::slotGeoSearchConfigChanged);
+    geoSearchConfig->load();
 
     prepareMenuForMac();
 
@@ -494,6 +500,7 @@ CMainWindow::~CMainWindow()
 
     cfg.setValue("gisLayerOpacity", CCanvas::gisLayerOpacity);
     cfg.setValue("visibleCanvas", tabWidget->currentIndex());
+    cfg.setValue("isGeosearchVisible", actionGeoSearch->isChecked());
     cfg.setValue("isScaleVisible", actionShowScale->isChecked());
     cfg.setValue("isGridVisible", actionShowGrid->isChecked());
     cfg.setValue("POIText", actionPOIText->isChecked());
@@ -534,6 +541,7 @@ CMainWindow::~CMainWindow()
     cfg.setValue("Units/slopeMode", IUnit::getSlopeMode());
 
     toolBarConfig->saveSettings();
+    geoSearchConfig->save();
 }
 
 void CMainWindow::setupHomePath()
@@ -1433,7 +1441,6 @@ void CMainWindow::slotSetupWptIcons()
     dlg.exec();
 }
 
-
 void CMainWindow::slotCloseTab()
 {
     CCanvas * canvas = dynamic_cast<CCanvas*>(tabWidget->currentWidget());
@@ -1547,6 +1554,11 @@ void CMainWindow::slotFullScreen()
 void CMainWindow::slotStartQMapTool()
 {
     QProcess::startDetached("qmaptool");
+}
+
+void CMainWindow::slotGeoSearchConfigChanged()
+{
+    actionGeoSearch->setIcon(geoSearchConfig->getCurrentIcon());
 }
 
 void CMainWindow::displayRegular()

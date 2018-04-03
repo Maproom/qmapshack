@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Norbert Truchsess <norbert.truchsess@t-online.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,17 +16,23 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMWCS_H
-#define CDEMWCS_H
+#ifndef CGEOSEARCHCONFIGDIALOG_H
+#define CGEOSEARCHCONFIGDIALOG_H
 
-#include "dem/CDemVRT.h"
+#include "ui_IGeoSearchConfigDialog.h"
 
-class CDemWCS : public CDemVRT
+class CGeoSearchConfig;
+
+class CGeoSearchConfigDialog : public QDialog, Ui_IGeoSearchConfigDialog
 {
 public:
-    CDemWCS(const QString& filename, CDemDraw *parent);
-    virtual ~CDemWCS() = default;
+    CGeoSearchConfigDialog(QWidget* parent, CGeoSearchConfig* searchConfig);
+
+private slots:
+    void slotAccepted();
+
+private:
+    CGeoSearchConfig* searchConfig;
 };
 
-#endif //CDEMWCS_H
-
+#endif

@@ -37,7 +37,7 @@ public slots:
 private slots:
     void slotApply();
 
-private:    
+private:
     CGisItemTrk& trk;
 };
 

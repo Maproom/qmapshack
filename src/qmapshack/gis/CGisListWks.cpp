@@ -46,7 +46,8 @@
 #include "gis/qlb/CQlbProject.h"
 #include "gis/qms/CQmsProject.h"
 #include "gis/rte/CGisItemRte.h"
-#include "gis/search/CSearchGoogle.h"
+#include "gis/search/CGeoSearch.h"
+#include "gis/search/CGeoSearchConfig.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/suunto/CLogProject.h"
 #include "gis/suunto/CSmlProject.h"
@@ -374,7 +375,7 @@ void CGisListWks::setExternalMenu(QMenu * project)
     menuNone = project;
     connect(CMainWindow::self().findChild<QAction*>("actionAddEmptyProject"),  &QAction::triggered, this, &CGisListWks::slotAddEmptyProject);
     connect(CMainWindow::self().findChild<QAction*>("actionCloseAllProjects"), &QAction::triggered, this, &CGisListWks::slotCloseAllProjects);
-    connect(CMainWindow::self().findChild<QAction*>("actionSearchGoogle"),     &QAction::triggered, this, &CGisListWks::slotSearchGoogle);
+    connect(CMainWindow::self().findChild<QAction*>("actionGeoSearch"),     &QAction::triggered, this, &CGisListWks::slotGeoSearch);
 }
 
 QAction * CGisListWks::addSortAction(QMenu * menu, QActionGroup * actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode)
@@ -973,6 +974,8 @@ void CGisListWks::slotLoadWorkspace()
         }
     }
 
+    slotGeoSearch(static_cast<QAction*>(CMainWindow::self().findChild<QAction*>("actionGeoSearch"))->isChecked());
+
     emit sigChanged();
 }
 
@@ -1231,9 +1234,9 @@ static void closeProjects(const QList<QTreeWidgetItem*> &items)
                 break;
             }
 
-            if(IGisProject::eTypeGoogle == project->getType())
+            if(IGisProject::eTypeGeoSearch == project->getType())
             {
-                CMainWindow::self().findChild<QAction*>("actionSearchGoogle")->setChecked(false);
+                CMainWindow::self().findChild<QAction*>("actionGeoSearch")->setChecked(false);
             }
             delete project;
         }
@@ -1763,14 +1766,14 @@ void CGisListWks::slotAddEmptyProject()
     }
 }
 
-void CGisListWks::slotSearchGoogle(bool on)
+void CGisListWks::slotGeoSearch(bool on)
 {
     CGisListWksEditLock lock(true, IGisItem::mutexItems);
 
-    delete searchGoogle;
+    delete geoSearch;
     if(on)
     {
-        searchGoogle = new CSearchGoogle(this);
+        geoSearch = new CGeoSearch(this);
     }
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);

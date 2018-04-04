@@ -19,6 +19,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
+#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDeleteExtension.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
@@ -74,9 +75,8 @@ static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString 
     addFilters<filters ...>(itemGroup, trk);
 }
 
-CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
-    : QWidget(parent)
-    , INotifyTrk(CGisItemTrk::eVisualDetails)
+CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
+    : INotifyTrk(CGisItemTrk::eVisualDetails)
     , trk(trk)
 {
     setupUi(this);
@@ -173,11 +173,11 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
         (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
 
-    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope>
+    addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
-
     slotShowPlots();
+    enableTabFilter();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -193,6 +193,10 @@ CDetailsTrk::~CDetailsTrk()
 
     saveGraphSource(comboGraph2, 2);
     saveGraphSource(comboGraph3, 3);
+
+    // Note: Maybe we have a race condition here.
+    // Usually the QPointer to "dlgDetails" should be cleared if the object is destroyed.
+    trk.clearDlgDetails();
 }
 
 void CDetailsTrk::slotSetLimitModeStyle(CLimit::mode_e mode, bool on)
@@ -475,7 +479,13 @@ void CDetailsTrk::updateData()
     CFilterSpeed *filterSpeed = tabWidget->findChild<CFilterSpeed *>("IFilterSpeed");
     if(nullptr != filterSpeed)
     {
-        filterSpeed->setElevationValid();
+        filterSpeed->updateUi();
+    }
+
+    CFilterChangeStartPoint *filterChangeStartPoint = tabWidget->findChild<CFilterChangeStartPoint *>("IFilterChangeStartPoint");
+    if(nullptr != filterChangeStartPoint)
+    {
+        filterChangeStartPoint->updateUi();
     }
 
     originator = false;
@@ -500,6 +510,25 @@ void CDetailsTrk::setMouseFocus(const CTrackData::trkpt_t * pt)
 void CDetailsTrk::setMouseRangeFocus(const CTrackData::trkpt_t *pt1, const CTrackData::trkpt_t *pt2)
 {
     labelInfoRange->setText( (pt1 && pt2) ? trk.getInfoRange(*pt1, *pt2) : "-\n-" );
+}
+
+void CDetailsTrk::enableTabFilter()
+{
+    if (trk.isReadOnly())
+    {
+        return;
+    }
+
+    switch(trk.getMode())
+    {
+    case CGisItemTrk::eModeNormal:
+        tabWidget->widget(eTabFilter)->setEnabled(true);
+        break;
+
+    case CGisItemTrk::eModeRange:
+        tabWidget->widget(eTabFilter)->setEnabled(false);
+        break;
+    }
 }
 
 void CDetailsTrk::setMouseClickFocus(const CTrackData::trkpt_t *pt)

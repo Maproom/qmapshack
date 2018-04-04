@@ -1294,7 +1294,7 @@ void CGisItemTrk::edit()
 {
     if(dlgDetails.isNull())
     {
-        dlgDetails = new CDetailsTrk(*this, nullptr);
+        dlgDetails = new CDetailsTrk(*this);
         dlgDetails->setObjectName(getName());
     }
 
@@ -2205,6 +2205,12 @@ bool CGisItemTrk::setMode(mode_e m, const QString& owner)
     mouseFocusOwner = (mode == eModeRange) ? owner : "";
 
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
+
+    if (!dlgDetails.isNull())
+    {
+        dlgDetails->enableTabFilter();
+    }
+
     return true;
 }
 

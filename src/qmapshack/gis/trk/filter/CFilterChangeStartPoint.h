@@ -1,5 +1,4 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,52 +15,29 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSPEED_H
-#define CFILTERSPEED_H
+#ifndef CFILTERCHANGESTARTPOINT_H
+#define CFILTERCHANGESTARTPOINT_H
 
-#include "ui_IFilterSpeed.h"
+#include "ui_IFilterChangeStartPoint.h"
 #include <QWidget>
 
 class CGisItemTrk;
 
-class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
+class CFilterChangeStartPoint : public QWidget, private Ui::IFilterChangeStartPoint
 {
     Q_OBJECT
+
 public:
-    CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterSpeed();
+    CFilterChangeStartPoint(CGisItemTrk &trk, QWidget *parent = 0);
+    virtual ~CFilterChangeStartPoint() = default;
 
     void updateUi();
-
-    struct cycling_type_t
-    {
-        QString name;
-        qreal plainSpeed;
-        qreal minSpeed;
-        qreal slopeAtMinSpeed;
-        qreal maxSpeed;
-        qreal slopeAtMaxSpeed;
-    };
 
 private slots:
     void slotApply();
 
-    void slotSetActivityType(int type);
-    void slotSetCyclingType(int type);
-    void slotSetPlainSpeed(double speed);
-    void slotSetMinSpeed(double speed);
-    void slotSetSlopeAtMinSpeed(double speed);
-    void slotSetMaxSpeed(double speed);
-    void slotSetSlopeAtMaxSpeed(double slope);
-    void slotSetMinMaxSlopes(bool);
-
 private:
     CGisItemTrk& trk;
-    const qint32 noOfFixTypes;
-    const qint32 noOfCustomTypes;
-
-    QList <cycling_type_t> cyclingTypes;
 };
 
-#endif //CFILTERSPEED_H
-
+#endif // CFILTERCHANGESTARTPOINT_H

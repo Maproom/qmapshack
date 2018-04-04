@@ -31,7 +31,7 @@ class CDetailsTrk : public QWidget, public INotifyTrk, private Ui::IDetailsTrk
 {
     Q_OBJECT
 public:
-    CDetailsTrk(CGisItemTrk &trk, QWidget * parent);
+    CDetailsTrk(CGisItemTrk &trk);
     virtual ~CDetailsTrk();
 
     void setMouseFocus(const CTrackData::trkpt_t *pt) override;

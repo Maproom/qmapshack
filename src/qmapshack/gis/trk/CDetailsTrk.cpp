@@ -19,6 +19,7 @@
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
+#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "gis/trk/filter/CFilterDelete.h"
 #include "gis/trk/filter/CFilterDeleteExtension.h"
 #include "gis/trk/filter/CFilterDouglasPeuker.h"
@@ -34,7 +35,6 @@
 #include "gis/trk/filter/CFilterSplitSegment.h"
 #include "gis/trk/filter/CFilterSubPt2Pt.h"
 #include "gis/trk/filter/CFilterTerrainSlope.h"
-#include "gis/trk/filter/CFilterChangeStartPoint.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/Signals.h"
@@ -75,9 +75,8 @@ static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString 
     addFilters<filters ...>(itemGroup, trk);
 }
 
-CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
-    : QWidget(parent)
-    , INotifyTrk(CGisItemTrk::eVisualDetails)
+CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
+    : INotifyTrk(CGisItemTrk::eVisualDetails)
     , trk(trk)
 {
     setupUi(this);
@@ -177,8 +176,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk, QWidget *parent)
     addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint>
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
-   slotShowPlots();
-   enableTabFilter();
+    slotShowPlots();
+    enableTabFilter();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -525,6 +524,7 @@ void CDetailsTrk::enableTabFilter()
     case CGisItemTrk::eModeNormal:
         tabWidget->widget(eTabFilter)->setEnabled(true);
         break;
+
     case CGisItemTrk::eModeRange:
         tabWidget->widget(eTabFilter)->setEnabled(false);
         break;

@@ -82,6 +82,13 @@ void CTrackData::readFrom(const SGisLine &l)
     }
 }
 
+void CTrackData::readFrom(const QVector<CTrackData::trkpt_t> &pts)
+{
+    segs.clear();
+    segs.resize(1);
+    trkseg_t &seg = segs.first();
+    seg.pts = pts;
+}
 
 void CTrackData::getPolyline(SGisLine &l) const
 {

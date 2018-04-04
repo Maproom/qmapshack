@@ -1294,7 +1294,7 @@ void CGisItemTrk::edit()
 {
     if(dlgDetails.isNull())
     {
-        dlgDetails = new CDetailsTrk(*this, nullptr);
+        dlgDetails = new CDetailsTrk(*this);
         dlgDetails->setObjectName(getName());
     }
 

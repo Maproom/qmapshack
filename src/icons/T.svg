@@ -14,7 +14,7 @@
    id="svg3513"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="V.svg">
+   sodipodi:docname="T.svg">
   <defs
      id="defs3515" />
   <sodipodi:namedview
@@ -44,7 +44,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -62,7 +62,7 @@
          sodipodi:role="line"
          id="tspan3004"
          x="15.175071"
-         y="43.852806">V</tspan></text>
+         y="43.852806">T</tspan></text>
     <rect
        style="fill:none;stroke:none"
        id="rect2998"

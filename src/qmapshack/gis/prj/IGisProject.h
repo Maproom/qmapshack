@@ -517,6 +517,8 @@ public:
         autoSavePending = false;
     }
 
+    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+
 protected:
     void genKey() const;
     virtual void setupName(const QString& defaultName);

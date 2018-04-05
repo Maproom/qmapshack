@@ -418,6 +418,8 @@ public:
 
     void applyFilter();
 
+    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+
 signals:
     void sigChanged();
 

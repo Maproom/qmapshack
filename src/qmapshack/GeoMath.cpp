@@ -305,6 +305,44 @@ qreal GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q)
     return dist;
 }
 
+qreal GPS_Math_DistPointPolyline(const QPolygonF& line, const QPointF& pt, qreal threshold)
+{
+    qreal d = threshold + 1;
+
+    const int len = line.size();
+    // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
+    for(int i=1; i<len; ++i)
+    {
+        const QPointF &p1 = line[i-1];
+        const QPointF &p2 = line[i];
+
+        qreal dx = p2.x() - p1.x();
+        qreal dy = p2.y() - p1.y();
+
+        // distance between p1 and p2
+        qreal d_p1_p2 = qSqrt(dx * dx + dy * dy);
+
+        // ratio u the tangent point will divide d_p1_p2
+        qreal u = ((pt.x() - p1.x()) * dx + (pt.y() - p1.y()) * dy) / (d_p1_p2 * d_p1_p2);
+
+        if(u < 0.0 || u > 1.0)
+        {
+            continue;
+        }
+
+        // coord. (x,y) of the point on line defined by [p1,p2] close to pt
+        qreal x = p1.x() + u * dx;
+        qreal y = p1.y() + u * dy;
+
+        qreal distance = qSqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
+        if(distance < threshold)
+        {
+            d = threshold = distance;
+        }
+    }
+
+    return d;
+}
 
 
 struct segment

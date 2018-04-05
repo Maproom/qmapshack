@@ -2702,3 +2702,17 @@ void CGisItemTrk::getMouseRange(int &idx1, int &idx2, bool total) const
     }
 }
 
+
+bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    qreal dist1 = GPS_Math_DistPointPolyline(lineSimple, pt1, threshold);
+    qreal dist2 = GPS_Math_DistPointPolyline(lineSimple, pt2, threshold);
+
+    if(dist1 < threshold && dist2 < threshold)
+    {
+        trk.getPolyline(polyline);
+        threshold = qMin(dist1, dist2);
+    }
+
+    return !polyline.isEmpty();
+}

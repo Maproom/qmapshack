@@ -1168,3 +1168,21 @@ void CGisWorkspace::fastDraw(QPainter& p, const QRectF& viewport, CGisDraw *gis)
 }
 
 
+bool CGisWorkspace::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(int i = 0; i < treeWks->topLevelItemCount(); i++)
+    {
+        QTreeWidgetItem * item1 = treeWks->topLevelItem(i);
+        IGisProject * project = dynamic_cast<IGisProject*>(item1);
+        if(project)
+        {
+            if(project->findPolylineCloseBy(pt1, pt2, threshold, polyline))
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}

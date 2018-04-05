@@ -72,6 +72,7 @@ public:
 
     bool useAutoRouting() const;
     bool useVectorRouting() const;
+    bool useTrackRouting() const;
 
     void storeToHistory(const SGisLine& line);
     void restoreFromHistory(SGisLine& line);
@@ -99,6 +100,7 @@ protected slots:
     void slotNoRouting();
     void slotAutoRouting();
     void slotVectorRouting();
+    void slotTrackRouting();
 
 
     virtual void slotAbort() = 0;

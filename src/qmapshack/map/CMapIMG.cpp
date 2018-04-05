@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/Poi.h"
 #include "helpers/CDraw.h"
@@ -2548,44 +2549,6 @@ void CMapIMG::getInfoPolygons(const QPoint& pt, QMultiMap<QString, QString>& dic
 }
 
 
-static qreal getDistance(const QPolygonF& line, const QPointF& pt, qreal threshold)
-{
-    qreal d = threshold + 1;
-
-    const int len = line.size();
-    // see http://local.wasp.uwa.edu.au/~pbourke/geometry/pointline/
-    for(int i=1; i<len; ++i)
-    {
-        const QPointF &p1 = line[i-1];
-        const QPointF &p2 = line[i];
-
-        qreal dx = p2.x() - p1.x();
-        qreal dy = p2.y() - p1.y();
-
-        // distance between p1 and p2
-        qreal d_p1_p2 = qSqrt(dx * dx + dy * dy);
-
-        // ratio u the tangent point will divide d_p1_p2
-        qreal u = ((pt.x() - p1.x()) * dx + (pt.y() - p1.y()) * dy) / (d_p1_p2 * d_p1_p2);
-
-        if(u < 0.0 || u > 1.0)
-        {
-            continue;
-        }
-
-        // coord. (x,y) of the point on line defined by [p1,p2] close to pt
-        qreal x = p1.x() + u * dx;
-        qreal y = p1.y() + u * dy;
-
-        qreal distance = qSqrt((x - pt.x())*(x - pt.x()) + (y - pt.y())*(y - pt.y()));
-        if(distance < threshold)
-        {
-            d = threshold = distance;
-        }
-    }
-
-    return d;
-}
 
 
 bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline) /* override */
@@ -2601,8 +2564,8 @@ bool CMapIMG::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32
             continue;
         }
 
-        qreal dist1 = ::getDistance(line.pixel, pt1, threshold);
-        qreal dist2 = ::getDistance(line.pixel, pt2, threshold);
+        qreal dist1 = GPS_Math_DistPointPolyline(line.pixel, pt1, threshold);
+        qreal dist2 = GPS_Math_DistPointPolyline(line.pixel, pt2, threshold);
 
         if(dist1 < threshold && dist2 < threshold)
         {

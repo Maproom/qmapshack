@@ -21,6 +21,7 @@
 #include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWorkspace.h"
 #include "gis/rte/router/CRouterSetup.h"
 #include "mouse/line/ILineOp.h"
 #include "mouse/line/IMouseEditLine.h"
@@ -56,7 +57,7 @@ void ILineOp::startDelayedRouting()
     {
         timerRouting->start();
     }
-    else if(parentHandler->useVectorRouting())
+    else if(parentHandler->useVectorRouting()||parentHandler->useTrackRouting())
     {
         slotTimeoutRouting();
     }
@@ -140,7 +141,7 @@ void ILineOp::updateLeadLines(qint32 idx)
     subLinePixel1.clear();
     subLinePixel2.clear();
 
-    if(parentHandler->useVectorRouting() && (idx != NOIDX))
+    if((parentHandler->useVectorRouting()||parentHandler->useTrackRouting()) && (idx != NOIDX))
     {
         leadLineCoord1.clear();
         leadLineCoord2.clear();
@@ -151,7 +152,11 @@ void ILineOp::updateLeadLines(qint32 idx)
         {
             const IGisLine::point_t& pt1 = points[idx - 1];
             const IGisLine::point_t& pt2 = points[idx];
-            if(canvas->findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1))
+
+            bool res = parentHandler->useVectorRouting() ?
+                       canvas->findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1) :
+                       CGisWorkspace::self().findPolylineCloseBy(pt2.pixel, pt2.pixel, 10, leadLineCoord1);
+            if(res)
             {
                 leadLinePixel1 = leadLineCoord1;
                 gis->convertRad2Px(leadLinePixel1);
@@ -166,7 +171,12 @@ void ILineOp::updateLeadLines(qint32 idx)
         {
             const IGisLine::point_t& pt1 = points[idx];
             const IGisLine::point_t& pt2 = points[idx + 1];
-            if(canvas->findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2))
+
+            bool res = parentHandler->useVectorRouting() ?
+                       canvas->findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2) :
+                       CGisWorkspace::self().findPolylineCloseBy(pt1.pixel, pt1.pixel, 10, leadLineCoord2);
+
+            if(res)
             {
                 leadLinePixel2 = leadLineCoord2;
                 gis->convertRad2Px(leadLinePixel2);
@@ -211,7 +221,7 @@ void ILineOp::tryRouting(IGisLine::point_t& pt1, IGisLine::point_t& pt2) const
     {
         showRoutingErrorMessage(msg);
     }
-    // that is a workaround for canvas loosing mousetracking caused by CProgressDialog being modal:
+    // that is a workaround for canvas loosing mouse tracking caused by CProgressDialog being modal:
     canvas->setMouseTracking(true);
 }
 
@@ -235,7 +245,7 @@ void ILineOp::finalizeOperation(qint32 idx)
         }
         CCanvas::restoreOverrideCursor("ILineOp::finalizeOperation");
     }
-    else if(parentHandler->useVectorRouting())
+    else if(parentHandler->useVectorRouting()||parentHandler->useTrackRouting())
     {
         if(idx > 0)
         {

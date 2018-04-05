@@ -84,6 +84,10 @@ IMouseEditLine::~IMouseEditLine()
     {
         mode = 2;
     }
+    else if(scrOptEditLine->toolTrackRoute->isChecked())
+    {
+        mode = 3;
+    }
 
     SETTINGS;
     cfg.setValue("Route/drawMode", mode);
@@ -109,6 +113,7 @@ void IMouseEditLine::commonSetup()
     connect(scrOptEditLine->toolNoRoute,     &QPushButton::clicked, this, &IMouseEditLine::slotNoRouting    );
     connect(scrOptEditLine->toolAutoRoute,   &QPushButton::clicked, this, &IMouseEditLine::slotAutoRouting  );
     connect(scrOptEditLine->toolVectorRoute, &QPushButton::clicked, this, &IMouseEditLine::slotVectorRouting);
+    connect(scrOptEditLine->toolTrackRoute,  &QPushButton::clicked, this, &IMouseEditLine::slotTrackRouting );
 
     connect(scrOptEditLine->toolUndo,        &QPushButton::clicked, this, &IMouseEditLine::slotUndo         );
     connect(scrOptEditLine->toolRedo,        &QPushButton::clicked, this, &IMouseEditLine::slotRedo         );
@@ -127,6 +132,10 @@ void IMouseEditLine::commonSetup()
 
     case 2:
         scrOptEditLine->toolVectorRoute->setChecked(true);
+        break;
+
+    case 3:
+        scrOptEditLine->toolTrackRoute->setChecked(true);
         break;
     }
 
@@ -152,6 +161,11 @@ bool IMouseEditLine::useAutoRouting() const
 bool IMouseEditLine::useVectorRouting() const
 {
     return scrOptEditLine->toolVectorRoute->isChecked();
+}
+
+bool IMouseEditLine::useTrackRouting() const
+{
+    return scrOptEditLine->toolTrackRoute->isChecked();
 }
 
 void IMouseEditLine::drawLine(const QPolygonF &l, const QColor color, int width, QPainter& p)
@@ -330,6 +344,11 @@ void IMouseEditLine::slotVectorRouting()
     canvas->reportStatus("Routino", QString());
 }
 
+void IMouseEditLine::slotTrackRouting()
+{
+    canvas->reportStatus(key.item, tr("<b>Track Routing</b><br/>Connect points with a line from a loaded track if possible.<br/>"));
+    canvas->reportStatus("Routino", QString());
+}
 
 void IMouseEditLine::changeCursor()
 {

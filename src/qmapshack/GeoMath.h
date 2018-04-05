@@ -76,6 +76,7 @@ QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearin
 bool    GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);
 void    GPS_Math_SubPolyline(const QPointF& pt1, const QPointF& pt2, qint32 threshold, const QPolygonF& pixel, segment_t& result);
 qreal   GPS_Math_DistPointPolyline(const QPolygonF &points, const QPointF &q);
+qreal   GPS_Math_DistPointPolyline(const QPolygonF& line, const QPointF& pt, qreal threshold);
 
 #endif                           //GEOMATH_H
 

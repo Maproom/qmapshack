@@ -1202,17 +1202,17 @@ void IGisProject::filter(const QString& str)
     }
 }
 
-bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
 {
 
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {
         CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(child(n));
-        if((trk != nullptr) && trk->findPolylineCloseBy(pt1, pt2, threshold, polyline))
+        if(trk != nullptr)
         {
-            return true;
+            trk->findPolylineCloseBy(pt1, pt2, threshold, polyline);
         }
     }
-    return false;
+    return !polyline.isEmpty();
 }

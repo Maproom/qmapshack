@@ -280,6 +280,9 @@
         </item>
         <item>
          <widget class="QToolButton" name="toolTrackRoute">
+          <property name="toolTip">
+           <string>Connect points with a line from a loaded track if possible.</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>

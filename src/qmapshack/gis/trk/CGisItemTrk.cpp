@@ -2703,7 +2703,7 @@ void CGisItemTrk::getMouseRange(int &idx1, int &idx2, bool total) const
 }
 
 
-bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline)
+bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
 {
     qreal dist1 = GPS_Math_DistPointPolyline(lineSimple, pt1, threshold);
     qreal dist2 = GPS_Math_DistPointPolyline(lineSimple, pt2, threshold);

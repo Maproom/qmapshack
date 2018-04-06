@@ -561,7 +561,7 @@ public:
      */
     void findWaypointsCloseBy(CProgressDialog &progress, quint32 &current);
 
-    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 threshold, QPolygonF& polyline);
+    bool findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32 &threshold, QPolygonF& polyline);
 private:
     /// no don't really use it, use CGisItemTrk(quint32 visuals) instead
     void updateHistory() override

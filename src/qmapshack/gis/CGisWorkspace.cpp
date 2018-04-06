@@ -1177,12 +1177,9 @@ bool CGisWorkspace::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, 
         IGisProject * project = dynamic_cast<IGisProject*>(item1);
         if(project)
         {
-            if(project->findPolylineCloseBy(pt1, pt2, threshold, polyline))
-            {
-                return true;
-            }
+            project->findPolylineCloseBy(pt1, pt2, threshold, polyline);
         }
     }
 
-    return false;
+    return !polyline.isEmpty();
 }

@@ -658,12 +658,12 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Разное</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="407"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="411"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="412"/>
         <source>Activity</source>
         <translation>Активность</translation>
     </message>
@@ -1440,37 +1440,37 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Показать точки.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2215"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2244"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2250"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Изменена высота точки %1 на %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2268"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2274"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Активность изменена на &apos;%1&apos; для всего трека.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2313"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Активность изменена на &apos;%1&apos; для интервала (%2..%3).</translation>
     </message>
@@ -1558,6 +1558,11 @@ To solve this conflict you can create and save a clone, force your version or dr
         <location filename="../gis/trk/filter/filter.cpp" line="475"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Преобразованы подточки с маршрутных в точки трека</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="519"/>
+        <source>Start Point moved to: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6860,6 +6865,29 @@ I don&apos;t want to read the documentation!</source>
     </message>
 </context>
 <context>
+    <name>IFilterChangeStartPoint</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
+        <source>Start Track at Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
+        <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
@@ -7370,43 +7398,43 @@ I don&apos;t want to read the documentation!</source>
         <translation>Настройка геопоиска</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="44"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Для использования укажите действующий адрес электронной почты.&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="70"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
         <source>please specify a valid email-address</source>
         <translation>Пожалуйста, укажите действующий адрес электронной почты</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="92"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
         <source>maximum number of results (default is 10):</source>
         <translation>Максимальное количество результатов (по умолчанию-10):</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="151"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Для использования создайте &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;имя пользователя&lt;/a&gt; для geonames,&lt;/p&gt;&lt;p&gt;затем включите &quot;Free Webservices&quot; в вашем &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;учетной записи&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Введите ваше имя пользователя Geonames здесь:&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="164"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
         <source>enter geonames username here</source>
         <translation>Введите имя пользователя geonames здесь</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="201"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Пожалуйста, введите &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API key&lt;/a&gt; здесь:&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="227"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
         <translation>Введите здесь Google API key</translation>
     </message>

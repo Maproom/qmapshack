@@ -516,5 +516,5 @@ void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString 
 
     deriveSecondaryData();
 
-    changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterChangeStartPoint.png");
+    changed(tr("Start Point moved to: ") + wptName.toLatin1(), "://icons/48x48/FilterChangeStartPoint.png");
 }

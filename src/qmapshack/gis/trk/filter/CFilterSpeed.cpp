@@ -170,10 +170,10 @@ void CFilterSpeed::slotApply()
 void CFilterSpeed::slotSetActivityType(int type)
 {
     stackedWidget->setCurrentIndex(type);
-    setElevationValid();
+    updateUi();
 }
 
-void CFilterSpeed::setElevationValid()
+void CFilterSpeed::updateUi()
 {
     if(trk.isTrkElevationInvalid() && comboActivityType->currentIndex() == 1)
     {

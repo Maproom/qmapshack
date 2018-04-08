@@ -2702,3 +2702,8 @@ void CGisItemTrk::getMouseRange(int &idx1, int &idx2, bool total) const
     }
 }
 
+void CGisItemTrk::getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const
+{
+    mr1 = mouseRange1;
+    mr2 = mouseRange2;
+}

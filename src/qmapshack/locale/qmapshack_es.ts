@@ -127,72 +127,72 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="182"/>
         <source>None selected</source>
-        <translation type="unfinished"></translation>
+        <translation>No seleccionado</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="187"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p align=&apos;right&apos;&gt;Esta pantalla de ayuda se cerrará cuando active un mapa.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="190"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Bienvenido/a&lt;/h1&gt;&lt;p&gt;Gracias por usar QMapShack. QMapShack es un proyecto de Código Abierto y sin ánimo de lucro, que es mantenido por voluntarios y entusiastas.Es muy útil y a alcanzado cierta madurez, pero le faltan algunas comodidades que podría tener con software &apos;gratuito&apos; comercial. De hecho, carecemos de los recursos para proporcionarle una descarga centralizada y conveniente de mapas, datos de elevación y datos de enrutamiento,es necesario descargar estos datos de varios sitios por su cuenta, pero esta página puede ayudarte un poco.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="199"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Empecemos&lt;/h2&gt;&lt;p&gt;En primer lugar, póngase cómodo colocando los widgets del dock alrededor de esta área según su gusto personal. Para ello, cójalos con el mouse, presionado el botón izquierdo en la barra de título y muévalos a donde desee . Puede aclopar a la izquierda, derecha, arriba y abajo, también se pueden apilar colocandolos justo encima. Si no deseea la funcionalidad que ofrecen los widgets y hacer que la interfaz de su QMapShack sea más simple. La Barra de Herramientas también es un widget, puede colocarlo donde quiera.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="209"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;La Wiki&lt;/h2&gt;&lt;p&gt;QMapShack tiene una amplia &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; con mucha información sobre cómo usarlo. Hay una &lt;a href=&apos;ShowQuickStart&apos;&gt;Guia de Inicio Rápido&lt;/a&gt; traducida a varios idiomas. Consultela y decubrirá la gran variedad de funciones que le ofrece QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="217"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Configuración actual:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="222"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Creación de entorno&lt;/h2&gt;&lt;p&gt;QMapShack necesita una carpeta en su disco duro donde se guardan todos los datos, naturalmente alcanzará gran tamaño. Se recomienda la creación de algunas subcarpetas:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Mapas - Para almacenar los mapas&lt;/li&gt;&lt;li&gt;DEM - Para almacenar los datos de elevación&lt;/li&gt;&lt;li&gt;Routino - Para almacenar los datos del enrutador offline Routino&lt;/li&gt;&lt;li&gt;BRouter - Para almacenar los datos del enrutador offline BRouter&lt;/li&gt;&lt;li&gt;Bases de Datos - Donde se crean las bases de datos para organizar sus datos GIS&lt;/li&gt;&lt;li&gt;GPX - Donde guardar los archivos GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;¿Desea crear estas carpetas ahora?  Indique &lt;a  href=&apos;SetupHome&apos;&gt;una carpeta&lt;/a&gt; y QMapShack creará las subcarpetas y ejecutará su configuración.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="239"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM's&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM's.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="254"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;¡Mapas!&lt;/h2&gt;&lt;p&gt;Un mapa siempre será un solo archivo que sea reconocible por QMapShack. Este archivo se ubicará en una de las carpetas de mapas configuradas (&lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas de Mapas&lt;/a&gt;). QMapShack lo encontrará y lo mostrará en la lista.Puede refrescar la lista de mapas haciendo clic con el botón derecho en la lista y seleccionando &apos;Recargar Mapas&apos; en el menú.&lt;/p&gt; &lt;p&gt;Debe de estar activado para ser visible. Haga clic con el botón derecho en la entrada del mapa y seleccione &apos;Activar&apos; en el menú. Al activar el mapa esta pantalla de ayuda se cerrará. Para verla de nuevo (&lt;a href=&apos;NewView&apos;&gt;Ver-&gt;Añadir Vista de Mapa&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Para empezar a ver algun mapa online &lt;a href=&apos;GetMaps&apos;&gt;usuarios impacientes&lt;/a&gt;. Si tiene un dispositivo GPS Garmin con mapas no comerciales, puede copiar los archivos * .img y * .jnx de su dispositivo a la carpeta de mapas.&lt;/p&gt; &lt;/p&gt;Si tiene mapas ráster en un formato admitido por GDAL, primero es necesario crear un archivo de definición de mapa virtual (* .vrt). Un archivo * .vrt puede hacer referencia a uno o a varios archivos. Utilice el generador de VRT incorporado de QMapShack (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear este archivo.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="270"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Datos&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Datos y Proyectos&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Sus Datos&lt;/h2&gt;&lt;p&gt;Para cargar tracks y waypoints clique &lt;a href=&apos;LoadData&apos;&gt;Archivo-&gt;Cargar Datos GIS&lt;/a&gt; en el menú. Por cada archivo se creará un proyecto independiente en el área de trabajo. Puede administrar sus datos en archivos individuales o usar una base de datos. Puede &lt;a href=&apos;CreateDB&apos;&gt;crear una base de datos&lt;/a&gt; en el widget correspondiente.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="285"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEM's online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM's&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="296"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Datos de elevación&lt;/h2&gt;&lt;p&gt;Los datos de elevación (Digital Elevation Model - DEM) se usan en distintas funciones de QMapShack y son totalmente independientes de los mapas, sin embargo funcionan bajo los mismos principios que los mapas. Los DEM serán un solo archivo en un formato que QMapShack pueda reconocer. Este archivo se ubicará en una de las carpetas configuradas en (&lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;). QMapShack los detectará y los mostrará en la lista, que puede refrescar haciendo clic con el botón derecho en la lista DEM y seleccionar &apos;Recargar DEM's&apos; en el menú.&lt;/p&gt;&lt;p&gt;Del mismo modo que con los mapas raster es necesario crear un archivo VRT para que los DEM sean reconocidos. Un solo *.vrt puede hacer referencia a uno a varios archivos. Nuevamente puede utilizar el (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear este archivo.&lt;/p&gt;&lt;p&gt;Para empezar a ver algunos DEM online, puede hacer clic en el enlace &lt;a href=&apos;GetDems&apos;&gt;usuarios impacientes&lt;/a&gt;, pero tenga en cuenta que el uso de estos recursos online ralentizan a QMapShack de un modo notable.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="311"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Enrutamiento&lt;/h2&gt;&lt;p&gt;QMapShack soporta servicios de enrutado online, pero si realmente quiere aprovechar todo el potencial de la herramienta se recomienda tener la base de datos del enrutador almacenada localmente. Hay dos motores offline disponibles.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Routino crea la ruta a partir de los archivos de la base de datos de OpenStreetMap. En QMapShack se incluye una herramienta para crear las bases de datos (&lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear Base de Datos de Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;La otra opción es usar BRouter con instalación y base de datos local. Haga clic en &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter: Configuración&lt;/a&gt; para descargar e instalar todo lo neceseario.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="943"/>
@@ -213,12 +213,12 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="31"/>
         <source>Print debug output to console.</source>
-        <translation>Imprimir salida de depuración en la consola.</translation>
+        <translation>Mostrar salida de depuración en la consola.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="34"/>
         <source>Print debug output to logfile (temp. path).</source>
-        <translation>Imprimir salida de depuración en archivo (carpeta temporal).</translation>
+        <translation>Guardar salida de depuración en archivo (carpeta temporal).</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="37"/>
@@ -433,7 +433,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../dem/CDemList.cpp" line="256"/>
         <source>Where do you want to store DEMs?</source>
-        <translation type="unfinished"></translation>
+        <translation>Dónde quiere almacenar los DEM</translation>
     </message>
 </context>
 <context>
@@ -772,17 +772,17 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="30"/>
         <source>coarse</source>
-        <translation>grueso</translation>
+        <translation>baja</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="31"/>
         <source>medium</source>
-        <translation>medio</translation>
+        <translation>medi</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterInterpolateElevation.cpp" line="32"/>
         <source>fine</source>
-        <translation>fino</translation>
+        <translation>alta</translation>
     </message>
 </context>
 <context>
@@ -928,12 +928,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="59"/>
         <source>Setup Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar búsqueda</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="87"/>
         <source>Select Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione servicio</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="91"/>
@@ -958,22 +958,22 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="97"/>
         <source>Configure Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Configure Servicios</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="98"/>
         <source>configure providers of geocoding search services</source>
-        <translation type="unfinished"></translation>
+        <translation>configurar proveedores de servicios de búsqueda de geocodificación</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="142"/>
         <source>no service configured - please click setup-icon in search-field</source>
-        <translation type="unfinished"></translation>
+        <translation>Servicio sin configurar - Haga clic en el icono de configuración del campo de búsqueda</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="232"/>
         <source>unexpected service-identifier %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Identificador de servicio inesperado %1</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="339"/>
@@ -1662,7 +1662,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="88"/>
         <source>Due to changes in the database system QMapShack forgot about the filename of your database &apos;%1&apos;. You have to select it again in the next step.</source>
-        <translation>Debido a cambios en el sistema de base de datos QMapShack olvidó el nombre de archivo de su base de datos  &apos;%1&apos;. Debe seleccionarlo de nuevo en el siguiente paso.</translation>
+        <translation>Debido a cambios en el sistema de base de datos QMapShack olvidó el nombre de archivo de su base de datos  &apos;%1&apos;. Se necesita seleccionarlo de nuevo en el siguiente paso.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="89"/>
@@ -2563,12 +2563,12 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="551"/>
         <source>Select folder...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Seleccione carpeta...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="941"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Haga clic en &lt;b&gt;Menu-&gt;Ver-&gt;Añadir vista de mapa&lt;/b&gt; para abrir una nueva vista, o &lt;b&gt;Menu-&gt;Archivo-&gt;Cargar Vista de Mapa&lt;/b&gt; para restaurar una vista guardada, o clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1070"/>
@@ -5098,7 +5098,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="48"/>
         <source>MySQL cannot be used at this point, because the corresponding driver (QMYSQL) is not available.&lt;br /&gt;Please make sure you have installed the corresponding package.&lt;br /&gt;If you don&apos;t know what to do now you should have &lt;a href=&quot;%1&quot;&gt;a look at the wiki&lt;/a&gt;.</source>
-        <translation>SQL no se puede utilizar en este momento, ya que el controlador correspondiente (QMYSQL) no está disponible.&lt;br /&gt;Asegúrese de haber instalado el paquete correspondiente.&lt;br /&gt;Si usted no sabe qué hacer ahora debe &lt;a href=&quot;%1&quot;&gt;consultar la wiki&lt;/a&gt;.</translation>
+        <translation>SQL no se puede utilizar en este momento, ya que el controlador correspondiente (QMYSQL) no está disponible.&lt;br /&gt;Asegúrese de haber instalado el paquete correspondiente.&lt;br /&gt;Si no sabe qué hacer ahora puede &lt;a href=&quot;%1&quot;&gt;consultar la wiki&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../gis/db/CSetupDatabase.cpp" line="103"/>
@@ -6093,7 +6093,8 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
         <location filename="../dem/IDemPathSetup.ui" line="143"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">¡Ayuda!¡Quiero DEM's!
+¡No quiero leer la documentación!</translation>
     </message>
 </context>
 <context>
@@ -6181,12 +6182,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para agregar archivos con datos de elevación haga clic en &lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="125"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Use el menú contextual (botón derecho del ratón y seleccione) para activar un archivo. Use arrastrar y soltar para mover el archivo activado en el orden de procesamiento.</translation>
+        <translation>Use el menú contextual (botón derecho del ratón) y seleccione para activar un archivo. Use arrastrar y soltar para mover el archivo activado en el orden de procesamiento.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="150"/>
@@ -6304,7 +6305,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="176"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Cambia el modo de sólo lectura. Debe abrir el bloqueo para editar el elemento.</translation>
+        <translation>Cambia el modo de sólo lectura. Se necesita abrir el candado para editar el elemento.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="179"/>
@@ -6428,7 +6429,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="198"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Cambia el modo de sólo lectura. Debe abrir el bloqueo para editar el elemento.</translation>
+        <translation>Cambia el modo de sólo lectura. Se necesita abrir el candado para editar el elemento.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="201"/>
@@ -6527,7 +6528,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="315"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Cambia el modo de sólo lectura. Debe abrir el bloqueo para editar el elemento.</translation>
+        <translation>Cambia el modo de sólo lectura. Se necesita abrir el candado para editar el elemento.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="318"/>
@@ -6708,7 +6709,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="312"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
-        <translation>Cambia el modo de sólo lectura. Debe abrir el bloqueo para editar el elemento.</translation>
+        <translation>Cambia el modo de sólo lectura. Se necesita abrir el candado para editar el elemento.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="315"/>
@@ -7011,7 +7012,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="76"/>
         <source>points</source>
-        <translation>puntos</translation>
+        <translation> puntos</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterMedian.ui" line="105"/>
@@ -7128,7 +7129,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files in view</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar altitud de los puntos del track utilizando los valores del fichero DEM cargado en la vista</translation>
     </message>
     <message>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
@@ -7248,7 +7249,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="572"/>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Constante</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="577"/>
@@ -7364,39 +7365,39 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="44"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para usar introduzca una dirección de email válida aquí:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="70"/>
         <source>please specify a valid email-address</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca una dirección de email válida</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="92"/>
         <source>maximum number of results (default is 10):</source>
-        <translation type="unfinished"></translation>
+        <translation>número máximo de resultados (por defecto 10)</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="151"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para utilizar cree una cuenta en &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;luego habilite &apos;Free Webservices&apos; en su &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Cuenta&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduzca su nombre de usuario en geonames aqui:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="164"/>
         <source>enter geonames username here</source>
-        <translation type="unfinished"></translation>
+        <translation>introduzca su nombre de usuario en geonames aqui</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="201"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;introduzca su &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; aquí:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="227"/>
         <source>enter Google API-key here</source>
-        <translation type="unfinished"></translation>
+        <translation>introduzca su Google API-key aquí</translation>
     </message>
 </context>
 <context>
@@ -7996,7 +7997,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="562"/>
         <source>Geosearch</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar lugares</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="631"/>
@@ -8284,7 +8285,7 @@ No quiero leer la documentación!</translation>
     <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para agregar mapas haga clic &lt;a href=&apos;MapFolders&apos;&gt;Archivo-&gt;Configurar rutas de mapas&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
@@ -9255,11 +9256,11 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para usar el enrutado offline es necesario configurar las rutas a las carpetas que contienen los datos de ruteo, haga clic en el botón de configuración para hacerlo. Puede crear sus propios datos de enrutado en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation type="vanished">Para utilizar el enrutamiento sin conexión es necesario definir rutas de acceso a los datos de enrutamiento locales. Utilice el botón de la herramienta de configuración para indicar una carpeta. Puede crear sus propios datos de enrutamiento con la  &lt;b&gt;herramienta-&gt;Crear base de datos de Routino&lt;/b&gt;.</translation>
+        <translation type="vanished">Para utilizar el enrutamiento offline es necesario definir rutas de acceso a los datos de enrutamiento locales. Utilice el botón de la herramienta de configuración para indicar una carpeta. Puede crear sus propios datos de enrutamiento con la  &lt;b&gt;herramienta-&gt;Crear base de datos de Routino&lt;/b&gt;.</translation>
     </message>
 </context>
 <context>
@@ -9337,7 +9338,7 @@ o
 &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
 &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
 &lt;/ol&gt;</source>
-        <translation>&lt;p&gt;Para crear una base de atos de Routino se necesita descargar archivos *.pbf de &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. El proceso de creación de una base de datos Routino es bastante lento y los archivos resultantes son bastante grandes. Por lo tanto, se recomienda no descargar continentes completos. Limite su descarga a los países que realmente necesita. Sin embargo, como Routino puede crear una ruta usando varias bases de datos, debe incluir todos los países por los que pase la ruta.&lt;/p&gt;
+        <translation>&lt;p&gt;Para crear una base de datos de Routino se necesita descargar archivos *.pbf de &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. El proceso de creación es bastante lento y los archivos resultantes son bastante grandes, por lo tanto, se recomienda no descargar continentes completos. Limite su descarga a los países que realmente necesita, sin embargo, como Routino puede crear una ruta usando varias bases de datos, es necesario incluir todos los países por los que desea que pase la ruta.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Seleccione uno o varios archivos *.pbf.&lt;/li&gt;
@@ -9494,7 +9495,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="40"/>
         <source>Save to original</source>
-        <translation>Guardar al original</translation>
+        <translation>Sobreescribir el original</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="47"/>
@@ -10940,7 +10941,7 @@ o
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="75"/>
         <source>Print date/time in </source>
-        <translation>Imprimir fecha y hora en</translation>
+        <translation>Mostrar fecha y hora en</translation>
     </message>
     <message>
         <location filename="../units/ITimeZoneSetup.ui" line="82"/>

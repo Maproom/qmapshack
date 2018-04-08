@@ -157,7 +157,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="222"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;Wählen Sie ein Hauptverzeichnis&lt;/h2&gt;&lt;p&gt;QMapShack benötigt auf Ihrer Festplatte ein Verzeichnis, wo alle Daten liegen. Üblicherweise wird das sehr groß. Wir empfehlen deswegen einen Ordner mit mehreren Unterordnern:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - hier liegen alle verfügbaren Karten&lt;/li&gt;&lt;li&gt;DEM - hier liegen die verfügbaren Höhendaten&lt;/li&gt;&lt;li&gt;Routino - hier liegen die Daten für den Routino Offline Router&lt;/li&gt;&lt;li&gt;BRouter - hier liegen die Daten für den BRouter Offline Router&lt;/li&gt;&lt;li&gt;Databases - hier erstellen Sie Datenbanken, um ihre persönlichen GIS Daten zu verwalten&lt;/li&gt;&lt;li&gt;GPX - hier liegen ihre GPX Dateien&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Wollen Sie diese Ordner jetzt gleich anlegen? Geben Sie dazu einen &lt;a  href=&apos;SetupHome&apos;&gt;Pfad&lt;/a&gt; an und QMapShack wird alle Unterordnern erstellen und sich in den Grundeinstellungen merken.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Wählen Sie ein Hauptverzeichnis&lt;/h2&gt;&lt;p&gt;QMapShack benötigt auf Ihrer Festplatte ein Verzeichnis, wo alle Daten liegen. Üblicherweise wird das sehr groß. Wir empfehlen deswegen einen Ordner mit mehreren Unterordnern:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - hier liegen alle verfügbaren Karten&lt;/li&gt;&lt;li&gt;DEM - hier liegen die verfügbaren Höhendaten&lt;/li&gt;&lt;li&gt;Routino - hier liegen die Daten für den Routino Offline Router&lt;/li&gt;&lt;li&gt;BRouter - hier liegen die Daten für den BRouter Offline Router&lt;/li&gt;&lt;li&gt;Databases - hier erstellen Sie Datenbanken, um ihre persönlichen GIS Daten zu verwalten&lt;/li&gt;&lt;li&gt;GPX - hier liegen ihre GPX Dateien&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Wollen Sie diese Ordner jetzt gleich anlegen? Geben Sie dazu einen &lt;a  href=&apos;SetupHome&apos;&gt;Pfad&lt;/a&gt; an und QMapShack wird alle Unterordnern erstellen und sich in den Grundeinstellungen merken.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="239"/>
@@ -167,7 +167,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="254"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;h2&gt;Karten!&lt;/h2&gt;&lt;p&gt;Eine Karte muss immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Kartenordnern liegen (&lt;a href=&apos;MapFolders&apos;&gt;Datei-&gt;Kartenverzeichnisse angeben&lt;/a&gt;). QMapShack wird die Datei finden und auflisten. Sie können die Kartenliste erneut laden, indem Sie mit der rechten Maustaste auf die Liste klicken und &apos;Karten erneut laden&apos; auswählen.&lt;/p&gt; &lt;p&gt;Eine Karte muss aktiviert werden, um sichtbar zu sein. Klicken Sie mit der rechten Maustaste auf den Karteneintrag in der Liste und wählen Sie &apos;Aktivieren&apos; aus. Sobald Sie eine Karte aktiviert haben, wird diese Hilfe verschwinden. Um sie wieder zu sehen, öffnen Sie einfach eine weitere Kartenansicht (&lt;a href=&apos;NewView&apos;&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Um mit ein paar Online Karten anzufangen, können sie auf den Link für &lt;a href=&apos;GetMaps&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Wenn Sie ein Garmin mit nichtkommerziellen Karten haben,  können Sie die *.img und *.jnx Dateien von Ihrem Gerät in den Kartenordner kopieren.&lt;/p&gt; &lt;/p&gt;Wenn Sie Rasterkarten in einem Format haben, das von GDAL unterstützt wird, müssen Sie zuerst eine virtuelle Kartendefinition (*.vrt) erstellen. Eine *.vrt Datei kann auf eine oder mehrere Dateien verweisen. Sie können QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) benutzen, um eine solche Datei zu erstellen.&lt;/p&gt;
+        <translation>&lt;h2&gt;Karten!&lt;/h2&gt;&lt;p&gt;Eine Karte muss immer über eine Datei, die von QMapShack erkannt wird, definiert sein. Diese Datei muss in einem der registrierten Kartenordnern liegen (&lt;a href=&apos;MapFolders&apos;&gt;Datei-&gt;Kartenverzeichnisse angeben&lt;/a&gt;). QMapShack wird die Datei finden und auflisten. Sie können die Kartenliste erneut laden, indem Sie mit der rechten Maustaste auf die Liste klicken und &apos;Karten erneut laden&apos; auswählen.&lt;/p&gt; &lt;p&gt;Eine Karte muss aktiviert werden, um sichtbar zu sein. Klicken Sie mit der rechten Maustaste auf den Karteneintrag in der Liste und wählen Sie &apos;Aktivieren&apos; aus. Sobald Sie eine Karte aktiviert haben, wird diese Hilfe verschwinden. Um sie wieder zu sehen, öffnen Sie einfach eine weitere Kartenansicht (&lt;a href=&apos;NewView&apos;&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Um mit ein paar Online Karten anzufangen, können sie auf den Link für &lt;a href=&apos;GetMaps&apos;&gt;Ungeduldige&lt;/a&gt; klicken. Wenn Sie ein Garmin mit nichtkommerziellen Karten haben,  können Sie die *.img und *.jnx Dateien von Ihrem Gerät in den Kartenordner kopieren.&lt;/p&gt; &lt;/p&gt;Wenn Sie Rasterkarten in einem Format haben, das von GDAL unterstützt wird, müssen Sie zuerst eine virtuelle Kartendefinition (*.vrt) erstellen. Eine *.vrt Datei kann auf eine oder mehrere Dateien verweisen. Sie können QMapShacks eigenen VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Werkzeug-&gt;VRT Builder&lt;/a&gt;) benutzen, um eine solche Datei zu erstellen.&lt;/p&gt;
 </translation>
     </message>
     <message>
@@ -659,12 +659,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Verschiedenes</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="407"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="411"/>
         <source>Color</source>
         <translation>Farbe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="412"/>
         <source>Activity</source>
         <translation>Aktivität</translation>
     </message>
@@ -1441,37 +1441,37 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Punkte anzeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2215"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
         <source>Changed name</source>
         <translation>Name geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
         <source>Changed comment</source>
         <translation>Kommentar geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
         <source>Changed description</source>
         <translation>Beschreibung geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
         <source>Changed links</source>
         <translation>Geänderte Verknüpfungen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2244"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2250"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Höhe von Punkt %1 auf %2 %3 geändert</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2268"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2274"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Die Aktivität wurde für den gesamten Track auf &apos;%1&apos; geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2313"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Die Aktivität wurde für den Bereich (%2..%3) auf &apos;%1&apos; geändert.</translation>
     </message>
@@ -1559,6 +1559,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <location filename="../gis/trk/filter/filter.cpp" line="475"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="519"/>
+        <source>Start Point moved to: </source>
+        <translation>Startpunkt verschieben zu:</translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6858,6 +6863,29 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
 </context>
 <context>
+    <name>IFilterChangeStartPoint</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
+        <source>Form</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
+        <source>Start Track at Point:</source>
+        <translation>Den Track an diesem Punkt anfangen:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
+        <source>...</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
+        <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
+        <translation>&lt;b&gt;Anfangpunkt ändern&lt;/b&gt;</translation>
+    </message>
+</context>
+<context>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
@@ -7367,42 +7395,42 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Geosuche einstellen</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="44"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte eine gültige EMail-Adresse eingeben:&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="70"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
         <source>please specify a valid email-address</source>
         <translation>Bitte eine gültige EMail-Adresse eingeben.</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="92"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
         <source>maximum number of results (default is 10):</source>
         <translation>maximale Anzahl von Ergebnissen (voreingestellt 10):</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="151"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte einen GeoNames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Benutzer &lt;/a&gt;anlegen&lt;/p&gt;&lt;p&gt;und dann &apos;Free Webservices&apos; in ihrem &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Konto&lt;/a&gt; anschalten.&lt;/p&gt;&lt;p&gt;Geben Sie ihren  Benutzernamen hier ein:&lt;/p&gt;
 </translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="164"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
         <source>enter geonames username here</source>
         <translation>GeoNames Benutzernamen hier eingeben.</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="201"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Bitte geben Sie ihren &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; hier ein:&lt;/p</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="227"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
         <translation>Google API Key hier eingeben.</translation>
     </message>

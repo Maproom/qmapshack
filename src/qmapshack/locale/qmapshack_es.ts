@@ -162,7 +162,7 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="239"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM's&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM's.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;Obtener Mapas&apos;&gt;Quiero mapas online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia Rápida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primeros Pasos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instalar Mapas y DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapas Base y DEM&apos;s.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener Mapas&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="254"/>
@@ -182,12 +182,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="285"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEM's online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM's&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuarios Impacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Quiero DEM&apos;s online.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuarios Pacientes:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Donde obtener DEM&apos;s&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="296"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Datos de elevación&lt;/h2&gt;&lt;p&gt;Los datos de elevación (Digital Elevation Model - DEM) se usan en distintas funciones de QMapShack y son totalmente independientes de los mapas, sin embargo funcionan bajo los mismos principios que los mapas. Los DEM serán un solo archivo en un formato que QMapShack pueda reconocer. Este archivo se ubicará en una de las carpetas configuradas en (&lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;). QMapShack los detectará y los mostrará en la lista, que puede refrescar haciendo clic con el botón derecho en la lista DEM y seleccionar &apos;Recargar DEM's&apos; en el menú.&lt;/p&gt;&lt;p&gt;Del mismo modo que con los mapas raster es necesario crear un archivo VRT para que los DEM sean reconocidos. Un solo *.vrt puede hacer referencia a uno a varios archivos. Nuevamente puede utilizar el (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear este archivo.&lt;/p&gt;&lt;p&gt;Para empezar a ver algunos DEM online, puede hacer clic en el enlace &lt;a href=&apos;GetDems&apos;&gt;usuarios impacientes&lt;/a&gt;, pero tenga en cuenta que el uso de estos recursos online ralentizan a QMapShack de un modo notable.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Datos de elevación&lt;/h2&gt;&lt;p&gt;Los datos de elevación (Digital Elevation Model - DEM) se usan en distintas funciones de QMapShack y son totalmente independientes de los mapas, sin embargo funcionan bajo los mismos principios que los mapas. Los DEM serán un solo archivo en un formato que QMapShack pueda reconocer. Este archivo se ubicará en una de las carpetas configuradas en (&lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;). QMapShack los detectará y los mostrará en la lista, que puede refrescar haciendo clic con el botón derecho en la lista DEM y seleccionar &apos;Recargar DEM&apos;s&apos; en el menú.&lt;/p&gt;&lt;p&gt;Del mismo modo que con los mapas raster es necesario crear un archivo VRT para que los DEM sean reconocidos. Un solo *.vrt puede hacer referencia a uno a varios archivos. Nuevamente puede utilizar el (&lt;a href=&apos;VrtBuilder&apos;&gt;Herramientas-&gt;Asistente VRT&lt;/a&gt;) para crear este archivo.&lt;/p&gt;&lt;p&gt;Para empezar a ver algunos DEM online, puede hacer clic en el enlace &lt;a href=&apos;GetDems&apos;&gt;usuarios impacientes&lt;/a&gt;, pero tenga en cuenta que el uso de estos recursos online ralentizan a QMapShack de un modo notable.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="311"/>
@@ -657,12 +657,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Diversos</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="407"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="411"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="412"/>
         <source>Activity</source>
         <translation>Actividad</translation>
     </message>
@@ -1439,37 +1439,37 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Mostrar puntos.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2215"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
         <source>Changed name</source>
         <translation>Se cambió el nombre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2221"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
         <source>Changed comment</source>
         <translation>Se cambió el comentario</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2227"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
         <source>Changed description</source>
         <translation>Se cambió la descripción</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2233"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2239"/>
         <source>Changed links</source>
         <translation>Se cambió el enlace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2244"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2250"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Se cambió altitud de los puntos %1 a %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2268"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2274"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Actividad cambiada a &apos;%1&apos; para todo el track.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2307"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2313"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Actividad cambiada a &apos;%1&apos; para el rango (%2..%3).</translation>
     </message>
@@ -1557,6 +1557,11 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/trk/filter/filter.cpp" line="475"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Convertidos puntos secundarios del ruteo a puntos de track</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="519"/>
+        <source>Start Point moved to: </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6093,7 +6098,7 @@ Si desea mantener sólo una mitad puede simplemente eliminar los puntos, o marca
         <location filename="../dem/IDemPathSetup.ui" line="143"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished">¡Ayuda!¡Quiero DEM's!
+        <translation type="unfinished">¡Ayuda!¡Quiero DEM&apos;s!
 ¡No quiero leer la documentación!</translation>
     </message>
 </context>
@@ -6853,6 +6858,29 @@ I don&apos;t want to read the documentation!</source>
     </message>
 </context>
 <context>
+    <name>IFilterChangeStartPoint</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
+        <source>Start Track at Point:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
+        <source>...</source>
+        <translation type="unfinished">...</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
+        <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IFilterDelete</name>
     <message>
         <location filename="../gis/trk/filter/IFilterDelete.ui" line="14"/>
@@ -7362,40 +7390,40 @@ I don&apos;t want to read the documentation!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="44"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para usar introduzca una dirección de email válida aquí:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="70"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
         <source>please specify a valid email-address</source>
         <translation>Introduzca una dirección de email válida</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="92"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
         <source>maximum number of results (default is 10):</source>
         <translation>número máximo de resultados (por defecto 10)</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="151"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;para utilizar cree una cuenta en &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;luego habilite &apos;Free Webservices&apos; en su &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Cuenta&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduzca su nombre de usuario en geonames aqui:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="164"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
         <source>enter geonames username here</source>
         <translation>introduzca su nombre de usuario en geonames aqui</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="201"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
         <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;introduzca su &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; aquí:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="227"/>
+        <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
         <translation>introduzca su Google API-key aquí</translation>
     </message>

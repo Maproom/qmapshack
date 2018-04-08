@@ -162,6 +162,7 @@ set( SRCS
     gis/trk/CSelectActivityColor.cpp
     gis/trk/CTableTrk.cpp
     gis/trk/CTrackData.cpp
+    gis/trk/filter/CFilterChangeStartPoint.cpp
     gis/trk/filter/CFilterDelete.cpp
     gis/trk/filter/CFilterDeleteExtension.cpp
     gis/trk/filter/CFilterDouglasPeuker.cpp
@@ -475,6 +476,7 @@ set( HDRS
     gis/trk/CSelectActivityColor.h
     gis/trk/CTableTrk.h
     gis/trk/CTrackData.h
+    gis/trk/filter/CFilterChangeStartPoint.h
     gis/trk/filter/CFilterDelete.h
     gis/trk/filter/CFilterDeleteExtension.h
     gis/trk/filter/CFilterDouglasPeuker.h
@@ -695,6 +697,7 @@ set( UIS
     gis/trk/IDetailsTrk.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui
+    gis/trk/filter/IFilterChangeStartPoint.ui
     gis/trk/filter/IFilterDelete.ui
     gis/trk/filter/IFilterDeleteExtension.ui
     gis/trk/filter/IFilterDouglasPeuker.ui

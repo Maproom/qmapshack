@@ -474,3 +474,47 @@ void CGisItemTrk::filterSubPt2Pt()
 
     changed(tr("Converted subpoints from routing to track points"), "://icons/48x48/FilterSubPt2Pt.png");
 }
+
+void CGisItemTrk::filterChangeStartPoint(qint32 idxNewStartPoint, const QString &wptName)
+{
+    QVector<CTrackData::trkpt_t> pts;
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+        pt.keyWpt.clear();
+        pts << pt;
+    }
+
+    QDateTime oldTimeStart = getTimeStart();
+    QDateTime oldTimeEnd = getTimeEnd();
+    QDateTime newTimeStart = pts[idxNewStartPoint].time;
+    QDateTime newTimeEnd = pts[idxNewStartPoint - 1].time;
+
+    qint64 deltaStart = qint64(oldTimeStart.toUTC().toTime_t()) - qint64(newTimeStart.toUTC().toTime_t());
+    qint64 deltaEnd = qint64(oldTimeEnd.toUTC().toTime_t()) - qint64(newTimeEnd.toUTC().toTime_t());
+
+    qint32 i;
+    for (i = 0; i < idxNewStartPoint; ++i)
+    {
+        pts[i].time = pts[i].time.addSecs(deltaEnd);    // Adjust old Start to new Start
+    }
+
+    for (; i < pts.size(); ++i)
+    {
+        pts[i].time = pts[i].time.addSecs(deltaStart);    // Adjust new Start to End
+    }
+
+    for (i = 0; i < idxNewStartPoint; ++i) // Reorder points
+    {
+        pts.insert(pts.size(), pts.takeAt(0));
+    }
+
+    trk.readFrom(pts);
+
+    deriveSecondaryData();
+
+    changed(tr("Start Point moved to: " + wptName.toLatin1()), "://icons/48x48/FilterChangeStartPoint.png");
+}

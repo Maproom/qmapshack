@@ -107,6 +107,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         plot->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         plot->show();
         layoutPlot->addWidget(plot);
+
+        const CTrackData::trkpt_t *ptRange1 = nullptr, *ptRange2 = nullptr;
+        trk.getMouseRange(ptRange1, ptRange2);
+        plot->setMouseRangeFocus(ptRange1, ptRange2);
     }
 
     if(trk.isOnDevice())

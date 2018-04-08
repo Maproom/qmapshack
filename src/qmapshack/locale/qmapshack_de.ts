@@ -1563,7 +1563,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="519"/>
         <source>Start Point moved to: </source>
-        <translation>Startpunkt verschieben zu:</translation>
+        <translation>Startpunkt verschoben zu: </translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6882,7 +6882,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Anfangpunkt ändern&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Anfangspunkt ändern&lt;/b&gt;</translation>
     </message>
 </context>
 <context>

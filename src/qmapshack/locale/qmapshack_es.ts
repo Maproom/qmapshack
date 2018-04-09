@@ -137,12 +137,12 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="190"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation>&lt;h1&gt;Bienvenido/a&lt;/h1&gt;&lt;p&gt;Gracias por usar QMapShack. QMapShack es un proyecto de Código Abierto y sin ánimo de lucro, que es mantenido por voluntarios y entusiastas.Es muy útil y a alcanzado cierta madurez, pero le faltan algunas comodidades que podría tener con software &apos;gratuito&apos; comercial. De hecho, carecemos de los recursos para proporcionarle una descarga centralizada y conveniente de mapas, datos de elevación y datos de enrutamiento,es necesario descargar estos datos de varios sitios por su cuenta, pero esta página puede ayudarte un poco.&lt;/p&gt;</translation>
+        <translation>&lt;h1&gt;Bienvenido/a&lt;/h1&gt;&lt;p&gt;Gracias por usar QMapShack. QMapShack es un proyecto de Código Abierto y sin ánimo de lucro, que es mantenido por voluntarios y entusiastas.Es muy útil y a alcanzado cierta madurez, pero le faltan algunas comodidades que podría tener con software &apos;gratuito&apos; comercial. De hecho, carecemos de los recursos para proporcionarle una descarga centralizada y conveniente de mapas, datos de elevación y datos de enrutamiento,es necesario descargar estos datos de varios sitios por su cuenta, pero esta página puede ayudarle un poco.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="199"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
-        <translation>&lt;h2&gt;Empecemos&lt;/h2&gt;&lt;p&gt;En primer lugar, póngase cómodo colocando los widgets del dock alrededor de esta área según su gusto personal. Para ello, cójalos con el mouse, presionado el botón izquierdo en la barra de título y muévalos a donde desee . Puede aclopar a la izquierda, derecha, arriba y abajo, también se pueden apilar colocandolos justo encima. Si no deseea la funcionalidad que ofrecen los widgets y hacer que la interfaz de su QMapShack sea más simple. La Barra de Herramientas también es un widget, puede colocarlo donde quiera.&lt;/p&gt;</translation>
+        <translation>&lt;h2&gt;Empecemos&lt;/h2&gt;&lt;p&gt;En primer lugar, póngase cómodo colocando los widgets del dock alrededor de esta área según su gusto personal. Para ello, cójalos con el mouse, presionado el botón izquierdo en la barra de título y muévalos a donde desee . Puede aclopar a la izquierda, derecha, arriba y abajo, también se pueden apilar colocandolos justo encima. Si no deseea la funcionalidad que ofrecen los widgets y hacer que la interfaz de su QMapShack sea más simple. La Barra de Herramientas también es un widget, puede colocarla donde quiera.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="209"/>
@@ -1561,7 +1561,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="519"/>
         <source>Start Point moved to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Punto de Inicio movido a:</translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6867,7 +6867,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
         <source>Start Track at Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Establecer Inicio en:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
@@ -6877,7 +6877,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Cambiar punto de Inicio&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -7387,7 +7387,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
         <source>Setup Geo-Search</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Configurar Búsqueda de Lugares</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
@@ -10160,7 +10160,7 @@ o
         <location filename="../gis/db/ISearchDatabase.ui" line="34"/>
         <source>Type the word you want to search for and press the search button. 
 If you enter &apos;word&apos; a search with an exact match is done. If you enter &apos;word*&apos;, &apos;word&apos; has to be at the beginning of a string.</source>
-        <translation>Escriba la palabra que desea buscar y pulse botón de busqueda. 
+        <translation>Escriba la palabra que desea buscar y pulse botón de busqueda.
 Si introduce la &apos;palabra&apos; entre apóstrofes se busca una coincidencia exacta . Si introduce &apos;palabra*&apos;, la &apos;palabra&apos; se busca al principio de una cadena.</translation>
     </message>
     <message>

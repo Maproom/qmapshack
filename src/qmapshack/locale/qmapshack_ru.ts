@@ -1562,7 +1562,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="519"/>
         <source>Start Point moved to: </source>
-        <translation type="unfinished"></translation>
+        <translation>Начальная точка перемещена в: </translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -6869,22 +6869,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
         <source>Start Track at Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Начало трека в точке:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Изменить начальную точку&lt;/b&gt;</translation>
     </message>
 </context>
 <context>

@@ -65,8 +65,6 @@ private slots:
     void slotWithArrowsMode(bool isUser);
     void slotWithArrows(bool yes);
 
-    void slotTabBarClicked(int);
-
 private:
     void loadGraphSource(QComboBox * comboBox, qint32 n, const QString cfgDefault);
     void saveGraphSource(QComboBox * comboBox, qint32 n);

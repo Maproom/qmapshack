@@ -158,8 +158,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
     connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
 
-    connect(tabWidget, &QTabWidget::tabBarClicked, this, &CDetailsTrk::slotTabBarClicked);
-
     setupGraphLimits(trk.limitsGraph1, toolLimitAutoGraph1, toolLimitUsrGraph1, toolLimitSysGraph1, spinMinGraph1, spinMaxGraph1);
     setupGraphLimits(trk.limitsGraph2, toolLimitAutoGraph2, toolLimitUsrGraph2, toolLimitSysGraph2, spinMinGraph2, spinMaxGraph2);
     setupGraphLimits(trk.limitsGraph3, toolLimitAutoGraph3, toolLimitUsrGraph3, toolLimitSysGraph3, spinMinGraph3, spinMaxGraph3);
@@ -183,7 +181,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
 
     slotShowPlots();
-    enableTabFilter();
 }
 
 CDetailsTrk::~CDetailsTrk()
@@ -492,8 +489,9 @@ void CDetailsTrk::updateData()
     if(nullptr != filterChangeStartPoint)
     {
         filterChangeStartPoint->updateUi();
-        enableTabFilter();
     }
+
+    enableTabFilter();
 
     originator = false;
     CCanvas::restoreOverrideCursor("CDetailsTrk::updateData");
@@ -741,9 +739,3 @@ void CDetailsTrk::slotWithArrows(bool yes)
 {
     trk.showArrows = yes;
 }
-
-void CDetailsTrk::slotTabBarClicked(int)
-{
-    enableTabFilter();
-}
-

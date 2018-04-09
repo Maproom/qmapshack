@@ -107,6 +107,10 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         plot->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         plot->show();
         layoutPlot->addWidget(plot);
+
+        const CTrackData::trkpt_t *ptRange1 = nullptr, *ptRange2 = nullptr;
+        trk.getMouseRange(ptRange1, ptRange2);
+        plot->setMouseRangeFocus(ptRange1, ptRange2);
     }
 
     if(trk.isOnDevice())
@@ -153,6 +157,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(comboColorSource, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotColorSourceChanged);
     connect(comboGraph2,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
     connect(comboGraph3,      static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &CDetailsTrk::slotSetupGraph);
+
+    connect(tabWidget, &QTabWidget::tabBarClicked, this, &CDetailsTrk::slotTabBarClicked);
 
     setupGraphLimits(trk.limitsGraph1, toolLimitAutoGraph1, toolLimitUsrGraph1, toolLimitSysGraph1, spinMinGraph1, spinMaxGraph1);
     setupGraphLimits(trk.limitsGraph2, toolLimitAutoGraph2, toolLimitUsrGraph2, toolLimitSysGraph2, spinMinGraph2, spinMaxGraph2);
@@ -486,6 +492,7 @@ void CDetailsTrk::updateData()
     if(nullptr != filterChangeStartPoint)
     {
         filterChangeStartPoint->updateUi();
+        enableTabFilter();
     }
 
     originator = false;
@@ -734,3 +741,9 @@ void CDetailsTrk::slotWithArrows(bool yes)
 {
     trk.showArrows = yes;
 }
+
+void CDetailsTrk::slotTabBarClicked(int)
+{
+    enableTabFilter();
+}
+

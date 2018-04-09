@@ -95,6 +95,7 @@ const QPoint CScrOptUnclutter::positions[9][8] =
 CScrOptUnclutter::CScrOptUnclutter(IMouse *mouse)
     : IScrOpt(mouse)
 {
+    hide();
 }
 
 CScrOptUnclutter::~CScrOptUnclutter()

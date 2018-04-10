@@ -1204,7 +1204,6 @@ void IGisProject::filter(const QString& str)
 
 bool IGisProject::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qint32& threshold, QPolygonF& polyline)
 {
-
     const int N = childCount();
     for(int n = 0; n < N; n++)
     {

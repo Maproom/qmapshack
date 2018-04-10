@@ -637,32 +637,32 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="168"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
         <source>Reduce visible track points</source>
         <translation>Omezit počet viditelných bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="171"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
         <source>Change elevation of track points</source>
         <translation>Změnit informace o výškách bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="174"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
         <source>Change timestamp of track points</source>
         <translation>Změnit časová razítka bodů stopy</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="177"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="181"/>
         <source>Miscellaneous</source>
         <translation>Různé</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="411"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="414"/>
         <source>Color</source>
         <translation>Barva</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="415"/>
         <source>Activity</source>
         <translation>Činnost</translation>
     </message>
@@ -2637,637 +2637,637 @@ A když to bez map nejde, proč je neposkytujete? Protože mít mapy připraven�
 <context>
     <name>CMapIMG</name>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="146"/>
+        <location filename="../map/CMapIMG.cpp" line="147"/>
         <source>Failed ...</source>
         <translation>Nepodařilo se...</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="175"/>
+        <location filename="../map/CMapIMG.cpp" line="176"/>
         <source>Unspecified</source>
         <translation>Neurčeno</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="176"/>
+        <location filename="../map/CMapIMG.cpp" line="177"/>
         <source>French</source>
         <translation>Francouzský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="177"/>
+        <location filename="../map/CMapIMG.cpp" line="178"/>
         <source>German</source>
         <translation>Německý</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="178"/>
+        <location filename="../map/CMapIMG.cpp" line="179"/>
         <source>Dutch</source>
         <translation>Holandský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="179"/>
+        <location filename="../map/CMapIMG.cpp" line="180"/>
         <source>English</source>
         <translation>Anglický</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="180"/>
+        <location filename="../map/CMapIMG.cpp" line="181"/>
         <source>Italian</source>
         <translation>Italský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="181"/>
+        <location filename="../map/CMapIMG.cpp" line="182"/>
         <source>Finnish</source>
         <translation>Finský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="182"/>
+        <location filename="../map/CMapIMG.cpp" line="183"/>
         <source>Swedish</source>
         <translation>Švédský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="183"/>
+        <location filename="../map/CMapIMG.cpp" line="184"/>
         <source>Spanish</source>
         <translation>Španělský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="184"/>
+        <location filename="../map/CMapIMG.cpp" line="185"/>
         <source>Basque</source>
         <translation>Baskický</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="185"/>
+        <location filename="../map/CMapIMG.cpp" line="186"/>
         <source>Catalan</source>
         <translation>Katalánský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="186"/>
+        <location filename="../map/CMapIMG.cpp" line="187"/>
         <source>Galician</source>
         <translation>Galicijský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="187"/>
+        <location filename="../map/CMapIMG.cpp" line="188"/>
         <source>Welsh</source>
         <translation>Velšský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="188"/>
+        <location filename="../map/CMapIMG.cpp" line="189"/>
         <source>Gaelic</source>
         <translation>Gaelský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="189"/>
+        <location filename="../map/CMapIMG.cpp" line="190"/>
         <source>Danish</source>
         <translation>Dánský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="190"/>
+        <location filename="../map/CMapIMG.cpp" line="191"/>
         <source>Norwegian</source>
         <translation>Norský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="191"/>
+        <location filename="../map/CMapIMG.cpp" line="192"/>
         <source>Portuguese</source>
         <translation>Portugalský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="192"/>
+        <location filename="../map/CMapIMG.cpp" line="193"/>
         <source>Slovak</source>
         <translation>Slovenský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="193"/>
+        <location filename="../map/CMapIMG.cpp" line="194"/>
         <source>Czech</source>
         <translation>Český</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="194"/>
+        <location filename="../map/CMapIMG.cpp" line="195"/>
         <source>Croatian</source>
         <translation>Chorvatský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="195"/>
+        <location filename="../map/CMapIMG.cpp" line="196"/>
         <source>Hungarian</source>
         <translation>Maďarský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="196"/>
+        <location filename="../map/CMapIMG.cpp" line="197"/>
         <source>Polish</source>
         <translation>Polský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="197"/>
+        <location filename="../map/CMapIMG.cpp" line="198"/>
         <source>Turkish</source>
         <translation>Turecký</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="198"/>
+        <location filename="../map/CMapIMG.cpp" line="199"/>
         <source>Greek</source>
         <translation>Řecký</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="199"/>
+        <location filename="../map/CMapIMG.cpp" line="200"/>
         <source>Slovenian</source>
         <translation>Slovinský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="200"/>
+        <location filename="../map/CMapIMG.cpp" line="201"/>
         <source>Russian</source>
         <translation>Ruský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="201"/>
+        <location filename="../map/CMapIMG.cpp" line="202"/>
         <source>Estonian</source>
         <translation>Estonský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="202"/>
+        <location filename="../map/CMapIMG.cpp" line="203"/>
         <source>Latvian</source>
         <translation>Lotyšský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="203"/>
+        <location filename="../map/CMapIMG.cpp" line="204"/>
         <source>Romanian</source>
         <translation>Rumunský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="204"/>
+        <location filename="../map/CMapIMG.cpp" line="205"/>
         <source>Albanian</source>
         <translation>Albánský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="205"/>
+        <location filename="../map/CMapIMG.cpp" line="206"/>
         <source>Bosnian</source>
         <translation>Bosenský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="206"/>
+        <location filename="../map/CMapIMG.cpp" line="207"/>
         <source>Lithuanian</source>
         <translation>Litevský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="207"/>
+        <location filename="../map/CMapIMG.cpp" line="208"/>
         <source>Serbian</source>
         <translation>Srbský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="208"/>
+        <location filename="../map/CMapIMG.cpp" line="209"/>
         <source>Macedonian</source>
         <translation>Makedonský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="209"/>
+        <location filename="../map/CMapIMG.cpp" line="210"/>
         <source>Bulgarian</source>
         <translation>Bulharský</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="266"/>
+        <location filename="../map/CMapIMG.cpp" line="267"/>
         <source>Major highway</source>
         <translation>Dálnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="267"/>
+        <location filename="../map/CMapIMG.cpp" line="268"/>
         <source>Principal highway</source>
         <translation>Silnice první třídy</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="268"/>
+        <location filename="../map/CMapIMG.cpp" line="269"/>
         <source>Other highway</source>
         <translation>Jiné rychlostní silnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="269"/>
+        <location filename="../map/CMapIMG.cpp" line="270"/>
         <source>Arterial road</source>
         <translation>Rychlostní silnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="270"/>
+        <location filename="../map/CMapIMG.cpp" line="271"/>
         <source>Collector road</source>
         <translation>Státní silnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="271"/>
+        <location filename="../map/CMapIMG.cpp" line="272"/>
         <source>Residential street</source>
         <translation>Silnice v obytné oblasti</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="272"/>
+        <location filename="../map/CMapIMG.cpp" line="273"/>
         <source>Alley/Private road</source>
         <translation>Soukromá cesta</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="273"/>
+        <location filename="../map/CMapIMG.cpp" line="274"/>
         <source>Highway ramp, low speed</source>
         <translation>Nájezd na dálnici/sjezd z dálnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="274"/>
+        <location filename="../map/CMapIMG.cpp" line="275"/>
         <source>Highway ramp, high speed</source>
         <translation>Nájezd na dálnici/sjezd z dálnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="275"/>
+        <location filename="../map/CMapIMG.cpp" line="276"/>
         <source>Unpaved road</source>
         <translation>Neasfaltovaná cesta</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="276"/>
+        <location filename="../map/CMapIMG.cpp" line="277"/>
         <source>Major highway connector</source>
         <translation>Dalniční přivaděč</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="277"/>
+        <location filename="../map/CMapIMG.cpp" line="278"/>
         <source>Roundabout</source>
         <translation>Kruhový objezd</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="278"/>
+        <location filename="../map/CMapIMG.cpp" line="279"/>
         <source>Railroad</source>
         <translation>Železnice, koleje</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="279"/>
+        <location filename="../map/CMapIMG.cpp" line="280"/>
         <source>Shoreline</source>
         <translation>Břeh</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="280"/>
+        <location filename="../map/CMapIMG.cpp" line="281"/>
         <source>Trail</source>
         <translation>Cesta</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="281"/>
+        <location filename="../map/CMapIMG.cpp" line="282"/>
         <source>Stream</source>
         <translation>Proud</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="282"/>
+        <location filename="../map/CMapIMG.cpp" line="283"/>
         <source>Time zone</source>
         <translation>Časové pásmo</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="283"/>
         <location filename="../map/CMapIMG.cpp" line="284"/>
+        <location filename="../map/CMapIMG.cpp" line="285"/>
         <source>Ferry</source>
         <translation>Přívoz</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="285"/>
+        <location filename="../map/CMapIMG.cpp" line="286"/>
         <source>State/province border</source>
         <translation>Státní/Zemská hranice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="286"/>
+        <location filename="../map/CMapIMG.cpp" line="287"/>
         <source>County/parish border</source>
         <translation>Krajská/Obecní hranice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="287"/>
+        <location filename="../map/CMapIMG.cpp" line="288"/>
         <source>International border</source>
         <translation>Mezinárodní hranice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="288"/>
+        <location filename="../map/CMapIMG.cpp" line="289"/>
         <source>River</source>
         <translation>Řeka</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="289"/>
+        <location filename="../map/CMapIMG.cpp" line="290"/>
         <source>Minor land contour</source>
         <translation>Malá vrstevnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="290"/>
+        <location filename="../map/CMapIMG.cpp" line="291"/>
         <source>Intermediate land contour</source>
         <translation>Střední vrstevnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="291"/>
+        <location filename="../map/CMapIMG.cpp" line="292"/>
         <source>Major land contour</source>
         <translation>Velká vrstevnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="292"/>
+        <location filename="../map/CMapIMG.cpp" line="293"/>
         <source>Minor depth contour</source>
         <translation>Malá hloubková čára</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="293"/>
+        <location filename="../map/CMapIMG.cpp" line="294"/>
         <source>Intermediate depth contour</source>
         <translation>Střední hloubková čára</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="294"/>
+        <location filename="../map/CMapIMG.cpp" line="295"/>
         <source>Major depth contour</source>
         <translation>Velká hloubková čára</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="295"/>
+        <location filename="../map/CMapIMG.cpp" line="296"/>
         <source>Intermittent stream</source>
         <translation>Přerušovaný potok (Wadi)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="296"/>
-        <location filename="../map/CMapIMG.cpp" line="378"/>
+        <location filename="../map/CMapIMG.cpp" line="297"/>
+        <location filename="../map/CMapIMG.cpp" line="379"/>
         <source>Airport runway</source>
         <translation>Přistávací dráha</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="297"/>
+        <location filename="../map/CMapIMG.cpp" line="298"/>
         <source>Pipeline</source>
         <translation>Dálkové potrubí</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="298"/>
+        <location filename="../map/CMapIMG.cpp" line="299"/>
         <source>Powerline</source>
         <translation>Elektrické vedení</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="299"/>
+        <location filename="../map/CMapIMG.cpp" line="300"/>
         <source>Marine boundary</source>
         <translation>Hranice moře</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="300"/>
+        <location filename="../map/CMapIMG.cpp" line="301"/>
         <source>Hazard boundary</source>
         <translation>Nebezpečná hranice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="365"/>
+        <location filename="../map/CMapIMG.cpp" line="366"/>
         <source>Large urban area (&amp;gt;200K)</source>
         <translation>Velkoměstská oblast (&amp;gt;200 000)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="366"/>
+        <location filename="../map/CMapIMG.cpp" line="367"/>
         <source>Small urban area (&amp;lt;200K)</source>
         <translation>Maloměstská oblast (&amp;gt;200 000)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="367"/>
+        <location filename="../map/CMapIMG.cpp" line="368"/>
         <source>Rural housing area</source>
         <translation>Městská obytná oblast</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="368"/>
+        <location filename="../map/CMapIMG.cpp" line="369"/>
         <source>Military base</source>
         <translation>Vojenská základna</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="369"/>
+        <location filename="../map/CMapIMG.cpp" line="370"/>
         <source>Parking lot</source>
         <translation>Parkoviště</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="370"/>
+        <location filename="../map/CMapIMG.cpp" line="371"/>
         <source>Parking garage</source>
         <translation>Parkovací budova</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="371"/>
+        <location filename="../map/CMapIMG.cpp" line="372"/>
         <source>Airport</source>
         <translation>Letiště</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="372"/>
+        <location filename="../map/CMapIMG.cpp" line="373"/>
         <source>Shopping center</source>
         <translation>Nákupní středisko</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="373"/>
+        <location filename="../map/CMapIMG.cpp" line="374"/>
         <source>Marina</source>
         <translation>Přístav</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="374"/>
+        <location filename="../map/CMapIMG.cpp" line="375"/>
         <source>University/College</source>
         <translation>Univerzita/Vysoká škola</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="375"/>
+        <location filename="../map/CMapIMG.cpp" line="376"/>
         <source>Hospital</source>
         <translation>Nemocnice</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="376"/>
+        <location filename="../map/CMapIMG.cpp" line="377"/>
         <source>Industrial complex</source>
         <translation>Průmyslový celek</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="377"/>
+        <location filename="../map/CMapIMG.cpp" line="378"/>
         <source>Reservation</source>
         <translation>Chráněné území</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="379"/>
+        <location filename="../map/CMapIMG.cpp" line="380"/>
         <source>Man-made area</source>
         <translation>Zástavba</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="380"/>
+        <location filename="../map/CMapIMG.cpp" line="381"/>
         <source>Sports complex</source>
         <translation>Oblast pro tělesné činnosti</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="381"/>
+        <location filename="../map/CMapIMG.cpp" line="382"/>
         <source>Golf course</source>
         <translation>Golfové hřiště</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="382"/>
+        <location filename="../map/CMapIMG.cpp" line="383"/>
         <source>Cemetery</source>
         <translation>Hřbitov</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="383"/>
         <location filename="../map/CMapIMG.cpp" line="384"/>
         <location filename="../map/CMapIMG.cpp" line="385"/>
+        <location filename="../map/CMapIMG.cpp" line="386"/>
         <source>National park</source>
         <translation>Národní park</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="386"/>
+        <location filename="../map/CMapIMG.cpp" line="387"/>
         <source>City park</source>
         <translation>Městské sady</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="387"/>
         <location filename="../map/CMapIMG.cpp" line="388"/>
         <location filename="../map/CMapIMG.cpp" line="389"/>
+        <location filename="../map/CMapIMG.cpp" line="390"/>
         <source>State park</source>
         <translation>Státní park</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="390"/>
+        <location filename="../map/CMapIMG.cpp" line="391"/>
         <source>Forest</source>
         <translation>Les</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="391"/>
+        <location filename="../map/CMapIMG.cpp" line="392"/>
         <source>Ocean</source>
         <translation>Oceán</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="392"/>
-        <location filename="../map/CMapIMG.cpp" line="394"/>
-        <location filename="../map/CMapIMG.cpp" line="404"/>
+        <location filename="../map/CMapIMG.cpp" line="393"/>
+        <location filename="../map/CMapIMG.cpp" line="395"/>
+        <location filename="../map/CMapIMG.cpp" line="405"/>
         <source>Blue (unknown)</source>
         <translation>Modrá (neznámé)</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="393"/>
+        <location filename="../map/CMapIMG.cpp" line="394"/>
         <source>Sea</source>
         <translation>Moře</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="395"/>
         <location filename="../map/CMapIMG.cpp" line="396"/>
-        <location filename="../map/CMapIMG.cpp" line="403"/>
+        <location filename="../map/CMapIMG.cpp" line="397"/>
+        <location filename="../map/CMapIMG.cpp" line="404"/>
         <source>Large lake</source>
         <translation>Velké jezero</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="397"/>
         <location filename="../map/CMapIMG.cpp" line="398"/>
+        <location filename="../map/CMapIMG.cpp" line="399"/>
         <source>Medium lake</source>
         <translation>Střední jezero</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="399"/>
         <location filename="../map/CMapIMG.cpp" line="400"/>
+        <location filename="../map/CMapIMG.cpp" line="401"/>
         <source>Small lake</source>
         <translation>Malé jezero</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="401"/>
         <location filename="../map/CMapIMG.cpp" line="402"/>
+        <location filename="../map/CMapIMG.cpp" line="403"/>
         <source>Major lake</source>
         <translation>Velmi velké jezero</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="405"/>
+        <location filename="../map/CMapIMG.cpp" line="406"/>
         <source>Major River</source>
         <translation>Veletok</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="406"/>
+        <location filename="../map/CMapIMG.cpp" line="407"/>
         <source>Large River</source>
         <translation>Velká řeka</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="407"/>
+        <location filename="../map/CMapIMG.cpp" line="408"/>
         <source>Medium River</source>
         <translation>Střední řeka</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="408"/>
+        <location filename="../map/CMapIMG.cpp" line="409"/>
         <source>Small River</source>
         <translation>Malá řeka</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="411"/>
+        <location filename="../map/CMapIMG.cpp" line="412"/>
         <source>Intermittent water</source>
         <translation>Přerušovaná voda</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="412"/>
+        <location filename="../map/CMapIMG.cpp" line="413"/>
         <source>Wetland/Swamp</source>
         <translation>Močál/Bažina</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="413"/>
+        <location filename="../map/CMapIMG.cpp" line="414"/>
         <source>Glacier</source>
         <translation>Ledovec</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="414"/>
+        <location filename="../map/CMapIMG.cpp" line="415"/>
         <source>Orchard/Plantation</source>
         <translation>Sad/Plantáž</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="415"/>
+        <location filename="../map/CMapIMG.cpp" line="416"/>
         <source>Scrub</source>
         <translation>Křoví</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="416"/>
+        <location filename="../map/CMapIMG.cpp" line="417"/>
         <source>Tundra</source>
         <translation>Tundra</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="417"/>
+        <location filename="../map/CMapIMG.cpp" line="418"/>
         <source>Flat</source>
         <translation>Rovina</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="418"/>
+        <location filename="../map/CMapIMG.cpp" line="419"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="432"/>
+        <location filename="../map/CMapIMG.cpp" line="433"/>
         <source>Read external type file...</source>
         <translation>Přečíst vnější typ souboru...</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="432"/>
+        <location filename="../map/CMapIMG.cpp" line="433"/>
         <source>Failed to read type file: %1
 Fall back to internal types.</source>
         <translation>Nepodařilo se přečíst typ souboru: %1
 Návrat k vnitřním typům.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="474"/>
+        <location filename="../map/CMapIMG.cpp" line="475"/>
         <source>Failed to read: </source>
         <translation>Nepodařilo se přečíst: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="517"/>
+        <location filename="../map/CMapIMG.cpp" line="518"/>
         <source>Failed to open: </source>
         <translation>Nepodařilo se otevřít: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="541"/>
-        <location filename="../map/CMapIMG.cpp" line="545"/>
+        <location filename="../map/CMapIMG.cpp" line="542"/>
+        <location filename="../map/CMapIMG.cpp" line="546"/>
         <source>Bad file format: </source>
         <translation>Špatný formát souboru: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="634"/>
+        <location filename="../map/CMapIMG.cpp" line="635"/>
         <source>Failed to read file structure: </source>
         <translation>Nepodařilo se přečíst stavbu souboru: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="669"/>
+        <location filename="../map/CMapIMG.cpp" line="670"/>
         <source>Loading %1</source>
         <translation>Nahrává se %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="675"/>
+        <location filename="../map/CMapIMG.cpp" line="676"/>
         <source>User abort: </source>
         <translation>Zrušeno uživatelem: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="678"/>
+        <location filename="../map/CMapIMG.cpp" line="679"/>
         <source>File is NT format. QMapShack is unable to read map files with NT format: </source>
         <translation>Soubor je ve formátu NT. QMapShack nedokáže číst mapové soubory ve formátu NT: </translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="769"/>
+        <location filename="../map/CMapIMG.cpp" line="770"/>
         <source>File contains locked / encrypted data. Garmin does not want you to use this file with any other software than the one supplied by Garmin.</source>
         <translation>Soubor obsahuje zamknutá/zašifrovaná data. Garmin nechce, aby byl tento soubor použit s jiným programem než dodaným Garminem.</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2388"/>
-        <location filename="../map/CMapIMG.cpp" line="2394"/>
-        <location filename="../map/CMapIMG.cpp" line="2398"/>
+        <location filename="../map/CMapIMG.cpp" line="2389"/>
+        <location filename="../map/CMapIMG.cpp" line="2395"/>
+        <location filename="../map/CMapIMG.cpp" line="2399"/>
         <source>Point of Interest</source>
         <translation>Podivuhodnost</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2484"/>
+        <location filename="../map/CMapIMG.cpp" line="2485"/>
         <source>Unknown</source>
         <translation>Neznámý</translation>
     </message>
     <message>
-        <location filename="../map/CMapIMG.cpp" line="2526"/>
-        <location filename="../map/CMapIMG.cpp" line="2534"/>
-        <location filename="../map/CMapIMG.cpp" line="2541"/>
+        <location filename="../map/CMapIMG.cpp" line="2527"/>
+        <location filename="../map/CMapIMG.cpp" line="2535"/>
+        <location filename="../map/CMapIMG.cpp" line="2542"/>
         <source>Area</source>
         <translation>Oblast</translation>
     </message>
@@ -7836,7 +7836,7 @@ Název souboru: %1</translation>
 <context>
     <name>ILineOp</name>
     <message>
-        <location filename="../mouse/line/ILineOp.cpp" line="190"/>
+        <location filename="../mouse/line/ILineOp.cpp" line="200"/>
         <source>Routing</source>
         <translation>Cesta</translation>
     </message>
@@ -8609,67 +8609,72 @@ Tip:
 <context>
     <name>IMouseEditLine</name>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="251"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="265"/>
         <source>&lt;b&gt;New Line&lt;/b&gt;&lt;br/&gt;Move the mouse and use the left mouse button to drop points. When done use the right mouse button to stop.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Nová čára&lt;/b&gt;&lt;br/&gt;Posuňte ukazovátko myši a použijte levé tlačítko myši k upuštění bodů. Až to bude uděláno, použijte pravé tlačítko myši k zastavení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="286"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="300"/>
         <source>&lt;b&gt;Delete Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to delete it.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Smazat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho smazání.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="294"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="308"/>
         <source>&lt;b&gt;Select Range of Points&lt;/b&gt;&lt;br/&gt;Left click on first point to start selection. Left click second point to complete selection and choose from options. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Upravit rozsah bodů&lt;/b&gt;&lt;br/&gt;Klepněte levým tlačítkem myši na první bod pro započetí výběru. Klepněte levým tlačítkem myši na druhý bod pro dokončení výběru a vyberte z voleb. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="302"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="316"/>
         <source>&lt;b&gt;Move Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a point and press the left button to make it stick to the cursor. Move the mouse to move the point. Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přesunout bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k bodu a stiskněte levé tlačítko myši pro jeho držení v blízkosti ukazovátka. Posuňte myší pro přesunutí bodu. Upustěte bod klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="310"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
         <source>&lt;b&gt;Add Point&lt;/b&gt;&lt;br/&gt;Move the mouse close to a line segment and press the left button to add a point. The point will stick to the cursor and you can move it.  Drop the point by a left click. Use the right mouse button to cancel.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Přidat bod&lt;/b&gt;&lt;br/&gt;Přesuňte ukazovátko myši blízko k čáře a stiskněte levé tlačítko myši pro přidání bodu. Bod přilne k ukazovátku a vy jím budete moci pohnout. Bod upustěte klepnutím levým tlačítkem myši. Použijte pravé tlačítko myši pro zrušení.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="318"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="332"/>
         <source>&lt;b&gt;No Routing&lt;/b&gt;&lt;br/&gt;All points will be connected with a straight line.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Žádné stanovení cesty&lt;/b&gt;&lt;br/&gt;Všechny body budou spojeny přímou čarou.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="324"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="338"/>
         <source>&lt;b&gt;Auto Routing&lt;/b&gt;&lt;br/&gt;The current router setup is used to derive a route between points. &lt;b&gt;Note:&lt;/b&gt; The selected router must be able to route on-the-fly. Offline routers usually can do, online routers can&apos;t.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Automatické stanovení cesty&lt;/b&gt;&lt;br/&gt;Nynější nastavení směrování je používáno k vytváření cesty mezi body. &lt;b&gt;Poznámka:&lt;/b&gt; Vybraný směrovač musí být schopen rychle směrovat (za běhu). Směrovače nepřipojené k internetu toto obvykle dokáží, směrovače připojené k internetu to běžně neumí.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="329"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="343"/>
         <source>&lt;b&gt;Vector Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded vector map if possible.&lt;br/&gt;</source>
         <translation>&lt;b&gt;Vektorové stanovení cesty&lt;/b&gt;&lt;br/&gt;Spojuje body čárou z nahrané vektorové mapy, je-li to možné.&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="501"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="349"/>
+        <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
         <source>&lt;b&gt;%1 Metrics&lt;/b&gt;</source>
         <translation>&lt;b&gt;%1 metrika&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="504"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="523"/>
         <source>Distance:</source>
         <translation>Vzdálenost:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="506"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="525"/>
         <source>Ascent:</source>
         <translation>Stoupání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.cpp" line="508"/>
+        <location filename="../mouse/line/IMouseEditLine.cpp" line="527"/>
         <source>Descent:</source>
         <translation>Klesání:</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IMouseEditLine.h" line="138"/>
+        <location filename="../mouse/line/IMouseEditLine.h" line="140"/>
         <source>&lt;br/&gt;&lt;b&gt;Move the map&lt;/b&gt;&lt;br/&gt;If you keep the left mouse button pressed and move the mouse, you will move the map.&lt;br/&gt;&lt;br/&gt;</source>
         <translation>&lt;br/&gt;&lt;b&gt;Posunout mapu&lt;/b&gt;&lt;br/&gt;Pokud levé tlačítko myši podržíte stisknuté a myší pohnete, posunete mapu.&lt;br/&gt;&lt;br/&gt;</translation>
     </message>
@@ -8716,19 +8721,19 @@ Tip:
         <translation>Vyjmout...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="542"/>
+        <location filename="../plot/IPlot.cpp" line="543"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Pro (pouze) svislé přiblížení podržte klávesu Ctrl.
 Pro (pouze) vodorovné přiblížení podržte klávesu Alt.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="697"/>
+        <location filename="../plot/IPlot.cpp" line="698"/>
         <source>No or bad data.</source>
         <translation>Žádná nebo špatná data.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1298"/>
+        <location filename="../plot/IPlot.cpp" line="1299"/>
         <source>Select output file</source>
         <translation>Vybrat výstupní soubor</translation>
     </message>
@@ -9580,8 +9585,9 @@ nebo
         <location filename="../mouse/line/IScrOptEditLine.ui" line="118"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="141"/>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="164"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="300"/>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="287"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="320"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="337"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -9616,12 +9622,17 @@ nebo
         <translation>Ctrl+V</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="297"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
+        <source>Connect points with a line from a loaded track if possible.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
         <source>Undo last change</source>
         <translation>Vrátit poslední změnu zpět</translation>
     </message>
     <message>
-        <location filename="../mouse/line/IScrOptEditLine.ui" line="314"/>
+        <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
         <source>Redo last change</source>
         <translation>Obnovit poslední změnu</translation>
     </message>

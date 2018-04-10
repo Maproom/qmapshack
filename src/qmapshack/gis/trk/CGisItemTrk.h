@@ -248,6 +248,7 @@ public:
     qint32 getElevation(qint32 idx) const;
 
     void getMouseRange(int &idx1, int &idx2, bool total) const;
+    void getMouseRange(const CTrackData::trkpt_t * &mr1, const CTrackData::trkpt_t * &mr2) const;
 
     /** @defgroup ColorSource Stuff related to coloring tracks using data from different sources
 

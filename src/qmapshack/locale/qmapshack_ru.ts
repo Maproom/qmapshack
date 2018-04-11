@@ -8673,7 +8673,7 @@ Tip:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="349"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Маршрутизация с помощью трека&lt;/b&gt;&lt;br/&gt;По возможности соединить точки линией загруженного трека.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
@@ -9654,7 +9654,7 @@ or
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>По возможности соединить точки линией загруженного трека.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>

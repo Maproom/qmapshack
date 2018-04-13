@@ -57,8 +57,8 @@ private:
     QString geonamesUsername;
     QString nominatimEmail;
     QString symbolName;
-    int nominatimLimit;
-
+    int nominatimLimit = 10;
+    bool accumulativeResults = false;
 
     friend class CGeoSearchConfigDialog;
     friend class CGeoSearch;

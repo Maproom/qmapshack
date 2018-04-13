@@ -26,6 +26,7 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
+#include "misc.h"
 #include "version.h"
 
 #include <QMutexLocker>
@@ -94,9 +95,20 @@ void CGeoSearch::slotSelectService()
     actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
     menu->addSeparator();
+    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AccumResults.png"),tr("Accumulative Results"));
+    actAccu->setCheckable(true);
+    actAccu->setChecked(searchConfig->accumulativeResults);
+    connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
+
+    QAction * actReset = menu->addAction(QIcon("://icons/32x32/Reset.png"),tr("Reset Results"));
+    actReset->setEnabled(childCount() != 0);
+    connect(actReset, &QAction::triggered, this, &CGeoSearch::slotResetResults);
+
+
+    menu->addSeparator();
+
     QAction* actSetup = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
     actSetup->setToolTip(tr("configure providers of geocoding search services"));
-
     connect(actSetup, &QAction::triggered, this, &CGeoSearch::slotSetupGeoSearch);
 
     menu->move(edit->parentWidget()->mapToGlobal(edit->geometry().topLeft()));
@@ -131,7 +143,12 @@ void CGeoSearch::slotSetupGeoSearch()
 
 void CGeoSearch::slotStartSearch()
 {
-    qDeleteAll(takeChildren());
+    if(!searchConfig->accumulativeResults)
+    {
+        qDeleteAll(takeChildren());
+    }
+
+    QMS_DELETE(itemStatus);
 
     QString addr = edit->text();
 
@@ -751,10 +768,10 @@ void CGeoSearch::parseNominatim(const QByteArray& data)
 
 void CGeoSearch::createErrorItem(const QString& status)
 {
-    QTreeWidgetItem * item = new QTreeWidgetItem(this);
-    item->setText(CGisListWks::eColumnName, status);
-    item->setToolTip(CGisListWks::eColumnName, status);
-    item->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
+    itemStatus = new QTreeWidgetItem(this);
+    itemStatus->setText(CGisListWks::eColumnName, status);
+    itemStatus->setToolTip(CGisListWks::eColumnName, status);
+    itemStatus->setIcon(CGisListWks::eColumnIcon,QIcon("://icons/32x32/Error.png"));
 }
 
 void CGeoSearch::slotConfigChanged()
@@ -763,4 +780,14 @@ void CGeoSearch::slotConfigChanged()
     actSymbol->setIcon(getWptIconByName(searchConfig->symbolName, focus));
     actSymbol->setObjectName(searchConfig->symbolName);
     setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
+}
+
+void CGeoSearch::slotAccuResults(bool yes)
+{
+    searchConfig->accumulativeResults = yes;
+}
+
+void CGeoSearch::slotResetResults()
+{
+    qDeleteAll(takeChildren());
 }

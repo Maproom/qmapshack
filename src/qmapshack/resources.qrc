@@ -38,6 +38,7 @@
         
         <file>../icons/32x32/2NavProject.png</file>
         <file>../icons/32x32/A.png</file>
+        <file>../icons/32x32/AccumResults.png</file>
         <file>../icons/32x32/ActAero.png</file>
         <file>../icons/32x32/ActBike.png</file>
         <file>../icons/32x32/ActCable.png</file>
@@ -271,6 +272,7 @@
         
         <file>../icons/48x48/2NavProject.png</file>
         <file>../icons/48x48/A.png</file>
+        <file>../icons/48x48/AccumResults.png</file>
         <file>../icons/48x48/ActAero.png</file>
         <file>../icons/48x48/ActBike.png</file>
         <file>../icons/48x48/ActCable.png</file>

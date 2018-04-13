@@ -38,7 +38,6 @@
         
         <file>../icons/32x32/2NavProject.png</file>
         <file>../icons/32x32/A.png</file>
-        <file>../icons/32x32/AccumResults.png</file>
         <file>../icons/32x32/ActAero.png</file>
         <file>../icons/32x32/ActBike.png</file>
         <file>../icons/32x32/ActCable.png</file>
@@ -52,6 +51,7 @@
         <file>../icons/32x32/ActTrain.png</file>
         <file>../icons/32x32/Activity.png</file>
         <file>../icons/32x32/Add.png</file>
+        <file>../icons/32x32/AddGreen.png</file>
         <file>../icons/32x32/AddArea.png</file>
         <file>../icons/32x32/AddImage.png</file>
         <file>../icons/32x32/AddMapWorkspace.png</file>
@@ -272,7 +272,6 @@
         
         <file>../icons/48x48/2NavProject.png</file>
         <file>../icons/48x48/A.png</file>
-        <file>../icons/48x48/AccumResults.png</file>
         <file>../icons/48x48/ActAero.png</file>
         <file>../icons/48x48/ActBike.png</file>
         <file>../icons/48x48/ActCable.png</file>
@@ -286,6 +285,7 @@
         <file>../icons/48x48/ActTrain.png</file>
         <file>../icons/48x48/Activity.png</file>
         <file>../icons/48x48/Add.png</file>
+        <file>../icons/48x48/AddGreen.png</file>
         <file>../icons/48x48/AddArea.png</file>
         <file>../icons/48x48/AddImage.png</file>
         <file>../icons/48x48/AddMapWorkspace.png</file>

@@ -66,11 +66,29 @@ CGeoSearch::CGeoSearch(CGisListWks * parent)
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CGeoSearch::slotRequestFinished);
     connect(searchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CGeoSearch::slotConfigChanged);
 
-    setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
+    setIcon();
 }
 
 CGeoSearch::~CGeoSearch()
 {
+}
+
+void CGeoSearch::setIcon()
+{
+    if(searchConfig->accumulativeResults)
+    {
+
+        QPixmap displayIcon = QPixmap(48,48);
+        displayIcon.fill(Qt::transparent);
+        QPainter painter(&displayIcon);
+        painter.drawPixmap(0,0,searchConfig->getCurrentIcon().pixmap(32,32).scaled(48,48,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        painter.drawPixmap(22,22,QPixmap("://icons/48x48/AddGreen.png").scaled(26,26,Qt::KeepAspectRatio, Qt::SmoothTransformation));
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnDecoration, displayIcon);
+    }
+    else
+    {
+        QTreeWidgetItem::setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
+    }
 }
 
 void CGeoSearch::slotChangeSymbol()
@@ -95,7 +113,7 @@ void CGeoSearch::slotSelectService()
     actionGroup->addAction(addService(CGeoSearchConfig::eServiceGoogle, tr("Google"), menu));
 
     menu->addSeparator();
-    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AccumResults.png"),tr("Accumulative Results"));
+    QAction * actAccu = menu->addAction(QIcon("://icons/32x32/AddGreen.png"),tr("Accumulative Results"));
     actAccu->setCheckable(true);
     actAccu->setChecked(searchConfig->accumulativeResults);
     connect(actAccu, &QAction::triggered, this, &CGeoSearch::slotAccuResults);
@@ -779,12 +797,13 @@ void CGeoSearch::slotConfigChanged()
     QPointF focus;
     actSymbol->setIcon(getWptIconByName(searchConfig->symbolName, focus));
     actSymbol->setObjectName(searchConfig->symbolName);
-    setIcon(CGisListWks::eColumnDecoration, searchConfig->getCurrentIcon());
+    setIcon();
 }
 
 void CGeoSearch::slotAccuResults(bool yes)
 {
     searchConfig->accumulativeResults = yes;
+    setIcon();
 }
 
 void CGeoSearch::slotResetResults()

@@ -63,6 +63,8 @@ private:
 
     void createErrorItem(const QString& status);
 
+    void setIcon();
+
     QLineEdit * edit;
     QAction * actSymbol;
     QNetworkAccessManager* networkAccessManager;

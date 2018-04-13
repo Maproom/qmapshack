@@ -21,6 +21,11 @@
 
 #include <QCollator>
 
+#define QMS_DELETE(p) \
+    delete p; \
+    p = nullptr
+
+
 template<typename T>
 bool sortByName(T * item1, T * item2)
 {
@@ -29,6 +34,7 @@ bool sortByName(T * item1, T * item2)
     collator.setNumericMode(true);
     return collator.compare(item1->getName(), item2->getName()) < 0;
 }
+
 
 
 #endif //MISC_H

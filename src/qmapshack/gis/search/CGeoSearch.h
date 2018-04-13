@@ -46,6 +46,8 @@ private slots:
     void slotStartSearch();
     void slotRequestFinished(QNetworkReply* reply);
     void slotConfigChanged();
+    void slotAccuResults(bool yes);
+    void slotResetResults();
 
 private:
     QAction *addService(CGeoSearchConfig::service_e service, const QString &name, QMenu *menu);
@@ -65,6 +67,7 @@ private:
     QAction * actSymbol;
     QNetworkAccessManager* networkAccessManager;
     CGeoSearchConfig* searchConfig;
+    QTreeWidgetItem * itemStatus = nullptr;
 };
 
 #endif //CSEARCHGOOGLE_H

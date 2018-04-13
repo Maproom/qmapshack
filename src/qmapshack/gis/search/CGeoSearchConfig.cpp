@@ -33,6 +33,7 @@ void CGeoSearchConfig::load()
 {
     SETTINGS;
     cfg.beginGroup("Search");
+    accumulativeResults = cfg.value("accumulativeResults",accumulativeResults).toBool();
     symbolName = cfg.value("symbol","Default").toString();
     currentService = service_e(cfg.value("current",eServiceNominatim).toInt());
     cfg.beginGroup("google");
@@ -43,7 +44,7 @@ void CGeoSearchConfig::load()
     cfg.endGroup();
     cfg.beginGroup("nominatim");
     nominatimEmail = cfg.value("email","").toString();
-    nominatimLimit = cfg.value("limit",10).toInt();
+    nominatimLimit = cfg.value("limit",nominatimLimit).toInt();
     cfg.endGroup();
     cfg.endGroup();
     emit sigConfigChanged();
@@ -53,6 +54,7 @@ void CGeoSearchConfig::save() const
 {
     SETTINGS;
     cfg.beginGroup("Search");
+    cfg.setValue("accumulativeResults",accumulativeResults);
     cfg.setValue("symbol",symbolName);
     cfg.setValue("current",currentService);
     cfg.beginGroup("google");

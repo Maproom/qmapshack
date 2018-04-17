@@ -2627,7 +2627,6 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
     x.setlength(N);
     y.setlength(N);
 
-    qreal basefactor = IUnit::self().basefactor;
     for(const CTrackData::trkpt_t& trkpt : trk)
     {
         if(trkpt.isHidden())

@@ -121,6 +121,10 @@ void CPlotProfile::updateData()
     }
 
     CMainWindow::self().getElevationAt(coords, lineDem);
+    for(QPointF& pt : lineDem)
+    {
+        pt.ry() *= basefactor;
+    }
 
     newLine(lineEle, "GPS");
     if(!lineDem.isEmpty())
@@ -133,7 +137,7 @@ void CPlotProfile::updateData()
         QPolygonF spline;
         for(const QPointF& pt : lineEle)
         {
-            spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()));
+            spline << QPointF(pt.x(), trk->getElevationInterpolated(pt.x()) * basefactor);
         }
 
         addLine(spline, "Interp.");

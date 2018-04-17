@@ -2641,7 +2641,7 @@ void CGisItemTrk::setupInterpolation(bool on, qint32 q)
         }
 
         x[trkpt.idxVisible] = trkpt.distance;
-        y[trkpt.idxVisible] = trkpt.ele * basefactor;
+        y[trkpt.idxVisible] = trkpt.ele;
     }
 
     /// @todo find a better way to scale the algorithm

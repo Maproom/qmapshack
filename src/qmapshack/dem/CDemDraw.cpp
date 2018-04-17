@@ -333,12 +333,10 @@ qreal CDemDraw::getSlopeAt(const QPointF& pos)
 
 void CDemDraw::getElevationAt(const QPolygonF& pos, QPolygonF& ele)
 {
-    qreal basefactor = IUnit::self().basefactor;
-
     for(int i = 0; i < pos.size(); i++)
     {
         qreal tmp = getElevationAt(pos[i]);
-        ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp * basefactor;
+        ele[i].ry() = (tmp == NOFLOAT) ? NOFLOAT : tmp;
     }
 }
 

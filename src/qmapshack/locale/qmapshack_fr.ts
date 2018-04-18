@@ -926,67 +926,77 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
 <context>
     <name>CGeoSearch</name>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="59"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="60"/>
         <source>Setup Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="87"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="106"/>
         <source>Select Service</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="91"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
         <source>OSM Nominatim</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="92"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="111"/>
         <source>Geonames Places</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="93"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="112"/>
         <source>Geonames Address</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="94"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="113"/>
         <source>Google</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="97"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
+        <source>Accumulative Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="121"/>
+        <source>Reset Results</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
         <source>Configure Services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="98"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="129"/>
         <source>configure providers of geocoding search services</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="142"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="177"/>
         <source>no service configured - please click setup-icon in search-field</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="232"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="267"/>
         <source>unexpected service-identifier %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="339"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="391"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="471"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="621"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="374"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="426"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="506"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="656"/>
         <source>Unknown response</source>
         <translation type="unfinished">Réponse inconnue</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="347"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="399"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="479"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="382"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="434"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="514"/>
         <source>Error: </source>
         <translation type="unfinished">Erreur: </translation>
     </message>

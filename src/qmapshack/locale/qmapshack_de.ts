@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -928,67 +928,77 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGeoSearch</name>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="59"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="60"/>
         <source>Setup Search</source>
         <translation>Suche einrichten</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="87"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="106"/>
         <source>Select Service</source>
         <translation>Dienst auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="91"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
         <source>OSM Nominatim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="92"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="111"/>
         <source>Geonames Places</source>
         <translation>Geonames Orte</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="93"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="112"/>
         <source>Geonames Address</source>
         <translation>Geonames Adressen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="94"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="113"/>
         <source>Google</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="97"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
+        <source>Accumulative Results</source>
+        <translation>Ergebnisse sammeln</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="121"/>
+        <source>Reset Results</source>
+        <translation>Ergebnisse löschen</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
         <source>Configure Services</source>
         <translation>Dienste konfigurieren</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="98"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="129"/>
         <source>configure providers of geocoding search services</source>
         <translation>Die Anbieter der Suchdienste konfigurieren.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="142"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="177"/>
         <source>no service configured - please click setup-icon in search-field</source>
         <translation>Kein Dienst konfiguriert - Bitte klicken Sie auf das Symbol für die Einstellungen im Suchfeld.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="232"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="267"/>
         <source>unexpected service-identifier %1</source>
         <translation>unbekannter Dienst %1</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="339"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="391"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="471"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="621"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="374"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="426"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="506"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="656"/>
         <source>Unknown response</source>
         <translation>Unbekannte Antwort</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="347"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="399"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="479"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="382"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="434"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="514"/>
         <source>Error: </source>
         <translation>Fehler:</translation>
     </message>
@@ -2565,7 +2575,7 @@ Zeile %2, Spalte %3:
     <name>CMainWindow</name>
     <message>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
+        <translation type="vanished">Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="551"/>
@@ -2631,7 +2641,7 @@ Zeile %2, Spalte %3:
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Sie erfahren dort mehr über die Bedienung von QMapShack.
+        <translation type="vanished">Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Sie erfahren dort mehr über die Bedienung von QMapShack.
 
 Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Ressourcen. Außerdem glauben wir, ist es nicht zu viel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.</translation>
     </message>
@@ -5090,11 +5100,11 @@ ist keine gültige Koordinatensystemdefinition:
     <name>CSearchGoogle</name>
     <message>
         <source>Unknown response</source>
-        <translation>Unbekannte Antwort</translation>
+        <translation type="vanished">Unbekannte Antwort</translation>
     </message>
     <message>
         <source>Error: </source>
-        <translation>Fehler:</translation>
+        <translation type="vanished">Fehler:</translation>
     </message>
 </context>
 <context>
@@ -6186,7 +6196,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="112"/>
@@ -7166,7 +7176,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
+        <translation type="vanished">Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
@@ -8255,7 +8265,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Search Google</source>
-        <translation>Mit Google suchen</translation>
+        <translation type="vanished">Mit Google suchen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="574"/>
@@ -8302,7 +8312,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
@@ -8312,7 +8322,7 @@ Dateiname: %1</translation>
     <message>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
-        <translation>Hilfe! Ich will Karten!
+        <translation type="vanished">Hilfe! Ich will Karten!
 Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
@@ -9299,7 +9309,7 @@ sein</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
+        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
     </message>
 </context>
 <context>

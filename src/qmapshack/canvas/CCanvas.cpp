@@ -166,12 +166,12 @@ CCanvas::~CCanvas()
 
 void addHtmlRow(QString& text, const QString& col1, const QString& col2, const QString& td1, const QString& td2)
 {
-    text += QString("<tr><td %3>%1</td><td %4>%2</td></tr>").arg(col1).arg(col2).arg(td1).arg(td2);
+    text += QString("<tr><td %3>%1</td><td %4>%2<div/></td></tr>").arg(col1).arg(col2).arg(td1).arg(td2);
 }
 
 void addHtmlRow(QString& text, const QString& col1, const QString& td1)
 {
-    text += QString("<tr><td %2>%1</td></tr>").arg(col1).arg(td1);
+    text += QString("<tr><td %2>%1<div/></td></tr>").arg(col1).arg(td1);
 }
 
 void CCanvas::buildHelpText()
@@ -194,7 +194,7 @@ void CCanvas::buildHelpText()
                                    "convenient download of maps, elevation data and routing data. You have to download these resources "
                                    "from various sites on your own. But this page might help you a bit</p>"
                                    );
-    addHtmlRow(msg,"<img src='://pics/DockWidgets.png'/>", msgWelcome, "rowspan='2' style='padding-right: 20px;'", "");
+    addHtmlRow(msg,"<img src='://pics/DockWidgets.png'/>", msgWelcome, "rowspan='3' style='padding-right: 20px;'", "");
 
     const QString& msgLetsStart = tr("<h2>Let's Start</h2>"
                                      "<p>As a first step make yourself comfortable by arranging the dock "
@@ -206,13 +206,15 @@ void CCanvas::buildHelpText()
                                      "anywhere you like.</p>"
                                      );
 
+    addHtmlRow(msg, msgLetsStart, "");
+
     const QString& msgWiki = tr("<h2>The Wiki</h2>"
                                 "<p>QMapShack has an extensive <a href='ShowWiki'>Wiki</a> with a lot of information about how to use it. "
                                 "There is a <a href='ShowQuickStart'>Quick Start Guide</a> translated into several languages. Read it and you will "
                                 "discover the full variety of features QMapShack offers you.</p>"
                                 );
 
-    addHtmlRow(msg, msgLetsStart + msgWiki, "");
+    addHtmlRow(msg, msgWiki, "");
 
     const QString& msgCurHome = tr("<h2>&nbsp;</h2>"
                                    "<p>Current home:<br/>"

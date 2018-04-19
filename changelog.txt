@@ -1,3 +1,27 @@
+V 1.11.1
+Add: Geo search: Setup for API keys and other login information
+Add: Nominatim OSM as search service
+Add: Geonames as search service
+Add: TwoNav: Read additional data fields hdop, vdop, sat and atemp
+Add: Some online sources for DEM.
+Add: Replace initial startup text by a short tutorial and add links to Wiki
+Fix: Newer TwoNav devices are not found by device watcher
+Fix: Avoid connection to MySQL DB when Password dialog is canceled or password is empty.
+[Issue #314] VRT Builder can't handle long list of files in Windows
+[Issue #315] Improve order of maps in maps tab
+[Issue #316] DEM window: list not only .VRT files but also .WCS ones
+[Issue #323] Initial offline BRouter tile selection unusable without map background
+[Issue #324] FilterReplaceElevation: no indication which view is used as source for DEM data
+[Issue #330] Add accumulative search to search item
+[Issue #332] Incorrect Elevations when using 'Replace Elevation Data' Filter when Units are set to Imperial
+[Issue #328] Use tracks for routing
+[Issue #327] ChangeTrackStartpoint - new track filter?
+[Issue #280] "Search Google" limitation and possible alternative
+
+QMapTool V1.1.0:
+Add: JNX export
+
+
 V 1.11.0
 Add: QMapTool and friends as sub-project
 Add: Reverse route

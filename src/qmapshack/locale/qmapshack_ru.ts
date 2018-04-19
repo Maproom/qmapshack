@@ -959,12 +959,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
         <source>Accumulative Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Накапливать результаты</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="121"/>
         <source>Reset Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить результаты</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="128"/>

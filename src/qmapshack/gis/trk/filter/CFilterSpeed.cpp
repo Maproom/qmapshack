@@ -27,26 +27,26 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     setupUi(this);
 
     labelWarning->setText("");
-    constantSpeed->setSuffix(IUnit::self().speedunit);
-    plainSpeed->setSuffix(IUnit::self().speedunit);
-    minSpeed->setSuffix(IUnit::self().speedunit);
-    maxSpeed->setSuffix(IUnit::self().speedunit);
+    spinConstantSpeed->setSuffix(IUnit::self().speedunit);
+    spinPlainSpeed->setSuffix(IUnit::self().speedunit);
+    spinMinSpeed->setSuffix(IUnit::self().speedunit);
+    spinMaxSpeed->setSuffix(IUnit::self().speedunit);
 
     QString val, slopeUnit;
     IUnit::self().slope2string(0, val, slopeUnit);
-    slopeAtMaxSpeed->setSuffix(slopeUnit);
-    slopeAtMinSpeed->setSuffix(slopeUnit);
+    spinSlopeAtMaxSpeed->setSuffix(slopeUnit);
+    spinSlopeAtMinSpeed->setSuffix(slopeUnit);
 
     // 4 fix and 3 custom cycling types has be defined as default!
     const QList<cycling_type_t> cyclingTypeDefaults =
     {
         {
             tr("City")          // name           Fix
-            , 15                // plainSpeed
-            , 5                 // minSpeed
-            , 5                 // slopeAtMinSpeed
-            , 35                // maxSpeed
-            , -5                // slopeAtMaxSpeed
+            , 15                // spinPlainSpeed
+            , 5                 // spinMinSpeed
+            , 5                 // spinSlopeAtMinSpeed
+            , 35                // spinMaxSpeed
+            , -5                // spinSlopeAtMaxSpeed
         },
         {
             tr("Trekking"), 20, 5, 8, 40, -5   // Fix
@@ -90,11 +90,11 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
         const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         cyclingType.name = cyclingTypeDefault.name;
-        cyclingType.plainSpeed = cfg.value("plainSpeed", cyclingTypeDefault.plainSpeed).toDouble();
-        cyclingType.minSpeed = cfg.value("minSpeed", cyclingTypeDefault.minSpeed).toDouble();
-        cyclingType.slopeAtMinSpeed = cfg.value("slopeAtMinSpeed", cyclingTypeDefault.slopeAtMinSpeed).toDouble();
-        cyclingType.maxSpeed = cfg.value("maxSpeed", cyclingTypeDefault.maxSpeed).toDouble();
-        cyclingType.slopeAtMaxSpeed = cfg.value("slopeAtMaxSpeed", cyclingTypeDefault.slopeAtMaxSpeed).toDouble();
+        cyclingType.plainSpeed = cfg.value("spinPlainSpeed", cyclingTypeDefault.plainSpeed).toDouble();
+        cyclingType.minSpeed = cfg.value("spinMinSpeed", cyclingTypeDefault.minSpeed).toDouble();
+        cyclingType.slopeAtMinSpeed = cfg.value("spinSlopeAtMinSpeed", cyclingTypeDefault.slopeAtMinSpeed).toDouble();
+        cyclingType.maxSpeed = cfg.value("spinMaxSpeed", cyclingTypeDefault.maxSpeed).toDouble();
+        cyclingType.slopeAtMaxSpeed = cfg.value("spinSlopeAtMaxSpeed", cyclingTypeDefault.slopeAtMaxSpeed).toDouble();
 
         comboCyclingType->addItem(cyclingType.name);
         cyclingTypes << cyclingType;
@@ -109,13 +109,13 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     slotSetCyclingType(comboCyclingType->currentIndex());
     connect(comboCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
 
-    constantSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed", 18.0).toDouble());
+    spinConstantSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed", 18.0).toDouble());
 
-    connect(plainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
-    connect(minSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMinSpeed(double)));
-    connect(slopeAtMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMinSpeed(double)));
-    connect(maxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
-    connect(slopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
+    connect(spinPlainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
+    connect(spinMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMinSpeed(double)));
+    connect(spinSlopeAtMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMinSpeed(double)));
+    connect(spinMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMaxSpeed(double)));
+    connect(spinSlopeAtMaxSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetSlopeAtMaxSpeed(double)));
 
     connect(toolApply, &QToolButton::clicked, this, &CFilterSpeed::slotApply);
 
@@ -131,17 +131,17 @@ CFilterSpeed::~CFilterSpeed()
         const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
         cfg.setArrayIndex(i);
         cfg.setValue("name", cyclingType.name);
-        cfg.setValue("plainSpeed", cyclingType.plainSpeed);
-        cfg.setValue("minSpeed", cyclingType.minSpeed);
-        cfg.setValue("slopeAtMinSpeed", cyclingType.slopeAtMinSpeed);
-        cfg.setValue("maxSpeed", cyclingType.maxSpeed);
-        cfg.setValue("slopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
+        cfg.setValue("spinPlainSpeed", cyclingType.plainSpeed);
+        cfg.setValue("spinMinSpeed", cyclingType.minSpeed);
+        cfg.setValue("spinSlopeAtMinSpeed", cyclingType.slopeAtMinSpeed);
+        cfg.setValue("spinMaxSpeed", cyclingType.maxSpeed);
+        cfg.setValue("spinSlopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
     }
     cfg.endArray();
 
     cfg.setValue("TrackDetails/Filter/Speed/activityType", comboActivityType->currentIndex());
     cfg.setValue("TrackDetails/Filter/Speed/cyclingType", comboCyclingType->currentIndex());
-    cfg.setValue("TrackDetails/Filter/Speed/speed", constantSpeed->value());
+    cfg.setValue("TrackDetails/Filter/Speed/speed", spinConstantSpeed->value());
 }
 
 void CFilterSpeed::slotApply()
@@ -151,7 +151,7 @@ void CFilterSpeed::slotApply()
     switch (comboActivityType->currentIndex())
     {
     case 0:
-        trk.filterSpeed(constantSpeed->value()/IUnit::self().speedfactor);
+        trk.filterSpeed(spinConstantSpeed->value()/IUnit::self().speedfactor);
         break;
 
     case 1:
@@ -197,21 +197,21 @@ void CFilterSpeed::slotSetCyclingType(int type)
 {
     const cycling_type_t &cyclingType = cyclingTypes[type];
 
-    plainSpeed->setValue(cyclingType.plainSpeed);
-    minSpeed->setValue(cyclingType.minSpeed);
-    maxSpeed->setValue(cyclingType.maxSpeed);
+    spinPlainSpeed->setValue(cyclingType.plainSpeed);
+    spinMinSpeed->setValue(cyclingType.minSpeed);
+    spinMaxSpeed->setValue(cyclingType.maxSpeed);
 
     if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
         qreal val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingType.slopeAtMinSpeed);
-        slopeAtMinSpeed->setValue(val);
+        spinSlopeAtMinSpeed->setValue(val);
         val = IUnit::slopeConvert(IUnit::eSlopePercent, cyclingType.slopeAtMaxSpeed);
-        slopeAtMaxSpeed->setValue(val);
+        spinSlopeAtMaxSpeed->setValue(val);
     }
     else if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {
-        slopeAtMinSpeed->setValue(cyclingType.slopeAtMinSpeed);
-        slopeAtMaxSpeed->setValue(cyclingType.slopeAtMaxSpeed);
+        spinSlopeAtMinSpeed->setValue(cyclingType.slopeAtMinSpeed);
+        spinSlopeAtMaxSpeed->setValue(cyclingType.slopeAtMaxSpeed);
     }
 
     if (type < 4)
@@ -273,13 +273,13 @@ void CFilterSpeed::slotSetMinMaxSlopes(bool)
     if(IUnit::getSlopeMode() == IUnit::eSlopePercent)
     {
         qreal val = IUnit::slopeConvert(IUnit::eSlopeDegrees, maxSlope);
-        slopeAtMinSpeed->setValue(val);
+        spinSlopeAtMinSpeed->setValue(val);
         val = IUnit::slopeConvert(IUnit::eSlopeDegrees, minSlope);
-        slopeAtMaxSpeed->setValue(val);
+        spinSlopeAtMaxSpeed->setValue(val);
     }
     else if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
-        slopeAtMinSpeed->setValue(maxSlope);
-        slopeAtMaxSpeed->setValue(minSlope);
+        spinSlopeAtMinSpeed->setValue(maxSlope);
+        spinSlopeAtMaxSpeed->setValue(minSlope);
     }
 }

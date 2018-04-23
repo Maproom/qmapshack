@@ -198,14 +198,8 @@ void CFilterSpeed::slotSetCyclingType(int type)
     const cycling_type_t &cyclingType = cyclingTypes[type];
 
     plainSpeed->setValue(cyclingType.plainSpeed);
-    maxSpeed->setMinimum(cyclingType.plainSpeed);
-    minSpeed->setMaximum(cyclingType.plainSpeed);
-
     minSpeed->setValue(cyclingType.minSpeed);
-    plainSpeed->setMinimum(cyclingType.minSpeed);
-
     maxSpeed->setValue(cyclingType.maxSpeed);
-    plainSpeed->setMaximum(cyclingType.maxSpeed);
 
     if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
     {
@@ -233,14 +227,11 @@ void CFilterSpeed::slotSetCyclingType(int type)
 void CFilterSpeed::slotSetPlainSpeed(double speed)
 {
     cyclingTypes[comboCyclingType->currentIndex()].plainSpeed = speed;
-    maxSpeed->setMinimum(speed);
-    minSpeed->setMaximum(speed);
 }
 
 void CFilterSpeed::slotSetMinSpeed(double speed)
 {
     cyclingTypes[comboCyclingType->currentIndex()].minSpeed = speed;
-    plainSpeed->setMinimum(speed);
 }
 
 void CFilterSpeed::slotSetSlopeAtMinSpeed(double slope)
@@ -259,7 +250,6 @@ void CFilterSpeed::slotSetSlopeAtMinSpeed(double slope)
 void CFilterSpeed::slotSetMaxSpeed(double speed)
 {
     cyclingTypes[comboCyclingType->currentIndex()].maxSpeed = speed;
-    plainSpeed->setMaximum(speed);
 }
 
 void CFilterSpeed::slotSetSlopeAtMaxSpeed(double slope)

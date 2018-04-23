@@ -14,6 +14,9 @@ set QMSI_GDAL_PATH="M:\lib\gdal"
 set QMSI_PROJ_PATH="M:\lib\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
 set QMSI_QUAZIP_PATH="M:\lib\quazip"
+set QMSI_ZLIB_PATH="M:\lib\zlib"
+set QMSI_CURL_PATH="M:\lib\cURL"
+set QMSI_SQLI_PATH="M:\lib\sqlite"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
 set QMSI_MGW6_PATH="M:\lib\mingw64"
 rem runtime libraries from mysql/mariadb 
@@ -102,6 +105,13 @@ rem section 2.2.6) MySql/MariaDB
 copy %QMSI_MSQL_PATH%\libmysql.dll
 rem section 2.2.7) QuaZip
 copy %QMSI_QUAZIP_PATH%\lib\quazip5.dll
+rem section 2.2.8) zlib
+copy %QMSI_ZLIB_PATH%\bin\zlibwapi.dll
+rem section 2.2.9) cURL
+copy %QMSI_CURL_PATH%\bin\libcurl.dll
+copy %QMSI_CURL_PATH%\bin\curl.exe
+rem section 2.2.10) sqlite
+copy %QMSI_SQLI_PATH%\sqlite3.dll
 
 rem section 2.3) Copy MSVC Redist Files
 copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe

@@ -191,7 +191,23 @@ Section "QMapShack" QMapShack
   SetOutPath $INSTDIR
     File Files\quazip5.dll
   ;END QuaZip Files
-  
+
+  ;BEGIN zLib Files
+  SetOutPath $INSTDIR
+    File Files\zlibwapi.dll
+  ;END zLib Files
+
+  ;BEGIN cURL Files
+  SetOutPath $INSTDIR
+    File Files\libcurl.dll
+    File Files\curl.exe
+  ;END cURL Files
+
+  ;BEGIN sqlite Files
+  SetOutPath $INSTDIR
+    File Files\sqlite3.dll
+  ;END sqlite Files
+
   ;BEGIN Routino Files    
   SetOutPath $INSTDIR
     File Files\routino.dll

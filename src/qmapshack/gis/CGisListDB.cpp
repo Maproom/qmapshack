@@ -584,15 +584,18 @@ void CGisListDB::slotCopyFolder()
 
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
-    quint64 idTarget    = 0;
+    QList<quint64> ids;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
 
-    CSelectDBFolder dlg(idTarget, db, host, this);
-    if(dlg.exec() == QDialog::Rejected)
+
+    CSelectDBFolder dlg(ids, db, host, this);
+    if((dlg.exec() == QDialog::Rejected) || ids.isEmpty())
     {
         return;
     }
+
+    quint64 idTarget = ids[0];
 
     // get a pointer to the parent folder for later use.
     IDBFolder * target = dbfolder->getFolder(idTarget);
@@ -651,22 +654,18 @@ void CGisListDB::slotMoveFolder()
 
     // next we need to get the target folder
     // NOTE: By pre-setting db and host, we limit the selection to the current database
-    quint64 idTarget    = 0;
+    QList<quint64> ids;
     QString db          = folder->getDBName();
     QString host        = folder->getDBHost();
 
-    CSelectDBFolder dlg(idTarget, db, host, this);
-    if(dlg.exec() == QDialog::Rejected)
+
+    CSelectDBFolder dlg(ids, db, host, this);
+    if((dlg.exec() == QDialog::Rejected) || ids.isEmpty())
     {
         return;
     }
 
-    // get a pointer to the parent folder for later use.
-    IDBFolder * target = dbfolder->getFolder(idTarget);
-    if(target == nullptr)
-    {
-        return;
-    }
+    quint64 idTarget = ids[0];
 
     // --- at this point we should have all data to perform the copy without interruption ---
 
@@ -689,7 +688,8 @@ void CGisListDB::slotMoveFolder()
             continue;
         }
 
-        if(target->isSiblingFrom(folder))
+        //if(target->isSiblingFrom(folder))
+        if(ids.contains(folder->getId()))
         {
             QMessageBox::warning(this, tr("Bad operation...."), tr("The target folder is a subfolder of the one to move. This will not work."), QMessageBox::Abort);
             continue;
@@ -717,7 +717,11 @@ void CGisListDB::slotMoveFolder()
     }
 
     // tell the parent folder to show all changes
-    target->update();
+    IDBFolder * target = dbfolder->getFolder(idTarget);
+    if(target != nullptr)
+    {
+        target->update();
+    }
     // tell other clients to show changes
     dbfolder->announceChange();
 }

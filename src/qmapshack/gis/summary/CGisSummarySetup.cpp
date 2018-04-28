@@ -102,11 +102,12 @@ void CGisSummarySetup::writeResults(CGisSummary::dropzone_e number, QLineEdit *l
 
 void CGisSummarySetup::slotAdd(QListWidget * listWidget)
 {
-    quint64 id;
+    QList<quint64> ids;
     QString db;
     QString host;
 
-    CSelectDBFolder dlg(id, db, host, this);
+
+    CSelectDBFolder dlg(ids, db, host, this);
     dlg.setWindowTitle(tr("Select summary project..."));
     dlg.setProjectsOnly(true);
     if(dlg.exec() == QDialog::Rejected)
@@ -114,7 +115,7 @@ void CGisSummarySetup::slotAdd(QListWidget * listWidget)
         return;
     }
 
-    addFolder(id, db, listWidget);
+    addFolder(ids[0], db, listWidget);
 }
 
 void CGisSummarySetup::slotDel(QListWidget * listWidget)

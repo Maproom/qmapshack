@@ -26,7 +26,18 @@ class CSelectDBFolder : public QDialog, private Ui::ISelectDBFolder
 {
     Q_OBJECT
 public:
-    CSelectDBFolder(quint64& id, QString& db, QString& host, QWidget * parent);
+    /**
+       @brief Create a dialog to select a folder
+
+       On success the list with IDs will be filled. The first entry will be the ID of the selected folder.
+       All other entries will be the IDs of the parents up to the database.
+
+       @param ids       This is a list of IDs the first one is the ID of the selected folder.
+       @param db        The database of the selected folder
+       @param host      The host of the selected folder
+       @param parent    The parent widget
+     */
+    CSelectDBFolder(QList<quint64>& ids, QString& db, QString& host, QWidget * parent);
     virtual ~CSelectDBFolder();
 
     void setProjectsOnly(bool yes)
@@ -39,9 +50,10 @@ private slots:
     void slotItemSelectionChanged();
 
 private:
-    quint64& id;
+    QList<quint64>& ids;
     QString& db;
     QString& host;
+
 
     bool projectsOnly = false;
 };

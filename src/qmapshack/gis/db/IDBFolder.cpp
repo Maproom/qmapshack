@@ -156,6 +156,8 @@ IDBFolderSql *IDBFolder::getDBFolder()
 
 IDBFolder * IDBFolder::getFolder(quint64 idFolder)
 {
+    QString tmp = text(CGisListDB::eColumnName);
+    qDebug() << tmp;
     if(id == idFolder)
     {
         return this;

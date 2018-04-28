@@ -1744,13 +1744,14 @@ void CGisListWks::slotAddEmptyProject()
     }
     else if(type == IGisProject::eTypeDb)
     {
-        quint64 idParent;
+        QList<quint64> ids;
         QString db;
         QString host;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, host, this);
-        if(dlg1.exec() == QDialog::Rejected)
+
+        CSelectDBFolder dlg1(ids, db, host, this);
+        if((dlg1.exec() == QDialog::Rejected) || ids.isEmpty())
         {
             return;
         }
@@ -1761,7 +1762,7 @@ void CGisListWks::slotAddEmptyProject()
             return;
         }
 
-        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, idParent, db, host);
+        CEvtW2DCreate * evt = new CEvtW2DCreate(name, type, ids[0], db, host);
         CGisDatabase::self().postEventForDb(evt);
     }
 }

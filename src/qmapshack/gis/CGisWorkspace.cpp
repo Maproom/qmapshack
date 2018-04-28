@@ -264,13 +264,13 @@ IGisProject * CGisWorkspace::selectProject()
     }
     else if(type == IGisProject::eTypeDb)
     {
-        quint64 idParent;
+        QList<quint64> ids;
         QString db;
         QString host;
         IDBFolder::type_e type;
 
-        CSelectDBFolder dlg1(idParent, db, host, this);
-        if(dlg1.exec() == QDialog::Rejected)
+        CSelectDBFolder dlg1(ids, db, host, this);
+        if((dlg1.exec() == QDialog::Rejected) || ids.isEmpty())
         {
             return nullptr;
         }
@@ -282,7 +282,7 @@ IGisProject * CGisWorkspace::selectProject()
         }
 
         QMutexLocker lock(&IGisItem::mutexItems);
-        CEvtW2DCreate evt(name, type, idParent, db, host);
+        CEvtW2DCreate evt(name, type, ids[0], db, host);
         CGisDatabase::self().sendEventForDb(&evt);
 
         if(evt.idChild)

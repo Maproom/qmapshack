@@ -24,9 +24,9 @@
 
 #include <QtWidgets>
 
-CSelectDBFolder::CSelectDBFolder(quint64 &id, QString &db, QString &host, QWidget *parent)
+CSelectDBFolder::CSelectDBFolder(QList<quint64> &ids, QString &db, QString &host, QWidget *parent)
     : QDialog(parent)
-    , id(id)
+    , ids(ids)
     , db(db)
     , host(host)
 {
@@ -96,19 +96,21 @@ void CSelectDBFolder::slotItemSelectionChanged()
     {
         if(projectsOnly && (folder->type() != IDBFolder::eTypeProject) && (folder->type() != IDBFolder::eTypeOther))
         {
-            id = -1;
+            ids.clear();
             db.clear();
             buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
             return;
         }
 
-        id      = folder->getId();
+        ids.clear();
+        ids     << folder->getId();
         db      = folder->getDBName();
         host    = folder->getDBHost();
 
         IDBFolder * folder1 = dynamic_cast<IDBFolder*>(folder->parent());
         while(folder1 != nullptr)
         {
+            ids << folder1->getId();
             folder1 = dynamic_cast<IDBFolder*>(folder1->parent());
         }
 
@@ -116,7 +118,7 @@ void CSelectDBFolder::slotItemSelectionChanged()
     }
     else
     {
-        id = -1;
+        ids.clear();
         db.clear();
         buttonBox->button(QDialogButtonBox::Ok)->setEnabled(false);
     }

@@ -597,13 +597,6 @@ void CGisListDB::slotCopyFolder()
 
     quint64 idTarget = ids[0];
 
-    // get a pointer to the parent folder for later use.
-    IDBFolder * target = dbfolder->getFolder(idTarget);
-    if(target == nullptr)
-    {
-        return;
-    }
-
     // --- at this point we should have all data to perform the copy without interruption ---
 
     // now iterate over all selected items
@@ -629,7 +622,12 @@ void CGisListDB::slotCopyFolder()
     }
 
     // tell the parent folder to show all changes
-    target->update();
+    IDBFolder * target = dbfolder->getFolder(idTarget);
+    if(target != nullptr)
+    {
+        target->update();
+    }
+
     // tell other clients to show changes
     dbfolder->announceChange();
 }

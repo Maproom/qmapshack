@@ -83,6 +83,11 @@ void CPropertyTrk::setupData()
             property.min        = 0;
         }
 
+        if(key == CKnownExtension::internalSpeedTime)
+        {
+            property.min        = 0;
+        }
+
         if(key == CKnownExtension::internalSlope)
         {
             qreal val;

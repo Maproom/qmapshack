@@ -119,7 +119,8 @@ int CColorLegend::paintLabel(QPainter &p, qreal value)
        || (posY > colorRect.top() + 3*fontHeight / 2 && posY < colorRect.bottom() - fontHeight / 2))
     {
         posX += 5;
-        const QString &labelText = QString("%1%2").arg(value, 0, 'f', 1).arg(unit);
+        int precision = !((int)value == value);     // returns 0 or 1
+        const QString &labelText = QString("%1%2").arg(value, 0, 'f', precision).arg(unit);
 
         p.drawText(posX, posY, labelText);
         posX += QFontMetrics(p.font()).width(labelText);

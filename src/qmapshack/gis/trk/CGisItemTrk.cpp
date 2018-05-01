@@ -327,6 +327,11 @@ QString CGisItemTrk::getInfoLimits() const
 
     for(const QString& key : keys)
     {
+        if(key == CKnownExtension::internalSpeedTime)  // Output of "Speed*" will already be covered by internalSpeedDist
+        {                                              // No need to show it twice
+            continue;
+        }
+
         const CKnownExtension& ext = CKnownExtension::get(key);
         const limits_t& limit = extrema[key];
 

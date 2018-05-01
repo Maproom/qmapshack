@@ -346,8 +346,10 @@ void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
 
     qreal speed = 0;
 
-    QEasingCurve upHillCurve(QEasingCurve::OutQuad);
-    QEasingCurve downHillCurve(QEasingCurve::InQuad);
+    QEasingCurve::Type upHillType = (minSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
+    QEasingCurve::Type downHillType = (maxSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
+    QEasingCurve upHillCurve(upHillType);
+    QEasingCurve downHillCurve(downHillType);
 
     for(CTrackData::trkpt_t& pt : trk)
     {

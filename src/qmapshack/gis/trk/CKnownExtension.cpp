@@ -150,8 +150,9 @@ void CKnownExtension::init(const IUnit &units)
     knownExtensions =
     {
         {internalSlope,
-         { tr("Slope", "extShortName"), tr("Slope*"), -1, -90., 90., 1., "°", "://icons/32x32/CSrcSlope.png", true, true,
-           [](const CTrackData::trkpt_t &p) { return p.slope1; }}
+         { tr("Slope", "extShortName"), tr("Slope*"), -1, -90., 90., 1., (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? "%" : "°",
+           "://icons/32x32/CSrcSlope.png", true, true,
+           [](const CTrackData::trkpt_t &p) { return (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? p.slope2 : p.slope1; }}
         },
 
         {internalSpeedDist,

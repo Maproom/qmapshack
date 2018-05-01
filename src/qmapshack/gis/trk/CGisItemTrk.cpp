@@ -829,7 +829,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
 
         updateExtrema(extremaSpeed,    pt.speed, pos);
         updateExtrema(extremaEle,      pt.ele, pos);
-        updateExtrema(extremaSlope,    pt.slope1, pos);
+        updateExtrema(extremaSlope,    (IUnit::getSlopeMode() == IUnit::eSlopePercent) ? pt.slope2 : pt.slope1, pos);
         updateExtrema(extremaProgress, pt.distance, pos);
     }
 
@@ -850,6 +850,7 @@ void CGisItemTrk::updateExtremaAndExtensions()
         existingExtensions << CKnownExtension::internalSpeedDist;
         existingExtensions << CKnownExtension::internalSpeedTime;
         extrema[CKnownExtension::internalSpeedDist] = extremaSpeed;
+        extrema[CKnownExtension::internalSpeedTime] = extremaSpeed;
     }
 
     if(numeric_limits<qreal>::max() != extremaProgress.min)

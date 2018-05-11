@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="ca">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ca" version="2.1">
 <context>
     <name>CAbout</name>
     <message>
@@ -127,72 +125,72 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="182"/>
         <source>None selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Cap seleccionat</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="187"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p align=&apos;right&apos;&gt;La finestra d&apos;ajuda es tancarà un cop activeu un mapa.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="190"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Benvinguts&lt;/h1&gt;&lt;p&gt;Gràcies per utilitzar QMapShack. QMapShack és un projecte Open Source sense ànim de lucre. El mantenen entusiastes i voluntaris. És estable i usable tot i que té certes mancances respecte del programari comercial &quot;lliure&quot;. De fet, no disposem dels recursos necessaris per a proporcionar un servei centralitzat de descàrrega de mapes, dades d&apos;elevació i dades d&apos;itineraris. Cal que descarregueu aquests recursos dels llocs que tingueu com a preferits. Aquesta plana us pot ajudar una mica.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="199"/>
         <source>&lt;h2&gt;Let&apos;s Start&lt;/h2&gt;&lt;p&gt;As a first step make yourself comfortable by arranging the dock widgets around this area to your personal liking. You can do this by grabbing the dock widget&apos;s title bars with your mouse (keep left button pressed on title bar) and move them where you want them. You can attach the dock widgets at the left, right, top or bottom. And you can stack them by placing them right above another dock widget. If you do not want to use the functionality of a dock widget you can close it and make QMapShack more simple for you. Also note that the tool bar is a dock widget, too. You can place it anywhere you like.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Comencem&lt;/h2&gt;&lt;p&gt;Primer de tot heu de crear un espai de treball on us sentiu còmodes movent les finestres acoblables on us agradi més. Podeu moure les finestres agafant-les per la barra superior amb el ratolí (manteniu el botó esquerra premut sobre la barra del títol) i movent-les a on vulgueu. Les podeu acoblar a l&apos;esquerra, dreta, dalt o baix. Es poden apilar posant la que tingueu seleccionada sobre una altre finestra acoblable. Si no us agrada aquest sistema de finestres acoblables, les podeu tancar totes i us serà més simple l&apos;ús de QMapShack. La barra d&apos;eines també és una finestra acoblable. La podeu moure i posar on us agradi més.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="209"/>
         <source>&lt;h2&gt;The Wiki&lt;/h2&gt;&lt;p&gt;QMapShack has an extensive &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; with a lot of information about how to use it. There is a &lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide&lt;/a&gt; translated into several languages. Read it and you will discover the full variety of features QMapShack offers you.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;La Wiki&lt;/h2&gt;&lt;p&gt;QMapShack té una complerta &lt;a href=&apos;ShowWiki&apos;&gt;Wiki&lt;/a&gt; amb molta informació de com utilitzar el programari. Disposa d&apos;una &lt;a href=&apos;ShowQuickStart&apos;&gt;Guia de Referència Ràpida&lt;/a&gt; traduïda a diferents idiomes. Si la llegiu descobrireu la immensa quantitat de prestacions que us ofereix QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="217"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Current home:&lt;br/&gt;%1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Directori d&apos;inici actual:&lt;br/&gt;%1&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="222"/>
         <source>&lt;h2&gt;Give it a home&lt;/h2&gt;&lt;p&gt;QMapShack needs a folder on your hard drive where all data is kept. Naturally this will grow very large. We recommend a folder with some subfolders:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - where all maps are stored&lt;/li&gt;&lt;li&gt;DEM - where all elevation data is stored&lt;/li&gt;&lt;li&gt;Routino - where routing data for the Routino offline router is stored&lt;/li&gt;&lt;li&gt;BRouter - where routing data for the BRouter offline router is stored&lt;/li&gt;&lt;li&gt;Databases - where you create databases to organize your GIS data&lt;/li&gt;&lt;li&gt;GPX - where you keep GPX files&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Do you want to create these folders right now? Give me a &lt;a  href=&apos;SetupHome&apos;&gt;path&lt;/a&gt; and QMapShack will create all sub-folder and update all settings.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Guarda-ho tot de forma ordenada&lt;/h2&gt;&lt;p&gt;QMapShack necessita una carpeta del disc dur on guardar totes les dades. Naturalment, creixerà molt. Recomanem crear una carpeta amb diverses sub-carpetes:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Maps - on s&apos;emmagatzemaran tots els mapes&lt;/li&gt;&lt;li&gt;DEM - on s&apos;emmagatzemaran totes les dades d&apos;alçades&lt;/li&gt;&lt;li&gt;Routino - on s&apos;emmagatzemaran tots els itineraris fora de línia de Routino&lt;/li&gt;&lt;li&gt;BRouter - on s&apos;emmagatzemaran tots els itineraris fora de línia de BRouter&lt;/li&gt;&lt;li&gt;Databases - on es crearan les bases de dades per a organitzar les dades GIS&lt;/li&gt;&lt;li&gt;GPX - on es guardaran els fitxers GPX&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Voleu crear ara aquestes carpetes? Diguem un &lt;a  href=&apos;SetupHome&apos;&gt;camí&lt;/a&gt; i QMapShack crearà totes les sub-carpetes i modificarà totes les dades de configuració.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="239"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;I want some online maps.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Quick Start Guide.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Getting Started.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Install Maps &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Basics Maps &amp; DEM.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for Maps&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuaris Impacients:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetMaps&apos;&gt;Vull alguns mapes en línia.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuaris amb Paciència:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;ShowQuickStart&apos;&gt;Guia d&apos;Inici Ràpida.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGettingStarted#markdown-header-add-maps&apos;&gt;Primers passos.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocInstallMapDem&apos;&gt;Instal·lar Mapes &amp; DEM&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocBasicsMapDem&apos;&gt;Mapes &amp; DEM Bàsics.&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Origen dels Mapes&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="254"/>
         <source>&lt;h2&gt;Maps!&lt;/h2&gt;&lt;p&gt;A map must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered map folders (&lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of maps by doing a right click on the map list and select &apos;Reload Maps&apos; from the menu.&lt;/p&gt; &lt;p&gt;A map must be activated to be visible. Right click on the map entry and select &apos;Activate&apos; from the menu. The moment a map is activated this help will disappear. To see it again you simply add another map view (&lt;a href=&apos;NewView&apos;&gt;View-&gt;Add Map View&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;To start with some online maps click on the link for &lt;a href=&apos;GetMaps&apos;&gt;impatient users&lt;/a&gt;. If you have a Garmin GPS device with non-commercial maps you can copy the *.img and *.jnx files from your device into the map folder.&lt;/p&gt; &lt;/p&gt;If you own raster maps in a format that is supported by GDAL you have to create a virtual map definition file (*.vrt), first. A *.vrt file can reference one or several other files. You can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Mapes!&lt;/h2&gt;&lt;p&gt;Un mapa ha d&apos;estar emmagatzemat en un fitxer que QMapShack ha de poder reconèixer. Aquest fitxer ha d&apos;estar situat en una de les carpetes de mapes definides a la configuració (&lt;a href=&apos;MapFolders&apos;&gt;Ftxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;). QMapShack el buscarà allà i el mostrara en una llista. Es pot actualitzar la llista de mapes fent clic al botó dret sobre la llista de mapes i seleccionant la opció del menú &apos;Tornar a carregar Mapes&apos;.&lt;/p&gt; &lt;p&gt;Per a veure el mapa, s&apos;ha d&apos;activar. Clic al botó dret sobre el nom del mapa i seleccionar del menú la opció &apos;Activar&apos;. Aquesta ajuda desapareixerà en el moment en que s&apos;activi el mapa. Per a tornar-la a veure afegiu una altre vista de mapa (&lt;a href=&apos;NewView&apos;&gt;Vista-&gt;Afegir Vista de Mapa&lt;/a&gt;).&lt;/p&gt; &lt;p&gt;Per començar amb algun mapa en línia podeu fer clic a l&apos;enllaç &lt;a href=&apos;GetMaps&apos;&gt;si sou un usuari sense paciència&lt;/a&gt;. Si teniu un GPS Garmin i hi teniu instal·lats mapes no-comercials, podeu copiar els fitxers *.img i els fitxers *.jnx del dispositiu a la carpeta de mapes.&lt;/p&gt; &lt;/p&gt;Si disposeu de mapes ràster que siguin compatibles amb GDAL, primer heu de crear un fitxer per a definir de forma virtual el mapa (*.vrt). Un fitxer *.vrt pot servir per a un o més fitxers. Cas de no existir aquest fitxer, es pot crear dins de QMapShack&apos;s amb el generador de VRT (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;).&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="270"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Databases&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Databases &amp; Projects&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocGisDatabase&apos;&gt;Bases de Dades&lt;/a&gt;&lt;/li&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/AdvProjects&apos;&gt;Bases de Dades i Projectes&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="277"/>
         <source>&lt;h2&gt;Your Data&lt;/h2&gt;&lt;p&gt;To load tracks and waypoints use &lt;a href=&apos;LoadData&apos;&gt;File-&gt;Load GIS Data&lt;/a&gt; from the menu. Each file will be an independent project in the workspace. You can manage your data in single files or you use a database. You can &lt;a href=&apos;CreateDB&apos;&gt;create a database&lt;/a&gt; in the database dockwidget.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Les vostre Dades&lt;/h2&gt;&lt;p&gt;Per a carregar tracks i fites escull &lt;a href=&apos;LoadData&apos;&gt;Fitxer-&gt;Carregar Dades GIS&lt;/a&gt; del menú. En l&apos;espai de treball, cada fitxer estarà en un projecte diferent. Podeu gestionar les dades fitxer a fitxer o utilitzar la base de dades. Podeu &lt;a href=&apos;CreateDB&apos;&gt;crear una base de dades&lt;/a&gt; en la finestra acoblable &quot;Base de Dades&quot;.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="285"/>
         <source>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Impatient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;I want some online DEMs.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Patient Users:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Sources for DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;&amp;nbsp;&lt;/h2&gt;&lt;p&gt;Usuaris Impacients:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;GetDems&apos;&gt;Vull alguns DEMs en línia.&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Usuaris amb Paciència:&lt;p&gt;&lt;ul&gt;&lt;li&gt;&lt;a href=&apos;https://bitbucket.org/maproom/qmapshack/wiki/DocMapDemSources&apos;&gt;Orígens per als DEM&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="296"/>
         <source>&lt;h2&gt;Elevation Data&lt;/h2&gt;&lt;p&gt;Elevation data (Digital Elevation Model - DEM) is used in various functions of QMapShack and is completely independent from the maps. However the same principles as for maps apply. DEM data must always be defined by a single file that is recognized by QMapShack. This file has to be placed into one of the registered DEM folders (&lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;). QMapShack will find it and list it. You can reload the list of DEM files by doing a right click on the DEM list and select &apos;Reload DEM&apos; from the menu.&lt;/p&gt;&lt;p&gt;Similar to raster maps DEM files have to be wrapped by a *.vrt file to be recognized. A *.vrt file can reference one or several other files. Again, you can use QMapShack&apos;s built-in VRT Builder (&lt;a href=&apos;VrtBuilder&apos;&gt;Tool-&gt;VRT Builder&lt;/a&gt;) to create such a file.&lt;/p&gt;&lt;p&gt;To start with some online DEMs you can click on the link for &lt;a href=&apos;GetDems&apos;&gt;impatient users&lt;/a&gt;. But keep in mind that using online DEMs slows down QMapShack significantly.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Dades d&apos;Elevació&lt;/h2&gt;&lt;p&gt;Les dades d&apos;elevació (Digital Elevation Model - DEM) s&apos;utilitzen en diverses funcions de QMapShack i són totalment independents dels mapes. De totes maneres. funcionen exactament igual.. Les dades DEM han d&apos;estar emmagatzemades en un fitxer que QMapShack ha de poder reconèixer. Aquest fitxer ha d&apos;estar situat en una de les carpetes DEM definides a la configuració (&lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;). QMapShack el buscarà allà i el mostrara en una llista. Es pot actualitzar la llista de fitxers DEM fent clic al botó dret sobre la llista de fitxers DEM i seleccionant la opció del menú &apos;Tornar a carregar DEM&apos;.&lt;/p&gt;&lt;p&gt;Igual que els mapes ràster, per a poder ser interpretats els fitxers DEM han d&apos;anar acompanyats d&apos;un fitxer *.vrt. Un fitxer *.vrt pot servir per a un o més fitxers. Cas de no existir aquest fitxer, es pot crear dins de QMapShack&apos;s amb el generador de VRT (&lt;a href=&apos;VrtBuilder&apos;&gt;Eina-&gt;Creador de VRT&lt;/a&gt;).&lt;/p&gt;&lt;p&gt;Per començar amb algun fitxer DEM en línia podeu fer clic a l&apos;enllaç &lt;a href=&apos;GetDems&apos;&gt;si sou un usuari sense paciència&lt;/a&gt;. Però s&apos;ha de tenir en compte que l&apos;ús de fitxers DEM en línia provoca que s&apos;alenteixi força el funcionament de QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="311"/>
         <source>&lt;h2&gt;Routing&lt;/h2&gt;&lt;p&gt;QMapShack supports online routing services. But if you really want to make use of the routing possibilities you need the routing database stored locally. There are two offline routing engines available.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;For Routino you have to create routing data from the Open Street Map database files. QMapShack has a built-in Routino Database Creator (&lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;A second option is to use a local BRouter installation with a local routing database. Use the &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter setup&lt;/a&gt; to download and install all necessary data.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h2&gt;Itineraris&lt;/h2&gt;&lt;p&gt;QMapShack permet accedir als serveis d&apos;itineraris en línia. La forma més eficient d&apos;utilitzar aquest servei és tenint la base de dades emmagatzemada a l&apos;ordinador. Existeixen dos serveis de creació d&apos;itineraris que permeten tenir les dades en local.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Per a utilitzar Routino heu de crear les dades dels itineraris utilitzant els fitxers de base de dades de Open Street Map. QMapShack té integrat un Creador de Bases de Dades Routino (&lt;a href=&apos;CreateRoutino&apos;&gt;Eina-&gt;Crea una Base de Dades Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;La segona opció és instal·lar una base de dades local d&apos;itineraris BRouter. Ves a la configuració de &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter&lt;/a&gt; per a descarregar i instal·lar totes les dades necessàries&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="943"/>
@@ -433,7 +431,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemList.cpp" line="256"/>
         <source>Where do you want to store DEMs?</source>
-        <translation type="unfinished"></translation>
+        <translation>On vols desar els DEMs?</translation>
     </message>
 </context>
 <context>
@@ -462,7 +460,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -497,7 +495,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>  No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -516,7 +514,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/prj/CDetailsPrj.cpp" line="267"/>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="782"/>
         <source>none</source>
-        <translation>Cap</translation>
+        <translation>cap</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="340"/>
@@ -559,7 +557,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
         <source>Arrival: </source>
-        <translation type="unfinished"></translation>
+        <translation>Arribada:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="608"/>
@@ -584,7 +582,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="621"/>
         <source>Time: </source>
-        <translation type="unfinished"></translation>
+        <translation>Hora:</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="631"/>
@@ -751,7 +749,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>  Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
@@ -790,42 +788,42 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="44"/>
         <source>City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciutat</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="52"/>
         <source>Trekking</source>
-        <translation type="unfinished"></translation>
+        <translation>Tresc</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="55"/>
         <source>Sportive</source>
-        <translation type="unfinished"></translation>
+        <translation>Esportista</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="58"/>
         <source>Mountain</source>
-        <translation type="unfinished"></translation>
+        <translation>Muntanya</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="61"/>
         <source>Custom 0</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalitzat 0</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="64"/>
         <source>Custom 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalitzat 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="67"/>
         <source>Custom 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Personalitzat 2</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation type="unfinished"></translation>
+        <translation>La ruta no te dades d&apos;elevació o són invalides. Si us plau corregiu o definiu una velocitat constant.</translation>
     </message>
 </context>
 <context>
@@ -883,12 +881,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -928,62 +926,62 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="60"/>
         <source>Setup Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de les Cerques</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="106"/>
         <source>Select Service</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el Servei</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
         <source>OSM Nominatim</source>
-        <translation type="unfinished"></translation>
+        <translation>OSM Nominatim</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="111"/>
         <source>Geonames Places</source>
-        <translation type="unfinished"></translation>
+        <translation>Geonames Llocs</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="112"/>
         <source>Geonames Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Geonames Adreces</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="113"/>
         <source>Google</source>
-        <translation type="unfinished"></translation>
+        <translation>Google</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
         <source>Accumulative Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultats Acumulats</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="121"/>
         <source>Reset Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicia Resultats</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
         <source>Configure Services</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Serveis</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="129"/>
         <source>configure providers of geocoding search services</source>
-        <translation type="unfinished"></translation>
+        <translation>configurar els proveïdors dels serveis de cerca geocoding</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="177"/>
         <source>no service configured - please click setup-icon in search-field</source>
-        <translation type="unfinished"></translation>
+        <translation>No hi ha cap servei configurat - is us plau, feu clic a la icona de configuració en el camp de cerca</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="267"/>
         <source>unexpected service-identifier %1</source>
-        <translation type="unfinished"></translation>
+        <translation>identificador de servei inesperat %1</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="374"/>
@@ -991,14 +989,14 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/search/CGeoSearch.cpp" line="506"/>
         <location filename="../gis/search/CGeoSearch.cpp" line="656"/>
         <source>Unknown response</source>
-        <translation type="unfinished">Resposta desconeguda</translation>
+        <translation>Resposta desconeguda</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="382"/>
         <location filename="../gis/search/CGeoSearch.cpp" line="434"/>
         <location filename="../gis/search/CGeoSearch.cpp" line="514"/>
         <source>Error: </source>
-        <translation type="unfinished"></translation>
+        <translation>Error: </translation>
     </message>
 </context>
 <context>
@@ -1089,7 +1087,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
         <source>route</source>
-        <translation type="unfinished"></translation>
+        <translation>ruta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="329"/>
@@ -1366,7 +1364,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="465"/>
         <source>Invalid slopes!</source>
-        <translation type="unfinished"></translation>
+        <translation>Pendent incorrecte!</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="601"/>
@@ -1546,7 +1544,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="395"/>
         <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;ha canviat la velocitat en moviment segons el pendent de %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="420"/>
@@ -1571,7 +1569,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="519"/>
         <source>Start Point moved to: </source>
-        <translation type="unfinished"></translation>
+        <translation>El Punt d&apos;Inici s&apos;ha mogut a:</translation>
     </message>
     <message>
         <location filename="../qlgt/converter.cpp" line="196"/>
@@ -1614,7 +1612,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="334"/>
         <source>Created: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Creat: %1</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="393"/>
@@ -1634,7 +1632,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="418"/>
         <source>Removed proximity</source>
-        <translation type="unfinished"></translation>
+        <translation>Proximitat eliminada</translation>
     </message>
     <message>
         <location filename="../gis/wpt/CGisItemWpt.cpp" line="423"/>
@@ -1728,7 +1726,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/CGisListDB.cpp" line="133"/>
         <location filename="../gis/CGisListDB.cpp" line="149"/>
         <source>Delete Item</source>
-        <translation>Esborrar l&apos;element</translation>
+        <translation>Suprimeix l&apos;element</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="137"/>
@@ -1763,7 +1761,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/CGisListDB.cpp" line="526"/>
         <source>Delete database folder...</source>
-        <translation>Elimina la carpeta de les bases de dades...</translation>
+        <translation>Suprimeix la carpeta de les bases de dades...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="526"/>
@@ -1940,7 +1938,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/CGisListWks.cpp" line="168"/>
         <location filename="../gis/CGisListWks.cpp" line="201"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta Nogo-Line</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="178"/>
@@ -1960,18 +1958,18 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/CGisListWks.cpp" line="182"/>
         <source>Change Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Canviar radi</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="184"/>
         <location filename="../gis/CGisListWks.cpp" line="212"/>
         <source>Toggle Nogo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta Nogo-Area</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="183"/>
         <source>Delete Radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix radi</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="194"/>
@@ -1996,7 +1994,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/CGisListWks.cpp" line="199"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertir ruta</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="200"/>
@@ -2026,7 +2024,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Set Track Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Definir color de la ruta</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="655"/>
@@ -2076,12 +2074,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en restaurar totes les carpetes en el resum de les zones de destí. És molt probable que s&apos;hagi esborrat la carpeta o la base de dades. Si us plau, reviseu la configuració del resum de les zones destí.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
         <source>Failed....</source>
-        <translation type="unfinished"></translation>
+        <translation> S&apos;ha produït un error...</translation>
     </message>
 </context>
 <context>
@@ -2089,7 +2087,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/summary/CGisSummaryDropZone.cpp" line="38"/>
         <source>Drag-n-drop items from the workspace into this drop zone.</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrossega I deixa anar els elements de l&apos;espai de treball dins de la zona de destí.</translation>
     </message>
 </context>
 <context>
@@ -2097,12 +2095,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Com funciona això?&lt;/b&gt;&lt;br/&gt;En utilitzar la base de dades, els elements GIS es poden utilitzar en diferents projectes. El cas més normal és que les dades d&apos;una sortida s&apos;emmagatzemin en la seva pròpia carpeta del projecte. A més d&apos;això, els elements es copien (referencien) en d&apos;altres carpetes agrupant-se per períodes de temps, ex. mensual, anual, total. Es pot fer de forma manual carregant els resums dels projectes a l&apos;espai de treball, copiant els elements i guardant els canvis fets. O bé es pot utilitzar aquest quadre de diàleg per a definir com a carpetes resum les carpetes de projectes de la base de dades i copiar-hi els elements arrossegant-los i deixant-los anar.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
         <source>Select summary project...</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona el resum del projecte...</translation>
     </message>
 </context>
 <context>
@@ -2548,12 +2546,12 @@ línia %2, columna %3:
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="182"/>
         <source>Use of local time...</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;utilitza la hora local...</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="183"/>
         <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>En el fitxer %1 no s&apos;han trobat hores UTC. S&apos;utilitzarà l&apos;hora de l&apos;ordinador local. Si fos necessari es poden ajustar les hores utilitzant el filtre de data i hora.</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CLogProject.cpp" line="245"/>
@@ -2572,18 +2570,14 @@ línia %2, columna %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation type="vanished">Utilitza &lt;b&gt;Menu-&gt;Vista-&gt;Afegir vista de Mapa&lt;/b&gt; per a obrir una nova vista. O &lt;b&gt;Menu-&gt;Fitxer-&gt;Carregar vista de Mapa&lt;/b&gt; per a recuperar-ne un de desat. O feu clic &lt;a href=&apos;newview&apos;&gt;aquí&lt;/a&gt;.</translation>
-    </message>
-    <message>
         <location filename="../CMainWindow.cpp" line="551"/>
         <source>Select folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar Carpeta...</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="941"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Utilitza &lt;b&gt;Menu-&gt;Vista-&gt;Afegir Vista de Mapa&lt;/b&gt; per obrir una nova vista. O &lt;b&gt;Menu-&gt;Fitxer-&gt;Carregar Vista Mapa&lt;/b&gt; per a recuperar-ne una de guardada. O clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1070"/>
@@ -2631,17 +2625,6 @@ línia %2, columna %3:
         <location filename="../CMainWindow.cpp" line="1704"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack ha detectat que la llibreria Proj4 no està instal·lada de forma correcte. Manquen les taules de conversió de les projeccions EPSG, emmagatzemades de normal a /usr/share/proj. Per a solucionar-ho contacteu el mantenidor del paquet de la distribució.</translation>
-    </message>
-</context>
-<context>
-    <name>CMapDraw</name>
-    <message>
-        <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
-
-If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation type="vanished">En aquest moment no hi ha cap mapa instal·lat. QMapShack no es diverteix si no té mapes. Podeu instal·lar-ne prement la tecla &apos;Ajuda. Vull mapes!&apos; a la finestra &apos;Mapes&apos; de l&apos;acoblador. O bé, podeu prémer la tecla F1 per accedir a la documentació en línia que us explicarà com utilitzar QMapShack. 
-
-Si no es diverteix, perquè no l&apos;hi doneu mapes? Per allotjar mapes a punt per a descarregar I instal·lar fa falta un bon servidor. I això no és un servei gratuït. El projecte no te els diners. A més, els mapes I les dades DEM tenen drets d&apos;autor. Per tant, abans d&apos;empaquetar les dades s&apos;ha de demanar permís al propietari dels drets d&apos;autor. Tot això no és tan senzill com sembla i, en alguns casos s&apos;han de pagar royalties. El projecte simplement no disposa dels recursos necessaris per fer-ho. I pensem que no és excessiu demanar-vos que ho feu vosaltres mateixos. Després de tot el programari es distribueix sense cap càrrec.</translation>
     </message>
 </context>
 <context>
@@ -3287,12 +3270,12 @@ Retorn als típus interns..</translation>
     <message>
         <location filename="../map/CMapList.cpp" line="224"/>
         <source>Deactivate</source>
-        <translation>Desactivat</translation>
+        <translation>Desactivar</translation>
     </message>
     <message>
         <location filename="../map/CMapList.cpp" line="224"/>
         <source>Activate</source>
-        <translation>Activat</translation>
+        <translation>Activar</translation>
     </message>
     <message>
         <location filename="../map/CMapList.cpp" line="255"/>
@@ -3783,7 +3766,7 @@ y: %4 m/px</translation>
     <message>
         <location filename="../grid/CProjWizard.cpp" line="222"/>
         <source>The value
-&apos;%1&apos;
+'%1'
 is not a valid coordinate system definition:
 %2</source>
         <translation>El valor
@@ -3794,7 +3777,7 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../grid/CProjWizard.cpp" line="230"/>
         <source>Lat/Lon projection is not allowed in this case.</source>
-        <translation type="unfinished"></translation>
+        <translation>En aquest cas no és permesa la projecció Lat/Lon.</translation>
     </message>
 </context>
 <context>
@@ -3815,22 +3798,22 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open...</source>
-        <translation type="unfinished">Error en obrir...</translation>
+        <translation>Error en obrir...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="55"/>
         <source>Failed to open %1</source>
-        <translation type="unfinished">Error en obrir %1</translation>
+        <translation>Error en obrir %1</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="138"/>
         <source>Could not convert...</source>
-        <translation type="unfinished"></translation>
+        <translation>No s&apos;ha pogur convertir...</translation>
     </message>
     <message>
         <location filename="../gis/qlb/CQlbProject.cpp" line="139"/>
         <source>The file contains overlays that can not be converted. This is because QMapShack does not support all overlay types of QLandkarte.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquest fitxer conté superposicions que no es poden convertir. QMapShack no té implementats tots els tipus de superposicions de QLandkarte.</translation>
     </message>
 </context>
 <context>
@@ -4056,12 +4039,12 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="780"/>
         <source>Error:</source>
-        <translation type="unfinished">Error:</translation>
+        <translation>Error:</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="786"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. De normal utilitza una adreça especial a la que no es pot accedir si no és a traves del dispositiu. De totes maneres BRouter rep els intents de connexió de totes les interfícies disponibles. Si us hi connecteu des de la vostra xarxa privada, amb un tallafocs actiu, no hi ha d&apos;haver cap problema. Si us hi connecteu mitjançant una xarxa pública aleshores cada port és un risc ja que el pot utilitzar qualsevol persona per posar en risc el vostre sistema. En aquest cas, no us recomanem utilitzar el servei BRouter en local. Si veieu aquest avís i utilitzeu una versió de BRouter &gt;= 1.4.10 s&apos;hauria de reforçar la vinculació de l&apos;adreça local configurant el nom de l&apos;amfitrió com a &quot;localhost&quot; i en la configuració del mode expert activant la opció &quot;Bind to hostname only&quot;.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="398"/>
@@ -4089,7 +4072,7 @@ no és una coordenada vàlida en la configuración activa:
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="519"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>aquesta versió de BRouter no permet més d&apos;1 zona-nogo</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="565"/>
@@ -4114,7 +4097,7 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="718"/>
         <source>BRouter (Version %1.%2.%3)</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter (Versió %1.%2.%3)</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="815"/>
@@ -4418,7 +4401,7 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
         <source>Error retrieving available routing data from %1: %2</source>
-        <translation>Error en la recuperació de les dades d&apos;enrutament disponibles a %1: %2</translation>
+        <translation>Error en la recuperació de les dades d&apos;itineraris disponibles a %1: %2</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="484"/>
@@ -4760,7 +4743,7 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="166"/>
         <source>In the routing database there is no highway near the coordinates to place a waypoint.</source>
-        <translation>A la base de dades de rutes no existeix cap autopista propera a les coordenades per a posar-hi una fita.</translation>
+        <translation>A la base de dades d&apos;itineraris no existeix cap autopista propera a les coordenades per a posar-hi una fita.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterRoutino.cpp" line="169"/>
@@ -4885,92 +4868,92 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="96"/>
         <source>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;An online service that provides positional data of civil aircrafts</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;OpenSky&lt;/b&gt;&lt;br/&gt;És un servei en línia que proporciona la possició dels avions comercials</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="170"/>
         <source>unkn.</source>
-        <translation type="unfinished"></translation>
+        <translation>desconegut.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="201"/>
         <source>key:</source>
-        <translation type="unfinished"></translation>
+        <translation>clau:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="202"/>
         <source>callsign:</source>
-        <translation type="unfinished"></translation>
+        <translation>senyal de trucada:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="203"/>
         <source>origin country:</source>
-        <translation type="unfinished"></translation>
+        <translation>país origen:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="204"/>
         <source>time position:</source>
-        <translation type="unfinished"></translation>
+        <translation>hora posició:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="205"/>
         <source>last contact:</source>
-        <translation type="unfinished"></translation>
+        <translation>darrer contacte:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="206"/>
         <source>longitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>longitud:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="207"/>
         <source>latitude:</source>
-        <translation type="unfinished"></translation>
+        <translation>latitud:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="208"/>
         <source>geo. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>geo. alt.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="209"/>
         <source>on ground:</source>
-        <translation type="unfinished"></translation>
+        <translation>a terra:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="210"/>
         <source>velocity:</source>
-        <translation type="unfinished"></translation>
+        <translation>velocitat:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
         <source>heading:</source>
-        <translation type="unfinished"></translation>
+        <translation>capçalera:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
         <source>vert. rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>velocitat vert.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="213"/>
         <source>baro. alt.:</source>
-        <translation type="unfinished"></translation>
+        <translation>baro. alt.:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="214"/>
         <source>squawk:</source>
-        <translation type="unfinished"></translation>
+        <translation>squawk:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="215"/>
         <source>spi:</source>
-        <translation type="unfinished"></translation>
+        <translation>spi:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
         <source>position source:</source>
-        <translation type="unfinished"></translation>
+        <translation>posició origen:</translation>
     </message>
 </context>
 <context>
@@ -4978,27 +4961,27 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="78"/>
         <source>Error...</source>
-        <translation type="unfinished">Error...</translation>
+        <translation>Error...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="89"/>
         <source>Select record file</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el fitxer de registre</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Reset record...</source>
-        <translation type="unfinished"></translation>
+        <translation>Posar a zero el registre...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="114"/>
         <source>Do you really want to reset the current record?</source>
-        <translation type="unfinished"></translation>
+        <translation>Està segur de voler posar a zero el registre?</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSkyInfo.cpp" line="160"/>
         <source>Failed...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha fallat ...</translation>
     </message>
 </context>
 <context>
@@ -5006,7 +4989,7 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../realtime/CRtSelectSource.cpp" line="62"/>
         <source>Select a real time source from the list. Some sources can be added multiple times. For others only a single instance can be added.</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecciona un temps real original de la llista. Alguns orígens es poden afegir vàries vegades. En d&apos;altres casos sols es pot afegir una vegada. </translation>
     </message>
 </context>
 <context>
@@ -5014,17 +4997,17 @@ no és una coordenada vàlida en la configuración activa:
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="65"/>
         <source>To add a real time source do a right click on the list above. </source>
-        <translation type="unfinished"></translation>
+        <translation>Fes clic amb el botó dret a la llista de sobre per afegir un temps real original.</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Delete Source...</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimir l&apos;origen...</translation>
     </message>
     <message>
         <location filename="../realtime/CRtWorkspace.cpp" line="254"/>
         <source>Do you really want to remove the realtime source?</source>
-        <translation type="unfinished"></translation>
+        <translation>Estàs segur de suprimir el temps real original? </translation>
     </message>
 </context>
 <context>
@@ -5094,17 +5077,6 @@ no és una coordenada vàlida en la configuración activa:
         <location filename="../gis/db/CSearchDatabase.cpp" line="38"/>
         <source>Search database &apos;%1&apos;:</source>
         <translation>Cercant la base de dades &apos;%1&apos;:</translation>
-    </message>
-</context>
-<context>
-    <name>CSearchGoogle</name>
-    <message>
-        <source>Unknown response</source>
-        <translation type="vanished">Resposta desconeguda</translation>
-    </message>
-    <message>
-        <source>Error: </source>
-        <translation type="vanished">Error: </translation>
     </message>
 </context>
 <context>
@@ -5262,12 +5234,12 @@ línia %2, columna %3:
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="195"/>
         <source>Use of local time...</source>
-        <translation type="unfinished"></translation>
+        <translation>S&apos;utilitza la hora local...</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="196"/>
         <source>No UTC time has been found in file %1. Local computer time will be used. You can adjust time using a time filter if needed.</source>
-        <translation type="unfinished"></translation>
+        <translation>En el fitxer %1 no s&apos;han trobat hores UTC. S&apos;utilitzarà l&apos;hora de l&apos;ordinador local. Si fos necessari es poden ajustar les hores utilitzant el filtre de data i hora.</translation>
     </message>
     <message>
         <location filename="../gis/suunto/CSmlProject.cpp" line="245"/>
@@ -6114,7 +6086,8 @@ Si sols voleu mantenir una part suprimiu els punts, o marqueu això per a crear 
         <location filename="../dem/IDemPathSetup.ui" line="143"/>
         <source>Help! I want DEMs!
 I don&apos;t want to read the documentation!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajuda! Necessito DEMs!
+No vull llegir tota la documentació!</translation>
     </message>
 </context>
 <context>
@@ -6196,13 +6169,9 @@ I don&apos;t want to read the documentation!</source>
         <translation>Formulari</translation>
     </message>
     <message>
-        <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Per afegir fitxers amb dades d&apos;elevació feu &lt;b&gt;Fitxer-&gt;Configurar camins DEM&lt;/b&gt;.  O feu clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aquí&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per afegir fitxers amb dades d&apos;elevació feu &lt;a href=&apos;DemFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a DEM&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="125"/>
@@ -6320,7 +6289,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="160"/>
         <source>This is a NoGo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta és una NoGo-Area</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="176"/>
@@ -6439,7 +6408,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="182"/>
         <source>This Route is a NoGo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta Ruta és una NoGo-Line</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="198"/>
@@ -6584,7 +6553,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1172"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1269"/>
         <source>User defined limits for this track</source>
-        <translation>Límits d&apos;aquest track definits per l&apos;usuari </translation>
+        <translation>Límits d&apos;aquest track definits per l&apos;usuari </translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
@@ -6603,7 +6572,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="293"/>
         <source>This Track is a NoGo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta Track és una NoGo-Line</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="599"/>
@@ -6759,7 +6728,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="296"/>
         <source>This Waypoint is a NoGo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquesta Fita és en una Zona-NoGo</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="312"/>
@@ -6879,22 +6848,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="49"/>
         <source>Start Track at Point:</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar el Track al punt Point:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="72"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterChangeStartPoint.ui" line="114"/>
         <source>&lt;b&gt;Change Start Point&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Canviar el punt d&apos;inici&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -7174,11 +7143,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files in view</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation type="vanished">Substitueix l&apos;elevació dels punts del track amb els valors carregats des dels fitxers DEM.</translation>
+        <translation>A la vista substitueix les alçades dels punts del track amb els valors carregats dels fitxers DEM   </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
@@ -7224,82 +7189,82 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="75"/>
         <source>labelWarning</source>
-        <translation type="unfinished"></translation>
+        <translation>etiquetaAvís</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="163"/>
         <source>Speed</source>
-        <translation type="unfinished">Velocitat</translation>
+        <translation>Velocitat</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="247"/>
         <source> Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Típus</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="320"/>
         <source>Max Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocitat màxima</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="330"/>
         <source>Plain Level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nivell Pla:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="362"/>
         <source>at positive Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>en Pendent positiu</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="372"/>
         <source>Min Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocitat mínima</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="382"/>
         <source>Uphill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pujada:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="392"/>
         <source>Downhill:</source>
-        <translation type="unfinished"></translation>
+        <translation>Baixada:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="402"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocitat en un Pendent zero</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="450"/>
         <source>at negative Slope</source>
-        <translation type="unfinished"></translation>
+        <translation>en Pendent negatiu</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Els valors positius i negatius dels pendents definits per l&apos;usuari es canviaran pels valors màxim i mínim dels pendents del track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="504"/>
         <source>Set min/max slopes from Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Estableix el pendent min/max d&apos;un Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="551"/>
         <source>not yet implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>pendent d&apos;implementar</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="572"/>
         <source>Constant</source>
-        <translation type="unfinished"></translation>
+        <translation>Constant</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="577"/>
         <source>Cycling</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclisme</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="170"/>
@@ -7309,7 +7274,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Aplica ara el filtre.</translation>
+        <translation>Aplicar el filtre ara.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="105"/>
@@ -7404,45 +7369,48 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="14"/>
         <source>Setup Geo-Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de les Geo-Cerques</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="50"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please specify a valid email-address:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://nominatim.openstreetmap.org/&quot; target=&quot;_blank&quot;&gt;Per a utilitzar Nominatim&lt;/a&gt; © &lt;a href=&quot;https://openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;OpenStreetMap ODbL&lt;/a&gt;&lt;/p&gt;&lt;p&gt;especificar una adreça vàlida de correu electronic:&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="63"/>
         <source>please specify a valid email-address</source>
-        <translation type="unfinished"></translation>
+        <translation>si us plau, especificar una adreça vàlida de correu electronic</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="85"/>
         <source>maximum number of results (default is 10):</source>
-        <translation type="unfinished"></translation>
+        <translation>número màxim de resultats (10 per defecte):</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="150"/>
-        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable &apos;Free Webservices&apos; in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
+        <source>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;to use please create a geonames &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;username&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;then enable 'Free Webservices' in your &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Account&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;enter your geonames username here:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://www.geonames.org/&quot; target=&quot;_blank&quot;&gt;Geonames&lt;/a&gt; © &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot; target=&quot;_blank&quot;&gt;Creative Commons Attribution 4.0 License&lt;/a&gt;&lt;/p&gt;&lt;p&gt;per a utilitzar geonames creeu, si us plau, un &lt;a href=&quot;http://www.geonames.org/login&quot; target=&quot;_blank&quot;&gt;nom d&apos;usuari&lt;/a&gt;,&lt;/p&gt;&lt;p&gt;un cop fet activeu &apos;Free Webservices&apos; en el vostre &lt;a href=&quot;http://www.geonames.org/manageaccount&quot; target=&quot;_blank&quot;&gt;Compte&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;introduir aquí el vostre nom d&apos;usuari Geonames:&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="163"/>
         <source>enter geonames username here</source>
-        <translation type="unfinished"></translation>
+        <translation>introduir aquí el nom d&apos;usuari Geonames</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="206"/>
         <source>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;please enter your &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; here:&lt;/p&gt;
 </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/start&quot; target=&quot;_blank&quot;&gt;Google Geocoding API&lt;/a&gt; © &lt;a href=&quot;https://developers.google.com/terms&quot; target=&quot;_blank&quot;&gt;Google.com&lt;/a&gt;&lt;/p&gt;&lt;p&gt;si us plau, introduiu la vostre &lt;a href=&quot;https://developers.google.com/maps/documentation/geocoding/get-api-key&quot; target=&quot;_blank&quot;&gt;Google API-Key&lt;/a&gt; aquí:&lt;/p&gt;
+</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
-        <translation type="unfinished"></translation>
+        <translation>introdueix la Google API-key aquí</translation>
     </message>
 </context>
 <context>
@@ -7470,7 +7438,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="135"/>
         <source>Show Summary Drop Zones</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostra el resum de les zones de destí.</translation>
     </message>
 </context>
 <context>
@@ -7643,22 +7611,22 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="35"/>
         <source>Setup summary drop zones.</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura el resum de les zones de destí.</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="38"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummary.ui" line="49"/>
         <source>Needs setup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cal configurar...</translation>
     </message>
 </context>
 <context>
@@ -7666,17 +7634,17 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="14"/>
         <source>Setup summary projects...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configura el resum dels projectes...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="20"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="37"/>
         <source>Drop Zone 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Zona de Destí 1</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="52"/>
@@ -7688,7 +7656,7 @@ Nom del fitxer: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="276"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="290"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="94"/>
@@ -7696,22 +7664,22 @@ Nom del fitxer: %1</translation>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="185"/>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="255"/>
         <source>Name</source>
-        <translation type="unfinished">Nom</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="107"/>
         <source>Drop Zone 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Zona de Destí 2</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="177"/>
         <source>Drop Zone 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Zona de Destí 3</translation>
     </message>
     <message>
         <location filename="../gis/summary/IGisSummarySetup.ui" line="247"/>
         <source>Drop Zone 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Zona de Destí 4</translation>
     </message>
 </context>
 <context>
@@ -7944,7 +7912,7 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="276"/>
         <source>Realtime</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps real</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="289"/>
@@ -8085,13 +8053,9 @@ Nom del fitxer: %1</translation>
         <translation>Afegir un projecte buit</translation>
     </message>
     <message>
-        <source>Search Google</source>
-        <translation type="vanished">Cerca a Google</translation>
-    </message>
-    <message>
         <location filename="../IMainWindow.ui" line="562"/>
         <source>Geosearch</source>
-        <translation type="unfinished"></translation>
+        <translation>Geosearch</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="574"/>
@@ -8291,12 +8255,12 @@ Nom del fitxer: %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="862"/>
         <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
+        <translation>Ctrl+N</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="871"/>
         <source>Start QMapTool</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicia QMapTool</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="246"/>
@@ -8312,24 +8276,14 @@ Nom del fitxer: %1</translation>
         <translation>Formulari</translation>
     </message>
     <message>
-        <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Per afegir mapes feu &lt;b&gt;Fitxer-&gt;Configurar Camins a Mapes&lt;/b&gt;.  O feu clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aquí&lt;/b&gt;&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../map/IMapList.ui" line="116"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
         <translation>Utilitza el menú contextual (clic al botó dret del ratolí o entrada) per activar un mapa. Utilitzar arrossega I deixa anar per a moure el mapa activat en el procés de dibuix. </translation>
     </message>
     <message>
-        <source>Help! I want maps!
-I don&apos;t want to read the documentation!</source>
-        <translation type="vanished">Ajuda! Vull mapes!
-No vull llegir la documentació!</translation>
-    </message>
-    <message>
         <location filename="../map/IMapList.ui" line="103"/>
         <source>To add maps use &lt;a href=&apos;MapFolders&apos;&gt;File-&gt;Setup Map Paths&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per afegir mapes fes &lt;a href=&apos;MapFolders&apos;&gt;Fitxer-&gt;Configurar els Camins a Mapes&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="141"/>
@@ -8577,42 +8531,42 @@ Consell:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
-        <translation type="unfinished"></translation>
+        <translation>Les vistes permeten mostrar diversos nivells de zoom del mapa.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
         <source>Create overviews for result.</source>
-        <translation type="unfinished"></translation>
+        <translation>Crea vistes del resultat.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
         <source>:2</source>
-        <translation type="unfinished"></translation>
+        <translation>:2</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="205"/>
         <source>:4</source>
-        <translation type="unfinished"></translation>
+        <translation>:4</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="212"/>
         <source>:8</source>
-        <translation type="unfinished"></translation>
+        <translation>:8</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="219"/>
         <source>:16</source>
-        <translation type="unfinished"></translation>
+        <translation>:16</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="226"/>
         <source>:32</source>
-        <translation type="unfinished"></translation>
+        <translation>:32</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="233"/>
         <source>:64</source>
-        <translation type="unfinished"></translation>
+        <translation>:64</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
@@ -8675,7 +8629,7 @@ Consell:
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="349"/>
         <source>&lt;b&gt;Track Routing&lt;/b&gt;&lt;br/&gt;Connect points with a line from a loaded track if possible.&lt;br/&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Itinerari d&apos;un Track&lt;/b&gt;&lt;br/&gt;Si és possible, connecta els punts amb una línia des de un track carregat.&lt;br/&gt;</translation>
     </message>
     <message>
         <location filename="../mouse/line/IMouseEditLine.cpp" line="520"/>
@@ -8840,7 +8794,7 @@ o
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
         <source>Proj4 Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation>Auxiliar Proj4</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -8993,22 +8947,22 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="234"/>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Ignora</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="256"/>
         <source>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;a href=&quot;http://brouter.de/brouter/&quot; target=&quot;_blank&quot;&gt;BRouter&lt;/a&gt; © &lt;a href=&quot;https://github.com/abrensch/brouter/blob/master/LICENSE&quot; target=&quot;_blank&quot;&gt;ABrensch, Licence GPLv3&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="269"/>
         <source>&lt;p&gt;Directions Courtesy of &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Directions Cortesia de &lt;a href=&quot;http://brouter.de/brouter-web/&quot; target=&quot;_blank&quot;&gt;BRouter-web&lt;/a&gt; &lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/IRouterBRouter.ui" line="282"/>
         <source>&lt;p&gt;Routing data &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; contributors&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Dades d&apos;itineraris &lt;a href=&quot;http://www.openstreetmap.org/copyright&quot; target=&quot;_blank&quot;&gt;© OpenStreetMap&lt;/a&gt; col·laboradors&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -9199,7 +9153,7 @@ o
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="641"/>
         <source>Bind to hostname only</source>
-        <translation type="unfinished"></translation>
+        <translation>Enllaça solament amb l&apos;ordinador central</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/IRouterBRouterSetupWizard.ui" line="551"/>
@@ -9305,11 +9259,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation type="vanished">Per a utilitzar itineraris fora de línia cal definir el camí a les dades locals d&apos;itineraris. Utilitza el boto configurar per a enregistrar un camí. Pots crear les teves dades locals d&apos;itineraris fent &lt;b&gt;Eina-&gt;Crea Routino Base de Dades&lt;/b&gt;.</translation>
+        <translation>Per a crear itineraris offline cal que indiqueu el camí a les dades locals d&apos;itineraris. Per a guardar un camí, premeu el botó configurar eina. Podeu crear les vostres própies dades d&apos;itineraris amb &lt;a href=&apos;CreateRoutino&apos;&gt;Eines-&gt;Crear Base de Dades Routino&lt;/a&gt;.</translation>
     </message>
 </context>
 <context>
@@ -9379,7 +9329,7 @@ o
     </message>
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="133"/>
-        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it&apos;s recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can&apos;t route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
+        <source>&lt;p&gt;To create a Routino routing database you need to download *pbf files from &lt;a href='http://download.geofabrik.de/'&gt;GeoFabrik&lt;/a&gt;. The process of creating a Routino database is quite slow and the resulting files quite large. Therefore it's recommended not to download whole continents. Limit your download to those countries you really need. However as Routino can't route over several databases you have to include all countries that are touched by a cross country border route.&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;Select one or multiple source *.pbf files.&lt;/li&gt;
@@ -9402,48 +9352,48 @@ o
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="42"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="63"/>
         <source>-</source>
-        <translation type="unfinished">-</translation>
+        <translation>-</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="35"/>
         <source>Last update</source>
-        <translation type="unfinished"></translation>
+        <translation>Darrera modificació</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="49"/>
         <source>Aircrafts seen:</source>
-        <translation type="unfinished"></translation>
+        <translation>Aeronaus vistes:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="56"/>
         <source>Show names</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar els noms</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="70"/>
         <source>See &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt; for details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Per a més detalls, mirar &lt;a href=&apos;https://opensky-network.org/&apos;&gt;OpenSky&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="80"/>
         <source>Enter a valid key.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduir una clau vàlida.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="87"/>
         <source>Record by key</source>
-        <translation type="unfinished"></translation>
+        <translation>Registre ordenat per clau</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="102"/>
         <source>Start recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicia l&apos;enregistrament.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="105"/>
@@ -9452,27 +9402,27 @@ o
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="162"/>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="176"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="122"/>
         <source>Pause recording.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fes una pausa en l&apos;enregistrament.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="145"/>
         <source>Convert record to track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Converteix el registre a track.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="159"/>
         <source>Reset record.</source>
-        <translation type="unfinished"></translation>
+        <translation>Posar a zero el registre.</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/IRtOpenSkyInfo.ui" line="173"/>
         <source>Select record file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar el fitxer de registre.</translation>
     </message>
 </context>
 <context>
@@ -9480,22 +9430,22 @@ o
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="44"/>
         <source>Failed to open record for reading.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en obrir per lectura el registre.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="63"/>
         <source>Failed to read entry. Truncate record to last valid entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en la lectura de dades. Registre truncat fins a la darrera dada vàlida.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="81"/>
         <source>Failed to open record for writing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en obrir per escriptura el registre.</translation>
     </message>
     <message>
         <location filename="../realtime/IRtRecord.cpp" line="94"/>
         <source>Failed to write entry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Error en l&apos;escriptura de dades.</translation>
     </message>
 </context>
 <context>
@@ -9503,7 +9453,7 @@ o
     <message>
         <location filename="../realtime/IRtSelectSource.ui" line="14"/>
         <source>Select a source...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar l&apos;origen...</translation>
     </message>
 </context>
 <context>
@@ -9511,27 +9461,27 @@ o
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="47"/>
         <source>Source</source>
-        <translation type="unfinished">Origen</translation>
+        <translation>Origen</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="95"/>
         <source>TextLabel</source>
-        <translation type="unfinished">EtiquetaDeText</translation>
+        <translation>Etiqueta de text</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="115"/>
         <source>Add Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Afegir l&apos;Origen</translation>
     </message>
     <message>
         <location filename="../realtime/IRtWorkspace.ui" line="124"/>
         <source>Delete Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimir l&apos;origen</translation>
     </message>
 </context>
 <context>
@@ -9655,7 +9605,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="284"/>
         <source>Connect points with a line from a loaded track if possible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Si és possible, connecta els punts amb una línia des de un track carregat.</translation>
     </message>
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="317"/>
@@ -9665,7 +9615,7 @@ o
     <message>
         <location filename="../mouse/line/IScrOptEditLine.ui" line="334"/>
         <source>Redo last change</source>
-        <translation>Refès l&apos;últim canvi</translation>
+        <translation>Refès el darrer canvi</translation>
     </message>
 </context>
 <context>
@@ -9707,7 +9657,7 @@ o
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="103"/>
         <source>Toggle Nogo-Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta Nogo-Area</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IScrOptOvlArea.ui" line="138"/>
@@ -9858,7 +9808,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="145"/>
         <source>Reverse Route</source>
-        <translation type="unfinished"></translation>
+        <translation>Invertir ruta</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="159"/>
@@ -9868,7 +9818,7 @@ o
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="173"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta Nogo-Line</translation>
     </message>
     <message>
         <location filename="../gis/rte/IScrOptRte.ui" line="205"/>
@@ -9928,7 +9878,7 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="129"/>
         <source>Change the color of all selected tracks.</source>
-        <translation type="unfinished"></translation>
+        <translation>Canviar el color de tots els tracks seleccionats.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="143"/>
@@ -10053,7 +10003,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
         <source>Change the color of the track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Canviar el color del track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
@@ -10063,7 +10013,7 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Toggle Nogo-Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Commuta Nogo-Line</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="255"/>
@@ -10123,17 +10073,17 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="150"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>edita el radi d&apos;una àrea circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="181"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia entre proximity i nogo-area</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix el cercle definit per la fita</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="231"/>
@@ -10146,34 +10096,34 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="20"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="49"/>
         <source>edit radius of circular area</source>
-        <translation type="unfinished"></translation>
+        <translation>edita el radi d&apos;una àrea circular</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="52"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="66"/>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="80"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="77"/>
         <source>Switch between proximity and nogo-area</source>
-        <translation type="unfinished"></translation>
+        <translation>Canvia entre proximity i nogo-area</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="63"/>
         <source>Delete circle defined by waypoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Suprimeix el cercle definit per la fita</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWptRadius.ui" line="127"/>
         <source>TextLabel</source>
-        <translation type="unfinished">EtiquetaDeText</translation>
+        <translation>Etiqueta de text</translation>
     </message>
 </context>
 <context>
@@ -10278,7 +10228,7 @@ Si introduïu &apos;word&apos; es fa una cerca de la paraula exacte. Si introdu�
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="14"/>
         <source>Select Parent Folder...</source>
-        <translation>Selecciona Carpeta Superior...</translation>
+        <translation>Seleccionar Carpeta Superior...</translation>
     </message>
     <message>
         <location filename="../gis/db/ISelectDBFolder.ui" line="26"/>
@@ -11045,7 +10995,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -11104,7 +11054,7 @@ o
     <message>
         <location filename="../units/IUnitsSetup.ui" line="30"/>
         <source>Nautical</source>
-        <translation type="unfinished"></translation>
+        <translation>Nàutica</translation>
     </message>
     <message>
         <location filename="../units/IUnitsSetup.ui" line="37"/>

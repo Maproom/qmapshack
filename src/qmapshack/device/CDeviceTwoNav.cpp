@@ -39,9 +39,13 @@ CDeviceTwoNav::CDeviceTwoNav(const QString &path, const QString &key, const QStr
     }
 
     pathData = "Data/";
-
-
     QDir dirData(dir.absoluteFilePath(pathData));
+
+    if(!dirData.exists())
+    {
+        pathData = "TwoNavData/Data/";
+        dirData.setPath(dir.absoluteFilePath(pathData));
+    }
 
     {
         IGisProject * project =  new CTwoNavProject(dirData.absolutePath(), this);

@@ -160,6 +160,13 @@ void CFilterSpeed::slotApply()
         break;
     }
 
+    case 2:
+    {
+        trk.filterSpeed(spinHikingPlainSpeed->value()/IUnit::self().speedfactor,
+                        spinHikingAscending->value(), spinHikingDescending->value());
+        break;
+    }
+
     default:
         break;
     }

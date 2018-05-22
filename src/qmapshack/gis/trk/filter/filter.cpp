@@ -397,7 +397,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
     changed(tr("Changed average moving speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
-void CGisItemTrk::filterSpeed(qreal speed)
+void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
 {
     QDateTime timestamp = timeStart;
     if(!timestamp.isValid())
@@ -420,6 +420,50 @@ void CGisItemTrk::filterSpeed(qreal speed)
     QString val, unit;
     IUnit::self().meter2speed(speed, val, unit);
     changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+}
+
+void CGisItemTrk::filterSpeed(qreal hikingPlainSpeed, qreal hikingAscending, qreal hikingDescending)
+{
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+        // calculation based on slope2 (Percent)
+        qreal slope = pt.slope2;
+        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
+        {
+            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
+        }
+
+        QVector<qreal> maxTerms(7);
+
+//        qreal A9 = slope;
+//        qreal B4 = hikingPlainSpeed;
+//        qreal B5 = hikingAscending;
+//        qreal B6 = hikingDescending;
+        qreal A9 = -2.0;
+        qreal B4 = 5.5;
+        qreal B5 = 600.0;
+        qreal B6 = 800.;
+        maxTerms[0] = 60 / B4;
+        maxTerms[1] = A9 * 60000 / B5;
+        maxTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
+        maxTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) -0.2) + (0.2 * 60000 / B5);
+        maxTerms[4] = -A9 * 60000 / B6;
+        maxTerms[5] = (A9 + 0.05) * ((60 / B4 + 0.5 * (0.25 * 60000 / B6 - 60 / B4)) - (60 / B4)) / (-0.25 + 0.05) + (60 / B4);
+        maxTerms[6] = (A9 + 0.25) * ((60 / B4) - (0.25 * 60000 / B6)) / ((-0.05 - 0.5 * (B6 / (B4 * 1000) - 0.05)) + 0.25) + (0.25 * 60000 / B6);
+
+        std::stable_sort(maxTerms.begin(), maxTerms.end(), std::greater<qreal>());
+
+        qDebug() << "KKA: Minutes1 B9 =" << maxTerms[0];
+
+    }
+
+    return;
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope)

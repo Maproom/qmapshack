@@ -391,10 +391,9 @@ void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
     }
 
     deriveSecondaryData();
-
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed average moving cycling speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
@@ -424,6 +423,16 @@ void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
 
 void CGisItemTrk::filterSpeed(qreal hikingPlainSpeed, qreal hikingAscending, qreal hikingDescending)
 {
+    if (!hikingPlainSpeed || !hikingAscending || !hikingDescending)
+    {
+        return;
+    }
+
+    QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime().toUTC();
+    }
 
     for(CTrackData::trkpt_t& pt : trk)
     {
@@ -441,14 +450,16 @@ void CGisItemTrk::filterSpeed(qreal hikingPlainSpeed, qreal hikingAscending, qre
 
         QVector<qreal> maxTerms(7);
 
-//        qreal A9 = slope;
-//        qreal B4 = hikingPlainSpeed;
-//        qreal B5 = hikingAscending;
-//        qreal B6 = hikingDescending;
-        qreal A9 = -2.0;
-        qreal B4 = 5.5;
-        qreal B5 = 600.0;
-        qreal B6 = 800.;
+        // Curve algorithm based on carloscoi curves
+        qreal A9 = slope / 100;      // Transform from Percent to tangens
+        qreal B4 = hikingPlainSpeed * 3.6; // Transform from km/h to m/s
+        qreal B5 = hikingAscending;
+        qreal B6 = hikingDescending;
+//        qreal A9 = -2.0;
+//        qreal B4 = 3.5;
+//        qreal B5 = 400.0;
+//        qreal B6 = 550.0;
+
         maxTerms[0] = 60 / B4;
         maxTerms[1] = A9 * 60000 / B5;
         maxTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
@@ -459,11 +470,23 @@ void CGisItemTrk::filterSpeed(qreal hikingPlainSpeed, qreal hikingAscending, qre
 
         std::stable_sort(maxTerms.begin(), maxTerms.end(), std::greater<qreal>());
 
-        qDebug() << "KKA: Minutes1 B9 =" << maxTerms[0];
+        qDebug() << "KKA: slope" << slope << "maxTerms[0]=" << maxTerms[0];
 
+        if (!maxTerms[0])
+        {
+            continue;
+        }
+        qreal speed = 1 / maxTerms[0] * 60 / 3.6; // Transform from km/h to m/s
+        qDebug() << "KKA: Speed=" << speed;
+
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
+        pt.time   = timestamp;
     }
 
-    return;
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
+    changed(tr("Changed average moving hiking speed depending on carloscoi curves to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope)

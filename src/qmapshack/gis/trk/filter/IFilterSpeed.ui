@@ -557,7 +557,20 @@
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="spinHikingPlainSpeed"/>
+            <widget class="QDoubleSpinBox" name="spinHikingPlainSpeed">
+             <property name="decimals">
+              <number>2</number>
+             </property>
+             <property name="minimum">
+              <double>0.100000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>99.900000000000006</double>
+             </property>
+             <property name="value">
+              <double>3.500000000000000</double>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_12">
@@ -567,7 +580,20 @@
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="spinHikingAscending"/>
+            <widget class="QDoubleSpinBox" name="spinHikingAscending">
+             <property name="decimals">
+              <number>0</number>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10000.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>400.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item>
             <widget class="QLabel" name="label_14">
@@ -577,7 +603,20 @@
             </widget>
            </item>
            <item>
-            <widget class="QDoubleSpinBox" name="spinHikingDescending"/>
+            <widget class="QDoubleSpinBox" name="spinHikingDescending">
+             <property name="decimals">
+              <number>0</number>
+             </property>
+             <property name="minimum">
+              <double>1.000000000000000</double>
+             </property>
+             <property name="maximum">
+              <double>10000.000000000000000</double>
+             </property>
+             <property name="value">
+              <double>550.000000000000000</double>
+             </property>
+            </widget>
            </item>
            <item>
             <spacer name="horizontalSpacer_7">

@@ -990,6 +990,8 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 
 void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11)
 {
+
+
     QString str;
 
     str.sprintf("%1.8f", wpt.lat);
@@ -1004,7 +1006,10 @@ void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11)
     writeXml(xml, "name",          wpt.name);
     writeXml(xml, "cmt",           html2Dev(wpt.cmt, strictGpx11));
     writeXml(xml, "desc",          html2Dev(wpt.desc, strictGpx11));
-    writeXml(xml, "src",           wpt.src);
+    if(isOnDevice() != IDevice::eTypeGarmin)
+    {
+        writeXml(xml, "src",           wpt.src);
+    }
     writeXml(xml, "link",          wpt.links);
     writeXml(xml, "sym",           wpt.sym);
     writeXml(xml, "type",          wpt.type);

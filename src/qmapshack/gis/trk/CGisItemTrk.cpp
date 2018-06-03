@@ -1321,6 +1321,8 @@ bool CGisItemTrk::cut()
         return false;
     }
 
+    mouseMoveFocus = nullptr;
+
     qint32 idxMouse             = mouseClickFocus->idxTotal;
     CCutTrk::mode_e mode        = dlg.getMode();
     CCutTrk::cutmode_e cutMode  = dlg.getCutMode();

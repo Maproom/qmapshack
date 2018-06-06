@@ -127,17 +127,17 @@
     <message>
         <location filename="../canvas/CCanvas.cpp" line="182"/>
         <source>None selected</source>
-        <translation>Ninguno seleccionado</translation>
+        <translation>No seleccionada</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="187"/>
         <source>&lt;p align=&apos;right&apos;&gt;This help will be closed the moment you activate a map.&lt;/p&gt;</source>
-        <translation>&lt;p align=&apos;right&apos;&gt;Esta pantalla de ayuda se cerrará cuando active un mapa.&lt;/p&gt;</translation>
+        <translation>&lt;p align=&apos;right&apos;&gt;Esta pantalla de ayuda se cerrará cuando actives un mapa.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="190"/>
         <source>&lt;h1&gt;Welcome&lt;/h1&gt;&lt;p&gt;Thank you for using QMapShack. QMapShack is a non-profit Open Source project. It&apos;s maintained by enthusiast and volunteers. It&apos;s very mature and useful but lacks certain amenities you might be used from &apos;free&apos; commercial software. As a matter of fact we lack the resources to provide you with a centralized and convenient download of maps, elevation data and routing data. You have to download these resources from various sites on your own. But this page might help you a bit&lt;/p&gt;</source>
-        <translation>&lt;h1&gt;Bienvenidos&lt;/h1&gt;&lt;p&gt;Gracias por usar QMapShack. Es un proyecto de Código abierto y sin ánimo de lucro mantenido por voluntarios y entusiastas. Aunque es muy útil y ha alcanzado cierta madurez no tiene las comodidades que se pueden encontrar usando software "gratuito" comercial. Carecemos de recursos para proporcionar una descarga de mapas, datos de elevación y enrutamiento. Es necesario obtener estos datos desde diferentes sitios, pero esta página te ayudará a hacerlo.&lt;/p&gt;</translation>
+        <translation>&lt;h1&gt;Bienvenidos&lt;/h1&gt;&lt;p&gt;Gracias por usar QMapShack. Es un proyecto de Código Abierto y sin ánimo de lucro mantenido por voluntarios y entusiastas. Aunque es muy útil y ha alcanzado cierta madurez no tiene las comodidades que se pueden encontrar usando software "gratuito" comercial. Carecemos de recursos para proporcionar una descarga de mapas, datos de elevación y enrutamiento. Es necesario obtener estos datos desde diferentes sitios, pero esta página te ayudará a hacerlo.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../canvas/CCanvas.cpp" line="199"/>
@@ -228,7 +228,7 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="40"/>
         <source>File with QMapShack configuration.</source>
-        <translation>Archivo con la configuración de QMapShack</translation>
+        <translation>Archivo con la configuración de QMapShack.</translation>
     </message>
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="40"/>
@@ -238,7 +238,7 @@
     <message>
         <location filename="../setup/CCommandProcessor.cpp" line="43"/>
         <source>Files for future use.</source>
-        <translation>Archivos para uso futuro</translation>
+        <translation>Archivos para uso futuro.</translation>
     </message>
 </context>
 <context>
@@ -259,12 +259,12 @@
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="59"/>
         <source>Lost &amp; Found (%1)</source>
-        <translation>Objetos Perdidos (%1)</translation>
+        <translation>Papelera (%1)</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderLostFound.cpp" line="64"/>
         <source>Lost &amp; Found</source>
-        <translation>Objetos Perdidos</translation>
+        <translation>Papelera</translation>
     </message>
 </context>
 <context>
@@ -1814,12 +1814,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="774"/>
         <source>Are you sure you want to delete all items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>¿Desea realmente eliminar todos los elementos de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
+        <translation>¿Desea realmente eliminar todos los elementos de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="795"/>
         <source>Are you sure you want to delete all selected items from Lost&amp;Found? This will remove them permanently.</source>
-        <translation>¿Desea realmente eliminar todos los elementos.seleccionados de &apos;Objetos Perdidos&apos;? Se eliminarán definitivamente.</translation>
+        <translation>¿Desea realmente eliminar todos los elementos.seleccionados de &apos;Papelera&apos;? Se eliminarán definitivamente.</translation>
     </message>
 </context>
 <context>
@@ -2076,7 +2076,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="107"/>
         <source>Failed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</source>
-        <translation type="unfinished">ailed to restore all folders in the summary drop zones. Probably the folder or database has been removed. Please check summary drop zone setup.</translation>
+        <translation>Error al restaurar las carpetas en el resumen de las zonas de destino. Es muy posible que haya eliminado la carpeta o la base de datos. Revise la configuración de las zonas de destino. </translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummary.cpp" line="111"/>
@@ -2097,12 +2097,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="41"/>
         <source>&lt;b&gt;What is this about?&lt;/b&gt;&lt;br/&gt;When using the database GIS items can be referenced by several projects. A common use-case is to store tour data in it&apos;s own project folder. Additionally the items are copied (referenced) into folders summarizing items of a certain time span, e.g. monthly, yearly, total. You can do this manually by loading the summary projects into the workspace, coping the items and saving the changes. Or you use this dialog to define project folders in the database as summary folders and copy the items by dragging them into the drag-n-drop area.</source>
-        <translation>&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;Al usar la base de datos, los elementos SIG pueden ser usados por varios proyectos. Un caso común es almacenar datos de recorrido en su propia carpeta de proyecto. Además, los elementos se copian (se referencian) en carpetas que agrupan elementos en un cierto intervalo de tiempo, mensual, anual, total. Puede hacerlo manualmente cargando los proyectos de recopilación en el espacio de trabajo, adaptando los elementos y guardando los cambios, o puede usar este cuadro de diálogo para definir carpetas de proyectos en la base de datos como carpetas de recopilación y copiar los elementos arrastrándolos al área de &quot;arrastrar y soltar&quot;.</translation>
+        <translation>&lt;b&gt;¿Que es esto?&lt;/b&gt;&lt;br/&gt;Al usar la base de datos, los elementos GIS pueden ser usados por varios proyectos. Un caso común es almacenar datos de un recorrido en su propia carpeta de proyecto. Además, los elementos se copian (se referencian) en carpetas agrupándolos por meses, años, total. Puede hacerlo manualmente cargando los resúmenes de los proyectos en el espacio de trabajo, copiando los elementos y guardando los cambios, o puede usar este cuadro de diálogo para definir como carpetas de resumen las carpetas de proyectos de la base de datos y copiar los elementos arrastrándolos y soltándolos.</translation>
     </message>
     <message>
         <location filename="../gis/summary/CGisSummarySetup.cpp" line="110"/>
         <source>Select summary project...</source>
-        <translation>Seleccione proyecto de recopilación...</translation>
+        <translation>Seleccione resumen del proyecto...</translation>
     </message>
 </context>
 <context>
@@ -2125,7 +2125,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="631"/>
         <source>Copy items...</source>
-        <translation type="unfinished">Copia elementos....</translation>
+        <translation type="unfinished">Copiar elementos....</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="650"/>
@@ -2233,7 +2233,7 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="38"/>
         <source>Cut history after</source>
-        <translation>Cortar historial despues</translation>
+        <translation>Cortar historial después</translation>
     </message>
     <message>
         <location filename="../widgets/CHistoryListWidget.cpp" line="155"/>
@@ -2309,7 +2309,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
         <source>Depth</source>
         <comment>extShortName</comment>
-        <translation>Profundidad</translation>
+        <translation>Prof.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="76"/>
@@ -2322,7 +2322,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="92"/>
         <source>Heart R.</source>
         <comment>extShortName</comment>
-        <translation>R. Cardiaco</translation>
+        <translation>R. Card.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="80"/>
@@ -2346,7 +2346,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
         <source>Speed</source>
         <comment>extShortName</comment>
-        <translation>Velocidad</translation>
+        <translation>Vel.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="104"/>
@@ -2364,7 +2364,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
         <source>Course</source>
         <comment>extShortName</comment>
-        <translation>Camino</translation>
+        <translation>Cam.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="108"/>
@@ -2413,7 +2413,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
         <source>Energy</source>
         <comment>extShortName</comment>
-        <translation>Energía</translation>
+        <translation>Eng.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="131"/>
@@ -2455,7 +2455,7 @@ línea %2, columna %3.
         <location filename="../gis/trk/CKnownExtension.cpp" line="158"/>
         <source>Speed over Distance*</source>
         <comment>extLongName</comment>
-        <translation>Velocidad por distancia *</translation>
+        <translation>Velocidad por distancia*</translation>
     </message>
     <message>
         <location filename="../gis/trk/CKnownExtension.cpp" line="163"/>
@@ -2566,7 +2566,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/db/CLostFoundProject.cpp" line="39"/>
         <source>Lost &amp; Found</source>
-        <translation>Objetos Perdidos</translation>
+        <translation>Papelera</translation>
     </message>
 </context>
 <context>
@@ -2599,7 +2599,7 @@ línea %2, columna %3.
     <message>
         <location filename="../CMainWindow.cpp" line="1098"/>
         <source>[Grid: %1]</source>
-        <translation>[Malla: %1]</translation>
+        <translation>[Cuadrícula: %1]</translation>
     </message>
     <message>
         <location filename="../CMainWindow.cpp" line="1239"/>
@@ -3616,7 +3616,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="51"/>
         <source>Copy position (Grid)</source>
-        <translation>Copiar posicion (malla)</translation>
+        <translation>Copiar posicion (cuadrícula)</translation>
     </message>
 </context>
 <context>
@@ -6475,22 +6475,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="479"/>
         <source>Use/edit user defined visibility of arrows for this track</source>
-        <translation>Utilizar / editar la visibilidad de las flechas de dirección de este track</translation>
+        <translation>Configuración para este track</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="508"/>
         <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
-        <translation>Utilizar / editar la visibilidad de las flechas de dirección de todos los track</translation>
+        <translation>Configuración por defecto para todos los tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="717"/>
         <source>Use/edit user defined scale factor for this track</source>
-        <translation>Utilizar / editar la escala de este track</translation>
+        <translation>Configuración para este track</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="746"/>
         <source>Use/edit system&apos;s default factor for all tracks</source>
-        <translation>Utilice / edite el valor por defecto de la escala para todos los tracks</translation>
+        <translation>Configuración por defecto para todos los tracks</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="883"/>
@@ -6656,7 +6656,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
         <source>Ele.</source>
-        <translation>Altitud.</translation>
+        <translation>Altitud</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
@@ -7525,7 +7525,7 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
         <location filename="../gis/IGisItem.cpp" line="742"/>
         <location filename="../gis/IGisItem.cpp" line="795"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;---sin descripción---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;---Sin descripción---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="753"/>
@@ -7547,7 +7547,7 @@ Es un elemento nuevo o ha sido eliminado en la base de datos por alguien.</trans
         <location filename="../gis/IGisItem.cpp" line="770"/>
         <location filename="../gis/IGisItem.cpp" line="809"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
-        <translation>&lt;p&gt;--- sin enlaces ---&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;--- Sin enlaces ---&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="944"/>
@@ -7750,7 +7750,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="14"/>
         <source>Setup Grid...</source>
-        <translation>Configurar Malla...</translation>
+        <translation>Configurar Cuadrícula...</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="22"/>
@@ -7773,7 +7773,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="63"/>
         <source>Get projection from current map.</source>
-        <translation>Obtener la proyección del el mapa actual.</translation>
+        <translation>Obtener la proyección del mapa actual.</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="89"/>
@@ -7783,12 +7783,12 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../grid/IGridSetup.ui" line="130"/>
         <source>Grid color</source>
-        <translation>Color de la malla</translation>
+        <translation>Color de la cuadrícula</translation>
     </message>
     <message>
         <location filename="../grid/IGridSetup.ui" line="143"/>
         <source>setup grid color</source>
-        <translation>Configurar el color de la malla</translation>
+        <translation>Configurar el color de la cuadrícula</translation>
     </message>
 </context>
 <context>
@@ -7958,7 +7958,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="337"/>
         <source>Show Grid</source>
-        <translation>Mostrar Malla</translation>
+        <translation>Mostrar Cuadrícula</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="340"/>
@@ -7968,7 +7968,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../IMainWindow.ui" line="352"/>
         <source>Setup Grid</source>
-        <translation>Configurar Malla</translation>
+        <translation>Configurar Cuadrícula</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="355"/>
@@ -10765,27 +10765,27 @@ o
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="295"/>
         <source>Bullet List (Circle)</source>
-        <translation>Lista de viñetas (círculos)</translation>
+        <translation>Lista de viñetas (Círculos)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="300"/>
         <source>Bullet List (Square)</source>
-        <translation>Lista de viñetas(cuadrados)</translation>
+        <translation>Lista de viñetas(Cuadrados)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="305"/>
         <source>Ordered List (Decimal)</source>
-        <translation>Lista ordenada(decimal)</translation>
+        <translation>Lista ordenada(Decimal)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="310"/>
         <source>Ordered List (Alpha lower)</source>
-        <translation>Lista ordenada (alfabético descendente)</translation>
+        <translation>Lista ordenada (Alfabético minúsculas)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="315"/>
         <source>Ordered List (Alpha upper)</source>
-        <translation>Lista ordenada (alfabético ascendente)</translation>
+        <translation>Lista ordenada (Alfabético mayúsculas)</translation>
     </message>
     <message>
         <location filename="../widgets/ITextEditWidget.ui" line="320"/>
@@ -11058,7 +11058,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="172"/>
         <source>!!! failed !!!
 </source>
-        <translation>!!!falló!!!</translation>
+        <translation>¡¡¡falló!!!</translation>
     </message>
 </context>
 <context>

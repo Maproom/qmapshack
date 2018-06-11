@@ -19,9 +19,9 @@
 #include "CAbout.h"
 #include "version.h"
 
-#include <QtWidgets>
 #include <gdal.h>
 #include <proj_api.h>
+#include <QtWidgets>
 #include <routino.h>
 
 CAbout::CAbout(QWidget *parent)

@@ -19,7 +19,6 @@
 #include "CMainWindow.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/IGisItem.h"
 #include "gis/db/CDBFolderGroup.h"
 #include "gis/db/CDBFolderOther.h"
 #include "gis/db/CDBFolderProject.h"
@@ -29,6 +28,7 @@
 #include "gis/db/IDBFolder.h"
 #include "gis/db/IDBFolderSql.h"
 #include "gis/db/macros.h"
+#include "gis/IGisItem.h"
 #include "misc.h"
 
 #include <QtSql>

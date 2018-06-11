@@ -21,8 +21,8 @@
 #include "map/CMapDraw.h"
 #include "map/CMapMAP.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 #define INT_TO_DEG(x) (qreal(x)/1e6)
 

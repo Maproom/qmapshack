@@ -17,17 +17,17 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
+#include "GeoMath.h"
 
 
-#include <QtMath>
 #include <proj_api.h>
+#include <QtMath>
 
 void CGisItemTrk::filterReducePoints(qreal dist)
 {

@@ -18,9 +18,9 @@
 
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include <initializer_list>
 #include <QSet>
 #include <QString>
-#include <initializer_list>
 
 static std::initializer_list<QString> knownSymbols = { "1stCategory", "2ndCategory", "3rdCategory", "4thCategory", "Danger", "FirstAid", "Food",
                                                        "HorsCategory", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };

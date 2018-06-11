@@ -17,12 +17,10 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
-#include "gis/WptIcons.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CDetailsWpt.h"
@@ -30,6 +28,8 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupNewWpt.h"
+#include "gis/WptIcons.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "mouse/IMouse.h"

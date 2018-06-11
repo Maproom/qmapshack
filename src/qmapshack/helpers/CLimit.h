@@ -19,11 +19,11 @@
 #ifndef CLIMIT_H
 #define CLIMIT_H
 
+#include <functional>
 #include <QObject>
 #include <QSet>
 #include <QString>
 #include <QVariant>
-#include <functional>
 
 #include "units/IUnit.h"
 

@@ -17,19 +17,19 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/WptIcons.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseAdapter.h"
 #include "mouse/CMouseRadiusWpt.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 CMouseRadiusWpt::CMouseRadiusWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas * canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse),

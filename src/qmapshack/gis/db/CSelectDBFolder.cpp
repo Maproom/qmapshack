@@ -103,7 +103,7 @@ void CSelectDBFolder::slotItemSelectionChanged()
         }
 
         ids.clear();
-        ids     << folder->getId();
+        ids << folder->getId();
         db      = folder->getDBName();
         host    = folder->getDBHost();
 

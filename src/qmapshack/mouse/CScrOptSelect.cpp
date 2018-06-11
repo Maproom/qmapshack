@@ -22,8 +22,8 @@
 #include "mouse/CScrOptSelect.h"
 #include "mouse/IMouse.h"
 
-#include <QtWidgets>
 #include <functional>
+#include <QtWidgets>
 
 using std::bind;
 

@@ -16,12 +16,12 @@
 
 **********************************************************************************************/
 
-#include "gis/WptIcons.h"
 #include "gis/db/CDBProject.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 
 #include "qlgt/CQlgtDiary.h"
 #include "qlgt/CQlgtFolder.h"

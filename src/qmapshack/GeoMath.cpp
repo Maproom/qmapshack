@@ -17,8 +17,8 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "canvas/IDrawContext.h"
+#include "GeoMath.h"
 #include "units/IUnit.h"
 #include <proj_api.h>
 #include <stdlib.h>

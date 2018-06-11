@@ -17,17 +17,17 @@
 **********************************************************************************************/
 
 #include "device/CDeviceGarmin.h"
-#include "gis/WptIcons.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 #include "version.h"
 
-#include <QtXml>
 #include <proj_api.h>
+#include <QtXml>
 
 const QString IGisProject::gpx_ns    = "http://www.topografix.com/GPX/1/1";
 const QString IGisProject::xsi_ns    = "http://www.w3.org/2001/XMLSchema-instance";
@@ -990,8 +990,6 @@ void IGisItem::readWpt(const QDomNode& xml, wpt_t& wpt)
 
 void IGisItem::writeWpt(QDomElement& xml, const wpt_t& wpt, bool strictGpx11)
 {
-
-
     QString str;
 
     str.sprintf("%1.8f", wpt.lat);

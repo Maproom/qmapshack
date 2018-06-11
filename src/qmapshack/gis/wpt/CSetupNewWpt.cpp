@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/WptIcons.h"
 #include "gis/wpt/CSetupNewWpt.h"
+#include "gis/WptIcons.h"
 #include "helpers/CPositionDialog.h"
 #include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"

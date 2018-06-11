@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CAppSetupLinux.h"
 #include "config.h"
+#include "CAppSetupLinux.h"
 
 #ifndef _MKSTR_1
 #define _MKSTR_1(x)    #x

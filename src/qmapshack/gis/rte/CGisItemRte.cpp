@@ -18,24 +18,24 @@
 **********************************************************************************************/
 
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
-#include "gis/WptIcons.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CDetailsRte.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/WptIcons.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
+#include <proj_api.h>
 #include <QtWidgets>
 #include <QtXml>
-#include <proj_api.h>
 
 const QPen CGisItemRte::penBackground(Qt::white, 5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
 IGisItem::key_t CGisItemRte::keyUserFocus;

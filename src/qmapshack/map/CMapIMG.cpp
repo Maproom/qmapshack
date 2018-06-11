@@ -16,10 +16,10 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/Poi.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CFileExt.h"
 #include "helpers/CProgressDialog.h"

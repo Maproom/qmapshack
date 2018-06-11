@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterReplaceElevation.h"
 

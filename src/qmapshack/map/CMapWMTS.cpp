@@ -18,9 +18,9 @@
 
 #include "CMainWindow.h"
 #include "helpers/CDraw.h"
+#include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
 #include "map/CMapWMTS.h"
-#include "map/cache/CDiskCache.h"
 #include "units/IUnit.h"
 
 #include <QtNetwork>

@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/IGisItem.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CDraw.h"

@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/Poi.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
+#include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
 #include "map/CMapItem.h"
 #include "map/CMapList.h"
 #include "map/CMapPathSetup.h"
 #include "map/IMap.h"
-#include "map/cache/CDiskCache.h"
 #include "setup/IAppSetup.h"
 
 #include <QtGui>

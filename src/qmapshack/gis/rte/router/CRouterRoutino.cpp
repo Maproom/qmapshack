@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/CRouterRoutino.h"
@@ -25,8 +25,8 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 #include <routino.h>
 
 

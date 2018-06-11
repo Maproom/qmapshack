@@ -17,8 +17,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "mouse/CMouseEditRte.h"

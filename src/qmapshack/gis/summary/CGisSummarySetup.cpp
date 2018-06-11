@@ -22,8 +22,8 @@
 #include "gis/summary/CGisSummary.h"
 #include "gis/summary/CGisSummarySetup.h"
 
-#include <QtWidgets>
 #include <functional>
+#include <QtWidgets>
 
 using std::bind;
 

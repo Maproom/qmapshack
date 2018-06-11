@@ -21,10 +21,10 @@
 
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
+#include <proj_api.h>
 #include <QImage>
 #include <QMutex>
 #include <QPointer>
-#include <proj_api.h>
 
 class CMapDraw;
 class IMapProp;

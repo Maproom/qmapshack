@@ -17,9 +17,9 @@
 **********************************************************************************************/
 
 
-#include "WptIcons.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include "WptIcons.h"
 
 #include <QtGui>
 

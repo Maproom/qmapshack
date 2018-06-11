@@ -17,8 +17,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #if defined(Q_OS_LINUX) || defined(Q_OS_FREEBSD)
 #include "device/CDeviceWatcherLinux.h"
 #endif
@@ -33,7 +33,6 @@
 #include "gis/CGisListWks.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/CSelDevices.h"
-#include "gis/IGisItem.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CLostFoundProject.h"
 #include "gis/db/CSelectDBFolder.h"
@@ -41,6 +40,7 @@
 #include "gis/db/macros.h"
 #include "gis/fit/CFitProject.h"
 #include "gis/gpx/CGpxProject.h"
+#include "gis/IGisItem.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/qlb/CQlbProject.h"

@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisListWks.h"
 #include "gis/ovl/CDetailsOvlArea.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/ovl/CScrOptOvlArea.h"
 #include "gis/prj/IGisProject.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10

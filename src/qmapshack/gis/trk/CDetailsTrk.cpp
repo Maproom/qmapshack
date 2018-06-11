@@ -43,8 +43,8 @@
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 #include <functional>
 

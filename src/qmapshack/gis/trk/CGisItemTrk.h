@@ -27,11 +27,11 @@
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
+#include <functional>
+#include <interpolation.h>
 #include <QDebug>
 #include <QPen>
 #include <QPointer>
-#include <functional>
-#include <interpolation.h>
 
 using std::numeric_limits;
 

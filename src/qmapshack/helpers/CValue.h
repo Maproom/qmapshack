@@ -19,9 +19,9 @@
 #ifndef CVALUE_H
 #define CVALUE_H
 
+#include <functional>
 #include <QSet>
 #include <QVariant>
-#include <functional>
 
 using fMarkChanged   = std::function<void(void)>;
 using fValueOnChange = std::function<void(const QVariant&)>;

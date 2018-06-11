@@ -22,9 +22,9 @@
 #include "map/CMapVRT.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>
+#include <QtWidgets>
 
 #define TILELIMIT 2500
 #define TILESIZEX 64

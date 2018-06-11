@@ -238,7 +238,7 @@ QDataStream& operator >>(QDataStream& s, CQlgtTrack& track)
                 s1 >> pt1->x;    ///< [m] cartesian gps coordinate
                 s1 >> pt1->y;    ///< [m] cartesian gps coordinate
                 s1 >> pt1->z;    ///< [m] cartesian gps coordinate
-                                 ///< [m/s] velocity
+                ///< [m/s] velocity
                 s1 >> pt1->vx;
                 ///< [m/s] velocity
                 s1 >> pt1->vy;

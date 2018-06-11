@@ -19,9 +19,9 @@
 #ifndef CGRID_H
 #define CGRID_H
 
+#include <proj_api.h>
 #include <QColor>
 #include <QObject>
-#include <proj_api.h>
 class QPainter;
 class QSettings;
 class CMapDraw;

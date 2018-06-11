@@ -17,8 +17,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterTilesSelect.h"
 #include "gis/rte/router/brouter/CRouterBRouterTilesSelectArea.h"

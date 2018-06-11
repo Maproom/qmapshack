@@ -18,9 +18,9 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
+#include "map/cache/CDiskCache.h"
 #include "map/CMapDraw.h"
 #include "map/IMapOnline.h"
-#include "map/cache/CDiskCache.h"
 
 #include <QMessageBox>
 #include <QtNetwork>

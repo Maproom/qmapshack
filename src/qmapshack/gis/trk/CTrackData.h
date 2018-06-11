@@ -1,12 +1,12 @@
 #ifndef TRACKDATA_H
 #define TRACKDATA_H
 
-#include "GeoMath.h"
 #include "gis/IGisItem.h"
-#include <QPoint>
-#include <QtWidgets>
+#include "GeoMath.h"
 #include <functional>
 #include <proj_api.h>
+#include <QPoint>
+#include <QtWidgets>
 
 
 struct SGisLine;

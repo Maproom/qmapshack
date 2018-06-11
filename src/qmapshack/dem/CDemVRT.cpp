@@ -17,15 +17,15 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "GeoMath.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemVRT.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <gdal_priv.h>
 #include <ogr_spatialref.h>
+#include <QtWidgets>
 
 #define TILELIMIT 30000
 #define TILESIZEX 64

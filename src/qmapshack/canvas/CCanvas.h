@@ -20,11 +20,11 @@
 #ifndef CCANVAS_H
 #define CCANVAS_H
 
+#include <proj_api.h>
 #include <QMap>
 #include <QPainter>
 #include <QPointer>
 #include <QWidget>
-#include <proj_api.h>
 
 #include "gis/IGisItem.h"
 

@@ -17,12 +17,12 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/rte/router/CRouterSetup.h"
+#include "GeoMath.h"
 #include "mouse/line/ILineOp.h"
 #include "mouse/line/IMouseEditLine.h"
 

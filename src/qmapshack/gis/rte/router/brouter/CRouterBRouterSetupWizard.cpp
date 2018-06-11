@@ -16,17 +16,17 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "setup/IAppSetup.h"
 #include <JlCompress.h>
+#include <proj_api.h>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QNetworkReply>
 #include <QNetworkRequest>
-#include <proj_api.h>
 
 CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
     : QWizard(CMainWindow::getBestWidgetForParent())

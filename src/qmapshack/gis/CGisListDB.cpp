@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "config.h"
+#include "CMainWindow.h"
 #include "gis/CGisListDB.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/db/CDBFolderLostFound.h"

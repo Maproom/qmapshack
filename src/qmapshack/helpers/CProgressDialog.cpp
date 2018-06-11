@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "helpers/CProgressDialog.h"
 #include "units/IUnit.h"
 
@@ -53,15 +53,17 @@ CProgressDialog::CProgressDialog(const QString text, int min, int max, QWidget *
         // add a timer to update the elapsed time
         QTimer * t = new QTimer(this);
         t->start(DELAY);
-        connect(t, &QTimer::timeout, this, [this] {setValue(0);
-                });
+        connect(t, &QTimer::timeout, this, [this] {
+            setValue(0);
+        });
     }
 
     QDialog::hide();
     timer = new QTimer(this);
     timer->setSingleShot(true);
-    connect(timer, &QTimer::timeout, this, [this] {show();
-            });
+    connect(timer, &QTimer::timeout, this, [this] {
+        show();
+    });
     timer->start(DELAY);
 }
 

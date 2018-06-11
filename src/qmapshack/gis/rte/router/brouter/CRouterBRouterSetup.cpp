@@ -21,10 +21,10 @@
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
 #include <QMessageBox>
-#include <QWebFrame>
-#include <QWebPage>
 #include <QtScript>
 #include <QtWebKit>
+#include <QWebFrame>
+#include <QWebPage>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
     : QObject(parent)

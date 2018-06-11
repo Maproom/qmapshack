@@ -20,8 +20,8 @@
 #define CROUTERBROUTERSETUP_H
 
 #include <QScriptValue>
-#include <QWebPage>
 #include <QtCore>
+#include <QWebPage>
 
 class CRouterBRouterSetup : public QObject
 {

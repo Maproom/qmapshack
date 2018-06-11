@@ -22,8 +22,8 @@
 #include "units/IUnit.h"
 
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 CTableTrk::CTableTrk(QWidget *parent)
     : QTreeWidget(parent)

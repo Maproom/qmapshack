@@ -17,13 +17,13 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisListWks.h"
-#include "gis/WptIcons.h"
 #include "gis/search/CGeoSearch.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "misc.h"
@@ -77,7 +77,6 @@ void CGeoSearch::setIcon()
 {
     if(searchConfig->accumulativeResults)
     {
-
         QPixmap displayIcon = QPixmap(48,48);
         displayIcon.fill(Qt::transparent);
         QPainter painter(&displayIcon);

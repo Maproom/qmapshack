@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "GeoMath.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
@@ -28,13 +27,14 @@
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 
+#include <proj_api.h>
 #include <QtWidgets>
 #include <QtXml>
-#include <proj_api.h>
 
 #define DEFAULT_COLOR       4
 #define MIN_DIST_CLOSE_TO   10

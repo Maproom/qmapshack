@@ -22,8 +22,8 @@
 #include "units/CUnitMetric.h"
 #include "units/CUnitNautic.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 const IUnit * IUnit::m_self = nullptr;
 
 const QPointF NOPOINTF(NOFLOAT, NOFLOAT);

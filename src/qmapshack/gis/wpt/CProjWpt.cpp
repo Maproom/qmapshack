@@ -17,15 +17,15 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "GeoMath.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "GeoMath.h"
 #include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 CProjWpt::CProjWpt(CGisItemWpt& wpt, QWidget *parent)
     : QDialog(parent)

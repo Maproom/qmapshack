@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CAppSetupWin.h"
 #include "config.h"
+#include "CAppSetupWin.h"
 
 
 void CAppSetupWin::initQMapShack()

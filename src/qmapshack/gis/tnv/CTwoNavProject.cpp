@@ -26,8 +26,8 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSettings.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 
 

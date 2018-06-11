@@ -17,17 +17,16 @@
 
 **********************************************************************************************/
 
-#include "CAbout.h"
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
 #include "config.h"
+#include "CAbout.h"
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "dem/CDemList.h"
 #include "gis/CGisDatabase.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/IGisLine.h"
-#include "gis/WptIcons.h"
 #include "gis/db/CSetupWorkspace.h"
+#include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
@@ -35,6 +34,7 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
+#include "gis/WptIcons.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CToolBarConfig.h"
@@ -83,9 +83,9 @@ QMutex CMainWindow::mutex(QMutex::NonRecursive);
 CMainWindow::CMainWindow()
     : id(qrand())
 {
-    qDebug() << "Application ID:" << id;
-    SETTINGS;
-    homeDir = cfg.value("Paths/homePath", "").toString();
+qDebug() << "Application ID:" << id;
+SETTINGS;
+homeDir = cfg.value("Paths/homePath", "").toString();
 
     pSelf = this;
     setupUi(this);

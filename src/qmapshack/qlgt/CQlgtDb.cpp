@@ -26,12 +26,12 @@
 #include "qlgt/IQlgtOverlay.h"
 #include "tool/CImportDatabase.h"
 
-#include "gis/WptIcons.h"
 #include "gis/db/macros.h"
 #include "gis/ovl/CGisItemOvlArea.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 #include "helpers/CProgressDialog.h"
 
 #include "CMainWindow.h"

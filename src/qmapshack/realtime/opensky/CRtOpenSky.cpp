@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "helpers/CDraw.h"
 #include "realtime/CRtDraw.h"
 #include "realtime/opensky/CRtOpenSky.h"

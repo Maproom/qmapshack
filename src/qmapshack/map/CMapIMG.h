@@ -19,11 +19,11 @@
 #ifndef CMAPIMG_H
 #define CMAPIMG_H
 
-#include "map/IMap.h"
 #include "map/garmin/CGarminPoint.h"
 #include "map/garmin/CGarminPolygon.h"
 #include "map/garmin/CGarminTyp.h"
 #include "map/garmin/Garmin.h"
+#include "map/IMap.h"
 
 #include <QMap>
 
@@ -252,24 +252,24 @@ private:
         quint32 tre2_size;       ///< 0x0000002D .. 0x00000030
         quint32 tre3_offset;     ///< 0x00000031 .. 0x00000034
         quint32 tre3_size;       ///< 0x00000035 .. 0x00000038
-                                 ///< 0x00000039 .. 0x0000003A
+        ///< 0x00000039 .. 0x0000003A
         quint16 tre3_rec_size;
         quint8 byte0x0000003B_0x0000003E[4];
         quint8 POI_flags;        ///< 0x0000003F
         quint8 byte0x00000040_0x00000049[10];
         quint32 tre4_offset;     ///< 0x0000004A .. 0x0000004D
         quint32 tre4_size;       ///< 0x0000004E .. 0x00000051
-                                 ///< 0x00000052 .. 0x00000053
+        ///< 0x00000052 .. 0x00000053
         quint16 tre4_rec_size;
         quint8 byte0x00000054_0x00000057[4];
         quint32 tre5_offset;     ///< 0x00000058 .. 0x0000005B
         quint32 tre5_size;       ///< 0x0000005C .. 0x0000005F
-                                 ///< 0x00000060 .. 0x00000061
+        ///< 0x00000060 .. 0x00000061
         quint16 tre5_rec_size;
         quint8 byte0x00000062_0x00000065[4];
         quint32 tre6_offset;     ///< 0x00000066 .. 0x00000069
         quint32 tre6_size;       ///< 0x0000006A .. 0x0000006D
-                                 ///< 0x0000006E .. 0x0000006F
+        ///< 0x0000006E .. 0x0000006F
         quint16 tre6_rec_size;
         quint8 byte0x00000070_0x00000073[4];
         /*-----------------------------------------------------*/
@@ -277,13 +277,13 @@ private:
         // Object groups V2 (CTreGroup2).
         quint32 tre7_offset;     ///< 0x0000007C .. 0x0000007F //Groups2Offset
         quint32 tre7_size;       ///< 0x00000080 .. 0x00000083  //dwGroups2Length
-                                 ///< 0x00000084 .. 0x00000085 //wGroup2RecSize
+        ///< 0x00000084 .. 0x00000085 //wGroup2RecSize
         quint16 tre7_rec_size;
         quint8 byte0x00000086_0x00000089[4];
         // Order: polyline, polygon, POI; each sorted by type (1 type 1 levels 1 subtype)
         quint32 tre8_offset;     ///< 0x0000008A .. 0x0000008D
         quint32 tre8_size;       ///< 0x0000008E .. 0x00000091
-                                 ///< 0x00000092 .. 0x00000093
+        ///< 0x00000092 .. 0x00000093
         quint16 tre8_rec_size;
 
         ///< 0x00000094 .. 0x00000095
@@ -297,7 +297,7 @@ private:
         quint8 key[20];          ///< 0x0000009A .. 0x000000AD
         quint32 tre9_offset;     ///< 0x000000AE .. 0x000000B1
         quint32 tre9_size;       ///< 0x000000B2 .. 0x000000B5
-                                 ///< 0x000000B6 .. 0x000000B7
+        ///< 0x000000B6 .. 0x000000B7
         quint16 tre9_rec_size;
     };
 
@@ -306,7 +306,7 @@ private:
     {
         quint32 offset;          ///< 0x00000015 .. 0x00000018
         quint32 length;          ///< 0x00000019 .. 0x0000001C
-                                 ///< 0x0000001D .. 0x00000020
+        ///< 0x0000001D .. 0x00000020
         quint32 offset_polyg2;
         ///< 0x00000021 .. 0x00000024
         quint32 length_polyg2;
@@ -331,54 +331,54 @@ private:
         quint8 coding;           ///< 0x0000001E
         quint32 lbl2_offset;     ///< 0x0000001F .. 0x00000022
         quint32 lbl2_length;     ///< 0x00000023 .. 0x00000026
-                                 ///< 0x00000027 .. 0x00000028
+        ///< 0x00000027 .. 0x00000028
         quint16 lbl2_rec_size;
         quint8 byte0x00000029_0x0000002C[4];
         quint32 lbl3_offset;     ///< 0x0000002D .. 0x00000030
         quint32 lbl3_length;     ///< 0x00000031 .. 0x00000034
-                                 ///< 0x00000035 .. 0x00000036
+        ///< 0x00000035 .. 0x00000036
         quint16 lbl3_rec_size;
         quint8 byte0x00000037_0x0000003A[4];
         quint32 lbl4_offset;     ///< 0x0000003B .. 0x0000003E
         quint32 lbl4_length;     ///< 0x0000003F .. 0x00000042
-                                 ///< 0x00000043 .. 0x00000044
+        ///< 0x00000043 .. 0x00000044
         quint16 lbl4_rec_size;
         quint8 byte0x00000045_0x00000048[4];
         quint32 lbl5_offset;     ///< 0x00000049 .. 0x0000004C
         quint32 lbl5_length;     ///< 0x0000004D .. 0x00000050
-                                 ///< 0x00000051 .. 0x00000052
+        ///< 0x00000051 .. 0x00000052
         quint16 lbl5_rec_size;
         quint8 byte0x00000053_0x00000056[4];
         quint32 lbl6_offset;     ///< 0x00000057 .. 0x0000005A
         quint32 lbl6_length;     ///< 0x0000005B .. 0x0000005E
-                                 ///< 0x0000005F
+        ///< 0x0000005F
         quint8 lbl6_addr_shift;
         ///< 0x00000060
         quint8 lbl6_glob_mask;
         quint8 byte0x00000061_0x00000063[3];
         quint32 lbl7_offset;     ///< 0x00000064 .. 0x00000067
         quint32 lbl7_length;     ///< 0x00000068 .. 0x0000006B
-                                 ///< 0x0000006C .. 0x0000006D
+        ///< 0x0000006C .. 0x0000006D
         quint16 lbl7_rec_size;
         quint8 byte0x0000006E_0x00000071[4];
         quint32 lbl8_offset;     ///< 0x00000072 .. 0x00000075
         quint32 lbl8_length;     ///< 0x00000076 .. 0x00000079
-                                 ///< 0x0000007A .. 0x0000007B
+        ///< 0x0000007A .. 0x0000007B
         quint16 lbl8_rec_size;
         quint8 byte0x0000007C_0x0000007F[4];
         quint32 lbl9_offset;     ///< 0x00000080 .. 0x00000083
         quint32 lbl9_length;     ///< 0x00000084 .. 0x00000087
-                                 ///< 0x00000088 .. 0x00000089
+        ///< 0x00000088 .. 0x00000089
         quint16 lbl9_rec_size;
         quint8 byte0x0000008A_0x0000008D[4];
         quint32 lbl10_offset;    ///< 0x0000008E .. 0x00000091
         quint32 lbl10_length;    ///< 0x00000092 .. 0x00000095
-                                 ///< 0x00000096 .. 0x00000097
+        ///< 0x00000096 .. 0x00000097
         quint16 lbl10_rec_size;
         quint8 byte0x00000098_0x0000009B[4];
         quint32 lbl11_offset;    ///< 0x0000009C .. 0x0000009F
         quint32 lbl11_length;    ///< 0x000000A0 .. 0x000000A3
-                                 ///< 0x000000A4 .. 0x000000A5
+        ///< 0x000000A4 .. 0x000000A5
         quint16 lbl11_rec_size;
         quint8 byte0x000000A6_0x000000A9[4];
         quint16 codepage;        ///< 0x000000AA .. 0x000000AB  optional check length
@@ -389,11 +389,11 @@ private:
     {
         quint32 net1_offset;     ///< 0x00000015 .. 0x00000018
         quint32 net1_length;     ///< 0x00000019 .. 0x0000001C
-                                 ///< 0x0000001D
+        ///< 0x0000001D
         quint8 net1_addr_shift;
         quint32 net2_offset;     ///< 0x0000001E .. 0x00000021
         quint32 net2_length;     ///< 0x00000022 .. 0x00000025
-                                 ///< 0x00000026
+        ///< 0x00000026
         quint8 net2_addr_shift;
         quint32 net3_offset;     ///< 0x00000027 .. 0x0000002A
         quint32 net3_length;     ///< 0x0000002B .. 0x0000002E

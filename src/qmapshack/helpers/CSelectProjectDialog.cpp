@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
 #include "canvas/CCanvas.h"
+#include "CMainWindow.h"
 #include "gis/CGisListWks.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"

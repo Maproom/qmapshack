@@ -16,8 +16,8 @@
 
 **********************************************************************************************/
 
-#include "gis/WptIcons.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/WptIcons.h"
 #include "helpers/CSettings.h"
 #include <QIcon>
 

@@ -21,9 +21,9 @@
 
 #include "canvas/IDrawContext.h"
 #include "canvas/IDrawObject.h"
+#include <proj_api.h>
 #include <QObject>
 #include <QPointer>
-#include <proj_api.h>
 
 #define CUSTOM_SLOPE_COLORTABLE ( -1 )
 

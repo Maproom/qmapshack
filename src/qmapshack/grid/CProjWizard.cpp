@@ -20,8 +20,8 @@
 #include "CProjWizard.h"
 #include "grid/mitab.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 struct mitab_entry_t
 {

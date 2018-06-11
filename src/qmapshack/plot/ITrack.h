@@ -19,9 +19,9 @@
 #ifndef ITRACK_H
 #define ITRACK_H
 
+#include <proj_api.h>
 #include <QImage>
 #include <QPolygonF>
-#include <proj_api.h>
 
 class QRectF;
 class QPainter;

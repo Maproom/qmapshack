@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "IGarminStrTbl.h"
 #include "helpers/CFileExt.h"
 #include "helpers/Platform.h"
+#include "IGarminStrTbl.h"
 
 #include <QtCore>
 

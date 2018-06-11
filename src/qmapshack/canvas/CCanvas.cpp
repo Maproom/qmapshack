@@ -17,19 +17,19 @@
 
 **********************************************************************************************/
 
-#include "CMainWindow.h"
-#include "GeoMath.h"
 #include "canvas/CCanvas.h"
 #include "canvas/CCanvasSetup.h"
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/IGisLine.h"
-#include "gis/Poi.h"
 #include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/Poi.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "grid/CGrid.h"
 #include "grid/CGridSetup.h"
+#include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
 #include "map/CMapDraw.h"

@@ -20,8 +20,8 @@
 #include "helpers/CElevationDialog.h"
 #include "units/IUnit.h"
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 CElevationDialog::CElevationDialog(QWidget * parent, QVariant &val, const QVariant &reset, const QPointF &pos)
     : QDialog(parent)

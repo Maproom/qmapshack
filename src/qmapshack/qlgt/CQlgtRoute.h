@@ -20,8 +20,8 @@
 #define CQLGTROUTE_H
 
 #include "qlgt/IItem.h"
-#include <QObject>
 #include <proj_api.h>
+#include <QObject>
 
 class CQlgtRoute : public QObject, public IItem
 {

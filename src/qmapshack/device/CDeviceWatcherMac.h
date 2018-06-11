@@ -21,8 +21,8 @@
 
 #include <DiskArbitration/DiskArbitration.h>
 #include <QStorageInfo>
-#include <QThread>
 #include <QtCore/QStringList>
+#include <QThread>
 
 #include "device/IDeviceWatcher.h"
 

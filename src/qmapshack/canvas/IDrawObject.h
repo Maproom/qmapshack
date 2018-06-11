@@ -20,8 +20,8 @@
 #define IDRAWOBJECT_H
 
 #include "units/IUnit.h"
-#include <QObject>
 #include <proj_api.h>
+#include <QObject>
 
 class QSettings;
 class QListWidget;

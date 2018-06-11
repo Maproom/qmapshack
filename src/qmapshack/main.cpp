@@ -21,9 +21,9 @@
 #include "setup/IAppSetup.h"
 #include "version.h"
 
+#include <iostream>
 #include <QNetworkProxyFactory>
 #include <QtWidgets>
-#include <iostream>
 
 
 int main(int argc, char ** argv)

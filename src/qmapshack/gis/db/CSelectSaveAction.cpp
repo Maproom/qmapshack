@@ -17,8 +17,8 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
-#include "gis/IGisItem.h"
 #include "gis/db/CSelectSaveAction.h"
+#include "gis/IGisItem.h"
 #include "helpers/CProgressDialog.h"
 
 CSelectSaveAction::CSelectSaveAction(const IGisItem *src, const IGisItem *tar, QWidget *parent)

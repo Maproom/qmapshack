@@ -19,8 +19,8 @@
 #ifndef CTABLETRK_H
 #define CTABLETRK_H
 
-#include <QTreeWidget>
 #include <gis/trk/CGisItemTrk.h>
+#include <QTreeWidget>
 
 class CTableTrk : public QTreeWidget, public INotifyTrk
 {

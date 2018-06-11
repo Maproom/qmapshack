@@ -19,8 +19,8 @@
 #include "gis/trk/CSelectActivityColor.h"
 #include "widgets/CColorChooser.h"
 
-#include <QtWidgets>
 #include <functional>
+#include <QtWidgets>
 
 using std::bind;
 

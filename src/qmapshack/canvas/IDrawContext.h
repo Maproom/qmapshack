@@ -20,11 +20,11 @@
 #define IDRAWCONTEXT_H
 
 
+#include <proj_api.h>
 #include <QImage>
 #include <QMutex>
 #include <QPointF>
 #include <QThread>
-#include <proj_api.h>
 
 
 #include "canvas/CCanvas.h"

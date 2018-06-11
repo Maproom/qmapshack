@@ -27,8 +27,8 @@
 #include "widgets/CTextEditWidget.h"
 
 
-#include <QtWidgets>
 #include <proj_api.h>
+#include <QtWidgets>
 
 CDetailsWpt::CDetailsWpt(CGisItemWpt &wpt, QWidget *parent)
     : QDialog(parent)

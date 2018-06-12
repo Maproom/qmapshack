@@ -334,6 +334,20 @@ QString CGisItemWpt::getInfo(quint32 feature) const
             str += tr("Created: %1").arg(IUnit::datetime2string(wpt.time, false, QPointF(wpt.lon*DEG_TO_RAD, wpt.lat*DEG_TO_RAD)));
         }
     }
+
+    if((feature & eFeatureShowLinks) && !wpt.links.isEmpty())
+    {
+        for(const link_t& link : wpt.links)
+        {
+            if(!link.type.isEmpty())
+            {
+                continue;
+            }
+            str += "<br/>\n";
+            str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
+
     return str + "</div>";
 }
 

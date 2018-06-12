@@ -500,6 +500,18 @@ QString CGisItemTrk::getInfo(quint32 feature) const
         }
     }
 
+    if((feature & eFeatureShowLinks) && !trk.links.isEmpty())
+    {
+        for(const link_t& link : trk.links)
+        {
+            if(!link.type.isEmpty())
+            {
+                continue;
+            }
+            str += "<br/>\n";
+            str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
 
     return str + "</div>";
 }

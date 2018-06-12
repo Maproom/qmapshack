@@ -437,6 +437,19 @@ QString CGisItemOvlArea::getInfo(quint32 feature) const
         }
     }
 
+    if((feature & eFeatureShowLinks) && !area.links.isEmpty())
+    {
+        for(const link_t& link : area.links)
+        {
+            if(!link.type.isEmpty())
+            {
+                continue;
+            }
+            str += "<br/>\n";
+            str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
+        }
+    }
+
     return str + "</div>";
 }
 

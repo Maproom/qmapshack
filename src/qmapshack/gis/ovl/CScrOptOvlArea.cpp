@@ -30,7 +30,7 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(area->getInfo(IGisItem::eFeatureShowName));
+    label->setText(area->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowLinks));
     adjustSize();
 
     anchor = area->getPointCloseBy(point);
@@ -52,6 +52,8 @@ CScrOptOvlArea::CScrOptOvlArea(CGisItemOvlArea *area, const QPoint &point, IMous
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptOvlArea::slotCopy);
     connect(toolEdit,        &QToolButton::clicked, this, &CScrOptOvlArea::slotEdit);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptOvlArea::slotNogo);
+
+    connect(label, &QLabel::linkActivated, this, &CScrOptOvlArea::slotLinkActivated);
 }
 
 CScrOptOvlArea::~CScrOptOvlArea()

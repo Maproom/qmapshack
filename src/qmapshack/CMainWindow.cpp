@@ -83,9 +83,9 @@ QMutex CMainWindow::mutex(QMutex::NonRecursive);
 CMainWindow::CMainWindow()
     : id(qrand())
 {
-qDebug() << "Application ID:" << id;
-SETTINGS;
-homeDir = cfg.value("Paths/homePath", "").toString();
+    qDebug() << "Application ID:" << id;
+    SETTINGS;
+    homeDir = cfg.value("Paths/homePath", "").toString();
 
     pSelf = this;
     setupUi(this);

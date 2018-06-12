@@ -264,6 +264,7 @@ public:
         , eFeatureShowFullText  = 0x00000002
         , eFeatureShowActivity  = 0x00000004
         , eFeatureShowDateTime  = 0x00000008
+        , eFeatureShowLinks     = 0x00000010
     };
 
     /**

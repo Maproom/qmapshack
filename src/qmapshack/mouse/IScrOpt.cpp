@@ -29,7 +29,7 @@ IScrOpt::IScrOpt(IMouse *mouse)
     , mouse(mouse)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFocusPolicy(Qt::WheelFocus);
+    setFocusPolicy(Qt::WheelFocus);   
 }
 
 IScrOpt::~IScrOpt()
@@ -61,3 +61,10 @@ void IScrOpt::leaveEvent(QEvent * e)
     }
 }
 
+void IScrOpt::slotLinkActivated(const QString& link)
+{
+    if(link.startsWith("http"))
+    {
+        QDesktopServices::openUrl(QUrl(link));
+    }
+}

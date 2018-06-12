@@ -31,7 +31,7 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(rte->getInfo(IGisItem::eFeatureShowName));
+    label->setText(rte->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowLinks));
     adjustSize();
 
     toolInstruction->setEnabled(rte->isCalculated());
@@ -68,6 +68,8 @@ CScrOptRte::CScrOptRte(CGisItemRte *rte, const QPoint& point, IMouse *parent)
     connect(toolInstruction, &QToolButton::toggled, this, &CScrOptRte::slotInstruction);
     connect(toolToTrack,     &QToolButton::clicked, this, &CScrOptRte::slotToTrack);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptRte::slotNogo);
+
+    connect(label, &QLabel::linkActivated, this, &CScrOptRte::slotLinkActivated);
 }
 
 CScrOptRte::~CScrOptRte()

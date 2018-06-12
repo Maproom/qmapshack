@@ -31,7 +31,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity));
+    label->setText(trk->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowActivity|IGisItem::eFeatureShowLinks));
     adjustSize();
 
     toolProfile->setChecked(trk->hasUserFocus());
@@ -82,6 +82,8 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::slotColor);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
+
+    connect(label, &QLabel::linkActivated, this, &CScrOptTrk::slotLinkActivated);
 
     // reset user focus if the track has it
     trk->setMouseFocusByPoint(NOPOINT, CGisItemTrk::eFocusMouseMove, "CScrOptTrk");

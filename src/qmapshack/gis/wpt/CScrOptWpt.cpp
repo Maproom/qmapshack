@@ -36,7 +36,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     setupUi(this);
     setOrigin(point);
     label->setFont(CMainWindow::self().getMapFont());
-    label->setText(wpt->getInfo(IGisItem::eFeatureShowName));
+    label->setText(wpt->getInfo(IGisItem::eFeatureShowName|IGisItem::eFeatureShowLinks));
     adjustSize();
 
     toolProj->setDisabled(wpt->isGeocache() || wpt->isOnDevice());
@@ -68,6 +68,8 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolDelRadius,  &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
     connect(toolNogoArea,   &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
     connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
+
+    connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
 
     adjustSize();
 }

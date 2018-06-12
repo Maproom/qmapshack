@@ -48,6 +48,9 @@ public:
     virtual void draw(QPainter& p) = 0;
     virtual void mouseMove(const QPoint& pos);
 
+protected slots:
+    void slotLinkActivated(const QString& link);
+
 protected:
     void enterEvent(QEvent *e) override;
     void leaveEvent(QEvent *e) override;

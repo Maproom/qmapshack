@@ -20,6 +20,8 @@
 #include "helpers/CToolBarConfig.h"
 #include "helpers/CToolBarSetupDialog.h"
 
+#include <QAction>
+
 bool CToolBarSetupDialog::CItemFilter::shouldBeMoved(QListWidgetItem *item)
 {
     CDialogItem * dialogItem = dynamic_cast<CDialogItem *>(item);

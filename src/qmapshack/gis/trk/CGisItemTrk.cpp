@@ -504,12 +504,11 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     {
         for(const link_t& link : trk.links)
         {
-            if(!link.type.isEmpty())
+            if(link.type.isEmpty() || (link.type == "text/html"))
             {
-                continue;
+                str += "<br/>\n";
+                str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
             }
-            str += "<br/>\n";
-            str += QString("<a href='%1'>%2</a>").arg(link.uri.toString()).arg(link.text);
         }
     }
 

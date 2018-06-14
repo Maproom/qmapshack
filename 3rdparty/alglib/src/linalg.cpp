@@ -38959,17 +38959,17 @@ static void rcond_cmatrixestimatenorm(ae_int_t n,
      /* Real    */ ae_vector* rsave,
      ae_state *_state)
 {
-    ae_int_t itmax;
-    ae_int_t i;
-    ae_int_t iter;
-    ae_int_t j;
-    ae_int_t jlast;
-    ae_int_t jump;
-    double absxi;
-    double altsgn;
-    double estold;
-    double safmin;
-    double temp;
+    ae_int_t itmax = 0;
+    ae_int_t i = 0;
+    ae_int_t iter = 0;
+    ae_int_t j = 0;
+    ae_int_t jlast = 0;
+    ae_int_t jump = 0;
+    double absxi = 0;
+    double altsgn = 0;
+    double estold = 0;
+    double safmin = 0;
+    double temp = 0;
 
 
     

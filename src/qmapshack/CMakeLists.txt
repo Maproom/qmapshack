@@ -529,7 +529,7 @@ set( HDRS
     map/CMapList.h
     map/CMapMAP.h
     map/CMapPathSetup.h
-    map/CMapPropSetup.h
+    map/CMapPropSetup.h    
     map/CMapRMAP.h
     map/CMapTMS.h
     map/CMapVRT.h
@@ -537,6 +537,7 @@ set( HDRS
     map/IMap.h
     map/IMapOnline.h
     map/IMapProp.h
+    map/IMapPropSetup.h
     map/cache/CDiskCache.h
     map/garmin/CGarminPoint.h
     map/garmin/CGarminPolygon.h

@@ -37,6 +37,7 @@ CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     connect(scrOptSelect->toolCopy,         &QToolButton::clicked, this, &CMouseSelect::slotCopy);
     connect(scrOptSelect->toolRoute,        &QToolButton::clicked, this, &CMouseSelect::slotRoute);
     connect(scrOptSelect->toolSymWpt,       &QToolButton::clicked, this, &CMouseSelect::slotSymWpt);
+    connect(scrOptSelect->toolEleWptTrk,    &QToolButton::clicked, this, &CMouseSelect::slotEleWptTrk);
     connect(scrOptSelect->toolCombineTrk,   &QToolButton::clicked, this, &CMouseSelect::slotCombineTrk);
     connect(scrOptSelect->toolActivityTrk,  &QToolButton::clicked, this, &CMouseSelect::slotActivityTrk);
     connect(scrOptSelect->toolColorTrk,     &QToolButton::clicked, this, &CMouseSelect::slotColorTrk);
@@ -130,6 +131,7 @@ void CMouseSelect::findItems(QList<IGisItem*>& items)
     scrOptSelect->toolCombineTrk->setEnabled(cntTrk > 1);
     scrOptSelect->toolActivityTrk->setEnabled(cntTrk > 0);
     scrOptSelect->toolColorTrk->setEnabled(cntTrk > 0);
+    scrOptSelect->toolEleWptTrk->setEnabled((cntWpt > 0)|(cntTrk > 0));
 }
 
 void CMouseSelect::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
@@ -198,5 +200,11 @@ void CMouseSelect::slotSymWpt() const
     }
 
     CGisWorkspace::self().changeWptSymByKey(itemKeys, tb.objectName());
+    canvas->resetMouse();
+}
+
+void CMouseSelect::slotEleWptTrk() const
+{
+    CGisWorkspace::self().addEleToWptTrkByKey(itemKeys);
     canvas->resetMouse();
 }

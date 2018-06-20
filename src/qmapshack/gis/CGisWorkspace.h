@@ -402,6 +402,9 @@ public:
     void makeRteFromWpt(const QList<IGisItem::key_t>& keys);
 
     void changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym);
+
+    void addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys);
+
     /**
        @brief Select a project via dialog
 

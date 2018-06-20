@@ -219,6 +219,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
+    actionEleWptTrk = menuItem->addAction(QIcon("://icons/32x32/SetEle.png"), tr("Add Elevation (sel. waypt. & tracks only)"), this, SLOT(slotEleWptTrk()));
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
     menuItem->addAction(actionColorTrk);
@@ -1044,6 +1045,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         if(nullptr != gisItem)
         {
             bool hasWpts  = false;
+            bool hasTrks  = false;
             bool onlyWpts = true;
             bool onlyTrks = true;
             for(QTreeWidgetItem *item : selectedItems())
@@ -1061,6 +1063,10 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 {
                     onlyTrks = false;
                 }
+                else
+                {
+                    hasTrks = false;
+                }
 
                 if(!onlyTrks && !onlyWpts)
                 {
@@ -1073,6 +1079,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             actionActivityTrk->setEnabled(onlyTrks);
             actionColorTrk->setEnabled(onlyTrks);
             actionSymWpt->setEnabled(hasWpts);
+            actionEleWptTrk->setEnabled(hasWpts|hasTrks);
 
             menuItem->exec(p);
             return;
@@ -2160,4 +2167,20 @@ void CGisListWks::slotSymWpt()
     }
 
     CGisWorkspace::self().changeWptSymByKey(keys, tb.objectName());
+}
+
+void CGisListWks::slotEleWptTrk()
+{
+    QList<IGisItem::key_t> keys;
+    for(QTreeWidgetItem * item : selectedItems())
+    {
+        IGisItem * gisItem = dynamic_cast<IGisItem*>(item);
+        if(gisItem != nullptr)
+        {
+            keys << gisItem->getKey();
+            continue;
+        }
+    }
+
+    CGisWorkspace::self().addEleToWptTrkByKey(keys);
 }

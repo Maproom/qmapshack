@@ -18,6 +18,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "canvas/CCanvasSelect.h"
 #include "CMainWindow.h"
 #include "device/IDevice.h"
 #include "gis/CGisDatabase.h"
@@ -666,13 +667,16 @@ void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const 
 
 void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
+    CCanvas * canvas = nullptr;
+    CCanvasSelect dlg(canvas, this);
+    dlg.exec();
 
-    CCanvas * canvas = CMainWindow::self().getVisibleCanvas();
     if(canvas == nullptr)
     {
         return;
     }
+
+    QMutexLocker lock(&IGisItem::mutexItems);
 
     for(const IGisItem::key_t& key : keys)
     {
@@ -694,7 +698,8 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
             CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
             if(wpt != nullptr)
             {
-                wpt->setElevation(canvas->getElevationAt(wpt->getPosition() * DEG_TO_RAD));
+                qreal ele = canvas->getElevationAt(wpt->getPosition() * DEG_TO_RAD);
+                wpt->setElevation(ele == NOFLOAT ? NOINT : ele);
             }
             break;
         }

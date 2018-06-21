@@ -22,8 +22,8 @@
 #include <QSet>
 #include <QString>
 
-static std::initializer_list<QString> knownSymbols = { "1stCategory", "2ndCategory", "3rdCategory", "4thCategory", "Danger", "FirstAid", "Food",
-                                                       "HorsCategory", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };
+static std::initializer_list<QString> knownSymbols = { "1st Category", "2nd Category", "3rd Category", "4th Category", "Danger", "First Aid", "Food",
+                                                       "Hors Category", "Left", "Right", "Sprint", "Straight", "Summit", "Valley", "Water" };
 
 void CGisItemWpt::saveTCX(QDomNode& courseNode, const QDateTime crsPtDateTimeToBeSaved)
 {

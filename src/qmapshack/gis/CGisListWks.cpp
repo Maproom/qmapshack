@@ -164,6 +164,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
     actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionColorTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
+    actionEleWptTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/SetEle.png"), tr("Set Elevation"), this, SLOT(slotEleWptTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGo.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
     actionNogoTrk->setCheckable(true);
@@ -179,10 +180,12 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionBubbleWpt->setCheckable(true);
     actionMoveWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"),     this, SLOT(slotMoveWpt()));
     actionProjWpt   = menuItemWpt->addAction(QIcon("://icons/32x32/WptProj.png"), tr("Proj. Waypoint..."), this, SLOT(slotProjWpt()));
+    menuItemWpt->addAction(actionEleWptTrk);
+    menuItemWpt->addSeparator();
     actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
     actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt = menuItemWpt->addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"),  this, SLOT(slotNogoItem()));
-    actionNogoWpt->setCheckable(true);
+    actionNogoWpt->setCheckable(true);    
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -219,7 +222,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     menuItem->addAction(actionCopyItem);
     actionRteFromWpt = menuItem->addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
     actionSymWpt    = menuItem->addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
-    actionEleWptTrk = menuItem->addAction(QIcon("://icons/32x32/SetEle.png"), tr("Add Elevation (sel. waypt. & tracks only)"), this, SLOT(slotEleWptTrk()));
+    menuItem->addAction(actionEleWptTrk);
     menuItem->addAction(actionCombineTrk);
     menuItem->addAction(actionActivityTrk);
     menuItem->addAction(actionColorTrk);

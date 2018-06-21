@@ -438,6 +438,9 @@ private slots:
     void slotWksItemSelectionChanged();
     void slotWksItemPressed(QTreeWidgetItem * item);
 
+    void slotFilterNameOnly(bool yes);
+    void slotFilterCompleteText(bool yes);
+
 
 private:
     friend class CMainWindow;

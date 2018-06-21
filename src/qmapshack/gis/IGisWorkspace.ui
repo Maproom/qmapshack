@@ -136,6 +136,22 @@
     <string>Setup Filter</string>
    </property>
   </action>
+  <action name="actionNameOnly">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>name only</string>
+   </property>
+  </action>
+  <action name="actionCompleteText">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>complete text</string>
+   </property>
+  </action>
  </widget>
  <customwidgets>
   <customwidget>

@@ -60,7 +60,6 @@ set( SRCS
     gis/CGisListWks.cpp
     gis/CGisWorkspace.cpp
     gis/CSelDevices.cpp
-    gis/CSetupFilter.cpp
     gis/IGisItem.cpp
     gis/IGisLine.cpp
     gis/WptIcons.cpp
@@ -373,7 +372,6 @@ set( HDRS
     gis/CGisListWks.h
     gis/CGisWorkspace.h
     gis/CSelDevices.h
-    gis/CSetupFilter.h
     gis/IGisItem.h
     gis/IGisLine.h
     gis/Poi.h
@@ -672,7 +670,6 @@ set( UIS
     gis/IGisDatabase.ui
     gis/IGisWorkspace.ui
     gis/ISelDevices.ui
-    gis/ISetupFilter.ui
     gis/db/IExportDatabase.ui
     gis/db/ISearchDatabase.ui
     gis/db/ISelectDBFolder.ui

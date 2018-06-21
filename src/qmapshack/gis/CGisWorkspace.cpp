@@ -24,7 +24,6 @@
 #include "gis/CGisDatabase.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
-#include "gis/CSetupFilter.h"
 #include "gis/db/CDBProject.h"
 #include "gis/db/CSelectDBFolder.h"
 #include "gis/db/CSetupFolder.h"
@@ -73,6 +72,9 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
     connect(treeWks, &CGisListWks::itemPressed, this, &CGisWorkspace::slotWksItemPressed);
     connect(treeWks, &CGisListWks::itemSelectionChanged, this, &CGisWorkspace::slotWksItemSelectionChanged);
     connect(treeWks, &CGisListWks::sigItemDeleted, this, &CGisWorkspace::slotWksItemSelectionChanged);
+
+    connect(actionNameOnly, &QAction::triggered, this, &CGisWorkspace::slotFilterNameOnly);
+    connect(actionCompleteText, &QAction::triggered, this, &CGisWorkspace::slotFilterCompleteText);
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
@@ -169,10 +171,28 @@ void CGisWorkspace::slotFilter(const QString& str)
 
 void CGisWorkspace::slotSetupFilter()
 {
-    CSetupFilter * setupFilter = new CSetupFilter(this);
-    setupFilter->adjustSize();
-    setupFilter->move(lineFilter->geometry().topLeft());
-    setupFilter->show();
+    QMenu * menu = new QMenu(lineFilter);
+    menu->addSection(tr("Apply filter to"));
+    menu->addAction(actionNameOnly);
+    menu->addAction(actionCompleteText);
+
+    QActionGroup* actionGroup = new QActionGroup(menu);
+    actionGroup->addAction(actionNameOnly);
+    actionGroup->addAction(actionCompleteText);
+
+    switch(IGisProject::filterMode)
+    {
+    case IGisProject::eFilterModeName:
+        actionNameOnly->setChecked(true);
+        break;
+
+    case IGisProject::eFilterModeText:
+        actionCompleteText->setChecked(true);
+        break;
+    }
+
+    menu->move(lineFilter->parentWidget()->mapToGlobal(lineFilter->geometry().topLeft()));
+    menu->exec();
 }
 
 void CGisWorkspace::slotSaveAll()
@@ -232,6 +252,24 @@ void CGisWorkspace::slotWksItemSelectionReset()
     for(CCanvas * canvas : CMainWindow::self().getCanvas())
     {
         canvas->reportStatus("WksSelection", "");
+    }
+}
+
+void CGisWorkspace::slotFilterNameOnly(bool yes)
+{
+    if(yes)
+    {
+        IGisProject::filterMode = IGisProject::eFilterModeName;
+        applyFilter();
+    }
+}
+
+void CGisWorkspace::slotFilterCompleteText(bool yes)
+{
+    if(yes)
+    {
+        IGisProject::filterMode = IGisProject::eFilterModeText;
+        applyFilter();
     }
 }
 

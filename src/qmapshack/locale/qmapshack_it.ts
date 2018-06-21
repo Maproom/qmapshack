@@ -2118,37 +2118,42 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
 <context>
     <name>CGisWorkspace</name>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="117"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="119"/>
         <source>Load project...</source>
         <translation>Caricamento del progetto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="117"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="119"/>
         <source>The project &quot;%1&quot; is already in the workspace.</source>
         <translation>Il progetto &quot;%1&quot; è già nello spazio di lavoro.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="219"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="175"/>
+        <source>Apply filter to</source>
+        <translation type="unfinished">Applica il filtro a</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisWorkspace.cpp" line="239"/>
         <source>&lt;b&gt;Item Selection: &lt;/b&gt;Item selected from workspace list. Click on the map to switch back to normal mouse selection behavior.</source>
         <translation>&lt;b&gt;Selezione oggetto:&lt;/b&gt;Seleziona un elemento dallo spazio di lavoro. Fare clic sulla mappa per tornare al normale comportamento del mouse.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="633"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="671"/>
         <source>Copy items...</source>
         <translation>Copia elementi...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="652"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="690"/>
         <source>Change waypoint symbols.</source>
         <translation>Cambia i simboli dei waypoint.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="864"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="902"/>
         <source>Cut Track...</source>
         <translation>Taglia traccia...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="864"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="902"/>
         <source>Do you want to delete the original track?</source>
         <translation>Vuoi eliminare la traccia originale?</translation>
     </message>
@@ -7777,6 +7782,16 @@ Nome file: %1</translation>
         <source>Setup Filter</source>
         <translation>Modifica filtro</translation>
     </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="144"/>
+        <source>name only</source>
+        <translation type="unfinished">Solo nome</translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisWorkspace.ui" line="152"/>
+        <source>complete text</source>
+        <translation type="unfinished">Testo completo</translation>
+    </message>
 </context>
 <context>
     <name>IGridSetup</name>
@@ -10560,24 +10575,16 @@ Una parola viene cercata come corrispondenza (come fosse &apos;*qualcosacosa*&ap
 <context>
     <name>ISetupFilter</name>
     <message>
-        <location filename="../gis/ISetupFilter.ui" line="14"/>
-        <source>Form</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gis/ISetupFilter.ui" line="38"/>
         <source>Apply filter to</source>
-        <translation>Applica il filtro a</translation>
+        <translation type="vanished">Applica il filtro a</translation>
     </message>
     <message>
-        <location filename="../gis/ISetupFilter.ui" line="45"/>
         <source>name only</source>
-        <translation>Solo nome</translation>
+        <translation type="vanished">Solo nome</translation>
     </message>
     <message>
-        <location filename="../gis/ISetupFilter.ui" line="52"/>
         <source>complete text</source>
-        <translation>Testo completo</translation>
+        <translation type="vanished">Testo completo</translation>
     </message>
 </context>
 <context>

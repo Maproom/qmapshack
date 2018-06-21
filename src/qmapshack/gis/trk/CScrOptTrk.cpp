@@ -60,15 +60,21 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::hide);
-    connect(toolCut,         &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::hide);
-    connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolProfile,     &QToolButton::toggled, this, &CScrOptTrk::hide);
+//    connect(toolCut,         &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolEdit,        &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolReverse,     &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolCombine,     &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolRange,       &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolActivity,    &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::hide);
+//    connect(toolAddElevation,&QToolButton::clicked, this, &CScrOptTrk::hide);
+
     connect(toolEditDetails, &QToolButton::clicked, this, &CScrOptTrk::slotEditDetails);
     connect(toolDelete,      &QToolButton::clicked, this, &CScrOptTrk::slotDelete);
     connect(toolCopy,        &QToolButton::clicked, this, &CScrOptTrk::slotCopy);
@@ -82,6 +88,7 @@ CScrOptTrk::CScrOptTrk(CGisItemTrk * trk, const QPoint& point, IMouse *parent)
     connect(toolColor,       &QToolButton::clicked, this, &CScrOptTrk::slotColor);
     connect(toolCopyWithWpt, &QToolButton::clicked, this, &CScrOptTrk::slotCopyWithWpt);
     connect(toolNogo,        &QToolButton::clicked, this, &CScrOptTrk::slotNogo);
+    connect(toolAddElevation,&QToolButton::clicked, this, &CScrOptTrk::slotAddElevation);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptTrk::slotLinkActivated);
 
@@ -173,6 +180,15 @@ void CScrOptTrk::slotCopyWithWpt()
 void CScrOptTrk::slotNogo()
 {
     CGisWorkspace::self().toggleNogoItem(key);
+    close();
+}
+
+
+void CScrOptTrk::slotAddElevation()
+{
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    CGisWorkspace::self().addEleToWptTrkByKey(keys);
     close();
 }
 

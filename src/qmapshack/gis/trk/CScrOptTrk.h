@@ -49,6 +49,7 @@ private slots:
     void slotColor();
     void slotCopyWithWpt();
     void slotNogo();
+    void slotAddElevation();
 
 
 private:

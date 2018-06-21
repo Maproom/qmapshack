@@ -688,7 +688,7 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
             if(trk != nullptr)
             {
-                trk->filterReplaceElevation(nullptr);
+                trk->filterReplaceElevation(canvas);
             }
             break;
         }

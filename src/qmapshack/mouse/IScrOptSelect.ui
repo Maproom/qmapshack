@@ -98,7 +98,7 @@
       <item>
        <widget class="QToolButton" name="toolEleWptTrk">
         <property name="toolTip">
-         <string>Replace the elevation in all selected waypoints and tracks by data from the DEM layer of the canvas.</string>
+         <string>Replace the elevation in all selected waypoints and tracks by values from the view's DEM data.</string>
         </property>
         <property name="text">
          <string>...</string>

@@ -37,6 +37,7 @@ set( SRCS
     GeoMath.cpp
     canvas/CCanvas.cpp
     canvas/CCanvasSetup.cpp
+    canvas/CCanvasSelect.cpp
     canvas/IDrawContext.cpp
     canvas/IDrawObject.cpp
     dem/CDemDraw.cpp
@@ -349,6 +350,7 @@ set( HDRS
     GeoMath.h
     canvas/CCanvas.h
     canvas/CCanvasSetup.h
+    canvas/CCanvasSelect.h
     canvas/IDrawContext.h
     canvas/IDrawObject.h
     dem/CDemDraw.h
@@ -663,6 +665,7 @@ set( UIS
     IAbout.ui
     IMainWindow.ui
     canvas/ICanvasSetup.ui
+    canvas/ICanvasSelect.ui
     dem/IDemList.ui
     dem/IDemPathSetup.ui
     dem/IDemPropSetup.ui

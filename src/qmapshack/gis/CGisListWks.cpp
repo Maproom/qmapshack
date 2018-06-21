@@ -164,7 +164,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCombineTrk = menuItemTrk->addAction(QIcon("://icons/32x32/Combine.png"),     tr("Combine Tracks"         ), this, SLOT(slotCombineTrk()));
     actionActivityTrk= menuItemTrk->addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionColorTrk   = menuItemTrk->addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
-    actionEleWptTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/SetEle.png"), tr("Set Elevation"), this, SLOT(slotEleWptTrk()));
+    actionEleWptTrk  = menuItemTrk->addAction(QIcon("://icons/32x32/SetEle.png"), tr("Replace Elevation by DEM"), this, SLOT(slotEleWptTrk()));
     actionCopyTrkWithWpt = menuItemTrk->addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     actionNogoTrk    = menuItemTrk->addAction(QIcon("://icons/32x32/NoGo.png"),   tr("Toggle Nogo-Line"       ), this, SLOT(slotNogoItem()));
     actionNogoTrk->setCheckable(true);

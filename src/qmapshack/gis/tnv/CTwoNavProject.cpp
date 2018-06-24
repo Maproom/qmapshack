@@ -122,9 +122,12 @@ bool CTwoNavProject::save()
             }
         }
 
+        QString fn = getName();
+        fn = fn.remove(QRegExp("[^A-Za-z0-9_]"));
+
         if(!wpts.isEmpty())
         {
-            if(!saveWpts(wpts, dir.absoluteFilePath("waypoints.wpt"), dir))
+            if(!saveWpts(wpts, dir.absoluteFilePath(fn + ".wpt"), dir))
             {
                 throw -1;
             }
@@ -132,7 +135,7 @@ bool CTwoNavProject::save()
 
         if(!geocaches.isEmpty())
         {
-            if(!saveWpts(geocaches, dir.absoluteFilePath("geocaches.wpt"), dir))
+            if(!saveWpts(geocaches, dir.absoluteFilePath(fn + "_gc.wpt"), dir))
             {
                 throw -1;
             }

@@ -1940,7 +1940,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Replace Elevation by DEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить высоты данными файлов ЦМР</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="168"/>
@@ -2126,7 +2126,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="175"/>
         <source>Apply filter to</source>
-        <translation type="unfinished">Применить фильтр</translation>
+        <translation>Применить фильтр</translation>
     </message>
     <message>
         <location filename="../gis/CGisWorkspace.cpp" line="239"/>
@@ -5860,12 +5860,12 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</translation>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="14"/>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="20"/>
         <source>Select a view to work with</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать вид для дальнейшей работы</translation>
     </message>
 </context>
 <context>
@@ -7783,12 +7783,12 @@ Filename: %1</source>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="144"/>
         <source>name only</source>
-        <translation type="unfinished">только к имени</translation>
+        <translation>только имя</translation>
     </message>
     <message>
         <location filename="../gis/IGisWorkspace.ui" line="152"/>
         <source>complete text</source>
-        <translation type="unfinished">к полному тексту</translation>
+        <translation>полный текст</translation>
     </message>
 </context>
 <context>
@@ -9962,7 +9962,7 @@ or
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить высоты всех выбранных маршрутных точек и треков данными файлов ЦМР для вида</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="115"/>
@@ -10108,7 +10108,7 @@ or
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
@@ -10179,7 +10179,7 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Заменить высоты данными файлов ЦМР для вида.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="164"/>

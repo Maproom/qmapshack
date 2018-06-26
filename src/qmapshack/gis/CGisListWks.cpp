@@ -1053,22 +1053,22 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             bool onlyTrks = true;
             for(QTreeWidgetItem *item : selectedItems())
             {
-                if(item->type() != IGisItem::eTypeWpt)
+                if(item->type() == IGisItem::eTypeWpt)
+                {                    
+                    hasWpts = true;
+                }
+                else
                 {
                     onlyWpts = false;
                 }
-                else
-                {
-                    hasWpts = true;
-                }
 
-                if(item->type() != IGisItem::eTypeTrk)
+                if(item->type() == IGisItem::eTypeTrk)
+                {
+                    hasTrks = true;
+                }
+                else
                 {
                     onlyTrks = false;
-                }
-                else
-                {
-                    hasTrks = false;
                 }
 
                 if(!onlyTrks && !onlyWpts)

@@ -29,7 +29,7 @@ class IMapPropSetup : public QWidget
     Q_OBJECT
 public:
     IMapPropSetup(IMap * mapfile, CMapDraw * map);
-    virtual ~IMapPropSetup();
+    virtual ~IMapPropSetup() = default;
 
 
 protected slots:

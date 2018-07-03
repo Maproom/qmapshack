@@ -1089,7 +1089,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="285"/>
         <source>route</source>
-        <translation type="unfinished">Ruta</translation>
+        <translation>Ruta</translation>
     </message>
     <message>
         <location filename="../gis/rte/CGisItemRte.cpp" line="329"/>
@@ -1330,13 +1330,13 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/trk/CGisItemTrk.cpp" line="323"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1795"/>
         <source>min.</source>
-        <translation type="unfinished">min.</translation>
+        <translation>min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="323"/>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="1795"/>
         <source>max.</source>
-        <translation type="unfinished">max.</translation>
+        <translation>max.</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="389"/>
@@ -2001,7 +2001,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Save as GPX 1.1 w/o ext...</source>
-        <translation>Guardar como GPX 1.1 w/o ext...</translation>
+        <translation>Guardar como GPX 1.1 (sin extensiones)</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="129"/>
@@ -2036,7 +2036,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="167"/>
         <source>Replace Elevation by DEM</source>
-        <translation type="unfinished"></translation>
+        <translation>Reemplazar Altitud por valores del DEM</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="169"/>
@@ -5856,12 +5856,12 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="14"/>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar...</translation>
     </message>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="20"/>
         <source>Select a view to work with</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vista en la que está cargado el DEM</translation>
     </message>
 </context>
 <context>
@@ -7190,7 +7190,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="63"/>
         <source>Replace elevation of track points with the values from loaded DEM files in view</source>
-        <translation>Reemplazar altitud de los puntos del track utilizando los valores del archivo DEM cargado en la vista</translation>
+        <translation>Reemplazar altitud de los puntos del track utilizando los valores del DEM cargado en la vista</translation>
     </message>
     <message>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
@@ -9946,7 +9946,7 @@ o
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="101"/>
         <source>Replace the elevation in all selected waypoints and tracks by values from the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reemplazar altitud en los Waypoints y Tracks seleccionados con los valores del DEM.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptSelect.ui" line="115"/>
@@ -10092,12 +10092,12 @@ o
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reemplazar Altitud por la de los valores del DEM.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
         <source>Copy track together with all attached waypoints into another project.</source>
-        <translation>Copiar track junto con todos los waypoints adjuntos en otro proyecto.</translation>
+        <translation>Copiar track junto con todos los waypoints cercanos en otro proyecto.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="237"/>
@@ -10163,7 +10163,7 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="143"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Reemplazar Altitud por la de los valores del DEM.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="164"/>

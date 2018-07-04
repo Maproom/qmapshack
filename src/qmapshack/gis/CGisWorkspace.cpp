@@ -689,14 +689,27 @@ void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const 
 
     PROGRESS_SETUP(tr("Change waypoint symbols."), 0, keys.count(), this);
     int cnt = 0;
+
+    QSet<IGisProject*> projects;
     for(const IGisItem::key_t& key : keys)
     {
         PROGRESS(cnt++, break);
         CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
         if(nullptr != wpt)
         {
+            IGisProject * project = wpt->getParentProject();
+            if(!projects.contains(project))
+            {
+                project->blockUpdateItems(true);
+                projects << project;
+            }
             wpt->setIcon(sym);
         }
+    }
+
+    for(IGisProject * project : projects)
+    {
+        project->blockUpdateItems(false);
     }
 
     emit sigChanged();
@@ -716,9 +729,18 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
 
     QMutexLocker lock(&IGisItem::mutexItems);
 
+    QSet<IGisProject*> projects;
     for(const IGisItem::key_t& key : keys)
     {
         IGisItem * item = dynamic_cast<IGisItem*>(getItemByKey(key));
+
+        IGisProject * project = item->getParentProject();
+        if(!projects.contains(project))
+        {
+            project->blockUpdateItems(true);
+            projects << project;
+        }
+
         switch(item->type())
         {
         case IGisItem::eTypeTrk:
@@ -742,6 +764,11 @@ void CGisWorkspace::addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys)
             break;
         }
         }
+    }
+
+    for(IGisProject * project : projects)
+    {
+        project->blockUpdateItems(false);
     }
 
     emit sigChanged();
@@ -984,13 +1011,27 @@ void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
     if(0xFFFFFFFF != flags)
     {
         QMutexLocker lock(&IGisItem::mutexItems);
+
+        QSet<IGisProject*> projects;
         for(const IGisItem::key_t& key : keys)
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
             if(trk != nullptr)
             {
+                IGisProject * project = trk->getParentProject();
+                if(!projects.contains(project))
+                {
+                    project->blockUpdateItems(true);
+                    projects << project;
+                }
+
                 trk->setActivity(flags);
             }
+        }
+
+        for(IGisProject * project : projects)
+        {
+            project->blockUpdateItems(false);
         }
     }
 }
@@ -1006,13 +1047,27 @@ void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
     if(colorIdx != NOIDX)
     {
         QMutexLocker lock(&IGisItem::mutexItems);
+
+        QSet<IGisProject*> projects;
         for(const IGisItem::key_t& key : keys)
         {
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
             if(trk != nullptr)
             {
+                IGisProject * project = trk->getParentProject();
+                if(!projects.contains(project))
+                {
+                    project->blockUpdateItems(true);
+                    projects << project;
+                }
+
                 trk->setColor(colorIdx);
             }
+        }
+
+        for(IGisProject * project : projects)
+        {
+            project->blockUpdateItems(false);
         }
     }
 }

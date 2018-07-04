@@ -599,6 +599,11 @@ void CGisItemWpt::drawItem(QPainter& p, const QRectF& viewport, CGisDraw * gis)
 
 void CGisItemWpt::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QRectF> &blockedAreas, const QFontMetricsF &fm, CGisDraw *gis)
 {
+    if(flags & eFlagWptBubble)
+    {
+        return;
+    }
+
     if(posScreen == NOPOINTF)
     {
         return;

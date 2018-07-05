@@ -127,15 +127,15 @@ cxx_add_flag_if_supported(-Woverloaded-virtual)
 find_package(Qt5Widgets             REQUIRED)
 find_package(Qt5Core                REQUIRED)
 find_package(Qt5Xml                 REQUIRED)
-find_package(Qt5Script              REQUIRED)
 find_package(Qt5Sql                 REQUIRED)
 find_package(Qt5LinguistTools       REQUIRED)
 find_package(Qt5PrintSupport        REQUIRED)
 find_package(Qt5UiTools             REQUIRED)
 find_package(Qt5Network             REQUIRED)
 find_package(Qt5WebEngineWidgets    REQUIRED)
-find_package(Qt5WebKitWidgets       REQUIRED) # depricated
-
+find_package(Qt5Qml                 REQUIRED)
+find_package(Qt5WebKitWidgets       REQUIRED) # deprecated
+find_package(Qt5Script              REQUIRED) # deprecated
 find_package(GDAL                   REQUIRED)
 find_package(PROJ                   REQUIRED)
 find_package(JPEG                   REQUIRED)

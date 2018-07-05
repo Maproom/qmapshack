@@ -18,9 +18,9 @@
 
 #include "gis/wpt/CDetailsGeoCache.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "helpers/CWebPage.h"
 
 #include <QtNetwork>
-#include <QtWebKitWidgets>
 #include <QtWidgets>
 
 #define HTTP_ATTR_WHAT      QNetworkRequest::Attribute(QNetworkRequest::User + 1)
@@ -34,7 +34,6 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
     setupUi(this);
     setWindowTitle(wpt.getName());
 
-    QString val, unit;
     QString strPos;
     QPointF pos = wpt.getPosition();
     IUnit::degToStr(pos.x(), pos.y(), strPos);
@@ -82,15 +81,17 @@ CDetailsGeoCache::CDetailsGeoCache(CGisItemWpt &wpt, QWidget *parent)
         QString str = geocache.longDesc;
         desc += "<p>" + str.replace("\n","<br/>") + "</p>";
     }
+
+    CWebPage * webDescPage = new CWebPage(0);
+    webDesc->setPage(webDescPage);
     webDesc->setHtml(desc);
-    webDesc->page()->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
 
     timerDownload = new QTimer(this);
     timerDownload->setSingleShot(true);
     connect(timerDownload,     &QTimer::timeout,       this, &CDetailsGeoCache::slotDownloadDone);
 
     connect(checkHint,         &QCheckBox::toggled,    this, &CDetailsGeoCache::slotHintChanged);
-    connect(webDesc,           &QWebView::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
+    connect(webDescPage,       &CWebPage::linkClicked, this, &CDetailsGeoCache::slotLinkClicked);
     connect(toolUpdateSpoiler, &QToolButton::clicked,  this, &CDetailsGeoCache::slotCollectSpoiler);
 
     networkManager = new QNetworkAccessManager(this);

@@ -518,6 +518,7 @@ set( HDRS
     helpers/CToolBarConfig.h
     helpers/CToolBarSetupDialog.h
     helpers/CValue.h
+    helpers/CWebPage.h
     helpers/CWptIconDialog.h
     helpers/Platform.h
     helpers/Signals.h
@@ -834,9 +835,11 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Xml
     Qt5::Script
     Qt5::Sql
-    Qt5::WebKitWidgets
     Qt5::PrintSupport
-    Qt5::UiTools
+    Qt5::UiTools    
+    Qt5::Network
+    Qt5::WebEngineWidgets
+    Qt5::WebKitWidgets      # depricated
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

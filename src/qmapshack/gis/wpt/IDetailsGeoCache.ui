@@ -260,15 +260,6 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="1">
-      <widget class="QWebView" name="webDesc">
-       <property name="url">
-        <url>
-         <string>about:blank</string>
-        </url>
-       </property>
-      </widget>
-     </item>
      <item row="0" column="0">
       <widget class="QToolButton" name="toolIcon">
        <property name="text">
@@ -337,16 +328,14 @@
        </item>
       </layout>
      </item>
+     <item row="4" column="1">
+      <widget class="QWebEngineView" name="webDesc" native="true"/>
+     </item>
     </layout>
    </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>QWebView</class>
-   <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
-  </customwidget>
   <customwidget>
    <class>CPhotoAlbum</class>
    <extends>QWidget</extends>
@@ -357,6 +346,12 @@
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>
    <header>widgets/CHistoryListWidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>QWebEngineView</class>
+   <extends>QWidget</extends>
+   <header location="global">QWebEngineView</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources>

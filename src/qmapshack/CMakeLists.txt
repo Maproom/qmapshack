@@ -832,14 +832,15 @@ endif(Qt5DBus_FOUND)
 
 target_link_libraries(${APPLICATION_NAME}
     Qt5::Widgets
-    Qt5::Xml
-    Qt5::Script
+    Qt5::Xml    
     Qt5::Sql
     Qt5::PrintSupport
     Qt5::UiTools    
     Qt5::Network
     Qt5::WebEngineWidgets
-    Qt5::WebKitWidgets      # depricated
+    Qt5::Qml
+    Qt5::WebKitWidgets      # deprecated
+    Qt5::Script             # deprecated
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}
     ${PROJ_LIBRARIES}

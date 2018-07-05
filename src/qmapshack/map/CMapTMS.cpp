@@ -24,7 +24,8 @@
 #include "units/IUnit.h"
 
 #include <QtNetwork>
-#include <QtScript>
+#include <QtQml>
+
 #include <QtWidgets>
 #include <QtXml>
 
@@ -279,27 +280,29 @@ QString CMapTMS::createUrl(const layer_t& layer, int x, int y, int z)
         QString contents = stream.readAll();
         scriptFile.close();
 
-        QScriptEngine engine;
-        QScriptValue fun = engine.evaluate(contents, filename);
+        QJSEngine engine;
+        QJSValue fun = engine.evaluate(contents, filename);
 
-        if(engine.hasUncaughtException())
+        if(fun.isError())
         {
-            int line = engine.uncaughtExceptionLineNumber();
-            qDebug() << "uncaught exception at line" << line << ":" << fun.toString();
+            qDebug() << "Uncaught exception at line"
+                     << fun.property("lineNumber").toInt()
+                     << ":" << fun.toString();
         }
 
-        QScriptValueList args;
+        QJSValueList args;
         args << z << x << y;
-        QScriptValue res = fun.call(QScriptValue(), args);
+        QJSValue res = fun.call(args);
         return res.toString();
     }
     else if(!layer.script.isEmpty())
     {
-        QScriptEngine engine;
-        QScriptValue fun = engine.evaluate(layer.script);
-        QScriptValueList args;
+        QJSEngine engine;
+        QJSValue fun = engine.evaluate(layer.script);
+
+        QJSValueList args;
         args << z << x << y;
-        QScriptValue res = fun.call(QScriptValue(), args);
+        QJSValue res = fun.call(args);
         return res.toString();
     }
 

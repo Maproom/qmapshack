@@ -124,21 +124,24 @@ cxx_add_flag_if_supported(-Woverloaded-virtual)
 ###############################################################################################
 # Find all required packages and setup internal variables
 ###############################################################################################
-find_package(Qt5Widgets         REQUIRED)
-find_package(Qt5Core            REQUIRED)
-find_package(Qt5Xml             REQUIRED)
-find_package(Qt5Script          REQUIRED)
-find_package(Qt5Sql             REQUIRED)
-find_package(Qt5WebKitWidgets   REQUIRED)
-find_package(Qt5LinguistTools   REQUIRED)
-find_package(Qt5PrintSupport    REQUIRED)
-find_package(Qt5UiTools         REQUIRED)
-find_package(GDAL               REQUIRED)
-find_package(PROJ               REQUIRED)
-find_package(JPEG               REQUIRED)
-find_package(ROUTINO            REQUIRED)
-find_package(QuaZip             REQUIRED)
-find_package(ALGLIB                     ) # optional as we can use our local version
+find_package(Qt5Widgets             REQUIRED)
+find_package(Qt5Core                REQUIRED)
+find_package(Qt5Xml                 REQUIRED)
+find_package(Qt5Script              REQUIRED)
+find_package(Qt5Sql                 REQUIRED)
+find_package(Qt5LinguistTools       REQUIRED)
+find_package(Qt5PrintSupport        REQUIRED)
+find_package(Qt5UiTools             REQUIRED)
+find_package(Qt5Network             REQUIRED)
+find_package(Qt5WebEngineWidgets    REQUIRED)
+find_package(Qt5WebKitWidgets       REQUIRED) # depricated
+
+find_package(GDAL                   REQUIRED)
+find_package(PROJ                   REQUIRED)
+find_package(JPEG                   REQUIRED)
+find_package(ROUTINO                REQUIRED)
+find_package(QuaZip                 REQUIRED)
+find_package(ALGLIB                         ) # optional as we can use our local version
 
 
 if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]{1}\\..*")

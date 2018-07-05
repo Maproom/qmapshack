@@ -38,6 +38,8 @@ signals:
 protected:
     void dragMoveEvent(QDragMoveEvent *event) override;
     void dropEvent(QDropEvent     *event) override;
+
+    void resizeEvent(QResizeEvent * e) override;
 };
 
 

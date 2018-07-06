@@ -80,14 +80,7 @@ void CMapItem::showChildren(bool yes)
         QWidget * widget = mapfile->getSetup();
         tw->setItemWidget(item, 0, widget);
 
-        qint32 w = tw->columnWidth(0) - tw->indentation() - 10;
-        if(tw->verticalScrollBar() != nullptr)
-        {
-            w -= tw->verticalScrollBar()->width();
-        }
-
-        widget->setMaximumWidth(w);
-        widget->setMinimumWidth(w);
+        resize();
     }
     else
     {
@@ -271,4 +264,28 @@ void CMapItem::moveToBottom()
     w->insertTopLevelItem(row, this);
 
     map->emitSigCanvasUpdate();
+}
+
+void CMapItem::resize()
+{
+    if(childCount() != 1)
+    {
+        return;
+    }
+
+    QTreeWidget * tw = treeWidget();
+    QWidget * widget = tw->itemWidget(child(0), 0);
+    if(widget == nullptr)
+    {
+        return;
+    }
+
+    qint32 w = tw->columnWidth(0) - tw->indentation() - 10;
+    if(tw->verticalScrollBar() != nullptr)
+    {
+        w -= tw->verticalScrollBar()->width();
+    }
+
+    widget->setMaximumWidth(w);
+    widget->setMinimumWidth(w);
 }

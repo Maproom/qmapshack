@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,49 +16,31 @@
 
 **********************************************************************************************/
 
-#ifndef CDEMLIST_H
-#define CDEMLIST_H
+#ifndef CDEMTREEWIDGET_H
+#define CDEMTREEWIDGET_H
 
 #include <QTreeWidget>
-#include <QWidget>
 
-#include "ui_IDemList.h"
+class CDemItem;
 
-class CDemList : public QWidget, private Ui::IDemsList
+class CDemTreeWidget : public QTreeWidget
 {
     Q_OBJECT
 public:
-    CDemList(QWidget * parent);
-    virtual ~CDemList();
-
-    void clear();
-    int count();
-    CDemItem * item(int i);
-    operator QTreeWidget*()
+    CDemTreeWidget(QWidget * parent)
+        : QTreeWidget(parent)
     {
-        return treeWidget;
     }
-
-    void updateHelpText();
-
-    void sort();
 
 signals:
     void sigChanged();
 
-public slots:
-    static void slotDemHonk();
-
-private slots:
-    void slotActivate();
-    void slotMoveUp();
-    void slotMoveDown();
-    void slotReloadDem();
-    void slotContextMenu(const QPoint &point);
-
-private:
-    QMenu * menu;
+protected:
+    void dragEnterEvent(QDragEnterEvent * e) override;
+    void dragMoveEvent(QDragMoveEvent *e) override;
+    void dropEvent(QDropEvent *e) override;
+    void resizeEvent(QResizeEvent * e) override;
 };
 
-#endif //CDEMLIST_H
+#endif //CDEMTREEWIDGET_H
 

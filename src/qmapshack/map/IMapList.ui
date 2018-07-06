@@ -179,7 +179,7 @@
   <customwidget>
    <class>CMapTreeWidget</class>
    <extends>QTreeWidget</extends>
-   <header>map/CMapList.h</header>
+   <header>map/CMapTreeWidget.h</header>
   </customwidget>
  </customwidgets>
  <resources>

@@ -73,14 +73,7 @@ void CDemItem::showChildren(bool yes)
         QWidget * widget = demfile->getSetup();
         tw->setItemWidget(item, 0, widget);
 
-        qint32 w = tw->columnWidth(0) - tw->indentation() - 10;
-        if(tw->verticalScrollBar() != nullptr)
-        {
-            w -= tw->verticalScrollBar()->width();
-        }
-
-        widget->setMaximumWidth(w);
-        widget->setMinimumWidth(w);
+        resize();
     }
     else
     {
@@ -232,4 +225,28 @@ void CDemItem::moveToBottom()
     w->insertTopLevelItem(row, this);
 
     dem->emitSigCanvasUpdate();
+}
+
+void CDemItem::resize()
+{
+    if(childCount() != 1)
+    {
+        return;
+    }
+
+    QTreeWidget * tw = treeWidget();
+    QWidget * widget = tw->itemWidget(child(0), 0);
+    if(widget == nullptr)
+    {
+        return;
+    }
+
+    qint32 w = tw->columnWidth(0) - tw->indentation() - 10;
+    if(tw->verticalScrollBar() != nullptr)
+    {
+        w -= tw->verticalScrollBar()->width();
+    }
+
+    widget->setMaximumWidth(w);
+    widget->setMinimumWidth(w);
 }

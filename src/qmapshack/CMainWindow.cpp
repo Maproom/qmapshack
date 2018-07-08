@@ -287,6 +287,7 @@ CMainWindow::CMainWindow()
     for (QDockWidget * const & dock : docks)
     {
         connect(dock, &QDockWidget::visibilityChanged, this, &CMainWindow::slotDockVisibilityChanged);
+        connect(dock, &QDockWidget::topLevelChanged, this, &CMainWindow::slotDockFloating);
     }
 
 
@@ -1511,6 +1512,21 @@ void CMainWindow::hideDocks()
         {
             dock->hide();
             activeDocks << dock;
+        }
+    }
+}
+
+void CMainWindow::slotDockFloating(bool floating)
+{
+    if(floating)
+    {
+        for (QDockWidget * const & dock : docks)
+        {
+            if (dock->isVisible() && dock->isFloating() && dock->isWindow())
+            {
+                dock->setWindowFlags(dock->windowFlags() & ~Qt::CustomizeWindowHint);
+                dock->show();
+            }
         }
     }
 }

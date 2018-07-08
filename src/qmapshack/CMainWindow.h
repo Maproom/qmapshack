@@ -184,7 +184,7 @@ private slots:
     void slotFullScreen();
     void slotStartQMapTool();
     void slotGeoSearchConfigChanged();
-
+    void slotDockFloating(bool floating);
 private:
     friend int main(int argc, char ** argv);
     CMainWindow();

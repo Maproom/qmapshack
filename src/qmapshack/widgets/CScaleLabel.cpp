@@ -16,9 +16,9 @@
 
 **********************************************************************************************/
 
-#include "widgets/CScaleLabel.h"
-#include "units/IUnit.h"
 #include "helpers/CDraw.h"
+#include "units/IUnit.h"
+#include "widgets/CScaleLabel.h"
 
 #include <QtWidgets>
 
@@ -39,7 +39,6 @@ void CScaleLabel::setValue(qreal min, qreal scale, qreal max)
     currentScale = scale;
 
     update();
-    //updatePixmap();
 }
 
 void CScaleLabel::paintEvent(QPaintEvent *e)

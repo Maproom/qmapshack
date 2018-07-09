@@ -185,7 +185,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptEditProx.png"), tr("Change Radius"), this, SLOT(slotEditRadiusWpt()));
     actionDelRadiusWpt = menuItemWpt->addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt = menuItemWpt->addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"),  this, SLOT(slotNogoItem()));
-    actionNogoWpt->setCheckable(true);    
+    actionNogoWpt->setCheckable(true);
     menuItemWpt->addSeparator();
     menuItemWpt->addAction(actionDelete);
     connect(menuItemWpt, &QMenu::triggered, &CGisWorkspace::self(), &CGisWorkspace::slotWksItemSelectionReset);
@@ -1054,7 +1054,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
             for(QTreeWidgetItem *item : selectedItems())
             {
                 if(item->type() == IGisItem::eTypeWpt)
-                {                    
+                {
                     hasWpts = true;
                 }
                 else

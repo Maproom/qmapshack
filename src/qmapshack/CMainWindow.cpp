@@ -1520,13 +1520,11 @@ void CMainWindow::slotDockFloating(bool floating)
 {
     if(floating)
     {
-        for (QDockWidget * const & dock : docks)
+        QDockWidget* dock = qobject_cast<QDockWidget*>(sender());
+        if(dock != nullptr)
         {
-            if (dock->isVisible() && dock->isFloating() && dock->isWindow())
-            {
-                dock->setWindowFlags(dock->windowFlags() & ~Qt::CustomizeWindowHint);
-                dock->show();
-            }
+            dock->setWindowFlags(dock->windowFlags() & ~Qt::CustomizeWindowHint);
+            dock->show();
         }
     }
 }

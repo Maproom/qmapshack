@@ -160,12 +160,12 @@ void CGeoSearch::slotSetupGeoSearch()
 
 void CGeoSearch::slotStartSearch()
 {
+    QMS_DELETE(itemStatus);
+
     if(!searchConfig->accumulativeResults)
     {
         qDeleteAll(takeChildren());
     }
-
-    QMS_DELETE(itemStatus);
 
     QString addr = edit->text();
 

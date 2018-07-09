@@ -34,9 +34,6 @@ public:
 protected slots:
     void slotPropertiesChanged() override;
 
-protected:
-    void resizeEvent(QResizeEvent * e) override;
-
 private slots:
     void slotScaleChanged(const QPointF& s);
     void slotSetMinScale(bool checked);
@@ -47,9 +44,6 @@ private slots:
     void slotSlopeChanged(int val);
 
 private:
-
-    void updateScaleLabel();
-
     CTinySpinBox* slopeSpins[SLOPE_LEVELS];
 
     static QPointF scale;

@@ -311,6 +311,7 @@ set( SRCS
     widgets/CLineEdit.cpp
     widgets/CPhotoAlbum.cpp
     widgets/CSelectDoubleListWidget.cpp
+    widgets/CScaleLabel.cpp
     widgets/CTemplateWidget.cpp
     widgets/CTextEdit.cpp
     widgets/CTextEditWidget.cpp
@@ -630,6 +631,7 @@ set( HDRS
     widgets/CLineEdit.h
     widgets/CPhotoAlbum.h
     widgets/CSelectDoubleListWidget.h
+    widgets/CScaleLabel.h
     widgets/CTemplateWidget.h
     widgets/CTextEdit.h
     widgets/CTextEditWidget.h

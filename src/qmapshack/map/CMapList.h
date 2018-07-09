@@ -22,7 +22,27 @@
 #include <QTreeWidget>
 #include <QWidget>
 
+class CMapItem;
 class QMenu;
+
+class CMapTreeWidget : public QTreeWidget
+{
+    Q_OBJECT
+public:
+    CMapTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    {
+    }
+
+signals:
+    void sigChanged();
+
+protected:
+    void dragEnterEvent(QDragEnterEvent *e) override;
+    void dragMoveEvent(QDragMoveEvent  *e) override;
+    void dropEvent(QDropEvent      *e) override;
+
+    void resizeEvent(QResizeEvent * e) override;
+};
 
 #include "ui_IMapList.h"
 

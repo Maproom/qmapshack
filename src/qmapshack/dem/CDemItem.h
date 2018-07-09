@@ -65,9 +65,6 @@ public:
        @brief Move item to top of list widget
      */
     void moveToTop();
-    /**
-       @brief Move item to bottom of list widget
-     */
     void moveToBottom();
 
     void updateIcon();
@@ -83,13 +80,6 @@ public:
     {
         return text(0);
     }
-
-
-    /**
-       @brief QT5.11 hack. Resize child widget to fit column width.
-    */
-    void resize();
-
 
 private:
     friend class CDemDraw;

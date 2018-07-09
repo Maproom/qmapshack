@@ -25,6 +25,65 @@
 
 #include <QtWidgets>
 
+void CDemTreeWidget::dragMoveEvent( QDragMoveEvent  * event )
+{
+    CDemItem * item = dynamic_cast<CDemItem*>(itemAt(event->pos()));
+
+    if(item && item->isActivated())
+    {
+        event->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(event);
+    }
+    else
+    {
+        event->setDropAction(Qt::IgnoreAction);
+    }
+}
+
+void CDemTreeWidget::dropEvent( QDropEvent  * event )
+{
+    CDemItem * item = dynamic_cast<CDemItem*>(currentItem());
+    if(item)
+    {
+        item->showChildren(false);
+    }
+
+    QTreeWidget::dropEvent(event);
+
+    if(item)
+    {
+        item->showChildren(true);
+    }
+
+    emit sigChanged();
+}
+
+void CDemTreeWidget::resizeEvent(QResizeEvent * e)
+{
+    QTreeWidget::resizeEvent(e);
+
+    qint32 w = columnWidth(0) - indentation() - 10;
+    if(verticalScrollBar() != nullptr)
+    {
+        w -= verticalScrollBar()->width();
+    }
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        QTreeWidgetItem * item = topLevelItem(n);
+        if(item->childCount() == 1)
+        {
+            QWidget * widget = itemWidget(item->child(0), 0);
+            if(widget != nullptr)
+            {
+                widget->setMaximumWidth(w);
+                widget->setMinimumWidth(w);
+            }
+        }
+    }
+}
+
 
 CDemList::CDemList(QWidget *parent)
     : QWidget(parent)

@@ -45,7 +45,6 @@ set( SRCS
     dem/CDemList.cpp
     dem/CDemPathSetup.cpp
     dem/CDemPropSetup.cpp
-    dem/CDemTreeWidget.cpp
     dem/CDemVRT.cpp
     dem/CDemWCS.cpp
     dem/IDem.cpp
@@ -217,7 +216,6 @@ set( SRCS
     map/CMapPropSetup.cpp
     map/CMapRMAP.cpp
     map/CMapTMS.cpp
-    map/CMapTreeWidget.cpp
     map/CMapVRT.cpp
     map/CMapWMTS.cpp
     map/IMap.cpp
@@ -359,7 +357,6 @@ set( HDRS
     dem/CDemList.h
     dem/CDemPathSetup.h
     dem/CDemPropSetup.h
-    dem/CDemTreeWidget.h
     dem/CDemVRT.h
     dem/CDemWCS.h
     dem/IDem.h
@@ -536,7 +533,6 @@ set( HDRS
     map/CMapPropSetup.h    
     map/CMapRMAP.h
     map/CMapTMS.h
-    map/CMapTreeWidget.h
     map/CMapVRT.h
     map/CMapWMTS.h
     map/IMap.h

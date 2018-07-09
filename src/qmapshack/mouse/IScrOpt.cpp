@@ -29,7 +29,7 @@ IScrOpt::IScrOpt(IMouse *mouse)
     , mouse(mouse)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    setFocusPolicy(Qt::WheelFocus);   
+    setFocusPolicy(Qt::WheelFocus);
 }
 
 IScrOpt::~IScrOpt()

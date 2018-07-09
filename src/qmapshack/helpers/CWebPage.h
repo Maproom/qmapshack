@@ -28,7 +28,6 @@ public:
     CWebPage(QObject* parent)
         : QWebEnginePage(parent)
     {
-
     }
 
     virtual ~CWebPage() = default;

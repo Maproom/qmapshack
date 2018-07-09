@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,33 +16,30 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPPROPSETUP_H
-#define CMAPPROPSETUP_H
+#ifndef CSCALELABEL_H
+#define CSCALELABEL_H
 
+#include <QLabel>
 
-#include "IMapProp.h"
-#include "ui_IMapPropSetup.h"
-
-class CMapPropSetup : public IMapProp, private Ui::IMapPropSetup
+class CScaleLabel : public QLabel
 {
     Q_OBJECT
 public:
-    CMapPropSetup(IMap * mapfile, CMapDraw * map);
-    virtual ~CMapPropSetup();
+    CScaleLabel(QWidget * parent);
+    virtual ~CScaleLabel() = default;
 
-protected slots:
-    void slotPropertiesChanged() override;
+    void setValue(qreal min, qreal scale, qreal max);
 
-private slots:
-    void slotScaleChanged(const QPointF& s);
-    void slotSetMinScale(bool checked);
-    void slotSetMaxScale(bool checked);
-    void slotLoadTypeFile();
-    void slotClearTypeFile();
+protected:
+    void paintEvent(QPaintEvent *e) override;
 
 private:
-    static QPointF scale;
+    void updatePixmap();
+
+    qreal minScale = 0;
+    qreal maxScale = 0;
+    qreal currentScale = 0;
 };
 
-#endif //CMAPPROPSETUP_H
+#endif //CSCALELABEL_H
 

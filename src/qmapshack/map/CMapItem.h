@@ -86,11 +86,6 @@ public:
         return text(0);
     }
 
-    /**
-       @brief QT5.11 hack. Resize child widget to fit column width.
-     */
-    void resize();
-
 private:
     friend class CMapDraw;
     CMapDraw * map;

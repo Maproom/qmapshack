@@ -188,7 +188,7 @@
   <customwidget>
    <class>CDemTreeWidget</class>
    <extends>QTreeWidget</extends>
-   <header>dem/CDemTreeWidget.h</header>
+   <header>dem/CDemList.h</header>
   </customwidget>
  </customwidgets>
  <resources>

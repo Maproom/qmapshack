@@ -144,8 +144,8 @@ find_package(QuaZip                 REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 
-if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-2]{1}\\..*")
-    message( SEND_ERROR "You need at least Qt5.3 or newer.")
+if(${Qt5Widgets_VERSION} MATCHES "5\\.[0-5]{1}\\..*")
+    message( SEND_ERROR "You need at least Qt5.6 or newer.")
 endif()
 
 if(USE_QT5DBus)

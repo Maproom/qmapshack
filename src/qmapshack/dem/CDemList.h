@@ -22,6 +22,27 @@
 #include <QTreeWidget>
 #include <QWidget>
 
+class CDemItem;
+
+class CDemTreeWidget : public QTreeWidget
+{
+    Q_OBJECT
+public:
+    CDemTreeWidget(QWidget * parent) : QTreeWidget(parent)
+    {
+    }
+
+signals:
+    void sigChanged();
+
+protected:
+    void dragMoveEvent(QDragMoveEvent *event) override;
+    void dropEvent(QDropEvent     *event) override;
+
+    void resizeEvent(QResizeEvent * e) override;
+};
+
+
 #include "ui_IDemList.h"
 
 class CDemList : public QWidget, private Ui::IDemsList

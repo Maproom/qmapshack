@@ -24,6 +24,70 @@
 
 #include <QtWidgets>
 
+void CMapTreeWidget::dragEnterEvent(QDragEnterEvent * e)
+{
+    collapseAll();
+    QTreeWidget::dragEnterEvent(e);
+}
+
+void CMapTreeWidget::dragMoveEvent(QDragMoveEvent  * e)
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(itemAt(e->pos()));
+
+    if(item && item->isActivated())
+    {
+        e->setDropAction(Qt::MoveAction);
+        QTreeWidget::dragMoveEvent(e);
+    }
+    else
+    {
+        e->setDropAction(Qt::IgnoreAction);
+    }
+}
+
+void CMapTreeWidget::dropEvent(QDropEvent  * e)
+{
+    CMapItem * item = dynamic_cast<CMapItem*>(currentItem());
+    if(item)
+    {
+        item->showChildren(false);
+    }
+
+    QTreeWidget::dropEvent(e);
+
+    if(item)
+    {
+        item->showChildren(true);
+    }
+
+    emit sigChanged();
+}
+
+void CMapTreeWidget::resizeEvent(QResizeEvent * e)
+{
+    QTreeWidget::resizeEvent(e);
+
+    qint32 w = columnWidth(0) - indentation() - 10;
+    if(verticalScrollBar() != nullptr)
+    {
+        w -= verticalScrollBar()->width();
+    }
+
+    const int N = topLevelItemCount();
+    for(int n = 0; n < N; n++)
+    {
+        QTreeWidgetItem * item = topLevelItem(n);
+        if(item->childCount() == 1)
+        {
+            QWidget * widget = itemWidget(item->child(0), 0);
+            if(widget != nullptr)
+            {
+                widget->setMaximumWidth(w);
+                widget->setMinimumWidth(w);
+            }
+        }
+    }
+}
 
 CMapList::CMapList(QWidget *parent)
     : QWidget(parent)

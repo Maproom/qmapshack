@@ -27,7 +27,7 @@
 #include "map/CMapVRT.h"
 #include "map/CMapWMTS.h"
 #include "map/IMapProp.h"
-#include <QtWidgets>
+#include <QtGui>
 
 QMutex CMapItem::mutexActiveMaps(QMutex::Recursive);
 
@@ -76,11 +76,7 @@ void CMapItem::showChildren(bool yes)
 
         QTreeWidgetItem * item = new QTreeWidgetItem(this);
         item->setFlags(Qt::ItemIsEnabled);
-
-        QWidget * widget = mapfile->getSetup();
-        tw->setItemWidget(item, 0, widget);
-
-        resize();
+        tw->setItemWidget(item, 0, mapfile->getSetup());
     }
     else
     {
@@ -264,28 +260,4 @@ void CMapItem::moveToBottom()
     w->insertTopLevelItem(row, this);
 
     map->emitSigCanvasUpdate();
-}
-
-void CMapItem::resize()
-{
-    if(childCount() != 1)
-    {
-        return;
-    }
-
-    QTreeWidget * tw = treeWidget();
-    QWidget * widget = tw->itemWidget(child(0), 0);
-    if(widget == nullptr)
-    {
-        return;
-    }
-
-    qint32 w = tw->columnWidth(0) - tw->indentation() - 10;
-    if(tw->verticalScrollBar() != nullptr)
-    {
-        w -= tw->verticalScrollBar()->width();
-    }
-
-    widget->setMaximumWidth(w);
-    widget->setMinimumWidth(w);
 }

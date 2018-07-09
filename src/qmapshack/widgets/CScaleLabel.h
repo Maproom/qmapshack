@@ -16,32 +16,30 @@
 
 **********************************************************************************************/
 
-#ifndef CMAPTREEWIDGET_H
-#define CMAPTREEWIDGET_H
+#ifndef CSCALELABEL_H
+#define CSCALELABEL_H
 
-#include <QTreeWidgetItem>
+#include <QLabel>
 
-class CMapItem;
-
-class CMapTreeWidget : public QTreeWidget
+class CScaleLabel : public QLabel
 {
     Q_OBJECT
 public:
-    CMapTreeWidget(QWidget * parent)
-        : QTreeWidget(parent)
-    {
-    }
+    CScaleLabel(QWidget * parent);
+    virtual ~CScaleLabel() = default;
 
-signals:
-    void sigChanged();
+    void setValue(qreal min, qreal scale, qreal max);
 
 protected:
-    void dragEnterEvent(QDragEnterEvent *e) override;
-    void dragMoveEvent(QDragMoveEvent *e) override;
-    void dropEvent(QDropEvent *e) override;
+    void paintEvent(QPaintEvent *e) override;
 
-    void resizeEvent(QResizeEvent * e) override;
+private:
+    void updatePixmap();
+
+    qreal minScale = 0;
+    qreal maxScale = 0;
+    qreal currentScale = 0;
 };
 
-#endif //CMAPTREEWIDGET_H
+#endif //CSCALELABEL_H
 

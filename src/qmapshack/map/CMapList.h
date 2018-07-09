@@ -40,8 +40,6 @@ protected:
     void dragEnterEvent(QDragEnterEvent *e) override;
     void dragMoveEvent(QDragMoveEvent  *e) override;
     void dropEvent(QDropEvent      *e) override;
-
-    void resizeEvent(QResizeEvent * e) override;
 };
 
 #include "ui_IMapList.h"

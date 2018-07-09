@@ -63,32 +63,6 @@ void CMapTreeWidget::dropEvent(QDropEvent  * e)
     emit sigChanged();
 }
 
-void CMapTreeWidget::resizeEvent(QResizeEvent * e)
-{
-    QTreeWidget::resizeEvent(e);
-
-    qint32 w = columnWidth(0) - indentation() - 10;
-    if(verticalScrollBar() != nullptr)
-    {
-        w -= verticalScrollBar()->width();
-    }
-
-    const int N = topLevelItemCount();
-    for(int n = 0; n < N; n++)
-    {
-        QTreeWidgetItem * item = topLevelItem(n);
-        if(item->childCount() == 1)
-        {
-            QWidget * widget = itemWidget(item->child(0), 0);
-            if(widget != nullptr)
-            {
-                widget->setMaximumWidth(w);
-                widget->setMinimumWidth(w);
-            }
-        }
-    }
-}
-
 CMapList::CMapList(QWidget *parent)
     : QWidget(parent)
 {

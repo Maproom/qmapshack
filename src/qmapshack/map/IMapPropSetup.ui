@@ -69,7 +69,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelScale">
+      <widget class="CScaleLabel" name="labelScale">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -263,6 +263,9 @@
           <property name="text">
            <string>-</string>
           </property>
+          <property name="scaledContents">
+           <bool>true</bool>
+          </property>
          </widget>
         </item>
         <item row="0" column="0">
@@ -394,6 +397,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CScaleLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">widgets/CScaleLabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../resources.qrc"/>
  </resources>

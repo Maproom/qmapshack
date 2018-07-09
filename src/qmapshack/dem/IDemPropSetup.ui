@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>163</height>
+    <width>269</width>
+    <height>173</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,7 +69,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="labelScale">
+      <widget class="CScaleLabel" name="labelScale">
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Control the range of scale the map is displayed. Use the two buttons left and right to define the actual scale as either minimum or maximum scale.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -149,6 +149,9 @@
       <widget class="QComboBox" name="comboGrades">
        <property name="insertPolicy">
         <enum>QComboBox::NoInsert</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToMinimumContentsLength</enum>
        </property>
       </widget>
      </item>
@@ -594,6 +597,11 @@
    <class>CTinySpinBox</class>
    <extends>QSpinBox</extends>
    <header>widgets/CTinySpinBox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>CScaleLabel</class>
+   <extends>QLabel</extends>
+   <header location="global">widgets/CScaleLabel.h</header>
   </customwidget>
  </customwidgets>
  <resources>

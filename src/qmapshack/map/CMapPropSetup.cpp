@@ -74,11 +74,6 @@ CMapPropSetup::~CMapPropSetup()
 {
 }
 
-void CMapPropSetup::resizeEvent(QResizeEvent * e) /* override */
-{
-    IMapProp::resizeEvent(e);
-    updateScaleLabel();
-}
 
 void CMapPropSetup::slotPropertiesChanged() /* override */
 {
@@ -91,7 +86,8 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
     toolSetMinScale->setChecked(minScale != NOFLOAT);
     qreal maxScale = mapfile->getMaxScale();
     toolSetMaxScale->setChecked(maxScale != NOFLOAT);
-    updateScaleLabel();
+
+    labelScale->setValue(mapfile->getMinScale(), scale.x(), mapfile->getMaxScale());
 
     // vector maps properties
     checkPolygons->setChecked(mapfile->getShowPolygons());
@@ -101,7 +97,7 @@ void CMapPropSetup::slotPropertiesChanged() /* override */
 
     // streaming map properties
     QString lbl = mapfile->getCachePath();
-    labelCachePath->setText(lbl);
+    labelCachePath->setText(lbl.size() < 20 ? lbl : "..." + lbl.right(17));
     labelCachePath->setToolTip(lbl);
     spinCacheSize->setValue(mapfile->getCacheSize());
     spinCacheExpiration->setValue(mapfile->getCacheExpiration());
@@ -135,58 +131,6 @@ void CMapPropSetup::slotSetMaxScale(bool checked)
 }
 
 
-#define BAR_HEIGHT 6
-#define HOR_MARGIN 3
-
-void CMapPropSetup::updateScaleLabel()
-{
-    int w = labelScale->width();
-    int h = labelScale->height();
-
-    QPixmap pix(w,h);
-    if(pix.isNull())
-    {
-        return;
-    }
-
-    pix.fill(Qt::transparent);
-    QPainter p(&pix);
-
-    // draw bar background
-    int xBar = HOR_MARGIN;
-    int yBar = (h - BAR_HEIGHT) / 2;
-
-    QRect bar(xBar, yBar, w-2*HOR_MARGIN, BAR_HEIGHT);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::white);
-    p.drawRect(bar);
-
-    // draw current scale range
-    qreal minScale = mapfile->getMinScale();
-    qreal maxScale = mapfile->getMaxScale();
-    if((minScale != NOFLOAT) || (maxScale != NOFLOAT))
-    {
-        int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
-        int x2Range = maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
-        int yRange  = yBar;
-
-        QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
-        p.setPen(Qt::NoPen);
-        p.setBrush(Qt::darkGreen);
-        p.drawRect(range);
-    }
-
-    // draw scale indicator
-    int xInd  = HOR_MARGIN + qRound(bar.width() * (1 + log10(scale.x())) / 5) - 3;
-    int yInd  = yBar - 1;
-
-    QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::NoBrush);
-    p.drawRect(ind);
-
-    labelScale->setPixmap(pix);
-}
 
 
 void CMapPropSetup::slotLoadTypeFile()

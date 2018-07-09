@@ -87,11 +87,6 @@ CDemPropSetup::~CDemPropSetup()
 {
 }
 
-void CDemPropSetup::resizeEvent(QResizeEvent * e)
-{
-    IDemProp::resizeEvent(e);
-    updateScaleLabel();
-}
 
 void CDemPropSetup::slotPropertiesChanged()
 {
@@ -102,7 +97,7 @@ void CDemPropSetup::slotPropertiesChanged()
     toolSetMinScale->setChecked( demfile->getMinScale() != NOFLOAT );
     toolSetMaxScale->setChecked( demfile->getMaxScale() != NOFLOAT );
 
-    updateScaleLabel();
+    labelScale->setValue(demfile->getMinScale(), scale.x(), demfile->getMaxScale());
 
     checkHillshading->setChecked(demfile->doHillshading());
     sliderHillshading->setValue(demfile->getFactorHillshading());
@@ -147,60 +142,6 @@ void CDemPropSetup::slotSetMaxScale(bool checked)
 {
     demfile->setMaxScale(checked ? scale.x() : NOFLOAT);
     slotPropertiesChanged();
-}
-
-
-#define BAR_HEIGHT 6
-#define HOR_MARGIN 3
-
-void CDemPropSetup::updateScaleLabel()
-{
-    int w = labelScale->width();
-    int h = labelScale->height();
-
-    QPixmap pix(w,h);
-    if(pix.isNull())
-    {
-        return;
-    }
-
-    pix.fill(Qt::transparent);
-    QPainter p(&pix);
-
-    // draw bar background
-    int xBar = HOR_MARGIN;
-    int yBar = (h - BAR_HEIGHT) / 2;
-
-    QRect bar(xBar, yBar, w-2*HOR_MARGIN, BAR_HEIGHT);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::white);
-    p.drawRect(bar);
-
-    // draw current scale range
-    qreal minScale = demfile->getMinScale();
-    qreal maxScale = demfile->getMaxScale();
-    if((minScale != NOFLOAT) || (maxScale != NOFLOAT))
-    {
-        int x1Range = minScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(minScale)) / 5) : bar.left();
-        int x2Range = maxScale != NOFLOAT ? HOR_MARGIN + qRound(bar.width() * (1 + log10(maxScale)) / 5) : bar.right();
-        int yRange  = yBar;
-
-        QRect range(x1Range, yRange, x2Range - x1Range, BAR_HEIGHT);
-        p.setPen(Qt::NoPen);
-        p.setBrush(Qt::darkGreen);
-        p.drawRect(range);
-    }
-
-    // draw scale indicator
-    int xInd  = HOR_MARGIN + qRound(bar.width() * (1 + log10(scale.x())) / 5) - 3;
-    int yInd  = yBar - 1;
-
-    QRect ind(xInd, yInd, 5, BAR_HEIGHT + 2);
-    p.setPen(Qt::darkBlue);
-    p.setBrush(Qt::NoBrush);
-    p.drawRect(ind);
-
-    labelScale->setPixmap(pix);
 }
 
 void CDemPropSetup::slotSlopeChanged(int val)

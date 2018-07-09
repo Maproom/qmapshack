@@ -118,8 +118,8 @@ CMapVRT::CMapVRT(const QString &filename, CMapDraw *parent)
     }
 
     OGRSpatialReference oSRS;
-    char *wkt = str;
-    oSRS.importFromWkt(&wkt);
+    const char *wkt = str;
+    oSRS.importFromWkt(wkt);
 
     char *proj4 = nullptr;
     oSRS.exportToProj4(&proj4);

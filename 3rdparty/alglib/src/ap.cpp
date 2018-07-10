@@ -7458,9 +7458,9 @@ std::string alglib::arraytostring(const double *ptr, ae_int_t n, int _dps)
     char mask2[64];
     int dps = _dps>=0 ? _dps : -_dps;
     result = "[";
-    if( snprintf(mask1, sizeof(mask1), "%%.%d%s", dps, _dps>=0 ? "f" : "e") >= (int)sizeof(mask1) )
+    if( sprintf(mask1, "%%.%d%s", dps, _dps>=0 ? "f" : "e")>=(int)sizeof(mask1) )
         throw ap_error("arraytostring(): buffer overflow");
-    if( snprintf(mask2, sizeof(mask2), ",%s", mask1) >= (int)sizeof(mask2) )
+    if( sprintf(mask2, ",%s", mask1)>=(int)sizeof(mask2) )
         throw ap_error("arraytostring(): buffer overflow");
     for(i=0; i<n; i++)
     {

@@ -18,6 +18,7 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
+#include "gis/rte/router/brouter/CRouterBRouterLocalVersionsWebPage.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
 #include "setup/IAppSetup.h"
@@ -53,6 +54,10 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
+    localVersionsPage = new CRouterBRouterLocalVersionsWebPage();
+    webLocalBRouterVersions->setPage(localVersionsPage);
+    connect(localVersionsPage, &CRouterBRouterLocalVersionsWebPage::sigLinkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
+    connect(localVersionsPage, &QWebEnginePage::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
     connect(pushLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked);
 
     connect(listProfiles, &QListView::clicked, this, &CRouterBRouterSetupWizard::slotProfileClicked);
@@ -480,20 +485,24 @@ void CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked()
 void CRouterBRouterSetupWizard::initLocalInstall()
 {
     pageLocalInstallation->setSetup(setup);
-    connect(webLocalBRouterVersions, &QWebView::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
-    webLocalBRouterVersions->load(QUrl(setup->binariesUrl));
-    QWebPage *localVersionsPage = webLocalBRouterVersions->page();
-    localVersionsPage->setLinkDelegationPolicy(QWebPage::DelegateAllLinks);
-    connect(localVersionsPage, &QWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
+    localInstallLoaded = false;
+    localVersionsPage->load(QUrl(setup->binariesUrl));
 }
 
 void CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished(bool ok)
 {
-    if (!ok)
+    if (!localInstallLoaded)
     {
-        textLocalInstall->setVisible(true);
-        textLocalInstall->setTextColor(Qt::red);
-        textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
+        if (!ok)
+        {
+            textLocalInstall->setVisible(true);
+            textLocalInstall->setTextColor(Qt::red);
+            textLocalInstall->append(tr("Error loading installation-page at %1").arg(setup->binariesUrl));
+        }
+        else
+        {
+            localInstallLoaded = true;
+        }
     }
 }
 

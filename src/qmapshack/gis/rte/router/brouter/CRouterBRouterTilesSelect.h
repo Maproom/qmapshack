@@ -26,11 +26,11 @@
 #include <QProgressBar>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include <QWebPage>
 
 class CRouterBRouterTilesSelectArea;
 class CRouterBRouterTilesStatus;
 class CRouterBRouterSetup;
+class QWebEnginePage;
 
 class CRouterBRouterTilesSelect : public QWidget
 {
@@ -79,6 +79,7 @@ private:
     void updateButtons() const;
     void updateTiles() const;
     void error(const QString &error) const;
+    void segmentsError(const QString &msg) const;
     void clearError() const;
 
     CRouterBRouterTilesStatus * getTileStatus(QPoint tile) const;
@@ -98,7 +99,7 @@ private:
 
     CRouterBRouterTilesSelectArea * selectArea;
 
-    QWebPage * tilesWebPage;
+    QWebEnginePage * tilesWebPage;
 
     QNetworkAccessManager * tilesDownloadManager;
     QVector<QNetworkReply*> tilesDownloadManagerReplies;

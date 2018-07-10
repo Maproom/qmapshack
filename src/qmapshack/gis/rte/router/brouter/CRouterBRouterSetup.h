@@ -21,7 +21,10 @@
 
 #include <QScriptValue>
 #include <QtCore>
-#include <QWebPage>
+
+class QNetworkAccessManager;
+class QNetworkReply;
+class QWebEnginePage;
 
 class CRouterBRouterSetup : public QObject
 {
@@ -101,7 +104,7 @@ private:
     QStringList localProfiles;
 
     QNetworkAccessManager * networkAccessManager;
-    QWebPage * profilesWebPage;
+    QWebEnginePage * profilesWebPage;
 
     bool expertMode;
     mode_e installMode;

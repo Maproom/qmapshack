@@ -495,20 +495,23 @@ void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
                     "  href = xpathResult.iterateNext();"
                     "}"
                     "profiles;",
-                    [this](const QVariant &v)
-        {
-            QStringList onlineProfilesLoaded = v.toStringList();
+                    [this](const QVariant& v) { afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(v); }
+        );
+    }
+}
 
-            if (onlineProfilesLoaded.size() == 0)
-            {
-                emitNetworkError(tr("%1 invalid result").arg(onlineProfilesUrl));
-            }
-            else
-            {
-                mergeOnlineProfiles(onlineProfilesLoaded);
-                emit sigProfilesChanged();
-            }
-        });
+void CRouterBRouterSetup::afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v)
+{
+    QStringList onlineProfilesLoaded = v.toStringList();
+
+    if (onlineProfilesLoaded.size() == 0)
+    {
+        emitNetworkError(tr("%1 invalid result").arg(onlineProfilesUrl));
+    }
+    else
+    {
+        mergeOnlineProfiles(onlineProfilesLoaded);
+        emit sigProfilesChanged();
     }
 }
 

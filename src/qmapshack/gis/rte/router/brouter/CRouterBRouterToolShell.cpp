@@ -58,6 +58,7 @@ void CRouterBRouterToolShell::stop()
 #else
         cmd.terminate();
 #endif
+        cmd.waitForFinished();
     }
 }
 

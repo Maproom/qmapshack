@@ -22,17 +22,16 @@
 #include "setup/IAppSetup.h"
 #include <QMessageBox>
 #include <QtScript>
-#include <QtWebKit>
-#include <QWebFrame>
-#include <QWebPage>
+#include <QNetworkReply>
+#include <QWebEnginePage>
 
 CRouterBRouterSetup::CRouterBRouterSetup(QObject *parent)
     : QObject(parent)
 {
     networkAccessManager = new QNetworkAccessManager(this);
-    profilesWebPage = new QWebPage(this);
+    profilesWebPage = new QWebEnginePage(this);
     connect(networkAccessManager, &QNetworkAccessManager::finished, this, &CRouterBRouterSetup::slotOnlineRequestFinished);
-    connect(profilesWebPage, &QWebPage::loadFinished, this, &CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished);
+    connect(profilesWebPage, &QWebEnginePage::loadFinished, this, &CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished);
 }
 
 CRouterBRouterSetup::~CRouterBRouterSetup()
@@ -342,7 +341,7 @@ QStringList CRouterBRouterSetup::getProfiles() const
 
 void CRouterBRouterSetup::loadLocalOnlineProfiles() const
 {
-    profilesWebPage->mainFrame()->load(QUrl(onlineProfilesUrl));
+    profilesWebPage->load(QUrl(onlineProfilesUrl));
 }
 
 void CRouterBRouterSetup::loadOnlineConfig() const
@@ -484,31 +483,32 @@ void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
     }
     else
     {
-        const QWebElement &htmlElement = profilesWebPage->mainFrame()->documentElement();
-        const QWebElementCollection &anchorElements = htmlElement.findAll("table tr td a");
-
-        if (anchorElements.count() == 0)
+        profilesWebPage->runJavaScript(
+                    "var profiles = [];"
+                    "var xpathResult = document.evaluate('.//@href',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
+                    "var href = xpathResult.iterateNext();"
+                    "while(href) {"
+                    "  var pmatch = href.value.match(/(\\S+)\\.brf/);"
+                    "  if (pmatch != null) {"
+                    "    profiles.push(pmatch[1]);"
+                    "  }"
+                    "  href = xpathResult.iterateNext();"
+                    "}"
+                    "profiles;",
+                    [this](const QVariant &v)
         {
-            emitNetworkError(tr("%1 invalid result").arg(onlineProfilesUrl));
-            return;
-        }
+            QStringList onlineProfilesLoaded = v.toStringList();
 
-        const QRegExp rxProfileName("(\\S+)\\.brf");
-
-        QStringList onlineProfilesLoaded;
-        for (const QWebElement &anchorElement : anchorElements)
-        {
-            const QString &profileName = anchorElement.toPlainText();
-            //only anchors matching the desired pattern
-            if (rxProfileName.indexIn(profileName) > -1)
+            if (onlineProfilesLoaded.size() == 0)
             {
-                onlineProfilesLoaded << rxProfileName.cap(1);
+                emitNetworkError(tr("%1 invalid result").arg(onlineProfilesUrl));
             }
-        }
-
-        mergeOnlineProfiles(onlineProfilesLoaded);
-
-        emit sigProfilesChanged();
+            else
+            {
+                mergeOnlineProfiles(onlineProfilesLoaded);
+                emit sigProfilesChanged();
+            }
+        });
     }
 }
 

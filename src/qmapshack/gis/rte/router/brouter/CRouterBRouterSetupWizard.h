@@ -22,6 +22,7 @@
 #include "ui_IRouterBRouterSetupWizard.h"
 
 class CCanvas;
+class CRouterBRouterLocalVersionsWebPage;
 class CRouterBRouterSetup;
 class CRouterBRouterTilesSelect;
 
@@ -107,8 +108,10 @@ private:
     CRouterBRouterSetup * setup;
 
     bool doLocalInstall;
+    bool localInstallLoaded;
     QUrl downloadUrl;
 
+    CRouterBRouterLocalVersionsWebPage * localVersionsPage;
     QNetworkAccessManager * networkAccessManager;
 
     bool isError { false };

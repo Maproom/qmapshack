@@ -57,6 +57,10 @@ public:
     static const int minTileLon;
     static const int maxTileLon;
     static const int tileSize;
+    static const QString patternTileName;
+    static const QRegExp regExpTileName;
+    static const QRegExp regExpDate;
+    static const QRegExp regExpSize;
 
 signals:
     void sigCompleteChanged() const;
@@ -78,6 +82,7 @@ private:
     void updateStatus();
     void updateButtons() const;
     void updateTiles() const;
+    void afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant &v);
     void error(const QString &error) const;
     void segmentsError(const QString &msg) const;
     void clearError() const;

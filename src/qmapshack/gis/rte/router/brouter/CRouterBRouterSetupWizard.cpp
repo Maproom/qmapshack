@@ -18,9 +18,9 @@
 
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
-#include "gis/rte/router/brouter/CRouterBRouterLocalVersionsWebPage.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
+#include "helpers/CWebPage.h"
 #include "setup/IAppSetup.h"
 #include <JlCompress.h>
 #include <proj_api.h>
@@ -54,9 +54,9 @@ CRouterBRouterSetupWizard::CRouterBRouterSetupWizard()
 
     connect(pushCreateOrUpdateLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotCreateOrUpdateLocalInstallClicked);
 
-    localVersionsPage = new CRouterBRouterLocalVersionsWebPage();
+    localVersionsPage = new CWebPage(this);
     webLocalBRouterVersions->setPage(localVersionsPage);
-    connect(localVersionsPage, &CRouterBRouterLocalVersionsWebPage::sigLinkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
+    connect(localVersionsPage, &CWebPage::linkClicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadLinkClicked);
     connect(localVersionsPage, &QWebEnginePage::loadFinished, this, &CRouterBRouterSetupWizard::slotWebLocalBRouterVersionsLoadFinished);
     connect(pushLocalInstall, &QPushButton::clicked, this, &CRouterBRouterSetupWizard::slotLocalDownloadButtonClicked);
 

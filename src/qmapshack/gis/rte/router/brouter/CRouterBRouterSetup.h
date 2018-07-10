@@ -94,6 +94,7 @@ private:
     void loadOnlineProfileAsync(const QString &profile, const profileRequest_e mode) const;
     void loadOnlineConfigFinished(QNetworkReply* reply);
     void loadOnlineProfileFinished(QNetworkReply * reply);
+    void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
     void mergeOnlineProfiles(const QStringList &profilesLoaded);
     void emitOnlineConfigScriptError(const QScriptValue &error) const;
     void emitNetworkError(QString error) const;

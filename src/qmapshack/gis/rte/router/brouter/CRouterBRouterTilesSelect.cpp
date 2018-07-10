@@ -34,6 +34,13 @@ const int CRouterBRouterTilesSelect::maxTileLat =  180;
 const int CRouterBRouterTilesSelect::minTileLon =  -85;
 const int CRouterBRouterTilesSelect::maxTileLon =   85;
 const int CRouterBRouterTilesSelect::tileSize   =    5;
+//pattern for filenames of tiles: 'E10_N20.rd5'
+const QString CRouterBRouterTilesSelect::patternTileName = QString("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
+const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouterTilesSelect::patternTileName);
+//pattern for tiles date parsing: '16-Feb-2017 20:48  '
+const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
+//pattern for tiles size parsing: 8.2M 271K 9.3K
+const QRegExp  CRouterBRouterTilesSelect::regExpSize = QRegExp(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
@@ -276,7 +283,7 @@ void CRouterBRouterTilesSelect::initialize()
         }
 
         const QStringList &segments = dir.entryList();
-        const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5$");
+        const QRegExp rxTileName(patternTileName);
         for (const QString &segment : segments)
         {
             if (rxTileName.indexIn(segment) > -1)
@@ -314,109 +321,104 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
         return;
     }
     tilesWebPage->runJavaScript(
-                "var tiles = [];"
-                "var xpathResult = document.evaluate('.//a',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
-                "var reTileName = /([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5/;"
-                "var anchor = xpathResult.iterateNext();"
-                "while(anchor) {"
-                "  if(reTileName.test(anchor.innerHTML)) {"
-                "    var dateElement = anchor.parentNode.nextSibling;"
-                "    var sizeElement = dateElement.nextSibling;"
-                "    var tile = {};"
-                "    tile.name = anchor.innerHTML;"
-                "    tile.date = dateElement.innerHTML;"
-                "    tile.size = sizeElement.innerHTML;"
-                "    tiles.push(tile);"
-                "  }"
-                "  anchor = xpathResult.iterateNext();"
-                "}"
-                "tiles;",
-                [this](const QVariant &v)
+                QString(
+                    "var tiles = [];"
+                    "var xpathResult = document.evaluate('.//a',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
+                    "var reTileName = /").append(patternTileName).append("/;")
+                .append(
+                    "var anchor = xpathResult.iterateNext();"
+                    "while(anchor) {"
+                    "  if(reTileName.test(anchor.innerHTML)) {"
+                    "    var dateElement = anchor.parentNode.nextSibling;"
+                    "    var sizeElement = dateElement.nextSibling;"
+                    "    var tile = {};"
+                    "    tile.name = anchor.innerHTML;"
+                    "    tile.date = dateElement.innerHTML;"
+                    "    tile.size = sizeElement.innerHTML;"
+                    "    tiles.push(tile);"
+                    "  }"
+                    "  anchor = xpathResult.iterateNext();"
+                    "}"
+                    "tiles;"),
+                [this](const QVariant &v) { afterSlotLoadOnlineTilesRequestFinishedRunJavascript(v); }
+    );
+}
+
+void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant &v)
+{
+    const QList<QVariant> & results = v.toList();
+    if (results.count() == 0)
     {
-        const QList<QVariant> & results = v.toList();
-        if (results.count() == 0)
+        segmentsError(tr("invalid result, no files found"));
+        update();
+        return;
+    }
+
+    for (const QVariant & result : results) {
+        const QMap<QString,QVariant> & tileMap = result.toMap();
+
+        const QString &tileName = tileMap.value("name").toString();
+        //only anchors matching the desired pattern
+        if (regExpTileName.indexIn(tileName) > -1)
         {
-            segmentsError(tr("invalid result, no files found"));
-            update();
-            return;
-        }
-        // 'E10_N20.rd5'
-        const QRegExp rxTileName("([EW])(\\d{1,3})_([NS])(\\d{1,3})\\.rd5");
+            const QPoint &tile = tileFromFileName(tileName);
 
-        // '16-Feb-2017 20:48  '
-        // const QString dateFormat = "d-MMM-yyyy H:mm";
-        // QDateFormat conversion depends on user-locale, doesn't work here
-        const QRegExp rxDate("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
-
-        // 8.2M 271K 9.3K
-        const QRegExp rxSize(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
-
-        for (const QVariant & result : results) {
-            const QMap<QString,QVariant> & tileMap = result.toMap();
-
-            const QString &tileName = tileMap.value("name").toString();
-            //only anchors matching the desired pattern
-            if (rxTileName.indexIn(tileName) > -1)
+            if (tile != noTile)
             {
-                const QPoint &tile = tileFromFileName(tileName);
-
-                if (tile != noTile)
+                CRouterBRouterTilesStatus * status = getTileStatus(tile);
+                if (status != nullptr)
                 {
-                    CRouterBRouterTilesStatus * status = getTileStatus(tile);
-                    if (status != nullptr)
+                    status->isRemote = true;
+
+                    const QString &date = tileMap.value("date").toString();
+                    if (regExpDate.indexIn(date) < 0)
                     {
-                        status->isRemote = true;
+                        segmentsError(tr("cannot parse: %1 is not a date").arg(date));
+                        update();
+                        return;
+                    }
+                    int day = regExpDate.cap(1).toInt();
+                    const QString &monthStr = regExpDate.cap(2);
+                    int month = monthStr == "Jan" ? 1 :
+                                monthStr == "Feb" ? 2 :
+                                monthStr == "Mar" ? 3 :
+                                monthStr == "Apr" ? 4 :
+                                monthStr == "May" ? 5 :
+                                monthStr == "Jun" ? 6 :
+                                monthStr == "Jul" ? 7 :
+                                monthStr == "Aug" ? 8 :
+                                monthStr == "Sep" ? 9 :
+                                monthStr == "Oct" ? 10 :
+                                monthStr == "Nov" ? 11 :
+                                monthStr == "Dec" ? 12 :
+                                                    0;
+                    int year = regExpDate.cap(3).toInt();
+                    int hour = regExpDate.cap(4).toInt();
+                    int min  = regExpDate.cap(5).toInt();
 
-                        const QString &date = tileMap.value("date").toString();
-                        if (rxDate.indexIn(date) < 0)
-                        {
-                            segmentsError(tr("cannot parse: %1 is not a date").arg(date));
-                            update();
-                            return;
-                        }
-                        int day = rxDate.cap(1).toInt();
-                        const QString &monthStr = rxDate.cap(2);
-                        int month = monthStr == "Jan" ? 1 :
-                                    monthStr == "Feb" ? 2 :
-                                    monthStr == "Mar" ? 3 :
-                                    monthStr == "Apr" ? 4 :
-                                    monthStr == "May" ? 5 :
-                                    monthStr == "Jun" ? 6 :
-                                    monthStr == "Jul" ? 7 :
-                                    monthStr == "Aug" ? 8 :
-                                    monthStr == "Sep" ? 9 :
-                                    monthStr == "Oct" ? 10 :
-                                    monthStr == "Nov" ? 11 :
-                                    monthStr == "Dec" ? 12 :
-                                                        0;
-                        int year = rxDate.cap(3).toInt();
-                        int hour = rxDate.cap(4).toInt();
-                        int min  = rxDate.cap(5).toInt();
+                    status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
 
-                        status->remoteDate = QDateTime(QDate(year,month,day),QTime(hour,min,0));
-
-                        const QString &size = tileMap.value("size").toString();
-                        if (rxSize.indexIn(size) < 0)
-                        {
-                            segmentsError(tr("cannot parse: %1 is not a valid size").arg(size));
-                            update();
-                            return;
-                        }
-                        status->remoteSize = rxSize.cap(1).toFloat() * (rxSize.cap(2) == "M" ? 1048576 :
-                                                                        rxSize.cap(2) == "G" ? 1073741824 :
-                                                                        rxSize.cap(2) == "K" ? 1024 :
-                                                                                               1);
-                        if (status->isLocal && status->remoteDate > status->localDate)
-                        {
-                            status->isOutdated = true;
-                        }
+                    const QString &size = tileMap.value("size").toString();
+                    if (regExpSize.indexIn(size) < 0)
+                    {
+                        segmentsError(tr("cannot parse: %1 is not a valid size").arg(size));
+                        update();
+                        return;
+                    }
+                    status->remoteSize = regExpSize.cap(1).toFloat() * (regExpSize.cap(2) == "M" ? 1048576 :
+                                                                    regExpSize.cap(2) == "G" ? 1073741824 :
+                                                                    regExpSize.cap(2) == "K" ? 1024 :
+                                                                                           1);
+                    if (status->isLocal && status->remoteDate > status->localDate)
+                    {
+                        status->isOutdated = true;
                     }
                 }
             }
         }
-        clearError();
-        update();
-    } );
+    }
+    clearError();
+    update();
 }
 
 QString CRouterBRouterTilesSelect::formatSize(const qint64 size)

@@ -22,9 +22,9 @@
 #include "ui_IRouterBRouterSetupWizard.h"
 
 class CCanvas;
-class CRouterBRouterLocalVersionsWebPage;
 class CRouterBRouterSetup;
 class CRouterBRouterTilesSelect;
+class CWebPage;
 
 class CRouterBRouterSetupWizard : public QWizard, private Ui::IRouterBRouterSetupWizard
 {
@@ -111,7 +111,7 @@ private:
     bool localInstallLoaded;
     QUrl downloadUrl;
 
-    CRouterBRouterLocalVersionsWebPage * localVersionsPage;
+    CWebPage * localVersionsPage;
     QNetworkAccessManager * networkAccessManager;
 
     bool isError { false };

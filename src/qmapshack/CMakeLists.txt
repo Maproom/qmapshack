@@ -129,6 +129,7 @@ set( SRCS
     gis/rte/router/CRouterSetup.cpp
     gis/rte/router/IRouter.cpp
     gis/rte/router/brouter/CRouterBRouterInfo.cpp
+    gis/rte/router/brouter/CRouterBRouterLocalVersionsWebPage.cpp
     gis/rte/router/brouter/CRouterBRouterSetup.cpp
     gis/rte/router/brouter/CRouterBRouterSetupPage.cpp
     gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp
@@ -445,6 +446,7 @@ set( HDRS
     gis/rte/router/CRouterSetup.h
     gis/rte/router/IRouter.h
     gis/rte/router/brouter/CRouterBRouterInfo.h
+    gis/rte/router/brouter/CRouterBRouterLocalVersionsWebPage.h
     gis/rte/router/brouter/CRouterBRouterSetup.h
     gis/rte/router/brouter/CRouterBRouterSetupPage.h
     gis/rte/router/brouter/CRouterBRouterSetupWizard.h
@@ -843,7 +845,6 @@ target_link_libraries(${APPLICATION_NAME}
     Qt5::Network
     Qt5::WebEngineWidgets
     Qt5::Qml
-    Qt5::WebKitWidgets      # deprecated
     Qt5::Script             # deprecated
     ${DBUS_LIB}
     ${GDAL_LIBRARIES}

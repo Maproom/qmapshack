@@ -19,9 +19,9 @@
 #ifndef CROUTERBROUTERSETUP_H
 #define CROUTERBROUTERSETUP_H
 
-#include <QScriptValue>
 #include <QtCore>
 
+class QJSValue;
 class QNetworkAccessManager;
 class QNetworkReply;
 class QWebEnginePage;
@@ -96,7 +96,7 @@ private:
     void loadOnlineProfileFinished(QNetworkReply * reply);
     void afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(const QVariant &v);
     void mergeOnlineProfiles(const QStringList &profilesLoaded);
-    void emitOnlineConfigScriptError(const QScriptValue &error) const;
+    void emitOnlineConfigScriptError(const QJSValue &error) const;
     void emitNetworkError(QString error) const;
     mode_e modeFromString(const QString &mode) const;
     QString stringFromMode(const mode_e mode) const;

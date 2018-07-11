@@ -20,8 +20,8 @@
 
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
+#include <QJSEngine>
 #include <QMessageBox>
-#include <QtScript>
 #include <QNetworkReply>
 #include <QWebEnginePage>
 
@@ -383,7 +383,7 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
 
         const QString jsConfig(reply->readAll());
 
-        QScriptEngine engine;
+        QJSEngine engine;
 
         const QString &jsSetup = QString( \
             "(function(){\
@@ -396,29 +396,29 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
                        BR = {};\
                       })();").arg(configHost);
 
-        engine.evaluate(jsSetup).toString();
-        engine.evaluate(jsConfig).toString();
-        if (engine.hasUncaughtException())
+        engine.evaluate(jsSetup);
+        const QJSValue &val = engine.evaluate(jsConfig);
+        if (val.isError())
         {
-            emitOnlineConfigScriptError(engine.uncaughtException());
+            emitOnlineConfigScriptError(val);
             return;
         }
 
-        const QScriptValue &br = engine.globalObject().property("BR");
-        if (!br.isValid() || br.isError())
+        const QJSValue &br = engine.globalObject().property("BR");
+        if (!br.isObject() || br.isError())
         {
             emitOnlineConfigScriptError(br);
             return;
         }
-        const QScriptValue &conf = br.property("conf");
-        if (!conf.isValid() || conf.isError())
+        const QJSValue &conf = br.property("conf");
+        if (!conf.isObject() || conf.isError())
         {
             emitOnlineConfigScriptError(conf);
             return;
         }
 
-        const QScriptValue &host = conf.property("host").toString();
-        if (!host.isValid() || host.isError())
+        const QJSValue &host = conf.property("host");
+        if (!host.isString() || host.isError())
         {
             emitOnlineConfigScriptError(host);
             return;
@@ -427,8 +427,8 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
         {
             onlineServiceUrl = host.toString();
         }
-        const QScriptValue &url = conf.property("profilesUrl").toString();
-        if (!url.isValid() || url.isError())
+        const QJSValue &url = conf.property("profilesUrl");
+        if (!url.isString() || url.isError())
         {
             emitOnlineConfigScriptError(url);
             return;
@@ -438,19 +438,19 @@ void CRouterBRouterSetup::loadOnlineConfigFinished(QNetworkReply *reply)
             onlineProfilesUrl = url.toString();
         }
 
-        const QScriptValue &profiles = conf.property("profiles");
-        if (!profiles.isValid() || profiles.isError())
+        const QJSValue &profiles = conf.property("profiles");
+        if (!profiles.isArray() || profiles.isError())
         {
             emitOnlineConfigScriptError(profiles);
             return;
         }
-        const qint32 len = profiles.property("length").toInt32();
+        const qint32 len = profiles.property("length").toInt();
 
         QStringList onlineProfilesLoaded;
         for(qint32 i=0; i<len; i++)
         {
-            const QScriptValue &profile = profiles.property(i);
-            if (!profile.isValid() || profile.isError())
+            const QJSValue &profile = profiles.property(i);
+            if (!profile.isString() || profile.isError())
             {
                 emitOnlineConfigScriptError(profile);
                 return;
@@ -534,7 +534,7 @@ void CRouterBRouterSetup::mergeOnlineProfiles(const QStringList &onlineProfilesL
     }
 }
 
-void CRouterBRouterSetup::emitOnlineConfigScriptError(const QScriptValue &error) const
+void CRouterBRouterSetup::emitOnlineConfigScriptError(const QJSValue &error) const
 {
     emit sigError(tr("Error parsing online-config:"),error.toString());
 }

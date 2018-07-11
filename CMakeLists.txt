@@ -134,7 +134,6 @@ find_package(Qt5UiTools             REQUIRED)
 find_package(Qt5Network             REQUIRED)
 find_package(Qt5WebEngineWidgets    REQUIRED)
 find_package(Qt5Qml                 REQUIRED)
-find_package(Qt5WebKitWidgets       REQUIRED) # deprecated
 find_package(Qt5Script              REQUIRED) # deprecated
 find_package(GDAL                   REQUIRED)
 find_package(PROJ                   REQUIRED)

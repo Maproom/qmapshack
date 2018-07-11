@@ -670,7 +670,10 @@ void CRouterBRouter::getBRouterVersion()
             cmd.start(setup->localJavaExecutable,args);
 
             cmd.waitForStarted();
-            cmd.waitForFinished();
+            if (!cmd.waitForFinished(200))
+            {
+                cmd.kill();
+            }
 
             parseBRouterVersion(QString(cmd.readAll()));
 

@@ -659,12 +659,7 @@ void CRouterBRouter::getBRouterVersion()
     {
         if (setup->isLocalBRouterInstalled())
         {
-            QProcess cmd;
-            QTimer timer;
-            QEventLoop eventLoop;
-
-            connect(&cmd,   static_cast<void (QProcess::*)(int)>(&QProcess::finished), &eventLoop, &QEventLoop::exit);
-            connect(&timer, &QTimer::timeout, &cmd,  &QProcess::kill);
+            QProcess cmd;            
 
             QStringList args;
             args << "-cp";
@@ -673,16 +668,16 @@ void CRouterBRouter::getBRouterVersion()
 
             cmd.setWorkingDirectory(setup->localDir);
             cmd.start(setup->localJavaExecutable,args);
-            timer.setSingleShot(true);
-            timer.start(200);
 
-            eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+            cmd.waitForStarted();
+            cmd.waitForFinished();
 
             parseBRouterVersion(QString(cmd.readAll()));
+
         }
         else
         {
-            labelBRouter->setText("BRouter: not found");
+            labelBRouter->setText(tr("BRouter: not found"));
         }
     }
     else
@@ -726,7 +721,7 @@ void CRouterBRouter::parseBRouterVersion(const QString &text)
         versionMinor = NOINT;
         versionPatch = NOINT;
 
-        labelBRouter->setText("BRouter:");
+        labelBRouter->setToolTip("BRouter: (failed to read version)");
     }
 }
 

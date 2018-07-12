@@ -2141,6 +2141,12 @@ void CGisItemTrk::drawLabel(QPainter& p, const QPolygonF&, QList<QRectF>& blocke
     {
         for(const QString& key : extrema.keys())
         {
+            if(key == CKnownExtension::internalSpeedTime)
+            {
+                // already handled by CKnownExtension::internalSpeedDist
+                continue;
+            }
+
             const CKnownExtension& ext = CKnownExtension::get(key);
             const limits_t& limit = extrema[key];
             QPointF posMin = limit.posMin * DEG_TO_RAD;

@@ -73,14 +73,14 @@ void CGisItemTrk::filterReducePoints(qreal dist)
     {
         if(line[cnt].used)
         {
-            pt.unsetFlag(CTrackData::trkpt_t::eHidden);
+            pt.unsetFlag(CTrackData::trkpt_t::eFlagHidden);
         }
         else
         {
             if(!pt.isHidden())
             {
                 nothingDone = false;
-                pt.setFlag(CTrackData::trkpt_t::eHidden);
+                pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
             }
         }
 
@@ -110,7 +110,7 @@ void CGisItemTrk::filterRemoveInvalidPoints()
     {
         if(pt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)))
         {
-            pt.setFlag(CTrackData::trkpt_t::eHidden);
+            pt.setFlag(CTrackData::trkpt_t::eFlagHidden);
             nothingDone = false;
         }
     }
@@ -128,7 +128,7 @@ void CGisItemTrk::filterReset()
 {
     for(CTrackData::trkpt_t& pt : trk)
     {
-        pt.unsetFlag(CTrackData::trkpt_t::eHidden);
+        pt.unsetFlag(CTrackData::trkpt_t::eFlagHidden);
     }
     deriveSecondaryData();
     changed(tr("Reset all hidden track points to visible"), "://icons/48x48/PointHide.png");
@@ -470,7 +470,7 @@ void CGisItemTrk::filterSubPt2Pt()
 {
     for(CTrackData::trkpt_t& pt : trk)
     {
-        pt.unsetFlag(CTrackData::trkpt_t::eSubpt);
+        pt.unsetFlag(CTrackData::trkpt_t::eFlagSubpt);
     }
     propHandler->setupData();
 

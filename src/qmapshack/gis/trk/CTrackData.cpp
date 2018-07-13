@@ -77,7 +77,7 @@ void CTrackData::readFrom(const SGisLine &l)
             trkpt.lon = sub.coord.x() * RAD_TO_DEG;
             trkpt.lat = sub.coord.y() * RAD_TO_DEG;
             trkpt.ele = sub.ele;
-            trkpt.setFlag(trkpt_t::eSubpt);
+            trkpt.setFlag(trkpt_t::eFlagSubpt);
         }
     }
 }
@@ -97,7 +97,7 @@ void CTrackData::getPolyline(SGisLine &l) const
     {
         if(!pt.isHidden())
         {
-            if(pt.hasFlag(trkpt_t::eSubpt))
+            if(pt.hasFlag(trkpt_t::eFlagSubpt))
             {
                 l.last().subpts << IGisLine::subpt_t(pt.radPoint());
             }

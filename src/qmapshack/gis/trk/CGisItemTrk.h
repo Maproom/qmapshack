@@ -401,7 +401,7 @@ public:
     void combine(const QList<key_t> &keys);
 
     /**
-       @brief Set the CTrackData::trkpt_t::eHidden flag
+       @brief Set the CTrackData::trkpt_t::eFlagHidden flag
 
        The flag is set for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -410,7 +410,7 @@ public:
     void hideSelectedPoints();
 
     /**
-       @brief Reset the CTrackData::trkpt_t::eHidden flag
+       @brief Reset the CTrackData::trkpt_t::eFlagHidden flag
 
        The flag is reset for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -436,7 +436,7 @@ public:
        @brief Copy a section into a new track object
 
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
-       including the hidden (CTrackData::trkpt_t::eHidden) ones.
+       including the hidden (CTrackData::trkpt_t::eFlagHidden) ones.
 
      */
     void copySelectedPoints() const;

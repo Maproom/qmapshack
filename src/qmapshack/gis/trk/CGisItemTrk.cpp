@@ -922,8 +922,8 @@ void CGisItemTrk::consolidatePoints()
             continue;
         }
 
-        seg.pts.first().unsetFlag(CTrackData::trkpt_t::eSubpt);
-        seg.pts.last().unsetFlag(CTrackData::trkpt_t::eSubpt);
+        seg.pts.first().unsetFlag(CTrackData::trkpt_t::eFlagSubpt);
+        seg.pts.last().unsetFlag(CTrackData::trkpt_t::eFlagSubpt);
     }
 }
 
@@ -1554,7 +1554,7 @@ void CGisItemTrk::hideSelectedPoints()
     {
         if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt.setFlag(CTrackData::trkpt_t::eHidden);
+            trkpt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }
     }
     resetMouseRange();
@@ -1588,7 +1588,7 @@ void CGisItemTrk::showSelectedPoints()
     {
         if(isInRange(trkpt.idxTotal, idx1, idx2))
         {
-            trkpt.unsetFlag(CTrackData::trkpt_t::eHidden);
+            trkpt.unsetFlag(CTrackData::trkpt_t::eFlagHidden);
         }
     }
 
@@ -2289,8 +2289,8 @@ void CGisItemTrk::setActivity(quint32 flag)
 {
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        trkpt.unsetFlag(CTrackData::trkpt_t::eActMask);
-        trkpt.setFlag((enum CTrackData::trkpt_t::flag_e) flag);
+        trkpt.unsetAct(CTrackData::trkpt_t::eActMask);
+        trkpt.setAct((enum CTrackData::trkpt_t::act_e) flag);
     }
 
     deriveSecondaryData();
@@ -2328,8 +2328,8 @@ void CGisItemTrk::setActivityRange(quint32 flags)
     {
         if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt.unsetFlag(CTrackData::trkpt_t::eActMask);
-            trkpt.setFlag((enum CTrackData::trkpt_t::flag_e) flags);
+            trkpt.unsetAct(CTrackData::trkpt_t::eActMask);
+            trkpt.setAct((enum CTrackData::trkpt_t::act_e) flags);
         }
     }
 

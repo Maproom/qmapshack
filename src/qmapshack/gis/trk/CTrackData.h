@@ -38,10 +38,16 @@ public:
 
         enum flag_e
         {
-            eHidden     = 0x00000004      ///< mark point as deleted
-            ,eSubpt     = 0x00000008
-                          // activity flags
-            ,eActNone   = 0x00000000
+             eFlagReserved1 = 0x00000001
+            ,eFlagReserved2 = 0x00000002
+            ,eFlagHidden    = 0x00000004      ///< mark point as deleted
+            ,eFlagSubpt     = 0x00000008
+        };
+
+        enum act_e
+        {
+            // activity flags
+             eActNone   = 0x00000000
             ,eActFoot   = 0x80000000
             ,eActCycle  = 0x40000000
             ,eActBike   = 0x20000000
@@ -77,7 +83,7 @@ public:
 
         inline bool isHidden() const
         {
-            return hasFlag(trkpt_t::eHidden);
+            return hasFlag(trkpt_t::eFlagHidden);
         }
 
         inline bool hasFlag(enum flag_e flag) const
@@ -94,6 +100,17 @@ public:
         {
             flags &= ~flag;
         }
+
+        inline void setAct(enum act_e act)
+        {
+            flags |= act;
+        }
+
+        inline void unsetAct(enum act_e act)
+        {
+            flags &= ~act;
+        }
+
 
         inline bool isValid(valid_e flag) const
         {

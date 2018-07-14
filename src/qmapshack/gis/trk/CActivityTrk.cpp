@@ -27,7 +27,7 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 const CActivityTrk::desc_t CActivityTrk::dummyDesc =
 {
     "-"
-    , CTrackData::trkpt_t::eActNone
+    , CTrackData::trkpt_t::eAct20None
     , "-"
     , "://icons/48x48/ActNone.png"
     , "://icons/16x16/ActNone.png"
@@ -36,7 +36,6 @@ const CActivityTrk::desc_t CActivityTrk::dummyDesc =
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
-    , allFlags(0)
 {
 }
 
@@ -47,7 +46,7 @@ void CActivityTrk::init()
     {
         { // 0
             "Foot"
-            , CTrackData::trkpt_t::eActFoot
+            , CTrackData::trkpt_t::eAct20Foot
             , tr("Foot")
             , "://icons/48x48/ActFoot.png"
             , "://icons/16x16/ActFoot.png"
@@ -55,7 +54,7 @@ void CActivityTrk::init()
         },
         { // 1
             "Cycle"
-            , CTrackData::trkpt_t::eActCycle
+            , CTrackData::trkpt_t::eAct20Cycle
             , tr("Bicycle")
             , "://icons/48x48/ActCycle.png"
             , "://icons/16x16/ActCycle.png"
@@ -63,7 +62,7 @@ void CActivityTrk::init()
         },
         { // 2
             "Bike"
-            , CTrackData::trkpt_t::eActBike
+            , CTrackData::trkpt_t::eAct20Bike
             , tr("Motor Bike")
             , "://icons/48x48/ActBike.png"
             , "://icons/16x16/ActBike.png"
@@ -71,7 +70,7 @@ void CActivityTrk::init()
         },
         { // 3
             "Car"
-            , CTrackData::trkpt_t::eActCar
+            , CTrackData::trkpt_t::eAct20Car
             , tr("Car")
             , "://icons/48x48/ActCar.png"
             , "://icons/16x16/ActCar.png"
@@ -79,7 +78,7 @@ void CActivityTrk::init()
         },
         { // 4
             "Cable"
-            , CTrackData::trkpt_t::eActCable
+            , CTrackData::trkpt_t::eAct20Cable
             , tr("Cable Car")
             , "://icons/48x48/ActCable.png"
             , "://icons/16x16/ActCable.png"
@@ -87,7 +86,7 @@ void CActivityTrk::init()
         },
         { // 5
             "Swim"
-            , CTrackData::trkpt_t::eActSwim
+            , CTrackData::trkpt_t::eAct20Swim
             , tr("Swim")
             , "://icons/48x48/ActSwim.png"
             , "://icons/16x16/ActSwim.png"
@@ -95,7 +94,7 @@ void CActivityTrk::init()
         },
         { // 6
             "Ship"
-            , CTrackData::trkpt_t::eActShip
+            , CTrackData::trkpt_t::eAct20Ship
             , tr("Ship")
             , "://icons/48x48/ActShip.png"
             , "://icons/16x16/ActShip.png"
@@ -103,7 +102,7 @@ void CActivityTrk::init()
         },
         { // 7
             "Aeronautik"
-            , CTrackData::trkpt_t::eActAero
+            , CTrackData::trkpt_t::eAct20Aero
             , tr("Aeronautics")
             , "://icons/48x48/ActAero.png"
             , "://icons/16x16/ActAero.png"
@@ -111,7 +110,7 @@ void CActivityTrk::init()
         },
         { // 8
             "Ski/Winter"
-            , CTrackData::trkpt_t::eActSki
+            , CTrackData::trkpt_t::eAct20Ski
             , tr("Ski/Winter")
             , "://icons/48x48/ActSki.png"
             , "://icons/16x16/ActSki.png"
@@ -119,7 +118,7 @@ void CActivityTrk::init()
         },
         { // 9
             "Train"
-            , CTrackData::trkpt_t::eActTrain
+            , CTrackData::trkpt_t::eAct20Train
             , tr("Public Transport")
             , "://icons/48x48/ActTrain.png"
             , "://icons/16x16/ActTrain.png"
@@ -153,13 +152,13 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
-quint32 CActivityTrk::selectActivity(QWidget *parent)
+CTrackData::trkpt_t::act20_e CActivityTrk::selectActivity(QWidget *parent)
 {
     QMenu menu(parent);
     QAction * act;
 
     act = menu.addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
-    act->setData(QVariant(CTrackData::trkpt_t::eActNone));
+    act->setData(QVariant(CTrackData::trkpt_t::eAct20None));
 
     for(const desc_t &desc : actDescriptor)
     {
@@ -170,16 +169,15 @@ quint32 CActivityTrk::selectActivity(QWidget *parent)
     act = menu.exec(QCursor::pos());
     if(nullptr != act)
     {
-        return act->data().toUInt(nullptr);
+        return CTrackData::trkpt_t::act20_e(act->data().toUInt(nullptr));
     }
-
-    return 0xFFFFFFFF;
+    return CTrackData::trkpt_t::eAct20Bad;
 }
 
 
 void CActivityTrk::update()
 {
-    allFlags = 0;
+    allFlags.clear();
     activityRanges.clear();
     activitySummary.clear();
 
@@ -187,21 +185,21 @@ void CActivityTrk::update()
     const CTrackData::trkpt_t *lastTrkpt  = nullptr;
     const CTrackData::trkpt_t *startTrkpt = nullptr;
 
-    quint32 lastFlag = 0xFFFFFFFF;
+    CTrackData::trkpt_t::act20_e lastAct = CTrackData::trkpt_t::eAct20Bad;
     for(const CTrackData::trkpt_t &pt : data)
     {
-        allFlags |= pt.flags;
+        allFlags << pt.getAct();
 
         if(pt.isHidden())
         {
             continue;
         }
         lastTrkpt = &pt;
-        if((pt.flags & CTrackData::trkpt_t::eActMask) != lastFlag)
+        if(pt.getAct() != lastAct)
         {
             if(startTrkpt != nullptr)
             {
-                activity_summary_t& summary = activitySummary[lastFlag];
+                activity_summary_t& summary = activitySummary[lastAct];
                 summary.distance += pt.distance - startTrkpt->distance;
                 summary.ascent   += pt.ascent   - startTrkpt->ascent;
                 summary.descent  += pt.descent  - startTrkpt->descent;
@@ -216,13 +214,13 @@ void CActivityTrk::update()
                 activity.t1 = startTrkpt->time.toTime_t();
                 activity.t2 = pt.time.toTime_t();
 
-                const desc_t& desc = getDescriptor(lastFlag);
+                const desc_t& desc = getDescriptor(lastAct);
                 activity.name = desc.name;
                 activity.icon = desc.iconSmall;
             }
 
             startTrkpt  = &pt;
-            lastFlag    = pt.flags & CTrackData::trkpt_t::eActMask;
+            lastAct     = pt.getAct();
         }
     }
 
@@ -231,7 +229,7 @@ void CActivityTrk::update()
         return;
     }
 
-    activity_summary_t& summary = activitySummary[lastFlag];
+    activity_summary_t& summary = activitySummary[lastAct];
     summary.distance += lastTrkpt->distance - startTrkpt->distance;
     summary.ascent   += lastTrkpt->ascent   - startTrkpt->ascent;
     summary.descent  += lastTrkpt->descent  - startTrkpt->descent;
@@ -246,13 +244,9 @@ void CActivityTrk::update()
     activity.t1 = startTrkpt->time.toTime_t();
     activity.t2 = lastTrkpt->time.toTime_t();
 
-    const desc_t& desc = getDescriptor(lastFlag);
+    const desc_t& desc = getDescriptor(lastAct);
     activity.name = desc.name;
     activity.icon = desc.iconSmall;
-
-
-
-    allFlags &= CTrackData::trkpt_t::eActMask;
 
 //    for(int i = 0; i < 9; i++)
 //    {
@@ -271,7 +265,7 @@ void CActivityTrk::printSummary(QString& str) const
     printSummary(activitySummary, allFlags, str);
 }
 
-void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, quint32 flags, QString& str)
+void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, const QSet<quint32>& acts, QString& str)
 {
     QString val, unit;
     qreal total;
@@ -285,13 +279,13 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     QVector<const desc_t*> descs;
     for(const desc_t &desc : actDescriptor)
     {
-        if(flags & desc.flag)
+        if(acts.contains(desc.flag))
         {
             descs << &desc;
         }
     }
 
-    const activity_summary_t& sumActNone = summary[CTrackData::trkpt_t::eActNone];
+    const activity_summary_t& sumActNone = summary[CTrackData::trkpt_t::eAct20None];
 
     if(sumActNone.distance != 0)
     {
@@ -534,7 +528,7 @@ void CActivityTrk::getActivityNames(QStringList& names) const
 {
     for(const desc_t &desc : actDescriptor)
     {
-        if((allFlags & desc.flag) != 0)
+        if(allFlags.contains(desc.flag))
         {
             names << desc.name;
         }
@@ -546,13 +540,13 @@ qint32 CActivityTrk::getActivityCount() const
     qint32 cnt = 0;
     for(const desc_t &desc : actDescriptor)
     {
-        if((allFlags & desc.flag) != 0)
+        if(allFlags.contains(desc.flag))
         {
             ++cnt;
         }
     }
 
-    const activity_summary_t& sumActNone = activitySummary[CTrackData::trkpt_t::eActNone];
+    const activity_summary_t& sumActNone = activitySummary[CTrackData::trkpt_t::eAct20None];
 
     if(sumActNone.distance != 0)
     {

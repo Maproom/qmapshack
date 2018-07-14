@@ -357,6 +357,7 @@ QDataStream& operator>>(QDataStream& stream, CTrackData::trkpt_t& pt)
 {
     quint8 version;
     stream >> version >> pt.flags;
+    pt.sanitizeFlags();
     stream >> (IGisItem::wpt_t&)pt;
     if(version > 1)
     {

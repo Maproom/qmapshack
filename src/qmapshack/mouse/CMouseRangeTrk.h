@@ -21,6 +21,7 @@
 #define CMOUSERANGETRK_H
 
 #include "gis/IGisItem.h"
+#include "gis/trk/CTrackData.h"
 #include "mouse/IMouse.h"
 #include <QPointer>
 
@@ -47,7 +48,7 @@ public:
 private slots:
     void slotHidePoints();
     void slotShowPoints();
-    void slotActivity(quint32 flags);
+    void slotActivity(CTrackData::trkpt_t::act20_e act);
     void slotCopy();
 
 private:

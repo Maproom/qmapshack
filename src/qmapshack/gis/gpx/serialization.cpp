@@ -751,6 +751,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, CTrackData& trk)
             if(ext.isElement())
             {
                 readXml(ext, "ql:flags", trkpt.flags);
+                trkpt.sanitizeFlags();
                 readXml(ext, trkpt.extensions);
             }
         }

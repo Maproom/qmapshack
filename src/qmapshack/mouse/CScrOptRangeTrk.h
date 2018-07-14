@@ -19,6 +19,7 @@
 #ifndef CSCROPTRANGETRK_H
 #define CSCROPTRANGETRK_H
 
+#include "gis/trk/CTrackData.h"
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptRangeTrk.h"
 
@@ -35,7 +36,7 @@ public:
     void draw(QPainter& p) override;
 
 signals:
-    void activitySelected(quint32 flag);
+    void activitySelected(CTrackData::trkpt_t::act20_e act);
 
 private:
     void selectActivity();

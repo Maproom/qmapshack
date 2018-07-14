@@ -38,28 +38,47 @@ public:
 
         enum flag_e
         {
-             eFlagReserved1 = 0x00000001
+            eFlagReserved1 = 0x00000001
             ,eFlagReserved2 = 0x00000002
-            ,eFlagHidden    = 0x00000004      ///< mark point as deleted
-            ,eFlagSubpt     = 0x00000008
+            ,eFlagHidden    = 0x00000004    ///< mark point as deleted
+            ,eFlagSubpt     = 0x00000008    ///< point has been derived as subpoint in a route
+            ,eFlagAct20     = 0x00000010    ///< activity coding V2.0
         };
 
-        enum act_e
+        enum act10_e
         {
             // activity flags
-             eActNone   = 0x00000000
-            ,eActFoot   = 0x80000000
-            ,eActCycle  = 0x40000000
-            ,eActBike   = 0x20000000
-            ,eActCar    = 0x10000000
-            ,eActCable  = 0x08000000
-            ,eActSwim   = 0x04000000
-            ,eActShip   = 0x02000000
-            ,eActAero   = 0x01000000
-            ,eActSki    = 0x00800000
-            ,eActTrain  = 0x00400000
-            ,eActMask   = 0xFFC00000    ///< mask for activity flags
-            ,eActMaxNum = 10            ///< maximum number of activity flags. this is defined by the mask
+            eActNone       = 0x00000000
+            ,eActFoot       = 0x80000000
+            ,eActCycle      = 0x40000000
+            ,eActBike       = 0x20000000
+            ,eActCar        = 0x10000000
+            ,eActCable      = 0x08000000
+            ,eActSwim       = 0x04000000
+            ,eActShip       = 0x02000000
+            ,eActAero       = 0x01000000
+            ,eActSki        = 0x00800000
+            ,eActTrain      = 0x00400000
+            ,eActMask       = 0xFFC00000    ///< mask for activity flags
+        };
+
+        enum act20_e
+        {
+            eAct20None     = 0
+            ,eAct20Foot     = 10
+            ,eAct20Cycle    = 30
+            ,eAct20Bike     = 50
+            ,eAct20Car      = 70
+            ,eAct20Cable    = 90
+            ,eAct20Swim     = 110
+            ,eAct20Ship     = 130
+            ,eAct20Aero     = 150
+            ,eAct20Ski      = 170
+            ,eAct20Train    = 190
+            ,eAct20MaxNum   = 210
+            ,eAct20Mask     = 0xFFC00000    ///< mask for activity flags
+            ,eAct20Shift    = 22
+            ,eAct20Bad      = 1023
         };
 
         enum valid_e
@@ -101,16 +120,16 @@ public:
             flags &= ~flag;
         }
 
-        inline void setAct(enum act_e act)
+        inline void setAct(enum act20_e act)
         {
-            flags |= act;
+            flags &= ~eAct20Mask;
+            flags |= (act << eAct20Shift);
         }
 
-        inline void unsetAct(enum act_e act)
+        inline act20_e getAct() const
         {
-            flags &= ~act;
+            return act20_e((flags & eAct20Mask) >> eAct20Shift);
         }
-
 
         inline bool isValid(valid_e flag) const
         {
@@ -132,7 +151,15 @@ public:
             return GPS_Math_Distance(lon * DEG_TO_RAD, lat * DEG_TO_RAD, other.lon * DEG_TO_RAD, other.lat * DEG_TO_RAD);
         }
 
-        quint32 flags = 0;
+        inline void sanitizeFlags()
+        {
+            if((flags & eFlagAct20) == 0)
+            {
+                //todo
+            }
+        }
+
+        quint32 flags = eFlagAct20;
         quint32 valid = 0;
         qint32 idxTotal = NOIDX;            //< index within the complete track
         qint32 idxVisible;                  //< offset into lineSimple
@@ -147,6 +174,8 @@ public:
         qreal elapsedSecondsMoving;         //< the seconds since the start of the track with moving speed
         IGisItem::key_t keyWpt;             //< the key of an attached waypoint
         QHash<QString,QVariant> extensions; //< track point extensions
+
+        static const QMap<act10_e, act20_e> act1to2;
     };
 
     struct trkseg_t

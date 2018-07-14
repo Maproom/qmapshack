@@ -1007,8 +1007,8 @@ void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
         return;
     }
 
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
+    CTrackData::trkpt_t::act20_e act = CActivityTrk::selectActivity(this);
+    if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         QMutexLocker lock(&IGisItem::mutexItems);
 
@@ -1025,7 +1025,7 @@ void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
                     projects << project;
                 }
 
-                trk->setActivity(flags);
+                trk->setActivity(act);
             }
         }
 

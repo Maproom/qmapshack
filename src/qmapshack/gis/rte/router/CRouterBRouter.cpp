@@ -642,11 +642,20 @@ void CRouterBRouter::startBRouter() const
             brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
         }
         QTcpSocket socket;
-        socket.connectToHost(setup->localHost,setup->localPort.toInt());
         int counts = 10;
-        bool connected;
-        while (!(connected = socket.waitForConnected(100)) && counts > 0)
+        bool connected = false;
+        while (counts > 0)
         {
+            socket.connectToHost(setup->localHost,setup->localPort.toInt());
+            if (socket.waitForConnected(100))
+            {
+                connected = true;
+                break;
+            }
+            if (socket.error() != QAbstractSocket::ConnectionRefusedError)
+            {
+                break;
+            }
             QThread::msleep(100);
             counts--;
         }

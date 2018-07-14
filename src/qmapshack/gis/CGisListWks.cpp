@@ -1593,8 +1593,8 @@ void CGisListWks::slotCombineTrk()
 
 void CGisListWks::slotActivityTrk()
 {
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
+    CTrackData::trkpt_t::act20_e act = CActivityTrk::selectActivity(this);
+    if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         CGisListWksEditLock lock(true, IGisItem::mutexItems);
         QList<QTreeWidgetItem*> items = selectedItems();
@@ -1603,7 +1603,7 @@ void CGisListWks::slotActivityTrk()
             CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
             if(trk)
             {
-                trk->setActivity(flags);
+                trk->setActivity(act);
             }
         }
     }

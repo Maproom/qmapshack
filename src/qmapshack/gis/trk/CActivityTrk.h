@@ -19,11 +19,14 @@
 #ifndef CACTIVITYTRK_H
 #define CACTIVITYTRK_H
 
+#include <gis/trk/CTrackData.h>
+
 #include <QCoreApplication>
 #include <QIcon>
 #include <QMap>
 #include <QMenu>
 #include <QPointer>
+#include <QSet>
 #include <QVector>
 class CGisItemTrk;
 
@@ -88,9 +91,9 @@ public:
 
     /**
        @brief Get sum of all flags seen in the track
-       @return A 32 bit field with all available activity flags set.
+       @return A QSet with all activity ids in the track
      */
-    quint32 getAllFlags() const
+    const QSet<quint32>& getAllFlags() const
     {
         return allFlags;
     }
@@ -99,7 +102,7 @@ public:
 
     void getActivityNames(QStringList& names) const;
 
-    static quint32 selectActivity(QWidget *parent);
+    static CTrackData::trkpt_t::act20_e selectActivity(QWidget *parent);
 
     /**
        @brief Convert internal summary to HTML table
@@ -112,7 +115,7 @@ public:
        @param summary  The array of summaries
        @param str   string to receive HTML
      */
-    static void printSummary(const QMap<quint32, activity_summary_t> &summary, quint32 flags, QString& str);
+    static void printSummary(const QMap<quint32, activity_summary_t> &summary, const QSet<quint32> &acts, QString& str);
 
 
     /**
@@ -145,7 +148,7 @@ private:
     static const desc_t dummyDesc;
 
     CGisItemTrk * trk;
-    quint32 allFlags;
+    QSet<quint32> allFlags;
     QList<activity_range_t> activityRanges;
     QMap<quint32, activity_summary_t> activitySummary;
 };

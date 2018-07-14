@@ -1211,7 +1211,7 @@ void IPlot::drawTags(QPainter& p)
 
 void IPlot::drawActivities(QPainter& p)
 {
-    if((mode == eModeIcon) || (trk->getActivities().getAllFlags() == 0))
+    if((mode == eModeIcon) || (trk->getActivities().getAllFlags().isEmpty()))
     {
         return;
     }
@@ -1335,9 +1335,9 @@ void IPlot::slotShowPoints()
     slotStopRange();
 }
 
-void IPlot::slotActivity(quint32 flags)
+void IPlot::slotActivity(CTrackData::trkpt_t::act20_e act)
 {
-    trk->setActivityRange(flags);
+    trk->setActivityRange(act);
     slotStopRange();
 }
 

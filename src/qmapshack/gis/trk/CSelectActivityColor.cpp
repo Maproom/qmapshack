@@ -68,45 +68,40 @@ void CSelectActivityColor::updateData()
         return;
     }
 
-    const CActivityTrk& act = trk->getActivities();
-    quint32 flags           = act.getAllFlags();
-    quint32 mask            = 0x80000000;
-    qint32 cnt              = 0;
-    for(quint32 i = 0; i < CTrackData::trkpt_t::eActMaxNum; i++)
+    const CActivityTrk& act     = trk->getActivities();
+    const QSet<quint32>& acts   = act.getAllFlags();
+    for(quint32 i = 0; i < CTrackData::trkpt_t::eAct20MaxNum; i++)
     {
-        if((flags & mask) != 0)
+        if(!acts.contains(i))
         {
-            const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(mask);
-
-            QLabel * label = new QLabel(this);
-            label->setMinimumSize(16,16);
-            label->setMaximumSize(16,16);
-            label->setPixmap(desc.iconSmall);
-            label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
-            horizontalLayout->addWidget(label);
-
-            allActLabels << label;
-
-            QPixmap pixmap(16,16);
-            pixmap.fill(desc.color);
-
-            QToolButton * button = new QToolButton(this);
-            button->setToolButtonStyle(Qt::ToolButtonIconOnly);
-            button->setAutoRaise(true);
-            button->setIcon(QIcon(pixmap));
-            button->setProperty("color", desc.color.name());
-            button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
-            horizontalLayout->addWidget(button);
-
-            auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, mask);
-            connect(button, &QToolButton::clicked, this, setColorFunc);
-
-            allActColors << button;
-
-            ++cnt;
+            continue;
         }
+        const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(i);
 
-        mask >>= 1;
+        QLabel * label = new QLabel(this);
+        label->setMinimumSize(16,16);
+        label->setMaximumSize(16,16);
+        label->setPixmap(desc.iconSmall);
+        label->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
+        horizontalLayout->addWidget(label);
+
+        allActLabels << label;
+
+        QPixmap pixmap(16,16);
+        pixmap.fill(desc.color);
+
+        QToolButton * button = new QToolButton(this);
+        button->setToolButtonStyle(Qt::ToolButtonIconOnly);
+        button->setAutoRaise(true);
+        button->setIcon(QIcon(pixmap));
+        button->setProperty("color", desc.color.name());
+        button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
+        horizontalLayout->addWidget(button);
+
+        auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, i);
+        connect(button, &QToolButton::clicked, this, setColorFunc);
+
+        allActColors << button;
     }
 
     QSpacerItem * spacer = new QSpacerItem(0,0,QSizePolicy::Minimum, QSizePolicy::Minimum);

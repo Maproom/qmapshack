@@ -378,8 +378,8 @@ void CDetailsTrk::updateData()
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
-    quint32 flags = trk.getActivities().getAllFlags();
-    bool hasActivity = 0 != (flags & CTrackData::trkpt_t::eActMask);
+    const QSet<quint32>& flags = trk.getActivities().getAllFlags();
+    bool hasActivity           = !flags.isEmpty();
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
     pushSetActivities->setEnabled(!isReadOnly);
@@ -669,10 +669,10 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 
 void CDetailsTrk::slotSetActivities()
 {
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
+    CTrackData::trkpt_t::act20_e act = CActivityTrk::selectActivity(this);
+    if(CTrackData::trkpt_t::eAct20Bad != act)
     {
-        trk.setActivity(flags);
+        trk.setActivity(act);
     }
 }
 

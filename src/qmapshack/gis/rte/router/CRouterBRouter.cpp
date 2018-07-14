@@ -647,7 +647,7 @@ void CRouterBRouter::startBRouter() const
         while (counts > 0)
         {
             socket.connectToHost(setup->localHost,setup->localPort.toInt());
-            if (socket.waitForConnected(100))
+            if (socket.waitForConnected())
             {
                 connected = true;
                 break;

@@ -58,6 +58,24 @@ static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
     }
 }
 
+static void readXml(const QDomNode& xml, const QString& tag, CTrackData::trkpt_t::act20_e& value)
+{
+    if(xml.namedItem(tag).isElement())
+    {
+        bool ok = false;
+        qint32 tmp = xml.namedItem(tag).toElement().text().toInt(&ok);
+        if(!ok)
+        {
+            value = CTrackData::trkpt_t::eAct20None;
+        }
+        else
+        {
+            value = CTrackData::trkpt_t::act20_e(tmp);
+        }
+    }
+}
+
+
 template<typename T>
 static void readXml(const QDomNode& xml, const QString& tag, T& value)
 {
@@ -300,7 +318,7 @@ static void writeXml(QDomNode& xml, const QString& tag, const QPoint& offsetBubb
 static void readXml(const QDomNode& node, const QString& parentTags, QHash<QString, QVariant>& extensions)
 {
     QString tag = node.nodeName();
-    if(tag.left(8) == "ql:flags")
+    if((tag.left(8) == "ql:flags") || (tag.left(11) == "ql:activity"))
     {
         return;
     }
@@ -751,6 +769,7 @@ void CGisItemTrk::readTrk(const QDomNode& xml, CTrackData& trk)
             if(ext.isElement())
             {
                 readXml(ext, "ql:flags", trkpt.flags);
+                readXml(ext, "ql:activity", trkpt.activity);
                 trkpt.sanitizeFlags();
                 readXml(ext, trkpt.extensions);
             }
@@ -821,6 +840,7 @@ void CGisItemTrk::save(QDomNode& gpx, bool strictGpx11)
                 QDomElement xmlExt  = doc.createElement("extensions");
                 xmlTrkpt.appendChild(xmlExt);
                 writeXml(xmlExt, "ql:flags", pt.flags);
+                writeXml(xmlExt, "ql:activity", pt.activity);
                 writeXml(xmlExt, pt.extensions);
             }
         }

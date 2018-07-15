@@ -42,9 +42,14 @@ public:
             ,eFlagReserved2 = 0x00000002
             ,eFlagHidden    = 0x00000004    ///< mark point as deleted
             ,eFlagSubpt     = 0x00000008    ///< point has been derived as subpoint in a route
-            ,eFlagAct20     = 0x00000010    ///< activity coding V2.0
         };
 
+        /**
+           @brief Old activity flags
+
+           These are used for backward compatibility. Do not add any
+           new value.
+         */
         enum act10_e
         {
             // activity flags
@@ -62,6 +67,11 @@ public:
             ,eActMask       = 0xFFC00000    ///< mask for activity flags
         };
 
+        /**
+           @brief New activity enumeration
+
+           Add new activities here. This is limited to 16bit signed (2^15) values.
+         */
         enum act20_e
         {
             eAct20None     = 0
@@ -75,10 +85,8 @@ public:
             ,eAct20Aero     = 150
             ,eAct20Ski      = 170
             ,eAct20Train    = 190
-            ,eAct20MaxNum   = 210
-            ,eAct20Mask     = 0xFFC00000    ///< mask for activity flags
-            ,eAct20Shift    = 22
-            ,eAct20Bad      = 1023
+            ,eAct20MaxNum   = 210       ///< limit to speed up for loops
+            ,eAct20Bad      = 0x7FFF
         };
 
         enum valid_e
@@ -122,13 +130,17 @@ public:
 
         inline void setAct(enum act20_e act)
         {
-            flags &= ~eAct20Mask;
-            flags |= (act << eAct20Shift);
+            activity = act;
+            if(act2to1.contains(activity))
+            {
+                flags &= ~eActMask;
+                flags |= act2to1[activity];
+            }
         }
 
         inline act20_e getAct() const
         {
-            return act20_e((flags & eAct20Mask) >> eAct20Shift);
+            return activity;
         }
 
         inline bool isValid(valid_e flag) const
@@ -153,13 +165,18 @@ public:
 
         inline void sanitizeFlags()
         {
-            if((flags & eFlagAct20) == 0)
+            if((activity == eAct20None))
             {
-                //todo
+                act10_e act = act10_e(flags & eActMask);
+                if(act1to2.contains(act))
+                {
+                    activity = act1to2[act];
+                }
             }
         }
 
-        quint32 flags = eFlagAct20;
+        act20_e activity = eAct20None;
+        quint32 flags = 0;
         quint32 valid = 0;
         qint32 idxTotal = NOIDX;            //< index within the complete track
         qint32 idxVisible;                  //< offset into lineSimple
@@ -176,6 +193,7 @@ public:
         QHash<QString,QVariant> extensions; //< track point extensions
 
         static const QMap<act10_e, act20_e> act1to2;
+        static const QMap<act20_e, act10_e> act2to1;
     };
 
     struct trkseg_t

@@ -16,6 +16,21 @@ const QMap<CTrackData::trkpt_t::act10_e, CTrackData::trkpt_t::act20_e> CTrackDat
     ,{CTrackData::trkpt_t::eActTrain,   CTrackData::trkpt_t::eAct20Train}
 };
 
+const QMap<CTrackData::trkpt_t::act20_e, CTrackData::trkpt_t::act10_e> CTrackData::trkpt_t::act2to1
+{
+    {CTrackData::trkpt_t::eAct20None,     CTrackData::trkpt_t::eActNone}
+    ,{CTrackData::trkpt_t::eAct20Foot,    CTrackData::trkpt_t::eActFoot}
+    ,{CTrackData::trkpt_t::eAct20Cycle,   CTrackData::trkpt_t::eActCycle}
+    ,{CTrackData::trkpt_t::eAct20Bike,    CTrackData::trkpt_t::eActBike}
+    ,{CTrackData::trkpt_t::eAct20Car,     CTrackData::trkpt_t::eActCar}
+    ,{CTrackData::trkpt_t::eAct20Cable,   CTrackData::trkpt_t::eActCable}
+    ,{CTrackData::trkpt_t::eAct20Swim,    CTrackData::trkpt_t::eActSwim}
+    ,{CTrackData::trkpt_t::eAct20Ship,    CTrackData::trkpt_t::eActShip}
+    ,{CTrackData::trkpt_t::eAct20Aero,    CTrackData::trkpt_t::eActAero}
+    ,{CTrackData::trkpt_t::eAct20Ski,     CTrackData::trkpt_t::eActSki}
+    ,{CTrackData::trkpt_t::eAct20Train,   CTrackData::trkpt_t::eActTrain}
+};
+
 
 CTrackData::CTrackData(const QString &name, const CTrackData &other, qint32 rangeStart, qint32 rangeEnd) : name(name)
 {

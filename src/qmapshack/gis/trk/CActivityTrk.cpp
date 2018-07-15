@@ -23,16 +23,17 @@
 
 QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
+#define DESCRIPTOR_ENTRY(name, icon, enumAct, colorIdx) \
+    { \
+        name \
+        , CTrackData::trkpt_t::enumAct \
+        , tr(name) \
+        , "://icons/48x48/" icon \
+        , "://icons/16x16/" icon \
+        , IGisItem::colorMap[colorIdx].color \
+    }
 
-const CActivityTrk::desc_t CActivityTrk::dummyDesc =
-{
-    "-"
-    , CTrackData::trkpt_t::eAct20None
-    , "-"
-    , "://icons/48x48/ActNone.png"
-    , "://icons/16x16/ActNone.png"
-    , QColor()
-};
+const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, 16);
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
@@ -44,89 +45,17 @@ void CActivityTrk::init()
 {
     actDescriptor =
     {
-        { // 0
-            "Foot"
-            , CTrackData::trkpt_t::eAct20Foot
-            , tr("Foot")
-            , "://icons/48x48/ActFoot.png"
-            , "://icons/16x16/ActFoot.png"
-            , IGisItem::colorMap[0].color
-        },
-        { // 1
-            "Cycle"
-            , CTrackData::trkpt_t::eAct20Cycle
-            , tr("Bicycle")
-            , "://icons/48x48/ActCycle.png"
-            , "://icons/16x16/ActCycle.png"
-            , IGisItem::colorMap[1].color
-        },
-        { // 2
-            "Bike"
-            , CTrackData::trkpt_t::eAct20Bike
-            , tr("Motor Bike")
-            , "://icons/48x48/ActBike.png"
-            , "://icons/16x16/ActBike.png"
-            , IGisItem::colorMap[2].color
-        },
-        { // 3
-            "Car"
-            , CTrackData::trkpt_t::eAct20Car
-            , tr("Car")
-            , "://icons/48x48/ActCar.png"
-            , "://icons/16x16/ActCar.png"
-            , IGisItem::colorMap[3].color
-        },
-        { // 4
-            "Cable"
-            , CTrackData::trkpt_t::eAct20Cable
-            , tr("Cable Car")
-            , "://icons/48x48/ActCable.png"
-            , "://icons/16x16/ActCable.png"
-            , IGisItem::colorMap[4].color
-        },
-        { // 5
-            "Swim"
-            , CTrackData::trkpt_t::eAct20Swim
-            , tr("Swim")
-            , "://icons/48x48/ActSwim.png"
-            , "://icons/16x16/ActSwim.png"
-            , IGisItem::colorMap[5].color
-        },
-        { // 6
-            "Ship"
-            , CTrackData::trkpt_t::eAct20Ship
-            , tr("Ship")
-            , "://icons/48x48/ActShip.png"
-            , "://icons/16x16/ActShip.png"
-            , IGisItem::colorMap[6].color
-        },
-        { // 7
-            "Aeronautik"
-            , CTrackData::trkpt_t::eAct20Aero
-            , tr("Aeronautics")
-            , "://icons/48x48/ActAero.png"
-            , "://icons/16x16/ActAero.png"
-            , IGisItem::colorMap[7].color
-        },
-        { // 8
-            "Ski/Winter"
-            , CTrackData::trkpt_t::eAct20Ski
-            , tr("Ski/Winter")
-            , "://icons/48x48/ActSki.png"
-            , "://icons/16x16/ActSki.png"
-            , IGisItem::colorMap[8].color
-        },
-        { // 9
-            "Train"
-            , CTrackData::trkpt_t::eAct20Train
-            , tr("Public Transport")
-            , "://icons/48x48/ActTrain.png"
-            , "://icons/16x16/ActTrain.png"
-            , IGisItem::colorMap[9].color
-        }
+        DESCRIPTOR_ENTRY("Foot",               "ActFoot.png",  eAct20Foot,     0)
+        ,DESCRIPTOR_ENTRY("Bicycle",            "ActCycle.png", eAct20Cycle,    1)
+        ,DESCRIPTOR_ENTRY("Motor Bike",         "ActBike.png",  eAct20Bike,     2)
+        ,DESCRIPTOR_ENTRY("Car",                "ActCar.png",   eAct20Car,      3)
+        ,DESCRIPTOR_ENTRY("Cable Car",          "ActCable.png", eAct20Cable,    4)
+        ,DESCRIPTOR_ENTRY("Swim",               "ActSwim.png",  eAct20Swim,     5)
+        ,DESCRIPTOR_ENTRY("Ship",               "ActShip.png",  eAct20Ship,     6)
+        ,DESCRIPTOR_ENTRY("Aeronautik",         "ActAero.png",  eAct20Aero,     7)
+        ,DESCRIPTOR_ENTRY("Ski/Winter",         "ActSki.png",   eAct20Ski,      8)
+        ,DESCRIPTOR_ENTRY("Public Transport",   "ActTrain.png", eAct20Train,    9)
     };
-
-
 
     SETTINGS;
     cfg.beginGroup("Activities");

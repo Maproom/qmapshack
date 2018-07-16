@@ -30,7 +30,7 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , tr(name) \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
-        , IGisItem::colorMap[colorIdx].color \
+        , IGisItem::colorMap[qMax(colorIdx,16)].color \
     }
 
 const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, 16);
@@ -52,7 +52,7 @@ void CActivityTrk::init()
         ,DESCRIPTOR_ENTRY("Cable Car",          "ActCable.png", eAct20Cable,    4)
         ,DESCRIPTOR_ENTRY("Swim",               "ActSwim.png",  eAct20Swim,     5)
         ,DESCRIPTOR_ENTRY("Ship",               "ActShip.png",  eAct20Ship,     6)
-        ,DESCRIPTOR_ENTRY("Aeronautik",         "ActAero.png",  eAct20Aero,     7)
+        ,DESCRIPTOR_ENTRY("Aeronautic",         "ActAero.png",  eAct20Aero,     7)
         ,DESCRIPTOR_ENTRY("Ski/Winter",         "ActSki.png",   eAct20Ski,      8)
         ,DESCRIPTOR_ENTRY("Public Transport",   "ActTrain.png", eAct20Train,    9)
     };
@@ -106,7 +106,7 @@ CTrackData::trkpt_t::act20_e CActivityTrk::selectActivity(QWidget *parent)
 
 void CActivityTrk::update()
 {
-    allFlags.clear();
+    allActivities.clear();
     activityRanges.clear();
     activitySummary.clear();
 
@@ -117,7 +117,7 @@ void CActivityTrk::update()
     CTrackData::trkpt_t::act20_e lastAct = CTrackData::trkpt_t::eAct20Bad;
     for(const CTrackData::trkpt_t &pt : data)
     {
-        allFlags << pt.getAct();
+        allActivities << pt.getAct();
 
         if(pt.isHidden())
         {
@@ -191,7 +191,7 @@ void CActivityTrk::update()
 
 void CActivityTrk::printSummary(QString& str) const
 {
-    printSummary(activitySummary, allFlags, str);
+    printSummary(activitySummary, allActivities, str);
 }
 
 void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, const QSet<quint32>& acts, QString& str)
@@ -457,7 +457,7 @@ void CActivityTrk::getActivityNames(QStringList& names) const
 {
     for(const desc_t &desc : actDescriptor)
     {
-        if(allFlags.contains(desc.flag))
+        if(allActivities.contains(desc.flag))
         {
             names << desc.name;
         }
@@ -466,22 +466,5 @@ void CActivityTrk::getActivityNames(QStringList& names) const
 
 qint32 CActivityTrk::getActivityCount() const
 {
-    qint32 cnt = 0;
-    for(const desc_t &desc : actDescriptor)
-    {
-        if(allFlags.contains(desc.flag))
-        {
-            ++cnt;
-        }
-    }
-
-    const activity_summary_t& sumActNone = activitySummary[CTrackData::trkpt_t::eAct20None];
-
-    if(sumActNone.distance != 0)
-    {
-        cnt++;
-    }
-
-
-    return cnt;
+    return allActivities.size();
 }

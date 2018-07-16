@@ -90,12 +90,12 @@ public:
     void update();
 
     /**
-       @brief Get sum of all flags seen in the track
+       @brief Get sum of all activities seen in the track
        @return A QSet with all activity ids in the track
      */
-    const QSet<quint32>& getAllFlags() const
+    const QSet<quint32>& getAllActivities() const
     {
-        return allFlags;
+        return allActivities;
     }
 
     qint32 getActivityCount() const;
@@ -148,7 +148,7 @@ private:
     static const desc_t dummyDesc;
 
     CGisItemTrk * trk;
-    QSet<quint32> allFlags;
+    QSet<quint32> allActivities;
     QList<activity_range_t> activityRanges;
     QMap<quint32, activity_summary_t> activitySummary;
 };

@@ -131,11 +131,12 @@ public:
         inline void setAct(enum act20_e act)
         {
             activity = act;
+            flags &= ~eActMask;
             if(act2to1.contains(activity))
-            {
-                flags &= ~eActMask;
+            {                
                 flags |= act2to1[activity];
             }
+
         }
 
         inline act20_e getAct() const

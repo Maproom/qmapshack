@@ -379,7 +379,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
     for(const CGisItemTrk* trk : trks)
     {
         const CActivityTrk& activities = trk->getActivities();
-        acts += activities.getAllFlags();
+        acts += activities.getAllActivities();
         activities.sumUp(summaries);
     }
 

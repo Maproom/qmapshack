@@ -1211,7 +1211,7 @@ void IPlot::drawTags(QPainter& p)
 
 void IPlot::drawActivities(QPainter& p)
 {
-    if((mode == eModeIcon) || (trk->getActivities().getAllFlags().isEmpty()))
+    if((mode == eModeIcon) || (trk->getActivities().getAllActivities().isEmpty()))
     {
         return;
     }

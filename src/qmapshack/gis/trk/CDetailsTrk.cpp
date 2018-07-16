@@ -378,7 +378,7 @@ void CDetailsTrk::updateData()
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
-    const QSet<quint32>& flags = trk.getActivities().getAllFlags();
+    const QSet<quint32>& flags = trk.getActivities().getAllActivities();
     bool hasActivity           = !flags.isEmpty();
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);

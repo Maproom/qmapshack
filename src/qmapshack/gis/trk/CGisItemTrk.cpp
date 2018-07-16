@@ -364,7 +364,7 @@ QString CGisItemTrk::getInfo(quint32 feature) const
     QString str = "<div>";
 
     qint32 actCnt                   = activities.getActivityCount();
-    const QSet<quint32>& actFlags   = activities.getAllFlags();
+    const QSet<quint32>& actFlags   = activities.getAllActivities();
 
     if(feature & eFeatureShowName)
     {

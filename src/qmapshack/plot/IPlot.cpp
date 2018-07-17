@@ -543,6 +543,8 @@ void IPlot::wheelEvent(QWheelEvent * e)
     QToolTip::showText(p,tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
     needsRedraw = true;
     update();
+
+    e->accept();
 }
 
 void IPlot::setSizes()

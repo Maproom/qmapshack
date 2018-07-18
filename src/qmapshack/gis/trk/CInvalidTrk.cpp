@@ -17,6 +17,7 @@
 **********************************************************************************************/
 
 #include "canvas/CCanvas.h"
+#include "gis/prj/IGisProject.h"
 #include "gis/trk/CInvalidTrk.h"
 
 #include <QMessageBox>
@@ -29,6 +30,7 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
     setupUi(this);
 
     connect(pushButton, &QPushButton::clicked, this, &CInvalidTrk::slotShowDetails);
+    connect(checkDoNotAskAgain, &QCheckBox::clicked, this, &CInvalidTrk::slotDoNotAskAgain);
 
     int s = QApplication::style()->pixelMetric(QStyle::PM_MessageBoxIconSize);
     labelIcon->setPixmap( QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(s,s));
@@ -40,7 +42,7 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
                       .arg(trk.getNumberOfVisiblePoints()));
 
     treeTrackPoints->hide();
-    treeTrackPoints->setTrack(&trk);    
+    treeTrackPoints->setTrack(&trk);
 
     adjustSize();
 
@@ -61,13 +63,24 @@ void CInvalidTrk::slotShowDetails()
     }
     else
     {
-        treeTrackPoints->show();        
+        treeTrackPoints->show();
         treeTrackPoints->showTopItem();
         treeTrackPoints->showNextInvalid();
         pushButton->setText(tr("Hide Details..."));
     }
 
     adjustSize();
+}
+
+void CInvalidTrk::slotDoNotAskAgain(bool checked)
+{
+    IGisProject * project = trk.getParentProject();
+    if(project != nullptr)
+    {
+        project->setInvalidDataOk(checked);
+    }
+
+    buttonBox->button(QDialogButtonBox::Yes)->setEnabled(!checked);
 }
 
 void CInvalidTrk::accept()

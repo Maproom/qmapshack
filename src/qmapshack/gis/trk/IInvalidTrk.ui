@@ -49,6 +49,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QCheckBox" name="checkDoNotAskAgain">
+         <property name="text">
+          <string>Do not ask again for this project</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
           <widget class="QPushButton" name="pushButton">

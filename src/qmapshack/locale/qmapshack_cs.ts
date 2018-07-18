@@ -2170,27 +2170,27 @@ line %2, column %3:
         <translation>Není souborem GPX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="273"/>
         <source>File exists ...</source>
         <translation>Soubor existuje...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="269"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="274"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Soubor existuje a nebyl vytvořen programem QMapShack. Pokud stisknete Ano, budou všechna data v tomto souboru ztracena. I když by tento soubor obsahoval data GPX a byl nahrán programem QMapShack, QMapShack nemusí být schopen nahrát a uložit všechny prvky tohoto souboru.  Tyto prvky budou ztraceny. Doporučuje se použít jiný soubor. &lt;b&gt;Opravdu chcete soubor přepsat?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="386"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="398"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Nepodařilo se vytvořit soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Nepodařilo se zapsat soubor &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="420"/>
         <source>Saving GIS data failed...</source>
         <translation>Nepodařilo se uložit data GIS...</translation>
     </message>
@@ -2267,17 +2267,17 @@ line %2, column %3:
 <context>
     <name>CInvalidTrk</name>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="36"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="38"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="60"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="62"/>
         <source>Show Details...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="65"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="69"/>
         <source>Hide Details...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -5298,62 +5298,62 @@ line %2, column %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="60"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="108"/>
         <source>Time</source>
         <translation type="unfinished">Čas</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="61"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="109"/>
         <source>Ele.</source>
         <translation type="unfinished">Výška</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="62"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
         <source>Delta</source>
         <translation type="unfinished">Rozdíl</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="63"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
         <source>Dist.</source>
         <translation type="unfinished">Vzdál.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="64"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
         <source>Speed</source>
         <translation type="unfinished">Rychlost</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="65"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
         <source>Slope</source>
         <translation type="unfinished">Sklon</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="66"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
         <source>Ascend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="67"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descend</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="68"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
         <source>Position</source>
         <translation type="unfinished">Poloha</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="164"/>
         <source>Double click to edit elevation value</source>
         <translation>Dvakrát klepněte pro upravení hodnoty výšky</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="142"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="150"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="153"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="158"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="172"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="174"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="191"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="199"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="202"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="207"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="221"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="223"/>
         <source>%1%2</source>
         <translation type="unfinished">%1%2</translation>
     </message>
@@ -7943,7 +7943,12 @@ Název souboru: %1</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IInvalidTrk.ui" line="56"/>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
+        <source>Do not ask again for this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
         <source>Show Details...</source>
         <translation type="unfinished"></translation>
     </message>

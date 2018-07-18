@@ -2745,20 +2745,15 @@ bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
 
 void CGisItemTrk::checkForInvalidPoints()
 {
+    IGisProject * project = getParentProject();
+    if(project && project->getInvalidDataOk())
+    {
+        return;
+    }
+
     if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
     {
         CInvalidTrk dlg(*this, CMainWindow::self().getBestWidgetForParent());
-        int res = dlg.exec();
-
-        qDebug() << res;
-
-//        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Invalid points...."),
-//                                        tr("The track '%1' has %2 invalid points out of %3 visible points. "
-//                                           "Do you want to hide invalid points now?").arg(getName()).arg(cntInvalidPoints).arg(cntVisiblePoints),
-//                                        QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-//        if(res == QMessageBox::Yes)
-//        {
-//            filterRemoveInvalidPoints();
-//        }
+        dlg.exec();
     }
 }

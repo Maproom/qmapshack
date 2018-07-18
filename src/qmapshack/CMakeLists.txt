@@ -156,6 +156,7 @@ set( SRCS
     gis/trk/CCutTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CGisItemTrk.cpp
+    gis/trk/CInvalidTrk.cpp
     gis/trk/CKnownExtension.cpp
     gis/trk/CPropertyTrk.cpp
     gis/trk/CScrOptTrk.cpp
@@ -471,6 +472,7 @@ set( HDRS
     gis/trk/CCutTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CGisItemTrk.h
+    gis/trk/CInvalidTrk.h
     gis/trk/CKnownExtension.h
     gis/trk/CPropertyTrk.h
     gis/trk/CScrOptTrk.h
@@ -699,6 +701,7 @@ set( UIS
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/IDetailsTrk.ui
+    gis/trk/IInvalidTrk.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui
     gis/trk/filter/IFilterChangeStartPoint.ui

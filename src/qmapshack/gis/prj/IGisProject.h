@@ -57,8 +57,9 @@ public:
     /// flags used to serialize trivial flags in qms file
     enum flags_e
     {
-        eFlagNoCorrelation  = 0x1
-        , eFlagAutoSave     = 0x2
+        eFlagNoCorrelation      = 0x1
+        , eFlagAutoSave         = 0x2
+        , eFlagInvalidDataOk    = 0x4
     };
 
     enum sorting_roadbook_e
@@ -366,6 +367,17 @@ public:
 
     void setAutoSave(bool on);
 
+    void setInvalidDataOk(bool ok)
+    {
+        invalidDataOk = ok;
+        setChanged();
+    }
+
+    bool getInvalidDataOk() const
+    {
+        return invalidDataOk;
+    }
+
     /**
        @brief Receive the current mouse position
 
@@ -558,12 +570,13 @@ protected:
     type_e type;
     mutable QString key;
     QString filename;
-    bool valid         = false;
-    bool noUpdate      = false;
-    bool noCorrelation = false;
-    bool changedRoadbookMode = false;
-    bool autoSave      = false; ///< flag to show if auto save is on or off
-    bool autoSavePending = false; ///< flag to show if auto save event has been sent. will be reset by save()
+    bool valid                  = false;
+    bool noUpdate               = false;
+    bool noCorrelation          = false;
+    bool changedRoadbookMode    = false;
+    bool autoSave               = false; ///< flag to show if auto save is on or off
+    bool autoSavePending        = false; ///< flag to show if auto save event has been sent. will be reset by save()
+    bool invalidDataOk          = false; ///< if set invalid data in GIS items will not raise any dialog
 
     metadata_t metadata;
     QString nameSuffix;

@@ -35,6 +35,7 @@ public slots:
 
 private slots:
     void slotShowDetails();
+    void slotDoNotAskAgain(bool checked);
 
 private:
     CGisItemTrk& trk;

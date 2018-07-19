@@ -35,6 +35,12 @@ CInvalidTrk::CInvalidTrk(CGisItemTrk &trk, QWidget *parent)
     int s = QApplication::style()->pixelMetric(QStyle::PM_MessageBoxIconSize);
     labelIcon->setPixmap( QApplication::style()->standardIcon(QStyle::SP_MessageBoxQuestion).pixmap(s,s));
 
+    IGisProject * p = trk.getParentProject();
+    if(p != nullptr && !p->getName().isEmpty())
+    {
+        labelName->setText("<b>" + p->getName() + ":</b>");
+    }
+
     labelMsg->setText(tr("The track '%1' has %2 invalid points out of %3 visible points. "
                          "Do you want to hide invalid points now?")
                       .arg(trk.getName())

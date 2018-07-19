@@ -78,7 +78,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
-    QTimer::singleShot(500, treeWks, SLOT(slotLoadWorkspace()));
+    QTimer::singleShot(1000, treeWks, SLOT(slotLoadWorkspace()));
 }
 
 CGisWorkspace::~CGisWorkspace()

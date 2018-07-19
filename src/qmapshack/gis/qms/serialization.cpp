@@ -605,6 +605,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     setColor(str2color(trk.color));
     setText(   CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+
+    checkForInvalidPoints();
     return stream;
 }
 

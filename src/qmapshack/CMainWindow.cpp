@@ -431,8 +431,6 @@ CMainWindow::CMainWindow()
     }
 
 
-    loadGISData(qlOpts->arguments);
-
     QTimer::singleShot(100, this, SLOT(slotSanityTest()));
 }
 

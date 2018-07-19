@@ -852,133 +852,140 @@ void CGisListWks::slotLoadWorkspace()
 
     QUERY_RUN("SELECT type, keyqms, name, changed, visible, data FROM workspace", return )
 
-    const int total = query.size();
-    PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
-    quint32 progCnt = 0;
+    { // open context for progress dialog
+        const int total = query.size();
+        PROGRESS_SETUP(tr("Loading workspace. Please wait."), 0, total, this);
+        quint32 progCnt = 0;
 
-    while(query.next())
-    {
-        PROGRESS(progCnt++, return );
-
-        int type               = query.value(0).toInt();
-        QString name           = query.value(2).toString();
-        bool changed           = query.value(3).toBool();
-        Qt::CheckState visible = query.value(4).toBool() ? Qt::Checked : Qt::Unchecked;
-        QByteArray data        = query.value(5).toByteArray();
-
-        QDataStream stream(&data, QIODevice::ReadOnly);
-        stream.setVersion(QDataStream::Qt_5_2);
-        stream.setByteOrder(QDataStream::LittleEndian);
-
-        IGisProject *project = nullptr;
-        switch(type)
+        while(query.next())
         {
-        case IGisProject::eTypeQms:
-        {
-            project = new CQmsProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
-            *project << stream;
-            break;
-        }
+            PROGRESS(progCnt++, return );
 
-        case IGisProject::eTypeQlb:
-        {
-            project = new CQlbProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
-            *project << stream;
-            break;
-        }
+            int type               = query.value(0).toInt();
+            QString name           = query.value(2).toString();
+            bool changed           = query.value(3).toBool();
+            Qt::CheckState visible = query.value(4).toBool() ? Qt::Checked : Qt::Unchecked;
+            QByteArray data        = query.value(5).toByteArray();
 
-        case IGisProject::eTypeGpx:
-        {
-            project = new CGpxProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1b)
-            *project << stream;
-            break;
-        }
+            QDataStream stream(&data, QIODevice::ReadOnly);
+            stream.setVersion(QDataStream::Qt_5_2);
+            stream.setByteOrder(QDataStream::LittleEndian);
 
-        case IGisProject::eTypeDb:
-        {
-            CDBProject * dbProject;
-            project = dbProject = new CDBProject(this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1c)
-
-            project->IGisProject::operator<<(stream);
-            dbProject->restoreDBLink();
-
-            if(!project->isValid())
+            IGisProject *project = nullptr;
+            switch(type)
             {
-                delete project;
-                project = nullptr;
-            }
-            else
+            case IGisProject::eTypeQms:
             {
-                dbProject->postStatus(false);
+                project = new CQmsProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
+                *project << stream;
+                break;
             }
-            break;
-        }
 
-        case IGisProject::eTypeSlf:
-        {
-            project = new CSlfProject(name, false);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1d)
-            *project << stream;
-
-            // the CSlfProject does not - as the other C*Project - register itself in the list
-            // of currently opened projects. This is done manually here.
-            addProject(project);
-            break;
-        }
-
-        case IGisProject::eTypeFit:
-        {
-            project = new CFitProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
-            *project << stream;
-            break;
-        }
-
-        case IGisProject::eTypeTcx:
-        {
-            project = new CTcxProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
-            *project << stream;
-            break;
-        }
-
-        case IGisProject::eTypeSml:
-        {
-            project = new CSmlProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
-            *project << stream;
-            break;
-        }
-
-        case IGisProject::eTypeLog:
-        {
-            project = new CSmlProject(name, this);
-            project->setCheckState(CGisListDB::eColumnCheckbox, visible);
-            *project << stream;
-            break;
-        }
-        }
-
-        if(nullptr != project)
-        {
-            // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
-            // but this results in a visible `the checkbox is being unchecked`, especially in case the project
-            // is large and takes some time to load.
-            // When done directly after construction there is no `blinking` of the check mark
-
-            project->setToolTip(eColumnName,project->getInfo());
-            if(changed)
+            case IGisProject::eTypeQlb:
             {
-                project->setChanged();
+                project = new CQlbProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1a)
+                *project << stream;
+                break;
+            }
+
+            case IGisProject::eTypeGpx:
+            {
+                project = new CGpxProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1b)
+                *project << stream;
+                break;
+            }
+
+            case IGisProject::eTypeDb:
+            {
+                CDBProject * dbProject;
+                project = dbProject = new CDBProject(this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1c)
+
+                project->IGisProject::operator<<(stream);
+                dbProject->restoreDBLink();
+
+                if(!project->isValid())
+                {
+                    delete project;
+                    project = nullptr;
+                }
+                else
+                {
+                    dbProject->postStatus(false);
+                }
+                break;
+            }
+
+            case IGisProject::eTypeSlf:
+            {
+                project = new CSlfProject(name, false);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible); // (1d)
+                *project << stream;
+
+                // the CSlfProject does not - as the other C*Project - register itself in the list
+                // of currently opened projects. This is done manually here.
+                addProject(project);
+                break;
+            }
+
+            case IGisProject::eTypeFit:
+            {
+                project = new CFitProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+                *project << stream;
+                break;
+            }
+
+            case IGisProject::eTypeTcx:
+            {
+                project = new CTcxProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+                *project << stream;
+                break;
+            }
+
+            case IGisProject::eTypeSml:
+            {
+                project = new CSmlProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+                *project << stream;
+                break;
+            }
+
+            case IGisProject::eTypeLog:
+            {
+                project = new CSmlProject(name, this);
+                project->setCheckState(CGisListDB::eColumnCheckbox, visible);
+                *project << stream;
+                break;
+            }
+            }
+
+            if(nullptr != project)
+            {
+                // Hiding the individual projects from the map (1a, 1b, 1c) could be done here within a single statement,
+                // but this results in a visible `the checkbox is being unchecked`, especially in case the project
+                // is large and takes some time to load.
+                // When done directly after construction there is no `blinking` of the check mark
+
+                project->setToolTip(eColumnName,project->getInfo());
+                if(changed)
+                {
+                    project->setChanged();
+                }
             }
         }
-    }
+    } // close context for progress dialog
 
     slotGeoSearch(static_cast<QAction*>(CMainWindow::self().findChild<QAction*>("actionGeoSearch"))->isChecked());
+
+    for(const QString &filename : qlOpts->arguments)
+    {
+        CGisWorkspace::self().loadGisProject(filename);
+    }
 
     emit sigChanged();
 }

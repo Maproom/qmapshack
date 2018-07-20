@@ -430,13 +430,13 @@ void CMouseNormal::slotSearchWeb() const
 {
     QObject * obj = sender();
     bool ok = false;
-    int idx = obj->property("ID").toInt(&ok);
+    int serviceId = obj->property("ServiceID").toInt(&ok);
     if(ok)
     {
         QPointF pt = mouse->getPoint();
         gis->convertPx2Rad(pt);
 
-        CGeoSearchWeb::self().open(pt * RAD_TO_DEG, idx);
+        CGeoSearchWeb::self().search(pt * RAD_TO_DEG, serviceId);
     }
 }
 
@@ -454,13 +454,9 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     menu.addSeparator();
     menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
     menu.addSeparator();
+    menu.addMenu(CGeoSearchWeb::self().getMenu(this, SLOT(slotSearchWeb()), &menu));
     menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
     menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
-
-    menu.addSeparator();
-
-    QMenu * menuSearch = CGeoSearchWeb::self().getMenu(this, SLOT(slotSearchWeb()), &menu);
-    menu.addMenu(menuSearch);
 
     QPoint p = canvas->mapToGlobal(point);
     menu.exec(p);

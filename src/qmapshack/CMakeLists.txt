@@ -700,8 +700,9 @@ set( UIS
     gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/rte/router/routino/IRouterRoutinoPathSetup.ui
     gis/search/IGeoSearchConfigDialog.ui
+    gis/search/IGeoSearchWebConfigDialog.ui
     gis/summary/IGisSummary.ui
-    gis/summary/IGisSummarySetup.ui
+    gis/summary/IGisSummarySetup.ui    
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/IDetailsTrk.ui

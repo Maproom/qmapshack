@@ -19,10 +19,13 @@
 #ifndef CGEOSEARCHWEBCONFIGDIALOG_H
 #define CGEOSEARCHWEBCONFIGDIALOG_H
 
-class CGeoSearchWebConfigDialog
+#include "ui_IGeoSearchWebConfigDialog.h"
+
+class CGeoSearchWebConfigDialog : public QDialog, private Ui::IGeoSearchWebConfigDialog
 {
+    Q_OBJECT
 public:
-    CGeoSearchWebConfigDialog();
+    CGeoSearchWebConfigDialog(QWidget * parent);
     virtual ~CGeoSearchWebConfigDialog() = default;
 };
 

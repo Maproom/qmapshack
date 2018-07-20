@@ -21,8 +21,8 @@
 
 #include <functional>
 #include <QObject>
-#include <QMenu>
 #include <QAction>
+#include <QIcon>
 
 class QMenu;
 
@@ -38,7 +38,10 @@ public:
 
     QMenu * getMenu(QObject * obj, const char *slot, QMenu * parent) const;
 
-    void open(const QPointF& pt, int idx) const;
+    void search(const QPointF& pt, int idx) const;
+
+private slots:
+    void slotConfigureServices();
 
 private:
     friend class CMainWindow;
@@ -47,14 +50,16 @@ private:
 
     struct service_t
     {
-        service_t(const QString& name, const QString& url)
+        service_t(const QString& name, const QString& url, const QIcon& icon = QIcon("://icons/32x32/SearchWeb.png"))
             : name(name)
             , url(url)
+            , icon(icon)
         {
         }
 
         QString name;
         QString url;
+        QIcon icon;
     };
 
     QList<service_t> services;

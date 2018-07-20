@@ -19,16 +19,26 @@
 #ifndef CGEOSEARCHWEB_H
 #define CGEOSEARCHWEB_H
 
+#include <functional>
 #include <QObject>
+#include <QMenu>
+#include <QAction>
+
+class QMenu;
 
 class CGeoSearchWeb : public QObject
 {
-public:    
+    Q_OBJECT
+public:
     static CGeoSearchWeb& self()
     {
         return *pSelf;
     }
     virtual ~CGeoSearchWeb() = default;
+
+    QMenu * getMenu(QObject * obj, const char *slot, QMenu * parent) const;
+
+    void open(const QPointF& pt, int idx) const;
 
 private:
     friend class CMainWindow;
@@ -41,7 +51,6 @@ private:
             : name(name)
             , url(url)
         {
-
         }
 
         QString name;

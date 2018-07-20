@@ -5339,12 +5339,12 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
         <source>Ascent</source>
-        <translation type="unfinished">Подъём</translation>
+        <translation>Подъём</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descent</source>
-        <translation type="unfinished">Спуск</translation>
+        <translation>Спуск</translation>
     </message>
     <message>
         <source>Ascend</source>

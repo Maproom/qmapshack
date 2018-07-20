@@ -31,6 +31,7 @@
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -418,6 +419,8 @@ CMainWindow::CMainWindow()
     geoSearchConfig = new CGeoSearchConfig(this);
     connect(geoSearchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CMainWindow::slotGeoSearchConfigChanged);
     geoSearchConfig->load();
+
+    geoSearchWeb = new CGeoSearchWeb(this);
 
     prepareMenuForMac();
 

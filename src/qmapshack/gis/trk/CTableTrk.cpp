@@ -111,8 +111,8 @@ void CTableTrk::setTrack(CGisItemTrk * track)
     labels << tr("Dist.");
     labels << tr("Speed");
     labels << tr("Slope");
-    labels << tr("Ascend");
-    labels << tr("Descend");
+    labels << tr("Ascent");
+    labels << tr("Descent");
     labels << tr("Position");
     setHeaderLabels(labels);
 

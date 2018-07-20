@@ -1969,18 +1969,18 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="684"/>
-        <location filename="../gis/CGisListWks.cpp" line="1842"/>
-        <location filename="../gis/CGisListWks.cpp" line="1880"/>
+        <location filename="../gis/CGisListWks.cpp" line="1849"/>
+        <location filename="../gis/CGisListWks.cpp" line="1887"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1299"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1299"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -2061,17 +2061,17 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="856"/>
+        <location filename="../gis/CGisListWks.cpp" line="857"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <location filename="../gis/CGisListWks.cpp" line="1273"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <location filename="../gis/CGisListWks.cpp" line="1273"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -2277,17 +2277,17 @@ Zeile %2, Spalte %3:
 <context>
     <name>CInvalidTrk</name>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="38"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
         <translation>Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="62"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
         <source>Show Details...</source>
         <translation>Zeige Details...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="69"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="75"/>
         <source>Hide Details...</source>
         <translation>Verstecke Details...</translation>
     </message>
@@ -2604,59 +2604,59 @@ Zeile %2, Spalte %3:
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="552"/>
+        <location filename="../CMainWindow.cpp" line="550"/>
         <source>Select folder...</source>
         <translation>Ordner auswählen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="942"/>
+        <location filename="../CMainWindow.cpp" line="940"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;NewView&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1071"/>
+        <location filename="../CMainWindow.cpp" line="1069"/>
         <source>Ele.: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1083"/>
+        <location filename="../CMainWindow.cpp" line="1081"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1099"/>
+        <location filename="../CMainWindow.cpp" line="1097"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1240"/>
+        <location filename="../CMainWindow.cpp" line="1238"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1274"/>
+        <location filename="../CMainWindow.cpp" line="1272"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1274"/>
-        <location filename="../CMainWindow.cpp" line="1300"/>
+        <location filename="../CMainWindow.cpp" line="1272"/>
+        <location filename="../CMainWindow.cpp" line="1298"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1300"/>
+        <location filename="../CMainWindow.cpp" line="1298"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1717"/>
+        <location filename="../CMainWindow.cpp" line="1715"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1718"/>
+        <location filename="../CMainWindow.cpp" line="1716"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -5340,11 +5340,19 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
-        <source>Ascend</source>
+        <source>Ascent</source>
         <translation>Anstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
+        <source>Descent</source>
+        <translation>Abstieg</translation>
+    </message>
+    <message>
+        <source>Ascend</source>
+        <translation>Anstieg</translation>
+    </message>
+    <message>
         <source>Descend</source>
         <translation>Abstieg</translation>
     </message>

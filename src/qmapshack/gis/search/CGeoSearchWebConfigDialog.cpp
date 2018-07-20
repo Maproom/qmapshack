@@ -18,8 +18,10 @@
 
 #include "CGeoSearchWebConfigDialog.h"
 
-CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog()
+CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QWidget *parent)
+    : QDialog(parent)
 {
+    setupUi(this);
 }
 
 

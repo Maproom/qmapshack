@@ -18,6 +18,7 @@
 
 #include "CMainWindow.h"
 #include "gis/search/CGeoSearchWeb.h"
+#include "gis/search/CGeoSearchWebConfigDialog.h"
 
 #include <QtWidgets>
 
@@ -28,49 +29,56 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
 {
     pSelf = this;
 
-    //services << service_t(tr("PeakFinder"), "https://www.peakfinder.org/?lat=%3&amp;lng=%2&amp;off=20&amp;azi=0&amp;zoom=4");
-    services << service_t(tr("PeakFinder"), "https://www.peakfinder.org/?lat=%3&lng=%2&ele=%1&azi=0&zoom=5");
-    services << service_t(tr("Waymarked Trails Hiking"), "https://hiking.waymarkedtrails.org/#routelist?map=13!%3!%2");
+    services << service_t(tr("PeakFinder"), "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5");
+    services << service_t(tr("Waymarked Trails Hiking"), "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1");
+    services << service_t(tr("Wikiloc"), "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13");
+    services << service_t(tr("Wikiloc Skitours"), "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17");
+    services << service_t(tr("Webcam"), "https://webcams.travel/map/#lat=%2&lng=%1&z=12");
 }
 
 
 QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QMenu * parent) const
 {
-    QMenu * menu = new QMenu(tr("Search Web"), parent);
+    QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
 
-    int idx = 0;
+    int serviceId = 0;
     for(const service_t& service : services)
     {
-        QAction * action = menu->addAction(service.name);
-        action->setProperty("ID", idx++);
+        QAction * action = menu->addAction(service.icon, service.name);
+        action->setProperty("ServiceID", serviceId++);
         connect(action, SIGNAL(triggered(bool)), obj, slot);
     }
+    menu->addSeparator();
+    menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"), this, &CGeoSearchWeb::slotConfigureServices);
 
     return menu;
 }
 
 
-void CGeoSearchWeb::open(const QPointF& pt, int idx) const
+void CGeoSearchWeb::search(const QPointF& pt, int serviceId) const
 {
-    if((idx < 0) || (idx >= services.size()))
+    if((serviceId < 0) || (serviceId >= services.size()))
     {
         return;
     }
 
-    QString url = services[idx].url;
-    url = url.replace("%2", QString::number(pt.x(), 'g', 8));
-    url = url.replace("%3", QString::number(pt.y(), 'g', 8));
+    QString url = services[serviceId].url;
+    url = url.replace("%1", QString::number(pt.x(), 'g', 8));
+    url = url.replace("%2", QString::number(pt.y(), 'g', 8));
 
     qreal ele = CMainWindow::self().getElevationAt(pt);
     if(ele == NOFLOAT)
     {
         ele = 0;
     }
-    url = url.replace("%1", QString::number(ele));
+    url = url.replace("%3", QString::number(ele));
 
-    qDebug() << url;
-    qDebug() << QUrl(url);
     QDesktopServices::openUrl(QUrl(url));
 }
 
+void CGeoSearchWeb::slotConfigureServices()
+{
+    CGeoSearchWebConfigDialog dlg(CMainWindow::self().getBestWidgetForParent());
+    dlg.exec();
+}

@@ -122,6 +122,8 @@ CMainWindow::CMainWindow()
     widgetRtWorkspace = new CRtWorkspace(this);
     dockRealtime->setWidget(widgetRtWorkspace);
 
+    geoSearchWeb = new CGeoSearchWeb(this);
+
     // start ---- restore window geometry -----
     cfg.beginGroup("MainWindow");
     if ( cfg.contains("geometry"))
@@ -419,8 +421,6 @@ CMainWindow::CMainWindow()
     geoSearchConfig = new CGeoSearchConfig(this);
     connect(geoSearchConfig, &CGeoSearchConfig::sigConfigChanged, this, &CMainWindow::slotGeoSearchConfigChanged);
     geoSearchConfig->load();
-
-    geoSearchWeb = new CGeoSearchWeb(this);
 
     prepareMenuForMac();
 

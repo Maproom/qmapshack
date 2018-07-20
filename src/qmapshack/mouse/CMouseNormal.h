@@ -59,6 +59,7 @@ private slots:
     void slotSelectArea()       const;
     void slotCopyPosition()     const;
     void slotCopyPositionGrid() const;
+    void slotSearchWeb()        const;
 
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);
@@ -83,9 +84,6 @@ protected:
 
     CScrOptUnclutter * screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
-
-    QMenu * menu;
-    QAction * actionPoiAsWpt;
 
     poi_t curPOI;
 };

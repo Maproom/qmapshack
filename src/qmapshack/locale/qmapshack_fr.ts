@@ -2042,34 +2042,34 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Sauvegarde de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="856"/>
+        <location filename="../gis/CGisListWks.cpp" line="857"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <location filename="../gis/CGisListWks.cpp" line="1273"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <location filename="../gis/CGisListWks.cpp" line="1273"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1299"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1299"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="684"/>
-        <location filename="../gis/CGisListWks.cpp" line="1842"/>
-        <location filename="../gis/CGisListWks.cpp" line="1880"/>
+        <location filename="../gis/CGisListWks.cpp" line="1849"/>
+        <location filename="../gis/CGisListWks.cpp" line="1887"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>
@@ -2275,17 +2275,17 @@ ligne %2, colonne %3:
 <context>
     <name>CInvalidTrk</name>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="38"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
         <translation type="unfinished">La trace &apos;%1&apos; a %2 points invalides sur %3 points visibles. Voulez-vous cacher les points invalides maintenant ?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="62"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
         <source>Show Details...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CInvalidTrk.cpp" line="69"/>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="75"/>
         <source>Hide Details...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2602,59 +2602,59 @@ ligne %2, colonne %3:
         <translation type="vanished">Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Add Map View&lt;/b&gt; pour ouvrir une nouvelle vue. Ou &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour charger une vue sauvegardée. Ou cliquez &lt;a href=&apos;newview&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="552"/>
+        <location filename="../CMainWindow.cpp" line="550"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="942"/>
+        <location filename="../CMainWindow.cpp" line="940"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1071"/>
+        <location filename="../CMainWindow.cpp" line="1069"/>
         <source>Ele.: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1083"/>
+        <location filename="../CMainWindow.cpp" line="1081"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pente du terrain : %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1099"/>
+        <location filename="../CMainWindow.cpp" line="1097"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1240"/>
+        <location filename="../CMainWindow.cpp" line="1238"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1274"/>
+        <location filename="../CMainWindow.cpp" line="1272"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1274"/>
-        <location filename="../CMainWindow.cpp" line="1300"/>
+        <location filename="../CMainWindow.cpp" line="1272"/>
+        <location filename="../CMainWindow.cpp" line="1298"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1300"/>
+        <location filename="../CMainWindow.cpp" line="1298"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1717"/>
+        <location filename="../CMainWindow.cpp" line="1715"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1718"/>
+        <location filename="../CMainWindow.cpp" line="1716"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG lstockées en généra dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
     </message>
@@ -5324,13 +5324,13 @@ ligne %2, colonne %3:
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
-        <source>Ascend</source>
-        <translation type="unfinished"></translation>
+        <source>Ascent</source>
+        <translation type="unfinished">Montée</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
-        <source>Descend</source>
-        <translation type="unfinished"></translation>
+        <source>Descent</source>
+        <translation type="unfinished">Descente</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>

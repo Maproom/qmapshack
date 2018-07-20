@@ -2278,17 +2278,17 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="38"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation type="unfinished">Трек &apos;%1&apos; имеет %2 неверных точек из %3 видимых точек. Вы хотите скрыть неверные очки?</translation>
+        <translation>Трек &apos;%1&apos; имеет %2 неверных точек из %3 видимых точек. Вы хотите скрыть неверные очки?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="62"/>
         <source>Show Details...</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать подробности...</translation>
     </message>
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="69"/>
         <source>Hide Details...</source>
-        <translation type="unfinished"></translation>
+        <translation>Скрыть подробности</translation>
     </message>
 </context>
 <context>
@@ -4082,7 +4082,7 @@ is not a valid coordinate system definition:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="706"/>
         <source>BRouter: not found</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter: Не найден</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="801"/>
@@ -5309,47 +5309,47 @@ line %2, column %3:
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="108"/>
         <source>Time</source>
-        <translation type="unfinished">Время</translation>
+        <translation>Время</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="109"/>
         <source>Ele.</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
         <source>Delta</source>
-        <translation type="unfinished">Разница</translation>
+        <translation>Разница</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
         <source>Dist.</source>
-        <translation type="unfinished">Расстояние</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
         <source>Speed</source>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
         <source>Slope</source>
-        <translation type="unfinished">Наклон</translation>
+        <translation>Наклон</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
         <source>Ascend</source>
-        <translation type="unfinished"></translation>
+        <translation>Подъём</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
         <source>Descend</source>
-        <translation type="unfinished"></translation>
+        <translation>Спуск</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
         <source>Position</source>
-        <translation type="unfinished">Позиция</translation>
+        <translation>Позиция</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="164"/>
@@ -7946,28 +7946,28 @@ Filename: %1</source>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="14"/>
         <source>Invalid points...</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверные точки...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
         <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
         <source>Invalid points:</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверные точки:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
         <source>Do not ask again for this project</source>
-        <translation type="unfinished"></translation>
+        <translation>Не спрашивать снова для этого проекта</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
         <source>Show Details...</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать подробности...</translation>
     </message>
 </context>
 <context>

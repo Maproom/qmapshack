@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -7431,7 +7431,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="35"/>
         <source>&lt;b&gt;Convert track subpoints to points&lt;/b&gt;</source>
-        <translation>&lt;p&gt;Zwischenpunkte in Trackpunkte umwandeln&lt;/b&gt;</translation>
+        <translation type="unfinished">&lt;b&gt;Zwischenpunkte in Trackpunkte umwandeln&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSubPt2Pt.ui" line="47"/>

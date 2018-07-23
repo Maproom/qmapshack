@@ -19,14 +19,26 @@
 #ifndef CGEOSEARCHWEBCONFIGDIALOG_H
 #define CGEOSEARCHWEBCONFIGDIALOG_H
 
+#include "gis/search/CGeoSearchWeb.h"
 #include "ui_IGeoSearchWebConfigDialog.h"
 
 class CGeoSearchWebConfigDialog : public QDialog, private Ui::IGeoSearchWebConfigDialog
 {
     Q_OBJECT
 public:
-    CGeoSearchWebConfigDialog(QWidget * parent);
+    CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t>& services, QWidget * parent);
     virtual ~CGeoSearchWebConfigDialog() = default;
+
+public slots:
+    void accept() override;
+
+private slots:
+    void slotAddNew();
+    void slotDelSelected();
+    void slotSelectionChanged();
+
+private:
+    QList<CGeoSearchWeb::service_t>& services;
 };
 
 #endif //CGEOSEARCHWEBCONFIGDIALOG_H

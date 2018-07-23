@@ -88,7 +88,7 @@ void IDrawContext::emitSigCanvasUpdate()
 
 bool IDrawContext::resize(const QSize& size)
 {
-    if(isRunning() && !wait(1000))
+    if(isRunning() && !wait(100))
     {
         return false;
     }

@@ -20,9 +20,9 @@
 #define CGEOSEARCHWEB_H
 
 #include <functional>
-#include <QObject>
 #include <QAction>
 #include <QIcon>
+#include <QObject>
 
 class QMenu;
 
@@ -34,7 +34,7 @@ public:
     {
         return *pSelf;
     }
-    virtual ~CGeoSearchWeb() = default;
+    virtual ~CGeoSearchWeb();
 
     QMenu * getMenu(QObject * obj, const char *slot, QMenu * parent) const;
 
@@ -44,6 +44,7 @@ private slots:
     void slotConfigureServices();
 
 private:
+    friend class CGeoSearchWebConfigDialog;
     friend class CMainWindow;
     CGeoSearchWeb(QObject *parent);
     static CGeoSearchWeb * pSelf;

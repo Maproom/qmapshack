@@ -19,6 +19,7 @@
 #include "CMainWindow.h"
 #include "gis/search/CGeoSearchWeb.h"
 #include "gis/search/CGeoSearchWebConfigDialog.h"
+#include "helpers/CSettings.h"
 
 #include <QtWidgets>
 
@@ -29,13 +30,52 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
 {
     pSelf = this;
 
-    services << service_t(tr("PeakFinder"), "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5");
-    services << service_t(tr("Waymarked Trails Hiking"), "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1");
-    services << service_t(tr("Wikiloc"), "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13");
-    services << service_t(tr("Wikiloc Skitours"), "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17");
-    services << service_t(tr("Webcam"), "https://webcams.travel/map/#lat=%2&lng=%1&z=12");
+    SETTINGS;
+    cfg.beginGroup("Search");
+
+    const qint32 N = cfg.beginReadArray("webServices");
+    if(N == 0)
+    {
+        services << service_t("PeakFinder", "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5");
+        services << service_t("Waymarked Trails Hiking", "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1");
+        services << service_t("Wikiloc", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13");
+        services << service_t("Wikiloc Skitours", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17");
+        services << service_t("Webcam", "https://webcams.travel/map/#lat=%2&lng=%1&z=12");
+    }
+    else
+    {
+        for(int n = 0; n < N; ++n)
+        {
+            cfg.setArrayIndex(n);
+            const QString& name = cfg.value("name").toString();
+            const QString& url  = cfg.value("url").toString();
+            services << service_t(name, url);
+        }
+    }
+
+    cfg.endArray(); // webServices
+    cfg.endGroup(); // Search
 }
 
+CGeoSearchWeb::~CGeoSearchWeb()
+{
+    SETTINGS;
+    cfg.beginGroup("Search");
+    cfg.remove("webServices");
+    cfg.beginWriteArray("webServices");
+
+    const qint32 N = services.size();
+    for(int n = 0; n < N; ++n)
+    {
+        const service_t& service = services[n];
+        cfg.setArrayIndex(n);
+        cfg.setValue("name", service.name);
+        cfg.setValue("url", service.url);
+    }
+
+    cfg.endArray(); // webServices
+    cfg.endGroup(); // Search
+}
 
 QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QMenu * parent) const
 {
@@ -79,6 +119,6 @@ void CGeoSearchWeb::search(const QPointF& pt, int serviceId) const
 
 void CGeoSearchWeb::slotConfigureServices()
 {
-    CGeoSearchWebConfigDialog dlg(CMainWindow::self().getBestWidgetForParent());
+    CGeoSearchWebConfigDialog dlg(services, CMainWindow::self().getBestWidgetForParent());
     dlg.exec();
 }

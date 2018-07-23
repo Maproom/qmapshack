@@ -503,15 +503,16 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {
-    needsRedraw = eRedrawAll;
 
     if(!setDrawContextSize(e->size()))
     {
-        // reschedule resize event because one of the draw conetxt threads is still running
+        // reschedule resize event because one of the draw context threads is still running
         // and blocking the access to internal data.
         QApplication::postEvent(this, new QResizeEvent(e->size(), e->oldSize()));
         return;
     }
+
+    needsRedraw = eRedrawAll;
     QWidget::resizeEvent(e);
 
     const QRect& r = rect();

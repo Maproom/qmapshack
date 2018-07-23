@@ -88,11 +88,21 @@ void IDrawContext::emitSigCanvasUpdate()
 
 bool IDrawContext::resize(const QSize& size)
 {
+    if(lastSize == size)
+    {
+        // nothing to do
+        return true;
+    }
+
     if(isRunning() && !wait(100))
     {
+        // blocked by thread, reschedule
         return false;
     }
-    mutex.lock(); // --------- start serialize with thread
+
+    QMutexLocker lock(&mutex);
+
+    lastSize   = size;
     viewWidth  = size.width();
     viewHeight = size.height();
 
@@ -104,8 +114,7 @@ bool IDrawContext::resize(const QSize& size)
     buffer[0].image.fill(Qt::transparent);
 
     buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);   
-    buffer[1].image.fill(Qt::transparent);
-    mutex.unlock(); // --------- stop serialize with thread
+    buffer[1].image.fill(Qt::transparent);    
 
     return true;
 }
@@ -466,7 +475,7 @@ void IDrawContext::run()
     mutex.lock();
     QTime t;
     t.start();
-    qDebug() << "start thread" << objectName();
+//    qDebug() << "start thread" << objectName();
 
     IDrawContext::buffer_t& currentBuffer = buffer[!bufIndex];
     while(intNeedsRedraw)
@@ -485,7 +494,7 @@ void IDrawContext::run()
 
         mutex.unlock();
 
-        qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
+//        qDebug() << "bufferScale" << (currentBuffer.scale * currentBuffer.zoomFactor);
         // ----- reset buffer -----
         currentBuffer.image.fill(Qt::transparent);
 
@@ -495,7 +504,7 @@ void IDrawContext::run()
     }
     // ----- switch buffer ------
     bufIndex = !bufIndex;
-    qDebug() << "stop thread" << objectName() << "after" << t.elapsed() << "ms";
+//    qDebug() << "stop thread" << objectName() << "after" << t.elapsed() << "ms";
 
     mutex.unlock();
 }

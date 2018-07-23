@@ -192,6 +192,8 @@ protected:
     int viewWidth  = 100; //< the viewports width [px]
     int viewHeight = 100; //< the viewports height [px]
 
+    QSize lastSize;
+
     QPointF center; /// the center of the viewport
 
     projPJ pjsrc; //< source projection should be the same for all maps

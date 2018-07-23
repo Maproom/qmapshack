@@ -86,11 +86,11 @@ void IDrawContext::emitSigCanvasUpdate()
 }
 
 
-void IDrawContext::resize(const QSize& size)
+bool IDrawContext::resize(const QSize& size)
 {
-    if(isRunning())
+    if(isRunning() && !wait(1000))
     {
-        wait();
+        return false;
     }
     mutex.lock(); // --------- start serialize with thread
     viewWidth  = size.width();
@@ -101,8 +101,13 @@ void IDrawContext::resize(const QSize& size)
     bufHeight  = viewHeight + 2 * BUFFER_BORDER;
 
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
-    buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
+    buffer[0].image.fill(Qt::transparent);
+
+    buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);   
+    buffer[1].image.fill(Qt::transparent);
     mutex.unlock(); // --------- stop serialize with thread
+
+    return true;
 }
 
 QString IDrawContext::getProjection() const

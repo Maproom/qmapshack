@@ -195,7 +195,7 @@
         <translation>&lt;h2&gt;Enrutamiento&lt;/h2&gt;&lt;p&gt;QMapShack puede usar enrutadores online, pero si quieres obtener el máximo rendimiento es recomendable usar una base de datos instalada localmente en tu ordenador. Puedes elegir entre estas dos opciones:&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Routino trabaja usando como base los datos de OpenStreetMap. En el menú &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear Base de Datos de Routino&lt;/a&gt; tienes la herramienta que te guiará para crear la base de datos necesaria.&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;La segunda opción es BRouter con instalación local. Haz clic en &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter: Configuración&lt;/a&gt; para abrir el asistente que descargará e instalará todo lo necesario.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="945"/>
+        <location filename="../canvas/CCanvas.cpp" line="952"/>
         <source>Setup Map Background</source>
         <translation>Configuracion del Fondo del Mapa</translation>
     </message>
@@ -999,6 +999,32 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <location filename="../gis/search/CGeoSearch.cpp" line="513"/>
         <source>Error: </source>
         <translation type="unfinished">Error: </translation>
+    </message>
+</context>
+<context>
+    <name>CGeoSearchWeb</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="82"/>
+        <source>Search Web for Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="93"/>
+        <source>Configure Services</source>
+        <translation type="unfinished">Configure Servicios</translation>
+    </message>
+</context>
+<context>
+    <name>CGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
+        <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="89"/>
+        <source>enter name and URL</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2602,59 +2628,59 @@ línea %2, columna %3.
         <translation type="vanished">Usar &lt;b&gt;Menu-&gt;ver-&gt;Añadir vista&lt;/b&gt; para abrir nueva vista, o &lt;b&gt;Menu-&gt;archivo-&gt;cargar vista&lt;/b&gt; para restaurar una vista guardada. O click &lt;a href=&apos;nueva vista&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="550"/>
+        <location filename="../CMainWindow.cpp" line="553"/>
         <source>Select folder...</source>
         <translation type="unfinished">Seleccione carpeta...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="940"/>
+        <location filename="../CMainWindow.cpp" line="943"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Haga clic en &lt;b&gt;Menu-&gt;Ver-&gt;Añadir vista&lt;/b&gt; para abrir una nueva vista, o &lt;b&gt;Menu-&gt;Archivo-&gt;Cargar Vista&lt;/b&gt; para restaurar una vista guardada, o clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1069"/>
+        <location filename="../CMainWindow.cpp" line="1072"/>
         <source>Ele.: %1%2</source>
         <translation>Altitud: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1081"/>
+        <location filename="../CMainWindow.cpp" line="1084"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendiente: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
         <source>[Grid: %1]</source>
         <translation>[Cuadrícula: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1238"/>
+        <location filename="../CMainWindow.cpp" line="1241"/>
         <source>Load GIS Data...</source>
         <translation>Cargar Datos GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1272"/>
+        <location filename="../CMainWindow.cpp" line="1275"/>
         <source>Select output file</source>
         <translation>Seleccionar archivo de salida</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1272"/>
-        <location filename="../CMainWindow.cpp" line="1298"/>
+        <location filename="../CMainWindow.cpp" line="1275"/>
+        <location filename="../CMainWindow.cpp" line="1301"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vista de QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1298"/>
+        <location filename="../CMainWindow.cpp" line="1301"/>
         <source>Select file to load</source>
         <translation>Seleccionar archivo a cargar</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1715"/>
+        <location filename="../CMainWindow.cpp" line="1718"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1716"/>
+        <location filename="../CMainWindow.cpp" line="1719"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack detectó una libreria Proj4 mal instalada. Faltan las tablas de conversión para las proyecciones EPSG normalmente almacenadas en /usr/share/proj. Póngase en contacto con el responsable del paquete de la distribución para solucionarlo.</translation>
     </message>
@@ -3605,42 +3631,42 @@ Estructura desconocida.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="448"/>
         <source>Add POI as Waypoint</source>
         <translation>Añadir POI como Waypoint </translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="450"/>
         <source>Add Waypoint</source>
         <translation>Añadir Waypoint</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="451"/>
         <source>Add Track</source>
         <translation>Añadir Track</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="452"/>
         <source>Add Route</source>
         <translation>Añadir ruta</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="453"/>
         <source>Add Area</source>
         <translation>Añadir Área</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="455"/>
         <source>Select Items On Map</source>
         <translation>Seleccionar elementos del mapa</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="50"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="458"/>
         <source>Copy position</source>
         <translation>Copiar posición</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="51"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="459"/>
         <source>Copy position (Grid)</source>
         <translation>Copiar posicion (cuadrícula)</translation>
     </message>
@@ -7515,6 +7541,39 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
         <translation>introduzca su Google API-key aquí</translation>
+    </message>
+</context>
+<context>
+    <name>IGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
+        <source>Configure Services...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
+        <source>TextLabel</source>
+        <translation type="unfinished">Denominación</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
+        <source>Name</source>
+        <translation type="unfinished">Nombre</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
+        <source>Delete selected</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>CAbout</name>
     <message>
@@ -197,7 +197,7 @@
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="945"/>
+        <location filename="../canvas/CCanvas.cpp" line="952"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -1004,6 +1004,32 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
 </context>
 <context>
+    <name>CGeoSearchWeb</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="82"/>
+        <source>Search Web for Position</source>
+        <translation>Position im Web suchen</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="93"/>
+        <source>Configure Services</source>
+        <translation>Dienste konfigurieren</translation>
+    </message>
+</context>
+<context>
+    <name>CGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
+        <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.</source>
+        <translation type="unfinished">&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="89"/>
+        <source>enter name and URL</source>
+        <translation>Namen und URL eingeben</translation>
+    </message>
+</context>
+<context>
     <name>CGisItemOvlArea</name>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="36"/>
@@ -1335,11 +1361,11 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <source>Invalid points....</source>
-        <translation>Ungültige Punkte...</translation>
+        <translation type="vanished">Ungültige Punkte...</translation>
     </message>
     <message>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation>Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
+        <translation type="vanished">Der Track &apos;%1&apos; hat %2 ungültige Punkte von insgesamt %3 sichtbaren Punkten. Wollen Sie die ungültigen Punkte herausnehmen?</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
@@ -2601,62 +2627,62 @@ Zeile %2, Spalte %3:
     <name>CMainWindow</name>
     <message>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;newview&apos;&gt;here&lt;/a&gt;.</source>
-        <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
+        <translation type="vanished">Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;newview&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="550"/>
+        <location filename="../CMainWindow.cpp" line="553"/>
         <source>Select folder...</source>
         <translation>Ordner auswählen...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="940"/>
+        <location filename="../CMainWindow.cpp" line="943"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Benützen Sie &lt;b&gt;Menü-&gt;Ansicht-&gt;Kartenansicht hinzufügen&lt;/b&gt;, um eine neue Ansicht zu öffnen. Oder &lt;b&gt;Menü-&gt;Datei-&gt;Kartenansicht laden&lt;/b&gt;, um eine gespeicherte wieder herzustellen. Oder Sie klicken einfach &lt;a href=&apos;NewView&apos;&gt;hier&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1069"/>
+        <location filename="../CMainWindow.cpp" line="1072"/>
         <source>Ele.: %1%2</source>
         <translation>Höhe: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1081"/>
+        <location filename="../CMainWindow.cpp" line="1084"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Hangneigung: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1097"/>
+        <location filename="../CMainWindow.cpp" line="1100"/>
         <source>[Grid: %1]</source>
         <translation>[Gitter: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1238"/>
+        <location filename="../CMainWindow.cpp" line="1241"/>
         <source>Load GIS Data...</source>
         <translation>GIS Daten laden...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1272"/>
+        <location filename="../CMainWindow.cpp" line="1275"/>
         <source>Select output file</source>
         <translation>Ausgabedatei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1272"/>
-        <location filename="../CMainWindow.cpp" line="1298"/>
+        <location filename="../CMainWindow.cpp" line="1275"/>
+        <location filename="../CMainWindow.cpp" line="1301"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack Ansicht (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1298"/>
+        <location filename="../CMainWindow.cpp" line="1301"/>
         <source>Select file to load</source>
         <translation>Zu ladende Datei auswählen</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1715"/>
+        <location filename="../CMainWindow.cpp" line="1718"/>
         <source>Fatal...</source>
         <translation>Schwerer Fehler...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1716"/>
+        <location filename="../CMainWindow.cpp" line="1719"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack hat eine unvollständig installierte Proj4 Bibliothek gefunden. Die Übersetzungstabellen für EPSG Projektionen, die normalerweise in /usr/share/proj installiert sind, fehlen. Bitte kontaktieren Sie den Paketbetreuer ihrer Distribution, um das zu beheben.</translation>
     </message>
@@ -2667,7 +2693,7 @@ Zeile %2, Spalte %3:
         <source>There are no maps right now. QMapShack is no fun without maps. You can install maps by pressing the &apos;Help! I want maps!&apos; button in the &apos;Maps&apos; dock window. Or you can press the F1 key to open the online documentation that tells you how to use QMapShack. 
 
 If it&apos;s no fun, why don&apos;t you provide maps? Well to host maps ready for download and installation requires a good server. And this is not a free service. The project lacks the money. Additionally map and DEM data has a copyright. Therefore the copyright holder has to be asked prior to package the data. This is not that easy as it might sound and for some data you have to pay royalties. The project simply lacks resources to do this. And we think installing the stuff yourself is not that much to ask from you. After all the software is distributed without a fee.</source>
-        <translation>Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Sie erfahren dort mehr über die Bedienung von QMapShack.
+        <translation type="vanished">Im Augenblick gibt es keine Karten. QMapShack macht ohne Karten überhaupt keinen Spaß. Sie können Online-Karten installieren, indem Sie den &apos;Hilfe! Ich will Karten!&apos; Knopf im Fenster &apos;Karten&apos; drücken. Oder drücken Sie F1 um zur Online-Hilfe zu gelangen. Sie erfahren dort mehr über die Bedienung von QMapShack.
 
 Wenn QMapShack ohne Karten keinen Spaß macht, warum werden dann keine mitgeliefert? Nun, um Karten fertig zur Installation zum Download anbieten zu können, benötigt man einen guten Server. Und der kostet. Dem Projekt fehlt hierzu das Geld. Zusätzlich unterliegen Karten- und DEM Daten dem Urheberrecht. Deswegen muss man den Urheber vorher fragen, ob man die Daten in ein Paket umwandeln und anbieten darf. Klingt einfacher als es oft ist. Und manchmal müsste man sogar Gebühren zahlen. Dem Projekt fehlen dafür schlicht die Ressourcen. Außerdem glauben wir, ist es nicht zu viel verlangt, wenn Sie die Daten selber installieren. Immerhin steht ihnen die Software kostenlos zur Verfügung.</translation>
     </message>
@@ -3608,42 +3634,42 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="448"/>
         <source>Add POI as Waypoint</source>
         <translation>POI als Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="450"/>
         <source>Add Waypoint</source>
         <translation>Wegpunkt hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="451"/>
         <source>Add Track</source>
         <translation>Track hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="452"/>
         <source>Add Route</source>
         <translation>Route hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="453"/>
         <source>Add Area</source>
         <translation>Gebiet hinzufügen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="455"/>
         <source>Select Items On Map</source>
         <translation>Elemente auf der Karte auswählen</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="50"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="458"/>
         <source>Copy position</source>
         <translation>Position kopieren</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="51"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="459"/>
         <source>Copy position (Grid)</source>
         <translation>Position kopieren (Gitter)</translation>
     </message>
@@ -5131,11 +5157,11 @@ ist keine gültige Koordinatensystemdefinition:
     <name>CSearchGoogle</name>
     <message>
         <source>Unknown response</source>
-        <translation>Unbekannte Antwort</translation>
+        <translation type="vanished">Unbekannte Antwort</translation>
     </message>
     <message>
         <source>Error: </source>
-        <translation>Fehler:</translation>
+        <translation type="vanished">Fehler:</translation>
     </message>
 </context>
 <context>
@@ -5350,11 +5376,11 @@ Zeile %2, Spalte %3:
     </message>
     <message>
         <source>Ascend</source>
-        <translation>Anstieg</translation>
+        <translation type="vanished">Anstieg</translation>
     </message>
     <message>
         <source>Descend</source>
-        <translation>Abstieg</translation>
+        <translation type="vanished">Abstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
@@ -6293,7 +6319,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Sie können Höhendaten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; DEM Verzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="112"/>
@@ -6574,7 +6600,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>Speed</source>
-        <translation>Geschw.</translation>
+        <translation type="vanished">Geschw.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="315"/>
@@ -6678,27 +6704,27 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation>Zeit</translation>
+        <translation type="vanished">Zeit</translation>
     </message>
     <message>
         <source>Ele.</source>
-        <translation>Höhe</translation>
+        <translation type="vanished">Höhe</translation>
     </message>
     <message>
         <source>Delta</source>
-        <translation>Delta</translation>
+        <translation type="vanished">Delta</translation>
     </message>
     <message>
         <source>Dist.</source>
-        <translation>Entf.</translation>
+        <translation type="vanished">Entf.</translation>
     </message>
     <message>
         <source>Slope</source>
-        <translation>Neigung</translation>
+        <translation type="vanished">Neigung</translation>
     </message>
     <message>
         <source>Position</source>
-        <translation>Position</translation>
+        <translation type="vanished">Position</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="383"/>
@@ -6780,11 +6806,11 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>Ascent</source>
-        <translation>Anstieg</translation>
+        <translation type="vanished">Anstieg</translation>
     </message>
     <message>
         <source>Descent</source>
-        <translation>Abstieg</translation>
+        <translation type="vanished">Abstieg</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1502"/>
@@ -7259,7 +7285,7 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <source>Replace elevation of track points with the values from loaded DEM files.</source>
-        <translation>Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
+        <translation type="vanished">Ersetzt die Höhendaten durch Daten aus den geladenen DEM Dateien.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReplaceElevation.ui" line="86"/>
@@ -7526,6 +7552,39 @@ Keine Lust die Anleitung zu lesen!</translation>
         <location filename="../gis/search/IGeoSearchConfigDialog.ui" line="219"/>
         <source>enter Google API-key here</source>
         <translation>Google API Key hier eingeben.</translation>
+    </message>
+</context>
+<context>
+    <name>IGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
+        <source>Configure Services...</source>
+        <translation>Dienste konfigurieren...</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
+        <source>TextLabel</source>
+        <translation>Bezeichnung</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
+        <source>URL</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add new</source>
+        <translation>Neuen hinzufügen</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
+        <source>Delete selected</source>
+        <translation>Ausgewählte löschen</translation>
     </message>
 </context>
 <context>
@@ -8387,7 +8446,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>Search Google</source>
-        <translation>Mit Google suchen</translation>
+        <translation type="vanished">Mit Google suchen</translation>
     </message>
     <message>
         <location filename="../IMainWindow.ui" line="574"/>
@@ -8434,7 +8493,7 @@ Dateiname: %1</translation>
     </message>
     <message>
         <source>To add maps use &lt;b&gt;File-&gt;Setup Map Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation>Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Sie können Karten mit &lt;b&gt;&quot;Menü -&gt; Datei -&gt; Kartenverzeichnisse angeben&quot;&lt;/b&gt; hinzufügen. Oder Sie klicken einfach &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;hier&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
@@ -8444,7 +8503,7 @@ Dateiname: %1</translation>
     <message>
         <source>Help! I want maps!
 I don&apos;t want to read the documentation!</source>
-        <translation>Hilfe! Ich will Karten!
+        <translation type="vanished">Hilfe! Ich will Karten!
 Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
@@ -9431,7 +9490,7 @@ sein</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
-        <translation>Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
+        <translation type="vanished">Um Offline-Routing zu nutzen, müssen Sie einen Pfad zu einer lokalen Routendatenbank angeben. Benutzen Sie dazu den Knopf mit dem blauen Ordner. Sie können mit &lt;b&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/b&gt; eine solche Routendatenbank selber erzeugen.</translation>
     </message>
 </context>
 <context>
@@ -10654,15 +10713,15 @@ Wenn Sie das Wort &apos;wort&apos; eingeben, wird exakt nach dem Wort gesucht. W
     <name>ISetupFilter</name>
     <message>
         <source>Apply filter to</source>
-        <translation>Filter anwenden auf</translation>
+        <translation type="vanished">Filter anwenden auf</translation>
     </message>
     <message>
         <source>name only</source>
-        <translation>den Namen</translation>
+        <translation type="vanished">den Namen</translation>
     </message>
     <message>
         <source>complete text</source>
-        <translation>den vollständigen Text</translation>
+        <translation type="vanished">den vollständigen Text</translation>
     </message>
 </context>
 <context>

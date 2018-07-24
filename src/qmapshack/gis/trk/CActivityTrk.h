@@ -76,7 +76,7 @@ public:
     struct desc_t
     {
         QString objName;
-        trkact_t flag;
+        trkact_t activity;
         QString name;
         QString iconLarge;
         QString iconSmall;
@@ -115,17 +115,18 @@ public:
 
     /**
        @brief Convert array of summaries to HTML table
-       @param summary  The array of summaries
-       @param str   string to receive HTML
+       @param summary   The map of summaries
+       @param acts      Set of all activities in the summary
+       @param str       string to receive HTML
      */
-    static void printSummary(const QMap<quint32, activity_summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
+    static void printSummary(const QMap<trkact_t, activity_summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
 
 
     /**
        @brief Add internal summary to given array of summaries
-       @param summary  an array of summaries to hold the sum
+       @param summary  an map of summaries to hold the sum
      */
-    void sumUp(QMap<quint32, activity_summary_t> &summary) const;
+    void sumUp(QMap<trkact_t, activity_summary_t> &summary) const;
 
 
     const QList<activity_range_t>& getActivityRanges() const
@@ -138,9 +139,9 @@ public:
         return actDescriptor;
     }
 
-    static const desc_t& getDescriptor(quint32 flag);
+    static const desc_t& getDescriptor(trkact_t act);
 
-    static void setColor(quint32 flag, const QString& color);
+    static void setColor(trkact_t act, const QString& color);
 
 private:
     friend class CGisItemTrk;
@@ -153,7 +154,7 @@ private:
     CGisItemTrk * trk;
     QSet<trkact_t> allActivities;
     QList<activity_range_t> activityRanges;
-    QMap<quint32, activity_summary_t> activitySummary;
+    QMap<trkact_t, activity_summary_t> activitySummary;
 };
 
 #endif //CACTIVITYTRK_H

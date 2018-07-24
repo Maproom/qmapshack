@@ -363,14 +363,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     QString str = "<div>";
 
-    qint32 actCnt                   = activities.getActivityCount();
-    const QSet<quint32>& actFlags   = activities.getAllActivities();
+    qint32 actCnt               = activities.getActivityCount();
+    const QSet<trkact_t>& acts  = activities.getAllActivities();
 
     if(feature & eFeatureShowName)
     {
-        if((actCnt == 1) && (actFlags.toList().first() != CTrackData::trkpt_t::eAct20None))
+        if((actCnt == 1) && (acts.toList().first() != CTrackData::trkpt_t::eAct20None))
         {
-            const CActivityTrk::desc_t& desc = activities.getDescriptor(actFlags.toList().first());
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.toList().first());
             str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
         }
         str += "<b>" + getName() + "</b>";
@@ -1829,7 +1829,7 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
     blockedAreas << rect;
 }
 
-void CGisItemTrk::setPen(QPainter& p, QPen& pen, CTrackData::trkpt_t::act20_e act) const
+void CGisItemTrk::setPen(QPainter& p, QPen& pen, trkact_t act) const
 {
     pen.setColor((act == CTrackData::trkpt_t::eAct20None) ? color : CActivityTrk::getDescriptor(act).color);
     p.setPen(pen);
@@ -2284,7 +2284,7 @@ void CGisItemTrk::setColor(int idx)
     }
 }
 
-void CGisItemTrk::setActivity(CTrackData::trkpt_t::act20_e act)
+void CGisItemTrk::setActivity(trkact_t act)
 {
     for(CTrackData::trkpt_t& trkpt : trk)
     {
@@ -2297,7 +2297,7 @@ void CGisItemTrk::setActivity(CTrackData::trkpt_t::act20_e act)
     changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 
-void CGisItemTrk::setActivityRange(CTrackData::trkpt_t::act20_e act)
+void CGisItemTrk::setActivityRange(trkact_t act)
 {
     if(!setReadOnlyMode(false))
     {

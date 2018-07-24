@@ -374,7 +374,7 @@ void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
 
 void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*> trks, bool isReadOnly)
 {
-    QSet<quint32> acts;
+    QSet<trkact_t> acts;
     QMap<quint32, CActivityTrk::activity_summary_t> summaries;
     for(const CGisItemTrk* trk : trks)
     {

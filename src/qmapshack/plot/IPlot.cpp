@@ -1335,7 +1335,7 @@ void IPlot::slotShowPoints()
     slotStopRange();
 }
 
-void IPlot::slotActivity(CTrackData::trkpt_t::act20_e act)
+void IPlot::slotActivity(trkact_t act)
 {
     trk->setActivityRange(act);
     slotStopRange();

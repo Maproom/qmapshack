@@ -336,4 +336,6 @@ public:
 QDataStream& operator<<(QDataStream& stream, const CTrackData::trkpt_t& pt);
 QDataStream& operator>>(QDataStream& stream, CTrackData::trkpt_t& pt);
 
+using trkact_t = CTrackData::trkpt_t::act20_e;
+
 #endif /* TRACKDATA_H */

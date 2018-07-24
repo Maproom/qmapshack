@@ -1007,7 +1007,7 @@ void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
         return;
     }
 
-    CTrackData::trkpt_t::act20_e act = CActivityTrk::selectActivity(this);
+    trkact_t act = CActivityTrk::selectActivity(this);
     if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         QMutexLocker lock(&IGisItem::mutexItems);

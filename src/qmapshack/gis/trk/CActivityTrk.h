@@ -76,7 +76,7 @@ public:
     struct desc_t
     {
         QString objName;
-        quint32 flag;
+        trkact_t flag;
         QString name;
         QString iconLarge;
         QString iconSmall;
@@ -93,16 +93,19 @@ public:
        @brief Get sum of all activities seen in the track
        @return A QSet with all activity ids in the track
      */
-    const QSet<quint32>& getAllActivities() const
+    const QSet<trkact_t>& getAllActivities() const
     {
         return allActivities;
     }
 
-    qint32 getActivityCount() const;
+    qint32 getActivityCount() const
+    {
+        return allActivities.size();
+    }
 
     void getActivityNames(QStringList& names) const;
 
-    static CTrackData::trkpt_t::act20_e selectActivity(QWidget *parent);
+    static trkact_t selectActivity(QWidget *parent);
 
     /**
        @brief Convert internal summary to HTML table
@@ -115,7 +118,7 @@ public:
        @param summary  The array of summaries
        @param str   string to receive HTML
      */
-    static void printSummary(const QMap<quint32, activity_summary_t> &summary, const QSet<quint32> &acts, QString& str);
+    static void printSummary(const QMap<quint32, activity_summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
 
 
     /**
@@ -148,7 +151,7 @@ private:
     static const desc_t dummyDesc;
 
     CGisItemTrk * trk;
-    QSet<quint32> allActivities;
+    QSet<trkact_t> allActivities;
     QList<activity_range_t> activityRanges;
     QMap<quint32, activity_summary_t> activitySummary;
 };

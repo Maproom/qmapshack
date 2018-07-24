@@ -81,7 +81,7 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
-CTrackData::trkpt_t::act20_e CActivityTrk::selectActivity(QWidget *parent)
+trkact_t CActivityTrk::selectActivity(QWidget *parent)
 {
     QMenu menu(parent);
     QAction * act;
@@ -98,7 +98,7 @@ CTrackData::trkpt_t::act20_e CActivityTrk::selectActivity(QWidget *parent)
     act = menu.exec(QCursor::pos());
     if(nullptr != act)
     {
-        return CTrackData::trkpt_t::act20_e(act->data().toUInt(nullptr));
+        return trkact_t(act->data().toUInt(nullptr));
     }
     return CTrackData::trkpt_t::eAct20Bad;
 }
@@ -110,11 +110,11 @@ void CActivityTrk::update()
     activityRanges.clear();
     activitySummary.clear();
 
-    const CTrackData&   data       = trk->getTrackData();
+    const CTrackData& data = trk->getTrackData();
     const CTrackData::trkpt_t *lastTrkpt  = nullptr;
     const CTrackData::trkpt_t *startTrkpt = nullptr;
 
-    CTrackData::trkpt_t::act20_e lastAct = CTrackData::trkpt_t::eAct20Bad;
+    trkact_t lastAct = CTrackData::trkpt_t::eAct20Bad;
     for(const CTrackData::trkpt_t &pt : data)
     {
         allActivities << pt.getAct();
@@ -194,7 +194,7 @@ void CActivityTrk::printSummary(QString& str) const
     printSummary(activitySummary, allActivities, str);
 }
 
-void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, const QSet<quint32>& acts, QString& str)
+void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, const QSet<trkact_t>& acts, QString& str)
 {
     QString val, unit;
     qreal total;
@@ -464,7 +464,3 @@ void CActivityTrk::getActivityNames(QStringList& names) const
     }
 }
 
-qint32 CActivityTrk::getActivityCount() const
-{
-    return allActivities.size();
-}

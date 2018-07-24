@@ -67,7 +67,7 @@ void CScrOptRangeTrk::draw(QPainter& p)
 
 void CScrOptRangeTrk::selectActivity()
 {
-    CTrackData::trkpt_t::act20_e act = CActivityTrk::selectActivity(this);
+    trkact_t act = CActivityTrk::selectActivity(this);
     if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         emit activitySelected(act);

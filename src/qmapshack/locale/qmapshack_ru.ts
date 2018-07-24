@@ -1007,12 +1007,12 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="85"/>
         <source>Search Web for Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск позиции в Интернете</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="96"/>
         <source>Configure Services</source>
-        <translation type="unfinished">Настройка сервисов</translation>
+        <translation>Настройка сервисов</translation>
     </message>
 </context>
 <context>
@@ -1020,22 +1020,22 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Добавить собственный сервис&lt;/b&gt;&lt;p&gt;Чтобы добавить сервис, вам нужно имя и URL с прототипами для координат. Прототипы:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;table&gt;&lt;tr&gt;&lt;th&gt;прототип&lt;/th&gt;&lt;th&gt;заменен на...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;долгота [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;широта [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="43"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Чтобы изменить сервис, выберите его имя или URL и сделайте двойной щелчок (альтернатива: нажмите F2). Вы также можете изменить  сервисы по умолчанию. Если вы удалите все сервисы, стандартные будут восстановлены при следующем запуске QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="93"/>
         <source>enter name and URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввести имя и URL</translation>
     </message>
 </context>
 <context>
@@ -7577,32 +7577,32 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
         <source>Configure Services...</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка сервисов</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
         <source>TextLabel</source>
-        <translation type="unfinished">Метка текста</translation>
+        <translation>Метка текста</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
         <source>Name</source>
-        <translation type="unfinished">Имя</translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
         <source>Add new</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить новый</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
         <source>Delete selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить выбранные</translation>
     </message>
 </context>
 <context>

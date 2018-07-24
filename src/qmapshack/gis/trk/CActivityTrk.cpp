@@ -30,10 +30,10 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , tr(name) \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
-        , IGisItem::colorMap[qMax(colorIdx,16)].color \
+        , IGisItem::colorMap[qMax(colorIdx,IGisItem::eColorTransparent)].color \
     }
 
-const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, 16);
+const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, IGisItem::eColorTransparent);
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)

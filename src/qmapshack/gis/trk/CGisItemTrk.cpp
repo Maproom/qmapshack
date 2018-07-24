@@ -23,6 +23,7 @@
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CInvalidTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
@@ -121,17 +122,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 
-    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
-    {
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Invalid points...."),
-                                        tr("The track '%1' has %2 invalid points out of %3 visible points. "
-                                           "Do you want to hide invalid points now?").arg(getName()).arg(cntInvalidPoints).arg(cntVisiblePoints),
-                                        QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-        if(res == QMessageBox::Yes)
-        {
-            filterRemoveInvalidPoints();
-        }
-    }
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
@@ -147,6 +138,8 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
 
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(const history_t& hist, const QString &dbHash, IGisProject * project)
@@ -173,6 +166,8 @@ CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject *project)
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
@@ -186,6 +181,8 @@ CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 
@@ -2741,4 +2738,19 @@ bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
     }
 
     return !polyline.isEmpty();
+}
+
+void CGisItemTrk::checkForInvalidPoints()
+{
+    IGisProject * project = getParentProject();
+    if(project && project->getInvalidDataOk())
+    {
+        return;
+    }
+
+    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
+    {
+        CInvalidTrk dlg(*this, CMainWindow::self().getBestWidgetForParent());
+        dlg.exec();
+    }
 }

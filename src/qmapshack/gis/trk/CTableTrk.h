@@ -52,6 +52,10 @@ public:
         ,eColMax
     };
 
+    void showTopItem();
+    void showNextInvalid();
+    void showPrevInvalid();
+
 private slots:
     void slotItemSelectionChanged();
     void slotItemDoubleClicked(QTreeWidgetItem * item, int column);

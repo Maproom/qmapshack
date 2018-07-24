@@ -177,6 +177,11 @@ void CGpxProject::loadGpx(const QString &filename, CGpxProject *project)
         project->noCorrelation = bool(xmlExtension.namedItem("ql:correlation").toElement().text().toInt() == 0);
     }
 
+    if(xmlExtension.namedItem("ql:invalidDataOk").isElement())
+    {
+        project->invalidDataOk = bool(xmlExtension.namedItem("ql:invalidDataOk").toElement().text().toInt() != 0);
+    }
+
     const QDomNode& xmlMetadata = xmlGpx.namedItem("metadata");
     if(xmlMetadata.isElement())
     {
@@ -373,6 +378,13 @@ bool CGpxProject::saveAs(const QString& fn, IGisProject& project, bool strictGpx
             QDomElement elem = xmlExt.ownerDocument().createElement("ql:correlation");
             xmlExt.appendChild(elem);
             QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.doCorrelation()));
+            elem.appendChild(text);
+        }
+
+        {
+            QDomElement elem = xmlExt.ownerDocument().createElement("ql:invalidDataOk");
+            xmlExt.appendChild(elem);
+            QDomText text = xmlExt.ownerDocument().createTextNode(QString::number(project.getInvalidDataOk()));
             elem.appendChild(text);
         }
     }

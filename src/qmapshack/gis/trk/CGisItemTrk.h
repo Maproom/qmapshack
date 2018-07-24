@@ -228,6 +228,7 @@ public:
     const QDateTime& getTimeStart()           const { return timeStart;        }
     const QDateTime& getTimeEnd()             const { return timeEnd;          }
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
+    qint32 getNumberOfInvalidPoints()         const { return cntInvalidPoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
     const CTrackData::trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
@@ -775,7 +776,11 @@ private:
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
+
+    void checkForInvalidPoints();
     /**@}*/
+
+
 
     /**
         \defgroup DrawUtilies Objects used to draw the track

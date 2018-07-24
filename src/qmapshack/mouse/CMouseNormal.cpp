@@ -22,6 +22,7 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/prj/IGisProject.h"
 #include "gis/rte/CGisItemRte.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "mouse/CMouseAdapter.h"
@@ -37,18 +38,6 @@ CMouseNormal::CMouseNormal(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorMoveMap.png"),0,0);
     screenUnclutter = new CScrOptUnclutter(this);
-
-    menu = new QMenu(canvas);
-    actionPoiAsWpt = menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
-    menu->addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
-    menu->addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
-    menu->addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
-    menu->addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
-    menu->addSeparator();
-    menu->addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
-    menu->addSeparator();
-    menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
-    menu->addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
 }
 
 CMouseNormal::~CMouseNormal()
@@ -437,10 +426,38 @@ void CMouseNormal::slotSelectArea() const
     canvas->setMouseSelect();
 }
 
+void CMouseNormal::slotSearchWeb() const
+{
+    QObject * obj = sender();
+    bool ok = false;
+    int serviceId = obj->property("ServiceID").toInt(&ok);
+    if(ok)
+    {
+        QPointF pt = mouse->getPoint();
+        gis->convertPx2Rad(pt);
+
+        CGeoSearchWeb::self().search(pt * RAD_TO_DEG, serviceId);
+    }
+}
+
 void CMouseNormal::showContextMenu(const QPoint &point)
 {
-    QPoint p = canvas->mapToGlobal(point);
+    QMenu menu(canvas);
+    if(curPOI.pos != NOPOINTF)
+    {
+        menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
+    }
+    menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
+    menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
+    menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
+    menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
+    menu.addSeparator();
+    menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
+    menu.addSeparator();
+    menu.addMenu(CGeoSearchWeb::self().getMenu(this, SLOT(slotSearchWeb()), &menu));
+    menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
+    menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
 
-    actionPoiAsWpt->setEnabled(curPOI.pos != NOPOINTF);
-    menu->exec(p);
+    QPoint p = canvas->mapToGlobal(point);
+    menu.exec(p);
 }

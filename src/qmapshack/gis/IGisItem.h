@@ -154,6 +154,27 @@ public:
 
     using selflags_t = quint32;
 
+    enum color_e
+    {
+        eColorBlack         = 0
+        , eColorDarkRed     = 1
+        , eColorDarkGreen   = 2
+        , eColorDarkYellow  = 3
+        , eColorDarkBlue    = 4
+        , eColorDarkMagenta = 5
+        , eColorDarkCyan    = 6
+        , eColorLightGray   = 7
+        , eColorDarkGray    = 8
+        , eColorRed         = 9
+        , eColorGreen       = 10
+        , eColorYellow      = 11
+        , eColorBlue        = 12
+        , eColorMagenta     = 13
+        , eColorCyan        = 14
+        , eColorWhite       = 15
+        , eColorTransparent = 16
+    };
+
     struct key_t
     {
         bool operator==(const key_t& k) const

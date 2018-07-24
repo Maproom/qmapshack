@@ -323,7 +323,6 @@ void CDemVRT::draw(IDrawContext::buffer_t& buf)
     p.setOpacity(o1);
 
     qreal nTiles = ((right - left) * (bottom - top) / (w * h));
-    qDebug() << "DEM> tiles:" << nTiles;
     if(!isOutOfScale(bufferScale) && (nTiles < TILELIMIT))
     {
         for(qreal y = top - 1; y < bottom; y += h)

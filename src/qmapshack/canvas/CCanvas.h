@@ -205,7 +205,15 @@ private:
     void setZoom(bool in, redraw_e &needsRedraw);
     void setSizeTrackProfile();
     void saveSizeTrackProfile();
-    void setDrawContextSize(const QSize& s);
+    /**
+       @brief Resize all registered drwa context objects
+
+       @param s     the new size
+
+       @return Return false if one of the draw conext could not be resized
+               because it's thread is running and blocking access to the data
+     */
+    bool setDrawContextSize(const QSize& s);
 
     QColor backColor = "#FFFFBF";       //< the background color used in case of missing map tiles
     redraw_e needsRedraw = eRedrawAll;  //< set true to initiate a complete redraw of the screen content

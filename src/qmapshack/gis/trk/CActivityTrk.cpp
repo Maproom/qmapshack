@@ -92,7 +92,7 @@ trkact_t CActivityTrk::selectActivity(QWidget *parent)
     for(const desc_t &desc : actDescriptor)
     {
         act = menu.addAction(QIcon(desc.iconLarge), desc.name);
-        act->setData(QVariant(desc.flag));
+        act->setData(QVariant(desc.activity));
     }
 
     act = menu.exec(QCursor::pos());
@@ -194,7 +194,7 @@ void CActivityTrk::printSummary(QString& str) const
     printSummary(activitySummary, allActivities, str);
 }
 
-void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary, const QSet<trkact_t>& acts, QString& str)
+void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summary, const QSet<trkact_t>& acts, QString& str)
 {
     QString val, unit;
     qreal total;
@@ -208,7 +208,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     QVector<const desc_t*> descs;
     for(const desc_t &desc : actDescriptor)
     {
-        if(acts.contains(desc.flag))
+        if(acts.contains(desc.activity))
         {
             descs << &desc;
         }
@@ -248,7 +248,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     distance = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().meter2distance(s.distance, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         distance += s.distance;
@@ -272,7 +272,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(s.ascent, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ascent;
@@ -296,7 +296,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(s.descent, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.descent;
@@ -320,7 +320,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
@@ -344,7 +344,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
@@ -368,7 +368,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
@@ -392,7 +392,7 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->flag];
+        const activity_summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
@@ -413,12 +413,12 @@ void CActivityTrk::printSummary(const QMap<quint32, activity_summary_t>& summary
     str += "</table>";
 }
 
-void CActivityTrk::sumUp(QMap<quint32, activity_summary_t> &summary) const
+void CActivityTrk::sumUp(QMap<trkact_t, activity_summary_t> &summary) const
 {
-    for(quint32 flag : activitySummary.keys())
+    for(trkact_t act : activitySummary.keys())
     {
-        const activity_summary_t &src = activitySummary[flag];
-        activity_summary_t       &dst = summary[flag];
+        const activity_summary_t &src = activitySummary[act];
+        activity_summary_t       &dst = summary[act];
 
         dst.distance += src.distance;
         dst.ascent   += src.ascent;
@@ -428,11 +428,11 @@ void CActivityTrk::sumUp(QMap<quint32, activity_summary_t> &summary) const
     }
 }
 
-const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
+const CActivityTrk::desc_t& CActivityTrk::getDescriptor(trkact_t act)
 {
     for(const desc_t &desc : actDescriptor)
     {
-        if(desc.flag == flag)
+        if(desc.activity == act)
         {
             return desc;
         }
@@ -441,11 +441,11 @@ const CActivityTrk::desc_t& CActivityTrk::getDescriptor(quint32 flag)
     return dummyDesc;
 }
 
-void CActivityTrk::setColor(quint32 flag, const QString& color)
+void CActivityTrk::setColor(trkact_t act, const QString& color)
 {
     for(desc_t &desc : actDescriptor)
     {
-        if(desc.flag == flag)
+        if(desc.activity == act)
         {
             desc.color = QColor(color);
             return;
@@ -457,7 +457,7 @@ void CActivityTrk::getActivityNames(QStringList& names) const
 {
     for(const desc_t &desc : actDescriptor)
     {
-        if(allActivities.contains(desc.flag))
+        if(allActivities.contains(desc.activity))
         {
             names << desc.name;
         }

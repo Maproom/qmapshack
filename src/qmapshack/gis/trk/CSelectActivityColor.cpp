@@ -75,7 +75,7 @@ void CSelectActivityColor::updateData()
         {
             continue;
         }
-        const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(i);
+        const CActivityTrk::desc_t& desc = CActivityTrk::getDescriptor(trkact_t(i));
 
         QLabel * label = new QLabel(this);
         label->setMinimumSize(16,16);
@@ -97,7 +97,7 @@ void CSelectActivityColor::updateData()
         button->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Maximum);
         horizontalLayout->addWidget(button);
 
-        auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, i);
+        auto setColorFunc = bind(&CSelectActivityColor::slotSetColor, this, button, trkact_t(i));
         connect(button, &QToolButton::clicked, this, setColorFunc);
 
         allActColors << button;
@@ -107,12 +107,12 @@ void CSelectActivityColor::updateData()
     horizontalLayout->addItem(spacer);
 }
 
-void CSelectActivityColor::slotSetColor(QToolButton * button, quint32 activityFlag)
+void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
 {
     CColorChooser dlg(button);
     dlg.move(button->parentWidget()->mapToGlobal(button->geometry().topRight()));
     if(dlg.exec() == QDialog::Accepted)
     {
-        CActivityTrk::setColor(activityFlag, button->property("color").toString());
+        CActivityTrk::setColor(act, button->property("color").toString());
     }
 }

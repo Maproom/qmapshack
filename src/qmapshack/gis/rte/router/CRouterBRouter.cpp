@@ -662,7 +662,10 @@ void CRouterBRouter::startBRouter() const
         if (connected)
         {
             socket.disconnectFromHost();
-            socket.waitForDisconnected();
+            if(socket.state() != QAbstractSocket::UnconnectedState)
+            {
+                socket.waitForDisconnected();
+            }
         }
     }
 }
@@ -682,7 +685,7 @@ void CRouterBRouter::getBRouterVersion()
     {
         if (setup->isLocalBRouterInstalled())
         {
-            QProcess cmd;            
+            QProcess cmd;
 
             QStringList args;
             args << "-cp";
@@ -699,7 +702,6 @@ void CRouterBRouter::getBRouterVersion()
             }
 
             parseBRouterVersion(QString(cmd.readAll()));
-
         }
         else
         {

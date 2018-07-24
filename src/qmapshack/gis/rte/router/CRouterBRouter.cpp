@@ -693,7 +693,7 @@ void CRouterBRouter::getBRouterVersion()
             cmd.start(setup->localJavaExecutable,args);
 
             cmd.waitForStarted();
-            if (!cmd.waitForFinished(200))
+            if (!cmd.waitForFinished(3000))
             {
                 cmd.kill();
             }

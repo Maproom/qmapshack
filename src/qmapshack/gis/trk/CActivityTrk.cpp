@@ -45,16 +45,16 @@ void CActivityTrk::init()
 {
     actDescriptor =
     {
-        DESCRIPTOR_ENTRY("Foot",               "ActFoot.png",  eAct20Foot,     0)
-        ,DESCRIPTOR_ENTRY("Bicycle",            "ActCycle.png", eAct20Cycle,    1)
-        ,DESCRIPTOR_ENTRY("Motor Bike",         "ActBike.png",  eAct20Bike,     2)
-        ,DESCRIPTOR_ENTRY("Car",                "ActCar.png",   eAct20Car,      3)
-        ,DESCRIPTOR_ENTRY("Cable Car",          "ActCable.png", eAct20Cable,    4)
-        ,DESCRIPTOR_ENTRY("Swim",               "ActSwim.png",  eAct20Swim,     5)
-        ,DESCRIPTOR_ENTRY("Ship",               "ActShip.png",  eAct20Ship,     6)
-        ,DESCRIPTOR_ENTRY("Aeronautic",         "ActAero.png",  eAct20Aero,     7)
-        ,DESCRIPTOR_ENTRY("Ski/Winter",         "ActSki.png",   eAct20Ski,      8)
-        ,DESCRIPTOR_ENTRY("Public Transport",   "ActTrain.png", eAct20Train,    9)
+        DESCRIPTOR_ENTRY("Foot",               "ActFoot.png",  eAct20Foot,     IGisItem::eColorBlack)
+        ,DESCRIPTOR_ENTRY("Bicycle",            "ActCycle.png", eAct20Cycle,    IGisItem::eColorDarkRed)
+        ,DESCRIPTOR_ENTRY("Motor Bike",         "ActBike.png",  eAct20Bike,     IGisItem::eColorDarkGreen)
+        ,DESCRIPTOR_ENTRY("Car",                "ActCar.png",   eAct20Car,      IGisItem::eColorDarkYellow)
+        ,DESCRIPTOR_ENTRY("Cable Car",          "ActCable.png", eAct20Cable,    IGisItem::eColorDarkBlue)
+        ,DESCRIPTOR_ENTRY("Swim",               "ActSwim.png",  eAct20Swim,     IGisItem::eColorDarkMagenta)
+        ,DESCRIPTOR_ENTRY("Ship",               "ActShip.png",  eAct20Ship,     IGisItem::eColorDarkCyan)
+        ,DESCRIPTOR_ENTRY("Aeronautic",         "ActAero.png",  eAct20Aero,     IGisItem::eColorLightGray)
+        ,DESCRIPTOR_ENTRY("Ski/Winter",         "ActSki.png",   eAct20Ski,      IGisItem::eColorDarkGray)
+        ,DESCRIPTOR_ENTRY("Public Transport",   "ActTrain.png", eAct20Train,    IGisItem::eColorRed)
     };
 
     SETTINGS;

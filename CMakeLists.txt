@@ -142,7 +142,7 @@ find_package(QuaZip                 REQUIRED)
 find_package(ALGLIB                         ) # optional as we can use our local version
 
 
-if(${Qt5Widgets_VERSION} VERSION_LESS 5.6.0)
+if(${Qt5Widgets_VERSION} VERSION_LESS 5.5.0)
     message( SEND_ERROR "You need at least Qt5.6 or newer.")
 endif()
 

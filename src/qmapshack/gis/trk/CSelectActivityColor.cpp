@@ -68,11 +68,10 @@ void CSelectActivityColor::updateData()
         return;
     }
 
-    const CActivityTrk& act     = trk->getActivities();
-    const QSet<quint32>& acts   = act.getAllActivities();
+    const QSet<trkact_t>& acts = trk->getActivities().getAllActivities();
     for(quint32 i = 0; i < CTrackData::trkpt_t::eAct20MaxNum; i++)
     {
-        if(!acts.contains(i))
+        if(!acts.contains(trkact_t(i)))
         {
             continue;
         }

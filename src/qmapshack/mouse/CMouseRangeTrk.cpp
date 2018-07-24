@@ -224,7 +224,7 @@ void CMouseRangeTrk::slotShowPoints()
     resetState();
 }
 
-void CMouseRangeTrk::slotActivity(CTrackData::trkpt_t::act20_e act)
+void CMouseRangeTrk::slotActivity(trkact_t act)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
 

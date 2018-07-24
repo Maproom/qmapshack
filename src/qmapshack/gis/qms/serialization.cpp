@@ -368,7 +368,7 @@ QDataStream& operator>>(QDataStream& stream, CTrackData::trkpt_t& pt)
     {
         qint16 tmp16;
         stream >> tmp16;
-        pt.activity = CTrackData::trkpt_t::act20_e(tmp16);
+        pt.activity = trkact_t(tmp16);
     }
 
     pt.sanitizeFlags();

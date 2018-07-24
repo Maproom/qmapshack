@@ -36,7 +36,7 @@ public:
     void draw(QPainter& p) override;
 
 signals:
-    void activitySelected(CTrackData::trkpt_t::act20_e act);
+    void activitySelected(trkact_t act);
 
 private:
     void selectActivity();

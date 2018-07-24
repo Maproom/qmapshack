@@ -58,7 +58,7 @@ static void readXml(const QDomNode& xml, const QString& tag, qint32& value)
     }
 }
 
-static void readXml(const QDomNode& xml, const QString& tag, CTrackData::trkpt_t::act20_e& value)
+static void readXml(const QDomNode& xml, const QString& tag, trkact_t& value)
 {
     if(xml.namedItem(tag).isElement())
     {
@@ -70,7 +70,7 @@ static void readXml(const QDomNode& xml, const QString& tag, CTrackData::trkpt_t
         }
         else
         {
-            value = CTrackData::trkpt_t::act20_e(tmp);
+            value = trkact_t(tmp);
         }
     }
 }

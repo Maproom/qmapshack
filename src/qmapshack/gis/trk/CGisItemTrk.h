@@ -294,7 +294,7 @@ public:
 private:
     void drawColorized(QPainter &p) const;
     void drawColorizedByActivity(QPainter& p) const;
-    void setPen(QPainter& p, QPen& pen, CTrackData::trkpt_t::act20_e act) const;
+    void setPen(QPainter& p, QPen& pen, trkact_t act) const;
     /**@}*/
 
 
@@ -422,7 +422,7 @@ public:
        @brief Set the activity flag for all track points
        @param flag  one of CTrackData::trkpt_t::flag_e::eAct...
      */
-    void setActivity(CTrackData::trkpt_t::act20_e act);
+    void setActivity(trkact_t act);
 
     /**
        @brief Sets the activity flag for a selected range of track points
@@ -430,7 +430,7 @@ public:
        The range has to be selected already. The activity will be selected by a dialog displayed
        in this method.
      */
-    void setActivityRange(CTrackData::trkpt_t::act20_e act);
+    void setActivityRange(trkact_t act);
 
     /**
        @brief Copy a section into a new track object

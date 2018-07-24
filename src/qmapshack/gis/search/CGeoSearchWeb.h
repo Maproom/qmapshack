@@ -36,6 +36,8 @@ public:
     }
     virtual ~CGeoSearchWeb();
 
+    static const QString defaultIcon;
+
     QMenu * getMenu(QObject * obj, const char *slot, QMenu * parent) const;
 
     void search(const QPointF& pt, int idx) const;
@@ -51,7 +53,7 @@ private:
 
     struct service_t
     {
-        service_t(const QString& name, const QString& url, const QIcon& icon = QIcon("://icons/32x32/SearchWeb.png"))
+        service_t(const QString& name, const QString& url, const QString& icon = defaultIcon)
             : name(name)
             , url(url)
             , icon(icon)
@@ -60,7 +62,7 @@ private:
 
         QString name;
         QString url;
-        QIcon icon;
+        QString icon;
     };
 
     QList<service_t> services;

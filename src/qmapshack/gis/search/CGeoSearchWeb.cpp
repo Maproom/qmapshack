@@ -24,6 +24,7 @@
 #include <QtWidgets>
 
 CGeoSearchWeb * CGeoSearchWeb::pSelf = nullptr;
+const QString CGeoSearchWeb::defaultIcon = "://icons/32x32/SearchWebDefault.png";
 
 CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
     : QObject(parent)
@@ -36,11 +37,11 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
     const qint32 N = cfg.beginReadArray("webServices");
     if(N == 0)
     {
-        services << service_t("PeakFinder", "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5");
-        services << service_t("Waymarked Trails Hiking", "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1");
-        services << service_t("Wikiloc", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13");
-        services << service_t("Wikiloc Skitours", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17");
-        services << service_t("Webcam", "https://webcams.travel/map/#lat=%2&lng=%1&z=12");
+        services << service_t("PeakFinder", "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5", "://icons/32x32/SearchWebPeakfinder.png");
+        services << service_t("Waymarked Trails Hiking", "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1", "://icons/32x32/SearchWebWaymarked.png");
+        services << service_t("Wikiloc", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13", "://icons/32x32/SearchWebOutings.png");
+        services << service_t("Wikiloc Skitours", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17", "://icons/32x32/SearchWebOutings.png");
+        services << service_t("Webcam", "https://webcams.travel/map/#lat=%2&lng=%1&z=12", "://icons/32x32/SearchWebCam.png");
     }
     else
     {
@@ -49,7 +50,8 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
             cfg.setArrayIndex(n);
             const QString& name = cfg.value("name").toString();
             const QString& url  = cfg.value("url").toString();
-            services << service_t(name, url);
+            const QString& icon = cfg.value("icon").toString();
+            services << service_t(name, url, icon);
         }
     }
 
@@ -71,6 +73,7 @@ CGeoSearchWeb::~CGeoSearchWeb()
         cfg.setArrayIndex(n);
         cfg.setValue("name", service.name);
         cfg.setValue("url", service.url);
+        cfg.setValue("icon", service.icon);
     }
 
     cfg.endArray(); // webServices
@@ -85,12 +88,13 @@ QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QMenu * parent) 
     int serviceId = 0;
     for(const service_t& service : services)
     {
-        QAction * action = menu->addAction(service.icon, service.name);
+        QAction * action = menu->addAction(QIcon(service.icon), service.name);
         action->setProperty("ServiceID", serviceId++);
         connect(action, SIGNAL(triggered(bool)), obj, slot);
     }
     menu->addSeparator();
-    menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"), this, &CGeoSearchWeb::slotConfigureServices);
+    QAction * act = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+    connect(act, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
 
     return menu;
 }

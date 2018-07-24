@@ -49,6 +49,8 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
     {
         QTreeWidgetItem * item = new QTreeWidgetItem(treeServices);
         item->setText(0, service.name);
+        item->setIcon(0, QIcon(service.icon));
+        item->setData(0, Qt::UserRole, service.icon);
         item->setText(1, service.url);
         item->setFlags(item->flags()|Qt::ItemIsEditable);
     }
@@ -67,12 +69,13 @@ void CGeoSearchWebConfigDialog::accept()
         QTreeWidgetItem * item = treeServices->topLevelItem(n);
         const QString& name = item->text(0);
         const QString& url  = item->text(1);
+        const QString& icon = item->data(0, Qt::UserRole).toString();
         if(name.isEmpty() || url.isEmpty() || !url.startsWith("http"))
         {
             continue;
         }
 
-        services << CGeoSearchWeb::service_t(name, url);
+        services << CGeoSearchWeb::service_t(name, url, icon.isEmpty() ?  CGeoSearchWeb::defaultIcon : icon);
     }
 
     QDialog::accept();
@@ -87,6 +90,8 @@ void CGeoSearchWebConfigDialog::slotAddNew()
 {
     QTreeWidgetItem * item = new QTreeWidgetItem(treeServices);
     item->setText(0, tr("enter name and URL"));
+    item->setIcon(0, QIcon(CGeoSearchWeb::defaultIcon));
+    item->setData(0, Qt::UserRole, CGeoSearchWeb::defaultIcon);
     item->setFlags(item->flags()|Qt::ItemIsEditable);
 }
 

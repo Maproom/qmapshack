@@ -30,20 +30,21 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
     connect(pushDelSelected, &QPushButton::clicked, this, &CGeoSearchWebConfigDialog::slotDelSelected);
     connect(treeServices, &QTreeWidget::itemSelectionChanged, this, &CGeoSearchWebConfigDialog::slotSelectionChanged);
 
-    const QString& msg = tr("<b>Add your own service</b>"
-                            "<p>To add your own service you need a name and an URL with placeholders for "
-                            "coordinates. Placeholders are:</p>"
-                            "<table>"
-                            "<tr><th>placeholder</th><th>replaced by...</th></tr>"
-                            "<tr><td>%1</td><td>longitude [°]</td></tr>"
-                            "<tr><td>%2</td><td>latitude [°]</td></tr>"
-                            "</table>"
-                            "To edit a service select either it's name or URL and do a double click (alternative: press F2). "
-                            "You can change the default services, too. If you remove all services the default ones will be "
-                            "restored on the next start of QMapShack."
-                            );
+    const QString& msg1 = tr("<b>Add your own service</b>"
+                             "<p>To add your own service you need a name and an URL with placeholders for "
+                             "coordinates. Placeholders are:</p>");
 
-    labelHelp->setText(msg);
+    const QString& msg2 = tr("<table>"
+                             "<tr><th>placeholder</th><th>replaced by...</th></tr>"
+                             "<tr><td>%1</td><td>longitude [°]</td></tr>"
+                             "<tr><td>%2</td><td>latitude [°]</td></tr>"
+                             "</table>");
+
+    const QString& msg3 = tr("<p>To edit a service select either it's name or URL and do a double click (alternative: press F2). "
+                             "You can change the default services, too. If you remove all services the default ones will be "
+                             "restored on the next start of QMapShack.</p>");
+
+    labelHelp->setText(msg1 + msg2 + msg3);
 
     for(const CGeoSearchWeb::service_t& service : services)
     {

@@ -122,7 +122,7 @@ private slots:
     void slotSymWpt();
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
-
+    void slotSearchWeb();
 
 private:
     void configDB();

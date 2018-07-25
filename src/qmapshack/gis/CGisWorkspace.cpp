@@ -35,6 +35,7 @@
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/IRouter.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -854,6 +855,16 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
         {
             canvas->setMouseRadiusWpt(*wpt);
         }
+    }
+}
+
+void CGisWorkspace::searchWptInWeb(const IGisItem::key_t &key, qint32 serviceId)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(nullptr != wpt)
+    {
+        CGeoSearchWeb::self().search(wpt->getPosition(), serviceId);
     }
 }
 

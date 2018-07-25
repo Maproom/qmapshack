@@ -80,7 +80,7 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QMenu * parent) const
+QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QWidget * parent) const
 {
     QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
@@ -90,7 +90,10 @@ QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QMenu * parent) 
     {
         QAction * action = menu->addAction(QIcon(service.icon), service.name);
         action->setProperty("ServiceID", serviceId++);
-        connect(action, SIGNAL(triggered(bool)), obj, slot);
+        if(obj != nullptr)
+        {
+            connect(action, SIGNAL(triggered(bool)), obj, slot);
+        }
     }
     menu->addSeparator();
     QAction * act = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));

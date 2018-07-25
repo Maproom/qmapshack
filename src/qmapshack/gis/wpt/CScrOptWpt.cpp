@@ -21,6 +21,7 @@
 #include "canvas/CCanvas.h"
 #include "CMainWindow.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
 #include "gis/wpt/CScrOptWpt.h"
@@ -52,17 +53,6 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     move(anchor.toPoint() + QPoint(-width()/2,SCR_OPT_OFFSET));
     show();
 
-//    connect(toolDelete,     &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolEdit,       &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolCopy,       &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolMove,       &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolProj,       &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolBubble,     &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolAddElevation,&QToolButton::clicked,this, &CScrOptWpt::hide);
-//    connect(toolDelRadius,  &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolNogoArea,   &QToolButton::clicked, this, &CScrOptWpt::hide);
-//    connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::hide);
-
     connect(toolDelete,     &QToolButton::clicked, this, &CScrOptWpt::slotDelete);
     connect(toolEdit,       &QToolButton::clicked, this, &CScrOptWpt::slotEdit);
     connect(toolCopy,       &QToolButton::clicked, this, &CScrOptWpt::slotCopy);
@@ -73,7 +63,7 @@ CScrOptWpt::CScrOptWpt(CGisItemWpt *wpt, const QPoint& point, IMouse *parent)
     connect(toolDelRadius,  &QToolButton::clicked, this, &CScrOptWpt::slotDeleteRadius);
     connect(toolNogoArea,   &QToolButton::clicked, this, &CScrOptWpt::slotNogoArea);
     connect(toolEditRadius, &QToolButton::clicked, this, &CScrOptWpt::slotEditRadius);
-
+    connect(toolSearchWeb,  &QToolButton::clicked, this, &CScrOptWpt::slotSearchWeb);
 
     connect(label, &QLabel::linkActivated, this, &CScrOptWpt::slotLinkActivated);
 
@@ -146,6 +136,22 @@ void CScrOptWpt::slotAddElevation()
     close();
 }
 
+void CScrOptWpt::slotSearchWeb()
+{
+    QMenu * menu = CGeoSearchWeb::self().getMenu(nullptr, "", this);
+    QAction * action = menu->exec(QCursor::pos());
+    if(action != nullptr)
+    {
+        bool ok = false;
+        int serviceId = action->property("ServiceID").toInt(&ok);
+        if(ok)
+        {
+            CGisWorkspace::self().searchWptInWeb(key, serviceId);
+        }
+    }
+    close();
+}
+
 void CScrOptWpt::draw(QPainter& p)
 {
     IGisItem * item = CGisWorkspace::self().getItemByKey(key);
@@ -158,3 +164,4 @@ void CScrOptWpt::draw(QPainter& p)
 
     CDraw::bubble(p, geometry(), anchor.toPoint());
 }
+

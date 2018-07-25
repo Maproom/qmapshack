@@ -1019,7 +1019,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;table&gt;&lt;tr&gt;&lt;th&gt;прототип&lt;/th&gt;&lt;th&gt;заменен на...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;долгота [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;широта [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;высота [м]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
@@ -10368,7 +10368,7 @@ or
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="219"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поиск информации о местоположении маршрутной точки на выбранных веб-сайтах.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="266"/>

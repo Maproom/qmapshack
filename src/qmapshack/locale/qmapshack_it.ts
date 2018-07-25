@@ -23,97 +23,87 @@
 <context>
     <name>CActivityTrk</name>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
         <source>Foot</source>
-        <translation>A piedi</translation>
+        <translation type="vanished">A piedi</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Bicycle</source>
-        <translation>Bicicletta</translation>
+        <translation type="vanished">Bicicletta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="67"/>
         <source>Motor Bike</source>
-        <translation>Motocicletta</translation>
+        <translation type="vanished">Motocicletta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="75"/>
         <source>Car</source>
-        <translation>Automobile</translation>
+        <translation type="vanished">Automobile</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="83"/>
         <source>Cable Car</source>
-        <translation>Funivia</translation>
+        <translation type="vanished">Funivia</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="91"/>
         <source>Swim</source>
-        <translation>Nuoto</translation>
+        <translation type="vanished">Nuoto</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="99"/>
         <source>Ship</source>
-        <translation>In barca</translation>
+        <translation type="vanished">In barca</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="115"/>
         <source>Ski/Winter</source>
-        <translation>Sci</translation>
+        <translation type="vanished">Sci</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="161"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="89"/>
         <source>No Activity</source>
         <translation>Nessuna</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="241"/>
         <source>Total</source>
         <translation>Totale</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="271"/>
         <source>Ascent:</source>
         <translation>Ascesa:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="372"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="295"/>
         <source>Descent:</source>
         <translation>Discesa:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="107"/>
         <source>Aeronautics</source>
-        <translation>Aeronautica</translation>
+        <translation type="vanished">Aeronautica</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="123"/>
         <source>Public Transport</source>
-        <translation>Trasporti publici</translation>
+        <translation type="vanished">Trasporti publici</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="324"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="247"/>
         <source>Distance:</source>
         <translation>Distanza:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="396"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="319"/>
         <source>Speed Moving:</source>
         <translation>Velocità in movimento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="420"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="343"/>
         <source>Speed Total:</source>
         <translation>Velocità complessiva:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="367"/>
         <source>Time Moving:</source>
         <translation>Tempo in movimento:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="468"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="391"/>
         <source>Time Total:</source>
         <translation>Tempo complessivo:</translation>
     </message>
@@ -659,12 +649,12 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation>Varie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="414"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="413"/>
         <source>Color</source>
         <translation>Colore</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="415"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="414"/>
         <source>Activity</source>
         <translation>Attività</translation>
     </message>
@@ -685,7 +675,7 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation>Figura%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1071"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
         <source>Unknown</source>
         <translation>Sconosciuto</translation>
     </message>
@@ -1025,16 +1015,16 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
-        <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
+        <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="43"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="93"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="94"/>
         <source>enter name and URL</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1485,37 +1475,37 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
         <translation>Visualizza punti (nascosti).</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2243"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2242"/>
         <source>Changed name</source>
         <translation>Nome cambiato</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2249"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2248"/>
         <source>Changed comment</source>
         <translation>Cambiato commento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2255"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2254"/>
         <source>Changed description</source>
         <translation>Cambiata descrizione</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2261"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2260"/>
         <source>Changed links</source>
         <translation>Cambiato collegamento</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2272"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2271"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Cambiata l&apos;elevazione dei punti da %1 a %2 %3</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2296"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2294"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; tracce complete.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2335"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2332"/>
         <source>Changed activity to &apos;%1&apos; for range(%2..%3).</source>
         <translation>Cambiata l&apos;attività a &apos;%1&apos; nell&apos;intervallo (%2..%3).</translation>
     </message>
@@ -1618,17 +1608,17 @@ Per risolvere questo conflitto si può salvare una copia, forzare la versione o 
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="609"/>
+        <location filename="../gis/gpx/serialization.cpp" line="627"/>
         <source>Archived</source>
         <translation>Archiviata</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="613"/>
+        <location filename="../gis/gpx/serialization.cpp" line="631"/>
         <source>Available</source>
         <translation>Disponibile</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="617"/>
+        <location filename="../gis/gpx/serialization.cpp" line="635"/>
         <source>Not Available</source>
         <translation>Non disponibile</translation>
     </message>
@@ -4122,17 +4112,17 @@ non è una definizione di coordinate valida:
         <translation>profilo: %1, alternativa: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="706"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
         <source>BRouter: not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="801"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="803"/>
         <source>Error:</source>
         <translation>Errore:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="807"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="809"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
         <translation>QMapShack comunica con BRouter tramite una connessione di rete. Di solito questo viene fatto su un indirizzo speciale che non può essere raggiunto dall&apos;esterno del tuo dispositivo. Tuttavia, BRouter ascolta le connessioni su tutte le interfacce disponibili. Se ci si trova nella propria rete privata con un firewall attivo, questo non è un grosso problema. Se si è in una rete pubblica, ogni porta aperta rappresenta un rischio in quanto può essere utilizzata da qualcun altro per compromettere il sistema. In questo caso, non è consigliabile utilizzare il servizio BRouter locale. Se viene visualizzato questo avviso e si utilizza la versione di BRouter&gt; = 1.4.10, è possibile applicare il binding all&apos;indirizzo locale impostando il nome host su &quot;localhost&quot; e selezionare &quot;Bind to hostname only&quot; nell&apos;impostazione utilizzando la modalità esperto.</translation>
     </message>
@@ -4175,42 +4165,42 @@ non è una definizione di coordinate valida:
         <translation>&lt;br/&gt;Tempo di calcolo: %1s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="854"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="856"/>
         <source>running</source>
         <translation>in esecuzine</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="846"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="848"/>
         <source>starting</source>
         <translation>partenza</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="739"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="741"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Versione %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="836"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="838"/>
         <source>Warning...</source>
         <translation>Attenzione...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="841"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="843"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Comprendo i rischi. Non ripetermelo.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="861"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="863"/>
         <source>stopped</source>
         <translation>fermato</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="872"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="874"/>
         <source>not installed</source>
         <translation>non installato</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="883"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="885"/>
         <source>online</source>
         <translation>online</translation>
     </message>

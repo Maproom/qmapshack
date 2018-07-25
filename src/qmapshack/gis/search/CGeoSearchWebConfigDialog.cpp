@@ -38,6 +38,7 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
                              "<tr><th>placeholder</th><th>replaced by...</th></tr>"
                              "<tr><td>%1</td><td>longitude [°]</td></tr>"
                              "<tr><td>%2</td><td>latitude [°]</td></tr>"
+                             "<tr><td>%3</td><td>elevation [m]</td></tr>"
                              "</table>");
 
     const QString& msg3 = tr("<p>To edit a service select either it's name or URL and do a double click (alternative: press F2). "

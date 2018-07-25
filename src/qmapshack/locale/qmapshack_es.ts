@@ -1982,58 +1982,30 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="637"/>
-        <location filename="../gis/CGisListWks.cpp" line="1956"/>
-        <location filename="../gis/CGisListWks.cpp" line="1994"/>
+        <location filename="../gis/CGisListWks.cpp" line="1948"/>
+        <location filename="../gis/CGisListWks.cpp" line="1986"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Actualizar dispositivos&lt;/b&gt;&lt;p&gt;Actualizar %1&lt;br/&gt;Por favor espere...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="949"/>
-        <source>Project (Workspace)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="974"/>
-        <source>Project (Device)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="989"/>
-        <source>Trash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1001"/>
         <source>Track</source>
-        <translation type="unfinished">Track</translation>
+        <translation type="obsolete">Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1025"/>
-        <source>Waypoint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
         <source>Route</source>
-        <translation type="unfinished">Ruta</translation>
+        <translation type="obsolete">Ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1068"/>
         <source>Area</source>
-        <translation type="unfinished">Área</translation>
+        <translation type="obsolete">Área</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
-        <source>GIS Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Delete project...</source>
         <translation>Eliminar Proyecto...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Do you really want to delete %1?</source>
         <translation>¿Desea realmente eliminar %1?</translation>
     </message>
@@ -2130,12 +2102,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
         <translation>Cargando espacio de trabajo. Por favor espere.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>Close all projects...</source>
         <translation>Cerrar todos los proyectos...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Esto eliminará todos los proyectos del espacio de trabajo.</translation>
     </message>

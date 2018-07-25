@@ -2003,18 +2003,18 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="637"/>
-        <location filename="../gis/CGisListWks.cpp" line="1956"/>
-        <location filename="../gis/CGisListWks.cpp" line="1994"/>
+        <location filename="../gis/CGisListWks.cpp" line="1948"/>
+        <location filename="../gis/CGisListWks.cpp" line="1986"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -2100,52 +2100,44 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="949"/>
         <source>Project (Workspace)</source>
-        <translation>Projekt (Arbeitsplatz)</translation>
+        <translation type="vanished">Projekt (Arbeitsplatz)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="974"/>
         <source>Project (Device)</source>
-        <translation>Projekt (Gerät)</translation>
+        <translation type="vanished">Projekt (Gerät)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="989"/>
         <source>Trash</source>
-        <translation>Mülleimer</translation>
+        <translation type="vanished">Mülleimer</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1001"/>
         <source>Track</source>
-        <translation>Track</translation>
+        <translation type="vanished">Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1025"/>
         <source>Waypoint</source>
-        <translation>Wegpunkt</translation>
+        <translation type="vanished">Wegpunkt</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
         <source>Route</source>
-        <translation>Route</translation>
+        <translation type="vanished">Route</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1068"/>
         <source>Area</source>
-        <translation>Gebiet</translation>
+        <translation type="vanished">Gebiet</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
         <source>GIS Items</source>
-        <translation>GIS Elemente</translation>
+        <translation type="vanished">GIS Elemente</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>

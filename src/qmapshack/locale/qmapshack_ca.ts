@@ -2064,8 +2064,8 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="637"/>
-        <location filename="../gis/CGisListWks.cpp" line="1956"/>
-        <location filename="../gis/CGisListWks.cpp" line="1994"/>
+        <location filename="../gis/CGisListWks.cpp" line="1948"/>
+        <location filename="../gis/CGisListWks.cpp" line="1986"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Modifica els dispositius &lt;/b&gt;&lt;p&gt;Modifica %1&lt;br/&gt;Si us plau, espereu...&lt;/p&gt;</translation>
     </message>
@@ -2080,62 +2080,34 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>S&apos;està carregant l&apos;espai de treball. Espera.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="949"/>
-        <source>Project (Workspace)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="974"/>
-        <source>Project (Device)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="989"/>
-        <source>Trash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1001"/>
         <source>Track</source>
-        <translation type="unfinished">Track</translation>
+        <translation type="obsolete">Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1025"/>
-        <source>Waypoint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
         <source>Route</source>
-        <translation type="unfinished">Itinerari</translation>
+        <translation type="obsolete">Itinerari</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1068"/>
         <source>Area</source>
-        <translation type="unfinished">Àrea</translation>
+        <translation type="obsolete">Àrea</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
-        <source>GIS Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>Close all projects...</source>
         <translation>Tancar tots els projectes...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>S&apos;eliminaran tots els projectes de l&apos;espai de treball.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Delete project...</source>
         <translation>Suprimeix el projecte...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Do you really want to delete %1?</source>
         <translation>Esteu segur que voleu suprimir %1?</translation>
     </message>

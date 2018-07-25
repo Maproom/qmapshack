@@ -996,12 +996,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="85"/>
         <source>Search Web for Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar en la web esta posición</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="99"/>
         <source>Configure Services</source>
-        <translation type="unfinished">Configurar Servicios</translation>
+        <translation>Configurar Servicios</translation>
     </message>
 </context>
 <context>
@@ -1009,22 +1009,22 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;b&gt;Añade nuevos servicios&lt;/b&gt;&lt;p&gt;Para añadir tus propios servicios es necesario un nombre y una URL con indicadores de posición para coordenadas. Los indicadores de posición son:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;table&gt;&lt;tr&gt;&lt;th&gt;indicador de posición&lt;/th&gt;&lt;th&gt;reemplazado por...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitud [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitud [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;altitud [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Para editar un servicio haga doble clic o F2 en él. También se pueden cambiar los predeterminados. Si se eliminan todos los servicios se restaurarán en el siguiente inicio los predeterminados.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="94"/>
         <source>enter name and URL</source>
-        <translation type="unfinished"></translation>
+        <translation>introducir nombre  URL</translation>
     </message>
 </context>
 <context>
@@ -10340,7 +10340,7 @@ o
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="219"/>
         <source>Search for information about the waypoint&apos;s position on selected websites.</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar información sobre el waypoint en webs seleccionadas</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="266"/>

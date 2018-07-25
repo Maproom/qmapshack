@@ -49,6 +49,7 @@ private slots:
     void slotNogoArea();
     void slotEditRadius();
     void slotAddElevation();
+    void slotSearchWeb();
 
 private:
     IGisItem::key_t key;

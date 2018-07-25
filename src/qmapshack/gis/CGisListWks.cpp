@@ -48,6 +48,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/search/CGeoSearch.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/slf/CSlfProject.h"
 #include "gis/suunto/CLogProject.h"
 #include "gis/suunto/CSmlProject.h"
@@ -1030,6 +1031,8 @@ void CGisListWks::showMenuItemWpt(const QPoint &p)
     menu.addAction(actionDelRadiusWpt);
     menu.addAction(actionNogoWpt);
     menu.addSeparator();
+    menu.addMenu(CGeoSearchWeb::self().getMenu(this, SLOT(slotSearchWeb()), &menu));
+    menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
 }
@@ -1085,7 +1088,6 @@ void CGisListWks::showMenuItem(const QPoint &p)
     menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
-
 }
 
 void CGisListWks::slotContextMenu(const QPoint& point)
@@ -2292,4 +2294,23 @@ void CGisListWks::slotEleWptTrk()
     }
 
     CGisWorkspace::self().addEleToWptTrkByKey(keys);
+}
+
+void CGisListWks::slotSearchWeb()
+{
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+
+    IGisItem * item = dynamic_cast<IGisItem*>(currentItem());
+    if(nullptr == item)
+    {
+        return;
+    }
+
+    QObject * obj = sender();
+    bool ok = false;
+    int serviceId = obj->property("ServiceID").toInt(&ok);
+    if(ok)
+    {
+        CGisWorkspace::self().searchWptInWeb(item->getKey(), serviceId);
+    }
 }

@@ -131,40 +131,36 @@ private:
     void migrateDB1to2();
     void migrateDB2to3();
     void setVisibilityOnMap(bool visible);
-    QAction * addSortAction(QMenu * menu, QActionGroup *actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode);
+    QAction * addSortAction(QObject *parent, QActionGroup *actionGroup, const QString& icon, const QString& text, IGisProject::sorting_folder_e mode);
+    QAction * addAction(const QIcon& icon, const QString& name, QObject * parent, const char * slot);
+
+    void showMenuProjectWks(const QPoint &p);
+    void showMenuProjectDev(const QPoint &p);
+    void showMenuProjectTrash(const QPoint &p);
+    void showMenuItemTrk(const QPoint &p);
+    void showMenuItemWpt(const QPoint &p);
+    void showMenuItemRte(const QPoint &p);
+    void showMenuItemOvl(const QPoint &p);
+    void showMenuItem(const QPoint &p);
 
     QSqlDatabase db;
 
-    QMenu * menuProjectWks;
-    QAction  * actionSave;
-    QAction  * actionSaveAs;
-    QAction  * actionSaveAsStrict;
-    QAction  * actionAutoSave;
-    QAction  * actionCopyPrj;
-    QAction  * actionEditPrj;
-    QAction  * actionCloseProj;
-    QAction  * actionShowOnMap;
-    QAction  * actionHideFrMap;
-    QAction  * actionSyncWksDev;
-    QAction  * actionSyncDB;
-    QAction  * actionSortByTime;
-    QAction  * actionSortByName;
-
-
-
-    QActionGroup * actionGroup;
-
-    QMenu * menuProjectDev;
-    QAction  * actionDelProj;
-    QAction  * actionSyncDevWks;
-
-    QMenu * menuProjectTrash;
-
-    QMenu * menuItem;
-    QMenu * menuItemTrk;
-    QMenu * menuItemWpt;
-    QMenu * menuItemRte;
-    QMenu * menuItemOvl;
+    QActionGroup * actionGroupSort;
+    QAction * actionSave;
+    QAction * actionSaveAs;
+    QAction * actionSaveAsStrict;
+    QAction * actionAutoSave;
+    QAction * actionCopyPrj;
+    QAction * actionEditPrj;
+    QAction * actionCloseProj;
+    QAction * actionShowOnMap;
+    QAction * actionHideFrMap;
+    QAction * actionSyncWksDev;
+    QAction * actionSyncDB;
+    QAction * actionSortByTime;
+    QAction * actionSortByName;
+    QAction * actionDelProj;
+    QAction * actionSyncDevWks;
     QAction * actionEditDetails;
     QAction * actionCopyItem;
     QAction * actionDelete;

@@ -968,7 +968,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="127"/>
         <source>Configure Services</source>
-        <translation>Configure Servicios</translation>
+        <translation>Configurar Servicios</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
@@ -1011,7 +1011,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="96"/>
         <source>Configure Services</source>
-        <translation type="unfinished">Configure Servicios</translation>
+        <translation type="unfinished">Configurar Servicios</translation>
     </message>
 </context>
 <context>
@@ -6317,7 +6317,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>To add files with elevation data use &lt;b&gt;File-&gt;Setup DEM Paths&lt;/b&gt;.  Or click &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</source>
-        <translation type="vanished">Para añadir archivos con datos de altitud &lt;b&gt;Archivo-&gt;configure rutas de DEM&lt;/b&gt;.  O clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aqui&lt;/b&gt;&lt;/a&gt;</translation>
+        <translation type="vanished">Para añadir archivos con datos de altitud &lt;b&gt;Archivo-&gt;configurar rutas de DEM&lt;/b&gt;.  O clic &lt;a href=&apos;setup&apos;&gt;&lt;b&gt;aqui&lt;/b&gt;&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="112"/>
@@ -7558,7 +7558,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
         <source>Configure Services...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar Servicios...</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
@@ -7578,12 +7578,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
         <source>Add new</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir nueva</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
         <source>Delete selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar lo seleccionado</translation>
     </message>
 </context>
 <context>
@@ -8002,7 +8002,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="14"/>
         <source>Invalid points...</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntos inválidos...</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
@@ -8013,17 +8013,17 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
         <source>Invalid points:</source>
-        <translation type="unfinished"></translation>
+        <translation>Puntos inválidos:</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
         <source>Do not ask again for this project</source>
-        <translation type="unfinished"></translation>
+        <translation>No volver a preguntar para este proyecto</translation>
     </message>
     <message>
         <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
         <source>Show Details...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver detalles...</translation>
     </message>
 </context>
 <context>

@@ -104,6 +104,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     db.open();
     configDB();
 
+    // workspace project related actions
     actionEditPrj       = addAction(QIcon("://icons/32x32/EditDetails.png"), tr("Edit.."), this, SLOT(slotEditPrj()));
     actionCopyPrj       = addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy to..."), this, SLOT(slotCopyProject()));
     actionShowOnMap     = addAction(QIcon("://icons/32x32/ShowAll.png"), tr("Show on Map"), this, SLOT(slotShowOnMap()));
@@ -121,11 +122,16 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionSyncDB        = addAction(QIcon("://icons/32x32/DatabaseSync.png"), tr("Sync. with Database"), this, SLOT(slotSyncDB()));
     actionCloseProj     = addAction(QIcon("://icons/32x32/Close.png"), tr("Close"), this, SLOT(slotCloseProject()));
 
+    // device project related actions
     actionSyncDevWks    = addAction(QIcon("://icons/32x32/Device.png"),tr("Update Project on Device"), this, SLOT(slotSyncDevWks()));
     actionDelProj       = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteProject()));
 
+    // common to all items actions
     actionEditDetails   = addAction(QIcon("://icons/32x32/EditDetails.png"),tr("Edit..."), this, SLOT(slotEditItem()));
     actionCopyItem      = addAction(QIcon("://icons/32x32/Copy.png"),tr("Copy to..."), this, SLOT(slotCopyItem()));
+    actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
+
+    // track related actions
     actionFocusTrk      = addAction(QIcon("://icons/32x32/TrkProfile.png"),tr("Track Profile"), this, SLOT(slotFocusTrk(bool)));
     actionFocusTrk->setCheckable(true);
     actionRangeTrk      = addAction(QIcon("://icons/32x32/SelectRange.png"), tr("Select Range"), this, SLOT(slotRangeTrk()));
@@ -138,8 +144,8 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionCopyTrkWithWpt = addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     actionNogoTrk       = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, SLOT(slotNogoItem()));
     actionNogoTrk->setCheckable(true);
-    actionDelete        = addAction(QIcon("://icons/32x32/DeleteOne.png"),tr("Delete"), this, SLOT(slotDeleteItem()));
 
+    // waypoint related actions
     actionBubbleWpt     = addAction(QIcon("://icons/32x32/Bubble.png"),  tr("Show Bubble"), this, SLOT(slotBubbleWpt()));
     actionBubbleWpt->setCheckable(true);
     actionMoveWpt       = addAction(QIcon("://icons/32x32/WptMove.png"), tr("Move Waypoint"), this, SLOT(slotMoveWpt()));
@@ -149,6 +155,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoWpt       = addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoWpt->setCheckable(true);
 
+    // route related actions
     actionFocusRte      = addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"), this, SLOT(slotFocusRte(bool)));
     actionFocusRte->setCheckable(true);
     actionCalcRte       = addAction(QIcon("://icons/32x32/Apply.png"), tr("Calculate Route"), this, SLOT(slotCalcRte()));
@@ -159,10 +166,12 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionNogoRte       = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, SLOT(slotNogoItem()));
     actionNogoRte->setCheckable(true);
 
+    // are related actions
     actionEditArea      = addAction(QIcon("://icons/32x32/AreaMove.png"),tr("Edit Area Points"), this, SLOT(slotEditArea()));
     actionNogoArea      = addAction(QIcon("://icons/32x32/NoGo.png"),tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoArea->setCheckable(true);
 
+    // several GIS items related actions
     actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
     actionSymWpt        = addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
 
@@ -937,6 +946,7 @@ void CGisListWks::slotLoadWorkspace()
 void CGisListWks::showMenuProjectWks(const QPoint& p)
 {
     QMenu menu(this);
+    menu.addSection(tr("Project (Workspace)"));
     menu.addAction(actionEditPrj);
     menu.addAction(actionCopyPrj);
     menu.addAction(actionShowOnMap);
@@ -961,6 +971,7 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
 void CGisListWks::showMenuProjectDev(const QPoint &p)
 {
     QMenu menu(this);
+    menu.addSection(tr("Project (Device)"));
     menu.addAction(actionEditPrj);
     menu.addAction(actionCopyPrj);
     menu.addAction(actionShowOnMap);
@@ -975,6 +986,7 @@ void CGisListWks::showMenuProjectDev(const QPoint &p)
 void CGisListWks::showMenuProjectTrash(const QPoint &p)
 {
     QMenu menu(this);
+    menu.addSection(tr("Trash"));
     menu.addAction(actionSaveAs);
     menu.addAction(actionSaveAsStrict);
     menu.addAction(actionCloseProj);
@@ -986,6 +998,7 @@ void CGisListWks::showMenuItemTrk(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
+    menu.addSection(tr("Track"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1009,6 +1022,7 @@ void CGisListWks::showMenuItemWpt(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
+    menu.addSection(tr("Waypoint"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1030,6 +1044,7 @@ void CGisListWks::showMenuItemRte(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
+    menu.addSection(tr("Route"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1050,6 +1065,7 @@ void CGisListWks::showMenuItemOvl(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
+    menu.addSection(tr("Area"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1065,6 +1081,7 @@ void CGisListWks::showMenuItem(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
+    menu.addSection(tr("GIS Items"));
     menu.addAction(actionCopyItem);
     menu.addSeparator();
     menu.addAction(actionRteFromWpt);

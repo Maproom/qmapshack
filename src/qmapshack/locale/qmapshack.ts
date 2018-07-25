@@ -2012,8 +2012,8 @@ To solve this conflict you can create and save a clone, force your version or dr
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="637"/>
-        <location filename="../gis/CGisListWks.cpp" line="1956"/>
-        <location filename="../gis/CGisListWks.cpp" line="1994"/>
+        <location filename="../gis/CGisListWks.cpp" line="1948"/>
+        <location filename="../gis/CGisListWks.cpp" line="1986"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2028,62 +2028,22 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="949"/>
-        <source>Project (Workspace)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="974"/>
-        <source>Project (Device)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="989"/>
-        <source>Trash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1001"/>
-        <source>Track</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1025"/>
-        <source>Waypoint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
-        <source>Route</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1068"/>
-        <source>Area</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
-        <source>GIS Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>Close all projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>This will remove all projects from the workspace.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Delete project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Do you really want to delete %1?</source>
         <translation type="unfinished"></translation>
     </message>

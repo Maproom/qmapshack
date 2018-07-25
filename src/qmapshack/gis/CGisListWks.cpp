@@ -946,7 +946,6 @@ void CGisListWks::slotLoadWorkspace()
 void CGisListWks::showMenuProjectWks(const QPoint& p)
 {
     QMenu menu(this);
-    menu.addSection(tr("Project (Workspace)"));
     menu.addAction(actionEditPrj);
     menu.addAction(actionCopyPrj);
     menu.addAction(actionShowOnMap);
@@ -971,7 +970,6 @@ void CGisListWks::showMenuProjectWks(const QPoint& p)
 void CGisListWks::showMenuProjectDev(const QPoint &p)
 {
     QMenu menu(this);
-    menu.addSection(tr("Project (Device)"));
     menu.addAction(actionEditPrj);
     menu.addAction(actionCopyPrj);
     menu.addAction(actionShowOnMap);
@@ -986,7 +984,6 @@ void CGisListWks::showMenuProjectDev(const QPoint &p)
 void CGisListWks::showMenuProjectTrash(const QPoint &p)
 {
     QMenu menu(this);
-    menu.addSection(tr("Trash"));
     menu.addAction(actionSaveAs);
     menu.addAction(actionSaveAsStrict);
     menu.addAction(actionCloseProj);
@@ -998,7 +995,6 @@ void CGisListWks::showMenuItemTrk(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
-    menu.addSection(tr("Track"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1022,7 +1018,6 @@ void CGisListWks::showMenuItemWpt(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
-    menu.addSection(tr("Waypoint"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1044,7 +1039,6 @@ void CGisListWks::showMenuItemRte(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
-    menu.addSection(tr("Route"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1065,7 +1059,6 @@ void CGisListWks::showMenuItemOvl(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
-    menu.addSection(tr("Area"));
     menu.addAction(actionEditDetails);
     menu.addAction(actionCopyItem);
     menu.addSeparator();
@@ -1081,7 +1074,6 @@ void CGisListWks::showMenuItem(const QPoint &p)
     CGisWorkspace::self().slotWksItemSelectionReset();
 
     QMenu menu(this);
-    menu.addSection(tr("GIS Items"));
     menu.addAction(actionCopyItem);
     menu.addSeparator();
     menu.addAction(actionRteFromWpt);

@@ -2073,69 +2073,41 @@ Pour résoudre ce conflit vous pouvez créer et sauvegarder un clone, forcer vot
         <translation>Chargement de l&apos;espace de travail. Patientez.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="949"/>
-        <source>Project (Workspace)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="974"/>
-        <source>Project (Device)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="989"/>
-        <source>Trash</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1001"/>
         <source>Track</source>
-        <translation type="unfinished">Trace</translation>
+        <translation type="obsolete">Trace</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1025"/>
-        <source>Waypoint</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1047"/>
         <source>Route</source>
-        <translation type="unfinished">Calcul d&apos;itinéraire</translation>
+        <translation type="obsolete">Calcul d&apos;itinéraire</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1068"/>
         <source>Area</source>
-        <translation type="unfinished">Surface</translation>
+        <translation type="obsolete">Surface</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1084"/>
-        <source>GIS Items</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>Close all projects...</source>
         <translation>Fermer tous les projets...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1380"/>
+        <location filename="../gis/CGisListWks.cpp" line="1372"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Ceci enlevera tous les projets de l&apos;espace de travail.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Delete project...</source>
         <translation>Supprimer le projet...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1406"/>
+        <location filename="../gis/CGisListWks.cpp" line="1398"/>
         <source>Do you really want to delete %1?</source>
         <translation>Êtes-vous sûr de vouloir supprimer %1?</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="637"/>
-        <location filename="../gis/CGisListWks.cpp" line="1956"/>
-        <location filename="../gis/CGisListWks.cpp" line="1994"/>
+        <location filename="../gis/CGisListWks.cpp" line="1948"/>
+        <location filename="../gis/CGisListWks.cpp" line="1986"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Mise à jour des appareils&lt;/b&gt;&lt;p&gt;Mise à jour de %1&lt;br/&gt;Patientez...&lt;/p&gt;</translation>
     </message>

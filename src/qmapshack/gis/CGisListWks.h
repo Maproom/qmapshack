@@ -170,6 +170,7 @@ private:
     QAction * actionEditRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
+    QAction * actionSearchWebWpt;
     QAction * actionFocusTrk;
     QAction * actionEditTrk;
     QAction * actionReverseTrk;

@@ -346,7 +346,7 @@ public:
 
     void editWptRadius(const IGisItem::key_t &key);
 
-    void searchWptInWeb(const IGisItem::key_t &key, qint32 serviceId);
+    void searchWeb(const IGisItem::key_t &key);
 
     /**
        @brief Set user focus to track

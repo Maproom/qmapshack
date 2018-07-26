@@ -858,13 +858,13 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::searchWptInWeb(const IGisItem::key_t &key, qint32 serviceId)
+void CGisWorkspace::searchWeb(const IGisItem::key_t &key)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
     CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(nullptr != wpt)
     {
-        CGeoSearchWeb::self().search(wpt->getPosition(), serviceId);
+        CGeoSearchWeb::self().search(wpt->getPosition());
     }
 }
 

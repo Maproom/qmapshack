@@ -155,6 +155,7 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionDelRadiusWpt  = addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt       = addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoWpt->setCheckable(true);
+    actionSearchWebWpt  = addAction(QIcon("://icons/32x32/SearchWeb.png"), tr("Search Web for Position"), this, SLOT(slotSearchWeb()));
 
     // route related actions
     actionFocusRte      = addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"), this, SLOT(slotFocusRte(bool)));
@@ -1031,7 +1032,7 @@ void CGisListWks::showMenuItemWpt(const QPoint &p)
     menu.addAction(actionDelRadiusWpt);
     menu.addAction(actionNogoWpt);
     menu.addSeparator();
-    menu.addMenu(CGeoSearchWeb::self().getMenu(this, SLOT(slotSearchWeb()), &menu));
+    menu.addAction(actionSearchWebWpt);
     menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
@@ -2298,7 +2299,7 @@ void CGisListWks::slotEleWptTrk()
 
 void CGisListWks::slotSearchWeb()
 {
-    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    CGisListWksEditLock lock(false, IGisItem::mutexItems);
 
     IGisItem * item = dynamic_cast<IGisItem*>(currentItem());
     if(nullptr == item)
@@ -2306,11 +2307,5 @@ void CGisListWks::slotSearchWeb()
         return;
     }
 
-    QObject * obj = sender();
-    bool ok = false;
-    int serviceId = obj->property("ServiceID").toInt(&ok);
-    if(ok)
-    {
-        CGisWorkspace::self().searchWptInWeb(item->getKey(), serviceId);
-    }
+    CGisWorkspace::self().searchWeb(item->getKey());
 }

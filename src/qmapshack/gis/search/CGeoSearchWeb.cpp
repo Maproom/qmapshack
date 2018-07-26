@@ -80,32 +80,31 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu * CGeoSearchWeb::getMenu(QObject * obj, const char* slot, QWidget * parent) const
-{
-    QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
-    menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
 
+void CGeoSearchWeb::search(const QPointF& pt) const
+{
+    QMenu menu(CMainWindow::self().getBestWidgetForParent());
+
+    QAction * action;
     int serviceId = 0;
     for(const service_t& service : services)
     {
-        QAction * action = menu->addAction(QIcon(service.icon), service.name);
+        action = menu.addAction(QIcon(service.icon), service.name);
         action->setProperty("ServiceID", serviceId++);
-        if(obj != nullptr)
-        {
-            connect(action, SIGNAL(triggered(bool)), obj, slot);
-        }
     }
-    menu->addSeparator();
-    QAction * act = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
-    connect(act, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
+    menu.addSeparator();
+    action = menu.addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+    connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
 
-    return menu;
-}
+    action = menu.exec(QCursor::pos());
+    if(action == nullptr)
+    {
+        return;
+    }
 
-
-void CGeoSearchWeb::search(const QPointF& pt, int serviceId) const
-{
-    if((serviceId < 0) || (serviceId >= services.size()))
+    bool ok = false;
+    serviceId = action->property("ServiceID").toInt(&ok);
+    if(!ok)
     {
         return;
     }

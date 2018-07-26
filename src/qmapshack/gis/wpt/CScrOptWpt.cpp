@@ -138,17 +138,7 @@ void CScrOptWpt::slotAddElevation()
 
 void CScrOptWpt::slotSearchWeb()
 {
-    QMenu * menu = CGeoSearchWeb::self().getMenu(nullptr, "", this);
-    QAction * action = menu->exec(QCursor::pos());
-    if(action != nullptr)
-    {
-        bool ok = false;
-        int serviceId = action->property("ServiceID").toInt(&ok);
-        if(ok)
-        {
-            CGisWorkspace::self().searchWptInWeb(key, serviceId);
-        }
-    }
+    CGisWorkspace::self().searchWeb(key);
     close();
 }
 

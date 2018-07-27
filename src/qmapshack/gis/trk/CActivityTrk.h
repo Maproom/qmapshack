@@ -28,6 +28,7 @@
 #include <QPointer>
 #include <QSet>
 #include <QVector>
+
 class CGisItemTrk;
 
 class CActivityTrk
@@ -38,6 +39,21 @@ public:
 
     static void init();
     static void release();
+    /**
+       @brief Get a menu object with all available activities.
+
+       This will create a menu with all activities to select from. The actions of the menu entries
+       will be connected to CGisWorkspace::slotActivityTrkByKey() withe list of keys and the selected
+       activity as parameters.
+
+       @param keys      a list of keys the selected will be applied to
+       @param parent    the parent widget of the menu
+       @param execute   set true to execute the menu at current cursor position and to destroy it afterwards
+
+       @return  A pointer to the menu.
+     */
+    static QMenu * getMenu(const QList<IGisItem::key_t>& keys, QWidget *parent, bool execute = false);
+    static QMenu * getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute = false);
 
     struct activity_summary_t
     {
@@ -103,9 +119,13 @@ public:
         return allActivities.size();
     }
 
+    /**
+       @brief Fill a list with the names of all activities found in the track
+
+       @param names a string list to receive the names.
+     */
     void getActivityNames(QStringList& names) const;
 
-    static trkact_t selectActivity(QWidget *parent);
 
     /**
        @brief Convert internal summary to HTML table

@@ -35,7 +35,7 @@ public:
 
     static const QString defaultIcon;
 
-    QMenu * getMenu(const QPointF& pt, QWidget * parent) const;
+    QMenu * getMenu(const QPointF& pt, QWidget * parent, bool execute = false) const;
     void search(const QPointF& pt) const;
 
 private slots:

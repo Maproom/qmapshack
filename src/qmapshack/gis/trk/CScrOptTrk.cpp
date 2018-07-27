@@ -142,9 +142,7 @@ void CScrOptTrk::slotRange()
 
 void CScrOptTrk::slotActivity()
 {
-    QList<IGisItem::key_t> keys;
-    keys << key;
-    CGisWorkspace::self().activityTrkByKey(keys);
+    CActivityTrk::getMenu(key, this, true);
     close();
 }
 

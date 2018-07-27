@@ -381,8 +381,6 @@ public:
      */
     void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
 
-    void activityTrkByKey(const QList<IGisItem::key_t>& keys);
-
     void colorTrkByKey(const QList<IGisItem::key_t>& keys);
 
     void rangeTrkByKey(const IGisItem::key_t &key);
@@ -431,6 +429,7 @@ signals:
 public slots:
     void slotSaveAll();
     void slotWksItemSelectionReset();
+    void slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act);
 
 private slots:
     void slotSetGisLayerOpacity(int val);
@@ -442,7 +441,6 @@ private slots:
 
     void slotFilterNameOnly(bool yes);
     void slotFilterCompleteText(bool yes);
-
 
 private:
     friend class CMainWindow;

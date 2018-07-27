@@ -274,6 +274,49 @@ void CGisWorkspace::slotFilterCompleteText(bool yes)
     }
 }
 
+void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    if(CTrackData::trkpt_t::eAct20Bad != act)
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        QSet<IGisProject*> projects;
+        for(const IGisItem::key_t& key : keys)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+            if(trk == nullptr)
+            {
+                continue;
+            }
+
+            IGisProject * project = trk->getParentProject();
+            if(!projects.contains(project))
+            {
+                project->blockUpdateItems(true);
+                projects << project;
+            }
+
+            if(trk->isRangeSelected())
+            {
+                trk->setActivityRange(act);
+            }
+            else
+            {
+                trk->setActivity(act);
+            }
+        }
+
+        for(IGisProject * project : projects)
+        {
+            project->blockUpdateItems(false);
+        }
+    }
+}
 
 IGisProject * CGisWorkspace::selectProject()
 {
@@ -691,9 +734,7 @@ void CGisWorkspace::searchWebByKey(const IGisItem::key_t &key)
     CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
     if(wpt != nullptr)
     {
-        QMenu * menu = CGeoSearchWeb::self().getMenu(wpt->getPosition(), this);
-        menu->exec(QCursor::pos());
-        delete menu;
+        CGeoSearchWeb::self().getMenu(wpt->getPosition(), this, true);
     }
 }
 
@@ -1012,42 +1053,6 @@ void CGisWorkspace::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QL
     dlg.exec();
 
     emit sigChanged();
-}
-
-void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
-{
-    if(keys.isEmpty())
-    {
-        return;
-    }
-
-    trkact_t act = CActivityTrk::selectActivity(this);
-    if(CTrackData::trkpt_t::eAct20Bad != act)
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-
-        QSet<IGisProject*> projects;
-        for(const IGisItem::key_t& key : keys)
-        {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-            if(trk != nullptr)
-            {
-                IGisProject * project = trk->getParentProject();
-                if(!projects.contains(project))
-                {
-                    project->blockUpdateItems(true);
-                    projects << project;
-                }
-
-                trk->setActivity(act);
-            }
-        }
-
-        for(IGisProject * project : projects)
-        {
-            project->blockUpdateItems(false);
-        }
-    }
 }
 
 void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)

@@ -346,8 +346,6 @@ public:
 
     void editWptRadius(const IGisItem::key_t &key);
 
-    void searchWeb(const IGisItem::key_t &key);
-
     /**
        @brief Set user focus to track
        @param yes       true if focus is set
@@ -407,7 +405,7 @@ public:
 
     void addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys);
 
-
+    void searchWebByKey(const IGisItem::key_t &key);
 
     /**
        @brief Select a project via dialog

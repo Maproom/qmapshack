@@ -122,7 +122,6 @@ private slots:
     void slotSymWpt();
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
-    void slotSearchWeb();
 
 private:
     void configDB();
@@ -138,7 +137,7 @@ private:
     void showMenuProjectDev(const QPoint &p);
     void showMenuProjectTrash(const QPoint &p);
     void showMenuItemTrk(const QPoint &p);
-    void showMenuItemWpt(const QPoint &p);
+    void showMenuItemWpt(const QPoint &p, CGisItemWpt *wpt);
     void showMenuItemRte(const QPoint &p);
     void showMenuItemOvl(const QPoint &p);
     void showMenuItem(const QPoint &p);
@@ -170,7 +169,6 @@ private:
     QAction * actionEditRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
-    QAction * actionSearchWebWpt;
     QAction * actionFocusTrk;
     QAction * actionEditTrk;
     QAction * actionReverseTrk;

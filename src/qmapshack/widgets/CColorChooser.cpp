@@ -33,7 +33,7 @@ CColorChooser::CColorChooser(QToolButton *parent)
     setupUi(this);
     setWindowFlags(Qt::ToolTip);
 
-    for(quint32 i = 0; i < IGisItem::colorMapSize; i++)
+    for(qint32 i = 0; i < IGisItem::colorMap.size(); i++)
     {
         QPixmap pixmap(16,16);
         pixmap.fill(IGisItem::colorMap[i].color);

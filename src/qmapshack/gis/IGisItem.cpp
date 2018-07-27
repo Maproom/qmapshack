@@ -44,7 +44,7 @@ const QString IGisItem::noKey;
 
 const QString IGisItem::noName = IGisItem::tr("[no name]");
 
-const IGisItem::color_t IGisItem::colorMap[] =
+const QVector<IGisItem::color_t> IGisItem::colorMap =
 {
     {"Black",        QColor(Qt::black),       QString("://icons/8x8/bullet_black.png")}
     ,{"DarkRed",     QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png")}
@@ -65,7 +65,6 @@ const IGisItem::color_t IGisItem::colorMap[] =
     ,{"Transparent", QColor(Qt::transparent), QString()}
 };
 
-const size_t IGisItem::colorMapSize = sizeof(colorMap) / sizeof(color_t);
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
     : QTreeWidgetItem(parent, typ)
@@ -626,7 +625,7 @@ void IGisItem::showIcon()
 
 QColor IGisItem::str2color(const QString& name)
 {
-    for(size_t i = 0; i < colorMapSize; i++)
+    for(int i = 0; i < colorMap.size(); i++)
     {
         if(QString(colorMap[i].name).toUpper() == name.toUpper())
         {
@@ -639,7 +638,7 @@ QColor IGisItem::str2color(const QString& name)
 
 QString IGisItem::color2str(const QColor& color)
 {
-    for(size_t i = 0; i < colorMapSize; i++)
+    for(int i = 0; i < colorMap.size(); i++)
     {
         if(colorMap[i].color == color)
         {

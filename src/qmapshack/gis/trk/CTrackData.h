@@ -133,10 +133,9 @@ public:
             activity = act;
             flags &= ~eActMask;
             if(act2to1.contains(activity))
-            {                
+            {
                 flags |= act2to1[activity];
             }
-
         }
 
         inline act20_e getAct() const

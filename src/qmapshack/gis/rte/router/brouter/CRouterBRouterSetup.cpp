@@ -484,19 +484,19 @@ void CRouterBRouterSetup::slotLoadOnlineProfilesRequestFinished(bool ok)
     else
     {
         profilesWebPage->runJavaScript(
-                    "var profiles = [];"
-                    "var xpathResult = document.evaluate('.//@href',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
-                    "var href = xpathResult.iterateNext();"
-                    "while(href) {"
-                    "  var pmatch = href.value.match(/(\\S+)\\.brf/);"
-                    "  if (pmatch != null) {"
-                    "    profiles.push(pmatch[1]);"
-                    "  }"
-                    "  href = xpathResult.iterateNext();"
-                    "}"
-                    "profiles;",
-                    [this](const QVariant& v) { afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(v); }
-        );
+            "var profiles = [];"
+            "var xpathResult = document.evaluate('.//@href',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
+            "var href = xpathResult.iterateNext();"
+            "while(href) {"
+            "  var pmatch = href.value.match(/(\\S+)\\.brf/);"
+            "  if (pmatch != null) {"
+            "    profiles.push(pmatch[1]);"
+            "  }"
+            "  href = xpathResult.iterateNext();"
+            "}"
+            "profiles;",
+            [this](const QVariant& v) { afterSlotLoadOnlineProfilesRequestFinishedRunJavascript(v); }
+            );
     }
 }
 

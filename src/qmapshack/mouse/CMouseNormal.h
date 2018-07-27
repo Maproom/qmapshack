@@ -59,7 +59,6 @@ private slots:
     void slotSelectArea()       const;
     void slotCopyPosition()     const;
     void slotCopyPositionGrid() const;
-    void slotSearchWeb()        const;
 
 private:
     bool setScreenOption(const QPoint& pt, IGisItem * item);

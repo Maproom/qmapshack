@@ -503,7 +503,6 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {
-
     if(!setDrawContextSize(e->size()))
     {
         // reschedule resize event because one of the draw context threads is still running

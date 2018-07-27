@@ -16,11 +16,11 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
-#include "gis/CGisWorkspace.h"
 
 #include <functional>
 

@@ -40,7 +40,7 @@ const QRegExp CRouterBRouterTilesSelect::regExpTileName = QRegExp(CRouterBRouter
 //pattern for tiles date parsing: '16-Feb-2017 20:48  '
 const QRegExp CRouterBRouterTilesSelect::regExpDate = QRegExp("(\\d{1,2})-(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)-(\\d{4}) (\\d{1,2}):(\\d{2})");
 //pattern for tiles size parsing: 8.2M 271K 9.3K
-const QRegExp  CRouterBRouterTilesSelect::regExpSize = QRegExp(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
+const QRegExp CRouterBRouterTilesSelect::regExpSize = QRegExp(" {0,2}(\\d{1,3}|\\d\\.\\d)([KMG])");
 
 CRouterBRouterTilesSelect::CRouterBRouterTilesSelect(QWidget *parent)
     : QWidget(parent)
@@ -320,27 +320,27 @@ void CRouterBRouterTilesSelect::slotLoadOnlineTilesRequestFinished(bool ok)
         return;
     }
     tilesWebPage->runJavaScript(
-                QString(
-                    "var tiles = [];"
-                    "var xpathResult = document.evaluate('.//a',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
-                    "var reTileName = /").append(patternTileName).append("/;")
-                .append(
-                    "var anchor = xpathResult.iterateNext();"
-                    "while(anchor) {"
-                    "  if(reTileName.test(anchor.innerHTML)) {"
-                    "    var dateElement = anchor.parentNode.nextSibling;"
-                    "    var sizeElement = dateElement.nextSibling;"
-                    "    var tile = {};"
-                    "    tile.name = anchor.innerHTML;"
-                    "    tile.date = dateElement.innerHTML;"
-                    "    tile.size = sizeElement.innerHTML;"
-                    "    tiles.push(tile);"
-                    "  }"
-                    "  anchor = xpathResult.iterateNext();"
-                    "}"
-                    "tiles;"),
-                [this](const QVariant &v) { afterSlotLoadOnlineTilesRequestFinishedRunJavascript(v); }
-    );
+        QString(
+            "var tiles = [];"
+            "var xpathResult = document.evaluate('.//a',document.body,null,XPathResult.UNORDERED_NODE_ITERATOR_TYPE,null);"
+            "var reTileName = /").append(patternTileName).append("/;")
+        .append(
+            "var anchor = xpathResult.iterateNext();"
+            "while(anchor) {"
+            "  if(reTileName.test(anchor.innerHTML)) {"
+            "    var dateElement = anchor.parentNode.nextSibling;"
+            "    var sizeElement = dateElement.nextSibling;"
+            "    var tile = {};"
+            "    tile.name = anchor.innerHTML;"
+            "    tile.date = dateElement.innerHTML;"
+            "    tile.size = sizeElement.innerHTML;"
+            "    tiles.push(tile);"
+            "  }"
+            "  anchor = xpathResult.iterateNext();"
+            "}"
+            "tiles;"),
+        [this](const QVariant &v) { afterSlotLoadOnlineTilesRequestFinishedRunJavascript(v); }
+        );
 }
 
 void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavascript(const QVariant &v)
@@ -353,7 +353,8 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
         return;
     }
 
-    for (const QVariant & result : results) {
+    for (const QVariant & result : results)
+    {
         const QMap<QString,QVariant> & tileMap = result.toMap();
 
         const QString &tileName = tileMap.value("name").toString();
@@ -390,7 +391,7 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
                                 monthStr == "Oct" ? 10 :
                                 monthStr == "Nov" ? 11 :
                                 monthStr == "Dec" ? 12 :
-                                                    0;
+                                0;
                     int year = regExpDate.cap(3).toInt();
                     int hour = regExpDate.cap(4).toInt();
                     int min  = regExpDate.cap(5).toInt();
@@ -405,9 +406,9 @@ void CRouterBRouterTilesSelect::afterSlotLoadOnlineTilesRequestFinishedRunJavasc
                         return;
                     }
                     status->remoteSize = regExpSize.cap(1).toFloat() * (regExpSize.cap(2) == "M" ? 1048576 :
-                                                                    regExpSize.cap(2) == "G" ? 1073741824 :
-                                                                    regExpSize.cap(2) == "K" ? 1024 :
-                                                                                           1);
+                                                                        regExpSize.cap(2) == "G" ? 1073741824 :
+                                                                        regExpSize.cap(2) == "K" ? 1024 :
+                                                                        1);
                     if (status->isLocal && status->remoteDate > status->localDate)
                     {
                         status->isOutdated = true;

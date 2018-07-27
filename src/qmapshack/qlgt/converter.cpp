@@ -207,7 +207,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1, IGisProject * project)
         event.hash = md5.result().toHex();
 
         history.histIdxCurrent = history.events.size() - 1;
-    }   
+    }
 }
 
 CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl, IGisProject * project)
@@ -239,7 +239,7 @@ CGisItemTrk::CGisItemTrk(const IQlgtOverlay& ovl, IGisProject * project)
     }
 
     genKey();
-    setupHistory();        
+    setupHistory();
 }
 
 

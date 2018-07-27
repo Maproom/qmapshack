@@ -19,9 +19,6 @@
 #ifndef CGEOSEARCHWEB_H
 #define CGEOSEARCHWEB_H
 
-#include <functional>
-#include <QAction>
-#include <QIcon>
 #include <QObject>
 
 class QMenu;
@@ -38,15 +35,19 @@ public:
 
     static const QString defaultIcon;
 
+    QMenu * getMenu(const QPointF& pt, QWidget * parent) const;
     void search(const QPointF& pt) const;
 
 private slots:
     void slotConfigureServices();
+    void slotSearchWeb(int serviceId, const QPointF pt);
 
 private:
+
+    CGeoSearchWeb(QObject *parent);
     friend class CGeoSearchWebConfigDialog;
     friend class CMainWindow;
-    CGeoSearchWeb(QObject *parent);
+
     static CGeoSearchWeb * pSelf;
 
     struct service_t

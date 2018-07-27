@@ -21,7 +21,9 @@
 #include "gis/search/CGeoSearchWebConfigDialog.h"
 #include "helpers/CSettings.h"
 
+#include <functional>
 #include <QtWidgets>
+
 
 CGeoSearchWeb * CGeoSearchWeb::pSelf = nullptr;
 const QString CGeoSearchWeb::defaultIcon = "://icons/32x32/SearchWebDefault.png";
@@ -80,35 +82,35 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-
-void CGeoSearchWeb::search(const QPointF& pt) const
+QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent) const
 {
-    QMenu menu(CMainWindow::self().getBestWidgetForParent());
+    QMenu * menu = new QMenu(tr("Search Web for Position"));
+    menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
 
     QAction * action;
     int serviceId = 0;
     for(const service_t& service : services)
     {
-        action = menu.addAction(QIcon(service.icon), service.name);
-        action->setProperty("ServiceID", serviceId++);
+        action = menu->addAction(QIcon(service.icon), service.name);
+        auto func = std::bind(&CGeoSearchWeb::slotSearchWeb, &self(), serviceId++, pt);
+        connect(action, &QAction::triggered, this, func);
     }
-    menu.addSeparator();
-    action = menu.addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
+
+    menu->addSeparator();
+    action = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
     connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
+    return menu;
+}
 
-    action = menu.exec(QCursor::pos());
-    if(action == nullptr)
-    {
-        return;
-    }
+void CGeoSearchWeb::search(const QPointF& pt) const
+{
+    QMenu * menu = getMenu(pt, CMainWindow::self().getBestWidgetForParent());
+    menu->exec(QCursor::pos());
+    delete menu;
+}
 
-    bool ok = false;
-    serviceId = action->property("ServiceID").toInt(&ok);
-    if(!ok)
-    {
-        return;
-    }
-
+void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt)
+{
     QString url = services[serviceId].url;
     url = url.replace("%1", QString::number(pt.x(), 'g', 8));
     url = url.replace("%2", QString::number(pt.y(), 'g', 8));

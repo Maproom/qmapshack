@@ -684,6 +684,19 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
+void CGisWorkspace::searchWebByKey(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt != nullptr)
+    {
+        QMenu * menu = CGeoSearchWeb::self().getMenu(wpt->getPosition(), this);
+        menu->exec(QCursor::pos());
+        delete menu;
+    }
+}
+
 void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -855,16 +868,6 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
         {
             canvas->setMouseRadiusWpt(*wpt);
         }
-    }
-}
-
-void CGisWorkspace::searchWeb(const IGisItem::key_t &key)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(nullptr != wpt)
-    {
-        CGeoSearchWeb::self().search(wpt->getPosition());
     }
 }
 

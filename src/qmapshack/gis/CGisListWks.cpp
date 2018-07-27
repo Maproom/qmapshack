@@ -155,7 +155,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionDelRadiusWpt  = addAction(QIcon("://icons/32x32/WptDelProx.png"), tr("Delete Radius"), this, SLOT(slotDelRadiusWpt()));
     actionNogoWpt       = addAction(QIcon("://icons/32x32/NoGo.png"),  tr("Toggle Nogo-Area"), this, SLOT(slotNogoItem()));
     actionNogoWpt->setCheckable(true);
-    actionSearchWebWpt  = addAction(QIcon("://icons/32x32/SearchWeb.png"), tr("Search Web for Position"), this, SLOT(slotSearchWeb()));
 
     // route related actions
     actionFocusRte      = addAction(QIcon("://icons/32x32/RteInstr.png"), tr("Route Instructions"), this, SLOT(slotFocusRte(bool)));
@@ -1015,7 +1014,7 @@ void CGisListWks::showMenuItemTrk(const QPoint &p)
     menu.exec(p);
 }
 
-void CGisListWks::showMenuItemWpt(const QPoint &p)
+void CGisListWks::showMenuItemWpt(const QPoint &p, CGisItemWpt * wpt)
 {
     CGisWorkspace::self().slotWksItemSelectionReset();
 
@@ -1032,7 +1031,7 @@ void CGisListWks::showMenuItemWpt(const QPoint &p)
     menu.addAction(actionDelRadiusWpt);
     menu.addAction(actionNogoWpt);
     menu.addSeparator();
-    menu.addAction(actionSearchWebWpt);
+    menu.addMenu(CGeoSearchWeb::self().getMenu(wpt->getPosition(), &menu));
     menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
@@ -1285,7 +1284,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionNogoWpt->setChecked(radius && wpt->isNogo());
                 actionMoveWpt->setEnabled(isProjectVisible && !isOnDevice);
                 actionProjWpt->setDisabled(isOnDevice);
-                showMenuItemWpt(p);
+                showMenuItemWpt(p, wpt);
                 break;
             }
 
@@ -2297,15 +2296,3 @@ void CGisListWks::slotEleWptTrk()
     CGisWorkspace::self().addEleToWptTrkByKey(keys);
 }
 
-void CGisListWks::slotSearchWeb()
-{
-    CGisListWksEditLock lock(false, IGisItem::mutexItems);
-
-    IGisItem * item = dynamic_cast<IGisItem*>(currentItem());
-    if(nullptr == item)
-    {
-        return;
-    }
-
-    CGisWorkspace::self().searchWeb(item->getKey());
-}

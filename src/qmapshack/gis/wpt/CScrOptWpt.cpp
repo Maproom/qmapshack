@@ -138,7 +138,7 @@ void CScrOptWpt::slotAddElevation()
 
 void CScrOptWpt::slotSearchWeb()
 {
-    CGisWorkspace::self().searchWeb(key);
+    CGisWorkspace::self().searchWebByKey(key);
     close();
 }
 

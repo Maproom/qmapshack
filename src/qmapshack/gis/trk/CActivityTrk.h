@@ -37,27 +37,9 @@ class CActivityTrk
 public:
     virtual ~CActivityTrk() = default;
 
-    static void init();
-    static void release();
-    /**
-       @brief Get a menu object with all available activities.
-
-       This will create a menu with all activities to select from. The actions of the menu entries
-       will be connected to CGisWorkspace::slotActivityTrkByKey() withe list of keys and the selected
-       activity as parameters.
-
-       @param keys      a list of keys the selected will be applied to
-       @param parent    the parent widget of the menu
-       @param execute   set true to execute the menu at current cursor position and to destroy it afterwards
-
-       @return  A pointer to the menu.
-     */
-    static QMenu * getMenu(const QList<IGisItem::key_t>& keys, QWidget *parent, bool execute = false);
-    static QMenu * getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute = false);
-
-    struct activity_summary_t
+    struct summary_t
     {
-        activity_summary_t() : distance(0), ascent(0), descent(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
+        summary_t() : distance(0), ascent(0), descent(0), ellapsedSeconds(0), ellapsedSecondsMoving(0)
         {
         }
 
@@ -77,7 +59,7 @@ public:
         qreal ellapsedSecondsMoving;
     };
 
-    struct activity_range_t
+    struct range_t
     {
         qreal d1;
         qreal d2;
@@ -98,6 +80,62 @@ public:
         QString iconSmall;
         QColor color;
     };
+
+
+    static void init();
+    static void release();
+    /**
+       @brief Get a menu object with all available activities.
+
+       This will create a menu with all activities to select from. The actions of the menu entries
+       will be connected to CGisWorkspace::slotActivityTrkByKey() with the list of keys and the selected
+       activity as parameters.
+
+       @param keys      a list of keys the selected will be applied to
+       @param parent    the parent widget of the menu
+       @param execute   set true to execute the menu at current cursor position and to destroy it afterwards
+
+       @return  A pointer to the menu. Will be nullptr if (execute == true).
+     */
+    static QMenu * getMenu(const QList<IGisItem::key_t>& keys, QWidget *parent, bool execute = false);
+    /**
+       @brief Convenience wrapper to getMenu(const QList<IGisItem::key_t>& keys,...)
+    */
+    static QMenu * getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute = false);
+    /**
+       @brief Convert array of summaries to HTML table
+       @param summary   The map of summaries
+       @param acts      Set of all activities in the summary
+       @param str       string to receive HTML
+     */
+    static void printSummary(const QMap<trkact_t, summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
+    /**
+       @brief Get constant reference to activity descriptor table
+       @return The constant reference to the descriptor table.
+    */
+    static const QVector<desc_t>& getActivityDescriptors()
+    {
+        return actDescriptor;
+    }
+
+    /**
+       @brief Get descriptor entry for activity.
+       @param act   The activity to search for
+
+       @return A constant reference to the descriptor. If the activity is not found a reference to "No Activity".
+    */
+    static const desc_t& getDescriptor(trkact_t act);
+
+    /**
+       @brief Set track color for activity.
+
+       This will change the track color of an activity globally for all tracks.
+
+       @param act   the activity to select
+       @param color the color as a color string
+     */
+    static void setColor(trkact_t act, const QString& color);
+
 
 
     /**
@@ -133,35 +171,19 @@ public:
      */
     void printSummary(QString& str) const;
 
-    /**
-       @brief Convert array of summaries to HTML table
-       @param summary   The map of summaries
-       @param acts      Set of all activities in the summary
-       @param str       string to receive HTML
-     */
-    static void printSummary(const QMap<trkact_t, activity_summary_t> &summary, const QSet<trkact_t> &acts, QString& str);
-
 
     /**
        @brief Add internal summary to given array of summaries
        @param summary  an map of summaries to hold the sum
      */
-    void sumUp(QMap<trkact_t, activity_summary_t> &summary) const;
+    void sumUp(QMap<trkact_t, summary_t> &summary) const;
 
 
-    const QList<activity_range_t>& getActivityRanges() const
+    const QList<range_t>& getActivityRanges() const
     {
         return activityRanges;
     }
 
-    static const QVector<desc_t>& getActivityDescriptors()
-    {
-        return actDescriptor;
-    }
-
-    static const desc_t& getDescriptor(trkact_t act);
-
-    static void setColor(trkact_t act, const QString& color);
 
 private:
     friend class CGisItemTrk;
@@ -173,8 +195,8 @@ private:
 
     CGisItemTrk * trk;
     QSet<trkact_t> allActivities;
-    QList<activity_range_t> activityRanges;
-    QMap<trkact_t, activity_summary_t> activitySummary;
+    QList<range_t> activityRanges;
+    QMap<trkact_t, summary_t> activitySummary;
 };
 
 #endif //CACTIVITYTRK_H

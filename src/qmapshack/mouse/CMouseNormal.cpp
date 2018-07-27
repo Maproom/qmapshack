@@ -426,12 +426,6 @@ void CMouseNormal::slotSelectArea() const
     canvas->setMouseSelect();
 }
 
-void CMouseNormal::slotSearchWeb() const
-{
-    QPointF pt = mouse->getPoint();
-    gis->convertPx2Rad(pt);
-    CGeoSearchWeb::self().search(pt * RAD_TO_DEG);
-}
 
 void CMouseNormal::showContextMenu(const QPoint &point)
 {
@@ -440,6 +434,9 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     {
         menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add POI as Waypoint"), this, SLOT(slotAddPoi()));
     }
+    QPointF pt = mouse->getPoint();
+    gis->convertPx2Rad(pt);
+
     menu.addAction(QIcon("://icons/32x32/AddWpt.png"),  tr("Add Waypoint"), this, SLOT(slotAddWpt()));
     menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
     menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
@@ -447,7 +444,7 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     menu.addSeparator();
     menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
     menu.addSeparator();
-    menu.addAction(QIcon("://icons/32x32/SearchWeb.png"), tr("Search Web for Position"), this, SLOT(slotSearchWeb()));
+    menu.addMenu(CGeoSearchWeb::self().getMenu(pt * RAD_TO_DEG, &menu));
     menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position"), this, SLOT(slotCopyPosition()));
     menu.addAction(QIcon("://icons/32x32/Copy.png"), tr("Copy position (Grid)"), this, SLOT(slotCopyPositionGrid()));
 

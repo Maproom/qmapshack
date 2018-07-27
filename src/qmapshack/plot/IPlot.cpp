@@ -1217,7 +1217,7 @@ void IPlot::drawActivities(QPainter& p)
         return;
     }
 
-    const QList<CActivityTrk::activity_range_t>& ranges = trk->getActivities().getActivityRanges();
+    const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
 
     QRect rectClipping = QRect(0,0,right - left,22);
@@ -1230,7 +1230,7 @@ void IPlot::drawActivities(QPainter& p)
 
     QRect rectIconFrame(0,0,20,20);
     QRect rectIcon(2,2,16,16);
-    for(const CActivityTrk::activity_range_t& range : ranges)
+    for(const CActivityTrk::range_t& range : ranges)
     {
         int x1, x2;
         if(data->axisType == CPlotData::eAxisTime)

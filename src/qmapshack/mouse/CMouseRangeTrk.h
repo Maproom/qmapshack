@@ -48,7 +48,7 @@ public:
 private slots:
     void slotHidePoints();
     void slotShowPoints();
-    void slotActivity(trkact_t act);
+    void slotActivity();
     void slotCopy();
 
 private:

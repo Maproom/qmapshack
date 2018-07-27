@@ -75,17 +75,17 @@ public:
         enum act20_e
         {
             eAct20None      = 0
-            ,eAct20Foot     = 50
-            ,eAct20Cycle    = 100
-            ,eAct20Bike     = 200
-            ,eAct20Car      = 300
-            ,eAct20Cable    = 400
-            ,eAct20Swim     = 500
-            ,eAct20Ship     = 600
-            ,eAct20Aero     = 700
-            ,eAct20Ski      = 800
-            ,eAct20Train    = 900
-            ,eAct20MaxNum   = 1000       ///< limit to speed up for loops
+            ,eAct20Foot     = 100
+            ,eAct20Cycle    = 200
+            ,eAct20Bike     = 300
+            ,eAct20Car      = 400
+            ,eAct20Cable    = 500
+            ,eAct20Swim     = 600
+            ,eAct20Ship     = 700
+            ,eAct20Aero     = 800
+            ,eAct20Ski      = 900
+            ,eAct20Train    = 1000
+            ,eAct20MaxNum   = 1100       ///< limit to speed up for loops
             ,eAct20Bad      = 0x7FFF
         };
 

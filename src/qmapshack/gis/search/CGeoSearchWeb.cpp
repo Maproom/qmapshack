@@ -82,9 +82,9 @@ CGeoSearchWeb::~CGeoSearchWeb()
     cfg.endGroup(); // Search
 }
 
-QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent) const
+QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent, bool execute) const
 {
-    QMenu * menu = new QMenu(tr("Search Web for Position"));
+    QMenu * menu = new QMenu(tr("Search Web for Position"), parent);
     menu->setIcon(QIcon("://icons/32x32/SearchWeb.png"));
 
     QAction * action;
@@ -99,6 +99,14 @@ QMenu *CGeoSearchWeb::getMenu(const QPointF& pt, QWidget * parent) const
     menu->addSeparator();
     action = menu->addAction(QIcon("://icons/32x32/Apply.png"),tr("Configure Services"));
     connect(action, &QAction::triggered, this, &CGeoSearchWeb::slotConfigureServices);
+
+    if(execute)
+    {
+        menu->exec(QCursor::pos());
+        delete menu;
+        return nullptr;
+    }
+
     return menu;
 }
 

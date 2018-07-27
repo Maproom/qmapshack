@@ -34,12 +34,6 @@ public:
     virtual ~CScrOptRangeTrk();
 
     void draw(QPainter& p) override;
-
-signals:
-    void activitySelected(trkact_t act);
-
-private:
-    void selectActivity();
 };
 
 #endif //CSCROPTRANGETRK_H

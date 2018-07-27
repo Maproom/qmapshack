@@ -20,6 +20,9 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
+#include "gis/CGisWorkspace.h"
+
+#include <functional>
 
 QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
@@ -81,28 +84,42 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
-trkact_t CActivityTrk::selectActivity(QWidget *parent)
+
+QMenu * CActivityTrk::getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute)
 {
-    QMenu menu(parent);
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    return getMenu(keys, parent, execute);
+}
+
+QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *parent, bool execute)
+{
+    QMenu * menu = new QMenu(tr("Set Track Activity"), parent);
+    menu->setIcon(QIcon("://icons/32x32/Activity.png"));
     QAction * act;
 
-    act = menu.addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
-    act->setData(QVariant(CTrackData::trkpt_t::eAct20None));
+    act = menu->addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
+    auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, CTrackData::trkpt_t::eAct20None);
+    QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
     for(const desc_t &desc : actDescriptor)
     {
-        act = menu.addAction(QIcon(desc.iconLarge), desc.name);
-        act->setData(QVariant(desc.activity));
+        act = menu->addAction(QIcon(desc.iconLarge), desc.name);
+        auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, desc.activity);
+        QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
     }
 
-    act = menu.exec(QCursor::pos());
-    if(nullptr != act)
+    menu->setEnabled(!keys.isEmpty());
+
+    if(execute)
     {
-        return trkact_t(act->data().toUInt(nullptr));
+        menu->exec(QCursor::pos());
+        delete menu;
+        return nullptr;
     }
-    return CTrackData::trkpt_t::eAct20Bad;
-}
 
+    return menu;
+}
 
 void CActivityTrk::update()
 {

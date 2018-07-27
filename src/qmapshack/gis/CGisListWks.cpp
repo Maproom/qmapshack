@@ -139,7 +139,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk       = addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionReverseTrk    = addAction(QIcon("://icons/32x32/Reverse.png"), tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionCombineTrk    = addAction(QIcon("://icons/32x32/Combine.png"), tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
-    actionActivityTrk   = addAction(QIcon("://icons/32x32/Activity.png"), tr("Set Track Activity"), this, SLOT(slotActivityTrk()));
     actionColorTrk      = addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
     actionEleWptTrk     = addAction(QIcon("://icons/32x32/SetEle.png"), tr("Replace Elevation by DEM"), this, SLOT(slotEleWptTrk()));
     actionCopyTrkWithWpt = addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
@@ -991,7 +990,7 @@ void CGisListWks::showMenuProjectTrash(const QPoint &p)
     menu.exec(p);
 }
 
-void CGisListWks::showMenuItemTrk(const QPoint &p)
+void CGisListWks::showMenuItemTrk(const QPoint &p, const IGisItem::key_t& key)
 {
     CGisWorkspace::self().slotWksItemSelectionReset();
 
@@ -1004,7 +1003,7 @@ void CGisListWks::showMenuItemTrk(const QPoint &p)
     menu.addAction(actionEditTrk);
     menu.addAction(actionReverseTrk);
     menu.addAction(actionCombineTrk);
-    menu.addAction(actionActivityTrk);
+    menu.addMenu(CActivityTrk::getMenu(key, &menu));
     menu.addAction(actionColorTrk);
     menu.addAction(actionEleWptTrk);
     menu.addAction(actionCopyTrkWithWpt);
@@ -1072,7 +1071,7 @@ void CGisListWks::showMenuItemOvl(const QPoint &p)
     menu.exec(p);
 }
 
-void CGisListWks::showMenuItem(const QPoint &p)
+void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& keysTrks,  const QList<IGisItem::key_t>& keysWpts)
 {
     CGisWorkspace::self().slotWksItemSelectionReset();
 
@@ -1083,7 +1082,7 @@ void CGisListWks::showMenuItem(const QPoint &p)
     menu.addAction(actionSymWpt);
     menu.addAction(actionEleWptTrk);
     menu.addAction(actionCombineTrk);
-    menu.addAction(actionActivityTrk);
+    menu.addMenu(CActivityTrk::getMenu(keysTrks, &menu));
     menu.addAction(actionColorTrk);
     menu.addSeparator();
     menu.addAction(actionDelete);
@@ -1154,43 +1153,35 @@ void CGisListWks::slotContextMenu(const QPoint& point)
         IGisItem *gisItem = dynamic_cast<IGisItem*>(currentItem());
         if(nullptr != gisItem)
         {
-            bool hasWpts  = false;
-            bool hasTrks  = false;
-            bool onlyWpts = true;
-            bool onlyTrks = true;
+            QList<IGisItem::key_t> keysTrk;
+            QList<IGisItem::key_t> keysWpt;
+
             for(QTreeWidgetItem *item : selectedItems())
             {
-                if(item->type() == IGisItem::eTypeWpt)
+                CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+                if(trk != nullptr)
                 {
-                    hasWpts = true;
-                }
-                else
-                {
-                    onlyWpts = false;
+                    keysTrk << trk->getKey();
                 }
 
-                if(item->type() == IGisItem::eTypeTrk)
+                CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(item);
+                if(wpt != nullptr)
                 {
-                    hasTrks = true;
-                }
-                else
-                {
-                    onlyTrks = false;
-                }
-
-                if(!onlyTrks && !onlyWpts)
-                {
-                    break;
+                    keysWpt << wpt->getKey();
                 }
             }
 
+            bool hasWpts  = !keysWpt.isEmpty();
+            bool hasTrks  = !keysTrk.isEmpty();
+            bool onlyWpts = hasWpts && !hasTrks;
+            bool onlyTrks = hasTrks && !hasWpts;
+
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
-            actionActivityTrk->setEnabled(onlyTrks);
             actionColorTrk->setEnabled(onlyTrks);
             actionSymWpt->setEnabled(hasWpts);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
-            showMenuItem(p);
+            showMenuItem(p, keysTrk, keysWpt);
             return;
         }
         return;
@@ -1268,7 +1259,7 @@ void CGisListWks::slotContextMenu(const QPoint& point)
                 actionCopyTrkWithWpt->setEnabled(trk->getNumberOfAttachedWpt() != 0);
                 actionFocusTrk->setChecked(gisItem->hasUserFocus());
                 actionFocusTrk->setEnabled(isProjectVisible);
-                showMenuItemTrk(p);
+                showMenuItemTrk(p, trk->getKey());
                 break;
             }
 
@@ -1699,9 +1690,8 @@ void CGisListWks::slotCombineTrk()
     }
 }
 
-void CGisListWks::slotActivityTrk()
+void CGisListWks::slotActivityTrk(trkact_t act)
 {
-    trkact_t act = CActivityTrk::selectActivity(this);
     if(CTrackData::trkpt_t::eAct20Bad != act)
     {
         CGisListWksEditLock lock(true, IGisItem::mutexItems);

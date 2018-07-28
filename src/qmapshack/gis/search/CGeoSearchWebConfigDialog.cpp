@@ -20,9 +20,9 @@
 
 #include <QtWidgets>
 
-CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QWidget *parent)
+CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t> &services, QWidget *parent)
     : QDialog(parent)
-    , services(CGeoSearchWeb::self().services)
+    , services(services)
 {
     setupUi(this);
 
@@ -127,7 +127,18 @@ void CGeoSearchWebConfigDialog::slotReset()
         return;
     }
 
-    services.clear();
-    CGeoSearchWeb::self().addDefaultServices();
+    QList<CGeoSearchWeb::service_t>::iterator it = services.begin();
+    while(it != services.end())
+    {
+        if(it->icon != CGeoSearchWeb::defaultIcon)
+        {
+            it = services.erase(it);
+            continue;
+        }
+
+        it++;
+    }
+
+    services = CGeoSearchWeb::self().defaultServices() + services;
     setupTreeWidget();
 }

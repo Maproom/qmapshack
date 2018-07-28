@@ -26,7 +26,7 @@ class CGeoSearchWebConfigDialog : public QDialog, private Ui::IGeoSearchWebConfi
 {
     Q_OBJECT
 public:
-    CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t>& services, QWidget * parent);
+    CGeoSearchWebConfigDialog(QWidget * parent);
     virtual ~CGeoSearchWebConfigDialog() = default;
 
 public slots:
@@ -36,8 +36,10 @@ private slots:
     void slotAddNew();
     void slotDelSelected();
     void slotSelectionChanged();
+    void slotReset();
 
 private:
+    void setupTreeWidget();
     QList<CGeoSearchWeb::service_t>& services;
 };
 

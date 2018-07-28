@@ -43,8 +43,8 @@ private slots:
     void slotSearchWeb(int serviceId, const QPointF pt);
 
 private:
-
     CGeoSearchWeb(QObject *parent);
+    void addDefaultServices();
     friend class CGeoSearchWebConfigDialog;
     friend class CMainWindow;
 

@@ -190,7 +190,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="952"/>
+        <location filename="../canvas/CCanvas.cpp" line="951"/>
         <source>Setup Map Background</source>
         <translation>Nastavit pozadí mapy</translation>
     </message>
@@ -999,12 +999,12 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGeoSearchWeb</name>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="87"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="97"/>
         <source>Search Web for Position</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="100"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="110"/>
         <source>Configure Services</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1012,23 +1012,43 @@ K vyřešení tohoto střetu můžete vytvořit a uložit klona, vynutit svoji v
 <context>
     <name>CGeoSearchWebConfigDialog</name>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="94"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
         <source>enter name and URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove all selected services?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Restore default...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Remove all services and restore default list?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4436,70 +4456,70 @@ není platným vymezením soustavy souřadnic
         <translation>Chyba při vytváření adresáře s částmi %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="375"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="376"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>Nelze zpracovat: %1 není datum</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="404"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>Nelze zpracovat: %1 není platná velikost</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="725"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="726"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Chyba při získávání dostupných dat se stanovením cesty z %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="497"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
         <source>segments directory does not exist: </source>
         <translation>Adresář s částmi neexistuje: </translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="511"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="512"/>
         <source>error creating file %1: %2</source>
         <translation>Chyba při vytváření souboru %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="543"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="583"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="544"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
         <source>no valid request for filename %1</source>
         <translation>Žádný platný požadavek pro souborový název %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="548"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="549"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="592"/>
         <source>no open file assigned to request for %1</source>
         <translation>Žádný otevřený soubor nepřiřazen k požadavku pro %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="558"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="601"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="559"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
         <source>error writing to file %1: %2</source>
         <translation>Chyba při zápisu do souboru %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="627"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="628"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Chyba při přejmenovávání souboru %1 na %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="701"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="702"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Aktuální: %1 (%2), zastaralé: %3 (%4), ke stažení: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="804"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="805"/>
         <source>being downloaded: %1 of %2</source>
         <translation>Stahuje se: %1 z %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="824"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="825"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>Žádná místní data, dostupná na internetu: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="810"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="811"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>Místní data zastaralá (%1, %2 - vzdálený %3, %4)</translation>
     </message>
@@ -4519,12 +4539,12 @@ není platným vymezením soustavy souřadnic
         <translation>Neplatný výsledek, nenalezeny žádné soubory</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="819"/>
         <source>local data up to date (%1, %2)</source>
         <translation>Místní data aktuální (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="830"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="831"/>
         <source>no routing-data available</source>
         <translation>Nejsou dostupná žádná data se stanovením cesty</translation>
     </message>
@@ -7579,12 +7599,32 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add a new web service to the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
         <source>Add new</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
+        <source>Remove all selected services from the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
         <source>Delete selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
+        <source>Remove all services and restore default list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
+        <source>Reset</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -7624,88 +7664,88 @@ I don&apos;t want to read the documentation!</source>
         <translation>[žádný název]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="317"/>
+        <location filename="../gis/IGisItem.cpp" line="316"/>
         <source>The item is not part of the project in the database.</source>
         <translation>Prvek není částí projektu v databázi.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="318"/>
+        <location filename="../gis/IGisItem.cpp" line="317"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
         <translation>
 Buď je to nový prvek nebo byl v databázi někým smazán.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="324"/>
+        <location filename="../gis/IGisItem.cpp" line="323"/>
         <source>The item is not in the database.</source>
         <translation>Prvek není v databázi.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="330"/>
+        <location filename="../gis/IGisItem.cpp" line="329"/>
         <source>The item might need to be saved</source>
         <translation>Může být potřeba prvek uložit.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="414"/>
+        <location filename="../gis/IGisItem.cpp" line="413"/>
         <source>Initial version.</source>
         <translation>Počáteční verze.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="534"/>
+        <location filename="../gis/IGisItem.cpp" line="533"/>
         <source>Never ask again.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="535"/>
+        <location filename="../gis/IGisItem.cpp" line="534"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Tento prvek je pravděpodobně pouze pro čtení, protože nebyl vytvořen v programu QMapShack. Obvykle nemáte zájem měnit zavedená data. Ale pokud si myslíte, že je to tentokrát na místě, stiskněte OK.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="536"/>
+        <location filename="../gis/IGisItem.cpp" line="535"/>
         <source>Read Only Mode...</source>
         <translation>Režim pouze pro čtení...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="739"/>
-        <location filename="../gis/IGisItem.cpp" line="792"/>
+        <location filename="../gis/IGisItem.cpp" line="738"/>
+        <location filename="../gis/IGisItem.cpp" line="791"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Popis:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="742"/>
-        <location filename="../gis/IGisItem.cpp" line="795"/>
+        <location filename="../gis/IGisItem.cpp" line="741"/>
+        <location filename="../gis/IGisItem.cpp" line="794"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- žádný popis ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="753"/>
+        <location filename="../gis/IGisItem.cpp" line="752"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Poznámka:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="756"/>
+        <location filename="../gis/IGisItem.cpp" line="755"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- žádná poznámka ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="767"/>
-        <location filename="../gis/IGisItem.cpp" line="806"/>
+        <location filename="../gis/IGisItem.cpp" line="766"/>
+        <location filename="../gis/IGisItem.cpp" line="805"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Odkazy:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="770"/>
-        <location filename="../gis/IGisItem.cpp" line="809"/>
+        <location filename="../gis/IGisItem.cpp" line="769"/>
+        <location filename="../gis/IGisItem.cpp" line="808"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- žádné odkazy ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Edit name...</source>
         <translation>Upravit název...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Enter new %1 name.</source>
         <translation>Zadat nový název %1.</translation>
     </message>

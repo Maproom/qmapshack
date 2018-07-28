@@ -188,7 +188,7 @@
         <translation>&lt;h2&gt;Streckenführung (Routing)&lt;/h2&gt;&lt;p&gt;QMapShack unterstützt Online Routing Dienste. Wenn Sie aber wirklich alle Möglichkeiten einer Streckenführung nutzen wollen, brauchen Sie eine lokale Routendatenbank. Es stehen Ihnen zwei Möglichkeiten zur Verfügung.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Für Routino müssen Sie eine Datenbank aus der Open Street Map Datenbasis erstellen. QMapShack besitzt einen eingebauten &apos;Routino Database Creator&apos; (&lt;a href=&apos;CreateRoutino&apos;&gt;Werkzeug-&gt;Routino Datenbank erstellen&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Die zweite Option ist eine lokale BRouter Installation mit einer lokalen Datenbank. Klicken Sie auf &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter einstellen&lt;/a&gt;, um die nötigen Daten zu laden und zu installieren.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="952"/>
+        <location filename="../canvas/CCanvas.cpp" line="951"/>
         <source>Setup Map Background</source>
         <translation>Kartenhintergrund einstellen</translation>
     </message>
@@ -997,12 +997,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGeoSearchWeb</name>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="87"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="97"/>
         <source>Search Web for Position</source>
         <translation>Position im Web suchen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="100"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="110"/>
         <source>Configure Services</source>
         <translation>Dienste konfigurieren</translation>
     </message>
@@ -1014,21 +1014,41 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="obsolete">&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
         <translation>&lt;b&gt;Fügen Sie ihren eigenen Dienst hinzu&lt;/b&gt;&lt;p&gt;Um ihren eigenen Dienst hinzuzufügen benötigen Sie einen Namen und einen URL mit Platzhaltern. Platzhalter sind:&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation>&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;Höhe [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove...</source>
+        <translation>Entfernen...</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove all selected services?</source>
+        <translation>Alles ausgewählten Dienste entfernen?</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Restore default...</source>
+        <translation>Grundeinstellung wiederherstellen...</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Remove all services and restore default list?</source>
+        <translation>Alle Dienste entfernen und die der Grundeinstellung wiederherstellen?</translation>
     </message>
     <message>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation type="vanished">&lt;table&gt;&lt;tr&gt;&lt;th&gt;Platzhalter&lt;/th&gt;&lt;th&gt;ersetzen durch...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;Längengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;Breitengrad [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.&lt;/p&gt;</translation>
     </message>
@@ -1037,7 +1057,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="vanished">Um einen Dienst zu ändern, wählen Sie entweder den Namen oder den URL aus und klicken darauf doppelt (Alternative: F2 drücken). Sie können auch die Dienste der Standardeinstellung ändern. Wenn Sie alle Dienste entfernen, dann werden beim nächsten Start von QMapShack die Dienste aus der Standardeinstellung wiederhergestellt.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="94"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
         <source>enter name and URL</source>
         <translation>Namen und URL eingeben</translation>
     </message>
@@ -4482,70 +4502,70 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>Fehler beim Anlegen des Verzeichnisses für die Routingdaten %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="375"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="376"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>nicht interpretierbar: %1 ist kein Datum</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="404"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>nicht interpretierbar: %1 ist keine gültige Größenangabe</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="725"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="726"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Fehler beim Abruf der verfügbaren Routingdaten von %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="497"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
         <source>segments directory does not exist: </source>
         <translation>Das Verzeichnis für die Routingdaten existiert nicht:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="511"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="512"/>
         <source>error creating file %1: %2</source>
         <translation>Fehler beim Anlegen der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="543"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="583"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="544"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
         <source>no valid request for filename %1</source>
         <translation>keine gültige Netzwerkanfrage für die Datei %1 vorhanden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="548"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="549"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="592"/>
         <source>no open file assigned to request for %1</source>
         <translation>der Netzwerkanfrage für %1 ist keine offene Datei zugeordnet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="558"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="601"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="559"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
         <source>error writing to file %1: %2</source>
         <translation>Fehler beim Schreiben der Datei %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="627"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="628"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Fehler beim Umbenennen der Datei von %1 nach %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="701"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="702"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Aktuell: %1 (%2), Veraltet: %3 (%4), noch Herunterzuladen: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="804"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="805"/>
         <source>being downloaded: %1 of %2</source>
         <translation>wird heruntergeladen: %1 von %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="824"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="825"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>lokale keine Daten. Verfügbar: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="810"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="811"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>lokale Daten veraltet (%1, %2 - auf dem Server: %3, %4)</translation>
     </message>
@@ -4565,12 +4585,12 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>ungültige Antwort, keine Dateien gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="819"/>
         <source>local data up to date (%1, %2)</source>
         <translation>lokale Daten sind aktuell (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="830"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="831"/>
         <source>no routing-data available</source>
         <translation>keine Routing-daten verfügbar</translation>
     </message>
@@ -7630,13 +7650,33 @@ Keine Lust die Anleitung zu lesen!</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add a new web service to the list.</source>
+        <translation>Eine neuen Webdienst zur Liste hinzufügen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
         <source>Add new</source>
         <translation>Neuen hinzufügen</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
+        <source>Remove all selected services from the list.</source>
+        <translation>Alle ausgewählten Dienste aus der Liste entfernen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
         <source>Delete selected</source>
         <translation>Ausgewählte löschen</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
+        <source>Remove all services and restore default list.</source>
+        <translation>Alle Dienste entfernen und die der Grundeinstellung wiederherstellen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
+        <source>Reset</source>
+        <translation>Zurücksetzen</translation>
     </message>
 </context>
 <context>
@@ -7675,87 +7715,87 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>[kein Name]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="317"/>
+        <location filename="../gis/IGisItem.cpp" line="316"/>
         <source>The item is not part of the project in the database.</source>
         <translation>Das Element ist nicht Teil des Projektes in der Datenbank.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="318"/>
+        <location filename="../gis/IGisItem.cpp" line="317"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
         <translation>Es ist entweder ein neues Symbol oder es wurde in der Datenbank gelöscht.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="324"/>
+        <location filename="../gis/IGisItem.cpp" line="323"/>
         <source>The item is not in the database.</source>
         <translation>Das Element ist nicht in der Datenbank.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="330"/>
+        <location filename="../gis/IGisItem.cpp" line="329"/>
         <source>The item might need to be saved</source>
         <translation>Es könnte notwendig sein, das Element zu speichern.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="414"/>
+        <location filename="../gis/IGisItem.cpp" line="413"/>
         <source>Initial version.</source>
         <translation>Erstversion.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="534"/>
+        <location filename="../gis/IGisItem.cpp" line="533"/>
         <source>Never ask again.</source>
         <translation>Aufhören nachzufragen.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="535"/>
+        <location filename="../gis/IGisItem.cpp" line="534"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Diese Element ist vermutlich schreibgeschützt, da nicht mit QMapShack erstellt. Normalerweise sollten importierte Daten nicht geändert werden. Wenn doch, drücken Sie &apos;OK&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="536"/>
+        <location filename="../gis/IGisItem.cpp" line="535"/>
         <source>Read Only Mode...</source>
         <translation>Schreibgeschützt...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="739"/>
-        <location filename="../gis/IGisItem.cpp" line="792"/>
+        <location filename="../gis/IGisItem.cpp" line="738"/>
+        <location filename="../gis/IGisItem.cpp" line="791"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Beschreibung:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="742"/>
-        <location filename="../gis/IGisItem.cpp" line="795"/>
+        <location filename="../gis/IGisItem.cpp" line="741"/>
+        <location filename="../gis/IGisItem.cpp" line="794"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Beschreibung ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="753"/>
+        <location filename="../gis/IGisItem.cpp" line="752"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Kommentar:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="756"/>
+        <location filename="../gis/IGisItem.cpp" line="755"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- kein Kommentar ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="767"/>
-        <location filename="../gis/IGisItem.cpp" line="806"/>
+        <location filename="../gis/IGisItem.cpp" line="766"/>
+        <location filename="../gis/IGisItem.cpp" line="805"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Verknüpfungen:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="770"/>
-        <location filename="../gis/IGisItem.cpp" line="809"/>
+        <location filename="../gis/IGisItem.cpp" line="769"/>
+        <location filename="../gis/IGisItem.cpp" line="808"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- keine Verknüpfungen---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Enter new %1 name.</source>
         <translation>Geben Sie einen neuen %1namen ein.</translation>
     </message>

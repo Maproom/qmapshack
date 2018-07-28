@@ -61,6 +61,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QPushButton" name="pushAddNew">
+       <property name="toolTip">
+        <string>Add a new web service to the list.</string>
+       </property>
        <property name="text">
         <string>Add new</string>
        </property>
@@ -71,8 +74,21 @@
        <property name="enabled">
         <bool>false</bool>
        </property>
+       <property name="toolTip">
+        <string>Remove all selected services from the list.</string>
+       </property>
        <property name="text">
         <string>Delete selected</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushReset">
+       <property name="toolTip">
+        <string>Remove all services and restore default list.</string>
+       </property>
+       <property name="text">
+        <string>Reset</string>
        </property>
       </widget>
      </item>

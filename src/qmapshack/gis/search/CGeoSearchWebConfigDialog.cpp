@@ -20,7 +20,7 @@
 
 #include <QtWidgets>
 
-CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t>& services, QWidget *parent)
+CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::service_t> &services, QWidget *parent)
     : QDialog(parent)
     , services(services)
 {
@@ -28,7 +28,9 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
 
     connect(pushAddNew, &QPushButton::clicked, this, &CGeoSearchWebConfigDialog::slotAddNew);
     connect(pushDelSelected, &QPushButton::clicked, this, &CGeoSearchWebConfigDialog::slotDelSelected);
+    connect(pushReset, &QPushButton::clicked, this, &CGeoSearchWebConfigDialog::slotReset);
     connect(treeServices, &QTreeWidget::itemSelectionChanged, this, &CGeoSearchWebConfigDialog::slotSelectionChanged);
+
 
     const QString& msg1 = tr("<b>Add your own service</b>"
                              "<p>To add your own service you need a name and an URL with placeholders for "
@@ -47,6 +49,14 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
 
     labelHelp->setText(msg1 + msg2 + msg3);
 
+    setupTreeWidget();
+    adjustSize();
+}
+
+void CGeoSearchWebConfigDialog::setupTreeWidget()
+{
+    treeServices->clear();
+
     for(const CGeoSearchWeb::service_t& service : services)
     {
         QTreeWidgetItem * item = new QTreeWidgetItem(treeServices);
@@ -58,7 +68,6 @@ CGeoSearchWebConfigDialog::CGeoSearchWebConfigDialog(QList<CGeoSearchWeb::servic
     }
 
     treeServices->header()->resizeSections(QHeaderView::ResizeToContents);
-    adjustSize();
 }
 
 void CGeoSearchWebConfigDialog::accept()
@@ -95,9 +104,41 @@ void CGeoSearchWebConfigDialog::slotAddNew()
     item->setIcon(0, QIcon(CGeoSearchWeb::defaultIcon));
     item->setData(0, Qt::UserRole, CGeoSearchWeb::defaultIcon);
     item->setFlags(item->flags()|Qt::ItemIsEditable);
+
+    treeServices->scrollToItem(item, QAbstractItemView::PositionAtCenter);
 }
 
 void CGeoSearchWebConfigDialog::slotDelSelected()
 {
+    int res = QMessageBox::question(this, tr("Remove..."), tr("Remove all selected services?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    if(res != QMessageBox::Yes)
+    {
+        return;
+    }
+
     qDeleteAll(treeServices->selectedItems());
+}
+
+void CGeoSearchWebConfigDialog::slotReset()
+{
+    int res = QMessageBox::question(this, tr("Restore default..."), tr("Remove all services and restore default list?"), QMessageBox::Yes|QMessageBox::No, QMessageBox::Yes);
+    if(res != QMessageBox::Yes)
+    {
+        return;
+    }
+
+    QList<CGeoSearchWeb::service_t>::iterator it = services.begin();
+    while(it != services.end())
+    {
+        if(it->icon != CGeoSearchWeb::defaultIcon)
+        {
+            it = services.erase(it);
+            continue;
+        }
+
+        it++;
+    }
+
+    services = CGeoSearchWeb::self().defaultServices() + services;
+    setupTreeWidget();
 }

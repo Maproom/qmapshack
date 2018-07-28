@@ -16,10 +16,13 @@
 
 **********************************************************************************************/
 
+#include "gis/CGisWorkspace.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "helpers/CSettings.h"
 #include "units/IUnit.h"
+
+#include <functional>
 
 QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
@@ -81,28 +84,42 @@ void CActivityTrk::release()
     cfg.endGroup(); // Activities
 }
 
-trkact_t CActivityTrk::selectActivity(QWidget *parent)
+
+QMenu * CActivityTrk::getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute)
 {
-    QMenu menu(parent);
+    QList<IGisItem::key_t> keys;
+    keys << key;
+    return getMenu(keys, parent, execute);
+}
+
+QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *parent, bool execute)
+{
+    QMenu * menu = new QMenu(tr("Set Track Activity"), parent);
+    menu->setIcon(QIcon("://icons/32x32/Activity.png"));
     QAction * act;
 
-    act = menu.addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
-    act->setData(QVariant(CTrackData::trkpt_t::eAct20None));
+    act = menu->addAction(QIcon("://icons/32x32/ActNone.png"), tr("No Activity"));
+    auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, CTrackData::trkpt_t::eAct20None);
+    QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
 
     for(const desc_t &desc : actDescriptor)
     {
-        act = menu.addAction(QIcon(desc.iconLarge), desc.name);
-        act->setData(QVariant(desc.activity));
+        act = menu->addAction(QIcon(desc.iconLarge), desc.name);
+        auto func = std::bind(&CGisWorkspace::slotActivityTrkByKey, &CGisWorkspace::self(), keys, desc.activity);
+        QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
     }
 
-    act = menu.exec(QCursor::pos());
-    if(nullptr != act)
+    menu->setEnabled(!keys.isEmpty());
+
+    if(execute)
     {
-        return trkact_t(act->data().toUInt(nullptr));
+        menu->exec(QCursor::pos());
+        delete menu;
+        return nullptr;
     }
-    return CTrackData::trkpt_t::eAct20Bad;
-}
 
+    return menu;
+}
 
 void CActivityTrk::update()
 {
@@ -128,15 +145,15 @@ void CActivityTrk::update()
         {
             if(startTrkpt != nullptr)
             {
-                activity_summary_t& summary = activitySummary[lastAct];
+                summary_t& summary = activitySummary[lastAct];
                 summary.distance += pt.distance - startTrkpt->distance;
                 summary.ascent   += pt.ascent   - startTrkpt->ascent;
                 summary.descent  += pt.descent  - startTrkpt->descent;
                 summary.ellapsedSeconds += pt.elapsedSeconds - startTrkpt->elapsedSeconds;
                 summary.ellapsedSecondsMoving += pt.elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
 
-                activityRanges << activity_range_t();
-                activity_range_t& activity = activityRanges.last();
+                activityRanges << range_t();
+                range_t& activity = activityRanges.last();
 
                 activity.d1 = startTrkpt->distance;
                 activity.d2 = pt.distance;
@@ -158,15 +175,15 @@ void CActivityTrk::update()
         return;
     }
 
-    activity_summary_t& summary = activitySummary[lastAct];
+    summary_t& summary = activitySummary[lastAct];
     summary.distance += lastTrkpt->distance - startTrkpt->distance;
     summary.ascent   += lastTrkpt->ascent   - startTrkpt->ascent;
     summary.descent  += lastTrkpt->descent  - startTrkpt->descent;
     summary.ellapsedSeconds += lastTrkpt->elapsedSeconds - startTrkpt->elapsedSeconds;
     summary.ellapsedSecondsMoving += lastTrkpt->elapsedSecondsMoving - startTrkpt->elapsedSecondsMoving;
 
-    activityRanges << activity_range_t();
-    activity_range_t& activity = activityRanges.last();
+    activityRanges << range_t();
+    range_t& activity = activityRanges.last();
 
     activity.d1 = startTrkpt->distance;
     activity.d2 = lastTrkpt->distance;
@@ -179,7 +196,7 @@ void CActivityTrk::update()
 
 //    for(int i = 0; i < 9; i++)
 //    {
-//        activity_summary_t& stat   = summaries[i];
+//        summary_t& stat   = summaries[i];
 //        qDebug() << "--------------" << i << "--------------";
 //        qDebug() << "stat.distance" << stat.distance;
 //        qDebug() << "stat.ascent" << stat.ascent;
@@ -194,7 +211,7 @@ void CActivityTrk::printSummary(QString& str) const
     printSummary(activitySummary, allActivities, str);
 }
 
-void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summary, const QSet<trkact_t>& acts, QString& str)
+void CActivityTrk::printSummary(const QMap<trkact_t, summary_t>& summary, const QSet<trkact_t>& acts, QString& str)
 {
     QString val, unit;
     qreal total;
@@ -214,7 +231,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
         }
     }
 
-    const activity_summary_t& sumActNone = summary[CTrackData::trkpt_t::eAct20None];
+    const summary_t& sumActNone = summary[CTrackData::trkpt_t::eAct20None];
 
     if(sumActNone.distance != 0)
     {
@@ -248,7 +265,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     distance = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().meter2distance(s.distance, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1 %2</td>").arg(val).arg(unit);
         distance += s.distance;
@@ -272,7 +289,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(s.ascent, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ascent;
@@ -296,7 +313,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().meter2elevation(s.descent, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.descent;
@@ -320,7 +337,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance/s.ellapsedSecondsMoving, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
@@ -344,7 +361,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().meter2speed(s.distance/s.ellapsedSeconds, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
@@ -368,7 +385,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSecondsMoving, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSecondsMoving;
@@ -392,7 +409,7 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     total = 0;
     for(const desc_t *desc : descs)
     {
-        const activity_summary_t& s = summary[desc->activity];
+        const summary_t& s = summary[desc->activity];
         IUnit::self().seconds2time(s.ellapsedSeconds, val, unit);
         str += QString("<td align='right'>&nbsp;&nbsp;%1%2</td>").arg(val).arg(unit);
         total += s.ellapsedSeconds;
@@ -413,12 +430,12 @@ void CActivityTrk::printSummary(const QMap<trkact_t, activity_summary_t>& summar
     str += "</table>";
 }
 
-void CActivityTrk::sumUp(QMap<trkact_t, activity_summary_t> &summary) const
+void CActivityTrk::sumUp(QMap<trkact_t, summary_t> &summary) const
 {
     for(trkact_t act : activitySummary.keys())
     {
-        const activity_summary_t &src = activitySummary[act];
-        activity_summary_t       &dst = summary[act];
+        const summary_t &src = activitySummary[act];
+        summary_t       &dst = summary[act];
 
         dst.distance += src.distance;
         dst.ascent   += src.ascent;

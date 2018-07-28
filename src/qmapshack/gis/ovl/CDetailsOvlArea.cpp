@@ -31,10 +31,10 @@ CDetailsOvlArea::CDetailsOvlArea(CGisItemOvlArea &area, QWidget * parent)
     setupUi(this);
 
     QPixmap icon(64,24);
-    for(size_t i = 0; i < CGisItemOvlArea::colorMapSize; ++i)
+    for(int i = 0; i < IGisItem::colorMap.size(); ++i)
     {
-        icon.fill(CGisItemOvlArea::colorMap[i].color);
-        comboColor->addItem(icon,"", CGisItemOvlArea::colorMap[i].color);
+        icon.fill(IGisItem::colorMap[i].color);
+        comboColor->addItem(icon,"", IGisItem::colorMap[i].color);
     }
 
     for(int i = 0; i < OVL_N_STYLES; ++i)

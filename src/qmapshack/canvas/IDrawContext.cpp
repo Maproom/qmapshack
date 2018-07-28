@@ -113,8 +113,8 @@ bool IDrawContext::resize(const QSize& size)
     buffer[0].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
     buffer[0].image.fill(Qt::transparent);
 
-    buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);   
-    buffer[1].image.fill(Qt::transparent);    
+    buffer[1].image = QImage(bufWidth, bufHeight, QImage::Format_ARGB32);
+    buffer[1].image.fill(Qt::transparent);
 
     return true;
 }

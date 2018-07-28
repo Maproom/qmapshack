@@ -565,8 +565,7 @@ public:
         const QString bullet;
     };
 
-    static const color_t colorMap[];
-    static const size_t colorMapSize;
+    static const QVector<color_t> colorMap;
 
 protected:
     /// set icon of QTreeWidgetItem

@@ -150,7 +150,7 @@ void CMouseRangeTrk::leftClicked(const QPoint& point)
             scrOptRange = new CScrOptRangeTrk(anchor, trk, this);
             connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotHidePoints);
             connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &CMouseRangeTrk::slotShowPoints);
-            connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &CMouseRangeTrk::slotActivity);
+            connect(scrOptRange->toolActivity, &QToolButton::clicked, this, &CMouseRangeTrk::slotActivity);
             connect(scrOptRange->toolCopy, &QToolButton::clicked, this, &CMouseRangeTrk::slotCopy);
 
             state = eStateRangeSelected;
@@ -224,17 +224,10 @@ void CMouseRangeTrk::slotShowPoints()
     resetState();
 }
 
-void CMouseRangeTrk::slotActivity(trkact_t act)
+void CMouseRangeTrk::slotActivity()
 {
-    QMutexLocker lock(&IGisItem::mutexItems);
-
-    CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(CGisWorkspace::self().getItemByKey(key));
-    if(nullptr != trk)
-    {
-        trk->setActivityRange(act);
-        canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
-    }
-
+    CActivityTrk::getMenu(key, &CGisWorkspace::self(), true);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
     scrOptRange->deleteLater();
     canvas->resetMouse();
 }

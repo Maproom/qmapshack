@@ -274,6 +274,49 @@ void CGisWorkspace::slotFilterCompleteText(bool yes)
     }
 }
 
+void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    if(CTrackData::trkpt_t::eAct20Bad != act)
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        QSet<IGisProject*> projects;
+        for(const IGisItem::key_t& key : keys)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+            if(trk == nullptr)
+            {
+                continue;
+            }
+
+            IGisProject * project = trk->getParentProject();
+            if(!projects.contains(project))
+            {
+                project->blockUpdateItems(true);
+                projects << project;
+            }
+
+            if(trk->isRangeSelected())
+            {
+                trk->setActivityRange(act);
+            }
+            else
+            {
+                trk->setActivity(act);
+            }
+        }
+
+        for(IGisProject * project : projects)
+        {
+            project->blockUpdateItems(false);
+        }
+    }
+}
 
 IGisProject * CGisWorkspace::selectProject()
 {
@@ -684,6 +727,17 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
+void CGisWorkspace::searchWebByKey(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt != nullptr)
+    {
+        CGeoSearchWeb::self().getMenu(wpt->getPosition(), this, true);
+    }
+}
+
 void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -858,16 +912,6 @@ void CGisWorkspace::editWptRadius(const IGisItem::key_t &key)
     }
 }
 
-void CGisWorkspace::searchWeb(const IGisItem::key_t &key)
-{
-    QMutexLocker lock(&IGisItem::mutexItems);
-    CGisItemWpt *wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
-    if(nullptr != wpt)
-    {
-        CGeoSearchWeb::self().search(wpt->getPosition());
-    }
-}
-
 void CGisWorkspace::addWptByPos(QPointF pt, const QString& label, const QString& desc) const
 {
     QString name = label;
@@ -1009,42 +1053,6 @@ void CGisWorkspace::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QL
     dlg.exec();
 
     emit sigChanged();
-}
-
-void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
-{
-    if(keys.isEmpty())
-    {
-        return;
-    }
-
-    trkact_t act = CActivityTrk::selectActivity(this);
-    if(CTrackData::trkpt_t::eAct20Bad != act)
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-
-        QSet<IGisProject*> projects;
-        for(const IGisItem::key_t& key : keys)
-        {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-            if(trk != nullptr)
-            {
-                IGisProject * project = trk->getParentProject();
-                if(!projects.contains(project))
-                {
-                    project->blockUpdateItems(true);
-                    projects << project;
-                }
-
-                trk->setActivity(act);
-            }
-        }
-
-        for(IGisProject * project : projects)
-        {
-            project->blockUpdateItems(false);
-        }
-    }
 }
 
 void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)

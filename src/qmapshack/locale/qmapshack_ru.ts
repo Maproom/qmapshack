@@ -54,22 +54,22 @@
         <translation type="vanished">Лыжи/зима</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="89"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
         <source>No Activity</source>
         <translation>Нет активности</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="241"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="258"/>
         <source>Total</source>
         <translation>Всего</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="271"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="288"/>
         <source>Ascent:</source>
         <translation>Подъём:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="295"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="312"/>
         <source>Descent:</source>
         <translation>Спуск:</translation>
     </message>
@@ -82,27 +82,32 @@
         <translation type="vanished">Общественный транспорт</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="247"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="97"/>
+        <source>Set Track Activity</source>
+        <translation type="unfinished">Добавить активность</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="264"/>
         <source>Distance:</source>
         <translation>Расстояние:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="319"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="336"/>
         <source>Speed Moving:</source>
         <translation>Скорость движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="343"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="360"/>
         <source>Speed Total:</source>
         <translation>Общая скорость:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="367"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="384"/>
         <source>Time Moving:</source>
         <translation>Время движения:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="391"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="408"/>
         <source>Time Total:</source>
         <translation>Общее время:</translation>
     </message>
@@ -185,7 +190,7 @@
         <translation>&lt;h2&gt;Маршрутизация&lt;/h2&gt;&lt;p&gt;QMapShack поддерживает онлайн маршрутизацию. Однако, если вы действительно хотите использовать все возможности маршрутизации, вам нужна база данных маршрутизации, хранящаяся локально. Существует два варианта.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Для Routino необходимо создать данные маршрутизации из файлов базы данных OpenStreetMap. QMapShack имеет встроенный построитель базы данных Routino (&lt;a href=&apos;CreateRoutino&apos;&gt;Инструмент-&gt;Создать базу данных Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;Второй вариант - использовать локальную установку BRouter с локальной базой данных маршрутизации. Чтобы загрузить и установить необходимые данные, нажмите кнопку &lt;a href=&apos;BRouterSetup&apos;&gt;Настройка BRouter&lt;/a&gt;&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="952"/>
+        <location filename="../canvas/CCanvas.cpp" line="951"/>
         <source>Setup Map Background</source>
         <translation>Настройка фона карт</translation>
     </message>
@@ -995,11 +1000,12 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGeoSearchWeb</name>
     <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="97"/>
         <source>Search Web for Position</source>
-        <translation type="vanished">Поиск позиции в Интернете</translation>
+        <translation>Поиск позиции в Интернете</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWeb.cpp" line="96"/>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="110"/>
         <source>Configure Services</source>
         <translation>Настройка сервисов</translation>
     </message>
@@ -1007,7 +1013,7 @@ To solve this conflict you can create and save a clone, force your version or dr
 <context>
     <name>CGeoSearchWebConfigDialog</name>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="33"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
         <translation>&lt;b&gt;Добавить собственный сервис&lt;/b&gt;&lt;p&gt;Чтобы добавить сервис, вам нужно имя и URL с прототипами для координат. Прототипы:&lt;/p&gt;</translation>
     </message>
@@ -1016,19 +1022,39 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="vanished">&lt;table&gt;&lt;tr&gt;&lt;th&gt;прототип&lt;/th&gt;&lt;th&gt;заменен на...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;долгота [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;широта [°]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="37"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
         <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
         <translation>&lt;table&gt;&lt;tr&gt;&lt;th&gt;прототип&lt;/th&gt;&lt;th&gt;заменен на...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;долгота [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;широта [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;высота [м]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="44"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Чтобы изменить сервис, выберите его имя или URL и сделайте двойной щелчок (альтернатива: нажмите F2). Вы также можете изменить  сервисы по умолчанию. Если вы удалите все сервисы, стандартные будут восстановлены при следующем запуске QMapShack.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="94"/>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
         <source>enter name and URL</source>
         <translation>Ввести имя и URL</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
+        <source>Remove all selected services?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Restore default...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
+        <source>Remove all services and restore default list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1960,131 +1986,129 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>Соединить треки</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Set Track Activity</source>
-        <translation>Добавить активность</translation>
+        <translation type="vanished">Добавить активность</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
+        <location filename="../gis/CGisListWks.cpp" line="143"/>
         <source>Replace Elevation by DEM</source>
         <translation>Заменить высоты данными файлов ЦМР</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="144"/>
         <source>Copy Track with Waypoints</source>
         <translation>Копировать трек с маршрутными точками</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="150"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Show Bubble</source>
         <translation>Показать пузырёк</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="152"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Move Waypoint</source>
         <translation>Переместить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Proj. Waypoint...</source>
         <translation>Проекция маршрутной точки...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="154"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
         <source>Change Radius</source>
         <translation>Изменить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
-        <location filename="../gis/CGisListWks.cpp" line="173"/>
+        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="171"/>
         <source>Toggle Nogo-Area</source>
         <translation>Переключить запретную зону</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="155"/>
+        <location filename="../gis/CGisListWks.cpp" line="154"/>
         <source>Delete Radius</source>
         <translation>Удалить радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="146"/>
-        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="145"/>
+        <location filename="../gis/CGisListWks.cpp" line="166"/>
         <source>Toggle Nogo-Line</source>
         <translation>Переключить запретную линию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="158"/>
         <source>Search Web for Position</source>
-        <translation type="unfinished">Поиск позиции в Интернете</translation>
+        <translation type="obsolete">Поиск позиции в Интернете</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Route Instructions</source>
         <translation>Маршрутные инструкции</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Calculate Route</source>
         <translation>Вычислить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Reset Route</source>
         <translation>Сбросить маршрутизацию</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Edit Route</source>
         <translation>Изменить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Reverse Route</source>
         <translation>Обратить маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Convert to Track</source>
         <translation>Преобразовать в трек</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="172"/>
+        <location filename="../gis/CGisListWks.cpp" line="170"/>
         <source>Edit Area Points</source>
         <translation>Изменить точки области</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="177"/>
+        <location filename="../gis/CGisListWks.cpp" line="175"/>
         <source>Create Route</source>
         <translation>Создать маршрут</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="178"/>
+        <location filename="../gis/CGisListWks.cpp" line="176"/>
         <source>Change Icon (sel. waypt. only)</source>
         <translation>Изменить пиктограмму (выбрать только маршрутные точки)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Set Track Color</source>
         <translation>Установить цвет трека</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="614"/>
+        <location filename="../gis/CGisListWks.cpp" line="612"/>
         <source>Drop items...</source>
         <translation>Удалить элементы...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="639"/>
-        <location filename="../gis/CGisListWks.cpp" line="1951"/>
-        <location filename="../gis/CGisListWks.cpp" line="1989"/>
+        <location filename="../gis/CGisListWks.cpp" line="637"/>
+        <location filename="../gis/CGisListWks.cpp" line="1940"/>
+        <location filename="../gis/CGisListWks.cpp" line="1978"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Обновить устройства&lt;/b&gt;&lt;p&gt;Обновить %1&lt;br/&gt;Подождите...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="765"/>
+        <location filename="../gis/CGisListWks.cpp" line="763"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Сохранение рабочей области. Подождите.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="812"/>
+        <location filename="../gis/CGisListWks.cpp" line="810"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Загрузка рабочей области. Подождите.</translation>
     </message>
@@ -2101,22 +2125,22 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation type="obsolete">Область</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1375"/>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>Close all projects...</source>
         <translation>Закрыть все проекты...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1375"/>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Это удалит все проекты из рабочей области.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1401"/>
+        <location filename="../gis/CGisListWks.cpp" line="1391"/>
         <source>Delete project...</source>
         <translation>Удалить проект...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1401"/>
+        <location filename="../gis/CGisListWks.cpp" line="1391"/>
         <source>Do you really want to delete %1?</source>
         <translation>Вы действительно хотите удалить %1?</translation>
     </message>
@@ -2178,22 +2202,22 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>&lt;b&gt;Выбор элементов: &lt;/b&gt;Элемент выбран из списка рабочей области. Нажать на карту, чтобы вернуться к обычному поведению мышки.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="672"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="715"/>
         <source>Copy items...</source>
         <translation>Копировать элементы ...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="691"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="745"/>
         <source>Change waypoint symbols.</source>
         <translation>Изменить символы путевых точек.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="940"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="984"/>
         <source>Cut Track...</source>
         <translation>Вырезать трек...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="940"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="984"/>
         <source>Do you want to delete the original track?</source>
         <translation>Желаете удалить изначальный трек?</translation>
     </message>
@@ -3652,47 +3676,46 @@ Unknown structure.</source>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="441"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="435"/>
         <source>Add POI as Waypoint</source>
         <translation>Добавить достопримечательность как маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="443"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="440"/>
         <source>Add Waypoint</source>
         <translation>Добавить маршрутную точку</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="444"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="441"/>
         <source>Add Track</source>
         <translation>Добавить трек</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="445"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="442"/>
         <source>Add Route</source>
         <translation>Добавить маршрут</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="446"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="443"/>
         <source>Add Area</source>
         <translation>Добавить область</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="448"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="445"/>
         <source>Select Items On Map</source>
         <translation>Выбрать элементы на карте</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="450"/>
         <source>Search Web for Position</source>
-        <translation type="unfinished">Поиск позиции в Интернете</translation>
+        <translation type="obsolete">Поиск позиции в Интернете</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="451"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="448"/>
         <source>Copy position</source>
         <translation>Скопировать позицию</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="452"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="449"/>
         <source>Copy position (Grid)</source>
         <translation>Скопировать позицию (координатная сетка)</translation>
     </message>
@@ -3716,32 +3739,32 @@ Unknown structure.</source>
 <context>
     <name>CMouseSelect</name>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="32"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="33"/>
         <source>&lt;b&gt;Select Items On Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation>&lt;b&gt;Выбрать элементы на карте&lt;/b&gt;&lt;br/&gt; Выберите прямоугольную область на карте. Используйте левую кнопку мышки и двигайте её. Прервать с правой кнопкой мышки. Уточните выбор с помощью метода указать-нажать-переместить по углам.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Выбрано:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="109"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="110"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 маршрутных точек&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="104"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="105"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 треков&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="114"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="115"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 маршрутов&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="119"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="120"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 областей&lt;br/&gt;</translation>
     </message>
@@ -4453,70 +4476,70 @@ is not a valid coordinate system definition:
         <translation>Ошибка создания каталога сегментов %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="375"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="376"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>Невозможно разобрать: %1 не является допустимой датой</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="404"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>Невозможно разобрать: %1 не является допустимым размером</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="725"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="726"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Ошибка получения доступных данных маршрутизации из %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="497"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
         <source>segments directory does not exist: </source>
         <translation>Папка сегментов не существует:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="511"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="512"/>
         <source>error creating file %1: %2</source>
         <translation>Ошибка создания файла сегментов %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="543"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="583"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="544"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
         <source>no valid request for filename %1</source>
         <translation>Недействительный запрос имени файла %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="548"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="591"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="549"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="592"/>
         <source>no open file assigned to request for %1</source>
         <translation>К запросу для %1 не был назначен открытый файл</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="558"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="601"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="559"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
         <source>error writing to file %1: %2</source>
         <translation>Ошибка записи в файл %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="627"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="628"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Ошибка переименования файла %1 до %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="701"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="702"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>Верно: %1 (%2), устарело: %3 (%4), загрузить: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="804"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="805"/>
         <source>being downloaded: %1 of %2</source>
         <translation>Загружено: %1 от %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="824"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="825"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>Нет локальных данных, доступно в Интернете: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="810"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="811"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>Локальные данные устарели (%1, %2 - удаленные %3, %4)</translation>
     </message>
@@ -4536,12 +4559,12 @@ is not a valid coordinate system definition:
         <translation>Неверный результат, файлы не найдены</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="818"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="819"/>
         <source>local data up to date (%1, %2)</source>
         <translation>Локальные данные верны (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="830"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="831"/>
         <source>no routing-data available</source>
         <translation>Нет доступных данных маршрутизации</translation>
     </message>
@@ -7611,13 +7634,33 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add a new web service to the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
         <source>Add new</source>
         <translation>Добавить новый</translation>
     </message>
     <message>
-        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="75"/>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
+        <source>Remove all selected services from the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
         <source>Delete selected</source>
         <translation>Удалить выбранные</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
+        <source>Remove all services and restore default list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -7656,88 +7699,88 @@ I don&apos;t want to read the documentation!</source>
         <translation>[нет имени]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="317"/>
+        <location filename="../gis/IGisItem.cpp" line="316"/>
         <source>The item is not part of the project in the database.</source>
         <translation>Элемент не является частью проекта в базе данных.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="318"/>
+        <location filename="../gis/IGisItem.cpp" line="317"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
         <translation>
 Это или новый элемент, или элемент был удален из базы данных кем-то другим.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="324"/>
+        <location filename="../gis/IGisItem.cpp" line="323"/>
         <source>The item is not in the database.</source>
         <translation>Элемент не в базе данных.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="330"/>
+        <location filename="../gis/IGisItem.cpp" line="329"/>
         <source>The item might need to be saved</source>
         <translation>Возможно, нужно сохранить элемент</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="414"/>
+        <location filename="../gis/IGisItem.cpp" line="413"/>
         <source>Initial version.</source>
         <translation>Исходная версия.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="534"/>
+        <location filename="../gis/IGisItem.cpp" line="533"/>
         <source>Never ask again.</source>
         <translation>Больше не спрашивать.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="535"/>
+        <location filename="../gis/IGisItem.cpp" line="534"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Вероятно, это элемент доступен только для чтения, потому что он не был создан внутри QMapShack. Обычно нет необходимости изменить импортированные данные. Но если для вас это приемлемо нажмите &quot;Да&quot;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="536"/>
+        <location filename="../gis/IGisItem.cpp" line="535"/>
         <source>Read Only Mode...</source>
         <translation>Режим &apos;только чтения&apos;...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="739"/>
-        <location filename="../gis/IGisItem.cpp" line="792"/>
+        <location filename="../gis/IGisItem.cpp" line="738"/>
+        <location filename="../gis/IGisItem.cpp" line="791"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Описание:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="742"/>
-        <location filename="../gis/IGisItem.cpp" line="795"/>
+        <location filename="../gis/IGisItem.cpp" line="741"/>
+        <location filename="../gis/IGisItem.cpp" line="794"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет описания---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="753"/>
+        <location filename="../gis/IGisItem.cpp" line="752"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Комментарий:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="756"/>
+        <location filename="../gis/IGisItem.cpp" line="755"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет комментария---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="767"/>
-        <location filename="../gis/IGisItem.cpp" line="806"/>
+        <location filename="../gis/IGisItem.cpp" line="766"/>
+        <location filename="../gis/IGisItem.cpp" line="805"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Ссылки:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="770"/>
-        <location filename="../gis/IGisItem.cpp" line="809"/>
+        <location filename="../gis/IGisItem.cpp" line="769"/>
+        <location filename="../gis/IGisItem.cpp" line="808"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;---нет ссылок---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Edit name...</source>
         <translation>Изменить имя...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="943"/>
         <source>Enter new %1 name.</source>
         <translation>Задать новое имя (%1).</translation>
     </message>
@@ -8963,19 +9006,19 @@ Tip:
         <translation>Вырезать...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="543"/>
+        <location filename="../plot/IPlot.cpp" line="542"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Удерживать клавишу CTRL для вертикального увеличения.
 Удерживать клавишу ALT для горизонтального увеличения.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="700"/>
+        <location filename="../plot/IPlot.cpp" line="699"/>
         <source>No or bad data.</source>
         <translation>Отсутствующие или неверные данные.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1301"/>
+        <location filename="../plot/IPlot.cpp" line="1300"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>

@@ -346,8 +346,6 @@ public:
 
     void editWptRadius(const IGisItem::key_t &key);
 
-    void searchWeb(const IGisItem::key_t &key);
-
     /**
        @brief Set user focus to track
        @param yes       true if focus is set
@@ -383,8 +381,6 @@ public:
      */
     void combineTrkByKey(const QList<IGisItem::key_t>& keys, const QList<IGisItem::key_t> &keysPreSel);
 
-    void activityTrkByKey(const QList<IGisItem::key_t>& keys);
-
     void colorTrkByKey(const QList<IGisItem::key_t>& keys);
 
     void rangeTrkByKey(const IGisItem::key_t &key);
@@ -407,7 +403,7 @@ public:
 
     void addEleToWptTrkByKey(const QList<IGisItem::key_t>& keys);
 
-
+    void searchWebByKey(const IGisItem::key_t &key);
 
     /**
        @brief Select a project via dialog
@@ -433,6 +429,7 @@ signals:
 public slots:
     void slotSaveAll();
     void slotWksItemSelectionReset();
+    void slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act);
 
 private slots:
     void slotSetGisLayerOpacity(int val);
@@ -444,7 +441,6 @@ private slots:
 
     void slotFilterNameOnly(bool yes);
     void slotFilterCompleteText(bool yes);
-
 
 private:
     friend class CMainWindow;

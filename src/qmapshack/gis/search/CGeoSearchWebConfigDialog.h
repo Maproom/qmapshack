@@ -36,8 +36,10 @@ private slots:
     void slotAddNew();
     void slotDelSelected();
     void slotSelectionChanged();
+    void slotReset();
 
 private:
+    void setupTreeWidget();
     QList<CGeoSearchWeb::service_t>& services;
 };
 

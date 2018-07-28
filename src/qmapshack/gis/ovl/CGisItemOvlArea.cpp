@@ -530,9 +530,9 @@ void CGisItemOvlArea::setLinks(const QList<link_t>& links)
 }
 
 
-void CGisItemOvlArea::setColor(size_t idx)
+void CGisItemOvlArea::setColor(int idx)
 {
-    if(idx >= colorMapSize)
+    if(idx >= colorMap.size())
     {
         return;
     }
@@ -542,9 +542,9 @@ void CGisItemOvlArea::setColor(size_t idx)
 
 void CGisItemOvlArea::setColor(const QColor& c)
 {
-    size_t n;
+    int n;
 
-    for(n = 0; n < colorMapSize; n++)
+    for(n = 0; n < colorMap.size(); n++)
     {
         if(colorMap[n].color == c)
         {
@@ -555,7 +555,7 @@ void CGisItemOvlArea::setColor(const QColor& c)
         }
     }
 
-    if(n == colorMapSize)
+    if(n == colorMap.size())
     {
         colorIdx    = DEFAULT_COLOR;
         color       = colorMap[DEFAULT_COLOR].color;

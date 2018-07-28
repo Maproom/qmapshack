@@ -21,6 +21,7 @@
 #define CGISLISTWKS_H
 
 #include "gis/prj/IGisProject.h"
+#include "gis/trk/CTrackData.h"
 
 #include <QPointer>
 #include <QSqlDatabase>
@@ -99,7 +100,7 @@ private slots:
     void slotReverseTrk();
     void slotCombineTrk();
     void slotRangeTrk();
-    void slotActivityTrk();
+    void slotActivityTrk(trkact_t act);
     void slotColorTrk();
     void slotCopyTrkWithWpt();
     void slotFocusRte(bool on);
@@ -122,7 +123,6 @@ private slots:
     void slotSymWpt();
     void slotEleWptTrk();
     void slotAutoSaveProject(bool on);
-    void slotSearchWeb();
 
 private:
     void configDB();
@@ -137,11 +137,11 @@ private:
     void showMenuProjectWks(const QPoint &p);
     void showMenuProjectDev(const QPoint &p);
     void showMenuProjectTrash(const QPoint &p);
-    void showMenuItemTrk(const QPoint &p);
-    void showMenuItemWpt(const QPoint &p);
+    void showMenuItemTrk(const QPoint &p, const IGisItem::key_t& key);
+    void showMenuItemWpt(const QPoint &p, CGisItemWpt *wpt);
     void showMenuItemRte(const QPoint &p);
     void showMenuItemOvl(const QPoint &p);
-    void showMenuItem(const QPoint &p);
+    void showMenuItem(const QPoint &p, const QList<IGisItem::key_t> &keysTrks, const QList<IGisItem::key_t> &keysWpts);
 
     QSqlDatabase db;
 
@@ -170,13 +170,11 @@ private:
     QAction * actionEditRadiusWpt;
     QAction * actionProjWpt;
     QAction * actionMoveWpt;
-    QAction * actionSearchWebWpt;
     QAction * actionFocusTrk;
     QAction * actionEditTrk;
     QAction * actionReverseTrk;
     QAction * actionCombineTrk;
     QAction * actionRangeTrk;
-    QAction * actionActivityTrk;
     QAction * actionColorTrk;
     QAction * actionNogoTrk;
     QAction * actionCopyTrkWithWpt;

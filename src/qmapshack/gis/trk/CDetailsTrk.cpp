@@ -668,11 +668,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 
 void CDetailsTrk::slotSetActivities()
 {
-    trkact_t act = CActivityTrk::selectActivity(this);
-    if(CTrackData::trkpt_t::eAct20Bad != act)
-    {
-        trk.setActivity(act);
-    }
+    CActivityTrk::getMenu(trk.getKey(), this, true);
 }
 
 void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)

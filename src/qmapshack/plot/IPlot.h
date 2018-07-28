@@ -65,7 +65,7 @@ private slots:
     void slotSave();
     void slotHidePoints();
     void slotShowPoints();
-    void slotActivity(trkact_t act);
+    void slotActivity();
     void slotCopy();
     void slotStopRange();
     void slotResetZoom();

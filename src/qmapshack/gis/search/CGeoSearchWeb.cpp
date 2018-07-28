@@ -39,7 +39,7 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
     const qint32 N = cfg.beginReadArray("webServices");
     if(N == 0)
     {
-        addDefaultServices();
+        services = defaultServices();
     }
     else
     {
@@ -57,18 +57,21 @@ CGeoSearchWeb::CGeoSearchWeb(QObject * parent)
     cfg.endGroup(); // Search
 }
 
-void CGeoSearchWeb::addDefaultServices()
+QList<CGeoSearchWeb::service_t> CGeoSearchWeb::defaultServices()
 {
-    services << service_t("PeakFinder", "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5", "://icons/32x32/SearchWebPeakfinder.png");
-    services << service_t("Waymarked Trails Hiking", "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1", "://icons/32x32/SearchWebWaymarked.png");
-    services << service_t("Wikiloc", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13", "://icons/32x32/SearchWebOutings.png");
-    services << service_t("Wikiloc Skitours", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17", "://icons/32x32/SearchWebOutings.png");
-    services << service_t("Webcam", "https://webcams.travel/map/#lat=%2&lng=%1&z=12", "://icons/32x32/SearchWebCam.png");
-    services << service_t("Meteoblue 7 days", "https://www.meteoblue.com/en/weather/forecast/week/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
-    services << service_t("Meteoblue 5 days", "https://www.meteoblue.com/en/weather/forecast/meteogramfive/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
-    services << service_t("Meteoblue Multi. Mod.", "https://www.meteoblue.com/en/weather/forecast/multimodel/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
-    services << service_t("Meteoblue Maps", "https://www.meteoblue.com/en/weather/webmap/index/%2N%1E?level=surface&zoom=8", "://icons/32x32/SearchWebMeteo.png");
-    services << service_t("Ventusky Map", "https://www.ventusky.com/?p=%2;%1;8&l=rain-3h", "://icons/32x32/SearchWebMeteo.png");
+    QList<service_t> tmp;
+    tmp << service_t("PeakFinder", "https://www.peakfinder.org/?lat=%2&lng=%1&ele=%3&azi=0&zoom=5", "://icons/32x32/SearchWebPeakfinder.png");
+    tmp << service_t("Waymarked Trails Hiking", "https://hiking.waymarkedtrails.org/#routelist?map=13!%2!%1", "://icons/32x32/SearchWebWaymarked.png");
+    tmp << service_t("Wikiloc", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13", "://icons/32x32/SearchWebOutings.png");
+    tmp << service_t("Wikiloc Skitours", "https://www.wikiloc.com/wikiloc/map.do?lt=%2&ln=%1&z=13&act=40,17", "://icons/32x32/SearchWebOutings.png");
+    tmp << service_t("Webcam", "https://webcams.travel/map/#lat=%2&lng=%1&z=12", "://icons/32x32/SearchWebCam.png");
+    tmp << service_t("Meteoblue 7 days", "https://www.meteoblue.com/en/weather/forecast/week/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
+    tmp << service_t("Meteoblue 5 days", "https://www.meteoblue.com/en/weather/forecast/meteogramfive/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
+    tmp << service_t("Meteoblue Multi. Mod.", "https://www.meteoblue.com/en/weather/forecast/multimodel/%2N%1E", "://icons/32x32/SearchWebMeteo.png");
+    tmp << service_t("Meteoblue Maps", "https://www.meteoblue.com/en/weather/webmap/index/%2N%1E?level=surface&zoom=8", "://icons/32x32/SearchWebMeteo.png");
+    tmp << service_t("Ventusky Map", "https://www.ventusky.com/?p=%2;%1;8&l=rain-3h", "://icons/32x32/SearchWebMeteo.png");
+
+    return tmp;
 }
 
 CGeoSearchWeb::~CGeoSearchWeb()
@@ -145,6 +148,6 @@ void CGeoSearchWeb::slotSearchWeb(int serviceId, const QPointF pt)
 
 void CGeoSearchWeb::slotConfigureServices()
 {
-    CGeoSearchWebConfigDialog dlg(CMainWindow::self().getBestWidgetForParent());
+    CGeoSearchWebConfigDialog dlg(services, CMainWindow::self().getBestWidgetForParent());
     dlg.exec();
 }

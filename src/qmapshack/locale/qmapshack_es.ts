@@ -23,35 +23,35 @@
     <name>CActivityTrk</name>
     <message>
         <source>Foot</source>
-        <translation type="vanished">A pié</translation>
+        <translation>A pie</translation>
     </message>
     <message>
         <source>Bicycle</source>
-        <translation type="vanished">Bicicleta</translation>
+        <translation>Bicicleta</translation>
     </message>
     <message>
         <source>Motor Bike</source>
-        <translation type="vanished">Moto</translation>
+        <translation>Moto</translation>
     </message>
     <message>
         <source>Car</source>
-        <translation type="vanished">Coche</translation>
+        <translation>Coche</translation>
     </message>
     <message>
         <source>Cable Car</source>
-        <translation type="vanished">Teleférico</translation>
+        <translation>Teleférico</translation>
     </message>
     <message>
         <source>Swim</source>
-        <translation type="vanished">Natación</translation>
+        <translation>Natación</translation>
     </message>
     <message>
         <source>Ship</source>
-        <translation type="vanished">Barco</translation>
+        <translation>Barco</translation>
     </message>
     <message>
         <source>Ski/Winter</source>
-        <translation type="vanished">Esquí</translation>
+        <translation>Esquí</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
@@ -75,11 +75,11 @@
     </message>
     <message>
         <source>Aeronautics</source>
-        <translation type="vanished">Aeronáutica</translation>
+        <translation>Aeronáutica</translation>
     </message>
     <message>
         <source>Public Transport</source>
-        <translation type="vanished">Transporte Público</translation>
+        <translation>Transporte Público</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="97"/>
@@ -1034,22 +1034,22 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
         <source>Remove...</source>
-        <translation type="unfinished"></translation>
+        <translation >Eliminar...</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="111"/>
         <source>Remove all selected services?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Eliminar los servicios seleccionados?</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
         <source>Restore default...</source>
-        <translation type="unfinished"></translation>
+        <translation>Restaurar predeterminados...</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="122"/>
         <source>Remove all services and restore default list?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Eliminar todos los servicios y restaurar predeterminados?</translation>
     </message>
 </context>
 <context>
@@ -2353,7 +2353,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CInvalidTrk.cpp" line="75"/>
         <source>Hide Details...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar Detalles...</translation>
     </message>
 </context>
 <context>
@@ -4151,7 +4151,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
         <source>BRouter: not found</source>
-        <translation type="unfinished"></translation>
+        <translation>BRouter: No encontrado</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="803"/>
@@ -5397,7 +5397,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
@@ -7612,32 +7612,32 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
         <source>Add a new web service to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir nuevo servicio web.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
         <source>Add new</source>
-        <translation>Añadir nueva</translation>
+        <translation>Añadir nuevo</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
         <source>Remove all selected services from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar los servicios seleccionados de la lista.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
         <source>Delete selected</source>
-        <translation>Eliminar lo seleccionado</translation>
+        <translation>Eliminar seleccionados</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
         <source>Remove all services and restore default list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar todos los servicios y restaurar por los predeterminados.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración predeterminada</translation>
     </message>
 </context>
 <context>

@@ -93,6 +93,7 @@ CMainWindow::CMainWindow()
     setWindowTitle(WHAT_STR);
     dockRealtime->toggleViewAction()->setChecked(false);
 
+    IGisItem::init();
     initWptIcons();
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);

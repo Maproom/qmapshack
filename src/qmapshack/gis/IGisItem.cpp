@@ -44,26 +44,7 @@ const QString IGisItem::noKey;
 
 const QString IGisItem::noName = IGisItem::tr("[no name]");
 
-QVector<IGisItem::color_t> IGisItem::colorMap =
-{
-    {"Black",        QColor(Qt::black),       QString("://icons/8x8/bullet_black.png")}
-    ,{"DarkRed",     QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png")}
-    ,{"DarkGreen",   QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png")}
-    ,{"DarkYellow",  QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png")}
-    ,{"DarkBlue",    QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png")}
-    ,{"DarkMagenta", QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png")}
-    ,{"DarkCyan",    QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png")}
-    ,{"LightGray",   QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png")}
-    ,{"DarkGray",    QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png")}
-    ,{"Red",         QColor(Qt::red),         QString("://icons/8x8/bullet_red.png")}
-    ,{"Green",       QColor(Qt::green),       QString("://icons/8x8/bullet_green.png")}
-    ,{"Yellow",      QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png")}
-    ,{"Blue",        QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png")}
-    ,{"Magenta",     QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png")}
-    ,{"Cyan",        QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png")}
-    ,{"White",       QColor(Qt::white),       QString("://icons/8x8/bullet_white.png")}
-    ,{"Transparent", QColor(Qt::transparent), QString()}
-};
+QVector<IGisItem::color_t> IGisItem::colorMap;
 
 
 IGisItem::IGisItem(IGisProject *parent, type_e typ, int idx)
@@ -164,6 +145,31 @@ IGisItem::~IGisItem()
 {
 }
 
+
+void IGisItem::init()
+{
+    colorMap =
+    {
+        {"Black",       tr("Black"),      QColor(Qt::black),       QString("://icons/8x8/bullet_black.png")}
+        ,{"DarkRed",     tr("Dark Red"),    QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png")}
+        ,{"DarkGreen",   tr("Dark Green"),  QColor(Qt::darkGreen),   QString("://icons/8x8/bullet_dark_green.png")}
+        ,{"DarkYellow",  tr("Dark Yellow"), QColor(Qt::darkYellow),  QString("://icons/8x8/bullet_dark_yellow.png")}
+        ,{"DarkBlue",    tr("Dark Blue"),   QColor(Qt::darkBlue),    QString("://icons/8x8/bullet_dark_blue.png")}
+        ,{"DarkMagenta", tr("Dark Magenta"),QColor(Qt::darkMagenta), QString("://icons/8x8/bullet_dark_magenta.png")}
+        ,{"DarkCyan",    tr("Dark Cyan"),   QColor(Qt::darkCyan),    QString("://icons/8x8/bullet_dark_cyan.png")}
+        ,{"LightGray",   tr("Light Gray"),  QColor(Qt::lightGray),   QString("://icons/8x8/bullet_gray.png")}
+        ,{"DarkGray",    tr("Dark Gray"),   QColor(Qt::darkGray),    QString("://icons/8x8/bullet_dark_gray.png")}
+        ,{"Red",         tr("Red"),        QColor(Qt::red),         QString("://icons/8x8/bullet_red.png")}
+        ,{"Green",       tr("Green"),      QColor(Qt::green),       QString("://icons/8x8/bullet_green.png")}
+        ,{"Yellow",      tr("Yellow"),     QColor(Qt::yellow),      QString("://icons/8x8/bullet_yellow.png")}
+        ,{"Blue",        tr("Blue"),       QColor(Qt::blue),        QString("://icons/8x8/bullet_blue.png")}
+        ,{"Magenta",     tr("Magenta"),    QColor(Qt::magenta),     QString("://icons/8x8/bullet_magenta.png")}
+        ,{"Cyan",        tr("Cyan"),       QColor(Qt::cyan),        QString("://icons/8x8/bullet_cyan.png")}
+        ,{"White",       tr("White"),      QColor(Qt::white),       QString("://icons/8x8/bullet_white.png")}
+        ,{"Transparent", tr("Transparent"),QColor(Qt::transparent), QString()}
+    };
+}
+
 qint32 IGisItem::selectColor(QWidget * parent)
 {
     QMenu * menu = getColorMenu("", nullptr, "", parent);
@@ -194,7 +200,7 @@ QMenu * IGisItem::getColorMenu(const QString& title, QObject * obj, const char *
     {
         QPixmap pixmap(16,16);
         pixmap.fill(IGisItem::colorMap[i].color);
-        action = menu->addAction(QIcon(pixmap), IGisItem::colorMap[i].name);
+        action = menu->addAction(QIcon(pixmap), IGisItem::colorMap[i].label);
         action->setProperty("colorIdx", i);
 
         if(obj != nullptr)

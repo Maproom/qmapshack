@@ -87,7 +87,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     {
         const IGisItem::color_t& color = IGisItem::getColorMap()[i];
         icon.fill(color.color);
-        comboColor->addItem(icon, color.name, color.color);
+        comboColor->addItem(icon, color.label, color.color);
     }
 
     widgetColorLayout->setAlignment(Qt::AlignTop);

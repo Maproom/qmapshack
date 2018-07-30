@@ -202,6 +202,7 @@ public:
     /// this mutex has to be locked when ever the item list is accessed.
     static QMutex mutexItems;
 
+    static void init();
     static QMenu * getColorMenu(const QString &title, QObject *obj, const char *slot, QWidget * parent);
     static qint32 selectColor(QWidget * parent);
 
@@ -563,9 +564,10 @@ public:
 
     struct color_t
     {
-        const char   *name;
-        const QColor color;
-        const QString bullet;
+        const char   *  name;
+        const QString   label;
+        const QColor    color;
+        const QString   bullet;
     };
 
     static const QVector<color_t>& getColorMap()

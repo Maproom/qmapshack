@@ -32,7 +32,7 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , name \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
-        , IGisItem::colorMap[qMax(colorIdx,IGisItem::eColorTransparent)].color \
+        , IGisItem::getColorMap()[qMax(colorIdx,IGisItem::eColorTransparent)].color \
     }
 
 const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, IGisItem::eColorTransparent);

@@ -48,7 +48,6 @@ class CPropertyTrk;
 class CFitStream;
 class CCanvas;
 
-#define TRK_N_COLORS          17
 #define ASCENT_THRESHOLD       5
 #define MIN_WIDTH_INFO_BOX   300
 

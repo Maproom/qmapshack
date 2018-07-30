@@ -44,7 +44,7 @@ const QString IGisItem::noKey;
 
 const QString IGisItem::noName = IGisItem::tr("[no name]");
 
-const QVector<IGisItem::color_t> IGisItem::colorMap =
+QVector<IGisItem::color_t> IGisItem::colorMap =
 {
     {"Black",        QColor(Qt::black),       QString("://icons/8x8/bullet_black.png")}
     ,{"DarkRed",     QColor(Qt::darkRed),     QString("://icons/8x8/bullet_dark_red.png")}

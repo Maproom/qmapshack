@@ -568,7 +568,10 @@ public:
         const QString bullet;
     };
 
-    static const QVector<color_t> colorMap;
+    static const QVector<color_t>& getColorMap()
+    {
+        return colorMap;
+    }
 
 protected:
     /// set icon of QTreeWidgetItem
@@ -631,6 +634,7 @@ protected:
         ,eFlagNogo          = 0x00000200
     };
 
+    static QVector<color_t> colorMap;
 private:
 
     void showIcon();

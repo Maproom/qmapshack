@@ -114,7 +114,7 @@ void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
         return;
     }
 
-    const QColor& color = IGisItem::colorMap[colorIdx].color;
+    const QColor& color = IGisItem::getColorMap()[colorIdx].color;
     QPixmap pixmap(16,16);
     pixmap.fill(color);
     button->setIcon(QIcon(pixmap));

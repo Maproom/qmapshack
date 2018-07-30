@@ -171,7 +171,7 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     // several GIS items related actions
     actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
-    actionSymWpt        = addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon (sel. waypt. only)"), this, SLOT(slotSymWpt()));
+    actionSymWpt        = addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon"), this, SLOT(slotSymWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -1076,10 +1076,12 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
 
     QMenu menu(this);
     menu.addAction(actionCopyItem);
-    menu.addSeparator();
+    menu.addSection(tr("Waypoints"));
     menu.addAction(actionRteFromWpt);
     menu.addAction(actionSymWpt);
+    menu.addSection(tr("Wayp. & Tracks"));
     menu.addAction(actionEleWptTrk);
+    menu.addSection(tr("Tracks"));
     menu.addAction(actionCombineTrk);
     action = menu.addMenu(CActivityTrk::getMenu(keysTrks, &menu));
     action->setEnabled(!keysTrks.isEmpty());
@@ -1174,11 +1176,9 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             bool hasWpts  = !keysWpt.isEmpty();
             bool hasTrks  = !keysTrk.isEmpty();
-            bool onlyWpts = hasWpts && !hasTrks;
-            bool onlyTrks = hasTrks && !hasWpts;
 
-            actionRteFromWpt->setEnabled(onlyWpts);
-            actionCombineTrk->setEnabled(onlyTrks);
+            actionRteFromWpt->setEnabled(keysWpt.count() > 1);
+            actionCombineTrk->setEnabled(keysTrk.count() > 1);
             actionSymWpt->setEnabled(hasWpts);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
             showMenuItem(p, keysTrk, keysWpt);

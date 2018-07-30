@@ -306,7 +306,6 @@ set( SRCS
     units/CUnitNautic.cpp
     units/CUnitsSetup.cpp
     units/IUnit.cpp
-    widgets/CColorChooser.cpp
     widgets/CColorLegend.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
@@ -629,7 +628,6 @@ set( HDRS
     units/CUnitsSetup.h
     units/IUnit.h
     version.h
-    widgets/CColorChooser.h
     widgets/CColorLegend.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h

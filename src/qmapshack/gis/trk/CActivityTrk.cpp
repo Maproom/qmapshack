@@ -28,9 +28,8 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
 #define DESCRIPTOR_ENTRY(name, icon, enumAct, colorIdx) \
     { \
-        name \
-        , CTrackData::trkpt_t::enumAct \
-        , tr(name) \
+         CTrackData::trkpt_t::enumAct \
+        , name \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \
         , IGisItem::colorMap[qMax(colorIdx,IGisItem::eColorTransparent)].color \
@@ -48,16 +47,16 @@ void CActivityTrk::init()
 {
     actDescriptor =
     {
-        DESCRIPTOR_ENTRY("Foot",               "ActFoot.png",  eAct20Foot,     IGisItem::eColorBlack)
-        ,DESCRIPTOR_ENTRY("Bicycle",            "ActCycle.png", eAct20Cycle,    IGisItem::eColorDarkRed)
-        ,DESCRIPTOR_ENTRY("Motor Bike",         "ActBike.png",  eAct20Bike,     IGisItem::eColorDarkGreen)
-        ,DESCRIPTOR_ENTRY("Car",                "ActCar.png",   eAct20Car,      IGisItem::eColorDarkYellow)
-        ,DESCRIPTOR_ENTRY("Cable Car",          "ActCable.png", eAct20Cable,    IGisItem::eColorDarkBlue)
-        ,DESCRIPTOR_ENTRY("Swim",               "ActSwim.png",  eAct20Swim,     IGisItem::eColorDarkMagenta)
-        ,DESCRIPTOR_ENTRY("Ship",               "ActShip.png",  eAct20Ship,     IGisItem::eColorDarkCyan)
-        ,DESCRIPTOR_ENTRY("Aeronautic",         "ActAero.png",  eAct20Aero,     IGisItem::eColorLightGray)
-        ,DESCRIPTOR_ENTRY("Ski/Winter",         "ActSki.png",   eAct20Ski,      IGisItem::eColorDarkGray)
-        ,DESCRIPTOR_ENTRY("Public Transport",   "ActTrain.png", eAct20Train,    IGisItem::eColorRed)
+        DESCRIPTOR_ENTRY(tr("Foot"),               "ActFoot.png",  eAct20Foot,     IGisItem::eColorBlack)
+        ,DESCRIPTOR_ENTRY(tr("Bicycle"),            "ActCycle.png", eAct20Cycle,    IGisItem::eColorDarkRed)
+        ,DESCRIPTOR_ENTRY(tr("Motor Bike"),         "ActBike.png",  eAct20Bike,     IGisItem::eColorDarkGreen)
+        ,DESCRIPTOR_ENTRY(tr("Car"),                "ActCar.png",   eAct20Car,      IGisItem::eColorDarkYellow)
+        ,DESCRIPTOR_ENTRY(tr("Cable Car"),          "ActCable.png", eAct20Cable,    IGisItem::eColorDarkBlue)
+        ,DESCRIPTOR_ENTRY(tr("Swim"),               "ActSwim.png",  eAct20Swim,     IGisItem::eColorDarkMagenta)
+        ,DESCRIPTOR_ENTRY(tr("Ship"),               "ActShip.png",  eAct20Ship,     IGisItem::eColorDarkCyan)
+        ,DESCRIPTOR_ENTRY(tr("Aeronautic"),         "ActAero.png",  eAct20Aero,     IGisItem::eColorLightGray)
+        ,DESCRIPTOR_ENTRY(tr("Ski/Winter"),         "ActSki.png",   eAct20Ski,      IGisItem::eColorDarkGray)
+        ,DESCRIPTOR_ENTRY(tr("Public Transport"),   "ActTrain.png", eAct20Train,    IGisItem::eColorRed)
     };
 
     SETTINGS;

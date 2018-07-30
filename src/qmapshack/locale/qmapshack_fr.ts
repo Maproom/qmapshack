@@ -22,54 +22,67 @@
 <context>
     <name>CActivityTrk</name>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="50"/>
         <source>Foot</source>
-        <translation type="vanished">A pieds</translation>
+        <translation>A pieds</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
         <source>Bicycle</source>
-        <translation type="vanished">Vélo</translation>
+        <translation>Vélo</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="52"/>
         <source>Motor Bike</source>
-        <translation type="vanished">Moto</translation>
+        <translation>Moto</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
         <source>Car</source>
-        <translation type="vanished">Voiture</translation>
+        <translation>Voiture</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
         <source>Cable Car</source>
-        <translation type="vanished">Téléphérique</translation>
+        <translation>Téléphérique</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
         <source>Swim</source>
-        <translation type="vanished">Natation</translation>
+        <translation>Natation</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
         <source>Ship</source>
-        <translation type="vanished">Bateau</translation>
+        <translation>Bateau</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
+        <source>Aeronautic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
         <source>Ski/Winter</source>
-        <translation type="vanished">Ski</translation>
+        <translation>Ski</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="101"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="100"/>
         <source>No Activity</source>
         <translation>Pas d&apos;activité</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="256"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="255"/>
         <source>Total</source>
         <translation>Total</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="286"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="285"/>
         <source>Ascent:</source>
         <translation>Montée:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="310"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="309"/>
         <source>Descent:</source>
         <translation>Descente:</translation>
     </message>
@@ -78,36 +91,37 @@
         <translation type="vanished">Aérien</translation>
     </message>
     <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Public Transport</source>
-        <translation type="vanished">Transports publics</translation>
+        <translation>Transports publics</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="97"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="96"/>
         <source>Set Track Activity</source>
         <translation type="unfinished">Choisir l&apos;activité de la trace</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="262"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="261"/>
         <source>Distance:</source>
         <translation>Distance:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="334"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="333"/>
         <source>Speed Moving:</source>
         <translation>Vitesse moyenne en déplacement:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="358"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="357"/>
         <source>Speed Total:</source>
         <translation>Vitesse moyenne totale:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="382"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="381"/>
         <source>Time Moving:</source>
         <translation>Temps en déplacement:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="406"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="405"/>
         <source>Time Total:</source>
         <translation>Temps total:</translation>
     </message>

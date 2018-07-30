@@ -73,7 +73,6 @@ public:
 
     struct desc_t
     {
-        QString objName;
         trkact_t activity;
         QString name;
         QString iconLarge;

@@ -82,11 +82,12 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     setupUi(this);
 
     QPixmap icon(14,14);
-
-    for(int i=0; i < TRK_N_COLORS; ++i)
+    const int N = IGisItem::getColorMap().count();
+    for(int i=0; i < N; ++i)
     {
-        icon.fill(IGisItem::colorMap[i].color);
-        comboColor->addItem(icon, IGisItem::colorMap[i].name, IGisItem::colorMap[i].color);
+        const IGisItem::color_t& color = IGisItem::getColorMap()[i];
+        icon.fill(color.color);
+        comboColor->addItem(icon, color.name, color.color);
     }
 
     widgetColorLayout->setAlignment(Qt::AlignTop);

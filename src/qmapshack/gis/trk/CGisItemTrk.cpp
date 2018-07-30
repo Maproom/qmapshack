@@ -2274,9 +2274,9 @@ void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 
 void CGisItemTrk::setColor(int idx)
 {
-    if(idx < TRK_N_COLORS)
+    if(idx < IGisItem::getColorMap().count())
     {
-        setColor(IGisItem::colorMap[idx].color);
+        setColor(IGisItem::getColorMap()[idx].color);
         updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
@@ -2335,17 +2335,20 @@ void CGisItemTrk::setActivityRange(trkact_t act)
 void CGisItemTrk::setColor(const QColor& c)
 {
     colorIdx = DEFAULT_COLOR;
-    for(int n = 0; n < TRK_N_COLORS; n++)
+
+    const QVector<IGisItem::color_t>& colorMap = IGisItem::getColorMap();
+    const int N = colorMap.count();
+    for(int n = 0; n < N; n++)
     {
-        if(c == IGisItem::colorMap[n].color)
+        if(c == colorMap[n].color)
         {
             colorIdx = n;
             break;
         }
     }
 
-    color  = IGisItem::colorMap[colorIdx].color;
-    bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
+    color  = colorMap[colorIdx].color;
+    bullet = QPixmap(colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));
 }

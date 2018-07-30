@@ -17,7 +17,6 @@
 **********************************************************************************************/
 
 #include "gis/trk/CSelectActivityColor.h"
-#include "widgets/CColorChooser.h"
 
 #include <functional>
 #include <QtWidgets>
@@ -109,10 +108,16 @@ void CSelectActivityColor::updateData()
 
 void CSelectActivityColor::slotSetColor(QToolButton * button, trkact_t act)
 {
-    CColorChooser dlg(button);
-    dlg.move(button->parentWidget()->mapToGlobal(button->geometry().topRight()));
-    if(dlg.exec() == QDialog::Accepted)
+    qint32 colorIdx = IGisItem::selectColor(this);
+    if(colorIdx == NOIDX)
     {
-        CActivityTrk::setColor(act, button->property("color").toString());
+        return;
     }
+
+    const QColor& color = IGisItem::colorMap[colorIdx].color;
+    QPixmap pixmap(16,16);
+    pixmap.fill(color);
+    button->setIcon(QIcon(pixmap));
+
+    CActivityTrk::setColor(act, color.name(QColor::HexRgb));
 }

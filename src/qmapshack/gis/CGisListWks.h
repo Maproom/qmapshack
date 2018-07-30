@@ -175,7 +175,6 @@ private:
     QAction * actionReverseTrk;
     QAction * actionCombineTrk;
     QAction * actionRangeTrk;
-    QAction * actionColorTrk;
     QAction * actionNogoTrk;
     QAction * actionCopyTrkWithWpt;
     QAction * actionFocusRte;

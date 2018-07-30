@@ -164,6 +164,47 @@ IGisItem::~IGisItem()
 {
 }
 
+qint32 IGisItem::selectColor(QWidget * parent)
+{
+    QMenu * menu = getColorMenu("", nullptr, "", parent);
+    QAction * action = menu->exec(QCursor::pos());
+
+    if(action == nullptr)
+    {
+        return NOIDX;
+    }
+
+    bool ok = false;
+    qint32 colorIdx = action->property("colorIdx").toInt(&ok);
+    if(!ok || (colorIdx == NOIDX))
+    {
+        return NOIDX;
+    }
+
+    return colorIdx;
+}
+
+QMenu * IGisItem::getColorMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
+{
+    QMenu * menu = new QMenu(title, parent);
+    menu->setIcon(QIcon("://icons/32x32/SelectColor.png"));
+
+    QAction * action;
+    for(qint32 i = 0; i < IGisItem::colorMap.size(); i++)
+    {
+        QPixmap pixmap(16,16);
+        pixmap.fill(IGisItem::colorMap[i].color);
+        action = menu->addAction(QIcon(pixmap), IGisItem::colorMap[i].name);
+        action->setProperty("colorIdx", i);
+
+        if(obj != nullptr)
+        {
+            QAction::connect(action, SIGNAL(triggered(bool)), obj, slot);
+        }
+    }
+    return menu;
+}
+
 IGisProject * IGisItem::getParentProject() const
 {
     return dynamic_cast<IGisProject*>(parent());

@@ -44,7 +44,6 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
-#include "widgets/CColorChooser.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -1062,7 +1061,7 @@ void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
         return;
     }
 
-    qint32 colorIdx = CColorChooser::selectColor(this);
+    qint32 colorIdx = IGisItem::selectColor(this);
     if(colorIdx != NOIDX)
     {
         QMutexLocker lock(&IGisItem::mutexItems);

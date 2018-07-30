@@ -202,6 +202,9 @@ public:
     /// this mutex has to be locked when ever the item list is accessed.
     static QMutex mutexItems;
 
+    static QMenu * getColorMenu(const QString &title, QObject *obj, const char *slot, QWidget * parent);
+    static qint32 selectColor(QWidget * parent);
+
     /**
        @brief If the item is part of a database project it will update itself with the database content
      */

@@ -109,8 +109,6 @@ QMenu * CActivityTrk::getMenu(const QList<IGisItem::key_t> &keys, QWidget *paren
         QAction::connect(act, &QAction::triggered, &CGisWorkspace::self(), func);
     }
 
-    menu->setEnabled(!keys.isEmpty());
-
     if(execute)
     {
         menu->exec(QCursor::pos());

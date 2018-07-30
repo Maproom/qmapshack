@@ -61,7 +61,6 @@
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
-#include "widgets/CColorChooser.h"
 
 #include <QApplication>
 #include <QtSql>
@@ -139,7 +138,6 @@ CGisListWks::CGisListWks(QWidget *parent)
     actionEditTrk       = addAction(QIcon("://icons/32x32/LineMove.png"), tr("Edit Track Points"), this, SLOT(slotEditTrk()));
     actionReverseTrk    = addAction(QIcon("://icons/32x32/Reverse.png"), tr("Reverse Track"), this, SLOT(slotReverseTrk()));
     actionCombineTrk    = addAction(QIcon("://icons/32x32/Combine.png"), tr("Combine Tracks"), this, SLOT(slotCombineTrk()));
-    actionColorTrk      = addAction(QIcon("://icons/32x32/SelectColor.png"), tr("Set Track Color"), this, SLOT(slotColorTrk()));
     actionEleWptTrk     = addAction(QIcon("://icons/32x32/SetEle.png"), tr("Replace Elevation by DEM"), this, SLOT(slotEleWptTrk()));
     actionCopyTrkWithWpt = addAction(QIcon("://icons/32x32/CopyTrkWithWpt.png"), tr("Copy Track with Waypoints"), this, SLOT(slotCopyTrkWithWpt()));
     actionNogoTrk       = addAction(QIcon("://icons/32x32/NoGo.png"), tr("Toggle Nogo-Line"), this, SLOT(slotNogoItem()));
@@ -1004,7 +1002,7 @@ void CGisListWks::showMenuItemTrk(const QPoint &p, const IGisItem::key_t& key)
     menu.addAction(actionReverseTrk);
     menu.addAction(actionCombineTrk);
     menu.addMenu(CActivityTrk::getMenu(key, &menu));
-    menu.addAction(actionColorTrk);
+    menu.addMenu(IGisItem::getColorMenu(tr("Set Track Color"), this, SLOT(slotColorTrk()), &menu));
     menu.addAction(actionEleWptTrk);
     menu.addAction(actionCopyTrkWithWpt);
     menu.addAction(actionNogoTrk);
@@ -1074,6 +1072,7 @@ void CGisListWks::showMenuItemOvl(const QPoint &p)
 void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& keysTrks,  const QList<IGisItem::key_t>& keysWpts)
 {
     CGisWorkspace::self().slotWksItemSelectionReset();
+    QAction * action;
 
     QMenu menu(this);
     menu.addAction(actionCopyItem);
@@ -1082,8 +1081,10 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
     menu.addAction(actionSymWpt);
     menu.addAction(actionEleWptTrk);
     menu.addAction(actionCombineTrk);
-    menu.addMenu(CActivityTrk::getMenu(keysTrks, &menu));
-    menu.addAction(actionColorTrk);
+    action = menu.addMenu(CActivityTrk::getMenu(keysTrks, &menu));
+    action->setEnabled(!keysTrks.isEmpty());
+    action = menu.addMenu(IGisItem::getColorMenu(tr("Set Track Color"), this, SLOT(slotColorTrk()), &menu));
+    action->setEnabled(!keysTrks.isEmpty());
     menu.addSeparator();
     menu.addAction(actionDelete);
     menu.exec(p);
@@ -1178,7 +1179,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             actionRteFromWpt->setEnabled(onlyWpts);
             actionCombineTrk->setEnabled(onlyTrks);
-            actionColorTrk->setEnabled(onlyTrks);
             actionSymWpt->setEnabled(hasWpts);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
             showMenuItem(p, keysTrk, keysWpt);
@@ -1709,18 +1709,22 @@ void CGisListWks::slotActivityTrk(trkact_t act)
 
 void CGisListWks::slotColorTrk()
 {
-    qint32 colorIdx = CColorChooser::selectColor(this);
-    if(colorIdx != NOIDX)
+    QObject * obj = sender();
+    bool ok = false;
+    qint32 colorIdx = obj->property("colorIdx").toInt(&ok);
+    if(!ok || (colorIdx == NOIDX))
     {
-        CGisListWksEditLock lock(true, IGisItem::mutexItems);
-        QList<QTreeWidgetItem*> items = selectedItems();
-        for(QTreeWidgetItem * item : items)
+        return;
+    }
+
+    CGisListWksEditLock lock(true, IGisItem::mutexItems);
+    QList<QTreeWidgetItem*> items = selectedItems();
+    for(QTreeWidgetItem * item : items)
+    {
+        CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
+        if(trk)
         {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(item);
-            if(trk)
-            {
-                trk->setColor(colorIdx);
-            }
+            trk->setColor(colorIdx);
         }
     }
 }

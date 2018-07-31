@@ -16,12 +16,13 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
+#include "gis/trk/CActivityTrk.h"
 #include "helpers/CWptIconDialog.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
-
 #include <QtWidgets>
 
 CMouseSelect::CMouseSelect(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
@@ -180,7 +181,7 @@ void CMouseSelect::slotCombineTrk() const
 
 void CMouseSelect::slotActivityTrk() const
 {
-    CGisWorkspace::self().activityTrkByKey(itemKeys);
+    CActivityTrk::getMenu(itemKeys, CMainWindow::self().getBestWidgetForParent(), true);
     canvas->resetMouse();
 }
 

@@ -51,8 +51,71 @@ CTableTrk::~CTableTrk()
     }
 }
 
+
+void CTableTrk::showTopItem()
+{
+    scrollTo(indexFromItem(topLevelItem(0), QAbstractItemView::PositionAtCenter));
+}
+
+void CTableTrk::showNextInvalid()
+{
+    qint32 index = 0;
+    QTreeWidgetItem * item = currentItem();
+    if(item != nullptr)
+    {
+        index = indexOfTopLevelItem(item) + 1;
+    }
+
+    const qint32 N = topLevelItemCount();
+    for(; index < N; index++)
+    {
+        QTreeWidgetItem * item = topLevelItem(index);
+        if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
+        {
+            scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
+            break;
+        }
+    }
+}
+
+void CTableTrk::showPrevInvalid()
+{
+    qint32 index = 0;
+    QTreeWidgetItem * item = currentItem();
+    if(item != nullptr)
+    {
+        index = indexOfTopLevelItem(item) - 1;
+    }
+
+    for(; index >= 0; index--)
+    {
+        QTreeWidgetItem * item = topLevelItem(index);
+        if(item->data(eColNum, Qt::UserRole).toUInt() != 0)
+        {
+            scrollTo(indexFromItem(item, QAbstractItemView::PositionAtCenter));
+            break;
+        }
+    }
+}
+
+
 void CTableTrk::setTrack(CGisItemTrk * track)
 {
+    setColumnCount(eColMax);
+
+    QStringList labels;
+    labels << "#";
+    labels << tr("Time");
+    labels << tr("Ele.");
+    labels << tr("Delta");
+    labels << tr("Dist.");
+    labels << tr("Speed");
+    labels << tr("Slope");
+    labels << tr("Ascent");
+    labels << tr("Descent");
+    labels << tr("Position");
+    setHeaderLabels(labels);
+
     if(trk != nullptr)
     {
         trk->unregisterVisual(this);
@@ -66,6 +129,8 @@ void CTableTrk::setTrack(CGisItemTrk * track)
         trk->registerVisual(this);
         updateData();
     }
+
+    adjustSize();
 }
 
 void CTableTrk::updateData()
@@ -103,6 +168,7 @@ void CTableTrk::updateData()
         if(trkpt.isInvalid(CTrackData::trkpt_t::invalid_e(invalidMask)) && !trkpt.isHidden())
         {
             bg = QColor(255, 100, 100);
+            item->setData(eColNum, Qt::UserRole, quint32(invalidMask));
         }
 
         QBrush fg( trkpt.isHidden() ? Qt::gray : Qt::black );

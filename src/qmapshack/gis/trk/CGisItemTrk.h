@@ -48,7 +48,6 @@ class CPropertyTrk;
 class CFitStream;
 class CCanvas;
 
-#define TRK_N_COLORS          17
 #define ASCENT_THRESHOLD       5
 #define MIN_WIDTH_INFO_BOX   300
 
@@ -228,6 +227,7 @@ public:
     const QDateTime& getTimeStart()           const { return timeStart;        }
     const QDateTime& getTimeEnd()             const { return timeEnd;          }
     qint32 getNumberOfVisiblePoints()         const { return cntVisiblePoints; }
+    qint32 getNumberOfInvalidPoints()         const { return cntInvalidPoints; }
     const CActivityTrk& getActivities()       const { return activities;       }
     const CPropertyTrk * getPropertyHandler() const { return propHandler;      }
     const CTrackData::trkpt_t * getMouseMoveFocusPoint()  const { return mouseMoveFocus;   }
@@ -294,7 +294,7 @@ public:
 private:
     void drawColorized(QPainter &p) const;
     void drawColorizedByActivity(QPainter& p) const;
-    void setPen(QPainter& p, QPen& pen, quint32 flag) const;
+    void setPen(QPainter& p, QPen& pen, trkact_t act) const;
     /**@}*/
 
 
@@ -401,7 +401,7 @@ public:
     void combine(const QList<key_t> &keys);
 
     /**
-       @brief Set the CTrackData::trkpt_t::eHidden flag
+       @brief Set the CTrackData::trkpt_t::eFlagHidden flag
 
        The flag is set for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -410,7 +410,7 @@ public:
     void hideSelectedPoints();
 
     /**
-       @brief Reset the CTrackData::trkpt_t::eHidden flag
+       @brief Reset the CTrackData::trkpt_t::eFlagHidden flag
 
        The flag is reset for all track points between mouseClickFocus and mouseMoveFocus,
        regardless of their previous state.
@@ -422,7 +422,7 @@ public:
        @brief Set the activity flag for all track points
        @param flag  one of CTrackData::trkpt_t::flag_e::eAct...
      */
-    void setActivity(quint32 flags);
+    void setActivity(trkact_t act);
 
     /**
        @brief Sets the activity flag for a selected range of track points
@@ -430,13 +430,13 @@ public:
        The range has to be selected already. The activity will be selected by a dialog displayed
        in this method.
      */
-    void setActivityRange(quint32 flags);
+    void setActivityRange(trkact_t act);
 
     /**
        @brief Copy a section into a new track object
 
        The section is defined by mouseClickFocus and mouseMoveFocus, All points are copied,
-       including the hidden (CTrackData::trkpt_t::eHidden) ones.
+       including the hidden (CTrackData::trkpt_t::eFlagHidden) ones.
 
      */
     void copySelectedPoints() const;
@@ -775,7 +775,11 @@ private:
     qreal totalElapsedSeconds = 0;
     qreal totalElapsedSecondsMoving = 0;
     quint32 numberOfAttachedWpt = 0;
+
+    void checkForInvalidPoints();
     /**@}*/
+
+
 
     /**
         \defgroup DrawUtilies Objects used to draw the track

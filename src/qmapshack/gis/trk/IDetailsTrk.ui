@@ -376,7 +376,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>4</number>
          </property>
          <widget class="QWidget" name="tab_3">
           <attribute name="title">
@@ -1493,56 +1493,6 @@
              <attribute name="headerDefaultSectionSize">
               <number>50</number>
              </attribute>
-             <column>
-              <property name="text">
-               <string notr="true">#</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Time</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Ele.</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Delta</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Dist.</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Speed</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Slope</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Ascent</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Descent</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>Position</string>
-              </property>
-             </column>
             </widget>
            </item>
           </layout>
@@ -1626,6 +1576,11 @@
  </widget>
  <customwidgets>
   <customwidget>
+   <class>CTableTrk</class>
+   <extends>QTreeWidget</extends>
+   <header>gis/trk/CTableTrk.h</header>
+  </customwidget>
+  <customwidget>
    <class>CHistoryListWidget</class>
    <extends>QListWidget</extends>
    <header>widgets/CHistoryListWidget.h</header>
@@ -1658,21 +1613,16 @@
    <header>gis/trk/CSelectActivityColor.h</header>
    <container>1</container>
   </customwidget>
-  <customwidget>
-   <class>CTableTrk</class>
-   <extends>QTreeWidget</extends>
-   <header>gis/trk/CTableTrk.h</header>
-  </customwidget>
  </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
-  <buttongroup name="buttonGroupArrow"/>
   <buttongroup name="buttonGroupLineWidth"/>
+  <buttongroup name="buttonGroupGraph3"/>
  </buttongroups>
 </ui>

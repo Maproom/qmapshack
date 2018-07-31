@@ -31,6 +31,7 @@
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/rte/router/CRouterRoutino.h"
 #include "gis/search/CGeoSearchConfig.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
@@ -92,6 +93,7 @@ CMainWindow::CMainWindow()
     setWindowTitle(WHAT_STR);
     dockRealtime->toggleViewAction()->setChecked(false);
 
+    IGisItem::init();
     initWptIcons();
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
@@ -120,6 +122,8 @@ CMainWindow::CMainWindow()
 
     widgetRtWorkspace = new CRtWorkspace(this);
     dockRealtime->setWidget(widgetRtWorkspace);
+
+    geoSearchWeb = new CGeoSearchWeb(this);
 
     // start ---- restore window geometry -----
     cfg.beginGroup("MainWindow");
@@ -430,8 +434,6 @@ CMainWindow::CMainWindow()
         }
     }
 
-
-    loadGISData(qlOpts->arguments);
 
     QTimer::singleShot(100, this, SLOT(slotSanityTest()));
 }

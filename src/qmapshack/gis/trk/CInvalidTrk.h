@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2016 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,31 +16,30 @@
 
 **********************************************************************************************/
 
-#ifndef CCOLORCHOOSER_H
-#define CCOLORCHOOSER_H
+#ifndef CINVALIDTRK_H
+#define CINVALIDTRK_H
 
-#include "ui_IColorChooser.h"
-#include <QDialog>
+#include "ui_IInvalidTrk.h"
 
-class QToolButton;
+class CGisItemTrk;
 
-class CColorChooser : public QDialog, private Ui::IColorChooser
+class CInvalidTrk : public QDialog, private Ui::IInvalidTrk
 {
     Q_OBJECT
 public:
-    CColorChooser(QToolButton * parent);
-    virtual ~CColorChooser() = default;
+    CInvalidTrk(CGisItemTrk& trk, QWidget * parent);
+    virtual ~CInvalidTrk();
 
-    static qint32 selectColor(QWidget *parent);
+public slots:
+    void accept() override;
 
 private slots:
-    void slotSelect(QToolButton * button);
+    void slotShowDetails();
+    void slotDoNotAskAgain(bool checked);
 
 private:
-    void moveToCursor();
-
-    QToolButton* parentButton;
+    CGisItemTrk& trk;
 };
 
-#endif //CCOLORCHOOSER_H
+#endif //CINVALIDTRK_H
 

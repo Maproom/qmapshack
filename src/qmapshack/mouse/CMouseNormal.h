@@ -84,9 +84,6 @@ protected:
     CScrOptUnclutter * screenUnclutter;
     QPointer<IScrOpt>  screenItemOption;
 
-    QMenu * menu;
-    QAction * actionPoiAsWpt;
-
     poi_t curPOI;
 };
 

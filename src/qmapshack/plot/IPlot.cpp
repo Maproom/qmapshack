@@ -438,8 +438,7 @@ void IPlot::mouseReleaseEvent(QMouseEvent * e)
                 connect(scrOptRange->toolHidePoints, &QToolButton::clicked, this, &IPlot::slotHidePoints);
                 connect(scrOptRange->toolShowPoints, &QToolButton::clicked, this, &IPlot::slotShowPoints);
                 connect(scrOptRange->toolCopy,       &QToolButton::clicked, this, &IPlot::slotCopy);
-
-                connect(scrOptRange.data(), &CScrOptRangeTrk::activitySelected, this, &IPlot::slotActivity);
+                connect(scrOptRange->toolActivity,   &QToolButton::clicked, this, &IPlot::slotActivity);
 
                 /* Adjust position of screen option widget if the widget is out of the visible area*/
                 QRect r1 = scrOptRange->geometry();
@@ -543,6 +542,8 @@ void IPlot::wheelEvent(QWheelEvent * e)
     QToolTip::showText(p,tr("Hold CTRL key for vertical zoom, only.\nHold ALT key for horizontal zoom, only."), this, QRect(), 500);
     needsRedraw = true;
     update();
+
+    e->accept();
 }
 
 void IPlot::setSizes()
@@ -1211,12 +1212,12 @@ void IPlot::drawTags(QPainter& p)
 
 void IPlot::drawActivities(QPainter& p)
 {
-    if((mode == eModeIcon) || (trk->getActivities().getAllFlags() == 0))
+    if((mode == eModeIcon) || (trk->getActivities().getAllActivities().isEmpty()))
     {
         return;
     }
 
-    const QList<CActivityTrk::activity_range_t>& ranges = trk->getActivities().getActivityRanges();
+    const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
 
     QRect rectClipping = QRect(0,0,right - left,22);
@@ -1229,7 +1230,7 @@ void IPlot::drawActivities(QPainter& p)
 
     QRect rectIconFrame(0,0,20,20);
     QRect rectIcon(2,2,16,16);
-    for(const CActivityTrk::activity_range_t& range : ranges)
+    for(const CActivityTrk::range_t& range : ranges)
     {
         int x1, x2;
         if(data->axisType == CPlotData::eAxisTime)
@@ -1335,9 +1336,9 @@ void IPlot::slotShowPoints()
     slotStopRange();
 }
 
-void IPlot::slotActivity(quint32 flags)
+void IPlot::slotActivity()
 {
-    trk->setActivityRange(flags);
+    CActivityTrk::getMenu(trk->getKey(), this, true);
     slotStopRange();
 }
 

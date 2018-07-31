@@ -165,6 +165,19 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
         layers << layer;
     }
 
+    // Add custom headers
+    const QDomElement& xmlRawHeader = xmlContents.firstChildElement("RawHeader");
+    const QDomNodeList& xmlValues   = xmlRawHeader.elementsByTagName("Value");
+    const int H = xmlValues.count();
+    for(qint32 n = 0; n < H; ++n)
+    {
+        const QDomNode& xmlValue = xmlValues.item(n);
+        registerHeaderItem(
+                xmlValue.attributes().namedItem("name").nodeValue(),
+                xmlValue.toElement().text()
+        );
+    }
+
     // if there is more than one layer the layer list in the properties widget has to be enabled.
     if(layers.size() > 1)
     {

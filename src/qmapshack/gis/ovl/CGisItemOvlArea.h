@@ -93,7 +93,7 @@ public:
     }
 
     void setName(const QString& str);
-    void setColor(size_t idx);
+    void setColor(int idx);
     void setDataFromPolyline(const SGisLine& l) override;
     void setWidth(qint32 w);
     void setStyle(qint32 s);

@@ -154,6 +154,27 @@ public:
 
     using selflags_t = quint32;
 
+    enum color_e
+    {
+        eColorBlack         = 0
+        , eColorDarkRed     = 1
+        , eColorDarkGreen   = 2
+        , eColorDarkYellow  = 3
+        , eColorDarkBlue    = 4
+        , eColorDarkMagenta = 5
+        , eColorDarkCyan    = 6
+        , eColorLightGray   = 7
+        , eColorDarkGray    = 8
+        , eColorRed         = 9
+        , eColorGreen       = 10
+        , eColorYellow      = 11
+        , eColorBlue        = 12
+        , eColorMagenta     = 13
+        , eColorCyan        = 14
+        , eColorWhite       = 15
+        , eColorTransparent = 16
+    };
+
     struct key_t
     {
         bool operator==(const key_t& k) const
@@ -180,6 +201,10 @@ public:
 
     /// this mutex has to be locked when ever the item list is accessed.
     static QMutex mutexItems;
+
+    static void init();
+    static QMenu * getColorMenu(const QString &title, QObject *obj, const char *slot, QWidget * parent);
+    static qint32 selectColor(QWidget * parent);
 
     /**
        @brief If the item is part of a database project it will update itself with the database content
@@ -539,13 +564,16 @@ public:
 
     struct color_t
     {
-        const char   *name;
-        const QColor color;
-        const QString bullet;
+        const char   *  name;
+        const QString   label;
+        const QColor    color;
+        const QString   bullet;
     };
 
-    static const color_t colorMap[];
-    static const size_t colorMapSize;
+    static const QVector<color_t>& getColorMap()
+    {
+        return colorMap;
+    }
 
 protected:
     /// set icon of QTreeWidgetItem
@@ -608,6 +636,7 @@ protected:
         ,eFlagNogo          = 0x00000200
     };
 
+    static QVector<color_t> colorMap;
 private:
 
     void showIcon();

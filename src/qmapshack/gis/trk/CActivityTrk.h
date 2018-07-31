@@ -188,9 +188,8 @@ private:
     friend class CGisItemTrk;
     CActivityTrk(CGisItemTrk * trk);
 
+    static desc_t dummyDesc;
     static QVector<desc_t> actDescriptor;
-
-    static const desc_t dummyDesc;
 
     CGisItemTrk * trk;
     QSet<trkact_t> allActivities;

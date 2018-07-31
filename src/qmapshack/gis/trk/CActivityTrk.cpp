@@ -35,7 +35,7 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
         , IGisItem::getColorMap()[qMax(colorIdx,IGisItem::eColorTransparent)].color \
     }
 
-const CActivityTrk::desc_t CActivityTrk::dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, IGisItem::eColorTransparent);
+CActivityTrk::desc_t CActivityTrk::dummyDesc;
 
 CActivityTrk::CActivityTrk(CGisItemTrk * trk)
     : trk(trk)
@@ -45,6 +45,8 @@ CActivityTrk::CActivityTrk(CGisItemTrk * trk)
 
 void CActivityTrk::init()
 {
+    dummyDesc = DESCRIPTOR_ENTRY("-", "ActNone.png", eAct20None, IGisItem::eColorTransparent);
+
     actDescriptor =
     {
         DESCRIPTOR_ENTRY(tr("Foot"),               "ActFoot.png",  eAct20Foot,     IGisItem::eColorBlack)

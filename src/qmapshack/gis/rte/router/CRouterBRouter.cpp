@@ -368,15 +368,13 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         reply->setProperty("options", getOptions());
         reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+        CProgressDialog progress(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
 
         QEventLoop eventLoop;
-        connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+        connect(&progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
         connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
         //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
         eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
-
-        delete progress;
 
         const QNetworkReply::NetworkError& netErr = reply->error();
         if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1,4,10))

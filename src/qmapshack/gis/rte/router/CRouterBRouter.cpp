@@ -653,12 +653,12 @@ void CRouterBRouter::startBRouter()
             brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
         }
 
-        progress = new CProgressDialog (tr("Waiting for local BRouter to finish initialization"), 0, NOINT, this);
         eventLoop = new QEventLoop(this);
+        CProgressDialog progress(tr("Waiting for local BRouter to finish initialization"), 0, NOINT, nullptr);
         QTcpSocket socket;
         QTimer timer;
 
-        connect(progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
+        connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
         connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouter::slotBRouterSocketConnected);
         connect(&socket, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), this, &CRouterBRouter::slotBRouterSocketError);
         connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
@@ -685,7 +685,6 @@ void CRouterBRouter::startBRouter()
             }
         }
         timer.stop();
-        delete progress;
         if ( connectState == eConnected )
         {
             socket.disconnectFromHost();

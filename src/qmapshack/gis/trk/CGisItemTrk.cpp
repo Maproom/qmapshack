@@ -23,6 +23,7 @@
 #include "gis/trk/CCutTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/CInvalidTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/trk/CPropertyTrk.h"
 #include "gis/trk/CScrOptTrk.h"
@@ -121,17 +122,7 @@ CGisItemTrk::CGisItemTrk(const QDomNode& xml, IGisProject *project)
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
 
-    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
-    {
-        int res = QMessageBox::question(CMainWindow::self().getBestWidgetForParent(), tr("Invalid points...."),
-                                        tr("The track '%1' has %2 invalid points out of %3 visible points. "
-                                           "Do you want to hide invalid points now?").arg(getName()).arg(cntInvalidPoints).arg(cntVisiblePoints),
-                                        QMessageBox::Yes|QMessageBox::No, QMessageBox::No);
-        if(res == QMessageBox::Yes)
-        {
-            filterRemoveInvalidPoints();
-        }
-    }
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
@@ -147,6 +138,8 @@ CGisItemTrk::CGisItemTrk(const QString& filename, IGisProject * project)
 
     setupHistory();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(const history_t& hist, const QString &dbHash, IGisProject * project)
@@ -173,6 +166,8 @@ CGisItemTrk::CGisItemTrk(CTrackData& trkdata, IGisProject *project)
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
@@ -186,6 +181,8 @@ CGisItemTrk::CGisItemTrk(CFitStream& stream, IGisProject * project)
     setupHistory();
     deriveSecondaryData();
     updateDecoration(eMarkNone, eMarkNone);
+
+    checkForInvalidPoints();
 }
 
 
@@ -363,14 +360,14 @@ QString CGisItemTrk::getInfo(quint32 feature) const
 
     QString str = "<div>";
 
-    qint32 actCnt       = activities.getActivityCount();
-    quint32 actFlags    = activities.getAllFlags();
+    qint32 actCnt               = activities.getActivityCount();
+    const QSet<trkact_t>& acts  = activities.getAllActivities();
 
     if(feature & eFeatureShowName)
     {
-        if((actCnt == 1) && actFlags)
+        if((actCnt == 1) && (acts.toList().first() != CTrackData::trkpt_t::eAct20None))
         {
-            const CActivityTrk::desc_t& desc = activities.getDescriptor(actFlags);
+            const CActivityTrk::desc_t& desc = activities.getDescriptor(acts.toList().first());
             str += QString("<img src='%1'/>&nbsp;").arg(desc.iconSmall);
         }
         str += "<b>" + getName() + "</b>";
@@ -922,8 +919,8 @@ void CGisItemTrk::consolidatePoints()
             continue;
         }
 
-        seg.pts.first().unsetFlag(CTrackData::trkpt_t::eSubpt);
-        seg.pts.last().unsetFlag(CTrackData::trkpt_t::eSubpt);
+        seg.pts.first().unsetFlag(CTrackData::trkpt_t::eFlagSubpt);
+        seg.pts.last().unsetFlag(CTrackData::trkpt_t::eFlagSubpt);
     }
 }
 
@@ -1554,7 +1551,7 @@ void CGisItemTrk::hideSelectedPoints()
     {
         if((idx1 < trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt.setFlag(CTrackData::trkpt_t::eHidden);
+            trkpt.setFlag(CTrackData::trkpt_t::eFlagHidden);
         }
     }
     resetMouseRange();
@@ -1588,7 +1585,7 @@ void CGisItemTrk::showSelectedPoints()
     {
         if(isInRange(trkpt.idxTotal, idx1, idx2))
         {
-            trkpt.unsetFlag(CTrackData::trkpt_t::eHidden);
+            trkpt.unsetFlag(CTrackData::trkpt_t::eFlagHidden);
         }
     }
 
@@ -1829,10 +1826,9 @@ void CGisItemTrk::drawLimitLabels(limit_type_e type, const QString& label, const
     blockedAreas << rect;
 }
 
-void CGisItemTrk::setPen(QPainter& p, QPen& pen, quint32 flag) const
+void CGisItemTrk::setPen(QPainter& p, QPen& pen, trkact_t act) const
 {
-    flag &= CTrackData::trkpt_t::eActMask;
-    pen.setColor((flag == 0) ? color : CActivityTrk::getDescriptor(flag).color);
+    pen.setColor((act == CTrackData::trkpt_t::eAct20None) ? color : CActivityTrk::getDescriptor(act).color);
     p.setPen(pen);
 }
 
@@ -1854,14 +1850,14 @@ void CGisItemTrk::drawColorizedByActivity(QPainter& p) const
             }
             if(nullptr == ptPrev)
             {
-                setPen(p, pen, pt.flags);
+                setPen(p, pen, pt.getAct());
                 ptPrev = &pt;
                 continue;
             }
 
-            if((ptPrev->flags & CTrackData::trkpt_t::eActMask) != (pt.flags & CTrackData::trkpt_t::eActMask))
+            if(ptPrev->getAct() != pt.getAct())
             {
-                setPen(p, pen, pt.flags);
+                setPen(p, pen, pt.getAct());
             }
 
             p.drawLine(lineSimple[ptPrev->idxVisible], lineSimple[pt.idxVisible]);
@@ -2278,35 +2274,34 @@ void CGisItemTrk::setElevation(qint32 idx, qint32 ele)
 
 void CGisItemTrk::setColor(int idx)
 {
-    if(idx < TRK_N_COLORS)
+    if(idx < IGisItem::getColorMap().count())
     {
-        setColor(IGisItem::colorMap[idx].color);
+        setColor(IGisItem::getColorMap()[idx].color);
         updateHistory(eVisualColorLegend|eVisualDetails);
     }
 }
 
-void CGisItemTrk::setActivity(quint32 flag)
+void CGisItemTrk::setActivity(trkact_t act)
 {
     for(CTrackData::trkpt_t& trkpt : trk)
     {
-        trkpt.unsetFlag(CTrackData::trkpt_t::eActMask);
-        trkpt.setFlag((enum CTrackData::trkpt_t::flag_e) flag);
+        trkpt.setAct(act);
     }
 
     deriveSecondaryData();
 
-    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flag);
+    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(act);
     changed(tr("Changed activity to '%1' for complete track.").arg(desc.name), desc.iconLarge);
 }
 
-void CGisItemTrk::setActivityRange(quint32 flags)
+void CGisItemTrk::setActivityRange(trkact_t act)
 {
     if(!setReadOnlyMode(false))
     {
         return;
     }
 
-    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(flags);
+    const CActivityTrk::desc_t &desc = CActivityTrk::getDescriptor(act);
 
     // read start/stop indices
     qint32 idx1, idx2;
@@ -2328,8 +2323,7 @@ void CGisItemTrk::setActivityRange(quint32 flags)
     {
         if((idx1 <= trkpt.idxTotal) && (trkpt.idxTotal < idx2))
         {
-            trkpt.unsetFlag(CTrackData::trkpt_t::eActMask);
-            trkpt.setFlag((enum CTrackData::trkpt_t::flag_e) flags);
+            trkpt.setAct(act);
         }
     }
 
@@ -2341,17 +2335,20 @@ void CGisItemTrk::setActivityRange(quint32 flags)
 void CGisItemTrk::setColor(const QColor& c)
 {
     colorIdx = DEFAULT_COLOR;
-    for(int n = 0; n < TRK_N_COLORS; n++)
+
+    const QVector<IGisItem::color_t>& colorMap = IGisItem::getColorMap();
+    const int N = colorMap.count();
+    for(int n = 0; n < N; n++)
     {
-        if(c == IGisItem::colorMap[n].color)
+        if(c == colorMap[n].color)
         {
             colorIdx = n;
             break;
         }
     }
 
-    color  = IGisItem::colorMap[colorIdx].color;
-    bullet = QPixmap(IGisItem::colorMap[colorIdx].bullet);
+    color  = colorMap[colorIdx].color;
+    bullet = QPixmap(colorMap[colorIdx].bullet);
 
     setIcon(color2str(color));
 }
@@ -2744,4 +2741,19 @@ bool CGisItemTrk::findPolylineCloseBy(const QPointF& pt1, const QPointF& pt2, qi
     }
 
     return !polyline.isEmpty();
+}
+
+void CGisItemTrk::checkForInvalidPoints()
+{
+    IGisProject * project = getParentProject();
+    if(project && project->getInvalidDataOk())
+    {
+        return;
+    }
+
+    if((cntInvalidPoints != 0) && (cntInvalidPoints < cntVisiblePoints))
+    {
+        CInvalidTrk dlg(*this, CMainWindow::self().getBestWidgetForParent());
+        dlg.exec();
+    }
 }

@@ -139,6 +139,8 @@ set( SRCS
     gis/search/CGeoSearch.cpp
     gis/search/CGeoSearchConfig.cpp
     gis/search/CGeoSearchConfigDialog.cpp
+    gis/search/CGeoSearchWeb.cpp
+    gis/search/CGeoSearchWebConfigDialog.cpp
     gis/slf/CSlfProject.cpp
     gis/slf/CSlfReader.cpp
     gis/summary/CGisSummary.cpp
@@ -156,6 +158,7 @@ set( SRCS
     gis/trk/CCutTrk.cpp
     gis/trk/CDetailsTrk.cpp
     gis/trk/CGisItemTrk.cpp
+    gis/trk/CInvalidTrk.cpp
     gis/trk/CKnownExtension.cpp
     gis/trk/CPropertyTrk.cpp
     gis/trk/CScrOptTrk.cpp
@@ -303,7 +306,6 @@ set( SRCS
     units/CUnitNautic.cpp
     units/CUnitsSetup.cpp
     units/IUnit.cpp
-    widgets/CColorChooser.cpp
     widgets/CColorLegend.cpp
     widgets/CDoubleSpinBox.cpp
     widgets/CFadingIcon.cpp
@@ -456,6 +458,8 @@ set( HDRS
     gis/search/CGeoSearch.h
     gis/search/CGeoSearchConfig.h
     gis/search/CGeoSearchConfigDialog.h
+    gis/search/CGeoSearchWeb.h
+    gis/search/CGeoSearchWebConfigDialog.h
     gis/slf/CSlfProject.h
     gis/slf/CSlfReader.h
     gis/summary/CGisSummary.h
@@ -471,6 +475,7 @@ set( HDRS
     gis/trk/CCutTrk.h
     gis/trk/CDetailsTrk.h
     gis/trk/CGisItemTrk.h
+    gis/trk/CInvalidTrk.h
     gis/trk/CKnownExtension.h
     gis/trk/CPropertyTrk.h
     gis/trk/CScrOptTrk.h
@@ -623,7 +628,6 @@ set( HDRS
     units/CUnitsSetup.h
     units/IUnit.h
     version.h
-    widgets/CColorChooser.h
     widgets/CColorLegend.h
     widgets/CDoubleSpinBox.h
     widgets/CFadingIcon.h
@@ -694,11 +698,13 @@ set( UIS
     gis/rte/router/brouter/IRouterBRouterSetupWizard.ui
     gis/rte/router/routino/IRouterRoutinoPathSetup.ui
     gis/search/IGeoSearchConfigDialog.ui
+    gis/search/IGeoSearchWebConfigDialog.ui
     gis/summary/IGisSummary.ui
-    gis/summary/IGisSummarySetup.ui
+    gis/summary/IGisSummarySetup.ui    
     gis/trk/ICombineTrk.ui
     gis/trk/ICutTrk.ui
     gis/trk/IDetailsTrk.ui
+    gis/trk/IInvalidTrk.ui
     gis/trk/IScrOptTrk.ui
     gis/trk/ISelectActivityColor.ui
     gis/trk/filter/IFilterChangeStartPoint.ui

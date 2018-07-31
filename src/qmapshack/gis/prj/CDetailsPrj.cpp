@@ -372,14 +372,14 @@ void CDetailsPrj::drawInfo(QTextCursor& cursor, bool isReadOnly)
     cursor1.insertHtml(IGisItem::createText(isReadOnly, prj.getDescription(), prj.getLinks()));
 }
 
-void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*> trks, bool isReadOnly)
+void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*> trks, bool /*isReadOnly*/)
 {
-    quint32 flags = 0;
-    QMap<quint32, CActivityTrk::activity_summary_t> summaries;
+    QSet<trkact_t> acts;
+    QMap<trkact_t, CActivityTrk::summary_t> summaries;
     for(const CGisItemTrk* trk : trks)
     {
         const CActivityTrk& activities = trk->getActivities();
-        flags |= activities.getAllFlags();
+        acts += activities.getAllActivities();
         activities.sumUp(summaries);
     }
 
@@ -393,7 +393,7 @@ void CDetailsPrj::drawTrackSummary(QTextCursor& cursor, const QList<CGisItemTrk*
 
     QString str;
     str += tr("<b>Summary over all tracks in project</b><br/>");
-    CActivityTrk::printSummary(summaries, flags, str);
+    CActivityTrk::printSummary(summaries, acts, str);
 
 
     cursor1.insertHtml(str);

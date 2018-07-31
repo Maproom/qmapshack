@@ -71,7 +71,6 @@ int main(int argc, char ** argv)
         splash->show();
     }
 
-
     CMainWindow w;
     w.show();
 

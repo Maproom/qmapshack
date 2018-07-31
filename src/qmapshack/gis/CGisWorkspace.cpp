@@ -35,6 +35,7 @@
 #include "gis/rte/CCreateRouteFromWpt.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/IRouter.h"
+#include "gis/search/CGeoSearchWeb.h"
 #include "gis/trk/CCombineTrk.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
@@ -43,7 +44,6 @@
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
-#include "widgets/CColorChooser.h"
 
 #include <QtWidgets>
 #include <QtXml>
@@ -78,7 +78,7 @@ CGisWorkspace::CGisWorkspace(QMenu *menuProject, QWidget *parent)
 
     // [Issue #265] Delay the loading of the workspace to make sure the complete IUnit system
     //              is up and running.
-    QTimer::singleShot(500, treeWks, SLOT(slotLoadWorkspace()));
+    QTimer::singleShot(1000, treeWks, SLOT(slotLoadWorkspace()));
 }
 
 CGisWorkspace::~CGisWorkspace()
@@ -273,6 +273,49 @@ void CGisWorkspace::slotFilterCompleteText(bool yes)
     }
 }
 
+void CGisWorkspace::slotActivityTrkByKey(const QList<IGisItem::key_t>& keys, trkact_t act)
+{
+    if(keys.isEmpty())
+    {
+        return;
+    }
+
+    if(CTrackData::trkpt_t::eAct20Bad != act)
+    {
+        QMutexLocker lock(&IGisItem::mutexItems);
+
+        QSet<IGisProject*> projects;
+        for(const IGisItem::key_t& key : keys)
+        {
+            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
+            if(trk == nullptr)
+            {
+                continue;
+            }
+
+            IGisProject * project = trk->getParentProject();
+            if(!projects.contains(project))
+            {
+                project->blockUpdateItems(true);
+                projects << project;
+            }
+
+            if(trk->isRangeSelected())
+            {
+                trk->setActivityRange(act);
+            }
+            else
+            {
+                trk->setActivity(act);
+            }
+        }
+
+        for(IGisProject * project : projects)
+        {
+            project->blockUpdateItems(false);
+        }
+    }
+}
 
 IGisProject * CGisWorkspace::selectProject()
 {
@@ -683,6 +726,17 @@ void CGisWorkspace::copyItemsByKey(const QList<IGisItem::key_t> &keys)
     CCanvas::triggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
+void CGisWorkspace::searchWebByKey(const IGisItem::key_t &key)
+{
+    QMutexLocker lock(&IGisItem::mutexItems);
+
+    CGisItemWpt * wpt = dynamic_cast<CGisItemWpt*>(getItemByKey(key));
+    if(wpt != nullptr)
+    {
+        CGeoSearchWeb::self().getMenu(wpt->getPosition(), this, true);
+    }
+}
+
 void CGisWorkspace::changeWptSymByKey(const QList<IGisItem::key_t>& keys, const QString& sym)
 {
     QMutexLocker lock(&IGisItem::mutexItems);
@@ -1000,42 +1054,6 @@ void CGisWorkspace::combineTrkByKey(const QList<IGisItem::key_t>& keys, const QL
     emit sigChanged();
 }
 
-void CGisWorkspace::activityTrkByKey(const QList<IGisItem::key_t>& keys)
-{
-    if(keys.isEmpty())
-    {
-        return;
-    }
-
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
-    {
-        QMutexLocker lock(&IGisItem::mutexItems);
-
-        QSet<IGisProject*> projects;
-        for(const IGisItem::key_t& key : keys)
-        {
-            CGisItemTrk * trk = dynamic_cast<CGisItemTrk*>(getItemByKey(key));
-            if(trk != nullptr)
-            {
-                IGisProject * project = trk->getParentProject();
-                if(!projects.contains(project))
-                {
-                    project->blockUpdateItems(true);
-                    projects << project;
-                }
-
-                trk->setActivity(flags);
-            }
-        }
-
-        for(IGisProject * project : projects)
-        {
-            project->blockUpdateItems(false);
-        }
-    }
-}
-
 void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
 {
     if(keys.isEmpty())
@@ -1043,7 +1061,7 @@ void CGisWorkspace::colorTrkByKey(const QList<IGisItem::key_t>& keys)
         return;
     }
 
-    qint32 colorIdx = CColorChooser::selectColor(this);
+    qint32 colorIdx = IGisItem::selectColor(this);
     if(colorIdx != NOIDX)
     {
         QMutexLocker lock(&IGisItem::mutexItems);

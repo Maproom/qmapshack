@@ -180,7 +180,7 @@ CGisItemTrk::CGisItemTrk(const CQlgtTrack &trk1, IGisProject * project)
 
         if(pt1.flags & CQlgtTrack::pt_t::eDeleted)
         {
-            pt.flags |= CTrackData::trkpt_t::eHidden;
+            pt.flags |= CTrackData::trkpt_t::eFlagHidden;
             hasHiddenPoints = true;
         }
     }

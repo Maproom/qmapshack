@@ -45,12 +45,6 @@ CScrOptRangeTrk::CScrOptRangeTrk(const QPointF &point, CGisItemTrk * trk, IMouse
 
     toolCopy->setDisabled(noRange);
     toolActivity->setDisabled(noRange);
-
-    connect(toolHidePoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
-    connect(toolShowPoints, &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
-    connect(toolCopy,       &QToolButton::clicked, this, &CScrOptRangeTrk::hide);
-
-    connect(toolActivity,   &QToolButton::clicked, this, &CScrOptRangeTrk::selectActivity);
 }
 
 CScrOptRangeTrk::~CScrOptRangeTrk()
@@ -65,13 +59,3 @@ void CScrOptRangeTrk::draw(QPainter& p)
     }
 }
 
-void CScrOptRangeTrk::selectActivity()
-{
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
-    {
-        emit activitySelected(flags);
-    }
-
-    hide();
-}

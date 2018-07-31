@@ -82,11 +82,12 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     setupUi(this);
 
     QPixmap icon(14,14);
-
-    for(int i=0; i < TRK_N_COLORS; ++i)
+    const int N = IGisItem::getColorMap().count();
+    for(int i=0; i < N; ++i)
     {
-        icon.fill(IGisItem::colorMap[i].color);
-        comboColor->addItem(icon, IGisItem::colorMap[i].name, IGisItem::colorMap[i].color);
+        const IGisItem::color_t& color = IGisItem::getColorMap()[i];
+        icon.fill(color.color);
+        comboColor->addItem(icon, color.label, color.color);
     }
 
     widgetColorLayout->setAlignment(Qt::AlignTop);
@@ -378,8 +379,7 @@ void CDetailsTrk::updateData()
     trk.getActivities().printSummary(str);
     labelActivityInfo->setText(str);
 
-    quint32 flags = trk.getActivities().getAllFlags();
-    bool hasActivity = 0 != (flags & CTrackData::trkpt_t::eActMask);
+    bool hasActivity = !trk.getActivities().getAllActivities().isEmpty();
     labelActivityHelp->setVisible(!hasActivity);
     labelActivityInfo->setVisible(hasActivity);
     pushSetActivities->setEnabled(!isReadOnly);
@@ -669,11 +669,7 @@ void CDetailsTrk::slotLinkActivated(const QUrl& url)
 
 void CDetailsTrk::slotSetActivities()
 {
-    quint32 flags = CActivityTrk::selectActivity(this);
-    if(0xFFFFFFFF != flags)
-    {
-        trk.setActivity(flags);
-    }
+    CActivityTrk::getMenu(trk.getKey(), this, true);
 }
 
 void CDetailsTrk::setupGraph(CPlot * plot, const CLimit& limit, const QString& source, QDoubleSpinBox * spinMin, QDoubleSpinBox * spinMax)

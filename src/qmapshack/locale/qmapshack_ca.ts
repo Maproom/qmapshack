@@ -22,97 +22,106 @@
 <context>
     <name>CActivityTrk</name>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="50"/>
         <source>Foot</source>
         <translation>A peu</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
         <source>Bicycle</source>
         <translation>Bicicleta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="67"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="52"/>
         <source>Motor Bike</source>
         <translation>Moto</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="75"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
         <source>Car</source>
         <translation>Cotxe</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="83"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
         <source>Cable Car</source>
         <translation>Telefèric</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="91"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
         <source>Swim</source>
         <translation>Natació</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="99"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
         <source>Ship</source>
         <translation>Vaixell</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="115"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
+        <source>Aeronautic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
         <source>Ski/Winter</source>
         <translation>Esquí/Hivern</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="161"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="100"/>
         <source>No Activity</source>
         <translation>Sense activitat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="318"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="255"/>
         <source>Total</source>
         <translation>Total</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="348"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="285"/>
         <source>Ascent:</source>
         <translation>Ascens:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="372"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="309"/>
         <source>Descent:</source>
         <translation>Descens:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="107"/>
         <source>Aeronautics</source>
-        <translation>Aeronàutica</translation>
+        <translation type="vanished">Aeronàutica</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="123"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Public Transport</source>
         <translation>Transport Públic</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="324"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="96"/>
+        <source>Set Track Activity</source>
+        <translation type="unfinished">Assigna una Activitat al Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="261"/>
         <source>Distance:</source>
         <translation>Distància:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="396"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="333"/>
         <source>Speed Moving:</source>
         <translation>Velocitat en Moviment:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="420"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="357"/>
         <source>Speed Total:</source>
         <translation>Velocitat Total:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="444"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="381"/>
         <source>Time Moving:</source>
         <translation>Temps en Moviment:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="468"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="405"/>
         <source>Time Total:</source>
         <translation>Temps Total:</translation>
     </message>
@@ -195,7 +204,7 @@
         <translation>&lt;h2&gt;Itineraris&lt;/h2&gt;&lt;p&gt;QMapShack permet accedir als serveis d&apos;itineraris en línia. La forma més eficient d&apos;utilitzar aquest servei és tenint la base de dades emmagatzemada a l&apos;ordinador. Existeixen dos serveis de creació d&apos;itineraris que permeten tenir les dades en local.&lt;/p&gt;&lt;h3&gt;Routino&lt;/h3&gt;&lt;p&gt;Per a utilitzar Routino heu de crear les dades dels itineraris utilitzant els fitxers de base de dades de Open Street Map. QMapShack té integrat un Creador de Bases de Dades Routino (&lt;a href=&apos;CreateRoutino&apos;&gt;Eina-&gt;Crea una Base de Dades Routino&lt;/a&gt;).&lt;/p&gt;&lt;h3&gt;BRouter&lt;/h3&gt;&lt;p&gt;La segona opció és instal·lar una base de dades local d&apos;itineraris BRouter. Ves a la configuració de &lt;a href=&apos;BRouterSetup&apos;&gt;BRouter&lt;/a&gt; per a descarregar i instal·lar totes les dades necessàries&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../canvas/CCanvas.cpp" line="945"/>
+        <location filename="../canvas/CCanvas.cpp" line="951"/>
         <source>Setup Map Background</source>
         <translation>Configura el Fons del Mapa</translation>
     </message>
@@ -203,9 +212,8 @@
 <context>
     <name>CColorChooser</name>
     <message>
-        <location filename="../widgets/CColorChooser.cpp" line="54"/>
         <source>Esc.</source>
-        <translation>Esc.</translation>
+        <translation type="vanished">Esc.</translation>
     </message>
 </context>
 <context>
@@ -462,7 +470,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -479,25 +487,25 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDetailsGeoCache</name>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="61"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
         <source>none</source>
         <translation>cap</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="61"/>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="131"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="60"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="132"/>
         <source>???</source>
         <translation>???</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="158"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="159"/>
         <source>Searching for images...</source>
         <translation>Cercant imatges...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="264"/>
+        <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -637,22 +645,22 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="172"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="173"/>
         <source>Reduce visible track points</source>
         <translation>Redueix els punts visibles del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="175"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="176"/>
         <source>Change elevation of track points</source>
         <translation>Canvia l&apos;elevació dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="178"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="179"/>
         <source>Change timestamp of track points</source>
         <translation>Canvia la data i hora dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="181"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="182"/>
         <source>Miscellaneous</source>
         <translation>Miscel·lània</translation>
     </message>
@@ -683,7 +691,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Imatge%1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="1071"/>
+        <location filename="../gis/gpx/serialization.cpp" line="1092"/>
         <source>Unknown</source>
         <translation>Desconegut</translation>
     </message>
@@ -751,7 +759,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>&#xa0; Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
@@ -883,12 +891,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -999,6 +1007,62 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <location filename="../gis/search/CGeoSearch.cpp" line="513"/>
         <source>Error: </source>
         <translation>Error: </translation>
+    </message>
+</context>
+<context>
+    <name>CGeoSearchWeb</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="100"/>
+        <source>Search Web for Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWeb.cpp" line="113"/>
+        <source>Configure Services</source>
+        <translation type="unfinished">Configurar Serveis</translation>
+    </message>
+</context>
+<context>
+    <name>CGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
+        <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
+        <source>&lt;table&gt;&lt;tr&gt;&lt;th&gt;placeholder&lt;/th&gt;&lt;th&gt;replaced by...&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%1&lt;/td&gt;&lt;td&gt;longitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%2&lt;/td&gt;&lt;td&gt;latitude [°]&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;%3&lt;/td&gt;&lt;td&gt;elevation [m]&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
+        <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
+        <source>enter name and URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="113"/>
+        <source>Remove...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="113"/>
+        <source>Remove all selected services?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="124"/>
+        <source>Restore default...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="124"/>
+        <source>Remove all services and restore default list?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1197,284 +1261,282 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Error en llegir les dades.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="78"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="79"/>
         <source>_Clone</source>
         <translation>_Clona</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="263"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="260"/>
         <source>Changed trackpoints, sacrificed all previous data.</source>
         <translation>Punts del track canviats, les dades antigues s&apos;han perdut.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="400"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="397"/>
         <source>, %1-, %2-</source>
         <translation>, %1-, %2-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="408"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="405"/>
         <source>Time: %1%2, Speed: %3%4</source>
         <translation>Temps: %1%2, Velocitat: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="412"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="409"/>
         <source>Time: -, Speed: -</source>
         <translation>Temps: -, Velocitat: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="420"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="417"/>
         <source>Moving: %1%2, Speed: %3%4</source>
         <translation>Moviment: %1%2, Velocitat: %3%4</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="424"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="421"/>
         <source>Moving: -, Speed: -</source>
         <translation>Moviment: -, Velocitat: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="433"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="430"/>
         <source>Start: %1</source>
         <translation>Inici: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="437"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="434"/>
         <source>Start: -</source>
         <translation>Inici: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="443"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="440"/>
         <source>End: %1</source>
         <translation>Final: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="447"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="444"/>
         <source>End: -</source>
         <translation>Final: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="451"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="448"/>
         <source>Points: %1 (%2)</source>
         <translation>Punts: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="455"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="452"/>
         <source>Invalid elevations!</source>
         <translation>Elevacions invàlidess!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="460"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="457"/>
         <source>Invalid timestamps!</source>
         <translation>Marques horàries invàlides !</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="465"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="462"/>
         <source>Invalid positions!</source>
         <translation>Posicions no vàlides!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="479"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="476"/>
         <source>Activities: %1</source>
         <translation>Activitats: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="602"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="599"/>
         <source>Index: %1</source>
         <translation>Index: %1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="606"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="603"/>
         <source>Index: visible %1, total %2</source>
         <translation>Índex: visible %1, total %2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="621"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="618"/>
         <source>, Slope: %1%2</source>
         <translation>, Pendent: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="654"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="651"/>
         <source>... and %1 tags not displayed</source>
         <translation>... I no es mostren %1 etiquetes</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="666"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="663"/>
         <source>Distance: - (-)</source>
         <translation>Distància: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="667"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="664"/>
         <source>Moving: - (-)</source>
         <translation>En moviment: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1360"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1373"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1429"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1473"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1612"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1357"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1370"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1426"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1470"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1609"/>
         <source>track</source>
         <translation>track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1564"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1561"/>
         <source>Hide point %1.</source>
         <translation>Amagar punt %1.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1568"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1565"/>
         <source>Hide points %1..%2.</source>
         <translation>Amagar punts %1..%2.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="717"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="729"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="714"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="726"/>
         <source>, %1%2</source>
         <translation>, %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="126"/>
         <source>Invalid points....</source>
-        <translation>punts invàlids....</translation>
+        <translation type="vanished">punts invàlids....</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="127"/>
         <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
-        <translation>El track &apos;%1&apos; té %2 punts invàlids dels %3 punts que es mostren. Vols amagar els punts invàlids?</translation>
+        <translation type="vanished">El track &apos;%1&apos; té %2 punts invàlids dels %3 punts que es mostren. Vols amagar els punts invàlids?</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="323"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1795"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>min.</source>
         <translation>mín.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="323"/>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1795"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="320"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1792"/>
         <source>max.</source>
         <translation>màx.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="389"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="386"/>
         <source>Length: %1%2</source>
         <translation>Longitud: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="396"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="393"/>
         <source>, %1%2%3, %4%5%6</source>
         <translation>, %1%2%3, %4%5%6</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="470"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="467"/>
         <source>Invalid slopes!</source>
         <translation>Pendent incorrecte!</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="617"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="614"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="626"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="623"/>
         <source>, Speed: %1%2</source>
         <translation>, Velocitat: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="664"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="661"/>
         <source>Ascent: - (-)</source>
         <translation>Ascens: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="665"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="662"/>
         <source>Descent: - (-)</source>
         <translation>Descens: - (-)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="672"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="669"/>
         <source>Ascent: %1%2 (%3%)</source>
         <translation>Ascens: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="678"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="675"/>
         <source>, Descent: %1%2 (%3%)</source>
         <translation>, Descens: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="684"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="681"/>
         <source>Distance: %1%2 (%3%)</source>
         <translation>Distància: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="690"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="687"/>
         <source>, Moving: %1%2 (%3%)</source>
         <translation>, En moviment: %1%2 (%3%)</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="706"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="703"/>
         <source>Ascent: -</source>
         <translation>Ascens: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="707"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="704"/>
         <source>Descent: -</source>
         <translation>Descens: -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="712"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="709"/>
         <source>Ascent: %1%2</source>
         <translation>Ascens: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="724"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="721"/>
         <source>, Descent: %1%2</source>
         <translation>, Descens: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="734"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="731"/>
         <source>Distance: %1%2</source>
         <translation>Distància: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="739"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="736"/>
         <source>, Time: %1%2</source>
         <translation>, Hora: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1419"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1416"/>
         <source>Permanently removed points %1..%2</source>
         <translation>S&apos;han suprimit definitivament els punts %1..%2</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="1597"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="1594"/>
         <source>Show points.</source>
         <translation>Mostrar els punts.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2240"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2242"/>
         <source>Changed name</source>
         <translation>Nom canviat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2246"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2248"/>
         <source>Changed comment</source>
         <translation>Comentari canviat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2252"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2254"/>
         <source>Changed description</source>
         <translation>Descripció canviada</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2258"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2260"/>
         <source>Changed links</source>
         <translation>Enllaços canviats</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2269"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2271"/>
         <source>Changed elevation of point %1 to %2 %3</source>
         <translation>Elevació dels punts %1 to %2 %3 canviada</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CGisItemTrk.cpp" line="2293"/>
+        <location filename="../gis/trk/CGisItemTrk.cpp" line="2294"/>
         <source>Changed activity to &apos;%1&apos; for complete track.</source>
         <translation>Activitat de tot el track canviada a &apos;%1&apos;.</translation>
     </message>
@@ -1582,17 +1644,17 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CGisItemWpt</name>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="609"/>
+        <location filename="../gis/gpx/serialization.cpp" line="627"/>
         <source>Archived</source>
         <translation>Arxivat</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="613"/>
+        <location filename="../gis/gpx/serialization.cpp" line="631"/>
         <source>Available</source>
         <translation>Disponible</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/serialization.cpp" line="617"/>
+        <location filename="../gis/gpx/serialization.cpp" line="635"/>
         <source>Not Available</source>
         <translation>No disponible</translation>
     </message>
@@ -1840,238 +1902,269 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>Amagar del Mapa</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="116"/>
+        <location filename="../gis/CGisListWks.cpp" line="114"/>
         <source>Sort by Time</source>
         <translation>Ordena per Hora</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="117"/>
+        <location filename="../gis/CGisListWks.cpp" line="115"/>
         <source>Sort by Name</source>
         <translation>Ordena per Nom</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="124"/>
+        <location filename="../gis/CGisListWks.cpp" line="118"/>
         <source>Save</source>
         <translation>Desa</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="126"/>
+        <location filename="../gis/CGisListWks.cpp" line="120"/>
         <source>Save as GPX 1.1 w/o ext...</source>
         <translation>Desa com a GPX 1.1 sense ext...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="129"/>
+        <location filename="../gis/CGisListWks.cpp" line="121"/>
         <source>Send to Devices</source>
         <translation>Envia als Dispositius</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="130"/>
+        <location filename="../gis/CGisListWks.cpp" line="122"/>
         <source>Sync. with Database</source>
         <translation>Sinc. amb Base de Dades</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="133"/>
+        <location filename="../gis/CGisListWks.cpp" line="123"/>
         <source>Close</source>
         <translation>Tanca</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="142"/>
+        <location filename="../gis/CGisListWks.cpp" line="126"/>
         <source>Update Project on Device</source>
         <translation>Modifica el Projecte en el Dispositiu</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="144"/>
-        <location filename="../gis/CGisListWks.cpp" line="172"/>
+        <location filename="../gis/CGisListWks.cpp" line="127"/>
+        <location filename="../gis/CGisListWks.cpp" line="132"/>
         <source>Delete</source>
         <translation>Suprimeix</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="156"/>
+        <location filename="../gis/CGisListWks.cpp" line="130"/>
         <source>Edit...</source>
         <translation>Edita...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="109"/>
-        <location filename="../gis/CGisListWks.cpp" line="157"/>
+        <location filename="../gis/CGisListWks.cpp" line="131"/>
         <source>Copy to...</source>
         <translation>Copia a...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="120"/>
+        <location filename="../gis/CGisListWks.cpp" line="116"/>
         <source>Autom. Save</source>
         <translation>Desa autom.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="125"/>
+        <location filename="../gis/CGisListWks.cpp" line="119"/>
         <source>Save as...</source>
         <translation>Anomena i desa...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="159"/>
+        <location filename="../gis/CGisListWks.cpp" line="135"/>
         <source>Track Profile</source>
         <translation>Perfil del Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="161"/>
+        <location filename="../gis/CGisListWks.cpp" line="137"/>
         <source>Select Range</source>
         <translation>Selecciona Rang</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="162"/>
+        <location filename="../gis/CGisListWks.cpp" line="138"/>
         <source>Edit Track Points</source>
         <translation>Edita els Punts del Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="163"/>
+        <location filename="../gis/CGisListWks.cpp" line="139"/>
         <source>Reverse Track</source>
         <translation>Invertir Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="164"/>
+        <location filename="../gis/CGisListWks.cpp" line="140"/>
         <source>Combine Tracks</source>
         <translation>Unir Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="167"/>
+        <location filename="../gis/CGisListWks.cpp" line="141"/>
         <source>Replace Elevation by DEM</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="168"/>
+        <location filename="../gis/CGisListWks.cpp" line="142"/>
         <source>Copy Track with Waypoints</source>
         <translation>Copia el track amb les Fites</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="169"/>
-        <location filename="../gis/CGisListWks.cpp" line="204"/>
+        <location filename="../gis/CGisListWks.cpp" line="143"/>
+        <location filename="../gis/CGisListWks.cpp" line="164"/>
         <source>Toggle Nogo-Line</source>
         <translation>Commuta Nogo-Line</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="179"/>
+        <location filename="../gis/CGisListWks.cpp" line="147"/>
         <source>Show Bubble</source>
         <translation>Mostra la Bombolla</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="181"/>
+        <location filename="../gis/CGisListWks.cpp" line="149"/>
         <source>Move Waypoint</source>
         <translation>Moure la Fita</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="182"/>
+        <location filename="../gis/CGisListWks.cpp" line="150"/>
         <source>Proj. Waypoint...</source>
         <translation>Proj. Fita...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="185"/>
+        <location filename="../gis/CGisListWks.cpp" line="151"/>
         <source>Change Radius</source>
         <translation>Canviar radi</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="187"/>
-        <location filename="../gis/CGisListWks.cpp" line="215"/>
+        <location filename="../gis/CGisListWks.cpp" line="153"/>
+        <location filename="../gis/CGisListWks.cpp" line="169"/>
         <source>Toggle Nogo-Area</source>
         <translation>Commuta Nogo-Area</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="186"/>
+        <location filename="../gis/CGisListWks.cpp" line="1079"/>
+        <source>Waypoints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1082"/>
+        <source>Wayp. &amp; Tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1084"/>
+        <source>Tracks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="152"/>
         <source>Delete Radius</source>
         <translation>Suprimeix radi</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="197"/>
+        <location filename="../gis/CGisListWks.cpp" line="157"/>
         <source>Route Instructions</source>
         <translation>Instruccions de l&apos;Itinerari</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="199"/>
+        <location filename="../gis/CGisListWks.cpp" line="159"/>
         <source>Calculate Route</source>
         <translation>Calcular l&apos;Itinerari</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="200"/>
+        <location filename="../gis/CGisListWks.cpp" line="160"/>
         <source>Reset Route</source>
         <translation>Reinicia Ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="201"/>
+        <location filename="../gis/CGisListWks.cpp" line="161"/>
         <source>Edit Route</source>
         <translation>Edita la Ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="202"/>
+        <location filename="../gis/CGisListWks.cpp" line="162"/>
         <source>Reverse Route</source>
         <translation>Invertir ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="203"/>
+        <location filename="../gis/CGisListWks.cpp" line="163"/>
         <source>Convert to Track</source>
         <translation>Convertir a track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="214"/>
+        <location filename="../gis/CGisListWks.cpp" line="168"/>
         <source>Edit Area Points</source>
         <translation>Edita els Punts de l&apos;Àrea</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="223"/>
+        <location filename="../gis/CGisListWks.cpp" line="173"/>
         <source>Create Route</source>
         <translation>Crear Ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="224"/>
         <source>Change Icon (sel. waypt. only)</source>
-        <translation>Canviar Icona (sols sel. fita)</translation>
+        <translation type="vanished">Canviar Icona (sols sel. fita)</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="165"/>
         <source>Set Track Activity</source>
-        <translation>Assigna una Activitat al Track</translation>
+        <translation type="vanished">Assigna una Activitat al Track</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="166"/>
+        <location filename="../gis/CGisListWks.cpp" line="1005"/>
+        <location filename="../gis/CGisListWks.cpp" line="1088"/>
         <source>Set Track Color</source>
         <translation>Definir color de la ruta</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="659"/>
+        <location filename="../gis/CGisListWks.cpp" line="610"/>
         <source>Drop items...</source>
         <translation>Deixar anar elements...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="684"/>
-        <location filename="../gis/CGisListWks.cpp" line="1842"/>
-        <location filename="../gis/CGisListWks.cpp" line="1880"/>
+        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <source>Change Icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="635"/>
+        <location filename="../gis/CGisListWks.cpp" line="1944"/>
+        <location filename="../gis/CGisListWks.cpp" line="1982"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Modifica els dispositius &lt;/b&gt;&lt;p&gt;Modifica %1&lt;br/&gt;Si us plau, espereu...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="810"/>
+        <location filename="../gis/CGisListWks.cpp" line="761"/>
         <source>Saving workspace. Please wait.</source>
         <translation>S&apos;està desant l&apos;espai de treball. Espera.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="856"/>
+        <location filename="../gis/CGisListWks.cpp" line="808"/>
         <source>Loading workspace. Please wait.</source>
         <translation>S&apos;està carregant l&apos;espai de treball. Espera.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <source>Track</source>
+        <translation type="obsolete">Track</translation>
+    </message>
+    <message>
+        <source>Route</source>
+        <translation type="obsolete">Itinerari</translation>
+    </message>
+    <message>
+        <source>Area</source>
+        <translation type="obsolete">Àrea</translation>
+    </message>
+    <message>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>Close all projects...</source>
         <translation>Tancar tots els projectes...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1266"/>
+        <location filename="../gis/CGisListWks.cpp" line="1365"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>S&apos;eliminaran tots els projectes de l&apos;espai de treball.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1391"/>
         <source>Delete project...</source>
         <translation>Suprimeix el projecte...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1292"/>
+        <location filename="../gis/CGisListWks.cpp" line="1391"/>
         <source>Do you really want to delete %1?</source>
         <translation>Esteu segur que voleu suprimir %1?</translation>
     </message>
@@ -2133,22 +2226,22 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
         <translation>&lt;b&gt;Selecció d&apos;Element: &lt;/b&gt;Element seleccionat de la llista d&apos;espais de treball. Feu clic en el mapa per tornar al comportament normal de selecció del ratolí.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="671"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="714"/>
         <source>Copy items...</source>
         <translation>Copia elements...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="690"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="744"/>
         <source>Change waypoint symbols.</source>
         <translation>Canviar el símbol de les fites.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="902"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="983"/>
         <source>Cut Track...</source>
         <translation>Tallar el Track...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisWorkspace.cpp" line="902"/>
+        <location filename="../gis/CGisWorkspace.cpp" line="983"/>
         <source>Do you want to delete the original track?</source>
         <translation>Voleu suprimir el track original?</translation>
     </message>
@@ -2180,27 +2273,27 @@ línia %2, columna %3:
         <translation>No és un fitxer GPX: %1</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="268"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="273"/>
         <source>File exists ...</source>
         <translation>El fitxer existeix ...</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="269"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="274"/>
         <source>The file exists and it has not been created by QMapShack. If you press &apos;yes&apos; all data in this file will be lost. Even if this file contains GPX data and has been loaded by QMapShack, QMapShack might not be able to load and store all elements of this file.  Those elements will be lost. I recommend to use another file. &lt;b&gt;Do you really want to overwrite the file?&lt;/b&gt;</source>
         <translation>Aquest fitxer ja existeix i no s&apos;ha creat a QMapShack. Si premeu &apos;si&apos; es perdrà tota la informació d&apos;aquest fitxer. Fins i tot si aquest fitxer té informació GPX i s&apos;ha carregat a QMapShack, QMapShack no pot carregar i emmagatzemar tota la informació existent en aquest fitxer.  La informació es perdrà. Recomano utilitzar un altre fitxer. &lt;b&gt;Segur que voleu sobreescriure el fitxer?&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="386"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="398"/>
         <source>Failed to create file &apos;%1&apos;</source>
         <translation>Ha fallat la creació del fitxer &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="396"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
         <source>Failed to write file &apos;%1&apos;</source>
         <translation>Error en escriure al fitxer &apos;%1&apos;</translation>
     </message>
     <message>
-        <location filename="../gis/gpx/CGpxProject.cpp" line="408"/>
+        <location filename="../gis/gpx/CGpxProject.cpp" line="420"/>
         <source>Saving GIS data failed...</source>
         <translation>Error desant dades GIS...</translation>
     </message>
@@ -2272,6 +2365,24 @@ línia %2, columna %3:
         <location filename="../tool/CImportDatabase.cpp" line="105"/>
         <source>Select target database...</source>
         <translation>Selecciona la base de dades destí...</translation>
+    </message>
+</context>
+<context>
+    <name>CInvalidTrk</name>
+    <message>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="44"/>
+        <source>The track &apos;%1&apos; has %2 invalid points out of %3 visible points. Do you want to hide invalid points now?</source>
+        <translation type="unfinished">El track &apos;%1&apos; té %2 punts invàlids dels %3 punts que es mostren. Vols amagar els punts invàlids?</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="68"/>
+        <source>Show Details...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CInvalidTrk.cpp" line="75"/>
+        <source>Hide Details...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2582,59 +2693,59 @@ línia %2, columna %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="551"/>
+        <location filename="../CMainWindow.cpp" line="554"/>
         <source>Select folder...</source>
         <translation>Seleccionar Carpeta...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="941"/>
+        <location filename="../CMainWindow.cpp" line="944"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilitza &lt;b&gt;Menu-&gt;Vista-&gt;Afegir Vista de Mapa&lt;/b&gt; per obrir una nova vista. O &lt;b&gt;Menu-&gt;Fitxer-&gt;Carregar Vista Mapa&lt;/b&gt; per a recuperar-ne una de guardada. O clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1070"/>
+        <location filename="../CMainWindow.cpp" line="1073"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1082"/>
+        <location filename="../CMainWindow.cpp" line="1085"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendent: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1098"/>
+        <location filename="../CMainWindow.cpp" line="1101"/>
         <source>[Grid: %1]</source>
         <translation>[Graella: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1239"/>
+        <location filename="../CMainWindow.cpp" line="1242"/>
         <source>Load GIS Data...</source>
         <translation>Carregar Dades GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1273"/>
+        <location filename="../CMainWindow.cpp" line="1276"/>
         <source>Select output file</source>
         <translation>Selecciona el fitxer de sortida</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1273"/>
-        <location filename="../CMainWindow.cpp" line="1299"/>
+        <location filename="../CMainWindow.cpp" line="1276"/>
+        <location filename="../CMainWindow.cpp" line="1302"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vista QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1299"/>
+        <location filename="../CMainWindow.cpp" line="1302"/>
         <source>Select file to load</source>
         <translation>Selecciona el fitxer a carregar</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1703"/>
+        <location filename="../CMainWindow.cpp" line="1719"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1704"/>
+        <location filename="../CMainWindow.cpp" line="1720"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack ha detectat que la llibreria Proj4 no està instal·lada de forma correcte. Manquen les taules de conversió de les projeccions EPSG, emmagatzemades de normal a /usr/share/proj. Per a solucionar-ho contacteu el mantenidor del paquet de la distribució.</translation>
     </message>
@@ -3334,7 +3445,7 @@ Retorn als típus interns..</translation>
 <context>
     <name>CMapPropSetup</name>
     <message>
-        <location filename="../map/CMapPropSetup.cpp" line="196"/>
+        <location filename="../map/CMapPropSetup.cpp" line="140"/>
         <source>Select type file...</source>
         <translation>Selecciona el tipus de fitxer...</translation>
     </message>
@@ -3385,18 +3496,18 @@ Retorn als típus interns..</translation>
 <context>
     <name>CMapTMS</name>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="68"/>
-        <location filename="../map/CMapTMS.cpp" line="78"/>
+        <location filename="../map/CMapTMS.cpp" line="69"/>
+        <location filename="../map/CMapTMS.cpp" line="79"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="68"/>
+        <location filename="../map/CMapTMS.cpp" line="69"/>
         <source>Failed to open %1</source>
         <translation>Error en obrir %1</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="78"/>
+        <location filename="../map/CMapTMS.cpp" line="79"/>
         <source>Failed to read: %1
 line %2, column %3:
  %4</source>
@@ -3405,7 +3516,7 @@ línia %2, columna %3:
  %4</translation>
     </message>
     <message>
-        <location filename="../map/CMapTMS.cpp" line="116"/>
+        <location filename="../map/CMapTMS.cpp" line="117"/>
         <source>Layer %1</source>
         <translation>Capa %1</translation>
     </message>
@@ -3469,7 +3580,7 @@ línia %2, columna %3:
         <location filename="../map/CMapWMTS.cpp" line="53"/>
         <location filename="../map/CMapWMTS.cpp" line="63"/>
         <location filename="../map/CMapWMTS.cpp" line="72"/>
-        <location filename="../map/CMapWMTS.cpp" line="218"/>
+        <location filename="../map/CMapWMTS.cpp" line="231"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
@@ -3500,7 +3611,7 @@ Estructura desconeguda.</translation>
         <translation>Servei inesperat. S&apos;esperava&apos;* WMTS 1.0.0&apos;. S&apos;ha llegit &apos;%1 %2&apos;.</translation>
     </message>
     <message>
-        <location filename="../map/CMapWMTS.cpp" line="218"/>
+        <location filename="../map/CMapWMTS.cpp" line="231"/>
         <source>No georeference information found.</source>
         <translation>No s&apos;ha trobat informació de georeferència.</translation>
     </message>
@@ -3575,42 +3686,42 @@ Estructura desconeguda.</translation>
 <context>
     <name>CMouseNormal</name>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="42"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="435"/>
         <source>Add POI as Waypoint</source>
         <translation>Afegir Punt d&apos;Interès com una Fita</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="43"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="440"/>
         <source>Add Waypoint</source>
         <translation>Afegir Fita</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="44"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="441"/>
         <source>Add Track</source>
         <translation>Afegir Track</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="45"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="442"/>
         <source>Add Route</source>
         <translation>Afegir Ruta</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="46"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="443"/>
         <source>Add Area</source>
         <translation>Afegir Àrea</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="48"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="445"/>
         <source>Select Items On Map</source>
         <translation>Selecciona elements en el Mapa</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="50"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="448"/>
         <source>Copy position</source>
         <translation>Copia la posició</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseNormal.cpp" line="51"/>
+        <location filename="../mouse/CMouseNormal.cpp" line="449"/>
         <source>Copy position (Grid)</source>
         <translation>Copia la posició (Graella)</translation>
     </message>
@@ -3634,32 +3745,32 @@ Estructura desconeguda.</translation>
 <context>
     <name>CMouseSelect</name>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="32"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="33"/>
         <source>&lt;b&gt;Select Items On Map&lt;/b&gt;&lt;br/&gt;Select a rectangular area on the map. Use the left mouse button and move the mouse. Abort with a right click. Adjust the selection by point-click-move on the corners.</source>
         <translation>&lt;b&gt;Seleccionar Elements del Mapa&lt;/b&gt;&lt;br/&gt;Selecciona una àrea rectangular en el mapa. Fes clic en el botó esquerra del ratolí i mou el ratolí. Fes clic al botó dret per interrompre. Per a ajustar la selecció apunta-fes clic-mou el ratolí a les cantonades.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="101"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="102"/>
         <source>&lt;b&gt;Selected:&lt;/b&gt;&lt;br/&gt;</source>
         <translation>&lt;b&gt;Seleccionats:&lt;/b&gt;&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="109"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="110"/>
         <source>%1 waypoints&lt;br/&gt;</source>
         <translation>%1 fites&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="104"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="105"/>
         <source>%1 tracks&lt;br/&gt;</source>
         <translation>%1 tracks&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="114"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="115"/>
         <source>%1 routes&lt;br/&gt;</source>
         <translation>%1 rutes&lt;br/&gt;</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseSelect.cpp" line="119"/>
+        <location filename="../mouse/CMouseSelect.cpp" line="120"/>
         <source>%1 areas&lt;br/&gt;</source>
         <translation>%1 àrees&lt;br/&gt;</translation>
     </message>
@@ -4049,12 +4160,17 @@ no és una coordenada vàlida en la configuración activa:
         <translation>perfil: %1, alternativa: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="780"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
+        <source>BRouter: not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="803"/>
         <source>Error:</source>
         <translation>Error:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="786"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="809"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
         <translation>QMapShack es comunica amb BRouter mitjançant una connexió de xarxa. De normal utilitza una adreça especial a la que no es pot accedir si no és a traves del dispositiu. De totes maneres BRouter rep els intents de connexió de totes les interfícies disponibles. Si us hi connecteu des de la vostra xarxa privada, amb un tallafocs actiu, no hi ha d&apos;haver cap problema. Si us hi connecteu mitjançant una xarxa pública aleshores cada port és un risc ja que el pot utilitzar qualsevol persona per posar en risc el vostre sistema. En aquest cas, no us recomanem utilitzar el servei BRouter en local. Si veieu aquest avís i utilitzeu una versió de BRouter &gt;= 1.4.10 s&apos;hauria de reforçar la vinculació de l&apos;adreça local configurant el nom de l&apos;amfitrió com a &quot;localhost&quot; i en la configuració del mode expert activant la opció &quot;Bind to hostname only&quot;.</translation>
     </message>
@@ -4097,42 +4213,42 @@ no és una coordenada vàlida en la configuración activa:
         <translation>&lt;br/&gt;Calculant el temps: %1s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="833"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="856"/>
         <source>running</source>
         <translation>correr</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="825"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="848"/>
         <source>starting</source>
         <translation>iniciant</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="718"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="741"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Versió %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="815"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="838"/>
         <source>Warning...</source>
         <translation>Avís...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="820"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="843"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Entenc el risc. No m&apos;ho diguis un altre cop.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="840"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="863"/>
         <source>stopped</source>
         <translation>Aturat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="851"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="874"/>
         <source>not installed</source>
         <translation>No instal·lat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="862"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="885"/>
         <source>online</source>
         <translation>En línia</translation>
     </message>
@@ -4140,22 +4256,22 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterSetup</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="482"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="481"/>
         <source>%1 not accessible</source>
         <translation>%1 no és accessible</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="492"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="509"/>
         <source>%1 invalid result</source>
         <translation>%1 resultat invàlid</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="536"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="539"/>
         <source>Error parsing online-config:</source>
         <translation>Error en analitzar la configuració en línia:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="541"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetup.cpp" line="544"/>
         <source>Network error:</source>
         <translation>Error de xarxa:</translation>
     </message>
@@ -4163,164 +4279,164 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterSetupWizard</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="38"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="39"/>
         <source>Restore Default Values</source>
         <translation>Restaura els Valors per Defecte</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="371"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="376"/>
         <source>Open Directory</source>
         <translation>Obrir Directori</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="378"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="383"/>
         <source>select Java Executable</source>
         <translation>Selecciona l&apos;Executable Java</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="414"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="419"/>
         <source>please select BRouter installation directory</source>
         <translation>si us plau, selecciona el directori on instal·lar BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="419"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="424"/>
         <source>selected directory does not exist</source>
         <translation>El directori seleccionat no existeix</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="420"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="425"/>
         <source>create directory and install BRouter there</source>
         <translation>Crea un directori i hi instal·les BRrouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="427"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="432"/>
         <source>existing BRouter installation</source>
         <translation>BRouter ja està instal·lat</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="428"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
         <source>update existing BRouter installation</source>
         <translation>actualitzar la instal·lació existent de BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="433"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="438"/>
         <source>empty directory, create new BRouter installation here</source>
         <translation>el directori està buit, crea una nova instal·lació de BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="434"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="439"/>
         <source>create new BRouter installation</source>
         <translation>Crea una nova instal·lació de BRouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="442"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="447"/>
         <source>seems to be a valid Java-executable</source>
         <translation>sembla que el Java-executable és vàlid</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="446"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
         <source>doesn&apos;t seem to be a valid Java-executable</source>
         <translation>no sembla que el Java-executable sigui vàlid</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="451"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="456"/>
         <source>Java Executable not found</source>
         <translation>No s&apos;ha trobat l&apos;Executable Java</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="496"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="500"/>
         <source>Error loading installation-page at %1</source>
         <translation>Error en carregar la pàgina d&apos;instal·lació a %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="505"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="514"/>
         <source>no brouter-version to install selected</source>
         <translation>No s&apos;ha seleccionat la versión per a instal·lar de brouter</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="513"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="522"/>
         <source>selected %1 for download and installation</source>
         <translation>%1 seleccionats per a baixar I instal·lar</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="524"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="533"/>
         <source>Warning...</source>
         <translation>Avís...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="529"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="538"/>
         <source>Download: %1&lt;br/&gt;&lt;br/&gt;This will download and install a zip file from a download location that is not secured by any standard at all, using plain HTTP. Usually this should be HTTPS. The risk is someone redirecting the request and sending you a replacement zip with malware. There is no way for QMapShack to detect this. &lt;br/&gt;If you do not understand this or if you are in doubt, do not proceed and abort. Use the Web version of BRouter instead.</source>
         <translation>Baixada: %1&lt;br/&gt;&lt;br/&gt;Es baixarà I s&apos;instal·lara un fitxer zip des d&apos;un servidor de baixades quen no compleix cap dels standards de seguretat normalment acceptats, utilitza HTTP en text pla. De normal s&apos;hauria d&apos;utilitzar HTTPS. Correu el risc que algú redireccioni la petició i baixeu un fitter zip amb codi maliciós. QMapShack no pot detectar-ho. &lt;br/&gt;Si no enteneu l&apos;explicació o teniu algum dubte, no seguiu I cancel·leu la operació. Com a alternativa podeu utilizer la plana Web de BRouter.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="541"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="550"/>
         <source>I understand the risk and wish to proceed.</source>
         <translation>Entenc el risc i vull continuar.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="553"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="562"/>
         <source>download %1 started</source>
         <translation>iniciada la baixada %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="565"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="574"/>
         <source>Network Error: %1</source>
         <translation>Error de xarxa: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="586"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="595"/>
         <source>download %1 finished</source>
         <translation>finalitzada la baixada %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="588"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="597"/>
         <source>unzipping:</source>
         <translation>descomprimint:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="593"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="602"/>
         <source>ready.</source>
         <translation>preparat.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="613"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="622"/>
         <source>download of brouter failed: %1</source>
         <translation>error en la baixada de brouter: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="623"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="630"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="632"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="639"/>
         <source>retrieving available profiles from %1</source>
         <translation>Recuperant desde %1 els perfils disponibles</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="654"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="736"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="663"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="745"/>
         <source>content of profile</source>
         <translation>contingut del perfil</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="729"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="738"/>
         <source>Error:</source>
         <translation>Error:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="466"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="471"/>
         <source>Error creating directory %1</source>
         <translation>S&apos;ha produït un error en crear el directori %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="571"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="580"/>
         <source>Error directory %1 does not exist</source>
         <translation>Error el directori %1 no existeix</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="578"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="587"/>
         <source>Error creating file %1</source>
         <translation>S&apos;ha produït un error en crear el fitxer %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="582"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterSetupWizard.cpp" line="591"/>
         <source>Error writing to file %1</source>
         <translation>S&apos;ha produït un error en escriure al fitxer %1</translation>
     </message>
@@ -4336,125 +4452,125 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterTilesSelect</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="92"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="98"/>
         <source>available routing-data is being determined.</source>
         <translation>S&apos;està determinant els itineraris disponibles.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="102"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="108"/>
         <source>Select outdated</source>
         <translation>Selecciona obsolets</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="103"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="109"/>
         <source>Clear Selection</source>
         <translation>Elimina la Selecció</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="104"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="110"/>
         <source>Delete selection</source>
         <translation>Suprimeix selecció</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="105"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="111"/>
         <source>Download</source>
         <translation>Baixada</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="184"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="190"/>
         <source>Error removing %1: %2</source>
         <translation>S&apos;ha produït un error en suprimir %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="275"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="281"/>
         <source>Error creating segments directory %1</source>
         <translation>Error en la creació de segments en el directori %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="688"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="702"/>
         <source>up-to-date: %1 (%2), outdated: %3 (%4), to be downloaded: %5 (%6)</source>
         <translation>actualitzat: %1 (%2), obsolets: %3 (%4), per a baixar: %5 (%6)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="786"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="805"/>
         <source>being downloaded: %1 of %2</source>
         <translation>s&apos;està baixant: %1 of %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="806"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="825"/>
         <source>no local data, online available: %1 (%2)</source>
         <translation>no hi ha dades locals, disponibles en línia: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="792"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="811"/>
         <source>local data outdated (%1, %2 - remote %3, %4)</source>
         <translation>les dades locals estan obsoletes (%1, %2 - remotes %3, %4)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="315"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="318"/>
         <source>Network Error</source>
         <translation>Error de xarxa</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="324"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="351"/>
         <source>invalid result, no files found</source>
         <translation>Resultat invàlid, no s&apos;han trobat fitxers</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="359"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="376"/>
         <source>cannot parse: %1 is not a date</source>
         <translation>no es pot analitzar: %1 no es una data</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="384"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="404"/>
         <source>cannot parse: %1 is not a valid size</source>
         <translation>no es pot analitzar: %1 la mida no és vàlida</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="403"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="726"/>
         <source>Error retrieving available routing data from %1: %2</source>
         <translation>Error en la recuperació de les dades d&apos;itineraris disponibles a %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="484"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
         <source>segments directory does not exist: </source>
         <translation>el directori de segments no existeix:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="498"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="512"/>
         <source>error creating file %1: %2</source>
         <translation>Error en la creació del fitxer %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="530"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="570"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="544"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="584"/>
         <source>no valid request for filename %1</source>
         <translation>la sol·licitud amb aquest nom de fitxer no és vàlida %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="535"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="578"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="549"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="592"/>
         <source>no open file assigned to request for %1</source>
         <translation>no hi ha cap fitxer obert per aquesta sol·licitud %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="545"/>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="588"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="559"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="602"/>
         <source>error writing to file %1: %2</source>
         <translation>Error en escriure al fitxer %1: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="614"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="628"/>
         <source>error renaming file %1 to %2: %3</source>
         <translation>Error en canviar el nom del fitxer %1 a %2: %3</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="800"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="819"/>
         <source>local data up to date (%1, %2)</source>
         <translation>dades locals actualitzades (%1, %2)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="812"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterTilesSelect.cpp" line="831"/>
         <source>no routing-data available</source>
         <translation>No hi ha itineraris disponibles</translation>
     </message>
@@ -4462,14 +4578,14 @@ no és una coordenada vàlida en la configuración activa:
 <context>
     <name>CRouterBRouterToolShell</name>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="93"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="94"/>
         <source>!!! done !!!
 </source>
         <translation>!!! fet !!!
 </translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="98"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterToolShell.cpp" line="99"/>
         <source>!!! failed !!!
 </source>
         <translation>!!! ha fallat !!!
@@ -5262,17 +5378,62 @@ línia %2, columna %3:
 <context>
     <name>CTableTrk</name>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="99"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="108"/>
+        <source>Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="109"/>
+        <source>Ele.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="110"/>
+        <source>Delta</source>
+        <translation type="unfinished">Delta</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="111"/>
+        <source>Dist.</source>
+        <translation type="unfinished">Dist.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="112"/>
+        <source>Speed</source>
+        <translation type="unfinished">Velocitat</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="113"/>
+        <source>Slope</source>
+        <translation type="unfinished">Pendent</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="114"/>
+        <source>Ascent</source>
+        <translation type="unfinished">Ascens</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="115"/>
+        <source>Descent</source>
+        <translation type="unfinished">Descens</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="116"/>
+        <source>Position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/CTableTrk.cpp" line="164"/>
         <source>Double click to edit elevation value</source>
         <translation>Doble clic per editar el valor de l&apos;elevació</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CTableTrk.cpp" line="125"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="133"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="136"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="141"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="155"/>
-        <location filename="../gis/trk/CTableTrk.cpp" line="157"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="191"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="199"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="202"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="207"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="221"/>
+        <location filename="../gis/trk/CTableTrk.cpp" line="223"/>
         <source>%1%2</source>
         <translation>%1%2</translation>
     </message>
@@ -5444,19 +5605,19 @@ línia %2, columna %3:
         <location filename="../gis/tnv/serialization.cpp" line="682"/>
         <location filename="../gis/tnv/serialization.cpp" line="756"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="195"/>
         <source>Error...</source>
         <translation>Error...</translation>
     </message>
     <message>
         <location filename="../gis/tnv/serialization.cpp" line="597"/>
         <location filename="../gis/tnv/CTwoNavProject.cpp" line="88"/>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="192"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="195"/>
         <source>Failed to open %1.</source>
         <translation>Error en obrir %1.</translation>
     </message>
     <message>
-        <location filename="../gis/tnv/CTwoNavProject.cpp" line="160"/>
+        <location filename="../gis/tnv/CTwoNavProject.cpp" line="163"/>
         <source>Save GIS data to...</source>
         <translation>Desa les dades GIS a...</translation>
     </message>
@@ -6159,29 +6320,29 @@ No vull llegir tota la documentació!</translation>
         <translation>Pendent</translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="226"/>
-        <location filename="../dem/IDemPropSetup.ui" line="326"/>
-        <location filename="../dem/IDemPropSetup.ui" line="410"/>
-        <location filename="../dem/IDemPropSetup.ui" line="494"/>
-        <location filename="../dem/IDemPropSetup.ui" line="578"/>
-        <source>°</source>
-        <translation>°</translation>
-    </message>
-    <message>
         <location filename="../dem/IDemPropSetup.ui" line="229"/>
         <location filename="../dem/IDemPropSetup.ui" line="329"/>
         <location filename="../dem/IDemPropSetup.ui" line="413"/>
         <location filename="../dem/IDemPropSetup.ui" line="497"/>
         <location filename="../dem/IDemPropSetup.ui" line="581"/>
+        <source>°</source>
+        <translation>°</translation>
+    </message>
+    <message>
+        <location filename="../dem/IDemPropSetup.ui" line="232"/>
+        <location filename="../dem/IDemPropSetup.ui" line="332"/>
+        <location filename="../dem/IDemPropSetup.ui" line="416"/>
+        <location filename="../dem/IDemPropSetup.ui" line="500"/>
+        <location filename="../dem/IDemPropSetup.ui" line="584"/>
         <source>&gt; </source>
         <translation>&gt; </translation>
     </message>
     <message>
-        <location filename="../dem/IDemPropSetup.ui" line="251"/>
-        <location filename="../dem/IDemPropSetup.ui" line="270"/>
-        <location filename="../dem/IDemPropSetup.ui" line="354"/>
-        <location filename="../dem/IDemPropSetup.ui" line="438"/>
-        <location filename="../dem/IDemPropSetup.ui" line="522"/>
+        <location filename="../dem/IDemPropSetup.ui" line="254"/>
+        <location filename="../dem/IDemPropSetup.ui" line="273"/>
+        <location filename="../dem/IDemPropSetup.ui" line="357"/>
+        <location filename="../dem/IDemPropSetup.ui" line="441"/>
+        <location filename="../dem/IDemPropSetup.ui" line="525"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
     </message>
@@ -6279,22 +6440,21 @@ No vull llegir tota la documentació!</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsGeoCache.ui" line="217"/>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="275"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="266"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="267"/>
         <source>about:blank</source>
-        <translation>about:blank</translation>
+        <translation type="vanished">about:blank</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="293"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="284"/>
         <source>Hint:</source>
         <translation>Consell:</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="324"/>
+        <location filename="../gis/wpt/IDetailsGeoCache.ui" line="315"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
     </message>
@@ -6578,7 +6738,7 @@ No vull llegir tota la documentació!</translation>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1172"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1269"/>
         <source>User defined limits for this track</source>
-        <translation>Límits d&apos;aquest track definits per l&apos;usuari </translation>
+        <translation>Límits d&apos;aquest track definits per l&apos;usuari&#xa0;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
@@ -6655,57 +6815,48 @@ No vull llegir tota la documentació!</translation>
         <translation>Punts</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1503"/>
         <source>Time</source>
-        <translation>Temps</translation>
+        <translation type="vanished">Temps</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1508"/>
         <source>Ele.</source>
-        <translation>Alt.</translation>
+        <translation type="vanished">Alt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1513"/>
         <source>Delta</source>
-        <translation>Delta</translation>
+        <translation type="vanished">Delta</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1518"/>
         <source>Dist.</source>
-        <translation>Dist.</translation>
+        <translation type="vanished">Dist.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1523"/>
         <source>Speed</source>
-        <translation>Velocitat</translation>
+        <translation type="vanished">Velocitat</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1528"/>
         <source>Slope</source>
-        <translation>Pendent</translation>
+        <translation type="vanished">Pendent</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1533"/>
         <source>Ascent</source>
-        <translation>Ascens</translation>
+        <translation type="vanished">Ascens</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1538"/>
         <source>Descent</source>
-        <translation>Descens</translation>
+        <translation type="vanished">Descens</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1543"/>
         <source>Position</source>
-        <translation>Possició</translation>
+        <translation type="vanished">Possició</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1552"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1502"/>
         <source>Filter</source>
         <translation>Filtre</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1589"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1539"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -7439,6 +7590,59 @@ No vull llegir tota la documentació!</translation>
     </message>
 </context>
 <context>
+    <name>IGeoSearchWebConfigDialog</name>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="14"/>
+        <source>Configure Services...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="24"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="50"/>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="55"/>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
+        <source>Add a new web service to the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
+        <source>Add new</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
+        <source>Remove all selected services from the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
+        <source>Delete selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
+        <source>Remove all services and restore default list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
+        <source>Reset</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>IGisDatabase</name>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="14"/>
@@ -7474,88 +7678,173 @@ No vull llegir tota la documentació!</translation>
         <translation>[sense nom]</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="317"/>
+        <location filename="../gis/IGisItem.cpp" line="153"/>
+        <source>Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="154"/>
+        <source>Dark Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="155"/>
+        <source>Dark Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="156"/>
+        <source>Dark Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="157"/>
+        <source>Dark Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="158"/>
+        <source>Dark Magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="159"/>
+        <source>Dark Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="160"/>
+        <source>Light Gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="161"/>
+        <source>Dark Gray</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="162"/>
+        <source>Red</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="163"/>
+        <source>Green</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="164"/>
+        <source>Yellow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="165"/>
+        <source>Blue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="166"/>
+        <source>Magenta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="167"/>
+        <source>Cyan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="168"/>
+        <source>White</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="169"/>
+        <source>Transparent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/IGisItem.cpp" line="363"/>
         <source>The item is not part of the project in the database.</source>
         <translation>L&apos;element no forma part del projecte a la base de dades.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="318"/>
+        <location filename="../gis/IGisItem.cpp" line="364"/>
         <source>
 It is either a new item or it has been deleted in the database by someone else.</source>
         <translation>
 Es tracta d&apos;un element nou o bé algú l&apos;ha esborrat de la base de dades.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="324"/>
+        <location filename="../gis/IGisItem.cpp" line="370"/>
         <source>The item is not in the database.</source>
         <translation>L&apos;element no existeix a la base de dades.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="330"/>
+        <location filename="../gis/IGisItem.cpp" line="376"/>
         <source>The item might need to be saved</source>
         <translation>És possible que s&apos;hagi de desar l&apos;element</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="414"/>
+        <location filename="../gis/IGisItem.cpp" line="460"/>
         <source>Initial version.</source>
         <translation>Versió inicial.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="534"/>
+        <location filename="../gis/IGisItem.cpp" line="580"/>
         <source>Never ask again.</source>
         <translation>No tornar-ho a preguntar.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="535"/>
+        <location filename="../gis/IGisItem.cpp" line="581"/>
         <source>&lt;h3&gt;%1&lt;/h3&gt; This element is probably read-only because it was not created within QMapShack. Usually you should not want to change imported data. But if you think that is ok press &apos;Ok&apos;.</source>
         <translation>&lt;h3&gt;%1&lt;/h3&gt; Aquest element probablement és sols de lectura perquè no es va crear amb QMapShack. Normalment no voldreu canviar les dades importades. Però si ho heu de fer premeu &apos;Ok&apos;.</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="536"/>
+        <location filename="../gis/IGisItem.cpp" line="582"/>
         <source>Read Only Mode...</source>
         <translation>Mode de només lectura...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="739"/>
-        <location filename="../gis/IGisItem.cpp" line="792"/>
+        <location filename="../gis/IGisItem.cpp" line="785"/>
+        <location filename="../gis/IGisItem.cpp" line="838"/>
         <source>&lt;h4&gt;Description:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Descripció:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="742"/>
-        <location filename="../gis/IGisItem.cpp" line="795"/>
+        <location filename="../gis/IGisItem.cpp" line="788"/>
+        <location filename="../gis/IGisItem.cpp" line="841"/>
         <source>&lt;p&gt;--- no description ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- sense descripció ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="753"/>
+        <location filename="../gis/IGisItem.cpp" line="799"/>
         <source>&lt;h4&gt;Comment:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Comentari:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="756"/>
+        <location filename="../gis/IGisItem.cpp" line="802"/>
         <source>&lt;p&gt;--- no comment ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- sense comentari ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="767"/>
-        <location filename="../gis/IGisItem.cpp" line="806"/>
+        <location filename="../gis/IGisItem.cpp" line="813"/>
+        <location filename="../gis/IGisItem.cpp" line="852"/>
         <source>&lt;h4&gt;Links:&lt;/h4&gt;</source>
         <translation>&lt;h4&gt;Enllaços:&lt;/h4&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="770"/>
-        <location filename="../gis/IGisItem.cpp" line="809"/>
+        <location filename="../gis/IGisItem.cpp" line="816"/>
+        <location filename="../gis/IGisItem.cpp" line="855"/>
         <source>&lt;p&gt;--- no links ---&lt;/p&gt;</source>
         <translation>&lt;p&gt;--- sense enllaços ---&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="990"/>
         <source>Edit name...</source>
         <translation>Edita el nom...</translation>
     </message>
     <message>
-        <location filename="../gis/IGisItem.cpp" line="944"/>
+        <location filename="../gis/IGisItem.cpp" line="990"/>
         <source>Enter new %1 name.</source>
         <translation>Introduir el Nou nom per a %1.</translation>
     </message>
@@ -7847,6 +8136,35 @@ Nom del fitxer: %1</translation>
         <location filename="../helpers/IInputDialog.ui" line="20"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
+    </message>
+</context>
+<context>
+    <name>IInvalidTrk</name>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="14"/>
+        <source>Invalid points...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="28"/>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="44"/>
+        <source>TextLabel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="37"/>
+        <source>Invalid points:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="54"/>
+        <source>Do not ask again for this project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IInvalidTrk.ui" line="63"/>
+        <source>Show Details...</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -8422,8 +8740,8 @@ No vull llegir la documentació!</translation>
     <message>
         <location filename="../map/IMapPropSetup.ui" line="53"/>
         <location filename="../map/IMapPropSetup.ui" line="90"/>
-        <location filename="../map/IMapPropSetup.ui" line="370"/>
-        <location filename="../map/IMapPropSetup.ui" line="384"/>
+        <location filename="../map/IMapPropSetup.ui" line="373"/>
+        <location filename="../map/IMapPropSetup.ui" line="387"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -8473,22 +8791,22 @@ No vull llegir la documentació!</translation>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="271"/>
+        <location filename="../map/IMapPropSetup.ui" line="274"/>
         <source>Cache Path</source>
         <translation>Camí a la Memòria Cau</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="353"/>
+        <location filename="../map/IMapPropSetup.ui" line="356"/>
         <source>Type File:</source>
         <translation>Tipus de fitxer:</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="367"/>
+        <location filename="../map/IMapPropSetup.ui" line="370"/>
         <source>Forget external type file and use internal types.</source>
         <translation>Oblida els tipus de fitxer externs i utilitza els propis.</translation>
     </message>
     <message>
-        <location filename="../map/IMapPropSetup.ui" line="381"/>
+        <location filename="../map/IMapPropSetup.ui" line="384"/>
         <source>Load an external type file.</source>
         <translation>Carregar un tipus de fitxer extern.</translation>
     </message>
@@ -8734,19 +9052,19 @@ Consell:
         <translation>Talla...</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="543"/>
+        <location filename="../plot/IPlot.cpp" line="542"/>
         <source>Hold CTRL key for vertical zoom, only.
 Hold ALT key for horizontal zoom, only.</source>
         <translation>Mantenir premuda la tecla CTRL només per zoom vertical.
 Mantenir premuda la tecla ALT només per zoom horitzontal.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="698"/>
+        <location filename="../plot/IPlot.cpp" line="699"/>
         <source>No or bad data.</source>
         <translation>No hi ha dades o són incorrectes.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1299"/>
+        <location filename="../plot/IPlot.cpp" line="1300"/>
         <source>Select output file</source>
         <translation>Selecciona el fitter de sortida</translation>
     </message>
@@ -10090,6 +10408,7 @@ o
         <location filename="../gis/wpt/IScrOptWpt.ui" line="146"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="167"/>
         <location filename="../gis/wpt/IScrOptWpt.ui" line="198"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="222"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10139,7 +10458,12 @@ o
         <translation>Suprimeix el cercle definit per la fita</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/IScrOptWpt.ui" line="245"/>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="219"/>
+        <source>Search for information about the waypoint&apos;s position on selected websites.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/wpt/IScrOptWpt.ui" line="266"/>
         <source>TextLabel</source>
         <translation>EtiquetaDeText</translation>
     </message>
@@ -10940,32 +11264,32 @@ o
 <context>
     <name>ITextEditWidgetSelMenu</name>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="55"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="61"/>
         <source>B</source>
         <translation>B</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="68"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="74"/>
         <source>I</source>
         <translation>I</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="81"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="87"/>
         <source>U</source>
         <translation>U</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="101"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="107"/>
         <source>Cut</source>
         <translation>Retalla</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="114"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="120"/>
         <source>Copy</source>
         <translation>Còpia</translation>
     </message>
     <message>
-        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="127"/>
+        <location filename="../widgets/ITextEditWidgetSelMenu.ui" line="133"/>
         <source>Paste</source>
         <translation>Enganxa</translation>
     </message>
@@ -11044,7 +11368,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>

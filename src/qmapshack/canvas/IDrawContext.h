@@ -60,8 +60,9 @@ public:
     /**
        @brief resize the internal buffer
        @param size  the new size of the canvas
+       @return Return false if the request could not access data because the thread is running.
      */
-    void resize(const QSize& size);
+    bool resize(const QSize& size);
     /**
        @brief Zoom in and out of the map by the scale factors defined in CMapDB::scales.
        @param in            set true to zoom in, and false to zoom out
@@ -190,6 +191,8 @@ protected:
     int bufHeight  = 100; //< buffer height [px]
     int viewWidth  = 100; //< the viewports width [px]
     int viewHeight = 100; //< the viewports height [px]
+
+    QSize lastSize;
 
     QPointF center; /// the center of the viewport
 

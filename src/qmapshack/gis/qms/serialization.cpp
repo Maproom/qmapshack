@@ -34,7 +34,7 @@
 #define VER_AREA        quint8(1)
 #define VER_LINK        quint8(1)
 #define VER_TRKSEG      quint8(1)
-#define VER_TRKPT       quint8(2)
+#define VER_TRKPT       quint8(3)
 #define VER_RTEPT       quint8(2)
 #define VER_RTESUBPT    quint8(2)
 #define VER_WPT_T       quint8(1)
@@ -350,6 +350,7 @@ QDataStream& operator<<(QDataStream& stream, const CTrackData::trkpt_t& pt)
     stream << VER_TRKPT << pt.flags;
     stream << (const IGisItem::wpt_t&)pt;
     stream << pt.extensions;
+    stream << qint16(pt.activity);
     return stream;
 }
 
@@ -362,6 +363,16 @@ QDataStream& operator>>(QDataStream& stream, CTrackData::trkpt_t& pt)
     {
         stream >> pt.extensions;
     }
+
+    if(version > 2)
+    {
+        qint16 tmp16;
+        stream >> tmp16;
+        pt.activity = trkact_t(tmp16);
+    }
+
+    pt.sanitizeFlags();
+
     return stream;
 }
 
@@ -605,6 +616,8 @@ QDataStream& CGisItemTrk::operator<<(QDataStream& stream)
     setColor(str2color(trk.color));
     setText(   CGisListWks::eColumnName, getName());
     setToolTip(CGisListWks::eColumnName, getInfo(IGisItem::eFeatureShowName));
+
+    checkForInvalidPoints();
     return stream;
 }
 
@@ -893,6 +906,7 @@ QDataStream& IGisProject::operator<<(QDataStream& stream)
         stream >> tmp;
         noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
         autoSave        = (tmp & eFlagAutoSave) != 0;
+        invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
     }
 
     if(version > 4)
@@ -973,7 +987,7 @@ QDataStream& IGisProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0)); // collect trivial flags in one field.
+    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     for(int i = 0; i < childCount(); i++)
@@ -1073,6 +1087,7 @@ QDataStream& CDBProject::operator<<(QDataStream& stream)
         stream >> tmp;
         noCorrelation   = (tmp & eFlagNoCorrelation) != 0;
         autoSave        = (tmp & eFlagAutoSave) != 0;
+        invalidDataOk   = (tmp & eFlagInvalidDataOk) != 0;
     }
     if(version > 4)
     {
@@ -1100,7 +1115,7 @@ QDataStream& CDBProject::operator>>(QDataStream& stream) const
     stream << metadata.bounds;
     stream << key;
     stream << qint32(sortingRoadbook);
-    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0)); // collect trivial flags in one field.
+    stream << qint8((noCorrelation ? eFlagNoCorrelation : 0) | (autoSave ? eFlagAutoSave : 0) | (invalidDataOk ? eFlagInvalidDataOk : 0)); // collect trivial flags in one field.
     stream << qint32(sortingFolder);
 
     return stream;

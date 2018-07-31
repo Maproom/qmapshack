@@ -503,9 +503,15 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
 
 void CCanvas::resizeEvent(QResizeEvent * e)
 {
-    needsRedraw = eRedrawAll;
+    if(!setDrawContextSize(e->size()))
+    {
+        // reschedule resize event because one of the draw context threads is still running
+        // and blocking the access to internal data.
+        QApplication::postEvent(this, new QResizeEvent(e->size(), e->oldSize()));
+        return;
+    }
 
-    setDrawContextSize(e->size());
+    needsRedraw = eRedrawAll;
     QWidget::resizeEvent(e);
 
     const QRect& r = rect();
@@ -1144,12 +1150,14 @@ void CCanvas::showProfile(bool yes)
     }
 }
 
-void CCanvas::setDrawContextSize(const QSize& s)
+bool CCanvas::setDrawContextSize(const QSize& s)
 {
+    bool done = true;
     for(IDrawContext * context : allDrawContext)
     {
-        context->resize(s);
+        done &= context->resize(s);
     }
+    return done;
 }
 
 void CCanvas::print(QPainter& p, const QRectF& area, const QPointF& focus)

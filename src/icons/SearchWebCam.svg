@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="48"
+   height="48"
+   background="#FFFFFF"
+   version="1.1"
+   id="svg29"
+   sodipodi:docname="SearchWebcams.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:export-filename="H:\iconssvg\export-to-QMS\icons\SearchWebCamsB16.png"
+   inkscape:export-xdpi="32"
+   inkscape:export-ydpi="32">
+  <metadata
+     id="metadata35">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs33" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1600"
+     inkscape:window-height="1138"
+     id="namedview31"
+     showgrid="false"
+     inkscape:zoom="7.4670476"
+     inkscape:cx="38.339833"
+     inkscape:cy="-3.3271528"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg29" />
+  <rect
+     style="opacity:1;fill:#000080;fill-opacity:1;stroke:#000080;stroke-width:1.20017791;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:20;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+     id="rect4567"
+     width="46.799824"
+     height="46.799824"
+     x="0.60008895"
+     y="0.60008895"
+     ry="0" />
+  <g
+     type="COMPO"
+     id="c_1"
+     transform="translate(0,-1232)" />
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="0" />
+  <rect
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000080;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+     id="rect911"
+     width="10.579818"
+     height="37.899853"
+     x="18.710091"
+     y="8.6270084" />
+  <rect
+     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000080;stroke-width:1.41957796;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke"
+     id="rect909"
+     width="30.438303"
+     height="21.159273"
+     x="8.7808485"
+     y="13.420363"
+     ry="4.1515727" />
+  <g
+     transform="matrix(0.06448234,0,0,0.06366477,0.80234213,-9.0915284)"
+     type="COMPO"
+     id="c_12"
+     style="stroke:#000080;stroke-width:44.21564484;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
+    <path
+       style="fill-opacity:0;stroke:#000080;stroke-width:44.21564484;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:connector-curvature="0"
+       rough-pts="328.98087,408.0924 301.31787,419.7776 277.87195,437.89758 259.75192,461.34344 248.06677,489.0064 243.9253,519.7777 248.06677,550.5489 259.75195,578.2119 277.87195,601.65784 301.31784,619.7778 328.98087,631.463 359.7521,635.6045 390.52332,631.463 418.1863,619.77783 441.63226,601.65784 459.75226,578.21185 471.43744,550.5489 475.57892,519.7777 471.43744,489.00647 459.75238,461.3435 441.6324,437.89752 418.1863,419.77753 390.5233,408.0924 359.7521,403.95093 "
+       id="h_94"
+       d="m 328.9809,408.0924 c -49.0032,13.4969 -85.0556,58.42585 -85.0556,111.6853 0,63.9114 51.91543,115.8268 115.8268,115.8268 63.91138,0 115.82682,-51.9154 115.82682,-115.8268 0,-63.91137 -51.91544,-115.82677 -115.82682,-115.82677 -10.65188,0 -20.97054,1.44207 -30.7712,4.14147"
+       path-type="area" />
+    <circle
+       style="fill:none;stroke:#000080;stroke-width:44.21564484;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       r="115.8268"
+       id="b_0"
+       sc="0.0,-115.8268"
+       pc="115.8268,0.0"
+       cy="519.77771"
+       cx="359.75211"
+       average="359.7521,519.7777" />
+  </g>
+</svg>

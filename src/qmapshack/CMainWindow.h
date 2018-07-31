@@ -33,6 +33,7 @@ class CRtWorkspace;
 class CCanvas;
 class CGeoSearchConfig;
 class CToolBarConfig;
+class CGeoSearchWeb;
 struct SGisLine;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
@@ -223,6 +224,8 @@ private:
 
     CToolBarConfig * toolBarConfig;
     CGeoSearchConfig * geoSearchConfig;
+
+    CGeoSearchWeb * geoSearchWeb;
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;

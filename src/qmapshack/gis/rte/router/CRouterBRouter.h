@@ -65,14 +65,16 @@ private slots:
     void slotDisplayProfileInfo(const QString &profile, const QString &content);
     void slotBRouterStateChanged(const QProcess::ProcessState newState);
     void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
-    void slotToggleBRouter() const;
+    void slotBRouterSocketError(const QAbstractSocket::SocketError error);
+    void slotBRouterSocketConnected();
+    void slotToggleBRouter();
     void slotToggleConsole() const;
     void slotClearError();
 
 private:
 
     void updateDialog() const;
-    void startBRouter() const;
+    void startBRouter();
     void stopBRouter() const;
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
@@ -93,11 +95,15 @@ private:
     CRouterBRouterToolShell * brouterShell {nullptr};
     QProcess::ProcessState brouterState { QProcess::NotRunning };
     QProcess::ProcessError brouterError { QProcess::UnknownError };
-    CProgressDialog * progress;
+    CProgressDialog * progress { nullptr };
     bool isError { false };
     QString error;
     QString errorDetails;
     bool isShutdown { false };
+
+    enum connect_state_e { eNone=0, eConnected=1, eError=2 };
+    QEventLoop * eventLoop { nullptr };
+    QAbstractSocket::SocketError socketError { QAbstractSocket::ConnectionRefusedError };
 
     int versionMajor { NOINT };
     int versionMinor { NOINT };

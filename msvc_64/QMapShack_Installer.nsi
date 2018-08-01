@@ -14,9 +14,11 @@
 ;  http://msdn.microsoft.com/en-us/library/8kche8ah.aspx ==> Distribute msvcr120.dll and msvcp120.dll
 ;  http://www.microsoft.com/en-us/download/details.aspx?id=40784 ==> Download the vcredist_x64.exe from here !!!
 ;  http://msdn.microsoft.com/en-us/vstudio/dn501987.aspx ==> Legal stuff
+;  https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads --> MSVC2017
 
 ;Revision Log
 ; 03-Aug-2014 First version of QMapShack installer based on the existing QLandkarteGT installer
+; 01-Aug-2018 Adapt for VS2017
 
 ;=================== BEGIN SCRIPT ====================
 ; Include for nice Setup UI, see http://nsis.sourceforge.net/Docs/Modern%20UI%202/Readme.html
@@ -88,16 +90,16 @@ Var StartMenuFolder
 ;------------------------------------------------------------------------
 ;Components description
 
-Section "MSVC++ 2013 SP1 Runtime" MSVC
+Section "MSVC++ 2017 Runtime" MSVC
 
   SetOutPath $INSTDIR
-  File Files\vcredist_x64.exe
-  ExecWait '"$INSTDIR\vcredist_x64.exe"'
-  Delete "$INSTDIR\vcredist_x64.exe"
+  File Files\VC_redist.x64.exe
+  ExecWait '"$INSTDIR\VC_redist.x64.exe"'
+  Delete "$INSTDIR\VC_redist.x64.exe"
   
 SectionEnd
-LangString DESC_MSVC ${LANG_ENGLISH} "Microsoft Visual C++ 2013 SP1 Runtime Libraries. Typically already installed on your PC. You only need to install them if it doesn't work without ;-)."
-LangString DESC_MSVC ${LANG_GERMAN} "Microsoft Visual C++ 2013 SP1 Laufzeitbibliotheken. Diese sind meist bereits auf dem Rechner installiert. Versuchen Sie die Installation zunächst einmal ohne dies."
+LangString DESC_MSVC ${LANG_ENGLISH} "Microsoft Visual C++ 2017 SP1 Runtime Libraries. Typically already installed on your PC. You only need to install them if it doesn't work without ;-)."
+LangString DESC_MSVC ${LANG_GERMAN} "Microsoft Visual C++ 2017 SP1 Laufzeitbibliotheken. Diese sind meist bereits auf dem Rechner installiert. Versuchen Sie die Installation zunächst einmal ohne dies."
 
 Section "QMapShack" QMapShack
 
@@ -128,25 +130,23 @@ Section "QMapShack" QMapShack
     File Files\Qt5PrintSupport.dll
     File Files\Qt5Qml.dll
     File Files\Qt5Quick.dll
-    File Files\Qt5Script.dll
+    File Files\Qt5QuickWidgets.dll
     File Files\Qt5Sensors.dll
     File Files\Qt5Sql.dll
     File Files\Qt5Svg.dll
     File Files\Qt5WebChannel.dll
-    File Files\Qt5WebKit.dll
+    File Files\Qt5WebEngine.dll
+    File Files\Qt5WebEngineCore.dll
+    File Files\Qt5WebEngineWidgets.dll
+    File Files\QtWebEngineProcess.exe
     File Files\Qt5Widgets.dll 
-    File Files\Qt5WebKitWidgets.dll	
     File Files\Qt5Xml.dll
-    File Files\icudt54.dll
-    File Files\icuin54.dll
-    File Files\icuuc54.dll
     File Files\libEGL.dll
     File Files\libGLESv2.dll
 
   SetOutPath "$INSTDIR\imageformats\"
     File Files\imageformats\qgif.dll
     File Files\imageformats\qjpeg.dll
-    File Files\imageformats\qmng.dll
     File Files\imageformats\qsvg.dll
     File Files\imageformats\qtiff.dll
     File Files\imageformats\qico.dll
@@ -159,13 +159,19 @@ Section "QMapShack" QMapShack
     File Files\sqldrivers\qsqlpsql.dll
 
   SetOutPath "$INSTDIR\platforms\"
-    File Files\platforms\qwindows.dll	
+    File Files\platforms\qwindows.dll
 
   SetOutPath "$INSTDIR\printsupport\"
     File Files\printsupport\windowsprintersupport.dll
     
   SetOutPath "$INSTDIR\translations"
-    File Files\translations\qt*.qm	
+    File Files\translations\qt*.qm
+
+  SetOutPath "$INSTDIR\translations\qtwebengine_locales"
+    File Files\translations\qtwebengine_locales\*.pak
+
+  SetOutPath "$INSTDIR\resources"
+    File Files\resources\*.*
   ;END Qt Files
     
   ;BEGIN GDAL and PROJ.4 Files    

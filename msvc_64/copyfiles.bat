@@ -6,14 +6,14 @@ rem http://technet.microsoft.com/en-us/library/bb491035.aspx
 rem http://vlaurie.com/computers2/Articles/environment.htm
 
 rem Section 1.) Define path to Qt, MSVC, .... installations
-set QMSI_QT_PATH="C:\Qt5\5.5\msvc2013_64"
-rem get the VC redistributable installer from http://www.microsoft.com/en-us/download/details.aspx?id=40784
-set QMSI_VCREDIST_PATH="M:\deploy"
+set QMSI_QT_PATH="C:\Qt5\5.11.1\msvc2017_64"
+rem get the VC redistributable installer from https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
+set QMSI_VCREDIST_PATH="M:\deploy_2017"
 rem set QLGTI_LIBEXIF_PATH="D:\qlgt\tools\libexif"
-set QMSI_GDAL_PATH="M:\lib\gdal"
-set QMSI_PROJ_PATH="M:\lib\PROJ"
+set QMSI_GDAL_PATH="M:\lib2017\gdal"
+set QMSI_PROJ_PATH="M:\lib2017\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
-set QMSI_QUAZIP_PATH="M:\lib\quazip"
+set QMSI_QUAZIP_PATH="M:\lib2017\quazip"
 set QMSI_ZLIB_PATH="M:\lib\zlib"
 set QMSI_CURL_PATH="M:\lib\cURL"
 set QMSI_SQLI_PATH="M:\lib\sqlite"
@@ -31,6 +31,7 @@ mkdir Files
 cd Files
 
 rem Section 2.1) Copy Qt files
+rem Note: Qt5WebEngine deployment is super crazy - see https://doc.qt.io/qt-5.11/qtwebengine-deploying.html
 copy %QMSI_QT_PATH%\bin\Qt5Core.dll
 copy %QMSI_QT_PATH%\bin\Qt5Gui.dll
 copy %QMSI_QT_PATH%\bin\Qt5Multimedia.dll
@@ -41,25 +42,23 @@ copy %QMSI_QT_PATH%\bin\Qt5Positioning.dll
 copy %QMSI_QT_PATH%\bin\Qt5PrintSupport.dll
 copy %QMSI_QT_PATH%\bin\Qt5Qml.dll
 copy %QMSI_QT_PATH%\bin\Qt5Quick.dll
-copy %QMSI_QT_PATH%\bin\Qt5Script.dll
+copy %QMSI_QT_PATH%\bin\Qt5QuickWidgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sensors.dll
 copy %QMSI_QT_PATH%\bin\Qt5Sql.dll
 copy %QMSI_QT_PATH%\bin\Qt5Svg.dll
 copy %QMSI_QT_PATH%\bin\Qt5WebChannel.dll
-copy %QMSI_QT_PATH%\bin\Qt5WebKit.dll
-copy %QMSI_QT_PATH%\bin\Qt5WebKitWidgets.dll
+copy %QMSI_QT_PATH%\bin\Qt5WebEngine.dll
+copy %QMSI_QT_PATH%\bin\Qt5WebEngineCore.dll
+copy %QMSI_QT_PATH%\bin\Qt5WebEngineWidgets.dll
+copy %QMSI_QT_PATH%\bin\QtWebEngineProcess.exe
 copy %QMSI_QT_PATH%\bin\Qt5Widgets.dll
 copy %QMSI_QT_PATH%\bin\Qt5Xml.dll
-copy %QMSI_QT_PATH%\bin\icudt54.dll
-copy %QMSI_QT_PATH%\bin\icuin54.dll
-copy %QMSI_QT_PATH%\bin\icuuc54.dll
 copy %QMSI_QT_PATH%\bin\libEGL.dll
 copy %QMSI_QT_PATH%\bin\libGLESv2.dll
 mkdir imageformats
 cd imageformats
 copy %QMSI_QT_PATH%\plugins\imageformats\qgif.dll
 copy %QMSI_QT_PATH%\plugins\imageformats\qjpeg.dll
-copy %QMSI_QT_PATH%\plugins\imageformats\qmng.dll
 copy %QMSI_QT_PATH%\plugins\imageformats\qsvg.dll
 copy %QMSI_QT_PATH%\plugins\imageformats\qtiff.dll
 copy %QMSI_QT_PATH%\plugins\imageformats\qico.dll
@@ -84,6 +83,14 @@ rem Qt translations
 rem Qt5: see http://doc.qt.io/qt-5/linguist-programmers.html
 mkdir translations
 copy %QMSI_QT_PATH%\translations\qtbase_??.qm translations
+rem Qt5WebEngine translations
+cd translations
+mkdir qtwebengine_locales
+copy %QMSI_QT_PATH%\translations\qtwebengine_locales\*.pak qtwebengine_locales
+cd ..
+rem rem Qt5WebEngine resources
+mkdir resources
+copy %QMSI_QT_PATH%\resources\*.* resources
 
 rem section 2.2) Copy GDAL and PROJ.4 Files 
 rem   put them in the same directory as the .exe for better testing
@@ -114,7 +121,7 @@ rem section 2.2.10) sqlite
 copy %QMSI_SQLI_PATH%\sqlite3.dll
 
 rem section 2.3) Copy MSVC Redist Files
-copy %QMSI_VCREDIST_PATH%\vcredist_x64.exe
+copy %QMSI_VCREDIST_PATH%\VC_redist.x64.exe
 
 rem section 2.4) Copy QMapShack Files
 copy %QMSI_BUILD_PATH%\bin\Release\qmapshack.exe

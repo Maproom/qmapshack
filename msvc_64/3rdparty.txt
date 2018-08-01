@@ -11,12 +11,12 @@ Dependencies
 ============
 QMS depends on the 3rd party software listed below:
 
-1.) Microsoft Visual C++ 2013 Redistributable Package
+1.) Microsoft Visual C++ 2017 Redistributable Package
   The installer vcredist_x64.exe (ca 7MB size) as downloaded from
-    http://www.microsoft.com/en-us/download/details.aspx?id=40784
+    https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads
   is already contained in the QMS Installer package and will be executed if selected by the user.
 
-  Note: Those runtime libraries may already be contained in Windows 7 or Windows 8 installations.
+  Note: Those runtime libraries may already be contained in Windows 10 installations.
 
 2.) Qt5 runtime libraries
   The Qt DLL's are deployed in the QMS installation directory. 

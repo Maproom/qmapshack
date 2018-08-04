@@ -368,15 +368,13 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         reply->setProperty("options", getOptions());
         reply->setProperty("time", QDateTime::currentDateTimeUtc().toMSecsSinceEpoch());
 
-        progress = new CProgressDialog(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, this);
+        CProgressDialog progress(tr("Calculate route with %1").arg(getOptions()), 0, NOINT, nullptr);
 
         QEventLoop eventLoop;
-        connect(progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
+        connect(&progress, &CProgressDialog::rejected, reply, &QNetworkReply::abort);
         connect(reply, &QNetworkReply::finished, &eventLoop, &QEventLoop::quit);
         //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
         eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
-
-        delete progress;
 
         const QNetworkReply::NetworkError& netErr = reply->error();
         if (netErr == QNetworkReply::RemoteHostClosedError && nogos.size() > 1 && !isMinimumVersion(1,4,10))
@@ -591,6 +589,17 @@ QUrl CRouterBRouter::getServiceUrl() const
     }
 }
 
+void CRouterBRouter::slotBRouterSocketConnected()
+{
+    eventLoop->exit(eConnected);
+}
+
+void CRouterBRouter::slotBRouterSocketError(const QAbstractSocket::SocketError error)
+{
+    socketError = error;
+    eventLoop->exit(eError);
+}
+
 void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
@@ -599,7 +608,7 @@ void CRouterBRouter::slotToggleConsole() const
     pushBRouterError->setVisible(showError);
 }
 
-void CRouterBRouter::slotToggleBRouter() const
+void CRouterBRouter::slotToggleBRouter()
 {
     if (brouterState == QProcess::NotRunning)
     {
@@ -611,7 +620,7 @@ void CRouterBRouter::slotToggleBRouter() const
     }
 }
 
-void CRouterBRouter::startBRouter() const
+void CRouterBRouter::startBRouter()
 {
     if (setup->isLocalBRouterInstalled())
     {
@@ -641,32 +650,44 @@ void CRouterBRouter::startBRouter() const
             }
             brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
         }
+
+        eventLoop = new QEventLoop(this);
+        CProgressDialog progress(tr("Waiting for local BRouter to finish initialization"), 0, NOINT, nullptr);
         QTcpSocket socket;
-        int counts = 10;
-        bool connected = false;
-        while (counts > 0)
+        QTimer timer;
+
+        connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
+        connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouter::slotBRouterSocketConnected);
+        connect(&socket, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), this, &CRouterBRouter::slotBRouterSocketError);
+        connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
+
+        timer.setSingleShot(true);
+        timer.start(30000); // up to 30 sec.
+        connect_state_e connectState = eNone;
+
+        while (timer.remainingTime() > 0 && brouterState == QProcess::Running)
         {
             socket.connectToHost(setup->localHost,setup->localPort.toInt());
-            if (socket.waitForConnected())
+            //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
+            connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
+
+            // retry after 100ms, but only in case socket is not yet connectable
+            if (connectState == eError && socketError == QAbstractSocket::ConnectionRefusedError)
             {
-                connected = true;
+                QThread::msleep(100);
+            }
+            else
+            {
+                // connection either succeeded, progress was canceled or timeout occured.
                 break;
             }
-            if (socket.error() != QAbstractSocket::ConnectionRefusedError)
-            {
-                break;
-            }
-            QThread::msleep(100);
-            counts--;
         }
-        if (connected)
+        timer.stop();
+        if ( connectState == eConnected )
         {
             socket.disconnectFromHost();
-            if(socket.state() != QAbstractSocket::UnconnectedState)
-            {
-                socket.waitForDisconnected();
-            }
         }
+        eventLoop->deleteLater();
     }
 }
 

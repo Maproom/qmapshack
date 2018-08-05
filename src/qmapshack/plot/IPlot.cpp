@@ -1217,6 +1217,12 @@ void IPlot::drawActivities(QPainter& p)
         return;
     }
 
+    if((trk->getActivities().getAllActivities().count() == 1)
+       && (trk->getActivities().getAllActivities().toList().first() == CTrackData::trkpt_t::eAct20None))
+    {
+        return;
+    }
+
     const QList<CActivityTrk::range_t>& ranges = trk->getActivities().getActivityRanges();
 
 

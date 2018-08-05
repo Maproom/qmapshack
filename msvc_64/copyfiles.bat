@@ -14,14 +14,14 @@ set QMSI_GDAL_PATH="M:\lib2017\gdal"
 set QMSI_PROJ_PATH="M:\lib2017\PROJ"
 set QMSI_ROUT_PATH="M:\src\routino_pkg"
 set QMSI_QUAZIP_PATH="M:\lib2017\quazip"
-set QMSI_ZLIB_PATH="M:\lib\zlib"
-set QMSI_CURL_PATH="M:\lib\cURL"
-set QMSI_SQLI_PATH="M:\lib\sqlite"
+set QMSI_ZLIB_PATH="M:\lib2017\zlib"
+set QMSI_CURL_PATH="M:\lib2017\cURL"
+set QMSI_SQLI_PATH="M:\lib2017\sqlite"
 rem runtime libraries from mingw/msys - in my installation originally at C:\msys\opt\windows_64\bin
-set QMSI_MGW6_PATH="M:\lib\mingw64"
+set QMSI_MGW6_PATH="M:\lib2017\mingw64"
 rem runtime libraries from mysql/mariadb 
 rem ToDo: describe from where to get - could this be optional?
-set QMSI_MSQL_PATH="M:\lib\mysql"
+set QMSI_MSQL_PATH="M:\lib2017\mysql"
 rem And finally of courss the path to your build directory!
 set QMSI_BUILD_PATH="..\..\build\"
 

@@ -136,6 +136,7 @@ void CScrOptTrk::slotCombine()
 
 void CScrOptTrk::slotRange()
 {
+    mouse = nullptr;
     CGisWorkspace::self().rangeTrkByKey(key);
     close();
 }

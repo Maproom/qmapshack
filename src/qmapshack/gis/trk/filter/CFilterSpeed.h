@@ -23,6 +23,9 @@
 #include <QWidget>
 
 class CGisItemTrk;
+class CFilterSpeedConst;
+class CFilterSpeedCycle;
+class CFilterSpeedHike;
 
 class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
 {
@@ -61,6 +64,10 @@ private:
     const qint32 noOfCustomTypes;
 
     QList <cycling_type_t> cyclingTypes;
+
+    CFilterSpeedConst * filterConst;
+    CFilterSpeedCycle * filterCycle;
+    CFilterSpeedHike  * filterHike;
 };
 
 #endif //CFILTERSPEED_H

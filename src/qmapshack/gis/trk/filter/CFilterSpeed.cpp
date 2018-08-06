@@ -19,12 +19,23 @@
 #include "canvas/CCanvas.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeed.h"
+#include "gis/trk/filter/CFilterSpeedConst.h"
+#include "gis/trk/filter/CFilterSpeedCycle.h"
+#include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CSettings.h"
 
 CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
 {
     setupUi(this);
+
+    filterConst = new CFilterSpeedConst(this);
+    filterCycle = new CFilterSpeedCycle(this);
+    filterHike  = new CFilterSpeedHike(this);
+
+    stackedWidget->addWidget(filterConst);
+    stackedWidget->addWidget(filterCycle);
+    stackedWidget->addWidget(filterHike);
 
     labelWarning->setText("");
     spinConstantSpeed->setSuffix(IUnit::self().speedunit);
@@ -151,17 +162,20 @@ void CFilterSpeed::slotApply()
     switch (comboActivityType->currentIndex())
     {
     case 0:
+        filterConst->apply(trk);
         trk.filterSpeed(spinConstantSpeed->value()/IUnit::self().speedfactor);
         break;
 
     case 1:
     {
+        filterCycle->apply(trk);
         trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
         break;
     }
 
     case 2:
     {
+        filterHike->apply(trk);
         trk.filterSpeed(spinHikingPlainSpeed->value()/IUnit::self().speedfactor,
                         spinHikingAscending->value(), spinHikingDescending->value());
         break;

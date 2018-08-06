@@ -103,7 +103,15 @@
      <item>
       <widget class="QToolButton" name="toolRange">
        <property name="toolTip">
-        <string>Select a range of points.</string>
+        <string extracomment="use line breakes to keep a sensible tool tip width">Select a range of points. You can use that tool to:
+
+* Hide or show points of a track. 
+* You can copy the selected range. 
+* You can choose an activity for the selected range
+
+Note: If you want to fix bad points in a real GPS recording 
+this is the right tool. Simply select the section of bad points 
+(one is ok, too) and hide them.</string>
        </property>
        <property name="text">
         <string>...</string>
@@ -117,7 +125,12 @@
      <item>
       <widget class="QToolButton" name="toolEdit">
        <property name="toolTip">
-        <string>Edit position of track points.</string>
+        <string extracomment="use line breakes to keep a sensible tool tip width">Edit the position of track points and use automatic routing 
+to create new track points. This is used to create new tracks 
+to plan a tour.
+
+Note: This is the wrong tool to fix bad points of a real GPS 
+recording. Use the range tool. </string>
        </property>
        <property name="text">
         <string>...</string>

@@ -22,72 +22,72 @@
 <context>
     <name>CActivityTrk</name>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="50"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="52"/>
         <source>Foot</source>
         <translation>Wandelen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="51"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
         <source>Bicycle</source>
         <translation>Fiets</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="52"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
         <source>Motor Bike</source>
         <translation>Motorfiets</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="53"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
         <source>Car</source>
         <translation>Auto</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="54"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
         <source>Cable Car</source>
         <translation>Kabelbaan</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="55"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
         <source>Swim</source>
         <translation>Zwemmen</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="56"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
         <source>Ship</source>
         <translation>Boot</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="57"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Aeronautic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="61"/>
         <source>Public Transport</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="100"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="102"/>
         <source>No Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="255"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="257"/>
         <source>Total</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="285"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="287"/>
         <source>Ascent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="309"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="311"/>
         <source>Descent:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="58"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="60"/>
         <source>Ski/Winter</source>
         <translation>Ski/Winter</translation>
     </message>
@@ -96,32 +96,32 @@
         <translation type="vanished">Vliegtuig</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="96"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
         <source>Set Track Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="261"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
         <source>Distance:</source>
         <translation>Afstand:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="333"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="335"/>
         <source>Speed Moving:</source>
         <translation>Bewogen snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="357"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="359"/>
         <source>Speed Total:</source>
         <translation>Totale snelheid:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="381"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="383"/>
         <source>Time Moving:</source>
         <translation>Bewogen tijd:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CActivityTrk.cpp" line="405"/>
+        <location filename="../gis/trk/CActivityTrk.cpp" line="407"/>
         <source>Time Total:</source>
         <translation>Totale tijd:</translation>
     </message>
@@ -658,12 +658,12 @@ Om dit conflict op te lossen kan een kloon gemaakt en opgelagen worden, forceer 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="414"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="415"/>
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="415"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="416"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
     </message>
@@ -6608,15 +6608,15 @@ I don&apos;t want to read the documentation!</source>
         <translation>Formulier</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="81"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="105"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="99"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="123"/>
         <source>-
 -</source>
         <translation>-
 -</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1057"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1071"/>
         <source>Profile</source>
         <translation>Profiel</translation>
     </message>
@@ -6625,178 +6625,178 @@ I don&apos;t want to read the documentation!</source>
         <translation type="vanished">Snelheid</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="315"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="331"/>
         <source>Toggle read only mode. You have to open the lock to edit the item.</source>
         <translation>Schrijfbeveiliging ingeschakeld. Klik op het slot om te kunnen bewerken.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="318"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="482"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="511"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="576"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="602"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="631"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="720"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="749"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1078"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1107"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1139"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1175"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1204"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1236"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1272"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1301"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1333"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="334"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="496"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="525"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="590"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="616"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="645"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="734"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="763"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1092"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1121"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1153"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1189"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1218"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1250"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1286"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1315"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1347"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="344"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="360"/>
         <source>-</source>
         <translation>-</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="383"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="397"/>
         <source>Info</source>
         <translation>Info</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="415"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="429"/>
         <source>Style</source>
         <translation>Stijl</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="457"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="471"/>
         <source>Source</source>
         <translation>Bron</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="662"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="676"/>
         <source>Maximum</source>
         <translation>Maximum</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="479"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="493"/>
         <source>Use/edit user defined visibility of arrows for this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="508"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="522"/>
         <source>Use/edit system&apos;s visibility of arrows for all tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="802"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="816"/>
         <source>Minimum</source>
         <translation>Minimum</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="717"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="731"/>
         <source>Use/edit user defined scale factor for this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="746"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="760"/>
         <source>Use/edit system&apos;s default factor for all tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="676"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="690"/>
         <source>x </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="464"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="478"/>
         <source>Width</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="669"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
         <source>with arrows</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="870"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="884"/>
         <source>Graphs</source>
         <translation>Grafieken</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="883"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="903"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="989"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="897"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="917"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1003"/>
         <source>max.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1022"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1029"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1036"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1043"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1057"/>
         <source>min.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="573"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1075"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1172"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1269"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="587"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1089"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1186"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1283"/>
         <source>User defined limits for this track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="56"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
         <source>-
 -
 -</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="265"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
         <source>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="293"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="309"/>
         <source>This Track is a NoGo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="599"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1104"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1201"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1298"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="613"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1118"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1215"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1312"/>
         <source>Automatic limits</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="628"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1136"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1233"/>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1330"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="642"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1150"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1247"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1344"/>
         <source>User defined limits for all tracks</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="822"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="836"/>
         <source>Color</source>
         <translation>Kleur</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1362"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1376"/>
         <source>Activity</source>
         <translation>Activiteit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1385"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1399"/>
         <source>Set Track Activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1428"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1442"/>
         <source>To differentiate the track statistics select an activity from the list for the complete track. Or select a part of the track to assign an activity.</source>
         <translation>Om de track statistieken te onderscheiden selecteer een activiteit uit de lijst voor de volledige track. Of selecteer een deel van de track om een activieteit toe te kennen.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1455"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1469"/>
         <source>Points</source>
         <translation>Punten</translation>
     </message>
@@ -6825,12 +6825,12 @@ I don&apos;t want to read the documentation!</source>
         <translation type="vanished">Positie</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1502"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1515"/>
         <source>Filter</source>
         <translation>Filter</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IDetailsTrk.ui" line="1539"/>
+        <location filename="../gis/trk/IDetailsTrk.ui" line="1552"/>
         <source>Hist.</source>
         <translation>Hist.</translation>
     </message>
@@ -9036,7 +9036,7 @@ Hold ALT key for horizontal zoom, only.</source>
         <translation>Geen of ontbrekende gegevens.</translation>
     </message>
     <message>
-        <location filename="../plot/IPlot.cpp" line="1300"/>
+        <location filename="../plot/IPlot.cpp" line="1306"/>
         <source>Select output file</source>
         <translation>Selecteer bestand</translation>
     </message>
@@ -10257,16 +10257,16 @@ of
         <location filename="../gis/trk/IScrOptTrk.ui" line="57"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="71"/>
         <location filename="../gis/trk/IScrOptTrk.ui" line="92"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="109"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="123"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="137"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="151"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="170"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="184"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="198"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="212"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="226"/>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="240"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="117"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="136"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="150"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="164"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="183"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="197"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="211"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="225"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="239"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="253"/>
         <source>...</source>
         <translation>...</translation>
     </message>
@@ -10286,27 +10286,50 @@ of
         <translation>Toon op scherm het profiel en gedetaileerde informatie van de punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
         <source>Select a range of points.</source>
-        <translation>Selecteer een reeks punten.</translation>
+        <translation type="vanished">Selecteer een reeks punten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="120"/>
         <source>Edit position of track points.</source>
-        <translation>Bewerk positie van trackpunten.</translation>
+        <translation type="vanished">Bewerk positie van trackpunten.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="134"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="106"/>
+        <source>Select a range of points. You can use that tool to:
+
+* Hide or show points of a track. 
+* You can copy the selected range. 
+* You can choose an activity for the selected range
+
+Note: If you want to fix bad points in a real GPS recording 
+this is the right tool. Simply select the section of bad points 
+(one is ok, too) and hide them.</source>
+        <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="128"/>
+        <source>Edit the position of track points and use automatic routing 
+to create new track points. This is used to create new tracks 
+to plan a tour.
+
+Note: This is the wrong tool to fix bad points of a real GPS 
+recording. Use the range tool. </source>
+        <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="147"/>
         <source>Reverse track.</source>
         <translation>Draai trackrichting.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="148"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="161"/>
         <source>Combine tracks.</source>
         <translation>Combineer tracks.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="162"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="175"/>
         <source>Cut track at selected point. You can use this to:
 
 * remove bad points at the start or end of the track
@@ -10321,32 +10344,32 @@ of
 </translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="181"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="194"/>
         <source>Set an activity for the complete track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="195"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="208"/>
         <source>Change the color of the track.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="209"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="222"/>
         <source>Replace elevation by the view&apos;s DEM data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="223"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="236"/>
         <source>Copy track together with all attached waypoints into another project.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="237"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="250"/>
         <source>Toggle Nogo-Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../gis/trk/IScrOptTrk.ui" line="269"/>
+        <location filename="../gis/trk/IScrOptTrk.ui" line="282"/>
         <source>TextLabel</source>
         <translation>Benaming</translation>
     </message>

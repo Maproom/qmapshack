@@ -80,7 +80,6 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     , trk(trk)
 {
     setupUi(this);
-
     QPixmap icon(14,14);
     const int N = IGisItem::getColorMap().count();
     for(int i=0; i < N; ++i)
@@ -107,7 +106,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
         plot->setMinimumSize(QSize(0, 100));
         plot->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::MinimumExpanding);
         plot->show();
-        layoutPlot->addWidget(plot);
+        framePlot->layout()->addWidget(plot);
 
         const CTrackData::trkpt_t *ptRange1 = nullptr, *ptRange2 = nullptr;
         trk.getMouseRange(ptRange1, ptRange2);
@@ -124,7 +123,8 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     checkGraph1->setChecked(cfg.value("showGraph1", true).toBool());
     checkGraph2->setChecked(cfg.value("showGraph2", true).toBool());
     checkGraph3->setChecked(cfg.value("showGraph3", true).toBool());
-    splitter->restoreState (cfg.value("splitterSizes").toByteArray());
+    splitter1->restoreState (cfg.value("splitterSizes1").toByteArray());
+    splitter2->restoreState (cfg.value("splitterSizes2").toByteArray());
     tabWidget->setCurrentIndex(cfg.value("visibleTab", 0).toInt());
     cfg.endGroup();
 
@@ -191,7 +191,8 @@ CDetailsTrk::~CDetailsTrk()
     cfg.setValue("showGraph1",    checkGraph1->isChecked());
     cfg.setValue("showGraph2",    checkGraph2->isChecked());
     cfg.setValue("showGraph3",    checkGraph3->isChecked());
-    cfg.setValue("splitterSizes", splitter->saveState());
+    cfg.setValue("splitterSizes1", splitter1->saveState());
+    cfg.setValue("splitterSizes2", splitter2->saveState());
     cfg.setValue("visibleTab",    tabWidget->currentIndex());
     cfg.endGroup();
 

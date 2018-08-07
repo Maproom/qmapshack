@@ -95,7 +95,9 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     }
 
     SETTINGS;
-    cfg.beginReadArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
+    cfg.beginGroup("TrackDetails/Filter/Speed");
+
+    cfg.beginReadArray("CustomCyclingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
         const cycling_type_t &cyclingTypeDefault = cyclingTypeDefaults[noOfFixTypes + i];
@@ -112,15 +114,29 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     }
     cfg.endArray();
 
-    comboActivityType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/activityType", 0).toInt());
+    comboActivityType->setCurrentIndex(cfg.value("activityType", 0).toInt());
     slotSetActivityType(comboActivityType->currentIndex());
     connect(comboActivityType, SIGNAL(activated(int)), this, SLOT(slotSetActivityType(int)));
 
-    comboCyclingType->setCurrentIndex(cfg.value("TrackDetails/Filter/Speed/cyclingType", 0).toInt());
+    comboCyclingType->setCurrentIndex(cfg.value("cyclingType", 0).toInt());
     slotSetCyclingType(comboCyclingType->currentIndex());
     connect(comboCyclingType, SIGNAL(activated(int)), this, SLOT(slotSetCyclingType(int)));
 
-    spinConstantSpeed->setValue(cfg.value("TrackDetails/Filter/Speed/speed", 18.0).toDouble());
+    spinConstantSpeed->setValue(cfg.value("speed", 18.0).toDouble());
+
+    cfg.beginGroup("Const");
+    filterConst->loadSettings(cfg);
+    cfg.endGroup(); // Const
+
+    cfg.beginGroup("Cycle");
+    filterCycle->loadSettings(cfg);
+    cfg.endGroup(); // Cycle
+
+    cfg.beginGroup("Hike");
+    filterHike->loadSettings(cfg);
+    cfg.endGroup(); // Hike
+
+    cfg.endGroup(); //TrackDetails/Filter/Speed
 
     connect(spinPlainSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetPlainSpeed(double)));
     connect(spinMinSpeed, SIGNAL(valueChanged(double)), this, SLOT(slotSetMinSpeed(double)));
@@ -136,7 +152,10 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
 CFilterSpeed::~CFilterSpeed()
 {
     SETTINGS;
-    cfg.beginWriteArray("TrackDetails/Filter/Speed/CustomCyclingTypes");
+    cfg.remove("TrackDetails/Filter/Speed/");
+    cfg.beginGroup("TrackDetails/Filter/Speed/");
+
+    cfg.beginWriteArray("CustomCyclingTypes");
     for (int i = 0; i < noOfCustomTypes; ++i)
     {
         const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
@@ -150,9 +169,24 @@ CFilterSpeed::~CFilterSpeed()
     }
     cfg.endArray();
 
-    cfg.setValue("TrackDetails/Filter/Speed/activityType", comboActivityType->currentIndex());
-    cfg.setValue("TrackDetails/Filter/Speed/cyclingType", comboCyclingType->currentIndex());
-    cfg.setValue("TrackDetails/Filter/Speed/speed", spinConstantSpeed->value());
+    cfg.setValue("activityType", comboActivityType->currentIndex());
+    cfg.setValue("cyclingType", comboCyclingType->currentIndex());
+    cfg.setValue("speed", spinConstantSpeed->value());
+
+    cfg.beginGroup("Const");
+    filterConst->saveSettings(cfg);
+    cfg.endGroup(); // Const
+
+    cfg.beginGroup("Cycle");
+    filterCycle->saveSettings(cfg);
+    cfg.endGroup(); // Cycle
+
+    cfg.beginGroup("Hike");
+    filterHike->saveSettings(cfg);
+    cfg.endGroup(); // Hike
+
+    cfg.endGroup(); //TrackDetails/Filter/Speed
+
 }
 
 void CFilterSpeed::slotApply()
@@ -163,12 +197,16 @@ void CFilterSpeed::slotApply()
     {
     case 0:
         filterConst->apply(trk);
+
+        //remove this
         trk.filterSpeed(spinConstantSpeed->value()/IUnit::self().speedfactor);
         break;
 
     case 1:
     {
         filterCycle->apply(trk);
+
+        //remove this
         trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
         break;
     }
@@ -176,6 +214,8 @@ void CFilterSpeed::slotApply()
     case 2:
     {
         filterHike->apply(trk);
+
+        //remove this
         trk.filterSpeed(spinHikingPlainSpeed->value()/IUnit::self().speedfactor,
                         spinHikingAscending->value(), spinHikingDescending->value());
         break;

@@ -18,13 +18,26 @@
 
 #include "gis/trk/filter/CFilterSpeedCycle.h"
 
+#include <QtWidgets>
+
 CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
 }
 
+void CFilterSpeedCycle::loadSettings(QSettings& cfg)
+{
+
+}
+
+void CFilterSpeedCycle::saveSettings(QSettings& cfg)
+{
+
+}
+
 void CFilterSpeedCycle::apply(CGisItemTrk& trk)
 {
 }
+
 

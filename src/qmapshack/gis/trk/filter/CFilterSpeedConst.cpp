@@ -19,10 +19,22 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/filter/CFilterSpeedConst.h"
 
+#include <QtWidgets>
+
 CFilterSpeedConst::CFilterSpeedConst(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+}
+
+void CFilterSpeedConst::loadSettings(QSettings& cfg)
+{
+
+}
+
+void CFilterSpeedConst::saveSettings(QSettings& cfg)
+{
+
 }
 
 void CFilterSpeedConst::apply(CGisItemTrk& trk)

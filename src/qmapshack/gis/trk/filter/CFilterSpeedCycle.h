@@ -22,6 +22,7 @@
 #include "ui_IFilterSpeedCycle.h"
 
 class CGisItemTrk;
+class QSettings;
 
 class CFilterSpeedCycle : public QWidget, private Ui::IFilterSpeedCycle
 {
@@ -29,6 +30,9 @@ class CFilterSpeedCycle : public QWidget, private Ui::IFilterSpeedCycle
 public:
     CFilterSpeedCycle(QWidget * parent);
     virtual ~CFilterSpeedCycle() = default;
+
+    void loadSettings(QSettings& cfg);
+    void saveSettings(QSettings& cfg);
 
     void apply(CGisItemTrk& trk);
 };

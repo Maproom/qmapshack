@@ -22,6 +22,7 @@
 #include "ui_IFilterSpeedConst.h"
 
 class CGisItemTrk;
+class QSettings;
 
 class CFilterSpeedConst : public QWidget, private Ui::IFilterSpeedConst
 {
@@ -29,6 +30,9 @@ class CFilterSpeedConst : public QWidget, private Ui::IFilterSpeedConst
 public:
     CFilterSpeedConst(QWidget * parent);
     virtual ~CFilterSpeedConst() = default;
+
+    void loadSettings(QSettings& cfg);
+    void saveSettings(QSettings& cfg);
 
     void apply(CGisItemTrk &trk);
 };

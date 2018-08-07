@@ -22,6 +22,7 @@
 #include "ui_IFilterSpeedHike.h"
 
 class CGisItemTrk;
+class QSettings;
 
 class CFilterSpeedHike : public QWidget, private Ui::IFilterSpeedHike
 {
@@ -29,6 +30,9 @@ class CFilterSpeedHike : public QWidget, private Ui::IFilterSpeedHike
 public:
     CFilterSpeedHike(QWidget * parent);
     virtual ~CFilterSpeedHike() = default;
+
+    void loadSettings(QSettings& cfg);
+    void saveSettings(QSettings& cfg);
 
     void apply(CGisItemTrk& trk);
 };

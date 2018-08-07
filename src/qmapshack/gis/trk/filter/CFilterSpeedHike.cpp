@@ -18,10 +18,22 @@
 
 #include "gis/trk/filter/CFilterSpeedHike.h"
 
+#include <QtWidgets>
+
 CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
     : QWidget(parent)
 {
     setupUi(this);
+}
+
+void CFilterSpeedHike::loadSettings(QSettings& cfg)
+{
+
+}
+
+void CFilterSpeedHike::saveSettings(QSettings& cfg)
+{
+
 }
 
 void CFilterSpeedHike::apply(CGisItemTrk& trk)

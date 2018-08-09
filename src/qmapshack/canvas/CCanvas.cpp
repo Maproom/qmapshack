@@ -44,6 +44,7 @@
 #include "mouse/CMouseRangeTrk.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
+#include "mouse/CMouseRuler.h"
 #include "plot/CPlotProfile.h"
 #include "realtime/CRtDraw.h"
 #include "units/IUnit.h"
@@ -457,6 +458,11 @@ void CCanvas::setMouseEditRte(CGisItemRte& rte)
 void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
 {
     mouse->setDelegate(new CMouseWptBubble(key, gis, this, mouse));
+}
+
+void CCanvas::setMouseRuler()
+{
+    mouse->setDelegate(new CMouseRuler(gis, this, mouse));
 }
 
 void CCanvas::setMousePrint()

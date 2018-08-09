@@ -244,6 +244,7 @@ set( SRCS
     mouse/CMousePrint.cpp
     mouse/CMouseRadiusWpt.cpp
     mouse/CMouseRangeTrk.cpp
+    mouse/CMouseRuler.cpp
     mouse/CMouseSelect.cpp
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptPrint.cpp
@@ -565,6 +566,7 @@ set( HDRS
     mouse/CMousePrint.h
     mouse/CMouseRadiusWpt.h
     mouse/CMouseRangeTrk.h
+    mouse/CMouseRuler.h
     mouse/CMouseSelect.h
     mouse/CMouseWptBubble.h
     mouse/CScrOptPrint.h

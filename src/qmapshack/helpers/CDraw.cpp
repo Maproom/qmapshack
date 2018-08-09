@@ -70,7 +70,7 @@ static inline int pointDistanceSquare(const QPointF &p1, const QPointF &p2)
 
 void CDraw::arrows(const QPolygonF &line, const QRectF &viewport, QPainter &p, int minPointDist, int minArrowDist, qreal scale)
 {
-    const QImage& arrow = createBasicArrow(p.brush(), scale);
+    const QImage& arrow = createBasicArrow(p.brush(), qMin(qMax(1.0, scale/3), 3.0));
     qreal xoff = qCeil(arrow.width()/2.0);
     qreal yoff = qFloor((arrow.height()-1)/2.0);
 

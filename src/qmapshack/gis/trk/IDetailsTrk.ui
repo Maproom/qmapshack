@@ -390,7 +390,7 @@
         </sizepolicy>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab_3">
         <attribute name="title">
@@ -490,7 +490,7 @@
                <item>
                 <widget class="QToolButton" name="toolUserArrow">
                  <property name="toolTip">
-                  <string>Use/edit user defined visibility of arrows for this track</string>
+                  <string>Set visibility of the arrows for this particular track.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -519,7 +519,7 @@
                <item>
                 <widget class="QToolButton" name="toolDefArrow">
                  <property name="toolTip">
-                  <string>Use/edit system's visibility of arrows for all tracks</string>
+                  <string>Set visibility of the arrows globally for all tracks that use the global settings.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -584,7 +584,7 @@
                <item>
                 <widget class="QToolButton" name="toolLimitUsrStyle">
                  <property name="toolTip">
-                  <string>User defined limits for this track</string>
+                  <string>Use user defined limits that only apply to this particular track.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -639,7 +639,7 @@
                <item>
                 <widget class="QToolButton" name="toolLimitSysStyle">
                  <property name="toolTip">
-                  <string>User defined limits for all tracks</string>
+                  <string>Use global user defined limits.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -684,25 +684,6 @@
                </property>
               </widget>
              </item>
-             <item row="7" column="1">
-              <widget class="QDoubleSpinBox" name="spinLineWidth">
-               <property name="prefix">
-                <string>x </string>
-               </property>
-               <property name="decimals">
-                <number>1</number>
-               </property>
-               <property name="minimum">
-                <double>1.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>4.000000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.500000000000000</double>
-               </property>
-              </widget>
-             </item>
              <item row="5" column="1">
               <widget class="CDoubleSpinBox" name="spinLimitLow">
                <property name="decimals">
@@ -728,7 +709,7 @@
                <item>
                 <widget class="QToolButton" name="toolUserLineWith">
                  <property name="toolTip">
-                  <string>Use/edit user defined scale factor for this track</string>
+                  <string>Change the line width for this particular track.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -757,7 +738,7 @@
                <item>
                 <widget class="QToolButton" name="toolDefLineWidth">
                  <property name="toolTip">
-                  <string>Use/edit system's default factor for all tracks</string>
+                  <string>Change the line width globally for all tracks that use the global settings.</string>
                  </property>
                  <property name="text">
                   <string>...</string>
@@ -846,6 +827,22 @@
                 <widget class="CSelectActivityColor" name="widgetColorActivity" native="true"/>
                </item>
               </layout>
+             </item>
+             <item row="7" column="1">
+              <widget class="QSpinBox" name="spinLineWidth">
+               <property name="suffix">
+                <string> points</string>
+               </property>
+               <property name="minimum">
+                <number>1</number>
+               </property>
+               <property name="maximum">
+                <number>12</number>
+               </property>
+               <property name="value">
+                <number>3</number>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -1086,7 +1083,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitUsrGraph1">
              <property name="toolTip">
-              <string>User defined limits for this track</string>
+              <string>Use user defined limits that only apply to this particular track.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1147,7 +1144,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitSysGraph1">
              <property name="toolTip">
-              <string>User defined limits for all tracks</string>
+              <string>Use global user defined limits.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1183,7 +1180,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitUsrGraph2">
              <property name="toolTip">
-              <string>User defined limits for this track</string>
+              <string>Use user defined limits that only apply to this particular track.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1244,7 +1241,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitSysGraph2">
              <property name="toolTip">
-              <string>User defined limits for all tracks</string>
+              <string>Use global user defined limits.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1280,7 +1277,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitUsrGraph3">
              <property name="toolTip">
-              <string>User defined limits for this track</string>
+              <string>Use user defined limits that only apply to this particular track.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1341,7 +1338,7 @@
            <item>
             <widget class="QToolButton" name="toolLimitSysGraph3">
              <property name="toolTip">
-              <string>User defined limits for all tracks</string>
+              <string>Use global user defined limits.</string>
              </property>
              <property name="text">
               <string>...</string>
@@ -1631,9 +1628,9 @@
  <connections/>
  <buttongroups>
   <buttongroup name="buttonGroupLineWidth"/>
-  <buttongroup name="buttonGroupGraph2"/>
-  <buttongroup name="buttonGroupGraph3"/>
   <buttongroup name="buttonGroupArrow"/>
+  <buttongroup name="buttonGroupGraph3"/>
+  <buttongroup name="buttonGroupGraph2"/>
   <buttongroup name="buttonGroupGraph1"/>
  </buttongroups>
 </ui>

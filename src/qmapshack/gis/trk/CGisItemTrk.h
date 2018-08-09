@@ -793,8 +793,8 @@ private:
     QPolygonF lineSimple;   //< the current track line as screen pixel coordinates
     QPolygonF lineFull;     //< visible and invisible points
 
-    qint32 penWidthFg = 3;  //< inner trackline width
-    qint32 penWidthBg = 5;  //< outer trackline width
+    qint32 penWidthFg = 1;  //< inner trackline width
+    qint32 penWidthBg = 3;  //< outer trackline width
     qint32 penWidthHi = 11; //< highlighted trackline width
 
     qint32 widthInfoBox = MIN_WIDTH_INFO_BOX;
@@ -807,7 +807,7 @@ private:
 
     fValueOnChange onChange = [this](const QVariant& val)
                               {
-                                  int w = qRound(3.0 * val.toDouble());
+                                  int w = qRound(1.0 * val.toDouble());
 
                                   penWidthFg = w;
                                   penWidthBg = w + 2;

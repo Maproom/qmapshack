@@ -397,6 +397,12 @@ void CMouseNormal::slotAddArea() const
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
 }
 
+void CMouseNormal::slotRuler() const
+{
+    canvas->setMouseRuler();
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawGis);
+}
+
 void CMouseNormal::slotCopyPosition() const
 {
     QPointF pt = mouse->getPoint();
@@ -441,6 +447,8 @@ void CMouseNormal::showContextMenu(const QPoint &point)
     menu.addAction(QIcon("://icons/32x32/AddTrk.png"),  tr("Add Track"),    this, SLOT(slotAddTrk()));
     menu.addAction(QIcon("://icons/32x32/AddRte.png"),  tr("Add Route"),    this, SLOT(slotAddRte()));
     menu.addAction(QIcon("://icons/32x32/AddArea.png"), tr("Add Area"),     this, SLOT(slotAddArea()));
+    menu.addSeparator();
+    menu.addAction(QIcon("://icons/32x32/CSrcDistance.png"), tr("Ruler"),   this, SLOT(slotRuler()));
     menu.addSeparator();
     menu.addAction(QIcon("://icons/32x32/SelectArea.png"), tr("Select Items On Map"), this, SLOT(slotSelectArea()));
     menu.addSeparator();

@@ -124,6 +124,7 @@ public:
     void setMouseEditArea(CGisItemOvlArea& area);
     void setMouseEditArea(const QPointF& pt);
     void setMouseWptBubble(const IGisItem::key_t& key);
+    void setMouseRuler();
     void setMousePrint();
     void setMouseSelect();
 

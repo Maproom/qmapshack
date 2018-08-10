@@ -259,7 +259,7 @@ private:
     /// a label with a track
     QLabel * labelTrackStatistic;
 
-    QLabel * labelStatusMessages;
+    QTextBrowser * textStatusMessages;
     QMap<QString, QString> statusMessages;
 
     QMutex mousePressMutex;

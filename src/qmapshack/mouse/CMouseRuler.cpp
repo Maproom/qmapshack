@@ -185,7 +185,7 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
     qreal totalDescent = 0;
 
     QString msg = "<b>" + tr("Distance Ruler") + "</b>";
-    msg += "<table border=1 cellspacing=0 cellpadding=2>";
+    msg += "<table border=1 cellspacing=0 cellpadding=2 width=100%>";
     msg += "<tr><th>#</th><th>" + tr("Distance") + "</th><th>" + tr("Ascent") + "</th><th>" + tr("Descent") + "</th></tr>";
 
     for(int n = 1; n < N; n++)

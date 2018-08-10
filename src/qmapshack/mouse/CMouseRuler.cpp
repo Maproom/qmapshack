@@ -21,7 +21,7 @@
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseRuler.h"
-#include "units/IUnit.h"
+#include "mouse/CScrOptRuler.h"
 
 #include <QtWidgets>
 
@@ -29,6 +29,11 @@ CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorRuler.png"),0,0);
+
+    scrOptRuler = new CScrOptRuler(this);
+    connect(scrOptRuler->toolUndo, &QToolButton::clicked, this, &CMouseRuler::slotUndo);
+    connect(scrOptRuler->toolRedo, &QToolButton::clicked, this, &CMouseRuler::slotRedo);
+    connect(scrOptRuler->toolReset, &QToolButton::clicked, this, &CMouseRuler::slotReset);
 
     const QString msg = tr(
         "<b>Distance Ruler</b><br/>"
@@ -44,7 +49,68 @@ CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
 CMouseRuler::~CMouseRuler()
 {
     canvas->reportStatus("CMouseRuler", "");
+    delete scrOptRuler;
 }
+
+void CMouseRuler::storeToHistory(const QPolygonF& line)
+{
+    // crop history if necessary
+    if(idxHistory != NOIDX)
+    {
+        while(history.size() > (idxHistory + 1))
+        {
+            history.pop_back();
+        }
+    }
+
+    history << line;
+    idxHistory = history.size() - 1;
+
+    scrOptRuler->toolRedo->setEnabled(false);
+    scrOptRuler->toolUndo->setEnabled(idxHistory > 0);
+    scrOptRuler->toolReset->setEnabled(true);
+}
+
+void CMouseRuler::slotUndo()
+{
+    if(idxHistory > 0)
+    {
+        idxHistory--;
+    }
+
+    ruler = history[idxHistory];
+
+    scrOptRuler->toolRedo->setEnabled(true);
+    scrOptRuler->toolUndo->setEnabled(idxHistory > 0);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CMouseRuler::slotRedo()
+{
+    if(idxHistory < (history.size() - 1))
+    {
+        idxHistory++;
+    }
+
+    ruler = history[idxHistory];
+
+    scrOptRuler->toolRedo->setEnabled(idxHistory < (history.size() - 1));
+    scrOptRuler->toolUndo->setEnabled(true);
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
+void CMouseRuler::slotReset()
+{
+    ruler.clear();
+    idxHistory = NOIDX;
+    history.clear();
+    scrOptRuler->toolRedo->setEnabled(false);
+    scrOptRuler->toolUndo->setEnabled(false);
+    scrOptRuler->toolReset->setEnabled(false);
+
+    canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
+}
+
 
 void CMouseRuler::rightButtonDown(const QPoint& pos)
 {
@@ -56,7 +122,7 @@ void CMouseRuler::rightButtonDown(const QPoint& pos)
 
     case eModeEdit:
         mode = eModePaused;
-        line.pop_back();
+        ruler.pop_back();
         break;
     }
 
@@ -70,19 +136,20 @@ void CMouseRuler::leftButtonDown(const QPoint& pos)
     QPointF coord = pos;
     gis->convertPx2Rad(coord);
 
-    if(line.isEmpty())
+    if(ruler.isEmpty())
     {
-        line << coord;
+        ruler << coord;
     }
 
-    line << coord;
+    ruler << coord;
+    storeToHistory(ruler);
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CMouseRuler::mouseMoved(const QPoint& pos)
 {
-    if(line.isEmpty() || mode != eModeEdit)
+    if(ruler.isEmpty() || mode != eModeEdit)
     {
         return;
     }
@@ -90,32 +157,32 @@ void CMouseRuler::mouseMoved(const QPoint& pos)
     QPointF coord = pos;
     gis->convertPx2Rad(coord);
 
-    line.last() = coord;
+    ruler.last() = coord;
 
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
 void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect)
 {
-    if(line.size() < 2)
+    if(ruler.size() < 2)
     {
         return;
     }
 
-    QPolygonF line1 = line;
-    gis->convertRad2Px(line1);
+    QPolygonF line = ruler;
+    gis->convertRad2Px(line);
 
     p.setPen(QPen(Qt::white, 5));
-    p.drawPolyline(line1);
+    p.drawPolyline(line);
 
     p.setPen(QPen(Qt::blue, 3));
-    p.drawPolyline(line1);
+    p.drawPolyline(line);
 
-    const int N = line.size();
+    const int N = ruler.size();
     for(int n = 1; n < N; n++)
     {
-        QPointF pt1 = line[n-1];
-        QPointF pt2 = line[n];
+        QPointF pt1 = ruler[n-1];
+        QPointF pt2 = ruler[n];
 
         qreal a1, a2;
         qreal d = GPS_Math_Distance(pt1.x(), pt1.y(), pt2.x(), pt2.y(), a1, a2);
@@ -142,7 +209,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
             str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val).arg(unit);
         }
 
-        QLineF seg(line1[n-1], line1[n]);
+        QLineF seg(line[n-1], line[n]);
         p.save();
         p.translate(seg.center().toPoint());
         p.rotate(a1 + ((a1 > 0) ? -90 : 90));

@@ -16,49 +16,24 @@
 
 **********************************************************************************************/
 
-#ifndef CMOUSERULER_H
-#define CMOUSERULER_H
-
+#include "mouse/CScrOptRuler.h"
 #include "mouse/IMouse.h"
-#include "units/IUnit.h"
 
-class CScrOptRuler;
+#include <QtWidgets>
 
-class CMouseRuler : public IMouse
+CScrOptRuler::CScrOptRuler(IMouse *mouse)
+    : IScrOpt(mouse)
 {
-    Q_OBJECT
-public:
-    CMouseRuler(CGisDraw * gis, CCanvas *canvas, CMouseAdapter *mouse);
-    virtual ~CMouseRuler();
+    setupUi(this);
+    connect(pushClose, &QPushButton::clicked, this, &CScrOptRuler::slotClose);
+
+    move(0,0);
+    adjustSize();
+    show();
+}
 
 
-    void rightButtonDown(const QPoint& pos) override;
-    void leftButtonDown(const QPoint& pos) override;
-    void mouseMoved(const QPoint& pos) override;
-    void draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &rect) override;
-
-private slots:
-    void slotUndo();
-    void slotRedo();
-    void slotReset();
-
-private:
-    void storeToHistory(const QPolygonF &line);
-
-    enum mode_e
-    {
-        eModeIdle
-        ,eModePaused
-        ,eModeEdit
-    };
-
-    mode_e mode = eModeEdit;
-    QPolygonF ruler;
-    qint32 idxHistory = NOIDX;
-    QList<QPolygonF> history;
-
-    CScrOptRuler * scrOptRuler;
-};
-
-#endif //CMOUSERULER_H
-
+void CScrOptRuler::slotClose()
+{
+    mouse->rightButtonDown(QPoint(0,0));
+}

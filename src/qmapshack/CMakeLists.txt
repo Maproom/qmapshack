@@ -249,6 +249,7 @@ set( SRCS
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptPrint.cpp
     mouse/CScrOptRangeTrk.cpp
+    mouse/CScrOptRuler.cpp
     mouse/CScrOptSelect.cpp
     mouse/CScrOptUnclutter.cpp
     mouse/IMouse.cpp
@@ -571,6 +572,7 @@ set( HDRS
     mouse/CMouseWptBubble.h
     mouse/CScrOptPrint.h
     mouse/CScrOptRangeTrk.h
+    mouse/CScrOptRuler.h
     mouse/CScrOptSelect.h
     mouse/CScrOptUnclutter.h
     mouse/IMouse.h
@@ -747,6 +749,7 @@ set( UIS
     map/IMapPropSetup.ui
     mouse/IScrOptPrint.ui
     mouse/IScrOptRangeTrk.ui
+    mouse/IScrOptRuler.ui
     mouse/IScrOptSelect.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui

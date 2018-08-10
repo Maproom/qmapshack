@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,35 +16,28 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSPEED_H
-#define CFILTERSPEED_H
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/trk/filter/CFilterSpeedConst.h"
 
-#include "ui_IFilterSpeed.h"
-#include <QWidget>
+#include <QtWidgets>
 
-class CGisItemTrk;
-class CFilterSpeedConst;
-class CFilterSpeedCycle;
-class CFilterSpeedHike;
-
-class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
+CFilterSpeedConst::CFilterSpeedConst(QWidget *parent)
+    : QWidget(parent)
 {
-    Q_OBJECT
-public:
-    CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterSpeed();
+    setupUi(this);
+}
 
-    void updateUi();
+void CFilterSpeedConst::loadSettings(QSettings& cfg)
+{
+    spinConstantSpeed->setValue(cfg.value("speed", 18.0).toDouble());
+}
 
-private slots:
-    void slotApply();
-    void slotSetActivityType(int type);
+void CFilterSpeedConst::saveSettings(QSettings& cfg)
+{
+    cfg.setValue("speed", spinConstantSpeed->value());
+}
 
-private:
-    CGisItemTrk& trk;
-    CFilterSpeedConst *filterConst;
-    CFilterSpeedCycle *filterCycle;
-    CFilterSpeedHike  *filterHike;
-};
-
-#endif //CFILTERSPEED_H
+void CFilterSpeedConst::apply(CGisItemTrk& trk)
+{
+    trk.filterSpeed(spinConstantSpeed->value() / IUnit::self().speedfactor);
+}

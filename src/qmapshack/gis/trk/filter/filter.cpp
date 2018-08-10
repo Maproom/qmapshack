@@ -330,6 +330,31 @@ void CGisItemTrk::filterObscureDate(int delta)
     }
 }
 
+void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
+{
+    QDateTime timestamp = timeStart;
+    if(!timestamp.isValid())
+    {
+        timestamp = QDateTime::currentDateTime().toUTC();
+    }
+
+    for(CTrackData::trkpt_t& pt : trk)
+    {
+        if(pt.isHidden())
+        {
+            continue;
+        }
+
+        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
+        pt.time   = timestamp;
+    }
+
+    deriveSecondaryData();
+    QString val, unit;
+    IUnit::self().meter2speed(speed, val, unit);
+    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+}
+
 void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType)
 {
     qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
@@ -394,97 +419,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
     changed(tr("Changed average moving cycling speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
-}
-
-void CGisItemTrk::filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType)
-{
-    qreal plainSpeed = cyclingType.plainSpeed / IUnit::self().speedfactor;
-    qreal minSpeed = cyclingType.minSpeed / IUnit::self().speedfactor;
-    qreal slopeAtMinSpeed = cyclingType.slopeAtMinSpeed;
-    qreal maxSpeed = cyclingType.maxSpeed / IUnit::self().speedfactor;
-    qreal slopeAtMaxSpeed = cyclingType.slopeAtMaxSpeed;
-
-    QDateTime timestamp = timeStart;
-    if(!timestamp.isValid())
-    {
-        timestamp = QDateTime::currentDateTime().toUTC();
-    }
-
-    qreal speed = 0;
-
-    QEasingCurve::Type upHillType = (minSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
-    QEasingCurve::Type downHillType = (maxSpeed < plainSpeed) ? QEasingCurve::OutQuad : QEasingCurve::InQuad;
-    QEasingCurve upHillCurve(upHillType);
-    QEasingCurve downHillCurve(downHillType);
-
-    for(CTrackData::trkpt_t& pt : trk)
-    {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-
-        // calculation based on slope2 (Percent)
-        qreal slope = pt.slope2;
-        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
-        {
-            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
-        }
-
-        if(slope < slopeAtMaxSpeed)
-        {
-            speed = maxSpeed;
-        }
-        else if(slope < 0 && slope >= slopeAtMaxSpeed)
-        {
-            speed = plainSpeed + (maxSpeed - plainSpeed) * downHillCurve.valueForProgress(slope / slopeAtMaxSpeed);
-        }
-        else if(slope == 0)
-        {
-            speed = plainSpeed;
-        }
-        else if(slope > 0 && slope <= slopeAtMinSpeed)
-        {
-            speed = plainSpeed + (minSpeed - plainSpeed) * upHillCurve.valueForProgress(slope / slopeAtMinSpeed);
-        }
-        else if(slope > slopeAtMinSpeed)
-        {
-            speed = minSpeed;
-        }
-
-        timestamp = speed == 0 ? timestamp : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
-    }
-
-    deriveSecondaryData();
-    QString val, unit;
-    IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving cycling speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
-}
-
-void CGisItemTrk::filterSpeed(qreal speed) // Constant speed
-{
-    QDateTime timestamp = timeStart;
-    if(!timestamp.isValid())
-    {
-        timestamp = QDateTime::currentDateTime().toUTC();
-    }
-
-    for(CTrackData::trkpt_t& pt : trk)
-    {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-
-        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance/speed));
-        pt.time   = timestamp;
-    }
-
-    deriveSecondaryData();
-    QString val, unit;
-    IUnit::self().meter2speed(speed, val, unit);
-    changed(tr("Changed speed to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
@@ -557,74 +491,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
                  << "Max min/km=" << maxTerms[0]
                  << "Speed m/s=" << speed
                  << "Speed km/h=" << speed * 3.6;
-
-        timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
-        pt.time   = timestamp;
-    }
-
-    deriveSecondaryData();
-    QString val, unit;
-    IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving hiking speed depending on carloscoi curves to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
-}
-
-void CGisItemTrk::filterSpeed(qreal hikingPlainSpeed, qreal hikingAscending, qreal hikingDescending)
-{
-    if (!hikingPlainSpeed || !hikingAscending || !hikingDescending)
-    {
-        return;
-    }
-
-    QDateTime timestamp = timeStart;
-    if(!timestamp.isValid())
-    {
-        timestamp = QDateTime::currentDateTime().toUTC();
-    }
-
-    for(CTrackData::trkpt_t& pt : trk)
-    {
-        if(pt.isHidden())
-        {
-            continue;
-        }
-
-        // calculation based on slope2 (Percent)
-        qreal slope = pt.slope2;
-        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
-        {
-            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
-        }
-
-        QVector<qreal> maxTerms(7);
-
-        // Curve algorithm based on carloscoi curves
-        qreal A9 = slope / 100;      // Transform from Percent to tangens
-        qreal B4 = hikingPlainSpeed * 3.6; // Transform from km/h to m/s
-        qreal B5 = hikingAscending;
-        qreal B6 = hikingDescending;
-//        qreal A9 = -2.0;
-//        qreal B4 = 3.5;
-//        qreal B5 = 400.0;
-//        qreal B6 = 550.0;
-
-        maxTerms[0] = 60 / B4;
-        maxTerms[1] = A9 * 60000 / B5;
-        maxTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
-        maxTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) -0.2) + (0.2 * 60000 / B5);
-        maxTerms[4] = -A9 * 60000 / B6;
-        maxTerms[5] = (A9 + 0.05) * ((60 / B4 + 0.5 * (0.25 * 60000 / B6 - 60 / B4)) - (60 / B4)) / (-0.25 + 0.05) + (60 / B4);
-        maxTerms[6] = (A9 + 0.25) * ((60 / B4) - (0.25 * 60000 / B6)) / ((-0.05 - 0.5 * (B6 / (B4 * 1000) - 0.05)) + 0.25) + (0.25 * 60000 / B6);
-
-        std::stable_sort(maxTerms.begin(), maxTerms.end(), std::greater<qreal>());
-
-        qDebug() << "KKA: slope" << slope << "maxTerms[0]=" << maxTerms[0];
-
-        if (!maxTerms[0])
-        {
-            continue;
-        }
-        qreal speed = 1 / maxTerms[0] * 60 / 3.6; // Transform from km/h to m/s
-        qDebug() << "KKA: Speed=" << speed;
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;

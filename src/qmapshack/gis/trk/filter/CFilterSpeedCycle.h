@@ -56,7 +56,7 @@ private slots:
     void slotSetMinMaxSlopes(bool);
 
 private:
-    const CGisItemTrk &trk;
+    const CGisItemTrk &trk; // Needed for filterGetSlopeLimits
     const qint32 noOfFixTypes;
     const qint32 noOfCustomTypes;
     const QList<cycling_type_t> cyclingTypeDefaults;

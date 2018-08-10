@@ -30,6 +30,9 @@
    </item>
    <item>
     <widget class="QToolButton" name="toolReset">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="toolTip">
       <string>Reset ruler.</string>
      </property>

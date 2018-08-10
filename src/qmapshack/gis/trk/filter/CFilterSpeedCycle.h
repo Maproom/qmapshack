@@ -28,13 +28,39 @@ class CFilterSpeedCycle : public QWidget, private Ui::IFilterSpeedCycle
 {
     Q_OBJECT
 public:
-    CFilterSpeedCycle(QWidget * parent);
+
+    struct cycling_type_t
+    {
+        QString name;
+        qreal plainSpeed;
+        qreal minSpeed;
+        qreal slopeAtMinSpeed;
+        qreal maxSpeed;
+        qreal slopeAtMaxSpeed;
+    };
+
+    CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk);
     virtual ~CFilterSpeedCycle() = default;
 
-    void loadSettings(QSettings& cfg);
-    void saveSettings(QSettings& cfg);
-
+    void loadSettings(QSettings &cfg);
+    void saveSettings(QSettings &cfg);
     void apply(CGisItemTrk& trk);
+
+private slots:
+    void slotSetCyclingType(int type);
+    void slotSetPlainSpeed(double speed);
+    void slotSetMinSpeed(double speed);
+    void slotSetSlopeAtMinSpeed(double speed);
+    void slotSetMaxSpeed(double speed);
+    void slotSetSlopeAtMaxSpeed(double slope);
+    void slotSetMinMaxSlopes(bool);
+
+private:
+    const CGisItemTrk &trk;
+    const qint32 noOfFixTypes;
+    const qint32 noOfCustomTypes;
+    const QList<cycling_type_t> cyclingTypeDefaults;
+    QList <cycling_type_t> cyclingTypes;
 };
 
 #endif //CFILTERSPEEDCYCLE_H

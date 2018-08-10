@@ -134,7 +134,7 @@
    <item row="1" column="5">
     <widget class="QStackedWidget" name="stackedWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="pageConstant">
       <layout class="QGridLayout" name="gridLayout_3">
@@ -663,6 +663,21 @@
        <item>
         <property name="text">
          <string>Hiking</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Constant3</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Cycle4</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Hiking5</string>
         </property>
        </item>
       </widget>

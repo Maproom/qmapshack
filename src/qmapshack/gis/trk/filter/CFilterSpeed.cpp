@@ -30,7 +30,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     setupUi(this);
 
     filterConst = new CFilterSpeedConst(this);
-    filterCycle = new CFilterSpeedCycle(this);
+    filterCycle = new CFilterSpeedCycle(this, trk);
     filterHike  = new CFilterSpeedHike(this);
 
     stackedWidget->addWidget(filterConst);
@@ -154,24 +154,24 @@ CFilterSpeed::~CFilterSpeed()
     SETTINGS;
     cfg.remove("TrackDetails/Filter/Speed/");
     cfg.beginGroup("TrackDetails/Filter/Speed/");
-
-    cfg.beginWriteArray("CustomCyclingTypes");
-    for (int i = 0; i < noOfCustomTypes; ++i)
-    {
-        const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
-        cfg.setArrayIndex(i);
-        cfg.setValue("name", cyclingType.name);
-        cfg.setValue("spinPlainSpeed", cyclingType.plainSpeed);
-        cfg.setValue("spinMinSpeed", cyclingType.minSpeed);
-        cfg.setValue("spinSlopeAtMinSpeed", cyclingType.slopeAtMinSpeed);
-        cfg.setValue("spinMaxSpeed", cyclingType.maxSpeed);
-        cfg.setValue("spinSlopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
-    }
-    cfg.endArray();
-
     cfg.setValue("activityType", comboActivityType->currentIndex());
-    cfg.setValue("cyclingType", comboCyclingType->currentIndex());
-    cfg.setValue("speed", spinConstantSpeed->value());
+
+//    cfg.beginWriteArray("CustomCyclingTypes");
+//    for (int i = 0; i < noOfCustomTypes; ++i)
+//    {
+//        const cycling_type_t &cyclingType = cyclingTypes[noOfFixTypes + i];
+//        cfg.setArrayIndex(i);
+//        cfg.setValue("name", cyclingType.name);
+//        cfg.setValue("spinPlainSpeed", cyclingType.plainSpeed);
+//        cfg.setValue("spinMinSpeed", cyclingType.minSpeed);
+//        cfg.setValue("spinSlopeAtMinSpeed", cyclingType.slopeAtMinSpeed);
+//        cfg.setValue("spinMaxSpeed", cyclingType.maxSpeed);
+//        cfg.setValue("spinSlopeAtMaxSpeed", cyclingType.slopeAtMaxSpeed);
+//    }
+//    cfg.endArray();
+
+//    cfg.setValue("cyclingType", comboCyclingType->currentIndex());
+//    cfg.setValue("speed", spinConstantSpeed->value());
 
     cfg.beginGroup("Const");
     filterConst->saveSettings(cfg);
@@ -195,29 +195,39 @@ void CFilterSpeed::slotApply()
 
     switch (comboActivityType->currentIndex())
     {
-    case 0:
+    case 3:
         filterConst->apply(trk);
 
         //remove this
-        trk.filterSpeed(spinConstantSpeed->value()/IUnit::self().speedfactor);
+//        trk.filterSpeed(spinConstantSpeed->value()/IUnit::self().speedfactor);
         break;
 
-    case 1:
+    case 4:
     {
         filterCycle->apply(trk);
 
         //remove this
-        trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
+//        trk.filterSpeed(cyclingTypes[comboCyclingType->currentIndex()]);
         break;
     }
 
     case 2:
     {
-        filterHike->apply(trk);
+//        filterHike->apply(trk);
 
         //remove this
         trk.filterSpeed(spinHikingPlainSpeed->value()/IUnit::self().speedfactor,
                         spinHikingAscending->value(), spinHikingDescending->value());
+        break;
+    }
+
+    case 5:
+    {
+        filterHike->apply(trk);
+
+        //remove this
+//        trk.filterSpeed(spinHikingPlainSpeed->value()/IUnit::self().speedfactor,
+//                        spinHikingAscending->value(), spinHikingDescending->value());
         break;
     }
 

@@ -41,7 +41,6 @@ CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
             "Use the left mouse button to add points. "
             "A right click will pause updating the ruler. "
             "Another left click will continue to add points. "
-            "Another right click will close the ruler tool."
             );
 
     canvas->reportStatus("CMouseRuler", msg);
@@ -120,16 +119,10 @@ void CMouseRuler::slotReset()
 
 void CMouseRuler::rightButtonDown(const QPoint& pos)
 {
-    switch(mode)
+    if(mode == eModeEdit)
     {
-    case eModePaused:
-        IMouse::rightButtonDown(pos);
-        break;
-
-    case eModeEdit:
         mode = eModePaused;
         ruler.pop_back();
-        break;
     }
 
     updateStatus(ruler);

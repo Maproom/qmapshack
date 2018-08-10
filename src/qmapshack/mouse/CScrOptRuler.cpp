@@ -35,5 +35,5 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse)
 
 void CScrOptRuler::slotClose()
 {
-    mouse->rightButtonDown(QPoint(0,0));
+    mouse->IMouse::rightButtonDown(QPoint(0,0));
 }

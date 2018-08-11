@@ -237,6 +237,7 @@
         <file>../icons/32x32/SortName.png</file>
         <file>../icons/32x32/Start.png</file>
         <file>../icons/32x32/T.png</file>
+        <file>../icons/32x32/Table.png</file>
         <file>../icons/32x32/Tainted.png</file>
         <file>../icons/32x32/TcxProject.png</file>
         <file>../icons/32x32/Template.png</file>
@@ -482,6 +483,7 @@
         <file>../icons/48x48/SortName.png</file>
         <file>../icons/48x48/Start.png</file>
         <file>../icons/48x48/T.png</file>
+        <file>../icons/48x48/Table.png</file>
         <file>../icons/48x48/Tainted.png</file>
         <file>../icons/48x48/TcxProject.png</file>
         <file>../icons/48x48/Template.png</file>

@@ -42,6 +42,11 @@ private slots:
     void slotRedo();
     void slotReset();
 
+    void slotToWpt();
+    void slotToTrk();
+    void slotToRte();
+    void slotToArea();
+
 private:
     void storeToHistory(const QPolygonF &line);
     void updateStatus(const QPolygonF &line);
@@ -53,7 +58,7 @@ private:
         ,eModeEdit
     };
 
-    mode_e mode = eModeEdit;
+    mode_e mode = eModePaused;
     QPolygonF ruler;
     qint32 idxHistory = NOIDX;
     QList<QPolygonF> history;

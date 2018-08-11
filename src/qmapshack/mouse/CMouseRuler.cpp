@@ -18,13 +18,21 @@
 
 #include "canvas/CCanvas.h"
 #include "gis/CGisDraw.h"
+#include "gis/CGisWorkspace.h"
+#include "gis/IGisItem.h"
+#include "gis/IGisLine.h"
+#include "gis/ovl/CGisItemOvlArea.h"
+#include "gis/rte/CGisItemRte.h"
+#include "gis/trk/CGisItemTrk.h"
+#include "gis/wpt/CGisItemWpt.h"
+#include "gis/wpt/CSetupNewWpt.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseRuler.h"
 #include "mouse/CScrOptRuler.h"
 
-#include <QtWidgets>
 #include <functional>
+#include <QtWidgets>
 
 CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
@@ -35,8 +43,11 @@ CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     connect(scrOptRuler->toolUndo, &QToolButton::clicked, this, &CMouseRuler::slotUndo);
     connect(scrOptRuler->toolRedo, &QToolButton::clicked, this, &CMouseRuler::slotRedo);
     connect(scrOptRuler->toolReset, &QToolButton::clicked, this, &CMouseRuler::slotReset);
-
     connect(scrOptRuler->toolShowTable, &QToolButton::clicked, this, [this](){updateStatus(ruler);});
+    connect(scrOptRuler->toolToWpt, &QToolButton::clicked, this, &CMouseRuler::slotToWpt);
+    connect(scrOptRuler->toolToTrk, &QToolButton::clicked, this, &CMouseRuler::slotToTrk);
+    connect(scrOptRuler->toolToRte, &QToolButton::clicked, this, &CMouseRuler::slotToRte);
+    connect(scrOptRuler->toolToArea, &QToolButton::clicked, this, &CMouseRuler::slotToArea);
 
     const QString msg =
         "<b>" + tr("Distance Ruler") + "</b><br/>" +
@@ -72,6 +83,10 @@ void CMouseRuler::storeToHistory(const QPolygonF& line)
     scrOptRuler->toolRedo->setEnabled(false);
     scrOptRuler->toolUndo->setEnabled(idxHistory > 0);
     scrOptRuler->toolReset->setEnabled(true);
+    scrOptRuler->toolToWpt->setEnabled(true);
+    scrOptRuler->toolToTrk->setEnabled(true);
+    scrOptRuler->toolToRte->setEnabled(true);
+    scrOptRuler->toolToArea->setEnabled(true);
 }
 
 void CMouseRuler::slotUndo()
@@ -114,11 +129,91 @@ void CMouseRuler::slotReset()
     scrOptRuler->toolRedo->setEnabled(false);
     scrOptRuler->toolUndo->setEnabled(false);
     scrOptRuler->toolReset->setEnabled(false);
+    scrOptRuler->toolToWpt->setEnabled(false);
+    scrOptRuler->toolToTrk->setEnabled(false);
+    scrOptRuler->toolToRte->setEnabled(false);
+    scrOptRuler->toolToArea->setEnabled(false);
 
     updateStatus(ruler);
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
+
+void CMouseRuler::slotToWpt()
+{
+    QString icon;
+    QString name;
+    QPointF point = NOPOINTF;
+
+    if(!CGisItemWpt::getNewWptData(point, icon, name))
+    {
+        return;
+    }
+
+    IGisProject * project = CGisWorkspace::self().selectProject();
+    if(nullptr == project)
+    {
+        return;
+    }
+
+    bool first = true;
+    QMutexLocker lock(&IGisItem::mutexItems);
+    for(const QPointF& pt : ruler)
+    {
+        if(!first)
+        {
+            // update name after the first one
+            name = CGisItemWpt::getLastName(name);
+        }
+        else
+        {
+            first = false;
+        }
+        qreal ele = canvas->getElevationAt(pt);
+        CGisItemWpt * wpt = new CGisItemWpt(pt * RAD_TO_DEG, ele, QDateTime::currentDateTimeUtc(), name, icon, project);
+        wpt->updateDecoration(CGisItemWpt::eMarkChanged, CGisItemWpt::eMarkNone);
+    }
+}
+
+void CMouseRuler::slotToTrk()
+{
+    QString name;
+    IGisProject * project = nullptr;
+
+    if(!IGisItem::getNameAndProject(name, project, tr("track")))
+    {
+        return;
+    }
+
+    QMutexLocker lock(&IGisItem::mutexItems);
+    new CGisItemTrk(SGisLine(ruler), name, project, NOIDX);
+}
+
+void CMouseRuler::slotToRte()
+{
+    QString name;
+    IGisProject * project = nullptr;
+
+    if(!IGisItem::getNameAndProject(name, project, tr("route")))
+    {
+        return;
+    }
+    QMutexLocker lock(&IGisItem::mutexItems);
+    new CGisItemRte(SGisLine(ruler), name, project, NOIDX);
+}
+
+void CMouseRuler::slotToArea()
+{
+    QString name;
+    IGisProject * project = nullptr;
+
+    if(!IGisItem::getNameAndProject(name, project, tr("area")))
+    {
+        return;
+    }
+    QMutexLocker lock(&IGisItem::mutexItems);
+    new CGisItemOvlArea(SGisLine(ruler), name, project, NOIDX);
+}
 
 void CMouseRuler::rightButtonDown(const QPoint& pos)
 {

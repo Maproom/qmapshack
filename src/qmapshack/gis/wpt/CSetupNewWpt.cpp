@@ -37,11 +37,18 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
     toolIcon->setObjectName(icon);
     toolIcon->setIcon(getWptIconByName(icon, focus));
 
-    QString pos;
-    IUnit::degToStr(pt.x(), pt.y(), pos);
-    linePosition->setText(pos);
-    labelWarning->hide();
+    if(pt != NOPOINTF)
+    {
+        QString pos;
+        IUnit::degToStr(pt.x(), pt.y(), pos);
+        linePosition->setText(pos);
+    }
+    else
+    {
+        linePosition->setDisabled(true);
+    }
 
+    labelWarning->hide();
     lineName->setText(name);
 
     connect(linePosition, &QLineEdit::textEdited, this, &CSetupNewWpt::slotEditPosition);
@@ -58,7 +65,7 @@ CSetupNewWpt::~CSetupNewWpt()
 
 void CSetupNewWpt::accept()
 {
-    if(CPositionDialog::getPosition(pt, linePosition->text()))
+    if((pt == NOPOINTF) || CPositionDialog::getPosition(pt, linePosition->text()))
     {
         icon = toolIcon->objectName();
         name = lineName->text();

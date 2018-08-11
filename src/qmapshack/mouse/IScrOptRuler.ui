@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>66</height>
+    <width>480</width>
+    <height>44</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,61 +22,65 @@
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line">
+    <widget class="Line" name="line_4">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QToolButton" name="toolReset">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
+    <widget class="QToolButton" name="toolToWpt">
      <property name="toolTip">
-      <string>Reset ruler.</string>
+      <string>Convert into a group of waypoints.</string>
      </property>
      <property name="text">
       <string>...</string>
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+       <normaloff>:/icons/waypoints/32x32/FlagBlue.png</normaloff>:/icons/waypoints/32x32/FlagBlue.png</iconset>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="Line" name="line_2">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QToolButton" name="toolUndo">
-     <property name="enabled">
-      <bool>false</bool>
+    <widget class="QToolButton" name="toolToTrk">
+     <property name="toolTip">
+      <string>Convert into a track.</string>
      </property>
      <property name="text">
       <string>...</string>
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Undo.png</normaloff>:/icons/32x32/Undo.png</iconset>
+       <normaloff>:/icons/32x32/Track.png</normaloff>:/icons/32x32/Track.png</iconset>
      </property>
     </widget>
    </item>
    <item>
-    <widget class="QToolButton" name="toolRedo">
-     <property name="enabled">
-      <bool>false</bool>
+    <widget class="QToolButton" name="toolToRte">
+     <property name="toolTip">
+      <string>Convert into a route.</string>
      </property>
      <property name="text">
       <string>...</string>
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Redo.png</normaloff>:/icons/32x32/Redo.png</iconset>
+       <normaloff>:/icons/32x32/Route.png</normaloff>:/icons/32x32/Route.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolToArea">
+     <property name="toolTip">
+      <string>Convert into an area.</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resources.qrc">
+       <normaloff>:/icons/32x32/Area.png</normaloff>:/icons/32x32/Area.png</iconset>
      </property>
     </widget>
    </item>
@@ -97,7 +101,7 @@
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
-       <normaloff>:/icons/32x32/Sort.png</normaloff>:/icons/32x32/Sort.png</iconset>
+       <normaloff>:/icons/32x32/Table.png</normaloff>:/icons/32x32/Table.png</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>
@@ -161,6 +165,64 @@
      </property>
      <property name="checkable">
       <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="Line" name="line_2">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolReset">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>Reset ruler.</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resources.qrc">
+       <normaloff>:/icons/32x32/Reset.png</normaloff>:/icons/32x32/Reset.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolUndo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>Undo</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resources.qrc">
+       <normaloff>:/icons/32x32/Undo.png</normaloff>:/icons/32x32/Undo.png</iconset>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="toolRedo">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>Redo</string>
+     </property>
+     <property name="text">
+      <string>...</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../resources.qrc">
+       <normaloff>:/icons/32x32/Redo.png</normaloff>:/icons/32x32/Redo.png</iconset>
      </property>
     </widget>
    </item>

@@ -16,6 +16,7 @@
 
 **********************************************************************************************/
 
+#include "CMainWindow.h"
 #include "dem/CDemDraw.h"
 #include "gis/CGisDraw.h"
 #include "gis/IGisLine.h"
@@ -28,6 +29,16 @@ void IGisLine::point_t::resetElevation()
     {
         subpts[i].ele = NOINT;
     }
+}
+
+SGisLine::SGisLine(const QPolygonF& line)
+{
+    for(const QPointF& pt : line)
+    {
+        append(IGisLine::point_t(pt));
+    }
+
+    CMainWindow::self().getElevationAt(*this);
 }
 
 void SGisLine::updateElevation(CDemDraw * dem)

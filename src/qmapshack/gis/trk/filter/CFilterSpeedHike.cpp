@@ -133,7 +133,7 @@ void CFilterSpeedHike::slotSetHikingType(int type)
     spinAscending->setValue(hikingType.ascending);
     spinDescending->setValue(hikingType.descending);
 
-    if (type < 4)
+    if (type < noOfFixTypes)
     {
         frameHiking->setEnabled(false);
     }

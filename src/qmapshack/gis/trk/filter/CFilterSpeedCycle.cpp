@@ -157,7 +157,7 @@ void CFilterSpeedCycle::slotSetCyclingType(int type)
         spinSlopeAtMaxSpeed->setValue(cyclingType.slopeAtMaxSpeed);
     }
 
-    if (type < 4)
+    if (type < noOfFixTypes)
     {
         frameCycling->setEnabled(false);
     }

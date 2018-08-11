@@ -331,6 +331,7 @@ public:
         hideArea = hide;
     }
 
+    static QString getLastName(const QString &name);
     static bool getNewWptData(QPointF& pt, QString& icon, QString& name);
 
     static void drawCircle(QPainter& p, const QPointF& pos, const qreal& r, const bool &avoid, const bool &selected);

@@ -200,11 +200,15 @@ void CGisItemWpt::setSymbol()
     setIcon();
 }
 
-bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
+QString CGisItemWpt::getLastName(const QString& name)
 {
     SETTINGS;
-    QString lastName = cfg.value("Waypoint/lastName", "wpt").toString();
-    QString lastIcon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+    QString lastName = name;
+
+    if(lastName.isEmpty())
+    {
+        lastName = cfg.value("Waypoint/lastName", "wpt").toString();
+    }
 
     const int s = lastName.size();
     if(s != 0)
@@ -228,9 +232,18 @@ bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
         }
     }
 
+    cfg.setValue("Waypoint/lastName", lastName);
+    return lastName;
+}
+
+bool CGisItemWpt::getNewWptData(QPointF& pt, QString& icon, QString& name)
+{
+    SETTINGS;
+    QString lastIcon = cfg.value("Waypoint/lastIcon", "Waypoint").toString();
+
     if(name.isEmpty())
     {
-        name = lastName;
+        name = getLastName("");
     }
     icon = lastIcon;
 

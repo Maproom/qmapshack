@@ -61,6 +61,9 @@ public:
 
 struct SGisLine : public QVector<IGisLine::point_t>
 {
+    SGisLine(){}
+    SGisLine(const QPolygonF& line);
+
     void updateElevation(CDemDraw * dem);
     void updatePixel(CGisDraw * gis);
 };

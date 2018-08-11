@@ -40,6 +40,7 @@ CFilterSpeed::CFilterSpeed(CGisItemTrk &trk, QWidget *parent)
     labelWarning->setText("");
 
     SETTINGS;
+    cfg.beginGroup("TrackDetails/Filter/Speed/");
     comboActivityType->setCurrentIndex(cfg.value("activityType", 0).toInt());
     slotSetActivityType(comboActivityType->currentIndex());
 

@@ -145,6 +145,11 @@ void CDraw::nogos(const QPolygonF &line, const QRectF &viewport, QPainter &p, in
     }
 }
 
+void CDraw::text(const QString &str, QPainter &p, const QPointF &center, const QColor &color, const QFont &font)
+{
+    text(str, p, center.toPoint(), color, font);
+}
+
 void CDraw::text(const QString &str, QPainter &p, const QPoint &center, const QColor &color, const QFont &font)
 {
     QFontMetrics fm(font);

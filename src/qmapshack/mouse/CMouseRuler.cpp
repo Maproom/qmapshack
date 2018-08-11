@@ -24,16 +24,19 @@
 #include "mouse/CScrOptRuler.h"
 
 #include <QtWidgets>
+#include <functional>
 
 CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     : IMouse(gis, canvas, mouse)
 {
     cursor = QCursor(QPixmap(":/cursors/cursorRuler.png"),0,0);
 
-    scrOptRuler = new CScrOptRuler(this);
+    scrOptRuler = new CScrOptRuler(this, canvas);
     connect(scrOptRuler->toolUndo, &QToolButton::clicked, this, &CMouseRuler::slotUndo);
     connect(scrOptRuler->toolRedo, &QToolButton::clicked, this, &CMouseRuler::slotRedo);
     connect(scrOptRuler->toolReset, &QToolButton::clicked, this, &CMouseRuler::slotReset);
+
+    connect(scrOptRuler->toolShowTable, &QToolButton::clicked, this, [this](){updateStatus(ruler);});
 
     const QString msg =
         "<b>" + tr("Distance Ruler") + "</b><br/>" +
@@ -167,7 +170,7 @@ void CMouseRuler::mouseMoved(const QPoint& pos)
 void CMouseRuler::updateStatus(const QPolygonF &line)
 {
     const int N = line.size();
-    if(N < 2)
+    if((N < 2) || !scrOptRuler->toolShowTable->isChecked())
     {
         canvas->reportStatus("CMouseRuler", "");
         return;
@@ -179,7 +182,15 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
 
     QString msg = "<b>" + tr("Distance Ruler") + "</b>";
     msg += "<table border=1 cellspacing=0 cellpadding=2 width=100%>";
-    msg += "<tr><th>#</th><th>" + tr("Distance") + "</th><th>" + tr("Ascent") + "</th><th>" + tr("Descent") + "</th></tr>";
+    msg += "<tr><th>#</th><th>"
+           + tr("Distance")
+           + "</th><th>"
+           + tr("Ascent")
+           + "</th><th>"
+           + tr("Descent")
+           + "</th><th>"
+           + tr("Course")
+           + "</th></tr>";
 
     for(int n = 1; n < N; n++)
     {
@@ -223,6 +234,12 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
                 msg += QString("<td align=right></td><td align=right>%1%2</td>").arg(val).arg(unit);
             }
         }
+        else
+        {
+            msg += "<td></td><td></td>";
+        }
+
+        msg += QString("<td>%1°</td>").arg(qRound(a1));
 
         msg += "</tr>";
     }
@@ -263,6 +280,7 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
         p.setPen(QPen(Qt::blue, 3));
         p.drawPolyline(line);
 
+        QRectF r(0,0,50,50);
         for(int n = 1; n < N; n++)
         {
             QPointF pt1 = ruler[n-1];
@@ -276,6 +294,23 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
                 continue;
             }
 
+            if((n > 1) && scrOptRuler->toolShowAngle->isChecked())
+            {
+                r.moveCenter(line[n-1]);
+
+                QLineF seg1(line[n-2], line[n-1]);
+                QLineF seg2(line[n-1], line[n]);
+
+                qreal angleStart = seg2.angle();
+                qreal angleSpan  = (seg2.angleTo(seg1) - 180);
+
+                p.setPen(Qt::black);
+                p.drawArc(r, angleStart * 16, angleSpan * 16);
+
+                CDraw::text(QString("%1°").arg(qAbs(qRound(angleSpan))), p, line[n-1], Qt::black);
+            }
+
+
             QString val;
             QString unit;
             IUnit::self().meter2distance(d, val, unit);
@@ -285,12 +320,17 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
             qreal ele1 = canvas->getElevationAt(pt1);
             qreal ele2 = canvas->getElevationAt(pt2);
 
-            if((ele1 != NOFLOAT) && (ele2 != NOFLOAT))
+            if((ele1 != NOFLOAT) && (ele2 != NOFLOAT) && scrOptRuler->toolShowAscent->isChecked())
             {
                 int delta = qRound(ele2 - ele1);
 
                 IUnit::self().meter2elevation(qAbs(delta), val, unit);
                 str += QString(", %1 %2%3").arg(delta > 0 ? QChar(0x2197) : QChar(0x2198)).arg(val).arg(unit);
+            }
+
+            if(scrOptRuler->toolShowCourse->isChecked())
+            {
+                str += QString(", %1°").arg(qRound(a1));
             }
 
             QLineF seg(line[n-1], line[n]);

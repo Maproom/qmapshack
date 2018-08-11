@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
-   sodipodi:docname="CSrcSlope.svg">
+   sodipodi:docname="CSrcAscent.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,7 +25,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="5.6568543"
-     inkscape:cx="9.5836807"
+     inkscape:cx="-21.106879"
      inkscape:cy="11.709225"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -60,34 +60,28 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-988.36218)">
+    <path
+       style="fill:#000080;fill-opacity:1;fill-rule:evenodd;stroke:#000080;stroke-width:0.00099755;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 60.259729,1045.6661 4.5580285,1045.6391 30.753358,997.83319 60.26486,1045.6668"
+       id="path4137"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 2.6850002,1035.654 17.4682568,-30.3289 -7.942105,0.749"
+       id="path4143"
+       inkscape:connector-curvature="0" />
     <rect
-       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:none;stroke-width:2.29999995;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4137"
        width="64"
        height="64"
        x="0"
        y="988.36218" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 61.149841,1039.2814 H 6.1498409 L 56.149841,994.28136"
-       id="path4568"
-       inkscape:connector-curvature="0" />
-    <path
-       style="fill:none;fill-opacity:1;stroke:#000080;stroke-width:4;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="path4570"
-       sodipodi:type="arc"
-       sodipodi:cx="6.1390815"
-       sodipodi:cy="1041.243"
-       sodipodi:rx="37.509857"
-       sodipodi:ry="37.430428"
-       sodipodi:start="5.4018533"
-       sodipodi:end="0.039939195"
-       sodipodi:open="true"
-       d="m 30,1012.3622 a 37.509857,37.430428 0 0 1 13.619026,30.3754" />
-    <path
        style="fill:none;fill-rule:evenodd;stroke:#000080;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 10.931416,1021.9001 37.71931,999.37473 30,997.36218"
-       id="path4143"
+       d="m 39.022822,1002.0527 19.581262,29.0096 2.813694,-7.4646"
+       id="path4143-5"
        inkscape:connector-curvature="0" />
   </g>
 </svg>

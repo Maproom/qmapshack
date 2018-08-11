@@ -88,7 +88,7 @@ void CMouseMoveWpt::draw(QPainter& p, CCanvas::redraw_e, const QRect&)
     p.drawPolygon(arrow);
     p.restore();
 
-    CDraw::text(str, p, (p2 + QPoint(0, -30)).toPoint(), Qt::darkBlue);
+    CDraw::text(str, p, (p2 + QPoint(0, -30)), Qt::darkBlue);
 
     p.drawPixmap(p1 - focus, icon);
     p.drawPixmap(p2 - focus, icon);

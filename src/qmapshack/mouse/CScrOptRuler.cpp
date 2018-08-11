@@ -16,22 +16,50 @@
 
 **********************************************************************************************/
 
+#include "canvas/CCanvas.h"
+#include "helpers/CSettings.h"
 #include "mouse/CScrOptRuler.h"
 #include "mouse/IMouse.h"
 
+#include <functional>
 #include <QtWidgets>
 
-CScrOptRuler::CScrOptRuler(IMouse *mouse)
+CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     : IScrOpt(mouse)
 {
     setupUi(this);
     connect(pushClose, &QPushButton::clicked, this, &CScrOptRuler::slotClose);
+
+    auto func = std::bind(&CCanvas::slotTriggerCompleteUpdate, canvas, CCanvas::eRedrawMouse);
+    connect(toolShowTable, &QToolButton::toggled, this, func);
+    connect(toolShowAscent, &QToolButton::toggled, this, func);
+    connect(toolShowCourse, &QToolButton::toggled, this, func);
+    connect(toolShowAngle, &QToolButton::toggled, this, func);
+
+    SETTINGS;
+    cfg.beginGroup("Ruler");
+    toolShowTable->setChecked(cfg.value("showTable", true).toBool());
+    toolShowCourse->setChecked(cfg.value("showCourse", true).toBool());
+    toolShowAscent->setChecked(cfg.value("showAscent", true).toBool());
+    toolShowAngle->setChecked(cfg.value("showAngle", false).toBool());
+    cfg.endGroup(); // Ruler
 
     move(0,0);
     adjustSize();
     show();
 }
 
+CScrOptRuler::~CScrOptRuler()
+{
+    SETTINGS;
+    cfg.remove("Ruler");
+    cfg.beginGroup("Ruler");
+    cfg.setValue("showTable", toolShowTable->isChecked());
+    cfg.setValue("showCourse", toolShowCourse->isChecked());
+    cfg.setValue("showAscent", toolShowAscent->isChecked());
+    cfg.setValue("showAngle", toolShowAngle->isChecked());
+    cfg.endGroup(); // Ruler
+}
 
 void CScrOptRuler::slotClose()
 {

@@ -22,12 +22,14 @@
 #include "mouse/IScrOpt.h"
 #include "ui_IScrOptRuler.h"
 
+class CCanvas;
+
 class CScrOptRuler : public IScrOpt, public Ui::IScrOptRuler
 {
     Q_OBJECT
 public:
-    CScrOptRuler(IMouse *mouse);
-    virtual ~CScrOptRuler() = default;
+    CScrOptRuler(IMouse *mouse, CCanvas * canvas);
+    virtual ~CScrOptRuler();
 
     void draw(QPainter& p) override
     {

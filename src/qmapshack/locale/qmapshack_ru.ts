@@ -1669,72 +1669,72 @@ To solve this conflict you can create and save a clone, force your version or dr
         <translation>_клон</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="277"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="290"/>
         <source>Elevation: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="288"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="301"/>
         <source>Proximity: %1%2</source>
         <translation>Радиус близости: %1%2</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="334"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="347"/>
         <source>Created: %1</source>
         <translation>Создан: %1</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="406"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="419"/>
         <source>Changed name</source>
         <translation>Изменено имя</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="416"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="429"/>
         <source>Changed position</source>
         <translation>Изменена позиция</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="422"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="435"/>
         <source>Changed elevation</source>
         <translation>Изменена высота</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="431"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="444"/>
         <source>Removed proximity</source>
         <translation>Удалён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="436"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="449"/>
         <source>Changed proximity</source>
         <translation>Изменён радиус близости</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="455"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="468"/>
         <source>Changed icon</source>
         <translation>Изменена пиктограмма</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="461"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="474"/>
         <source>Changed comment</source>
         <translation>Изменён комментарий</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="467"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="480"/>
         <source>Changed description</source>
         <translation>Изменено описание</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="473"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="486"/>
         <source>Changed links</source>
         <translation>Изменены ссылки</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="479"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="492"/>
         <source>Changed images</source>
         <translation>Изменены изображения</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CGisItemWpt.cpp" line="485"/>
+        <location filename="../gis/wpt/CGisItemWpt.cpp" line="498"/>
         <source>Add image</source>
         <translation>Добавить изображение</translation>
     </message>
@@ -3777,33 +3777,53 @@ Unknown structure.</source>
 <context>
     <name>CMouseRuler</name>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="39"/>
-        <location filename="../mouse/CMouseRuler.cpp" line="180"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="53"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="278"/>
         <source>Distance Ruler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="40"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="54"/>
         <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="182"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="183"/>
+        <source>track</source>
+        <translation type="unfinished">трек</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="197"/>
+        <source>route</source>
+        <translation type="unfinished">маршрут</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="210"/>
+        <source>area</source>
+        <translation type="unfinished">область</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="281"/>
         <source>Distance</source>
         <translation type="unfinished">Расстояние</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="182"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="283"/>
         <source>Ascent</source>
         <translation type="unfinished">Подъём</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="182"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="285"/>
         <source>Descent</source>
         <translation type="unfinished">Спуск</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="233"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="287"/>
+        <source>Course</source>
+        <translation type="unfinished">Курс</translation>
+    </message>
+    <message>
+        <location filename="../mouse/CMouseRuler.cpp" line="345"/>
         <source>Sum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10341,13 +10361,69 @@ or
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="34"/>
+        <source>Convert into a group of waypoints.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="48"/>
+        <source>Convert into a track.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="62"/>
+        <source>Convert into a route.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="76"/>
+        <source>Convert into an area.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="97"/>
+        <source>Show table.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="117"/>
+        <source>Show course of each segment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="137"/>
+        <source>Show ascent or descent of each segment.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="157"/>
+        <source>Show angle between line segments.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="184"/>
         <source>Reset ruler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="201"/>
+        <source>Undo</source>
+        <translation type="unfinished">Отменить</translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="218"/>
+        <source>Redo</source>
+        <translation type="unfinished">Вернуть</translation>
+    </message>
+    <message>
         <location filename="../mouse/IScrOptRuler.ui" line="37"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="58"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="72"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="51"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="65"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="79"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="100"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="160"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="187"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="204"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="221"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>

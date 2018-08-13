@@ -35,6 +35,7 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     connect(toolShowAscent, &QToolButton::toggled, this, func);
     connect(toolShowCourse, &QToolButton::toggled, this, func);
     connect(toolShowAngle, &QToolButton::toggled, this, func);
+    connect(toolShowPrecision, &QToolButton::toggled, this, func);
 
     SETTINGS;
     cfg.beginGroup("Ruler");
@@ -42,6 +43,7 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     toolShowCourse->setChecked(cfg.value("showCourse", true).toBool());
     toolShowAscent->setChecked(cfg.value("showAscent", true).toBool());
     toolShowAngle->setChecked(cfg.value("showAngle", false).toBool());
+    toolShowPrecision->setChecked(cfg.value("showPrecision", false).toBool());
     cfg.endGroup(); // Ruler
 
     move(0,0);
@@ -58,6 +60,7 @@ CScrOptRuler::~CScrOptRuler()
     cfg.setValue("showCourse", toolShowCourse->isChecked());
     cfg.setValue("showAscent", toolShowAscent->isChecked());
     cfg.setValue("showAngle", toolShowAngle->isChecked());
+    cfg.setValue("showPrecision", toolShowPrecision->isChecked());
     cfg.endGroup(); // Ruler
 }
 

@@ -44,6 +44,7 @@ CMouseRuler::CMouseRuler(CGisDraw *gis, CCanvas *canvas, CMouseAdapter *mouse)
     connect(scrOptRuler->toolRedo, &QToolButton::clicked, this, &CMouseRuler::slotRedo);
     connect(scrOptRuler->toolReset, &QToolButton::clicked, this, &CMouseRuler::slotReset);
     connect(scrOptRuler->toolShowTable, &QToolButton::clicked, this, [this](){updateStatus(ruler);});
+    connect(scrOptRuler->toolShowPrecision, &QToolButton::clicked, this, [this](){updateStatus(ruler);});
     connect(scrOptRuler->toolToWpt, &QToolButton::clicked, this, &CMouseRuler::slotToWpt);
     connect(scrOptRuler->toolToTrk, &QToolButton::clicked, this, &CMouseRuler::slotToTrk);
     connect(scrOptRuler->toolToRte, &QToolButton::clicked, this, &CMouseRuler::slotToRte);
@@ -64,6 +65,18 @@ CMouseRuler::~CMouseRuler()
 {
     canvas->reportStatus("CMouseRuler", "");
     delete scrOptRuler;
+}
+
+void CMouseRuler::meter2whatever(qreal meter, QString& val, QString& unit)
+{
+    if(scrOptRuler->toolShowPrecision->isChecked())
+    {
+        IUnit::self().meter2base(meter, val, unit);
+    }
+    else
+    {
+        IUnit::self().meter2distance(meter, val, unit);
+    }
 }
 
 void CMouseRuler::storeToHistory(const QPolygonF& line)
@@ -239,10 +252,10 @@ void CMouseRuler::leftClicked(const QPoint& pos)
         ruler << coord;
     }
 
-    ruler << coord;
     storeToHistory(ruler);
     updateStatus(ruler);
 
+    ruler << coord;
     canvas->slotTriggerCompleteUpdate(CCanvas::eRedrawMouse);
 }
 
@@ -306,7 +319,8 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
 
         QString val;
         QString unit;
-        IUnit::self().meter2distance(d, val, unit);
+
+        meter2whatever(d, val, unit);
 
         msg += "<td align=right>" + val + unit + "</td>";
 
@@ -334,7 +348,8 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
             msg += "<td></td><td></td>";
         }
 
-        msg += QString("<td>%1°</td>").arg(qRound(a1));
+        val.sprintf("%1.1f", a1);
+        msg += QString("<td align=right>%1°</td>").arg(val);
 
         msg += "</tr>";
     }
@@ -343,7 +358,7 @@ void CMouseRuler::updateStatus(const QPolygonF &line)
     {
         QString val, unit;
         msg += "<tr><td><b>" + tr("Sum") + "</b></td>";
-        IUnit::self().meter2distance(totalDistance, val, unit);
+        meter2whatever(totalDistance, val, unit);
         msg += "<td align=right><b>" + val + unit + "</b></td>";
         IUnit::self().meter2elevation(totalAscent, val, unit);
         msg += "<td align=right><b>" + val + unit + "</b></td>";
@@ -408,8 +423,8 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
 
             QString val;
             QString unit;
-            IUnit::self().meter2distance(d, val, unit);
 
+            meter2whatever(d, val, unit);
             QString str = val + unit;
 
             qreal ele1 = canvas->getElevationAt(pt1);
@@ -425,7 +440,8 @@ void CMouseRuler::draw(QPainter& p, CCanvas::redraw_e needsRedraw, const QRect &
 
             if(scrOptRuler->toolShowCourse->isChecked())
             {
-                str += QString(", %1°").arg(qRound(a1));
+                val.sprintf("%1.1f", a1);
+                str += QString(", %1°").arg(val);
             }
 
             QLineF seg(line[n-1], line[n]);

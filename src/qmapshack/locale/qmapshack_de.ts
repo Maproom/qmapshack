@@ -3807,8 +3807,8 @@ Unbekannte Struktur.</translation>
 <context>
     <name>CMouseRuler</name>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="53"/>
-        <location filename="../mouse/CMouseRuler.cpp" line="278"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="54"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="291"/>
         <source>Distance Ruler</source>
         <translation>Distanzmesser</translation>
     </message>
@@ -3817,47 +3817,47 @@ Unbekannte Struktur.</translation>
         <translation type="vanished">Fügen Sie mit der linken Maustaste neue Punkte hinzu. Ein Klick mit der rechten Maustaste pausiert die Aktualisierung des Lineals. Ein Klick mit der linken Maustaste nimmt das Hinzufügen von Punkten wieder auf. Ein weiterer Klick mit der rechten Maustaste beendet das Linealwerkzeug.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="54"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="55"/>
         <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. </source>
         <translation>Fügen Sie mit der linken Maustaste neue Punkte hinzu. Ein Klick mit der rechten Maustaste pausiert die Aktualisierung des Lineals. Ein erneuter Klick mit der linken Maustaste fügt wieder Punkte hinzu.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="183"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="196"/>
         <source>track</source>
         <translation>Track</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="197"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="210"/>
         <source>route</source>
         <translation>Route</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="210"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="223"/>
         <source>area</source>
         <translation>Gebiet</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="281"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="294"/>
         <source>Distance</source>
         <translation>Entf.</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="283"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="296"/>
         <source>Ascent</source>
         <translation>Anstieg</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="285"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="298"/>
         <source>Descent</source>
         <translation>Abstieg</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="287"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="300"/>
         <source>Course</source>
         <translation>Kurs</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="345"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="360"/>
         <source>Sum</source>
         <translation>Summe</translation>
     </message>
@@ -10420,17 +10420,22 @@ sein</translation>
         <translation>Zeige den Winkel zwischen den Segmenten an.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="184"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="174"/>
+        <source>Show distances in high precision.</source>
+        <translation>Entfernungen mit hoher Genauigkeit anzeigen.</translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="201"/>
         <source>Reset ruler.</source>
         <translation>Lineal zurücksetzen.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="201"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="218"/>
         <source>Undo</source>
         <translation>Rückgängig</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="218"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="235"/>
         <source>Redo</source>
         <translation>Wiederherstellen</translation>
     </message>
@@ -10441,9 +10446,10 @@ sein</translation>
         <location filename="../mouse/IScrOptRuler.ui" line="79"/>
         <location filename="../mouse/IScrOptRuler.ui" line="100"/>
         <location filename="../mouse/IScrOptRuler.ui" line="160"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="187"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="177"/>
         <location filename="../mouse/IScrOptRuler.ui" line="204"/>
         <location filename="../mouse/IScrOptRuler.ui" line="221"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="238"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -11695,18 +11701,18 @@ sein</translation>
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="792"/>
         <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="804"/>
         <source>Error</source>
         <translation>Fehler</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="792"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation>Falsches Positionsformat. Muss entweder &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; oder &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot; sein.</translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="804"/>
         <source>Position values out of bounds. </source>
         <translation>Position außerhalb der gültigen Werte.</translation>
     </message>

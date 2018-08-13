@@ -3696,53 +3696,53 @@ Unknown structure.</source>
 <context>
     <name>CMouseRuler</name>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="53"/>
-        <location filename="../mouse/CMouseRuler.cpp" line="278"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="54"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="291"/>
         <source>Distance Ruler</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="54"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="55"/>
         <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="183"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="196"/>
         <source>track</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="197"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="210"/>
         <source>route</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="210"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="223"/>
         <source>area</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="281"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="294"/>
         <source>Distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="283"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="296"/>
         <source>Ascent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="285"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="298"/>
         <source>Descent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="287"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="300"/>
         <source>Course</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="345"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="360"/>
         <source>Sum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10143,17 +10143,22 @@ or
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="184"/>
-        <source>Reset ruler.</source>
+        <location filename="../mouse/IScrOptRuler.ui" line="174"/>
+        <source>Show distances in high precision.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="201"/>
-        <source>Undo</source>
+        <source>Reset ruler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="218"/>
+        <source>Undo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="235"/>
         <source>Redo</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10164,9 +10169,10 @@ or
         <location filename="../mouse/IScrOptRuler.ui" line="79"/>
         <location filename="../mouse/IScrOptRuler.ui" line="100"/>
         <location filename="../mouse/IScrOptRuler.ui" line="160"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="187"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="177"/>
         <location filename="../mouse/IScrOptRuler.ui" line="204"/>
         <location filename="../mouse/IScrOptRuler.ui" line="221"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="238"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -11370,18 +11376,18 @@ or
 <context>
     <name>IUnit</name>
     <message>
-        <location filename="../units/IUnit.cpp" line="792"/>
         <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="804"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="792"/>
+        <location filename="../units/IUnit.cpp" line="798"/>
         <source>Bad position format. Must be: &quot;[N|S] ddd mm.sss [W|E] ddd mm.sss&quot; or &quot;[N|S] ddd.ddd [W|E] ddd.ddd&quot;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../units/IUnit.cpp" line="798"/>
+        <location filename="../units/IUnit.cpp" line="804"/>
         <source>Position values out of bounds. </source>
         <translation type="unfinished"></translation>
     </message>

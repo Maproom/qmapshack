@@ -24,6 +24,8 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CTrackData.h"
 #include "gis/trk/filter/CFilterSpeed.h"
+#include "gis/trk/filter/CFilterSpeedCycle.h"
+#include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -537,8 +539,10 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType);
-    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
+    void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
+    void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
+
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const;
 
     void filterTerrainSlope();
     void filterReplaceElevation(CCanvas *canvas);

@@ -55,7 +55,8 @@ public:
     virtual qreal elevation2meter(const QString& val) const = 0;
     /// convert a range in meter into a scale and a matching unit
     virtual void meter2unit(qreal meter, qreal& scale, QString&  unit) const  = 0;
-
+    /// convert meter into the base unit (ft, m)
+    virtual void meter2base(qreal meter, QString& val, QString& unit) const;
 
     enum type_e {eTypeMetric, eTypeImperial, eTypeNautic};
     /// instantiate the correct unit object

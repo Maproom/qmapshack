@@ -423,11 +423,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 {
-    qreal plainSpeed = hikingType.plainSpeed / IUnit::self().speedfactor; // Transform from set format to m/s
-    qreal ascending = hikingType.ascending;
-    qreal descending = hikingType.descending;
-
-    if (!plainSpeed || !ascending || !descending)
+    if (!hikingType.plainSpeed || !hikingType.ascending || !hikingType.descending)
     {
         return;
     }
@@ -441,14 +437,13 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     // Curve algorithm based on carloscoi curves
     // variable names according to carloscoi xls cell names, A9, B4, B5, B6
     // for better interpretation of formula
-    qreal B4 = plainSpeed * 3.6; // Transform from m/s to km/h
-    qreal B5 = ascending;
-    qreal B6 = descending;
+    qreal B4 = hikingType.plainSpeed / IUnit::self().speedfactor * 3.6; // Transform from set format to km/h
+    qreal B5 = hikingType.ascending;
+    qreal B6 = hikingType.descending;
 
-    qDebug() << "KKA: plainSpeed m/s=" << plainSpeed << "plainSpeed km/h=" << plainSpeed *3.6 << "ascending=" << ascending << "descending=" << descending;
+//    qDebug() << "KKA: plainSpeed m/s=" << plainSpeed << "plainSpeed km/h=" << plainSpeed *3.6 << "ascending=" << ascending << "descending=" << descending;
+//    qint32 i = 0; // Debug only
 
-
-    qint32 i = 0; // Debug only
     for(CTrackData::trkpt_t& pt : trk)
     {
         if(pt.isHidden())
@@ -465,11 +460,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 
         QVector<qreal> maxTerms(7); // to store carloscoi terms
 
-        qreal A9 = slope / 100;      // Transform from percent to tangens
-//        qreal A9 = -0.075; // For testing
-//        qreal B4 = 4.5;
-//        qreal B5 = 500.0;
-//        qreal B6 = 700.0;
+        qreal A9 = slope / 100;      // Transform slope value from percent to tangens
 
         maxTerms[0] = 60 / B4;
         maxTerms[1] = A9 * 60000 / B5;
@@ -486,11 +477,11 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
             continue;
         }
         qreal speed = 1 / maxTerms[0] / 60 * 1000; // Transform from min/km to m/s
-        qDebug() << "KKA: Pnt=" << i++
-                 << "Slope tangens=" << slope/100
-                 << "Max min/km=" << maxTerms[0]
-                 << "Speed m/s=" << speed
-                 << "Speed km/h=" << speed * 3.6;
+//        qDebug() << "KKA: Pnt=" << i++
+//                 << "Slope tangens=" << slope/100
+//                 << "Max min/km=" << maxTerms[0]
+//                 << "Speed m/s=" << speed
+//                 << "Speed km/h=" << speed * 3.6;
 
         timestamp = speed == 0 ? QDateTime() : timestamp.addMSecs(qRound(1000 * pt.deltaDistance / speed));
         pt.time   = timestamp;

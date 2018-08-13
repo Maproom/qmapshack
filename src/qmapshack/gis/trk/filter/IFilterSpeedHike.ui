@@ -212,6 +212,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboHikingType</tabstop>
+  <tabstop>spinPlainSpeed</tabstop>
+  <tabstop>spinAscending</tabstop>
+  <tabstop>spinDescending</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

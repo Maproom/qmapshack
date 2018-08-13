@@ -249,6 +249,10 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>comboActivityType</tabstop>
+  <tabstop>toolApply</tabstop>
+ </tabstops>
  <resources>
   <include location="../../../resources.qrc"/>
  </resources>

@@ -20,7 +20,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CActivityTrk.h"
-#include "helpers/CWptIconDialog.h"
+#include "gis/WptIcons.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
 #include <QtWidgets>
@@ -193,14 +193,13 @@ void CMouseSelect::slotColorTrk() const
 
 void CMouseSelect::slotSymWpt() const
 {
-    QToolButton tb;
-    CWptIconDialog dlg(&tb);
-    if(dlg.exec() == QDialog::Rejected)
+    QString iconName = selectWptIcon(CMainWindow::self().getBestWidgetForParent());
+    if(iconName.isEmpty())
     {
         return;
     }
 
-    CGisWorkspace::self().changeWptSymByKey(itemKeys, tb.objectName());
+    CGisWorkspace::self().changeWptSymByKey(itemKeys, iconName);
     canvas->resetMouse();
 }
 

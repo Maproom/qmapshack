@@ -191,3 +191,53 @@ QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
 
     return icon;
 }
+
+static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
+{
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(s1, s2) < 0;
+}
+
+QMenu * getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
+{
+    QMenu * menu = new QMenu(title, parent);
+    menu->setIcon(QIcon("://icons/waypoints/32x32/PinBlue.png"));
+
+    const QMap<QString, icon_t>& wptIcons = getWptIcons();
+    QStringList keys = wptIcons.keys();
+
+    qSort(keys.begin(), keys.end(), keyLessThanAlpha);
+
+    for(const QString &key : keys)
+    {
+        const QString& icon = wptIcons[key].path;
+        QPixmap pixmap      = loadIcon(icon);
+
+        QAction * action = menu->addAction(pixmap, key);
+        action->setProperty("iconName", key);
+        if(obj != nullptr)
+        {
+            QAction::connect(action, SIGNAL(triggered(bool)), obj, slot);
+        }
+    }
+
+    return menu;
+}
+
+QString selectWptIcon(QWidget * parent)
+{
+    QString icon;
+
+    QMenu * menu = getWptIconMenu("", nullptr, "", parent);
+    QAction * action = menu->exec(QCursor::pos());
+
+    if(action != nullptr)
+    {
+        icon = action->property("iconName").toString();
+    }
+
+    return icon;
+}
+

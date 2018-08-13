@@ -172,21 +172,21 @@ void IGisItem::init()
 
 qint32 IGisItem::selectColor(QWidget * parent)
 {
-    QMenu * menu = getColorMenu("", nullptr, "", parent);
-    QAction * action = menu->exec(QCursor::pos());
+    qint32 colorIdx     = NOIDX;
+    QMenu * menu        = getColorMenu("", nullptr, "", parent);
+    QAction * action    = menu->exec(QCursor::pos());
 
-    if(action == nullptr)
+    if(action != nullptr)
     {
-        return NOIDX;
+        bool ok = false;
+        colorIdx = action->property("colorIdx").toInt(&ok);
+        if(!ok)
+        {
+            colorIdx = NOIDX;
+        }
     }
 
-    bool ok = false;
-    qint32 colorIdx = action->property("colorIdx").toInt(&ok);
-    if(!ok || (colorIdx == NOIDX))
-    {
-        return NOIDX;
-    }
-
+    delete menu;
     return colorIdx;
 }
 

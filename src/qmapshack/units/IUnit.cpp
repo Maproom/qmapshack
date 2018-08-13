@@ -446,6 +446,12 @@ IUnit::IUnit(const type_e &type, const QString& baseunit, const qreal basefactor
     m_self = this;
 }
 
+void IUnit::meter2base(qreal meter, QString& val, QString& unit) const
+{
+    unit = baseunit;
+    val.sprintf("%1.0f", meter * basefactor);
+}
+
 void IUnit::slope2string(qreal slope, QString &val, QString &unit)
 {
     switch(slopeMode)

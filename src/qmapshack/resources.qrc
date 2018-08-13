@@ -177,6 +177,7 @@
         <file>../icons/32x32/PointHide.png</file>
         <file>../icons/32x32/PointMove.png</file>
         <file>../icons/32x32/PointShow.png</file>
+        <file>../icons/32x32/Precision.png</file>
         <file>../icons/32x32/Print.png</file>
         <file>../icons/32x32/PrintSave.png</file>
         <file>../icons/32x32/ProfileToWindow.png</file>
@@ -423,6 +424,7 @@
         <file>../icons/48x48/PointHide.png</file>
         <file>../icons/48x48/PointMove.png</file>
         <file>../icons/48x48/PointShow.png</file>
+        <file>../icons/48x48/Precision.png</file>
         <file>../icons/48x48/Print.png</file>
         <file>../icons/48x48/PrintSave.png</file>
         <file>../icons/48x48/ProfileToWindow.png</file>

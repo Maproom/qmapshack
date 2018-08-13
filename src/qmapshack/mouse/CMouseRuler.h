@@ -50,6 +50,7 @@ private slots:
 private:
     void storeToHistory(const QPolygonF &line);
     void updateStatus(const QPolygonF &line);
+    void meter2whatever(qreal meter, QString& val, QString& unit);
 
     enum mode_e
     {

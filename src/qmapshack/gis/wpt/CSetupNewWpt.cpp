@@ -19,7 +19,6 @@
 #include "gis/wpt/CSetupNewWpt.h"
 #include "gis/WptIcons.h"
 #include "helpers/CPositionDialog.h"
-#include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -96,10 +95,14 @@ void CSetupNewWpt::slotEditName(const QString& str)
 
 void CSetupNewWpt::slotChangeIcon()
 {
-    CWptIconDialog dlg(toolIcon);
-    dlg.exec();
+    QString iconName = selectWptIcon(this);
+    if(!iconName.isEmpty())
+    {
+        QPointF focus;
+        toolIcon->setObjectName(iconName);
+        toolIcon->setIcon(getWptIconByName(iconName, focus));
+    }
 }
-
 
 void CSetupNewWpt::checkInput()
 {

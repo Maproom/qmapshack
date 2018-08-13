@@ -31,13 +31,10 @@ class CWptIconDialog : public QDialog, private Ui::IWptIconDialog
 {
     Q_OBJECT
 public:
-    CWptIconDialog(QToolButton * parent);
-    CWptIconDialog(QAction * parent);
     CWptIconDialog(CMainWindow * parent);
     virtual ~CWptIconDialog();
 
 private slots:
-    void slotItemClicked(QListWidgetItem * item);
     void slotSetupPath();
 
 private:

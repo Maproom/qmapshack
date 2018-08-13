@@ -26,59 +26,12 @@
 
 static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
 {
-    QRegExp re("[0-9]*");
-
-    QString _s1 = s1;
-    QString _s2 = s2;
-
-    _s1.remove(re);
-    _s2.remove(re);
-
-    if(_s1 == _s2)
-    {
-        QRegExp re(".*([0-9]*).*");
-
-        if(re.exactMatch(s1))
-        {
-            _s1 = re.cap(1);
-        }
-        else
-        {
-            _s1 = "0";
-        }
-
-        if(re.exactMatch(s2))
-        {
-            _s2 = re.cap(1);
-        }
-        else
-        {
-            _s2 = "0";
-        }
-
-        return _s1.toInt() < _s2.toInt();
-    }
-    return s1 < s2;
+    static QCollator collator;
+    // this will set collator to natural sorting mode (instead of lexical)
+    collator.setNumericMode(true);
+    return collator.compare(s1, s2) < 0;
 }
 
-
-CWptIconDialog::CWptIconDialog(QAction *parent)
-    : QDialog(CMainWindow::self().getBestWidgetForParent())
-    , action(parent)
-{
-    setupUi(this);
-    setupList(action);
-    setupSignals();
-}
-
-CWptIconDialog::CWptIconDialog(QToolButton *parent)
-    : QDialog(CMainWindow::self().getBestWidgetForParent())
-    , button(parent)
-{
-    setupUi(this);
-    setupList(button);
-    setupSignals();
-}
 
 CWptIconDialog::CWptIconDialog(CMainWindow * parent)
     : QDialog(parent)
@@ -90,8 +43,6 @@ CWptIconDialog::CWptIconDialog(CMainWindow * parent)
 
 void CWptIconDialog::setupSignals()
 {
-    connect(listWidget, &QListWidget::itemClicked,   this, &CWptIconDialog::slotItemClicked);
-    connect(listWidget, &QListWidget::itemActivated, this, &CWptIconDialog::slotItemClicked);
     connect(toolPath,   &QToolButton::clicked,       this, &CWptIconDialog::slotSetupPath);
 }
 
@@ -128,32 +79,14 @@ void CWptIconDialog::setupList(QObject * obj)
     SETTINGS;
     QString path = cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString();
     labelIconPath->setProperty("path", path);
-    labelIconPath->setText(path.size() > 25 ? "..." + path.right(22) : path);
+    labelIconPath->setText(path);
     labelIconPath->setToolTip(path);
-
-    adjustSize();
 }
 
 CWptIconDialog::~CWptIconDialog()
 {
 }
 
-void CWptIconDialog::slotItemClicked(QListWidgetItem * item)
-{
-    if(button)
-    {
-        button->setIcon(item->icon());
-        button->setObjectName(item->text());
-        button->setToolTip(item->text());
-    }
-    else if(action)
-    {
-        action->setIcon(item->icon());
-        action->setObjectName(item->text());
-        action->setToolTip(item->text());
-    }
-    accept();
-}
 
 void CWptIconDialog::slotSetupPath()
 {

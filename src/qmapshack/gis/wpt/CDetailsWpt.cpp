@@ -18,14 +18,13 @@
 
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
 #include "helpers/CPositionDialog.h"
-#include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
 #include "widgets/CTextEditWidget.h"
-
 
 #include <proj_api.h>
 #include <QtWidgets>
@@ -223,10 +222,10 @@ void CDetailsWpt::slotChangeIcon()
 {
     if(!wpt.isReadOnly())
     {
-        CWptIconDialog dlg(toolIcon);
-        if(dlg.exec() == QDialog::Accepted)
+        QString iconName = selectWptIcon(this);
+        if(!iconName.isEmpty())
         {
-            wpt.setIcon(toolIcon->objectName());
+            wpt.setIcon(iconName);
             setupGui();
         }
     }

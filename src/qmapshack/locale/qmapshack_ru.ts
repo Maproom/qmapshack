@@ -59,7 +59,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Aeronautic</source>
-        <translation type="unfinished"></translation>
+        <translation>Аэронавтика</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="60"/>
@@ -98,7 +98,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished">Добавить активность</translation>
+        <translation>Добавить активность</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
@@ -1052,22 +1052,22 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="113"/>
         <source>Remove...</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить...</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="113"/>
         <source>Remove all selected services?</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все выбранные сервисы?</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="124"/>
         <source>Restore default...</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить умолчание...</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="124"/>
         <source>Remove all services and restore default list?</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все сервисы и восстановить список по умолчанию?</translation>
     </message>
 </context>
 <context>
@@ -1960,17 +1960,17 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1079"/>
         <source>Waypoints</source>
-        <translation type="unfinished"></translation>
+        <translation>Маршрутные точки</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1082"/>
         <source>Wayp. &amp; Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Мвршр.точки и треки</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1084"/>
         <source>Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Треки</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="109"/>
@@ -2126,7 +2126,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Change Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить пиктограмма</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="635"/>
@@ -3736,7 +3736,7 @@ Unknown structure.</source>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="451"/>
         <source>Ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейка</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="453"/>
@@ -3780,52 +3780,52 @@ Unknown structure.</source>
         <location filename="../mouse/CMouseRuler.cpp" line="54"/>
         <location filename="../mouse/CMouseRuler.cpp" line="291"/>
         <source>Distance Ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Линейка для расстояния</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="55"/>
         <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. </source>
-        <translation type="unfinished"></translation>
+        <translation>Используйте левую кнопку мыши для добавления точек. Щелчок правой кнопкой мыши приостановит обновление линейки. Еще один щелчок левой кнопкой мыши будет добавлять точку. </translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="196"/>
         <source>track</source>
-        <translation type="unfinished">трек</translation>
+        <translation>трек</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="210"/>
         <source>route</source>
-        <translation type="unfinished">маршрут</translation>
+        <translation>маршрут</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="223"/>
         <source>area</source>
-        <translation type="unfinished">область</translation>
+        <translation>область</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="294"/>
         <source>Distance</source>
-        <translation type="unfinished">Расстояние</translation>
+        <translation>Расстояние</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="296"/>
         <source>Ascent</source>
-        <translation type="unfinished">Подъём</translation>
+        <translation>Подъём</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="298"/>
         <source>Descent</source>
-        <translation type="unfinished">Спуск</translation>
+        <translation>Спуск</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="300"/>
         <source>Course</source>
-        <translation type="unfinished">Курс</translation>
+        <translation>Курс</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="360"/>
         <source>Sum</source>
-        <translation type="unfinished"></translation>
+        <translation>Сумма</translation>
     </message>
 </context>
 <context>
@@ -6791,7 +6791,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1183"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1280"/>
         <source>Use user defined limits that only apply to this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать пользовательские пределы только для этого трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="642"/>
@@ -6799,7 +6799,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1244"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1341"/>
         <source>Use global user defined limits.</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать глобальные пользовательские пределы.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="676"/>
@@ -6822,7 +6822,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="834"/>
         <source> points</source>
-        <translation type="unfinished"></translation>
+        <translation> точек</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="881"/>
@@ -6882,12 +6882,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="493"/>
         <source>Set visibility of the arrows for this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>.Установить видимость стрелок направления для данного трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="522"/>
         <source>Set visibility of the arrows globally for all tracks that use the global settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Установить видимость стрелок направления глобально для всех треков, использующих глобальные настройки.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="613"/>
@@ -6904,12 +6904,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Change the line width for this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить ширину линии для данного трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="741"/>
         <source>Change the line width globally for all tracks that use the global settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить ширину линии глобально для всех треков, использующих глобальные настройки.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="817"/>
@@ -7759,7 +7759,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="65"/>
         <source>Add a new web service to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить новый сервис в список.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="68"/>
@@ -7769,7 +7769,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="78"/>
         <source>Remove all selected services from the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все выбранные сервисы из списка.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="81"/>
@@ -7779,12 +7779,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="88"/>
         <source>Remove all services and restore default list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить все сервисы и восстановить список по умолчанию.</translation>
     </message>
     <message>
         <location filename="../gis/search/IGeoSearchWebConfigDialog.ui" line="91"/>
         <source>Reset</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить</translation>
     </message>
 </context>
 <context>
@@ -7825,87 +7825,87 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisItem.cpp" line="153"/>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Черный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="154"/>
         <source>Dark Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-красный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="155"/>
         <source>Dark Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-зеленый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="156"/>
         <source>Dark Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-желтый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="157"/>
         <source>Dark Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-синий</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="158"/>
         <source>Dark Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-пурпурный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="159"/>
         <source>Dark Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-голубой</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="160"/>
         <source>Light Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлосерый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="161"/>
         <source>Dark Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно-серый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="162"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Красный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="163"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Зеленый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="164"/>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Желтый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="165"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Синий</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="166"/>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Пурпурный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="167"/>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Голубой</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="168"/>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Белый</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="169"/>
         <source>Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Прозрачный</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="363"/>
@@ -10352,72 +10352,72 @@ or
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="20"/>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="34"/>
         <source>Convert into a group of waypoints.</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать в группу маршрутных точек.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="48"/>
         <source>Convert into a track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать в трек.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="62"/>
         <source>Convert into a route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать в маршрут.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="76"/>
         <source>Convert into an area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Преобразовать в область.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="97"/>
         <source>Show table.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать таблицу.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="117"/>
         <source>Show course of each segment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать курс каждого сегмента.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="137"/>
         <source>Show ascent or descent of each segment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать подъем или спуск каждого сегмента.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="157"/>
         <source>Show angle between line segments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать угол между сегментами.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="174"/>
         <source>Show distances in high precision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать расстояния с высокой точностью.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="201"/>
         <source>Reset ruler.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить линейку.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="218"/>
         <source>Undo</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="235"/>
         <source>Redo</source>
-        <translation type="unfinished">Вернуть</translation>
+        <translation>Вернуть</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="37"/>
@@ -10431,7 +10431,7 @@ or
         <location filename="../mouse/IScrOptRuler.ui" line="221"/>
         <location filename="../mouse/IScrOptRuler.ui" line="238"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
 </context>
 <context>
@@ -10596,7 +10596,15 @@ Note: If you want to fix bad points in a real GPS recording
 this is the right tool. Simply select the section of bad points 
 (one is ok, too) and hide them.</source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать интервал точек. Вы можете использовать этот инструмент чтобы:
+
+* скрыть или показать точки трека,
+* скопировать выбранный интервал,
+* выбрать вид активности для выбранного интервала.
+
+Примечание: если вы хотите исправить плохие точки в реальной записи GPS
+это правильный инструмент. Просто выберите интервал плохих точек
+(возможно и лишь одну точку) и скройте их.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="128"/>
@@ -10607,7 +10615,12 @@ to plan a tour.
 Note: This is the wrong tool to fix bad points of a real GPS 
 recording. Use the range tool. </source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Изменить положение точек трека и использовать автоматическую маршрутизацию
+для создания новых точек трека. Используется для создания новых треков
+если спланировать тур.
+
+Примечание: это неправильный инструмент для исправления плохих точек реальной записи GPS. 
+Используйте для этого инструмент интервала.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="147"/>

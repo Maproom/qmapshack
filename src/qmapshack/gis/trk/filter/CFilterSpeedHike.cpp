@@ -25,26 +25,26 @@ CFilterSpeedHike::CFilterSpeedHike(QWidget *parent)
     : QWidget(parent), noOfFixTypes(4), noOfCustomTypes(3)
       // 4 fix and 3 custom hiking types has be defined as default
       // Based on carloscoi analysis
-      //    - Road:           5.5 / 600 / 850
-      //    - Mountaineer:    4.5 / 500 / 700
-      //    - Group:          3.6 / 400 / 560
-      //    - Rocks:          2.9 / 320 / 450
+      //  - Road or Track:               5.5 / 600 / 850
+      //  - Path:                        4.5 / 500 / 700
+      //  - Difficult Path:              3.6 / 400 / 560
+      //  - Off Path or Rocky Terrain:   2.9 / 320 / 450
       ,hikingTypeDefaults
       {
           {
-              tr("Road")            // Fix: name
+              tr("Road or Track")            // Fix: name
               , 5.5                 // Flat Speed in actual speedunit
               , 600                 // Ascending in fix m/h
               , 850                 // Descending in fix m/h
           },
           {
-              tr("Mountaineer"), 4.5, 500, 700,   // Fix
+              tr("Path"), 4.5, 500, 700,                       // Fix
           },
           {
-              tr("Group"), 3.6, 400, 560,         // Fix
+              tr("Difficult Path"), 3.6, 400, 560,             // Fix
           },
           {
-              tr("Rocks"), 2.9, 320, 450,         // Fix
+              tr("Off Path or Rocky Terrain"), 2.9, 320, 450,  // Fix
           },
           {
               tr("Custom 0"), 4.5, 500, 700       // Custom 0

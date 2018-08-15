@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,35 +16,26 @@
 
 **********************************************************************************************/
 
-#ifndef CFILTERSPEED_H
-#define CFILTERSPEED_H
+#ifndef CFILTERSPEEDCONST_H
+#define CFILTERSPEEDCONST_H
 
-#include "ui_IFilterSpeed.h"
-#include <QWidget>
+#include "ui_IFilterSpeedConst.h"
 
 class CGisItemTrk;
-class CFilterSpeedConst;
-class CFilterSpeedCycle;
-class CFilterSpeedHike;
+class QSettings;
 
-class CFilterSpeed : public QWidget, private Ui::IFilterSpeed
+class CFilterSpeedConst : public QWidget, private Ui::IFilterSpeedConst
 {
     Q_OBJECT
 public:
-    CFilterSpeed(CGisItemTrk& trk, QWidget * parent);
-    virtual ~CFilterSpeed();
+    CFilterSpeedConst(QWidget *parent);
+    virtual ~CFilterSpeedConst() = default;
 
-    void updateUi();
+    void loadSettings(QSettings &cfg);
+    void saveSettings(QSettings &cfg);
 
-private slots:
-    void slotApply();
-    void slotSetActivityType(int type);
-
-private:
-    CGisItemTrk& trk;
-    CFilterSpeedConst *filterConst;
-    CFilterSpeedCycle *filterCycle;
-    CFilterSpeedHike  *filterHike;
+    void apply(CGisItemTrk &trk);
 };
 
-#endif //CFILTERSPEED_H
+#endif //CFILTERSPEEDCONST_H
+

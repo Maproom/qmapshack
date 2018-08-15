@@ -59,7 +59,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="59"/>
         <source>Aeronautic</source>
-        <translation type="unfinished"></translation>
+        <translation>Aéreo</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="60"/>
@@ -441,7 +441,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../dem/CDemList.cpp" line="256"/>
         <source>Where do you want to store DEMs?</source>
-        <translation>Dónde quiere almacenar los DEM</translation>
+        <translation>¿Dónde quiere almacenar los DEM?</translation>
     </message>
 </context>
 <context>
@@ -454,7 +454,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../dem/CDemPathSetup.cpp" line="58"/>
         <source>Select DEM file path...</source>
-        <translation>Seleccione la ruta al archivo DEM...</translation>
+        <translation>Seleccionar la ruta al archivo DEM...</translation>
     </message>
 </context>
 <context>
@@ -524,7 +524,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="419"/>
         <source>&lt;h2&gt;Waypoints&lt;/h2&gt;</source>
-        <translation>Waypoints</translation>
+        <translation>&lt;h2&gt;Waypoints&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="426"/>
@@ -547,7 +547,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="445"/>
         <source>&lt;h2&gt;Tracks&lt;/h2&gt;</source>
-        <translation>Tracks</translation>
+        <translation>&lt;h2&gt;Tracks&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="597"/>
@@ -587,7 +587,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="710"/>
         <source>&lt;h2&gt;Areas&lt;/h2&gt;</source>
-        <translation>Áreas</translation>
+        <translation>&lt;h2&gt;Áreas&lt;/h2&gt;</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="127"/>
@@ -2135,7 +2135,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="174"/>
         <source>Change Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar Icono</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="761"/>
@@ -2155,7 +2155,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1082"/>
         <source>Wayp. &amp; Tracks</source>
-        <translation type="unfinished"></translation>
+        <translation>Wayp. y Tracks</translation>
     </message>
     <message>
         <location filename="../gis/CGisListWks.cpp" line="1084"/>
@@ -3731,7 +3731,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="451"/>
         <source>Ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Regla</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseNormal.cpp" line="453"/>
@@ -3775,12 +3775,12 @@ Estructura desconocida.</translation>
         <location filename="../mouse/CMouseRuler.cpp" line="54"/>
         <location filename="../mouse/CMouseRuler.cpp" line="291"/>
         <source>Distance Ruler</source>
-        <translation type="unfinished"></translation>
+        <translation>Medir Distancia</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="55"/>
         <source>Use the left mouse button to add points. A right click will pause updating the ruler. Another left click will continue to add points. </source>
-        <translation type="unfinished"></translation>
+        <translation>Con el botón izquierdo del ratón añades puntos, con el derecho detienes la actualización de la regla. Click izquierdo para continuar añadiendo puntos.</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="196"/>
@@ -3815,12 +3815,12 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="300"/>
         <source>Course</source>
-        <translation type="unfinished"></translation>
+        <translation>Rumbo</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="360"/>
         <source>Sum</source>
-        <translation type="unfinished"></translation>
+        <translation>Total</translation>
     </message>
 </context>
 <context>
@@ -4316,7 +4316,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="843"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
-        <translation>Comprendo el riesgo. No avisar de nuevo</translation>
+        <translation>Asumo el riesgo. No avisar de nuevo.</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/CRouterBRouter.cpp" line="863"/>
@@ -6837,7 +6837,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="281"/>
         <source>The track was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>El track se ha importado a QMapShack y se ha editado, no muestra los datos originales. Consulte el historial de cambios.</translation>
+        <translation>El track se ha importado a QMapShack y se ha editado, no muestra los datos originales. Consulta el historial de cambios.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="309"/>
@@ -6852,12 +6852,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="493"/>
         <source>Set visibility of the arrows for this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar/mostrar las flechas en este track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="522"/>
         <source>Set visibility of the arrows globally for all tracks that use the global settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar/mostrar las flechas en todos los tracks.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="587"/>
@@ -6865,7 +6865,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1183"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1280"/>
         <source>Use user defined limits that only apply to this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Límites para este track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="642"/>
@@ -6873,7 +6873,7 @@ I don&apos;t want to read the documentation!</source>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1244"/>
         <location filename="../gis/trk/IDetailsTrk.ui" line="1341"/>
         <source>Use global user defined limits.</source>
-        <translation type="unfinished"></translation>
+        <translation>Límites para todos los tracks.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="683"/>
@@ -6883,12 +6883,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="712"/>
         <source>Change the line width for this particular track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anchura de la línea de este track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="741"/>
         <source>Change the line width globally for all tracks that use the global settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Anchura de la línea de todos los track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="817"/>
@@ -6898,7 +6898,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="834"/>
         <source> points</source>
-        <translation type="unfinished"></translation>
+        <translation> puntos</translation>
     </message>
     <message>
         <source>points</source>
@@ -7802,87 +7802,87 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisItem.cpp" line="153"/>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Negro</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="154"/>
         <source>Dark Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Granate</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="155"/>
         <source>Dark Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde Oscuro</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="156"/>
         <source>Dark Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde Claro</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="157"/>
         <source>Dark Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul Oscuro</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="158"/>
         <source>Dark Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Violeta</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="159"/>
         <source>Dark Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul Turquesa</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="160"/>
         <source>Light Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris Claro</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="161"/>
         <source>Dark Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="162"/>
         <source>Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Rojo</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="163"/>
         <source>Green</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="164"/>
         <source>Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Amarillo</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="165"/>
         <source>Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="166"/>
         <source>Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Magenta</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="167"/>
         <source>Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Cian</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="168"/>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanco</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="169"/>
         <source>Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparente</translation>
     </message>
     <message>
         <location filename="../gis/IGisItem.cpp" line="363"/>
@@ -10330,57 +10330,57 @@ o
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="20"/>
         <source>Close</source>
-        <translation type="unfinished">Cerrar</translation>
+        <translation>Cerrar</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="34"/>
         <source>Convert into a group of waypoints.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir en waypoints.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="48"/>
         <source>Convert into a track.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir en track.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="62"/>
         <source>Convert into a route.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir en ruta.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="76"/>
         <source>Convert into an area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Convertir en área.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="97"/>
         <source>Show table.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ver tabla.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="117"/>
         <source>Show course of each segment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver rumbo de cada segmento.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="137"/>
         <source>Show ascent or descent of each segment.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver ascenso o descenso en cada segmento.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="157"/>
         <source>Show angle between line segments.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver ángulo formado entre los segmentos.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="174"/>
         <source>Show distances in high precision.</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar distancias en alta precisión.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="201"/>
         <source>Reset ruler.</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar regla.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="218"/>

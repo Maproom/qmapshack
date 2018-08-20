@@ -19,9 +19,9 @@
 #ifndef WPTICONS_H
 #define WPTICONS_H
 
+#include <QMenu>
 #include <QPixmap>
 #include <QString>
-#include <QMenu>
 
 struct icon_t
 {

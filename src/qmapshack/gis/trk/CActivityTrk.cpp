@@ -28,7 +28,7 @@ QVector<CActivityTrk::desc_t> CActivityTrk::actDescriptor;
 
 #define DESCRIPTOR_ENTRY(name, icon, enumAct, colorIdx) \
     { \
-         CTrackData::trkpt_t::enumAct \
+        CTrackData::trkpt_t::enumAct \
         , name \
         , "://icons/48x48/" icon \
         , "://icons/16x16/" icon \

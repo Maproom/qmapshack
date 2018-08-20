@@ -680,7 +680,7 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CDetailsWpt</name>
     <message>
-        <location filename="../gis/wpt/CDetailsWpt.cpp" line="167"/>
+        <location filename="../gis/wpt/CDetailsWpt.cpp" line="166"/>
         <source>Enter new proximity range.</source>
         <translation>Geben Sie einen neuen Abstandsalarm ein.</translation>
     </message>
@@ -798,44 +798,113 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="44"/>
+        <source>City</source>
+        <translation type="vanished">Stadtrad</translation>
+    </message>
+    <message>
+        <source>Trekking</source>
+        <translation type="vanished">Trekkingrad</translation>
+    </message>
+    <message>
+        <source>Sportive</source>
+        <translation type="vanished">Sportrad</translation>
+    </message>
+    <message>
+        <source>Mountain</source>
+        <translation type="vanished">Mountain Bike</translation>
+    </message>
+    <message>
+        <source>Custom 0</source>
+        <translation type="vanished">Benutzer 0</translation>
+    </message>
+    <message>
+        <source>Custom 1</source>
+        <translation type="vanished">Benutzer 1</translation>
+    </message>
+    <message>
+        <source>Custom 2</source>
+        <translation type="vanished">Benutzer 2</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
+        <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
+        <translation>Der Track hat entweder keine oder ungültige Höhendaten. Bitte korrigieren oder nur eine konstante Geschwindigkeit benutzen!</translation>
+    </message>
+</context>
+<context>
+    <name>CFilterSpeedCycle</name>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="30"/>
         <source>City</source>
         <translation>Stadtrad</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="52"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="38"/>
         <source>Trekking</source>
         <translation>Trekkingrad</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="55"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="41"/>
         <source>Sportive</source>
         <translation>Sportrad</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="58"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="44"/>
         <source>Mountain</source>
         <translation>Mountain Bike</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="61"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="47"/>
         <source>Custom 0</source>
         <translation>Benutzer 0</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="64"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="50"/>
         <source>Custom 1</source>
         <translation>Benutzer 1</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="67"/>
+        <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="53"/>
         <source>Custom 2</source>
         <translation>Benutzer 2</translation>
     </message>
+</context>
+<context>
+    <name>CFilterSpeedHike</name>
     <message>
-        <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="181"/>
-        <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation>Der Track hat entweder keine oder ungültige Höhendaten. Bitte korrigieren oder nur eine konstante Geschwindigkeit benutzen!</translation>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="35"/>
+        <source>Road or Track</source>
+        <translation>Straße oder Weg</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="41"/>
+        <source>Path</source>
+        <translation>Pfad</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="44"/>
+        <source>Difficult Path</source>
+        <translation>Schwieriger Pfad</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="47"/>
+        <source>Off Path or Rocky Terrain</source>
+        <translation>Abseits oder felsiges Terain</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="50"/>
+        <source>Custom 0</source>
+        <translation>Benutzer 0</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="53"/>
+        <source>Custom 1</source>
+        <translation>Benutzer 1</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="56"/>
+        <source>Custom 2</source>
+        <translation>Benutzer 2</translation>
     </message>
 </context>
 <context>
@@ -936,77 +1005,77 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
 <context>
     <name>CGeoSearch</name>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="60"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="59"/>
         <source>Setup Search</source>
         <translation>Suche einrichten</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="105"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
         <source>Select Service</source>
         <translation>Dienst auswählen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="109"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="114"/>
         <source>OSM Nominatim</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="115"/>
         <source>Geonames Places</source>
         <translation>Geonames Orte</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="111"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="116"/>
         <source>Geonames Address</source>
         <translation>Geonames Adressen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="112"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="117"/>
         <source>Google</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="115"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="120"/>
         <source>Accumulative Results</source>
         <translation>Ergebnisse sammeln</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="120"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="125"/>
         <source>Reset Results</source>
         <translation>Ergebnisse löschen</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="127"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="132"/>
         <source>Configure Services</source>
         <translation>Dienste konfigurieren</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="128"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="133"/>
         <source>configure providers of geocoding search services</source>
         <translation>Die Anbieter der Suchdienste konfigurieren.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="176"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="181"/>
         <source>no service configured - please click setup-icon in search-field</source>
         <translation>Kein Dienst konfiguriert - Bitte klicken Sie auf das Symbol für die Einstellungen im Suchfeld.</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="266"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="271"/>
         <source>unexpected service-identifier %1</source>
         <translation>unbekannter Dienst %1</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="373"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="425"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="505"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="655"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="378"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="430"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="510"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="660"/>
         <source>Unknown response</source>
         <translation>Unbekannte Antwort</translation>
     </message>
     <message>
-        <location filename="../gis/search/CGeoSearch.cpp" line="381"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="433"/>
-        <location filename="../gis/search/CGeoSearch.cpp" line="513"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="386"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="438"/>
+        <location filename="../gis/search/CGeoSearch.cpp" line="518"/>
         <source>Error: </source>
         <translation>Fehler:</translation>
     </message>
@@ -1620,32 +1689,41 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Künstliche Zeitstempel mit einem Abstand von %1 Sek. gesetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="397"/>
-        <source>Changed average moving speed depending on slope to %1%2.</source>
-        <translation>Die Durchschnittsgeschwindigkeit abhängig von der Steigung auf %1%2 gesetzt.</translation>
+        <location filename="../gis/trk/filter/filter.cpp" line="417"/>
+        <source>Changed average moving cycling speed with profile &apos;%3&apos; to %1%2.</source>
+        <translation>Durchschnittliche Fahrradgeschwindigkeit mit dem Profil &apos;%3&apos; auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="422"/>
+        <source>Changed average moving speed depending on slope to %1%2.</source>
+        <translation type="vanished">Die Durchschnittsgeschwindigkeit abhängig von der Steigung auf %1%2 gesetzt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="355"/>
         <source>Changed speed to %1%2.</source>
         <translation>Geschwindigkeit auf %1%2 geändert.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="448"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="485"/>
+        <source>Changed average moving hiking speed with profile &apos;%3&apos; to %1%2.</source>
+        <translation>Durchschnittliche Wandergeschwindigkeit mit dem Profil &apos;%3&apos; auf %1%2 geändert.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/filter.cpp" line="511"/>
         <source>%1 (Segment %2)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="466"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="529"/>
         <source>Removed extension %1 from all Track Points</source>
         <translation>Erweiterung %1 wurde von allen Trackpunkten entfernt</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="477"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="540"/>
         <source>Converted subpoints from routing to track points</source>
         <translation>Punkte vom autom. Routing in Trackpunkte umgewandelt </translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/filter.cpp" line="521"/>
+        <location filename="../gis/trk/filter/filter.cpp" line="584"/>
         <source>Start Point moved to: </source>
         <translation>Startpunkt verschoben zu: </translation>
     </message>
@@ -2041,19 +2119,19 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="vanished">Trackaktivität festlegen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="610"/>
+        <location filename="../gis/CGisListWks.cpp" line="609"/>
         <source>Drop items...</source>
         <translation>Elemente verwerfen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="635"/>
-        <location filename="../gis/CGisListWks.cpp" line="1944"/>
-        <location filename="../gis/CGisListWks.cpp" line="1982"/>
+        <location filename="../gis/CGisListWks.cpp" line="634"/>
+        <location filename="../gis/CGisListWks.cpp" line="1943"/>
+        <location filename="../gis/CGisListWks.cpp" line="1981"/>
         <source>&lt;b&gt;Update devices&lt;/b&gt;&lt;p&gt;Update %1&lt;br/&gt;Please wait...&lt;/p&gt;</source>
         <translation>&lt;b&gt;Aktualisieren der Geräte&lt;/b&gt;&lt;p&gt;Aktualisiere %1&lt;br/&gt;Bitte warten...&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1079"/>
+        <location filename="../gis/CGisListWks.cpp" line="1078"/>
         <source>Waypoints</source>
         <translation>Wegpunkte</translation>
     </message>
@@ -2068,12 +2146,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Tracks</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1391"/>
+        <location filename="../gis/CGisListWks.cpp" line="1390"/>
         <source>Delete project...</source>
         <translation>Projekt löschen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1391"/>
+        <location filename="../gis/CGisListWks.cpp" line="1390"/>
         <source>Do you really want to delete %1?</source>
         <translation>Sind Sie sicher, dass sie %1 löschen wollen?</translation>
     </message>
@@ -2144,23 +2222,23 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation>Mit der Datenbank synchronisieren</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="174"/>
+        <location filename="../gis/CGisListWks.cpp" line="1080"/>
         <source>Change Icon</source>
         <translation>Symbol ändern</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1005"/>
+        <location filename="../gis/CGisListWks.cpp" line="1004"/>
         <location filename="../gis/CGisListWks.cpp" line="1088"/>
         <source>Set Track Color</source>
         <translation>Trackfarbe einstellen</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="761"/>
+        <location filename="../gis/CGisListWks.cpp" line="760"/>
         <source>Saving workspace. Please wait.</source>
         <translation>Arbeitsplatz wird gespeichert. Bitte warten.</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="808"/>
+        <location filename="../gis/CGisListWks.cpp" line="807"/>
         <source>Loading workspace. Please wait.</source>
         <translation>Arbeitsplatz laden. Bitte warten.</translation>
     </message>
@@ -2197,12 +2275,12 @@ Um den Konflikt zu lösen, erstellen und speichern Sie einen Klon, erzwingen Ihr
         <translation type="vanished">GIS Elemente</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1365"/>
+        <location filename="../gis/CGisListWks.cpp" line="1364"/>
         <source>Close all projects...</source>
         <translation>Alle Projekte schließen...</translation>
     </message>
     <message>
-        <location filename="../gis/CGisListWks.cpp" line="1365"/>
+        <location filename="../gis/CGisListWks.cpp" line="1364"/>
         <source>This will remove all projects from the workspace.</source>
         <translation>Dies wird alle Projekte aus dem Arbeitsplatz entfernen.</translation>
     </message>
@@ -4026,12 +4104,12 @@ ist keine gültige Koordinatensystemdefinition:
 <context>
     <name>CProjWpt</name>
     <message>
-        <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
+        <location filename="../gis/wpt/CProjWpt.cpp" line="67"/>
         <source>Edit name...</source>
         <translation>Name bearbeiten...</translation>
     </message>
     <message>
-        <location filename="../gis/wpt/CProjWpt.cpp" line="62"/>
+        <location filename="../gis/wpt/CProjWpt.cpp" line="67"/>
         <source>Enter new waypoint name.</source>
         <translation>Geben Sie einen neuen Namen für den Wegpunkt ein.</translation>
     </message>
@@ -5775,7 +5853,7 @@ Zeile %2, Spalte %3:
 <context>
     <name>CWptIconDialog</name>
     <message>
-        <location filename="../helpers/CWptIconDialog.cpp" line="161"/>
+        <location filename="../helpers/CWptIconDialog.cpp" line="94"/>
         <source>Path to user icons...</source>
         <translation>Pfad zu Benutzersymbolen...</translation>
     </message>
@@ -7523,109 +7601,205 @@ Keine Lust die Anleitung zu lesen!</translation>
 <context>
     <name>IFilterSpeed</name>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="23"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="29"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="52"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="64"/>
         <source>&lt;b&gt;Change Speed&lt;/b&gt;</source>
         <translation>&lt;b&gt;Geschwindigkeit ändern&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="75"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="84"/>
         <source>labelWarning</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="163"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
+        <source>Hiking</source>
+        <translation>Wandern</translation>
+    </message>
+    <message>
         <source>Speed</source>
-        <translation>Geschwindigkeit</translation>
+        <translation type="vanished">Geschwindigkeit</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="247"/>
         <source> Type</source>
-        <translation>Typ</translation>
+        <translation type="vanished">Typ</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="320"/>
         <source>Max Speed</source>
-        <translation>Max. Geschw.</translation>
+        <translation type="vanished">Max. Geschw.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="330"/>
         <source>Plain Level:</source>
-        <translation>Ebene:</translation>
+        <translation type="vanished">Ebene:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="362"/>
         <source>at positive Slope</source>
-        <translation>bei positiver Steigung</translation>
+        <translation type="vanished">bei positiver Steigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="372"/>
         <source>Min Speed</source>
-        <translation>Min. Geschw.</translation>
+        <translation type="vanished">Min. Geschw.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="382"/>
         <source>Uphill:</source>
-        <translation>Bergauf:</translation>
+        <translation type="vanished">Bergauf:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="392"/>
         <source>Downhill:</source>
-        <translation>Bergab:</translation>
+        <translation type="vanished">Bergab:</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="402"/>
         <source>Speed at zero Slope</source>
-        <translation>Geschw. ohne Steigung</translation>
+        <translation type="vanished">Geschw. ohne Steigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="450"/>
         <source>at negative Slope</source>
-        <translation>bei negativer Steigung</translation>
+        <translation type="vanished">bei negativer Steigung</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="501"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation>Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
+        <translation type="vanished">Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="504"/>
         <source>Set min/max slopes from Track</source>
-        <translation>Min./Max. Steigung aus dem Track</translation>
+        <translation type="vanished">Min./Max. Steigung aus dem Track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="551"/>
-        <source>not yet implemented</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="572"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="181"/>
         <source>Constant</source>
         <translation>Konstant</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="577"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="186"/>
         <source>Cycling</source>
         <translation>Fahrrad</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="170"/>
         <source> km/h</source>
-        <translation> km/h</translation>
+        <translation type="vanished"> km/h</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="102"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
         <source>Apply filter now.</source>
         <translation>Den Filter jetzt anwenden.</translation>
     </message>
     <message>
-        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="105"/>
+        <location filename="../gis/trk/filter/IFilterSpeed.ui" line="117"/>
         <source>...</source>
         <translation></translation>
+    </message>
+</context>
+<context>
+    <name>IFilterSpeedConst</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="14"/>
+        <source>Form</source>
+        <translation>Diese Strecke vermeiden</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
+        <source>Speed</source>
+        <translation>Geschwindigkeit</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="42"/>
+        <source> km/h</source>
+        <translation> km/h</translation>
+    </message>
+</context>
+<context>
+    <name>IFilterSpeedCycle</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="26"/>
+        <source>Form</source>
+        <translation>Diese Strecke vermeiden</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="59"/>
+        <source> Type</source>
+        <translation> Typ</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
+        <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
+        <translation>Benutzerdefinierte positive und negative Steigungen werden durch die minimale und maximale Steigung im Track ersetzt.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="125"/>
+        <source>Set min/max slopes from Track</source>
+        <translation>Min./Max. Steigung aus dem Track</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="148"/>
+        <source>Max Speed</source>
+        <translation>Max. Geschw.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="158"/>
+        <source>Min Speed</source>
+        <translation>Min. Geschw.</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="187"/>
+        <source>Plain Level:</source>
+        <translation>Ebene:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="197"/>
+        <source>Uphill:</source>
+        <translation>Bergauf:</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
+        <source>at negative Slope</source>
+        <translation>bei negativer Steigung</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
+        <source>at positive Slope</source>
+        <translation>bei positiver Steigung</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
+        <source>Speed at zero Slope</source>
+        <translation>Geschw. ohne Steigung</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="259"/>
+        <source>Downhill:</source>
+        <translation>Bergab:</translation>
+    </message>
+</context>
+<context>
+    <name>IFilterSpeedHike</name>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="14"/>
+        <source>Form</source>
+        <translation>Diese Strecke vermeiden</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="50"/>
+        <source> Type</source>
+        <translation> Typ</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
+        <source>Descending</source>
+        <translation>Absteigend</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="139"/>
+        <source>Speed at zero Slope</source>
+        <translation>Geschw. ohne Steigung</translation>
+    </message>
+    <message>
+        <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="178"/>
+        <source>Ascending</source>
+        <translation>Aufsteigend</translation>
     </message>
 </context>
 <context>

@@ -59,7 +59,7 @@ private slots:
     void slotSearchWeb(int serviceId, const QPointF pt);
 
 private:
-    CGeoSearchWeb(QObject *parent);    
+    CGeoSearchWeb(QObject *parent);
     friend class CMainWindow;
 
     static CGeoSearchWeb * pSelf;

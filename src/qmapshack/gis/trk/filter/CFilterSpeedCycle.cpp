@@ -24,35 +24,35 @@
 CFilterSpeedCycle::CFilterSpeedCycle(QWidget *parent, CGisItemTrk &trk)
     : QWidget(parent), trk(trk), noOfFixTypes(4), noOfCustomTypes(3)
     // 4 fix and 3 custom cycling types has be defined as default
-      ,cyclingTypeDefaults
-      {
-          {
-              tr("City")          // Fix: name
-              , 15                // spinPlainSpeed
-              , 5                 // spinMinSpeed
-              , 5                 // spinSlopeAtMinSpeed
-              , 35                // spinMaxSpeed
-              , -5                // spinSlopeAtMaxSpeed
-          },
-          {
-              tr("Trekking"), 20, 5, 8, 40, -5   // Fix
-          },
-          {
-              tr("Sportive"), 27, 7, 10, 60, -8  // Fix
-          },
-          {
-              tr("Mountain"), 15, 4, 15, 40, -15 // Fix
-          },
-          {
-              tr("Custom 0"), 20, 5, 8, 40, -5 // Custom 0
-          },
-          {
-              tr("Custom 1"), 20, 5, 8, 40, -5 // Custom 1
-          },
-          {
-              tr("Custom 2"), 20, 5, 8, 40, -5 // Custom 2
-          }
-      }
+    ,cyclingTypeDefaults
+    {
+    {
+        tr("City")                // Fix: name
+        , 15                      // spinPlainSpeed
+        , 5                       // spinMinSpeed
+        , 5                       // spinSlopeAtMinSpeed
+        , 35                      // spinMaxSpeed
+        , -5                      // spinSlopeAtMaxSpeed
+    },
+    {
+        tr("Trekking"), 20, 5, 8, 40, -5         // Fix
+    },
+    {
+        tr("Sportive"), 27, 7, 10, 60, -8        // Fix
+    },
+    {
+        tr("Mountain"), 15, 4, 15, 40, -15       // Fix
+    },
+    {
+        tr("Custom 0"), 20, 5, 8, 40, -5       // Custom 0
+    },
+    {
+        tr("Custom 1"), 20, 5, 8, 40, -5       // Custom 1
+    },
+    {
+        tr("Custom 2"), 20, 5, 8, 40, -5       // Custom 2
+    }
+    }
 {
     setupUi(this);
 

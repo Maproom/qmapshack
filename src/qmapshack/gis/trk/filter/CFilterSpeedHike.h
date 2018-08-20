@@ -35,6 +35,15 @@ public:
         qreal plainSpeed;
         qreal ascending;
         qreal descending;
+
+        inline bool isValid() const
+        {
+            if (!plainSpeed || !ascending || !descending)
+            {
+                return false;
+            }
+            return true;
+        }
     };
 
     CFilterSpeedHike(QWidget * parent);

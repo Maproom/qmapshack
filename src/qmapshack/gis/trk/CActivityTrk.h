@@ -99,7 +99,7 @@ public:
     static QMenu * getMenu(const QList<IGisItem::key_t>& keys, QWidget *parent, bool execute = false);
     /**
        @brief Convenience wrapper to getMenu(const QList<IGisItem::key_t>& keys,...)
-    */
+     */
     static QMenu * getMenu(const IGisItem::key_t &key, QWidget *parent, bool execute = false);
     /**
        @brief Convert array of summaries to HTML table
@@ -111,7 +111,7 @@ public:
     /**
        @brief Get constant reference to activity descriptor table
        @return The constant reference to the descriptor table.
-    */
+     */
     static const QVector<desc_t>& getActivityDescriptors()
     {
         return actDescriptor;
@@ -122,7 +122,7 @@ public:
        @param act   The activity to search for
 
        @return A constant reference to the descriptor. If the activity is not found a reference to "No Activity".
-    */
+     */
     static const desc_t& getDescriptor(trkact_t act);
 
     /**

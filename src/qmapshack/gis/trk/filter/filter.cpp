@@ -385,10 +385,6 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
 
         // calculation based on slope2 (Percent)
         qreal slope = pt.slope2;
-        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
-        {
-            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
-        }
 
         if(slope < slopeAtMaxSpeed)
         {
@@ -423,7 +419,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingTy
 
 void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
 {
-    if (!hikingType.plainSpeed || !hikingType.ascending || !hikingType.descending)
+    if (!hikingType.isValid())
     {
         return;
     }
@@ -441,7 +437,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     qreal B5 = hikingType.ascending;
     qreal B6 = hikingType.descending;
 
-//    qDebug() << "KKA: plainSpeed m/s=" << plainSpeed << "plainSpeed km/h=" << plainSpeed *3.6 << "ascending=" << ascending << "descending=" << descending;
+//    qDebug() << "KKA: plainSpeed m/s=" << B4 / 3.6 << "plainSpeed km/h=" << B4 << "ascending=" << B5 << "descending=" << B6;
 //    qint32 i = 0; // Debug only
 
     for(CTrackData::trkpt_t& pt : trk)
@@ -451,35 +447,31 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
             continue;
         }
 
-        // calculation based on slope2 (Percent)
-        qreal slope = pt.slope2;
-        if(IUnit::getSlopeMode() == IUnit::eSlopeDegrees)
-        {
-            slope = IUnit::slopeConvert(IUnit::eSlopeDegrees, pt.slope1);
-        }
+        // calculation based on slope2 in percent transformed to tangens
+        qreal A9 = pt.slope2 / 100;
 
-        QVector<qreal> maxTerms(7); // to store carloscoi terms
+        // The carloscoi curve formula is based on 7 terms.
+        // For the given four input vaulues: slope, plainSpeed, ascending and descending
+        // the max value of these 7 terms will be used for the speed at the trkPnt
+        QVector<qreal> formulaTerms(7);
+        formulaTerms[0] = 60 / B4;
+        formulaTerms[1] = A9 * 60000 / B5;
+        formulaTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
+        formulaTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) -0.2) + (0.2 * 60000 / B5);
+        formulaTerms[4] = -A9 * 60000 / B6;
+        formulaTerms[5] = (A9 + 0.05) * ((60 / B4 + 0.5 * (0.25 * 60000 / B6 - 60 / B4)) - (60 / B4)) / (-0.25 + 0.05) + (60 / B4);
+        formulaTerms[6] = (A9 + 0.25) * ((60 / B4) - (0.25 * 60000 / B6)) / ((-0.05 - 0.5 * (B6 / (B4 * 1000) - 0.05)) + 0.25) + (0.25 * 60000 / B6);
 
-        qreal A9 = slope / 100;      // Transform slope value from percent to tangens
+        std::stable_sort(formulaTerms.begin(), formulaTerms.end(), std::greater<qreal>()); // Sort for max term, formulaTerms[0] is max in min/km
 
-        maxTerms[0] = 60 / B4;
-        maxTerms[1] = A9 * 60000 / B5;
-        maxTerms[2] = (A9-0) * ((60 / B4 + 0.5 * (0.2 * 60000 / B5 - 60 / B4)) - (60 / B4)) / (0.2 - 0) + (60 / B4);
-        maxTerms[3] = (A9 - 0.2) * ((60 / B4) - (0.2 * 60000 / B5)) / (((B5 / (B4 * 1000) - 0) * 0.5) -0.2) + (0.2 * 60000 / B5);
-        maxTerms[4] = -A9 * 60000 / B6;
-        maxTerms[5] = (A9 + 0.05) * ((60 / B4 + 0.5 * (0.25 * 60000 / B6 - 60 / B4)) - (60 / B4)) / (-0.25 + 0.05) + (60 / B4);
-        maxTerms[6] = (A9 + 0.25) * ((60 / B4) - (0.25 * 60000 / B6)) / ((-0.05 - 0.5 * (B6 / (B4 * 1000) - 0.05)) + 0.25) + (0.25 * 60000 / B6);
-
-        std::stable_sort(maxTerms.begin(), maxTerms.end(), std::greater<qreal>()); // Sort for max term, maxTerms[0] is max in min/km
-
-        if (!maxTerms[0]) // To avoid devide by zero
+        if (!formulaTerms[0]) // To avoid devide by zero
         {
             continue;
         }
-        qreal speed = 1 / maxTerms[0] / 60 * 1000; // Transform from min/km to m/s
+        qreal speed = 1 / formulaTerms[0] / 60 * 1000; // Transform from min/km to m/s
 //        qDebug() << "KKA: Pnt=" << i++
-//                 << "Slope tangens=" << slope/100
-//                 << "Max min/km=" << maxTerms[0]
+//                 << "Slope tangens=" << A9
+//                 << "Max min/km=" << formulaTerms[0]
 //                 << "Speed m/s=" << speed
 //                 << "Speed km/h=" << speed * 3.6;
 
@@ -490,7 +482,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving hiking speed depending on carloscoi curves to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed average moving hiking speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const

@@ -106,7 +106,7 @@ void IDrawObject::drawTileLQ(const QImage& img, QPolygonF& l, QPainter& p, IDraw
 
 
     // switch to HQ if the gaps get visible
-    if(context.getZoomFactor().x() > 70)
+    if((context.getZoomFactor().x() > 70) && (pjsrc != nullptr))
     {
         if((qAbs(dy1) > 2) || (qAbs(dx2) > 2))
         {

@@ -482,7 +482,7 @@ void CGisItemTrk::filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType)
     deriveSecondaryData();
     QString val, unit;
     IUnit::self().meter2speed(totalDistance / totalElapsedSecondsMoving, val, unit);
-    changed(tr("Changed average moving hiking speed depending on slope to %1%2.").arg(val).arg(unit), "://icons/48x48/Time.png");
+    changed(tr("Changed average moving hiking speed with profile '%3' to %1%2.").arg(val).arg(unit).arg(hikingType.name), "://icons/48x48/Time.png");
 }
 
 void CGisItemTrk::filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const

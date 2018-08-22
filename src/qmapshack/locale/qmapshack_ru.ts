@@ -835,37 +835,37 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="30"/>
         <source>City</source>
-        <translation type="unfinished">городской</translation>
+        <translation>городской</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="38"/>
         <source>Trekking</source>
-        <translation type="unfinished">треккинг</translation>
+        <translation>треккинг</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="41"/>
         <source>Sportive</source>
-        <translation type="unfinished">спортивный</translation>
+        <translation>спортивный</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="44"/>
         <source>Mountain</source>
-        <translation type="unfinished">горный</translation>
+        <translation>горный</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="47"/>
         <source>Custom 0</source>
-        <translation type="unfinished">пользовательский 0</translation>
+        <translation>пользовательский 0</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="50"/>
         <source>Custom 1</source>
-        <translation type="unfinished">пользовательский 1</translation>
+        <translation>пользовательский 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="53"/>
         <source>Custom 2</source>
-        <translation type="unfinished">пользовательский 2</translation>
+        <translation>пользовательский 2</translation>
     </message>
 </context>
 <context>
@@ -873,37 +873,37 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="35"/>
         <source>Road or Track</source>
-        <translation type="unfinished"></translation>
+        <translation>дорога или тропа </translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="41"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>тропинка</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="44"/>
         <source>Difficult Path</source>
-        <translation type="unfinished"></translation>
+        <translation>сложная тропинка</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="47"/>
         <source>Off Path or Rocky Terrain</source>
-        <translation type="unfinished"></translation>
+        <translation>внедорожная или скалистая местность</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="50"/>
         <source>Custom 0</source>
-        <translation type="unfinished">пользовательский 0</translation>
+        <translation>пользовательский 0</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="53"/>
         <source>Custom 1</source>
-        <translation type="unfinished">пользовательский 1</translation>
+        <translation>пользовательский 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="56"/>
         <source>Custom 2</source>
-        <translation type="unfinished">пользовательский 2</translation>
+        <translation>пользовательский 2</translation>
     </message>
 </context>
 <context>
@@ -1682,7 +1682,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="417"/>
         <source>Changed average moving cycling speed with profile &apos;%3&apos; to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменена средняя скорость движения на велосипеде с профилем &apos;%3&apos; к %1%2.</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -1696,7 +1696,7 @@ To solve this conflict you can create and save a clone, force your version or dr
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="485"/>
         <source>Changed average moving hiking speed with profile &apos;%3&apos; to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменена средняя скорость похода с профилем &apos;%3&apos; к %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="511"/>
@@ -5727,7 +5727,7 @@ line %2, column %3:
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="41"/>
         <source>Hiking Tour Summary (built-in)</source>
-        <translation>Сводка пеших экскурсий (встроенная)</translation>
+        <translation>Сводка пеших походов (встроенная)</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="159"/>
@@ -7592,7 +7592,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>пешего похода</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -7676,17 +7676,17 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
         <source>Speed</source>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="42"/>
         <source> km/h</source>
-        <translation type="unfinished"> км/ч</translation>
+        <translation> км/ч</translation>
     </message>
 </context>
 <context>
@@ -7694,62 +7694,62 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="26"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="59"/>
         <source> Type</source>
-        <translation type="unfinished"> Тип</translation>
+        <translation> Тип</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="unfinished">Заданные пользователем положительные и отрицательные значения склона будут заменены минимальными и максимальными значениями склона с трека.</translation>
+        <translation>Заданные пользователем положительные и отрицательные значения склона будут заменены минимальными и максимальными значениями склона с трека.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="125"/>
         <source>Set min/max slopes from Track</source>
-        <translation type="unfinished">Установить мин./макс. склоны с трека</translation>
+        <translation>Установить мин./макс. склоны с трека</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="148"/>
         <source>Max Speed</source>
-        <translation type="unfinished">Макс. скорость</translation>
+        <translation>Макс. скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="158"/>
         <source>Min Speed</source>
-        <translation type="unfinished">Мин. скорость</translation>
+        <translation>Мин. скорость</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="187"/>
         <source>Plain Level:</source>
-        <translation type="unfinished">Плоский:</translation>
+        <translation>Плоский:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="197"/>
         <source>Uphill:</source>
-        <translation type="unfinished">Подъем:</translation>
+        <translation>Подъем:</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
         <source>at negative Slope</source>
-        <translation type="unfinished">на отрицательном склоне</translation>
+        <translation>на отрицательном склоне</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
         <source>at positive Slope</source>
-        <translation type="unfinished">на положительном склоне</translation>
+        <translation>на положительном склоне</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished">Скорость при нулевом склоне</translation>
+        <translation>Скорость при нулевом склоне</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="259"/>
         <source>Downhill:</source>
-        <translation type="unfinished">Спуск:</translation>
+        <translation>Спуск:</translation>
     </message>
 </context>
 <context>
@@ -7757,27 +7757,27 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="50"/>
         <source> Type</source>
-        <translation type="unfinished"> Тип</translation>
+        <translation> Тип</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Спуск</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="139"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished">Скорость при нулевом склоне</translation>
+        <translation>Скорость при нулевом склоне</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="178"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Подъём</translation>
     </message>
 </context>
 <context>

@@ -98,7 +98,7 @@
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="98"/>
         <source>Set Track Activity</source>
-        <translation type="unfinished">Establecer actividad del track</translation>
+        <translation>Establecer actividad del track</translation>
     </message>
     <message>
         <location filename="../gis/trk/CActivityTrk.cpp" line="263"/>
@@ -280,7 +280,7 @@
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="59"/>
         <source>MySQL Database</source>
-        <translation>Mi base de datos SQL</translation>
+        <translation>Base de Datos MySQL</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderMysql.cpp" line="62"/>
@@ -309,7 +309,7 @@
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="61"/>
         <source>File: </source>
-        <translation>Archivo:</translation>
+        <translation>Archivo: </translation>
     </message>
     <message>
         <location filename="../gis/db/CDBFolderSqlite.cpp" line="65"/>
@@ -389,7 +389,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="590"/>
         <source>Missing folder...</source>
-        <translation>Falta la carpeta</translation>
+        <translation>Falta la carpeta...</translation>
     </message>
     <message>
         <location filename="../gis/db/CDBProject.cpp" line="591"/>
@@ -597,7 +597,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="128"/>
         <source>Correlation...</source>
-        <translation>Correlación..</translation>
+        <translation>Correlación...</translation>
     </message>
     <message>
         <location filename="../gis/prj/CDetailsPrj.cpp" line="395"/>
@@ -860,7 +860,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedCycle.cpp" line="53"/>
         <source>Custom 2</source>
-        <translation type="unfinished">Personalizado 1</translation>
+        <translation type="unfinished">Personalizado 3</translation>
     </message>
 </context>
 <context>
@@ -868,37 +868,37 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="35"/>
         <source>Road or Track</source>
-        <translation type="unfinished"></translation>
+        <translation>Carretera o Pista</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="41"/>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Sendero</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="44"/>
         <source>Difficult Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Sendero dificil</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="47"/>
         <source>Off Path or Rocky Terrain</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuera de senda o Rocas</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="50"/>
         <source>Custom 0</source>
-        <translation type="unfinished">Personalizado 1</translation>
+        <translation>Personalizado 1</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="53"/>
         <source>Custom 1</source>
-        <translation type="unfinished">Personalizado 2</translation>
+        <translation>Personalizado 2</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="56"/>
         <source>Custom 2</source>
-        <translation type="unfinished">Personalizado 1</translation>
+        <translation>Personalizado 3</translation>
     </message>
 </context>
 <context>
@@ -988,12 +988,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="457"/>
         <source>This is a typ file with unknown polygon encoding. Please report!</source>
-        <translation>Este es un archivo TYP con una codificación de polígonos desconocida. ¡Por favor, repórtelo!</translation>
+        <translation>Este es un archivo TYP con una codificación de polígonos desconocida. ¡Repórtalo, por favor!</translation>
     </message>
     <message>
         <location filename="../map/garmin/CGarminTyp.cpp" line="838"/>
         <source>This is a typ file with unknown polyline encoding. Please report!</source>
-        <translation>Este es un archivo TYP con una codificación de polilíneas desconocida. ¡Por favor, repórtelo!</translation>
+        <translation>Este es un archivo TYP con una codificación de polilíneas desconocida. ¡Repórtalo, por favor!</translation>
     </message>
 </context>
 <context>
@@ -1006,7 +1006,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="110"/>
         <source>Select Service</source>
-        <translation>Seleccione servicio</translation>
+        <translation>Seleccionar servicio</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="114"/>
@@ -1079,7 +1079,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="100"/>
         <source>Search Web for Position</source>
-        <translation>Buscar en la web esta posición</translation>
+        <translation>Abrir web para esta posición</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWeb.cpp" line="113"/>
@@ -1092,7 +1092,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="35"/>
         <source>&lt;b&gt;Add your own service&lt;/b&gt;&lt;p&gt;To add your own service you need a name and an URL with placeholders for coordinates. Placeholders are:&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Añade nuevos servicios&lt;/b&gt;&lt;p&gt;Para añadir tus propios servicios es necesario un nombre y una URL con indicadores de posición para coordenadas. Los indicadores de posición son:&lt;/p&gt;</translation>
+        <translation>&lt;b&gt;Añade nuevos servicios&lt;/b&gt;&lt;p&gt;Para añadir tus propios servicios es necesario un nombre y una URL con indicadores de posición para coordenadas. Los indicadores de posición son:&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="39"/>
@@ -1102,7 +1102,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="46"/>
         <source>&lt;p&gt;To edit a service select either it&apos;s name or URL and do a double click (alternative: press F2). You can change the default services, too. If you remove all services the default ones will be restored on the next start of QMapShack.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Para editar un servicio haga doble clic o F2 en él. También se pueden cambiar los predeterminados. Si se eliminan todos los servicios se restaurarán en el siguiente inicio los predeterminados.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Para editar un servicio haz doble clic o F2 en él. También se pueden cambiar los predeterminados. Si se eliminan todos los servicios QMapShack restaurará los predeterminados en el siguiente inicio.&lt;/p&gt;</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearchWebConfigDialog.cpp" line="103"/>
@@ -1180,7 +1180,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="505"/>
         <source>Changed fill pattern.</source>
-        <translation>Se cambió el patró de relleno.</translation>
+        <translation>Se cambió el patrón de relleno.</translation>
     </message>
     <message>
         <location filename="../gis/ovl/CGisItemOvlArea.cpp" line="511"/>
@@ -1593,12 +1593,12 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2260"/>
         <source>Changed links</source>
-        <translation>Se cambió el enlace</translation>
+        <translation>Se cambiaron los enlaces</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2271"/>
         <source>Changed elevation of point %1 to %2 %3</source>
-        <translation>Se cambió altitud de los puntos %1 a %2 %3</translation>
+        <translation>Se cambió la altitud de los puntos %1 a %2 %3</translation>
     </message>
     <message>
         <location filename="../gis/trk/CGisItemTrk.cpp" line="2294"/>
@@ -1673,7 +1673,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="417"/>
         <source>Changed average moving cycling speed with profile &apos;%3&apos; to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se cambió la velocidad media en movimiento con el perfil &apos;%3&apos; a %1%2.</translation>
     </message>
     <message>
         <source>Changed average moving speed depending on slope to %1%2.</source>
@@ -1687,7 +1687,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="485"/>
         <source>Changed average moving hiking speed with profile &apos;%3&apos; to %1%2.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se cambió la media en movimiento con perfil &apos;%3&apos; a %1%2.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/filter.cpp" line="511"/>
@@ -1853,7 +1853,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="129"/>
         <source>Import from Files...</source>
-        <translation>Importar desde archivos..</translation>
+        <translation>Importar desde archivos...</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="130"/>
@@ -1869,7 +1869,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="137"/>
         <source>Search Database</source>
-        <translation>Buscar base de datos</translation>
+        <translation>Buscar en Base de Datos</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="138"/>
@@ -1884,7 +1884,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/CGisListDB.cpp" line="146"/>
         <source>Empty</source>
-        <translation>Vacío</translation>
+        <translation>Vaciar</translation>
     </message>
     <message>
         <location filename="../gis/CGisListDB.cpp" line="462"/>
@@ -3662,7 +3662,8 @@ línea %2, columna %3.
         <location filename="../tool/CMapVrtBuilder.cpp" line="217"/>
         <source>!!! done !!!
 </source>
-        <translation>¡¡¡ hecho !!!</translation>
+        <translation>¡¡¡ hecho !!!
+</translation>
     </message>
 </context>
 <context>
@@ -3864,7 +3865,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="210"/>
         <source>route</source>
-        <translation type="unfinished">Ruta</translation>
+        <translation type="unfinished">ruta</translation>
     </message>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="223"/>
@@ -3948,7 +3949,7 @@ Estructura desconocida.</translation>
     <message>
         <location filename="../plot/CPlot.cpp" line="60"/>
         <source>Time</source>
-        <translation>Tiempo</translation>
+        <translation>Hora</translation>
     </message>
 </context>
 <context>
@@ -5208,7 +5209,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="211"/>
         <source>heading:</source>
-        <translation type="unfinished">Cabecera:</translation>
+        <translation type="unfinished">Rumbo:</translation>
     </message>
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="212"/>
@@ -5233,7 +5234,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../realtime/opensky/CRtOpenSky.cpp" line="216"/>
         <source>position source:</source>
-        <translation type="unfinished">Posición origen:</translation>
+        <translation type="unfinished">Origen Posición:</translation>
     </message>
 </context>
 <context>
@@ -5961,7 +5962,7 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="293"/>
         <source>ferrata gear</source>
-        <translation>Material de ferrata</translation>
+        <translation>Equipo de ferrata</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="307"/>
@@ -6163,7 +6164,7 @@ Norbert Truchsess (norbert.truchsess@t-online.de)</source>
     <message>
         <location filename="../canvas/ICanvasSelect.ui" line="20"/>
         <source>Select a view to work with</source>
-        <translation type="unfinished">Vista en la que está cargado el DEM</translation>
+        <translation>Vista en la que está cargado el DEM</translation>
     </message>
 </context>
 <context>
@@ -6634,7 +6635,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="132"/>
         <source>The area was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>El área se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulte el historial de cambios</translation>
+        <translation>El área se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulta el historial de cambios</translation>
     </message>
     <message>
         <location filename="../gis/ovl/IDetailsOvlArea.ui" line="160"/>
@@ -6753,7 +6754,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="154"/>
         <source>The route was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>Esta ruta se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulte el historial de cambios.</translation>
+        <translation>Esta ruta se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulta el historial de cambios.</translation>
     </message>
     <message>
         <location filename="../gis/rte/IDetailsRte.ui" line="182"/>
@@ -7066,7 +7067,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="268"/>
         <source>The waypoint was imported to QMapShack and was changed. It does not show the original data anymore. Please see history for changes. </source>
-        <translation>El waypoint se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulte el historial de cambios.</translation>
+        <translation>El waypoint se importó a QMapShack y se cambió. Ya no muestra los datos originales. Consulta el historial de cambios.</translation>
     </message>
     <message>
         <location filename="../gis/wpt/IDetailsWpt.ui" line="312"/>
@@ -7569,7 +7570,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="191"/>
         <source>Hiking</source>
-        <translation type="unfinished"></translation>
+        <translation>Excursionismo</translation>
     </message>
     <message>
         <source>Speed</source>
@@ -7577,7 +7578,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source> Type</source>
-        <translation type="vanished">Tipo</translation>
+        <translation type="vanished"> Tipo</translation>
     </message>
     <message>
         <source>Max Speed</source>
@@ -7589,7 +7590,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>at positive Slope</source>
-        <translation type="vanished">en la pendiente positiva</translation>
+        <translation type="vanished">En Ascenso</translation>
     </message>
     <message>
         <source>Min Speed</source>
@@ -7609,11 +7610,11 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>at negative Slope</source>
-        <translation type="vanished">En Pendiente negativa</translation>
+        <translation type="vanished">En Descenso</translation>
     </message>
     <message>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="vanished">Los valores de pendiente positivos y negativos definidos por el usuario serán reemplazados por los del Track.</translation>
+        <translation type="vanished">Los valores de ascenso y descenso definidos por el usuario serán reemplazados por los del Track.</translation>
     </message>
     <message>
         <source>Set min/max slopes from Track</source>
@@ -7658,12 +7659,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="35"/>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedConst.ui" line="42"/>
         <source> km/h</source>
-        <translation type="unfinished"> km/h</translation>
+        <translation> km/h</translation>
     </message>
 </context>
 <context>
@@ -7681,22 +7682,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="122"/>
         <source>User defined positive and negative slope values will be replaced by the minimum and maximum slope values from the track.</source>
-        <translation type="unfinished">Los valores de pendiente positivos y negativos definidos por el usuario serán reemplazados por los del Track.</translation>
+        <translation>Los valores de pendiente definidos por el usuario serán reemplazados por los mínimos y máximos del Track.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="125"/>
         <source>Set min/max slopes from Track</source>
-        <translation type="unfinished">Establecer pendiente Max/Min del Track</translation>
+        <translation type="unfinished">Establecer pendientes Max/Min del Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="148"/>
         <source>Max Speed</source>
-        <translation type="unfinished">Vel. Máx.</translation>
+        <translation>Vel. Máx.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="158"/>
         <source>Min Speed</source>
-        <translation type="unfinished">Vel. Min.</translation>
+        <translation>Vel. Min.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="187"/>
@@ -7711,12 +7712,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
         <source>at negative Slope</source>
-        <translation type="unfinished">En Pendiente negativa</translation>
+        <translation type="unfinished">en pendiente negativa</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
         <source>at positive Slope</source>
-        <translation type="unfinished">en la pendiente positiva</translation>
+        <translation type="unfinished">en pendiente positiva</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
@@ -7739,22 +7740,22 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="50"/>
         <source> Type</source>
-        <translation type="unfinished">Tipo</translation>
+        <translation type="unfinished"> Tipo</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="113"/>
         <source>Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>Descenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="139"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished">Velocidad en llano</translation>
+        <translation>Velocidad en llano</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="178"/>
         <source>Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>Ascenso</translation>
     </message>
 </context>
 <context>
@@ -9137,17 +9138,20 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
         <source>Source No Data (-srcnodata)</source>
-        <translation>Sin Fuente de Datos (-srcnodata)</translation>
+        <translatorcomment>sirve para indicar a gdal que valor sera considerado como &apos;NODATA&apos;  &apos;sin dato&apos; en el fichero origen</translatorcomment>
+        <translation>&apos;sin dato&apos; Origen (-srcnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="80"/>
         <source>Target No Data (-vrtnodata)</source>
-        <translation>Sin Datos de Destino (-vrtnodata)</translation>
+        <translatorcomment>sirve para indicar a gdal que valor sera considerado como &apos;NODATA&apos; (sin dato) en el fichero destino</translatorcomment>
+        <translation>&apos;sin dato&apos; Destino (-vrtnodata)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="90"/>
         <source>Target Projection (-a_srs)</source>
-        <translation>Proyección Objetivo (-a_srs)</translation>
+        <translatorcomment>sirve para asignar un SRS ( Proyección / Datum ) al .VRT</translatorcomment>
+        <translation>Proyección / Datum (-a_srs)</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="97"/>
@@ -9168,17 +9172,17 @@ Tip:
 &lt;li&gt;Use the advanced options to add a &quot;no data&quot; value if your source files do not have one and do not form a rectangular map. Areas with no map file will become transparent.&lt;/li&gt;
 &lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
 &lt;/ul&gt;</source>
-        <translation>&lt;ol&gt;
-&lt;li&gt;Seleccione uno o varios archivos.&lt;/li&gt;
+        <translation type="unfinished">&lt;ol&gt;
+&lt;li&gt;Seleccione uno o varios archivos de origen.&lt;/li&gt;
 &lt;li&gt;Seleccione un nombre para el archivo VRT de destino.&lt;/li&gt;
-&lt;li&gt;Pulse  botón&lt;/li&gt;&quot;Empezar&quot;.
+&lt;li&gt;Pulse el botón &quot;Empezar&quot;.&lt;/li&gt;
 &lt;/ol&gt;
 
 Consejos:
 &lt;ul&gt;
-&lt;li&gt;Si tiene varios archivos, colóquelos en una subcarpeta de su carpeta de mapas. Cree el archivo VRT en su carpeta de mapas&lt;/li&gt;
-&lt;li&gt;Utilice las opciones avanzadas para añadir un valor de &quot;sin datos&quot;  si sus archivos de origen no los tienen y no forman un área rectangular. Las áreas sin mapa se volverán transparentes.&lt;/li&gt;
-&lt;li&gt;La opción &quot;-a_srs&quot;  está destinada a asignar una Proyección / Datum cuando el archivo de origen no lo tiene. Esto NO reproyecta los datos.&lt;/li&gt;
+&lt;li&gt;Si tiene varios archivos, colóquelos en una subcarpeta de su carpeta de mapas.El archivo VRT debe crearse en una de las carpetas configuradas para mapas&lt;/li&gt;
+&lt;li&gt;Utilice las opciones avanzadas para definir un valor &quot;sin dato&quot; si los archivos no lo tienen definido  y no forman un área rectangular. Las áreas &quot;sin dato&quot; se volverán transparentes.&lt;/li&gt;
+&lt;li&gt;La opción &quot;-a_srs&quot;  está destinada a asignar una Proyección / Datum cuando el archivo de origen no lo tiene definido. Esto NO reproyecta los datos.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
     <message>
@@ -9195,12 +9199,13 @@ Consejos:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
-        <translation>Las vistas generales le permitirán mostrar el mapa a varios niveles de zoom.</translation>
+        <translatorcomment>ampliada la descripción de ayuda</translatorcomment>
+        <translation>Las vistas generales le permitirán mostrar una generalización del mapa en los niveles de zoom más lejanos. El valor indicado es un divisor (en cada dimension) del fichero de origen. Se crearán ficheros adicionales para los valores seleccionados.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
         <source>Create overviews for result.</source>
-        <translation type="unfinished">Crear vistas del resultado.</translation>
+        <translation>Crear vistas del resultado.</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
@@ -9458,7 +9463,7 @@ o
     <message>
         <location filename="../grid/IProjWizard.ui" line="14"/>
         <source>Proj4 Wizard</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Asistente de Proj4</translation>
     </message>
     <message>
         <location filename="../grid/IProjWizard.ui" line="29"/>
@@ -10529,7 +10534,7 @@ o
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="97"/>
         <source>Show table.</source>
-        <translation type="unfinished">Ver tabla.</translation>
+        <translation>Ver tabla.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="117"/>
@@ -10742,7 +10747,15 @@ Note: If you want to fix bad points in a real GPS recording
 this is the right tool. Simply select the section of bad points 
 (one is ok, too) and hide them.</source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar intervalo de puntos. Puede servir para:
+
+* Ocultar o mostrar puntos del track.
+* El intervalo seleccionado se puede copiar.
+* Se puede establecer una actividad para la selección.
+
+Nota: Esta es la herramienta mas adecuada si lo que
+quieres es corregir puntos erróneos de un track grabado. 
+Solo seleccionar los puntos, o punto, no válidos y ocultarlos.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="128"/>
@@ -10753,7 +10766,12 @@ to plan a tour.
 Note: This is the wrong tool to fix bad points of a real GPS 
 recording. Use the range tool. </source>
         <extracomment>use line breakes to keep a sensible tool tip width</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Editar la posición de los puntos y usar el ruteo automático
+para crear los nuevos puntos que sean necesarios.Puede servir
+para crear nuevos tracks durante la planificación de los recorridos.
+
+Nota: Esta no es la herramienta correcta para
+corregir los puntos erróneos de un track grabado.</translation>
     </message>
     <message>
         <location filename="../gis/trk/IScrOptTrk.ui" line="147"/>

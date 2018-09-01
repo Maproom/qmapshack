@@ -187,7 +187,7 @@ private:
     QAction * actionEditArea;
     QAction * actionNogoArea;
     QAction * actionRteFromWpt;
-    QAction * actionSymWpt;
+
     QAction * actionEleWptTrk;
 
     QMenu * menuNone = nullptr;

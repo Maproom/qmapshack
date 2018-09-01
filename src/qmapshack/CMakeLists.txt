@@ -178,6 +178,9 @@ set( SRCS
     gis/trk/filter/CFilterReplaceElevation.cpp
     gis/trk/filter/CFilterReset.cpp
     gis/trk/filter/CFilterSpeed.cpp
+    gis/trk/filter/CFilterSpeedConst.cpp
+    gis/trk/filter/CFilterSpeedCycle.cpp
+    gis/trk/filter/CFilterSpeedHike.cpp
     gis/trk/filter/CFilterSplitSegment.cpp
     gis/trk/filter/CFilterSubPt2Pt.cpp
     gis/trk/filter/CFilterTerrainSlope.cpp
@@ -244,10 +247,12 @@ set( SRCS
     mouse/CMousePrint.cpp
     mouse/CMouseRadiusWpt.cpp
     mouse/CMouseRangeTrk.cpp
+    mouse/CMouseRuler.cpp
     mouse/CMouseSelect.cpp
     mouse/CMouseWptBubble.cpp
     mouse/CScrOptPrint.cpp
     mouse/CScrOptRangeTrk.cpp
+    mouse/CScrOptRuler.cpp
     mouse/CScrOptSelect.cpp
     mouse/CScrOptUnclutter.cpp
     mouse/IMouse.cpp
@@ -495,6 +500,9 @@ set( HDRS
     gis/trk/filter/CFilterReplaceElevation.h
     gis/trk/filter/CFilterReset.h
     gis/trk/filter/CFilterSpeed.h
+    gis/trk/filter/CFilterSpeedConst.h
+    gis/trk/filter/CFilterSpeedCycle.h
+    gis/trk/filter/CFilterSpeedHike.h
     gis/trk/filter/CFilterSplitSegment.h
     gis/trk/filter/CFilterSubPt2Pt.h
     gis/trk/filter/CFilterTerrainSlope.h
@@ -565,10 +573,12 @@ set( HDRS
     mouse/CMousePrint.h
     mouse/CMouseRadiusWpt.h
     mouse/CMouseRangeTrk.h
+    mouse/CMouseRuler.h
     mouse/CMouseSelect.h
     mouse/CMouseWptBubble.h
     mouse/CScrOptPrint.h
     mouse/CScrOptRangeTrk.h
+    mouse/CScrOptRuler.h
     mouse/CScrOptSelect.h
     mouse/CScrOptUnclutter.h
     mouse/IMouse.h
@@ -720,6 +730,9 @@ set( UIS
     gis/trk/filter/IFilterReplaceElevation.ui
     gis/trk/filter/IFilterReset.ui
     gis/trk/filter/IFilterSpeed.ui
+    gis/trk/filter/IFilterSpeedConst.ui
+    gis/trk/filter/IFilterSpeedCycle.ui
+    gis/trk/filter/IFilterSpeedHike.ui
     gis/trk/filter/IFilterSplitSegment.ui
     gis/trk/filter/IFilterSubPt2Pt.ui
     gis/trk/filter/IFilterTerrainSlope.ui
@@ -745,6 +758,7 @@ set( UIS
     map/IMapPropSetup.ui
     mouse/IScrOptPrint.ui
     mouse/IScrOptRangeTrk.ui
+    mouse/IScrOptRuler.ui
     mouse/IScrOptSelect.ui
     mouse/line/IScrOptEditLine.ui
     mouse/line/IScrOptRangeLine.ui

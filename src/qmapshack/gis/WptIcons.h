@@ -19,6 +19,7 @@
 #ifndef WPTICONS_H
 #define WPTICONS_H
 
+#include <QMenu>
 #include <QPixmap>
 #include <QString>
 
@@ -41,6 +42,8 @@ QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src = nu
 void setWptIconByName(const QString& name, const QString& filename);
 void setWptIconByName(const QString& name, const QPixmap& icon);
 QPixmap loadIcon(const QString& path);
+QString selectWptIcon(QWidget * parent);
+QMenu * getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent);
 
 #endif //WPTICONS_H
 

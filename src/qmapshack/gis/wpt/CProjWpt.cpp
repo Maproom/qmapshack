@@ -20,8 +20,8 @@
 #include "gis/prj/IGisProject.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/wpt/CProjWpt.h"
+#include "gis/WptIcons.h"
 #include "GeoMath.h"
-#include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
 
 #include <proj_api.h>
@@ -53,8 +53,13 @@ CProjWpt::~CProjWpt()
 
 void CProjWpt::slotChangeIcon()
 {
-    CWptIconDialog dlg(toolIcon);
-    dlg.exec();
+    QString iconName = selectWptIcon(this);
+    if(!iconName.isEmpty())
+    {
+        QPointF focus;
+        toolIcon->setObjectName(iconName);
+        toolIcon->setIcon(getWptIconByName(iconName, focus));
+    }
 }
 
 void CProjWpt::slotChangeName()

@@ -24,6 +24,8 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CTrackData.h"
 #include "gis/trk/filter/CFilterSpeed.h"
+#include "gis/trk/filter/CFilterSpeedCycle.h"
+#include "gis/trk/filter/CFilterSpeedHike.h"
 #include "helpers/CLimit.h"
 #include "helpers/CValue.h"
 
@@ -537,8 +539,10 @@ public:
 
     /** @param speed speed in meter per seconds */
     void filterSpeed(qreal speed);
-    void filterSpeed(const CFilterSpeed::cycling_type_t &cyclingType);
-    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope);
+    void filterSpeed(const CFilterSpeedCycle::cycling_type_t &cyclingType);
+    void filterSpeed(const CFilterSpeedHike::hiking_type_t &hikingType);
+
+    void filterGetSlopeLimits(qreal &minSlope, qreal &maxSlope) const;
 
     void filterTerrainSlope();
     void filterReplaceElevation(CCanvas *canvas);
@@ -793,8 +797,8 @@ private:
     QPolygonF lineSimple;   //< the current track line as screen pixel coordinates
     QPolygonF lineFull;     //< visible and invisible points
 
-    qint32 penWidthFg = 3;  //< inner trackline width
-    qint32 penWidthBg = 5;  //< outer trackline width
+    qint32 penWidthFg = 1;  //< inner trackline width
+    qint32 penWidthBg = 3;  //< outer trackline width
     qint32 penWidthHi = 11; //< highlighted trackline width
 
     qint32 widthInfoBox = MIN_WIDTH_INFO_BOX;
@@ -807,7 +811,7 @@ private:
 
     fValueOnChange onChange = [this](const QVariant& val)
                               {
-                                  int w = qRound(3.0 * val.toDouble());
+                                  int w = qRound(1.0 * val.toDouble());
 
                                   penWidthFg = w;
                                   penWidthBg = w + 2;

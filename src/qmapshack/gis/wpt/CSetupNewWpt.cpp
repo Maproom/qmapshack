@@ -19,7 +19,6 @@
 #include "gis/wpt/CSetupNewWpt.h"
 #include "gis/WptIcons.h"
 #include "helpers/CPositionDialog.h"
-#include "helpers/CWptIconDialog.h"
 #include "units/IUnit.h"
 
 #include <QtWidgets>
@@ -37,11 +36,18 @@ CSetupNewWpt::CSetupNewWpt(QPointF &pt, QString &icon, QString &name, QWidget *p
     toolIcon->setObjectName(icon);
     toolIcon->setIcon(getWptIconByName(icon, focus));
 
-    QString pos;
-    IUnit::degToStr(pt.x(), pt.y(), pos);
-    linePosition->setText(pos);
-    labelWarning->hide();
+    if(pt != NOPOINTF)
+    {
+        QString pos;
+        IUnit::degToStr(pt.x(), pt.y(), pos);
+        linePosition->setText(pos);
+    }
+    else
+    {
+        linePosition->setDisabled(true);
+    }
 
+    labelWarning->hide();
     lineName->setText(name);
 
     connect(linePosition, &QLineEdit::textEdited, this, &CSetupNewWpt::slotEditPosition);
@@ -58,7 +64,7 @@ CSetupNewWpt::~CSetupNewWpt()
 
 void CSetupNewWpt::accept()
 {
-    if(CPositionDialog::getPosition(pt, linePosition->text()))
+    if((pt == NOPOINTF) || CPositionDialog::getPosition(pt, linePosition->text()))
     {
         icon = toolIcon->objectName();
         name = lineName->text();
@@ -89,10 +95,14 @@ void CSetupNewWpt::slotEditName(const QString& str)
 
 void CSetupNewWpt::slotChangeIcon()
 {
-    CWptIconDialog dlg(toolIcon);
-    dlg.exec();
+    QString iconName = selectWptIcon(this);
+    if(!iconName.isEmpty())
+    {
+        QPointF focus;
+        toolIcon->setObjectName(iconName);
+        toolIcon->setIcon(getWptIconByName(iconName, focus));
+    }
 }
-
 
 void CSetupNewWpt::checkInput()
 {

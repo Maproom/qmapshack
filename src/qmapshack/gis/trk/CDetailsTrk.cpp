@@ -144,7 +144,7 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     connect(plot2,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
     connect(plot3,            &CPlot::sigMouseClickState,          this, &CDetailsTrk::slotMouseClickState);
 
-    connect(spinLineWidth,    static_cast<void (QDoubleSpinBox::*)(double)>(&QDoubleSpinBox::valueChanged), this, &CDetailsTrk::slotLineWidth);
+    connect(spinLineWidth,    static_cast<void (QSpinBox::*)(int)>(&QSpinBox::valueChanged), this, &CDetailsTrk::slotLineWidth);
     connect(checkWithArrows,  &QCheckBox::toggled, this, &CDetailsTrk::slotWithArrows);
 
     setupStyleLimits(trk.colorSourceLimit, toolLimitAutoStyle, toolLimitUsrStyle, toolLimitSysStyle, spinLimitLow, spinLimitHigh);
@@ -721,7 +721,7 @@ void CDetailsTrk::slotLineWidthMode(bool isUser)
     spinLineWidth->setValue(trk.lineScale.val().toDouble());
 }
 
-void CDetailsTrk::slotLineWidth(qreal f)
+void CDetailsTrk::slotLineWidth(int f)
 {
     trk.lineScale = f;
 }

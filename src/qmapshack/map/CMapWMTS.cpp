@@ -173,9 +173,9 @@ CMapWMTS::CMapWMTS(const QString &filename, CMapDraw *parent)
     {
         const QDomNode& xmlValue = xmlValues.item(n);
         registerHeaderItem(
-                xmlValue.attributes().namedItem("name").nodeValue(),
-                xmlValue.toElement().text()
-        );
+            xmlValue.attributes().namedItem("name").nodeValue(),
+            xmlValue.toElement().text()
+            );
     }
 
     // if there is more than one layer the layer list in the properties widget has to be enabled.

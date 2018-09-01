@@ -61,7 +61,7 @@ private slots:
     void slotSetLimitModeStyle(CLimit::mode_e mode, bool on);
 
     void slotLineWidthMode(bool isUser);
-    void slotLineWidth(qreal f);
+    void slotLineWidth(int f);
     void slotWithArrowsMode(bool isUser);
     void slotWithArrows(bool yes);
 

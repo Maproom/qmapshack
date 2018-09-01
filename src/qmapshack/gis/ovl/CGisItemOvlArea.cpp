@@ -339,7 +339,7 @@ void CGisItemOvlArea::drawLabel(QPainter& p, const QPolygonF &viewport, QList<QR
     rect.adjust(-2,-2,2,2);
     rect.moveCenter(pt);
 
-    CDraw::text(getName(), p, pt.toPoint(), Qt::darkBlue);
+    CDraw::text(getName(), p, pt, Qt::darkBlue);
     blockedAreas << rect;
 }
 

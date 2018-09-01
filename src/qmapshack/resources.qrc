@@ -15,6 +15,7 @@
         <file>../cursors/cursorPointMove.png</file>
         <file>../cursors/cursorPrint.png</file>
         <file>../cursors/cursorRadiusWpt.png</file>
+        <file>../cursors/cursorRuler.png</file>
         <file>../cursors/cursorSave.png</file>
         <file>../cursors/cursorSelectArea.png</file>
         <file>../cursors/cursorSelectRange.png</file>
@@ -70,6 +71,7 @@
         <file>../icons/32x32/Bubble.png</file>
         <file>../icons/32x32/CSrcATemp.png</file>
         <file>../icons/32x32/CSrcAccel.png</file>
+        <file>../icons/32x32/CSrcAscent.png</file>
         <file>../icons/32x32/CSrcCAD.png</file>
         <file>../icons/32x32/CSrcCourse.png</file>
         <file>../icons/32x32/CSrcDepth.png</file>
@@ -175,6 +177,7 @@
         <file>../icons/32x32/PointHide.png</file>
         <file>../icons/32x32/PointMove.png</file>
         <file>../icons/32x32/PointShow.png</file>
+        <file>../icons/32x32/Precision.png</file>
         <file>../icons/32x32/Print.png</file>
         <file>../icons/32x32/PrintSave.png</file>
         <file>../icons/32x32/ProfileToWindow.png</file>
@@ -231,9 +234,11 @@
         <file>../icons/32x32/SizeArrow.png</file>
         <file>../icons/32x32/SlfProject.png</file>
         <file>../icons/32x32/SmlProject.png</file>
+        <file>../icons/32x32/Sort.png</file>
         <file>../icons/32x32/SortName.png</file>
         <file>../icons/32x32/Start.png</file>
         <file>../icons/32x32/T.png</file>
+        <file>../icons/32x32/Table.png</file>
         <file>../icons/32x32/Tainted.png</file>
         <file>../icons/32x32/TcxProject.png</file>
         <file>../icons/32x32/Template.png</file>
@@ -312,6 +317,7 @@
         <file>../icons/48x48/Bubble.png</file>
         <file>../icons/48x48/CSrcATemp.png</file>
         <file>../icons/48x48/CSrcAccel.png</file>
+        <file>../icons/48x48/CSrcAscent.png</file>
         <file>../icons/48x48/CSrcCAD.png</file>
         <file>../icons/48x48/CSrcCourse.png</file>
         <file>../icons/48x48/CSrcDepth.png</file>
@@ -418,6 +424,7 @@
         <file>../icons/48x48/PointHide.png</file>
         <file>../icons/48x48/PointMove.png</file>
         <file>../icons/48x48/PointShow.png</file>
+        <file>../icons/48x48/Precision.png</file>
         <file>../icons/48x48/Print.png</file>
         <file>../icons/48x48/PrintSave.png</file>
         <file>../icons/48x48/ProfileToWindow.png</file>
@@ -474,9 +481,11 @@
         <file>../icons/48x48/SizeArrow.png</file>
         <file>../icons/48x48/SlfProject.png</file>
         <file>../icons/48x48/SmlProject.png</file>
+        <file>../icons/48x48/Sort.png</file>
         <file>../icons/48x48/SortName.png</file>
         <file>../icons/48x48/Start.png</file>
         <file>../icons/48x48/T.png</file>
+        <file>../icons/48x48/Table.png</file>
         <file>../icons/48x48/Tainted.png</file>
         <file>../icons/48x48/TcxProject.png</file>
         <file>../icons/48x48/Template.png</file>

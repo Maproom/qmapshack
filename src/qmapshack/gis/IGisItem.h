@@ -565,9 +565,9 @@ public:
     struct color_t
     {
         const char   *  name;
-        const QString   label;
-        const QColor    color;
-        const QString   bullet;
+        const QString label;
+        const QColor color;
+        const QString bullet;
     };
 
     static const QVector<color_t>& getColorMap()

@@ -42,6 +42,7 @@
 #include "mouse/CMousePrint.h"
 #include "mouse/CMouseRadiusWpt.h"
 #include "mouse/CMouseRangeTrk.h"
+#include "mouse/CMouseRuler.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CMouseWptBubble.h"
 #include "plot/CPlotProfile.h"
@@ -51,7 +52,22 @@
 
 #include <QtWidgets>
 
-qreal CCanvas::gisLayerOpacity = 1.0;
+qreal CCanvas::gisLayerOpacity          = 1.0;
+
+
+#define X_OFF_STATUS          20
+#define Y_OFF_STATUS          50
+#define WIDTH_PROFILE_LARGE   300
+#define HEIGHT_PROFILE_LARGE  120
+#define WIDTH_PROFILE_SMALL   200
+#define HEIGHT_PROFILE_SMALL  80
+
+inline QSize getTrackProfileSize(int height)
+{
+    return height > 700 ?
+           QSize(WIDTH_PROFILE_LARGE, HEIGHT_PROFILE_LARGE)
+           : QSize(WIDTH_PROFILE_SMALL, HEIGHT_PROFILE_SMALL);
+}
 
 CCanvas::CCanvas(QWidget *parent, const QString &name)
     : QWidget(parent)
@@ -112,10 +128,10 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     loadIndicator2->start();
     demLoadIndicator->show();
 
-    labelStatusMessages = new QLabel(this);
-    labelStatusMessages->setWordWrap(true);
-    labelStatusMessages->setMinimumWidth(300);
-    labelStatusMessages->hide();
+    textStatusMessages = new QTextBrowser(this);
+    textStatusMessages->setFrameStyle(QFrame::NoFrame);
+    textStatusMessages->setMinimumWidth(300);
+    textStatusMessages->hide();
 
     labelTrackStatistic = new QLabel(this);
     labelTrackStatistic->setWordWrap(true);
@@ -133,7 +149,6 @@ CCanvas::CCanvas(QWidget *parent, const QString &name)
     timerTrackOnFocus->start(1000);
 
     connect(timerTrackOnFocus, &QTimer::timeout, this, &CCanvas::slotCheckTrackOnFocus);
-
 
     labelHelp = new QTextBrowser(this);
     labelHelp->setOpenLinks(false);
@@ -459,6 +474,11 @@ void CCanvas::setMouseWptBubble(const IGisItem::key_t& key)
     mouse->setDelegate(new CMouseWptBubble(key, gis, this, mouse));
 }
 
+void CCanvas::setMouseRuler()
+{
+    mouse->setDelegate(new CMouseRuler(gis, this, mouse));
+}
+
 void CCanvas::setMousePrint()
 {
     mouse->setDelegate(new CMousePrint(gis, this, mouse));
@@ -490,13 +510,18 @@ void CCanvas::reportStatus(const QString& key, const QString& msg)
 
     if(report.isEmpty())
     {
-        labelStatusMessages->hide();
+        textStatusMessages->hide();
     }
     else
     {
-        labelStatusMessages->show();
-        labelStatusMessages->setText(report);
-        labelStatusMessages->adjustSize();
+        textStatusMessages->show();
+        textStatusMessages->setText(report);
+
+        qreal h;
+        h = height() - Y_OFF_STATUS - getTrackProfileSize(height()).height() - 40;
+        h = qMin(h, textStatusMessages->document()->size().height() + 10);
+        textStatusMessages->setMinimumHeight(h);
+        textStatusMessages->setMaximumHeight(h);
     }
     update();
 }
@@ -523,7 +548,7 @@ void CCanvas::resizeEvent(QResizeEvent * e)
     QPoint p2(demLoadIndicator->width()>>1, demLoadIndicator->height()>>1);
     demLoadIndicator->move(r.center() - p2);
 
-    labelStatusMessages->move(20,50);
+    textStatusMessages->move(X_OFF_STATUS, Y_OFF_STATUS);
 
     slotUpdateTrackStatistic(CMainWindow::self().isMinMaxTrackValues());
     setSizeTrackProfile();
@@ -746,9 +771,9 @@ void CCanvas::keyPressEvent(QKeyEvent * e)
 
 void CCanvas::drawStatusMessages(QPainter& p)
 {
-    if(labelStatusMessages->isVisible())
+    if(textStatusMessages->isVisible())
     {
-        QRect r = labelStatusMessages->frameGeometry();
+        QRect r = textStatusMessages->frameGeometry();
         r.adjust(-5, -5, 5, 5);
         p.setPen(CDraw::penBorderGray);
         p.setBrush(CDraw::brushBackWhite);
@@ -1116,15 +1141,7 @@ void CCanvas::setSizeTrackProfile()
     }
     else
     {
-        if(size().height() < 700)
-        {
-            plotTrackProfile->resize(200,80);
-        }
-        else
-        {
-            plotTrackProfile->resize(300,120);
-        }
-
+        plotTrackProfile->resize(getTrackProfileSize(height()));
         plotTrackProfile->move(20, height() - plotTrackProfile->height() - 20);
     }
 }

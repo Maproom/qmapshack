@@ -25,7 +25,6 @@
 #include "gis/wpt/CGisItemWpt.h"
 #include "gis/WptIcons.h"
 #include "helpers/CSettings.h"
-#include "helpers/CWptIconDialog.h"
 #include "misc.h"
 #include "version.h"
 
@@ -92,8 +91,14 @@ void CGeoSearch::setIcon()
 
 void CGeoSearch::slotChangeSymbol()
 {
-    CWptIconDialog dlg(actSymbol);
-    dlg.exec();
+    QString iconName = selectWptIcon(treeWidget());
+    if(!iconName.isEmpty())
+    {
+        QPointF focus;
+        actSymbol->setObjectName(iconName);
+        actSymbol->setIcon(getWptIconByName(iconName, focus));
+    }
+
     searchConfig->symbolName = actSymbol->objectName();
     searchConfig->emitChanged();
 }
@@ -808,4 +813,5 @@ void CGeoSearch::slotAccuResults(bool yes)
 void CGeoSearch::slotResetResults()
 {
     qDeleteAll(takeChildren());
+    updateDecoration();
 }

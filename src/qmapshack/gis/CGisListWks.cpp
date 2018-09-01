@@ -55,11 +55,11 @@
 #include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
+#include "gis/WptIcons.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
 #include "helpers/CSettings.h"
-#include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
 
 #include <QApplication>
@@ -171,7 +171,6 @@ CGisListWks::CGisListWks(QWidget *parent)
 
     // several GIS items related actions
     actionRteFromWpt    = addAction(QIcon("://icons/32x32/Route.png"), tr("Create Route"), this, SLOT(slotRteFromWpt()));
-    actionSymWpt        = addAction(QIcon("://icons/waypoints/32x32/PinBlue.png"), tr("Change Icon"), this, SLOT(slotSymWpt()));
 
     connect(qApp, &QApplication::aboutToQuit, this, &CGisListWks::slotSaveWorkspace);
     connect(this, &CGisListWks::customContextMenuRequested, this, &CGisListWks::slotContextMenu);
@@ -1078,7 +1077,8 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
     menu.addAction(actionCopyItem);
     menu.addSection(tr("Waypoints"));
     menu.addAction(actionRteFromWpt);
-    menu.addAction(actionSymWpt);
+    action = menu.addMenu(getWptIconMenu(tr("Change Icon"), this, SLOT(slotSymWpt()), &menu));
+    action->setEnabled(!keysWpts.isEmpty());
     menu.addSection(tr("Wayp. & Tracks"));
     menu.addAction(actionEleWptTrk);
     menu.addSection(tr("Tracks"));
@@ -1179,7 +1179,6 @@ void CGisListWks::slotContextMenu(const QPoint& point)
 
             actionRteFromWpt->setEnabled(keysWpt.count() > 1);
             actionCombineTrk->setEnabled(keysTrk.count() > 1);
-            actionSymWpt->setEnabled(hasWpts);
             actionEleWptTrk->setEnabled(hasWpts|hasTrks);
             showMenuItem(p, keysTrk, keysWpt);
             return;
@@ -2252,9 +2251,10 @@ void CGisListWks::slotCopyProject()
 void CGisListWks::slotSymWpt()
 {
     CGisListWksEditLock lock(false, IGisItem::mutexItems);
-    QToolButton tb;
-    CWptIconDialog dlg(&tb);
-    if(dlg.exec() == QDialog::Rejected)
+
+    QObject * obj = sender();
+    QString iconName = obj->property("iconName").toString();
+    if(iconName.isEmpty())
     {
         return;
     }
@@ -2271,7 +2271,7 @@ void CGisListWks::slotSymWpt()
         keys << wpt->getKey();
     }
 
-    CGisWorkspace::self().changeWptSymByKey(keys, tb.objectName());
+    CGisWorkspace::self().changeWptSymByKey(keys, iconName);
 }
 
 void CGisListWks::slotEleWptTrk()

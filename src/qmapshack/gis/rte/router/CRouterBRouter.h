@@ -27,10 +27,10 @@
 #include <QProcess>
 #include <QTimer>
 
+class CRouterBRouterLocal;
 class CRouterBRouterSetup;
 class CRouterBRouterSetupWizard;
 class CRouterBRouterInfo;
-class CRouterBRouterToolShell;
 class CRouterSetup;
 class CProgressDialog;
 
@@ -63,10 +63,6 @@ private slots:
     void slotToolProfileInfoClicked() const;
     void slotDisplayError(const QString &error, const QString &details) const;
     void slotDisplayProfileInfo(const QString &profile, const QString &content);
-    void slotBRouterStateChanged(const QProcess::ProcessState newState);
-    void slotBRouterError(const QProcess::ProcessError error, const QString &errorString);
-    void slotBRouterSocketError(const QAbstractSocket::SocketError error);
-    void slotBRouterSocketConnected();
     void slotToggleBRouter();
     void slotToggleConsole() const;
     void slotClearError();
@@ -74,16 +70,15 @@ private slots:
 private:
 
     void updateDialog() const;
-    void startBRouter();
-    void stopBRouter() const;
     void getBRouterVersion();
     bool isMinimumVersion(int major, int minor, int patch) const;
     void parseBRouterVersion(const QString& text);
-    bool usesLocalBindaddress() const;
-    void updateLocalBRouterStatus() const;
+    void updateBRouterStatus() const;
     int synchronousRequest(const QVector<QPointF>& points, const QList<IGisItem *> &nogos, QPolygonF &coords, bool isVersionRequest);
     QNetworkRequest getRequest(const QVector<QPointF>& routePoints, const QList<IGisItem *> &nogos) const;
     QUrl getServiceUrl() const;
+
+    CRouterBRouterLocal * localBRouter;
 
     QNetworkAccessManager * networkAccessManager;
     QTimer * timerCloseStatusMsg;
@@ -92,24 +87,15 @@ private:
     CRouterBRouterSetup * setup;
     CRouterSetup * routerSetup;
     CRouterBRouterInfo * info;
-    CRouterBRouterToolShell * brouterShell {nullptr};
-    QProcess::ProcessState brouterState { QProcess::NotRunning };
-    QProcess::ProcessError brouterError { QProcess::UnknownError };
     CProgressDialog * progress { nullptr };
-    bool isError { false };
-    QString error;
-    QString errorDetails;
     bool isShutdown { false };
-
-    enum connect_state_e { eNone=0, eConnected=1, eError=2 };
-    QEventLoop * eventLoop { nullptr };
-    QAbstractSocket::SocketError socketError { QAbstractSocket::ConnectionRefusedError };
 
     int versionMajor { NOINT };
     int versionMinor { NOINT };
     int versionPatch { NOINT };
 
     static CRouterBRouter * pSelf;
+    friend class CRouterBRouterLocal;
 };
 
 #endif //CROUTERBROUTER_H

@@ -63,7 +63,7 @@ private slots:
     void slotToolProfileInfoClicked() const;
     void slotDisplayError(const QString &error, const QString &details) const;
     void slotDisplayProfileInfo(const QString &profile, const QString &content);
-    void slotToggleBRouter();
+    void slotToggleBRouter() const;
     void slotToggleConsole() const;
     void slotClearError();
 

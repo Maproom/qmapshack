@@ -3688,17 +3688,17 @@ Zeile %2, Spalte %3:
         <translation>GDAL VRT erstellen</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="80"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="82"/>
         <source>Select files...</source>
         <translation>Dateien auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="110"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="112"/>
         <source>Select target file...</source>
         <translation>Zieldatei auswählen...</translation>
     </message>
     <message>
-        <location filename="../tool/CMapVrtBuilder.cpp" line="217"/>
+        <location filename="../tool/CMapVrtBuilder.cpp" line="224"/>
         <source>!!! done !!!
 </source>
         <translation>!!! erledigt !!!</translation>
@@ -4343,112 +4343,156 @@ ist keine gültige Koordinatensystemdefinition:
         <translation>dritte Variante</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="172"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="169"/>
         <source>BRouter (offline)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="179"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="176"/>
         <source>BRouter (online)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="209"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="206"/>
         <source>profile: %1, alternative: %2</source>
         <translation>Profil: %1, Variante: %2</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
         <source>BRouter: not found</source>
-        <translation>BRouter: nicht gefunden</translation>
+        <translation type="vanished">BRouter: nicht gefunden</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="803"/>
         <source>Error:</source>
-        <translation>Fehler:</translation>
+        <translation type="vanished">Fehler:</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="809"/>
         <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
-        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Addresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
+        <translation type="vanished">QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Addresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="398"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="531"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="393"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="526"/>
         <source>response is empty</source>
         <translation>Anwort ist leer</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="446"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="441"/>
         <source>Bad response from server: %1</source>
         <translation>Fehlerhafte Serverantwort: %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="497"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="492"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routing request sent to server. Please wait...</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Routen-anfrage an den Server geschickt. Bitte warten...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="371"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="500"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="368"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="495"/>
         <source>Calculate route with %1</source>
         <translation>Berechne Route mit %1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="384"/>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="519"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="379"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="514"/>
         <source>this version of BRouter does not support more then 1 nogo-area</source>
         <translation>Diese Version von BRouter unterstütz nicht mehr als ein Vermeidungsgebiet</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="565"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="560"/>
         <source>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Bad response from server:&lt;br/&gt;%1</source>
         <translation>&lt;b&gt;BRouter&lt;/b&gt;&lt;br/&gt;Fehler-Antwort vom Server&lt;br/&gt;%1</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="555"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="550"/>
         <source>&lt;br/&gt;Calculation time: %1s</source>
         <translation>&lt;br/&gt;Berechnungszeit: %1 s</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="856"/>
         <source>running</source>
-        <translation>wird ausgeführt</translation>
+        <translation type="vanished">wird ausgeführt</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="848"/>
         <source>starting</source>
-        <translation>started</translation>
+        <translation type="vanished">started</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="741"/>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="645"/>
         <source>BRouter (Version %1.%2.%3)</source>
         <translation>BRouter (Version %1.%2.%3)</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="838"/>
+        <source>Warning...</source>
+        <translation type="vanished">Warnung...</translation>
+    </message>
+    <message>
+        <source>I understand the risk. Don&apos;t tell me again.</source>
+        <translation type="vanished">Ich verstehe das Risiko. Bitte nicht mehr zeigen.</translation>
+    </message>
+    <message>
+        <source>stopped</source>
+        <translation type="vanished">angehalten</translation>
+    </message>
+    <message>
+        <source>not installed</source>
+        <translation type="vanished">nicht installiert</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="708"/>
+        <source>online</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
+    <name>CRouterBRouterLocal</name>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="86"/>
+        <source>Waiting for local BRouter to finish initialization</source>
+        <translation>Wartet auf das Ende der lokalen BRouter Initialisierung</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="174"/>
+        <source>BRouter: not found</source>
+        <translation>BRouter: nicht gefunden</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="192"/>
+        <source>Error:</source>
+        <translation>Fehler:</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="198"/>
+        <source>QMapShack communicates with BRouter via a network connection. Usually this is done on a special address that can&apos;t be reached from outside your device. However BRouter listens for connections on all available interfaces. If you are in your own private network with an active firewall, this is not much of a problem. If you are in a public network every open port is a risk as it can be used by someone else to compromise your system. We do not recommend to use the local BRouter service in this case. If you see this warning and use BRouter version &gt;= 1.4.10 you can enforce binding to local address by setting hostname to &quot;localhost&quot; and check &quot;Bind to hostname only&quot; in the setup using expert mode.</source>
+        <translation>QMapShack kommuniziert mit BRouter über eine Netzwerkverbindung. Normalerweise wird das über eine spezielle Addresse gemacht, die von außen nicht zugänglich ist. Allerdings horcht BRouter auf allen verfügbaren Netzwerkschnittstellen. Wenn Sie in ihrem eigenen privaten Netzwerk mit einer aktiven Firewall sind, ist das kein großes Problem. Wenn Sie in einem öffentlichen Netzwerk sind, stellt jeder offene Zugang ein Risiko dar, weil er von jemanden missbraucht werden kann, ihr System anzugreifen. Wir empfehlen in diesem Fall auf den lokal laufenden BRouter zu verzichten. Wenn Sie diese Warnung sehen und BRouter Version &gt;= 1.4.10 benutzen, können Sie die Benutzung der lokalen Adresse erzwingen, indem Sie den Hostnamen auf &quot;localhost&quot; setzen und in den Einstellungen im Experten Modus &quot;Nur mit dem Hostnamen verbinden&quot; auswählen.</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="219"/>
         <source>Warning...</source>
         <translation>Warnung...</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="843"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="224"/>
         <source>I understand the risk. Don&apos;t tell me again.</source>
         <translation>Ich verstehe das Risiko. Bitte nicht mehr zeigen.</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="863"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="229"/>
+        <source>starting</source>
+        <translation>startet</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="237"/>
+        <source>running</source>
+        <translation>wird ausgeführt</translation>
+    </message>
+    <message>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="244"/>
         <source>stopped</source>
         <translation>angehalten</translation>
     </message>
     <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="874"/>
+        <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="255"/>
         <source>not installed</source>
         <translation>nicht installiert</translation>
-    </message>
-    <message>
-        <location filename="../gis/rte/router/CRouterBRouter.cpp" line="885"/>
-        <source>online</source>
-        <translation></translation>
     </message>
 </context>
 <context>
@@ -9175,9 +9219,8 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
         <source>Advanced Options</source>
-        <translation>Erweiterte Optionen</translation>
+        <translation type="vanished">Erweiterte Optionen</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="73"/>
@@ -9200,7 +9243,7 @@ Keine Lust die Anleitung zu lesen!</translation>
         <translation>Diese Optionen sind für spezielle Fälle. Normalerweise werden sie leer gelassen. Für mehr Information lesen Sie die GDAL &lt;a href=&apos;http://www.gdal.org/gdalbuildvrt.html&apos;&gt;Hilfe&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="157"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="167"/>
         <source>&lt;ol&gt;
 &lt;li&gt;Select one or multiple source files.&lt;/li&gt;
 &lt;li&gt;Select a file name for the target VRT file.&lt;/li&gt;
@@ -9228,7 +9271,7 @@ Tipp:
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="22"/>
-        <location filename="../tool/IMapVrtBuilder.ui" line="245"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="255"/>
         <source>...</source>
         <translation></translation>
     </message>
@@ -9238,57 +9281,67 @@ Tipp:
         <translation>Quelldateien auswählen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="183"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
+        <source>Ad&amp;vanced Options</source>
+        <translation>Erweiterte Optionen</translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
+        <source>User defined options</source>
+        <translation>Benutzerdef. Opt.</translation>
+    </message>
+    <message>
+        <location filename="../tool/IMapVrtBuilder.ui" line="193"/>
         <source>Overviews will allow you to show the map for a larger range of zooms.</source>
         <translation>Übersichtsebenen erlauben es Ihnen die Karte in einem größeren Zoombereich anzuzeigen.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="186"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="196"/>
         <source>Create overviews for result.</source>
         <translation>Übersichtsebenen erstellen.</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="198"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="208"/>
         <source>:2</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="205"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="215"/>
         <source>:4</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="212"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="222"/>
         <source>:8</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="219"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="229"/>
         <source>:16</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="226"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="236"/>
         <source>:32</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="233"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="243"/>
         <source>:64</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="268"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="278"/>
         <source>Target Filename:</source>
         <translation>Zieldatei auswählen:</translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="275"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="285"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../tool/IMapVrtBuilder.ui" line="284"/>
+        <location filename="../tool/IMapVrtBuilder.ui" line="294"/>
         <source>Start</source>
         <translation></translation>
     </message>

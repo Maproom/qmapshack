@@ -23,8 +23,8 @@
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 
-#include <QtWidgets>
 #include <QtNetwork>
+#include <QtWidgets>
 
 CRouterBRouterLocal::CRouterBRouterLocal(CRouterBRouter &parent) : QObject(&parent), brouter(parent)
 {

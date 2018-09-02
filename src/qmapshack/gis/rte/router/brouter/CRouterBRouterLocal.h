@@ -39,7 +39,7 @@ public:
     bool isBRouterNotRunning() const;
     bool isBRouterError() const;
     void clearBRouterError();
-    void getBRouterVersion();
+    void getBRouterVersion() const;
     void updateLocalBRouterStatus() const;
 
 private slots:

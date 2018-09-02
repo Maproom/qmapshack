@@ -145,7 +145,7 @@ void CRouterBRouterLocal::clearBRouterError()
     brouterError = QProcess::UnknownError;
 }
 
-void CRouterBRouterLocal::getBRouterVersion()
+void CRouterBRouterLocal::getBRouterVersion() const
 {
     if (brouter->setup->isLocalBRouterInstalled())
     {

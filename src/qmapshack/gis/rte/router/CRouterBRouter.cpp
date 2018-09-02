@@ -594,7 +594,7 @@ void CRouterBRouter::slotToggleConsole() const
     pushBRouterError->setVisible(showError);
 }
 
-void CRouterBRouter::slotToggleBRouter()
+void CRouterBRouter::slotToggleBRouter() const
 {
     if (localBRouter->isBRouterNotRunning())
     {

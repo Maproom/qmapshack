@@ -31,7 +31,7 @@ class CRouterBRouterLocal : public QObject
 {
     Q_OBJECT
 public:
-    CRouterBRouterLocal(CRouterBRouter * parent);
+    CRouterBRouterLocal(CRouterBRouter &parent);
     virtual ~CRouterBRouterLocal() {}
 
     void startBRouter();
@@ -51,7 +51,7 @@ private slots:
 private:
     bool usesLocalBindaddress() const;
 
-    CRouterBRouter * brouter;
+    CRouterBRouter & brouter;
 
     CRouterBRouterToolShell * brouterShell {nullptr};
     QProcess::ProcessState brouterState { QProcess::NotRunning };

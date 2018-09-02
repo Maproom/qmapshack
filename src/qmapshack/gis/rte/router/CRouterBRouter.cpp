@@ -73,7 +73,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     textBRouterError->setVisible(false);
     pushBRouterError->setVisible(false);
 
-    localBRouter = new CRouterBRouterLocal(this);
+    localBRouter = new CRouterBRouterLocal(*this);
 
     updateDialog();
 

@@ -148,6 +148,7 @@ private:
     const QString onlineCacheDir = "BRouter";
 
     friend class CRouterBRouter;
+    friend class CRouterBRouterLocal;
     friend class CRouterBRouterSetupPage;
     friend class CRouterBRouterSetupWizard;
     friend class CRouterBRouterTilesSelect;

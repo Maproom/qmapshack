@@ -22,9 +22,9 @@
 #include "gis/CGisWorkspace.h"
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/router/brouter/CRouterBRouterInfo.h"
+#include "gis/rte/router/brouter/CRouterBRouterLocal.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetup.h"
 #include "gis/rte/router/brouter/CRouterBRouterSetupWizard.h"
-#include "gis/rte/router/brouter/CRouterBRouterToolShell.h"
 #include "gis/rte/router/CRouterBRouter.h"
 #include "gis/wpt/CGisItemWpt.h"
 #include "helpers/CProgressDialog.h"
@@ -73,10 +73,7 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
     textBRouterError->setVisible(false);
     pushBRouterError->setVisible(false);
 
-    //set textBRouterOutput as parent of ToolShell to ensure Toolshell is destroyed before text
-    brouterShell = new CRouterBRouterToolShell(textBRouterOutput,textBRouterOutput);
-    connect(brouterShell, &CRouterBRouterToolShell::sigProcessStateChanged, this, &CRouterBRouter::slotBRouterStateChanged);
-    connect(brouterShell, &CRouterBRouterToolShell::sigProcessError,        this, &CRouterBRouter::slotBRouterError);
+    localBRouter = new CRouterBRouterLocal(this);
 
     updateDialog();
 
@@ -92,9 +89,9 @@ CRouterBRouter::CRouterBRouter(QWidget *parent)
 CRouterBRouter::~CRouterBRouter()
 {
     isShutdown = true;
-    if (brouterState != QProcess::NotRunning)
+    if (!localBRouter->isBRouterNotRunning())
     {
-        stopBRouter();
+        localBRouter->stopBRouter();
     }
     SETTINGS;
     cfg.beginGroup("Route/brouter");
@@ -106,7 +103,7 @@ CRouterBRouter::~CRouterBRouter()
 
 void CRouterBRouter::slotToolSetupClicked()
 {
-    stopBRouter();
+    localBRouter->stopBRouter();
     CRouterBRouterSetupWizard setupWizard;
     setupWizard.exec();
     slotClearError();
@@ -144,7 +141,7 @@ void CRouterBRouter::slotClearError()
     textBRouterError->clear();
     textBRouterError->setVisible(false);
     pushBRouterError->setVisible(false);
-    brouterError = QProcess::UnknownError;
+    localBRouter->clearBRouterError();
 }
 
 void CRouterBRouter::slotDisplayProfileInfo(const QString &profile, const QString &content)
@@ -190,7 +187,7 @@ void CRouterBRouter::updateDialog() const
     comboProfile->setEnabled(hasItems);
     toolProfileInfo->setEnabled(hasItems);
     comboAlternative->setEnabled(hasItems);
-    updateLocalBRouterStatus();
+    updateBRouterStatus();
 }
 
 void CRouterBRouter::slotCloseStatusMsg() const
@@ -354,9 +351,9 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
         return -1;
     }
 
-    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning())
     {
-        startBRouter();
+        localBRouter->startBRouter();
     }
 
     synchronous = true;
@@ -454,9 +451,9 @@ int CRouterBRouter::synchronousRequest(const QVector<QPointF> &points, const QLi
 void CRouterBRouter::calcRoute(const IGisItem::key_t& key)
 {
     mutex.lock();
-    if (setup->installMode == CRouterBRouterSetup::eModeLocal && brouterState == QProcess::NotRunning)
+    if (setup->installMode == CRouterBRouterSetup::eModeLocal && localBRouter->isBRouterNotRunning())
     {
-        startBRouter();
+        localBRouter->startBRouter();
     }
     CGisItemRte *rte = dynamic_cast<CGisItemRte*>(CGisWorkspace::self().getItemByKey(key));
     if(nullptr == rte)
@@ -589,145 +586,31 @@ QUrl CRouterBRouter::getServiceUrl() const
     }
 }
 
-void CRouterBRouter::slotBRouterSocketConnected()
-{
-    eventLoop->exit(eConnected);
-}
-
-void CRouterBRouter::slotBRouterSocketError(const QAbstractSocket::SocketError error)
-{
-    socketError = error;
-    eventLoop->exit(eError);
-}
-
 void CRouterBRouter::slotToggleConsole() const
 {
     textBRouterOutput->setVisible(!textBRouterOutput->isVisible());
-    bool showError = brouterError != QProcess::UnknownError && !textBRouterOutput->isVisible();
+    bool showError = localBRouter->isBRouterError() && !textBRouterOutput->isVisible();
     textBRouterError->setVisible(showError);
     pushBRouterError->setVisible(showError);
 }
 
 void CRouterBRouter::slotToggleBRouter()
 {
-    if (brouterState == QProcess::NotRunning)
+    if (localBRouter->isBRouterNotRunning())
     {
-        startBRouter();
+        localBRouter->startBRouter();
     }
     else
     {
-        stopBRouter();
+        localBRouter->stopBRouter();
     }
-}
-
-void CRouterBRouter::startBRouter()
-{
-    if (setup->isLocalBRouterInstalled())
-    {
-        textBRouterOutput->clear();
-        //# BRouter standalone server
-        //# java -cp brouter.jar btools.brouter.RouteServer <segmentdir> <profile-map> <customprofiledir> <port> <maxthreads>
-        //# maxRunningTime is the request timeout in seconds, set to 0 to disable timeout//    JAVA_OPTS=
-        //    CLASSPATH=../brouter.jar
-        //    java $JAVA_OPTS -cp $CLASSPATH btools.server.RouteServer ../segments4 ../profiles2 ../customprofiles 17777 1
-
-        if (brouterState == QProcess::NotRunning)
-        {
-            QStringList args;
-            args << setup->localJavaOpts.split(QRegExp("\\s+"));
-            args << QString("-DmaxRunningTime=%1").arg(setup->localMaxRunningTime);
-            args << "-cp";
-            args << "brouter.jar";
-            args << "btools.server.RouteServer";
-            args << setup->localSegmentsDir;
-            args << setup->localProfileDir;
-            args << setup->localCustomProfileDir;
-            args << setup->localPort;
-            args << setup->localNumberThreads;
-            if (usesLocalBindaddress())
-            {
-                args << setup->localHost;
-            }
-            brouterShell->start(setup->localDir, setup->localJavaExecutable, args);
-        }
-
-        eventLoop = new QEventLoop(this);
-        CProgressDialog progress(tr("Waiting for local BRouter to finish initialization"), 0, NOINT, nullptr);
-        QTcpSocket socket;
-        QTimer timer;
-
-        connect(&progress, &CProgressDialog::rejected, eventLoop, &QEventLoop::quit);
-        connect(&socket, &QAbstractSocket::connected, this, &CRouterBRouter::slotBRouterSocketConnected);
-        connect(&socket, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), this, &CRouterBRouter::slotBRouterSocketError);
-        connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
-
-        timer.setSingleShot(true);
-        timer.start(30000); // up to 30 sec.
-        connect_state_e connectState = eNone;
-
-        while (timer.remainingTime() > 0 && brouterState == QProcess::Running)
-        {
-            socket.connectToHost(setup->localHost,setup->localPort.toInt());
-            //Processing userinputevents in local eventloop would cause a SEGV when clicking 'abort' of calling LineOp
-            connectState = connect_state_e(eventLoop->exec(QEventLoop::ExcludeUserInputEvents));
-
-            // retry after 100ms, but only in case socket is not yet connectable
-            if (connectState == eError && socketError == QAbstractSocket::ConnectionRefusedError)
-            {
-                QThread::msleep(100);
-            }
-            else
-            {
-                // connection either succeeded, progress was canceled or timeout occured.
-                break;
-            }
-        }
-        timer.stop();
-        if ( connectState == eConnected )
-        {
-            socket.disconnectFromHost();
-        }
-        eventLoop->deleteLater();
-    }
-}
-
-void CRouterBRouter::stopBRouter() const
-{
-    if (brouterState != QProcess::NotRunning)
-    {
-        brouterShell->stop();
-    }
-    textBRouterOutput->setVisible(false);
 }
 
 void CRouterBRouter::getBRouterVersion()
 {
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
-        if (setup->isLocalBRouterInstalled())
-        {
-            QProcess cmd;
-
-            QStringList args;
-            args << "-cp";
-            args << "brouter.jar";
-            args << "btools.server.RouteServer";
-
-            cmd.setWorkingDirectory(setup->localDir);
-            cmd.start(setup->localJavaExecutable,args);
-
-            cmd.waitForStarted();
-            if (!cmd.waitForFinished(3000))
-            {
-                cmd.kill();
-            }
-
-            parseBRouterVersion(QString(cmd.readAll()));
-        }
-        else
-        {
-            labelBRouter->setText(tr("BRouter: not found"));
-        }
+        localBRouter->getBRouterVersion();
     }
     else
     {
@@ -807,37 +690,8 @@ bool CRouterBRouter::isMinimumVersion(int major, int minor, int patch) const
     return true;
 }
 
-bool CRouterBRouter::usesLocalBindaddress() const
+void CRouterBRouter::updateBRouterStatus() const
 {
-    return setup->localBindLocalonly && isMinimumVersion(1,4,10);
-}
-
-void CRouterBRouter::slotBRouterStateChanged(const QProcess::ProcessState newState)
-{
-    brouterState = newState;
-    updateLocalBRouterStatus();
-}
-
-void CRouterBRouter::slotBRouterError(const QProcess::ProcessError error, const QString &errorString)
-{
-    brouterError = error;
-    slotDisplayError(tr("Error:"),errorString);
-    updateLocalBRouterStatus();
-}
-
-void CRouterBRouter::updateLocalBRouterStatus() const
-{
-    static const QString msgBRouterWarning = tr(
-        "QMapShack communicates with BRouter via a network connection. Usually this is done on a special "
-        "address that can't be reached from outside your device. However BRouter listens for connections "
-        "on all available interfaces. If you are in your own private network with an active firewall, this "
-        "is not much of a problem. If you are in a public network every open port is a risk as it can be "
-        "used by someone else to compromise your system. We do not recommend to use the local BRouter service "
-        "in this case. If you see this warning and use BRouter version >= 1.4.10 you can enforce binding to "
-        "local address by setting hostname to \"localhost\" and check \"Bind to hostname only\" in the setup "
-        "using expert mode."
-        );
-
     if (isShutdown)
     {
         return;
@@ -846,59 +700,7 @@ void CRouterBRouter::updateLocalBRouterStatus() const
     labelBRouterWarning->hide();
     if (setup->installMode == CRouterBRouterSetup::eModeLocal)
     {
-        if (setup->isLocalBRouterInstalled())
-        {
-            switch(brouterState)
-            {
-            case QProcess::Starting:
-            {
-                SETTINGS;
-                if(!usesLocalBindaddress() && cfg.value("Route/brouter/local/showWarning", true).toBool())
-                {
-                    QMessageBox mbox;
-                    mbox.setWindowTitle(tr("Warning..."));
-                    mbox.setIcon(QMessageBox::Warning);
-                    mbox.setStandardButtons(QMessageBox::Ok);
-                    mbox.setText(msgBRouterWarning);
-
-                    QCheckBox * checkAgree = new QCheckBox(tr("I understand the risk. Don't tell me again."), &mbox);
-                    mbox.setCheckBox(checkAgree);
-                    mbox.exec();
-                    cfg.setValue("Route/brouter/local/showWarning", !checkAgree->isChecked());
-                }
-                labelStatus->setText(tr("starting"));
-                toolConsole->setVisible(true);
-                break;
-            }
-
-            case QProcess::Running:
-            {
-                labelBRouterWarning->setVisible(!usesLocalBindaddress());
-                labelStatus->setText(tr("running"));
-                toolConsole->setVisible(true);
-                break;
-            }
-
-            case QProcess::NotRunning:
-            {
-                labelStatus->setText(tr("stopped"));
-                toolConsole->setVisible(brouterError != QProcess::UnknownError);
-                break;
-            }
-            }
-
-            checkFastRecalc->setEnabled(true);
-            toolToggleBRouter->setEnabled(true);
-        }
-        else
-        {
-            labelStatus->setText(tr("not installed"));
-            toolConsole->setVisible(false);
-            toolToggleBRouter->setEnabled(false);
-            checkFastRecalc->setEnabled(false);
-        }
-        toolToggleBRouter->setVisible(true);
-        checkFastRecalc->setVisible(true);
+        localBRouter->updateLocalBRouterStatus();
     }
     else
     {

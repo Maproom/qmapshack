@@ -42,6 +42,7 @@ CMapVrtBuilder::CMapVrtBuilder(QWidget *parent)
     lineASrs->setText(cfg.value("a_srs", "").toString());
     lineSrcNoData->setText(cfg.value("srcndata", "").toString());
     lineVrtNoData->setText(cfg.value("vrtndata", "").toString());
+    lineUserOptions->setText(cfg.value("useropt", "").toString());
     groupOverviews->setChecked(cfg.value("Overviews", false).toBool());
     checkBy2->setChecked(cfg.value("by2", false).toBool());
     checkBy4->setChecked(cfg.value("by4", false).toBool());
@@ -62,6 +63,7 @@ CMapVrtBuilder::~CMapVrtBuilder()
     cfg.setValue("a_srs", lineASrs->text());
     cfg.setValue("srcndata", lineSrcNoData->text());
     cfg.setValue("vrtndata", lineVrtNoData->text());
+    cfg.setValue("useropt", lineUserOptions->text());
     cfg.setValue("Overviews", groupOverviews->isChecked());
     cfg.setValue("by2", checkBy2->isChecked());
     cfg.setValue("by4", checkBy4->isChecked());
@@ -154,6 +156,11 @@ void CMapVrtBuilder::slotStart()
         if(!lineVrtNoData->text().isEmpty())
         {
             args << "-vrtnodata" << lineVrtNoData->text();
+        }
+
+        if(!lineUserOptions->text().isEmpty())
+        {
+            args << lineUserOptions->text().split(" ", QString::SkipEmptyParts);
         }
     }
 

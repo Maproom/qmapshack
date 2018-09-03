@@ -1,3 +1,43 @@
+V 1.12.0
+[Issue #334] Database: Moving a folder fails sometimes
+[Issue #339] Crash when cutting track in external profile window
+[Issue #342] Show links in screen option dialogs for waypoints, tracks, routes, areas
+[Issue #346] Add a menu function to replace the elevation value in waypoints for a selection of waypoints.
+[Issue #345] TCX: Some symbols get replaced by "Generic"
+[Issue #348] Inconsistent menu "Replace elevation by DEM"
+[Issue #347] fixed freezing text edit dialog on mac.
+[Issue #351] Avoid redundant (Label-) information when drawing Wpt
+[Issue #340] Strange window behavior when changing waypoint icons
+[Issue #352] Replace QtWebKit by QtWebEngine
+[Issue #353] Replace QtScript by QJSEngine
+[Issue #343] Display problems after updating QT from 5.10.1 to 5.11.0
+[Issue #354] Crash while working with GeoSearch
+[issue #355] on BRouter start wait for socket being actualy ready to connect
+[Issue #356] QMapShack crashes when closed while BRouter still running
+[Issue #338] QMS freezes after installing and selecting BRouter [Windows 10]
+[Issue #363] Tracks: Duplicate label for min/max speed
+[Issue #366] Plot: Tool tip for additional zoom modes does not show up when zoomed with mouse wheel.
+[Issue #367] Trk: Append a list of track points to the invalid trackpoint message box.
+[Issue #369] Web Search: Search information about a position in the Web
+[Issue #371] QMS hangs when opening GPX file with invalid points
+[Issue #372] Unable to get BRouter version
+[Issue #373] BRouter server response: connection denied (still occuring)
+[Issue #375] Trk Details: Add splitter between track info and tab widget
+[Issue #377] Trk: Minimum track width is still too wide
+[Issue #378] Add ruler tool for distances.
+[Issue #387] VRT Builder: Add line for user defined options.
+TwoNav: Fix path for old devices.
+TwoNav: Use project name for waypoint file on device.
+Trk: Finetune speed filter for cycles
+Trk: Add speed filter for mountaineers
+Trk: Change coding of activities to allow a larger amount of activities
+Garmin: Don't save the <src> element in waypoints when writing to Garmin device
+GUI: Unify item selections to use a menu
+
+QMapTool V1.1.0:
+Show map layers of JNX export
+
+
 V 1.11.1
 Add: Geo search: Setup for API keys and other login information
 Add: Nominatim OSM as search service

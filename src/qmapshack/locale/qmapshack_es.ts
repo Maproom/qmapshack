@@ -822,7 +822,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeed.cpp" line="127"/>
         <source>Track has no or invalid elevation data. Please correct or set constant speed!</source>
-        <translation>El Track no contiene datos de elevación o son incorrectos. ¡Por favor, corregir o establecer velocidad constante!</translation>
+        <translation>El Track no contiene datos de elevación o son incorrectos. ¡Corregir o establecer velocidad constante!</translation>
     </message>
 </context>
 <context>
@@ -4405,7 +4405,7 @@ no es una definición de sistema de coordenadas válido:
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="86"/>
         <source>Waiting for local BRouter to finish initialization</source>
-        <translation type="unfinished"></translation>
+        <translation>Esperando que BRouter local inicie</translation>
     </message>
     <message>
         <location filename="../gis/rte/router/brouter/CRouterBRouterLocal.cpp" line="174"/>
@@ -9216,15 +9216,15 @@ Tip:
 &lt;li&gt;The &quot;-a_srs&quot; option is intended to assign a Projection/Datum when the source file lacks it. This does NOT re-project the data.&lt;/li&gt;
 &lt;/ul&gt;</source>
         <translation type="unfinished">&lt;ol&gt;
-&lt;li&gt;Seleccione uno o varios archivos de origen.&lt;/li&gt;
-&lt;li&gt;Seleccione un nombre para el archivo VRT de destino.&lt;/li&gt;
-&lt;li&gt;Pulse el botón &quot;Empezar&quot;.&lt;/li&gt;
+&lt;li&gt;Selecciona uno o varios archivos de origen.&lt;/li&gt;
+&lt;li&gt;Elige un nombre para el archivo VRT de destino.&lt;/li&gt;
+&lt;li&gt;Pulsa el botón &quot;Empezar&quot;.&lt;/li&gt;
 &lt;/ol&gt;
 
 Consejos:
 &lt;ul&gt;
-&lt;li&gt;Si tiene varios archivos, colóquelos en una subcarpeta de su carpeta de mapas.El archivo VRT debe crearse en una de las carpetas configuradas para mapas&lt;/li&gt;
-&lt;li&gt;Utilice las opciones avanzadas para definir un valor &quot;sin dato&quot; si los archivos no lo tienen definido  y no forman un área rectangular. Las áreas &quot;sin dato&quot; se volverán transparentes.&lt;/li&gt;
+&lt;li&gt;Si tienes varios archivos, ponlos en una subcarpeta de su carpeta de mapas.El archivo VRT debe crearse en una de las carpetas configuradas para mapas&lt;/li&gt;
+&lt;li&gt;Usa las opciones avanzadas para definir un valor &quot;sin dato&quot; si los archivos no lo tienen definido  y no forman un área rectangular. Las áreas &quot;sin dato&quot; se volverán transparentes.&lt;/li&gt;
 &lt;li&gt;La opción &quot;-a_srs&quot;  está destinada a asignar una Proyección / Datum cuando el archivo de origen no lo tiene definido. Esto NO reproyecta los datos.&lt;/li&gt;
 &lt;/ul&gt;</translation>
     </message>
@@ -9242,12 +9242,12 @@ Consejos:
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="61"/>
         <source>Ad&amp;vanced Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones Avanzadas</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="130"/>
         <source>User defined options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones definidas por el usuario</translation>
     </message>
     <message>
         <location filename="../tool/IMapVrtBuilder.ui" line="193"/>
@@ -10063,13 +10063,13 @@ o
 &lt;li&gt;Select a prefix. The database will be listed by this prefix.&lt;/li&gt;
 &lt;li&gt;Press &quot;Start&quot; button.&lt;/li&gt;
 &lt;/ol&gt;</source>
-        <translation>&lt;p&gt;Para crear una base de datos de Routino hay que descargar archivos *.pbf de &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. El proceso de creación es bastante lento y los archivos resultantes bastante grandes, por lo tanto, se recomienda no descargar continentes completos. Limite su descarga a los países que realmente necesita, sin embargo, como Routino no puede crear una ruta usando varias bases de datos, es necesario incluir todos los países por los que desea que pasen sus rutas.&lt;/p&gt;
+        <translation>&lt;p&gt;Para crear una base de datos de Routino hay que descargar archivos *.pbf de &lt;a href=&apos;http://download.geofabrik.de/&apos;&gt;GeoFabrik&lt;/a&gt;. El proceso de creación es bastante lento y los archivos resultantes bastante grandes, por lo tanto, se recomienda no descargar continentes completos, descarga solo los países que realmente necesitas, pero piensa que Routino no puede crear rutas entre bases de datos distintas, debes incluir todos los países por los que quieres que pasen tus rutas.&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;Seleccione uno o varios archivos *.pbf.&lt;/li&gt;
-&lt;li&gt;Seleccione la carpeta para su base de datos de Routino.&lt;/li&gt;
-&lt;li&gt;Seleccione un prefijo. La base de datos será listada por este prefijo.&lt;/li&gt;
-&lt;li&gt;Presione  botón &lt;/li&gt;&quot;Empezar&quot;.
+&lt;li&gt;Selecciona uno o varios archivos *.pbf.&lt;/li&gt;
+&lt;li&gt;Escoge la carpeta para su base de datos de Routino.&lt;/li&gt;
+&lt;li&gt;Introduce el prefijo. La base de datos será listada por este prefijo.&lt;/li&gt;
+&lt;li&gt;Presiona  botón &lt;/li&gt;&quot;Empezar&quot;.
 &lt;/ol&gt;</translation>
     </message>
 </context>

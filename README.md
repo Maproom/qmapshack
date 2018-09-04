@@ -22,7 +22,7 @@ Dependencies
 Next to QT5 you will need the development packages of:
 
 
-* [Qt5](https://www.qt.io/) (at least 5.4)
+* [Qt5](https://www.qt.io/) (at least 5.8)
 * [GDAL](http://www.gdal.org/)
 * [Proj4](https://github.com/OSGeo/proj.4/wiki)
 * [Routino](http://www.routino.org/) (at least 3.1)

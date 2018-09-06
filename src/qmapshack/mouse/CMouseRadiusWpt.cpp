@@ -21,7 +21,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseAdapter.h"

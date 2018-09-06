@@ -27,7 +27,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/rte/CScrOptRte.h"
 #include "gis/trk/CGisItemTrk.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CDraw.h"
@@ -51,7 +51,7 @@ void CGisItemRte::rtept_t::updateIcon()
     }
     else
     {
-        icon = getWptIconByName(sym, focus);
+        icon = CWptIconManager::self().getWptIconByName(sym, focus);
     }
 }
 /// used to create a copy of route with new parent

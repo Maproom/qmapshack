@@ -21,7 +21,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "mouse/CMouseAdapter.h"
@@ -39,7 +39,7 @@ CMouseMoveWpt::CMouseMoveWpt(CGisItemWpt &wpt, CGisDraw * gis, CCanvas *canvas, 
     avoid(wpt.isNogo())
 {
     cursor  = QCursor(QPixmap(":/cursors/cursorMoveWpt.png"), 0, 0);
-    icon    = getWptIconByName(wpt.getIconName(), focus);
+    icon    = CWptIconManager::self().getWptIconByName(wpt.getIconName(), focus);
     newPos  = origPos;
     wpt.setHideArea(true);
     canvas->triggerCompleteUpdate(CCanvas::eRedrawGis);

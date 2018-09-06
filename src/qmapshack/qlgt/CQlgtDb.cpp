@@ -31,7 +31,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CProgressDialog.h"
 
 #include "CMainWindow.h"
@@ -314,7 +314,7 @@ void CQlgtDb::migrateDB(int version)
                 if(query.value(1).toInt() == eWpt || query.value(1).toInt() == eRte)
                 {
                     QPointF focus;
-                    pixmap = getWptIconByName(query.value(2).toString(), focus);
+                    pixmap = CWptIconManager::self().getWptIconByName(query.value(2).toString(), focus);
                 }
                 else if(query.value(1).toInt() == eTrk)
                 {

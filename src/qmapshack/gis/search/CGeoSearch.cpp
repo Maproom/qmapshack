@@ -23,7 +23,7 @@
 #include "gis/search/CGeoSearch.h"
 #include "gis/search/CGeoSearchConfigDialog.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
 #include "misc.h"
 #include "version.h"
@@ -51,7 +51,7 @@ CGeoSearch::CGeoSearch(CGisListWks * parent)
 
     edit = new QLineEdit(parent);
 
-    actSymbol = edit->addAction(getWptIconByName(searchConfig->symbolName, focus), QLineEdit::TrailingPosition);
+    actSymbol = edit->addAction(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus), QLineEdit::TrailingPosition);
     actSymbol->setObjectName(searchConfig->symbolName);
     connect(actSymbol, &QAction::triggered, this, &CGeoSearch::slotChangeSymbol);
 
@@ -91,12 +91,12 @@ void CGeoSearch::setIcon()
 
 void CGeoSearch::slotChangeSymbol()
 {
-    QString iconName = selectWptIcon(treeWidget());
+    QString iconName = CWptIconManager::self().selectWptIcon(treeWidget());
     if(!iconName.isEmpty())
     {
         QPointF focus;
         actSymbol->setObjectName(iconName);
-        actSymbol->setIcon(getWptIconByName(iconName, focus));
+        actSymbol->setIcon(CWptIconManager::self().getWptIconByName(iconName, focus));
     }
 
     searchConfig->symbolName = actSymbol->objectName();
@@ -799,7 +799,7 @@ void CGeoSearch::createErrorItem(const QString& status)
 void CGeoSearch::slotConfigChanged()
 {
     QPointF focus;
-    actSymbol->setIcon(getWptIconByName(searchConfig->symbolName, focus));
+    actSymbol->setIcon(CWptIconManager::self().getWptIconByName(searchConfig->symbolName, focus));
     actSymbol->setObjectName(searchConfig->symbolName);
     setIcon();
 }

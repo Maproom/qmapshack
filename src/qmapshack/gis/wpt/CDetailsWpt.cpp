@@ -18,7 +18,7 @@
 
 #include "gis/wpt/CDetailsWpt.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CElevationDialog.h"
 #include "helpers/CInputDialog.h"
 #include "helpers/CLinksDialog.h"
@@ -222,7 +222,7 @@ void CDetailsWpt::slotChangeIcon()
 {
     if(!wpt.isReadOnly())
     {
-        QString iconName = selectWptIcon(this);
+        QString iconName = CWptIconManager::self().selectWptIcon(this);
         if(!iconName.isEmpty())
         {
             wpt.setIcon(iconName);

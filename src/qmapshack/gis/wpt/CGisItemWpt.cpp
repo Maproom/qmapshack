@@ -28,7 +28,7 @@
 #include "gis/wpt/CScrOptWpt.h"
 #include "gis/wpt/CScrOptWptRadius.h"
 #include "gis/wpt/CSetupNewWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "GeoMath.h"
 #include "helpers/CDraw.h"
 #include "helpers/CSettings.h"
@@ -400,11 +400,11 @@ void CGisItemWpt::setIcon()
 {
     if(geocache.hasData)
     {
-        IGisItem::setIcon(getWptIconByName(geocache.type, focus));
+        IGisItem::setIcon(CWptIconManager::self().getWptIconByName(geocache.type, focus));
     }
     else
     {
-        IGisItem::setIcon(getWptIconByName(wpt.sym, focus));
+        IGisItem::setIcon(CWptIconManager::self().getWptIconByName(wpt.sym, focus));
     }
 }
 
@@ -463,7 +463,7 @@ void CGisItemWpt::setIcon(const QString& name)
 
     QPointF focus;
     QString path;
-    getWptIconByName(name, focus, &path);
+    CWptIconManager::self().getWptIconByName(name, focus, &path);
 
     changed(tr("Changed icon"), path);
 }

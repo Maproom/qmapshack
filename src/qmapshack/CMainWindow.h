@@ -35,6 +35,7 @@ class CGeoSearchConfig;
 class CToolBarConfig;
 class CGeoSearchWeb;
 struct SGisLine;
+class CWptIconManager;
 
 class CMainWindow : public QMainWindow, private Ui::IMainWindow
 {
@@ -226,6 +227,7 @@ private:
     CGeoSearchConfig * geoSearchConfig;
 
     CGeoSearchWeb * geoSearchWeb;
+    CWptIconManager * wptIconManager;
 
     QList<QDockWidget *> docks;
     QList<QDockWidget *> activeDocks;

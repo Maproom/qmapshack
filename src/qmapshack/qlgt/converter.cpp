@@ -21,7 +21,7 @@
 #include "gis/rte/CGisItemRte.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 
 #include "qlgt/CQlgtDiary.h"
 #include "qlgt/CQlgtFolder.h"
@@ -280,7 +280,7 @@ CGisItemRte::CGisItemRte(const CQlgtRoute& rte1, IGisProject * project)
     rte.desc        = rte1.description;
 
     QPointF focus;
-    QPixmap icon = getWptIconByName(rte1.iconString, focus);
+    QPixmap icon = CWptIconManager::self().getWptIconByName(rte1.iconString, focus);
 
     for(const CQlgtRoute::pt_t& pt1 : rte1.priRoute)
     {

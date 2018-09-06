@@ -59,10 +59,9 @@ set( SRCS
     gis/CGisListDB.cpp
     gis/CGisListWks.cpp
     gis/CGisWorkspace.cpp
-    gis/CSelDevices.cpp
+    gis/CSelDevices.cpp    
     gis/IGisItem.cpp
     gis/IGisLine.cpp
-    gis/WptIcons.cpp
     gis/db/CDBFolderGroup.cpp
     gis/db/CDBFolderLostFound.cpp
     gis/db/CDBFolderMysql.cpp
@@ -211,6 +210,7 @@ set( SRCS
     helpers/CToolBarSetupDialog.cpp
     helpers/CValue.cpp
     helpers/CWptIconDialog.cpp
+    helpers/CWptIconManager.cpp
     main.cpp
     map/CMapDraw.cpp
     map/CMapGEMF.cpp
@@ -380,11 +380,10 @@ set( HDRS
     gis/CGisListDB.h
     gis/CGisListWks.h
     gis/CGisWorkspace.h
-    gis/CSelDevices.h
+    gis/CSelDevices.h    
     gis/IGisItem.h
     gis/IGisLine.h
     gis/Poi.h
-    gis/WptIcons.h
     gis/db/CDBFolderGroup.h
     gis/db/CDBFolderLostFound.h
     gis/db/CDBFolderMysql.h
@@ -536,6 +535,7 @@ set( HDRS
     helpers/CValue.h
     helpers/CWebPage.h
     helpers/CWptIconDialog.h
+    helpers/CWptIconManager.h
     helpers/Platform.h
     helpers/Signals.h
     map/CMapDraw.h

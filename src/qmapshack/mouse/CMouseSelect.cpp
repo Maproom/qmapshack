@@ -20,7 +20,7 @@
 #include "gis/CGisDraw.h"
 #include "gis/CGisWorkspace.h"
 #include "gis/trk/CActivityTrk.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "mouse/CMouseSelect.h"
 #include "mouse/CScrOptSelect.h"
 #include <QtWidgets>
@@ -193,7 +193,7 @@ void CMouseSelect::slotColorTrk() const
 
 void CMouseSelect::slotSymWpt() const
 {
-    QString iconName = selectWptIcon(CMainWindow::self().getBestWidgetForParent());
+    QString iconName = CWptIconManager::self().selectWptIcon(CMainWindow::self().getBestWidgetForParent());
     if(iconName.isEmpty())
     {
         return;

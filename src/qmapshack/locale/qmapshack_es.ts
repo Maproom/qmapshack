@@ -2775,59 +2775,59 @@ línea %2, columna %3.
         <translation type="vanished">Usar &lt;b&gt;Menu-&gt;ver-&gt;Añadir vista&lt;/b&gt; para abrir nueva vista, o &lt;b&gt;Menu-&gt;archivo-&gt;cargar vista&lt;/b&gt; para restaurar una vista guardada. O click &lt;a href=&apos;nueva vista&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="554"/>
+        <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation type="unfinished">Seleccione carpeta...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="944"/>
+        <location filename="../CMainWindow.cpp" line="946"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Haga clic en &lt;b&gt;Menu-&gt;Ver-&gt;Añadir vista&lt;/b&gt; para abrir una nueva vista, o &lt;b&gt;Menu-&gt;Archivo-&gt;Cargar Vista&lt;/b&gt; para restaurar una vista guardada, o clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1073"/>
+        <location filename="../CMainWindow.cpp" line="1075"/>
         <source>Ele.: %1%2</source>
         <translation>Altitud: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1085"/>
+        <location filename="../CMainWindow.cpp" line="1087"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendiente: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1101"/>
+        <location filename="../CMainWindow.cpp" line="1103"/>
         <source>[Grid: %1]</source>
         <translation>[Cuadrícula: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1242"/>
+        <location filename="../CMainWindow.cpp" line="1244"/>
         <source>Load GIS Data...</source>
         <translation>Cargar Datos GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
         <source>Select output file</source>
         <translation>Seleccionar archivo de salida</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vista de QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>Select file to load</source>
         <translation>Seleccionar archivo a cargar</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1719"/>
+        <location filename="../CMainWindow.cpp" line="1721"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1720"/>
+        <location filename="../CMainWindow.cpp" line="1722"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack detectó una libreria Proj4 mal instalada. Faltan las tablas de conversión para las proyecciones EPSG normalmente almacenadas en /usr/share/proj. Póngase en contacto con el responsable del paquete de la distribución para solucionarlo.</translation>
     </message>

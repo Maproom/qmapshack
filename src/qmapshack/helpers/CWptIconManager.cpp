@@ -1,5 +1,5 @@
 /**********************************************************************************************
-    Copyright (C) 2014 Oliver Eichler oliver.eichler@gmx.de
+    Copyright (C) 2018 Oliver Eichler oliver.eichler@gmx.de
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -16,18 +16,23 @@
 
 **********************************************************************************************/
 
-
+#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
 #include "setup/IAppSetup.h"
-#include "WptIcons.h"
 
-#include <QtGui>
+#include <QtWidgets>
 
-static const char * wptDefault = "://icons/waypoints/32x32/Default.png";
+CWptIconManager * CWptIconManager::pSelf = nullptr;
+const char * CWptIconManager::wptDefault = "://icons/waypoints/32x32/Default.png";
 
-static QMap<QString, icon_t> wptIcons;
+CWptIconManager::CWptIconManager(QObject *parent)
+{
+    pSelf = this;
 
-void initWptIcons()
+    init();
+}
+
+void CWptIconManager::init()
 {
     wptIcons.clear();
 
@@ -36,9 +41,6 @@ void initWptIcons()
     wptIcons["City (Large)"]        = icon_t("://icons/waypoints/32x32/CityLarge.png", 16, 16);
     wptIcons["City (Medium)"]       = icon_t("://icons/waypoints/32x32/CityMedium.png", 16, 16);
     wptIcons["City (Small)"]        = icon_t("://icons/waypoints/32x32/CitySmall.png", 16, 16);
-//    wptIcons["Small City"]          = ":/icons/wpt/small_city15x15.png";
-//    wptIcons["Geocache"]            = ":/icons/wpt/geocache15x15.png";
-//    wptIcons["Geocache Found"]      = ":/icons/wpt/geocache_fnd15x15.png";
     wptIcons["Residence"]           = icon_t("://icons/waypoints/32x32/Residence.png", 16, 16);
     wptIcons["Flag, Red"]           = icon_t("://icons/waypoints/32x32/FlagRed.png", 0, 32);
     wptIcons["Flag, Blue"]          = icon_t("://icons/waypoints/32x32/FlagBlue.png", 0, 32);
@@ -106,20 +108,14 @@ void initWptIcons()
     }
 }
 
-const QMap<QString, icon_t>& getWptIcons()
-{
-    return wptIcons;
-}
-
-
-void setWptIconByName(const QString& name, const QString& filename)
+void CWptIconManager::setWptIconByName(const QString& name, const QString& filename)
 {
     QPixmap icon(filename);
     wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
 }
 
 
-void setWptIconByName(const QString& name, const QPixmap& icon)
+void CWptIconManager::setWptIconByName(const QString& name, const QPixmap& icon)
 {
     SETTINGS;
     QDir dirIcon(cfg.value("Paths/externalWptIcons", IAppSetup::getPlatformInstance()->userDataPath("WaypointIcons")).toString());
@@ -129,7 +125,7 @@ void setWptIconByName(const QString& name, const QPixmap& icon)
     wptIcons[name] = icon_t(filename, icon.width()>>1, icon.height()>>1);
 }
 
-QPixmap loadIcon(const QString& path)
+QPixmap CWptIconManager::loadIcon(const QString& path)
 {
     QFileInfo finfo(path);
     if(finfo.completeSuffix() != "bmp")
@@ -144,7 +140,8 @@ QPixmap loadIcon(const QString& path)
     }
 }
 
-QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
+
+QPixmap CWptIconManager::getWptIconByName(const QString& name, QPointF &focus, QString * src)
 {
     QPixmap icon;
     QString path;
@@ -192,6 +189,21 @@ QPixmap getWptIconByName(const QString& name, QPointF &focus, QString * src)
     return icon;
 }
 
+QString CWptIconManager::selectWptIcon(QWidget * parent)
+{
+    QString icon;
+
+    QMenu * menu = getWptIconMenu("", nullptr, "", parent);
+    QAction * action = menu->exec(QCursor::pos());
+
+    if(action != nullptr)
+    {
+        icon = action->property("iconName").toString();
+    }
+
+    return icon;
+}
+
 static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
 {
     static QCollator collator;
@@ -200,7 +212,7 @@ static bool keyLessThanAlpha(const QString&  s1, const QString&  s2)
     return collator.compare(s1, s2) < 0;
 }
 
-QMenu * getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
+QMenu * CWptIconManager::getWptIconMenu(const QString& title, QObject * obj, const char * slot, QWidget * parent)
 {
     QMenu * menu = new QMenu(title, parent);
     menu->setIcon(QIcon("://icons/waypoints/32x32/PinBlue.png"));
@@ -226,18 +238,4 @@ QMenu * getWptIconMenu(const QString& title, QObject * obj, const char * slot, Q
     return menu;
 }
 
-QString selectWptIcon(QWidget * parent)
-{
-    QString icon;
-
-    QMenu * menu = getWptIconMenu("", nullptr, "", parent);
-    QAction * action = menu->exec(QCursor::pos());
-
-    if(action != nullptr)
-    {
-        icon = action->property("iconName").toString();
-    }
-
-    return icon;
-}
 

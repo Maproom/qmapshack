@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CQlgtWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 
 struct wpt_head_entry_t
 {
@@ -373,5 +373,5 @@ void CQlgtWpt::setIcon(const QString& str)
 {
     QPointF focus;
     iconString = str;
-    iconPixmap = getWptIconByName(str, focus);
+    iconPixmap = CWptIconManager::self().getWptIconByName(str, focus);
 }

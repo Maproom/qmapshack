@@ -17,7 +17,7 @@
 **********************************************************************************************/
 
 #include "CMainWindow.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CSettings.h"
 #include "helpers/CWptIconDialog.h"
 #include "setup/IAppSetup.h"
@@ -53,7 +53,7 @@ void CWptIconDialog::setupList(QObject * obj)
     QString currentIcon = obj == nullptr ? QString() : obj->objectName();
     QListWidgetItem * currentItem = nullptr;
 
-    const QMap<QString, icon_t>& wptIcons = getWptIcons();
+    const QMap<QString, CWptIconManager::icon_t>& wptIcons = CWptIconManager::self().getWptIcons();
     QStringList keys = wptIcons.keys();
 
     qSort(keys.begin(), keys.end(), keyLessThanAlpha);
@@ -61,7 +61,7 @@ void CWptIconDialog::setupList(QObject * obj)
     for(const QString &key : keys)
     {
         const QString& icon = wptIcons[key].path;
-        QPixmap pixmap      = loadIcon(icon);
+        QPixmap pixmap      = CWptIconManager::self().loadIcon(icon);
 
         QListWidgetItem * item = new QListWidgetItem(pixmap, key, listWidget);
         if(currentIcon == key)
@@ -99,6 +99,6 @@ void CWptIconDialog::slotSetupPath()
 
     SETTINGS;
     cfg.setValue("Paths/externalWptIcons", path);
-    initWptIcons();
+    CWptIconManager::self().init();
     setupList(button == nullptr ? dynamic_cast<QObject*>(action) : dynamic_cast<QObject*>(button));
 }

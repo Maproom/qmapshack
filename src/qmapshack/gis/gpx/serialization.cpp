@@ -23,7 +23,7 @@
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/trk/CKnownExtension.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "version.h"
 
 #include <proj_api.h>
@@ -865,7 +865,7 @@ void CGisItemRte::readRte(const QDomNode& xml, rte_t& rte)
         rtept_t& rtept = rte.pts[m];
         const QDomNode& xmlRtept = xmlRtepts.item(m);
         readWpt(xmlRtept, rtept);
-        rtept.icon = getWptIconByName(rtept.sym, rtept.focus);
+        rtept.icon = CWptIconManager::self().getWptIconByName(rtept.sym, rtept.focus);
     }
 
     // decode some well known extensions

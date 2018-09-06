@@ -2771,59 +2771,59 @@ línia %2, columna %3:
 <context>
     <name>CMainWindow</name>
     <message>
-        <location filename="../CMainWindow.cpp" line="554"/>
+        <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation>Seleccionar Carpeta...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="944"/>
+        <location filename="../CMainWindow.cpp" line="946"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Utilitza &lt;b&gt;Menu-&gt;Vista-&gt;Afegir Vista de Mapa&lt;/b&gt; per obrir una nova vista. O &lt;b&gt;Menu-&gt;Fitxer-&gt;Carregar Vista Mapa&lt;/b&gt; per a recuperar-ne una de guardada. O clic &lt;a href=&apos;NewView&apos;&gt;aquí&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1073"/>
+        <location filename="../CMainWindow.cpp" line="1075"/>
         <source>Ele.: %1%2</source>
         <translation>Ele.: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1085"/>
+        <location filename="../CMainWindow.cpp" line="1087"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pendent: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1101"/>
+        <location filename="../CMainWindow.cpp" line="1103"/>
         <source>[Grid: %1]</source>
         <translation>[Graella: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1242"/>
+        <location filename="../CMainWindow.cpp" line="1244"/>
         <source>Load GIS Data...</source>
         <translation>Carregar Dades GIS...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
         <source>Select output file</source>
         <translation>Selecciona el fitxer de sortida</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vista QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>Select file to load</source>
         <translation>Selecciona el fitxer a carregar</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1719"/>
+        <location filename="../CMainWindow.cpp" line="1721"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1720"/>
+        <location filename="../CMainWindow.cpp" line="1722"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack ha detectat que la llibreria Proj4 no està instal·lada de forma correcte. Manquen les taules de conversió de les projeccions EPSG, emmagatzemades de normal a /usr/share/proj. Per a solucionar-ho contacteu el mantenidor del paquet de la distribució.</translation>
     </message>

@@ -2743,59 +2743,59 @@ ligne %2, colonne %3:
         <translation type="vanished">Utilisez &lt;b&gt;Menu-&gt;Vue-&gt;Add Map View&lt;/b&gt; pour ouvrir une nouvelle vue. Ou &lt;b&gt;Menu-&gt;Fichier-&gt;Charger une vue cartographique&lt;/b&gt; pour charger une vue sauvegardée. Ou cliquez &lt;a href=&apos;newview&apos;&gt;ici&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="554"/>
+        <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="944"/>
+        <location filename="../CMainWindow.cpp" line="946"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1073"/>
+        <location filename="../CMainWindow.cpp" line="1075"/>
         <source>Ele.: %1%2</source>
         <translation>Altitude: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1085"/>
+        <location filename="../CMainWindow.cpp" line="1087"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Pente du terrain : %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1101"/>
+        <location filename="../CMainWindow.cpp" line="1103"/>
         <source>[Grid: %1]</source>
         <translation>[Grille: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1242"/>
+        <location filename="../CMainWindow.cpp" line="1244"/>
         <source>Load GIS Data...</source>
         <translation>Charger des données SIG...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
         <source>Select output file</source>
         <translation>Sélectionner le fichier de sortie</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>QMapShack View (*.view)</source>
         <translation>Vue QMapShack (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>Select file to load</source>
         <translation>Sélectionner le fichier à charger</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1719"/>
+        <location filename="../CMainWindow.cpp" line="1721"/>
         <source>Fatal...</source>
         <translation>Fatal...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1720"/>
+        <location filename="../CMainWindow.cpp" line="1722"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack a détecter une bibliothèque Proj4 mal installée. Les tables de translation pour les projections ESPG lstockées en généra dans /usr/share/proj sont manquantes. Contactez votre gestionnaire de distribution pour réparer cela.</translation>
     </message>

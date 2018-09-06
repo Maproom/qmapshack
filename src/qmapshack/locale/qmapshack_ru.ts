@@ -2784,59 +2784,59 @@ line %2, column %3:
         <translation type="vanished">Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;newview&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="554"/>
+        <location filename="../CMainWindow.cpp" line="556"/>
         <source>Select folder...</source>
         <translation>Выбрать папку...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="944"/>
+        <location filename="../CMainWindow.cpp" line="946"/>
         <source>Use &lt;b&gt;Menu-&gt;View-&gt;Add Map View&lt;/b&gt; to open a new view. Or &lt;b&gt;Menu-&gt;File-&gt;Load Map View&lt;/b&gt; to restore a saved one. Or click &lt;a href=&apos;NewView&apos;&gt;here&lt;/a&gt;.</source>
         <translation>Использовать &lt;b&gt;Меню-&gt;Вид-&gt;Добавить окно карты&lt;/b&gt; для добавления нового вида. Или &lt;b&gt;Меню-&gt;Файл-&gt;Загрузить вид карты&lt;/b&gt; для восстановления сохраненного вида. Или нажмите &lt;a href=&apos;NewView&apos;&gt;здесь&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1073"/>
+        <location filename="../CMainWindow.cpp" line="1075"/>
         <source>Ele.: %1%2</source>
         <translation>Высота: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1085"/>
+        <location filename="../CMainWindow.cpp" line="1087"/>
         <source>Slope: %1%2</source>
         <comment>terrain</comment>
         <translation>Склон: %1%2</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1101"/>
+        <location filename="../CMainWindow.cpp" line="1103"/>
         <source>[Grid: %1]</source>
         <translation>[Координатная сетка: %1]</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1242"/>
+        <location filename="../CMainWindow.cpp" line="1244"/>
         <source>Load GIS Data...</source>
         <translation>Загрузить данные ГИС...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
         <source>Select output file</source>
         <translation>Выбрать выходной файл</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1276"/>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1278"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>QMapShack View (*.view)</source>
         <translation>QMapShack вид (*.view)</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1302"/>
+        <location filename="../CMainWindow.cpp" line="1304"/>
         <source>Select file to load</source>
         <translation>Выбрать файл для загрузки</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1719"/>
+        <location filename="../CMainWindow.cpp" line="1721"/>
         <source>Fatal...</source>
         <translation>Неустранимая ошибка...</translation>
     </message>
     <message>
-        <location filename="../CMainWindow.cpp" line="1720"/>
+        <location filename="../CMainWindow.cpp" line="1722"/>
         <source>QMapShack detected a badly installed Proj4 library. The translation tables for EPSG projections usually stored in /usr/share/proj are missing. Please contact the package maintainer of your distribution to fix it.</source>
         <translation>QMapShack обнаружил плохо установленную библиотеку Proj4. Таблицы перевода для проекций EPSG обычно находятся в /usr/share/pro отсутствуют. Пожалуйста, сообщите об этом администратору пакета, чтобы поправить это.</translation>
     </message>

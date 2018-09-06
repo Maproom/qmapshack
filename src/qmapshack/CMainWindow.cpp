@@ -25,6 +25,7 @@
 #include "dem/CDemList.h"
 #include "gis/CGisDatabase.h"
 #include "gis/CGisWorkspace.h"
+#include "helpers/CWptIconManager.h"
 #include "gis/db/CSetupWorkspace.h"
 #include "gis/IGisLine.h"
 #include "gis/prj/IGisProject.h"
@@ -35,7 +36,7 @@
 #include "gis/trk/CActivityTrk.h"
 #include "gis/trk/CDetailsTrk.h"
 #include "gis/trk/CKnownExtension.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSettings.h"
 #include "helpers/CToolBarConfig.h"
@@ -94,7 +95,8 @@ CMainWindow::CMainWindow()
     dockRealtime->toggleViewAction()->setChecked(false);
 
     IGisItem::init();
-    initWptIcons();
+    //initWptIcons();
+    wptIconManager = new CWptIconManager(this);
 
     IUnit::setUnitType((IUnit::type_e)cfg.value("MainWindow/units",IUnit::eTypeMetric).toInt(), this);
     IUnit::setSlopeMode((IUnit::slope_mode_e)cfg.value("Units/slopeMode", IUnit::eSlopeDegrees).toInt());

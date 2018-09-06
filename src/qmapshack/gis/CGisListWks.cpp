@@ -55,7 +55,7 @@
 #include "gis/tcx/CTcxProject.h"
 #include "gis/trk/CGisItemTrk.h"
 #include "gis/wpt/CGisItemWpt.h"
-#include "gis/WptIcons.h"
+#include "helpers/CWptIconManager.h"
 #include "helpers/CProgressDialog.h"
 #include "helpers/CSelectCopyAction.h"
 #include "helpers/CSelectProjectDialog.h"
@@ -1077,7 +1077,7 @@ void CGisListWks::showMenuItem(const QPoint &p, const QList<IGisItem::key_t>& ke
     menu.addAction(actionCopyItem);
     menu.addSection(tr("Waypoints"));
     menu.addAction(actionRteFromWpt);
-    action = menu.addMenu(getWptIconMenu(tr("Change Icon"), this, SLOT(slotSymWpt()), &menu));
+    action = menu.addMenu(CWptIconManager::self().getWptIconMenu(tr("Change Icon"), this, SLOT(slotSymWpt()), &menu));
     action->setEnabled(!keysWpts.isEmpty());
     menu.addSection(tr("Wayp. & Tracks"));
     menu.addAction(actionEleWptTrk);

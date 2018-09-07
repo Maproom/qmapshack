@@ -195,14 +195,14 @@
    <item>
     <widget class="QComboBox" name="comboStepDist">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change the distance in a fixed step.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>Change the distance in a fixed step.</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QComboBox" name="comboStepAngle">
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Change the angle in a fixed step.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>Change the angle in a fixed step.</string>
      </property>
     </widget>
    </item>

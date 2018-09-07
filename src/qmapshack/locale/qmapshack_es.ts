@@ -3848,7 +3848,7 @@ Estructura desconocida.</translation>
     <name>CMouseRuler</name>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="54"/>
-        <location filename="../mouse/CMouseRuler.cpp" line="291"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="314"/>
         <source>Distance Ruler</source>
         <translation>Medir Distancia</translation>
     </message>
@@ -3873,27 +3873,27 @@ Estructura desconocida.</translation>
         <translation type="unfinished">área</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="294"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="317"/>
         <source>Distance</source>
         <translation type="unfinished">Distancia</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="296"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="319"/>
         <source>Ascent</source>
         <translation type="unfinished">Ascenso</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="298"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="321"/>
         <source>Descent</source>
         <translation type="unfinished">Descenso</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="300"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="323"/>
         <source>Course</source>
         <translation>Rumbo</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="360"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="383"/>
         <source>Sum</source>
         <translation>Total</translation>
     </message>
@@ -10610,17 +10610,27 @@ o
         <translation>Mostrar distancias en alta precisión.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="201"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="198"/>
+        <source>Change the distance in a fixed step.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="205"/>
+        <source>Change the angle in a fixed step.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="222"/>
         <source>Reset ruler.</source>
         <translation>Reiniciar regla.</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="218"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="239"/>
         <source>Undo</source>
         <translation type="unfinished">Deshacer</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="235"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="256"/>
         <source>Redo</source>
         <translation type="unfinished">Rehacer</translation>
     </message>
@@ -10632,9 +10642,9 @@ o
         <location filename="../mouse/IScrOptRuler.ui" line="100"/>
         <location filename="../mouse/IScrOptRuler.ui" line="160"/>
         <location filename="../mouse/IScrOptRuler.ui" line="177"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="204"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="221"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="238"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="225"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="242"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="259"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>

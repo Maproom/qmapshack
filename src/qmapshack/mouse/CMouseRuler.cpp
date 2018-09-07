@@ -269,6 +269,29 @@ void CMouseRuler::mouseMoved(const QPoint& pos)
     QPointF coord = pos;
     gis->convertPx2Rad(coord);
 
+    qreal stepDistance = scrOptRuler->comboStepDist->currentData().toDouble();
+    qreal stepAngle = scrOptRuler->comboStepAngle->currentData().toDouble();
+
+    if((stepDistance || stepAngle) && (ruler.count() > 1))
+    {
+        const QPointF& coord0 = ruler[ruler.count() - 2];
+
+        qreal a1, a2;
+        qreal d = GPS_Math_Distance(coord0.x(), coord0.y(), coord.x(), coord.y(), a1, a2);
+
+        if(stepDistance)
+        {
+            d = qRound(d / stepDistance) * stepDistance;
+        }
+
+        if(stepAngle)
+        {
+            a1 = qRound(a1 / stepAngle) * stepAngle;
+        }
+
+        coord = GPS_Math_Wpt_Projection(coord0, d, a1 * DEG_TO_RAD);
+    }
+
     ruler.last() = coord;
 
     updateStatus(ruler);

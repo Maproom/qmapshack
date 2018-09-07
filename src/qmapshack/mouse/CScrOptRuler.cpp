@@ -28,6 +28,20 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     : IScrOpt(mouse)
 {
     setupUi(this);
+    comboStepDist->addItem("-", 0);
+    comboStepDist->addItem("10m", 10);
+    comboStepDist->addItem("100m", 100);
+    comboStepDist->addItem("1000m", 1000);
+
+    comboStepAngle->addItem("-",0);
+    comboStepAngle->addItem("5°",5);
+    comboStepAngle->addItem("10°",10);
+    comboStepAngle->addItem("15°",15);
+    comboStepAngle->addItem("30°",30);
+    comboStepAngle->addItem("45°",45);
+    comboStepAngle->addItem("60°",60);
+    comboStepAngle->addItem("90°",90);
+
     connect(pushClose, &QPushButton::clicked, this, &CScrOptRuler::slotClose);
 
     auto func = std::bind(&CCanvas::slotTriggerCompleteUpdate, canvas, CCanvas::eRedrawMouse);

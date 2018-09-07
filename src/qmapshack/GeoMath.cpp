@@ -401,22 +401,6 @@ void GPS_Math_DouglasPeucker(QVector<pointDP> &line, qreal d)
     }
 }
 
-QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing)
-{
-    QPointF pt2;
-
-    qreal d    = distance / 6378130.0;
-    qreal lon1 = pt1.x();
-    qreal lat1 = pt1.y();
-
-    qreal lat2 = qAsin(qSin(lat1) * qCos(d) + qCos(lat1) * qSin(d) * qCos(-bearing));
-    qreal lon2 = qCos(lat1) == 0 ? lon1 : fmod(lon1 - qAsin(qSin(-bearing) * qSin(d) / qCos(lat1)) + M_PI, (2*M_PI)) - M_PI;
-
-    pt2.rx() = lon2;
-    pt2.ry() = lat2;
-    return pt2;
-}
-
 
 bool GPS_Math_LineCrossesRect(const QPointF &p1, const QPointF &p2, const QRectF &rect)
 {
@@ -600,4 +584,72 @@ void segment_t::apply(const QPolygonF& coords, const QPolygonF& pixel, QPolygonF
             }
         }
     }
+}
+
+
+
+QPointF GPS_Math_Wpt_Projection(const QPointF& p1, qreal distance, qreal bearing)
+{
+    qreal Phi1 = p1.y();
+    qreal Lambda1 = p1.x();
+    qreal Alpha1 = bearing;
+    qreal s = distance;
+
+    const qreal a = 6378137.0;
+    const qreal b = 6356752.3142;
+    const qreal f = 1.0/298.257223563;
+
+    qreal sinAlpha1 = qSin(Alpha1);
+    qreal cosAlpha1 = qCos(Alpha1);
+
+    qreal tanU1 = (1-f) * qTan(Phi1);
+    qreal cosU1 = 1 / qSqrt((1 + tanU1*tanU1));
+    qreal sinU1 = tanU1 * cosU1;
+    qreal Sigma1 = qAtan2(tanU1, cosAlpha1);
+    qreal sinAlpha = cosU1 * sinAlpha1;
+    qreal cosSqAlpha = 1 - sinAlpha*sinAlpha;
+    qreal uSq = cosSqAlpha * (a*a - b*b) / (b*b);
+    qreal A = 1 + uSq/16384*(4096+uSq*(-768+uSq*(320-175*uSq)));
+    qreal B = uSq/1024 * (256+uSq*(-128+uSq*(74-47*uSq)));
+
+    qreal cos2SigmaM;
+    qreal sinSigma;
+    qreal cosSigma;
+    qreal deltaSigma;
+
+    qreal Sigma = s / (b*A);
+    qreal Sigma_;
+    int iterations = 0;
+    do
+    {
+        cos2SigmaM = qCos(2*Sigma1 + Sigma);
+        sinSigma = qSin(Sigma);
+        cosSigma = qCos(Sigma);
+        deltaSigma = B*sinSigma*(cos2SigmaM+B/4*(cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)-
+                                 B/6*cos2SigmaM*(-3+4*sinSigma*sinSigma)*(-3+4*cos2SigmaM*cos2SigmaM)));
+        Sigma_ = Sigma;
+        Sigma = s / (b*A) + deltaSigma;
+    }
+    while (qAbs(Sigma-Sigma_) > 1e-12 && ++iterations<100);
+    if (iterations >= 100)
+    {
+        return NOPOINTF;
+    }
+    qreal x = sinU1*sinSigma - cosU1*cosSigma*cosAlpha1;
+    qreal Phi2 = qAtan2(sinU1*cosSigma + cosU1*sinSigma*cosAlpha1, (1-f)*qSqrt(sinAlpha*sinAlpha + x*x));
+    qreal Lambda = qAtan2(sinSigma*sinAlpha1, cosU1*cosSigma - sinU1*sinSigma*cosAlpha1);
+    qreal C = f/16*cosSqAlpha*(4+f*(4-3*cosSqAlpha));
+    qreal L = Lambda - (1-C) * f * sinAlpha *
+              (Sigma + C*sinSigma*(cos2SigmaM+C*cosSigma*(-1+2*cos2SigmaM*cos2SigmaM)));
+
+    qreal Lambda2 = Lambda1+L;
+    if(Lambda2 > PI)
+    {
+        Lambda2 = -Lambda2 + PI;
+    }
+
+//    qreal Alpha2 = qAtan2(sinAlpha, -x);
+//    Alpha2 = (Alpha2 + 2*PI) % (2*PI); // normalise to 0..360
+
+    return QPointF(Lambda2, Phi2);
 }

@@ -3804,7 +3804,7 @@ Neznámá stavba.</translation>
     <name>CMouseRuler</name>
     <message>
         <location filename="../mouse/CMouseRuler.cpp" line="54"/>
-        <location filename="../mouse/CMouseRuler.cpp" line="291"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="314"/>
         <source>Distance Ruler</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3829,27 +3829,27 @@ Neznámá stavba.</translation>
         <translation type="unfinished">Oblast</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="294"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="317"/>
         <source>Distance</source>
         <translation type="unfinished">Vzdálenost</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="296"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="319"/>
         <source>Ascent</source>
         <translation type="unfinished">Stoupání</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="298"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="321"/>
         <source>Descent</source>
         <translation type="unfinished">Klesání</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="300"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="323"/>
         <source>Course</source>
         <translation type="unfinished">Směr</translation>
     </message>
     <message>
-        <location filename="../mouse/CMouseRuler.cpp" line="360"/>
+        <location filename="../mouse/CMouseRuler.cpp" line="383"/>
         <source>Sum</source>
         <translation type="unfinished"></translation>
     </message>
@@ -10490,17 +10490,27 @@ nebo
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="201"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="198"/>
+        <source>Change the distance in a fixed step.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="205"/>
+        <source>Change the angle in a fixed step.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mouse/IScrOptRuler.ui" line="222"/>
         <source>Reset ruler.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="218"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="239"/>
         <source>Undo</source>
         <translation type="unfinished">Zpět</translation>
     </message>
     <message>
-        <location filename="../mouse/IScrOptRuler.ui" line="235"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="256"/>
         <source>Redo</source>
         <translation type="unfinished">Znovu</translation>
     </message>
@@ -10512,9 +10522,9 @@ nebo
         <location filename="../mouse/IScrOptRuler.ui" line="100"/>
         <location filename="../mouse/IScrOptRuler.ui" line="160"/>
         <location filename="../mouse/IScrOptRuler.ui" line="177"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="204"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="221"/>
-        <location filename="../mouse/IScrOptRuler.ui" line="238"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="225"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="242"/>
+        <location filename="../mouse/IScrOptRuler.ui" line="259"/>
         <source>...</source>
         <translation type="unfinished">...</translation>
     </message>

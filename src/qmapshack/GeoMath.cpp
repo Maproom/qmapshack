@@ -211,12 +211,6 @@ qreal GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, con
     return 6371010 * d;
 }
 
-void GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal distance, const qreal bearing, qreal& lon2, qreal& lat2)
-{
-    qreal d    = distance / 6378130.0;
-    lat2 = qAsin(qSin(lat1) * qCos(d) + qCos(lat1) * qSin(d) * qCos(-bearing));
-    lon2 = qCos(lat1) == 0 ? lon1 : fmod(lon1 - qAsin(qSin(-bearing) * qSin(d) / qCos(lat1)) + PI, TWOPI) - PI;
-}
 
 static qreal GPS_Math_distPointLine3D(const point3D &x1, const point3D &x2, const point3D &x0)
 {

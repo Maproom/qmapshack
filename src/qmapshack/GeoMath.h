@@ -70,7 +70,6 @@ qreal   GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const 
 qreal   GPS_Math_Distance(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
 /// use for short distances, much quicker processing
 qreal   GPS_Math_DistanceQuick(const qreal u1, const qreal v1, const qreal u2, const qreal v2);
-void    GPS_Math_Wpt_Projection(const qreal lon1, const qreal lat1, const qreal distance, const qreal bearing, qreal& lon2, qreal& lat2);
 void    GPS_Math_DouglasPeucker(QVector<pointDP>& line, qreal d);
 QPointF GPS_Math_Wpt_Projection(const QPointF& pt1, qreal distance, qreal bearing);
 bool    GPS_Math_LineCrossesRect(const QPointF& p1, const QPointF& p2, const QRectF& rect);

@@ -58,6 +58,8 @@ CScrOptRuler::CScrOptRuler(IMouse *mouse, CCanvas *canvas)
     toolShowAscent->setChecked(cfg.value("showAscent", true).toBool());
     toolShowAngle->setChecked(cfg.value("showAngle", false).toBool());
     toolShowPrecision->setChecked(cfg.value("showPrecision", false).toBool());
+    comboStepDist->setCurrentIndex(cfg.value("comboStepDist", 0).toInt());
+    comboStepAngle->setCurrentIndex(cfg.value("comboStepAngle", 0).toInt());
     cfg.endGroup(); // Ruler
 
     move(0,0);
@@ -75,6 +77,8 @@ CScrOptRuler::~CScrOptRuler()
     cfg.setValue("showAscent", toolShowAscent->isChecked());
     cfg.setValue("showAngle", toolShowAngle->isChecked());
     cfg.setValue("showPrecision", toolShowPrecision->isChecked());
+    cfg.setValue("comboStepDist", comboStepDist->currentIndex());
+    cfg.setValue("comboStepAngle", comboStepAngle->currentIndex());
     cfg.endGroup(); // Ruler
 }
 

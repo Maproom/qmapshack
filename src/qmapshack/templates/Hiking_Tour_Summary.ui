@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>564</width>
+    <width>572</width>
     <height>578</height>
    </rect>
   </property>
@@ -78,7 +78,7 @@
       <item row="1" column="2">
        <widget class="QRadioButton" name="radioButton">
         <property name="text">
-         <string>hot</string>
+         <string>ho&amp;t</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -88,7 +88,7 @@
       <item row="2" column="2">
        <widget class="QRadioButton" name="radioButton_2">
         <property name="text">
-         <string>warm</string>
+         <string>war&amp;m</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -98,7 +98,7 @@
       <item row="3" column="2">
        <widget class="QRadioButton" name="radioButton_3">
         <property name="text">
-         <string>cold</string>
+         <string>&amp;cold</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -108,7 +108,7 @@
       <item row="4" column="2">
        <widget class="QRadioButton" name="radioButton_4">
         <property name="text">
-         <string>freezing</string>
+         <string>free&amp;zing</string>
         </property>
         <property name="shortcut">
          <string notr="true"/>
@@ -171,38 +171,7 @@
       <string>Character</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox_14">
-        <property name="text">
-         <string>large ascend</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="checkBox_17">
-        <property name="text">
-         <string>climbing</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QCheckBox" name="checkBox_16">
-        <property name="text">
-         <string>via ferrata</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Rating</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
+      <item row="6" column="1">
        <widget class="QComboBox" name="comboBox">
         <item>
          <property name="text">
@@ -257,10 +226,41 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="3" column="0">
        <widget class="QCheckBox" name="checkBox_4">
         <property name="text">
          <string>aborted</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_14">
+        <property name="text">
+         <string>large ascend</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Rating</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_17">
+        <property name="text">
+         <string>climbing</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="checkBox_16">
+        <property name="text">
+         <string>via ferrata</string>
         </property>
        </widget>
       </item>
@@ -273,10 +273,24 @@
       <string>Equipment</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox_12">
+        <property name="text">
+         <string>camping gear</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="4">
        <widget class="QCheckBox" name="checkBox_8">
         <property name="text">
          <string>ski</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
+       <widget class="QCheckBox" name="checkBox_9">
+        <property name="text">
+         <string>snow shoes</string>
         </property>
        </widget>
       </item>
@@ -294,13 +308,6 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBox_12">
-        <property name="text">
-         <string>camping gear</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="checkBox_10">
         <property name="text">
@@ -308,10 +315,17 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="4">
-       <widget class="QCheckBox" name="checkBox_9">
+      <item row="0" column="5">
+       <widget class="QCheckBox" name="checkBox_15">
         <property name="text">
-         <string>snow shoes</string>
+         <string>crampon</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="5">
+       <widget class="QCheckBox" name="checkBox_21">
+        <property name="text">
+         <string>ice pick</string>
         </property>
        </widget>
       </item>
@@ -356,11 +370,13 @@
   <tabstop>comboBox</tabstop>
   <tabstop>lineEdit_3</tabstop>
   <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_19</tabstop>
-  <tabstop>checkBox_8</tabstop>
   <tabstop>checkBox_12</tabstop>
+  <tabstop>checkBox_19</tabstop>
   <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_8</tabstop>
   <tabstop>checkBox_9</tabstop>
+  <tabstop>checkBox_15</tabstop>
+  <tabstop>checkBox_21</tabstop>
   <tabstop>lineEdit</tabstop>
   <tabstop>textEdit</tabstop>
  </tabstops>

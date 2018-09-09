@@ -769,6 +769,7 @@ set( UIS
     realtime/IRtWorkspace.ui
     realtime/opensky/IRtOpenSkyInfo.ui
     templates/Hiking_Tour_Summary.ui
+    templates/Hiking_Tour_Summary_\(Advanced\).ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui

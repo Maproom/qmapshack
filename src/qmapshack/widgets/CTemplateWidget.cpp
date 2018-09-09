@@ -39,6 +39,7 @@ void CTemplateWidget::listTemplates()
     comboTemplates->clear();
     comboTemplates->addItem(tr("choose one..."));
     comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), "://templates/Hiking_Tour_Summary.ui");
+    comboTemplates->addItem(tr("Hiking Tour Summary - Advanced (built-in)"), "://templates/Hiking_Tour_Summary_(Advanced).ui");
 
     SETTINGS;
     const QString& path = cfg.value("TextEditWidget/templatePath", "").toString();
@@ -234,6 +235,8 @@ void CTemplateWidget::slotTemplateActivated(int idx)
 
     SETTINGS;
     cfg.setValue("TextEditWidget/template", filename);
+
+    adjustSize();
 }
 
 void CTemplateWidget::slotPreview()

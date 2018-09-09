@@ -651,5 +651,6 @@
         <file>pics/DockWidgets.png</file>
         
         <file>templates/Hiking_Tour_Summary.ui</file>
+        <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
     </qresource>
 </RCC>

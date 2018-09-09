@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
-    <height>624</height>
+    <width>1050</width>
+    <height>803</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -105,7 +105,7 @@
       <item row="1" column="0">
        <widget class="QRadioButton" name="radioButton_5">
         <property name="text">
-         <string>a&amp;lpine</string>
+         <string>alpine</string>
         </property>
        </widget>
       </item>
@@ -133,7 +133,7 @@
       <item row="3" column="0">
        <widget class="QRadioButton" name="radioButton_16">
         <property name="text">
-         <string>&amp;via ferrata</string>
+         <string>via ferrata</string>
         </property>
        </widget>
       </item>
@@ -322,15 +322,15 @@
      <property name="title">
       <string>Graduation MIDE</string>
      </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
        <widget class="QLabel" name="label">
         <property name="text">
          <string>Severity Environment</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
+      <item>
        <widget class="QComboBox" name="comboBox_6">
         <item>
          <property name="text">
@@ -364,7 +364,7 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item>
        <widget class="QLabel" name="label_4">
         <property name="minimumSize">
          <size>
@@ -383,7 +383,7 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item>
        <widget class="QComboBox" name="comboBox_2">
         <item>
          <property name="text">
@@ -417,14 +417,14 @@
         </item>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Terrain underfoot</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item>
        <widget class="QComboBox" name="comboBox_5">
         <item>
          <property name="text">
@@ -458,14 +458,14 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item>
        <widget class="QLabel" name="label_5">
         <property name="text">
          <string>Effort required </string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item>
        <widget class="QComboBox" name="comboBox_3">
         <item>
          <property name="text">
@@ -524,7 +524,7 @@
       <item>
        <widget class="QRadioButton" name="radioButton_10">
         <property name="text">
-         <string>RN&amp;G (Running)</string>
+         <string>RNG (Running)</string>
         </property>
        </widget>
       </item>
@@ -548,6 +548,7 @@
      <zorder>radioButton_10</zorder>
      <zorder>radioButton_11</zorder>
      <zorder>lineEdit_5</zorder>
+     <zorder>verticalSpacer</zorder>
     </widget>
    </item>
    <item row="1" column="0" colspan="4">
@@ -583,49 +584,6 @@
   <zorder>groupBox_f</zorder>
   <zorder>groupBox_g</zorder>
  </widget>
- <tabstops>
-  <tabstop>checkBox</tabstop>
-  <tabstop>checkBox_5</tabstop>
-  <tabstop>checkBox_6</tabstop>
-  <tabstop>checkBox_7</tabstop>
-  <tabstop>checkBox_20</tabstop>
-  <tabstop>checkBox_18</tabstop>
-  <tabstop>checkBox_11</tabstop>
-  <tabstop>checkBox_2</tabstop>
-  <tabstop>radioButton</tabstop>
-  <tabstop>radioButton_2</tabstop>
-  <tabstop>radioButton_3</tabstop>
-  <tabstop>radioButton_4</tabstop>
-  <tabstop>lineEdit_2</tabstop>
-  <tabstop>radioButton_6</tabstop>
-  <tabstop>radioButton_5</tabstop>
-  <tabstop>radioButton_17</tabstop>
-  <tabstop>radioButton_16</tabstop>
-  <tabstop>checkBox_14</tabstop>
-  <tabstop>checkBox_13</tabstop>
-  <tabstop>checkBox_15</tabstop>
-  <tabstop>checkBox_4</tabstop>
-  <tabstop>comboBox</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>checkBox_3</tabstop>
-  <tabstop>checkBox_19</tabstop>
-  <tabstop>checkBox_12</tabstop>
-  <tabstop>checkBox_10</tabstop>
-  <tabstop>checkBox_8</tabstop>
-  <tabstop>checkBox_16</tabstop>
-  <tabstop>checkBox_17</tabstop>
-  <tabstop>checkBox_9</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>comboBox_6</tabstop>
-  <tabstop>comboBox_2</tabstop>
-  <tabstop>comboBox_5</tabstop>
-  <tabstop>comboBox_3</tabstop>
-  <tabstop>radioButton_11</tabstop>
-  <tabstop>radioButton_10</tabstop>
-  <tabstop>lineEdit_5</tabstop>
-  <tabstop>textEdit</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

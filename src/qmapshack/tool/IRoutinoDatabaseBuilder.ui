@@ -149,10 +149,38 @@
      </item>
     </layout>
    </item>
+   <item row="2" column="0">
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="labelError">
+       <property name="text">
+        <string>&lt;b style = 'color: red'&gt; Unable to find Routino's planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
   </layout>
   <zorder>textBrowser</zorder>
   <zorder>pushStart</zorder>
   <zorder>listWidget</zorder>
+  <zorder>verticalLayoutWidget</zorder>
  </widget>
  <resources>
   <include location="../resources.qrc"/>

@@ -49,6 +49,8 @@ private:
     QStringList sourceFiles;
     QString targetPrefix;
     QString targetPath;
+
+    QString planetsplitter;
 };
 
 #endif //CROUTINODATABASEBUILDER_H

@@ -116,6 +116,18 @@ void CRoutinoDatabaseBuilder::enabelStartButton()
         return;
     }
 
+    planetsplitter = QStandardPaths::findExecutable("planetsplitter");
+    if(planetsplitter.isEmpty())
+    {
+        planetsplitter = QStandardPaths::findExecutable("routino-planetsplitter");
+    }
+    labelError->setVisible(planetsplitter.isEmpty());
+
+    if(planetsplitter.isEmpty())
+    {
+        return;
+    }
+
     pushStart->setEnabled(true);
 }
 
@@ -159,8 +171,8 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         args << QString("--tagging=%1").arg(instance->routinoPath("tagging.xml"));
         args << "--process-only";
 
-        stdOut("planetsplitter " +  args.join(" ") + "\n");
-        cmd.start("planetsplitter", args);
+        stdOut(planetsplitter + " " +  args.join(" ") + "\n");
+        cmd.start(planetsplitter, args);
 
         last = true;
     }
@@ -185,8 +197,8 @@ void CRoutinoDatabaseBuilder::finished(int exitCode, QProcess::ExitStatus status
         sourceFiles.pop_front();
 
 
-        stdOut("planetsplitter " +  args.join(" ") + "\n");
-        cmd.start("planetsplitter", args);
+        stdOut(planetsplitter + " " +  args.join(" ") + "\n");
+        cmd.start(planetsplitter, args);
     }
 }
 

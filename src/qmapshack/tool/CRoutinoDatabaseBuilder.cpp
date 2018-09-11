@@ -49,6 +49,8 @@ CRoutinoDatabaseBuilder::CRoutinoDatabaseBuilder(QWidget * parent)
     path = cfg.value("RoutinoDatabaseBuilder/targetPath", path).toString();
 
     labelTargetPath->setText(path);
+
+    enabelStartButton();
 }
 
 CRoutinoDatabaseBuilder::~CRoutinoDatabaseBuilder()
@@ -102,6 +104,19 @@ void CRoutinoDatabaseBuilder::slotSelectTargetPath()
 void CRoutinoDatabaseBuilder::enabelStartButton()
 {
     pushStart->setDisabled(true);
+
+    planetsplitter = QStandardPaths::findExecutable("planetsplitter");
+    if(planetsplitter.isEmpty())
+    {
+        planetsplitter = QStandardPaths::findExecutable("routino-planetsplitter");
+    }
+    labelError->setVisible(planetsplitter.isEmpty());
+
+    if(planetsplitter.isEmpty())
+    {
+        return;
+    }
+
     if(listWidget->count() == 0)
     {
         return;
@@ -112,18 +127,6 @@ void CRoutinoDatabaseBuilder::enabelStartButton()
     }
 
     if(lineTargetPrefix->text().isEmpty())
-    {
-        return;
-    }
-
-    planetsplitter = QStandardPaths::findExecutable("planetsplitter");
-    if(planetsplitter.isEmpty())
-    {
-        planetsplitter = QStandardPaths::findExecutable("routino-planetsplitter");
-    }
-    labelError->setVisible(planetsplitter.isEmpty());
-
-    if(planetsplitter.isEmpty())
     {
         return;
     }

@@ -768,8 +768,10 @@ set( UIS
     realtime/IRtSelectSource.ui
     realtime/IRtWorkspace.ui
     realtime/opensky/IRtOpenSkyInfo.ui
+    templates/Cycling_Tour_Summary.ui
     templates/Hiking_Tour_Summary.ui
     templates/Hiking_Tour_Summary_\(Advanced\).ui
+    templates/Running_Summary.ui
     tool/IImportDatabase.ui
     tool/IMapVrtBuilder.ui
     tool/IRoutinoDatabaseBuilder.ui

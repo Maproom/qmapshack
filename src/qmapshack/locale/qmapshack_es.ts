@@ -883,7 +883,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="47"/>
         <source>Off Path or Rocky Terrain</source>
-        <translation>Fuera de senda o Rocas</translation>
+        <translation>Sin Senda o Rocas</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/CFilterSpeedHike.cpp" line="50"/>
@@ -1036,7 +1036,7 @@ Para resolver este conflicto puedes crear y guardar una copia, forzar o eliminar
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="125"/>
         <source>Reset Results</source>
-        <translation>Reiniciar Resultados</translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <location filename="../gis/search/CGeoSearch.cpp" line="132"/>
@@ -5675,12 +5675,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="101"/>
         <source>This TCX file contains at least 1 workout, but neither an activity nor a course. As workouts do not contain position data, they can not be imported to QMapShack.</source>
-        <translation>Este archivo TCX contiene al menos un entrenamiento, pero ninguna actividad ni carrera. Los entrenamientos que no contienen datos de posición, no se pueden importar a QMapShack</translation>
+        <translation>Este archivo TCX contiene al menos un entrenamiento, pero ninguna actividad ni trayecto. Los entrenamientos que no contienen datos de posición, no se pueden importar a QMapShack</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="106"/>
         <source>This TCX file does not contain any activity or course: %1</source>
-        <translation>El archivo TCX %1 no contiene ninguna actividad ni carrera</translation>
+        <translation>El archivo TCX %1 no contiene ninguna actividad ni trayecto</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="275"/>
@@ -5700,7 +5700,7 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="339"/>
         <source>Course</source>
-        <translation>Carrera</translation>
+        <translation>Trayecto</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="340"/>
@@ -5720,12 +5720,12 @@ línea %2, columna %3.
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="334"/>
         <source>Activity or course?</source>
-        <translation>¿Actividad o carrera?</translation>
+        <translation>¿Actividad o trayecto?</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="335"/>
         <source>QMapShack does not know how track &lt;b&gt;%1&lt;/b&gt; should be saved. &lt;b&gt;Do you want to save it as a course or as an activity? &lt;/b&gt;Remember that only waypoints close enough to the track will be saved when saving as a course. Waypoints will not be saved when saving as an activity.</source>
-        <translation>QMapShack no sabe cómo el track &lt;b&gt;%1&lt;/b&gt; Debe ser guardado. &lt;b&gt;¿Desea guardarlo como carrera o como actividad? &lt;/b&gt;Recuerde que sólo se guardarán waypoints lo suficientemente cerca del track al guardar como carrera. Los waypoints no se guardarán al guardar como actividad.</translation>
+        <translation>QMapShack no sabe cómo el track &lt;b&gt;%1&lt;/b&gt; debe ser guardado. &lt;b&gt;¿Quieres guardarlo como trayecto o como actividad? &lt;/b&gt;Recuerda que sólo se guardarán waypoints lo suficientemente cercanos al track al guardar como trayecto y no se guardarán al hacerlo como actividad.</translation>
     </message>
     <message>
         <location filename="../gis/tcx/CTcxProject.cpp" line="432"/>
@@ -5759,7 +5759,7 @@ línea %2, columna %3.
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="42"/>
         <source>Hiking Tour Summary - Advanced (built-in)</source>
-        <translation type="unfinished"></translation>
+        <translation>Resumen de Excursionismo - Avanzado</translation>
     </message>
     <message>
         <location filename="../widgets/CTemplateWidget.cpp" line="160"/>
@@ -5862,7 +5862,7 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="14"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation>Ficha</translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="557"/>
@@ -5932,7 +5932,7 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="233"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="138"/>
         <source>humid</source>
-        <translation>humedad</translation>
+        <translation>humedo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="88"/>
@@ -5944,7 +5944,7 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="94"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="211"/>
         <source>easy hiking</source>
-        <translation>Senderismo fácil</translation>
+        <translation>Senderismo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="122"/>
@@ -5980,19 +5980,19 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="203"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="91"/>
         <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
+        <translation>templado</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="253"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="101"/>
         <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
+        <translation>frío</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="263"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="81"/>
         <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
+        <translation>caluroso</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="293"/>
@@ -6010,48 +6010,48 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="47"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="328"/>
         <source>ice pick</source>
-        <translation type="unfinished"></translation>
+        <translation>piolet</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="61"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="321"/>
         <source>crampon</source>
-        <translation type="unfinished"></translation>
+        <translation>crampones</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="129"/>
         <source>night</source>
-        <translation type="unfinished"></translation>
+        <translation>nocturno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="163"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="183"/>
         <source>Rating 5 stars</source>
-        <translation>***** Excepcional</translation>
+        <translation>Calificación 5 estrellas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="168"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="188"/>
         <source>Rating 4 stars</source>
-        <translation>**** Muy buena</translation>
+        <translation>Calificación 4 estrellas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="173"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="193"/>
         <source>Rating 3 stars</source>
-        <translation>*** Buena</translation>
+        <translation>Calificación 3 estrellas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="178"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="198"/>
         <source>Rating 2 stars</source>
-        <translation>** Regular</translation>
+        <translation>Calificación 2 estrellas</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="183"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="203"/>
         <source>Rating 1 star</source>
-        <translation>* Mala</translation>
+        <translation>Calificación 1 estrella</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="143"/>
@@ -6075,7 +6075,7 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="68"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="314"/>
         <source>night gear</source>
-        <translation>Equipo nocturno</translation>
+        <translation>iluminación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="75"/>
@@ -6093,144 +6093,144 @@ línea %2, columna %3.
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="33"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="286"/>
         <source>ski</source>
-        <translation>ski</translation>
+        <translation>esquis</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="54"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="279"/>
         <source>camping gear</source>
-        <translation>Material de acampada</translation>
+        <translation>acampada/vivac</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="300"/>
         <location filename="../templates/Hiking_Tour_Summary.ui" line="111"/>
         <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
+        <translation>bajo cero</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="323"/>
         <source>Graduation MIDE</source>
-        <translation type="unfinished"></translation>
+        <translation>Graduación MIDE</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="329"/>
         <source>Severity Environment</source>
-        <translation type="unfinished"></translation>
+        <translation>severidad del medio</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="342"/>
         <source>1. The environment is not risk free</source>
-        <translation type="unfinished"></translation>
+        <translation>1. El medio no está exento de riesgos</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="347"/>
         <source>2. More than 1 risk factor</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Hay más de un factor de riesgo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="352"/>
         <source>3. Various risk factors</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Hay varios factores de riesgo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="357"/>
         <source>4. Considerable riskfactors</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Hay bastantes factores de riesgo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="362"/>
         <source>5. Many risk factors</source>
-        <translation type="unfinished"></translation>
+        <translation>5. Hay muchos factores de riesgo</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="382"/>
         <source>Orientation</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientación</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="395"/>
         <source>1. Paths and junctions well signed</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Caminos y cruces bien definidos</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="400"/>
         <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Sendas o señalización que indican la ruta</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="405"/>
         <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Exige la identificación precisa de accidentes geográficos</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="410"/>
         <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Exige técnicas de navegación avanzadas, mas allá de la interpretación de mapas y/o terreno</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="415"/>
         <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="unfinished"></translation>
+        <translation>5. La navegación está interrumpida por obstáculos que hay que bordear</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="423"/>
         <source>Terrain underfoot</source>
-        <translation type="unfinished"></translation>
+        <translation>Desplazamiento</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="436"/>
         <source>1. Easy walking</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Marcha por superficie lisa</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="441"/>
         <source>2. Bridleways and well made footpaths</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Marcha por buenos caminos</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="446"/>
         <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Marcha por sendas escalonadas o terrenos irregulares</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="451"/>
         <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Es preciso el uso de las manos o saltos para mantener el equilibrio</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="456"/>
         <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="unfinished"></translation>
+        <translation>5. Requiere el uso de las manos para la progresión</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="464"/>
         <source>Effort required </source>
-        <translation type="unfinished"></translation>
+        <translation>Esfuerzo requerido</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="477"/>
         <source>1. Less than one hour of continuous walking</source>
-        <translation type="unfinished"></translation>
+        <translation>1. Hasta 1 h de marcha efectiva</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="482"/>
         <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
+        <translation>2. Entre 1 h y 3 h de marcha efectiva</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="487"/>
         <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
+        <translation>3. Entre 3 h y 6 h de marcha efectiva</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="492"/>
         <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
+        <translation>4. Entre 6 h y 10 h de marcha efectiva</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="497"/>
         <source>5. More than 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
+        <translation>5. Más de 10 h de marcha efectiva</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="508"/>
@@ -6240,7 +6240,7 @@ línea %2, columna %3.
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="520"/>
         <source>HKG  (Hiking)</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">HKG  (Senderismo)</translation>
     </message>
     <message>
         <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="527"/>
@@ -6782,12 +6782,12 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../dem/IDemList.ui" line="112"/>
         <source>To add files with elevation data use &lt;a href=&apos;DemFolders&apos;&gt;File-&gt;Setup DEM Paths&lt;/a&gt;.</source>
-        <translation>Para agregar archivos con datos de elevación haga clic en &lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;.</translation>
+        <translation>Para agregar archivos con datos de elevación hacer clic en &lt;a href=&apos;DemFolders&apos;&gt;Archivo-&gt;Configurar rutas a los DEM&lt;/a&gt;.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="125"/>
         <source>Use the context menu (right mouse button click on entry) to activate a file. Use drag-n-drop to move the activated file in the process order. </source>
-        <translation>Use el menú contextual (botón derecho del ratón) para activar un archivo. Use arrastrar y soltar para mover el archivo activado en el orden de procesamiento.</translation>
+        <translation>Activar un DEM con el menú contextual (botón derecho del ratón). Arrastrar y soltar para moverlo en el orden de dibujado.</translation>
     </message>
     <message>
         <location filename="../dem/IDemList.ui" line="150"/>
@@ -7796,7 +7796,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="35"/>
         <source>&lt;b&gt;Reset Hidden Track Points&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Restaurar Puntos Ocultos del Track&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Restaurar los Puntos Ocultos del Track&lt;/b&gt;</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterReset.ui" line="47"/>
@@ -7865,7 +7865,7 @@ I don&apos;t want to read the documentation!</source>
     </message>
     <message>
         <source>Speed at zero Slope</source>
-        <translation type="vanished">Velocidad en llano</translation>
+        <translation type="vanished">Vel. en llano</translation>
     </message>
     <message>
         <source>at negative Slope</source>
@@ -7900,7 +7900,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="114"/>
         <source>Apply filter now.</source>
-        <translation type="unfinished">Aplicar filtro.</translation>
+        <translation>Aplicar filtro.</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeed.ui" line="117"/>
@@ -7946,7 +7946,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="125"/>
         <source>Set min/max slopes from Track</source>
-        <translation type="unfinished">Establecer pendientes Max/Min del Track</translation>
+        <translation>Establecer pendientes Max/Min del Track</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="148"/>
@@ -7971,17 +7971,17 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="207"/>
         <source>at negative Slope</source>
-        <translation type="unfinished">en pendiente negativa</translation>
+        <translation type="unfinished">descenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="217"/>
         <source>at positive Slope</source>
-        <translation type="unfinished">en pendiente positiva</translation>
+        <translation type="unfinished">ascenso</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="227"/>
         <source>Speed at zero Slope</source>
-        <translation type="unfinished">Velocidad en llano</translation>
+        <translation type="unfinished">Vel. en llano</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedCycle.ui" line="259"/>
@@ -8009,7 +8009,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="139"/>
         <source>Speed at zero Slope</source>
-        <translation>Velocidad en llano</translation>
+        <translation>Vel. en llano</translation>
     </message>
     <message>
         <location filename="../gis/trk/filter/IFilterSpeedHike.ui" line="178"/>
@@ -8213,7 +8213,7 @@ I don&apos;t want to read the documentation!</source>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="67"/>
         <source>Age</source>
-        <translation type="unfinished">Edad</translation>
+        <translation>Antigüedad</translation>
     </message>
     <message>
         <location filename="../gis/IGisDatabase.ui" line="112"/>
@@ -8751,7 +8751,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="33"/>
         <source>Uri</source>
-        <translation>Uri</translation>
+        <translation>URL</translation>
     </message>
     <message>
         <location filename="../helpers/ILinksDialog.ui" line="43"/>
@@ -9196,7 +9196,7 @@ Nombre de archivo %1</translation>
     <message>
         <location filename="../map/IMapList.ui" line="116"/>
         <source>Use the context menu (right mouse button click on entry) to activate a map. Use drag-n-drop to move the activated map in the draw order. </source>
-        <translation>Use el menú contextual (botón derecho del ratón, y seleccione) para activar un mapa. Use arrastrar y soltar para mover el mapa activado en el orden de dibujado. </translation>
+        <translation>Activar un mapa con el menú contextual(botón derecho del ratón). Arrastrar y soltar para moverlo en el orden de dibujado. </translation>
     </message>
     <message>
         <source>Help! I want maps!
@@ -10196,7 +10196,7 @@ o
     <message>
         <location filename="../gis/rte/router/IRouterRoutino.ui" line="148"/>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;a href=&apos;CreateRoutino&apos;&gt;Tool-&gt;Create Routino Database&lt;/a&gt;.</source>
-        <translation>Para usar el enrutado offline es necesario configurar las rutas a las carpetas que contienen los datos de ruteo, haga clic en el botón de configuración para hacerlo. Puede crear sus propios datos de enrutado en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
+        <translation>Para usar el enrutado offline hay que configurar las rutas a las carpetas que contienen los datos de ruteo, haga clic en el botón de configuración para hacerlo. Se pueden crear en &lt;a href=&apos;CreateRoutino&apos;&gt;Herramientas-&gt;Crear base de datos de Routino&lt;/a&gt;.</translation>
     </message>
     <message>
         <source>To use offline routing you need to define paths to local routing data. Use the setup tool button to register a path. You can create your own routing data with &lt;b&gt;Tool-&gt;Create Routino Database&lt;/b&gt;.</source>
@@ -10290,7 +10290,7 @@ o
     <message>
         <location filename="../tool/IRoutinoDatabaseBuilder.ui" line="157"/>
         <source>&lt;b style = &apos;color: red&apos;&gt; Unable to find Routino&apos;s planetsplitter. Searched for &quot;planetsplitter&quot; and &quot;routino-planetsplitter&quot;.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b style = &apos;color: red&apos;&gt; No encontrado planetsplitter de Routino. Ha sido buscado por &quot;planetsplitter&quot; y por &quot;routino-planetsplitter&quot;.&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -10832,12 +10832,12 @@ o
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="198"/>
         <source>Change the distance in a fixed step.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar distancia en pasos prefijados.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="205"/>
         <source>Change the angle in a fixed step.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar ángulo en pasos prefijados.</translation>
     </message>
     <message>
         <location filename="../mouse/IScrOptRuler.ui" line="222"/>

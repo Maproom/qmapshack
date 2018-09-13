@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>THikingTourSummaryAdvanced</class>
+ <widget class="QWidget" name="THikingTourSummaryAdvanced">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -569,8 +569,6 @@
        </spacer>
       </item>
      </layout>
-     <zorder>checkBox_11</zorder>
-     <zorder>lineEdit_5</zorder>
     </widget>
    </item>
    <item row="3" column="0" colspan="4">

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>TRunningSummary</class>
+ <widget class="QWidget" name="TRunningSummary">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1037</width>
-    <height>803</height>
+    <height>824</height>
    </rect>
   </property>
   <property name="windowTitle">

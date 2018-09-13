@@ -38,8 +38,10 @@ void CTemplateWidget::listTemplates()
 {
     comboTemplates->clear();
     comboTemplates->addItem(tr("choose one..."));
+    comboTemplates->addItem(tr("Cycling Tour Summary (built-in)"), "://templates/Cycling_Tour_Summary.ui");
     comboTemplates->addItem(tr("Hiking Tour Summary (built-in)"), "://templates/Hiking_Tour_Summary.ui");
     comboTemplates->addItem(tr("Hiking Tour Summary - Advanced (built-in)"), "://templates/Hiking_Tour_Summary_(Advanced).ui");
+    comboTemplates->addItem(tr("Running Summary (built-in)"), "://templates/Running_Summary.ui");
 
     SETTINGS;
     const QString& path = cfg.value("TextEditWidget/templatePath", "").toString();

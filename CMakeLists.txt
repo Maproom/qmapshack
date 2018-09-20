@@ -82,7 +82,7 @@ if (APPLE)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -stdlib=libc++")
     SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -framework Foundation -framework DiskArbitration")
     SET(LINK_FLAGS "${LINK_FLAGS} -framework Foundation -framework DiskArbitration")
-    SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.7")
+    SET(CMAKE_OSX_DEPLOYMENT_TARGET "10.11")
 endif(APPLE)
 
 if(WIN32)

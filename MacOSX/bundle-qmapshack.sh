@@ -20,17 +20,19 @@ function extendAppStructure {
 function copyAdditionalLibraries {
     cp -v    $ROUTINO_LIB_LIB_DIR/libroutino.so $BUILD_BUNDLE_FRW_DIR
     cp -v    $QUAZIP_LIB_LIB_DIR/libquazip.1.dylib $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtSensors.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtPositioning.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtMultimediaWidgets.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtMultimedia.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtWebKitWidgets.framework $BUILD_BUNDLE_FRW_DIR
+
+    cp -v    $DBUS_DIR/libdbus-1.3.dylib $BUILD_BUNDLE_FRW_DIR
+
     cp -v -R $QT_DIR/lib/QtOpenGL.framework $BUILD_BUNDLE_FRW_DIR
     cp -v -R $QT_DIR/lib/QtQuick.framework $BUILD_BUNDLE_FRW_DIR
     cp -v -R $QT_DIR/lib/QtQml.framework $BUILD_BUNDLE_FRW_DIR
-    cp -v -R $QT_DIR/lib/QtWebChannel.framework $BUILD_BUNDLE_FRW_DIR
-    # TODO remove QT Bus, is only for linux needed
-    #cp -v -R $QT_DIR/lib/QtDBus.framework $BUILD_BUNDLE_FRW_DIR
+
+    # remove debug libraries
+    for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/* -type f -name '*_debug*'`
+    do
+        echo $F
+        rm $F
+    done
 }
 
 
@@ -52,15 +54,14 @@ function copyExtTools {
 
     # currently only used by QMapTool.
     cp -v $BUILD_BIN_DIR/qmt_rgb2pct            $BUILD_BUNDLE_RES_BIN_DIR
+    cp -v $BUILD_BIN_DIR/qmt_map2jnx            $BUILD_BUNDLE_RES_BIN_DIR
 }
 
 
 function adjustLinkingExtTools {
     for F in `find $BUILD_BUNDLE_RES_BIN_DIR -type f ! \( -name "*.py" \)`
     do
-        adjustLinkQt $F "/usr/local/opt/"
-        adjustLinkQt $F "/usr/local/Cellar/"
-        adjustLinkQt $F "/usr/local/lib/"
+        adjustLinkQt $F "/usr/local/"
     done
 }
 

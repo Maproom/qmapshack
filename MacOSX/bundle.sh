@@ -131,19 +131,20 @@ function adjustLinking {
     for F in `find $BUILD_BUNDLE_PLUGIN_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
     do 
         adjustLinkQt $F "libq"
+        adjustLinkQt $F "/usr/local/"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR/Qt*.framework/Versions/5 -type f -maxdepth 1` 
     do 
         adjustLinkQt $F "Qt"
-        adjustLinkQt $F "libdbus"
+        adjustLinkQt $F "/usr/local/"
     done
 
     for F in `find $BUILD_BUNDLE_FRW_DIR -type f -type f \( -iname "*.dylib" -o -iname "*.so" \)` 
     do 
         adjustLinkQt $F "Qt"
         adjustLinkQt $F "libroutino"
-        adjustLinkQt $F "libdbus"
+        adjustLinkQt $F "/usr/local/"
     done
 
     adjustLinkQt $BUILD_BUNDLE_APP_FILE "Qt"
@@ -172,20 +173,23 @@ function adjustLinkQt {
             LIB_VERSION=Versions/5
             LIB=$LIB.framework/$LIB_VERSION/$LIB
             PREL="@executable_path/../Frameworks/$LIB"
-        elif [[ "$P" == *"plugins"* ]]; then
+        elif [[ "$P" == *"PlugIns"* ]]; then
             # subdirectory for PlugIns
-            LIB=${P##*plugins/} # remove prepart
+            LIB=${P##*PlugIns/} # remove prepart
             PREL="@executable_path/../PlugIns/$LIB"
         fi
 
-#echo "F    = $F"
-#echo "P    = $P"
-#echo "LIB  = $LIB"
-#echo "FREL = $FREL"
-#echo "PREL = $PREL"
-#echo "L    = $L"
-#echo "-----"
-		if [[ "$LIB" == *"$FREL" ]]; then
+echo "-----"
+echo "F    = $F"
+echo "FREL = $FREL"
+echo "L    = $L"
+echo "P    = $P"
+echo "LIB  = $LIB"
+echo "PREL = $PREL"
+
+        if [[ "$P" == "$FREL" ]]; then
+            echo "no update - is a relativ id"
+		elif [[ "$LIB" == *"$FREL" ]]; then
             echo "name_tool: $FREL >> $PREL ($P)"
             sudo install_name_tool -id $PREL $F
         elif [[ "$P" == *$L* ]]; then

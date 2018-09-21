@@ -654,5 +654,7 @@
         <file>templates/Hiking_Tour_Summary_(Advanced).ui</file>
         <file>templates/Cycling_Tour_Summary.ui</file>
         <file>templates/Running_Summary.ui</file>
+
+        <file>../macOS/closeButtonGrey.png</file>
     </qresource>
 </RCC>

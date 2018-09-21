@@ -29,3 +29,12 @@ QToolBar > QToolButton:hover {
     border: 1px solid #cdcdcd;
     background-color: #d7d7d7;
 }
+
+/* fix for issue https://bugreports.qt.io/browse/QTBUG-61092 */
+QTabBar::close-button {
+    background-image: url(://macOS/closeButtonGrey.png);
+}
+
+QTabBar::close-button:hover {
+    background-image: url(://macOS/closeButtonGrey.png);
+}

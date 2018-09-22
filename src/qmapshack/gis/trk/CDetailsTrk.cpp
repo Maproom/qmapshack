@@ -52,27 +52,28 @@ using std::bind;
 
 /* base case: add the filter specified in template parameter */
 template<typename filter>
-static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk)
+static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk, qint32& minWidth)
 {
     QTreeWidgetItem *item = new QTreeWidgetItem(itemGroup);
     itemGroup->treeWidget()->setItemWidget(item, /* column = */ 0, new filter(trk, itemGroup->treeWidget()));
+    minWidth = qMax(minWidth, itemGroup->treeWidget()->itemWidget(item,0)->sizeHint().width());
 }
 
 template<typename filter1, typename filter2, typename ... remainingFilters>
-static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk)
+static void addFilters(QTreeWidgetItem *itemGroup, CGisItemTrk& trk, qint32& minWidth)
 {
-    addFilters<filter1>(itemGroup, trk);
-    addFilters<filter2, remainingFilters ...>(itemGroup, trk);
+    addFilters<filter1>(itemGroup, trk, minWidth);
+    addFilters<filter2, remainingFilters ...>(itemGroup, trk, minWidth);
 }
 
 template<typename ... filters>
-static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString &groupText, const QString &groupIcon)
+static void addFilterGroup(QTreeWidget *widget, CGisItemTrk& trk, const QString &groupText, const QString &groupIcon, qint32& minWidth)
 {
     QTreeWidgetItem *itemGroup = new QTreeWidgetItem(widget);
     itemGroup->setIcon(/* column = */ 0, QIcon(groupIcon));
     itemGroup->setText(/* column = */ 0, groupText);
 
-    addFilters<filters ...>(itemGroup, trk);
+    addFilters<filters ...>(itemGroup, trk, minWidth);
 }
 
 CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
@@ -169,17 +170,22 @@ CDetailsTrk::CDetailsTrk(CGisItemTrk& trk)
     loadGraphSource(comboGraph2, 2, CKnownExtension::internalSpeedDist);
     loadGraphSource(comboGraph3, 3, CKnownExtension::internalProgress);
 
+    // this will the largest minimum width of all filter widgets
+    qint32 minWidth = 0;
     addFilterGroup<CFilterDouglasPeuker, CFilterInvalid, CFilterReset, CFilterDelete>
-        (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png");
+        (treeFilter, trk, tr("Reduce visible track points"), "://icons/48x48/PointHide.png", minWidth);
 
     addFilterGroup<CFilterMedian, CFilterInterpolateElevation, CFilterReplaceElevation, CFilterOffsetElevation>
-        (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png");
+        (treeFilter, trk, tr("Change elevation of track points"), "://icons/48x48/SetEle.png", minWidth);
 
     addFilterGroup<CFilterNewDate, CFilterObscureDate, CFilterSpeed>
-        (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png");
+        (treeFilter, trk, tr("Change timestamp of track points"), "://icons/48x48/Time.png", minWidth);
 
     addFilterGroup<CFilterDeleteExtension, CFilterSplitSegment, CFilterSubPt2Pt, CFilterTerrainSlope, CFilterChangeStartPoint>
-        (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png");
+        (treeFilter, trk, tr("Miscellaneous"), "://icons/48x48/CSrcUnknown.png", minWidth);
+
+    // limit tree widget horizontal size to the filter widget with the largest minimum size
+    treeFilter->setMinimumWidth(minWidth + treeFilter->indentation());
 
     slotShowPlots();
 }

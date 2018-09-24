@@ -1,289 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>THikingTourSummaryAdvanced</class>
- <widget class="QWidget" name="THikingTourSummaryAdvanced">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1050</width>
-    <height>803</height>
+    <width>836</width>
+    <height>826</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
-   <item row="2" column="0" colspan="3">
-    <widget class="QGroupBox" name="groupBox_e">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox_b">
      <property name="title">
-      <string>Graduation MIDE</string>
+      <string>Weather</string>
      </property>
-     <property name="checkable">
-      <bool>false</bool>
-     </property>
-     <property name="checked">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QLabel" name="label">
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox">
         <property name="text">
-         <string/>
+         <string>sunny</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_21">
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_20">
         <property name="text">
-         <string>Severity Environment</string>
-        </property>
-        <property name="checked">
-         <bool>false</bool>
+         <string>foggy</string>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_6">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <item>
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1. The environment is not risk free</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2. More than 1 risk factor</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3. Various risk factors</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4. Considerable riskfactors</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5. Many risk factors</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_22">
+      <item row="0" column="2">
+       <widget class="QRadioButton" name="radioButton">
         <property name="text">
-         <string>Orientation</string>
+         <string>ho&amp;t</string>
         </property>
-        <property name="checked">
-         <bool>false</bool>
+        <property name="shortcut">
+         <string notr="true"/>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_2">
-        <item>
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1. Paths and junctions well signed</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2. Footpaths or way marks which follow the route</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3. Demands orientation by identification of geographic features and compass points</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5. Difficult navigation is interrupted by obstacles which must be avoided</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_23">
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox_5">
         <property name="text">
-         <string>Terrain underfoot</string>
+         <string>clouds</string>
         </property>
-        <property name="checked">
-         <bool>false</bool>
+        <property name="shortcut">
+         <string notr="true"/>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_5">
-        <property name="editable">
-         <bool>false</bool>
-        </property>
-        <item>
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1. Easy walking</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2. Bridleways and well made footpaths</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3. Rocky stairways, rough ground and screes</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4. Contains sections where the use of hands is necessary for balance</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5. Scrambling, pulling on hands and arms for progress</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_24">
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_18">
         <property name="text">
-         <string>Effort required </string>
+         <string>windy</string>
         </property>
-        <property name="checked">
-         <bool>false</bool>
+        <property name="shortcut">
+         <string notr="true"/>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QComboBox" name="comboBox_3">
-        <item>
-         <property name="text">
-          <string/>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>1. Less than one hour of continuous walking</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>2. From 1 to 3 hours of continuous walking</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>3. From 3 to 6 hours of continuous walking</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>4. From 6 to 10 hours of continuous walking</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>5. More than 10 hours of continuous walking</string>
-         </property>
-        </item>
+      <item row="1" column="2">
+       <widget class="QRadioButton" name="radioButton_2">
+        <property name="text">
+         <string>war&amp;m</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBox_6">
+        <property name="text">
+         <string>rain</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_11">
+        <property name="text">
+         <string>humid</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QRadioButton" name="radioButton_3">
+        <property name="text">
+         <string>&amp;cold</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBox_7">
+        <property name="text">
+         <string>snow</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QCheckBox" name="checkBox_2">
+        <property name="text">
+         <string>hail/soft hail</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QRadioButton" name="radioButton_4">
+        <property name="text">
+         <string>free&amp;zing</string>
+        </property>
+        <property name="shortcut">
+         <string notr="true"/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <widget class="QLineEdit" name="lineEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="1">
+   <item row="0" column="1" colspan="2">
     <widget class="QGroupBox" name="groupBox_a">
      <property name="title">
       <string>Character</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
-      <item row="0" column="0">
-       <widget class="QRadioButton" name="radioButton_6">
-        <property name="text">
-         <string>easy hiking</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox_14">
-        <property name="text">
-         <string>large ascend</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QRadioButton" name="radioButton_5">
-        <property name="text">
-         <string>alpine</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox_13">
-        <property name="text">
-         <string>long distance</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QRadioButton" name="radioButton_17">
-        <property name="text">
-         <string>climbing</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="checkBox_15">
-        <property name="text">
-         <string>night</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QRadioButton" name="radioButton_16">
-        <property name="text">
-         <string>via ferrata</string>
-        </property>
-       </widget>
-      </item>
+     <layout class="QGridLayout" name="gridLayout_3">
       <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox_4">
         <property name="text">
          <string>aborted</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Rating</string>
         </property>
        </widget>
       </item>
@@ -322,23 +195,257 @@
        </widget>
       </item>
       <item row="5" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit_3"/>
+       <widget class="QLineEdit" name="lineEdit_2"/>
+      </item>
+      <item row="1" column="1">
+       <widget class="QCheckBox" name="checkBox_13">
+        <property name="text">
+         <string>long distance</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_15">
+        <property name="text">
+         <string>night</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Rating</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="radioButton_17">
+        <property name="text">
+         <string>climbing</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QRadioButton" name="radioButton_16">
+        <property name="text">
+         <string>via ferrata</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QRadioButton" name="radioButton_5">
+        <property name="text">
+         <string>alpine</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QCheckBox" name="checkBox_14">
+        <property name="text">
+         <string>large ascend</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="radioButton_6">
+        <property name="text">
+         <string>easy hiking</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="2" colspan="2">
+   <item row="1" column="0" colspan="5">
+    <layout class="QVBoxLayout" name="verticalLayout_6">
+     <item>
+      <widget class="QGroupBox" name="groupBox_da">
+       <property name="title">
+        <string>MIDE: Severity Environment</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QComboBox" name="comboBox_6">
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1. The environment is not risk free</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2. More than 1 risk factor</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3. Various risk factors</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4. Considerable risk factors</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5. Many risk factors</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_db">
+       <property name="title">
+        <string>MIDE: Orientation</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QComboBox" name="comboBox_2">
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1. Paths and junctions well signed</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2. Footpaths or way marks which follow the route</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3. Demands orientation by identification of geographic features and compass points</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5. Difficult navigation is interrupted by obstacles which must be avoided</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_dc">
+       <property name="title">
+        <string>MIDE: Terrain underfoot</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QComboBox" name="comboBox_5">
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1. Easy walking</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2. Bridleways and well made footpaths</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3. Rocky stairways, rough ground and screes</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4. Contains sections where the use of hands is necessary for balance</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5. Scrambling, pulling on hands and arms for progress</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_dd">
+       <property name="title">
+        <string>MIDE: Effort required </string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QComboBox" name="comboBox_3">
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>1. Less than one hour of continuous walking</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2. From 1 to 3 hours of continuous walking</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3. From 3 to 6 hours of continuous walking</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4. From 6 to 10 hours of continuous walking</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5. More than 10 hours of continuous walking</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="0" column="3">
     <widget class="QGroupBox" name="groupBox_d">
      <property name="title">
       <string>Equipment</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="checkBox_3">
-        <property name="text">
-         <string>climbing gear</string>
-        </property>
-       </widget>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="4" column="0" colspan="2">
+       <widget class="QLineEdit" name="lineEdit_3"/>
       </item>
       <item row="0" column="1">
        <widget class="QCheckBox" name="checkBox_8">
@@ -347,31 +454,10 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBox_19">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBox_3">
         <property name="text">
-         <string>ferrata gear</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox_16">
-        <property name="text">
-         <string>ice pick</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBox_12">
-        <property name="text">
-         <string>camping gear</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="checkBox_17">
-        <property name="text">
-         <string>crampon</string>
+         <string>climbing gear</string>
         </property>
        </widget>
       </item>
@@ -382,6 +468,20 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBox_19">
+        <property name="text">
+         <string>ferrata gear</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="checkBox_17">
+        <property name="text">
+         <string>crampon</string>
+        </property>
+       </widget>
+      </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="checkBox_9">
         <property name="text">
@@ -389,209 +489,177 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0" colspan="2">
-       <widget class="QLineEdit" name="lineEdit_4"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBox_b">
-     <property name="title">
-      <string>Weather</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="2">
-       <widget class="QRadioButton" name="radioButton_2">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBox_12">
         <property name="text">
-         <string>war&amp;m</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
+         <string>camping gear</string>
         </property>
        </widget>
-      </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QLineEdit" name="lineEdit_2"/>
       </item>
       <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBox_18">
+       <widget class="QCheckBox" name="checkBox_16">
         <property name="text">
-         <string>windy</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="checkBox_20">
-        <property name="text">
-         <string>foggy</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="checkBox_111">
-        <property name="text">
-         <string>humid</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBox_5">
-        <property name="text">
-         <string>clouds</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
-       <widget class="QRadioButton" name="radioButton_3">
-        <property name="text">
-         <string>&amp;cold</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QRadioButton" name="radioButton">
-        <property name="text">
-         <string>ho&amp;t</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBox_6">
-        <property name="text">
-         <string>rain</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="checkBox_7">
-        <property name="text">
-         <string>snow</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QCheckBox" name="checkBox_2">
-        <property name="text">
-         <string>hail/soft hail</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
-       <widget class="QRadioButton" name="radioButton_4">
-        <property name="text">
-         <string>free&amp;zing</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>sunny</string>
-        </property>
-        <property name="shortcut">
-         <string notr="true"/>
+         <string>ice pick</string>
         </property>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
+   <item row="2" column="3" colspan="2">
+    <widget class="QGroupBox" name="groupBox_fb">
+     <property name="title">
+      <string>SAC scale</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <item>
+       <widget class="QComboBox" name="comboBox_4">
+        <item>
+         <property name="text">
+          <string/>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-5</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>T-6</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="3">
+    <widget class="QGroupBox" name="groupBox_f">
+     <property name="title">
+      <string>IBP Index (HKG)</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLineEdit" name="lineEdit_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="3" colspan="2">
     <widget class="QGroupBox" name="groupBox_c">
      <property name="title">
       <string>Participants</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QTextEdit" name="textEdit_2"/>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="2" column="3">
-    <widget class="QGroupBox" name="groupBox_f">
-     <property name="title">
-      <string>IBP Index</string>
-     </property>
-     <property name="checkable">
-      <bool>true</bool>
-     </property>
-     <property name="checked">
-      <bool>true</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QCheckBox" name="checkBox_11">
-        <property name="text">
-         <string>HKG  (Hiking)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEdit_5"/>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="4">
+   <item row="2" column="0" rowspan="3" colspan="3">
     <widget class="QGroupBox" name="groupBox_g">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title">
       <string>Details</string>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QTextEdit" name="textEdit"/>
+     <layout class="QGridLayout" name="gridLayout_5">
+      <item row="0" column="0">
+       <widget class="QTextEdit" name="textEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
-  <zorder>groupBox_b</zorder>
-  <zorder>groupBox_a</zorder>
-  <zorder>groupBox_d</zorder>
-  <zorder>groupBox_c</zorder>
-  <zorder>groupBox_e</zorder>
-  <zorder>groupBox_f</zorder>
-  <zorder>groupBox_g</zorder>
  </widget>
+ <tabstops>
+  <tabstop>checkBox</tabstop>
+  <tabstop>checkBox_5</tabstop>
+  <tabstop>checkBox_6</tabstop>
+  <tabstop>checkBox_7</tabstop>
+  <tabstop>checkBox_20</tabstop>
+  <tabstop>checkBox_18</tabstop>
+  <tabstop>checkBox_11</tabstop>
+  <tabstop>checkBox_2</tabstop>
+  <tabstop>radioButton</tabstop>
+  <tabstop>radioButton_2</tabstop>
+  <tabstop>radioButton_3</tabstop>
+  <tabstop>radioButton_4</tabstop>
+  <tabstop>lineEdit</tabstop>
+  <tabstop>radioButton_6</tabstop>
+  <tabstop>radioButton_5</tabstop>
+  <tabstop>radioButton_17</tabstop>
+  <tabstop>radioButton_16</tabstop>
+  <tabstop>checkBox_14</tabstop>
+  <tabstop>checkBox_13</tabstop>
+  <tabstop>checkBox_15</tabstop>
+  <tabstop>checkBox_4</tabstop>
+  <tabstop>comboBox</tabstop>
+  <tabstop>lineEdit_2</tabstop>
+  <tabstop>checkBox_3</tabstop>
+  <tabstop>checkBox_19</tabstop>
+  <tabstop>checkBox_12</tabstop>
+  <tabstop>checkBox_10</tabstop>
+  <tabstop>checkBox_8</tabstop>
+  <tabstop>checkBox_16</tabstop>
+  <tabstop>checkBox_17</tabstop>
+  <tabstop>checkBox_9</tabstop>
+  <tabstop>lineEdit_3</tabstop>
+  <tabstop>comboBox_6</tabstop>
+  <tabstop>comboBox_2</tabstop>
+  <tabstop>comboBox_5</tabstop>
+  <tabstop>comboBox_3</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>lineEdit_5</tabstop>
+  <tabstop>comboBox_4</tabstop>
+  <tabstop>textEdit_2</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

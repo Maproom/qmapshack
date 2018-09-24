@@ -470,7 +470,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../dem/CDemVRT.cpp" line="44"/>
         <source>Failed to load file: %1</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer: %1</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer: %1</translation>
     </message>
     <message>
         <location filename="../dem/CDemVRT.cpp" line="52"/>
@@ -505,7 +505,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/wpt/CDetailsGeoCache.cpp" line="265"/>
         <source>No images found</source>
-        <translation>  No s&apos;ha trobat cap imatge</translation>
+        <translation>&#xa0; No s&apos;ha trobat cap imatge</translation>
     </message>
 </context>
 <context>
@@ -645,32 +645,32 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
 <context>
     <name>CDetailsTrk</name>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="173"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="176"/>
         <source>Reduce visible track points</source>
         <translation>Redueix els punts visibles del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="176"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="179"/>
         <source>Change elevation of track points</source>
         <translation>Canvia l&apos;elevació dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="179"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="182"/>
         <source>Change timestamp of track points</source>
         <translation>Canvia la data i hora dels punts del track</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="182"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="185"/>
         <source>Miscellaneous</source>
         <translation>Miscel·lània</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="415"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="421"/>
         <source>Color</source>
         <translation>Color</translation>
     </message>
     <message>
-        <location filename="../gis/trk/CDetailsTrk.cpp" line="416"/>
+        <location filename="../gis/trk/CDetailsTrk.cpp" line="422"/>
         <source>Activity</source>
         <translation>Activitat</translation>
     </message>
@@ -759,7 +759,7 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="153"/>
         <source>Save project as %1</source>
-        <translation>  Desa el projecte com a %1</translation>
+        <translation>&#xa0; Desa el projecte com a %1</translation>
     </message>
     <message>
         <location filename="../gis/db/CExportDatabaseThread.cpp" line="157"/>
@@ -960,12 +960,12 @@ Per a resolver aquest conflicte heu de crear i desar una còpia idèntica, forç
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="61"/>
         <source>Failed to load file %1...</source>
-        <translation>  No s&apos;ha pogut carregar el fitxer %1...</translation>
+        <translation>&#xa0; No s&apos;ha pogut carregar el fitxer %1...</translation>
     </message>
     <message>
         <location filename="../gis/fit/CFitProject.cpp" line="93"/>
         <source>Failed to open FIT file %1.</source>
-        <translation>  No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
+        <translation>&#xa0; No s&apos;ha pogut obrir el fitxer FIT %1.</translation>
     </message>
 </context>
 <context>
@@ -5838,36 +5838,317 @@ línia %2, columna %3:
 <context>
     <name>Form</name>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="14"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="14"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation type="vanished">Formulari</translation>
+        <translation>Formulari</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="270"/>
+        <source>shoes:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="282"/>
+        <source>backpack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="289"/>
+        <source>gloves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="296"/>
+        <source>hip pack</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="303"/>
+        <source>poles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="310"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="481"/>
+        <source>crampon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="324"/>
+        <source>calf guard comp.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="346"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="264"/>
+        <source>MIDE: Severity Environment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="352"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="270"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="361"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
+        <source>1. The environment is not risk free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="366"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="284"/>
+        <source>2. More than 1 risk factor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="371"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="289"/>
+        <source>3. Various risk factors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="376"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="294"/>
+        <source>4. Considerable risk factors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="381"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
+        <source>5. Many risk factors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="392"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="310"/>
+        <source>MIDE: Orientation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="404"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="322"/>
+        <source>1. Paths and junctions well signed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="409"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="327"/>
+        <source>2. Footpaths or way marks which follow the route</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="414"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="332"/>
+        <source>3. Demands orientation by identification of geographic features and compass points</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="419"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="337"/>
+        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="424"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="342"/>
+        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="435"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
+        <source>MIDE: Terrain underfoot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="450"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="368"/>
+        <source>1. Easy walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="455"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="373"/>
+        <source>2. Bridleways and well made footpaths</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="460"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="378"/>
+        <source>3. Rocky stairways, rough ground and screes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="465"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="383"/>
+        <source>4. Contains sections where the use of hands is necessary for balance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="470"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="388"/>
+        <source>5. Scrambling, pulling on hands and arms for progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="481"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="399"/>
+        <source>MIDE: Effort required </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="493"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="411"/>
+        <source>1. Less than one hour of continuous walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="498"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="416"/>
+        <source>2. From 1 to 3 hours of continuous walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="503"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="421"/>
+        <source>3. From 3 to 6 hours of continuous walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="508"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="426"/>
+        <source>4. From 6 to 10 hours of continuous walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="513"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="431"/>
+        <source>5. More than 10 hours of continuous walking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="538"/>
+        <source>IBP Index (RNG)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="565"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="396"/>
+        <source>Max. heart rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="577"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="408"/>
+        <source>Avg. heart rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="589"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="420"/>
+        <source>Min. heart rate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="601"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="432"/>
+        <source>Cal. consumption</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="615"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="512"/>
+        <source>SAC scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="627"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="524"/>
+        <source>T-1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="632"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="529"/>
+        <source>T-2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="637"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="534"/>
+        <source>T-3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="642"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
+        <source>T-4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="647"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="544"/>
+        <source>T-5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="652"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="549"/>
+        <source>T-6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="663"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="585"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="301"/>
         <source>Participants</source>
-        <translation type="vanished">Participants</translation>
+        <translation>Participants</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="20"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="20"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="26"/>
         <source>Weather</source>
-        <translation type="vanished">Meteorologia</translation>
+        <translation>Meteorologia</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="56"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="83"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="89"/>
         <source>rain</source>
-        <translation type="vanished">pluja</translation>
+        <translation>pluja</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="36"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="26"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="32"/>
         <source>sunny</source>
-        <translation type="vanished">assolellat</translation>
+        <translation>assolellat</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="86"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="113"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="119"/>
         <source>snow</source>
-        <translation type="vanished">neu</translation>
+        <translation>neu</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="26"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="53"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="59"/>
         <source>clouds</source>
-        <translation type="vanished">nuvols</translation>
+        <translation>nuvols</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="76"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="63"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="69"/>
         <source>windy</source>
-        <translation type="vanished"> ventades</translation>
+        <translation> ventades</translation>
     </message>
     <message>
         <source>hot</source>
@@ -5886,104 +6167,276 @@ línia %2, columna %3:
         <translation type="vanished">gelades</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="143"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="36"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="42"/>
         <source>foggy</source>
-        <translation type="vanished">boira</translation>
+        <translation>boira</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="133"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="93"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="99"/>
         <source>humid</source>
-        <translation type="vanished">humitat</translation>
+        <translation>humitat</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="153"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="153"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="152"/>
         <source>Character</source>
-        <translation type="vanished">Caràcter</translation>
+        <translation>Caràcter</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="207"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="210"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="207"/>
+        <source>night</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="214"/>
+        <source>trail running</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="224"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
+        <source>city/road</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="231"/>
+        <source> track</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="238"/>
+        <source>ultra long dist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="252"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="252"/>
         <source>easy hiking</source>
-        <translation type="vanished">caminada fàcil</translation>
+        <translation>caminada fàcil</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="224"/>
         <source>climbing</source>
-        <translation type="vanished">escalada</translation>
+        <translation>escalada</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="238"/>
         <source>alpine</source>
-        <translation type="vanished">alpí</translation>
+        <translation>alpí</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="245"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="245"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="179"/>
         <source>large ascend</source>
-        <translation type="vanished">pujada llarga</translation>
+        <translation>pujada llarga</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="200"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="203"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="193"/>
         <source>long distance</source>
-        <translation type="vanished">llarga distància</translation>
+        <translation>llarga distància</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="231"/>
         <source>via ferrata</source>
-        <translation type="vanished">via ferrada</translation>
+        <translation>via ferrada</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="116"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="123"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="129"/>
         <source>hail/soft hail</source>
-        <translation type="vanished">calamarsa/calamarsa suau</translation>
+        <translation>calamarsa/calamarsa suau</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="193"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="217"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="214"/>
         <source>Rating</source>
-        <translation type="vanished"> Valoració</translation>
+        <translation> Valoració</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="165"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="172"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <source>Rating 5 stars</source>
-        <translation type="vanished">Valoració 5 estrelles</translation>
+        <translation>Valoració 5 estrelles</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="46"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="79"/>
+        <source>war&amp;m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="66"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="136"/>
+        <source>free&amp;zing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="96"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="103"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
+        <source>&amp;cold</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="123"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="43"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="49"/>
+        <source>ho&amp;t</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="170"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="232"/>
         <source>Rating 4 stars</source>
-        <translation type="vanished">Valoració 4 estrelles</translation>
+        <translation>Valoració 4 estrelles</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="175"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="182"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="237"/>
         <source>Rating 3 stars</source>
-        <translation type="vanished">Valoració 3 estrelles</translation>
+        <translation>Valoració 3 estrelles</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="180"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="187"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="242"/>
         <source>Rating 2 stars</source>
-        <translation type="vanished">Valoració 2 estrelles</translation>
+        <translation>Valoració 2 estrelles</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="185"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="192"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="247"/>
         <source>Rating 1 star</source>
-        <translation type="vanished">Valoració 1 estrella</translation>
+        <translation>Valoració 1 estrella</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="159"/>
         <source>aborted</source>
-        <translation type="vanished">Interromput</translation>
+        <translation>Interromput</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="262"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="444"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="261"/>
         <source>Equipment</source>
-        <translation type="vanished">Equipament</translation>
+        <translation>Equipament</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="474"/>
         <source>ferrata gear</source>
-        <translation type="vanished">equip per a vies ferrades</translation>
+        <translation>equip per a vies ferrades</translation>
     </message>
     <message>
+        <location filename="../templates/Running_Summary.ui" line="317"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="467"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="274"/>
         <source>night gear</source>
-        <translation type="vanished">equipació nocturna</translation>
+        <translation>equipació nocturna</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="488"/>
         <source>snow shoes</source>
-        <translation type="vanished">sabates de neu</translation>
+        <translation>sabates de neu</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="460"/>
         <source>climbing gear</source>
-        <translation type="vanished">equip d&apos;escalada</translation>
+        <translation>equip d&apos;escalada</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="453"/>
         <source>ski</source>
-        <translation type="vanished">esquí</translation>
+        <translation>esquí</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="502"/>
+        <source>ice pick</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="495"/>
         <source>camping gear</source>
-        <translation type="vanished">equip de càmping</translation>
+        <translation>equip de càmping</translation>
     </message>
     <message>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="560"/>
+        <source>IBP Index (HKG)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Running_Summary.ui" line="526"/>
+        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="603"/>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="338"/>
         <source>Details</source>
-        <translation type="vanished">Detalls</translation>
+        <translation>Detalls</translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="158"/>
+        <source>enduro</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="165"/>
+        <source>freeride</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="172"/>
+        <source>XC</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="200"/>
+        <source>downhill</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="267"/>
+        <source>protections</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
+        <source>E-Bike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="288"/>
+        <source>saddlebags</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="320"/>
+        <source>Bike</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="352"/>
+        <source>IBP Index (BYC)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../templates/Cycling_Tour_Summary.ui" line="377"/>
+        <source>% Cycling</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -6905,7 +7358,7 @@ No vull llegir tota la documentació!</translation>
     </message>
     <message>
         <source>User defined limits for this track</source>
-        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari </translation>
+        <translation type="vanished">Límits d&apos;aquest track definits per l&apos;usuari&#xa0;</translation>
     </message>
     <message>
         <location filename="../gis/trk/IDetailsTrk.ui" line="74"/>
@@ -11789,7 +12242,7 @@ o
         <location filename="../tool/IToolShell.cpp" line="51"/>
         <source>Make sure the required packages are installed, `%1` exists and is executable.
 </source>
-        <translation> Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
+        <translation>&#xa0;Assegureu-vos que els paquets necessaris estan instal·lats, `%1` existeix i es pot executar.
 </translation>
     </message>
     <message>
@@ -11912,224 +12365,96 @@ o
 <context>
     <name>TCyclingTourSummary</name>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation type="obsolete">Formulari</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="26"/>
         <source>Details</source>
-        <translation type="unfinished">Detalls</translation>
+        <translation type="obsolete">Detalls</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="38"/>
-        <source>Dificulty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="52"/>
-        <source> IBPIndex BYC (Bicycle)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="83"/>
-        <source>% cycling</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="93"/>
-        <source>Cardio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="99"/>
-        <source>Max. heart rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="109"/>
-        <source>Min. heart rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="119"/>
-        <source>cal. consumption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="132"/>
         <source>Equipment</source>
-        <translation type="unfinished">Equipament</translation>
+        <translation type="obsolete">Equipament</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="138"/>
-        <source>protections</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="145"/>
         <source>night gear</source>
-        <translation type="unfinished">equipació nocturna</translation>
+        <translation type="obsolete">equipació nocturna</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="152"/>
-        <source>e-bike</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="159"/>
-        <source>saddlebags</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="171"/>
-        <source>bike</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="186"/>
         <source>Character</source>
-        <translation type="unfinished">Caràcter</translation>
+        <translation type="obsolete">Caràcter</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="192"/>
-        <source>e&amp;nduro</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="199"/>
-        <source>freeride</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="206"/>
-        <source>XC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="213"/>
         <source>large ascend</source>
-        <translation type="unfinished">pujada llarga</translation>
+        <translation type="obsolete">pujada llarga</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="220"/>
-        <source>city/road</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="227"/>
         <source>long distance</source>
-        <translation type="unfinished">llarga distància</translation>
+        <translation type="obsolete">llarga distància</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="234"/>
-        <source>downhill</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="241"/>
-        <source>night</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="248"/>
         <source>Rating</source>
-        <translation type="unfinished"> Valoració</translation>
+        <translation type="obsolete"> Valoració</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="261"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished">Valoració 5 estrelles</translation>
+        <translation type="obsolete">Valoració 5 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="266"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished">Valoració 4 estrelles</translation>
+        <translation type="obsolete">Valoració 4 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="271"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished">Valoració 3 estrelles</translation>
+        <translation type="obsolete">Valoració 3 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="276"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished">Valoració 2 estrelles</translation>
+        <translation type="obsolete">Valoració 2 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="281"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished">Valoració 1 estrella</translation>
+        <translation type="obsolete">Valoració 1 estrella</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="301"/>
         <source>Weather</source>
-        <translation type="unfinished">Meteorologia</translation>
+        <translation type="obsolete">Meteorologia</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="307"/>
         <source>sunny</source>
-        <translation type="unfinished">assolellat</translation>
+        <translation type="obsolete">assolellat</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="317"/>
         <source>foggy</source>
-        <translation type="unfinished">boira</translation>
+        <translation type="obsolete">boira</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="324"/>
-        <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="334"/>
         <source>clouds</source>
-        <translation type="unfinished">nuvols</translation>
+        <translation type="obsolete">nuvols</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="344"/>
         <source>windy</source>
-        <translation type="unfinished"> ventades</translation>
+        <translation type="obsolete"> ventades</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="354"/>
-        <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="364"/>
         <source>rain</source>
-        <translation type="unfinished">pluja</translation>
+        <translation type="obsolete">pluja</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="374"/>
         <source>humid</source>
-        <translation type="unfinished">humitat</translation>
+        <translation type="obsolete">humitat</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="384"/>
-        <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="394"/>
         <source>snow</source>
-        <translation type="unfinished">neu</translation>
+        <translation type="obsolete">neu</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="404"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished">calamarsa/calamarsa suau</translation>
+        <translation type="obsolete">calamarsa/calamarsa suau</translation>
     </message>
     <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="411"/>
-        <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Cycling_Tour_Summary.ui" line="427"/>
         <source>Participants</source>
-        <translation type="unfinished">Participants</translation>
+        <translation type="obsolete">Participants</translation>
     </message>
 </context>
 <context>
@@ -12333,702 +12658,235 @@ o
 <context>
     <name>THikingTourSummaryAdvanced</name>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation type="obsolete">Formulari</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="20"/>
-        <source>Graduation MIDE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="39"/>
-        <source>Severity Environment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="49"/>
-        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="58"/>
-        <source>1. The environment is not risk free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="63"/>
-        <source>2. More than 1 risk factor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="68"/>
-        <source>3. Various risk factors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="73"/>
-        <source>4. Considerable riskfactors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="78"/>
-        <source>5. Many risk factors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="86"/>
-        <source>Orientation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="102"/>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="107"/>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="112"/>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="117"/>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="122"/>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="130"/>
-        <source>Terrain underfoot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="149"/>
-        <source>1. Easy walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="154"/>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="159"/>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="164"/>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="169"/>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="177"/>
-        <source>Effort required </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="193"/>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="198"/>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="203"/>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="208"/>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="213"/>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="224"/>
         <source>Character</source>
-        <translation type="unfinished">Caràcter</translation>
+        <translation type="obsolete">Caràcter</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="230"/>
         <source>easy hiking</source>
-        <translation type="unfinished">caminada fàcil</translation>
+        <translation type="obsolete">caminada fàcil</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="237"/>
         <source>large ascend</source>
-        <translation type="unfinished">pujada llarga</translation>
+        <translation type="obsolete">pujada llarga</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="244"/>
         <source>alpine</source>
-        <translation type="unfinished">alpí</translation>
+        <translation type="obsolete">alpí</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="251"/>
         <source>long distance</source>
-        <translation type="unfinished">llarga distància</translation>
+        <translation type="obsolete">llarga distància</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="258"/>
         <source>climbing</source>
-        <translation type="unfinished">escalada</translation>
+        <translation type="obsolete">escalada</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="265"/>
-        <source>night</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="272"/>
         <source>via ferrata</source>
-        <translation type="unfinished">via ferrada</translation>
+        <translation type="obsolete">via ferrada</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="279"/>
         <source>aborted</source>
-        <translation type="unfinished">Interromput</translation>
+        <translation type="obsolete">Interromput</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="286"/>
         <source>Rating</source>
-        <translation type="unfinished"> Valoració</translation>
+        <translation type="obsolete"> Valoració</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="299"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished">Valoració 5 estrelles</translation>
+        <translation type="obsolete">Valoració 5 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="304"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished">Valoració 4 estrelles</translation>
+        <translation type="obsolete">Valoració 4 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="309"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished">Valoració 3 estrelles</translation>
+        <translation type="obsolete">Valoració 3 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="314"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished">Valoració 2 estrelles</translation>
+        <translation type="obsolete">Valoració 2 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="319"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished">Valoració 1 estrella</translation>
+        <translation type="obsolete">Valoració 1 estrella</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="333"/>
         <source>Equipment</source>
-        <translation type="unfinished">Equipament</translation>
+        <translation type="obsolete">Equipament</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="339"/>
         <source>climbing gear</source>
-        <translation type="unfinished">equip d&apos;escalada</translation>
+        <translation type="obsolete">equip d&apos;escalada</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="346"/>
         <source>ski</source>
-        <translation type="unfinished">esquí</translation>
+        <translation type="obsolete">esquí</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="353"/>
         <source>ferrata gear</source>
-        <translation type="unfinished">equip per a vies ferrades</translation>
+        <translation type="obsolete">equip per a vies ferrades</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="360"/>
-        <source>ice pick</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="367"/>
         <source>camping gear</source>
-        <translation type="unfinished">equip de càmping</translation>
+        <translation type="obsolete">equip de càmping</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="374"/>
-        <source>crampon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="381"/>
         <source>night gear</source>
-        <translation type="unfinished">equipació nocturna</translation>
+        <translation type="obsolete">equipació nocturna</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="388"/>
         <source>snow shoes</source>
-        <translation type="unfinished">sabates de neu</translation>
+        <translation type="obsolete">sabates de neu</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="401"/>
         <source>Weather</source>
-        <translation type="unfinished">Meteorologia</translation>
+        <translation type="obsolete">Meteorologia</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="407"/>
-        <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="420"/>
         <source>windy</source>
-        <translation type="unfinished"> ventades</translation>
+        <translation type="obsolete"> ventades</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="430"/>
         <source>foggy</source>
-        <translation type="unfinished">boira</translation>
+        <translation type="obsolete">boira</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="437"/>
         <source>humid</source>
-        <translation type="unfinished">humitat</translation>
+        <translation type="obsolete">humitat</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="447"/>
         <source>clouds</source>
-        <translation type="unfinished">nuvols</translation>
+        <translation type="obsolete">nuvols</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="457"/>
-        <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="467"/>
-        <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="477"/>
         <source>rain</source>
-        <translation type="unfinished">pluja</translation>
+        <translation type="obsolete">pluja</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="487"/>
         <source>snow</source>
-        <translation type="unfinished">neu</translation>
+        <translation type="obsolete">neu</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="497"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished">calamarsa/calamarsa suau</translation>
+        <translation type="obsolete">calamarsa/calamarsa suau</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="504"/>
-        <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="514"/>
         <source>sunny</source>
-        <translation type="unfinished">assolellat</translation>
+        <translation type="obsolete">assolellat</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="527"/>
         <source>Participants</source>
-        <translation type="unfinished">Participants</translation>
+        <translation type="obsolete">Participants</translation>
     </message>
     <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="539"/>
-        <source>IBP Index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="551"/>
-        <source>HKG  (Hiking)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Hiking_Tour_Summary_(Advanced).ui" line="577"/>
         <source>Details</source>
-        <translation type="unfinished">Detalls</translation>
+        <translation type="obsolete">Detalls</translation>
     </message>
 </context>
 <context>
     <name>TRunningSummary</name>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="14"/>
         <source>Form</source>
-        <translation type="unfinished">Formulari</translation>
+        <translation type="obsolete">Formulari</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="26"/>
         <source>Weather</source>
-        <translation type="unfinished">Meteorologia</translation>
+        <translation type="obsolete">Meteorologia</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="32"/>
         <source>sunny</source>
-        <translation type="unfinished">assolellat</translation>
+        <translation type="obsolete">assolellat</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="42"/>
         <source>foggy</source>
-        <translation type="unfinished">boira</translation>
+        <translation type="obsolete">boira</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="49"/>
-        <source>ho&amp;t</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="59"/>
         <source>clouds</source>
-        <translation type="unfinished">nuvols</translation>
+        <translation type="obsolete">nuvols</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="69"/>
         <source>windy</source>
-        <translation type="unfinished"> ventades</translation>
+        <translation type="obsolete"> ventades</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="79"/>
-        <source>war&amp;m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="89"/>
         <source>rain</source>
-        <translation type="unfinished">pluja</translation>
+        <translation type="obsolete">pluja</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="99"/>
         <source>humid</source>
-        <translation type="unfinished">humitat</translation>
+        <translation type="obsolete">humitat</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="109"/>
-        <source>&amp;cold</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="119"/>
         <source>snow</source>
-        <translation type="unfinished">neu</translation>
+        <translation type="obsolete">neu</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="129"/>
         <source>hail/soft hail</source>
-        <translation type="unfinished">calamarsa/calamarsa suau</translation>
+        <translation type="obsolete">calamarsa/calamarsa suau</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="136"/>
-        <source>free&amp;zing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="152"/>
         <source>Character</source>
-        <translation type="unfinished">Caràcter</translation>
+        <translation type="obsolete">Caràcter</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="164"/>
         <source>Rating 5 stars</source>
-        <translation type="unfinished">Valoració 5 estrelles</translation>
+        <translation type="obsolete">Valoració 5 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="169"/>
         <source>Rating 4 stars</source>
-        <translation type="unfinished">Valoració 4 estrelles</translation>
+        <translation type="obsolete">Valoració 4 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="174"/>
         <source>Rating 3 stars</source>
-        <translation type="unfinished">Valoració 3 estrelles</translation>
+        <translation type="obsolete">Valoració 3 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="179"/>
         <source>Rating 2 stars</source>
-        <translation type="unfinished">Valoració 2 estrelles</translation>
+        <translation type="obsolete">Valoració 2 estrelles</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="184"/>
         <source>Rating 1 star</source>
-        <translation type="unfinished">Valoració 1 estrella</translation>
+        <translation type="obsolete">Valoració 1 estrella</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="192"/>
         <source>Rating</source>
-        <translation type="unfinished"> Valoració</translation>
+        <translation type="obsolete"> Valoració</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="199"/>
         <source>long distance</source>
-        <translation type="unfinished">llarga distància</translation>
+        <translation type="obsolete">llarga distància</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="206"/>
-        <source>night</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="213"/>
-        <source>trail running</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="223"/>
-        <source>city/road</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="230"/>
-        <source> track</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="237"/>
-        <source>ultra long dist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="244"/>
         <source>large ascend</source>
-        <translation type="unfinished">pujada llarga</translation>
+        <translation type="obsolete">pujada llarga</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="251"/>
         <source>easy hiking</source>
-        <translation type="unfinished">caminada fàcil</translation>
+        <translation type="obsolete">caminada fàcil</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="261"/>
         <source>Equipment</source>
-        <translation type="unfinished">Equipament</translation>
+        <translation type="obsolete">Equipament</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="269"/>
-        <source>shoes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="281"/>
-        <source>backpack</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="288"/>
-        <source>gloves</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="295"/>
-        <source>hip pack</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="302"/>
-        <source>poles</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="309"/>
-        <source>crampon</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="316"/>
         <source>night gear</source>
-        <translation type="unfinished">equipació nocturna</translation>
+        <translation type="obsolete">equipació nocturna</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="323"/>
-        <source>calf guard comp.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="336"/>
         <source>Participants</source>
-        <translation type="unfinished">Participants</translation>
+        <translation type="obsolete">Participants</translation>
     </message>
     <message>
-        <location filename="../templates/Running_Summary.ui" line="355"/>
-        <source>Graduation MIDE</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="361"/>
-        <source>Severity Environment</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="374"/>
-        <source>1. The environment is not risk free</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="379"/>
-        <source>2. More than 1 risk factor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="384"/>
-        <source>3. Various risk factors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="389"/>
-        <source>4. Considerable riskfactors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="394"/>
-        <source>5. Many risk factors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="414"/>
-        <source>Orientation</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="427"/>
-        <source>1. Paths and junctions well signed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="432"/>
-        <source>2. Footpaths or way marks which follow the route</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="437"/>
-        <source>3. Demands orientation by identification of geographic features and compass points</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="442"/>
-        <source>4. Requires advanced navigation techniques, beyond interpretation of features on the map and the ground</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="447"/>
-        <source>5. Difficult navigation is interrupted by obstacles which must be avoided</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="455"/>
-        <source>Terrain underfoot</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="468"/>
-        <source>1. Easy walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="473"/>
-        <source>2. Bridleways and well made footpaths</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="478"/>
-        <source>3. Rocky stairways, rough ground and screes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="483"/>
-        <source>4. Contains sections where the use of hands is necessary for balance</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="488"/>
-        <source>5. Scrambling, pulling on hands and arms for progress</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="496"/>
-        <source>Effort required </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="509"/>
-        <source>1. Less than one hour of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="514"/>
-        <source>2. From 1 to 3 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="519"/>
-        <source>3. From 3 to 6 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="524"/>
-        <source>4. From 6 to 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="529"/>
-        <source>5. More than 10 hours of continuous walking</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="540"/>
-        <source>IBP Index</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="552"/>
-        <source>RNG (Running)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="565"/>
-        <source>Cardio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="571"/>
-        <source>Max. heart rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="581"/>
-        <source>Min. heart rate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="591"/>
-        <source>cal. consumption</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../templates/Running_Summary.ui" line="610"/>
         <source>Details</source>
-        <translation type="unfinished">Detalls</translation>
+        <translation type="obsolete">Detalls</translation>
     </message>
 </context>
 </TS>
